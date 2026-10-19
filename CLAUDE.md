@@ -1,0 +1,53 @@
+# Nebraska audit cash-flow pipeline
+
+GitHub Actions does all downloading, trimming, validation and CSV/XLSX building. Claude sessions
+only read trimmed PDFs (via the `extractor` subagent) and write JSON.
+
+## Git rules
+- Work directly on `main`: no side branches and no pull requests.
+- Always run `git pull --rebase` before starting and before every push.
+- Claude sessions only ever write to `output/json/` and `CLAUDE.md`. GitHub Actions owns everything
+  else in `output/` (and `trimmed/`). This avoids merge conflicts.
+- If a push fails, stop and tell the user.
+
+## Layout
+- `scripts/download.py` lists and downloads audit PDFs to `audits/` (gitignored). The URL patterns
+  are in its CONFIG block.
+- `scripts/find_pages.py` saves the statement pages to `trimmed/` and writes `output/manifest.csv`.
+- `scripts/validate.py` checks `output/json/` and writes `output/flagged.csv`.
+- `scripts/build_csv.py` writes `output/cashflow_long.csv`, `cashflow_summary.csv`, `progress.csv`
+  and `cashflow.xlsx`.
+- `.github/workflows/fetch.yml` is run manually. `validate.yml` runs on each push to `output/json/`.
+- `.claude/agents/extractor.md` is the extraction subagent. It holds the full schema and rules.
+
+## Schema and category rules (summary; full rules are in the extractor agent)
+One JSON per report: `output/json/<pdf stem>.json`. Fields: entity_name, entity_type,
+fiscal_year_end, basis (`cash`|`GAAP`), extraction_attempt, beginning_cash, beginning_investments,
+beginning_fund_balance, receipts[], disbursements[], transfers_in, transfers_out, debt_proceeds,
+other_financing, adjustments[], reported_totals{receipts,disbursements}, proprietary (GAAP:
+operating, noncapital_financing, capital_and_related_financing, investing, beginning_cash,
+ending_cash), ending_cash, ending_investments, ending_fund_balance, notes.
+- Money values are `{"amount", "source_page"}`, where source_page is the page within the trimmed PDF.
+  List items are `{category, original_label, amount, source_page}`.
+- Receipt categories: property tax, sales tax, other taxes, intergovernmental/state aid, federal
+  grants, charges for services/fees, investment income, other.
+- Disbursement categories: general government, public safety, streets/highways,
+  culture/recreation, health/welfare, economic development, utilities, debt service principal,
+  debt service interest, capital outlay, other.
+- Identity: beginning + receipts − disbursements + transfers_in − transfers_out + debt_proceeds +
+  other_financing + adjustments = ending (cash for cash basis, fund balance for GAAP).
+
+## Batch procedure
+1. `git pull --rebase`.
+2. Read `output/progress.csv`. Take the next `pending` reports, plus any `flagged` reports whose
+   `extraction_attempt` is 1 (re-check each flagged report once; after that leave it for a human).
+   You can do this with a short `python -c`/`grep` that prints filenames only.
+3. Send them to the `extractor` agent in groups of about 5 reports per agent (several agents in
+   parallel is fine). Pass only the filenames.
+4. `git add output/json/ && git commit -m "extract: N reports"`, then `git pull --rebase && git push`.
+   GitHub Actions validates and updates progress.
+5. Repeat until the user's usage runs low, then report how many are done and how many remain
+   (counts from `output/progress.csv` after a pull).
+
+Keep the main session lean: don't open PDFs or print JSON in the main conversation. Rely on the
+agents' one-line statuses.
