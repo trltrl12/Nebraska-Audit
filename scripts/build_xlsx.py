@@ -2,25 +2,26 @@
 
 Sheets:
   Summary          one row per report: balances, totals, reconciliation, flag status
-  Line Items       every receipt/disbursement line as printed (original label, category,
-                   amount, trimmed and original page)
+  Review           items to look at even when the numbers check out (split/unlabeled taxes, etc.)
+  Line Items       every receipt/disbursement line from the basic statements
   Detail Lines     every line item from the supplementary schedules (budget-to-actual,
                    departmental, combining, fund schedules): fund, department, category,
                    detailed category, actual and final budget
-  Revenue by Source       one row per report, one column per detailed revenue category
-  Spending by Type        one row per report, one column per detailed expenditure category
+  Revenue by Source       one row per report and fund type, one column per detailed revenue category
+  Spending by Type        one row per report and fund type, one column per detailed expenditure category
   Spending by Department  one row per report and department/function, with its share of spending
-  Receipts         one row per report, one column per receipt category
-  Disbursements    one row per report, one column per disbursement category
-  Financing        transfers, debt proceeds, other financing, adjustments, investments
+  Receipts         one row per report and fund type, one column per receipt category
+  Disbursements    one row per report and fund type, one column per disbursement category
+  Financing & Balances    balances, transfers, debt proceeds, other financing, adjustments
   Proprietary      GAAP proprietary-fund cash flows by activity
   Balance Sheet    every asset, liability, deferral and fund balance/net position line
   Flagged          validation issues (output/flagged.csv)
   Progress         status of every report (output/progress.csv)
   Notes            the extractor's notes per report
-  Review           items to look at even when the numbers check out (split/unlabeled taxes, etc.)
 Lines carry fund_type: governmental or business-type (utility funds), reported separately.
-Every sheet has a source_url column linking to the report PDF on the Auditor's website.
+Every sheet ends with two reference columns: `pages` (the page or pages of the original audit the
+row comes from, e.g. "7" or "7-10, 23-31") and `page_link` (opens the Auditor's PDF at the first
+of those pages).
 Run after validate.py and build_csv.py (it reads their outputs).
 """
 import sys
@@ -31,18 +32,19 @@ from openpyxl.styles import Alignment, Font, PatternFill
 from openpyxl.utils import get_column_letter
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from common import (page_ranges, DETAIL_EXPENSE_CATEGORIES,  # noqa: E402
-                     DETAIL_REVENUE_CATEGORIES,  # noqa: E402
-                    FUND_TYPES, REVIEW_CSV, fund_type, reported_total,
-                    BS_SECTIONS, DISBURSEMENT_CATEGORIES, FILE_LIST, FLAGGED, MANIFEST, OUTPUT, PROGRESS_CSV,  # noqa: E402
-                    PROPRIETARY_FIELDS, RECEIPT_CATEGORIES, SUMMARY_CSV, amt, load_reports, page,
-                    read_csv)
+from common import (BS_SECTIONS, DETAIL_EXPENSE_CATEGORIES, DETAIL_REVENUE_CATEGORIES,  # noqa: E402
+                    DISBURSEMENT_CATEGORIES, FILE_LIST, FLAGGED, FUND_TYPES, MANIFEST, OUTPUT, PROGRESS_CSV,
+                    PROPRIETARY_FIELDS, RECEIPT_CATEGORIES, REVIEW_CSV, SUMMARY_CSV, amt, fund_type,
+                    load_reports, page, page_ranges, read_csv, reported_total)
 
 XLSX = OUTPUT / "cashflow.xlsx"
 MONEY = '#,##0.00;[Red](#,##0.00)'
 HEAD_FILL = PatternFill("solid", fgColor="1F4E78")
 BAD_FILL = PatternFill("solid", fgColor="F8CBAD")
 GOOD_FILL = PatternFill("solid", fgColor="C6EFCE")
+REF = ["pages", "page_link"]          # the two reference columns, last on every sheet
+# CSV columns replaced by the reference columns
+HIDE = {"source_url", "report_pages", "pages_kept", "trimmed_file", "source_page", "pages"}
 
 
 def num(v):
@@ -77,11 +79,9 @@ def add_sheet(wb, title, header, rows, money_cols=(), status_col=None):
     for i, h in enumerate(header, 1):
         width = max([len(str(h))] + [len(str(r[i - 1])) for r in rows[:500] if i - 1 < len(r) and r[i - 1] is not None])
         ws.column_dimensions[get_column_letter(i)].width = min(max(width + 2, 10), 60)
-    for col in ("source_url", "page_link"):  # clickable links to the PDF on the Auditor's website
-        if col not in idx:
-            continue
-        ws.column_dimensions[get_column_letter(idx[col])].width = 14
-        for (cell,) in ws.iter_rows(min_row=2, min_col=idx[col], max_col=idx[col]):
+    if "page_link" in idx:  # clickable link to the PDF on the Auditor's website
+        ws.column_dimensions[get_column_letter(idx["page_link"])].width = 14
+        for (cell,) in ws.iter_rows(min_row=2, min_col=idx["page_link"], max_col=idx["page_link"]):
             v = str(cell.value or "")
             if v.startswith("http"):
                 cell.hyperlink = v
@@ -99,109 +99,114 @@ def main():
     file_urls = {Path(r["filename"]).stem: r.get("url", "") for r in read_csv(FILE_LIST)}
 
     def url(stem):
-        return manifest.get(stem, {}).get("url") or file_urls.get(stem, "")
+        return manifest.get(Path(stem).stem, {}).get("url") or file_urls.get(Path(stem).stem, "")
+
+    def kept(stem):
+        return [p for p in (manifest.get(Path(stem).stem, {}).get("pages_kept") or "").split(";") if p]
 
     def orig(stem, p):
         """Page number in the original audit for page p of the trimmed PDF."""
-        kept = (manifest.get(stem, {}).get("pages_kept") or "").split(";")
         try:
-            return int(kept[int(p) - 1])
+            return int(kept(stem)[int(p) - 1])
         except (ValueError, IndexError, TypeError):
             return None
 
-    def link(stem, p):
-        """Link that opens the original PDF on the Auditor's site at the page trimmed page p came from."""
-        u, rp = url(stem), orig(stem, p)
-        return f"{u}#page={rp}" if u and rp else u
+    def ref_pages(stem, pages):
+        """[pages, page_link] for original-report page numbers."""
+        pages = sorted({int(p) for p in pages if p})
+        u = url(stem)
+        return [page_ranges(pages), f"{u}#page={pages[0]}" if u and pages else u]
 
-    def where(stem, p):
-        """[trimmed_page, report_page, page_link] for one number."""
-        return [p, orig(stem, p), link(stem, p)]
+    def ref(stem, items):
+        """[pages, page_link] for one item / a list of items carrying trimmed-PDF source_page."""
+        items = items if isinstance(items, list) else [items]
+        return ref_pages(stem, [orig(stem, page(i) if isinstance(i, dict) else i) for i in items])
 
-    def page_list(stem, items):
-        """Original-report pages of a group of lines, as ranges ("6-9, 23")."""
-        return page_ranges([orig(stem, i.get("source_page")) for i in items if orig(stem, i.get("source_page"))])
-
-    WHERE = ["trimmed_page", "report_page", "page_link"]
+    def ref_all(stem):
+        """[pages, page_link] covering every page kept for the report."""
+        return ref_pages(stem, kept(stem))
 
     wb = Workbook()
     wb.remove(wb.active)
+    ident = ["entity_name", "entity_type", "filename", "fiscal_year_end", "basis"]
 
+    # ---- Summary (from cashflow_summary.csv)
     srows = read_csv(SUMMARY_CSV)
-    sh = list(srows[0].keys()) if srows else ["entity_name"]
+    sh = [h for h in (list(srows[0].keys()) if srows else ["entity_name"]) if h not in HIDE]
     money = [h for h in sh if h not in ("entity_name", "entity_type", "county", "filename", "fiscal_year_end",
-                                        "basis", "filing_type", "source_url", "balance_type", "reconciles",
-                                        "prop_reconciles", "balance_sheet_statement", "balance_sheet_balances",
-                                        "flagged", "fiscal_year", "bt_measure", "bt_reconciles", "review_items")]
-    money = [h for h in money if h != "report_pages"]
-    add_sheet(wb, "Summary", sh, [[r[h] for h in sh] for r in srows], money, "reconciles")
+                                        "basis", "filing_type", "balance_type", "reconciles", "prop_reconciles",
+                                        "balance_sheet_statement", "balance_sheet_balances", "flagged",
+                                        "fiscal_year", "bt_measure", "bt_reconciles", "review_items")]
+    add_sheet(wb, "Summary", sh + REF, [[r[h] for h in sh] + ref_all(r["filename"]) for r in srows],
+              money, "reconciles")
 
+    # ---- Review
     rv = read_csv(REVIEW_CSV)
     rh = ["entity_name", "filename", "where", "fund_type", "original_label", "amount", "reason"]
-    add_sheet(wb, "Review", rh + WHERE + ["source_url"],
-              [[r.get(h) for h in rh] + where(r["filename"], r.get("source_page")) + [url(r["filename"])] for r in rv],
-              ["amount"])
+    add_sheet(wb, "Review", rh + REF, [[r.get(h) for h in rh] + ref(r["filename"], r.get("source_page"))
+                                       for r in rv], ["amount"])
 
-    ident = ["entity_name", "entity_type", "filename", "fiscal_year_end", "basis", "source_url"]
+    # ---- Line Items (basic statements)
     lines = []
     for s, d in reports:
-        base = [d.get("entity_name"), d.get("entity_type"), s, d.get("fiscal_year_end"), d.get("basis"), url(s)]
+        base = [d.get("entity_name"), d.get("entity_type"), s, d.get("fiscal_year_end"), d.get("basis")]
         for section in ("receipts", "disbursements"):
             for it in d.get(section) or []:
                 lines.append(base + [fund_type(it), section, it.get("category"), it.get("original_label"),
-                                     it.get("amount")] + where(s, it.get("source_page")))
-    add_sheet(wb, "Line Items", ident + ["fund_type", "section", "category", "original_label", "amount"] + WHERE,
+                                     it.get("amount")] + ref(s, it))
+    add_sheet(wb, "Line Items", ident + ["fund_type", "section", "category", "original_label", "amount"] + REF,
               lines, ["amount"])
 
-    # ---- detail schedules
+    # ---- Detail Lines (supplementary schedules)
     det = []
     for s, d in reports:
-        base = [d.get("entity_name"), d.get("entity_type"), s, d.get("fiscal_year_end"), d.get("basis"), url(s)]
+        base = [d.get("entity_name"), d.get("entity_type"), s, d.get("fiscal_year_end"), d.get("basis")]
         for it in d.get("detail") or []:
-            det.append((s, d, it, base + [it.get("schedule"), fund_type(it), it.get("fund"), it.get("department"), it.get("section"),
-                                          it.get("category"), it.get("detail_category"), it.get("original_label"),
-                                          it.get("amount"), it.get("budget_final")] + where(s, it.get("source_page"))))
+            det.append(base + [it.get("schedule"), fund_type(it), it.get("fund"), it.get("department"),
+                               it.get("section"), it.get("category"), it.get("detail_category"),
+                               it.get("original_label"), it.get("amount"), it.get("budget_final")] + ref(s, it))
     add_sheet(wb, "Detail Lines", ident + ["schedule", "fund_type", "fund", "department", "section", "category",
-                                           "detail_category", "original_label", "amount", "budget_final"] + WHERE,
-              [r for *_, r in det], ["amount", "budget_final"])
+                                           "detail_category", "original_label", "amount", "budget_final"] + REF,
+              det, ["amount", "budget_final"])
 
+    # ---- Revenue by Source / Spending by Type
     for title, sec, cats in (("Revenue by Source", "revenue", DETAIL_REVENUE_CATEGORIES),
                              ("Spending by Type", "expenditure", DETAIL_EXPENSE_CATEGORIES)):
         rows = []
         for s, d in reports:
             for ft in FUND_TYPES:
+                used = [it for it in d.get("detail") or []
+                        if it.get("section") == sec and fund_type(it) == ft and it.get("detail_category") in cats]
+                if not used:
+                    continue
                 tot = dict.fromkeys(cats, 0.0)
-                used = []
-                for it in d.get("detail") or []:
-                    if it.get("section") == sec and fund_type(it) == ft and it.get("detail_category") in tot:
-                        tot[it["detail_category"]] += float(it.get("amount") or 0)
-                        used.append(it)
-                if any(tot.values()):
-                    rows.append([d.get("entity_name"), d.get("entity_type"), s, d.get("fiscal_year_end"),
-                                 d.get("basis"), url(s), page_list(s, used), ft] + [round(tot[c], 2) for c in cats]
-                                + [round(sum(tot.values()), 2)])
-        add_sheet(wb, title, ident + ["report_pages", "fund_type"] + cats + ["total"], rows, cats + ["total"])
+                for it in used:
+                    tot[it["detail_category"]] += float(it.get("amount") or 0)
+                rows.append([d.get("entity_name"), d.get("entity_type"), s, d.get("fiscal_year_end"), d.get("basis"),
+                             ft] + [round(tot[c], 2) for c in cats] + [round(sum(tot.values()), 2)] + ref(s, used))
+        add_sheet(wb, title, ident + ["fund_type"] + cats + ["total"] + REF, rows, cats + ["total"])
 
+    # ---- Spending by Department
     rows = []
     for s, d in reports:
-        by, used = {}, {}
+        by = {}
         for it in d.get("detail") or []:
             if it.get("section") == "expenditure":
                 k = (fund_type(it), it.get("fund") or "", it.get("department") or it.get("category") or "")
-                by[k] = by.get(k, 0.0) + float(it.get("amount") or 0)
-                used.setdefault(k, []).append(it)
-        totals = {ft: sum(v for k, v in by.items() if k[0] == ft) or 1 for ft in FUND_TYPES}
-        for (ft, fund, dept), v in sorted(by.items(), key=lambda kv: (kv[0][0], -kv[1])):
-            first = used[(ft, fund, dept)][0].get("source_page")
+                by.setdefault(k, []).append(it)
+        totals = {ft: sum(float(i.get("amount") or 0) for k, its in by.items() if k[0] == ft for i in its) or 1
+                  for ft in FUND_TYPES}
+        for (ft, fund, dept), its in sorted(by.items(), key=lambda kv: (kv[0][0], -sum(float(i.get("amount") or 0)
+                                                                                       for i in kv[1]))):
+            v = sum(float(i.get("amount") or 0) for i in its)
             rows.append([d.get("entity_name"), d.get("entity_type"), s, d.get("fiscal_year_end"), d.get("basis"),
-                         url(s), ft, fund, dept, round(v, 2), round(v / totals[ft], 4),
-                         page_list(s, used[(ft, fund, dept)]), link(s, first)])
+                         ft, fund, dept, round(v, 2), round(v / totals[ft], 4)] + ref(s, its))
     ws = add_sheet(wb, "Spending by Department", ident + ["fund_type", "fund", "department", "amount",
-                                                          "share_of_fund_type_spending", "report_pages", "page_link"],
-                   rows, ["amount"])
+                                                          "share_of_fund_type_spending"] + REF, rows, ["amount"])
     for (cell,) in ws.iter_rows(min_row=2, min_col=len(ident) + 5, max_col=len(ident) + 5):
         cell.number_format = "0.0%"
 
+    # ---- Receipts / Disbursements by high-level category
     for title, key, cats in (("Receipts", "receipts", RECEIPT_CATEGORIES),
                              ("Disbursements", "disbursements", DISBURSEMENT_CATEGORIES)):
         rows = []
@@ -216,73 +221,80 @@ def main():
                         tot[it["category"]] += float(it.get("amount") or 0)
                 stated = amt(reported_total(d, ft, key))
                 rows.append([d.get("entity_name"), d.get("entity_type"), s, d.get("fiscal_year_end"), d.get("basis"),
-                             url(s), page_list(s, its), ft] + [round(tot[c], 2) for c in cats]
-                            + [round(sum(tot.values()), 2), stated])
-        add_sheet(wb, title, ident + ["report_pages", "fund_type"] + cats + ["total (sum of lines)", "total (stated in report)"], rows,
-                  cats + ["total (sum of lines)", "total (stated in report)"])
+                             ft] + [round(tot[c], 2) for c in cats] + [round(sum(tot.values()), 2), stated]
+                            + ref(s, its))
+        add_sheet(wb, title, ident + ["fund_type"] + cats + ["total (sum of lines)", "total (stated in report)"]
+                  + REF, rows, cats + ["total (sum of lines)", "total (stated in report)"])
 
+    # ---- Financing & Balances
     fin_keys = ["beginning_cash", "beginning_investments", "beginning_fund_balance", "transfers_in",
                 "transfers_out", "debt_proceeds", "other_financing", "ending_cash", "ending_investments",
                 "ending_fund_balance"]
     rows = []
     for s, d in reports:
-        base = [d.get("entity_name"), d.get("entity_type"), s, d.get("fiscal_year_end"), d.get("basis"), url(s)]
+        base = [d.get("entity_name"), d.get("entity_type"), s, d.get("fiscal_year_end"), d.get("basis")]
         for k in fin_keys:
             v = d.get(k)
             if amt(v) is not None:
-                rows.append(base + ["governmental", k, k, amt(v)] + where(s, page(v)))
+                rows.append(base + ["governmental", k, k, amt(v)] + ref(s, v))
         for it in d.get("adjustments") or []:
-            rows.append(base + ["governmental", "adjustment", it.get("original_label"), it.get("amount")]
-                        + where(s, it.get("source_page")))
+            rows.append(base + ["governmental", "adjustment", it.get("original_label"), it.get("amount")] + ref(s, it))
         bt = d.get("business_type") or {}
         for k in ("beginning", "ending", "transfers_net", "debt_proceeds", "other_financing"):
             if amt(bt.get(k)) is not None:
-                rows.append(base + ["business-type", k, f"{k} ({bt.get('measure') or ''})".strip(), amt(bt.get(k))]
-                            + where(s, page(bt.get(k))))
+                rows.append(base + ["business-type", k, f"{k} ({bt.get('measure') or ''})", amt(bt.get(k))]
+                            + ref(s, bt.get(k)))
         for it in bt.get("adjustments") or []:
             rows.append(base + ["business-type", "adjustment", it.get("original_label"), it.get("amount")]
-                        + where(s, it.get("source_page")))
-    add_sheet(wb, "Financing & Balances", ident + ["fund_type", "item", "original_label", "amount"] + WHERE,
+                        + ref(s, it))
+    add_sheet(wb, "Financing & Balances", ident + ["fund_type", "item", "original_label", "amount"] + REF,
               rows, ["amount"])
 
+    # ---- Proprietary (GAAP cash flows)
     rows = []
+    pk = ["beginning_cash"] + PROPRIETARY_FIELDS + ["ending_cash"]
     for s, d in reports:
         p = d.get("proprietary") or {}
         if not p:
             continue
-        vals = [p.get(k) for k in ["beginning_cash"] + PROPRIETARY_FIELDS + ["ending_cash"]]
-        rows.append([d.get("entity_name"), d.get("entity_type"), s, d.get("fiscal_year_end"), d.get("basis"), url(s),
-                     page_list(s, [v for v in vals if isinstance(v, dict)])] + [amt(v) for v in vals])
-    pk = ["beginning_cash"] + PROPRIETARY_FIELDS + ["ending_cash"]
-    add_sheet(wb, "Proprietary", ident + ["report_pages"] + pk, rows, pk)
+        vals = [p.get(k) for k in pk]
+        rows.append([d.get("entity_name"), d.get("entity_type"), s, d.get("fiscal_year_end"), d.get("basis")]
+                    + [amt(v) for v in vals] + ref(s, [v for v in vals if isinstance(v, dict)]))
+    add_sheet(wb, "Proprietary", ident + pk + REF, rows, pk)
 
+    # ---- Balance Sheet
     rows = []
     for s, d in reports:
         bs = d.get("balance_sheet") or {}
-        base = [d.get("entity_name"), d.get("entity_type"), s, d.get("fiscal_year_end"), d.get("basis"), url(s)]
+        base = [d.get("entity_name"), d.get("entity_type"), s, d.get("fiscal_year_end"), d.get("basis")]
         for sec, tot in BS_SECTIONS.items():
             for it in bs.get(sec) or []:
                 rows.append(base + [bs.get("statement", ""), sec, it.get("category", ""), it.get("original_label"),
-                                    it.get("amount")] + where(s, it.get("source_page")))
+                                    it.get("amount")] + ref(s, it))
             if amt(bs.get(tot)) is not None:
                 rows.append(base + [bs.get("statement", ""), sec, tot, "(total as stated)", amt(bs.get(tot))]
-                            + where(s, page(bs.get(tot))))
-    add_sheet(wb, "Balance Sheet", ident + ["statement", "section", "category", "original_label", "amount"] + WHERE,
+                            + ref(s, bs.get(tot)))
+    add_sheet(wb, "Balance Sheet", ident + ["statement", "section", "category", "original_label", "amount"] + REF,
               rows, ["amount"])
 
+    # ---- Flagged
     fr = read_csv(FLAGGED)
     fh = ["filename", "check", "reason", "expected", "actual", "difference"]
-    add_sheet(wb, "Flagged", fh + ["report_pages", "source_url"],
-              [[r.get(h) for h in fh] + [page_ranges([orig(r["filename"], p) for p in (r.get("pages") or "").split(";")
-                                                      if orig(r["filename"], p)]), url(r["filename"])] for r in fr],
+    add_sheet(wb, "Flagged", fh + REF,
+              [[r.get(h) for h in fh] + (ref(r["filename"], [p for p in (r.get("pages") or "").split(";") if p])
+                                         if r.get("pages") else ref_all(r["filename"])) for r in fr],
               ["expected", "actual", "difference"])
 
+    # ---- Progress
     pr = read_csv(PROGRESS_CSV)
-    ph = list(pr[0].keys()) if pr else ["filename", "status"]
-    add_sheet(wb, "Progress", ph, [[r[h] for h in ph] for r in pr], status_col="status")
+    ph = [h for h in (list(pr[0].keys()) if pr else ["filename", "status"]) if h not in HIDE]
+    add_sheet(wb, "Progress", ph + REF,
+              [[r[h] for h in ph] + (ref_all(r["filename"]) if kept(r["filename"]) else ["", url(r["filename"])])
+               for r in pr], status_col="status")
 
-    add_sheet(wb, "Notes", ["filename", "entity_name", "notes"],
-              [[s, d.get("entity_name"), d.get("notes")] for s, d in reports if d.get("notes")])
+    # ---- Notes
+    add_sheet(wb, "Notes", ["filename", "entity_name", "notes"] + REF,
+              [[s, d.get("entity_name"), d.get("notes")] + ref_all(s) for s, d in reports if d.get("notes")])
 
     wb.save(XLSX)
     print(f"wrote {XLSX.relative_to(OUTPUT.parent)} ({len(reports)} reports, {len(lines)} line items)")
