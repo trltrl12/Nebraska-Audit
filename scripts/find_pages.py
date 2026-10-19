@@ -14,6 +14,7 @@ OCR needs Tesseract (apt install tesseract-ocr) and TESSDATA_PREFIX set.
 """
 import argparse
 import datetime as dt
+import io
 import re
 import sys
 from pathlib import Path
@@ -36,6 +37,8 @@ MAX_CONTINUATIONS = 8
 MAX_UNTITLED = 2           # untitled number-heavy pages accepted right after a statement
 MAX_DETAIL_PAGES = 15      # cap on supplementary detail pages per report (extraction cost)
 TITLE_MAX_OFFSET = 30      # a title must start within this many characters of its line
+FLATTEN_DPI = 200          # layered scans are re-rendered to one black-and-white image at this dpi
+FLATTEN_MARK = "flattened-v1"
 
 # Statement title families: (type, regex). Checked in order; the first match wins.
 _OF = r"statements?\s+of\s*"
@@ -403,6 +406,38 @@ def select_pages(pages):
     return keep, kept_types, basis, flag
 
 
+def needs_flatten(page):
+    """Scanner 'mixed raster' pages (a background image plus stacked 1-bit CCITT/JBIG2 masks and an
+    invisible OCR layer) show only partly in many viewers (e.g. numbers but no words)."""
+    ims = page.get_images(full=True)
+    return len(ims) > 1 or any(im[8] in ("CCITTFaxDecode", "JBIG2Decode") for im in ims)
+
+
+def flatten_layered(doc):
+    """Return a copy of doc in which layered scan pages are a single black-and-white image."""
+    from PIL import Image  # only needed here
+    if not any(needs_flatten(p) for p in doc):
+        return doc
+    out = pymupdf.open()
+    for n, p in enumerate(doc):
+        if not needs_flatten(p):
+            out.insert_pdf(doc, from_page=n, to_page=n)
+            continue
+        pix = p.get_pixmap(dpi=FLATTEN_DPI, colorspace=pymupdf.csGRAY)
+        im = Image.frombytes("L", (pix.width, pix.height), pix.samples)
+        buf = io.BytesIO()
+        im.point(lambda v: 255 if v > 180 else 0).convert("1").save(buf, "PNG", optimize=True)
+        new = out.new_page(width=p.rect.width, height=p.rect.height)
+        new.insert_image(new.rect, stream=buf.getvalue())
+    return out
+
+
+def save_trimmed(doc, path):
+    doc = flatten_layered(doc)
+    doc.set_metadata({"keywords": FLATTEN_MARK})
+    doc.save(path, garbage=4, deflate=True)
+
+
 def process(pdf_path, meta):
     url = meta.get("url", "")
     doc = pymupdf.open(pdf_path)
@@ -415,7 +450,7 @@ def process(pdf_path, meta):
             out.insert_pdf(doc, from_page=p, to_page=p)
         TRIMMED.mkdir(exist_ok=True)
         trimmed_name = Path(pdf_path).name
-        out.save(TRIMMED / trimmed_name, garbage=4, deflate=True)
+        save_trimmed(out, TRIMMED / trimmed_name)
         out.close()
     first_text = " ".join(full for _, full, _ in pages[:3])
     row = dict(filename=Path(pdf_path).name, url=url,
@@ -438,8 +473,24 @@ def main():
     ap.add_argument("--drop-stale", action="store_true",
                     help="remove manifest rows (and trimmed PDFs) made by an older FINDER_VERSION, so the "
                          "next download/trim re-processes them; then exit")
+    ap.add_argument("--flatten-existing", action="store_true",
+                    help="flatten layered scan pages in trimmed/*.pdf made before flattening existed; then exit")
     ap.add_argument("files", nargs="*", help="specific PDFs (default: everything in audits/)")
     a = ap.parse_args()
+
+    if a.flatten_existing:
+        n = 0
+        for f in sorted(TRIMMED.glob("*.pdf")):
+            doc = pymupdf.open(f)
+            if (doc.metadata or {}).get("keywords") == FLATTEN_MARK:
+                continue
+            tmp = f.with_suffix(".tmp")
+            save_trimmed(doc, tmp)
+            doc.close()
+            tmp.replace(f)
+            n += 1
+        print(f"flattened/marked {n} trimmed PDFs")
+        return
 
     if a.drop_stale:
         rows = read_csv(MANIFEST)

@@ -94,6 +94,10 @@ jobs:
         run: |
           python scripts/find_pages.py --drop-stale
           bash /tmp/commit_push.sh "re-trim queue: drop reports from older find_pages versions"
+      - name: Flatten layered scan pages in existing trimmed PDFs
+        run: |
+          python scripts/find_pages.py --flatten-existing
+          bash /tmp/commit_push.sh "flatten layered scan pages in trimmed PDFs"
       - name: List filings
         run: |
           flags=""
