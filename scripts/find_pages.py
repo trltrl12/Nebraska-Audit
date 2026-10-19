@@ -187,9 +187,11 @@ DETAIL_TITLES = [
     ("detail_combining", r"combining\s+(statements?|schedules?)\s+of\s+" + _BASIS
                          + r"(receipts|revenues|disbursements|expenditures)"),
     ("detail_departments", r"(statement|schedule)s?\s+of\s+(general\s+fund\s+)?" + _BASIS
-                           + r"(disbursements|expenditures)\b|by\s+(department|function|object)|departmental"),
+                           + r"(operating\s+)?(disbursements|expenditures|expenses)\b|by\s+(department|function|object)"
+                             r"|departmental"),
     ("detail_schedule", r"(statement|schedule)s?\s+of\s+" + _BASIS
-                        + r"(receipts|revenues)(,?\s*(and\s+)?(disbursements|expenditures))?"),
+                        + r"(operating\s+|(net\s+)?patient\s+service\s+|net\s+)?(receipts|revenues?)\b"
+                          r"(,?\s*(and\s+)?(disbursements|expenditures|expenses))?"),
 ]
 DETAIL_TITLES = [(t, re.compile(rx)) for t, rx in DETAIL_TITLES]
 DETAIL_EXCLUDE_RE = re.compile(
@@ -410,7 +412,8 @@ def select_pages(pages):
         flag = "no_statements_found" + ("; scanned, OCR found no titles" if n_ocr > len(pages) / 2 else "")
     elif len(basic) > 25:
         flag = "many_pages"
-    elif not any(has_type(t, FLOW_TYPES | {"schedule_receipts_disbursements", "activities"}) for t in basic):
+    elif not any(has_type(t, FLOW_TYPES | {"schedule_receipts_disbursements", "activities",
+                                           "proprietary_revenues_expenses"}) for t in basic):
         flag = "no_revenue_statement"
     elif not any(has_type(t, ("net_position", "balance_sheet", "assets_fund_balances")) for t in basic):
         flag = "no_balance_statement"

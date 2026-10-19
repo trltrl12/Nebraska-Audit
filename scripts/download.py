@@ -41,7 +41,17 @@ from common import (AUDITS, DOWNLOAD_ERRORS, FILE_LIST, MANIFEST, OUTPUT, ROOT, 
 YEAR = os.environ.get("AUDIT_YEAR", "2025")
 SEARCH_URL = os.environ.get("AUDIT_SEARCH_URL", "https://www.nebraska.gov/auditor/reports/index.cgi")
 SEARCH_PAGE = SEARCH_URL + "?audit=1"
-SUBTYPES = os.environ.get("AUDIT_SUBTYPES", "Cities and Villages,Counties,School Districts")
+SUBTYPES = os.environ.get("AUDIT_SUBTYPES", "all")
+# Every subdivision type offered by the Auditor's search form ("all" expands to these).
+ALL_SUBTYPES = [
+    "Agricultural Societies", "Airport Authorities", "Cemetery Districts", "Cities and Villages",
+    "Cities and Villages - Utilities", "Community Colleges", "Community Redevelopment Authorities", "Counties",
+    "County Proprietary Funds", "ESUs", "Fire - Mutual Finance Organizations", "Fire Districts",
+    "Health Care Facilities", "Historical Societies", "Housing Authorities", "Land Banks",
+    "Miscellaneous Districts", "Municipal Inland Port Authorities", "Natural Resources Districts",
+    "Public Power Districts", "Road Improvement Districts", "Sanitary Improvement Districts",
+    "School Districts", "Townships", "Water Districts",
+]
 # Filing types to download (all filings are listed in file_list.csv regardless).
 FILING_TYPES = os.environ.get("AUDIT_FILING_TYPES", "Audit,Waiver")
 DIR_URL = os.environ.get("AUDIT_DIR_URL", "https://auditors.nebraska.gov/Audits_Filed/{year}/")
@@ -331,6 +341,8 @@ def main():
 
     pdf_re = re.compile(PDF_URL_REGEX, re.I)
     subtypes = [s.strip() for s in a.subtypes.split(",") if s.strip()]
+    if [s.lower() for s in subtypes] == ["all"]:
+        subtypes = ALL_SUBTYPES
     filing_types = {s.strip().lower() for s in a.filing_types.split(",") if s.strip()}
 
     rows = [r for r in read_csv(FILE_LIST) if r.get("url")]

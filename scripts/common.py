@@ -38,6 +38,7 @@ DISBURSEMENT_CATEGORIES = [
     "health/welfare", "economic development", "utilities", "debt service principal",
     "debt service interest", "capital outlay",
     "instruction", "support services", "student transportation", "food service",   # school districts
+    "hospital/health care", "housing", "natural resources/conservation", "agriculture/fair",
     "other",
 ]
 PROPRIETARY_FIELDS = ["operating", "noncapital_financing", "capital_and_related_financing", "investing"]
@@ -63,7 +64,8 @@ DETAIL_REVENUE_CATEGORIES = [
     "other utility charges",
     "licenses and permits", "fines and forfeitures", "fees of office", "rentals",
     "recreation/pool/park fees", "cemetery fees", "tuition and fees", "school lunch sales",
-    "ambulance/rescue fees", "other charges for services",
+    "ambulance/rescue fees", "patient service revenue", "tenant rent", "fair/event revenue",
+    "other charges for services",
     "investment income", "donations/contributions", "reimbursements/refunds", "sale of assets",
     "miscellaneous revenue",
 ]
@@ -74,7 +76,8 @@ DETAIL_EXPENSE_CATEGORIES = [
     "insurance", "rent/leases", "dues, training and travel", "printing, publishing and postage",
     "grants/payments to other entities", "law enforcement contract", "equipment purchases",
     "construction/infrastructure", "land and buildings", "debt principal", "debt interest and fees",
-    "tax refunds/treasurer fees", "miscellaneous expenditure",
+    "tax refunds/treasurer fees", "purchased power/cost of sales", "depreciation",
+    "medical supplies and services", "miscellaneous expenditure",
 ]
 DETAIL_SECTIONS = ["revenue", "expenditure", "other financing"]
 

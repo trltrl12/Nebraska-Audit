@@ -201,9 +201,9 @@ digits as printed. Never invent a number. If a value isn't shown, use `null` and
     detail, not a replacement.
   - If the trimmed PDF has no detail schedules, use `"detail": []` and `"detail_totals": []`.
 - Detailed revenue categories (`detail_category` for revenue; use exactly these strings):
-  `property tax`, `sales tax`, `motor vehicle tax`, `occupation/franchise tax`, `lodging tax`, `inheritance tax`, `other local taxes`, `taxes (unlabeled)`, `highway allocation`, `motor vehicle pro-rate`, `municipal equalization`, `homestead/tax credits`, `state school aid (TEEOSA)`, `other state aid`, `county/other local governments`, `federal grants`, `water charges`, `sewer charges`, `electric charges`, `gas charges`, `refuse/sanitation charges`, `other utility charges`, `licenses and permits`, `fines and forfeitures`, `fees of office`, `rentals`, `recreation/pool/park fees`, `cemetery fees`, `tuition and fees`, `school lunch sales`, `ambulance/rescue fees`, `other charges for services`, `investment income`, `donations/contributions`, `reimbursements/refunds`, `sale of assets`, `miscellaneous revenue`.
+  `property tax`, `sales tax`, `motor vehicle tax`, `occupation/franchise tax`, `lodging tax`, `inheritance tax`, `other local taxes`, `taxes (unlabeled)`, `highway allocation`, `motor vehicle pro-rate`, `municipal equalization`, `homestead/tax credits`, `state school aid (TEEOSA)`, `other state aid`, `county/other local governments`, `federal grants`, `water charges`, `sewer charges`, `electric charges`, `gas charges`, `refuse/sanitation charges`, `other utility charges`, `licenses and permits`, `fines and forfeitures`, `fees of office`, `rentals`, `recreation/pool/park fees`, `cemetery fees`, `tuition and fees`, `school lunch sales`, `ambulance/rescue fees`, `patient service revenue`, `tenant rent`, `fair/event revenue`, `other charges for services`, `investment income`, `donations/contributions`, `reimbursements/refunds`, `sale of assets`, `miscellaneous revenue`.
 - Detailed expenditure categories (`detail_category` for expenditure; use exactly these strings):
-  `salaries and wages`, `employee benefits and payroll taxes`, `professional/contract services`, `supplies and materials`, `utilities (power, gas, phone)`, `fuel`, `repairs and maintenance`, `insurance`, `rent/leases`, `dues, training and travel`, `printing, publishing and postage`, `grants/payments to other entities`, `law enforcement contract`, `equipment purchases`, `construction/infrastructure`, `land and buildings`, `debt principal`, `debt interest and fees`, `tax refunds/treasurer fees`, `miscellaneous expenditure`.
+  `salaries and wages`, `employee benefits and payroll taxes`, `professional/contract services`, `supplies and materials`, `utilities (power, gas, phone)`, `fuel`, `repairs and maintenance`, `insurance`, `rent/leases`, `dues, training and travel`, `printing, publishing and postage`, `grants/payments to other entities`, `law enforcement contract`, `equipment purchases`, `construction/infrastructure`, `land and buildings`, `debt principal`, `debt interest and fees`, `tax refunds/treasurer fees`, `purchased power/cost of sales`, `depreciation`, `medical supplies and services`, `miscellaneous expenditure`.
   Examples: officer/clerk/teacher pay → `salaries and wages`; FICA, retirement, health insurance →
   `employee benefits and payroll taxes`; legal, audit, engineering, contract labor →
   `professional/contract services`; street lighting/electricity → `utilities (power, gas, phone)`;
@@ -224,10 +224,36 @@ services/fees` (utility sales, permits, licenses, rentals, fines), `investment i
 center), `health/welfare` (health, cemetery, senior services, assistance), `economic
 development` (LB840, TIF, CRA, tourism), `utilities` (water, sewer, electric, gas, refuse),
 `debt service principal`, `debt service interest` (including fees), `capital outlay`,
-school districts: `instruction` (regular, special education, vocational, activities), `support
-services` (pupil, instructional staff, general and school administration, business, operation
-and maintenance of plant), `student transportation`, `food service`; and `other`.
+school districts and community colleges: `instruction` (regular, special education, vocational,
+activities), `support services` (pupil, instructional staff, general and school administration,
+business, operation and maintenance of plant), `student transportation`, `food service`; plus
+`hospital/health care`, `housing`, `natural resources/conservation` (NRDs, water and drainage
+districts), `agriculture/fair` (agricultural societies), and `other`.
 When a function line mixes categories, pick the dominant one and mention it in `notes`.
+
+## Entity types beyond cities, counties and schools
+- **Entirely business-type entities** (health care facilities/hospitals, public power districts,
+  housing authorities, airport authorities, community colleges, many water districts, "Cities and
+  Villages - Utilities"): all lines are `fund_type: business-type`; record balances in
+  `business_type` (measure `net position` for accrual statements) and set the top-level
+  governmental balances/transfers to null and `reported_totals.governmental` to null. Use the
+  Statement of Revenues, Expenses, and Changes in Net Position (operating + nonoperating revenues
+  and expenses) for receipts/disbursements, and the Statement of Net Position / Balance Sheet for
+  `balance_sheet`. Depreciation is an expense line (`detail_category` `depreciation`).
+- **Hospitals:** net patient service revenue → `charges for services/fees` (detail
+  `patient service revenue`); operating expenses by line (salaries, benefits, supplies,
+  professional fees…), function `hospital/health care`.
+- **Housing authorities:** tenant rent → `charges for services/fees` (detail `tenant rent`); HUD
+  operating subsidies and capital fund grants → `federal grants`; function `housing`.
+- **Public power districts:** electric sales → detail `electric charges`; purchased power →
+  `purchased power/cost of sales`; function `utilities`.
+- **Fire districts, townships, cemetery districts, SIDs, road improvement districts,
+  historical/agricultural societies:** usually cash-basis governmental (or a waiver form); fire →
+  `public safety`, township roads → `streets/highways`, cemetery → `health/welfare`, ag society
+  fair/events → `agriculture/fair` with revenue detail `fair/event revenue`. SIDs (sanitary and
+  improvement districts) are mostly special assessments (→ `other taxes`, detail `other local
+  taxes`), warrant/bond proceeds (→ `debt_proceeds`) and debt service.
+- **NRDs:** property tax and state/federal grants; function `natural resources/conservation`.
 
 ## Output to the caller
 Don't return extracted data. Return exactly one line per report, nothing else:

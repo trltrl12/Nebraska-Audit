@@ -79,8 +79,14 @@ def check(stem, d):
         if item.get("source_page") in (None, ""):
             f("schema", f"adjustments: no source_page for {item.get('original_label')!r}")
 
+    # Entities that are entirely business-type (hospitals, power/housing authorities, community
+    # colleges...) have no governmental funds: skip the governmental checks for them.
+    has_gov = any(fund_type(i) == "governmental" for k in ("receipts", "disbursements") for i in d.get(k) or [])
+    has_bt = any(fund_type(i) == "business-type" for k in ("receipts", "disbursements") for i in d.get(k) or [])
+    gov_only_checks = has_gov or not has_bt
+
     # Balance roll-forward
-    r = reconcile(d)
+    r = reconcile(d) if gov_only_checks else dict(beginning=0, ending=0, reconciles=True, balance_type="none")
     bkeys = (["beginning_fund_balance", "ending_fund_balance"] if r["balance_type"] == "fund_balance"
              else ["beginning_cash", "ending_cash"])
     if r["beginning"] is None or r["ending"] is None:
@@ -97,7 +103,7 @@ def check(stem, d):
             rt = reported_total(d, fund, key)
             stated = amt(rt)
             if stated is None:
-                if lines or fund == "governmental":
+                if lines or (fund == "governmental" and gov_only_checks):
                     f("totals", f"no stated {fund} total for {key} recorded in reported_totals")
                 continue
             computed = sum_items(lines)
