@@ -90,6 +90,10 @@ jobs:
           git rm -q --ignore-unmatch output/manifest.csv
           git rm -q --ignore-unmatch 'trimmed/*.pdf'
           bash /tmp/commit_push.sh "reprocess: clear manifest and trimmed PDFs"
+      - name: Queue reports trimmed by an older find_pages version
+        run: |
+          python scripts/find_pages.py --drop-stale
+          bash /tmp/commit_push.sh "re-trim queue: drop reports from older find_pages versions"
       - name: List filings
         run: |
           flags=""

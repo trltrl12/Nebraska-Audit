@@ -22,7 +22,7 @@ DETAIL_CSV = OUTPUT / "cashflow_detail.csv"
 MANIFEST_FIELDS = [
     "filename", "url", "entity_name", "entity_type", "county", "subdivision_type", "fiscal_year",
     "filing_type", "basis_guess",
-    "total_pages", "pages_kept", "page_types", "trimmed_file", "flag", "processed_at",
+    "total_pages", "pages_kept", "page_types", "trimmed_file", "flag", "processed_at", "finder_version",
 ]
 
 RECEIPT_CATEGORIES = [
