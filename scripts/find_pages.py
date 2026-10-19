@@ -22,7 +22,11 @@ import pymupdf
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from common import (AUDITS, FILE_LIST, MANIFEST, MANIFEST_FIELDS, TRIMMED,  # noqa: E402
-                    append_csv, read_csv)
+                    append_csv, read_csv, write_csv)
+
+# Bump whenever page selection changes: reports trimmed by an older version are re-trimmed
+# automatically on the next fetch run (see --drop-stale).
+FINDER_VERSION = 4
 
 HEADER_FRAC = 0.30         # statement titles sit in the top 30% of the page
 OCR_FRAC = 0.35            # how much of a scanned page to OCR
@@ -422,7 +426,8 @@ def process(pdf_path, meta):
                basis_guess=basis, total_pages=len(pages),
                pages_kept=";".join(str(p + 1) for p in keep),
                page_types=";".join(kept_types), trimmed_file=f"trimmed/{trimmed_name}" if trimmed_name else "",
-               flag=flag, processed_at=dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"))
+               flag=flag, processed_at=dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"),
+               finder_version=FINDER_VERSION)
     doc.close()
     return row
 
@@ -430,8 +435,23 @@ def process(pdf_path, meta):
 def main():
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--keep", action="store_true", help="keep full PDFs in audits/ after processing")
+    ap.add_argument("--drop-stale", action="store_true",
+                    help="remove manifest rows (and trimmed PDFs) made by an older FINDER_VERSION, so the "
+                         "next download/trim re-processes them; then exit")
     ap.add_argument("files", nargs="*", help="specific PDFs (default: everything in audits/)")
     a = ap.parse_args()
+
+    if a.drop_stale:
+        rows = read_csv(MANIFEST)
+        fresh = [r for r in rows if str(r.get("finder_version") or "") == str(FINDER_VERSION)]
+        stale = [r for r in rows if r not in fresh]
+        for r in stale:
+            if r.get("trimmed_file"):
+                (TRIMMED.parent / r["trimmed_file"]).unlink(missing_ok=True)
+        if stale or (rows and "finder_version" not in rows[0]):
+            write_csv(MANIFEST, fresh, MANIFEST_FIELDS)  # also upgrades the header
+        print(f"finder v{FINDER_VERSION}: {len(stale)} stale reports queued for re-trimming, {len(fresh)} current")
+        return
 
     meta = {r["filename"]: r for r in read_csv(FILE_LIST)}
     done = {r["filename"] for r in read_csv(MANIFEST)}
@@ -448,7 +468,8 @@ def main():
                        county=m.get("county", ""), subdivision_type=m.get("subdivision_type", ""),
                        fiscal_year=m.get("fiscal_year", ""), filing_type=m.get("filing_type", ""),
                        flag=f"error: {type(e).__name__}: {e}"[:200],
-                       processed_at=dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"))
+                       processed_at=dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"),
+                       finder_version=FINDER_VERSION)
         append_csv(MANIFEST, row, MANIFEST_FIELDS)
         n += 1
         print(f"{f.name}: pages {row.get('pages_kept') or '-'} {row.get('flag', '')}")
