@@ -3,10 +3,13 @@ name: debug_pages
 # Diagnostics for page detection: re-download already-processed PDFs and commit a per-page
 # text summary to output/page_debug/ (no trimming, manifest untouched).
 on:
+  push:
+    branches: [main]
+    paths: ["config/debug_pages.txt"]
   workflow_dispatch:
     inputs:
       filenames:
-        description: "Space-separated PDF filenames (blank = every file in output/manifest.csv)"
+        description: "Space-separated PDF filenames (blank = config/debug_pages.txt, else every file in output/manifest.csv)"
         default: ""
 
 permissions:
@@ -39,6 +42,8 @@ jobs:
           python - <<'PY'
           import csv, os, time, requests
           names = os.environ.get("FILENAMES", "").split()
+          if not names and os.path.exists("config/debug_pages.txt"):
+              names = [l.strip() for l in open("config/debug_pages.txt") if l.strip() and not l.startswith("#")]
           rows = {r["filename"]: r for r in csv.DictReader(open("output/file_list.csv"))}
           if not names:
               names = [r["filename"] for r in csv.DictReader(open("output/manifest.csv"))]
