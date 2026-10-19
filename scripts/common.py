@@ -185,6 +185,18 @@ def reconcile(d):
     return out
 
 
+def page_ranges(pages):
+    """[6, 7, 8, 9, 23] -> "6-9, 23" (original-report page numbers used)."""
+    ps = sorted({int(p) for p in pages if str(p).strip().isdigit()})
+    out, start = [], None
+    for a, b in zip(ps, ps[1:] + [None]):
+        start = a if start is None else start
+        if b != a + 1:
+            out.append(f"{start}-{a}" if start != a else str(a))
+            start = None
+    return ", ".join(out)
+
+
 def fund_type(item):
     return (item or {}).get("fund_type") or "governmental"
 

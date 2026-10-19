@@ -12,14 +12,14 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from common import (BS_SECTIONS, DETAIL_CSV, DOWNLOAD_ERRORS, FILE_LIST, FLAGGED, LONG_CSV, MANIFEST,  # noqa: E402
                     PROGRESS_CSV, PROPRIETARY_FIELDS, SUMMARY_CSV, amt, balance_sheet_check, bs_total,
-                    REVIEW_CSV, fund_type, load_reports, page, read_csv, reconcile, reconcile_business,
+                    REVIEW_CSV, fund_type, page_ranges, load_reports, page, read_csv, reconcile, reconcile_business,
                     reconcile_proprietary, write_csv)
 
 LONG_FIELDS = ["entity_name", "entity_type", "filename", "fiscal_year_end", "basis", "fund_type", "section",
                "category", "amount", "original_labels", "source_pages", "source_pages_original",
                "source_url"]
 SUMMARY_FIELDS = ["entity_name", "entity_type", "county", "filename", "fiscal_year", "fiscal_year_end", "basis",
-                  "filing_type", "source_url", "balance_type",
+                  "filing_type", "source_url", "report_pages", "balance_type",
                   # governmental funds
                   "beginning_balance", "total_receipts", "total_disbursements", "transfers_in",
                   "transfers_out", "debt_proceeds", "other_financing", "adjustments", "ending_balance",
@@ -35,7 +35,7 @@ DETAIL_FIELDS = ["entity_name", "entity_type", "county", "filename", "fiscal_yea
                  "fund_type", "fund", "department", "section", "category", "detail_category", "original_label", "amount",
                  "budget_final", "source_page", "source_page_original", "source_url"]
 PROGRESS_FIELDS = ["filename", "entity_name", "entity_type", "county", "subdivision_type", "filing_type",
-                   "status", "basis_guess", "trimmed_file", "pages_kept", "extraction_attempt",
+                   "status", "basis_guess", "trimmed_file", "report_pages", "pages_kept", "extraction_attempt",
                    "flag_reasons", "source_url"]
 
 
@@ -146,7 +146,7 @@ def main():
             balance_sheet_statement=bs.get("statement", ""),
             **{tot: bs_total(bs, sec) for sec, tot in BS_SECTIONS.items()},
             balance_sheet_balances="" if not bc else ("yes" if bc["balances"] else "no"),
-            fiscal_year=m.get("fiscal_year"),
+            fiscal_year=m.get("fiscal_year"), report_pages=page_ranges((m.get("pages_kept") or "").split(";")),
             bt_measure=rb["measure"], bt_beginning=rb["beginning"],
             bt_receipts=round(rb["receipts"], 2) if rb["receipts"] else None,
             bt_disbursements=round(rb["disbursements"], 2) if rb["disbursements"] else None,
@@ -172,6 +172,7 @@ def main():
                              subdivision_type=m.get("subdivision_type"), filing_type=m.get("filing_type"),
                              status=status, basis_guess=m.get("basis_guess"),
                              trimmed_file=m.get("trimmed_file"), pages_kept=m.get("pages_kept"),
+                             report_pages=page_ranges((m.get("pages_kept") or "").split(";")),
                              extraction_attempt=(d or {}).get("extraction_attempt", "") if d else "",
                              flag_reasons=" | ".join(flagged.get(stem, [])) or m.get("flag", ""),
                              source_url=m.get("url") or file_urls.get(stem, "")))

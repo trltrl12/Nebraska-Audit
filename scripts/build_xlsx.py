@@ -31,7 +31,8 @@ from openpyxl.styles import Alignment, Font, PatternFill
 from openpyxl.utils import get_column_letter
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from common import (DETAIL_EXPENSE_CATEGORIES, DETAIL_REVENUE_CATEGORIES,  # noqa: E402
+from common import (page_ranges, DETAIL_EXPENSE_CATEGORIES,  # noqa: E402
+                     DETAIL_REVENUE_CATEGORIES,  # noqa: E402
                     FUND_TYPES, REVIEW_CSV, fund_type, reported_total,
                     BS_SECTIONS, DISBURSEMENT_CATEGORIES, FILE_LIST, FLAGGED, MANIFEST, OUTPUT, PROGRESS_CSV,  # noqa: E402
                     PROPRIETARY_FIELDS, RECEIPT_CATEGORIES, SUMMARY_CSV, amt, load_reports, page,
@@ -76,12 +77,15 @@ def add_sheet(wb, title, header, rows, money_cols=(), status_col=None):
     for i, h in enumerate(header, 1):
         width = max([len(str(h))] + [len(str(r[i - 1])) for r in rows[:500] if i - 1 < len(r) and r[i - 1] is not None])
         ws.column_dimensions[get_column_letter(i)].width = min(max(width + 2, 10), 60)
-    if "source_url" in idx:  # clickable link to the PDF on the Auditor's website
-        ws.column_dimensions[get_column_letter(idx["source_url"])].width = 18
-        for (cell,) in ws.iter_rows(min_row=2, min_col=idx["source_url"], max_col=idx["source_url"]):
-            if cell.value and str(cell.value).startswith("http"):
-                cell.hyperlink = str(cell.value)
-                cell.value = "Open PDF"
+    for col in ("source_url", "page_link"):  # clickable links to the PDF on the Auditor's website
+        if col not in idx:
+            continue
+        ws.column_dimensions[get_column_letter(idx[col])].width = 14
+        for (cell,) in ws.iter_rows(min_row=2, min_col=idx[col], max_col=idx[col]):
+            v = str(cell.value or "")
+            if v.startswith("http"):
+                cell.hyperlink = v
+                cell.value = f"Open p.{v.rsplit('#page=', 1)[1]}" if "#page=" in v else "Open PDF"
                 cell.font = Font(color="0563C1", underline="single")
     ws.freeze_panes = "B2" if title != "Notes" else "A2"
     if rows:
@@ -98,11 +102,27 @@ def main():
         return manifest.get(stem, {}).get("url") or file_urls.get(stem, "")
 
     def orig(stem, p):
+        """Page number in the original audit for page p of the trimmed PDF."""
         kept = (manifest.get(stem, {}).get("pages_kept") or "").split(";")
         try:
             return int(kept[int(p) - 1])
         except (ValueError, IndexError, TypeError):
             return None
+
+    def link(stem, p):
+        """Link that opens the original PDF on the Auditor's site at the page trimmed page p came from."""
+        u, rp = url(stem), orig(stem, p)
+        return f"{u}#page={rp}" if u and rp else u
+
+    def where(stem, p):
+        """[trimmed_page, report_page, page_link] for one number."""
+        return [p, orig(stem, p), link(stem, p)]
+
+    def page_list(stem, items):
+        """Original-report pages of a group of lines, as ranges ("6-9, 23")."""
+        return page_ranges([orig(stem, i.get("source_page")) for i in items if orig(stem, i.get("source_page"))])
+
+    WHERE = ["trimmed_page", "report_page", "page_link"]
 
     wb = Workbook()
     wb.remove(wb.active)
@@ -113,11 +133,13 @@ def main():
                                         "basis", "filing_type", "source_url", "balance_type", "reconciles",
                                         "prop_reconciles", "balance_sheet_statement", "balance_sheet_balances",
                                         "flagged", "fiscal_year", "bt_measure", "bt_reconciles", "review_items")]
+    money = [h for h in money if h != "report_pages"]
     add_sheet(wb, "Summary", sh, [[r[h] for h in sh] for r in srows], money, "reconciles")
 
     rv = read_csv(REVIEW_CSV)
-    rh = ["entity_name", "filename", "where", "fund_type", "original_label", "amount", "reason", "source_page"]
-    add_sheet(wb, "Review", rh + ["source_url"], [[r.get(h) for h in rh] + [url(r["filename"])] for r in rv],
+    rh = ["entity_name", "filename", "where", "fund_type", "original_label", "amount", "reason"]
+    add_sheet(wb, "Review", rh + WHERE + ["source_url"],
+              [[r.get(h) for h in rh] + where(r["filename"], r.get("source_page")) + [url(r["filename"])] for r in rv],
               ["amount"])
 
     ident = ["entity_name", "entity_type", "filename", "fiscal_year_end", "basis", "source_url"]
@@ -127,9 +149,9 @@ def main():
         for section in ("receipts", "disbursements"):
             for it in d.get(section) or []:
                 lines.append(base + [fund_type(it), section, it.get("category"), it.get("original_label"),
-                                     it.get("amount"), it.get("source_page"), orig(s, it.get("source_page"))])
-    add_sheet(wb, "Line Items", ident + ["fund_type", "section", "category", "original_label", "amount", "source_page",
-                                         "source_page_original"], lines, ["amount"])
+                                     it.get("amount")] + where(s, it.get("source_page")))
+    add_sheet(wb, "Line Items", ident + ["fund_type", "section", "category", "original_label", "amount"] + WHERE,
+              lines, ["amount"])
 
     # ---- detail schedules
     det = []
@@ -138,11 +160,9 @@ def main():
         for it in d.get("detail") or []:
             det.append((s, d, it, base + [it.get("schedule"), fund_type(it), it.get("fund"), it.get("department"), it.get("section"),
                                           it.get("category"), it.get("detail_category"), it.get("original_label"),
-                                          it.get("amount"), it.get("budget_final"), it.get("source_page"),
-                                          orig(s, it.get("source_page"))]))
+                                          it.get("amount"), it.get("budget_final")] + where(s, it.get("source_page"))))
     add_sheet(wb, "Detail Lines", ident + ["schedule", "fund_type", "fund", "department", "section", "category",
-                                           "detail_category", "original_label", "amount", "budget_final",
-                                           "source_page", "source_page_original"],
+                                           "detail_category", "original_label", "amount", "budget_final"] + WHERE,
               [r for *_, r in det], ["amount", "budget_final"])
 
     for title, sec, cats in (("Revenue by Source", "revenue", DETAIL_REVENUE_CATEGORIES),
@@ -151,28 +171,34 @@ def main():
         for s, d in reports:
             for ft in FUND_TYPES:
                 tot = dict.fromkeys(cats, 0.0)
+                used = []
                 for it in d.get("detail") or []:
                     if it.get("section") == sec and fund_type(it) == ft and it.get("detail_category") in tot:
                         tot[it["detail_category"]] += float(it.get("amount") or 0)
+                        used.append(it)
                 if any(tot.values()):
                     rows.append([d.get("entity_name"), d.get("entity_type"), s, d.get("fiscal_year_end"),
-                                 d.get("basis"), url(s), ft] + [round(tot[c], 2) for c in cats]
+                                 d.get("basis"), url(s), page_list(s, used), ft] + [round(tot[c], 2) for c in cats]
                                 + [round(sum(tot.values()), 2)])
-        add_sheet(wb, title, ident + ["fund_type"] + cats + ["total"], rows, cats + ["total"])
+        add_sheet(wb, title, ident + ["report_pages", "fund_type"] + cats + ["total"], rows, cats + ["total"])
 
     rows = []
     for s, d in reports:
-        by = {}
+        by, used = {}, {}
         for it in d.get("detail") or []:
             if it.get("section") == "expenditure":
                 k = (fund_type(it), it.get("fund") or "", it.get("department") or it.get("category") or "")
                 by[k] = by.get(k, 0.0) + float(it.get("amount") or 0)
+                used.setdefault(k, []).append(it)
         totals = {ft: sum(v for k, v in by.items() if k[0] == ft) or 1 for ft in FUND_TYPES}
         for (ft, fund, dept), v in sorted(by.items(), key=lambda kv: (kv[0][0], -kv[1])):
+            first = used[(ft, fund, dept)][0].get("source_page")
             rows.append([d.get("entity_name"), d.get("entity_type"), s, d.get("fiscal_year_end"), d.get("basis"),
-                         url(s), ft, fund, dept, round(v, 2), round(v / totals[ft], 4)])
+                         url(s), ft, fund, dept, round(v, 2), round(v / totals[ft], 4),
+                         page_list(s, used[(ft, fund, dept)]), link(s, first)])
     ws = add_sheet(wb, "Spending by Department", ident + ["fund_type", "fund", "department", "amount",
-                                                          "share_of_fund_type_spending"], rows, ["amount"])
+                                                          "share_of_fund_type_spending", "report_pages", "page_link"],
+                   rows, ["amount"])
     for (cell,) in ws.iter_rows(min_row=2, min_col=len(ident) + 5, max_col=len(ident) + 5):
         cell.number_format = "0.0%"
 
@@ -190,8 +216,9 @@ def main():
                         tot[it["category"]] += float(it.get("amount") or 0)
                 stated = amt(reported_total(d, ft, key))
                 rows.append([d.get("entity_name"), d.get("entity_type"), s, d.get("fiscal_year_end"), d.get("basis"),
-                             url(s), ft] + [round(tot[c], 2) for c in cats] + [round(sum(tot.values()), 2), stated])
-        add_sheet(wb, title, ident + ["fund_type"] + cats + ["total (sum of lines)", "total (stated in report)"], rows,
+                             url(s), page_list(s, its), ft] + [round(tot[c], 2) for c in cats]
+                            + [round(sum(tot.values()), 2), stated])
+        add_sheet(wb, title, ident + ["report_pages", "fund_type"] + cats + ["total (sum of lines)", "total (stated in report)"], rows,
                   cats + ["total (sum of lines)", "total (stated in report)"])
 
     fin_keys = ["beginning_cash", "beginning_investments", "beginning_fund_balance", "transfers_in",
@@ -203,22 +230,31 @@ def main():
         for k in fin_keys:
             v = d.get(k)
             if amt(v) is not None:
-                rows.append(base + [k, k, amt(v), page(v), orig(s, page(v))])
+                rows.append(base + ["governmental", k, k, amt(v)] + where(s, page(v)))
         for it in d.get("adjustments") or []:
-            rows.append(base + ["adjustment", it.get("original_label"), it.get("amount"), it.get("source_page"),
-                                orig(s, it.get("source_page"))])
-    add_sheet(wb, "Financing & Balances", ident + ["item", "original_label", "amount", "source_page",
-                                                   "source_page_original"], rows, ["amount"])
+            rows.append(base + ["governmental", "adjustment", it.get("original_label"), it.get("amount")]
+                        + where(s, it.get("source_page")))
+        bt = d.get("business_type") or {}
+        for k in ("beginning", "ending", "transfers_net", "debt_proceeds", "other_financing"):
+            if amt(bt.get(k)) is not None:
+                rows.append(base + ["business-type", k, f"{k} ({bt.get('measure') or ''})".strip(), amt(bt.get(k))]
+                            + where(s, page(bt.get(k))))
+        for it in bt.get("adjustments") or []:
+            rows.append(base + ["business-type", "adjustment", it.get("original_label"), it.get("amount")]
+                        + where(s, it.get("source_page")))
+    add_sheet(wb, "Financing & Balances", ident + ["fund_type", "item", "original_label", "amount"] + WHERE,
+              rows, ["amount"])
 
     rows = []
     for s, d in reports:
         p = d.get("proprietary") or {}
         if not p:
             continue
-        rows.append([d.get("entity_name"), d.get("entity_type"), s, d.get("fiscal_year_end"), d.get("basis"), url(s)]
-                    + [amt(p.get(k)) for k in ["beginning_cash"] + PROPRIETARY_FIELDS + ["ending_cash"]])
+        vals = [p.get(k) for k in ["beginning_cash"] + PROPRIETARY_FIELDS + ["ending_cash"]]
+        rows.append([d.get("entity_name"), d.get("entity_type"), s, d.get("fiscal_year_end"), d.get("basis"), url(s),
+                     page_list(s, [v for v in vals if isinstance(v, dict)])] + [amt(v) for v in vals])
     pk = ["beginning_cash"] + PROPRIETARY_FIELDS + ["ending_cash"]
-    add_sheet(wb, "Proprietary", ident + pk, rows, pk)
+    add_sheet(wb, "Proprietary", ident + ["report_pages"] + pk, rows, pk)
 
     rows = []
     for s, d in reports:
@@ -227,16 +263,19 @@ def main():
         for sec, tot in BS_SECTIONS.items():
             for it in bs.get(sec) or []:
                 rows.append(base + [bs.get("statement", ""), sec, it.get("category", ""), it.get("original_label"),
-                                    it.get("amount"), it.get("source_page"), orig(s, it.get("source_page"))])
+                                    it.get("amount")] + where(s, it.get("source_page")))
             if amt(bs.get(tot)) is not None:
-                rows.append(base + [bs.get("statement", ""), sec, tot, "(total as stated)", amt(bs.get(tot)),
-                                    page(bs.get(tot)), orig(s, page(bs.get(tot)))])
-    add_sheet(wb, "Balance Sheet", ident + ["statement", "section", "category", "original_label", "amount",
-                                            "source_page", "source_page_original"], rows, ["amount"])
+                rows.append(base + [bs.get("statement", ""), sec, tot, "(total as stated)", amt(bs.get(tot))]
+                            + where(s, page(bs.get(tot))))
+    add_sheet(wb, "Balance Sheet", ident + ["statement", "section", "category", "original_label", "amount"] + WHERE,
+              rows, ["amount"])
 
     fr = read_csv(FLAGGED)
-    fh = ["filename", "check", "reason", "expected", "actual", "difference", "pages"]
-    add_sheet(wb, "Flagged", fh, [[r.get(h) for h in fh] for r in fr], ["expected", "actual", "difference"])
+    fh = ["filename", "check", "reason", "expected", "actual", "difference"]
+    add_sheet(wb, "Flagged", fh + ["report_pages", "source_url"],
+              [[r.get(h) for h in fh] + [page_ranges([orig(r["filename"], p) for p in (r.get("pages") or "").split(";")
+                                                      if orig(r["filename"], p)]), url(r["filename"])] for r in fr],
+              ["expected", "actual", "difference"])
 
     pr = read_csv(PROGRESS_CSV)
     ph = list(pr[0].keys()) if pr else ["filename", "status"]
