@@ -35,6 +35,22 @@ DISBURSEMENT_CATEGORIES = [
 ]
 PROPRIETARY_FIELDS = ["operating", "noncapital_financing", "capital_and_related_financing", "investing"]
 
+ASSET_CATEGORIES = [
+    "cash and investments", "receivables", "due from other governments", "inventories/prepaids",
+    "restricted assets", "capital assets", "other assets",
+]
+LIABILITY_CATEGORIES = [
+    "accounts payable", "accrued liabilities", "due to other governments", "unearned revenue",
+    "debt - due within one year", "debt - due in more than one year", "net pension/OPEB liability",
+    "other liabilities",
+]
+# Balance-sheet line lists and their stated-total fields
+BS_SECTIONS = {
+    "assets": "total_assets", "deferred_outflows": "total_deferred_outflows",
+    "liabilities": "total_liabilities", "deferred_inflows": "total_deferred_inflows",
+    "equity": "total_equity",
+}
+
 # Absolute tolerance in dollars, plus a relative tolerance on the largest figure involved.
 ABS_TOL = float(os.environ.get("RECONCILE_ABS_TOL", "10"))
 REL_TOL = float(os.environ.get("RECONCILE_REL_TOL", "0.0005"))
@@ -133,6 +149,26 @@ def reconcile(d):
     out["difference"] = round(end - comp, 2)
     out["reconciles"] = abs(end - comp) <= tol(beg, end, receipts, disb)
     return out
+
+
+def bs_total(bs, section):
+    """Stated total if given, else the sum of the lines (None if neither)."""
+    stated = amt(bs.get(BS_SECTIONS[section]))
+    if stated is not None:
+        return stated
+    return sum_items(bs.get(section)) if bs.get(section) else None
+
+
+def balance_sheet_check(d):
+    """assets + deferred outflows = liabilities + deferred inflows + equity (fund balance / net position)."""
+    bs = d.get("balance_sheet") or {}
+    a, e = bs_total(bs, "assets"), bs_total(bs, "equity")
+    if a is None or e is None:
+        return None
+    left = a + (bs_total(bs, "deferred_outflows") or 0)
+    right = (bs_total(bs, "liabilities") or 0) + (bs_total(bs, "deferred_inflows") or 0) + e
+    return dict(left=round(left, 2), right=round(right, 2), difference=round(left - right, 2),
+                balances=abs(left - right) <= tol(left, right))
 
 
 def reconcile_proprietary(d):

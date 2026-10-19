@@ -28,7 +28,13 @@ fiscal_year_end, basis (`cash`|`GAAP`), extraction_attempt, beginning_cash, begi
 beginning_fund_balance, receipts[], disbursements[], transfers_in, transfers_out, debt_proceeds,
 other_financing, adjustments[], reported_totals{receipts,disbursements}, proprietary (GAAP:
 operating, noncapital_financing, capital_and_related_financing, investing, beginning_cash,
-ending_cash), ending_cash, ending_investments, ending_fund_balance, notes.
+ending_cash), balance_sheet{statement, scope, column, assets[], deferred_outflows[], liabilities[],
+deferred_inflows[], equity[], total_assets, total_deferred_outflows, total_liabilities,
+total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_fund_balance, notes.
+- Each report covers revenue sources, expenditures, and a balance sheet with all assets and
+  liabilities (government-wide Statement of Net Position for GAAP; cash-basis net position
+  statement otherwise). The link to the PDF on the Auditor's site (manifest `url`) is added to
+  every output by build_csv.py; it is not stored in the JSON.
 - Money values are `{"amount", "source_page"}`, where source_page is the page within the trimmed PDF.
   List items are `{category, original_label, amount, source_page}`.
 - Receipt categories: property tax, sales tax, other taxes, intergovernmental/state aid, federal
@@ -36,6 +42,12 @@ ending_cash), ending_cash, ending_investments, ending_fund_balance, notes.
 - Disbursement categories: general government, public safety, streets/highways,
   culture/recreation, health/welfare, economic development, utilities, debt service principal,
   debt service interest, capital outlay, other.
+- Asset categories: cash and investments, receivables, due from other governments,
+  inventories/prepaids, restricted assets, capital assets, other assets.
+- Liability categories: accounts payable, accrued liabilities, due to other governments, unearned
+  revenue, debt - due within one year, debt - due in more than one year, net pension/OPEB
+  liability, other liabilities.
+- Balance check: assets + deferred outflows = liabilities + deferred inflows + equity.
 - Identity: beginning + receipts − disbursements + transfers_in − transfers_out + debt_proceeds +
   other_financing + adjustments = ending (cash for cash basis, fund balance for GAAP).
 

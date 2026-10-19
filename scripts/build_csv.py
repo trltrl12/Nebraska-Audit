@@ -9,21 +9,26 @@ from collections import OrderedDict
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from common import (DOWNLOAD_ERRORS, FILE_LIST, FLAGGED, LONG_CSV, MANIFEST,  # noqa: E402
-                    PROGRESS_CSV, PROPRIETARY_FIELDS, SUMMARY_CSV, amt, load_reports, page,
-                    read_csv, reconcile, reconcile_proprietary, write_csv)
+from common import (BS_SECTIONS, DOWNLOAD_ERRORS, FILE_LIST, FLAGGED, LONG_CSV, MANIFEST,  # noqa: E402
+                    PROGRESS_CSV, PROPRIETARY_FIELDS, SUMMARY_CSV, amt, balance_sheet_check, bs_total,
+                    load_reports, page, read_csv, reconcile, reconcile_proprietary, write_csv)
 
 LONG_FIELDS = ["entity_name", "entity_type", "filename", "fiscal_year_end", "basis", "section",
-               "category", "amount", "original_labels", "source_pages", "source_pages_original"]
-SUMMARY_FIELDS = ["entity_name", "entity_type", "filename", "fiscal_year_end", "basis", "balance_type",
+               "category", "amount", "original_labels", "source_pages", "source_pages_original",
+               "source_url"]
+SUMMARY_FIELDS = ["entity_name", "entity_type", "county", "filename", "fiscal_year_end", "basis",
+                  "filing_type", "source_url", "balance_type",
                   "beginning_balance", "total_receipts", "total_disbursements", "transfers_in",
                   "transfers_out", "debt_proceeds", "other_financing", "adjustments", "ending_balance",
                   "computed_ending", "difference", "reconciles", "beginning_cash", "ending_cash",
                   "beginning_investments", "ending_investments",
                   "prop_operating", "prop_noncapital_financing", "prop_capital_and_related_financing",
-                  "prop_investing", "prop_reconciles", "flagged"]
-PROGRESS_FIELDS = ["filename", "entity_name", "entity_type", "county", "subdivision_type", "filing_type", "status", "basis_guess", "trimmed_file",
-                   "pages_kept", "extraction_attempt", "flag_reasons"]
+                  "prop_investing", "prop_reconciles",
+                  "balance_sheet_statement", "total_assets", "total_deferred_outflows", "total_liabilities",
+                  "total_deferred_inflows", "total_equity", "balance_sheet_balances", "flagged"]
+PROGRESS_FIELDS = ["filename", "entity_name", "entity_type", "county", "subdivision_type", "filing_type",
+                   "status", "basis_guess", "trimmed_file", "pages_kept", "extraction_attempt",
+                   "flag_reasons", "source_url"]
 
 
 def orig_pages(pages, mapping):
@@ -38,6 +43,7 @@ def orig_pages(pages, mapping):
 
 def main():
     manifest = {Path(r["filename"]).stem: r for r in read_csv(MANIFEST)}
+    file_urls = {Path(r["filename"]).stem: r.get("url", "") for r in read_csv(FILE_LIST)}
     flagged = {}
     for r in read_csv(FLAGGED):
         flagged.setdefault(r["filename"], []).append(f"{r['check']}: {r['reason']}")
@@ -50,7 +56,8 @@ def main():
         m = manifest.get(stem, {})
         mapping = (m.get("pages_kept") or "").split(";") if m.get("pages_kept") else []
         base = dict(entity_name=d.get("entity_name"), entity_type=d.get("entity_type"), filename=stem,
-                    fiscal_year_end=d.get("fiscal_year_end"), basis=d.get("basis"))
+                    fiscal_year_end=d.get("fiscal_year_end"), basis=d.get("basis"),
+                    source_url=m.get("url") or file_urls.get(stem, ""))
 
         for section in ("receipts", "disbursements"):
             agg = OrderedDict()
@@ -88,8 +95,17 @@ def main():
                                   original_labels="", source_pages=";".join(p),
                                   source_pages_original=orig_pages(p, mapping)))
 
+        bs = d.get("balance_sheet") or {}
+        for sec in BS_SECTIONS:
+            for it in bs.get(sec) or []:
+                p = [str(it.get("source_page"))] if it.get("source_page") is not None else []
+                long_rows.append(dict(base, section=f"balance_sheet_{sec}", category=it.get("category", sec),
+                                      amount=it.get("amount"), original_labels=it.get("original_label", ""),
+                                      source_pages=";".join(p), source_pages_original=orig_pages(p, mapping)))
+
         r = reconcile(d)
         pr = reconcile_proprietary(d)
+        bc = balance_sheet_check(d)
         summary_rows.append(dict(
             base, balance_type=r["balance_type"], beginning_balance=r["beginning"],
             total_receipts=round(r["receipts"], 2), total_disbursements=round(r["disbursements"], 2),
@@ -103,6 +119,10 @@ def main():
             ending_investments=amt(d.get("ending_investments")),
             **{f"prop_{k}": amt(prop.get(k)) for k in PROPRIETARY_FIELDS},
             prop_reconciles="" if not pr else ("yes" if pr["reconciles"] else "no"),
+            county=m.get("county"), filing_type=m.get("filing_type"),
+            balance_sheet_statement=bs.get("statement", ""),
+            **{tot: bs_total(bs, sec) for sec, tot in BS_SECTIONS.items()},
+            balance_sheet_balances="" if not bc else ("yes" if bc["balances"] else "no"),
             flagged="yes" if stem in flagged else "no"))
 
     # Progress: every known report
@@ -125,14 +145,16 @@ def main():
                              status=status, basis_guess=m.get("basis_guess"),
                              trimmed_file=m.get("trimmed_file"), pages_kept=m.get("pages_kept"),
                              extraction_attempt=(d or {}).get("extraction_attempt", "") if d else "",
-                             flag_reasons=" | ".join(flagged.get(stem, [])) or m.get("flag", "")))
+                             flag_reasons=" | ".join(flagged.get(stem, [])) or m.get("flag", ""),
+                             source_url=m.get("url") or file_urls.get(stem, "")))
     failed = {r["filename"] for r in read_csv(DOWNLOAD_ERRORS)}
     for r in read_csv(FILE_LIST):
         if r["filename"] not in seen:
             progress.append(dict(filename=r["filename"], county=r.get("county"),
                                  subdivision_type=r.get("subdivision_type"), filing_type=r.get("filing_type"),
                                  entity_name=r.get("entity_name") or Path(r["filename"]).stem.replace("_", " "),
-                                 status="download_failed" if r["filename"] in failed else "not_fetched"))
+                                 status="download_failed" if r["filename"] in failed else "not_fetched",
+                                 source_url=r.get("url", "")))
     progress.sort(key=lambda r: r["filename"].lower())
 
     write_csv(LONG_CSV, long_rows, LONG_FIELDS)

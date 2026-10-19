@@ -5,12 +5,15 @@ Checks per report:
   reconcile   - beginning balance + receipts - disbursements + transfers/debt/other = ending
   totals      - category amounts sum to the totals stated in the report
   proprietary - (GAAP) beginning cash + four activity totals = ending cash
+  balance     - balance-sheet lines sum to stated totals; assets + deferred outflows =
+                liabilities + deferred inflows + fund balance/net position
 """
 import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from common import (DISBURSEMENT_CATEGORIES, FLAGGED, PROPRIETARY_FIELDS,  # noqa: E402
+from common import (ASSET_CATEGORIES, BS_SECTIONS, LIABILITY_CATEGORIES, balance_sheet_check,  # noqa: E402
+                    DISBURSEMENT_CATEGORIES, FLAGGED, PROPRIETARY_FIELDS,  # noqa: E402
                     RECEIPT_CATEGORIES, amt, load_reports, page, reconcile,
                     reconcile_proprietary, sum_items, tol, write_csv)
 
@@ -100,6 +103,32 @@ def check(stem, d):
             pages = ";".join(str(page(v)) for v in p.values() if page(v) is not None)
             f("proprietary", "beginning cash + activities != ending cash",
               expected=pr["computed"], actual=pr["ending"], pages=pages)
+    # Balance sheet / statement of net position
+    bs = d.get("balance_sheet")
+    if not bs:
+        f("balance", "no balance_sheet recorded")
+    else:
+        for sec, cats in (("assets", ASSET_CATEGORIES), ("liabilities", LIABILITY_CATEGORIES)):
+            for it in bs.get(sec) or []:
+                if it.get("category") not in cats:
+                    f("schema", f"balance_sheet.{sec}: unknown category {it.get('category')!r} "
+                                f"({it.get('original_label')!r})", pages=str(it.get("source_page", "")))
+        for sec, tot in BS_SECTIONS.items():
+            for it in bs.get(sec) or []:
+                if it.get("source_page") in (None, ""):
+                    f("schema", f"balance_sheet.{sec}: no source_page for {it.get('original_label')!r}")
+            stated = amt(bs.get(tot))
+            if stated is not None and bs.get(sec):
+                s = sum_items(bs.get(sec))
+                if abs(s - stated) > tol(stated):
+                    f("balance", f"sum of balance_sheet.{sec} != {tot}", expected=float(stated),
+                      actual=round(float(s), 2), pages=pages_of(bs, [sec]))
+        bc = balance_sheet_check(d)
+        if bc is None:
+            f("balance", "balance_sheet missing assets or fund balance/net position total")
+        elif not bc["balances"]:
+            f("balance", "assets + deferred outflows != liabilities + deferred inflows + equity",
+              expected=bc["right"], actual=bc["left"], pages=pages_of(bs, list(BS_SECTIONS)))
     return flags
 
 

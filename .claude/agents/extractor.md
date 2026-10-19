@@ -12,7 +12,8 @@ report filenames (e.g. `Lincoln_FY2025.pdf`). For each one:
    over 10). **Read the tables visually from the page images. Do not trust extracted text
    order:** it scrambles table columns. Check each number against its row label and column header.
 2. Optionally look up the report's row in `output/manifest.csv` (Grep for the filename) for
-   `entity_type`, `basis_guess` and `page_types`. Don't read anything else.
+   `entity_type`, `basis_guess` and `page_types`. Don't read anything else. (The link to the
+   original PDF comes from the manifest automatically; don't add it to the JSON.)
 3. If `output/json/<stem>.json` already exists (a re-check of a flagged report), Grep the
    report's lines in `output/flagged.csv`, fix the problems it lists, and set
    `extraction_attempt` to the previous value + 1.
@@ -48,6 +49,21 @@ digits as printed. Never invent a number. If a value isn't shown, use `null` and
     "disbursements": {"amount": 0, "source_page": 1, "includes": []}
   },
   "proprietary": null,
+  "balance_sheet": {
+    "statement": "Statement of Net Position (as printed)",
+    "scope": "government-wide | governmental funds | cash basis",
+    "column": "Total Primary Government",
+    "assets": [{"category": "cash and investments", "original_label": "Cash and Cash Equivalents", "amount": 0, "source_page": 3}],
+    "deferred_outflows": [],
+    "liabilities": [{"category": "accounts payable", "original_label": "Accounts Payable", "amount": 0, "source_page": 3}],
+    "deferred_inflows": [],
+    "equity": [{"original_label": "Unrestricted", "amount": 0, "source_page": 3}],
+    "total_assets": {"amount": 0, "source_page": 3},
+    "total_deferred_outflows": null,
+    "total_liabilities": {"amount": 0, "source_page": 3},
+    "total_deferred_inflows": null,
+    "total_equity": {"amount": 0, "source_page": 3}
+  },
   "ending_cash": {"amount": 0, "source_page": 2},
   "ending_investments": null,
   "ending_fund_balance": null,
@@ -90,6 +106,28 @@ digits as printed. Never invent a number. If a value isn't shown, use `null` and
   `{"operating": {...}, "noncapital_financing": {...}, "capital_and_related_financing": {...},
   "investing": {...}, "beginning_cash": {...}, "ending_cash": {...}}`. These are the "net cash
   provided (used) by …" lines, each a money object. Otherwise null.
+
+- **balance_sheet** (required; every asset and liability line):
+  - *GAAP:* use the government-wide **Statement of Net Position**, "Total" / "Total Primary
+    Government" column, which includes capital assets and long-term debt. If there isn't one, use
+    the governmental funds **Balance Sheet** "Total Governmental Funds" column and say so in `notes`.
+  - *Cash basis:* use the **Statement of Net Position – Cash Basis**, or the "Statement of Assets
+    and Fund Balances / Net Position Arising from Cash Transactions" (total column). These usually
+    have only cash/investment assets and no liabilities. Use empty lists, not null.
+  - `statement` = title as printed, `scope` = which kind it is, `column` = the column you used.
+  - One item per printed line, same as receipts. Skip subtotal lines. `equity` holds the fund
+    balance or net position lines (nonspendable, restricted, committed, assigned, unassigned, net
+    investment in capital assets, unrestricted…) with their printed labels; no category needed.
+  - Record printed totals in the `total_*` fields. It must balance: total_assets +
+    total_deferred_outflows = total_liabilities + total_deferred_inflows + total_equity.
+  - Asset categories: `cash and investments`, `receivables` (taxes, accounts, special
+    assessments, loans), `due from other governments`, `inventories/prepaids`, `restricted assets`,
+    `capital assets` (land, construction in progress, depreciable assets net of depreciation),
+    `other assets`.
+  - Liability categories: `accounts payable`, `accrued liabilities` (wages, interest, compensated
+    absences due soon), `due to other governments`, `unearned revenue`, `debt - due within one
+    year`, `debt - due in more than one year`, `net pension/OPEB liability`, `other liabilities`.
+    If debt isn't split by due date, use `debt - due in more than one year` and note it.
 
 ### Receipt categories (use exactly these strings)
 `property tax`, `sales tax`, `other taxes` (motor vehicle, occupation, lodging, franchise,

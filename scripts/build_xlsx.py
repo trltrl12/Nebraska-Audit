@@ -8,9 +8,11 @@ Sheets:
   Disbursements    one row per report, one column per disbursement category
   Financing        transfers, debt proceeds, other financing, adjustments, investments
   Proprietary      GAAP proprietary-fund cash flows by activity
+  Balance Sheet    every asset, liability, deferral and fund balance/net position line
   Flagged          validation issues (output/flagged.csv)
   Progress         status of every report (output/progress.csv)
   Notes            the extractor's notes per report
+Every sheet has a source_url column linking to the report PDF on the Auditor's website.
 Run after validate.py and build_csv.py (it reads their outputs).
 """
 import sys
@@ -21,7 +23,7 @@ from openpyxl.styles import Alignment, Font, PatternFill
 from openpyxl.utils import get_column_letter
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from common import (DISBURSEMENT_CATEGORIES, FLAGGED, MANIFEST, OUTPUT, PROGRESS_CSV,  # noqa: E402
+from common import (BS_SECTIONS, DISBURSEMENT_CATEGORIES, FILE_LIST, FLAGGED, MANIFEST, OUTPUT, PROGRESS_CSV,  # noqa: E402
                     PROPRIETARY_FIELDS, RECEIPT_CATEGORIES, SUMMARY_CSV, amt, load_reports, page,
                     read_csv)
 
@@ -64,6 +66,13 @@ def add_sheet(wb, title, header, rows, money_cols=(), status_col=None):
     for i, h in enumerate(header, 1):
         width = max([len(str(h))] + [len(str(r[i - 1])) for r in rows[:500] if i - 1 < len(r) and r[i - 1] is not None])
         ws.column_dimensions[get_column_letter(i)].width = min(max(width + 2, 10), 60)
+    if "source_url" in idx:  # clickable link to the PDF on the Auditor's website
+        ws.column_dimensions[get_column_letter(idx["source_url"])].width = 18
+        for (cell,) in ws.iter_rows(min_row=2, min_col=idx["source_url"], max_col=idx["source_url"]):
+            if cell.value and str(cell.value).startswith("http"):
+                cell.hyperlink = str(cell.value)
+                cell.value = "Open PDF"
+                cell.font = Font(color="0563C1", underline="single")
     ws.freeze_panes = "B2" if title != "Notes" else "A2"
     if rows:
         ws.auto_filter.ref = ws.dimensions
@@ -73,6 +82,10 @@ def add_sheet(wb, title, header, rows, money_cols=(), status_col=None):
 def main():
     manifest = {Path(r["filename"]).stem: r for r in read_csv(MANIFEST)}
     reports = [(s, d) for s, d, e in load_reports() if d and not e]
+    file_urls = {Path(r["filename"]).stem: r.get("url", "") for r in read_csv(FILE_LIST)}
+
+    def url(stem):
+        return manifest.get(stem, {}).get("url") or file_urls.get(stem, "")
 
     def orig(stem, p):
         kept = (manifest.get(stem, {}).get("pages_kept") or "").split(";")
@@ -86,14 +99,16 @@ def main():
 
     srows = read_csv(SUMMARY_CSV)
     sh = list(srows[0].keys()) if srows else ["entity_name"]
-    money = [h for h in sh if h not in ("entity_name", "entity_type", "filename", "fiscal_year_end", "basis",
-                                        "balance_type", "reconciles", "prop_reconciles", "flagged")]
+    money = [h for h in sh if h not in ("entity_name", "entity_type", "county", "filename", "fiscal_year_end",
+                                        "basis", "filing_type", "source_url", "balance_type", "reconciles",
+                                        "prop_reconciles", "balance_sheet_statement", "balance_sheet_balances",
+                                        "flagged")]
     add_sheet(wb, "Summary", sh, [[r[h] for h in sh] for r in srows], money, "reconciles")
 
-    ident = ["entity_name", "entity_type", "filename", "fiscal_year_end", "basis"]
+    ident = ["entity_name", "entity_type", "filename", "fiscal_year_end", "basis", "source_url"]
     lines = []
     for s, d in reports:
-        base = [d.get("entity_name"), d.get("entity_type"), s, d.get("fiscal_year_end"), d.get("basis")]
+        base = [d.get("entity_name"), d.get("entity_type"), s, d.get("fiscal_year_end"), d.get("basis"), url(s)]
         for section in ("receipts", "disbursements"):
             for it in d.get(section) or []:
                 lines.append(base + [section, it.get("category"), it.get("original_label"), it.get("amount"),
@@ -110,7 +125,7 @@ def main():
                 if it.get("category") in tot:
                     tot[it["category"]] += float(it.get("amount") or 0)
             stated = amt((d.get("reported_totals") or {}).get(key))
-            rows.append([d.get("entity_name"), d.get("entity_type"), s, d.get("fiscal_year_end"), d.get("basis")]
+            rows.append([d.get("entity_name"), d.get("entity_type"), s, d.get("fiscal_year_end"), d.get("basis"), url(s)]
                         + [round(tot[c], 2) for c in cats] + [round(sum(tot.values()), 2), stated])
         add_sheet(wb, title, ident + cats + ["total (sum of lines)", "total (stated in report)"], rows,
                   cats + ["total (sum of lines)", "total (stated in report)"])
@@ -120,7 +135,7 @@ def main():
                 "ending_fund_balance"]
     rows = []
     for s, d in reports:
-        base = [d.get("entity_name"), d.get("entity_type"), s, d.get("fiscal_year_end"), d.get("basis")]
+        base = [d.get("entity_name"), d.get("entity_type"), s, d.get("fiscal_year_end"), d.get("basis"), url(s)]
         for k in fin_keys:
             v = d.get(k)
             if amt(v) is not None:
@@ -136,10 +151,24 @@ def main():
         p = d.get("proprietary") or {}
         if not p:
             continue
-        rows.append([d.get("entity_name"), d.get("entity_type"), s, d.get("fiscal_year_end"), d.get("basis")]
+        rows.append([d.get("entity_name"), d.get("entity_type"), s, d.get("fiscal_year_end"), d.get("basis"), url(s)]
                     + [amt(p.get(k)) for k in ["beginning_cash"] + PROPRIETARY_FIELDS + ["ending_cash"]])
     pk = ["beginning_cash"] + PROPRIETARY_FIELDS + ["ending_cash"]
     add_sheet(wb, "Proprietary", ident + pk, rows, pk)
+
+    rows = []
+    for s, d in reports:
+        bs = d.get("balance_sheet") or {}
+        base = [d.get("entity_name"), d.get("entity_type"), s, d.get("fiscal_year_end"), d.get("basis"), url(s)]
+        for sec, tot in BS_SECTIONS.items():
+            for it in bs.get(sec) or []:
+                rows.append(base + [bs.get("statement", ""), sec, it.get("category", ""), it.get("original_label"),
+                                    it.get("amount"), it.get("source_page"), orig(s, it.get("source_page"))])
+            if amt(bs.get(tot)) is not None:
+                rows.append(base + [bs.get("statement", ""), sec, tot, "(total as stated)", amt(bs.get(tot)),
+                                    page(bs.get(tot)), orig(s, page(bs.get(tot)))])
+    add_sheet(wb, "Balance Sheet", ident + ["statement", "section", "category", "original_label", "amount",
+                                            "source_page", "source_page_original"], rows, ["amount"])
 
     fr = read_csv(FLAGGED)
     fh = ["filename", "check", "reason", "expected", "actual", "difference", "pages"]
