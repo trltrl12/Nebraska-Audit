@@ -34,14 +34,15 @@ TITLE_MAX_OFFSET = 30      # a title must start within this many characters of i
 
 # Statement title families: (type, regex). Checked in order; the first match wins.
 _OF = r"statements?\s+of\s*"
+_BASIS = r"((the\s+)?(modified\s+)?cash(\s+basis)?\s+)?"   # "cash" / "cash basis" / "modified cash basis"
 TITLES = [
-    ("receipts_disbursements", _OF + r"(the\s+)?(modified\s+)?(cash\s+)?receipts,?\s*(and\s+)?(disbursements|expenditures)"),
-    ("fund_balance_changes", _OF + r"(cash\s+|fund\s+balances?\s+and\s+)?changes\s+in\s+(cash|fund|cash\s+basis\s+fund)\s+balances?"),
+    ("receipts_disbursements", _OF + r"(the\s+)?" + _BASIS + r"receipts,?\s*(and\s+)?(disbursements|expenditures)"),
+    ("fund_balance_changes", _OF + _BASIS + r"(fund\s+balances?\s+and\s+)?changes\s+in\s+" + _BASIS + r"(cash|fund)\s+balances?"),
     ("revenues_expenditures", _OF + r"revenues,?\s*expenditures"),
     ("proprietary_revenues_expenses", _OF + r"revenues,?\s*expenses"),
     ("activities", _OF + r"activities"),
     ("cash_flows", _OF + r"cash\s+flows"),
-    ("assets_fund_balances", _OF + r"(cash\s+(basis\s+)?)?assets,?\s*(liabilities,?\s*)?(and|&)\s+(fund\s+balances?|net\s+position|cash\s+balances?)"),
+    ("assets_fund_balances", _OF + _BASIS + r"assets,?\s*(liabilities,?\s*)?(and|&)\s+(fund\s+balances?|net\s+position|cash\s+balances?)"),
     ("net_position", _OF + r"(fund\s+)?net\s+(position|assets)"),
     ("balance_sheet", r"balance\s+sheets?\b"),
     # Some small-village audits present their only statement as a "schedule"; used only when
@@ -177,7 +178,7 @@ def classify_lines(lines, full_text=""):
         return None
     found = title_matches(lines[:20])
     # "assets ... and receipts, disbursements" also contains the receipts title further along
-    if "assets_fund_balances" in found and re.search(r"receipts,?\s*(and\s+)?disbursements", head):
+    if "assets_fund_balances" in found and re.search(r"receipts,?\s*(and\s+)?disbursements|changes\s+in", head):
         found.append("receipts_disbursements")
     found = list(dict.fromkeys(found))
     return "+".join(found) if found else None
@@ -289,7 +290,10 @@ def select_pages(pages):
             if types[j] or EXCLUDE_RE.search(" ".join(lines[:20])):
                 break  # a titled page is handled by the outer loop
             lab_j = exhibit_label(lines)
-            if lab_j and (lab_j == label or (label is None and re.search(r"\bpage\s+\d", " ".join(lines[:8])))):
+            head8 = " ".join(lines[:8])
+            # OCR sometimes drops spaces ("exhibithi", "page1"), so the exhibit word alone counts here
+            if (lab_j or "exhibit" in head8) and \
+                    (lab_j == label or (label is None and re.search(r"\bpage\s*\d", head8))):
                 # untitled facing/continuation page of the same exhibit
                 keep.append(j)
                 kept_types.append(t + "(cont)")
