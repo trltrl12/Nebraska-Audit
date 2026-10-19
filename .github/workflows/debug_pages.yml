@@ -43,12 +43,13 @@ jobs:
           DUMP_OCR: ${{ inputs.ocr && '1' || '0' }}
         run: |
           mkdir -p audits
+          grep -q '^ocr=1' config/debug_pages.txt 2>/dev/null && export DUMP_OCR=1
           export TESSDATA_PREFIX=$(dirname $(find /usr/share -name eng.traineddata | head -1))
           python - <<'PY'
           import csv, os, time, requests
           names = os.environ.get("FILENAMES", "").split()
           if not names and os.path.exists("config/debug_pages.txt"):
-              names = [l.strip() for l in open("config/debug_pages.txt") if l.strip() and not l.startswith("#")]
+              names = [l.strip() for l in open("config/debug_pages.txt") if l.strip() and not l.startswith("#") and "=" not in l]
           rows = {r["filename"]: r for r in csv.DictReader(open("output/file_list.csv"))}
           if not names:
               names = [r["filename"] for r in csv.DictReader(open("output/manifest.csv"))]

@@ -66,7 +66,8 @@ CONTINUED_RE = re.compile(r"\bcontinued\b|\bcont'?d\b|\bpage\s+[2-9]\b|\bpage\s+
 EXHIBIT_RE = re.compile(r"\b(exhibit|statement)\s+([a-z]|[0-9]{1,2}|[ivxl!|1]{1,5})(?=[\s.,:;-]|$)")
 NOTE_HEADING_RE = re.compile(r"^\(?(\d{1,2}|[a-h])[.)]\s")
 NUMBER_RE = re.compile(r"\(?\$?\s?\d{1,3}(,\d{3})+(\.\d\d)?\)?")
-CASH_BASIS_RE = re.compile(r"cash\s+basis|cash\s+transactions|receipts|disbursements")
+CASH_BASIS_RE = re.compile(r"cash\s+basis|cash\s+transactions|cash\s+receipts|receipts,?\s*(and\s+)?disbursements")
+NOTES_RE = re.compile(r"^notes\s+to\s+(the\s+)?(basic\s+)?financial\s+statements")
 MODIFIED_RE = re.compile(r"modified\s+cash")
 
 
@@ -99,19 +100,48 @@ def ocr_region(page, frac):
         return ""
 
 
+def rotated_header(page):
+    """Header lines of a page whose text runs sideways (landscape tables printed on a portrait
+    page), or None if the text is mostly horizontal. Text running upward has its top at the
+    left edge; text running downward has its top at the right edge."""
+    lines, hor, rot = [], 0, 0
+    for b in page.get_text("dict")["blocks"]:
+        for ln in b.get("lines", []):
+            txt = "".join(sp["text"] for sp in ln["spans"]).strip()
+            if not txt:
+                continue
+            dx, dy = ln["dir"]
+            if abs(dx) > 0.9:
+                hor += len(txt)
+            else:
+                rot += len(txt)
+                lines.append((dy, ln["bbox"], txt))
+    if rot <= hor or not lines:
+        return None
+    up = sum(1 for dy, _, _ in lines if dy < 0) >= len(lines) / 2
+    r = page.rect
+    if up:   # reads bottom-to-top: header is the leftmost strip, lines ordered left to right
+        sel = [(bb[0], -bb[3], t) for dy, bb, t in lines if dy < 0 and bb[0] <= r.x0 + r.width * HEADER_FRAC]
+    else:    # reads top-to-bottom: header is the rightmost strip, lines ordered right to left
+        sel = [(-bb[2], bb[1], t) for dy, bb, t in lines if dy > 0 and bb[2] >= r.x1 - r.width * HEADER_FRAC]
+    return [norm(t).strip() for _, _, t in sorted(sel)]
+
+
 def page_header(page):
     """(header lines in reading order, full text, source) for one page."""
     full = page.get_text("text")
     if len(full.strip()) < MIN_TEXT_CHARS:
         text, src = ocr_region(page, OCR_FRAC), "ocr"
         full = text
-    else:
-        r = page.rect
-        text = page.get_text("text", clip=pymupdf.Rect(r.x0, r.y0, r.x1, r.y0 + r.height * HEADER_FRAC),
-                             sort=True)
-        src = "text"
+        lines = [norm(ln).strip() for ln in text.splitlines() if ln.strip()]
+        return lines, full, src
+    lines = rotated_header(page)
+    if lines is not None:
+        return lines, full, "text-rotated"
+    r = page.rect
+    text = page.get_text("text", clip=pymupdf.Rect(r.x0, r.y0, r.x1, r.y0 + r.height * HEADER_FRAC), sort=True)
     lines = [norm(ln).strip() for ln in text.splitlines() if ln.strip()]
-    return lines, full, src
+    return lines, full, "text"
 
 
 def title_matches(lines):
@@ -228,6 +258,14 @@ def entity_type_from(meta, fn, first_text):
 def select_pages(pages):
     """pages: [(header lines, full text, source)]. Returns (keep indexes, their types, basis, flag)."""
     types = [classify_lines(lines, full) for lines, full, _ in pages]
+    # Basic statements come before the notes; statement-like pages after the notes are
+    # supplementary (individual fund statements, combining schedules) - unless that's all there is.
+    first = next((i for i, t in enumerate(types) if t), None)
+    if first is not None:
+        notes = next((i for i in range(first, len(pages))
+                      if any(NOTES_RE.search(ln) for ln in pages[i][0][:8])), None)
+        if notes is not None and any(types[:notes]):
+            types = types[:notes] + [None] * (len(types) - notes)
     # Schedules count only when the report has no statement of receipts/revenues at all.
     if any(has_type(t, FLOW_TYPES) for t in types):
         types = [None if t == "schedule_receipts_disbursements" else t for t in types]
