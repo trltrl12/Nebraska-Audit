@@ -1,14 +1,16 @@
-"""Find the financial-statement pages in each downloaded audit and save them as a small PDF.
+"""Find the basic financial-statement pages in each downloaded audit and save them as a small PDF.
 
-For every PDF in audits/ not yet in output/manifest.csv:
-  * cash-basis audits: "Statement of Receipts, Disbursements, and Changes in Cash Balances"
-    (and close variants);
-  * GAAP audits: governmental funds "Statement of Revenues, Expenditures, and Changes in
-    Fund Balances", "Statement of Cash Flows - Proprietary Funds", governmental funds
-    "Balance Sheet";
-  * plus continuation pages.
-Matching pages go to trimmed/<filename> and a row is appended to output/manifest.csv.
-Full PDFs are deleted after processing unless --keep is given.
+For every PDF in audits/ not yet in output/manifest.csv, each page's title is read from the top
+of the page (text layer sorted by position, or OCR for scanned pages) and matched against:
+  * revenue/expenditure statements: receipts & disbursements, changes in fund/cash balances,
+    revenues & expenditures, statement of activities, proprietary revenues & expenses;
+  * balance statements: statement of net position, balance sheet, statement of assets
+    (liabilities) and fund balances / net position;
+  * statement of cash flows;
+plus "(continued)" pages. Budget, reconciliation, combining, fiduciary and other supplementary
+pages are excluded. Matching pages go to trimmed/<filename> and a row is appended to
+output/manifest.csv. Full PDFs are deleted after processing unless --keep is given.
+OCR needs Tesseract (apt install tesseract-ocr) and TESSDATA_PREFIX set.
 """
 import argparse
 import datetime as dt
@@ -22,35 +24,155 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from common import (AUDITS, FILE_LIST, MANIFEST, MANIFEST_FIELDS, TRIMMED,  # noqa: E402
                     append_csv, read_csv)
 
-HEADER_LINES = 14          # a statement title must appear in the first N text lines of a page
+HEADER_FRAC = 0.30         # statement titles sit in the top 30% of the page
+OCR_FRAC = 0.35            # how much of a scanned page to OCR
+OCR_DPI = 150
+MIN_TEXT_CHARS = 50        # below this a page is treated as scanned (image only)
 MAX_CONTINUATIONS = 8
-SCANNED_CHARS_PER_PAGE = 100
+TITLE_MAX_OFFSET = 30      # a title must start within this many characters of its line
 
-# (statement type, basis, title regex, regex that must also appear in the page header, exclusion regex)
-PATTERNS = [
-    ("cash_receipts_disbursements", "cash",
-     r"statement\s+of\s+(cash\s+)?receipts,?\s+(disbursements|expenditures)(,?\s+and\s+changes\s+in\s+"
-     r"(fund\s+)?(cash|cash\s+and\s+investment)s?\s+balances?)?", None, None),
-    ("cash_receipts_disbursements", "cash",
-     r"statement\s+of\s+(cash\s+)?receipts\s+and\s+(disbursements|expenditures)", None, None),
-    ("cash_receipts_disbursements", "cash",
-     r"statement\s+of\s+(changes\s+in\s+)?cash\s+(receipts|balances?)", None, None),
-    ("cash_receipts_disbursements", "cash",
-     r"statement\s+of\s+(cash\s+)?receipts,?\s+disbursements", None, None),
-    ("gov_revenues_expenditures", "GAAP",
-     r"statement\s+of\s+revenues,?\s+expenditures,?\s+and\s+changes\s+in\s+fund\s+balances?",
-     r"governmental\s+funds?", r"budget|reconciliation|\bactual\b"),
-    ("proprietary_cash_flows", "GAAP",
-     r"statement\s+of\s+cash\s+flows", r"proprietary|enterprise|business.type", r"fiduciary"),
-    ("gov_balance_sheet", "GAAP",
-     r"\bbalance\s+sheet\b", r"governmental\s+funds?", r"reconciliation"),
+# Statement title families: (type, regex). Checked in order; the first match wins.
+_OF = r"statements?\s+of\s*"
+TITLES = [
+    ("receipts_disbursements", _OF + r"(the\s+)?(modified\s+)?(cash\s+)?receipts,?\s*(and\s+)?(disbursements|expenditures)"),
+    ("fund_balance_changes", _OF + r"(cash\s+|fund\s+balances?\s+and\s+)?changes\s+in\s+(cash|fund|cash\s+basis\s+fund)\s+balances?"),
+    ("revenues_expenditures", _OF + r"revenues,?\s*expenditures"),
+    ("proprietary_revenues_expenses", _OF + r"revenues,?\s*expenses"),
+    ("activities", _OF + r"activities"),
+    ("cash_flows", _OF + r"cash\s+flows"),
+    ("assets_fund_balances", _OF + r"(cash\s+)?assets,?\s*(liabilities,?\s*)?(and|&)\s+(fund\s+balances?|net\s+position|cash\s+balances?)"),
+    ("net_position", _OF + r"(fund\s+)?net\s+(position|assets)"),
+    ("balance_sheet", r"balance\s+sheets?\b"),
+    # Some small-village audits present their only statement as a "schedule"; used only when
+    # no statement of receipts/revenues was found anywhere in the report.
+    ("schedule_receipts_disbursements", r"schedules?\s+of\s*(modified\s+)?(cash\s+)?receipts,?\s*(and\s+)?disbursements"),
 ]
-PATTERNS = [(t, b, re.compile(p), re.compile(r) if r else None, re.compile(x) if x else None)
-            for t, b, p, r, x in PATTERNS]
-TOC_RE = re.compile(r"table\s+of\s+contents|\bcontents\b")
-CONTINUED_RE = re.compile(r"\(?\bcontinued\b\)?|\bcont'?d\b")
+TITLES = [(t, re.compile(rx)) for t, rx in TITLES]
+FLOW_TYPES = {"receipts_disbursements", "fund_balance_changes", "revenues_expenditures"}
+# A header containing any of these is not a basic statement we want.
+EXCLUDE_RE = re.compile(
+    r"reconcil|budget|combining|individual\s+fund|federal\s+awards|findings|fiduciary|custodial|"
+    r"agency\s+fund|pension|opeb|proportionate|contributions\s+to|notes\s+to|questioned|"
+    r"schedule\s+of\s+(investments|outstanding|interfund|changes|expenditures|cash\s+disbursements\s+of)|"
+    r"table\s+of\s+contents|\bindex\b|summary\s+schedule|county\s+officers?|office\s+activities|"
+    r"discussion\s+and\s+analysis|summary\s+statements?|condensed|\(unaudited\)|activity\s+funds?\b|"
+    r"independent\s+(auditor|accountant)|certified\s+public\s+accountants")
+# A matched "title" line that reads like a sentence is prose (MD&A, notes, opinion), not a title.
+PROSE_RE = re.compile(r"\b(presents?|shows?|reports?|reported|are\s+different|provides?|includes?|"
+                      r"is\s+presented|we\s+have|in\s+the\s+accompanying|focus)\b")
+TITLE_MAX_WORDS = 18
+TITLE_MAX_LEN = 130
+CONTINUED_RE = re.compile(r"\bcontinued\b|\bcont'?d\b|\bpage\s+[2-9]\b|\bpage\s+\d\s+of\s+\d")
+EXHIBIT_RE = re.compile(r"\b(exhibit|statement)\s+([a-z]|[0-9]{1,2}|[ivxl!|1]{1,5})(?=[\s.,:;-]|$)")
+NOTE_HEADING_RE = re.compile(r"^\(?(\d{1,2}|[a-h])[.)]\s")
 NUMBER_RE = re.compile(r"\(?\$?\s?\d{1,3}(,\d{3})+(\.\d\d)?\)?")
-DOT_LEADER_RE = re.compile(r"\.{5,}\s*\d+")
+CASH_BASIS_RE = re.compile(r"cash\s+basis|cash\s+transactions|receipts|disbursements")
+MODIFIED_RE = re.compile(r"modified\s+cash")
+
+
+def norm(s):
+    s = s.lower()
+    for a in "–—−":
+        s = s.replace(a, "-")
+    s = s.replace("’", "'").replace("\xa0", " ")
+    return re.sub(r"[ \t]+", " ", s)
+
+
+_ocr_ok = None
+
+
+def ocr_region(page, frac):
+    """OCR the top part of an image-only page (needs Tesseract; returns "" if unavailable)."""
+    global _ocr_ok
+    if _ocr_ok is False:
+        return ""
+    try:
+        r = page.rect
+        pix = page.get_pixmap(dpi=OCR_DPI, clip=pymupdf.Rect(r.x0, r.y0, r.x1, r.y0 + r.height * frac))
+        text = pymupdf.open("pdf", pix.pdfocr_tobytes())[0].get_text("text")
+        _ocr_ok = True
+        return text
+    except Exception as e:  # noqa: BLE001
+        if _ocr_ok is None:
+            print(f"OCR unavailable ({e}); scanned pages will not be classified")
+        _ocr_ok = False
+        return ""
+
+
+def page_header(page):
+    """(header lines in reading order, full text, source) for one page."""
+    full = page.get_text("text")
+    if len(full.strip()) < MIN_TEXT_CHARS:
+        text, src = ocr_region(page, OCR_FRAC), "ocr"
+        full = text
+    else:
+        r = page.rect
+        text = page.get_text("text", clip=pymupdf.Rect(r.x0, r.y0, r.x1, r.y0 + r.height * HEADER_FRAC),
+                             sort=True)
+        src = "text"
+    lines = [norm(ln).strip() for ln in text.splitlines() if ln.strip()]
+    return lines, full, src
+
+
+def title_matches(lines):
+    """Statement types whose title starts (near) the beginning of a header line.
+    Two consecutive lines are joined so titles that wrap still match."""
+    found = []
+    ok = [ln for ln in lines if len(ln) <= TITLE_MAX_LEN and not PROSE_RE.search(ln)
+          and not NOTE_HEADING_RE.search(ln)]
+    cands = ok + [f"{a} {b}" for a, b in zip(ok, ok[1:])]
+    for ln in cands:
+        if len(ln.split()) > 2 * TITLE_MAX_WORDS:
+            continue
+        for t, rx in TITLES:
+            m = rx.search(ln)
+            if m and m.start() <= TITLE_MAX_OFFSET and t not in found:
+                found.append(t)
+    return found
+
+
+def is_toc(full_text):
+    """A table of contents lists several statement titles on one page."""
+    lines = [norm(ln).strip() for ln in full_text.splitlines() if ln.strip()]
+    hits = sum(1 for ln in lines for _, rx in TITLES if (m := rx.search(ln)) and m.start() <= TITLE_MAX_OFFSET)
+    return hits >= 4 or bool(re.search(r"table\s+of\s+contents|^contents$", norm(full_text[:400]), re.M))
+
+
+def classify_lines(lines, full_text=""):
+    """Statement type(s) for a page from its header lines, joined with "+" (combined statements
+    such as "assets and fund balances and receipts, disbursements ..." match several), or None."""
+    head = " ".join(lines[:20])
+    if not lines or EXCLUDE_RE.search(head) or (full_text and is_toc(full_text)):
+        return None
+    found = title_matches(lines[:20])
+    # "assets ... and receipts, disbursements" also contains the receipts title further along
+    if "assets_fund_balances" in found and re.search(r"receipts,?\s*(and\s+)?disbursements", head):
+        found.append("receipts_disbursements")
+    found = list(dict.fromkeys(found))
+    return "+".join(found) if found else None
+
+
+def exhibit_label(lines):
+    """'Exhibit II' / 'Exhibit B' / 'Statement 3' label in a page header (OCR'd l ! | 1 read as i)."""
+    for ln in lines[:8]:
+        m = EXHIBIT_RE.search(ln)
+        if m:
+            lab = m.group(2)
+            if re.fullmatch(r"[ivxl!|1]+", lab) and not lab.isdigit():
+                lab = re.sub(r"[l!|1]", "i", lab)
+            return f"{m.group(1)} {lab}"
+    return None
+
+
+def has_type(t, kinds):
+    return bool(t) and any(k in t.split("+") for k in kinds)
+
+
+def classify(text):
+    """Classify from plain page text (used by tests / diagnostics)."""
+    lines = [norm(ln).strip() for ln in text.splitlines() if ln.strip()]
+    return classify_lines(lines[:20], text)
+
 
 ENTITY_TYPES = [
     ("sanitary and improvement district", r"sanitary\s+(and|&)\s+improvement\s+district|\bsid\b"),
@@ -66,46 +188,6 @@ ENTITY_TYPES = [
     ("village", r"\bvillage\s+of\b|\bvillage\b"),
     ("city", r"\bcity\s+of\b|\bcity\b"),
 ]
-
-
-def norm(s):
-    s = s.lower().replace("–", "-").replace("—", "-").replace("’", "'")
-    return re.sub(r"[ \t]+", " ", s)
-
-
-def header(text):
-    lines = [ln.strip() for ln in text.splitlines() if ln.strip()]
-    return " ".join(lines[:HEADER_LINES])
-
-
-def is_toc(text):
-    t = text[:600]
-    return bool(TOC_RE.search(t)) and len(DOT_LEADER_RE.findall(text)) + text.count("....") >= 2 \
-        or len(DOT_LEADER_RE.findall(text)) >= 4
-
-
-def is_narrative(text):
-    """Auditor's opinion / notes pages: lots of prose, few numbers."""
-    words = len(text.split())
-    nums = len(NUMBER_RE.findall(text))
-    return words > 250 and nums < 8
-
-
-def classify(text):
-    h = norm(header(text))
-    full = norm(text)
-    if is_toc(full) or is_narrative(full):
-        return None
-    for t, basis, pat, req, excl in PATTERNS:
-        m = pat.search(h)
-        if not m:
-            continue
-        if req and not req.search(h):
-            continue
-        if excl and excl.search(h):
-            continue
-        return t, basis
-    return None
 
 
 def entity_from_filename(fn):
@@ -143,45 +225,77 @@ def entity_type_from(meta, fn, first_text):
     return t if t != "unknown" or not st else st
 
 
-def process(pdf_path, meta):
-    url = meta.get("url", "")
-    doc = pymupdf.open(pdf_path)
-    texts = [p.get_text("text") for p in doc]
-    total_chars = sum(len(t.strip()) for t in texts)
-    keep, types = [], []
+def select_pages(pages):
+    """pages: [(header lines, full text, source)]. Returns (keep indexes, their types, basis, flag)."""
+    types = [classify_lines(lines, full) for lines, full, _ in pages]
+    # Schedules count only when the report has no statement of receipts/revenues at all.
+    if any(has_type(t, FLOW_TYPES) for t in types):
+        types = [None if t == "schedule_receipts_disbursements" else t for t in types]
+
+    keep, kept_types = [], []
     i = 0
-    while i < len(texts):
-        c = classify(texts[i])
-        if not c:
+    while i < len(pages):
+        t = types[i]
+        if not t:
             i += 1
             continue
-        t, _ = c
         keep.append(i)
-        types.append(t)
-        # Continuation pages: "(continued)" in the header, or the same title repeated,
-        # or a numbers-heavy page with no other title directly following.
+        kept_types.append(t)
+        # Continuation pages: same title again, or "(continued)" with numbers and no other title.
+        label = exhibit_label(pages[i][0])
         j = i + 1
-        while j < len(texts) and j - i <= MAX_CONTINUATIONS:
-            h = norm(header(texts[j]))
-            cj = classify(texts[j])
-            if cj and cj[0] == t:
-                keep.append(j); types.append(t); j += 1; continue
-            if cj:
-                break
-            if CONTINUED_RE.search(h) and not is_narrative(norm(texts[j])) \
-                    and len(NUMBER_RE.findall(texts[j])) >= 10:
-                keep.append(j); types.append(t + "(cont)"); j += 1; continue
+        while j < len(pages) and j - i <= MAX_CONTINUATIONS:
+            lines, full, src = pages[j]
+            if types[j] or EXCLUDE_RE.search(" ".join(lines[:20])):
+                break  # a titled page is handled by the outer loop
+            lab_j = exhibit_label(lines)
+            if lab_j and (lab_j == label or (label is None and re.search(r"\bpage\s+\d", " ".join(lines[:8])))):
+                # untitled facing/continuation page of the same exhibit
+                keep.append(j)
+                kept_types.append(t + "(cont)")
+                j += 1
+                continue
+            # OCR only covers the top of the page, so don't require many numbers there
+            if CONTINUED_RE.search(" ".join(lines[:12])) and \
+                    len(NUMBER_RE.findall(full)) >= (0 if src == "ocr" else 10):
+                keep.append(j)
+                kept_types.append(t + "(cont)")
+                j += 1
+                continue
             break
         i = j
 
-    found = sorted(set(types), key=types.index)
-    basis = ("GAAP" if any(t.startswith(("gov_", "proprietary")) for t in found)
-             else "cash" if found else "")
+    heads = " ".join(" ".join(pages[p][0][:20]) for p in keep)
     if not keep:
-        flag = "likely_scanned" if total_chars < SCANNED_CHARS_PER_PAGE * max(len(texts), 1) \
-            else "no_statements_found"
+        basis = ""
+    elif MODIFIED_RE.search(heads):
+        basis = "modified cash"
+    elif any(has_type(t, ("revenues_expenditures", "proprietary_revenues_expenses", "cash_flows",
+                          "balance_sheet")) for t in kept_types) and not CASH_BASIS_RE.search(heads):
+        basis = "GAAP"
+    else:
+        basis = "cash"
+    n_ocr = sum(1 for _, _, src in pages if src == "ocr")
+    if not keep:
+        flag = "no_statements_found" + ("; scanned, OCR found no titles" if n_ocr > len(pages) / 2 else "")
+    elif len(keep) > 25:
+        flag = "many_pages"
+    elif not any(has_type(t, FLOW_TYPES | {"schedule_receipts_disbursements", "activities"}) for t in kept_types):
+        flag = "no_revenue_statement"
+    elif not any(has_type(t, ("net_position", "balance_sheet", "assets_fund_balances")) for t in kept_types):
+        flag = "no_balance_statement"
     else:
         flag = ""
+    if n_ocr:
+        flag = (flag + "; " if flag else "") + f"ocr_pages={n_ocr}"
+    return keep, kept_types, basis, flag
+
+
+def process(pdf_path, meta):
+    url = meta.get("url", "")
+    doc = pymupdf.open(pdf_path)
+    pages = [page_header(p) for p in doc]
+    keep, kept_types, basis, flag = select_pages(pages)
     trimmed_name = ""
     if keep:
         out = pymupdf.open()
@@ -191,15 +305,15 @@ def process(pdf_path, meta):
         trimmed_name = Path(pdf_path).name
         out.save(TRIMMED / trimmed_name, garbage=4, deflate=True)
         out.close()
-    first_text = " ".join(texts[:3])
+    first_text = " ".join(full for _, full, _ in pages[:3])
     row = dict(filename=Path(pdf_path).name, url=url,
                entity_name=meta.get("entity_name") or entity_from_filename(Path(pdf_path).name),
                entity_type=entity_type_from(meta, Path(pdf_path).name, first_text),
                county=meta.get("county", ""), subdivision_type=meta.get("subdivision_type", ""),
                fiscal_year=meta.get("fiscal_year", ""), filing_type=meta.get("filing_type", ""),
-               basis_guess=basis, total_pages=len(texts),
+               basis_guess=basis, total_pages=len(pages),
                pages_kept=";".join(str(p + 1) for p in keep),
-               page_types=";".join(types), trimmed_file=f"trimmed/{trimmed_name}" if trimmed_name else "",
+               page_types=";".join(kept_types), trimmed_file=f"trimmed/{trimmed_name}" if trimmed_name else "",
                flag=flag, processed_at=dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"))
     doc.close()
     return row

@@ -11,6 +11,10 @@ on:
       filenames:
         description: "Space-separated PDF filenames (blank = config/debug_pages.txt, else every file in output/manifest.csv)"
         default: ""
+      ocr:
+        description: "OCR scanned pages (slow)"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -36,6 +40,7 @@ jobs:
       - name: Download and dump
         env:
           FILENAMES: ${{ inputs.filenames }}
+          DUMP_OCR: ${{ inputs.ocr && '1' || '0' }}
         run: |
           mkdir -p audits
           export TESSDATA_PREFIX=$(dirname $(find /usr/share -name eng.traineddata | head -1))
@@ -62,6 +67,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm -rq --cached output/page_debug 2>/dev/null || true
           git add output/page_debug
           git diff --cached --quiet && exit 0
           git commit -q -m "debug_pages: per-page text dumps [skip ci]"

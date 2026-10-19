@@ -1,52 +1,41 @@
-"""Diagnostics for find_pages.py: write a per-page text summary of each PDF.
+"""Diagnostics for find_pages.py: show what it sees and selects for each PDF.
 
 For every PDF given (default: everything in audits/), writes output/page_debug/<stem>.txt with,
-per page: character count, image count, the current classification, and the first
-LINES lines of text. Pages with almost no text are OCR'd (top half only) when Tesseract is
-installed, so scanned reports can be inspected too.
+per page: character count, image count, text source (text layer or OCR), the classification,
+and the header lines find_pages reads (top of the page, sorted by position). Also writes
+output/page_debug/_summary.csv comparing the current selection with output/manifest.csv.
+Set DUMP_OCR=0 to skip OCR of scanned pages (much faster).
 """
 import argparse
-import re
+import os
 import sys
 from pathlib import Path
 
 import pymupdf
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from common import AUDITS, OUTPUT  # noqa: E402
-import find_pages  # noqa: E402
+from common import AUDITS, MANIFEST, OUTPUT, read_csv, write_csv  # noqa: E402
+import find_pages as fp  # noqa: E402
 
 OUT = OUTPUT / "page_debug"
-LINES = 30
-
-
-def ocr_top(page, frac=0.5, dpi=150):
-    try:
-        r = page.rect
-        clip = pymupdf.Rect(r.x0, r.y0, r.x1, r.y0 + r.height * frac)
-        pix = page.get_pixmap(dpi=dpi, clip=clip)
-        doc = pymupdf.open("pdf", pix.pdfocr_tobytes())
-        return doc[0].get_text("text")
-    except Exception as e:  # noqa: BLE001
-        return f"<OCR failed: {type(e).__name__}: {e}>"
+LINES = 15
 
 
 def dump(path):
     doc = pymupdf.open(path)
+    if os.environ.get("DUMP_OCR", "1") == "0":
+        fp._ocr_ok = False
+    pages = [fp.page_header(p) for p in doc]
     out = [f"# {Path(path).name}  pages={len(doc)}"]
-    for i, page in enumerate(doc):
-        text = page.get_text("text")
-        chars = len(text.strip())
-        imgs = len(page.get_images())
-        src = "text"
-        if chars < 50:
-            text, src = ocr_top(page), "ocr-top-half"
-        c = find_pages.classify(text) if src == "text" else None
-        lines = [ln.strip() for ln in text.splitlines() if ln.strip()][:LINES]
-        out.append(f"\n=== page {i + 1} | chars={chars} images={imgs} src={src} | class={c[0] if c else '-'}")
-        out += ["  " + re.sub(r"\s+", " ", ln)[:140] for ln in lines]
+    for i, (page, (lines, full, src)) in enumerate(zip(doc, pages)):
+        c = fp.classify_lines(lines, full)
+        out.append(f"\n=== page {i + 1} | chars={len(page.get_text('text').strip())} "
+                   f"images={len(page.get_images())} src={src} | class={c or '-'}")
+        out += ["  " + ln[:140] for ln in lines[:LINES]]
+    keep, types, basis, flag = fp.select_pages(pages)
     doc.close()
-    return "\n".join(out) + "\n"
+    return "\n".join(out) + "\n", dict(pages_kept=";".join(str(k + 1) for k in keep),
+                                       page_types=";".join(types), basis_guess=basis, flag=flag)
 
 
 def main():
@@ -54,13 +43,23 @@ def main():
     ap.add_argument("files", nargs="*")
     a = ap.parse_args()
     OUT.mkdir(parents=True, exist_ok=True)
+    old = {r["filename"]: r for r in read_csv(MANIFEST)}
     files = [Path(f) for f in a.files] or sorted(AUDITS.glob("*.pdf"))
+    rows = []
     for f in files:
         try:
-            (OUT / f"{f.stem}.txt").write_text(dump(f), encoding="utf-8")
-            print(f"dumped {f.name}")
+            text, sel = dump(f)
+            (OUT / f"{f.stem}.txt").write_text(text, encoding="utf-8")
+            o = old.get(f.name, {})
+            rows.append(dict(filename=f.name, filing_type=o.get("filing_type", ""),
+                             old_pages=o.get("pages_kept", ""), old_types=o.get("page_types", ""),
+                             old_flag=o.get("flag", ""), new_pages=sel["pages_kept"],
+                             new_types=sel["page_types"], new_basis=sel["basis_guess"], new_flag=sel["flag"]))
+            print(f"dumped {f.name}: {sel['pages_kept'] or '-'} {sel['flag']}")
         except Exception as e:  # noqa: BLE001
             print(f"failed {f.name}: {e}")
+    write_csv(OUT / "_summary.csv", rows, ["filename", "filing_type", "old_pages", "old_types", "old_flag",
+                                           "new_pages", "new_types", "new_basis", "new_flag"])
 
 
 if __name__ == "__main__":

@@ -28,6 +28,10 @@ on:
         description: "Re-run the search even if these types are already listed"
         type: boolean
         default: false
+      reprocess:
+        description: "Discard manifest + trimmed PDFs and re-trim every report (after find_pages changes)"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -44,6 +48,7 @@ env:
   MAX_CHUNKS: ${{ inputs.max_chunks }}
   TIME_BUDGET_MINUTES: ${{ inputs.time_budget_minutes }}
   RELIST: ${{ inputs.relist }}
+  REPROCESS: ${{ inputs.reprocess }}
 
 jobs:
   fetch:
@@ -58,6 +63,10 @@ jobs:
         with:
           python-version: "3.12"
           cache: pip
+      - name: Install Tesseract (OCR for scanned reports)
+        run: |
+          sudo apt-get update -q && sudo apt-get install -y -q tesseract-ocr
+          echo "TESSDATA_PREFIX=$(dirname "$(find /usr/share -name eng.traineddata | head -1)")" >> "$GITHUB_ENV"
       - run: pip install -r requirements.txt
       - name: Configure git and helpers
         run: |
@@ -75,6 +84,12 @@ jobs:
           done
           echo "::error::push failed"; exit 1
           SH
+      - name: Reset trimming (reprocess)
+        if: ${{ inputs.reprocess }}
+        run: |
+          git rm -q --ignore-unmatch output/manifest.csv
+          git rm -q --ignore-unmatch 'trimmed/*.pdf'
+          bash /tmp/commit_push.sh "reprocess: clear manifest and trimmed PDFs"
       - name: List filings
         run: |
           flags=""
