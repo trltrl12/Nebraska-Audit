@@ -1,14 +1,20 @@
 name: fetch
 
-# Manual trigger: download audit PDFs in chunks, trim them to the statement pages,
-# commit trimmed/ + output/ after every chunk. Re-running resumes where it stopped
-# (files already in output/manifest.csv are skipped).
+# Manual trigger: list filings via the Auditor's search, download PDFs in chunks, trim them to
+# the statement pages, commit trimmed/ + output/ after every chunk. Re-running resumes where
+# it stopped (files already in output/manifest.csv are skipped).
 on:
   workflow_dispatch:
     inputs:
       year:
-        description: "Audit filing year"
+        description: "Fiscal year to search"
         default: "2025"
+      subdivision_types:
+        description: "Comma-separated subdivision types (as named in the Auditor's search form)"
+        default: "Cities and Villages,Counties,School Districts"
+      filing_types:
+        description: "Filing types to download: Audit, Waiver, or Audit,Waiver"
+        default: "Audit,Waiver"
       chunk_size:
         description: "PDFs per chunk (commit after each chunk)"
         default: "25"
@@ -19,7 +25,7 @@ on:
         description: "Stop starting new chunks after this many minutes"
         default: "300"
       relist:
-        description: "Rebuild the file list from the website"
+        description: "Re-run the search even if these types are already listed"
         type: boolean
         default: false
 
@@ -29,6 +35,15 @@ permissions:
 concurrency:
   group: output-writer
   cancel-in-progress: false
+
+env:
+  AUDIT_YEAR: ${{ inputs.year }}
+  AUDIT_SUBTYPES: ${{ inputs.subdivision_types }}
+  AUDIT_FILING_TYPES: ${{ inputs.filing_types }}
+  CHUNK_SIZE: ${{ inputs.chunk_size }}
+  MAX_CHUNKS: ${{ inputs.max_chunks }}
+  TIME_BUDGET_MINUTES: ${{ inputs.time_budget_minutes }}
+  RELIST: ${{ inputs.relist }}
 
 jobs:
   fetch:
@@ -44,43 +59,51 @@ jobs:
           python-version: "3.12"
           cache: pip
       - run: pip install -r requirements.txt
-      - name: Configure git
+      - name: Configure git and helpers
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          cat > /tmp/commit_push.sh <<'SH'
+          set -e
+          python scripts/build_csv.py
+          git add trimmed/ output/ ':!output/json'
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -q -m "fetch: $1 [skip ci]"
+          for i in 1 2 3 4; do
+            git pull --rebase -q origin main && git push -q origin HEAD:main && exit 0
+            sleep $(( 2 ** i ))
+          done
+          echo "::error::push failed"; exit 1
+          SH
+      - name: List filings
+        run: |
+          flags=""
+          [ "$RELIST" = "true" ] && flags="--relist"
+          rc=0
+          python scripts/download.py --list-only $flags || rc=$?
+          # Commit the listing and raw search responses (output/listing_debug/) even on failure.
+          bash /tmp/commit_push.sh "list filings ($AUDIT_YEAR: $AUDIT_SUBTYPES)"
+          if [ "$rc" != "0" ]; then
+            echo "::error title=No PDFs found::The Auditor's search returned no PDF links. Raw responses are committed in output/listing_debug/."
+            exit 1
+          fi
       - name: Download and trim in chunks
-        env:
-          AUDIT_YEAR: ${{ inputs.year }}
         run: |
           set -euo pipefail
           start=$(date +%s)
-          budget=$(( ${{ inputs.time_budget_minutes }} * 60 ))
+          budget=$(( TIME_BUDGET_MINUTES * 60 ))
           chunk=0
-          if [ "${{ inputs.relist }}" = "true" ]; then
-            python scripts/download.py --year "$AUDIT_YEAR" --relist --list-only
-          fi
-          commit_push () {
-            python scripts/build_csv.py
-            git add trimmed/ output/ ':!output/json'
-            if git diff --cached --quiet; then return 0; fi
-            git commit -q -m "fetch: $1 [skip ci]"
-            for i in 1 2 3 4; do
-              git pull --rebase -q origin main && git push -q origin HEAD:main && return 0
-              sleep $(( 2 ** i ))
-            done
-            echo "push failed"; return 1
-          }
           while :; do
             chunk=$((chunk + 1))
-            out=$(python scripts/download.py --year "$AUDIT_YEAR" --max-files "${{ inputs.chunk_size }}" | tee /dev/stderr)
+            out=$(python scripts/download.py --max-files "$CHUNK_SIZE" | tee /dev/stderr)
             python scripts/find_pages.py
-            commit_push "chunk $chunk ($(echo "$out" | tail -1))"
+            bash /tmp/commit_push.sh "chunk $chunk ($(echo "$out" | tail -1))"
             downloaded=$(echo "$out" | sed -n 's/.*downloaded=\([0-9]*\).*/\1/p' | tail -1)
             remaining=$(echo "$out" | sed -n 's/.*remaining=\([0-9]*\).*/\1/p' | tail -1)
             echo "chunk $chunk: downloaded=$downloaded remaining=$remaining"
             [ "${downloaded:-0}" = "0" ] && break
             [ "${remaining:-0}" = "0" ] && break
-            [ "${{ inputs.max_chunks }}" != "0" ] && [ "$chunk" -ge "${{ inputs.max_chunks }}" ] && break
+            [ "$MAX_CHUNKS" != "0" ] && [ "$chunk" -ge "$MAX_CHUNKS" ] && break
             [ $(( $(date +%s) - start )) -ge "$budget" ] && { echo "Time budget reached; re-run to resume."; break; }
           done
       - name: Summary
@@ -89,11 +112,17 @@ jobs:
           echo "## Fetch summary" >> "$GITHUB_STEP_SUMMARY"
           python - >> "$GITHUB_STEP_SUMMARY" <<'PY'
           import csv, collections, pathlib
+          fl = pathlib.Path("output/file_list.csv")
+          if fl.exists():
+              rows = list(csv.DictReader(fl.open()))
+              c = collections.Counter((r.get("subdivision_type", ""), r.get("filing_type", "")) for r in rows)
+              print(f"**Listed {len(rows)} filings**\n")
+              for (st, ft), v in sorted(c.items()):
+                  print(f"- {st or '?'} / {ft or '?'}: {v}")
           p = pathlib.Path("output/progress.csv")
           if p.exists():
               c = collections.Counter(r["status"] for r in csv.DictReader(p.open()))
+              print("\n**Progress**\n")
               for k, v in sorted(c.items()):
                   print(f"- {k}: {v}")
-          else:
-              print("No progress.csv yet - check the log and output/listing_debug/.")
           PY

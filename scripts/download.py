@@ -1,27 +1,32 @@
-"""Download Nebraska local-government audit PDFs, one at a time, politely.
+"""List and download Nebraska local-government audit filings, one at a time, politely.
 
-Listing strategies (choose with --strategy, default "auto" = try them all and merge):
-  dirlist    - parse an HTML directory listing at DIR_URL (e.g. .../Audits_Filed/2025/)
-  reports    - crawl the APA reports database (nebraska.gov/auditor/reports/index.cgi?audit=1
-               and FileSearch/years.cgi): follows links, submits search forms whose
-               fields offer the target year, and follows pagination
-  urls_file  - read config/audit_urls.txt (one PDF URL per line)
+Listing uses the Auditor of Public Accounts' official search
+(https://www.nebraska.gov/auditor/reports/index.cgi?audit=1). The form POSTs to index.cgi with
+  type=audit, subtype=<subdivision type> (multi), year=<fiscal year> (multi),
+  countyselect=<county> (multi, optional), name=<entity> (multi, optional),
+  csv=0 (HTML results page) or csv=1 ("Export As Excel File").
+One request per subdivision type: the Excel export first (used if it carries PDF links), then
+the HTML results page. Raw responses are saved to output/listing_debug/.
 
-Every candidate PDF URL must match PDF_URL_REGEX. All URL patterns are in the CONFIG
-block below or overridable by command-line flags / environment variables.
+Strategies (--strategy):
+  search     - the official search above (default)
+  dirlist    - parse an HTML directory listing at DIR_URL (the Audits_Filed folder has none today)
+  urls_file  - config/audit_urls.txt, one PDF URL per line (always merged in when present)
 
-Writes output/file_list.csv (all PDFs found) and logs failures to
-output/download_errors.csv. Raw HTML of listing pages is saved to
-output/listing_debug/ so the site's structure can be inspected if listing fails.
+Writes output/file_list.csv (filename, url, entity_name, county, subdivision_type,
+fiscal_year, filing_type = Audit/Waiver) and logs download failures to
+output/download_errors.csv. Exits with status 2 if no PDFs are listed.
 """
 import argparse
+import csv
 import datetime as dt
+import io
 import os
 import re
 import sys
 import time
 from pathlib import Path
-from urllib.parse import urljoin, urlparse, unquote
+from urllib.parse import unquote, urljoin, urlparse
 
 import requests
 from bs4 import BeautifulSoup
@@ -32,24 +37,21 @@ from common import (AUDITS, DOWNLOAD_ERRORS, FILE_LIST, MANIFEST, OUTPUT, ROOT, 
 
 # ---------------- CONFIG (edit here, or override with flags / env vars) ----------------
 YEAR = os.environ.get("AUDIT_YEAR", "2025")
+SEARCH_URL = os.environ.get("AUDIT_SEARCH_URL", "https://www.nebraska.gov/auditor/reports/index.cgi")
+SEARCH_PAGE = SEARCH_URL + "?audit=1"
+SUBTYPES = os.environ.get("AUDIT_SUBTYPES", "Cities and Villages,Counties,School Districts")
+# Filing types to download (all filings are listed in file_list.csv regardless).
+FILING_TYPES = os.environ.get("AUDIT_FILING_TYPES", "Audit,Waiver")
 DIR_URL = os.environ.get("AUDIT_DIR_URL", "https://auditors.nebraska.gov/Audits_Filed/{year}/")
-SEARCH_URLS = os.environ.get(
-    "AUDIT_SEARCH_URLS",
-    "https://www.nebraska.gov/auditor/reports/index.cgi?audit=1,"
-    "https://www.nebraska.gov/auditor/reports/index.cgi,"
-    "https://www.nebraska.gov/auditor/FileSearch/years.cgi",
-).split(",")
-# A URL is an audit PDF if it matches this (year substituted in).
-PDF_URL_REGEX = os.environ.get("AUDIT_PDF_REGEX", r"/Audits_Filed/{year}/[^?#]+\.pdf$")
-# Only crawl pages on these hosts, and only paths matching this regex.
-CRAWL_HOSTS = {"www.nebraska.gov", "nebraska.gov", "auditors.nebraska.gov"}
-CRAWL_PATH_REGEX = r"/auditor/(reports|FileSearch)/|/Audits_Filed/"
-MAX_CRAWL_PAGES = int(os.environ.get("AUDIT_MAX_CRAWL_PAGES", "400"))
+# A link counts as a filing PDF if its URL matches this.
+PDF_URL_REGEX = os.environ.get("AUDIT_PDF_REGEX", r"\.pdf(\?|#|$)")
 URLS_FILE = ROOT / "config" / "audit_urls.txt"
 USER_AGENT = "Nebraska-Audit research pipeline (github.com/trltrl12/Nebraska-Audit)"
 # ----------------------------------------------------------------------------------------
 
 DEBUG_DIR = OUTPUT / "listing_debug"
+LIST_FIELDS = ["filename", "url", "entity_name", "county", "subdivision_type", "fiscal_year",
+               "filing_type", "link_text"]
 ERROR_FIELDS = ["timestamp", "run_id", "filename", "url", "attempts", "error"]
 RUN_ID = os.environ.get("GITHUB_RUN_ID", "local")
 
@@ -57,172 +59,273 @@ session = requests.Session()
 session.headers["User-Agent"] = USER_AGENT
 
 
-def get(url, delay, **kw):
-    time.sleep(delay)
-    r = session.get(url, timeout=60, **kw)
-    r.raise_for_status()
-    return r
-
-
-def save_debug(name, text):
+def save_debug(name, content):
     DEBUG_DIR.mkdir(parents=True, exist_ok=True)
-    safe = re.sub(r"[^A-Za-z0-9._-]+", "_", name)[:120]
-    (DEBUG_DIR / f"{safe}.html").write_text(text[:500_000], encoding="utf-8", errors="replace")
+    safe = re.sub(r"[^A-Za-z0-9._-]+", "_", name)[:150]
+    data = content if isinstance(content, bytes) else content.encode("utf-8", "replace")
+    (DEBUG_DIR / safe).write_bytes(data[:8_000_000])
 
 
-def pdf_links(html, base, pdf_re):
+# ---------- parsing search responses (HTML table, HTML-as-xls, xlsx, CSV) ----------
+
+COL_HINTS = {
+    "entity_name": r"subdivision\s*name|entity|^name$|political|subdivision$|^name",
+    "county": r"county",
+    "subdivision_type": r"type\s*of\s*sub|sub.*type|subtype|subdivision\s*type|category",
+    "fiscal_year": r"fiscal|year|\bfy\b|period",
+    "filing_type": r"audit\s*/\s*waiver|waiver|filing|report\s*type|^type$|audit",
+}
+
+
+def map_columns(header):
+    out = {}
+    for key, rx in COL_HINTS.items():
+        for i, h in enumerate(header):
+            if i not in out.values() and re.search(rx, (h or "").strip(), re.I):
+                out[key] = i
+                break
+    return out
+
+
+def filing_type_of(cells, url, link_text):
+    hay = " ".join([*cells, url, link_text])
+    if re.search(r"waiver", hay, re.I):
+        return "Waiver"
+    if re.search(r"\baudit", hay, re.I):
+        return "Audit"
+    return ""
+
+
+def records_from_table(header, rows, base_url, pdf_re):
+    """rows: list of (cells[str], links[(href, text)])."""
+    cols = map_columns(header)
+    recs = []
+    for cells, links in rows:
+        # URLs can also sit in cell text (exports)
+        links = list(links) + [(m, "") for c in cells for m in re.findall(r"https?://\S+?\.pdf", c, re.I)]
+        for href, text in links:
+            url = urljoin(base_url, href.strip())
+            if not pdf_re.search(url):
+                continue
+            g = lambda k: cells[cols[k]].strip() if k in cols and cols[k] < len(cells) else ""  # noqa: E731
+            ft = g("filing_type")
+            ft = filing_type_of([ft], "", "") if ft else filing_type_of(cells, url, text)
+            recs.append(dict(url=url, entity_name=g("entity_name") or (cells[0].strip() if cells else ""),
+                             county=g("county"), subdivision_type=g("subdivision_type"),
+                             fiscal_year=g("fiscal_year"), filing_type=ft, link_text=text.strip()))
+    return recs
+
+
+def parse_html(html, base_url, pdf_re):
     soup = BeautifulSoup(html, "html.parser")
-    out = set()
-    for a in soup.find_all("a", href=True):
-        u = urljoin(base, a["href"].strip())
-        if pdf_re.search(urlparse(u).path):
-            out.add(u)
-    return out, soup
+    recs = []
+    for table in soup.find_all("table"):
+        trs = table.find_all("tr")
+        if not trs:
+            continue
+        header, body = [], []
+        for tr in trs:
+            ths = tr.find_all("th")
+            tds = tr.find_all(["td", "th"])
+            if ths and not tr.find_all("td") and not header:
+                header = [c.get_text(" ", strip=True) for c in ths]
+                continue
+            cells = [c.get_text(" ", strip=True) for c in tds]
+            links = [(a["href"], a.get_text(" ", strip=True)) for a in tr.find_all("a", href=True)]
+            body.append((cells, links))
+        if not header and body and not any(l for _, l in body[:1]):
+            header = body.pop(0)[0]
+        recs += records_from_table(header, body, base_url, pdf_re)
+    if not recs:  # PDF links outside tables
+        for a in soup.find_all("a", href=True):
+            parent = a.find_parent(["li", "p", "div", "tr"]) or a
+            recs += records_from_table([], [([parent.get_text(" ", strip=True)], [(a["href"], a.get_text(" ", strip=True))])],
+                                       base_url, pdf_re)
+    return recs
+
+
+def parse_xlsx(data, base_url, pdf_re):
+    from openpyxl import load_workbook
+    wb = load_workbook(io.BytesIO(data), read_only=False, data_only=True)
+    recs = []
+    for ws in wb.worksheets:
+        rows = list(ws.iter_rows())
+        if not rows:
+            continue
+        header = [str(c.value or "") for c in rows[0]]
+        body = []
+        for r in rows[1:]:
+            cells = [str(c.value) if c.value is not None else "" for c in r]
+            links = [(c.hyperlink.target, str(c.value or "")) for c in r if c.hyperlink and c.hyperlink.target]
+            body.append((cells, links))
+        recs += records_from_table(header, body, base_url, pdf_re)
+    return recs
+
+
+def parse_csv_text(text, base_url, pdf_re):
+    rows = list(csv.reader(io.StringIO(text), dialect=csv.Sniffer().sniff(text[:4096], ",\t;")
+                           if text.strip() else "excel"))
+    if not rows:
+        return []
+    return records_from_table(rows[0], [(r, []) for r in rows[1:]], base_url, pdf_re)
+
+
+def parse_response(resp, pdf_re):
+    data = resp.content
+    if data[:2] == b"PK":
+        return parse_xlsx(data, resp.url, pdf_re), "xlsx"
+    text = resp.text
+    if re.search(r"<(table|html|a\s)", text[:20000], re.I):
+        return parse_html(text, resp.url, pdf_re), "html"
+    return parse_csv_text(text, resp.url, pdf_re), "csv"
+
+
+def list_search(year, subtypes, delay, pdf_re):
+    # Load the search page first (sets any session cookies the CGI expects).
+    try:
+        time.sleep(delay)
+        session.get(SEARCH_PAGE, timeout=60)
+    except Exception as e:  # noqa: BLE001
+        print(f"[search] could not load {SEARCH_PAGE}: {e}")
+    recs = []
+    for st in subtypes:
+        got, export = [], []
+        for csv_flag in ("1", "0"):  # Excel export first, then the HTML results page
+            params = dict(type="audit", subtype=st, year=year, csv=csv_flag)
+            try:
+                time.sleep(delay)
+                r = session.post(SEARCH_URL, data=params, timeout=180,
+                                 headers={"Referer": SEARCH_PAGE})
+                r.raise_for_status()
+            except Exception as e:  # noqa: BLE001
+                print(f"[search] {st} csv={csv_flag}: {e}")
+                continue
+            kind_guess = "xlsx" if r.content[:2] == b"PK" else ("html" if b"<" in r.content[:2000] else "csv")
+            save_debug(f"search_{year}_{st}_{'export' if csv_flag == '1' else 'results'}.{kind_guess}", r.content)
+            found, kind = parse_response(r, pdf_re)
+            print(f"[search] {st} {'export' if csv_flag == '1' else 'results'} ({kind}, {len(r.content)} bytes): "
+                  f"{len(found)} PDF links")
+            if csv_flag == "1":
+                export = found
+                if found:
+                    got = found
+                    break
+            else:
+                # Results page has the links; borrow filing type etc. from the export when missing.
+                by_name = {}
+                for e in export:
+                    by_name.setdefault(e["entity_name"].lower(), e)
+                for f in found:
+                    e = by_name.get(f["entity_name"].lower())
+                    if e:
+                        for k in ("filing_type", "county", "fiscal_year"):
+                            f[k] = f[k] or e[k]
+                got = found
+        for g in got:
+            g["subdivision_type"] = g["subdivision_type"] or st
+            g["fiscal_year"] = g["fiscal_year"] or year
+        recs += got
+    return recs
 
 
 def list_dirlist(year, delay, pdf_re):
     url = DIR_URL.format(year=year)
     try:
-        r = get(url, delay)
+        time.sleep(delay)
+        r = session.get(url, timeout=60)
+        r.raise_for_status()
     except Exception as e:  # noqa: BLE001
         print(f"[dirlist] {url}: {e}")
-        return set()
-    save_debug(f"dirlist_{year}", r.text)
-    links, _ = pdf_links(r.text, url, pdf_re)
-    print(f"[dirlist] {url}: {len(links)} PDFs")
-    return links
+        return []
+    save_debug(f"dirlist_{year}.html", r.text)
+    recs = parse_html(r.text, url, pdf_re)
+    print(f"[dirlist] {url}: {len(recs)} PDFs")
+    return recs
 
 
-def form_requests(soup, base, year):
-    """Yield (method, url, params) for forms that have a field offering the target year."""
-    for form in soup.find_all("form"):
-        action = urljoin(base, form.get("action") or base)
-        method = (form.get("method") or "get").lower()
-        params, has_year = {}, False
-        for inp in form.find_all("input"):
-            n = inp.get("name")
-            if not n or inp.get("type") in ("submit", "button", "image", "reset"):
-                continue
-            if inp.get("type") in ("checkbox", "radio") and not inp.has_attr("checked"):
-                continue
-            params[n] = inp.get("value", "")
-        for sel in form.find_all("select"):
-            n = sel.get("name")
-            if not n:
-                continue
-            opts = sel.find_all("option")
-            year_opt = next((o for o in opts if year in (o.get("value") or o.text)), None)
-            if year_opt is not None and re.search(r"year|fy|fiscal", n + sel.get("id", ""), re.I):
-                params[n] = year_opt.get("value") or year_opt.text.strip()
-                has_year = True
-            else:
-                # Prefer an "all" option, else the first one.
-                allo = next((o for o in opts if re.search(r"^\s*(all|any)\b", o.text, re.I)), None)
-                o = allo or (opts[0] if opts else None)
-                params[n] = (o.get("value") if o and o.has_attr("value") else (o.text.strip() if o else ""))
-        for inp in form.find_all("input"):
-            n = inp.get("name") or ""
-            if re.search(r"year|fy|fiscal", n, re.I) and inp.get("type") in (None, "text", "number", "search"):
-                params[n] = year
-                has_year = True
-        if has_year:
-            yield method, action, params
-
-
-def list_reports(year, delay, pdf_re):
-    """Breadth-first crawl of the APA search pages, submitting year forms."""
-    found, seen, queue, n = set(), set(), [("get", u.strip(), None) for u in SEARCH_URLS if u.strip()], 0
-    while queue and n < MAX_CRAWL_PAGES:
-        method, url, params = queue.pop(0)
-        key = (method, url, tuple(sorted((params or {}).items())))
-        if key in seen:
-            continue
-        seen.add(key)
-        try:
-            time.sleep(delay)
-            r = (session.post(url, data=params, timeout=60) if method == "post"
-                 else session.get(url, params=params, timeout=60))
-            r.raise_for_status()
-        except Exception as e:  # noqa: BLE001
-            print(f"[reports] {url} {params or ''}: {e}")
-            continue
-        n += 1
-        if n <= 15:
-            save_debug(f"reports_{n}_{urlparse(r.url).path}_{urlparse(r.url).query}", r.text)
-        if "html" not in r.headers.get("content-type", "html"):
-            continue
-        links, soup = pdf_links(r.text, r.url, pdf_re)
-        found |= links
-        for f in form_requests(soup, r.url, year):
-            queue.append(f)
-        for a in soup.find_all("a", href=True):
-            u = urljoin(r.url, a["href"].strip())
-            pu = urlparse(u)
-            if pu.netloc not in CRAWL_HOSTS or not re.search(CRAWL_PATH_REGEX, pu.path):
-                continue
-            if pu.path.lower().endswith(".pdf"):
-                continue
-            # Only follow links tied to the year or that look like pagination/next pages.
-            text = a.get_text(" ", strip=True).lower()
-            if year in u or re.search(r"next|page|more|»|>", text) or re.search(r"page=|offset=|start=", pu.query):
-                queue.append(("get", u.split("#")[0], None))
-    print(f"[reports] crawled {n} pages: {len(found)} PDFs")
-    return found
-
-
-def list_urls_file(pdf_re):
+def list_urls_file():
     if not URLS_FILE.exists():
-        return set()
-    urls = {ln.strip() for ln in URLS_FILE.read_text().splitlines() if ln.strip() and not ln.startswith("#")}
-    print(f"[urls_file] {len(urls)} URLs")
-    return urls
+        return []
+    urls = [ln.strip() for ln in URLS_FILE.read_text().splitlines() if ln.strip() and not ln.startswith("#")]
+    if urls:
+        print(f"[urls_file] {len(urls)} URLs")
+    return [dict(url=u, filing_type=filing_type_of([], u, "")) for u in urls]
 
 
 def filename_of(url):
-    return unquote(Path(urlparse(url).path).name)
+    return re.sub(r"[^A-Za-z0-9._-]+", "_", unquote(Path(urlparse(url).path).name))
+
+
+def merge(rows, recs):
+    """Add new records to file_list rows, keyed by URL; give each a unique filename."""
+    by_url = {r["url"]: r for r in rows}
+    names = {r["filename"] for r in rows}
+    for rec in recs:
+        if rec["url"] in by_url:
+            old = by_url[rec["url"]]
+            for k, v in rec.items():
+                if v and not old.get(k):
+                    old[k] = v
+            continue
+        fn = filename_of(rec["url"])
+        if not fn.lower().endswith(".pdf"):
+            fn += ".pdf"
+        stem, n = fn[:-4], 2
+        while fn in names:
+            fn, n = f"{stem}_{n}.pdf", n + 1
+        names.add(fn)
+        row = dict(rec, filename=fn)
+        rows.append(row)
+        by_url[rec["url"]] = row
+    rows.sort(key=lambda r: r["filename"].lower())
+    return rows
 
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--year", default=YEAR)
-    ap.add_argument("--strategy", default="auto", choices=["auto", "dirlist", "reports", "urls_file"])
+    ap.add_argument("--subtypes", default=SUBTYPES, help="comma-separated subdivision types")
+    ap.add_argument("--filing-types", default=FILING_TYPES, help="comma-separated: Audit,Waiver")
+    ap.add_argument("--strategy", default="search", choices=["search", "dirlist", "urls_file"])
     ap.add_argument("--max-files", type=int, default=0, help="download at most N files this call (0 = no limit)")
     ap.add_argument("--delay", type=float, default=1.5, help="seconds between requests")
     ap.add_argument("--retries", type=int, default=3)
-    ap.add_argument("--relist", action="store_true", help="rebuild file_list.csv even if it exists")
+    ap.add_argument("--relist", action="store_true", help="re-query the search even if listed already")
     ap.add_argument("--list-only", action="store_true")
     a = ap.parse_args()
 
-    pdf_re = re.compile(PDF_URL_REGEX.format(year=re.escape(a.year)), re.I)
+    pdf_re = re.compile(PDF_URL_REGEX, re.I)
+    subtypes = [s.strip() for s in a.subtypes.split(",") if s.strip()]
+    filing_types = {s.strip().lower() for s in a.filing_types.split(",") if s.strip()}
 
-    rows = read_csv(FILE_LIST)
-    if a.relist or not rows:
-        urls = set()
-        if a.strategy in ("auto", "dirlist"):
-            urls |= list_dirlist(a.year, a.delay, pdf_re)
-        if a.strategy in ("auto", "reports") and (a.strategy == "reports" or not urls):
-            urls |= list_reports(a.year, a.delay, pdf_re)
-        if a.strategy in ("auto", "urls_file"):
-            urls |= list_urls_file(pdf_re)
-        known = {r["url"] for r in rows}
-        rows += [{"filename": filename_of(u), "url": u} for u in sorted(urls) if u not in known]
-        # De-duplicate on filename
-        rows = list({r["filename"]: r for r in rows}.values())
-        rows.sort(key=lambda r: r["filename"].lower())
-        write_csv(FILE_LIST, rows, ["filename", "url"])
+    rows = [r for r in read_csv(FILE_LIST) if r.get("url")]
+    listed = {(r.get("subdivision_type"), r.get("fiscal_year")) for r in rows}
+    missing = subtypes if a.relist else [s for s in subtypes if (s, a.year) not in listed]
+    if missing or not rows:
+        recs = []
+        if a.strategy == "search":
+            recs += list_search(a.year, missing or subtypes, a.delay, pdf_re)
+        elif a.strategy == "dirlist":
+            recs += list_dirlist(a.year, a.delay, pdf_re)
+        recs += list_urls_file()
+        rows = merge(rows, recs)
+        write_csv(FILE_LIST, rows, LIST_FIELDS)
         print(f"file_list.csv: {len(rows)} PDFs")
     if not rows:
-        print("ERROR: no PDFs listed. Inspect output/listing_debug/ and adjust the CONFIG block, "
-              "or put URLs in config/audit_urls.txt.")
+        print("::error title=No PDFs found::The audit search returned 0 PDF links. Inspect the raw "
+              "responses in output/listing_debug/ and adjust scripts/download.py (CONFIG / parsers), "
+              "or list URLs in config/audit_urls.txt.")
         print("downloaded=0 remaining=0")
-        return
+        sys.exit(2)
     if a.list_only:
         return
 
     processed = {r["filename"] for r in read_csv(MANIFEST)}
     failed_this_run = {r["filename"] for r in read_csv(DOWNLOAD_ERRORS) if r.get("run_id") == RUN_ID}
     AUDITS.mkdir(exist_ok=True)
-    todo = [r for r in rows if r["filename"] not in processed and r["filename"] not in failed_this_run]
+    todo = [r for r in rows if r["filename"] not in processed and r["filename"] not in failed_this_run
+            and r.get("subdivision_type", "") in subtypes + [""]
+            and (not r.get("filing_type") or r["filing_type"].lower() in filing_types)]
     downloaded = failures = 0
     for r in todo:
         if a.max_files and downloaded >= a.max_files:
@@ -234,7 +337,9 @@ def main():
         err = None
         for attempt in range(1, a.retries + 1):
             try:
-                resp = get(r["url"], a.delay if attempt == 1 else a.delay * 2 * attempt, stream=True)
+                time.sleep(a.delay if attempt == 1 else a.delay * 2 * attempt)
+                resp = session.get(r["url"], timeout=120, stream=True)
+                resp.raise_for_status()
                 tmp = dest.with_suffix(".part")
                 with tmp.open("wb") as f:
                     for chunk in resp.iter_content(1 << 16):

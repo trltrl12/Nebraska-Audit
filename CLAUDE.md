@@ -11,8 +11,10 @@ only read trimmed PDFs (via the `extractor` subagent) and write JSON.
 - If a push fails, stop and tell the user.
 
 ## Layout
-- `scripts/download.py` lists and downloads audit PDFs to `audits/` (gitignored). The URL patterns
-  are in its CONFIG block.
+- `scripts/download.py` lists filings via the Auditor's search (POST to
+  nebraska.gov/auditor/reports/index.cgi: type=audit, subtype, year, csv=1 export / csv=0 results)
+  and downloads PDFs to `audits/` (gitignored). Raw search responses go to `output/listing_debug/`.
+  `output/file_list.csv` records each filing's county, subdivision type and filing type (Audit/Waiver).
 - `scripts/find_pages.py` saves the statement pages to `trimmed/` and writes `output/manifest.csv`.
 - `scripts/validate.py` checks `output/json/` and writes `output/flagged.csv`.
 - `scripts/build_csv.py` writes `output/cashflow_long.csv`, `cashflow_summary.csv`, `progress.csv`

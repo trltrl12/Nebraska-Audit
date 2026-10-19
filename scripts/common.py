@@ -19,7 +19,8 @@ SUMMARY_CSV = OUTPUT / "cashflow_summary.csv"
 PROGRESS_CSV = OUTPUT / "progress.csv"
 
 MANIFEST_FIELDS = [
-    "filename", "url", "entity_name", "entity_type", "basis_guess",
+    "filename", "url", "entity_name", "entity_type", "county", "subdivision_type", "fiscal_year",
+    "filing_type", "basis_guess",
     "total_pages", "pages_kept", "page_types", "trimmed_file", "flag", "processed_at",
 ]
 

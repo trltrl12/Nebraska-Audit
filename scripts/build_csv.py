@@ -22,7 +22,7 @@ SUMMARY_FIELDS = ["entity_name", "entity_type", "filename", "fiscal_year_end", "
                   "beginning_investments", "ending_investments",
                   "prop_operating", "prop_noncapital_financing", "prop_capital_and_related_financing",
                   "prop_investing", "prop_reconciles", "flagged"]
-PROGRESS_FIELDS = ["filename", "entity_name", "entity_type", "status", "basis_guess", "trimmed_file",
+PROGRESS_FIELDS = ["filename", "entity_name", "entity_type", "county", "subdivision_type", "filing_type", "status", "basis_guess", "trimmed_file",
                    "pages_kept", "extraction_attempt", "flag_reasons"]
 
 
@@ -120,14 +120,18 @@ def main():
         else:
             status = "pending"
         progress.append(dict(filename=m["filename"], entity_name=m.get("entity_name"),
-                             entity_type=m.get("entity_type"), status=status, basis_guess=m.get("basis_guess"),
+                             entity_type=m.get("entity_type"), county=m.get("county"),
+                             subdivision_type=m.get("subdivision_type"), filing_type=m.get("filing_type"),
+                             status=status, basis_guess=m.get("basis_guess"),
                              trimmed_file=m.get("trimmed_file"), pages_kept=m.get("pages_kept"),
                              extraction_attempt=(d or {}).get("extraction_attempt", "") if d else "",
                              flag_reasons=" | ".join(flagged.get(stem, [])) or m.get("flag", "")))
     failed = {r["filename"] for r in read_csv(DOWNLOAD_ERRORS)}
     for r in read_csv(FILE_LIST):
         if r["filename"] not in seen:
-            progress.append(dict(filename=r["filename"], entity_name=Path(r["filename"]).stem.replace("_", " "),
+            progress.append(dict(filename=r["filename"], county=r.get("county"),
+                                 subdivision_type=r.get("subdivision_type"), filing_type=r.get("filing_type"),
+                                 entity_name=r.get("entity_name") or Path(r["filename"]).stem.replace("_", " "),
                                  status="download_failed" if r["filename"] in failed else "not_fetched"))
     progress.sort(key=lambda r: r["filename"].lower())
 

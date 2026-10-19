@@ -122,7 +122,29 @@ def entity_type_of(fn, first_text):
     return "unknown"
 
 
-def process(pdf_path, url):
+# Search-form subdivision type -> entity_type ("Cities and Villages" is refined from the text)
+SUBTYPE_TO_ENTITY = {
+    "counties": "county", "county proprietary funds": "county", "school districts": "school district",
+    "esus": "school district", "natural resources districts": "natural resources district",
+    "fire districts": "fire district", "sanitary improvement districts": "sanitary and improvement district",
+    "health care facilities": "hospital", "public power districts": "public power / utility",
+    "cities and villages - utilities": "public power / utility", "housing authorities": "housing authority",
+    "airport authorities": "airport authority", "community colleges": "community college",
+}
+
+
+def entity_type_from(meta, fn, first_text):
+    st = (meta.get("subdivision_type") or "").strip().lower()
+    if st in SUBTYPE_TO_ENTITY:
+        return SUBTYPE_TO_ENTITY[st]
+    t = entity_type_of(fn, first_text)
+    if st == "cities and villages" and t not in ("city", "village"):
+        return "city/village"
+    return t if t != "unknown" or not st else st
+
+
+def process(pdf_path, meta):
+    url = meta.get("url", "")
     doc = pymupdf.open(pdf_path)
     texts = [p.get_text("text") for p in doc]
     total_chars = sum(len(t.strip()) for t in texts)
@@ -171,8 +193,10 @@ def process(pdf_path, url):
         out.close()
     first_text = " ".join(texts[:3])
     row = dict(filename=Path(pdf_path).name, url=url,
-               entity_name=entity_from_filename(Path(pdf_path).name),
-               entity_type=entity_type_of(Path(pdf_path).name, first_text),
+               entity_name=meta.get("entity_name") or entity_from_filename(Path(pdf_path).name),
+               entity_type=entity_type_from(meta, Path(pdf_path).name, first_text),
+               county=meta.get("county", ""), subdivision_type=meta.get("subdivision_type", ""),
+               fiscal_year=meta.get("fiscal_year", ""), filing_type=meta.get("filing_type", ""),
                basis_guess=basis, total_pages=len(texts),
                pages_kept=";".join(str(p + 1) for p in keep),
                page_types=";".join(types), trimmed_file=f"trimmed/{trimmed_name}" if trimmed_name else "",
@@ -187,7 +211,7 @@ def main():
     ap.add_argument("files", nargs="*", help="specific PDFs (default: everything in audits/)")
     a = ap.parse_args()
 
-    urls = {r["filename"]: r["url"] for r in read_csv(FILE_LIST)}
+    meta = {r["filename"]: r for r in read_csv(FILE_LIST)}
     done = {r["filename"] for r in read_csv(MANIFEST)}
     files = [Path(f) for f in a.files] or sorted(AUDITS.glob("*.pdf"))
     n = 0
@@ -195,9 +219,12 @@ def main():
         if f.name in done:
             continue
         try:
-            row = process(f, urls.get(f.name, ""))
+            row = process(f, meta.get(f.name, {}))
         except Exception as e:  # noqa: BLE001
-            row = dict(filename=f.name, url=urls.get(f.name, ""), entity_name=entity_from_filename(f.name),
+            m = meta.get(f.name, {})
+            row = dict(filename=f.name, url=m.get("url", ""), entity_name=m.get("entity_name") or entity_from_filename(f.name),
+                       county=m.get("county", ""), subdivision_type=m.get("subdivision_type", ""),
+                       fiscal_year=m.get("fiscal_year", ""), filing_type=m.get("filing_type", ""),
                        flag=f"error: {type(e).__name__}: {e}"[:200],
                        processed_at=dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"))
         append_csv(MANIFEST, row, MANIFEST_FIELDS)
