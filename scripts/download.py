@@ -11,6 +11,8 @@ the HTML results page. Raw responses are saved to output/listing_debug/.
 Strategies (--strategy):
   search     - the official search above (default)
   dirlist    - parse an HTML directory listing at DIR_URL (the Audits_Filed folder has none today)
+  (with "search", a saved export at config/export_<year>.xlsx is read first and the live
+   search only runs for subdivision types it doesn't cover)
   urls_file  - config/audit_urls.txt, one PDF URL per line (always merged in when present)
 
 Writes output/file_list.csv (filename, url, entity_name, county, subdivision_type,
@@ -46,6 +48,8 @@ DIR_URL = os.environ.get("AUDIT_DIR_URL", "https://auditors.nebraska.gov/Audits_
 # A link counts as a filing PDF if its URL matches this.
 PDF_URL_REGEX = os.environ.get("AUDIT_PDF_REGEX", r"\.pdf(\?|#|$)")
 URLS_FILE = ROOT / "config" / "audit_urls.txt"
+# Saved export from the search page; used first when present (search only fills in missing types).
+EXPORT_FILE = ROOT / "config" / "export_{year}.xlsx"
 USER_AGENT = "Nebraska-Audit research pipeline (github.com/trltrl12/Nebraska-Audit)"
 # ----------------------------------------------------------------------------------------
 
@@ -68,13 +72,24 @@ def save_debug(name, content):
 
 # ---------- parsing search responses (HTML table, HTML-as-xls, xlsx, CSV) ----------
 
-COL_HINTS = {
-    "entity_name": r"subdivision\s*name|entity|^name$|political|subdivision$|^name",
+COL_HINTS = {  # checked in this order; a column is claimed by the first key that matches it
+    "subdivision_type": r"type\s*of\s*sub|sub\w*\s*type|subtype|category",
+    "filing_type": r"filing\s*type|audit\s*/\s*waiver|waiver|report\s*type|^type$",
+    "entity_name": r"name\s*of\s*sub|subdivision\s*name|entity|^name|political|subdivision",
     "county": r"county",
-    "subdivision_type": r"type\s*of\s*sub|sub.*type|subtype|subdivision\s*type|category",
     "fiscal_year": r"fiscal|year|\bfy\b|period",
-    "filing_type": r"audit\s*/\s*waiver|waiver|filing|report\s*type|^type$|audit",
 }
+# Row labels that mark a transposed export (one filing per column)
+TRANSPOSED_RE = re.compile(r"name\s*of\s*subdivision|link\s*to\s*report|filing\s*type", re.I)
+
+
+def untranspose(rows):
+    """The APA export puts field names in column A and one filing per column."""
+    if len(rows) > 1 and sum(bool(TRANSPOSED_RE.search(str(r[0] if r else ""))) for r in rows) >= 2:
+        width = max(len(r) for r in rows)
+        rows = [list(r) + [""] * (width - len(r)) for r in rows]
+        return [list(col) for col in zip(*rows)]
+    return rows
 
 
 def map_columns(header):
@@ -102,7 +117,7 @@ def records_from_table(header, rows, base_url, pdf_re):
     recs = []
     for cells, links in rows:
         # URLs can also sit in cell text (exports)
-        links = list(links) + [(m, "") for c in cells for m in re.findall(r"https?://\S+?\.pdf", c, re.I)]
+        links = list(links) + [(m, "") for c in cells for m in re.findall(r"https?://[^\s\"']+?\.pdf", c, re.I)]
         for href, text in links:
             url = urljoin(base_url, href.strip())
             if not pdf_re.search(url):
@@ -146,25 +161,28 @@ def parse_html(html, base_url, pdf_re):
 
 def parse_xlsx(data, base_url, pdf_re):
     from openpyxl import load_workbook
-    wb = load_workbook(io.BytesIO(data), read_only=False, data_only=True)
+    # data_only=False keeps =HYPERLINK("url") formulas, which is where the export puts the links
+    wb = load_workbook(io.BytesIO(data), read_only=False, data_only=False)
     recs = []
     for ws in wb.worksheets:
-        rows = list(ws.iter_rows())
-        if not rows:
+        grid, links = [], {}
+        for r in ws.iter_rows():
+            grid.append([str(c.value) if c.value is not None else "" for c in r])
+            for c in r:
+                if c.hyperlink and c.hyperlink.target:
+                    links[(c.row - 1, c.column - 1)] = c.hyperlink.target
+        if not grid:
             continue
-        header = [str(c.value or "") for c in rows[0]]
-        body = []
-        for r in rows[1:]:
-            cells = [str(c.value) if c.value is not None else "" for c in r]
-            links = [(c.hyperlink.target, str(c.value or "")) for c in r if c.hyperlink and c.hyperlink.target]
-            body.append((cells, links))
-        recs += records_from_table(header, body, base_url, pdf_re)
+        for (i, j), url in links.items():  # fold real hyperlinks into the cell text
+            grid[i][j] = f"{grid[i][j]} {url}"
+        grid = untranspose(grid)
+        recs += records_from_table(grid[0], [(r, []) for r in grid[1:]], base_url, pdf_re)
     return recs
 
 
 def parse_csv_text(text, base_url, pdf_re):
-    rows = list(csv.reader(io.StringIO(text), dialect=csv.Sniffer().sniff(text[:4096], ",\t;")
-                           if text.strip() else "excel"))
+    delim = "\t" if text[:4096].count("\t") > text[:4096].count(",") else ","
+    rows = untranspose(list(csv.reader(io.StringIO(text), delimiter=delim)))
     if not rows:
         return []
     return records_from_table(rows[0], [(r, []) for r in rows[1:]], base_url, pdf_re)
@@ -202,7 +220,11 @@ def list_search(year, subtypes, delay, pdf_re):
                 continue
             kind_guess = "xlsx" if r.content[:2] == b"PK" else ("html" if b"<" in r.content[:2000] else "csv")
             save_debug(f"search_{year}_{st}_{'export' if csv_flag == '1' else 'results'}.{kind_guess}", r.content)
-            found, kind = parse_response(r, pdf_re)
+            try:
+                found, kind = parse_response(r, pdf_re)
+            except Exception as e:  # noqa: BLE001
+                print(f"[search] {st}: could not parse response: {type(e).__name__}: {e}")
+                found, kind = [], "unparsed"
             print(f"[search] {st} {'export' if csv_flag == '1' else 'results'} ({kind}, {len(r.content)} bytes): "
                   f"{len(found)} PDF links")
             if csv_flag == "1":
@@ -241,6 +263,19 @@ def list_dirlist(year, delay, pdf_re):
     recs = parse_html(r.text, url, pdf_re)
     print(f"[dirlist] {url}: {len(recs)} PDFs")
     return recs
+
+
+def list_export_file(year, pdf_re):
+    """A saved copy of the search's "Export As Excel File" (config/export_<year>.xlsx or .csv)."""
+    for p in (EXPORT_FILE.with_suffix(".xlsx"), EXPORT_FILE.with_suffix(".csv")):
+        p = Path(str(p).format(year=year))
+        if p.exists():
+            data = p.read_bytes()
+            recs = (parse_xlsx(data, SEARCH_URL, pdf_re) if data[:2] == b"PK"
+                    else parse_csv_text(data.decode("utf-8", "replace"), SEARCH_URL, pdf_re))
+            print(f"[export_file] {p.relative_to(ROOT)}: {len(recs)} PDF links")
+            return recs
+    return []
 
 
 def list_urls_file():
@@ -299,12 +334,15 @@ def main():
     filing_types = {s.strip().lower() for s in a.filing_types.split(",") if s.strip()}
 
     rows = [r for r in read_csv(FILE_LIST) if r.get("url")]
-    listed = {(r.get("subdivision_type"), r.get("fiscal_year")) for r in rows}
-    missing = subtypes if a.relist else [s for s in subtypes if (s, a.year) not in listed]
+    listed = lambda: {(r.get("subdivision_type"), str(r.get("fiscal_year"))) for r in rows}  # noqa: E731
+    missing = subtypes if a.relist else [s for s in subtypes if (s, a.year) not in listed()]
     if missing or not rows:
         recs = []
         if a.strategy == "search":
-            recs += list_search(a.year, missing or subtypes, a.delay, pdf_re)
+            rows = merge(rows, list_export_file(a.year, pdf_re))
+            missing = [s for s in missing if (s, a.year) not in listed()]
+            if missing:
+                recs += list_search(a.year, missing, a.delay, pdf_re)
         elif a.strategy == "dirlist":
             recs += list_dirlist(a.year, a.delay, pdf_re)
         recs += list_urls_file()
