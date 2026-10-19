@@ -31,17 +31,26 @@ operating, noncapital_financing, capital_and_related_financing, investing, begin
 ending_cash), detail[], detail_totals[], balance_sheet{statement, scope, column, assets[], deferred_outflows[], liabilities[],
 deferred_inflows[], equity[], total_assets, total_deferred_outflows, total_liabilities,
 total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_fund_balance, notes.
+- **Governmental and business-type (utility/enterprise) funds are separate:** every
+  receipts/disbursements/detail line has `fund_type` (governmental | business-type); top-level
+  balances, transfers and debt fields are governmental; `business_type{measure, beginning,
+  ending, transfers_net, debt_proceeds, other_financing, adjustments}` rolls the utility funds
+  forward; `reported_totals{governmental{receipts,disbursements}, business-type{...}}`.
+- **Combined/unlabeled tax lines** are split using the report's own breakdown (`split_from`
+  set) or kept as `taxes (unlabeled)`; both, and any line marked `review`, go to
+  output/review.csv (the user's review list).
 - Each report covers revenue sources, expenditures, and a balance sheet with all assets and
   liabilities (government-wide Statement of Net Position for GAAP; cash-basis net position
   statement otherwise). The link to the PDF on the Auditor's site (manifest `url`) is added to
   every output by build_csv.py; it is not stored in the JSON.
 - Money values are `{"amount", "source_page"}`, where source_page is the page within the trimmed PDF.
   List items are `{category, original_label, amount, source_page}`.
-- Receipt categories: property tax, sales tax, other taxes, intergovernmental/state aid, federal
+- Receipt categories: property tax, sales tax, other taxes, taxes (unlabeled), intergovernmental/state aid, federal
   grants, charges for services/fees, investment income, other.
 - Disbursement categories: general government, public safety, streets/highways,
   culture/recreation, health/welfare, economic development, utilities, debt service principal,
-  debt service interest, capital outlay, other.
+  debt service interest, capital outlay, instruction, support services, student transportation,
+  food service (the last four for school districts), other.
 - Asset categories: cash and investments, receivables, due from other governments,
   inventories/prepaids, restricted assets, capital assets, other assets.
 - Liability categories: accounts payable, accrued liabilities, due to other governments, unearned
@@ -53,7 +62,7 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
   below; object for spending), original_label, amount (actual), budget_final, source_page}, plus
   detail_totals[] {schedule, fund, section, amount, source_page} for the printed totals.
   No double counting across schedules.
-- Detailed revenue categories: property tax, sales tax, motor vehicle tax, occupation/franchise tax, lodging tax, inheritance tax, other local taxes, highway allocation, motor vehicle pro-rate, municipal equalization, homestead/tax credits, state school aid (TEEOSA), other state aid, county/other local governments, federal grants, water charges, sewer charges, electric charges, gas charges, refuse/sanitation charges, other utility charges, licenses and permits, fines and forfeitures, fees of office, rentals, recreation/pool/park fees, cemetery fees, tuition and fees, school lunch sales, ambulance/rescue fees, other charges for services, investment income, donations/contributions, reimbursements/refunds, sale of assets, miscellaneous revenue.
+- Detailed revenue categories: property tax, sales tax, motor vehicle tax, occupation/franchise tax, lodging tax, inheritance tax, other local taxes, taxes (unlabeled), highway allocation, motor vehicle pro-rate, municipal equalization, homestead/tax credits, state school aid (TEEOSA), other state aid, county/other local governments, federal grants, water charges, sewer charges, electric charges, gas charges, refuse/sanitation charges, other utility charges, licenses and permits, fines and forfeitures, fees of office, rentals, recreation/pool/park fees, cemetery fees, tuition and fees, school lunch sales, ambulance/rescue fees, other charges for services, investment income, donations/contributions, reimbursements/refunds, sale of assets, miscellaneous revenue.
 - Detailed expenditure categories: salaries and wages, employee benefits and payroll taxes, professional/contract services, supplies and materials, utilities (power, gas, phone), fuel, repairs and maintenance, insurance, rent/leases, dues, training and travel, printing, publishing and postage, grants/payments to other entities, law enforcement contract, equipment purchases, construction/infrastructure, land and buildings, debt principal, debt interest and fees, tax refunds/treasurer fees, miscellaneous expenditure.
 - Balance check: assets + deferred outflows = liabilities + deferred inflows + equity.
 - Identity: beginning + receipts − disbursements + transfers_in − transfers_out + debt_proceeds +

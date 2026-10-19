@@ -37,16 +37,24 @@ digits as printed. Never invent a number. If a value isn't shown, use `null` and
   "beginning_cash": {"amount": 0, "source_page": 1},
   "beginning_investments": null,
   "beginning_fund_balance": null,
-  "receipts": [{"category": "property tax", "original_label": "Property Taxes", "amount": 0, "source_page": 1}],
-  "disbursements": [{"category": "general government", "original_label": "General Government", "amount": 0, "source_page": 1}],
+  "receipts": [{"fund_type": "governmental", "category": "property tax", "original_label": "Property Taxes", "amount": 0, "source_page": 1},
+               {"fund_type": "business-type", "category": "charges for services/fees", "original_label": "Water sales", "amount": 0, "source_page": 6}],
+  "disbursements": [{"fund_type": "governmental", "category": "general government", "original_label": "General Government", "amount": 0, "source_page": 1}],
   "transfers_in": null,
   "transfers_out": null,
   "debt_proceeds": null,
   "other_financing": null,
   "adjustments": [{"original_label": "Prior period adjustment", "amount": 0, "source_page": 2}],
   "reported_totals": {
-    "receipts": {"amount": 0, "source_page": 1, "includes": []},
-    "disbursements": {"amount": 0, "source_page": 1, "includes": []}
+    "governmental": {"receipts": {"amount": 0, "source_page": 1, "includes": []},
+                     "disbursements": {"amount": 0, "source_page": 1, "includes": []}},
+    "business-type": {"receipts": {"amount": 0, "source_page": 6, "includes": []},
+                      "disbursements": {"amount": 0, "source_page": 6, "includes": []}}
+  },
+  "business_type": {
+    "measure": "cash | net position",
+    "beginning": {"amount": 0, "source_page": 6}, "ending": {"amount": 0, "source_page": 6},
+    "transfers_net": null, "debt_proceeds": null, "other_financing": null, "adjustments": []
   },
   "proprietary": null,
   "balance_sheet": {
@@ -68,7 +76,7 @@ digits as printed. Never invent a number. If a value isn't shown, use `null` and
   "ending_investments": null,
   "ending_fund_balance": null,
   "detail": [
-    {"schedule": "Budgetary Comparison Schedule - General Fund", "fund": "General", "department": "Police",
+    {"schedule": "Budgetary Comparison Schedule - General Fund", "fund_type": "governmental", "fund": "General", "department": "Police",
      "section": "expenditure", "category": "public safety", "detail_category": "salaries and wages",
      "original_label": "Salaries", "amount": 0, "budget_final": 0, "source_page": 9}
   ],
@@ -81,13 +89,28 @@ digits as printed. Never invent a number. If a value isn't shown, use `null` and
 ```
 
 ### Field rules
-- **Which column:** use the **Total** column (all funds combined), or "Total Governmental Funds"
-  for GAAP governmental statements. If there's no total column, add the fund columns yourself
-  and say so in `notes`. If the report has several cash statements (e.g. governmental plus
-  business-type, or several funds on separate pages), combine them into one total per line and
-  explain in `notes`.
-- **Cash basis** (`basis: "cash"`): `beginning_cash` / `ending_cash` are the balances the
-  statement rolls forward (beginning and ending "cash balance" or "cash and investments").
+- **Governmental vs. business-type funds are kept separate.** Every receipts, disbursements and
+  detail line has `fund_type`: `governmental` (general, street, special revenue, debt service,
+  capital projects…) or `business-type` (enterprise / proprietary funds: water, sewer, electric,
+  gas, refuse, school nutrition, airport, golf course…). Never add the two together. Skip
+  fiduciary/custodial/agency funds entirely.
+  - Governmental lines come from the governmental funds statement, using its **Total
+    Governmental Funds** column (if there's no total column, add the fund columns yourself and
+    say so in `notes`).
+  - Business-type lines come from the proprietary/enterprise funds statement (cash basis:
+    receipts and disbursements of the proprietary funds; GAAP: Statement of Revenues, Expenses,
+    and Changes in Fund Net Position), using its total enterprise funds column. Record its
+    balances in `business_type`: `measure` = `cash` (cash basis) or `net position` (accrual),
+    `beginning`/`ending` = that statement's beginning/ending cash or net position,
+    `transfers_net` = signed transfers in(+)/out(−), `debt_proceeds`, `other_financing` (signed:
+    capital contributions, sale of assets…), `adjustments`. Validation checks beginning +
+    receipts − disbursements + those = ending. If there are no business-type funds, set
+    `business_type` to null and use only governmental lines.
+  - `beginning_cash`/`ending_cash`/`*_fund_balance`, `transfers_in/out`, `debt_proceeds`,
+    `other_financing`, `adjustments` at the top level are for the **governmental funds** only.
+  - `reported_totals` records each fund type's printed totals separately.
+- **Cash basis** (`basis: "cash"`): `beginning_cash` / `ending_cash` are the governmental funds
+  balances the statement rolls forward (beginning and ending "cash balance" or "cash and investments").
   Fill `beginning_investments` / `ending_investments` only when investments are reported
   separately; they are informational and not added to cash. Leave the `*_fund_balance`
   fields null.
@@ -97,7 +120,17 @@ digits as printed. Never invent a number. If a value isn't shown, use `null` and
   "cash and cash equivalents/investments" from the governmental funds Balance Sheet (total
   column); `beginning_cash` is null unless it's shown.
 - **receipts / disbursements:** one item per printed line (don't merge lines), keeping the
-  label exactly as printed in `original_label`. Don't include subtotal or total lines as
+  label exactly as printed in `original_label`.
+- **Combined or unlabeled tax lines** (e.g. a single "Taxes" line that mixes property, sales,
+  motor vehicle and other taxes): split it into one item per tax type when the report shows the
+  breakdown anywhere in the trimmed PDF (statement of activities general revenues, budget
+  schedule, combining schedule). Give each split item `"split_from": "Taxes 9,369,327 (p5)"` and
+  make sure the split items add up to the original line. If the report doesn't break it down,
+  keep one item with category `taxes (unlabeled)` (also `detail_category` `taxes (unlabeled)` in
+  detail). Both cases go on the user's review list automatically.
+- **review:** add `"review": "<short reason>"` to any line you are unsure about (unreadable
+  digits, a category guess you aren't confident in, a line that may belong to another fund
+  type). These are collected into a review list for the user; don't overuse it. Don't include subtotal or total lines as
   items. Transfers, debt/bond/loan proceeds and other financing sources go in their own
   fields, not in receipts or disbursements.
 - **transfers_in, transfers_out, debt_proceeds:** positive numbers. **other_financing:** signed
@@ -108,9 +141,12 @@ digits as printed. Never invent a number. If a value isn't shown, use `null` and
   transfers_out + debt_proceeds + other_financing + Σadjustments = ending (cash for cash
   basis; fund balance for GAAP). If yours doesn't reconcile, look again for a line you missed
   before writing.
-- **reported_totals:** the "Total Receipts" / "Total Revenues" and "Total Disbursements" /
-  "Total Expenditures" lines exactly as printed. If a printed total already includes transfers
-  or debt proceeds, list those field names in `includes` (e.g. `["transfers_in"]`).
+- **reported_totals:** per fund type, the "Total Receipts" / "Total Revenues" and "Total
+  Disbursements" / "Total Expenditures" (business-type: total operating + nonoperating revenues /
+  expenses, or total receipts / disbursements) exactly as printed. If a printed total already
+  includes transfers or debt proceeds, list those field names in `includes` (e.g.
+  `["transfers_in"]`; business-type: `["transfers_net"]`). If a statement prints no single total
+  (e.g. separate operating and nonoperating totals), add them up and say so in `notes`.
 - **proprietary** (GAAP only, from the Statement of Cash Flows – Proprietary Funds, total column):
   `{"operating": {...}, "noncapital_financing": {...}, "capital_and_related_financing": {...},
   "investing": {...}, "beginning_cash": {...}, "ending_cash": {...}}`. These are the "net cash
@@ -148,7 +184,8 @@ digits as printed. Never invent a number. If a value isn't shown, use `null` and
     "Water"…), `department` = the department/function heading the line sits under ("Police",
     "Streets", "Parks", "Administration"…), or null if there are no departments.
   - `section`: `revenue`, `expenditure`, or `other financing` (transfers, debt proceeds, sale of
-    assets shown below the expenditures).
+    assets shown below the expenditures). `fund_type` as above (a Water Fund schedule is
+    `business-type`).
   - `category` is the high-level receipt or disbursement category from the lists below, and for
     expenditures it is the *function* (police salaries → `public safety`). `detail_category` is the
     fine category below; for expenditures it is the *object* (police salaries → `salaries and wages`).
@@ -164,7 +201,7 @@ digits as printed. Never invent a number. If a value isn't shown, use `null` and
     detail, not a replacement.
   - If the trimmed PDF has no detail schedules, use `"detail": []` and `"detail_totals": []`.
 - Detailed revenue categories (`detail_category` for revenue; use exactly these strings):
-  `property tax`, `sales tax`, `motor vehicle tax`, `occupation/franchise tax`, `lodging tax`, `inheritance tax`, `other local taxes`, `highway allocation`, `motor vehicle pro-rate`, `municipal equalization`, `homestead/tax credits`, `state school aid (TEEOSA)`, `other state aid`, `county/other local governments`, `federal grants`, `water charges`, `sewer charges`, `electric charges`, `gas charges`, `refuse/sanitation charges`, `other utility charges`, `licenses and permits`, `fines and forfeitures`, `fees of office`, `rentals`, `recreation/pool/park fees`, `cemetery fees`, `tuition and fees`, `school lunch sales`, `ambulance/rescue fees`, `other charges for services`, `investment income`, `donations/contributions`, `reimbursements/refunds`, `sale of assets`, `miscellaneous revenue`.
+  `property tax`, `sales tax`, `motor vehicle tax`, `occupation/franchise tax`, `lodging tax`, `inheritance tax`, `other local taxes`, `taxes (unlabeled)`, `highway allocation`, `motor vehicle pro-rate`, `municipal equalization`, `homestead/tax credits`, `state school aid (TEEOSA)`, `other state aid`, `county/other local governments`, `federal grants`, `water charges`, `sewer charges`, `electric charges`, `gas charges`, `refuse/sanitation charges`, `other utility charges`, `licenses and permits`, `fines and forfeitures`, `fees of office`, `rentals`, `recreation/pool/park fees`, `cemetery fees`, `tuition and fees`, `school lunch sales`, `ambulance/rescue fees`, `other charges for services`, `investment income`, `donations/contributions`, `reimbursements/refunds`, `sale of assets`, `miscellaneous revenue`.
 - Detailed expenditure categories (`detail_category` for expenditure; use exactly these strings):
   `salaries and wages`, `employee benefits and payroll taxes`, `professional/contract services`, `supplies and materials`, `utilities (power, gas, phone)`, `fuel`, `repairs and maintenance`, `insurance`, `rent/leases`, `dues, training and travel`, `printing, publishing and postage`, `grants/payments to other entities`, `law enforcement contract`, `equipment purchases`, `construction/infrastructure`, `land and buildings`, `debt principal`, `debt interest and fees`, `tax refunds/treasurer fees`, `miscellaneous expenditure`.
   Examples: officer/clerk/teacher pay → `salaries and wages`; FICA, retirement, health insurance →
@@ -175,7 +212,7 @@ digits as printed. Never invent a number. If a value isn't shown, use `null` and
 
 ### Receipt categories (use exactly these strings)
 `property tax`, `sales tax`, `other taxes` (motor vehicle, occupation, lodging, franchise,
-in-lieu taxes), `intergovernmental/state aid` (state aid, highway allocation, county or other
+in-lieu taxes), `taxes (unlabeled)` (only when a combined tax line can't be split), `intergovernmental/state aid` (state aid, highway allocation, county or other
 local government payments, pro-rate motor vehicle, homestead), `federal grants`, `charges for
 services/fees` (utility sales, permits, licenses, rentals, fines), `investment income`
 (interest, dividends), `other` (donations, reimbursements, miscellaneous).
@@ -186,7 +223,10 @@ services/fees` (utility sales, permits, licenses, rentals, fines), `investment i
 (roads, bridges, street lighting), `culture/recreation` (parks, pool, library, community
 center), `health/welfare` (health, cemetery, senior services, assistance), `economic
 development` (LB840, TIF, CRA, tourism), `utilities` (water, sewer, electric, gas, refuse),
-`debt service principal`, `debt service interest` (including fees), `capital outlay`, `other`.
+`debt service principal`, `debt service interest` (including fees), `capital outlay`,
+school districts: `instruction` (regular, special education, vocational, activities), `support
+services` (pupil, instructional staff, general and school administration, business, operation
+and maintenance of plant), `student transportation`, `food service`; and `other`.
 When a function line mixes categories, pick the dominant one and mention it in `notes`.
 
 ## Output to the caller

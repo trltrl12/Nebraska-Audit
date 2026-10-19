@@ -12,23 +12,27 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from common import (BS_SECTIONS, DETAIL_CSV, DOWNLOAD_ERRORS, FILE_LIST, FLAGGED, LONG_CSV, MANIFEST,  # noqa: E402
                     PROGRESS_CSV, PROPRIETARY_FIELDS, SUMMARY_CSV, amt, balance_sheet_check, bs_total,
-                    load_reports, page, read_csv, reconcile, reconcile_proprietary, write_csv)
+                    REVIEW_CSV, fund_type, load_reports, page, read_csv, reconcile, reconcile_business,
+                    reconcile_proprietary, write_csv)
 
-LONG_FIELDS = ["entity_name", "entity_type", "filename", "fiscal_year_end", "basis", "section",
+LONG_FIELDS = ["entity_name", "entity_type", "filename", "fiscal_year_end", "basis", "fund_type", "section",
                "category", "amount", "original_labels", "source_pages", "source_pages_original",
                "source_url"]
-SUMMARY_FIELDS = ["entity_name", "entity_type", "county", "filename", "fiscal_year_end", "basis",
+SUMMARY_FIELDS = ["entity_name", "entity_type", "county", "filename", "fiscal_year", "fiscal_year_end", "basis",
                   "filing_type", "source_url", "balance_type",
+                  # governmental funds
                   "beginning_balance", "total_receipts", "total_disbursements", "transfers_in",
                   "transfers_out", "debt_proceeds", "other_financing", "adjustments", "ending_balance",
                   "computed_ending", "difference", "reconciles", "beginning_cash", "ending_cash",
                   "beginning_investments", "ending_investments",
                   "prop_operating", "prop_noncapital_financing", "prop_capital_and_related_financing",
                   "prop_investing", "prop_reconciles",
+                  # business-type (utility) funds
+                  "bt_measure", "bt_beginning", "bt_receipts", "bt_disbursements", "bt_ending", "bt_reconciles",
                   "balance_sheet_statement", "total_assets", "total_deferred_outflows", "total_liabilities",
-                  "total_deferred_inflows", "total_equity", "balance_sheet_balances", "flagged"]
+                  "total_deferred_inflows", "total_equity", "balance_sheet_balances", "flagged", "review_items"]
 DETAIL_FIELDS = ["entity_name", "entity_type", "county", "filename", "fiscal_year_end", "basis", "schedule",
-                 "fund", "department", "section", "category", "detail_category", "original_label", "amount",
+                 "fund_type", "fund", "department", "section", "category", "detail_category", "original_label", "amount",
                  "budget_final", "source_page", "source_page_original", "source_url"]
 PROGRESS_FIELDS = ["filename", "entity_name", "entity_type", "county", "subdivision_type", "filing_type",
                    "status", "basis_guess", "trimmed_file", "pages_kept", "extraction_attempt",
@@ -48,6 +52,9 @@ def orig_pages(pages, mapping):
 def main():
     manifest = {Path(r["filename"]).stem: r for r in read_csv(MANIFEST)}
     file_urls = {Path(r["filename"]).stem: r.get("url", "") for r in read_csv(FILE_LIST)}
+    reviews = {}
+    for r in read_csv(REVIEW_CSV):
+        reviews[r["filename"]] = reviews.get(r["filename"], 0) + 1
     flagged = {}
     for r in read_csv(FLAGGED):
         flagged.setdefault(r["filename"], []).append(f"{r['check']}: {r['reason']}")
@@ -66,13 +73,13 @@ def main():
         for section in ("receipts", "disbursements"):
             agg = OrderedDict()
             for it in d.get(section) or []:
-                a = agg.setdefault(it.get("category"), dict(amount=0.0, labels=[], pages=[]))
+                a = agg.setdefault((fund_type(it), it.get("category")), dict(amount=0.0, labels=[], pages=[]))
                 a["amount"] += float(it.get("amount") or 0)
                 a["labels"].append(str(it.get("original_label", "")))
                 if it.get("source_page") not in (None, "") and str(it["source_page"]) not in a["pages"]:
                     a["pages"].append(str(it["source_page"]))
-            for cat, a in agg.items():
-                long_rows.append(dict(base, section=section, category=cat, amount=round(a["amount"], 2),
+            for (ft, cat), a in agg.items():
+                long_rows.append(dict(base, fund_type=ft, section=section, category=cat, amount=round(a["amount"], 2),
                                       original_labels="; ".join(a["labels"]), source_pages=";".join(a["pages"]),
                                       source_pages_original=orig_pages(a["pages"], mapping)))
         scalars = [("balance", k) for k in ("beginning_cash", "beginning_investments", "ending_cash",
@@ -109,7 +116,8 @@ def main():
 
         for it in d.get("detail") or []:
             p = [str(it.get("source_page"))] if it.get("source_page") is not None else []
-            detail_rows.append(dict(base, county=m.get("county"), schedule=it.get("schedule"), fund=it.get("fund"),
+            detail_rows.append(dict(base, county=m.get("county"), schedule=it.get("schedule"),
+                                    fund_type=fund_type(it), fund=it.get("fund"),
                                     department=it.get("department"), section=it.get("section"),
                                     category=it.get("category"), detail_category=it.get("detail_category"),
                                     original_label=it.get("original_label"), amount=it.get("amount"),
@@ -117,8 +125,10 @@ def main():
                                     source_page_original=orig_pages(p, mapping)))
 
         r = reconcile(d)
+        rb = reconcile_business(d)
         pr = reconcile_proprietary(d)
         bc = balance_sheet_check(d)
+        yn = {True: "yes", False: "no", None: ""}
         summary_rows.append(dict(
             base, balance_type=r["balance_type"], beginning_balance=r["beginning"],
             total_receipts=round(r["receipts"], 2), total_disbursements=round(r["disbursements"], 2),
@@ -136,7 +146,12 @@ def main():
             balance_sheet_statement=bs.get("statement", ""),
             **{tot: bs_total(bs, sec) for sec, tot in BS_SECTIONS.items()},
             balance_sheet_balances="" if not bc else ("yes" if bc["balances"] else "no"),
-            flagged="yes" if stem in flagged else "no"))
+            fiscal_year=m.get("fiscal_year"),
+            bt_measure=rb["measure"], bt_beginning=rb["beginning"],
+            bt_receipts=round(rb["receipts"], 2) if rb["receipts"] else None,
+            bt_disbursements=round(rb["disbursements"], 2) if rb["disbursements"] else None,
+            bt_ending=rb["ending"], bt_reconciles=yn[rb["reconciles"]],
+            flagged="yes" if stem in flagged else "no", review_items=reviews.get(stem, 0)))
 
     # Progress: every known report
     progress = []

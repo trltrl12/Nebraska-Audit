@@ -18,6 +18,10 @@ LONG_CSV = OUTPUT / "cashflow_long.csv"
 SUMMARY_CSV = OUTPUT / "cashflow_summary.csv"
 PROGRESS_CSV = OUTPUT / "progress.csv"
 DETAIL_CSV = OUTPUT / "cashflow_detail.csv"
+REVIEW_CSV = OUTPUT / "review.csv"
+
+# Every receipt/disbursement/detail line belongs to one of these (fiduciary funds are excluded).
+FUND_TYPES = ["governmental", "business-type"]
 
 MANIFEST_FIELDS = [
     "filename", "url", "entity_name", "entity_type", "county", "subdivision_type", "fiscal_year",
@@ -26,13 +30,15 @@ MANIFEST_FIELDS = [
 ]
 
 RECEIPT_CATEGORIES = [
-    "property tax", "sales tax", "other taxes", "intergovernmental/state aid",
+    "property tax", "sales tax", "other taxes", "taxes (unlabeled)", "intergovernmental/state aid",
     "federal grants", "charges for services/fees", "investment income", "other",
 ]
 DISBURSEMENT_CATEGORIES = [
     "general government", "public safety", "streets/highways", "culture/recreation",
     "health/welfare", "economic development", "utilities", "debt service principal",
-    "debt service interest", "capital outlay", "other",
+    "debt service interest", "capital outlay",
+    "instruction", "support services", "student transportation", "food service",   # school districts
+    "other",
 ]
 PROPRIETARY_FIELDS = ["operating", "noncapital_financing", "capital_and_related_financing", "investing"]
 
@@ -49,7 +55,7 @@ LIABILITY_CATEGORIES = [
 # Revenue: where the money comes from.
 DETAIL_REVENUE_CATEGORIES = [
     "property tax", "sales tax", "motor vehicle tax", "occupation/franchise tax", "lodging tax",
-    "inheritance tax", "other local taxes",
+    "inheritance tax", "other local taxes", "taxes (unlabeled)",
     "highway allocation", "motor vehicle pro-rate", "municipal equalization", "homestead/tax credits",
     "state school aid (TEEOSA)", "other state aid",
     "county/other local governments", "federal grants",
@@ -163,8 +169,8 @@ def reconcile(d):
         btype = "cash"
         beg = amt(d.get("beginning_cash"))
         end = amt(d.get("ending_cash"))
-    receipts = sum_items(d.get("receipts"))
-    disb = sum_items(d.get("disbursements"))
+    receipts = sum_items(gov_items(d.get("receipts")))
+    disb = sum_items(gov_items(d.get("disbursements")))
     net_other = ((amt(d.get("transfers_in")) or 0) - (amt(d.get("transfers_out")) or 0)
                  + (amt(d.get("debt_proceeds")) or 0) + (amt(d.get("other_financing")) or 0)
                  + sum_items(d.get("adjustments")))
@@ -177,6 +183,43 @@ def reconcile(d):
     out["difference"] = round(end - comp, 2)
     out["reconciles"] = abs(end - comp) <= tol(beg, end, receipts, disb)
     return out
+
+
+def fund_type(item):
+    return (item or {}).get("fund_type") or "governmental"
+
+
+def gov_items(items):
+    return [i for i in items or [] if fund_type(i) == "governmental"]
+
+
+def bt_items(items):
+    return [i for i in items or [] if fund_type(i) == "business-type"]
+
+
+def reconcile_business(d):
+    """Business-type (utility) funds: beginning + receipts - disbursements + transfers_net +
+    debt_proceeds + other_financing + adjustments = ending (cash or net position, as reported)."""
+    bt = d.get("business_type") or {}
+    rec, dis = sum_items(bt_items(d.get("receipts"))), sum_items(bt_items(d.get("disbursements")))
+    beg, end = amt(bt.get("beginning")), amt(bt.get("ending"))
+    out = dict(beginning=beg, receipts=rec, disbursements=dis, ending=end, computed_ending=None,
+               difference=None, reconciles=None, measure=bt.get("measure"))
+    if beg is None or end is None:
+        return out
+    comp = (beg + rec - dis + (amt(bt.get("transfers_net")) or 0) + (amt(bt.get("debt_proceeds")) or 0)
+            + (amt(bt.get("other_financing")) or 0) + sum_items(bt.get("adjustments")))
+    out.update(computed_ending=round(comp, 2), difference=round(end - comp, 2),
+               reconciles=abs(end - comp) <= tol(beg, end, rec, dis))
+    return out
+
+
+def reported_total(d, fund, key):
+    """Printed total for receipts/disbursements of one fund type (older flat form = governmental)."""
+    rt = d.get("reported_totals") or {}
+    if fund in rt:
+        return (rt.get(fund) or {}).get(key)
+    return rt.get(key) if fund == "governmental" else None
 
 
 def bs_total(bs, section):

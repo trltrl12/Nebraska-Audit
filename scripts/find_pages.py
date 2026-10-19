@@ -27,7 +27,7 @@ from common import (AUDITS, FILE_LIST, MANIFEST, MANIFEST_FIELDS, TRIMMED,  # no
 
 # Bump whenever page selection changes: reports trimmed by an older version are re-trimmed
 # automatically on the next fetch run (see --drop-stale).
-FINDER_VERSION = 4
+FINDER_VERSION = 5
 
 HEADER_FRAC = 0.30         # statement titles sit in the top 30% of the page
 OCR_FRAC = 0.35            # how much of a scanned page to OCR
@@ -198,22 +198,37 @@ DETAIL_EXCLUDE_RE = re.compile(
     r"certified\s+public\s+accountants|discussion\s+and\s+analysis|county\s+officers?|"
     r"office\s+activit|summary\s+schedule|debt|bonds?\s+payable|capital\s+assets|"
     r"taxes\s+(levied|certified|collected)|tax\s+collections?|fiduciary|custodial|agency\s+funds?|"
-    r"reconcil|net\s+position|balance\s+sheet|assets\s+and|condensed|activity\s+funds?\b")
+    r"reconcil|net\s+position|balance\s+sheet|assets\s+and|condensed|activity\s+funds?\b|"
+    r"our\s+audit|we\s+were\s+engaged|engaged\s+to\s+report|other\s+matters|in\s+our\s+opinion")
+
+
+def title_block(lines, limit=10):
+    """The heading lines above the table body: stop at the first line with a dollar amount, so
+    body lines such as 'Interest on investments' or 'Debt service' don't trigger exclusions."""
+    out = []
+    for ln in lines[:limit]:
+        if NUMBER_RE.search(ln) or "$" in ln:
+            break
+        out.append(ln)
+    return " ".join(out)
 
 
 def classify_detail(lines, full_text=""):
     """Detail-schedule type for a page that isn't a basic statement, or None."""
-    head = " ".join(lines[:20])
-    if not lines or DETAIL_EXCLUDE_RE.search(head) or (full_text and is_toc(full_text)):
+    head = title_block(lines)
+    if not lines or DETAIL_EXCLUDE_RE.search(head) or (full_text and is_toc(full_text)) \
+            or re.search(r"reconcil", " ".join(lines[:20])):
         return None
     ok = [ln for ln in lines[:20] if len(ln) <= TITLE_MAX_LEN and not PROSE_RE.search(ln)
           and not NOTE_HEADING_RE.search(ln)]
+    found = set()
     for ln in ok + [f"{a} {b}" for a, b in zip(ok, ok[1:])]:
         for t, rx in DETAIL_TITLES:
             m = rx.search(ln)
             if m and m.start() <= TITLE_MAX_OFFSET + 20:
-                return t
-    return None
+                found.add(t)
+    # most specific first (DETAIL_TITLES order), so a wrapped "... by department" title wins
+    return next((t for t, _ in DETAIL_TITLES if t in found), None)
 
 
 def classify_lines(lines, full_text=""):
@@ -337,7 +352,8 @@ def select_pages(pages):
         j = i + 1
         while j < len(pages) and j - i <= MAX_CONTINUATIONS:
             lines, full, src = pages[j]
-            if types[j] or excl.search(" ".join(lines[:20])):
+            head_j = title_block(lines) if t.startswith("detail_") else " ".join(lines[:20])
+            if types[j] or excl.search(head_j):
                 break  # a titled page is handled by the outer loop
             lab_j = exhibit_label(lines)
             head8 = " ".join(lines[:8])
@@ -368,10 +384,13 @@ def select_pages(pages):
         i = j
 
     # Cap the detail pages (they're extra cost for extraction); basic statements always stay.
+    # Departmental and budget schedules carry the most line-item detail, so they're kept first.
     detail_idx = [n for n, t in enumerate(kept_types) if t.startswith("detail_")]
     truncated = len(detail_idx) > MAX_DETAIL_PAGES
     if truncated:
-        drop = set(detail_idx[MAX_DETAIL_PAGES:])
+        prio = {"detail_departments": 0, "detail_budget": 1, "detail_combining": 2, "detail_schedule": 3}
+        ranked = sorted(detail_idx, key=lambda n: (prio.get(kept_types[n].replace("(cont)", ""), 4), n))
+        drop = set(ranked[MAX_DETAIL_PAGES:])
         keep = [k for n, k in enumerate(keep) if n not in drop]
         kept_types = [t for n, t in enumerate(kept_types) if n not in drop]
     basic = [t for t in kept_types if not t.startswith("detail_")]
