@@ -1,0 +1,67 @@
+name: debug_pages
+
+# Diagnostics for page detection: re-download already-processed PDFs and commit a per-page
+# text summary to output/page_debug/ (no trimming, manifest untouched).
+on:
+  workflow_dispatch:
+    inputs:
+      filenames:
+        description: "Space-separated PDF filenames (blank = every file in output/manifest.csv)"
+        default: ""
+
+permissions:
+  contents: write
+
+concurrency:
+  group: output-writer
+  cancel-in-progress: false
+
+jobs:
+  dump:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: sudo apt-get update -q && sudo apt-get install -y -q tesseract-ocr
+      - run: pip install -r requirements.txt
+      - name: Download and dump
+        env:
+          FILENAMES: ${{ inputs.filenames }}
+        run: |
+          mkdir -p audits
+          export TESSDATA_PREFIX=$(dirname $(find /usr/share -name eng.traineddata | head -1))
+          python - <<'PY'
+          import csv, os, time, requests
+          names = os.environ.get("FILENAMES", "").split()
+          rows = {r["filename"]: r for r in csv.DictReader(open("output/file_list.csv"))}
+          if not names:
+              names = [r["filename"] for r in csv.DictReader(open("output/manifest.csv"))]
+          s = requests.Session(); s.headers["User-Agent"] = "Nebraska-Audit research pipeline"
+          for n in names:
+              if n not in rows: print("unknown", n); continue
+              time.sleep(1.5)
+              try:
+                  r = s.get(rows[n]["url"], timeout=120); r.raise_for_status()
+                  open(f"audits/{n}", "wb").write(r.content); print("got", n)
+              except Exception as e:
+                  print("failed", n, e)
+          PY
+          python scripts/dump_pages.py
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add output/page_debug
+          git diff --cached --quiet && exit 0
+          git commit -q -m "debug_pages: per-page text dumps [skip ci]"
+          for i in 1 2 3 4; do
+            git pull --rebase -q origin main && git push -q origin HEAD:main && exit 0
+            sleep $(( 2 ** i ))
+          done
+          exit 1
