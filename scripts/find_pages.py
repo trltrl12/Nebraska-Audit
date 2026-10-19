@@ -29,6 +29,7 @@ OCR_FRAC = 0.35            # how much of a scanned page to OCR
 OCR_DPI = 150
 MIN_TEXT_CHARS = 50        # below this a page is treated as scanned (image only)
 MAX_CONTINUATIONS = 8
+MAX_UNTITLED = 2           # untitled number-heavy pages accepted right after a statement
 TITLE_MAX_OFFSET = 30      # a title must start within this many characters of its line
 
 # Statement title families: (type, regex). Checked in order; the first match wins.
@@ -40,7 +41,7 @@ TITLES = [
     ("proprietary_revenues_expenses", _OF + r"revenues,?\s*expenses"),
     ("activities", _OF + r"activities"),
     ("cash_flows", _OF + r"cash\s+flows"),
-    ("assets_fund_balances", _OF + r"(cash\s+)?assets,?\s*(liabilities,?\s*)?(and|&)\s+(fund\s+balances?|net\s+position|cash\s+balances?)"),
+    ("assets_fund_balances", _OF + r"(cash\s+(basis\s+)?)?assets,?\s*(liabilities,?\s*)?(and|&)\s+(fund\s+balances?|net\s+position|cash\s+balances?)"),
     ("net_position", _OF + r"(fund\s+)?net\s+(position|assets)"),
     ("balance_sheet", r"balance\s+sheets?\b"),
     # Some small-village audits present their only statement as a "schedule"; used only when
@@ -281,6 +282,7 @@ def select_pages(pages):
         kept_types.append(t)
         # Continuation pages: same title again, or "(continued)" with numbers and no other title.
         label = exhibit_label(pages[i][0])
+        untitled = 0
         j = i + 1
         while j < len(pages) and j - i <= MAX_CONTINUATIONS:
             lines, full, src = pages[j]
@@ -296,6 +298,14 @@ def select_pages(pages):
             # OCR only covers the top of the page, so don't require many numbers there
             if CONTINUED_RE.search(" ".join(lines[:12])) and \
                     len(NUMBER_RE.findall(full)) >= (0 if src == "ocr" else 10):
+                keep.append(j)
+                kept_types.append(t + "(cont)")
+                j += 1
+                continue
+            # Second page of a wide statement: no title at all, just more columns of numbers.
+            if untitled < MAX_UNTITLED and not PROSE_RE.search(" ".join(lines[:6])) and \
+                    len(NUMBER_RE.findall(full)) >= (8 if src == "ocr" else 15):
+                untitled += 1
                 keep.append(j)
                 kept_types.append(t + "(cont)")
                 j += 1
