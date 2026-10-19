@@ -1,0 +1,338 @@
+<!DOCTYPE HTML>
+<html lang="en">
+	<head>
+		<!-- Google Tag Manager -->
+		<script>
+			(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+			new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+			j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+			'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+			})(window,document,'script','dataLayer','GTM-TBGCTK4');
+		</script>
+		<!-- End Google Tag Manager -->
+		<meta charset="utf-8">
+		<meta http-equiv="Content-Language" content="en" />
+		<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=320, height=device-height, target-densitydpi=medium-dpi" />
+		<meta name="keywords" content="nebraska,auditor,public,accounts,auditor of public accounts,audit,auditing,state,government,state government,nebraska state government,ne,neb,nebr,nebraska state auditor,mike,foley,mike foley">
+		<meta name="description" content="The official site for the State of Nebraska Auditor of Public Accounts - Mike Foley">
+		<meta http-equiv="X-UA-Compatible" content="EDGE" />
+		<link href="/base/css/bootstrap-3.current.min.css" rel="stylesheet" />
+		<link href="/base/dragon_li/css/style.css" rel="stylesheet" />
+		<link href="/base/css/jquery-ui-1.current.min.css" rel="stylesheet" />
+	    <link href="/base/dragon_li/agency/auditor/css/auditor.css" rel="stylesheet" />
+		<script src="/base/js/jquery-3.current.min.js"></script>
+		<script src="/base/js/jquery-migrate-3.1.0.min.js"></script>
+		<script src="/base/js/jquery-ui-1.current.min.js"></script>
+		<script src="/base/js/bootstrap-3.current.min.js"></script>
+		<script src="/base/dragon_li/js/resize.js"></script>
+		<script src="/base/dragon_li/js/common.js"></script><script type="text/javascript" src="js/custom.js"></script>
+		<script>
+			$(document).ready(function(){
+				$('.checkall').click(function(){
+					if($(this).text() == ' Check All'){
+						$('input[type=checkbox]').attr('checked', 'checked');
+						$(this).html('<span class="glyphicon glyphicon-unchecked"></span> Uncheck All');
+					}else{
+						$('input[type=checkbox]').removeAttr('checked');
+						$(this).html('<span class="glyphicon glyphicon-check"></span> Check All');
+					}
+				});
+				var allchecked = true;
+				$('[type=checkbox]').each(function(){
+					if(!$(this).attr('checked')){
+						allchecked = false;
+					}
+				});
+				if(allchecked){
+					$('.checkall').trigger('click');
+				}
+			});
+			function doubleCheck(csv, o){
+				var type = document.getElementById('type').value;
+				if(type == 'school' || type == 'municipal' || type == 'county' || type == 'general'){
+					checked = false;
+					var form = o.form;
+					for( var i = 0; i < form.elements.length; i++ ){
+						if( form.elements[i].type == "checkbox" ){
+							if( form.elements[i].checked ){
+								checked = true;
+							}
+						}
+					}
+					if(document.getElementById('year').value == ''){
+						alert("You must select a year or years.");
+						return false;
+					}else if(document.getElementById('sub').value == ''){
+						alert("You must select a subdivision or subdivisions.");
+						return false;
+					}else if(checked == false){
+						alert("You must select what type of detailed information you want to review.");
+						return false;
+					}else{
+						document.getElementById('csv').value = csv;
+						document.forms["queryform"].submit();
+					}
+				}else{
+					if(document.getElementById('year').value == ''){
+						alert("You must select a year or years.");
+						return false;
+					}else if(document.getElementById('countyselect').value == "" && document.getElementById('name').value == "" && document.getElementById('subtype').value == ""){
+						alert("You must select a county and / or subdivision.");
+						return false;
+					}else{
+						document.getElementById('csv').value = csv;
+						document.forms["queryform"].submit();
+					}
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<!-- Google Tag Manager (noscript) -->
+		<noscript>
+			<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TBGCTK4"
+						  height="0" width="0" style="display:none;visibility:hidden">
+			</iframe>
+		</noscript>
+		<!-- End Google Tag Manager (noscript) -->
+		<div class="header-container">
+			<div class="transparent-header">
+				<div class="row branding-text">
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+						Official Nebraska Government Website
+					</div>
+				</div>
+			
+				<div class="row branding-image">
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+						<a href="http://www.nebraska.gov/"><img src="/base/dragon_li/img/branding-header.png" height="20" width="338" alt="Official Nebraska Government Website" /></a>
+					</div>
+				</div>
+				
+				<div class="row negov-logo">
+					<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 left-header">
+						<a href="http://www.nebraska.gov/"><img src="/base/dragon_li/img/nebraska-logo.png" alt="nebraska.gov" height="35" width="244" /></a>
+					</div>
+					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 right-header">
+						<a id="google_translate_element" class="iblock pull-right"></a> 
+						<div class="pull-right iblock translate-adj">
+							<a href="http://www.nebraska.gov/allagencies.html">All State Agencies</a> | 
+							<a href="http://www.nebraska.gov/allservice.html">All State Services</a> | 
+						</div>
+						<meta name="google-translate-customization" content="bc0bc0a4e61a1471-1893bb37cc147105-g41a15bf26dbd41b5-c" ></meta>
+						<script type="text/javascript">
+							function googleTranslateElementInit() {
+								new google.translate.TranslateElement({pageLanguage: "en", layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, "google_translate_element");
+							}
+						</script>
+						<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+						<style>
+						.iblock { display: inline-block; }
+						.translate-adj { line-height: 25px; vertical-align: baseline; }
+						.goog-te-gadget-simple {
+							border: 0px;
+							background-color: transparent;
+							margin-left: .5em;
+						}
+						.goog-te-menu-value span { color: #e7a125; font-size: 105%; }
+						.goog-te-menu-value:hover{ text-decoration: none; }
+						.dropdown-toggle b.caret { color: black; }
+						</style>
+					</div>
+				</div>
+			</div>
+			
+			<div class="container">
+				<div class="row agency-row">
+					<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 pull-right">
+						<div class="agency-name">
+							Nebraska Auditor of Public Accounts<br />
+							<small class="italic">Accountability, Integrity, Reliability</small><br />
+							<small>Mike Foley</small>
+						</div>
+					</div>
+					<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 left pull-left header-logo">
+						<a href="http://auditors.nebraska.gov/"><img src="/base/dragon_li/agency/auditor/img/state-seal.png" alt="Nebraska State Seal" /></a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="container">
+			<nav class="navbar navbar-default" role="navigation">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					
+					
+					
+					
+					
+					
+					
+				</div>
+				
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse navbar-ex1-collapse">
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="https://auditors.nebraska.gov/">Auditor's Home</a></li>
+<li><a href="#" class="dropdown-toggle" data-toggle="dropdown">APA Reports Issued <span class="glyphicon glyphicon-chevron-down" style="font-size: 80%;"></span></a>
+	<ul class="dropdown-menu">
+		<li><a href="https://www.nebraska.gov/auditor/FileSearch/entity.cgi"  rel="noopener noreferrer" target="_blank">By Agency</a></li>
+		<li><a href="https://www.nebraska.gov/auditor/FileSearch/years.cgi" target="_blank" rel="noopener noreferrer" >By Year</a></li>
+		<li><a href="https://www.nebraska.gov/auditor/FileSearch/press.cgi" target="_blank" rel="noopener noreferrer" >Press Releases</a></li>
+	</ul>
+</li>
+<li><a href="#" class="dropdown-toggle" data-toggle="dropdown">Local Government <span class="glyphicon glyphicon-chevron-down" style="font-size: 80%;"></span></a>
+	<ul class="dropdown-menu">
+		<li><a href="https://auditors.nebraska.gov/Audit_Info.html" target="_blank" rel="noopener noreferrer" >Audit Information</a></li>
+		<li><a href="https://auditors.nebraska.gov/Budget_Info.html" target="_blank" rel="noopener noreferrer" >Budget Information</a></li>
+		<li><a href="https://auditors.nebraska.gov/County_Information.html" target="_blank" rel="noopener noreferrer" >County Information</a></li>
+		<li><a href="https://www.nebraska.gov/auditor/reports/index.cgi?audit=1" target="_blank" rel="noopener noreferrer" >Search Audits/Waivers </a></li>
+		<li><a href="https://www.nebraska.gov/auditor/reports/index.cgi?budget=1" target="_blank" rel="noopener noreferrer" >Search Budgets</a></li>
+        <li><a href="https://auditors.nebraska.gov/BondSearch.html" target="_blank" rel="noopener noreferrer" >Search Bonds</a></li>
+        <li><a href="https://auditors.nebraska.gov/ForfeitureSearch.html" target="_blank" rel="noopener noreferrer" >Search Forfeitures</a></li>
+        <li><a href="https://auditors.nebraska.gov/InterlocalSearch.html" target="_blank" rel="noopener noreferrer" >Search Interlocals</a></li>
+        <li><a href="https://auditors.nebraska.gov/RetirementSearch.html" target="_blank" rel="noopener noreferrer" >Search Retirement</a></li>
+	</ul>
+</li>
+<li><a href="#" class="dropdown-toggle" data-toggle="dropdown">Submit Forms <span class="glyphicon glyphicon-chevron-down" style="font-size: 80%;"></span></a>
+	<ul class="dropdown-menu">
+		<li><a href="https://www.nebraska.gov/auditor/FileUpload/index.cgi?audit=1" target="_blank" rel="noopener noreferrer" >Audit / Waiver</a></li>
+		<li><a href="https://www.nebraska.gov/auditor/FileUpload/index.cgi?budget=1" target="_blank" rel="noopener noreferrer" >Budget </a></li>
+		<li><a href="https://www.nebraska.gov/auditor/interlocal/index.cgi" target="_blank" rel="noopener noreferrer" >Interlocal</a></li>
+		<li><a href="https://www.nebraska.gov/auditor/bond/index.cgi" target="_blank" rel="noopener noreferrer" >Bond Filing</a></li>
+        <li><a href="https://www.nebraska.gov/auditor/forfeiture/" target="_blank" rel="noopener noreferrer" >Forfeiture Report</a></li>
+        <li><a href="https://www.nebraska.gov/auditor/retirement/" target="_blank" rel="noopener noreferrer" >Retirement Report</a></li>
+	</ul>
+</li>
+
+					</ul>
+				</div><!-- /.navbar-collapse -->
+			</nav>
+			<div class="content">
+				
+
+
+
+
+				<noscript>
+				  <h5>Your browser's Javascript setting is currently DISABLED!</h5>
+				  <p>JavaScript <span class="underline">MUST</span> be enabled to use this system. <br />Errors will occur in processing if JavaScript is not enabled in your browser's 'Internet Options' or 'Preferences' settings.</p>
+				</noscript>
+				
+				
+
+	<style>
+		label { width: 100%; }
+		h4 { background-color: #364147; color: white; padding: .5em; margin-top: 0; }
+		h5 { background-color: #A7885A; color: white; padding: .25em .5em .25em .5em; }
+		td div.sideways { -webkit-transform: rotate(-90deg); -moz-transform: rotate(-90deg); filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3); margin-top: 8em; font-weight: bold; }
+		td[rowspan] { width: 2em; padding: 0; }
+		table { background-color: white; }
+	</style>
+
+	<script>document.title = "Nebraska Auditor of Public Accounts | Main Page";</script>
+	<script>
+		function submitform(){
+			$('#csv').val(0);
+			$('#queryform').submit();
+		}
+	</script>
+
+	
+	
+	
+	<form method='post' action='index.cgi' name="queryform" id="queryform">
+		<input type="hidden" value="" name="type" id="type" />
+		
+		
+		
+		</form>
+
+	
+
+<div class="modal fade" id="helpfultips" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				
+					<h4 class="modal-title">Budget Search Help</h4>
+				
+			</div>
+			<div class="modal-body">
+				<p>You may pick multiple items within any specific selection areas by holding down the [Ctrl] key while clicking choices with your mouse.</p>
+				<p>You may also click inside a selection area and begin typing to jump to the first selection starting with those letters.</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="helpfultips2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				
+					<h4 class="modal-title">Budget Search Help</h4>
+				
+			</div>
+			<div class="modal-body">
+				<p>Click the ' <button class="btn btn-xs btn-default"><span class="glyphicon glyphicon-check"></span> Check All</button> ' button to select all data fields, or click the individual check boxes to select only the data fields you want.</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+			</div>
+			<div class="footer">
+				<div class="row">
+					<div class="col-md-12 text-center visible-sm visible-md hidden-lg">
+						Built and Maintained by Nebraska.gov<br />
+						<a href="http://www.nebraska.gov/allagencies.html" target="_blank">All State Agencies</a> | <a href="http://www.nebraska.gov/allservice.html" target="_blank">All State Services</a><br /><br />
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 left-footer">
+						<span class="bold"><a href="https://auditors.nebraska.gov/">Nebraska Auditor of Public Accounts</a></span><br />
+						State Capitol, Suite 2303<br />
+						P.O. Box 98917<br />
+						Lincoln, NE 68509-8917<br />
+						Phone: (402) 471-2111<br />
+						Fax: (402) 471-3301<br />
+						Email: <a href="mailto:mike.foley@nebraska.gov"><span class="glyphicon glyphicon-envelope"></span> mike.foley@nebraska.gov</a>
+					</div>
+					<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 text-center bold">
+						<a href="https://auditors.nebraska.gov/SAE_E-Mail.html"><span class="glyphicon glyphicon-envelope"></span> Anonymously Report Fraud, Waste, and Abuse</a>
+					</div>
+					<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 right-footer">
+						Nebraska.gov<br />
+						Contact Us: <a href="http://www.nebraska.gov/contact-us.html" target="_blank">Support</a><br />
+						
+					</div>
+				</div>
+	
+				<div class="row">
+					<div class="col-md-12 text-center">
+						<a href="http://www.nebraska.gov/policies.html" class="right" target="_blank">Security, Accessibility, and Privacy Policies</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<br />
+	</body>
+</html>
+
