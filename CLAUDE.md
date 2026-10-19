@@ -28,7 +28,7 @@ fiscal_year_end, basis (`cash`|`GAAP`), extraction_attempt, beginning_cash, begi
 beginning_fund_balance, receipts[], disbursements[], transfers_in, transfers_out, debt_proceeds,
 other_financing, adjustments[], reported_totals{receipts,disbursements}, proprietary (GAAP:
 operating, noncapital_financing, capital_and_related_financing, investing, beginning_cash,
-ending_cash), balance_sheet{statement, scope, column, assets[], deferred_outflows[], liabilities[],
+ending_cash), detail[], detail_totals[], balance_sheet{statement, scope, column, assets[], deferred_outflows[], liabilities[],
 deferred_inflows[], equity[], total_assets, total_deferred_outflows, total_liabilities,
 total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_fund_balance, notes.
 - Each report covers revenue sources, expenditures, and a balance sheet with all assets and
@@ -47,6 +47,14 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
 - Liability categories: accounts payable, accrued liabilities, due to other governments, unearned
   revenue, debt - due within one year, debt - due in more than one year, net pension/OPEB
   liability, other liabilities.
+- **detail[]** = every line from the supplementary schedules (budget-to-actual, departmental,
+  combining, fund schedules): {schedule, fund, department, section (revenue|expenditure|other
+  financing), category (high-level list above; function for spending), detail_category (fine list
+  below; object for spending), original_label, amount (actual), budget_final, source_page}, plus
+  detail_totals[] {schedule, fund, section, amount, source_page} for the printed totals.
+  No double counting across schedules.
+- Detailed revenue categories: property tax, sales tax, motor vehicle tax, occupation/franchise tax, lodging tax, inheritance tax, other local taxes, highway allocation, motor vehicle pro-rate, municipal equalization, homestead/tax credits, state school aid (TEEOSA), other state aid, county/other local governments, federal grants, water charges, sewer charges, electric charges, gas charges, refuse/sanitation charges, other utility charges, licenses and permits, fines and forfeitures, fees of office, rentals, recreation/pool/park fees, cemetery fees, tuition and fees, school lunch sales, ambulance/rescue fees, other charges for services, investment income, donations/contributions, reimbursements/refunds, sale of assets, miscellaneous revenue.
+- Detailed expenditure categories: salaries and wages, employee benefits and payroll taxes, professional/contract services, supplies and materials, utilities (power, gas, phone), fuel, repairs and maintenance, insurance, rent/leases, dues, training and travel, printing, publishing and postage, grants/payments to other entities, law enforcement contract, equipment purchases, construction/infrastructure, land and buildings, debt principal, debt interest and fees, tax refunds/treasurer fees, miscellaneous expenditure.
 - Balance check: assets + deferred outflows = liabilities + deferred inflows + equity.
 - Identity: beginning + receipts − disbursements + transfers_in − transfers_out + debt_proceeds +
   other_financing + adjustments = ending (cash for cash basis, fund balance for GAAP).
@@ -56,7 +64,8 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
 2. Read `output/progress.csv`. Take the next `pending` reports, plus any `flagged` reports whose
    `extraction_attempt` is 1 (re-check each flagged report once; after that leave it for a human).
    You can do this with a short `python -c`/`grep` that prints filenames only.
-3. Send them to the `extractor` agent in groups of about 5 reports per agent (several agents in
+3. Send them to the `extractor` agent in groups of about 3 reports per agent (trimmed PDFs with
+   detail schedules run 15-30 pages) (several agents in
    parallel is fine). Pass only the filenames.
 4. `git add output/json/ && git commit -m "extract: N reports"`, then `git pull --rebase && git push`.
    GitHub Actions validates and updates progress.

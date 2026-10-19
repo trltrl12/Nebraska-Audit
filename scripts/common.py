@@ -17,6 +17,7 @@ FLAGGED = OUTPUT / "flagged.csv"
 LONG_CSV = OUTPUT / "cashflow_long.csv"
 SUMMARY_CSV = OUTPUT / "cashflow_summary.csv"
 PROGRESS_CSV = OUTPUT / "progress.csv"
+DETAIL_CSV = OUTPUT / "cashflow_detail.csv"
 
 MANIFEST_FIELDS = [
     "filename", "url", "entity_name", "entity_type", "county", "subdivision_type", "fiscal_year",
@@ -44,6 +45,33 @@ LIABILITY_CATEGORIES = [
     "debt - due within one year", "debt - due in more than one year", "net pension/OPEB liability",
     "other liabilities",
 ]
+# Fine-grained categories for line items in the supplementary detail schedules.
+# Revenue: where the money comes from.
+DETAIL_REVENUE_CATEGORIES = [
+    "property tax", "sales tax", "motor vehicle tax", "occupation/franchise tax", "lodging tax",
+    "inheritance tax", "other local taxes",
+    "highway allocation", "motor vehicle pro-rate", "municipal equalization", "homestead/tax credits",
+    "state school aid (TEEOSA)", "other state aid",
+    "county/other local governments", "federal grants",
+    "water charges", "sewer charges", "electric charges", "gas charges", "refuse/sanitation charges",
+    "other utility charges",
+    "licenses and permits", "fines and forfeitures", "fees of office", "rentals",
+    "recreation/pool/park fees", "cemetery fees", "tuition and fees", "school lunch sales",
+    "ambulance/rescue fees", "other charges for services",
+    "investment income", "donations/contributions", "reimbursements/refunds", "sale of assets",
+    "miscellaneous revenue",
+]
+# Expenditure: what the money is spent on (object of expenditure).
+DETAIL_EXPENSE_CATEGORIES = [
+    "salaries and wages", "employee benefits and payroll taxes", "professional/contract services",
+    "supplies and materials", "utilities (power, gas, phone)", "fuel", "repairs and maintenance",
+    "insurance", "rent/leases", "dues, training and travel", "printing, publishing and postage",
+    "grants/payments to other entities", "law enforcement contract", "equipment purchases",
+    "construction/infrastructure", "land and buildings", "debt principal", "debt interest and fees",
+    "tax refunds/treasurer fees", "miscellaneous expenditure",
+]
+DETAIL_SECTIONS = ["revenue", "expenditure", "other financing"]
+
 # Balance-sheet line lists and their stated-total fields
 BS_SECTIONS = {
     "assets": "total_assets", "deferred_outflows": "total_deferred_outflows",

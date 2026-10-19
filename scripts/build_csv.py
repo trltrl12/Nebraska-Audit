@@ -1,5 +1,6 @@
-"""Build output/cashflow_long.csv, output/cashflow_summary.csv, output/progress.csv
-and the detailed workbook output/cashflow.xlsx.
+"""Build output/cashflow_long.csv, output/cashflow_summary.csv, output/cashflow_detail.csv
+(every line item from the supplementary schedules), output/progress.csv and the detailed
+workbook output/cashflow.xlsx.
 
 source_page in the JSON is the page number inside the trimmed PDF; the *_original
 columns map it back to the page number of the full audit via output/manifest.csv.
@@ -9,7 +10,7 @@ from collections import OrderedDict
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from common import (BS_SECTIONS, DOWNLOAD_ERRORS, FILE_LIST, FLAGGED, LONG_CSV, MANIFEST,  # noqa: E402
+from common import (BS_SECTIONS, DETAIL_CSV, DOWNLOAD_ERRORS, FILE_LIST, FLAGGED, LONG_CSV, MANIFEST,  # noqa: E402
                     PROGRESS_CSV, PROPRIETARY_FIELDS, SUMMARY_CSV, amt, balance_sheet_check, bs_total,
                     load_reports, page, read_csv, reconcile, reconcile_proprietary, write_csv)
 
@@ -26,6 +27,9 @@ SUMMARY_FIELDS = ["entity_name", "entity_type", "county", "filename", "fiscal_ye
                   "prop_investing", "prop_reconciles",
                   "balance_sheet_statement", "total_assets", "total_deferred_outflows", "total_liabilities",
                   "total_deferred_inflows", "total_equity", "balance_sheet_balances", "flagged"]
+DETAIL_FIELDS = ["entity_name", "entity_type", "county", "filename", "fiscal_year_end", "basis", "schedule",
+                 "fund", "department", "section", "category", "detail_category", "original_label", "amount",
+                 "budget_final", "source_page", "source_page_original", "source_url"]
 PROGRESS_FIELDS = ["filename", "entity_name", "entity_type", "county", "subdivision_type", "filing_type",
                    "status", "basis_guess", "trimmed_file", "pages_kept", "extraction_attempt",
                    "flag_reasons", "source_url"]
@@ -48,7 +52,7 @@ def main():
     for r in read_csv(FLAGGED):
         flagged.setdefault(r["filename"], []).append(f"{r['check']}: {r['reason']}")
 
-    long_rows, summary_rows, extracted = [], [], {}
+    long_rows, summary_rows, detail_rows, extracted = [], [], [], {}
     for stem, d, err in load_reports():
         extracted[stem] = d
         if err or not d:
@@ -102,6 +106,15 @@ def main():
                 long_rows.append(dict(base, section=f"balance_sheet_{sec}", category=it.get("category", sec),
                                       amount=it.get("amount"), original_labels=it.get("original_label", ""),
                                       source_pages=";".join(p), source_pages_original=orig_pages(p, mapping)))
+
+        for it in d.get("detail") or []:
+            p = [str(it.get("source_page"))] if it.get("source_page") is not None else []
+            detail_rows.append(dict(base, county=m.get("county"), schedule=it.get("schedule"), fund=it.get("fund"),
+                                    department=it.get("department"), section=it.get("section"),
+                                    category=it.get("category"), detail_category=it.get("detail_category"),
+                                    original_label=it.get("original_label"), amount=it.get("amount"),
+                                    budget_final=it.get("budget_final"), source_page=";".join(p),
+                                    source_page_original=orig_pages(p, mapping)))
 
         r = reconcile(d)
         pr = reconcile_proprietary(d)
@@ -159,6 +172,7 @@ def main():
 
     write_csv(LONG_CSV, long_rows, LONG_FIELDS)
     write_csv(SUMMARY_CSV, summary_rows, SUMMARY_FIELDS)
+    write_csv(DETAIL_CSV, detail_rows, DETAIL_FIELDS)
     write_csv(PROGRESS_CSV, progress, PROGRESS_FIELDS)
     counts = {}
     for r in progress:

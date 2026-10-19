@@ -30,6 +30,7 @@ OCR_DPI = 150
 MIN_TEXT_CHARS = 50        # below this a page is treated as scanned (image only)
 MAX_CONTINUATIONS = 8
 MAX_UNTITLED = 2           # untitled number-heavy pages accepted right after a statement
+MAX_DETAIL_PAGES = 15      # cap on supplementary detail pages per report (extraction cost)
 TITLE_MAX_OFFSET = 30      # a title must start within this many characters of its line
 
 # Statement title families: (type, regex). Checked in order; the first match wins.
@@ -61,7 +62,8 @@ EXCLUDE_RE = re.compile(
     r"independent\s+(auditor|accountant)|certified\s+public\s+accountants")
 # A matched "title" line that reads like a sentence is prose (MD&A, notes, opinion), not a title.
 PROSE_RE = re.compile(r"\b(presents?|shows?|reports?|reported|are\s+different|provides?|includes?|"
-                      r"is\s+presented|we\s+have|in\s+the\s+accompanying|focus)\b")
+                      r"is\s+presented|we\s+have|in\s+the\s+accompanying|focus|comprises?|responsible|"
+                      r"our|we|opinions?|assurance)\b")
 TITLE_MAX_WORDS = 18
 TITLE_MAX_LEN = 130
 CONTINUED_RE = re.compile(r"\bcontinued\b|\bcont'?d\b|\bpage\s+[2-9]\b|\bpage\s+\d\s+of\s+\d")
@@ -170,6 +172,43 @@ def is_toc(full_text):
     return hits >= 4 or bool(re.search(r"table\s+of\s+contents|^contents$", norm(full_text[:400]), re.M))
 
 
+# Supplementary schedules with line-item detail (revenue sources, spending by department/object).
+# These usually follow the notes. Checked only on pages that aren't basic statements.
+DETAIL_TITLES = [
+    ("detail_budget", r"budgetary\s+comparison|budget\s+(and|to)\s+actual|actual\s+and\s+budget|"
+                      r"budgetary\s+basis|compared\s+to\s+budget"),
+    ("detail_combining", r"combining\s+(statements?|schedules?)\s+of\s+" + _BASIS
+                         + r"(receipts|revenues|disbursements|expenditures)"),
+    ("detail_departments", r"(statement|schedule)s?\s+of\s+(general\s+fund\s+)?" + _BASIS
+                           + r"(disbursements|expenditures)\b|by\s+(department|function|object)|departmental"),
+    ("detail_schedule", r"(statement|schedule)s?\s+of\s+" + _BASIS
+                        + r"(receipts|revenues)(,?\s*(and\s+)?(disbursements|expenditures))?"),
+]
+DETAIL_TITLES = [(t, re.compile(rx)) for t, rx in DETAIL_TITLES]
+DETAIL_EXCLUDE_RE = re.compile(
+    r"federal\s+awards|findings|questioned|outstanding|investments|interfund|pension|opeb|"
+    r"contributions\s+to|notes\s+to|table\s+of\s+contents|independent\s+(auditor|accountant)|"
+    r"certified\s+public\s+accountants|discussion\s+and\s+analysis|county\s+officers?|"
+    r"office\s+activit|summary\s+schedule|debt|bonds?\s+payable|capital\s+assets|"
+    r"taxes\s+(levied|certified|collected)|tax\s+collections?|fiduciary|custodial|agency\s+funds?|"
+    r"reconcil|net\s+position|balance\s+sheet|assets\s+and|condensed|activity\s+funds?\b")
+
+
+def classify_detail(lines, full_text=""):
+    """Detail-schedule type for a page that isn't a basic statement, or None."""
+    head = " ".join(lines[:20])
+    if not lines or DETAIL_EXCLUDE_RE.search(head) or (full_text and is_toc(full_text)):
+        return None
+    ok = [ln for ln in lines[:20] if len(ln) <= TITLE_MAX_LEN and not PROSE_RE.search(ln)
+          and not NOTE_HEADING_RE.search(ln)]
+    for ln in ok + [f"{a} {b}" for a, b in zip(ok, ok[1:])]:
+        for t, rx in DETAIL_TITLES:
+            m = rx.search(ln)
+            if m and m.start() <= TITLE_MAX_OFFSET + 20:
+                return t
+    return None
+
+
 def classify_lines(lines, full_text=""):
     """Statement type(s) for a page from its header lines, joined with "+" (combined statements
     such as "assets and fund balances and receipts, disbursements ..." match several), or None."""
@@ -268,9 +307,12 @@ def select_pages(pages):
                       if any(NOTES_RE.search(ln) for ln in pages[i][0][:8])), None)
         if notes is not None and any(types[:notes]):
             types = types[:notes] + [None] * (len(types) - notes)
-    # Schedules count only when the report has no statement of receipts/revenues at all.
+    # Schedules count as the main statement only when the report has no statement of
+    # receipts/revenues at all; otherwise they're detail.
     if any(has_type(t, FLOW_TYPES) for t in types):
-        types = [None if t == "schedule_receipts_disbursements" else t for t in types]
+        types = ["detail_schedule" if t == "schedule_receipts_disbursements" else t for t in types]
+    # Detail schedules (line items) anywhere in the report
+    types = [t or classify_detail(lines, full) for t, (lines, full, _) in zip(types, pages)]
 
     keep, kept_types = [], []
     i = 0
@@ -283,11 +325,12 @@ def select_pages(pages):
         kept_types.append(t)
         # Continuation pages: same title again, or "(continued)" with numbers and no other title.
         label = exhibit_label(pages[i][0])
+        excl = DETAIL_EXCLUDE_RE if t.startswith("detail_") else EXCLUDE_RE
         untitled = 0
         j = i + 1
         while j < len(pages) and j - i <= MAX_CONTINUATIONS:
             lines, full, src = pages[j]
-            if types[j] or EXCLUDE_RE.search(" ".join(lines[:20])):
+            if types[j] or excl.search(" ".join(lines[:20])):
                 break  # a titled page is handled by the outer loop
             lab_j = exhibit_label(lines)
             head8 = " ".join(lines[:8])
@@ -317,27 +360,40 @@ def select_pages(pages):
             break
         i = j
 
-    heads = " ".join(" ".join(pages[p][0][:20]) for p in keep)
+    # Cap the detail pages (they're extra cost for extraction); basic statements always stay.
+    detail_idx = [n for n, t in enumerate(kept_types) if t.startswith("detail_")]
+    truncated = len(detail_idx) > MAX_DETAIL_PAGES
+    if truncated:
+        drop = set(detail_idx[MAX_DETAIL_PAGES:])
+        keep = [k for n, k in enumerate(keep) if n not in drop]
+        kept_types = [t for n, t in enumerate(kept_types) if n not in drop]
+    basic = [t for t in kept_types if not t.startswith("detail_")]
+
+    heads = " ".join(" ".join(pages[p][0][:20]) for p, t in zip(keep, kept_types) if not t.startswith("detail_"))
     if not keep:
         basis = ""
     elif MODIFIED_RE.search(heads):
         basis = "modified cash"
     elif any(has_type(t, ("revenues_expenditures", "proprietary_revenues_expenses", "cash_flows",
-                          "balance_sheet")) for t in kept_types) and not CASH_BASIS_RE.search(heads):
+                          "balance_sheet")) for t in basic) and not CASH_BASIS_RE.search(heads):
         basis = "GAAP"
     else:
         basis = "cash"
     n_ocr = sum(1 for _, _, src in pages if src == "ocr")
-    if not keep:
+    if not basic:
         flag = "no_statements_found" + ("; scanned, OCR found no titles" if n_ocr > len(pages) / 2 else "")
-    elif len(keep) > 25:
+    elif len(basic) > 25:
         flag = "many_pages"
-    elif not any(has_type(t, FLOW_TYPES | {"schedule_receipts_disbursements", "activities"}) for t in kept_types):
+    elif not any(has_type(t, FLOW_TYPES | {"schedule_receipts_disbursements", "activities"}) for t in basic):
         flag = "no_revenue_statement"
-    elif not any(has_type(t, ("net_position", "balance_sheet", "assets_fund_balances")) for t in kept_types):
+    elif not any(has_type(t, ("net_position", "balance_sheet", "assets_fund_balances")) for t in basic):
         flag = "no_balance_statement"
     else:
         flag = ""
+    if truncated:
+        flag = (flag + "; " if flag else "") + f"detail_truncated({len(detail_idx)})"
+    if basic and not any(t.startswith("detail_") for t in kept_types):
+        flag = (flag + "; " if flag else "") + "no_detail_schedules"
     if n_ocr:
         flag = (flag + "; " if flag else "") + f"ocr_pages={n_ocr}"
     return keep, kept_types, basis, flag

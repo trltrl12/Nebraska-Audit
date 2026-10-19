@@ -67,6 +67,15 @@ digits as printed. Never invent a number. If a value isn't shown, use `null` and
   "ending_cash": {"amount": 0, "source_page": 2},
   "ending_investments": null,
   "ending_fund_balance": null,
+  "detail": [
+    {"schedule": "Budgetary Comparison Schedule - General Fund", "fund": "General", "department": "Police",
+     "section": "expenditure", "category": "public safety", "detail_category": "salaries and wages",
+     "original_label": "Salaries", "amount": 0, "budget_final": 0, "source_page": 9}
+  ],
+  "detail_totals": [
+    {"schedule": "Budgetary Comparison Schedule - General Fund", "fund": "General", "section": "expenditure",
+     "amount": 0, "source_page": 9}
+  ],
   "notes": "Anything ambiguous: which column was used, combined lines, unreadable digits, etc."
 }
 ```
@@ -128,6 +137,41 @@ digits as printed. Never invent a number. If a value isn't shown, use `null` and
     absences due soon), `due to other governments`, `unearned revenue`, `debt - due within one
     year`, `debt - due in more than one year`, `net pension/OPEB liability`, `other liabilities`.
     If debt isn't split by due date, use `debt - due in more than one year` and note it.
+
+- **detail** (line items from the supplementary schedules, which are the pages after the basic
+  statements: budgetary comparison / budget-and-actual schedules, departmental schedules, combining
+  schedules, and schedules of receipts and disbursements by fund). This is where the real revenue
+  sources and spending detail are, so capture every line:
+  - One item per printed revenue or expenditure line. Use the **Actual** column for `amount`, and
+    put the final budget in `budget_final` if shown (else null). Skip variance columns.
+  - `schedule` = the schedule's title (short), `fund` = the fund it covers ("General", "Street",
+    "Water"…), `department` = the department/function heading the line sits under ("Police",
+    "Streets", "Parks", "Administration"…), or null if there are no departments.
+  - `section`: `revenue`, `expenditure`, or `other financing` (transfers, debt proceeds, sale of
+    assets shown below the expenditures).
+  - `category` is the high-level receipt or disbursement category from the lists below, and for
+    expenditures it is the *function* (police salaries → `public safety`). `detail_category` is the
+    fine category below; for expenditures it is the *object* (police salaries → `salaries and wages`).
+    `other financing` lines need no category.
+  - Don't include subtotal or total lines as items. Record each schedule's printed totals in
+    `detail_totals`, once per fund and section ("Total Revenues", "Total Expenditures"); validation
+    checks that the items add up to them.
+  - **No double counting:** if the same fund's lines appear on two schedules (e.g. a budget
+    schedule and a departmental schedule for the General Fund), record only the more detailed one
+    and say so in `notes`. For a combining schedule with many fund columns, record per fund for up
+    to 6 funds; with more, use its Total column with fund = "Nonmajor funds (combined)".
+  - The basic-statement `receipts` / `disbursements` lists stay as they are. `detail` is extra
+    detail, not a replacement.
+  - If the trimmed PDF has no detail schedules, use `"detail": []` and `"detail_totals": []`.
+- Detailed revenue categories (`detail_category` for revenue; use exactly these strings):
+  `property tax`, `sales tax`, `motor vehicle tax`, `occupation/franchise tax`, `lodging tax`, `inheritance tax`, `other local taxes`, `highway allocation`, `motor vehicle pro-rate`, `municipal equalization`, `homestead/tax credits`, `state school aid (TEEOSA)`, `other state aid`, `county/other local governments`, `federal grants`, `water charges`, `sewer charges`, `electric charges`, `gas charges`, `refuse/sanitation charges`, `other utility charges`, `licenses and permits`, `fines and forfeitures`, `fees of office`, `rentals`, `recreation/pool/park fees`, `cemetery fees`, `tuition and fees`, `school lunch sales`, `ambulance/rescue fees`, `other charges for services`, `investment income`, `donations/contributions`, `reimbursements/refunds`, `sale of assets`, `miscellaneous revenue`.
+- Detailed expenditure categories (`detail_category` for expenditure; use exactly these strings):
+  `salaries and wages`, `employee benefits and payroll taxes`, `professional/contract services`, `supplies and materials`, `utilities (power, gas, phone)`, `fuel`, `repairs and maintenance`, `insurance`, `rent/leases`, `dues, training and travel`, `printing, publishing and postage`, `grants/payments to other entities`, `law enforcement contract`, `equipment purchases`, `construction/infrastructure`, `land and buildings`, `debt principal`, `debt interest and fees`, `tax refunds/treasurer fees`, `miscellaneous expenditure`.
+  Examples: officer/clerk/teacher pay → `salaries and wages`; FICA, retirement, health insurance →
+  `employee benefits and payroll taxes`; legal, audit, engineering, contract labor →
+  `professional/contract services`; street lighting/electricity → `utilities (power, gas, phone)`;
+  sheriff contract → `law enforcement contract`; payments to library/fire boards → `grants/payments
+  to other entities`.
 
 ### Receipt categories (use exactly these strings)
 `property tax`, `sales tax`, `other taxes` (motor vehicle, occupation, lodging, franchise,

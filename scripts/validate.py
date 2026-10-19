@@ -7,12 +7,15 @@ Checks per report:
   proprietary - (GAAP) beginning cash + four activity totals = ending cash
   balance     - balance-sheet lines sum to stated totals; assets + deferred outflows =
                 liabilities + deferred inflows + fund balance/net position
+  detail      - detail line items use known categories, and per fund/schedule/section they sum
+                to the totals printed on the schedule (detail_totals)
 """
 import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from common import (ASSET_CATEGORIES, BS_SECTIONS, LIABILITY_CATEGORIES, balance_sheet_check,  # noqa: E402
+from common import (DETAIL_EXPENSE_CATEGORIES, DETAIL_REVENUE_CATEGORIES, DETAIL_SECTIONS,  # noqa: E402
+                    ASSET_CATEGORIES, BS_SECTIONS, LIABILITY_CATEGORIES, balance_sheet_check,
                     DISBURSEMENT_CATEGORIES, FLAGGED, PROPRIETARY_FIELDS,  # noqa: E402
                     RECEIPT_CATEGORIES, amt, load_reports, page, reconcile,
                     reconcile_proprietary, sum_items, tol, write_csv)
@@ -129,6 +132,35 @@ def check(stem, d):
         elif not bc["balances"]:
             f("balance", "assets + deferred outflows != liabilities + deferred inflows + equity",
               expected=bc["right"], actual=bc["left"], pages=pages_of(bs, list(BS_SECTIONS)))
+    # Detail schedules (line items)
+    detail = d.get("detail") or []
+    fine = {"revenue": DETAIL_REVENUE_CATEGORIES, "expenditure": DETAIL_EXPENSE_CATEGORIES}
+    sums = {}
+    for it in detail:
+        sec = it.get("section")
+        lab = it.get("original_label")
+        if sec not in DETAIL_SECTIONS:
+            f("schema", f"detail: section must be one of {DETAIL_SECTIONS}, got {sec!r} ({lab!r})")
+            continue
+        if sec in fine and it.get("detail_category") not in fine[sec]:
+            f("schema", f"detail: unknown {sec} detail_category {it.get('detail_category')!r} ({lab!r})",
+              pages=str(it.get("source_page", "")))
+        if sec == "revenue" and it.get("category") not in RECEIPT_CATEGORIES:
+            f("schema", f"detail: unknown revenue category {it.get('category')!r} ({lab!r})")
+        if sec == "expenditure" and it.get("category") not in DISBURSEMENT_CATEGORIES:
+            f("schema", f"detail: unknown expenditure category {it.get('category')!r} ({lab!r})")
+        if it.get("source_page") in (None, "") or it.get("amount") is None:
+            f("schema", f"detail: missing amount or source_page for {lab!r}")
+        key = (it.get("fund") or "", it.get("schedule") or "", sec)
+        sums[key] = sums.get(key, 0.0) + float(it.get("amount") or 0)
+    for tot in d.get("detail_totals") or []:
+        key = (tot.get("fund") or "", tot.get("schedule") or "", tot.get("section"))
+        stated = amt(tot)
+        if stated is None or key not in sums:
+            continue
+        if abs(sums[key] - stated) > tol(stated):
+            f("detail", f"detail lines != printed total for {key[2]} / {key[0] or 'all funds'} / {key[1]}",
+              expected=float(stated), actual=round(sums[key], 2), pages=str(tot.get("source_page", "")))
     return flags
 
 

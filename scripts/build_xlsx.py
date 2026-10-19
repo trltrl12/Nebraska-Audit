@@ -4,6 +4,12 @@ Sheets:
   Summary          one row per report: balances, totals, reconciliation, flag status
   Line Items       every receipt/disbursement line as printed (original label, category,
                    amount, trimmed and original page)
+  Detail Lines     every line item from the supplementary schedules (budget-to-actual,
+                   departmental, combining, fund schedules): fund, department, category,
+                   detailed category, actual and final budget
+  Revenue by Source       one row per report, one column per detailed revenue category
+  Spending by Type        one row per report, one column per detailed expenditure category
+  Spending by Department  one row per report and department/function, with its share of spending
   Receipts         one row per report, one column per receipt category
   Disbursements    one row per report, one column per disbursement category
   Financing        transfers, debt proceeds, other financing, adjustments, investments
@@ -23,7 +29,8 @@ from openpyxl.styles import Alignment, Font, PatternFill
 from openpyxl.utils import get_column_letter
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from common import (BS_SECTIONS, DISBURSEMENT_CATEGORIES, FILE_LIST, FLAGGED, MANIFEST, OUTPUT, PROGRESS_CSV,  # noqa: E402
+from common import (DETAIL_EXPENSE_CATEGORIES, DETAIL_REVENUE_CATEGORIES,  # noqa: E402
+                    BS_SECTIONS, DISBURSEMENT_CATEGORIES, FILE_LIST, FLAGGED, MANIFEST, OUTPUT, PROGRESS_CSV,  # noqa: E402
                     PROPRIETARY_FIELDS, RECEIPT_CATEGORIES, SUMMARY_CSV, amt, load_reports, page,
                     read_csv)
 
@@ -115,6 +122,49 @@ def main():
                                      it.get("source_page"), orig(s, it.get("source_page"))])
     add_sheet(wb, "Line Items", ident + ["section", "category", "original_label", "amount", "source_page",
                                          "source_page_original"], lines, ["amount"])
+
+    # ---- detail schedules
+    det = []
+    for s, d in reports:
+        base = [d.get("entity_name"), d.get("entity_type"), s, d.get("fiscal_year_end"), d.get("basis"), url(s)]
+        for it in d.get("detail") or []:
+            det.append((s, d, it, base + [it.get("schedule"), it.get("fund"), it.get("department"), it.get("section"),
+                                          it.get("category"), it.get("detail_category"), it.get("original_label"),
+                                          it.get("amount"), it.get("budget_final"), it.get("source_page"),
+                                          orig(s, it.get("source_page"))]))
+    add_sheet(wb, "Detail Lines", ident + ["schedule", "fund", "department", "section", "category",
+                                           "detail_category", "original_label", "amount", "budget_final",
+                                           "source_page", "source_page_original"],
+              [r for *_, r in det], ["amount", "budget_final"])
+
+    for title, sec, cats in (("Revenue by Source", "revenue", DETAIL_REVENUE_CATEGORIES),
+                             ("Spending by Type", "expenditure", DETAIL_EXPENSE_CATEGORIES)):
+        rows = []
+        for s, d in reports:
+            tot = dict.fromkeys(cats, 0.0)
+            for it in d.get("detail") or []:
+                if it.get("section") == sec and it.get("detail_category") in tot:
+                    tot[it["detail_category"]] += float(it.get("amount") or 0)
+            if any(tot.values()):
+                rows.append([d.get("entity_name"), d.get("entity_type"), s, d.get("fiscal_year_end"), d.get("basis"),
+                             url(s)] + [round(tot[c], 2) for c in cats] + [round(sum(tot.values()), 2)])
+        add_sheet(wb, title, ident + cats + ["total"], rows, cats + ["total"])
+
+    rows = []
+    for s, d in reports:
+        by = {}
+        for it in d.get("detail") or []:
+            if it.get("section") == "expenditure":
+                k = (it.get("fund") or "", it.get("department") or it.get("category") or "")
+                by[k] = by.get(k, 0.0) + float(it.get("amount") or 0)
+        total = sum(by.values()) or 1
+        for (fund, dept), v in sorted(by.items(), key=lambda kv: -kv[1]):
+            rows.append([d.get("entity_name"), d.get("entity_type"), s, d.get("fiscal_year_end"), d.get("basis"),
+                         url(s), fund, dept, round(v, 2), round(v / total, 4)])
+    ws = add_sheet(wb, "Spending by Department", ident + ["fund", "department", "amount", "share_of_spending"],
+                   rows, ["amount"])
+    for (cell,) in ws.iter_rows(min_row=2, min_col=len(ident) + 4, max_col=len(ident) + 4):
+        cell.number_format = "0.0%"
 
     for title, key, cats in (("Receipts", "receipts", RECEIPT_CATEGORIES),
                              ("Disbursements", "disbursements", DISBURSEMENT_CATEGORIES)):
