@@ -1,18 +1,24 @@
 {
   "stem": "Cairo_FY2025",
-  "values_checked": 169,
+  "values_checked": 178,
   "issues": [
-    {"severity": "warning", "path": "detail[19].category", "page": 14,
-     "extracted": "charges for services/fees / other charges for services", "on_page": "Rural fire reimbursement 9,994, printed under 'Intergovernmental revenue:'",
-     "issue": "the schedule prints it under Intergovernmental revenue, and the fund statement's General Intergovernmental 43,218 = 33,224 + 9,994 (p5). Intergovernmental/state aid (detail: county/other local governments) matches the report. Charges for services is defensible under the 'rural fire contracts' rule, but it doesn't match the basic statement."},
+    {"severity": "warning", "path": "detail[94].category", "page": 13,
+     "extracted": "economic development", "on_page": "Sales tax projects 69,116 (p5: Sales Tax Fund capital outlay 60,616 + community development 8,500)",
+     "issue": "the function-mix rule says use the dominant function; per p5, 60,616 of 69,116 is capital outlay, so capital outlay fits better than economic development"},
+    {"severity": "warning", "path": "detail[41].category", "page": 14,
+     "extracted": "general government", "on_page": "Capital outlay 5,492 (General department)",
+     "issue": "p5 reports this 5,492 as General Fund Capital outlay, separate from General government 261,920; the function category could be capital outlay"},
+    {"severity": "warning", "path": "detail[19].category", "page": 15,
+     "extracted": "intergovernmental/state aid / county/other local governments", "on_page": "Rural fire reimbursement 9,994",
+     "issue": "the extractor rules list rural fire contracts under charges for services/fees; the report itself puts it under Intergovernmental (p5 General 43,218 = 33,224 + 9,994), so it's defensible"},
     {"severity": "warning", "path": "ending_cash", "page": 5,
-     "extracted": 1519921, "on_page": "Total fund balances 1,519,921; total assets (cash 1,508,069 + county treasurer 14,850) 1,522,919 on p4",
-     "issue": "ending_cash holds the fund balance, not cash; the 2,998 payroll withholding liability makes the difference. It is consistent with beginning_cash (also a fund balance) and the roll-forward, and the notes mention it."},
-    {"severity": "warning", "path": "transfers_in", "page": 5,
-     "extracted": 11327, "on_page": "Transfers from (to) other funds: General (3,350), Street 21,303, Debt Service (6,626), Total 11,327",
-     "issue": "recorded as the net Total column figure, with transfers_out null; the gross amounts are 21,303 in and 9,976 out. The net transfer from the business-type funds (-11,327, p7) matches."},
-    {"severity": "warning", "path": "detail[72].outside_printed_total", "page": 13,
-     "extracted": null, "on_page": "Interfund transfers 1,781 printed below Total expenditures",
-     "issue": "the General Fund department transfers (detail[72] 1,781 and detail[73] -5,131) are printed outside the schedule totals but lack outside_printed_total: true. The Street Fund transfer (detail[85]) has it."}
+     "extracted": 1519921, "on_page": "Fund balances - September 30, 2025 1,519,921; balance sheet p4 cash 1,508,069 + county treasurer cash 14,850 = 1,522,919",
+     "issue": "beginning_cash/ending_cash are governmental fund balances (net of 2,998 payroll withholding liability), not cash; the roll-forward holds and the notes disclose it"},
+    {"severity": "warning", "path": "balance_sheet.liabilities[3].category", "page": 1,
+     "extracted": "other liabilities", "on_page": "Sales tax payable 1,158",
+     "issue": "sales tax collected and owed to the state could be due to other governments"},
+    {"severity": "warning", "path": "disbursements[17].category", "page": 7,
+     "extracted": "economic development", "on_page": "Business park incentive loan forgiveness (2,920)",
+     "issue": "the category is a guess (flagged review); it is a nonoperating item in the Sewer Fund"}
   ]
 }

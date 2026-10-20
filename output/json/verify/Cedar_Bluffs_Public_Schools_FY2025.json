@@ -1,86 +1,24 @@
 {
   "stem": "Cedar_Bluffs_Public_Schools_FY2025",
-  "values_checked": 240,
+  "values_checked": 190,
   "issues": [
-    {
-      "severity": "warning",
-      "path": "detail[130].detail_category",
-      "page": 21,
-      "extracted": "professional/contract services",
-      "on_page": "Activities Fund - Purchased services 57,949",
-      "issue": "[fixed: student activities / student activity spending] The rules say school activity funds use expense detail_category 'student activity spending'."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[131].detail_category",
-      "page": 21,
-      "extracted": "supplies and materials",
-      "on_page": "Activities Fund - Supplies and materials 119,500",
-      "issue": "[fixed: student activities / student activity spending] The rules say school activity funds use expense detail_category 'student activity spending'."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[132].detail_category",
-      "page": 21,
-      "extracted": "miscellaneous expenditure",
-      "on_page": "Activities Fund - Other expenses 118,567",
-      "issue": "[fixed: student activities / student activity spending] Last-resort category used where a specific one applies: activity fund spending is 'student activity spending'."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[126].detail_category",
-      "page": 20,
-      "extracted": "professional/contract services",
-      "on_page": "Student Fee Fund - Purchased services 583",
-      "issue": "Category is student activities (receipts use 'student activity receipts'), so detail_category could be 'student activity spending' for consistency."
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[1].category",
-      "page": 4,
-      "extracted": "support services",
-      "on_page": "Student support services 613,646 = General Fund 317,047 + Other Governmental 296,599 (Activities 296,016 + Student Fee 583)",
-      "issue": "The line mixes General Fund student support with student activity fund spending (48%). Support services is dominant, but notes don't mention the mix as the rules require."
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[8].category",
-      "page": 4,
-      "extracted": "other",
-      "on_page": "Community service operations 55,564",
-      "issue": "Last-resort category. No exact match exists; culture/recreation or support services could arguably apply. Review flag already set."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[77].category",
-      "page": 12,
-      "extracted": "other",
-      "on_page": "Community service operations 55,564",
-      "issue": "Same judgment call as disbursements[8]."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[8].category",
-      "page": 4,
-      "extracted": "charges for services/fees",
-      "on_page": "Other local receipts 3,820 (GF tuition 36 + Student Fee activities receipts 3,784)",
-      "issue": "Mixed line. The category is defensible and a review flag is set."
-    },
-    {
-      "severity": "warning",
-      "path": "transfers_in / transfers_out",
-      "page": 5,
-      "extracted": null,
-      "on_page": "Transfers: General Fund (200,000), Other Governmental 200,000, Total blank",
-      "issue": "The Total column prints no transfers, so null is defensible, but fund-level transfers of 200,000 in and out exist. The identity holds either way."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[18].original_label",
-      "page": 9,
-      "extracted": "Other state categorical programs",
-      "on_page": "Other state categorial programs",
-      "issue": "Printed label (code 3599) has the typo 'categorial'. Extractor normalised the spelling. Same for detail[80] (p12)."
-    }
+    {"severity": "error", "path": "detail[132].detail_category", "page": 23,
+     "extracted": "miscellaneous expenditure", "on_page": "Activities Fund - Other expenses 118,567",
+     "issue": "Activities Fund spending: the rules say school activity funds use expense detail 'student activity spending', and that specific category fits. 'miscellaneous expenditure' is the last-resort category."},
+    {"severity": "warning", "path": "detail[130].detail_category", "page": 23,
+     "extracted": "professional/contract services", "on_page": "Activities Fund - Purchased services 57,949",
+     "issue": "The rules say activity fund expenses use 'student activity spending'. The object label is printed, so this is defensible, but it is inconsistent with the rule."},
+    {"severity": "warning", "path": "detail[131].detail_category", "page": 23,
+     "extracted": "supplies and materials", "on_page": "Activities Fund - Supplies and materials 119,500",
+     "issue": "The rules say activity fund expenses use 'student activity spending'. The object label is printed, so this is defensible, but it is inconsistent with the rule."},
+    {"severity": "warning", "path": "detail[18].original_label", "page": 11,
+     "extracted": "Other state categorical programs", "on_page": "Other state categorial programs",
+     "issue": "Label is printed with the typo 'categorial' (line 3599). The extractor corrected the spelling."},
+    {"severity": "warning", "path": "detail[79].original_label", "page": 14,
+     "extracted": "Other state categorical programs", "on_page": "Other state categorial programs",
+     "issue": "Label is printed with the typo 'categorial' (line 3599). The extractor corrected the spelling."},
+    {"severity": "warning", "path": "receipts[8].category", "page": 4,
+     "extracted": "charges for services/fees", "on_page": "Other local receipts 3,820",
+     "issue": "Mixed line: 36 is SPED tuition (GF p11) and 3,784 is Student Fee Fund activities receipts (p22). The category is defensible and the line is already marked review."}
   ]
 }
