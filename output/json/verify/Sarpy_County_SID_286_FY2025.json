@@ -1,0 +1,18 @@
+{
+  "stem": "Sarpy_County_SID_286_FY2025",
+  "values_checked": 102,
+  "issues": [
+    {"severity": "warning", "path": "receipts[1].original_label", "page": 2,
+     "extracted": "State motor vehicle tax allocation 1,087 (p4)", "on_page": "p2 Statement of Activities labels 1,087 'Real estate tax credit' and 32,627 'State motor vehicle tax allocation'",
+     "issue": "The report's own statements contradict each other on the labels of 1,087 and 32,627. Extraction follows p4 and the p5-p6 budget schedules (528+559=1,087 motor vehicle), which looks right, but the p2 label swap is a report inconsistency worth noting."},
+    {"severity": "warning", "path": "receipts[1].category", "page": 4,
+     "extracted": "intergovernmental/state aid", "on_page": "State motor vehicle tax allocation 1,087",
+     "issue": "Could be motor vehicle tax rather than pro-rate state aid; label is ambiguous. Same for detail[2] and detail[19]."},
+    {"severity": "warning", "path": "disbursements[3].category", "page": 4,
+     "extracted": "utilities", "on_page": "Electrical fees 20,584",
+     "issue": "For an SID, electrical fees are likely street lighting, which the rules place under streets/highways. Judgment call."},
+    {"severity": "warning", "path": "balance_sheet.liabilities[1].category", "page": 1,
+     "extracted": "other liabilities", "on_page": "Warrants issued not registered 36,392",
+     "issue": "Could be classed as short-term debt (debt - due within one year). Judgment call."}
+  ]
+}
