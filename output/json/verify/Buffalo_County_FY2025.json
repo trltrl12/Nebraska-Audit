@@ -1,102 +1,46 @@
 {
   "stem": "Buffalo_County_FY2025",
-  "values_checked": 268,
+  "values_checked": 172,
   "issues": [
-    {
-      "severity": "warning",
-      "path": "detail[50].category",
-      "page": 6,
-      "extracted": "other",
-      "on_page": "General government > Miscellaneous > Personal services 3,353,570",
-      "issue": "[fixed: function now general government per p4/p6] The Miscellaneous department is printed under the General government heading and is part of 'Total general governmenat' 22,393,878 (p6). Category should be general government."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[51].category",
-      "page": 6,
-      "extracted": "other",
-      "on_page": "General government > Miscellaneous > Operating expenses 5,446,116",
-      "issue": "[fixed: function now general government per p4/p6] Printed under the General government heading (p6). Category should be general government."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[52].category",
-      "page": 6,
-      "extracted": "other",
-      "on_page": "General government > Miscellaneous > Supplies/materials 563,355",
-      "issue": "[fixed: function now general government per p4/p6] Printed under the General government heading (p6). Category should be general government."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[53].category",
-      "page": 6,
-      "extracted": "other",
-      "on_page": "General government > Miscellaneous > Equipment rental 105,275",
-      "issue": "[fixed: function now general government per p4/p6] Printed under the General government heading (p6). Category should be general government."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[54].category",
-      "page": 6,
-      "extracted": "other",
-      "on_page": "General government > Miscellaneous > Capital outlay 1,568",
-      "issue": "[fixed: function now general government per p4/p6] Printed under the General government heading (p6). Category should be general government."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[94].category",
-      "page": 4,
-      "extracted": "other",
-      "on_page": "Inheritance Fund disbursements 2,272,034 in the General Government row (p4)",
-      "issue": "[fixed: function now general government per p4/p6] The budget schedule (p10) says only 'Miscellaneous', but the fund statement (p4) puts this exact amount in the General Government row of the Inheritance Fund column. Category should be general government."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[98].category",
-      "page": 4,
-      "extracted": "health/welfare",
-      "on_page": "Health Reserve Fund disbursements 4,425,880 in the General Government row (p4)",
-      "issue": "[fixed: function now general government per p4/p6] The fund statement (p4) prints Health Reserve spending as General Government, not Public Health (the Public Health row is '-' for this fund). Category should be general government. Its detail_category 'salaries and wages' is also doubtful: a health reserve fund's 'Personal services' is most likely employee health benefits (employee benefits and payroll taxes)."
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[9].category",
-      "page": 4,
-      "extracted": "other",
-      "on_page": "Miscellaneous General 12,067,255 (General 9,898,931 + ARPA 2,168,324)",
-      "issue": "Mixed line: 82% is the General Fund Miscellaneous department, which the budget schedule (p6) prints under General government, so the dominant category would be general government plus review. The review note is also wrong: it says the line includes 'inheritance 2,272,034', but that amount is in the General Government row (p4), not Miscellaneous General."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[6].category",
-      "page": 4,
-      "extracted": "other",
-      "on_page": "Other 12,477,185 (General 5,584,319; Road 180,031; Inheritance 2,242,946; Health Reserve 4,119,298; Other Gov 350,591)",
-      "issue": "24.7% of governmental receipts sits in 'other'. The Inheritance Fund column (2,242,946) is shown as inheritance tax on p2 ('Inheritance 2,242,946') and p10, and the Road column 180,031 matches 'Sale of surplus property 180,031' (p2). These could be split out by fund column."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[84].detail_category",
-      "page": 9,
-      "extracted": "highway allocation",
-      "on_page": "State 5,087,588",
-      "issue": "The Road Fund line is printed only as 'State'. Highway allocation is likely but is an assumption, and no review flag was added."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[85].detail_category",
-      "page": 9,
-      "extracted": "miscellaneous revenue",
-      "on_page": "Local 180,031",
-      "issue": "The amount equals 'Sale of surplus property 180,031' (p2) and the Highway Superintendent receipts 180,031 (p16), so sale of assets is likely. Already flagged for review."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[100].category",
-      "page": 14,
-      "extracted": "property tax 3,301,155",
-      "on_page": "Property tax 3,301,155 (incl. Visitors Promotion 900 893,932 and Visitors Promotion Improvements 995 893,932)",
-      "issue": "The Visitors Promotion funds are most likely lodging tax, while the top-level receipts split books lodging 1,791,364 separately, so detail and receipts disagree. Kept as printed, with a review flag."
-    }
+    {"severity": "warning", "path": "receipts[6].category", "page": 4,
+     "extracted": "other",
+     "on_page": "Other 12,477,185 (Inheritance Fund column 2,242,946 = Inheritance 2,242,946 on Statement of Activities p2; Health Reserve 4,119,298; General 5,584,319; Road 180,031; Other Governmental 350,591)",
+     "issue": "A quarter of governmental receipts sits in 'other'. The Inheritance Fund column of this same line is identifiable as inheritance tax (2,242,946, p2), so that part could be separated or at least named. The rest is undescribed. A review flag is already set."},
+    {"severity": "warning", "path": "disbursements[9].category", "page": 4,
+     "extracted": "general government",
+     "on_page": "Miscellaneous General 12,067,255",
+     "issue": "Mixed line: General Fund Miscellaneous department 9,898,931 (which includes Debt servicing 429,047, p6) plus ARPA 2,168,324. Calling it general government is defensible; a review flag is already set."},
+    {"severity": "warning", "path": "detail[57].category", "page": 6,
+     "extracted": "debt service principal / debt principal",
+     "on_page": "Debt servicing 429,047",
+     "issue": "Principal and interest not separated, and the whole amount is recorded as principal. A review flag is already set."},
+    {"severity": "warning", "path": "detail[87].detail_category", "page": 9,
+     "extracted": "other state aid",
+     "on_page": "Road Fund State 5,087,588",
+     "issue": "Probably highway allocation; the page does not say so. A review flag is already set."},
+    {"severity": "warning", "path": "detail[88].category", "page": 9,
+     "extracted": "other / miscellaneous revenue",
+     "on_page": "Road Fund Local 180,031",
+     "issue": "The amount equals Sale of surplus property 180,031 on the Statement of Activities (p2), so 'sale of assets' looks more accurate than other/miscellaneous. The match is by amount only."},
+    {"severity": "warning", "path": "detail[100].category", "page": 11,
+     "extracted": "other / miscellaneous revenue",
+     "on_page": "Health Reserve Fund Local 4,119,298",
+     "issue": "Large 'other' line. The Statement of Activities (p2) shows the same 4,119,298 as Public health operating grants and contributions, so it is probably health-plan contributions (charges, reimbursements or contributions) rather than miscellaneous."},
+    {"severity": "warning", "path": "detail[101].detail_category", "page": 11,
+     "extracted": "salaries and wages",
+     "on_page": "Health Reserve Fund Personal services 4,425,880",
+     "issue": "Spending from a health reserve (self-insurance) fund is more likely employee benefits than wages. A review flag is already set."},
+    {"severity": "warning", "path": "detail[103].category", "page": 14,
+     "extracted": "property tax",
+     "on_page": "Property tax 3,301,155 (Totals column; includes Visitors Promotion 893,932 and Visitors Promotion Improvements 893,932)",
+     "issue": "The label is as printed, but about 1.79M of this comes from the visitors promotion funds and is presumably lodging tax (Lodging 1,791,364 on p2). Recording it as property tax overstates property tax in the detail."},
+    {"severity": "warning", "path": "detail[1].category", "page": 5,
+     "extracted": "other / miscellaneous revenue",
+     "on_page": "General Fund Local 5,584,319",
+     "issue": "Broad 'Local' group in other/miscellaneous with no breakdown printed (a review flag is set). Same applies to detail[106] (Nonmajor Local 350,591, which includes Keno Lottery 69,535 and 911 surcharges 204,986 per p14)."},
+    {"severity": "warning", "path": "detail[6].detail_category", "page": 5,
+     "extracted": "not itemized",
+     "on_page": "Operating expenses (every department)",
+     "issue": "'Operating expenses' is a catch-all object line inside a department breakdown, not a department total with no object detail. 'not itemized' is a judgment call that applies to every Operating expenses line in detail."}
   ]
 }
