@@ -1,15 +1,9 @@
 {
   "stem": "Adams_FY2025",
-  "values_checked": 137,
+  "values_checked": 140,
   "issues": [
-    {"severity": "warning", "path": "receipts[5]", "page": 11,
-     "extracted": "Intergovernmental revenues 216,059 as intergovernmental/state aid (review: broad group)", "on_page": "Schedule 2 Totals breaks this line into Highway allocation 92,156, Motor vehicle fees 6,127, Homestead allocation 9,931, Other 107,845",
-     "issue": "The categories don't match. detail[43] (Street, Motor vehicle fees 6,127) is under motor vehicle tax, but the same money stays in state aid in receipts. The report prints the breakdown, so this line could be split the way Taxes was. Kept as a warning because the line has a review flag and splitting non-tax lines is optional."},
-    {"severity": "warning", "path": "detail[8].detail_category", "page": 2,
-     "extracted": "other charges for services", "on_page": "General Fund Charges for services 83,807 (p10); Exhibit B (p2) shows Sanitation Charges for Services 83,807",
-     "issue": "Exhibit B ties this line to Sanitation, so refuse/sanitation charges fits better than other charges for services."},
-    {"severity": "warning", "path": "reported_totals.business-type", "page": 8,
-     "extracted": "receipts 233,426 / disbursements 404,952 (operating totals only)", "on_page": "Exhibit H prints separate operating totals and Total non-operating receipts (disbursements) 138,702 (net, includes transfers 185,719); Exhibit B p2 Total business-type activities expenses 451,969",
-     "issue": "Exhibit H has no single total, and the rules say to add operating and nonoperating totals. The extractor used the operating totals only and marked Interest/fees expense 47,017 as outside_printed_total. This is defensible because the non-operating total is a net figure that includes transfers, and notes explain it."}
+    {"severity": "error", "path": "detail[65].amount", "page": 14, "extracted": 419145, "on_page": "Receipts - Proprietary Funds 419,145 (= operating receipts 233,426 + Transfers from other funds 185,719, p8)", "issue": "Detail line recorded in section revenue includes the 185,719 transfer from other funds; a transfer is recorded as revenue. The transfer part should be split out as an other financing line (split_from naming p14 line and p8), leaving 233,426 as revenue."},
+    {"severity": "warning", "path": "receipts[5].category", "page": 6, "extracted": "intergovernmental/state aid (216,059)", "on_page": "Intergovernmental revenues 216,059; p11 breakdown: Highway allocation 92,156, Motor vehicle fees 6,127, Homestead allocation 9,931, Other 107,845", "issue": "The report prints the breakdown of this line (p10-11), so the 6,127 Motor vehicle fees could be split out as motor vehicle tax; as entered, the receipts list and detail[48] categorize the same 6,127 differently."},
+    {"severity": "warning", "path": "disbursements[7]", "page": 6, "extracted": "Bond issue costs / Bond principal payments / Bond interest payments as disbursements (outside_printed_total)", "on_page": "printed under Other financing sources (uses) on Exhibit E", "issue": "Debt payments and issue costs printed as other financing uses were entered as disbursements outside the printed total; defensible (identity reconciles), but the detail[] records the same lines as section other financing."}
   ]
 }
