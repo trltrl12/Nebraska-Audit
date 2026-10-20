@@ -2,23 +2,53 @@
   "stem": "Ewing_FY2025",
   "values_checked": 142,
   "issues": [
-    {"severity": "error", "path": "missing", "page": 10,
-     "extracted": null, "on_page": "Debt service - Principal: Actual 44,433, Budget 47,232",
-     "issue": "All-funds budget schedule debt service principal (business-type Water/Sewer loan principal, matches p9 principal payments 44,433) is not in detail, though the extractor recorded the other business-type lines (Sanitation, Wastewater, Water) from this schedule. The extractor rules say to record business-type debt service lines from the budget schedule."},
-    {"severity": "error", "path": "missing", "page": 10,
-     "extracted": null, "on_page": "Debt service - Interest: Actual 26,876, Budget 26,876",
-     "issue": "Business-type debt service interest line on the p10 budget schedule is not in detail (the extractor left it out, as with principal)."},
-    {"severity": "warning", "path": "detail", "page": 10,
-     "extracted": "no detail lines for Street Fund or Keno Fund", "on_page": "Streets and Highways: Actual 31,429, Budget 365,000",
-     "issue": "The fund-by-fund rule says budget schedule lines should be recorded for funds that have no more detailed schedule. Streets and Highways 31,429 is all Street Fund (p5) and could be recorded for it. Keno's 10,000 Community Development can't be pulled apart on p10."},
-    {"severity": "warning", "path": "notes", "page": 10,
-     "extracted": "Budget schedule p10 itself does not add up (e.g. fund balance)", "on_page": "Revenues 696,022 - expenditures 550,928 = 145,094; 1,266,062 + 145,094 = 1,411,156",
-     "issue": "The note is wrong: the p10 actual and budget columns both foot, and the fund balance rolls forward. The schedule is on a different (budgetary) basis, but it is internally consistent."},
-    {"severity": "warning", "path": "receipts[14].category", "page": 5,
-     "extracted": "other", "on_page": "Housing loan revenues 23,155",
-     "issue": "LB840 / housing rehabilitation loan repayments (p13 Loan revenues 14,627 + 8,528). No receipt category fits exactly. These may be principal repayments of loans the village made, not revenue. A person should confirm how to treat them (detail[63], detail[65] too)."},
-    {"severity": "warning", "path": "receipts[9].category", "page": 5,
-     "extracted": "other taxes", "on_page": "Public power district lease payments 36,415",
-     "issue": "PPD lease payments treated as PPD in-lieu tax. Defensible, but it's a judgment call (could be seen as rentals / charges for services)."}
+    {
+      "severity": "error",
+      "path": "missing",
+      "page": 10,
+      "extracted": null,
+      "on_page": "Debt service - Principal: Actual 44,433, Budget 47,232",
+      "issue": "[fixed] All-funds budget schedule debt service principal (business-type Water/Sewer loan principal, matches p9 principal payments 44,433) is not in detail, though the extractor recorded the other business-type lines (Sanitation, Wastewater, Water) from this schedule. The extractor rules say to record business-type debt service lines from the budget schedule."
+    },
+    {
+      "severity": "error",
+      "path": "missing",
+      "page": 10,
+      "extracted": null,
+      "on_page": "Debt service - Interest: Actual 26,876, Budget 26,876",
+      "issue": "[fixed] Business-type debt service interest line on the p10 budget schedule is not in detail (the extractor left it out, as with principal)."
+    },
+    {
+      "severity": "warning",
+      "path": "detail",
+      "page": 10,
+      "extracted": "no detail lines for Street Fund or Keno Fund",
+      "on_page": "Streets and Highways: Actual 31,429, Budget 365,000",
+      "issue": "The fund-by-fund rule says budget schedule lines should be recorded for funds that have no more detailed schedule. Streets and Highways 31,429 is all Street Fund (p5) and could be recorded for it. Keno's 10,000 Community Development can't be pulled apart on p10."
+    },
+    {
+      "severity": "warning",
+      "path": "notes",
+      "page": 10,
+      "extracted": "Budget schedule p10 itself does not add up (e.g. fund balance)",
+      "on_page": "Revenues 696,022 - expenditures 550,928 = 145,094; 1,266,062 + 145,094 = 1,411,156",
+      "issue": "The note is wrong: the p10 actual and budget columns both foot, and the fund balance rolls forward. The schedule is on a different (budgetary) basis, but it is internally consistent."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[14].category",
+      "page": 5,
+      "extracted": "other",
+      "on_page": "Housing loan revenues 23,155",
+      "issue": "LB840 / housing rehabilitation loan repayments (p13 Loan revenues 14,627 + 8,528). No receipt category fits exactly. These may be principal repayments of loans the village made, not revenue. A person should confirm how to treat them (detail[63], detail[65] too)."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[9].category",
+      "page": 5,
+      "extracted": "other taxes",
+      "on_page": "Public power district lease payments 36,415",
+      "issue": "PPD lease payments treated as PPD in-lieu tax. Defensible, but it's a judgment call (could be seen as rentals / charges for services)."
+    }
   ]
 }
