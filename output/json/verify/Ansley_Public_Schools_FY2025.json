@@ -1,0 +1,33 @@
+{
+  "stem": "Ansley_Public_Schools_FY2025",
+  "values_checked": 222,
+  "issues": [
+    {"severity": "error", "path": "detail[40].amount", "page": 14,
+     "extracted": 339060, "on_page": "GF 2600 Operation and Maintenance of Buildings and Sites 339,060; p8 Adjustments column eliminates (36,000) of it; p9 Adjustments column Transfers In (101,000) = Depreciation 86,000 + Activities 15,000",
+     "issue": "Hidden transfer: 36,000 of this GF spending line is the General Fund's transfer to the Depreciation Fund (recorded as 'Transfers from General Fund' 86,000 in detail[52]). The same money is counted as both spending and a transfer. Should be split (split_from + review) into 303,060 expenditure and a -36,000 'other financing' item."},
+    {"severity": "error", "path": "detail[41].amount", "page": 14,
+     "extracted": 50000, "on_page": "GF 2650 Vehicle Acquisition and Maintenance 50,000; p8 Adjustments column (50,000), total column 0",
+     "issue": "Hidden transfer: the whole 50,000 is the rest of the 86,000 GF transfer to the Depreciation Fund (36,000 + 50,000 = 86,000 = Depreciation 'Transfers from General Fund', p15). Recorded as spending while detail[52] also records it as a transfer in. Should be an 'other financing' item of -50,000 (split_from + review), with 0 expenditure."},
+    {"severity": "error", "path": "missing", "page": 20,
+     "extracted": null, "on_page": "Schedule of Receipts, Disbursements, Transfers and Fund Balance - Activities Fund (p20-21): about 60 activity accounts, receipts 256,456, disbursements 250,296, transfers in (out) 15,000",
+     "issue": "Schedule left out. The extractor kept the 2-line Activities Fund budget schedule (p18) to avoid double counting, but the no-double-counting rule says to keep the MORE detailed schedule, and the per-account schedule is far more detailed. Totals agree, so no money is missing, but the account-level detail is not recorded."},
+    {"severity": "error", "path": "detail[16].category", "page": 12,
+     "extracted": "other / miscellaneous revenue", "on_page": "State Sources: 3990 Other (actual 0, budget 150,200)",
+     "issue": "The line is printed under State Sources, so intergovernmental/state aid (detail 'other state aid') fits; 'other' is a last resort. Actual amount is 0, so no dollar impact."},
+    {"severity": "warning", "path": "receipts[6].amount", "page": 7,
+     "extracted": 1184218, "on_page": "p7 GF column Property Tax Credit 1,112,803 / Other State Receipts 430,345; p12 GF schedule Property Tax Credit 1,122,803 (other state lines total 420,345)",
+     "issue": "The report itself has an offsetting 10,000 classification difference between the fund statement and the GF budget schedule (totals agree). It is only mentioned in notes, with no report_discrepancies entry. detail[12] uses the schedule figure 1,122,803."},
+    {"severity": "warning", "path": "receipts[10].category", "page": 7,
+     "extracted": "charges for services/fees", "on_page": "Other 253,009 (= Activities Fund 1790 Other Activity Income, p18)",
+     "issue": "Printed label is 'Other'. The source is identified (student activity receipts), so this category is defensible, but it is a judgment call."},
+    {"severity": "warning", "path": "disbursements[20].category", "page": 8,
+     "extracted": "support services", "on_page": "Other Support Services 314,067 = Depreciation 63,771 + Activities 250,296",
+     "issue": "Most of the line (250,296) is Activities Fund spending, so 'student activities' is the dominant category. Mixed line."},
+    {"severity": "warning", "path": "disbursements[23].category", "page": 9,
+     "extracted": "debt service principal", "on_page": "Debt Services 81,820",
+     "issue": "Principal and interest aren't split anywhere in the report. Recording it all as principal is an assumption (detail[69] does the same)."},
+    {"severity": "warning", "path": "detail[61].category", "page": 16,
+     "extracted": "support services", "on_page": "Special Building Fund 4700 Building Improvements 59,249",
+     "issue": "The function code is 4700 (facilities/capital), so 'capital outlay' may fit better. The statement folds it into Operation and Maintenance."}
+  ]
+}

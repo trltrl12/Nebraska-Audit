@@ -2,20 +2,45 @@
   "stem": "Arnold_FY2025",
   "values_checked": 140,
   "issues": [
-    {"severity": "error", "path": "receipts[8].category", "page": 4,
-     "extracted": "other", "on_page": "Other 36,529 (General 33,096 + Street 3,364 + Econ Dev 69)",
-     "issue": "The report prints what this line is made of (p10, p12, p14), and most of it is charges for services: camping fees 16,208, community center rentals 12,094, supply sales and service 2,156, messages 25 (30,483 of 36,529). The rest is franchise fees 1,621, permits 446, street interest 913 and misc 3,066. The rule for mixed lines is the dominant category ('charges for services/fees') plus a review note naming the mix, not 'other'."},
-    {"severity": "warning", "path": "receipts[5].category", "page": 4,
-     "extracted": "other", "on_page": "Loan repayments 6,540",
-     "issue": "Repayments of economic development loans. The Statement of Activities (p2) counts them as Community Development charges for services. They could also be seen as other financing (return of loan principal). 'other' is used, with a review note. Same for detail[36]."},
-    {"severity": "warning", "path": "receipts[7].category", "page": 4,
-     "extracted": "donations/contributions", "on_page": "Grants 30,625 (General Fund 'Grant', p10)",
-     "issue": "The report does not say where the grant came from. Village grants usually come from a government (state or federal), and 'donations/contributions' is meant for non-government sources. Same for detail[12]."},
-    {"severity": "warning", "path": "business_type.measure", "page": 8,
-     "extracted": "net position", "on_page": "NET POSITION (modified cash basis) 1,106,686 = cash and time deposits",
-     "issue": "The report is modified cash basis. Under the schema rules the measure would be 'cash'; the amounts are the same either way."},
-    {"severity": "warning", "path": "disbursements[6..24].category", "page": 6,
-     "extracted": "utilities", "on_page": "Proprietary statement lists expenses by object (Salaries, Payroll tax, Supplies...)",
-     "issue": "The rule for spending listed only by object asks for review 'listed by object'; none of these lines has it. The function (utilities) is correct."}
+    {
+      "severity": "warning",
+      "path": "receipts[8].category",
+      "page": 4,
+      "extracted": "other",
+      "on_page": "Other 36,529 (General 33,096 + Street 3,364 + Econ Dev 69)",
+      "issue": "[fixed per checker: now charges for services/fees] The report prints what this line is made of (p10, p12, p14), and most of it is charges for services: camping fees 16,208, community center rentals 12,094, supply sales and service 2,156, messages 25 (30,483 of 36,529). The rest is franchise fees 1,621, permits 446, street interest 913 and misc 3,066. The rule for mixed lines is the dominant category ('charges for services/fees') plus a review note naming the mix, not 'other'."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[5].category",
+      "page": 4,
+      "extracted": "other",
+      "on_page": "Loan repayments 6,540",
+      "issue": "Repayments of economic development loans. The Statement of Activities (p2) counts them as Community Development charges for services. They could also be seen as other financing (return of loan principal). 'other' is used, with a review note. Same for detail[36]."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[7].category",
+      "page": 4,
+      "extracted": "donations/contributions",
+      "on_page": "Grants 30,625 (General Fund 'Grant', p10)",
+      "issue": "The report does not say where the grant came from. Village grants usually come from a government (state or federal), and 'donations/contributions' is meant for non-government sources. Same for detail[12]."
+    },
+    {
+      "severity": "warning",
+      "path": "business_type.measure",
+      "page": 8,
+      "extracted": "net position",
+      "on_page": "NET POSITION (modified cash basis) 1,106,686 = cash and time deposits",
+      "issue": "The report is modified cash basis. Under the schema rules the measure would be 'cash'; the amounts are the same either way."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[6..24].category",
+      "page": 6,
+      "extracted": "utilities",
+      "on_page": "Proprietary statement lists expenses by object (Salaries, Payroll tax, Supplies...)",
+      "issue": "The rule for spending listed only by object asks for review 'listed by object'; none of these lines has it. The function (utilities) is correct."
+    }
   ]
 }
