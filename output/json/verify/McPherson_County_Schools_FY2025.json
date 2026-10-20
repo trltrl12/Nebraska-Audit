@@ -1,0 +1,24 @@
+{
+  "stem": "McPherson_County_Schools_FY2025",
+  "values_checked": 293,
+  "issues": [
+    {"severity": "error", "path": "detail[254]", "page": 8,
+     "extracted": 50000, "on_page": "5200 Transfer from general fund 50,000.00 (p8) = same money as the General Fund Support column 50,000.00 already recorded per account (detail[55]-detail[62], p16)",
+     "issue": "The 50,000 General-to-Activities transfer in is recorded twice in detail (8 per-account lines from p16 totalling 50,000 plus this p8 line); double counted. Drop one of them"},
+    {"severity": "warning", "path": "detail[54].original_label", "page": 16,
+     "extracted": "251 Neal Memorial Scholarship", "on_page": "251 Neal Memoral Scholarship",
+     "issue": "label not exactly as printed (page has the typo 'Memoral'); same for detail[88]"},
+    {"severity": "warning", "path": "detail[227].split_from", "page": 14,
+     "extracted": "split_from set", "on_page": "732 Transfer to depreciation for vehicle 100,179.25 (printed as its own line)",
+     "issue": "Amount is printed as its own line, so it is not a split; split_from is unnecessary (treatment as other financing is correct and matches Depreciation 5200 100,179.25 on p7)"},
+    {"severity": "warning", "path": "detail[100].category", "page": 3,
+     "extracted": "debt service interest", "on_page": "Special Building column: Support services 5,327.12, Capital outlay 71,413.12 (= 4,282.13 + 20,452 + 27,109.50 + 19,569.49)",
+     "issue": "Statement counts Special Building interest on debt (19,569.49) and repairs (detail[96], 4,282.13, recorded as support services) as capital outlay; label-based categories are defensible but won't tie to the statement function lines"},
+    {"severity": "warning", "path": "detail[107].category", "page": 10,
+     "extracted": "capital outlay", "on_page": "4500 610 School Safety supplies 575.47; statement p3 puts all QCPU spending (82,690.04) under Debt service",
+     "issue": "function choice doesn't match the statement; judgment call"},
+    {"severity": "warning", "path": "detail[231].category", "page": 14,
+     "extracted": "instruction", "on_page": "3552 School Safety grants 58,066.50",
+     "issue": "school safety spending is more likely support services/capital than instruction; no review flag on the detail line (the statement-level line has one)"}
+  ]
+}

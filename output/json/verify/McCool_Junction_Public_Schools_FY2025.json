@@ -1,0 +1,54 @@
+{
+  "stem": "McCool_Junction_Public_Schools_FY2025",
+  "values_checked": 209,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "detail_totals[6].amount",
+      "page": 13,
+      "extracted": 293334.14,
+      "on_page": "Activities Fund Exh J receipts 293,334.14, which includes a 25,000.00 transfer from the General Fund",
+      "issue": "[fixed] A transfer is recorded as revenue in detail. Exhibit D (p4) prints Transfers 75,000.00 into Other Governmental Funds and 75,000.00 out of the General Fund (also Exh G 8000, p10). School Nutrition shows only 50,000.00 (p14). Bond (p15), Special Building (p16), QCPU (p17) and Student Fee (p18) receipts have no transfer line and tie to their own totals. The fund receipt totals 293,334.14 + 198,413.82 + 7,951.36 + 122,073.00 + 15,316.66 = 637,088.98 equal the Other Governmental Funds Total Receipts on p4, which include the 75,000 of transfers. So the remaining 25,000.00 sits inside the Activities account receipts (detail[95]-detail[101], all 'student activity receipts'). Under the hidden-transfer rule, keep the printed lines and add a contra revenue line of -25,000 (department = Activities Fund group, split_from, review), an other financing +25,000 line, and 'includes': ['other financing'] on this total. The decision_needed entry raises this, but the arithmetic settles it. Top-level receipts are not affected: the Total column excludes the transfers."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[10].category",
+      "page": 8,
+      "extracted": "intergovernmental/state aid / county/other local governments",
+      "on_page": "2110 County fines and license fees 20,057.44",
+      "issue": "The label names fines and license fees, so 'fines and forfeitures' could apply (Nebraska county fines and license money passed to schools). The county-payment category is defensible. The same question applies to receipts[11] 'County receipts' 21,615.38, of which 20,057.44 (93%) is this line."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[41].detail_category",
+      "page": 19,
+      "extracted": "dues, training and travel",
+      "on_page": "Regular Instruction - Other Expenses 11,014.15",
+      "issue": "Exhibit P 'Other Expenses' has no description on the page. The extractor's notes call the mapping to dues/training/travel a guess. Under the rules this could be 'miscellaneous expenditure' with review."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[48].detail_category",
+      "page": 19,
+      "extracted": "dues, training and travel",
+      "on_page": "Special Education Instruction - Other Expenses 995.00",
+      "issue": "Same guessed mapping of the undescribed 'Other Expenses' object."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[54].detail_category",
+      "page": 19,
+      "extracted": "dues, training and travel",
+      "on_page": "Guidance Services - Other Expenses 1,710.00",
+      "issue": "Same guessed mapping of the undescribed 'Other Expenses' object."
+    },
+    {
+      "severity": "warning",
+      "path": "missing",
+      "page": 20,
+      "extracted": null,
+      "on_page": "Exhibit P (Cash Disbursements for Operational Expenses - General Fund) ends at 2173 Physical Therapy SPED 0-2 on trimmed p20 (report p38; manifest pages_kept ends at 38 of 47)",
+      "issue": "Exhibit P probably continues on report p39+, which was not trimmed. Programs 2181-6992 (1,597,590.08) therefore only have function totals ('not itemized') from Exh G p10. Their object detail is missing from the trimmed PDF. This is a page-finder issue, not an extraction error."
+    }
+  ]
+}

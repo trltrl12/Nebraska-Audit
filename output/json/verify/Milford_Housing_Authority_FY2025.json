@@ -1,0 +1,21 @@
+{
+  "stem": "Milford_Housing_Authority_FY2025",
+  "values_checked": 70,
+  "issues": [
+    {"severity": "warning", "path": "disbursements[6]", "page": 3,
+     "extracted": -52217, "on_page": "Interest subsidy income (52,217), under Non-operating (income) and expense",
+     "issue": "Recorded as a negative disbursement, as printed. It is HUD interest-reduction subsidy income, so it could also be a federal grants receipt. Either way the net change in net position is the same."},
+    {"severity": "warning", "path": "receipts[3].category", "page": 3,
+     "extracted": "federal grants", "on_page": "Resident assistance payments 122,537 (under Rental income)",
+     "issue": "Assumed to be a HUD rental assistance subsidy (federal grants). It is printed inside rental income, so it could be read as tenant rent. Already marked review."},
+    {"severity": "warning", "path": "detail_totals[0].amount", "page": 5,
+     "extracted": 348053, "on_page": "Total operating and maintenance 144,830; Total utilities 55,605; Total administrative 116,604; Total taxes and insurance 31,014",
+     "issue": "One computed total stands in for four printed section totals; the sum is correct and it is marked computed. It is 642 less than the p3 Total expenses of 348,695 because Bad debts 642 is not on the schedule. This is explained in notes, not a report error."},
+    {"severity": "warning", "path": "proprietary.capital_and_related_financing", "page": 4,
+     "extracted": -59547, "on_page": "Net cash provided by (used in) financing activities (59,547)",
+     "issue": "The statement prints only one 'financing activities' section (mortgage principal). Putting it under capital and related financing, rather than noncapital, is an assumption; it is marked computed."},
+    {"severity": "warning", "path": "detail[18].detail_category", "page": 5,
+     "extracted": "insurance", "on_page": "Workers' compensation 165",
+     "issue": "Could be employee benefits and payroll taxes. Also, detail[8] 'Garbage and trash removal' is filed as utilities (power, gas, phone); it is a sanitation service. Both are defensible."}
+  ]
+}
