@@ -1,0 +1,23 @@
+{
+  "stem": "Giltner_FY2025",
+  "values_checked": 135,
+  "issues": [
+    {"severity": "warning", "path": "proprietary", "page": 8,
+     "extracted": null,
+     "on_page": "Statement of Cash Flows - Proprietary Funds, Total: operating 191,637; noncapital financing (117,500); capital and related financing (155,260); investing -; beginning 714,042; end of year 632,919 (cash consists of 632,920)",
+     "issue": "Business-type funds are on the accrual basis and print a full cash flow statement, but proprietary was left null because the overall basis is marked cash. Defensible under the GAAP-only rule, but the data is there. The page itself has a 1-dollar rounding gap (632,919 vs 632,920; Water 3,253 vs 3,254)."},
+    {"severity": "warning", "path": "ending_cash", "page": 5,
+     "extracted": 370787, "on_page": "Fund balance - September 30, 2025 370,787; Balance Sheet p4: cash 366,569 + county treasurer cash 6,034 = total assets 372,603",
+     "issue": "beginning_cash/ending_cash hold governmental fund balances (366,860 / 370,787), not cash. This is consistent with the roll-forward the statement prints (modified cash basis), but actual governmental cash at year end is 372,603 (net of 1,816 payroll withholding liability)."},
+    {"severity": "warning", "path": "detail[2].detail_category", "page": 9,
+     "extracted": "other state aid", "on_page": "Intergovernmental 39,480 (p12: General 14,637 + Fire 24,843)",
+     "issue": "The larger part (24,843, 63%) is intergovernmental revenue of the Fire department, likely rural fire / other local government payments, so the dominant detail category may be county/other local governments rather than other state aid. Marked review by the extractor."},
+    {"severity": "warning", "path": "detail[0]", "page": 9,
+     "extracted": "General Fund revenue lines taken from the budget schedule p9",
+     "on_page": "p12 Combining Statement - General Fund Departments prints the same revenue lines split by department (General/Park/Fire/Community Center)",
+     "issue": "Expenditures came from the more detailed p12 combining statement, but revenues came from p9 (which has budget figures). The no-double-counting rule prefers the more detailed schedule. Totals are the same (185,288), so this is a judgment call, not a counting error."},
+    {"severity": "warning", "path": "receipts[6].category", "page": 5,
+     "extracted": "donations/contributions", "on_page": "Contributions and grants 1,000 (p3: Capital Grants and Contributions, Environment and leisure)",
+     "issue": "The label mixes contributions and grants; if the 1,000 is a government grant it would be intergovernmental. No review flag on the line."}
+  ]
+}
