@@ -1,0 +1,27 @@
+{
+  "stem": "Niobrara_FY2025",
+  "values_checked": 159,
+  "issues": [
+    {"severity": "warning", "path": "disbursements[1].amount", "page": 4,
+     "extracted": 332916, "on_page": "Street department 84,645",
+     "issue": "p4 prints 84,645 against 'Street department' and 332,916 against 'Police department'. The extractor swapped the amounts to match p2 (Streets 332,916, Police 84,645), p8 and the department schedules pp7-8. That fix looks right, but the amount differs from what p4 prints next to this label."},
+    {"severity": "warning", "path": "disbursements[2].amount", "page": 4,
+     "extracted": 84645, "on_page": "Police department 332,916",
+     "issue": "Same p4 label swap as disbursements[1]. Recorded per the schedules, not as printed."},
+    {"severity": "warning", "path": "report_discrepancies", "page": 4,
+     "extracted": [], "on_page": "Street department 84,645 / Police department 332,916 (p4) vs Police 84,645 / Streets 332,916 (pp2, 5, 7, 8)",
+     "issue": "The report contradicts itself (p4 labels swapped against the statement of activities and schedules), but this is noted only in review/notes and not recorded in report_discrepancies."},
+    {"severity": "warning", "path": "missing", "page": 2,
+     "extracted": null, "on_page": "Proprietary fund statement of receipts/disbursements (report p15) not in the trimmed PDF; only p2 totals 190,042 / 162,615 and p11 net position 41,125 are available",
+     "issue": "Business-type receipts and disbursements are single totals from the statement of activities. The proprietary fund's line-item statement was not trimmed (a find_pages problem, not an extraction error). Its lines are missing from the data."},
+    {"severity": "warning", "path": "disbursements[7].category", "page": 2,
+     "extracted": "utilities", "on_page": "Business-type activities: Proprietary activities (162,615)",
+     "issue": "The trimmed pages never say what the proprietary fund is (utility or something else). 'utilities' is an assumption and carries no review flag."},
+    {"severity": "warning", "path": "detail[10].detail_category", "page": 5,
+     "extracted": "miscellaneous revenue", "on_page": "Housing Rehab - restricted 2,495",
+     "issue": "detail_category 'miscellaneous revenue' doesn't match category 'intergovernmental/state aid' (receipts[10] uses intergovernmental/state aid too). The source isn't explained (it may be housing-rehab loan repayments), so the category is a guess."},
+    {"severity": "warning", "path": "detail[31].category", "page": 6,
+     "extracted": "health/welfare", "on_page": "General and Administrative: Cemetery 3,000",
+     "issue": "Lines in the General and Administrative schedule were moved to other functions: Cemetery to health/welfare; Golf Course support detail[35] 8,500, Park detail[46] 656 and FEMA Rodeo Grounds detail[53] 900 to culture/recreation. As a result the detail function totals no longer tie to p2 General government 131,227 (they reach 118,171). Defensible by label, but a judgment call."}
+  ]
+}
