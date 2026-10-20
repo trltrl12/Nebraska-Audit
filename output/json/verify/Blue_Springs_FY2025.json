@@ -1,0 +1,21 @@
+{
+  "stem": "Blue_Springs_FY2025",
+  "values_checked": 115,
+  "issues": [
+    {"severity": "warning", "path": "receipts[3].category", "page": 6,
+     "extracted": "charges for services/fees", "on_page": "MFO payment 11,631 (Schedule 4 p12: 'MFO payments received', Fire fund)",
+     "issue": "MFO is most likely a fire Mutual Finance Organization payment, which passes through state mutual finance assistance. That makes it intergovernmental/state aid, not a fee. Exhibit B (p2) lists it under general revenues, not charges for services. The same applies to detail[27].category/detail_category (other charges for services)."},
+    {"severity": "warning", "path": "receipts[2].category", "page": 14,
+     "extracted": "intergovernmental/state aid", "on_page": "County road tax 1,444",
+     "issue": "Treated as a county payment, but the label says tax and Exhibit B (p2) counts it in Taxes 30,222 (= property 28,778 + county road tax 1,444). It could be property tax/other taxes. The same applies to detail[34]."},
+    {"severity": "warning", "path": "receipts[8].category", "page": 6,
+     "extracted": "intergovernmental/state aid", "on_page": "Grant income 112,331",
+     "issue": "The grant's source (state, federal or private) is not stated anywhere in the trimmed PDF, so state aid is an assumption. The same applies to detail[10] (detail_category other state aid)."},
+    {"severity": "warning", "path": "detail[8].category", "page": 10,
+     "extracted": "sales tax", "on_page": "Sales tax collected 1,274",
+     "issue": "This line has a matching expenditure, 'Sales tax remitted' 1,227 (detail[19]). It looks like sales tax the city collects on its own sales and passes to the state, not local option sales tax revenue. Category is doubtful."},
+    {"severity": "warning", "path": "receipts[6].category", "page": 6,
+     "extracted": "charges for services/fees", "on_page": "Charges for services 45,454",
+     "issue": "Schedule 2 (p10) shows this line is licenses, fees and permits 3,293 + materials and services sold and refunds 40,887 + sales tax collected 1,274 (= 45,454). It is a mixed line with no review flag. Dominant category is acceptable."}
+  ]
+}
