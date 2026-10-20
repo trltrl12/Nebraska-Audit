@@ -1,0 +1,30 @@
+{
+  "stem": "Chester_FY2025",
+  "values_checked": 86,
+  "issues": [
+    {"severity": "warning", "path": "receipts[0].split_from", "page": 2,
+     "extracted": "property 51,912 / motor vehicle 7,313 / sales 33,522", "on_page": "Taxes 92,747 (p6); Statement of Activities general revenues (p2) titled 'For the Year Ended September 30, 2024'",
+     "issue": "the split adds up to 92,747 and agrees with Schedule 1 (p10) General Fund figures, but the source statement's title says FY2024. That looks like a typo in the report (its net position ties to 2025)"},
+    {"severity": "warning", "path": "receipts[3].category", "page": 6,
+     "extracted": "motor vehicle tax", "on_page": "Motor vehicle fees 4,065 (Special Revenue fund)",
+     "issue": "Statement of Activities (p2) counts this in Intergovernmental revenues (94,425 = 90,360 + 4,065), so it may be state aid (pro-rate/highway) rather than local motor vehicle tax"},
+    {"severity": "warning", "path": "receipts[6].category", "page": 6,
+     "extracted": "donations/contributions", "on_page": "Grant/Donation Income 50,500",
+     "issue": "50,000 of it is a capital grant to public safety (p2, Non-Major funds p5). That part is likely a government grant (state aid/federal grants), not a donation. Already marked review"},
+    {"severity": "warning", "path": "disbursements[6].category", "page": 6,
+     "extracted": "debt service principal", "on_page": "Debt service 20,349",
+     "issue": "principal and interest are combined. Statement of Activities (p2) shows debt service expense 5,349, so about 5,349 of this may be interest. Already marked review"},
+    {"severity": "warning", "path": "disbursements[3].category", "page": 6,
+     "extracted": "utilities", "on_page": "Sanitation 27,577",
+     "issue": "governmental sanitation (refuse) function; utilities is defensible, but health/welfare is also possible. Already marked review"},
+    {"severity": "warning", "path": "disbursements[10].original_label", "page": 8,
+     "extracted": "Insurance (personal services)", "on_page": "Insurance",
+     "issue": "label annotated with its section heading. detail[13] 'Insurance (personal services)' and detail[16] 'Insurance (operating expenses)' (p10) are likewise printed only as 'Insurance'"},
+    {"severity": "warning", "path": "detail[18].detail_category", "page": 10,
+     "extracted": "tax refunds/treasurer fees", "on_page": "Sales tax 16,398 (General Fund operating expenses)",
+     "issue": "nature of a sales-tax expenditure is unclear (sales tax paid/remitted); category is a guess. Already marked review"},
+    {"severity": "warning", "path": "proprietary", "page": 9,
+     "extracted": null, "on_page": "Statement of Cash Flows - Accrual Basis, Totals 2025: operating 83,099; noncapital (16,400); capital and related (70,003); investing (694); beginning cash 64,145; ending cash 60,147",
+     "issue": "the business-type funds are accrual and print a full cash-flow statement. proprietary was left null because the governmental basis is cash; consider filling it in"}
+  ]
+}
