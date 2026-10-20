@@ -1,0 +1,24 @@
+{
+  "stem": "Nebraska_City_Public_Schools_FY2025",
+  "values_checked": 208,
+  "issues": [
+    {"severity": "warning", "path": "ending_cash.amount", "page": 4,
+     "extracted": 14409380, "on_page": "Fund balances end of year 14,409,380; total assets (cash, CDs, county treasurer) 14,443,998 (p5)",
+     "issue": "beginning/ending_cash are the fund balance totals (cash net of payroll withholdings payable 34,618), not cash assets. The identity holds on that basis and notes say so, but it is an assumption the extractor made."},
+    {"severity": "warning", "path": "detail[187].fund_type", "page": 16,
+     "extracted": "governmental", "on_page": "School Nutrition Fund, shown within Other Governmental Funds on p3-5",
+     "issue": "The extractor rules list school nutrition as a business-type example. The report presents it as a governmental (special revenue) fund, so governmental is defensible, but the rules don't settle it. This also covers receipts[13], disbursements[8] and detail[187]-[192]."},
+    {"severity": "warning", "path": "receipts[10].category", "page": 3,
+     "extracted": "intergovernmental/state aid", "on_page": "County receipts 122,966 (p8: 2110 County fines and license fees 121,788; 2130 Other county receipts 1,178)",
+     "issue": "Most of the line is county fines and license fees passed to the school. Recording it as intergovernmental (county/other local governments) is defensible, but it could be read as fines and forfeitures."},
+    {"severity": "warning", "path": "detail[165].budget_final", "page": 11,
+     "extracted": null, "on_page": "5000 Debt services budget 40,000",
+     "issue": "The line's printed budget of 40,000 is missing from both split items (detail[165], detail[166])."},
+    {"severity": "warning", "path": "detail[176].amount", "page": 7,
+     "extracted": -800000, "on_page": "Reclassifications: Regular instruction +546,681, State programs (239,486), Federal programs (1,107,195)",
+     "issue": "The contra line nets the full state and federal program reclassifications against the +546,681 added to Regular instruction. The arithmetic is right (1,346,681 - 546,681 = 800,000) and the function totals tie to the statement, but the netting is the extractor's assumption."},
+    {"severity": "warning", "path": "detail[196].original_label", "page": 17,
+     "extracted": "Other taxes", "on_page": "Bond Fund schedule prints 'Other taxes' 842; the governmental funds statement (p3) shows Bond Fund 842 on the 'Public power district sales tax' row",
+     "issue": "The two schedules label this line differently. The JSON follows p17 as printed, and the category (other taxes / other local taxes) is the same either way."}
+  ]
+}
