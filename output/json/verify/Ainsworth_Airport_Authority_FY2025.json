@@ -2,14 +2,8 @@
   "stem": "Ainsworth_Airport_Authority_FY2025",
   "values_checked": 53,
   "issues": [
-    {"severity": "warning", "path": "disbursements[0..13].category", "page": 2,
-     "extracted": "other", "on_page": "Operating expenses of an airport authority (fuel purchases for resale, personnel, depreciation...)",
-     "issue": "All 14 operating expense lines (903,994) are in 'other' because no airport/transportation function exists in the category list. This is defensible, and each line has a review flag, but the whole entity's spending lands in 'other'."},
-    {"severity": "warning", "path": "receipts[4].category", "page": 2,
-     "extracted": "charges for services/fees", "on_page": "Water assessments 49,111",
-     "issue": "This looks like a recovery of the Water assessment expense (58,307) from farm tenants, so it could be reimbursements/refunds or special assessments. It is a judgment call."},
-    {"severity": "warning", "path": "receipts[7].category", "page": 2,
-     "extracted": "federal grants", "on_page": "Grant revenue 5,708",
-     "issue": "The grant's source is not stated on the page. Federal (FAA) is likely but is an assumption."}
+    {"severity": "warning", "path": "receipts[7].category", "page": 2, "extracted": "federal grants", "on_page": "Grant revenue 5,708", "issue": "The page doesn't say who gave the grant (could be FAA/federal or Nebraska state aeronautics). Federal is an assumption."},
+    {"severity": "warning", "path": "receipts[4].category", "page": 2, "extracted": "charges for services/fees", "on_page": "Water assessments 49,111", "issue": "Judgment call. It looks like the authority passing a water assessment on to tenants (there is a matching 58,307 'Water assessment' expense), so reimbursements/refunds or special assessments could also fit."},
+    {"severity": "warning", "path": "disbursements[0..13].category", "page": 2, "extracted": "other", "on_page": "all operating expense lines", "issue": "All 903,994 of operating expenses are in 'other' because the list has no airport function. This follows the rules (review is set), but 100% of spending lands in 'other'."}
   ]
 }
