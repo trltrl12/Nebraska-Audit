@@ -2,11 +2,21 @@
   "stem": "Logan_Township_Knox_County_B2526",
   "values_checked": 13,
   "issues": [
-    {"severity": "error", "path": "disbursements[1].category", "page": 1,
-     "extracted": "other", "on_page": "Debt Service: Other 336.39",
-     "issue": "The printed label is a debt service line, so a specific category fits (debt service principal with review, as the other Logan Township forms in this batch use for the same line). The extractor guessed it is a treasurer's commission, but 2% of property tax 16,750.28 is 335.01, not 336.39, and nothing on the page backs that up. Using 'other' when the label names a category goes against the last-resort rule."},
-    {"severity": "warning", "path": "reported_totals.governmental.disbursements.amount", "page": 1,
-     "extracted": 23936.39, "on_page": "Line 29 Total Disbursements & Transfers 23,936.39; lines 19 (24,600.00) + 25 (336.39) = 24,936.39",
-     "issue": "Confirmed: the printed total is 1,000.00 less than its lines. Line 30 balance forward 11,771.68 = 36,708.07 - 24,936.39, so the lines and the ending balance agree and the printed total is the typo. The figure stays as printed and the gap is recorded in report_discrepancies (difference -1,000.00). Correct handling; listed here for review."}
+    {
+      "severity": "warning",
+      "path": "disbursements[1].category",
+      "page": 1,
+      "extracted": "other",
+      "on_page": "Debt Service: Other 336.39",
+      "issue": "[fixed directly] The printed label is a debt service line, so a specific category fits (debt service principal with review, as the other Logan Township forms in this batch use for the same line). The extractor guessed it is a treasurer's commission, but 2% of property tax 16,750.28 is 335.01, not 336.39, and nothing on the page backs that up. Using 'other' when the label names a category goes against the last-resort rule."
+    },
+    {
+      "severity": "warning",
+      "path": "reported_totals.governmental.disbursements.amount",
+      "page": 1,
+      "extracted": 23936.39,
+      "on_page": "Line 29 Total Disbursements & Transfers 23,936.39; lines 19 (24,600.00) + 25 (336.39) = 24,936.39",
+      "issue": "Confirmed: the printed total is 1,000.00 less than its lines. Line 30 balance forward 11,771.68 = 36,708.07 - 24,936.39, so the lines and the ending balance agree and the printed total is the typo. The figure stays as printed and the gap is recorded in report_discrepancies (difference -1,000.00). Correct handling; listed here for review."
+    }
   ]
 }
