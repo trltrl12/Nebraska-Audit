@@ -67,7 +67,7 @@ def main():
         flagged.setdefault(r["filename"], []).append(f"{r['check']}: {r['reason']}")
 
     long_rows, summary_rows, detail_rows, extracted = [], [], [], {}
-    for stem, d, err in load_reports():
+    for stem, d, err in load_reports(scaled=True):
         extracted[stem] = d
         if err or not d:
             continue

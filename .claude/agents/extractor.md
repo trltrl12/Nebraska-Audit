@@ -25,7 +25,8 @@ report filenames (e.g. `Lincoln_FY2025.pdf`). For each one:
 Every money value is an object `{"amount": <number>, "source_page": <int>}` or `null` when the report
 doesn't show it. `source_page` is the **page number within the trimmed PDF** (1 = first page).
 Amounts are plain numbers in dollars: no commas or `$`, parentheses become negative, and all
-digits as printed. Never invent a number. **Any value that is not printed as-is on its cited
+digits as printed. If the statements say amounts are in thousands ("Dollars in thousands", "(000's)"),
+keep the printed figures and add top-level `"units": 1000`; the build multiplies them. Never invent a number. **Any value that is not printed as-is on its cited
 page** (a sum of columns, operating + nonoperating totals added together, a derived beginning
 balance, a split) must carry `"computed": "<how: e.g. 'operating 512,000 + nonoperating 60,873 (p8)'>"`
 on that item or money object. Every amount is later checked against the page text and by an

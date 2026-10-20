@@ -96,7 +96,7 @@ def add_sheet(wb, title, header, rows, money_cols=(), status_col=None):
 
 def main():
     manifest = {Path(r["filename"]).stem: r for r in read_csv(MANIFEST)}
-    reports = [(s, d) for s, d, e in load_reports() if d and not e]
+    reports = [(s, d) for s, d, e in load_reports(scaled=True) if d and not e]
     file_urls = {Path(r["filename"]).stem: r.get("url", "") for r in read_csv(FILE_LIST)}
 
     def url(stem):

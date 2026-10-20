@@ -128,13 +128,38 @@ def append_csv(path, row, fields):
         w.writerow(row)
 
 
-def load_reports():
-    """Yield (stem, data_or_None, error_or_None) for every JSON in output/json/."""
+SCALED_KEYS = ("amount", "budget_final", "difference")
+
+
+def _scale(node, factor):
+    """Multiply every amount-like value in a report by factor (in place)."""
+    if isinstance(node, dict):
+        for k, v in node.items():
+            if k in SCALED_KEYS and isinstance(v, (int, float)) and not isinstance(v, bool):
+                node[k] = round(v * factor, 2)
+            else:
+                _scale(v, factor)
+    elif isinstance(node, list):
+        for v in node:
+            _scale(v, factor)
+
+
+def load_reports(scaled=False):
+    """Yield (stem, data_or_None, error_or_None) for every JSON in output/json/.
+
+    Reports printed in thousands carry top-level "units": 1000 and store amounts as printed (so
+    validate.py can match them to the page text). scaled=True multiplies them to whole dollars for
+    the CSV/XLSX outputs."""
     for p in sorted(JSON_DIR.glob("*.json")):
         try:
-            yield p.stem, json.loads(p.read_text(encoding="utf-8")), None
+            d = json.loads(p.read_text(encoding="utf-8"))
         except Exception as e:  # noqa: BLE001
             yield p.stem, None, f"invalid JSON: {e}"
+            continue
+        units = d.get("units") if isinstance(d, dict) else None
+        if scaled and isinstance(units, (int, float)) and units not in (0, 1):
+            _scale(d, units)
+        yield p.stem, d, None
 
 
 def amt(field):
