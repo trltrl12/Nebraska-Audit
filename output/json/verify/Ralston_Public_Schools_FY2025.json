@@ -1,0 +1,24 @@
+{
+  "stem": "Ralston_Public_Schools_FY2025",
+  "values_checked": 263,
+  "issues": [
+    {"severity": "error", "path": "detail[126].category", "page": 5,
+     "extracted": "support services", "on_page": "Capital outlay (Special Building Fund column 20,940,888 = Purchased services 349,138 + Buildings and sites 20,591,750)",
+     "issue": "Special Building Fund 'Purchased services' 349,138 (p18) is printed under Capital outlay on the governmental funds statement (p5); the function was guessed as support services, so the detail function split does not tie to the statement. Should be capital outlay (detail_category professional/contract services can stay)."},
+    {"severity": "warning", "path": "receipts[16].category", "page": 4,
+     "extracted": "intergovernmental/state aid", "on_page": "Cooperative receipts 1,503,416 (Cooperative Fund 'Tuition and other receipts', p20; shown as Charges for Services on the Statement of Activities, p1)",
+     "issue": "The report itself classifies this as charges for services (tuition from cooperating districts); extractor rules treat service-contract/interlocal revenue as charges for services/fees. Defensible either way; already marked review."},
+    {"severity": "warning", "path": "detail[134].detail_category", "page": 20,
+     "extracted": "county/other local governments", "on_page": "Tuition and other receipts 1,503,416",
+     "issue": "Label says tuition; 'tuition and fees' (category charges for services/fees) fits the label and the Statement of Activities' Charges for Services column (p1). Judgment call."},
+    {"severity": "warning", "path": "receipts[11].category", "page": 4,
+     "extracted": "intergovernmental/state aid", "on_page": "County sources 90,979 (budget schedule p9: 2110 County fines and license fees)",
+     "issue": "Line is county-distributed fines and license fees; intergovernmental is defensible (paid by the county), but 'fines and forfeitures' could also fit. Same applies to detail[9]."},
+    {"severity": "warning", "path": "detail[143].detail_category", "page": 21,
+     "extracted": "other charges for services", "on_page": "Activities receipts 42,910 (Student Fee Fund)",
+     "issue": "Same label 'Activities receipts' in the Activities Fund (detail[96]) is 'student activity receipts'; student fees could also be 'tuition and fees'. Inconsistent detail category for the same label."},
+    {"severity": "warning", "path": "detail[88]", "page": 7,
+     "extracted": -500000, "on_page": "Reclassifications column: Instruction 2,130,930, Private and state categorical programs (687,820), Federal programs (1,943,110), Total disbursements (500,000); p8 Transfers reclassification (500,000) vs Depreciation Fund 500,000",
+     "issue": "Contra line and matching other financing line detail[90] (-500,000) are derived by the extractor from the reclassification columns, not printed as lines; arithmetic holds (lines 46,243,388 - 500,000 + 2,130,930 reclass = Instruction etc.; Depreciation Fund transfer in 500,000 p14 matches) and both are marked split_from/review. Assumption that the 500,000 sits inside the program lines is reasonable but should be confirmed."}
+  ]
+}
