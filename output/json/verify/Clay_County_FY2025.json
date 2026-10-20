@@ -1,0 +1,24 @@
+{
+  "stem": "Clay_County_FY2025",
+  "values_checked": 122,
+  "issues": [
+    {"severity": "warning", "path": "receipts[5].category", "page": 6,
+     "extracted": "other", "on_page": "Local 2,592,308",
+     "issue": "Statement of Activities (p2) prints Charges for Services 560,651 + Interest income 711,090 + Miscellaneous 1,320,567 = 2,592,308 exactly, so the report shows what this line is made of (same basis as the Taxes split the extractor did from p2). As entered, 21% of governmental receipts sit in 'other', including about 711k of investment income."},
+    {"severity": "warning", "path": "detail[2].amount", "page": 9,
+     "extracted": 1347433, "on_page": "Local 1,347,433 (budget schedule)",
+     "issue": "Correct as printed, but the budget-basis Local includes sale of surplus 29,154 (combining p7 Local 1,318,279 + sale of surplus 29,154). Likewise detail[31] Road Local 1,233,488 = 1,229,248 + sale of surplus 4,240 (p5). The sale-of-asset amounts are mixed into 'miscellaneous revenue'."},
+    {"severity": "warning", "path": "detail[30].detail_category", "page": 10,
+     "extracted": "highway allocation", "on_page": "Intergovernmental 1,704,389 (Road Fund)",
+     "issue": "Assumed to be highway allocation; the schedule doesn't say (review already set)."},
+    {"severity": "warning", "path": "detail[32].category", "page": 10,
+     "extracted": "streets/highways (not itemized)", "on_page": "DISBURSEMENTS 9,127,893",
+     "issue": "Single line; per p5 it includes capital outlay 6,007,348 and bond issuance costs 176,250 as well as public works 2,944,295 (review already set)."},
+    {"severity": "warning", "path": "detail[42].detail_category", "page": 8,
+     "extracted": "taxes (unlabeled)", "on_page": "Taxes 5,225 (Visitor Promotion Fund)",
+     "issue": "Visitor promotion funds are funded by lodging tax, and 5,225 is exactly half of the Lodging tax 10,450 on p2; lodging tax would likely fit."},
+    {"severity": "warning", "path": "detail", "page": 6,
+     "extracted": "6 non-major funds from p8", "on_page": "Non-Major Funds column: Taxes 810,979, Intergovernmental 198,179, Local 44,781, disbursements 1,187,867 (incl. principal 505,000, interest 236,082)",
+     "issue": "The other non-major funds (e.g. the road improvement bond / debt service funds) are not in the trimmed PDF, so non-major detail is incomplete (the 6 shown funds carry taxes of only 138,747). The rules call for the combining Total column when there are more than 6 funds; it isn't available here. The extractor noted this."}
+  ]
+}
