@@ -1,0 +1,15 @@
+{
+  "stem": "Lawrence_Rural_Fire_District_B2526",
+  "values_checked": 11,
+  "issues": [
+    {"severity": "warning", "path": "beginning_investments", "page": 1,
+     "extracted": 32407.90, "on_page": "Investments 32,407.90 (line 3, already inside line 5 subtotal 128,698.98)",
+     "issue": "beginning_investments is filled in even though the same amount is already part of beginning_cash (line 5), while ending_investments is null. Under the field rules, investments are filled only when reported separately and are not added to cash. A downstream sum of cash + investments would count 32,407.90 twice, and the beginning and ending fields are not treated the same way."},
+    {"severity": "warning", "path": "receipts[4].category", "page": 1,
+     "extracted": "other", "on_page": "Local Receipts: Other 15,667.87",
+     "issue": "This line is 25.6% of governmental receipts, so 'other' is over the 10% review threshold. Nothing on the form says what it is. For rural fire districts it is often fire-protection contracts with cities or villages (which would be charges for services/fees), but this cannot be confirmed from the page."},
+    {"severity": "warning", "path": "fiscal_year_end", "page": 1,
+     "extracted": "2025-06-30", "on_page": "column header 'Actual/Estimated 2024 - 2025' only",
+     "issue": "Fiscal year end is assumed and not printed in the trimmed PDF."}
+  ]
+}
