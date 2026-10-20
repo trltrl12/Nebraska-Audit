@@ -1,0 +1,24 @@
+{
+  "stem": "North_Platte_Airport_Authority_FY2025",
+  "values_checked": 168,
+  "issues": [
+    {"severity": "warning", "path": "business_type.ending", "page": 4,
+     "extracted": 31855824, "on_page": 31855824,
+     "issue": "Roll-forward is off by 2 (21,820,910 + 15,236,031 - 5,201,115 = 31,855,826 vs printed 31,855,824). This is rounding in the report, not a misread. Every line was checked against the page. Printed operating loss (3,748,601) is 1 more than 1,037,105 - 4,785,705 = (3,748,600). Printed total nonoperating 13,783,515 is 1 less than its lines (13,783,516). Both gaps are already in report_discrepancies."},
+    {"severity": "warning", "path": "disbursements[0..27].category", "page": 3,
+     "extracted": "other", "on_page": "operating expenses by object (airport)",
+     "issue": "All 28 operating expense lines (4,785,705) are category 'other' with no 'review' flag. No airport/transportation function exists in the list, so 'other' is defensible, but the rules require 'review' on 'other' lines. Same for the detail[] operating expenditure lines (category 'other')."},
+    {"severity": "warning", "path": "receipts[15].category", "page": 3,
+     "extracted": "other", "on_page": "Miscellaneous 449,593",
+     "issue": "Unexplained Miscellaneous is 43% of operating revenues and up from 12,611 in 2024. Nothing in the trimmed pages explains it. Flagged review."},
+    {"severity": "warning", "path": "receipts[17].category", "page": 4,
+     "extracted": "federal grants", "on_page": "Federal and state grants 11,977,442",
+     "issue": "Mixed federal and state line. The page gives no split, so it is all recorded as federal grants (flagged review). Same for detail[5]."},
+    {"severity": "warning", "path": "receipts[16].category", "page": 4,
+     "extracted": "property tax", "on_page": "Taxes, net 1,988,864",
+     "issue": "Assumed to be the property tax levy. Defensible for an airport authority but not stated on the page (flagged review)."},
+    {"severity": "warning", "path": "detail[30].detail_category", "page": 7,
+     "extracted": "dues, training and travel", "on_page": "Licensing 120",
+     "issue": "Judgment call. Could be fees or permits paid. The amount is immaterial."}
+  ]
+}
