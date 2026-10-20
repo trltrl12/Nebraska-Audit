@@ -1,0 +1,15 @@
+{
+  "stem": "Odell_FY2025",
+  "values_checked": 41,
+  "issues": [
+    {"severity": "warning", "path": "receipts[12].category", "page": 1,
+     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Enterprise Fund) 177,048.82",
+     "issue": "All Enterprise Fund receipts are printed only as 'Local Receipts: Other'; treating them as utility charges is a reasonable guess (the fund's spending is Solid Waste/Wastewater/Water), but nothing on the page breaks the line down. The line already has a review flag."},
+    {"severity": "warning", "path": "disbursements[3]", "page": 2,
+     "extracted": "Capital Improvements (Street Fund) 74,396.73 / (Enterprise Fund) 38,005.92 (disbursements[4])", "on_page": "Line 35 Capital Improvements: Street 74,396.73, Enterprise 38,005.92, Total 112,402.65",
+     "issue": "The mixed row was split by fund column as the rule requires, and each figure is printed in its own column, but neither item has split_from as the rule asks. The same applies to line 18 Local Receipts: Other (receipts[10], [11], [12]; Total 218,482.88)."},
+    {"severity": "warning", "path": "decision_needed", "page": 3,
+     "extracted": "transfers_in 156,376.02 includes 55,978.52 into General; transfers_out 81,376.02 includes 55,978.52 out of General", "on_page": "Schedule of Interfund Transfers: General -> General 55,978.52",
+     "issue": "The schedule prints a transfer of 55,978.52 from the General Fund to the General Fund itself. It is recorded as both a transfer in and a transfer out, so it nets to zero, but it raises both totals. Is this a real transfer between General sub-accounts or a mis-labelled schedule line? The extraction has no decision_needed entry for it."}
+  ]
+}
