@@ -1,0 +1,33 @@
+{
+  "stem": "Kearney_Public_Schools_FY2025",
+  "values_checked": 259,
+  "issues": [
+    {"severity": "warning", "path": "receipts[8].category", "page": 5,
+     "extracted": "fines and forfeitures", "on_page": "Fines and licenses 528,091",
+     "issue": "Mixed line (GF schedule p8: county fines and license fees 488,413 + local license fees 32,743 + police court fines 6,935). Dominant category is defensible, but the rules require a review note naming the mix and there isn't one."},
+    {"severity": "warning", "path": "receipts[16].category", "page": 5,
+     "extracted": "other", "on_page": "Other income 28,968",
+     "issue": "GF budget schedule p8 shows this is mostly community service activities 25,968 (charges for services). The review note is there; charges for services/fees could be the better category."},
+    {"severity": "warning", "path": "detail[8].category", "page": 8,
+     "extracted": "fines and forfeitures", "on_page": "1911 Local license fees 32,743",
+     "issue": "category (fines and forfeitures) doesn't match detail_category (licenses and permits) or the label. licenses and permits fits the line; the extractor matched it to the statement's combined line instead."},
+    {"severity": "warning", "path": "detail[13].detail_category", "page": 8,
+     "extracted": "other state aid", "on_page": "3110 State aid 9,772,197",
+     "issue": "Code 3110 'State aid' in a Nebraska school district is TEEOSA equalization aid; 'state school aid (TEEOSA)' looks like the right detail_category."},
+    {"severity": "warning", "path": "detail[83].category", "page": 12,
+     "extracted": "donations/contributions", "on_page": "Donations and other local sources 66,643",
+     "issue": "Mixed label (donations + other local sources) recorded with no review note naming the mix."},
+    {"severity": "warning", "path": "detail[50].detail_category", "page": 9,
+     "extracted": "not itemized", "on_page": "4300 Building improvements 2,000",
+     "issue": "Building improvements is an object; 'land and buildings' or 'construction/infrastructure' may fit better than 'not itemized'. The same applies to the QCPU Building improvements line, detail[63] (5,153,760, p10)."},
+    {"severity": "warning", "path": "detail[29].original_label", "page": 8,
+     "extracted": "Special education (support)", "on_page": "Special education",
+     "issue": "Label isn't exactly as printed (the extractor added '(support)'; the line sits under the Support services heading)."},
+    {"severity": "warning", "path": "detail[25].original_label", "page": 8,
+     "extracted": "Sale of property (non-revenue receipts)", "on_page": "Sale of property",
+     "issue": "Label isn't exactly as printed (the heading 'Non-revenue receipts' was appended)."},
+    {"severity": "warning", "path": "receipts[23].original_label", "page": 7,
+     "extracted": "Interest income (nonoperating)", "on_page": "Interest income",
+     "issue": "Label isn't exactly as printed (the extractor added '(nonoperating)')."}
+  ]
+}
