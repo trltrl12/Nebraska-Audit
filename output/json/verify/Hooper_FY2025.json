@@ -2,23 +2,53 @@
   "stem": "Hooper_FY2025",
   "values_checked": 192,
   "issues": [
-    {"severity": "error", "path": "detail[106].section", "page": 11,
-     "extracted": "other financing (Grants and donations 220, 2,733, 500)", "on_page": "Grants and donations 220 (General), 2,733 (Library), 500 (Cemetery), printed under Other financing sources (uses)",
-     "issue": "Grants and donations are revenue, not transfers, debt proceeds or sale of assets. The extraction itself records the same 3,453 as a donations/contributions receipt (receipts[11], outside_printed_total). These three detail lines (detail[106], [107], [108]) should be section 'revenue', category 'donations/contributions', detail_category 'donations/contributions', with outside_printed_total: true. As entered they drop out of revenue detail and are treated like financing."},
-    {"severity": "warning", "path": "detail[7].amount", "page": 11,
-     "extracted": 21811, "on_page": "21,811 (could be 21,810)",
-     "issue": "With 21,811, both the General column (sum 580,850 vs printed 580,849) and the Interest row (21,811+1,763+840+108 = 24,522 vs printed 24,521) are off by 1. A value of 21,810 would make both tie, so this digit may be misread, or the report rounds. report_discrepancies mentions only the column difference, not the Interest row."},
-    {"severity": "warning", "path": "detail[95].category", "page": 11,
-     "extracted": "public safety", "on_page": "Cemetery column (23,630)",
-     "issue": "The category rules put cemetery under health/welfare. The extractor used public safety to tie to the statement's Public safety line (142,029 = Police 118,399 + Cemetery 23,630) and marked review. This applies to all Cemetery expenditure lines, detail[95]-[101]."},
-    {"severity": "warning", "path": "detail[27].category", "page": 11,
-     "extracted": "other", "on_page": "TIF column: Other miscellaneous 63,653",
-     "issue": "63,653 of the 66,972 'Other miscellaneous' receipts sits in the TIF column, which is most likely tax-increment (property tax) money passed through. Left as other/miscellaneous with review; a person should confirm. The same applies to receipts[10]."},
-    {"severity": "warning", "path": "disbursements[6]", "page": 4,
-     "extracted": "Debt service 234,275 split 187,909 / 46,066 / 300", "on_page": "Debt service (234,275) under Other financing sources (uses), Bond column; Bond Fund schedule p9 prints principal 187,909, interest 46,066, Other 300",
-     "issue": "The split is backed by the Bond Fund schedule, the only fund with debt service. The 300 'Other' is assumed to be fees and recorded as interest."},
-    {"severity": "warning", "path": "detail", "page": 8,
-     "extracted": "General Fund budget schedule not recorded", "on_page": "Other miscellaneous 66,984 and Total receipts 904,278 (budget schedule) vs 66,972 on p4/p11 (889,336 + 11,488 + 3,453 = 904,277)",
-     "issue": "The unrecorded budget schedule disagrees with the statement and combining schedule by 12 on Other miscellaneous and by 1 on the total. It does not affect the recorded figures but is an internal report inconsistency not listed in report_discrepancies."}
+    {
+      "severity": "error",
+      "path": "detail[106].section",
+      "page": 11,
+      "extracted": "other financing (Grants and donations 220, 2,733, 500)",
+      "on_page": "Grants and donations 220 (General), 2,733 (Library), 500 (Cemetery), printed under Other financing sources (uses)",
+      "issue": "[fixed] Grants and donations are revenue, not transfers, debt proceeds or sale of assets. The extraction itself records the same 3,453 as a donations/contributions receipt (receipts[11], outside_printed_total). These three detail lines (detail[106], [107], [108]) should be section 'revenue', category 'donations/contributions', detail_category 'donations/contributions', with outside_printed_total: true. As entered they drop out of revenue detail and are treated like financing."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[7].amount",
+      "page": 11,
+      "extracted": 21811,
+      "on_page": "21,811 (could be 21,810)",
+      "issue": "With 21,811, both the General column (sum 580,850 vs printed 580,849) and the Interest row (21,811+1,763+840+108 = 24,522 vs printed 24,521) are off by 1. A value of 21,810 would make both tie, so this digit may be misread, or the report rounds. report_discrepancies mentions only the column difference, not the Interest row."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[95].category",
+      "page": 11,
+      "extracted": "public safety",
+      "on_page": "Cemetery column (23,630)",
+      "issue": "The category rules put cemetery under health/welfare. The extractor used public safety to tie to the statement's Public safety line (142,029 = Police 118,399 + Cemetery 23,630) and marked review. This applies to all Cemetery expenditure lines, detail[95]-[101]."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[27].category",
+      "page": 11,
+      "extracted": "other",
+      "on_page": "TIF column: Other miscellaneous 63,653",
+      "issue": "63,653 of the 66,972 'Other miscellaneous' receipts sits in the TIF column, which is most likely tax-increment (property tax) money passed through. Left as other/miscellaneous with review; a person should confirm. The same applies to receipts[10]."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[6]",
+      "page": 4,
+      "extracted": "Debt service 234,275 split 187,909 / 46,066 / 300",
+      "on_page": "Debt service (234,275) under Other financing sources (uses), Bond column; Bond Fund schedule p9 prints principal 187,909, interest 46,066, Other 300",
+      "issue": "The split is backed by the Bond Fund schedule, the only fund with debt service. The 300 'Other' is assumed to be fees and recorded as interest."
+    },
+    {
+      "severity": "warning",
+      "path": "detail",
+      "page": 8,
+      "extracted": "General Fund budget schedule not recorded",
+      "on_page": "Other miscellaneous 66,984 and Total receipts 904,278 (budget schedule) vs 66,972 on p4/p11 (889,336 + 11,488 + 3,453 = 904,277)",
+      "issue": "The unrecorded budget schedule disagrees with the statement and combining schedule by 12 on Other miscellaneous and by 1 on the total. It does not affect the recorded figures but is an internal report inconsistency not listed in report_discrepancies."
+    }
   ]
 }

@@ -30,7 +30,11 @@
 {"fund_type":"governmental","category":"charges for services/fees","original_label":"Sale of Lunches","amount":84432,"source_page":5},
 {"fund_type":"governmental","category":"federal grants","original_label":"Federal Receipts","amount":736644,"source_page":5},
 {"fund_type":"governmental","category":"investment income","original_label":"Interest income","amount":19047,"source_page":5},
-{"fund_type":"governmental","category":"other","original_label":"Other/Donations/Non Revenue","amount":265775,"source_page":5,"review":"mixed line: General 84,744 (donations, sale of property, insurance, capital lease, other non-revenue per p8) plus Activity Fund 181,031 receipts"}
+{"fund_type":"governmental","category":"charges for services/fees","original_label":"Other/Donations/Non Revenue","amount":181031,"source_page":5,"split_from":"Other/Donations/Non Revenue 265,775 (p5): Activity Fund receipts (p13)","computed":"Activity Fund 'Activities receipts/ Admissions' 181,031 (p13)"},
+{"fund_type":"governmental","category":"donations/contributions","original_label":"Other/Donations/Non Revenue","amount":7050,"source_page":5,"split_from":"Other/Donations/Non Revenue 265,775 (p5): General 1920 Other Contributions & Donations 7,050 (p8)","computed":"General Fund 1920 donations 7,050 (p8)"},
+{"fund_type":"governmental","category":"sale of assets","original_label":"Other/Donations/Non Revenue","amount":11047,"source_page":5,"split_from":"Other/Donations/Non Revenue 265,775 (p5): General 5300 Proceed Sale Property 11,047 (p8)","computed":"General Fund 5300 sale of property 11,047 (p8)"},
+{"fund_type":"governmental","category":"reimbursements/refunds","original_label":"Other/Donations/Non Revenue","amount":3476,"source_page":5,"split_from":"Other/Donations/Non Revenue 265,775 (p5): General 5301 Insurance Adjustment 3,476 (p8)","computed":"General Fund 5301 insurance 3,476 (p8)"},
+{"fund_type":"governmental","category":"other","original_label":"Other/Donations/Non Revenue","amount":49322,"source_page":5,"split_from":"Other/Donations/Non Revenue 265,775 (p5): General 5690 Other Non-Revenue Receipts 49,322 (p8)","computed":"General Fund 5690 other non-revenue receipts 49,322 (p8)","review":"unexplained other non-revenue receipts; nothing on the pages says what they are"}
 ],
 "disbursements": [
 {"fund_type":"governmental","category":"instruction","original_label":"Instruction","amount":4705202,"source_page":6},
@@ -49,13 +53,13 @@
 {"fund_type":"governmental","category":"food service","original_label":"Nutrition Program","amount":259568,"source_page":6},
 {"fund_type":"governmental","category":"capital outlay","original_label":"Capital Outlay","amount":99650,"source_page":6}
 ],
-"transfers_in": {"amount": 85450, "source_page": 6, "computed": "Activity Fund 35,450 + School Nutrition Fund 50,000 (p6 Transfers in(out) row)"},
+"transfers_in": {"amount": 95648, "source_page": 6, "computed": "Activity Fund 35,450 + School Nutrition Fund 50,000 (p6 Transfers in(out) row) + General 5200 Funds Transfer In 10,198 (p8), split out of receipts line Other/Donations/Non Revenue 265,775 (p5)", "review": "includes one-sided 10,198 transfer in from p8"},
 "transfers_out": {"amount": 85450, "source_page": 6, "computed": "General Fund transfers out (85,450) (p6)"},
-"debt_proceeds": null,
+"debt_proceeds": {"amount": 3651, "source_page": 8, "computed": "General 5500 Capital Lease 3,651 (p8), split out of receipts line Other/Donations/Non Revenue 265,775 (p5)"},
 "other_financing": null,
 "adjustments": [],
 "reported_totals": {
- "governmental": {"receipts": {"amount": 9451545, "source_page": 5, "includes": []},
+ "governmental": {"receipts": {"amount": 9451545, "source_page": 5, "includes": [], "includes_split": {"transfers_in": 10198, "debt_proceeds": 3651}},
                   "disbursements": {"amount": 9271209, "source_page": 6, "includes": []}},
  "business-type": null
 },
@@ -225,6 +229,8 @@
 {"schedule":"Budget and Actual - Qualified Capital Purpose Undertaking Fund","fund":"Qualified Capital Purpose Undertaking","section":"revenue","amount":67,"source_page":16},
 {"schedule":"Budget and Actual - Student Fee Fund","fund":"Student Fee","section":"revenue","amount":37,"source_page":17}
 ],
-"decision_needed": [],
-"notes": "Cash-basis (modified cash) school district; governmental funds only, no business-type funds (School Nutrition is a governmental fund here). Statements used: p5 receipts and p6 disbursements, Total Funds column; beginning 4,029,442 is the restated beginning fund balance (p6); roll-forward reconciles. Balance sheet from p1 Statement of Net Position, Governmental Activities column (component unit Foundation excluded). Detail: General Fund budget schedule pp8-10 (object detail not printed, so expenditure lines are not itemized; budget_final only printed as totals, left null); other fund schedules pp11-17. General Fund schedule (receipts 8,844,482, disbursements 8,727,920 incl. 85,450 transfers out) differs from the statement General column (8,847,125 / 8,755,796); recorded as printed. Non-revenue lines on p8 (transfer in, sale proceeds, insurance, capital lease, other) put in other financing since the schedule prints them under Total Other Financing Sources. The p7 combining schedule not recorded in detail (duplicates). Depreciation and Employee Benefit funds have no column on pp4-6 (folded into General). Read pages 1-17 of 17"
+"decision_needed": [
+ {"question": "General Fund 5200 Funds Transfer In of 10,198 (p8) has no matching transfer out: General transfers out of 85,450 match only Activity 35,450 + Nutrition 50,000 (p6). Where did it come from (Foundation, custodial fund?) and is it a transfer or a receipt?", "amount": 10198, "recorded_as": "Moved out of receipts into transfers_in (total 95,648 = 85,450 + 10,198), review", "source_page": 8}
+],
+"notes": "Cash-basis (modified cash) school district; governmental funds only, no business-type funds (School Nutrition is a governmental fund here). Statements used: p5 receipts and p6 disbursements, Total Funds column; beginning 4,029,442 is the restated beginning fund balance (p6); roll-forward reconciles. Balance sheet from p1 Statement of Net Position, Governmental Activities column (component unit Foundation excluded). Detail: General Fund budget schedule pp8-10 (object detail not printed, so expenditure lines are not itemized; budget_final only printed as totals, left null); other fund schedules pp11-17. General Fund schedule (receipts 8,844,482, disbursements 8,727,920 incl. 85,450 transfers out) differs from the statement General column (8,847,125; 8,755,796); recorded as printed. Non-revenue lines on p8 (transfer in, sale proceeds, insurance, capital lease, other) put in other financing since the schedule prints them under Total Other Financing Sources. The p7 combining schedule not recorded in detail (duplicates). Depreciation and Employee Benefit funds have no column on pp4-6 (folded into General). The printed p5 line Other/Donations/Non Revenue 265,775 (General 84,744 + Activity 181,031) is split into five receipts items (251,926) plus capital lease 3,651 (debt_proceeds) and transfer in 10,198 (in transfers_in); reported_totals receipts keeps the printed 9,451,545 with includes_split noting the 13,849 moved out. Read pages 1-17 of 17"
 }

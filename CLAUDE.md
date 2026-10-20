@@ -132,6 +132,7 @@ These were diagnosed and fixed in find_pages v6; re-extract and re-verify them a
   Grand_Island_Public_Schools_Foundation_FY2025 (all 5 trimmed pages cut off on the right: Total and Jack Martin
   columns missing; skipped, no JSON).
   Garfield_County_Agricultural_Society_FY2025 (report p25 not trimmed: trimmed jumps p24 to p26).
+  Humboldt_FY2025 (governmental fund statements, report pp5-7, not trimmed; budget schedule used).
   Hemingford_Public_Schools_FY2025 (report pp34-35, probably the Activity Fund schedule, not trimmed).
   Gothenburg_FY2025 (report pp42 and 49 not trimmed; may hold schedule lines).
   Grand_Island_Public_Schools_FY2025 (report p39, probably the Activities Fund schedule, not trimmed).
