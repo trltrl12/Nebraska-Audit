@@ -1,0 +1,33 @@
+{
+  "stem": "Omaha_Public_Power_District_FY2025",
+  "values_checked": 81,
+  "issues": [
+    {"severity": "warning", "path": "missing", "page": 3,
+     "extracted": null, "on_page": "Trimmed PDF goes from report p26 (Statement of Revenues, Expenses and Changes in Net Position) to report p28 (Statement of Cash Flows); report p27 not trimmed",
+     "issue": "Report p27 is not in the trimmed PDF. The statements on pp26 and 28 are each complete and everything ties (net income, net position roll-forward, cash roll-forward), so p27 is probably a photo or blank page, but this can't be confirmed from the trimmed PDF."},
+    {"severity": "warning", "path": "receipts[7].category", "page": 3,
+     "extracted": "other", "on_page": "Allowances for funds used during construction 51,387",
+     "issue": "AFUDC is a non-cash credit for capitalized interest/equity cost. Putting it in 'other' is defensible (no category fits; it is flagged for review). It is 51,387 of 1,843,558 business-type receipts. Someone could also argue it should be left out of receipts altogether as non-cash."},
+    {"severity": "warning", "path": "receipts[9].category", "page": 3,
+     "extracted": "other", "on_page": "Other - net 4,641",
+     "issue": "The page prints this line only as 'Other - net', so 'other' plus review is defensible."},
+    {"severity": "warning", "path": "receipts[3].category", "page": 3,
+     "extracted": "donations/contributions", "on_page": "Contributions in aid of construction 37,854 (offset by Reduction of plant costs ... (37,854))",
+     "issue": "Contributions in aid of construction are capital contributions from customers and developers, not gifts. The pair nets to zero, so totals are unaffected, but the category is a judgment call (this could be business_type.other_financing)."},
+    {"severity": "warning", "path": "balance_sheet.assets[7].original_label", "page": 1,
+     "extracted": "Other (current)", "on_page": "Other",
+     "issue": "Label mismatch: the extractor added '(current)' to tell this line apart from the long-term 'Other' line. The amount 339,740 is correct."},
+    {"severity": "warning", "path": "balance_sheet.assets[16].original_label", "page": 1,
+     "extracted": "Other (long-term)", "on_page": "Other",
+     "issue": "Label mismatch: the extractor added '(long-term)'. The amount 311,318 is correct."},
+    {"severity": "warning", "path": "balance_sheet.liabilities[4].original_label", "page": 2,
+     "extracted": "Decommissioning (current)", "on_page": "Decommissioning",
+     "issue": "Label mismatch: the extractor added '(current)'. The amount 54,420 is correct."},
+    {"severity": "warning", "path": "balance_sheet.liabilities[12].original_label", "page": 2,
+     "extracted": "Other (long-term)", "on_page": "Other",
+     "issue": "Label mismatch: the extractor added '(long-term)'. The amount 74,475 is correct."},
+    {"severity": "warning", "path": "notes", "page": 3,
+     "extracted": "amounts in thousands, not multiplied", "on_page": "(thousands)",
+     "issue": "All amounts are recorded in thousands, as printed. Other reports are in whole dollars, so cross-report sums in the CSV/XLSX will understate OPPD by a factor of 1,000 unless the build applies a unit factor."}
+  ]
+}
