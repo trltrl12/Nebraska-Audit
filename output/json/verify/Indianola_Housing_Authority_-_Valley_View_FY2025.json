@@ -1,0 +1,15 @@
+{
+  "stem": "Indianola_Housing_Authority_-_Valley_View_FY2025",
+  "values_checked": 38,
+  "issues": [
+    {"severity": "error", "path": "reported_totals.business-type.receipts.computed", "page": 2,
+     "extracted": "total operating revenues 96,174.26 + total nonoperating revenues (expenses) 115,222.74 = 211,644.34", "on_page": "96,174.26 + 115,222.74 = 211,397.00; 211,644.34 = 96,174.26 + gross nonoperating revenues 115,470.08 (59,894.00 + 54,731.00 + 845.08, not printed as a subtotal)",
+     "issue": "The amount 211,644.34 is right (equals the receipts list), but the computed explanation's arithmetic does not hold: the printed net nonoperating total 115,222.74 gives 211,397.00. The same wrong statement is repeated in notes."},
+    {"severity": "warning", "path": "business_type.adjustments[0]", "page": 2,
+     "extracted": "Loss on disposition of capital assets -247.34 as adjustment", "on_page": "Nonoperating revenues (expenses): Loss on disposition of capital assets (247.34)",
+     "issue": "Printed nonoperating expense recorded as an adjustment instead of a disbursement; roll-forward holds. Defensible judgment call."},
+    {"severity": "warning", "path": "receipts[3].category", "page": 2,
+     "extracted": "federal grants", "on_page": "HUD capital funds 54,731.00 (nonoperating revenue)",
+     "issue": "HUD capital fund grants are federal; recorded as receipts because the report prints them as nonoperating revenue (only the separate 'HUD capital grants' 1,000 under Capital contributions went to other_financing). Consistent with the rules but worth a look."}
+  ]
+}
