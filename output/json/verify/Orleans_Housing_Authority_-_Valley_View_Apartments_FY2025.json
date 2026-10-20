@@ -1,0 +1,18 @@
+{
+  "stem": "Orleans_Housing_Authority_-_Valley_View_Apartments_FY2025",
+  "values_checked": 12,
+  "issues": [
+    {"severity": "warning", "path": "reported_totals.business-type.disbursements", "page": 1,
+     "extracted": 53608.14, "on_page": "Total Disbursements 63,203.28 (line 25, includes line 24 transfers out 9,595.14)",
+     "issue": "The rules call for the printed total plus includes ['transfers_net']. The extractor used a computed total without transfers instead. It is marked computed and the arithmetic is right."},
+    {"severity": "warning", "path": "receipts[2].category", "page": 1,
+     "extracted": "federal grants", "on_page": "Local Receipts -- Subsidy 18,674.00",
+     "issue": "Assumed to be the HUD operating subsidy, but the form prints it under Local Receipts. The line already has a review flag."},
+    {"severity": "warning", "path": "decision_needed", "page": 1,
+     "extracted": null, "on_page": "Inter-fund transfer Reserves to checking 9,595.14; Reason: 'Transfer in of 4298.33 and transferred out of 5296.81'",
+     "issue": "The printed reason does not match the 9,595.14 printed on lines 15 and 24. The transfer is recorded as net 0 inside the single entity, and this is mentioned only in notes, with no decision_needed entry. A person should confirm whether the transfer amounts are right."},
+    {"severity": "warning", "path": "fiscal_year_end", "page": 1,
+     "extracted": "2025-06-30", "on_page": "2025 AUDIT WAIVER REQUEST (no period printed)",
+     "issue": "The fiscal year end is assumed; no period is printed on the form."}
+  ]
+}
