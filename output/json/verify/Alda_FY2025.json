@@ -1,0 +1,15 @@
+{
+  "stem": "Alda_FY2025",
+  "values_checked": 93,
+  "issues": [
+    {"severity": "error", "path": "reported_totals.business-type.receipts", "page": 7, "extracted": 254321, "on_page": "Total revenue 248,742 + Interest income 5,579 (no 254,321 printed)", "issue": "sum of operating revenue and nonoperating interest income (arithmetic correct) not marked computed"},
+    {"severity": "error", "path": "reported_totals.business-type.disbursements", "page": 7, "extracted": 358356, "on_page": "p7 prints Total operating expenses 318,621, interest (2,474), loan and bond fees (37,261); 358,356 is printed only on p2 (Statement of Activities, Total business-type activities expenses)", "issue": "cited page does not show the value; source_page should be 2 or the value marked computed"},
+    {"severity": "warning", "path": "disbursements[18]", "page": 7, "extracted": 2474, "on_page": "Interest expense: Water 13,862, Sewer (16,336), Total (2,474)", "issue": "Water interest printed as positive (likely sign error in report; cash flow p8 shows interest paid 13,862 + 16,336 = 30,198); printed net total used so roll-forward ties; flagged review"},
+    {"severity": "warning", "path": "beginning_cash", "page": 5, "extracted": 279722, "on_page": "Fund balance - September 30, 2024 279,722", "issue": "beginning cash taken from beginning fund balance (modified cash basis, no separate beginning cash shown); assumption"},
+    {"severity": "warning", "path": "ending_cash", "page": 4, "extracted": 339066, "on_page": "Total assets 339,066 = cash (25,906) + CDs 359,391 + county treasurer cash 5,581", "issue": "ending cash includes certificates of deposit; ending_investments left null"},
+    {"severity": "warning", "path": "detail[9:21].category", "page": 11, "extracted": "general government", "on_page": "General Fund combining statement Total column lumps General, Police, Ballpark, Community Center, Fire, Rescue departments", "issue": "operating lines include Fire (public safety) and Ballpark/Community Center (culture/recreation) amounts, e.g. Insurance 24,484 includes Fire 9,815 and Ballpark 8,882; function totals in detail do not match p5 functions; department-level columns not itemized"},
+    {"severity": "warning", "path": "detail[9].detail_category", "page": 11, "extracted": "salaries and wages", "on_page": "Salaries and benefits 27,226", "issue": "line combines salaries and benefits"},
+    {"severity": "warning", "path": "detail[0:24].budget_final", "page": 9, "extracted": null, "on_page": "General Fund budgetary comparison p9 shows budget by revenue line and function", "issue": "General Fund budget amounts not recorded (detail taken from combining statement); revenue-line budgets (e.g. Property 89,908) were available"},
+    {"severity": "warning", "path": "business_type", "page": 8, "extracted": "measure net position; no debt_proceeds", "on_page": "Bond anticipation note proceeds 425,000; principal payments (438,116)", "issue": "BAN proceeds and principal repayment excluded because roll-forward is on net position; depreciation 129,244 included as a disbursement"}
+  ]
+}
