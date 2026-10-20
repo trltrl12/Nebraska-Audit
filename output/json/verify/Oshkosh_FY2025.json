@@ -1,0 +1,26 @@
+{
+  "stem": "Oshkosh_FY2025",
+  "values_checked": 89,
+  "issues": [
+    {"severity": "error", "path": "missing", "page": 9,
+     "extracted": "detail: [] (no lines)",
+     "on_page": "Budget and Actual - All Funds schedule: revenues Taxes and special assessments 503,132.38 (budget 574,535), Licenses and permits 3,819.00, Intergovernmental 191,305.81, Charges for services 750,041.79, Interest 71,826.50, Grants and donations 3,376.00, Keno proceeds 32,138.88, Other 166,986.19, Total revenues 1,722,626.55; expenditures General Government 487,189.08, Streets 247,490.33, Pool 55,735.35, Library 61,724.11, Auditorium 12,285.69, Culture and Recreation 35,712.59, Junkyard 189,829.60, Sewer 62,190.98, Water 157,432.11, Debt service Principal 168,917.25, Interest and charges 102,069.46, Total expenditures 1,580,576.55",
+     "issue": "The only supplementary schedule was left out of detail[] because it mixes fund types. The expenditure lines can be separated: the six governmental function lines add to exactly 900,137.15 (the governmental statement total), and Junkyard/Sewer/Water are business-type. Revenue and debt lines are mixed and could be recorded with fund 'All funds' and a review note. The extractor rules ask for every budget-to-actual line with actual and budget_final."},
+    {"severity": "warning", "path": "decision_needed", "page": 4,
+     "extracted": "receipts[4] 'In Lieu' 12,516.74 recorded as other taxes (receipt)",
+     "on_page": "p4 prints 'In Lieu 12,516.74'; p2 Statement of Activities prints the same 12,516.74 as 'Bond proceeds' under general revenues",
+     "issue": "If this is bond/loan proceeds it belongs in debt_proceeds, not receipts. The line has a review note, but there is no decision_needed entry for this question, which only a person can settle."},
+    {"severity": "warning", "path": "disbursements[21].category", "page": 5,
+     "extracted": "debt service principal 53,200.00",
+     "on_page": "Debt service (53,200.00) under Other financing sources (uses)",
+     "issue": "Principal and interest are combined. p2 shows governmental interest expense 13,200.00, and p9 debt lines imply principal 40,000 (168,917.25 - 128,917.25 business principal on p8). Recording the whole 53,200 as principal is allowed (the line itself isn't split on p5), but 13,200 is interest."},
+    {"severity": "warning", "path": "disbursements[0..20].category", "page": 4,
+     "extracted": "general government for all object lines (about 720k)",
+     "on_page": "p9 prints the governmental function split: General Government 487,189.08, Streets 247,490.33, Pool 55,735.35, Library 61,724.11, Auditorium 12,285.69, Culture and Recreation 35,712.59 (sum 900,137.15); p2: Streets and Highways 247,490.33",
+     "issue": "Following the 'listed by object' rule puts the street, pool and library spending under general government. This is defensible under the rules, but it overstates general government by about 412k compared with the report's own function split."},
+    {"severity": "warning", "path": "receipts[15].original_label", "page": 7,
+     "extracted": "Other (operating revenue)",
+     "on_page": "Other",
+     "issue": "The label has a parenthetical added. It is not the printed text."}
+  ]
+}
