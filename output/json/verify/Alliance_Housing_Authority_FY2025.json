@@ -1,18 +1,10 @@
 {
   "stem": "Alliance_Housing_Authority_FY2025",
-  "values_checked": 52,
+  "values_checked": 53,
   "issues": [
-    {"severity": "warning", "path": "business_type.other_financing", "page": 2,
-     "extracted": 162269.74, "on_page": "Capital contributions HUD capital grants 221,882.27; Loss on disposition of capital assets (59,612.53) (nonoperating)",
-     "issue": "Computed value nets a nonoperating loss line (printed inside Total Nonoperating Revenues (Expenses) 334,916.19) against capital contributions. The arithmetic holds and the roll-forward reconciles. Still, the loss on disposition could be recorded as a negative sale-of-assets receipt or a disbursement instead of being hidden in other_financing."},
-    {"severity": "warning", "path": "balance_sheet.liabilities[6].category", "page": 1,
-     "extracted": "accrued liabilities", "on_page": "Accrued compensated absences (noncurrent) 3,479.01",
-     "issue": "Noncurrent compensated absences. The rules give accrued liabilities for amounts due soon, so other liabilities may fit better."},
-    {"severity": "warning", "path": "balance_sheet.assets[4].original_label", "page": 1,
-     "extracted": "Accrued interest receivable (current)", "on_page": "Accrued interest receivable",
-     "issue": "Labels not verbatim. The extractor added '(current)'/'(noncurrent)' suffixes and 'Restricted:' prefixes to tell repeated labels apart (also assets[6], assets[7], assets[8], assets[10], liabilities[2], liabilities[6])."},
-    {"severity": "warning", "path": "balance_sheet.scope", "page": 1,
-     "extracted": "government-wide", "on_page": "Statement of Net Position - Proprietary Fund (Housing column)",
-     "issue": "The statement is a single proprietary fund statement, not a government-wide statement. It is the same thing in practice for a one-fund entity."}
+    {"severity": "warning", "path": "receipts[5].original_label", "page": 2, "extracted": "HUD capital grants (nonoperating)", "on_page": "HUD capital grants", "issue": "label altered; the extractor added '(nonoperating)' to tell it apart from the capital-contributions line of the same name"},
+    {"severity": "warning", "path": "disbursements[7]", "page": 2, "extracted": 59612.53, "on_page": "Loss on disposition of capital assets (59,612.53)", "issue": "nonoperating loss on disposal treated as a disbursement with function 'housing' (already marked review); it could also go to business_type.other_financing as a negative sale-of-assets item. The roll-forward holds either way"},
+    {"severity": "warning", "path": "balance_sheet.liabilities[6].category", "page": 1, "extracted": "accrued liabilities", "on_page": "Noncurrent: Accrued compensated absences 3,479.01", "issue": "noncurrent compensated absences put in 'accrued liabilities' (the rules describe this as compensated absences due soon); 'other liabilities' may fit better"},
+    {"severity": "warning", "path": "balance_sheet.assets[6].original_label", "page": 1, "extracted": "Restricted: Cash and cash equivalents (current)", "on_page": "Restricted: Cash and cash equivalents", "issue": "the extractor added '(current)' / '(noncurrent)' to labels to tell repeated lines apart (also assets[7], assets[8], assets[10], liabilities[6]); amounts are correct"}
   ]
 }

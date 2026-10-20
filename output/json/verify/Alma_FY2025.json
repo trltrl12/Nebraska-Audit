@@ -2,41 +2,101 @@
   "stem": "Alma_FY2025",
   "values_checked": 310,
   "issues": [
-    {"severity": "error", "path": "detail[173..181].category", "page": 9,
-     "extracted": "utilities", "on_page": "Golf Fund operating expenses (Personnel services 147,469 ... Depreciation 15,729)",
-     "issue": "Golf course is a recreation function (culture/recreation), not a utility; the extractor itself coded Golf charges as recreation/pool/park fees. Amounts are correct."},
-    {"severity": "error", "path": "detail[186..192].category", "page": 9,
-     "extracted": "utilities", "on_page": "RV Park Fund operating expenses (Utilities and telephone 10,618 ... Depreciation 4,766)",
-     "issue": "RV park is a recreation function (culture/recreation), not a utility. Amounts are correct."},
-    {"severity": "warning", "path": "disbursements[9..20].category", "page": 9,
-     "extracted": "utilities", "on_page": "Total column operating expense lines (include Golf 334,197 and RV Park 33,043)",
-     "issue": "Total enterprise column mixes utility and recreation funds; all business-type operating lines coded utilities. Defensible for a total column, but about 367k is recreation."},
-    {"severity": "warning", "path": "receipts[9].category", "page": 5,
-     "extracted": "donations/contributions", "on_page": "Grants and donations 490,854",
-     "issue": "p3 shows 451,762 of this as capital grants (347,064 general government, 104,698 airport); airport grants are usually FAA/state, so much of it is likely government grants, not private donations. Source isn't stated."},
-    {"severity": "warning", "path": "detail[98].category", "page": 14,
-     "extracted": "donations/contributions", "on_page": "Grant income 104,698",
-     "issue": "Airport grant income is probably federal/state (FAA/NDOT) aid, not a private donation; source not stated."},
-    {"severity": "warning", "path": "detail[6].category", "page": 17,
-     "extracted": "donations/contributions", "on_page": "Grants and donations 347,064",
-     "issue": "Equals the general-government capital grant on p3; could be a government grant. Source not stated."},
-    {"severity": "warning", "path": "receipts[10].category", "page": 5,
-     "extracted": "other", "on_page": "Loan collections 26,850",
-     "issue": "CDBG notes-receivable principal repayments; no specific category fits (it is arguably a balance-sheet item rather than revenue). Same for detail[104]."},
-    {"severity": "warning", "path": "receipts[14].category", "page": 9,
-     "extracted": "occupation/franchise tax", "on_page": "Franchise fees 184,135 (Electric Fund operating revenue)",
-     "issue": "Electric Fund franchise fees are an operating revenue of a fund with almost no expenses (likely a lease/franchise payment from the electric provider); could be charges for services/rentals. Same for detail[164]."},
-    {"severity": "warning", "path": "disbursements[4].category", "page": 5,
-     "extracted": "other", "on_page": "Airport 67,011",
-     "issue": "No airport/transportation category exists; other is defensible. Same for detail[100] (Airport Operating expenditures 66,151)."},
-    {"severity": "warning", "path": "detail[33].detail_category", "page": 17,
-     "extracted": "land and buildings", "on_page": "Capital outlay 89,979 (Administrative)",
-     "issue": "The object of the capital outlay isn't printed; equipment purchases or construction/infrastructure would be equally possible."},
-    {"severity": "warning", "path": "ending_investments", "page": 4,
-     "extracted": null, "on_page": "Certificates of deposit 1,094,131; County treasurer cash 22,695 (Total Governmental Funds)",
-     "issue": "ending_cash uses only Cash and cash equivalents 1,093,112. The CDs are printed separately and could fill ending_investments (the notes mention this)."},
-    {"severity": "warning", "path": "detail[*].detail_category (Salaries and benefits / Personnel services)", "page": 8,
-     "extracted": "salaries and wages", "on_page": "Salaries and benefits; Personnel services",
-     "issue": "Combined pay and benefits lines are coded salaries and wages; benefits can't be separated (marked review by the extractor)."}
+    {
+      "severity": "error",
+      "path": "detail[173..181].category",
+      "page": 9,
+      "extracted": "utilities",
+      "on_page": "Golf Fund operating expenses (Personnel services 147,469 ... Depreciation 15,729)",
+      "issue": "[fixed] Golf course is a recreation function (culture/recreation), not a utility; the extractor itself coded Golf charges as recreation/pool/park fees. Amounts are correct."
+    },
+    {
+      "severity": "error",
+      "path": "detail[186..192].category",
+      "page": 9,
+      "extracted": "utilities",
+      "on_page": "RV Park Fund operating expenses (Utilities and telephone 10,618 ... Depreciation 4,766)",
+      "issue": "[fixed] RV park is a recreation function (culture/recreation), not a utility. Amounts are correct."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[9..20].category",
+      "page": 9,
+      "extracted": "utilities",
+      "on_page": "Total column operating expense lines (include Golf 334,197 and RV Park 33,043)",
+      "issue": "Total enterprise column mixes utility and recreation funds; all business-type operating lines coded utilities. Defensible for a total column, but about 367k is recreation."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[9].category",
+      "page": 5,
+      "extracted": "donations/contributions",
+      "on_page": "Grants and donations 490,854",
+      "issue": "p3 shows 451,762 of this as capital grants (347,064 general government, 104,698 airport); airport grants are usually FAA/state, so much of it is likely government grants, not private donations. Source isn't stated."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[98].category",
+      "page": 14,
+      "extracted": "donations/contributions",
+      "on_page": "Grant income 104,698",
+      "issue": "Airport grant income is probably federal/state (FAA/NDOT) aid, not a private donation; source not stated."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[6].category",
+      "page": 17,
+      "extracted": "donations/contributions",
+      "on_page": "Grants and donations 347,064",
+      "issue": "Equals the general-government capital grant on p3; could be a government grant. Source not stated."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[10].category",
+      "page": 5,
+      "extracted": "other",
+      "on_page": "Loan collections 26,850",
+      "issue": "CDBG notes-receivable principal repayments; no specific category fits (it is arguably a balance-sheet item rather than revenue). Same for detail[104]."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[14].category",
+      "page": 9,
+      "extracted": "occupation/franchise tax",
+      "on_page": "Franchise fees 184,135 (Electric Fund operating revenue)",
+      "issue": "Electric Fund franchise fees are an operating revenue of a fund with almost no expenses (likely a lease/franchise payment from the electric provider); could be charges for services/rentals. Same for detail[164]."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[4].category",
+      "page": 5,
+      "extracted": "other",
+      "on_page": "Airport 67,011",
+      "issue": "No airport/transportation category exists; other is defensible. Same for detail[100] (Airport Operating expenditures 66,151)."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[33].detail_category",
+      "page": 17,
+      "extracted": "land and buildings",
+      "on_page": "Capital outlay 89,979 (Administrative)",
+      "issue": "The object of the capital outlay isn't printed; equipment purchases or construction/infrastructure would be equally possible."
+    },
+    {
+      "severity": "warning",
+      "path": "ending_investments",
+      "page": 4,
+      "extracted": null,
+      "on_page": "Certificates of deposit 1,094,131; County treasurer cash 22,695 (Total Governmental Funds)",
+      "issue": "ending_cash uses only Cash and cash equivalents 1,093,112. The CDs are printed separately and could fill ending_investments (the notes mention this)."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[*].detail_category (Salaries and benefits / Personnel services)",
+      "page": 8,
+      "extracted": "salaries and wages",
+      "on_page": "Salaries and benefits; Personnel services",
+      "issue": "Combined pay and benefits lines are coded salaries and wages; benefits can't be separated (marked review by the extractor)."
+    }
   ]
 }
