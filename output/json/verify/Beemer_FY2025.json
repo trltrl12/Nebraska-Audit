@@ -1,0 +1,20 @@
+{
+  "stem": "Beemer_FY2025",
+  "values_checked": 159,
+  "issues": [
+    {"severity": "error", "path": "receipts[24].outside_printed_total", "page": 7,
+     "extracted": "Grant proceeds 20,000 and Interest income 4,896 (receipts[24], receipts[25]) flagged outside_printed_total; reported_totals.business-type.receipts = 351,389",
+     "on_page": "Sales 326,493; nonoperating Grant proceeds 20,000, Interest income 4,896",
+     "issue": "Inconsistent: the computed business-type receipts total (351,389) already includes these two lines, but the validator drops outside_printed_total lines, leaving 326,493 vs 351,389 (diff 24,896). For business-type, the total is operating + nonoperating, so these flags should not be set"},
+    {"severity": "error", "path": "disbursements[17].outside_printed_total", "page": 7,
+     "extracted": "Principal 130,000 and Interest 16,103 (disbursements[17], disbursements[18]) flagged outside_printed_total; reported_totals.business-type.disbursements = 460,784",
+     "on_page": "Total operating expenses 314,681; nonoperating Principal (130,000), Interest (16,103)",
+     "issue": "Inconsistent: the total 460,784 includes these lines, but the validator drops flagged lines, leaving 314,681 vs 460,784 (diff 146,103). Flags should not be set"},
+    {"severity": "warning", "path": "reported_totals.business-type.disbursements", "page": 2,
+     "extracted": "460,784 marked computed, source_page 7", "on_page": "Total business-type activities Expenses 460,784 (p2)",
+     "issue": "This total is printed on the Statement of Activities (p2), so it need not be marked computed; it could cite p2"},
+    {"severity": "warning", "path": "receipts[24].category", "page": 7,
+     "extracted": "federal grants", "on_page": "Grant proceeds 20,000 (Sewer; capital grant on p3)",
+     "issue": "The report does not state the grant source (could be state)"}
+  ]
+}

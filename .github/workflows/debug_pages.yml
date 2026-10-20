@@ -64,6 +64,33 @@ jobs:
                   print("failed", n, e)
           PY
           python scripts/dump_pages.py
+      - name: Probe for waiver/audit PDFs behind budget-form links
+        run: |
+          python - <<'PY'
+          import csv, time, requests
+          rows = [r for r in csv.DictReader(open("output/file_list.csv")) if "Budgets_Filed" in r["url"]]
+          s = requests.Session(); s.headers["User-Agent"] = "Nebraska-Audit research pipeline"
+          out = []
+          for r in rows:
+              base = r["filename"].rsplit("_B", 1)[0]
+              yr = r["fiscal_year"]
+              for url in (f"https://auditors.nebraska.gov/Audits_Filed/{yr}/{base}_FY{yr}.pdf",
+                          f"https://auditors.nebraska.gov/Audits_Filed/{yr}/{base}_Waiver_FY{yr}.pdf"):
+                  time.sleep(0.5)
+                  try:
+                      h = s.head(url, timeout=30, allow_redirects=True)
+                      code = h.status_code
+                      ctype = h.headers.get("content-type", "")
+                  except Exception as e:
+                      code, ctype = "error", str(e)[:80]
+                  out.append(dict(filename=r["filename"], probe_url=url, status=code, content_type=ctype))
+          import os
+          os.makedirs("output/page_debug", exist_ok=True)
+          with open("output/page_debug/_alt_urls.csv", "w", newline="") as f:
+              w = csv.DictWriter(f, fieldnames=["filename", "probe_url", "status", "content_type"])
+              w.writeheader(); w.writerows(out)
+          print(sum(1 for o in out if o["status"] == 200), "of", len(rows), "budget-form entities have a PDF at a probed address")
+          PY
       - name: Commit
         run: |
           git config user.name "github-actions[bot]"

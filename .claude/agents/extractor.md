@@ -255,7 +255,8 @@ dominant one plus `"review"` naming the mix.
 net" go in `transfers_in`/`transfers_out` (`business_type.transfers_net`) and, in `detail`, in
 section `other financing` with a signed amount (+ in, − out). If a schedule's printed "Total
 receipts/disbursements" includes the transfer, add `"includes": ["other financing"]` to that
-`detail_totals` entry instead of moving the transfer into revenue or expenditure.
+`detail_totals` entry instead of moving the transfer into revenue or expenditure; an `other financing`
+line printed outside that total gets `"outside_printed_total": true`.
 
 **Transfers hidden inside spending or receipt lines (common in school districts):** if a fund
 column or fund schedule prints a transfer inside an ordinary line (e.g. "Pupil transportation"

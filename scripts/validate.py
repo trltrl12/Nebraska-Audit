@@ -237,7 +237,8 @@ def check(stem, d):
             f("schema", f"detail: fund_type must be one of {FUND_TYPES}, got {it.get('fund_type')!r} ({lab!r})")
         key = (it.get("fund") or "", it.get("schedule") or "", sec)
         sums[key] = sums.get(key, 0.0) + float(it.get("amount") or 0)
-        if sec == "other financing":  # signed: + in (counts toward revenue), − out (toward expenditure)
+        if sec == "other financing" and not it.get("outside_printed_total"):
+            # signed: + in (counts toward revenue), − out (toward expenditure)
             a = float(it.get("amount") or 0)
             k2 = (key[0], key[1], "revenue+of" if a > 0 else "expenditure+of")
             sums[k2] = sums.get(k2, 0.0) + abs(a)
