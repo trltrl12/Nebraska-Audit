@@ -1,0 +1,54 @@
+{
+  "stem": "Sarpy_County_FY2025",
+  "values_checked": 283,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "receipts[6].category",
+      "page": 6,
+      "extracted": "other",
+      "on_page": "Miscellaneous revenues 96,338 (Stadium, p5); Cash flows p6 investing activities 'Interest income' Stadium 96,338; p2 business-type investment income 203,843 = 107,505 + 96,338",
+      "issue": "[fixed] The report shows what this line is: the cash flow statement and Statement of Activities treat the Stadium's 96,338 as interest/investment income. Category should be 'investment income', not 'other'."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[3].category",
+      "page": 4,
+      "extracted": "other",
+      "on_page": "Intergovernmental: Local 57,125,004",
+      "issue": "Printed under the 'Intergovernmental' heading, and 35% of governmental revenue is in 'other' (well above the 10% review level). The Statement of Activities (p2) suggests the line mixes charges for services (19,284,405), investment income (8,766,925) and other (7,582,455), and none is more than half. Recorded with review; a person should decide whether this is intergovernmental (county/other local governments) or mixed local revenue. The same applies to the 'Local' detail lines detail[3] (46,845,295), detail[71] (6,301,047) and detail[85] (3,709,043)."
+    },
+    {
+      "severity": "warning",
+      "path": "balance_sheet",
+      "page": 3,
+      "extracted": "Balance Sheet - Governmental Funds, Total Governmental Funds",
+      "on_page": "government-wide Statement of Net Position not in trimmed PDF (trimmed p1 is an MD&A page instead)",
+      "issue": "The trim is missing the government-wide Statement of Net Position (probably report p16), so the balance sheet leaves out capital assets, long-term debt and all business-type assets/liabilities. The extractor's fallback follows the rules and says so in notes; the trim should be fixed."
+    },
+    {
+      "severity": "warning",
+      "path": "detail",
+      "page": 7,
+      "extracted": "omitted",
+      "on_page": "Zero-actual lines with budgets: Payroll Accrual (budget 1,000,000, p7); Road operating transfer out (budget -1,600,000, p9); Visitors Improvement (593,979), County Drug Enforcement (8,365), State Grant-Justice Reinvestment (132,492), Federal Forfeiture - County Attorney (23,477), E911 Wireless Service (budget -) (p11)",
+      "issue": "Lines with an actual of '-' were left out (stated in notes). The totals are unaffected, but the budget_final figures are lost."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[65].category",
+      "page": 8,
+      "extracted": "health/welfare",
+      "on_page": "Noxious Weed 92,770 (under Public Health)",
+      "issue": "The category rules list noxious weed control under 'natural resources/conservation'. The page prints it under the Public Health heading, so the current category can be defended."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[70].detail_category",
+      "page": 9,
+      "extracted": "other state aid",
+      "on_page": "Road Funds: State 18,959,632",
+      "issue": "State money in the Road Funds is most likely highway allocation; the page does not say so, so 'other state aid' can be defended."
+    }
+  ]
+}

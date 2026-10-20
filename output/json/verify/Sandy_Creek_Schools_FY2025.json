@@ -1,0 +1,26 @@
+{
+  "stem": "Sandy_Creek_Schools_FY2025",
+  "values_checked": 229,
+  "issues": [
+    {"severity": "warning", "path": "detail[75].schedule", "page": 8,
+     "extracted": "Exhibit H - Depreciation Fund (fund General, -325,000.00)",
+     "on_page": "Exhibit F Reclassifications (325,000.00), p8",
+     "issue": "The General Fund sending-side transfer line is filed under schedule 'Exhibit H - Depreciation Fund' with fund 'General' and source_page 8 (Exhibit F). Exhibit H has no General Fund total, so the line is outside the Exhibit G General expenditure tie-out. As recorded, Exhibit G General expenditure items (including the -150,000 and -175,000 contra lines) plus the 8000 transfer come to 9,288,497.56, not the printed 9,613,497.56: a 325,000 gap unless this line is counted with Exhibit G. The amounts themselves are right."},
+    {"severity": "warning", "path": "detail[106].section", "page": 10,
+     "extracted": "revenue / other / miscellaneous revenue 5,287,335.04",
+     "on_page": "5610 Cash balance from merged district 5,287,335.04",
+     "issue": "At statement level the merged-district cash (9,489,414.16) is other_financing (a special item on p2), but in detail this line and the 'Cash balance from dissolved district' lines in the Depreciation, Employee Benefit, School Nutrition, Special Building, QCPU and Cooperative schedules are revenue in category 'other'. The two treatments don't match, and the detail puts about 9.49M into 'other' revenue. Each line has a review flag, and the decision_needed entry covers the question."},
+    {"severity": "warning", "path": "disbursements[13]", "page": 6,
+     "extracted": 427465.28,
+     "on_page": "Other student support 765,328.66 (Other Governmental Funds column); no activities schedule printed",
+     "issue": "The remainder after School Nutrition (337,863.38, p14) is not printed. It is assumed to be student activities, which fits the 239,668.00 student activities fund balance on p4 but is not shown on any page. It is marked computed/review; check it against the activities fund schedule in the full report."},
+    {"severity": "warning", "path": "detail[117].fund_type", "page": 14,
+     "extracted": "governmental",
+     "on_page": "School Nutrition Fund, reported within Other Governmental Funds (p6)",
+     "issue": "The rules usually treat school nutrition as business-type. Here the report presents it as a governmental fund, so keeping it governmental can be defended. This applies to all School Nutrition lines and to the food service split in disbursements."},
+    {"severity": "warning", "path": "missing", "page": 19,
+     "extracted": null,
+     "on_page": "Exhibit O stops after program 2151 (p19); no student activities fund schedule in the trimmed PDF",
+     "issue": "This is a trimming gap, not an extraction error: Exhibit O object detail for programs 2152 onward and the student activities fund schedule (about 607,133 receipts and 427,465 disbursements, by roll-forward) are not in the trimmed PDF. Programs 2152 onward are taken from Exhibit G as 'not itemized'. Re-trim and re-extract."}
+  ]
+}
