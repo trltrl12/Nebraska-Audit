@@ -1,15 +1,9 @@
 {
   "stem": "Callaway_Public_Schools_FY2025",
-  "values_checked": 312,
+  "values_checked": 585,
   "issues": [
-    {"severity": "warning", "path": "report_discrepancies[0]", "page": 13,
-     "extracted": 472271.88, "on_page": "group totals exceed printed lines by 472,271.88 (2100 92,983.82; 2200 386.98; 2310 3,392.12; 2320-30 4,463.86; 2400 26,437.43; 2500 12,213.08; 2610 205,658.57; 2620 118,416.82; 2710 8,319.20)",
-     "issue": "Confirmed the report itself doesn't add up; this is not an extraction miss. Every printed actual line in these groups is in detail[] and I re-added each group (pp12-15). The schedule is continuous (report pp29-34 = original pp32-37 per manifest; no page dropped by trimming), and the Budget and 2024 Actual columns of the same groups are also short (e.g. 2100 budget lines 270,509 vs total 334,461; 2024 lines 257,621.68 vs 290,450.00; 2200 budget 74,418 vs 78,924; 2310 budget 23,493 vs 27,693), so rows (e.g. 211/231 in 2100, salaries in 2610/2620) were left out of the printed schedule. There is nothing on the page to recover. The 2200 shortfall of 386.98 is not a misread digit: all 2200 digits re-checked. The entry is correct; keep it."},
-    {"severity": "warning", "path": "receipts[15]/receipts[16].split_from", "page": 2,
-     "extracted": "65,919.82 federal + 827.29 state", "on_page": "Operating Grants and Contributions - School Nutrition 66,747.11",
-     "issue": "Split uses the School Nutrition fund schedule (p9: 4210 Federal reimbursements 65,919.82 + 3150 State reimbursements 827.29 = 66,747.11). That is a defensible breakdown of the line, but p2 itself prints only one figure."},
-    {"severity": "warning", "path": "detail[69].detail_category", "page": 13,
-     "extracted": "dues, training and travel", "on_page": "580 SPED transport 155.85",
-     "issue": "SPED pupil transport, not staff travel; professional/contract services (or function student transportation) may fit better"}
+    {"severity": "error", "path": "detail[118].original_label", "page": 14, "extracted": "643 Web based software", "on_page": "733 Furniture and equipment 0.09", "issue": "in 2320-30 Executive administration the 0.09 actual sits on the 733 Furniture and equipment row (the row whose 2024 budget is 500.00); the 643 Web based software row is '-' for 2025 (its 2024 budget is 1,000.00). Label should be 733 Furniture and equipment and detail_category equipment purchases; the note saying it is on the 643 row is also wrong"},
+    {"severity": "error", "path": "receipts[7].category", "page": 2, "extracted": "intergovernmental/state aid", "on_page": "Operating Grants and Contributions - School Nutrition 66,747.11 (p9: 3150 State reimbursements 827.29 + 4210 Federal reimbursements 65,919.82)", "issue": "mixed line must take the dominant category; 98.8% is federal, so it should be 'federal grants' (detail records the 65,919.82 as federal grants)"},
+    {"severity": "warning", "path": "disbursements[11].category", "page": 2, "extracted": "other", "on_page": "Corporate grants 2,000.00", "issue": "function not stated on p2 or p15 (3400 Grants from Corporations); 'other' with review is defensible. Same for detail[163]"}
   ]
 }

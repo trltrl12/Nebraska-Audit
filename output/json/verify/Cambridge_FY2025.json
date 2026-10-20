@@ -1,21 +1,11 @@
 {
   "stem": "Cambridge_FY2025",
-  "values_checked": 205,
+  "values_checked": 185,
   "issues": [
-    {"severity": "warning", "path": "report_discrepancies", "page": 18,
-     "extracted": null, "on_page": "Note A: General Fund total revenues (GAAP) 991,823 (= 1,006,002 - 14,179)",
-     "issue": "The report contradicts itself: the governmental funds statement (p6) and the departmental combining schedule (p20) both print General Fund total revenues 991,283. Extracted values use 991,283 and tie, so no extracted figure is wrong, but there is no report_discrepancies entry for this 540 difference."},
-    {"severity": "warning", "path": "receipts[9].category", "page": 7,
-     "extracted": "other", "on_page": "Loan collections 159,024",
-     "issue": "repayments of notes receivable (LB840 107,712, Street 37,526, Recreation 9,600, other funds 4,186); no receipt category fits, and the line is arguably a balance-sheet collection rather than revenue. Together with Other income 18,363, governmental 'other' is about 10.6% of receipts."},
-    {"severity": "warning", "path": "receipts[16].category", "page": 11,
-     "extracted": "federal grants", "on_page": "Grant income 107,669 (Water 47,839, Sewer 59,830; capital grants on p3)",
-     "issue": "grant source (federal vs state) not stated on the page"},
-    {"severity": "warning", "path": "receipts[8].category", "page": 7,
-     "extracted": "donations/contributions", "on_page": "Grants and contributions 176,786 (p3: operating grants 70,613 + capital grants 106,173 incl. ambulance 106,948 on p19)",
-     "issue": "probably mostly government grants rather than private gifts; already marked review"},
-    {"severity": "warning", "path": "detail[83].category", "page": 15,
-     "extracted": "debt service principal", "on_page": "Debt service 43,672",
-     "issue": "combined principal + interest line classed as principal (p6 GAAP: Street principal 34,445, interest 32,494)"}
+    {"severity": "warning", "path": "receipts[9].category", "page": 7, "extracted": "other", "on_page": "Loan collections 159,024", "issue": "Loan collections (repayments of LB840/street/housing rehab notes receivable) in 'other'; no listed category clearly fits, so defensible, but it is 9.5% of governmental receipts. Same for detail[9], detail[51], detail[58], detail[62] (miscellaneous revenue)"},
+    {"severity": "warning", "path": "receipts[8].category", "page": 7, "extracted": "donations/contributions", "on_page": "Grants and contributions 176,786", "issue": "Statement of Activities (pp2-3) shows governmental operating grants and contributions 70,613 and capital grants and contributions 250,545 by function, and the GF departments schedule (p20) puts 50,000 under Administrative and 106,948 under Ambulance; part may be government grants (intergovernmental/federal) rather than private donations. Same for detail[8]"},
+    {"severity": "warning", "path": "business-type receipts: receipts[17].category", "page": 11, "extracted": "intergovernmental/state aid", "on_page": "Grant income 107,669 (water 47,839, sewer 59,830)", "issue": "Statement of Activities (p3) reports these as capital grants and contributions; grantor (state vs federal) is not stated"},
+    {"severity": "warning", "path": "detail[13,19,23,27,35,39,43].detail_category", "page": 20, "extracted": "employee benefits and payroll taxes", "on_page": "Salaries and benefits", "issue": "combined salaries-and-benefits lines; salaries are usually the dominant part, so 'salaries and wages' may fit better"},
+    {"severity": "warning", "path": "detail[16,18,21,25,29,34,37,41,45].detail_category", "page": 20, "extracted": "not itemized", "on_page": "Operating expenses", "issue": "these are object lines inside each department's breakdown, not function totals without object detail; 'not itemized' is reserved for the latter (could be 'miscellaneous expenditure' with review)"}
   ]
 }
