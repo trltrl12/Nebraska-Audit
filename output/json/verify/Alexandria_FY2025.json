@@ -1,15 +1,10 @@
 {
   "stem": "Alexandria_FY2025",
-  "values_checked": 33,
+  "values_checked": 34,
   "issues": [
-    {"severity": "warning", "path": "disbursements[5].category", "page": 3,
-     "extracted": "debt service principal", "on_page": "Debt Service 37,001.00 (Water 10,356.00, Sewer 26,645.00)",
-     "issue": "Line 39 'Debt Service' does not split principal from interest; all of it is recorded as principal. The amount and the business-type fund_type (Water and Sewer columns only) are correct."},
-    {"severity": "warning", "path": "receipts[10].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Water 48,689.65, Sewer 58,743.15)",
-     "issue": "The Water and Sewer fund receipts are printed only as 'Local Receipts: Other'. Treating them as utility charges is a presumption (the line already has a review flag). The arithmetic 107,432.80 is correct."},
-    {"severity": "warning", "path": "balance_sheet.assets[0].original_label", "page": 1,
-     "extracted": "Net Cash Balance (Ending Balance)", "on_page": "Net Cash Balance (line 26)",
-     "issue": "Label is embellished. The page prints 'Net Cash Balance'. The amount 350,699.11 is correct, and it is the all-funds total (governmental plus business-type), as the notes say."}
+    {"severity": "warning", "path": "receipts[10].category", "page": 1, "extracted": "other", "on_page": "Local Receipts: Other (Water Fund column) 48,689.65", "issue": "Only receipt of the Water Fund; almost certainly water sales, so 'charges for services/fees' is the likely category. Label also has '(Water Fund)' appended, which is not printed. Already marked review."},
+    {"severity": "warning", "path": "receipts[11].category", "page": 1, "extracted": "other", "on_page": "Local Receipts: Other (Sewer Fund column) 58,743.15", "issue": "Only receipt of the Sewer Fund; almost certainly sewer charges, so 'charges for services/fees' is the likely category. Label also has '(Sewer Fund)' appended, which is not printed. Already marked review."},
+    {"severity": "warning", "path": "disbursements[5]", "page": 3, "extracted": {"fund_type": "business-type", "category": "debt service principal", "amount": 37001.00}, "on_page": "Line 39 Debt Service (under Governmental heading): Water Fund 10,356.00 + Sewer Fund 26,645.00 = 37,001.00", "issue": "Judgment call: the line is printed under the Governmental heading but sits entirely in the Water/Sewer columns, so it was treated as business-type. Principal and interest are combined, so 'debt service principal' is an assumption. Arithmetic is correct and the value is marked computed."},
+    {"severity": "warning", "path": "balance_sheet.equity[0].original_label", "page": 1, "extracted": "Ending Balance (Line 24)", "on_page": "Ending Balance (Line 22 MINUS Line 23)", "issue": "Label is not exactly as printed. The amount 350,699.11 is correct."}
   ]
 }

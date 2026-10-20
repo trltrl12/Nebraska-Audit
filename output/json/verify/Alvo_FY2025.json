@@ -1,22 +1,11 @@
 {
   "stem": "Alvo_FY2025",
-  "values_checked": 26,
-  "report_discrepancies_confirmed": [],
+  "values_checked": 27,
   "issues": [
-    {"severity": "warning", "path": "receipts[2].category", "page": 1,
-     "extracted": "intergovernmental/state aid / other state aid", "on_page": "Line 9 State Receipts: Motor Vehicle Fee 1,485.02 (Street Fund)",
-     "issue": "The category rules list 'motor vehicle fees' under motor vehicle tax, but this form prints it under State Receipts, separate from line 15 'Local Receipts: Motor Vehicle Tax'. Judgment call (already flagged for review)."},
-    {"severity": "warning", "path": "receipts[6].detail_category", "page": 1,
-     "extracted": "charges for services/fees / other utility charges", "on_page": "Line 18 Local Receipts: Other, Water/Sewer column 47,878.98",
-     "issue": "The form doesn't say what this is. Treating it as water/sewer charges is an assumption (already flagged for review)."},
-    {"severity": "warning", "path": "disbursements[3].category", "page": 3,
-     "extracted": "debt service principal / debt principal", "on_page": "Line 39 Debt Service 9,856.70 (Street Fund)",
-     "issue": "Principal and interest are not split on the page, so classing all of it as principal is an assumption (already flagged for review)."},
-    {"severity": "warning", "path": "disbursements[4]", "page": 3,
-     "extracted": "other / miscellaneous expenditure 30,296.14", "on_page": "Line 40 Miscellaneous: General 23.08, Street 30,273.06",
-     "issue": "The Street Fund 'Miscellaneous' is large (74% of Street spending). It could be capital or a transfer, but lines 19/20 and 49/50 (transfers) are blank, so there is no evidence of a hidden transfer. Already flagged for review."},
-    {"severity": "warning", "path": "balance_sheet.assets[0]", "page": 1,
-     "extracted": "Net Cash Balance 40,165.43 (Total column)", "on_page": "County Treasurer Balance at September 30, 2025: 2,451.17 (printed below the table)",
-     "issue": "The extractor assumed the county treasurer balance is already included in Net Cash Balance. The form doesn't say so. If it isn't included, cash is understated by 2,451.17."}
+    {"severity": "warning", "path": "receipts[6].category", "page": 1, "extracted": "other", "on_page": "Local Receipts: Other (WATER/SEWER column) 47,878.98", "issue": "Only receipt of the Water/Sewer fund; almost certainly utility charges, so 'charges for services/fees' is the likely category. Label also has '(Water/Sewer)' appended, which is not printed. Already marked review."},
+    {"severity": "warning", "path": "disbursements[3].category", "page": 3, "extracted": "debt service principal", "on_page": "Debt Service 9,856.70 (Street Fund)", "issue": "Principal and interest are combined (Road Loan, p5), so 'principal' is an assumption. Already marked review."},
+    {"severity": "warning", "path": "disbursements[4].category", "page": 3, "extracted": "other", "on_page": "Miscellaneous: General 23.08 + Street Fund 30,273.06 = 30,296.14", "issue": "30,273.06 of it is Street Fund spending, so 'streets/highways' could be argued for most of the line. 'other' is defensible because the label says only Miscellaneous. Already marked review."},
+    {"severity": "warning", "path": "balance_sheet.equity[0].original_label", "page": 1, "extracted": "Ending Balance (Line 24)", "on_page": "Ending Balance (Line 22 MINUS Line 23)", "issue": "Label is not exactly as printed. The amount 40,165.43 is correct."},
+    {"severity": "warning", "path": "notes", "page": 2, "extracted": "revised version used (pp1,3,5)", "on_page": "pp2,4,6 are an earlier, crossed-out original (total receipts 134,042.01, ending 39,935.43)", "issue": "Assumption: the 'Revision received' pages were used and the crossed-out original was ignored. This looks correct, and every cited figure matches the revised pages."}
   ]
 }
