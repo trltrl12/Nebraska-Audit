@@ -1,0 +1,22 @@
+{
+  "stem": "Auburn_Housing_Authority_-_Valley_View_FY2025",
+  "values_checked": 50,
+  "issues": [
+    {"severity": "warning", "path": "balance_sheet.liabilities[2].original_label", "page": 1,
+     "extracted": "Accrued compensated absences (current)", "on_page": "Accrued compensated absences",
+     "issue": "label has an added '(current)' qualifier not printed; it sits under CURRENT LIABILITIES"},
+    {"severity": "warning", "path": "balance_sheet.liabilities[7]", "page": 1,
+     "extracted": {"original_label": "Accrued compensated absences (noncurrent)", "category": "accrued liabilities"},
+     "on_page": "NONCURRENT LIABILITIES: Accrued compensated absences 1,273.66",
+     "issue": "label has an added '(noncurrent)' qualifier; category 'accrued liabilities' is meant for amounts due soon, a noncurrent compensated-absence balance could be 'other liabilities'"},
+    {"severity": "warning", "path": "balance_sheet.scope", "page": 1,
+     "extracted": "government-wide", "on_page": "STATEMENT OF NET POSITION-PROPRIETARY FUND",
+     "issue": "statement is a proprietary fund statement (single fund, column 'Housing'), not a government-wide statement; amounts are fine"},
+    {"severity": "warning", "path": "receipts[1].category", "page": 2,
+     "extracted": "other", "on_page": "Other income 31,694.60",
+     "issue": "unexplained operating 'Other income' (about 15% of operating revenue) left in 'other'; defensible as nothing on the page explains it. Already marked review"},
+    {"severity": "warning", "path": "business_type.other_financing", "page": 2,
+     "extracted": 108116.90, "on_page": "CAPITAL CONTRIBUTIONS: HUD capital grants 108,116.90",
+     "issue": "federal HUD capital grant recorded as other financing (capital contribution) instead of a federal grants receipt; matches the capital-contributions rule but the total federal grant revenue is understated in receipts"}
+  ]
+}
