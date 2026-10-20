@@ -1,0 +1,18 @@
+{
+  "stem": "Panhandle_Area_Development_District_FY2025",
+  "values_checked": 50,
+  "issues": [
+    {"severity": "warning", "path": "report_discrepancies[0]", "page": 2,
+     "extracted": 73, "on_page": "15 operating expense lines (Total column, and the same in the Without Donor Restrictions column) add to 312,072; printed Total Operating Expenses 312,145",
+     "issue": "Confirmed: the report itself doesn't add up. This is not a misread or a missed line. Every line was checked visually, and there are no other expense lines on p2. The printed total 312,145 is backed by the loss from operations (297,053 - 312,145 = -15,092), the net position roll-forward (1,853,323 - 9,452 = 1,843,871) and the p3 cash flow (goods and services payments 102,386 = 312,145 - employee costs 208,167 - depreciation 914 - AP increase 678). So one printed line item is probably 73 too low, but the page doesn't say which. As a result the business-type identity (beginning + receipts - disbursements = ending) will also be off by 73. Only a 'totals' entry was recorded; consider a matching 'business' entry."},
+    {"severity": "warning", "path": "receipts[0].category", "page": 2,
+     "extracted": "charges for services/fees", "on_page": "Memberships 68,044",
+     "issue": "The district's members are local governments, so these dues could be intergovernmental/state aid (county/other local governments). Judgment call."},
+    {"severity": "warning", "path": "balance_sheet.liabilities[3].category", "page": 1,
+     "extracted": "other liabilities", "on_page": "NONCURRENT LIABILITIES: Conditional Grants 269,535; Less: Current Portion of Long-Term Liabilities (29,512)",
+     "issue": "The categories don't match. The current portion 29,512 is recorded as 'debt - due within one year', but the noncurrent balance it is taken from is 'other liabilities'. The p3 cash flow shows 'Principal Payments on Long-Term Debt' (29,725), so the conditional grants look like repayable debt, which would be 'debt - due in more than one year' (net 240,023)."},
+    {"severity": "warning", "path": "balance_sheet.assets[5].category", "page": 1,
+     "extracted": "receivables", "on_page": "OTHER ASSETS - RESTRICTED: Loan Receivable - Economic Development, Net 201,486 (and the three other loan receivables)",
+     "issue": "The page prints the four loan receivables under 'Other Assets - Restricted'. 'restricted assets' would also fit. Judgment call, noted by the extractor."}
+  ]
+}
