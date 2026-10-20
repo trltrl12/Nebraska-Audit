@@ -1,0 +1,16 @@
+{
+  "stem": "Louisville_Public_Schools_FY2025",
+  "values_checked": 225,
+  "issues": [
+    {"severity": "warning", "path": "disbursements[1].category", "page": 4,
+     "extracted": "support services", "on_page": "Student support services 741,340 = General Fund 355,108 + Other Governmental Funds (Activities Fund) 386,232",
+     "issue": "Most of this line (386,232, 52%) is Activities Fund spending, which is student activities. The rule says to pick the dominant category, or the line could be split by its printed p4 fund columns (355,108 support services / 386,232 student activities). The extractor kept the whole line as support services and does not mention the mix in notes."},
+    {"severity": "warning", "path": "detail[81]", "page": 6,
+     "extracted": "contra -118,400 in group 'State categorical and federal programs' (category instruction)",
+     "on_page": "Reclassifications column: Instruction +219,736, Instructional support (23,400), Private and state categorical programs (68,603), Federal programs (246,133); total (118,400)",
+     "issue": "The page puts 95,000 of the hidden transfer in the categorical/federal group (68,603 + 246,133 - 219,736) and 23,400 in the Instructional support row. A single -118,400 contra under categorical/federal charges 23,400 to instruction that the page takes out of support services - instruction. Fund and function totals still tie (instruction 7,092,205; instructional support 550,266) because detail[90] offsets it, but splitting the contra into -95,000 (instruction) and -23,400 (support services, department Support services - instruction) would match the page more closely."},
+    {"severity": "warning", "path": "detail[90].category", "page": 12,
+     "extracted": "instruction", "on_page": "Employee Benefit Fund 'Benefits paid' 23,400; printed in the Instructional support row of the Employee Benefit column on p6",
+     "issue": "p6 prints this spending under Instructional support, so support services fits the page better. It is recorded as instruction only to offset the contra placement in detail[81]. Already marked review."}
+  ]
+}
