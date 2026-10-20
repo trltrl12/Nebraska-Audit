@@ -24,6 +24,7 @@ row comes from, e.g. "7" or "7-10, 23-31") and `page_link` (opens the Auditor's 
 of those pages).
 Run after validate.py and build_csv.py (it reads their outputs).
 """
+import json
 import sys
 from pathlib import Path
 
@@ -35,7 +36,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from common import (BS_SECTIONS, DETAIL_EXPENSE_CATEGORIES, DETAIL_REVENUE_CATEGORIES,  # noqa: E402
                     DISBURSEMENT_CATEGORIES, FILE_LIST, FLAGGED, FUND_TYPES, MANIFEST, OUTPUT, PROGRESS_CSV,
                     PROPRIETARY_FIELDS, RECEIPT_CATEGORIES, REVIEW_CSV, SUMMARY_CSV, amt, fund_type,
-                    load_reports, page, page_ranges, read_csv, reported_total)
+                    JSON_DIR, load_reports, page, page_ranges, read_csv, reported_total, write_csv)
 
 XLSX = OUTPUT / "cashflow.xlsx"
 MONEY = '#,##0.00;[Red](#,##0.00)'
@@ -291,6 +292,42 @@ def main():
     add_sheet(wb, "Progress", ph + REF,
               [[r[h] for h in ph] + (ref_all(r["filename"]) if kept(r["filename"]) else ["", url(r["filename"])])
                for r in pr], status_col="status")
+
+    # ---- Mistakes: errors printed in the reports themselves, and extraction errors the verifier caught
+    mrows = []
+    for s_, d in reports:
+        m = manifest.get(Path(s_).stem, {})
+        who = dict(entity_name=d.get("entity_name"), subdivision_type=m.get("subdivision_type", ""),
+                   county=m.get("county", ""), filename=s_)
+        for x in d.get("report_discrepancies") or []:
+            if isinstance(x, dict):
+                mrows.append(dict(who, kind="error in the printed report", check=x.get("check"),
+                                  difference=x.get("difference"), description=x.get("note"),
+                                  source_page=x.get("source_page")))
+        vf = JSON_DIR / "verify" / f"{s_}.json"
+        if vf.exists():
+            try:
+                issues = json.loads(vf.read_text(encoding="utf-8")).get("issues") or []
+            except Exception:  # noqa: BLE001
+                issues = []
+            for i in issues:
+                txt = str(i.get("issue") or "")
+                if i.get("severity") == "error" or txt.startswith("[fixed"):
+                    mrows.append(dict(who, kind="extraction error caught by the verifier"
+                                      + (" (fixed)" if txt.startswith("[fixed") else " (open)"),
+                                      check=i.get("path"), difference="", description=txt,
+                                      source_page=i.get("page")))
+    mh = ["entity_name", "subdivision_type", "county", "filename", "kind", "check", "difference", "description"]
+    write_csv(OUTPUT / "report_mistakes.csv", mrows, mh + ["source_page"])
+    add_sheet(wb, "Mistakes", mh + REF, [[r.get(h) for h in mh] + ref(r["filename"], r.get("source_page"))
+                                         for r in mrows], ["difference"])
+    tally = {}
+    for r in mrows:
+        k = (r["subdivision_type"] or "?", r["kind"].split(" (")[0])
+        t = tally.setdefault(k, [set(), 0])
+        t[0].add(r["filename"]); t[1] += 1
+    add_sheet(wb, "Mistakes by Type", ["subdivision_type", "kind", "reports", "mistakes"],
+              [[k[0], k[1], len(v[0]), v[1]] for k, v in sorted(tally.items())])
 
     # ---- Notes
     add_sheet(wb, "Notes", ["filename", "entity_name", "notes"] + REF,
