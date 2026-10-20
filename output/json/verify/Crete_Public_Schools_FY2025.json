@@ -1,0 +1,24 @@
+{
+  "stem": "Crete_Public_Schools_FY2025",
+  "values_checked": 270,
+  "issues": [
+    {"severity": "warning", "path": "receipts[13].category", "page": 4,
+     "extracted": "intergovernmental/state aid", "on_page": "County sources 179,171 (p10: County fines 172,921 + ESU receipts 6,250)",
+     "issue": "This broad group is mostly county fines. The dominant category is fines and forfeitures, which is the category detail[12] uses for the same money. The line has no 'broad group; detail on p.10' review flag."},
+    {"severity": "warning", "path": "receipts[14].category", "page": 4,
+     "extracted": "intergovernmental/state aid", "on_page": "State sources 21,790,630",
+     "issue": "This broad group also includes nameplate capacity tax (1,425 + 180 + 151, which is 'other taxes') and homestead/property tax credits, itemized on p10, p17 and p18. It has no 'broad group' review flag. The same applies to receipts[15] Federal sources (itemized on p11)."},
+    {"severity": "warning", "path": "disbursements[4].category", "page": 4,
+     "extracted": "support services", "on_page": "Support services: Pupils 2,504,082 (General 1,789,012 + Other Governmental Funds 715,070)",
+     "issue": "The 715,070 from the Activity Fund is student activity spending, which the rules classify as 'student activities'. The line mixes categories, and the notes don't mention it as the rules require."},
+    {"severity": "warning", "path": "detail[136].category", "page": 20,
+     "extracted": "support services", "on_page": "Benefits paid 21,493 (p4 shows it under Regular instruction, Other Governmental Funds column)",
+     "issue": "The review note says the function isn't given, but the governmental funds statement does give it (Regular instruction). The category should probably be 'instruction', so the detail and statement functions agree."},
+    {"severity": "warning", "path": "detail[134].detail_category", "page": 18,
+     "extracted": "debt principal", "on_page": "Loan repayment 395,625",
+     "issue": "The loan repayment could include interest; the page doesn't split it. On p4 the Special Building column puts all of its spending (2,637,288, including this repayment) in Capital outlay, so the statement-level and detail functions differ for this line."},
+    {"severity": "warning", "path": "disbursements[15].split_from", "page": 4,
+     "extracted": "Debt service 2,111,806 split into principal 1,468,646 and interest/issuance 643,160", "on_page": "Debt service: General 128,646 + Bond 1,983,160 (p15 Principal 128,646; p17 Principal 1,340,000, Interest 642,345, Bond issuance costs 815)",
+     "issue": "The split is built from the fund column breakdowns on p4, p15 and p17; the arithmetic is correct. It's acceptable under the split rule, but the original_label text was changed. Kept for review."}
+  ]
+}
