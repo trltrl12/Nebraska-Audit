@@ -1,0 +1,21 @@
+{
+  "stem": "Palmyra_FY2025",
+  "values_checked": 47,
+  "issues": [
+    {"severity": "warning", "path": "disbursements[5].review", "page": 5,
+     "extracted": null, "on_page": "Payroll related 55,747; Operating 23,286; Supplies and maintenance 154,044 (business-type, by object only)",
+     "issue": "The business-type spending is listed only by object (no function) and was given the fund's function, 'utilities'. The extractor rules say to add review 'listed by object' to such lines (disbursements[5]-[7]), and none is present."},
+    {"severity": "warning", "path": "detail[86].amount", "page": 6,
+     "extracted": 130640, "on_page": "Budget schedule Water 130,640 vs statement Water total operating 130,639 (p5); Drop Off 39,381 vs 39,382",
+     "issue": "The report has a $1 rounding difference between the budget schedule and the statement (Water +1, Drop Off -1); the combined total of 282,836 agrees. The figures are recorded as printed."},
+    {"severity": "warning", "path": "decision_needed", "page": 6,
+     "extracted": "transfers null", "on_page": "Reconciliation: Receipts and transfers 832,443; Disbursements (924,983), vs budget schedule receipts 752,443 and disbursements 844,983",
+     "issue": "The government-wide reconciliation shows 80,000 more receipts and 80,000 more disbursements than the statements and the budget schedule. These look like interfund transfers that cancel out (the net change of -92,540 agrees), but no statement prints them. A person should confirm whether there were 80,000 of transfers; this is not in decision_needed[]."},
+    {"severity": "warning", "path": "missing", "page": 6,
+     "extracted": null, "on_page": "Receipts and ransfers 752,443 (actual), budget 652,922",
+     "issue": "The budget schedule's single receipts line was not entered in detail. It combines governmental (539,958) and business-type (212,485) receipts and has no breakdown, and the notes explain why it was left out, so this is defensible but incomplete."},
+    {"severity": "warning", "path": "receipts[4].category", "page": 3,
+     "extracted": "donations/contributions", "on_page": "Grants and donations 104,445 (General)",
+     "issue": "The line mixes grants and donations, and the grantor is not stated. It could be state or federal grants. The Statement of Activities (report p5), which might break it down by function or program, is not in the trimmed PDF (the trim jumps from report p4 to p6). The extractor already marked this line review."}
+  ]
+}

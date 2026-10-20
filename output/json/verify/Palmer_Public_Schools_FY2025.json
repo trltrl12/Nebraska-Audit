@@ -1,0 +1,18 @@
+{
+  "stem": "Palmer_Public_Schools_FY2025",
+  "values_checked": 192,
+  "issues": [
+    {"severity": "warning", "path": "receipts[14].category", "page": 2,
+     "extracted": "charges for services/fees", "on_page": "Licenses and fines 2,025 (government-wide general receipts, p2); 'Fees' 2,025 on p4 and '1740 Fees' on p12",
+     "issue": "The report's own government-wide statement calls this 2,025 'Licenses and fines', so it may belong in licenses and permits or fines and forfeitures rather than charges for services. The same applies to detail[6] (1740 Fees, detail_category 'other charges for services')."},
+    {"severity": "warning", "path": "detail[50]", "page": 14,
+     "extracted": {"category": "other", "amount": 1361}, "on_page": "Other non-revenue receipts 1,361; Transfers (1,361) under other financing (p14); Reclassifications column (1,361) against Nonrevenue receipts and transfers 198,639 = 200,000 - 1,361 (p7-8)",
+     "issue": "The p7 reclassification treats this 1,361 receipt as part of the transfers (it is removed from receipts and netted out of the 200,000 transfer), so it is probably a transfer and not revenue. As recorded, the same 1,361 shows up once as 'other' revenue and once as a -1,361 transfer out of the Depreciation Fund (detail[53]). The page does not show where the 1,361 went, so it is a one-sided transfer, and decision_needed[] does not cover it."},
+    {"severity": "warning", "path": "detail[83].budget_final", "page": 19,
+     "extracted": null, "on_page": 105119,
+     "issue": "The 105,119 budget is printed on the 'Salaries - spanish teacher' row and repeated as the total. Leaving the line's budget_final null, as the notes explain, is defensible, but it differs from the page."},
+    {"severity": "warning", "path": "receipts[18]", "page": 2,
+     "extracted": "State receipts 3,485,640 (p4)", "on_page": "State aid 1,722,720; Other state receipts 1,344,684 (p2)",
+     "issue": "The report's government-wide statement shows 'State aid' as 1,722,720. That is the General Fund's 2024 actual for 3110 State aid; the 2025 figure is 1,810,102 (p11). The general receipts still tie to the total (6,760,767), so this is only a labeling or split oddity in the report and does not affect the JSON, which uses the p4 fund statement."}
+  ]
+}
