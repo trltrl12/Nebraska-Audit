@@ -1,0 +1,21 @@
+{
+  "stem": "Ogallala_Public_Schools_FY2025",
+  "values_checked": 243,
+  "issues": [
+    {"severity": "warning", "path": "detail[13].detail_category", "page": 8,
+     "extracted": "other state aid", "on_page": "3110 State aid 1,346,316",
+     "issue": "Function code 3110 'State aid' is the TEEOSA equalization aid line; 'state school aid (TEEOSA)' fits better than 'other state aid'"},
+    {"severity": "warning", "path": "detail[54].category", "page": 10,
+     "extracted": "capital outlay / not itemized", "on_page": "2600 Building improvements 89,870",
+     "issue": "Function code 2600 is operation and maintenance of plant (Building and grounds); p5 splits it 1,763 building and grounds + 88,107 capital outlay. Capital outlay as the dominant part is defensible; detail_category could be 'land and buildings' instead of 'not itemized' since the label names an object"},
+    {"severity": "warning", "path": "disbursements[11].category", "page": 5,
+     "extracted": "instruction", "on_page": "State categorical programs 20,626; Federal programs 605,890",
+     "issue": "Recorded under instruction 'per school rule', but the report's own Statement of Activities (p2) lists State categorical programs and Federal programs as separate functions, not under Instruction. No better category exists, so this stays a judgment call (applies to disbursements[12] and detail[52] too)"},
+    {"severity": "warning", "path": "detail[42].original_label", "page": 5,
+     "extracted": "Transfer to Depreciation Fund (within Pupil transportation)", "on_page": "Pupil transportation eliminations (54,450)",
+     "issue": "The label is built by the extractor, not printed. The split itself is supported (p5 eliminates 54,450 and 20,000 from those two exact lines, and the Depreciation Fund p9 shows Transfer from General Fund 74,450). Same for detail[43] (20,000, State categorical programs)"},
+    {"severity": "warning", "path": "notes", "page": null,
+     "extracted": "Read pages 1-13 of 13", "on_page": "trim jumps report p18 to p20 and p47 to p49",
+     "issue": "The 13 trimmed pages are all covered and every line on them is in the JSON. But report p19 (probably the reconciliation) and p48 (probably the combining balance sheet) were not trimmed, and there is no General Fund Exhibit N or per-account activity schedule in the trim. Check the source PDF to confirm nothing with schedule lines was dropped"}
+  ]
+}

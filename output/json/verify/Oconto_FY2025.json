@@ -1,0 +1,22 @@
+{
+  "stem": "Oconto_FY2025",
+  "values_checked": 37,
+  "issues": [
+    {"severity": "warning", "path": "receipts[11].category", "page": 1,
+     "extracted": "other",
+     "on_page": "Local Receipts: Other, WATER FUND XX320 column 50,765.52 (the Water Fund's only receipt)",
+     "issue": "This is almost certainly water charges (charges for services/fees). Left in other with review because the page doesn't label it. Defensible, but it is 100% of business-type receipts in other."},
+    {"severity": "warning", "path": "notes", "page": 1,
+     "extracted": "line 26 General net cash reads 3,283.84 on p1 and 3,283.36 on p5",
+     "on_page": "p1 line 26 General Net Cash Balance reads 3,283.36, the same as p5 (258,856.48 - 255,573.12 = 3,283.36; the line 26 total 20,391.25 ties)",
+     "issue": "The note claims p1 and p5 differ, but I couldn't confirm that. No JSON value is affected."},
+    {"severity": "warning", "path": "ending_investments", "page": 6,
+     "extracted": 255573.12,
+     "on_page": "Schedule of Investments: USDA Reserve 57,743.43 + USDA Reserve 7,910.16 + Water restricted 63,361.41 are included in the 255,573.12 that Exhibit A line 27 puts in the GENERAL FUND column",
+     "issue": "About 129,015 of the investments the report shows under the General Fund look like water-system reserves. Kept governmental as printed. The business_type ending balance (5,490.55) may understate the water fund's resources."},
+    {"severity": "warning", "path": "disbursements[6].category", "page": 3,
+     "extracted": "general government (also disbursements[7] streets/highways)",
+     "on_page": "General Government 2,844.07 and Public Works - Streets 2,016.79 in WATER FUND XX320 column",
+     "issue": "Water Fund spending printed on governmental function lines. Kept business-type by column with governmental function categories; utilities might fit better. Already flagged review."}
+  ]
+}
