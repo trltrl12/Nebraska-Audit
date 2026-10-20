@@ -99,6 +99,11 @@ independent verifier, so unmarked computed values show up as errors. If a value 
   capital projects…) or `business-type` (enterprise / proprietary funds: water, sewer, electric,
   gas, refuse, school nutrition, airport, golf course…). Never add the two together. Skip
   fiduciary/custodial/agency funds entirely.
+  - **Cash-basis village/city statements with one column per fund** (e.g. General, Street, Water,
+    Sewer, "Enterprise Fund", Lagoon…): every utility/enterprise column is business-type, even when the
+    statement has no separate proprietary section. Split mixed rows by column (split_from), take
+    governmental balances from the governmental columns only, and fill `business_type` from the
+    utility columns. Never fold a utility column into the governmental totals.
   - Governmental lines come from the governmental funds statement, using its **Total
     Governmental Funds** column (if there's no total column, add the fund columns yourself and
     say so in `notes`).
