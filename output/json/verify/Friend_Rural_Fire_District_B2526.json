@@ -1,0 +1,12 @@
+{
+  "stem": "Friend_Rural_Fire_District_B2526",
+  "values_checked": 13,
+  "issues": [
+    {"severity": "warning", "path": "receipts[5].category", "page": 1,
+     "extracted": "other (1,317,414)", "on_page": "Local Receipts: Other 1,317,414.00; p2 Documentation of Transfers: 'BOND PROCEEDS RECEIVED FOR NEW FIRE BUILDING WERE TRANSFERRED TO AN ICS SAVINGS ACCOUNT' (1,500,000)",
+     "issue": "This line is 95% of the year's receipts and is very likely the bond proceeds named on p2 (prior year 8,493; 2025-26 budget adds 103,758 bond P&I and 1,763,000 capital improvements). If so it belongs in debt_proceeds, not receipts. The extractor kept it as 'other' with review, but did not add the decision_needed[] entry the rules ask for when an unexplained line that is most of the year's receipts may be loan proceeds."},
+    {"severity": "warning", "path": "transfers_in", "page": 2,
+     "extracted": 1500000, "on_page": "Transfer From: MONEY MARKET SAVINGS, To: ICS SAVINGS - BOND FUND, 1,500,000.00",
+     "issue": "Per p2 this was a move between bank accounts (FDIC coverage), not a fund-to-fund transfer. Figures match lines 16/28 and net to zero; noting only that it is a cash move printed as a transfer."}
+  ]
+}
