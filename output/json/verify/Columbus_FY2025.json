@@ -1,19 +1,24 @@
 {
   "stem": "Columbus_FY2025",
-  "values_checked": 168,
+  "values_checked": 161,
   "issues": [
-    {"severity": "error", "path": "disbursements[0].source_page", "page": 6, "extracted": 5, "on_page": 6, "issue": "General government 2,733,629 is the Total Governmental Funds figure printed on p6; p5 shows only the fund columns (General Fund 2,693,029). The amount is right but the cited page is wrong."},
-    {"severity": "error", "path": "disbursements[1].source_page", "page": 6, "extracted": 5, "on_page": 6, "issue": "Public safety 12,656,903 is printed only on p6 (Total column); p5 General Fund shows 10,935,565."},
-    {"severity": "error", "path": "disbursements[2].source_page", "page": 6, "extracted": 5, "on_page": 6, "issue": "Public works 3,309,015 is printed only on p6 (Total column); p5 shows 3,027,514 (Streets)."},
-    {"severity": "error", "path": "disbursements[3].source_page", "page": 6, "extracted": 5, "on_page": 6, "issue": "Cultural and recreation 6,410,848 is printed only on p6 (Total column); p5 General Fund shows 6,405,557."},
-    {"severity": "error", "path": "disbursements[4].source_page", "page": 6, "extracted": 5, "on_page": 6, "issue": "Community development 2,048,566 is printed only on p6 (Total column); p5 General Fund shows 706,968."},
-    {"severity": "error", "path": "disbursements[5].source_page", "page": 6, "extracted": 5, "on_page": 6, "issue": "Capital outlay 11,754,259 is printed only on p6 (Total column); p5 shows 6,384,581 and 3,811,945."},
-    {"severity": "warning", "path": "receipts[1].category", "page": 6, "extracted": "licenses and permits", "on_page": "Fees, taxes, permits and licenses 2,489,713", "issue": "Combined line mixing fees, taxes, permits and licenses; no breakdown printed. The dominant component is unknown (Streets fund's 729,735 share is probably state highway allocation or other taxes)."},
-    {"severity": "warning", "path": "receipts[6].category", "page": 6, "extracted": "intergovernmental/state aid", "on_page": "Grants 2,957,956", "issue": "The source isn't stated: the grants could be federal or state. Airport fund grants of 898,966 (p17) are likely FAA (federal)."},
-    {"severity": "warning", "path": "receipts[10].category", "page": 10, "extracted": "occupation/franchise tax", "on_page": "Franchise fees 4,789,801 (Electric Fund)", "issue": "This is the Electric Fund's only revenue, possibly lease or franchise payments from the electric operator. It could be charges for services/fees. Defensible."},
-    {"severity": "warning", "path": "receipts[12].category", "page": 10, "extracted": "sales tax", "on_page": "Sales tax 588,710 (operating revenue of the utility funds)", "issue": "Sales tax collected on utility bills and remitted (offset by 'Sales tax remitted' 630,059). It is a pass-through, not the city's own sales tax revenue. Defensible as printed."},
-    {"severity": "warning", "path": "detail[15].category", "page": 14, "extracted": "licenses and permits", "on_page": "Fees, taxes, permits, and licenses 4,135,454 (Streets/Engineering Fund)", "issue": "For a street fund this amount is most likely state highway allocation or motor vehicle/wheel tax, not licenses and permits. No breakdown printed. The category is doubtful."},
-    {"severity": "warning", "path": "detail[30].detail_category", "page": 16, "extracted": "debt interest and fees", "on_page": "Other 669,970", "issue": "The schedule prints only 'Other'. The interest category is inferred from p5 (1/2 Cent Sales Tax Fund interest and fiscal charges 669,970). The inference is reasonable."},
-    {"severity": "warning", "path": "missing", "page": 17, "extracted": null, "on_page": "Combining Statement of Revenues, Expenditures and Changes in Fund Balances - Nonmajor Governmental Funds (pp17-18): 10 fund columns (Airport, Downtown, Gaming, E911, Wireless 911, 911 Equipment Share, Housing Rehab Loans, Progress and Jobs Growth, Keno, Library Foundation)", "issue": "The nonmajor detail is not recorded. The trimmed pages are incomplete: the 10 columns' revenues add to 5,243,633 against Other Governmental Funds 5,493,196 (p6), and no Total column is printed. The rule's alternative would be the Other Governmental Funds column (pp5-6) as 'Nonmajor funds (combined)'. The extractor disclosed this in notes."}
+    {"severity": "warning", "path": "missing", "page": 17,
+     "extracted": null, "on_page": "Combining Statement - Nonmajor Governmental Funds: 10 fund columns, no Total column; revenues sum 5,243,633 vs Other Governmental Funds 5,493,196 (p6); expenditures sum 4,945,061 vs 5,759,886",
+     "issue": "The trimmed PDF is missing the rest of the nonmajor combining statement (remaining fund columns and the Total column), so no nonmajor detail was recorded. Detail is incomplete until the PDF is re-trimmed. Candidate for the CLAUDE.md 'Trimmed PDF is missing pages' follow-up."},
+    {"severity": "warning", "path": "receipts[4].category", "page": 17,
+     "extracted": "charges for services/fees", "on_page": "Keno fund column: Charges for services 579,410 (part of Other Governmental Funds 675,990 = Airport 7,746 + E911 71,440 + Housing Rehab 17,394 + Keno 579,410)",
+     "issue": "579,410 of 'Charges for services' 4,105,578 is Keno fund revenue (keno/lottery), and the combining statement prints this breakdown by fund. Keeping it whole is defensible because the line label is 'Charges for services', but keno revenue is understated as a result (only Gaming tax 621,186 is in keno/lottery)."},
+    {"severity": "warning", "path": "detail[15].category", "page": 14,
+     "extracted": "licenses and permits", "on_page": "Fees, taxes, permits, and licenses 4,135,454 (Streets/Engineering, budget basis)",
+     "issue": "On the GAAP statement (p5), Streets/Engineering revenue is Sales tax 3,440,668 + Fees, taxes, permits and licenses 729,735 = 4,170,403. So the budget-basis line is probably mostly sales tax (and/or highway allocation), not licenses and permits. Category is doubtful. Already marked review."},
+    {"severity": "warning", "path": "receipts[1].category", "page": 6,
+     "extracted": "licenses and permits", "on_page": "Fees, taxes, permits and licenses 2,489,713 (p2 general revenues show 'Other taxes and fees' 4,458,288)",
+     "issue": "This combined line mixes taxes, fees, permits and licenses, and the report gives no breakdown. 'licenses and permits' is a guess; occupation taxes may dominate. The same applies to business-type receipts[11] (568,514). Already marked review."},
+    {"severity": "warning", "path": "receipts[6].category", "page": 17,
+     "extracted": "intergovernmental/state aid", "on_page": "Grants 2,957,956, incl. Airport fund Grants 898,966 and Housing Rehab 215,050",
+     "issue": "The grant source is unspecified. The Airport fund's 898,966 is likely FAA (federal), so part of this may belong in federal grants. Already marked review."},
+    {"severity": "warning", "path": "receipts[12].amount", "page": 10,
+     "extracted": 588710, "on_page": "Sales tax 588,710 (enterprise funds), with Sales tax remitted 630,059 as an operating expense",
+     "issue": "This is sales tax collected on utility bills and remitted to the state, a pass-through. Recording it as 'sales tax' receipts inflates the city's business-type sales tax. Recorded as printed."}
   ]
 }
