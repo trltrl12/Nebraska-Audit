@@ -3,7 +3,7 @@
 "entity_type": "village",
 "fiscal_year_end": "2025-09-30",
 "basis": "cash",
-"extraction_attempt": 2,
+"extraction_attempt": 3,
 "beginning_cash": {"amount": 346553, "source_page": 4},
 "beginning_investments": null,
 "beginning_fund_balance": null,
@@ -16,10 +16,10 @@
 {"fund_type":"governmental","category":"charges for services/fees","original_label":"Licenses and permits","amount":165,"source_page":4},
 {"fund_type":"governmental","category":"charges for services/fees","original_label":"Rent","amount":3795,"source_page":4},
 {"fund_type":"governmental","category":"other taxes","original_label":"Franchise fees","amount":18146,"source_page":4},
-{"fund_type":"governmental","category":"investment income","original_label":"Interest income","amount":10535,"source_page":4,"review":"printed under Other Financing Sources (Uses) but treated as a receipt"},
+{"fund_type":"governmental","category":"investment income","original_label":"Interest income","amount":10535,"source_page":4,"outside_printed_total":true,"review":"printed under Other Financing Sources (Uses), below Total Receipts; treated as a receipt"},
 {"fund_type":"business-type","category":"charges for services/fees","original_label":"Charge for services","amount":112049,"source_page":6},
 {"fund_type":"business-type","category":"other","original_label":"Other","amount":16565,"source_page":6},
-{"fund_type":"business-type","category":"investment income","original_label":"Interest income","amount":4539,"source_page":6,"review":"printed under Other Receipts (Disbursements)"}
+{"fund_type":"business-type","category":"investment income","original_label":"Interest income","amount":4539,"source_page":6,"outside_printed_total":true,"review":"printed under Other Receipts (Disbursements), below Total Receipts"}
 ],
 "disbursements": [
 {"fund_type":"governmental","category":"general government","original_label":"Administration","amount":18983,"source_page":4},
@@ -30,9 +30,9 @@
 {"fund_type":"governmental","category":"other","original_label":"Supplies and materials","amount":31104,"source_page":4,"review":"object-based line, function unknown"},
 {"fund_type":"business-type","category":"utilities","original_label":"Personnel","amount":5167,"source_page":6},
 {"fund_type":"business-type","category":"utilities","original_label":"General operating","amount":26637,"source_page":6},
-{"fund_type":"business-type","category":"debt service principal","original_label":"Loan payments","amount":61543,"source_page":6},
-{"fund_type":"business-type","category":"debt service interest","original_label":"Interest expense","amount":28124,"source_page":6},
-{"fund_type":"business-type","category":"capital outlay","original_label":"Capital outlay","amount":30000,"source_page":6}
+{"fund_type":"business-type","category":"debt service principal","original_label":"Loan payments","amount":61543,"source_page":6,"outside_printed_total":true},
+{"fund_type":"business-type","category":"debt service interest","original_label":"Interest expense","amount":28124,"source_page":6,"outside_printed_total":true},
+{"fund_type":"business-type","category":"capital outlay","original_label":"Capital outlay","amount":30000,"source_page":6,"outside_printed_total":true}
 ],
 "transfers_in": null,
 "transfers_out": {"amount": 673, "source_page": 4},
@@ -49,6 +49,10 @@
 "transfers_net":{"amount":673,"source_page":6},"debt_proceeds":null,"other_financing":null,"adjustments":[]
 },
 "proprietary": null,
+"report_discrepancies": [
+{"check":"totals","difference":-1,"source_page":4,"note":"Printed governmental Total Receipts 123,982 but the printed lines in the Total column (41,457+45,987+5,861+5,827+2,745+165+3,795+18,146) add to 123,983; source rounding."},
+{"check":"balance","difference":-1,"source_page":1,"note":"Printed total assets 538,438 vs printed total net position / total liabilities and net position 538,439 (Total column); source rounding."}
+],
 "balance_sheet": {
 "statement":"Statement of Net Position - Cash Basis",
 "scope":"cash basis",
@@ -94,5 +98,5 @@
 {"schedule":"Budget and Actual - All Funds","fund":"All funds","section":"revenue","amount":268343,"source_page":9},
 {"schedule":"Budget and Actual - All Funds","fund":"All funds","section":"expenditure","amount":293413,"source_page":9}
 ],
-"notes": "Cash basis. Governmental figures from Total column of governmental funds statement (p4); beginning 346,553 and ending 339,128. reported_totals are the printed totals (gov receipts 123,982 p4; business-type receipts 128,614 and disbursements 31,804 p6). Interest income 10,535 is printed under Other Financing Sources but recorded as an investment-income receipt, so it is outside the printed governmental total. Printed receipts lines sum to 123,983 (1 off from printed total, rounding in source), so identity is off by 1. Transfers (673) out of governmental funds. Business-type (water and sewer, pp6-8): interest income 4,539 plus loan payments 61,543, interest expense 28,124 and capital outlay 30,000 are printed as Other receipts (disbursements); they are included as lines but are outside the printed business-type totals. Transfers in (net) 673. Business-type begins 216,956 ends 199,311. Balance sheet from Statement of Net Position total column (p1); printed total net position 538,439 vs total assets 538,438 (source rounding). Detail: only the All Funds budgetary schedule exists (p9), mixes governmental and business-type; Taxes line split using statement of activities general revenues (property 45,987, motor vehicle 8,572 = 5,827+2,745, homestead/other 5,861). Transfers kept in revenue/expenditure sections to match printed totals; revenue items sum to 268,344 vs printed 268,343 (rounding). No proprietary cash flow object because cash basis."
+"notes": "Cash basis. Governmental figures from Total column of governmental funds statement (p4); beginning 346,553 and ending 339,128. reported_totals are exactly the printed totals (gov receipts 123,982 and disbursements 141,269 p4; business-type receipts 128,614 and disbursements 31,804 p6). Lines printed below the printed total lines are kept as items with outside_printed_total=true: governmental Interest income 10,535 (under Other Financing Sources); business-type Interest income 4,539, Loan payments 61,543, Interest expense 28,124 and Capital outlay 30,000 (under Other Receipts (Disbursements)). Lines not marked outside sum to: gov receipts 123,983 (printed total 123,982, 1 off, source rounding, see report_discrepancies), gov disbursements 141,269, business-type receipts 128,614, business-type disbursements 31,804. Transfers (673) out of governmental funds; business-type transfers net in 673. Business-type begins 216,956 ends 199,311 and rolls forward. Balance sheet from Statement of Net Position total column (p1); printed total net position 538,439 vs total assets 538,438 (source rounding, see report_discrepancies). Detail: only the All Funds budgetary schedule exists (p9), mixes governmental and business-type; Taxes line split using statement of activities general revenues (property 45,987, motor vehicle 8,572 = 5,827+2,745, homestead/other 5,861). Transfers kept in revenue/expenditure sections to match printed totals; revenue items sum to 268,344 vs printed 268,343 (rounding). No proprietary cash flow object because cash basis."
 }
