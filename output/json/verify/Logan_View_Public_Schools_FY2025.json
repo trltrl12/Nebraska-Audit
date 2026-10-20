@@ -1,0 +1,86 @@
+{
+  "stem": "Logan_View_Public_Schools_FY2025",
+  "values_checked": 199,
+  "issues": [
+    {
+      "severity": "warning",
+      "path": "balance_sheet.assets[0-3].source_page, balance_sheet.equity[0-2].source_page, total_assets.source_page, total_equity.source_page",
+      "page": 3,
+      "extracted": 6,
+      "on_page": "Statement of Activities and Net Position (assets/net position section) is trimmed page 3",
+      "issue": "[fixed directly] every balance-sheet item cites page 6, which is the governmental funds balance sheet. The statement title and labels used ('Bond escrow', 'Cash at county treasurer', 'Unrestricted') are from page 3. Unrestricted 8,016,928 doesn't appear on page 6 at all (p6 shows assigned/unassigned fund balances). source_page should be 3."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[42].amount",
+      "page": 8,
+      "extracted": 1316783,
+      "on_page": "Operation and maintenance of plant 1,316,783 (p13); Reclassifications column (212,500) on p8",
+      "issue": "[fixed directly] the line hides a 212,500 transfer to the Depreciation Fund (p14: 'Transfer - General Fund (as expensed in the General Fund)' 425,000). By the hidden-transfer rule it should be split into 1,104,283 spending plus an other-financing line of -212,500 (split_from, review). As entered, the same money is counted as spending and also as the Depreciation Fund's transfer in (detail[47])."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[43].amount",
+      "page": 8,
+      "extracted": 502578,
+      "on_page": "Student transportation 502,578 (p13); Reclassifications column (212,500) on p8",
+      "issue": "[fixed directly] same hidden transfer: 212,500 of this line is the transfer to the Depreciation Fund. It should be split into 290,078 spending plus -212,500 other financing. As entered it is double counted with detail[47] (+425,000)."
+    },
+    {
+      "severity": "warning",
+      "path": "report_discrepancies",
+      "page": 16,
+      "extracted": "no entry for School Nutrition receipts",
+      "on_page": "Total receipts 420,981; lines 209,427 + 209,296 + 2,257 = 420,980",
+      "issue": "[fixed directly] the School Nutrition Fund's printed total receipts (p16, also p9) is 1 more than its lines add up to. This isn't recorded in report_discrepancies, so detail_totals[2] won't tie to its items."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[11].category",
+      "page": 4,
+      "extracted": "other",
+      "on_page": "Other local receipts 5,852 (General Fund) = Categorical grants from corporations and other private interests 5,100 + Textbook rentals 37 + Other local receipts 715 (p11)",
+      "issue": "[fixed directly] this is a mixed line and 5,100 of the 5,852 (87%) is private grants, so the rule calls for the dominant category, donations/contributions (with review), not 'other'"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[10]",
+      "page": 4,
+      "extracted": "376,744 + 5,852 (split_from)",
+      "on_page": "Other local receipts 382,596 (Total column)",
+      "issue": "the printed total-column line was split into its fund columns (Nonmajor 376,744 / General 5,852). The fund columns on the same row do print this breakdown, so it is defensible, but it is a split rather than one line per printed line."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[25].category",
+      "page": 4,
+      "extracted": "reimbursements/refunds",
+      "on_page": "Interest rebates 301,462 (Bond Fund)",
+      "issue": "rebates of bond interest are usually a federal subsidy (federal grants) rather than a refund. Same for detail[68]."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[5].amount",
+      "page": 4,
+      "extracted": 372024,
+      "on_page": "Motor vehicle tax: General 369,853 + Special Building 2,171 = 372,024; Penalties and interest: 10,639 + 941 = 11,580 vs total 11,579",
+      "issue": "the report itself is inconsistent. The Special Building schedule (p19) calls its 2,171 'Penalties and interest on taxes', but p4 prints it in the Motor vehicle row and total. The penalties row doesn't add across (off by 1), and the General Fund column adds to 10,868,817 against a printed 10,868,816. Only the overall 1-dollar difference is in report_discrepancies. The figures are recorded as printed."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[2].category",
+      "page": 5,
+      "extracted": "support services",
+      "on_page": "Support services - students 1,394,162 (General 934,665 + Nonmajor 459,497)",
+      "issue": "459,497 of this printed line is Activities Fund spending (p9/p22), which the category rules put under student activities. The line is kept as printed, so this is a mixed function."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[9].category",
+      "page": 5,
+      "extracted": "instruction",
+      "on_page": "State categorical programs 161,967; Federal programs 316,740",
+      "issue": "the function is a guess (the extractor marked it for review). Same for disbursements[10], detail[44] and detail[45]."
+    }
+  ]
+}
