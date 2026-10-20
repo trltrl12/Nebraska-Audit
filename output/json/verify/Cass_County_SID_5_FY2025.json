@@ -2,18 +2,42 @@
   "stem": "Cass_County_SID_5_FY2025",
   "values_checked": 165,
   "issues": [
-    {"severity": "error", "path": "detail[31]", "page": 11,
-     "extracted": {"section": "revenue", "category": "other", "original_label": "Miscellaneous", "amount": 3000},
-     "on_page": "Schedule 3 Miscellaneous 3,000; Statement of Cash Flows p7 'Transfers to/from other funds 3,000' (noncapital financing); budgetary excess 75,184 = net increase in cash 75,184",
-     "issue": "The 3,000 'Miscellaneous' revenue in the proprietary budget schedule is the 3,000 transfer from other funds shown on the cash flow statement. It is recorded as revenue instead of an 'other financing' transfer (+3,000). Its detail_totals revenue entry (726,811) includes it and would need 'includes': ['other financing']."},
-    {"severity": "warning", "path": "detail[27].amount", "page": 10,
-     "extracted": -205725, "on_page": "Transfer from other funds (205,725)",
-     "issue": "Recorded as printed (negative, under a 'from' label). The budgetary transfers don't net across funds (General +21,268, Debt Service -205,725, enterprise none on Schedule 3), and the GAAP statement p4 shows no transfers. This is a report oddity; consider a report_discrepancies entry."},
-    {"severity": "warning", "path": "receipts[5].category", "page": 4,
-     "extracted": "investment income", "on_page": "Interest - tower lease 599",
-     "issue": "This is the interest part of a lease receivable (GASB 87), not investment earnings. investment income is defensible; charges for services/fees (rentals) is the alternative. The line is already marked review."},
-    {"severity": "warning", "path": "debt_proceeds", "page": 4,
-     "extracted": 398419, "on_page": "Issuance of warrants 398,419 (Total column)",
-     "issue": "The value is printed as-is in the Total column, so the 'computed' tag is unnecessary (harmless). The warrants retired (394,003) are recorded as other_financing rather than debt service; this follows the statement's other financing section."}
+    {
+      "severity": "warning",
+      "path": "detail[31]",
+      "page": 11,
+      "extracted": {
+        "section": "revenue",
+        "category": "other",
+        "original_label": "Miscellaneous",
+        "amount": 3000
+      },
+      "on_page": "Schedule 3 Miscellaneous 3,000; Statement of Cash Flows p7 'Transfers to/from other funds 3,000' (noncapital financing); budgetary excess 75,184 = net increase in cash 75,184",
+      "issue": "[fixed: moved to other financing] The 3,000 'Miscellaneous' revenue in the proprietary budget schedule is the 3,000 transfer from other funds shown on the cash flow statement. It is recorded as revenue instead of an 'other financing' transfer (+3,000). Its detail_totals revenue entry (726,811) includes it and would need 'includes': ['other financing']."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[27].amount",
+      "page": 10,
+      "extracted": -205725,
+      "on_page": "Transfer from other funds (205,725)",
+      "issue": "Recorded as printed (negative, under a 'from' label). The budgetary transfers don't net across funds (General +21,268, Debt Service -205,725, enterprise none on Schedule 3), and the GAAP statement p4 shows no transfers. This is a report oddity; consider a report_discrepancies entry."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[5].category",
+      "page": 4,
+      "extracted": "investment income",
+      "on_page": "Interest - tower lease 599",
+      "issue": "This is the interest part of a lease receivable (GASB 87), not investment earnings. investment income is defensible; charges for services/fees (rentals) is the alternative. The line is already marked review."
+    },
+    {
+      "severity": "warning",
+      "path": "debt_proceeds",
+      "page": 4,
+      "extracted": 398419,
+      "on_page": "Issuance of warrants 398,419 (Total column)",
+      "issue": "The value is printed as-is in the Total column, so the 'computed' tag is unnecessary (harmless). The warrants retired (394,003) are recorded as other_financing rather than debt service; this follows the statement's other financing section."
+    }
   ]
 }
