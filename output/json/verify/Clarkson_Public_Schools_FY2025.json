@@ -2,36 +2,93 @@
   "stem": "Clarkson_Public_Schools_FY2025",
   "values_checked": 288,
   "issues": [
-    {"severity": "error", "path": "disbursements[29].category", "page": 7,
-     "extracted": "other", "on_page": "Other Expenses and Services 995,850.02 (Special Building 905,603.05, Depreciation 36,850.13, Employee Benefit 53,396.84)",
-     "issue": "Mixed function line should take its dominant category, not 'other'. Schedule I (p20) shows 668,806.00 of it is Special Building construction services (4300-450 624,086.00 + 4600-450 44,720.00), about 67% of the line, so 'capital outlay' fits (keep the review note naming the mix: bond issuance costs 236,691.76, depreciation fund 36,850.13, employee benefit 53,396.84)."},
-    {"severity": "warning", "path": "receipts[6]", "page": 5,
-     "extracted": {"category": "other", "amount": 776836.30}, "on_page": "Non-Revenue Receipts 776,836.30 (incl. Depreciation Fund 5200 Allocation from General Fund 725,000.00, p15)",
-     "issue": "93% of this line is an interfund allocation from the General Fund (transfer-like by its label). The report presents it as a receipt, and no page shows a matching General Fund transfer out (General Fund transfers are only 144,666.25; Schedule M object lines add up to 4,909,725.75 with no 725,000 line). So keeping it as printed holds the roll-forward. But if the General Fund side sits inside one of its spending lines, total receipts and disbursements are both overstated by 725,000. Needs a human look."},
-    {"severity": "warning", "path": "detail[193]", "page": 15,
-     "extracted": {"original_label": "5200 Allocation from General Fund", "section": "revenue", "category": "other", "amount": 725000.0},
-     "on_page": "5200 Allocation from General Fund 725,000.00",
-     "issue": "Same item at the detail level: interfund allocation recorded as revenue in 'other' / 'miscellaneous revenue', not as other financing. Defensible only because the report shows no offsetting transfer out."},
-    {"severity": "warning", "path": "detail[10].category", "page": 11,
-     "extracted": "intergovernmental/state aid / county/other local governments", "on_page": "2110 County Fines and Licenses 27,799.97",
-     "issue": "Label names fines and licenses. These are county-collected fines and license fees passed through to the school, so 'fines and forfeitures' could fit instead."},
-    {"severity": "warning", "path": "detail[195].category", "page": 15,
-     "extracted": "other", "on_page": "2900-300 / 2900-400 / 2900-600 (Depreciation Fund) 3,576.19 / 4,890.87 / 28,383.07",
-     "issue": "Function code 2900 is the 'other support services' function in the NE school chart of accounts, so 'support services' could fit instead of 'other' (applies to detail[194]-[196])."},
-    {"severity": "warning", "path": "detail[199].detail_category", "page": 16,
-     "extracted": "other / miscellaneous expenditure", "on_page": "2900-890 Other Charges 53,396.84 (Employee Benefit Fund)",
-     "issue": "The fund exists to pay employee benefits, so 'employee benefits and payroll taxes' (and function 'support services', code 2900) are arguably more specific than other/miscellaneous."},
-    {"severity": "warning", "path": "detail[213].detail_category", "page": 18,
-     "extracted": "school lunch sales", "on_page": "1630 Special Functions Reimbursement 2,364.17",
-     "issue": "Label says reimbursement. 'reimbursements/refunds' is a possible alternative, though catering for special functions is a food-service charge."},
-    {"severity": "warning", "path": "detail[224].category", "page": 20,
-     "extracted": "other / miscellaneous expenditure", "on_page": "4600-890 Other 105.29",
-     "issue": "Function 4600 is the same construction function as 4600-450 Construction Services, so 'capital outlay' may fit better than 'other' (small amount)."},
-    {"severity": "warning", "path": "detail[*].detail_category (Schedule M 'Other Property Services')", "page": 21,
-     "extracted": "professional/contract services", "on_page": "Other Property Services, e.g. 2310 Board of Education 65,391.20",
-     "issue": "Object code 500 ('other purchased services') usually covers insurance, communications and travel; the Board of Education's 65,391.20 is probably insurance. Category is a judgment call."},
-    {"severity": "warning", "path": "balance_sheet.assets[1].category", "page": 1,
-     "extracted": "due from other governments", "on_page": "County Treasurers' Balance 490,747.61",
-     "issue": "This is the district's cash held by the county treasurers (Schedule N, p29), not an intergovernmental receivable, so 'cash and investments' is arguable. Exhibit III counts it in fund balance as cash."}
+    {
+      "severity": "warning",
+      "path": "disbursements[29].category",
+      "page": 7,
+      "extracted": "other",
+      "on_page": "Other Expenses and Services 995,850.02 (Special Building 905,603.05, Depreciation 36,850.13, Employee Benefit 53,396.84)",
+      "issue": "[fixed: recategorized with review note] Mixed function line should take its dominant category, not 'other'. Schedule I (p20) shows 668,806.00 of it is Special Building construction services (4300-450 624,086.00 + 4600-450 44,720.00), about 67% of the line, so 'capital outlay' fits (keep the review note naming the mix: bond issuance costs 236,691.76, depreciation fund 36,850.13, employee benefit 53,396.84)."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[6]",
+      "page": 5,
+      "extracted": {
+        "category": "other",
+        "amount": 776836.3
+      },
+      "on_page": "Non-Revenue Receipts 776,836.30 (incl. Depreciation Fund 5200 Allocation from General Fund 725,000.00, p15)",
+      "issue": "93% of this line is an interfund allocation from the General Fund (transfer-like by its label). The report presents it as a receipt, and no page shows a matching General Fund transfer out (General Fund transfers are only 144,666.25; Schedule M object lines add up to 4,909,725.75 with no 725,000 line). So keeping it as printed holds the roll-forward. But if the General Fund side sits inside one of its spending lines, total receipts and disbursements are both overstated by 725,000. Needs a human look."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[187]",
+      "page": 15,
+      "extracted": {
+        "original_label": "5200 Allocation from General Fund",
+        "section": "revenue",
+        "category": "other",
+        "amount": 725000.0
+      },
+      "on_page": "5200 Allocation from General Fund 725,000.00",
+      "issue": "Same item at the detail level: interfund allocation recorded as revenue in 'other' / 'miscellaneous revenue', not as other financing. Defensible only because the report shows no offsetting transfer out."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[10].category",
+      "page": 11,
+      "extracted": "intergovernmental/state aid / county/other local governments",
+      "on_page": "2110 County Fines and Licenses 27,799.97",
+      "issue": "Label names fines and licenses. These are county-collected fines and license fees passed through to the school, so 'fines and forfeitures' could fit instead."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[188].category",
+      "page": 15,
+      "extracted": "other",
+      "on_page": "2900-300 / 2900-400 / 2900-600 (Depreciation Fund) 3,576.19 / 4,890.87 / 28,383.07",
+      "issue": "Function code 2900 is the 'other support services' function in the NE school chart of accounts, so 'support services' could fit instead of 'other' (applies to detail[188]-[190])."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[193].detail_category",
+      "page": 16,
+      "extracted": "other / miscellaneous expenditure",
+      "on_page": "2900-890 Other Charges 53,396.84 (Employee Benefit Fund)",
+      "issue": "The fund exists to pay employee benefits, so 'employee benefits and payroll taxes' (and function 'support services', code 2900) are arguably more specific than other/miscellaneous."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[202].detail_category",
+      "page": 18,
+      "extracted": "school lunch sales",
+      "on_page": "1630 Special Functions Reimbursement 2,364.17",
+      "issue": "Label says reimbursement. 'reimbursements/refunds' is a possible alternative, though catering for special functions is a food-service charge."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[224].category",
+      "page": 20,
+      "extracted": "other / miscellaneous expenditure",
+      "on_page": "4600-890 Other 105.29",
+      "issue": "Function 4600 is the same construction function as 4600-450 Construction Services, so 'capital outlay' may fit better than 'other' (small amount)."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[*].detail_category (Schedule M 'Other Property Services')",
+      "page": 21,
+      "extracted": "professional/contract services",
+      "on_page": "Other Property Services, e.g. 2310 Board of Education 65,391.20",
+      "issue": "Object code 500 ('other purchased services') usually covers insurance, communications and travel; the Board of Education's 65,391.20 is probably insurance. Category is a judgment call."
+    },
+    {
+      "severity": "warning",
+      "path": "balance_sheet.assets[1].category",
+      "page": 1,
+      "extracted": "due from other governments",
+      "on_page": "County Treasurers' Balance 490,747.61",
+      "issue": "This is the district's cash held by the county treasurers (Schedule N, p29), not an intergovernmental receivable, so 'cash and investments' is arguable. Exhibit III counts it in fund balance as cash."
+    }
   ]
 }
