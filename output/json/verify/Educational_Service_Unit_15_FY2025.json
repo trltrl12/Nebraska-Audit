@@ -1,0 +1,10 @@
+{
+  "stem": "Educational_Service_Unit_15_FY2025",
+  "values_checked": 123,
+  "issues": [
+    {"severity": "warning", "path": "receipts[5].category", "page": 5, "extracted": "intergovernmental/state aid", "on_page": "1960 Service Revenue from Other Local Government Units 1,354,253", "issue": "Categorised as intergovernmental (county/other local governments), while the similar line 1951 Revenues from ESUs Within the State (receipts[4]) is charges for services. Exhibit B (p2) counts 1385 + 1951 + 1960 (74,706 + 52,370 + 1,354,253 = 1,481,329) as Charges for Services. Either category is defensible, but the two lines are treated inconsistently. Same applies to detail[5]."},
+    {"severity": "warning", "path": "ending_cash", "page": 4, "extracted": 3229248, "on_page": "Fund Balances - Ending 3,229,248; Total Assets (cash, cash with fiscal agent, investments) 3,237,654 (p1)", "issue": "ending_cash/beginning_cash are the fund balance (net of 8,406 Due to Employees), not cash. Total cash and investments is 3,237,654. The roll-forward identity holds on fund balance. The assumption is explained in the notes."},
+    {"severity": "warning", "path": "ending_investments", "page": 1, "extracted": 2000000, "on_page": "Investments 2,000,000", "issue": "The 2,000,000 investments are already inside ending_cash (3,229,248), so adding ending_cash and ending_investments would double count them. beginning_investments is null, so the two years are not on the same basis."},
+    {"severity": "warning", "path": "detail[37].detail_category", "page": 6, "extracted": "not itemized", "on_page": "2530 Printing, Publishing & Duplicating Services 3,290; 2330 ESU Legal Services 9,572 (detail[35])", "issue": "These program codes name an object that fits 'printing, publishing and postage' / 'professional/contract services'. 'not itemized' is defensible because they are function codes."}
+  ]
+}
