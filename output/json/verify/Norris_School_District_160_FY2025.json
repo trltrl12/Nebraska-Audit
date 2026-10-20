@@ -1,0 +1,18 @@
+{
+  "stem": "Norris_School_District_160_FY2025",
+  "values_checked": 201,
+  "issues": [
+    {"severity": "warning", "path": "disbursements[11].amount", "page": 4,
+     "extracted": 1554698, "on_page": "Debt service 2,002,504 (single statement line)",
+     "issue": "The statement prints one Debt service line. The principal/interest split adds up correctly (1,235,000+49,698+270,000 and 392,881+54,925 from the Bond, Special Building and QCPU schedules, pp17/19/21), but it is built from three fund schedules, not from a breakdown of the statement line itself. Defensible because the fund columns 1,468,385+155,119+379,000 tie to the line; the split is marked computed/split_from."},
+    {"severity": "warning", "path": "detail_totals[1].amount", "page": 12,
+     "extracted": 28245927, "on_page": 29097527,
+     "issue": "The printed General Fund Total disbursements is 29,097,527. The extractor recorded 29,097,527 less the 851,600 hidden-transfer contra (marked computed), so the detail items tie. This is not the printed figure."},
+    {"severity": "warning", "path": "receipts[11].category", "page": 3,
+     "extracted": "charges for services/fees", "on_page": "Postsecondary receipts (code 1955, p9)",
+     "issue": "Nature unclear. Code 1955 is in the 1950s miscellaneous-local series, which may be payments from postsecondary institutions (intergovernmental/county/other local governments), not tuition. Already marked review; same applies to detail[10]."},
+    {"severity": "warning", "path": "receipts[18].category", "page": 3,
+     "extracted": "other", "on_page": "Other receipts 19,272 (Depreciation Fund 'Other nonrevenue receipts', p13)",
+     "issue": "Nonrevenue receipts in school accounting are usually sale of property, insurance recoveries or refunds (sale of assets/reimbursements), but the page doesn't say which. 'other' with review is defensible. Same applies to detail[75]."}
+  ]
+}
