@@ -1,0 +1,21 @@
+{
+  "stem": "ONeill_Airport_Authority_FY2025",
+  "values_checked": 62,
+  "issues": [
+    {"severity": "warning", "path": "receipts[*].fund_type", "page": 3,
+     "extracted": "governmental", "on_page": "General Fund (Governmental Fund Revenues, Expenditures, and Changes in Fund Balances)",
+     "issue": "Extractor rules list airport authorities as entirely business-type entities (all lines business-type, balances in business_type, governmental fields null). This extraction records everything as governmental because the report presents a single governmental General Fund. Defensible from the page, but it goes against the stated entity-type rule. All receipts, disbursements and detail lines are affected."},
+    {"severity": "warning", "path": "decision_needed", "page": 3,
+     "extracted": null, "on_page": "Single General Fund reported as a governmental fund for an airport authority",
+     "issue": "decision_needed[] is missing. A person needs to settle whether to treat this airport authority as governmental (as the report presents it) or business-type (as the entity-type rule says)."},
+    {"severity": "warning", "path": "disbursements[0].category", "page": 3,
+     "extracted": "other", "on_page": "Airport operations: Cost of fuel for resale / Operating expenses / Personnel services",
+     "issue": "disbursements[0-2] and every detail expenditure line use function 'other'. The listed-by-object rule would point to the fund's function (General Fund -> general government) with review. There is no airport function, so this is a judgment call."},
+    {"severity": "warning", "path": "receipts[3].category", "page": 3,
+     "extracted": "intergovernmental/state aid", "on_page": "Other taxes and state revenues 12,340",
+     "issue": "The line mixes other taxes with state revenue and no breakdown is printed. 'other taxes' would also be defensible. It is already marked review."},
+    {"severity": "warning", "path": "detail[23].detail_category", "page": 5,
+     "extracted": "dues, training and travel", "on_page": "Fees, permits, and licenses 560",
+     "issue": "Permit and license fees paid are not dues, training or travel. 'miscellaneous expenditure' or 'professional/contract services' may fit better."}
+  ]
+}
