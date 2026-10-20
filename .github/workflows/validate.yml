@@ -27,6 +27,10 @@ jobs:
         with:
           python-version: "3.12"
           cache: pip
+      - name: Install Tesseract (OCR for checking amounts on scanned pages)
+        run: |
+          sudo apt-get update -q && sudo apt-get install -y -q tesseract-ocr
+          echo "TESSDATA_PREFIX=$(dirname "$(find /usr/share -name eng.traineddata | head -1)")" >> "$GITHUB_ENV"
       - run: pip install -r requirements.txt
       - run: python scripts/validate.py
       - run: python scripts/build_csv.py

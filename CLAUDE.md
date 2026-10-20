@@ -39,6 +39,7 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
 - **All 25 subdivision types** are in scope. Entirely business-type entities (hospitals, power,
   housing, airports, community colleges) have only business-type lines and `business_type`
   balances; governmental fields are null. Entity-type rules are in the extractor agent.
+- Any value not printed as-is (sums, splits, derived balances) carries `computed: "<how>"`.
 - **Combined/unlabeled tax lines** are split using the report's own breakdown (`split_from`
   set) or kept as `taxes (unlabeled)`; both, and any line marked `review`, go to
   output/review.csv (the user's review list).
@@ -80,9 +81,13 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
 3. Send them to the `extractor` agent in groups of about 3 reports per agent (trimmed PDFs with
    detail schedules run 15-30 pages) (several agents in
    parallel is fine). Pass only the filenames.
-4. `git add output/json/ && git commit -m "extract: N reports"`, then `git pull --rebase && git push`.
-   GitHub Actions validates and updates progress.
-5. Repeat until the user's usage runs low, then report how many are done and how many remain
+4. Send the same reports to the `verifier` agent (about 3 per agent). It re-reads each trimmed PDF
+   and writes `output/json/verify/<stem>.json` with every discrepancy (errors and warnings).
+5. `git add output/json/ && git commit -m "extract: N reports"`, then `git pull --rebase && git push`.
+   GitHub Actions validates (exact math: >$1 flagged, any smaller difference to review; every
+   amount checked against its page text/OCR; verifier errors flagged, warnings to review) and
+   updates progress.
+6. Repeat until the user's usage runs low, then report how many are done and how many remain
    (counts from `output/progress.csv` after a pull).
 
 Keep the main session lean: don't open PDFs or print JSON in the main conversation. Rely on the

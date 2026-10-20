@@ -10,10 +10,16 @@ Checks per report:
   detail      - detail line items use known categories, and per fund/schedule/section they sum
                 to the totals printed on the schedule (detail_totals)
   business    - business-type (utility) funds roll forward on their own
+  on_page     - every extracted amount appears on the page it cites (text layer or OCR); see
+                pagecheck.py
+  verifier    - discrepancies found by the independent verifier agent (output/json/verify/)
 
-Also writes output/review.csv: items a person should look at even when the numbers check out
-(lines marked "review" by the extractor, split or unlabeled tax lines).
+Every comparison is exact: a difference over $1 is flagged; any difference from 1 cent to $1 goes
+to the review list (possible report rounding). Also writes output/review.csv: items a person should
+look at even when the numbers check out (lines marked "review" by the extractor, split or unlabeled
+tax lines, computed values, amounts not found on their page, verifier notes).
 """
+import json
 import sys
 from pathlib import Path
 
@@ -22,7 +28,11 @@ from common import (DETAIL_EXPENSE_CATEGORIES, DETAIL_REVENUE_CATEGORIES, DETAIL
                     ASSET_CATEGORIES, BS_SECTIONS, LIABILITY_CATEGORIES, balance_sheet_check,
                     DISBURSEMENT_CATEGORIES, FLAGGED, FUND_TYPES, PROPRIETARY_FIELDS, REVIEW_CSV,
                     RECEIPT_CATEGORIES, amt, fund_type, load_reports, page, reconcile, reconcile_business,
-                    reconcile_proprietary, reported_total, sum_items, tol, write_csv)
+                    reconcile_proprietary, reported_total, sum_items, write_csv, JSON_DIR)
+import pagecheck  # noqa: E402
+
+FLAG_OVER = 1.0      # dollars: larger differences are flagged
+REVIEW_OVER = 0.005  # dollars: any smaller nonzero difference goes to the review list
 
 REVIEW_FIELDS = ["filename", "entity_name", "where", "fund_type", "original_label", "amount", "reason",
                  "source_page"]
@@ -46,12 +56,28 @@ def pages_of(d, keys):
 
 
 def check(stem, d):
-    flags = []
+    flags, reviews = [], []
 
     def f(chk, reason, expected="", actual="", pages=""):
         diff = round(actual - expected, 2) if isinstance(expected, float) and isinstance(actual, float) else ""
         flags.append(dict(filename=stem, check=chk, reason=reason, expected=expected,
                           actual=actual, difference=diff, pages=pages))
+
+    def rv(where, reason, label="", amount="", src_page="", ftype=""):
+        reviews.append(dict(filename=stem, entity_name=d.get("entity_name"), where=where, fund_type=ftype,
+                            original_label=label, amount=amount, reason=reason, source_page=src_page))
+
+    def cmp(chk, reason, expected, actual, pages=""):
+        """Exact comparison: flag over $1, review any smaller nonzero difference."""
+        if expected is None or actual is None:
+            return
+        diff = float(actual) - float(expected)
+        if abs(diff) > FLAG_OVER:
+            f(chk, reason, expected=round(float(expected), 2), actual=round(float(actual), 2), pages=pages)
+        elif abs(diff) >= REVIEW_OVER:
+            first = str(pages).split(";")[0] if pages else ""
+            rv(chk, f"{reason}: off by {diff:+,.2f} (report rounding?)", amount=round(float(actual), 2),
+               src_page=first)
 
     for k in REQUIRED:
         if d.get(k) in (None, ""):
@@ -91,9 +117,9 @@ def check(stem, d):
              else ["beginning_cash", "ending_cash"])
     if r["beginning"] is None or r["ending"] is None:
         f("reconcile", f"missing {bkeys[0]} or {bkeys[1]}", pages=pages_of(d, bkeys))
-    elif not r["reconciles"]:
-        f("reconcile", f"{bkeys[0]} + receipts - disbursements + transfers/debt/other != {bkeys[1]}",
-          expected=r["computed_ending"], actual=r["ending"], pages=pages_of(d, bkeys + ["receipts", "disbursements"]))
+    elif gov_only_checks:
+        cmp("reconcile", f"governmental {bkeys[0]} + receipts - disbursements + transfers/debt/other vs {bkeys[1]}",
+            r["computed_ending"], r["ending"], pages=pages_of(d, bkeys))
 
     # Category amounts vs. totals stated in the report, per fund type
     bt = d.get("business_type") or {}
@@ -111,18 +137,17 @@ def check(stem, d):
             for inc in (rt.get("includes") or []) if isinstance(rt, dict) else []:
                 if inc in ("transfers_in", "transfers_out", "debt_proceeds", "other_financing", "transfers_net"):
                     computed += amt(src.get(inc)) or 0
-            if abs(computed - stated) > tol(stated):
-                f("totals", f"sum of {fund} {key} lines != stated total", expected=float(stated),
-                  actual=round(float(computed), 2), pages=f"{page(rt) or ''}")
+            cmp("totals", f"sum of {fund} {key} lines vs printed total", float(stated), computed,
+                pages=f"{page(rt) or ''}")
 
     # Business-type (utility) funds roll forward on their own
     if any(fund_type(i) == "business-type" for k in ("receipts", "disbursements") for i in d.get(k) or []):
         rb = reconcile_business(d)
         if rb["beginning"] is None or rb["ending"] is None:
             f("business", "business-type lines present but business_type.beginning/ending missing")
-        elif not rb["reconciles"]:
-            f("business", "business-type beginning + receipts - disbursements + transfers/debt/other != ending",
-              expected=rb["computed_ending"], actual=rb["ending"])
+        else:
+            cmp("business", "business-type beginning + receipts - disbursements + transfers/debt/other vs ending",
+                rb["computed_ending"], rb["ending"], pages=str(page(bt.get("ending")) or ""))
 
     # Proprietary cash flows (GAAP)
     if basis == "gaap" and d.get("proprietary"):
@@ -131,10 +156,10 @@ def check(stem, d):
         if missing and len(missing) < len(PROPRIETARY_FIELDS):
             f("proprietary", f"missing {', '.join(missing)}")
         pr = reconcile_proprietary(d)
-        if pr and not pr["reconciles"]:
-            pages = ";".join(str(page(v)) for v in p.values() if page(v) is not None)
-            f("proprietary", "beginning cash + activities != ending cash",
-              expected=pr["computed"], actual=pr["ending"], pages=pages)
+        if pr:
+            pages = ";".join(str(page(v)) for v in p.values() if isinstance(v, dict) and page(v) is not None)
+            cmp("proprietary", "cash flows: beginning cash + activities vs ending cash", pr["computed"], pr["ending"],
+                pages=pages)
     # Balance sheet / statement of net position
     bs = d.get("balance_sheet")
     if not bs:
@@ -151,16 +176,14 @@ def check(stem, d):
                     f("schema", f"balance_sheet.{sec}: no source_page for {it.get('original_label')!r}")
             stated = amt(bs.get(tot))
             if stated is not None and bs.get(sec):
-                s = sum_items(bs.get(sec))
-                if abs(s - stated) > tol(stated):
-                    f("balance", f"sum of balance_sheet.{sec} != {tot}", expected=float(stated),
-                      actual=round(float(s), 2), pages=pages_of(bs, [sec]))
+                cmp("balance", f"sum of balance_sheet.{sec} lines vs printed {tot}", float(stated),
+                    sum_items(bs.get(sec)), pages=pages_of(bs, [sec]))
         bc = balance_sheet_check(d)
         if bc is None:
             f("balance", "balance_sheet missing assets or fund balance/net position total")
-        elif not bc["balances"]:
-            f("balance", "assets + deferred outflows != liabilities + deferred inflows + equity",
-              expected=bc["right"], actual=bc["left"], pages=pages_of(bs, list(BS_SECTIONS)))
+        else:
+            cmp("balance", "assets + deferred outflows vs liabilities + deferred inflows + equity",
+                bc["right"], bc["left"], pages=pages_of(bs, list(BS_SECTIONS)))
     # Detail schedules (line items)
     detail = d.get("detail") or []
     fine = {"revenue": DETAIL_REVENUE_CATEGORIES, "expenditure": DETAIL_EXPENSE_CATEGORIES}
@@ -189,10 +212,30 @@ def check(stem, d):
         stated = amt(tot)
         if stated is None or key not in sums:
             continue
-        if abs(sums[key] - stated) > tol(stated):
-            f("detail", f"detail lines != printed total for {key[2]} / {key[0] or 'all funds'} / {key[1]}",
-              expected=float(stated), actual=round(sums[key], 2), pages=str(tot.get("source_page", "")))
-    return flags
+        cmp("detail", f"detail lines vs printed total for {key[2]} / {key[0] or 'all funds'} / {key[1]}",
+            float(stated), sums[key], pages=str(tot.get("source_page", "")))
+
+    # Every amount must appear on the page it cites
+    for miss in pagecheck.check_report(stem, d):
+        rv("on_page", miss["reason"], miss["label"], miss["amount"], miss["source_page"], miss.get("fund_type", ""))
+
+    # Independent verifier
+    vf = JSON_DIR / "verify" / f"{stem}.json"
+    if vf.exists():
+        try:
+            ver = json.loads(vf.read_text(encoding="utf-8"))
+        except Exception as e:  # noqa: BLE001
+            ver = {"issues": [{"severity": "error", "issue": f"unreadable verifier file: {e}"}]}
+        for i in ver.get("issues") or []:
+            text = f"verifier: {i.get('issue', '')}" + (f" (page shows {i['on_page']})" if i.get("on_page") not in
+                                                        (None, "") else "")
+            if i.get("severity") == "error":
+                f("verifier", f"{i.get('path', '')}: {text}", pages=str(i.get("page", "")))
+            else:
+                rv("verifier", text, i.get("path", ""), i.get("extracted", ""), i.get("page", ""))
+    else:
+        rv("verifier", "not yet independently verified")
+    return flags, reviews
 
 
 def review_items(stem, d):
@@ -205,6 +248,8 @@ def review_items(stem, d):
                 reasons.append(str(it["review"]))
             if it.get("split_from"):
                 reasons.append(f"split from combined line: {it['split_from']}")
+            if it.get("computed"):
+                reasons.append(f"computed, not printed: {it['computed']}")
             cats = (it.get("category"), it.get("detail_category"))
             if "taxes (unlabeled)" in cats:
                 reasons.append("tax line with no tax type; could not be split from the report")
@@ -223,8 +268,10 @@ def main():
         if err:
             rows.append(dict(filename=stem, check="schema", reason=err))
             continue
-        rows.extend(check(stem, d))
+        fl, rvs = check(stem, d)
+        rows.extend(fl)
         review.extend(review_items(stem, d))
+        review.extend(rvs)
     write_csv(FLAGGED, rows, FLAG_FIELDS)
     write_csv(REVIEW_CSV, review, REVIEW_FIELDS)
     print(f"validated {n} reports; {len({r['filename'] for r in rows})} flagged ({len(rows)} issues); "
