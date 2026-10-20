@@ -2,11 +2,53 @@
   "stem": "Educational_Service_Unit_18_FY2025",
   "values_checked": 70,
   "issues": [
-    {"severity": "error", "path": "disbursements[1].category", "page": 2, "extracted": "other", "on_page": "Other state and federal 2,606,617 (p3); Statement of Activities p2 reports Instruction 3,491,370 = 884,753 + 2,606,617", "issue": "the report itself classes this spending as Instruction (p2), so a specific category fits; should be 'instruction', not 'other'"},
-    {"severity": "error", "path": "detail[16..22].category", "page": 5, "extracted": "other", "on_page": "Other Federal lines 430,786 / 1,060,147 / 504,895 / 266,041 / 40,878 / 92,550 / 211,320 (total 2,606,617)", "issue": "same as disbursements[1]: p2 puts this program under Instruction; function should be 'instruction', not 'other'"},
-    {"severity": "warning", "path": "detail[29..32].detail_category", "page": 5, "extracted": "professional/contract services", "on_page": "Co-op contracts: District staff development 1,495,349; Computer technology 2,329,627; Assessment services 358,373; Media contracted services 109,769", "issue": "these are co-op program totals with no object breakdown; 'not itemized' may fit better than professional/contract services"},
-    {"severity": "warning", "path": "receipts[3].category", "page": 2, "extracted": "other taxes", "on_page": "Other 467,391 (p3 Local sources); shown under Taxes - Other on p2", "issue": "kind of tax not stated; defensible since p2 lists it under Taxes (already marked review). Actual is far above the 1,500 budget"},
-    {"severity": "warning", "path": "ending_cash", "page": 3, "extracted": 13990151, "on_page": "Fund balance, end of year 13,990,151; investments held by LPS 14,118,486 (p1)", "issue": "beginning/ending 'cash' are the fund balance (net of 128,335 accrued expenses and encumbrances), not cash; explained in notes. No governmental funds statement in the trimmed PDF, so the budget schedule was used"},
-    {"severity": "warning", "path": "detail[11..32].budget_final", "page": 3, "extracted": null, "on_page": "function budgets on p3: Instruction 1,036,535; Other state and federal 3,818,608; Support services and business 7,898,255; General administration 140,118; Co-op contracts and services 4,839,686", "issue": "expenditure budgets are printed by function on p3 but not recorded anywhere, because the by-object p5 schedule was used; information lost, not a wrong figure"}
+    {
+      "severity": "error",
+      "path": "disbursements[1].category",
+      "page": 2,
+      "extracted": "other",
+      "on_page": "Other state and federal 2,606,617 (p3); Statement of Activities p2 reports Instruction 3,491,370 = 884,753 + 2,606,617",
+      "issue": "[fixed] the report itself classes this spending as Instruction (p2), so a specific category fits; it should be 'instruction', not 'other'"
+    },
+    {
+      "severity": "error",
+      "path": "detail[16..22].category",
+      "page": 5,
+      "extracted": "other",
+      "on_page": "Other Federal lines 430,786 / 1,060,147 / 504,895 / 266,041 / 40,878 / 92,550 / 211,320 (total 2,606,617)",
+      "issue": "[fixed] same as disbursements[1]: p2 puts this program under Instruction, so the function should be 'instruction', not 'other'"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[35..38].detail_category",
+      "page": 5,
+      "extracted": "professional/contract services",
+      "on_page": "Co-op contracts: District staff development 1,495,349; Computer technology 2,329,627; Assessment services 358,373; Media contracted services 109,769",
+      "issue": "these are co-op program totals with no object breakdown; 'not itemized' may fit better than professional/contract services"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[3].category",
+      "page": 2,
+      "extracted": "other taxes",
+      "on_page": "Other 467,391 (p3 Local sources); shown under Taxes - Other on p2",
+      "issue": "the kind of tax is not stated; defensible since p2 lists it under Taxes (already marked review). The actual is far above the 1,500 budget"
+    },
+    {
+      "severity": "warning",
+      "path": "ending_cash",
+      "page": 3,
+      "extracted": 13990151,
+      "on_page": "Fund balance, end of year 13,990,151; investments held by LPS 14,118,486 (p1)",
+      "issue": "beginning/ending 'cash' are the fund balance (net of 128,335 accrued expenses and encumbrances), not cash; this is explained in notes. There is no governmental funds statement in the trimmed PDF, so the budget schedule was used"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[11..38].budget_final",
+      "page": 3,
+      "extracted": null,
+      "on_page": "function budgets on p3: Instruction 1,036,535; Other state and federal 3,818,608; Support services and business 7,898,255; General administration 140,118; Co-op contracts and services 4,839,686",
+      "issue": "expenditure budgets are printed by function on p3 but not recorded anywhere, because the by-object p5 schedule was used; information lost, not a wrong figure"
+    }
   ]
 }

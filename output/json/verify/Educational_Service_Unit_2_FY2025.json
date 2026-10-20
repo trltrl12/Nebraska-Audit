@@ -2,14 +2,77 @@
   "stem": "Educational_Service_Unit_2_FY2025",
   "values_checked": 186,
   "issues": [
-    {"severity": "error", "path": "detail[18].category", "page": 7, "extracted": "intergovernmental/state aid / other state aid", "on_page": "3133 Nameplate capacity tax 222", "issue": "the receipt rules list nameplate capacity tax under 'other taxes' (detail 'other local taxes'), as Carline taxes in this same report and nameplate tax in ESU 1 are treated"},
-    {"severity": "error", "path": "receipts[11].category", "page": 7, "extracted": "other", "on_page": "1960 Miscellaneous revenues from other local government units 197,204", "issue": "the label names the source (other local governments), so 'intergovernmental/state aid' (county or other local government payments) fits; 'other' is a last resort"},
-    {"severity": "error", "path": "detail[11].category", "page": 7, "extracted": "other / miscellaneous revenue", "on_page": "1960 Miscellaneous revenues from other local government units 197,204", "issue": "should be intergovernmental/state aid, detail 'county/other local governments' (same as receipts[11])"},
-    {"severity": "warning", "path": "receipts[9].category", "page": 7, "extracted": "other", "on_page": "1951 Miscellaneous revenue from ESU's within state 88,220", "issue": "paid by other ESUs (local governments); 'intergovernmental/state aid' / 'county/other local governments' may fit better (same for detail[9])"},
-    {"severity": "warning", "path": "receipts[13].category", "page": 7, "extracted": "other", "on_page": "1990 Miscellaneous local receipts 347,728 (budget 10,000)", "issue": "nature not described; with the other 'other' lines this is about 3% of receipts (already marked review)"},
-    {"severity": "warning", "path": "receipts[12].category", "page": 7, "extracted": "other", "on_page": "1970 Revenue from other departments in agency 4,601", "issue": "may be an internal reimbursement (reimbursements/refunds); judgment call"},
-    {"severity": "warning", "path": "receipts[17]", "page": 8, "extracted": "Other receipts 9,833 as revenue (other)", "on_page": "Other financing sources: 9000 Non-program receipts 9,833 (included in Total receipts); matching 9000 Non-Program Expenditures 9,833 (p10)", "issue": "printed under 'Other financing sources' and offset exactly by non-program expenditures; likely a pass-through rather than revenue. Kept as revenue because the printed total includes it (already marked review)"},
-    {"severity": "warning", "path": "receipts[15]", "page": 7, "extracted": "State sources 1,190,498 as one intergovernmental/state aid line", "on_page": "State sources breakdown on p7 includes 3133 Nameplate capacity tax 222", "issue": "Local was split using the p7 breakdown but State was not, so a small tax line stays inside state aid; categories are inconsistent between receipts and detail"},
-    {"severity": "warning", "path": "disbursements[8].category", "page": 4, "extracted": "other", "on_page": "Private and state categorical programs 528,208 (p10: private categorical grants 131,250; state early childhood 385,507; school safety 11,451)", "issue": "judgment call: mostly early childhood programs, which could be instruction; same for detail[27..29]"}
+    {
+      "severity": "error",
+      "path": "detail[17].category",
+      "page": 7,
+      "extracted": "intergovernmental/state aid / other state aid",
+      "on_page": "3133 Nameplate capacity tax 222",
+      "issue": "[fixed] the receipt rules list nameplate capacity tax under 'other taxes' (detail 'other local taxes'), the same way Carline taxes in this report and nameplate tax in ESU 1 are treated"
+    },
+    {
+      "severity": "error",
+      "path": "receipts[11].category",
+      "page": 7,
+      "extracted": "other",
+      "on_page": "1960 Miscellaneous revenues from other local government units 197,204",
+      "issue": "[fixed] the label names the source (other local governments), so 'intergovernmental/state aid' (county or other local government payments) fits; 'other' is a last resort"
+    },
+    {
+      "severity": "error",
+      "path": "detail[11].category",
+      "page": 7,
+      "extracted": "other / miscellaneous revenue",
+      "on_page": "1960 Miscellaneous revenues from other local government units 197,204",
+      "issue": "[fixed] should be intergovernmental/state aid, detail 'county/other local governments' (same as receipts[11])"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[9].category",
+      "page": 7,
+      "extracted": "other",
+      "on_page": "1951 Miscellaneous revenue from ESU's within state 88,220",
+      "issue": "paid by other ESUs (local governments); 'intergovernmental/state aid' / 'county/other local governments' may fit better (same for detail[9])"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[13].category",
+      "page": 7,
+      "extracted": "other",
+      "on_page": "1990 Miscellaneous local receipts 347,728 (budget 10,000)",
+      "issue": "nature not described; together with the other 'other' lines this is about 3% of receipts (already marked review)"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[12].category",
+      "page": 7,
+      "extracted": "other",
+      "on_page": "1970 Revenue from other departments in agency 4,601",
+      "issue": "may be an internal reimbursement (reimbursements/refunds); judgment call"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[17]",
+      "page": 8,
+      "extracted": "Other receipts 9,833 as revenue (other)",
+      "on_page": "Other financing sources: 9000 Non-program receipts 9,833 (included in Total receipts); matching 9000 Non-Program Expenditures 9,833 (p10)",
+      "issue": "printed under 'Other financing sources' and offset exactly by non-program expenditures, so it is likely a pass-through rather than revenue. Kept as revenue because the printed total includes it (already marked review)"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[15]",
+      "page": 7,
+      "extracted": "State sources 1,190,498 as one intergovernmental/state aid line",
+      "on_page": "State sources breakdown on p7 includes 3133 Nameplate capacity tax 222",
+      "issue": "Local was split using the p7 breakdown but State was not, so a small tax line stays inside state aid; the categories are inconsistent between receipts and detail"
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[8].category",
+      "page": 4,
+      "extracted": "other",
+      "on_page": "Private and state categorical programs 528,208 (p10: private categorical grants 131,250; state early childhood 385,507; school safety 11,451)",
+      "issue": "judgment call: mostly early childhood programs, which could be instruction; same for detail[59..61]"
+    }
   ]
 }

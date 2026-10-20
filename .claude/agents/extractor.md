@@ -269,6 +269,13 @@ receipts/disbursements" includes the transfer, add `"includes": ["other financin
 `detail_totals` entry instead of moving the transfer into revenue or expenditure; an `other financing`
 line printed outside that total gets `"outside_printed_total": true`.
 
+**Educational Service Units and school districts (state account codes):** 1951/1960-type lines
+("Miscellaneous revenue from other districts / ESUs / other local government units") are
+`intergovernmental/state aid` / `county/other local governments`, never `other`; nameplate capacity tax
+is `other taxes` / `other local taxes`; interlocal-agreement and service-contract revenue is
+`charges for services/fees`; "Other state and federal" or program lines that the report's own
+statement counts under Instruction go to `instruction`.
+
 **Questions only a person can settle** (a one-sided transfer, an unexplained line that is most of the
 year's receipts and may be loan proceeds, a possibly voided page, a filing for the wrong year): record
 the line as the rules say, and also add an entry to `decision_needed[]`:
