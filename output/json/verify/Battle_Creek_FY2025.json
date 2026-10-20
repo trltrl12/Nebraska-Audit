@@ -1,0 +1,30 @@
+{
+  "stem": "Battle_Creek_FY2025",
+  "values_checked": 77,
+  "issues": [
+    {"severity": "warning", "path": "business_type", "page": 6,
+     "extracted": "business-type lines from government-wide Statement of Activities (p2-3)", "on_page": "trimmed PDF jumps from report page 9 (proprietary Statement of Net Position) to page 13 (cash flows); report pages 10-12 are not in the trimmed PDF",
+     "issue": "the proprietary funds Statement of Revenues, Expenses and Changes in Net Position (accrual, with depreciation; total net position 3,345,413 on p6) appears to be missing from the trimmed PDF, so business-type lines could not be taken from it. Trimming issue, not an extraction error"},
+    {"severity": "warning", "path": "business_type.measure", "page": 3,
+     "extracted": "net position", "on_page": "Net Position - modified cash basis, Business-Type 305,632 -> 306,297",
+     "issue": "the roll-forward is the cash-basis government-wide net position (cash 14,301 + due from other funds 267,153 + investments 24,843), not accrual net position; measure 'cash' may be more accurate"},
+    {"severity": "warning", "path": "transfers_in", "page": 3,
+     "extracted": 208240, "on_page": "Transfers From (To) Other Funds: Governmental 208,240, Business-Type (208,698), Total (458)",
+     "issue": "the report's own transfers don't net to zero (difference 458); no report_discrepancies entry records this"},
+    {"severity": "warning", "path": "receipts[1].category", "page": 5,
+     "extracted": "intergovernmental/state aid", "on_page": "Operating Grants and Contributions 7,500 (Park)",
+     "issue": "source not stated; could be donations/contributions"},
+    {"severity": "warning", "path": "detail[1].category", "page": 9,
+     "extracted": "donations/contributions", "on_page": "Grants and Contributions 153,927",
+     "issue": "153,927 = operating grants 7,500 + sewer capital grants 146,427, which receipts[] classes as intergovernmental/state aid; same money categorized differently in receipts and detail"},
+    {"severity": "warning", "path": "detail[0].fund_type", "page": 9,
+     "extracted": "governmental", "on_page": "All-funds budget schedule: Charges for Services 7,691,117 (includes utility charges 1,903,433 and nursing home)",
+     "issue": "all eight all-funds revenue lines (detail[0]-detail[7]) are marked governmental although they include business-type and nursing home revenue; flagged review by extractor"},
+    {"severity": "warning", "path": "detail[18].fund_type", "page": 9,
+     "extracted": "governmental", "on_page": "Debt Service Principal 229,081; Interest and Fees 24,638",
+     "issue": "229,081 = governmental 24,081 + business-type 205,000 (and 24,638 = 3,058 + 21,580); detail[18] and detail[19] are mostly business-type debt service but are marked governmental"},
+    {"severity": "warning", "path": "detail[1].budget_final", "page": 9,
+     "extracted": null, "on_page": "-",
+     "issue": "budget column prints '-' (zero) for Grants and Contributions, Franchise Fees, Investment Income, Miscellaneous Income and Interest and Fees; recorded as null instead of 0"}
+  ]
+}
