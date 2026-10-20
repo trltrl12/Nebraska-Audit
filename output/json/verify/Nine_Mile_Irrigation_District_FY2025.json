@@ -1,0 +1,24 @@
+{
+  "stem": "Nine_Mile_Irrigation_District_FY2025",
+  "values_checked": 11,
+  "issues": [
+    {"severity": "warning", "path": "receipts[2]", "page": 1,
+     "extracted": "receipt, category other, 22582.47", "on_page": "Local Receipts -- Cost-Share Loan for SWIIF Grant $22,582.47",
+     "issue": "Label says loan. If this is loan proceeds, the rules put it in business_type.debt_proceeds, not receipts. It is printed inside line 16 Total Resources Available, and decision_needed already raises the question, so it is left as a warning."},
+    {"severity": "warning", "path": "receipts[1].category", "page": 1,
+     "extracted": "other", "on_page": "Local Receipts $149,302.18",
+     "issue": "Broad form line with no breakdown on the page, so 'other' with review is defensible. For an irrigation district this is probably irrigation assessments or water charges. It is 34% of receipts, so the >10% 'other' review applies."},
+    {"severity": "warning", "path": "disbursements[0].category", "page": 1,
+     "extracted": "utilities", "on_page": "Operating Expenses $128,092.99",
+     "issue": "Operating expenses with no function. The extractor rules list water and drainage districts under 'natural resources/conservation', which may fit an irrigation district better than 'utilities'. Judgment call; review already set."},
+    {"severity": "warning", "path": "disbursements[2].category", "page": 1,
+     "extracted": "debt service interest", "on_page": "Debt Service: Other $31,489.24",
+     "issue": "The page doesn't say whether this is principal or interest. Given the SWIIF cost-share loan, it may be mostly loan principal. Assumption; review already set."},
+    {"severity": "warning", "path": "entity_type", "page": 1,
+     "extracted": "public power / utility (all lines business-type)", "on_page": "Nine Mile Irrigation District, 2025 Audit Waiver Request, Total of All Funds",
+     "issue": "The extractor assumed the irrigation district is entirely business-type. The form gives no fund types. Defensible, but irrigation districts could also be read as governmental or natural resources/conservation entities."},
+    {"severity": "warning", "path": "fiscal_year_end", "page": 1,
+     "extracted": "2025-06-30", "on_page": "not printed (2025 Audit Waiver Request)",
+     "issue": "Fiscal year end was assumed (the notes say so). Irrigation districts may use a calendar year."}
+  ]
+}
