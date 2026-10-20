@@ -1,0 +1,18 @@
+{
+  "stem": "Plainview_FY2025",
+  "values_checked": 194,
+  "issues": [
+    {"severity": "warning", "path": "proprietary", "page": 9,
+     "extracted": null, "on_page": "Statement of Cash Flows - Proprietary Funds shows only Electric and Water columns; the Sewer, Sanitation and Total columns (continuation of report p23) are not in the trimmed PDF",
+     "issue": "The trimmed PDF is missing the continuation page of the proprietary cash flow statement. proprietary is null; with basis 'cash' that is allowed, but the enterprise funds use accrual accounting and their cash flow totals are lost. find_pages should keep the facing page."},
+    {"severity": "warning", "path": "receipts[6].category", "page": 5,
+     "extracted": "federal grants", "on_page": "Grants 83,119",
+     "issue": "No page says where the grants come from; they could be state or private. The same assumption is used in detail (Park, Handibus, Library and Economic Development grants)."},
+    {"severity": "warning", "path": "receipts[9].category", "page": 5,
+     "extracted": "other", "on_page": "Loan collections 90,363",
+     "issue": "These are repayments of economic development and housing loans receivable (Economic Development 29,724 p12, Housing Authority 60,639 p14), which is principal coming back rather than revenue. Recording them as 'other' is defensible but inflates other revenue. The same applies to detail[87] and detail[104]."},
+    {"severity": "warning", "path": "balance_sheet.liabilities[7].category", "page": 1,
+     "extracted": "accrued liabilities", "on_page": "Accrued compensated absences 37,682 (noncurrent liabilities)",
+     "issue": "This line sits under noncurrent liabilities, while the accrued liabilities category is meant for compensated absences due soon. 'other liabilities' may fit better."}
+  ]
+}
