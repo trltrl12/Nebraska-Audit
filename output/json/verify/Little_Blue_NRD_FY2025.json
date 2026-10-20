@@ -1,0 +1,27 @@
+{
+  "stem": "Little_Blue_NRD_FY2025",
+  "values_checked": 95,
+  "issues": [
+    {"severity": "warning", "path": "receipts[1].category", "page": 5,
+     "extracted": "intergovernmental/state aid", "on_page": "Grants 724,282 (p2: Operating Grants and Contributions)",
+     "issue": "The report doesn't say whether these grants are state or federal, so the category is a guess (already in review). Same for detail[1] and business-type receipts[11] Grant income 3,300."},
+    {"severity": "warning", "path": "disbursements[0].category", "page": 5,
+     "extracted": "general government (disbursements[0]-[7], [11])", "on_page": "General Government: Salaries and benefits ... Miscellaneous",
+     "issue": "The rules give NRDs the natural resources/conservation function. The printed heading is General Government, and these lines are administrative. The extractor split the heading: admin lines general government, project/water lines natural resources/conservation. Defensible, but the function is split inside one printed group."},
+    {"severity": "warning", "path": "business_type.beginning", "page": 7,
+     "extracted": 1207487, "on_page": "As originally reported -, Restatement 1,207,487, As restated 1,207,487",
+     "issue": "Business-type starts from the restated balance, but the governmental side starts from the original balance and books the restatement as an adjustment. The two are treated differently. The roll-forward holds either way."},
+    {"severity": "warning", "path": "ending_cash.amount", "page": 4,
+     "extracted": 1354332, "on_page": "Cash and cash equivalents 1,354,332; County treasurer cash 18,010; Certificates of deposit 275,192",
+     "issue": "Uses only the cash and cash equivalents line. The county treasurer cash 18,010 and CDs 275,192 are left out, though the rule's 'cash and cash equivalents/investments' could take in either or both (total 1,647,534). The choice is stated in notes."},
+    {"severity": "warning", "path": "balance_sheet.liabilities[3].category", "page": 1,
+     "extracted": "accrued liabilities", "on_page": "Accrued compensated absences 67,257 (under Noncurrent liabilities)",
+     "issue": "Printed as noncurrent, but the rules say accrued liabilities is for compensated absences due soon. 'debt - due in more than one year' or 'other liabilities' may fit better."},
+    {"severity": "warning", "path": "detail[12].detail_category", "page": 9,
+     "extracted": "printing, publishing and postage", "on_page": "Information and education 52,938",
+     "issue": "Category guess with no review flag. Could be professional/contract services or miscellaneous."},
+    {"severity": "warning", "path": "detail[16].detail_category", "page": 9,
+     "extracted": "construction/infrastructure", "on_page": "Project costs 496,597",
+     "issue": "Category guess with no review flag. The object of 'project costs' isn't stated."}
+  ]
+}
