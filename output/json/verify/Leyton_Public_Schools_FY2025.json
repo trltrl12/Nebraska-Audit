@@ -2,20 +2,45 @@
   "stem": "Leyton_Public_Schools_FY2025",
   "values_checked": 204,
   "issues": [
-    {"severity": "error", "path": "detail[5].amount", "page": 5,
-     "extracted": 30798, "on_page": 30796,
-     "issue": "1370 Preschool Tuition and Fees misread. The scan is low resolution, but Exhibit B (p2) prints Instruction charges for services 30,796, the only General Fund charge, and 30,796 makes the General Fund Local Sources lines add exactly to the printed 3,178,525 (Charges for Services total 45,406 = 30,796 + School Nutrition 14,610)."},
-    {"severity": "error", "path": "report_discrepancies[2]", "page": 5,
-     "extracted": "General Fund local sources lines add to 3,178,527 vs printed 3,178,525 (difference -2)", "on_page": "lines add to 3,178,525 once 1370 is read as 30,796",
-     "issue": "spurious report discrepancy caused by the misread of detail[5]; remove it once the amount is fixed"},
-    {"severity": "warning", "path": "receipts[1].category", "page": 4,
-     "extracted": "intergovernmental/state aid", "on_page": "County Sources 11,623 (= 2110 County Fines and Licenses only, p5)",
-     "issue": "doesn't match the detail line, which is categorized fines and forfeitures; the whole line is county fines and licenses, so fines and forfeitures would be consistent"},
-    {"severity": "warning", "path": "receipts[4].category", "page": 4,
-     "extracted": "other (25,664)", "on_page": "Other: Employee Benefit 15,514, Special Building 10,150 (fund columns, p4); Exhibit K labels the 10,150 '5000 Insurance Adjustments'",
-     "issue": "the 10,150 is insurance proceeds (reimbursements/refunds under the rules), and the fund columns print the split; only the 15,514 is truly unidentified"},
-    {"severity": "warning", "path": "detail[78].section", "page": 11,
-     "extracted": "other financing (5000 Insurance Adjustments 10,150, no category)", "on_page": "printed under Other Financing Sources in Exhibit K, but counted in Exhibit D Total Receipts",
-     "issue": "insurance proceeds, not a transfer or debt; recorded as printed, but it is revenue (reimbursements/refunds) in Exhibit D, so the treatment needs a decision"}
+    {
+      "severity": "warning",
+      "path": "detail[5].amount",
+      "page": 5,
+      "extracted": 30798,
+      "on_page": 30796,
+      "issue": "[fixed: 30,796; spurious discrepancy removed] 1370 Preschool Tuition and Fees misread. The scan is low resolution, but Exhibit B (p2) prints Instruction charges for services 30,796, the only General Fund charge, and 30,796 makes the General Fund Local Sources lines add exactly to the printed 3,178,525 (Charges for Services total 45,406 = 30,796 + School Nutrition 14,610)."
+    },
+    {
+      "severity": "warning",
+      "path": "report_discrepancies[2]",
+      "page": 5,
+      "extracted": "General Fund local sources lines add to 3,178,527 vs printed 3,178,525 (difference -2)",
+      "on_page": "lines add to 3,178,525 once 1370 is read as 30,796",
+      "issue": "[fixed: 30,796; spurious discrepancy removed] spurious report discrepancy caused by the misread of detail[5]; remove it once the amount is fixed"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[1].category",
+      "page": 4,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "County Sources 11,623 (= 2110 County Fines and Licenses only, p5)",
+      "issue": "doesn't match the detail line, which is categorized fines and forfeitures; the whole line is county fines and licenses, so fines and forfeitures would be consistent"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[4].category",
+      "page": 4,
+      "extracted": "other (25,664)",
+      "on_page": "Other: Employee Benefit 15,514, Special Building 10,150 (fund columns, p4); Exhibit K labels the 10,150 '5000 Insurance Adjustments'",
+      "issue": "the 10,150 is insurance proceeds (reimbursements/refunds under the rules), and the fund columns print the split; only the 15,514 is truly unidentified"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[78].section",
+      "page": 11,
+      "extracted": "other financing (5000 Insurance Adjustments 10,150, no category)",
+      "on_page": "printed under Other Financing Sources in Exhibit K, but counted in Exhibit D Total Receipts",
+      "issue": "insurance proceeds, not a transfer or debt; recorded as printed, but it is revenue (reimbursements/refunds) in Exhibit D, so the treatment needs a decision"
+    }
   ]
 }

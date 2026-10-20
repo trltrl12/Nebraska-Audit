@@ -25,7 +25,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from common import (DETAIL_EXPENSE_CATEGORIES, DETAIL_REVENUE_CATEGORIES, DETAIL_SECTIONS,  # noqa: E402
+from common import (TRIMMED, DETAIL_EXPENSE_CATEGORIES, DETAIL_REVENUE_CATEGORIES, DETAIL_SECTIONS,  # noqa: E402
                     ASSET_CATEGORIES, BS_SECTIONS, LIABILITY_CATEGORIES, balance_sheet_check,
                     DISBURSEMENT_CATEGORIES, FLAGGED, FUND_TYPES, PROPRIETARY_FIELDS, REVIEW_CSV,
                     RECEIPT_CATEGORIES, amt, fund_type, load_reports, page, reconcile, reconcile_business,
@@ -266,6 +266,16 @@ def check(stem, d):
             float(stated), sums[key], pages=str(tot.get("source_page", "")))
 
     category_checks(d, f, rv)
+
+    # The extractor must have read every page of the trimmed PDF ("Read pages 1-N of N" in notes)
+    tp = TRIMMED / f"{stem}.pdf"
+    seen = re.findall(r"Read pages 1-(\d+) of (\d+)", d.get("notes") or "")
+    if tp.exists() and seen:
+        import pymupdf
+        n = pymupdf.open(tp).page_count
+        if int(seen[-1][0]) != n or int(seen[-1][1]) != n:
+            f("coverage", f"notes say pages 1-{seen[-1][0]} of {seen[-1][1]} were read, but the trimmed PDF "
+                          f"has {n} pages (re-trimmed or not fully read): re-extract")
 
     # Every amount must appear on the page it cites
     for miss in pagecheck.check_report(stem, d):

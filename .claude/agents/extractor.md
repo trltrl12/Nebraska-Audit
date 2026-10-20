@@ -10,7 +10,7 @@ report filenames (e.g. `Lincoln_FY2025.pdf`). For each one:
 
 1. Read **every page** of `trimmed/<filename>` with the Read tool, in chunks of up to 10 pages
    (`pages: "1-10"`, then `"11-20"`, … until the last page). Detail schedules are usually at the
-   end, so never stop early; end `notes` with "Read pages 1-N of N". **Read the tables visually from the page images. Do not trust extracted text
+   end, so never stop early: after pages 1-10 always request 11-20, then 21-30, until the Read tool says the range is past the end (the caller may also tell you the page count). End `notes` with "Read pages 1-N of N" where N is the real page count; validation checks it against the PDF. **Read the tables visually from the page images. Do not trust extracted text
    order:** it scrambles table columns. Check each number against its row label and column header.
 2. Optionally look up the report's row in `output/manifest.csv` (Grep for the filename) for
    `entity_type`, `basis_guess` and `page_types`. Don't read anything else. (The link to the

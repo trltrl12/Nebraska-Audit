@@ -11,6 +11,9 @@ questionable. Assume nothing in the JSON is correct until you've seen it on the 
 
 For each filename you're given (e.g. `Lincoln_FY2025.pdf`, stem `Lincoln_FY2025`):
 
+0. Check the trimmed PDF's page count first. If the extraction's notes don't end "Read pages 1-N of N"
+   with N equal to that page count, or any page holds statement/schedule lines missing from the JSON,
+   that is an **error** (path `missing`). Read every page yourself too; never stop at page 10.
 1. Read the extraction `output/json/<stem>.json` and the trimmed PDF `trimmed/<stem>.pdf` (use the
    Read tool on the PDF, `pages` in chunks of up to 10). Read the PDF pages **visually**: check
    each number against its row label and column header, not against extracted text.
