@@ -1,27 +1,15 @@
 {
   "stem": "Adams_FY2025",
-  "values_checked": 136,
+  "values_checked": 137,
   "issues": [
-    {"severity": "error", "path": "receipts[3].category", "page": 2,
-     "extracted": "charges for services/fees", "on_page": "MFO payments received 16,075 (listed under General revenues on Exhibit B, not program Charges for Services)",
-     "issue": "MFO (Mutual Finance Organization) payments are state aid to fire protection, and Exhibit B prints them as a general revenue apart from charges for services. The category should be intergovernmental/state aid."},
-    {"severity": "error", "path": "detail[56].category", "page": 12,
-     "extracted": "charges for services/fees / other charges for services", "on_page": "MFO payments received 16,075 (Fire Fund)",
-     "issue": "Same line as receipts[3]: it should be intergovernmental/state aid, with detail_category other state aid."},
     {"severity": "warning", "path": "receipts[5]", "page": 11,
-     "extracted": "Intergovernmental revenues 216,059 as intergovernmental/state aid", "on_page": "Schedule 2 breaks this line into Highway allocation 92,156, Motor vehicle fees 6,127, Homestead allocation 9,931, Other 107,845",
-     "issue": "Inconsistent categories. detail[43] puts Motor vehicle fees 6,127 under motor vehicle tax, but the same money stays in state aid in receipts. The report prints the breakdown, so this line could be split the way Taxes was."},
-    {"severity": "warning", "path": "detail[19].original_label", "page": 10,
-     "extracted": "Library interlock", "on_page": "Library interlocal",
-     "issue": "label mismatch"},
-    {"severity": "warning", "path": "detail[9].detail_category", "page": 10,
-     "extracted": "donations/contributions", "on_page": "Grants/Donations 87,100 (General); also detail[29] Grants/Donations 17,222 (Rescue Squad)",
-     "issue": "Mixed label (grants and donations) has no review flag. Exhibit B shows these as capital grants and contributions, so part of it may be government grants."},
-    {"severity": "warning", "path": "detail[22].detail_category", "page": 10,
-     "extracted": "construction/infrastructure", "on_page": "Capital outlay 1,308,707",
-     "issue": "The object category is a guess (notes say so) but the line has no review flag. The same applies to the Rescue and Fire capital outlay lines (equipment purchases)."},
-    {"severity": "warning", "path": "report_discrepancies", "page": 6,
-     "extracted": null, "on_page": "Exhibit E other financing lines (27,688)+(105,000)+(54,724)+223,900+(409,619) = (373,131) vs printed Total other financing sources (uses) 901,869; General column lines sum (523,361) vs printed 751,639",
-     "issue": "The basic statement leaves out the Bond proceeds 1,275,000 line, which is printed only on Schedule 1/2 (p10-11). The report itself doesn't add up on p5-6. This is mentioned in notes but there is no report_discrepancies entry."}
+     "extracted": "Intergovernmental revenues 216,059 as intergovernmental/state aid (review: broad group)", "on_page": "Schedule 2 Totals breaks this line into Highway allocation 92,156, Motor vehicle fees 6,127, Homestead allocation 9,931, Other 107,845",
+     "issue": "The categories don't match. detail[43] (Street, Motor vehicle fees 6,127) is under motor vehicle tax, but the same money stays in state aid in receipts. The report prints the breakdown, so this line could be split the way Taxes was. Kept as a warning because the line has a review flag and splitting non-tax lines is optional."},
+    {"severity": "warning", "path": "detail[8].detail_category", "page": 2,
+     "extracted": "other charges for services", "on_page": "General Fund Charges for services 83,807 (p10); Exhibit B (p2) shows Sanitation Charges for Services 83,807",
+     "issue": "Exhibit B ties this line to Sanitation, so refuse/sanitation charges fits better than other charges for services."},
+    {"severity": "warning", "path": "reported_totals.business-type", "page": 8,
+     "extracted": "receipts 233,426 / disbursements 404,952 (operating totals only)", "on_page": "Exhibit H prints separate operating totals and Total non-operating receipts (disbursements) 138,702 (net, includes transfers 185,719); Exhibit B p2 Total business-type activities expenses 451,969",
+     "issue": "Exhibit H has no single total, and the rules say to add operating and nonoperating totals. The extractor used the operating totals only and marked Interest/fees expense 47,017 as outside_printed_total. This is defensible because the non-operating total is a net figure that includes transfers, and notes explain it."}
   ]
 }
