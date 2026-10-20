@@ -102,3 +102,19 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
 
 Keep the main session lean: don't open PDFs or print JSON in the main conversation. Rely on the
 agents' one-line statuses.
+
+## Open follow-ups (remove each line once done)
+After the debug_pages run (config/debug_pages.txt, run 5/5b) shows why, fix scripts/find_pages.py,
+re-trim these, then re-extract and re-verify them (their JSON is incomplete until then):
+- Trimmed PDF is missing pages: Annie_Jeffrey_Memorial_Health_Center_FY2025 (balance sheet),
+  Adams_County_FY2025 (report p45: Highway Bond Fund, nonmajor totals), Arapahoe_FY2025 (other
+  nonmajor combining page), Auburn_Public_Schools_FY2025 (report p27, Employee Benefit Fund),
+  Battle_Creek_FY2025 (report pp10-12, proprietary statement), Butte_FY2025 (report p31, rest of
+  General Fund spending).
+- Trimmed to a budget page only (skipped, no JSON): Cass_County_SID_9_FY2025, Cass_County_SID_10_FY2025,
+  Bismark_Township_Platte_County_B2526.
+- ~97 Audit filings marked no_statements_found (mostly SIDs) and 72 with no balance statement: page
+  finder misses their titles.
+- ~1,000 Waiver filings link only a budget form (Budgets_Filed/…_B2526.pdf): check
+  output/page_debug/_alt_urls.csv for a real waiver PDF; otherwise read prior-year actuals from the
+  budget form. Extraction skips *_B2526 files until this is decided.
