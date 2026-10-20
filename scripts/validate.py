@@ -107,6 +107,16 @@ def check(stem, d):
             rv(chk, f"{reason}: off by {diff:+,.2f} (report rounding?)", amount=round(float(actual), 2),
                src_page=first)
 
+    money = ["beginning_cash", "beginning_investments", "beginning_fund_balance", "ending_cash",
+             "ending_investments", "ending_fund_balance", "transfers_in", "transfers_out", "debt_proceeds",
+             "other_financing"]
+    for where, obj, keys in (("", d, money), ("business_type.", d.get("business_type") or {},
+                              ["beginning", "ending", "transfers_net", "debt_proceeds", "other_financing"])):
+        for k in keys:
+            v = obj.get(k)
+            if v is not None and not (isinstance(v, dict) or isinstance(v, (int, float))):
+                f("schema", f"{where}{k} must be one money object {{amount, source_page}}, got {type(v).__name__}")
+                obj[k] = None
     for k in REQUIRED:
         if d.get(k) in (None, ""):
             f("schema", f"missing {k}")

@@ -148,6 +148,8 @@ independent verifier, so unmarked computed values show up as errors. If a value 
   type). These are collected into a review list for the user; don't overuse it. Don't include subtotal or total lines as
   items. Transfers, debt/bond/loan proceeds and other financing sources go in their own
   fields, not in receipts or disbursements.
+- **transfers_in, transfers_out, debt_proceeds, other_financing** (and the `business_type` ones) are each ONE money
+  object `{amount, source_page}`, never a list; combine several lines with `computed`.
 - **transfers_in, transfers_out, debt_proceeds:** positive numbers. **other_financing:** signed
   (e.g. sale of capital assets +, payment to refunded-bond escrow −).
 - **adjustments:** signed items that change the balance but aren't covered above (prior-period
