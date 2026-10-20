@@ -1,24 +1,26 @@
 {
   "stem": "Amherst_FY2025",
   "values_checked": 74,
+  "report_discrepancies_confirmed": [
+    "[0] p4 Total column: 41,457 + 45,987 + 5,861 + 5,827 + 2,745 + 165 + 3,795 + 18,146 = 123,983 vs printed TOTAL RECEIPTS 123,982 (-1). Confirmed.",
+    "[1] p1 Total column: asset lines 536,653 + 1,786 = 538,439 vs printed TOTAL ASSETS 538,438; TOTAL NET POSITION 538,439 (-1). Confirmed.",
+    "[2] p9: 60,420 + 165 + 41,457 + 115,844 + 15,074 + 673 + 34,711 = 268,344 vs printed TOTAL RECEIPTS 268,343 (-1). Confirmed."
+  ],
   "issues": [
-    {"severity": "warning", "path": "report_discrepancies", "page": 9,
-     "extracted": "no entry for p9 (only mentioned in notes)", "on_page": "Receipts 60,420+165+41,457+115,844+15,074+673+34,711 = 268,344; printed TOTAL RECEIPTS 268,343",
-     "issue": "the report's all-funds budget schedule receipts don't add up ($1 off) but this isn't recorded in report_discrepancies (check 'detail', difference -1); only the notes mention it"},
-    {"severity": "warning", "path": "report_discrepancies[1]", "page": 1,
-     "extracted": "balance: total assets 538,438 vs net position 538,439", "on_page": "Cash 536,653 + Cash at County Treasurer 1,786 = 538,439; printed TOTAL ASSETS 538,438",
-     "issue": "confirmed the report is $1 off. The misprint is in TOTAL ASSETS itself (the asset lines add to 538,439, and the Governmental 339,128 + Proprietary 199,311 columns also make 538,439), so the asset lines vs total_assets check will also be $1 off"},
-    {"severity": "warning", "path": "balance_sheet.total_liabilities", "page": 1,
-     "extracted": 0, "on_page": "no liabilities section or Total Liabilities line printed (only TOTAL LIABILITIES AND NET POSITION 538,439)",
-     "issue": "0 isn't printed; should be null or carry 'computed'"},
-    {"severity": "warning", "path": "disbursements[7].detail_category", "page": 6,
-     "extracted": "miscellaneous expenditure", "on_page": "General operating 26,637",
-     "issue": "'miscellaneous expenditure' is a last resort that needs a 'review' marker under the rules, and this line has none. 'not itemized' may fit better"},
-    {"severity": "warning", "path": "disbursements[10].detail_category", "page": 6,
-     "extracted": "construction/infrastructure", "on_page": "Capital outlay 30,000 (p7 cash flows: 'Cash paid for property and equipment')",
-     "issue": "the object isn't stated; p7 calls it property and equipment, so 'equipment purchases' or 'land and buildings' are equally possible"},
+    {"severity": "warning", "path": "report_discrepancies", "page": 6,
+     "extracted": "no entry", "on_page": "p6 cross-foot: Personnel 2,584 + 2,584 = 5,168 vs Total 5,167; Interest income 205 + 4,335 = 4,540 vs 4,539; Transfers (10,579) + 11,253 = 674 vs 673. p4 General column receipts add to 79,781 vs printed 79,780. p2 governmental Change in net position (7,424) vs p4 (7,425)",
+     "issue": "The report has more $1 rounding differences that aren't recorded. The Total-column figures used are correct as printed."},
     {"severity": "warning", "path": "receipts[9].detail_category; detail[6].detail_category", "page": 6,
-     "extracted": "other charges for services", "on_page": "Charge for services: Water 56,910, Sewer 55,139 (Total 112,049)",
-     "issue": "these are water and sewer charges (fund columns on p6/p2), so 'water charges'/'sewer charges' would be more specific than 'other charges for services'"}
+     "extracted": "other charges for services", "on_page": "Charge for services: Water 56,910, Sewer 55,139",
+     "issue": "These are water and sewer utility charges, and p6 prints them by fund. 'water charges' and 'sewer charges' (or at least 'other utility charges') would fit better than 'other charges for services'."},
+    {"severity": "warning", "path": "disbursements[3..5].category", "page": 4,
+     "extracted": "Personnel services / Operating expenses -> general government; Supplies and materials -> streets/highways", "on_page": "Operating expenses: General 45,358 + Street 12,450; Supplies and materials: General 10,882 + Street 20,222",
+     "issue": "The statement lists these by object with no function, so the function was assigned by dominant fund column. Judgment call (already flagged for review)."},
+    {"severity": "warning", "path": "disbursements[10].detail_category", "page": 6,
+     "extracted": "construction/infrastructure", "on_page": "Capital outlay (30,000) Sewer; p7: Cash paid for property and equipment",
+     "issue": "The object isn't stated, so equipment purchases is also possible (already flagged for review)."},
+    {"severity": "warning", "path": "detail[0..2,5,6,7,8,10,11].budget_final", "page": 9,
+     "extracted": null, "on_page": "Final Budget: Taxes 58,065; Charges for services 136,000; Interest 2,000; Other -",
+     "issue": "After the combined p9 lines were split, their final budgets were dropped and aren't recorded anywhere in detail. This was the extractor's choice and is already flagged for review."}
   ]
 }

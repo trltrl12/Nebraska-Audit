@@ -1,24 +1,22 @@
 {
   "stem": "Alvo_FY2025",
   "values_checked": 26,
+  "report_discrepancies_confirmed": [],
   "issues": [
-    {"severity": "error", "path": "balance_sheet.assets[0].amount", "page": 1,
-     "extracted": 29015.00, "on_page": "TOTAL column line 26 Net Cash Balance 40,165.43 (General 26,338.55, Street (1,673.90), Water/Sewer 11,150.43, Special Revenue 4,350.35)",
-     "issue": "wrong column: the cash-basis balance sheet should use the printed Total column (all funds, 40,165.43; the other reports include business-type cash), not a computed governmental-only subtotal. The same applies to equity[0], total_assets and total_equity (29,015.00 -> 40,165.43). ending_cash 29,015.00 is right as the governmental figure"},
-    {"severity": "warning", "path": "balance_sheet.equity[0].original_label", "page": 1,
-     "extracted": "Ending Balance (governmental funds)", "on_page": "Ending Balance (Line 22 MINUS Line 23) / Subtotal of Ending Balances",
-     "issue": "label edited by the extractor and not as printed"},
     {"severity": "warning", "path": "receipts[2].category", "page": 1,
-     "extracted": "intergovernmental/state aid / other state aid", "on_page": "State Receipts: Motor Vehicle Fee 1,485.02 (Street Fund)",
-     "issue": "the rules list 'motor vehicle fees' under motor vehicle tax. Here it is printed under State Receipts, separate from the form's Motor Vehicle Pro-Rate and Local Motor Vehicle Tax lines, so state aid is defensible; judgment call (already marked review)"},
+     "extracted": "intergovernmental/state aid / other state aid", "on_page": "Line 9 State Receipts: Motor Vehicle Fee 1,485.02 (Street Fund)",
+     "issue": "The category rules list 'motor vehicle fees' under motor vehicle tax, but this form prints it under State Receipts, separate from line 15 'Local Receipts: Motor Vehicle Tax'. Judgment call (already flagged for review)."},
+    {"severity": "warning", "path": "receipts[6].detail_category", "page": 1,
+     "extracted": "charges for services/fees / other utility charges", "on_page": "Line 18 Local Receipts: Other, Water/Sewer column 47,878.98",
+     "issue": "The form doesn't say what this is. Treating it as water/sewer charges is an assumption (already flagged for review)."},
     {"severity": "warning", "path": "disbursements[3].category", "page": 3,
-     "extracted": "debt service principal", "on_page": "Debt Service 9,856.70 (Street Fund)",
-     "issue": "principal and interest are not split, so the whole amount is classed as principal (already marked review)"},
+     "extracted": "debt service principal / debt principal", "on_page": "Line 39 Debt Service 9,856.70 (Street Fund)",
+     "issue": "Principal and interest are not split on the page, so classing all of it as principal is an assumption (already flagged for review)."},
     {"severity": "warning", "path": "disbursements[4]", "page": 3,
-     "extracted": 30296.14, "on_page": "Miscellaneous: General 23.08 + Street 30,273.06 = 30,296.14",
-     "issue": "amount is correct. The large Street Fund 'Miscellaneous' may really be capital outlay, debt or a transfer; 'other' is a judgment call (already marked review)"},
-    {"severity": "warning", "path": "receipts[6].category", "page": 1,
-     "extracted": "charges for services/fees / other utility charges", "on_page": "Local Receipts: Other (Water/Sewer column) 47,878.98",
-     "issue": "generic label; treating it as utility charges is an assumption (already marked review)"}
+     "extracted": "other / miscellaneous expenditure 30,296.14", "on_page": "Line 40 Miscellaneous: General 23.08, Street 30,273.06",
+     "issue": "The Street Fund 'Miscellaneous' is large (74% of Street spending). It could be capital or a transfer, but lines 19/20 and 49/50 (transfers) are blank, so there is no evidence of a hidden transfer. Already flagged for review."},
+    {"severity": "warning", "path": "balance_sheet.assets[0]", "page": 1,
+     "extracted": "Net Cash Balance 40,165.43 (Total column)", "on_page": "County Treasurer Balance at September 30, 2025: 2,451.17 (printed below the table)",
+     "issue": "The extractor assumed the county treasurer balance is already included in Net Cash Balance. The form doesn't say so. If it isn't included, cash is understated by 2,451.17."}
   ]
 }
