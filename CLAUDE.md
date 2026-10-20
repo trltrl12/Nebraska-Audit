@@ -123,6 +123,8 @@ These were diagnosed and fixed in find_pages v6; re-extract and re-verify them a
   Beatrice_Public_Schools_FY2025 (report p7, governmental receipts page, not trimmed; receipts built from
   fund schedules, marked computed).
   Boelus_FY2025 (Exhibit A page 2, lines 29-52 spending by function, not trimmed; fund totals used).
+  Cross_County_Community_Schools_FY2025 (trim stops partway through Exhibit N; remaining programs from the
+  budget schedule).
 - Budget forms whose Total All Funds page wasn't found (manifest flag no_budget_actuals_found; skipped, no
   JSON): Lewis_Township_Clay_County_B2526 and any others with that flag. Check why the finder misses it.
 - Filed under FY2025 but the PDF holds an earlier year (extracted as printed; check the Auditor's site for
