@@ -1,0 +1,24 @@
+{
+  "stem": "Burwell_FY2025",
+  "values_checked": 57,
+  "issues": [
+    {"severity": "warning", "path": "receipts[3].category", "page": 4,
+     "extracted": "donations/contributions", "on_page": "Grants and donations 594,305 (p2: operating grants 59,683 + capital grants 534,622; 553,137 is in the Local Option Sales Tax fund)",
+     "issue": "Mixed grants and donations line, and the source isn't stated. The large capital grant for the public welfare project may be government money (intergovernmental/state aid or federal grants) rather than private donations."},
+    {"severity": "warning", "path": "other_financing", "page": 4,
+     "extracted": -26332, "on_page": "Capital contributions (27,625) + Proceeds from sale 1,293; total other financing sources (uses) (26,332)",
+     "issue": "p2 labels the (27,625) 'Contributions - internal activities'. It matches business-type Capital contributions (net) +27,625 on p6, so it is an internal transfer between governmental and business-type activities and arguably belongs in transfers_out and business_type.transfers_net, not other_financing. The arithmetic and the computed marking are correct."},
+    {"severity": "warning", "path": "business_type.other_financing", "page": 6,
+     "extracted": 27625, "on_page": "CAPITAL CONTRIBUTIONS (NET) 27,625",
+     "issue": "The amount matches the page. It is the business-type side of the internal contribution from governmental funds (p2 'Contributions - internal activities'), so it is arguably transfers_net rather than other_financing."},
+    {"severity": "warning", "path": "transfers_in", "page": 4,
+     "extracted": null, "on_page": "Interfund transfer in (out): General (116,586), Street 116,586, Local Option Sales Tax 100,000, Infrastructure (100,000); Total column '-'",
+     "issue": "Gross governmental transfers in and out of 216,586 each are printed by fund, but the Total Governmental Funds column nets them to '-'. Leaving transfers_in and transfers_out null follows the total column and is defensible. Note that p8 shows 116,586 as Transfers."},
+    {"severity": "warning", "path": "detail", "page": 8,
+     "extracted": [], "on_page": "Budgetary comparison schedule: receipts and disbursements by fund (General 538,158 / 418,505, Street 277,114 / 372,161, ..., Contributions 27,625, Transfers 116,586)",
+     "issue": "The p8 budget schedule was left out entirely. Its lines are per-fund totals with only a grand-total budget (no line items), so skipping them is defensible, but it is a supplementary schedule printed in the trimmed PDF."},
+    {"severity": "warning", "path": "disbursements[5].category", "page": 4,
+     "extracted": "general government", "on_page": "Studies and research 18,635 (Infrastructure fund; p2 'Infrastructure')",
+     "issue": "Category is a guess. Infrastructure studies could equally be streets/highways or economic development."}
+  ]
+}
