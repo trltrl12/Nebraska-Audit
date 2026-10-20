@@ -1,0 +1,22 @@
+{
+  "stem": "Knox_County_FY2025",
+  "values_checked": 146,
+  "issues": [
+    {"severity": "error", "path": "missing", "page": 5,
+     "extracted": null,
+     "on_page": "Combining Statement - General Fund, Inheritance Tax Fund column: Inheritance tax 640,237; General government 301,104; Public welfare & social services 29,700; Culture and recreation 30,000; Capital outlay 399,694 (Total disbursements 760,498); Transfers - out (503,241)",
+     "issue": "The Inheritance Tax Fund (part of the General Fund) is not in detail[]. The p11 budget schedule only covers the General Fund column, so these lines are printed only on p5 and are not a double count. Without them, detail revenue is 640,237 short of the statement's 11,724,481, and detail transfers out (3,146,612) are 503,241 short of the 3,649,853 transfers in. The notes mention the fund but it was never recorded. Add these lines and their detail_totals (revenue 640,237, expenditure 760,498)."},
+    {"severity": "warning", "path": "detail[25].category", "page": 11,
+     "extracted": "streets/highways", "on_page": "Noxious Weed (under Public Works)",
+     "issue": "The category rules list noxious weed control under natural resources/conservation. The report prints it under Public Works, so streets/highways is defensible; already marked review."},
+    {"severity": "warning", "path": "detail[3].category", "page": 11,
+     "extracted": "General Fund departments by budget schedule", "on_page": "p5 General Fund column: General government 2,258,796; Public safety 1,314,461; Public works 229,022; Public welfare 61,986; Capital outlay 140,030",
+     "issue": "The budget-schedule department lines tie to the 4,004,295 total. Their function split (general government 2,290,621, public safety 1,407,556, streets 243,365, welfare 62,753, capital outlay 0) differs from the p5 function columns because the departments include the 140,030 capital outlay. Applies to detail[3]-detail[28]."},
+    {"severity": "warning", "path": "detail[1].detail_category", "page": 11,
+     "extracted": "other state aid", "on_page": "Intergovernmental",
+     "issue": "Intergovernmental is a broad group that may include federal money; the p2 Public works capital grants of 825,623 equal the Flowage Easement Road Fund's intergovernmental receipts. Recorded as other state aid without a review flag. Also applies to detail[31], detail[36], detail[44] and receipts[5]."},
+    {"severity": "warning", "path": "missing", "page": 5,
+     "extracted": null, "on_page": "Trimmed PDF jumps from report p21 (source PDF p26) to report p27 (source PDF p32)",
+     "issue": "Report pages 22-26 (source PDF pp27-31) were not trimmed. They may hold combining or other fund schedules (for example Road or Inheritance Tax detail, or fiduciary schedules); this can't be confirmed from the trimmed PDF."}
+  ]
+}
