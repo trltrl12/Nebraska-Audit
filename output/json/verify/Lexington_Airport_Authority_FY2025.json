@@ -1,0 +1,15 @@
+{
+  "stem": "Lexington_Airport_Authority_FY2025",
+  "values_checked": 61,
+  "issues": [
+    {"severity": "warning", "path": "detail_totals[0].amount", "page": 4,
+     "extracted": 1881810, "on_page": "1,490,734 + 167,731 + 223,346 = 1,881,811 vs printed Total operating revenues 1,881,810",
+     "issue": "the report's own $1 rounding difference is mentioned in notes but isn't recorded in report_discrepancies"},
+    {"severity": "warning", "path": "disbursements[0..16].category", "page": 2,
+     "extracted": "other", "on_page": "airport operating expenses (Bank charges ... Wages)",
+     "issue": "16 of 17 business-type expense lines (about $386k of $387k) are in 'other' because no airport function exists; defensible, but more than 10% of business-type spending is in other"},
+    {"severity": "warning", "path": "detail[0..5].fund_type", "page": 4,
+     "extracted": "business-type", "on_page": "STATEMENT OF REVENUES AND EXPENDITURES (BUDGETARY BASIS) ... GOVERNMENTAL FUND TYPE",
+     "issue": "the schedule's title says governmental fund type; the extractor tagged its lines business-type to match the airport's entity-type rule (assumption)"}
+  ]
+}

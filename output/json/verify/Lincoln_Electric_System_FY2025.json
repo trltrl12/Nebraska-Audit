@@ -1,0 +1,24 @@
+{
+  "stem": "Lincoln_Electric_System_FY2025",
+  "values_checked": 67,
+  "issues": [
+    {"severity": "error", "path": "receipts[3].category", "page": 2,
+     "extracted": "other", "on_page": "City dividend for utility ownership revenue 13,817",
+     "issue": "'other' used although a specific category fits: the note on p4 says the CDFUO is assessed on all retail customer billings, so it is a customer charge (charges for services/fees)"},
+    {"severity": "error", "path": "disbursements[7].category", "page": 2,
+     "extracted": "other", "on_page": "Payment in lieu of taxes (15,065)",
+     "issue": "'other' used for a public power entity; extractor rules give public power districts function 'utilities' for all spending lines (every other operating line here is 'utilities')"},
+    {"severity": "error", "path": "disbursements[9].category", "page": 2,
+     "extracted": "other", "on_page": "Other expense (139)",
+     "issue": "'other' used for a public power entity's nonoperating expense; the function for the whole entity is 'utilities' under the public power rule"},
+    {"severity": "warning", "path": "disbursements[6].category", "page": 2,
+     "extracted": "other", "on_page": "City dividend for utility ownership expense (14,243)",
+     "issue": "payment to the owning City (p4 note); printed as a noncapital subsidy, not a transfer. Category should probably be 'utilities' (entity function), unless the user prefers to treat it as a transfer to the City"},
+    {"severity": "warning", "path": "receipts[2].category", "page": 2,
+     "extracted": "charges for services/fees", "on_page": "Other 10,639 (operating revenues)",
+     "issue": "operating revenue printed only as 'Other'; charges for services/fees is assumed, nothing on the page describes it"},
+    {"severity": "warning", "path": "business_type.other_financing", "page": 2,
+     "extracted": null, "on_page": "Capital Contributions 24,875; Plant Costs Recovered through Capital Contributions (24,875)",
+     "issue": "two printed lines left out because they net to zero; this is explained in notes and the roll-forward still holds, but the capital contributions are not captured anywhere"}
+  ]
+}

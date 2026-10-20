@@ -1,0 +1,26 @@
+{
+  "stem": "Leigh_Community_Schools_FY2025",
+  "values_checked": 162,
+  "issues": [
+    {"severity": "error", "path": "detail", "page": 8,
+     "extracted": "General Fund budget expenditure lines total 4,813,022 (plus -150,000 transfers); Depreciation Fund 'Transfer from general fund' +425,000 recorded as other financing (detail[50])",
+     "on_page": "General budget schedule (pp7-8) shows only 150,000 'Transfers to other funds', yet the Depreciation schedule (p9) receives 425,000 'Transfer from general fund'. Budget General 4,963,022 + Depreciation 133,065 - 425,000 = 4,671,087 = statement General disbursements 4,521,087 + 150,000 transfers (p5); receipts 5,131,775 + 489,219 - 425,000 = 5,195,994 (p5)",
+     "issue": "the 425,000 transfer to the Depreciation Fund is hidden inside the General Fund budget expenditure lines (the page does not say which; 2600s 638,707 and 27X0 298,930 are far above the statement's 546,772 and 98,140). Under the hidden-transfer rule the same money now appears both as General spending and as a transfer; needs a contra expenditure line of -425,000 (department = General Fund expenditures, split_from, review) plus a General other financing line of -425,000. Notes mention the mismatch but no fix was made"},
+    {"severity": "warning", "path": "receipts[2].category", "page": 6,
+     "extracted": "intergovernmental/state aid", "on_page": "County receipts 29,095 = 2110 County fines and license fees 24,889 + 2210 ESU receipts 4,206 (p7); p2 shows it as 'County fines and licenses' charges for services",
+     "issue": "dominant component (86%) is county fines and license fees, which detail[8] records as fines and forfeitures; category inconsistent with the detail. Review flag set"},
+    {"severity": "warning", "path": "receipts[1].review", "page": 6,
+     "extracted": "mixed: activities 218,172, school nutrition 126,853, interest 44,085+14,321+7,679+1,417, etc.",
+     "on_page": "Local receipts 517,772 = General 114,210 + Activities 218,172 + School Nutrition 126,853 + Student Fee 131 + Special Building 44,085 + Bond 14,321",
+     "issue": "review note cites 7,679 and 1,417, which do not appear in this report (they are the Village of Leigh's interest figures); category charges for services/fees as dominant is defensible"},
+    {"severity": "warning", "path": "report_discrepancies", "page": 2,
+     "extracted": null, "on_page": "Statement of Activities: Taxes 4,915,395 and Student meals charges 126,863; fund statement p6/p5: Taxes 4,915,405 and School Nutrition local receipts 126,853",
+     "issue": "the report's two statements disagree by 10 on taxes (offset by +10 in student meals charges); not recorded in report_discrepancies. JSON uses the fund statement figures, which add up"},
+    {"severity": "warning", "path": "disbursements[20].category", "page": 6,
+     "extracted": "instruction", "on_page": "Federal programs 181,120 = General 120,980 + School Nutrition 60,140 (p5)",
+     "issue": "60,140 of this line is School Nutrition Fund federal programs, which is food service, not instruction; review flag set"},
+    {"severity": "warning", "path": "disbursements[21].category", "page": 6,
+     "extracted": "debt service principal", "on_page": "Debt services 655,600",
+     "issue": "line is not split between principal and interest; all recorded as principal (review flag set)"}
+  ]
+}
