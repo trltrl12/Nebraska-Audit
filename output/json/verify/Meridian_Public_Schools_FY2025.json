@@ -1,0 +1,46 @@
+{
+  "stem": "Meridian_Public_Schools_FY2025",
+  "values_checked": 198,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "detail[65].category",
+      "page": 6,
+      "extracted": "support services (whole -87,000 contra)",
+      "on_page": "Reclassifications column: Operation and maintenance of plant (67,000); State programs (7,588) + Federal programs (212,484) less Instruction 200,072 = net (20,000)",
+      "issue": "[fixed] The hidden 87,000 transfer to the Depreciation Fund comes out of two function groups: 67,000 from O&M of plant (support services) and 20,000 from state/federal programs, which this extraction files under instruction (detail[60]-[64]). The single -87,000 contra is filed entirely under support services. As a result, detail instruction (2,945,235 + 220,072 = 3,165,307) is 20,000 above the statement's Instruction 3,145,307, and support services O&M (400,349 - 87,000) is 20,000 below the statement's 333,349. This should be two contra lines: -67,000 support services (O&M) and -20,000 instruction (state/federal programs)."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[1].category",
+      "page": 3,
+      "extracted": "support services",
+      "on_page": "Student support services 658,083 = General Fund 320,926 + Other Governmental Funds (Activities Fund) 337,157",
+      "issue": "More than half of this statement line is Activities Fund spending (337,157, p7/p16). Under the 'dominant category' rule it could be student activities. Defensible, since the label says student support services, but the mix is not mentioned in the notes."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[66].original_label",
+      "page": 11,
+      "extracted": "8000 Transfers (to School Nutrition 114,055 and Activities 70,000)",
+      "on_page": "8000 Transfers",
+      "issue": "The label has the extractor's explanation added to it. The amount (-184,055) and budget (96,304) are correct, and the transfer ties to Nutrition 114,055 + Activities 70,000."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[7].category",
+      "page": 3,
+      "extracted": "other",
+      "on_page": "Other local receipts 27,636 (= School Nutrition Fund 'Other receipts', p7/p15)",
+      "issue": "Left in 'other' with review. The report gives no breakdown of the School Nutrition 'Other receipts'. It may be meal-related charges (a la carte/adult meals), but the page doesn't say."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[6].category",
+      "page": 3,
+      "extracted": "fines and forfeitures",
+      "on_page": "Local license fees and fines 960",
+      "issue": "Mixed line (licenses and fines). Recorded as fines with review; licenses and permits would be equally defensible."
+    }
+  ]
+}

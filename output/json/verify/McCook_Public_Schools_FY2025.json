@@ -1,0 +1,78 @@
+{
+  "stem": "McCook_Public_Schools_FY2025",
+  "values_checked": 410,
+  "issues": [
+    {
+      "severity": "warning",
+      "path": "detail_totals[1].amount",
+      "page": 17,
+      "extracted": 19698086,
+      "on_page": 20328086,
+      "issue": "Printed General Fund exhibit Total Disbursements is 20,328,086 (includes 100,000 Transfers to Activities). Extractor stored a computed 19,698,086 (less 100,000 transfer and 530,000 contra) instead of the printed total with includes [\"other financing\"]. Marked computed and the arithmetic holds (exhibit lines 20,228,086 - 530,000 contra = 19,698,086), but the printed total is not recorded as printed."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[160].category",
+      "page": 11,
+      "extracted": "capital outlay",
+      "on_page": "Contracted services 37,924 (Special Building Fund)",
+      "issue": "The governmental funds statement (p4) puts Special Building's 73,434 (37,924 + 35,510) under 'Maintenance and operation of plant' (support services), not capital outlay. The function split in detail does not tie to the statement's function lines."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[162].category",
+      "page": 11,
+      "extracted": "capital outlay",
+      "on_page": "Building improvements 35,510 (Special Building Fund)",
+      "issue": "Same as detail[160]: p4 reports this under Maintenance and operation of plant (support services)."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[9].category",
+      "page": 4,
+      "extracted": "other",
+      "on_page": "Other 144,927 (General 90,015 = Insurance adjustments 49,860 + Other non-revenue receipts 40,155 on p8; Depreciation Other income 54,912 on p10)",
+      "issue": "No component is over half, so 'other' is defensible. But p8 prints the breakdown, so 49,860 could be split out as reimbursements/refunds (the detail already classes it that way). Inconsistent with detail[28]."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[0].amount",
+      "page": 4,
+      "extracted": 6020472,
+      "on_page": "Taxes: Property 6,020,472; General Fund 5,980,623 = Local district taxes 5,976,679 + Carline taxes 3,944 (p8)",
+      "issue": "Amount is correct as printed. The statement's Property line includes 3,944 of carline tax, which the detail classes as other taxes (detail[1]). Small category inconsistency between the statement and the schedule."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[55].detail_category",
+      "page": 13,
+      "extracted": "dues, training and travel",
+      "on_page": "Mileage paid 134,289 (Support Services - Pupils)",
+      "issue": "This is large for staff mileage. It is likely pupil-transportation mileage paid to parents (could be professional/contract services). Already marked review."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[116].detail_category",
+      "page": 16,
+      "extracted": "miscellaneous expenditure",
+      "on_page": "District transportation (175,035) (Central Services - Business Services)",
+      "issue": "A negative credit line, probably a transportation cost reallocation out of business services. 'miscellaneous expenditure' is a last resort; the amount and sign are correct."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[296].detail_category",
+      "page": 19,
+      "extracted": "student activity receipts",
+      "on_page": "NE Community Foundation 8,528",
+      "issue": "Receipts from a community foundation (and the Scholarships account, detail[231], 6,033) may be donations/contributions rather than activity receipts. This is a judgment call."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[290].category",
+      "page": 19,
+      "extracted": "investment income",
+      "on_page": "1st Central Bank CD receipts 14,992, disbursements 9,377",
+      "issue": "Receipts into a CD account are presumed to be interest. They may instead be deposits or redemptions moved between activity accounts. Already marked review."
+    }
+  ]
+}

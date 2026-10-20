@@ -140,6 +140,8 @@ These were diagnosed and fixed in find_pages v6; re-extract and re-verify them a
   Gothenburg_FY2025 (report pp42 and 49 not trimmed; may hold schedule lines).
   Grand_Island_Public_Schools_FY2025 (report p39, probably the Activities Fund schedule, not trimmed).
   Grand_Island_FY2025 (nonmajor combining schedule's Total column page not trimmed; nonmajor detail left out).
+  Merrick_County_FY2025 (trim jumps report p7 to p21: governmental funds receipts/disbursements statement missing;
+  Statement of Activities used, ties).
   Gering_Ft_Laramie_Irrigation_District_FY2025 (nonoperating/capital-grant statement page not trimmed; 9,257,241
   derived as an adjustment meanwhile).
 - Budget forms whose Total All Funds page wasn't found (manifest flag no_budget_actuals_found; skipped, no
