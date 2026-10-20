@@ -1,0 +1,21 @@
+{
+  "stem": "Colfax_County_FY2025",
+  "values_checked": 104,
+  "issues": [
+    {"severity": "warning", "path": "report_discrepancies[0]", "page": 5,
+     "extracted": 5140578, "on_page": "General Government actual lines sum 1,557,669; TOTAL DISBURSEMENTS printed 6,698,247",
+     "issue": "Checked as an extraction error and ruled out; the discrepancy is real and correctly recorded. Trimmed p5 (printed p17, original PDF p19) is the whole General Fund schedule: header, receipts, the General Government lines only, then TOTAL DISBURSEMENTS. The next page (p6, printed p18) is the Road/Inheritance schedule, so no page is missing. Nothing was misread: receipts add to the printed 8,950,287, and the 12 non-zero General Government actuals (all captured; the other lines are dashes) add to 1,557,669. The total is not a budget/actual mix-up and includes no transfers (6,698,247 equals the GF TOTAL DISBURSEMENTS on p4). The Budget columns have the same gap: lines add to 1,964,705 against a printed 9,037,695. The missing 5,140,578 equals the GF's other functions on p4 (Public Safety 3,264,111 + Public Works 60,757 + Public Assistance 41,533 + Miscellaneous 1,506,522 + Capital Outlay 267,656 = 5,140,579), less $1 rounding. The printed schedule leaves out those function lines, so GF detail cannot add up to its total. Accept the discrepancy."},
+    {"severity": "warning", "path": "detail[6..17]", "page": 5,
+     "extracted": 1557669, "on_page": 1557668,
+     "issue": "GF schedule General Government lines add to 1,557,669; p4 GF General Government prints 1,557,668. $1 rounding difference in the report itself."},
+    {"severity": "warning", "path": "detail[17].category", "page": 5,
+     "extracted": "general government", "on_page": "Agriculture Ext AG",
+     "issue": "Agricultural extension could be agriculture/fair; it is printed under the General Government heading, so general government is defensible (already marked review)."},
+    {"severity": "warning", "path": "receipts[0]", "page": 4,
+     "extracted": "Taxes 6,289,997 as taxes (unlabeled)", "on_page": "Fund columns: General 5,765,073; Inheritance Tax Fund 479,656; Nonmajor 45,268 (Visitors Promotion 25,262, E911 20,006 on p10/p12)",
+     "issue": "p4 breaks the Taxes line down by fund, and the detail records the Inheritance Tax Fund's 479,656 as inheritance tax. The receipt-level line could be split the same way (inheritance tax 479,656), and Visitors Promotion taxes are probably lodging tax. As extracted, receipts and detail categorize the same Taxes money differently. Judgment call."},
+    {"severity": "warning", "path": "receipts[5]", "page": 2,
+     "extracted": "Miscellaneous 23,952 as other", "on_page": "Statement of Activities general receipts: Health Insurance Settlements 7,350 + Miscellaneous 16,602 = 23,952",
+     "issue": "The report itself splits this line on p2: a 7,350 settlement, which is the Opioid Settlement Fund's receipts on p11, plus 16,602 miscellaneous. The settlement part could be split out (split_from) and given a specific category, for example reimbursements/refunds. The review note's page reference also does not match the page labels."}
+  ]
+}
