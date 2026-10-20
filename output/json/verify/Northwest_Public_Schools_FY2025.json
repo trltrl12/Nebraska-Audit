@@ -1,0 +1,24 @@
+{
+  "stem": "Northwest_Public_Schools_FY2025",
+  "values_checked": 190,
+  "issues": [
+    {"severity": "warning", "path": "detail[33].original_label", "page": 9,
+     "extracted": "Transfers (to Nutrition Fund 200,000 and Activity Fund 25,000)", "on_page": "Transfers",
+     "issue": "Label is not the printed text. The page prints only 'Transfers' (code 8000), and the extractor added the breakdown, which it worked out from p6 (General Fund 'Transfer to Nutrition Fund' 200,000 plus 'Extracurricular activities' 25,000 eliminated). Amount -225,000 and budget -125,000 are correct."},
+    {"severity": "warning", "path": "detail[32]", "page": 9,
+     "extracted": "contra -200,000 (plus Building and grounds kept at 1,958,583 and other financing detail[34] -200,000)", "on_page": "Building and grounds 1,958,583; p6 Eliminations (200,000) on the Building and grounds row",
+     "issue": "p6 shows exactly which line holds the hidden transfer to the Depreciation Fund (Building and grounds). The hidden-transfer rule calls for splitting that line (1,758,583 spending + 200,000 transfer). A contra line is meant for when the page only names a group of lines. The net effect is the same and totals tie (19,455,819 + 425,000 = 19,880,819). Structural choice only."},
+    {"severity": "warning", "path": "receipts[7].category", "page": 6,
+     "extracted": "fines and forfeitures", "on_page": "Fines and licenses 52,382",
+     "issue": "Mixed label (fines and licenses) with no review note naming the mix, which the rules require. Its p9 counterpart 'County fines and license fees' (detail[7]) also has no review note."},
+    {"severity": "warning", "path": "disbursements[10].category", "page": 6,
+     "extracted": "instruction", "on_page": "State categorical programs 81,303",
+     "issue": "The Statement of Activities (p2) lists State categorical programs as a separate function, not under Instruction. Putting it under instruction is a judgment call (already marked review). The same applies to detail[22]."},
+    {"severity": "warning", "path": "disbursements[11].category", "page": 6,
+     "extracted": "instruction", "on_page": "Federal programs 439,779",
+     "issue": "The Statement of Activities (p2) lists Federal programs as a separate function, not under Instruction. Putting it under instruction is a judgment call (already marked review). The same applies to detail[23]."},
+    {"severity": "warning", "path": "detail[48].budget_final", "page": 12,
+     "extracted": 12327, "on_page": "12,327.000",
+     "issue": "Budget is printed oddly as '12,327.000'. 12,327 is confirmed by the budget total receipts 627,327 (12,327 + 615,000)."}
+  ]
+}
