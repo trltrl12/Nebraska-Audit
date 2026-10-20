@@ -1,0 +1,27 @@
+{
+  "stem": "Cedar_Bluffs_FY2025",
+  "values_checked": 146,
+  "issues": [
+    {"severity": "warning", "path": "receipts[5]", "page": 4,
+     "extracted": 16809, "on_page": "Miscellaneous 57,642 (Total Governmental Funds); Other Governmental Funds column 16,809",
+     "issue": "Split of the Miscellaneous line into keno 16,809 and other 40,833 rests on the Other Governmental Funds column (p4), the Keno Fund schedule (p12, also labelled 'Miscellaneous') and the statement of activities (p2: Community betterment operating grants 16,809, general revenue Miscellaneous 40,833). The report never prints the word keno for this revenue. Arithmetic holds (16,809 + 40,833 = 57,642). Defensible, but it's a judgment call."},
+    {"severity": "warning", "path": "receipts[3].category", "page": 4,
+     "extracted": "intergovernmental/state aid", "on_page": "Grant revenue 5,915",
+     "issue": "Grant source is not stated (p2 shows it as general government operating grants and contributions). It could be a federal grant or a private contribution."},
+    {"severity": "warning", "path": "detail[11].detail_category", "page": 10,
+     "extracted": "other state aid", "on_page": "Intergovernmental 99,677 (Street Fund)",
+     "issue": "Street Fund intergovernmental revenue is most likely highway allocation, but the page doesn't say so."},
+    {"severity": "warning", "path": "detail[18].split_from", "page": 10,
+     "extracted": "26,892 / 899", "on_page": "Debt service 27,791",
+     "issue": "The budget schedule prints one Debt service line. The split uses the Street Fund column's Principal 26,892 and Interest 899 on p4 (same fund, same year, sums correctly). Defensible."},
+    {"severity": "warning", "path": "detail[43].budget_final", "page": 14,
+     "extracted": null, "on_page": "Debt service budget 55,235",
+     "issue": "The Sewer Fund Debt service line has a printed final budget of 55,235. Both split items (detail[43], detail[44]) set budget_final to null, so that budget figure is lost. The actual-amount split 39,880 + 3,973 = 43,853 matches the p8 cash flows."},
+    {"severity": "warning", "path": "ending_cash", "page": 3,
+     "extracted": 547796, "on_page": "Total fund balances 547,796 = cash 438,634 + investments 102,110 + due from other governments 7,052",
+     "issue": "beginning_cash and ending_cash are the governmental fund balances the statement rolls forward, so the identity holds. But ending_cash includes investments 102,110 (also reported separately as ending_investments) and a non-cash receivable of 7,052. Actual governmental cash is 438,634."},
+    {"severity": "warning", "path": "detail", "page": null,
+     "extracted": "no Debt Service Fund schedule", "on_page": "Trimmed PDF jumps from report p24 (Keno) to p26 (Water)",
+     "issue": "Report page 25 (probably the Debt Service Fund budgetary comparison schedule) is not in the trimmed PDF. The Debt Service Fund's revenue of 68,168 and expenditures of 68,155 (p4) therefore have no detail lines. This is a trimming gap, not an extraction error."}
+  ]
+}
