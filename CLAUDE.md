@@ -108,6 +108,9 @@ agents' one-line statuses.
   the next fetch re-trims, compare each extracted report's manifest `pages_kept` with
   `output/json/_meta/pages_at_extraction.csv`; re-extract and re-verify every report whose pages
   changed (their source_page numbers no longer match).
+- Extracted from old (v5) trims but not yet verified, because the v6 re-trim removed those files: Ashton,
+  Atlanta, Avoca, Ayr, Barada, Barneston, Bartlett, Bazile_Mills, Bee, Belden, Belgrade, Belvidere,
+  Benedict, Berwyn, Bladen (all _FY2025). Verify them once v6 re-trims them (re-extract first if their pages changed).
 These were diagnosed and fixed in find_pages v6; re-extract and re-verify them after the re-trim:
 - Trimmed PDF is missing pages: Annie_Jeffrey_Memorial_Health_Center_FY2025 (balance sheet),
   Adams_County_FY2025 (report p45: Highway Bond Fund, nonmajor totals), Arapahoe_FY2025 (other
