@@ -119,6 +119,8 @@ These were diagnosed and fixed in find_pages v6; re-extract and re-verify them a
   General Fund spending), Cody_Kilgore_Public_School_FY2025 (p18 activity accounts cut off; residual
   lines from p17 used meanwhile), Columbus_FY2025 (rest of the nonmajor
   combining statement: printed columns 5,243,633 of 5,493,196, no Total column; no nonmajor detail yet).
+  Litchfield_Public_Schools_FY2025 (left half of the governmental receipts/disbursements statement,
+  report p17-18 spread; receipt labels inferred from fund schedules, marked review).
 - Trimmed to a budget page only (skipped, no JSON): Cass_County_SID_9_FY2025, Cass_County_SID_10_FY2025,
   Bismark_Township_Platte_County_B2526.
 - ~97 Audit filings marked no_statements_found (mostly SIDs) and 72 with no balance statement: page
