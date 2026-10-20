@@ -132,6 +132,16 @@ independent verifier, so unmarked computed values show up as errors. If a value 
   make sure the split items add up to the original line. If the report doesn't break it down,
   keep one item with category `taxes (unlabeled)` (also `detail_category` `taxes (unlabeled)` in
   detail). Both cases go on the user's review list automatically.
+- **outside_printed_total:** if a statement prints its "Total Receipts/Disbursements" line and
+  then lists more receipts/disbursements below it (interest income under "Other Financing
+  Sources", loan payments under "Other Receipts (Disbursements)"…), record those lines as normal
+  items with `"outside_printed_total": true`, and keep `reported_totals` equal to the printed
+  total. Never change a printed total to include them.
+- **report_discrepancies:** if the printed report itself doesn't add up (its own totals or
+  roll-forward are off), record the figures exactly as printed and add one entry per problem to a
+  top-level list: `{"check": "business" | "reconcile" | "balance" | "totals" | "detail",
+  "difference": <printed result minus what the parts add up to>, "source_page": n, "note": "..."}`.
+  These are listed for the user as "the report itself doesn't add up", separate from errors.
 - **review:** add `"review": "<short reason>"` to any line you are unsure about (unreadable
   digits, a category guess you aren't confident in, a line that may belong to another fund
   type). These are collected into a review list for the user; don't overuse it. Don't include subtotal or total lines as

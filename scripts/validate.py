@@ -67,11 +67,22 @@ def check(stem, d):
         reviews.append(dict(filename=stem, entity_name=d.get("entity_name"), where=where, fund_type=ftype,
                             original_label=label, amount=amount, reason=reason, source_page=src_page))
 
+    declared = [x for x in d.get("report_discrepancies") or [] if isinstance(x, dict)]
+
     def cmp(chk, reason, expected, actual, pages=""):
-        """Exact comparison: flag over $1, review any smaller nonzero difference."""
+        """Exact comparison: flag over $1, review any smaller nonzero difference. A difference the
+        extractor declared in report_discrepancies (the printed report itself doesn't add up) goes
+        to the review list with that wording instead of being flagged."""
         if expected is None or actual is None:
             return
         diff = float(actual) - float(expected)
+        for x in declared:
+            if x.get("check") == chk and amt(x.get("difference")) is not None \
+                    and abs(abs(diff) - abs(amt(x.get("difference")))) < 0.01 and abs(diff) >= REVIEW_OVER:
+                rv(chk, f"THE REPORT ITSELF DOESN'T ADD UP: {reason}: off by {diff:+,.2f} as printed; "
+                        f"{x.get('note', '')}".strip("; "), amount=round(float(actual), 2),
+                   src_page=str(x.get("source_page") or ""))
+                return
         if abs(diff) > FLAG_OVER:
             f(chk, reason, expected=round(float(expected), 2), actual=round(float(actual), 2), pages=pages)
         elif abs(diff) >= REVIEW_OVER:
@@ -125,7 +136,9 @@ def check(stem, d):
     bt = d.get("business_type") or {}
     for fund in FUND_TYPES:
         for key in ("receipts", "disbursements"):
-            lines = [i for i in d.get(key) or [] if fund_type(i) == fund]
+            # lines printed below the report's own total line (e.g. interest income listed under
+            # "other financing") are real receipts/disbursements but not part of the printed total
+            lines = [i for i in d.get(key) or [] if fund_type(i) == fund and not i.get("outside_printed_total")]
             rt = reported_total(d, fund, key)
             stated = amt(rt)
             if stated is None:

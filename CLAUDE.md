@@ -40,6 +40,10 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
   housing, airports, community colleges) have only business-type lines and `business_type`
   balances; governmental fields are null. Entity-type rules are in the extractor agent.
 - Any value not printed as-is (sums, splits, derived balances) carries `computed: "<how>"`.
+- Lines printed below a statement's own total line carry `outside_printed_total: true`; printed
+  totals are never altered. Where the printed report itself doesn't add up, the figures stay as
+  printed and `report_discrepancies[]` records it (listed for review as "the report itself
+  doesn't add up").
 - **Combined/unlabeled tax lines** are split using the report's own breakdown (`split_from`
   set) or kept as `taxes (unlabeled)`; both, and any line marked `review`, go to
   output/review.csv (the user's review list).
