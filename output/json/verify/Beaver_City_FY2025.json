@@ -1,0 +1,33 @@
+{
+  "stem": "Beaver_City_FY2025",
+  "values_checked": 221,
+  "issues": [
+    {"severity": "warning", "path": "basis", "page": 1,
+     "extracted": "GAAP", "on_page": "Governmental Activities (Modified Cash Basis); Business-type Activities (Accrual Basis)",
+     "issue": "governmental funds are modified cash basis but basis is set to GAAP (fund balance roll-forward); defensible because there are fund balance statements, but inconsistent with other modified-cash reports recorded as 'cash'"},
+    {"severity": "warning", "path": "ending_cash.amount", "page": 4,
+     "extracted": -439804, "on_page": "Cash and cash equivalents (439,804); Certificates of deposit 702,111; County treasurer cash 5,861; Investments 594,971",
+     "issue": "ending_cash uses only the 'Cash and cash equivalents' line (negative); CDs, county treasurer cash and investments (total assets 863,139) are excluded"},
+    {"severity": "warning", "path": "receipts[6].category", "page": 6,
+     "extracted": "donations/contributions", "on_page": "Grants and contributions 16,224",
+     "issue": "mostly Fire 10,542 and Ambulance 5,562 (p17-18); fire/ambulance grants may be governmental (state) grants; also detail[8], detail[12]"},
+    {"severity": "warning", "path": "receipts[10].category", "page": 6,
+     "extracted": "other", "on_page": "Loan collections 31,106",
+     "issue": "specific label put in 'other'; loan repayments to the Sales Tax (economic development) fund fit no listed category cleanly; also detail[93]"},
+    {"severity": "warning", "path": "receipts", "page": 6,
+     "extracted": "other 88,681 + loan collections 31,106 = 119,787", "on_page": "Total revenues 676,655",
+     "issue": "17.7% of governmental receipts are in 'other' (>10% review threshold); the General department 'Other receipts' 71,053 (p17) is the largest part and nothing on the page says what it is"},
+    {"severity": "warning", "path": "receipts[17].category", "page": 8,
+     "extracted": "donations/contributions", "on_page": "Grant income 192",
+     "issue": "grant source not stated; could be federal/state grant"},
+    {"severity": "warning", "path": "detail[28].detail_category", "page": 17,
+     "extracted": "salaries and wages", "on_page": "Salaries and benefits",
+     "issue": "line mixes salaries and benefits; same for every department's 'Salaries and benefits' line (detail[46], [55], [70], [79])"},
+    {"severity": "warning", "path": "detail[37].detail_category", "page": 17,
+     "extracted": "professional/contract services", "on_page": "Police: Contracted services 58,082",
+     "issue": "the Police department's only expense is contracted services, which is almost certainly a law enforcement (sheriff) contract -> 'law enforcement contract'"},
+    {"severity": "warning", "path": "detail[85].detail_category", "page": 12,
+     "extracted": "other state aid", "on_page": "Street Fund: Intergovernmental 123,755",
+     "issue": "Street Fund intergovernmental revenue is most likely highway allocation; page does not say so"}
+  ]
+}
