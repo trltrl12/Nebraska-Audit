@@ -1,0 +1,27 @@
+{
+  "stem": "Brady_FY2025",
+  "values_checked": 88,
+  "issues": [
+    {"severity": "warning", "path": "transfers_in", "page": 4,
+     "extracted": 140826.69, "on_page": "Row labelled 'Transfers out': General 150,972.72, Street (10,146.03), Total 140,826.69; 'Transfers in' row is blank",
+     "issue": "The amount is printed on the 'Transfers out' row but is a net inflow (Total other financing sources 157,196.37 = 16,369.68 + 140,826.69). Recording it as transfers_in is right, but the extractor reinterpreted the label and netted the Street-to-General 10,146.03."},
+    {"severity": "warning", "path": "balance_sheet.liabilities[0].category", "page": 1,
+     "extracted": "other liabilities", "on_page": "Sales tax collected 328.48 (p5: Sales Taxes payable)",
+     "issue": "Sales tax collected and owed to the state fits 'due to other governments' better."},
+    {"severity": "warning", "path": "detail[14].category", "page": 10,
+     "extracted": "other", "on_page": "Brady Days column, Other 10,096.76",
+     "issue": "The Brady Days (village festival) department heading says what these receipts are; charges for services/fees (detail 'fair/event revenue' or 'other charges for services') may fit better than other/miscellaneous. The same 10,096.76 is inside receipts[9]."},
+    {"severity": "warning", "path": "receipts[8].category", "page": 10,
+     "extracted": "occupation/franchise tax", "on_page": "Franchise/Capital/Patronage 47,827.57",
+     "issue": "This line mixes franchise fees with capital credits/patronage refunds, which are not taxes. The Statement of Activities (p2) reports it inside 'Other receipts'. Dominant component unknown; already marked review."},
+    {"severity": "warning", "path": "receipts[7].category", "page": 4,
+     "extracted": "donations/contributions", "on_page": "Grants and contributions 22,381.46 (Police and Fire 22,316.46; SoA: Operating Grants and Contributions)",
+     "issue": "Fire/police grants are often from state or federal agencies; the source is not stated, so donations/contributions is uncertain (marked review)."},
+    {"severity": "warning", "path": "detail", "page": 9,
+     "extracted": null, "on_page": "Statement of Revenues and Expenditures - Budgetary Basis - Budget and Actual - All Funds (all-funds summary with final budgets)",
+     "issue": "Not recorded in detail[]. This is defensible because it is a broad all-funds summary that overlaps the basic statements and the p10-11 departmental schedule, but no budget_final values are captured anywhere."},
+    {"severity": "warning", "path": "report_discrepancies", "page": 8,
+     "extracted": null, "on_page": "Net cash provided by operating activities 106,869.56 (p7) vs reconciliation result 106,853.61 (p8, after (15.95) change in taxes payable)",
+     "issue": "The proprietary cash flow statement contradicts itself by 15.95. No extracted value depends on it (proprietary is null for cash basis, and beginning/ending cash roll forward correctly), but it could be noted in report_discrepancies."}
+  ]
+}
