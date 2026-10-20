@@ -1,0 +1,27 @@
+{
+  "stem": "Bloomfield_FY2025",
+  "values_checked": 150,
+  "issues": [
+    {"severity": "error", "path": "detail[26].category", "page": 10,
+     "extracted": "other / miscellaneous revenue", "on_page": "Intergovernmental: Other 5,964 (Culture and Recreation); p2 shows it as Culture and Recreation operating grants 5,964",
+     "issue": "The line is printed under the Intergovernmental heading and p2 shows it as an operating grant, so the page says what it is. It should be 'intergovernmental/state aid' (detail 'county/other local governments' or 'other state aid'), not other/miscellaneous."},
+    {"severity": "warning", "path": "receipts[6].category", "page": 4,
+     "extracted": "other", "on_page": "Miscellaneous 641,319 (General 446,084, Street 435, Ambulance 153,800, Other 41,000)",
+     "issue": "pp10 and 14 itemize most of this line: donations/fundraisers 307,456, licenses and permits 4,242, gambling 3,731. About 325,455 is undescribed (ambulance 153,800, other income 144,399, fire misc 26,920, reuse 336). The undescribed part is slightly the larger, so 'other' is defensible, but it is 32% of governmental receipts. The review flag is set."},
+    {"severity": "warning", "path": "receipts[3].category", "page": 4,
+     "extracted": "intergovernmental/state aid", "on_page": "Intergovernmental 600,018 (General 320,384 itemized p10)",
+     "issue": "This is a broad group with no review flag. The General part includes non-intergovernmental items: NPPD lease payment 93,207 (rentals), In-lieu of tax 23,402 + Street 4,845 (other taxes), Franchise fees 7,430 (occupation/franchise tax). Ambulance 75,000 is not itemized."},
+    {"severity": "warning", "path": "receipts[9].category", "page": 7,
+     "extracted": "intergovernmental/state aid", "on_page": "Grant 181,553 (p2: business-type Capital grants and contributions)",
+     "issue": "The grant's source (federal vs state) is not stated. A review flag is already set."},
+    {"severity": "warning", "path": "detail[22].detail_category", "page": 10,
+     "extracted": "county/other local governments", "on_page": "Mutual financial organization 18,437",
+     "issue": "Nebraska Mutual Finance Organization (MFO) aid to fire departments is a state program, so 'other state aid' is likely the better detail category."},
+    {"severity": "warning", "path": "detail[14].category", "page": 10,
+     "extracted": "other / miscellaneous revenue", "on_page": "Economic Development reuse payments 336; p2 shows Community Development operating grants 336",
+     "issue": "p2 classes this as an operating grant (likely CDBG reuse funds), so intergovernmental may fit better."},
+    {"severity": "warning", "path": "detail[33].detail_category", "page": 11,
+     "extracted": "professional/contract services", "on_page": "Operating expenses 317,753",
+     "issue": "All 'Operating expenses' lines (detail[33], [38], [42], [59], [73], [78]) are mapped to professional/contract services because the cash flow statement p8 says 'contractual services'. They probably include utilities, insurance and other objects. Assumption."}
+  ]
+}

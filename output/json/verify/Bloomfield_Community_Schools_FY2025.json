@@ -1,0 +1,31 @@
+{
+  "stem": "Bloomfield_Community_Schools_FY2025",
+  "values_checked": 113,
+  "issues": [
+    {"severity": "error", "path": "receipts[6].category", "page": 3,
+     "extracted": "other", "on_page": "Other local receipts 2,400 (General Fund only); GF schedule p5: 1910 Rentals of school property 2,100 + 1920 Contributions and donations 300 = 2,400",
+     "issue": "The report does describe this line: it is rentals 2,100 plus donations 300, so rentals dominate. It should be 'charges for services/fees' (review: mixed with donations), not 'other'."},
+    {"severity": "error", "path": "receipts[4].category", "page": 3,
+     "extracted": "licenses and permits", "on_page": "Local licenses and fees 6,390; GF schedule p5: 1740 Student fees 4,430 + 1911 Local license fees 1,960",
+     "issue": "For a mixed line the rule is to use the dominant category. Student fees (4,430) are larger than license fees (1,960), so it should be 'charges for services/fees'. The extractor's own review note lists this breakdown."},
+    {"severity": "warning", "path": "receipts[10].category", "page": 3,
+     "extracted": "intergovernmental/state aid", "on_page": "State receipts 2,989,868 (GF 2,754,900 detailed on pp5-6)",
+     "issue": "This is a broad group and has no review flag. The GF part includes 3133 Nameplate capacity tax 159,123, which the rules classify as 'other taxes', not state aid. Should carry review 'broad group; detail on p.5-6'."},
+    {"severity": "warning", "path": "disbursements[1].category", "page": 3,
+     "extracted": "support services", "on_page": "Student support services 537,025 = General Fund 296,884 + Activity Fund 240,141",
+     "issue": "The fund columns print the split, and the Activity Fund 240,141 is student activities spending. Filing the whole 537,025 under support services overstates that category. A review flag is already set."},
+    {"severity": "warning", "path": "detail[9].detail_category", "page": 5,
+     "extracted": "county/other local governments", "on_page": "2110 County fines and license fees 5,705",
+     "issue": "Judgment call. This is county-distributed fines and license money; 'fines and forfeitures' would also be defensible."},
+    {"severity": "warning", "path": "detail[70].category", "page": 9,
+     "extracted": "instruction", "on_page": "3500 State categorical programs: 3552 Safety and security 7,180",
+     "issue": "Safety and security is closer to support services (operation of plant) than to instruction. Judgment call."},
+    {"severity": "warning", "path": "detail[76].budget_final", "page": 9,
+     "extracted": 75000, "on_page": "8000 Interfund transfers: budget 75,000, actual 120,000",
+     "issue": "The amount is signed (-120,000) but budget_final is unsigned (+75,000), so the signs don't match within the line."},
+    {"severity": "warning", "path": "detail", "page": 5,
+     "extracted": "GF budget schedule revenue 5,982,054 / expenditure 5,541,642, beginning 1,463,889",
+     "on_page": "GF statement column p3-4: receipts 5,984,423, disbursements 5,487,727, beginning 1,728,297",
+     "issue": "The budget schedule doesn't agree with the statement's General Fund column. Interest is 10,987 vs 13,356, O&M 484,732 vs 565,817, transportation 349,624 vs 214,624, and fund balance differs. Both pages are recorded as printed and the extractor's notes mention it, but the report gives no reconciliation."}
+  ]
+}
