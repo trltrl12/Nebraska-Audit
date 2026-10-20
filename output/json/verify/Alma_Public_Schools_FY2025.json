@@ -1,0 +1,33 @@
+{
+  "stem": "Alma_Public_Schools_FY2025",
+  "values_checked": 92,
+  "issues": [
+    {"severity": "error", "path": "missing", "page": 18,
+     "extracted": null, "on_page": "Special Building Fund budget schedule: Property taxes - special building 273,354; Interest 4,721; Carline tax 5; Public power district sales tax 5,737; Taxes paid after due date 2,002; Homestead exemption 8,631; Property tax credit 148,345; Pro-rate motor vehicle 798; Total receipts 443,593 (budget 411,543); Site improvement 230,475; Lease purchase - principal 69,769; Lease purchase - interest 1,600; Total disbursements 301,844 (budget 992,422)",
+     "issue": "This fund schedule is missing from detail/detail_totals, and the notes don't explain why. It is not double counted by the General Fund combining schedule."},
+    {"severity": "error", "path": "missing", "page": 16,
+     "extracted": null, "on_page": "School Nutrition Fund budget schedule: Daily sales - school lunch program 65,225; Daily sales - school breakfast program 4,942; Daily sales - non-reimbursable programs 6,977; Interest 668; Rebates 248; State 996; Federal 122,959; Total receipts 202,015 (budget 282,035); Salaries 73,822; Employee benefits 12,973; Contracted services 3,067; Supplies 3,185; Food 115,142; Equipment 19,059; Other 1,650; Total disbursements 228,898 (budget 383,915)",
+     "issue": "This fund schedule is missing from detail/detail_totals. It is the only object-level spending detail in the report."},
+    {"severity": "error", "path": "missing", "page": 17,
+     "extracted": null, "on_page": "Qualified Capital Purpose Undertaking Fund: Property taxes - debt service 53; Interest 394; Total receipts 447; Transfers out 100,000 (budget 114,417)",
+     "issue": "This fund schedule is missing from detail/detail_totals. The transfer out 100,000 belongs in the other financing section."},
+    {"severity": "error", "path": "missing", "page": 19,
+     "extracted": null, "on_page": "Activities Fund: Activities 330,240 (budget 277,500); Transfers 5,936; Disbursements 368,402 (budget 523,544)",
+     "issue": "This fund schedule is missing from detail/detail_totals. It should use revenue detail 'student activity receipts' and expenditure category student activities / 'student activity spending'. The transfer 5,936 goes in other financing."},
+    {"severity": "warning", "path": "receipts[6].category", "page": 4,
+     "extracted": "other", "on_page": "Other 3,248 (General 2,995 = Carline tax 50 + Local license fees 2,070 + Grants from corporations 800 + Police court fines 75 per p7/p11; Special Building 5 = carline tax; Other funds 248 = nutrition Rebates p16)",
+     "issue": "The report's schedules show what this line is, so the review note 'unspecified' isn't accurate. Licenses and permits is the dominant part (64%), so it could take that category with a review note naming the mix."},
+    {"severity": "warning", "path": "receipts[5].category", "page": 4,
+     "extracted": "investment income", "on_page": "Interest 53,429 (General 47,646 = Interest 28,744 + Penalty and interest on delinquent taxes 18,902 per p7)",
+     "issue": "About 18,902 of this line is penalty and interest on delinquent taxes, which the rules put under property tax. That share is investment income only by label. The basic statement doesn't print the split, so the line is kept as printed."},
+    {"severity": "warning", "path": "receipts[9].category", "page": 4,
+     "extracted": "intergovernmental/state aid", "on_page": "County sources 22,119 = County fines and license fees 14,926 + ESU receipts 7,193 (p7)",
+     "issue": "The dominant component is county fines and license fees (fines and forfeitures; detail[9] uses that category). The intergovernmental category is defensible from the label."},
+    {"severity": "warning", "path": "disbursements[2].category", "page": 4,
+     "extracted": "support services", "on_page": "Support services - Students 785,437 = General 417,035 + Other Governmental Funds 368,402 (= Activities Fund disbursements, p19)",
+     "issue": "47% of this line is activity fund spending, which fits the student activities category. Support services is still the dominant part, and the review note mentions it."},
+    {"severity": "warning", "path": "detail (General Fund schedule choice)", "page": 11,
+     "extracted": "General Fund Components combining schedule p7-9 (function totals, 'not itemized')", "on_page": "General Fund Budget and Actual schedule p11-14 itemizes spending by sub-function (e.g. 1100 Regular instruction 3,255,753, 1160 Poverty programs 247,251, 2120 Guidance 94,182 ...)",
+     "issue": "The budget schedule is more detailed but excludes the Depreciation Fund and includes transfers. Choosing the combining schedule is defensible but loses detail. There is also a $1 inconsistency between the report's own schedules: Nonprogram expenditures is 6,494 on p14 vs 6,493 on p9 (detail[45])."}
+  ]
+}
