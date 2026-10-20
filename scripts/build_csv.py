@@ -39,6 +39,13 @@ PROGRESS_FIELDS = ["filename", "entity_name", "entity_type", "county", "subdivis
                    "flag_reasons", "source_url"]
 
 
+
+def filing_label(m):
+    """Audit / Waiver, or "Waiver/budget only" when the filing links only a budget form."""
+    if "Budgets_Filed" in (m.get("url") or "") or "_B2526" in (m.get("filename") or ""):
+        return "Waiver/budget only"
+    return m.get("filing_type")
+
 def orig_pages(pages, mapping):
     out = []
     for p in pages:
@@ -142,7 +149,7 @@ def main():
             ending_investments=amt(d.get("ending_investments")),
             **{f"prop_{k}": amt(prop.get(k)) for k in PROPRIETARY_FIELDS},
             prop_reconciles="" if not pr else ("yes" if pr["reconciles"] else "no"),
-            county=m.get("county"), filing_type=m.get("filing_type"),
+            county=m.get("county"), filing_type=filing_label(m),
             balance_sheet_statement=bs.get("statement", ""),
             **{tot: bs_total(bs, sec) for sec, tot in BS_SECTIONS.items()},
             balance_sheet_balances="" if not bc else ("yes" if bc["balances"] else "no"),
@@ -170,7 +177,7 @@ def main():
             status = "pending"
         progress.append(dict(filename=m["filename"], entity_name=m.get("entity_name"),
                              entity_type=m.get("entity_type"), county=m.get("county"),
-                             subdivision_type=m.get("subdivision_type"), filing_type=m.get("filing_type"),
+                             subdivision_type=m.get("subdivision_type"), filing_type=filing_label(m),
                              status=status, basis_guess=m.get("basis_guess"),
                              trimmed_file=m.get("trimmed_file"), pages_kept=m.get("pages_kept"),
                              report_pages=page_ranges((m.get("pages_kept") or "").split(";")),
@@ -181,7 +188,7 @@ def main():
     for r in read_csv(FILE_LIST):
         if r["filename"] not in seen:
             progress.append(dict(filename=r["filename"], county=r.get("county"),
-                                 subdivision_type=r.get("subdivision_type"), filing_type=r.get("filing_type"),
+                                 subdivision_type=r.get("subdivision_type"), filing_type=filing_label(r),
                                  entity_name=r.get("entity_name") or Path(r["filename"]).stem.replace("_", " "),
                                  status="download_failed" if r["filename"] in failed else "not_fetched",
                                  source_url=r.get("url", "")))
