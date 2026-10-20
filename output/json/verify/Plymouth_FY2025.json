@@ -2,29 +2,69 @@
   "stem": "Plymouth_FY2025",
   "values_checked": 141,
   "issues": [
-    {"severity": "error", "path": "receipts[13].category", "page": 6,
-     "extracted": "other", "on_page": "Miscellaneous 5,262 (General 267, Street 4,269, Park 726); Statement of Activities p2 shows Public works charges for services 4,269 = Street Miscellaneous, and General 267 / Park 726 sit inside Policy/administration 72,188 and Culture and recreation 6,621 charges for services",
-     "issue": "the report's Statement of Activities classifies the whole line as charges for services (Street 4,269 is 81% of it); per the rules it should be charges for services/fees, not other"},
-    {"severity": "error", "path": "detail[26].category", "page": 10,
-     "extracted": "other / miscellaneous revenue", "on_page": "Street Special Revenue Miscellaneous 4,269 = Statement of Activities p2 Public works charges for services 4,269",
-     "issue": "the page shows what this is: charges for services (other charges for services); same reasoning for detail[7] (General 267) and detail[36] (nonmajor 726)"},
-    {"severity": "warning", "path": "receipts[4].category", "page": 6,
-     "extracted": "other taxes", "on_page": "Public power lease rebate 63,115",
-     "issue": "a lease payment/rebate, not a tax; the Statement of Activities (p2) counts it inside Policy/administration charges for services 72,188, so charges for services/fees (detail rentals) may fit better; same for detail[2]"},
-    {"severity": "warning", "path": "receipts[14].category", "page": 6,
-     "extracted": "other", "on_page": "Community development 3,600",
-     "issue": "Statement of Activities p2 Policy/administration charges for services 72,188 = 63,115 + 4,097 + 1,109 + 267 + 3,600, so the report treats it as charges for services; same for detail[8]"},
-    {"severity": "warning", "path": "receipts[15].category", "page": 6,
-     "extracted": "other", "on_page": "Grant repayments 31,346 (CDBG Special Revenue)",
-     "issue": "label says what it is (repayments of CDBG grants/loans); reimbursements/refunds or charges for services (Statement of Activities p2 Economic development charges 34,346 = 31,346 + Lammel 3,000) fit better than other; same for detail[38]"},
-    {"severity": "warning", "path": "notes", "page": 5,
-     "extracted": "Debt Service column page not in trimmed PDF", "on_page": "Trimmed p5 (Exhibit E) prints the Debt Service column: Taxes 56,797, Intergovernmental 11,845, Total revenues 68,642, Debt service 613, Bond principal paid (60,000), Bond interest and fees paid (4,845)",
-     "issue": "notes are wrong (receipts[3] and receipts[6] themselves cite p5); the Debt Service fund has no lines in detail[], so detail revenue covers 581,659 of 650,301"},
-    {"severity": "warning", "path": "detail[39].category", "page": 12,
-     "extracted": "culture/recreation (detail[39]-[42], [45], [46])", "on_page": "Exhibit E p6 nonmajor function totals: Culture and recreation 69,210, Economic development 16,811 (CDBG 6,333 + Recycle 9,799 + Lammel 679), Public safety 12,213, Policy/admin 690 (Town Hall)",
-     "issue": "function guessed (marked review); culture/recreation detail lines sum to 80,591 vs 69,210 printed, because Recycle Program, Lammel Building, Fire supplies 213 and Town Hall lines are all put in culture/recreation; per-fund columns on pp11-12 show the true function"},
-    {"severity": "warning", "path": "missing", "page": 8,
-     "extracted": null, "on_page": "Exhibit H non-operating lines by fund: Water interest income 2; Sewer interest income 187; Sewer interest expense (5,355)",
-     "issue": "business-type detail from Exhibit H includes only the operating lines; the non-operating lines are in receipts/disbursements totals but not in detail by fund"}
+    {
+      "severity": "error",
+      "path": "receipts[13].category",
+      "page": 6,
+      "extracted": "other",
+      "on_page": "Miscellaneous 5,262 (General 267, Street 4,269, Park 726); Statement of Activities p2 shows Public works charges for services 4,269 = Street Miscellaneous, and General 267 / Park 726 sit inside Policy/administration 72,188 and Culture and recreation 6,621 charges for services",
+      "issue": "[fixed] the report's Statement of Activities classifies the whole line as charges for services (Street 4,269 is 81% of it); per the rules it should be charges for services/fees, not other"
+    },
+    {
+      "severity": "error",
+      "path": "detail[26].category",
+      "page": 10,
+      "extracted": "other / miscellaneous revenue",
+      "on_page": "Street Special Revenue Miscellaneous 4,269 = Statement of Activities p2 Public works charges for services 4,269",
+      "issue": "[fixed] the page shows what this is: charges for services (other charges for services); same reasoning for detail[7] (General 267) and detail[36] (nonmajor 726)"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[4].category",
+      "page": 6,
+      "extracted": "other taxes",
+      "on_page": "Public power lease rebate 63,115",
+      "issue": "a lease payment/rebate, not a tax; the Statement of Activities (p2) counts it inside Policy/administration charges for services 72,188, so charges for services/fees (detail rentals) may fit better; same for detail[2]"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[14].category",
+      "page": 6,
+      "extracted": "other",
+      "on_page": "Community development 3,600",
+      "issue": "Statement of Activities p2 Policy/administration charges for services 72,188 = 63,115 + 4,097 + 1,109 + 267 + 3,600, so the report treats it as charges for services; same for detail[8]"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[15].category",
+      "page": 6,
+      "extracted": "other",
+      "on_page": "Grant repayments 31,346 (CDBG Special Revenue)",
+      "issue": "label says what it is (repayments of CDBG grants/loans); reimbursements/refunds or charges for services (Statement of Activities p2 Economic development charges 34,346 = 31,346 + Lammel 3,000) fit better than other; same for detail[38]"
+    },
+    {
+      "severity": "warning",
+      "path": "notes",
+      "page": 5,
+      "extracted": "Debt Service column page not in trimmed PDF",
+      "on_page": "Trimmed p5 (Exhibit E) prints the Debt Service column: Taxes 56,797, Intergovernmental 11,845, Total revenues 68,642, Debt service 613, Bond principal paid (60,000), Bond interest and fees paid (4,845)",
+      "issue": "notes are wrong (receipts[3] and receipts[6] themselves cite p5); the Debt Service fund has no lines in detail[], so detail revenue covers 581,659 of 650,301"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[39].category",
+      "page": 12,
+      "extracted": "culture/recreation (detail[39]-[42], [45], [46])",
+      "on_page": "Exhibit E p6 nonmajor function totals: Culture and recreation 69,210, Economic development 16,811 (CDBG 6,333 + Recycle 9,799 + Lammel 679), Public safety 12,213, Policy/admin 690 (Town Hall)",
+      "issue": "function guessed (marked review); culture/recreation detail lines sum to 80,591 vs 69,210 printed, because Recycle Program, Lammel Building, Fire supplies 213 and Town Hall lines are all put in culture/recreation; per-fund columns on pp11-12 show the true function"
+    },
+    {
+      "severity": "warning",
+      "path": "missing",
+      "page": 8,
+      "extracted": null,
+      "on_page": "Exhibit H non-operating lines by fund: Water interest income 2; Sewer interest income 187; Sewer interest expense (5,355)",
+      "issue": "business-type detail from Exhibit H includes only the operating lines; the non-operating lines are in receipts/disbursements totals but not in detail by fund"
+    }
   ]
 }
