@@ -1,0 +1,21 @@
+{
+  "stem": "Crawford_Public_Schools_FY2025",
+  "values_checked": 225,
+  "issues": [
+    {"severity": "warning", "path": "detail[81..90]", "page": 16,
+     "extracted": "Activities Fund per-account schedule", "on_page": "header reads CHADRON PUBLIC SCHOOLS DISTRICT NO. 2, CHADRON, NEBRASKA (UNAUDITED)",
+     "issue": "the per-account schedule is headed with another district's name. Its totals (81,015 / 229,230 / 165,933 / 144,312) match Crawford's Activities Fund on p15, so it was used, but where the page came from should be confirmed"},
+    {"severity": "warning", "path": "detail[85]", "page": 15,
+     "extracted": -90000, "on_page": "Transfers in 90,000 (p15); not shown in any p16 account",
+     "issue": "contra line for a transfer hidden in account receipts; this follows the extractor rule, but which account holds the 90,000 is an assumption the page doesn't print"},
+    {"severity": "warning", "path": "detail[50].category", "page": 9,
+     "extracted": "other", "on_page": "Local sources 154 (Depreciation Fund)",
+     "issue": "probably interest, but the page doesn't say; 'other' with review is defensible"},
+    {"severity": "warning", "path": "detail[52].category", "page": 10,
+     "extracted": "other", "on_page": "Local sources 28,492 (Employee Benefit Fund)",
+     "issue": "source isn't printed; 'other' with review is defensible"},
+    {"severity": "warning", "path": "report_discrepancies", "page": 4,
+     "extracted": "totals -1 only", "on_page": "Total disbursements 4,384,907; lines sum 4,384,908",
+     "issue": "with the line items as printed, the roll-forward 1,657,050 + 4,708,334 - 4,384,908 = 1,980,476 vs ending 1,980,477 is off by $1. The cause is the report's own rounding (already recorded as a totals discrepancy), but no 'reconcile' entry was added"}
+  ]
+}
