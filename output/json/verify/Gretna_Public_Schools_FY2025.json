@@ -1,0 +1,24 @@
+{
+  "stem": "Gretna_Public_Schools_FY2025",
+  "values_checked": 258,
+  "issues": [
+    {"severity": "error", "path": "receipts[12].source_page", "page": 5,
+     "extracted": 6, "on_page": "Activities column, Local receipts 2,265,807 is on p5 (also p2 Charges for Services 'Other'); p6 shows only the Total column 69,049,331",
+     "issue": "wrong source_page: 2,265,807 is not printed on p6, so page-text check will fail; should be 5"},
+    {"severity": "warning", "path": "detail[193].category", "page": 10,
+     "extracted": "capital outlay", "on_page": "Re-Appropriated Funds 2,943,215",
+     "issue": "nature not stated; statement p5 folds the Depreciation fund's 2,943,215 into the General Fund's Instructional services / Support services lines (93,406,795 = 90,463,580 + 2,943,215), not capital outlay; category is a guess (already marked review)"},
+    {"severity": "warning", "path": "detail[7].detail_category", "page": 7,
+     "extracted": "county/other local governments", "on_page": "2110 County fines and license fees 250,915",
+     "issue": "these are fines/license fees the county passes to schools; could be fines and forfeitures (same for receipts[13] 'County receipts' intergovernmental/state aid)"},
+    {"severity": "warning", "path": "detail[207].category", "page": 12,
+     "extracted": "sale of assets (section revenue)", "on_page": "Building Fund Local sources 'Other' 99,070; statement p5/p6 shows it as Proceeds from sale of capital assets under Other Financing Sources",
+     "issue": "kept as revenue in detail to tie to the printed schedule total while top level treats it as other_financing; defensible, already marked review"},
+    {"severity": "warning", "path": "detail[35].department", "page": 8,
+     "extracted": "1100 Regular instructional programs", "on_page": "no department heading; lines listed directly under 'Disbursements'",
+     "issue": "inconsistent with the other General Fund lines (department 'Instruction'); cosmetic"},
+    {"severity": "warning", "path": "detail[200].detail_category", "page": 11,
+     "extracted": "purchased power/cost of sales", "on_page": "Food 1,506,403",
+     "issue": "food purchased for resale; cost of sales is reasonable but supplies and materials is an alternative"}
+  ]
+}
