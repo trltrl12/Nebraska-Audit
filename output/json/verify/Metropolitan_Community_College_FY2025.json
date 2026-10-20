@@ -1,0 +1,24 @@
+{
+  "stem": "Metropolitan_Community_College_FY2025",
+  "values_checked": 77,
+  "issues": [
+    {"severity": "warning", "path": "receipts[2].category", "page": 2,
+     "extracted": "other", "on_page": "Other sources 2,344,979",
+     "issue": "The cash flow statement (p3) shows operating receipts of Auxiliary enterprises 1,895,264 and Other receipts 365,855, so this line looks like mostly auxiliary enterprise sales (charges for services/fees). That is cash basis rather than a printed breakdown of this line, so it is not certain."},
+    {"severity": "warning", "path": "business_type.other_financing", "page": 2,
+     "extracted": 22200931, "on_page": "Total other revenues, (expenses), gains or (losses) 22,200,931 (Capital appropriations 22,523,578; Gain (loss) on disposal of capital assets (322,647))",
+     "issue": "The amount and arithmetic are correct, but Capital appropriations (22.5M) is kept out of receipts. The cash flow statement (p3) shows 'Property taxes - capital improvement fund 20,973,105', which suggests this is mostly a capital property tax levy. Someone should decide whether it is revenue or a capital contribution. The loss on disposal is also netted into the same figure."},
+    {"severity": "warning", "path": "disbursements[0].category", "page": 2,
+     "extracted": "instruction", "on_page": "Personnel services 115,404,428; Operating expenses 47,358,824; Travel 814,919",
+     "issue": "Expenses are listed by object, and all three lines are assigned to instruction. The General Fund schedule (p4) shows only about 43% of spending is Instruction; the rest is academic support, student service, institutional administration and physical plant (support services). The function split is a guess; review is already set. This also applies to disbursements[1] and disbursements[2]."},
+    {"severity": "warning", "path": "disbursements[4].category", "page": 2,
+     "extracted": "other", "on_page": "Depreciation and amortization 15,662,810",
+     "issue": "Depreciation is put in 'other' while the other object-only lines were given a function (instruction). The treatment is inconsistent; this is a judgment call."},
+    {"severity": "warning", "path": "balance_sheet.liabilities[9].category", "page": 1,
+     "extracted": "accrued liabilities", "on_page": "Noncurrent liabilities: Compensated absences 3,851,051",
+     "issue": "This is the noncurrent compensated absences, but the rules limit 'accrued liabilities' to compensated absences due soon. 'other liabilities' (or long-term) may fit better."},
+    {"severity": "warning", "path": "detail[0].detail_category", "page": 4,
+     "extracted": "salaries and wages", "on_page": "Personnel services 57,943,207",
+     "issue": "Personnel services probably includes benefits (the notes say so), and all five departmental 'Personnel services' lines are entered as salaries and wages only. The same applies to detail[4], [8], [12] and [16]."}
+  ]
+}
