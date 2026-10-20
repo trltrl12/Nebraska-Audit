@@ -2,44 +2,93 @@
   "stem": "Bertrand_Public_Schools_FY2025",
   "values_checked": 322,
   "issues": [
-    {"severity": "error", "path": "detail[79].category", "page": 5,
-     "extracted": "instruction (single contra -87,840.80)",
-     "on_page": "Reclassifications: Regular instruction (45,203.38); Support services - students: Special education school age (42,637.42)",
-     "issue": "The amount and the General fund attribution are correct now: Cooperative receives 87,840.80 (p17), and General's 125,000 Transfers = Nutrition 80,000 + Activities 45,000. But 42,637.42 of this contra comes out of the Special education school age line, which p4/p5 print under Support services - students; disbursements[3] also has it as support services. Booking the whole contra as 'instruction' understates detail instruction by 42,637.42 and overstates support services by the same amount. It needs two contra lines: instruction -45,203.38 (group Regular instruction = Exh G 1100/1190/1300, p9) and support services -42,637.42 (group SPED school age = Exh G 2141-2181, p9)."},
-    {"severity": "warning", "path": "detail[79].department", "page": 5,
-     "extracted": null, "on_page": "Regular instruction / Special education school age",
-     "issue": "The group-contra rule says department = the group. Here department is null and the group sits in a nonstandard 'department_note' field."},
-    {"severity": "warning", "path": "detail[68]", "page": 6,
-     "extracted": "2710 Vehicle operation 135,098.71 (335,098.71 - 200,000) plus detail[81] -200,000 other financing",
-     "on_page": "Exh E reclassification (200,000.00) on 'Student transportation - reg' 361,915.83 (= 2710 335,098.71 + 2730 26,817.12)",
-     "issue": "The page shows the 200,000 transfer against the group line, not against 2710 specifically. Putting it all in 2710 is very likely right: 2730 is only 26,817.12, and 2710 overran its 130,300 budget by 204,798.71. Still, the rule says to use a group contra when only the group is shown. Marked review."},
-    {"severity": "warning", "path": "detail[95]", "page": 4,
-     "extracted": "Activities contra -45,000 revenue and detail[96] +45,000 other financing",
-     "on_page": "No 45,000 printed. Exh D Other Governmental Funds Transfers 212,840.80 (p4); Nutrition 80,000 (p13); Cooperative 87,840.80 (p17)",
-     "issue": "The 45,000 is derived, not printed. The derivation holds: 212,840.80 - 80,000 - 87,840.80 = 45,000. Also, Other local receipts 437,383.21 - nutrition sales 85,718.45 - coop tuition 130,523.21 - Bond misc 516.13 - QCPUF misc 935.49 = 219,689.93, and 219,689.93 + contributions 23,314.20 + 45,000 = 288,004.13 (p12). Interest 7,573.48 = Bond + QCPUF only. Correctly marked computed and review."},
-    {"severity": "warning", "path": "disbursements[14]", "page": 5,
-     "extracted": "Other student support split 242,408.55 activities / 254,584.29 school nutrition",
-     "on_page": "Other student support 496,992.84 (Other Governmental Funds column only)",
-     "issue": "Exhibit D doesn't print this split. It is inferred from the fund schedules' totals (p12, p13), which add up exactly; Cooperative is in the instruction lines and Bond/QCPUF in Debt service. Defensible but an assumption; the same applies to disbursements[15]."},
-    {"severity": "warning", "path": "receipts[10].category", "page": 5,
-     "extracted": "charges for services/fees", "on_page": "Other local receipts 448,108.46",
-     "issue": "Mixed line: activity receipts 219,689.93, coop tuition 130,523.21, lunch sales 85,718.45, pre-school tuition 3,500, local license fees 789.76, corporate grants 4,500, and misc 3,387.11. Already marked review."},
-    {"severity": "warning", "path": "receipts[11].category", "page": 5,
-     "extracted": "intergovernmental/state aid", "on_page": "County receipts 16,537.33 (2110 County fines and license fees 16,067.33 + 2210 ESU 470.00, p8)",
-     "issue": "Most of this is county fines and license fees, which could arguably be fines and forfeitures. The same applies to detail[9]."},
-    {"severity": "warning", "path": "receipts[17]", "page": 5,
-     "extracted": "Non-revenue receipts split includes Depreciation fund 4,932.10",
-     "on_page": "Exh E/F (p6-7) put the 4,932.10 on the Other local receipts row (13,721.86); Exh D (p4) and Exh H (p11) treat it as non-revenue (13,266.92)",
-     "issue": "The report itself is inconsistent across exhibits. The extractor follows Exh D, which matches the total column used. The same applies to detail[84]."},
-    {"severity": "warning", "path": "detail[89].detail_category", "page": 12,
-     "extracted": "student activity receipts", "on_page": "Activities fund receipts 288,004.13",
-     "issue": "Exh D shows 23,314.20 of the Activities fund's receipts as Contributions and donations. The per-account schedule can't separate them."},
-    {"severity": "warning", "path": "detail[153].category", "page": 17,
-     "extracted": "instruction (Cooperative fund detail[153]-[158])", "on_page": "Exh D Other Governmental Funds: Regular instruction 90,436.75 + Support services SPED school age 127,927.26 = Cooperative 218,364.01 (p4)",
-     "issue": "Exh D puts 127,927.26 of the Cooperative fund's spending under support services, but the object-level lines can't be split, so all of it is recorded as instruction. Judgment call."},
-    {"severity": "warning", "path": "detail", "page": 18,
-     "extracted": "General fund expenditures from Exh G by program (not itemized)",
-     "on_page": "Exh O Cash disbursements by object (p18-19, unaudited)",
-     "issue": "Exh O is the more detailed object-level schedule, but the trimmed PDF has only part of it (it ends at Occupational Therapy). Using Exh G is defensible and is disclosed in notes."}
+    {
+      "severity": "warning",
+      "path": "detail[79].category",
+      "page": 5,
+      "extracted": "instruction (single contra -87,840.80)",
+      "on_page": "Reclassifications: Regular instruction (45,203.38); Support services - students: Special education school age (42,637.42)",
+      "issue": "[fixed: contra split into instruction -45,203.38 and support services -42,637.42] The amount and the General fund attribution are correct now: Cooperative receives 87,840.80 (p17), and General's 125,000 Transfers = Nutrition 80,000 + Activities 45,000. But 42,637.42 of this contra comes out of the Special education school age line, which p4/p5 print under Support services - students; disbursements[3] also has it as support services. Booking the whole contra as 'instruction' understates detail instruction by 42,637.42 and overstates support services by the same amount. It needs two contra lines: instruction -45,203.38 (group Regular instruction = Exh G 1100/1190/1300, p9) and support services -42,637.42 (group SPED school age = Exh G 2141-2181, p9)."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[79].department",
+      "page": 5,
+      "extracted": null,
+      "on_page": "Regular instruction / Special education school age",
+      "issue": "The group-contra rule says department = the group. Here department is null and the group sits in a nonstandard 'department_note' field."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[68]",
+      "page": 6,
+      "extracted": "2710 Vehicle operation 135,098.71 (335,098.71 - 200,000) plus detail[81] -200,000 other financing",
+      "on_page": "Exh E reclassification (200,000.00) on 'Student transportation - reg' 361,915.83 (= 2710 335,098.71 + 2730 26,817.12)",
+      "issue": "The page shows the 200,000 transfer against the group line, not against 2710 specifically. Putting it all in 2710 is very likely right: 2730 is only 26,817.12, and 2710 overran its 130,300 budget by 204,798.71. Still, the rule says to use a group contra when only the group is shown. Marked review."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[95]",
+      "page": 4,
+      "extracted": "Activities contra -45,000 revenue and detail[96] +45,000 other financing",
+      "on_page": "No 45,000 printed. Exh D Other Governmental Funds Transfers 212,840.80 (p4); Nutrition 80,000 (p13); Cooperative 87,840.80 (p17)",
+      "issue": "The 45,000 is derived, not printed. The derivation holds: 212,840.80 - 80,000 - 87,840.80 = 45,000. Also, Other local receipts 437,383.21 - nutrition sales 85,718.45 - coop tuition 130,523.21 - Bond misc 516.13 - QCPUF misc 935.49 = 219,689.93, and 219,689.93 + contributions 23,314.20 + 45,000 = 288,004.13 (p12). Interest 7,573.48 = Bond + QCPUF only. Correctly marked computed and review."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[14]",
+      "page": 5,
+      "extracted": "Other student support split 242,408.55 activities / 254,584.29 school nutrition",
+      "on_page": "Other student support 496,992.84 (Other Governmental Funds column only)",
+      "issue": "Exhibit D doesn't print this split. It is inferred from the fund schedules' totals (p12, p13), which add up exactly; Cooperative is in the instruction lines and Bond/QCPUF in Debt service. Defensible but an assumption; the same applies to disbursements[15]."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[10].category",
+      "page": 5,
+      "extracted": "charges for services/fees",
+      "on_page": "Other local receipts 448,108.46",
+      "issue": "Mixed line: activity receipts 219,689.93, coop tuition 130,523.21, lunch sales 85,718.45, pre-school tuition 3,500, local license fees 789.76, corporate grants 4,500, and misc 3,387.11. Already marked review."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[11].category",
+      "page": 5,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "County receipts 16,537.33 (2110 County fines and license fees 16,067.33 + 2210 ESU 470.00, p8)",
+      "issue": "Most of this is county fines and license fees, which could arguably be fines and forfeitures. The same applies to detail[9]."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[17]",
+      "page": 5,
+      "extracted": "Non-revenue receipts split includes Depreciation fund 4,932.10",
+      "on_page": "Exh E/F (p6-7) put the 4,932.10 on the Other local receipts row (13,721.86); Exh D (p4) and Exh H (p11) treat it as non-revenue (13,266.92)",
+      "issue": "The report itself is inconsistent across exhibits. The extractor follows Exh D, which matches the total column used. The same applies to detail[84]."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[89].detail_category",
+      "page": 12,
+      "extracted": "student activity receipts",
+      "on_page": "Activities fund receipts 288,004.13",
+      "issue": "Exh D shows 23,314.20 of the Activities fund's receipts as Contributions and donations. The per-account schedule can't separate them."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[153].category",
+      "page": 17,
+      "extracted": "instruction (Cooperative fund detail[153]-[158])",
+      "on_page": "Exh D Other Governmental Funds: Regular instruction 90,436.75 + Support services SPED school age 127,927.26 = Cooperative 218,364.01 (p4)",
+      "issue": "Exh D puts 127,927.26 of the Cooperative fund's spending under support services, but the object-level lines can't be split, so all of it is recorded as instruction. Judgment call."
+    },
+    {
+      "severity": "warning",
+      "path": "detail",
+      "page": 18,
+      "extracted": "General fund expenditures from Exh G by program (not itemized)",
+      "on_page": "Exh O Cash disbursements by object (p18-19, unaudited)",
+      "issue": "Exh O is the more detailed object-level schedule, but the trimmed PDF has only part of it (it ends at Occupational Therapy). Using Exh G is defensible and is disclosed in notes."
+    }
   ]
 }
