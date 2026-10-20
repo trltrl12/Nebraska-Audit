@@ -1,0 +1,26 @@
+{
+  "stem": "Norfolk_FY2025",
+  "values_checked": 303,
+  "issues": [
+    {"severity": "warning", "path": "decision_needed", "page": 4,
+     "extracted": "Taxes 21,346,018 kept as taxes (unlabeled)",
+     "on_page": "Statement of Activities general revenues: Property Taxes 7,061,049; Sales Taxes 14,246,924; Other Taxes 283,645 (sum 21,591,618, accrual basis)",
+     "issue": "The report does print a tax-type breakdown (p4), but it is accrual basis and is 245,600 more than the fund-statement Taxes line, so it can't be used as an exact split_from. Keeping the line unlabeled is defensible, but it hides about 14.2M of sales tax (most of the city's taxes). Someone needs to decide whether to split it in proportion or leave it unlabeled. This isn't in decision_needed[]."},
+    {"severity": "warning", "path": "receipts[11].category", "page": 5,
+     "extracted": "other", "on_page": "Loan Repayments 124,399",
+     "issue": "The label says what the line is (repayments on CDBG/LB840 loans), so it isn't an unexplained miscellaneous line. No category fits exactly (reimbursements/refunds is the closest), so 'other' with review is defensible. The same applies to detail[37] (CDBG Loan Repayments 122,204, p12) and detail[53] (LB 840 Loan Repayments 2,000, p14)."},
+    {"severity": "warning", "path": "detail[36].category", "page": 12,
+     "extracted": "intergovernmental/state aid (detail_category federal grants)", "on_page": "Community Development Block Grant Fund - Intergovernmental Revenue 31,950",
+     "issue": "The high-level category doesn't match detail_category. If CDBG is treated as federal, category should be 'federal grants'. If it is treated as state pass-through aid, detail_category should be 'other state aid'."},
+    {"severity": "warning", "path": "other_financing", "page": 5,
+     "extracted": 66570, "on_page": "Information Technology Subscriptions 39,769 + Insurance Proceeds 26,801",
+     "issue": "The arithmetic is correct and marked computed. However, Information Technology Subscriptions (39,769) is a subscription-based IT financing (SBITA), which works like lease or debt proceeds and could go in debt_proceeds instead. This is a judgment call."},
+    {"severity": "warning", "path": "missing", "page": null,
+     "extracted": null,
+     "on_page": "Trimmed PDF skips report pp32-33 and 35 (governmental funds Balance Sheet and reconciliations), pp76-78, and pp85-87 (probably the Combined Utilities combining net position and revenues/expenses by division; p88 is the combining departmental cash flows)",
+     "issue": "The trim left these pages out. ending_cash is null because the governmental funds Balance Sheet isn't trimmed, and the utilities' detail by division (water/sewer/solid waste/stormwater charges and expenses) is probably on the missing pages. All 20 trimmed pages were read and are fully covered by the extraction. This is a trimming problem, not an extraction error."},
+    {"severity": "warning", "path": "notes", "page": 7,
+     "extracted": "157,716 net to the utilities", "on_page": "Transfers (Out) (157,716) in Combined Utilities; Economic Development Operating Transfers In 157,716/157,717",
+     "issue": "The notes get the direction backwards: the utilities transfer 157,716 out to the governmental funds. The amounts and signs in the JSON (transfers_net -157,716; governmental transfers in exceed transfers out by 157,716) are correct."}
+  ]
+}
