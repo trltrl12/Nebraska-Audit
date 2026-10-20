@@ -1,0 +1,29 @@
+{
+  "stem": "Dawes_County_FY2025",
+  "values_checked": 130,
+  "issues": [
+    {"severity": "error", "path": "detail[26].category", "page": 3,
+     "extracted": "streets/highways", "on_page": "Noxious Weed Control 109,451 (under Public Works heading)",
+     "issue": "The disbursement category rules name noxious weed control explicitly under natural resources/conservation, so that category should be used even though the county prints it under Public Works."},
+    {"severity": "warning", "path": "disbursements[6]", "page": 2,
+     "extracted": "Debt Service 97,595 as debt service principal",
+     "on_page": "Debt Service (97,595); p12 Total Nonmajor: Principal Payments 75,200, Interest and Fiscal Charges 22,395",
+     "issue": "The report prints the principal/interest breakdown of this exact line (p12), so 22,395 of interest is recorded as principal. It could be split with split_from. Already marked review."},
+    {"severity": "warning", "path": "receipts[0]", "page": 2,
+     "extracted": "single items for program receipts totals 533,725 and 1,426,841",
+     "on_page": "Per-function program receipts: Fees 303,919 / 228,336 / 1,470; Grants 58,909 / 1,458 / 1,346,186 / 20,288",
+     "issue": "The Total Governmental Activities row was entered as the item instead of the per-function lines. Amounts and categories are unaffected; Public Works grants 1,346,186 are probably highway allocation."},
+    {"severity": "warning", "path": "detail[16].category", "page": 3,
+     "extracted": "general government", "on_page": "Agricultural Extension Agent 86,223 (under General Government heading)",
+     "issue": "Could be agriculture/fair; the report's heading supports general government."},
+    {"severity": "warning", "path": "detail[38].category", "page": 5,
+     "extracted": "inheritance tax", "on_page": "Inheritance Fund: Taxes 164,170",
+     "issue": "The label 'Taxes' is categorized as inheritance tax here (inferred from the fund name) but as taxes (unlabeled) in receipts[2]. This is defensible but inconsistent with the same-label rule."},
+    {"severity": "warning", "path": "ending_investments", "page": 1,
+     "extracted": 322246, "on_page": "Cash and cash equivalents 5,860,595; Investments 322,246; Total 6,182,841",
+     "issue": "ending_cash (6,182,841) already includes investments while ending_investments is also filled and beginning_investments is null. The roll-forward is consistent, but investments appear in both fields."},
+    {"severity": "warning", "path": "notes", "page": 10,
+     "extracted": "The 11 nonmajor funds", "on_page": "14 nonmajor fund columns on pp10-12",
+     "issue": "The fund count in notes is wrong (figures unaffected; Total Nonmajor column used)."}
+  ]
+}
