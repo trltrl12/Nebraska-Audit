@@ -1,0 +1,70 @@
+{
+  "stem": "Kimball_Public_Schools_FY2025",
+  "values_checked": 193,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "detail[71].category",
+      "page": 4,
+      "extracted": "capital outlay",
+      "on_page": "Depreciation Fund 290,241 under Student Transportation (= 25,782 + 264,459, p9)",
+      "issue": "[fixed] Depreciation 2900 Rentals of Equipment and Vehicles 25,782: Exhibit D puts it in the Student Transportation function, so the category should be student transportation, not capital outlay. Detail functions must tie to the statement's function lines."
+    },
+    {
+      "severity": "error",
+      "path": "detail[73].category",
+      "page": 4,
+      "extracted": "capital outlay",
+      "on_page": "Depreciation Fund 10,759 under Operation and Maintenance of Plant",
+      "issue": "[fixed] Depreciation 2900 Supplies and Materials 10,759: Exhibit D puts it in Operation and Maintenance of Plant, so the category should be support services."
+    },
+    {
+      "severity": "error",
+      "path": "detail[74].category",
+      "page": 4,
+      "extracted": "capital outlay",
+      "on_page": "Depreciation Fund 290,241 under Student Transportation (= 25,782 + 264,459, p9)",
+      "issue": "[fixed] Depreciation 2900 Capital Outlay 264,459: Exhibit D puts it in Student Transportation (probably vehicles), so the category should be student transportation. As extracted, detail capital outlay (570,807) doesn't tie to the statement's Site Improvments line (238,750)."
+    },
+    {
+      "severity": "error",
+      "path": "detail[85].category",
+      "page": 4,
+      "extracted": "capital outlay",
+      "on_page": "Special Building Fund 89,238 under Operation and Maintenance of Plant (= 57,851 + 31,387, p10)",
+      "issue": "[fixed] Special Building 4700 Building Improvements 31,387: Exhibit D puts it in Operation and Maintenance of Plant, so the category should be support services. The detail_category land and buildings can stay."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[10].category",
+      "page": 4,
+      "extracted": "intergovernmental/state aid (State Sources 3,363,021 unsplit)",
+      "on_page": "State Sources 3,363,021; includes 3133 Nameplate Capacity Tax 56,069 (p5) + 4,935 (p10) = 61,004",
+      "issue": "Under the rules nameplate capacity tax is other taxes, and detail[15]/detail[82] record it that way, but at statement level it stays inside state aid. Local Sources was split from the same fund schedules and State Sources was not, which is inconsistent. There is a review flag."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[9].category",
+      "page": 5,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "County Sources: 2110 Fines and Licenses 93,009",
+      "issue": "Labelled Fines and Licenses (county-remitted fines and license money). The local 1911 Fines and Licenses line is categorized fines and forfeitures, so the same label has two categories. Intergovernmental is defensible because Exhibit B shows it as State and County Shared Receipts. There is a review flag."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[0]",
+      "page": 4,
+      "extracted": "Local Sources 5,126,463 split into 8 category items",
+      "on_page": "Local Sources 5,126,463 (Exhibit D total column)",
+      "issue": "The split is built from the per-fund schedules (General and Special Building print 'Local Sources' subtotals; Nutrition, Activities and Depreciation print only receipt lines that tie to their Local Sources column). The arithmetic checks out (sums to 5,126,463) and it ties to Exhibit B Property/Carline/Interest, but someone should confirm this split is acceptable under the rule that a line may only be split when the report prints its breakdown."
+    },
+    {
+      "severity": "warning",
+      "path": "balance_sheet.assets[1].category",
+      "page": 1,
+      "extracted": "restricted assets",
+      "on_page": "Cash with Fiscal Agent 1,223,518",
+      "issue": "Exhibit C shows 1,127,842 of this belongs to the General Fund (unassigned) and 95,676 to Special Building. It is cash, not clearly restricted, so cash and investments may fit better."
+    }
+  ]
+}

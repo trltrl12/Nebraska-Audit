@@ -205,6 +205,10 @@ independent verifier, so unmarked computed values show up as errors. If a value 
   - `schedule` = the schedule's title (short), `fund` = the fund it covers ("General", "Street",
     "Water"…), `department` = the department/function heading the line sits under ("Police",
     "Streets", "Parks", "Administration"…), or null if there are no departments.
+  - **County General Fund sub-funds:** a county's General Fund combining page (General Fund +
+    Inheritance Tax Fund columns) often has a budget schedule for the General Fund column only.
+    The Inheritance Tax Fund column's lines (revenue, spending, transfers) go into `detail` from
+    the combining page, since no other schedule has them.
   - **Department columns:** when a schedule prints departments as columns (General / Police / Park /
     Library…), record one line per department column per object line, each with that
     department's function as `category`. Never record only the Total column under one function:
