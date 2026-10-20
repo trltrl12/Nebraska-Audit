@@ -1,0 +1,21 @@
+{
+  "stem": "Hubbell_FY2025",
+  "values_checked": 44,
+  "issues": [
+    {"severity": "warning", "path": "receipts[18].category", "page": 1,
+     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other 79,521 (Electric), 18,943 (Water), 4,430 (Sewer), 8,306 (Garbage)",
+     "issue": "The utility-fund 'Local Receipts: Other' lines (receipts[18]-[21]) are assumed to be utility sales. That is plausible, but the label doesn't say so, and the lines carry no review flag."},
+    {"severity": "warning", "path": "receipts[0]", "page": 1,
+     "extracted": "11,608 (General) / 1,289 (Water)", "on_page": "Personal and Real Property Taxes total 12,897",
+     "issue": "Rows that mix governmental and utility columns (property tax, pro-rate, State Receipts: Other, Property Tax Credit, Local Receipts: Other) were split by fund column with no split_from, which the column-per-fund rule asks for. The amounts themselves are printed in the fund columns and are correct."},
+    {"severity": "warning", "path": "receipts[0].original_label", "page": 1,
+     "extracted": "Personal and Real Property Taxes (General Fund)", "on_page": "Personal and Real Property Taxes",
+     "issue": "The fund name was appended to the printed label on every receipt and disbursement, so original_label is not exactly as printed."},
+    {"severity": "warning", "path": "notes", "page": 1,
+     "extracted": null, "on_page": "County Treasurer Balance at October 1, 2024 $957.89; at September 30, 2025 433.45",
+     "issue": "The county treasurer balances printed under Exhibit A are not recorded or mentioned. They are not in the net cash balances."},
+    {"severity": "warning", "path": "balance_sheet.liabilities", "page": 5,
+     "extracted": [], "on_page": "Schedule of Outstanding Debt: GO Water Bond 95,496.00",
+     "issue": "The outstanding GO Water Bond (95,496) is printed but not mentioned in notes. The cash-basis balance sheet has no liabilities."}
+  ]
+}
