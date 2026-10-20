@@ -1,0 +1,30 @@
+{
+  "stem": "Hemingford_Public_Schools_FY2025",
+  "values_checked": 325,
+  "issues": [
+    {"severity": "error", "path": "receipts[9].category", "page": 5,
+     "extracted": "other", "on_page": "Other Local Receipts 299,747 = General 150 + Nonmajor 299,597 (Activity Fund receipts 248,321 + Cooperative tuition 51,276 per p15/p18)",
+     "issue": "The extractor's own review note shows what the line is: student activity receipts and tuition, which are both charges for services. It should be 'charges for services/fees' with a review note about the mix, not 'other'."},
+    {"severity": "error", "path": "missing", "page": 16,
+     "extracted": null, "on_page": "Depreciation Fund DISBURSEMENTS: Capital Outlay, Budget 395,545, Actual -",
+     "issue": "Expenditure line left out of the Depreciation Fund detail. Actual is 0, so no total changes, but the budget figure is lost. Other zero-actual lines (e.g. QCPUF School Safety) were included."},
+    {"severity": "warning", "path": "missing", "page": null,
+     "extracted": null, "on_page": "Report pp34-35 not in trimmed PDF (trimmed p13 = report p33, p14 = report p36); presumably the Activity Fund budget schedule (receipts 248,321, disbursements 396,851, transfer in 125,000 per p15)",
+     "issue": "This is a trimming gap, not a misread, and the notes mention the missing Activity Fund schedule. That fund's detail is not recorded, and the report isn't on the CLAUDE.md missing-pages list."},
+    {"severity": "warning", "path": "detail[7].detail_category", "page": 8,
+     "extracted": "other state aid", "on_page": "3110-000 State Aid 1,247,107",
+     "issue": "Account 3110 State Aid is TEEOSA equalization aid. 'state school aid (TEEOSA)' fits better."},
+    {"severity": "warning", "path": "receipts[3].category", "page": 5,
+     "extracted": "fines and forfeitures", "on_page": "County Fines and Licenses 18,959",
+     "issue": "The line mixes fines and licenses. Choosing the larger part is fine, but the rules call for a review note naming the mix, and there isn't one. Same for detail[6]."},
+    {"severity": "warning", "path": "disbursements[1].category", "page": 5,
+     "extracted": "support services 753,711", "on_page": "Support Services: Students 753,711 = General 356,860 + Nonmajor 396,851 (Activity Fund disbursements per p15)",
+     "issue": "More than half the line is Activity Fund spending, which would be 'student activities'. Kept as printed with no review note."},
+    {"severity": "warning", "path": "detail_totals[1].amount", "page": 12,
+     "extracted": 7465755, "on_page": "TOTAL OPERATIONAL CASH DISBURSEMENTS 7,795,755",
+     "issue": "The stored total is not the printed total: printed 7,795,755 less 330,000 of hidden transfers. It is marked computed and the contra lines tie to it, but the printed total itself is not recorded."},
+    {"severity": "warning", "path": "other_financing", "page": 5,
+     "extracted": 4968, "on_page": "Non-program Receipts 15,753; Non-program Disbursements (10,785) under Other Financing Sources (Uses)",
+     "issue": "Follows p5 and is marked computed with correct arithmetic. However, the 15,753 includes Insurance Adjustments 2,941 (reimbursements) and Other Non-revenue Receipts 1,430. The Statement of Activities (p2) counts the 10,785 as a function disbursement (total 8,348,287). detail[95] (Non-program Expenses, entered as other financing) raises the same question."}
+  ]
+}
