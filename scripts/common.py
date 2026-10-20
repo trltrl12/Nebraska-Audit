@@ -143,9 +143,12 @@ def amt(field):
         return None
     if isinstance(field, dict):
         field = field.get("amount")
-    if field is None or field == "":
+    if field is None or field == "" or isinstance(field, (list, dict)):
+        return None  # malformed values are flagged by validate.py, never crash the build
+    try:
+        return float(field)
+    except (TypeError, ValueError):
         return None
-    return float(field)
 
 
 def page(field):
