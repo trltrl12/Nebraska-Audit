@@ -1,0 +1,24 @@
+{
+  "stem": "Harlan_County_FY2025",
+  "values_checked": 158,
+  "issues": [
+    {"severity": "warning", "path": "receipts[5].category", "page": 2,
+     "extracted": "other (Miscellaneous 68,398)", "on_page": "Statement of Activities general receipts: Health Insurance Settlements 5,581 + Miscellaneous 62,817 = 68,398",
+     "issue": "The p4 Miscellaneous line is broken down on p2: 5,581 is settlements (Opioid Settlement Fund 5,580 on p13/p15), which could be reimbursements/refunds rather than other. The extractor did not split it; that is defensible because p2 is a different statement, but the user may want the 5,581 recategorized. Same for detail[119] (Nonmajor Miscellaneous 5,580)."},
+    {"severity": "warning", "path": "detail[109].detail_category", "page": 6,
+     "extracted": "taxes (unlabeled)", "on_page": "Inheritance Tax Fund - Taxes 208,783",
+     "issue": "This is the Inheritance Tax Fund's only receipt line, so it is almost certainly inheritance tax; it is kept as taxes (unlabeled) with review. Defensible, but inheritance tax could be used here."},
+    {"severity": "warning", "path": "detail[99].category", "page": 5,
+     "extracted": "other", "on_page": "Miscellaneous - Inherit Tax 682,227 (budget 0)",
+     "issue": "682,227 of unbudgeted General Fund spending labelled 'Inherit Tax' sits under Miscellaneous, with no function category. It is about 10% of governmental spending and its purpose is not stated (it is not a transfer: no fund shows a matching transfer in). This also drives disbursements[5] (Miscellaneous 731,345, other). It needs a person to look at it; decision_needed[] is absent."},
+    {"severity": "warning", "path": "detail[107]", "page": 6,
+     "extracted": "Road Fund DISBURSEMENTS 2,674,310 as one streets/highways line", "on_page": "p4 Road Fund column: Public Works 1,737,111 + Capital Outlay 937,200 = 2,674,311",
+     "issue": "The budget schedule prints one disbursements line, so 'not itemized' is correct, but the function split on p4 puts 937,200 under capital outlay. The detail function totals will not tie to the statement's function lines."},
+    {"severity": "warning", "path": "detail_totals[1].amount", "page": 5,
+     "extracted": 2744766, "on_page": "p5 TOTAL DISBURSEMENTS 2,744,766 vs p4 General Fund TOTAL DISBURSEMENTS 2,744,764",
+     "issue": "Rounding differences between the budget schedule and the fund statement are printed in the report itself: GF disbursements +2 (General Government lines sum to 990,961 vs 990,960 on p4; Public Safety lines 879,797 vs 879,796), Road disbursements 2,674,310 vs 2,674,311 and Road ending 44,543 vs 44,541. Notes mention only the receipt rounding, and no report_discrepancies entries are recorded."},
+    {"severity": "warning", "path": "balance_sheet.assets", "page": 1,
+     "extracted": "1,101,719 / 2,528,232", "on_page": "p1 1,101,719 / 2,528,232; p3 1,106,728 / 2,523,223",
+     "issue": "The report's cash/investments split differs by 5,009 between the Statement of Net Position (p1) and the fund statement (p3). Both total 3,629,951. Amounts are correctly recorded as printed and the difference is in the notes, but it is not in report_discrepancies. ending_investments (2,523,223, p3) does not match the balance sheet investments (2,528,232)."}
+  ]
+}
