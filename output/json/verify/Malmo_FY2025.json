@@ -1,0 +1,21 @@
+{
+  "stem": "Malmo_FY2025",
+  "values_checked": 30,
+  "issues": [
+    {"severity": "warning", "path": "receipts[7].category", "page": 1,
+     "extracted": "other", "on_page": "Local Receipts: Other (General Fund) 36,328.76",
+     "issue": "Unexplained 'other' line is 66% of General Fund receipts (55,280.48) and 45% of governmental receipts; nothing on the 5 pages breaks it down. Recorded correctly as other + review, but a person may want to settle what it is (not in decision_needed)."},
+    {"severity": "warning", "path": "receipts[8].split_from", "page": 1,
+     "extracted": null, "on_page": "Line 18 Local Receipts: Other total 80,225.07 = General 36,328.76 + Water 26,384.28 + Sewer 17,512.03",
+     "issue": "Line 18 is a mixed row split by fund column (receipts[7], [8], [9]) but none of the parts carries split_from naming the printed total-column line, as the per-column rule asks. Amounts themselves are printed in the fund columns and are correct."},
+    {"severity": "warning", "path": "receipts[8].original_label", "page": 1,
+     "extracted": "Local Receipts: Other (Water Fund)", "on_page": "Local Receipts: Other",
+     "issue": "Fund name added to the printed label (also receipts[9] '(Sewer Fund)' and disbursements[3] 'Debt Service (Water Fund)'). Category charges for services/fees for utility-fund local receipts is an assumption (review set)."},
+    {"severity": "warning", "path": "disbursements[3].category", "page": 3,
+     "extracted": "debt service principal", "on_page": "Debt Service 4,609.00 (Water Fund column, printed under the 'Governmental:' heading)",
+     "issue": "Principal/interest not split on the page; whole line put to principal (review set). Line sits under the Governmental heading but in the Water Fund column; treated as business-type by column, which is defensible."},
+    {"severity": "warning", "path": "notes", "page": 1,
+     "extracted": null, "on_page": "County Treasurer Balance at October 1, 2024 $1,168.29; at September 30, 2025 734.59",
+     "issue": "County treasurer balances printed below the statement are not mentioned in notes; they are not part of the printed cash balances, so excluding them is right, but they should be noted."}
+  ]
+}
