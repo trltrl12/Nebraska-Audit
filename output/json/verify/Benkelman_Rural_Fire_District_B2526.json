@@ -1,0 +1,18 @@
+{
+  "stem": "Benkelman_Rural_Fire_District_B2526",
+  "values_checked": 12,
+  "issues": [
+    {"severity": "warning", "path": "receipts[5].amount", "page": 2,
+     "extracted": 12325.43, "on_page": "p2 (struck through with a diagonal line): Local Receipts: Other 12,325.43; p1 (clean copy): 16,798.40",
+     "issue": "The extractor used p2 because it matches the p3 worksheet (cash reserve 21,473.92), which is what the budget-form rule says to do. But p2 has a diagonal line drawn through it, which usually means the filer voided it, so p1 may be the version that counts. If p1 is right, Local Other is 16,798.40, receipts are 76,916.19 and ending cash is 197,408.15 (4,472.97 more). A person needs to decide which page applies."},
+    {"severity": "warning", "path": "ending_cash.amount", "page": 2,
+     "extracted": 192935.18, "on_page": "p2 (struck through) 192,935.18; p1 197,408.15",
+     "issue": "Depends on the same choice between the two Total All Funds pages (see receipts[5])."},
+    {"severity": "warning", "path": "reported_totals.governmental.receipts.amount", "page": 2,
+     "extracted": 72443.22, "on_page": "p2 246,995.74 - 174,552.52; p1 251,468.71 - 174,552.52 = 76,916.19",
+     "issue": "Depends on the same choice between the two Total All Funds pages."},
+    {"severity": "warning", "path": "receipts[5].category", "page": 2,
+     "extracted": "other", "on_page": "Local Receipts: Other",
+     "issue": "17% (or 22% on p1) of receipts are in 'other'. The form gives no breakdown. Already marked review."}
+  ]
+}

@@ -1,27 +1,18 @@
 {
   "stem": "Bayard_Public_Schools_FY2025",
-  "values_checked": 205,
+  "values_checked": 248,
   "issues": [
-    {"severity": "warning", "path": "detail[1].original_label", "page": 5,
-     "extracted": "1115 Cartine Taxes", "on_page": "1115 Carline Taxes",
-     "issue": "Label misspelled: the page prints 'Carline' (carline tax). The category 'other taxes' is correct for carline."},
-    {"severity": "warning", "path": "detail[76].original_label", "page": 11,
-     "extracted": "1115 Cartine Taxes", "on_page": "1115 Carline Taxes",
-     "issue": "Label misspelled: the page prints 'Carline'."},
-    {"severity": "warning", "path": "detail[10].category", "page": 5,
-     "extracted": "intergovernmental/state aid / county/other local governments", "on_page": "County Sources: 2110 Fines and Licenses 47,991",
-     "issue": "The same label 'Fines and Licenses' (1911, detail[7]) is categorized as fines and forfeitures. The county line is defensible as county-distributed money, but the categories are inconsistent within the report."},
-    {"severity": "warning", "path": "detail[50].category", "page": 7,
-     "extracted": "support services", "on_page": "2900 Retirement Incentive Plan Payments 11,576; Exhibit D (p4) reports Employee Benefit Fund spending under Instruction",
-     "issue": "The basic statement classifies this spending as Instruction, so the function should probably be 'instruction'."},
+    {"severity": "warning", "path": "receipts[0].split_from", "page": 4,
+     "extracted": "Local Sources 3,419,713 split into 9 items", "on_page": "Local Sources 3,419,713 (total column); per-fund Local Sources subtotals itemized on Exh F-L (pp5,7-12)",
+     "issue": "split assembled from seven fund schedules rather than a single printed breakdown of the total-column line; every component and the sum (3,419,713) verified against the pages"},
     {"severity": "warning", "path": "detail[73].category", "page": 10,
-     "extracted": "capital outlay", "on_page": "Depreciation Fund 2900 Supplies 69 / 2900 Capital Outlay 6,558; Exhibit D (p4) reports 6,627 under Operation & Maintenance of Plant",
-     "issue": "The function differs from the basic statement (support services). Applies to detail[73] and detail[74]."},
+     "extracted": "capital outlay", "on_page": "Depreciation Fund 2900 Supplies 69 / 2900 Capital Outlay 6,558; p4 shows the fund's 6,627 under Operation & Maintenance of Plant",
+     "issue": "function differs from the governmental funds statement (support services/O&M); applies to detail[73] and detail[74]; defensible from the line labels"},
     {"severity": "warning", "path": "detail[82].category", "page": 11,
-     "extracted": "capital outlay", "on_page": "Special Building Fund 4600 Supplies 446 / 4700 Building 49,112; Exhibit D (p4) reports 49,558 under Operation & Maintenance of Plant",
-     "issue": "The function differs from the basic statement (support services). Applies to detail[82] and detail[83]. Capital outlay is defensible for building spending."},
-    {"severity": "warning", "path": "receipts[0].category", "page": 4,
-     "extracted": "property tax", "on_page": "Local Sources 3,419,713",
-     "issue": "Broad group (already marked review). It also includes interest, motor vehicle tax, lunch sales, activity receipts (about 249k) and other items. Exhibit B (p2) shows general receipts: property 2,917,281, motor vehicle 187,722, etc. Correctly not split under the split rule."}
+     "extracted": "capital outlay", "on_page": "Special Building 4600 Supplies 446 / 4700 Building 49,112; p4 shows the fund's 49,558 under Operation & Maintenance of Plant",
+     "issue": "function differs from the governmental funds statement (support services/O&M); applies to detail[82] and detail[83]; defensible"},
+    {"severity": "warning", "path": "disbursements[14].category", "page": 4,
+     "extracted": "health/welfare", "on_page": "Community Services 6,275",
+     "issue": "function guess for a school district; same in detail[45]"}
   ]
 }
