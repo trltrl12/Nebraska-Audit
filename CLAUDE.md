@@ -150,6 +150,7 @@ These were diagnosed and fixed in find_pages v6; re-extract and re-verify them a
   Ord_FY2025 (report p61, left half of the Schedule of Expenditures by fund, not trimmed; only the right half is p22).
   ONeill_FY2025 (manifest detail_truncated(23): report pp44, 53, 57, 61-66, 69-72, 75+ not trimmed; other governmental combining, utility schedules).
   Plattsmouth_Airport_Authority_FY2025 (report p8, governmental funds revenues/expenditures statement, not trimmed; budget-basis schedule used).
+  Polk_FY2025 (odd report pages 27-35 of the combining schedules not trimmed: Bandstand/Playground/Total/budget columns; actuals from Exhibits III-IV).
   Gering_Ft_Laramie_Irrigation_District_FY2025 (nonoperating/capital-grant statement page not trimmed; 9,257,241
   derived as an adjustment meanwhile).
 - Budget forms whose Total All Funds page wasn't found (manifest flag no_budget_actuals_found; skipped, no
