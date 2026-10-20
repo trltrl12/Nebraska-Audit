@@ -2,44 +2,109 @@
   "stem": "Nance_County_FY2025",
   "values_checked": 298,
   "issues": [
-    {"severity": "error", "path": "detail[4].category", "page": 8,
-     "extracted": "other / miscellaneous revenue", "on_page": "Local 776,359; Statement of Activities (pp2-3) shows General Fund department charges for services of 623,101 (Clerk 36,793, Treasurer 142,222, Election 4,949, Clerk of District Court 10,934, Sheriff 368,692, County Attorney 81, Emergency Manager 59,430)",
-     "issue": "about 80% of this 'Local' line is charges for services according to the report's own Statement of Activities (all charges for services come out of the Local Fees line: 1,535,240 + general 387,408 = 1,922,648). The rule says to use the dominant category: charges for services/fees (detail 'fees of office' / 'other charges for services'), with review, not other"},
-    {"severity": "error", "path": "detail[85].category", "page": 14,
-     "extracted": "other / miscellaneous revenue", "on_page": "Road Local 115,903; Statement of Activities p2 Road charges for services 115,603",
-     "issue": "the Statement of Activities identifies almost all of it (99.7%) as charges for services, so it should be charges for services/fees, not other"},
-    {"severity": "error", "path": "detail[95].category", "page": 15,
-     "extracted": "other / miscellaneous revenue", "on_page": "Visitors Promotion Local 5,857; Statement of Activities p2 charges for services 5,857",
-     "issue": "the page identifies it as charges for services (and a visitors promotion fund is normally paid for by lodging tax), so other is wrong. Use lodging tax or charges for services/fees, with review"},
-    {"severity": "error", "path": "detail[97].category", "page": 15,
-     "extracted": "other / miscellaneous revenue", "on_page": "Register of Deeds Local 2,934; Statement of Activities p2 charges for services 2,934",
-     "issue": "this is charges for services (fees of office), not other"},
-    {"severity": "error", "path": "detail[99].category", "page": 15,
-     "extracted": "other / miscellaneous revenue", "on_page": "Pre Trial Diversion Local 275; Statement of Activities p2 charges for services 275",
-     "issue": "this is charges for services/fees, not other"},
-    {"severity": "error", "path": "detail[106].category", "page": 16,
-     "extracted": "other / miscellaneous revenue", "on_page": "911 Emergency Management Local 5,153; Statement of Activities p3 charges for services 5,088",
-     "issue": "99% is charges for services according to the Statement of Activities, so it should be charges for services/fees"},
-    {"severity": "warning", "path": "detail[100].category", "page": 15,
-     "extracted": "other / miscellaneous revenue", "on_page": "Canine (K-9) Local 410; Statement of Activities p3 Operating Grants and Contributions 410",
-     "issue": "the report counts it as an operating grant/contribution, so it is probably donations/contributions rather than other"},
-    {"severity": "warning", "path": "detail[94]", "page": 14,
-     "extracted": "Sinking Emergency Management Local 6,510 recorded as revenue (other)", "on_page": "Local 6,510; General Fund Emergency Manager 'Transfers' 6,510 out (p12); total transfers in 2,796,335 vs out 2,802,845 (p5), a 6,510 gap",
-     "issue": "the 6,510 transfer out of the General Fund appears to have been received as a 'Local' receipt in Sinking Emergency Management, so it is a one-sided transfer. As printed, the same money counts as both a transfer out and revenue"},
-    {"severity": "warning", "path": "decision_needed", "page": 5,
-     "extracted": null, "on_page": "Transfers From Other Funds 2,796,335 vs Transfers to Other Funds 2,802,845 (difference 6,510 = Emergency Manager transfer, received as Sinking Emergency Management 'Local' 6,510)",
-     "issue": "one-sided transfer not listed in decision_needed[]: should the 6,510 be treated as a transfer in rather than local revenue?"},
-    {"severity": "warning", "path": "receipts[3]", "page": 4,
-     "extracted": "inheritance tax 825,474 split from Local Fees, Licenses, Commissions, and Miscellaneous", "on_page": "Inheritance Tax Fund column 825,474 on the Local Fees row (p4); Statement of Activities p3 lists Inheritance Tax charges for services 782,382",
-     "issue": "the split uses a fund column, not a printed category breakdown, and the report's own Statement of Activities classifies 782,382 of it as charges for services. The arithmetic is right (825,474 + 1,097,174 = 1,922,648) and the split is defensible, but it is a judgment call. Its source is p4 (Inheritance Tax column), not p5"},
-    {"severity": "warning", "path": "receipts[2].category", "page": 5,
-     "extracted": "intergovernmental/state aid 3,376,904", "on_page": "Intergovernmental Receipts 3,376,904; federal parts are General 14,677 + Road 2,611 + Disaster 1,669,722 = 1,687,010 (pp8, 14, 15)",
-     "issue": "federal grants make up 49.96% of the line, so state aid is only barely dominant. The review flag is already set"},
-    {"severity": "warning", "path": "detail[67].detail_category", "page": 12,
-     "extracted": "professional/contract services", "on_page": "Communication Center Operating Disbursements 158,664",
-     "issue": "every 'Operating Disbursements' line is mapped to professional/contract services. That is a blanket assumption: for example, Communication Center 158,664 is probably a payment to another entity, and Miscellaneous 256,702 (detail[56]) probably includes insurance"},
-    {"severity": "warning", "path": "detail_totals", "page": 14,
-     "extracted": null, "on_page": "Total Sinking Road Equipment 492,775 (p14); Schedule 2 Total Receipts 6,308,594 (p16); Schedule 2 Total Disbursements 4,070,885 (p18)",
-     "issue": "printed totals not recorded in detail_totals. The items do add up to them (checked)"}
+    {
+      "severity": "error",
+      "path": "detail[4].category",
+      "page": 8,
+      "extracted": "other / miscellaneous revenue",
+      "on_page": "Local 776,359; Statement of Activities (pp2-3) shows General Fund department charges for services of 623,101 (Clerk 36,793, Treasurer 142,222, Election 4,949, Clerk of District Court 10,934, Sheriff 368,692, County Attorney 81, Emergency Manager 59,430)",
+      "issue": "[fixed] about 80% of this 'Local' line is charges for services according to the report's own Statement of Activities (all charges for services come out of the Local Fees line: 1,535,240 + general 387,408 = 1,922,648). The rule says to use the dominant category: charges for services/fees (detail 'fees of office' / 'other charges for services'), with review, not other"
+    },
+    {
+      "severity": "error",
+      "path": "detail[85].category",
+      "page": 14,
+      "extracted": "other / miscellaneous revenue",
+      "on_page": "Road Local 115,903; Statement of Activities p2 Road charges for services 115,603",
+      "issue": "[fixed] the Statement of Activities identifies almost all of it (99.7%) as charges for services, so it should be charges for services/fees, not other"
+    },
+    {
+      "severity": "error",
+      "path": "detail[95].category",
+      "page": 15,
+      "extracted": "other / miscellaneous revenue",
+      "on_page": "Visitors Promotion Local 5,857; Statement of Activities p2 charges for services 5,857",
+      "issue": "[fixed] the page identifies it as charges for services (and a visitors promotion fund is normally paid for by lodging tax), so other is wrong. Use lodging tax or charges for services/fees, with review"
+    },
+    {
+      "severity": "error",
+      "path": "detail[97].category",
+      "page": 15,
+      "extracted": "other / miscellaneous revenue",
+      "on_page": "Register of Deeds Local 2,934; Statement of Activities p2 charges for services 2,934",
+      "issue": "[fixed] this is charges for services (fees of office), not other"
+    },
+    {
+      "severity": "error",
+      "path": "detail[99].category",
+      "page": 15,
+      "extracted": "other / miscellaneous revenue",
+      "on_page": "Pre Trial Diversion Local 275; Statement of Activities p2 charges for services 275",
+      "issue": "[fixed] this is charges for services/fees, not other"
+    },
+    {
+      "severity": "error",
+      "path": "detail[106].category",
+      "page": 16,
+      "extracted": "other / miscellaneous revenue",
+      "on_page": "911 Emergency Management Local 5,153; Statement of Activities p3 charges for services 5,088",
+      "issue": "[fixed] 99% is charges for services according to the Statement of Activities, so it should be charges for services/fees"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[100].category",
+      "page": 15,
+      "extracted": "other / miscellaneous revenue",
+      "on_page": "Canine (K-9) Local 410; Statement of Activities p3 Operating Grants and Contributions 410",
+      "issue": "the report counts it as an operating grant/contribution, so it is probably donations/contributions rather than other"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[94]",
+      "page": 14,
+      "extracted": "Sinking Emergency Management Local 6,510 recorded as revenue (other)",
+      "on_page": "Local 6,510; General Fund Emergency Manager 'Transfers' 6,510 out (p12); total transfers in 2,796,335 vs out 2,802,845 (p5), a 6,510 gap",
+      "issue": "the 6,510 transfer out of the General Fund appears to have been received as a 'Local' receipt in Sinking Emergency Management, so it is a one-sided transfer. As printed, the same money counts as both a transfer out and revenue"
+    },
+    {
+      "severity": "warning",
+      "path": "decision_needed",
+      "page": 5,
+      "extracted": null,
+      "on_page": "Transfers From Other Funds 2,796,335 vs Transfers to Other Funds 2,802,845 (difference 6,510 = Emergency Manager transfer, received as Sinking Emergency Management 'Local' 6,510)",
+      "issue": "one-sided transfer not listed in decision_needed[]: should the 6,510 be treated as a transfer in rather than local revenue?"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[3]",
+      "page": 4,
+      "extracted": "inheritance tax 825,474 split from Local Fees, Licenses, Commissions, and Miscellaneous",
+      "on_page": "Inheritance Tax Fund column 825,474 on the Local Fees row (p4); Statement of Activities p3 lists Inheritance Tax charges for services 782,382",
+      "issue": "the split uses a fund column, not a printed category breakdown, and the report's own Statement of Activities classifies 782,382 of it as charges for services. The arithmetic is right (825,474 + 1,097,174 = 1,922,648) and the split is defensible, but it is a judgment call. Its source is p4 (Inheritance Tax column), not p5"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[2].category",
+      "page": 5,
+      "extracted": "intergovernmental/state aid 3,376,904",
+      "on_page": "Intergovernmental Receipts 3,376,904; federal parts are General 14,677 + Road 2,611 + Disaster 1,669,722 = 1,687,010 (pp8, 14, 15)",
+      "issue": "federal grants make up 49.96% of the line, so state aid is only barely dominant. The review flag is already set"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[67].detail_category",
+      "page": 12,
+      "extracted": "professional/contract services",
+      "on_page": "Communication Center Operating Disbursements 158,664",
+      "issue": "every 'Operating Disbursements' line is mapped to professional/contract services. That is a blanket assumption: for example, Communication Center 158,664 is probably a payment to another entity, and Miscellaneous 256,702 (detail[53]) probably includes insurance"
+    },
+    {
+      "severity": "warning",
+      "path": "detail_totals",
+      "page": 14,
+      "extracted": null,
+      "on_page": "Total Sinking Road Equipment 492,775 (p14); Schedule 2 Total Receipts 6,308,594 (p16); Schedule 2 Total Disbursements 4,070,885 (p18)",
+      "issue": "printed totals not recorded in detail_totals. The items do add up to them (checked)"
+    }
   ]
 }
