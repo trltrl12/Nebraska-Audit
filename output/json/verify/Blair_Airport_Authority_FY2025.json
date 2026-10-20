@@ -1,0 +1,11 @@
+{
+  "stem": "Blair_Airport_Authority_FY2025",
+  "values_checked": 57,
+  "issues": [
+    {"severity": "warning", "path": "entity_type", "page": 4, "extracted": "airport authority (governmental funds only, business_type null)", "on_page": "Balance Sheet / Statement of Revenues, Expenditures and Changes in Fund Balance - Governmental Funds (General Fund, Debt Fund)", "issue": "extractor rules treat airport authorities as entirely business-type, but this report presents governmental funds; recording them as governmental matches the statements, but it is an exception to the rule and should be confirmed"},
+    {"severity": "warning", "path": "receipts[0].category", "page": 4, "extracted": "taxes (unlabeled)", "on_page": "Taxes 304,864 (General Fund 71,191 + Debt Fund 233,673)", "issue": "the General Fund part (71,191) is printed as 'Property tax' on the budget schedule (p5) and the government-wide statement (p2) shows Property taxes 308,849 / Other taxes 682; keeping the whole line unlabeled is defensible because the Debt Fund part is not broken down, but nearly all of it is property tax"},
+    {"severity": "warning", "path": "receipts[2].category", "page": 4, "extracted": "intergovernmental/state aid", "on_page": "Intergovernmental 641,473", "issue": "source of the grants (FAA/federal vs state) is not stated; airport capital grants are often federal"},
+    {"severity": "warning", "path": "detail[3].detail_category", "page": 5, "extracted": "other state aid", "on_page": "Grants 635,473", "issue": "grant source not stated; 'other state aid' is a guess (could be federal grants)"},
+    {"severity": "warning", "path": "other_financing", "page": 4, "extracted": 53317, "on_page": "Insurance recovery 53,317 (Other Financing Sources)", "issue": "treated as other financing as the statement presents it; the category rules list insurance proceeds under reimbursements/refunds, so the treatment is a judgment call"}
+  ]
+}
