@@ -1,0 +1,33 @@
+{
+  "stem": "Pawnee_City_FY2025",
+  "values_checked": 95,
+  "issues": [
+    {"severity": "error", "path": "receipts[0].category", "page": 4,
+     "extracted": "property tax", "on_page": "Taxes 580,690 (p4); budget schedule p7 labels the same amount 'Property and city taxes/sales taxes'",
+     "issue": "Combined tax line that the report itself says includes sales taxes, and no property/sales breakdown is printed anywhere in the trimmed PDF. Per the combined-tax rule it should be 'taxes (unlabeled)', not property tax."},
+    {"severity": "error", "path": "detail[0].category", "page": 7,
+     "extracted": "property tax / detail_category property tax", "on_page": "Property and city taxes/sales taxes 580,690",
+     "issue": "The label explicitly mixes property and sales taxes and no split is printed. Should be 'taxes (unlabeled)' in both category and detail_category."},
+    {"severity": "error", "path": "detail[5].amount", "page": 7,
+     "extracted": 151140, "on_page": "Miscellaneous 151,140 (budgetary basis); Exhibit 4 p4 shows Miscellaneous 106,140 + Equity Transfer In 45,000 for the same funds",
+     "issue": "This line includes the 45,000 equity transfer from the Water Fund (151,140 - 106,140 = 45,000), so a transfer is counted as revenue in detail. Per the hidden-transfer rule, split it into miscellaneous revenue 106,140 and an 'other financing' +45,000 line, with split_from citing p4 and review, and mark the detail_totals revenue entry (1,515,361) includes ['other financing']."},
+    {"severity": "warning", "path": "receipts[6].original_label", "page": 6,
+     "extracted": "Charge for services (Water 393,160 + Sewer 362,850 + Garbage 85,038)", "on_page": "Charge for services",
+     "issue": "The amount 841,048 (Totals column) is correct, but the label has the extractor's fund breakdown added to it. The printed label is just 'Charge for services'."},
+    {"severity": "warning", "path": "receipts[8].category", "page": 6,
+     "extracted": "other", "on_page": "Rent and Miscellaneous income 78,728",
+     "issue": "Mixed line. Rent would be charges for services/fees (rentals), but the page doesn't say which part is bigger, so 'other' with review is defensible."},
+    {"severity": "warning", "path": "disbursements[5].category", "page": 4,
+     "extracted": "other", "on_page": "Airport 625",
+     "issue": "Airport has no exact category, so 'other' with review is acceptable. Economic development or general government could also be argued. Same for detail[8]."},
+    {"severity": "warning", "path": "ending_cash.amount", "page": 3,
+     "extracted": 744592, "on_page": "Cash & certificates of deposit 744,592; Cash County Treasurer 12,994 (Total Governmental Funds)",
+     "issue": "ending_cash leaves out the 12,994 cash held by the County Treasurer. Total governmental cash would be 757,586. The exclusion is explained in notes, but it is an assumption."},
+    {"severity": "warning", "path": "proprietary", "page": 6,
+     "extracted": null, "on_page": "Trimmed PDF jumps from report p10 (Exhibit 6) to report p28 (Exhibit A-1)",
+     "issue": "This is a GAAP report with enterprise funds, but the Statement of Cash Flows - Proprietary Funds (probably report p11) isn't in the trimmed PDF, so proprietary is null. Check the source PDF and the trimming."},
+    {"severity": "warning", "path": "report_discrepancies", "page": 2,
+     "extracted": null, "on_page": "Total business-type activities expenses printed 689,568; Water 239,593 + Sewer 344,418 + Garbage 85,557 = 669,568",
+     "issue": "The Statement of Activities' business-type expense total is 20,000 higher than its lines. Total Primary Government 2,142,843 uses 669,568, so 689,568 looks like a typo. Not recorded in report_discrepancies; no JSON value depends on it."}
+  ]
+}
