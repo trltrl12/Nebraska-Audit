@@ -1,0 +1,27 @@
+{
+  "stem": "Blackbird_Township_Thurston_County_B2526",
+  "values_checked": 8,
+  "issues": [
+    {"severity": "error", "path": "receipts[0].amount", "page": 1,
+     "extracted": 4893.98, "on_page": 6000.81,
+     "issue": "Taken from p2, which is struck through with a red X, so it is the voided version of the All Funds page. p1 is the clean page, and the reviewer's red-ink '45%' over its #DIV/0! shows p1 is the accepted final version. p3 (page 2-A, with the same 'Thurston County County' title typo as p2) matches p2 because it was printed from the same draft. It is not the budget form worksheet, so it can't decide which version is final. Column 2 line 6 on p1 is 6,000.81."},
+    {"severity": "error", "path": "missing", "page": 1,
+     "extracted": null, "on_page": "Local Receipts: Other 178.08 (line 14, column 2)",
+     "issue": "The final p1 prints 178.08 on line 14. It is missing from receipts, and the notes leave it out of the p1 description."},
+    {"severity": "error", "path": "transfers_in", "page": 1,
+     "extracted": 1300.00, "on_page": null,
+     "issue": "p1 line 15 'Transfers In Of Surplus Fees' column 2 is '-'. The 1,300.00 appears only on the voided p2. The Documentation of Transfers page is also blank, and the budget-form rules say transfers come from that page. Should be null."},
+    {"severity": "error", "path": "reported_totals.governmental.receipts", "page": 1,
+     "extracted": 6201.55, "on_page": 6186.46,
+     "issue": "p1: Total Resources Available 12,822.89 - line 5 subtotal 6,636.43 = 6,186.46 (computed). 'includes' should be [] (no transfer on p1)."},
+    {"severity": "error", "path": "ending_cash.amount", "page": 1,
+     "extracted": 5373.98, "on_page": 5358.89,
+     "issue": "p1 line 30 Balance Forward/Cash Reserve, column 2 is 5,358.89. 5,373.98 is from the voided p2. Check with p1 figures: 6,636.43 + 6,000.81 + 7.57 + 178.08 - 7,464.00 = 5,358.89."},
+    {"severity": "warning", "path": "beginning_cash.source_page", "page": 1,
+     "extracted": 2, "on_page": "6,636.43 on p1 (same on p2)",
+     "issue": "The amount is the same on both versions, but source_page (and every other source_page) should point to p1, the final page. Beginning cash 6,067.14 + 0 + 569.29 = 6,636.43 is correct. receipts[1] 7.57 and disbursements[0] 7,464.00 also match p1."},
+    {"severity": "warning", "path": "notes", "page": 1,
+     "extracted": "p1 (property tax 6,000.81, no transfer, total resources 12,822.89, ending 5,358.89)", "on_page": "p1 also has Local Receipts: Other 178.08",
+     "issue": "The notes describe p1 without its line 14 receipt. Notes and review flags should say p1 was used and p2 is the red-X voided draft."}
+  ]
+}

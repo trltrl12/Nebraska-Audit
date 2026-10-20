@@ -302,8 +302,10 @@ When a function line mixes categories, pick the dominant one and mention it in `
 - Use the prior-year actual column: FY2025 = column 2 ("Actual 2024-2025" or "Actual/Estimated
   2024-2025"), never the budget year. Put "budget form, prior-year actual column" in notes and set
   `review: true` on every line if the column is labelled "estimated".
-- If there is both an original and a revised "Total All Funds" page, use the one that agrees with
-  the budget form worksheet and say which in notes.
+- If there are two versions of the "Total All Funds" page, a page crossed out (red X, diagonal line,
+  "Do Not Submit") is void: use the unmarked page, even if a worksheet agrees with the crossed-out
+  one. Record the other version's differing figures in report_discrepancies and add a review note.
+  If neither is marked, use the one that agrees with the worksheet and say which in notes.
 - Transfers come from the "Documentation of Transfers" page, never from receipts/disbursements.
 - There is no balance sheet: leave `balance_sheet` null and say so in notes.
 - Beginning cash = the line 5 subtotal of beginning balances (net cash + investments + county
