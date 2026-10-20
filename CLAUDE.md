@@ -113,8 +113,7 @@ These were diagnosed and fixed in find_pages v6; re-extract and re-verify them a
   nonmajor combining page), Auburn_Public_Schools_FY2025 (report p27, Employee Benefit Fund),
   Battle_Creek_FY2025 (report pp10-12, proprietary statement), Butte_FY2025 (report p31, rest of
   General Fund spending), Cody_Kilgore_Public_School_FY2025 (p18 activity accounts cut off; residual
-  lines from p17 used meanwhile), Columbus_FY2025 (rest of the nonmajor
-  combining statement: printed columns 5,243,633 of 5,493,196, no Total column; no nonmajor detail yet).
+  lines from p17 used meanwhile).
   Litchfield_Public_Schools_FY2025 (left half of the governmental receipts/disbursements statement,
   report p17-18 spread; receipt labels inferred from fund schedules, marked review).
   Leigh_FY2025 (General Fund departments schedule continues past trimmed p12: Housing/Park/Pool/Library
