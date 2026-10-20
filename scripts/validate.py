@@ -272,6 +272,9 @@ def check(stem, d):
     # The extractor must have read every page of the trimmed PDF ("Read pages 1-N of N" in notes)
     tp = TRIMMED / f"{stem}.pdf"
     seen = re.findall(r"Read pages 1-(\d+) of (\d+)", d.get("notes") or "")
+    if tp.exists() and not seen:
+        f("coverage", "notes don't end with \"Read pages 1-N of N\", so it isn't confirmed that every page "
+                      "of the trimmed PDF was read: re-extract")
     if tp.exists() and seen:
         import pymupdf
         n = pymupdf.open(tp).page_count
