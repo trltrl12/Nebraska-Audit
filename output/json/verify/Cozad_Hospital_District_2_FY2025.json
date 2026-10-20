@@ -1,0 +1,27 @@
+{
+  "stem": "Cozad_Hospital_District_2_FY2025",
+  "values_checked": 161,
+  "issues": [
+    {"severity": "warning", "path": "receipts[9].category", "page": 3,
+     "extracted": "donations/contributions", "on_page": "Noncapital grants and contributions 747,459",
+     "issue": "the line mixes government grants and private contributions; it could be intergovernmental/state aid or federal grants"},
+    {"severity": "warning", "path": "receipts[7].category", "page": 3,
+     "extracted": "investment income", "on_page": "Change in cash surrender value 59,460",
+     "issue": "change in variable annuity value treated as investment income; defensible, but it is an unrealized value change"},
+    {"severity": "warning", "path": "detail[28].detail_category", "page": 6,
+     "extracted": "supplies and materials", "on_page": "Schedule 2 'Supplies and Other' column (total 14,942,762 includes employee benefits 2,746,571 and depreciation 1,733,722)",
+     "issue": "the Supplies and Other cells (detail[29]..detail[102], odd-numbered entries) include employee benefits and professional/purchased services, which the schedule doesn't break out; the 'supplies and materials' detail_category is approximate (e.g. Medical records 1,532,155, IT 501,189, Administration 858,322 are likely mostly contract services)"},
+    {"severity": "warning", "path": "detail[54].detail_category", "page": 6,
+     "extracted": "medical supplies and services", "on_page": "Pharmacy - Supplies and Other 955,151",
+     "issue": "inconsistent with the other clinical departments, whose Supplies and Other cells are coded 'supplies and materials'"},
+    {"severity": "warning", "path": "detail[74].detail_category", "page": 6,
+     "extracted": "purchased power/cost of sales", "on_page": "Retail pharmacy - Supplies and Other 371,723",
+     "issue": "treating it as cost of sales is an assumption (already marked for review)"},
+    {"severity": "warning", "path": "detail[84].detail_category", "page": 7,
+     "extracted": "utilities (power, gas, phone)", "on_page": "Operation of plant 199,534 (Supplies and Other)",
+     "issue": "the 'utilities' detail category is assumed; the schedule doesn't say what the cost is"},
+    {"severity": "warning", "path": "detail[28].original_label", "page": 6,
+     "extracted": "Nursing service - Salaries", "on_page": "Nursing service (Salaries column)",
+     "issue": "every Schedule 2 original_label is built from the row label plus the column header ('- Salaries' / '- Supplies and Other'); none is printed as-is"}
+  ]
+}

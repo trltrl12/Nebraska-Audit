@@ -1,0 +1,21 @@
+{
+  "stem": "Crookston_FY2025",
+  "values_checked": 26,
+  "issues": [
+    {"severity": "warning", "path": "receipts[8].category", "page": 1,
+     "extracted": "other", "on_page": "Local Receipts: Other 30,485.00 (General 26,867.09, Street 3,617.91)",
+     "issue": "49% of governmental receipts are in 'other'. Nothing on the page breaks it down. It probably includes the water and solid waste charges the General Fund collects, and it may include the bank loan issued 1/13/2025 (8,196.47 still outstanding, p3), which would be debt_proceeds, not a receipt"},
+    {"severity": "warning", "path": "disbursements[3].category", "page": 2,
+     "extracted": "debt service principal", "on_page": "Debt Service 5,777.37",
+     "issue": "a single debt service line that combines principal and interest; the whole line goes to principal"},
+    {"severity": "warning", "path": "disbursements[4].fund_type", "page": 2,
+     "extracted": "governmental", "on_page": "Business-Type Activities: Solid Waste 1,770.00 (General Fund column)",
+     "issue": "the line is printed under Business-Type Activities but paid from the General Fund; calling it governmental is defensible because there is no enterprise fund, but it's a judgment call"},
+    {"severity": "warning", "path": "disbursements[5].fund_type", "page": 2,
+     "extracted": "governmental", "on_page": "Business-Type Activities: Water 9,811.47 (General Fund column)",
+     "issue": "the line is printed under Business-Type Activities but paid from the General Fund; calling it governmental is defensible because there is no enterprise fund, but it's a judgment call"},
+    {"severity": "warning", "path": "balance_sheet.liabilities", "page": 3,
+     "extracted": [], "on_page": "Schedule of Outstanding Debt: Bank Loan 8,196.47",
+     "issue": "the outstanding bank loan is printed on p3 but isn't on the cash-basis balance statement, so the balance sheet has no liabilities. Separately, the county treasurer balance (671.14) is printed outside line 28 and also isn't included"}
+  ]
+}
