@@ -253,6 +253,14 @@ section `other financing` with a signed amount (+ in, − out). If a schedule's 
 receipts/disbursements" includes the transfer, add `"includes": ["other financing"]` to that
 `detail_totals` entry instead of moving the transfer into revenue or expenditure.
 
+**Transfers hidden inside spending or receipt lines (common in school districts):** if a fund
+column or fund schedule prints a transfer inside an ordinary line (e.g. "Pupil transportation"
+or "2640 Care and Upkeep of Equipment" that the total/government-wide column then eliminates or
+reclassifies as a transfer), split it: the spending/receipt part as one item and the transfer as
+an `other financing` item (signed), both with `split_from` naming the printed line and the page
+showing the elimination, plus `"review"`. Check every elimination/reclassification column for this
+before writing; the same money must never appear as both spending and a transfer.
+
 **Splitting a combined line** (`split_from`) is only allowed when the report itself prints the
 breakdown of *that* line. Never split a line just because some other statement's lines happen to
 add up to it; if a schedule only prints broad groups ("Taxes", "State", "Local"), record each group
