@@ -1,0 +1,30 @@
+{
+  "stem": "Elgin_FY2025",
+  "values_checked": 170,
+  "issues": [
+    {"severity": "warning", "path": "detail[14].category", "page": 15,
+     "extracted": "general government", "on_page": "Salaries and benefits 144,910 = General 82,570 + Park 10,625 + Pool 33,075 + Library 18,640 (pp14-15)",
+     "issue": "General Fund combining statement prints department columns (General, Police, Fire, Sales Tax, Park, Pool, Youth, Library); the Total-column object lines detail[14]-detail[25] are all given function general government although most Park/Pool/Youth/Library amounts are culture/recreation and Police/Fire amounts public safety (p5 functions: general government 195,599, public safety 68,517, environment and leisure 95,292). Marked review; function split is knowable from the page."},
+    {"severity": "warning", "path": "detail[6].category", "page": 14,
+     "extracted": "charges for services/fees", "on_page": "Rural fire reimbursements 11,297 under 'Intergovernmental revenue:'",
+     "issue": "the report prints this under Intergovernmental revenue and includes it in the p5 Intergovernmental line (907 + 12,944 + 11,297 = 25,148); rural fire contracts go to charges for services under the rules, but it could be intergovernmental/state aid (county/other local governments) or reimbursements"},
+    {"severity": "warning", "path": "receipts[9].category", "page": 5,
+     "extracted": "donations/contributions", "on_page": "Grants and contributions 159,960 (p3: capital grants 159,661 public safety/works/leisure, operating 298)",
+     "issue": "mostly a Rescue Fund capital grant of 159,461 (detail[49]); grantor not stated, may be a government grant (state/federal) rather than a private contribution; already marked review"},
+    {"severity": "warning", "path": "detail[16].detail_category", "page": 15,
+     "extracted": "law enforcement contract", "on_page": "Interlocal agreement 38,200 = Police 33,600 + Fire 4,600",
+     "issue": "4,600 of the line is a fire interlocal agreement, not law enforcement; already marked review"},
+    {"severity": "warning", "path": "detail[19].detail_category", "page": 15,
+     "extracted": "dues, training and travel", "on_page": "Licenses, fees, and taxes 1,330",
+     "issue": "licenses/fees/taxes paid is not dues/training/travel; could be miscellaneous expenditure or tax refunds/treasurer fees"},
+    {"severity": "warning", "path": "detail[0].budget_final", "page": 15,
+     "extracted": 189850, "on_page": "no budget column on pp14-15; 189,850 is on the General Fund budget schedule p10",
+     "issue": "budget_final values on the combining-statement lines (detail[0]-[3], [10], [11], [13], [26]-[28]) come from p10 while source_page says 15; explained in notes but not marked per item"},
+    {"severity": "warning", "path": "proprietary", "page": 8,
+     "extracted": null, "on_page": "Statement of Cash Flows - Proprietary Funds, Total: operating 177,249; capital and related financing (163,057); investing (3,398); beginning cash 145,899; ending cash 156,693",
+     "issue": "proprietary cash-flow statement is printed (accrual-basis enterprise funds) but left null because basis is 'cash'; acceptable under the rules (GAAP only) but the data exists"},
+    {"severity": "warning", "path": "receipts[13].category", "page": 7,
+     "extracted": "charges for services/fees", "on_page": "Other revenue 4,113 (operating revenues, Water Fund)",
+     "issue": "printed as Other revenue; treated as charges because it sits in operating revenues; defensible but a judgment call"}
+  ]
+}

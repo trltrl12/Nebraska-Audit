@@ -1,0 +1,21 @@
+{
+  "stem": "Elyria_FY2025",
+  "values_checked": 23,
+  "issues": [
+    {"severity": "warning", "path": "entity_name", "page": 1,
+     "extracted": "Village of Comstock (filed as Elyria_FY2025)", "on_page": "Village of Comstock, Nebraska (header on all 4 pages)",
+     "issue": "This is NOT the same report as Comstock_FY2025. trimmed/Comstock_FY2025.pdf has General, Street and Utility Fund columns, beginning 56,166, property tax 15,054, no investments, Utility-to-Street transfer 39,155 and ending 51,034. This file has only General and Street, beginning 115,930, property tax 17,644, CDs 108,714, General-to-Street transfer 3,200, ending 146,440, and is a different scan with a 'See Accountants' Compilation Report' stamp. None of the figures match. Most likely this is Elyria's own filing, made on a template whose Comstock header was never changed, but the page can't prove that. decision_needed already asks the question; the answer should also note that the data is not a duplicate of Comstock's"},
+    {"severity": "warning", "path": "report_discrepancies", "page": 3,
+     "extracted": null, "on_page": "Crossed-out duplicate Exhibit A p2: General Government 15,787, no line 50 transfer (total 21,503 unchanged)",
+     "issue": "The void (red X) page was correctly ignored and is described in notes, but its differing figures aren't recorded in report_discrepancies. The budget-form rule calls for that (applied here by analogy)"},
+    {"severity": "warning", "path": "ending_investments", "page": 1,
+     "extracted": null, "on_page": "Line 27 Investments 108,714 (line 2 beginning 32,343)",
+     "issue": "Investments are reported on their own lines. ending_cash/beginning_cash correctly use the line 24/line 3 totals including investments, but the informational beginning_/ending_investments fields are left null"},
+    {"severity": "warning", "path": "balance_sheet.assets", "page": 1,
+     "extracted": "Net Cash Balance 37,726; Investments 108,714", "on_page": "County Treasurer Balance at September 30, 2025: 727.00 (Oct 1, 2024: 2,292.00)",
+     "issue": "The memo County Treasurer balance printed below the statement isn't in the balance sheet or notes. It isn't part of the line 28 total, so leaving it out is defensible"},
+    {"severity": "warning", "path": "beginning_cash.computed", "page": 1,
+     "extracted": 115930, "on_page": "Line 3 Subtotal of Beginning Balance 115,930.00 (Total column)",
+     "issue": "The value is printed as-is on line 3, so the 'computed' tag isn't needed (amount is correct)"}
+  ]
+}
