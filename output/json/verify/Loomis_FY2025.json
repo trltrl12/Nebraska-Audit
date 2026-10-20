@@ -1,0 +1,16 @@
+{
+  "stem": "Loomis_FY2025",
+  "values_checked": 148,
+  "issues": [
+    {"severity": "warning", "path": "detail[44].category", "page": 9,
+     "extracted": "general government", "on_page": "TIF payments 6,824 (General column)",
+     "issue": "The category rules list TIF under economic development. The extractor used general government, which is defensible because the p4 statement counts this spending in the General government line (162,045). Someone should confirm which function to use."},
+    {"severity": "warning", "path": "notes", "page": 10,
+     "extracted": "Budget-basis schedule (p10) ... its actuals tie (revenues 565,394, expenditures 631,491)",
+     "on_page": "Debt service 33,138; Public Works - water 146,676",
+     "issue": "The p10 budget schedule's totals tie, but its Debt service actual (33,138) doesn't match the p6/p9 debt service principal 26,352 + interest 18,138 = 44,490. The 11,352 difference sits in Public Works - water. This is only an internal classification inconsistency between the report's schedules; the JSON is not affected because p10 isn't entered."},
+    {"severity": "warning", "path": "transfers_in", "page": 4,
+     "extracted": 15000, "on_page": "TRANSFER IN (OUT): General (15,000), Street 15,000, Total Governmental Funds column blank",
+     "issue": "transfers_in/out come from the fund columns because the Total column is blank (the transfers net to zero within the governmental funds). The roll-forward still holds. This is noted for transparency."}
+  ]
+}
