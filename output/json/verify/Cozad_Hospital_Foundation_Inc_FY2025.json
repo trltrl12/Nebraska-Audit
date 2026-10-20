@@ -1,0 +1,21 @@
+{
+  "stem": "Cozad_Hospital_Foundation_Inc_FY2025",
+  "values_checked": 33,
+  "issues": [
+    {"severity": "warning", "path": "receipts[5]", "page": 2,
+     "extracted": "other 18000", "on_page": "Net assets released from restrictions 18,000",
+     "issue": "Internal reclassification between net-asset classes (offset by the -18,000 'released from restriction' line in business_type.adjustments), similar to a transfer; it inflates receipts by 18,000. Kept because the printed total 557,808 includes it; net effect on the roll-forward is zero."},
+    {"severity": "warning", "path": "business_type.adjustments[0]", "page": 2,
+     "extracted": "adjustment 595 and 1391 (adjustments[0], [1])", "on_page": "With donor restrictions: Investment income 595; Net realized and unrealized gains on investments 1,391",
+     "issue": "These are real investment revenues of the donor-restricted class, recorded as adjustments rather than receipts (investment income). Amounts are correct; classification is questionable."},
+    {"severity": "warning", "path": "entity_type", "page": 1,
+     "extracted": "hospital", "on_page": "Cozad Hospital Foundation, Inc. (nonprofit foundation, Statements of Financial Position / Activities)",
+     "issue": "Entity is a nonprofit fundraising foundation supporting a hospital, not a hospital; 'other' may fit better."},
+    {"severity": "warning", "path": "disbursements[1].category", "page": 2,
+     "extracted": "hospital/health care", "on_page": "Program services: Student loan forgiveness 82,147; Scholarships and educational assistance 19,127",
+     "issue": "Education assistance (student loans/scholarships) categorized as hospital/health care; defensible (medical students) but a judgment call. Same for disbursements[2]."},
+    {"severity": "warning", "path": "disbursements[3].category", "page": 2,
+     "extracted": "other", "on_page": "Management and general 5,794",
+     "issue": "Administrative expense put in 'other'; 'general government' could arguably fit. Fundraising expense (disbursements[4], 31,055) is also in 'other'."}
+  ]
+}
