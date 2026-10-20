@@ -5,7 +5,7 @@
     {"severity": "error", "path": "missing", "page": 8,
      "extracted": "General Fund detail expenditures recorded as printed (16,762,964) with no contra line and no transfer-out; Depreciation detail[90] records +300,000 transfer in",
      "on_page": "General Fund schedule total disbursements 16,762,964 (p8) include the 300,000 transfer to the Depreciation Fund: statement p4 General Fund column (General + Depreciation) disbursements 16,703,680 = 16,762,964 + 240,716 - 300,000; Depreciation p10 '5200 Transfers incoming 300,000'. Statement vs schedule differences: Instructional services 10,050,471 vs 10,072,971 (-22,500), Operations and maintenance 1,876,630 vs 1,913,414 (-36,784)",
-     "issue": "The same 300,000 is in detail as General Fund spending and as a Depreciation transfer in. The extractor rule for transfers hidden in school-district spending lines requires a negative contra expenditure line (split_from naming the groups, review) and an other financing -300,000 line for the General Fund. Neither was added; the notes describe the gap but the detail double counts it."},
+     "issue": "[fixed] The same 300,000 is in detail as General Fund spending and as a Depreciation transfer in. The extractor rule for transfers hidden in school-district spending lines requires a negative contra expenditure line (split_from naming the groups, review) and an other financing -300,000 line for the General Fund. Neither was added; the notes describe the gap but the detail double counts it."},
     {"severity": "warning", "path": "receipts[0].category", "page": 5,
      "extracted": "property tax, 11,812,750", "on_page": "Local receipts 11,812,750",
      "issue": "Broad group recorded with its dominant category plus review, which the rules allow. But the fund schedules print the full breakdown and it reconciles exactly: GF 8,627,217 (p6) + Special Building 1,642,934 (p11, excluding interest 13,054) + School Nutrition 313 (p12) + Bond 1,176,086 (p13, including interest 33,568) + QCPU 366,200 (p14) = 11,812,750. It holds about 2.15M that is not property tax (motor vehicle tax 1,521,318, donations 470,686, tuition, Bond interest 33,568, etc.). Because Bond interest sits in this line, receipts[5] Interest 112,887 also understates investment income."},
@@ -20,6 +20,6 @@
      "issue": "Lease payments with principal and interest not split are all recorded as principal. Same for disbursements[8] (Lease payments 1,836,729, debt service principal). Both lines already carry review."},
     {"severity": "warning", "path": "notes", "page": 3,
      "extracted": "Fund balance p9 total 14,092,919 agrees", "on_page": "p9 shows the General Fund balance 7,949,460; total fund balances 14,092,919 are on p3",
-     "issue": "Wrong page reference in notes."}
+     "issue": "[fixed] Wrong page reference in notes."}
   ]
 }
