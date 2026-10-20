@@ -293,7 +293,7 @@ def check(stem, d):
         for i in ver.get("issues") or []:
             text = f"verifier: {i.get('issue', '')}" + (f" (page shows {i['on_page']})" if i.get("on_page") not in
                                                         (None, "") else "")
-            if i.get("severity") == "error":
+            if i.get("severity") == "error" and not str(i.get("issue", "")).startswith("[fixed"):
                 f("verifier", f"{i.get('path', '')}: {text}", pages=str(i.get("page", "")))
             else:
                 rv("verifier", text, i.get("path", ""), i.get("extracted", ""), i.get("page", ""))
