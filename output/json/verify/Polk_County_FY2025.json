@@ -1,0 +1,21 @@
+{
+  "stem": "Polk_County_FY2025",
+  "values_checked": 126,
+  "issues": [
+    {"severity": "warning", "path": "receipts[4].category", "page": 4,
+     "extracted": "charges for services/fees", "on_page": "Local 1,439,767 (p2: charges for services 702,340, interest income 659,789, miscellaneous 82,980)",
+     "issue": "No category is more than half of 'Local': charges for services are about 49% and interest about 46% (the p2 parts total 1,445,109, not 1,439,767). Choosing charges for services is defensible as the largest part, but interest is almost as big. Review is already set."},
+    {"severity": "warning", "path": "detail[2].detail_category", "page": 8,
+     "extracted": "other charges for services", "on_page": "General Fund Local 1,262,382",
+     "issue": "The General Fund probably receives most of the county's 659,789 interest income (p2). If it does, interest is more than half of this line and investment income would be the dominant category. No per-fund breakdown is printed. Review is already set."},
+    {"severity": "warning", "path": "detail[34].category", "page": 5,
+     "extracted": "streets/highways", "on_page": "Noxious Weed Fund, Public works 27,393",
+     "issue": "The disbursement rules list noxious weed control under natural resources/conservation. The page prints it as Public works, so streets/highways ties to the statement's function, but the rules point the other way. Review is already set."},
+    {"severity": "warning", "path": "detail[38].detail_category", "page": 10,
+     "extracted": "other charges for services", "on_page": "Road Fund Local 73,347 (p4 Road column: Local 35,284 + Sale of surplus 38,063 = 73,347)",
+     "issue": "About 52% of this budget-schedule line seems to be the sale of surplus 38,063, which makes sale of assets the dominant category. This is inferred because the two p4 figures add up exactly; the budget page itself does not print the breakdown. The extractor notes it in review."},
+    {"severity": "warning", "path": "detail_totals[8].amount", "page": 11,
+     "extracted": 182473, "on_page": "Intergovernmental 182,473 (no TOTAL RECEIPTS line printed)",
+     "issue": "The Highway Buyback schedule has no printed receipts total. This detail_totals entry repeats the single line and is not marked computed. The amount is correct."}
+  ]
+}
