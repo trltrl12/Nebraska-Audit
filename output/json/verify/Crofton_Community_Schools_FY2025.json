@@ -1,0 +1,11 @@
+{
+  "stem": "Crofton_Community_Schools_FY2025",
+  "values_checked": 183,
+  "issues": [
+    {"severity": "warning", "path": "receipts[0].source_page", "page": 2, "extracted": 5, "on_page": "Taxes Levied 3,243,046 printed on Statement of Activities (p2)", "issue": "amount is printed as-is on p2; source_page 5 points at the combined Taxes 3,530,665 line instead"},
+    {"severity": "warning", "path": "receipts[4].category", "page": 2, "extracted": "taxes (unlabeled)", "on_page": "Interest and Dividends 188,652 (p2) = 188,614 (p5) + 38 Bond Fund", "issue": "Statement of Activities treats the Bond Fund's 38 as interest (and the Bond Fund schedule p16 calls it Interest on Investments); residual 39 could be investment income (38) plus 1 rounding rather than taxes (unlabeled)"},
+    {"severity": "warning", "path": "receipts[19].category", "page": 9, "extracted": "other", "on_page": "Non-Revenue Receipts 17,607 = 5301 Insurance Adjustment 200 + 5690 Other Non-Revenue Receipts 9,556 (p9) + Depreciation Fund 7,851 (p12)", "issue": "kept whole as other; the report prints the breakdown, so the 200 insurance adjustment could be split out as reimbursements/refunds, the way Other Local Receipts was split"},
+    {"severity": "warning", "path": "detail[13].detail_category", "page": 8, "extracted": "county/other local governments", "on_page": "2110 County Fines and Licenses 9,901", "issue": "county pass-through of fines and licence fees; could be fines and forfeitures. The same applies to receipts[15] Intermediate Sources 9,901"},
+    {"severity": "warning", "path": "transfers_in", "page": 6, "extracted": 200000, "on_page": "Transfers In (Out): General (35,000), Depreciation 100,000, Employee Benefit 100,000 (p6); Activity 35,000 (p7); total 200,000 (p5)", "issue": "printed net figure recorded as transfers_in with transfers_out null. Governmental transfers do not net to zero: Depreciation and Employee Benefit each show 'Transfers from General Fund' 100,000 (p12, p13), but the General Fund shows only 35,000 out (p10). This is consistent as printed, but it looks like a report anomaly worth review"}
+  ]
+}
