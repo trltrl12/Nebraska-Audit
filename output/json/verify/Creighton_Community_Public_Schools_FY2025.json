@@ -1,0 +1,21 @@
+{
+  "stem": "Creighton_Community_Public_Schools_FY2025",
+  "values_checked": 190,
+  "issues": [
+    {"severity": "error", "path": "detail[61].amount", "page": 9,
+     "extracted": 274894, "on_page": "2710 Vehicle operation and purchasing - regular education 274,894 (p9); fund statement p3 General Fund Student transportation 224,894",
+     "issue": "Hidden transfer: 50,000 of this line is a transfer that the p3 General Fund column eliminates. It matches the Employee Benefit Fund's 'Transfers from the General Fund' 50,000 (p12), which is also recorded as other financing in detail[78]. The rules for transfers hidden inside spending lines require a split (spending 224,894 + other financing -50,000, with split_from and review). As recorded, the same 50,000 counts as both spending and a transfer."},
+    {"severity": "error", "path": "detail[65].amount", "page": 9,
+     "extracted": 100000, "on_page": "4700 Building improvements 100,000 (p9); p3 General Fund capital outlay 156,985 = Depreciation Fund capital outlay only (p11)",
+     "issue": "Hidden transfer: p3 has no General Fund capital outlay apart from the Depreciation Fund's 156,985, and 4300 Architecture 8,480 sits in O&M (598,250 = 503,460 + 1,726 + 14,933 + 8,480 + 69,651). So 4700 Building improvements 100,000 is part of the 200,000 transfer to the Depreciation Fund (p11 'Transfers from the General Fund' 200,000, detail[73]). This counts the same money twice; it should be recorded as other financing -100,000 (split_from, review), not as capital outlay spending."},
+    {"severity": "error", "path": "missing", "page": 9,
+     "extracted": null, "on_page": "General Fund instruction lines (1000 Instruction + 3500 State categorical + 6000 Federal programs, p7-9) total 4,060,673; p3 General Fund Instruction 3,960,673",
+     "issue": "The other 100,000 of the 200,000 transfer to the Depreciation Fund is inside the General Fund instruction lines, and the page doesn't show which line. The rules call for a contra line (section expenditure, -100,000, department instruction, split_from, review) plus an other financing line of -100,000. Neither is there. Hidden transfers total 250,000 (100,000 + 100,000 + 50,000), which matches the gap between the p9 schedule disbursements less the 8000 lines (6,031,633) and the p3 General Fund column less the Depreciation Fund (6,008,269 - 226,636 = 5,781,633). The notes say these transfers 'do not appear as lines in that schedule'; that is incorrect."},
+    {"severity": "warning", "path": "receipts[5].category", "page": 3,
+     "extracted": "other", "on_page": "Other local receipts 18,824",
+     "issue": "The p6 schedule breaks this line down exactly: 1421 312 + 1800 225 + 1920 10,050 + 1925 1,500 + 1955 6,187 + 1980 550 = 18,824. The dominant part is donations/contributions (11,550, 61%), so the line could take that category plus a review naming the mix instead of 'other'."},
+    {"severity": "warning", "path": "detail[64].category", "page": 9,
+     "extracted": "capital outlay", "on_page": "4300 Architecture and engineering 8,480",
+     "issue": "The p3 fund statement counts this 8,480 under Operation and maintenance of plant, not capital outlay. The category doesn't match the report's own function classification."}
+  ]
+}
