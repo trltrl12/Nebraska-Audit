@@ -1,0 +1,15 @@
+{
+  "stem": "Sarpy_County_SID_246_FY2025",
+  "values_checked": 91,
+  "issues": [
+    {"severity": "warning", "path": "detail", "page": 4,
+     "extracted": "Actual on Budgetary Basis column", "on_page": "Schedules print both 'Actual on GAAP Basis' and 'Actual on Budgetary Basis' columns (pp4-5)",
+     "issue": "Extractor chose the budgetary-basis actuals (e.g. GF Property Taxes 106,109 vs GAAP 97,679; DSF Net Capital Outlay 29,329 vs 44,296), so detail does not tie to the GAAP statement on p2. Defensible (matches budget comparison), but an assumption; noted in notes."},
+    {"severity": "warning", "path": "detail[17].category", "page": 5,
+     "extracted": "debt service interest", "on_page": "Collection Fees - County Treasurer 7,360 (Debt Service Fund)",
+     "issue": "Treasurer collection fee is not debt interest; the statement-level line (disbursements[1]) and the GF detail line use general government. Inconsistent function for the same label. Same for detail[19] Professional Fees 1,466 (debt service interest)."},
+    {"severity": "warning", "path": "detail[5].detail_category", "page": 4,
+     "extracted": "professional/contract services", "on_page": "Fiscal Agent Fees 500 (General Fund)",
+     "issue": "Same label in the DSF (detail[18]) is debt interest and fees; inconsistent object category for the same label."}
+  ]
+}

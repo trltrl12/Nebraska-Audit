@@ -1,0 +1,12 @@
+{
+  "stem": "Sarpy_County_SID_248_FY2025",
+  "values_checked": 85,
+  "issues": [
+    {"severity": "warning", "path": "ending_cash.amount", "page": 1,
+     "extracted": 119139, "on_page": "Cash - County Treasurer 119,139; Investments 155,000 (Total column)",
+     "issue": "GAAP rule defines ending_cash as 'cash and cash equivalents/investments' from the balance sheet; extractor kept investments 155,000 separate in ending_investments (so cash and investments together would be 274,139). Defensible since investments print on their own line, but an assumption."},
+    {"severity": "warning", "path": "detail[14].category", "page": 5,
+     "extracted": "debt service interest", "on_page": "Collection fee - County Treasurer 883 (Debt Service Fund)",
+     "issue": "Treasurer collection fee is not debt interest; the statement-level line (disbursements[0]) and GF detail use general government. Inconsistent function for the same label."}
+  ]
+}
