@@ -1,0 +1,21 @@
+{
+  "stem": "Gering_Ft_Laramie_Irrigation_District_FY2025",
+  "values_checked": 68,
+  "issues": [
+    {"severity": "error", "path": "missing", "page": null,
+     "extracted": null, "on_page": "Report p7 (the rest of the Statements of Revenue, Expenses, and Changes in Net Position: nonoperating revenue/expense, capital grants, change in net position, beginning/ending net position) is not in the trimmed PDF. Trimmed pages are report pp4, 5, 6, 8",
+     "issue": "statement lines are missing from the JSON. Nonoperating revenues (e.g. interest income), interest expense and capital grants aren't recorded as receipts/disbursements/other_financing, and reported_totals cover operating items only. Needs a re-trim that includes report p7, then re-extraction"},
+    {"severity": "error", "path": "business_type.beginning.source_page", "page": 2,
+     "extracted": 1, "on_page": "TOTAL NET POSITION 2024 column 14,596,083 is on trimmed p2",
+     "issue": "the amount is right but the cited page is wrong: p1 doesn't show 14,596,083"},
+    {"severity": "warning", "path": "business_type.adjustments[0].amount", "page": 4,
+     "extracted": 9257241, "on_page": "not printed on any trimmed page",
+     "issue": "the 9,257,241 isn't printed anywhere in the trimmed PDF (pp1-4 checked). It can be rebuilt exactly from p1/p4 figures: capital grants cash 8,528,658 + grant receivable increase 668,425 (1,347,132 - 678,707) = 9,197,083; plus interest income received 139,902; less interest expense 79,744 (paid 102,582 - decrease in interest payable 22,838 (65,831 - 42,993)); total 9,257,241. This suggests p7 holds capital grants of about 9,197,083 (other_financing), interest income of about 139,902 (receipts) and interest expense of about 79,744 (disbursements), but that is an inference, not a printed figure. The cited source_page 2 shows only the ending balance"},
+    {"severity": "warning", "path": "receipts[0].category", "page": 3,
+     "extracted": "charges for services/fees", "on_page": "User assessments 2,247,661",
+     "issue": "irrigation district assessments are levied on land served; 'special assessments' could apply. Defensible as charges for water delivery"},
+    {"severity": "warning", "path": "disbursements[*].category", "page": 3,
+     "extracted": "utilities", "on_page": "operating expenses of an irrigation district (incl. Gering Valley flood control 12,272)",
+     "issue": "the category rules list water and drainage districts under 'natural resources/conservation'. Utilities is defensible for irrigation water delivery, but the choice should be consistent across irrigation districts"}
+  ]
+}
