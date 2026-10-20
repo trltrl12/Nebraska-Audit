@@ -1,0 +1,21 @@
+{
+  "stem": "Region_3_Behavioral_Health_FY2025",
+  "values_checked": 65,
+  "issues": [
+    {"severity": "error", "path": "other_financing.amount", "page": 6,
+     "extracted": -149170.79, "on_page": "Net proceeds on sale of assets 1,885.21; Debt service (151,056.00); Total other financing sources (uses) (149,170.79)",
+     "issue": "Debt service (151,056.00) is a payment printed below Total expenditures. Under the outside_printed_total rule it should be a disbursement (debt service principal, outside_printed_total: true), not other financing. other_financing should be only the sale-of-assets proceeds, 1,885.21. With that change the identity still holds."},
+    {"severity": "error", "path": "missing", "page": 6,
+     "extracted": null, "on_page": "Debt service (151,056.00) under Other Financing Sources (Uses)",
+     "issue": "The debt service payment isn't in disbursements[]. It is spending (lease/debt principal), currently netted into other_financing. Add it with outside_printed_total: true; reported_totals stays 11,544,353.05."},
+    {"severity": "warning", "path": "ending_investments", "page": 4,
+     "extracted": null, "on_page": "Certificates of deposit 248,237.31",
+     "issue": "The governmental funds Balance Sheet lists certificates of deposit separately from cash, so ending_investments could be 248,237.31 (informational). ending_cash 5,573,457.48 is cash only."},
+    {"severity": "warning", "path": "balance_sheet.liabilities[3].original_label", "page": 1,
+     "extracted": "Right-to-use lease liability (current)", "on_page": "Right-to-use lease liability",
+     "issue": "'(current)' isn't printed. The extractor added it to tell the line apart from the noncurrent one (same applies to liabilities[5] '(noncurrent)'). Amounts are correct."},
+    {"severity": "warning", "path": "disbursements[24].category", "page": 6,
+     "extracted": "debt service principal", "on_page": "Lease payments (lease renewals) 3,500.96",
+     "issue": "Printed among operating expenditures, not as debt service. It could be rent/leases under health/welfare. Defensible, and already marked review."}
+  ]
+}
