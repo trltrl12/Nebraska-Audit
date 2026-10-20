@@ -1,0 +1,12 @@
+{
+  "stem": "Parkview_Lodge_Assisted_Living_FY2025",
+  "values_checked": 44,
+  "issues": [
+    {"severity": "error", "path": "report_discrepancies", "page": 2, "extracted": "no entry", "on_page": "Operating expense lines add to 744,609; printed Total operating expenses 744,608",
+     "issue": "The page doesn't add up, and report_discrepancies doesn't record it. The 14 operating expense lines (515,674 + 60,021 + 1,829 + 2,075 + 40,420 + 7,341 + 1,125 + 36,616 + 14,763 + 1,838 + 16,515 + 10,298 + 9,287 + 26,807) add to 744,609, but the printed total is 744,608 (difference -1). Operating loss (148,476), change in net position (80,411) and ending 232,176 all follow from the printed 744,608. All digits were checked visually and match. With the line items, the business_type roll-forward gives 232,175, not 232,176."},
+    {"severity": "warning", "path": "disbursements[11].category", "page": 2, "extracted": "hospital/health care", "on_page": "Interest expense 10,298",
+     "issue": "Interest expense is printed within operating expenses, but 'debt service interest' is a specific category that fits."},
+    {"severity": "warning", "path": "report_discrepancies[0].check", "page": 1, "extracted": "balance", "on_page": "Total current assets 16,664 vs lines -18,090 + 34,753 = 16,663",
+     "issue": "The balance sheet itself balances (398,160 = 165,984 + 232,176). The 1 difference is a subtotal not adding up, so 'totals' is the more accurate check type."}
+  ]
+}

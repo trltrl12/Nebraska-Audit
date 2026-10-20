@@ -1,0 +1,16 @@
+{
+  "stem": "Pathfinder_Irrigation_District_FY2025",
+  "values_checked": 54,
+  "issues": [
+    {"severity": "warning", "path": "receipts[4].amount", "page": 2, "extracted": 50681, "on_page": 50681,
+     "issue": "Not a misread: the page clearly prints Interest income 50,681, and every other nonoperating figure reads correctly (43,773; (36,634); (7,390)). The report itself is inconsistent: the lines add to 50,430, but the printed total is 55,430, and change in net position 214,636 and ending 2,322,113 both follow from 55,430. Cash flow interest received is 55,680 (p3). That points to a typo in the report, where interest income should be 55,681. The report_discrepancies entry (+5,000) is correct. As extracted, the business_type roll-forward (2,107,477 + 3,895,482 - 3,685,846 = 2,317,113) is 5,000 short of the 2,322,113 ending. A person has to decide whether to keep 50,681 as printed or use 55,681."},
+    {"severity": "warning", "path": "receipts[0].category", "page": 2, "extracted": "charges for services/fees", "on_page": "Operation and maintenance assessments",
+     "issue": "Irrigation district O&M assessments are levied per acre on land in the district. 'special assessments' is arguably the better fit; charges for services is defensible."},
+    {"severity": "warning", "path": "disbursements[0].category", "page": 2, "extracted": "utilities", "on_page": "General and administrative (and disbursements[1]-[10])",
+     "issue": "Irrigation district operating expenses are listed by object/division with no function. The extractor rules list water and drainage districts under 'natural resources/conservation', which may fit better than 'utilities'. The lines also lack the 'listed by object' review flag the rules call for."},
+    {"severity": "warning", "path": "balance_sheet.liabilities[5].category", "page": 1, "extracted": "accrued liabilities", "on_page": "Accrued compensated absences (under NONCURRENT LIABILITIES) 132,931",
+     "issue": "The rules put compensated absences 'due soon' in accrued liabilities, but this one is printed as noncurrent; 'other liabilities' or 'debt - due in more than one year' may fit better."},
+    {"severity": "warning", "path": "balance_sheet.liabilities[3].category", "page": 1, "extracted": "other liabilities", "on_page": "Prepaid lease liability 100",
+     "issue": "A prepaid lease is rent received in advance, so 'unearned revenue' may be the better category."}
+  ]
+}
