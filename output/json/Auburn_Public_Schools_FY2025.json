@@ -3,7 +3,7 @@
 "entity_type": "school district",
 "fiscal_year_end": "2025-08-31",
 "basis": "cash",
-"extraction_attempt": 1,
+"extraction_attempt": 2,
 "beginning_cash": {"amount": 5308693, "source_page": 4},
 "beginning_investments": null,
 "beginning_fund_balance": null,
@@ -29,7 +29,7 @@
 {"fund_type":"governmental","category":"charges for services/fees","original_label":"Student fees","amount":12095,"source_page":4},
 {"fund_type":"governmental","category":"investment income","original_label":"Interest income","amount":18865,"source_page":4},
 {"fund_type":"governmental","category":"reimbursements/refunds","original_label":"Nonrevenue receipts","amount":2332,"source_page":4,"review":"p6 shows this as insurance adjustments (5301)"},
-{"fund_type":"governmental","category":"other","original_label":"Other local receipts","amount":880884,"source_page":4,"review":"unexplained; includes 490,000 labelled Transfers from General on Depreciation Fund schedule (p9) and Activity fund receipts 278,521"}
+{"fund_type":"governmental","category":"other","original_label":"Other local receipts","amount":390884,"source_page":4,"computed":"Other local receipts 880,884 (p4) minus 490,000 Transfers from General (p9)","split_from":"Other local receipts 880,884 (p4)","review":"remainder after removing the 490,000 transfer; mixed line: Activity fund receipts 278,521 (student activity) plus General/Special Building/Bond/QCPU other receipts"}
 ],
 "disbursements": [
 {"fund_type":"governmental","category":"instruction","original_label":"Instruction","amount":8704623,"source_page":4},
@@ -52,13 +52,13 @@
 {"fund_type":"governmental","category":"capital outlay","original_label":"Capital outlay","amount":1805,"source_page":4},
 {"fund_type":"governmental","category":"food service","original_label":"Nutrition Program","amount":492839,"source_page":4}
 ],
-"transfers_in": null,
+"transfers_in": {"amount": 490000, "source_page": 9, "computed": "Depreciation Fund 'Transfers from General' 490,000 (p9), carved out of Other local receipts 880,884 (p4); no matching transfer out on General Fund schedule (p8) or combining schedule (p5)"},
 "transfers_out": null,
 "debt_proceeds": null,
 "other_financing": null,
 "adjustments": [],
 "reported_totals": {
-"governmental": {"receipts": {"amount": 17505154, "source_page": 4, "includes": []},
+"governmental": {"receipts": {"amount": 17505154, "source_page": 4, "includes": ["transfers_in"]},
                  "disbursements": {"amount": 15474247, "source_page": 4, "includes": []}},
 "business-type": null
 },
@@ -95,6 +95,9 @@
 "ending_cash": {"amount": 7339600, "source_page": 4},
 "ending_investments": null,
 "ending_fund_balance": null,
+"report_discrepancies": [
+{"check":"totals","difference":390000,"source_page":9,"note":"Depreciation Fund shows Transfers from General 490,000 (p9) but no matching transfer out of the General Fund appears anywhere: p4 Transfers in(out) General is (120,000); p5 General transfers (120,000); p8 Fund Transfers Out 120,000, and General Fund disbursements 14,095,479 (p5) exclude it. Interfund transfers in 510,000 (490,000 + 20,000 + 100,000) vs out 120,000. The 490,000 is counted in printed total receipts 17,505,154 and no spending line contains the outflow, so spending is kept as printed."}
+],
 "detail": [
 {"schedule":"Budget and Actual - General Fund","fund_type":"governmental","fund":"General","department":"Local Sources","section":"revenue","category":"property tax","detail_category":"property tax","original_label":"1100 Taxes Levied/Assessed by the School District","amount":6270622,"budget_final":null,"source_page":6},
 {"schedule":"Budget and Actual - General Fund","fund_type":"governmental","fund":"General","department":"Local Sources","section":"revenue","category":"other taxes","detail_category":"other local taxes","original_label":"1115 Carline Taxes","amount":5847,"budget_final":null,"source_page":6},
@@ -203,7 +206,7 @@
 {"schedule":"Budget and Actual - General Fund","fund_type":"governmental","fund":"General","department":null,"section":"other financing","original_label":"8000 Fund Transfers Out","amount":-120000,"budget_final":null,"source_page":8},
 
 {"schedule":"Depreciation Fund Budget and Actual","fund_type":"governmental","fund":"Depreciation","department":"Local Sources","section":"revenue","category":"investment income","detail_category":"investment income","original_label":"Interest on Investments","amount":1067,"budget_final":null,"source_page":9},
-{"schedule":"Depreciation Fund Budget and Actual","fund_type":"governmental","fund":"Depreciation","department":"Local Sources","section":"other financing","original_label":"Transfers from General","amount":490000,"budget_final":null,"source_page":9,"review":"not matched by a transfer out on General Fund schedule; statement p4 includes it in other local receipts"},
+{"schedule":"Depreciation Fund Budget and Actual","fund_type":"governmental","fund":"Depreciation","department":"Local Sources","section":"other financing","original_label":"Transfers from General","amount":490000,"budget_final":null,"source_page":9,"review":"one-sided: no matching transfer out on General Fund schedule (p8) or combining schedule (p5); statement p4 includes it in Other local receipts (split out to transfers_in)"},
 {"schedule":"Depreciation Fund Budget and Actual","fund_type":"governmental","fund":"Depreciation","department":"Central Services","section":"expenditure","category":"support services","detail_category":"not itemized","original_label":"Central Services - Other Support Services","amount":43116,"budget_final":null,"source_page":9},
 
 {"schedule":"Activities Fund Budget and Actual","fund_type":"governmental","fund":"Activities","department":"Local Receipts","section":"revenue","category":"charges for services/fees","detail_category":"student activity receipts","original_label":"Student Organization membership Dues and Fees","amount":37489,"budget_final":null,"source_page":10},
@@ -223,5 +226,5 @@
 {"schedule":"Activities Fund Budget and Actual","fund":"Activities","section":"revenue","amount":298521,"source_page":10,"includes":["other financing"]},
 {"schedule":"Activities Fund Budget and Actual","fund":"Activities","section":"expenditure","amount":317725,"source_page":10}
 ],
-"notes": "Modified cash basis; GAAP-like net position statement with no liabilities. Top-level receipts/disbursements from Total Governmental Funds column (p4); fund columns include General fund plus Depreciation and Employee Benefit funds in the General column (all governmental, school nutrition included, no business-type funds). Beginning/ending cash are fund balances 5,308,693 to 7,339,600 (cash on hand + county treasurer). Interfund transfers net to zero in the total column (General -120,000, Activity +20,000, Nutrition +100,000), so transfers_in/out are null; Activity fund receipts 278,521 on p4 exclude the 20,000 transfer. The Depreciation Fund schedule (p9) shows 490,000 Transfers from General included in its 491,067 receipts, but the General fund schedule shows no matching transfer out; the p4 total receipts 17,505,154 (equal to p5 combining schedule total) include it in other local receipts 880,884. Statement p4 labels Support services - students/instruction appear swapped vs the p7 General Fund schedule (guidance/health totals 756,784 are 'Student'; 272,366 are 'Instruction'); statement lines kept as printed. Detail: General Fund schedule (p6-8) records the General Fund proper (excludes Depreciation/Employee Benefit funds); its printed Grand Total of All Receipts 15,632,880 includes non-revenue 2,332; its Total Disbursements 14,215,479 includes the 120,000 transfer out (recorded as other financing -120,000). Budget amounts for General Fund are printed only as grand totals (14,357,759 receipts; 14,606,106 disbursements), so budget_final is null per line. Combining schedule on p5 not itemized (fund totals only, duplicates p4). Employee Benefit, Bond, Special Building, Student Fee, QCPUF, Contingency, Nutrition fund schedules not in trimmed PDF. Detail category for expenditures all 'not itemized' since schedule is by function only. Read pages 1-10 of 10"
+"notes": "Modified cash basis; GAAP-like net position statement with no liabilities. Top-level receipts/disbursements from Total Governmental Funds column (p4); fund columns include General fund plus Depreciation and Employee Benefit funds in the General column (all governmental, school nutrition included, no business-type funds). Beginning/ending cash are fund balances 5,308,693 to 7,339,600 (cash on hand + county treasurer). FIX PASS (attempt 2): the 490,000 Transfers from General (p9) was moved out of Other local receipts (880,884 -> 390,884, split_from) into transfers_in; printed total receipts 17,505,154 includes it (includes: transfers_in). No page shows where the 490,000 leaves the General Fund (no elimination column; p5 General disbursements 14,095,479 = p8 14,215,479 less the 120,000 transfer; p4 General transfers (120,000) only), so disbursements are kept as printed and the one-sided transfer is recorded in report_discrepancies. Other transfers (General -120,000, Activity +20,000, Nutrition +100,000) net to zero in the total column and are not recorded at top level. Activity fund receipts 278,521 on p4 exclude the 20,000 transfer. Statement p4 labels Support services - students/instruction appear swapped vs the p7 General Fund schedule (guidance/health totals 756,784 are 'Student'; 272,366 are 'Instruction'); statement lines kept as printed. Detail: General Fund schedule (p6-8) records the General Fund proper (excludes Depreciation/Employee Benefit funds); its printed Grand Total of All Receipts 15,632,880 includes non-revenue 2,332; its Total Disbursements 14,215,479 includes the 120,000 transfer out (recorded as other financing -120,000). On p7 the heading over 2120-2181 is printed 'Support Services - Staff' but its subtotal reads 'Total Support Services - Student'; department recorded as Support Services - Student. Budget amounts for General Fund are printed only as grand totals (14,357,759 receipts; 14,606,106 disbursements), so budget_final is null per line. Combining schedule on p5 not itemized (fund totals only, duplicates p4). Employee Benefit, Bond, Special Building, Student Fee, QCPUF, Contingency, Nutrition fund schedules not in trimmed PDF (original p27 missing). Detail category for expenditures all 'not itemized' since schedule is by function only. Read pages 1-10 of 10"
 }
