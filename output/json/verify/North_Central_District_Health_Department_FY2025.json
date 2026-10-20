@@ -1,0 +1,22 @@
+{
+  "stem": "North_Central_District_Health_Department_FY2025",
+  "values_checked": 43,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "receipts[1].split_from",
+      "page": 2,
+      "extracted": "Operating Grants and Contributions split into Federal 1,298,404 (receipts[1]) and State 544,670 (receipts[2]) from budget schedule p3",
+      "on_page": "p2: Operating Grants and Contributions 1,843,074 (single line); p3 budget schedule: Federal Receipts 1,298,404, State Receipts 544,670, Local Receipts 909,230",
+      "issue": "[fixed] kept split: the report's own p3 schedule breaks the line down to the dollar (same as other fund-schedule splits); marked computed and review. The report never prints a breakdown of the 'Operating Grants and Contributions' line itself. The split relies on the budget schedule's Federal + State lines happening to add up to it (exact tie, and Local 909,230 = charges 844,231 + interest 64,849 + other 150). That is very plausible, but the rule only allows split_from when the report prints the breakdown of that line. Either keep one line of 1,843,074 (dominant category federal grants, review 'broad group; detail on p3') or have a person approve the split."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[19].detail_category",
+      "page": 4,
+      "extracted": "repairs and maintenance",
+      "on_page": "Vehicle Expenses 6,884",
+      "issue": "On p2 the report counts this line under 'Seminars, Training and Travel' 21,056 (= Education and Training 3,022 + Meetings and Conferences 6,141 + Mileage 3,615 + Travel 1,394 + Vehicle Expenses 6,884). It may be better as 'dues, training and travel' or 'fuel'. Judgment call."
+    }
+  ]
+}

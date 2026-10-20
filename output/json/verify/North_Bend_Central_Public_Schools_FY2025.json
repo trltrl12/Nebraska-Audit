@@ -1,0 +1,24 @@
+{
+  "stem": "North_Bend_Central_Public_Schools_FY2025",
+  "values_checked": 368,
+  "issues": [
+    {"severity": "warning", "path": "disbursements[35].original_label", "page": 18,
+     "extracted": "Other Purchased Services & Supplies", "on_page": "Other Purchased Services",
+     "issue": "The cited page (Total Governmental Funds column, Exhibit III p7) prints 'Other Purchased Services'. The '& Supplies' wording is from the General Fund columns page (trimmed p12). The amount 217,977.41 is correct (97,550.41 + 800 + 470 + 119,157)."},
+    {"severity": "warning", "path": "receipts[6].category", "page": 16,
+     "extracted": "other (Non-Revenue Receipts 530,040.94, includes 5200 Allocation from General Fund 146,260.00 + 100,942.57)", "on_page": "Schedules C/D (pp25-26) print '5200 Allocation from General Fund' as receipts",
+     "issue": "Handled inconsistently. In detail[] the two allocations (247,202.57) are 'other financing', but in receipts they stay inside Non-Revenue Receipts as revenue, while transfers_in holds only 141,500. The General Fund shows no matching outflow, so this is a one-sided transfer. decision_needed already covers it, but whoever settles it should apply the answer to receipts and transfers_in too."},
+    {"severity": "warning", "path": "decision_needed", "page": 25,
+     "extracted": "detail 5690 Other Non-Revenue Receipts 188,451.00 (Depreciation) and 65,000.00 (Special Building), category other", "on_page": "5690 Other Non-Revenue Receipts 188,451.00 (p25); 65,000.00 (p31)",
+     "issue": "Round, unexplained non-revenue receipts: 56% of the Depreciation Fund's receipts and the Special Building Fund's only non-tax, non-interest line. They may be interfund money (no sending fund shows it), like the allocations already in decision_needed. Not raised as a question for a person."},
+    {"severity": "warning", "path": "disbursements[37].fund_type", "page": 18,
+     "extracted": "governmental", "on_page": "School Nutrition Fund column inside 'Governmental Funds' statement",
+     "issue": "The extractor rules list school nutrition as a business-type example. The report itself presents it as a governmental fund (and it is in Total Governmental Funds), so governmental is defensible. This is an assumption the extractor made (see notes)."},
+    {"severity": "warning", "path": "detail[10].category", "page": 21,
+     "extracted": "intergovernmental/state aid / county/other local governments", "on_page": "2110 County Fines and Licenses 44,197.88",
+     "issue": "Fine and license money that the county passes through. 'fines and forfeitures' could also fit. Judgment call."},
+    {"severity": "warning", "path": "detail[43].detail_category", "page": 36,
+     "extracted": "dues, training and travel", "on_page": "Other Items",
+     "issue": "Every Schedule M 'Other Items' line (object 800), and Schedule G '3100-800 Other' (detail[248]), is mapped to dues, training and travel. The page doesn't say what they hold, so 'miscellaneous expenditure' with a review flag may be more accurate."}
+  ]
+}
