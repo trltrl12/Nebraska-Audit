@@ -1,0 +1,27 @@
+{
+  "stem": "Loup_County_FY2025",
+  "values_checked": 80,
+  "issues": [
+    {"severity": "error", "path": "detail[3].category", "page": 8,
+     "extracted": "other / miscellaneous revenue", "on_page": "Local 267,360 (General Fund)",
+     "issue": "Countywide interest income is 202,747 (p2) and total Local outside the General Fund is only 7,674 (Road 493 + Non-Major 7,181, p4), so at least 195,073 (73%) of General Fund Local is interest. Under the rules this should be investment income / investment income with review 'broad group (interest, charges, misc)'. The statement-level receipts already put this money mostly in investment income, so the categories are inconsistent within the report."},
+    {"severity": "error", "path": "detail[33].category", "page": 7,
+     "extracted": "other / miscellaneous revenue", "on_page": "Local 7,181 (Total Non-Major: Preservation & Modernization 695, STOP 800, Ambulance 5,686, p6)",
+     "issue": "Ambulance Fund Local 5,686 matches exactly the p2 Public assistance Charges for Services of 5,686 (79% of the line), and the Preservation & Modernization fees are charges too. Should be charges for services/fees (detail e.g. other charges for services or ambulance/rescue fees) with review, not other."},
+    {"severity": "error", "path": "detail[17].category", "page": 8,
+     "extracted": "streets/highways", "on_page": "Public Works: Noxious Weed 26,472",
+     "issue": "The disbursement rules list noxious weed control under natural resources/conservation. The heading on the page is Public Works, but the function category should follow the rule list."},
+    {"severity": "warning", "path": "receipts[5].split_from", "page": 2,
+     "extracted": "Local 275,034 split 52,517 / 202,747 / 19,770", "on_page": "Charges for Services 52,517; Interest income 202,747; Miscellaneous 19,770",
+     "issue": "Local is not broken down directly anywhere. The split comes from the statement of activities, whose lines add up to Local exactly (and Intergovernmental 884,793 = 524,760 + 21,595 + 338,438). Defensible, but the rules only allow a split where the report prints a breakdown of that line; applies to receipts[5], [6] and [7]."},
+    {"severity": "warning", "path": "detail[0].split_from", "page": 8,
+     "extracted": "General Fund Taxes 689,243 split property 643,535 / motor vehicle 45,708", "on_page": "Taxes 689,243",
+     "issue": "The split uses the countywide p2 breakdown. The General Fund holds every non-lodging tax (Road/Bridge taxes 0, Non-Major taxes = lodging 14,724), so the split is correct arithmetically, but it is inferred and not printed for the fund; applies to detail[0] and detail[1]."},
+    {"severity": "warning", "path": "detail[14]", "page": 8,
+     "extracted": "Miscellaneous 397,868 as general government", "on_page": "Miscellaneous 397,868 under General Government",
+     "issue": "The General Government lines in General Fund detail total 732,643, but the p5 combining statement shows general government 636,564. The 96,079 gap equals public safety 48,747 + public assistance 2,167 + culture and recreation 12,720 + capital outlay 32,445 that sit inside Miscellaneous. As a result the detail function split doesn't tie to the statement (the extractor already marked review)."},
+    {"severity": "warning", "path": "detail[26].category", "page": 9,
+     "extracted": "streets/highways (Road 937,325; also detail[30] Bridge 404,422)", "on_page": "DISBURSEMENTS 937,325 / 404,422",
+     "issue": "These are single-line totals with no breakdown. Per p4 they include capital outlay of 134,863 (Road) and 363,361 (Bridge), most of the Bridge figure. Correctly kept as printed, but the function category hides the capital outlay."}
+  ]
+}
