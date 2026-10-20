@@ -1,0 +1,23 @@
+{
+  "stem": "Hooker_County_FY2025",
+  "values_checked": 92,
+  "issues": [
+    {"severity": "error", "path": "detail[0].category", "page": 7,
+     "extracted": "property tax", "on_page": "Taxes 864,071",
+     "issue": "The line is left unsplit, with detail_category 'taxes (unlabeled)', but category is set to 'property tax'. The two fields contradict each other. Under the rule, an unsplit combined tax line takes 'taxes (unlabeled)' for both fields. Per p2 it is property 820,926 plus motor vehicle 43,145."},
+    {"severity": "warning", "path": "missing", "page": 4,
+     "extracted": "non-major combining detail for ARPA, STOP, Grant and Preservation only",
+     "on_page": "Non-Major Funds column (p4): Taxes 54,004, Intergovernmental 71,784, Local 5,900, Public safety 16,075, Capital outlay 107,056, Principal and interest 10,662, Transfers in 19,599. The p6 combining page covers only Intergovernmental 53,017, Local 2,699 and Public safety 998.",
+     "issue": "The first non-major combining page (report p22: Visitors Improvement, 911, Highway Buyback, Emergency Bridge etc.) is not in the trimmed PDF, so about 18,767 of intergovernmental, 3,201 of local, 54,004 of lodging tax, and 133,795 of spending plus transfers have no detail lines. This is a trim gap, not an extraction error; the extractor mentions it in notes."},
+    {"severity": "warning", "path": "detail[17].category", "page": 7,
+     "extracted": "streets/highways", "on_page": "Public Works: Noxious Weed 23,806",
+     "issue": "The category rules list noxious weed control under natural resources/conservation. Keeping it as public works matches the statement's function heading and is marked review, so it is defensible."},
+    {"severity": "warning", "path": "receipts[4].category", "page": 4,
+     "extracted": "intergovernmental/state aid", "on_page": "Intergovernmental 462,106 (incl. Grant Fund capital grant 53,017, p2/p6)",
+     "issue": "The 53,017 Grant Fund capital grant inside Intergovernmental may be federal. The source is not stated; review is already set."},
+    {"severity": "warning", "path": "receipts[5]", "page": 2,
+     "extracted": "Local 132,740 split 43,183 / 58,593 / 30,964",
+     "on_page": "Statement of Activities: Charges for services 43,183, Interest income 58,593, Miscellaneous 30,964",
+     "issue": "The split ties exactly. However, the charges-for-services column on p2 is a program-receipts column, not a printed breakdown of the 'Local' line, so the split relies on the assumption that all charges for services sit in Local."}
+  ]
+}
