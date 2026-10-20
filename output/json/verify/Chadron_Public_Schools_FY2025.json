@@ -2,20 +2,45 @@
   "stem": "Chadron_Public_Schools_FY2025",
   "values_checked": 143,
   "issues": [
-    {"severity": "error", "path": "report_discrepancies", "page": 2,
-     "extracted": "no balance entry", "on_page": "Cash in bank 5,270,298 + Cash at county treasurer 1,164,282 = 6,434,580; TOTAL ASSETS printed 6,434,581",
-     "issue": "The printed balance-sheet asset lines add to 6,434,580, not the printed total 6,434,581 (difference +1). Equity lines do add to 6,434,581. The page itself doesn't add up, but report_discrepancies has no entry for it. On p5 the Cash in bank fund columns also add to 5,270,299 against a printed 5,270,298."},
-    {"severity": "warning", "path": "receipts[0].category", "page": 3,
-     "extracted": "taxes (unlabeled)", "on_page": "Local receipts 6,206,987",
-     "issue": "Mixed local line kept as taxes (unlabeled). This is defensible because no schedule prints a breakdown of this exact line. However, the Statement of Activities (p1) general receipts Taxes 5,377,961 + Interest 128,215 + Local receipts 40,265 plus charges for services 660,546 add exactly to 6,206,987. About 660,546 is charges for services (student activities, nutrition sales) and 128,215 is interest. The note saying 'the report gives no tax breakdown' is not accurate."},
-    {"severity": "warning", "path": "disbursements[3].original_label", "page": 3,
-     "extracted": "Student support (Student Activity Fund)", "on_page": "Student support 502,428 (Student Activity Fund column)",
-     "issue": "Split by fund column. The amounts are right (893,694 + 502,428 = 1,396,122), but the label suffix is not printed."},
-    {"severity": "warning", "path": "disbursements[14].category", "page": 4,
-     "extracted": "debt service principal", "on_page": "Debt service 210,426",
-     "issue": "Principal and interest are not separated on the page, so the whole line is assumed to be principal."},
-    {"severity": "warning", "path": "detail[10].category", "page": 6,
-     "extracted": "intergovernmental/state aid / county/other local governments", "on_page": "2110 County fines and license fees 84,324",
-     "issue": "County-remitted fines and license fees. This could arguably be fines and forfeitures; it is treated consistently with the 'County receipts' line in receipts."}
+    {
+      "severity": "warning",
+      "path": "report_discrepancies",
+      "page": 2,
+      "extracted": "no balance entry",
+      "on_page": "Cash in bank 5,270,298 + Cash at county treasurer 1,164,282 = 6,434,580; TOTAL ASSETS printed 6,434,581",
+      "issue": "[fixed: report_discrepancies entry added] The printed balance-sheet asset lines add to 6,434,580, not the printed total 6,434,581 (difference +1). Equity lines do add to 6,434,581. The page itself doesn't add up, but report_discrepancies has no entry for it. On p5 the Cash in bank fund columns also add to 5,270,299 against a printed 5,270,298."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[0].category",
+      "page": 3,
+      "extracted": "taxes (unlabeled)",
+      "on_page": "Local receipts 6,206,987",
+      "issue": "Mixed local line kept as taxes (unlabeled). This is defensible because no schedule prints a breakdown of this exact line. However, the Statement of Activities (p1) general receipts Taxes 5,377,961 + Interest 128,215 + Local receipts 40,265 plus charges for services 660,546 add exactly to 6,206,987. About 660,546 is charges for services (student activities, nutrition sales) and 128,215 is interest. The note saying 'the report gives no tax breakdown' is not accurate."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[3].original_label",
+      "page": 3,
+      "extracted": "Student support (Student Activity Fund)",
+      "on_page": "Student support 502,428 (Student Activity Fund column)",
+      "issue": "Split by fund column. The amounts are right (893,694 + 502,428 = 1,396,122), but the label suffix is not printed."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[14].category",
+      "page": 4,
+      "extracted": "debt service principal",
+      "on_page": "Debt service 210,426",
+      "issue": "Principal and interest are not separated on the page, so the whole line is assumed to be principal."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[10].category",
+      "page": 6,
+      "extracted": "intergovernmental/state aid / county/other local governments",
+      "on_page": "2110 County fines and license fees 84,324",
+      "issue": "County-remitted fines and license fees. This could arguably be fines and forfeitures; it is treated consistently with the 'County receipts' line in receipts."
+    }
   ]
 }
