@@ -1,0 +1,21 @@
+{
+  "stem": "Eastern_Sarpy_County_Suburban_Fire_Protection_District_FY2025",
+  "values_checked": 56,
+  "issues": [
+    {"severity": "error", "path": "detail[9].amount", "page": 4,
+     "extracted": -403850, "on_page": 403850,
+     "issue": "Wrong sign. The line is labelled 'Transfer to other funds', but the schedule adds it: excess 704,363 + 403,850 = 1,108,213, and 'Net other financing uses' is printed positive 403,850. The fund statement p2 also shows General Fund 'Transfer from other fund' +403,850 and Debt Service (403,850). So this is an inflow (+) to the General Fund, and detail[9] and detail[18] both being -403,850 makes the two sides fail to net to zero"},
+    {"severity": "error", "path": "detail[9].budget_final", "page": 4,
+     "extracted": -415000, "on_page": 415000,
+     "issue": "Same sign problem in the budget column: budget excess (394,079) + 415,000 = 20,921, so the budgeted transfer is an inflow to the General Fund"},
+    {"severity": "warning", "path": "decision_needed", "page": 4,
+     "extracted": null, "on_page": "General 'Transfer to other funds' 403,850 (added); Debt Service 'Transfer from other funds' (403,850) (subtracted)",
+     "issue": "The transfer labels contradict the arithmetic on both budget schedules and on the p2 fund statement (money moves from Debt Service into General, the reverse of what the labels say). There is no decision_needed entry asking which direction is correct"},
+    {"severity": "warning", "path": "receipts[5].category", "page": 2,
+     "extracted": "other", "on_page": "Miscellaneous income 809",
+     "issue": "The General Fund budget schedule p4 prints the same 809 as 'Carline Taxes', so 'other taxes' fits better than 'other'. The same money is categorized differently in receipts (other) and in detail[4] (other taxes)"},
+    {"severity": "warning", "path": "disbursements[0].category", "page": 2,
+     "extracted": "general government", "on_page": "Board fees 6,150 (Debt Service Fund)",
+     "issue": "p5 prints this same 6,150 as 'Bond issue costs', and detail[17] records it as debt service interest. The receipts list and detail use different categories for the same money"}
+  ]
+}
