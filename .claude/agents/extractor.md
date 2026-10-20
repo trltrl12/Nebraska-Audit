@@ -267,7 +267,12 @@ with nothing on the page that says what they are, and then add `"review"`. Befor
 assessments", "Reimbursements", "Sale of property", "Donations" always has its own category. Use
 the same category for the same label everywhere in a report (receipts and detail). A line that
 mixes two categories ("Permits, fees and licenses", "Miscellaneous and reimbursements") gets the
-dominant one plus `"review"` naming the mix.
+dominant one plus `"review"` naming the mix. This includes broad statement lines ("Other local
+receipts", "Non-revenue receipts", "Local", "Other"): before putting one in `other`, look up what
+it is made of in the fund schedules (activity fund receipts → charges for services; insurance
+adjustments → reimbursements; donations; interest; property tax…). If any category is more than
+half of it, use that category (or split with `split_from`). `other` is only for lines that stay
+unexplained after that.
 
 **Transfers are never revenue or spending.** "Transfers", "Transfer to/from … fund", "Transfers,
 net" go in `transfers_in`/`transfers_out` (`business_type.transfers_net`) and, in `detail`, in
