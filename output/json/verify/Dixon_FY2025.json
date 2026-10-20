@@ -1,0 +1,21 @@
+{
+  "stem": "Dixon_FY2025",
+  "values_checked": 35,
+  "issues": [
+    {"severity": "warning", "path": "receipts[10].original_label", "page": 1,
+     "extracted": "Local Receipts: Other (Water Fund)", "on_page": "Local Receipts: Other (line 18, Water Fund column 391.56; row total 51,386.47)",
+     "issue": "fund name appended to the printed label; line 18 is a mixed row split by fund column, but no split_from is recorded on any of its three parts (receipts[9], [10], [11]). Amounts are as printed in each column"},
+    {"severity": "warning", "path": "receipts[11].original_label", "page": 1,
+     "extracted": "Local Receipts: Other (Sewer Fund)", "on_page": "Local Receipts: Other (line 18, Sewer Fund column 587.33)",
+     "issue": "fund name appended to the printed label; no split_from even though the row is split by column"},
+    {"severity": "warning", "path": "disbursements[2].category", "page": 2,
+     "extracted": "streets/highways", "on_page": "Public Works - Other 9,105.24 (General Fund)",
+     "issue": "function is a guess (could be general government or utilities-type public works); already marked review"},
+    {"severity": "warning", "path": "beginning_investments.amount", "page": 1,
+     "extracted": 78352.71, "on_page": "General Fund line 2 Investments 78,352.71, already inside line 3 subtotal 112,526.90",
+     "issue": "investments are already included in beginning_cash (line 3) and ending_cash (line 24); filled as informational only (same for ending_investments 81,289.38, line 27). Dodge County Historical Society, a similar form, leaves them null; treatment differs between reports"},
+    {"severity": "warning", "path": "balance_sheet.liabilities", "page": 3,
+     "extracted": [], "on_page": "Schedule of Outstanding Debt: USDA Loan 105,588.32 (fund not stated)",
+     "issue": "outstanding USDA loan printed on p3 is not in balance_sheet liabilities; defensible for a cash-basis statement (explained in notes), but the debt exists"}
+  ]
+}
