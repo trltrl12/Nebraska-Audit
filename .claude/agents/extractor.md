@@ -301,6 +301,10 @@ supplies) with no function, use the function of the fund it's printed under (Gen
 In `detail`, a function or department total printed with no object breakdown gets
 `detail_category` `not itemized` (not `miscellaneous expenditure`); school activity funds use
 revenue detail `student activity receipts` and expense detail `student activity spending`.
+School districts: the "Cash Disbursements for Operational Expenses - General Fund" exhibit (Exhibit
+N/O, program × object: Salaries and Wages, Benefits, Purchased Services, Supplies, Capital Assets,
+Other) is a detail schedule: enter every object line per program in `detail` (it supersedes any
+function-only General Fund lines from other schedules, so don't double count), tied to its totals.
 When a function line mixes categories, pick the dominant one and mention it in `notes`.
 
 ## Budget forms (`*_B2526` files: Waiver filings that only filed a budget)
