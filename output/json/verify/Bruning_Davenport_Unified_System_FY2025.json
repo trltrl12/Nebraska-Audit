@@ -1,62 +1,36 @@
 {
   "stem": "Bruning_Davenport_Unified_System_FY2025",
-  "values_checked": 228,
+  "values_checked": 319,
   "issues": [
-    {
-      "severity": "warning",
-      "path": "detail[80].budget_final",
-      "page": 20,
-      "extracted": null,
-      "on_page": 109945.0,
-      "issue": "[fixed: budget_final filled as printed] 8000 Transfers (Schedule B) has a printed budget of 109,945.00, recorded as null"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[131].budget_final",
-      "page": 27,
-      "extracted": null,
-      "on_page": 54.09,
-      "issue": "[fixed: budget_final filled as printed] 8000-911 Transfer To General Fund (Schedule L) has a printed budget of 54.09, recorded as null"
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[28]",
-      "page": 21,
-      "extracted": "other 300,000.00 (5200 Allocation from General Fund)",
-      "on_page": "Depreciation Fund 5200 Allocation from General Fund 300,000.00; included in statement Non-Revenue Receipts 306,272.30 (p8)",
-      "issue": "a transfer-like allocation kept as revenue. The General Fund shows no matching outflow (Schedule B lines sum to 5,694,371.64 plus 8000 Transfers 265,000 = 5,959,371.64, and transfers out of 265,000 go only to Activities 115,000 and Nutrition 150,000). Keeping it as a receipt is therefore needed for the identity and is defensible, but it is probably a property tax levy allocation rather than 'other'. Same for detail[95]. Marked review."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[21].category",
-      "page": 9,
-      "extracted": "intergovernmental/state aid",
-      "on_page": "County Receipts 34,160.55",
-      "issue": "96% of this line is 2110 County Fines and Licenses 32,857.55 (p17), which detail categorizes as fines and forfeitures. The mixed-line rule calls for the dominant category with review, or a split from Schedule A, as was done for Local Receipts."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[0]",
-      "page": 17,
-      "extracted": "Local Receipts 3,218,027.13 split into 21 items",
-      "on_page": "Exhibit III Local Receipts 3,218,027.13 (p9); per-fund schedules A/I/F/G print the lines",
-      "issue": "split built from the fund schedules (GF Schedule A 1000 Local Receipts less 1510 interest, which the statement shows separately). The arithmetic is exact (2,926,310.94 + 135,503.44 + 156,043.56 + 169.19). It is defensible as the report's own breakdown, but it is the extractor's reconstruction and goes to review."
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[38].category",
-      "page": 11,
-      "extracted": "other",
-      "on_page": "Community Services Operations 9,432.02",
-      "issue": "no direct category; culture/recreation or general government might fit. Marked review."
-    },
-    {
-      "severity": "warning",
-      "path": "detail",
-      "page": 28,
-      "extracted": "Schedule B (program level, not itemized)",
-      "on_page": "Schedule M - Operational Expenses by object (unaudited), pp28-30, truncated at program 2171",
-      "issue": "the more detailed object-level schedule exists but is cut off by trimming, so the extractor used the program-level Schedule B. This avoids double counting and is defensible, but the object detail for programs 1100-2171 on pp28-30 is not captured."
-    }
+    {"severity": "warning", "path": "receipts[6].category", "page": 9,
+     "extracted": "other (Non-Revenue Receipts 308,613.07)", "on_page": "Non-Revenue Receipts 308,613.07; Depreciation Fund portion 306,272.30 includes '5200 Allocation from General Fund' 300,000.00 (p21)",
+     "issue": "300,000 is coded 5200 (the transfers code) and the General Fund side appears as 'Property' spending in 2650 (100,000) and 2710 (200,000) on p36, so the same money is counted as both receipt and spending. The report itself does not eliminate it, so keeping it as printed is defensible (review already set), but the treatment is inconsistent with detail (see next issue)."},
+    {"severity": "warning", "path": "detail[35].section", "page": 21,
+     "extracted": "other financing (+300,000.00, 5200 Allocation from General Fund)", "on_page": "5200 Allocation from General Fund 300,000.00 inside Total Receipts",
+     "issue": "Treated as a transfer in detail but as a receipt in receipts[6], and the General Fund side (Sch M 2650/2710 Property, detail lines on p36) stays as equipment spending; detail other financing therefore nets to +300,000 with no matching transfer out, and transfers_in/out (265,054.09) exclude it. Pick one treatment consistently."},
+    {"severity": "warning", "path": "receipts[0].category", "page": 9,
+     "extracted": "property tax", "on_page": "Local Receipts 3,218,027.13",
+     "issue": "Broad group: about 2.77M property tax/penalties, plus motor vehicle tax 222,072.28, carline/PPD tax, Activities Fund receipts 156,043.56, refunds, licenses, etc. Property tax is dominant (~86%) and review is set; acceptable but not a clean category."},
+    {"severity": "warning", "path": "detail[9].detail_category", "page": 17,
+     "extracted": "county/other local governments", "on_page": "2110 County Fines and Licenses 32,857.55",
+     "issue": "Label is fines and licenses distributed by the county; could be fines and forfeitures. Defensible as county payment."},
+    {"severity": "warning", "path": "detail[5].detail_category", "page": 17,
+     "extracted": "county/other local governments", "on_page": "1421 Transportation received from other Districts 2,433.02",
+     "issue": "Statement of Activities (p4) shows this 2,433.02 as Charges for Services for transportation; could be other charges for services."},
+    {"severity": "warning", "path": "detail[43].category", "page": 22,
+     "extracted": "general government", "on_page": "Sch D Employee Benefit Fund 2900-200 Employee Benefits 0.00",
+     "issue": "School district: support services fits better than general government (amount is 0.00, so no money effect)."},
+    {"severity": "warning", "path": "detail[58].budget_final", "page": 23,
+     "extracted": null, "on_page": "828,209.00 printed on the 2900-800 Other row",
+     "issue": "Budget is printed on that row (as a group budget) but left null, while Sch C 2900-700 kept its row budget 1,081,007.00; same for Sch I 2660-700 Property (detail[83].budget_final null, 1,127,500.00 printed on that row, p26). Inconsistent handling; noted in extractor notes."},
+    {"severity": "warning", "path": "detail[*].detail_category (Sch M 'Other Property Services')", "page": 28,
+     "extracted": "professional/contract services", "on_page": "Other Property Services (e.g. 1100 94,850.59; 2580 101,959.15; 2710 22,574.80)",
+     "issue": "'Other Property Services' (object 500 series, other purchased services: tuition, insurance, communications, travel) mapped to professional/contract services everywhere except 2610 (utilities, review). Judgment call; some of these may be insurance or tuition."},
+    {"severity": "warning", "path": "detail[86].detail_category", "page": 26,
+     "extracted": "construction/infrastructure", "on_page": "4700-400 Purchased Property Services 205,349.25",
+     "issue": "Same label is repairs and maintenance elsewhere; 4700 (building acquisition/construction) makes construction defensible."},
+    {"severity": "warning", "path": "disbursements[38].category", "page": 11,
+     "extracted": "other", "on_page": "Community Services Operations 9,432.02",
+     "issue": "Last-resort category with review set; no clearly better school category (culture/recreation possible). Same for Sch M 3300 detail lines (p36)."}
   ]
 }

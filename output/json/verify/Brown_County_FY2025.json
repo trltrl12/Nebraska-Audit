@@ -1,70 +1,38 @@
 {
   "stem": "Brown_County_FY2025",
-  "values_checked": 77,
+  "values_checked": 92,
   "issues": [
-    {
-      "severity": "warning",
-      "path": "receipts[5].category",
-      "page": 4,
-      "extracted": "other",
-      "on_page": "Local 773,189",
-      "issue": "[fixed: now charges for services/fees with review] 'Local' is a mixed group, not an unexplained miscellaneous line. The statement of activities (p2) accounts for it exactly: charges for services 447,257 + interest income 192,725 + miscellaneous 133,207 = 773,189. Under the mixed-line rule it takes the dominant category, 'charges for services/fees' (58%), with review naming the mix, not 'other'. A split is not allowed because p2 doesn't label these lines as a breakdown of 'Local'."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[0]",
-      "page": 2,
-      "extracted": "Taxes split into property 3,627,704 / motor vehicle 185,633 / lodging 50,460",
-      "on_page": "p4 Taxes 3,863,797; p2 general receipts Taxes: Property, Motor vehicle, Inheritance, Lodging",
-      "issue": "split uses the statement of activities general receipts, the case the rules allow. It is exact (3,863,797) and has split_from, with inheritance tax shown on its own on p4. Recorded as acceptable; it goes to review automatically."
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[7].category",
-      "page": 4,
-      "extracted": "debt service principal",
-      "on_page": "Debt service: Principal and interest 950,614",
-      "issue": "combined principal and interest line; the interest share is not shown. Already marked review."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[2].category",
-      "page": 5,
-      "extracted": "other",
-      "on_page": "General Fund Local 367,550",
-      "issue": "mixed local receipts (charges, interest, miscellaneous) with no fund-level breakdown; 'other' with review is defensible, but charges for services/fees is likely dominant"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[10].category",
-      "page": 5,
-      "extracted": "other",
-      "on_page": "Inheritance Tax Fund Local 348",
-      "issue": "probably interest income on the inheritance tax fund; nature not printed"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[18].category",
-      "page": 7,
-      "extracted": "other",
-      "on_page": "Road Fund Local 95,932",
-      "issue": "the schedule's 'Local' includes sale of surplus 41,132 (p4: Road local 54,800 + sale of surplus 41,132 = 95,932). That part is sale of assets, which the basic statement shows as other financing, so it is mixed in here as revenue. Marked review."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[17].detail_category",
-      "page": 7,
-      "extracted": "highway allocation",
-      "on_page": "Road Fund Intergovernmental 1,022,678",
-      "issue": "assumed to be highway allocation; it may include other state/federal aid (p2 shows capital grants 55,190 under public works). Marked review."
-    },
-    {
-      "severity": "warning",
-      "path": "missing",
-      "page": 6,
-      "extracted": null,
-      "on_page": "Combining Statement - Non-Major Governmental Funds: Visitor Promotion, Preservation & Modernization, Drug and Alcohol, Canine (K-9), 911 Emergency, 911 Wireless (continued on next page, not in trimmed PDF)",
-      "issue": "the nonmajor combining page's lines are not in detail. There are more than 6 nonmajor funds and the Total column is on a page not trimmed, so the rule (use the Total column) can't be applied. The omission is explained in notes, but nonmajor detail is incomplete because of the trimming."
-    }
+    {"severity": "error", "path": "missing", "page": 5,
+     "extracted": null,
+     "on_page": "Combining Statement - General Fund, Inheritance Tax Fund column: Inheritance tax 151,924; Local 348; General government 18,641; Capital outlay 85,531; Transfers - in 55,190; Transfers - out (196,911); totals: receipts 152,272, disbursements 104,172",
+     "issue": "The General Fund budget schedule (p10) covers only the General Fund column of p5. The Inheritance Tax Fund lines on p5 are not in detail, and neither are their detail_totals. Adding them would not double count anything."},
+    {"severity": "error", "path": "missing", "page": 5,
+     "extracted": null,
+     "on_page": "Combining Statement - General Fund, Veterans Aid Fund column: Capital outlay 2,124 (total disbursements 2,124)",
+     "issue": "The Veterans Aid Fund line on p5 is not in detail, and its total is not in detail_totals. The p10 budget schedule leaves this fund out."},
+    {"severity": "error", "path": "receipts[5].category", "page": 2,
+     "extracted": "other",
+     "on_page": "Local 773,189 (p4) = Charges for services 447,257 + Interest income 192,725 + Miscellaneous 133,207 (Statement of Activities, p2)",
+     "issue": "Local is recorded as 'other', but p2 shows what it is: mostly charges for services (58%), plus interest and miscellaneous. These three figures add up to the line exactly. Under the rules, 'other' is only for lines with nothing on the page that explains them, and a mixed line takes its dominant category (charges for services/fees) plus a review note. Splitting it with split_from, the same way Taxes was split, would also be defensible."},
+    {"severity": "warning", "path": "detail[2].category", "page": 10,
+     "extracted": "other / miscellaneous revenue",
+     "on_page": "Local 379,383 (General Fund budget schedule)",
+     "issue": "Broad 'Local' group put in other/miscellaneous. The countywide breakdown on p2 suggests mostly charges for services or fees of office. Same applies to detail[29] (Road Local 95,932, which includes sale of surplus 41,132 per p4) and detail[35] (Nonmajor Local 275,990)."},
+    {"severity": "warning", "path": "detail[23].category", "page": 10,
+     "extracted": "streets/highways",
+     "on_page": "Noxious Weed Control 44,806 (under Public Works)",
+     "issue": "The disbursement rules list noxious weed control under natural resources/conservation. The extractor followed the printed Public Works heading and added a review flag."},
+    {"severity": "warning", "path": "detail[28].detail_category", "page": 11,
+     "extracted": "other state aid",
+     "on_page": "Road Fund Intergovernmental 1,022,678",
+     "issue": "Road Fund intergovernmental receipts are most likely highway allocation. The schedule does not say so."},
+    {"severity": "warning", "path": "disbursements[7].category", "page": 4,
+     "extracted": "debt service principal",
+     "on_page": "Principal and interest 950,614",
+     "issue": "Combined principal-and-interest line recorded entirely as principal. No split is printed, and a review flag is already set. Same applies to detail[43] (Nonmajor Principal and interest 840,248)."},
+    {"severity": "warning", "path": "detail[16].category", "page": 10,
+     "extracted": "general government / not itemized",
+     "on_page": "Miscellaneous 755,984 (General Government)",
+     "issue": "Large miscellaneous department line. Classing it with its printed function heading is defensible; a review flag is already set."}
   ]
 }
