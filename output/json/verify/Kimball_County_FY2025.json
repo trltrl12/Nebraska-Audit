@@ -1,0 +1,21 @@
+{
+  "stem": "Kimball_County_FY2025",
+  "values_checked": 106,
+  "issues": [
+    {"severity": "warning", "path": "missing", "page": 14,
+     "extracted": null, "on_page": "Report page 31 is not in the trimmed PDF (trimmed p13 = report p30, nonmajor budget schedule end; trimmed p14 = report p32, nonmajor combining schedule)",
+     "issue": "Can't confirm what report p31 holds (possibly a blank page, or a schedule such as a combining balance sheet or another fund schedule). All statement and schedule totals in the trimmed pages tie, so no line is shown to be missing, but the gap should be checked in the source PDF."},
+    {"severity": "warning", "path": "receipts[3].category", "page": 4,
+     "extracted": "other taxes", "on_page": "Other Nonmajor Governmental Funds, Taxes 52,136",
+     "issue": "The nonmajor combining schedule (p14) shows Visitor Promotion Fund receipts 53,718 and Visitor Improvement Fund receipts 45,852, so the 52,136 nonmajor 'Taxes' is very likely lodging (visitor) tax. The type isn't printed, so 'other taxes' with review is defensible; same for detail[49] (Nonmajor Taxes, 'other local taxes')."},
+    {"severity": "warning", "path": "reported_totals.governmental", "page": 2,
+     "extracted": {"receipts": 10140193, "disbursements": 10202078}, "on_page": "Statement of Activities: Cash disbursements total 9,579,187 (General government 2,278,173); program + general receipts 1,100,378 + 3,795,598 + 4,621,326 = 9,517,302",
+     "issue": "The government-wide Statement of Activities shows receipts and disbursements both 622,891 lower than the fund statement (p4), all in General government (2,278,173 vs 2,901,064); the net change (61,885) agrees. The extraction correctly uses the fund statement, but the difference isn't mentioned in notes or report_discrepancies; it looks like an offset netted in the government-wide statement (reimbursements or similar) and may affect how 'Local' 1,740,900 is read."},
+    {"severity": "warning", "path": "receipts[4].category", "page": 4,
+     "extracted": "charges for services/fees", "on_page": "Local 1,740,900",
+     "issue": "Broad group 'Local'. Statement of Activities charges for services 1,100,378 is about 63% of it, so the dominant category holds, but the rest is unexplained (other receipts 126,684 and amounts netted in the government-wide statement). Already marked review."},
+    {"severity": "warning", "path": "disbursements[2].category", "page": 4,
+     "extracted": "streets/highways", "on_page": "Public Works 5,225,007 (includes Transit Service Fund 3,558,518)",
+     "issue": "About 68% of Public Works is the county transit (public transportation) service, not roads. No transit category exists and the statement prints it as Public Works, so the choice is defensible; already marked review. Same for the Transit Service Fund detail lines (detail[35]-[39])."}
+  ]
+}
