@@ -1,0 +1,18 @@
+{
+  "stem": "Mason_City_Rural_Fire_District_4_B2526",
+  "values_checked": 9,
+  "issues": [
+    {"severity": "warning", "path": "notes", "page": 3,
+     "extracted": "'used unmarked p2, which also agrees with the cash reserve on p3 (...unmarked page shows 123,133.86)'", "on_page": "p3 Cash Reserve Fund: Total Cash Reserve 20,100.47, Remaining Cash Reserve % 34%",
+     "issue": "The note is wrong and garbled. The p3 worksheet (20,100.47, 34%) agrees with the crossed-out p1 (line 30 col 3 20,100.47, cash reserve 34%), not with the unmarked p2 (123,133.86, 205%). Using unmarked p2 is still correct under the rule (a crossed-out page is void even if a worksheet agrees with it), and all p2 amounts match. The reviewer should know the worksheet sides with the void page."},
+    {"severity": "warning", "path": "receipts[*].review", "page": 2,
+     "extracted": "no review flag on receipts[0..1]", "on_page": "Column 2 header 'Actual/Estimated 2024 - 2025'",
+     "issue": "The budget-form rule says to set review: true on every line when the column is labelled 'estimated'. Amounts match the page."},
+    {"severity": "warning", "path": "receipts[2].category", "page": 2,
+     "extracted": "other (25,711.39)", "on_page": "Local Receipts: Other 25,711.39",
+     "issue": "Amount matches the page. The line is 21% of receipts with no description; 'other' with review is defensible, but this fund type is over the 10% threshold for 'other'."},
+    {"severity": "warning", "path": "fiscal_year_end", "page": 2,
+     "extracted": "2025-06-30", "on_page": "Actual/Estimated 2024 - 2025 (no end date printed)",
+     "issue": "The fiscal year end is assumed, not printed. This follows the rule and is stated in notes."}
+  ]
+}
