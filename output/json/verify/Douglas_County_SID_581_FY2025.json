@@ -2,17 +2,37 @@
   "stem": "Douglas_County_SID_581_FY2025",
   "values_checked": 106,
   "issues": [
-    {"severity": "error", "path": "balance_sheet.liabilities[1].category", "page": 1,
-     "extracted": "debt - due within one year", "on_page": "Warrants Payable 111,557 (no due-date split)",
-     "issue": "The extractor rules say debt that isn't split by due date goes in 'debt - due in more than one year' (with a note), not due within one year."},
-    {"severity": "warning", "path": "disbursements[6].category", "page": 2,
-     "extracted": "general government", "on_page": "Interlocal Payments 296,864 (Debt Service Fund)",
-     "issue": "This is 42% of governmental spending and the function is assumed. It is paid from the Debt Service Fund, so it may be an interlocal payment for infrastructure or debt (for example to a city). It is already marked review, as is detail[22] (240,155 on p5)."},
-    {"severity": "warning", "path": "receipts[4].category", "page": 2,
-     "extracted": "intergovernmental/state aid", "on_page": "State Motor Vehicle Tax Allocation 1,030",
-     "issue": "Treated as the state pro-rate allocation. This is defensible and consistent with detail[2] and detail[18]."},
-    {"severity": "warning", "path": "missing", "page": 4,
-     "extracted": null, "on_page": "Zero-actual lines omitted: Clerk Fees '-' (budget 300) on p4; Engineering '-' (budget 35,000), Net Capital Outlay '-' (budget 350,000), Interest on Investments budgetary '-' on p5",
-     "issue": "With these left out, the budget_final figures don't add up to the printed budget totals (120,400 and 649,776). The actual figures are unaffected."}
+    {
+      "severity": "error",
+      "path": "balance_sheet.liabilities[1].category",
+      "page": 1,
+      "extracted": "debt - due within one year",
+      "on_page": "Warrants Payable 111,557 (no due-date split)",
+      "issue": "[fixed] The extractor rules say debt that isn't split by due date goes in 'debt - due in more than one year' (with a note), not due within one year."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[6].category",
+      "page": 2,
+      "extracted": "general government",
+      "on_page": "Interlocal Payments 296,864 (Debt Service Fund)",
+      "issue": "This is 42% of governmental spending and the function is assumed. It is paid from the Debt Service Fund, so it may be an interlocal payment for infrastructure or debt (for example to a city). It is already marked review, as is detail[22] (240,155 on p5)."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[4].category",
+      "page": 2,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "State Motor Vehicle Tax Allocation 1,030",
+      "issue": "Treated as the state pro-rate allocation. This is defensible and consistent with detail[2] and detail[18]."
+    },
+    {
+      "severity": "warning",
+      "path": "missing",
+      "page": 4,
+      "extracted": null,
+      "on_page": "Zero-actual lines omitted: Clerk Fees '-' (budget 300) on p4; Engineering '-' (budget 35,000), Net Capital Outlay '-' (budget 350,000), Interest on Investments budgetary '-' on p5",
+      "issue": "With these left out, the budget_final figures don't add up to the printed budget totals (120,400 and 649,776). The actual figures are unaffected."
+    }
   ]
 }

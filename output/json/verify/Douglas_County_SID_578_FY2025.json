@@ -2,23 +2,53 @@
   "stem": "Douglas_County_SID_578_FY2025",
   "values_checked": 132,
   "issues": [
-    {"severity": "error", "path": "balance_sheet.liabilities[1].category", "page": 1,
-     "extracted": "debt - due within one year", "on_page": "Warrants Payable 6,530,470 (no due-date split)",
-     "issue": "The extractor rules say debt that isn't split by due date goes in 'debt - due in more than one year' (with a note). Putting 6.5M of SID construction warrants in due-within-one-year overstates current debt."},
-    {"severity": "warning", "path": "receipts[5]", "page": 2,
-     "extracted": 69955, "on_page": "Collection in District 69,955 (p2 Debt Service column); 119,928 in the Schedule 2 'Actual on GAAP Basis' column (p5)",
-     "issue": "The report is inconsistent: p5 GAAP-basis column shows Collection in District 119,928 and Interest on Warrants 504,255 (debt service total revenues 730,093, total expenditures 1,712,171), while p2 shows 69,955 / 454,282 (680,120 / 1,662,198). Both sides differ by 49,973. The p2 amount is correctly extracted; this belongs in report_discrepancies for review."},
-    {"severity": "warning", "path": "receipts[5].category", "page": 2,
-     "extracted": "other", "on_page": "Collection in District",
-     "issue": "Nothing on the page explains it, so it is coded other with review (7.4% of receipts). It may be special assessment collections."},
-    {"severity": "warning", "path": "receipts[4].category", "page": 2,
-     "extracted": "intergovernmental/state aid", "on_page": "State Motor Vehicle Tax Allocation 982",
-     "issue": "Treated as the state pro-rate allocation; this is defensible and applied consistently, including detail[2] and detail[19] 'State Motor Vehicle Taxes' coded motor vehicle pro-rate."},
-    {"severity": "warning", "path": "missing", "page": 4,
-     "extracted": null, "on_page": "Zero-actual lines omitted: Insurance '-' (budget 1,500), Publication Fees '-' (budget 150) on p4; Bond Maintenance Costs '-' (budget 2,000), Interlocal Payments '-', Change in Payables '-' on p5",
-     "issue": "Lines with a zero actual were left out, so the budget_final figures no longer add up to the printed budget totals (222,150 and 633,529). The actual amounts are unaffected."},
-    {"severity": "warning", "path": "other_financing", "page": 2,
-     "extracted": -1513044, "on_page": "Warrants Retired (1,161,765) + Change in Payables (351,279)",
-     "issue": "The computed amount is correct and marked. Change in Payables is an accrual item that the report prints under other financing uses; it is kept there as printed."}
+    {
+      "severity": "error",
+      "path": "balance_sheet.liabilities[1].category",
+      "page": 1,
+      "extracted": "debt - due within one year",
+      "on_page": "Warrants Payable 6,530,470 (no due-date split)",
+      "issue": "[fixed] The extractor rules say debt that isn't split by due date goes in 'debt - due in more than one year' (with a note). Putting 6.5M of SID construction warrants in due-within-one-year overstates current debt."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[5]",
+      "page": 2,
+      "extracted": 69955,
+      "on_page": "Collection in District 69,955 (p2 Debt Service column); 119,928 in the Schedule 2 'Actual on GAAP Basis' column (p5)",
+      "issue": "The report is inconsistent: p5 GAAP-basis column shows Collection in District 119,928 and Interest on Warrants 504,255 (debt service total revenues 730,093, total expenditures 1,712,171), while p2 shows 69,955 / 454,282 (680,120 / 1,662,198). Both sides differ by 49,973. The p2 amount is correctly extracted; this belongs in report_discrepancies for review."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[5].category",
+      "page": 2,
+      "extracted": "other",
+      "on_page": "Collection in District",
+      "issue": "Nothing on the page explains it, so it is coded other with review (7.4% of receipts). It may be special assessment collections."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[4].category",
+      "page": 2,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "State Motor Vehicle Tax Allocation 982",
+      "issue": "Treated as the state pro-rate allocation; this is defensible and applied consistently, including detail[2] and detail[19] 'State Motor Vehicle Taxes' coded motor vehicle pro-rate."
+    },
+    {
+      "severity": "warning",
+      "path": "missing",
+      "page": 4,
+      "extracted": null,
+      "on_page": "Zero-actual lines omitted: Insurance '-' (budget 1,500), Publication Fees '-' (budget 150) on p4; Bond Maintenance Costs '-' (budget 2,000), Interlocal Payments '-', Change in Payables '-' on p5",
+      "issue": "Lines with a zero actual were left out, so the budget_final figures no longer add up to the printed budget totals (222,150 and 633,529). The actual amounts are unaffected."
+    },
+    {
+      "severity": "warning",
+      "path": "other_financing",
+      "page": 2,
+      "extracted": -1513044,
+      "on_page": "Warrants Retired (1,161,765) + Change in Payables (351,279)",
+      "issue": "The computed amount is correct and marked. Change in Payables is an accrual item that the report prints under other financing uses; it is kept there as printed."
+    }
   ]
 }

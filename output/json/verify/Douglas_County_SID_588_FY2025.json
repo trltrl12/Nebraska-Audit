@@ -1,0 +1,38 @@
+{
+  "stem": "Douglas_County_SID_588_FY2025",
+  "values_checked": 96,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "balance_sheet.liabilities[1].category",
+      "page": 1,
+      "extracted": "debt - due within one year",
+      "on_page": "Warrants Payable 5,730,492 (no due-date split)",
+      "issue": "[fixed] The extractor rules say debt that isn't split by due date goes in 'debt - due in more than one year' (with a note). Putting 5.7M of SID warrants in due-within-one-year misstates current debt."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[4].category",
+      "page": 2,
+      "extracted": "other",
+      "on_page": "Collection in District 2,006",
+      "issue": "Nothing on the page explains it, so it is coded other with review (about 1% of receipts). The same applies to detail[19] (p4)."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[3].category",
+      "page": 2,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "State Motor Vehicle Tax Allocation 16",
+      "issue": "Treated as the state pro-rate allocation. This is defensible and consistent with detail[3] and detail[18]."
+    },
+    {
+      "severity": "warning",
+      "path": "missing",
+      "page": 3,
+      "extracted": null,
+      "on_page": "Zero-actual budgeted lines omitted: Interest on Warrants budgetary '-' (budget 24,433) and Warrants Retired '-' (budget (154,734)) on p3; Interest on Warrants budgetary '-' (budget 306,255) on p4",
+      "issue": "With these left out, the budget_final figures don't add up to the printed budget totals (127,725 and 367,831). The actual figures are unaffected."
+    }
+  ]
+}

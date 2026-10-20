@@ -1,0 +1,30 @@
+{
+  "stem": "Douglas_County_SID_586_FY2025",
+  "values_checked": 80,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "balance_sheet.liabilities[1].category",
+      "page": 1,
+      "extracted": "debt - due within one year",
+      "on_page": "Warrants Payable 716,764 (no due-date split)",
+      "issue": "[fixed] The extractor rules say debt that isn't split by due date goes in 'debt - due in more than one year' (with a note), not due within one year."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[1].category",
+      "page": 2,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "State Motor Vehicle Tax Allocation 115",
+      "issue": "Treated as the state pro-rate allocation. This is defensible and consistent with detail[1] and detail[10]."
+    },
+    {
+      "severity": "warning",
+      "path": "missing",
+      "page": 3,
+      "extracted": null,
+      "on_page": "Zero-actual lines omitted: Maintenance budgetary '-' (budget 2,000) on p3; Bond Issue Costs '-' (budget 5,000), Bonds Issued '-' (budget 300,000), Warrants Retired '-' (budget (275,000)) on p4",
+      "issue": "With these left out, the budget_final figures don't add up to the printed budget totals (30,900 and 95,185). The actual figures are unaffected. Notes mention only some of them."
+    }
+  ]
+}
