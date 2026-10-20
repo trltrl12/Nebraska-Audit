@@ -182,7 +182,7 @@ def check(stem, d):
     # Proprietary cash flows (GAAP)
     if basis == "gaap" and d.get("proprietary"):
         p = d["proprietary"]
-        missing = [k for k in PROPRIETARY_FIELDS if amt(p.get(k)) is None]
+        missing = [k for k in PROPRIETARY_FIELDS if k not in p]  # null = section not printed
         if missing and len(missing) < len(PROPRIETARY_FIELDS):
             f("proprietary", f"missing {', '.join(missing)}")
         pr = reconcile_proprietary(d)
@@ -315,7 +315,8 @@ def category_checks(d, f, rv):
         lab, sec = str(it.get("original_label") or ""), it.get("section")
         where = f"{k}[{i}]"
         # Transfers are financing, never revenue or spending
-        if TRANSFER_RE.search(lab) and (k != "detail" or sec != "other financing"):
+        if TRANSFER_RE.search(lab) and (k != "detail" or sec != "other financing") \
+                and not it.get("split_from") and not re.search(r"intergovernmental transfer", lab, re.I):
             f("category", f"{where} {lab!r} {amt(it):,.0f}: transfer recorded as "
               f"{'a ' + k[:-1] if k != 'detail' else sec}; transfers belong in transfers_in/out "
               f"(detail section 'other financing')", pages=str(it.get("source_page", "")))

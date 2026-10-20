@@ -1,0 +1,30 @@
+{
+  "stem": "Ashland_Greenwood_Public_School_FY2025",
+  "values_checked": 203,
+  "issues": [
+    {"severity": "warning", "path": "detail[134].detail_category", "page": 20,
+     "extracted": "professional/contract services",
+     "on_page": "Activities Fund - Purchased services 116,080",
+     "issue": "The category rules say school activity fund spending uses expense detail 'student activity spending'. The same applies to detail[135] (Supplies and materials 96,071, coded supplies and materials), detail[136] (Capital outlay 523, coded equipment purchases) and detail[137] (Other expenses 114,592, coded miscellaneous expenditure)."},
+    {"severity": "warning", "path": "detail[133].detail_category", "page": 20,
+     "extracted": "miscellaneous revenue",
+     "on_page": "Activities Fund - Other local receipts 79,504",
+     "issue": "The rule for activity funds is revenue detail 'student activity receipts'. Coding this line as miscellaneous puts student activity money into 'other'."},
+    {"severity": "warning", "path": "detail[110]", "page": 17,
+     "extracted": {"category": "other", "detail_category": "miscellaneous revenue", "amount": 2066},
+     "on_page": "Special Building Fund - Other financing sources 2,066 (inside Total receipts 110,336; p4 shows it as Other nonrevenue receipts)",
+     "issue": "The line is labelled 'Other financing sources' but is printed inside receipts and is not a transfer (p5 transfers are only GF -289,406 / Other +289,406). Keeping it as revenue is defensible, but its nature (sale of assets, insurance or other) is unknown."},
+    {"severity": "warning", "path": "detail[124].detail_category", "page": 18,
+     "extracted": "purchased power/cost of sales",
+     "on_page": "School Nutrition Fund - Food 453,701",
+     "issue": "Judgment call. Food for meal service could also be 'supplies and materials'. Already flagged for review."},
+    {"severity": "warning", "path": "disbursements[1].category", "page": 5,
+     "extracted": "support services",
+     "on_page": "Student support services 1,636,946 (Other Governmental Funds 350,886 = Activities Fund 327,265 + Student Fee Fund 23,622, p19-20)",
+     "issue": "The printed line includes about 350,886 of activity and student fee fund spending that fits 'student activities'. The category follows the printed label, so this is noted for review only."},
+    {"severity": "warning", "path": "missing", "page": 21,
+     "extracted": null,
+     "on_page": "Flex Benefit Fund budget and actual: Employee contributions 97,027, Interest 62, Total receipts 97,089, Employee claims 100,434",
+     "issue": "Schedule skipped on purpose. The fund is not in the governmental funds statement (Other Governmental Funds total 1,338,850 on p4 = QCPUF + Nutrition excluding transfer + Student Fee + Activities), so leaving it out looks correct as a fiduciary/benefit fund. Confirm."}
+  ]
+}

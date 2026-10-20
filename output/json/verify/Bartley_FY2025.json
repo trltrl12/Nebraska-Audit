@@ -1,0 +1,27 @@
+{
+  "stem": "Bartley_FY2025",
+  "values_checked": 50,
+  "issues": [
+    {"severity": "error", "path": "disbursements[4].category", "page": 4,
+     "extracted": "general government", "on_page": "Operating expenses 51,234 (Street 50,623, Community Redevelopment 610)",
+     "issue": "Spending listed by object takes the function of its fund. 99% of this line is in the Street Fund, so it should be 'streets/highways'. The p9 budget schedule confirms that Street Fund spending (55,315) is a separate function from General Government."},
+    {"severity": "error", "path": "disbursements[5].category", "page": 4,
+     "extracted": "general government", "on_page": "Supplies and materials 2,274 (Street Fund only)",
+     "issue": "The whole line is in the Street Fund, so it should be 'streets/highways', not general government."},
+    {"severity": "error", "path": "missing", "page": 9,
+     "extracted": "detail: []", "on_page": "Statement of Receipts and Disbursements - Budgetary Basis - Budget and Actual - All Funds. Receipts: Taxes 124,039 (budget 141,386); Licenses and permits 108 (1,186); Charges for services 754,508 (450,200); Interest 18,984 (22,233); Grants, donations and misc. 540 (-); Fire MFO 11,949 (-); TIF receipts 64,038 (-); Other 19,871 (6,382); Transfers In 200,000 (200,000); TOTAL 1,194,036 (821,386). Disbursements: General Government 143,083 (300,000); Public Safety 22,735 (78,000); Culture and Recreation 73,972 (70,000); Street 55,315 (115,000); Community Redevelopment 7,036 (110,000); Electric 387,308 (450,000); Water 19,174 (90,000); Sewer 15,441 (60,000); Sanitation 40,254 (50,000); Transfers out 200,000 (200,000); TOTAL 964,317 (1,523,000)",
+     "issue": "A budget-to-actual schedule is printed but none of its lines are in detail. The no-double-counting rule applies between detail schedules, not between detail and the basic statements, so this schedule should have been captured. Its disbursement lines are by function and fund and can each be given a fund_type (Electric, Water, Sewer and Sanitation are business-type). Some receipt lines (Charges for services, Interest, Other) combine both fund types and would need a review flag."},
+    {"severity": "warning", "path": "report_discrepancies[1]", "page": 4,
+     "extracted": 1, "on_page": "269,081 + 163,059 - 302,140 + 272,012 = 402,012",
+     "issue": "Using its printed totals, the report rolls forward exactly. This $1 is the same footing error already recorded in report_discrepancies[0] (receipt lines 163,058 vs Total Receipts 163,059). It is not a separate roll-forward error in the report. Entries [0] and [2] are confirmed: business 950,449 + 747,955 - 462,177 + 11,010 - 200,000 = 1,047,237 vs 1,047,238, and the fund beginning balances add to 950,450."},
+    {"severity": "warning", "path": "report_discrepancies", "page": 4,
+     "extracted": "3 entries", "on_page": "Personnel services 85,003 + 1,818 = 86,821 vs 86,820 printed; Community Redevelopment column 610 + 6,425 = 7,035 vs 7,036; TOTAL DISBURSEMENTS row 239,790 + 55,315 + 7,036 = 302,141 vs 302,140",
+     "issue": "Three more $1 rounding differences on p4 that the report itself prints. They are not recorded but don't change the extracted figures."},
+    {"severity": "warning", "path": "receipts[11].category", "page": 4,
+     "extracted": "charges for services/fees", "on_page": "Fire MFO 11,949",
+     "issue": "MFO is most likely Mutual Finance Organization aid, which the State of Nebraska pays to fire/municipal MFOs. That would make it intergovernmental/state aid, not rural fire contract fees. It is marked for review. Judgment call."},
+    {"severity": "warning", "path": "receipts[9].category", "page": 2,
+     "extracted": "charges for services/fees", "on_page": "Charges for services 11,171 (p4); 'Electric, gas, and cable lease' on p2",
+     "issue": "p2 says this line is electric, gas and cable lease receipts, which may be franchise fees (occupation/franchise tax) rather than charges for services. Judgment call."}
+  ]
+}

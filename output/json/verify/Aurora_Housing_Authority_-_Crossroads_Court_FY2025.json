@@ -1,0 +1,15 @@
+{
+  "stem": "Aurora_Housing_Authority_-_Crossroads_Court_FY2025",
+  "values_checked": 43,
+  "issues": [
+    {"severity": "error", "path": "receipts[5]", "page": 2,
+     "extracted": 52810, "on_page": "Capital Contributions - HUD 52,810 (printed below Income (Loss) Before Contributions)",
+     "issue": "capital contributions are other financing under the rules (business_type.other_financing, signed +), not a receipt; they are printed outside operating and nonoperating revenue. business_type.other_financing is null"},
+    {"severity": "warning", "path": "reported_totals.business-type.receipts", "page": 2,
+     "extracted": 320835, "on_page": "Total Operating Revenue 250,126; Total Nonoperating Revenue (Expenses) 17,899",
+     "issue": "the computed total adds in capital contributions 52,810; operating + nonoperating alone is 268,025. Correct the total when receipts[5] is moved"},
+    {"severity": "warning", "path": "balance_sheet.scope", "page": 1,
+     "extracted": "government-wide", "on_page": "Statement of Net Position - Proprietary Funds",
+     "issue": "this is a proprietary-funds statement (the entity's only statement); 'government-wide' is a label mismatch"}
+  ]
+}
