@@ -1,0 +1,94 @@
+{
+  "stem": "Big_Springs_FY2025",
+  "values_checked": 80,
+  "issues": [
+    {
+      "severity": "warning",
+      "path": "detail[16].fund_type",
+      "page": 9,
+      "extracted": "governmental",
+      "on_page": "Debt service - Principal and interest 164,300",
+      "issue": "[fixed: fund_type now business-type] All debt service is in the proprietary funds: p6 Debt service - interest 31,638.89 + principal 132,661.42 = 164,300.31 (Water/Sewer). The governmental funds statement (p4) has no debt service. Should be business-type."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[16].category",
+      "page": 9,
+      "extracted": "debt service principal",
+      "on_page": "Principal and interest 164,300",
+      "issue": "Combined principal and interest line (p6: principal 132,661.42, interest 31,638.89) is all put under principal; dominant category is defensible, but the line is mixed."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[0].category",
+      "page": 9,
+      "extracted": "taxes (unlabeled)",
+      "on_page": "Taxes 208,464",
+      "issue": "p4 prints the breakdown under its Taxes heading: Property taxes 167,501.67 + Motor vehicle 17,140.27 + Other 23,821.83 = 208,463.77 (rounds to 208,464). The combined-tax rule would allow a split_from split; kept as unlabeled instead."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[3].fund_type",
+      "page": 9,
+      "extracted": "governmental / other charges for services",
+      "on_page": "Charges for services 330,046",
+      "issue": "All-funds line is about 99.6% business-type: water/sewer charges 328,687.11 (p6) plus governmental 1,358.80 (p4). Tagging it governmental with detail_category 'other charges for services' misstates the fund type; water/sewer charges would be the dominant detail category."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[4].fund_type",
+      "page": 9,
+      "extracted": "governmental",
+      "on_page": "Interest 8,229",
+      "issue": "Includes business-type interest income of 6,095.55 (p6) plus governmental 2,133.49 (p4). The business-type part is the larger one."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[15].fund_type",
+      "page": 9,
+      "extracted": "governmental",
+      "on_page": "Trash 86,500",
+      "issue": "Assumption: there is no trash enterprise fund on the statements, so it was treated as governmental under 'utilities'. Already marked review."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[2].category",
+      "page": 4,
+      "extracted": "intergovernmental/state aid (label 'Other (under Taxes)')",
+      "on_page": "Other 23,821.83 (under Taxes); p2 'Homestead/other'",
+      "issue": "Judgment call: the line is printed under Taxes as 'Other', and p2 labels it 'Homestead/other'. State aid (homestead) is defensible but it could be other taxes. Also original_label is not exactly as printed ('Other')."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[9].category",
+      "page": 4,
+      "extracted": "donations/contributions",
+      "on_page": "Grants and contributions 27,158.77",
+      "issue": "p2 shows this as Operating Grants and Contributions for Culture and Recreation. The source (government grant or private) is not stated, so it could be intergovernmental. Already marked review."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[13].original_label",
+      "page": 6,
+      "extracted": "Other (operating revenues)",
+      "on_page": "Other",
+      "issue": "Label has extractor annotation; printed label is 'Other'."
+    },
+    {
+      "severity": "warning",
+      "path": "business_type.measure",
+      "page": 6,
+      "extracted": "net position",
+      "on_page": "NET POSITION (cash basis)",
+      "issue": "Extractor rules say measure = 'cash' for cash basis. The statement rolls forward cash-basis net position (cash + CDs = 411,422.35), so the amounts are right, but the measure label departs from the rule."
+    },
+    {
+      "severity": "warning",
+      "path": "report_discrepancies",
+      "page": 10,
+      "extracted": null,
+      "on_page": "Comparative statement p10: receipt lines sum to 653,619.09 vs printed Total Receipts 693,637.71",
+      "issue": "p10 (comparative governmental statement) leaves out the Keno proceeds line (40,018.62) but its total still includes it, so the page doesn't add up. p10 was not used for data, so this is not recorded in report_discrepancies."
+    }
+  ]
+}
