@@ -1,0 +1,38 @@
+{
+  "stem": "Hayes_County_FY2025",
+  "values_checked": 110,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "detail[4].category",
+      "page": 5,
+      "extracted": "other / miscellaneous revenue",
+      "on_page": "Local 145,270 (Exhibit F); General column of Exhibit D p4: Charges for Services 92,372 + Interest 42,013 + Miscellaneous 8,694 + Intergovernmental 2,191 (7,777 - State 5,586)",
+      "issue": "[fixed] Broad 'Local' group is mostly charges for services (64%). The mixed-line rule calls for the dominant category (charges for services/fees, detail 'other charges for services') with a review note naming the mix, not 'other'."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[24].category",
+      "page": 5,
+      "extracted": "streets/highways",
+      "on_page": "Noxious Weed 5,082 (under Public Works)",
+      "issue": "Extractor rules put noxious weed control under natural resources/conservation. The statement counts it in Public Works, so streets/highways is defensible. But Economic Development (detail[14]) was moved out of its printed function, so the two lines are handled inconsistently."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[14].category",
+      "page": 5,
+      "extracted": "economic development",
+      "on_page": "Economic Development 8,122, printed under General Government (Exhibit D General Government 759,959 includes it)",
+      "issue": "Detail function differs from the function the statement uses, so the General Fund detail by function won't tie to Exhibit D's General Government line. Already marked review."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[0].budget_final",
+      "page": 5,
+      "extracted": null,
+      "on_page": "Taxes final budget 1,130,475; Road Local (detail[30], detail[31]) final budget 10,300 (p7)",
+      "issue": "Split items carry null budget_final, so the printed final budgets for the combined lines are dropped (they appear only in a review note for Road)."
+    }
+  ]
+}
