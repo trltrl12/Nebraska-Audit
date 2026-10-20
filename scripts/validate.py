@@ -69,6 +69,7 @@ def check(stem, d):
                             original_label=label, amount=amount, reason=reason, source_page=src_page))
 
     declared = [x for x in d.get("report_discrepancies") or [] if isinstance(x, dict)]
+    used = set()
 
     def cmp(chk, reason, expected, actual, pages=""):
         """Exact comparison: flag over $1, review any smaller nonzero difference. A difference the
@@ -77,13 +78,28 @@ def check(stem, d):
         if expected is None or actual is None:
             return
         diff = float(actual) - float(expected)
-        for x in declared:
-            if x.get("check") == chk and amt(x.get("difference")) is not None \
-                    and abs(abs(diff) - abs(amt(x.get("difference")))) < 0.01 and abs(diff) >= REVIEW_OVER:
-                rv(chk, f"THE REPORT ITSELF DOESN'T ADD UP: {reason}: off by {diff:+,.2f} as printed; "
-                        f"{x.get('note', '')}".strip("; "), amount=round(float(actual), 2),
-                   src_page=str(x.get("source_page") or ""))
-                return
+        # Pick the declared discrepancy that best fits this comparison: same size, then same
+        # check, same page, and not already used by another comparison.
+        pg = {p.strip() for p in str(pages).split(";") if p.strip()}
+        best, best_score = None, -1
+        for n, x in enumerate(declared):
+            if amt(x.get("difference")) is None or abs(diff) < REVIEW_OVER \
+                    or abs(abs(diff) - abs(amt(x.get("difference")))) >= 0.01:
+                continue
+            same_check = x.get("check") == chk or (chk == "totals" and x.get("check") == "business"
+                                                   and "business" in reason)
+            if not same_check and x.get("check") != "totals":
+                continue
+            score = 4 * same_check + 2 * (str(x.get("source_page")) in pg) + (n not in used)
+            if score > best_score:
+                best, best_score = n, score
+        if best is not None:
+            x = declared[best]
+            used.add(best)
+            rv(chk, f"THE REPORT ITSELF DOESN'T ADD UP: {reason}: off by {diff:+,.2f} as printed; "
+                    f"{x.get('note', '')}".strip("; "), amount=round(float(actual), 2),
+               src_page=str(x.get("source_page") or ""))
+            return
         if abs(diff) > FLAG_OVER:
             f(chk, reason, expected=round(float(expected), 2), actual=round(float(actual), 2), pages=pages)
         elif abs(diff) >= REVIEW_OVER:
