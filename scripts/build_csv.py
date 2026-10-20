@@ -160,7 +160,8 @@ def main():
         seen.add(m["filename"])
         d = extracted.get(stem)
         if not m.get("trimmed_file"):
-            status = "no_statements_found"
+            status = ("not_applicable" if (m.get("flag") or "").startswith("not_financial_report")
+                      else "no_statements_found")
         elif stem in flagged:
             status = "flagged"
         elif stem in extracted:

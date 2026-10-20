@@ -27,7 +27,7 @@ from common import (AUDITS, FILE_LIST, MANIFEST, MANIFEST_FIELDS, TRIMMED,  # no
 
 # Bump whenever page selection changes: reports trimmed by an older version are re-trimmed
 # automatically on the next fetch run (see --drop-stale).
-FINDER_VERSION = 5
+FINDER_VERSION = 6
 
 HEADER_FRAC = 0.30         # statement titles sit in the top 30% of the page
 OCR_FRAC = 0.35            # how much of a scanned page to OCR
@@ -35,7 +35,8 @@ OCR_DPI = 150
 MIN_TEXT_CHARS = 50        # below this a page is treated as scanned (image only)
 MAX_CONTINUATIONS = 8
 MAX_UNTITLED = 2           # untitled number-heavy pages accepted right after a statement
-MAX_DETAIL_PAGES = 15      # cap on supplementary detail pages per report (extraction cost)
+MAX_DETAIL_PAGES = 20      # soft cap on supplementary detail pages per report (extraction cost)
+MAX_DETAIL_PAGES_HARD = 30 # the top-priority schedule is never split below this
 TITLE_MAX_OFFSET = 30      # a title must start within this many characters of its line
 FLATTEN_DPI = 200          # layered scans are re-rendered to one black-and-white image at this dpi
 FLATTEN_MARK = "flattened-v1"
@@ -47,26 +48,56 @@ TITLES = [
     ("receipts_disbursements", _OF + r"(the\s+)?" + _BASIS + r"receipts,?\s*(and\s+)?(disbursements|expenditures)"),
     ("fund_balance_changes", _OF + _BASIS + r"(fund\s+balances?\s+and\s+)?changes\s+in\s+" + _BASIS + r"(cash|fund)\s+balances?"),
     ("revenues_expenditures", _OF + r"revenues,?\s*expenditures"),
-    ("proprietary_revenues_expenses", _OF + r"revenues,?\s*expenses"),
+    ("proprietary_revenues_expenses", _OF + r"revenues,?\s*(and\s+)?(support,?\s*(and\s+)?|gains,?\s*(and\s+)?)?expenses"),
     ("activities", _OF + r"activities"),
     ("cash_flows", _OF + r"cash\s+flows"),
-    ("assets_fund_balances", _OF + _BASIS + r"assets,?\s*(liabilities,?\s*)?(and|&)\s+(fund\s+balances?|net\s+position|cash\s+balances?)"),
-    ("net_position", _OF + r"(fund\s+)?net\s+(position|assets)"),
+    ("assets_fund_balances", _OF + _BASIS + r"assets,?\s*(liabilities,?\s*)?(and|&)\s+(fund\s+balances?|net\s+(position|assets)|cash\s+balances?)"),
+    ("net_position", _OF + r"(fund\s+)?net\s+(position|assets)|" + _OF + r"financial\s+position"),
     ("balance_sheet", r"balance\s+sheets?\b"),
     # Some small-village audits present their only statement as a "schedule"; used only when
     # no statement of receipts/revenues was found anywhere in the report.
     ("schedule_receipts_disbursements", r"schedules?\s+of\s*(modified\s+)?(cash\s+)?receipts,?\s*(and\s+)?disbursements"),
 ]
 TITLES = [(t, re.compile(rx)) for t, rx in TITLES]
-FLOW_TYPES = {"receipts_disbursements", "fund_balance_changes", "revenues_expenditures"}
+TITLES_RX = dict(TITLES)
+# Waiver-type filings. Each of these pages carries receipts, disbursements AND beginning/ending
+# cash + investments, so it is both the flow and the balance statement.
+WAIVER_SUMMARY_RE = re.compile(r"summary\s+statement\s+of\s+(actual\s+)?cash\s+receipts,?\s*disbursements,?\s*(and\s+)?balances")
+VILLAGE_WAIVER_RE = re.compile(r"village\s+audit\s+waiver\s+request\s+form")
+WAIVER_INVESTMENTS_RE = re.compile(r"^schedule\s+of\s+investments\b", re.M)
+# Budget forms filed as the audit waiver (Budgets_Filed/*_Bnnnn): page 2 "total all funds" holds
+# actual 2023-24 (column 1), actual[/estimated] 2024-25 (column 2) and the adopted budget (column 3);
+# the "general budget form worksheet" pages split each year by fund; "documentation of transfers"
+# explains column-2 transfers.
+BUDGET_FORM_RE = re.compile(r"\b(general|sid|city|village|county)\s+budget\s+form\b|this\s+budget\s+is\s+for\s+the\s+period")
+BUDGET_PAGES = [
+    ("budget_all_funds", re.compile(r"total\s+all\s+funds")),
+    ("budget_fund_worksheet", re.compile(r"budget\s+form\s+worksheet")),
+    ("budget_transfers", re.compile(r"documentation\s+of\s+transfers")),
+]
+NOT_FINANCIAL_RE = re.compile(r"full[- ]time\s+equivalent\s+student\s+enrollment|enrollment\s+statements")
+BALANCE_TYPES = {"net_position", "balance_sheet", "assets_fund_balances", "waiver_summary", "budget_all_funds"}
+FLOW_TYPES = {"receipts_disbursements", "fund_balance_changes", "revenues_expenditures", "waiver_summary",
+              "budget_all_funds"}
 # A header containing any of these is not a basic statement we want.
 EXCLUDE_RE = re.compile(
-    r"reconcil|budget|combining|individual\s+fund|federal\s+awards|findings|fiduciary|custodial|"
+    r"budget|combining|individual\s+fund|federal\s+awards|findings|fiduciary|custodial|"
     r"agency\s+fund|pension|opeb|proportionate|contributions\s+to|notes\s+to|questioned|"
     r"schedule\s+of\s+(investments|outstanding|interfund|changes|expenditures|cash\s+disbursements\s+of)|"
     r"table\s+of\s+contents|\bindex\b|summary\s+schedule|county\s+officers?|office\s+activities|"
     r"discussion\s+and\s+analysis|summary\s+statements?|condensed|\(unaudited\)|activity\s+funds?\b|"
     r"independent\s+(auditor|accountant)|certified\s+public\s+accountants")
+# Reconciliation pages are excluded only when a header line *starts* with "reconciliation": SID
+# statements carry a "reconciliation" column ("fund fund total reconciliation net position").
+RECONCIL_TITLE_RE = re.compile(r"^\W*(a\s+)?reconcil", re.M)
+
+
+def excluded(lines, rx=None):
+    """True if a page header names a page we never want (see EXCLUDE_RE / RECONCIL_TITLE_RE)."""
+    rx = rx or EXCLUDE_RE
+    return bool(rx.search(" ".join(lines[:20])) or RECONCIL_TITLE_RE.search("\n".join(lines[:20])))
+
+
 # A matched "title" line that reads like a sentence is prose (MD&A, notes, opinion), not a title.
 PROSE_RE = re.compile(r"\b(presents?|shows?|reports?|reported|are\s+different|provides?|includes?|"
                       r"is\s+presented|we\s+have|in\s+the\s+accompanying|focus|comprises?|responsible|"
@@ -187,18 +218,24 @@ DETAIL_TITLES = [
     ("detail_combining", r"combining\s+(statements?|schedules?)\s+of\s+" + _BASIS
                          + r"(receipts|revenues|disbursements|expenditures)"),
     ("detail_departments", r"(statement|schedule)s?\s+of\s+(general\s+fund\s+)?" + _BASIS
-                           + r"(operating\s+)?(disbursements|expenditures|expenses)\b|by\s+(department|function|object)"
+                           + r"(operating\s+|functional\s+)?(disbursements|expenditures|expenses)\b|by\s+(department|function|object)"
                              r"|departmental"),
     ("detail_schedule", r"(statement|schedule)s?\s+of\s+" + _BASIS
                         + r"(operating\s+|(net\s+)?patient\s+service\s+|net\s+)?(receipts|revenues?)\b"
                           r"(,?\s*(and\s+)?(disbursements|expenditures|expenses))?"),
 ]
 DETAIL_TITLES = [(t, re.compile(rx)) for t, rx in DETAIL_TITLES]
+# Hospital supplementary schedules are titled only "Schedule 5 / Net patient service revenue",
+# "Other revenue", "Expenses"; accept these bare titles when a "schedule N" label heads the page.
+SCHEDULE_LABEL_RE = re.compile(r"^schedule\s+\d{1,2}\b")
+BARE_DETAIL_RE = re.compile(r"^((net\s+)?patient\s+service\s+revenues?|other\s+(operating\s+)?revenues?|"
+                            r"(operating\s+)?revenues?|(operating\s+|departmental\s+)?expenses|"
+                            r"(operating\s+)?expenses\s+by\s+(department|function))$")
 DETAIL_EXCLUDE_RE = re.compile(
     r"federal\s+awards|findings|questioned|outstanding|investments|interfund|pension|opeb|"
     r"contributions\s+to|notes\s+to|table\s+of\s+contents|independent\s+(auditor|accountant)|"
     r"certified\s+public\s+accountants|discussion\s+and\s+analysis|county\s+officers?|"
-    r"office\s+activit|summary\s+schedule|debt|bonds?\s+payable|capital\s+assets|"
+    r"office\s+activit|summary\s+schedule|debt(?!\s+service)|bonds?\s+payable|accountability|capital\s+assets|"
     r"taxes\s+(levied|certified|collected)|tax\s+collections?|fiduciary|custodial|agency\s+funds?|"
     r"reconcil|net\s+position|balance\s+sheet|assets\s+and|condensed|activity\s+funds?\b|"
     r"our\s+audit|we\s+were\s+engaged|engaged\s+to\s+report|other\s+matters|in\s+our\s+opinion")
@@ -229,6 +266,8 @@ def classify_detail(lines, full_text=""):
             m = rx.search(ln)
             if m and m.start() <= TITLE_MAX_OFFSET + 20:
                 found.add(t)
+    if any(SCHEDULE_LABEL_RE.search(ln) for ln in lines[:3]) and any(BARE_DETAIL_RE.search(ln) for ln in lines[:8]):
+        found.add("detail_departments" if any(re.search(r"expenses", ln) for ln in lines[:8]) else "detail_schedule")
     # most specific first (DETAIL_TITLES order), so a wrapped "... by department" title wins
     return next((t for t, _ in DETAIL_TITLES if t in found), None)
 
@@ -237,9 +276,15 @@ def classify_lines(lines, full_text=""):
     """Statement type(s) for a page from its header lines, joined with "+" (combined statements
     such as "assets and fund balances and receipts, disbursements ..." match several), or None."""
     head = " ".join(lines[:20])
-    if not lines or EXCLUDE_RE.search(head) or (full_text and is_toc(full_text)):
+    if WAIVER_SUMMARY_RE.search(head):   # "summary statement" would otherwise be excluded
+        return "waiver_summary"
+    if not lines or excluded(lines) or (full_text and is_toc(full_text)):
         return None
     found = title_matches(lines[:20])
+    # combined "receipts, disbursements ... and statement of assets and fund balances" titles:
+    # the second title starts too far into the wrapped line for title_matches
+    if has_type("+".join(found), FLOW_TYPES) and re.search(r"and\s+" + TITLES_RX["assets_fund_balances"].pattern, head):
+        found.append("assets_fund_balances")
     # "assets ... and receipts, disbursements" also contains the receipts title further along
     if "assets_fund_balances" in found and re.search(r"receipts,?\s*(and\s+)?disbursements|changes\s+in", head):
         found.append("receipts_disbursements")
@@ -320,9 +365,36 @@ def entity_type_from(meta, fn, first_text):
     return t if t != "unknown" or not st else st
 
 
-def select_pages(pages):
+def select_budget_form(pages):
+    """Budget form filed in place of a waiver: keep only the pages that print prior-year actuals."""
+    keep, kept_types = [], []
+    for i, (lines, full, src) in enumerate(pages):
+        head = " ".join(lines[:12])
+        for t, rx in BUDGET_PAGES:
+            if rx.search(head) and not (t == "budget_fund_worksheet" and re.search(r"adopted\s+budget", head)):
+                keep.append(i)
+                kept_types.append(t)
+                break
+    n_ocr = sum(1 for _, _, src in pages if src == "ocr")
+    flag = "budget_form" + ("" if "budget_all_funds" in kept_types else "; no_budget_actuals_found")
+    if n_ocr:
+        flag += f"; ocr_pages={n_ocr}"
+    return keep, kept_types, "cash", flag
+
+
+def select_pages(pages, filename=""):
     """pages: [(header lines, full text, source)]. Returns (keep indexes, their types, basis, flag)."""
+    first_heads = " ".join(" ".join(lines[:15]) for lines, _, _ in pages[:12])
+    if NOT_FINANCIAL_RE.search(first_heads) or re.search(r"_FTESE_", filename):
+        return [], [], "", "not_financial_report (enrollment audit)"
+    if re.search(r"_B\d{4}\.pdf$", filename) or (BUDGET_FORM_RE.search(first_heads)
+                                                   and not VILLAGE_WAIVER_RE.search(first_heads)):
+        return select_budget_form(pages)
+    village_waiver = bool(VILLAGE_WAIVER_RE.search(first_heads))
     types = [classify_lines(lines, full) for lines, full, _ in pages]
+    if village_waiver:   # Exhibit A's "Investments (should agree to Schedule 1)" -> keep Schedule 1
+        types = [t or ("waiver_investments" if WAIVER_INVESTMENTS_RE.search("\n".join(lines[:6])) else None)
+                 for t, (lines, _, _) in zip(types, pages)]
     # Basic statements come before the notes; statement-like pages after the notes are
     # supplementary (individual fund statements, combining schedules) - unless that's all there is.
     first = next((i for i, t in enumerate(types) if t), None)
@@ -355,10 +427,16 @@ def select_pages(pages):
         while j < len(pages) and j - i <= MAX_CONTINUATIONS:
             lines, full, src = pages[j]
             head_j = title_block(lines) if t.startswith("detail_") else " ".join(lines[:20])
-            if types[j] or excl.search(head_j):
+            if types[j] or excl.search(head_j) or RECONCIL_TITLE_RE.search("\n".join(lines[:20])):
                 break  # a titled page is handled by the outer loop
             lab_j = exhibit_label(lines)
             head8 = " ".join(lines[:8])
+            # second page of a two-page statement of financial/net position (hospitals)
+            if has_type(t, BALANCE_TYPES) and re.search(r"^liabilities(,|\s+and)", head8):
+                keep.append(j)
+                kept_types.append(t + "(cont)")
+                j += 1
+                continue
             # OCR sometimes drops spaces ("exhibithi", "page1"), so the exhibit word alone counts here
             if (lab_j or "exhibit" in head8) and \
                     (lab_j == label or (label is None and re.search(r"\bpage\s*\d", head8))):
@@ -387,12 +465,31 @@ def select_pages(pages):
 
     # Cap the detail pages (they're extra cost for extraction); basic statements always stay.
     # Departmental and budget schedules carry the most line-item detail, so they're kept first.
+    # A schedule run (consecutive pages of one detail type, incl. its continuations) is kept or
+    # dropped as a whole; runs are taken in priority order while they fit MAX_DETAIL_PAGES, and
+    # the top-priority run is always kept whole up to MAX_DETAIL_PAGES_HARD.
     detail_idx = [n for n, t in enumerate(kept_types) if t.startswith("detail_")]
     truncated = len(detail_idx) > MAX_DETAIL_PAGES
     if truncated:
         prio = {"detail_departments": 0, "detail_budget": 1, "detail_combining": 2, "detail_schedule": 3}
-        ranked = sorted(detail_idx, key=lambda n: (prio.get(kept_types[n].replace("(cont)", ""), 4), n))
-        drop = set(ranked[MAX_DETAIL_PAGES:])
+        base = lambda n: kept_types[n].replace("(cont)", "")  # noqa: E731
+        runs = []
+        for n in detail_idx:
+            if runs and base(n) == base(runs[-1][-1]) and keep[n] == keep[runs[-1][-1]] + 1:
+                runs[-1].append(n)
+            else:
+                runs.append([n])
+        runs.sort(key=lambda r: (prio.get(base(r[0]), 4), r[0]))
+        taken, used = set(), 0
+        for r in runs:
+            if used + len(r) <= MAX_DETAIL_PAGES or (not taken and len(r) <= MAX_DETAIL_PAGES_HARD):
+                taken.update(r)
+                used += len(r)
+            elif not taken:  # an oversized top-priority run keeps its first pages
+                taken.update(r[:MAX_DETAIL_PAGES_HARD])
+                used += MAX_DETAIL_PAGES_HARD
+        drop = set(detail_idx) - taken
+        truncated = bool(drop)
         keep = [k for n, k in enumerate(keep) if n not in drop]
         kept_types = [t for n, t in enumerate(kept_types) if n not in drop]
     basic = [t for t in kept_types if not t.startswith("detail_")]
@@ -415,8 +512,8 @@ def select_pages(pages):
     elif not any(has_type(t, FLOW_TYPES | {"schedule_receipts_disbursements", "activities",
                                            "proprietary_revenues_expenses"}) for t in basic):
         flag = "no_revenue_statement"
-    elif not any(has_type(t, ("net_position", "balance_sheet", "assets_fund_balances")) for t in basic):
-        flag = "no_balance_statement"
+    elif not any(has_type(t, BALANCE_TYPES) for t in basic) and not village_waiver:
+        flag = "no_balance_statement"   # village waiver Exhibit A carries the beginning/ending balances
     else:
         flag = ""
     if truncated:
@@ -464,7 +561,7 @@ def process(pdf_path, meta):
     url = meta.get("url", "")
     doc = pymupdf.open(pdf_path)
     pages = [page_header(p) for p in doc]
-    keep, kept_types, basis, flag = select_pages(pages)
+    keep, kept_types, basis, flag = select_pages(pages, Path(pdf_path).name)
     trimmed_name = ""
     if keep:
         out = pymupdf.open()

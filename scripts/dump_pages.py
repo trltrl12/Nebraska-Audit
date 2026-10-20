@@ -32,7 +32,7 @@ def dump(path):
         out.append(f"\n=== page {i + 1} | chars={len(page.get_text('text').strip())} "
                    f"images={len(page.get_images())} src={src} | class={c or '-'}")
         out += ["  " + ln[:140] for ln in lines[:LINES]]
-    keep, types, basis, flag = fp.select_pages(pages)
+    keep, types, basis, flag = fp.select_pages(pages, Path(path).name)
     doc.close()
     return "\n".join(out) + "\n", dict(pages_kept=";".join(str(k + 1) for k in keep),
                                        page_types=";".join(types), basis_guess=basis, flag=flag)

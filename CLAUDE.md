@@ -104,8 +104,11 @@ Keep the main session lean: don't open PDFs or print JSON in the main conversati
 agents' one-line statuses.
 
 ## Open follow-ups (remove each line once done)
-After the debug_pages run (config/debug_pages.txt, run 5/5b) shows why, fix scripts/find_pages.py,
-re-trim these, then re-extract and re-verify them (their JSON is incomplete until then):
+- find_pages.py v6 is pushed (debt-service schedules were being dropped, plus the fixes below). After
+  the next fetch re-trims, compare each extracted report's manifest `pages_kept` with
+  `output/json/_meta/pages_at_extraction.csv`; re-extract and re-verify every report whose pages
+  changed (their source_page numbers no longer match).
+These were diagnosed and fixed in find_pages v6; re-extract and re-verify them after the re-trim:
 - Trimmed PDF is missing pages: Annie_Jeffrey_Memorial_Health_Center_FY2025 (balance sheet),
   Adams_County_FY2025 (report p45: Highway Bond Fund, nonmajor totals), Arapahoe_FY2025 (other
   nonmajor combining page), Auburn_Public_Schools_FY2025 (report p27, Employee Benefit Fund),
@@ -118,4 +121,6 @@ re-trim these, then re-extract and re-verify them (their JSON is incomplete unti
   finder misses their titles.
 - ~1,000 Waiver filings link only a budget form (Budgets_Filed/…_B2526.pdf): check
   output/page_debug/_alt_urls.csv for a real waiver PDF; otherwise read prior-year actuals from the
-  budget form. Extraction skips *_B2526 files until this is decided.
+  budget form. The probe found real FY2025 PDFs only for Silver_Creek_Township_Merrick_County and
+  Spencer_Township_Boyd_County; the rest are extracted from the budget form (rules in the extractor
+  agent) once v6 trims them to the budget pages.

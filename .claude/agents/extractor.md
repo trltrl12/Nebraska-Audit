@@ -298,6 +298,15 @@ In `detail`, a function or department total printed with no object breakdown get
 revenue detail `student activity receipts` and expense detail `student activity spending`.
 When a function line mixes categories, pick the dominant one and mention it in `notes`.
 
+## Budget forms (`*_B2526` files: Waiver filings that only filed a budget)
+- Use the prior-year actual column: FY2025 = column 2 ("Actual 2024-2025" or "Actual/Estimated
+  2024-2025"), never the budget year. Put "budget form, prior-year actual column" in notes and set
+  `review: true` on every line if the column is labelled "estimated".
+- If there is both an original and a revised "Total All Funds" page, use the one that agrees with
+  the budget form worksheet and say which in notes.
+- Transfers come from the "Documentation of Transfers" page, never from receipts/disbursements.
+- There is no balance sheet: leave `balance_sheet` null and say so in notes.
+
 ## Entity types beyond cities, counties and schools
 - **Entirely business-type entities** (health care facilities/hospitals, public power districts,
   housing authorities, airport authorities, community colleges, many water districts, "Cities and
