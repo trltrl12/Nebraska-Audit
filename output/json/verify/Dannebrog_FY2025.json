@@ -1,0 +1,16 @@
+{
+  "stem": "Dannebrog_FY2025",
+  "values_checked": 54,
+  "issues": [
+    {"severity": "error", "path": "missing", "page": 9,
+     "extracted": "detail: []",
+     "on_page": "Budgetary Comparison Schedule - All Funds (Actual / Original and Final Budget): Property 79,972 / 77,556; Motor vehicle tax 6,045 / 9,000; Franchise fees 27,847 / 35,200; Sales tax 47,236 / 46,200; State intergovernmental 79,986 / 83,825; Other local receipts 216,518 / 185,170 (Total resources 457,604); Governmental: General government 138,789 / 123,100, Public works 73,071 / 102,700, Environment and leisure 28,522 / 23,800, Capital outlay - / 74,600 (Total governmental 240,382); Business-type: Water 68,970 / 78,290, Sewer 66,362 / 60,330, Trash 33,091 / 32,100 (Total business-type 168,423); Transfers in 36,267 / 64,000; Transfers out (36,267) / (64,000)",
+     "issue": "The only supplementary schedule was skipped entirely. Most of its lines can be assigned a fund type: the tax and state lines and the Governmental expenditure lines are governmental, and Water/Sewer/Trash are business-type. Only 'Other local receipts' 216,518 mixes the two (governmental 17,476 + business-type 199,042, both derivable from pp5/7). Its lines should be in detail[] with detail_totals, and the mixed line should be flagged with review rather than dropping the whole page."},
+    {"severity": "warning", "path": "ending_cash", "page": 5,
+     "extracted": 92215, "on_page": "Fund balances 92,215; governmental cash assets 94,772 (p4)",
+     "issue": "beginning_cash/ending_cash hold governmental fund balance, not cash. Governmental cash (94,772) is higher by the 2,557 liability. This is defensible because the statement rolls fund balance forward, but it is an assumption. beginning_cash 64,035 is printed as-is on p5 but is still marked computed."},
+    {"severity": "warning", "path": "reported_totals.business-type.disbursements", "page": 2,
+     "extracted": 168423, "on_page": "Total business-type activities expenses 168,423 (p2)",
+     "issue": "Marked computed from p7 parts, but the same figure is printed as a single total on the Statement of Activities (p2). The amount is correct."}
+  ]
+}
