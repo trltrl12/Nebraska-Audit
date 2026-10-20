@@ -1,0 +1,15 @@
+{
+  "stem": "Huntley_FY2025",
+  "values_checked": 11,
+  "issues": [
+    {"severity": "warning", "path": "reported_totals.governmental.receipts", "page": 1,
+     "extracted": 22330.99, "on_page": "Total Resources Available 76,345.92 - line 5 subtotal 27,209.96 = 49,135.96 (includes transfers in 26,804.97)",
+     "issue": "Budget/waiver-form rule says receipts total = Total Resources Available minus line 5 subtotal (49,135.96, includes [\"transfers_in\"]). The extractor also took out transfers in (22,330.99, includes []). The figure is consistent and marked computed, but it doesn't follow the stated rule."},
+    {"severity": "warning", "path": "disbursements[1].category", "page": 1,
+     "extracted": "other", "on_page": "Remittance to County Treasurer 40,979.04",
+     "issue": "On dissolution the village sent its remaining balance to the Harlan County Treasurer. Treating this as spending in 'other' is defensible, but it is more than half of the outflows and is really a handover of the balance to another government, not operating spending. No decision_needed entry asks whether it should be spending or other financing."},
+    {"severity": "warning", "path": "transfers_in", "page": 1,
+     "extracted": 26804.97, "on_page": "Line 15 26,804.97 / line 24 26,804.97; Inter-fund Transfers From/To/Amount boxes blank",
+     "issue": "Transfers come from lines 15/24 because the transfer documentation is blank. Notes don't say so, as the rule asks. In and out are equal within the single Total of All Funds column, so the net is zero."}
+  ]
+}
