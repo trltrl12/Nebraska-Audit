@@ -1,0 +1,15 @@
+{
+  "stem": "Chambers_FY2025",
+  "values_checked": 37,
+  "issues": [
+    {"severity": "warning", "path": "disbursements[4].fund_type", "page": 2,
+     "extracted": "governmental", "on_page": "Line 45 Solid Waste 65,278.00, General Fund column, under 'Business-Type Activities'",
+     "issue": "The line is paid from the General Fund (a governmental fund), so governmental is defensible. The form prints it as a business-type activity, which puts 65,278 of utility spending in governmental totals. The line already has a review flag."},
+    {"severity": "warning", "path": "beginning_cash", "page": 1,
+     "extracted": -731, "on_page": "Line 3 subtotal: General (203,201.00), Street 202,470.00; line 2 Investments General 18,500.00",
+     "issue": "beginning_cash and ending_cash use the line 3 and line 28 subtotals (net cash plus investments) and leave beginning/ending_investments null, although investments are printed separately (18,500 / 19,056). The roll-forward ties this way and it is computed and noted. Net cash alone is -19,231 at the start and 74,325 at the end."},
+    {"severity": "warning", "path": "receipts[10].original_label", "page": 1,
+     "extracted": "Local Receipts: Other (Enterprise - Sewer)", "on_page": "Local Receipts: Other",
+     "issue": "The extractor added fund-name suffixes that are not on the page; the same applies to receipts[11] and disbursements[5]-[7]. Also, receipts[10] and [11] are classed as charges for services/fees although the printed label is 'Other' (assumed utility user charges; both carry review flags)."}
+  ]
+}

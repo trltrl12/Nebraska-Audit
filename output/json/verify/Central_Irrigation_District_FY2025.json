@@ -1,0 +1,78 @@
+{
+  "stem": "Central_Irrigation_District_FY2025",
+  "values_checked": 14,
+  "issues": [
+    {
+      "severity": "warning",
+      "path": "business_type.ending.amount",
+      "page": 1,
+      "extracted": 9127.03,
+      "on_page": 9027.03,
+      "issue": "[fixed: 9,027.03 as written; gap recorded] Line 26 'Balance Forward/Ending Balance' is handwritten 9027.03. The second digit is a closed loop (a 0), not a single stroke (a 1), and lines 26, 28 and 31 all read the same way. 9,127.03 is the extractor's own arithmetic (line 16 73,673.53 minus line 25 64,546.50), not the printed figure. Record 9,027.03 as printed and log the form's subtraction error in report_discrepancies."
+    },
+    {
+      "severity": "warning",
+      "path": "balance_sheet.assets[0].amount",
+      "page": 1,
+      "extracted": 9127.03,
+      "on_page": 9027.03,
+      "issue": "[fixed: 9,027.03 as written; gap recorded] Line 28 'Cash on Hand and in Bank' reads 9027.03"
+    },
+    {
+      "severity": "warning",
+      "path": "balance_sheet.equity[0].amount",
+      "page": 1,
+      "extracted": 9127.03,
+      "on_page": 9027.03,
+      "issue": "[fixed: 9,027.03 as written; gap recorded] Line 26 'Balance Forward/Ending Balance' reads 9027.03"
+    },
+    {
+      "severity": "warning",
+      "path": "balance_sheet.total_assets.amount",
+      "page": 1,
+      "extracted": 9127.03,
+      "on_page": 9027.03,
+      "issue": "[fixed: 9,027.03 as written; gap recorded] Line 31 'Total [Line 28 + Line 29 + Line 30]' reads 9027.03"
+    },
+    {
+      "severity": "warning",
+      "path": "balance_sheet.total_equity.amount",
+      "page": 1,
+      "extracted": 9127.03,
+      "on_page": 9027.03,
+      "issue": "[fixed: 9,027.03 as written; gap recorded] Line 26 / line 31 read 9027.03"
+    },
+    {
+      "severity": "warning",
+      "path": "report_discrepancies",
+      "page": 1,
+      "extracted": "only the 0.02 line-16 entry",
+      "on_page": "line 26 9,027.03 vs line 16 73,673.53 - line 25 64,546.50 = 9,127.03",
+      "issue": "[fixed: 9,027.03 as written; gap recorded] Missing discrepancy entry: {check: 'reconcile', difference: -100.00}. The form's ending balance is 100.00 below line 16 minus line 25. Against beginning 33,404.21 + receipts 40,269.30 - disbursements 64,546.50 = 9,127.01, the difference is -99.98. Keep the existing 0.02 'totals' entry for line 16 (73,673.53 printed vs 73,673.51 computed)."
+    },
+    {
+      "severity": "warning",
+      "path": "reported_totals.business-type.receipts.amount",
+      "page": 1,
+      "extracted": 40269.3,
+      "on_page": "no printed total receipts; line 16 73,673.53 - line 5 33,404.21 = 40,269.32",
+      "issue": "Computed as the sum of lines 12-13 (correct and marked computed). The form's own line 16 implies 40,269.32 (the 0.02 already in report_discrepancies)."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[0].category",
+      "page": 1,
+      "extracted": "utilities",
+      "on_page": "Operating Expenses",
+      "issue": "Irrigation district: function could be natural resources/conservation (the extractor rules list water and drainage districts there) rather than utilities. Judgment call; the line already has a review flag."
+    },
+    {
+      "severity": "warning",
+      "path": "fiscal_year_end",
+      "page": 1,
+      "extracted": "2025-12-31",
+      "on_page": "2025",
+      "issue": "The form prints only the year 2025, so the year-end date is assumed"
+    }
+  ]
+}
