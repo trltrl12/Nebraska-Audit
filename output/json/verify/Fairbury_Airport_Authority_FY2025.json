@@ -1,0 +1,19 @@
+{
+  "stem": "Fairbury_Airport_Authority_FY2025",
+  "values_checked": 84,
+  "issues": [
+    {"severity": "warning", "path": "receipts[6].category", "page": 4,
+     "extracted": "federal grants", "on_page": "Grant proceeds 130,381 (p2: Capital Grants and Contributions)",
+     "issue": "Grantor not printed; federal (FAA) is an assumption. Could be state aid passed through NDOT Aeronautics. Same assumption on detail[6] (176,279, p5). Line already carries review."},
+    {"severity": "warning", "path": "receipts[].fund_type", "page": 4,
+     "extracted": "governmental (all lines), business_type null",
+     "on_page": "Statements present General and Debt Service as 'Governmental Activities' (modified accrual)",
+     "issue": "The extractor rules treat airport authorities as entirely business-type. The extractor followed the report's governmental presentation and said so in notes. That is defensible, but it departs from the entity-type rule."},
+    {"severity": "warning", "path": "detail[9].detail_category", "page": 5,
+     "extracted": "construction/infrastructure", "on_page": "Capital outlay 44,113 (function line, no object breakdown)",
+     "issue": "The rule for a function total with no object breakdown is 'not itemized'. Exhibit E (p4) labels it 'Runways and improvements', so construction/infrastructure is defensible."},
+    {"severity": "warning", "path": "beginning_cash", "page": 1,
+     "extracted": null, "on_page": "2024 comparative: Cash in bank 135,905 + Cash with county treasurer 1,513 = 137,418",
+     "issue": "Beginning cash is left null, but the prior-year cash is printed in the comparative column (p1, p3). It could be filled as computed."}
+  ]
+}
