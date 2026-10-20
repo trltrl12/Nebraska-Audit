@@ -1,0 +1,21 @@
+{
+  "stem": "Conestoga_Public_Schools_FY2025",
+  "values_checked": 126,
+  "issues": [
+    {"severity": "error", "path": "receipts[16].category", "page": 3,
+     "extracted": "other", "on_page": "Other nonrevenue receipts 192,250 (General 192,220 = Sale of property 15,116 + Insurance adjustments 100,696 + Other 29,859 (p10) + Depreciation Fund 46,549 (p6); Special Building 23; Other 7)",
+     "issue": "the report shows what this line is made of. Under the mixed-line rule it should take the dominant category, reimbursements/refunds (insurance adjustments 100,696 = 52%), with a review note naming the mix, not 'other'"},
+    {"severity": "warning", "path": "disbursements[11].category", "page": 4,
+     "extracted": "debt service principal", "on_page": "Debt service 1,345,598",
+     "issue": "principal and interest are combined in one line and the whole amount is put under principal. The same applies to detail[49] (250,228) and detail[61] (101,412). Already marked review."},
+    {"severity": "warning", "path": "missing", "page": 10,
+     "extracted": null, "on_page": "General Fund budget schedule disbursements: 1100 Regular instruction 5,306,972; 1125 Regular instruction - flex-spending 17,197; 1150 Limited English proficiency programs 42,001; 1160 Poverty programs 123,289; 1190 Early childhood education programs 4,910",
+     "issue": "printed object-level expenditure lines left out. The trimmed PDF cuts the schedule off after these lines, so the extractor used the combining schedule Total column (p6-7) instead to avoid double counting. This is defensible, but the more detailed lines are lost."},
+    {"severity": "warning", "path": "detail[66].category", "page": 8,
+     "extracted": "student activities", "on_page": "Activities Fund - Support services - students 339,864",
+     "issue": "this is categorized as student activities in detail, but the same money sits in disbursements[1] 'Support services - student' 1,010,755 as support services. The categories are inconsistent across schedules."},
+    {"severity": "warning", "path": "detail[9].detail_category", "page": 9,
+     "extracted": "county/other local governments", "on_page": "2110 County fines and license fees 61,967",
+     "issue": "the label says fines and license fees passed through by the county. 'county/other local governments' is defensible, but 'fines and forfeitures' could also apply."}
+  ]
+}
