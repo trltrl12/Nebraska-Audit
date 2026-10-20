@@ -1,0 +1,18 @@
+{
+  "stem": "Norfolk_Regional_Airport_-_Karl_Stefan_Memorial_Field_FY2025",
+  "values_checked": 99,
+  "issues": [
+    {"severity": "warning", "path": "receipts[*].fund_type", "page": 3,
+     "extracted": "governmental", "on_page": "General Fund (governmental fund statement, fund balance, property taxes)",
+     "issue": "The extractor rules list airport authorities as entirely business-type, but this report presents the authority as one governmental General Fund (modified accrual, fund balance). Recording it as governmental follows the statement and is defensible, but it departs from the entity-type rule. A person should confirm."},
+    {"severity": "warning", "path": "disbursements[0..9,11,12].category", "page": 3,
+     "extracted": "other", "on_page": "Other Salaries, Payroll Taxes, Professional Fees, ... Bad Debt Expense (by object, no function)",
+     "issue": "Lines listed by object with no function were put in 'other'. The rule for object-only statements says to use the fund's function (General Fund -> general government) with review 'listed by object'. No airport/transportation category exists, so 'other' is a judgment call. The same applies to the detail[8..19] expenditure categories on p5."},
+    {"severity": "warning", "path": "detail[7]", "page": 5,
+     "extracted": "section revenue, category other, detail_category miscellaneous revenue, amount 0", "on_page": "Loan Proceeds  budget 4,560,000  actual -",
+     "issue": "Loan proceeds are debt proceeds and belong in section 'other financing', not revenue/'other' (the printed Total Receipts includes the budget line). The actual is 0, so totals are not affected."},
+    {"severity": "warning", "path": "beginning_cash", "page": 5,
+     "extracted": null, "on_page": "Fund Balance, Beginning of Year 1,053,570 (cash basis, General Fund)",
+     "issue": "Beginning General Fund cash is printed on the cash-basis budget schedule (its ending 1,497,745 equals ending_cash), but beginning_cash was left null."}
+  ]
+}
