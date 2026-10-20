@@ -1,0 +1,15 @@
+{
+  "stem": "Craig_FY2025",
+  "values_checked": 21,
+  "issues": [
+    {"severity": "warning", "path": "disbursements[4].category", "page": 3,
+     "extracted": "utilities 68795.47", "on_page": "Wastewater: General Fund 54,750.47, Debt Service Fund 14,045.00, Total 68,795.47",
+     "issue": "14,045 of this line is the Debt Service Fund bond payment (bond 4.50%, p4); the per-fund columns are printed, so it could be categorized as debt service rather than utilities."},
+    {"severity": "warning", "path": "disbursements[3].fund_type", "page": 3,
+     "extracted": "governmental", "on_page": "Solid Waste 15,660.60, Wastewater, Water 30,166.35 under 'Business-Type Activities' (General Fund column)",
+     "issue": "Utility lines printed under the Business-Type Activities heading but paid from the General Fund (no enterprise fund column); governmental is defensible. Applies to disbursements[3], [4], [5]."},
+    {"severity": "warning", "path": "balance_sheet.equity[0]", "page": 1,
+     "extracted": "Subtotal of Ending Balances (Line 26 + 27) 417239.05", "on_page": "Line 28 417,239.05",
+     "issue": "Equity line is the printed subtotal of the asset lines, not a separate fund balance line; total_assets marked computed although printed as-is."}
+  ]
+}
