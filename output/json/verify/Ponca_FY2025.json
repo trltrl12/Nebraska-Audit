@@ -1,0 +1,24 @@
+{
+  "stem": "Ponca_FY2025",
+  "values_checked": 176,
+  "issues": [
+    {"severity": "warning", "path": "receipts[7].category", "page": 5,
+     "extracted": "donations/contributions", "on_page": "Grants 43,852 (capital grants and contributions, Environment and leisure, p3)",
+     "issue": "The same label 'Grants' is categorized differently in one report: the governmental Grants line is donations/contributions, but business-type receipts[16] 'Grants' 1,345,113 is intergovernmental/state aid. The rules say a label gets one category everywhere in a report. The grantor is not stated for either line."},
+    {"severity": "warning", "path": "receipts[16].category", "page": 7,
+     "extracted": "intergovernmental/state aid", "on_page": "Grants 1,345,113 (Water Fund, nonoperating; cash flow p8 'Grant proceeds received' under capital financing)",
+     "issue": "Grantor not stated, so this could be federal grants. Its category also doesn't match governmental receipts[7] 'Grants' (donations/contributions)."},
+    {"severity": "warning", "path": "ending_cash", "page": 4,
+     "extracted": 508583, "on_page": "Total fund balances 508,583; total assets (cash + restricted cash + county treasurer cash) 508,312; payroll withholding liability (271)",
+     "issue": "beginning_cash/ending_cash hold fund balances, not cash. Actual governmental cash is 508,312. The notes explain this; it is an assumption the extractor made."},
+    {"severity": "warning", "path": "detail[69].category", "page": 12,
+     "extracted": "streets/highways", "on_page": "Sanitation department (Contracted services 58,432, Other expenses 530)",
+     "issue": "The category rules put refuse/sanitation under utilities. Streets/highways was chosen so the detail ties to the statement's Public works function (58,962). Defensible, but it is a judgment call. Same for detail[70]."},
+    {"severity": "warning", "path": "detail[63].category", "page": 12,
+     "extracted": "culture/recreation", "on_page": "Cemetery department (expenditures 21,892)",
+     "issue": "The category rules put cemetery under health/welfare. Culture/recreation follows the statement's 'Environment and leisure' function so the detail ties. Judgment call; it applies to detail[63]-[67] (detail[68] is capital outlay)."},
+    {"severity": "warning", "path": "detail[45].detail_category", "page": 11,
+     "extracted": "construction/infrastructure", "on_page": "Capital outlay 8,823 (Police)",
+     "issue": "The capital outlay object is not stated; for Police it is more likely equipment purchases (e.g. vehicles). The same guess is used for detail[36], detail[68] and detail[78], all already marked review."}
+  ]
+}

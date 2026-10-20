@@ -1,0 +1,18 @@
+{
+  "stem": "Ponca_Public_Schools_FY2025",
+  "values_checked": 242,
+  "issues": [
+    {"severity": "warning", "path": "receipts[5].category", "page": 4,
+     "extracted": "investment income", "on_page": "Interest 91,516 (General Fund column 72,829 = 1510 Interest 62,275 + 1140 Penalties and interest on taxes 7,307 + Depreciation interest 3,228 + Employee Benefit interest 19)",
+     "issue": "The statement's Interest line includes 7,307 of penalties and interest on taxes, which the rules count as property tax. Detail[4] records it as property tax, so receipts and detail are inconsistent. Investment income is dominant, so keeping it is defensible; already marked review."},
+    {"severity": "warning", "path": "receipts[7].category", "page": 4,
+     "extracted": "other taxes", "on_page": "Other 3,751 (General 3,553 = Carline tax 1,878 + Rent 375 + License fees 1,300, p7; Bond 198 = Carline tax, p14)",
+     "issue": "Mixed line: carline tax 2,076 (55%, other taxes) plus rent 375 (charges for services) and license fees 1,300 (licenses and permits). Dominant category used; already marked review."},
+    {"severity": "warning", "path": "detail[86].source_page", "page": 4,
+     "extracted": 5, "on_page": "Instruction 4,637,373 and Instructional support 356,305 are on trimmed p4; only Student transportation 391,504 is on p5",
+     "issue": "The computed contra lines detail[86] (-50,000, Instruction) and detail[87] (-25,000, Instructional support) cite page 5, but the statement lines they come from are on page 4. Their split_from text also says '(p5)'. detail[88] (Student transportation) correctly cites p5."},
+    {"severity": "warning", "path": "detail[86].amount", "page": 10,
+     "extracted": -50000, "on_page": "General Fund schedule total disbursements 7,713,846 vs statement General Fund column 7,613,925 (includes Employee Benefit 79): differences Instruction 50,000, Instructional support 25,000, Student transportation 25,000",
+     "issue": "I re-derived the hidden 100,000 transfer to the Depreciation Fund and the 50,000/25,000/25,000 allocation by function group; the arithmetic holds. The allocation is inferred, not printed, and is already in decision_needed."}
+  ]
+}
