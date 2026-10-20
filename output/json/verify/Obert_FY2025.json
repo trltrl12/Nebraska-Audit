@@ -1,0 +1,18 @@
+{
+  "stem": "Obert_FY2025",
+  "values_checked": 33,
+  "issues": [
+    {"severity": "warning", "path": "decision_needed", "page": 1,
+     "extracted": "receipts[8] Local Receipts: Other 23,489.76 in category other; no decision_needed entry",
+     "on_page": "Local Receipts: Other, General Fund 23,489.76 (of 35,159.30 total receipts)",
+     "issue": "An unexplained line that is about 67% of governmental receipts. The General Fund also pays Water 10,690.40 and Solid Waste 3,615.50, so this is probably water/refuse charges collected in the General Fund, but nothing on the page says so. Only a person can settle it, and decision_needed[] doesn't exist."},
+    {"severity": "warning", "path": "disbursements[3].fund_type", "page": 3,
+     "extracted": "governmental (Solid Waste 3,615.50; also disbursements[4] Water 10,690.40)",
+     "on_page": "Business-Type Activities lines 45 and 48 printed in the GENERAL FUND column",
+     "issue": "Utility operations are accounted for in the General Fund. Keeping them governmental by column is defensible (the extractor flagged it with review), but these are business-type activities per the row heading."},
+    {"severity": "warning", "path": "disbursements[5].category", "page": 3,
+     "extracted": "debt service principal",
+     "on_page": "Debt Service 1,011.00 (Water Bond column); debt schedule p5: 5,278.07 outstanding at 5.00%",
+     "issue": "Principal and interest are combined (about 264 of it would be interest at 5% on roughly 5,278). Recorded as principal with review. Judgment call."}
+  ]
+}
