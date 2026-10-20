@@ -1,0 +1,11 @@
+{
+  "stem": "Atkinson_Housing_Agency_Elkhorn_Meadows_FY2025",
+  "values_checked": 16,
+  "issues": [
+    {"severity": "warning", "path": "business_type.transfers_net", "page": 1, "extracted": 6179.54, "on_page": "15 Transfers Between Funds In $3,089.77; 24 Transfers Between Funds Out ($3,089.77); Inter-fund: Reserve acct to Operating acct $3,089.77", "issue": "the transfer is between two accounts of the same entity and should net to zero, but the form prints the transfer out as a negative disbursement, so its roll-forward adds 3,089.77 twice. The figures are recorded as printed, but this is the report itself not adding up economically: ending 133,941.10 is 6,179.54 above beginning + receipts - disbursements (127,761.56). Belongs in report_discrepancies, which is absent"},
+    {"severity": "warning", "path": "reported_totals.business-type.disbursements.amount", "page": 1, "extracted": 121069.98, "on_page": "25 Total Disbursements $117,980.21", "issue": "not the printed total; computed as 117,980.21 + 3,089.77 to exclude the negative transfer line (marked computed). Arithmetic is right (107,900.82 + 13,169.16 = 121,069.98), but the rules call for the printed total with 'includes'"},
+    {"severity": "warning", "path": "receipts[2].category", "page": 1, "extracted": "charges for services/fees", "on_page": "14 Local Receipts -- project services, laundry, tenant charges, reserve interest $6,535.19", "issue": "mixed line including reserve interest (investment income); dominant category chosen, already marked review"},
+    {"severity": "warning", "path": "disbursements[1].category", "page": 1, "extracted": "debt service principal", "on_page": "21 Debt Service: Bond Principal & Interest Payments $13,169.16", "issue": "combined principal and interest, not split on the page; already marked review"},
+    {"severity": "warning", "path": "fiscal_year_end", "page": 1, "extracted": "2025-06-30", "on_page": "2025 AUDIT WAIVER REQUEST (no period dates printed)", "issue": "fiscal year end assumed; disclosed in notes"}
+  ]
+}
