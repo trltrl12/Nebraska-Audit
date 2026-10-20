@@ -1,0 +1,18 @@
+{
+  "stem": "Hadar_FY2025",
+  "values_checked": 28,
+  "issues": [
+    {"severity": "warning", "path": "disbursements[6].fund_type", "page": 3,
+     "extracted": "governmental", "on_page": "Line 47 Wastewater 11,370.23 (General Fund column, under 'Business-Type Activities')",
+     "issue": "This is a business-type activity row printed in the General Fund column. Keeping it governmental by column is defensible, since there is no utility fund, its receipts can't be separated and the governmental roll-forward needs it. It could still be read as business-type spending. A review flag is already set."},
+    {"severity": "warning", "path": "disbursements[6].original_label", "page": 3,
+     "extracted": "Wastewater (General Fund column)", "on_page": "Wastewater",
+     "issue": "The extractor added text to the printed label."},
+    {"severity": "warning", "path": "beginning_cash", "page": 1,
+     "extracted": 379313.73, "on_page": "Line 3 Subtotal of Beginning Balance 379,313.73 (Net Cash 248,299.34 + Investments 131,014.39)",
+     "issue": "beginning_cash/ending_cash use the cash-plus-investments subtotals, and beginning_investments/ending_investments are also filled. The roll-forward is correct and the notes explain it, but the investments are already inside cash, so anyone who adds the two fields together will double count them."},
+    {"severity": "warning", "path": "missing", "page": 1,
+     "extracted": null, "on_page": "County Treasurer Balance at October 1, 2024 $2,818.77; at September 30, 2025 2,576.62",
+     "issue": "The county treasurer balances printed under the statement are not recorded or mentioned in the notes. They are not part of the statement's totals, so this is informational only."}
+  ]
+}
