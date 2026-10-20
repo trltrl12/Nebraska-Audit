@@ -1,0 +1,22 @@
+{
+  "stem": "Boyd_-_Holt_County_911_Dispatch_Center_FY2025",
+  "values_checked": 29,
+  "issues": [
+    {"severity": "warning", "path": "receipts[0].category", "page": 1,
+     "extracted": "charges for services/fees", "on_page": "Assessments 695,014",
+     "issue": "These are assessments on the member counties (Boyd and Holt). The rules put county/local government payments under intergovernmental/state aid. Charges for services is defensible by analogy with rural fire contracts. Review."},
+    {"severity": "warning", "path": "receipts[0].fund_type", "page": 1,
+     "extracted": "business-type", "on_page": "Statement of Revenues, Support and Expenses - Modified Cash Basis (single column)",
+     "issue": "The extractor assumed a county-funded 911 dispatch center is entirely business-type. It is funded mainly by county assessments and surcharges and is governmental in nature. This assumption applies to every line."},
+    {"severity": "warning", "path": "business_type.measure", "page": 1,
+     "extracted": "net position", "on_page": "NET ASSETS (modified cash basis)",
+     "issue": "basis is 'cash' but measure is 'net position'. The rules say cash-basis statements use measure 'cash'. The statement rolls forward modified-cash net assets, so the label is defensible."},
+    {"severity": "warning", "path": "balance_sheet", "page": 1,
+     "extracted": "equity NET ASSETS - END OF YEAR 252,110; total_assets null",
+     "on_page": "no statement of net position / assets in trimmed PDF",
+     "issue": "The trimmed PDF has no balance sheet, so the equity line is taken from the activity statement and there are no asset lines. The balance check (assets = equity) can't be satisfied. This is a trimming gap."},
+    {"severity": "warning", "path": "detail[0].detail_category", "page": 2,
+     "extracted": "salaries and wages", "on_page": "Salaries and Payroll Taxes 534,174",
+     "issue": "Mixed line (wages plus payroll taxes). Using the dominant category is acceptable, but it isn't noted in the item or notes."}
+  ]
+}
