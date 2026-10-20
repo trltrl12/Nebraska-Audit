@@ -2,10 +2,45 @@
   "stem": "Algernon_Township_Custer_County_B2526",
   "values_checked": 11,
   "issues": [
-    {"severity": "error", "path": "beginning_investments", "page": 1, "extracted": 50916.34, "on_page": "Investments 50,916.34 is already inside line 5 Subtotal of Beginning Balances 103,986.20 (= beginning_cash)", "issue": "Investments counted twice: budget-form rule says leave beginning_investments null because beginning_cash already includes them; beginning cash + investments would overstate the opening balance by 50,916.34 and break the roll-forward against ending_cash 126,833.54 (which has ending_investments null)"},
-    {"severity": "error", "path": "fiscal_year_end", "page": 1, "extracted": "2025-09-30", "on_page": "no fiscal year-end date printed (column headed 2024 - 2025)", "issue": "Budget-form rule: if no year-end is printed use 2025-06-30 and say it was assumed in notes; 2025-09-30 has no basis on the page and notes do not mention an assumption"},
-    {"severity": "error", "path": "reported_totals.governmental.receipts", "page": 1, "extracted": null, "on_page": "Total Resources Available 182,787.78 - Subtotal of Beginning Balances 103,986.20 = 78,801.58", "issue": "Budget-form rule requires reported receipts = Total Resources Available minus line 5 subtotal (computed); left null. Receipt lines sum to 78,801.58, which agrees"},
-    {"severity": "warning", "path": "beginning_cash", "page": 1, "extracted": 103986.20, "on_page": 103986.20, "issue": "Amount correct (line 5 subtotal) but budget-form rule says mark it computed (net cash 52,942.91 + investments 50,916.34 + county treasurer 126.95); no computed field"},
-    {"severity": "warning", "path": "receipts[0].amount", "page": 1, "extracted": 75248.22, "on_page": "p1 (clean) 75,248.22; p2 (crossed out in red) 62,178.82", "issue": "Two versions of the Total All Funds page are filed with different 2024-25 property tax (75,248.22 vs 62,178.82), Local Receipts: Other (2,918.27 vs 2,300.36) and Operating Expenses (45,954.24 vs 32,266.93). Extractor used the un-struck p1, which is the defensible choice and both reach the same ending balance 126,833.54, but the user should know the actual-column figures were revised"}
+    {
+      "severity": "warning",
+      "path": "beginning_investments",
+      "page": 1,
+      "extracted": 50916.34,
+      "on_page": "Investments 50,916.34 is already inside line 5 Subtotal of Beginning Balances 103,986.20 (= beginning_cash)",
+      "issue": "[fixed directly] Investments counted twice: budget-form rule says leave beginning_investments null because beginning_cash already includes them; beginning cash + investments would overstate the opening balance by 50,916.34 and break the roll-forward against ending_cash 126,833.54 (which has ending_investments null)"
+    },
+    {
+      "severity": "warning",
+      "path": "fiscal_year_end",
+      "page": 1,
+      "extracted": "2025-09-30",
+      "on_page": "no fiscal year-end date printed (column headed 2024 - 2025)",
+      "issue": "[fixed directly] Budget-form rule: if no year-end is printed use 2025-06-30 and say it was assumed in notes; 2025-09-30 has no basis on the page and notes do not mention an assumption"
+    },
+    {
+      "severity": "warning",
+      "path": "reported_totals.governmental.receipts",
+      "page": 1,
+      "extracted": null,
+      "on_page": "Total Resources Available 182,787.78 - Subtotal of Beginning Balances 103,986.20 = 78,801.58",
+      "issue": "[fixed directly] Budget-form rule requires reported receipts = Total Resources Available minus line 5 subtotal (computed); left null. Receipt lines sum to 78,801.58, which agrees"
+    },
+    {
+      "severity": "warning",
+      "path": "beginning_cash",
+      "page": 1,
+      "extracted": 103986.2,
+      "on_page": 103986.2,
+      "issue": "Amount correct (line 5 subtotal) but budget-form rule says mark it computed (net cash 52,942.91 + investments 50,916.34 + county treasurer 126.95); no computed field"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[0].amount",
+      "page": 1,
+      "extracted": 75248.22,
+      "on_page": "p1 (clean) 75,248.22; p2 (crossed out in red) 62,178.82",
+      "issue": "Two versions of the Total All Funds page are filed with different 2024-25 property tax (75,248.22 vs 62,178.82), Local Receipts: Other (2,918.27 vs 2,300.36) and Operating Expenses (45,954.24 vs 32,266.93). Extractor used the un-struck p1, which is the defensible choice and both reach the same ending balance 126,833.54, but the user should know the actual-column figures were revised"
+    }
   ]
 }
