@@ -1,0 +1,22 @@
+{
+  "stem": "Chase_County_Schools_FY2025",
+  "values_checked": 152,
+  "issues": [
+    {"severity": "error", "path": "receipts[7].source_page", "page": 4,
+     "extracted": 5, "on_page": 4,
+     "issue": "The Interest 56,139 line is on page 4 of the governmental funds statement (also p2). Page 5 does not show 56,139."},
+    {"severity": "error", "path": "receipts[13].source_page", "page": 4,
+     "extracted": 5, "on_page": 4,
+     "issue": "The County receipts 5,216 line is on page 4. Page 5 does not show 5,216."},
+    {"severity": "error", "path": "disbursements[12].category", "page": 6,
+     "extracted": "other", "on_page": "Other 5,342 (= Student Fee Fund Drivers' education, p11/p21)",
+     "issue": "The report identifies this line as drivers' education (p11 Student Fee column; p21). A specific category fits (instruction), and detail[69] uses instruction for the same money, so 'other' is not the last resort here."},
+    {"severity": "warning", "path": "disbursements[8]", "page": 5,
+     "extracted": "Student transportation 468,225 (source_page 9)",
+     "on_page": "No Student transportation row on the governmental funds statement pp5-6; its printed lines sum to 12,387,030 vs printed Total disbursements 12,855,255 (General column 10,201,864 vs printed 10,670,089)",
+     "issue": "The amount is correct: it is printed on p1 and in the p9 Total column, and with it the total reconciles. But the statement itself does not add up (it is missing the row), and report_discrepancies does not mention that."},
+    {"severity": "warning", "path": "detail_totals[4].amount", "page": 16,
+     "extracted": 273, "on_page": "Interest 273; no 'Total receipts' line printed",
+     "issue": "The Employee Benefit Fund schedule prints no receipts total, so this total is the single line repeated and is not a printed total."}
+  ]
+}
