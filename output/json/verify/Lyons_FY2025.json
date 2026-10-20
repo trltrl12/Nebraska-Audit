@@ -1,0 +1,21 @@
+{
+  "stem": "Lyons_FY2025",
+  "values_checked": 170,
+  "issues": [
+    {"severity": "warning", "path": "missing", "page": null,
+     "extracted": null, "on_page": "Trimmed PDF jumps from report p7 to p10 and from p20 to p22: report pp8-9 (likely the proprietary Statement of Revenues, Expenses and Changes in Net Position) and p21 are not in the trimmed PDF",
+     "issue": "Trim gap, not an extraction error. Business-type receipts and disbursements come only from the Statement of Activities (p3), with one line per utility and no expense-by-object detail. Every page that was trimmed is fully covered by the JSON."},
+    {"severity": "warning", "path": "proprietary", "page": 7,
+     "extracted": null, "on_page": "Statement of Cash Flows - Proprietary Fund: net cash from operating 50,801; capital financing (105,635); investing 56,383; transfers to other funds (105,128); beginning cash 1,863,032; ending 1,759,453",
+     "issue": "proprietary is left null because the governmental basis is cash, but the utilities are reported on an accrual basis and the trimmed PDF prints a full proprietary cash flow statement. Consider capturing it."},
+    {"severity": "warning", "path": "other_financing", "page": 5,
+     "extracted": 47052, "on_page": "Grants and donations 47,052 (under Other Financing Sources)",
+     "issue": "Recorded as printed on p5 and p8 (other financing). But the Statement of Activities (p3) counts it as Operating Grants and Contributions for culture and recreation (47,252 = 47,052 + 200 state aid), and on p10 it is labelled 'Grant/donation income' for Parks 46,432 and Library 620. Arguably it is a receipt (donations/contributions). It also affects detail[101] and detail[102]."},
+    {"severity": "warning", "path": "detail[14].amount", "page": 10,
+     "extracted": 291, "on_page": "291 (Parks, Interest/dividends)",
+     "issue": "Possible faint digit. The Interest row (1,200 + 291 = 1,491 vs printed 1,492) and the Parks receipts column (32,883 vs printed 32,884) are both 1 short at this cell, so 292 would tie both. The page has rounding differences of 1-2 throughout (the printed row totals themselves sum to 819,251 vs the printed 819,250), so 291 as read is probably right. The review note on detail[13] (General 1,200 'may be 1,201') points the wrong way: the General column already sums to 586,013, 1 over the printed 586,012."},
+    {"severity": "warning", "path": "detail[99].category", "page": 10,
+     "extracted": "economic development", "on_page": "LB 840 7,472 (General department column)",
+     "issue": "Fits the category rule (LB840 = economic development). But the General column's total 130,372 equals the statement's General government function (p3, p5), so the detail function split no longer ties to the statement's general government line by 7,472."}
+  ]
+}

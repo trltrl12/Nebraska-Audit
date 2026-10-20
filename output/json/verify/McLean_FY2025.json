@@ -1,0 +1,18 @@
+{
+  "stem": "McLean_FY2025",
+  "values_checked": 28,
+  "issues": [
+    {"severity": "warning", "path": "receipts[8].original_label", "page": 1,
+     "extracted": "Local Receipts: Other (General Fund)", "on_page": "Local Receipts: Other (General Fund column 10,299.26; Enterprise Fund column 19,415.31; Total 29,714.57)",
+     "issue": "Row 18 is split by fund column, but neither part has split_from (the rules for per-fund-column village statements say to split mixed rows by column with split_from). The amounts are printed in their columns and are correct. The '(General Fund)'/'(Enterprise Fund)' suffixes were added to the printed label."},
+    {"severity": "warning", "path": "receipts[9].category", "page": 1,
+     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Enterprise Fund) 19,415.31",
+     "issue": "Calling this utility charges is an assumption: the page doesn't say what the Enterprise Fund's 'Other' local receipts are. It is reasonable because the fund only spends on solid waste, wastewater and water. Already marked review."},
+    {"severity": "warning", "path": "receipts[8].category", "page": 1,
+     "extracted": "other", "on_page": "Local Receipts: Other 10,299.26",
+     "issue": "Nothing in the trimmed PDF explains this line, so 'other' is allowed, but it is 30.6% of governmental receipts (more than the 10% limit). Already marked review."},
+    {"severity": "warning", "path": "balance_sheet.assets", "page": 1,
+     "extracted": "Net Cash Balance 118,194.70 only", "on_page": "County Treasurer Balance at October 1, 2024 $325.38; County Treasurer Balance at September 30, 2025 161.68",
+     "issue": "The memo boxes for the county treasurer balance are not in the JSON and not mentioned in notes. They seem to be held outside the village's Net Cash Balance, since lines 24 and 28 agree without them, so this is probably correct. A person should confirm they don't need to be recorded."}
+  ]
+}

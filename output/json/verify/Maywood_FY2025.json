@@ -1,0 +1,24 @@
+{
+  "stem": "Maywood_FY2025",
+  "values_checked": 116,
+  "issues": [
+    {"severity": "warning", "path": "detail[6].budget_final", "page": 8,
+     "extracted": null, "on_page": "General Fund budget schedule: Charges for services, budget 1,000, actual 160",
+     "issue": "The notes say budget_final is filled where p8 shows a matching line. p8's Charges for services line (actual 160) matches this Park line exactly, but budget_final was left null. Rental fees (budget '-') and interest (actual split across departments) are fine as null."},
+    {"severity": "warning", "path": "detail[9].detail_category", "page": 11,
+     "extracted": "salaries and wages", "on_page": "Salaries, taxes, and benefits 11,334 (General); also detail[10] Park 642",
+     "issue": "The line mixes wages, payroll taxes and benefits, and was put under salaries and wages (it is marked review). It's a judgement call."},
+    {"severity": "warning", "path": "detail[27].detail_category", "page": 11,
+     "extracted": "equipment purchases", "on_page": "Capital outlay 5,923 (General Fund, General dept)",
+     "issue": "The object of the capital outlay is not stated, so the category is a guess (marked review). Likewise detail[44] (Street Capital outlay 17,520, p9) went to construction/infrastructure."},
+    {"severity": "warning", "path": "detail[32].detail_category", "page": 9,
+     "extracted": "highway allocation", "on_page": "Street Fund Intergovernmental 59,602",
+     "issue": "Presumed to be highway allocation; it may include other state/local aid (marked review)."},
+    {"severity": "warning", "path": "receipts[10].category", "page": 6,
+     "extracted": "charges for services/fees", "on_page": "Other revenue 6,936 (Water 6,974, Sewer (38))",
+     "issue": "Operating 'Other revenue' is presumed to be utility fees; not explained on the page (marked review)."},
+    {"severity": "warning", "path": "proprietary", "page": 7,
+     "extracted": "Water Fund only (operating 50,500; ending cash 179,706)", "on_page": "Statement of Cash Flows - Proprietary Funds prints only a Water Fund column; enterprise cash total is 316,833 (p5)",
+     "issue": "The report prints no total enterprise column, so the proprietary cash flows cover Water only and won't tie to the business-type total cash. The notes say so; the gap is in the report itself."}
+  ]
+}
