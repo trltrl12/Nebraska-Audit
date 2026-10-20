@@ -1,14 +1,12 @@
 {
   "stem": "Alma_Rural_Fire_District_B2526",
-  "values_checked": 12,
+  "values_checked": 22,
   "issues": [
-    {"severity": "warning", "path": "notes", "page": 2,
-     "extracted": "Total All Funds p2 used (ending 278,195.95)",
-     "on_page": "p2 is struck through with a red X; p1 (not crossed out) shows ending 283,009.19, net cash 326,498.85, Local Receipts: Other 76,831.31, total resources 1,010,628.23",
-     "issue": "Extractor used the crossed-out Total All Funds page. It agrees with the 2024-2025 worksheet (p5), and its beginning balance 417,051.82 matches the 2023-2024 worksheet ending (p6), so the choice follows the budget-form rule and looks right. Still, the page that seems to be the submitted one (p1) differs on beginning cash (418,258.08 vs 417,051.82), local receipts (76,831.31 vs 73,224.33) and ending cash (283,009.19 vs 278,195.95). A human should confirm which version is final."},
     {"severity": "warning", "path": "transfers_in.amount", "page": 3,
-     "extracted": 227511.85,
-     "on_page": "Documentation of Transfers: Bond Fund to General 207,511.00 + General to Sinking 20,000.00 = 227,511.00; Total All Funds line 16/28 and worksheet p5 show 227,511.85 (Bond Fund out 207,511.85)",
-     "issue": "The Documentation of Transfers page is 0.85 lower than the transfer lines on the form. The extractor used the line 16/28 figure (it matches the worksheet and keeps the roll-forward in balance) but didn't mention the 0.85 gap in notes or report_discrepancies. Same applies to transfers_out."}
+     "extracted": 227511.85, "on_page": "Documentation of Transfers: Bond Fund to General 207,511.00; General to Sinking 20,000.00 (total 227,511.00); p1 lines 16/28 = 227,511.85",
+     "issue": "The rule says transfers come from the Documentation of Transfers page when it is filled in. The extractor used lines 16/28 (227,511.85, which the p5 worksheet supports with 207,511.85) instead of 227,511.00. In and out net to zero, so reconciliation is unaffected. The 0.85 difference is mentioned in notes but not in report_discrepancies. The same applies to transfers_out.amount."},
+    {"severity": "warning", "path": "receipts[2].category", "page": 1,
+     "extracted": "other", "on_page": "Local Receipts: Other 76,831.31",
+     "issue": "Unspecified local receipts in other (about 21% of receipts) with review. Defensible, but it exceeds the 10% other threshold."}
   ]
 }

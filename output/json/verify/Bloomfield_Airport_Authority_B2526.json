@@ -1,21 +1,12 @@
 {
   "stem": "Bloomfield_Airport_Authority_B2526",
-  "values_checked": 12,
+  "values_checked": 15,
   "issues": [
-    {"severity": "error", "path": "receipts[0-5].fund_type", "page": 1,
-     "extracted": "governmental", "on_page": "Bloomfield Airport Authority (airport authority)",
-     "issue": "The extractor rules (Entity types) and CLAUDE.md treat airport authorities as entirely business-type entities, so every line should be fund_type business-type. The other airport budget form (Albion_Airport_Authority_B2526) was extracted that way, so the two are inconsistent."},
-    {"severity": "error", "path": "disbursements[0-1].fund_type", "page": 1,
-     "extracted": "governmental", "on_page": "Operating Expenses 65,813.98; Capital Improvements 1,443,608.70",
-     "issue": "Should be business-type (airport authority), as above."},
-    {"severity": "error", "path": "business_type", "page": 1,
-     "extracted": null, "on_page": "beginning 110,801.50 (line 5), ending 13,083.23 (line 30)",
-     "issue": "For an entirely business-type entity, business_type should hold measure 'cash', beginning 110,801.50 (computed, line 5 subtotal) and ending 13,083.23. Top-level beginning_cash/ending_cash should be null, and the totals should go in reported_totals['business-type'] instead of governmental. The amounts themselves are correct."},
     {"severity": "warning", "path": "disbursements[0].category", "page": 1,
      "extracted": "other", "on_page": "Operating Expenses 65,813.98",
-     "issue": "There is no airport function category, so 'other' with review is defensible. Albion airport used the same treatment."},
+     "issue": "Airport operating expenses put in other with review, because no disbursement category fits an airport. Defensible, but it is a judgment call."},
     {"severity": "warning", "path": "receipts[5].category", "page": 1,
      "extracted": "other", "on_page": "Local Receipts: Other 216,018.18",
-     "issue": "Large (15% of receipts) and unexplained; it may be a local match or grant for the 1.44M capital project. 'other' with review is defensible since the page doesn't say."}
+     "issue": "Large unspecified local receipts (about 15% of receipts) in the other category, in a year with a 1,443,608.70 capital improvement. They may be grant or local matching funds, but the page does not say, so other with review is defensible."}
   ]
 }
