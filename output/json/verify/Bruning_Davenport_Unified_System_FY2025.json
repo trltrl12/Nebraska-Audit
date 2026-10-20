@@ -1,0 +1,62 @@
+{
+  "stem": "Bruning_Davenport_Unified_System_FY2025",
+  "values_checked": 228,
+  "issues": [
+    {
+      "severity": "warning",
+      "path": "detail[80].budget_final",
+      "page": 20,
+      "extracted": null,
+      "on_page": 109945.0,
+      "issue": "[fixed: budget_final filled as printed] 8000 Transfers (Schedule B) has a printed budget of 109,945.00, recorded as null"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[131].budget_final",
+      "page": 27,
+      "extracted": null,
+      "on_page": 54.09,
+      "issue": "[fixed: budget_final filled as printed] 8000-911 Transfer To General Fund (Schedule L) has a printed budget of 54.09, recorded as null"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[28]",
+      "page": 21,
+      "extracted": "other 300,000.00 (5200 Allocation from General Fund)",
+      "on_page": "Depreciation Fund 5200 Allocation from General Fund 300,000.00; included in statement Non-Revenue Receipts 306,272.30 (p8)",
+      "issue": "a transfer-like allocation kept as revenue. The General Fund shows no matching outflow (Schedule B lines sum to 5,694,371.64 plus 8000 Transfers 265,000 = 5,959,371.64, and transfers out of 265,000 go only to Activities 115,000 and Nutrition 150,000). Keeping it as a receipt is therefore needed for the identity and is defensible, but it is probably a property tax levy allocation rather than 'other'. Same for detail[95]. Marked review."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[21].category",
+      "page": 9,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "County Receipts 34,160.55",
+      "issue": "96% of this line is 2110 County Fines and Licenses 32,857.55 (p17), which detail categorizes as fines and forfeitures. The mixed-line rule calls for the dominant category with review, or a split from Schedule A, as was done for Local Receipts."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[0]",
+      "page": 17,
+      "extracted": "Local Receipts 3,218,027.13 split into 21 items",
+      "on_page": "Exhibit III Local Receipts 3,218,027.13 (p9); per-fund schedules A/I/F/G print the lines",
+      "issue": "split built from the fund schedules (GF Schedule A 1000 Local Receipts less 1510 interest, which the statement shows separately). The arithmetic is exact (2,926,310.94 + 135,503.44 + 156,043.56 + 169.19). It is defensible as the report's own breakdown, but it is the extractor's reconstruction and goes to review."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[38].category",
+      "page": 11,
+      "extracted": "other",
+      "on_page": "Community Services Operations 9,432.02",
+      "issue": "no direct category; culture/recreation or general government might fit. Marked review."
+    },
+    {
+      "severity": "warning",
+      "path": "detail",
+      "page": 28,
+      "extracted": "Schedule B (program level, not itemized)",
+      "on_page": "Schedule M - Operational Expenses by object (unaudited), pp28-30, truncated at program 2171",
+      "issue": "the more detailed object-level schedule exists but is cut off by trimming, so the extractor used the program-level Schedule B. This avoids double counting and is defensible, but the object detail for programs 1100-2171 on pp28-30 is not captured."
+    }
+  ]
+}
