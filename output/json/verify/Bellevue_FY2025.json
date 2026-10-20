@@ -1,21 +1,21 @@
 {
   "stem": "Bellevue_FY2025",
-  "values_checked": 136,
+  "values_checked": 137,
   "issues": [
-    {"severity": "warning", "path": "detail[7].category", "page": 5,
+    {"severity": "error", "path": "detail[7].category", "page": 5,
      "extracted": "other / miscellaneous revenue", "on_page": "Miscellaneous and reimbursements 3,894,297",
-     "issue": "The rules say a mixed line gets its dominant category plus a review note naming the mix, with 'other' as a last resort. On p4's General Fund column, Reimbursements (1,069,844) is larger than Miscellaneous (443,059), which points to reimbursements/refunds. The budget-basis amount is much larger than both, so the dominant part is uncertain."},
-    {"severity": "warning", "path": "receipts[7].category", "page": 4,
-     "extracted": "intergovernmental/state aid", "on_page": "Intergovernmental 20,172,658",
-     "issue": "Unlabeled mix: the p2 Statement of Activities shows 14.6M operating grants and 1.3M capital grants, some of which are likely federal. There is no review flag here, though the matching General Fund detail line (detail[6]) has one."},
-    {"severity": "warning", "path": "detail[10].category", "page": 5,
-     "extracted": "economic development", "on_page": "Community development 27,177,240 (budget basis)",
-     "issue": "Community development mapped to economic development. That is flagged for review on disbursements[2] but not here or on detail[16]. The budget-basis amount (27.2M vs 4.6M GAAP) suggests it includes capital or other non-economic-development spending."},
+     "issue": "The rules name 'Miscellaneous and reimbursements' as a mixed line that gets its dominant category plus review. It must not go to 'other'. On p4 (General Fund) Reimbursements 1,069,844 outweighs Miscellaneous 443,059, so the line should be reimbursements/refunds with detail_category reimbursements/refunds, and the review should name the mix."},
     {"severity": "warning", "path": "detail[18]", "page": 10,
-     "extracted": "LB840 investment income 89,605; economic development 13,508; transfers 750,000 (detail[18]-[20])", "on_page": "Schedule of Revenues and Expenditures - LB840 Funds",
-     "issue": "Possible double count. The economic development restriction (2,982,415) sits in the General Fund column (p3), so LB840 activity is probably already inside the General Fund budget schedule (p5). Review already set."},
-    {"severity": "warning", "path": "balance_sheet.liabilities[3].category", "page": 1,
-     "extracted": "accrued liabilities", "on_page": "Compensated absences - Payable in more than one year 4,282,740",
-     "issue": "The accrued liabilities category is defined as compensated absences due soon. The long-term portion would fit better under other liabilities."}
+     "extracted": "LB840 schedule lines (investment income 89,605; economic development 13,508; transfers 750,000)", "on_page": "Schedule of Revenues and Expenditures - LB840 Funds",
+     "issue": "Likely double counted with the General Fund budget schedule. The only governmental 'Restricted - Economic development' balance (2,982,415) sits in the General Fund column (p3), and LB840's ending balance of 2,415,152 fits inside it, which suggests LB840 is reported inside the General Fund. Applies to detail[18]-detail[20] and the LB840 detail_totals. Already marked review."},
+    {"severity": "warning", "path": "receipts[1].category", "page": 4,
+     "extracted": "other taxes", "on_page": "Payments in-lieu of taxes and franchise taxes 1,473,417",
+     "issue": "Mixed line. In-lieu of tax looks dominant (p5 General Fund: in-lieu 851,413 vs franchise 532,508), so 'other taxes' is defensible. The review text says 'no single category fits' instead of naming the dominant part."},
+    {"severity": "warning", "path": "disbursements[2].category", "page": 4,
+     "extracted": "economic development", "on_page": "Community development 4,605,293",
+     "issue": "Mapping 'Community development' to economic development is a judgment call. Same for detail[10] and detail[16]. Already marked review."},
+    {"severity": "warning", "path": "detail[5].category", "page": 5,
+     "extracted": "charges for services/fees", "on_page": "Permits, fees and licenses 10,316,690",
+     "issue": "Mixed line. Taking the dominant part from the p4 GAAP split (fees plus charges for services 8.4M vs permits 1.9M) is defensible. Already marked review."}
   ]
 }
