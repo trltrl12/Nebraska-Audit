@@ -1,0 +1,19 @@
+{
+  "stem": "Loup_Basin_Public_Health_Department_FY2025",
+  "values_checked": 69,
+  "issues": [
+    {"severity": "warning", "path": "beginning_cash", "page": 5, "extracted": null, "on_page": 1881193,
+     "issue": "Notes say beginning cash is not shown, but the cash-basis budgetary schedule p5 prints 'Fund Balance - Beginning of Year' Actual 1,881,193, and its ending 896,646 equals Cash in Bank. It could be recorded as beginning_cash (p5)."},
+    {"severity": "warning", "path": "missing", "page": 5, "extracted": null,
+     "on_page": "Budgetary schedule expenditures (Actual / Budget): Public Health 1,531,706 / 2,761,905; Capital Improvements 2,161,288 / 2,677,000; Other Capital Outlay 20,206 / 150,000; Total Expenditures 3,713,200",
+     "issue": "Left out on purpose (the p6 object schedule supersedes them, as the notes say). This is defensible under the no-double-counting rule, but the expenditure budget figures are lost, and the detail revenue (cash basis, p5) and detail expenditure (GAAP, p6) now come from different bases."},
+    {"severity": "warning", "path": "detail[8].category", "page": 6, "extracted": "capital outlay / land and buildings 2,389,751", "on_page": "Capital Outlay 2,389,751",
+     "issue": "The detail function split doesn't tie to the statement p4. The p6 non-capital lines total 1,556,042 against Public Health 1,576,248, and p6 Capital Outlay 2,389,751 is 20,206 more than the statement's 2,369,545. 20,206 equals 'Other Capital Outlay' on p5, so the statement counts 20,206 of the schedule's capital outlay as Public Health. The detail_category 'land and buildings' is also a guess: p5 only says Capital Improvements / Other Capital Outlay."},
+    {"severity": "warning", "path": "receipts[0].category", "page": 4, "extracted": "intergovernmental/state aid", "on_page": "Federal and State Funding 2,430,656",
+     "issue": "Mixes federal and state money and no split is printed. Recorded entirely as state aid (already marked review); detail[0] uses 'other state aid' the same way."},
+    {"severity": "warning", "path": "receipts[1].category", "page": 4, "extracted": "intergovernmental/state aid", "on_page": "Grants 267,500",
+     "issue": "Grantor not stated. The Statement of Activities p2 groups it under 'Operating Grants and Contributions', so it could be federal grants or private contributions (already marked review)."},
+    {"severity": "warning", "path": "detail[18].category", "page": 6, "extracted": "health/welfare", "on_page": "Interest 98",
+     "issue": "An interest expense line was given the function health/welfare; 'debt service interest' would match the object. It is immaterial, and the statement does include it in Public Health."}
+  ]
+}
