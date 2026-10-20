@@ -1,0 +1,27 @@
+{
+  "stem": "Douglas_County_SID_596_FY2025",
+  "values_checked": 65,
+  "issues": [
+    {"severity": "warning", "path": "receipts[2].category", "page": 2,
+     "extracted": "intergovernmental/state aid", "on_page": "State Motor Vehicle Tax Allocation 323",
+     "issue": "label is a motor vehicle tax allocation, not pro-rate; category 'motor vehicle tax' may fit better"},
+    {"severity": "warning", "path": "detail[2].detail_category", "page": 4,
+     "extracted": "motor vehicle pro-rate", "on_page": "State Motor Vehicle Tax Allocation 148",
+     "issue": "label does not say pro-rate; could be 'motor vehicle tax' (same for detail[12], 175, p5)"},
+    {"severity": "warning", "path": "receipts[3].category", "page": 2,
+     "extracted": "other", "on_page": "Collection in District 7,568 (Debt Service Fund)",
+     "issue": "nature not stated on page; may be special assessment collections; review flag set"},
+    {"severity": "warning", "path": "detail[13].detail_category", "page": 5,
+     "extracted": "miscellaneous revenue", "on_page": "Collection in District 7,568",
+     "issue": "same as above"},
+    {"severity": "warning", "path": "balance_sheet.liabilities[2].original_label", "page": 1,
+     "extracted": "Bonds (accrued interest, listed under Warrants Payable)", "on_page": "Bonds 21,589",
+     "issue": "printed label is only 'Bonds' (indented under Warrants Payable, Debt Service Fund column); extractor's label adds interpretation; categorized as accrued interest on bonds, a reasonable but unconfirmed guess (review flag set)"},
+    {"severity": "warning", "path": "detail", "page": 4,
+     "extracted": null, "on_page": "GF: Clerk Fees - (budget 1,292); Utilities - (12,000); Warrants Issued/Retired - (52,592/(52,592)). DS: Engineering, Fiscal Agent Fees, Professional Fees - (no budget)",
+     "issue": "lines with '-' GAAP actual omitted (disclosed in notes); budget_final for these lines is lost"},
+    {"severity": "warning", "path": "detail", "page": 4,
+     "extracted": "Actual on GAAP Basis column", "on_page": "Schedules print both 'Actual on GAAP Basis' and 'Actual on Budgetary Basis'",
+     "issue": "extractor chose the GAAP-basis actual column (ties to p2); budgetary-basis actuals differ; assumption noted"}
+  ]
+}
