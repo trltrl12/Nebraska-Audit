@@ -132,6 +132,7 @@ These were diagnosed and fixed in find_pages v6; re-extract and re-verify them a
   Grand_Island_Public_Schools_Foundation_FY2025 (all 5 trimmed pages cut off on the right: Total and Jack Martin
   columns missing; skipped, no JSON).
   Garfield_County_Agricultural_Society_FY2025 (report p25 not trimmed: trimmed jumps p24 to p26).
+  Grand_Island_Public_Schools_FY2025 (report p39, probably the Activities Fund schedule, not trimmed).
   Grand_Island_FY2025 (nonmajor combining schedule's Total column page not trimmed; nonmajor detail left out).
   Gering_Ft_Laramie_Irrigation_District_FY2025 (nonoperating/capital-grant statement page not trimmed; 9,257,241
   derived as an adjustment meanwhile).
