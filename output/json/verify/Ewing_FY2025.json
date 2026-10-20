@@ -1,6 +1,6 @@
 {
   "stem": "Ewing_FY2025",
-  "values_checked": 142,
+  "values_checked": 146,
   "issues": [
     {
       "severity": "error",
@@ -8,7 +8,7 @@
       "page": 10,
       "extracted": null,
       "on_page": "Debt service - Principal: Actual 44,433, Budget 47,232",
-      "issue": "[fixed] All-funds budget schedule debt service principal (business-type Water/Sewer loan principal, matches p9 principal payments 44,433) is not in detail, though the extractor recorded the other business-type lines (Sanitation, Wastewater, Water) from this schedule. The extractor rules say to record business-type debt service lines from the budget schedule."
+      "issue": "[fixed] All-funds budget schedule debt service principal (business-type Water/Sewer loan principal, matches p9 principal payments 44,433) is not in detail, though the extractor recorded the other business-type lines (Sanitation, Wastewater, Water) from this schedule. The extractor rules say to record business-type debt service lines from the budget schedule. Re-check: now detail[69], amount 44,433 and budget_final 47,232 match p10; p9 confirms Water 18,366 + Sewer 26,067 = 44,433."
     },
     {
       "severity": "error",
@@ -16,7 +16,15 @@
       "page": 10,
       "extracted": null,
       "on_page": "Debt service - Interest: Actual 26,876, Budget 26,876",
-      "issue": "[fixed] Business-type debt service interest line on the p10 budget schedule is not in detail (the extractor left it out, as with principal)."
+      "issue": "[fixed] Business-type debt service interest line on the p10 budget schedule is not in detail (the extractor left it out, as with principal). Re-check: now detail[70], amount 26,876 and budget_final 26,876 match p10; p9 confirms Water 9,232 + Sewer 17,644 = 26,876. No double counting: p10 lists debt service separately from the Sanitation/Wastewater/Water lines, and governmental functions 304,882 + Sanitation/Wastewater/Water 174,737 + debt service 71,309 = 550,928, the printed total expenditures."
+    },
+    {
+      "severity": "warning",
+      "path": "notes",
+      "page": 10,
+      "extracted": "its debt service and transfers lines are not split by fund and not recorded",
+      "on_page": "Debt service Principal 44,433 / Interest 26,876 (now in detail[69], detail[70])",
+      "issue": "The notes are out of date: the p10 debt service lines are now in detail with a placeholder fund 'Water/Sewer (business-type debt)'. That fund name isn't printed on p10, which is an All Funds schedule; the Water/Sewer split comes from p9."
     },
     {
       "severity": "warning",
