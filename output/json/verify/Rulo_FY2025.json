@@ -1,0 +1,21 @@
+{
+  "stem": "Rulo_FY2025",
+  "values_checked": 30,
+  "issues": [
+    {"severity": "warning", "path": "disbursements[0].category", "page": 3,
+     "extracted": "general government", "on_page": "General Government line 29: General 84,465.47, Street 21,954.04, Cemetery 12,930.67, Fire 6,206.80, Keno 13,383.00",
+     "issue": "Every fund's spending is printed on the General Government line. Street, Cemetery and Fire fund spending is probably streets/highways, health/welfare and public safety. Recording it as printed is defensible, but the function split is misleading."},
+    {"severity": "warning", "path": "receipts[9].category", "page": 1,
+     "extracted": "keno/lottery", "on_page": "Local Receipts: Other, Keno Fund column 34,885.87",
+     "issue": "The category comes from the fund name, not the line label (already marked review)."},
+    {"severity": "warning", "path": "receipts[10].category", "page": 1,
+     "extracted": "other", "on_page": "Local Receipts: Other: General 8,956.52, Street 178.70, Cemetery 3,561.30, Fire 36.10, Rev. Sharing 4.50",
+     "issue": "Several fund columns are combined into one 'other' line. The Cemetery 3,561.30 is probably cemetery fees, but the page doesn't break it down."},
+    {"severity": "warning", "path": "receipts[11].category", "page": 1,
+     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other, Enterprise Fund 52,989.55",
+     "issue": "Enterprise-fund 'Other' receipts are presumed to be utility charges. The p6 transfer schedule calls this fund 'Water'."},
+    {"severity": "warning", "path": "transfers_in", "page": 6,
+     "extracted": 23205.81, "on_page": "Cemetery to Cemetery 2,203.91",
+     "issue": "The schedule lists a transfer from the Cemetery fund to itself. It shows as both a transfer in and a transfer out, so it nets to zero, but it inflates gross transfers and looks like a preparer error."}
+  ]
+}
