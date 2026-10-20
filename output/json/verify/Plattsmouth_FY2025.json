@@ -1,0 +1,29 @@
+{
+  "stem": "Plattsmouth_FY2025",
+  "values_checked": 172,
+  "issues": [
+    {"severity": "error", "path": "missing", "page": 11,
+     "extracted": null,
+     "on_page": "Combined Statement of Receipts, Disbursements, and Changes in Cash Balances - Budget and Actual - Budgetary Basis, All Funds: Water actual 10,072,074 (budget 17,812,570); Sewer actual 36,551,327 (budget 34,470,270)",
+     "issue": "Page 11 is a budget-to-actual schedule and none of its lines are in detail[]. The Water and Sewer disbursement lines are clearly business-type, and no other schedule covers those funds (detail has no business-type lines), so recording them would not double count. The rule says to record budget-schedule lines for every fund the detailed General Fund schedule doesn't cover, including each utility fund. The notes explain the omission, but these two lines can be recorded without mixing fund types."},
+    {"severity": "warning", "path": "missing", "page": 11,
+     "extracted": null,
+     "on_page": "Receipts: Taxes 4,288,935; Intergovernmental 2,168,341; Local receipts - other 42,014,114 (total 48,471,390). Disbursements: General government 5,013,978; Public Safety - Police - EMS - Fire 3,548,981; Public Works - Streets 3,156,924; Public Health and Social Services 95,827; Culture and Recreation 2,143,910; Community Development 669,466 (total 61,252,487)",
+     "issue": "The other lines on p11 mix the General Fund (already detailed on pp12-15), the other governmental funds and the utility funds (receipts) in one column. Leaving them out to avoid double counting can be defended, but the nonmajor governmental funds now have no detail anywhere."},
+    {"severity": "warning", "path": "receipts[0].amount", "page": 5,
+     "extracted": 2200410, "on_page": "Taxes 4,288,935 (p5); Statement of Activities 'Property taxes' 2,200,410 (p3)",
+     "issue": "The split matches the p3 breakdown and the arithmetic holds (2,200,410 + 2,088,525 = 4,288,935). But the GF schedule (p12) shows the p3 'Property taxes' figure also holds Motor vehicle taxes 130,916 and Occupation taxes 163,689: 1,344,622 + 130,916 + 163,689 + Debt Service taxes 561,183 = 2,200,410. So 294,605 of motor vehicle and occupation tax is counted as property tax. A finer split could be built from p5 and p12 (property 1,905,805, motor vehicle 130,916, occupation 163,689), but it assumes the Debt Service taxes 561,183 are all property tax."},
+    {"severity": "warning", "path": "detail[51..55].category, detail[65..69].category", "page": 14,
+     "extracted": "health/welfare", "on_page": "Cemetery and Senior Citizen Center printed under 'Culture and Recreation'",
+     "issue": "The schedule puts Cemetery (219,704) and Senior Citizen Center (208,125) under Culture and Recreation, and the statement's Public Health and Welfare (p5, 95,826) is Animal Control only. The general rule (cemetery and senior services = health/welfare) supports the extractor's choice, but because of it the detail function totals don't tie to the statement's function lines."},
+    {"severity": "warning", "path": "detail[*].detail_category (Administrative and general lines)", "page": 13,
+     "extracted": "not itemized", "on_page": "Administrative and general",
+     "issue": "'Administrative and general' is an object line inside an itemized department, not a function total with no object breakdown. 'not itemized' or 'miscellaneous expenditure' are both judgment calls. The amount is large (about 1.07M across the GF departments)."},
+    {"severity": "warning", "path": "detail[*].detail_category (Personnel services lines)", "page": 13,
+     "extracted": "salaries and wages", "on_page": "Personnel services",
+     "issue": "'Personnel services' most likely includes benefits and payroll taxes as well as wages. No split is printed, so salaries and wages is a reasonable choice."},
+    {"severity": "warning", "path": "receipts[11].category", "page": 9,
+     "extracted": "intergovernmental/state aid", "on_page": "Intergovernmental grants 39,179,759 (shown as Capital Grants and Contributions on p3)",
+     "issue": "These capital grants are 94% of business-type receipts. Recording them as nonoperating revenue follows p9, but the funding source (state, federal or SRF) is unknown. They could be federal grants, or could be treated as capital contributions. The line is already marked review."}
+  ]
+}
