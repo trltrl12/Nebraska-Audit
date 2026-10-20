@@ -1,0 +1,30 @@
+{
+  "stem": "Sargent_Public_Schools_FY2025",
+  "values_checked": 210,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "missing",
+      "page": 22,
+      "extracted": null,
+      "on_page": "Schedule of Receipts, Disbursements, Transfers and Fund Balance - Activities Fund (report p49): per-account lines Athletic Equipment through Library Fines (e.g. FFA receipts 48,324 / disbursements 39,917; FBLA 25,237 / 24,898; Concessions 20,186 / 11,308). The schedule continues on report p50, which is not in the trimmed PDF.",
+      "issue": "[fixed] (trim gap logged in CLAUDE.md follow-ups) The per-account Activities Fund schedule is printed, and the rules say to record it account by account in place of the one-line budget schedule. None of its lines are in detail[]. The extractor used the Activities budget schedule (p19: 205,266 receipts / 218,220 disbursements) because the trim cuts off after Library Fines, so the accounts cannot be tied to the totals. The trimmed PDF is missing report p50. Re-trim, then record the schedule account by account."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[16].category",
+      "page": 10,
+      "extracted": "support services",
+      "on_page": "Other Support Services 408,323 (GF 103,526 + Depreciation 86,577 + Activities 218,220, p9)",
+      "issue": "Activities Fund spending is 218,220 of the 408,323 (53%). The rule for mixed function lines says to use the dominant category, which here is 'student activities'. The line is already marked review."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[2].category",
+      "page": 8,
+      "extracted": "fines and forfeitures",
+      "on_page": "Fines and Licenses 10,794",
+      "issue": "The line mixes fines and licenses but has no review flag naming the mix. detail[3] (1911, 600) and detail[7] (2110, 10,194) have the same gap. For a school district this is mostly state apportionment of fines and licenses, so the category is defensible."
+    }
+  ]
+}
