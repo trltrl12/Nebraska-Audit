@@ -2,35 +2,85 @@
   "stem": "Atkinson_FY2025",
   "values_checked": 264,
   "issues": [
-    {"severity": "error", "path": "receipts[10].category", "page": 6,
-     "extracted": "other", "on_page": "Other 639,006",
-     "issue": "Line is not unexplained: the fund schedules print its full breakdown, which adds to exactly 639,006. General 502,457 (p18) = PPD lease 444,604 + rentals 25,531 + gas franchise 6,677 + cable/cell franchise 2,537 + occupation taxes 2,085 + lot sales 5,150 + other 15,873. Street 3,496 other (p21). LB 840 110,117 loan payments (p24). Other column 22,936 = Econ Dev loan repayments 4,643 (p27) + CDBG loan payments 14,733 (p25) + Library donations 3,560 (p23). The dominant part (PPD lease 444,604, about 70%) is categorized charges for services/fees elsewhere in this JSON (receipts[13], detail[10]). Either split it with split_from (as was done for Taxes) or give it the dominant category charges for services/fees with review. The note and review text saying 'no full breakdown across funds' is incorrect."},
-    {"severity": "warning", "path": "receipts[3].category", "page": 21,
-     "extracted": "other taxes", "on_page": "Township taxes 19,055",
-     "issue": "The combined budget (p16) lists this as 'Township funds' under Other revenues. It may be a payment from another local government (intergovernmental/state aid) rather than a city tax."},
-    {"severity": "warning", "path": "receipts[12].category", "page": 11,
-     "extracted": "other", "on_page": "Other operating revenues 21,418",
-     "issue": "p14 shows these are noncash solar credits applied to sewer utility bills, so charges for services/fees could fit better than other."},
-    {"severity": "warning", "path": "disbursements[4].category", "page": 6,
-     "extracted": "general government", "on_page": "Public Buildings 33,291",
-     "issue": "This is the Community Building (p20). The combined budget (p16) classifies it as 'Culture and Recreation - Community Center', and the category rules list community center under culture/recreation."},
-    {"severity": "warning", "path": "detail[32].category", "page": 20,
-     "extracted": "general government", "on_page": "Community Building - Operating expenditures 28,926",
-     "issue": "p16 classifies it as Culture and Recreation - Community Center, so culture/recreation may fit better."},
-    {"severity": "warning", "path": "detail[33].category", "page": 20,
-     "extracted": "general government", "on_page": "Community Building - Capital outlay 4,365",
-     "issue": "p16 classifies it as Culture and Recreation - Community Center, so culture/recreation may fit better."},
-    {"severity": "warning", "path": "disbursements[6].category", "page": 6,
-     "extracted": "other", "on_page": "Transportation 43,988",
-     "issue": "p17 labels this 'Transfer to Airport Authority' and p31 shows a matching airport levy. It is a payment to a separate authority, not an interfund transfer, so keeping it as spending is defensible; the category is a judgment call (other, or economic development / a payment to another entity)."},
-    {"severity": "warning", "path": "detail[34].category", "page": 20,
-     "extracted": "other", "on_page": "Airport 43,988",
-     "issue": "Same as disbursements[6]: p17 labels it 'Transfer to Airport Authority'. Detail_category 'grants/payments to other entities' could fit better than 'not itemized'."},
-    {"severity": "warning", "path": "detail[20].detail_category", "page": 19,
-     "extracted": "employee benefits and payroll taxes", "on_page": "Employee benefits 8,216",
-     "issue": "p17 shows the same 8,216 as 'Net transfer to insurance fund', and p31 puts it in the Employee Benefit department. The basic statement (p6) counts it as general government spending, so keeping it as spending matches the statement, but it may be an interfund transfer."},
-    {"severity": "warning", "path": "detail[24].category", "page": 19,
-     "extracted": "debt service principal", "on_page": "Debt service 5,609",
-     "issue": "The p6 General column prints the split: principal 5,424 and interest and fees 185. The whole 5,609 is recorded as principal."}
+    {
+      "severity": "warning",
+      "path": "receipts[10].category",
+      "page": 6,
+      "extracted": "other",
+      "on_page": "Other 639,006",
+      "issue": "[fixed: recategorized with review note] Line is not unexplained: the fund schedules print its full breakdown, which adds to exactly 639,006. General 502,457 (p18) = PPD lease 444,604 + rentals 25,531 + gas franchise 6,677 + cable/cell franchise 2,537 + occupation taxes 2,085 + lot sales 5,150 + other 15,873. Street 3,496 other (p21). LB 840 110,117 loan payments (p24). Other column 22,936 = Econ Dev loan repayments 4,643 (p27) + CDBG loan payments 14,733 (p25) + Library donations 3,560 (p23). The dominant part (PPD lease 444,604, about 70%) is categorized charges for services/fees elsewhere in this JSON (receipts[13], detail[10]). Either split it with split_from (as was done for Taxes) or give it the dominant category charges for services/fees with review. The note and review text saying 'no full breakdown across funds' is incorrect."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[3].category",
+      "page": 21,
+      "extracted": "other taxes",
+      "on_page": "Township taxes 19,055",
+      "issue": "The combined budget (p16) lists this as 'Township funds' under Other revenues. It may be a payment from another local government (intergovernmental/state aid) rather than a city tax."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[12].category",
+      "page": 11,
+      "extracted": "other",
+      "on_page": "Other operating revenues 21,418",
+      "issue": "p14 shows these are noncash solar credits applied to sewer utility bills, so charges for services/fees could fit better than other."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[4].category",
+      "page": 6,
+      "extracted": "general government",
+      "on_page": "Public Buildings 33,291",
+      "issue": "This is the Community Building (p20). The combined budget (p16) classifies it as 'Culture and Recreation - Community Center', and the category rules list community center under culture/recreation."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[32].category",
+      "page": 20,
+      "extracted": "general government",
+      "on_page": "Community Building - Operating expenditures 28,926",
+      "issue": "p16 classifies it as Culture and Recreation - Community Center, so culture/recreation may fit better."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[33].category",
+      "page": 20,
+      "extracted": "general government",
+      "on_page": "Community Building - Capital outlay 4,365",
+      "issue": "p16 classifies it as Culture and Recreation - Community Center, so culture/recreation may fit better."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[6].category",
+      "page": 6,
+      "extracted": "other",
+      "on_page": "Transportation 43,988",
+      "issue": "p17 labels this 'Transfer to Airport Authority' and p31 shows a matching airport levy. It is a payment to a separate authority, not an interfund transfer, so keeping it as spending is defensible; the category is a judgment call (other, or economic development / a payment to another entity)."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[34].category",
+      "page": 20,
+      "extracted": "other",
+      "on_page": "Airport 43,988",
+      "issue": "Same as disbursements[6]: p17 labels it 'Transfer to Airport Authority'. Detail_category 'grants/payments to other entities' could fit better than 'not itemized'."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[20].detail_category",
+      "page": 19,
+      "extracted": "employee benefits and payroll taxes",
+      "on_page": "Employee benefits 8,216",
+      "issue": "p17 shows the same 8,216 as 'Net transfer to insurance fund', and p31 puts it in the Employee Benefit department. The basic statement (p6) counts it as general government spending, so keeping it as spending matches the statement, but it may be an interfund transfer."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[24].category",
+      "page": 19,
+      "extracted": "debt service principal",
+      "on_page": "Debt service 5,609",
+      "issue": "The p6 General column prints the split: principal 5,424 and interest and fees 185. The whole 5,609 is recorded as principal."
+    }
   ]
 }
