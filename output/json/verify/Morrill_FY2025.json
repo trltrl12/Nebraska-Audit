@@ -1,0 +1,24 @@
+{
+  "stem": "Morrill_FY2025",
+  "values_checked": 127,
+  "issues": [
+    {"severity": "warning", "path": "receipts[5].category", "page": 12,
+     "extracted": "charges for services/fees", "on_page": "Charges for Services 333,815 includes Keno column 25,882 (combining schedule p12)",
+     "issue": "25,882 sits in the Keno sub-fund column and is likely keno proceeds (keno/lottery); same for detail[4]. Column breakdown is printed on p12"},
+    {"severity": "warning", "path": "receipts[4].category", "page": 12,
+     "extracted": "licenses and permits", "on_page": "Licenses and Permits 47,094 (General Fund) includes Golf column 43,675",
+     "issue": "most of the General Fund line is in the Golf sub-fund (likely memberships/green fees = charges for services); same for detail[3]"},
+    {"severity": "warning", "path": "disbursements[2].category", "page": 12,
+     "extracted": "streets/highways", "on_page": "Public Works 175,333 = General Fund 66,279 (entirely Fire sub-fund column, p12) + Streets 109,054",
+     "issue": "the General Fund's Public Works 66,279 is all in the Fire column on the combining schedule; may be public safety. Same for detail[9]"},
+    {"severity": "warning", "path": "ending_cash", "page": 4,
+     "extracted": 225366, "on_page": "Total fund balances 225,366; total governmental assets (cash) 1,002,687; Due to Other Funds 777,321",
+     "issue": "ending_cash is the fund balance rolled forward, not the governmental cash on hand (1,002,687); defensible since the statement rolls forward fund balance, but the user should know"},
+    {"severity": "warning", "path": "proprietary", "page": 8,
+     "extracted": null, "on_page": "Statement of Cash Flows - Proprietary Funds: operating 1,023,907; noncapital financing (445,298); capital and related financing (676,344); beginning cash 2,151,995; ending cash 2,054,260",
+     "issue": "business-type activities are accrual and a proprietary cash flow statement is printed, but proprietary is null because basis is 'cash'; rule says GAAP only, so defensible"},
+    {"severity": "warning", "path": "beginning_cash", "page": 13,
+     "extracted": 160991, "on_page": "Fund balance - beginning, as restated 160,991; General Fund as previously reported 274,021, restatement for accounting error (55,515)",
+     "issue": "beginning balances are 'as restated' (governmental and business-type 6,907,094); the restatement is not recorded anywhere (no adjustment needed for the identity), and the business-type restatement amount is not in the trimmed PDF"}
+  ]
+}
