@@ -1,24 +1,9 @@
 {
   "stem": "Alma_Public_Schools_FY2025",
-  "values_checked": 133,
+  "values_checked": 139,
   "issues": [
-    {"severity": "warning", "path": "receipts[5].category", "page": 4,
-     "extracted": "investment income", "on_page": "Interest 53,429 (General 47,646 = Interest 28,172 + Penalty and interest on delinquent taxes 18,902 per p11; Depreciation 572 is in the combining Total on p7)",
-     "issue": "About 18,902 of this line is penalty and interest on delinquent taxes, which the rules put under property tax. The basic statement doesn't print the split, so the line stays as printed (review flag present)."},
-    {"severity": "warning", "path": "receipts[9].category", "page": 4,
-     "extracted": "intergovernmental/state aid", "on_page": "County sources 22,119 = County fines and license fees 14,926 + ESU receipts 7,193 (p7)",
-     "issue": "The dominant part is county fines and license fees. detail[9] categorizes that as fines and forfeitures, so the same money has two different categories. The intergovernmental category is defensible from the label."},
-    {"severity": "warning", "path": "receipts[6].category", "page": 4,
-     "extracted": "licenses and permits", "on_page": "Other 3,248 = General 2,995 (Carline tax 50, Local license fees and fines 2,070, Grants from corporations 800, Police court fines 75; p7) + Special Building 5 (carline tax, p18) + Other funds 248 (nutrition Rebates, p16)",
-     "issue": "Mixed line. Licenses is the dominant part (64%) and the review flag names the mix, so the category is defensible."},
-    {"severity": "warning", "path": "disbursements[2].category", "page": 4,
-     "extracted": "support services", "on_page": "Support services - Students 785,437 = General 417,035 + Other Governmental Funds 368,402 (= Activities Fund disbursements, p19)",
-     "issue": "47% of this line is activity fund spending, which fits student activities. Support services is still the larger part, and the review flag mentions it."},
-    {"severity": "warning", "path": "disbursements[9].category", "page": 5,
-     "extracted": "instruction", "on_page": "Federal programs 243,847 (General). Combining schedule p9 prints Federal programs 237,354 + Non-program expenditures 6,493 = 243,847",
-     "issue": "The function of federal programs isn't stated, so instruction is an assumption (review flag present). The basic statement line also includes 6,493 of non-program expenditures. The detail is consistent with p9."},
-    {"severity": "warning", "path": "detail (General Fund schedule choice)", "page": 12,
-     "extracted": "General Fund Components combining schedule Total column p7-9 (function totals, 'not itemized')", "on_page": "General Fund budget schedule p11-14 itemizes spending by sub-function (1100 Regular instruction 3,255,753; 1160 Poverty programs 247,251; 2120 Guidance 94,182; 2710 Vehicle operation 390,045 ...); Depreciation Fund schedule p15",
-     "issue": "The budget schedule (p11-14) plus the Depreciation Fund schedule (p15) would give more spending detail without double counting. The combining schedule was chosen instead because it applies the 200,000 transfer elimination. That is defensible, but detail is lost. No double counting either way: the General/Depreciation budget schedules (p11-15) are correctly not recorded."}
+    {"severity": "warning", "path": "detail[34..46]", "page": 9, "extracted": "General Fund expenditures from the General Fund Components combining schedule (13 function-level lines, detail_category 'not itemized')", "on_page": "General Fund budget schedule p12-14 itemizes spending account by account (about 45 lines, e.g. 1100 Regular instruction 3,255,753, 1160 Poverty programs 247,251, 2120 Guidance 94,182...). The Depreciation Fund schedule on p15 shows Student transportation services 25,000.", "issue": "The rules say to record the more detailed schedule. The extractor used the less detailed combining schedule and explained why (it covers the Depreciation Fund and applies the eliminations). Defensible, but the account-level spending detail on p12-14 is not captured."},
+    {"severity": "warning", "path": "receipts[9].category", "page": 4, "extracted": "intergovernmental/state aid", "on_page": "County sources 22,119 = County fines and license fees 14,926 + ESU receipts 7,193 (p7)", "issue": "Most of this line (14,926) is county fines and license fees, which detail[9] puts under fines and forfeitures. The same money gets a different category in receipts and in detail."},
+    {"severity": "warning", "path": "disbursements[2].category", "page": 4, "extracted": "support services", "on_page": "Support services - Students 785,437 (incl. Other Governmental Funds 368,402 = Activities Fund disbursements, p19)", "issue": "About 47% of this printed line is student activity spending. It can't be split on the statement; review is already set."}
   ]
 }

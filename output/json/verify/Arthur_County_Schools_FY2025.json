@@ -1,22 +1,9 @@
 {
   "stem": "Arthur_County_Schools_FY2025",
-  "values_checked": 208,
+  "values_checked": 404,
   "issues": [
-    {"severity": "error", "path": "missing", "page": 16,
-     "extracted": null,
-     "on_page": "Detailed Schedule of Cash Receipts and Disbursements - Activities Fund (p16): about 45 activity accounts (e.g. 1010 Athletics receipts 5,517.73 / disbursements 20,837.62, 1040 Band 12,080.55 / 16,447.18, 1080 FFA 20,817.38 / 16,984.48 ...), total receipts 91,183.28, disbursements 99,749.67, General Fund support 25,000.00",
-     "issue": "Schedule left out. The JSON records the Activities Fund only from the one-line p8 budget schedule (Activity receipts 91,041.60, Cash disbursements 99,749.67) and says in notes that p16 was skipped to avoid double counting. The rule is to keep the more detailed schedule, which is p16. (p17 is the FY2024 prior-year version and is correctly excluded.)"},
-    {"severity": "warning", "path": "receipts[6]", "page": 3,
-     "extracted": {"original_label": "5300 Sale of property", "amount": 5800.00, "source_page": 5},
-     "on_page": "p3 has no sale-of-property line. General/Deprec receipt lines add to 3,113,025.21, but the printed Total receipts is 3,118,825.21 (Total Governmental Funds lines 3,282,603.55 vs printed 3,288,403.55)",
-     "issue": "The report itself doesn't add up. The extractor added a receipts line taken from p5 so the lines match the p3 total. It is marked computed/review and logged in report_discrepancies, and 5,800.00 does appear on p5. Keeping only the printed p3 lines and leaving the 5,800 gap as a discrepancy would follow the rule more closely, so a human should decide."},
-    {"severity": "warning", "path": "receipts[1].category", "page": 3,
-     "extracted": "intergovernmental/state aid",
-     "on_page": "County receipts 52,797.29 = GF 2,787.00 (fines 1,637 + ESU 1,150, p5) + QCPUF 27,194.04 (property tax 15,288.13 + credits/pro-rate 11,905.91, p10) + Special Building 22,816.25 (all 1100 Local property taxes, p9)",
-     "issue": "Broad group whose largest part is property tax (38,104.38 of 52,797.29, about 72%). The dominant category would be property tax, not state aid. It already has a review flag."},
-    {"severity": "warning", "path": "detail[139].detail_category", "page": 14,
-     "extracted": "miscellaneous expenditure",
-     "on_page": "3590 195 Extended grant 925.91",
-     "issue": "Object code 195 is in the 100-series (salaries), so 'salaries and wages' looks like a better fit than miscellaneous."}
+    {"severity": "warning", "path": "receipts[6]", "page": 5, "extracted": 5800, "on_page": "p3 prints no sale-of-property line; its lines sum to 3,282,603.55 vs printed Total receipts 3,288,403.55. 5300 Sale of property 5,800.00 is printed on p5.", "issue": "This line was added from p5 so the receipts reach the printed total. The amount is right and the gap is exactly the General Fund sale of property. But report_discrepancies[0] still says the lines fall 5,800 short, and with the added line they no longer do, so the report-doesn't-add-up check may be counted twice. Keep either the added line or the discrepancy entry, not both."},
+    {"severity": "warning", "path": "detail[153].budget_final", "page": 15, "extracted": 10000, "on_page": "8000 Transfers 913 Activities fund: budget 10,000.00, actual 25,000.00", "issue": "The amount is signed (-25,000, transfer out) but budget_final is not (+10,000). Other reports in this batch store transfer-out budgets as negative numbers."},
+    {"severity": "warning", "path": "receipts[1].category", "page": 3, "extracted": "property tax", "on_page": "County receipts 52,797.29 (property tax 38,104.38; property tax credit/homestead/pro-rate 11,906.91; fines 1,637; ESU 1,150)", "issue": "Broad group recorded under its dominant category (about 72% property tax). Defensible; review is already set."}
   ]
 }

@@ -1,21 +1,21 @@
 {
   "stem": "Arlington_Public_Schools_FY2025",
-  "values_checked": 289,
+  "values_checked": 270,
   "issues": [
-    {"severity": "error", "path": "detail[82].amount", "page": 12,
-     "extracted": 110336, "on_page": "6408 IDEA enrollment/poverty (619) 160,336",
-     "issue": "Guessed placement that misstates a printed line. p6 Reclassifications show only that 50,000 net leaves the group State programs (10,799) + Other state categorical programs (7,637) + Federal programs (280,177), against Instruction +248,613. It isn't assigned to a line: 6200 (65,942) could also hold it, or it could be spread. Fix per rule: keep 6408 at 160,336 as printed and add one contra line (section expenditure, -50,000, department = the state/federal programs group, split_from naming those lines and p6, review). Keep the -50,000 other financing line (detail[89]) but change its split_from, which names 6408, to the group."},
-    {"severity": "error", "path": "detail[72].amount", "page": 12,
-     "extracted": 199198, "on_page": "2710 Regular pupil transportation 299,198",
-     "issue": "Printed line not kept as printed. p6 shows (100,000) leaving the Student transportation group: General Fund 309,042 = 2710 299,198 + 2712 6,744 + 2713 3,100 (2730/2732 fall under Operation and maintenance of plant on p6). The page doesn't say which line. 2710 is very likely, since at least 90,156 must sit in it, but that's still an inference. Fix per rule: keep 299,198 as printed plus a group-level contra (-100,000, department Student transportation, split_from naming 2710/2712/2713 and p6, review). Keep detail[88] but point its split_from at the group."},
-    {"severity": "warning", "path": "detail[117]", "page": 17,
-     "extracted": "Interest and penalties on taxes 433, category other taxes", "on_page": "p17: Interest and penalties on taxes 433; p8: Special Building PPD sales tax 433, interest and penalties 206, motor vehicle 1,375",
-     "issue": "The p17 row labels for 433 / 1,375 / 206 conflict with the combining schedule p8 (and p3). The extractor keeps the p17 labels and uses the p8 categories, with review. That's reasonable, but the label and category don't match on these three items (detail[117], detail[118], detail[119])."},
+    {"severity": "warning", "path": "disbursements[1]", "page": 3,
+     "extracted": "Student support services (General Fund column) 579,853 + disbursements[2] (Other Governmental Funds column) 495,426 as student activities", "on_page": "Student support services 1,075,279 (General 579,853, Other 495,426)",
+     "issue": "split by the fund columns printed on p3 (adds to 1,075,279; marked split_from/computed); the 495,426 matches Activities Fund Supplies (p19). Labels have a column suffix added; category for the activities part is a judgment call"},
+    {"severity": "warning", "path": "disbursements[10]", "page": 3,
+     "extracted": "principal 1,210,000 + disbursements[11] interest/other costs 59,608", "on_page": "Debt service 1,269,608",
+     "issue": "split taken from the Bond (p16), Special Building (p17) and QCPU (p18) schedules rather than p3; arithmetic confirmed (500,000 + 365,000 + 345,000 = 1,210,000; 49,109 + 8,288 + 1,811 + 200 + 200 = 59,608; fund parts 549,309 + 373,288 + 347,011 = 1,269,608 on p8); marked split_from/computed"},
     {"severity": "warning", "path": "detail[8].detail_category", "page": 9,
      "extracted": "county/other local governments", "on_page": "2110 County fines and license fees 51,222",
-     "issue": "These are fines and license fees passed through by the county. Could be fines and forfeitures. p3 groups them as 'County and ESU sources' (receipts[15], intergovernmental). Judgment call."},
-    {"severity": "warning", "path": "report_discrepancies[0]", "page": 12,
-     "extracted": 2500, "on_page": "General Fund total disbursements 10,962,624; lines sum to 10,960,124",
-     "issue": "Confirmed. Every p6 group ties to the p10-12 lines except Federal programs (p12 lines 277,677 vs p6 280,177), so the 2,500 is in the federal program lines. Figures are as printed, so this is the report's own difference."}
+     "issue": "label says fines and license fees (county-collected fines passed to schools); fines and forfeitures is arguably the better fit"},
+    {"severity": "warning", "path": "detail[89]", "page": 12,
+     "extracted": "contra -50,000 in State and federal programs group (+ detail[91] other financing -50,000)", "on_page": "p6 Reclassifications: Instruction +248,613, State programs (10,799), Other state categorical (7,637), Federal programs (280,177); total (150,000); p7 Depreciation transfer 150,000",
+     "issue": "amount confirmed (298,613 - 248,613 = 50,000; with the 100,000 Student transportation reclass = 150,000). But p6 shows only a net, so the 50,000 could be in the Instruction lines (1100-1291) as easily as in the 3535/3551/6200-6998 group; function is instruction either way. The -100,000 Student transportation contra (detail[88]/[90]) is confirmed: p6 Student transportation 309,042 = 2710 299,198 + 2712 6,744 + 2713 3,100"},
+    {"severity": "warning", "path": "detail[119]", "page": 17,
+     "extracted": "label 'Interest and penalties on taxes' 433 categorized other taxes; detail[120] label 'Public power district sales tax' 1,375 categorized motor vehicle tax; detail[121] label 'Motor vehicle taxes' 206 categorized property tax", "on_page": "p17 labels as extracted; p8 Special Building column: public power district sales tax 433, motor vehicle taxes 1,375, interest and penalties 206",
+     "issue": "p17 row labels look misprinted against p8; amounts and labels are as printed and categories follow p8 (review flags present). Label/category mismatch is intentional but should be reviewed"}
   ]
 }
