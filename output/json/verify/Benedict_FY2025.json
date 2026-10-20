@@ -1,0 +1,18 @@
+{
+  "stem": "Benedict_FY2025",
+  "values_checked": 35,
+  "issues": [
+    {"severity": "warning", "path": "receipts[10].category", "page": 1,
+     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other - Sewer 172,001.65, Water 93,721.69",
+     "issue": "the extractor assumed this line is user charges. The page labels it only 'Other', and the sewer amount looks large for a village's charges, given 329,980.77 of sewer capital improvements and new NDEE debt of 351,835 issued 12/15/2024 (p3). It may include loan or grant proceeds."},
+    {"severity": "warning", "path": "disbursements[5].category", "page": 2,
+     "extracted": "debt service principal", "on_page": "Debt Service 33,818.64 (Sewer 3,000.78, Water 30,817.86)",
+     "issue": "principal and interest are not split on the page; principal is assumed (line already marked review)"},
+    {"severity": "warning", "path": "receipts[9].category", "page": 1,
+     "extracted": "other", "on_page": "Local Receipts: Other - General 32,617.62, Community Center 1,625.00",
+     "issue": "unspecified line; 'other' with review is defensible (Community Center 1,625 is likely rentals)"},
+    {"severity": "warning", "path": "balance_sheet.column", "page": 1,
+     "extracted": "Total", "on_page": "Total column lines 26-28 include Sewer and Water (business-type) balances",
+     "issue": "the balance sheet uses the all-funds total (607,308.12), including the business-type funds, while ending_cash (586,440.22) is governmental only. This is consistent with the rules, but the user should know the two figures cover different funds."}
+  ]
+}

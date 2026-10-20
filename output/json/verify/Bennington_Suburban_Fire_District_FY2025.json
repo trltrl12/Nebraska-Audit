@@ -1,12 +1,24 @@
 {
   "stem": "Bennington_Suburban_Fire_District_FY2025",
-  "values_checked": 35,
+  "values_checked": 62,
   "issues": [
-    {"severity": "warning", "path": "detail[4].amount", "page": 5,
-     "extracted": 229918, "on_page": "Intergovernmental and program fees 1,151,078 (p5)",
-     "issue": "The combined budget-schedule line is split using the p4 General Fund column (Intergovernmental 229,918 + Program fees 921,160 = 1,151,078). That is the same fund's own breakdown, so the split is defensible. But the cited p5 doesn't print 229,918 or 921,160; they are on p4. budget_final is null because the 639,097 budget can't be split. Applies to detail[4] and detail[5]."},
+    {"severity": "warning", "path": "detail[4].split_from", "page": 5,
+     "extracted": "229,918 + 921,160 split of 'Intergovernmental and program fees'", "on_page": "Intergovernmental and program fees 1,151,078 (p5); General column on p4 prints Intergovernmental 229,918 and Program fees 921,160",
+     "issue": "the budget page does not print this split. It comes from the same fund's column on p4, which the rules allow ('anywhere in the trimmed PDF'), so it is defensible, but a reviewer should confirm. The split items add up to 1,151,078."},
+    {"severity": "warning", "path": "detail[4].budget_final", "page": 5,
+     "extracted": null, "on_page": "Intergovernmental and program fees budget 639,097",
+     "issue": "the combined budget figure 639,097 is not stored on either split line (it appears only in split_from and notes), so the General Fund budget lines add up to 2,141,377 instead of the printed budget total of 2,780,474"},
     {"severity": "warning", "path": "detail[5].detail_category", "page": 5,
-     "extracted": "other charges for services", "on_page": "Program fees 921,160; p2 shows them as charges for services of 'Public safety - Fire and Ambulance'",
-     "issue": "These are likely ambulance/rescue billing, so 'ambulance/rescue fees' may fit better."}
+     "extracted": "other charges for services", "on_page": "Program fees 921,160 (function: 'Public safety - Fire and Ambulance', p2)",
+     "issue": "a fire and ambulance district's program fees are probably ambulance charges, which would be 'ambulance/rescue fees'"},
+    {"severity": "warning", "path": "detail[4].detail_category", "page": 4,
+     "extracted": "other state aid", "on_page": "Intergovernmental 229,918",
+     "issue": "the source government is not stated; it could be 'county/other local governments' (review already set)"},
+    {"severity": "warning", "path": "receipts[1].category", "page": 4,
+     "extracted": "other taxes", "on_page": "Other taxes 19,795",
+     "issue": "unlabeled other taxes; 'other taxes' with review is defensible"},
+    {"severity": "warning", "path": "detail[10].detail_category", "page": 5,
+     "extracted": "equipment purchases", "on_page": "Capital outlays 490,030",
+     "issue": "the object type is not printed; 'equipment purchases' is a guess (review set)"}
   ]
 }
