@@ -1,0 +1,21 @@
+{
+  "stem": "Douglas_County_SID_575_FY2025",
+  "values_checked": 14,
+  "issues": [
+    {"severity": "warning", "path": "balance_sheet", "page": 1,
+     "extracted": "empty (no statement printed)", "on_page": "Only Schedule 1 (budget and actual, unaudited; report p16 of 21) is in the trimmed PDF",
+     "issue": "Manifest flags no_statements_found. The 21-page audit almost certainly holds the basic statements (Statement of Net Position / governmental fund balance sheet, like the other Douglas County SIDs on report pp6-7), but the trimmer missed them. The balance sheet and basic-statement receipts/disbursements can't be checked until the PDF is re-trimmed."},
+    {"severity": "warning", "path": "basis", "page": 1,
+     "extracted": "cash", "on_page": "(Budgetary Basis); Fund balances at beginning/end of year",
+     "issue": "Basis is assumed. The schedule prints fund balances on a budgetary basis, and comparable Douglas County SIDs report on a GAAP (modified accrual) basis. If this one is GAAP too, 967,166 / 1,009,035 belong in beginning_fund_balance / ending_fund_balance, not beginning_cash / ending_cash."},
+    {"severity": "warning", "path": "beginning_cash", "page": 1,
+     "extracted": 967166, "on_page": 967166,
+     "issue": "The amount matches the printed 'Fund balances at beginning of year', but it is marked computed even though it is printed as-is (the flag only explains relabelling a fund balance as cash). Same for ending_cash 1,009,035."},
+    {"severity": "warning", "path": "receipts[1].category", "page": 1,
+     "extracted": "property tax (negative)", "on_page": "Collection fees on property taxes - County Treasurer (23,159)",
+     "issue": "Netting the County Treasurer fee against property tax is defensible because the schedule prints it inside revenues. It could also be treated as a tax refunds/treasurer fees expense."},
+    {"severity": "warning", "path": "disbursements[2].category", "page": 1,
+     "extracted": "debt service principal", "on_page": "Debt service - warrant principal and interest 6,754,245",
+     "issue": "Combined principal and interest is put entirely in principal; the page gives no split. Same for disbursements[3] (bond principal and interest 522,440)."}
+  ]
+}
