@@ -2,23 +2,53 @@
   "stem": "Bloomfield_Community_Schools_FY2025",
   "values_checked": 168,
   "issues": [
-    {"severity": "error", "path": "receipts[6].category", "page": 3,
-     "extracted": "other", "on_page": "Other local receipts 2,400 (p7: 1910 Rentals of school property 2,100 + 1920 Contributions and donations 300)",
-     "issue": "The report shows what this line is: rentals 2,100 (dominant) and contributions 300 on p7. 'other' is only for lines with no description. It should be 'charges for services/fees' with a review note naming the mix, which also matches the detail lines (rentals / donations)."},
-    {"severity": "warning", "path": "receipts[4].category", "page": 3,
-     "extracted": "licenses and permits", "on_page": "Local licenses and fees 6,390 (p7: 1740 Student fees 4,430 + 1911 Local license fees 1,960)",
-     "issue": "Mixed line. The dominant part is student fees 4,430, which the detail categorizes as charges for services. Under the dominant-category rule this should be 'charges for services/fees'. 'licenses and permits' matches the label, so it is defensible."},
-    {"severity": "warning", "path": "detail[104].category", "page": 17,
-     "extracted": "debt service interest (department 'Debt service')", "on_page": "Other expenses 5,256, printed at the same indent as the 'Debt service' heading, not under it",
-     "issue": "On p17, 'Other expenses' does not sit under the Debt service heading (whose Principal/Interest lines are blank for 2025). The governmental funds statement (p3) puts all 69,924 of Special Building spending under Capital outlay. The category is more likely 'capital outlay', and the department should be null."},
-    {"severity": "warning", "path": "transfers_in.amount", "page": 4,
-     "extracted": 100000, "on_page": "Interfund transfers: General (97,375), Activity (2,625), Other Governmental 100,000; Total column blank",
-     "issue": "transfers_in/out (100,000 each) are the statement's net per-fund-column figures, correctly marked computed. Gross transfers in the budget schedules are 142,625 each way (General out 120,000 to Nutrition 100,000 and Activities 20,000; Activities out 22,625 to General), plus the eliminated 135,000 to Depreciation. Net effect is zero either way, so the identity holds."},
-    {"severity": "warning", "path": "detail[90].detail_category", "page": 15,
-     "extracted": "employee benefits and payroll taxes", "on_page": "Salaries and benefits 170,294",
-     "issue": "Combined line. Salaries are usually the larger part, so 'salaries and wages' is the more likely dominant category. Already marked review."},
-    {"severity": "warning", "path": "detail[93].detail_category", "page": 15,
-     "extracted": "purchased power/cost of sales", "on_page": "Cost of food supplies 133,719",
-     "issue": "Judgment call. 'supplies and materials' also fits; Blair's equivalent 'Food and supplies' line uses supplies and materials."}
+    {
+      "severity": "warning",
+      "path": "receipts[6].category",
+      "page": 3,
+      "extracted": "other",
+      "on_page": "Other local receipts 2,400 (p7: 1910 Rentals of school property 2,100 + 1920 Contributions and donations 300)",
+      "issue": "[fixed: recategorized with review note] The report shows what this line is: rentals 2,100 (dominant) and contributions 300 on p7. 'other' is only for lines with no description. It should be 'charges for services/fees' with a review note naming the mix, which also matches the detail lines (rentals / donations)."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[4].category",
+      "page": 3,
+      "extracted": "licenses and permits",
+      "on_page": "Local licenses and fees 6,390 (p7: 1740 Student fees 4,430 + 1911 Local license fees 1,960)",
+      "issue": "Mixed line. The dominant part is student fees 4,430, which the detail categorizes as charges for services. Under the dominant-category rule this should be 'charges for services/fees'. 'licenses and permits' matches the label, so it is defensible."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[104].category",
+      "page": 17,
+      "extracted": "debt service interest (department 'Debt service')",
+      "on_page": "Other expenses 5,256, printed at the same indent as the 'Debt service' heading, not under it",
+      "issue": "On p17, 'Other expenses' does not sit under the Debt service heading (whose Principal/Interest lines are blank for 2025). The governmental funds statement (p3) puts all 69,924 of Special Building spending under Capital outlay. The category is more likely 'capital outlay', and the department should be null."
+    },
+    {
+      "severity": "warning",
+      "path": "transfers_in.amount",
+      "page": 4,
+      "extracted": 100000,
+      "on_page": "Interfund transfers: General (97,375), Activity (2,625), Other Governmental 100,000; Total column blank",
+      "issue": "transfers_in/out (100,000 each) are the statement's net per-fund-column figures, correctly marked computed. Gross transfers in the budget schedules are 142,625 each way (General out 120,000 to Nutrition 100,000 and Activities 20,000; Activities out 22,625 to General), plus the eliminated 135,000 to Depreciation. Net effect is zero either way, so the identity holds."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[90].detail_category",
+      "page": 15,
+      "extracted": "employee benefits and payroll taxes",
+      "on_page": "Salaries and benefits 170,294",
+      "issue": "Combined line. Salaries are usually the larger part, so 'salaries and wages' is the more likely dominant category. Already marked review."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[93].detail_category",
+      "page": 15,
+      "extracted": "purchased power/cost of sales",
+      "on_page": "Cost of food supplies 133,719",
+      "issue": "Judgment call. 'supplies and materials' also fits; Blair's equivalent 'Food and supplies' line uses supplies and materials."
+    }
   ]
 }
