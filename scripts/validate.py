@@ -177,6 +177,9 @@ def check(stem, d):
             for inc in (rt.get("includes") or []) if isinstance(rt, dict) else []:
                 if inc in ("transfers_in", "transfers_out", "debt_proceeds", "other_financing", "transfers_net"):
                     computed += amt(src.get(inc)) or 0
+            # hidden transfers split out of a printed line stay inside the printed total
+            for x in (rt.get("includes_split") or []) if isinstance(rt, dict) else []:
+                computed += amt(x) or 0
             cmp("totals", f"sum of {fund} {key} lines vs printed total", float(stated), computed,
                 pages=f"{page(rt) or ''}")
 
