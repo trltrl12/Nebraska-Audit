@@ -1,0 +1,33 @@
+{
+  "stem": "Fairbury_FY2025",
+  "values_checked": 323,
+  "issues": [
+    {"severity": "error", "path": "detail[164].category", "page": 28,
+     "extracted": "debt service principal", "on_page": "Bond Fund, Operating expenditures - Miscellaneous 400",
+     "issue": "This is a miscellaneous operating cost, not principal. Exhibit E (p6) counts the debt service funds' miscellaneous 2,548 (400 + 2,148) under Economic development: nonmajor Economic development 107,843 = Keno 14,281 + Grant Projects 91,014 + 2,548, and Debt service 233,410 = 1,995 + 180,000 + 51,415. The category should be economic development, per the report's own function grouping."},
+    {"severity": "error", "path": "detail[169].category", "page": 29,
+     "extracted": "debt service principal", "on_page": "Paving Fund, Miscellaneous 2,148",
+     "issue": "Same as the Bond Fund miscellaneous line: Exhibit E (p6) counts it under Economic development, not debt service, and it isn't principal."},
+    {"severity": "warning", "path": "beginning_cash", "page": 6,
+     "extracted": 10724946, "on_page": "Fund balances - October 1 10,724,946; total assets 9/30/2024 10,727,946",
+     "issue": "beginning_cash and ending_cash hold the governmental fund balances, not cash. Ending 10,110,356 includes special assessments receivable of 96,233 and is net of warrants payable of 3,000; actual cash plus CDs with the county treasurer at 9/30/2025 is 10,017,123 (p3-4). This is defensible because the statement rolls fund balances forward, and the notes explain it."},
+    {"severity": "warning", "path": "receipts[19].category", "page": 8,
+     "extracted": "federal grants", "on_page": "Grant income/forgiveness 128,205 (Water)",
+     "issue": "'Forgiveness' suggests loan forgiveness, and Exhibit B (p2) shows it as Capital grants and contributions. It could be intergovernmental aid or a capital contribution, not a federal grant. The same applies to detail[183]."},
+    {"severity": "warning", "path": "receipts[22].category", "page": 8,
+     "extracted": "investment income", "on_page": "Interest and other income 325,643",
+     "issue": "The label mixes interest with other income, and the line has no review flag."},
+    {"severity": "warning", "path": "receipts[23].category", "page": 8,
+     "extracted": "other", "on_page": "Farm income/expenses 79,637",
+     "issue": "Printed as a net farm figure. 'other' is defensible (it is flagged for review), though farm lease income could be charges for services (rentals)."},
+    {"severity": "warning", "path": "detail[186].detail_category", "page": 8,
+     "extracted": "not itemized", "on_page": "Water Fund, Production and purchased power 220,133",
+     "issue": "This is inconsistent with the Light Fund's line with the same label (purchased power/cost of sales). The Sewer line (detail[194]) is also 'not itemized'."},
+    {"severity": "warning", "path": "missing", "page": null,
+     "extracted": null, "on_page": "Report pp42-47 (Schedules 6-9, Light/Water/Sewer budget schedules), p8, p11 and p62 are not in the trimmed PDF",
+     "issue": "The trimmed PDF skips report pages 42-47, so the business-type budget-to-actual detail is missing (the extractor's notes acknowledge this and use Exhibit H instead). Report pages 8, 11 and 62 are also absent (probably reconciliations or a blank page). Nothing on the 30 trimmed pages is missing from the JSON; this is a trimming follow-up."},
+    {"severity": "warning", "path": "balance_sheet.column", "page": 1,
+     "extracted": "Totals 2025", "on_page": "Governmental 9/30/2025 modified cash + Business-type 4/30/2025 accrual",
+     "issue": "The Totals column adds two different fiscal year-ends and bases. The figures are as printed and the notes explain it."}
+  ]
+}

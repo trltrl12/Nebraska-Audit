@@ -1,0 +1,78 @@
+{
+  "stem": "Fillmore_County_School_District_25_FY2025",
+  "values_checked": 270,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "detail[153].detail_category",
+      "page": 16,
+      "extracted": "miscellaneous expenditure",
+      "on_page": "Dues & fees 4,494.62",
+      "issue": "[fixed] label names a specific object: 'dues, training and travel' fits (or 'debt interest and fees' if these are bond-related fees); miscellaneous expenditure is a last resort"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[28].original_label",
+      "page": 9,
+      "extracted": "4998 ESSER III",
+      "on_page": "4998 ESSERS III",
+      "issue": "label differs slightly from the printed text (amount 268,058.00 correct)"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[7].detail_category",
+      "page": 8,
+      "extracted": "county/other local governments",
+      "on_page": "2110 County fines and licenses 26,722.65",
+      "issue": "county-distributed fines and license fees; 'fines and forfeitures' is arguably closer than county/other local governments (same for receipts[14] County receipts, which includes it)"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[45].detail_category",
+      "page": 18,
+      "extracted": "professional/contract services",
+      "on_page": "Special Education Instruction - Other Purchased Services 967,945.55",
+      "issue": "large SPED 'Other Purchased Services' is likely tuition/contracted payments to other districts or ESUs; could be 'grants/payments to other entities'"
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[18].category",
+      "page": 5,
+      "extracted": "capital outlay",
+      "on_page": "Capital projects 907,067.62",
+      "issue": "printed line includes 363,116.70 bond issuance costs (p16), which detail[155] records as debt service interest; top-level and detail categories differ for the same money (line kept unsplit as printed, review already set)"
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[14].category",
+      "page": 5,
+      "extracted": "instruction",
+      "on_page": "State programs 17,773.91 / Federal programs 375,435.92",
+      "issue": "the report shows State programs and Federal programs (disbursements[14], [15]) as functions of their own, not under Instruction; instruction is defensible (Title I, IDEA, REAP, ESSER) but is a judgment call"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[114].amount",
+      "page": 4,
+      "extracted": -9000.0,
+      "on_page": "not printed; derived as Other Governmental Funds transfers 249,000.00 (p4) less nutrition allocation 240,000.00 (p15)",
+      "issue": "extractor's assumption: the arithmetic holds (nutrition 364,487.02 + activities 380,665.51 + student fee 8.00 = 575,160.53 vs 566,254.96 misc local + 9,000 more in the p4 column), but which activity account holds the 9,000 is not printed; already in decision_needed"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[124].fund_type",
+      "page": 15,
+      "extracted": "governmental",
+      "on_page": "School Nutrition Fund reported within Other Governmental Funds (p3, p4)",
+      "issue": "extractor rules list school nutrition among business-type funds, but this report presents it as a governmental fund; governmental is consistent with the report (also receipts[12], receipts[13], disbursements[16])"
+    },
+    {
+      "severity": "warning",
+      "path": "notes",
+      "page": 19,
+      "extracted": "Read pages 1-19 of 19",
+      "on_page": "Exhibit N ends after 2162 Occupational Therapy - SPED Ages 3-5; the rest of the program-by-object schedule is not in the trimmed PDF",
+      "issue": "trim incomplete: programs 2163 onward have only function totals from Exhibit G ('not itemized'); find_pages should keep the remaining Exhibit N pages"
+    }
+  ]
+}

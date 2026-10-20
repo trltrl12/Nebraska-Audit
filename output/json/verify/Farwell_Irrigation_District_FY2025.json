@@ -1,0 +1,18 @@
+{
+  "stem": "Farwell_Irrigation_District_FY2025",
+  "values_checked": 53,
+  "issues": [
+    {"severity": "warning", "path": "receipts[1].category", "page": 2,
+     "extracted": "charges for services/fees", "on_page": "Assessments 1,078,580",
+     "issue": "Irrigation district assessments are levied on benefited acres, so 'special assessments' probably fits better than charges for services. The extractor rules say an assessment line gets its own category. A person should decide."},
+    {"severity": "warning", "path": "receipts[5].category", "page": 2,
+     "extracted": "federal grants", "on_page": "Grant revenue 689,298",
+     "issue": "The page doesn't say who gave the grant (the cash flow statement on p3 shows it under capital financing as 'Grant proceeds'). It could be state or federal; the extractor assumed federal."},
+    {"severity": "warning", "path": "disbursements[9]", "page": 2,
+     "extracted": "utilities 55,598 (disbursement)", "on_page": "Capital contribution - Loup Basin Reclamation District (55,598)",
+     "issue": "A nonoperating payment to another district. Recording it as a disbursement is defensible, but it might belong in business_type.other_financing (negative) instead. It's a payment to another entity, not utility operations."},
+    {"severity": "warning", "path": "disbursements[0].category", "page": 2,
+     "extracted": "utilities", "on_page": "Personnel costs ... Depreciation (operating expenses listed by object)",
+     "issue": "Operating expenses are listed only by object. The rules call for the review note 'listed by object', and lines 0-8 don't have it. For an irrigation district, 'natural resources/conservation' (water and drainage districts) may also be a better function than 'utilities'."}
+  ]
+}
