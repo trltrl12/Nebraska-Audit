@@ -1,0 +1,24 @@
+{
+  "stem": "Sarpy_County_SID_275_FY2025",
+  "values_checked": 92,
+  "issues": [
+    {"severity": "warning", "path": "disbursements[7].category", "page": 2,
+     "extracted": "general government", "on_page": "Fiscal agent fees 12,100",
+     "issue": "Fiscal/paying agent fees are debt-related; rule puts fees under debt service interest. Debt Service detail Paying agent fees (detail[21]) uses debt service interest, General detail (detail[11]) uses general government: inconsistent."},
+    {"severity": "warning", "path": "detail[20].category", "page": 5,
+     "extracted": "debt service interest", "on_page": "Collection fee - County Treasurer 4,942",
+     "issue": "Same label is general government in General Fund detail and statement; treasurer collection fee is not interest."},
+    {"severity": "warning", "path": "disbursements[2].category", "page": 2,
+     "extracted": "utilities", "on_page": "Electricity 29,070",
+     "issue": "SID electricity is usually street lighting (streets/highways); judgment call."},
+    {"severity": "warning", "path": "disbursements[8].category", "page": 2,
+     "extracted": "utilities", "on_page": "Repairs and maintenance 42,037",
+     "issue": "Function assigned by judgment (listed by object); could be streets/highways."},
+    {"severity": "warning", "path": "transfers_in", "page": 2,
+     "extracted": null, "on_page": "Transfer to/from other funds: General (20,000), Debt Service 20,000, Total -",
+     "issue": "Interfund transfer of 20,000 left out of top-level transfers because the Total column nets to zero; defensible, identity unaffected. Detail records both sides (+20,000 / -20,000) correctly."},
+    {"severity": "warning", "path": "other_financing", "page": 2,
+     "extracted": -187561, "on_page": "Warrants retired (187,561)",
+     "issue": "Warrant redemptions recorded as negative other_financing; extractor assumption."}
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "stem": "Sarpy_County_SID_274_FY2025",
+  "values_checked": 77,
+  "issues": [
+    {"severity": "warning", "path": "disbursements[6].category", "page": 2,
+     "extracted": "general government", "on_page": "Paying agent fees 9,000 (General 8,000 + Debt Service 1,000)",
+     "issue": "Paying agent fees are debt-related fees; rule lists fees under debt service interest. The Debt Service detail line (detail[18]) uses debt service interest, so the same label is categorized two ways."},
+    {"severity": "warning", "path": "detail[17].category", "page": 5,
+     "extracted": "debt service interest", "on_page": "Collection fee - County Treasurer 1,976",
+     "issue": "Same label is general government in the General Fund detail (detail[3]) and in disbursements[0]; treasurer collection fee is not interest. Inconsistent category for the same label."},
+    {"severity": "warning", "path": "disbursements[1].category", "page": 2,
+     "extracted": "utilities", "on_page": "Electricity 6,897",
+     "issue": "SID electricity is usually street lighting (streets/highways under the rules); utilities is a judgment call."},
+    {"severity": "warning", "path": "disbursements[7].category", "page": 2,
+     "extracted": "utilities", "on_page": "Repairs and maintenance 8,770",
+     "issue": "Function assigned by judgment (spending listed by object); could be streets/highways or general government. No review flag on statement line."},
+    {"severity": "warning", "path": "other_financing", "page": 2,
+     "extracted": -47799, "on_page": "Warrants retired (47,799)",
+     "issue": "Warrant redemptions recorded as negative other_financing rather than netted against debt_proceeds; defensible but an extractor assumption."}
+  ]
+}
