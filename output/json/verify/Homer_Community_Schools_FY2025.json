@@ -2,37 +2,69 @@
   "stem": "Homer_Community_Schools_FY2025",
   "values_checked": 170,
   "issues": [
-    {"severity": "error", "path": "report_discrepancies", "page": 1,
-     "extracted": "no balance entry",
-     "on_page": "Restricted Capital Outlay 217,829 + Debt Service 171,308 + Unrestricted 1,525,048 = 1,914,185; printed Total Net Position 1,914,184",
-     "issue": "The Statement of Net Position equity lines add to 1 more than the printed Total Net Position (and Total Assets 1,914,184). balance_sheet.equity items therefore sum to 1,914,185, not total_equity 1,914,184. The figures match the page, but the gap is not recorded in report_discrepancies (needs a 'balance' entry, difference -1). The governmental funds balance sheet (p4) has the same 1 gap: Total column 1,914,185 vs 1,914,184; Other Governmental 335,282 vs 335,281."},
-    {"severity": "error", "path": "detail[115].category", "page": 17,
-     "extracted": "other",
-     "on_page": "QCPU 'Miscellaneous Expenditures' 16,350; statement p6 QCPU Debt Service 129,351 = 95,046 + 17,955 + 16,350",
-     "issue": "The report's own statement counts this line under Debt Service, so 'other' is wrong. The category should be a debt service category: 'debt service interest' (fees) is most likely, with review, since principal vs. interest/fees isn't stated. detail_category 'miscellaneous expenditure' could be 'debt interest and fees'."},
-    {"severity": "warning", "path": "disbursements", "page": 6,
-     "extracted": "lines sum 8,772,757; reported 8,772,756",
-     "on_page": "Total Governmental Fund lines sum 8,772,757; printed Total Disbursements 8,772,756",
-     "issue": "Checked: this is not a misread. Every Total-column line was read again from the page, and they add to 8,772,757. The General Fund column has the same problem: its lines add to 7,258,383 vs printed 7,258,382. The General Fund components page (p7) also adds to 7,148,789 vs printed 7,148,788. The 1 comes from rounding of the function lines in the report: the budget schedule detail (pp10-11) ties exactly to 7,148,788, while Special Education 620,430/620,431, Students 392,323/392,322, Central 157,751/157,752, Transportation 335,190/335,191 and Federal 217,412/217,411 differ by 1 each. report_discrepancies[0] is correct. Roll-forward as printed: 2,535,316 + 8,151,624 - 8,772,756 = 1,914,184."},
-    {"severity": "warning", "path": "receipts[10].category", "page": 5,
-     "extracted": "intergovernmental/state aid (no review)",
-     "on_page": "Intermediate Sources 159,291 = 2110 County Fines and Licenses 15,734 + 2130 Other County Receipts 15,734 + 2210 ESU Receipts 127,823 (p9)",
-     "issue": "This is a broad group that includes 15,734 of fines. The rules want it recorded as printed with review 'broad group; detail on p.9'. The same applies to State Sources and Federal Sources (receipts[11], receipts[12]), which also have no review."},
-    {"severity": "warning", "path": "receipts[5]", "page": 5,
-     "extracted": 4,
-     "on_page": "Taxes 2,512,304 (p5) vs Statement of Activities tax lines totalling 2,512,300 (p2)",
-     "issue": "The 4 remainder is a computed rounding plug, put in property tax. It is marked computed and review, and the arithmetic is right. The fund-level tax lines (pp9, 16, 17 plus 5 Employee Benefit) add to 2,512,305, so the report's own pieces disagree with each other."},
-    {"severity": "warning", "path": "detail[65].original_label", "page": 11,
-     "extracted": "5000 Debt Service",
-     "on_page": "5000 Debt Serivce",
-     "issue": "The label is printed with a typo ('Serivce', and the department heading 'Debt Serivce'). The extractor corrected the spelling."},
-    {"severity": "warning", "path": "detail_totals[5].amount", "page": 13,
-     "extracted": 15205,
-     "on_page": "Other Employee Benefits 15,205 (no Total Disbursements line printed)",
-     "issue": "The Employee Benefit schedule prints no expenditure total. This detail_totals value is the single line's amount and isn't marked computed. The Activities Fund schedule (p14) is the same: no Total Cash Receipts or Total Disbursements line is printed, so detail_totals[6] 281,282 and detail_totals[7] 247,348 are the line amounts."},
-    {"severity": "warning", "path": "detail", "page": 18,
-     "extracted": "Schedule to Accounts with County Treasurers (pp18-19) not recorded",
-     "on_page": "County Treasurer Fees 20,080 (General) and 1,986 (Special Building); Transfers to School Treasurer",
-     "issue": "Leaving this out to avoid double counting is defensible. The receipts repeat the budget-schedule lines, and the budget-schedule taxes appear to be net of the fees (2,003,147 - 1,983,068 = 20,079). The treasurer fees therefore don't appear anywhere as spending. This is an assumption the extractor made; noted for review."}
+    {
+      "severity": "error",
+      "path": "report_discrepancies",
+      "page": 1,
+      "extracted": "no balance entry",
+      "on_page": "Restricted Capital Outlay 217,829 + Debt Service 171,308 + Unrestricted 1,525,048 = 1,914,185; printed Total Net Position 1,914,184",
+      "issue": "[fixed] The Statement of Net Position equity lines add to 1 more than the printed Total Net Position (and Total Assets 1,914,184). balance_sheet.equity items therefore sum to 1,914,185, not total_equity 1,914,184. The figures match the page, but the gap is not recorded in report_discrepancies (needs a 'balance' entry, difference -1). The governmental funds balance sheet (p4) has the same 1 gap: Total column 1,914,185 vs 1,914,184; Other Governmental 335,282 vs 335,281."
+    },
+    {
+      "severity": "error",
+      "path": "detail[115].category",
+      "page": 17,
+      "extracted": "other",
+      "on_page": "QCPU 'Miscellaneous Expenditures' 16,350; statement p6 QCPU Debt Service 129,351 = 95,046 + 17,955 + 16,350",
+      "issue": "[fixed] The report's own statement counts this line under Debt Service, so 'other' is wrong. The category should be a debt service category: 'debt service interest' (fees) is most likely, with review, since principal vs. interest/fees isn't stated. detail_category 'miscellaneous expenditure' could be 'debt interest and fees'."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements",
+      "page": 6,
+      "extracted": "lines sum 8,772,757; reported 8,772,756",
+      "on_page": "Total Governmental Fund lines sum 8,772,757; printed Total Disbursements 8,772,756",
+      "issue": "Checked: this is not a misread. Every Total-column line was read again from the page, and they add to 8,772,757. The General Fund column has the same problem: its lines add to 7,258,383 vs printed 7,258,382. The General Fund components page (p7) also adds to 7,148,789 vs printed 7,148,788. The 1 comes from rounding of the function lines in the report: the budget schedule detail (pp10-11) ties exactly to 7,148,788, while Special Education 620,430/620,431, Students 392,323/392,322, Central 157,751/157,752, Transportation 335,190/335,191 and Federal 217,412/217,411 differ by 1 each. report_discrepancies[0] is correct. Roll-forward as printed: 2,535,316 + 8,151,624 - 8,772,756 = 1,914,184."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[10].category",
+      "page": 5,
+      "extracted": "intergovernmental/state aid (no review)",
+      "on_page": "Intermediate Sources 159,291 = 2110 County Fines and Licenses 15,734 + 2130 Other County Receipts 15,734 + 2210 ESU Receipts 127,823 (p9)",
+      "issue": "This is a broad group that includes 15,734 of fines. The rules want it recorded as printed with review 'broad group; detail on p.9'. The same applies to State Sources and Federal Sources (receipts[11], receipts[12]), which also have no review."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[5]",
+      "page": 5,
+      "extracted": 4,
+      "on_page": "Taxes 2,512,304 (p5) vs Statement of Activities tax lines totalling 2,512,300 (p2)",
+      "issue": "The 4 remainder is a computed rounding plug, put in property tax. It is marked computed and review, and the arithmetic is right. The fund-level tax lines (pp9, 16, 17 plus 5 Employee Benefit) add to 2,512,305, so the report's own pieces disagree with each other."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[65].original_label",
+      "page": 11,
+      "extracted": "5000 Debt Service",
+      "on_page": "5000 Debt Serivce",
+      "issue": "The label is printed with a typo ('Serivce', and the department heading 'Debt Serivce'). The extractor corrected the spelling."
+    },
+    {
+      "severity": "warning",
+      "path": "detail_totals[5].amount",
+      "page": 13,
+      "extracted": 15205,
+      "on_page": "Other Employee Benefits 15,205 (no Total Disbursements line printed)",
+      "issue": "The Employee Benefit schedule prints no expenditure total. This detail_totals value is the single line's amount and isn't marked computed. The Activities Fund schedule (p14) is the same: no Total Cash Receipts or Total Disbursements line is printed, so detail_totals[6] 281,282 and detail_totals[7] 247,348 are the line amounts."
+    },
+    {
+      "severity": "warning",
+      "path": "detail",
+      "page": 18,
+      "extracted": "Schedule to Accounts with County Treasurers (pp18-19) not recorded",
+      "on_page": "County Treasurer Fees 20,080 (General) and 1,986 (Special Building); Transfers to School Treasurer",
+      "issue": "Leaving this out to avoid double counting is defensible. The receipts repeat the budget-schedule lines, and the budget-schedule taxes appear to be net of the fees (2,003,147 - 1,983,068 = 20,079). The treasurer fees therefore don't appear anywhere as spending. This is an assumption the extractor made; noted for review."
+    }
   ]
 }
