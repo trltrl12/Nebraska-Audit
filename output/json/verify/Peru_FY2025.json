@@ -1,0 +1,29 @@
+{
+  "stem": "Peru_FY2025",
+  "values_checked": 49,
+  "issues": [
+    {"severity": "error", "path": "missing", "page": 8,
+     "extracted": null,
+     "on_page": "Budgetary Comparison Schedule - All Funds, RECEIPTS (Actual): General 853,456; Debt service 33,364; Water 765,108; Sewer 50,991; Sanitation 31,758; Transfers 4,140,329; Total receipts 5,875,006 (final budget 11,825,892)",
+     "issue": "detail[] and detail_totals[] are empty, but p8 is a budget-to-actual schedule covering all funds. Its Water/Sewer/Sanitation figures are cash/budgetary basis (e.g. Water 765,108) and don't match the accrual proprietary statement, so they don't just repeat the statements. Under the detail rules the schedule's lines should be recorded per fund (with the Transfers line as other financing) and its totals in detail_totals."},
+    {"severity": "error", "path": "missing", "page": 8,
+     "extracted": null,
+     "on_page": "Budgetary Comparison Schedule - All Funds, DISBURSEMENTS (Actual): General 1,254,793; Debt service 29,152; Water 4,570,468; Sewer 15,008; Sanitation 29,137; Transfers 4,140,329; Total disbursements 10,038,887 (final budget 11,792,761)",
+     "issue": "Disbursement lines of the p8 budget schedule are left out of detail[]. The Water 4,570,468 cash disbursements (which include 3,622,897 of principal and 605,042 of capital purchases, per p7) appear nowhere else in the JSON."},
+    {"severity": "warning", "path": "receipts[7].category", "page": 6,
+     "extracted": "federal grants", "on_page": "Grant income 326,526",
+     "issue": "The source isn't stated. The Statement of Activities (p2) shows it as Water capital grants and contributions 310,728 plus business-type Intergovernmental 15,799, so intergovernmental/state aid is just as possible. This is a capital grant, so it might also belong in business_type.other_financing as a capital contribution, although it's printed as nonoperating revenue."},
+    {"severity": "warning", "path": "ending_cash", "page": 4,
+     "extracted": 1032030, "on_page": "ENDING FUND BALANCE 1,032,030; balance sheet p3 cash 493,861 + restricted cash 605,541 + cash at county treasurer 3,096 = 1,102,498",
+     "issue": "ending_cash (and beginning_cash 5,474,971) are fund balances, not cash. The governmental balance sheet carries accounts payable 63,365 and accrued expenses 7,103, so the basis is modified cash rather than pure cash. The extractor says so in notes, but the cash figure on the page is 1,102,498."},
+    {"severity": "warning", "path": "basis", "page": 7,
+     "extracted": "cash", "on_page": "Statement of Cash Flows - Business-type Activities (operating -435,774; investing 319; capital and related financing 694,902; beginning cash 17,992; ending cash 277,439)",
+     "issue": "basis is set to cash, so proprietary is null. But the business-type statements are accrual (depreciation, receivables, long-term debt) and come with a full cash flow statement, and the governmental funds report payables. A person may want basis set to GAAP/modified and proprietary filled in."},
+    {"severity": "warning", "path": "reported_totals.business-type.disbursements.amount", "page": 6,
+     "extracted": 636120, "on_page": "Total operating expenses 636,120 (p6); Statement of Activities Total business-type activities 636,121 and Water 577,196 vs 577,195 (p2)",
+     "issue": "The report's two statements differ by 1 (rounding). The figure is taken correctly from p6, but the difference is only in notes, not in report_discrepancies."},
+    {"severity": "warning", "path": "missing", "page": null,
+     "extracted": null, "on_page": "Trimmed pages jump from report p6 to p8 and from p10 to p12 (report pp7 and 11 not trimmed)",
+     "issue": "These are probably reconciliation pages (governmental funds to Statement of Net Position/Activities) with no new revenue or spending lines, but they couldn't be checked."}
+  ]
+}
