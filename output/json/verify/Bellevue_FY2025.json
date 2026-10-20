@@ -1,0 +1,30 @@
+{
+  "stem": "Bellevue_FY2025",
+  "values_checked": 135,
+  "issues": [
+    {"severity": "error", "path": "debt_proceeds", "page": 4,
+     "extracted": 34170348, "on_page": "Bonds issued 34,020,000; Issuance of SBITA 150,348",
+     "issue": "Not printed as one figure. It is the sum 34,020,000 + 150,348, and the money object has no 'computed' marker (the sum itself is correct)"},
+    {"severity": "error", "path": "reported_totals.business-type.receipts", "page": 8,
+     "extracted": 14133249, "on_page": "Total Operating Revenues 13,862,653; nonoperating Insurance reimbursement 34,480 and Interest income 236,116 (no combined total printed)",
+     "issue": "A computed sum (13,862,653 + 34,480 + 236,116) with no 'computed' marker. The arithmetic is correct and it is explained only in the notes"},
+    {"severity": "error", "path": "reported_totals.business-type.disbursements", "page": 8,
+     "extracted": 11978366, "on_page": "Total Operating Expenses 11,948,511; Interest expense (29,855)",
+     "issue": "A computed sum (11,948,511 + 29,855) with no 'computed' marker on p8. The arithmetic is correct. The same figure is printed as Waste water Expenses on p2, but p8 is cited"},
+    {"severity": "warning", "path": "detail[18..20]", "page": 10,
+     "extracted": "LB840 Funds: Investment income 89,605, Economic development 13,508, Transfers 750,000", "on_page": "Schedule of Revenues and Expenditures - LB840 Funds",
+     "issue": "The LB840 economic development money appears to sit inside the General Fund: Restricted for economic development 2,982,415 is in the General Fund column on p3, and there is no separate LB840 column. If so, these lines are already in the General Fund budget schedule (detail[0..13]) and are counted twice. Check whether LB840 is reported within the General Fund"},
+    {"severity": "warning", "path": "detail[6].detail_category", "page": 5,
+     "extracted": "other state aid", "on_page": "Intergovernmental 17,953,078",
+     "issue": "An unlabeled intergovernmental line that probably mixes state (highway allocation etc.), federal and county money. 'other state aid' is an assumption"},
+    {"severity": "warning", "path": "detail[5].detail_category", "page": 5,
+     "extracted": "licenses and permits", "on_page": "Permits, fees and licenses 10,316,690",
+     "issue": "A mixed line. On the GAAP statement (p4) the General Fund shows Permits and licenses 1,936,022, Fees 2,509,795 and Charges for services 5,904,304, so charges and fees make up most of this line, not licenses and permits"},
+    {"severity": "warning", "path": "detail[15].detail_category", "page": 6,
+     "extracted": "miscellaneous revenue", "on_page": "Lottery 1,114,413",
+     "issue": "Lottery/keno proceeds have no exact category. 'miscellaneous revenue' is a judgment call (it could be 'other local taxes')"},
+    {"severity": "warning", "path": "balance_sheet.liabilities[3].category", "page": 1,
+     "extracted": "other liabilities", "on_page": "Compensated absences - Payable in more than one year 4,282,740",
+     "issue": "The current portion of compensated absences is categorized as accrued liabilities but the noncurrent portion as other liabilities. The treatment is inconsistent, though each choice can be defended"}
+  ]
+}
