@@ -1,0 +1,62 @@
+{
+  "stem": "Brainard_FY2025",
+  "values_checked": 91,
+  "issues": [
+    {
+      "severity": "warning",
+      "path": "detail[17].category",
+      "page": 8,
+      "extracted": "debt service interest",
+      "on_page": "Sewer: Debt service 46,380",
+      "issue": "[fixed: now debt service principal with review] combined debt service line is 40,000 principal + 6,380 interest (p6); dominant category is debt service principal, not interest (detail_category could be debt principal)"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[3].fund_type",
+      "page": 7,
+      "extracted": "governmental / other / miscellaneous revenue",
+      "on_page": "Other local sources 973,302",
+      "issue": "line mixes fund types: it equals business-type receipts 771,421 (p6) + governmental interest 41,770 + other general receipts 160,111 (p4); tagged entirely governmental, so governmental detail revenue (1,283,100) far exceeds governmental receipts (511,679); about 79% is utility charges, not miscellaneous"
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[19].category",
+      "page": 6,
+      "extracted": "utilities",
+      "on_page": "Capital improvements 1,000",
+      "issue": "capital improvements fit capital outlay; governmental capital improvements in detail use capital outlay, business-type ones (detail[14], detail[19]) use utilities, which is inconsistent"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[6].category",
+      "page": 6,
+      "extracted": "sales tax",
+      "on_page": "Sales tax collected 25,443",
+      "issue": "sales tax collected on utility sales is a pass-through remitted to the state (disbursements[14] Sales tax 23,824), not village sales tax revenue; it may inflate sales tax totals"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[4].category",
+      "page": 4,
+      "extracted": "other",
+      "on_page": "Other general receipts 160,111",
+      "issue": "31% of governmental receipts in other; p2 shows this line partly as charges for services 15,167 and operating grants 5,485 (general government / culture), remainder 139,459 other general receipts; not split because p4 doesn't break the line down"
+    },
+    {
+      "severity": "warning",
+      "path": "ending_cash.amount",
+      "page": 4,
+      "extracted": 570181,
+      "on_page": "Ending fund balances 570,181; cash 596,211 + county treasurer 5,001 = 601,212 (p3)",
+      "issue": "ending_cash/beginning_cash are total fund balances (cash less 31,031 due to fire department), not cash; the roll-forward is consistent but actual governmental cash is 601,212"
+    },
+    {
+      "severity": "warning",
+      "path": "report_discrepancies[0].note",
+      "page": 2,
+      "extracted": "difference 400 (Sewer disbursements)",
+      "on_page": "Sewer 55,669; business-type other general receipts 621",
+      "issue": "p2 also shows business-type other general receipts 621 vs nonoperating receipts 221 (-349 + 570) on p6; the 400 offsets so the change in net position 149,030 agrees. The note doesn't mention the offsetting receipts difference"
+    }
+  ]
+}

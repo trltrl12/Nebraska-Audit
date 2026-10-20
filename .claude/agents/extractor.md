@@ -309,7 +309,8 @@ When a function line mixes categories, pick the dominant one and mention it in `
   `patient service revenue`); operating expenses by line (salaries, benefits, supplies,
   professional fees…), function `hospital/health care`.
 - **Housing authorities:** tenant rent → `charges for services/fees` (detail `tenant rent`); HUD
-  operating subsidies and capital fund grants → `federal grants`; function `housing`.
+  operating subsidies → `federal grants`; HUD capital fund grants printed as "Capital contributions" (below
+  income before contributions) → `business_type.other_financing`, not receipts; function `housing`.
 - **Public power districts:** electric sales → detail `electric charges`; purchased power →
   `purchased power/cost of sales`; function `utilities`.
 - **Fire districts, townships, cemetery districts, SIDs, road improvement districts,
