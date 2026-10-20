@@ -1,0 +1,15 @@
+{
+  "stem": "Kilgore_FY2025",
+  "values_checked": 17,
+  "issues": [
+    {"severity": "warning", "path": "report_discrepancies[0]", "page": 2,
+     "extracted": {"check": "totals", "difference": 0}, "on_page": "Trimmed p2 is the same Exhibit A page 1 crossed out with a red X; its lines 26-28 by fund (General 128,844.72 / 51,675.53 = 180,520.25; Street 0 / 10,357.76) disagree with its own line 24 (56,103.96 / 134,774.05), totals agree",
+     "issue": "Entry is about the voided page, not a failure of the statement used (p1 adds up and rolls forward exactly). With difference 0 it will still be listed to the user as 'the report itself doesn't add up'. Defensible by analogy to the budget-form void-page rule, but the user should know p1 itself has no discrepancy."},
+    {"severity": "warning", "path": "notes", "page": 1,
+     "extracted": null, "on_page": "County Treasurer Balance at October 1, 2024 $1,002.72; at September 30, 2025 1,448.78",
+     "issue": "County treasurer balances are printed below Exhibit A but are not recorded or mentioned anywhere in the JSON (not in balances, balance_sheet or notes). They are outside the Exhibit A roll-forward, so leaving them out is defensible, but they should be noted."},
+    {"severity": "warning", "path": "disbursements[2].category", "page": 4,
+     "extracted": "streets/highways", "on_page": "Public Works - Other (General Fund) 16,871.78",
+     "issue": "General Fund 'Public Works - Other' is separate from line 32 'Public Works - Streets' on the form, so it may not be streets (could be utilities, sanitation, etc.). Already marked review; judgment call."}
+  ]
+}

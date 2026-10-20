@@ -1,0 +1,18 @@
+{
+  "stem": "Loup_City_FY2025",
+  "values_checked": 54,
+  "issues": [
+    {"severity": "warning", "path": "detail", "page": 9,
+     "extracted": [], "on_page": "Budget and Actual (Budgetary Basis) - All Funds: 13 receipt lines (Total receipts actual 2,550,923, budget 2,618,709) and 11 disbursement lines (Total disbursements actual 3,579,241, budget 4,447,641)",
+     "issue": "The only supplementary schedule was left out of detail because it combines governmental and utility funds. Some lines could be given a fund type (Water 507,221, Wastewater 688,115 and Community development 5,465 are business-type; the taxes are governmental), and the final budget figures appear nowhere else in the JSON. The extractor's reasoning is documented in notes, but a person should decide whether all-funds budget schedules should be recorded."},
+    {"severity": "warning", "path": "receipts[12].category", "page": 8,
+     "extracted": "keno/lottery", "on_page": "Operating revenues - Other, Lottery column 10,480",
+     "issue": "The page labels this line only 'Other'. Calling it lottery proceeds rests on it sitting in the Lottery fund column. That is plausible, but the label doesn't say so. The column split itself is printed, so split_from is fine."},
+    {"severity": "warning", "path": "disbursements[15].category", "page": 8,
+     "extracted": "utilities", "on_page": "Miscellaneous 16,015 = Lottery 5,465 + Water 6,054 + Sewer 4,496",
+     "issue": "The Lottery fund's 5,465 is printed in its own column, and the p9 budget schedule calls it 'Community development'. It could be split out as economic development with split_from instead of being counted as utilities spending. Right now it only carries a review note."},
+    {"severity": "warning", "path": "beginning_cash", "page": 6,
+     "extracted": 3099878, "on_page": "Fund balances, beginning of year 3,099,878",
+     "issue": "Beginning cash is the beginning fund balance / net position. The trimmed PDF doesn't print beginning governmental cash. Ending fund balance 2,866,804 equals cash + county treasurer + investments (p1), so this is a reasonable stand-in, but it is an assumption."}
+  ]
+}
