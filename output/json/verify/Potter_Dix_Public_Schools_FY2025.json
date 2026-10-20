@@ -1,0 +1,21 @@
+{
+  "stem": "Potter_Dix_Public_Schools_FY2025",
+  "values_checked": 304,
+  "issues": [
+    {"severity": "warning", "path": "receipts[0].category", "page": 2,
+     "extracted": "property tax 2,111,964.18", "on_page": "SoA Taxes Property 2,111,964.18 = GF 1100 2,052,232.14 + SB 1110 38,064.76 + SB 3131 Property tax credit 21,667.28 (p11)",
+     "issue": "The SoA split puts the Special Building property tax credit (21,667.28) under property tax, but detail records the same line as homestead/tax credits, which is state aid. Categories for the same money don't match. (The Interest line 68,059.03 likewise includes interest on taxes, 11,343.06 + 41.87.)"},
+    {"severity": "warning", "path": "disbursements[7].category", "page": 4,
+     "extracted": "instruction", "on_page": "State programs 22,730.35",
+     "issue": "The SoA (p2) lists State programs as its own function, not under Instruction, so 'instruction' is a judgment call (already marked review)."},
+    {"severity": "warning", "path": "disbursements[8].category", "page": 4,
+     "extracted": "instruction", "on_page": "Federal programs 156,571.89",
+     "issue": "The SoA (p2) lists Federal programs as its own function, not under Instruction, so 'instruction' is a judgment call (already marked review)."},
+    {"severity": "warning", "path": "detail[209].detail_category", "page": 17,
+     "extracted": "student activity receipts", "on_page": "Now interest 1,686.60",
+     "issue": "The account label says interest, so 'investment income' looks like the better category."},
+    {"severity": "warning", "path": "detail[215].detail_category", "page": 17,
+     "extracted": "student activity receipts", "on_page": "Policky scholarship MMA/CD 24,638.90; Scholarship savings 14,688.66; Scholarship CD's 428.45 (detail[215]-[217])",
+     "issue": "These three scholarship-account receipts add up to exactly 39,756.01, which equals Activities Fund '1510 Interest' on p9 (and the statement's Interest line counts it as interest). They are probably interest earnings and should be investment income, not activity receipts."}
+  ]
+}
