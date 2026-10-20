@@ -1,0 +1,24 @@
+{
+  "stem": "Bellevue_Public_Schools_FY2025",
+  "values_checked": 239,
+  "issues": [
+    {"severity": "error", "path": "receipts[0].category", "page": 6,
+     "extracted": "taxes (unlabeled) 47,789,308 (unsplit)",
+     "on_page": "Local receipts 47,789,308 = GF 41,953,337 (p5) + Special Building 268,147 (p5) + Bond 5,567,824 (p6); the budget schedules print the full breakdown: GF 1100 Local district taxes 36,485,013, 1120 PPD sales taxes 376,061, 1125 Motor vehicle tax 4,410,889, 1323 Tuition 147,391, 1990 Other local receipts 533,983 (p7; = 41,953,337, interest 234,244 is in the Interest line); SB property taxes 18 + other local receipts 268,129 (p10); Bond property taxes 5,502,112 + PPD sales taxes 65,712 (p14)",
+     "issue": "the report prints the breakdown of this line exactly, so it should be split (split_from): property tax 41,987,143; other taxes (PPD sales tax) 441,773; motor vehicle tax 4,410,889; charges for services/fees (tuition) 147,391; other (other local receipts) 802,112; total 47,789,308. The line also holds about $950k of non-tax receipts, so taxes (unlabeled) is wrong, and the review note's claim that no split is printed is incorrect"},
+    {"severity": "error", "path": "detail[52].amount", "page": 8,
+     "extracted": "2600 Operating & maintenance of plant 13,946,152 (all expenditure)",
+     "on_page": "Schedule 13,946,152 (p8) vs governmental-funds statement GF column maintenance and operation of plant 12,696,152 (p5); difference 1,250,000 = Operational transfer from the General fund on the Special Building schedule (p10) and GF transfers out (p5)",
+     "issue": "hidden transfer not split: the statement reclassifies 1,250,000 of this line as a transfer to Special Building. It should be split into expenditure 12,696,152 plus an other financing item -1,250,000 (split_from, review). As entered, the same 1,250,000 is both GF spending and a transfer in (detail[65])"},
+    {"severity": "error", "path": "missing", "page": 8,
+     "extracted": null,
+     "on_page": "GF schedule instruction lines 1100-1300, 3500, 6000 (detail[38]-[46], [54], [56]) total 90,399,767 (p8); statement GF Instructional services 86,949,767 (p5); difference 3,450,000 = Operational transfer from the General fund to Employee Benefit (p9) and part of GF transfers out 5,525,000 (p5)",
+     "issue": "hidden transfer inside a group of lines: the page doesn't say which instruction line holds it, so the rules call for a contra line (section expenditure, -3,450,000, department instruction, split_from, review) plus an other financing line -3,450,000. Both are missing, so 3,450,000 is counted as both GF spending and a transfer in (detail[59]). Check: 132,498,579 schedule spending + 3,224,464 EB - 1,250,000 - 3,450,000 = 131,023,043 statement GF disbursements (p5)"},
+    {"severity": "warning", "path": "receipts[1].category", "page": 6,
+     "extracted": "intergovernmental/state aid", "on_page": "County receipts 321,514 = 2110 County fines and license fees (p7)",
+     "issue": "same money is categorised fines and forfeitures in detail[6] but intergovernmental/state aid at the statement level; categories are inconsistent"},
+    {"severity": "warning", "path": "disbursements[2].original_label", "page": 5,
+     "extracted": "Support services - pupils (School Nutrition Fund)", "on_page": "Support services - pupils",
+     "issue": "label has extractor annotations added (also disbursements[7] '(Special Building Fund)', detail[78]-[89] '- Receipts/- Disbursements', detail[90]-[91] '(receipts)/(disbursements)'); the amounts are correct"}
+  ]
+}
