@@ -1,0 +1,21 @@
+{
+  "stem": "Clarkson_Public_Schools_FY2025",
+  "values_checked": 250,
+  "issues": [
+    {"severity": "warning", "path": "receipts[0].category", "page": 5,
+     "extracted": "property tax", "on_page": "Local Receipts 2,499,099.94 (General 2,252,372.29 + Special Building 31,768.45 + Activities 214,959.20)",
+     "issue": "broad group recorded as property tax; it includes Activities Fund receipts 214,959.20, motor vehicle tax 137,309.96, tuition 48,000 and other local items (Schedule A p11). Total-column breakdown is not printed, so it cannot be split, but the category overstates property tax"},
+    {"severity": "warning", "path": "receipts[6].category", "page": 5,
+     "extracted": "other", "on_page": "Non-Revenue Receipts 776,836.30 (incl. Depreciation Fund 5200 Allocation from General Fund 725,000.00, p15; Employee Benefit 51,229.24)",
+     "issue": "725,000 'Allocation from General Fund' looks like an interfund transfer but the report prints it as a receipt with no matching General Fund outflow (GF disbursements 5,054,392.00 = functions 4,909,725.75 + transfers 144,666.25). Kept as printed; needs human review. Same for detail[37]"},
+    {"severity": "warning", "path": "disbursements[29].category", "page": 7,
+     "extracted": "other", "on_page": "Other Expenses and Services 995,850.02 (Special Building 905,603.05, Depreciation 36,850.13, Employee Benefit 53,396.84)",
+     "issue": "91% is Special Building Fund spending in a year with 14,950,000 bond proceeds, likely capital outlay/construction; function not printed, so 'other' is defensible but questionable"},
+    {"severity": "warning", "path": "detail[38].category", "page": 15,
+     "extracted": "other", "on_page": "2900-300 Purchased Professional & Technical Services 3,576.19",
+     "issue": "function code 2900 is in the 2000 support-services series (Other Support Services in the Nebraska chart of accounts); 'support services' fits better than 'other'. Same for detail[39] and detail[40]"},
+    {"severity": "warning", "path": "detail[99].detail_category", "page": 18,
+     "extracted": "professional/contract services", "on_page": "2310 Board of Education - Other Property Services 65,391.20",
+     "issue": "'Other Property Services' (object 500-series other purchased services: insurance, communications, tuition, travel) mapped to professional/contract services throughout Schedule M; could be insurance or other objects. Judgment call applied to every 'Other Property Services' line"}
+  ]
+}

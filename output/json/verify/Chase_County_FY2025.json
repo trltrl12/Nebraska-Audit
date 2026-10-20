@@ -1,0 +1,28 @@
+{
+  "stem": "Chase_County_FY2025",
+  "values_checked": 102,
+  "issues": [
+    {"severity": "warning", "path": "detail[0].split_from", "page": 5,
+     "extracted": "Taxes split into property tax 2,920,256 + motor vehicle tax 293,142 (source_page 5)",
+     "on_page": "Taxes 3,213,398 (budget 3,167,844); no breakdown on p5",
+     "issue": "Exhibit F prints only the broad group 'Taxes'. The split uses the Exhibit D General column (p4), which does print 2,920,256 + 293,142 = 3,213,398 for the same fund, so the arithmetic holds. But the extractor's 'broad group' rule says to keep budget-schedule groups as printed, and the split amounts are not on the cited page 5. budget_final 3,167,844 was also dropped. Applies to detail[0] and detail[1]."},
+    {"severity": "warning", "path": "detail[4].split_from", "page": 5,
+     "extracted": "Local split into charges 406,924 + interest 369,503 + miscellaneous 75,180 (source_page 5)",
+     "on_page": "Local 851,607 (budget 410,800)",
+     "issue": "Same issue as the Taxes split: the breakdown comes from Exhibit D p4 (it sums correctly to 851,607), not from page 5. Budget 410,800 was dropped. Applies to detail[4], detail[5] and detail[6]."},
+    {"severity": "warning", "path": "detail[37].split_from", "page": 7,
+     "extracted": "Road Local split into 1,426 + 32,288 (source_page 7)",
+     "on_page": "Local 33,714 (budget 1,041)",
+     "issue": "Split taken from Exhibit D Road column p4 (sums correctly); not printed on p7; broad-group rule. Applies to detail[37] and detail[38]."},
+    {"severity": "warning", "path": "detail[36].detail_category", "page": 7,
+     "extracted": "highway allocation", "on_page": "State 1,245,125 (Exhibit D: Intergovernmental)",
+     "issue": "Assumption: the schedule only says 'State'. Highway allocation is likely for a Road Fund but is not labelled."},
+    {"severity": "warning", "path": "detail[26].category", "page": 5,
+     "extracted": "streets/highways", "on_page": "Public Works: Noxious Weed 29,131",
+     "issue": "The category rules list noxious weed control under natural resources/conservation. The extractor followed the Public Works heading instead."},
+    {"severity": "warning", "path": "missing", "page": 15,
+     "extracted": null,
+     "on_page": "Schedule 4 Highway Allocation Bond: Cash Receipts 459,918; Cash Disbursements 459,918",
+     "issue": "The Highway Allocation Bond debt service fund is not in Schedule 3, so its 459,918 of disbursements (principal 385,000 + interest 74,918 on Exhibit D) has no detail line. Its 'receipts' are really the transfer in from Road (Exhibit D nonmajor Transfers In 755,848 = 295,930 + 459,918), so they must not be recorded as revenue. This is acknowledged in notes."}
+  ]
+}
