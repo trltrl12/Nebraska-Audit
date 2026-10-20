@@ -2,23 +2,53 @@
   "stem": "Fremont_Public_Schools_FY2025",
   "values_checked": 449,
   "issues": [
-    {"severity": "error", "path": "detail[7].category", "page": 7,
-     "extracted": "other / miscellaneous revenue", "on_page": "Miscellaneous revenue (code 1960) 20,215",
-     "issue": "Extractor rules: 1951/1960-type school lines are intergovernmental/state aid / county/other local governments, never other. Should be intergovernmental/state aid (detail_category county/other local governments)."},
-    {"severity": "error", "path": "receipts[6].category", "page": 5,
-     "extracted": "other 424,515 (includes GF Miscellaneous revenue code 1960, 20,215)", "on_page": "GF Miscellaneous revenue 1960 20,215 (p7)",
-     "issue": "Same 1960 line is folded into the governmental 'other' receipt; per the rule it belongs in intergovernmental/state aid (other would be 404,300, intergovernmental +20,215). Split arithmetic otherwise correct."},
-    {"severity": "warning", "path": "detail[9].detail_category", "page": 7,
-     "extracted": "intergovernmental/state aid / county/other local governments", "on_page": "County fines and license fees (2110) 520,419",
-     "issue": "Fines/license fees passed through by the county; 'fines and forfeitures' is an arguable alternative. Same applies to receipts[8] (County receipts)."},
-    {"severity": "warning", "path": "disbursements[4].category", "page": 5,
-     "extracted": "support services", "on_page": "Central services 5,394,270 (GF 1,982,832 + Depreciation 2,434,598 + Activity Fund 963,941 + Student Fee 12,899)",
-     "issue": "Line mixes Activity Fund spending (student activities) into Central services; dominant category is defensible but notes don't mention the mix as the rules ask."},
-    {"severity": "warning", "path": "receipts[7].category", "page": 5,
-     "extracted": "charges for services/fees", "on_page": "Activity Fund 906,595 + Student Fee Fund 13,478 (Other local receipts columns)",
-     "issue": "Activity fund receipts have no breakdown; charges for services is a judgment call (already marked review)."},
-    {"severity": "warning", "path": "detail[257].category", "page": 10,
-     "extracted": "other / miscellaneous revenue", "on_page": "Special Building Fund Other non-revenue receipts 1,281,605 and Other local receipts 400,000",
-     "issue": "Large unexplained Special Building receipts (about 62% of that fund's receipts); nature not stated, could be insurance, reimbursement or financing. Already marked review; worth a person checking the notes."}
+    {
+      "severity": "error",
+      "path": "detail[7].category",
+      "page": 7,
+      "extracted": "other / miscellaneous revenue",
+      "on_page": "Miscellaneous revenue (code 1960) 20,215",
+      "issue": "[fixed] Extractor rules: 1951/1960-type school lines are intergovernmental/state aid / county/other local governments, never other. Should be intergovernmental/state aid (detail_category county/other local governments)."
+    },
+    {
+      "severity": "error",
+      "path": "receipts[6].category",
+      "page": 5,
+      "extracted": "other 424,515 (includes GF Miscellaneous revenue code 1960, 20,215)",
+      "on_page": "GF Miscellaneous revenue 1960 20,215 (p7)",
+      "issue": "[fixed] Same 1960 line is folded into the governmental 'other' receipt; per the rule it belongs in intergovernmental/state aid (other would be 404,300, intergovernmental +20,215). Split arithmetic otherwise correct."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[9].detail_category",
+      "page": 7,
+      "extracted": "intergovernmental/state aid / county/other local governments",
+      "on_page": "County fines and license fees (2110) 520,419",
+      "issue": "Fines/license fees passed through by the county; 'fines and forfeitures' is an arguable alternative. Same applies to receipts[8] (County receipts)."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[4].category",
+      "page": 5,
+      "extracted": "support services",
+      "on_page": "Central services 5,394,270 (GF 1,982,832 + Depreciation 2,434,598 + Activity Fund 963,941 + Student Fee 12,899)",
+      "issue": "Line mixes Activity Fund spending (student activities) into Central services; dominant category is defensible but notes don't mention the mix as the rules ask."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[7].category",
+      "page": 5,
+      "extracted": "charges for services/fees",
+      "on_page": "Activity Fund 906,595 + Student Fee Fund 13,478 (Other local receipts columns)",
+      "issue": "Activity fund receipts have no breakdown; charges for services is a judgment call (already marked review)."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[257].category",
+      "page": 10,
+      "extracted": "other / miscellaneous revenue",
+      "on_page": "Special Building Fund Other non-revenue receipts 1,281,605 and Other local receipts 400,000",
+      "issue": "Large unexplained Special Building receipts (about 62% of that fund's receipts); nature not stated, could be insurance, reimbursement or financing. Already marked review; worth a person checking the notes."
+    }
   ]
 }
