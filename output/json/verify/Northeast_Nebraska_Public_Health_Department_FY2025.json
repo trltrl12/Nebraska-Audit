@@ -2,17 +2,37 @@
   "stem": "Northeast_Nebraska_Public_Health_Department_FY2025",
   "values_checked": 61,
   "issues": [
-    {"severity": "error", "path": "receipts[0].category", "page": 2,
-     "extracted": "intergovernmental/state aid", "on_page": "Grant Receipts 1,942,057; budget schedule p3: Federal 1,568,022, State 482,036, Local 407,448 (total 2,457,506)",
-     "issue": "Federal grants must be most of Grant Receipts. Only 515,449 of receipts are non-grant (General Receipts p2), so at least 1,568,022 - 515,449 = 1,052,573 of the 1,942,057 grant line is federal, which is more than half. Under the dominant-category rule this should be 'federal grants' (keep the review note on the federal/state mix)."},
-    {"severity": "warning", "path": "ending_cash", "page": 2,
-     "extracted": 1106689, "on_page": "Fund Balance/Net Position - Ending 1,106,689; cash on p1 is 402,819 + 716,575 = 1,119,394",
-     "issue": "Modified cash basis. beginning_cash/ending_cash hold the fund balance the statement rolls forward, not actual cash (cash is 1,119,394, net of 12,827 payables and 122 prepaid). This is defensible and explained in notes, but the field holds a fund balance, not cash."},
-    {"severity": "warning", "path": "detail[2].category", "page": 3,
-     "extracted": "other / miscellaneous revenue", "on_page": "Local 407,448",
-     "issue": "Broad 'Local' group. It includes Interest 25,027 and Other Receipts 32,535 (p2); the remaining ~349,886 is not explained. 'other' with review is defensible but may be local government contributions or fees."},
-    {"severity": "warning", "path": "disbursements[3].category", "page": 2,
-     "extracted": "health/welfare", "on_page": "ARPA 696,937",
-     "issue": "Budget schedule p3 shows Capital outlay 699,666, which is close to ARPA 696,937, so this program line may be mostly capital outlay. The extractor already marked it for review."}
+    {
+      "severity": "error",
+      "path": "receipts[0].category",
+      "page": 2,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "Grant Receipts 1,942,057; budget schedule p3: Federal 1,568,022, State 482,036, Local 407,448 (total 2,457,506)",
+      "issue": "[fixed] Federal grants must be most of Grant Receipts. Only 515,449 of receipts are non-grant (General Receipts p2), so at least 1,568,022 - 515,449 = 1,052,573 of the 1,942,057 grant line is federal, which is more than half. Under the dominant-category rule this should be 'federal grants' (keep the review note on the federal/state mix)."
+    },
+    {
+      "severity": "warning",
+      "path": "ending_cash",
+      "page": 2,
+      "extracted": 1106689,
+      "on_page": "Fund Balance/Net Position - Ending 1,106,689; cash on p1 is 402,819 + 716,575 = 1,119,394",
+      "issue": "Modified cash basis. beginning_cash/ending_cash hold the fund balance the statement rolls forward, not actual cash (cash is 1,119,394, net of 12,827 payables and 122 prepaid). This is defensible and explained in notes, but the field holds a fund balance, not cash."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[2].category",
+      "page": 3,
+      "extracted": "other / miscellaneous revenue",
+      "on_page": "Local 407,448",
+      "issue": "Broad 'Local' group. It includes Interest 25,027 and Other Receipts 32,535 (p2); the remaining ~349,886 is not explained. 'other' with review is defensible but may be local government contributions or fees."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[3].category",
+      "page": 2,
+      "extracted": "health/welfare",
+      "on_page": "ARPA 696,937",
+      "issue": "Budget schedule p3 shows Capital outlay 699,666, which is close to ARPA 696,937, so this program line may be mostly capital outlay. The extractor already marked it for review."
+    }
   ]
 }
