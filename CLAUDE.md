@@ -108,8 +108,6 @@ agents' one-line statuses.
   the next fetch re-trims, compare each extracted report's manifest `pages_kept` with
   `output/json/_meta/pages_at_extraction.csv`; re-extract and re-verify every report whose pages
   changed (their source_page numbers no longer match).
-- Extracted from old (v5) trims, still to verify after re-trim: Bladen (all _FY2025;
-  re-extract first if their pages changed).
 These were diagnosed and fixed in find_pages v6; re-extract and re-verify them after the re-trim:
 - Trimmed PDF is missing pages: Arapahoe_FY2025 (other
   nonmajor combining page), Auburn_Public_Schools_FY2025 (report p27, Employee Benefit Fund),
