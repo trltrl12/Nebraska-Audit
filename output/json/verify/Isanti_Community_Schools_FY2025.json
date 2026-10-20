@@ -1,0 +1,24 @@
+{
+  "stem": "Isanti_Community_Schools_FY2025",
+  "values_checked": 159,
+  "issues": [
+    {"severity": "warning", "path": "detail[35].amount", "page": 10,
+     "extracted": 105267, "on_page": 355267,
+     "issue": "Extractor's assumption: the schedule prints 2700 Student transportation as 355,267, and the extractor split it into 105,267 of spending plus a 250,000 transfer to the Depreciation Fund (detail[41]). The figures support this: statement p5 shows 105,267 for this line, and GF statement disbursements 7,973,295 = schedule 8,168,544 + Depreciation 54,751 - 250,000. But the schedule never says the 250,000 is a transfer. It is marked split_from/review."},
+    {"severity": "warning", "path": "detail[41].original_label", "page": 10,
+     "extracted": "Transfer to Depreciation Fund (inside 2700 Student transportation)", "on_page": "2700 Student transportation",
+     "issue": "This label was written by the extractor for the split transfer line; it is not printed on the page. The matching inflow is printed on p11 as 'Transfer - General Fund' 250,000."},
+    {"severity": "warning", "path": "detail[40].original_label", "page": 10,
+     "extracted": "8000 Transfers (to Nutrition 500,000 and Activities 350,000)", "on_page": "8000 Transfers",
+     "issue": "The extractor added an explanation in parentheses to the printed label. The amounts are correct (-850,000; budget 745,000)."},
+    {"severity": "warning", "path": "detail[44].category", "page": 11,
+     "extracted": "capital outlay", "on_page": "DISBURSEMENTS 54,751 (Depreciation Fund)",
+     "issue": "Statement p5 counts this under 'Other support services' (75,971 = GF 2900 21,220 + Depreciation 54,751), so with capital outlay as the function the detail won't tie to the statement's function lines. support services may be the better fit."},
+    {"severity": "warning", "path": "detail[6].detail_category", "page": 8,
+     "extracted": "county/other local governments", "on_page": "2110 County fines and licenses",
+     "issue": "A judgment call. The label describes fines and license money paid out through the county, so 'fines and forfeitures' or 'licenses and permits' could also fit. The statement p4 label 'County and ESU sources' supports the intergovernmental reading."},
+    {"severity": "warning", "path": "disbursements[11].category", "page": 5,
+     "extracted": "debt service principal", "on_page": "Debt service 179,308",
+     "issue": "The whole debt service line is recorded as principal. The trimmed pages don't split principal and interest (same for detail[38], 5000 Debt services). It is flagged review."}
+  ]
+}

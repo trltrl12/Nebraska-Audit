@@ -2,17 +2,37 @@
   "stem": "Inman_FY2025",
   "values_checked": 31,
   "issues": [
-    {"severity": "error", "path": "receipts[4].amount", "page": 1,
-     "extracted": 17086, "on_page": 17066,
-     "issue": "Line 11 State Receipts: Municipal Equalization Aid prints 17,066.00 in both the General Fund and Total columns, not 17,086. With 17,066 the General Fund lines 4-20 add to exactly the printed 49,400, the Total column adds to the printed 104,757, and the governmental roll-forward (54,892 + 80,175 - 75,346 = 59,721) ties to the printed ending balance. The printed report does add up; the off-by-20 was a misread."},
-    {"severity": "error", "path": "report_discrepancies", "page": 1,
-     "extracted": "two entries, difference -20 (totals and reconcile)", "on_page": "General Fund receipts 49,400 = sum of lines; roll-forward ties",
-     "issue": "Both report_discrepancies entries come from the 17,086 misread and are false. The printed report reconciles, so report_discrepancies should be []."},
-    {"severity": "warning", "path": "receipts[10].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Sewer Fund) 19,171.00",
-     "issue": "Printed as 'Other'. The extractor assumed these are sewer charges, which is plausible but nothing on the page says so (review already set)."},
-    {"severity": "warning", "path": "receipts[11].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Sewer Reserve Fund) 411.00",
-     "issue": "A reserve fund's 411 'Other' receipt is more likely interest than user charges. This is an assumption (review already set)."}
+    {
+      "severity": "error",
+      "path": "receipts[4].amount",
+      "page": 1,
+      "extracted": 17086,
+      "on_page": 17066,
+      "issue": "[fixed] Line 11 State Receipts: Municipal Equalization Aid prints 17,066.00 in both the General Fund and Total columns, not 17,086. With 17,066 the General Fund lines 4-20 add to exactly the printed 49,400, the Total column adds to the printed 104,757, and the governmental roll-forward (54,892 + 80,175 - 75,346 = 59,721) ties to the printed ending balance. The printed report does add up; the off-by-20 was a misread."
+    },
+    {
+      "severity": "error",
+      "path": "report_discrepancies",
+      "page": 1,
+      "extracted": "two entries, difference -20 (totals and reconcile)",
+      "on_page": "General Fund receipts 49,400 = sum of lines; roll-forward ties",
+      "issue": "[fixed] Both report_discrepancies entries come from the 17,086 misread and are false. The printed report reconciles, so report_discrepancies should be []."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[10].category",
+      "page": 1,
+      "extracted": "charges for services/fees",
+      "on_page": "Local Receipts: Other (Sewer Fund) 19,171.00",
+      "issue": "Printed as 'Other'. The extractor assumed these are sewer charges, which is plausible but nothing on the page says so (review already set)."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[11].category",
+      "page": 1,
+      "extracted": "charges for services/fees",
+      "on_page": "Local Receipts: Other (Sewer Reserve Fund) 411.00",
+      "issue": "A reserve fund's 411 'Other' receipt is more likely interest than user charges. This is an assumption (review already set)."
+    }
   ]
 }
