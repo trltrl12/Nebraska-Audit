@@ -1,0 +1,38 @@
+{
+  "stem": "Nuckolls_County_Historical_Society_FY2025",
+  "values_checked": 7,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "balance_sheet.assets",
+      "page": 1,
+      "extracted": [],
+      "on_page": "Line 27 Ending Balance consists of: 28 Cash on Hand and in Bank 29,424.99; 29 Investments 2,005,170.91; 31 Total 2,034,595.90",
+      "issue": "[fixed] Balance sheet section is printed (lines 27-31) but assets are left empty and total_assets is null. The notes say 'No balance sheet in the filing', which is not true. Oakdale_FY2025 records the same kind of section. Cash on hand and investments should be 'cash and investments' assets with total_assets 2,034,595.90."
+    },
+    {
+      "severity": "error",
+      "path": "balance_sheet.equity",
+      "page": 1,
+      "extracted": [],
+      "on_page": "Line 26 Balance Forward/Ending Balance 2,034,595.90",
+      "issue": "[fixed] The ending fund balance is not recorded as equity and total_equity is null, so the balance check (assets = liabilities + equity) can't be done."
+    },
+    {
+      "severity": "warning",
+      "path": "fiscal_year_end",
+      "page": 1,
+      "extracted": "2025-06-30",
+      "on_page": "2026 AUDIT WAIVER REQUEST (no period printed)",
+      "issue": "No fiscal year is printed, so 2025-06-30 was assumed. The form is titled 2026 Audit Waiver Request; confirm the period on the Auditor's site."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[0].category",
+      "page": 1,
+      "extracted": "other",
+      "on_page": "Local Receipts 214,326.57",
+      "issue": "The only receipt line is unexplained and is all of the year's receipts, so it is 100% 'other'. It may be mostly investment income on about 1.7M of investments, but the page doesn't say. Already marked review."
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "stem": "Oakdale_FY2025",
+  "values_checked": 32,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "balance_sheet.equity",
+      "page": 1,
+      "extracted": [],
+      "on_page": "Line 24 Ending Balance: General 36,284.00, Street 244,167.00, Debt Service 72,238.00, Enterprise 42,294.00, Total 394,983.00",
+      "issue": "[fixed] total_assets is 394,983 but equity is empty and total_equity is null, so assets = liabilities + equity doesn't hold (394,983 vs 0). The validator will report a missing fund balance total. The ending balance (Total column 394,983.00) should be recorded as equity with total_equity 394,983.00."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[9].category",
+      "page": 1,
+      "extracted": "other",
+      "on_page": "Local Receipts: Other - General 77,486.00, Street 879.00",
+      "issue": "78,365 is about 29% of governmental receipts and is unexplained. No breakdown is in the trimmed PDF. Already marked review."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[5].category",
+      "page": 2,
+      "extracted": "debt service principal",
+      "on_page": "Debt Service 24,600.00",
+      "issue": "Principal and interest are combined. Debt service principal is the rule default, and the line is marked review."
+    }
+  ]
+}
