@@ -1,0 +1,27 @@
+{
+  "stem": "Coleridge_FY2025",
+  "values_checked": 130,
+  "issues": [
+    {"severity": "warning", "path": "receipts[4]", "page": 5,
+     "extracted": "taxes (unlabeled) 24,698 (Street fund taxes)", "on_page": "Statement of Activities general revenues: Franchise fees 77,086 (p3) vs General Fund franchise fees 52,388 (p10); 77,086 - 52,388 = 24,698",
+     "issue": "the Street Fund taxes are probably franchise fees (the government-wide franchise fee total exceeds the General Fund amount by exactly 24,698). This is only inferred from another statement, so keeping the line as 'taxes (unlabeled)' is allowed, but the review entry should mention this"},
+    {"severity": "warning", "path": "receipts[9].category", "page": 10,
+     "extracted": "intergovernmental/state aid", "on_page": "Rural fire contribution 18,109",
+     "issue": "the category rules list rural fire contracts under charges for services/fees; 'contribution' from a rural fire district can also be read as an intergovernmental payment. Same judgment applies to detail[13] (county/other local governments)"},
+    {"severity": "warning", "path": "ending_cash", "page": 6,
+     "extracted": 402864, "on_page": "Fund balance end of year 402,864 (p6); governmental cash 469,766 + county treasurer 6,896 = 476,662 with Due from other funds 53,692 and Due to other funds 127,490 (p4)",
+     "issue": "beginning/ending 'cash' are the fund balances, which include interfund receivables/payables, so they differ from actual governmental cash. The roll-forward holds; this is a labelling assumption"},
+    {"severity": "warning", "path": "detail[24].category", "page": 10,
+     "extracted": "culture/recreation", "on_page": "Community Building expenditures 23,696",
+     "issue": "the governmental funds statement (p5) puts Community Building spending under General government (General column 110,684 = General 86,988 + Community Building 23,696), while Culture and Recreation 27,243 = Park operating only. The rules put community centers under culture/recreation, so this is defensible but inconsistent with the report. Applies to detail[24]-detail[26]"},
+    {"severity": "warning", "path": "detail[23].detail_category", "page": 10,
+     "extracted": "construction/infrastructure", "on_page": "Capital outlay 37,606 (General); also Park 476,683 -> construction/infrastructure, Fire 8,060 -> equipment purchases",
+     "issue": "the object of these capital outlay lines is not printed, so the detail categories are guesses (the extractor flagged them for review)"},
+    {"severity": "warning", "path": "detail", "page": 8,
+     "extracted": "business-type detail covers operating lines only", "on_page": "Nonoperating per fund: Sewer capital expenses (22,000), principal (3,080), interest (509); Water capital expenses (25,387), principal (27,551), interest (13,073)",
+     "issue": "the per-fund nonoperating lines from p8 are not in detail. They are covered by the top-level business-type disbursements, so nothing is lost in totals, but the per-fund detail is incomplete"},
+    {"severity": "warning", "path": "missing", "page": 9,
+     "extracted": null, "on_page": "Combined budget schedule: Nursing Home revenues 3,761,937; Public buildings - nursing home 3,760,166; cash balance 803,750 -> 670,250",
+     "issue": "the village nursing home appears only in the p9 budget schedule; it is not in the governmental or proprietary statements and is excluded from the JSON. Leaving it out is defensible (it is outside the basic statements), but the user should know about it; the notes only mention it in passing"}
+  ]
+}
