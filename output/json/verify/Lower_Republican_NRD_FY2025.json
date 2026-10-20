@@ -1,0 +1,27 @@
+{
+  "stem": "Lower_Republican_NRD_FY2025",
+  "values_checked": 119,
+  "issues": [
+    {"severity": "warning", "path": "disbursements", "page": 5,
+     "extracted": "functions assigned line by line (general government / natural resources/conservation)", "on_page": "All 13 lines printed under 'General Government:' (total general government 3,345,743); Statement of Activities p2 also shows one 'General government' function",
+     "issue": "The extractor split the printed General Government group between general government and natural resources/conservation by its own judgment. Defensible for an NRD, but the page does not print this split."},
+    {"severity": "warning", "path": "receipts[3].category", "page": 5,
+     "extracted": "charges for services/fees", "on_page": "Charges for services 193,238 (p9 budget schedule labels the same amount 'Reimbursements')",
+     "issue": "The same money is categorised differently in receipts (charges for services/fees) and detail (reimbursements/refunds). Both lines are marked for review."},
+    {"severity": "warning", "path": "receipts[2].category", "page": 5,
+     "extracted": "intergovernmental/state aid", "on_page": "Grants 604,313",
+     "issue": "The page does not say which government the grants come from (state, federal or local). Already marked for review."},
+    {"severity": "warning", "path": "balance_sheet.liabilities[4].category", "page": 1,
+     "extracted": "accrued liabilities", "on_page": "Accrued compensated absences 83,521 (under Noncurrent liabilities)",
+     "issue": "The line is printed as a noncurrent liability. The rules put compensated absences in accrued liabilities only when 'due soon', so 'debt - due in more than one year' or 'other liabilities' may fit better."},
+    {"severity": "warning", "path": "ending_cash", "page": 4,
+     "extracted": 1463139, "on_page": "Cash and cash equivalents 1,463,139; County treasurer cash 23,544",
+     "issue": "ending_cash leaves out County treasurer cash 23,544. Including it would make 1,486,683."},
+    {"severity": "warning", "path": "detail[19].detail_category", "page": 9,
+     "extracted": "construction/infrastructure", "on_page": "Capital outlay 612,014",
+     "issue": "Capital outlay is not broken down by object, so 'not itemized' or 'equipment purchases' could also apply."},
+    {"severity": "warning", "path": "detail[8].detail_category", "page": 9,
+     "extracted": "fuel", "on_page": "Auto expenses 19,967",
+     "issue": "Vehicle expense may include repairs and insurance as well as fuel. This is a judgment call."}
+  ]
+}

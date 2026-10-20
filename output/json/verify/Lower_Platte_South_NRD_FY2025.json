@@ -2,26 +2,61 @@
   "stem": "Lower_Platte_South_NRD_FY2025",
   "values_checked": 118,
   "issues": [
-    {"severity": "error", "path": "detail_totals[1].amount", "page": 3,
-     "extracted": 10791576, "on_page": "Budget and Actual - General Fund expenditure items in detail = Depreciation 914,872 + Capital outlay 0 = 914,872",
-     "issue": "The expenditure total 10,791,576 is filed under schedule 'Budget and Actual - General Fund', but only 914,872 of detail items carry that schedule name. The other 9,876,704 is on items tagged 'Administrative Expenditures' (1,100,905, p4), 'Project and Improvement Costs and Capital Outlay' (5,094,751, p5) and 'Personnel Costs' (3,681,048, p6). The validator matches by fund+schedule+section, so this does not tie. Those three schedules' printed totals (p4 1,100,905; p5 5,094,751; p6 3,681,048) are not in detail_totals. Either add those three totals and cut the p3 entry down to depreciation and capital outlay, or put every expenditure item under one schedule name."},
-    {"severity": "warning", "path": "missing", "page": 5,
-     "extracted": null, "on_page": "Land (budget -, GAAP -), Buildings (budget 800,000, GAAP -), Construction in progress (-), Infrastructure (budget 10,136,323, GAAP -), Machinery (-), Office equipment (-); budgetary-basis actuals 902,963 / 130,481 / 1,819,517 / 275,264 / 34,634 / 58,096",
-     "issue": "Six capital outlay lines on the p5 project schedule are left out of detail. The p3 one-line 'Capital outlay' (actual 0, budget 10,936,323 = 800,000 + 10,136,323) stands in for them. Their GAAP-column actual is 0, so the totals still tie, but the more detailed p5 lines and their budgets are lost. 'Small equipment' (actual 0) on p4 was recorded, so zero lines were handled inconsistently."},
-    {"severity": "warning", "path": "detail", "page": 3,
-     "extracted": "Actual Amounts GAAP Basis column", "on_page": "Columns: Original and Final Budget / Actual (Budgetary Basis) / Variance / Budget to GAAP Differences / Actual Amounts GAAP Basis",
-     "issue": "Detail amounts use the GAAP-basis column, not the 'Actual (Budgetary Basis)' column. This is defensible because it ties to the Statement of Activities. But the detail drops capital outlay (budgetary actual 3,882,666), and Personnel (3,681,048) does not match the fund-statement disbursement (3,533,963). So detail does not tie to receipts/disbursements."},
-    {"severity": "warning", "path": "ending_cash", "page": 1,
-     "extracted": 696313, "on_page": "Cash 696,313; Cash at County Treasurer 182,359; Investments 18,295,493",
-     "issue": "ending_cash leaves out Cash at County Treasurer 182,359, which is cash. Including it would make 878,672."},
-    {"severity": "warning", "path": "balance_sheet.liabilities[2].category", "page": 1,
-     "extracted": "debt - due in more than one year", "on_page": "Compensated absences payable (note A) 276,194",
-     "issue": "Compensated absences are not debt. 'accrued liabilities' or 'other liabilities' may fit better (the line is not split by due date)."},
-    {"severity": "warning", "path": "receipts[2].category", "page": 2,
-     "extracted": "intergovernmental/state aid", "on_page": "Local grants and reimbursements 504,979",
-     "issue": "The line mixes local government grants with reimbursements. The category is defensible, and the line is already marked for review."},
-    {"severity": "warning", "path": "detail[8].detail_category", "page": 4,
-     "extracted": "repairs and maintenance", "on_page": "Auto and truck expense 63,805",
-     "issue": "Vehicle expense could also be fuel. The judgment call is not marked for review."}
+    {
+      "severity": "error",
+      "path": "detail_totals[1].amount",
+      "page": 3,
+      "extracted": 10791576,
+      "on_page": "Budget and Actual - General Fund expenditure items in detail = Depreciation 914,872 + Capital outlay 0 = 914,872",
+      "issue": "[fixed] The expenditure total 10,791,576 is filed under schedule 'Budget and Actual - General Fund', but only 914,872 of detail items carry that schedule name. The other 9,876,704 is on items tagged 'Administrative Expenditures' (1,100,905, p4), 'Project and Improvement Costs and Capital Outlay' (5,094,751, p5) and 'Personnel Costs' (3,681,048, p6). The validator matches by fund+schedule+section, so this does not tie. Those three schedules' printed totals (p4 1,100,905; p5 5,094,751; p6 3,681,048) are not in detail_totals. Either add those three totals and cut the p3 entry down to depreciation and capital outlay, or put every expenditure item under one schedule name."
+    },
+    {
+      "severity": "warning",
+      "path": "missing",
+      "page": 5,
+      "extracted": null,
+      "on_page": "Land (budget -, GAAP -), Buildings (budget 800,000, GAAP -), Construction in progress (-), Infrastructure (budget 10,136,323, GAAP -), Machinery (-), Office equipment (-); budgetary-basis actuals 902,963 / 130,481 / 1,819,517 / 275,264 / 34,634 / 58,096",
+      "issue": "Six capital outlay lines on the p5 project schedule are left out of detail. The p3 one-line 'Capital outlay' (actual 0, budget 10,936,323 = 800,000 + 10,136,323) stands in for them. Their GAAP-column actual is 0, so the totals still tie, but the more detailed p5 lines and their budgets are lost. 'Small equipment' (actual 0) on p4 was recorded, so zero lines were handled inconsistently."
+    },
+    {
+      "severity": "warning",
+      "path": "detail",
+      "page": 3,
+      "extracted": "Actual Amounts GAAP Basis column",
+      "on_page": "Columns: Original and Final Budget / Actual (Budgetary Basis) / Variance / Budget to GAAP Differences / Actual Amounts GAAP Basis",
+      "issue": "Detail amounts use the GAAP-basis column, not the 'Actual (Budgetary Basis)' column. This is defensible because it ties to the Statement of Activities. But the detail drops capital outlay (budgetary actual 3,882,666), and Personnel (3,681,048) does not match the fund-statement disbursement (3,533,963). So detail does not tie to receipts/disbursements."
+    },
+    {
+      "severity": "warning",
+      "path": "ending_cash",
+      "page": 1,
+      "extracted": 696313,
+      "on_page": "Cash 696,313; Cash at County Treasurer 182,359; Investments 18,295,493",
+      "issue": "ending_cash leaves out Cash at County Treasurer 182,359, which is cash. Including it would make 878,672."
+    },
+    {
+      "severity": "warning",
+      "path": "balance_sheet.liabilities[2].category",
+      "page": 1,
+      "extracted": "debt - due in more than one year",
+      "on_page": "Compensated absences payable (note A) 276,194",
+      "issue": "Compensated absences are not debt. 'accrued liabilities' or 'other liabilities' may fit better (the line is not split by due date)."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[2].category",
+      "page": 2,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "Local grants and reimbursements 504,979",
+      "issue": "The line mixes local government grants with reimbursements. The category is defensible, and the line is already marked for review."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[8].detail_category",
+      "page": 4,
+      "extracted": "repairs and maintenance",
+      "on_page": "Auto and truck expense 63,805",
+      "issue": "Vehicle expense could also be fuel. The judgment call is not marked for review."
+    }
   ]
 }
