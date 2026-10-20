@@ -1,0 +1,33 @@
+{
+  "stem": "Johnson_County_Central_Public_Schools_FY2025",
+  "values_checked": 204,
+  "issues": [
+    {"severity": "error", "path": "receipts[15].amount", "page": 4,
+     "extracted": 220836, "on_page": "Other local receipts 220,836 (General Fund column 200,929 = General Fund local items 60,929 + Depreciation Fund 'Transfer in From General' 140,000, p9/p5)",
+     "issue": "140,000 of this receipt line is a transfer ('Transfer in From General', p9), so it is counted as revenue. The rules say transfers are never revenue, even one-sided ones (record as the rules say and add decision_needed). The page prints the breakdown: the p4 General Fund column = General 10,436,965 + Depreciation 140,403 + Employee Benefit 21 = 10,577,389, and p9 itemizes the 140,000. So it should be split out (split_from) as transfers_in 140,000 (transfers_in 441,656 vs transfers_out 301,656, one-sided), leaving 80,836 in receipts and reported_totals as printed. decision_needed already raises the question, but the line is still recorded as revenue."},
+    {"severity": "warning", "path": "receipts[15].category", "page": 4,
+     "extracted": "other", "on_page": "Other local receipts 220,836",
+     "issue": "Apart from the 140,000 transfer, the 80,836 left is identifiable on pp6, 12, 14, 15: General local items 60,929 (penalties and interest on taxes 17,460, tuition 10,441, Public Power District 7,914, license fees 8,056, police court fines 9,782, community services 3,775, contributions 1,544, misc 1,651, other), School Nutrition 15,410 (non-reimbursable programs 7,341 + other 8,069), Special Building 4,043 (PPD tax 1,358 + penalties 2,685), QCPU penalties 454. The review note only says 'mixed local sources' and doesn't name the mix."},
+    {"severity": "warning", "path": "receipts[4].category", "page": 4,
+     "extracted": "intergovernmental/state aid", "on_page": "Categorical Grants 6,732 (p6: '1925 Other Categorical Grants' under Local sources)",
+     "issue": "On p6 it is a local source, not state aid. The matching spending is '3400 Corporations & Other Private Interests' (p8), so donations/contributions may fit better. Same question for detail[13] (detail_category 'other state aid')."},
+    {"severity": "warning", "path": "receipts[10].category", "page": 4,
+     "extracted": "fines and forfeitures", "on_page": "County fines and fees 44,202 = 2110 County Fines and License Fee 43,401 + 2210 ESU Receipts 801 (p6)",
+     "issue": "Mixed line (801 from the ESU is county/other local government money). Dominant category is fine, but no review note names the mix."},
+    {"severity": "warning", "path": "receipts[13].category", "page": 4,
+     "extracted": "other", "on_page": "Nonrevenue receipts 21,020 = General 10,957 + Special Building 'Other Contributions and Donations' 10,063 (p14)",
+     "issue": "About half is donations/contributions (and detail[112] puts that 10,063 in donations/contributions). 'other' with review is defensible as the dominant share, but the categories don't match between receipts and detail."},
+    {"severity": "warning", "path": "detail[117].category", "page": 14,
+     "extracted": "support services", "on_page": "Operations of Buildings 45,766; Maintenance of Buildings 16,594 (Special Building Fund)",
+     "issue": "p4 puts all Special Building disbursements (538,599) under 'Capital outlay', so the detail function split (support services 62,360 + capital outlay 476,239) doesn't tie to the statement's function lines. Applies to detail[117] and detail[118]."},
+    {"severity": "warning", "path": "disbursements[9].category", "page": 4,
+     "extracted": "other", "on_page": "Community Service and State Program 32,809 (p8: 3300 Community Service Operations 14,054; 3535 High Ability Learners 6,612; 3551 Career Education 7,500; 3599 Other 4,643)",
+     "issue": "State categorical programs (high ability learners, career education) could be instruction. 'other' with review is a judgment call. Same for disbursements[8] (Categorical Grants from Corporation 3,023) and detail[75]-detail[79]."},
+    {"severity": "warning", "path": "beginning_cash.amount", "page": 2,
+     "extracted": 4724714, "on_page": "Net position - beg. Restated 4,724,714 (p2); Student Fee Fund 'FUND BALANCE, Beginning of Year (Restated)' 4,345 (p16)",
+     "issue": "The beginning balance is printed as restated. The restatement amount isn't on the trimmed pages and adjustments[] is empty. The roll-forward from the restated figure holds, but the prior-year ending balance may differ."},
+    {"severity": "warning", "path": "detail[70].original_label", "page": 7,
+     "extracted": "2650 Vehicle Operation and Maintenance (Other than Student Transportation Vehicles)", "on_page": "2650 Vehicle Operation and Maintenace (Other than Student (Transportation Vehicles)",
+     "issue": "Label not exactly as printed (printed spelling 'Maintenace'). Cosmetic."}
+  ]
+}
