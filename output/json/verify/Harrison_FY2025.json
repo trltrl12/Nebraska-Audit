@@ -1,0 +1,18 @@
+{
+  "stem": "Harrison_FY2025",
+  "values_checked": 74,
+  "issues": [
+    {"severity": "error", "path": "detail[3].category", "page": 8,
+     "extracted": "other (fund_type governmental)", "on_page": "Local 474,541 (budget 567,812)",
+     "issue": "The all-funds budget schedule's 'Local' line ties to: proprietary operating receipts 279,752 (fees and services 279,488 + misc 264, p7) + interest 9,218 (5,294 governmental + 3,924 business-type) + governmental Local 50,571 + 135,000 of governmental grants (p5 Intergovernmental 223,721 less the 88,721 here) = 474,541. The dominant part is utility charges for services, so under the mixed-line rule category should be 'charges for services/fees' (detail_category already says 'other charges for services', so the two disagree). Also about 61% of the line (283,676) is business-type, but the whole line is tagged governmental. Review flag is present."},
+    {"severity": "warning", "path": "receipts[3].category", "page": 5,
+     "extracted": "other", "on_page": "Local 50,571",
+     "issue": "'Local' is broken down on the Statement of Activities (pp2-3): governmental fees/charges 14,976 + operating grants 1,986 + misc income 22,609 + 11,000 of capital grants = 50,571. 'other' with review is defensible because the page has no single dominant specific category (the largest piece is Miscellaneous), but part of it is fees and grants."},
+    {"severity": "warning", "path": "receipts[0].category", "page": 3,
+     "extracted": "property tax", "on_page": "Property taxes and motor vehicle taxes 45,191 (p3); 'Property taxes' (p5)",
+     "issue": "On the Statement of Activities the 45,191 line is labelled 'Property taxes and motor vehicle taxes', so the property tax figure includes some motor vehicle tax. The report gives no split. The same applies to the detail[0] split item."},
+    {"severity": "warning", "path": "detail[0].budget_final", "page": 8,
+     "extracted": null, "on_page": "Taxes budget 44,158",
+     "issue": "Splitting the Taxes line 118,560 into property 45,191 / sales 73,369 (from p3/p5) is allowed under the combined-tax rule and adds up correctly. But the printed final budget 44,158 was dropped from both split items (it is only in a review note), so detail budget totals will be 44,158 short of the printed 726,418."}
+  ]
+}

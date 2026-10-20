@@ -143,7 +143,8 @@ These were diagnosed and fixed in find_pages v6; re-extract and re-verify them a
   the FY2025 filing): Bristow_FY2025 (period 10/1/23-9/30/24).
 - Trimmed to a budget page only (skipped, no JSON): Cass_County_SID_9_FY2025, Cass_County_SID_10_FY2025.
   Also trimmed to one page (extracted from that page; check the source PDF for missing statements):
-  Douglas_County_SID_520/575/583/584/615/640_FY2025.
+  Douglas_County_SID_520/575/583/584/615/640_FY2025, Hickman_FY2025 (all-fund-types budget schedule only;
+  disbursements recorded).
 - ~97 Audit filings marked no_statements_found (mostly SIDs) and 72 with no balance statement: page
   finder misses their titles.
 - ~1,000 Waiver filings link only a budget form (Budgets_Filed/…_B2526.pdf): check
