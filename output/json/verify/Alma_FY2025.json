@@ -1,0 +1,33 @@
+{
+  "stem": "Alma_FY2025",
+  "values_checked": 162,
+  "issues": [
+    {"severity": "error", "path": "detail[13].category", "page": 18,
+     "extracted": "general government", "on_page": "Contracted services 76,691 = Police 41,616 + Park 14,325 + Recreation 20,750; Administrative -",
+     "issue": "None of this line is administrative. The biggest share is the police contract (public safety, detail_category could be law enforcement contract) and the rest is culture/recreation. General government is wrong under the dominant-category rule."},
+    {"severity": "error", "path": "detail[17].category", "page": 18,
+     "extracted": "general government", "on_page": "Repairs and maintenance 97,225: Pool 38,360, Recreation 22,129, Park 6,596, Library 1,599, Pheasant Ridge Trail 455 (=69,139 culture/recreation) vs Administrative 13,913",
+     "issue": "Culture/recreation departments make up most of this line, so the dominant function is culture/recreation, not general government."},
+    {"severity": "error", "path": "detail[19].category", "page": 18,
+     "extracted": "general government", "on_page": "Utilities and telephone 51,112: Pool 13,894, Recreation 5,824, Park 2,439, Library 4,137, Trail 2,872 (=29,166) vs Administrative 2,928",
+     "issue": "The dominant function is culture/recreation, not general government."},
+    {"severity": "error", "path": "detail[20].category", "page": 18,
+     "extracted": "general government", "on_page": "Supplies 34,917: Pool 15,578, Library 9,045, Park 1,596, Recreation 1,434 (=27,653) vs Administrative 5,852",
+     "issue": "The dominant function is culture/recreation, not general government."},
+    {"severity": "error", "path": "disbursements[13].category", "page": 9,
+     "extracted": "utilities", "on_page": "Supplies 101,303 = Golf 90,969 + Gas 1,984 + Water 7,505 + Sewer 32 + Trash 621 + RV Park 192",
+     "issue": "90% of this enterprise line is the Golf Fund, so the dominant function is culture/recreation, not utilities."},
+    {"severity": "warning", "path": "detail[12..21]", "page": 18,
+     "extracted": "department null; all object lines general government", "on_page": "Department columns Administrative, Fire, Police, Shop, Community Building, Park, Pool, Recreation, Library, Pheasant Ridge Trail",
+     "issue": "The Total column was used, so every object line got function general government even though the schedule prints the department split. For example, Salaries and benefits 285,368 includes Pool 64,101 and Library 48,257. Notes say only 'departments not split' and don't mention the mixed functions, which the rules require."},
+    {"severity": "warning", "path": "disbursements[9..20].category", "page": 9,
+     "extracted": "utilities", "on_page": "Enterprise totals include Golf Fund (334,197 operating) and RV Park Fund (33,043)",
+     "issue": "All business-type operating expense lines are categorized as utilities even though about 21% of operating expenses are golf and RV park (culture/recreation). Only Supplies is golf-dominant (flagged above); the rest are utility-dominant. The mix is not noted."},
+    {"severity": "warning", "path": "receipts[9].category", "page": 5,
+     "extracted": "donations/contributions", "on_page": "Grants and donations 490,854 (General 386,156 incl. Administrative 347,064; Airport 104,698). p2 shows 347,064 and 104,698 as Capital Grants and Contributions",
+     "issue": "Most of this line looks like government capital grants: the Airport grant, recorded in detail[37] as federal grants, and the 347,064 community building grant. Donations/contributions may be wrong, and it is inconsistent with detail[37]. The review flag is present."},
+    {"severity": "warning", "path": "detail[37].detail_category", "page": 14,
+     "extracted": "federal grants", "on_page": "Grant income 104,698",
+     "issue": "The page doesn't state the grant source (federal is the extractor's assumption, flagged for review). The same money is categorized donations/contributions in receipts[9]."}
+  ]
+}

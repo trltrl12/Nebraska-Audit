@@ -1,0 +1,18 @@
+{
+  "stem": "Alma_Housing_Authority_-_Parkview_Manor_FY2025",
+  "values_checked": 54,
+  "issues": [
+    {"severity": "warning", "path": "proprietary.investing.amount", "page": 3,
+     "extracted": 282.18, "on_page": "282.16 (last digit faint; reads more like 6)",
+     "issue": "The extractor used 282.18 because -2,599.66 + 2,881.84 = 282.18 and that ties to the net decrease (4,172.92). If the page really prints 282.16, the report's own subtotal is off by 0.02. In that case the printed value should be recorded, with a report_discrepancies entry (currently empty). The notes do disclose this."},
+    {"severity": "warning", "path": "business_type.adjustments[0]", "page": 2,
+     "extracted": "Insurance proceeds (special item) 1,250.00 as adjustment", "on_page": "SPECIAL ITEMS: Insurance proceeds 1,250.00",
+     "issue": "The category rules put insurance proceeds under reimbursements/refunds. Keeping it as an adjustment is defensible because it's printed as a special item. Amount and sign are correct."},
+    {"severity": "warning", "path": "balance_sheet.liabilities[7].category", "page": 1,
+     "extracted": "accrued liabilities", "on_page": "Accrued compensated absences (noncurrent) 9,109.69",
+     "issue": "The rules limit accrued liabilities to compensated absences due soon. This noncurrent portion could be other liabilities."},
+    {"severity": "warning", "path": "balance_sheet.scope", "page": 1,
+     "extracted": "government-wide", "on_page": "Statement of Net Position - Proprietary Fund",
+     "issue": "This is a single proprietary fund statement, not a government-wide statement. It's equivalent here because it's the only fund, but the scope label is inaccurate."}
+  ]
+}
