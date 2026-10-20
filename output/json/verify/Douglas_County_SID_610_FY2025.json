@@ -1,0 +1,42 @@
+{
+  "stem": "Douglas_County_SID_610_FY2025",
+  "values_checked": 110,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "balance_sheet.liabilities[1].category",
+      "page": 1,
+      "extracted": "debt - due within one year",
+      "on_page": "Warrants Payable 497,028 (no due-date label)",
+      "issue": "[fixed] Warrants Payable has no due-date split on the page (only bonds are labelled 'Due After One Year'). Per the extractor rule and the batch instruction it belongs in 'debt - due in more than one year'."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[4].category",
+      "page": 2,
+      "extracted": "other",
+      "on_page": "Collection in District 268",
+      "issue": "Kept in 'other' with review; in SID reports this is usually special assessments collected directly by the district, so 'special assessments' may fit. Same for detail[3]."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[1].category",
+      "page": 2,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "State Motor Vehicle Tax Allocation 276",
+      "issue": "Category judgment call: could be 'motor vehicle tax'. Detail[2] detail_category 'motor vehicle pro-rate' although the label does not say pro-rate."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[15]",
+      "page": 2,
+      "extracted": {
+        "category": "debt service principal",
+        "amount": 637416,
+        "outside_printed_total": true
+      },
+      "on_page": "Other Financing Sources (Uses): Warrants Retired (637,416)",
+      "issue": "Printed under Other Financing Uses; recorded as a debt service principal disbursement (outside_printed_total). Defensible but an assumption. Roll-forward holds (= 1,205,066)."
+    }
+  ]
+}

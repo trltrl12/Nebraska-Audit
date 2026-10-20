@@ -1,0 +1,42 @@
+{
+  "stem": "Douglas_County_SID_607_FY2025",
+  "values_checked": 100,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "balance_sheet.liabilities[1].category",
+      "page": 1,
+      "extracted": "debt - due within one year",
+      "on_page": "Warrants payable 149,722 (no due-date label)",
+      "issue": "[fixed] Warrants payable is not labelled as due within one year. The extractor rule ('If debt isn't split by due date, use debt - due in more than one year') and the batch instruction both put Warrants Payable with no due-date split in 'debt - due in more than one year'. (The statement prints it above the 'Noncurrent liabilities' heading, but it carries no due-date label.)"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[2].category",
+      "page": 4,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "State motor vehicle tax allocation 617",
+      "issue": "Category judgment call: could be 'motor vehicle tax'. Detail[1] detail_category 'motor vehicle pro-rate' even though the label does not say pro-rate."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[2].category",
+      "page": 4,
+      "extracted": "general government",
+      "on_page": "Electrical fees 14,176",
+      "issue": "Function guessed (already marked review); for an SID this is likely street lighting, which would be streets/highways."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[12]",
+      "page": 4,
+      "extracted": {
+        "category": "debt service principal",
+        "amount": 1995389,
+        "outside_printed_total": true
+      },
+      "on_page": "Other Financing Sources (Uses): Payment of warrants (1,995,389)",
+      "issue": "Printed under Other Financing Uses; recorded as a debt service principal disbursement (outside_printed_total) rather than as other financing. Defensible but an assumption. Roll-forward holds (457,544 + 2,008,179 - 3,773,902 - 1,995,389 + 4,000,000 = 696,432)."
+    }
+  ]
+}

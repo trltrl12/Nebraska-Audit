@@ -1,0 +1,30 @@
+{
+  "stem": "Douglas_County_SID_608_FY2025",
+  "values_checked": 107,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "balance_sheet.liabilities[1].category",
+      "page": 1,
+      "extracted": "debt - due within one year",
+      "on_page": "Warrants Payable 11,655,578 (no due-date label)",
+      "issue": "[fixed] Warrants Payable has no due-date split on the page (only bonds are labelled 'Due After One Year'). Per the extractor rule and the batch instruction it belongs in 'debt - due in more than one year'."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[4].category",
+      "page": 2,
+      "extracted": "other",
+      "on_page": "Collection in District 12,300 (Debt Service Fund)",
+      "issue": "Kept in 'other' with review. In SID reports 'Collection in District' is usually special assessments paid directly to the district (it sits in the Debt Service Fund next to special assessments); 'special assessments' may fit. Same for detail[17]."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[3].category",
+      "page": 2,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "State Motor Vehicle Tax Allocation 511",
+      "issue": "Category judgment call: could be 'motor vehicle tax'. Detail[2] detail_category 'motor vehicle pro-rate' although the label does not say pro-rate."
+    }
+  ]
+}
