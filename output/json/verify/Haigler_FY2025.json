@@ -1,0 +1,18 @@
+{
+  "stem": "Haigler_FY2025",
+  "values_checked": 42,
+  "issues": [
+    {"severity": "warning", "path": "disbursements[6].category", "page": 3,
+     "extracted": "debt service principal", "on_page": "Debt Service 30,186.51 (Water Fund column, line 39)",
+     "issue": "Principal and interest are not split on the page. The whole line is recorded as principal; the debt schedule (p5) shows rates up to 4.38%, so part of it is likely interest. Already marked review."},
+    {"severity": "warning", "path": "balance_sheet.equity[0]", "page": 1,
+     "extracted": "Subtotal of Ending Balances (line 28) 114,990.75", "on_page": "Line 28 Subtotal of Ending Balances 114,990.75 (an asset subtotal, no equity line printed)",
+     "issue": "The equity item reuses the line 28 asset subtotal and has no computed marker (total_equity has one). The figure is right, but it is not printed as equity."},
+    {"severity": "warning", "path": "missing", "page": 1,
+     "extracted": null, "on_page": "County Treasurer Balance at October 1, 2024 1,791.36; at September 30, 2025 2,187.25",
+     "issue": "County treasurer balances are printed below Exhibit A but are left out of the balances and notes. They are not part of lines 24/28, so the roll-forward still holds; the extractor just didn't mention them."},
+    {"severity": "warning", "path": "receipts[11].category", "page": 1,
+     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Water 85,393.34 / Wastewater 33,582.88 / Solid Waste 37,162.09)",
+     "issue": "The page only says 'Local Receipts: Other'. Treating these as utility user charges is an assumption, though a reasonable one (already marked review). Same for receipts[12] and receipts[13]."}
+  ]
+}
