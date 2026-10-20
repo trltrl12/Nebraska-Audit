@@ -1,0 +1,16 @@
+{
+  "stem": "Sarpy-Cass_Health_Department_FY2025",
+  "values_checked": 17,
+  "issues": [
+    {"severity": "warning", "path": "receipts[0].category", "page": 2,
+     "extracted": "intergovernmental/state aid", "on_page": "Grants 2,315,157",
+     "issue": "The grant source isn't stated. 'State receipts' is printed as a separate line, so these grants are probably federal (pass-through) and could belong in federal grants. Already marked review."},
+    {"severity": "warning", "path": "disbursements", "page": 2,
+     "extracted": "health/welfare for Personnel/Operating expenses/Supplies/Rent, no review",
+     "on_page": "Disbursements listed by object only",
+     "issue": "The rules require \"review\": \"listed by object\" when spending is listed only by object. The extractor deliberately left it off. Since the filing type is Health Care Facilities, the function could also be hospital/health care rather than health/welfare."},
+    {"severity": "warning", "path": "entity_type", "page": 1,
+     "extracted": "hospital", "on_page": "Sarpy/Cass Health Department (file_list: Health Care Facilities)",
+     "issue": "This is a local public health department, not a hospital, and it is funded mostly by grants and state receipts. Treating it as entirely business-type follows the Health Care Facilities subdivision rule, but it is arguably governmental. A person should confirm the fund_type treatment."}
+  ]
+}
