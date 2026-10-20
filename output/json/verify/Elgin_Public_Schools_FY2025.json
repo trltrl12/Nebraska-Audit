@@ -1,0 +1,25 @@
+{
+  "stem": "Elgin_Public_Schools_FY2025",
+  "values_checked": 213,
+  "issues": [
+    {"severity": "error", "path": "missing", "page": 8,
+     "extracted": null,
+     "on_page": "GF budget-basis disbursements (p8, total 4,711,483) include the 100,000 transfer to the Depreciation Fund (note p15: 'transfers to the Depreciation and Employee Benefit Funds are included as disbursements of the General Fund'; Depreciation 'Transfer from other funds' 100,000 p9). Statement GF column p3-4 shows Pupil transportation 285,310 vs budget 335,310 and Regular instruction 2,218,809 vs 2,251,671.",
+     "issue": "Hidden transfer not separated: the same 100,000 is in GF detail expenditure (detail[33] 1100 Regular instruction 2,251,671 and/or detail[38] 2700 Pupil transportation 335,310) and in detail[45] Depreciation other financing +100,000. Rules require a split (or a negative contra expenditure line with split_from + review) and a GF other financing line of -100,000; notes acknowledge the budget basis but no split/contra was entered."},
+    {"severity": "warning", "path": "receipts[10].category", "page": 3,
+     "extracted": "intergovernmental/state aid", "on_page": "State receipts 3,409,238",
+     "issue": "Broad group with no review flag: includes nameplate capacity tax 768,006 (724,036 GF p6 + 43,970 SB p12; printed separately on p2), which is 'other taxes' under the rules. Should carry review 'broad group; detail on p6-7, p12'."},
+    {"severity": "warning", "path": "receipts[9].category", "page": 3,
+     "extracted": "fines and forfeitures", "on_page": "County fines and licenses 13,070",
+     "issue": "Line includes 2210 ESU receipts 2,237 (p6, county/other local governments) along with fines 10,833; no review note."},
+    {"severity": "warning", "path": "receipts[8].category", "page": 3,
+     "extracted": "other", "on_page": "Other local sources 16,294",
+     "issue": "GF schedule p6 shows it is 1910 Rental of school equipment and facilities 804 + 1990 Other local receipts 15,490; 'other' is defensible as dominant part (review present) but rental portion identifiable."},
+    {"severity": "warning", "path": "disbursements[2].category", "page": 3,
+     "extracted": "support services", "on_page": "Pupils 511,365 (GF 311,732; Other Governmental Funds 199,633)",
+     "issue": "199,633 of this line is Activities Fund spending (p14/p17), i.e. student activities; category per label is defensible but the mix is not noted/reviewed."},
+    {"severity": "warning", "path": "report_discrepancies", "page": 8,
+     "extracted": null, "on_page": "GF budget schedule: FUND BALANCE, end of year 3,878,151 vs TOTAL FUND BALANCE 3,878,150",
+     "issue": "1-dollar rounding difference printed in the GF budget schedule itself is not recorded in report_discrepancies (only the p2 and p4/p5 differences are)."}
+  ]
+}
