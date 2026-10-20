@@ -285,7 +285,9 @@ net" go in `transfers_in`/`transfers_out` (`business_type.transfers_net`) and, i
 section `other financing` with a signed amount (+ in, − out). If a schedule's printed "Total
 receipts/disbursements" includes the transfer, add `"includes": ["other financing"]` to that
 `detail_totals` entry instead of moving the transfer into revenue or expenditure; an `other financing`
-line printed outside that total gets `"outside_printed_total": true`.
+line printed outside that total gets `"outside_printed_total": true`. A financing line printed inside the
+other section's total with the opposite sign (e.g. "Warrants issued" shown as a negative disbursement)
+keeps its signed amount and gets `"printed_in": "expenditure"` (or `"revenue"`).
 
 **Educational Service Units and school districts (state account codes):** 1951/1960-type lines
 ("Miscellaneous revenue from other districts / ESUs / other local government units") are

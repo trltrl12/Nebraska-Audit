@@ -253,8 +253,14 @@ def check(stem, d):
         if sec == "other financing" and not it.get("outside_printed_total"):
             # signed: + in (counts toward revenue), − out (toward expenditure)
             a = float(it.get("amount") or 0)
-            k2 = (key[0], key[1], "revenue+of" if a > 0 else "expenditure+of")
-            sums[k2] = sums.get(k2, 0.0) + abs(a)
+            if it.get("printed_in") in ("revenue", "expenditure"):
+                # printed inside that section's total with the opposite sign (e.g. warrants issued
+                # shown as a negative disbursement): + in lowers an expenditure total, − out a revenue one
+                k2 = (key[0], key[1], f"{it['printed_in']}+of")
+                sums[k2] = sums.get(k2, 0.0) + (-a if it["printed_in"] == "expenditure" else a)
+            else:
+                k2 = (key[0], key[1], "revenue+of" if a > 0 else "expenditure+of")
+                sums[k2] = sums.get(k2, 0.0) + abs(a)
     for tot in d.get("detail_totals") or []:
         key = (tot.get("fund") or "", tot.get("schedule") or "", tot.get("section"))
         stated = amt(tot)
