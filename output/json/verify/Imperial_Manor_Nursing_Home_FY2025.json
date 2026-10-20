@@ -1,0 +1,12 @@
+{
+  "stem": "Imperial_Manor_Nursing_Home_FY2025",
+  "values_checked": 49,
+  "issues": [
+    {"severity": "error", "path": "report_discrepancies", "page": 2,
+     "extracted": null, "on_page": "2025 column: Net position, beginning of year '-'; Prior period adjustment '-'; Transfer from City 280,572; Net position, beginning of year as restated 852,132; Decrease in net position (747,309); end of year 385,395",
+     "issue": "the printed 2025 roll-forward does not add up: '-' + '-' + 280,572 = 280,572, not the printed 'as restated' 852,132; and 852,132 - 747,309 = 104,823, not the printed ending 385,395 (difference 280,572). The 2025 beginning net position is printed as '-' though the prior-year ending is 852,132. The extraction reconciles by using 852,132 as beginning and adding the transfer separately, which is reasonable, but the report's own inconsistency is only in notes and is missing from report_discrepancies"},
+    {"severity": "warning", "path": "decision_needed", "page": 2,
+     "extracted": {"business_type.transfers_net": 280572}, "on_page": "Transfer from City 280,572",
+     "issue": "one-sided transfer from the primary government (City of Imperial) to this component unit, printed on the page in an inconsistent position (see report_discrepancies); recorded as business_type.transfers_net with no decision_needed entry. A person should confirm whether it is a transfer or a capital/operating contribution"}
+  ]
+}

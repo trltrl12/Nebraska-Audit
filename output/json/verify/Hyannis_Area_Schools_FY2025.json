@@ -1,0 +1,33 @@
+{
+  "stem": "Hyannis_Area_Schools_FY2025",
+  "values_checked": 147,
+  "issues": [
+    {"severity": "error", "path": "balance_sheet.equity", "page": 2,
+     "extracted": "161,119 + 26,665 + 1,647,473 with total_equity 1,835,256, no report_discrepancies entry",
+     "on_page": "Restricted 161,119 + 26,665 + Unrestricted 1,647,473 = 1,835,257 vs printed TOTAL NET POSITION 1,835,256 (same on p4: fund balance lines 161,119+26,665+40,316+66,191+1,540,966 = 1,835,257 vs 1,835,256; fund columns 1,607,157+26,665+161,119+40,316 = 1,835,257)",
+     "issue": "The equity lines add to 1 more than the printed total. The amounts are transcribed correctly; this is the report's own rounding, but there's no report_discrepancies entry (check 'balance', difference -1) for it, so the balance sheet will fail the check without explanation."},
+    {"severity": "error", "path": "receipts[0].category", "page": 3,
+     "extracted": "other", "on_page": "Local receipts 2,006,553",
+     "issue": "This is a mixed group line and should take its dominant category, with a review note naming the mix. The fund schedules (pp5, 8-12) print what's in it: property tax 1,552,217 (1,383,834 General + 168,383 Special Building), motor vehicle 134,014, carline 17,270, interest 41,598, activity receipts 166,083, lunch sales 74,369, other local 17,922, Employee Benefit 3,080. Property tax is about 77%, so the category should be 'property tax', not 'other'. The review text 'report prints no breakdown' is also wrong."},
+    {"severity": "error", "path": "report_discrepancies[3].difference", "page": 10,
+     "extracted": -1, "on_page": "Total receipts 132,826 vs lines 49+74,369+215+46,192+12,000 = 132,825",
+     "issue": "Wrong sign. difference = printed minus parts = 132,826 - 132,825 = +1."},
+    {"severity": "warning", "path": "report_discrepancies[4]", "page": 11,
+     "extracted": "one entry, difference 1",
+     "on_page": "receipts 319,160 vs lines 319,159 (+1); disbursements 622,361 vs lines 443,606 + 178,756 = 622,362 (-1)",
+     "issue": "Two separate problems with opposite signs are combined into one entry with difference +1. They should be two entries (+1 and -1)."},
+    {"severity": "warning", "path": "report_discrepancies", "page": 4,
+     "extracted": "not recorded",
+     "on_page": "p3 General Fund column receipts 1,584,967+17,306+1,720,317+165,336 = 3,487,926 vs printed 3,487,927; p4 Student Activity excess 166,083-213,297 = (47,214) vs printed (47,213); p4 Special Building net change (124,445)+(178,756) = (303,201) vs printed (303,202); p4/p11 Special Building cash 121,122+39,996 = 161,118 vs printed 161,119; p5 General Fund 'Total local sources' lines = 1,579,512 vs printed 1,579,511; p1 general receipts lines = 3,390,804 vs printed 3,390,805, charges 166,083+74,369 = 240,452 vs 240,453",
+     "issue": "More $1 rounding differences in the report itself, in fund columns and subtotals the JSON doesn't use. They don't affect the extracted figures, but they confirm the report rounds throughout and are worth recording."},
+    {"severity": "warning", "path": "detail[35].original_label", "page": 9,
+     "extracted": "RECEIPTS (unlabeled)", "on_page": "RECEIPTS 3,080",
+     "issue": "The printed label is just 'RECEIPTS'; the extractor added ' (unlabeled)'. The amount is correct."},
+    {"severity": "warning", "path": "detail[36].category", "page": 9,
+     "extracted": "other", "on_page": "Employee benefits paid 2,904",
+     "issue": "The detail function is 'other', but the same 2,904 sits inside statement 'Other disbursements', which the JSON categorises as 'capital outlay' (disbursements[12]). The two are inconsistent. 'support services' is probably the better function for district-wide benefits."},
+    {"severity": "warning", "path": "detail[56].detail_category", "page": 11,
+     "extracted": "land and buildings", "on_page": "Capital outlay 18,072 (Special Building Fund)",
+     "issue": "The object isn't specified. School Nutrition 'Capital outlay' was put under 'equipment purchases', so this is a judgment call; it is defensible for a building fund."}
+  ]
+}
