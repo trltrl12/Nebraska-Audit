@@ -1,0 +1,18 @@
+{
+  "stem": "Hemingford_FY2025",
+  "values_checked": 106,
+  "issues": [
+    {"severity": "warning", "path": "receipts[7].category", "page": 5,
+     "extracted": "federal grants", "on_page": "Grants 97,969",
+     "issue": "Nothing on the page says who the grantor is. Statement of Activities (p2) shows it as General Government capital receipts and contributions. Federal grants is a guess; it could equally be state aid or donations/contributions. The same applies to detail[7] (p9)."},
+    {"severity": "warning", "path": "receipts[10].category", "page": 7,
+     "extracted": "other (Miscellaneous 77,041)", "on_page": "Miscellaneous: Electric 27,380, Water 1,679, Care Center 47,982",
+     "issue": "The p7 fund columns break this line down, and the Statement of Activities (p3) counts the Care Center 47,982 as Charges for Services (business-type charges 1,767,409 = 1,719,427 + 47,982); only 29,059 is general-revenue Miscellaneous. About 62% of this 'other' line could be charges for services/fees."},
+    {"severity": "warning", "path": "disbursements[9].category", "page": 7,
+     "extracted": "utilities", "on_page": "Purchased Power / Personnel Services / General Operating Expenses / Depreciation (Totals column)",
+     "issue": "Business-type expenses listed by object were all given function 'utilities' (disbursements[9]-[12]), but they include the Care Center Fund (operating expenses 94,391, plus 9,007 interest), which p3 shows as its own function and which is not a utility (health/welfare or hospital/health care). The Care Center column could be split out by fund column."},
+    {"severity": "warning", "path": "proprietary", "page": 8,
+     "extracted": null, "on_page": "Statement of Cash Flows - Proprietary Funds Totals: operating 253,323; capital and related financing (389,003); financing (interfund borrowing) 0; beginning cash 1,370,232; ending cash 1,234,552",
+     "issue": "proprietary was left null because basis is 'cash', but the business-type funds use the accrual basis and a full proprietary cash flow statement is printed on p8. Those figures are not captured anywhere in the JSON."}
+  ]
+}
