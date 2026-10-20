@@ -1,0 +1,11 @@
+{
+  "stem": "Lewiston_FY2025",
+  "values_checked": 34,
+  "issues": [
+    {"severity": "warning", "path": "beginning_cash.amount", "page": 1, "extracted": 108927.18, "on_page": "Street Fund line 1 Net Cash Balance prints as 20,667.94 or 20,687.94 (faint scan); line 3 subtotal similarly ambiguous (90,667.94 / 90,687.94)", "issue": "ambiguous digit; 20,687.94 / 90,687.94 is confirmed by the total column (109,559.52 and 212,995.24) and the Street roll-forward to 97,729.93, so the extracted value is arithmetically consistent"},
+    {"severity": "warning", "path": "beginning_investments.amount", "page": 1, "extracted": 70000.00, "on_page": "Street Fund line 2 Investments 70,000.00", "issue": "beginning_cash/ending_cash already include these investments (line 3 / line 28 subtotals); beginning_investments/ending_investments (73,151.91) are subsets of cash, not additional amounts; fine if treated as informational only"},
+    {"severity": "warning", "path": "receipts[10].category", "page": 1, "extracted": "other", "on_page": "Local Receipts: Other 59,214.43 (Water and Sewer Fund column)", "issue": "the only receipt line of the Water and Sewer Fund is almost certainly water/sewer charges, but the form does not label it; 100% of business-type receipts are in 'other'"},
+    {"severity": "warning", "path": "disbursements[2].category", "page": 3, "extracted": "debt service principal", "on_page": "Debt Service 9,163.00 (Water and Sewer Fund)", "issue": "principal and interest are not split on the page; whole line recorded as principal"},
+    {"severity": "warning", "path": "balance_sheet", "page": 1, "extracted": "empty lists, totals null", "on_page": "Lines 25-28 'Ending Balance Consists Of': Net Cash Balance 125,712.24, Investments 107,952.62, Subtotal 233,664.86 (Total column); p5 Schedule of Outstanding Debt: USDA loans 186,782.46 + 34,028.18 = 220,810.64", "issue": "no formal net position statement, but Exhibit A prints the ending cash/investment composition (could serve as cash-basis assets) and p5 lists outstanding debt; extractor left the balance sheet empty"}
+  ]
+}
