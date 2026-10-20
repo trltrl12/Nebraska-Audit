@@ -318,7 +318,8 @@ When a function line mixes categories, pick the dominant one and mention it in `
 - "Operating Expenses" with no function: use the entity type's function (fire districts public
   safety, townships streets/highways, cemeteries health/welfare…) with `review`. Combined bond
   principal & interest takes debt service principal with `review`.
-- If the transfers page is not in the trimmed PDF, say so in notes (transfers null).
+- Transfers come from the Documentation of Transfers page; if that page is blank or not in the
+  trimmed PDF, use lines 16/28 of column 2 (or null if blank) and say so in notes.
 
 ## Entity types beyond cities, counties and schools
 - **Entirely business-type entities** (health care facilities/hospitals, public power districts,
