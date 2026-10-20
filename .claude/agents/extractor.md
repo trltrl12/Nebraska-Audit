@@ -259,7 +259,11 @@ column or fund schedule prints a transfer inside an ordinary line (e.g. "Pupil t
 or "2640 Care and Upkeep of Equipment" that the total/government-wide column then eliminates or
 reclassifies as a transfer), split it: the spending/receipt part as one item and the transfer as
 an `other financing` item (signed), both with `split_from` naming the printed line and the page
-showing the elimination, plus `"review"`. Check every elimination/reclassification column for this
+showing the elimination, plus `"review"`. If the page only shows the transfer coming out of a
+group of lines (e.g. "Operation and maintenance of plant", "federal programs") and not which line,
+never guess: keep every printed line as printed and add one contra line (section `expenditure`,
+negative, department = that group, `split_from` naming the group's lines and page, `review`)
+plus the `other financing` line. Check every elimination/reclassification column for this
 before writing; the same money must never appear as both spending and a transfer.
 
 **Splitting a combined line** (`split_from`) is only allowed when the report itself prints the

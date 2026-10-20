@@ -2,26 +2,61 @@
   "stem": "Atkinson_FY2025",
   "values_checked": 240,
   "issues": [
-    {"severity": "error", "path": "receipts[12].category", "page": 6,
-     "extracted": "other", "on_page": "Other 639,006 = General 502,457 (PPD lease 444,604, rentals 25,531, franchise fees 9,214, occupation tax 2,085, lot sales 5,150, other 15,873; p18/p28) + Street 3,496 + LB 840 110,117 + Other funds 22,936",
-     "issue": "the report shows what this broad group is: about 70% is the public power district lease (444,604), which the detail records as rentals/charges for services. Under the broad-group rule it should get its best category (charges for services/fees) plus review, not 'other'"},
-    {"severity": "warning", "path": "receipts[14].category", "page": 11,
-     "extracted": "other", "on_page": "Other operating revenues 21,418 (p14: noncash 'Solar credits applied to utility bills' 21,418)",
-     "issue": "p14 (not p13 as the review says) shows these are solar credits applied to sewer utility bills, so charges for services/fees could fit; ambiguous"},
-    {"severity": "warning", "path": "disbursements[6].category", "page": 6,
-     "extracted": "streets/highways", "on_page": "Transportation 43,988; p17 combined budget labels it 'Transfer to Airport Authority'; p28 Airport department 43,988",
-     "issue": "this is a payment to the separate Airport Authority. It is not an interfund transfer: the fund and government-wide statements (p2) report it as spending, so keeping it as spending is right. But streets/highways is doubtful for an airport (no airport category; 'other' or economic development are alternatives)"},
-    {"severity": "warning", "path": "detail[34].detail_category", "page": 20,
-     "extracted": "not itemized", "on_page": "Airport 43,988 (p17: 'Transfer to Airport Authority')",
-     "issue": "a payment to another entity; grants/payments to other entities fits better than not itemized"},
-    {"severity": "warning", "path": "detail[20]", "page": 19,
-     "extracted": "Employee benefits 8,216 (general government expenditure)", "on_page": "p17 combined budget: 'Net transfer to insurance fund' 8,216; p28 Employee Benefit department operating 8,216",
-     "issue": "possible transfer hidden in a spending line. No separate insurance fund appears in the statements (General fund holds 'Restricted for employee benefits' 19,099) and p6 reports it as expenditure, so it stays as spending, but a reviewer should confirm"},
-    {"severity": "warning", "path": "detail[38].category", "page": 21,
-     "extracted": "other taxes / other local taxes", "on_page": "Township taxes 19,055 (p16: 'Township funds')",
-     "issue": "township levy remitted to the city; could be intergovernmental (county/other local governments) or property tax. Not in the rule's other-taxes list, and there is no review flag (same for receipts[4])"},
-    {"severity": "warning", "path": "detail", "page": 15,
-     "extracted": "no detail for Debt Service fund or TIF fund", "on_page": "TIF revenue 8,353, TIF expenditure 9,623 (pp15-17 combined all-fund budget); Debt Service fund revenues 20,603, expenditures 112,286 (p6 column)",
-     "issue": "these funds have no individual schedule; their lines appear only in the combined all-fund-types budget schedule (pp15-17), which was left out to avoid double counting. Acknowledged in notes, but the fund-level detail is incomplete"}
+    {
+      "severity": "warning",
+      "path": "receipts[12].category",
+      "page": 6,
+      "extracted": "other",
+      "on_page": "Other 639,006 = General 502,457 (PPD lease 444,604, rentals 25,531, franchise fees 9,214, occupation tax 2,085, lot sales 5,150, other 15,873; p18/p28) + Street 3,496 + LB 840 110,117 + Other funds 22,936",
+      "issue": "[fixed per checker: now charges for services/fees] the report shows what this broad group is: about 70% is the public power district lease (444,604), which the detail records as rentals/charges for services. Under the broad-group rule it should get its best category (charges for services/fees) plus review, not 'other'"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[14].category",
+      "page": 11,
+      "extracted": "other",
+      "on_page": "Other operating revenues 21,418 (p14: noncash 'Solar credits applied to utility bills' 21,418)",
+      "issue": "p14 (not p13 as the review says) shows these are solar credits applied to sewer utility bills, so charges for services/fees could fit; ambiguous"
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[6].category",
+      "page": 6,
+      "extracted": "streets/highways",
+      "on_page": "Transportation 43,988; p17 combined budget labels it 'Transfer to Airport Authority'; p28 Airport department 43,988",
+      "issue": "this is a payment to the separate Airport Authority. It is not an interfund transfer: the fund and government-wide statements (p2) report it as spending, so keeping it as spending is right. But streets/highways is doubtful for an airport (no airport category; 'other' or economic development are alternatives)"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[34].detail_category",
+      "page": 20,
+      "extracted": "not itemized",
+      "on_page": "Airport 43,988 (p17: 'Transfer to Airport Authority')",
+      "issue": "a payment to another entity; grants/payments to other entities fits better than not itemized"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[20]",
+      "page": 19,
+      "extracted": "Employee benefits 8,216 (general government expenditure)",
+      "on_page": "p17 combined budget: 'Net transfer to insurance fund' 8,216; p28 Employee Benefit department operating 8,216",
+      "issue": "possible transfer hidden in a spending line. No separate insurance fund appears in the statements (General fund holds 'Restricted for employee benefits' 19,099) and p6 reports it as expenditure, so it stays as spending, but a reviewer should confirm"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[38].category",
+      "page": 21,
+      "extracted": "other taxes / other local taxes",
+      "on_page": "Township taxes 19,055 (p16: 'Township funds')",
+      "issue": "township levy remitted to the city; could be intergovernmental (county/other local governments) or property tax. Not in the rule's other-taxes list, and there is no review flag (same for receipts[4])"
+    },
+    {
+      "severity": "warning",
+      "path": "detail",
+      "page": 15,
+      "extracted": "no detail for Debt Service fund or TIF fund",
+      "on_page": "TIF revenue 8,353, TIF expenditure 9,623 (pp15-17 combined all-fund budget); Debt Service fund revenues 20,603, expenditures 112,286 (p6 column)",
+      "issue": "these funds have no individual schedule; their lines appear only in the combined all-fund-types budget schedule (pp15-17), which was left out to avoid double counting. Acknowledged in notes, but the fund-level detail is incomplete"
+    }
   ]
 }
