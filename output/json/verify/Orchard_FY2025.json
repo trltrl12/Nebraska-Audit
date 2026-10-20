@@ -1,0 +1,21 @@
+{
+  "stem": "Orchard_FY2025",
+  "values_checked": 129,
+  "issues": [
+    {"severity": "warning", "path": "receipts[16].category", "page": 7,
+     "extracted": "donations/contributions", "on_page": "Grant proceeds 8,370 (p3 Statement of Activities: Capital Grants and Contributions)",
+     "issue": "Capital grant for the enterprise fund with no source stated; likely a government grant (intergovernmental/state aid or federal grants) rather than a private donation, and as a capital grant it could arguably sit in business_type.other_financing. Already marked review."},
+    {"severity": "warning", "path": "receipts[10].category", "page": 5,
+     "extracted": "other", "on_page": "Loan collections 990 (LB840 Fund)",
+     "issue": "LB840 loan collections are repayments of economic development loans (principal recovery), arguably other_financing rather than revenue; kept as printed revenue line in 'other' with review. Judgment call."},
+    {"severity": "warning", "path": "detail[59].category", "page": 11,
+     "extracted": "health/welfare", "on_page": "Cemetery Fees 1,130 / Supplies 186 (Cemetery total 1,316)",
+     "issue": "The governmental funds statement (p5) puts the Cemetery department's 1,316 under Public works in the General Fund column (General Fund Public works = 1,316), so the department-column function split does not tie to the statement's function columns. health/welfare follows the category list for cemeteries; applies to detail[59] and detail[60]."},
+    {"severity": "warning", "path": "detail[35].detail_category", "page": 10,
+     "extracted": "miscellaneous expenditure", "on_page": "Fire & Rescue: Other expenses 9,725",
+     "issue": "Equals the Fire & Rescue intergovernmental revenue of 9,725; probably a pass-through payment to a fire district, i.e. 'grants/payments to other entities'. Already marked review."},
+    {"severity": "warning", "path": "detail", "page": 9,
+     "extracted": "only business-type lines of the all-funds budget schedule recorded", "on_page": "Governmental: General government 137,445 (budget 250,000) ... Capital outlay 102,149 (budget 152,000); Total governmental 650,427",
+     "issue": "Governmental budget-to-actual lines (by function, all governmental funds combined) were left out to avoid double counting the General Fund. Defensible, but the Street, Keno and LB840 funds then have no detail lines and governmental budget_final figures are not captured."}
+  ]
+}
