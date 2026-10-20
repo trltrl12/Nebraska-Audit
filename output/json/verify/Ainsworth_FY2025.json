@@ -1,27 +1,10 @@
 {
   "stem": "Ainsworth_FY2025",
-  "values_checked": 210,
+  "values_checked": 188,
   "issues": [
-    {"severity": "warning", "path": "basis", "page": 5,
-     "extracted": "GAAP", "on_page": "Governmental funds: 'Modified Cash Basis' (p4, p5, p10-15); enterprise funds: accrual",
-     "issue": "Governmental funds (the top-level fields) are on the modified cash basis, but basis is set to GAAP following the manifest. As a result fund balances are used and beginning_cash is null. The figures themselves are correct."},
-    {"severity": "warning", "path": "detail[5].detail_category", "page": 14,
-     "extracted": "county/other local governments", "on_page": "Intergovernmental receipts 241,133 (Administrative); statement of activities p3 labels all governmental intergovernmental 552,346 as 'State allocation'",
-     "issue": "The report calls this money state allocation, so other state aid (or a specific state program) fits better than county/other local governments."},
-    {"severity": "warning", "path": "detail[18].detail_category", "page": 15,
-     "extracted": "county/other local governments", "on_page": "Library: Intergovernmental receipts 12,115 (part of 'State allocation' 552,346, p3)",
-     "issue": "Same issue as detail[5]: the report labels it state allocation."},
-    {"severity": "warning", "path": "receipts[10].category", "page": 5,
-     "extracted": "other", "on_page": "Loan collections 88,260",
-     "issue": "Repayments of LB840/housing development loans. No receipt category fits cleanly, so 'other' with review is defensible. Same for detail[83] and detail[95]."},
-    {"severity": "warning", "path": "receipts[16].category", "page": 7,
-     "extracted": "intergovernmental/state aid", "on_page": "Grant income 612,551 (p3: Capital Grants and Contributions, water 305,984 / sewer 306,567; p9: 'Grant proceeds' under capital and related financing)",
-     "issue": "These are capital grants and the grantor isn't stated, so they could be federal. As printed nonoperating revenue they are fine as receipts, but they could instead be treated as capital contributions (business_type.other_financing). Governmental receipts[9] 'Grants and contributions' 474,218 likewise includes 404,165 of Street capital grants with the grantor not stated."},
-    {"severity": "warning", "path": "detail[89]", "page": 5,
-     "extracted": "Debt service split 49,125 principal / 21,176 interest", "on_page": "p11 Street Fund 'Debt service' 70,301; p5 Street column 'Principal payments on debt' 49,125 and 'Interest payments on debt' 21,176",
-     "issue": "The split uses the report's own Street-fund breakdown on p5 and adds up (49,125 + 21,176 = 70,301). It's marked split_from + review. The budget_final 69,544 for Debt service was not captured on the split items."},
-    {"severity": "warning", "path": "disbursements[5].category", "page": 5,
-     "extracted": "economic development", "on_page": "Community improvement 220,321",
-     "issue": "Category guessed from label. Restricted net position 'Community improvement' is a separate sales-tax fund (Community Improvement Fund), and its use is not stated."}
+    {"severity": "warning", "path": "receipts[14].category", "page": 7, "extracted": "charges for services/fees", "on_page": "Other revenue 28,216", "issue": "printed only as 'Other revenue' (operating revenue of Water/Sewer/Garbage); categorized as charges for services with no review flag. Defensible as operating revenue, but the label does not say what it is; should carry review (or be 'other' with review)"},
+    {"severity": "warning", "path": "receipts[10].category", "page": 5, "extracted": "other", "on_page": "Loan collections 88,260", "issue": "loan repayments (LB840 78,902 + Housing Development 9,358) put in 'other'; no listed category fits cleanly, so this is a judgment call (already marked review). Same for detail[13] and detail[20]"},
+    {"severity": "warning", "path": "receipts[9].category", "page": 5, "extracted": "intergovernmental/state aid", "on_page": "Grants and contributions 474,218", "issue": "mixes Street capital grants 404,165 with General Fund operating grants and contributions 70,053 (Park & Recreation 70,020, Museum 33 on p15), which may be private donations; grantor not stated (already marked review). Same for detail[34]"},
+    {"severity": "warning", "path": "detail[9].budget_final", "page": 11, "extracted": null, "on_page": "Debt service budget 69,544, actual 70,301", "issue": "Street Fund 'Debt service' 70,301 split into principal 49,125 / interest 21,176 using the Street column on p5 (same fund, so the split ties to a printed breakdown); the printed budget 69,544 for the combined line is dropped from both halves (detail[9], detail[10])"}
   ]
 }

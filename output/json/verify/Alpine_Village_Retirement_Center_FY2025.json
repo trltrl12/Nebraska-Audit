@@ -1,12 +1,15 @@
 {
   "stem": "Alpine_Village_Retirement_Center_FY2025",
-  "values_checked": 60,
+  "values_checked": 62,
   "issues": [
-    {"severity": "warning", "path": "receipts[10].category", "page": 2,
-     "extracted": "federal grants", "on_page": "Other grant revenue 1,500",
-     "issue": "Grant source not stated on the page (cash flow p3 just says 'Grant proceeds'); federal grants is an assumption, could be state aid or donations/contributions"},
-    {"severity": "warning", "path": "balance_sheet.assets[5].category", "page": 1,
-     "extracted": "restricted assets", "on_page": "Funded depreciation (note E) 295,078",
-     "issue": "Funded depreciation is usually board-designated, not externally restricted; equity has no restricted line. Category is defensible but could be cash and investments"}
+    {"severity": "warning", "path": "disbursements[6].original_label", "page": 2,
+     "extracted": "Salaries (administrative)", "on_page": "Salaries",
+     "issue": "extractor added '(administrative)' to the printed labels of disbursements[6] 'Salaries', [7] 'Payroll taxes' and [17] 'Miscellaneous' (all under ADMINISTRATIVE EXPENSES); amounts correct"},
+    {"severity": "warning", "path": "receipts[9].category", "page": 2,
+     "extracted": "donations/contributions", "on_page": "Other grant revenue 1,500",
+     "issue": "grant source not stated; could be intergovernmental/state aid or federal grants (already marked review)"},
+    {"severity": "warning", "path": "disbursements[18].category", "page": 2,
+     "extracted": "hospital/health care", "on_page": "Gain (loss) on disposal of capital assets (1,055)",
+     "issue": "loss on disposal is printed as a negative nonoperating revenue; treated as a disbursement, which is defensible (it keeps the roll-forward 3,268,771 + 127,437 = 3,396,208), but it could instead be a negative sale of assets receipt"}
   ]
 }

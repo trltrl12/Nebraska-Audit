@@ -1,18 +1,24 @@
 {
   "stem": "Chambers_Public_Schools_FY2025",
-  "values_checked": 54,
+  "values_checked": 190,
   "issues": [
-    {"severity": "warning", "path": "receipts[10].category", "page": 6,
-     "extracted": "charges for services/fees", "on_page": "Other 140,536 (Activities Fund column)",
-     "issue": "Split of 'Other' 148,391 by fund column (140,536 + 6,040 + 1,815 = 148,391). Treating Activities Fund 'Other' as charges for services is an assumption."},
-    {"severity": "warning", "path": "receipts[13].category", "page": 3,
-     "extracted": "federal grants", "on_page": "School Nutrition Operating Grants and Contributions 23,834",
-     "issue": "The page does not say whether the grant is federal or state; the extractor assumed federal."},
+    {"severity": "warning", "path": "receipts[11].amount", "page": 12,
+     "extracted": "General Fund Other 6,040 split into Textbook Sales 20, Postsecondary Receipts 1,811, Refund of Prior Year Expenditures 1,704, Miscellaneous 2,505 (receipts[11]-[14])", "on_page": "p6 prints General Fund Other 6,040; p12 lists the local receipt lines but does not label any of them 'Other'",
+     "issue": "The split of the General Fund's 6,040 rests on the p12 lines that are left over adding up to 6,040. The arithmetic holds (20+1,811+1,704+2,505 = 6,040, and the full Other split = 148,391), but the report never says these four lines make up 'Other'. Probably right; needs review against the rule that a split must come from a breakdown the report itself prints."},
+    {"severity": "warning", "path": "detail[59].detail_category", "page": 20,
+     "extracted": "Activities Fund account receipts total 140,778, all student activity receipts", "on_page": "p18 and p6: Activities Fund Interest 242 + Activities Receipts 140,536 = 140,778",
+     "issue": "The 242 of Activities Fund interest sits inside the per-account receipts (p20 doesn't separate it out), so detail investment income (8,735) is 242 lower than the statement's Interest Income 8,977 and detail activity receipts are 242 higher. The page doesn't show which account holds the interest, so this can't be fixed exactly."},
     {"severity": "warning", "path": "disbursements[17].category", "page": 9,
      "extracted": "debt service principal", "on_page": "Debt Services 37,194",
-     "issue": "Principal and interest are not separated on the page, so the whole line is assumed to be principal."},
-    {"severity": "warning", "path": "disbursements[19].original_label", "page": 3,
-     "extracted": "School Nutrition (Statement of Activities disbursements)", "on_page": "School Nutrition 93,447",
-     "issue": "Label is not as printed. The amount is correct. Business-type receipt labels also carry added descriptors ('School Nutrition - ...', '(Business-Type Activity)')."}
+     "issue": "Principal and interest aren't split anywhere in the trimmed PDF (p17 also shows only 'Debt Service'), so the whole amount is assumed to be principal."},
+    {"severity": "warning", "path": "disbursements[18].category", "page": 9,
+     "extracted": "instruction", "on_page": "Federal Programs 97,232",
+     "issue": "The function is a guess. Federal programs may include support-services spending (same for detail line 'Federal Programs')."},
+    {"severity": "warning", "path": "disbursements[15].category", "page": 9,
+     "extracted": "instruction", "on_page": "State Categorical Programs 11,739",
+     "issue": "The function is a guess (same for the matching detail line)."},
+    {"severity": "warning", "path": "receipts[3].category", "page": 7,
+     "extracted": "fines and forfeitures", "on_page": "Fines and Licenses 4,945 (p12: 2110 County Fines and Licenses)",
+     "issue": "The label mixes fines and licenses. Fines is the usual dominant part for school districts; the extractor already marked it for review."}
   ]
 }
