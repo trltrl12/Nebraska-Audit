@@ -371,7 +371,10 @@ When a function line mixes categories, pick the dominant one and mention it in `
   `balance_sheet`. Depreciation is an expense line (`detail_category` `depreciation`).
 - **Hospitals:** net patient service revenue → `charges for services/fees` (detail
   `patient service revenue`); operating expenses by line (salaries, benefits, supplies,
-  professional fees…), function `hospital/health care`.
+  professional fees…), function `hospital/health care`. A supplementary patient revenue schedule
+  (gross charges by department, less charity care and contractual adjustments, = net) goes into
+  `detail` line by line, with the deductions negative and a `detail_totals` entry for the net. It
+  is not double counting, because detail is kept separate from receipts.
 - **Housing authorities:** tenant rent → `charges for services/fees` (detail `tenant rent`); HUD
   operating subsidies → `federal grants`; HUD capital fund grants printed as "Capital contributions" (below
   income before contributions) → `business_type.other_financing`, not receipts; function `housing`.
