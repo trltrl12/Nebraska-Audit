@@ -1,0 +1,15 @@
+{
+  "stem": "Dannebrog_Housing_Agency_-_Oak_Street_Manor_FY2025",
+  "values_checked": 17,
+  "issues": [
+    {"severity": "warning", "path": "disbursements[1].category", "page": 1,
+     "extracted": "capital outlay", "on_page": "Line 20 Other Capital Outlay - handwritten 'Bank Loan' 5,534.64",
+     "issue": "Handwritten 'Bank Loan' suggests a loan repayment (debt service principal/interest), not capital outlay; already marked review"},
+    {"severity": "warning", "path": "business_type.transfers_net", "page": 1,
+     "extracted": 1000.00, "on_page": "Line 15 Transfers In 2,000.00; Line 24 Transfers Out 1,000.00 (Reserve <-> Checking)",
+     "issue": "These transfers are between two bank accounts of the same entity, both inside 'Total of All Funds', so they should net to zero. The form shows +1,000 net. The printed roll-forward holds (68,408.59 - 58,689.87 = 9,718.72 = 3,047.70 + 6,671.02), but the asymmetric transfers may hide a misclassified receipt. Also, reported_totals.business-type.disbursements 'includes' lists transfers_net, but the printed total only includes the 1,000 transfer out, not the net figure"},
+    {"severity": "warning", "path": "fiscal_year_end", "page": 1,
+     "extracted": "2025-06-30", "on_page": "no period printed ('2025 Audit Waiver Request')",
+     "issue": "Fiscal year end assumed"}
+  ]
+}
