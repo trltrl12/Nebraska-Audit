@@ -1,0 +1,18 @@
+{
+  "stem": "Hickman_FY2025",
+  "values_checked": 18,
+  "issues": [
+    {"severity": "warning", "path": "missing", "page": 1,
+     "extracted": null, "on_page": "Receipts and transfers (resource inflows) 9,534,274; Budgetary fund balance, beginning 6,417,103; ending 4,875,153 (all funds combined)",
+     "issue": "Printed schedule lines not entered in the JSON. Leaving them out is defensible because the page doesn't split them between governmental and business-type funds, and the extraction's decision_needed[] records it. Receipts, beginning balance and ending balance are therefore all null, and the identity can't be checked."},
+    {"severity": "warning", "path": "balance_sheet", "page": 1,
+     "extracted": null, "on_page": "Only page 26 (Budgetary Comparison Schedule - All Fund Types) is in the trimmed PDF",
+     "issue": "The trimmed PDF has no basic statements: no Statement of Net Position, no governmental funds statement, no proprietary statement. The report needs re-trimming. The extraction's decision_needed[] covers it."},
+    {"severity": "warning", "path": "basis", "page": 1,
+     "extracted": "GAAP", "on_page": "Actual Amounts (Budgetary Basis)",
+     "issue": "Basis is recorded as GAAP, but every disbursement figure is a budgetary-basis (cash) charge to appropriations, not a GAAP expenditure or expense. Governmental lines don't come from the governmental funds statement. Business-type lines don't come from the proprietary statement."},
+    {"severity": "warning", "path": "detail[].budget_final", "page": 1,
+     "extracted": null, "on_page": "Original Budget column; variance column headed 'Variance with Final Budget' equals Actual minus Original (e.g. 1,246,353 - 1,589,607 = -343,254)",
+     "issue": "The variance is computed against the original budget, so the original budget appears to be the final budget. budget_final could be the Original Budget figures (1,589,607; 140,636; 1,349,297; 861,092; 3,526,954; 214,246; 7,860,641). The extraction left them null."}
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "stem": "Hildreth_FY2025",
+  "values_checked": 129,
+  "issues": [
+    {"severity": "warning", "path": "receipts[8].category", "page": 6,
+     "extracted": "donations/contributions", "on_page": "Contributions and grants 8,087 (shown as Operating Grants and Contributions on p2)",
+     "issue": "The line mixes grants and contributions. The grants may come from a government (intergovernmental/state aid or federal grants). This isn't marked review, and the same category is used in detail for Cemetery 1,100, Library 3,820 and Summer Sports 3,167."},
+    {"severity": "warning", "path": "disbursements[14].category", "page": 8,
+     "extracted": "utilities", "on_page": "Capital outlay (49,645) under Nonoperating income (expenses)",
+     "issue": "The proprietary fund's capital outlay is recorded as 'utilities'. 'capital outlay' may fit better."},
+    {"severity": "warning", "path": "detail[26].category", "page": 12,
+     "extracted": "health/welfare", "on_page": "Cemetery department, shown under 'Public works' on the General Fund budget schedule (p10). Statement Public works 52,985 = General 6,439 + Street 46,546 (p5)",
+     "issue": "The Cemetery department's spending (detail[26]-[29], 13,639) is classed health/welfare. The basic statement counts it in Public works, which the extraction mapped to streets/highways, so the detail function split doesn't tie to the statement's function columns. health/welfare is the rule's category for cemeteries, so this is defensible; only the mismatch needs noting."},
+    {"severity": "warning", "path": "detail[24].category", "page": 12,
+     "extracted": "general government", "on_page": "Capital outlay 1,064 (General), 7,200 (Cemetery), 7,695 (Library); total 15,959 = General Fund 'Capital outlay' function on p5",
+     "issue": "The General Fund department capital outlay lines (detail[24], [28], [34]) take their department's function. The statement reports these 15,959 as a separate Capital outlay function, so the detail function split doesn't tie to the statement."}
+  ]
+}
