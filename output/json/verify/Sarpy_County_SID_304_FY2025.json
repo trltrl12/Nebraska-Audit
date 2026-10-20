@@ -1,0 +1,22 @@
+{
+  "stem": "Sarpy_County_SID_304_FY2025",
+  "values_checked": 111,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "report_discrepancies",
+      "page": 2,
+      "extracted": null,
+      "on_page": "Total column: Total Other Financing Sources (Uses) (1,186,002); Excess ... and Transfers (1,034,525)",
+      "issue": "[fixed] The printed report doesn't add up. In the Total column, Bonds Issued 910,000 + Warrants Issued 3,003 - Warrants Retired 1,188,880 - Change in Payables 125 = (276,002), which is also what the Debt Service column prints, but the Total column prints (1,186,002), a gap of -910,000. The Excess line (1,034,525) carries the same error: 151,477 - 1,186,002 = (1,034,525), while 2,629,909 - 1,034,525 does not equal the printed ending 2,505,384. The JSON figures are right (identity holds at 2,505,384), but report_discrepancies has no entry for this. It needs one: check totals, difference -910000, source_page 2."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[4].category",
+      "page": 2,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "State Motor Vehicle Tax Allocation 1,400",
+      "issue": "Label says motor vehicle tax allocation, not pro-rate. This may be the county-distributed motor vehicle tax (category motor vehicle tax) rather than state pro-rate aid. Same call for detail[3] and detail[18]."
+    }
+  ]
+}

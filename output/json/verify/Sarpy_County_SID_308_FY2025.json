@@ -1,0 +1,20 @@
+{
+  "stem": "Sarpy_County_SID_308_FY2025",
+  "values_checked": 90,
+  "issues": [
+    {"severity": "warning", "path": "disbursements[4]", "page": 4,
+     "extracted": {"original_label": "Repairs and maintenance (R&M - Street)", "amount": 2166, "source_page": 4},
+     "on_page": "p4: Repairs and maintenance 23,556 (General Fund only); p5: R&M -Street 2,166",
+     "issue": "The split is backed by the same fund's own breakdown on p5 (Sewer 0 + Street 2,166 + Park 21,390 = 23,556), so it's allowed and marked split_from/computed. But original_label isn't the printed label, and 2,166 is printed on p5, not on the cited source_page 4, so the page-text check may flag it."},
+    {"severity": "warning", "path": "disbursements[5]", "page": 4,
+     "extracted": {"original_label": "Repairs and maintenance (R&M - Park)", "amount": 21390, "source_page": 4},
+     "on_page": "p4: Repairs and maintenance 23,556; p5: R&M -Park 21,390",
+     "issue": "Same as disbursements[4]: the label is constructed and the amount is printed on p5, not on the cited page 4."},
+    {"severity": "warning", "path": "ending_cash", "page": 4,
+     "extracted": 929401, "on_page": "Fund balance - end of year 929,401 (= Cash with County Treasurer 264,401 + Investments 665,000, p3)",
+     "issue": "beginning_cash/ending_cash are fund balances that include investments, while ending_investments 665,000 is also filled in. That matches the roll-forward and notes explain it, but anyone adding cash + investments would double count 665,000."},
+    {"severity": "warning", "path": "other_financing", "page": 4,
+     "extracted": -118313, "on_page": "Warrants issued prior year paid (118,313) under Other financing sources and uses",
+     "issue": "Recorded as printed in the financing section, but paying off prior-year warrants is repaying debt; it's arguably debt service principal. The identity holds either way."}
+  ]
+}
