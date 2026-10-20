@@ -11,7 +11,7 @@
      "on_page": "Contra line -19,640 (transfer payments to Depreciation 12,000 and Employee Benefit 7,640) plus a matching transfers_out. The General fund schedule p9 '8000 Transfers (Outgoing) 112,008' covers only Activities 40,908 (p12) + Nutrition 71,100 (p13), and General fund cash rolls forward without the 19,640 (1,777,786 + 5,264,476 - 5,261,816 = 1,780,446), so the payment sits inside General fund spending lines.",
      "issue": "A transfer is hidden inside spending lines. Governmental disbursements (p5 General column 5,153,882 = General 5,149,808 + Employee Benefit 4,074) include 19,640 that is really a transfer, so the same money counts as both spending and a transfer. The page doesn't show which line holds it, so the rule calls for keeping the printed lines and adding a negative contra expenditure line (department = General fund spending, split_from, review) plus the other financing line. Neither was added."},
     {"severity": "error", "path": "detail", "page": 9,
-     "extracted": "Depreciation 'Fund Transfer In' +12,000 (detail[83]) and Employee Benefit 'Transfer from General Fund' +7,640 (detail[84]) recorded as other financing; General fund detail has only -112,008",
+     "extracted": "Depreciation 'Fund Transfer In' +12,000 (detail[81]) and Employee Benefit 'Transfer from General Fund' +7,640 (detail[82]) recorded as other financing; General fund detail has only -112,008 (detail[79])",
      "on_page": "p9 Transfers (Outgoing) 112,008 = 40,908 + 71,100; the 19,640 paid to Depreciation/Employee Benefit sits in General fund expenditure lines",
      "issue": "Detail transfers don't net: +12,000 + 7,640 + 40,908 + 71,100 - 112,008 = +19,640. The General fund schedule's expenditure lines still contain the 19,640 that the receiving funds record as transfers, so that money appears as both spending and a transfer. A General fund contra expenditure line (-19,640, split_from, review) and an other financing line of -19,640 are missing."},
     {"severity": "warning", "path": "receipts[15].category", "page": 6,
@@ -22,13 +22,13 @@
      "extracted": "County Fines and Fees (General Fund column) / Other Local Receipts (… column)",
      "on_page": "County Fines and Fees 78,251; Other Local Receipts 272,306",
      "issue": "The combined lines were split by fund column (receipts[10], [11], [15]-[20]). The column amounts are printed and the sums are right (12,251+66,000 = 78,251; 39,377+203,682+5,390+14,400+8,986+471 = 272,306), but the original_label values add column names that aren't printed as labels."},
-    {"severity": "warning", "path": "detail[78].fund_type", "page": 13,
+    {"severity": "warning", "path": "detail[88].fund_type", "page": 13,
      "extracted": "governmental",
      "on_page": "School Nutrition Fund shown as a column of the governmental funds statements (p4-5); no proprietary statement",
-     "issue": "School nutrition is normally business-type under the rules. Here the report presents it as a governmental fund and gives no proprietary statement, so keeping it governmental is defensible but an assumption."},
-    {"severity": "warning", "path": "detail[123].budget_final", "page": 17,
+     "issue": "School nutrition is normally business-type under the rules. Here the report presents it as a governmental fund and gives no proprietary statement, so keeping it governmental (detail[88]-[100] and receipts/disbursements) is defensible but an assumption."},
+    {"severity": "warning", "path": "detail[129].budget_final", "page": 17,
      "extracted": 10000,
      "on_page": "Budget 10,000 printed only on the Total Cash Receipts / Total Cash Disbursements lines",
-     "issue": "The Student Fee lines (detail[123], [124]) take budget_final from the total line, while every other fund schedule leaves budget_final null where the budget is printed only on totals. This is inconsistent."}
+     "issue": "The Student Fee lines (detail[129], [130]) take budget_final from the total line, while every other fund schedule leaves budget_final null where the budget is printed only on totals. This is inconsistent."}
   ]
 }
