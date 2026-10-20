@@ -1,0 +1,27 @@
+{
+  "stem": "Humboldt_Table_Rock_Steinauer_Public_Schools_FY2025",
+  "values_checked": 182,
+  "issues": [
+    {"severity": "error", "path": "receipts[22].category", "page": 5,
+     "extracted": "other", "on_page": "Other/Donations/Non Revenue 265,775 = General 84,744 + Activity Fund 181,031",
+     "issue": "Mixed line filed as 'other' although the page says what it is: 181,031 (68%) is Activity Fund receipts (p13 'Activities receipts/ Admissions'), so the dominant category is charges for services/fees (student activity receipts). The General 84,744 is broken down on p8: 7,050 donations + 10,198 transfer in + 11,047 sale of property + 3,476 insurance + 3,651 capital lease + 49,322 other non-revenue. Under the mixed-line rule it should take the dominant category with a review note."},
+    {"severity": "error", "path": "receipts[22].amount", "page": 8,
+     "extracted": 265775, "on_page": "5200 Funds Transfer In 10,198 is inside the General column 84,744 of this receipt line",
+     "issue": "A 10,198 transfer in is counted as a receipt. p8 prints the breakdown of the General 84,744 (7,050 + 77,694 non-revenue sources), so the split is allowed: 10,198 should come out of receipts as a transfer (with split_from and review). Capital lease proceeds 3,651 (debt proceeds) and sale of property 11,047 (sale of assets) are in the same line too. The transfer is one-sided: General transfers out of 85,450 match only Activity 35,450 + Nutrition 50,000 on p6. See the decision_needed issue."},
+    {"severity": "warning", "path": "decision_needed", "page": 8,
+     "extracted": [], "on_page": "5200 Funds Transfer In 10,198 (General Fund non-revenue sources)",
+     "issue": "One-sided transfer in with no matching transfer out from any fund (p6 transfers net to zero; p7 shows General (85,450) only). This is listed as a question only a person can settle, but decision_needed is empty. Ask where the 10,198 came from (Foundation component unit, custodial fund?) and whether it should be a receipt or a transfer."},
+    {"severity": "warning", "path": "detail[85].category", "page": 6,
+     "extracted": "support services", "on_page": "Instruction 4,705,202 on p6 = schedule Total Instruction 4,691,526 (p9) + Employee Benefit 13,676",
+     "issue": "The statement's General column (which includes the Depreciation and Employee Benefit funds) puts the Employee Benefit fund's 13,676 'Benefits' under Instruction, not support services. Use instruction so the detail ties to the statement's function lines."},
+    {"severity": "warning", "path": "receipts[12].category", "page": 5,
+     "extracted": "intergovernmental/state aid", "on_page": "County Fines 52,837 (p8: 2110 County Fines and License Fees, Intermediate Sources)",
+     "issue": "Judgment call: the money comes through the county (an intermediate source), but the label says fines and license fees, so fines and forfeitures is also defensible. It is already marked review."},
+    {"severity": "warning", "path": "receipts[18].category", "page": 5,
+     "extracted": "intergovernmental/state aid", "on_page": "Other State Receipts 357,048 = General 351,900 + Special Building 5,148",
+     "issue": "Mixed line with no review note: it includes Nameplate Capacity tax 124,587 (p8) + 4,623 (p15) = 129,210, which the rules class as other taxes. State aid is still the dominant category (227,838), so it should keep that category but carry a review note naming the mix."},
+    {"severity": "warning", "path": "detail[4].original_label", "page": 8,
+     "extracted": "1140 Penalties and Interest on Taxes", "on_page": "1140 Penalties and Interest on Taxes (Levied/Assessed by School Districts)",
+     "issue": "Printed label is cut short."}
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "stem": "Henderson_FY2025",
+  "values_checked": 108,
+  "issues": [
+    {"severity": "warning", "path": "balance_sheet.total_assets", "page": 1,
+     "extracted": 4208903, "on_page": "Total assets 4,208,903; Net position 4,208,905 (Total memo-only column)",
+     "issue": "Confirmed this is not a misread. The digits are clear and both totals are entered exactly as printed. The page itself is out by 2. Asset lines add to 4,208,904 (printed 4,208,903). Equity lines add to 4,208,904 (printed 4,208,905). Certificates of deposit total 36,176 vs 3,296 + 32,879 = 36,175 across the row. Governmental column assets add to 3,950,751 vs 3,950,752 printed. These are rounding differences in the report, and report_discrepancies already records them, so nothing needs to change."},
+    {"severity": "warning", "path": "report_discrepancies[3].difference", "page": 4,
+     "extracted": 0, "on_page": "Ending fund balance 3,950,750 (p4) vs 3,950,751 (p3) vs 3,950,752 (p1/p3 assets)",
+     "issue": "Entry says the report doesn't agree with itself but records a difference of 0. It should be -1 / -2 (p4 against p3/p1)."},
+    {"severity": "warning", "path": "disbursements[4].original_label", "page": 4,
+     "extracted": "Ambulance (public safety)", "on_page": "Ambulance 7,755 (p4, p8); 'Auditorium 7,755' on Statement of Activities p2",
+     "issue": "The report labels the 7,755 function two different ways. As Auditorium it would be culture/recreation, not public safety. Same question for detail[24]."},
+    {"severity": "warning", "path": "receipts[5].category", "page": 4,
+     "extracted": "intergovernmental/state aid 234,498", "on_page": "p8 breakdown includes Motor vehicle fees 11,132 and In lieu of taxes 9,861",
+     "issue": "The line includes 11,132 of motor vehicle fees and 9,861 of in-lieu tax, which have their own categories. It is kept whole and already marked for review."},
+    {"severity": "warning", "path": "disbursements[5].category", "page": 9,
+     "extracted": "debt service principal 180,000", "on_page": "Debt service 180,000 (Debt Service Fund p9; separate 'Interest' and 'Other' lines)",
+     "issue": "The page labels this line only 'Debt service'. Treating it as principal is a reasonable guess but not stated. Same for detail[29]."},
+    {"severity": "warning", "path": "other_financing", "page": 4,
+     "extracted": 2254, "on_page": "Grants 2,254 under Other Financing Sources (Uses)",
+     "issue": "Entered as other financing, as p4 prints it. But grants are normally revenue, and p2 lists 'Grants' under General Revenues."},
+    {"severity": "error", "path": "detail[36].section", "page": 10,
+     "extracted": "other financing -178,599", "on_page": "Debt service (178,599) under Other Financing Sources (Uses), proprietary budget schedule",
+     "issue": "This is a debt service payment, not a transfer or financing source. p7 cash flows show it is principal 165,000 plus interest 13,599. Under the outside_printed_total rule (loan payments printed below the total), it belongs in section expenditure (debt principal / debt interest) with outside_printed_total: true."},
+    {"severity": "warning", "path": "detail[0].budget_final", "page": 8,
+     "extracted": null, "on_page": "Budget (Final) column printed, e.g. Property taxes 224,325, General government 432,217",
+     "issue": "Final budget was left null for every p8 line, even though a budget column is printed. That column seems to cover General and Special Revenue together (e.g. highway allocation 170,986). Leaving it null is defensible, but it is an assumption."}
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "stem": "Hebron_FY2025",
+  "values_checked": 500,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "report_discrepancies",
+      "page": 6,
+      "extracted": null,
+      "on_page": "Exhibit E Total Governmental Funds revenue lines add to 2,664,674 but Total revenues prints 2,665,071; the Non-Major Funds column on p5 has the same gap (lines 1,346,685 vs printed 1,347,082)",
+      "issue": "[fixed] The printed statement doesn't add up by 397: the Lottery 397 on p30 has no line of its own. The JSON has no report_discrepancies entry for this. The extractor instead added a computed keno/lottery receipt (receipts[15]) to close the gap."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[15]",
+      "page": 30,
+      "extracted": 397,
+      "on_page": "Lottery 397 (Sched 22, Keno Lottery); no such line on Exhibit E p6",
+      "issue": "This receipt line isn't printed on the governmental funds statement; it is a plug equal to the difference between the printed total and the printed lines. The plug matches Keno lottery revenue and the Statement of Activities (economic development charges 397), so it is a reasonable assumption, but original_label is a description rather than a printed label."
+    },
+    {
+      "severity": "error",
+      "path": "detail[192].category",
+      "page": 31,
+      "extracted": "other",
+      "on_page": "Grant Project Fund Operating expenditures 481,461",
+      "issue": "[fixed] Exhibit D/E puts this spending under Economic development: the non-major Economic development 616,406 = 107,962 + 865 + 26,118 + 481,461. The specific category 'economic development' fits and is supported by the report's own statement, so 'other' is wrong. detail[193] (Capital outlay, budget 354,810) has the same problem."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[11].category",
+      "page": 6,
+      "extracted": "donations/contributions",
+      "on_page": "Contributions/grants 665,809",
+      "issue": "This includes Grant Project grant income 434,445 and Parks grants 189,441. The Statement of Activities (p2) shows these as operating grants (economic development 448,490) and capital grants (culture and recreation 185,965), which are probably government grants (intergovernmental or federal) rather than private donations. The grantor isn't stated. detail[191] and detail[76] have the same issue."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[31].category",
+      "page": 13,
+      "extracted": "public safety",
+      "on_page": "Police and traffic: Contracted law enforcement 163,702",
+      "issue": "Logically this is public safety, but Exhibit D (p5) reports the whole General Fund 581,283 under Policy/administration (General Fund public safety 0). The detail function split therefore doesn't tie to the statement, and the top-level 'general government' disbursement (581,509) includes 163,702 of law enforcement."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[111].category",
+      "page": 21,
+      "extracted": "health/welfare",
+      "on_page": "Cemetery Department Fund expenditures 56,902",
+      "issue": "The rules map cemetery to health/welfare, but the report counts Cemetery in Culture & recreation: non-major Culture & recreation 474,077 ties exactly only with Cemetery 56,902 included. The detail function split (detail[111]-[120]) differs from the statement's function column."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[41]",
+      "page": 15,
+      "extracted": "section other financing, no category",
+      "on_page": "Payment of long-term liabilities-principal (19,083) / interest (4,178) under Other financing sources (uses)",
+      "issue": "Debt service payments in fund schedules were recorded as 'other financing' with no debt category, as printed (also detail[93],[94] Recreation, detail[166],[167] Summer Rec). They are recorded at top level as disbursements (outside_printed_total), so detail and receipts/disbursements treat them differently. Consistent with the printed layout, but worth checking."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[157].detail_category",
+      "page": 27,
+      "extracted": "supplies and materials",
+      "on_page": "Bar expense 13,955",
+      "issue": "Goods bought for resale (bar stock, and also Concessions goods detail[103] 5,593 and Concession goods detail[179] 17,217) could be 'purchased power/cost of sales'."
+    },
+    {
+      "severity": "warning",
+      "path": "missing",
+      "page": 12,
+      "extracted": null,
+      "on_page": "Schedules 5-8 (report pp41-46) are not in the trimmed PDF: trimmed p16 = report p40 (Sched 4A), p17 = report p47 (Sched 9)",
+      "issue": "This is a trimming gap, not an extraction error. The missing nonmajor fund schedules hold the 20,873 tax remainder kept as taxes (unlabeled) (receipts[7]), policy/admin 226, debt service 61,727, the 61,630 Fire Truck Sinking transfer destination, and those funds' detail lines. All 31 trimmed pages were read and the notes correctly say 'Read pages 1-31 of 31'."
+    }
+  ]
+}
