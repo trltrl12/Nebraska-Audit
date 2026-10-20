@@ -274,7 +274,8 @@ mixes two categories ("Permits, fees and licenses", "Miscellaneous and reimburse
 dominant one plus `"review"` naming the mix. This includes broad statement lines ("Other local
 receipts", "Non-revenue receipts", "Local", "Other"): before putting one in `other`, look up what
 it is made of in the fund schedules (activity fund receipts → charges for services; insurance
-adjustments → reimbursements; donations; interest; property tax…). If any category is more than
+adjustments → reimbursements; donations; interest; property tax…). For counties and cities, the Statement of
+Activities' charges for services by function/department also shows what a fund's "Local" line holds. If any category is more than
 half of it, use that category (or split with `split_from`). `other` is only for lines that stay
 unexplained after that.
 

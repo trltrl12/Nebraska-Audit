@@ -1,0 +1,33 @@
+{
+  "stem": "Nebraska_Cooperative_Republican_Platte_Enhancement_Project_N-CORPE_FY2025",
+  "values_checked": 57,
+  "issues": [
+    {"severity": "error", "path": "receipts[5].amount", "page": 2,
+     "extracted": 1419211.44, "on_page": "Land operations Charges for Services 1,419,211.44 (p2) = p6 Total revenues 2,682,769.78 less Reimbursements from NRD's 1,263,558.34, i.e. Building/Housing rent 7,800.00 + Land rent 660,743.94 + Equipment and feedlot rent 2,650.00 + Utilities reimb 287,294.52 + Expenses reimb 361,037.62 + Miscellaneous 74,969.73 + Gain on sale 7,600.00 + Grant 17,115.63",
+     "issue": "Double counted. There is only one fund (the governmental fund, p4-p5). The business-type 'Land operations' revenue on the Statement of Activities is built from the same rents, reimbursements and other receipts already in governmental receipts[0]-[4] (Building rent 7,800, Land rent 660,743.94, Equipment & feedlot rent 2,650 match exactly) plus the 7,600 sale of assets already in other_financing. Recording it again as a business-type receipt counts the money twice."},
+    {"severity": "error", "path": "disbursements[20].amount", "page": 2,
+     "extracted": 771589.97, "on_page": "Land operations expenses 771,589.97 (p2) = p6 Land expenditures total; its lines Payroll labor 367,218.50, Equipment rent 8,973.56, Chemicals and application 387.00, Custom hire 3,230.00 are the same figures as governmental Labor expenses, Equipment rent, Chemical and application, Land rent on p5",
+     "issue": "Double counted. The land-operations expenses are already inside the governmental fund's Total expenditures 1,538,364.06 (p5). The business_type roll-forward (1,670,185.70 to 2,317,807.17) is the activity-basis split of the same single fund's net position, so business_type.beginning/ending also overlap the governmental figures. Someone needs to decide how to treat this; it isn't in decision_needed[]."},
+    {"severity": "error", "path": "missing", "page": 6,
+     "extracted": null, "on_page": "Statement of Revenues and Expenditures by Location - Modified Cash Basis, REVENUES (4 NRD columns + Total): Building/Housing rent 7,800.00; Land rent 660,743.94; Equipment and feedlot rent 2,650.00; Utilities reimbursement 287,294.52; Expenses reimbursement 361,037.62; Miscellaneous 74,969.73; Gain (loss) on Sale of Assets 7,600.00; Grant Revenue 17,115.63; Reimbursements from NRD's 1,263,558.34; TOTAL REVENUES 2,682,769.78",
+     "issue": "The supplementary schedule's revenue lines are left out of detail[]/detail_totals[] (detail is []). The rules ask for every supplementary schedule line, tied to its own printed totals; detail does not have to tie to the fund statement and is kept separate from receipts, so recording it would not double count. The page adds up (lines sum to 2,682,769.78)."},
+    {"severity": "error", "path": "missing", "page": 7,
+     "extracted": null, "on_page": "Same schedule, EXPENDITURES pp6-7: Land expenditures (Augmentation 283,008.97 ... Stock well repairs 29,329.88; subtotal 771,589.97), General Expenditures (Legal notices 466.79 ... Misc. expense 1,224.00; subtotal 1,334,120.61), Aug Misc. expense 295,694.64, Insurance Liability 47,156.70, Professional fees (Accounting 15,200.00, Engineering/design 945.00, Legal 23,664.50), Interest expense 1,296,430.46, Interest income (34,931.65), Dividends (17,586.40); Expenditures net of interest income 3,732,283.83",
+     "issue": "Expenditure lines of the location schedule (about 40 object lines with 4 NRD columns and a Total) are left out of detail[]/detail_totals[]."},
+    {"severity": "warning", "path": "report_discrepancies", "page": 5,
+     "extracted": "one 'totals' entry, difference 17,115.63", "on_page": "Revenue lines 7,800.00 + 660,743.94 + 2,650.00 + 1,629,026.28 + 379,850.65 = 2,680,070.87; Total revenues printed 2,697,186.50",
+     "issue": "Re-read visually at full size: every digit is clear, so the 17,115.63 gap is not a misread. The printed total matches the page's own later lines (2,697,186.50 - 1,538,364.06 = 1,158,822.44 printed; 468,845.16 + 1,158,822.44 - 1,291,970.30 = 335,697.30 printed), and the 2024 column adds up exactly. So the 2025 revenue lines as printed are short by 17,115.63, the same as Grant Revenue on p6. Recording it as printed is correct. But the governmental roll-forward in the JSON also misses by the same amount (468,845.16 + 2,680,070.87 - 8,667,934.36 + 5,837,600.00 = 318,581.67 vs ending 335,697.30), and no 'reconcile' entry records that."},
+    {"severity": "warning", "path": "decision_needed", "page": 5,
+     "extracted": null, "on_page": "Total revenues 2,697,186.50 vs printed lines 2,680,070.87",
+     "issue": "decision_needed[] is missing. Someone needs to decide whether the unlisted 17,115.63 (probably the Grant Revenue on p6) should be added as a receipt line. They also need to decide how to handle the business-type land operations overlap (see the errors above)."},
+    {"severity": "warning", "path": "receipts[4].category", "page": 6,
+     "extracted": "other", "on_page": "Other 379,850.65",
+     "issue": "On p6 the non-rent, non-NRD receipts are mostly reimbursements: Utilities reimbursement 287,294.52, Miscellaneous 74,969.73 and Grant Revenue 17,115.63, which sum to 379,379.88. Under the 'look up what it is made of' rule that would point to reimbursements/refunds, but the parts don't tie exactly to 379,850.65, so 'other' with review is defensible."},
+    {"severity": "warning", "path": "receipts[3].category", "page": 5,
+     "extracted": "intergovernmental/state aid", "on_page": "Reimbursements from NRD's 1,629,026.28",
+     "issue": "The label says reimbursements (category reimbursements/refunds), but the payer is the member NRDs (other local governments), and p2 shows the NRD part as capital grants and contributions. intergovernmental/state aid is defensible; it's a judgment call."},
+    {"severity": "warning", "path": "disbursements[1].category", "page": 5,
+     "extracted": "general government", "on_page": "Bank and loan fees 33,264.10",
+     "issue": "Loan fees may belong in debt service interest (including fees). Mixed line, judgment call."}
+  ]
+}
