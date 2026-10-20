@@ -2,29 +2,69 @@
   "stem": "Ansley_FY2025",
   "values_checked": 124,
   "issues": [
-    {"severity": "error", "path": "ending_cash.source_page", "page": 4,
-     "extracted": 3, "on_page": "442,402 is printed in the Total column on p4 (and governmental activities column p1); p3 shows only the fund columns (General 329,644 etc.)",
-     "issue": "wrong source_page; amount 442,402 is correct but should cite p4"},
-    {"severity": "warning", "path": "detail[19].amount", "page": 18,
-     "extracted": 119266, "on_page": "Trash 121,666",
-     "issue": "2,400 split out of Trash is inferred: p18 prints no transfer line; the remaining 9,600 of the 52,000 transfers must sit in the business-type lines (governmental lines tie exactly: General Government 191,655 = 151,655 + 40,000; Public Works 197,414 = Street fund expenditures 195,014 + 2,400), and p14 shows 2,400 out of each utility fund, but Trash cash disbursements cannot be tied to the p15 cash flow statement. Electric does tie: p15 payments 583,864 + 112,738 + capital 129,530 + principal 45,432 + interest 65,045 = 936,609 = 939,009 - 2,400"},
-    {"severity": "warning", "path": "detail[21].amount", "page": 18,
-     "extracted": 124918, "on_page": "Sewer 127,318",
-     "issue": "2,400 transfer split inferred from p14 per-fund transfers; Sewer cash line cannot be tied to the p15 cash flows (p15 Sewer outflows total 119,459)"},
-    {"severity": "warning", "path": "detail[23].amount", "page": 18,
-     "extracted": 124002, "on_page": "Water 126,402",
-     "issue": "2,400 transfer split inferred from p14 per-fund transfers; Water cash line cannot be tied to the p15 cash flows (p15 Water outflows total 135,907)"},
-    {"severity": "warning", "path": "detail[9].fund_type", "page": 17,
-     "extracted": "business-type", "on_page": "Local Receipts: Other 1,298,608",
-     "issue": "broad line mixes business-type utility receipts with governmental local receipts (franchise, occupation, lease, grants, donations, interest, etc.); single fund_type is an approximation (review already set)"},
-    {"severity": "warning", "path": "detail[5].detail_category", "page": 17,
-     "extracted": "homestead/tax credits", "on_page": "State Receipts: Other 13,254",
-     "issue": "printed only as 'Other'; category inferred from equality with Homestead Exemption 5,804 + Property Tax Credit 7,450 (p6); defensible, review already set"},
-    {"severity": "warning", "path": "receipts[18].category", "page": 6,
-     "extracted": "intergovernmental/state aid", "on_page": "Grants 23,500",
-     "issue": "grantor not stated; could be federal grants or donations/contributions (review already set)"},
-    {"severity": "warning", "path": "receipts[23].category", "page": 13,
-     "extracted": "charges for services/fees", "on_page": "Customer Deposits 4,000 (Operating Revenues)",
-     "issue": "customer deposits are printed as operating revenue; amount as printed but nature is questionable (review already set)"}
+    {
+      "severity": "warning",
+      "path": "ending_cash.source_page",
+      "page": 4,
+      "extracted": 3,
+      "on_page": "442,402 is printed in the Total column on p4 (and governmental activities column p1); p3 shows only the fund columns (General 329,644 etc.)",
+      "issue": "[fixed: source_page now 4] wrong source_page; amount 442,402 is correct but should cite p4"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[19].amount",
+      "page": 18,
+      "extracted": 119266,
+      "on_page": "Trash 121,666",
+      "issue": "2,400 split out of Trash is inferred: p18 prints no transfer line; the remaining 9,600 of the 52,000 transfers must sit in the business-type lines (governmental lines tie exactly: General Government 191,655 = 151,655 + 40,000; Public Works 197,414 = Street fund expenditures 195,014 + 2,400), and p14 shows 2,400 out of each utility fund, but Trash cash disbursements cannot be tied to the p15 cash flow statement. Electric does tie: p15 payments 583,864 + 112,738 + capital 129,530 + principal 45,432 + interest 65,045 = 936,609 = 939,009 - 2,400"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[21].amount",
+      "page": 18,
+      "extracted": 124918,
+      "on_page": "Sewer 127,318",
+      "issue": "2,400 transfer split inferred from p14 per-fund transfers; Sewer cash line cannot be tied to the p15 cash flows (p15 Sewer outflows total 119,459)"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[23].amount",
+      "page": 18,
+      "extracted": 124002,
+      "on_page": "Water 126,402",
+      "issue": "2,400 transfer split inferred from p14 per-fund transfers; Water cash line cannot be tied to the p15 cash flows (p15 Water outflows total 135,907)"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[9].fund_type",
+      "page": 17,
+      "extracted": "business-type",
+      "on_page": "Local Receipts: Other 1,298,608",
+      "issue": "broad line mixes business-type utility receipts with governmental local receipts (franchise, occupation, lease, grants, donations, interest, etc.); single fund_type is an approximation (review already set)"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[5].detail_category",
+      "page": 17,
+      "extracted": "homestead/tax credits",
+      "on_page": "State Receipts: Other 13,254",
+      "issue": "printed only as 'Other'; category inferred from equality with Homestead Exemption 5,804 + Property Tax Credit 7,450 (p6); defensible, review already set"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[18].category",
+      "page": 6,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "Grants 23,500",
+      "issue": "grantor not stated; could be federal grants or donations/contributions (review already set)"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[23].category",
+      "page": 13,
+      "extracted": "charges for services/fees",
+      "on_page": "Customer Deposits 4,000 (Operating Revenues)",
+      "issue": "customer deposits are printed as operating revenue; amount as printed but nature is questionable (review already set)"
+    }
   ]
 }
