@@ -1,0 +1,12 @@
+{
+  "stem": "Blue_Creek_Irrigation_District_FY2025",
+  "values_checked": 12,
+  "issues": [
+    {"severity": "warning", "path": "receipts[2].amount", "page": 1, "extracted": 122.69, "on_page": "122.69 (handwritten; last digit could be 0 or 6)", "issue": "ambiguous handwritten digit; 122.69 is the reading that makes the roll-forward tie to 40,903.20"},
+    {"severity": "warning", "path": "missing", "page": 1, "extracted": null, "on_page": "line 12 Local Receipts: scribbled-out handwritten entry", "issue": "crossed-out entry treated as blank; roll-forward ties without it, so treatment looks right"},
+    {"severity": "warning", "path": "disbursements[0].category", "page": 1, "extracted": "utilities", "on_page": "Operating Expenses 53,704.27", "issue": "irrigation district spending fits 'natural resources/conservation' (water and drainage districts) better than 'utilities'"},
+    {"severity": "warning", "path": "receipts[0].fund_type", "page": 1, "extracted": "business-type", "on_page": "Personal and Real Property Taxes 55,608.21", "issue": "district is funded mostly by property tax; treating it as entirely business-type (and entity_type 'public power / utility') is questionable, governmental would also be defensible"},
+    {"severity": "warning", "path": "fiscal_year_end", "page": 1, "extracted": "2024-12-31", "on_page": "2024 AUDIT WAIVER REQUEST (no date)", "issue": "fiscal year end assumed; form is the 2024 waiver while the file is labelled FY2025"},
+    {"severity": "warning", "path": "reported_totals.business-type.receipts", "page": 1, "extracted": 58279.79, "on_page": "line 16 Total Resources Available $0.00 (form not filled)", "issue": "printed totals are $0.00 form artifacts; receipts total computed (marked computed), disbursement total 53,704.27 is the single line, not a printed total"}
+  ]
+}
