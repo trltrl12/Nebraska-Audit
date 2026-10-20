@@ -1,0 +1,62 @@
+{
+ "stem": "Elwood_Public_Schools_FY2025",
+ "values_checked": 327,
+ "issues": [
+  {
+   "severity": "error",
+   "path": "missing",
+   "page": 18,
+   "extracted": "720 Building improvements 50,000 recorded only as expenditure (land and buildings); General Fund other financing lines total -301,764.98",
+   "on_page": "p3 Statement of Activities: Maintenance of plant 304,647.25 vs schedule p18 Total support services - maintenance of plant 354,647.25 (50,000 reclassified); p4 General/Deprec Transfers out 351,764.98 = 250,000 to Depreciation + 49,631.88 + 52,133.10, but labelled Depreciation transfers inside the p15-18 schedule total only 200,000",
+   "issue": "[fixed] The report shows exactly which group the unlabelled 50,000 transfer comes out of (2620-70 maintenance of plant). The rule for transfers hidden in a group of lines says to keep the printed lines and add a contra line (section expenditure, -50,000, department 2620-70, split_from, review) plus an other financing line of -50,000. Neither was added, so General Fund detail spending is 50,000 too high and transfers to the Depreciation Fund are 50,000 too low (200,000 vs 250,000 received on p9). decision_needed already asks about this, but the p3 elimination answers which group it is."
+  },
+  {
+   "severity": "warning",
+   "path": "disbursements[8].category",
+   "page": 5,
+   "extracted": "capital outlay 474,130.98",
+   "on_page": "Capital outlay 474,130.98 = General/Deprec 135,040.29 + Special Building 339,090.69; p12 shows Special Building is 32,600.93 technology + 284,795.35 capital lease payment + 21,694.41 capital lease interest; p3 shows Building Lease 306,489.76 separately",
+   "issue": "The printed line is recorded as printed, but 306,489.76 of it is lease debt service (principal and interest). Debt service makes up most of capital outlay, which the user should know about."
+  },
+  {
+   "severity": "warning",
+   "path": "receipts[0].split_from",
+   "page": 5,
+   "extracted": "Local receipts 2,586,585.48 split into property tax 2,317,431.73, carline 7.16, motor vehicle 268,085.94, fines 520.00, sale of property 540.00, QCPU interest 0.65",
+   "on_page": "p5 prints Local receipts 2,586,585.48 as one line; the split is pieced together from fund schedules p7 (local receipts lines minus 1510/1140 interest, plus 5320 under non-revenue), p12 and p13. The p3 general receipts print a slightly different breakdown (Property 2,317,432.38; Fines and licenses 32,205.73; Other 540.00)",
+   "issue": "The arithmetic is correct (sums to 2,586,585.48 exactly), but no single page prints this line's breakdown, so it is a reconstruction. Defensible but should be noted."
+  },
+  {
+   "severity": "warning",
+   "path": "detail[198..218].detail_category",
+   "page": 21,
+   "extracted": "Activities Fund receipts 67,628.62, all student activity receipts",
+   "on_page": "p10 Activities budget schedule: 1510 Interest 350.53 + 1710 Activity receipts 67,278.09 = 67,628.62; p21 per-account receipts total 67,628.62",
+   "issue": "350.53 of the per-account activity receipts is interest (top-level puts it under Interest). p21 doesn't say which account holds it, so it can't be moved, but detail overstates student activity receipts by 350.53 compared with the top-level lines."
+  },
+  {
+   "severity": "warning",
+   "path": "receipts[7].amount",
+   "page": 5,
+   "extracted": "State receipts 2,262,605.72; Federal receipts 273,543.20",
+   "on_page": "p4 School Nutrition column: State receipts 1,804.59 (= p11 1920 Donations), Federal receipts 73,726.82 (= p11 4210 Federal 73,115.72 + 3150 State reimbursements 611.10)",
+   "issue": "Amounts are as printed, but the statement's State receipts line includes 1,804.59 of donations, and its Federal line includes 611.10 of state reimbursement. The report's own grouping looks off."
+  },
+  {
+   "severity": "warning",
+   "path": "detail[274].category",
+   "page": 13,
+   "extracted": "other / miscellaneous expenditure",
+   "on_page": "4500 890 Other expense 20.00 (QCPU fund)",
+   "issue": "Function code 4500 is facilities acquisition/construction, so capital outlay may fit better than other. The amount is immaterial."
+  },
+  {
+   "severity": "warning",
+   "path": "detail[5].detail_category",
+   "page": 7,
+   "extracted": "fines and forfeitures (1911 Fines and licenses 520.00; 2110 Fines and licenses 31,685.73)",
+   "on_page": "1911 Fines and licenses; 2110 Fines and licenses",
+   "issue": "These lines mix two categories. The rules say to use the dominant category plus a review note naming the mix, and neither detail line (detail[5], detail[6]) has one (receipts[16] County receipts has a review note)."
+  }
+ ]
+}
