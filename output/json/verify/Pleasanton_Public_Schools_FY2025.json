@@ -1,0 +1,21 @@
+{
+  "stem": "Pleasanton_Public_Schools_FY2025",
+  "values_checked": 154,
+  "issues": [
+    {"severity": "warning", "path": "detail[0].schedule", "page": 9,
+     "extracted": "General Fund Components combining (receipts)", "on_page": "Schedule of Receipts... Budget and Actual - General Fund (budget 3,845,000 from p9)",
+     "issue": "schedule name says combining schedule but the amount and budget_final come from the p9 General Fund budget schedule like the following lines; amount itself is correct"},
+    {"severity": "warning", "path": "detail[29].original_label", "page": 12,
+     "extracted": "Interest received (Depreciation Fund)", "on_page": "Interest received",
+     "issue": "fund name appended to printed label; same for detail[30] 'Interest (Employee Benefit Fund)', printed 'Interest' (p13)"},
+    {"severity": "warning", "path": "detail[42].detail_category", "page": 12,
+     "extracted": "not itemized (Capital outlay (Depreciation Fund) 202,124 from p8)", "on_page": "Depreciation Fund p12: Capital outlay 57,924; Vehicle acquisition 144,200",
+     "issue": "the Depreciation Fund schedule prints an object breakdown (could be capital outlay 57,924 + equipment purchases 144,200); not double counted, but less detailed than available"},
+    {"severity": "warning", "path": "detail[44].fund_type", "page": 14,
+     "extracted": "governmental", "on_page": "School Nutrition Fund, reported inside Other Governmental Funds (p4-6)",
+     "issue": "extractor rules list school nutrition among business-type examples; here the report presents it as a governmental fund, so governmental is defensible (applies to detail[44]-[56], receipts[21], disbursements[11])"},
+    {"severity": "warning", "path": "disbursements[10].category", "page": 5,
+     "extracted": "culture/recreation", "on_page": "Community service operation 38,119",
+     "issue": "function guessed (already marked review); school community services could also be support services/other; same for detail[41]"}
+  ]
+}
