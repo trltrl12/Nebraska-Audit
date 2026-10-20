@@ -1,18 +1,12 @@
 {
   "stem": "Ashland_FY2025",
-  "values_checked": 95,
+  "values_checked": 115,
   "issues": [
-    {"severity": "warning", "path": "receipts[7].category", "page": 4,
-     "extracted": "federal grants", "on_page": "Housing rehabilitation program 1,755 (p7 Grant income 1,755; p2 shows it as Public works operating grants)",
-     "issue": "Grant source not printed; federal is an assumption (likely CDBG pass-through, but could be state). Same assumption on detail[8] Grant income."},
-    {"severity": "warning", "path": "receipts[12].category", "page": 6,
-     "extracted": "donations/contributions", "on_page": "Grants and contributions 16,500",
-     "issue": "Label mixes grants and contributions and the source is not stated; if it is a government grant it would be intergovernmental/state aid or federal grants."},
-    {"severity": "warning", "path": "detail[2].detail_category", "page": 7,
-     "extracted": "other state aid", "on_page": "Intergovernmental revenues 582,625",
-     "issue": "Unbroken intergovernmental line; other state aid is a judgment call (could include highway allocation, pro-rate, equalization or county payments)."},
-    {"severity": "warning", "path": "business_type.measure", "page": 6,
-     "extracted": "net position", "on_page": "Net position - beginning 558,284 / end 1,579,659",
-     "issue": "Cash-basis report, where the rules call for measure cash; the p6 statement rolls forward cash-basis net position (cash 2,191,493 less due to other funds 611,834), so net position matches what is printed. This is an assumption the extractor made."}
+    {"severity": "warning", "path": "beginning_cash", "page": 4, "extracted": 4424918, "on_page": "Fund balance - beginning of year 4,424,918", "issue": "governmental beginning/ending_cash are the cash-basis fund balances, not cash: ending 5,296,023 includes Due from other funds 1,872,653 less Due to other funds 1,260,819 (p3); governmental cash and CDs on p3 total 4,684,189. Disclosed in notes; identity reconciles on this measure"},
+    {"severity": "warning", "path": "business_type.ending", "page": 6, "extracted": 1579659, "on_page": "Net position - end of year 1,579,659", "issue": "measure 'cash' but the figure is cash-basis net position (cash 2,095,354 + CDs 96,139 less Due to other funds 611,834, p5). Disclosed in notes"},
+    {"severity": "warning", "path": "receipts[7].category", "page": 4, "extracted": "intergovernmental/state aid", "on_page": "Housing rehabilitation program 1,755 (p7 'Grant income'; p2 operating grants, public works)", "issue": "grant source not printed; housing rehabilitation grants are often federal (CDBG) pass-through. Same for detail[8] 'Grant income' (other state aid). Already marked review"},
+    {"severity": "warning", "path": "receipts[13].category", "page": 6, "extracted": "donations/contributions", "on_page": "Grants and contributions 16,500", "issue": "source not printed; could be a government grant (intergovernmental/federal). Already marked review"},
+    {"severity": "warning", "path": "receipts[8].category", "page": 4, "extracted": "other", "on_page": "Other revenues 687,429 (p2 'Miscellaneous'; p7 'Miscellaneous revenues' 681,369 + Keno fund 'Other' 6,060)", "issue": "nothing on the pages describes it; 'other' is defensible but is 13.2% of governmental receipts (over the 10% review threshold)"},
+    {"severity": "warning", "path": "detail[12].amount", "page": 7, "extracted": 1381667, "on_page": "Public health and safety 1,381,667", "issue": "budgetary actual includes 46,684 General Fund capital lease principal that p4 shows as debt service; Debt Service fund capital lease (59,220 vs 57,652) and interest (161,207 vs 162,775) also differ from p4 by 1,568 in offsetting directions. Printed as is; detail category for that 46,684 is public safety rather than debt service principal"}
   ]
 }
