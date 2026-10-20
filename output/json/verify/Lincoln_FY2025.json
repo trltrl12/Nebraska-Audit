@@ -2,14 +2,29 @@
   "stem": "Lincoln_FY2025",
   "values_checked": 399,
   "issues": [
-    {"severity": "error", "path": "report_discrepancies", "page": 8,
-     "extracted": null, "on_page": "Total Expenditures 51,386,753 vs line items 51,386,754",
-     "issue": "Federal Grants Fund budget schedule: printed total expenditures (detail_totals[5] = 51,386,753) is $1 less than the sum of its printed lines (51,386,754). The cause is the General Government subtotal on p7: 271,463 + 125 + 2,985,922 = 3,257,510, but 3,257,509 is printed. The detail items are transcribed correctly, but this report discrepancy (difference -1, p8) is not recorded in report_discrepancies, unlike the matching General Fund and Street Construction rounding entries."},
-    {"severity": "warning", "path": "receipts[10].category", "page": 4,
-     "extracted": "charges for services/fees", "on_page": "Reimbursement for Services 22,156,615",
-     "issue": "The label says 'Reimbursement' and the rules give reimbursements their own category (reimbursements/refunds). charges for services/fees is defensible because these are payments for services the city provides, but it is a judgment call. The same applies to detail[6] (General, 5,877,792), detail[42] (Street Construction, 5,332) and detail[58] (Federal Grants, 1,062,747), all detail_category 'other charges for services'."},
-    {"severity": "warning", "path": "detail[48].category", "page": 6,
-     "extracted": "capital outlay", "on_page": "Capital Outlay 119,818 (Expenditures -- Streets and Highways)",
-     "issue": "Capital outlay detail lines are categorized inconsistently. The Street Construction line uses category 'capital outlay'. The Federal Grants capital outlay lines (detail[69], [73], [77], [82]) and the nonmajor capital projects lines (detail[132]-[140]) use the function (public safety, streets/highways...). All use detail_category 'not itemized', although capital outlay is an object, so construction/infrastructure or equipment purchases could apply. The amounts are correct."}
+    {
+      "severity": "warning",
+      "path": "report_discrepancies",
+      "page": 8,
+      "extracted": null,
+      "on_page": "Total Expenditures 51,386,753 vs line items 51,386,754",
+      "issue": "[fixed: recorded in report_discrepancies] Federal Grants Fund budget schedule: printed total expenditures (detail_totals[5] = 51,386,753) is $1 less than the sum of its printed lines (51,386,754). The cause is the General Government subtotal on p7: 271,463 + 125 + 2,985,922 = 3,257,510, but 3,257,509 is printed. The detail items are transcribed correctly, but this report discrepancy (difference -1, p8) is not recorded in report_discrepancies, unlike the matching General Fund and Street Construction rounding entries."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[10].category",
+      "page": 4,
+      "extracted": "charges for services/fees",
+      "on_page": "Reimbursement for Services 22,156,615",
+      "issue": "The label says 'Reimbursement' and the rules give reimbursements their own category (reimbursements/refunds). charges for services/fees is defensible because these are payments for services the city provides, but it is a judgment call. The same applies to detail[6] (General, 5,877,792), detail[42] (Street Construction, 5,332) and detail[58] (Federal Grants, 1,062,747), all detail_category 'other charges for services'."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[48].category",
+      "page": 6,
+      "extracted": "capital outlay",
+      "on_page": "Capital Outlay 119,818 (Expenditures -- Streets and Highways)",
+      "issue": "Capital outlay detail lines are categorized inconsistently. The Street Construction line uses category 'capital outlay'. The Federal Grants capital outlay lines (detail[69], [73], [77], [82]) and the nonmajor capital projects lines (detail[132]-[140]) use the function (public safety, streets/highways...). All use detail_category 'not itemized', although capital outlay is an object, so construction/infrastructure or equipment purchases could apply. The amounts are correct."
+    }
   ]
 }

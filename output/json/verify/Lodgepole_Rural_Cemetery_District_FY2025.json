@@ -1,0 +1,18 @@
+{
+  "stem": "Lodgepole_Rural_Cemetery_District_FY2025",
+  "values_checked": 12,
+  "issues": [
+    {"severity": "warning", "path": "beginning_investments", "page": 1,
+     "extracted": 10000.00, "on_page": "line 3 Investments $10,000.00; line 5 Subtotal $18,229.77",
+     "issue": "beginning_cash (18,229.77) and ending_cash (51,903.10) already include investments, yet beginning_investments/ending_investments (10,418.15) are also filled. Downstream code that adds cash + investments would double count. Also, beginning_cash is printed as-is on line 5, so its 'computed' tag isn't needed"},
+    {"severity": "warning", "path": "receipts[2].original_label", "page": 1,
+     "extracted": "Local Receipts -- (second)", "on_page": "Local Receipts -- (line 14)",
+     "issue": "'(second)' isn't printed; label differs from the page"},
+    {"severity": "warning", "path": "receipts", "page": 1,
+     "extracted": "all 3 lines (36,773.33) category other", "on_page": "Local Receipts 2,500.00; Local Receipts -- 33,750.00; Local Receipts -- 523.33 (descriptions blank)",
+     "issue": "100% of receipts are in 'other' because the form gives no descriptions; already marked review. 523.33 may be interest, and 33,750.00 may be a county tax distribution"},
+    {"severity": "warning", "path": "fiscal_year_end", "page": 1,
+     "extracted": "2025-12-31", "on_page": "not printed",
+     "issue": "fiscal year end is assumed, and the notes don't say so"}
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "stem": "Lodgepole_Housing_Agency_-_Valley_View_Apartments_FY2025",
+  "values_checked": 11,
+  "issues": [
+    {"severity": "warning", "path": "fiscal_year_end", "page": 1,
+     "extracted": "2025-12-31", "on_page": "not printed (2025 Audit Waiver Request)",
+     "issue": "fiscal year end is assumed, and the notes don't say so"},
+    {"severity": "warning", "path": "receipts[0].category", "page": 1,
+     "extracted": "property tax", "on_page": "Personal and Real Property Taxes $20,205.15",
+     "issue": "this is a pre-printed form line. For an apartment housing authority, 20,205.15 is more likely tenant rent than property tax. It was kept as printed but not marked review"},
+    {"severity": "warning", "path": "reported_totals.business-type", "page": 1,
+     "extracted": null, "on_page": "Total Disbursements $28,129.26 (includes Transfers Out $5,160.78)",
+     "issue": "the printed disbursements total could be recorded with includes ['transfers_net'] instead of null"},
+    {"severity": "warning", "path": "business_type.transfers_net", "page": 1,
+     "extracted": 2259.22, "on_page": "Transfers In $7,420.00; Transfers Out $5,160.78; inter-fund detail 'See attached' (not in trimmed PDF)",
+     "issue": "transfers in and out on a single 'Total of All Funds' column don't net to zero, so they increase the ending balance; the explanation page isn't in the trimmed PDF. Arithmetic checks out (8,310.85 + 20,642.25 - 22,968.48 + 2,259.22 = 8,243.84)"}
+  ]
+}
