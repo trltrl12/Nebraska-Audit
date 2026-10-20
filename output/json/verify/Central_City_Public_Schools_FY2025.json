@@ -1,46 +1,15 @@
 {
   "stem": "Central_City_Public_Schools_FY2025",
-  "values_checked": 158,
+  "values_checked": 208,
   "issues": [
-    {
-      "severity": "warning",
-      "path": "disbursements[21].category",
-      "page": 9,
-      "extracted": "other",
-      "on_page": "Other 530 (Nutrition Fund, Operating disbursements)",
-      "issue": "[fixed: now food service] Nutrition Fund spending is listed by object only; the rule is to use the fund's function (food service), as done for the other Nutrition Fund lines. 'other' is not a last resort here because the function is known"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[43]",
-      "page": 10,
-      "extracted": "4000 Facilities -450,000 (other financing, split_from)",
-      "on_page": "4000 Facilities 450,000 (disbursements); eliminated (450,000) against Depreciation Fund 'Transfer from other funds' in Eliminations column p7",
-      "issue": "Whole printed expenditure line reclassified as an interfund transfer, based on the p7 elimination. Defensible, but nothing is actually split, so split_from describes a reclassification rather than a printed breakdown"
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[15].category",
-      "page": 7,
-      "extracted": "donations/contributions",
-      "on_page": "Grants and donations 75,361 (General 33,361 + Building 42,000)",
-      "issue": "Mixed label. The 42,000 Building Fund portion appears as capital grants and contributions on p3 and may come from a government (intergovernmental). Already marked review"
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[11].category",
-      "page": 7,
-      "extracted": "instruction",
-      "on_page": "State categorical programs 171,814",
-      "issue": "Function not stated; instruction is a guess (already marked review)"
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[12].category",
-      "page": 7,
-      "extracted": "instruction",
-      "on_page": "Federal programs 510,851",
-      "issue": "Function not stated; instruction is a guess (already marked review)"
-    }
+    {"severity": "warning", "path": "receipts[17].review", "page": 6,
+     "extracted": "General 9,084 + Depreciation 10,604", "on_page": "General Fund Other 9,104 (p6); Depreciation Other 10,604; total 19,708",
+     "issue": "Amount 19,708 is correct, but the review note's breakdown is wrong: p6 prints General Fund 'Other' as 9,104 (= p10 '1990 Other' 9,084 + '1910 Rental of school equipment' 20). 9,084 + 10,604 = 19,688, not 19,708. Only the note text is wrong."},
+    {"severity": "warning", "path": "detail[43]", "page": 7,
+     "extracted": "4000 Facilities -450,000 as other financing (split_from)", "on_page": "Facilities 450,000 disbursement in General Fund (p6/p10), eliminated (450,000) against Depreciation 'Transfer from other funds' in the Eliminations column (p7)",
+     "issue": "Extractor's assumption: the whole printed disbursement line is reclassified as an interfund transfer, using split_from even though nothing is split. This matches the elimination on p7 and is already marked review. detail_totals[1] (13,132,507, includes other financing) only ties if the validator adds the absolute values of the signed -450,000 and -65,000 lines."},
+    {"severity": "warning", "path": "detail[11].category", "page": 10,
+     "extracted": "donations/contributions", "on_page": "1920 Grants and donations 33,361",
+     "issue": "On p2 the auditor counts this 33,361 in Instruction operating grants and contributions (1,613,005 + 31,727 + 33,361 + 841 = 1,678,934), so it may include grants from governments. The category is defensible and already marked review. The same applies to receipts[15] (75,361)."}
   ]
 }
