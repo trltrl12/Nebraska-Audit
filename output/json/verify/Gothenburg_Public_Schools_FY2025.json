@@ -1,0 +1,31 @@
+{
+  "stem": "Gothenburg_Public_Schools_FY2025",
+  "values_checked": 455,
+  "issues": [
+    {"severity": "warning", "path": "detail[69]", "page": 12,
+     "extracted": {"original_label": "Interlocal agreement", "amount": 95000, "detail_category": "grants/payments to other entities"},
+     "on_page": "Support services - pupils / Other support services: Interlocal agreement 95,000 (prior year 100,000)",
+     "issue": "Exactly matches the 95,000 'Transfer from General Fund' received by the Cooperative Fund (p25). The reclassification column on p5 removes the 95,000 from Regular instruction, but the Regular instruction exhibit lines (p11) have no 95,000 line, so the hidden transfer is probably this Support services - pupils line. Following the p5 placement, the extraction puts the contra (-95,000) under Regular instruction (detail[46]), which leaves 95,000 counted as both a payment to another entity and a transfer at line level. Totals are not affected. A person should decide which department the contra line belongs under."},
+    {"severity": "warning", "path": "detail[122]", "page": 14,
+     "extracted": 250105, "on_page": "Maintenance of plant: Purchased services 250,105 (prior year 66,251)",
+     "issue": "Probably contains the 250,000 hidden transfer to the Depreciation Fund (p22). The extraction correctly keeps the printed line and adds a group-level contra line (detail[135]) as the rules require; this note is for the reviewer."},
+    {"severity": "warning", "path": "disbursements[1].category", "page": 4,
+     "extracted": "instruction", "on_page": "Poverty programs 525,515, printed under 'Support services:' (p4); Statement of Activities p2 includes it in Support services 4,400,370",
+     "issue": "The report itself counts this line under Support services, so classing it as instruction means the function split will not tie to the Statement of Activities. Defensible either way; already marked review."},
+    {"severity": "warning", "path": "disbursements[2].category", "page": 4,
+     "extracted": "instruction", "on_page": "Special education instruction programs 1,706,080, printed under 'Support services:' (p4); included in Support services 4,400,370 on p2",
+     "issue": "Same as Poverty programs: the report counts it under Support services. Judgment call; already marked review."},
+    {"severity": "warning", "path": "disbursements[19]", "page": 5,
+     "extracted": "Debt service 802,090 split into principal 685,000 + interest 117,090",
+     "on_page": "Debt service 802,090 (Total Governmental Funds, p5); fund schedules print Bond principal 685,000, interest 34,361, misc 400 (p20), General interest 36,954 (p16), QCPUF interest 45,375 (p26)",
+     "issue": "The arithmetic is right (685,000 + 36,954 + 34,361 + 400 + 45,375 = 802,090). The breakdown comes from adding up per-fund schedules, not from a breakdown printed for this line, which is borderline under the split_from rule. The Bond 'Miscellaneous' 400 is treated as interest/fees, which is an assumption."},
+    {"severity": "warning", "path": "receipts[7]", "page": 4,
+     "extracted": {"category": "fines and forfeitures", "original_label": "Fines and licenses", "amount": 90632},
+     "on_page": "Fines and licenses 90,632 = General Fund 2110 Fines and licenses 87,593 + 1911 Local license fees 3,039 (p9)",
+     "issue": "The line mixes fines and license fees. The dominant category is correct, but the rules call for a review note naming the mix, and there is none."},
+    {"severity": "warning", "path": "receipts[17]", "page": 5,
+     "extracted": {"category": "other", "amount": 124040},
+     "on_page": "Other 124,040 = General 45,490 (Insurance adjustments 36,913, Other non-revenue 3,315, Other local 5,262) + Depreciation 3,550 + Cooperative Other local receipts 75,000",
+     "issue": "The fund schedules show 36,913 of this line is insurance adjustments (reimbursements/refunds). Keeping the printed 'Other' line whole with a review note is defensible, but the reviewer should know part of it has a specific category."}
+  ]
+}

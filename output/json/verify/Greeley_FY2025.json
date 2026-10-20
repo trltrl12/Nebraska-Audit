@@ -1,0 +1,27 @@
+{
+  "stem": "Greeley_FY2025",
+  "values_checked": 110,
+  "issues": [
+    {"severity": "error", "path": "reported_totals.business-type.disbursements.source_page", "page": 2,
+     "extracted": 3, "on_page": 2,
+     "issue": "290,665 (Total Business-Type Activities disbursements) is printed on trimmed p2 (Statement of Activities, report p15); p3 shows only Total Primary Government 780,538. Cited page is wrong."},
+    {"severity": "warning", "path": "disbursements[2].category", "page": 7,
+     "extracted": "health/welfare", "on_page": "Sanitation 40,121",
+     "issue": "Sanitation (refuse) is listed under `utilities` in the disbursement category rules, and the same line is categorised `utilities` in detail[19]. Categories are inconsistent within the report."},
+    {"severity": "warning", "path": "detail[19].fund_type", "page": 15,
+     "extracted": "business-type", "on_page": "Sanitation 40,121 (under Business-Type Activities on budget schedule)",
+     "issue": "The budget schedule prints Sanitation under Business-Type Activities, but the governmental funds statement (p7) and Statement of Activities (p2) show the same 40,121 in the General Fund / governmental activities. It probably belongs to governmental."},
+    {"severity": "warning", "path": "detail[9].fund_type", "page": 14,
+     "extracted": "governmental", "on_page": "Other (Local Receipts) 479,810",
+     "issue": "This line is on the Total Primary Government schedule and mixes governmental and business-type receipts (utility charges, enterprise sale of assets etc.). Tagging it all governmental overstates governmental detail. Already marked review."},
+    {"severity": "warning", "path": "detail[10]", "page": 15,
+     "extracted": "General Government 119,201 (split_from 363,551)", "on_page": "General Government 363,551",
+     "issue": "The schedule doesn't print the hidden-transfer split. It is derived from statement p7 (119,201) and p8 (General Fund transfers out 244,350), and the arithmetic holds (119,201 + 244,350 = 363,551). Defensible under the hidden-transfer rule but is an extractor assumption; also applies to detail[11] (-244,350)."},
+    {"severity": "warning", "path": "receipts[15].category", "page": 3,
+     "extracted": "other taxes", "on_page": "HGRPPD/Black Hills Energy 57,921",
+     "issue": "Combined line: the public power district payment fits `other taxes` (in lieu), but the Black Hills Energy (gas utility) portion is probably a franchise fee (`occupation/franchise tax`). The report has no breakdown."},
+    {"severity": "warning", "path": "missing", "page": null,
+     "extracted": null, "on_page": "Report pp22-23 (Proprietary Statement of Net Position: assets/current liabilities) and p28 (proprietary cash flows: capital/investing, beginning/ending cash) are not in the trimmed PDF",
+     "issue": "Trimmed PDF skips these pages (trimmed p8 = report p21, p9 = report p24; p12 = report p27, p13 = report p29). No JSON field strictly needs them (balance_sheet uses the government-wide statement; basis cash so proprietary null), but the trim is incomplete."}
+  ]
+}
