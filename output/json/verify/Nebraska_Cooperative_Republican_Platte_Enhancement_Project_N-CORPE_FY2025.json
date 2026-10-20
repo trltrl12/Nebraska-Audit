@@ -2,29 +2,53 @@
   "stem": "Nebraska_Cooperative_Republican_Platte_Enhancement_Project_N-CORPE_FY2025",
   "values_checked": 93,
   "issues": [
-    {"severity": "error", "path": "other_financing", "page": 5,
-     "extracted": -1291970.30,
-     "on_page": "Other financing sources (uses): Capital contributions 5,830,000.00; Debt service (7,129,570.30); Sale of assets 7,600.00; Total (1,291,970.30)",
-     "issue": "Debt service (7,129,570.30) is a bond principal and interest payment, not a financing source. It is printed below Total expenditures, so under the outside_printed_total rule (loan payments printed under other receipts/disbursements) it should be a disbursements item (debt service principal, review: combined principal and interest) with outside_printed_total: true. other_financing would then be capital contributions + sale of assets = 5,837,600.00 (computed). As recorded, 7.13M of debt service is missing from spending. The page does not split the line. Derived from p1/p2, not printed: interest paid is about 1,296,430.46 + the drop in accrued interest 3,139.84 = 1,299,570.30, which leaves 5,830,000.00 principal. That is not a printed split, so it must not be used as split_from."},
-    {"severity": "error", "path": "receipts[4].category", "page": 6,
-     "extracted": "other",
-     "on_page": "Other 379,850.65 (p5) = Utilities reimbursement 287,294.52 + Miscellaneous 74,969.73 (p6) + Dividends 17,586.40 (p7), exact to the cent",
-     "issue": "The review note says the location schedule lines do not tie to this line, but these three schedule lines add up exactly to 379,850.65. Utilities reimbursement is 75.6% of it, so under the 'more than half' rule the line is reimbursements/refunds (review naming the mix with miscellaneous and dividends), not other. A split_from split is not allowed because the page does not print a breakdown of this line."},
-    {"severity": "warning", "path": "disbursements[].category", "page": 5,
-     "extracted": "general government (18 of 20 lines)",
-     "on_page": "Current expenditures listed by object only (Augmentation infrastructure, Labor expenses, Utilities...); p2 calls the function 'General Government'",
-     "issue": "The p5 statement lists spending by object with no function, but the lines have no 'review: listed by object'. N-CORPE is a four-NRD streamflow-augmentation project, so natural resources/conservation is arguably the better function than general government. The same applies to the general government detail[] expenditure lines."},
-    {"severity": "warning", "path": "detail[38].category", "page": 7,
-     "extracted": "general government / miscellaneous expenditure, -34931.65",
-     "on_page": "Interest income (34,931.65)",
-     "issue": "This is investment income, netted on the schedule against expenditures. Recording it as a negative expenditure ties the printed 'Expenditures net of interest income' 3,732,283.83, which is defensible, but the category does not match the label. The same applies to detail[39] Dividends (17,586.40). Together they equal the p2 unrestricted investment earnings 52,518.05."},
-    {"severity": "warning", "path": "detail[32].original_label", "page": 7,
-     "extracted": "Augmentation Misc. expense (label partly cut off: 'Augi Misc. expense')",
-     "on_page": "Augi Misc. expense 295,694.64",
-     "issue": "original_label is not the printed text; it adds an interpretation and a parenthetical. department 'Augmentation' is not a printed heading either: the row sits right under the General Expenditures subtotal. The amount is correct and matches p5 Augmentation infrastructure."},
-    {"severity": "warning", "path": "decision_needed", "page": 2,
-     "extracted": "all lines governmental; business_type null",
-     "on_page": "Statement of Activities: Business-type activities - Land operations, expenses 771,589.97, charges for services 1,419,211.44, ending net position 2,317,807.17",
-     "issue": "The report itself treats land operations as business-type. The 771,589.97 equals the p6 Land expenditures subtotal, and 1,419,211.44 equals the first eight p6 revenue lines (rents through Grant Revenue). The fund statements (pp4-5) show only governmental funds, so recording everything once as governmental is defensible and avoids double counting. Still, whether the land-operations lines should be business-type is a classification question for a person, and decision_needed[] does not have it."}
+    {
+      "severity": "error",
+      "path": "other_financing",
+      "page": 5,
+      "extracted": -1291970.3,
+      "on_page": "Other financing sources (uses): Capital contributions 5,830,000.00; Debt service (7,129,570.30); Sale of assets 7,600.00; Total (1,291,970.30)",
+      "issue": "[fixed] Debt service (7,129,570.30) is a bond principal and interest payment, not a financing source. It is printed below Total expenditures, so under the outside_printed_total rule (loan payments printed under other receipts/disbursements) it should be a disbursements item (debt service principal, review: combined principal and interest) with outside_printed_total: true. other_financing would then be capital contributions + sale of assets = 5,837,600.00 (computed). As recorded, 7.13M of debt service is missing from spending. The page does not split the line. Derived from p1/p2, not printed: interest paid is about 1,296,430.46 + the drop in accrued interest 3,139.84 = 1,299,570.30, which leaves 5,830,000.00 principal. That is not a printed split, so it must not be used as split_from."
+    },
+    {
+      "severity": "error",
+      "path": "receipts[4].category",
+      "page": 6,
+      "extracted": "other",
+      "on_page": "Other 379,850.65 (p5) = Utilities reimbursement 287,294.52 + Miscellaneous 74,969.73 (p6) + Dividends 17,586.40 (p7), exact to the cent",
+      "issue": "[fixed] The review note says the location schedule lines do not tie to this line, but these three schedule lines add up exactly to 379,850.65. Utilities reimbursement is 75.6% of it, so under the 'more than half' rule the line is reimbursements/refunds (review naming the mix with miscellaneous and dividends), not other. A split_from split is not allowed because the page does not print a breakdown of this line."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[].category",
+      "page": 5,
+      "extracted": "general government (18 of 20 lines)",
+      "on_page": "Current expenditures listed by object only (Augmentation infrastructure, Labor expenses, Utilities...); p2 calls the function 'General Government'",
+      "issue": "The p5 statement lists spending by object with no function, but the lines have no 'review: listed by object'. N-CORPE is a four-NRD streamflow-augmentation project, so natural resources/conservation is arguably the better function than general government. The same applies to the general government detail[] expenditure lines."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[38].category",
+      "page": 7,
+      "extracted": "general government / miscellaneous expenditure, -34931.65",
+      "on_page": "Interest income (34,931.65)",
+      "issue": "This is investment income, netted on the schedule against expenditures. Recording it as a negative expenditure ties the printed 'Expenditures net of interest income' 3,732,283.83, which is defensible, but the category does not match the label. The same applies to detail[39] Dividends (17,586.40). Together they equal the p2 unrestricted investment earnings 52,518.05."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[32].original_label",
+      "page": 7,
+      "extracted": "Augmentation Misc. expense (label partly cut off: 'Augi Misc. expense')",
+      "on_page": "Augi Misc. expense 295,694.64",
+      "issue": "original_label is not the printed text; it adds an interpretation and a parenthetical. department 'Augmentation' is not a printed heading either: the row sits right under the General Expenditures subtotal. The amount is correct and matches p5 Augmentation infrastructure."
+    },
+    {
+      "severity": "warning",
+      "path": "decision_needed",
+      "page": 2,
+      "extracted": "all lines governmental; business_type null",
+      "on_page": "Statement of Activities: Business-type activities - Land operations, expenses 771,589.97, charges for services 1,419,211.44, ending net position 2,317,807.17",
+      "issue": "The report itself treats land operations as business-type. The 771,589.97 equals the p6 Land expenditures subtotal, and 1,419,211.44 equals the first eight p6 revenue lines (rents through Grant Revenue). The fund statements (pp4-5) show only governmental funds, so recording everything once as governmental is defensible and avoids double counting. Still, whether the land-operations lines should be business-type is a classification question for a person, and decision_needed[] does not have it."
+    }
   ]
 }
