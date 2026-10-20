@@ -1,0 +1,27 @@
+{
+  "stem": "Doniphan_FY2025",
+  "values_checked": 157,
+  "issues": [
+    {"severity": "warning", "path": "receipts[9].category", "page": 5,
+     "extracted": "occupation/franchise tax", "on_page": "Franchises and leases 97,923 (p10: Public power lease 93,991 + Franchise fees 3,932)",
+     "issue": "Most of this line (93,991) is a public power lease payment, which could be read as rentals (charges for services/fees) rather than franchise tax. The Statement of Activities (p3) labels it 'Franchise and occupation tax', so the category is defensible. The line already carries a review flag."},
+    {"severity": "warning", "path": "detail[3].detail_category", "page": 10,
+     "extracted": "occupation/franchise tax", "on_page": "Public power lease 93,991",
+     "issue": "A lease payment from the public power district. Could be 'rentals'. Treating it as franchise-type revenue is a common Nebraska practice and matches p3."},
+    {"severity": "warning", "path": "disbursements[8]", "page": 8,
+     "extracted": "utilities (no review flag)", "on_page": "Personnel services / Supplies / Utilities / Operation and maintenance / Other disbursements (proprietary funds, listed by object)",
+     "issue": "The business-type spending lines on p8 are listed by object, not by function. The extractor rules ask for review: 'listed by object' on these lines (disbursements[8], [9], [10], [11], [14]), but none has it. The 'utilities' function itself is correct."},
+    {"severity": "warning", "path": "disbursements[13].category", "page": 8,
+     "extracted": "debt service principal", "on_page": "Debt 66,178",
+     "issue": "The page does not split this line into principal and interest. All of it went to principal, as the rules require for combined debt lines, and the line is flagged for review."},
+    {"severity": "warning", "path": "detail[29].category", "page": 12,
+     "extracted": "intergovernmental/state aid / other state aid", "on_page": "Motor vehicle sales tax collections 25,507",
+     "issue": "Could be motor vehicle tax or sales tax. The basic statement (p5) puts it inside Intergovernmental, so 'state aid' is defensible. The line is flagged for review."},
+    {"severity": "warning", "path": "detail[66].detail_category", "page": 18,
+     "extracted": "grants/payments to other entities", "on_page": "Deposits refunded 12,800",
+     "issue": "These are refunds of hall rental deposits, not grants or payments to other entities. No category fits well; 'miscellaneous expenditure' or a refund-type category might suit better. The matching receipt 'Charges for deposit receipts' (detail[65], 'rentals') holds refundable deposits rather than rental income."},
+    {"severity": "warning", "path": "detail[20].detail_category", "page": 10,
+     "extracted": "tax refunds/treasurer fees", "on_page": "Sales tax 1,078",
+     "issue": "Sales tax paid on purchases is not a tax refund or a treasurer fee. It could be 'miscellaneous expenditure'. The line is flagged for review."}
+  ]
+}
