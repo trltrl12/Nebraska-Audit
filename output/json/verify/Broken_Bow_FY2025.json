@@ -2,41 +2,101 @@
   "stem": "Broken_Bow_FY2025",
   "values_checked": 156,
   "issues": [
-    {"severity": "error", "path": "disbursements[17].category", "page": 4,
-     "extracted": "general government", "on_page": "Salaries 628,311.16 = General 214,415.92 + Street 413,895.24",
-     "issue": "listed by object: the rule is to use the function of the fund, and the dominant fund here is Street (66%), so the category should be streets/highways"},
-    {"severity": "error", "path": "disbursements[16].category", "page": 4,
-     "extracted": "general government", "on_page": "Repairs and maintenance 226,635.17 = General 43,500.44 + Street 183,134.73",
-     "issue": "listed by object: the dominant fund is Street (81%), so the category should be streets/highways"},
-    {"severity": "error", "path": "detail[26].fund_type", "page": 9,
-     "extracted": "governmental", "on_page": "Transfers out 776,561.23; p7 shows the whole amount coming out of enterprise funds (Electric 651,561.31, Water 64,999.92, Sewer 60,000.00); governmental funds show no transfers out (p4)",
-     "issue": "wrong fund type: should be business-type"},
-    {"severity": "warning", "path": "detail[7].fund_type", "page": 9,
-     "extracted": "governmental", "on_page": "Interest 360,992.79 = governmental 35,690.20 + business-type 325,302.59 (p2)",
-     "issue": "mixed line, 90% business-type; the dominant fund type is business-type"},
-    {"severity": "warning", "path": "detail[11].fund_type", "page": 9,
-     "extracted": "governmental", "on_page": "Transfers in 776,561.23 = General 576,561.23 (p4) + Billing 200,000.00 (p7)",
-     "issue": "mixed line; 200,000 is a business-type transfer"},
-    {"severity": "warning", "path": "detail[0..3].split_from", "page": 9,
-     "extracted": "property 1,191,565.17 / sales 1,852,465.06 / motor vehicle 89,838.11 / franchise 38,193.36", "on_page": "Taxes and special assessments 3,172,061.70 (all funds); p2 general revenues tax lines add up to it exactly",
-     "issue": "the split uses Statement of Activities general revenues (allowed by the combined-tax rule, and the sum ties exactly), but p2 is a different statement, not a breakdown of this budget line. The label says 'special assessments' and none are split out. Budget 2,952,602.00 is dropped (budget_final null on all four)"},
-    {"severity": "warning", "path": "detail_totals[1]", "page": 9,
-     "extracted": 23185470.34, "on_page": "Total expenditures 23,185,470.34 includes Transfers out 776,561.23 as a positive addend",
-     "issue": "detail[26] is stored as -776,561.23 (signed). The items only add up to the printed total if the transfer counts as +776,561.23; signed items sum to 21,632,347.88"},
-    {"severity": "warning", "path": "detail[10].category", "page": 9,
-     "extracted": "other", "on_page": "Other 556,794.87 = Keno 199,327.82 + Other receipts 357,467.05 (p2)",
-     "issue": "36% of this line is keno (keno/lottery). It isn't printed as a breakdown of this line, so it can't be split, but the category mixes in keno"},
-    {"severity": "warning", "path": "disbursements[8].category", "page": 4,
-     "extracted": "economic development", "on_page": "Keno 168,969.18 (General fund)",
-     "issue": "the function of keno spending isn't stated; the category is a guess"},
-    {"severity": "warning", "path": "disbursements[22].category", "page": 4,
-     "extracted": "other", "on_page": "Miscellaneous 328,959.90 = General 319,432.79 + Street 9,527.11",
-     "issue": "listed by object, mostly General fund; the listed-by-object rule would give general government"},
-    {"severity": "warning", "path": "receipts[10].category", "page": 4,
-     "extracted": "donations/contributions", "on_page": "Grants and donations 34,202.96 (p2 shows it as Capital Grants and Contributions, General Government)",
-     "issue": "grants and donations are combined; part may be government grants"},
-    {"severity": "warning", "path": "ending_cash", "page": 3,
-     "extracted": 658810.90, "on_page": "Cash (including cash equivalents) 658,810.90; Cash held by County Treasurer 57,622.74; Certificates of deposit 3,714,289.43 (Total Governmental Funds)",
-     "issue": "ending_cash leaves out county treasurer cash and CDs, and ending_investments is null even though CDs are reported separately"}
+    {
+      "severity": "warning",
+      "path": "disbursements[17].category",
+      "page": 4,
+      "extracted": "general government",
+      "on_page": "Salaries 628,311.16 = General 214,415.92 + Street 413,895.24",
+      "issue": "[fixed: streets/highways] listed by object: the rule is to use the function of the fund, and the dominant fund here is Street (66%), so the category should be streets/highways"
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[16].category",
+      "page": 4,
+      "extracted": "general government",
+      "on_page": "Repairs and maintenance 226,635.17 = General 43,500.44 + Street 183,134.73",
+      "issue": "[fixed: streets/highways] listed by object: the dominant fund is Street (81%), so the category should be streets/highways"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[26].fund_type",
+      "page": 9,
+      "extracted": "governmental",
+      "on_page": "Transfers out 776,561.23; p7 shows the whole amount coming out of enterprise funds (Electric 651,561.31, Water 64,999.92, Sewer 60,000.00); governmental funds show no transfers out (p4)",
+      "issue": "[fixed: business-type] wrong fund type: should be business-type"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[7].fund_type",
+      "page": 9,
+      "extracted": "governmental",
+      "on_page": "Interest 360,992.79 = governmental 35,690.20 + business-type 325,302.59 (p2)",
+      "issue": "mixed line, 90% business-type; the dominant fund type is business-type"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[11].fund_type",
+      "page": 9,
+      "extracted": "governmental",
+      "on_page": "Transfers in 776,561.23 = General 576,561.23 (p4) + Billing 200,000.00 (p7)",
+      "issue": "mixed line; 200,000 is a business-type transfer"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[0..3].split_from",
+      "page": 9,
+      "extracted": "property 1,191,565.17 / sales 1,852,465.06 / motor vehicle 89,838.11 / franchise 38,193.36",
+      "on_page": "Taxes and special assessments 3,172,061.70 (all funds); p2 general revenues tax lines add up to it exactly",
+      "issue": "the split uses Statement of Activities general revenues (allowed by the combined-tax rule, and the sum ties exactly), but p2 is a different statement, not a breakdown of this budget line. The label says 'special assessments' and none are split out. Budget 2,952,602.00 is dropped (budget_final null on all four)"
+    },
+    {
+      "severity": "warning",
+      "path": "detail_totals[1]",
+      "page": 9,
+      "extracted": 23185470.34,
+      "on_page": "Total expenditures 23,185,470.34 includes Transfers out 776,561.23 as a positive addend",
+      "issue": "detail[26] is stored as -776,561.23 (signed). The items only add up to the printed total if the transfer counts as +776,561.23; signed items sum to 21,632,347.88"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[10].category",
+      "page": 9,
+      "extracted": "other",
+      "on_page": "Other 556,794.87 = Keno 199,327.82 + Other receipts 357,467.05 (p2)",
+      "issue": "36% of this line is keno (keno/lottery). It isn't printed as a breakdown of this line, so it can't be split, but the category mixes in keno"
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[8].category",
+      "page": 4,
+      "extracted": "economic development",
+      "on_page": "Keno 168,969.18 (General fund)",
+      "issue": "the function of keno spending isn't stated; the category is a guess"
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[22].category",
+      "page": 4,
+      "extracted": "other",
+      "on_page": "Miscellaneous 328,959.90 = General 319,432.79 + Street 9,527.11",
+      "issue": "listed by object, mostly General fund; the listed-by-object rule would give general government"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[10].category",
+      "page": 4,
+      "extracted": "donations/contributions",
+      "on_page": "Grants and donations 34,202.96 (p2 shows it as Capital Grants and Contributions, General Government)",
+      "issue": "grants and donations are combined; part may be government grants"
+    },
+    {
+      "severity": "warning",
+      "path": "ending_cash",
+      "page": 3,
+      "extracted": 658810.9,
+      "on_page": "Cash (including cash equivalents) 658,810.90; Cash held by County Treasurer 57,622.74; Certificates of deposit 3,714,289.43 (Total Governmental Funds)",
+      "issue": "ending_cash leaves out county treasurer cash and CDs, and ending_investments is null even though CDs are reported separately"
+    }
   ]
 }
