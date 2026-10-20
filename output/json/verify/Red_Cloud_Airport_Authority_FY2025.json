@@ -1,0 +1,15 @@
+{
+  "stem": "Red_Cloud_Airport_Authority_FY2025",
+  "values_checked": 39,
+  "issues": [
+    {"severity": "warning", "path": "disbursements[7].category", "page": 2,
+     "extracted": "utilities", "on_page": "Utilities 6,359",
+     "issue": "The 'utilities' function means running a water/sewer/electric/gas/refuse utility. This line is the airport's own utility bills (detail_category utilities (power, gas, phone) is right), so the function should match the airport's other operating lines rather than 'utilities'. Same for detail[10].category."},
+    {"severity": "warning", "path": "disbursements", "page": 2,
+     "extracted": "general government / other / utilities mixed", "on_page": "single airport operating schedule",
+     "issue": "All eight lines are airport operating costs, but they're split across three functions (general government for bookkeeping, insurance, office and registration; other for fuel, maintenance and the irrigation assessment; utilities for utility bills). There's no airport function, so one consistent function for the whole schedule would be more defensible. This is a judgment call."},
+    {"severity": "warning", "path": "detail[7].review", "page": 2,
+     "extracted": "category other, no review", "on_page": "Maintenance and repairs 8,651",
+     "issue": "Detail line uses function category 'other' without a review flag. The matching disbursements[4] line has one."}
+  ]
+}
