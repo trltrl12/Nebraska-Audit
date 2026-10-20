@@ -1,0 +1,24 @@
+{
+  "stem": "Papillion_Rural_Fire_Protection_District_FY2025",
+  "values_checked": 71,
+  "issues": [
+    {"severity": "warning", "path": "report_discrepancies", "page": 3,
+     "extracted": null, "on_page": "Total Governmental Funds: Restricted for debt service 877,175; Unassigned 5,329,920; Total fund balance 6,207,125",
+     "issue": "The governmental funds balance sheet doesn't add up: 877,175 + 5,329,920 = 6,207,095, but the total printed is 6,207,125. The Debt Service column prints 877,205. Mentioned only in notes, not in report_discrepancies. No extracted figure is affected, since balance_sheet uses p1."},
+    {"severity": "warning", "path": "report_discrepancies", "page": 6,
+     "extracted": null, "on_page": "Fund balances beginning 801,855; changes (54,391); end of year 747,494",
+     "issue": "The Debt Service budgetary schedule doesn't roll forward: 801,855 - 54,391 = 747,464, but 747,494 is printed (off by 30, the transfer amount). Not recorded in report_discrepancies or notes. The fund balance on this page isn't extracted."},
+    {"severity": "warning", "path": "reported_totals.governmental.receipts", "page": 2,
+     "extracted": 6438717, "on_page": "Statement of Activities: Contract revenue 365,366, Total general revenues 6,438,716",
+     "issue": "The report's own rounding difference of 1 between the Statement of Activities (p2) and the fund statement (p4: 365,367 / 6,438,717). Mentioned in notes only, not in report_discrepancies."},
+    {"severity": "warning", "path": "receipts[1].category", "page": 4,
+     "extracted": "other taxes", "on_page": "Other taxes 10,817",
+     "issue": "Nothing in the trimmed PDF says what this is. For a fire district it may be motor vehicle pro-rate or in-lieu taxes (state aid). Defensible, and already marked review. The detail lines (detail[1], [14], [20]) are treated the same way."},
+    {"severity": "warning", "path": "balance_sheet.liabilities[0].category", "page": 1,
+     "extracted": "accounts payable", "on_page": "Payroll taxes payable 421",
+     "issue": "Payroll taxes payable could be counted as accrued liabilities rather than accounts payable. Judgment call."},
+    {"severity": "warning", "path": "detail[27].detail_category", "page": 6,
+     "extracted": "equipment purchases", "on_page": "Capital outlay 182,637",
+     "issue": "The object isn't printed. 'not itemized' might fit better than assuming equipment. Already marked review."}
+  ]
+}
