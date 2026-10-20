@@ -1,0 +1,25 @@
+{
+  "stem": "Gering_FY2025",
+  "values_checked": 165,
+  "issues": [
+    {"severity": "warning", "path": "decision_needed", "page": 9,
+     "extracted": {"business_type.other_financing": 1274423, "disbursements[7] Capital outlay": 2450208},
+     "on_page": "Water Fund Capital Contribution 1,244,423 (p9); p10 reconciliation: 'Transfers in of capital assets from governmental activities 1,244,423'; Special Projects Fund capital outlay 1,244,423 (p19)",
+     "issue": "The Water Fund capital contribution 1,244,423 is a transfer of capital assets from governmental activities (p10 reconciliation; Statement of Activities p2 transfers 528,077 = 1,772,500 - 1,244,423). The same money is governmental capital outlay (Special Projects Fund, inside the 2,450,208 line) and business-type other_financing. Within each fund type this follows the fund statements, but a person should decide whether to treat it as an inter-fund transfer. decision_needed[] is missing."},
+    {"severity": "warning", "path": "receipts[4].category", "page": 5,
+     "extracted": "taxes (unlabeled)", "on_page": "Miscellaneous taxes 2,397,153 (General 953,046; Street 1,341,067; nonmajor 103,040)",
+     "issue": "The Street Fund share (1,341,067; budget schedule p15 calls it 'Taxes' 1,342,080) is probably the state highway allocation (motor fuel tax), i.e. intergovernmental/state aid. The page doesn't confirm this, so keeping it unsplit is defensible, but it is a large line (21% of governmental revenue). The same applies to detail[19] (Street 'Taxes' 1,342,080, p15)."},
+    {"severity": "warning", "path": "receipts[10].category", "page": 10,
+     "extracted": "other", "on_page": "Other revenues 542,555",
+     "issue": "Statement of Activities (p2) shows these 542,555 as 'Operating Grants and Contributions', so the page does say what they are. 'intergovernmental/state aid' or 'donations/contributions' may fit better than 'other'."},
+    {"severity": "warning", "path": "detail[15].category", "page": 14,
+     "extracted": "charges for services/fees", "on_page": "Keno Fund - Charges for services 1,675,510",
+     "issue": "This line sits in the Keno Fund and is almost certainly keno proceeds ('keno/lottery'). It is printed as 'Charges for services', and the extractor marked it for review. The same keno money (1,659,125 GAAP) is inside receipts[6] 'Charges for services' 2,443,437."},
+    {"severity": "warning", "path": "ending_cash", "page": 4,
+     "extracted": 15046901, "on_page": "Cash and investments 15,046,901; Cash with county treasurer 208,568",
+     "issue": "ending_cash leaves out the 208,568 'Cash with county treasurer' printed on the governmental funds Balance Sheet (Total Governmental Funds). Defensible, but cash including the treasurer balance would be 15,255,469."},
+    {"severity": "warning", "path": "disbursements[8].category", "page": 10,
+     "extracted": "utilities", "on_page": "Totals column: Golf 1,051,248, Leasing 111,906 (+88,458 interest), Civic 778,077 of operating expenses",
+     "issue": "All business-type expense lines are in 'utilities', but the Golf, Civic and Leasing funds (about 2.0M) are not utilities (golf and civic would be culture/recreation). The Totals column lists spending by object, not by function, so this is a judgment call. It applies to disbursements[8]-[12]."}
+  ]
+}

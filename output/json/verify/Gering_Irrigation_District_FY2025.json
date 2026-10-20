@@ -1,0 +1,18 @@
+{
+  "stem": "Gering_Irrigation_District_FY2025",
+  "values_checked": 7,
+  "issues": [
+    {"severity": "warning", "path": "decision_needed", "page": 1,
+     "extracted": null, "on_page": "Line 16 442,940; line 26 66,335; line 28 153,156 + line 29 86,821 = 239,977; line 31 66,335",
+     "issue": "Confirmed printed error, not a misread: line 16 Total Resources Available 442,940 is only receipts (413,180 + 29,760) and leaves out the line 5 beginning balance 199,426, and line 26 66,335 = 442,940 - 376,605 follows from that wrong line 16. The real ending balance is unclear: the roll-forward gives 265,761, cash + CDs on lines 28-29 add to 239,977 (25,784 apart), and line 26/31 print 66,335. business_type.ending is recorded as 66,335. A person should decide which ending balance to use (or check with the district); decision_needed[] is missing."},
+    {"severity": "warning", "path": "receipts[1].category", "page": 1,
+     "extracted": "other", "on_page": "Local Receipts -- reimburses, interest, other 29,760",
+     "issue": "Mixed line (reimbursements, interest, other). Under the mixed-line rule it should get its dominant category plus review, but the page doesn't show which part is dominant, so 'other' with review is defensible."},
+    {"severity": "warning", "path": "disbursements[0].category", "page": 1,
+     "extracted": "utilities", "on_page": "Operating Expenses 376,605",
+     "issue": "Irrigation district. The disbursement rules list water and drainage districts under 'natural resources/conservation', which may fit better than 'utilities'. entity_type 'public power / utility' (and treating the whole entity as business-type) is also a judgment call; 'other' may fit better."},
+    {"severity": "warning", "path": "receipts[0].category", "page": 1,
+     "extracted": "property tax", "on_page": "Personal and Real Property Taxes -- water taxes 413,180",
+     "issue": "Irrigation district 'water taxes' are usually per-acre assessments on irrigated land, so 'special assessments' could apply. The form prints the line as property taxes, so 'property tax' is defensible."}
+  ]
+}
