@@ -1,0 +1,27 @@
+{
+  "stem": "Region_5_Behavioral_Health_FY2025",
+  "values_checked": 72,
+  "issues": [
+    {"severity": "warning", "path": "detail[20]", "page": 6,
+     "extracted": "Schedule of Operating Expenditures (Total column), 20 lines, total 3,997,344", "on_page": "Schedule of Operating Expenditures total 3,997,344; budget schedule p5 Operating expenditures 1,650,018; fund statement p4 Operating expenditures 1,651,325 + Capital outlay 289,838",
+     "issue": "Likely double counting. The p6 object schedule (salaries 2,114,374, equipment 32,338, etc.) covers costs that are also inside the p5 budget schedule's Allocations/Operating expenditures lines, which are recorded too. Detail spending totals 26,072,771 against 22,366,572 actual expenditures. The pages don't show how the 3,997,344 maps onto 20,425,409 + 1,650,018, so the overlap can't be removed from the page alone."},
+    {"severity": "warning", "path": "decision_needed", "page": 6,
+     "extracted": null, "on_page": "Schedule of Operating Expenditures total 3,997,344 vs Operating expenditures 1,650,018 (p5) / 1,651,325 (p4)",
+     "issue": "There is no decision_needed entry. A person should decide whether the p6 program-by-object schedule should replace part of the p5 budget-schedule spending lines (and which part) or be kept alongside them."},
+    {"severity": "warning", "path": "detail[20].fund", "page": 6,
+     "extracted": "All programs (Total column only)", "on_page": "9 program columns: General Office, Network Admin, Youth/Prevention/Emergency/Consumer/Housing/Disaster/CQI Coordination",
+     "issue": "Only the Total column was recorded. The rule says to record each department column. All programs are health/welfare, so the function split is unaffected, but the program-level detail is lost."},
+    {"severity": "warning", "path": "receipts[4].category", "page": 2,
+     "extracted": "other", "on_page": "Miscellaneous services 626,019 (Statement of Activities: Operating Grants and Contributions)",
+     "issue": "The Statement of Activities (p2) shows this as operating grants and contributions for the Miscellaneous services program, so it isn't fully unexplained. It probably belongs in a grants category, but the grantor isn't named. It is 2.8% of receipts. detail[4] has the same issue."},
+    {"severity": "warning", "path": "receipts[6].category", "page": 4,
+     "extracted": "intergovernmental/state aid", "on_page": "Opioid settlement 1,621,153",
+     "issue": "Opioid settlement money comes from manufacturer and distributor settlements, passed through the state. 'intergovernmental/state aid' is defensible, but it could also be 'other'. The line is already marked review. detail[6] has the same issue."},
+    {"severity": "warning", "path": "balance_sheet.liabilities[0].category", "page": 1,
+     "extracted": "due to other governments", "on_page": "Accounts payable - agencies 861,961",
+     "issue": "'Agencies' are probably service-provider agencies (subcontractors), not governments, so 'accounts payable' may fit better."},
+    {"severity": "warning", "path": "detail[19].detail_category", "page": 6,
+     "extracted": "miscellaneous expenditure", "on_page": "Admin fee 2,454",
+     "issue": "'professional/contract services' may fit. The amount is immaterial."}
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "stem": "Region_4_Behavioral_Health_FY2025",
+  "values_checked": 84,
+  "issues": [
+    {"severity": "error", "path": "detail[0].schedule", "page": 2,
+     "extracted": "Schedule of Revenues and Expenditures with Budget Comparison", "on_page": "Budget Comparison (schedule name used by detail[1-43] and detail_totals[0])",
+     "issue": "The Personnel line has a different schedule name from the other 43 lines and from the only detail_total. Grouped by schedule, the 'Budget Comparison' items add up to 8,824,752, not the printed 10,264,210 (a 1,439,458 gap), and the Personnel line has no total of its own. Use the same schedule name for all lines so the detail ties."},
+    {"severity": "warning", "path": "detail[0].original_label", "page": 2,
+     "extracted": "Personnel (total; object detail on report p23, not trimmed)", "on_page": "Personnel",
+     "issue": "The label is not as printed, and the amount comes from the basic statement (p2), not a detail schedule. It stands in for the Personnel schedule page that was not trimmed (marked review)."},
+    {"severity": "warning", "path": "missing", "page": 3,
+     "extracted": null, "on_page": "Budget schedule REVENUES section and Personnel expenditures (report pp22-23) not in the trimmed PDF",
+     "issue": "Trimmed p3 starts at 'EXPENDITURES (Continued)'. The schedule's revenue lines and Personnel object lines were not trimmed, so detail has no revenue section. This is a trimming gap, not an extraction error. All 4 trimmed pages were read and the notes say 'Read pages 1-4 of 4'."},
+    {"severity": "warning", "path": "detail[2].original_label", "page": 3,
+     "extracted": "Opioid Settlement Expenditures", "on_page": "Opoid Settlement Expenditures",
+     "issue": "The extractor corrected the page's spelling; the label does not exactly match the printed text."},
+    {"severity": "warning", "path": "balance_sheet.liabilities[1].category", "page": 1,
+     "extracted": "due to other governments", "on_page": "Due to Agencies 2,391",
+     "issue": "'Agencies' here probably means service-provider agencies (subcontractors), not governments. 'accounts payable' or 'other liabilities' may fit better."},
+    {"severity": "warning", "path": "detail[29].detail_category", "page": 4,
+     "extracted": "dues, training and travel", "on_page": "License Fees 1,046",
+     "issue": "This may be software or other license fees rather than dues or training. 'licenses' has no object category, so this is a judgment call."},
+    {"severity": "warning", "path": "detail[30].detail_category", "page": 4,
+     "extracted": "professional/contract services", "on_page": "Bank Service Charges 25",
+     "issue": "Bank charges could fit 'debt interest and fees' or 'miscellaneous expenditure'. The amount is immaterial."}
+  ]
+}
