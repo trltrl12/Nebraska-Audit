@@ -2,10 +2,45 @@
   "stem": "Lower_Platte_North_NRD_FY2025",
   "values_checked": 99,
   "issues": [
-    {"severity": "error", "path": "detail_totals", "page": 11, "extracted": "no total for schedule 'Budgetary Comparison - General Fund - Administrative Expenses'; GF expenditure total 11,944,651 has no includes_schedules", "on_page": "Administrative Expenses schedule total actual 472,934 (p11); General Fund total charges to appropriations 11,944,651 (p9)", "issue": "The 14 Administration lines (sum 472,934) carry a different schedule name, so the 'Budgetary Comparison - General Fund' expenditure items sum to 11,471,717 vs the printed 11,944,651 (gap 472,934). Add a detail_totals entry for the Administrative Expenses schedule (472,934, p11) and includes_schedules on the GF expenditure total."},
-    {"severity": "warning", "path": "ending_cash", "page": 4, "extracted": 604206, "on_page": "Cash and cash equivalents 604,206; County treasurer cash 39,108", "issue": "Governmental fund balance sheet also prints County treasurer cash 39,108; ending_cash excludes it. Arguably 643,314 (computed)."},
-    {"severity": "warning", "path": "balance_sheet.liabilities[6].category", "page": 1, "extracted": "accrued liabilities", "on_page": "Noncurrent liabilities: Accrued compensated absences 261,953", "issue": "Printed under noncurrent liabilities; 'accrued liabilities' is for amounts due soon. 'debt - due in more than one year' or 'other liabilities' may fit better."},
-    {"severity": "warning", "path": "balance_sheet.liabilities[4].category", "page": 1, "extracted": "unearned revenue", "on_page": "Unavailable revenues 45,190", "issue": "Unavailable revenue is normally a deferred inflow; the report prints it under current liabilities, so recording it as a liability is defensible."},
-    {"severity": "warning", "path": "detail[26].detail_category", "page": 9, "extracted": "not itemized", "on_page": "Personnel 2,125,716", "issue": "Personnel is effectively an object (salaries and benefits) rather than a function total; 'not itemized' is defensible since salaries and benefits are not split."}
+    {
+      "severity": "error",
+      "path": "detail_totals",
+      "page": 11,
+      "extracted": "no total for schedule 'Budgetary Comparison - General Fund - Administrative Expenses'; GF expenditure total 11,944,651 has no includes_schedules",
+      "on_page": "Administrative Expenses schedule total actual 472,934 (p11); General Fund total charges to appropriations 11,944,651 (p9)",
+      "issue": "[fixed] The 14 Administration lines (sum 472,934) carry a different schedule name, so the 'Budgetary Comparison - General Fund' expenditure items sum to 11,471,717 vs the printed 11,944,651 (gap 472,934). Add a detail_totals entry for the Administrative Expenses schedule (472,934, p11) and includes_schedules on the GF expenditure total."
+    },
+    {
+      "severity": "warning",
+      "path": "ending_cash",
+      "page": 4,
+      "extracted": 604206,
+      "on_page": "Cash and cash equivalents 604,206; County treasurer cash 39,108",
+      "issue": "Governmental fund balance sheet also prints County treasurer cash 39,108; ending_cash excludes it. Arguably 643,314 (computed)."
+    },
+    {
+      "severity": "warning",
+      "path": "balance_sheet.liabilities[6].category",
+      "page": 1,
+      "extracted": "accrued liabilities",
+      "on_page": "Noncurrent liabilities: Accrued compensated absences 261,953",
+      "issue": "Printed under noncurrent liabilities; 'accrued liabilities' is for amounts due soon. 'debt - due in more than one year' or 'other liabilities' may fit better."
+    },
+    {
+      "severity": "warning",
+      "path": "balance_sheet.liabilities[4].category",
+      "page": 1,
+      "extracted": "unearned revenue",
+      "on_page": "Unavailable revenues 45,190",
+      "issue": "Unavailable revenue is normally a deferred inflow; the report prints it under current liabilities, so recording it as a liability is defensible."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[26].detail_category",
+      "page": 9,
+      "extracted": "not itemized",
+      "on_page": "Personnel 2,125,716",
+      "issue": "Personnel is effectively an object (salaries and benefits) rather than a function total; 'not itemized' is defensible since salaries and benefits are not split."
+    }
   ]
 }
