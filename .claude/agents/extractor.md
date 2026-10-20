@@ -215,9 +215,9 @@ independent verifier, so unmarked computed values show up as errors. If a value 
     detail, not a replacement.
   - If the trimmed PDF has no detail schedules, use `"detail": []` and `"detail_totals": []`.
 - Detailed revenue categories (`detail_category` for revenue; use exactly these strings):
-  `property tax`, `sales tax`, `motor vehicle tax`, `occupation/franchise tax`, `lodging tax`, `inheritance tax`, `other local taxes`, `taxes (unlabeled)`, `highway allocation`, `motor vehicle pro-rate`, `municipal equalization`, `homestead/tax credits`, `state school aid (TEEOSA)`, `other state aid`, `county/other local governments`, `federal grants`, `water charges`, `sewer charges`, `electric charges`, `gas charges`, `refuse/sanitation charges`, `other utility charges`, `licenses and permits`, `fines and forfeitures`, `fees of office`, `rentals`, `recreation/pool/park fees`, `cemetery fees`, `tuition and fees`, `school lunch sales`, `ambulance/rescue fees`, `patient service revenue`, `tenant rent`, `fair/event revenue`, `other charges for services`, `investment income`, `donations/contributions`, `reimbursements/refunds`, `sale of assets`, `miscellaneous revenue`.
+  `property tax`, `sales tax`, `motor vehicle tax`, `occupation/franchise tax`, `lodging tax`, `inheritance tax`, `special assessments`, `keno/lottery`, `other local taxes`, `taxes (unlabeled)`, `highway allocation`, `motor vehicle pro-rate`, `municipal equalization`, `homestead/tax credits`, `state school aid (TEEOSA)`, `other state aid`, `county/other local governments`, `federal grants`, `water charges`, `sewer charges`, `electric charges`, `gas charges`, `refuse/sanitation charges`, `other utility charges`, `licenses and permits`, `fines and forfeitures`, `fees of office`, `rentals`, `recreation/pool/park fees`, `cemetery fees`, `tuition and fees`, `school lunch sales`, `ambulance/rescue fees`, `patient service revenue`, `tenant rent`, `fair/event revenue`, `student activity receipts`, `other charges for services`, `investment income`, `donations/contributions`, `reimbursements/refunds`, `sale of assets`, `miscellaneous revenue`.
 - Detailed expenditure categories (`detail_category` for expenditure; use exactly these strings):
-  `salaries and wages`, `employee benefits and payroll taxes`, `professional/contract services`, `supplies and materials`, `utilities (power, gas, phone)`, `fuel`, `repairs and maintenance`, `insurance`, `rent/leases`, `dues, training and travel`, `printing, publishing and postage`, `grants/payments to other entities`, `law enforcement contract`, `equipment purchases`, `construction/infrastructure`, `land and buildings`, `debt principal`, `debt interest and fees`, `tax refunds/treasurer fees`, `purchased power/cost of sales`, `depreciation`, `medical supplies and services`, `miscellaneous expenditure`.
+  `salaries and wages`, `employee benefits and payroll taxes`, `professional/contract services`, `supplies and materials`, `utilities (power, gas, phone)`, `fuel`, `repairs and maintenance`, `insurance`, `rent/leases`, `dues, training and travel`, `printing, publishing and postage`, `grants/payments to other entities`, `law enforcement contract`, `equipment purchases`, `construction/infrastructure`, `land and buildings`, `debt principal`, `debt interest and fees`, `tax refunds/treasurer fees`, `purchased power/cost of sales`, `depreciation`, `medical supplies and services`, `student activity spending`, `not itemized` (function/department total with no object breakdown), `miscellaneous expenditure` (last resort, with `"review"`).
   Examples: officer/clerk/teacher pay → `salaries and wages`; FICA, retirement, health insurance →
   `employee benefits and payroll taxes`; legal, audit, engineering, contract labor →
   `professional/contract services`; street lighting/electricity → `utilities (power, gas, phone)`;
@@ -225,11 +225,38 @@ independent verifier, so unmarked computed values show up as errors. If a value 
   to other entities`.
 
 ### Receipt categories (use exactly these strings)
-`property tax`, `sales tax`, `other taxes` (motor vehicle, occupation, lodging, franchise,
-in-lieu taxes), `taxes (unlabeled)` (only when a combined tax line can't be split), `intergovernmental/state aid` (state aid, highway allocation, county or other
-local government payments, pro-rate motor vehicle, homestead), `federal grants`, `charges for
-services/fees` (utility sales, permits, licenses, rentals, fines), `investment income`
-(interest, dividends), `other` (donations, reimbursements, miscellaneous).
+`property tax` (including penalties and interest on property taxes), `sales tax`,
+`motor vehicle tax` (motor vehicle tax, wheel tax, motor vehicle fees; but *pro-rate* motor vehicle
+is state aid), `occupation/franchise tax`, `lodging tax`, `inheritance tax`, `special assessments`,
+`keno/lottery` (keno, lottery, gaming proceeds), `other taxes` (only taxes that fit none of these:
+in-lieu of tax, nameplate capacity, carline, public power district tax), `taxes (unlabeled)` (only
+when a combined tax line can't be split), `intergovernmental/state aid` (state aid, highway
+allocation, county or other local government payments, pro-rate motor vehicle, homestead,
+municipal equalization, TEEOSA), `federal grants`, `charges for services/fees` (utility sales,
+rentals, fees of office, program fees, rural fire contracts), `licenses and permits`,
+`fines and forfeitures`, `investment income` (interest, dividends), `donations/contributions`
+(private gifts, donations, grants and contributions not from a government), `reimbursements/refunds`
+(including insurance proceeds), `sale of assets` (sale of property/equipment, gain on sale), and
+`other`.
+
+**`other` is a last resort.** Use it only for lines printed as "Miscellaneous", "Other" or similar
+with nothing on the page that says what they are, and then add `"review"`. Before using `other` or
+`other taxes`, check every category above; a line like "Motor vehicle", "Keno", "Special
+assessments", "Reimbursements", "Sale of property", "Donations" always has its own category. Use
+the same category for the same label everywhere in a report (receipts and detail). A line that
+mixes two categories ("Permits, fees and licenses", "Miscellaneous and reimbursements") gets the
+dominant one plus `"review"` naming the mix.
+
+**Transfers are never revenue or spending.** "Transfers", "Transfer to/from … fund", "Transfers,
+net" go in `transfers_in`/`transfers_out` (`business_type.transfers_net`) and, in `detail`, in
+section `other financing` with a signed amount (+ in, − out). If a schedule's printed "Total
+receipts/disbursements" includes the transfer, add `"includes": ["other financing"]` to that
+`detail_totals` entry instead of moving the transfer into revenue or expenditure.
+
+**Splitting a combined line** (`split_from`) is only allowed when the report itself prints the
+breakdown of *that* line. Never split a line just because some other statement's lines happen to
+add up to it; if a schedule only prints broad groups ("Taxes", "State", "Local"), record each group
+as printed with its best category and `"review": "broad group; detail on p.N"`.
 
 ### Disbursement categories (use exactly these strings)
 `general government` (administration, clerk, legal, insurance, elections), `public safety`
@@ -238,11 +265,18 @@ services/fees` (utility sales, permits, licenses, rentals, fines), `investment i
 center), `health/welfare` (health, cemetery, senior services, assistance), `economic
 development` (LB840, TIF, CRA, tourism), `utilities` (water, sewer, electric, gas, refuse),
 `debt service principal`, `debt service interest` (including fees), `capital outlay`,
-school districts and community colleges: `instruction` (regular, special education, vocational,
-activities), `support services` (pupil, instructional staff, general and school administration,
-business, operation and maintenance of plant), `student transportation`, `food service`; plus
+school districts and community colleges: `instruction` (regular, special education, vocational),
+`support services` (pupil, instructional staff, general and school administration,
+business, operation and maintenance of plant), `student transportation`, `food service`,
+`student activities` (activity fund clubs, athletics, class accounts); plus
 `hospital/health care`, `housing`, `natural resources/conservation` (NRDs, water and drainage
-districts), `agriculture/fair` (agricultural societies), and `other`.
+districts, noxious weed control), `agriculture/fair` (agricultural societies), and `other` (last
+resort, with `"review"`). If a statement lists spending only by object (personnel, operating,
+supplies) with no function, use the function of the fund it's printed under (General Fund →
+`general government`, Street Fund → `streets/highways`…) and add `"review": "listed by object"`.
+In `detail`, a function or department total printed with no object breakdown gets
+`detail_category` `not itemized` (not `miscellaneous expenditure`); school activity funds use
+revenue detail `student activity receipts` and expense detail `student activity spending`.
 When a function line mixes categories, pick the dominant one and mention it in `notes`.
 
 ## Entity types beyond cities, counties and schools
@@ -265,8 +299,8 @@ When a function line mixes categories, pick the dominant one and mention it in `
   historical/agricultural societies:** usually cash-basis governmental (or a waiver form); fire →
   `public safety`, township roads → `streets/highways`, cemetery → `health/welfare`, ag society
   fair/events → `agriculture/fair` with revenue detail `fair/event revenue`. SIDs (sanitary and
-  improvement districts) are mostly special assessments (→ `other taxes`, detail `other local
-  taxes`), warrant/bond proceeds (→ `debt_proceeds`) and debt service.
+  improvement districts) are mostly special assessments (→ `special assessments`, detail
+  `special assessments`), warrant/bond proceeds (→ `debt_proceeds`) and debt service.
 - **NRDs:** property tax and state/federal grants; function `natural resources/conservation`.
 
 ## Output to the caller

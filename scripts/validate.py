@@ -20,6 +20,7 @@ look at even when the numbers check out (lines marked "review" by the extractor,
 tax lines, computed values, amounts not found on their page, verifier notes).
 """
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -220,13 +221,21 @@ def check(stem, d):
             f("schema", f"detail: fund_type must be one of {FUND_TYPES}, got {it.get('fund_type')!r} ({lab!r})")
         key = (it.get("fund") or "", it.get("schedule") or "", sec)
         sums[key] = sums.get(key, 0.0) + float(it.get("amount") or 0)
+        if sec == "other financing":  # signed: + in (counts toward revenue), − out (toward expenditure)
+            a = float(it.get("amount") or 0)
+            k2 = (key[0], key[1], "revenue+of" if a > 0 else "expenditure+of")
+            sums[k2] = sums.get(k2, 0.0) + abs(a)
     for tot in d.get("detail_totals") or []:
         key = (tot.get("fund") or "", tot.get("schedule") or "", tot.get("section"))
         stated = amt(tot)
         if stated is None or key not in sums:
             continue
+        if "other financing" in (tot.get("includes") or []):  # printed total includes the transfers
+            sums[key] += sums.get((key[0], key[1], f"{key[2]}+of"), 0.0)
         cmp("detail", f"detail lines vs printed total for {key[2]} / {key[0] or 'all funds'} / {key[1]}",
             float(stated), sums[key], pages=str(tot.get("source_page", "")))
+
+    category_checks(d, f, rv)
 
     # Every amount must appear on the page it cites
     for miss in pagecheck.check_report(stem, d):
@@ -249,6 +258,89 @@ def check(stem, d):
     else:
         rv("verifier", "not yet independently verified")
     return flags, reviews
+
+
+# Label patterns and the categories they should get (receipts category, detail_category).
+# A line matching a pattern but categorized differently goes to review.
+LABEL_RULES = [
+    (r"special assess", "special assessments", "special assessments"),
+    (r"keno|lottery", "keno/lottery", "keno/lottery"),
+    (r"pro[- ]?rate", "intergovernmental/state aid", "motor vehicle pro-rate"),
+    (r"motor vehicle|wheel tax", "motor vehicle tax", "motor vehicle tax"),
+    (r"occupation|franchise", "occupation/franchise tax", "occupation/franchise tax"),
+    (r"lodging", "lodging tax", "lodging tax"),
+    (r"inheritance", "inheritance tax", "inheritance tax"),
+    (r"nameplate", "other taxes", "other local taxes"),
+    (r"in[- ]lieu", "other taxes", "other local taxes"),
+    (r"penalt(y|ies).*interest.*tax", "property tax", "property tax"),
+    (r"^(\d+ )?interest( income| earned| on investments)?$|investment (income|earnings)", "investment income",
+     "investment income"),
+    (r"sale of (property|assets|capital|equipment)|gain on sale", "sale of assets", "sale of assets"),
+    (r"reimburse|refund", "reimbursements/refunds", "reimbursements/refunds"),
+    (r"donation|contribution", "donations/contributions", "donations/contributions"),
+    (r"licen[cs]e|permit", "licenses and permits", "licenses and permits"),
+    (r"\bfines?\b|forfeit", "fines and forfeitures", "fines and forfeitures"),
+    (r"\bTEEOSA\b|state equalization aid", "intergovernmental/state aid", "state school aid (TEEOSA)"),
+    (r"highway allocation", "intergovernmental/state aid", "highway allocation"),
+]
+TRANSFER_RE = re.compile(r"\btransfers?\b(?! station)", re.I)
+OTHER_SHARE = 0.10   # "other" above this share of a fund type's receipts/disbursements → review
+
+
+def _norm(label):
+    return re.sub(r"^\d+\s+|[^a-z0-9]+", " ", str(label or "").lower()).strip()
+
+
+def category_checks(d, f, rv):
+    """Catch lines that are probably in the wrong category, and too much in 'other'."""
+    lines = [(k, i, it) for k in ("receipts", "disbursements", "detail")
+             for i, it in enumerate(d.get(k) or []) if isinstance(it, dict)]
+    for k, i, it in lines:
+        lab, sec = str(it.get("original_label") or ""), it.get("section")
+        where = f"{k}[{i}]"
+        # Transfers are financing, never revenue or spending
+        if TRANSFER_RE.search(lab) and (k != "detail" or sec != "other financing"):
+            f("category", f"{where} {lab!r} {amt(it):,.0f}: transfer recorded as "
+              f"{'a ' + k[:-1] if k != 'detail' else sec}; transfers belong in transfers_in/out "
+              f"(detail section 'other financing')", pages=str(it.get("source_page", "")))
+            continue
+        if k == "detail" and sec == "other financing":
+            continue
+        is_rev = k == "receipts" or sec == "revenue"
+        for pat, cat, dcat in LABEL_RULES:
+            if re.search(pat, lab, re.I) and is_rev:
+                got = (it.get("category"), it.get("detail_category") if k == "detail" else dcat)
+                if got != (cat, dcat):
+                    rv("category", f"{lab!r} is usually {cat}" + (f" / {dcat}" if k == "detail" else "")
+                       + f", recorded as {' / '.join(str(x) for x in got[: 2 if k == 'detail' else 1])}",
+                       lab, amt(it), it.get("source_page", ""), it.get("fund_type", ""))
+                break
+        if it.get("category") in ("other", "other taxes") or it.get("detail_category") in (
+                "miscellaneous revenue", "miscellaneous expenditure", "other local taxes"):
+            rv("other", f"in a catch-all category ({it.get('category')}"
+               + (f" / {it.get('detail_category')}" if k == "detail" else "") + "); confirm nothing more specific fits",
+               lab, amt(it), it.get("source_page", ""), it.get("fund_type", ""))
+    # Same label categorized differently within one report
+    seen = {}
+    for k, i, it in lines:
+        if not (k == "receipts" or (k == "detail" and it.get("section") == "revenue")):
+            continue  # spending labels like "Supplies" rightly differ by function
+        key = ("rev" if k == "receipts" or it.get("section") == "revenue" else "exp", _norm(it.get("original_label")))
+        seen.setdefault(key, set()).add(it.get("category"))
+    for (side, lab), cats in sorted(seen.items()):
+        if len(cats) > 1 and lab:
+            rv("category", f"same label {lab!r} has different categories in this report: "
+               + ", ".join(sorted(str(c) for c in cats)), lab)
+    # Share of each fund type's totals sitting in "other"
+    for key in ("receipts", "disbursements"):
+        for ft in FUND_TYPES:
+            items = [it for it in d.get(key) or [] if isinstance(it, dict) and fund_type(it) == ft
+                     and amt(it) is not None]
+            total = sum(abs(amt(it)) for it in items)
+            other = sum(abs(amt(it)) for it in items if it.get("category") == "other")
+            if total and other / total > OTHER_SHARE:
+                rv("other", f"{other / total:.0%} of {ft} {key} ({other:,.0f} of {total:,.0f}) is in 'other'",
+                   amount=round(other, 2), ftype=ft)
 
 
 def review_items(stem, d):
