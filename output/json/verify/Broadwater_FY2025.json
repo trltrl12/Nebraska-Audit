@@ -1,0 +1,27 @@
+{
+  "stem": "Broadwater_FY2025",
+  "values_checked": 39,
+  "issues": [
+    {"severity": "error", "path": "report_discrepancies", "page": 1,
+     "extracted": null, "on_page": "Line 24 Ending Balance total 149,451.42 vs line 28 Subtotal of Ending Balances 149,406.18 (diff 45.24); per fund line 24 vs 28: General 52,838.06 vs 66,167.95, Street 21,159.81 vs 10,766.71, Library 6,371.49 vs 12,112.71, Park (985.87) vs 2,732.68, Sanitation and Sewer 4,209.83 vs 0, Water 65,858.10 vs 57,626.13 (governmental 79,383.49 vs 91,779.95; business-type 70,067.93 vs 57,626.13)",
+     "issue": "the form says lines 24 and 28 must agree, but they don't, in total or by fund. This is the report itself not adding up, but no report_discrepancies entry was recorded (it's only mentioned in notes)"},
+    {"severity": "warning", "path": "beginning_cash", "page": 1,
+     "extracted": 120321.80, "on_page": "p1 (typed copy, entity name blank 'Village of , Nebraska') per-fund line 3; p2 (signed Broadwater copy, crossed out in red) puts the full 175,481.44 beginning balance in General and shows different per-fund ending balances (General 148,928.93, Street (5,561.34), Library (5,222.78), Park (3,601.68), Water 10,698.46)",
+     "issue": "the governmental vs business-type split of the beginning and ending balances depends on the unnamed typed page 1 rather than the signed (but crossed-out) page 2. Totals agree on both pages, but on page 2 the business-type ending balance would be 14,908.29 instead of 70,067.93"},
+    {"severity": "warning", "path": "disbursements[3]", "page": 3,
+     "extracted": {"fund_type": "business-type", "category": "debt service principal", "amount": 6793.67}, "on_page": "Line 39 Debt Service 6,793.67 (printed in the Governmental section, Sanitation and Sewer Fund column)",
+     "issue": "fund_type follows the fund column, not the section it's printed in. 'Debt Service' isn't split into principal and interest, so the category 'debt service principal' is an assumption"},
+    {"severity": "warning", "path": "receipts[7].category", "page": 1,
+     "extracted": "other", "on_page": "Local Receipts: Other 41,885.49 (governmental funds)",
+     "issue": "nothing on the page says what this is; 'other' makes up 44% of governmental receipts (over the 10% review threshold)"},
+    {"severity": "warning", "path": "receipts[8].category", "page": 1,
+     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other 31,571.28 (Sanitation and Sewer Fund)",
+     "issue": "printed as 'Other'; assumed to be utility charges"},
+    {"severity": "warning", "path": "receipts[9].category", "page": 1,
+     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other 65,565.88 (Water)",
+     "issue": "printed as 'Other'; assumed to be utility charges"},
+    {"severity": "warning", "path": "balance_sheet.assets[3..6].original_label", "page": 4,
+     "extracted": "NPAIT Investments (label partly obscured; Library/Park/Street/Water)", "on_page": "'rary', 'k', 'eet', 'ter' under NPAIT Investments (obscured by handwritten adding-machine tape)",
+     "issue": "labels partly hidden; fund names inferred. Amounts 12,112.71 / 2,732.68 / 10,766.71 / 57,626.13 are legible and match line 27 on p1"}
+  ]
+}
