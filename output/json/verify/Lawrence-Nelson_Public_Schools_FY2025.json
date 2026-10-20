@@ -1,34 +1,62 @@
 {
   "stem": "Lawrence-Nelson_Public_Schools_FY2025",
-  "values_checked": 197,
+  "values_checked": 285,
   "issues": [
-    {"severity": "error", "path": "receipts[3].category", "page": 5,
-     "extracted": "other taxes (Taxes: Other 1,376,314.65)",
-     "on_page": "Breakdown printed in the trimmed PDF: General Fund Other 1,353,519.45 (p4) = 3130 Homestead 26,031.83 + 3131 Property tax credit 1,308,134.78 + 3133 Nameplate 10,568.19 + 3180 Pro-rate MV 8,784.65 (Exh. G p8); Other Govt 22,795.20 = QCPU Homestead 445.02 + PTC 22,048.96 + Nameplate 171.90 + Pro-rate 129.32 (Exh. M p15)",
-     "issue": "Line kept in 'other taxes', but the report breaks it down and about 98% of it is state property tax credit/homestead (intergovernmental/state aid). It should be split with split_from: homestead/tax credits 1,356,660.59 (PTC 1,330,183.74 + homestead 26,476.85) and pro-rate 8,913.97 (both intergovernmental/state aid), nameplate 10,740.09 (other taxes). These add to 1,376,314.65."},
-    {"severity": "error", "path": "missing", "page": 5,
-     "extracted": null,
-     "on_page": "Exhibit D reclassification (11,044.91) on 'Special education 0-5' (p5); matching receipt is Cooperative Fund 'Allocation from general fund' 11,044.91 (Exh. N p16); General Fund 'Special education 0-5' 30,992.41 (pp4, 6) is not reclassified on Exhibit F (p7)",
-     "issue": "A second transfer is hidden in General Fund spending: 11,044.91 to the Cooperative Fund sits inside the General Fund's Special education 0-5 program lines (Exh. G pp9-10). The detail records it as Cooperative other financing +11,044.91 (detail[130]), but the General Fund lines have no contra/other-financing pair for it, so the same money shows up as both spending and a transfer. Needs a contra expenditure line (department = Special education 0-5 group, split_from, review) plus an other financing -11,044.91. The notes are also wrong to say the 11,044.91 is 'inside Special education 0-5 in Other Governmental Funds'."},
-    {"severity": "warning", "path": "receipts[11].category", "page": 2,
-     "extracted": "other (Cash balance from dissolved district 4,968,148.15)",
-     "on_page": "Shown as 'Special Item' on the Statement of Activities (p2); included in Total Receipts on p4/p5",
-     "issue": "It is a merger special item, not revenue. The extractor rules list special items under adjustments, but it sits inside the printed total receipts. Either treatment is defensible; as entered, it makes up 44% of governmental receipts as 'other'."},
-    {"severity": "warning", "path": "receipts[5].category", "page": 5,
-     "extracted": "other (Other local receipts 520,821.76)",
-     "on_page": "General Fund part 58,268.81 is itemized in Exh. G (tuition, licenses, donations, categorical grant, refunds, misc.); Other Govt part 462,552.95 includes school lunch sales 102,635.65, Cooperative receipts from other districts 117,912.69, student fees 14,828.24",
-     "issue": "Mixed line. Most of what is identifiable is charges for services or local-government payments; 'other' is a weak fit (dominant category plus review would be better)."},
-    {"severity": "warning", "path": "disbursements[13].category", "page": 5,
-     "extracted": "support services (Other student support 513,679.23)",
-     "on_page": "Other Governmental Funds column only (p4)",
-     "issue": "Probably mostly food service (School Nutrition 255,826.49) and student activities; support services is a guess. Already marked review."},
-    {"severity": "warning", "path": "detail[95].fund_type", "page": 13,
-     "extracted": "governmental (School Nutrition Fund, detail[95]-detail[112])",
-     "on_page": "School Nutrition Fund reported within Other Governmental Funds (p3-p4)",
-     "issue": "The extractor rules give school nutrition as an example of a business-type fund. Here the report presents it as a governmental fund, so governmental is defensible; flagged for consistency."},
-    {"severity": "warning", "path": "detail", "page": 18,
-     "extracted": "Exhibit G used for General Fund spending (not itemized)",
-     "on_page": "Exhibit P object-level General Fund disbursements (pp18-19), cut off after Speech pathology SPED ages 0-2; Exhibit J (student activities, Other Govt receipts approx. 424,691.77) not in trimmed PDF",
-     "issue": "The trimmed PDF looks incomplete: the more detailed Exhibit P is truncated and the student activity schedule is missing, so the detail can't cover all Other Governmental Funds receipts (1,229,286.65 printed vs 804,594.88 in recorded schedules). Re-trim recommended."}
+    {
+      "severity": "warning",
+      "path": "receipts[8].category",
+      "page": 5,
+      "extracted": "other ('Other local receipts' 520,821.76)",
+      "on_page": "General Fund part 58,268.81 = 1370 Tuition 20,800 + 1911 Licenses 1,520 + 1920 Donations 750 + 1925 Categorical grants 25,000 + 1955 Postsecondary 125 + 1980 Refunds 7,620.59 + 1990 Misc 2,453.22 (Exh. G p8). Other Governmental part 462,552.95 includes School Nutrition sales 102,635.65 (p13), Cooperative 'Received from other districts' 117,912.69 (p16), Student Fee 'Extracurricular activity fees' 14,828.24 (p17), QCPU misc 162.04 (p15); the remaining ~227,014 is presumably student activity receipts (Exhibit J, not in the trimmed PDF)",
+      "issue": "[fixed: recategorized with review note] The schedules show what this line is, so 'other' doesn't apply. Under the rules a mixed line gets its dominant category plus review. The dominant identifiable part is charges for services/fees (lunch sales, fees, tuition and probably activity receipts), with local-government payments (cooperative) second."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[14].category",
+      "page": 2,
+      "extracted": "other ('Cash balance from dissolved district' 4,968,148.15)",
+      "on_page": "Shown as a 'Special Item' on the Statement of Activities (p2); included in Total Receipts on p4/p5",
+      "issue": "This is the opening balance from a merger (special item), not revenue, and it is 44% of governmental receipts. Keeping it inside receipts matches the printed total; treating it as an adjustment is the alternative. Already marked review."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[13].category",
+      "page": 4,
+      "extracted": "support services ('Other student support' 513,679.23)",
+      "on_page": "Other Governmental Funds only: School Nutrition disbursements 255,826.49 (p13) + Student Fee 14,828.24 (p17) + ~243,024.50 that is presumably student activities (Exhibit J not in the trimmed PDF)",
+      "issue": "The largest identifiable part is food service (about 50%), then student activities; 'support services' fits least. Already marked review."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[85].split_from",
+      "page": 9,
+      "extracted": "General Fund Special education 0-5 lines (1291, 1292, 2142, 2152, 2153 etc., pp9-10)",
+      "on_page": "Special education 0-5 30,992.41 (p4/p6) = 2142 1,303.25 + 2152 15,652.69 + 2153 6,668.06 + 2162 1,371.08 + 2163 164.53 + 2172 598.00 + 2173 5,114.80 + 2182 120.00; 1291 182,466.31 and 1292 11,697.56 fall under 'Special education' (796,292.40 = 1200 + 1291 + 1292)",
+      "issue": "The contra amount (-11,044.91), the paired other financing line (detail[86]) and the treatment are right, but split_from names 1291/1292, which belong to the Special education instruction row, not the Special education 0-5 group."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[12].category",
+      "page": 8,
+      "extracted": "intergovernmental/state aid / county/other local governments ('2110 County fines and license fees' 12,600.78)",
+      "on_page": "2110 County fines and license fees (County Sources)",
+      "issue": "This is fine and license money passed through by the county; 'fines and forfeitures' fits the label (Lincoln's identical code 2110 was categorized as fines). Judgment call."
+    },
+    {
+      "severity": "warning",
+      "path": "detail",
+      "page": 18,
+      "extracted": "Exhibit G used for General Fund spending (detail_category 'not itemized'); Exhibit P not recorded",
+      "on_page": "Exhibit P 'Cash Disbursements for Operational Expenses - General Fund' (pp18-19) gives the object breakdown (salaries, benefits, purchased services, supplies\u2026) for Regular instruction through Speech pathology SPED ages 0-2, then the trimmed PDF ends",
+      "issue": "The more detailed object schedule is only partly in the trimmed PDF, so using Exhibit G avoids a partial double count and is defensible. Either way, the Exhibit P lines on pp18-19 are not in the JSON."
+    },
+    {
+      "severity": "warning",
+      "path": "detail",
+      "page": 4,
+      "extracted": "Other Governmental Funds schedules recorded: School Nutrition, QCPU, Cooperative, Student Fee (receipts 804,594.88)",
+      "on_page": "Other Governmental Funds Total Receipts 1,229,286.65 (p4); Student activities fund balance 181,667.27 (p3)",
+      "issue": "The student activities schedule (about 424,691.77 of receipts) isn't in the trimmed PDF, so the detail can't cover all Other Governmental Funds lines. A re-trim is recommended (page-finder issue, not an extraction error)."
+    }
   ]
 }
