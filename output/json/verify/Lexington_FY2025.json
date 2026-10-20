@@ -1,0 +1,24 @@
+{
+  "stem": "Lexington_FY2025",
+  "values_checked": 144,
+  "issues": [
+    {"severity": "warning", "path": "detail[22].category", "page": 14,
+     "extracted": "health/welfare", "on_page": "Business-Type: Ambulance 43,752",
+     "issue": "the category rules list rescue under public safety; ambulance probably belongs in public safety"},
+    {"severity": "warning", "path": "detail[8].fund_type", "page": 14,
+     "extracted": "governmental", "on_page": "Interest 282,101 = governmental 143,467 (p6) + enterprise 138,634 (p11)",
+     "issue": "the line mixes governmental and business-type funds but is tagged governmental only; the same applies to detail[9] Donations 324,010, detail[10] Miscellaneous 1,101,189, detail[23] Capital outlay 5,777,641 and detail[24] Debt service 1,681,900 (all-purpose schedule)"},
+    {"severity": "warning", "path": "detail[24].category", "page": 14,
+     "extracted": "debt service principal", "on_page": "Debt service 1,681,900",
+     "issue": "the line combines principal and interest (and both fund types); the category takes the dominant part (already marked review)"},
+    {"severity": "warning", "path": "receipts[8].category", "page": 6,
+     "extracted": "other", "on_page": "Loan principal 874,143",
+     "issue": "these are loan repayments collected, which fit no receipt category and aren't really revenue; in 'other' with review (same for detail[7], 874,143, p14)"},
+    {"severity": "warning", "path": "receipts[15].category", "page": 11,
+     "extracted": "intergovernmental/state aid", "on_page": "Grant revenue 123,000 (Ambulance; Capital Grants and Contributions column on p3)",
+     "issue": "the grant's source isn't stated (could be federal or private), and as a capital grant it could arguably be capital contributions (other_financing) rather than a receipt"},
+    {"severity": "warning", "path": "proprietary.investing", "page": 12,
+     "extracted": 138634, "on_page": "Interest received 138,634 (no net investing line printed on trimmed page)",
+     "issue": "computed from the section's only line; it agrees with the net increase in cash, 1,275,818 (p13)"}
+  ]
+}
