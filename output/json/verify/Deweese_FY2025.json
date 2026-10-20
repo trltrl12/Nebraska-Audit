@@ -1,0 +1,18 @@
+{
+  "stem": "Deweese_FY2025",
+  "values_checked": 34,
+  "issues": [
+    {"severity": "warning", "path": "beginning_cash", "page": 1,
+     "extracted": 165032.63, "on_page": "Line 3 Subtotal of Beginning Balance: General 105,312.26 (incl. investments 19,397.94) + Street 59,720.37",
+     "issue": "beginning_cash/ending_cash are the form's cash+investments subtotals (correct roll-forward), but beginning_investments 19,397.94 and ending_investments 19,625.06 are also filled although they are already inside cash; anyone adding the fields would double count"},
+    {"severity": "warning", "path": "receipts[6].category", "page": 1,
+     "extracted": "other", "on_page": "Local Receipts: Other (General Fund) 10,029.92",
+     "issue": "nothing on the page says what this is; it is 17.7% of governmental receipts (>10% in other), so it goes to review"},
+    {"severity": "warning", "path": "receipts[7].category", "page": 1,
+     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Water 7,968.00 / Sewer 11,520.00 / Garbage 7,530.00)",
+     "issue": "receipts[7]-[9]: the line is printed only as 'Other'; treating it as utility user charges is an assumption (already marked review)"},
+    {"severity": "warning", "path": "disbursements[1].category", "page": 2,
+     "extracted": "debt service principal", "on_page": "Debt Service 19,795.96 + 9,533.94 (and Sewer 6,788.99, disbursements[2])",
+     "issue": "the page doesn't split principal and interest; the whole line was put in principal (already marked review)"}
+  ]
+}
