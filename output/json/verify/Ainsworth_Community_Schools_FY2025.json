@@ -1,0 +1,21 @@
+{
+  "stem": "Ainsworth_Community_Schools_FY2025",
+  "values_checked": 207,
+  "issues": [
+    {"severity": "error", "path": "detail[72].amount", "page": 10,
+     "extracted": 378119, "on_page": "2610 Operations of buildings 378,119 / 2620 Maintenance of buildings 361,815 (O&M lines 2610-2650 total 847,807); statement p4 O&M 732,748 = 847,807 + Depreciation capital outlay 84,941 - 200,000",
+     "issue": "A 200,000 General Fund to Depreciation Fund transfer is embedded in the General Fund O&M expenditure lines (detail[72]-[73]) while the same 200,000 is also recorded as 'Transfer from the General Fund' other financing in detail[92]. Rule (transfers hidden inside spending lines) requires splitting it out as an other financing item with split_from + review; the same money currently appears as both spending and a transfer. The extractor noted it and added review but did not split. The page doesn't show which O&M line holds the 200,000, so a human needs to decide where the split goes."},
+    {"severity": "warning", "path": "receipts[9].category", "page": 4,
+     "extracted": "other", "on_page": "Other receipts 426,799 (Other Governmental Funds 306,816 = Activities receipts p18; General 118,574 = tuition 4,864 + misc 4,604 + insurance adjustments 106,958 + other nonrevenue 2,148, p7-8; Special Building 1,409)",
+     "issue": "The report shows what the line is: about 72% is student activity receipts. Under the mixed-line rule the dominant category charges for services/fees (with review naming the mix) fits better than 'other'."},
+    {"severity": "warning", "path": "disbursements[1].category", "page": 4,
+     "extracted": "support services", "on_page": "Student support services 1,087,762 (incl. Other Governmental Funds 381,682 = Activities Fund purchased services, p18)",
+     "issue": "381,682 of this line is student activity spending (detail[117] uses 'student activities'), so the categories are inconsistent. The printed line can't be split at statement level, so this is left as a judgment call."},
+    {"severity": "warning", "path": "detail[13].detail_category", "page": 7,
+     "extracted": "homestead/tax credits", "on_page": "3133 Tax wind energy 589 (shown as 'Personal property tax credit' on p2)",
+     "issue": "The label says wind energy tax (nameplate capacity tax, i.e. other local taxes) but the statement of activities calls it a personal property tax credit. Ambiguous."},
+    {"severity": "warning", "path": "disbursements[9].category", "page": 5,
+     "extracted": "health/welfare", "on_page": "Community services 10,200",
+     "issue": "Category guessed from label. School community services is not clearly health/welfare."}
+  ]
+}
