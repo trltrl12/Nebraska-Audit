@@ -1,0 +1,22 @@
+{
+  "stem": "Keith_County_FY2025",
+  "values_checked": 132,
+  "issues": [
+    {"severity": "error", "path": "detail[0].category", "page": 2,
+     "extracted": "taxes (unlabeled)", "on_page": "Property 4,686,910 (General Fund Taxes split, p2/p10)",
+     "issue": "The line has been split out as property tax (detail_category 'property tax', split_from set), but its high-level category is still 'taxes (unlabeled)'. Should be 'property tax', matching receipts[0] and the rule to use the same category for the same line throughout."},
+    {"severity": "warning", "path": "detail[0].split_from", "page": 10,
+     "extracted": "property 4,686,910 + motor vehicle 480,879", "on_page": "General Fund Taxes 5,167,789 (p10); no per-fund breakdown printed",
+     "issue": "No page prints the General Fund's own tax breakdown. The split is worked out by subtraction: total taxes 5,911,146 minus nonmajor taxes 743,357 (Visitors Promotion and Improvement 358,758 x2 = lodging, 911 Emergency 25,841 = other, p6/p8) leaves exactly property + motor vehicle from p2. The arithmetic forces this result, but it is inferred, not printed. Applies to detail[1] too."},
+    {"severity": "warning", "path": "detail[23].category", "page": 10,
+     "extracted": "streets/highways", "on_page": "Noxious Weed (under Public Works heading)",
+     "issue": "The category rules put noxious weed control under natural resources/conservation. The page prints it under Public Works, so the current entry is defensible (extractor already flagged it for review)."},
+    {"severity": "warning", "path": "detail", "page": 10,
+     "extracted": "General Fund budget-schedule lines: general government 2,636,036; public safety 2,857,822; public works 52,396; welfare 59,310",
+     "on_page": "General Fund function columns p5: general government 2,306,312; public safety 2,835,649; public works 68,688; welfare 171,154; culture 21,295; community development 101,100; capital outlay 101,366",
+     "issue": "The departments on the budget schedule don't tie to the statement's function split (for example 'Miscellaneous' 726,495 probably holds the culture, community development and capital outlay money). The lines match the page and add to 5,605,564, but function totals taken from detail won't match the statements. The extractor disclosed this in notes."},
+    {"severity": "warning", "path": "receipts[6].category", "page": 2,
+     "extracted": "other (Local 2,172,072)", "on_page": "p2: charges for services 753,743 + interest income 564,954 + miscellaneous 763,375 + capital grants 90,000 = 2,172,072",
+     "issue": "The Statement of Activities effectively breaks this line down, so the review note's 'not broken out' is not quite right. The page doesn't label these as parts of 'Local', so keeping one line is allowed. The largest part is miscellaneous, with charges for services almost as large, so 'other' is borderline. The nonmajor 'Local' (detail[34]) also contains Keno Fund 30,904 (p8)."}
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "stem": "Kearney_County_Health_Services_FY2025",
+  "values_checked": 148,
+  "issues": [
+    {"severity": "warning", "path": "receipts[1].category", "page": 2,
+     "extracted": "other", "on_page": "Other revenue 2,249,271",
+     "issue": "Unspecified operating revenue recorded as 'other' (with review). It is 10.8% of business-type receipts, so it is over the 10% 'other' threshold."},
+    {"severity": "warning", "path": "receipts[3].category", "page": 2,
+     "extracted": "donations/contributions", "on_page": "Noncapital grants and contributions 61,920",
+     "issue": "Grants may come from government sources (intergovernmental/state aid or federal grants). The extractor already marked it review."},
+    {"severity": "warning", "path": "detail[25..87].detail_category", "page": 5,
+     "extracted": "supplies and materials (all 'Supplies and Other' cells)", "on_page": "Supplies and Other column total 7,833,066 = statement supplies and other 4,093,987 + employee benefits 1,942,699 + depreciation 1,636,494 + insurance 159,886",
+     "issue": "The 'Supplies and Other' column also holds the 1,942,699 of employee benefits (spread across the departments, mostly Administrative Services 2,137,426). All of it is recorded as supplies and materials, so the detail understates benefits and overstates supplies. The page doesn't print the split."},
+    {"severity": "warning", "path": "balance_sheet.liabilities[12].category", "page": 1,
+     "extracted": "accrued liabilities", "on_page": "Long-Term Compensated Absences, Less Current Obligations 230,209",
+     "issue": "The rules limit accrued liabilities to compensated absences due soon. The long-term portion would fit better as other liabilities (or debt - due in more than one year)."},
+    {"severity": "warning", "path": "balance_sheet.assets[2].original_label", "page": 1,
+     "extracted": "Receivables - Patient, net", "on_page": "Patient, net of estimated uncollectibles of $879,000",
+     "issue": "Label shortened from the printed text. The amount 3,088,011 is correct."}
+  ]
+}
