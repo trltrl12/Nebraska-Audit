@@ -1,0 +1,23 @@
+{
+  "stem": "Platte_County_FY2025",
+  "values_checked": 86,
+  "issues": [
+    {"severity": "error", "path": "missing", "page": 8,
+     "extracted": null,
+     "on_page": "Nonmajor governmental funds budget-and-actual schedule (report pp24-25, trimmed pp8-9): 18 fund columns (Juvenile Diversion Program ... Law Enforcement Equipment) with receipts of 770,420 (p8) + 1,234,089 (p9) = 2,004,509 and disbursements of 1,311,720 (p8) + 1,728,190 (p9) = 3,039,910, none of them in detail[]",
+     "issue": "The trimmed PDF has schedule lines that aren't in the JSON. The extractor left the nonmajor funds out because the Total column page (report p26) isn't trimmed. But the governmental funds statement (p4, Nonmajor Funds column) prints the combined nonmajor totals: receipts Taxes 799,918, Investment Income 62,544, Intergovernmental 1,419,027, Charges for Services 130,196, Miscellaneous 83,497, total 2,495,182; disbursements General Government 1,691,861, Public Safety 807,798, Culture and Recreation 655,253, Principal 900,400, Interest 5,115, total 4,060,427; transfers in 284,362, out (2,066,147). Those could be recorded as 'Nonmajor funds (combined)', or the fund columns could be recorded after a re-trim."},
+    {"severity": "warning", "path": "missing", "page": 9,
+     "extracted": null,
+     "on_page": "Report p26 (third nonmajor schedule page with the remaining funds and the Total column) not in trimmed PDF; trimmed p9 = report p25 ends with Law Enforcement Equipment. Unseen remainder: receipts 490,673, disbursements 1,020,517 (includes debt service 905,515), transfers out 420,652",
+     "issue": "Trimmed PDF is missing a schedule page (find_pages issue); the remainder was worked out from the p4 Nonmajor Funds column less the pp8-9 fund columns."},
+    {"severity": "warning", "path": "receipts[0].category", "page": 4,
+     "extracted": "taxes (unlabeled)", "on_page": "Taxes 16,557,497 (Total); Inheritance Tax column 2,475,957 (p4, p7); Harrah's Casino fund Taxes 616,978 (p9)",
+     "issue": "The notes say the trimmed pages show no tax-type breakdown, but p4 prints the Inheritance Tax Fund's share of the Taxes line (2,475,957, recorded in detail as inheritance tax), and p9 shows 616,978 of casino/gaming tax (keno/lottery). A partial split_from (inheritance tax 2,475,957, keno/lottery 616,978, rest taxes (unlabeled) 13,464,562) could be argued from the report's own fund columns. Left unsplit, the same label 'Taxes' has different categories in receipts and detail[14]."},
+    {"severity": "warning", "path": "detail[3].detail_category", "page": 5,
+     "extracted": "other state aid", "on_page": "Intergovernmental 3,024,756",
+     "issue": "Broad 'Intergovernmental' group in the General Fund, probably mixed state and federal (p2 shows operating grants by function). Treated as other state aid with no review flag; the rules want review 'broad group'."},
+    {"severity": "warning", "path": "ending_investments", "page": 3,
+     "extracted": 5735074, "on_page": "Investments (Note 1.D) 5,735,074",
+     "issue": "The amount is correct, but ending_cash 17,773,982 already includes these investments (the notes say so). The rules treat ending_investments as separate from cash and not added to it, so filling it while it sits inside ending_cash risks double counting downstream. Consider null, with a note."}
+  ]
+}
