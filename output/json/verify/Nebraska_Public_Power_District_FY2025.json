@@ -1,0 +1,15 @@
+{
+  "stem": "Nebraska_Public_Power_District_FY2025",
+  "values_checked": 70,
+  "issues": [
+    {"severity": "warning", "path": "receipts[2].category", "page": 3,
+     "extracted": "reimbursements/refunds", "on_page": "Other income 1,921",
+     "issue": "Nothing on the page says what 'Other income' is, so reimbursements/refunds is a guess. The rules say an unexplained 'Other' line goes in 'other' with a review note. The line is already marked review."},
+    {"severity": "warning", "path": "notes", "page": 1,
+     "extracted": "all amounts in thousands as printed", "on_page": "(in 000's) on every statement header",
+     "issue": "Every money value is stored in thousands of dollars without being scaled. Anything that combines or compares entities in cashflow_long/summary will understate NPPD by 1,000x unless the values are scaled or the unit is carried through. Transcribing the figures as printed is consistent, but this needs a decision."},
+    {"severity": "warning", "path": "balance_sheet.liabilities", "page": 2,
+     "extracted": "no item for 'Revolving credit agreements, current'", "on_page": "Revolving credit agreements, current: 2025 '-', 2024 250,314",
+     "issue": "Correctly left out: the 2025 column on the image shows a dash. The PDF's text layer puts 250,314 in the 2025 position, so a text/OCR-based amount check may wrongly flag this line or other page-2 lines."}
+  ]
+}
