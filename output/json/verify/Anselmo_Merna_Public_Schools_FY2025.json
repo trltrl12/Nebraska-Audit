@@ -1,0 +1,29 @@
+{
+  "stem": "Anselmo_Merna_Public_Schools_FY2025",
+  "values_checked": 312,
+  "issues": [
+    {"severity": "error", "path": "report_discrepancies[0]", "page": 16,
+     "extracted": {"check": "detail", "difference": -1.00, "note": "Pupil transportation line items ... sum to 260,882.75 ... likely a single digit misread"},
+     "on_page": "Pupil transportation lines 166,550.07 + 16,371.84 + 12,366.84 + 15,138.91 + 480.00 + 5,087.25 + 8,547.56 + 325.00 + 5,133.41 + 27,573.72 + 3,307.15 = 260,881.75 = printed Total support services - pupil transportation 260,881.75",
+     "issue": "Spurious discrepancy. Every pupil-transportation detail amount in the JSON (detail lines 110 Salary - drivers through 810 Dues and fees) matches the page digit for digit, and they add exactly to the printed 260,881.75. The report does add up and no digit was misread. The $1 came from the extractor's own addition and must not be listed as 'the report itself doesn't add up'. Remove this entry; no amount needs changing."},
+    {"severity": "warning", "path": "receipts[0]", "page": 3,
+     "extracted": "Local receipts 2,463,842.55 split into 13 items (split_from)",
+     "on_page": "Local receipts: General/Depr/Emp Benefit 2,346,391.25, School Nutrition 52,159.15, Special Building 65,292.15 (p3); fund schedules p6, p11, p12",
+     "issue": "The split is rebuilt from three fund schedules, not from one printed breakdown of the line. The General column figure 2,346,391.25 is not printed on p6: p6 'Total local receipts' 2,419,851.63 includes 1510 Interest 73,460.38, which the fund statement moves to 'Interest'. Special Building's 3133 Nameplate capacity tax (25.65) is printed under state items on p12 but has to be counted in local receipts to reach 65,292.15. The arithmetic holds (sums equal 2,463,842.55), but this is an inference. 'State receipts' was left unsplit, which is inconsistent. Review whether the split is allowed under the split_from rule."},
+    {"severity": "warning", "path": "receipts[13].category", "page": 6,
+     "extracted": "fines and forfeitures", "on_page": "2110 Fines and licenses 13,062.98",
+     "issue": "Label mixes fines and licenses, and neither this item nor detail[10] has the 'review' that the mixed-label rule requires."},
+    {"severity": "warning", "path": "receipts[7].category", "page": 6,
+     "extracted": "donations/contributions", "on_page": "1925 Grants 11,976.10 (under Local receipts)",
+     "issue": "Grantor not stated; could be intergovernmental. Same for detail[8]. Already marked review."},
+    {"severity": "warning", "path": "receipts[18].category", "page": 4,
+     "extracted": "charges for services/fees", "on_page": "Activities 199,897.77 (p10: 1710 Activity receipts 172,190.84 + 1920 Donation 27,706.93)",
+     "issue": "Line mixes student activity receipts and donations (27,706.93); dominant category is defensible. Already marked review."},
+    {"severity": "warning", "path": "disbursements[1].category", "page": 4,
+     "extracted": "support services", "on_page": "Support services 1,963,022.99; p7 prints Pupil transportation 260,881.75 inside it",
+     "issue": "Includes 260,881.75 of pupil transportation, which has its own category (student transportation). Kept as one line with review. Defensible because the fund statement prints one line."},
+    {"severity": "warning", "path": "disbursements[2].category", "page": 4,
+     "extracted": "support services", "on_page": "Other salaries and benefits 41,037.41 (Employee Benefit fund 2900 281 Health insurance deductible, p9)",
+     "issue": "Function guessed (also detail Employee Benefit expenditure). Already marked review."}
+  ]
+}
