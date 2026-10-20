@@ -36,8 +36,9 @@ on:
 permissions:
   contents: write
 
+# Own queue, so validate runs triggered by Claude's pushes can never cancel a waiting fetch.
 concurrency:
-  group: output-writer
+  group: fetch
   cancel-in-progress: false
 
 env:
@@ -79,7 +80,9 @@ jobs:
           if git diff --cached --quiet; then exit 0; fi
           git commit -q -m "fetch: $1 [skip ci]"
           for i in 1 2 3 4; do
-            git pull --rebase -q origin main && git push -q origin HEAD:main && exit 0
+            # Generated outputs may also be written by validate: keep this run's version on a conflict.
+            git pull --rebase -q -X theirs origin main && git push -q origin HEAD:main && exit 0
+            git rebase --abort 2>/dev/null || true
             sleep $(( 2 ** i ))
           done
           echo "::error::push failed"; exit 1

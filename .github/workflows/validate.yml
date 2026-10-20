@@ -11,9 +11,10 @@ on:
 permissions:
   contents: write
 
+# Own queue: only the newest validate matters, and a waiting fetch is never bumped by it.
 concurrency:
-  group: output-writer
-  cancel-in-progress: false
+  group: validate
+  cancel-in-progress: true
 
 jobs:
   validate:
@@ -42,7 +43,9 @@ jobs:
           if git diff --cached --quiet; then echo "No changes"; exit 0; fi
           git commit -m "validate: update flagged, progress and CSV/XLSX outputs [skip ci]"
           for i in 1 2 3 4; do
-            git pull --rebase origin main && git push origin HEAD:main && exit 0
+            # Generated files: on a conflict keep this run's version (-X theirs = the commit being replayed).
+            git pull --rebase -X theirs origin main && git push origin HEAD:main && exit 0
+            git rebase --abort 2>/dev/null || true
             sleep $(( 2 ** i ))
           done
           echo "push failed"; exit 1
