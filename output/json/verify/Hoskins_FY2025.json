@@ -1,0 +1,15 @@
+{
+  "stem": "Hoskins_FY2025",
+  "values_checked": 29,
+  "issues": [
+    {"severity": "warning", "path": "receipts[10].category", "page": 1,
+     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Enterprise Fund column) 107,598.27",
+     "issue": "Line printed only as 'Local Receipts: Other'; categorizing it as utility charges is an assumption (review already set). original_label also has '(Enterprise Fund)' appended, which is not printed on the row."},
+    {"severity": "warning", "path": "receipts", "page": 1,
+     "extracted": "Water Bond column treated as governmental", "on_page": "WATER BOND column (property tax 19,539.84, ending (751.44)); disbursement only Debt Service 24,770.00 (p3); Water Bonds 140,000 outstanding (p5)",
+     "issue": "Water Bond fund is a debt service fund for water bonds, funded by property tax; treating it as governmental is defensible but it services utility debt. Its negative ending balance (751.44) is included in governmental ending_cash."},
+    {"severity": "warning", "path": "notes", "page": 1,
+     "extracted": null, "on_page": "County Treasurer Balance at October 1, 2024 $2,564.09; at September 30, 2025 2,257.82",
+     "issue": "County Treasurer balances printed below the statement are not recorded or mentioned in notes; they are not included in lines 1-28, so balances as extracted are correct, but the omission should be noted."}
+  ]
+}
