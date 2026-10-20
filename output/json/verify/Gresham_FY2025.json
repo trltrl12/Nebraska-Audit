@@ -1,0 +1,15 @@
+{
+  "stem": "Gresham_FY2025",
+  "values_checked": 38,
+  "issues": [
+    {"severity": "warning", "path": "beginning_investments", "page": 1,
+     "extracted": 142611.99, "on_page": "Line 2 Investments 142,611.99; also inside beginning_cash 388,231.32 (line 3 subtotal)",
+     "issue": "beginning_cash/ending_cash already include investments (needed for the line 3 / line 24 roll-forward) while beginning_investments/ending_investments are also filled; rules say investments are informational and not added to cash, so downstream use must not add them twice. Same for ending_investments 148,334.45."},
+    {"severity": "warning", "path": "receipts[11].category", "page": 1,
+     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Water Fund) 74,885.06",
+     "issue": "Water and Sewer columns only print 'Local Receipts: Other'; utility charges is an assumption (already marked review). Sewer 95,893.67 may include NDEE loan proceeds (loan issued 12/15/2024, 172,718.18 outstanding p5); covered in decision_needed."},
+    {"severity": "warning", "path": "disbursements[6].category", "page": 3,
+     "extracted": "debt service principal", "on_page": "Debt Service 7,268.15 (Sewer Fund)",
+     "issue": "principal and interest not split on the page; whole line put in principal (marked review)."}
+  ]
+}
