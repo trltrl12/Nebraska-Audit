@@ -1,0 +1,18 @@
+{
+  "stem": "Annie_Jeffrey_Memorial_Health_Center_FY2025",
+  "values_checked": 23,
+  "issues": [
+    {"severity": "error", "path": "balance_sheet", "page": null,
+     "extracted": "empty (statement 'Not included in trimmed PDF')", "on_page": "Trimmed PDF has only 2 pages: Statement of Revenues, Expenses and Changes in Net Position (p1, report p.11) and Statement of Cash Flows (p2, report p.12, marked '(Continued)'). The Statement of Net Position (likely report p.9-10) is not in the trimmed PDF",
+     "issue": "Required balance sheet pages missing from trimmed PDF (manifest also flags no_balance_statement); find_pages.py needs to re-trim to include the Statement of Net Position. The cash flow continuation page (reconciliation) is also cut off"},
+    {"severity": "warning", "path": "receipts[3].category", "page": 1,
+     "extracted": "taxes (unlabeled)", "on_page": "Tax revenue 278,163",
+     "issue": "Almost certainly the Polk County property tax levy for the health center, but the trimmed pages don't say so; taxes (unlabeled) is defensible"},
+    {"severity": "warning", "path": "receipts[6].category", "page": 1,
+     "extracted": "donations/contributions", "on_page": "Noncapital grants and contributions 60,049",
+     "issue": "Mixes grants (possibly governmental) and contributions; source not stated"},
+    {"severity": "warning", "path": "receipts[5].amount", "page": 1,
+     "extracted": 2070, "on_page": 2070,
+     "issue": "Correct per page image (2025 = 2,070; 2024 = (1,118)), but the text layer lists '(1,118) 2,070' in reversed order, so an automated text check may misread it"}
+  ]
+}
