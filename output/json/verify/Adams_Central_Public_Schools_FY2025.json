@@ -1,21 +1,12 @@
 {
   "stem": "Adams_Central_Public_Schools_FY2025",
-  "values_checked": 221,
+  "values_checked": 158,
   "issues": [
-    {"severity": "error", "path": "detail[37].amount", "page": 9,
-     "extracted": 532554, "on_page": "532,554 (p9 General Fund Actual; also p5 General Fund column); p6 Eliminations (200,000) on the same row gives Total Governmental 332,554",
-     "issue": "Neither figure is a misread digit: 532,554 is printed for the General Fund on p5 and p9, and 332,554 is the p6 Total Governmental Funds after a (200,000) elimination on the Pupil transportation row. That 200,000 is the interfund transfer to the Depreciation Fund (p13 'Transfer from other funds' 200,000, recorded as detail[69] +200,000 other financing). The JSON counts the same 200,000 twice: as General Fund student transportation spending and as a transfer into Depreciation. Detail expenditures (excluding other financing) total 19,641,589 against the statement's 19,441,589. Should be 332,554 student transportation plus a -200,000 other-financing transfer (split_from the 532,554 line, using the p6 elimination), or at least flagged."},
-    {"severity": "error", "path": "detail[72].amount", "page": 13,
-     "extracted": 817168, "on_page": "Activity Fund Extracurricular receipts 817,168 (p13); p6 Eliminations (250,000) on the Extracurricular receipts row; p9 General 'Transfer to Activity Fund' 250,000",
-     "issue": "The Activity Fund's 817,168 includes the 250,000 transfer from the General Fund (eliminated on p6, where Total Governmental extracurricular receipts are 585,887 = 835,887 - 250,000). The General side is recorded as -250,000 other financing (detail[28]), but the receiving side is recorded as student activity receipts, so detail revenue is overstated by 250,000 (detail revenue sums to 21,614,188 against the statement's 21,364,188). The 250,000 should be split out as +250,000 other financing (split_from 817,168, using the p6 elimination)."},
-    {"severity": "warning", "path": "disbursements[9].category", "page": 6,
-     "extracted": "support services", "on_page": "Community service operations 3,852",
-     "issue": "Community service operations (function code 3300 on p9) is a separate function in the school chart of accounts, not support services (2xxx). It could be 'other' (with review). Same applies to detail[38]."},
-    {"severity": "warning", "path": "detail[33].department", "page": 9,
-     "extracted": "Support services", "on_page": "Only 'Pupil' and 'Instructional staff' are indented under 'Support services:' on p9",
-     "issue": "department 'Support services' was also given to General administration, School administration, Business, Building and grounds, Pupil transportation and Community service operations (detail[33]-[38]). Those rows are not printed under the heading; the extractor inferred it from the function codes (3300 Community service operations is not support services)."},
-    {"severity": "warning", "path": "detail[70].detail_category", "page": 13,
-     "extracted": "construction/infrastructure", "on_page": "Depreciation Fund Capital outlay 219,773",
-     "issue": "The page gives no object breakdown for the Depreciation Fund's capital outlay. 'construction/infrastructure' is a guess; it could be equipment purchases or 'not itemized'."}
+    {"severity": "warning", "path": "detail[37].review", "page": 9, "extracted": null, "on_page": "Pupil transportation 532,554 (p9); elimination (200,000) on Pupil transportation row and on 'Transfer from General Fund' receipts row (p6); Depreciation Fund 'Transfer from other funds' 200,000 (p13)", "issue": "Split confirmed against the pages (332,554 spending + -200,000 transfer = 532,554). The spending half carries split_from/computed but no 'review'; the hidden-transfer rule asks for review on both halves (detail[38] has it)."},
+    {"severity": "warning", "path": "detail[73].review", "page": 13, "extracted": null, "on_page": "Activity Fund Extracurricular receipts 817,168 (p13); elimination (250,000) on Extracurricular receipts row (p6); General Fund 'Transfer to Activity Fund' 250,000 (p9) / 'Extracurricular activities' 250,000 (p5) eliminated (250,000) (p6)", "issue": "Split confirmed against the pages (567,168 receipts + 250,000 transfer = 817,168; Activity + Student Fees 817,168 + 18,719 = 835,887 on p6). The receipts half has no 'review'; rule asks for review on both halves (detail[74] has it)."},
+    {"severity": "warning", "path": "disbursements[9].category", "page": 6, "extracted": "support services", "on_page": "Community service operations 3,852", "issue": "Function 3300 community service operations is not a support-services function; 'other' (with review) is an alternative. Same for detail[39]."},
+    {"severity": "warning", "path": "disbursements[10].category", "page": 6, "extracted": "instruction", "on_page": "State categorical programs 44,545", "issue": "Function judgment; state categorical programs mapped to instruction. Same mapping in detail[40]."},
+    {"severity": "warning", "path": "disbursements[11].category", "page": 6, "extracted": "instruction", "on_page": "Federal programs 332,473", "issue": "Function judgment; federal programs mapped to instruction. Same mapping in detail[41]."},
+    {"severity": "warning", "path": "receipts[9].category", "page": 6, "extracted": "fines and forfeitures", "on_page": "Fines and licenses 68,613", "issue": "Mixed label (fines and licenses); dominant-category choice with review, defensible. Same in detail[10]."}
   ]
 }

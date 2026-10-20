@@ -2,23 +2,11 @@
   "stem": "Alda_FY2025",
   "values_checked": 93,
   "issues": [
-    {"severity": "warning", "path": "detail[10].category", "page": 11,
-     "extracted": "general government", "on_page": "Insurance 24,484 = General 5,787 + Ballpark 8,882 + Fire 9,815",
-     "issue": "Fire (9,815) is the largest share, so under the dominant-function rule this would be public safety, not general government."},
-    {"severity": "warning", "path": "detail[15].category", "page": 11,
-     "extracted": "general government", "on_page": "Repairs and maintenance 22,235 = General 5,155 + Ballpark 4,241 + Community Center 1,631 + Fire 11,208",
-     "issue": "Fire (11,208, about half) is the largest share, so the dominant function would be public safety."},
-    {"severity": "warning", "path": "detail[17]", "page": 11,
-     "extracted": {"category": "general government", "detail_category": "dues, training and travel"}, "on_page": "Transportation 2,350 = General 1,042 + Fire 1,308",
-     "issue": "Fire is the larger share, so the dominant function would be public safety. The object could also be fuel rather than travel."},
-    {"severity": "warning", "path": "detail[9]", "page": 11,
-     "extracted": "General Fund lines taken from the Total column, department null", "on_page": "Six department columns printed (General, Police, Ballpark, Community Center, Fire, Rescue)",
-     "issue": "The Total column loses the department breakdown, so the functions are guesses. The 11 operating lines mapped to general government sum to 134,861, but the p5 General government function is 80,688 (Fire, Ballpark and Community Center costs are included). Recording per department would allow exact functions. Principal 9,656 and interest 352 are entirely Fire Department debt."},
-    {"severity": "warning", "path": "detail[25].detail_category", "page": 10,
-     "extracted": "highway allocation", "on_page": "Street Fund 'Intergovernmental' 115,729",
-     "issue": "The label does not say highway allocation. The category is a reasonable assumption for a Street Fund, but it is not printed."},
-    {"severity": "warning", "path": "disbursements[18].amount", "page": 7,
-     "extracted": 2474, "on_page": "Interest expense: Water 13,862 (positive), Sewer (16,336), Total (2,474)",
-     "issue": "The total is recorded as printed, but the Water figure appears to be a sign error in the report: the p8 cash flow shows interest paid (13,862), which makes true total interest 30,198. The report's own totals are internally consistent with the sign as printed, so this is a question about the report, not about the extraction."}
+    {"severity": "warning", "path": "detail[9]", "page": 11, "extracted": "Total column with department null", "on_page": "Department columns General, Police, Ballpark, Community Center, Fire, Rescue", "issue": "The combining General Fund departments schedule prints a column for each of 6 departments, but detail[0]-detail[23] use only the Total column and assign one function per line by dominant share. For example, Insurance 24,484 is all public safety even though only 9,815 is Fire (General 5,787, Ballpark 8,882), and Supplies 9,867 is all general government even though it covers 5 departments. Recording per department would keep the functions accurate. Dominant-share mapping is documented with review, so this is a warning."},
+    {"severity": "warning", "path": "detail[21].detail_category", "page": 11, "extracted": "equipment purchases", "on_page": "Capital outlay 20,671 (General 7,749, Ballpark 4,567, Fire 8,355)", "issue": "Object not stated on the page; 'equipment purchases' is an assumption and has no review."},
+    {"severity": "warning", "path": "receipts[4].category", "page": 5, "extracted": "charges for services/fees", "on_page": "Charges for services 11,554 (= Licenses and permits 1,701 + Rental and fees 9,853, p11)", "issue": "Top-level line includes 1,701 of licenses and permits per p11; charges is dominant, but no review naming the mix."},
+    {"severity": "warning", "path": "disbursements[18]", "page": 7, "extracted": 2474, "on_page": "Interest expense: Water 13,862 (positive), Sewer (16,336), Total (2,474); Loan and bond fees Water (28,661); cash flow p8 shows interest paid (13,862) and fees paid (937)", "issue": "The report's Water interest/fees split looks misstated: 27,724 (= 2 x 13,862) is moved between interest and fees. Interest + fees total 39,735 still matches the cash flow (30,198 + 9,537), so the totals and roll-forward hold. Amounts are recorded as printed; flagged for review."},
+    {"severity": "warning", "path": "beginning_cash", "page": 5, "extracted": 279722, "on_page": "Fund balance - September 30, 2024 279,722", "issue": "Beginning cash is the printed beginning fund balance (modified cash basis, no separate beginning cash line). Reasonable, but it's an assumption (review set)."},
+    {"severity": "warning", "path": "detail[25].detail_category", "page": 10, "extracted": "highway allocation", "on_page": "Intergovernmental 115,729 (Street Fund)", "issue": "Label is only 'Intergovernmental'; highway allocation is assumed for a Street Fund (review set)."}
   ]
 }
