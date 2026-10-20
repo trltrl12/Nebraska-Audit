@@ -1,0 +1,24 @@
+{
+  "stem": "Memphis_FY2025",
+  "values_checked": 26,
+  "issues": [
+    {"severity": "warning", "path": "report_discrepancies[0].difference", "page": 1,
+     "extracted": 440.64, "on_page": "line 28 total 133,327.04 minus line 24 total 133,767.68 = -440.64",
+     "issue": "sign convention is printed result minus parts; difference should probably be -440.64"},
+    {"severity": "warning", "path": "business_type.ending", "page": 1,
+     "extracted": 65991.38, "on_page": "Water/Sewer line 24 65,991.38 vs line 28 Net Cash Balance 41,236.64",
+     "issue": "business-type ending uses line 24, which reconciles, but line 28 shows 24,754.74 less cash for Water/Sewer; no 'business' entry in report_discrepancies for this fund-level gap (Keno +23,992.74, Keno Reserve +13,486.02, General +7,494.98, Street -20,659.64 also differ)"},
+    {"severity": "warning", "path": "decision_needed", "page": 1,
+     "extracted": null, "on_page": "Total Receipts 79,441.35 = Total Disbursements 79,441.35 exactly; line 24 vs line 28 fund balances differ widely; pages 3-6 are crossed-out versions with different figures",
+     "issue": "identical receipts and disbursements totals plus large per-fund line 24/line 28 gaps suggest the unmarked disbursement figures may be plugged or misallocated; a person should confirm which ending balances (line 24 or line 28) are authoritative. No decision_needed entry."},
+    {"severity": "warning", "path": "balance_sheet.equity[0].original_label", "page": 1,
+     "extracted": "Subtotal of Ending Balances (Line 28)", "on_page": "Subtotal of Ending Balances (Line 26 + 27)",
+     "issue": "label paraphrased (amount 133,327.04 correct)"},
+    {"severity": "warning", "path": "receipts[5].category", "page": 1,
+     "extracted": "keno/lottery", "on_page": "Local Receipts: Other, Keno Fund column 14,396.15",
+     "issue": "keno inferred from fund name; defensible (marked review)"},
+    {"severity": "warning", "path": "balance_sheet.assets", "page": 1,
+     "extracted": null, "on_page": "County Treasurer Balance at September 30, 2025: 115.81 (Oct 1, 2024: 313.87)",
+     "issue": "county treasurer balances printed below the statement not recorded or mentioned"}
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "stem": "Merna_FY2025",
+  "values_checked": 65,
+  "issues": [
+    {"severity": "error", "path": "detail[3].category", "page": 9,
+     "extracted": "other / miscellaneous revenue", "on_page": "Other local receipts (governmental portion 76,485 = charges for services 64,804 + interest 3,879 + contributions 2,039 + miscellaneous 5,763 per p5)",
+     "issue": "charges for services are 85% of this portion; rule says a broad line whose components are more than half one category takes that category: should be charges for services/fees / other charges for services (with review naming the mix), not other"},
+    {"severity": "warning", "path": "detail[3].split_from", "page": 9,
+     "extracted": "Other local receipts 225,953 (p9)", "on_page": "Other local receipts 225,953 (single all-funds line; p9 prints no governmental/business-type split)",
+     "issue": "split by fund type uses p5 and p7 statement lines rather than a breakdown printed for this line; arithmetic ties exactly (76,485 + 149,468 = 225,953) and the fund-type rule requires separating them, but it is a split the budget page itself does not print"},
+    {"severity": "warning", "path": "detail[4].detail_category", "page": 9,
+     "extracted": "other charges for services", "on_page": "business-type portion = Water sales 109,034 + Sewer sales 38,191 (p7)",
+     "issue": "utility sales; other utility charges (or water/sewer charges) fits better than other charges for services"},
+    {"severity": "warning", "path": "receipts[5].category", "page": 5,
+     "extracted": "donations/contributions", "on_page": "Contributions and grants 2,039 (Street Fund; shown as Capital Grants and Contributions for Public works on p3)",
+     "issue": "may be a government grant (intergovernmental) rather than a private donation; page does not say"},
+    {"severity": "warning", "path": "beginning_cash", "page": 5,
+     "extracted": 47076, "on_page": "Fund balances - September 30, 2024: 47,076",
+     "issue": "beginning cash taken from fund balance (no prior-year cash printed); reasonable under modified cash with no liabilities, marked computed"}
+  ]
+}
