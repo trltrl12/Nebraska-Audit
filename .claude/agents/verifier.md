@@ -31,10 +31,14 @@ For each filename you're given (e.g. `Lincoln_FY2025.pdf`, stem `Lincoln_FY2025`
      reimbursements, donations, sale of assets…) is an **error**; a transfer recorded as revenue or
      spending is an **error**; a split (`split_from`) that the page doesn't print is an **error**;
      a doubtful but defensible category is a warning.
-3. Check **completeness**: every revenue/expenditure line printed on the statements and detail
+3. **Add it up yourself:** sum every list against its printed total (receipts and disbursements
+   per fund type, each detail schedule per fund and section, balance-sheet sections) and roll the
+   balances forward. A gap is an **error** (find the missing, extra or misread line) unless the
+   page itself doesn't add up, in which case it must be in `report_discrepancies`.
+4. Check **completeness**: every revenue/expenditure line printed on the statements and detail
    schedules is in the JSON exactly once (nothing skipped, nothing double counted across
    schedules), and subtotal/total lines are not entered as items.
-4. Write `output/json/verify/<stem>.json` (create the folder if needed). Never edit
+5. Write `output/json/verify/<stem>.json` (create the folder if needed). Never edit
    `output/json/<stem>.json` itself, and write nowhere else:
 
 ```json

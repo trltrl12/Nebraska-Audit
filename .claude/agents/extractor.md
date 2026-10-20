@@ -208,6 +208,9 @@ independent verifier, so unmarked computed values show up as errors. If a value 
   - Don't include subtotal or total lines as items. Record each schedule's printed totals in
     `detail_totals`, once per fund and section ("Total Revenues", "Total Expenditures"); validation
     checks that the items add up to them.
+  - **Student activity funds:** when a per-account activities schedule is printed (Athletics,
+    Band, FFA, class accounts…), record it account by account; it is the more detailed schedule,
+    so leave out the one-line activities budget schedule instead.
   - **No double counting:** if the same fund's lines appear on two schedules (e.g. a budget
     schedule and a departmental schedule for the General Fund), record only the more detailed one
     and say so in `notes`. For a combining schedule with many fund columns, record per fund for up
