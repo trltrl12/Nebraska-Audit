@@ -112,8 +112,7 @@ agents' one-line statuses.
   Atlanta, Avoca, Ayr, Barada, Barneston, Bartlett, Bazile_Mills, Bee, Belden, Belgrade, Belvidere,
   Benedict, Berwyn, Bladen (all _FY2025). Verify them once v6 re-trims them (re-extract first if their pages changed).
 These were diagnosed and fixed in find_pages v6; re-extract and re-verify them after the re-trim:
-- Trimmed PDF is missing pages: Annie_Jeffrey_Memorial_Health_Center_FY2025 (balance sheet),
-  Adams_County_FY2025 (report p45: Highway Bond Fund, nonmajor totals), Arapahoe_FY2025 (other
+- Trimmed PDF is missing pages: Adams_County_FY2025 (report p45: Highway Bond Fund, nonmajor totals), Arapahoe_FY2025 (other
   nonmajor combining page), Auburn_Public_Schools_FY2025 (report p27, Employee Benefit Fund),
   Battle_Creek_FY2025 (report pp10-12, proprietary statement), Butte_FY2025 (report p31, rest of
   General Fund spending), Cody_Kilgore_Public_School_FY2025 (p18 activity accounts cut off; residual
