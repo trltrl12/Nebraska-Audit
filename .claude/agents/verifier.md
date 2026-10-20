@@ -24,7 +24,13 @@ For each filename you're given (e.g. `Lincoln_FY2025.pdf`, stem `Lincoln_FY2025`
    - is `fund_type` right (governmental vs business-type/enterprise)?
    - if the value isn't printed anywhere (a sum or split the extractor computed), is it marked
      with `computed` or `split_from`, and is the arithmetic right?
-   - are categories sensible (`category`, `detail_category`)? A doubtful category is a warning.
+   - are categories right under the category rules in `.claude/agents/extractor.md` (read its
+     "Receipt categories" and "Disbursement categories" sections first)? A line in `other`,
+     `other taxes`, `miscellaneous revenue/expenditure` or `other local taxes` when a specific
+     category fits (motor vehicle, keno/lottery, special assessments, licenses, fines,
+     reimbursements, donations, sale of assets…) is an **error**; a transfer recorded as revenue or
+     spending is an **error**; a split (`split_from`) that the page doesn't print is an **error**;
+     a doubtful but defensible category is a warning.
 3. Check **completeness**: every revenue/expenditure line printed on the statements and detail
    schedules is in the JSON exactly once (nothing skipped, nothing double counted across
    schedules), and subtotal/total lines are not entered as items.
