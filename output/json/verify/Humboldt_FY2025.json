@@ -1,0 +1,27 @@
+{
+  "stem": "Humboldt_FY2025",
+  "values_checked": 93,
+  "issues": [
+    {"severity": "error", "path": "other_financing", "page": 5,
+     "extracted": 15350, "on_page": "Other Financing Sources (Uses): Grant 15,350",
+     "issue": "A grant is revenue, not an other financing source. It is printed below the 'Total' receipts line, so it should be a governmental receipt (intergovernmental/state aid or federal grants, with review) carrying outside_printed_total: true, with the printed total left at 946,257. The roll-forward still ties either way."},
+    {"severity": "error", "path": "business_type.other_financing", "page": 3,
+     "extracted": 25500, "on_page": "Other Financing Sources: Grants 25,500 (p4 cash flow shows it under non-capital financing)",
+     "issue": "This is a noncapital grant, which is revenue, not a capital contribution or other financing. It should be a business-type receipt with outside_printed_total: true."},
+    {"severity": "warning", "path": "detail[19].section", "page": 5,
+     "extracted": "other financing", "on_page": "Grant 15,350 (budget 10,000)",
+     "issue": "A grant is revenue. Section 'other financing' is meant for transfers, debt proceeds and sale of assets. It is printed under Other Financing Sources, so the placement is defensible, but it should be consistent with the receipts fix."},
+    {"severity": "warning", "path": "detail[27].section", "page": 6,
+     "extracted": "other financing", "on_page": "Grant 25,500 (budget -)",
+     "issue": "Same issue as detail[19]: a grant recorded as other financing rather than revenue."},
+    {"severity": "warning", "path": "balance_sheet.total_liabilities", "page": 1,
+     "extracted": 1388072, "on_page": "Total liabilities 1,225,000 (Total - Memorandum Only)",
+     "issue": "The printed 'Total liabilities' line (1,225,000) is only the long-term subtotal. The extractor substituted a computed 1,388,072, which is correct, ties to p2 and balances, and is marked computed. No report_discrepancies entry records the misleading printed total."},
+    {"severity": "warning", "path": "missing", "page": null,
+     "extracted": null, "on_page": "Report pp5-7 (governmental fund statements / statement of activities) are not in the trimmed PDF (trimmed p1 = report p4, p2 = report p8)",
+     "issue": "Governmental receipts and disbursements come from the p5 budget schedule because the governmental statement was not trimmed. They tie to the budget schedule's actual totals, but the source statement could not be checked."},
+    {"severity": "warning", "path": "detail[20].detail_category", "page": 6,
+     "extracted": "other utility charges", "on_page": "Water and sewer 340,247",
+     "issue": "This line combines water and sewer charges. 'other utility charges' is defensible, but it could be marked review as mixed."}
+  ]
+}
