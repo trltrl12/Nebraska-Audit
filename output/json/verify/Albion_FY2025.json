@@ -1,0 +1,30 @@
+{
+  "stem": "Albion_FY2025",
+  "values_checked": 154,
+  "issues": [
+    {"severity": "error", "path": "missing", "page": 14,
+     "extracted": null,
+     "on_page": "Combining Statement - Nonmajor Governmental Funds: Keno Fund Lottery proceeds 8,181; Keno Fund General government 50; Housing Rehab Fund Transfers in 2,360; Keno Fund Transfers out (7,190); totals revenues 8,181 / expenditures 50",
+     "issue": "supplementary combining schedule left out of detail[] and detail_totals[]. These funds have no other detail schedule, so adding them would not double count"},
+    {"severity": "error", "path": "detail[12..24].category", "page": 15,
+     "extracted": "general government (all General Fund expenditure lines, Total column)",
+     "on_page": "Departments General, Park, Police, Fire, Library, Pool on p15-16; e.g. Salaries and benefits 757,465 = General 301,201 + Park 64,372 + Police 247,377 + Fire 2,685 + Library 84,499 + Pool 57,331",
+     "issue": "the category (function) is wrong for most of the money. Only 528,174 of the 2,237,222 in expenditures is the General department; Police/Fire are public safety and Park/Library/Pool are culture/recreation. The schedule prints six department columns, so lines should be entered per department, with department set, instead of the Total column with department null"},
+    {"severity": "warning", "path": "detail[3].category", "page": 16,
+     "extracted": "intergovernmental/state aid / county/other local governments", "on_page": "Rural fire reimbursements 46,169 (under Intergovernmental revenue heading)",
+     "issue": "the rules put rural fire contracts under charges for services/fees; the label also suggests reimbursements/refunds. The page heading supports intergovernmental, so this is a judgment call"},
+    {"severity": "warning", "path": "receipts[5].category", "page": 5,
+     "extracted": "intergovernmental/state aid", "on_page": "Grant revenue 93,022",
+     "issue": "grant source (state/federal/private) not stated; detail[4] uses other state aid. Extractor marked review"},
+    {"severity": "warning", "path": "detail[12].detail_category", "page": 16,
+     "extracted": "salaries and wages", "on_page": "Salaries and benefits 757,465",
+     "issue": "combined salaries and benefits line; wages and benefits can't be separated"},
+    {"severity": "warning", "path": "detail[20].detail_category", "page": 16,
+     "extracted": "dues, training and travel", "on_page": "Transportation 16,392",
+     "issue": "could be fuel/vehicle costs rather than travel"},
+    {"severity": "warning", "path": "proprietary", "page": 9,
+     "extracted": null,
+     "on_page": "Statement of Cash Flows - Proprietary Funds, Total: operating 211,902; noncapital financing 378,288; capital and related financing (1,171,767); investing 246,276; beginning cash 535,779; ending cash 200,478",
+     "issue": "the business-type funds are accrual and a proprietary cash flow statement is printed, but proprietary is null because basis is cash. This is allowed by the GAAP-only rule but drops data"}
+  ]
+}
