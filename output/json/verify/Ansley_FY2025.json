@@ -1,0 +1,33 @@
+{
+  "stem": "Ansley_FY2025",
+  "values_checked": 99,
+  "issues": [
+    {"severity": "error", "path": "detail[11].amount", "page": 18,
+     "extracted": 191655, "on_page": "General Government 191,655 under 'Disbursements and Transfers'; GAAP General Government 151,655 (p6); General Fund Transfers Out (40,000) (p7)",
+     "issue": "Hidden transfer: 191,655 = 151,655 spending + 40,000 General Fund transfer out. The schedule prints Transfers 52,000 on the receipt side but has no transfer-out line, so the outflow sits inside this spending line. Split into 151,655 expenditure + (40,000) other financing, both with split_from and review."},
+    {"severity": "error", "path": "detail[13].amount", "page": 18,
+     "extracted": 197414, "on_page": "Public Works 197,414; Street and Alley Fund Total Expenditures 195,014 (p5) and Transfers Out (2,400) (p7)",
+     "issue": "Hidden transfer: 197,414 = 195,014 Street fund spending + 2,400 transfer out. Split out the (2,400) as other financing with split_from and review."},
+    {"severity": "error", "path": "detail[15].amount", "page": 18,
+     "extracted": 939009, "on_page": "Electric 939,009; Electric cash flows p15: suppliers 583,864 + employees 112,738 + capital assets 129,530 + principal 45,432 + interest 65,045 = 936,609; Transfers (2,400) p14/p15",
+     "issue": "Hidden transfer: 939,009 = 936,609 cash spending + 2,400 transfer out. Split out the (2,400) as other financing with split_from and review."},
+    {"severity": "warning", "path": "detail[16].amount", "page": 18,
+     "extracted": "Trash 121,666; Sewer 127,318; Water 126,402 (detail[16]-[18])", "on_page": "Each of Trash, Sewer and Water transfers out (2,400) (p14); schedule shows Transfers in 52,000 = 40,000 + 2,400 + 4 x 2,400 with no transfer-out line",
+     "issue": "Each of these lines very likely includes a 2,400 transfer out. Transfers in total 52,000 and the only outflow lines are spending lines. The amounts can't be confirmed from the cash-flow statement (accrual/cash timing), so this is a warning rather than an error. Review and split if confirmed."},
+    {"severity": "warning", "path": "detail[9]", "page": 17,
+     "extracted": {"fund_type": "business-type", "category": "other", "detail_category": "miscellaneous revenue", "amount": 1298608}, "on_page": "Local Receipts: Other 1,298,608 (total primary government)",
+     "issue": "Mixed line: it holds utility charges (business-type operating revenue 1,116,387, p13) and governmental local receipts (franchise, occupation, rentals, interest, grants, etc.), but it is tagged entirely business-type. Category 'other' is defensible from the page label alone, but the report shows it is mostly utility charges (charges for services/fees). Already marked review."},
+    {"severity": "warning", "path": "detail[5].detail_category", "page": 17,
+     "extracted": "other state aid", "on_page": "State Receipts: Other 13,254 = Homestead Exemption 5,804 + Property Tax Credit 7,450 (p6)",
+     "issue": "The amount exactly equals homestead + property tax credit on p6. homestead/tax credits fits better."},
+    {"severity": "warning", "path": "basis", "page": 5,
+     "extracted": "GAAP", "on_page": "Governmental funds statements titled 'Modified Cash Basis' (p3-p8); proprietary funds accrual",
+     "issue": "Governmental funds are modified cash basis. GAAP treatment (fund balance roll-forward 396,510 to 477,800, ending_cash 442,402) reconciles and is defensible, but it is the extractor's assumption."},
+    {"severity": "warning", "path": "receipts[18].category", "page": 6,
+     "extracted": "intergovernmental/state aid", "on_page": "Grants 23,500",
+     "issue": "Grantor not stated; could be federal or private. Already marked review."},
+    {"severity": "warning", "path": "disbursements[7]", "page": 13,
+     "extracted": "Personal Services / Contracted Services / Depreciation (disbursements[7],[8],[11]) category utilities", "on_page": "Proprietary expenses printed by object only",
+     "issue": "Listed by object with no function. Materials and Supplies and Other Operating Expenses carry 'review: listed by object', but these three lines do not."}
+  ]
+}
