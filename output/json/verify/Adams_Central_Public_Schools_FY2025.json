@@ -1,0 +1,31 @@
+{
+  "stem": "Adams_Central_Public_Schools_FY2025",
+  "values_checked": 211,
+  "issues": [
+    {"severity": "error", "path": "reported_totals.business-type.receipts.amount", "page": 8,
+     "extracted": 572873, "on_page": "Total operating receipts 572,034; Interest income 839 (no combined total printed)",
+     "issue": "computed sum (572,034 + 839) is not marked with 'computed'; arithmetic is correct"},
+    {"severity": "error", "path": "detail[67..72]", "page": 13,
+     "extracted": "fund = 'Nonmajor funds (combined)' (Total Other Governmental Funds column)",
+     "on_page": "Combining statement has only 4 fund columns: Depreciation, Employee Benefits, Activity, Student Fees",
+     "issue": "rules require per-fund lines for combining schedules with up to 6 funds; Total column used instead (totals themselves are correct)"},
+    {"severity": "warning", "path": "detail[41]", "page": 9,
+     "extracted": "section revenue/expenditure, category instruction, detail_category grants/payments to other entities",
+     "on_page": "Transfer to Activity Fund 250,000",
+     "issue": "interfund transfer; arguably section 'other financing' rather than an instruction expenditure (it is inside the printed total disbursements)"},
+    {"severity": "warning", "path": "detail[70]", "page": 13,
+     "extracted": "section revenue, detail_category miscellaneous revenue",
+     "on_page": "Transfer from other funds 200,000",
+     "issue": "interfund transfer; arguably section 'other financing' (it is inside the printed total receipts)"},
+    {"severity": "warning", "path": "detail_totals[4], detail_totals[5]", "page": 11,
+     "extracted": "revenue 22,527; expenditure 0",
+     "on_page": "Cooperative Fund schedule prints no Total receipts / Total disbursements lines",
+     "issue": "detail_totals entries are not printed totals (single line values); not marked computed"},
+    {"severity": "warning", "path": "disbursements[12].category", "page": 6,
+     "extracted": "instruction", "on_page": "Extracurricular activities 714,913",
+     "issue": "extracurricular activities mapped to instruction; could be support services/other"},
+    {"severity": "warning", "path": "detail[72].category", "page": 13,
+     "extracted": "instruction", "on_page": "Extracurricular activities 714,913",
+     "issue": "extracurricular activities mapped to instruction; could be support services/other"}
+  ]
+}
