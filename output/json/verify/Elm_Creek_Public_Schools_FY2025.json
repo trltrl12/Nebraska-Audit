@@ -1,0 +1,18 @@
+{
+  "stem": "Elm_Creek_Public_Schools_FY2025",
+  "values_checked": 236,
+  "issues": [
+    {"severity": "error", "path": "detail[116].category", "page": 21,
+     "extracted": "student activities", "on_page": "Activities receipts 345,162 (revenue section)",
+     "issue": "'student activities' is a disbursement category, not a receipt category; a revenue line needs a receipt category. The same label in receipts[9] is 'charges for services/fees', and the rules say the same label gets the same category everywhere (detail_category 'student activity receipts' is fine)"},
+    {"severity": "warning", "path": "receipts[8].category", "page": 3,
+     "extracted": "other", "on_page": "Other 2,598 (p3); the GF budget schedule p11 prints the same amount as 1925 Categorical grants under Local sources",
+     "issue": "The report says what this line is, so 'other' is questionable. It could be donations/contributions (a grant not from a government) or intergovernmental. Same question for detail[9] (category other / detail_category miscellaneous revenue for 'Categorical grants')"},
+    {"severity": "warning", "path": "receipts[14].category", "page": 3,
+     "extracted": "intergovernmental/state aid", "on_page": "County receipts 25,176 = Fines and licenses 22,907 + ESU receipts 2,269 (p7/p11)",
+     "issue": "Most of this line is county-distributed fines and licenses, which detail[10] puts under fines and forfeitures. Keeping one line is defensible (label is 'County receipts'), but the high-level categories don't match between receipts and detail"},
+    {"severity": "warning", "path": "detail[75].original_label", "page": 14,
+     "extracted": "Transfers (to Nutrition and Activities funds)", "on_page": "8000 Transfers",
+     "issue": "The extractor added the parenthetical; the printed label is 'Transfers'. The amount (-190,000, budget -302,098) is correct"}
+  ]
+}
