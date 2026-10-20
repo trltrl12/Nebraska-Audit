@@ -1,0 +1,21 @@
+{
+  "stem": "Hay_Springs_FY2025",
+  "values_checked": 100,
+  "issues": [
+    {"severity": "error", "path": "report_discrepancies", "page": 7,
+     "extracted": null, "on_page": "Total column: beginning cash 309,680 + net increase 39,261 = 348,941; printed end of year 348,940 (Water column 36,607 - 20,301 = 16,306 vs printed 16,305)",
+     "issue": "The proprietary cash-flow statement doesn't add up by 1. proprietary.* values match the page, but this rounding gap in the printed report is not recorded in report_discrepancies."},
+    {"severity": "warning", "path": "report_discrepancies[3]", "page": 1,
+     "extracted": "Total assets 1,654,888 vs liabilities + net position 1,654,889", "on_page": "Asset lines (Totals column) add to 1,654,889 (total current assets lines 499,353 vs printed 499,352; business-type current assets 446,931 vs printed 446,930)",
+     "issue": "The 1 dollar gap is in the printed asset subtotal/total, not between the two sides of the balance sheet. The difference is recorded, but the note puts it in the wrong place. The asset lines vs total_assets check will also be off by 1."},
+    {"severity": "warning", "path": "detail[0..5], detail[15], detail[16].fund_type", "page": 8,
+     "extracted": "governmental", "on_page": "All-funds budget schedule: Interest 8,386 = 5,102 governmental + 3,284 business-type; Debt service interest 12,491 = 1,808 governmental + 10,683 business-type; principal 68,191 includes utility debt; Charges for services 281,713 includes utility charges",
+     "issue": "These all-funds lines mix governmental and business-type money but are all tagged governmental. The extractor marked them for review, but any per-fund-type totals built from detail will be off."},
+    {"severity": "warning", "path": "ending_cash", "page": 3,
+     "extracted": 50259, "on_page": "Cash (including cash equivalents) '-'; Cash held by County Treasurer 6,808; Certificates of deposit 43,451; liability Cash deficit - equity in pooled cash 123,406",
+     "issue": "Computed and marked. However, the governmental funds have a 123,406 pooled-cash deficit, so 50,259 overstates their net cash position."},
+    {"severity": "warning", "path": "disbursements[5].category", "page": 4,
+     "extracted": "streets/highways", "on_page": "Airport 7,579",
+     "issue": "Judgment call: no transportation category exists. Defensible, and already marked review (same for detail[10])."}
+  ]
+}
