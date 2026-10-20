@@ -1,0 +1,24 @@
+{
+  "stem": "Arnold_Public_Schools_FY2025",
+  "values_checked": 385,
+  "issues": [
+    {"severity": "error", "path": "detail[13].category", "page": 6,
+     "extracted": "intergovernmental/state aid / other state aid", "on_page": "3133 Nameplate capacity tax 2,455.86",
+     "issue": "The receipt category rules name nameplate capacity tax under 'other taxes' (detail_category 'other local taxes'), not state aid."},
+    {"severity": "error", "path": "detail[184].category", "page": 11,
+     "extracted": "intergovernmental/state aid / other state aid", "on_page": "3133 Nameplate capacity 76.97",
+     "issue": "Same as detail[13]: nameplate capacity is 'other taxes' / 'other local taxes' under the rules."},
+    {"severity": "warning", "path": "receipts[0..10].split_from", "page": 4,
+     "extracted": "Local receipts 1,954,897.62 and County receipts 253,749.32 split into 11 items", "on_page": "Local receipts / County receipts (broad groups)",
+     "issue": "The splits add up exactly. But they were rebuilt from items in three fund schedules: General p6, School Nutrition p10, Cooperative p12 (and Special Building p11 for County receipts). The report prints no breakdown of these two lines as such. The p6 'Total local receipts' of 1,963,791.69 does not equal the General Fund's 1,944,582.89 on p3, because 1140/1510 interest is moved into the Interest row. The broad-group rule says to keep a group as printed with its best category and a review note."},
+    {"severity": "warning", "path": "receipts[15].category", "page": 4,
+     "extracted": "investment income", "on_page": "Interest 142,032.16",
+     "issue": "This line includes 1140 Interest on taxes: 5,821.64 (General, p6) + 876.30 (Special Building, p11) = 6,697.94. The rules put interest on taxes under 'property tax', and detail does (detail[2], detail[180]). That breakdown is printed but was not split out here, so the same receipts get different categories in the two places."},
+    {"severity": "warning", "path": "disbursements[6].category", "page": 4,
+     "extracted": "instruction", "on_page": "State program expenditures 147,165.89",
+     "issue": "This is a judgment call. The line includes 3599 School Safety Buildings 83,001 (capital), and 28,449 of 720 Building improvements that the General Fund schedule shows under operation of plant (p17, 118,716.89 + 28,449 = 147,165.89). The Statement of Activities (p2) shows State programs and Federal programs as separate functions. Same for disbursements[7] (Federal program expenditures)."},
+    {"severity": "warning", "path": "detail[190].detail_category", "page": 12,
+     "extracted": "other charges for services", "on_page": "1990 Dual Credit 9,564.73",
+     "issue": "Dual credit receipts are course or tuition fees, so 'tuition and fees' may fit better. The extractor already flagged this for review."}
+  ]
+}

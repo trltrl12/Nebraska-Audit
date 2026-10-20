@@ -1,0 +1,15 @@
+{
+  "stem": "Arthur_County_FY2025",
+  "values_checked": 100,
+  "issues": [
+    {"severity": "error", "path": "detail[4].category", "page": 5,
+     "extracted": "other / miscellaneous revenue", "on_page": "Local 103,944",
+     "issue": "Exhibit D (p4, General column) shows what 'Local' is made of: charges for services 62,386, interest 35,813, miscellaneous 4,128, local intergovernmental 1,617. The broad-group rule asks for the best (dominant) category, which is 'charges for services/fees' / 'other charges for services', with a review note. It also conflicts with how the extractor handled the Road Fund 'Local' line (split using the same Exhibit D)."},
+    {"severity": "warning", "path": "detail[27].split_from", "page": 7,
+     "extracted": "Local 4,892 split into charges 4,762 + misc 130", "on_page": "Local 4,892 (Exhibit G prints only the group)",
+     "issue": "Exhibit G prints only the 'Local' group. The split comes from the Road column of Exhibit D (p4); it adds up, but the broad-group rule says not to split groups like 'Local' and to record them with the best category and a review note. Same for detail[28]."},
+    {"severity": "warning", "path": "detail[32..37].budget_final", "page": 9,
+     "extracted": "200 / 23,146 / 17,255 / 1,100", "on_page": "Schedule 2 (p9) has no budget column",
+     "issue": "These budget figures are fund-level budget totals from Schedule 3 on p10, not from the cited p9. They are attached to single lines, which is reasonable only because each fund has one line per section."}
+  ]
+}
