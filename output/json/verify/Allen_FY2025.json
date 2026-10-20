@@ -1,0 +1,21 @@
+{
+  "stem": "Allen_FY2025",
+  "values_checked": 80,
+  "issues": [
+    {"severity": "warning", "path": "receipts[4].category", "page": 5,
+     "extracted": "other", "on_page": "Loan collections 392 (CDBG Fund); p2 Statement of Activities shows it as Community development Charges for Services 392",
+     "issue": "The report itself classifies this as charges for services. The category could be charges for services/fees rather than 'other'. Loan repayments are a judgment call."},
+    {"severity": "warning", "path": "receipts[3].category", "page": 5,
+     "extracted": "charges for services/fees (label 'Charges for services')", "on_page": "Same 625 printed as 'Licenses and permits' on p11 (detail[3])",
+     "issue": "The same 625 is categorized as charges for services at the top level and licenses and permits in detail. The top-level category follows its printed label, but the two categories are inconsistent."},
+    {"severity": "warning", "path": "balance_sheet.liabilities[1].category", "page": 1,
+     "extracted": "other liabilities", "on_page": "Sales tax payable 421",
+     "issue": "Sales tax collected and owed to the state fits 'due to other governments' better."},
+    {"severity": "warning", "path": "ending_cash", "page": 5,
+     "extracted": 385521, "on_page": "Fund balance 385,521; governmental funds total cash assets 388,200 (p4), with payroll withholding liability 2,679",
+     "issue": "beginning_cash and ending_cash are the fund balances the statement rolls forward, not the cash itself. Cash is 388,200. This is defensible under the cash-basis rule, and the identity holds (282,405 + 307,534 - 204,418 = 385,521)."},
+    {"severity": "warning", "path": "detail[13].detail_category", "page": 11,
+     "extracted": "dues, training and travel", "on_page": "Fire: Meetings, seminars, and dues 13,890 (equals Rural fire revenue 13,890)",
+     "issue": "The amount exactly equals the rural fire receipt, which suggests a pass-through payment to a fire entity (grants/payments to other entities). The printed label supports 'dues'. The line already has a review flag."}
+  ]
+}
