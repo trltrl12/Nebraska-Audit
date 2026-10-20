@@ -2,17 +2,29 @@
   "stem": "Sandhills_Public_Schools_FY2025",
   "values_checked": 178,
   "issues": [
-    {"severity": "error", "path": "report_discrepancies", "page": 4,
-     "extracted": "no report_discrepancies entry (only mentioned in notes)",
-     "on_page": "Special Building Fund column receipt lines add to 137,803 but Total receipts prints 227,803; Total Governmental Funds lines add to 3,710,253 but Total receipts prints 3,800,253",
-     "issue": "the printed statement doesn't add up: the 90,000 Special Building loan proceeds (printed only on the p15 budget schedule) sit inside the printed totals with no line on p4. Treating it as debt_proceeds and listing it in reported_totals.includes is reasonable and the roll-forward ties (1,825,635 + 3,710,253 - 3,660,982 + 90,000 = 1,964,906), but the page's own footing gap of 90,000 needs a report_discrepancies entry (check 'totals', difference 90,000, source_page 4)"},
-    {"severity": "warning", "path": "report_discrepancies", "page": 2,
-     "extracted": "not recorded",
-     "on_page": "Total general receipts 3,464,511; the printed lines add to 3,369,398",
-     "issue": "the Statement of Activities general receipts are 95,113 short of their printed total (the 90,000 loan proceeds plus the 5,113 Educational Service Unit receipts have no line). These figures aren't used in receipts[], but the gap could be recorded as well"},
-    {"severity": "warning", "path": "disbursements[2].category", "page": 4,
-     "extracted": "support services (Pupils 227,756)",
-     "on_page": "Pupils: General Fund 109,674 + Other Governmental Funds 118,082 = 227,756",
-     "issue": "118,082 of this line is the Activities Fund's disbursements (p16), which falls under student activities. The page prints the column split, so it could be split by column (split_from) into support services 109,674 and student activities 118,082"}
+    {
+      "severity": "error",
+      "path": "report_discrepancies",
+      "page": 4,
+      "extracted": "no report_discrepancies entry (only mentioned in notes)",
+      "on_page": "Special Building Fund column receipt lines add to 137,803 but Total receipts prints 227,803; Total Governmental Funds lines add to 3,710,253 but Total receipts prints 3,800,253",
+      "issue": "[fixed] the printed statement doesn't add up: the 90,000 Special Building loan proceeds (printed only on the p15 budget schedule) sit inside the printed totals with no line on p4. Treating it as debt_proceeds and listing it in reported_totals.includes is reasonable and the roll-forward ties (1,825,635 + 3,710,253 - 3,660,982 + 90,000 = 1,964,906), but the page's own footing gap of 90,000 needs a report_discrepancies entry (check 'totals', difference 90,000, source_page 4)"
+    },
+    {
+      "severity": "warning",
+      "path": "report_discrepancies",
+      "page": 2,
+      "extracted": "not recorded",
+      "on_page": "Total general receipts 3,464,511; the printed lines add to 3,369,398",
+      "issue": "the Statement of Activities general receipts are 95,113 short of their printed total (the 90,000 loan proceeds plus the 5,113 Educational Service Unit receipts have no line). These figures aren't used in receipts[], but the gap could be recorded as well"
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[2].category",
+      "page": 4,
+      "extracted": "support services (Pupils 227,756)",
+      "on_page": "Pupils: General Fund 109,674 + Other Governmental Funds 118,082 = 227,756",
+      "issue": "118,082 of this line is the Activities Fund's disbursements (p16), which falls under student activities. The page prints the column split, so it could be split by column (split_from) into support services 109,674 and student activities 118,082"
+    }
   ]
 }
