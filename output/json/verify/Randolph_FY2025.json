@@ -1,0 +1,25 @@
+{
+  "stem": "Randolph_FY2025",
+  "values_checked": 275,
+  "issues": [
+    {"severity": "warning", "path": "basis", "page": 5,
+     "extracted": "GAAP", "on_page": "Statement of Revenues, Expenditures, and Changes in Fund Balances - Modified Cash Basis - Governmental Funds",
+     "issue": "The governmental funds are on a modified cash basis, but the extraction records them as GAAP so that fund balance rolls forward. That's defensible, but the report isn't GAAP. Related: ending_cash (-69,774) is only the Cash and cash equivalents line from the p4 balance sheet. It leaves out Certificates of deposit 12,687, Restricted cash 683,539 and County treasurer cash 13,521 (total assets 639,973)."},
+    {"severity": "warning", "path": "receipts[6].category", "page": 5,
+     "extracted": "donations/contributions", "on_page": "Contributions and grants 254,935",
+     "issue": "The line mixes private gifts with grants. The Statement of Activities (pp2-3) shows 190,387 operating grants and 64,548 capital grants (Economic Development). The Recycling 15,761 and Fire 20,611 amounts may be government grants, which would be intergovernmental. The source isn't stated. Same issue in detail (Economic Development 64,548, Recycling 15,761)."},
+    {"severity": "warning", "path": "receipts[5].category", "page": 5,
+     "extracted": "other", "on_page": "Loan collections 17,397",
+     "issue": "Repayments of Community Betterment Fund loans. No category fits exactly, so 'other' is defensible. Review flag set."},
+    {"severity": "warning", "path": "detail[*].category (Cemetery and Recycling departments)", "page": 17,
+     "extracted": "streets/highways", "on_page": "Cemetery 15,330; Recycling 17,033 (General Fund departments)",
+     "issue": "Both departments were set to streets/highways so the function split ties to the statement's Public works line (16,542 = 15,330 + 1,212, which checks). The category rules would otherwise put cemetery under health/welfare and recycling under utilities. Only the first Cemetery line has a review flag."},
+    {"severity": "warning", "path": "detail[*].detail_category (Salaries and benefits, Transportation)", "page": 16,
+     "extracted": "salaries and wages / fuel", "on_page": "Salaries and benefits; Transportation",
+     "issue": "'Salaries and benefits' combines wages and benefits and is recorded as salaries and wages. 'Transportation' is assumed to be fuel. Both are judgment calls."},
+    {"severity": "warning", "path": "report_discrepancies", "page": 4,
+     "extracted": "only the Statement of Net Position 1-dollar difference is recorded",
+     "on_page": "Balance Sheet - Governmental Funds: Total assets 639,973 vs Total liabilities and fund balances 639,972",
+     "issue": "The governmental funds balance sheet also misses by 1 (a rounding difference printed in the report). It isn't listed in report_discrepancies, though that statement isn't used for balance_sheet."}
+  ]
+}
