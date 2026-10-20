@@ -2,20 +2,45 @@
   "stem": "Indianola_FY2025",
   "values_checked": 171,
   "issues": [
-    {"severity": "error", "path": "receipts[5].category", "page": 4,
-     "extracted": "licenses and permits", "on_page": "Licenses, rents, and fees 2,685 = Licenses and permits 975 (General 875 + Cemetery 100) + Rental and fees 1,710 (pp10-11)",
-     "issue": "Mixed line must take its dominant category; the report's own breakdown shows rents/fees (1,710) dominate licenses (975), so the category should be charges for services/fees (with review naming the mix). The review note also misstates licenses as 875 (omits Cemetery 100)."},
-    {"severity": "warning", "path": "business_type.adjustments[0]", "page": 6,
-     "extracted": "Loss from joint venture -46,753 as adjustment", "on_page": "Nonoperating revenues (expenses): Loss from joint venture (46,753)",
-     "issue": "Printed as a nonoperating expense; recorded as an adjustment rather than a disbursement. Roll-forward holds either way, and the extractor's disbursement total ties to Statement of Activities expenses 948,492, so this is defensible but is a judgment call."},
-    {"severity": "warning", "path": "ending_cash", "page": 3,
-     "extracted": 779285, "on_page": "Total fund balances 779,285; total assets (cash, CDs, county treasurer cash) 784,710 with payroll withholdings liability 5,425",
-     "issue": "beginning_cash/ending_cash are governmental fund balances, not cash; actual governmental cash at year end is 784,710. Explained in notes, but the cash figure is understated by 5,425."},
-    {"severity": "warning", "path": "detail[145].category", "page": 11,
-     "extracted": "streets/highways", "on_page": "Cemetery department (report groups it under Public works)",
-     "issue": "Category rules put cemetery under health/welfare; extractor followed the report's Public works grouping so the function split ties to p4. Applies to all Cemetery expenditure lines (detail[145],[151],[163],[170],[187],[195]). Defensible; flagged for review."},
-    {"severity": "warning", "path": "detail", "page": 10,
-     "extracted": "Combining Statement - General Fund Departments treated as FY2025", "on_page": "Header reads 'Year ended September 30, 2024'",
-     "issue": "Schedule header prints 2024; extractor assumed a typo because its Total column (225,309 / 205,614) ties to the FY2025 statements on pp4 and 8. Assumption looks right but is not confirmed by the page."}
+    {
+      "severity": "error",
+      "path": "receipts[5].category",
+      "page": 4,
+      "extracted": "licenses and permits",
+      "on_page": "Licenses, rents, and fees 2,685 = Licenses and permits 975 (General 875 + Cemetery 100) + Rental and fees 1,710 (pp10-11)",
+      "issue": "[fixed] Mixed line must take its dominant category; the report's own breakdown shows rents/fees (1,710) dominate licenses (975), so the category should be charges for services/fees (with review naming the mix). The review note also misstates licenses as 875 (omits Cemetery 100)."
+    },
+    {
+      "severity": "warning",
+      "path": "business_type.adjustments[0]",
+      "page": 6,
+      "extracted": "Loss from joint venture -46,753 as adjustment",
+      "on_page": "Nonoperating revenues (expenses): Loss from joint venture (46,753)",
+      "issue": "Printed as a nonoperating expense; recorded as an adjustment rather than a disbursement. Roll-forward holds either way, and the extractor's disbursement total ties to Statement of Activities expenses 948,492, so this is defensible but is a judgment call."
+    },
+    {
+      "severity": "warning",
+      "path": "ending_cash",
+      "page": 3,
+      "extracted": 779285,
+      "on_page": "Total fund balances 779,285; total assets (cash, CDs, county treasurer cash) 784,710 with payroll withholdings liability 5,425",
+      "issue": "beginning_cash/ending_cash are governmental fund balances, not cash; actual governmental cash at year end is 784,710. Explained in notes, but the cash figure is understated by 5,425."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[145].category",
+      "page": 11,
+      "extracted": "streets/highways",
+      "on_page": "Cemetery department (report groups it under Public works)",
+      "issue": "Category rules put cemetery under health/welfare; extractor followed the report's Public works grouping so the function split ties to p4. Applies to all Cemetery expenditure lines (detail[145],[151],[163],[170],[187],[195]). Defensible; flagged for review."
+    },
+    {
+      "severity": "warning",
+      "path": "detail",
+      "page": 10,
+      "extracted": "Combining Statement - General Fund Departments treated as FY2025",
+      "on_page": "Header reads 'Year ended September 30, 2024'",
+      "issue": "Schedule header prints 2024; extractor assumed a typo because its Total column (225,309 / 205,614) ties to the FY2025 statements on pp4 and 8. Assumption looks right but is not confirmed by the page."
+    }
   ]
 }
