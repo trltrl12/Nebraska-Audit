@@ -1,0 +1,18 @@
+{
+  "stem": "Douglas_County_SID_634_FY2025",
+  "values_checked": 64,
+  "issues": [
+    {"severity": "warning", "path": "receipts[1].category", "page": 4,
+     "extracted": "intergovernmental/state aid", "on_page": "State motor vehicle tax allocation 14",
+     "issue": "Category judgment call: motor vehicle tax allocation could be 'motor vehicle tax' (only pro-rate is state aid under the rules). Same for detail[1] ('other state aid')."},
+    {"severity": "warning", "path": "receipts", "page": 2,
+     "extracted": "no special assessments receipt", "on_page": "Special assessments and interest 9,118,165 (Government-Wide Statement of Activities)",
+     "issue": "The governmental funds statement (p4) shows no special assessment revenue because the whole 9,118,165 is deferred (p3 'Unavailable revenue - special assessments'). Receipts follow the rules (fund statement), but the SID's main revenue source appears only on the government-wide statement; worth knowing when comparing SIDs."},
+    {"severity": "warning", "path": "detail[1].amount", "page": 5,
+     "extracted": 14, "on_page": "Budget 10, Actual 14, Variance 24",
+     "issue": "Printed variance (24) doesn't match budget vs actual (should be 4); variance column is not extracted, actual 14 is correct. Printed irregularity only."},
+    {"severity": "warning", "path": "detail", "page": 5,
+     "extracted": "budgetary-basis actuals", "on_page": "Actual (Budgetary Basis) only",
+     "issue": "Detail amounts are budgetary basis and differ from the GAAP fund statement (e.g. taxes 9,733 vs 11,144; DS capital outlay 9,495,349 vs 7,872,047; warrants issued 9,806,022 vs 9,806,295). This is disclosed in notes and is the only actual column printed; flagged so the difference isn't read as a misread."}
+  ]
+}
