@@ -1,0 +1,30 @@
+{
+  "stem": "Aurora_Public_Schools_FY2025",
+  "values_checked": 335,
+  "issues": [
+    {"severity": "error", "path": "detail[87]", "page": 10,
+     "extracted": 527117.76, "on_page": "2710 Vehicle operation 608,367.76",
+     "issue": "the 81,250 reclassification (Exhibit F p7) comes out of the group 'Student transportation - regular' (2710 608,367.76 + 2730 91,471.03 = 699,838.79), and the page doesn't say which line. The extractor guessed 2710 and split it, which the page doesn't print. Per the rules, keep 2710 at 608,367.76 and add a negative contra line (department 'Student transportation - regular', split_from naming 2710/2730 and p7) plus the -81,250 other financing line"},
+    {"severity": "warning", "path": "detail[88].original_label", "page": 7,
+     "extracted": "2710 Vehicle operation (reclassified as transfer to Depreciation Fund)", "on_page": "Reclassifications (81,250.00) on Student transportation - regular",
+     "issue": "the -81,250 other financing amount is right, but it is tied to line 2710 by assumption; it should reference the group"},
+    {"severity": "error", "path": "missing", "page": 14,
+     "extracted": null, "on_page": "Activities Fund receipts 805,801.32 include a 40,000.00 transfer in (Exhibit D p4: Other Governmental Funds 'Transfers' 40,000 receipts, eliminated in Reclassifications; Activities 805,801.32 = local 742,212.61 + interest 258.98 + contributions 23,329.73 + 40,000)",
+     "issue": "transfer hidden inside Activities receipt lines is left in as revenue (detail[115] has only a review note). Needs a negative contra revenue line (-40,000, split_from naming the Activities lines and p4, review) and a +40,000 other financing line. As it stands the 40,000 is both General Fund '8000 Transfers' and Activities revenue"},
+    {"severity": "error", "path": "missing", "page": 4,
+     "extracted": null, "on_page": "Other Governmental Funds 'Transfers' disbursement 27,001.01 (Exhibit D p4); Other student support 1,777,757.45 = Activities 878,483.70 (p14) + Nutrition 926,274.76 (p15) - 27,001.01",
+     "issue": "transfer out hidden inside Activities/School Nutrition disbursement lines is left in as spending (detail[123] has only a review note). Needs a -27,001.01 contra expenditure line (department = Activities/Nutrition group, split_from, review) and a -27,001.01 other financing line. The General Fund already records it as '5200 Fund transfers in' 27,001.01"},
+    {"severity": "warning", "path": "receipts[3]", "page": 5,
+     "extracted": "taxes (unlabeled) 5,855,055.58", "on_page": "Other (taxes) 5,855,055.58",
+     "issue": "the fund schedules do print the parts exactly: carline 13,290.96 + homestead exemption 204,284.42 + property tax credit 5,608,224.98 + pro rate motor vehicle 29,255.22 = 5,855,055.58 (General p8: 12,729.59/195,669.63/5,472,377.25/28,076.81 = 5,708,853.28; Bond p16; Special Building p17). A split with split_from looks possible; the notes' claim that the report doesn't break it down is not accurate. The review text also says it includes penalties, but penalties are in the Property line (9,272,766.62 = 1110 + 1140)"},
+    {"severity": "warning", "path": "detail[13].detail_category", "page": 8,
+     "extracted": "county/other local governments", "on_page": "2110 County fines and license fees 211,162.94",
+     "issue": "could be fines and forfeitures (fines/license money distributed through the county); judgment call"},
+    {"severity": "warning", "path": "detail", "page": 19,
+     "extracted": null, "on_page": "Exhibit O Cash Disbursements for Operational Expenses - General Fund (unaudited), object breakdown, p19-20 (partial in trimmed PDF)",
+     "issue": "the more detailed object breakdown is left out (Exhibit G program lines kept as 'not itemized'), justified in the notes because it is incomplete in the trimmed PDF; noted for review"},
+    {"severity": "warning", "path": "receipts[6].category", "page": 5,
+     "extracted": "charges for services/fees", "on_page": "Miscellaneous local receipts 1,268,030.91",
+     "issue": "mixed line (activity receipts, lunch sales, misc local); dominant-category choice, already marked review"}
+  ]
+}
