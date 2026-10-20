@@ -1,0 +1,27 @@
+{
+  "stem": "Bridgeport_Public_Schools_FY2025",
+  "values_checked": 131,
+  "issues": [
+    {"severity": "warning", "path": "receipts[0].category", "page": 3,
+     "extracted": "property tax", "on_page": "Local sources 7,569,558 (GF detail p6 includes motor vehicle 258,975, carline 36,262, tuition 48,624, interest 32,528, fines, licenses, contributions, private grants)",
+     "issue": "broad group kept whole as property tax per the broad-group rule (review set); several hundred thousand of it is motor vehicle tax, tuition, interest and other non-property-tax receipts"},
+    {"severity": "warning", "path": "receipts[4].category", "page": 3,
+     "extracted": "other", "on_page": "Other nonrevenue receipts, General Fund column 1,269,831 (code 5690, p7); p1 shows it as general receipt 'Other receipts'",
+     "issue": "large (about 9% of governmental receipts) and undescribed; possibly a nonrevenue/financing item rather than revenue; review set"},
+    {"severity": "warning", "path": "detail[10].category", "page": 6,
+     "extracted": "intergovernmental/state aid / county/other local governments", "on_page": "2110 County fines and license fees 70,495",
+     "issue": "label says fines and license fees; 'fines and forfeitures' would match the label (Brady used that for the same item); county-distributed, so defensible; basic-statement receipts[1] 'County sources' 70,845 is the same judgment"},
+    {"severity": "warning", "path": "disbursements[10].category", "page": 4,
+     "extracted": "other", "on_page": "Private grants 9,896",
+     "issue": "function not stated; 'other' with review is a last-resort guess (detail[44] same)"},
+    {"severity": "warning", "path": "disbursements[13].category", "page": 4,
+     "extracted": "debt service principal", "on_page": "Debt service 2,255,210 (GF 1,727,638 + Bond 527,572)",
+     "issue": "principal and interest combined; whole amount put in principal (review set); detail[47] and Bond detail same"},
+    {"severity": "warning", "path": "detail[58].category", "page": 9,
+     "extracted": "investment income", "on_page": "Depreciation Fund Local sources 32",
+     "issue": "broad 'Local sources' group assumed to be interest; likewise EB, Special Building and Bond 'Local sources' assumed property tax (review set on each)"},
+    {"severity": "warning", "path": "detail_totals[2]", "page": 9,
+     "extracted": 32, "on_page": "Local sources 32 (no 'Total receipts' line printed)",
+     "issue": "Depreciation, Employee Benefit, Special Building, Bond (expenditure) and Activities (expenditure) schedules print a single line with no total line; detail_totals repeat that line's figure rather than a printed total"}
+  ]
+}
