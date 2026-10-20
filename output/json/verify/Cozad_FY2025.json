@@ -1,0 +1,70 @@
+{
+  "stem": "Cozad_FY2025",
+  "values_checked": 166,
+  "issues": [
+    {
+      "severity": "warning",
+      "path": "receipts[7].category",
+      "page": 6,
+      "extracted": "donations/contributions",
+      "on_page": "Contributions 248,709.74 (Grant fund 215,386.70; General 33,323.04)",
+      "issue": "[fixed: federal grants with review note] The report itself names this money as government grants. On p13 the same 248,709.74 is printed as 'Federal/State grants'. On p3 it is 'Capital Grants and Contributions', and 215,386.70 of it sits under Economic Development in the Grant fund, whose balance is 'Restricted for federal programs' (p5). Under the rules, donations/contributions is only for money not from a government. The category should be federal grants (or intergovernmental/state aid), with review because federal and state are mixed."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[11].detail_category",
+      "page": 14,
+      "extracted": "donations/contributions",
+      "on_page": "Grants and contributions 31,974.04 (General)",
+      "issue": "Label mixes grants and contributions, and p13 groups all of it under 'Federal/State grants'. It may be government grants rather than private donations."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[12].detail_category",
+      "page": 14,
+      "extracted": "donations/contributions",
+      "on_page": "Grants and contributions 1,349.00 (Library)",
+      "issue": "Same as detail[11]: may be a government grant per p13 'Federal/State grants'."
+    },
+    {
+      "severity": "warning",
+      "path": "transfers_in",
+      "page": 7,
+      "extracted": 45787.98,
+      "on_page": "Total Governmental Funds column: '-' (General (45,787.98), Grant 45,787.98)",
+      "issue": "The rules call for the Total Governmental Funds column, which prints no transfers (it nets to zero). The fund-level figures were recorded as transfers_in/out (marked computed). The net effect on the identity is zero, but this departs from the total-column rule."
+    },
+    {
+      "severity": "warning",
+      "path": "transfers_out",
+      "page": 7,
+      "extracted": 45787.98,
+      "on_page": "Total Governmental Funds column: '-'",
+      "issue": "See transfers_in: intra-governmental transfer taken from fund columns; total column shows none."
+    },
+    {
+      "severity": "warning",
+      "path": "basis",
+      "page": 7,
+      "extracted": "GAAP",
+      "on_page": "p1 'Governmental Activities (Modified Cash Basis)', p14 'Modified cash basis'; p7 'Modified Accrual Basis'",
+      "issue": "The report labels the governmental basis inconsistently. Treating it as GAAP with fund balances is a judgment call. The roll-forward holds either way (fund balance 1,237,567.70 vs cash 1,142,592.99 + 44,488.75 county treasurer)."
+    },
+    {
+      "severity": "warning",
+      "path": "balance_sheet.assets[7].category",
+      "page": 1,
+      "extracted": "restricted assets",
+      "on_page": "Due from other funds 721,456.04 (under 'Restricted assets - Temporarily restricted')",
+      "issue": "This is an interfund receivable printed under the restricted-assets heading. The Totals column does not eliminate internal balances (Due to other funds 721,456.04 is in liabilities[2]), so assets and liabilities are both overstated by 721,456.04. The figures are as printed; flagged for awareness."
+    },
+    {
+      "severity": "warning",
+      "path": "missing",
+      "page": 13,
+      "extracted": null,
+      "on_page": "Budget and Actual - All Funds: Streets 610,769.87; Economic Development 396,756.60; Electric 5,423,381.79; Water 771,065.14; Wastewater 1,184,395.83; Sanitation 641,632.95; revenue groups (Federal/State grants 248,709.74, Taxes and special assessments 2,888,592.11, Intergovernmental 1,061,652.34, Charges for services 7,981,742.62, Interest 30,731.85, Other 200,124.21)",
+      "issue": "The whole p13 schedule was left out to avoid double counting with the p14 General Fund departmental schedule. But the Street fund, Grant fund and proprietary expenditure lines on p13 have no other detail, so they are not captured in detail[] at all. This is a defensible overlap judgment, but it is a completeness gap."
+    }
+  ]
+}
