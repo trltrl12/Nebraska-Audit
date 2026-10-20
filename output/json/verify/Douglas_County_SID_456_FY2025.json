@@ -1,0 +1,21 @@
+{
+  "stem": "Douglas_County_SID_456_FY2025",
+  "values_checked": 103,
+  "issues": [
+    {"severity": "warning", "path": "report_discrepancies", "page": 2,
+     "extracted": null, "on_page": "Statement of Activities Net Position, End of Year (643,369) vs Statement of Net Position Total Net Position (643,370) on p1",
+     "issue": "1-dollar rounding difference printed in the report; noted in notes only, not recorded in report_discrepancies. balance_sheet.total_equity (-643,370) correctly matches p1"},
+    {"severity": "warning", "path": "disbursements[5].category", "page": 4,
+     "extracted": "general government", "on_page": "Financial service fees 13,500 (Debt Service Fund column)",
+     "issue": "financial service fees charged to the Debt Service Fund are likely bond-related fees (debt service interest, which includes fees); same for detail[21] (professional/contract services vs debt interest and fees)"},
+    {"severity": "warning", "path": "disbursements[2].category", "page": 4,
+     "extracted": "utilities", "on_page": "Electrical fees 24,572",
+     "issue": "for an SID, electrical fees are usually street lighting (streets/highways) rather than a utility function; same for detail[7]"},
+    {"severity": "warning", "path": "receipts[2].category", "page": 4,
+     "extracted": "intergovernmental/state aid (detail: motor vehicle pro-rate)", "on_page": "State motor vehicle tax allocation",
+     "issue": "ambiguous between motor vehicle tax and state pro-rate; defensible judgment call (also detail[2], detail[16])"},
+    {"severity": "warning", "path": "ending_investments", "page": 3,
+     "extracted": null, "on_page": "Investments 147,216 (Total Governmental Funds)",
+     "issue": "investments printed separately on the governmental funds balance sheet but ending_investments left null (mentioned only in notes)"}
+  ]
+}

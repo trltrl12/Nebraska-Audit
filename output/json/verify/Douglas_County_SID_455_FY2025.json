@@ -1,0 +1,18 @@
+{
+  "stem": "Douglas_County_SID_455_FY2025",
+  "values_checked": 80,
+  "issues": [
+    {"severity": "warning", "path": "report_discrepancies", "page": 2,
+     "extracted": null, "on_page": "General Fund: Issuance of warrants 115,241, Warrants retired (115,241), Total other financing sources (uses) (46,926); Debt Service Fund: 11,025, (11,025), total 46,926",
+     "issue": "the fund columns' printed OFS totals don't equal their own lines (an unlabeled 46,926 interfund movement, probably a transfer GF to DS); the Total column used by the extraction is unaffected (0). Mentioned in notes only, not in report_discrepancies"},
+    {"severity": "warning", "path": "disbursements[3].category", "page": 2,
+     "extracted": "general government", "on_page": "Fiscal agent fees 10,150 (Debt Service Fund)",
+     "issue": "fiscal/paying agent fees on bonds could be debt service interest (which includes fees); same for detail[8] and detail[17] (Paying agent fees, detail_category professional/contract services vs debt interest and fees)"},
+    {"severity": "warning", "path": "disbursements[1].category", "page": 2,
+     "extracted": "utilities", "on_page": "Electricity 12,775",
+     "issue": "for an SID, electricity is usually street lighting (streets/highways) rather than a utility function; same for detail[4]"},
+    {"severity": "warning", "path": "receipts[2].category", "page": 2,
+     "extracted": "intergovernmental/state aid (detail: motor vehicle pro-rate)", "on_page": "State motor vehicle tax allocation",
+     "issue": "ambiguous between motor vehicle tax and state pro-rate; defensible judgment call (also detail[2], detail[15])"}
+  ]
+}

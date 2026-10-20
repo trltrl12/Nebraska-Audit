@@ -1,18 +1,38 @@
 {
-  "stem": "Dodge_FY2025",
-  "values_checked": 94,
-  "issues": [
-    {"severity": "error", "path": "other_financing", "page": 4,
-     "extracted": 3927, "on_page": "Grants and donations 3,927 (under OTHER FINANCING SOURCES, below Total receipts)",
-     "issue": "This is a donation receipt printed below the Total receipts line, not a financing source. Under the outside_printed_total rule it should be a receipts item (governmental, donations/contributions, 'Grants and donations', 3,927, p4, outside_printed_total: true) with other_financing null. The detail schedule (p7) already treats it as revenue, so the two records disagree. The roll-forward still balances after the move."},
-    {"severity": "warning", "path": "reported_totals.business-type.receipts.computed", "page": 6,
-     "extracted": "printed Total operating revenues (includes interest income)", "on_page": "Total operating revenues 506,027",
-     "issue": "The value is printed as-is, so a 'computed' marker is misleading. It should be a note instead."},
-    {"severity": "warning", "path": "disbursements[1].category", "page": 4,
-     "extracted": "public safety", "on_page": "Public Health and Safety 208,830",
-     "issue": "The function mixes health and safety. public safety as the dominant category is defensible, but the notes don't mention the mix (detail[11] same)."},
-    {"severity": "warning", "path": "missing", "page": 1,
-     "extracted": null, "on_page": "Auditor letter (p1) refers to 'nonmajor governmental fund combining statements and statement of general fund departmental revenue and expenditures'",
-     "issue": "The original PDF has 21 pages and 8 are trimmed. No departmental or combining schedule is in the trimmed PDF. It is probably boilerplate (only a General Fund is reported), but nobody can confirm that from the trimmed file."}
-  ]
+ "stem": "Dodge_FY2025",
+ "values_checked": 94,
+ "issues": [
+  {
+   "severity": "error",
+   "path": "other_financing",
+   "page": 4,
+   "extracted": 3927,
+   "on_page": "Grants and donations 3,927 (under OTHER FINANCING SOURCES, below Total receipts)",
+   "issue": "[fixed] This is a donation receipt printed below the Total receipts line, not a financing source. Under the outside_printed_total rule it should be a receipts item (governmental, donations/contributions, 'Grants and donations', 3,927, p4, outside_printed_total: true) with other_financing null. The detail schedule (p7) already treats it as revenue, so the two records disagree. The roll-forward still balances after the move."
+  },
+  {
+   "severity": "warning",
+   "path": "reported_totals.business-type.receipts.computed",
+   "page": 6,
+   "extracted": "printed Total operating revenues (includes interest income)",
+   "on_page": "Total operating revenues 506,027",
+   "issue": "The value is printed as-is, so a 'computed' marker is misleading. It should be a note instead."
+  },
+  {
+   "severity": "warning",
+   "path": "disbursements[1].category",
+   "page": 4,
+   "extracted": "public safety",
+   "on_page": "Public Health and Safety 208,830",
+   "issue": "The function mixes health and safety. public safety as the dominant category is defensible, but the notes don't mention the mix (detail[11] same)."
+  },
+  {
+   "severity": "warning",
+   "path": "missing",
+   "page": 1,
+   "extracted": null,
+   "on_page": "Auditor letter (p1) refers to 'nonmajor governmental fund combining statements and statement of general fund departmental revenue and expenditures'",
+   "issue": "The original PDF has 21 pages and 8 are trimmed. No departmental or combining schedule is in the trimmed PDF. It is probably boilerplate (only a General Fund is reported), but nobody can confirm that from the trimmed file."
+  }
+ ]
 }

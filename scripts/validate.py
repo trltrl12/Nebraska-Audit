@@ -262,6 +262,8 @@ def check(stem, d):
             continue
         if "other financing" in (tot.get("includes") or []):  # printed total includes the transfers
             sums[key] += sums.get((key[0], key[1], f"{key[2]}+of"), 0.0)
+        for sch in tot.get("includes_schedules") or []:  # lines moved to a more detailed schedule
+            sums[key] += sums.get((key[0], sch, key[2]), 0.0)
         cmp("detail", f"detail lines vs printed total for {key[2]} / {key[0] or 'all funds'} / {key[1]}",
             float(stated), sums[key], pages=str(tot.get("source_page", "")))
 
