@@ -1,0 +1,15 @@
+{
+  "stem": "Frontier_County_FY2025",
+  "values_checked": 92,
+  "issues": [
+    {"severity": "warning", "path": "receipts[0].category", "page": 2,
+     "extracted": "taxes (unlabeled)", "on_page": "Statement of Activities general receipts: Property 2,172,068; Motor vehicle 144,615; Lodging 10,112; Other 8,656 (sum 2,335,451 vs Taxes 2,335,449 on p4)",
+     "issue": "The report does print a tax-type breakdown, $2 off the p4 Taxes line. The extractor kept the line unsplit (review flag set). It could instead be split per p2 with the $2 recorded in report_discrepancies. Judgment call for the reviewer."},
+    {"severity": "warning", "path": "detail[32].detail_category", "page": 11,
+     "extracted": "other charges for services", "on_page": "Local 26,638 (Courthouse Building Fund)",
+     "issue": "The 'Local' lines in the Road (detail[30], 11,974), Courthouse Building (detail[32]) and Nonmajor (detail[37], 2,583) schedules are categorized as charges for services without the review flag the General Fund 'Local' line carries. Courthouse Building Fund local receipts are likely interest, not fees."},
+    {"severity": "warning", "path": "notes", "page": 8,
+     "extracted": "Nonmajor combining has 9 funds (p6-8)", "on_page": "10 fund columns: Lodging Tax, Register of Deeds, Veterans' Aid (p6); Drug Law, ARPA, 911 Emergency, 911 Wireless (p7); Emergency Bridge, EDA/STPE, Courthouse Bond (p8)",
+     "issue": "Fund count in the notes is wrong. No effect on the data: the Total column was correctly used because there are more than 6 funds."}
+  ]
+}
