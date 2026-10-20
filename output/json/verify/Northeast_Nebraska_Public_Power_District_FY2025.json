@@ -1,0 +1,15 @@
+{
+  "stem": "Northeast_Nebraska_Public_Power_District_FY2025",
+  "values_checked": 51,
+  "issues": [
+    {"severity": "warning", "path": "balance_sheet.liabilities[5].original_label", "page": 2,
+     "extracted": "Accounts payable (long-term)", "on_page": "Accounts payable (under Long-term Liabilities)",
+     "issue": "The extractor added '(long-term)' to the label; the printed row label is 'Accounts payable'. The amount 551,573 is correct."},
+    {"severity": "warning", "path": "business_type.other_financing", "page": 3,
+     "extracted": 0, "on_page": "Capital Contributions 727,958; Plant Cost Recovered through Capital Contributions (727,958)",
+     "issue": "Netting these two lines to 0 is arithmetically right and marked computed, but it hides the 727,958 of capital contributions. Recording +727,958 other_financing and a -727,958 adjustment would keep it visible."},
+    {"severity": "warning", "path": "receipts[3].category", "page": 3,
+     "extracted": "investment income", "on_page": "Patronage capital credit allocations 121,459",
+     "issue": "Patronage capital credits are non-cash allocations from cooperatives; 'investment income' is a judgment call (already marked review)."}
+  ]
+}
