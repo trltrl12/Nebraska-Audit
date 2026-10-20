@@ -1,30 +1,54 @@
 {
   "stem": "Aurora_FY2025",
-  "values_checked": 241,
+  "values_checked": 220,
   "issues": [
-    {"severity": "error", "path": "missing", "page": 16,
-     "extracted": null, "on_page": "Combining Statement of Revenues and Expenditures - General Fund Departments, Administrative column: Transfers in 447",
-     "issue": "General Fund transfer in printed on the departmental schedule is not recorded in detail as an 'other financing' item (Street, EMS and nonmajor schedules do record theirs); the notes say it was deliberately left to top-level transfers only, which the detail rules don't allow"},
-    {"severity": "error", "path": "missing", "page": 16,
-     "extracted": null, "on_page": "Combining Statement of Revenues and Expenditures - General Fund Departments, Administrative column: Transfers out (908,500)",
-     "issue": "General Fund transfer out is not recorded in detail as an 'other financing' item (-908,500)"},
-    {"severity": "warning", "path": "receipts[9].category", "page": 5,
-     "extracted": "donations/contributions", "on_page": "Grants and contributions 554,899",
-     "issue": "the grantor isn't stated. The 554,462 General Fund part shows as operating grants and contributions under General government on the Statement of Activities (p2), and the 437 CDBG part is categorized federal grants in detail[] (p15), so the same label gets two different categories. May be intergovernmental/federal"},
-    {"severity": "warning", "path": "detail[11].category", "page": 16,
-     "extracted": "donations/contributions", "on_page": "Grants and contributions 554,462",
-     "issue": "grantor not stated; budget was 803,897 (p10). Could be government grants rather than private donations"},
-    {"severity": "warning", "path": "detail[48].detail_category", "page": 16,
-     "extracted": "equipment purchases", "on_page": "Fire - Capital outlay 5,602",
-     "issue": "the object isn't stated. Library capital outlay (detail[69]) uses 'not itemized' for the same kind of line; equipment purchases is an assumption"},
-    {"severity": "warning", "path": "detail[87].category", "page": 11,
-     "extracted": "debt service principal", "on_page": "Debt service 176,313",
-     "issue": "budget-schedule 'Debt service' lines (Street 176,313; Special Assessments 513,675 p12; EMS 83,837 p13) combine principal and interest but are all categorized as principal; already marked review"},
-    {"severity": "warning", "path": "ending_cash", "page": 4,
-     "extracted": 4298911, "on_page": "Cash and cash equivalents 4,298,911; County treasurer cash 62,193",
-     "issue": "governmental ending_cash leaves out the 62,193 county treasurer cash printed on the same balance sheet; defensible, but noted as an assumption"},
-    {"severity": "warning", "path": "detail", "page": 13,
-     "extracted": null, "on_page": "EMS Fund Capital outlay actual -, budget 2,500",
-     "issue": "zero-actual line left out (budget 2,500 not captured); noted in the extraction notes"}
+    {
+      "severity": "warning",
+      "path": "detail[28].outside_printed_total",
+      "page": 16,
+      "extracted": null,
+      "on_page": "OTHER FINANCING SOURCES (USES): Transfers in 447 (printed below Total revenues 4,238,156 and Total expenditures)",
+      "issue": "[fixed: outside_printed_total set] the newly added transfer is correct (447, + sign, other financing), but General's detail_totals revenue entry has includes ['other financing'] (because Loan proceeds 323,805 is inside Total revenues). This transfer is printed outside that total, so it needs outside_printed_total: true. Without it, General revenue + other financing = 4,238,156 + 447 - 908,500 = 3,330,103, not the printed 4,238,156"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[29].outside_printed_total",
+      "page": 16,
+      "extracted": null,
+      "on_page": "Transfers out (908,500) (printed below the totals)",
+      "issue": "[fixed: outside_printed_total set] amount -908,500 is correct, but the line is outside the printed total and needs outside_printed_total: true (see detail[28])"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[9].category",
+      "page": 5,
+      "extracted": "donations/contributions",
+      "on_page": "Grants and contributions 554,899 (p2: General government Operating Grants and Contributions 554,462; capital grants 437)",
+      "issue": "grantor not stated, so it may be government grants. The 437 CDBG part is categorized federal grants in detail[104], so the same label gets two categories. Already marked review (same for detail[11])"
+    },
+    {
+      "severity": "warning",
+      "path": "ending_cash",
+      "page": 4,
+      "extracted": 4298911,
+      "on_page": "Cash and cash equivalents 4,298,911; County treasurer cash 62,193",
+      "issue": "governmental ending_cash leaves out the 62,193 county treasurer cash printed on the same balance sheet; an assumption"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[89].category",
+      "page": 11,
+      "extracted": "debt service principal",
+      "on_page": "Debt service 176,313",
+      "issue": "budget-schedule 'Debt service' lines (also detail[96] 513,675 p12, detail[101] 83,837 p13) combine principal and interest; already marked review"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[50].detail_category",
+      "page": 16,
+      "extracted": "equipment purchases",
+      "on_page": "Fire - Capital outlay 5,602",
+      "issue": "object not stated (Library capital outlay detail[71] uses 'not itemized'); assumption, already marked review"
+    }
   ]
 }
