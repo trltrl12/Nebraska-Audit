@@ -2,17 +2,101 @@
   "stem": "Alliance_FY2025",
   "values_checked": 212,
   "issues": [
-    {"severity": "error", "path": "ending_cash.source_page", "page": 5, "extracted": 4, "on_page": "Total Governmental Funds column (Cash and cash equivalents 2,681,936) is on trimmed page 5; page 4 holds only General/Street/Sales Tax/Debt Service columns", "issue": "Wrong source_page: 2,681,936 is not printed on page 4. Amount is correct"},
-    {"severity": "error", "path": "detail[41..58].source_page", "page": 23, "extracted": 22, "on_page": "Total Nonmajor Governmental Funds column (233,107 ... transfers out (725,591)) is on trimmed page 23; page 22 holds Airport Sinking, Museum Exhibit, Nuisance Cleanup and E911 columns", "issue": "Wrong source_page on all 18 'Nonmajor funds (combined)' detail lines. Amounts are correct"},
-    {"severity": "error", "path": "detail_totals[9..10].source_page", "page": 23, "extracted": 22, "on_page": "Total revenues 2,065,479 / Total expenditures 1,662,575 (Total Nonmajor column, page 23)", "issue": "Wrong source_page; totals are printed on page 23. Amounts are correct"},
-    {"severity": "warning", "path": "ending_cash", "page": 5, "extracted": 2681936, "on_page": "Cash and cash equivalents 2,681,936; Restricted cash 7,325,821; County treasurer cash 94,540 (Total Governmental Funds)", "issue": "Only unrestricted cash and cash equivalents taken; restricted cash and county treasurer cash excluded. Judgment call (in notes)"},
-    {"severity": "warning", "path": "receipts[5].category", "page": 7, "extracted": "other taxes", "on_page": "Enhanced Employment Area tax 67,154", "issue": "In Nebraska an Enhanced Employment Area tax is normally a general business occupation tax, so occupation/franchise tax may fit. The page doesn't say so; flagged review. Same for detail[44]"},
-    {"severity": "warning", "path": "receipts[6].category", "page": 7, "extracted": "property tax", "on_page": "TIF proceeds 264,743", "issue": "TIF proceeds treated as property tax (flagged review); defensible. Same for detail[29]"},
-    {"severity": "warning", "path": "receipts[8].category", "page": 7, "extracted": "federal grants", "on_page": "Grants 1,114,560 (General 42,887, Airport 628,175 capital grants, Other 443,498: Public Transit 392,046, RSVP 51,452)", "issue": "Federal source not printed; likely mostly federal (FAA/transit) but an assumption (flagged review)"},
-    {"severity": "warning", "path": "receipts[13].category", "page": 7, "extracted": "sale of assets", "on_page": "Sale of property/insurance proceeds 2,125", "issue": "Mixed line (sale of assets and insurance proceeds, i.e. reimbursements) with no review flag; the rules ask for review naming the mix. Same for detail[8]"},
-    {"severity": "warning", "path": "detail[37].category", "page": 19, "extracted": "streets/highways", "on_page": "Airport Fund: Operating expenses 562,222", "issue": "The governmental funds statement (p7) classifies Airport Fund spending as 'Environment and leisure' (565,855), which maps to culture/recreation. streets/highways contradicts the report's own function (flagged review)"},
-    {"severity": "warning", "path": "balance_sheet.liabilities[9].category", "page": 1, "extracted": "accrued liabilities", "on_page": "Compensated absences - noncurrent 569,809", "issue": "Noncurrent compensated absences; the rules tie accrued liabilities to amounts due soon. 'debt - due in more than one year' or 'other liabilities' may fit better"},
-    {"severity": "warning", "path": "balance_sheet.liabilities[7].category", "page": 1, "extracted": "unearned revenue", "on_page": "Unavailable special assessments 486,903 (current liability)", "issue": "Unavailable (not unearned) revenue; category is a judgment call"},
-    {"severity": "warning", "path": "detail", "page": 14, "extracted": "General Fund revenue total 3,431,512 (budget basis)", "on_page": "GAAP statement p6 General Fund total revenues 3,426,669; total expenditures 8,377,993 vs budget 8,138,531", "issue": "Detail comes from budget-basis schedules, so it differs from the GAAP basic statement (noted by extractor). Not double counted"}
+    {
+      "severity": "warning",
+      "path": "ending_cash.source_page",
+      "page": 5,
+      "extracted": 4,
+      "on_page": "Total Governmental Funds column (Cash and cash equivalents 2,681,936) is on trimmed page 5; page 4 holds only General/Street/Sales Tax/Debt Service columns",
+      "issue": "[fixed: page citation] Wrong source_page: 2,681,936 is not printed on page 4. Amount is correct"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[41..58].source_page",
+      "page": 23,
+      "extracted": 22,
+      "on_page": "Total Nonmajor Governmental Funds column (233,107 ... transfers out (725,591)) is on trimmed page 23; page 22 holds Airport Sinking, Museum Exhibit, Nuisance Cleanup and E911 columns",
+      "issue": "[fixed: page citation] Wrong source_page on all 18 'Nonmajor funds (combined)' detail lines. Amounts are correct"
+    },
+    {
+      "severity": "warning",
+      "path": "detail_totals[9..10].source_page",
+      "page": 23,
+      "extracted": 22,
+      "on_page": "Total revenues 2,065,479 / Total expenditures 1,662,575 (Total Nonmajor column, page 23)",
+      "issue": "[fixed: page citation] Wrong source_page; totals are printed on page 23. Amounts are correct"
+    },
+    {
+      "severity": "warning",
+      "path": "ending_cash",
+      "page": 5,
+      "extracted": 2681936,
+      "on_page": "Cash and cash equivalents 2,681,936; Restricted cash 7,325,821; County treasurer cash 94,540 (Total Governmental Funds)",
+      "issue": "Only unrestricted cash and cash equivalents taken; restricted cash and county treasurer cash excluded. Judgment call (in notes)"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[5].category",
+      "page": 7,
+      "extracted": "other taxes",
+      "on_page": "Enhanced Employment Area tax 67,154",
+      "issue": "In Nebraska an Enhanced Employment Area tax is normally a general business occupation tax, so occupation/franchise tax may fit. The page doesn't say so; flagged review. Same for detail[44]"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[6].category",
+      "page": 7,
+      "extracted": "property tax",
+      "on_page": "TIF proceeds 264,743",
+      "issue": "TIF proceeds treated as property tax (flagged review); defensible. Same for detail[29]"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[8].category",
+      "page": 7,
+      "extracted": "federal grants",
+      "on_page": "Grants 1,114,560 (General 42,887, Airport 628,175 capital grants, Other 443,498: Public Transit 392,046, RSVP 51,452)",
+      "issue": "Federal source not printed; likely mostly federal (FAA/transit) but an assumption (flagged review)"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[13].category",
+      "page": 7,
+      "extracted": "sale of assets",
+      "on_page": "Sale of property/insurance proceeds 2,125",
+      "issue": "Mixed line (sale of assets and insurance proceeds, i.e. reimbursements) with no review flag; the rules ask for review naming the mix. Same for detail[8]"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[37].category",
+      "page": 19,
+      "extracted": "streets/highways",
+      "on_page": "Airport Fund: Operating expenses 562,222",
+      "issue": "The governmental funds statement (p7) classifies Airport Fund spending as 'Environment and leisure' (565,855), which maps to culture/recreation. streets/highways contradicts the report's own function (flagged review)"
+    },
+    {
+      "severity": "warning",
+      "path": "balance_sheet.liabilities[9].category",
+      "page": 1,
+      "extracted": "accrued liabilities",
+      "on_page": "Compensated absences - noncurrent 569,809",
+      "issue": "Noncurrent compensated absences; the rules tie accrued liabilities to amounts due soon. 'debt - due in more than one year' or 'other liabilities' may fit better"
+    },
+    {
+      "severity": "warning",
+      "path": "balance_sheet.liabilities[7].category",
+      "page": 1,
+      "extracted": "unearned revenue",
+      "on_page": "Unavailable special assessments 486,903 (current liability)",
+      "issue": "Unavailable (not unearned) revenue; category is a judgment call"
+    },
+    {
+      "severity": "warning",
+      "path": "detail",
+      "page": 14,
+      "extracted": "General Fund revenue total 3,431,512 (budget basis)",
+      "on_page": "GAAP statement p6 General Fund total revenues 3,426,669; total expenditures 8,377,993 vs budget 8,138,531",
+      "issue": "Detail comes from budget-basis schedules, so it differs from the GAAP basic statement (noted by extractor). Not double counted"
+    }
   ]
 }
