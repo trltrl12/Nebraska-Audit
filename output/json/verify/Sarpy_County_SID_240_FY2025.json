@@ -1,0 +1,12 @@
+{
+  "stem": "Sarpy_County_SID_240_FY2025",
+  "values_checked": 75,
+  "issues": [
+    {"severity": "warning", "path": "ending_investments", "page": 3,
+     "extracted": 655000, "on_page": "Investments 655,000; Fund balance - end of year 796,083 (= cash 141,083 + investments 655,000)",
+     "issue": "ending_cash 796,083 already includes the 655,000 of investments, because the statement rolls forward cash plus investments. ending_investments is informational, but any downstream sum of the two would count the investments twice. beginning_investments is null although beginning_cash 931,710 also includes investments (the split isn't shown)."},
+    {"severity": "warning", "path": "disbursements", "page": 4,
+     "extracted": "general government (no review flag)", "on_page": "Disbursements listed by object only",
+     "issue": "The rules require \"review\": \"listed by object\" on object-only spending lines, and none has it. Electricity in an SID is probably street lighting (streets/highways)."}
+  ]
+}

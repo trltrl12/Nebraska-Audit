@@ -1,0 +1,30 @@
+{
+  "stem": "Sarpy_County_SID_238_FY2025",
+  "values_checked": 71,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "receipts[2].category",
+      "page": 4,
+      "extracted": "investment income",
+      "on_page": "Interest 27 (General 12 + Debt Service 15); budget schedules pp6-7 print the same 12 and 15 as 'Interest on taxes'",
+      "issue": "[fixed] The report's own schedules show this interest is interest on property taxes, so the category should be property tax (which includes interest on taxes). detail[1] and detail[12] already use property tax, so receipts and detail disagree."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[5].category",
+      "page": 4,
+      "extracted": "general government",
+      "on_page": "Trash removal 47,040",
+      "issue": "Refuse collection fits the utilities function (water, sewer, electric, gas, refuse). detail[8] (detail_category professional/contract services) has the same issue."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements",
+      "page": 4,
+      "extracted": "general government (no review flag)",
+      "on_page": "Expenditures listed by object only",
+      "issue": "The rules require \"review\": \"listed by object\" on object-only spending lines, and none has it. Electricity in an SID is probably street lighting (streets/highways)."
+    }
+  ]
+}
