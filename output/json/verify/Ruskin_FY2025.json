@@ -1,0 +1,26 @@
+{
+  "stem": "Ruskin_FY2025",
+  "values_checked": 29,
+  "issues": [
+    {"severity": "warning", "path": "receipts[10].category", "page": 1,
+     "extracted": "charges for services/fees",
+     "on_page": "Local Receipts: Other 125,665.76 (Utilities Fund column)",
+     "issue": "The line is printed only as 'Other'. Treating utility-fund local receipts as water/sewer charges is a reasonable inference but not shown on the page. Already flagged review."},
+    {"severity": "warning", "path": "receipts[10].original_label", "page": 1,
+     "extracted": "Local Receipts: Other (Utilities Fund)",
+     "on_page": "Local Receipts: Other",
+     "issue": "The extractor added a fund name in parentheses to the printed label. Same for disbursements[3] 'Capital Improvements (Street Fund)' and disbursements[4] 'Capital Improvements (Utilities Fund)'; the printed label is 'Capital Improvements' (line 35, split by column 8,172.47 / 65,047.25). Amounts are correct."},
+    {"severity": "warning", "path": "receipts[9].category", "page": 1,
+     "extracted": "other",
+     "on_page": "Local Receipts: Other 41,277.94 (General) + 58.34 (Street)",
+     "issue": "29% of governmental receipts are in 'other' (over the 10% threshold). Nothing in the trimmed file explains it, so 'other' with review is the right last resort, but it needs a person's look. Also note that two fund columns are combined into one item (marked computed, arithmetic correct)."},
+    {"severity": "warning", "path": "balance_sheet", "page": 1,
+     "extracted": "empty lists, statement 'Statement of Cash Receipts and Disbursements - All Funds (no net position statement in trimmed file)'",
+     "on_page": "Lines 25-28 'Ending Balance Consists Of': Net Cash Balance 59,344.27 / 47,800.81 / 6,953.53, total 114,098.61; County Treasurer Balance at September 30, 2025 654.87 (at October 1, 2024 6,423.64)",
+     "issue": "No net position statement exists. The ending-balance composition (cash by fund) and the county treasurer balances are printed but not captured anywhere. A person should decide whether balance_sheet should be null (as for other waiver forms) or hold the line 26 cash. The county treasurer balances are printed outside the statement and are not in beginning/ending cash."},
+    {"severity": "warning", "path": "business_type.ending", "page": 1,
+     "extracted": 6593.53,
+     "on_page": "Line 24 Ending Balance 6,593.53; line 26 Net Cash Balance 6,953.53",
+     "issue": "The report contradicts itself by 360.00 (possible digit transposition 59/95). Recorded in report_discrepancies, and line 24 (which ties to the roll-forward) was used. Which figure is the real cash is for a person to confirm."}
+  ]
+}
