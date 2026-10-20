@@ -1,22 +1,21 @@
 {
   "stem": "Axtell_FY2025",
-  "values_checked": 186,
+  "values_checked": 285,
   "issues": [
-    {"severity": "warning", "path": "receipts[9]", "page": 4,
-     "extracted": "Other receipts 21,361 split into franchise tax 2,885 / rental income 10,643 / misc general 6,783 / misc cemetery 1,050",
-     "on_page": "p4 prints a single 'Other receipts 21,361' (General column); p9 prints the General fund 'Other' group (Interest 136,226, Franchise tax 2,885, Electric system lease 110,573, Rental income 10,643, Misc General 6,783, Cemetery 1,050)",
-     "issue": "No page prints a breakdown of the 21,361 line itself. The split comes from taking Interest and Electric system lease (separate p4 lines) out of the p9 'Other' group. The arithmetic is right (2,885+10,643+6,783+1,050 = 21,361) and it uses the same fund's own schedule, but the split is derived, not printed. Applies to receipts[9]-[12]."},
+    {"severity": "warning", "path": "receipts[9].category", "page": 4,
+     "extracted": "other", "on_page": "Other receipts 21,361 (General column)",
+     "issue": "On p9 the General Fund schedule's lines not shown elsewhere on p4 add up exactly to 21,361: Rental income 10,643 + Franchise tax 2,885 + Miscellaneous General 6,783 + Cemetery 1,050. The review text saying there is no breakdown is inaccurate, and rentals are the largest part (charges for services/fees). Not split because the line isn't labelled; keeping 'other' is defensible."},
     {"severity": "warning", "path": "transfers_out", "page": 5,
-     "extracted": 53004,
-     "on_page": "Total Governmental Funds: Transfers in (78,042), Transfers out 25,038, Total other financing sources (uses) (53,004)",
-     "issue": "After reclassification the total column prints transfers in as negative and transfers out as positive. The extractor recorded the net (53,004) as transfers_out with transfers_in null. The net matches the enterprise transfers net +53,004 (p7), but the gross printed lines are not what was recorded."},
-    {"severity": "warning", "path": "business_type.measure", "page": 7,
-     "extracted": "net position",
-     "on_page": "Statement of Revenues, Expenditures and Changes in Net Position - Modified Cash Basis (net position = cash 502,498)",
-     "issue": "The extractor rules say measure = 'cash' for cash-basis statements. The statement is titled net position, but it is the cash balance."},
+     "extracted": 53004, "on_page": "Total Governmental Funds: Transfers in (78,042), Transfers out 25,038, Total other financing (53,004)",
+     "issue": "The Total column prints transfers in as negative and transfers out as positive after the Reclassifications column. The extractor recorded only the net (53,004) as transfers_out (marked computed; matches enterprise +53,004). The gross fund transfers (Road in 97,172; General/Debt/CDA out 150,176) are not captured. Defensible assumption."},
+    {"severity": "warning", "path": "disbursements[9].review", "page": 7,
+     "extracted": null, "on_page": "Operating expenditures listed by object (Salaries 42,040 ... Chemicals 6,744)",
+     "issue": "Business-type spending is listed only by object and assigned the utilities function. Rule requires review 'listed by object', but only disbursements[16] (Miscellaneous) has it; disbursements[9]-[15] and [17]-[18] lack it."},
     {"severity": "warning", "path": "detail[32].category", "page": 10,
-     "extracted": "general government",
-     "on_page": "Capital outlay 96,711 (General government dept)",
-     "issue": "Capital outlay lines are categorized inconsistently. General fund departments (detail[32], [40], [56], [63]) and the Special Revenue capital outlay use the function as category, while the Water and Sewer capital outlay lines use 'capital outlay'. The governmental statement p4 prints capital outlay as its own line (317,446)."}
+     "extracted": "general government", "on_page": "Capital outlay 96,711 (General government)",
+     "issue": "Inconsistent function for capital outlay: General/Special Revenue capital outlay lines (detail[32] 96,711, [40] 3,425, [56] 71,452, [63] 7,352, [83] 12,019, and Street resurfacing [87] 126,487) take the department's function, while p4 reports them as 'Capital outlay' (General 178,940, Road 138,506) and the water/sewer detail lines ([106], [119]) use 'capital outlay'."},
+    {"severity": "warning", "path": "receipts[8].category", "page": 4,
+     "extracted": "property tax", "on_page": "TIF collections 91,649 (Community Development Agency)",
+     "issue": "TIF collections (tax increment) treated as property tax; defensible, review already set (also detail[78])."}
   ]
 }
