@@ -1,0 +1,24 @@
+{
+  "stem": "Lower_Elkhorn_NRD_FY2025",
+  "values_checked": 280,
+  "issues": [
+    {"severity": "warning", "path": "receipts[0].category", "page": 5,
+     "extracted": "property tax", "on_page": "Local district taxes 4,552,848",
+     "issue": "GAAP line likely includes state-paid homestead (66,988), property tax credit (515,448), pro-rate (10,482) and nameplate capacity tax (46,840), which the budgetary schedule p12 shows separately; it cannot be split because the page doesn't break down this line (different basis). Kept as property tax with review, which is defensible, but about 0.6M of state aid sits in property tax."},
+    {"severity": "warning", "path": "detail[11]", "page": 12,
+     "extracted": "Wau-Col RWS reimbursement 975 (revenue, reimbursements/refunds); detail[88] Repayment to the Natural Resources District 975 (expenditure, grants/payments to other entities)", "on_page": "975 / 975",
+     "issue": "interfund repayment between the General Fund and the Wau-Col enterprise fund, recorded as ordinary revenue on one side and spending on the other. It may be repayment of an interfund advance (due to/from other funds appear on pp4, 8) and not true revenue or spending. Needs a person to decide."},
+    {"severity": "warning", "path": "detail[54].detail_category", "page": 15,
+     "extracted": "other charges for services", "on_page": "Hookup fees 32,000",
+     "issue": "water system hookup fees would fit 'other utility charges' better. Note too that the GAAP statement p10 treats this 32,000 as capital contributions (business_type.other_financing)."},
+    {"severity": "warning", "path": "detail", "page": 15,
+     "extracted": null, "on_page": "Logan East: Federal grant budget 350,000, Loans budget 40,000 (no actual); Wau-Col p16: Contributions budget 2,820 (no actual)",
+     "issue": "budget-only lines with a blank actual were left out of detail (the notes say so). Defensible, but budget_final for these printed lines is lost. 'Loans' would be other financing in any case."},
+    {"severity": "warning", "path": "detail[17].detail_category", "page": 12,
+     "extracted": "repairs and maintenance", "on_page": "Auto and truck expense 45,229",
+     "issue": "could be fuel or a mix of fuel and repairs. Same judgment for detail[60] Logan East 'Auto and truck expenses' 18,646 (p15)."},
+    {"severity": "warning", "path": "detail[25].detail_category", "page": 12,
+     "extracted": "printing, publishing and postage", "on_page": "Information and education 174,721",
+     "issue": "an NRD information/education program may be mostly contracted services or grants rather than printing. A category judgment call."}
+  ]
+}
