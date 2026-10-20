@@ -1,0 +1,27 @@
+{
+  "stem": "Bennington_FY2025",
+  "values_checked": 119,
+  "issues": [
+    {"severity": "warning", "path": "receipts[3].category", "page": 4,
+     "extracted": "occupation/franchise tax", "on_page": "Occupation and in lieu taxes 44,998 (p4); the p5 budget schedule prints the same 44,998 as 'In-lieu of tax'",
+     "issue": "The report's own budget schedule calls this whole amount in-lieu of tax, which the rules put under 'other taxes'. The label mixes the two types and the line has no review flag."},
+    {"severity": "warning", "path": "detail[2].detail_category", "page": 7,
+     "extracted": "occupation/franchise tax", "on_page": "Occupation and in lieu taxes 35,944",
+     "issue": "Same mixed occupation/in-lieu line as receipts[3]. p5 treats it as in-lieu of tax ('other local taxes'). No review flag."},
+    {"severity": "warning", "path": "disbursements[4].category", "page": 4,
+     "extracted": "economic development", "on_page": "Community betterment - keno 4,800",
+     "issue": "Category is a guess. The p5 budget schedule includes this 4,800 in Culture and recreation (737,355 = 732,555 + 4,800), so culture/recreation looks better supported."},
+    {"severity": "warning", "path": "detail[7].amount", "page": 7,
+     "extracted": 366135, "on_page": "Miscellaneous 596,220 (General column); Total column 610,079",
+     "issue": "Split is not printed on the page. It is inferred: the p7 total of 610,079 is the p4 General Fund Miscellaneous 379,994 plus the 230,085 transfer in, and every other p7 Total line equals p4. Arithmetic is right (596,220 - 230,085 = 366,135) and it is marked computed/split_from. Placing the transfer in the General column is an assumption, but that is the only column large enough to hold it."},
+    {"severity": "warning", "path": "detail[8].amount", "page": 7,
+     "extracted": 230085, "on_page": "not printed on p7 (transfer in 230,085 is printed on p4)",
+     "issue": "Cites source_page 7, but 230,085 does not appear there; it appears on p4. The item has split_from but no computed field."},
+    {"severity": "warning", "path": "detail[15].detail_category", "page": 8,
+     "extracted": "licenses and permits", "on_page": "Parks - Licenses, fees and permits 115,690",
+     "issue": "p2 Statement of Activities shows this 115,690 as Culture and recreation charges for services, so 'recreation/pool/park fees' (receipt category charges for services/fees) probably fits better. In the same way, receipts[9] (666,443) includes sewer fees of 234,828 that p2 shows as capital grants."},
+    {"severity": "warning", "path": "detail[33].category", "page": 7,
+     "extracted": "streets/highways", "on_page": "Street - Capital outlay 374,896; Parks - Capital outlay 508,287 (p8)",
+     "issue": "On p4 these two capital outlay lines (together 883,183) are the 'Capital outlays' disbursement line, categorized as capital outlay. In detail they are categorized under department functions, so the same money has different categories in the two lists. Applies to detail[33] and detail[66]."}
+  ]
+}
