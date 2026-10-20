@@ -1,0 +1,33 @@
+{
+  "stem": "Lancaster_County_FY2025",
+  "values_checked": 294,
+  "issues": [
+    {"severity": "error", "path": "detail[97].category", "page": 20,
+     "extracted": "other / miscellaneous revenue", "on_page": "Other income 2,031,461 (Total Nonmajor), of which Keno fund column 1,882,957 (92.7%)",
+     "issue": "The combining schedule shows this line is almost entirely Keno fund proceeds (Keno column, p20). Under the more-than-half rule it should be keno/lottery (detail_category keno/lottery), not other/miscellaneous revenue."},
+    {"severity": "error", "path": "receipts[6].category", "page": 7,
+     "extracted": "other", "on_page": "Other income 3,762,040; Nonmajor column 2,031,461 includes Keno fund 1,882,957 (p20) = 50.05% of the line",
+     "issue": "Keno proceeds are just over half of this statement line (1,882,957 of 3,762,040), so the more-than-half rule calls for keno/lottery (or a split with split_from p20). This is borderline; flagged because the rule is explicit."},
+    {"severity": "error", "path": "missing", "page": 19,
+     "extracted": null, "on_page": "General Fund combining schedule sub-fund columns: Veterans Aid Fund - Public health and human services 11,003, Transfers in 20,000; Broadband Fund - General government 62,572, Transfers in 100,000; Elimination - Transfers in (120,000), Transfers out 120,000",
+     "issue": "The General Fund budget schedule (pp12-14) covers only the General Fund column. The Veterans Aid and Broadband sub-funds are separately budgeted, and their budget pages (report pp85-86) are not trimmed. Under the county General Fund sub-fund rule, their lines should come into detail from the combining page p19. Without them, detail transfers do not net: GF transfers out 17,391,239 includes 120,000 sent to these sub-funds, with no matching inflow in detail."},
+    {"severity": "warning", "path": "detail[4].category", "page": 12,
+     "extracted": "licenses and permits", "on_page": "License, fees, and rental income 90,581",
+     "issue": "The same label is categorized charges for services/fees in receipts[4] and detail[95] (rentals), but licenses and permits here. The rules require one category per label across the report."},
+    {"severity": "warning", "path": "receipts[0].category", "page": 7,
+     "extracted": "taxes (unlabeled)", "on_page": "Taxes 120,655,538; Statement of Activities p4 lists property 90,455,323, inheritance 9,911,225, motor vehicle 12,303,348, lodging 4,536,131, in-lieu 1,892,089, occupation 10,980, nameplate 2,995, drug 5,241, gaming 1,768,569 (sum 120,885,901)",
+     "issue": "The breakdown is printed but differs from the fund statement line by 230,363 (accrual/unavailable-revenue difference). Leaving the line unsplit is defensible. A person may prefer a split with the difference absorbed in property tax."},
+    {"severity": "warning", "path": "detail[46].detail_category", "page": 15,
+     "extracted": "other state aid", "on_page": "Highway Fund - State revenues 12,593,760",
+     "issue": "State revenue in the county Highway Fund is most likely highway allocation. other state aid is defensible because the page doesn't say."},
+    {"severity": "warning", "path": "detail[40].original_label", "page": 13,
+     "extracted": "Health and human services", "on_page": "Health and human sevices",
+     "issue": "The label is printed with a typo ('sevices'). The extractor corrected it here but kept other printed typos (Administratve, Emrgency)."},
+    {"severity": "warning", "path": "detail[89].amount", "page": 18,
+     "extracted": 126677, "on_page": "126,677 (budget schedule) vs 126,676 (fund statement p8)",
+     "issue": "The amount matches its page. The report prints a $1 difference between the Federal Grants budget schedule and the governmental funds statement."},
+    {"severity": "warning", "path": "proprietary", "page": 11,
+     "extracted": "internal service fund cash flows", "on_page": "Statement of Cash Flows - Proprietary Funds (Internal Service Funds column only)",
+     "issue": "The only proprietary funds are internal service funds, which are governmental activities and not business-type. The figures match the page, but downstream users should know proprietary here is not enterprise data."}
+  ]
+}
