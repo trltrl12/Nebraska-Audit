@@ -1,0 +1,27 @@
+{
+  "stem": "Ayr_FY2025",
+  "values_checked": 28,
+  "issues": [
+    {"severity": "warning", "path": "receipts[8].category", "page": 1,
+     "extracted": "other", "on_page": "18 Local Receipts: Other (Sewer Fund column) 8,986.80",
+     "issue": "100% of business-type receipts are in 'other'; these are most likely sewer charges, but the form doesn't say so. Defensible, review."},
+    {"severity": "warning", "path": "disbursements[0].category", "page": 3,
+     "extracted": "general government", "on_page": "29 General Government: General Fund 12,003.33, Street Fund 13,612.44",
+     "issue": "The Street Fund's 13,612.44 (54% of Street Fund spending) is printed on the General Government row and merged into one general government item. Probably street spending by function. Category as printed, review."},
+    {"severity": "warning", "path": "disbursements[0].original_label", "page": 3,
+     "extracted": "General Government (General 12,003.33 + Street 13,612.44)", "on_page": "General Government",
+     "issue": "Label not as printed (amounts added to the label). Same for disbursements[1] 'Capital Improvements (General 10,990.40 + Street 11,573.91)'. The sums are correct and marked computed."},
+    {"severity": "warning", "path": "receipts[0].original_label", "page": 1,
+     "extracted": "Personal and Real Property Taxes (General)", "on_page": "Personal and Real Property Taxes",
+     "issue": "Fund names in parentheses were added to the printed labels on every receipts item."},
+    {"severity": "warning", "path": "entity_name", "page": 1,
+     "extracted": "Village of Ayr", "on_page": "Village of , Nebraska",
+     "issue": "Village name is blank on every page; the name was taken from the filename (stated in notes)."},
+    {"severity": "warning", "path": "balance_sheet.equity[0].original_label", "page": 1,
+     "extracted": "Ending Balance (Subtotal of Ending Balances, all funds)", "on_page": "Subtotal of Ending Balances (Line 26 + 27) 187,240.51",
+     "issue": "Label paraphrased, not as printed. The amount is right."},
+    {"severity": "warning", "path": "notes", "page": 1,
+     "extracted": "receipts 241,255.50 total incl. 192,256.33 beginning", "on_page": "21 Total Receipts 48,999.17; 22 Total Resources Available 241,255.50",
+     "issue": "Notes misdescribe 241,255.50 as receipts. It is Total Resources Available (line 22); printed Total Receipts is 48,999.17, which equals governmental 40,012.37 + sewer 8,986.80. The JSON values are unaffected. The scan's rows are offset by about half a line, but the Total column confirms every receipt row assignment."}
+  ]
+}

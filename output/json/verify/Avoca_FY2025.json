@@ -1,0 +1,27 @@
+{
+  "stem": "Avoca_FY2025",
+  "values_checked": 37,
+  "issues": [
+    {"severity": "error", "path": "receipts[6].category", "page": 1,
+     "extracted": "other", "on_page": "18 Local Receipts: Other, Comm Impr/Keno column 11,224.65",
+     "issue": "The only receipt of the fund headed 'Comm Impr/Keno' is in 'other'; the page names keno as the fund's source, so keno/lottery fits (keep review)."},
+    {"severity": "warning", "path": "receipts[9].category", "page": 1,
+     "extracted": "other", "on_page": "18 Local Receipts: Other, Enterprise column 102,862.16",
+     "issue": "100% of business-type receipts (excluding the 46.54 transfer) are in 'other'; these are most likely water/wastewater charges, but the form doesn't say so. Defensible, review."},
+    {"severity": "warning", "path": "disbursements[6].category", "page": 3,
+     "extracted": "debt service principal", "on_page": "39 Debt Service 23,097.00 (Enterprise column, row printed under 'Governmental:')",
+     "issue": "Combined principal and interest line recorded as principal. The row is printed under the Governmental heading but in the Enterprise column; business-type by column is correct."},
+    {"severity": "warning", "path": "disbursements[5].category", "page": 3,
+     "extracted": "economic development", "on_page": "38 Community Development, Library/Sign column 846.20",
+     "issue": "Library/Sign fund spending printed on the Community Development row; could be culture/recreation (library). Category as printed."},
+    {"severity": "warning", "path": "transfers_in", "page": 5,
+     "extracted": 10787.38, "on_page": "p1 line 20 'Other Than Surplus Fees' General 10,787.38; p3 line 49 'Surplus Fees' Comm Impr/Keno 10,787.38; p5 handwritten 'Comm Impr/Keno to General Fund 10,787.38', total corrected 46.54 -> 10,833.92",
+     "issue": "The report itself labels the transfer inconsistently (line 20 in vs line 49 out) and adds it to p5 by handwritten correction. Pages 2 and 4 are struck-through earlier versions (p4 Community Development 20,780.17 with no transfer). The extractor correctly used pp1/3; the amounts reconcile."},
+    {"severity": "warning", "path": "entity_name", "page": 1,
+     "extracted": "Village of Avoca", "on_page": "Village of , Nebraska",
+     "issue": "Village name is blank on every page; the name was taken from the filename (stated in notes)."},
+    {"severity": "warning", "path": "receipts[4].original_label", "page": 1,
+     "extracted": "Local Receipts: Other (General)", "on_page": "Local Receipts: Other",
+     "issue": "Fund names in parentheses were added to the printed labels (receipts[4]-[9], disbursements[4]-[5]). Also balance_sheet.assets[1] 'Investments (Certificates of Deposit)' (printed 'Investments (Should agree to Schedule 1)') and equity[0] 'Subtotal of Ending Balances (all funds)' (printed '(Line 26 + 27)') are paraphrased."}
+  ]
+}

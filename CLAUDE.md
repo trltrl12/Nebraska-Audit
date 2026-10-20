@@ -124,6 +124,8 @@ These were diagnosed and fixed in find_pages v6; re-extract and re-verify them a
   columns missing; p9 budget schedule used meanwhile).
   Lawrence-Nelson_Public_Schools_FY2025 (student activities schedule, ~424,692 of receipts, not trimmed;
   General Fund detail by object pp18-19 only partly there).
+  Beatrice_Public_Schools_FY2025 (report p7, governmental receipts page, not trimmed; receipts built from
+  fund schedules, marked computed).
 - Budget forms whose Total All Funds page wasn't found (manifest flag no_budget_actuals_found; skipped, no
   JSON): Lewis_Township_Clay_County_B2526 and any others with that flag. Check why the finder misses it.
 - Trimmed to a budget page only (skipped, no JSON): Cass_County_SID_9_FY2025, Cass_County_SID_10_FY2025,
