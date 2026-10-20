@@ -1,0 +1,21 @@
+{
+  "stem": "Gage_County_FY2025",
+  "values_checked": 159,
+  "issues": [
+    {"severity": "warning", "path": "receipts[0].category", "page": 4,
+     "extracted": "inheritance tax", "on_page": "Taxes 1,744,110 (Inheritance column)",
+     "issue": "Split of the Taxes line is by fund column, not a printed tax-type breakdown; 'inheritance tax' is inferred from the fund name. Plausible for a Nebraska county Inheritance fund, but it is an assumption."},
+    {"severity": "warning", "path": "receipts[1].category", "page": 13,
+     "extracted": "taxes (unlabeled)", "on_page": "Visitors Promotion Taxes 94,457; Visitor's Improvement Taxes 94,462; 911 Emergency Management Taxes 21,580",
+     "issue": "Not consistent with receipts[0]: the Inheritance fund's taxes were categorized by fund name, but the nonmajor Visitors Promotion/Improvement taxes (188,919, normally county lodging tax) were left unlabeled. Either approach can be defended; the treatment should be the same for both."},
+    {"severity": "warning", "path": "detail[20].category", "page": 5,
+     "extracted": "culture/recreation", "on_page": "Misc. - General Government 3,514,867 (under General Government heading)",
+     "issue": "Label and schedule heading say General Government; recorded as culture/recreation because p4 prints General Fund Culture and Recreation 3,514,867. Defensible, but label and category don't match."},
+    {"severity": "warning", "path": "detail[29].category", "page": 5,
+     "extracted": "streets/highways", "on_page": "Noxious Weed Control 2,517",
+     "issue": "Category rules list noxious weed control under natural resources/conservation; recorded as streets/highways to tie to p4 General Fund Public Works 65,941 (Surveyor 63,425 + Weed 2,517 = 65,942)."},
+    {"severity": "warning", "path": "detail[46].category", "page": 7,
+     "extracted": "other", "on_page": "Insurance fund Miscellaneous 1,503,327",
+     "issue": "Self-insurance fund receipts are probably premium contributions or reimbursements, not truly miscellaneous; nothing printed describes them, so 'other' with review is allowed but uncertain. The same applies to receipts[6] (1,619,327)."}
+  ]
+}
