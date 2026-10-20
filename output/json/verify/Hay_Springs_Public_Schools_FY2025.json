@@ -1,0 +1,33 @@
+{
+  "stem": "Hay_Springs_Public_Schools_FY2025",
+  "values_checked": 151,
+  "issues": [
+    {"severity": "error", "path": "detail[80].budget_final", "page": 9,
+     "extracted": null, "on_page": 60000,
+     "issue": "8000 Activities support prints an Original and Final Budget of 60,000; budget_final is null"},
+    {"severity": "warning", "path": "detail[31].budget_final", "page": 6,
+     "extracted": 200000, "on_page": "200,000 printed on heading row '1200 Special education - students', not on '1200 Special education - school age'",
+     "issue": "the group budget was assigned to the first line under the heading; it is the budget for all of 1200/1291/1292"},
+    {"severity": "warning", "path": "detail[79].original_label", "page": 9,
+     "extracted": "8000 School Nutrition support (printed in disbursements; transfer to Nutrition fund)", "on_page": "8000 School Nutrition support",
+     "issue": "label has commentary added; also split_from is set although the line is printed as is and only reclassified (the 284,572 transfer out is on p3), not split. Same applies to detail[80] ('8000 Activities support')"},
+    {"severity": "warning", "path": "detail[6].category", "page": 5,
+     "extracted": "intergovernmental/state aid / county/other local governments", "on_page": "2110 Fines and licenses 29,506 (p1: 'County fines and license fees')",
+     "issue": "county-distributed fines and license fees; could be fines and forfeitures. Defensible but no review flag"},
+    {"severity": "warning", "path": "receipts[8].category", "page": 3,
+     "extracted": "intergovernmental/state aid", "on_page": "County and ESU sources 67,791",
+     "issue": "broad group: General 30,193 (fines and licenses 29,506 + ESU 687, p5) plus Special Building 37,598 (homestead, property tax credit, pro-rate, p12); no review flag noting the mix"},
+    {"severity": "warning", "path": "disbursements[1].category", "page": 3,
+     "extracted": "support services", "on_page": "Student support services 568,906 (General 386,229 + Other Governmental 182,677)",
+     "issue": "182,677 of the line is Activities Fund spending (student activities in detail[108]); mixed function line not mentioned in notes"},
+    {"severity": "warning", "path": "detail[89].category", "page": 13,
+     "extracted": "support services", "on_page": "Student Fee Fund, Support services - students, Other expenses 100",
+     "issue": "statement p3 counts this 100 under Instruction (Other Governmental Funds column), so detail and statement functions differ"},
+    {"severity": "warning", "path": "detail_totals[3].schedule", "page": 14,
+     "extracted": "Qualified Capital Purpose Undertaking Fund Budget and Actual", "on_page": "QCPU detail lines use schedule 'QCPU Fund Budget and Actual'",
+     "issue": "schedule name differs between detail[] and detail_totals[]; a schedule-name match in validation may not tie them (fund names do match; items sum to 61,172)"},
+    {"severity": "warning", "path": "detail[97].fund_type", "page": 11,
+     "extracted": "governmental", "on_page": "School Nutrition Fund reported within Other Governmental Funds (p3)",
+     "issue": "extractor rules list school nutrition as business-type, but the report presents it as a governmental fund; kept governmental per the report (applies to all School Nutrition lines and the 'Nutrition Program' receipts/disbursements)"}
+  ]
+}

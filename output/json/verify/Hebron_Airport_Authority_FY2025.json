@@ -2,21 +2,52 @@
   "stem": "Hebron_Airport_Authority_FY2025",
   "values_checked": 79,
   "issues": [
-    {"severity": "error", "path": "detail[9]", "page": 5,
-     "extracted": {"section": "revenue", "category": "other", "detail_category": "miscellaneous revenue", "original_label": "Loan proceeds", "amount": 0, "budget_final": 100000},
-     "on_page": "Loan proceeds 0 (budget 100,000), printed inside Total cash receipts 255,530",
-     "issue": "Loan proceeds are debt proceeds, not revenue. They should go in section 'other financing', and the revenue detail_totals entry should get includes ['other financing'] because the printed total contains them. They are not 'other'/'miscellaneous revenue'. The actual is 0, so no totals change, but the budget figure of 100,000 is counted as revenue budget."},
-    {"severity": "warning", "path": "receipts[*].fund_type", "page": 4,
-     "extracted": "governmental", "on_page": "Statements are headed 'Governmental Activities' / 'General Fund' (Exhibits A, C, E)",
-     "issue": "The extractor rules list airport authorities as entirely business-type entities, but this report presents a governmental General Fund on a modified accrual basis. Following the report's own presentation (governmental) is defensible, but it conflicts with the entity-type rule. A person should decide which to use."},
-    {"severity": "warning", "path": "detail[12].category", "page": 5,
-     "extracted": "debt service principal", "on_page": "Debt service 11,146 (combined; Exhibit E shows principal 10,044 + interest 1,102)",
-     "issue": "The combined debt service line is recorded entirely as principal (it has a review flag). Exhibit E prints the split, but Schedule 1 doesn't, so keeping one line is correct under the split rule."},
-    {"severity": "warning", "path": "detail[1].detail_category", "page": 5,
-     "extracted": "other state aid", "on_page": "Intergovernmental revenues 4,420",
-     "issue": "The page doesn't say where this money comes from (state or county/local). 'other state aid' is a guess."},
-    {"severity": "warning", "path": "disbursements[0-8].category", "page": 4,
-     "extracted": "general government", "on_page": "Policy/administration (airport operations: fuel, hangar repairs, utilities, insurance)",
-     "issue": "Airport operating costs are recorded as general government. There is no transportation/airport function in the list, so this is defensible but a judgment call."}
+    {
+      "severity": "error",
+      "path": "detail[9]",
+      "page": 5,
+      "extracted": {
+        "section": "revenue",
+        "category": "other",
+        "detail_category": "miscellaneous revenue",
+        "original_label": "Loan proceeds",
+        "amount": 0,
+        "budget_final": 100000
+      },
+      "on_page": "Loan proceeds 0 (budget 100,000), printed inside Total cash receipts 255,530",
+      "issue": "[fixed] Loan proceeds are debt proceeds, not revenue. They should go in section 'other financing', and the revenue detail_totals entry should get includes ['other financing'] because the printed total contains them. They are not 'other'/'miscellaneous revenue'. The actual is 0, so no totals change, but the budget figure of 100,000 is counted as revenue budget."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[*].fund_type",
+      "page": 4,
+      "extracted": "governmental",
+      "on_page": "Statements are headed 'Governmental Activities' / 'General Fund' (Exhibits A, C, E)",
+      "issue": "The extractor rules list airport authorities as entirely business-type entities, but this report presents a governmental General Fund on a modified accrual basis. Following the report's own presentation (governmental) is defensible, but it conflicts with the entity-type rule. A person should decide which to use."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[12].category",
+      "page": 5,
+      "extracted": "debt service principal",
+      "on_page": "Debt service 11,146 (combined; Exhibit E shows principal 10,044 + interest 1,102)",
+      "issue": "The combined debt service line is recorded entirely as principal (it has a review flag). Exhibit E prints the split, but Schedule 1 doesn't, so keeping one line is correct under the split rule."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[1].detail_category",
+      "page": 5,
+      "extracted": "other state aid",
+      "on_page": "Intergovernmental revenues 4,420",
+      "issue": "The page doesn't say where this money comes from (state or county/local). 'other state aid' is a guess."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[0-8].category",
+      "page": 4,
+      "extracted": "general government",
+      "on_page": "Policy/administration (airport operations: fuel, hangar repairs, utilities, insurance)",
+      "issue": "Airport operating costs are recorded as general government. There is no transportation/airport function in the list, so this is defensible but a judgment call."
+    }
   ]
 }
