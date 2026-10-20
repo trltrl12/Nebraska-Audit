@@ -141,6 +141,13 @@ def main():
     add_sheet(wb, "Summary", sh + REF, [[r[h] for h in sh] + ref_all(r["filename"]) for r in srows],
               money, "reconciles")
 
+    # ---- Needs Decision: questions only a person can settle (JSON `decision_needed[]`)
+    dh = ["entity_name", "entity_type", "filename", "question", "amount", "how_recorded_now", "your_decision"]
+    add_sheet(wb, "Needs Decision", dh + REF,
+              [[d.get("entity_name"), d.get("entity_type"), s, q.get("question"), amt(q.get("amount")),
+                q.get("recorded_as"), ""] + ref(s, q) for s, d in reports for q in d.get("decision_needed") or []],
+              ["amount"])
+
     # ---- Review
     rv = read_csv(REVIEW_CSV)
     rh = ["entity_name", "filename", "where", "fund_type", "original_label", "amount", "reason"]

@@ -269,6 +269,12 @@ receipts/disbursements" includes the transfer, add `"includes": ["other financin
 `detail_totals` entry instead of moving the transfer into revenue or expenditure; an `other financing`
 line printed outside that total gets `"outside_printed_total": true`.
 
+**Questions only a person can settle** (a one-sided transfer, an unexplained line that is most of the
+year's receipts and may be loan proceeds, a possibly voided page, a filing for the wrong year): record
+the line as the rules say, and also add an entry to `decision_needed[]`:
+`{"question": "<plain question, one or two sentences>", "amount": <number or omitted>, "recorded_as":
+"<how it is recorded now>", "source_page": <int>}`. These go to the "Needs Decision" sheet for the user.
+
 **Transfers hidden inside spending or receipt lines (common in school districts):** if a fund
 column or fund schedule prints a transfer inside an ordinary line (e.g. "Pupil transportation"
 or "2640 Care and Upkeep of Equipment" that the total/government-wide column then eliminates or

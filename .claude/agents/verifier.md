@@ -63,6 +63,8 @@ For each filename you're given (e.g. `Lincoln_FY2025.pdf`, stem `Lincoln_FY2025`
   rounding difference printed in the report itself, an assumption the extractor made.
 - `path` points at the JSON field (e.g. `balance_sheet.assets[2].amount`, `business_type.ending`).
   For a missing line use `path: "missing"` and put the printed label and amount in `on_page`.
+- A question only a person can settle (see "Questions only a person can settle" in the extractor rules) that the
+  extraction's `decision_needed[]` lacks is a **warning** with `path: "decision_needed"`.
 - If everything checks out, `issues` is `[]`. Don't invent issues; don't skip real ones.
 
 Return exactly one line per report and nothing else:
