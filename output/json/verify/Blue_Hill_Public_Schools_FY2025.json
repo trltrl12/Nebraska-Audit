@@ -2,29 +2,69 @@
   "stem": "Blue_Hill_Public_Schools_FY2025",
   "values_checked": 245,
   "issues": [
-    {"severity": "error", "path": "disbursements[40].source_page", "page": 10,
-     "extracted": 9, "on_page": "Purchased Services 122,290.00 is printed only on p10 (Special Building Fund and Total Governmental Funds columns)",
-     "issue": "the cited page p9 does not show this amount; source_page should be 10"},
-    {"severity": "error", "path": "disbursements[41].source_page", "page": 10,
-     "extracted": 9, "on_page": "School Nutrition 185,172.49 is printed only on p10 (School Nutrition Fund and Total columns)",
-     "issue": "the cited page p9 does not show this amount; source_page should be 10"},
-    {"severity": "error", "path": "disbursements[42].source_page", "page": 10,
-     "extracted": 9, "on_page": "Capital Outlay 407,132.40 is printed only on p10 (Special Building Fund and Total columns)",
-     "issue": "the cited page p9 does not show this amount; source_page should be 10"},
-    {"severity": "warning", "path": "disbursements[0].source_page", "page": 6,
-     "extracted": 5, "on_page": "Total Governmental Funds column is on the facing pages p6, p8 and p10",
-     "issue": "disbursements[0]-[38] cite the General Fund column pages (p5, p7, p9) instead of the Total Governmental Funds column pages (p6, p8, p10). The amounts are the same in both columns, so the values are right, but the citation points at the wrong column"},
-    {"severity": "warning", "path": "receipts[1].category", "page": 14,
-     "extracted": "intergovernmental/state aid", "on_page": "County Receipts 11,432.02 = 2110 County Fines and License Fees 6,608.09 + 2210 Educational Service Unit 4,823.93",
-     "issue": "broad group; the larger part is fines and license fees (fines and forfeitures). Needs a review flag ('broad group; detail on p14')"},
-    {"severity": "warning", "path": "receipts[2].category", "page": 14,
-     "extracted": "intergovernmental/state aid", "on_page": "State Receipts 3,381,942.15 includes 3133 Nameplate Capacity Tax 186,724.61 (other taxes) and 3131 Property Tax Credit 1,236,203.62",
-     "issue": "broad group with no review flag, even though the rules ask for 'review: broad group; detail on p.N'. State aid is the dominant part, so the category itself is defensible"},
-    {"severity": "warning", "path": "detail[30].section", "page": 18,
-     "extracted": "other financing", "on_page": "5200 Allocation from General Fund 250,000.00 (Schedule C, under Receipts); included in Non-Revenue Receipts 289,062.48 on p6",
-     "issue": "the same 250,000 counts as revenue in receipts[6] but as other financing (a transfer) in detail. The rules say one label should get the same treatment everywhere. No General Fund outflow is shown (General Fund transfers out are only 60,000; total transfers in and out balance at 377,783.13), so it is unclear whether this is a transfer or revenue sent straight to the fund. Already flagged for review"},
-    {"severity": "warning", "path": "detail[140].detail_category", "page": 25,
-     "extracted": "professional/contract services", "on_page": "2620 Maintenance of Buildings - Purchased Property Services 257,407.18",
-     "issue": "'Purchased Property Services' (repair, maintenance and rental of property) could be 'repairs and maintenance'. The same judgment applies to every Purchased Property Services line, e.g. detail[135] 2610 Operation of Buildings 219,148.84 and detail[51] 1190 Early Childhood 154,647.00"}
+    {
+      "severity": "warning",
+      "path": "disbursements[40].source_page",
+      "page": 10,
+      "extracted": 9,
+      "on_page": "Purchased Services 122,290.00 is printed only on p10 (Special Building Fund and Total Governmental Funds columns)",
+      "issue": "[fixed: source_page now 10] the cited page p9 does not show this amount; source_page should be 10"
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[41].source_page",
+      "page": 10,
+      "extracted": 9,
+      "on_page": "School Nutrition 185,172.49 is printed only on p10 (School Nutrition Fund and Total columns)",
+      "issue": "[fixed: source_page now 10] the cited page p9 does not show this amount; source_page should be 10"
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[42].source_page",
+      "page": 10,
+      "extracted": 9,
+      "on_page": "Capital Outlay 407,132.40 is printed only on p10 (Special Building Fund and Total columns)",
+      "issue": "[fixed: source_page now 10] the cited page p9 does not show this amount; source_page should be 10"
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[0].source_page",
+      "page": 6,
+      "extracted": 5,
+      "on_page": "Total Governmental Funds column is on the facing pages p6, p8 and p10",
+      "issue": "disbursements[0]-[38] cite the General Fund column pages (p5, p7, p9) instead of the Total Governmental Funds column pages (p6, p8, p10). The amounts are the same in both columns, so the values are right, but the citation points at the wrong column"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[1].category",
+      "page": 14,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "County Receipts 11,432.02 = 2110 County Fines and License Fees 6,608.09 + 2210 Educational Service Unit 4,823.93",
+      "issue": "broad group; the larger part is fines and license fees (fines and forfeitures). Needs a review flag ('broad group; detail on p14')"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[2].category",
+      "page": 14,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "State Receipts 3,381,942.15 includes 3133 Nameplate Capacity Tax 186,724.61 (other taxes) and 3131 Property Tax Credit 1,236,203.62",
+      "issue": "broad group with no review flag, even though the rules ask for 'review: broad group; detail on p.N'. State aid is the dominant part, so the category itself is defensible"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[30].section",
+      "page": 18,
+      "extracted": "other financing",
+      "on_page": "5200 Allocation from General Fund 250,000.00 (Schedule C, under Receipts); included in Non-Revenue Receipts 289,062.48 on p6",
+      "issue": "the same 250,000 counts as revenue in receipts[6] but as other financing (a transfer) in detail. The rules say one label should get the same treatment everywhere. No General Fund outflow is shown (General Fund transfers out are only 60,000; total transfers in and out balance at 377,783.13), so it is unclear whether this is a transfer or revenue sent straight to the fund. Already flagged for review"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[140].detail_category",
+      "page": 25,
+      "extracted": "professional/contract services",
+      "on_page": "2620 Maintenance of Buildings - Purchased Property Services 257,407.18",
+      "issue": "'Purchased Property Services' (repair, maintenance and rental of property) could be 'repairs and maintenance'. The same judgment applies to every Purchased Property Services line, e.g. detail[135] 2610 Operation of Buildings 219,148.84 and detail[51] 1190 Early Childhood 154,647.00"
+    }
   ]
 }
