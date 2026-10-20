@@ -2,9 +2,37 @@
   "stem": "Douglas_County_SID_569_FY2025",
   "values_checked": 64,
   "issues": [
-    {"severity": "error", "path": "receipts[1].category", "page": 2, "extracted": "special assessments", "on_page": "Statement of Activities general receipts: Intergovernmental 162,887 (= Collections in district 160,957 + State motor vehicle tax allocation 1,930)", "issue": "the report itself classifies 'Collections in district' as intergovernmental, not special assessments; category should be intergovernmental/state aid (detail[15] likewise, detail_category county/other local governments). The extractor's own review note calls the special-assessment reading an assumption"},
-    {"severity": "warning", "path": "receipts[2].category", "page": 4, "extracted": "intergovernmental/state aid", "on_page": "State motor vehicle tax allocation 1,930", "issue": "treated as pro-rate state aid (detail[1] and detail[16] use 'motor vehicle pro-rate'); the label could also mean the local motor vehicle tax distribution (motor vehicle tax). The report does group it under Intergovernmental on p2, which supports the state-aid reading"},
-    {"severity": "warning", "path": "ending_investments", "page": 3, "extracted": 687088, "on_page": "Investments 687,088 (included in Total assets / fund balance 1,366,058)", "issue": "ending_cash 1,366,058 already includes these investments, and beginning_investments is null; anyone adding ending_cash + ending_investments double counts 687,088. Also ending_cash carries a 'computed' note citing p3 although 1,366,058 is printed on p4 (and p1/p3) as is"},
-    {"severity": "warning", "path": "disbursements[6].category", "page": 4, "extracted": "culture/recreation", "on_page": "Repairs and maintenance - grounds 75,540", "issue": "the page doesn't say these are park grounds; SID common-area grounds upkeep could be general government. Judgment call with no review flag (same for detail[8])"}
+    {
+      "severity": "error",
+      "path": "receipts[1].category",
+      "page": 2,
+      "extracted": "special assessments",
+      "on_page": "Statement of Activities general receipts: Intergovernmental 162,887 (= Collections in district 160,957 + State motor vehicle tax allocation 1,930)",
+      "issue": "[fixed] the report itself classifies 'Collections in district' as intergovernmental, not special assessments; category should be intergovernmental/state aid (detail[15] likewise, detail_category county/other local governments). The extractor's own review note calls the special-assessment reading an assumption"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[2].category",
+      "page": 4,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "State motor vehicle tax allocation 1,930",
+      "issue": "treated as pro-rate state aid (detail[1] and detail[16] use 'motor vehicle pro-rate'); the label could also mean the local motor vehicle tax distribution (motor vehicle tax). The report does group it under Intergovernmental on p2, which supports the state-aid reading"
+    },
+    {
+      "severity": "warning",
+      "path": "ending_investments",
+      "page": 3,
+      "extracted": 687088,
+      "on_page": "Investments 687,088 (included in Total assets / fund balance 1,366,058)",
+      "issue": "ending_cash 1,366,058 already includes these investments, and beginning_investments is null; anyone adding ending_cash + ending_investments double counts 687,088. Also ending_cash carries a 'computed' note citing p3 although 1,366,058 is printed on p4 (and p1/p3) as is"
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[6].category",
+      "page": 4,
+      "extracted": "culture/recreation",
+      "on_page": "Repairs and maintenance - grounds 75,540",
+      "issue": "the page doesn't say these are park grounds; SID common-area grounds upkeep could be general government. Judgment call with no review flag (same for detail[8])"
+    }
   ]
 }
