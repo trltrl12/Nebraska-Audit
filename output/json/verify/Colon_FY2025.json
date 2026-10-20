@@ -1,0 +1,24 @@
+{
+  "stem": "Colon_FY2025",
+  "values_checked": 40,
+  "issues": [
+    {"severity": "warning", "path": "disbursements[3].category", "page": 2,
+     "extracted": "economic development", "on_page": "Community Development: Community Park Fund 57,424.75 + Federal & State ARPA & Hazard Mit. Grant 9,380.35",
+     "issue": "follows the printed label, but 57,424.75 is Community Park Fund spending (likely culture/recreation) and 9,380.35 is a hazard-mitigation grant project; category is questionable and not marked review"},
+    {"severity": "warning", "path": "receipts[11].fund_type", "page": 1,
+     "extracted": "business-type (includes Sewer Utility Security Deposits Fund 300.00)", "on_page": "Sewer Utility Security Deposits Fund, Local Receipts: Other 300.00",
+     "issue": "customer security deposits fund may be a custodial/fiduciary fund (to be skipped) rather than enterprise; the 300.00 is deposits received, not sewer fees, yet it is categorized charges for services/fees. Extractor flagged the classification as a judgement"},
+    {"severity": "warning", "path": "disbursements[8].category", "page": 2,
+     "extracted": "other", "on_page": "Miscellaneous 100.00 (Sewer Utility Security Deposits Fund)",
+     "issue": "probably a deposit refund (reimbursements/refunds or not spending at all, if the fund is custodial); marked review"},
+    {"severity": "warning", "path": "disbursements[5].fund_type", "page": 2,
+     "extracted": "business-type", "on_page": "Capital Improvements 19,687.43 / Other Capital Outlay 9,505.00 / Debt Service 15,397.00 printed under the 'Governmental' row heading, Wastewater Sewer Fund column",
+     "issue": "assigned business-type by fund column although the rows sit under the Governmental heading; consistent with the fund-based rule, noted for awareness"},
+    {"severity": "warning", "path": "receipts[11].category", "page": 1,
+     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other 51,562.70 (Wastewater Sewer Fund)",
+     "issue": "presumed sewer charges; page only says Local Receipts: Other (marked review)"},
+    {"severity": "warning", "path": "disbursements[4].category", "page": 2,
+     "extracted": "debt service principal", "on_page": "Debt Service 11,592.96 (Street Fund); Debt Service 15,397.00 (Wastewater)",
+     "issue": "combined principal and interest lines assigned to principal (both marked review)"}
+  ]
+}

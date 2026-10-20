@@ -1,24 +1,70 @@
 {
   "stem": "Columbus_FY2025",
-  "values_checked": 161,
+  "values_checked": 182,
   "issues": [
-    {"severity": "warning", "path": "missing", "page": 17,
-     "extracted": null, "on_page": "Combining Statement - Nonmajor Governmental Funds: 10 fund columns, no Total column; revenues sum 5,243,633 vs Other Governmental Funds 5,493,196 (p6); expenditures sum 4,945,061 vs 5,759,886",
-     "issue": "The trimmed PDF is missing the rest of the nonmajor combining statement (remaining fund columns and the Total column), so no nonmajor detail was recorded. Detail is incomplete until the PDF is re-trimmed. Candidate for the CLAUDE.md 'Trimmed PDF is missing pages' follow-up."},
-    {"severity": "warning", "path": "receipts[4].category", "page": 17,
-     "extracted": "charges for services/fees", "on_page": "Keno fund column: Charges for services 579,410 (part of Other Governmental Funds 675,990 = Airport 7,746 + E911 71,440 + Housing Rehab 17,394 + Keno 579,410)",
-     "issue": "579,410 of 'Charges for services' 4,105,578 is Keno fund revenue (keno/lottery), and the combining statement prints this breakdown by fund. Keeping it whole is defensible because the line label is 'Charges for services', but keno revenue is understated as a result (only Gaming tax 621,186 is in keno/lottery)."},
-    {"severity": "warning", "path": "detail[15].category", "page": 14,
-     "extracted": "licenses and permits", "on_page": "Fees, taxes, permits, and licenses 4,135,454 (Streets/Engineering, budget basis)",
-     "issue": "On the GAAP statement (p5), Streets/Engineering revenue is Sales tax 3,440,668 + Fees, taxes, permits and licenses 729,735 = 4,170,403. So the budget-basis line is probably mostly sales tax (and/or highway allocation), not licenses and permits. Category is doubtful. Already marked review."},
-    {"severity": "warning", "path": "receipts[1].category", "page": 6,
-     "extracted": "licenses and permits", "on_page": "Fees, taxes, permits and licenses 2,489,713 (p2 general revenues show 'Other taxes and fees' 4,458,288)",
-     "issue": "This combined line mixes taxes, fees, permits and licenses, and the report gives no breakdown. 'licenses and permits' is a guess; occupation taxes may dominate. The same applies to business-type receipts[11] (568,514). Already marked review."},
-    {"severity": "warning", "path": "receipts[6].category", "page": 17,
-     "extracted": "intergovernmental/state aid", "on_page": "Grants 2,957,956, incl. Airport fund Grants 898,966 and Housing Rehab 215,050",
-     "issue": "The grant source is unspecified. The Airport fund's 898,966 is likely FAA (federal), so part of this may belong in federal grants. Already marked review."},
-    {"severity": "warning", "path": "receipts[12].amount", "page": 10,
-     "extracted": 588710, "on_page": "Sales tax 588,710 (enterprise funds), with Sales tax remitted 630,059 as an operating expense",
-     "issue": "This is sales tax collected on utility bills and remitted to the state, a pass-through. Recording it as 'sales tax' receipts inflates the city's business-type sales tax. Recorded as printed."}
+    {
+      "severity": "warning",
+      "path": "beginning_fund_balance.source_page",
+      "page": 6,
+      "extracted": 5,
+      "on_page": "Beginning of year 21,012,418 (Total Governmental Funds column, p6)",
+      "issue": "[fixed: page 6] amount is right but cited page is wrong: p5 shows only the four major-fund columns (8,943,739 / (644,257) / 5,326,786 / 580,203); 21,012,418 is printed on p6"
+    },
+    {
+      "severity": "warning",
+      "path": "ending_fund_balance.source_page",
+      "page": 6,
+      "extracted": 5,
+      "on_page": "End of year 22,100,764 (Total Governmental Funds column, p6; also total fund balances p4)",
+      "issue": "[fixed: page 6] amount is right but cited page is wrong: 22,100,764 is not printed on p5 (major-fund columns only); it is on p6 and p4"
+    },
+    {
+      "severity": "warning",
+      "path": "notes",
+      "page": 19,
+      "extracted": "Nonmajor combining statement has 12 funds (pp17-19)",
+      "on_page": "13 fund columns: Airport, Downtown, Gaming, E911 (p17); Wireless 911, 911 Equipment Share, Housing Rehab Loans, Progress and Jobs Growth, Keno, Library Foundation (p18); Debt Service, Library Endowment, Gerrard Park Trust (p19)",
+      "issue": "the fund count in the notes is wrong (13, not 12). It doesn't affect the figures: the combining statement is now complete across pp17-19, and the Total Other Governmental column (p19) agrees with every recorded detail line and with both totals (5,493,196 / 5,759,886)"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[30].category",
+      "page": 16,
+      "extracted": "debt service interest",
+      "on_page": "Other 669,970",
+      "issue": "the row is printed as 'Other'. Calling it interest relies on it matching 'Interest and fiscal charges' 669,970 in the 1/2 Cent Sales Tax column on p5. That is defensible and already marked review"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[35].detail_category",
+      "page": 19,
+      "extracted": "other charges for services",
+      "on_page": "Charges for services 675,990 (includes Keno fund 579,410 on p18)",
+      "issue": "most of the nonmajor 'Charges for services' is the Keno fund, which is probably keno proceeds (keno/lottery). It is kept as printed because the total column can't be split"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[10].category",
+      "page": 10,
+      "extracted": "occupation/franchise tax",
+      "on_page": "Franchise fees 4,789,801 (Electric Fund)",
+      "issue": "the Statement of Activities (p2) shows these Electric fund receipts as charges for services, so 'charges for services/fees' could also fit. Already marked review"
+    },
+    {
+      "severity": "warning",
+      "path": "balance_sheet.liabilities[3].category",
+      "page": 1,
+      "extracted": "other liabilities",
+      "on_page": "Compensated absences - Payable after one year 881,835",
+      "issue": "a long-term compensated absences liability fits 'debt - due in more than one year' (or 'accrued liabilities') better than 'other liabilities'"
+    },
+    {
+      "severity": "warning",
+      "path": "ending_cash",
+      "page": 4,
+      "extracted": 4437273,
+      "on_page": "Cash and cash equivalents 4,437,273; Cash at county treasurer 510,105; Investments 17,025,046 (Total Governmental Funds)",
+      "issue": "ending_cash leaves out cash at county treasurer 510,105, and investments are kept separately in ending_investments. The rule asks for 'cash and cash equivalents/investments'. This is noted in the notes, so it is defensible"
+    }
   ]
 }

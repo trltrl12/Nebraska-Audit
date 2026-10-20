@@ -1,18 +1,18 @@
 {
   "stem": "CO76-04072026-July_1_2024_through_June_30_2025_Audit_Report_and_Management_Letter",
-  "values_checked": 109,
+  "values_checked": 149,
   "issues": [
-    {"severity": "warning", "path": "receipts[4].category", "page": 4,
-     "extracted": "other taxes", "on_page": "Taxes: Other 228,296",
-     "issue": "The combining statement (p16-19) shows by fund that part of this is Visitor Promotion 36,427 + Visitor Improvement 36,427 (lodging tax funds), plus 911 funds (23,286, 136, 50,600). The printed line has no type breakdown, so 'other taxes' is defensible, but part of it is probably lodging tax."},
     {"severity": "warning", "path": "detail[28].category", "page": 5,
-     "extracted": "streets/highways", "on_page": "Public Works - Noxious Weed Control 113,229",
-     "issue": "Category rules list noxious weed control under natural resources/conservation. The report prints it under the Public Works heading, so this is a judgment call."},
-    {"severity": "warning", "path": "detail[35].detail_category", "page": 7,
-     "extracted": "highway allocation", "on_page": "Road & Bridge Fund Intergovernmental 2,000,100",
-     "issue": "Extractor assumption: the page does not say this is highway allocation."},
-    {"severity": "warning", "path": "detail[48]", "page": 4,
-     "extracted": "Nonmajor detail (detail[48]-detail[62]) taken from the Nonmajor Funds column of the basic statement (p4)", "on_page": "Combining Statement - Nonmajor Funds ends at printed p35 marked (Continued); the remaining fund columns (Highway Bond, COVID ARPA, Federal Drug Forfeiture, Victim Witness, etc.) and the Total Nonmajor Funds column are not in the trimmed PDF",
-     "issue": "Trimming gap: the last page(s) of the combining statement were cut off. The p4 column amounts are correct and add up (1,925,483 / 2,087,003), but they repeat the basic statement and add no extra detail. find_pages.py may need to include the next page."}
+     "extracted": "streets/highways", "on_page": "Public Works: Noxious Weed Control 113,229",
+     "issue": "the extractor rules put noxious weed control under 'natural resources/conservation'. The report itself lists it under Public Works, so streets/highways follows the page, but the rule list says otherwise"},
+    {"severity": "warning", "path": "detail[31].detail_category", "page": 5,
+     "extracted": "not itemized", "on_page": "Aging Services Payroll 151,336",
+     "issue": "the label names the object (payroll), so 'salaries and wages' would fit better than 'not itemized'"},
+    {"severity": "warning", "path": "detail[0].original_label", "page": 4,
+     "extracted": "Taxes - Property / Taxes - Motor Vehicle / Taxes - Nameplate Capacity / Taxes - Other (detail[0]-[3])", "on_page": "p5 prints a single 'Taxes 8,457,279'; p4 General Fund column prints Property 7,539,596, Motor Vehicle 582,528, Nameplate Capacity 255,266, Other 79,889",
+     "issue": "the split is allowed (the report prints this fund's breakdown on p4) and the parts add up to 8,457,279. The labels are built from the p4 rows, not printed on the budget schedule, and the combined budget of 8,752,517 is not carried"},
+    {"severity": "warning", "path": "detail[50].category", "page": 20,
+     "extracted": "other taxes", "on_page": "Taxes: Other 148,214 (Visitor Promotion 36,427 + Visitor Improvement 36,427 on p16; 911 Emergency Management 23,286 on p18; 911 Emergency Services 136 + 911 Wireless Service 50,600 + Courthouse Bond 1,324 on p19; Emergency Bridge 12 on p16; Veterans' Aid 2 on p17)",
+     "issue": "about half of this line is probably lodging tax (the Visitor Promotion/Improvement funds) and most of the rest 911 surcharges, but the report doesn't label them. 'Other taxes' with review is defensible. The same applies to receipts[4] (228,296)"}
   ]
 }
