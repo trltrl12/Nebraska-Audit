@@ -1,0 +1,102 @@
+{
+  "stem": "Madison_Public_Schools_FY2025",
+  "values_checked": 269,
+  "issues": [
+    {
+      "severity": "warning",
+      "path": "report_discrepancies[0].note",
+      "page": 6,
+      "extracted": "rounding; Bond Fund interest shown as 1,166.50 elsewhere",
+      "on_page": "General Fund column: lines add to 9,879,481 vs printed Total Disbursements 9,879,480 (p6, and p7 General Fund 9,755,157 vs 9,755,156); source is Special Education 957,237 on p5/p7 vs schedule lines 1200 957,014 + 1291 193 + 1292 29 = 957,236 (p10)",
+      "issue": "Confirmed not a misread: Total Governmental Funds disbursement lines add to 12,847,302 vs printed 12,847,301. The $1 comes from the General Fund Special Education line (957,237 on the statement vs 957,236 on the budget schedule), not from Bond Fund interest (1,166.50 is a receipt). Amount and sign are right; only the explanation is wrong."
+    },
+    {
+      "severity": "error",
+      "path": "report_discrepancies",
+      "page": 1,
+      "extracted": 8271589,
+      "on_page": "Cash at Bank 7,384,460 + Cash at County Treasurer 887,130 = 8,271,590; printed Total Assets 8,271,589",
+      "issue": "[fixed] The balance sheet assets on the page add to 8,271,590, $1 more than the printed total. Not recorded in report_discrepancies (check 'balance'). (p4 General Fund column has the same $1: 3,972,828 + 731,436 = 4,704,264 vs 4,704,265.)"
+    },
+    {
+      "severity": "error",
+      "path": "report_discrepancies",
+      "page": 16,
+      "extracted": 504567,
+      "on_page": "25,624 + 1,734 + 464,767 + 11,283 + 1,160 = 504,568; printed Total Disbursements 504,567",
+      "issue": "[fixed] The School Nutrition Fund expenditure lines add to 504,568, $1 more than the printed total. Not recorded in report_discrepancies."
+    },
+    {
+      "severity": "error",
+      "path": "report_discrepancies",
+      "page": 17,
+      "extracted": 207428,
+      "on_page": "Local lines 181,244+72+76+264+1,167 = 182,823 (printed 182,822); all revenue lines = 207,429 vs printed Total Cash Receipts 207,428",
+      "issue": "[fixed] The Bond Fund revenue lines add to 207,429, $1 more than the printed total, because Interest of 1,166.50 is printed as 1,167. Not recorded in report_discrepancies."
+    },
+    {
+      "severity": "error",
+      "path": "report_discrepancies",
+      "page": 18,
+      "extracted": 1222159,
+      "on_page": "Local lines 746,469+47+410+1,378+55,635 = 803,939 (printed 803,940); State lines 11,186+403,423+791+2,821 = 418,221 (printed 418,220); all lines = 1,222,160 vs printed Total Cash Receipts 1,222,159",
+      "issue": "[fixed] The Special Building Fund revenue lines add to 1,222,160, $1 more than the printed total. Not recorded in report_discrepancies."
+    },
+    {
+      "severity": "error",
+      "path": "report_discrepancies",
+      "page": 20,
+      "extracted": 7596,
+      "on_page": "Interest 14 + Extracurricular Activities Fees 7,581 = 7,595; printed Total Cash Receipts 7,596",
+      "issue": "[fixed] The Student Fee Fund revenue lines add to 7,595, $1 less than the printed total. Not recorded in report_discrepancies."
+    },
+    {
+      "severity": "warning",
+      "path": "report_discrepancies",
+      "page": 2,
+      "extracted": null,
+      "on_page": "Statement of Activities disbursements lines add to 12,061,012 vs printed Total 12,061,010; p3 Change in Net Position printed 878,989 vs 10,240,504 - 9,361,514 = 878,990; p19 QCPU Total State Sources 16,972 vs lines 16,973 (items still tie to 64,986)",
+      "issue": "Other rounding gaps the report prints in pages the extraction cites (none of these totals is a JSON value). Not recorded."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[70].section",
+      "page": 11,
+      "extracted": "other financing -250,000",
+      "on_page": "2650 Vehicle Operation, Maintenance, & Purchasing 250,000 (budget 50,000)",
+      "issue": "Treating it as a hidden transfer is inferred. The amount matches the Depreciation Fund's 'Transfers from the General Fund' 250,000 (p13), and the statement's one-sided Transfers In (out) total of 250,000 (p6, p3) backs it up, but no elimination or reclassification column is printed. It is already in decision_needed. Disbursements[8] (1,089,072) and transfers_out depend on the same assumption."
+    },
+    {
+      "severity": "warning",
+      "path": "decision_needed[1]",
+      "page": 2,
+      "extracted": "receipts 'other' 786,290 and debt service principal 786,290",
+      "on_page": "Statement of Activities Debt Service 1,037,509 (= fund Debt Service 1,823,799 - corporation 786,290); government-wide receipts also leave out the 786,290",
+      "issue": "Extra evidence for the person deciding: the government-wide statement drops the Leasing Corporation's 786,290 on both sides, which suggests it is a pass-through of the Special Building Fund's 652,902 + 133,388 debt payments. As extracted, governmental receipts and spending each count that 786,290 twice. Also, all of the corporation's 786,290 is put in 'debt service principal' with no principal/interest split printed."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[9].category",
+      "page": 5,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "Intermediate Sources 54,980 = 2110 County Fines and Licenses 48,919 + 2210 ESU Receipts 6,061 (p9)",
+      "issue": "Most of this line is county-distributed fines and license money. 'fines and forfeitures' could be argued; the same applies to detail[7] (2110 County Fines and Licenses, county/other local governments)."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[103].detail_category",
+      "page": 14,
+      "extracted": "miscellaneous expenditure",
+      "on_page": "Employee Benefit Fund - Miscellaneous Expenditures 41,519",
+      "issue": "This sits in the Employee Benefit Fund, so 'employee benefits and payroll taxes' may fit better than the last-resort category. It already carries a review flag."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[10].split_from",
+      "page": 5,
+      "extracted": "State Sources 4,848,977 minus Nameplate Capacity 5,639",
+      "on_page": "Nameplate Capacity Tax lines under State Sources: GF 4,670 (p9), Bond 146 (p17), Special Building 791 (p18), QCPU 32 (p19) = 5,639; p3 Nameplate Capacity 5,639",
+      "issue": "The split checks out against the fund schedules and p3, and moving nameplate capacity to 'other taxes' follows the rules. The statement line itself prints no breakdown, so the split is assembled from several schedules."
+    }
+  ]
+}

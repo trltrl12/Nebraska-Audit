@@ -1,0 +1,54 @@
+{
+  "stem": "Lyman_FY2025",
+  "values_checked": 255,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "receipts[6].outside_printed_total",
+      "page": 6,
+      "extracted": true,
+      "on_page": "Interest income 3,064 is inside Total receipts 1,011,827 (p12) used as reported_totals.business-type.receipts",
+      "issue": "[fixed] flag contradicts the reported total chosen: validator drops flagged lines, so business-type receipts sum to 943,898 vs reported 1,011,827 (diff 67,929). Either remove the flags or report the p6 operating total"
+    },
+    {
+      "severity": "error",
+      "path": "receipts[7].outside_printed_total",
+      "page": 6,
+      "extracted": true,
+      "on_page": "Miscellaneous income 64,865 is inside Total receipts 1,011,827 (p12)",
+      "issue": "[fixed] same inconsistency as receipts[6]; business-type receipts check fails by 67,929"
+    },
+    {
+      "severity": "error",
+      "path": "disbursements[20].outside_printed_total",
+      "page": 6,
+      "extracted": true,
+      "on_page": "Interest charges 14,340 is inside Total disbursements 787,958 (p12) used as reported_totals.business-type.disbursements",
+      "issue": "[fixed] validator drops flagged lines, so business-type disbursements sum to 732,283 vs reported 787,958 (diff 55,675)"
+    },
+    {
+      "severity": "error",
+      "path": "disbursements[21].outside_printed_total",
+      "page": 6,
+      "extracted": true,
+      "on_page": "Debt payments 41,335 is inside Total disbursements 787,958 (p12)",
+      "issue": "[fixed] same inconsistency as disbursements[20]; business-type disbursements check fails by 55,675"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[38..47].category",
+      "page": 11,
+      "extracted": "other",
+      "on_page": "General Fund 'Other' department column, total disbursements 117,131",
+      "issue": "p1 implies Other = Public Health and Safety 81,398 (164,832 - Police 83,434) + Culture and Recreation 26,223 (109,759 - Park 83,536) + Economic Development 9,511; dominant function is public safety (~69%), which the rules prefer over other"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[106].detail_category",
+      "page": 12,
+      "extracted": "miscellaneous revenue",
+      "on_page": "Leasing fund Other 16,950",
+      "issue": "Leasing fund's only operating receipt; likely lease rentals (rentals / charges for services) rather than other; same applies to the Leasing part of receipts[7] Miscellaneous income 64,865"
+    }
+  ]
+}

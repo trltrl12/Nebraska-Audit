@@ -1,0 +1,24 @@
+{
+  "stem": "Malcolm_Public_Schools_FY2025",
+  "values_checked": 425,
+  "issues": [
+    {"severity": "warning", "path": "receipts[15].category", "page": 16,
+     "extracted": "other (receipt, 60,000.00)", "on_page": "5200 Allocation from General Fund 60,000.00 (Depreciation Fund receipts; General Fund Schedule B/M shows transfers 8000 of only 94,049.31)",
+     "issue": "One-sided interfund allocation. By its label it is a transfer, but no General Fund transfer out matches it, so the matching outflow is probably hidden in General Fund spending and the page doesn't show which line. It is kept as a receipt in receipts[] (ties to the printed Total Receipts 10,906,445.19), yet detail[233] records the same line as section 'other financing', so the two are treated inconsistently. decision_needed has this; a person must settle it."},
+    {"severity": "warning", "path": "detail[233].section", "page": 16,
+     "extracted": "other financing", "on_page": "5200 Allocation from General Fund 60,000.00",
+     "issue": "Recorded as other financing in detail but as revenue (category other) in receipts[15]; no matching -60,000 other financing line exists in the General Fund detail. Same decision as above."},
+    {"severity": "warning", "path": "balance_sheet.assets[1].category", "page": 1,
+     "extracted": "receivables", "on_page": "County Treasurers' Balance 207,027.85",
+     "issue": "This is cash the county treasurers hold for the district. The report counts it in fund cash balances (ending cash 7,619,724.31 includes it), so 'cash and investments' fits better than 'receivables'."},
+    {"severity": "warning", "path": "detail[21].category", "page": 12,
+     "extracted": "other taxes / other local taxes (3133 Nameplate Capacity Tax 6,765.36; also Bond 410.77 p19, Special Building 1,074.26 p20)", "on_page": "Nameplate Capacity Tax printed under 3000 State Receipts",
+     "issue": "In detail, nameplate capacity tax is 'other taxes' (as the rules say), but in receipts[] the same 8,250.39 sits inside unsplit State Receipts as intergovernmental/state aid. The same label gets different categories. This is defensible because State Receipts is a broad line that is mostly state aid."},
+    {"severity": "warning", "path": "detail[*].detail_category (Schedule M 'Other Items' lines; detail[253] '3100-800 Other')", "page": 22,
+     "extracted": "dues, training and travel", "on_page": "Other Items / 3100-800 Other",
+     "issue": "Judgment call: object 800 'Other Items' is not broken down on the page. It may be dues/fees, but it could also be miscellaneous expenditure. The notes record it as an assumption."},
+    {"severity": "warning", "path": "detail[*].detail_category (Schedule M 'Other Property Services' lines)", "page": 22,
+     "extracted": "professional/contract services", "on_page": "Other Property Services",
+     "issue": "Judgment call: the printed label is 'Other Property Services' (state object 500, other purchased services such as insurance, communication, travel and transportation contracts). It could instead be repairs and maintenance or another object. The notes record it as an assumption."}
+  ]
+}

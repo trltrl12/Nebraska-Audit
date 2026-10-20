@@ -1,0 +1,70 @@
+{
+  "stem": "Madison_FY2025",
+  "values_checked": 208,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "detail[14].detail_category",
+      "page": 15,
+      "extracted": "other charges for services",
+      "on_page": "Rescue department: Charges for services 64,803",
+      "issue": "[fixed] Charges for services printed in the Rescue department column are ambulance billing; the specific detail category 'ambulance/rescue fees' fits, so the catch-all 'other charges for services' should not be used. The Statement of Activities (p2) shows public safety charges 77,800 = police licenses 12,997 + rescue 64,803."
+    },
+    {
+      "severity": "warning",
+      "path": "decision_needed",
+      "page": 3,
+      "extracted": "transfers_out 376,801 (includes 20,000 to CRA component unit); decision_needed[] absent",
+      "on_page": "Transfer from City to CRA (20,000); General Fund Transfers out (20,000) p5",
+      "issue": "The 20,000 transfer goes to a discretely presented component unit (Community Redevelopment Authority), outside the primary government, so no fund in the JSON receives it. That makes it a one-sided transfer, and arguably economic-development spending. A person should decide; it is not in decision_needed[]."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[42].detail_category",
+      "page": 14,
+      "extracted": "land and buildings",
+      "on_page": "Administrative: Capital outlay 497,625",
+      "issue": "Capital outlay has no object breakdown on the page. 'land and buildings' is a guess (notes say so) and the line has no review flag. 'not itemized' or 'equipment purchases' could apply equally."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[52].detail_category",
+      "page": 14,
+      "extracted": "land and buildings",
+      "on_page": "Police: Capital outlay 102,084",
+      "issue": "Object guessed; no breakdown printed (police capital is likely vehicles/equipment). No review flag."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[61].detail_category",
+      "page": 14,
+      "extracted": "land and buildings",
+      "on_page": "Fire: Capital outlay 39,945",
+      "issue": "Object guessed; no breakdown printed. No review flag."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[72].detail_category",
+      "page": 15,
+      "extracted": "land and buildings",
+      "on_page": "Rescue: Capital outlay 269,085",
+      "issue": "Object guessed; no breakdown printed (rescue capital is likely an ambulance/equipment). No review flag."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[85].detail_category",
+      "page": 15,
+      "extracted": "land and buildings",
+      "on_page": "Park: Capital outlay 21,009",
+      "issue": "Object guessed; no breakdown printed. No review flag."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[32].detail_category",
+      "page": 14,
+      "extracted": "salaries and wages",
+      "on_page": "Salaries and benefits 69,743",
+      "issue": "The line combines salaries and benefits but is recorded as 'salaries and wages' with no review flag. The same applies to detail[43], [53], [62], [76], [86] and [94] (Police 294,310, Fire 1,000, Rescue 125, Park 53,634, Pool 39,073, Library 89,930). Notes mention it, but the mixed line should carry review."
+    }
+  ]
+}

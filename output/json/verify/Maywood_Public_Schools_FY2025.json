@@ -1,0 +1,57 @@
+{
+  "stem": "Maywood_Public_Schools_FY2025",
+  "values_checked": 195,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "detail[88]",
+      "page": 16,
+      "extracted": {
+        "section": "expenditure",
+        "category": "student activities",
+        "amount": 4115
+      },
+      "on_page": "Student Fees Fund: Extracurricular activity fees disbursement 4,115 (fund closed to 0); General Fund p8 line 5200 'Transfers' receipt 4,115",
+      "issue": "[fixed] Inconsistent transfer treatment in detail: the receiving side (detail[27], General Fund 'Transfers' +4,115) is recorded as other financing, but the sending fund's matching 4,115 outflow is still an expenditure. The same money is a transfer on one side and spending on the other. Either record the Student Fees outflow as other financing -4,115, or put the General Fund 4,115 back in revenue, depending on the decision_needed answer."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[13]",
+      "page": 3,
+      "extracted": {
+        "category": "other",
+        "amount": 18752
+      },
+      "on_page": "Other 18,752 (GF 18,403 = nonrevenue 15,880 incl. Transfers 4,115 + non-program 2,523; other funds 349)",
+      "issue": "Statement line contains the 4,115 interfund 'Transfers' (p8) as a receipt, and Student support services 409,593 contains the matching 4,115 Student Fees outflow. Kept as printed and raised in decision_needed. Defensible because the statement doesn't eliminate it, but both statement totals include a transfer."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[1].category",
+      "page": 3,
+      "extracted": "support services",
+      "on_page": "Student support services 409,593 = GF 194,450 + Activities 211,028 + Student Fees 4,115 (pp9, 15, 16)",
+      "issue": "Activity-fund spending (215,143) is the larger part of this line, so under the 'dominant category' rule it could be 'student activities'. The line is already marked review."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[9]",
+      "page": 7,
+      "extracted": {
+        "original_label": "County Fines and licenses",
+        "category": "intergovernmental/state aid",
+        "detail_category": "county/other local governments"
+      },
+      "on_page": "2110 Fines and licenses (under County and ESU sources) 8,194",
+      "issue": "The printed label is 'Fines and licenses'; 'County' was added. Treating this as county pass-through is defensible, but 'fines and forfeitures' could also fit."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[27].original_label",
+      "page": 8,
+      "extracted": "Transfers (nonrevenue receipts)",
+      "on_page": "Transfers",
+      "issue": "The label has extra text and is not exactly as printed."
+    }
+  ]
+}
