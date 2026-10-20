@@ -2,29 +2,69 @@
   "stem": "Edgar_FY2025",
   "values_checked": 84,
   "issues": [
-    {"severity": "error", "path": "receipts[14].category", "page": 9,
-     "extracted": "federal grants", "on_page": "State grants and shared revenues 132,484 (p9) = municipal equalization 25,027 + motor vehicle fees 6,103 + highway allocation 91,354 + water Grants 10,000",
-     "issue": "the all-funds budget schedule lists the 10,000 water grant under Intergovernmental - State grants and shared revenues, so the report treats it as state aid; should be intergovernmental/state aid, not federal grants"},
-    {"severity": "warning", "path": "other_financing", "page": 6,
-     "extracted": 30590, "on_page": "Rural fire reimbursement 30,590 (under Other Financing Sources)",
-     "issue": "printed under other financing sources on p6, but p3 shows it as a general revenue and the rules treat rural fire contracts as charges for services/fees; recording it as other_financing rather than a receipt is a judgment call"},
-    {"severity": "warning", "path": "detail[6].category", "page": 9,
-     "extracted": "intergovernmental/state aid / county/other local governments", "on_page": "Rural fire reimbursement 30,590",
-     "issue": "rules map rural fire contracts to charges for services/fees (or reimbursements/refunds); also inconsistent with treating the same item as other_financing at the top level"},
-    {"severity": "warning", "path": "detail[3].detail_category", "page": 9,
-     "extracted": "other state aid", "on_page": "State grants and shared revenues 132,484",
-     "issue": "line combines municipal equalization 25,027, motor vehicle fees 6,103, highway allocation 91,354 and the 10,000 water grant; the review note mentions only the water grant"},
-    {"severity": "warning", "path": "detail[4].fund_type", "page": 9,
-     "extracted": "governmental", "on_page": "Charges for services 341,671",
-     "issue": "266,668 of the 341,671 (78%) is water/sewer; the all-funds line is mostly business-type but recorded as governmental (marked review)"},
-    {"severity": "warning", "path": "detail[21].category", "page": 9,
-     "extracted": "debt service principal / debt principal", "on_page": "Debt service 197,229",
-     "issue": "combined line: governmental principal 80,000 + interest and fees 97,688 + business-type principal 19,541; principal is not dominant (interest 97,688 vs principal 99,541 is close) and fund types are mixed (marked review)"},
-    {"severity": "warning", "path": "ending_investments", "page": 4,
-     "extracted": null, "on_page": "Certificates of deposit 124,110 (2024: 121,489)",
-     "issue": "governmental funds statement reports certificates of deposit separately; ending/beginning_investments could be filled informationally (they are already inside the fund balance used as cash)"},
-    {"severity": "warning", "path": "detail[15].fund_type", "page": 9,
-     "extracted": "business-type", "on_page": "Public Works 206,930",
-     "issue": "treated as water/sewer based on the arithmetic (operating expenses 313,596 - depreciation 118,308 + interest 11,642 = 206,930); the page does not label it by fund. The review note says 'opex incl depreciation 195,288', but 195,288 is opex excluding depreciation"}
+    {
+      "severity": "error",
+      "path": "receipts[14].category",
+      "page": 9,
+      "extracted": "federal grants",
+      "on_page": "State grants and shared revenues 132,484 (p9) = municipal equalization 25,027 + motor vehicle fees 6,103 + highway allocation 91,354 + water Grants 10,000",
+      "issue": "[fixed] the all-funds budget schedule lists the 10,000 water grant under Intergovernmental - State grants and shared revenues, so the report treats it as state aid; should be intergovernmental/state aid, not federal grants"
+    },
+    {
+      "severity": "warning",
+      "path": "other_financing",
+      "page": 6,
+      "extracted": 30590,
+      "on_page": "Rural fire reimbursement 30,590 (under Other Financing Sources)",
+      "issue": "printed under other financing sources on p6, but p3 shows it as a general revenue and the rules treat rural fire contracts as charges for services/fees; recording it as other_financing rather than a receipt is a judgment call"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[6].category",
+      "page": 9,
+      "extracted": "intergovernmental/state aid / county/other local governments",
+      "on_page": "Rural fire reimbursement 30,590",
+      "issue": "rules map rural fire contracts to charges for services/fees (or reimbursements/refunds); also inconsistent with treating the same item as other_financing at the top level"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[3].detail_category",
+      "page": 9,
+      "extracted": "other state aid",
+      "on_page": "State grants and shared revenues 132,484",
+      "issue": "line combines municipal equalization 25,027, motor vehicle fees 6,103, highway allocation 91,354 and the 10,000 water grant; the review note mentions only the water grant"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[4].fund_type",
+      "page": 9,
+      "extracted": "governmental",
+      "on_page": "Charges for services 341,671",
+      "issue": "266,668 of the 341,671 (78%) is water/sewer; the all-funds line is mostly business-type but recorded as governmental (marked review)"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[21].category",
+      "page": 9,
+      "extracted": "debt service principal / debt principal",
+      "on_page": "Debt service 197,229",
+      "issue": "combined line: governmental principal 80,000 + interest and fees 97,688 + business-type principal 19,541; principal is not dominant (interest 97,688 vs principal 99,541 is close) and fund types are mixed (marked review)"
+    },
+    {
+      "severity": "warning",
+      "path": "ending_investments",
+      "page": 4,
+      "extracted": null,
+      "on_page": "Certificates of deposit 124,110 (2024: 121,489)",
+      "issue": "governmental funds statement reports certificates of deposit separately; ending/beginning_investments could be filled informationally (they are already inside the fund balance used as cash)"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[15].fund_type",
+      "page": 9,
+      "extracted": "business-type",
+      "on_page": "Public Works 206,930",
+      "issue": "treated as water/sewer based on the arithmetic (operating expenses 313,596 - depreciation 118,308 + interest 11,642 = 206,930); the page does not label it by fund. The review note says 'opex incl depreciation 195,288', but 195,288 is opex excluding depreciation"
+    }
   ]
 }

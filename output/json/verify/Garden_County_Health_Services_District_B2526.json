@@ -1,0 +1,15 @@
+{
+  "stem": "Garden_County_Health_Services_District_B2526",
+  "values_checked": 10,
+  "issues": [
+    {"severity": "warning", "path": "receipts[0].fund_type", "page": 1,
+     "extracted": "business-type", "on_page": "Personal and Real Property Taxes 175,107.78 (Total All Funds budget form; no patient revenue shown)",
+     "issue": "Entity treated as an entirely business-type hospital, so all lines are business-type and governmental fields are null. The form shows only property tax, state aid and one 'Operating Expenses' line (no patient service revenue), so this looks like a tax-levying health services district that funds care rather than a hospital operating an enterprise; governmental classification is arguable. Applies to all receipts/disbursements and business_type balances"},
+    {"severity": "warning", "path": "business_type.beginning", "page": 1,
+     "extracted": 0, "on_page": "Lines 2-5 column 2 all printed '-'",
+     "issue": "Beginning balance taken as 0 from dashes; extractor's note that this is a new district is an inference (column 1 is also all dashes), not stated on the page"},
+    {"severity": "warning", "path": "fiscal_year_end", "page": 1,
+     "extracted": "2025-06-30", "on_page": "Actual/Estimated 2024 - 2025 (no end date printed)",
+     "issue": "Fiscal year end assumed by the extractor; not printed on the form"}
+  ]
+}
