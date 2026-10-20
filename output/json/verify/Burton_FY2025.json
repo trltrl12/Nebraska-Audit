@@ -1,0 +1,18 @@
+{
+  "stem": "Burton_FY2025",
+  "values_checked": 19,
+  "issues": [
+    {"severity": "warning", "path": "beginning_cash", "page": 1,
+     "extracted": 34881.13, "on_page": "Net Cash Balance 18,910.33; Investments 15,970.80; Subtotal 34,881.13",
+     "issue": "beginning_cash/ending_cash use the line 3/28 subtotals, which include investments, and beginning_investments/ending_investments (15,970.80 / 16,352.79) are filled as well. The rules say investments are informational and not added to cash, so anything that adds the two together will count them twice. Using the subtotal is needed for the roll-forward to work."},
+    {"severity": "warning", "path": "receipts[2].category", "page": 1,
+     "extracted": "other", "on_page": "Local Receipts: Other 831.72 (General 381.99, Street 18.06, Companion Savings 431.67)",
+     "issue": "General's 381.99 exactly equals the CD's growth (16,352.79 - 15,970.80). It is almost certainly interest, i.e. investment income. 'other' is 16.6% of receipts."},
+    {"severity": "warning", "path": "disbursements[3].fund_type", "page": 3,
+     "extracted": "governmental", "on_page": "44 Electric Utility (Business-Type Activities): General 346.60, Street 234.00, total 580.60",
+     "issue": "Printed under Business-Type Activities but paid from governmental funds, and there are no enterprise funds. Treating it as governmental is defensible (probably electricity/street lighting)."},
+    {"severity": "warning", "path": "disbursements[2].category", "page": 3,
+     "extracted": "other", "on_page": "40 Miscellaneous 837.18 (General 120.18, Street 717.00)",
+     "issue": "Printed only as 'Miscellaneous'; 'other' is the last resort."}
+  ]
+}

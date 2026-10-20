@@ -1,0 +1,32 @@
+{
+  "stem": "Brownville_FY2025",
+  "values_checked": 44,
+  "issues": [
+    {"severity": "warning", "path": "transfers_in", "page": 9,
+     "extracted": "General 1,198.69 + Special Fund 1,650.00 (in); General 1,771.77 + Special 1,198.69 (out)",
+     "on_page": "Schedule of Interfund Transfers p9: Special Account -> General 1,650.00; General -> Special Account 1,198.69; General -> Water 121.77",
+     "issue": "Exhibit A per-fund transfer cells (p1, p3, p5, p7) do not match the p9 transfer schedule (the schedule implies General in 1,650.00 / out 1,320.46 and Special in 1,198.69 / out 1,650.00). Governmental totals (in 2,848.69, out 2,970.46) and the 2,970.46 grand total agree either way, so the JSON figures are right, but the report is internally inconsistent per fund and this is not noted in report_discrepancies or notes"},
+    {"severity": "warning", "path": "receipts[5].category", "page": 1,
+     "extracted": "intergovernmental/state aid", "on_page": "State Receipts: Other 237,538.53 (General Fund)",
+     "issue": "Very large unexplained state receipt (58% of governmental receipts). On the crossed-out original page 4, 237,226.03 of it sat in the Culvert Fund. Its nature is not stated; it is already marked review"},
+    {"severity": "warning", "path": "receipts[10].category", "page": 1,
+     "extracted": "other", "on_page": "Local Receipts: Other 24,163.11 (General Fund)",
+     "issue": "Kept as other with review. The p11 investment schedule shows large 'CD Keno' balances, so part of this may be keno/lottery receipts, but the page does not break it down"},
+    {"severity": "warning", "path": "receipts[14].category", "page": 1,
+     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Water 48,754.20 / Sewer 61,882.71)",
+     "issue": "Assumed to be utility charges (receipts[14] and [15]). This is reasonable but the page does not say so; already marked review"},
+    {"severity": "warning", "path": "disbursements[2].category", "page": 7,
+     "extracted": "general government", "on_page": "General Government 2,968.98 (Volunteer Fire Dept column)",
+     "issue": "Volunteer Fire Dept spending is printed on the General Government row. Keeping it as printed is defensible, but public safety may be the true function"},
+    {"severity": "warning", "path": "disbursements[7].category", "page": 5,
+     "extracted": "debt service principal", "on_page": "Debt Service 26,431.00 (Sewer Fund)",
+     "issue": "The page prints a single 'Debt Service' line, not split into principal and interest. Recording it all as principal is an assumption"},
+    {"severity": "warning", "path": "receipts[*].original_label", "page": 1,
+     "extracted": "e.g. 'State Receipts: Other (General Fund)', 'Capital Improvements (Water Fund)'",
+     "on_page": "'State Receipts: Other', 'Capital Improvements'",
+     "issue": "Fund names in parentheses were added to the printed row labels to tell the lines apart (also in disbursements). The labels are not exactly as printed"},
+    {"severity": "warning", "path": "balance_sheet.equity[0].original_label", "page": 1,
+     "extracted": "Ending Balance (Line 24/28)", "on_page": "Ending Balance (Line 22 MINUS Line 23) / Subtotal of Ending Balances (Line 26 + 27)",
+     "issue": "This label combines two printed rows; it is not a label printed on the page"}
+  ]
+}
