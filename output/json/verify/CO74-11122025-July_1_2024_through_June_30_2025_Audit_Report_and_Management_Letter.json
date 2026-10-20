@@ -1,0 +1,21 @@
+{
+  "stem": "CO74-11122025-July_1_2024_through_June_30_2025_Audit_Report_and_Management_Letter",
+  "values_checked": 160,
+  "issues": [
+    {"severity": "warning", "path": "detail[8].amount", "page": 5,
+     "extracted": 342627, "on_page": "General Fund Miscellaneous 342,627 (p5/p4); Lease-Purchase Agreement 251,388 (p2)",
+     "issue": "The top-level split is confirmed: p2 prints Lease-Purchase Agreement 251,388 + Miscellaneous 147,975 = p4 Miscellaneous 399,363, and the receipts total (11,348,845, includes debt_proceeds) and cash roll-forward tie exactly. But the 251,388 can only sit in General Fund Miscellaneous (Road 37,630 and Nonmajor 19,106 are too small), so detail still counts the lease-purchase as revenue while the top level treats it as debt proceeds. No page prints the split by fund, so leaving it as printed (with review) is correct under the split rule. Flagged for the user so the inconsistency is known."},
+    {"severity": "warning", "path": "detail[31].category", "page": 5,
+     "extracted": "streets/highways", "on_page": "Public Works: Noxious Weed Control 3,363",
+     "issue": "Printed under Public Works, but the category rules map noxious weed control to natural resources/conservation."},
+    {"severity": "warning", "path": "receipts[4].category", "page": 4,
+     "extracted": "other taxes", "on_page": "Insurance Tax Allocation 29,332",
+     "issue": "State-distributed insurance premium tax allocation; could arguably be intergovernmental/state aid. Same call made at detail[2]."},
+    {"severity": "warning", "path": "detail[45].source_page", "page": 7,
+     "extracted": 7, "on_page": "DISBURSEMENTS 291,578 on p7; 110,056 / 181,522 printed on p4 Inheritance Fund column",
+     "issue": "Function split is printed (p4) and adds to 291,578, but the split amounts (detail[45] 110,056 and detail[46] 181,522) cite p7, where only 291,578 appears."},
+    {"severity": "warning", "path": "detail[0].original_label", "page": 4,
+     "extracted": "Taxes (property) / Taxes (motor vehicle) / Taxes (insurance tax allocation) / Taxes (nameplate capacity) / Taxes (other)", "on_page": "Property / Motor Vehicle / Insurance Tax Allocation / Nameplate Capacity / Other (General Fund column)",
+     "issue": "Labels for the General Fund tax split (detail[0]-[4]) are made up, not printed. The split itself is printed on p4 and adds to Taxes 6,114,811 (p5)."}
+  ]
+}
