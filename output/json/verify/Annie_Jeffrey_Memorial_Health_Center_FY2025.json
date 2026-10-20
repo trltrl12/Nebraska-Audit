@@ -1,18 +1,12 @@
 {
   "stem": "Annie_Jeffrey_Memorial_Health_Center_FY2025",
-  "values_checked": 23,
+  "values_checked": 136,
   "issues": [
-    {"severity": "error", "path": "balance_sheet", "page": null,
-     "extracted": "empty (statement 'Not included in trimmed PDF')", "on_page": "Trimmed PDF has only 2 pages: Statement of Revenues, Expenses and Changes in Net Position (p1, report p.11) and Statement of Cash Flows (p2, report p.12, marked '(Continued)'). The Statement of Net Position (likely report p.9-10) is not in the trimmed PDF",
-     "issue": "Required balance sheet pages missing from trimmed PDF (manifest also flags no_balance_statement); find_pages.py needs to re-trim to include the Statement of Net Position. The cash flow continuation page (reconciliation) is also cut off"},
-    {"severity": "warning", "path": "receipts[3].category", "page": 1,
-     "extracted": "taxes (unlabeled)", "on_page": "Tax revenue 278,163",
-     "issue": "Almost certainly the Polk County property tax levy for the health center, but the trimmed pages don't say so; taxes (unlabeled) is defensible"},
-    {"severity": "warning", "path": "receipts[6].category", "page": 1,
-     "extracted": "donations/contributions", "on_page": "Noncapital grants and contributions 60,049",
-     "issue": "Mixes grants (possibly governmental) and contributions; source not stated"},
-    {"severity": "warning", "path": "receipts[5].amount", "page": 1,
-     "extracted": 2070, "on_page": 2070,
-     "issue": "Correct per page image (2025 = 2,070; 2024 = (1,118)), but the text layer lists '(1,118) 2,070' in reversed order, so an automated text check may misread it"}
+    {"severity": "warning", "path": "receipts[3].category", "page": 3, "extracted": "property tax", "on_page": "Tax revenue 278,163", "issue": "The label does not name the tax. 'property tax' is supported by the 'Property tax receivable' line on p1, but no breakdown is printed. 'taxes (unlabeled)' would be the strict reading."},
+    {"severity": "warning", "path": "receipts[6].category", "page": 3, "extracted": "donations/contributions", "on_page": "Noncapital grants and contributions 60,049", "issue": "The source is not stated (government grant vs private gift), so this could be federal grants or state aid. Already marked review."},
+    {"severity": "warning", "path": "detail[*].detail_category (Schedule 7 'Supplies and Other' items, detail[29]-detail[82])", "page": 7, "extracted": "supplies and materials", "on_page": "Supplies and Other column (total 4,871,684, p8)", "issue": "This column also holds employee benefits (statement p3: benefits 1,221,678 + supplies and other 3,659,475 = 4,881,153), so 'supplies and materials' overstates supplies. A mixed category was used; the extractor's note discloses it."},
+    {"severity": "warning", "path": "detail_totals[2].amount", "page": 8, "extracted": 8906429, "on_page": "Schedule 7 Totals 8,906,429 vs statement operating expenses excluding depreciation 8,915,898 (p3)", "issue": "Schedule 7 is 9,469 less than the statement. Supplies and Other 4,871,684 vs benefits + supplies 4,881,153 on p3. The schedule adds up internally (all line items checked), but the report is inconsistent between schedule and statement. This is mentioned in notes but not in report_discrepancies."},
+    {"severity": "warning", "path": "balance_sheet.assets[6].category", "page": 1, "extracted": "other assets", "on_page": "Estimated third-party payor settlements 1,206,959", "issue": "This is an amount due from Medicare/Medicaid payors, so 'receivables' could fit. 'other assets' is defensible."},
+    {"severity": "warning", "path": "balance_sheet.liabilities[3].original_label", "page": 2, "extracted": "Accrued expenses: Compensated absences", "on_page": "Compensated absenses", "issue": "The printed spelling is 'absenses'. The label was corrected and the 'Accrued expenses:' heading added. The amount 315,099 is correct."}
   ]
 }
