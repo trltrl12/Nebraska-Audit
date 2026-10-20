@@ -282,6 +282,13 @@ the line as the rules say, and also add an entry to `decision_needed[]`:
 `{"question": "<plain question, one or two sentences>", "amount": <number or omitted>, "recorded_as":
 "<how it is recorded now>", "source_page": <int>}`. These go to the "Needs Decision" sheet for the user.
 
+**Transfer cross-check (do this for every report):** for each "transfer from General Fund" / "transfers
+in" printed in a receiving fund (Depreciation, Employee Benefit, Special Building, Debt Service…), find the
+matching outflow in the sending fund's detail. If the sending fund's schedule total includes it inside
+spending lines (look for a reclassification/adjustment column, a statement line lower than the schedule
+line, or a note saying transfers "are included as disbursements"), apply the hidden-transfer rule below.
+The same money must never be both spending and a transfer.
+
 **Transfers hidden inside spending or receipt lines (common in school districts):** if a fund
 column or fund schedule prints a transfer inside an ordinary line (e.g. "Pupil transportation"
 or "2640 Care and Upkeep of Equipment" that the total/government-wide column then eliminates or

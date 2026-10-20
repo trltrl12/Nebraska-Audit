@@ -38,6 +38,8 @@ For each filename you're given (e.g. `Lincoln_FY2025.pdf`, stem `Lincoln_FY2025`
    per fund type, each detail schedule per fund and section, balance-sheet sections) and roll the
    balances forward. A gap is an **error** (find the missing, extra or misread line) unless the
    page itself doesn't add up, in which case it must be in `report_discrepancies`.
+3b. **Transfers:** for every transfer into a fund, confirm the sending fund's matching outflow is a transfer
+   (other financing), not left inside its spending lines. A transfer counted as spending is an **error**.
 4. Check **completeness**: every revenue/expenditure line printed on the statements and detail
    schedules is in the JSON exactly once (nothing skipped, nothing double counted across
    schedules), and subtotal/total lines are not entered as items.
