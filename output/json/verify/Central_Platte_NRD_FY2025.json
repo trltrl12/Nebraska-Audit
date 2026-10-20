@@ -1,0 +1,78 @@
+{
+  "stem": "Central_Platte_NRD_FY2025",
+  "values_checked": 146,
+  "issues": [
+    {
+      "severity": "warning",
+      "path": "missing",
+      "page": 4,
+      "extracted": null,
+      "on_page": "Lease Expense: Actual on GAAP Basis -, Adjustment 21,012, Actual on Budgetary Basis 21,012, Final Budget -",
+      "issue": "[fixed: Lease Expense line added (actual 0 on GAAP basis)] expenditure line on the General budget-and-actual schedule (between Legal Notices and Miscellaneous) is not in detail[]; other zero-actual lines (Project Land Rights, Project Legal Costs, Lobby Expense, Taxes) were kept, so this one is missing. Amount 0 in the GAAP column used, so totals are unaffected"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[*].amount (Budget and Actual - General / Project Sinking)",
+      "page": 4,
+      "extracted": "Actual on GAAP Basis column",
+      "on_page": "columns: Actual on GAAP Basis / Adjustment to Budgetary Basis / Actual on Budgetary Basis / Original/Final Budget",
+      "issue": "extractor assumed the GAAP-basis actual column rather than the budgetary-basis actual (e.g. total expenditures 11,673,313 GAAP vs 11,773,199 budgetary; revenues 10,985,116 vs 10,700,030). Consistent with the basic statements, but the budget comparison on the page is against the budgetary-basis actual"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[18].amount",
+      "page": 4,
+      "extracted": 74400,
+      "on_page": "Miscellaneous 74,400 (p4) vs 74,401 (p7); total expenditures 11,673,313 (p5) vs 11,673,314 (p7); deficiency (688,197) p5 vs (688,198) p8",
+      "issue": "$1 rounding difference between two of the report's own schedules; recorded as printed and mentioned in notes and review, but no report_discrepancies entry was added"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[0].category / detail[0].detail_category",
+      "page": 7,
+      "extracted": "intergovernmental/state aid / other state aid",
+      "on_page": "State and Federal Funds 3,292,271",
+      "issue": "mixed state and federal line, no breakdown printed; review flag present"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[4].category / detail[5].category",
+      "page": 2,
+      "extracted": "reimbursements/refunds",
+      "on_page": "Reimbursements by Others 1,372,866; Statement of Activities operating grants and contributions 4,665,137 = State and Federal Funds 3,292,271 + Reimbursements by Others 1,372,866",
+      "issue": "category follows the label, but the Statement of Activities treats these reimbursements as operating grants (likely cost-share/project reimbursements from other governments); could be intergovernmental/state aid"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[7].detail_category",
+      "page": 4,
+      "extracted": "repairs and maintenance",
+      "on_page": "Automobile and Truck Expense 38,877",
+      "issue": "object guess; could be mostly fuel; review flag present"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[9].detail_category",
+      "page": 4,
+      "extracted": "construction/infrastructure",
+      "on_page": "Capital Outlay 6,644,030",
+      "issue": "no object breakdown printed; not itemized or equipment purchases equally plausible; review flag present"
+    },
+    {
+      "severity": "warning",
+      "path": "balance_sheet.liabilities[1].category",
+      "page": 1,
+      "extracted": "other liabilities",
+      "on_page": "Sales Tax Payable 368",
+      "issue": "could be due to other governments"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[7].original_label",
+      "page": 9,
+      "extracted": "Interest Income from Investments (Project Sinking)",
+      "on_page": "Interest Income from Investments",
+      "issue": "fund name added to the printed label; amount correct"
+    }
+  ]
+}
