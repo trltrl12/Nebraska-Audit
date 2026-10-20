@@ -1,0 +1,24 @@
+{
+  "stem": "Douglas_County_SID_583_FY2025",
+  "values_checked": 15,
+  "issues": [
+    {"severity": "warning", "path": "balance_sheet", "page": 1,
+     "extracted": "empty (no statement printed)", "on_page": "Only Schedule 1 (budget and actual, unaudited; report p16 of 21) is in the trimmed PDF",
+     "issue": "Manifest flags no_statements_found. The 21-page audit almost certainly holds the basic statements (net position / fund balance sheet and the fund revenue/expenditure statement), but the trimmer missed them. The balance sheet and basic-statement lines can't be checked until the PDF is re-trimmed."},
+    {"severity": "warning", "path": "basis", "page": 1,
+     "extracted": "cash", "on_page": "(Budgetary Basis); Fund balances at beginning/end of year",
+     "issue": "Basis is assumed. The schedule prints budgetary-basis fund balances, and comparable Douglas County SID audits are GAAP (modified accrual). If this one is GAAP too, 5,220,465 / 4,604,269 belong in beginning_fund_balance / ending_fund_balance."},
+    {"severity": "warning", "path": "beginning_cash", "page": 1,
+     "extracted": 5220465, "on_page": 5220465,
+     "issue": "The amount matches the printed 'Fund balances at beginning of year', but it is marked computed even though it is printed as-is. Same for ending_cash 4,604,269."},
+    {"severity": "warning", "path": "receipts[1].category", "page": 1,
+     "extracted": "property tax (negative)", "on_page": "Collection fees on property taxes - County Treasurer (26,779)",
+     "issue": "Netting the fee against property tax is defensible because it is printed within revenues. It could also be treated as a treasurer-fee expense."},
+    {"severity": "warning", "path": "receipts[4].category", "page": 1,
+     "extracted": "special assessments", "on_page": "Interest on special assessments (net) 1,648,841",
+     "issue": "This is interest on assessments, not principal. 'special assessments' is defensible and consistent with the other SID reports, but some coders would use investment income."},
+    {"severity": "warning", "path": "disbursements[2].category", "page": 1,
+     "extracted": "debt service principal", "on_page": "Debt service - warrant principal and interest 11,004,039",
+     "issue": "Combined principal and interest is put entirely in principal; the page gives no split. Same for disbursements[3] (bond principal and interest 1,779,018)."}
+  ]
+}
