@@ -1,0 +1,38 @@
+{
+  "stem": "Centura_Public_Schools_FY2025",
+  "values_checked": 178,
+  "issues": [
+    {
+      "severity": "warning",
+      "path": "missing",
+      "page": 7,
+      "extracted": null,
+      "on_page": "General Fund schedule (p7) disbursements include the 250,000 transfer to the Depreciation Fund (Depreciation 'Transfer from other funds' 250,000, p8); General schedule 'Transfers outgoing' shows only 43,000",
+      "issue": "[fixed: -250,000 contra and other financing lines added] Transfer hidden inside the General Fund schedule's spending lines. The statement General column (p3) eliminates it: 8,486,600 + 200,673 - 250,000 = 8,437,273. The shifts show up in Staff (583,902 vs 533,902), Operation and maintenance of plant (1,259,138 vs 1,209,138) and Pupil transportation (322,050 vs 372,723), but the page doesn't say which line carries it. Under the rules this needs a -250,000 contra expenditure line (split_from, review) plus a -250,000 other financing line. As written, the 250,000 shows up both as General Fund spending and as a Depreciation Fund transfer in."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[13].category",
+      "page": 3,
+      "extracted": "other",
+      "on_page": "Other sources 14,098 (p6: 5200 Transfers 12,494 + 5690 Other nonrevenue receipts 1,604)",
+      "issue": "12,494 of this line is printed as 'Transfers' on the General Fund schedule. In substance it is the Depreciation Fund's 'Other local receipts' 12,494 (p8), passed on to General and eliminated inside the combined General column. Keeping it as a receipt matches the printed total, but the label is a transfer, so review whether to split."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[8].category",
+      "page": 3,
+      "extracted": "other",
+      "on_page": "Other local sources 47,124",
+      "issue": "15,540 of this is '1800 Revenue from the community' (p5), which the detail classes as donations/contributions. This statement line and the detail are classed inconsistently."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[11].category",
+      "page": 3,
+      "extracted": "other",
+      "on_page": "Community service programs 12,189",
+      "issue": "'other' is a last resort. Community service programs could fit culture/recreation or health/welfare. Judgment call (also detail[38])."
+    }
+  ]
+}
