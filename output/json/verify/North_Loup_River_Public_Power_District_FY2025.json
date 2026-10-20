@@ -1,0 +1,33 @@
+{
+  "stem": "North_Loup_River_Public_Power_District_FY2025",
+  "values_checked": 97,
+  "issues": [
+    {"severity": "error", "path": "detail[2].detail_category", "page": 7,
+     "extracted": "other utility charges", "on_page": "Water Charges 56,726",
+     "issue": "The detailed list has an exact 'water charges' category, and that is what the line is labelled."},
+    {"severity": "error", "path": "detail[7].category", "page": 7,
+     "extracted": "other / miscellaneous revenue", "on_page": "Miscellaneous 11,709 (budget 11,000)",
+     "issue": "The extractor's own review says this holds Lease Income 11,000 (p3), and the budget equals the lease exactly. The dominant part is rental income, so it should be charges for services/fees / rentals with a review note, not other."},
+    {"severity": "error", "path": "missing", "page": 7,
+     "extracted": null, "on_page": "EXPENDITURES: Capital Outlay 1,674,040 (budget 1,432,361); Debt Service 463,060 (budget 423,860)",
+     "issue": "All budget-schedule expenditure lines were left out 'to avoid double counting' with the Schedules of Expenses (pp8-9). But those schedules cover only Directors/Field/General and Office operating expenses (1,069,589). Capital outlay and debt service appear nowhere else in the JSON, so leaving them out drops 2,137,100 of printed spending instead of avoiding a double count."},
+    {"severity": "warning", "path": "missing", "page": 7,
+     "extracted": null, "on_page": "Irrigation 1,133,816 (budget 1,121,002)",
+     "issue": "This cash-basis operating line overlaps the more detailed accrual Schedules of Expenses, so leaving it out is defensible. It isn't recorded anywhere, and the detail mixes cash-basis revenue with accrual expenses."},
+    {"severity": "warning", "path": "receipts[0].category", "page": 3,
+     "extracted": "charges for services/fees", "on_page": "Charges for Services 1,225,281",
+     "issue": "The budget schedule (p7) shows these receipts are mostly 'Special Emergency Assessment' 1,165,336 plus Water Charges 56,726. The detail calls the same money special assessments, so the receipts category and the detail category don't match. The label supports charges, so this is a judgment call."},
+    {"severity": "warning", "path": "disbursements[0].category", "page": 3,
+     "extracted": "utilities", "on_page": "Public Power and Irrigation District",
+     "issue": "This entity is mainly an irrigation district (canal, dam, lateral rehab, groundwater recharge). natural resources/conservation could be the better function for every line. utilities is defensible under the public power district rule."},
+    {"severity": "warning", "path": "missing", "page": 8,
+     "extracted": null, "on_page": "Trimmed PDF jumps from report p26 (trimmed p7) to report p29 (trimmed p8)",
+     "issue": "Report pp27-28 aren't trimmed. They may hold more supplementary schedules (for example revenue or other department expense detail), which can't be checked. 'Read pages 1-9 of 9' matches the trimmed page count."},
+    {"severity": "warning", "path": "detail_totals[1]", "page": 9,
+     "extracted": 1069589, "on_page": "Total Director's Expense 14,503 (p8); Total Field Expense 729,386 (p8); Total General and Office 325,700 (p9)",
+     "issue": "Three printed department totals were merged into one computed total (correctly marked computed; the arithmetic holds). Per-department totals would match the page better."},
+    {"severity": "warning", "path": "detail[14].detail_category", "page": 8,
+     "extracted": "employee benefits and payroll taxes", "on_page": "Vehicle Allowance 43,550",
+     "issue": "Classing it as a benefit is a judgment call (it could be travel). The line's review says the row alignment is hard to read, but on the page the amount is clearly 43,550 on the Vehicle Allowance row."}
+  ]
+}

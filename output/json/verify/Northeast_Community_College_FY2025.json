@@ -1,0 +1,21 @@
+{
+  "stem": "Northeast_Community_College_FY2025",
+  "values_checked": 97,
+  "issues": [
+    {"severity": "warning", "path": "report_discrepancies", "page": 9,
+     "extracted": null, "on_page": "Reconciliation: Operating loss (64,220,959) + total adjustments 6,657,466 = net cash used in operating activities (57,563,493); statement p8 prints (57,563,491)",
+     "issue": "the report's own cash flow reconciliation differs from the statement by 2 (printed result -57,563,493 vs -57,563,491); not recorded in report_discrepancies. proprietary.operating correctly uses the p8 figure"},
+    {"severity": "warning", "path": "disbursements[0].category", "page": 4,
+     "extracted": "instruction", "on_page": "Operating expenses listed by object only (Personnel services, Operating, Supplies, Travel, Depreciation, Amortization)",
+     "issue": "all six operating expense lines (disbursements[0]-[5]) were put under instruction. That is an assumption: the p11-12 schedule shows only about 37% of General Fund spending is Instruction, and the rest is support services. Marked review, so it is defensible, but the function split is not known"},
+    {"severity": "warning", "path": "receipts[4].category", "page": 4,
+     "extracted": "charges for services/fees", "on_page": "Other operating 60,418",
+     "issue": "unexplained 'Other operating' revenue put in charges for services instead of other. The cash flow statement (p8) calls it 'Other receipts' and gives no explanation. Defensible because it is an operating revenue, but it is a guess (marked review)"},
+    {"severity": "warning", "path": "detail[6].detail_category", "page": 11,
+     "extracted": "professional/contract services", "on_page": "Operating expenses",
+     "issue": "'Operating expenses' lines (detail[6], [11], [16], [20], [25], [29]) were mapped to professional/contract services. The page gives no object breakdown, so this is a judgment call (marked review)"},
+    {"severity": "warning", "path": "detail[29].category", "page": 12,
+     "extracted": "other", "on_page": "8 Scholarships",
+     "issue": "the Scholarships program function was put in other. Student aid has no function category of its own, so this is defensible (marked review)"}
+  ]
+}
