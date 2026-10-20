@@ -1,0 +1,28 @@
+{
+  "stem": "Red_Willow_County_FY2025",
+  "values_checked": 140,
+  "issues": [
+    {"severity": "warning", "path": "detail[0].split_from", "page": 5,
+     "extracted": "Taxes split 3,559,210 property / 534,489 motor vehicle",
+     "on_page": "Taxes 4,093,699 (budget final 4,081,265)",
+     "issue": "Exhibit F prints one 'Taxes' line. The split uses the General column of Exhibit D (p4), which prints exactly these two lines for the same fund, and they add up to 4,093,699, so it is defensible. But the rule only allows a split when the report breaks down that line itself, and State/Local on the same schedule were left as broad groups. Also, budget_final is null on both split items even though 4,081,265 is printed, and the original_label values ('Taxes (property tax portion)'...) are not printed labels."},
+    {"severity": "warning", "path": "detail[29].category", "page": 5,
+     "extracted": "streets/highways", "on_page": "Public Works: Noxious Weed Control 16,966",
+     "issue": "The disbursement rules list noxious weed control under natural resources/conservation. The report prints it under Public Works, and the extractor already marked it for review."},
+    {"severity": "warning", "path": "detail[34].category", "page": 7,
+     "extracted": "charges for services/fees", "on_page": "Local 61,313",
+     "issue": "In Exhibit D (p4), the Road column breaks this line down as Miscellaneous 32,373 (53%), Charges for Services 28,645 and Intergovernmental 295. Under the 'more than half' rule the dominant category is miscellaneous/other, not charges for services."},
+    {"severity": "warning", "path": "detail[4].category", "page": 5,
+     "extracted": "charges for services/fees", "on_page": "Local 1,083,417",
+     "issue": "In Exhibit D (p4), the General column breaks this down as charges 499,345 (46%), interest 491,444 (45%), misc 21,039 and intergovernmental 71,589. No category is more than half, and charges only barely beat investment income. Defensible as the dominant category, and it is already marked for review."},
+    {"severity": "warning", "path": "detail[45].detail_category", "page": 10,
+     "extracted": "other charges for services", "on_page": "Charges for Services 878,997",
+     "issue": "Schedule 4 (pp11-13) shows that most of this is Horse Arena 352,288 and Fair 287,091 (73% together). 'fair/event revenue' may fit better."},
+    {"severity": "warning", "path": "detail[42].fund", "page": 10,
+     "extracted": "Nonmajor funds (combined)", "on_page": "Schedule 2 has 3 columns: Special Revenue Funds (Schedule 4), Jail Bond, Nursing Home Bond, plus Total",
+     "issue": "The rule is to record per fund for up to 6 fund columns. Schedule 2 has only 3, but one of them is a 14-fund special revenue total (Schedule 4), so the extractor's use of the Total column is defensible. The two debt service funds are not separated."},
+    {"severity": "warning", "path": "missing", "page": 10,
+     "extracted": null, "on_page": "Trimmed p9 = report p22 and p10 = report p25; trimmed p10 = report p25 and p11 = report p27",
+     "issue": "Report pages 23-24 and 26 are not in the trimmed PDF. These are probably the nonmajor combining balance sheets (Schedules 1 and 3) and the budgetary notes, and every receipt and disbursement total ties, but this cannot be confirmed from the trimmed PDF."}
+  ]
+}
