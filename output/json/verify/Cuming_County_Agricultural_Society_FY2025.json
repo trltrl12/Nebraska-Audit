@@ -1,0 +1,46 @@
+{
+  "stem": "Cuming_County_Agricultural_Society_FY2025",
+  "values_checked": 55,
+  "issues": [
+    {
+      "severity": "warning",
+      "path": "detail[3].section",
+      "page": 6,
+      "extracted": "revenue (category other, miscellaneous revenue)",
+      "on_page": "Local receipts 200,000 (= Loan proceeds 200,000 on p4)",
+      "issue": "[fixed directly] Loan proceeds are recorded as revenue in detail. They belong in section 'other financing' (debt proceeds), and detail_totals[0] (1,277,091, which includes them) should carry includes: [\"other financing\"]. The top-level debt_proceeds is handled correctly."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[3].original_label",
+      "page": 6,
+      "extracted": "Local receipts (second line)",
+      "on_page": "Local receipts",
+      "issue": "The label is not as printed; the page prints 'Local receipts' twice."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[2].category",
+      "page": 6,
+      "extracted": "other / miscellaneous revenue",
+      "on_page": "Local receipts 514,367 (= Donations 499,602 + Interest income 14,765 per p4)",
+      "issue": "[fixed directly] 'other' is used although the report shows this group is 97% donations. Under the mixed-line rule it should be donations/contributions (detail donations/contributions), with review naming the interest mix."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[7].category",
+      "page": 4,
+      "extracted": "debt service principal",
+      "on_page": "Loan payment 206,589 (listed under General government)",
+      "issue": "Principal and interest are not split, and the whole amount is assigned to principal (already marked review)."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[7].category",
+      "page": 6,
+      "extracted": "debt service principal",
+      "on_page": "Payments on long term debt 206,589",
+      "issue": "Principal and interest are not split."
+    }
+  ]
+}

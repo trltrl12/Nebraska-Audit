@@ -1,0 +1,70 @@
+{
+  "stem": "Curtis_FY2025",
+  "values_checked": 89,
+  "issues": [
+    {
+      "severity": "warning",
+      "path": "detail[3].fund_type",
+      "page": 7,
+      "extracted": "governmental",
+      "on_page": "Charges for services 2,039,625 (all funds) = governmental 9,407 + business-type 2,030,218 (p2, p4, p6)",
+      "issue": "[fixed directly] This all-funds budget line is 99.5% utility-fund (electric/water/sewer/garbage/golf) charges but is tagged governmental, which folds utility revenue into the governmental detail. The report prints the governmental/business-type breakdown of this exact line on p2 (Charges for Services column). Split it (split_from) or tag it business-type, with review."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[6].fund_type",
+      "page": 7,
+      "extracted": "governmental",
+      "on_page": "Interest income 99,312 (all funds) = governmental 15,676 + business-type 83,636 (p2 'Investment earnings')",
+      "issue": "[fixed directly] Mixed line, mostly business-type (84%), but tagged governmental. Same fix as detail[3]."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[16].fund_type",
+      "page": 7,
+      "extracted": "governmental",
+      "on_page": "Transfers out 371,224 = governmental 12,484 + business-type 358,739 (p2)",
+      "issue": "Other financing line tagged governmental, but 97% of it is business-type transfers."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[15].fund_type",
+      "page": 7,
+      "extracted": "governmental",
+      "on_page": "Other expense 197,457",
+      "issue": "All-funds schedule; nothing on the page shows which fund type this belongs to. Tagging it governmental is an assumption."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[15]",
+      "page": 6,
+      "extracted": 2734,
+      "on_page": "Miscellaneous revenues (expenses) (2,734) total = Electric (6,670) + Garbage 3,936",
+      "issue": "The net total-column figure is recorded as one disbursement, so Garbage misc revenue 3,936 is netted against Electric misc expense 6,670. This is marked computed/review, and the amount and roll-forward are correct."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[5].category",
+      "page": 4,
+      "extracted": "donations/contributions",
+      "on_page": "Contributions and grants 332,015 (p2: Capital Grants and Contributions; Pool Fund 301,010 on p8)",
+      "issue": "The source isn't stated, so some of this may be government grants (intergovernmental/federal) rather than private donations. Already marked review."
+    },
+    {
+      "severity": "warning",
+      "path": "transfers_out",
+      "page": 4,
+      "extracted": 12484,
+      "on_page": "Operating transfers in (out): General 93,115, Sales tax (105,599), Total (12,484)",
+      "issue": "Recorded as the net of the total column (no transfers_in). The total column prints only the net (12,484), so this is acceptable. The gross amounts by fund are 93,115 in and 105,599 out."
+    },
+    {
+      "severity": "warning",
+      "path": "detail",
+      "page": 8,
+      "extracted": "not recorded",
+      "on_page": "Combining Schedule of Revenues, Expenditures, and Fund Balances (Deficit) - General Fund (8 sub-fund columns; total revenues 773,382, expenditures 651,910)",
+      "issue": "The supplementary combining schedule was left out of detail to avoid double counting with the p7 all-funds budget schedule (stated in notes). This is a judgment call: p8 is the more detailed schedule for the General Fund."
+    }
+  ]
+}
