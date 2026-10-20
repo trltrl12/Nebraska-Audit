@@ -1,0 +1,18 @@
+{
+  "stem": "Polk_County_SID_1_FY2025",
+  "values_checked": 92,
+  "issues": [
+    {"severity": "warning", "path": "receipts[4].category", "page": 2,
+     "extracted": "intergovernmental/state aid", "on_page": "State Motor Vehicle Tax Allocation 334",
+     "issue": "Ambiguous label. Motor vehicle tax that the county passes on to subdivisions is 'motor vehicle tax'; only pro-rate is state aid. detail[2] and detail[13] use 'motor vehicle pro-rate' for the same line. Defensible, but it is a judgment call."},
+    {"severity": "warning", "path": "disbursements[3].category", "page": 2,
+     "extracted": "utilities", "on_page": "Maintenance 28,630 (General Fund)",
+     "issue": "Function is a guess (already marked review). SID maintenance could be streets/highways or general government. The same guess is in detail[6] and detail[18]."},
+    {"severity": "warning", "path": "detail", "page": 4,
+     "extracted": "Actual on GAAP Basis column", "on_page": "Schedules 1-2 print 'Actual on GAAP Basis', 'Adjustments to Budgetary Basis' and 'Actual on Budgetary Basis'",
+     "issue": "The amounts use the GAAP-basis actual column, but budget_final should be compared with the budgetary-basis actual (e.g. GF Property Taxes 84,192 GAAP vs 88,028 budgetary; DSF Special Assessments 0 GAAP vs 29,389 budgetary; DSF Net Capital Outlay 0 vs 49,718). Defensible because it ties to the statements, but a person should confirm which column to use."},
+    {"severity": "warning", "path": "missing", "page": 4,
+     "extracted": null, "on_page": "Schedule 1 General Fund OTHER FINANCING: Warrants Issued - (GAAP) / 79,073 (budgetary) / 67,300 budget; Warrants Retired - / (79,073) / (67,300)",
+     "issue": "The General Fund warrant lines are not in detail. Their GAAP actual is 0, but zero-actual lines elsewhere (Utilities, the DSF budget-only lines) were recorded with budget_final, so this is inconsistent. It has no effect on totals."}
+  ]
+}
