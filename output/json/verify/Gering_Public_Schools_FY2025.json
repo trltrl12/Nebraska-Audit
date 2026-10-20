@@ -1,0 +1,27 @@
+{
+  "stem": "Gering_Public_Schools_FY2025",
+  "values_checked": 390,
+  "issues": [
+    {"severity": "warning", "path": "receipts[14].split_from", "page": 15,
+     "extracted": "Nonrevenue Receipts 15,731 (p4); breakdown on p36 (...)", "on_page": "5300 962 / 5301 10,000 / 5690 4,769 on trimmed p15 (report p36)",
+     "issue": "Split is allowed and the amounts are right (962 + 10,000 + 4,769 = 15,731), but split_from on receipts[14]-[16] gives the report page number (p36), not the trimmed page (p15)."},
+    {"severity": "warning", "path": "receipts[9].category", "page": 4,
+     "extracted": "fines and forfeitures", "on_page": "County and Local Fines and Licenses 120,459",
+     "issue": "The label mixes fines and licenses. The dominant category is defensible, but the rules want a review note naming the mix. The same applies to detail[9] '2110 County Fines and License Fees'."},
+    {"severity": "warning", "path": "disbursements[54].category", "page": 6,
+     "extracted": "other", "on_page": "Other Disbursements 50,801 (General Fund column 5,473; Nonmajor column 45,328)",
+     "issue": "Kept as 'other' with review. The fund columns show what it is: 5,473 Employee Benefit Fund benefits paid (p20) and 45,328 QCPU Fund purchased services (p24). A more specific function (support services / capital outlay) could be argued. Same judgment applies to detail[136] (QCPU Purchased Services, category other)."},
+    {"severity": "warning", "path": "disbursements[45].category", "page": 6,
+     "extracted": "instruction", "on_page": "State Categorical Programs 570,349; Federal Programs 1,462,619",
+     "issue": "The rule sends program lines to instruction when the report's own statement counts them under Instruction. Here the Statement of Activities (p1) prints State Categorical Programs and Federal Programs as their own function lines, separate from Instruction (14,507,281). Mapping them to instruction is a judgment call. Already marked review. Also applies to disbursements[47] and the matching detail lines."},
+    {"severity": "warning", "path": "detail[4].original_label", "page": 14,
+     "extracted": "1190 Other Taxes (In-Lieu-of Taxes per p12)", "on_page": "1190 Other Taxes",
+     "issue": "The extractor added an annotation to the printed label. The amount 25,131 does match In-Lieu-of Taxes in the combining schedule (p10), so the category is supported."},
+    {"severity": "warning", "path": "disbursements[23].original_label", "page": 5,
+     "extracted": "Support Services - Other (Students)", "on_page": "Support Services - Other",
+     "issue": "The extractor added a heading suffix to the printed label to tell the two lines apart. The same applies to disbursements[28] 'Support Services - Other (Staff)'. Amounts are correct."},
+    {"severity": "warning", "path": "detail[101].fund_type", "page": 21,
+     "extracted": "governmental", "on_page": "School Nutrition Fund (nonmajor governmental fund, pp4-6, p8)",
+     "issue": "The extractor rules list school nutrition as a business-type example. This report presents it as a nonmajor governmental fund inside the Total Governmental Funds column, so 'governmental' follows the statement. Flagged so the classification is a deliberate choice."}
+  ]
+}
