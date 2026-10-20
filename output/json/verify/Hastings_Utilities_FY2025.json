@@ -1,0 +1,27 @@
+{
+  "stem": "Hastings_Utilities_FY2025",
+  "values_checked": 56,
+  "issues": [
+    {"severity": "warning", "path": "receipts[2].category", "page": 7,
+     "extracted": "other", "on_page": "DEE loan forgiveness 120,427",
+     "issue": "This is forgiveness of a loan from the Nebraska Dept. of Environment and Energy (state revolving fund), which is a state/federal subsidy. 'intergovernmental/state aid' (or 'federal grants') fits better than 'other'. It could also be treated as debt-related other financing (p8 shows 'DEE loan proceeds (including loan forgiveness)'). Judgment call."},
+    {"severity": "warning", "path": "receipts[4].category", "page": 7,
+     "extracted": "other", "on_page": "Allocated administration interest and other revenue 149,224",
+     "issue": "This line mixes interest and other revenue. The rules say a mixed line takes its dominant category ('investment income' if interest dominates) plus a review note. The page doesn't show which part is larger."},
+    {"severity": "warning", "path": "disbursements[4].category", "page": 7,
+     "extracted": "other", "on_page": "Miscellaneous expenses (378,729)",
+     "issue": "The whole entity is a utility, and the MD&A (p2) says nonoperating expenses are cost of coal, jobbing and services to PPGA, which are utility operations. Function 'utilities' would fit better than 'other'."},
+    {"severity": "warning", "path": "disbursements[5].category", "page": 7,
+     "extracted": "other", "on_page": "Loss on disposal of assets (188,496)",
+     "issue": "This is a non-cash loss on utility plant. Function 'utilities' would fit better than 'other'. Judgment call."},
+    {"severity": "warning", "path": "balance_sheet.liabilities[6].category", "page": 5,
+     "extracted": "accrued liabilities", "on_page": "Compensated absences 4,391,259 (under Noncurrent liabilities)",
+     "issue": "It is printed under noncurrent liabilities, but the rules limit 'accrued liabilities' to compensated absences due soon. 'other liabilities' or 'debt - due in more than one year' would fit better."},
+    {"severity": "warning", "path": "balance_sheet.assets[14].original_label", "page": 4,
+     "extracted": "Less accumulated depreciation (non-utility)", "on_page": "Less accumulated depreciation",
+     "issue": "Label is not exactly as printed: '(non-utility)' was added to tell it apart from the utility-plant line. The amount -9,907,659 is correct."},
+    {"severity": "warning", "path": "business_type.transfers_net.computed", "page": 7,
+     "extracted": "computed: Payments in lieu of taxes ... shown negative", "on_page": "Payments in lieu of taxes (3,703,166)",
+     "issue": "The amount is printed as-is (negative), so it isn't actually computed. The question of treating it as a transfer is already in decision_needed."}
+  ]
+}
