@@ -1,0 +1,15 @@
+{
+  "stem": "Sarpy_County_SID_249_FY2025",
+  "values_checked": 99,
+  "issues": [
+    {"severity": "warning", "path": "receipts[3].category", "page": 2,
+     "extracted": "investment income", "on_page": "Interest on Special Assessments 3,869",
+     "issue": "Interest charged on special assessments arguably belongs with special assessments (by analogy with interest on property taxes -> property tax); same label in detail[14] is investment income with no review flag. Extractor already flagged receipts[3] for review."},
+    {"severity": "warning", "path": "receipts[4].category", "page": 2,
+     "extracted": "intergovernmental/state aid", "on_page": "State Motor Vehicle Tax Allocation 862",
+     "issue": "Category call: could be motor vehicle tax rather than pro-rate state aid (detail[2], detail[15] use detail_category motor vehicle pro-rate). Defensible, needs a consistent rule across SIDs."},
+    {"severity": "warning", "path": "debt_proceeds", "page": 2,
+     "extracted": null, "on_page": "Warrants Issued 50,299; Warrants Retired (50,299); Change in Payables 8,432; Total Other Financing Sources (Uses) 8,432",
+     "issue": "Extractor put the printed net 8,432 in other_financing and left debt_proceeds null. The SID rule sends warrant proceeds to debt_proceeds (50,299), with warrants retired (-50,299) and change in payables (+8,432) in other_financing. Identity holds either way."}
+  ]
+}
