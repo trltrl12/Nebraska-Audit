@@ -1,0 +1,24 @@
+{
+  "stem": "Buffalo_County_Agricultural_Society_FY2025",
+  "values_checked": 118,
+  "issues": [
+    {"severity": "error", "path": "receipts[9].category", "page": 3,
+     "extracted": "other", "on_page": "Difference of livestock sales collected over livestock sales paid 5,407",
+     "issue": "The label says what it is (net fair livestock-sale proceeds), so 'other' isn't allowed. Should be charges for services/fees (fair/event revenue)."},
+    {"severity": "error", "path": "detail[9].detail_category", "page": 4,
+     "extracted": "miscellaneous revenue (category other)", "on_page": "Difference of livestock sales collected over livestock sales paid 5,407",
+     "issue": "Same line as receipts[9]: the label identifies it as fair livestock-sale proceeds. Should be category charges for services/fees, detail_category fair/event revenue."},
+    {"severity": "warning", "path": "detail[27].detail_category", "page": 4,
+     "extracted": "debt interest and fees", "on_page": "Credit card processing fees and returned checks 24,283",
+     "issue": "Card processing and bank fees are not debt costs; professional/contract services or miscellaneous expenditure fits better."},
+    {"severity": "warning", "path": "detail[31].detail_category", "page": 4,
+     "extracted": "tax refunds/treasurer fees", "on_page": "Sales tax 55,129",
+     "issue": "Sales tax remitted on fair sales is neither a tax refund nor a treasurer fee; this category is a judgment call (already flagged for review)."},
+    {"severity": "warning", "path": "detail[16].detail_category", "page": 4,
+     "extracted": "fuel", "on_page": "Vehicle expense 13,557",
+     "issue": "Vehicle expense may include repairs and insurance as well as fuel; judgment call, already flagged for review."},
+    {"severity": "warning", "path": "detail", "page": 5,
+     "extracted": "zero-actual lines omitted", "on_page": "Sinking Fund budget-only lines: Capital outlay 1,652,027; Debt service 50,000; Supplies 6,000; Vehicle expense 1,000 (actual '-')",
+     "issue": "Lines with no actual but a large final budget were left out, so their budget_final figures are lost (e.g. capital outlay budget 1,652,027). Totals are unaffected."}
+  ]
+}
