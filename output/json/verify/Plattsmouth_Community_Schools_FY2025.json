@@ -1,0 +1,38 @@
+{
+  "stem": "Plattsmouth_Community_Schools_FY2025",
+  "values_checked": 314,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "detail[111].budget_final",
+      "page": 23,
+      "extracted": null,
+      "on_page": 372019,
+      "issue": "[fixed] Special Building Fund 'Non-program expenditures' line (the other financing line, -144,923) prints Original and Final Budget 372,019; JSON has budget_final null"
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[10].category",
+      "page": 7,
+      "extracted": "instruction",
+      "on_page": "Federal programs 2,696,615 (and Private and state categorical programs 176,727, disbursements[9])",
+      "issue": "The statement lists these as their own functions, not under Instruction, so the rule that sends program lines to instruction only when the statement counts them there doesn't strictly apply. Instruction is a defensible dominant-function guess, but neither line is marked review"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[111].original_label",
+      "page": 23,
+      "extracted": "Non-program expenditures (interfund loan to General Fund)",
+      "on_page": "Non-program expenditures",
+      "issue": "The extractor added the explanation in parentheses to the label; the page prints only 'Non-program expenditures'"
+    },
+    {
+      "severity": "warning",
+      "path": "notes",
+      "page": 26,
+      "extracted": "Student Fee Fund skipped as fiduciary/outside scope",
+      "on_page": "Student Fee Fund receipts 11,425, disbursements 21,092",
+      "issue": "The extractor assumed this fund is fiduciary. That holds up: the governmental totals tie without it (nonmajor = QCPUF + Special Building exactly), but the page doesn't label the fund fiduciary"
+    }
+  ]
+}
