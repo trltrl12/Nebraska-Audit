@@ -1,0 +1,22 @@
+{
+  "stem": "Axtell_FY2025",
+  "values_checked": 186,
+  "issues": [
+    {"severity": "warning", "path": "receipts[9]", "page": 4,
+     "extracted": "Other receipts 21,361 split into franchise tax 2,885 / rental income 10,643 / misc general 6,783 / misc cemetery 1,050",
+     "on_page": "p4 prints a single 'Other receipts 21,361' (General column); p9 prints the General fund 'Other' group (Interest 136,226, Franchise tax 2,885, Electric system lease 110,573, Rental income 10,643, Misc General 6,783, Cemetery 1,050)",
+     "issue": "No page prints a breakdown of the 21,361 line itself. The split comes from taking Interest and Electric system lease (separate p4 lines) out of the p9 'Other' group. The arithmetic is right (2,885+10,643+6,783+1,050 = 21,361) and it uses the same fund's own schedule, but the split is derived, not printed. Applies to receipts[9]-[12]."},
+    {"severity": "warning", "path": "transfers_out", "page": 5,
+     "extracted": 53004,
+     "on_page": "Total Governmental Funds: Transfers in (78,042), Transfers out 25,038, Total other financing sources (uses) (53,004)",
+     "issue": "After reclassification the total column prints transfers in as negative and transfers out as positive. The extractor recorded the net (53,004) as transfers_out with transfers_in null. The net matches the enterprise transfers net +53,004 (p7), but the gross printed lines are not what was recorded."},
+    {"severity": "warning", "path": "business_type.measure", "page": 7,
+     "extracted": "net position",
+     "on_page": "Statement of Revenues, Expenditures and Changes in Net Position - Modified Cash Basis (net position = cash 502,498)",
+     "issue": "The extractor rules say measure = 'cash' for cash-basis statements. The statement is titled net position, but it is the cash balance."},
+    {"severity": "warning", "path": "detail[33].category", "page": 10,
+     "extracted": "general government",
+     "on_page": "Capital outlay 96,711 (General government dept)",
+     "issue": "Capital outlay lines are categorized inconsistently. General fund departments (detail[33], [38], [56], [62]) and the Special Revenue capital outlay use the function as category, while the Water and Sewer capital outlay lines use 'capital outlay'. The governmental statement p4 prints capital outlay as its own line (317,446)."}
+  ]
+}
