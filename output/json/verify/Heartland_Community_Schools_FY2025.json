@@ -2,29 +2,69 @@
   "stem": "Heartland_Community_Schools_FY2025",
   "values_checked": 276,
   "issues": [
-    {"severity": "error", "path": "receipts[3].category", "page": 6,
-     "extracted": "other taxes", "on_page": "Taxes: Other 1,925,010.92",
-     "issue": "The report does print what this line is made of. General 1,794,589.98 = carline 2,243.50 + homestead 26,789.64 + property tax credit 1,756,529.76 + pro-rate MV 9,027.08 (p9). Bond 130,346.43 = carline 362.46 + homestead 4,538.46 + property tax credit 124,187.90 + pro-rate 1,257.61 (p16). Special Building 74.51 = pro-rate (p17). So 1,912,045.76 (99.3%) is homestead/property tax credit, which is state aid; only 2,605.96 is carline tax. Under the mixed-line rule the dominant category is intergovernmental/state aid, with review, or the line should be split by fund schedule. The review text saying 'no breakdown of this line printed' is wrong."},
-    {"severity": "error", "path": "detail[89].category", "page": 11,
-     "extracted": "other", "on_page": "3300 Community service 350.00",
-     "issue": "Exhibit F (p7) counts 3300 Community service under Regular instruction (2,910,742.02 = 2,910,392.02 + 350). The rules say program lines the report's own statement counts under Instruction go to 'instruction', so 'other' is wrong."},
-    {"severity": "warning", "path": "receipts[6].category", "page": 6,
-     "extracted": "other", "on_page": "Other local receipts 613,091.10",
-     "issue": "Made up of tuition 8,124.51 + General misc 14,315.34 + Bond misc 297,806.86 + Other Governmental Funds 292,844.39 (school lunch sales 109,647.27 + activity receipts 183,197.12). Exhibit B shows 300,968.90 of it as Charges for Services. Charges for services/fees (49%) is about as large as the unexplained part (51%), so 'other' with review is defensible but questionable."},
-    {"severity": "warning", "path": "disbursements[14].split_from", "page": 6,
-     "extracted": "Other student support split 227,794.90 / 243,464.65", "on_page": "Other student support 471,259.55 (Other Governmental Funds column only)",
-     "issue": "p6 does not print this split. It comes from the Activities (p14) and School Nutrition (p15) fund totals, the only two Other Governmental Funds (p3-4). The arithmetic holds and the split is defensible, but it was not printed on the statement itself. The same applies to disbursements[15]."},
-    {"severity": "warning", "path": "detail[8].category", "page": 9,
-     "extracted": "intergovernmental/state aid / county/other local governments", "on_page": "2110 County fines and license fees 43,535.34",
-     "issue": "The label says fines and license fees, passed through by the county. Could be fines and forfeitures. The current category is consistent with the top-level 'County receipts', so this is a judgment call."},
-    {"severity": "warning", "path": "detail[118].original_label", "page": 6,
-     "extracted": "Transfer in from General Fund (inside account receipts)", "on_page": "Transfers 42,459.06 (Other Governmental Funds column)",
-     "issue": "The label is descriptive, not printed. Which fund received the transfer (Activities) is inferred: Nutrition receipts 208,312.49 hold no transfer, so it must sit inside Activities receipts 374,732.64. The arithmetic holds. The contra line detail[117] rests on the same inference."},
-    {"severity": "warning", "path": "detail[100].original_label", "page": 8,
-     "extracted": "Transfer to Depreciation Fund (hidden in spending lines, reclassified)", "on_page": "Reclassifications (133,091.00) + (41,000.00) + (135,600.00) = (309,691.00)",
-     "issue": "The label is descriptive, not printed. The amount is correctly marked computed and ties to 'Transfers from general fund' 309,691.00 (p12)."},
-    {"severity": "warning", "path": "missing", "page": 19,
-     "extracted": null, "on_page": "Exhibit N continues past Occupational Therapy - SPED Ages 0-2 (program 2163); object detail for programs 2171-8000 is not in the trimmed PDF",
-     "issue": "The trimmed PDF is missing the rest of Exhibit N. The extractor used Exhibit G program totals ('not itemized') for 2171 onward, and those tie to the 6,709,256.67 total. These pages are not on the CLAUDE.md missing-pages follow-up list; re-trim to capture the object detail."}
+    {
+      "severity": "error",
+      "path": "receipts[3].category",
+      "page": 6,
+      "extracted": "other taxes",
+      "on_page": "Taxes: Other 1,925,010.92",
+      "issue": "[fixed] The report does print what this line is made of. General 1,794,589.98 = carline 2,243.50 + homestead 26,789.64 + property tax credit 1,756,529.76 + pro-rate MV 9,027.08 (p9). Bond 130,346.43 = carline 362.46 + homestead 4,538.46 + property tax credit 124,187.90 + pro-rate 1,257.61 (p16). Special Building 74.51 = pro-rate (p17). So 1,912,045.76 (99.3%) is homestead/property tax credit, which is state aid; only 2,605.96 is carline tax. Under the mixed-line rule the dominant category is intergovernmental/state aid, with review, or the line should be split by fund schedule. The review text saying 'no breakdown of this line printed' is wrong."
+    },
+    {
+      "severity": "error",
+      "path": "detail[89].category",
+      "page": 11,
+      "extracted": "other",
+      "on_page": "3300 Community service 350.00",
+      "issue": "[fixed] Exhibit F (p7) counts 3300 Community service under Regular instruction (2,910,742.02 = 2,910,392.02 + 350). The rules say program lines the report's own statement counts under Instruction go to 'instruction', so 'other' is wrong."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[6].category",
+      "page": 6,
+      "extracted": "other",
+      "on_page": "Other local receipts 613,091.10",
+      "issue": "Made up of tuition 8,124.51 + General misc 14,315.34 + Bond misc 297,806.86 + Other Governmental Funds 292,844.39 (school lunch sales 109,647.27 + activity receipts 183,197.12). Exhibit B shows 300,968.90 of it as Charges for Services. Charges for services/fees (49%) is about as large as the unexplained part (51%), so 'other' with review is defensible but questionable."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[14].split_from",
+      "page": 6,
+      "extracted": "Other student support split 227,794.90 / 243,464.65",
+      "on_page": "Other student support 471,259.55 (Other Governmental Funds column only)",
+      "issue": "p6 does not print this split. It comes from the Activities (p14) and School Nutrition (p15) fund totals, the only two Other Governmental Funds (p3-4). The arithmetic holds and the split is defensible, but it was not printed on the statement itself. The same applies to disbursements[15]."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[8].category",
+      "page": 9,
+      "extracted": "intergovernmental/state aid / county/other local governments",
+      "on_page": "2110 County fines and license fees 43,535.34",
+      "issue": "The label says fines and license fees, passed through by the county. Could be fines and forfeitures. The current category is consistent with the top-level 'County receipts', so this is a judgment call."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[118].original_label",
+      "page": 6,
+      "extracted": "Transfer in from General Fund (inside account receipts)",
+      "on_page": "Transfers 42,459.06 (Other Governmental Funds column)",
+      "issue": "The label is descriptive, not printed. Which fund received the transfer (Activities) is inferred: Nutrition receipts 208,312.49 hold no transfer, so it must sit inside Activities receipts 374,732.64. The arithmetic holds. The contra line detail[117] rests on the same inference."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[100].original_label",
+      "page": 8,
+      "extracted": "Transfer to Depreciation Fund (hidden in spending lines, reclassified)",
+      "on_page": "Reclassifications (133,091.00) + (41,000.00) + (135,600.00) = (309,691.00)",
+      "issue": "The label is descriptive, not printed. The amount is correctly marked computed and ties to 'Transfers from general fund' 309,691.00 (p12)."
+    },
+    {
+      "severity": "warning",
+      "path": "missing",
+      "page": 19,
+      "extracted": null,
+      "on_page": "Exhibit N continues past Occupational Therapy - SPED Ages 0-2 (program 2163); object detail for programs 2171-8000 is not in the trimmed PDF",
+      "issue": "The trimmed PDF is missing the rest of Exhibit N. The extractor used Exhibit G program totals ('not itemized') for 2171 onward, and those tie to the 6,709,256.67 total. These pages are not on the CLAUDE.md missing-pages follow-up list; re-trim to capture the object detail."
+    }
   ]
 }
