@@ -1,0 +1,16 @@
+{
+  "stem": "Public_Health_Solutions_FY2025",
+  "values_checked": 67,
+  "issues": [
+    {"severity": "error", "path": "detail[9:17]", "page": 6,
+     "extracted": "Nonmajor combining Total column lines (revenue 1,093,606; expenditure 872,812)",
+     "on_page": "Budgetary Comparison Schedule p3 covers all budgeted funds in one Actual column (revenue 3,316,325; outflows 2,293,094), which already includes the nonmajor funds",
+     "issue": "Double counting across schedules: the nonmajor funds' lines appear in both the all-funds budget schedule (detail[0:8]) and the nonmajor combining Total column (detail[9:17]). For example, Clinic services 225,026 and Public health education 119,756 are each recorded twice in detail, even though they come only from nonmajor funds. Keep only one schedule for the nonmajor funds. The budget schedule can't be split by fund, so this needs a choice: keep the budget schedule only, or keep the combining schedule and drop the budget schedule."},
+    {"severity": "warning", "path": "receipts[0].category", "page": 2,
+     "extracted": "intergovernmental/state aid", "on_page": "Grants 2,759,636",
+     "issue": "Grant sources aren't stated. Several nonmajor funds are probably federal pass-through money (COVID Immunization, ELC, Emergency Preparedness, Opioid), so part of this may be federal grants. A review flag is already set. The same applies to detail[0] and detail[9] (detail_category other state aid)."},
+    {"severity": "warning", "path": "detail[3].detail_category", "page": 3,
+     "extracted": "salaries and wages", "on_page": "Personnel and benefits 1,650,677",
+     "issue": "This one line combines salaries and benefits (statement p2: Personnel 1,196,487 + Benefits 412,719). Recorded under the dominant category with a review flag."}
+  ]
+}
