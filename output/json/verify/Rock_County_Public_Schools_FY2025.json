@@ -1,0 +1,15 @@
+{
+  "stem": "Rock_County_Public_Schools_FY2025",
+  "values_checked": 160,
+  "issues": [
+    {"severity": "warning", "path": "detail[77]", "page": 10,
+     "extracted": -240000, "on_page": "Depreciation Fund 'Transfer from General Fund' 240,000 (p10); GF schedule 8000 Interfund transfers only 38,500 (p9)",
+     "issue": "Extractor assumption: the 240,000 transfer is hidden in General Fund spending lines and placed against the instruction group. The page doesn't print this. It is supported by arithmetic: schedule instruction-type lines 2,902,120 + Employee Benefit 18,750 - 240,000 = statement Instruction 2,680,870, and every other function ties exactly. Contra and other-financing lines are both marked split_from/review."},
+    {"severity": "warning", "path": "receipts[4].category", "page": 3,
+     "extracted": "investment income", "on_page": "Interest 88,717 (includes GF 1140 Interest on taxes 8,310, p6)",
+     "issue": "The statement line mixes investment interest with 8,310 interest on property taxes, which the rules put under property tax. The dominant category was used, and the line is marked review."},
+    {"severity": "warning", "path": "detail[82].category", "page": 10,
+     "extracted": "capital outlay", "on_page": "Depreciation Fund: Support services - business / Capital outlay 20,000",
+     "issue": "The governmental funds statement counts this 20,000 under Student transportation (290,014 = GF 2700 lines 270,014 + 20,000), not Capital outlay, so the detail function doesn't tie to the statement's function lines. The line is marked review."}
+  ]
+}

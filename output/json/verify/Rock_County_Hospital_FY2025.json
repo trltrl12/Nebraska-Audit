@@ -1,0 +1,15 @@
+{
+  "stem": "Rock_County_Hospital_FY2025",
+  "values_checked": 106,
+  "issues": [
+    {"severity": "warning", "path": "missing", "page": 4,
+     "extracted": null, "on_page": "Trimmed p4 = report p6 (Statements of Cash Flows, ends '(Continued)'); trimmed p5 = report p8. Report p7 (cash flow continuation) is not in the trimmed PDF",
+     "issue": "Continuation page of the cash flow statement was not trimmed. It probably holds only the operating-loss reconciliation and noncash disclosures, so no JSON figures depend on it, but this has not been confirmed."},
+    {"severity": "warning", "path": "balance_sheet.liabilities[5].category", "page": 2,
+     "extracted": "accrued liabilities", "on_page": "Accrued compensated absences and related benefits, excluding current portion 128,000",
+     "issue": "This is the noncurrent portion. 'accrued liabilities' is meant for amounts due soon, so 'other liabilities' (or long-term) may fit better."},
+    {"severity": "warning", "path": "receipts[5].category", "page": 3,
+     "extracted": "donations/contributions", "on_page": "Noncapital grants and contributions 122,974",
+     "issue": "The source isn't stated. The grants may be governmental (state/federal) rather than private gifts. The line is already marked review."}
+  ]
+}
