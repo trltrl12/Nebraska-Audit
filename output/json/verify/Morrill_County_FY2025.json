@@ -1,0 +1,24 @@
+{
+  "stem": "Morrill_County_FY2025",
+  "values_checked": 131,
+  "issues": [
+    {"severity": "warning", "path": "balance_sheet.statement", "page": 3,
+     "extracted": "Statement of Assets and Fund Balances - Cash Basis, Governmental Funds (Restricted 2,327,754 / Committed 1,545,458 / Unassigned 1,591,441)",
+     "on_page": "p1 Statement of Net Position - Cash Basis: Cash 5,464,653; Restricted 2,327,754; Unrestricted 3,136,899",
+     "issue": "the rules list the Statement of Net Position - Cash Basis first, and this report prints one on p1. The extractor used the fund-level statement instead. Both are allowed and the totals agree, but the equity lines differ (committed/unassigned vs unrestricted)."},
+    {"severity": "warning", "path": "detail[38].detail_category", "page": 9,
+     "extracted": "salaries and wages", "on_page": "Self-Insured Medical Insurance Fund - Personnel services 605,888",
+     "issue": "spending from a self-insured medical insurance fund is probably employee health claims/premiums, so 'employee benefits and payroll taxes' likely fits better than salaries"},
+    {"severity": "warning", "path": "detail[5].detail_category", "page": 5,
+     "extracted": "professional/contract services", "on_page": "Operating expenses",
+     "issue": "every generic 'Operating expenses' line (detail[5], [10], [14], [17], [20], [29], [41], [45], [47], [51]) is mapped to professional/contract services. This is a judgment call, since the object is not stated. 'Capital outlay' mapped to equipment purchases or construction/infrastructure is likewise assumed."},
+    {"severity": "warning", "path": "detail_totals", "page": 8,
+     "extracted": "Bridge Buyback revenue 106,149 (p8); Self-Insured expenditure 605,888 (p9); Fairgrounds revenue 31,940 and expenditure 144,754 (p10)",
+     "on_page": "no 'Total receipts'/'Total disbursements' line printed on these schedules; each figure is the single line item",
+     "issue": "these detail_totals entries copy a single printed line rather than a printed total line. The values are right, but they are not printed totals."},
+    {"severity": "warning", "path": "detail", "page": 8,
+     "extracted": "budget-only lines omitted",
+     "on_page": "Bridge Buyback Operating expenses budget 26,925 and Capital outlay budget 599,807 (p8); Non-Major General government Capital outlay budget 70,000 and Public Welfare Operating expenses budget 9,000 (p11); no actual on any of them",
+     "issue": "these printed lines have a budget but no actual, and they are left out of detail. The actual totals are unaffected, but budget_final coverage is incomplete. Bridge Buyback is mentioned in notes; the nonmajor lines are not."}
+  ]
+}

@@ -2,39 +2,93 @@
   "stem": "Minden_FY2025",
   "values_checked": 234,
   "issues": [
-    {"severity": "error", "path": "report_discrepancies", "page": 11,
-     "extracted": "no report_discrepancies entry; proprietary operating 858827, noncapital -522044, capital -1595647, investing -2204723, beginning_cash 6326942, ending_cash 2863355 (printed Total column)",
-     "on_page": "Fund columns (Water, Sewer, Electric, Utilities Surplus, Bond-Enterprise, Other Enterprise Funds) add to: operating 859338, noncapital -47125, capital -1644059, investing -2208877, net change -3040723, beginning 6217704, ending 3176981",
-     "issue": "The printed Total column of the proprietary Statement of Cash Flows (p10-11) leaves out the Other Enterprise Funds column on every line (511; 474,919; (48,412); (4,154); 422,864; (109,238); 313,626). Printed ending cash 2,863,355 also doesn't match total enterprise cash and cash equivalents of 3,176,981 on the fund net position statement (p7) or the business-type column on p1. The values match what's printed, but the report itself doesn't add up and report_discrepancies should record it (difference on ending cash -313,626)."},
-    {"severity": "warning", "path": "detail[38].category", "page": 17,
-     "extracted": "health/welfare", "on_page": "Cemetery department (Salaries and benefits 57,488 ... Capital outlay 24,929)",
-     "issue": "All 8 Cemetery department lines (detail[38], [46], [53], [62], [70], [78], [86], [94]) use health/welfare. On the governmental funds statement (p5) the Cemetery department's non-capital spending, 103,475, makes up the General Fund's 'Public works' line (103,473). So the detail function split doesn't tie to the statement's function lines. The category list does put cemetery under health/welfare, so this is a judgment call."},
-    {"severity": "warning", "path": "disbursements[3].category", "page": 5,
-     "extracted": "streets/highways", "on_page": "Public works 581,382",
-     "issue": "Includes 103,473 of General Fund cemetery spending (see Cemetery department, p17) along with the Street Fund's 477,909. Mapping it all to streets/highways is defensible but mixes in cemetery."},
-    {"severity": "warning", "path": "detail[0].detail_category", "page": 16,
-     "extracted": "property tax", "on_page": "General property tax 1,273,502",
-     "issue": "The governmental funds statement (p5, General Fund column) shows this as Property 1,191,114 + Motor vehicle 82,388. As recorded, 82,388 of motor vehicle tax sits under property tax in the detail. The extractor noted this; a split with split_from could be justified."},
-    {"severity": "warning", "path": "detail[13].detail_category", "page": 16,
-     "extracted": "other charges for services", "on_page": "Fire: Charges for services 332,772",
-     "issue": "Fire department charges are probably ambulance/rescue fees or rural fire contracts. Category is a judgment call."},
-    {"severity": "warning", "path": "detail[75].detail_category", "page": 16,
-     "extracted": "dues, training and travel", "on_page": "Transportation (Park 2,341, Police 10,894, Fire 6,082, Cemetery 2,215)",
-     "issue": "'Transportation' for park, police, fire and cemetery departments (detail[75]-[78]) may be mostly vehicle fuel or vehicle costs (fuel) rather than travel. Judgment call."},
-    {"severity": "warning", "path": "detail[30].detail_category", "page": 16,
-     "extracted": "salaries and wages", "on_page": "Salaries and benefits",
-     "issue": "The 'Salaries and benefits' lines (detail[30]-[37]) combine wages and benefits. Recorded as salaries and wages; the extractor noted this."},
-    {"severity": "warning", "path": "detail[98].detail_category", "page": 16,
-     "extracted": "equipment purchases", "on_page": "Capital outlay",
-     "issue": "General Fund department 'Capital outlay' lines (detail[98]-[104]) are put under equipment purchases with no object breakdown on the page. The extractor's notes call this a guess; 'not itemized' or a review flag would also fit."},
-    {"severity": "warning", "path": "receipts[15]", "page": 8,
-     "extracted": 425417, "on_page": "Bond-Enterprise Fund Sales tax 425,417",
-     "issue": "Business-type sales tax 425,417 (Bond-Enterprise Fund) is exactly the same as the General Fund's sales tax, 425,417 (p5, p12). The government-wide statement (p3) prints both, but a person should confirm this isn't the same sales tax recorded twice (governmental and business-type)."},
-    {"severity": "warning", "path": "detail[111].detail_category", "page": 13,
-     "extracted": "other state aid", "on_page": "Street Fund Intergovernmental 499,223",
-     "issue": "Street Fund intergovernmental revenue is probably mostly highway allocation. Already marked review."},
-    {"severity": "warning", "path": "ending_cash", "page": 5,
-     "extracted": 1111281, "on_page": "Fund balance - September 30, 2025 1,111,281",
-     "issue": "beginning_cash and ending_cash are the governmental fund balances (modified cash basis, net of interfund due to/from). The governmental funds balance sheet (p4) shows cash, CDs and county treasurer cash of 1,896,471. This is the extractor's stated assumption."}
+    {
+      "severity": "error",
+      "path": "report_discrepancies",
+      "page": 11,
+      "extracted": "no report_discrepancies entry; proprietary operating 858827, noncapital -522044, capital -1595647, investing -2204723, beginning_cash 6326942, ending_cash 2863355 (printed Total column)",
+      "on_page": "Fund columns (Water, Sewer, Electric, Utilities Surplus, Bond-Enterprise, Other Enterprise Funds) add to: operating 859338, noncapital -47125, capital -1644059, investing -2208877, net change -3040723, beginning 6217704, ending 3176981",
+      "issue": "[fixed] The printed Total column of the proprietary Statement of Cash Flows (p10-11) leaves out the Other Enterprise Funds column on every line (511; 474,919; (48,412); (4,154); 422,864; (109,238); 313,626). Printed ending cash 2,863,355 also doesn't match total enterprise cash and cash equivalents of 3,176,981 on the fund net position statement (p7) or the business-type column on p1. The values match what's printed, but the report itself doesn't add up and report_discrepancies should record it (difference on ending cash -313,626)."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[38].category",
+      "page": 17,
+      "extracted": "health/welfare",
+      "on_page": "Cemetery department (Salaries and benefits 57,488 ... Capital outlay 24,929)",
+      "issue": "The Cemetery department's function lines (detail[38], [46], [53], [62], [70], [78], [86], [94]) use health/welfare. On the governmental funds statement (p5) the Cemetery department's non-capital spending, 103,475, makes up the General Fund's 'Public works' line (103,473). So the detail function split doesn't tie to the statement's function lines. The category list does put cemetery under health/welfare, so this is a judgment call."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[3].category",
+      "page": 5,
+      "extracted": "streets/highways",
+      "on_page": "Public works 581,382",
+      "issue": "Includes 103,473 of General Fund cemetery spending (see Cemetery department, p17) along with the Street Fund's 477,909. Mapping it all to streets/highways is defensible but mixes in cemetery."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[0].detail_category",
+      "page": 16,
+      "extracted": "property tax",
+      "on_page": "General property tax 1,273,502",
+      "issue": "The governmental funds statement (p5, General Fund column) shows this as Property 1,191,114 + Motor vehicle 82,388. As recorded, 82,388 of motor vehicle tax sits under property tax in the detail. The extractor noted this; a split with split_from could be justified."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[13].detail_category",
+      "page": 16,
+      "extracted": "other charges for services",
+      "on_page": "Fire: Charges for services 332,772",
+      "issue": "Fire department charges are probably ambulance/rescue fees or rural fire contracts. Category is a judgment call."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[75].detail_category",
+      "page": 16,
+      "extracted": "dues, training and travel",
+      "on_page": "Transportation (Park 2,341, Police 10,894, Fire 6,082, Cemetery 2,215)",
+      "issue": "'Transportation' for park, police, fire and cemetery departments (detail[75]-[78]) may be mostly vehicle fuel or vehicle costs (fuel) rather than travel. Judgment call."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[32].detail_category",
+      "page": 16,
+      "extracted": "salaries and wages",
+      "on_page": "Salaries and benefits",
+      "issue": "The 'Salaries and benefits' lines (detail[32]-[38]) combine wages and benefits. Recorded as salaries and wages; the extractor noted this."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[100].detail_category",
+      "page": 16,
+      "extracted": "equipment purchases",
+      "on_page": "Capital outlay",
+      "issue": "General Fund department 'Capital outlay' lines (detail[100]-[106]) are put under equipment purchases with no object breakdown on the page. The extractor's notes call this a guess; 'not itemized' or a review flag would also fit."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[15]",
+      "page": 8,
+      "extracted": 425417,
+      "on_page": "Bond-Enterprise Fund Sales tax 425,417",
+      "issue": "Business-type sales tax 425,417 (Bond-Enterprise Fund) is exactly the same as the General Fund's sales tax, 425,417 (p5, p12). The government-wide statement (p3) prints both, but a person should confirm this isn't the same sales tax recorded twice (governmental and business-type)."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[113].detail_category",
+      "page": 13,
+      "extracted": "other state aid",
+      "on_page": "Street Fund Intergovernmental 499,223",
+      "issue": "Street Fund intergovernmental revenue is probably mostly highway allocation. Already marked review."
+    },
+    {
+      "severity": "warning",
+      "path": "ending_cash",
+      "page": 5,
+      "extracted": 1111281,
+      "on_page": "Fund balance - September 30, 2025 1,111,281",
+      "issue": "beginning_cash and ending_cash are the governmental fund balances (modified cash basis, net of interfund due to/from). The governmental funds balance sheet (p4) shows cash, CDs and county treasurer cash of 1,896,471. This is the extractor's stated assumption."
+    }
   ]
 }
