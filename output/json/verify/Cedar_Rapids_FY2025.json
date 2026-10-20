@@ -1,0 +1,27 @@
+{
+  "stem": "Cedar_Rapids_FY2025",
+  "values_checked": 125,
+  "issues": [
+    {"severity": "warning", "path": "receipts[9].category", "page": 5,
+     "extracted": "donations/contributions", "on_page": "Grants and contributions 24,907 (p16: Grants 13,348 [Fire 10,000, Library 3,348] + Contributions 11,559)",
+     "issue": "Mixed line. Over half of it is 'Grants' (Fire 10,000 shown as public safety operating grants on p2) with no grantor stated, so it may be government grants rather than private donations. Review flag already set."},
+    {"severity": "warning", "path": "detail[7].detail_category", "page": 16,
+     "extracted": "donations/contributions", "on_page": "Grants 13,348 (Fire 10,000; Library 3,348)",
+     "issue": "Grantor not stated. The fire and library grants may come from a government (intergovernmental/state aid or federal grants) rather than private donors."},
+    {"severity": "warning", "path": "detail[4].category", "page": 15,
+     "extracted": "charges for services/fees / other charges for services", "on_page": "Rural fire reimbursement 6,992, printed under 'Intergovernmental revenue'",
+     "issue": "This page prints the line as intergovernmental revenue (detail 'county/other local governments' would fit), and the p5 receipt 'Intergovernmental' 104,329 that contains it is categorized intergovernmental/state aid. The category is defensible under the rural-fire-contract rule, but it doesn't match how the page classifies the line."},
+    {"severity": "warning", "path": "detail[6].detail_category", "page": 16,
+     "extracted": "other charges for services", "on_page": "Rental and fees 25,129 (Rescue 18,384; Cedar Valley Center 2,460; Library 16; Park 4,269)",
+     "issue": "Rescue fees of 18,384 are the dominant part (73%; shown as public safety charges for services on p2), so 'ambulance/rescue fees' looks like the better detail category."},
+    {"severity": "warning", "path": "detail[13].detail_category", "page": 16,
+     "extracted": "dues, training and travel", "on_page": "Licenses, fees, and taxes 20",
+     "issue": "Label is licenses, fees and taxes, not dues or training. The category is a judgment call (the amount is trivial)."},
+    {"severity": "warning", "path": "balance_sheet.liabilities[3].category", "page": 1,
+     "extracted": "other liabilities", "on_page": "Sales tax payable 381",
+     "issue": "Sales tax collected and owed to the State would fit 'due to other governments'."},
+    {"severity": "warning", "path": "proprietary", "page": 8,
+     "extracted": null, "on_page": "Statement of Cash Flows - Proprietary Funds, Total (p9): operating (23,155); investing (4,890); beginning cash 419,778; ending cash 391,733",
+     "issue": "Business-type funds are on the accrual basis and print a cash flow statement, but proprietary is null because the report as a whole was treated as cash basis. Defensible under the GAAP-only rule, but the data is printed."}
+  ]
+}
