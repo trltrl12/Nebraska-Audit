@@ -1,0 +1,18 @@
+{
+  "stem": "Elkhorn_Rural_Public_Power_District_FY2025",
+  "values_checked": 47,
+  "issues": [
+    {"severity": "warning", "path": "receipts[1].original_label", "page": 3,
+     "extracted": "Other (operating revenues)", "on_page": "Other",
+     "issue": "label printed as just 'Other' under Operating Revenues; amount 200,546 correct. Category charges for services/fees is a defensible guess for an unspecified operating revenue of an electric utility, but nothing on the page says what it is (no review flag set)"},
+    {"severity": "warning", "path": "balance_sheet.assets[2].original_label", "page": 1,
+     "extracted": "Other investments (current)", "on_page": "Other investments",
+     "issue": "extractor added '(current)'/'(noncurrent)' to labels: assets[2] and assets[7] are both printed 'Other investments' (current 500,000, noncurrent 4,500,000); amounts correct"},
+    {"severity": "warning", "path": "balance_sheet.liabilities[2].original_label", "page": 2,
+     "extracted": "Accrued liabilities (current)", "on_page": "Accrued liabilities",
+     "issue": "extractor added '(current)'/'(noncurrent)' to labels: liabilities[2] (82,737) and liabilities[4] (46,307) are both printed 'Accrued liabilities'; amounts correct"},
+    {"severity": "warning", "path": "business_type.other_financing", "page": 3,
+     "extracted": null, "on_page": "Capital Contributions 1,205,828; Plant Cost Recovered through Capital Contributions (1,205,828)",
+     "issue": "assumption: the two printed lines net to 0 so neither is recorded; roll-forward is unaffected, but the capital contributions received are not captured anywhere in the JSON"}
+  ]
+}
