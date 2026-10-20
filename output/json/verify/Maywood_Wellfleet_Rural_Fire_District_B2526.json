@@ -1,0 +1,15 @@
+{
+  "stem": "Maywood_Wellfleet_Rural_Fire_District_B2526",
+  "values_checked": 14,
+  "issues": [
+    {"severity": "warning", "path": "receipts[4].category", "page": 1,
+     "extracted": "other (51,922.46)", "on_page": "Local Receipts: Other 51,922.46; p2 transfer 'General Fund to MFO Fund 29,824.86, Reason: Transfer MFO fund receipts'",
+     "issue": "Amount matches the page. The line is 26% of non-transfer receipts with no description, so this fund type is well over the 10% threshold for 'other'. p2 shows MFO (mutual finance organization) receipts arriving in the General Fund; these may sit in this line or in State Receipts: Other. If they are in this line, part of it is intergovernmental/state aid. The page doesn't settle it, so 'other' with review is defensible."},
+    {"severity": "warning", "path": "receipts[*].review", "page": 1,
+     "extracted": "no review flag on receipts[0..3], disbursements[1..2]", "on_page": "Column 2 header 'Actual/Estimated 2024 - 2025'",
+     "issue": "The budget-form rule says to set review: true on every line when the column is labelled 'estimated'. Amounts match the page."},
+    {"severity": "warning", "path": "fiscal_year_end", "page": 1,
+     "extracted": "2025-06-30", "on_page": "Actual/Estimated 2024 - 2025 (no end date printed)",
+     "issue": "The fiscal year end is assumed, not printed. This follows the rule and is stated in notes."}
+  ]
+}

@@ -129,6 +129,10 @@ These were diagnosed and fixed in find_pages v6; re-extract and re-verify them a
   Fillmore_County_School_District_25_FY2025 (trim stops partway through Exhibit N after 2162; later programs from the budget schedule).
   Fairbury_FY2025 (report pp42-47 Light/Water/Sewer budget schedules 6-9, plus pp8, 11, 62, not trimmed).
   Chadron_Public_Schools_FY2025 (report p34 not trimmed: trimmed p15 = report p33, p16 = report p35).
+  Grand_Island_Public_Schools_Foundation_FY2025 (all 5 trimmed pages cut off on the right: Total and Jack Martin
+  columns missing; skipped, no JSON).
+  Gering_Ft_Laramie_Irrigation_District_FY2025 (nonoperating/capital-grant statement page not trimmed; 9,257,241
+  derived as an adjustment meanwhile).
 - Budget forms whose Total All Funds page wasn't found (manifest flag no_budget_actuals_found; skipped, no
   JSON): Lewis_Township_Clay_County_B2526 and any others with that flag. Check why the finder misses it.
 - Filed under FY2025 but the PDF holds an earlier year (extracted as printed; check the Auditor's site for
