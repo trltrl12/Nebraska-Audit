@@ -1,0 +1,21 @@
+{
+  "stem": "Northeast_Nebraska_Economic_Development_District_FY2025",
+  "values_checked": 51,
+  "issues": [
+    {"severity": "warning", "path": "missing", "page": 3,
+     "extracted": null, "on_page": "Statement of Revenues, Expenses, and Changes in Net Position ends at Total Operating Expenses 1,076,119; the next report page (nonoperating items, change in net position, beginning/ending net position) and the Statement of Cash Flows are not in the trimmed PDF",
+     "issue": "Trimming gap, not an extraction error. The roll-forward ties (5,755,388 + 1,146,389 - 1,076,119 = 5,825,658), so any nonoperating items must net to zero, but offsetting nonoperating revenue and expense lines can't be ruled out, and proprietary cash flows are unavailable. Re-trim to include report p7 and the cash flow statement."},
+    {"severity": "warning", "path": "business_type.beginning", "page": 2,
+     "extracted": 5755388, "on_page": "TOTAL NET POSITION, 2024 column 5,755,388",
+     "issue": "Beginning net position is taken from the prior-year balance sheet column because the statement's beginning-of-year line was not trimmed. The amount is printed, but it isn't printed as the beginning balance."},
+    {"severity": "warning", "path": "receipts[2].category", "page": 3,
+     "extracted": "charges for services/fees", "on_page": "Dues and Assessments 227,470",
+     "issue": "Member dues/assessments of an economic development district are usually paid by member counties and cities, which would make them intergovernmental/state aid (county or other local government payments). Already marked review."},
+    {"severity": "warning", "path": "receipts[6].category", "page": 3,
+     "extracted": "donations/contributions", "on_page": "In-Kind Dues 15,000",
+     "issue": "In-kind dues probably come from member governments (it matches Rent Expense 15,000), so intergovernmental is an alternative. Already marked review."},
+    {"severity": "warning", "path": "receipts[1].category", "page": 3,
+     "extracted": "investment income", "on_page": "Interest Income 269,712 (operating revenue)",
+     "issue": "Operating interest income is most likely interest on revolving-loan notes receivable (restricted notes receivable 4,414,417), not investment earnings. Defensible under the rules ('interest'); already marked review."}
+  ]
+}
