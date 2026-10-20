@@ -121,6 +121,8 @@ These were diagnosed and fixed in find_pages v6; re-extract and re-verify them a
   combining statement: printed columns 5,243,633 of 5,493,196, no Total column; no nonmajor detail yet).
   Litchfield_Public_Schools_FY2025 (left half of the governmental receipts/disbursements statement,
   report p17-18 spread; receipt labels inferred from fund schedules, marked review).
+  Leigh_FY2025 (General Fund departments schedule continues past trimmed p12: Housing/Park/Pool/Library
+  columns missing; p9 budget schedule used meanwhile).
 - Budget forms whose Total All Funds page wasn't found (manifest flag no_budget_actuals_found; skipped, no
   JSON): Lewis_Township_Clay_County_B2526 and any others with that flag. Check why the finder misses it.
 - Trimmed to a budget page only (skipped, no JSON): Cass_County_SID_9_FY2025, Cass_County_SID_10_FY2025,
