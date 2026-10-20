@@ -2,26 +2,61 @@
   "stem": "ONeill_FY2025",
   "values_checked": 265,
   "issues": [
-    {"severity": "error", "path": "receipts[1].source_page", "page": 2,
-     "extracted": 3, "on_page": "Motor vehicle taxes 95,194 is printed on p2 (Statement of Activities general revenues), also p14 and p16; it is not on p3",
-     "issue": "wrong source_page: the cited page does not show this amount"},
-    {"severity": "error", "path": "missing", "page": 15,
-     "extracted": null, "on_page": "General obligation bonds and interest 222,176 (budget 422,425), all-funds budget schedule",
-     "issue": "This line is the Debt Service Fund's spending (equals the p6 Debt Service column total 222,176), and that fund has no other detail schedule. Under the fund-by-fund rule the all-funds budget schedule's lines must be recorded for every fund that has no more detailed schedule, but only the utility lines were kept"},
-    {"severity": "error", "path": "missing", "page": 14,
-     "extracted": null, "on_page": "Community Development 116 (budget 30,461), all-funds budget schedule",
-     "issue": "CDBG fund spending (p6 Other Governmental, Community Development 116). No other schedule covers it, so it should be in detail under the fund-by-fund rule"},
-    {"severity": "warning", "path": "missing", "page": null,
-     "extracted": null, "on_page": "Source PDF has 86 pages; trimmed keeps PDF pp7-19, 46-47, 49-56, 58-60, 62-64, 71-72, 77-78 (manifest flag detail_truncated(23)). Missing report pages 44, 53, 57, 61-66, 69-72 and 75+",
-     "issue": "The trim drops pages that likely hold schedule lines: report p53 (probably the Other Governmental Funds combining revenues/expenditures for TIF/CDBG/Keno), p57 (probably the Debt Service or CDBG fund budget schedule), and pp61-66 (probably the Combined Utilities Fund revenues/expenditures by department for Water/Sewer/Solid Waste). The extraction covers all 33 trimmed pages and its notes correctly end 'Read pages 1-33 of 33'. Check the source PDF and re-trim"},
-    {"severity": "warning", "path": "receipts[13].category", "page": 3,
-     "extracted": "other", "on_page": "Remainder 84,441 of Miscellaneous revenue includes Franchise fees 27,061 (printed separately on p3; Gas franchise 12,075 + Cable TV franchise 14,986 on p16), Lot sales 12,208, Keno 1,188, Rural fire 2,000, Other park 2,930",
-     "issue": "The extractor already split this line using the report's breakdown. Franchise fees 27,061 could be split out to occupation/franchise tax, as they are in detail, and keno to keno/lottery. Left in 'other' as a computed residual"},
-    {"severity": "warning", "path": "receipts[7].category", "page": 24,
-     "extracted": "intergovernmental/state aid", "on_page": "Street Fund intergovernmental 593,549 includes Motor vehicle fees 36,527 (detail category motor vehicle tax)",
-     "issue": "The same money is categorized differently in receipts (intergovernmental) and in detail (motor vehicle tax). Defensible because the statement groups it under intergovernmental, but inconsistent"},
-    {"severity": "warning", "path": "receipts[12].category", "page": 29,
-     "extracted": "other", "on_page": "LB 840 Fund Loan repayments 299,387",
-     "issue": "Repayments of LB 840 revolving loans (loans made, 233,050, are recorded as spending under grants/payments). 'other' with review is defensible, but a person may want to decide whether loan principal flows belong in receipts/disbursements at all"}
+    {
+      "severity": "error",
+      "path": "receipts[1].source_page",
+      "page": 2,
+      "extracted": 3,
+      "on_page": "Motor vehicle taxes 95,194 is printed on p2 (Statement of Activities general revenues), also p14 and p16; it is not on p3",
+      "issue": "[fixed] wrong source_page: the cited page does not show this amount"
+    },
+    {
+      "severity": "error",
+      "path": "missing",
+      "page": 15,
+      "extracted": null,
+      "on_page": "General obligation bonds and interest 222,176 (budget 422,425), all-funds budget schedule",
+      "issue": "[fixed] This line is the Debt Service Fund's spending (equals the p6 Debt Service column total 222,176), and that fund has no other detail schedule. Under the fund-by-fund rule the all-funds budget schedule's lines must be recorded for every fund that has no more detailed schedule, but only the utility lines were kept"
+    },
+    {
+      "severity": "error",
+      "path": "missing",
+      "page": 14,
+      "extracted": null,
+      "on_page": "Community Development 116 (budget 30,461), all-funds budget schedule",
+      "issue": "[fixed] CDBG fund spending (p6 Other Governmental, Community Development 116). No other schedule covers it, so it should be in detail under the fund-by-fund rule"
+    },
+    {
+      "severity": "warning",
+      "path": "missing",
+      "page": null,
+      "extracted": null,
+      "on_page": "Source PDF has 86 pages; trimmed keeps PDF pp7-19, 46-47, 49-56, 58-60, 62-64, 71-72, 77-78 (manifest flag detail_truncated(23)). Missing report pages 44, 53, 57, 61-66, 69-72 and 75+",
+      "issue": "The trim drops pages that likely hold schedule lines: report p53 (probably the Other Governmental Funds combining revenues/expenditures for TIF/CDBG/Keno), p57 (probably the Debt Service or CDBG fund budget schedule), and pp61-66 (probably the Combined Utilities Fund revenues/expenditures by department for Water/Sewer/Solid Waste). The extraction covers all 33 trimmed pages and its notes correctly end 'Read pages 1-33 of 33'. Check the source PDF and re-trim"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[13].category",
+      "page": 3,
+      "extracted": "other",
+      "on_page": "Remainder 84,441 of Miscellaneous revenue includes Franchise fees 27,061 (printed separately on p3; Gas franchise 12,075 + Cable TV franchise 14,986 on p16), Lot sales 12,208, Keno 1,188, Rural fire 2,000, Other park 2,930",
+      "issue": "The extractor already split this line using the report's breakdown. Franchise fees 27,061 could be split out to occupation/franchise tax, as they are in detail, and keno to keno/lottery. Left in 'other' as a computed residual"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[7].category",
+      "page": 24,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "Street Fund intergovernmental 593,549 includes Motor vehicle fees 36,527 (detail category motor vehicle tax)",
+      "issue": "The same money is categorized differently in receipts (intergovernmental) and in detail (motor vehicle tax). Defensible because the statement groups it under intergovernmental, but inconsistent"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[12].category",
+      "page": 29,
+      "extracted": "other",
+      "on_page": "LB 840 Fund Loan repayments 299,387",
+      "issue": "Repayments of LB 840 revolving loans (loans made, 233,050, are recorded as spending under grants/payments). 'other' with review is defensible, but a person may want to decide whether loan principal flows belong in receipts/disbursements at all"
+    }
   ]
 }

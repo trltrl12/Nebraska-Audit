@@ -1,0 +1,18 @@
+{
+  "stem": "Ord_Public_Schools_FY2025",
+  "values_checked": 157,
+  "issues": [
+    {"severity": "warning", "path": "receipts[5].category", "page": 4,
+     "extracted": "motor vehicle tax 364,851", "on_page": "Motor vehicle tax: General 363,094, Bond 1,434, QCPU 323",
+     "issue": "The Bond (1,434, p12) and QCPU (323, p14) amounts in this statement line are printed as 'Pro-rate motor vehicle' on their fund schedules, which is state aid. So 1,757 of state aid sits inside the motor vehicle tax line. Amount is correct as printed; minor category mix."},
+    {"severity": "warning", "path": "detail[10].detail_category", "page": 7,
+     "extracted": "county/other local governments", "on_page": "2110 County fines and license fees 15,661",
+     "issue": "Fines and license fees the county passes on to schools could be fines and forfeitures or licenses and permits instead. Intergovernmental is defensible because the statement groups it under 'County receipts'."},
+    {"severity": "warning", "path": "receipts[*].fund_type (School Nutrition)", "page": 4,
+     "extracted": "governmental", "on_page": "School Nutrition Fund reported within Other Governmental Funds column",
+     "issue": "The extractor rules list school nutrition as a business-type example, but this report presents it as a governmental fund and has no proprietary statement. Treating it as governmental follows the report; confirm this is intended."},
+    {"severity": "warning", "path": "disbursements[3].category", "page": 5,
+     "extracted": "student activities 508,505", "on_page": "Support services - students, Other Governmental Funds column 508,505",
+     "issue": "The split by fund column is printed on the page and the Activities Fund disbursements (p19) tie to it. But the statement puts this amount under the support services function, so recategorizing it as student activities is a judgment call (already marked review)."}
+  ]
+}

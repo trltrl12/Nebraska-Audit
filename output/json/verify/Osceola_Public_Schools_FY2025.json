@@ -1,0 +1,18 @@
+{
+  "stem": "Osceola_Public_Schools_FY2025",
+  "values_checked": 152,
+  "issues": [
+    {"severity": "warning", "path": "missing", "page": 13,
+     "extracted": null, "on_page": "Report page 38 (between Bond Fund budget schedule p37 = trimmed p12 and Other Governmental Funds combining statement p39 = trimmed p13) not in trimmed PDF",
+     "issue": "The trimmed PDF skips report page 38. Given where it falls, it is probably another supplementary schedule (e.g. a Nutrition Fund or other-fund budget schedule, or an activity-account schedule). Any schedule lines on it are absent. The statement totals in the JSON all tie, so this affects detail only."},
+    {"severity": "warning", "path": "receipts[9].category", "page": 6,
+     "extracted": "fines and forfeitures", "on_page": "Fines and licenses 9,715",
+     "issue": "This line mixes 2110 Fines and licenses 8,385 with 1911 Other local license fees 1,330 (p9). Fines is the dominant part, but there is no review note naming the mix, which the rules require for mixed lines."},
+    {"severity": "warning", "path": "receipts[16].category", "page": 6,
+     "extracted": "sale of assets", "on_page": "Sale of property 36,822",
+     "issue": "The statement says 'Sale of property', but the General Fund schedule (p9) shows the same 36,822 as 5301 Insurance adjustments. The rules put insurance adjustments/proceeds under reimbursements/refunds. A person needs to decide which label wins."},
+    {"severity": "warning", "path": "detail[23].category", "page": 9,
+     "extracted": "sale of assets / sale of assets", "on_page": "5301 Insurance adjustments 36,822",
+     "issue": "The printed label is 'Insurance adjustments', and the extractor rules map insurance adjustments to reimbursements/refunds (detail: reimbursements/refunds). It was categorized as sale of assets to match the statement's 'Sale of property' label. Flagged review, but probably should be reimbursements/refunds."}
+  ]
+}
