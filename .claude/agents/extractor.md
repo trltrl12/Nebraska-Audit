@@ -248,7 +248,10 @@ independent verifier, so unmarked computed values show up as errors. If a value 
 `motor vehicle tax` (motor vehicle tax, wheel tax, motor vehicle fees; but *pro-rate* motor vehicle
 is state aid), `occupation/franchise tax`, `lodging tax`, `inheritance tax`, `special assessments`,
 `keno/lottery` (keno, lottery, gaming proceeds), `other taxes` (only taxes that fit none of these:
-in-lieu of tax, nameplate capacity, carline, public power district tax), `taxes (unlabeled)` (only
+in-lieu of tax, nameplate capacity, carline, public power district tax; a school "Taxes: Other" /
+"Other taxes" statement line is usually mostly homestead, property tax credit and pro-rate
+motor vehicle money, which is state aid: split it by summing those lines from the fund schedules,
+with `split_from`), `taxes (unlabeled)` (only
 when a combined tax line can't be split), `intergovernmental/state aid` (state aid, highway
 allocation, county or other local government payments, pro-rate motor vehicle, homestead,
 municipal equalization, TEEOSA), `federal grants`, `charges for services/fees` (utility sales,

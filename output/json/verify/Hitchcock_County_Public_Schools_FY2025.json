@@ -1,0 +1,21 @@
+{
+  "stem": "Hitchcock_County_Public_Schools_FY2025",
+  "values_checked": 174,
+  "issues": [
+    {"severity": "error", "path": "receipts[14].category", "page": 4,
+     "extracted": "other", "on_page": "Other 44,064 (GF 43,767 = 5300 Proceeds of disposal of property 100 + 5301 Insurance adjustments 30,855 + 5690 Other non-revenue receipts 2,268 on p9; Employee Benefit 5690 10,544 p12; Nutrition 1990 297 p13)",
+     "issue": "The report itself breaks this line down, and insurance adjustments (30,855, 70%) are the dominant part. Under the mixed-line rule the line takes the dominant category (reimbursements/refunds, consistent with detail[27]) with a review naming the mix, not 'other'."},
+    {"severity": "warning", "path": "detail[2].original_label", "page": 10,
+     "extracted": "8000 Transfers (to Nutrition 50,000 and Activities 50,000 per p13, p16)", "on_page": "8000 Transfers",
+     "issue": "The extractor added an explanation to the printed label. The amount (-100,000) and budget (575,000) are correct."},
+    {"severity": "warning", "path": "detail[77]", "page": 7,
+     "extracted": -25000, "on_page": "Reclassifications column: Instruction 209,935; State categorical programs (38,408); Federal programs (196,527); Transfers in (225,000)",
+     "issue": "This contra line and the -25,000 other-financing line in detail[80] are the net of three printed reclassification figures (25,000 is not printed as one figure on the expenditure side). The arithmetic holds, it matches the Employee Benefit transfer in (p12), and GF detail ties to the p5 instruction total 3,096,460. Still, the extractor inferred where the transfer sits; it is marked split_from and review."},
+    {"severity": "warning", "path": "detail[106].category", "page": 15,
+     "extracted": "support services", "on_page": "2610 Operation of buildings 16,591 (Special Building Fund); p5 statement puts all Special Building spending (58,164) under Capital outlay",
+     "issue": "The function doesn't tie to the governmental statement: there, Special Building Fund spending is all capital outlay. 'Support services' fits the label but conflicts with how the report classifies it."},
+    {"severity": "warning", "path": "disbursements[1].category", "page": 5,
+     "extracted": "support services", "on_page": "Student support services 676,907 (General 448,614 + Other Governmental Funds 228,293 = Activities Fund 2900)",
+     "issue": "The line includes 228,293 of Activities Fund spending, which the detail classes as student activities. The extractor kept it as printed, with review; this is a judgment call."}
+  ]
+}
