@@ -1,0 +1,30 @@
+{
+  "stem": "Elwood_Housing_Authority_FY2025",
+  "values_checked": 18,
+  "issues": [
+    {"severity": "error", "path": "receipts[0].original_label", "page": 1,
+     "extracted": "Federal Receipts 33,784.00", "on_page": "value column directly below the line-6 'Receipts' black box: 33,784.00 = line 7 Personal and Real Property Taxes; 33,798.00 = line 8 Federal Receipts",
+     "issue": "[fixed] skewed fax: row assignment of the receipts block looks off by one line. In the value column the 8 receipt amounts run contiguously from the cell right under the line-6 black box (line 7) to line 14, with one empty cell (line 15) before the line-16 total 165,794.51; the extraction puts them on lines 8-15 and leaves line 7 empty, which the spacing doesn't support. Its own notes apply the same one-row shift to the beginning balances (27,757.92 = line 2) but not to receipts. Totals are unaffected; labels/categories/transfers change"},
+    {"severity": "error", "path": "receipts[1].original_label", "page": 1,
+     "extracted": "State Receipts 33,798.00 (intergovernmental/state aid)", "on_page": "line 8 Federal Receipts 33,798.00 (by value-column spacing)",
+     "issue": "[fixed] same one-row shift: likely federal (HUD) receipts; receipts[2]-[4] (284.00, 2,091.44, 464.00) would be lines 9-11 State Receipts and receipts[5] 1,031.00 line 12 Local Receipts"},
+    {"severity": "error", "path": "receipts[6]", "page": 1,
+     "extracted": "Local Receipts -- (line 14) 14,159.25, category other", "on_page": "line 13 'Local Receipts -- transfer to savings' 14,159.25 (by spacing); equals line 24 Transfers Between Funds Out 14,159.25, reason 'number 24-transfer to saving'",
+     "issue": "[fixed] this is the inbound leg of the transfer to savings, recorded as revenue; a transfer must not be a receipt. With the shift corrected it nets against the 14,159.25 transfer out"},
+    {"severity": "error", "path": "receipts[5].category", "page": 1,
+     "extracted": "other (Local Receipts -- transfer to savings, 1,031.00)", "on_page": "Local Receipts -- transfer to savings",
+     "issue": "[fixed] a line labelled as a transfer is recorded as revenue (under the extraction's own row mapping); under the spacing-based mapping 1,031.00 is line 12 Local Receipts instead"},
+    {"severity": "error", "path": "business_type.transfers_net", "page": 1,
+     "extracted": -10282.47, "on_page": "line 15 Transfers Between Funds In appears blank; 3,876.78 sits on line 14 Local Receipts -- (unlabeled); line 24 out 14,159.25",
+     "issue": "[fixed] 3,876.78 is likely a line-14 local receipt, not a transfer in; with line 13 (14,159.25 transfer to savings) treated as the matching transfer, transfers net to 0 and receipts excluding transfers are 71,452.44 (lines 7-12 + 14) rather than 85,611.69; reported_totals.business-type.receipts (computed) changes accordingly"},
+    {"severity": "warning", "path": "receipts[4].category", "page": 1,
+     "extracted": "charges for services/fees", "on_page": "Local Receipts 464.00 (or, by spacing, State Receipts -- 464.00)",
+     "issue": "assumed tenant rent; unlabeled and its row is uncertain"},
+    {"severity": "warning", "path": "fiscal_year_end", "page": 1,
+     "extracted": "2025-06-30", "on_page": "2025 AUDIT WAIVER REQUEST (no period printed)",
+     "issue": "fiscal year end assumed"},
+    {"severity": "warning", "path": "decision_needed", "page": 1,
+     "extracted": "question about 14,159.25 line 14 and 1,031 transfer to savings", "on_page": "row alignment ambiguous on a skewed fax",
+     "issue": "the decision entry should also ask the user to confirm the row assignment (is 33,784.00 property taxes on line 7 or federal on line 8; is 3,876.78 a transfer in on line 15 or a line-14 local receipt) against the original filing"}
+  ]
+}

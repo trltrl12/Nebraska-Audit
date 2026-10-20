@@ -1,0 +1,62 @@
+{
+  "stem": "Elkhorn_Public_Schools_FY2025",
+  "values_checked": 300,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "detail[107].budget_final",
+      "page": 12,
+      "extracted": 70000,
+      "on_page": null,
+      "issue": "[fixed] Expenditure line '3535 High ability learners' (State programs, p12) has no budget printed; 70,000 is the 3535 revenue-line budget from p9, copied onto the expenditure line by mistake. Should be null."
+    },
+    {
+      "severity": "error",
+      "path": "disbursements[12].category",
+      "page": 4,
+      "extracted": "debt service interest",
+      "on_page": "Debt service 31,147,179 (Bond Fund p17: Principal 18,595,000, Interest 12,105,505, Other 5,250; Special Building p19: Bond Issue expense 441,424)",
+      "issue": "[fixed] Combined debt line: the dominant part is principal (18,595,000 of 31,147,179), so under the dominant-category rule (and the combined bond P&I rule) it should be 'debt service principal' with review, not 'debt service interest'."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts",
+      "page": 3,
+      "extracted": 180756041,
+      "on_page": 180756541,
+      "issue": "Confirmed: the report itself doesn't add up; no line was misread or missed. Re-added all 17 Total Governmental Funds receipt lines on p3: they sum to 180,756,041, while Total receipts prints 180,756,541. The 500 gap is entirely in the General Fund column (its lines sum to 134,322,793 vs printed 134,323,293). Every other column adds up exactly (Bond 33,479,197, Special Building 3,718,547, Other 9,235,504), and every row ties across. The missing 500 is '1920 Contributions and donations from private sources' (budget schedule p9, where Local sources add to 62,122,911 only with the 500 included). The statement of activities p1 holds it inside 'Other local receipts' 65,794 (= 60,379 + 4,915 + 500), but the p3 statement prints no line for it. The extractor's report_discrepancies entries (totals +500, reconcile +500) are correct, and printed totals were kept as printed."
+    },
+    {
+      "severity": "warning",
+      "path": "report_discrepancies",
+      "page": 6,
+      "extracted": null,
+      "on_page": "General Fund column lines sum to 134,252,570; printed Total receipts 134,253,070",
+      "issue": "The General Fund combining schedule (p6) leaves out the same 500 contributions line, so it is 500 short in the same way. Not entered in detail (the p9-10 budget schedule was used), but the existing discrepancy note could mention that p6 repeats the omission."
+    },
+    {
+      "severity": "warning",
+      "path": "report_discrepancies",
+      "page": 1,
+      "extracted": null,
+      "on_page": "Disbursement lines sum to 256,918,411; printed Total governmental activities 257,950,695",
+      "issue": "The statement of activities (p1) has no Facilities Acquisitions and Construction line (1,032,284), so its disbursements column doesn't add up by 1,032,284. Notes say 'statement of activities (pp1-2) agrees', which isn't true for disbursements. p1 figures aren't used in the JSON, so this is informational."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[9].review",
+      "page": 4,
+      "extracted": "total column value not visibly printed on page image",
+      "on_page": "1,032,284 printed in Total Governmental Funds column",
+      "issue": "The review note is wrong: 1,032,284 is printed in the Total Governmental Funds column on p4. The amount is correct, so the review flag isn't needed."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[16].category",
+      "page": 3,
+      "extracted": "other",
+      "on_page": "Other nonrevenue receipts 268,704",
+      "issue": "Kept as 'other' with review. Defensible: the General Fund 72,704 is broken down on p10 (sale of property 8,011, insurance 63,544, other 1,149), but the Special Building 196,000 (p19) is unexplained and is most of the line."
+    }
+  ]
+}
