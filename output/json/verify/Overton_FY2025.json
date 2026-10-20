@@ -1,0 +1,28 @@
+{
+  "stem": "Overton_FY2025",
+  "values_checked": 106,
+  "issues": [
+    {"severity": "error", "path": "report_discrepancies", "page": 5,
+     "extracted": null, "on_page": "Fire and Ambulance column lines add to 39,304 but print Total revenues 189,304; Total Governmental Funds lines add to 641,540 but print 791,540",
+     "issue": "The printed governmental statement doesn't add up: a 150,000 revenue line (the grant shown on p2 as capital grants and on p9 as Grant proceeds) is missing from the page. The extractor added receipts[9] from p9 so the list ties, but there is no report_discrepancies entry (check 'totals', difference 150000, source_page 5). Per the rules the printed report not adding up must be recorded there."},
+    {"severity": "error", "path": "detail[20]-detail[38]", "page": 10,
+     "extracted": "County Treasurer schedule revenue lines (property taxes 152,871 + 56,522 = 209,393; motor vehicle taxes 16,143; homestead, pro-rate, in-lieu, carline, interest, state tax credit; collection fees; transfers to Village Treasurer)",
+     "on_page": "Budget schedule p9 'Property and motor vehicle taxes' 225,536 = 209,393 + 16,143 (the same amounts as p3 Property taxes / Motor vehicle taxes), plus Other state revenue 56,904 holds the county-collected state credits",
+     "issue": "Double counting across schedules: the county treasurer pass-through schedule (p10) is the same money already in detail[0] and detail[4] from the All Funds budget schedule (p9). Only one schedule should be kept for this money (p10 is more detailed for the General and Street Bond portions), or the overlap must be removed."},
+    {"severity": "warning", "path": "detail[29].amount, detail[38].amount", "page": 10,
+     "extracted": "other financing -200,806 / -68,661", "on_page": "Transfer to Village Treasurer 200,806 / 68,661 (listed under Expenditures)",
+     "issue": "This is the county treasurer sending collected taxes on to the village, not a transfer between funds. Recording it as other financing is defensible because of the label, but it has no matching transfer in on the village side."},
+    {"severity": "warning", "path": "receipts[9].category", "page": 9,
+     "extracted": "federal grants", "on_page": "Grant proceeds 150,000 (p9); Public Safety capital grants and contributions 150,000 (p2)",
+     "issue": "The page doesn't say who gave the grant; it could be a state grant or a private contribution. The line is also not printed on the governmental statement p5 (see the report_discrepancies error)."},
+    {"severity": "warning", "path": "detail[0].category", "page": 9,
+     "extracted": "property tax (225,536)", "on_page": "Property and motor vehicle taxes 225,536; p3 prints Property taxes 209,393 and Motor vehicle taxes 16,143 (sum 225,536)",
+     "issue": "Combined tax line put entirely in property tax. Under the combined-tax-line rule it could be split into property tax 209,393 and motor vehicle tax 16,143 with split_from, using the p3 general revenues breakdown."},
+    {"severity": "warning", "path": "receipts[0].category", "page": 5,
+     "extracted": "taxes (unlabeled) 270,982", "on_page": "County treasurer revenues 270,982",
+     "issue": "Kept as unlabeled. Statement of Activities p3 implies 209,393 property tax + 16,143 motor vehicle tax + 45,446 state money (within Intergovernmental 123,769). That is derived, not a printed breakdown of this line, so leaving it unsplit is defensible. Noting the possible split for review."},
+    {"severity": "warning", "path": "business_type.measure", "page": 8,
+     "extracted": "net position", "on_page": "NET POSITION (modified cash basis; assets are all cash/CDs)",
+     "issue": "The rules say measure = 'cash' for cash-basis statements. The amounts are the same either way."}
+  ]
+}
