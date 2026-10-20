@@ -1,12 +1,18 @@
 {
   "stem": "Cedar_Creek_FY2025",
-  "values_checked": 112,
+  "values_checked": 136,
   "issues": [
+    {"severity": "warning", "path": "disbursements[0].category", "page": 2,
+     "extracted": "general government", "on_page": "Salaries 22,250 (General 15,300 + Street 6,950)",
+     "issue": "Lines 0-6 (Salaries, Payroll taxes, Insurance, Utilities, Repairs and maintenance, Gas and oil, Professional fees and dues) are object lines that mix General and Street Fund money. All of them went to general government, although part is streets/highways (e.g. Street Fund 6,950 salaries, 3,305 repairs). This is defensible because the page prints only one Total line per object, and the lines are marked review."},
+    {"severity": "warning", "path": "disbursements[11].category", "page": 2,
+     "extracted": "economic development", "on_page": "State taxes 3,370 (Community Betterment Keno Fund)",
+     "issue": "State taxes paid from the keno fund (likely keno/lottery tax) are an object, not a function. 'economic development' (community betterment) is a judgment call; general government is also possible."},
+    {"severity": "warning", "path": "disbursements[7].category", "page": 2,
+     "extracted": "health/welfare", "on_page": "Sanitation 7,013",
+     "issue": "Sanitation (refuse) is listed under 'utilities' in the disbursement category rules (water, sewer, electric, gas, refuse). health/welfare is defensible but doubtful. The same call is made in detail[14]."},
     {"severity": "warning", "path": "detail[19].detail_category", "page": 3,
      "extracted": "equipment purchases", "on_page": "Capital outlay 26,244",
-     "issue": "General Fund capital outlay object is not described on the page; equipment purchases is an assumption (could be construction/infrastructure or land and buildings)"},
-    {"severity": "warning", "path": "detail[32].detail_category", "page": 4,
-     "extracted": "construction/infrastructure", "on_page": "Capital outlay 86,712",
-     "issue": "Street Fund capital outlay object is not described on the page; construction/infrastructure is a reasonable assumption but could include equipment"}
+     "issue": "The object of the General Fund capital outlay is not stated. 'equipment purchases' is a guess; the line is already marked review."}
   ]
 }

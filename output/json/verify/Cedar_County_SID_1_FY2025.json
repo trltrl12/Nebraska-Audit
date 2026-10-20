@@ -1,0 +1,15 @@
+{
+  "stem": "Cedar_County_SID_1_FY2025",
+  "values_checked": 11,
+  "issues": [
+    {"severity": "warning", "path": "receipts[1].amount", "page": 1,
+     "extracted": 19879.77, "on_page": "$1 9879.77 (handwritten, line 14 Local Receipts -- Sewer Fee)",
+     "issue": "Amount is printed (handwritten, with a gap after the leading 1), so it is not really computed. The value is right: 14,780.59 + 34.29 + 19,879.77 = 34,694.65 (line 16), and 34,694.65 - 10,558.48 = 24,136.17 (line 26/31). The 'computed' tag is not needed; the faint first digit stays a review point."},
+    {"severity": "warning", "path": "receipts[1].fund_type", "page": 1,
+     "extracted": "governmental", "on_page": "Total of All Funds (no fund split); receipts are sewer fees",
+     "issue": "The SID's activity is sewer operations, so it could be business-type. The form gives only an all-funds column, so governmental is a defensible assumption."},
+    {"severity": "warning", "path": "disbursements[0].category", "page": 1,
+     "extracted": "utilities", "on_page": "Operating Expenses",
+     "issue": "Line 18 'Operating Expenses' has no function printed. 'utilities' (sewer) is an assumption; the line is already marked review."}
+  ]
+}
