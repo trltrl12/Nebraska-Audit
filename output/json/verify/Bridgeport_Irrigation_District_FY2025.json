@@ -1,0 +1,22 @@
+{
+  "stem": "Bridgeport_Irrigation_District_FY2025",
+  "values_checked": 13,
+  "issues": [
+    {"severity": "warning", "path": "disbursements[0].category", "page": 1,
+     "extracted": "utilities", "on_page": "Operating Expenses 187,915.00",
+     "issue": "the rules put water and drainage districts under 'natural resources/conservation'; an irrigation district arguably belongs there rather than 'utilities'"},
+    {"severity": "warning", "path": "receipts[0].fund_type", "page": 1,
+     "extracted": "business-type", "on_page": "single 'Total of All Funds' column; Personal and Real Property Taxes 59,671.23",
+     "issue": "the whole entity is treated as business-type, although it is funded mainly by property taxes/assessments; this is an assumption about the entity type"},
+    {"severity": "warning", "path": "receipts[2..3].category", "page": 1,
+     "extracted": "other", "on_page": "Local Receipts -- Empire Canal 3,000.00; Local Receipts -- Pipe 6,856.63 (handwritten)",
+     "issue": "nature not stated (possibly canal service charges / sale of pipe); 'other' with review is defensible. Together 11% of receipts"},
+    {"severity": "warning", "path": "fiscal_year_end", "page": 1,
+     "extracted": "2025-06-30", "on_page": "'2025 Audit Waiver Request'; no period printed",
+     "issue": "fiscal year end assumed"},
+    {"severity": "warning", "path": "balance_sheet", "page": 1,
+     "extracted": "line 28 Cash on Hand and in Bank 65,050.51 / line 26 65,050.51",
+     "on_page": "no balance statement; waiver summary only",
+     "issue": "the balance sheet is built from the waiver form's ending balance lines (an assumption); the amounts match"}
+  ]
+}

@@ -126,6 +126,8 @@ These were diagnosed and fixed in find_pages v6; re-extract and re-verify them a
   Boelus_FY2025 (Exhibit A page 2, lines 29-52 spending by function, not trimmed; fund totals used).
 - Budget forms whose Total All Funds page wasn't found (manifest flag no_budget_actuals_found; skipped, no
   JSON): Lewis_Township_Clay_County_B2526 and any others with that flag. Check why the finder misses it.
+- Filed under FY2025 but the PDF holds an earlier year (extracted as printed; check the Auditor's site for
+  the FY2025 filing): Bristow_FY2025 (period 10/1/23-9/30/24).
 - Trimmed to a budget page only (skipped, no JSON): Cass_County_SID_9_FY2025, Cass_County_SID_10_FY2025.
 - ~97 Audit filings marked no_statements_found (mostly SIDs) and 72 with no balance statement: page
   finder misses their titles.
