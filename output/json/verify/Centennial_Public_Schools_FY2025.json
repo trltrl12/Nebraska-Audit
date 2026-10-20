@@ -1,0 +1,24 @@
+{
+  "stem": "Centennial_Public_Schools_FY2025",
+  "values_checked": 215,
+  "issues": [
+    {"severity": "warning", "path": "receipts[9].category", "page": 6,
+     "extracted": "fines and forfeitures", "on_page": "Fines and licenses 49,242 (p9: fines and licenses 43,986 + local license fees 3,820 + other county receipts 1,436)",
+     "issue": "Mixed line (fines plus licenses plus county receipts). The dominant category is correct, but the rules require a 'review' flag naming the mix and none is set."},
+    {"severity": "warning", "path": "receipts[15].category", "page": 6,
+     "extracted": "sale of assets", "on_page": "Sale of property 4,523 (p9: General sale of property 267 + insurance adjustments 4,226; p6/p12: Depreciation Fund 30)",
+     "issue": "The printed line is mostly insurance adjustments (4,226 of 4,523), which would be reimbursements/refunds. The category follows the label, but the content is dominantly something else."},
+    {"severity": "warning", "path": "receipts[17].review", "page": 9,
+     "extracted": "includes insurance adjustments and other non-revenue receipts", "on_page": "General 'Other' 147,158 = preschool 8,052 + rental of facilities 1,102 + other local receipts 42,797 + other non-revenue receipts 95,207; plus Special Building 929",
+     "issue": "The review note is inaccurate. Insurance adjustments (4,226) sit in 'Sale of property', not 'Other'. 'Other' also contains preschool tuition and facility rentals, so 'other' is defensible as dominant but the breakdown is printed on p9."},
+    {"severity": "warning", "path": "detail[48]", "page": 12,
+     "extracted": "Depreciation Fund 'Other' 30", "on_page": "p6 prints the Other Governmental Funds 30 on the 'Sale of property' row; p12 prints it as 'Other'",
+     "issue": "The report labels the same 30 differently on the two statements. Detail follows p12 (miscellaneous revenue), while the receipts follow p6 (sale of assets). This is an inconsistency in the report itself."},
+    {"severity": "warning", "path": "missing", "page": 9,
+     "extracted": null, "on_page": "1925 Categorical grant: budget 5,000, actual -; 3551 Career Education: budget 1,000, actual -",
+     "issue": "Two General Fund budget lines with no actual amount are omitted. This has no money effect; only the budget_final values are lost."},
+    {"severity": "warning", "path": "business_type", "page": 2,
+     "extracted": 503842, "on_page": "Statement of Activities nutrition services expenses 503,843 vs p8 total operating disbursements 503,842",
+     "issue": "$1 rounding difference printed in the report itself. It is mentioned in notes but not recorded in report_discrepancies."}
+  ]
+}
