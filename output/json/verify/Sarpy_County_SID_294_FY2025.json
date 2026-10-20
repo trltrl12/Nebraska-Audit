@@ -1,0 +1,15 @@
+{
+  "stem": "Sarpy_County_SID_294_FY2025",
+  "values_checked": 109,
+  "issues": [
+    {"severity": "warning", "path": "receipts[3].category", "page": 2,
+     "extracted": "intergovernmental/state aid", "on_page": "State Motor Vehicle Tax Allocation 1,586",
+     "issue": "Judgment call. 'State ... Allocation' reads as pro-rate motor vehicle money (state aid), but it could be the county's distribution of motor vehicle tax, which would make it 'motor vehicle tax'. The same applies to detail[3] and detail[17] (detail_category 'motor vehicle pro-rate')."},
+    {"severity": "warning", "path": "disbursements[1].category", "page": 2,
+     "extracted": "general government", "on_page": "Bond Maintenance Costs 1,146 (Debt Service Fund)",
+     "issue": "This is a bond administration fee paid from the Debt Service Fund. The rules put debt fees under 'debt service interest (including fees)'. detail[22] (Bond Maintenance, p5) also has category 'general government' with detail_category 'debt interest and fees', while detail[21] Bond Issue Costs uses 'debt service interest'. The categories are inconsistent."},
+    {"severity": "warning", "path": "detail", "page": 4,
+     "extracted": "amounts from 'Actual on Budgetary Basis' column", "on_page": "Schedules 1-2 print both 'Actual on GAAP Basis' and 'Actual on Budgetary Basis' columns",
+     "issue": "Assumption. Detail uses the budgetary-basis actuals, so detail totals (GF 629,739 expenditures, DS 463,823) do not match the GAAP fund statement (552,077 / 467,322). The choice is defensible because it is the column comparable to the budget, and it is stated in notes."}
+  ]
+}
