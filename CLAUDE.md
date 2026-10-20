@@ -131,6 +131,7 @@ These were diagnosed and fixed in find_pages v6; re-extract and re-verify them a
   Chadron_Public_Schools_FY2025 (report p34 not trimmed: trimmed p15 = report p33, p16 = report p35).
   Grand_Island_Public_Schools_Foundation_FY2025 (all 5 trimmed pages cut off on the right: Total and Jack Martin
   columns missing; skipped, no JSON).
+  Garfield_County_Agricultural_Society_FY2025 (report p25 not trimmed: trimmed jumps p24 to p26).
   Gering_Ft_Laramie_Irrigation_District_FY2025 (nonoperating/capital-grant statement page not trimmed; 9,257,241
   derived as an adjustment meanwhile).
 - Budget forms whose Total All Funds page wasn't found (manifest flag no_budget_actuals_found; skipped, no

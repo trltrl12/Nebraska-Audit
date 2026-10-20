@@ -205,6 +205,10 @@ independent verifier, so unmarked computed values show up as errors. If a value 
   - `schedule` = the schedule's title (short), `fund` = the fund it covers ("General", "Street",
     "Water"…), `department` = the department/function heading the line sits under ("Police",
     "Streets", "Parks", "Administration"…), or null if there are no departments.
+  - **Department columns:** when a schedule prints departments as columns (General / Police / Park /
+    Library…), record one line per department column per object line, each with that
+    department's function as `category`. Never record only the Total column under one function:
+    the function split must tie to the statement's function columns.
   - `section`: `revenue`, `expenditure`, or `other financing` (transfers, debt proceeds, sale of
     assets shown below the expenditures). `fund_type` as above (a Water Fund schedule is
     `business-type`).
