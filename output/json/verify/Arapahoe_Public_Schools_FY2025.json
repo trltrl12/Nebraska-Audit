@@ -1,0 +1,30 @@
+{
+  "stem": "Arapahoe_Public_Schools_FY2025",
+  "values_checked": 250,
+  "issues": [
+    {"severity": "error", "path": "detail[44].amount", "page": 10,
+     "extracted": 358664, "on_page": "GF 2500 Central services 358,664; Employee Benefit Fund 'Transfer - General Fund (as expensed from the General Fund)' 2,325 (p13); GF combining schedule Reclassifications (2,325) (p7); statement Central services 359,252 = 358,664 - 2,325 + 2,913",
+     "issue": "Hidden transfer: 2,325 of GF Central services was paid to the Employee Benefit Fund. detail[56] also records it as an 'other financing' transfer in, so the same money appears as both spending and a transfer. Should be split (split_from + review) into 356,339 expenditure and a -2,325 'other financing' item."},
+    {"severity": "warning", "path": "receipts[30].original_label", "page": 4,
+     "extracted": "Insurance adjustments", "on_page": "Fund statement p4 and GF schedule p10 (5301): 'Insurance adjustments' 24,030; government-wide statement p2: 'Loan proceeds' 24,030",
+     "issue": "The report labels the same 24,030 as loan proceeds on the government-wide statement. If it really is loan proceeds it belongs in debt_proceeds, not receipts. The fund-level label looks more reliable (5400 Loan proceeds is blank)."},
+    {"severity": "warning", "path": "receipts[16].category", "page": 4,
+     "extracted": "charges for services/fees", "on_page": "Other local receipts 258,564 = Activities receipts 243,890 (p21) + School Nutrition other receipts 14,674 (p14)",
+     "issue": "A mixed 'other' line, mostly student activity receipts. The category is defensible."},
+    {"severity": "warning", "path": "receipts[29].category", "page": 4,
+     "extracted": "charges for services/fees", "on_page": "School Nutrition Program 112,644 = Student lunches and milk 111,514 + State reimbursement 1,130 (p14)",
+     "issue": "Includes 1,130 of state reimbursement (state aid). Charges are dominant."},
+    {"severity": "warning", "path": "detail[12].category", "page": 8,
+     "extracted": "intergovernmental/state aid / county/other local governments", "on_page": "2110 County fines and license fees 23,065",
+     "issue": "These are fines and license fees passed through by the county. 'fines and forfeitures' may fit better. The statement calls it 'County receipts'."},
+    {"severity": "warning", "path": "disbursements[4].category", "page": 5,
+     "extracted": "support services", "on_page": "Support services - students 682,144 = General 370,157 + Other Governmental (Activities Fund) 311,987",
+     "issue": "Mixed line. 46% is student activities spending."},
+    {"severity": "warning", "path": "disbursements[16].category", "page": 5,
+     "extracted": "debt service principal", "on_page": "Debt service 37,434 (General Fund 5000 Debt services)",
+     "issue": "Principal and interest aren't split. Recording it all as principal is an assumption (detail[49] does the same)."},
+    {"severity": "warning", "path": "detail", "page": 9,
+     "extracted": "budget-only lines omitted", "on_page": "GF 3990 Other state receipts (budget 11,500, no actual); Special Building PPD sales tax (budget 500); QCPU Purchased services (budget 100,000); Depreciation Fund Transfer (budget 170,000), General supplies (budget 2,000), Capital outlay (budget 170,169)",
+     "issue": "Lines with a budget but a blank 2025 actual were skipped, so their budget_final values are not recorded. No effect on actual amounts."}
+  ]
+}
