@@ -1,0 +1,30 @@
+{
+  "stem": "Broken_Bow_Public_Schools_FY2025",
+  "values_checked": 174,
+  "issues": [
+    {"severity": "error", "path": "report_discrepancies", "page": 4,
+     "extracted": null, "on_page": "Total disbursements 33,481,751 (Total Governmental Funds); Special Building Fund column total 20,076,366",
+     "issue": "The printed statement does not foot: the disbursement lines on p3-4 sum to 33,481,684, 67 less than the printed total 33,481,751. The gap is in the Special Building Fund column (18,344,446 + 255,000 + 1,476,853 = 20,076,299 vs printed 20,076,366); the fund schedule p15 shows a debt service 'Other' 67 that the statement omits from its lines. All 12 disbursement lines are transcribed correctly, so the JSON identity (36,205,512 + 16,667,830 - 33,481,684 = 19,391,658 vs ending 19,391,591) is off by 67, but there is no report_discrepancies entry ({check: 'totals', difference: 67, source_page: 4}). The notes wrongly say the roll-forward reconciles (it does only on the printed total)."},
+    {"severity": "error", "path": "detail[90].budget_final", "page": 9,
+     "extracted": null, "on_page": 150000,
+     "issue": "8000 Transfers has a printed final budget of 150,000 (original 150,000), recorded as null"},
+    {"severity": "warning", "path": "receipts[7].category", "page": 3,
+     "extracted": "intergovernmental/state aid", "on_page": "State receipts 6,292,944",
+     "issue": "broad group with no review flag; includes nameplate capacity tax (165,249 + 21,693 + 8,527, p6/p12/p14), which is categorized 'other taxes' in detail, plus homestead/property tax credits. The rules ask for review: 'broad group; detail on p.6-14'."},
+    {"severity": "warning", "path": "receipts[11].category", "page": 3,
+     "extracted": "other", "on_page": "Other receipts 130,519",
+     "issue": "the General Fund part (129,969) can be traced on p6-7 to tuition 28,585, dividends 101, fees 15,485, rentals 21,071+7, license fees 2,460, fines and license fees 52,744, misc 922, ESU 650, sale of property 2,285, insurance adjustments 5,659 (= 129,969), plus Special Building 'Other' 550. Keeping one 'other' line with review is defensible, since the page doesn't print it as a breakdown of this line, but the line is mostly fines/fees, not unexplained revenue."},
+    {"severity": "warning", "path": "detail[89]", "page": 4,
+     "extracted": -400000, "on_page": "no such line printed; inferred from p4 GF total 12,217,212 vs schedule lines 12,526,082 and Depreciation Fund transfer 400,000 (p10)",
+     "issue": "contra line and the matching other financing line detail[91] (-400,000) are the extractor's inference. The arithmetic holds (schedule instruction-related lines 7,837,287 - 400,000 + Depreciation Fund instruction 22,261 = statement instruction 7,459,548) and both are marked computed/split_from/review, but which line holds the transfer is still an assumption."},
+    {"severity": "warning", "path": "detail_totals[1]", "page": 9,
+     "extracted": 12606082, "on_page": 12606082,
+     "issue": "printed total includes the printed 8000 Transfers 80,000. Reconciling it to the items also needs the inferred -400,000 contra and -400,000 other financing lines (12,126,082 expenditure items + 480,000 transfers). The sign convention depends on the validator, so it may flag."},
+    {"severity": "warning", "path": "detail[95].detail_category", "page": 10,
+     "extracted": "equipment purchases", "on_page": "Building and sites - Capital outlay 68,869",
+     "issue": "object not stated; under 'Building and sites' it could be land and buildings or construction (already marked review)"},
+    {"severity": "warning", "path": "detail[102].detail_category", "page": 11,
+     "extracted": "supplies and materials", "on_page": "Food 588,462",
+     "issue": "food purchases for the nutrition program; supplies is defensible, though 'purchased power/cost of sales' could also be argued"}
+  ]
+}
