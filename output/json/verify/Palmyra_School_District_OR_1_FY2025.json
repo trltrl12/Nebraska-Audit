@@ -1,0 +1,19 @@
+{
+  "stem": "Palmyra_School_District_OR_1_FY2025",
+  "values_checked": 212,
+  "issues": [
+    {"severity": "error", "path": "receipts[19].amount", "page": 4,
+     "extracted": 438953, "on_page": "Other 758,895 (p4), of which Depreciation Fund 'Fund Transfer In' 375,000 (p10) and Employee Benefit 'Transfers In' 40,365 (p11)",
+     "issue": "415,365 of this 'other' receipt is printed as transfers in on the Depreciation and Employee Benefit schedules (the statement's General Fund column includes those funds). A transfer has been recorded as revenue. Under the hidden-transfer rule it should be split out (split_from, review) into transfers_in, leaving about 23,588 in receipts. The detail section already records both as other financing, so receipts and detail disagree. decision_needed[0] asks the right question (one-sided transfer, no matching outflow in the General Fund schedule), but the top-level figure still counts the transfer as revenue."},
+    {"severity": "warning", "path": "receipts[4].amount", "page": 4,
+     "extracted": 456629, "on_page": "Statement Motor vehicle 456,629 (p4) vs General Fund schedule 1125 Motor vehicle taxes 455,629 (p7)",
+     "issue": "The report doesn't agree with itself. The statement's motor vehicle line is 1,000 higher than the schedule, and its General Fund 'Other' 436,628 is 1,000 lower than the schedule lines it is made of (437,628). The column totals still tie. The figure matches the statement, but report_discrepancies has no entry for this."},
+    {"severity": "warning", "path": "detail[*].original_label", "page": 7,
+     "extracted": "e.g. '2120 Guidance Services', '2610 Operation of Buildings', '4969 ESSA Title IV A: SSAE', '6200 Title I Part A ESSA'",
+     "on_page": "'Support Services - Guidance Services', 'Operation & Maintenance of Plant - Operation of Buildings', 'ESSA Title IV A: Student Support & Academic Enrichment Grant (SSAE)', 'Title I Part A ESSA Improving Basic Programs Operated by Local Education Agencies'",
+     "issue": "Many detail labels on pp7-9 are shortened (the 'Support Services - ' / 'Operation & Maintenance of Plant - ' prefixes are dropped, long federal program names cut off). The amounts are right."},
+    {"severity": "warning", "path": "detail[90].category", "page": 11,
+     "extracted": "support services", "on_page": "Employee Benefit Fund 'Other Support Services' 28,691",
+     "issue": "The statement (p5) counts this 28,691 under Instruction (6,642,978 = schedule instruction 6,614,287 + 28,691), so the detail function doesn't match the statement's. It follows the schedule label, so it is defensible."}
+  ]
+}
