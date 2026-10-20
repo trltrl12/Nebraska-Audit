@@ -1,0 +1,21 @@
+{
+  "stem": "Lodgepole_FY2025",
+  "values_checked": 51,
+  "issues": [
+    {"severity": "error", "path": "report_discrepancies", "page": 4,
+     "extracted": "only reconcile (diff 1), proprietary totals and balance entries", "on_page": "Governmental TOTAL DISBURSEMENTS (Total column) printed 372,628; lines 221,865 + 33,284 + 34,561 + 82,919 = 372,629",
+     "issue": "the governmental disbursements total on the page is off by 1 from its own lines and this is not recorded in report_discrepancies. Because of it, the identity computed from the items gives 257,244 vs the printed ending 257,246 (gap 2), while the recorded reconcile entry covers only 1. Needs a 'totals' entry (difference -1)"},
+    {"severity": "error", "path": "receipts[6].category", "page": 4,
+     "extracted": "motor vehicle tax", "on_page": "Incentive Fees 900 (Street fund); Statement of Activities p2 shows State Highway Allocation 67,903 = 67,003 + 900",
+     "issue": "the report's own Statement of Activities groups Incentive Fees with State Highway Allocation (state street-superintendent incentive payment), not with motor vehicle taxes (Motor vehicle taxes 11,420 = 6,926 + 4,494). Should be intergovernmental/state aid"},
+    {"severity": "warning", "path": "receipts[13].category", "page": 4,
+     "extracted": "intergovernmental/state aid", "on_page": "Grants 95,000",
+     "issue": "grant source (state vs federal) not stated; already marked review. The business-type Grants 9,182 (receipts[16]) is shown as a capital grant in the proprietary cash flow statement (p7)"},
+    {"severity": "warning", "path": "balance_sheet.scope", "page": 1,
+     "extracted": "government-wide", "on_page": "Statement of Net Position - Cash Basis",
+     "issue": "the rules use scope 'cash basis' for cash-basis net position statements"},
+    {"severity": "warning", "path": "detail", "page": 11,
+     "extracted": [], "on_page": "Statement of Receipts and Disbursements - Budgetary Basis - Budget and Actual - All Funds",
+     "issue": "detail left empty. The only supplementary schedule mixes governmental and proprietary funds in its lines and pp9-10 repeat the basic statements, so skipping it is defensible, but the budget schedule is not captured"}
+  ]
+}

@@ -306,6 +306,19 @@ When a function line mixes categories, pick the dominant one and mention it in `
   the budget form worksheet and say which in notes.
 - Transfers come from the "Documentation of Transfers" page, never from receipts/disbursements.
 - There is no balance sheet: leave `balance_sheet` null and say so in notes.
+- Beginning cash = the line 5 subtotal of beginning balances (net cash + investments + county
+  treasurer balance), marked `computed`; ending cash = line 30 "Balance Forward/Cash Reserve". Leave
+  `beginning_investments`/`ending_investments` null (they are already inside cash) and name the
+  parts in a `note`.
+- Receipts are the individual resource lines of column 2 (property tax, motor vehicle, state aid,
+  local receipts…); `reported_totals` receipts = Total Resources Available minus the line 5 subtotal
+  (`computed`).
+- `fiscal_year_end`: use the year printed on the form; if none is printed, 2025-06-30, and say it
+  was assumed in notes.
+- "Operating Expenses" with no function: use the entity type's function (fire districts public
+  safety, townships streets/highways, cemeteries health/welfare…) with `review`. Combined bond
+  principal & interest takes debt service principal with `review`.
+- If the transfers page is not in the trimmed PDF, say so in notes (transfers null).
 
 ## Entity types beyond cities, counties and schools
 - **Entirely business-type entities** (health care facilities/hospitals, public power districts,

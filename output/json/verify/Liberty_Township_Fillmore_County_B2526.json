@@ -2,17 +2,37 @@
   "stem": "Liberty_Township_Fillmore_County_B2526",
   "values_checked": 13,
   "issues": [
-    {"severity": "error", "path": "missing", "page": 1,
-     "extracted": "notes: 'Read pages 1-2 of 2.'", "on_page": "trimmed PDF has 1 page (Total All Funds, form page 2)",
-     "issue": "Page-count statement is wrong: the trimmed PDF has only 1 page, so the notes should end 'Read pages 1-1 of 1'. The notes claim a second page was read, but none exists. The form's page 2-A (Documentation of Transfers) is not in the trimmed PDF."},
-    {"severity": "warning", "path": "transfers_in", "page": 1,
-     "extracted": null, "on_page": "Lines 15, 16, 27, 28 all '-' in column 2",
-     "issue": "'No transfers' is supported by the Total All Funds lines, but it cannot be cross-checked because the Documentation of Transfers page (2-A) was not trimmed into the PDF."},
-    {"severity": "warning", "path": "beginning_investments", "page": 1,
-     "extracted": 37682.00, "on_page": "Investments 37,682.00 (line 3, already inside line 5 subtotal 49,971.00)",
-     "issue": "beginning_investments is filled in even though the same amount is already part of beginning_cash, while ending_investments is null. The two are treated inconsistently and there is a risk of counting it twice downstream."},
-    {"severity": "warning", "path": "fiscal_year_end", "page": 1,
-     "extracted": "2025-06-30", "on_page": "column header 'Actual/Estimated 2024 - 2025' only",
-     "issue": "Fiscal year end is assumed and not printed in the trimmed PDF."}
+    {
+      "severity": "warning",
+      "path": "missing",
+      "page": 1,
+      "extracted": "notes: 'Read pages 1-2 of 2.'",
+      "on_page": "trimmed PDF has 1 page (Total All Funds, form page 2)",
+      "issue": "[fixed: page note corrected; transfers page absence noted] Page-count statement is wrong: the trimmed PDF has only 1 page, so the notes should end 'Read pages 1-1 of 1'. The notes claim a second page was read, but none exists. The form's page 2-A (Documentation of Transfers) is not in the trimmed PDF."
+    },
+    {
+      "severity": "warning",
+      "path": "transfers_in",
+      "page": 1,
+      "extracted": null,
+      "on_page": "Lines 15, 16, 27, 28 all '-' in column 2",
+      "issue": "'No transfers' is supported by the Total All Funds lines, but it cannot be cross-checked because the Documentation of Transfers page (2-A) was not trimmed into the PDF."
+    },
+    {
+      "severity": "warning",
+      "path": "beginning_investments",
+      "page": 1,
+      "extracted": 37682.0,
+      "on_page": "Investments 37,682.00 (line 3, already inside line 5 subtotal 49,971.00)",
+      "issue": "beginning_investments is filled in even though the same amount is already part of beginning_cash, while ending_investments is null. The two are treated inconsistently and there is a risk of counting it twice downstream."
+    },
+    {
+      "severity": "warning",
+      "path": "fiscal_year_end",
+      "page": 1,
+      "extracted": "2025-06-30",
+      "on_page": "column header 'Actual/Estimated 2024 - 2025' only",
+      "issue": "Fiscal year end is assumed and not printed in the trimmed PDF."
+    }
   ]
 }

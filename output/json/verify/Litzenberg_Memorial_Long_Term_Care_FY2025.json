@@ -1,0 +1,15 @@
+{
+  "stem": "Litzenberg_Memorial_Long_Term_Care_FY2025",
+  "values_checked": 111,
+  "issues": [
+    {"severity": "warning", "path": "detail_totals", "page": 4,
+     "extracted": [], "on_page": "department subtotals printed: Nursing 1,777,019; Physical therapy 66,782; Speech therapy 7,000; Occupational therapy 34,579 (p4); Dietary 541,361; Housekeeping and laundry 109,058; Maintenance and plant operations 329,127 (p5); Activities and social services 160,555; Adminstration 618,900; Health information management 53,787 (p6)",
+     "issue": "detail_totals left empty although every department total is printed. I checked each department's items against its subtotal and all ten agree (sum 3,698,168 = total operating expenses 3,762,885 less depreciation 64,717). They could be recorded so validation can check them"},
+    {"severity": "warning", "path": "receipts[1]", "page": 2,
+     "extracted": "intergovernmental/state aid, 114,947", "on_page": "Intergovernmental transfer 114,947 (operating revenues)",
+     "issue": "the label contains 'transfer', but the line is printed as operating revenue (Medicaid intergovernmental transfer payment). Recording it as state aid is defensible; the validator's transfer-label check will flag it"},
+    {"severity": "warning", "path": "receipts[2].category", "page": 2,
+     "extracted": "charges for services/fees, -91,512", "on_page": "Quality assurance assessment (91,512)",
+     "issue": "a negative operating revenue (assessment paid to the state) recorded under charges for services; category is a judgment call"}
+  ]
+}
