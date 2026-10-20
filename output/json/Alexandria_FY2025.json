@@ -3,8 +3,8 @@
   "entity_type": "village",
   "fiscal_year_end": "2025-09-30",
   "basis": "cash",
-  "extraction_attempt": 1,
-  "beginning_cash": {"amount": 169671.25, "source_page": 1, "computed": "General 63,604.72 + Street 101,331.75 + Fire 10.23 + Park 4,724.55 (p1 line 1); governmental funds only"},
+  "extraction_attempt": 2,
+  "beginning_cash": {"amount": 169671.25, "source_page": 1, "computed": "governmental funds line 3 beginning balance: General 63,604.72 + Street 101,331.75 + Fire 10.23 + Park 4,724.55 (p1)"},
   "beginning_investments": null,
   "beginning_fund_balance": null,
   "receipts": [
@@ -17,8 +17,9 @@
     {"fund_type": "governmental", "category": "intergovernmental/state aid", "original_label": "State Receipts: Property Tax Credit", "amount": 2598.42, "source_page": 1},
     {"fund_type": "governmental", "category": "motor vehicle tax", "original_label": "Local Receipts: Motor Vehicle Tax", "amount": 2235.28, "source_page": 1},
     {"fund_type": "governmental", "category": "other taxes", "original_label": "Local Receipts: In Lieu of Tax", "amount": 4633.62, "source_page": 1},
-    {"fund_type": "governmental", "category": "other", "original_label": "Local Receipts: Other", "amount": 15870.93, "source_page": 1, "computed": "General 6,328.58 + Street 3,352.75 + Park 6,189.60 (governmental columns of line 18)", "review": "unspecified other local receipts"},
-    {"fund_type": "business-type", "category": "charges for services/fees", "original_label": "Local Receipts: Other", "amount": 107432.80, "source_page": 1, "computed": "Water 48,689.65 + Sewer 58,743.15 (line 18)", "review": "water/sewer fund receipts under Local Receipts: Other; presumed utility charges"}
+    {"fund_type": "governmental", "category": "other", "original_label": "Local Receipts: Other", "amount": 15870.93, "source_page": 1, "computed": "total column 123,303.73 minus Water Fund 48,689.65 minus Sewer Fund 58,743.15 = General 6,328.58 + Street 3,352.75 + Park 6,189.60 (p1)", "review": "printed only as 'Local Receipts: Other'"},
+    {"fund_type": "business-type", "category": "other", "original_label": "Local Receipts: Other (Water Fund)", "amount": 48689.65, "source_page": 1, "review": "printed only as 'Local Receipts: Other'; presumably water sales"},
+    {"fund_type": "business-type", "category": "other", "original_label": "Local Receipts: Other (Sewer Fund)", "amount": 58743.15, "source_page": 1, "review": "printed only as 'Local Receipts: Other'; presumably sewer charges"}
   ],
   "disbursements": [
     {"fund_type": "governmental", "category": "general government", "original_label": "General Government", "amount": 36554.26, "source_page": 3},
@@ -26,7 +27,7 @@
     {"fund_type": "governmental", "category": "streets/highways", "original_label": "Public Works - Streets", "amount": 18078.79, "source_page": 3},
     {"fund_type": "governmental", "category": "capital outlay", "original_label": "Capital Improvements", "amount": 39485.38, "source_page": 3},
     {"fund_type": "governmental", "category": "culture/recreation", "original_label": "Culture & Recreation", "amount": 6770.99, "source_page": 3},
-    {"fund_type": "business-type", "category": "debt service principal", "original_label": "Debt Service", "amount": 37001.00, "source_page": 3, "review": "printed under governmental heading but all in Water (10,356) and Sewer (26,645) funds; principal and interest not split"},
+    {"fund_type": "business-type", "category": "debt service principal", "original_label": "Debt Service", "amount": 37001.00, "source_page": 3, "computed": "Water Fund 10,356.00 + Sewer Fund 26,645.00 (p3)", "review": "Debt service printed under Governmental heading but entirely in Water/Sewer fund columns; treated as business-type; principal and interest combined"},
     {"fund_type": "business-type", "category": "utilities", "original_label": "Wastewater", "amount": 35590.25, "source_page": 3},
     {"fund_type": "business-type", "category": "utilities", "original_label": "Water", "amount": 35051.22, "source_page": 3}
   ],
@@ -37,40 +38,40 @@
   "adjustments": [],
   "reported_totals": {
     "governmental": {
-      "receipts": {"amount": 109502.93, "source_page": 1, "includes": ["transfers_in"], "computed": "General 34,478.23 + Street 45,936.57 + Fire 6,140.34 + Park 22,947.79 (line 21)"},
-      "disbursements": {"amount": 106710.42, "source_page": 3, "includes": ["transfers_out"], "computed": "General 43,315.25 + Street 57,564.17 + Fire 2,541.00 + Park 3,290.00 (line 52)"}
+      "receipts": {"amount": 109502.93, "source_page": 1, "includes": ["transfers_in"], "computed": "General 34,478.23 + Street 45,936.57 + Fire 6,140.34 + Park 22,947.79 (line 21, p1)"},
+      "disbursements": {"amount": 106710.42, "source_page": 3, "includes": ["transfers_out"], "computed": "General 43,315.25 + Street 57,564.17 + Fire 2,541.00 + Park 3,290.00 (line 52, p3)"}
     },
     "business-type": {
-      "receipts": {"amount": 107432.80, "source_page": 1, "includes": [], "computed": "Water 48,689.65 + Sewer 58,743.15 (line 21)"},
-      "disbursements": {"amount": 107642.47, "source_page": 3, "includes": [], "computed": "Water 45,407.22 + Sewer 62,235.25 (line 52)"}
+      "receipts": {"amount": 107432.80, "source_page": 1, "includes": [], "computed": "Water Fund 48,689.65 + Sewer Fund 58,743.15 (line 21, p1)"},
+      "disbursements": {"amount": 107642.47, "source_page": 3, "includes": [], "computed": "Water Fund 45,407.22 + Sewer Fund 62,235.25 (line 52, p3)"}
     }
   },
   "business_type": {
     "measure": "cash",
-    "beginning": {"amount": 178445.02, "source_page": 1, "computed": "Water 18,460.37 + Sewer 159,984.65 (line 3)"},
-    "ending": {"amount": 178235.35, "source_page": 1, "computed": "Water 21,742.80 + Sewer 156,492.55 (line 24)"},
+    "beginning": {"amount": 178445.02, "source_page": 1, "computed": "Water Fund 18,460.37 + Sewer Fund 159,984.65 (p1)"},
+    "ending": {"amount": 178235.35, "source_page": 1, "computed": "Water Fund 21,742.80 + Sewer Fund 156,492.55 (p1)"},
     "transfers_net": null, "debt_proceeds": null, "other_financing": null, "adjustments": []
   },
   "proprietary": null,
   "balance_sheet": {
-    "statement": "Statement of Cash Receipts and Disbursements - All Funds (ending balance, lines 24-28)",
+    "statement": "Statement of Cash Receipts and Disbursements - All Funds (Exhibit A), ending balance (no separate net position statement)",
     "scope": "cash basis",
     "column": "TOTAL (all funds)",
-    "assets": [{"category": "cash and investments", "original_label": "Net Cash Balance (Ending Balance)", "amount": 350699.11, "source_page": 1}],
+    "assets": [{"category": "cash and investments", "original_label": "Subtotal of Ending Balances (Line 26 + 27)", "amount": 350699.11, "source_page": 1}],
     "deferred_outflows": [],
     "liabilities": [],
     "deferred_inflows": [],
-    "equity": [{"original_label": "Subtotal of Ending Balances (Line 26 + 27)", "amount": 350699.11, "source_page": 1}],
+    "equity": [{"original_label": "Ending Balance (Line 24)", "amount": 350699.11, "source_page": 1}],
     "total_assets": {"amount": 350699.11, "source_page": 1},
     "total_deferred_outflows": null,
     "total_liabilities": null,
     "total_deferred_inflows": null,
     "total_equity": {"amount": 350699.11, "source_page": 1}
   },
-  "ending_cash": {"amount": 172463.76, "source_page": 1, "computed": "General 54,767.70 + Street 89,704.15 + Fire 3,609.57 + Park 24,382.34 (line 26); governmental funds only"},
+  "ending_cash": {"amount": 172463.76, "source_page": 1, "computed": "governmental funds line 24: General 54,767.70 + Street 89,704.15 + Fire 3,609.57 + Park 24,382.34 (p1)"},
   "ending_investments": null,
   "ending_fund_balance": null,
   "detail": [],
   "detail_totals": [],
-  "notes": "Compiled cash-basis all-funds statement with one column per fund. Governmental = General, Street, Fire, Park funds; business-type = Water and Sewer funds (sums of fund columns computed). Debt service line sits under the Governmental heading but is entirely in the Water and Sewer fund columns, so it is recorded as business-type. Transfers (3,280 Street in / General out) are both governmental, included in the printed fund totals. Pages 2 and 4 are blank templates. Balance sheet derived from ending-balance lines (no separate net position statement); it covers all funds combined. No detail schedules."
+  "notes": "Cash-basis compilation (Waiver filing, Exhibit A). Governmental funds = General, Street, Fire, Park; business-type = Water and Sewer funds (columns summed by me). Street Fund line 20 transfer in 3,280.00 is inside its Total Receipts and General Fund transfer out 3,280.00 inside Total Disbursements; both removed from receipts/disbursements lines and shown as transfers. Local Receipts: Other split by fund column. Page 2 and 4 of the PDF are blank 'other fund' continuation pages (p2 = page 1a, p4 = page 2a). Beginning/ending investments are none. Debt outstanding (USDA lagoon 586,425.03, USDA water 298,141.71, total 884,566.74, p5) not placed on balance sheet because the cash-basis statement carries no liabilities. Balance sheet derived from Exhibit A ending balance. Read pages 1-5 of 5"
 }

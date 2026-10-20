@@ -15,8 +15,10 @@ OCR needs Tesseract (apt install tesseract-ocr) and TESSDATA_PREFIX set.
 import argparse
 import datetime as dt
 import io
+import os
 import re
 import sys
+from concurrent.futures import ProcessPoolExecutor
 from pathlib import Path
 
 import pymupdf
@@ -586,6 +588,19 @@ def process(pdf_path, meta):
     return row
 
 
+def _process_safe(job):
+    f, m = job
+    try:
+        return process(f, m)
+    except Exception as e:  # noqa: BLE001
+        return dict(filename=f.name, url=m.get("url", ""), entity_name=m.get("entity_name") or entity_from_filename(f.name),
+                    county=m.get("county", ""), subdivision_type=m.get("subdivision_type", ""),
+                    fiscal_year=m.get("fiscal_year", ""), filing_type=m.get("filing_type", ""),
+                    flag=f"error: {type(e).__name__}: {e}"[:200],
+                    processed_at=dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"),
+                    finder_version=FINDER_VERSION)
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--keep", action="store_true", help="keep full PDFs in audits/ after processing")
@@ -627,24 +642,25 @@ def main():
     done = {r["filename"] for r in read_csv(MANIFEST)}
     files = [Path(f) for f in a.files] or sorted(AUDITS.glob("*.pdf"))
     n = 0
-    for f in files:
-        if f.name in done:
-            continue
-        try:
-            row = process(f, meta.get(f.name, {}))
-        except Exception as e:  # noqa: BLE001
-            m = meta.get(f.name, {})
-            row = dict(filename=f.name, url=m.get("url", ""), entity_name=m.get("entity_name") or entity_from_filename(f.name),
-                       county=m.get("county", ""), subdivision_type=m.get("subdivision_type", ""),
-                       fiscal_year=m.get("fiscal_year", ""), filing_type=m.get("filing_type", ""),
-                       flag=f"error: {type(e).__name__}: {e}"[:200],
-                       processed_at=dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"),
-                       finder_version=FINDER_VERSION)
+    todo = [f for f in files if f.name not in done]
+    # OCR is CPU-bound: trim several PDFs at once (one Tesseract thread each); rows are written here,
+    # in order, so the manifest is only ever touched by this process.
+    workers = max(1, int(os.environ.get("TRIM_WORKERS", os.cpu_count() or 1)))
+    os.environ.setdefault("OMP_THREAD_LIMIT", "1")
+    jobs = [(f, meta.get(f.name, {})) for f in todo]
+    if workers > 1 and len(jobs) > 1:
+        pool = ProcessPoolExecutor(workers)
+        results = pool.map(_process_safe, jobs)
+    else:
+        pool, results = None, map(_process_safe, jobs)
+    for (f, _), row in zip(jobs, results):
         append_csv(MANIFEST, row, MANIFEST_FIELDS)
         n += 1
         print(f"{f.name}: pages {row.get('pages_kept') or '-'} {row.get('flag', '')}")
         if not a.keep:
             f.unlink(missing_ok=True)
+    if pool:
+        pool.shutdown()
     print(f"processed {n} PDFs")
 
 
