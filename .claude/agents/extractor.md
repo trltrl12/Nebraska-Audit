@@ -220,7 +220,11 @@ independent verifier, so unmarked computed values show up as errors. If a value 
     so leave out the one-line activities budget schedule instead.
   - **No double counting:** if the same fund's lines appear on two schedules (e.g. a budget
     schedule and a departmental schedule for the General Fund), record only the more detailed one
-    and say so in `notes`. For a combining schedule with many fund columns, record per fund for up
+    and say so in `notes`. This is decided fund by fund: when a budget schedule covers all funds
+    and a more detailed schedule exists only for some (e.g. the General Fund), still record the
+    budget schedule's lines for every other fund, including each utility/business-type fund
+    (Water, Sewer, Electric… operating expenses, debt service, capital; actual and budget).
+    For a combining schedule with many fund columns, record per fund for up
     to 6 funds; with more, use its Total column with fund = "Nonmajor funds (combined)".
   - The basic-statement `receipts` / `disbursements` lists stay as they are. `detail` is extra
     detail, not a replacement.
