@@ -24,7 +24,7 @@ from pathlib import Path
 import pymupdf
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from common import (AUDITS, FILE_LIST, MANIFEST, MANIFEST_FIELDS, TRIMMED,  # noqa: E402
+from common import (AUDITS, FILE_LIST, MANIFEST, MANIFEST_FIELDS, ROOT, TRIMMED,  # noqa: E402
                     append_csv, read_csv, write_csv)
 
 # Bump whenever page selection changes: reports trimmed by an older version are re-trimmed
@@ -116,8 +116,14 @@ def title_lines(lines, default):
     return default
 
 
+# A bare "Reconciliation" / "Reconciling items (Note 2)" line is a column heading of a SID's combined
+# fund/government-wide statement (OCR and some text layers put each heading word on its own line).
+RECONCIL_COLUMN_RE = re.compile(r"^\W*reconcil\w*(\s+items)?(\s+\(note\s+\d+\))?\W*$")
+
+
 def reconcil_title(lines):
-    return bool(RECONCIL_TITLE_RE.search("\n".join(ln for ln in lines[:20] if not CASH_FLOW_RECONCIL_RE.search(ln))))
+    return bool(RECONCIL_TITLE_RE.search("\n".join(ln for ln in lines[:20] if not CASH_FLOW_RECONCIL_RE.search(ln)
+                                                    and not RECONCIL_COLUMN_RE.search(ln))))
 
 
 def excluded(lines, rx=None, column_default=None):
@@ -797,7 +803,11 @@ def main():
 
     if a.drop_stale:
         rows = read_csv(MANIFEST)
-        fresh = [r for r in rows if str(r.get("finder_version") or "") == str(FINDER_VERSION)]
+        # config/retrim.csv (stem,before): also re-trim these reports if trimmed before that UTC time
+        # (a finder fix that only affects a few already-trimmed reports, without a version bump)
+        rt = {r["stem"]: r["before"] for r in read_csv(ROOT / "config" / "retrim.csv")}
+        fresh = [r for r in rows if str(r.get("finder_version") or "") == str(FINDER_VERSION)
+                 and not (r["filename"][:-4] in rt and (r.get("processed_at") or "") < rt[r["filename"][:-4]])]
         stale = [r for r in rows if r not in fresh]
         for r in stale:
             if r.get("trimmed_file"):
