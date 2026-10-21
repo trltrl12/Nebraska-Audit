@@ -168,6 +168,7 @@ These were diagnosed and fixed in find_pages v6; re-extract and re-verify them a
   Wahoo_FY2025 (no General Fund budget schedule trimmed; source PDF p19 and pp23-27 not kept).
   Wisner_Care_Center_FY2025 (trimmed to 3 pages, no revenue/expense statement: receipts/disbursements empty, net position change as placeholder adjustment).
   York_FY2025 (report p73, rest of the General Fund Departments combining schedule: Fire/EMS, Library, Total columns, not trimmed; departmental detail left out).
+  York_Public_Schools_FY2025 (trim stops partway through Exhibit P at p20: object detail for programs 2130+, ~8.0M, missing; Exhibit G function lines used).
   Gering_Ft_Laramie_Irrigation_District_FY2025 (nonoperating/capital-grant statement page not trimmed; 9,257,241
   derived as an adjustment meanwhile).
 - Budget forms whose Total All Funds page wasn't found (manifest flag no_budget_actuals_found; skipped, no

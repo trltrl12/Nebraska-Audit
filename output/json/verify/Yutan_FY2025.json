@@ -2,25 +2,45 @@
   "stem": "Yutan_FY2025",
   "values_checked": 154,
   "issues": [
-    {"severity": "error", "path": "detail_totals[2].amount", "page": 9,
-     "extracted": 26864,
-     "on_page": "Bond Fund Total receipts 26,864; lines 1,882 + 42 + 18,847 + 6,091 = 26,862",
-     "issue": "The printed Bond Fund total receipts (also Bond column on p4) is 2 more than its lines. The amounts are transcribed correctly, but report_discrepancies has no entry for this gap (only the Bond disbursements gap is recorded), and it is over the $1 tolerance."},
-    {"severity": "warning", "path": "balance_sheet.total_assets", "page": 1,
-     "extracted": 4787415,
-     "on_page": "Total (memo only) asset lines add to 4,787,414; printed Total assets 4,787,415",
-     "issue": "A $1 rounding gap in the printed asset section is not recorded in report_discrepancies. The existing balance entry covers a different check."},
-    {"severity": "warning", "path": "balance_sheet.total_equity", "page": 1,
-     "extracted": 3241400,
-     "on_page": "Net position lines 2,030,446 + 452,754 + 151,807 + 606,394 = 3,241,401; printed Net position 3,241,400",
-     "issue": "A $1 rounding gap in the net position section is not recorded in report_discrepancies."},
-    {"severity": "warning", "path": "detail[63].section", "page": 11,
-     "extracted": "other financing (Grants and donations 49,875 Police; also detail[64] 883 Library)",
-     "on_page": "Other financing sources (uses): Grants and donations",
-     "issue": "The same line is a receipt (donations/contributions, outside_printed_total) in receipts[10] but other financing with no category in detail. This breaks the same-label-same-category rule; it should probably be section revenue with outside_printed_total."},
-    {"severity": "warning", "path": "receipts[10].category", "page": 2,
-     "extracted": "donations/contributions",
-     "on_page": "Grants and donations 50,758; p2 shows it as Operating Grants and Contributions (public safety 49,875, culture and recreation 883)",
-     "issue": "The Police 49,875 may be a government grant (intergovernmental/federal) rather than a private donation. The source is not stated, so this is a judgment call."}
+    {
+      "severity": "error",
+      "path": "detail_totals[2].amount",
+      "page": 9,
+      "extracted": 26864,
+      "on_page": "Bond Fund Total receipts 26,864; lines 1,882 + 42 + 18,847 + 6,091 = 26,862",
+      "issue": "[fixed] The printed Bond Fund total receipts (also Bond column on p4) is 2 more than its lines. The amounts are transcribed correctly, but report_discrepancies has no entry for this gap (only the Bond disbursements gap is recorded), and it is over the $1 tolerance."
+    },
+    {
+      "severity": "warning",
+      "path": "balance_sheet.total_assets",
+      "page": 1,
+      "extracted": 4787415,
+      "on_page": "Total (memo only) asset lines add to 4,787,414; printed Total assets 4,787,415",
+      "issue": "A $1 rounding gap in the printed asset section is not recorded in report_discrepancies. The existing balance entry covers a different check."
+    },
+    {
+      "severity": "warning",
+      "path": "balance_sheet.total_equity",
+      "page": 1,
+      "extracted": 3241400,
+      "on_page": "Net position lines 2,030,446 + 452,754 + 151,807 + 606,394 = 3,241,401; printed Net position 3,241,400",
+      "issue": "A $1 rounding gap in the net position section is not recorded in report_discrepancies."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[63].section",
+      "page": 11,
+      "extracted": "other financing (Grants and donations 49,875 Police; also detail[64] 883 Library)",
+      "on_page": "Other financing sources (uses): Grants and donations",
+      "issue": "The same line is a receipt (donations/contributions, outside_printed_total) in receipts[10] but other financing with no category in detail. This breaks the same-label-same-category rule; it should probably be section revenue with outside_printed_total."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[10].category",
+      "page": 2,
+      "extracted": "donations/contributions",
+      "on_page": "Grants and donations 50,758; p2 shows it as Operating Grants and Contributions (public safety 49,875, culture and recreation 883)",
+      "issue": "The Police 49,875 may be a government grant (intergovernmental/federal) rather than a private donation. The source is not stated, so this is a judgment call."
+    }
   ]
 }
