@@ -19,7 +19,7 @@ concurrency:
 jobs:
   validate:
     runs-on: ubuntu-latest
-    timeout-minutes: 120
+    timeout-minutes: 240
     steps:
       - uses: actions/checkout@v4
         with:
@@ -33,13 +33,34 @@ jobs:
           sudo apt-get update -q && sudo apt-get install -y -q tesseract-ocr
           echo "TESSDATA_PREFIX=$(dirname "$(find /usr/share -name eng.traineddata | head -1)")" >> "$GITHUB_ENV"
       - run: pip install -r requirements.txt
+      # OCR results for scanned pages persist between runs, so a run that is cut off keeps its progress.
+      - name: Restore OCR cache
+        uses: actions/cache/restore@v4
+        with:
+          path: output/page_text
+          key: page-text-${{ github.run_id }}
+          restore-keys: page-text-
+      - name: OCR scanned pages not cached yet (parallel)
+        id: warm
+        timeout-minutes: 150
+        continue-on-error: true
+        run: python scripts/pagecheck.py --warm
+      - name: Save OCR cache
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: output/page_text
+          key: page-text-${{ github.run_id }}
+      - name: Stop if OCR didn't finish (the next run continues from the saved cache)
+        if: steps.warm.outcome != 'success'
+        run: echo "OCR cache incomplete; rerun to continue" && exit 1
       - run: python scripts/validate.py
       - run: python scripts/build_csv.py
       - name: Commit results
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add output/ ':!output/json'
+          git add output/ ':!output/json' ':!output/page_text'
           if git diff --cached --quiet; then echo "No changes"; exit 0; fi
           git commit -m "validate: update flagged, progress and CSV/XLSX outputs [skip ci]"
           for i in 1 2 3 4; do

@@ -7,6 +7,7 @@ for image-only pages (needs Tesseract; results cached in output/page_text/). Val
 computed itself (marked "computed" or "split_from") are reported as computed rather than missing.
 """
 import json
+import os
 import re
 import sys
 from pathlib import Path
@@ -16,7 +17,7 @@ import pymupdf
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from common import OUTPUT, TRIMMED, amt, fund_type, page  # noqa: E402
 
-CACHE = OUTPUT / "page_text"
+CACHE = Path(os.environ.get("PAGE_TEXT_CACHE", OUTPUT / "page_text"))
 OCR_DPI = 200
 NUM_RE = re.compile(r"\d[\d,]*(?:\.\d+)?")
 _ocr_ok = None
@@ -141,3 +142,43 @@ def check_report(stem, d):
             reason = f"amount not found on cited page {sp}; check it against the report"
         out.append(dict(where=where, label=label, amount=a, source_page=sp, fund_type=ft, reason=reason))
     return out
+
+
+def _warm_one(stem):
+    try:
+        page_texts(stem)
+    except Exception as e:  # noqa: BLE001
+        print(f"pagecheck: {stem}: {e}")
+    return stem
+
+
+def warm(workers=None):
+    """Fill output/page_text/ for every trimmed PDF that has a JSON, in parallel.
+
+    Each finished report is cached on disk right away, so an interrupted run keeps its progress
+    (the workflow saves the folder with actions/cache even when this step times out)."""
+    from concurrent.futures import ProcessPoolExecutor
+    from common import JSON_DIR
+    stems = sorted(p.stem for p in JSON_DIR.glob("*.json"))
+    todo = []
+    for s in stems:
+        pdf, c = TRIMMED / f"{s}.pdf", CACHE / f"{s}.json"
+        if not pdf.exists():
+            continue
+        try:
+            if c.exists() and json.loads(c.read_text(encoding="utf-8")).get("key") == f"{pdf.stat().st_size}":
+                continue
+        except Exception:  # noqa: BLE001
+            pass
+        todo.append(s)
+    print(f"pagecheck warm: {len(stems)} reports, {len(todo)} not cached yet")
+    with ProcessPoolExecutor(max_workers=workers or os.cpu_count()) as ex:
+        for i, _ in enumerate(ex.map(_warm_one, todo, chunksize=4), 1):
+            if i % 100 == 0:
+                print(f"pagecheck warm: {i}/{len(todo)}", flush=True)
+    print("pagecheck warm: done")
+
+
+if __name__ == "__main__":
+    if "--warm" in sys.argv:
+        warm()
