@@ -1,0 +1,19 @@
+{
+  "stem": "Stapleton_FY2025",
+  "values_checked": 33,
+  "issues": [
+    {"severity": "warning", "path": "receipts[6].category", "page": 1,
+     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other - Sewer 66,695.73, Water 39,398.11, Solid Waste 158,053.82 (receipts[6]-[8])",
+     "issue": "The page doesn't say what these are. Treating the utility columns' 'Other' as user charges is a reasonable assumption, and the lines are already marked review."},
+    {"severity": "warning", "path": "disbursements[5].category", "page": 3,
+     "extracted": "debt service principal", "on_page": "Debt Service 12,307.38 (Solid Waste column)",
+     "issue": "This is a combined principal and interest payment on a 4.25% equipment loan (p4). Recording it all as principal overstates principal by the interest portion. Already marked review."},
+    {"severity": "warning", "path": "decision_needed", "page": 4,
+     "extracted": "ending_investments 24,665.02 all governmental (General Fund column, line 27)",
+     "on_page": "Schedule of Investments: Flex CD 40167 8,219.70; Sewer Flex CD 7,557.73; Water Tank Savings CD 8,887.59",
+     "issue": "Two of the three CDs are named for the sewer and water utilities, but Exhibit A puts all of them in the General Fund column. Governmental ending cash (79,168.66) may therefore include about 16,445.32 of utility money. As printed, the extraction is correct, but only a person can decide this and it is not in decision_needed."},
+    {"severity": "warning", "path": "beginning_cash", "page": 1,
+     "extracted": 121011.00, "on_page": "Line 1 Net Cash Balance: General 91,222.00, Street 29,789.00 (all columns whole dollars); line 2 Investments blank",
+     "issue": "Every beginning balance is a whole-dollar amount, and no beginning investments are shown even though three CDs are held at year end. The beginning figures may be rounded or estimated. They are recorded as printed."}
+  ]
+}
