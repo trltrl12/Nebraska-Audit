@@ -143,10 +143,8 @@ These were diagnosed and fixed in find_pages v6; re-extract and re-verify them a
   Plattsmouth_Airport_Authority_FY2025 (report p8, governmental funds revenues/expenditures statement, not trimmed; budget-basis schedule used).
   Polk_FY2025 (odd report pages 27-35 of the combining schedules not trimmed: Bandstand/Playground/Total/budget columns; actuals from Exhibits III-IV).
   Sargent_Public_Schools_FY2025 (report p50, rest of the per-account Activities Fund schedule, not trimmed; one-line budget schedule used).
-  South_Sioux_City_FY2025 (report pp77, 91-92, nonmajor fund schedules, not trimmed; nonmajor detail revenue 6.72M vs 8.53M).
   Springfield_FY2025 (Note M, explaining 33.2M sales tax and 3.5M permits, not trimmed).
   South_Platte_Public_Schools_FY2025 (report p31, Activity Fund schedule, not trimmed).
-  St_Edward_FY2025 (report pp18-21, governmental fund statements, not trimmed: no cash roll-forward; government-wide only).
   Superior_FY2025 (report pp17-18, governmental funds revenue/expenditure statement, and p66, Community Development Agency Fund, not trimmed: ~255k receipts incl. TIF proceeds 248,373 and ~15k spending missing; beginning_fund_balance null).
   Tekamah_Airport_Authority_FY2025 (trimmed to the Statement of Net Position only: revenue/expense statement not trimmed).
   Taylor_FY2025 (report pp14-22, governmental fund statements, not trimmed; governmental figures derived from the all-funds budget schedule, transfers unclear; left flagged for re-extraction).
