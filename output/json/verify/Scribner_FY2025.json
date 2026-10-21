@@ -2,17 +2,37 @@
   "stem": "Scribner_FY2025",
   "values_checked": 53,
   "issues": [
-    {"severity": "warning", "path": "business_type.measure", "page": 7,
-     "extracted": "net position (562,345 -> 792,918)", "on_page": "Cash flows p7: cash 763,385 -> 849,558; Payments on line of credit (150,000); Cash received from customers 2,378,990",
-     "issue": "Modified cash basis report, but the utility roll-forward uses net position from p6. The p6 statement leaves out the 150,000 line-of-credit payment shown on the p7 cash flow statement, and its revenues (2,373,390) differ from cash received (2,378,990). The figures tie as recorded, but a cash measure would need those lines. Confirm which measure to use."},
-    {"severity": "warning", "path": "detail", "page": 8,
-     "extracted": "not entered", "on_page": "Budget and Actual - All Funds: State receipts 563,303; Other local receipts 3,012,556; Public Works 1,828,270; Capital outlay 237,726; Debt service 488,607; Public Health 17,030; totals 3,999,223 / 3,636,697",
-     "issue": "The all-funds budgetary schedule (with budget figures) was left out of detail. It mixes governmental and utility funds, so leaving it out is defensible, but its budget figures are lost. It also prints Public Health 17,030 against 17,029 on p4, and its total disbursements of 3,636,697 are 1 more than the parts (3,636,696)."},
-    {"severity": "warning", "path": "balance_sheet.equity[0].amount", "page": 1,
-     "extracted": 307812, "on_page": 307812,
-     "issue": "Matches the page, but the report looks internally inconsistent: 'Restricted for Community Improvement' 307,812 equals the LB840 fund's BEGINNING balance on p9, while p9 shows the LB840 ending balance as 239,922. There is no report_discrepancies entry."},
-    {"severity": "warning", "path": "detail[1].detail_category", "page": 9,
-     "extracted": "other / miscellaneous revenue", "on_page": "Loan repayments 52,195",
-     "issue": "LB840 revolving-loan principal repayments are not really revenue. Category 'other' is a judgment call; the line already carries review."}
+    {
+      "severity": "warning",
+      "path": "missing",
+      "page": 10,
+      "extracted": null,
+      "on_page": "Trimmed pages are report pp4-11, 26 and 35; report pp27-34 (between the all-funds budget statement and the LB840 schedule) are not trimmed",
+      "issue": "probably notes to the budgetary statement and other supplementary pages; every printed total ties without them, but the source PDF should be checked for further fund/utility schedules"
+    },
+    {
+      "severity": "warning",
+      "path": "detail",
+      "page": 9,
+      "extracted": "not entered",
+      "on_page": "Statement of Receipts, Disbursements and Changes in Cash Balances - Budget and Actual - All Funds: State receipts 563,303, Other local receipts 3,012,556, Public Works 1,828,270, Capital outlay 237,726, Debt service 488,607, etc.",
+      "issue": "the supplementary budget-to-actual schedule is left out of detail because it combines governmental and utility funds in broad groups; defensible (explained in notes), but its budget figures are not captured anywhere"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[9].category",
+      "page": 2,
+      "extracted": "donations/contributions",
+      "on_page": "Grants and contributions 5,787 (Statement of Activities: operating grants and contributions, Culture and Recreation)",
+      "issue": "the source isn't stated; if these are government grants they belong in intergovernmental/state aid or federal grants"
+    },
+    {
+      "severity": "warning",
+      "path": "balance_sheet.equity[0].amount",
+      "page": 1,
+      "extracted": 307812,
+      "on_page": "Restricted for Community Improvement 307,812; but the LB840 schedule (p10) shows the LB840 fund balance going from 307,812 at the beginning to 239,922 at year-end",
+      "issue": "[fixed 2026-10-21: report_discrepancies entry added] the report's restricted net position seems to be the LB840 balance at the beginning of the year, not the end; the figure is recorded as printed, but the inconsistency isn't noted"
+    }
   ]
 }
