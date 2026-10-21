@@ -1,70 +1,70 @@
 {
   "stem": "Neligh_Oakdale_Schools_FY2025",
-  "values_checked": 243,
+  "values_checked": 249,
   "issues": [
     {
       "severity": "error",
-      "path": "detail_totals[12]",
-      "page": 13,
-      "extracted": "Activities Fund revenue lines detail[99]-detail[134] sum to 578,825, all recorded as section revenue / student activity receipts; no transfer line",
-      "on_page": "p4 Activities Fund column: Interest 1,723 + District Activities 366,018 + Transfer from Other Funds 211,084 = Total Receipts 578,825; p13 Cash Receipts column total 578,825; p7 General Fund 8000 Transfers 221,084 = Activities 211,084 + School Nutrition 5200 Transfers 10,000 (p10); p4 Reclassifications (721,084) = 500,000 + 211,084 + 10,000",
-      "issue": "[fixed] The report's own arithmetic settles the decision_needed item: the p13 per-account receipts column ties to the p4 Activities column total 578,825, which itself contains the printed line 'Transfer from Other Funds 211,084', and that figure is exactly the General Fund's 8000 Transfers (221,084) less the 10,000 received by School Nutrition. So 211,084 of the Activities Fund detail receipts is a transfer counted as revenue, and the General Fund's -221,084 outflow (detail[67]) has only a 10,000 matching inflow in detail (detail[79]); the 211,084 inflow to Activities is missing as other financing. p13 does not say which accounts received it (Scoreboard 268,130 is likely but not stated), so under the hidden-transfer rule keep every account line as printed and add: (1) contra line {schedule: 'Activities Fund Schedule', fund_type: 'governmental', fund: 'Activities', department: 'Activities Fund accounts (all)', section: 'revenue', category: 'charges for services/fees', detail_category: 'student activity receipts', original_label: 'Transfer from Other Funds included in account receipts', amount: -211084, source_page: 13, split_from: 'Activities Fund Cash Receipts column 578,825 (p13); p4 Activities Fund column prints Transfer from Other Funds 211,084, eliminated by Reclassifications (721,084)', review: 'transfer from General Fund inside activity account receipts; accounts not identified'}; (2) other financing line {schedule: 'Activities Fund Schedule', fund_type: 'governmental', fund: 'Activities', department: null, section: 'other financing', original_label: 'Transfer from Other Funds', amount: 211084, source_page: 4, split_from: same as above, review: 'counterpart of General Fund 8000 Transfers 221,084 (p7)'}; and add includes: ['other financing'] to detail_totals[12]. Revenue then nets to 367,741 (= 366,018 District Activities + 1,723 interest per p4). The decision_needed entry can then be removed. Basic-statement receipts are unaffected (Total column already eliminates it)."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[108].detail_category",
-      "page": 13,
-      "extracted": "student activity receipts",
-      "on_page": "Interest Income 1,645",
-      "issue": "Account is labelled Interest Income (p4 shows Activities Fund interest 1,723); investment income would fit the label. Defensible as an activity account, already marked review."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[93].detail_category",
-      "page": 11,
-      "extracted": "repairs and maintenance",
-      "on_page": "2620 Maintenance of Buildings 17,879",
-      "issue": "Function code line with no object breakdown; the rules call for 'not itemized' (as used for the same code in the General Fund, detail[57])."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[32].original_label",
-      "page": 6,
-      "extracted": "9001 Repayment of Interfund Loan (Non-Program Receipts)",
-      "on_page": "9001 Repayment of Interfund Loan",
-      "issue": "Label has the group header appended; printed row label is '9001 Repayment of Interfund Loan'."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[0].amount",
-      "page": 2,
-      "extracted": 2935566,
-      "on_page": "Statement of Activities (p2) Property 2,935,565; fund statement (p4) 2,935,566",
-      "issue": "$1 rounding difference between the two printed statements (both totals still tie to 8,680,819). Extracted value follows p4 correctly; not recorded in report_discrepancies."
+      "path": "receipts[10].category",
+      "page": 5,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "County Receipts 17,416 (all of it is GF 2110 County Fines and Licenses, p7)",
+      "issue": "[fixed 2026-10-21: recategorized to fines and forfeitures (code 2110)] The statement line is entirely code 2110. The extractor rules make 2110 fines and forfeitures, and detail[10] already uses fines and forfeitures for the same money. Per the broad-line rule (use the category that is more than half of the line), this should be 'fines and forfeitures'."
     },
     {
       "severity": "warning",
       "path": "receipts[11].category",
-      "page": 4,
-      "extracted": "intergovernmental/state aid",
-      "on_page": "State Receipts 3,980,182 (includes 3133 Nameplate Capacity Tax 348,001 GF p6 + 29,294 Special Building p11)",
-      "issue": "Fund schedules print the breakdown of this line, so nameplate capacity tax (377,295, 'other taxes' per rules and as used in detail) could be split out with split_from. Kept as printed with review; judgment call."
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[31].category",
       "page": 5,
-      "extracted": "instruction",
-      "on_page": "Federal Programs 327,955",
-      "issue": "Statement of Activities (p2) shows Federal Programs as its own function, not under instruction; the rule sends such lines to instruction only when the report counts them under Instruction. Judgment call."
+      "extracted": "intergovernmental/state aid (3,980,182, kept whole)",
+      "on_page": "State Receipts 3,980,182 includes 3133 Nameplate Capacity Tax 348,001 (GF p7) + 29,294 (Special Building p12) = 377,295",
+      "issue": "Nameplate capacity tax (about 9.5% of the line) is 'other taxes' under the rules, and the fund schedules print its breakdown, so a split_from split would be allowed. Keeping the line whole is defensible because state aid is the dominant category. The line is already marked review."
     },
     {
       "severity": "warning",
-      "path": "detail[10].category",
-      "page": 6,
-      "extracted": "intergovernmental/state aid / county/other local governments",
-      "on_page": "2110 County Fines and Licenses 17,416",
-      "issue": "County distribution of fines and license money; county-payment category is defensible, but fines and forfeitures could also fit."
+      "path": "detail[8].detail_category",
+      "page": 7,
+      "extracted": "other charges for services",
+      "on_page": "1955 Postsecondary Receipts 976",
+      "issue": "Category guess. Postsecondary (dual-credit) receipts could be 'tuition and fees'. Already marked review."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[33].original_label",
+      "page": 7,
+      "extracted": "9001 Repayment of Interfund Loan (Non-Program Receipts)",
+      "on_page": "9001 Repayment of Interfund Loan",
+      "issue": "Label mismatch: the extractor added the section heading to the printed label."
+    },
+    {
+      "severity": "warning",
+      "path": "detail (Special Building, 2620 Maintenance of Buildings).detail_category",
+      "page": 12,
+      "extracted": "repairs and maintenance",
+      "on_page": "2620 Maintenance of Buildings 17,879 (function code, no object breakdown)",
+      "issue": "This is a function line with no object breakdown, so the rules point to 'not itemized'. That is how the same 2620 line is treated in the General Fund. 'repairs and maintenance' is plausible but inconsistent."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[*].budget_final",
+      "page": 7,
+      "extracted": "field absent on every detail line",
+      "on_page": "budget printed only on schedule totals (e.g. GF receipts 6,402,493, disbursements 9,026,344)",
+      "issue": "The schema expects budget_final (null when not shown). The key is missing entirely instead of set to null. The printed budget totals are not recorded anywhere."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[0].amount",
+      "page": 3,
+      "extracted": 2935566,
+      "on_page": "Statement of Activities: Property 2,935,565; governmental funds statement p5: 2,935,566",
+      "issue": "The report's two statements differ by $1 (printed rounding). This is not recorded in report_discrepancies. The extracted figure correctly follows the funds statement."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[6].review",
+      "page": 5,
+      "extracted": "review says the Activities receipts column 'also contains 211,084 of transfers'",
+      "on_page": "Activities Fund column: Interest 1,723 + District Activities 366,018 + Transfer from Other Funds 211,084 (separate line) = 578,825",
+      "issue": "On p5 the 211,084 transfer is a separate line, not part of District Activities 366,018. The amount is right, but the review note is misleading. The transfer is hidden only in the p14 per-account schedule, which detail handles with a contra line."
     }
   ]
 }

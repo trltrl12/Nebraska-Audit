@@ -1,12 +1,46 @@
 {
   "stem": "Nelson_FY2025",
-  "values_checked": 148,
+  "values_checked": 156,
   "issues": [
-    {"severity": "warning", "path": "receipts[0].category", "page": 6, "extracted": "property tax", "on_page": "General taxes 126,074", "issue": "Unlabeled 'General taxes' line with no breakdown anywhere in the trimmed PDF (Nebraska city general taxes usually include motor vehicle tax too). The rules say a combined tax line that can't be split stays 'taxes (unlabeled)'. Same for the 'General taxes' detail lines on p13 (detail[0], [5], [9], [12], [17], [21], [24]). Already marked review."},
-    {"severity": "warning", "path": "disbursements[9].category", "page": 10, "extracted": "utilities", "on_page": "Orner Apartments column, total operating expenses 28,563", "issue": "All 14 business-type expense lines (disbursements[9]-[22]) are filed under function 'utilities', but 28,563 of them are Orner Apartments (housing). p10 prints them by fund column, so the housing share could be split out by column. The extractor notes this choice."},
-    {"severity": "warning", "path": "detail[33].category", "page": 13, "extracted": "economic development", "on_page": "Community Center Department: Community Development 15,533", "issue": "The rule is to use each department column's own function, and the rules list community centers under culture/recreation. Defensible because the fund statement prints this line as Community development."},
-    {"severity": "warning", "path": "detail[34].category", "page": 13, "extracted": "economic development", "on_page": "Library: Community Development 30,223", "issue": "Library department spending would normally be culture/recreation. The page prints the line as Community Development, which is defensible. Already marked review."},
-    {"severity": "warning", "path": "report_discrepancies", "page": 13, "extracted": "only the State aid row (60,828 vs 60,827) recorded", "on_page": "General Department total revenues 180,567 (parts add to 180,566); Street Department 127,143 (parts 127,144); Park and Recreation 49,559 (parts 49,560)", "issue": "Some department columns on p13 are off by 1 from rounding. The Totals column (which detail_totals uses) only differs through the state aid row. The column-level rounding is not recorded."},
-    {"severity": "warning", "path": "decision_needed", "page": 13, "extracted": "Miscellaneous 256,954 (Fire Maintenance Department) recorded as other", "on_page": "Fire Maintenance Department: Miscellaneous 256,954; Capital outlay 255,652", "issue": "An unexplained 'Miscellaneous' receipt nearly equal to the fire department's capital outlay that year. It may be a donation or grant, a reimbursement from the rural fire district, or financing for a fire truck, and it is about 30% of governmental revenue. No decision_needed[] entry was made."}
+    {
+      "severity": "warning",
+      "path": "receipts[0].category",
+      "page": 6,
+      "extracted": "property tax",
+      "on_page": "General taxes 126,074 (no breakdown printed anywhere; budget schedule p13 shows General taxes 134,689 on budget basis)",
+      "issue": "'General taxes' has no printed breakdown and may include motor vehicle tax along with property tax. Under the rules an unbroken tax line can be kept as 'taxes (unlabeled)'. Property tax is defensible because franchise and sales tax are separate lines. Already marked review. The same treatment applies to the detail 'General taxes' lines on p14."
+    },
+    {
+      "severity": "warning",
+      "path": "decision_needed",
+      "page": 14,
+      "extracted": "Miscellaneous 303,195 recorded as 'other' (Fire Maintenance Department 256,954); no decision_needed entry",
+      "on_page": "Fire Maintenance Miscellaneous 256,954 vs Fire capital outlay 255,652; Statement of Activities p4 also shows Gain on disposal of capital assets 41,147",
+      "issue": "This unexplained line is about 35% of governmental revenue and almost exactly matches the fire department's capital outlay. It may be loan or lease proceeds, an insurance recovery, a grant/donation, or trade-in/sale proceeds. If it is financing, it should be debt_proceeds/other_financing, not receipts. A person should decide; consider adding a decision_needed entry."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[5].category",
+      "page": 6,
+      "extracted": "economic development",
+      "on_page": "Community development 73,306 = Community Center 15,533 + Library 30,223 + C.R.A. 25 (p14) + Sales Tax Fund 27,525",
+      "issue": "The line is mostly library and community center spending, which the rules place under culture/recreation. Following the statement's function label is defensible. The same judgement applies to the detail Library (30,223) and Community Center (15,533) 'Community Development' lines on p14; the Library one is already marked review."
+    },
+    {
+      "severity": "warning",
+      "path": "report_discrepancies",
+      "page": 14,
+      "extracted": "only the State aid row rounding (60,828 vs 60,827) recorded for p14",
+      "on_page": "Department column totals: General revenues 180,567 vs lines 180,566; Street 127,143 vs 127,144; Park and Recreation 49,559 vs 49,560; General Dept expenditures 151,148 vs 79,547 + 71,600 = 151,147",
+      "issue": "The schedule's department-column totals each differ from their lines by $1 (printed rounding). Overall the detail revenue items add to 762,178 vs the printed 762,177; the recorded State aid entry explains this $1. The column-level differences are not listed."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[21].category",
+      "page": 10,
+      "extracted": "debt service interest",
+      "on_page": "Debt service 11,826 (Sewer operating expense)",
+      "issue": "The principal/interest split is not printed. Interest is likely, because principal payments of 14,450 appear separately in the cash flow statement (p11) and the accrued interest payable is 11,825. Still an assumption; already marked review."
+    }
   ]
 }
