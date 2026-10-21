@@ -1,70 +1,18 @@
 {
   "stem": "Heartland_Community_Schools_FY2025",
-  "values_checked": 276,
+  "values_checked": 290,
   "issues": [
-    {
-      "severity": "error",
-      "path": "receipts[3].category",
-      "page": 6,
-      "extracted": "other taxes",
-      "on_page": "Taxes: Other 1,925,010.92",
-      "issue": "[fixed] The report does print what this line is made of. General 1,794,589.98 = carline 2,243.50 + homestead 26,789.64 + property tax credit 1,756,529.76 + pro-rate MV 9,027.08 (p9). Bond 130,346.43 = carline 362.46 + homestead 4,538.46 + property tax credit 124,187.90 + pro-rate 1,257.61 (p16). Special Building 74.51 = pro-rate (p17). So 1,912,045.76 (99.3%) is homestead/property tax credit, which is state aid; only 2,605.96 is carline tax. Under the mixed-line rule the dominant category is intergovernmental/state aid, with review, or the line should be split by fund schedule. The review text saying 'no breakdown of this line printed' is wrong."
-    },
-    {
-      "severity": "error",
-      "path": "detail[89].category",
-      "page": 11,
-      "extracted": "other",
-      "on_page": "3300 Community service 350.00",
-      "issue": "[fixed] Exhibit F (p7) counts 3300 Community service under Regular instruction (2,910,742.02 = 2,910,392.02 + 350). The rules say program lines the report's own statement counts under Instruction go to 'instruction', so 'other' is wrong."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[6].category",
-      "page": 6,
-      "extracted": "other",
-      "on_page": "Other local receipts 613,091.10",
-      "issue": "Made up of tuition 8,124.51 + General misc 14,315.34 + Bond misc 297,806.86 + Other Governmental Funds 292,844.39 (school lunch sales 109,647.27 + activity receipts 183,197.12). Exhibit B shows 300,968.90 of it as Charges for Services. Charges for services/fees (49%) is about as large as the unexplained part (51%), so 'other' with review is defensible but questionable."
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[14].split_from",
-      "page": 6,
-      "extracted": "Other student support split 227,794.90 / 243,464.65",
-      "on_page": "Other student support 471,259.55 (Other Governmental Funds column only)",
-      "issue": "p6 does not print this split. It comes from the Activities (p14) and School Nutrition (p15) fund totals, the only two Other Governmental Funds (p3-4). The arithmetic holds and the split is defensible, but it was not printed on the statement itself. The same applies to disbursements[15]."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[8].category",
-      "page": 9,
-      "extracted": "intergovernmental/state aid / county/other local governments",
-      "on_page": "2110 County fines and license fees 43,535.34",
-      "issue": "The label says fines and license fees, passed through by the county. Could be fines and forfeitures. The current category is consistent with the top-level 'County receipts', so this is a judgment call."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[118].original_label",
-      "page": 6,
-      "extracted": "Transfer in from General Fund (inside account receipts)",
-      "on_page": "Transfers 42,459.06 (Other Governmental Funds column)",
-      "issue": "The label is descriptive, not printed. Which fund received the transfer (Activities) is inferred: Nutrition receipts 208,312.49 hold no transfer, so it must sit inside Activities receipts 374,732.64. The arithmetic holds. The contra line detail[117] rests on the same inference."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[100].original_label",
-      "page": 8,
-      "extracted": "Transfer to Depreciation Fund (hidden in spending lines, reclassified)",
-      "on_page": "Reclassifications (133,091.00) + (41,000.00) + (135,600.00) = (309,691.00)",
-      "issue": "The label is descriptive, not printed. The amount is correctly marked computed and ties to 'Transfers from general fund' 309,691.00 (p12)."
-    },
-    {
-      "severity": "warning",
-      "path": "missing",
-      "page": 19,
-      "extracted": null,
-      "on_page": "Exhibit N continues past Occupational Therapy - SPED Ages 0-2 (program 2163); object detail for programs 2171-8000 is not in the trimmed PDF",
-      "issue": "The trimmed PDF is missing the rest of Exhibit N. The extractor used Exhibit G program totals ('not itemized') for 2171 onward, and those tie to the 6,709,256.67 total. These pages are not on the CLAUDE.md missing-pages follow-up list; re-trim to capture the object detail."
-    }
+    {"severity": "warning", "path": "receipts[7].category", "page": 6,
+     "extracted": "other", "on_page": "Other local receipts 613,091.10 (General 22,439.85, Bond 297,806.86, Other Governmental Funds 292,844.39)",
+     "issue": "The statement's fund columns print the breakdown: the 292,844.39 Other Governmental Funds part is activity and nutrition sales, which Exhibit B (p2) shows as charges for services under Other student support. That is 47.8%, under the more-than-half rule, so 'other' is allowed. Splitting by fund column (split_from) would make about half of this line charges for services/fees."},
+    {"severity": "warning", "path": "detail[99].department", "page": 22,
+     "extracted": "Public Information Services", "on_page": "Operation of Buildings (heading printed above the 14,121.97 / 5,353.72 / 24,569.54 group, total 44,045.23)",
+     "issue": "The department name doesn't match the printed heading. The extractor's reasoning holds: 44,045.23 equals 2560 Public Information Services on Exhibit G p11, and that program has no other block in Exhibit N. The report itself has the wrong heading. This also applies to detail[100] and detail[101]."},
+    {"severity": "warning", "path": "detail[98].detail_category", "page": 21,
+     "extracted": "professional/contract services", "on_page": "Printing & Publishing: Other Purchased Services 13,915.55",
+     "issue": "This sits under the Printing & Publishing program, so 'printing, publishing and postage' fits better."},
+    {"severity": "warning", "path": "detail[109].detail_category", "page": 22,
+     "extracted": "professional/contract services", "on_page": "Operation of Buildings: Other Purchased Services 120,421.00",
+     "issue": "In the school chart of accounts, Other Purchased Services (500s) is mostly property insurance, communications and travel, not professional services. For this large plant-operation line, insurance is the more likely category. All 'Other Purchased Services' lines are mapped to professional/contract services, which is a judgment call."}
   ]
 }
