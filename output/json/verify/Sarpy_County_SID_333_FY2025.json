@@ -1,0 +1,18 @@
+{
+  "stem": "Sarpy_County_SID_333_FY2025",
+  "values_checked": 123,
+  "issues": [
+    {"severity": "error", "path": "balance_sheet.liabilities[1].category", "page": 1,
+     "extracted": "debt - due within one year", "on_page": "Warrants Payable 12,592,748 (not split by due date)",
+     "issue": "Extractor rules say debt that is not split by due date goes under 'debt - due in more than one year' (with a note). The note is there, but the category is the wrong one. This is material, since $12.6M is shown as current debt."},
+    {"severity": "warning", "path": "disbursements[11].category", "page": 2,
+     "extracted": "utilities", "on_page": "Utilities 862,662 (General 13,946; Debt Service Fund 848,716)",
+     "issue": "A large Debt Service Fund 'Utilities' outlay in an SID is probably utility infrastructure or connection payments (closer to capital outlay), and the General Fund part is probably street lighting. The page doesn't say, so 'utilities' is defensible but questionable."},
+    {"severity": "warning", "path": "ending_investments", "page": 1,
+     "extracted": null, "on_page": "Investments 1,185,000",
+     "issue": "The balance sheet prints investments as a separate line, but ending_investments is left null. Only the notes mention the figure."},
+    {"severity": "warning", "path": "detail[7].category", "page": 4,
+     "extracted": "general government / professional/contract services", "on_page": "Fiscal Agent Fees (General Fund, actual 0, budget 10,500)",
+     "issue": "The same label in the Debt Service Fund (detail[27]) is categorized as debt service interest / debt interest and fees. The two should match. The actual amount is 0."}
+  ]
+}

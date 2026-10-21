@@ -1,0 +1,15 @@
+{
+  "stem": "Sarpy_County_SID_332_FY2025",
+  "values_checked": 107,
+  "issues": [
+    {"severity": "warning", "path": "report_discrepancies", "page": 1,
+     "extracted": 520127, "on_page": "Balance sheet fund balances 453,985 + 66,141 = 520,126; p2 Construction ending 453,986, Total 520,127; p4 change in fund balance 152,091 vs p2 152,092",
+     "issue": "The printed balance sheet and operating statement differ by $1 (a rounding difference in the report itself). The JSON follows p2, which is internally consistent. The difference is mentioned only in notes, not in report_discrepancies."},
+    {"severity": "warning", "path": "detail[32].section", "page": 4,
+     "extracted": "expenditure / debt service principal", "on_page": "Warrants paid, net 1,117,643 (Construction Fund disbursements)",
+     "issue": "This is a net warrant financing flow, and the p2 statement treats it as other financing ('Warrants issued (paid), net'). The General Fund's 'Warrants issued, net' was recorded as other financing, so the two are treated differently. Recording it as principal spending is defensible, but it inflates detail spending compared with the statement."},
+    {"severity": "warning", "path": "detail[6].category", "page": 3,
+     "extracted": "utilities", "on_page": "Electric services 11,634",
+     "issue": "For an SID this is most likely street lighting, which the rules put under streets/highways."}
+  ]
+}

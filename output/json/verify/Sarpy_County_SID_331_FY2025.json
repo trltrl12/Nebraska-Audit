@@ -1,0 +1,21 @@
+{
+  "stem": "Sarpy_County_SID_331_FY2025",
+  "values_checked": 117,
+  "issues": [
+    {"severity": "error", "path": "balance_sheet.liabilities[1].category", "page": 1,
+     "extracted": "debt - due within one year", "on_page": "Warrants Payable 324,070 (not split by due date)",
+     "issue": "Extractor rules say debt that is not split by due date goes under 'debt - due in more than one year' (with a note). The note is there, but the category is the wrong one."},
+    {"severity": "warning", "path": "receipts[5].category", "page": 2,
+     "extracted": "other", "on_page": "Collection In District 1,929 (Debt Service Fund; budgetary basis 46,729 on p5)",
+     "issue": "The page doesn't say what this line is. In an SID's Debt Service Fund it may be special assessments collected directly by the district. It is already marked review, and 'other' is defensible."},
+    {"severity": "warning", "path": "disbursements[9].category", "page": 2,
+     "extracted": "utilities", "on_page": "Utilities 26,780 (General Fund)",
+     "issue": "For an SID, a General Fund 'Utilities' line is most likely street lighting or power, which the rules put under streets/highways. 'utilities' is defensible."},
+    {"severity": "warning", "path": "ending_investments", "page": 1,
+     "extracted": null, "on_page": "Investments 1,205,000",
+     "issue": "The balance sheet prints investments as a separate line, but ending_investments is left null. Only the notes mention the figure."},
+    {"severity": "warning", "path": "detail[16].original_label", "page": 5,
+     "extracted": "State Motor Vehicle Tax Allocation", "on_page": "State Motor Vechicle Tax Allocation",
+     "issue": "The page prints a typo, and the label was silently corrected. This is cosmetic only."}
+  ]
+}
