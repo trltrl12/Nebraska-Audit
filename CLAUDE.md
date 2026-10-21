@@ -165,6 +165,7 @@ These were diagnosed and fixed in find_pages v6; re-extract and re-verify them a
   Tekamah_Herman_Community_School_FY2025 (report p27, probably the Activity Fund schedule, not trimmed).
   Upper_Loup_NRD_FY2025 (report p9, end of cash flow statement with cash balances, not trimmed; cash derived from net position).
   Two_Rivers_Public_Health_Department_FY2025 (report p10, Statement of Net Position, and pp34-36 not trimmed; fund balance sheet used).
+  Wahoo_FY2025 (no General Fund budget schedule trimmed; source PDF p19 and pp23-27 not kept).
   Gering_Ft_Laramie_Irrigation_District_FY2025 (nonoperating/capital-grant statement page not trimmed; 9,257,241
   derived as an adjustment meanwhile).
 - Budget forms whose Total All Funds page wasn't found (manifest flag no_budget_actuals_found; skipped, no
