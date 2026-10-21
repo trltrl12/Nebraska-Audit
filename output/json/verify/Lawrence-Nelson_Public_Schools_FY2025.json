@@ -1,62 +1,62 @@
 {
   "stem": "Lawrence-Nelson_Public_Schools_FY2025",
-  "values_checked": 285,
+  "values_checked": 287,
   "issues": [
     {
-      "severity": "warning",
-      "path": "receipts[8].category",
-      "page": 5,
-      "extracted": "other ('Other local receipts' 520,821.76)",
-      "on_page": "General Fund part 58,268.81 = 1370 Tuition 20,800 + 1911 Licenses 1,520 + 1920 Donations 750 + 1925 Categorical grants 25,000 + 1955 Postsecondary 125 + 1980 Refunds 7,620.59 + 1990 Misc 2,453.22 (Exh. G p8). Other Governmental part 462,552.95 includes School Nutrition sales 102,635.65 (p13), Cooperative 'Received from other districts' 117,912.69 (p16), Student Fee 'Extracurricular activity fees' 14,828.24 (p17), QCPU misc 162.04 (p15); the remaining ~227,014 is presumably student activity receipts (Exhibit J, not in the trimmed PDF)",
-      "issue": "[fixed: recategorized with review note] The schedules show what this line is, so 'other' doesn't apply. Under the rules a mixed line gets its dominant category plus review. The dominant identifiable part is charges for services/fees (lunch sales, fees, tuition and probably activity receipts), with local-government payments (cooperative) second."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[14].category",
-      "page": 2,
-      "extracted": "other ('Cash balance from dissolved district' 4,968,148.15)",
-      "on_page": "Shown as a 'Special Item' on the Statement of Activities (p2); included in Total Receipts on p4/p5",
-      "issue": "This is the opening balance from a merger (special item), not revenue, and it is 44% of governmental receipts. Keeping it inside receipts matches the printed total; treating it as an adjustment is the alternative. Already marked review."
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[13].category",
-      "page": 4,
-      "extracted": "support services ('Other student support' 513,679.23)",
-      "on_page": "Other Governmental Funds only: School Nutrition disbursements 255,826.49 (p13) + Student Fee 14,828.24 (p17) + ~243,024.50 that is presumably student activities (Exhibit J not in the trimmed PDF)",
-      "issue": "The largest identifiable part is food service (about 50%), then student activities; 'support services' fits least. Already marked review."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[85].split_from",
-      "page": 9,
-      "extracted": "General Fund Special education 0-5 lines (1291, 1292, 2142, 2152, 2153 etc., pp9-10)",
-      "on_page": "Special education 0-5 30,992.41 (p4/p6) = 2142 1,303.25 + 2152 15,652.69 + 2153 6,668.06 + 2162 1,371.08 + 2163 164.53 + 2172 598.00 + 2173 5,114.80 + 2182 120.00; 1291 182,466.31 and 1292 11,697.56 fall under 'Special education' (796,292.40 = 1200 + 1291 + 1292)",
-      "issue": "The contra amount (-11,044.91), the paired other financing line (detail[86]) and the treatment are right, but split_from names 1291/1292, which belong to the Special education instruction row, not the Special education 0-5 group."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[12].category",
+      "severity": "error",
+      "path": "detail[8].category",
       "page": 8,
-      "extracted": "intergovernmental/state aid / county/other local governments ('2110 County fines and license fees' 12,600.78)",
-      "on_page": "2110 County fines and license fees (County Sources)",
-      "issue": "This is fine and license money passed through by the county; 'fines and forfeitures' fits the label (Lincoln's identical code 2110 was categorized as fines). Judgment call."
+      "extracted": "intergovernmental/state aid / other state aid",
+      "on_page": "1925 Categorical grants 25,000.00 (Local Sources, p8); matching spending program is 'Categorical Grants from Corporations' (Exhibit P p24)",
+      "issue": "[fixed 2026-10-21: donations/contributions] The page itself says these grants come from corporations, a private source listed under Local Sources, so the category should be donations/contributions (detail donations/contributions). The review note's 'state grant' reasoning is contradicted by p24."
     },
     {
       "severity": "warning",
-      "path": "detail",
+      "path": "detail[33].category",
+      "page": 9,
+      "extracted": "revenue / other / miscellaneous revenue (5610 Cash balance from dissolved district 2,732,835.10; also the same line in Depreciation p11 305,633.89, Employee Benefit p12 1,519.81, School Nutrition p13 51,145.37, Special Building p14 1,435,610.90, QCPU p15 279,725.64)",
+      "on_page": "Non-Revenue Sources: 5610 Cash balance from dissolved district",
+      "issue": "At the statement level these 4,968,148.15 are an adjustment (Special Item, p2), but in detail they are revenue in 'other'. That puts about 4.8M into detail 'other' revenue. The same label gets two different treatments. It would be more consistent as section 'other financing' with 'includes' on the detail_totals."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[*].detail_category (Exhibit P 'Other Expenses' lines, pp18-24)",
       "page": 18,
-      "extracted": "Exhibit G used for General Fund spending (detail_category 'not itemized'); Exhibit P not recorded",
-      "on_page": "Exhibit P 'Cash Disbursements for Operational Expenses - General Fund' (pp18-19) gives the object breakdown (salaries, benefits, purchased services, supplies\u2026) for Regular instruction through Speech pathology SPED ages 0-2, then the trimmed PDF ends",
-      "issue": "The more detailed object schedule is only partly in the trimmed PDF, so using Exhibit G avoids a partial double count and is defensible. Either way, the Exhibit P lines on pp18-19 are not in the JSON."
+      "extracted": "miscellaneous expenditure (no review flag)",
+      "on_page": "Other Expenses",
+      "issue": "The rules say miscellaneous expenditure is a last resort and must carry 'review'. None of the roughly 20 Exhibit P 'Other Expenses' lines has one."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[14].amount",
+      "page": 5,
+      "extracted": 257852.74,
+      "on_page": "Other student support 513,679.23 (one printed line)",
+      "issue": "This residual split is not printed anywhere. Only the School Nutrition part (255,826.49, Exh K p13) and the Student Fee part (14,828.24, p17) are printed. The Activity Fund part (243,024.50) is derived because its schedule isn't trimmed. It is marked computed/review, but it goes beyond 'the report prints the breakdown of that line'."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[8].amount",
+      "page": 5,
+      "extracted": 402909.07,
+      "on_page": "Other local receipts 520,821.76",
+      "issue": "This is a residual after splitting out the Cooperative Fund's 117,912.69. It also holds about 227,014 of derived Activity Fund receipts plus General Fund categorical grants, donations and refunds. Note that the Statement of Activities (p2) shows the 117,912.69 as Special education charges for services, not as intergovernmental money. Category is a judgment call."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[10].category",
+      "page": 5,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "County receipts 16,979.99 = 2110 County fines and license fees 12,600.78 + 2210 Educational service unit receipts 4,379.21 (Exh G p8)",
+      "issue": "Fines (code 2110, fines and forfeitures under the rules) make up 74% of this line. It could take fines and forfeitures, or be split using the p8 breakdown."
     },
     {
       "severity": "warning",
       "path": "detail",
-      "page": 4,
-      "extracted": "Other Governmental Funds schedules recorded: School Nutrition, QCPU, Cooperative, Student Fee (receipts 804,594.88)",
-      "on_page": "Other Governmental Funds Total Receipts 1,229,286.65 (p4); Student activities fund balance 181,667.27 (p3)",
-      "issue": "The student activities schedule (about 424,691.77 of receipts) isn't in the trimmed PDF, so the detail can't cover all Other Governmental Funds lines. A re-trim is recommended (page-finder issue, not an extraction error)."
+      "page": 24,
+      "extracted": "no Activity Fund lines; transfers out in detail -402,044.91 vs transfers in 366,044.91",
+      "on_page": "Exhibit P Transfers: Activity Fund 36,000.00 (p24); Activity Fund receipts about 424,691.77 (incl. 36,000 transfer, 161,677.44 dissolved-district cash) and disbursements about 243,024.50 implied by p4",
+      "issue": "The Activity Fund schedule is not in the trimmed PDF (known trim gap). The 36,000 transfer has no receiving line, and the per-account activity receipts and spending are missing from detail. Check the source PDF."
     }
   ]
 }
