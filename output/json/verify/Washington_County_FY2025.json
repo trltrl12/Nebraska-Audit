@@ -1,0 +1,27 @@
+{
+  "stem": "Washington_County_FY2025",
+  "values_checked": 330,
+  "issues": [
+    {"severity": "warning", "path": "receipts[6].category", "page": 4,
+     "extracted": "charges for services/fees", "on_page": "Miscellaneous 2,814,097",
+     "issue": "The Statement of Activities (p2) lists Miscellaneous 2,814,097 under General Receipts, not under program Fees, Fines and Charges for Services (1,569,409 = Licenses 167,774 + Charges 189,645 + Offices 1,211,990). About 75% of the line is Self-Funded Insurance Fund receipts (2,109,308, p20), which are internal insurance premium contributions and not clearly charges for services. The remaining ~705,000 (General Fund 526,024, Road 82,868, ARPA 41,775, Visitors 54,144, etc.) is unexplained. The category is defensible but questionable; the same applies to detail[115] (Self-Funded Insurance 'Miscellaneous')."},
+    {"severity": "warning", "path": "receipts[0].category", "page": 4,
+     "extracted": "taxes (unlabeled)", "on_page": "Taxes 15,171,538; Inheritance Fund column 796,948",
+     "issue": "On p4, the Inheritance Fund column shows that 796,948 of the combined Taxes line is inheritance tax, and detail[51] records it as inheritance tax. The line could have been partly split (inheritance tax 796,948 vs. the unlabeled remainder) with split_from. Keeping it unlabeled is defensible because the column is inferred from the fund name."},
+    {"severity": "warning", "path": "detail[30].category", "page": 5,
+     "extracted": "streets/highways", "on_page": "Noxious Weeds 49,862 (under Public Works)",
+     "issue": "The category rules map noxious weed control to natural resources/conservation. The extractor used streets/highways so it ties to the p4 Public Works function, and marked the line for review. This is a judgment call."},
+    {"severity": "warning", "path": "detail[57].detail_category", "page": 7,
+     "extracted": "homestead/tax credits", "on_page": "County Treasurer - Homestead Commission (74)",
+     "issue": "These negative treasurer-commission lines (also detail[65] -390 on p8 and detail[103] -105 on p17) are coded as intergovernmental homestead aid. The governmental funds statement (p4) puts the -74 on its Charges for Services row and the -390 and -105 on its Miscellaneous row. They are commissions withheld rather than state aid, so the category is questionable. The amounts are small."},
+    {"severity": "warning", "path": "detail[79].category", "page": 14,
+     "extracted": "other", "on_page": "County Visitors' Program Fund - Miscellaneous 54,144",
+     "issue": "A county visitors' promotion fund is normally funded by lodging tax, but the page labels the line only 'Miscellaneous' and gives no breakdown. 'other' with review is acceptable; flagging it as possibly lodging tax."},
+    {"severity": "warning", "path": "detail[38].original_label", "page": 6,
+     "extracted": "Miscellaneous", "on_page": "Miscellaneaous",
+     "issue": "The Road Fund budget schedule prints the label misspelled as 'Miscellaneaous'; the JSON uses the corrected spelling. The amount 82,868 is correct."},
+    {"severity": "warning", "path": "report_discrepancies", "page": 4,
+     "extracted": null, "on_page": "Taxes row fund columns add to 15,171,537 (Total 15,171,538); Intergovernmental 5,651,637 (5,651,636); Miscellaneous 2,814,098 (2,814,097); Total Receipts 26,592,476 (26,592,475); ending balances 12,731,237 (12,731,236)",
+     "issue": "On p4, the Total Governmental Funds column differs by $1 from the sum of the fund columns on several rows (rounding in the report itself). The extracted Total column figures are as printed, but these $1 cross-foot differences are not in report_discrepancies. Only the p4-vs-p3 ending-balance differences are mentioned, and only in notes."}
+  ]
+}
