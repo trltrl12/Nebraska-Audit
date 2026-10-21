@@ -1,0 +1,21 @@
+{
+  "stem": "Superior_FY2025",
+  "values_checked": 362,
+  "issues": [
+    {"severity": "warning", "path": "missing", "page": 3,
+     "extracted": null, "on_page": "TIF proceeds 248,373 (Statement of Activities, governmental general revenues); also Property 355,877 vs 353,877 in fund schedules, Investment income 43,181 vs 39,080, Miscellaneous 6,848 vs 6,426, Economic development expenses 408,221 vs 393,102",
+     "issue": "The trimmed PDF has no governmental funds revenue/expenditure statement (report pp17-18) and no Community Development Agency Fund schedule, so about 255k of governmental receipts (mostly TIF proceeds) and about 15k of economic development spending are not in receipts/disbursements. decision_needed[0] raises the missing CDA fund but doesn't give the size of the gap. Re-trim and re-extract."},
+    {"severity": "warning", "path": "receipts[*].original_label", "page": 19,
+     "extracted": "e.g. 'Property (General Fund)', 'Grants (Grant Fund)', 'Lottery (Nonmajor funds)'", "on_page": "Property / Grants / Lottery",
+     "issue": "The extractor added fund names in parentheses to the printed labels on every governmental receipt and disbursement line. This is needed because the lines were assembled from fund schedules, but the labels are not exactly as printed."},
+    {"severity": "warning", "path": "receipts[21].category", "page": 14,
+     "extracted": "other", "on_page": "Loan repayment 14,308 (Sales Tax Fund); also receipts[24] Loan repayment 73,853 (Economic Development Fund)",
+     "issue": "These are collections of loan principal receivable. The schedule counts them as resources, but they arguably aren't revenue (better as other_financing). They are marked review; judgment call."},
+    {"severity": "warning", "path": "ending_cash", "page": 4,
+     "extracted": 229604, "on_page": "Cash and cash equivalents 229,604; County treasurer cash 19,997; Restricted cash 1,158,364; Restricted certificates of deposit 942,015 (Total Governmental Funds)",
+     "issue": "ending_cash uses only the unrestricted cash line, leaving out county treasurer cash and restricted cash/CDs (total assets 2,349,980, essentially all cash). Defensible, but it understates governmental cash."},
+    {"severity": "warning", "path": "receipts[12].category", "page": 19,
+     "extracted": "sale of assets", "on_page": "Sales/insurance proceeds 29,427 (27,848 of it in Ambulance)",
+     "issue": "The line mixes sale proceeds and insurance proceeds (insurance proceeds would be reimbursements/refunds). The Statement of Activities shows only 5,058 gain on disposal. Already marked review."}
+  ]
+}
