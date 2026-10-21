@@ -1,0 +1,30 @@
+{
+  "stem": "Sarpy_County_SID_336_FY2025",
+  "values_checked": 102,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "disbursements[3].category",
+      "page": 2,
+      "extracted": "health/welfare",
+      "on_page": "Garbage Collection 26,400",
+      "issue": "[fixed] The disbursement category rules list refuse under 'utilities' (water, sewer, electric, gas, refuse), so garbage collection should be 'utilities', not health/welfare."
+    },
+    {
+      "severity": "error",
+      "path": "detail[6].category",
+      "page": 4,
+      "extracted": "health/welfare",
+      "on_page": "Garbage Collection 15,840 (Actual on Budgetary Basis)",
+      "issue": "[fixed] Same as disbursements[3]: refuse/garbage collection is 'utilities' under the category rules."
+    },
+    {
+      "severity": "warning",
+      "path": "detail",
+      "page": 4,
+      "extracted": "Actual on Budgetary Basis column",
+      "on_page": "Schedules 1-2 print both 'Actual on GAAP Basis' and 'Actual on Budgetary Basis' columns",
+      "issue": "Extractor chose the budgetary-basis actuals (the column compared with budget). This is defensible, but the GAAP-basis column is the one that ties to the p2 statement (e.g. Garbage Collection 26,400 GAAP vs 15,840 budgetary). Assumption; noted in notes."
+    }
+  ]
+}

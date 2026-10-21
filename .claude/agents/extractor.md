@@ -403,7 +403,8 @@ When a function line mixes categories, pick the dominant one and mention it in `
   improvement districts) are mostly special assessments (→ `special assessments`, detail
   `special assessments`), warrant/bond proceeds (→ `debt_proceeds`) and debt service. For SIDs:
   bond maintenance, bond issue costs and paying/fiscal agent fees → `debt service interest` (detail
-  `debt interest and fees`); interest on special assessments → `special assessments`.
+  `debt interest and fees`); interest on special assessments → `special assessments`. Garbage/trash/refuse
+  collection → `utilities`.
 - **NRDs:** property tax and state/federal grants; function `natural resources/conservation`.
 
 ## Output to the caller
