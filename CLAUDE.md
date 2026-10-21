@@ -139,7 +139,6 @@ These were diagnosed and fixed in find_pages v6; re-extract and re-verify them a
   Grand_Island_FY2025 (nonmajor combining schedule's Total column page not trimmed; nonmajor detail left out).
   Merrick_County_FY2025 (trim jumps report p7 to p21: governmental funds receipts/disbursements statement missing;
   Statement of Activities used, ties).
-  Milford_Public_Schools_FY2025 (trim stops partway through Exhibit N; programs 2151+ from the budget schedule).
   Norris_Public_Power_District_FY2025 (Statements of Net Position liabilities/net position page not trimmed; equity from p2).
   Niobrara_Public_Schools_FY2025 (report p27 not trimmed; totals tie without it).
   Omaha_Public_Schools_FY2025 (report pp81-89 and p94, possibly more fund budget schedules, not trimmed).
