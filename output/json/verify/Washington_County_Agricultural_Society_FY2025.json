@@ -2,20 +2,45 @@
   "stem": "Washington_County_Agricultural_Society_FY2025",
   "values_checked": 104,
   "issues": [
-    {"severity": "error", "path": "receipts[5].category", "page": 2,
-     "extracted": "other", "on_page": "Miscellaneous 16,594 (p4) = General Government charges for services 15,946 + Miscellaneous 648 on the Statement of Activities (p2)",
-     "issue": "The Statement of Activities counts 15,946 of the 16,594 (96%) as charges for services (total charges 586,456 = 570,510 + 15,946). Per the rules, a broad line whose explained majority fits a category takes that category: should be 'charges for services/fees' (with review), not 'other'."},
-    {"severity": "error", "path": "detail[4].category", "page": 2,
-     "extracted": "other / miscellaneous revenue", "on_page": "Miscellaneous 16,594 (p5); 15,946 shown as General Government charges for services (p2)",
-     "issue": "Same line as receipts[5]: should be 'charges for services/fees' / 'other charges for services' (review), not other / miscellaneous revenue. Use the same category in receipts and detail."},
-    {"severity": "warning", "path": "detail[1].split_from", "page": 5,
-     "extracted": "Charges for services 570,510 split into Rental 149,510 / Fair and event 247,550 / Advertising 173,450", "on_page": "Budget schedule prints one line 'Charges for services 570,510' (budget 500,000)",
-     "issue": "The split uses the p4 receipts statement lines, which add exactly to 570,510 for the same single fund. That's defensible, but the budget schedule itself doesn't print the breakdown (the rules allow a split only where the report breaks down that line), and the 500,000 budget is dropped (budget_final null). Items cite p5, but the amounts are printed on p4."},
-    {"severity": "warning", "path": "detail_totals", "page": 6,
-     "extracted": "only Budgetary Comparison Schedule totals 784,950 / 672,284 (p5)", "on_page": "General and Administrative schedule Total 287,713 (p6); Fair Events schedule Total 384,571 (p7)",
-     "issue": "Expenditure detail items carry schedule names 'General Fund Disbursements - General and Administrative' / '- Fair Events', but there is no detail_totals entry under those names. Their printed totals (287,713 and 384,571) aren't recorded, so a schedule-name tie-out may not match. The items do sum to 672,284 overall."},
-    {"severity": "warning", "path": "detail[14].detail_category", "page": 6,
-     "extracted": "professional/contract services", "on_page": "Commissions 6,853",
-     "issue": "Object unclear: could be sales commissions (e.g. on advertising). The category is a judgment call."}
+    {
+      "severity": "error",
+      "path": "receipts[5].category",
+      "page": 2,
+      "extracted": "other",
+      "on_page": "Miscellaneous 16,594 (p4) = General Government charges for services 15,946 + Miscellaneous 648 on the Statement of Activities (p2)",
+      "issue": "[fixed] The Statement of Activities counts 15,946 of the 16,594 (96%) as charges for services (total charges 586,456 = 570,510 + 15,946). Per the rules, a broad line whose explained majority fits a category takes that category: should be 'charges for services/fees' (with review), not 'other'."
+    },
+    {
+      "severity": "error",
+      "path": "detail[4].category",
+      "page": 2,
+      "extracted": "other / miscellaneous revenue",
+      "on_page": "Miscellaneous 16,594 (p5); 15,946 shown as General Government charges for services (p2)",
+      "issue": "[fixed] Same line as receipts[5]: should be 'charges for services/fees' / 'other charges for services' (review), not other / miscellaneous revenue. Use the same category in receipts and detail."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[1].split_from",
+      "page": 5,
+      "extracted": "Charges for services 570,510 split into Rental 149,510 / Fair and event 247,550 / Advertising 173,450",
+      "on_page": "Budget schedule prints one line 'Charges for services 570,510' (budget 500,000)",
+      "issue": "The split uses the p4 receipts statement lines, which add exactly to 570,510 for the same single fund. That's defensible, but the budget schedule itself doesn't print the breakdown (the rules allow a split only where the report breaks down that line), and the 500,000 budget is dropped (budget_final null). Items cite p5, but the amounts are printed on p4."
+    },
+    {
+      "severity": "warning",
+      "path": "detail_totals",
+      "page": 6,
+      "extracted": "only Budgetary Comparison Schedule totals 784,950 / 672,284 (p5)",
+      "on_page": "General and Administrative schedule Total 287,713 (p6); Fair Events schedule Total 384,571 (p7)",
+      "issue": "Expenditure detail items carry schedule names 'General Fund Disbursements - General and Administrative' / '- Fair Events', but there is no detail_totals entry under those names. Their printed totals (287,713 and 384,571) aren't recorded, so a schedule-name tie-out may not match. The items do sum to 672,284 overall."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[14].detail_category",
+      "page": 6,
+      "extracted": "professional/contract services",
+      "on_page": "Commissions 6,853",
+      "issue": "Object unclear: could be sales commissions (e.g. on advertising). The category is a judgment call."
+    }
   ]
 }
