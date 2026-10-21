@@ -1,9 +1,14 @@
 {
   "stem": "ONeill_Rural_Fire_District_3_B2526",
-  "values_checked": 14,
+  "values_checked": 17,
   "issues": [
-    {"severity": "warning", "path": "transfers_out.amount", "page": 1,
-     "extracted": 60000.00, "on_page": "?0,000.00 (leading digit hidden by the diagonal line)",
-     "issue": "The diagonal line across the page hides the first digit of line 28, column 2. 60,000 matches line 16 (transfer in 60,000.00, clearly printed) and makes line 29 (374,691.13) and line 30 (578,497.86) add up. The JSON doesn't say this value was partly unreadable."}
+    {
+      "severity": "warning",
+      "path": "receipts[5].category",
+      "page": 1,
+      "extracted": "other",
+      "on_page": "Local Receipts: Other 90,024.45",
+      "issue": "Unexplained line is about 34% of non-transfer receipts (264,927.29) and is in 'other'. Nothing on the form says what it is (for a rural fire district it could be rural fire/ambulance contract fees or donations). Already marked review; it is not 'most of the year's receipts', so it was not added to decision_needed."
+    }
   ]
 }

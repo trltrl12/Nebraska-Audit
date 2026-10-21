@@ -139,7 +139,7 @@ These were diagnosed and fixed in find_pages v6; re-extract and re-verify them a
   Omaha_Public_Schools_FY2025 (report pp81-89 and p94, possibly more fund budget schedules, not trimmed).
   Ogallala_FY2025 (report pp17, 19, 62 not trimmed; probably nonmajor balance sheet/reconciliations).
   Ord_FY2025 (report p61, left half of the Schedule of Expenditures by fund, not trimmed; only the right half is p22).
-  ONeill_FY2025 (manifest detail_truncated(23): report pp44, 53, 57, 61-66, 69-72, 75+ not trimmed; other governmental combining, utility schedules).
+  ONeill_FY2025 (report pp53, 57, 62 now trimmed: Other Governmental combining, CDBG and Debt Service schedules added; still not trimmed: report pp44, 61, 63-66, 69-72, 75+, probably the utility schedules).
   Plattsmouth_Airport_Authority_FY2025 (report p8, governmental funds revenues/expenditures statement, not trimmed; budget-basis schedule used).
   Polk_FY2025 (odd report pages 27-35 of the combining schedules not trimmed: Bandstand/Playground/Total/budget columns; actuals from Exhibits III-IV).
   Sargent_Public_Schools_FY2025 (report p50, rest of the per-account Activities Fund schedule, not trimmed; one-line budget schedule used).
@@ -171,8 +171,7 @@ These were diagnosed and fixed in find_pages v6; re-extract and re-verify them a
   end of cash flow statement), Hooker_County_FY2025 (second half of nonmajor combining), Logan_County_FY2025 (source pp26-27 nonmajor combining), Niobrara_FY2025 (report p15
   proprietary statement), Norfolk_FY2025 (beginning governmental cash still null: no prior-year balance sheet),
   Northeast_Nebraska_Economic_Development_District_FY2025 (cash flow statement report pp7-8),
-  Ord_FY2025 (also report p15 government-wide assets/liabilities),
-  Otoe_County_FY2025 (governmental funds receipts/disbursements statement).
+  Ord_FY2025 (also report p15 government-wide assets/liabilities).
   Hastings_Public_Schools_FY2025 (report pp51-54, probably the per-account Activity Fund schedule, and pp15, 49 not trimmed).
 - Filed under FY2025 but the PDF holds an earlier year (extracted as printed; check the Auditor's site for
   the FY2025 filing): Bristow_FY2025 (period 10/1/23-9/30/24), Naper_FY2025 (period 10/1/23-9/30/24; not yet checked
