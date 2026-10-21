@@ -1,18 +1,18 @@
 {
   "stem": "Sarpy_County_SID_38_FY2025",
-  "values_checked": 88,
+  "values_checked": 105,
   "issues": [
-    {"severity": "warning", "path": "balance_sheet", "page": 1,
-     "extracted": null, "on_page": "trimmed p1 is report p5; report p4 (Balance Sheet/Statement of Net Position) is not in the trimmed PDF",
-     "issue": "Balance sheet left null because the trim leaves out the statement. This is a trimming gap, not an extraction error. ending_cash is null for the same reason."},
-    {"severity": "warning", "path": "proprietary.capital_and_related_financing", "page": 2,
-     "extracted": -58088, "on_page": "CASH FLOWS FROM CAPITAL AND FINANCING ACTIVITIES: Net Transfers from Other Funds (58,088)",
-     "issue": "The section is headed 'capital and financing' and holds only an interfund transfer. Transfers normally count as noncapital financing, so this classification is a judgment call."},
-    {"severity": "warning", "path": "receipts[2].category", "page": 1,
+    {"severity": "warning", "path": "receipts[2].category", "page": 2,
      "extracted": "intergovernmental/state aid", "on_page": "State Motor Vehicle Tax Allocation 184",
-     "issue": "Treated as pro-rate motor vehicle (state aid); the same goes for detail[2] and detail[15] ('State Motor Vehicle Taxes', motor vehicle pro-rate). Defensible, but the label could also mean the county motor vehicle tax distribution (motor vehicle tax)."},
-    {"severity": "warning", "path": "detail[3]", "page": 4,
-     "extracted": {"fund_type": "governmental", "amount": 90554}, "on_page": "Water Use Fees 90,554 (General Fund, budgetary basis; GAAP column '-')",
-     "issue": "Water utility revenue appears in the General Fund only on the budgetary basis, replacing the 58,088 transfer. It is entered as governmental detail while the same water revenue is business-type on p1, so governmental detail overstates governmental charges if aggregated."}
+     "issue": "Label could mean county-distributed motor vehicle tax (motor vehicle tax) rather than pro-rate state aid; same judgment applies to detail[2] and detail[16] (detail_category motor vehicle pro-rate, labelled 'State Motor Vehicle Taxes')"},
+    {"severity": "warning", "path": "disbursements[5].category", "page": 2,
+     "extracted": "general government", "on_page": "Maintenance 30,701",
+     "issue": "Function guessed (already marked review); SID maintenance could be streets/highways or utilities"},
+    {"severity": "warning", "path": "disbursements[7].category", "page": 2,
+     "extracted": "utilities", "on_page": "Utilities 22,636 (governmental funds)",
+     "issue": "Governmental-fund utility bills of an SID are often street lighting (streets/highways); utilities function is defensible but uncertain"},
+    {"severity": "warning", "path": "proprietary.capital_and_related_financing", "page": 3,
+     "extracted": -58088, "on_page": "CASH FLOWS FROM CAPITAL AND FINANCING ACTIVITIES: Net Transfers from Other Funds (58,088)",
+     "issue": "Amount correct; the heading is combined 'capital and financing', and transfers to other funds are normally noncapital financing, so the section choice is a judgment call"}
   ]
 }
