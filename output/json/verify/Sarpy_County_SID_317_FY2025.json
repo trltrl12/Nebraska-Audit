@@ -1,0 +1,21 @@
+{
+  "stem": "Sarpy_County_SID_317_FY2025",
+  "values_checked": 111,
+  "issues": [
+    {"severity": "warning", "path": "detail[27].original_label", "page": 5,
+     "extracted": "Bond Payable - Bonds (interest)", "on_page": "Bond Payable / Bonds 333,400",
+     "issue": "page prints 'Bonds' under Bond Payable; '(interest)' was added by the extractor. Treating it as interest is reasonable (GAAP column 332,610 equals the statement's Bond Payable Interest line) but the label is not as printed"},
+    {"severity": "warning", "path": "disbursements[9].category", "page": 2,
+     "extracted": "utilities", "on_page": "Utilities 8,153",
+     "issue": "SID 'Utilities' expense is most likely street-light power; streets/highways may fit better than the utilities (water/sewer/electric enterprise) function"},
+    {"severity": "warning", "path": "receipts[4].category", "page": 2,
+     "extracted": "intergovernmental/state aid", "on_page": "State Motor Vehicle Tax Allocation 1,706",
+     "issue": "treated as pro-rate motor vehicle (state aid); could be the county-distributed motor vehicle tax (motor vehicle tax). Same choice in detail[3] and detail[19]"},
+    {"severity": "warning", "path": "other_financing", "page": 2,
+     "extracted": -4702, "on_page": "Warrants Retired (4,702)",
+     "issue": "warrants retired recorded as negative other_financing alongside debt_proceeds 4,702; nets to zero and the identity holds, but it is debt repayment rather than a financing source"},
+    {"severity": "warning", "path": "detail", "page": 4,
+     "extracted": "Actual on Budgetary Basis column", "on_page": "Actual on GAAP Basis / Adjustments / Actual on Budgetary Basis",
+     "issue": "extractor used the budgetary-basis actual column (e.g. Special Assessments 190,528 and GF Warrants Issued/Retired 182,216 appear only there); defensible since it compares to budget, but detail will not tie to the GAAP statement lines"}
+  ]
+}
