@@ -145,7 +145,6 @@ These were diagnosed and fixed in find_pages v6; re-extract and re-verify them a
   Sargent_Public_Schools_FY2025 (report p50, rest of the per-account Activities Fund schedule, not trimmed; one-line budget schedule used).
   Springfield_FY2025 (Note M, explaining 33.2M sales tax and 3.5M permits, not trimmed).
   South_Platte_Public_Schools_FY2025 (report p31, Activity Fund schedule, not trimmed).
-  Superior_FY2025 (report pp17-18, governmental funds revenue/expenditure statement, and p66, Community Development Agency Fund, not trimmed: ~255k receipts incl. TIF proceeds 248,373 and ~15k spending missing; beginning_fund_balance null).
   Tekamah_Airport_Authority_FY2025 (trimmed to the Statement of Net Position only: revenue/expense statement not trimmed).
   Taylor_FY2025 (report pp14-22, governmental fund statements, not trimmed; governmental figures derived from the all-funds budget schedule, transfers unclear; left flagged for re-extraction).
   Tekamah_Herman_Community_School_FY2025 (report p27, probably the Activity Fund schedule, not trimmed).
