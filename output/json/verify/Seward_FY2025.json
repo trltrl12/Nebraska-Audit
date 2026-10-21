@@ -1,0 +1,24 @@
+{
+  "stem": "Seward_FY2025",
+  "values_checked": 172,
+  "issues": [
+    {"severity": "warning", "path": "ending_cash", "page": 4,
+     "extracted": 3992294, "on_page": "Cash and cash equivalents 3,992,294; Certificates of deposit 463,691; County treasurer cash 60,716; Restricted cash 2,261,425; Restricted CDs 15,000",
+     "issue": "ending_cash uses the single 'Cash and cash equivalents' line only. The rule says cash and cash equivalents/investments from the governmental funds Balance Sheet, so the CDs and county treasurer cash (and possibly the restricted cash) could arguably be included. The notes disclose this choice."},
+    {"severity": "warning", "path": "disbursements[19]", "page": 7,
+     "extracted": "Franchise fees 1,480,043 (business-type, utilities)", "on_page": "Franchise fees 1,480,043 (Electric 1,357,021 + Water 123,022); General Fund revenue 'Taxes: Franchise' 1,480,043 (p5)",
+     "issue": "The utilities' franchise-fee expense exactly equals the General Fund franchise tax revenue. It is an internal payment from the utilities to the General Fund, reported under GAAP as tax/expense rather than as a transfer. It is recorded correctly as printed, but a person may want to know it inflates both sides."},
+    {"severity": "warning", "path": "receipts[8].category", "page": 5,
+     "extracted": "other", "on_page": "Loan collections 139,540 (LB840 Fund, p14)",
+     "issue": "This is repayment of economic-development loan principal. It is not really revenue and fits no category well. 'other' with review is defensible."},
+    {"severity": "warning", "path": "receipts[10].category", "page": 5,
+     "extracted": "federal grants", "on_page": "Grants 596,974 (General 41,394, Street 190,429, Capital Projects 281,000, CDBG 84,151)",
+     "issue": "Only the CDBG 84,151 is clearly federal. The grantor of the rest is not stated, so it may be state aid. The extractor marked it for review. The same applies to detail Grants lines and the business-type receipts[18] 'Grant revenue' 5,579."},
+    {"severity": "warning", "path": "receipts[5].category", "page": 5,
+     "extracted": "property tax", "on_page": "Taxes: TIF proceeds 699,222",
+     "issue": "Treating the TIF increment as property tax is a judgment call. The extractor marked it for review."},
+    {"severity": "warning", "path": "detail[55].category", "page": 15,
+     "extracted": "streets/highways", "on_page": "Perpetual Care (Permanent Fund) Public works 146",
+     "issue": "The amount is cemetery perpetual-care spending printed under 'Public works'. Its nature is health/welfare (cemetery). It is immaterial."}
+  ]
+}
