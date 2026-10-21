@@ -1,0 +1,24 @@
+{
+  "stem": "Westside_Community_Schools_FY2025",
+  "values_checked": 211,
+  "issues": [
+    {"severity": "warning", "path": "other_financing", "page": 4,
+     "extracted": 1177923, "on_page": "Insurance proceeds 186,363; Sale of equipment 3,505; Back-dated tax settlements 988,055 (under Other Financing Sources)",
+     "issue": "The amounts and sum are correct and follow the statement's Other Financing Sources section. But back-dated tax settlements (code 6400) are really tax receipts, and the rules otherwise put insurance proceeds under reimbursements/refunds. Treating them as financing rather than receipts is a judgment call."},
+    {"severity": "warning", "path": "detail[0].category", "page": 7,
+     "extracted": "taxes (unlabeled)", "on_page": "County Treasurer - taxes 46,451,351 (codes 1100-1140)",
+     "issue": "detail[0], detail[43] and detail[49] keep 'County Treasurer - taxes' unsplit. p4 prints property / motor vehicle / public power district taxes for each fund column, but those lines also include the 'other state receipts' line (General 46,451,351 + 75,590 = 46,526,941; Bond 10,869,204 + 901,141 = 11,770,345; Special Building 2,981,058 + 1,399,152 = 4,380,210), so a clean split isn't printed. Keeping them unlabeled is defensible. Note that p4's tax lines therefore hold some state receipts (receipts[0..2])."},
+    {"severity": "warning", "path": "detail[60].category", "page": 11,
+     "extracted": "student activities", "on_page": "Employee Benefits Fund - Special Pay Deferral, function code 2900, 47,522",
+     "issue": "An employee special pay deferral isn't student-activity spending. p4 only lumps it into 'Activities supplies and materials'. support services (other support, code 2900) seems a better fit."},
+    {"severity": "warning", "path": "detail[62]", "page": 12,
+     "extracted": {"amount": 40194, "budget_final": null}, "on_page": "Salaries (codes 1300; 2190) 43,359, budget 90,000",
+     "issue": "The Salaries line is split 40,194 / 3,165 using the p4 Other Governmental Funds function column. That's a derived breakdown, not one printed for this line, and it is marked computed/split_from. The 90,000 budget is dropped from both parts (detail[62], detail[63]). Consider keeping one line of 43,359 with budget 90,000."},
+    {"severity": "warning", "path": "detail[70].detail_category", "page": 13,
+     "extracted": "supplies and materials", "on_page": "Food purchases 3,849,690",
+     "issue": "Food bought for resale could be 'purchased power/cost of sales'. Judgment call."},
+    {"severity": "warning", "path": "balance_sheet.assets[1].original_label", "page": 1,
+     "extracted": "Funds held by (County Treasurer per p3)", "on_page": "Funds held by",
+     "issue": "The label has extractor commentary added. The printed label is 'Funds held by'."}
+  ]
+}
