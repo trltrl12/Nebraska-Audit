@@ -1,0 +1,17 @@
+{
+  "stem": "South_Central_Public_Power_District_FY2025",
+  "values_checked": 44,
+  "issues": [
+    {"severity": "warning", "path": "balance_sheet.assets", "page": 1,
+     "extracted": "current asset lines 5,560,817 + 4,725,167 + 2,907,901 + 13,641 + 4,320,025 + 132,370 = 17,659,921; all asset items sum to 71,819,099",
+     "on_page": "Total current assets 17,659,920; TOTAL ASSETS 71,819,098",
+     "issue": "The printed report is off by $1 (rounding): its own current asset lines add to 17,659,921. Every line was rechecked against the page and transcribed correctly. This belongs in report_discrepancies (check 'balance', difference -1, p1), but the JSON doesn't record it."},
+    {"severity": "warning", "path": "proprietary", "page": 4,
+     "extracted": "operating 5,580,787 + capital and related -6,629,648 + investing -514,283 = -1,563,144; 7,123,962 - 1,563,144 = 5,560,818",
+     "on_page": "NET DECREASE IN CASH AND CASH EQUIVALENTS (1,563,145); end of year 5,560,817",
+     "issue": "The printed cash flow statement is off by $1 (rounding): its section nets add to -1,563,144, but it prints -1,563,145. The values are transcribed correctly. This isn't recorded in report_discrepancies."},
+    {"severity": "warning", "path": "balance_sheet.assets[2].category", "page": 1,
+     "extracted": "other assets", "on_page": "Investments in associated organizations 1,089,918 (noncurrent assets)",
+     "issue": "These are investments (e.g. cooperative capital credits), so 'cash and investments' is arguable. Judgment call."}
+  ]
+}

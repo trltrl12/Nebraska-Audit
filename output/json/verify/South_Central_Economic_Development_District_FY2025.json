@@ -1,0 +1,62 @@
+{
+  "stem": "South_Central_Economic_Development_District_FY2025",
+  "values_checked": 72,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "detail",
+      "page": 4,
+      "extracted": "29 lines from the Total column; 28 with category 'economic development' (1,882,502) and only Bank service charges (50) as 'general government'",
+      "on_page": "Statement of Functional Expenses prints function columns Program Services 1,811,570 and General and Administration 70,982; G&A column lines: Bank service charges 50, Dues and subscriptions 12,108, Employee benefits 1,292, Insurance 7,251, Occupancy 1,209, Other expense 38, Payroll 33,026, Payroll taxes 2,561, Professional services 13,447 (sum 70,982)",
+      "issue": "[fixed] Department-columns rule broken: the schedule was recorded from the Total column under one function, so the detail function split (1,882,502 / 50) doesn't match the statement's disbursements (1,811,570 economic development / 70,982 general government). Lines that are wholly G&A (Dues, Insurance, Professional services, Other expense 38) are tagged economic development, and the lines split between columns (Employee benefits, Occupancy, Payroll, Payroll taxes) need one item per column."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[0].category",
+      "page": 2,
+      "extracted": "donations/contributions",
+      "on_page": "Grants and contributions 865,715 (with donor restrictions 738,612)",
+      "issue": "An economic development district's grants are likely mostly government grants (federal/state). Could be federal grants or intergovernmental/state aid. The page doesn't show the split; the line is 46% of receipts. Line already has a review tag."
+    },
+    {
+      "severity": "warning",
+      "path": "balance_sheet.assets[7]",
+      "page": 1,
+      "extracted": "Net property and equipment 21,082",
+      "on_page": "Equipment 51,462; Less: accumulated depreciation (30,380); Net property and equipment 21,082",
+      "issue": "The net subtotal line was recorded instead of the two printed lines. The total is unaffected."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[0].detail_category",
+      "page": 4,
+      "extracted": "professional/contract services",
+      "on_page": "Advertising 6,364",
+      "issue": "Advertising could be 'printing, publishing and postage'. Judgment call."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[8].detail_category",
+      "page": 4,
+      "extracted": "dues, training and travel",
+      "on_page": "License and permits 41",
+      "issue": "Licenses/permits aren't dues, training or travel. Could be miscellaneous expenditure. Judgment call, small amount."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[9].detail_category",
+      "page": 4,
+      "extracted": "supplies and materials",
+      "on_page": "Meeting expense 3,234",
+      "issue": "Meeting expense could be 'dues, training and travel' or miscellaneous. Judgment call."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[17].detail_category",
+      "page": 4,
+      "extracted": "grants/payments to other entities",
+      "on_page": "NET property abatement and demo 332,630",
+      "issue": "Abatement/demolition work is likely 'construction/infrastructure' or 'professional/contract services' rather than payments to other entities. Already has a review tag."
+    }
+  ]
+}
