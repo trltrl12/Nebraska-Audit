@@ -1,18 +1,27 @@
 {
   "stem": "South_Sioux_City_FY2025",
-  "values_checked": 245,
+  "values_checked": 340,
   "issues": [
+    {"severity": "error", "path": "detail[94]", "page": 20,
+     "extracted": "Harvest Meadows Area TIF, section expenditure, category public safety, 1,816,062", "on_page": "Budget schedule p20 prints 'Public Safety 1,816,062'; GAAP combining page p12 shows Harvest Meadows Area TIF with no revenue or expenditures and 'Interfund Transfers Out (1,816,062)'",
+     "issue": "[fixed 2026-10-21: kept printed line and total, added contra -1,816,062 public safety line and -1,816,062 other financing line; total includes other financing] The report's own GAAP statement shows this 1,816,062 is a transfer out, not public safety spending. Nonmajor GAAP public safety is 3,116,099 (p13), which is close to the other funds' budget-basis public safety lines (909,265 + 1,881,473 + 87,144 + 215,264 = 3,093,146) and leaves no room for 1,816,062 more. The receiving funds' Transfers In are already in detail (e.g. Street Projects 2,286,728, detail[107]), so the same money is counted as both spending and a transfer. Under the hidden-transfer rule, this should be a negative 'other financing' line (-1,816,062, split_from the p20 line and the p12 elimination, review), with the public safety spending at 0 or a contra line. The detail_totals entry for 1,816,062 stays as printed."},
     {"severity": "warning", "path": "balance_sheet.total_assets.amount", "page": 1,
-     "extracted": 248635180, "on_page": "248,835,180 (third digit looks like 8 in the page image)",
-     "issue": "The printed Total Assets (Total column) reads as 248,835,180 at page resolution. The 21 asset lines add to 248,635,180, and the statement only balances at 248,635,180 (75,402,514 + 2,853,271 + 170,381,539 - 2,144). The extracted figure is very likely correct, but the printed digit is ambiguous. The extractor's notes say the same."},
-    {"severity": "warning", "path": "business_type.other_financing", "page": 7,
-     "extracted": -9179006, "on_page": "Contributed Capital Revenue 570,994; Extraordinary Item - Settlement Expense (9,750,000)",
-     "issue": "The 9,750,000 extraordinary settlement expense is folded into other_financing. The rules put special/extraordinary items in adjustments, and other_financing is for capital contributions and asset sales. Better: other_financing 570,994 plus an adjustment of -9,750,000. The roll-forward holds either way."},
-    {"severity": "warning", "path": "missing", "page": 15,
-     "extracted": null, "on_page": "Report pp91-92 (nonmajor special revenue budget schedules, including the revenue section of Harvest Meadows Area TIF / Marina Inn TIF) and report p77 (first page of the nonmajor combining statement; trimmed p10 is marked '(Continued)') are not in the trimmed PDF",
-     "issue": "Trim gap, not an extractor error. The nonmajor budget schedules in the trimmed PDF have revenue of 6,717,516, against 8,529,845 of nonmajor revenue on the GAAP statement (p5/p10). Nonmajor property tax is 2,640,385 against 3,387,571, and transfers in are 4,137,281 against 4,365,715 for all governmental funds. So one or more nonmajor funds' schedules are missing from detail. Add this report to the find_pages missing-pages follow-up and re-extract after a re-trim."},
+     "extracted": 248635180, "on_page": "248,835,180 (third digit reads as 8 at page resolution)",
+     "issue": "The 21 asset lines add to 248,635,180, and the statement balances only at that figure (75,402,514 + 2,853,271 + 170,381,539 - 2,144). The extracted value is almost certainly right, but the printed digit is ambiguous. The Governmental Activities column total (not used) also reads as 96,448,288, while its lines add to 96,449,288."},
+    {"severity": "warning", "path": "missing", "page": 11,
+     "extracted": null, "on_page": "Trimmed p11 (report p76) is headed 'Governmental Nonmajor Funds - (Continued)'; the first page of the nonmajor combining schedule (report p75) is not in the trimmed PDF",
+     "issue": "Trim gap, not an extractor error. The funds on report p75 appear to be the ones covered by budget schedules (Capital Improvement Sales Tax, Library, Fire, All America City TIF, County/LEC, Opioids, W 25th-39th TIF, Roth TIF, Debt Service), so detail is probably complete. The page can't be checked, though, and the notes don't mention it."},
+    {"severity": "warning", "path": "receipts[17]", "page": 7,
+     "extracted": 729796, "on_page": "Local Option Sales Tax 729,796 (proprietary nonoperating); Public Safety Sales Tax fund also shows Local Option Sales Taxes 729,796 (p12) inside governmental total 4,153,395 (p5)",
+     "issue": "[fixed 2026-10-21: confirmed on p7/p12, added decision_needed entry; amounts unchanged] The business-type sales tax equals the Public Safety Sales Tax fund's governmental sales tax to the dollar, and the Statement of Activities (p3) counts both (total 4,883,191). This may be two equal half-cent taxes, or the report may count the same tax twice. Recorded as printed. Worth a look."},
     {"severity": "warning", "path": "balance_sheet.liabilities[19].category", "page": 1,
      "extracted": "debt - due in more than one year", "on_page": "Due in more than one year: Compensated Absences 774,296",
-     "issue": "Compensated absences are not debt. The current portion (liabilities[13]) is coded accrued liabilities, but the noncurrent portion is coded as debt. Use other liabilities (or accrued liabilities) for both to be consistent."}
+     "issue": "Compensated absences are not debt. The current portion (liabilities[13]) is coded as accrued liabilities, but the noncurrent portion is coded as debt. Use accrued liabilities or other liabilities for both."},
+    {"severity": "warning", "path": "balance_sheet.assets[11].category", "page": 1,
+     "extracted": "other assets", "on_page": "Receivables - Due from Component Unit 1,084,333",
+     "issue": "The page prints this under the Receivables heading, so 'receivables' may fit better. This is a judgment call."},
+    {"severity": "warning", "path": "detail[7].budget_final", "page": 10,
+     "extracted": null, "on_page": "-",
+     "issue": "Where the budget column prints a dash (zero), budget_final is sometimes null (detail[7], [9], [10], [17], [18], [19], [28], [40], [47], [62], [65], [66], [69], [70], [94], [95], [107], [108]) and sometimes 0 (detail[80], [87], [88]). A printed dash is a zero budget, so 0 would be the consistent choice."}
   ]
 }
