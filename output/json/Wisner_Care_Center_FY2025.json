@@ -1,83 +1,478 @@
 {
-"entity_name": "Wisner Care Center",
-"entity_type": "hospital",
-"fiscal_year_end": "2025-06-30",
-"basis": "GAAP",
-"extraction_attempt": 1,
-"beginning_cash": null,
-"beginning_investments": null,
-"beginning_fund_balance": null,
-"receipts": [],
-"disbursements": [],
-"transfers_in": null,
-"transfers_out": null,
-"debt_proceeds": null,
-"other_financing": null,
-"adjustments": [],
-"reported_totals": {"governmental": null, "business-type": null},
-"business_type": {
- "measure": "net position",
- "beginning": {"amount": 1643317, "source_page": 1},
- "ending": {"amount": 790193, "source_page": 1},
- "transfers_net": null,
- "debt_proceeds": null,
- "other_financing": null,
- "adjustments": [
-  {"original_label":"Change in net position (revenue and expense statement not in trimmed PDF)","amount":-853124,"source_page":1,"computed":"net position 790,193 - 1,643,317 (p1)","review":"placeholder so the roll-forward ties; revenues and expenses are not available"}
- ]
-},
-"proprietary": {
- "operating": {"amount":755040,"source_page":2},
- "noncapital_financing": null,
- "capital_and_related_financing": {"amount":-167230,"source_page":2},
- "investing": {"amount":836,"source_page":2},
- "beginning_cash": {"amount":236468,"source_page":2},
- "ending_cash": {"amount":825114,"source_page":2}
-},
-"balance_sheet": {
- "statement": "Statements of Net Position",
- "scope": "government-wide",
- "column": "2025",
- "assets": [
-  {"category":"cash and investments","original_label":"Cash and cash equivalents","amount":825114,"source_page":1},
-  {"category":"restricted assets","original_label":"Resident cash","amount":3110,"source_page":1},
-  {"category":"receivables","original_label":"Accounts receivable","amount":158539,"source_page":1},
-  {"category":"inventories/prepaids","original_label":"Prepaid expenses","amount":27633,"source_page":1},
-  {"category":"capital assets","original_label":"Land","amount":5712,"source_page":1},
-  {"category":"capital assets","original_label":"Land improvements","amount":16858,"source_page":1},
-  {"category":"capital assets","original_label":"Buildings and improvements","amount":2256986,"source_page":1},
-  {"category":"capital assets","original_label":"Furniture and equipment","amount":1112465,"source_page":1},
-  {"category":"capital assets","original_label":"Less accumulated depreciation","amount":-2630667,"source_page":1}
- ],
- "deferred_outflows": [],
- "liabilities": [
-  {"category":"accounts payable","original_label":"Accounts payable","amount":121338,"source_page":1},
-  {"category":"accrued liabilities","original_label":"Accrued salaries","amount":112719,"source_page":1},
-  {"category":"accrued liabilities","original_label":"Accrued compensated absences","amount":143274,"source_page":1},
-  {"category":"accrued liabilities","original_label":"Accrued payroll taxes and employee withholding","amount":2808,"source_page":1},
-  {"category":"other liabilities","original_label":"Resident funds","amount":3110,"source_page":1},
-  {"category":"debt - due within one year","original_label":"Current portion of notes payable","amount":144318,"source_page":1},
-  {"category":"accrued liabilities","original_label":"Accrued interest payable","amount":1143,"source_page":1},
-  {"category":"debt - due in more than one year","original_label":"Notes payable, net of current maturities","amount":456847,"source_page":1}
- ],
- "deferred_inflows": [],
- "equity": [
-  {"original_label":"Net investment in capital assets","amount":761354,"source_page":1},
-  {"original_label":"Unrestricted","amount":28839,"source_page":1}
- ],
- "total_assets": {"amount":1775750,"source_page":1},
- "total_deferred_outflows": null,
- "total_liabilities": {"amount":985557,"source_page":1},
- "total_deferred_inflows": null,
- "total_equity": {"amount":790193,"source_page":1}
-},
-"ending_cash": null,
-"ending_investments": null,
-"ending_fund_balance": null,
-"decision_needed": [
- {"question":"The trimmed PDF has only the Statement of Net Position, the Statement of Cash Flows and a department pie chart (percentages only). The Statement of Revenues, Expenses and Changes in Net Position was not trimmed, so receipts and disbursements are empty. Should this report be re-trimmed and re-extracted?","amount":-853124,"recorded_as":"No receipts/disbursements; the net position change of -853,124 is recorded as a computed placeholder adjustment in business_type","source_page":1}
-],
-"detail": [],
-"detail_totals": [],
-"notes": "Nursing home (Wisner Care Center, a component unit of the City of Wisner), accrual basis, entirely business-type. The trimmed PDF has only 3 pages: Statement of Net Position (p1, report p11), Statement of Cash Flows (p2, report p13) and Operating Expenditures by Department pie charts (p3, report p29; percentages only, no dollar amounts, so not recorded in detail). No statement of revenues and expenses was trimmed (manifest flag no_revenue_statement), so receipts and disbursements are empty; operating loss of 434,800 appears only in the cash flow reconciliation (p2). business_type beginning (2024) and ending (2025) net position from p1; the -853,124 change is a computed placeholder, not an extracted adjustment. proprietary values are the total (only) column of the cash flow statement; there is no noncapital financing section. Cash flow statement cash 236,468 -> 825,114 ties. Balance sheet balances (1,775,750 = 985,557 + 790,193). Resident cash 3,110 shown as restricted assets and matching resident funds liability. Zero lines (construction in progress, ERC receivable, unearned grant advance, restricted for awning project) not recorded. Read pages 1-3 of 3"
+  "entity_name": "Wisner Care Center",
+  "entity_type": "hospital",
+  "fiscal_year_end": "2025-06-30",
+  "basis": "GAAP",
+  "extraction_attempt": 1,
+  "beginning_cash": null,
+  "beginning_investments": null,
+  "beginning_fund_balance": null,
+  "receipts": [
+    {
+      "fund_type": "business-type",
+      "category": "charges for services/fees",
+      "original_label": "Nursing home care - private",
+      "amount": 1557739,
+      "source_page": 2
+    },
+    {
+      "fund_type": "business-type",
+      "category": "charges for services/fees",
+      "original_label": "Nursing home care - DHHS",
+      "amount": 976628,
+      "source_page": 2
+    },
+    {
+      "fund_type": "business-type",
+      "category": "charges for services/fees",
+      "original_label": "Nursing home care - Medicare",
+      "amount": 277371,
+      "source_page": 2
+    },
+    {
+      "fund_type": "business-type",
+      "category": "charges for services/fees",
+      "original_label": "Nursing home care - VA",
+      "amount": 422833,
+      "source_page": 2
+    },
+    {
+      "fund_type": "business-type",
+      "category": "charges for services/fees",
+      "original_label": "Assisted living revenue",
+      "amount": 340527,
+      "source_page": 2
+    },
+    {
+      "fund_type": "business-type",
+      "category": "charges for services/fees",
+      "original_label": "Home health",
+      "amount": 56605,
+      "source_page": 2
+    },
+    {
+      "fund_type": "business-type",
+      "category": "intergovernmental/state aid",
+      "original_label": "LB 1014 Health Aid for Nursing Facilities",
+      "amount": 25926,
+      "source_page": 2
+    },
+    {
+      "fund_type": "business-type",
+      "category": "other",
+      "original_label": "Other revenue",
+      "amount": 14473,
+      "source_page": 2,
+      "review": "printed as Other revenue, no description"
+    },
+    {
+      "fund_type": "business-type",
+      "category": "other",
+      "original_label": "Uncollectible ERC (note M)",
+      "amount": -189411,
+      "source_page": 2,
+      "review": "negative nonoperating item (write-off of Employee Retention Credit receivable)"
+    },
+    {
+      "fund_type": "business-type",
+      "category": "investment income",
+      "original_label": "Interest income",
+      "amount": 836,
+      "source_page": 2
+    },
+    {
+      "fund_type": "business-type",
+      "category": "donations/contributions",
+      "original_label": "Donations and grants",
+      "amount": 47881,
+      "source_page": 2,
+      "review": "mixes donations and grants; grant source not stated"
+    },
+    {
+      "fund_type": "business-type",
+      "category": "sale of assets",
+      "original_label": "Loss on disposal of assets (note E)",
+      "amount": -82770,
+      "source_page": 2,
+      "review": "negative nonoperating item (loss)"
+    },
+    {
+      "fund_type": "business-type",
+      "category": "federal grants",
+      "original_label": "ARPA grant (note K)",
+      "amount": -78459,
+      "source_page": 2,
+      "review": "negative nonoperating item: ARPA grant printed as (78,459), apparently returned/derecognized grant (cash flow shows repayment of grant proceeds 102,500)"
+    },
+    {
+      "fund_type": "business-type",
+      "category": "donations/contributions",
+      "original_label": "Other grant revenue",
+      "amount": 4124,
+      "source_page": 2,
+      "review": "grant source not stated"
+    }
+  ],
+  "disbursements": [
+    {
+      "fund_type": "business-type",
+      "category": "hospital/health care",
+      "original_label": "Nursing care",
+      "amount": 2430879,
+      "source_page": 2
+    },
+    {
+      "fund_type": "business-type",
+      "category": "hospital/health care",
+      "original_label": "Dietary",
+      "amount": 557594,
+      "source_page": 2
+    },
+    {
+      "fund_type": "business-type",
+      "category": "hospital/health care",
+      "original_label": "Laundry",
+      "amount": 60760,
+      "source_page": 2
+    },
+    {
+      "fund_type": "business-type",
+      "category": "hospital/health care",
+      "original_label": "Housekeeping",
+      "amount": 148761,
+      "source_page": 2
+    },
+    {
+      "fund_type": "business-type",
+      "category": "hospital/health care",
+      "original_label": "Occupancy",
+      "amount": 452019,
+      "source_page": 2
+    },
+    {
+      "fund_type": "business-type",
+      "category": "hospital/health care",
+      "original_label": "Social services/activities",
+      "amount": 147038,
+      "source_page": 2
+    },
+    {
+      "fund_type": "business-type",
+      "category": "hospital/health care",
+      "original_label": "Salaries",
+      "amount": 137403,
+      "source_page": 2
+    },
+    {
+      "fund_type": "business-type",
+      "category": "hospital/health care",
+      "original_label": "Payroll taxes",
+      "amount": 10779,
+      "source_page": 2
+    },
+    {
+      "fund_type": "business-type",
+      "category": "hospital/health care",
+      "original_label": "Office supplies",
+      "amount": 23934,
+      "source_page": 2
+    },
+    {
+      "fund_type": "business-type",
+      "category": "hospital/health care",
+      "original_label": "Liability insurance",
+      "amount": 22775,
+      "source_page": 2
+    },
+    {
+      "fund_type": "business-type",
+      "category": "hospital/health care",
+      "original_label": "Professional services",
+      "amount": 23615,
+      "source_page": 2
+    },
+    {
+      "fund_type": "business-type",
+      "category": "hospital/health care",
+      "original_label": "Telephone",
+      "amount": 8208,
+      "source_page": 2
+    },
+    {
+      "fund_type": "business-type",
+      "category": "hospital/health care",
+      "original_label": "Licenses, dues, and unemployment",
+      "amount": 18081,
+      "source_page": 2
+    },
+    {
+      "fund_type": "business-type",
+      "category": "hospital/health care",
+      "original_label": "Employee insurance/benefits",
+      "amount": 13630,
+      "source_page": 2
+    },
+    {
+      "fund_type": "business-type",
+      "category": "hospital/health care",
+      "original_label": "Advertising and promotion",
+      "amount": 25350,
+      "source_page": 2
+    },
+    {
+      "fund_type": "business-type",
+      "category": "hospital/health care",
+      "original_label": "Education and travel",
+      "amount": 807,
+      "source_page": 2
+    },
+    {
+      "fund_type": "business-type",
+      "category": "hospital/health care",
+      "original_label": "Contract services",
+      "amount": 2100,
+      "source_page": 2
+    },
+    {
+      "fund_type": "business-type",
+      "category": "hospital/health care",
+      "original_label": "Miscellaneous",
+      "amount": 1799,
+      "source_page": 2
+    },
+    {
+      "fund_type": "business-type",
+      "category": "hospital/health care",
+      "original_label": "Computer expenses",
+      "amount": 16954,
+      "source_page": 2
+    },
+    {
+      "fund_type": "business-type",
+      "category": "hospital/health care",
+      "original_label": "Bad debts expense",
+      "amount": 4416,
+      "source_page": 2
+    },
+    {
+      "fund_type": "business-type",
+      "category": "hospital/health care",
+      "original_label": "Quality assurance assessment (note J)",
+      "amount": 102411,
+      "source_page": 2,
+      "review": "printed as (102,411) in nonoperating revenues (expenses); treated as a disbursement"
+    },
+    {
+      "fund_type": "business-type",
+      "category": "debt service interest",
+      "original_label": "Interest expense",
+      "amount": 18114,
+      "source_page": 2
+    }
+  ],
+  "transfers_in": null,
+  "transfers_out": null,
+  "debt_proceeds": null,
+  "other_financing": null,
+  "adjustments": [],
+  "reported_totals": {
+    "governmental": null,
+    "business-type": {
+      "receipts": {
+        "amount": 3374303,
+        "source_page": 2,
+        "includes": [],
+        "computed": "total operating revenues 3,672,102 + total nonoperating revenues (expenses) (418,324) + quality assurance assessment 102,411 + interest expense 18,114 (both listed in disbursements) (p2)"
+      },
+      "disbursements": {
+        "amount": 4227427,
+        "source_page": 2,
+        "includes": [],
+        "computed": "direct cost of services 3,797,051 + administrative expenses 309,851 + quality assurance assessment 102,411 + interest expense 18,114 (p2)"
+      }
+    }
+  },
+  "business_type": {
+    "measure": "net position",
+    "beginning": {
+      "amount": 1643317,
+      "source_page": 2
+    },
+    "ending": {
+      "amount": 790193,
+      "source_page": 2
+    },
+    "transfers_net": null,
+    "debt_proceeds": null,
+    "other_financing": null,
+    "adjustments": []
+  },
+  "proprietary": {
+    "operating": {
+      "amount": 755040,
+      "source_page": 3
+    },
+    "noncapital_financing": null,
+    "capital_and_related_financing": {
+      "amount": -167230,
+      "source_page": 3
+    },
+    "investing": {
+      "amount": 836,
+      "source_page": 3
+    },
+    "beginning_cash": {
+      "amount": 236468,
+      "source_page": 3
+    },
+    "ending_cash": {
+      "amount": 825114,
+      "source_page": 3
+    }
+  },
+  "balance_sheet": {
+    "statement": "Statements of Net Position",
+    "scope": "government-wide",
+    "column": "2025",
+    "assets": [
+      {
+        "category": "cash and investments",
+        "original_label": "Cash and cash equivalents",
+        "amount": 825114,
+        "source_page": 1
+      },
+      {
+        "category": "restricted assets",
+        "original_label": "Resident cash",
+        "amount": 3110,
+        "source_page": 1
+      },
+      {
+        "category": "receivables",
+        "original_label": "Accounts receivable",
+        "amount": 158539,
+        "source_page": 1
+      },
+      {
+        "category": "inventories/prepaids",
+        "original_label": "Prepaid expenses",
+        "amount": 27633,
+        "source_page": 1
+      },
+      {
+        "category": "capital assets",
+        "original_label": "Land",
+        "amount": 5712,
+        "source_page": 1
+      },
+      {
+        "category": "capital assets",
+        "original_label": "Land improvements",
+        "amount": 16858,
+        "source_page": 1
+      },
+      {
+        "category": "capital assets",
+        "original_label": "Buildings and improvements",
+        "amount": 2256986,
+        "source_page": 1
+      },
+      {
+        "category": "capital assets",
+        "original_label": "Furniture and equipment",
+        "amount": 1112465,
+        "source_page": 1
+      },
+      {
+        "category": "capital assets",
+        "original_label": "Less accumulated depreciation",
+        "amount": -2630667,
+        "source_page": 1
+      }
+    ],
+    "deferred_outflows": [],
+    "liabilities": [
+      {
+        "category": "accounts payable",
+        "original_label": "Accounts payable",
+        "amount": 121338,
+        "source_page": 1
+      },
+      {
+        "category": "accrued liabilities",
+        "original_label": "Accrued salaries",
+        "amount": 112719,
+        "source_page": 1
+      },
+      {
+        "category": "accrued liabilities",
+        "original_label": "Accrued compensated absences",
+        "amount": 143274,
+        "source_page": 1
+      },
+      {
+        "category": "accrued liabilities",
+        "original_label": "Accrued payroll taxes and employee withholding",
+        "amount": 2808,
+        "source_page": 1
+      },
+      {
+        "category": "other liabilities",
+        "original_label": "Resident funds",
+        "amount": 3110,
+        "source_page": 1
+      },
+      {
+        "category": "debt - due within one year",
+        "original_label": "Current portion of notes payable",
+        "amount": 144318,
+        "source_page": 1
+      },
+      {
+        "category": "accrued liabilities",
+        "original_label": "Accrued interest payable",
+        "amount": 1143,
+        "source_page": 1
+      },
+      {
+        "category": "debt - due in more than one year",
+        "original_label": "Notes payable, net of current maturities",
+        "amount": 456847,
+        "source_page": 1
+      }
+    ],
+    "deferred_inflows": [],
+    "equity": [
+      {
+        "original_label": "Net investment in capital assets",
+        "amount": 761354,
+        "source_page": 1
+      },
+      {
+        "original_label": "Unrestricted",
+        "amount": 28839,
+        "source_page": 1
+      }
+    ],
+    "total_assets": {
+      "amount": 1775750,
+      "source_page": 1
+    },
+    "total_deferred_outflows": null,
+    "total_liabilities": {
+      "amount": 985557,
+      "source_page": 1
+    },
+    "total_deferred_inflows": null,
+    "total_equity": {
+      "amount": 790193,
+      "source_page": 1
+    }
+  },
+  "ending_cash": null,
+  "ending_investments": null,
+  "ending_fund_balance": null,
+  "detail": [],
+  "detail_totals": [],
+  "notes": "Nursing home (Wisner Care Center, a component unit of the City of Wisner), accrual basis, entirely business-type; governmental fields null. Trimmed PDF (find_pages v8): Statement of Net Position (p1, report p11), Statement of Revenues, Expenses, and Changes in Net Position (p2, report p12, added by the v8 re-trim), Statement of Cash Flows (p3, report p13) and Operating Expenditures by Department pie charts (p4, report p29; percentages only, no dollar amounts, so not recorded in detail). Receipts/disbursements from p2, 2025 Amount column only (per-inpatient-day and 2024 columns ignored). Direct cost of services and administrative expense lines each recorded as disbursements (hospital/health care). Quality assurance assessment (102,411) and interest expense (18,114) are printed among nonoperating revenues (expenses) but recorded as disbursements; negative nonoperating items Uncollectible ERC (189,411), Loss on disposal (82,770) and ARPA grant (78,459) kept as negative receipts. Receipts check: operating 3,672,102 - 189,411 + 836 + 47,881 - 82,770 - 78,459 + 4,124 = 3,374,303; disbursements 3,797,051 + 309,851 + 102,411 + 18,114 = 4,227,427; net (853,124) = printed decrease in net position; 1,643,317 -> 790,193 ties. Contract services - Stanton and DHHS van grant are dashes for 2025, not recorded. No detail schedules. proprietary values are the total (only) column of the cash flow statement (p3); there is no noncapital financing section. Cash flow statement cash 236,468 -> 825,114 ties. Balance sheet balances (1,775,750 = 985,557 + 790,193). Resident cash 3,110 shown as restricted assets and matching resident funds liability. Zero lines (construction in progress, ERC receivable, unearned grant advance, restricted for awning project) not recorded. Read pages 1-4 of 4"
 }
