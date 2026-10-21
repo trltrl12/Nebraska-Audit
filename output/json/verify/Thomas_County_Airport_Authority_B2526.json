@@ -1,0 +1,18 @@
+{
+  "stem": "Thomas_County_Airport_Authority_B2526",
+  "values_checked": 11,
+  "issues": [
+    {"severity": "warning", "path": "decision_needed", "page": 1,
+     "extracted": null, "on_page": "Line 6 Personal and Real Property Taxes: col 1 56,458.77, col 2 '-', col 3 64,700.00 (tax request 65,994.00)",
+     "issue": "The authority levies property tax (prior year 56,458.77, next year's request 65,994.00) but column 2 shows none for 2024-2025, and property tax credit 9,072.66 was still received. The form ties internally, so the figure is recorded as printed, but whether 2024-25 property tax was omitted or misposted on the form is a question for a person; it is only mentioned in notes, not in decision_needed[]."},
+    {"severity": "warning", "path": "receipts[2]", "page": 1,
+     "extracted": {"original_label": "State Receipts: Other", "amount": 144499.0}, "on_page": "Line 9 State Aid 144,499.00 struck through; 144,499.00 rewritten in red on line 10 State Receipts: Other",
+     "issue": "Hand correction on the form: the extractor follows the red rewrite (line 10). The amount and category (intergovernmental/state aid) are the same either way; the page text layer still carries the figure on line 9. Correctly marked review."},
+    {"severity": "warning", "path": "disbursements[0].category", "page": 1,
+     "extracted": "other", "on_page": "Operating Expenses 56,889.45",
+     "issue": "No airport function exists in the category list, so 'other' with review is defensible, but it puts 29% of spending in 'other'. Judgment call for the reviewer."},
+    {"severity": "warning", "path": "notes", "page": 1,
+     "extracted": "Treated as governmental cash-basis budget form.", "on_page": null,
+     "issue": "The notes contradict the JSON: every line is fund_type business-type, governmental balances and reported_totals.governmental are null, and the balances are in business_type (which matches the airport-authority rule). The sentence in the notes is wrong, but the data is consistent."}
+  ]
+}
