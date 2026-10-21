@@ -146,8 +146,7 @@ These were diagnosed and fixed in find_pages v6; re-extract and re-verify them a
   Springfield_FY2025 (Note M, explaining 33.2M sales tax and 3.5M permits, not trimmed).
   South_Platte_Public_Schools_FY2025 (report p31, Activity Fund schedule, not trimmed).
   Tekamah_Herman_Community_School_FY2025 (report p27, probably the Activity Fund schedule, not trimmed).
-  Upper_Loup_NRD_FY2025 (report p9, end of cash flow statement with cash balances, not trimmed; cash derived from net position).
-  Two_Rivers_Public_Health_Department_FY2025 (report p10, Statement of Net Position, and pp34-36 not trimmed; fund balance sheet used).
+  Two_Rivers_Public_Health_Department_FY2025 (report pp34-36 not trimmed; Statement of Net Position now in the v8 trim).
   Wahoo_FY2025 (no General Fund budget schedule trimmed; source PDF p19 and pp23-27 not kept).
   Wisner_Care_Center_FY2025 (trimmed to 3 pages, no revenue/expense statement: receipts/disbursements empty, net position change as placeholder adjustment).
   York_FY2025 (report p73, rest of the General Fund Departments combining schedule: Fire/EMS, Library, Total columns, not trimmed; departmental detail left out).
