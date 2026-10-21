@@ -1,0 +1,12 @@
+{
+  "stem": "West_Central_District_Health_Department_FY2025",
+  "values_checked": 52,
+  "issues": [
+    {"severity": "warning", "path": "ending_cash.amount", "page": 3,
+     "extracted": 438871, "on_page": "FUND BALANCE, end of year 438,871; Cash in bank and on hand 454,348 (p2, p4)",
+     "issue": "ending_cash and beginning_cash (327,477) hold the modified-cash fund balance the statement rolls forward, not cash. Actual cash is 454,348 at year end and 349,602 at the start (p4), so the two differ by the payroll taxes withheld liability. This is defensible, since it is the balance the statement rolls forward and the notes explain it, but the field is labelled cash."},
+    {"severity": "warning", "path": "report_discrepancies", "page": 4,
+     "extracted": "totals -6,648; reconcile 22,125", "on_page": "Budget schedule: cash reserve 349,602 + 104,746 = 454,348 (adds up); statement: 327,477 + 111,394 = 438,871 (adds up)",
+     "issue": "Both report_discrepancies entries come from a difference in basis, not from arithmetic that fails. The cash-basis schedule and the fund-balance statement differ by payroll taxes withheld (22,125 at the start, 15,477 at the end; 22,125 - 15,477 = 6,648, which is exactly the gap in expenditures). Each schedule adds up on its own, so listing these as 'the report itself doesn't add up' overstates the problem."}
+  ]
+}
