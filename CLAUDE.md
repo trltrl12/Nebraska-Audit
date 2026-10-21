@@ -171,7 +171,7 @@ These were diagnosed and fixed in find_pages v6; re-extract and re-verify them a
   Falls_City_Public_Schools_FY2025 (report p6 governmental receipts/disbursements), Fillmore_County_FY2025 (report p34,
   right half of nonmajor combining), Furnas_County_FY2025 (second nonmajor combining page), Greeley_FY2025 (report p28,
   end of cash flow statement), Hooker_County_FY2025 (second half of nonmajor combining), Logan_County_FY2025 (source pp26-27 nonmajor combining), Niobrara_FY2025 (report p15
-  proprietary statement), Norfolk_FY2025 (report pp32-33 governmental balance sheet; cash null),
+  proprietary statement), Norfolk_FY2025 (beginning governmental cash still null: no prior-year balance sheet),
   Northeast_Nebraska_Economic_Development_District_FY2025 (cash flow statement report pp7-8), Omaha_FY2025 (report
   pp24-25 proprietary revenue/expense statement), Ord_FY2025 (also report p15 government-wide assets/liabilities),
   Otoe_County_FY2025 (governmental funds receipts/disbursements statement).
