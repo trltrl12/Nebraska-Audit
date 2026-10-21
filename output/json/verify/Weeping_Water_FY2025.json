@@ -1,12 +1,15 @@
 {
   "stem": "Weeping_Water_FY2025",
-  "values_checked": 78,
+  "values_checked": 77,
   "issues": [
-    {"severity": "warning", "path": "receipts[2].category", "page": 4,
-     "extracted": "intergovernmental/state aid", "on_page": "Intergovernmental 526,996 (Sales Tax fund column 231,638; General 69,834; Street 224,602; other 922)",
-     "issue": "231,638 of the Intergovernmental line sits in the Sales Tax special revenue fund column and is probably the city's local option sales tax as distributed by the state. The page doesn't call it sales tax, so intergovernmental can be defended, but sales tax may be the better category. Worth a person's look."},
-    {"severity": "warning", "path": "missing", "page": 8,
-     "extracted": null, "on_page": "Combined Budget and Actual - Budgetary Basis, All Funds (General All-Purpose column): Taxes 360,105; Licenses and permits 6,536; Highway allocation 176,175; State aid 69,834; Other intergovernmental 280,987; Other including charges for services 797,887; Interest 13,298; expenditures General government 315,634, Public Works - Street 224,427, Public Works - Utility Funds 667,719, Public Health and Safety 53,927, Culture and Recreation 221,283, Public Building 64,842, Debt service 80,021; total revenues 1,704,822 / expenditures 1,627,853",
-     "issue": "None of the p8 budget schedule is in detail. The extractor left it out because it is a single all-funds column that mixes governmental and utility funds and overlaps the p9 nonmajor detail, so this is defensible. However, it is the only place that breaks Intergovernmental 526,996 down (highway allocation 176,175 + state aid 69,834 + other 280,987 = 526,996), and General, Street, Park, Sales Tax and the utility funds have no detail lines at all. A person should decide whether to record it."}
+    {"severity": "warning", "path": "receipts[5].category", "page": 4,
+     "extracted": "other", "on_page": "Miscellaneous 59,969 (p2: 'Contributions and miscellaneous revenues')",
+     "issue": "The Statement of Activities (p2) calls this line contributions and miscellaneous, so part of it may be donations/contributions. No breakdown is printed, so 'other' with review is defensible."},
+    {"severity": "warning", "path": "detail[9].detail_category", "page": 10,
+     "extracted": "other charges for services", "on_page": "Community Building - Charges for services 8,400",
+     "issue": "Community building charges are probably rentals. This is a judgment call."},
+    {"severity": "warning", "path": "missing", "page": 9,
+     "extracted": null, "on_page": "Combined Budget and Actual - All Funds (General All-Purpose): Taxes 360,105; Licenses and permits 6,536; Highway allocation 176,175; State aid 69,834; Other intergovernmental 280,987; Other including charges for services 797,887; Interest 13,298; total revenues 1,704,822; expenditures by function, total 1,627,853; operating transfers in/out 53,282",
+     "issue": "The p9 all-funds budget schedule is not in detail. The extractor left it out because it combines governmental and utility funds and overlaps the p10 nonmajor detail. That is defensible, but the page is the only place that breaks Intergovernmental 526,996 into highway allocation 176,175, state aid 69,834 and other 280,987 (these sum exactly to 526,996)."}
   ]
 }

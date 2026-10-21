@@ -2,10 +2,23 @@
   "stem": "Western_Community_College_FY2025",
   "values_checked": 84,
   "issues": [
-    {"severity": "warning", "path": "disbursements[0].category", "page": 2, "extracted": "other", "on_page": "Personal services 21,646,994; Operating expenses 11,110,867; Travel 418,102; Noncapitalized capital assets 535,234; Depreciation 3,062,996 (disbursements[0]-[4])", "issue": "Statement lists expenses by object only, so all 36.8M of operating expenses sit in 'other' (marked review). Rules say to use the fund's function for object-only statements; a community college has no single function (the p4 schedule splits instruction/support services), so this is a judgment call that leaves >10% of business-type spending in 'other'."},
-    {"severity": "warning", "path": "business_type.other_financing", "page": 2, "extracted": 3155768, "on_page": "Other Income: Capital appropriations 3,135,960; Insurance proceeds 19,808; Total other income 3,155,768", "issue": "Insurance proceeds 19,808 are a receipt category under the rules (reimbursements/refunds) but are folded into other_financing with capital appropriations. Treating capital appropriations as other_financing (below income before other revenues) is defensible. Computed value correctly marked and matches the printed total."},
-    {"severity": "warning", "path": "balance_sheet.liabilities[7].category", "page": 1, "extracted": "accrued liabilities", "on_page": "Compensated absences 1,042,809 (under Noncurrent liabilities)", "issue": "Rules put only compensated absences due soon in accrued liabilities; this one is noncurrent (other liabilities or debt - due in more than one year)."},
-    {"severity": "warning", "path": "detail[0].detail_category", "page": 4, "extracted": "salaries and wages", "on_page": "Personnel services (every program)", "issue": "Personnel services likely includes benefits; recorded entirely as salaries and wages."},
-    {"severity": "warning", "path": "balance_sheet.liabilities[5].original_label", "page": 1, "extracted": "Subscription Liability payable (current)", "on_page": "Subscription Liability payable", "issue": "Extractor added '(current)'/'(noncurrent)' to the printed label to tell the two lines apart; amounts 503,401 and 1,739,583 are correct."}
+    {"severity": "warning", "path": "disbursements[0].category", "page": 2,
+     "extracted": "other", "on_page": "Personal services 21,646,994; Operating expenses 11,110,867; Travel 418,102; Noncapitalized capital assets 535,234; Depreciation 3,062,996",
+     "issue": "About 36.8M of operating expenses (disbursements[0]-[4]) are in 'other' because the statement lists spending by object only. The 'listed by object' rule says to use the fund or entity function with review rather than 'other'. For a college that could be instruction or support services. The p5-6 schedule shows mostly support services plus instruction (9.27M of 29.08M). Judgment call."},
+    {"severity": "warning", "path": "business_type.other_financing", "page": 2,
+     "extracted": 3155768, "on_page": "Other Income: Capital appropriations 3,135,960; Insurance proceeds 19,808; Total other income 3,155,768",
+     "issue": "Capital appropriations are a capital improvement property tax (p3 cash flow: 'Property taxes - capital improvement fund' 2,999,056), and the rules class insurance proceeds as reimbursements/refunds. The extractor treated both as capital-contribution-type other financing rather than receipts. Defensible because they are printed below income before other revenues, but questionable."},
+    {"severity": "warning", "path": "report_discrepancies", "page": 3,
+     "extracted": null, "on_page": "Operating section lines sum to (29,140,925) vs printed (29,140,926); section totals sum to 3,008,879 vs printed net increase 3,008,880; components of cash 14,590,026 vs SoNP cash 14,590,025",
+     "issue": "The cash flow statement has $1 rounding differences that report_discrepancies does not record. The proprietary values themselves match the page."},
+    {"severity": "warning", "path": "balance_sheet.liabilities[7].category", "page": 1,
+     "extracted": "accrued liabilities", "on_page": "Compensated absences 1,042,809 (noncurrent liabilities)",
+     "issue": "This liability is printed under noncurrent liabilities, but the rules give 'accrued liabilities' to compensated absences due soon. 'other liabilities' may fit better."},
+    {"severity": "warning", "path": "balance_sheet.liabilities[5].original_label", "page": 1,
+     "extracted": "Subscription Liability payable (current)", "on_page": "Subscription Liability payable",
+     "issue": "The extractor added '(current)' and, on liabilities[10], '(noncurrent)' to the printed label to tell the two lines apart. Amounts are correct."},
+    {"severity": "warning", "path": "detail[0].detail_category", "page": 5,
+     "extracted": "salaries and wages", "on_page": "Personnel services",
+     "issue": "Personnel services probably include benefits and was recorded as salaries and wages for every program (detail[0], [4], [8], [12], [16]) with no review flag. Judgment call."}
   ]
 }

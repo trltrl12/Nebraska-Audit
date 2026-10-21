@@ -1,94 +1,24 @@
 {
   "stem": "West_Point_FY2025",
-  "values_checked": 255,
+  "values_checked": 274,
   "issues": [
-    {
-      "severity": "error",
-      "path": "receipts[6].category",
-      "page": 2,
-      "extracted": "other",
-      "on_page": "Loan collections 62,438 (p5); Statement of Activities p2 shows exactly 62,438 as Charges for Services under Economic development",
-      "issue": "[fixed] Line is in 'other' though the report's own Statement of Activities classifies it as charges for services (LB840/CDBG loan collections). Rule: use the SoA charges-for-services breakdown before 'other'. Use charges for services/fees (with review), or raise as decision_needed if loan principal repayments should be treated as non-revenue."
-    },
-    {
-      "severity": "error",
-      "path": "detail[152].detail_category",
-      "page": 12,
-      "extracted": "other / miscellaneous revenue",
-      "on_page": "Loan collections 62,438 (CDBG 3,039 + LB840 59,399)",
-      "issue": "[fixed] Same line as receipts[6]; SoA p2 counts it as Economic development charges for services, so 'other'/'miscellaneous revenue' is not the last resort here (other charges for services)."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[9].category",
-      "page": 5,
-      "extracted": "donations/contributions",
-      "on_page": "Contributions and grants 2,228,209 (Debt Service 1,790,022; SoA p3 capital grants 1,793,814 public works)",
-      "issue": "Mostly capital grants, probably from a government (state/federal), which would be intergovernmental/state aid or federal grants rather than private donations; source not stated. Same applies to detail Debt Service (detail[141]) and Nonmajor (detail[153]) 'Contributions and grants'."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[11].category",
-      "page": 5,
-      "extracted": "property tax",
-      "on_page": "TIF proceeds 59,161 (CDA Fund)",
-      "issue": "Assumed tax increment receipts; could instead be TIF bond/loan proceeds (debt_proceeds). Marked review by extractor."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[150].original_label",
-      "page": 11,
-      "extracted": "Transfers out (printed label; statement p5 shows transfer in)",
-      "on_page": "Transfers out 90,584",
-      "issue": "original_label altered from the printed 'Transfers out'. Treating it as +90,584 inflow is correct (Sales Tax Fund out 231,584 = Debt Service 90,584 + Equipment Sinking 141,000; p5 shows Debt Service +90,584), but the printed label is a mislabel in the report itself."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[126].category",
-      "page": 14,
-      "extracted": "streets/highways",
-      "on_page": "Cemetery department lines detail[126]-[130] (statement p5 Public works 897,916 = Street 882,867 + Cemetery 15,049)",
-      "issue": "Rules map cemetery to health/welfare; extractor followed the statement's Public works grouping so function totals tie. Judgment call."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[31].detail_category",
-      "page": 13,
-      "extracted": "salaries and wages",
-      "on_page": "Salaries and benefits (every department)",
-      "issue": "Combined salaries-and-benefits line recorded entirely as salaries and wages in all departments; mixes two objects."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[38].detail_category",
-      "page": 13,
-      "extracted": "dues, training and travel",
-      "on_page": "Transportation (every department; Street 21,944, Police 17,184)",
-      "issue": "Department 'Transportation' may be vehicle fuel/operation (fuel or repairs and maintenance) rather than travel."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[28].detail_category",
-      "page": 14,
-      "extracted": "highway allocation",
-      "on_page": "Street - Intergovernmental 578,944",
-      "issue": "Assumed highway allocation; not labelled on page (reasonable, marked review)."
-    },
-    {
-      "severity": "warning",
-      "path": "balance_sheet.liabilities[5].category",
-      "page": 1,
-      "extracted": "accrued liabilities",
-      "on_page": "Accrued compensated absences 111,741 (under Noncurrent liabilities)",
-      "issue": "Rules put only compensated absences due soon in accrued liabilities; this is noncurrent (other liabilities or debt - due in more than one year)."
-    },
-    {
-      "severity": "warning",
-      "path": "ending_cash",
-      "page": 4,
-      "extracted": 5210237,
-      "on_page": "Total assets 5,210,237 (includes certificates of deposit 275,000 and restricted CDs 525,000)",
-      "issue": "Ending cash includes 800,000 of CDs with no separate ending_investments; beginning_cash 4,675,534 is the prior fund balance (marked computed). Consistent, but cash vs investments not separated."
-    }
+    {"severity": "warning", "path": "receipts[9].category", "page": 5,
+     "extracted": "donations/contributions", "on_page": "Contributions and grants 2,228,209 (Debt Service Fund 1,790,022; p3 capital grants: Public works 1,793,814, Environment and leisure 100,000)",
+     "issue": "Most of this is capital grants for public works, which probably come from a government (intergovernmental/state aid or federal grants), not private donations. The source isn't printed. Same question for detail[141] (Debt Service 1,790,022) and detail[153] (Nonmajor 375,994)."},
+    {"severity": "warning", "path": "detail[150].original_label", "page": 12,
+     "extracted": "Transfers out (printed label; statement p5 shows transfer in)", "on_page": "Transfers out",
+     "issue": "The label is annotated, not as printed. Treating it as an inflow of +90,584 is correct: the page adds it to resources (794,858 + 90,584 = 885,442), and p5 shows the Debt Service transfer in as 90,584."},
+    {"severity": "warning", "path": "detail[96].category", "page": 15,
+     "extracted": "culture/recreation", "on_page": "Senior Center (statement function: Environment and leisure)",
+     "issue": "Category rules put senior services under health/welfare. The extractor followed the statement's grouping so the lines tie to the p5 function totals. The same applies to Cemetery (detail[126]-[130], streets/highways), which the rules would put under health/welfare. Judgment call."},
+    {"severity": "warning", "path": "detail[31].detail_category", "page": 14,
+     "extracted": "salaries and wages", "on_page": "Salaries and benefits",
+     "issue": "The line mixes salaries and benefits and was recorded as salaries and wages for every department, with no review flag. The 'Transportation' lines were mapped to dues, training and travel, but could be vehicle or fuel costs. Judgment calls."},
+    {"severity": "warning", "path": "balance_sheet.liabilities[5].category", "page": 1,
+     "extracted": "accrued liabilities", "on_page": "Accrued compensated absences 111,741 (noncurrent liabilities)",
+     "issue": "This liability is printed under noncurrent liabilities, but the rules give 'accrued liabilities' to compensated absences due soon. 'other liabilities' may fit better."},
+    {"severity": "warning", "path": "proprietary", "page": 8,
+     "extracted": "operating 625,890 ...", "on_page": "Statement of Cash Flows - Proprietary Funds (accrual)",
+     "issue": "proprietary is filled although basis is 'cash'. The rules say GAAP only. The figures match the page, and the business-type funds are accrual, so this is informational."}
   ]
 }
