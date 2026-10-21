@@ -1,0 +1,18 @@
+{
+  "stem": "Sarpy_County_SID_370_FY2025",
+  "values_checked": 96,
+  "issues": [
+    {"severity": "warning", "path": "detail", "page": 4,
+     "extracted": "Actual on Budgetary Basis column", "on_page": "Schedules 1-2 print 'Actual on GAAP Basis', 'Adjustments to Budgetary Basis' and 'Actual on Budgetary Basis'",
+     "issue": "Extractor chose the budgetary-basis actual column; defensible, but detail differs from the statements (e.g. Special Assessments 701,329 budgetary vs '-' GAAP). Noted in notes; flagging the assumption."},
+    {"severity": "warning", "path": "other_financing", "page": 2,
+     "extracted": -392182, "on_page": "Warrants Retired (400,321); Change in Payables 8,139",
+     "issue": "Arithmetic and computed note are correct, but Warrants Retired is principal repayment of warrants; netting it into other_financing (as printed under Other Financing Uses) rather than debt service principal is a judgment call."},
+    {"severity": "warning", "path": "detail[26].original_label", "page": 5,
+     "extracted": "Warrants Retired", "on_page": "Warrents Retired",
+     "issue": "Label printed with a typo ('Warrents'); extractor corrected the spelling."},
+    {"severity": "warning", "path": "detail[18].category", "page": 5,
+     "extracted": "general government", "on_page": "Engineering 10,841 (Debt Service Fund, budgetary basis; GAAP column shows '-')",
+     "issue": "On the GAAP basis this cost is capitalized (adjustment column), so capital outlay / construction-infrastructure could fit better; same for Professional Fees 89,234 (detail[21]). Judgment call."}
+  ]
+}
