@@ -113,7 +113,7 @@ agents' one-line statuses.
 These were diagnosed and fixed in find_pages v6; re-extract and re-verify them after the re-trim:
 - Trimmed PDF is missing pages: Arapahoe_FY2025 (other
   nonmajor combining page),
-  Battle_Creek_FY2025 (report pp10-12, proprietary statement), Butte_FY2025 (report p31, rest of
+  Butte_FY2025 (report p31, rest of
   General Fund spending), Cody_Kilgore_Public_School_FY2025 (p18 activity accounts cut off; residual
   lines from p17 used meanwhile).
   Litchfield_Public_Schools_FY2025 (left half of the governmental receipts/disbursements statement,
