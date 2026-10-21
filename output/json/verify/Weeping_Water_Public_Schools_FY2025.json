@@ -2,23 +2,53 @@
   "stem": "Weeping_Water_Public_Schools_FY2025",
   "values_checked": 238,
   "issues": [
-    {"severity": "error", "path": "detail[81].amount", "page": 5,
-     "extracted": 651749, "on_page": "Employee Benefit 5690 Other non-revenue receipts 651,749 (p11) eliminated in the Reclassifications column (651,749) on the General Fund combining schedule (p5)",
-     "issue": "Internal money is counted twice in detail. The p5 Reclassifications column removes 651,749 from both Employee Benefit receipts and its spending (658,990 out of student support services: 651,749 eliminated, 7,241 moved to Instruction). The GF budget schedule lines (pp8-9, 6,455,828 of spending) already include the payments into Employee Benefit. Detail spending adds up to 8,833,980, against 8,182,231 on the statement (p3), a gap of exactly 651,749. The hidden-transfer rule calls for splitting with split_from p5: Employee Benefit receipt 651,749 becomes other financing (+), and its 2900 spending 658,990 becomes 7,241 spending (instruction per p5) plus 651,749 other financing (-). decision_needed raises the question, but the lines are recorded as revenue and spending."},
-    {"severity": "error", "path": "detail[82].category", "page": 5,
-     "extracted": "support services (658,990)", "on_page": "Employee Benefit spending 658,990: (658,990) reclassified out of Student support services, 7,241 of it into Instruction (623,762 = 482,058 + 134,463 + 7,241)",
-     "issue": "Same issue on the spending side: 651,749 of this line is the eliminated internal amount. Only 7,241 is real spending, and p5 counts that under Instruction."},
-    {"severity": "error", "path": "detail[122].category", "page": 3,
-     "extracted": "instruction", "on_page": "2191 Postsecondary education 6,414 (p16); counted in Other Governmental Funds Student support services 288,964 = 282,550 + 6,414 (p3)",
-     "issue": "The report's own statement counts this line under student support services, and code 2191 is in the support-services range. The category should be support services, not instruction. The extractor's own review note admits the statement disagrees."},
-    {"severity": "warning", "path": "detail[9].category", "page": 6,
-     "extracted": "charges for services/fees / miscellaneous revenue", "on_page": "1990 Other local receipts 3,175",
-     "issue": "The category (charges for services) and detail_category (miscellaneous revenue) don't match. Nothing on the page explains this line, so 'other' is arguably the right category. It was copied from the broad statement line."},
-    {"severity": "warning", "path": "detail[87].category", "page": 12,
-     "extracted": "charges for services/fees / miscellaneous revenue", "on_page": "1990 Miscellaneous local receipts 32,513",
-     "issue": "Unexplained miscellaneous receipt in the School Nutrition Fund. The category and detail_category don't match. It may be meal charges, but nothing on the page says what it is."},
-    {"severity": "warning", "path": "receipts[12].split_from", "page": 7,
-     "extracted": "Other 4,714 split into 2,584 / 850 / 1,280", "on_page": "Nonrevenue receipts 24,714 = 5200 transfers 20,000 + 5301 2,584 + 5320 850 + 5690 1,280",
-     "issue": "The split uses the p7 nonrevenue receipts group minus the transfer, which adds up to the p3/p5 'Other' 4,714. The page doesn't print the breakdown of 'Other' itself, but the match is exact. Acceptable, but the split rests on an inference."}
+    {
+      "severity": "error",
+      "path": "detail[81].amount",
+      "page": 5,
+      "extracted": 651749,
+      "on_page": "Employee Benefit 5690 Other non-revenue receipts 651,749 (p11) eliminated in the Reclassifications column (651,749) on the General Fund combining schedule (p5)",
+      "issue": "[fixed] Internal money is counted twice in detail. The p5 Reclassifications column removes 651,749 from both Employee Benefit receipts and its spending (658,990 out of student support services: 651,749 eliminated, 7,241 moved to Instruction). The GF budget schedule lines (pp8-9, 6,455,828 of spending) already include the payments into Employee Benefit. Detail spending adds up to 8,833,980, against 8,182,231 on the statement (p3), a gap of exactly 651,749. The hidden-transfer rule calls for splitting with split_from p5: Employee Benefit receipt 651,749 becomes other financing (+), and its 2900 spending 658,990 becomes 7,241 spending (instruction per p5) plus 651,749 other financing (-). decision_needed raises the question, but the lines are recorded as revenue and spending."
+    },
+    {
+      "severity": "error",
+      "path": "detail[82].category",
+      "page": 5,
+      "extracted": "support services (658,990)",
+      "on_page": "Employee Benefit spending 658,990: (658,990) reclassified out of Student support services, 7,241 of it into Instruction (623,762 = 482,058 + 134,463 + 7,241)",
+      "issue": "[fixed] Same issue on the spending side: 651,749 of this line is the eliminated internal amount. Only 7,241 is real spending, and p5 counts that under Instruction."
+    },
+    {
+      "severity": "error",
+      "path": "detail[122].category",
+      "page": 3,
+      "extracted": "instruction",
+      "on_page": "2191 Postsecondary education 6,414 (p16); counted in Other Governmental Funds Student support services 288,964 = 282,550 + 6,414 (p3)",
+      "issue": "[fixed] The report's own statement counts this line under student support services, and code 2191 is in the support-services range. The category should be support services, not instruction. The extractor's own review note admits the statement disagrees."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[9].category",
+      "page": 6,
+      "extracted": "charges for services/fees / miscellaneous revenue",
+      "on_page": "1990 Other local receipts 3,175",
+      "issue": "The category (charges for services) and detail_category (miscellaneous revenue) don't match. Nothing on the page explains this line, so 'other' is arguably the right category. It was copied from the broad statement line."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[87].category",
+      "page": 12,
+      "extracted": "charges for services/fees / miscellaneous revenue",
+      "on_page": "1990 Miscellaneous local receipts 32,513",
+      "issue": "Unexplained miscellaneous receipt in the School Nutrition Fund. The category and detail_category don't match. It may be meal charges, but nothing on the page says what it is."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[12].split_from",
+      "page": 7,
+      "extracted": "Other 4,714 split into 2,584 / 850 / 1,280",
+      "on_page": "Nonrevenue receipts 24,714 = 5200 transfers 20,000 + 5301 2,584 + 5320 850 + 5690 1,280",
+      "issue": "The split uses the p7 nonrevenue receipts group minus the transfer, which adds up to the p3/p5 'Other' 4,714. The page doesn't print the breakdown of 'Other' itself, but the match is exact. Acceptable, but the split rests on an inference."
+    }
   ]
 }
