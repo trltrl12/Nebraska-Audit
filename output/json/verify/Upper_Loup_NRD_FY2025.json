@@ -1,0 +1,21 @@
+{
+  "stem": "Upper_Loup_NRD_FY2025",
+  "values_checked": 140,
+  "issues": [
+    {"severity": "warning", "path": "receipts[*].fund_type", "page": 4,
+     "extracted": "business-type (all lines)", "on_page": "Single-column proprietary-style statements (Statements of Net Position / Revenues, Expenses and Changes in Net Position); no fund or activity label",
+     "issue": "An NRD is normally a governmental entity (property tax funded; extractor rules list NRDs separately from the entirely business-type entity types). Recording everything as business-type with net-position roll-forward is defensible given the enterprise-style statements, but governmental vs business-type treatment is an assumption."},
+    {"severity": "warning", "path": "proprietary.ending_cash", "page": 5,
+     "extracted": 422148.05, "on_page": "Cash flow page ends at investing activities; net change / ending cash not on trimmed pages",
+     "issue": "Proprietary beginning/ending cash are computed from the net position statement (p1). The four printed cash-flow sections net to -68,584.73 (the notes say -68,583.73, a $1 typo), while the computed balances change by -67,317.93: a 1,266.80 gap that will fail any proprietary roll-forward check. Report p9 (net change in cash, cash balances) was apparently not trimmed."},
+    {"severity": "warning", "path": "disbursements[*].category", "page": 3,
+     "extracted": "natural resources/conservation (no review)", "on_page": "Expenses listed by object only (Salaries, Insurance, Postage...)",
+     "issue": "Rules call for review: 'listed by object' when object-only spending is assigned the entity's function; none of the lines carry it."},
+    {"severity": "warning", "path": "detail[11].detail_category", "page": 6,
+     "extracted": "not itemized", "on_page": "Personnel expense 6,236.23",
+     "issue": "'not itemized' is for function totals with no object breakdown; Personnel expense is an object line (likely employee benefits or training and travel)."},
+    {"severity": "warning", "path": "detail[31].detail_category", "page": 7,
+     "extracted": "purchased power/cost of sales", "on_page": "Tree and mulch program 123,842.01",
+     "issue": "Program cost; cost of sales is defensible (trees resold to customers) but supplies and materials or not itemized could also fit."}
+  ]
+}
