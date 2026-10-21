@@ -1,0 +1,26 @@
+{
+  "stem": "York_Public_Schools_FY2025",
+  "values_checked": 392,
+  "issues": [
+    {"severity": "warning", "path": "missing", "page": 20,
+     "extracted": "Exhibit G function-only lines (not itemized) for programs 2130-6998",
+     "on_page": "Exhibit P (Cash Disbursements for Operational Expenses - General Fund) ends on trimmed p20 at Guidance Services 467,631.29; the by-object pages for programs 2130 onward are not in the trimmed PDF",
+     "issue": "Trimmed PDF stops partway through Exhibit P, so the object breakdown for about 8.0M of General Fund spending is missing. Totals still tie because the extractor used the Exhibit G program lines (p9-10). This report is not on the CLAUDE.md missing-pages list; re-trim needed."},
+    {"severity": "warning", "path": "detail[160].category", "page": 12,
+     "extracted": "instruction (Benefits paid 3,305,894.11; also detail[161] Other professional services 279,842.31)",
+     "on_page": "Exhibit F p6 Employee Benefit Fund column spreads its 3,585,736.42 by function: Regular instruction 2,238,956.39, Special education 306,631.94, support services, transportation, state & federal programs",
+     "issue": "All Employee Benefit spending is categorized as instruction, but the report prints the function split on p6. About 1.04M belongs to support services, student transportation and others. Lines are flagged review."},
+    {"severity": "warning", "path": "detail[180].fund_type", "page": 14,
+     "extracted": "governmental (all School Nutrition Fund lines detail[180]-detail[199], and disbursements[13] food service)",
+     "on_page": "School Nutrition Fund is reported inside Other Governmental Funds (p3, p4)",
+     "issue": "The extractor rules list school nutrition as business-type. Here the report treats it as a governmental fund and the governmental totals include it, so governmental looks defensible, but someone should confirm."},
+    {"severity": "warning", "path": "detail[47].detail_category", "page": 19,
+     "extracted": "professional/contract services",
+     "on_page": "Other Purchased Services 779.76 (also detail[66] 37.89, detail[72] 4,724.00, detail[82] 247.10)",
+     "issue": "In the school chart of accounts, Other Purchased Services (500s) is mostly travel, communications, insurance and tuition, not professional services. Judgment call."},
+    {"severity": "warning", "path": "receipts[7].review", "page": 5,
+     "extracted": "~65% student activity receipts",
+     "on_page": "Activities receipts net of the 85,630 transfer and 5,930.65 donations = 851,558.15 of 1,442,216.18",
+     "issue": "That makes the student activity share about 59%, not ~65%. It is still the dominant part, so the category stands; only the review text is off."}
+  ]
+}

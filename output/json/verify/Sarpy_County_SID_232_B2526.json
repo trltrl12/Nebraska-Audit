@@ -1,0 +1,15 @@
+{
+  "stem": "Sarpy_County_SID_232_B2526",
+  "values_checked": 11,
+  "issues": [
+    {"severity": "warning", "path": "disbursements[2].amount", "page": 1,
+     "extracted": 11139, "on_page": "Line 25 Debt Service: Other 11,139.00 (also line 19 Operating Expenses 11,139.00 and line 14 Local Receipts: Other 11,139.00)",
+     "issue": "The same amount is printed on line 14 (receipt), line 19 and line 25, and column 1 repeats the pattern (15,001 on all three lines). The printed total 36,378 includes both disbursements, so the extraction matches the page, but this looks like a pass-through that may be double counted on the form. A person may want to confirm it. Interest/fees is a guess for 'Debt Service: Other'. Already marked review."},
+    {"severity": "warning", "path": "receipts[3].category", "page": 1,
+     "extracted": "other", "on_page": "Local Receipts: Other 11,139.00",
+     "issue": "Nothing on the form says what this is, so 'other' is a defensible last resort. It is about 17% of receipts (11,139 of 65,936), so it goes to review. Already marked review."},
+    {"severity": "warning", "path": "disbursements[0].category", "page": 1,
+     "extracted": "general government", "on_page": "Operating Expenses 11,139.00",
+     "issue": "No function is printed. General government is the SID default used elsewhere, but it's a judgment call. Already marked review."}
+  ]
+}
