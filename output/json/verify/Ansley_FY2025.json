@@ -1,70 +1,54 @@
 {
   "stem": "Ansley_FY2025",
-  "values_checked": 124,
+  "values_checked": 146,
   "issues": [
     {
-      "severity": "warning",
-      "path": "ending_cash.source_page",
-      "page": 4,
-      "extracted": 3,
-      "on_page": "442,402 is printed in the Total column on p4 (and governmental activities column p1); p3 shows only the fund columns (General 329,644 etc.)",
-      "issue": "[fixed: source_page now 4] wrong source_page; amount 442,402 is correct but should cite p4"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[19].amount",
-      "page": 18,
-      "extracted": 119266,
-      "on_page": "Trash 121,666",
-      "issue": "2,400 split out of Trash is inferred: p18 prints no transfer line; the remaining 9,600 of the 52,000 transfers must sit in the business-type lines (governmental lines tie exactly: General Government 191,655 = 151,655 + 40,000; Public Works 197,414 = Street fund expenditures 195,014 + 2,400), and p14 shows 2,400 out of each utility fund, but Trash cash disbursements cannot be tied to the p15 cash flow statement. Electric does tie: p15 payments 583,864 + 112,738 + capital 129,530 + principal 45,432 + interest 65,045 = 936,609 = 939,009 - 2,400"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[21].amount",
-      "page": 18,
-      "extracted": 124918,
-      "on_page": "Sewer 127,318",
-      "issue": "2,400 transfer split inferred from p14 per-fund transfers; Sewer cash line cannot be tied to the p15 cash flows (p15 Sewer outflows total 119,459)"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[23].amount",
-      "page": 18,
-      "extracted": 124002,
-      "on_page": "Water 126,402",
-      "issue": "2,400 transfer split inferred from p14 per-fund transfers; Water cash line cannot be tied to the p15 cash flows (p15 Water outflows total 135,907)"
+      "severity": "error",
+      "path": "detail[9].category",
+      "page": 20,
+      "extracted": "other / miscellaneous revenue",
+      "on_page": "Local Receipts: Other 1,298,608",
+      "issue": "[fixed 2026-10-21: recategorized to charges for services/fees (other utility charges), mix noted in review] Broad line can be broken down from the report itself: it equals business-type cash receipts (receipts from customers 1,106,488 + miscellaneous 16,366 + advances on capital debt 8,315 + interest 70,328 = 1,201,497, p18) plus the remaining governmental receipts 97,111 (p9 total 497,438 less the other schedule lines 400,327). Receipts from customers (utility charges) are about 85% of it, so under the 'more than half' rule it should be charges for services/fees (detail other utility charges / other charges for services) with review, not other / miscellaneous revenue."
     },
     {
       "severity": "warning",
       "path": "detail[9].fund_type",
-      "page": 17,
+      "page": 20,
       "extracted": "business-type",
-      "on_page": "Local Receipts: Other 1,298,608",
-      "issue": "broad line mixes business-type utility receipts with governmental local receipts (franchise, occupation, lease, grants, donations, interest, etc.); single fund_type is an approximation (review already set)"
+      "on_page": "Local Receipts: Other 1,298,608 (Total Primary Government schedule)",
+      "issue": "Line mixes about 97,111 of governmental receipts (incl. loan proceeds 7,684) with about 1,201,497 of business-type cash receipts (incl. advances on capital debt 8,315). Tagging it business-type is the dominant choice, but governmental detail revenue is understated and debt proceeds sit inside revenue."
     },
     {
       "severity": "warning",
-      "path": "detail[5].detail_category",
-      "page": 17,
-      "extracted": "homestead/tax credits",
-      "on_page": "State Receipts: Other 13,254",
-      "issue": "printed only as 'Other'; category inferred from equality with Homestead Exemption 5,804 + Property Tax Credit 7,450 (p6); defensible, review already set"
+      "path": "detail[13].split_from",
+      "page": 21,
+      "extracted": "Electric/Trash/Sewer/Water each split into spending minus 2,400 plus other financing -2,400",
+      "on_page": "Electric 939,009; Trash 121,666; Sewer 127,318; Water 126,402 under 'Disbursements and Transfers'",
+      "issue": "The governmental splits tie exactly (191,655 - 151,655 = 40,000; 197,414 - 195,014 = 2,400). The four enterprise splits are inferred from the p17 transfers (2,400) per fund and the 52,000 total. The page does not show that each cash-basis line includes 2,400. This is defensible under the hidden-transfer rule, but it is an assumption (detail[13]-[20])."
     },
     {
       "severity": "warning",
-      "path": "receipts[18].category",
-      "page": 6,
-      "extracted": "intergovernmental/state aid",
-      "on_page": "Grants 23,500",
-      "issue": "grantor not stated; could be federal grants or donations/contributions (review already set)"
+      "path": "detail[21].fund",
+      "page": 22,
+      "extracted": "Total primary government",
+      "on_page": "Schedule of Expenditures - Modified Cash Basis - Governmental Funds: columns General / Street and Alley / City Hall / Park / Pool / Grants Fund",
+      "issue": "The fund name is stored in department and fund is set to 'Total primary government' for all 24 p22 lines (detail[21]-[44]). The schedule prints per-fund totals (137,312 / 195,014 / 14,779 / 42,945 / 35,698), but detail_totals records only the 425,748 Total, so the per-fund ties can't be checked."
     },
     {
       "severity": "warning",
-      "path": "receipts[23].category",
-      "page": 13,
-      "extracted": "charges for services/fees",
-      "on_page": "Customer Deposits 4,000 (Operating Revenues)",
-      "issue": "customer deposits are printed as operating revenue; amount as printed but nature is questionable (review already set)"
+      "path": "detail[26].detail_category",
+      "page": 22,
+      "extracted": "debt principal",
+      "on_page": "Debt Service 1,800 (Street and Alley); 1,000 (Park)",
+      "issue": "Debt Service holds principal and interest (p8: Street 1,576 + 224, Park 875 + 125). Recording it all as debt principal is the dominant choice, but 349 of interest is included (also detail[40])."
+    },
+    {
+      "severity": "warning",
+      "path": "ending_cash",
+      "page": 7,
+      "extracted": 442402,
+      "on_page": "Cash and Cash Equivalents 442,402; Cash at County Treasurer 9,665",
+      "issue": "ending_cash leaves out Cash at County Treasurer 9,665, which is also a cash line on the governmental funds balance sheet. Assumption noted in the extraction's notes."
     }
   ]
 }
