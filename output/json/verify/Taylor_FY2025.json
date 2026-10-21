@@ -1,25 +1,22 @@
 {
   "stem": "Taylor_FY2025",
-  "values_checked": 47,
+  "values_checked": 55,
   "issues": [
-    {"severity": "error", "path": "transfers_in.amount", "page": 5,
-     "extracted": 64325, "on_page": "Transfers 64,325 (Total Primary Government budget schedule, revenues)",
-     "issue": "64,325 is the transfers line for the whole primary government, so it includes the Sewer Fund's 'Transfers from other funds' 43,834 (p4), which is already in business_type.transfers_net. The sewer transfer cannot sit in Federal or Other Local Receipts instead: 1,980,987 + 584,932 - 2,557,647 leaves only 8,272, which would go negative. So 43,834 is counted twice across fund types. Governmental transfers in are at most 20,491 (64,325 - 43,834)."},
-    {"severity": "error", "path": "disbursements", "page": 6,
-     "extracted": "General Government 121,912 + Public Works 85,738 + Public Health 13 + Culture 12,875 = 220,538 recorded as spending, plus transfers_out 43,834 (computed)",
-     "on_page": "Disbursements and Transfers schedule: no transfers-out line; Total Disbursements and Transfers 2,798,074 ties to ending cash 451,207",
-     "issue": "The schedule ties to actual cash and counts 64,325 of transfers in, so the matching 64,325 of transfers out has to sit inside its disbursement lines. It is not in the Sewer line: 2,577,536 is below the sewer's cash outflows of 2,578,536, which include no transfers out (p4). So the governmental function lines (220,538) almost certainly contain about 64,325 of transfers out, and the page doesn't say which line. Treating 220,538 as spending and also subtracting transfers_out 43,834 counts transfers as spending. Fix per the hidden-transfer rule: a contra line plus transfers_out 64,325 and transfers_in about 20,491. This leaves the net (-43,834) and the roll-forward unchanged."},
-    {"severity": "warning", "path": "report_discrepancies[0]", "page": 6,
-     "extracted": 1000, "on_page": "Sewer 2,577,536 (budget schedule p6) vs cash outflows 9,715 + 13,647 + 1,926,038 + 579,804 + 49,332 = 2,578,536 (cash flows p4)",
-     "issue": "I checked the 1,000 gap. No digit was misread. Each printed statement adds up on its own: budget revenues 2,728,704, resources 3,249,281, disbursements 2,798,074, ending 451,207 = 446,775 + 4,432; sewer cash 164,854 + 22,945 = 187,799; net position 477,233 -> 1,853,449. No line is missing from the trimmed pages. The gap comes from the report's own schedules disagreeing by 1,000 on the Sewer fund, so it belongs in report_discrepancies, where it is. Because governmental receipts are derived by subtraction, the 1,000 may really belong in the residual line receipts[8] (8,272 vs 9,272) or in a governmental spending line. A person should settle this from the full report."},
-    {"severity": "warning", "path": "missing", "page": null,
-     "extracted": null, "on_page": "Trimmed PDF jumps from report p13 (Statement of Net Position) to p23 (proprietary fund). Report pp14-22 (Statement of Activities, governmental fund statements) are not trimmed.",
-     "issue": "Governmental receipts, beginning cash and transfers are derived from the all-funds budget schedule because the governmental fund statements are missing from the trim. Re-trim and re-extract from the governmental statements. The extractor's decision_needed already raises this question."},
-    {"severity": "warning", "path": "receipts[8]", "page": 5,
-     "extracted": 8272, "on_page": "not printed (Federal 1,980,987 + Other Local Receipts 584,932 - sewer cash receipts 2,557,647)",
-     "issue": "Computed residual with a made-up label, marked computed, review and decision_needed. The arithmetic is right, but the figure depends on the 1,000 schedule mismatch above."},
-    {"severity": "warning", "path": "missing", "page": 5,
-     "extracted": null, "on_page": "Budgetary comparison schedule, Total Primary Government (pp5-6): revenue, disbursement and Sewer 2,577,536 lines, budget and actual",
-     "issue": "detail[] is empty because the schedule mixes governmental and sewer funds. Its governmental lines repeat receipts and disbursements, but the Sewer 2,577,536 line (actual and budget 2,674,767) could have gone into detail as business-type. This is a judgment call."}
+    {
+      "severity": "warning",
+      "path": "missing",
+      "page": 12,
+      "extracted": "detail: []",
+      "on_page": "Budgetary Comparison Schedule - Cash Basis, Total Primary Government (pp12-13): revenue lines (Property Taxes 33,157; Federal Receipts 1,980,987; Pro-Rate Motor Vehicle 73; Highway Allocation and Incentive 37,419; Motor Vehicle Fees 2,474; Municipal Equalization 11,691; Other State Receipts 6,868; Motor Vehicle Taxes 2,480; In Lieu of Taxes 4,298; Other Local Receipts 584,932; Transfers 64,325) and disbursement lines (General Government 121,912; Public Works 85,738; Public Health and Social Services 13; Culture and Recreation 12,875; Sewer 2,577,536), with budgets",
+      "issue": "The extractor rules say a budget schedule's lines go into detail for every fund, including the business-type Sewer line. The extractor left the schedule out on purpose and explained why in notes: it is one all-funds column that mixes governmental and sewer revenue, so Federal and Other Local Receipts can't be given a fund_type, and its function lines include 64,325 of transfers. That reasoning holds up, but at least the Sewer disbursement line (actual 2,577,536, budget 2,674,767) could have been recorded as business-type. A person should decide."
+    },
+    {
+      "severity": "warning",
+      "path": "report_discrepancies",
+      "page": 3,
+      "extracted": "receipts[8] 69 and receipts[9] 2,896 (fund statement p6), each with a review note",
+      "on_page": "Statement of Activities p3: Pro Rate Motor Vehicle 73, Property Tax Credit 2,892 (fund statement p6: 69 and 2,896; budget schedule p12: Pro-Rate 73)",
+      "issue": "[fixed 2026-10-21: report_discrepancies entry added] The report's own statements disagree by 4 on two lines, and the differences offset (the total is 2,965 either way). The figures as recorded match p6. The review notes cover it, but report_discrepancies has no entry for it."
+    }
   ]
 }
