@@ -1,12 +1,30 @@
 {
   "stem": "Wisner_Care_Center_FY2025",
-  "values_checked": 30,
+  "values_checked": 67,
   "issues": [
-    {"severity": "warning", "path": "receipts", "page": 2,
-     "extracted": "[] (receipts and disbursements empty)", "on_page": "Statement of Revenues, Expenses and Changes in Net Position (report p12) not in trimmed PDF; trim jumps report p11 -> p13 -> p29",
-     "issue": "no revenue/expense lines can be extracted from the 3 trimmed pages; the report needs re-trimming (report p12) and re-extraction. Also not listed in CLAUDE.md open follow-ups. decision_needed already asks this"},
-    {"severity": "warning", "path": "business_type.adjustments[0].amount", "page": 1,
-     "extracted": -853124, "on_page": "net position 790,193 (2025) and 1,643,317 (2024); the change -853,124 is printed only on the City of Wisner Statement of Activities (component unit column)",
-     "issue": "computed placeholder (marked computed and review) that stands in for the whole year's revenues less expenses; it is not a real adjustment and would distort any adjustments totals"}
+    {
+      "severity": "warning",
+      "path": "receipts[8].category",
+      "page": 2,
+      "extracted": "other",
+      "on_page": "Uncollectible ERC (note M) (189,411)",
+      "issue": "Write-off of an Employee Retention Credit receivable (a federal payroll credit). It could be categorized as federal grants rather than other. Flagged review already; judgment call."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[12]",
+      "page": 2,
+      "extracted": -78459,
+      "on_page": "ARPA grant (note K) (78,459)",
+      "issue": "Negative federal grant revenue. The 2024 balance sheet shows construction in progress 78,459 and unearned grant advance 24,041, and the cash flow shows repayment of grant proceeds (102,500), so this looks like a grant reversal or repayment. Amount and sign match the page. A person should confirm it belongs in receipts as negative revenue, and decision_needed has no entry for it."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[13].category",
+      "page": 2,
+      "extracted": "donations/contributions",
+      "on_page": "Other grant revenue 4,124",
+      "issue": "Grant source not stated. The cash flow statement (p3) lists 'Grant proceeds received 4,124' apart from 'Donations received', so it may be a government grant (federal grants or intergovernmental/state aid). Flagged review already."
+    }
   ]
 }
