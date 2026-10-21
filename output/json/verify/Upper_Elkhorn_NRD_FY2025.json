@@ -1,0 +1,27 @@
+{
+  "stem": "Upper_Elkhorn_NRD_FY2025",
+  "values_checked": 135,
+  "issues": [
+    {"severity": "warning", "path": "detail[36]", "page": 7,
+     "extracted": {"section": "other financing", "amount": -120000, "printed_in": "expenditure"}, "on_page": "Sinking Fund Transfers 120,000 (inside Total expenditures 1,652,243)",
+     "issue": "The transfer is printed as a positive amount inside the expenditure total. It was recorded as -120,000 with printed_in. The rules reserve printed_in for opposite-sign lines, so 'includes: [\"other financing\"]' alone would be the expected treatment. The expenditure items add to 1,532,243, and 1,532,243 + 120,000 = 1,652,243. A signed -120,000 makes that total check fail if the validator adds the signed amount. detail[7] (Transfers +120,000, revenue section) also carries printed_in although it has the same sign as the revenue lines."},
+    {"severity": "warning", "path": "receipts[6].category", "page": 4,
+     "extracted": "other", "on_page": "Other sources 30,858",
+     "issue": "Nothing in the report explains this line. The Statement of Activities (p2) shows nameplate capacity tax 54,744 and miscellaneous 58,522 as general revenues. Part of 'Other sources' (or of 'Local district taxes') may be nameplate capacity tax (other taxes). It is already marked review."},
+    {"severity": "warning", "path": "receipts[2].category", "page": 4,
+     "extracted": "charges for services/fees", "on_page": "Chemigation 87,750",
+     "issue": "Chemigation revenue is mostly state chemigation permit fees, so 'licenses and permits' could fit. The Statement of Activities counts it as charges for services. Judgment call; the same applies to detail[3]."},
+    {"severity": "warning", "path": "receipts[5].category", "page": 4,
+     "extracted": "reimbursements/refunds", "on_page": "Reimbursements from other districts 28,664",
+     "issue": "Payments from other districts could be intergovernmental (other local governments). It is already marked review."},
+    {"severity": "warning", "path": "disbursements", "page": 4,
+     "extracted": "natural resources/conservation (by-object lines)", "on_page": "Operating expenditures listed by object (Auto and truck expenses ... Chemigation)",
+     "issue": "The statement lists spending by object only. The function was assigned from the entity type, as the rules say, but the 'listed by object' review flag the rules call for was not added."},
+    {"severity": "warning", "path": "detail[8].detail_category", "page": 6,
+     "extracted": "repairs and maintenance", "on_page": "Auto and truck expense 33,001",
+     "issue": "Vehicle expense could be mostly fuel. Judgment call."},
+    {"severity": "warning", "path": "detail[14].detail_category", "page": 6,
+     "extracted": "dues, training and travel", "on_page": "Fees and licenses 3,868",
+     "issue": "Fees and licenses paid do not clearly fit dues, training and travel. Judgment call."}
+  ]
+}
