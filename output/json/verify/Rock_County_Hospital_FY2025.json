@@ -2,14 +2,14 @@
   "stem": "Rock_County_Hospital_FY2025",
   "values_checked": 106,
   "issues": [
-    {"severity": "warning", "path": "missing", "page": 4,
-     "extracted": null, "on_page": "Trimmed p4 = report p6 (Statements of Cash Flows, ends '(Continued)'); trimmed p5 = report p8. Report p7 (cash flow continuation) is not in the trimmed PDF",
-     "issue": "Continuation page of the cash flow statement was not trimmed. It probably holds only the operating-loss reconciliation and noncash disclosures, so no JSON figures depend on it, but this has not been confirmed."},
-    {"severity": "warning", "path": "balance_sheet.liabilities[5].category", "page": 2,
-     "extracted": "accrued liabilities", "on_page": "Accrued compensated absences and related benefits, excluding current portion 128,000",
-     "issue": "This is the noncurrent portion. 'accrued liabilities' is meant for amounts due soon, so 'other liabilities' (or long-term) may fit better."},
     {"severity": "warning", "path": "receipts[5].category", "page": 3,
      "extracted": "donations/contributions", "on_page": "Noncapital grants and contributions 122,974",
-     "issue": "The source isn't stated. The grants may be governmental (state/federal) rather than private gifts. The line is already marked review."}
+     "issue": "The page doesn't say where the grants come from. Some or all of it may be government money (federal grants or intergovernmental/state aid). The extractor already flagged it for review."},
+    {"severity": "warning", "path": "detail[54].detail_category", "page": 8,
+     "extracted": "professional/contract services", "on_page": "Information technology - Supplies and Other 201,584",
+     "issue": "Judgment call. The column is printed as 'Supplies and Other', so this could equally be supplies and materials or software/subscriptions."},
+    {"severity": "warning", "path": "detail", "page": 8,
+     "extracted": "Supplies and Other lines given supply/service detail_categories", "on_page": "Supplies and Other column total 9,498,256 = statement employee benefits 1,632,618 + supplies and other 7,865,638",
+     "issue": "Employee benefits are spread across the departments' Supplies and Other column, so the supply and service detail_categories overstate supplies by about 1.63M and benefits never show up as their own detail line. This is noted only in the review on detail[57]."}
   ]
 }

@@ -1,54 +1,18 @@
 {
   "stem": "Rushville_FY2025",
-  "values_checked": 72,
+  "values_checked": 116,
   "issues": [
-    {
-      "severity": "error",
-      "path": "report_discrepancies",
-      "page": 5,
-      "extracted": "one 'business' entry, difference 1 (nonoperating total only)",
-      "on_page": "Operating expense lines (Total column) add to 423,211 but Total operating expenses printed 423,210 (Golf column lines add to 126,920, printed 126,919); nonoperating lines 1,521 - 7,194 = (5,673), printed (5,672)",
-      "issue": "[fixed] The business-type roll-forward from the extracted items (997,281 + 515,968 - 430,405 + 53,063 = 1,135,907) is 2 short of the printed ending 1,135,909. The operating-expenses rounding gap (1) is not recorded in report_discrepancies, and the recorded business difference (1) understates the gap (2)."
-    },
-    {
-      "severity": "error",
-      "path": "missing",
-      "page": 7,
-      "extracted": "detail: [] (schedule deliberately skipped)",
-      "on_page": "Statement of Revenues and Expenditures - Budgetary Basis, Budget and Actual - All Funds: revenues Taxes and special assessments 540,809 (budget 406,895), Licenses and permits 4,263 (2,800), Intergovernmental 491,055 (279,034), Charges for services 713,651 (709,827), Interest 71,615 (50,000), Grants and donations 14,207 (20,000), Other 152,075 (-), Transfers in 53,063; Total revenues 2,040,738. Expenditures General Government 539,719 (201,100), Public Safety 151,537 (208,780), Streets 222,552 (354,632), Parks and recreation 161,333 (323,175), Cemetery 85,612 (97,900), Library 83,075 (71,750), Water 138,633 (142,260), Sewer 97,799 (100,550), Golf 122,104 (119,600), Principal 18,462 (69,297), Interest and charges 7,194 (-), Transfers out 53,063; Total expenditures 1,681,083",
-      "issue": "[fixed] The only supplementary (budget-to-actual) schedule in the file is not entered in detail[]/detail_totals[]. The rules say to capture every budget-schedule line, including the utility fund lines (Water, Sewer, Golf are business-type). No other detail schedule exists, so recording it would not double count. The extractor skipped it because revenue lines mix fund types. If it is recorded, the mixed revenue lines need a fund-type decision or review flag."
-    },
-    {
-      "severity": "warning",
-      "path": "balance_sheet.equity",
-      "page": 1,
-      "extracted": "828,927 + 835,718 + 590,996 + 212,969 = 2,468,610",
-      "on_page": "TOTAL NET POSITION 2,468,609",
-      "issue": "Net position lines add to 1 more than the printed total (rounding in the report). Not listed in report_discrepancies (the balance entry only covers assets vs liabilities+net position)."
-    },
-    {
-      "severity": "warning",
-      "path": "ending_cash",
-      "page": 2,
-      "extracted": 104660,
-      "on_page": "Cash (including cash equivalents) 104,660; Certificates of Deposit 40,000; Cash held by County Treasurer 7,018; Restricted Cash in Bank 377,163; Restricted Certificates of Deposit 677,077 (Total Governmental Fund column)",
-      "issue": "ending_cash uses only the cash line. The rule says 'cash and cash equivalents/investments', so CDs and county treasurer cash (151,678 with those) and possibly restricted cash/CDs (1,205,918 with all) could belong. The extractor's choice is noted in notes; a person should confirm it."
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[9].category",
-      "page": 5,
-      "extracted": "utilities",
-      "on_page": "Personal Services 199,869 (Water 76,749, Sewer 76,777, Golf 46,343)",
-      "issue": "All business-type object lines (disbursements[9]-[15]) are under 'utilities', but about 30% of operating expenses (Golf column 126,919) is a golf course, which is culture/recreation. Using the dominant function is defensible; the lines are already flagged for review."
-    },
-    {
-      "severity": "warning",
-      "path": "ending_fund_balance",
-      "page": 3,
-      "extracted": 1332700,
-      "on_page": "p3 fund balance end of year General 581,365 / Permanent Trust 645,337; p2 balance sheet total fund balances General 519,407 / Permanent Trust 707,295",
-      "issue": "The report's fund-level ending balances differ between the two statements by 61,958 (equal to the Permanent Trust restricted cash in bank). The totals agree (1,332,700), so the extraction is unaffected, but it is an inconsistency in the report. p2 General Fund total assets 519,406 vs total fund balances 519,407 (rounding)."
-    }
+    {"severity": "warning", "path": "disbursements[9].category", "page": 6,
+     "extracted": "utilities", "on_page": "Total column object lines (Personal Services through Depreciation, disbursements[9]-[15]); Golf column total operating expenses 126,919",
+     "issue": "All business-type object lines are categorised as utilities, but the Golf fund (about 30% of operating expenses) is culture/recreation. The page prints the Water/Sewer/Golf columns, so the lines could be split by fund. This also doesn't match detail[16], where Golf is culture/recreation."},
+    {"severity": "warning", "path": "report_discrepancies", "page": 1,
+     "extracted": "no entry for the net position section", "on_page": "Net position lines 828,927 + 835,718 + 590,996 + 212,969 = 2,468,610 vs printed TOTAL NET POSITION 2,468,609 (governmental column 520,718 + 584,427 + 227,556 = 1,332,701 vs 1,332,700)",
+     "issue": "A $1 rounding difference printed in the report is not recorded in report_discrepancies. The balance entry covers only assets and total liabilities + net position."},
+    {"severity": "warning", "path": "proprietary.investing", "page": 7,
+     "extracted": -490, "on_page": "Total column lines (519) + 30 = (489); printed net investing (490); printed net increase 154,148 vs the four section totals 154,147",
+     "issue": "A $1 rounding difference in the printed cash flow statement (Water and Golf columns are also off by 1). The amounts match the page, but it is not in report_discrepancies."},
+    {"severity": "warning", "path": "ending_cash", "page": 3,
+     "extracted": 104660, "on_page": "Cash 104,660; Certificates of Deposit 40,000; Cash held by County Treasurer 7,018; Restricted Cash in Bank 377,163; Restricted CDs 677,077",
+     "issue": "ending_cash is only the unrestricted cash line, and ending_investments is null even though CDs (40,000 + 677,077) are printed. This is defensible because the identity uses fund balance (GAAP), but it understates governmental cash and investments (total 1,205,918)."}
   ]
 }
