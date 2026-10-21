@@ -1,38 +1,30 @@
 {
   "stem": "Tecumseh_FY2025",
-  "values_checked": 105,
+  "values_checked": 97,
   "issues": [
     {
-      "severity": "error",
-      "path": "detail[29]-detail[34]",
-      "page": 10,
-      "extracted": "LB840 schedule recorded as separate fund 'LB840' (receipts 317,399, disbursements 305,555)",
-      "on_page": "The governmental funds are only General and Debt Service (p3, p4). LB840's ending balance of 202,772 falls inside the General Fund's 'Restricted for Economic development' 632,983 (p3).",
-      "issue": "[fixed] Double counting. The LB840 Funds are a sub-account of the General Fund, so their receipts and disbursements are already in the General Fund budget schedule lines (detail[0]-[17], p8), e.g. Economic development 381,409 already includes the LB840 grants, administration and capital outlay. Record only one of the two, or keep LB840 as a breakdown that is not added on top of the General Fund. The extractor noticed this (decision_needed[0]) but still recorded both."
-    },
-    {
-      "severity": "error",
-      "path": "detail[29]",
-      "page": 10,
-      "extracted": "sales tax 109,009 (section revenue)",
-      "on_page": "Sales tax transfer from City 109,009",
-      "issue": "[fixed] A line labelled 'transfer' is recorded as revenue. This is money moved from the city's sales tax to LB840 inside the General Fund. The tax is already counted once in the General Fund's Sales tax 494,467 (p8), so counting it here as sales tax counts it twice."
+      "severity": "warning",
+      "path": "decision_needed[0].recorded_as",
+      "page": 11,
+      "extracted": "Recorded as separate fund 'LB840' in detail; not added to statement receipts/disbursements",
+      "on_page": "LB840 Funds schedule: Sales tax transfer from City 109,009; Program income 203,511; Investment income 4,879; Total Receipts 317,399; Grants 9,081; Administration 107,972; Capital outlay 188,502; Total Disbursements 305,555",
+      "issue": "recorded_as contradicts the notes and the detail list. detail[] has no LB840 lines; the notes say the p11 schedule was left out because LB840 is a General Fund sub-account (p3 and p4 show only General and Debt Service funds). Leaving it out is defensible and avoids double counting, but decision_needed[0] should describe what was actually done."
     },
     {
       "severity": "warning",
       "path": "decision_needed",
-      "page": 9,
-      "extracted": "transfers_out 890,270 incl. Debt Service 'Transfers out' (316,411)",
-      "on_page": "DS Transfers out (316,411) (p4, p9). The utility records it as 'Repayment of due from other fund 316,411' (p7), not as a transfer. The Statement of Activities Total column shows 'Transfers to (from) funds' (316,411), which doesn't net to zero (p2).",
-      "issue": "A one-sided transfer. The governmental side calls it a transfer out, while the receiving utility treats it as an advance being repaid. A person should decide whether it stays in transfers_out or is treated as other financing (repaying an interfund advance). This is not in decision_needed[]."
+      "page": 4,
+      "extracted": "transfers_out 890,270 (includes Debt Service Transfers out 316,411)",
+      "on_page": "Debt Service Transfers out (316,411) (p4, p10). The utility fund records it as 'Repayment of due from other fund 316,411' (p7, noncapital financing), not as a transfer. Statement of Activities 'Transfers to (from) funds' Total column = (316,411) (p2): it does not net to zero.",
+      "issue": "One-sided transfer. The governmental side treats 316,411 as a transfer out, while the utility treats it as an interfund advance being repaid; business_type.transfers_net is 417,859 only. A person should decide whether it stays in transfers_out or becomes other_financing. decision_needed[] does not have this question."
     },
     {
       "severity": "warning",
-      "path": "proprietary",
-      "page": 7,
-      "extracted": null,
-      "on_page": "Statement of Cash Flows - Proprietary Fund: operating 1,682,973; noncapital financing 734,270; capital and related financing (547,561); investing (3,399,166); beginning cash 1,755,252; ending cash 225,768",
-      "issue": "The proprietary cash flows are printed but not captured. The governmental funds are cash basis, while the utility fund is full accrual. Under the 'GAAP only' rule, null is defensible, but the data is on the page."
+      "path": "receipts[9].category",
+      "page": 4,
+      "extracted": "other",
+      "on_page": "Miscellaneous receipts 274,115 (General 246,877, Debt Service 27,238)",
+      "issue": "The line is marked review, but the review text implies that LB840 program income of 203,511 (p11) is most of it. The Statement of Activities (p2) shows Economic development charges for services of 81,411, so at least part of the program income sits in Charges for services rather than Miscellaneous. What the line holds is not determinable from the page, so 'other' is defensible."
     },
     {
       "severity": "warning",
@@ -40,7 +32,23 @@
       "page": 6,
       "extracted": "intergovernmental/state aid",
       "on_page": "Grant revenue 1,465,044 (nonoperating)",
-      "issue": "The page doesn't say whether the grant is federal or state. The Statement of Activities (p2) shows it as Capital Grants and Contributions (1,495,044 = 1,465,044 + 30,000 capital contributions). The category is a judgment call; the line is already marked for review."
+      "issue": "The page doesn't say whether the grant is federal or state. The Statement of Activities (p2) puts it under Capital Grants and Contributions (1,495,044 = 1,465,044 + 30,000 capital contributions). This is a judgment call; the line is already marked review."
+    },
+    {
+      "severity": "warning",
+      "path": "proprietary",
+      "page": 7,
+      "extracted": null,
+      "on_page": "Statement of Cash Flows - Proprietary Fund: operating 1,682,973; noncapital financing 734,270; capital and related financing (547,561); investing (3,399,166); beginning cash 1,755,252; ending cash 225,768",
+      "issue": "The proprietary cash flows are printed but not captured. The governmental funds are cash basis, while the utility fund is full accrual. Under the 'GAAP only' rule null is defensible, but the data is on the page."
+    },
+    {
+      "severity": "warning",
+      "path": "notes",
+      "page": null,
+      "extracted": "...Read pages 1-11 of 11 (v8 re-trim: ...) LB840 schedule (p11) left out of detail...",
+      "on_page": "trimmed PDF has 11 pages",
+      "issue": "The page count is correct and all 11 pages hold only lines that are in the JSON or deliberately excluded. However, the notes do not end with 'Read pages 1-11 of 11': the LB840 sentence was appended after it."
     }
   ]
 }
