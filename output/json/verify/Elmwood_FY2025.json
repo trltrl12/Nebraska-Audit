@@ -1,15 +1,12 @@
 {
   "stem": "Elmwood_FY2025",
-  "values_checked": 136,
+  "values_checked": 144,
   "issues": [
-    {"severity": "warning", "path": "receipts[14].category", "page": 7,
-     "extracted": "charges for services/fees", "on_page": "Other revenue 4,565 (operating revenues, Water 2,441 + Sewer 2,124)",
-     "issue": "Label is 'Other revenue'; charges for services is defensible (p2 Statement of Activities counts total operating revenues 345,111 as charges for services) but the category doesn't match the label and the line has no review flag"},
-    {"severity": "warning", "path": "disbursements[7..15].category", "page": 7,
-     "extracted": "utilities", "on_page": "Water/Sewer operating expenses listed by object (Personnel services, Professional fees, ... Depreciation)",
-     "issue": "Spending is listed by object with no function; rules ask for the fund's function plus review 'listed by object', and no review is set"},
-    {"severity": "warning", "path": "proprietary", "page": 8,
-     "extracted": null, "on_page": "Statement of Cash Flows - Proprietary Funds, Total: operating 19,686; noncapital financing 70,000 (transfers); capital and related financing (81,372); investing 1,860; cash beginning 278,069; ending 288,243",
-     "issue": "Enterprise funds are accrual and the trimmed PDF has a proprietary cash flow statement, but proprietary is null because the governmental basis is modified cash. Defensible under the GAAP-only rule; the user may want these figures recorded"}
+    {"severity": "warning", "path": "receipts[11].category", "page": 5,
+     "extracted": "donations/contributions", "on_page": "Contributions and grants 13,801",
+     "issue": "the label mixes grants and contributions (p13: Park 6,991, Library 6,810; p2 shows it as operating grants and contributions). If any part is a government grant (e.g. state library aid) it is intergovernmental. A mixed label should get the dominant category plus review, and no review is set. Same for detail[10] and detail[11]"},
+    {"severity": "warning", "path": "receipts[16].category", "page": 7,
+     "extracted": "donations/contributions", "on_page": "Grant income 16,963 (Water Fund, nonoperating)",
+     "issue": "p3 shows this as a Water capital grant. The grantor isn't stated and it could be a state or federal grant (intergovernmental/federal grants) rather than a private contribution. Already marked review"}
   ]
 }
