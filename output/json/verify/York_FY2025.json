@@ -1,0 +1,27 @@
+{
+  "stem": "York_FY2025",
+  "values_checked": 193,
+  "issues": [
+    {"severity": "error", "path": "receipts[4].source_page", "page": 7,
+     "extracted": 6, "on_page": "Sales tax 6,746,990 (Total Governmental Funds column, p7)",
+     "issue": "The amount is right, but the cited page is wrong. The Total Governmental Funds column is on p7. Page 6 shows only General 4,657,960 and Street 402,282, so 6,746,990 does not appear on p6."},
+    {"severity": "warning", "path": "receipts[0].source_page", "page": 7,
+     "extracted": 6, "on_page": "Total Governmental Funds column is on p7",
+     "issue": "receipts[0]-[3] (Property 2,162,400, Motor vehicle 243,398, Special assessments 61,667, Occupation/franchise 3,386,771) cite p6. Those figures appear on p6 only because they equal the General/Street fund columns. The Total column that the rules call for is on p7."},
+    {"severity": "error", "path": "missing", "page": 22,
+     "extracted": null, "on_page": "Combining Statement of Revenues and Expenditures - General Fund Departments (report p72): object-level revenue and expenditure lines for General, Capital Projects, Auditorium, Parks, Police, Community Center (e.g. Salaries and benefits 583,001 / 100,721 / 327,031 / 2,277,118 / 427,231; State assistance 187,007; School funding 27,000; Capital outlay 5,908,201 ...)",
+     "issue": "Page 22 holds schedule lines that are not in the JSON. The extractor left the page out because it is cut off: the remaining department columns (Fire/EMS, Library, Total..., report p73) are not in the trimmed PDF. Re-trim to include report p73, then record this schedule by department and object in place of the function-only General Fund budget lines."},
+    {"severity": "warning", "path": "receipts[8].category", "page": 7,
+     "extracted": "federal grants", "on_page": "Grants 579,210",
+     "issue": "Made up of General 42,096, CDBG 101,461, Capital Projects 188,390 and nonmajor 247,263 (Creative District 99,428, Aviation 147,835). Creative District grants are probably state money (Nebraska Arts Council), and the Capital Projects source isn't stated, so 'federal grants' is uncertain. The same applies to detail[6], detail[44] and detail[61]."},
+    {"severity": "warning", "path": "receipts[9].category", "page": 7,
+     "extracted": "other", "on_page": "Loan collections 2,372",
+     "issue": "Repayments of CDBG loans are a loan-principal inflow, not unexplained revenue. It's a judgment call between 'other' and treating it as financing. Same for detail[40]."},
+    {"severity": "warning", "path": "disbursements[5].category", "page": 7,
+     "extracted": "other", "on_page": "Airport 411,739",
+     "issue": "No airport function in the list, so 'other' with review is defensible. 'economic development' or 'general government' are alternatives. Same for detail[68]."},
+    {"severity": "warning", "path": "detail[23].category", "page": 14,
+     "extracted": "culture/recreation", "on_page": "Senior center 14,197 (under Environment and leisure)",
+     "issue": "The category rules list senior services under health/welfare. It is printed under the Environment and leisure heading, so culture/recreation is defensible."}
+  ]
+}
