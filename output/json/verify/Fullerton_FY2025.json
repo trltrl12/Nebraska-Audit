@@ -1,11 +1,18 @@
 {
   "stem": "Fullerton_FY2025",
-  "values_checked": 132,
+  "values_checked": 113,
   "issues": [
-    {"severity": "warning", "path": "receipts[8].category", "page": 7, "extracted": "federal grants", "on_page": "Grant income 160,485 (General 22,332, Street 135,258, Equipment Sinking 2,895)", "issue": "Grant source isn't stated. The Statement of Activities (p3) shows 138,153 as capital grants for Public Works and 22,332 as operating grants, so some of this may be state money. Same judgment applies to detail[8] (163,297) and business-type receipts[16] (2,812). The extractor already marked these for review."},
-    {"severity": "warning", "path": "balance_sheet.liabilities[5].category", "page": 1, "extracted": "accrued liabilities", "on_page": "Compensated absences 43,455 (under Noncurrent liabilities)", "issue": "The rules limit accrued liabilities to compensated absences due soon. This line is printed as noncurrent, so 'debt - due in more than one year' or 'other liabilities' may fit better."},
-    {"severity": "warning", "path": "detail[6].fund_type", "page": 13, "extracted": "governmental", "on_page": "Charges for services 460,870 (all-funds schedule)", "issue": "About 365,000 of this all-funds line is water/sewer charges (460,870 - governmental 95,642), so most of it is business-type even though it is tagged governmental. The same mix applies to detail[8] Grant income, detail[11] Interest income, detail[19] Capital outlay (incl. 307,230 utility), detail[20] Principal (incl. 29,288) and detail[21] Interest (incl. 12,844). Each has a review note, but fund-type totals built from detail will be overstated for governmental."},
-    {"severity": "warning", "path": "report_discrepancies", "page": 4, "extracted": null, "on_page": "Prior period adjustment, Compensated absences: Governmental (30,610) but Total column (20,861); subtotal Governmental (51,471) but Total (41,722); restated Total 5,328,052 = 5,379,523 - 51,471", "issue": "The Statement of Activities Total column doesn't add up: the compensated-absences adjustment and its subtotal are 9,749 too small, but the restated balance uses the correct 51,471. No extracted value comes from this page, but report_discrepancies doesn't mention it."},
-    {"severity": "warning", "path": "disbursements[8]", "page": 11, "extracted": "utilities (Personnel, Supplies, Insurance, ...)", "on_page": "Enterprise fund operating expenses listed by object", "issue": "The business-type expenses are listed by object only. The rules ask for review 'listed by object' on these lines (disbursements[8]-[15]), and they don't have it. The function (utilities) itself is right."}
+    {"severity": "warning", "path": "detail[6].fund_type", "page": 14,
+     "extracted": "governmental", "on_page": "Charges for services 460,870 (all-funds budget schedule)",
+     "issue": "about 365,228 of this all-funds line is water/sewer (business-type) cash receipts vs 95,642 governmental charges; tagged governmental although mostly business-type (review note present). Same mix applies to detail[11] interest, detail[20] capital outlay, detail[21] principal, detail[22] interest"},
+    {"severity": "warning", "path": "ending_cash", "page": 5,
+     "extracted": 897944, "on_page": "Cash and cash equivalents (claim on cash) 897,944; restricted cash 792,016; County treasurer cash 27,429 (Total Governmental Funds)",
+     "issue": "ending_cash excludes restricted cash and county treasurer cash; assumption stated in notes"},
+    {"severity": "warning", "path": "balance_sheet.liabilities[5].category", "page": 1,
+     "extracted": "accrued liabilities", "on_page": "Compensated absences 43,455 (under Noncurrent liabilities)",
+     "issue": "printed as a noncurrent liability; accrued liabilities is for amounts due soon, so other liabilities may fit better"},
+    {"severity": "warning", "path": "report_discrepancies", "page": 4,
+     "extracted": null, "on_page": "Prior period adjustment, Total column: Compensated absences (20,861) vs governmental (30,610); subtotal (41,722) vs (51,471); restated total 5,328,052 ties to (51,471)",
+     "issue": "Statement of Activities total column prints the wrong prior-period figures (difference 9,749); not used in the JSON but the printed page does not add up and is not recorded in report_discrepancies"}
   ]
 }

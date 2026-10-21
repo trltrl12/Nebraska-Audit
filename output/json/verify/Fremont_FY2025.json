@@ -1,22 +1,18 @@
 {
   "stem": "Fremont_FY2025",
-  "values_checked": 194,
+  "values_checked": 176,
   "issues": [
-    {"severity": "error", "path": "missing", "page": 11,
-     "extracted": "six nonmajor fund columns only (revenue 6,287,349; expenditure 5,036,699); Total Non-Major column not recorded",
-     "on_page": "Total Non-Major Governmental Funds column (p11): Property tax 679,483; Payments in lieu of taxes 2,111; Business 91,179; Intergovernmental 5,826,299; Keno 978,897; Charges for services 276,652; Donations 74,972; Investment income 357,630; Sales proceeds 192; Other income 1,997; Total revenues 8,289,412; General government 2,697,906; Public safety 1,551,219; Public works 263,493; Environment and leisure 1,167,788; Lease principal 22,864; Lease interest 1,253; Principal on long-term debt 590,000; Interest on long-term debt 109,529; Total expenditures 6,404,052; Loan proceeds 63,739; Insurance recoveries 5,283; Transfers in 201,216; Transfers out (1,387,838)",
-     "issue": "[fixed] The nonmajor combining schedule has more than 6 fund columns: the six shown add to only 6,287,349 of the 8,289,412 total revenues. The rule says to use the Total column (fund 'Nonmajor funds (combined)') in that case. Its Total column is printed on p11, but the extractor recorded only the six visible funds. That leaves about 2,002,063 of nonmajor revenue out of detail (including all nonmajor property tax 679,483 and keno 978,897), plus about 1,367,353 of expenditures (debt principal 590,000, interest 109,529, public works 263,493…) and nonmajor transfers (100,000 in, 783,100 out). Fix: replace the per-fund nonmajor lines with the Total column lines and totals."},
-    {"severity": "warning", "path": "missing", "page": 11,
-     "extracted": null, "on_page": "Combining nonmajor statement continuation (report p70 or so: the funds holding property tax, keno, debt service, public works) not in trimmed PDF",
-     "issue": "The trimmed PDF appears to be missing the companion page of the nonmajor combining statement. The extractor noted this. Add it to the find_pages follow-ups."},
-    {"severity": "warning", "path": "detail[68].original_label", "page": 11,
-     "extracted": "Transfers out", "on_page": "Transfers in (10,866) (Special Projects column)",
-     "issue": "The page prints (10,866) on the 'Transfers in' row, not 'Transfers out'. The signed amount -10,866 is correct, but original_label should be the printed label. A review flag is already set."},
-    {"severity": "warning", "path": "detail[55].category", "page": 11,
-     "extracted": "intergovernmental/state aid", "on_page": "Intergovernmental 3,132,206 (American Rescue Plan)",
-     "issue": "detail_category is 'federal grants' but category is 'intergovernmental/state aid'. These are inconsistent. If ARPA is treated as federal, category should be 'federal grants'."},
     {"severity": "warning", "path": "ending_cash", "page": 3,
-     "extracted": 44520832, "on_page": "Cash and cash equivalents 44,520,832; Investments 18,826,145; County treasurer cash 288,736 (Total Governmental Funds)",
-     "issue": "ending_cash covers cash and cash equivalents only. Investments 18,826,145 are printed separately but ending_investments is null. The GAAP rule says 'cash and cash equivalents/investments', so consider including investments or filling ending_investments."}
+     "extracted": 44520832, "on_page": "Cash and cash equivalents 44,520,832; County treasurer cash 288,736 (Total Governmental Funds)",
+     "issue": "ending_cash excludes the separate County treasurer cash line 288,736, which is also cash; defensible but an assumption (noted in notes)"},
+    {"severity": "warning", "path": "other_financing", "page": 4,
+     "extracted": 51769, "on_page": "Insurance recoveries 51,769 (Other Financing Sources)",
+     "issue": "governmental insurance recoveries kept as other financing (as printed), while the business-type insurance recoveries 1,142,568 (p6) are recorded as receipts (reimbursements/refunds); inconsistent treatment of the same label across fund types"},
+    {"severity": "warning", "path": "receipts[6].category", "page": 4,
+     "extracted": "intergovernmental/state aid", "on_page": "Intergovernmental 11,922,186",
+     "issue": "line includes American Rescue Plan intergovernmental 3,132,206 (p12, federal), about 26% of the line; state aid is dominant but the mix is not flagged for review"},
+    {"severity": "warning", "path": "detail[21].detail_category", "page": 10,
+     "extracted": "other state aid", "on_page": "Street Fund: Intergovernmental 5,383,196",
+     "issue": "Street Fund intergovernmental revenue is most likely highway allocation; source not itemized on the page, so a judgment call"}
   ]
 }
