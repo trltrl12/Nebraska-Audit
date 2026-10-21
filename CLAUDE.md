@@ -125,7 +125,6 @@ These were diagnosed and fixed in find_pages v6; re-extract and re-verify them a
   Beatrice_Public_Schools_FY2025 (report p7, governmental receipts page, not trimmed; receipts built from
   fund schedules, marked computed).
   Boelus_FY2025 (Exhibit A page 2, lines 29-52 spending by function, not trimmed; fund totals used).
-  Deshler_FY2025 (governmental receipts/disbursements statement not trimmed; business-type data complete).
   Fillmore_County_School_District_25_FY2025 (trim stops partway through Exhibit N after 2162; later programs from the budget schedule).
   Fairbury_FY2025 (report pp42-47 Light/Water/Sewer budget schedules 6-9, plus pp8, 11, 62, not trimmed).
   Chadron_Public_Schools_FY2025 (report p34 not trimmed: trimmed p15 = report p33, p16 = report p35).
