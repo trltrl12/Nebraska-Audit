@@ -2,29 +2,69 @@
   "stem": "Thayer_County_FY2025",
   "values_checked": 101,
   "issues": [
-    {"severity": "error", "path": "detail[44].category", "page": 7,
-     "extracted": "other", "on_page": "Taxes 6,468 (Total Non-Major; Visitors Promotion 4,312 + Visitors Improvement 2,156)",
-     "issue": "A Taxes line is never 'other'. It is all lodging tax: the visitors funds hold it, and the Statement of Activities (p2) prints Lodging 6,468, which is the same amount. receipts[2] records the same 6,468 as 'lodging tax', and the rules require one category per label across the report. Category should be 'lodging tax' (detail_category 'lodging tax'), or at the very least 'taxes (unlabeled)'."},
-    {"severity": "warning", "path": "detail[0].split_from", "page": 8,
-     "extracted": "property 3,043,382 + motor vehicle 356,193", "on_page": "Taxes 3,399,575 (General Fund budget schedule, no breakdown)",
-     "issue": "The General Fund Taxes line is split using the county-wide Statement of Activities breakdown (p2). That page prints the split of total taxes, not of the General Fund line; the split works only because lodging 6,468 sits in the nonmajor funds. The sum is exact and the inference holds, but p8 does not print the split itself. Applies to detail[1] too."},
-    {"severity": "warning", "path": "detail[32].category", "page": 5,
-     "extracted": "streets/highways", "on_page": "Noxious Weed column, Public works 155,867",
-     "issue": "The disbursement rules list noxious weed control under 'natural resources/conservation'. The statement prints it under Public works, so streets/highways ties to the p4 function column. A judgment call (the extractor already marked it review)."},
-    {"severity": "warning", "path": "detail[37].category", "page": 9,
-     "extracted": "streets/highways 3,157,781 (one line)", "on_page": "DISBURSEMENTS 3,157,781; p4 Road column: Public works 2,594,828 + Capital outlay 562,953",
-     "issue": "The Road Fund spending is recorded under one function, but p4 prints its function split (562,953 capital outlay). The ARP fund was split from the same p4 columns (detail[40]/[41]), so Road is handled inconsistently. Splitting it the same way would let it tie to the statement's function columns."},
-    {"severity": "warning", "path": "report_discrepancies[0]", "page": 9,
-     "extracted": "Road Local 53,778 vs statement 7,876 recorded as a budget-basis discrepancy", "on_page": "Road Fund Sale of surplus 45,902 (p4)",
-     "issue": "The gap 53,778 - 7,876 = 45,902 is exactly the Road Fund sale of surplus on p4, so the budget schedule folds sale of surplus into Local. The report adds up; this is not a discrepancy. As a result detail[36] (Road Local 53,778) includes 45,902 of sale of assets. Likewise the General Fund budget receipts 4,983,381 (detail[2]+[3]) exceed the combining page's 4,980,250 by 3,131, which is the General Fund sale of surplus."},
-    {"severity": "warning", "path": "detail[3].category", "page": 8,
-     "extracted": "other / miscellaneous revenue", "on_page": "Local 850,478",
-     "issue": "Broad group 'Local' is put in 'other'. The Statement of Activities (p2) shows county Local of 933,171 = charges for services 538,259 + interest 323,376 + misc 71,536, and most of it is General Fund (general government charges 303,917, public safety charges 187,542), so charges for services is probably the largest part. The same applies to detail[27] (Emergency Mgmt Local 2,499), detail[31] (Noxious Weed Local 46,262, likely weed-control charges; public works charges for services on p2 are 46,800), detail[36] and detail[46] (nonmajor Local 24,632, mostly 911 Emergency Services 20,907, which are public safety charges)."},
-    {"severity": "warning", "path": "detail[35].detail_category", "page": 9,
-     "extracted": "other state aid", "on_page": "Road Fund Intergovernmental 1,690,992",
-     "issue": "A county Road Fund's intergovernmental receipts are normally mostly highway allocation. 'other state aid' is defensible because the line is not itemized."},
-    {"severity": "warning", "path": "notes", "page": 6,
-     "extracted": "Nonmajor combining (11 funds, p6-7)", "on_page": "10 fund columns: Visitors Promotion, Preservation & Modernization, Drug and Alcohol, 911 Emergency Services, 911 Wireless, Hospital Bond, Visitors Improvement, 911 Wireless Holding, Equipment Sinking, Emergency Bridge",
-     "issue": "The fund count in the notes is off by one. The Total Non-Major column is used either way, so there is no effect on the figures."}
+    {
+      "severity": "error",
+      "path": "detail[44].category",
+      "page": 7,
+      "extracted": "other",
+      "on_page": "Taxes 6,468 (Total Non-Major; Visitors Promotion 4,312 + Visitors Improvement 2,156)",
+      "issue": "[fixed] A Taxes line is never 'other'. It is all lodging tax: the visitors funds hold it, and the Statement of Activities (p2) prints Lodging 6,468, which is the same amount. receipts[2] records the same 6,468 as 'lodging tax', and the rules require one category per label across the report. Category should be 'lodging tax' (detail_category 'lodging tax'), or at the very least 'taxes (unlabeled)'."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[0].split_from",
+      "page": 8,
+      "extracted": "property 3,043,382 + motor vehicle 356,193",
+      "on_page": "Taxes 3,399,575 (General Fund budget schedule, no breakdown)",
+      "issue": "The General Fund Taxes line is split using the county-wide Statement of Activities breakdown (p2). That page prints the split of total taxes, not of the General Fund line; the split works only because lodging 6,468 sits in the nonmajor funds. The sum is exact and the inference holds, but p8 does not print the split itself. Applies to detail[1] too."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[32].category",
+      "page": 5,
+      "extracted": "streets/highways",
+      "on_page": "Noxious Weed column, Public works 155,867",
+      "issue": "The disbursement rules list noxious weed control under 'natural resources/conservation'. The statement prints it under Public works, so streets/highways ties to the p4 function column. A judgment call (the extractor already marked it review)."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[37].category",
+      "page": 9,
+      "extracted": "streets/highways 3,157,781 (one line)",
+      "on_page": "DISBURSEMENTS 3,157,781; p4 Road column: Public works 2,594,828 + Capital outlay 562,953",
+      "issue": "The Road Fund spending is recorded under one function, but p4 prints its function split (562,953 capital outlay). The ARP fund was split from the same p4 columns (detail[40]/[41]), so Road is handled inconsistently. Splitting it the same way would let it tie to the statement's function columns."
+    },
+    {
+      "severity": "warning",
+      "path": "report_discrepancies[0]",
+      "page": 9,
+      "extracted": "Road Local 53,778 vs statement 7,876 recorded as a budget-basis discrepancy",
+      "on_page": "Road Fund Sale of surplus 45,902 (p4)",
+      "issue": "The gap 53,778 - 7,876 = 45,902 is exactly the Road Fund sale of surplus on p4, so the budget schedule folds sale of surplus into Local. The report adds up; this is not a discrepancy. As a result detail[36] (Road Local 53,778) includes 45,902 of sale of assets. Likewise the General Fund budget receipts 4,983,381 (detail[2]+[3]) exceed the combining page's 4,980,250 by 3,131, which is the General Fund sale of surplus."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[3].category",
+      "page": 8,
+      "extracted": "other / miscellaneous revenue",
+      "on_page": "Local 850,478",
+      "issue": "Broad group 'Local' is put in 'other'. The Statement of Activities (p2) shows county Local of 933,171 = charges for services 538,259 + interest 323,376 + misc 71,536, and most of it is General Fund (general government charges 303,917, public safety charges 187,542), so charges for services is probably the largest part. The same applies to detail[27] (Emergency Mgmt Local 2,499), detail[31] (Noxious Weed Local 46,262, likely weed-control charges; public works charges for services on p2 are 46,800), detail[36] and detail[46] (nonmajor Local 24,632, mostly 911 Emergency Services 20,907, which are public safety charges)."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[35].detail_category",
+      "page": 9,
+      "extracted": "other state aid",
+      "on_page": "Road Fund Intergovernmental 1,690,992",
+      "issue": "A county Road Fund's intergovernmental receipts are normally mostly highway allocation. 'other state aid' is defensible because the line is not itemized."
+    },
+    {
+      "severity": "warning",
+      "path": "notes",
+      "page": 6,
+      "extracted": "Nonmajor combining (11 funds, p6-7)",
+      "on_page": "10 fund columns: Visitors Promotion, Preservation & Modernization, Drug and Alcohol, 911 Emergency Services, 911 Wireless, Hospital Bond, Visitors Improvement, 911 Wireless Holding, Equipment Sinking, Emergency Bridge",
+      "issue": "The fund count in the notes is off by one. The Total Non-Major column is used either way, so there is no effect on the figures."
+    }
   ]
 }
