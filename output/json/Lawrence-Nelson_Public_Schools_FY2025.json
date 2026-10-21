@@ -79,9 +79,20 @@
       "fund_type": "governmental",
       "category": "charges for services/fees",
       "original_label": "Other local receipts",
-      "amount": 520821.76,
+      "amount": 402909.07,
       "source_page": 5,
-      "review": "mixed line: schedules show mostly lunch sales, fees and tuition"
+      "review": "mixed: lunch sales 102,635.65 (p13), student fees 14,828.24 (p17), activity fund receipts (schedule not trimmed), General Fund local receipts 58,268.81 (p4); dominant charges for services",
+      "split_from": "Other local receipts 520,821.76 (p5)",
+      "computed": "520,821.76 less Cooperative Fund 'Received from other districts' 117,912.69 (Exh N p16)"
+    },
+    {
+      "fund_type": "governmental",
+      "category": "intergovernmental/state aid",
+      "original_label": "Other local receipts (received from other districts)",
+      "amount": 117912.69,
+      "source_page": 5,
+      "split_from": "Other local receipts 520,821.76 (p5)",
+      "computed": "Cooperative Fund 'Received from other districts' 117,912.69 (Exh N p16)"
     },
     {
       "fund_type": "governmental",
@@ -117,14 +128,6 @@
       "original_label": "Federal receipts",
       "amount": 218210.31,
       "source_page": 5
-    },
-    {
-      "fund_type": "governmental",
-      "category": "other",
-      "original_label": "Cash balance from dissolved district",
-      "amount": 4968148.15,
-      "source_page": 5,
-      "review": "Opening cash received from dissolved district (printed in total receipts; shown as Special Item on Statement of Activities)"
     },
     {
       "fund_type": "governmental",
@@ -229,11 +232,22 @@
     },
     {
       "fund_type": "governmental",
-      "category": "support services",
-      "original_label": "Other student support",
-      "amount": 513679.23,
+      "category": "food service",
+      "original_label": "Other student support (school nutrition)",
+      "amount": 255826.49,
       "source_page": 5,
-      "review": "Other student support (Other Governmental Funds); likely includes school nutrition, activities and cooperative funds; function not stated"
+      "split_from": "Other student support 513,679.23 (p5)",
+      "computed": "School Nutrition Fund total disbursements 255,826.49 (Exh K p13)"
+    },
+    {
+      "fund_type": "governmental",
+      "category": "student activities",
+      "original_label": "Other student support (student fee and activities)",
+      "amount": 257852.74,
+      "source_page": 5,
+      "split_from": "Other student support 513,679.23 (p5)",
+      "computed": "513,679.23 less School Nutrition 255,826.49; includes Student Fee Fund 14,828.24 (Exh O p17) and the remaining 243,024.50 (activity fund; schedule not in trimmed PDF)",
+      "review": "residual attributed to student activities; activity fund schedule not trimmed"
     },
     {
       "fund_type": "governmental",
@@ -271,13 +285,29 @@
   "transfers_out": null,
   "debt_proceeds": null,
   "other_financing": null,
-  "adjustments": [],
+  "adjustments": [
+    {
+      "original_label": "Cash balance from dissolved district",
+      "amount": 4968148.15,
+      "source_page": 5,
+      "note": "Special Item on the Statement of Activities (p2): opening cash brought in from the dissolved district; printed inside Total Receipts on Exhibit D (p5) but not revenue"
+    }
+  ],
   "reported_totals": {
     "governmental": {
       "receipts": {
         "amount": 11179353.75,
         "source_page": 5,
-        "includes": []
+        "includes": [
+          "adjustments"
+        ],
+        "includes_split": [
+          {
+            "amount": 4968148.15,
+            "source_page": 5,
+            "computed": "Cash balance from dissolved district (Special Item, recorded in adjustments) is inside the printed Total Receipts 11,179,353.75"
+          }
+        ]
       },
       "disbursements": {
         "amount": 5872493.31,
@@ -2328,5 +2358,5 @@
       "source_page": 17
     }
   ],
-  "notes": "School district, modified cash basis (first year after dissolved-district merger; beginning balances are zero and the 4,968,148.15 'Cash balance from dissolved district' is printed in total receipts, recorded as an 'other' receipt with review). Receipts, disbursements and ending cash use the Governmental Funds (total) column after reclassifications on Exhibit D (p5); labels come from the fund statement on p4. The reclassification column eliminates 127,044.91 of transfers (116,000 general fund transfers out; 11,044.91 hidden inside the General Fund's Special education 0-5 program lines, transferred to the Cooperative Fund), so no transfers appear at the total level and transfers_in/out are null. 'Taxes: Other' 1,376,314.65 (p5) is split into property tax credit 1,330,183.74, homestead 26,476.85, pro-rate 8,913.97 and nameplate 10,740.09 using the General Fund (Exh. G p8: 1,353,519.45) and QCPU (Exh. M p15: 22,795.20) breakdowns. Balance sheet = Statement of Net Position (p1); fund balance sheet on p3 not used. Detail: Exhibit G (General Fund budgetary comparison, program lines) plus Exhibits H, I, K, L, M, N, O. Exhibit P (object-level general fund disbursements, pp18-19, partial in trimmed PDF) and the General Fund Components combining schedule (pp6-7) duplicate those lines and were not recorded. In Exhibit G, 275,000 allocation to the Depreciation Fund is embedded in the student transportation - regular lines (shown by the Exhibit F reclassification, p7), so a contra expenditure line and an other-financing line were added; likewise the 11,044.91 General Fund to Cooperative Fund transfer inside the Special education 0-5 lines has a contra expenditure line and an other-financing line (Exhibit D p5, Cooperative Fund p16). The printed G disbursement total 5,254,317.95 includes that 275,000 and the 116,000 transfers. Student activity accounts (181,667.27 assigned fund balance) have no schedule in the trimmed PDF. Budget amounts of '-' recorded as 0; budget columns on other fund schedules are only totals, so budget_final null. Read pages 1-19 of 19."
+  "notes": "School district, modified cash basis (first year after dissolved-district merger; beginning balances are zero and the 4,968,148.15 'Cash balance from dissolved district' is printed in total receipts but shown as a Special Item on the Statement of Activities, so it is recorded in adjustments; reported receipts total ties via includes_split). Receipts, disbursements and ending cash use the Governmental Funds (total) column after reclassifications on Exhibit D (p5); labels come from the fund statement on p4. The reclassification column eliminates 127,044.91 of transfers (116,000 general fund transfers out; 11,044.91 hidden inside the General Fund's Special education 0-5 program lines, transferred to the Cooperative Fund), so no transfers appear at the total level and transfers_in/out are null. 'Taxes: Other' 1,376,314.65 (p5) is split into property tax credit 1,330,183.74, homestead 26,476.85, pro-rate 8,913.97 and nameplate 10,740.09 using the General Fund (Exh. G p8: 1,353,519.45) and QCPU (Exh. M p15: 22,795.20) breakdowns. Balance sheet = Statement of Net Position (p1); fund balance sheet on p3 not used. Detail: Exhibit G (General Fund budgetary comparison, program lines) plus Exhibits H, I, K, L, M, N, O. Exhibit P (object-level general fund disbursements, pp18-19, partial in trimmed PDF) and the General Fund Components combining schedule (pp6-7) duplicate those lines and were not recorded. In Exhibit G, 275,000 allocation to the Depreciation Fund is embedded in the student transportation - regular lines (shown by the Exhibit F reclassification, p7), so a contra expenditure line and an other-financing line were added; likewise the 11,044.91 General Fund to Cooperative Fund transfer inside the Special education 0-5 lines has a contra expenditure line and an other-financing line (Exhibit D p5, Cooperative Fund p16). The printed G disbursement total 5,254,317.95 includes that 275,000 and the 116,000 transfers. Student activity accounts (181,667.27 assigned fund balance) have no schedule in the trimmed PDF. Budget amounts of '-' recorded as 0; budget columns on other fund schedules are only totals, so budget_final null. Read pages 1-19 of 19. Recheck: 'Other student support' (Other Governmental Funds, p4) split into school nutrition 255,826.49 (Exh K) and student fee/activities residual 257,852.74; 'Other local receipts' split to show Cooperative Fund receipts from other districts 117,912.69 (Exh N) as intergovernmental."
 }
