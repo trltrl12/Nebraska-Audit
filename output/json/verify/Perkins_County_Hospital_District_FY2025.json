@@ -2,14 +2,14 @@
   "stem": "Perkins_County_Hospital_District_FY2025",
   "values_checked": 151,
   "issues": [
-    {"severity": "warning", "path": "detail[*].detail_category (Schedule 2 'Supplies and Other' column lines)", "page": 8,
-     "extracted": "supplies and materials", "on_page": "Supplies and Other column total 17,441,873 (p9)",
-     "issue": "The Schedule 2 'Supplies and Other' column also holds employee benefits: 17,441,873 - depreciation 1,928,984 - statement 'Supplies and other' 11,103,735 = 4,409,154, which is the p4 'Employee benefits and payroll taxes' line. So the department 'Supplies and Other' amounts include benefits, and calling them all 'supplies and materials' overstates supplies by about 4.4M. All amounts match the page."},
-    {"severity": "warning", "path": "detail[72].detail_category", "page": 9,
-     "extracted": "employee benefits and payroll taxes", "on_page": "Salaries and benefits, Supplies and Other column 276,376",
-     "issue": "Calling this benefits is an assumption (the extractor marked it review). The amount is correct, but benefits are not shown separately on the schedule (see the warning above)."},
-    {"severity": "warning", "path": "receipts[7].category", "page": 4,
-     "extracted": "donations/contributions", "on_page": "Noncapital grants and contributions 56,337",
-     "issue": "The page doesn't say where this comes from. It could be government grants (intergovernmental/state aid or federal grants) rather than private gifts. Already marked review."}
+    {"severity": "warning", "path": "detail[24..63].detail_category", "page": 9,
+     "extracted": "supplies and materials", "on_page": "Supplies and Other column total 17,441,873 = statement Supplies and other 11,103,735 + Employee benefits and payroll taxes 4,409,154 + Depreciation 1,928,984",
+     "issue": "Schedule 2's 'Supplies and Other' column includes employee benefits. Only 276,376 of the 4,409,154 is recorded as benefits, so supplies and materials in detail is overstated by about 4.13M across the department lines."},
+    {"severity": "warning", "path": "detail[24..63].original_label", "page": 9,
+     "extracted": "e.g. 'Nursing service - Hospital (Salaries and Wages)'", "on_page": "Nursing service - Hospital (row) x Salaries and Wages / Supplies and Other (columns)",
+     "issue": "The labels combine the row label with the column heading, so they are not the exact printed text. The amounts and columns are correct."},
+    {"severity": "warning", "path": "balance_sheet.assets[8].category", "page": 1,
+     "extracted": "due from other governments", "on_page": "Due from third-party payors: Estimated third-party payor settlements 48,326",
+     "issue": "Third-party payors include private insurers as well as Medicare/Medicaid, so receivables is equally defensible. The matching liabilities[6] (1,125,683) is likewise recorded as due to other governments."}
   ]
 }
