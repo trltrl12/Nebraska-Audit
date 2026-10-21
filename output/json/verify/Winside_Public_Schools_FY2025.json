@@ -2,20 +2,45 @@
   "stem": "Winside_Public_Schools_FY2025",
   "values_checked": 311,
   "issues": [
-    {"severity": "error", "path": "receipts[9].source_page", "page": 9,
-     "extracted": 10, "on_page": "2110 County Fines and Licenses 7,758 is on trimmed p9 (report p36); p10 does not show it",
-     "issue": "wrong source_page: amount 7,758 is not printed on the cited page 10 (also printed on p2 as County Fines and Licenses); split_from text 'detail on p10' is also wrong"},
-    {"severity": "error", "path": "receipts[10].source_page", "page": 9,
-     "extracted": 10, "on_page": "2210 ESU Receipts 525 is on trimmed p9; p10 does not show it",
-     "issue": "wrong source_page: amount 525 is not printed on the cited page 10"},
-    {"severity": "error", "path": "detail_totals[8].amount", "page": 16,
-     "extracted": 1186243, "on_page": "Bond Fund Total Cash Receipts 1,186,243; printed lines add to 1,186,242 (Total Local Sources 846,779 + Total State Sources 339,463)",
-     "issue": "the page itself is off by $1 (printed total minus lines = +1) but there is no report_discrepancies entry for it; validation will show an unexplained gap"},
-    {"severity": "warning", "path": "disbursements[16].category", "page": 6,
-     "extracted": "debt service principal", "on_page": "Debt Service 2,036,129",
-     "issue": "the whole line is counted as principal, but the fund schedules print interest and fees inside it (Bond interest 240,545 + misc 800 p16, Special Building interest 57,378 p17, QCPU interest 34,628 + other debt costs 400 p18 = 333,751). Only the leasing corporation's 497,378 has no breakdown. Flagged review, but debt service interest is understated by at least 333,751"},
-    {"severity": "warning", "path": "receipts[7].category", "page": 5,
-     "extracted": "other", "on_page": "Other Local Receipts, Winside Educational Facilities Leasing Corporation column 497,378",
-     "issue": "probably lease rentals the district pays the corporation (equals Special Building debt service 497,378), which would be charges for services/fees or an internal flow rather than 'other'; covered by decision_needed, but the category is still unresolved"}
+    {
+      "severity": "error",
+      "path": "receipts[9].source_page",
+      "page": 9,
+      "extracted": 10,
+      "on_page": "2110 County Fines and Licenses 7,758 is on trimmed p9 (report p36); p10 does not show it",
+      "issue": "[fixed] wrong source_page: amount 7,758 is not printed on the cited page 10 (also printed on p2 as County Fines and Licenses); split_from text 'detail on p10' is also wrong"
+    },
+    {
+      "severity": "error",
+      "path": "receipts[10].source_page",
+      "page": 9,
+      "extracted": 10,
+      "on_page": "2210 ESU Receipts 525 is on trimmed p9; p10 does not show it",
+      "issue": "[fixed] wrong source_page: amount 525 is not printed on the cited page 10"
+    },
+    {
+      "severity": "error",
+      "path": "detail_totals[8].amount",
+      "page": 16,
+      "extracted": 1186243,
+      "on_page": "Bond Fund Total Cash Receipts 1,186,243; printed lines add to 1,186,242 (Total Local Sources 846,779 + Total State Sources 339,463)",
+      "issue": "[fixed] the page itself is off by $1 (printed total minus lines = +1) but there is no report_discrepancies entry for it; validation will show an unexplained gap"
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[16].category",
+      "page": 6,
+      "extracted": "debt service principal",
+      "on_page": "Debt Service 2,036,129",
+      "issue": "the whole line is counted as principal, but the fund schedules print interest and fees inside it (Bond interest 240,545 + misc 800 p16, Special Building interest 57,378 p17, QCPU interest 34,628 + other debt costs 400 p18 = 333,751). Only the leasing corporation's 497,378 has no breakdown. Flagged review, but debt service interest is understated by at least 333,751"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[7].category",
+      "page": 5,
+      "extracted": "other",
+      "on_page": "Other Local Receipts, Winside Educational Facilities Leasing Corporation column 497,378",
+      "issue": "probably lease rentals the district pays the corporation (equals Special Building debt service 497,378), which would be charges for services/fees or an internal flow rather than 'other'; covered by decision_needed, but the category is still unresolved"
+    }
   ]
 }
