@@ -75,19 +75,19 @@
     },
     {
       "fund_type": "governmental",
-      "category": "other",
-      "original_label": "Other Local Receipts",
-      "amount": 786290,
-      "source_page": 5,
-      "review": "All in Madison Educational Facilities Leasing Corporation column; offsets the corporation's 786,290 debt service; likely lease payments from the district (pass-through)"
+      "category": "fines and forfeitures",
+      "original_label": "Intermediate Sources (2110 County Fines and Licenses)",
+      "amount": 48919,
+      "source_page": 9,
+      "split_from": "Intermediate Sources 54,980 (p5)"
     },
     {
       "fund_type": "governmental",
       "category": "intergovernmental/state aid",
-      "original_label": "Intermediate Sources",
-      "amount": 54980,
-      "source_page": 5,
-      "review": "County fines and licenses 48,919 + ESU receipts 6,061 (p2, p9)"
+      "original_label": "Intermediate Sources (2210 ESU Receipts)",
+      "amount": 6061,
+      "source_page": 9,
+      "split_from": "Intermediate Sources 54,980 (p5)"
     },
     {
       "fund_type": "governmental",
@@ -262,16 +262,6 @@
     },
     {
       "fund_type": "governmental",
-      "category": "debt service principal",
-      "original_label": "Debt Service (Madison Educational Facilities Leasing Corporation)",
-      "amount": 786290,
-      "source_page": 6,
-      "split_from": "Debt Service 1,823,799 (p6)",
-      "computed": "Corporation column Debt Service 786,290 (p6)",
-      "review": "principal/interest split not printed for the corporation; mirrors Special Building Fund payment"
-    },
-    {
-      "fund_type": "governmental",
       "category": "support services",
       "original_label": "Employee Benefits",
       "amount": 41913,
@@ -280,13 +270,14 @@
     }
   ],
   "transfers_in": {
-    "amount": 250000,
-    "source_page": 6
+    "amount": 1036290,
+    "source_page": 6,
+    "computed": "printed Transfers In (out) 250,000 (p6) + 786,290 intra-entity Leasing Corp receipt split from Other Local Receipts (p5; eliminated on the Statement of Activities p2)"
   },
   "transfers_out": {
-    "amount": 250000,
+    "amount": 1036290,
     "source_page": 11,
-    "computed": "hidden inside General Fund spending: 2650 Vehicle Operation, Maintenance, & Purchasing 250,000 (p11), matching Depreciation Fund transfer from General Fund 250,000 (p13)"
+    "computed": "hidden inside General Fund spending: 2650 Vehicle Operation, Maintenance, & Purchasing 250,000 (p11), matching Depreciation Fund transfer from General Fund 250,000 (p13); plus 786,290 Leasing Corp debt service (p6) = Debt Service 1,823,799 (p6) minus 1,037,509 on the Statement of Activities (p2), intra-entity"
   },
   "debt_proceeds": null,
   "other_financing": null,
@@ -296,12 +287,31 @@
       "receipts": {
         "amount": 13476290,
         "source_page": 5,
-        "includes": []
+        "includes": [],
+        "includes_split": [
+          {
+            "amount": 786290,
+            "source_page": 5,
+            "note": "Leasing Corp Other Local Receipts split into transfers_in"
+          }
+        ]
       },
       "disbursements": {
         "amount": 12847301,
         "source_page": 6,
-        "includes": []
+        "includes": [],
+        "includes_split": [
+          {
+            "amount": 250000,
+            "source_page": 11,
+            "note": "hidden transfer to Depreciation Fund split from Operations and Maintenance into transfers_out"
+          },
+          {
+            "amount": 786290,
+            "source_page": 6,
+            "note": "Leasing Corp debt service split from Debt Service into transfers_out"
+          }
+        ]
       }
     },
     "business-type": null
@@ -414,12 +424,6 @@
       "amount": 250000,
       "recorded_as": "transfers_in 250,000 (printed) and transfers_out 250,000 (computed, hidden in Operations and Maintenance); spending reduced by 250,000",
       "source_page": 11
-    },
-    {
-      "question": "Madison Educational Facilities Leasing Corporation shows 786,290 of 'Other Local Receipts' and 786,290 of debt service, mirroring the Special Building Fund debt payments of 786,290. Is this a pass-through that double counts?",
-      "amount": 786290,
-      "recorded_as": "receipts 'other' 786,290 and debt service principal 786,290, as printed",
-      "source_page": 5
     }
   ],
   "detail": [
@@ -520,8 +524,8 @@
       "fund": "General",
       "department": null,
       "section": "revenue",
-      "category": "intergovernmental/state aid",
-      "detail_category": "county/other local governments",
+      "category": "fines and forfeitures",
+      "detail_category": "fines and forfeitures",
       "original_label": "2110 County Fines and Licenses",
       "amount": 48919,
       "budget_final": 50000,
@@ -2630,5 +2634,5 @@
       ]
     }
   ],
-  "notes": "Modified cash basis school district; all funds governmental (School Nutrition and Activities are governmental funds here), so business_type is null. Basis for receipts/disbursements: Statement of Cash Receipts, Disbursements, and Changes in Fund Balances - Governmental Funds, Total Governmental Funds column (p5-6); balance sheet from Statement of Net Position - Modified Cash Basis (p1). Taxes line split using statement of activities (p2); State Sources split to carve out nameplate capacity (p3 and fund schedules); Non-Revenue Receipts split into insurance adjustments (p10) and the rest. Debt Service line split using the fund schedules (p17-19); the leasing corporation's 786,290 has no breakdown. Hidden transfer: General Fund line 2650 Vehicle Operation, Maintenance, & Purchasing 250,000 (p11) equals the Depreciation Fund transfer from the General Fund (p13); the statement's Operations and Maintenance 1,339,072 still includes it, so I removed it from spending and recorded transfers_out 250,000 (computed), with printed transfers_in 250,000 (net total column). Because of this, sum of disbursement items (12,597,302) differs from printed total 12,847,301 by the 250,000 reclassification (and 1 rounding). Printed roll-forward ties: 7,392,600 + 13,476,290 - 12,847,301 + 250,000 = 8,271,589; my items give 8,271,588 due to 1 rounding in the printed disbursements. Detail: General Fund budget schedule (p9-12) is used for General Fund (more detailed than the General Fund components statement p7 and combining statement p8, which are not duplicated); the County Treasurer schedules (p21-22) and Other Governmental combining (p8) duplicate fund schedules and are not recorded. Detail lines with zero actual (and budget-only lines such as 1910, 6200 Title I ESEA, Budget Contingency, 4700) are omitted except 2211 shown at 0. Spending detail has no object breakdown, so detail_category is 'not itemized'. General Fund detail total 9,822,556 includes the 67,400 transfer (shown as other financing); the 250,000 reclassified transfer is also in other financing, so expenditure lines sum to 9,505,156 (printed less both transfers). Mid-schedule rounding of 1 in printed subtotals noted in report_discrepancies. Pages p1-p22 map to report pages 5-10, 31, 33, 34-47. Read pages 1-22 of 22."
+  "notes": "Modified cash basis school district; all funds governmental (School Nutrition and Activities are governmental funds here), so business_type is null. Basis for receipts/disbursements: Statement of Cash Receipts, Disbursements, and Changes in Fund Balances - Governmental Funds, Total Governmental Funds column (p5-6); balance sheet from Statement of Net Position - Modified Cash Basis (p1). Taxes line split using statement of activities (p2); State Sources split to carve out nameplate capacity (p3 and fund schedules); Non-Revenue Receipts split into insurance adjustments (p10) and the rest. Debt Service line split using the fund schedules (p17-19); the Madison Educational Facilities Leasing Corporation (blended) column's Other Local Receipts 786,290 and Debt Service 786,290 are the Special Building Fund's debt payments passed through the corporation; the Statement of Activities (p2) eliminates them (Debt Service 1,037,509 = 1,823,799 - 786,290), so both are recorded as an intra-entity transfer in/out (as for Columbus), not as receipts or spending. Hidden transfer: General Fund line 2650 Vehicle Operation, Maintenance, & Purchasing 250,000 (p11) equals the Depreciation Fund transfer from the General Fund (p13); the statement's Operations and Maintenance 1,339,072 still includes it, so I removed it from spending and recorded transfers_out 250,000 (computed), with printed transfers_in 250,000 (net total column). Because of these, disbursement items (11,811,012) differ from printed total 12,847,301 by the 250,000 and 786,290 reclassifications (includes_split) and 1 rounding; receipt items differ from 13,476,290 by the 786,290. Printed roll-forward ties: 7,392,600 + 13,476,290 - 12,847,301 + 250,000 = 8,271,589; my items give 7,392,600 + 12,690,000 - 11,811,012 + 1,036,290 - 1,036,290 = 8,271,588 due to 1 rounding in the printed disbursements. Detail: General Fund budget schedule (p9-12) is used for General Fund (more detailed than the General Fund components statement p7 and combining statement p8, which are not duplicated); the County Treasurer schedules (p21-22) and Other Governmental combining (p8) duplicate fund schedules and are not recorded. Detail lines with zero actual (and budget-only lines such as 1910, 6200 Title I ESEA, Budget Contingency, 4700) are omitted except 2211 shown at 0. Spending detail has no object breakdown, so detail_category is 'not itemized'. General Fund detail total 9,822,556 includes the 67,400 transfer (shown as other financing); the 250,000 reclassified transfer is also in other financing, so expenditure lines sum to 9,505,156 (printed less both transfers). Mid-schedule rounding of 1 in printed subtotals noted in report_discrepancies. Pages p1-p22 map to report pages 5-10, 31, 33, 34-47. Read pages 1-22 of 22. Intermediate Sources 54,980 split per p9 into 2110 County Fines and Licenses 48,919 (fines and forfeitures) and 2210 ESU Receipts 6,061."
 }
