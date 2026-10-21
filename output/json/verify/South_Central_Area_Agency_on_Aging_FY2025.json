@@ -2,11 +2,53 @@
   "stem": "South_Central_Area_Agency_on_Aging_FY2025",
   "values_checked": 59,
   "issues": [
-    {"severity": "error", "path": "receipts[3].category", "page": 2, "extracted": "other", "on_page": "Local public - cash and other 51,262", "issue": "label says what the line is: local public (county/local government) funding, i.e. intergovernmental/state aid (county/other local governments). Under the rules a mixed line takes its dominant category with review; 'other' is only for lines with nothing saying what they are"},
-    {"severity": "warning", "path": "receipts[0].category", "page": 2, "extracted": "intergovernmental/state aid", "on_page": "Grants and contracts: Grant Funds 2,562,574", "issue": "94% of revenue; an area agency on aging's grant funds are largely federal Older Americans Act money passed through the state. Split between state and federal not printed; extractor marked review"},
-    {"severity": "warning", "path": "detail[4].original_label", "page": 3, "extracted": "Interest - Right-to-use asset", "on_page": "Interest - Right-to-asset", "issue": "label on the Statement of Functional Expenses reads 'Right-to-asset' (the activities statement p2 reads 'Right-to-use asset'); same for detail[14]"},
-    {"severity": "warning", "path": "balance_sheet.liabilities[5].original_label", "page": 1, "extracted": "Right-to-use lease liability (Note 7) - current", "on_page": "Right-to-use lease liability (Note 7) (under CURRENT LIABILITIES)", "issue": "' - current' / ' - noncurrent' suffixes (liabilities[5], [6]) added by extractor to distinguish the two identically printed rows; amounts correct"},
-    {"severity": "warning", "path": "balance_sheet.liabilities[1].category", "page": 1, "extracted": "due to other governments", "on_page": "Due to senior center contractors 41,438", "issue": "contractors are not necessarily governments; could be accounts payable (cash flow p4 calls the change 'due to governmental agencies'). Extractor marked review"},
-    {"severity": "warning", "path": "receipts[0].fund_type", "page": 2, "extracted": "business-type", "on_page": "single-column nonprofit-style statements (Statement of Financial Position / Activities / Functional Expenses)", "issue": "area agencies on aging are not in the entirely business-type list; treating the whole entity as business-type (governmental fields null) is an assumption a person may want to confirm"}
+    {
+      "severity": "error",
+      "path": "receipts[3].category",
+      "page": 2,
+      "extracted": "other",
+      "on_page": "Local public - cash and other 51,262",
+      "issue": "[fixed] label says what the line is: local public (county/local government) funding, i.e. intergovernmental/state aid (county/other local governments). Under the rules a mixed line takes its dominant category with review; 'other' is only for lines with nothing saying what they are"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[0].category",
+      "page": 2,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "Grants and contracts: Grant Funds 2,562,574",
+      "issue": "94% of revenue; an area agency on aging's grant funds are largely federal Older Americans Act money passed through the state. Split between state and federal not printed; extractor marked review"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[4].original_label",
+      "page": 3,
+      "extracted": "Interest - Right-to-use asset",
+      "on_page": "Interest - Right-to-asset",
+      "issue": "label on the Statement of Functional Expenses reads 'Right-to-asset' (the activities statement p2 reads 'Right-to-use asset'); same for detail[14]"
+    },
+    {
+      "severity": "warning",
+      "path": "balance_sheet.liabilities[5].original_label",
+      "page": 1,
+      "extracted": "Right-to-use lease liability (Note 7) - current",
+      "on_page": "Right-to-use lease liability (Note 7) (under CURRENT LIABILITIES)",
+      "issue": "' - current' / ' - noncurrent' suffixes (liabilities[5], [6]) added by extractor to distinguish the two identically printed rows; amounts correct"
+    },
+    {
+      "severity": "warning",
+      "path": "balance_sheet.liabilities[1].category",
+      "page": 1,
+      "extracted": "due to other governments",
+      "on_page": "Due to senior center contractors 41,438",
+      "issue": "contractors are not necessarily governments; could be accounts payable (cash flow p4 calls the change 'due to governmental agencies'). Extractor marked review"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[0].fund_type",
+      "page": 2,
+      "extracted": "business-type",
+      "on_page": "single-column nonprofit-style statements (Statement of Financial Position / Activities / Functional Expenses)",
+      "issue": "area agencies on aging are not in the entirely business-type list; treating the whole entity as business-type (governmental fields null) is an assumption a person may want to confirm"
+    }
   ]
 }
