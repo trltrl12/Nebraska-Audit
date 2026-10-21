@@ -2,8 +2,14 @@
   "stem": "Ainsworth_Irrigation_District_FY2025",
   "values_checked": 61,
   "issues": [
-    {"severity": "warning", "path": "receipts[1].category", "page": 3, "extracted": "charges for services/fees", "on_page": "Repayment assessments 255,068", "issue": "Assessments levied on district lands to repay the U.S. supply works obligation could be special assessments (extractor already marked review)."},
-    {"severity": "warning", "path": "receipts[0].category", "page": 3, "extracted": "charges for services/fees", "on_page": "Irrigation assessments (net of discounts ...) 1,435,654", "issue": "Per-acre irrigation assessments could be considered special assessments rather than charges for services; judgment call, not marked review."},
-    {"severity": "warning", "path": "disbursements[0].category", "page": 3, "extracted": "general government (admin lines) / utilities (field operations lines)", "on_page": "Administrative and general; Field operations", "issue": "For an irrigation (water) district the disbursement rules list natural resources/conservation (water and drainage districts); general government/utilities is defensible but inconsistent with that rule. Applies to disbursements[0]-[18]."}
+    {"severity": "warning", "path": "disbursements[0-18].category", "page": 3,
+     "extracted": "general government / utilities", "on_page": "Administrative and general 601,740; Field operations 1,253,364",
+     "issue": "Irrigation district: the disbursement category list names water and drainage districts under 'natural resources/conservation'; using general government for the administrative lines and utilities for field operations is defensible but doubtful"},
+    {"severity": "warning", "path": "receipts[0].category", "page": 3,
+     "extracted": "charges for services/fees", "on_page": "Irrigation assessments (net of discounts ...) 1,435,654; Repayment assessments 255,068",
+     "issue": "Per-acre irrigation and repayment assessments (97% of receipts) could be 'special assessments' rather than charges for services; only receipts[1] carries a review note"},
+    {"severity": "warning", "path": "receipts[5].category", "page": 4,
+     "extracted": "investment income", "on_page": "Interest income - assessments 637",
+     "issue": "Interest charged on assessments; under the SID rule ('interest on special assessments -> special assessments') this could belong with the assessments rather than investment income"}
   ]
 }
