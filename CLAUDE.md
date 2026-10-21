@@ -194,8 +194,10 @@ These were diagnosed and fixed in find_pages v6; re-extract and re-verify them a
 - Douglas_County_SID_520/575/583/584/615_FY2025: v8 trims add the governmental fund statement (rebuilt from it) but
   still no balance sheet / Statement of Net Position page.
 - Trimmed to one page (extracted from that page; check the source PDF for missing statements):
-  Douglas_County_SID_640_FY2025, Hickman_FY2025 (all-fund-types budget schedule only;
-  disbursements recorded).
+  Douglas_County_SID_640_FY2025.
+- Hickman_FY2025: v8 trim adds the Statement of Activities, governmental Balance Sheet and Other Governmental
+  combining page (rebuilt from them); still missing the governmental revenues/expenditures statement (report p8),
+  Statement of Net Position (p5) and proprietary statements, so beginning_fund_balance is null.
 - ~97 Audit filings marked no_statements_found (mostly SIDs) and 72 with no balance statement: page
   finder misses their titles.
 - ~1,000 Waiver filings link only a budget form (Budgets_Filed/…_B2526.pdf): check
