@@ -1,30 +1,54 @@
 {
   "stem": "Battle_Creek_FY2025",
-  "values_checked": 77,
+  "values_checked": 101,
   "issues": [
-    {"severity": "warning", "path": "business_type", "page": 6,
-     "extracted": "business-type lines from government-wide Statement of Activities (p2-3)", "on_page": "trimmed PDF jumps from report page 9 (proprietary Statement of Net Position) to page 13 (cash flows); report pages 10-12 are not in the trimmed PDF",
-     "issue": "the proprietary funds Statement of Revenues, Expenses and Changes in Net Position (accrual, with depreciation; total net position 3,345,413 on p6) appears to be missing from the trimmed PDF, so business-type lines could not be taken from it. Trimming issue, not an extraction error"},
-    {"severity": "warning", "path": "business_type.measure", "page": 3,
-     "extracted": "net position", "on_page": "Net Position - modified cash basis, Business-Type 305,632 -> 306,297",
-     "issue": "the roll-forward is the cash-basis government-wide net position (cash 14,301 + due from other funds 267,153 + investments 24,843), not accrual net position; measure 'cash' may be more accurate"},
-    {"severity": "warning", "path": "transfers_in", "page": 3,
-     "extracted": 208240, "on_page": "Transfers From (To) Other Funds: Governmental 208,240, Business-Type (208,698), Total (458)",
-     "issue": "the report's own transfers don't net to zero (difference 458); no report_discrepancies entry records this"},
-    {"severity": "warning", "path": "receipts[1].category", "page": 5,
-     "extracted": "intergovernmental/state aid", "on_page": "Operating Grants and Contributions 7,500 (Park)",
-     "issue": "source not stated; could be donations/contributions"},
-    {"severity": "warning", "path": "detail[1].category", "page": 9,
-     "extracted": "donations/contributions", "on_page": "Grants and Contributions 153,927",
-     "issue": "153,927 = operating grants 7,500 + sewer capital grants 146,427, which receipts[] classes as intergovernmental/state aid; same money categorized differently in receipts and detail"},
-    {"severity": "warning", "path": "detail[0].fund_type", "page": 9,
-     "extracted": "governmental", "on_page": "All-funds budget schedule: Charges for Services 7,691,117 (includes utility charges 1,903,433 and nursing home)",
-     "issue": "all eight all-funds revenue lines (detail[0]-detail[7]) are marked governmental although they include business-type and nursing home revenue; flagged review by extractor"},
-    {"severity": "warning", "path": "detail[18].fund_type", "page": 9,
-     "extracted": "governmental", "on_page": "Debt Service Principal 229,081; Interest and Fees 24,638",
-     "issue": "229,081 = governmental 24,081 + business-type 205,000 (and 24,638 = 3,058 + 21,580); detail[18] and detail[19] are mostly business-type debt service but are marked governmental"},
-    {"severity": "warning", "path": "detail[1].budget_final", "page": 9,
-     "extracted": null, "on_page": "-",
-     "issue": "budget column prints '-' (zero) for Grants and Contributions, Franchise Fees, Investment Income, Miscellaneous Income and Interest and Fees; recorded as null instead of 0"}
+    {
+      "severity": "error",
+      "path": "detail[0].amount",
+      "page": 10,
+      "extracted": 5694207,
+      "on_page": "Charges for Services 7,691,117 (single all-funds line; no breakdown printed)",
+      "issue": "[fixed 2026-10-21: residual no longer labelled Nursing Home as fact; detail_category other charges for services; decision_needed entry added] split_from a line whose breakdown the report never prints: 5,694,207 is a residual (7,691,117 - 93,477 - 1,903,433) assumed to be the Nursing Home, which appears nowhere in the trimmed statements. The split rule forbids this; the detail_category 'patient service revenue', fund_type business-type and budget_final 7,582,289 (an all-funds budget) all rest on that assumption."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[3].split_from",
+      "page": 10,
+      "extracted": "Grants and Contributions 153,927 split 146,427 / 7,500",
+      "on_page": "Grants and Contributions 153,927",
+      "issue": "the split uses the p2 Capital (146,427) and Operating (7,500) grant columns, which add up to the line but are not a printed breakdown of it (same for detail[4]). Defensible because the figures tie exactly, but it is a split taken from another statement."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[23].split_from",
+      "page": 10,
+      "extracted": "Principal 229,081 split 205,000 / 24,081; Interest and Fees 24,638 split 21,580 / 3,058",
+      "on_page": "Principal 229,081; Interest and Fees 24,638",
+      "issue": "split by fund type using the p2 governmental and business-type debt service lines (detail[23]-[26]). They tie exactly, but the budget page prints no breakdown. The Investment Income and Miscellaneous Income splits are fine because p3 prints them by column."
+    },
+    {
+      "severity": "warning",
+      "path": "decision_needed",
+      "page": 10,
+      "extracted": null,
+      "on_page": "Nursing Home 4,919,193 actual (budget 5,616,274); Charges for Services 7,691,117",
+      "issue": "the all-funds budget schedule includes a Nursing Home that is not in any basic statement (it may be a component unit or a fund left out of the statements). A person should decide whether its about 5.69M of revenue and 4.92M of spending belong in this city's detail. decision_needed[] is missing. The one-sided transfer difference (governmental +208,240 vs business-type (208,698), Total (458) on p3) is also a candidate for this list, although report_discrepancies records it."
+    },
+    {
+      "severity": "warning",
+      "path": "detail",
+      "page": 7,
+      "extracted": "no p7 lines in detail",
+      "on_page": "Proprietary Funds Statement of Revenues, Expenses and Changes in Net Position: Purchased Services 831,317, Personnel Services 292,927, Utilities 44,711, Maintenance and Repairs 100,635, ... Depreciation 187,782 (accrual basis)",
+      "issue": "the newly trimmed p7 object-level utility expenses are left out on purpose: they are on the accrual basis, and the extractor says they would double count the p10 function lines. A defensible judgment call, but the utility spending detail stays 'not itemized'."
+    },
+    {
+      "severity": "warning",
+      "path": "notes",
+      "page": null,
+      "extracted": "'Read pages 1-11 of 11' appears mid-notes, followed by recheck text",
+      "on_page": "trimmed PDF has 11 pages",
+      "issue": "the page count matches (11) and every page is accounted for, but the coverage phrase is not at the end of notes. The notes also still say 'revenue lines all marked governmental with review', which contradicts the current fund_type splits."
+    }
   ]
 }
