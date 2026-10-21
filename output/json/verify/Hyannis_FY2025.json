@@ -1,20 +1,46 @@
 {
   "stem": "Hyannis_FY2025",
-  "values_checked": 48,
+  "values_checked": 64,
   "issues": [
-    {"severity": "error", "path": "missing", "page": 6,
-     "extracted": "detail: [] / detail_totals: []",
-     "on_page": "Budgetary Comparison Schedule (report p19), Actual (Final Budget): Receipts General 69,070 (68,126), Street 55,200 (43,619), Improvement fund 210,307 (47,000), Utilities and other local sources 1,042,705 (2,799,387), Total Receipts 1,377,282 (2,958,132); Disbursements General 57,852 (93,569), Street 53,064 (519,754), Improvement fund 193,162 (-), Utilities and other local sources 2,301,883 (4,034,957), Total Disbursements 2,605,961 (4,648,280)",
-     "issue": "[fixed] The budget-to-actual schedule's fund-level lines and totals (with final budget) aren't in detail/detail_totals. The rules say to record budget schedule lines for every fund, including utility funds, even with no object breakdown (expenditure detail_category 'not itemized')."},
-    {"severity": "warning", "path": "disbursements[0].category", "page": 3,
-     "extracted": "general government (111,159)", "on_page": "General government: General Fund 57,852, Streets Fund 53,064, Improvement Fund 243, Total 111,159",
-     "issue": "53,064 of the 'General government' line is Streets Fund spending, which is streets/highways under the fund-function rule. The fund columns are printed, so a column split (split_from) is available. The label matches as recorded, so this is a judgment call."},
-    {"severity": "warning", "path": "receipts[5].category", "page": 5,
-     "extracted": "federal grants", "on_page": "Grant reimbursements 869,855 (Water)",
-     "issue": "The grant source (federal vs state, e.g. a state revolving fund or CDBG passthrough) isn't printed. 'federal grants' is an assumption, already marked review."},
-    {"severity": "warning", "path": "notes", "page": 5,
-     "extracted": "Principle Payments (sic) 90,000 and Interest expense appear only in ... (water)",
-     "on_page": "Interest expense 178 is in the Sewer column; Principle Payments 90,000 is in the Water column",
-     "issue": "The notes text misattributes the 178 interest expense to Water. Amounts aren't affected."}
+    {
+      "severity": "error",
+      "path": "detail[0].category",
+      "page": 4,
+      "extracted": "other / miscellaneous revenue",
+      "on_page": "General Fund receipts 69,070 = Taxes 48,308 + Interest 46 + State receipts 10,072 + Other general receipts 10,644",
+      "issue": "[fixed 2026-10-21: dominant category with review] Broad fund-level line: taxes are 70% of it (and Taxes is recorded as property tax in receipts[0] per p2). Under the broad-line rule (>half) it should be property tax / property tax with review, not other."
+    },
+    {
+      "severity": "error",
+      "path": "detail[3].category",
+      "page": 6,
+      "extracted": "charges for services/fees / other utility charges",
+      "on_page": "Utilities and other local sources 1,042,705 = Charges for services 172,850 + Grant reimbursements 869,855 (p6)",
+      "issue": "[fixed 2026-10-21: dominant category with review] 83% of the line is Grant reimbursements (recorded as federal grants in receipts[6]); under the broad-line rule the dominant category is federal grants (detail federal grants), with review naming the mix. Current category is inconsistent with the receipts list."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[1].detail_category",
+      "page": 4,
+      "extracted": "other state aid",
+      "on_page": "Street 55,200 (State receipts 42,176 in Streets Fund)",
+      "issue": "State receipts in the Street Fund are most likely highway allocation; other state aid is defensible but highway allocation may fit better."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[6].category",
+      "page": 6,
+      "extracted": "federal grants",
+      "on_page": "Grant reimbursements 869,855 (Water)",
+      "issue": "Grantor not stated on the page; could be state (e.g. NDEE/state revolving) rather than federal. Review flag present."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[17].original_label",
+      "page": 6,
+      "extracted": "Bond interest (non-operating)",
+      "on_page": "Bond interest",
+      "issue": "Label has extractor text added; printed label is 'Bond interest' under NON-OPERATING RECEIPTS (DISBURSEMENTS)."
+    }
   ]
 }
