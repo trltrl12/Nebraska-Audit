@@ -1,0 +1,19 @@
+{
+  "stem": "York_County_FY2025",
+  "values_checked": 134,
+  "issues": [
+    {"severity": "warning", "path": "detail[12].detail_category", "page": 14,
+     "extracted": "not itemized", "on_page": "Health Accident 1,123,385",
+     "issue": "The Health Accident department is the county's employee health insurance. 'employee benefits and payroll taxes' is more specific than 'not itemized'."},
+    {"severity": "warning", "path": "detail[56].split_from", "page": 13,
+     "extracted": "lodging tax 466,796 = Visitors Promotion 233,398 (p7) + Visitors Improvement 233,398 (p12)",
+     "on_page": "Taxes 1,503,968 (Total Nonmajor Funds, p13)",
+     "issue": "The split is by fund column. Calling those columns lodging tax is an inference, though it is backed by Statement of Activities 'Lodging' 466,796 (p2), and the arithmetic holds. The remainder of 1,037,172 (detail[57]) = Emergency Mgmt 3 + Ambulance 303,938 + Highway Allocation Bond 733,231."},
+    {"severity": "warning", "path": "balance_sheet.assets[0].amount", "page": 1,
+     "extracted": 6027112, "on_page": "Cash 6,027,112 (p1) vs 6,022,154 on governmental funds statement (p3)",
+     "issue": "The report classifies 4,958 differently on two pages: restricted cash and investments is 3,961,643 on p1 but 3,346,044 + 620,557 = 3,966,601 on p3. Total assets agree (11,940,366). This is in notes but not in report_discrepancies."},
+    {"severity": "warning", "path": "detail[51].fund_type_note", "page": 15,
+     "extracted": null, "on_page": "Road Fund Local 81,429",
+     "issue": "Stray non-schema field 'fund_type_note' on this line. Harmless, but worth removing on re-extraction."}
+  ]
+}
