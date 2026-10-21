@@ -1,15 +1,21 @@
 {
   "stem": "Sarpy_County_SID_65_FY2025",
-  "values_checked": 86,
+  "values_checked": 104,
   "issues": [
-    {"severity": "warning", "path": "balance_sheet", "page": 1,
-     "extracted": null, "on_page": "no Statement of Net Position / Balance Sheet in the trimmed PDF (trimmed p1 = report p5; report pp3-4 not trimmed)",
-     "issue": "Required balance sheet is missing because of the trim, so ending_cash is also null. Check the source PDF and re-trim; this is not an extraction error."},
-    {"severity": "warning", "path": "proprietary.capital_and_related_financing", "page": 2,
-     "extracted": 117527, "on_page": "CASH FLOWS FROM CAPITAL AND FINANCING ACTIVITIES - Net Transfers from Other Funds 117,527",
-     "issue": "The statement prints one combined 'capital and financing' section. Transfers from other funds would normally be noncapital financing; it was recorded as capital_and_related_financing. Judgment call."},
+    {"severity": "warning", "path": "receipts[2].category", "page": 2,
+     "extracted": "intergovernmental/state aid", "on_page": "State Motor Vehicle Tax Allocation 1,266",
+     "issue": "Label could mean the county-distributed motor vehicle tax (category motor vehicle tax) or the state pro-rate (state aid). The small amount suggests pro-rate, but it is a judgment call. Same for detail[2] and detail[14] (detail_category motor vehicle pro-rate, p5-6)."},
+    {"severity": "warning", "path": "disbursements[7].category", "page": 2,
+     "extracted": "utilities", "on_page": "Utilities 26,172",
+     "issue": "An SID's 'Utilities' line is often street lighting (streets/highways) or common-area power, not a utility operation. The function is a judgment call and the line has no review flag. Same for detail[10] (p5)."},
+    {"severity": "warning", "path": "disbursements[5].category", "page": 2,
+     "extracted": "utilities", "on_page": "Maintenance 86,712",
+     "issue": "Function guessed (already has a review flag). SID maintenance could be streets/highways or general government. Same for detail[8]."},
+    {"severity": "warning", "path": "proprietary.capital_and_related_financing", "page": 3,
+     "extracted": 117527, "on_page": "CASH FLOWS FROM CAPITAL AND FINANCING ACTIVITIES: Net Transfers from Other Funds 117,527",
+     "issue": "The statement prints one combined 'capital and financing' section. Transfers are normally noncapital financing, so this could belong in noncapital_financing."},
     {"severity": "warning", "path": "detail", "page": 5,
-     "extracted": "omitted", "on_page": "Debt Service Fund: Engineering, Fiscal Agent Fees, Professional Fees show '-' actual (GAAP) with budgets 5,000 / 2,500 / 2,500; General Fund (p4) Warrants Issued/Retired '-' actual with budgets 186,000 / (197,447)",
-     "issue": "Lines with zero GAAP actual but a nonzero final budget were left out, so their budget figures are lost. Actual totals are not affected."}
+     "extracted": "Actual on GAAP Basis column", "on_page": "Schedules 1-2 print both 'Actual on GAAP Basis' and 'Actual on Budgetary Basis' columns",
+     "issue": "The extractor took the GAAP actual column, which ties to the statement, over the budgetary actual. This is a defensible assumption and is stated in notes. Lines with a '-' GAAP actual but a nonzero budget were left out (General Warrants Issued/Retired, budget 186,000/(197,447); Debt Service Engineering, Fiscal Agent Fees and Professional Fees, budget 5,000/2,500/2,500)."}
   ]
 }

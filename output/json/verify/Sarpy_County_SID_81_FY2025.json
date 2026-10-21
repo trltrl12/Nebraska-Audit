@@ -1,15 +1,38 @@
 {
   "stem": "Sarpy_County_SID_81_FY2025",
-  "values_checked": 32,
+  "values_checked": 72,
   "issues": [
-    {"severity": "warning", "path": "balance_sheet", "page": 1,
-     "extracted": null, "on_page": "trimmed PDF is only the unaudited Schedule 1 budget-and-actual (budgetary basis) page",
-     "issue": "The basic financial statements and balance sheet are not in the trimmed PDF. Check the source PDF and re-trim."},
-    {"severity": "warning", "path": "basis", "page": 1,
-     "extracted": "cash", "on_page": "Budgetary Basis; 'Fund balances at beginning/end of year' 343,398 / 392,035",
-     "issue": "The extractor assumed cash basis and recorded budgetary fund balances as beginning_cash/ending_cash. Defensible, but it is an assumption."},
-    {"severity": "warning", "path": "receipts[1].category", "page": 1,
-     "extracted": "property tax", "on_page": "Collection fees on property taxes - County Treasurer (4,231)",
-     "issue": "Treasurer collection fees are printed as negative revenue and recorded as negative property tax, matching the page (already marked review). They could be treated as a general government treasurer-fee expense instead."}
+    {
+      "severity": "error",
+      "path": "detail[3].category",
+      "page": 3,
+      "extracted": "other / miscellaneous revenue",
+      "on_page": "Other 14,421 (Schedule 1); p2 shows non-tax revenue = Fee for water service 14,204 + Other 884",
+      "issue": "[fixed 2026-10-21: to charges for services / water charges (dominant part)] Broad 'Other' line left in other, although the extractor's own lookup shows water service fees are about 94% of it. Under the broad-line rule (use a category that is more than half of the line) it should be charges for services/fees, detail water charges, with review. Do not split it."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[5].category",
+      "page": 3,
+      "extracted": "general government",
+      "on_page": "Operating expenditures 164,429",
+      "issue": "Per p2, about 131.8k of the 166.0k operating spending is trash, utilities, repairs and water system costs (function utilities). The dominant-function rule points to utilities, not general government."
+    },
+    {
+      "severity": "warning",
+      "path": "beginning_cash",
+      "page": 3,
+      "extracted": 343398,
+      "on_page": "Fund balances at beginning of year 343,398 (Budgetary Basis)",
+      "issue": "The page prints this as a budgetary fund balance, not a cash figure. Treating it as cash is inferred from the ending budgetary balance 392,035 equalling p1 cash; it is not marked computed."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[3].category",
+      "page": 2,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "State motor vehicle allocation 438",
+      "issue": "Could be the motor vehicle tax rather than state pro-rate. Judgment call; same for detail[2] (detail_category motor vehicle pro-rate)."
+    }
   ]
 }
