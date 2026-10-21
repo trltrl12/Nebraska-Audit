@@ -137,7 +137,6 @@ These were diagnosed and fixed in find_pages v6; re-extract and re-verify them a
   Gothenburg_FY2025 (report pp42 and 49 not trimmed; may hold schedule lines).
   Grand_Island_Public_Schools_FY2025 (report p39, probably the Activities Fund schedule, not trimmed).
   Grand_Island_FY2025 (nonmajor combining schedule's Total column page not trimmed; nonmajor detail left out).
-  Norris_Public_Power_District_FY2025 (Statements of Net Position liabilities/net position page not trimmed; equity from p2).
   Niobrara_Public_Schools_FY2025 (report p27 not trimmed; totals tie without it).
   Omaha_Public_Schools_FY2025 (report pp81-89 and p94, possibly more fund budget schedules, not trimmed).
   Ogallala_FY2025 (report pp17, 19, 62 not trimmed; probably nonmajor balance sheet/reconciliations).
