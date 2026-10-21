@@ -1,62 +1,15 @@
 {
   "stem": "Ewing_FY2025",
-  "values_checked": 146,
+  "values_checked": 148,
   "issues": [
-    {
-      "severity": "error",
-      "path": "missing",
-      "page": 10,
-      "extracted": null,
-      "on_page": "Debt service - Principal: Actual 44,433, Budget 47,232",
-      "issue": "[fixed] All-funds budget schedule debt service principal (business-type Water/Sewer loan principal, matches p9 principal payments 44,433) is not in detail, though the extractor recorded the other business-type lines (Sanitation, Wastewater, Water) from this schedule. The extractor rules say to record business-type debt service lines from the budget schedule. Re-check: now detail[69], amount 44,433 and budget_final 47,232 match p10; p9 confirms Water 18,366 + Sewer 26,067 = 44,433."
-    },
-    {
-      "severity": "error",
-      "path": "missing",
-      "page": 10,
-      "extracted": null,
-      "on_page": "Debt service - Interest: Actual 26,876, Budget 26,876",
-      "issue": "[fixed] Business-type debt service interest line on the p10 budget schedule is not in detail (the extractor left it out, as with principal). Re-check: now detail[70], amount 26,876 and budget_final 26,876 match p10; p9 confirms Water 9,232 + Sewer 17,644 = 26,876. No double counting: p10 lists debt service separately from the Sanitation/Wastewater/Water lines, and governmental functions 304,882 + Sanitation/Wastewater/Water 174,737 + debt service 71,309 = 550,928, the printed total expenditures."
-    },
-    {
-      "severity": "warning",
-      "path": "notes",
-      "page": 10,
-      "extracted": "its debt service and transfers lines are not split by fund and not recorded",
-      "on_page": "Debt service Principal 44,433 / Interest 26,876 (now in detail[69], detail[70])",
-      "issue": "The notes are out of date: the p10 debt service lines are now in detail with a placeholder fund 'Water/Sewer (business-type debt)'. That fund name isn't printed on p10, which is an All Funds schedule; the Water/Sewer split comes from p9."
-    },
-    {
-      "severity": "warning",
-      "path": "detail",
-      "page": 10,
-      "extracted": "no detail lines for Street Fund or Keno Fund",
-      "on_page": "Streets and Highways: Actual 31,429, Budget 365,000",
-      "issue": "The fund-by-fund rule says budget schedule lines should be recorded for funds that have no more detailed schedule. Streets and Highways 31,429 is all Street Fund (p5) and could be recorded for it. Keno's 10,000 Community Development can't be pulled apart on p10."
-    },
-    {
-      "severity": "warning",
-      "path": "notes",
-      "page": 10,
-      "extracted": "Budget schedule p10 itself does not add up (e.g. fund balance)",
-      "on_page": "Revenues 696,022 - expenditures 550,928 = 145,094; 1,266,062 + 145,094 = 1,411,156",
-      "issue": "The note is wrong: the p10 actual and budget columns both foot, and the fund balance rolls forward. The schedule is on a different (budgetary) basis, but it is internally consistent."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[14].category",
-      "page": 5,
-      "extracted": "other",
-      "on_page": "Housing loan revenues 23,155",
-      "issue": "LB840 / housing rehabilitation loan repayments (p13 Loan revenues 14,627 + 8,528). No receipt category fits exactly. These may be principal repayments of loans the village made, not revenue. A person should confirm how to treat them (detail[63], detail[65] too)."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[9].category",
-      "page": 5,
-      "extracted": "other taxes",
-      "on_page": "Public power district lease payments 36,415",
-      "issue": "PPD lease payments treated as PPD in-lieu tax. Defensible, but it's a judgment call (could be seen as rentals / charges for services)."
-    }
+    {"severity": "warning", "path": "receipts[13].category", "page": 5,
+     "extracted": "other", "on_page": "Other revenues 73,351 (General Fund column)",
+     "issue": "The amount is correct, but nothing in the report explains this line, and it is about 16% of governmental receipts. Per the p12 combining schedule, 73,351 = Other 73,344 (Total column) + Donations 7, so a small donations part is folded in. The review note's 'General Fund other 70,893' is only the General department column; the General Fund Total column on p12 shows Other 73,344."},
+    {"severity": "warning", "path": "receipts[14].category", "page": 5,
+     "extracted": "other", "on_page": "Housing loan revenues 23,155 (p14: LB 840 loan revenues 14,627 + Housing Rehabilitation 8,528)",
+     "issue": "These look like repayments of loans the village made from its LB840 and housing rehabilitation programs (loan principal collected, not revenue). 'other' with review is defensible, but a person may want to decide whether this belongs in receipts at all."},
+    {"severity": "warning", "path": "detail", "page": 11,
+     "extracted": "budget schedule governmental lines not recorded", "on_page": "Streets and Highways 31,429 (budget 365,000); Community Development 87,074 incl. Keno Fund 10,000 (budget 437,032)",
+     "issue": "The Street Fund and Keno Fund have no detail schedule other than the all-funds budget schedule. Its Streets and Highways line is entirely Street Fund spending and could have been recorded with budget_final 365,000. The amounts are still in disbursements (p5), so nothing is missing from the totals. This is a judgment call because the budget schedule's revenue lines are combined across all funds."}
   ]
 }
