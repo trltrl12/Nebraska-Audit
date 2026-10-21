@@ -1,0 +1,24 @@
+{
+  "stem": "Tecumseh_FY2025",
+  "values_checked": 105,
+  "issues": [
+    {"severity": "error", "path": "detail[29]-detail[34]", "page": 10,
+     "extracted": "LB840 schedule recorded as separate fund 'LB840' (receipts 317,399, disbursements 305,555)",
+     "on_page": "The governmental funds are only General and Debt Service (p3, p4). LB840's ending balance of 202,772 falls inside the General Fund's 'Restricted for Economic development' 632,983 (p3).",
+     "issue": "Double counting. The LB840 Funds are a sub-account of the General Fund, so their receipts and disbursements are already in the General Fund budget schedule lines (detail[0]-[17], p8), e.g. Economic development 381,409 already includes the LB840 grants, administration and capital outlay. Record only one of the two, or keep LB840 as a breakdown that is not added on top of the General Fund. The extractor noticed this (decision_needed[0]) but still recorded both."},
+    {"severity": "error", "path": "detail[29]", "page": 10,
+     "extracted": "sales tax 109,009 (section revenue)", "on_page": "Sales tax transfer from City 109,009",
+     "issue": "A line labelled 'transfer' is recorded as revenue. This is money moved from the city's sales tax to LB840 inside the General Fund. The tax is already counted once in the General Fund's Sales tax 494,467 (p8), so counting it here as sales tax counts it twice."},
+    {"severity": "warning", "path": "decision_needed", "page": 9,
+     "extracted": "transfers_out 890,270 incl. Debt Service 'Transfers out' (316,411)",
+     "on_page": "DS Transfers out (316,411) (p4, p9). The utility records it as 'Repayment of due from other fund 316,411' (p7), not as a transfer. The Statement of Activities Total column shows 'Transfers to (from) funds' (316,411), which doesn't net to zero (p2).",
+     "issue": "A one-sided transfer. The governmental side calls it a transfer out, while the receiving utility treats it as an advance being repaid. A person should decide whether it stays in transfers_out or is treated as other financing (repaying an interfund advance). This is not in decision_needed[]."},
+    {"severity": "warning", "path": "proprietary", "page": 7,
+     "extracted": null,
+     "on_page": "Statement of Cash Flows - Proprietary Fund: operating 1,682,973; noncapital financing 734,270; capital and related financing (547,561); investing (3,399,166); beginning cash 1,755,252; ending cash 225,768",
+     "issue": "The proprietary cash flows are printed but not captured. The governmental funds are cash basis, while the utility fund is full accrual. Under the 'GAAP only' rule, null is defensible, but the data is on the page."},
+    {"severity": "warning", "path": "receipts[13].category", "page": 6,
+     "extracted": "intergovernmental/state aid", "on_page": "Grant revenue 1,465,044 (nonoperating)",
+     "issue": "The page doesn't say whether the grant is federal or state. The Statement of Activities (p2) shows it as Capital Grants and Contributions (1,495,044 = 1,465,044 + 30,000 capital contributions). The category is a judgment call; the line is already marked for review."}
+  ]
+}

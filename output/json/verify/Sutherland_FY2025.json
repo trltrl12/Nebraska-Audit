@@ -2,27 +2,61 @@
   "stem": "Sutherland_FY2025",
   "values_checked": 194,
   "issues": [
-    {"severity": "error", "path": "receipts[19].outside_printed_total", "page": 7,
-     "extracted": "outside_printed_total: true on Interest income 4,812 (and disbursements[34] Interest and fees expense 24,948); reported_totals.business-type receipts 679,495 / disbursements 625,668 computed to include them",
-     "on_page": "Total operating revenues 674,683; Total operating expenses 600,720; nonoperating Interest income 4,812, Interest and fees expense (24,948)",
-     "issue": "These two settings contradict each other. The business-type reported_totals are computed as operating plus nonoperating, so they already include these two lines, yet the lines are flagged as outside the printed total. Under the flag, the items inside the total add to 674,684 / 600,719 against reported 679,495 / 625,668 (gaps 4,811 and 24,949). Either drop the flag, or use the printed operating totals as reported_totals."},
-    {"severity": "error", "path": "report_discrepancies[2].difference", "page": 5,
-     "extracted": -1, "on_page": "Sale of assets 13,389 + Interest income 30,311 = 43,700 vs printed Total nonoperating 43,699 (General column 13,389 + 22,360 = 35,749 vs 35,748); operating income 250,615 vs 250,616",
-     "issue": "With the JSON's line items, the governmental identity is 1,460,175 + 1,690,328 + 13,389 + 30,311 - 1,439,712 = 1,754,491 against a printed ending of 1,754,489, so the difference is -2, not -1. The entry also leaves out the nonoperating-total rounding (43,700 vs 43,699)."},
-    {"severity": "error", "path": "report_discrepancies[0]", "page": 11,
-     "extracted": "difference -1; lines add up to 1,109,520", "on_page": "column totals 947,879 + 1,495 + 2,272 + 128,012 + 21,167 + 8,694 = 1,109,519 = printed Total revenues",
-     "issue": "The General Fund departments revenue lines add to exactly 1,109,519, so the detail ties. Two row totals are off in opposite directions (Property taxes 388,740 + 105,721 = 494,461 vs printed 494,462; Other 71,495 + 458 = 71,953 vs printed 71,952), and they cancel out. The stated difference and the stated line sum are wrong."},
-    {"severity": "error", "path": "report_discrepancies[1].difference", "page": 12,
-     "extracted": "difference -3; lines add up to 1,239,916", "on_page": "expenditure lines add up to 1,239,915 vs printed 1,239,913 (General column lines 558,100 vs 558,098; Pool 230,482 vs 230,481)",
-     "issue": "The sum of the detail expenditure lines (checked by row and by column) is 1,239,915, not 1,239,916, so the difference is -2."},
-    {"severity": "warning", "path": "disbursements[0].category", "page": 4,
-     "extracted": "general government (all 17 object lines)", "on_page": "Total column mixes General 1,239,913, Street 166,455, Keno 3,809, LB840 Economic Development 29,536",
-     "issue": "For object-only statements the rule says to use the function of the fund each line is printed under. Here every Total-column object line is tagged general government, so 166,455 of Street Fund spending (streets/highways) and 29,536 of LB840 spending (economic development) sit under general government. The lines are flagged 'listed by object', but splitting them by fund column (split_from) would follow the rule more closely."},
-    {"severity": "warning", "path": "detail[4].category", "page": 11,
-     "extracted": "sales tax", "on_page": "Special assessment 510 (p11); same 510 is 'Sales tax - LB840' in the General column on p4",
-     "issue": "The two pages label this line differently. The extractor chose sales tax based on p4 and flagged it review. That is defensible, but p11 prints 'Special assessment', which has its own category."},
-    {"severity": "warning", "path": "ending_cash", "page": 5,
-     "extracted": 1754489, "on_page": "Total fund balance 1,754,489 (p3) = cash 101,400 + CDs 117,859 + county 19,862 + restricted cash 1,430,928 + Due from Water and Sewer 86,285 - Taxes payable 1,845",
-     "issue": "On this modified cash basis, beginning_cash/ending_cash are fund balances, not cash. The ending figure includes an 86,285 interfund receivable and a 1,845 payable, and actual governmental cash is 1,670,049. This follows the 'balance the statement rolls forward' rule, but it is worth knowing."}
+    {
+      "severity": "error",
+      "path": "receipts[19].outside_printed_total",
+      "page": 7,
+      "extracted": "outside_printed_total: true on Interest income 4,812 (and disbursements[34] Interest and fees expense 24,948); reported_totals.business-type receipts 679,495 / disbursements 625,668 computed to include them",
+      "on_page": "Total operating revenues 674,683; Total operating expenses 600,720; nonoperating Interest income 4,812, Interest and fees expense (24,948)",
+      "issue": "[fixed] These two settings contradict each other. The business-type reported_totals are computed as operating plus nonoperating, so they already include these two lines, yet the lines are flagged as outside the printed total. Under the flag, the items inside the total add to 674,684 / 600,719 against reported 679,495 / 625,668 (gaps 4,811 and 24,949). Either drop the flag, or use the printed operating totals as reported_totals."
+    },
+    {
+      "severity": "error",
+      "path": "report_discrepancies[2].difference",
+      "page": 5,
+      "extracted": -1,
+      "on_page": "Sale of assets 13,389 + Interest income 30,311 = 43,700 vs printed Total nonoperating 43,699 (General column 13,389 + 22,360 = 35,749 vs 35,748); operating income 250,615 vs 250,616",
+      "issue": "[fixed] With the JSON's line items, the governmental identity is 1,460,175 + 1,690,328 + 13,389 + 30,311 - 1,439,712 = 1,754,491 against a printed ending of 1,754,489, so the difference is -2, not -1. The entry also leaves out the nonoperating-total rounding (43,700 vs 43,699)."
+    },
+    {
+      "severity": "error",
+      "path": "report_discrepancies[0]",
+      "page": 11,
+      "extracted": "difference -1; lines add up to 1,109,520",
+      "on_page": "column totals 947,879 + 1,495 + 2,272 + 128,012 + 21,167 + 8,694 = 1,109,519 = printed Total revenues",
+      "issue": "[fixed] The General Fund departments revenue lines add to exactly 1,109,519, so the detail ties. Two row totals are off in opposite directions (Property taxes 388,740 + 105,721 = 494,461 vs printed 494,462; Other 71,495 + 458 = 71,953 vs printed 71,952), and they cancel out. The stated difference and the stated line sum are wrong."
+    },
+    {
+      "severity": "error",
+      "path": "report_discrepancies[1].difference",
+      "page": 12,
+      "extracted": "difference -3; lines add up to 1,239,916",
+      "on_page": "expenditure lines add up to 1,239,915 vs printed 1,239,913 (General column lines 558,100 vs 558,098; Pool 230,482 vs 230,481)",
+      "issue": "[fixed] The sum of the detail expenditure lines (checked by row and by column) is 1,239,915, not 1,239,916, so the difference is -2."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[0].category",
+      "page": 4,
+      "extracted": "general government (all 17 object lines)",
+      "on_page": "Total column mixes General 1,239,913, Street 166,455, Keno 3,809, LB840 Economic Development 29,536",
+      "issue": "For object-only statements the rule says to use the function of the fund each line is printed under. Here every Total-column object line is tagged general government, so 166,455 of Street Fund spending (streets/highways) and 29,536 of LB840 spending (economic development) sit under general government. The lines are flagged 'listed by object', but splitting them by fund column (split_from) would follow the rule more closely."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[4].category",
+      "page": 11,
+      "extracted": "sales tax",
+      "on_page": "Special assessment 510 (p11); same 510 is 'Sales tax - LB840' in the General column on p4",
+      "issue": "The two pages label this line differently. The extractor chose sales tax based on p4 and flagged it review. That is defensible, but p11 prints 'Special assessment', which has its own category."
+    },
+    {
+      "severity": "warning",
+      "path": "ending_cash",
+      "page": 5,
+      "extracted": 1754489,
+      "on_page": "Total fund balance 1,754,489 (p3) = cash 101,400 + CDs 117,859 + county 19,862 + restricted cash 1,430,928 + Due from Water and Sewer 86,285 - Taxes payable 1,845",
+      "issue": "On this modified cash basis, beginning_cash/ending_cash are fund balances, not cash. The ending figure includes an 86,285 interfund receivable and a 1,845 payable, and actual governmental cash is 1,670,049. This follows the 'balance the statement rolls forward' rule, but it is worth knowing."
+    }
   ]
 }
