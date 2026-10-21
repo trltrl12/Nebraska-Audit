@@ -104,7 +104,9 @@ Keep the main session lean: don't open PDFs or print JSON in the main conversati
 agents' one-line statuses.
 
 ## Open follow-ups (remove each line once done)
-- find_pages.py v6 is pushed (debt-service schedules were being dropped, plus the fixes below). After
+- find_pages.py v7 is pushed (v6 debt-service fix plus: budget-form Total All Funds page, scanned/rotated/garbled
+  page OCR, title variants, fund-name exclusions, detail soft cap 25). Butte_FY2025 (report p31 already in the trim:
+  re-check the extraction) and Cass_County_SID_9/10 (v6 already keeps their statements) were stale entries. After
   the next fetch re-trims, compare each extracted report's manifest `pages_kept` with
   `output/json/_meta/pages_at_extraction.csv`; re-extract and re-verify every report whose pages
   changed (their source_page numbers no longer match).
@@ -171,16 +173,31 @@ These were diagnosed and fixed in find_pages v6; re-extract and re-verify them a
   York_Public_Schools_FY2025 (trim stops partway through Exhibit P at p20: object detail for programs 2130+, ~8.0M, missing; Exhibit G function lines used).
   Gering_Ft_Laramie_Irrigation_District_FY2025 (nonoperating/capital-grant statement page not trimmed; 9,257,241
   derived as an adjustment meanwhile).
+  Found in the 2026-10-21 outside-review recheck (re-extract after the v7 re-trim):
+  Beatrice_FY2025 (nonmajor/capital projects schedules), Beaver_Crossing_FY2025 (budget columns report pp26, 28, 30),
+  Blair_FY2025 (Debt Service budget schedule, report pp63-65, 67), Box_Butte_County_FY2025 (rest of nonmajor combining
+  statement after report p24), Bradshaw_FY2025 (General Fund combining pages report pp32, 34),
+  Central_City_Public_Schools_FY2025 (report p41 Bond Fund budget), Central_Platte_NRD_FY2025 (report p11 fund statement),
+  Cuming_County_FY2025 (governmental funds statement report pp7-8), Douglas_County_FY2025 (other nonmajor combining pages),
+  Falls_City_Public_Schools_FY2025 (report p6 governmental receipts/disbursements), Fillmore_County_FY2025 (report p34,
+  right half of nonmajor combining), Furnas_County_FY2025 (second nonmajor combining page), Greeley_FY2025 (report p28,
+  end of cash flow statement), Hooker_County_FY2025 (second half of nonmajor combining), Lincoln_FY2025 (nonmajor special
+  revenue combining pages), Logan_County_FY2025 (source pp26-27 nonmajor combining), Niobrara_FY2025 (report p15
+  proprietary statement), Norfolk_FY2025 (report pp32-33 governmental balance sheet; cash null),
+  Northeast_Nebraska_Economic_Development_District_FY2025 (cash flow statement report pp7-8), Omaha_FY2025 (report
+  pp24-25 proprietary revenue/expense statement), Ord_FY2025 (also report p15 government-wide assets/liabilities),
+  Otoe_County_FY2025 (governmental funds receipts/disbursements statement).
 - Budget forms whose Total All Funds page wasn't found (manifest flag no_budget_actuals_found; skipped, no
   JSON): Lewis_Township_Clay_County_B2526 and any others with that flag. Check why the finder misses it.
 - Filed under FY2025 but the PDF holds an earlier year (extracted as printed; check the Auditor's site for
-  the FY2025 filing): Bristow_FY2025 (period 10/1/23-9/30/24). Checked 2026-10-21: the Auditor's only FY2025 file
+  the FY2025 filing): Bristow_FY2025 (period 10/1/23-9/30/24), Naper_FY2025 (period 10/1/23-9/30/24; not yet checked
+  on the Auditor's site). Checked 2026-10-21: the Auditor's only FY2025 file
   (approved waiver for FY ending 2025) attaches the 10/1/23-9/30/24 statement; no other filing exists. Leave as is.
 - Blank waiver form (all fields $0.00; skipped, no JSON): Youth_and_Family_Crisis_Response_Center_FY2025. Checked 2026-10-21:
   the Auditor's current file is the same approved waiver with $0.00 on every line (no other filing). Extract it as
   all zeros, like Washington_County_SID_5, after the current validate run finishes.
-- Trimmed to a budget page only (skipped, no JSON): Cass_County_SID_9_FY2025, Cass_County_SID_10_FY2025.
-  Also trimmed to one page (extracted from that page; check the source PDF for missing statements):
+- Cass_County_SID_9_FY2025, Cass_County_SID_10_FY2025: v6/v7 trims hold their statements; extract them (no JSON yet).
+- Trimmed to one page (extracted from that page; check the source PDF for missing statements):
   Douglas_County_SID_520/575/583/584/615/640_FY2025, Hickman_FY2025 (all-fund-types budget schedule only;
   disbursements recorded).
 - ~97 Audit filings marked no_statements_found (mostly SIDs) and 72 with no balance statement: page
