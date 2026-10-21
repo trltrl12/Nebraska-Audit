@@ -1,102 +1,54 @@
 {
   "stem": "Nebraska_City_FY2025",
-  "values_checked": 171,
+  "values_checked": 163,
   "issues": [
     {
-      "severity": "error",
-      "path": "detail[164].amount",
-      "page": 9,
-      "extracted": 347521,
-      "on_page": "LB840 'Sales tax transfer from City' 347,521 = Economic Development Fund 'Transfers in' 347,521 (p8, detail[163])",
-      "issue": "[fixed] Double counted across schedules: the LB840 Funds schedule (p9) is a subset of the Economic Development Fund budget schedule (p8): identical transfer in 347,521 and identical investment income 9,139; LB840 program income 87,294 sits inside ED program income 91,669 and LB840 expenditures 252,513 inside ED disbursements 951,688. The same transfer is recorded twice."
-    },
-    {
-      "severity": "error",
-      "path": "detail[165].amount",
-      "page": 9,
-      "extracted": 87294,
-      "on_page": "Program income 87,294 (already inside ED Fund Program income 91,669, p8)",
-      "issue": "[fixed] Double counted: LB840 program income is part of the Economic Development Fund line already in detail[160]."
-    },
-    {
-      "severity": "error",
-      "path": "detail[166].amount",
-      "page": 9,
-      "extracted": 9139,
-      "on_page": "Investment income 9,139 (identical to ED Fund Investment income 9,139, p8)",
-      "issue": "[fixed] Double counted: same investment income as detail[161]."
-    },
-    {
-      "severity": "error",
-      "path": "detail[167].amount",
-      "page": 9,
-      "extracted": 125000,
-      "on_page": "Loans 125,000 (part of ED Fund Economic development 951,688, p8)",
-      "issue": "[fixed] Double counted: LB840 spending is inside the ED Fund 'Economic development' line detail[162]. Keep one schedule only (or keep LB840 lines and reduce the ED line with split_from), and say so in notes."
-    },
-    {
-      "severity": "error",
-      "path": "detail[168].amount",
-      "page": 9,
-      "extracted": 126196,
-      "on_page": "Grants 126,196 (part of ED Fund Economic development 951,688, p8)",
-      "issue": "[fixed] Double counted: same as detail[167]."
-    },
-    {
-      "severity": "error",
-      "path": "detail[169].amount",
-      "page": 9,
-      "extracted": 1317,
-      "on_page": "Administration 1,317 (part of ED Fund Economic development 951,688, p8)",
-      "issue": "[fixed] Double counted: same as detail[167]."
+      "severity": "warning",
+      "path": "receipts[0].split_from",
+      "page": 2,
+      "extracted": "Taxes 5,339,520 split property 1,814,735 / PILOT 2,615 / sales 3,120,073 / occupation 402,097",
+      "on_page": "p4 prints only 'Taxes' 5,339,520; the breakdown comes from the Statement of Activities general revenues (p2), which totals the same 5,339,520",
+      "issue": "Split uses a different statement's breakdown. The totals tie, but the fund budget schedules imply a slightly different split: General Fund property 1,247,790 (incl. TIF 4,105) + Debt Service taxes 572,720 = 1,816,405 property vs 1,814,735 on p2; General 2,589,202 + Street 529,201 = 3,118,403 sales vs 3,120,073 on p2 (1,670 apart). Defensible, but worth review."
     },
     {
       "severity": "warning",
-      "path": "receipts[0].category",
-      "page": 2,
-      "extracted": "charges for services/fees",
-      "on_page": "Charges for Services - General government 225,749",
-      "issue": "Equals the General Fund 'Licenses and permits' actual 225,749 exactly (p6), so it is probably licenses and permits, not charges for services."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[5].category",
-      "page": 2,
+      "path": "receipts[7].category",
+      "page": 4,
       "extracted": "federal grants",
-      "on_page": "Operating Grants and Contributions - Cultural and recreational 99,876",
-      "issue": "May be mostly private donations (the General Fund shows Donations 130,956 on p6), so donations/contributions could fit better. More generally, receipts[5]-[10] are all put in federal grants, but the report never says which government (or donor) the grants come from (the budget schedules just say 'Grant income'). This is marked review."
+      "on_page": "Grant income 1,622,600",
+      "issue": "The page never says the grants are federal (Economic Development 697,256 could be state CDBG/pass-through; Street 330,000 and General 595,344 have no source given). The extractor assumed federal. It is marked review, and the same applies to detail[6], detail[23] and detail[31]."
     },
     {
       "severity": "warning",
-      "path": "detail[150].detail_category",
-      "page": 7,
+      "path": "detail[22].detail_category",
+      "page": 9,
       "extracted": "other state aid",
       "on_page": "Street Department Fund - State revenue 1,232,304",
-      "issue": "Street fund state revenue is most likely highway allocation, but the label doesn't say so."
+      "issue": "State revenue in the Street Department Fund is most likely highway allocation; the label doesn't say, so 'other state aid' is defensible."
     },
     {
       "severity": "warning",
-      "path": "detail[152].category",
-      "page": 7,
-      "extracted": "other",
-      "on_page": "Street Department Fund - Miscellaneous 31,275",
-      "issue": "Equals both the Street Fund 'Transfers out' 31,275 and the General Fund 'Transfers in' 31,275, so it may be a pass-through or a transfer. Statement-level Miscellaneous 174,233 (receipts[20]) = GF 142,958 + Street 31,275. This is marked review; a person may need to settle it."
-    },
-    {
-      "severity": "warning",
-      "path": "business_type.other_financing",
-      "page": 4,
+      "path": "missing",
+      "page": 6,
       "extracted": null,
       "on_page": "Capital Contributions 320,205; Plant Cost Recovered through Capital Contributions (320,205)",
-      "issue": "These two lines are left out because they net to zero. The identity still holds, but the capital contributions aren't recorded anywhere."
+      "issue": "Both lines are left out of the business-type receipts/disbursements. They net to zero, so the roll-forward still holds, and the notes explain it. This is a completeness judgment call."
     },
     {
       "severity": "warning",
-      "path": "proprietary",
-      "page": 5,
-      "extracted": "filled",
-      "on_page": "Statement of Cash Flows - Proprietary Fund",
-      "issue": "The rules say proprietary is filled for GAAP only, but basis is 'cash' (governmental activities are cash basis; the enterprise fund is accrual). This is defensible, and all figures match the page (828,167 - 4,827,755 + 2,290,433 = -1,709,155; 6,541,398 to 4,832,243)."
+      "path": "missing",
+      "page": 11,
+      "extracted": null,
+      "on_page": "LB840 Funds schedule: Sales tax transfer from City 347,521; Program income 87,294; Investment income 9,139; Loans 125,000; Grants 126,196; Administration 1,317; Total Revenues 443,954; Total Expenditures 252,513",
+      "issue": "The whole schedule is left out of detail[] as a subset of the Economic Development Fund (p10). That is plausible (same 347,521 transfer and 9,139 interest), but p11 is the only object-level breakdown of the economic development spending, and the report never says it is a subset. Judgment call, explained in notes."
+    },
+    {
+      "severity": "warning",
+      "path": "balance_sheet.liabilities[8].category",
+      "page": 1,
+      "extracted": "other liabilities",
+      "on_page": "Compensated absences - Payable in more than one year 589,358",
+      "issue": "[fixed 2026-10-21: long-term portion recategorized to accrued liabilities] Inconsistent with the current portion (liabilities[7], 264,851), which is categorized accrued liabilities. The two portions of the same item should probably share a category."
     }
   ]
 }
