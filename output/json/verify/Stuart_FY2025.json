@@ -1,0 +1,18 @@
+{
+  "stem": "Stuart_FY2025",
+  "values_checked": 217,
+  "issues": [
+    {"severity": "warning", "path": "detail[11].detail_category", "page": 14,
+     "extracted": "other state aid", "on_page": "Motor vehicle fee 8,488 (Intergovernmental; p12 'State - motor vehicle fees')",
+     "issue": "Rules list motor vehicle fees under motor vehicle tax; the report prints it as intergovernmental state revenue. Judgment call, already marked review."},
+    {"severity": "warning", "path": "detail[12].detail_category", "page": 14,
+     "extracted": "other state aid", "on_page": "Incentive payment 600 (p12 budget schedule: 'State - highway allocation and incentive' 143,218 = 142,618 + 600)",
+     "issue": "Budget schedule groups the incentive payment with highway allocation; 'highway allocation' may fit better."},
+    {"severity": "warning", "path": "missing", "page": 13,
+     "extracted": null, "on_page": "Nursing Home Bonds 27,418; Airport 13,596 (expenditures, all-fund-types budget schedule); p12 Property taxes 156,052 vs General levy 142,456 (diff 13,596 = airport levy)",
+     "issue": "These budget-schedule lines appear in no fund statement and are not in the JSON. The extractor left the whole budget schedule out because more detailed fund schedules exist, but these lines have no other schedule. They are probably pass-through or fiduciary amounts (the notes mention them). A person should confirm leaving them out is right."},
+    {"severity": "warning", "path": "ending_cash", "page": 5,
+     "extracted": 335143, "on_page": "Fund balances end of year 335,143 (p3: cash 139,689 + due from other funds 188,601 + county treasurer 6,853)",
+     "issue": "Ending (and beginning) 'cash' is the modified-cash fund balance and includes an interfund receivable of 188,601. This matches the statement's roll-forward, but it is not pure cash."}
+  ]
+}

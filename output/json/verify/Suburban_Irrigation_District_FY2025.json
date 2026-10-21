@@ -1,0 +1,26 @@
+{
+  "stem": "Suburban_Irrigation_District_FY2025",
+  "values_checked": 11,
+  "issues": [
+    {"severity": "warning", "path": "disbursements[0].category", "page": 1,
+     "extracted": "utilities",
+     "on_page": "Operating Expenses 78,639.27 (Suburban Irrigation District)",
+     "issue": "The rules list water and drainage districts under natural resources/conservation. An irrigation district probably fits that better than utilities."},
+    {"severity": "warning", "path": "receipts[0].category", "page": 1,
+     "extracted": "charges for services/fees",
+     "on_page": "Local Receipts -- WATER ASSESSMENTS AND NRD 67,368.27",
+     "issue": "Irrigation water assessments are levied on land, so special assessments may fit better. The line also mixes in NRD money (intergovernmental). It is already marked review."},
+    {"severity": "warning", "path": "entity_type", "page": 1,
+     "extracted": "public power / utility",
+     "on_page": "SUBURBAN IRRIGATION DISTRICT",
+     "issue": "This is an irrigation district, not a power or utility entity. Treating it as entirely business-type (not governmental cash basis) is a judgment call."},
+    {"severity": "warning", "path": "fiscal_year_end", "page": 1,
+     "extracted": "2025-06-30",
+     "on_page": "2025 Audit Waiver Request (no period printed)",
+     "issue": "The year end is assumed. Irrigation districts often use a calendar year (2024-12-31 or 2025-12-31)."},
+    {"severity": "warning", "path": "balance_sheet", "page": 1,
+     "extracted": null,
+     "on_page": "Lines 28-31: Cash on Hand and in Bank 165,045.78; Investments 0.00; Cash at County Treasurer 40,689.48; Total 205,735.26",
+     "issue": "This is a waiver summary, not a budget form. Its ending-balance lines could form a cash-basis balance sheet (assets only), but balance_sheet was left null."}
+  ]
+}

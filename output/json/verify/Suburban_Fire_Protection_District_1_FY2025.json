@@ -1,0 +1,38 @@
+{
+  "stem": "Suburban_Fire_Protection_District_1_FY2025",
+  "values_checked": 143,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "other_financing.amount",
+      "page": 4,
+      "extracted": 116130,
+      "on_page": "Other financing sources (uses): Gain on sale of equipment 5,000; Gain on involuntary disposal 185,994; Note payment (14,864); Bond payment (60,000); Total 116,130",
+      "issue": "[fixed] Note payment 14,864 and Bond payment 60,000 are debt principal repayments printed below Total expenditures. Under the outside_printed_total rule they belong in disbursements (debt service principal, outside_printed_total: true), not netted into other_financing. With them moved out, other_financing would be 190,994 and the identity still holds."
+    },
+    {
+      "severity": "warning",
+      "path": "other_financing.computed",
+      "page": 4,
+      "extracted": "gain on sale 5,000 + gain on involuntary disposal 185,994 in other_financing",
+      "on_page": "Gain (loss) on involuntary disposal of equipment 185,994",
+      "issue": "The involuntary-disposal gain is insurance proceeds on destroyed equipment. It could be a receipt (reimbursements/refunds, outside_printed_total) instead of other_financing. The sale-of-equipment gain in other_financing is defensible."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[36].detail_category",
+      "page": 6,
+      "extracted": "sale of assets",
+      "on_page": "Gain on asset disposal 185,994 (Sinking Fund)",
+      "issue": "The rules put insurance proceeds under reimbursements/refunds. This is an involuntary-disposal (insurance) gain, so it may need reimbursements/refunds. It is already marked review."
+    },
+    {
+      "severity": "warning",
+      "path": "report_discrepancies",
+      "page": 4,
+      "extracted": "only the 5,000 balance-sheet fund-balance difference recorded",
+      "on_page": "p4 Sinking interest income 3,151 / levied property taxes 137,647 vs p6 accrual column 3,152 / 137,646",
+      "issue": "There are $1 rounding differences between the fund statement and the budget schedule's accrual column. They don't affect any recorded total, but they aren't noted."
+    }
+  ]
+}
