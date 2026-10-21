@@ -128,7 +128,7 @@ These were diagnosed and fixed in find_pages v6; re-extract and re-verify them a
   Fairbury_FY2025 (report pp42-47 Light/Water/Sewer budget schedules 6-9, plus pp8, 11, 62, not trimmed).
   Chadron_Public_Schools_FY2025 (report p34 not trimmed: trimmed p15 = report p33, p16 = report p35).
   Grand_Island_Public_Schools_Foundation_FY2025 (all 5 trimmed pages cut off on the right: Total and Jack Martin
-  columns missing; skipped, no JSON).
+  columns missing; still cut off after the v8 re-trim, so check the source PDF page size/crop; skipped, no JSON).
   Garfield_County_Agricultural_Society_FY2025 (report p25 not trimmed: trimmed jumps p24 to p26).
   Lyons_FY2025 (report pp8-9, probably the utilities revenue/expense statement, and p21 not trimmed).
   Kimball_County_FY2025 (report p31 not trimmed), Kimball_FY2025 (report pp17, 19, 59 not trimmed); totals tie, check source.
