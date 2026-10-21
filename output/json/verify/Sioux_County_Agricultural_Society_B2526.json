@@ -1,0 +1,15 @@
+{
+  "stem": "Sioux_County_Agricultural_Society_B2526",
+  "values_checked": 13,
+  "issues": [
+    {"severity": "warning", "path": "transfers_in.amount", "page": 1,
+     "extracted": 13000, "on_page": "line 16 col 2: 13,000.00; Documentation of Transfers (p2): 14,000.00",
+     "issue": "The budget-form rule says transfers come from the Documentation of Transfers page, which shows 14,000 (General Fair Account to Rodeo Account). The extractor used the 13,000 on lines 16/28 of column 2 instead, which ties to the printed totals. The difference is recorded in report_discrepancies and decision_needed. Transfers in and out net to zero either way, so the roll-forward is unaffected."},
+    {"severity": "warning", "path": "transfers_out.amount", "page": 1,
+     "extracted": 13000, "on_page": "line 28 col 2: 13,000.00; Documentation of Transfers (p2): 14,000.00",
+     "issue": "Same deviation as transfers_in: the line 28 figure was used instead of the Documentation of Transfers figure."},
+    {"severity": "warning", "path": "receipts[4].category", "page": 1,
+     "extracted": "other", "on_page": "Local Receipts: Other 28,186.18",
+     "issue": "This line is 43% of governmental receipts and sits in 'other'. For a county fair it is probably fair/event revenue (charges for services/fees), but the form doesn't say so. Defensible as recorded, with review set."}
+  ]
+}
