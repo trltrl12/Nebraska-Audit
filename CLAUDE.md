@@ -167,6 +167,7 @@ These were diagnosed and fixed in find_pages v6; re-extract and re-verify them a
   Two_Rivers_Public_Health_Department_FY2025 (report p10, Statement of Net Position, and pp34-36 not trimmed; fund balance sheet used).
   Wahoo_FY2025 (no General Fund budget schedule trimmed; source PDF p19 and pp23-27 not kept).
   Wisner_Care_Center_FY2025 (trimmed to 3 pages, no revenue/expense statement: receipts/disbursements empty, net position change as placeholder adjustment).
+  York_FY2025 (report p73, rest of the General Fund Departments combining schedule: Fire/EMS, Library, Total columns, not trimmed; departmental detail left out).
   Gering_Ft_Laramie_Irrigation_District_FY2025 (nonoperating/capital-grant statement page not trimmed; 9,257,241
   derived as an adjustment meanwhile).
 - Budget forms whose Total All Funds page wasn't found (manifest flag no_budget_actuals_found; skipped, no
