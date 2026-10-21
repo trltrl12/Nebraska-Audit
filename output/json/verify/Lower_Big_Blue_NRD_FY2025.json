@@ -1,27 +1,70 @@
 {
   "stem": "Lower_Big_Blue_NRD_FY2025",
-  "values_checked": 165,
+  "values_checked": 166,
   "issues": [
-    {"severity": "warning", "path": "disbursements[0..18].category", "page": 5,
-     "extracted": "general government", "on_page": "OPERATING EXPENDITURES (Salaries ... Miscellaneous expense), total 1,259,804; Statement of Activities p3 'General and administrative'",
-     "issue": "NRD rule says function natural resources/conservation. general government is defensible because the Statement of Activities prints a 'General and administrative' function, but it's a judgment call. The same applies to the matching detail lines on pp11-12."},
-    {"severity": "warning", "path": "detail[6]", "page": 11,
-     "extracted": "Investment income 131,851, fund_type governmental", "on_page": "Investment income 131,851 (= governmental 121,135 + business-type 10,716 per Statement of Activities p3)",
-     "issue": "This district-wide cash-basis line includes the rural water funds' interest of 10,716 but is tagged governmental only. The page doesn't split it, so it can't be split, but the fund type is mixed."},
-    {"severity": "warning", "path": "detail_totals", "page": 11,
-     "extracted": "District (all funds) revenue 3,729,433 / expenditure 3,103,530", "on_page": "Total receipts 3,729,433; Total disbursements 3,103,530",
-     "issue": "Totals match, but each printed total mixes governmental and business-type lines (rural water revenues 251,139, rural water disbursements 200,521). Any per-fund-type tie-out will need to treat this schedule as all funds."},
-    {"severity": "warning", "path": "detail[16].detail_category", "page": 11,
-     "extracted": "equipment purchases", "on_page": "Capital acquisitions 816,943",
-     "issue": "Per p6 this is mostly Building construction 725,504 (with equipment 10,000, office equipment 11,439, vehicles 70,000). The dominant object is construction/infrastructure or land and buildings, not equipment purchases."},
-    {"severity": "warning", "path": "detail[26].detail_category", "page": 11,
-     "extracted": "dues, training and travel", "on_page": "Fees and licenses 3,646",
-     "issue": "Category guess; could be professional/contract services or miscellaneous."},
-    {"severity": "warning", "path": "detail[24].detail_category", "page": 11,
-     "extracted": "repairs and maintenance", "on_page": "Truck and auto 26,337",
-     "issue": "Vehicle costs probably include fuel; category is a judgment call."},
-    {"severity": "warning", "path": "detail[38]", "page": 12,
-     "extracted": "not itemized 200,521", "on_page": "Rural water system disbursements (including actual note principal payments of $56,082) 200,521",
-     "issue": "The line includes 56,082 of debt principal printed in its label. It is left as one not-itemized utilities line; it could be split using the printed principal amount."}
+    {
+      "severity": "error",
+      "path": "detail[16].detail_category",
+      "page": 12,
+      "extracted": "equipment purchases",
+      "on_page": "Capital acquisitions 816,943 (p6: Building construction 725,504, Machinery and equipment 10,000, Office equipment 11,439, Vehicles 70,000)",
+      "issue": "[fixed 2026-10-21: land and buildings with review] The report's own capital outlay breakdown (p6) shows 89% of this line is building construction. Under the dominant-object rule it should be 'land and buildings' (or 'construction/infrastructure'), with review naming the mix, not 'equipment purchases'."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[2].split_from",
+      "page": 5,
+      "extracted": "Federal 45,750 / State 464,114 split from 'Federal and state grants' 509,864",
+      "on_page": "p5 prints one line 'Federal and state grants 509,864'. The p12 cash-basis budget schedule prints Federal funds 45,750 and State funds 464,114",
+      "issue": "The split comes from a different (cash-basis budgetary) schedule. It ties exactly, so it is very likely the same money, but the rules allow a split only when the report breaks out that line itself. receipts[3] has the same issue. Judgment call."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[0..18].category",
+      "page": 5,
+      "extracted": "general government",
+      "on_page": "OPERATING EXPENDITURES (Salaries ... Miscellaneous expense), total 1,259,804. Statement of Activities p3: 'General and administrative' 1,336,065",
+      "issue": "The NRD rule says function natural resources/conservation. general government is defensible because the Statement of Activities prints a 'General and administrative' function. Judgment call; the matching detail lines on pp12-13 are the same."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[6].fund_type",
+      "page": 12,
+      "extracted": "governmental",
+      "on_page": "Investment income 131,851 (= governmental 121,135 + business-type 10,716 per p3)",
+      "issue": "This district-wide cash-basis line includes the rural water funds' interest of 10,716 but is tagged governmental only. The page prints no split."
+    },
+    {
+      "severity": "warning",
+      "path": "detail_totals",
+      "page": 12,
+      "extracted": "District (all funds) revenue 3,729,433 / expenditure 3,103,530 (p13)",
+      "on_page": "Total receipts 3,729,433; Total disbursements 3,103,530",
+      "issue": "Totals tie, but each printed total mixes governmental and business-type lines (Rural water system revenues 251,139, Rural water system disbursements 200,521). A per-fund-type tie-out has to treat this schedule as all funds."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[38].detail_category",
+      "page": 13,
+      "extracted": "not itemized 200,521",
+      "on_page": "Rural water system disbursements (including actual note principal payments of $56,082) 200,521",
+      "issue": "The label prints 56,082 of debt principal inside this line. It is left as one not-itemized utilities line."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[25].detail_category",
+      "page": 12,
+      "extracted": "repairs and maintenance",
+      "on_page": "Truck and auto 26,337",
+      "issue": "Vehicle costs probably include fuel. Category judgment call."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[27].detail_category",
+      "page": 12,
+      "extracted": "dues, training and travel",
+      "on_page": "Fees and licenses 3,646",
+      "issue": "Category guess; could be professional/contract services or miscellaneous."
+    }
   ]
 }

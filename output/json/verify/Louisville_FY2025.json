@@ -1,54 +1,30 @@
 {
   "stem": "Louisville_FY2025",
-  "values_checked": 131,
+  "values_checked": 154,
   "issues": [
-    {
-      "severity": "error",
-      "path": "receipts[9].category",
-      "page": 6,
-      "extracted": "other",
-      "on_page": "p5 'Miscellaneous income (expense)' 84,190 = p6 cash flow line 'Contributions, reimbursements, and garnishment' 84,190",
-      "issue": "[fixed] the report's own cash flow statement says what this line is (contributions, reimbursements and garnishment), so 'other' is not a last resort here; it should be reimbursements/refunds or donations/contributions (dominant one unknown) with a review note naming the mix"
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[14].category",
-      "page": 5,
-      "extracted": "other",
-      "on_page": "Loss on Sale of Assets (924,340), Care Center",
-      "issue": "non-cash loss recorded as spending under 'other'; it could instead be a negative sale of assets item or other_financing. Judgment call (already marked review)"
-    },
-    {
-      "severity": "warning",
-      "path": "decision_needed",
-      "page": 5,
-      "extracted": "[] (absent)",
-      "on_page": "Care Center: Transfers Out - Equity (2,039,991), Loss on Sale of Assets (924,340), net position 3,395,196 to 0",
-      "issue": "the Care Center was disposed of during the year. The 2,039,991 equity transfer to the General Fund does not appear in the p6 cash flow statement, and the Care Center's cash flow shows 'Purchase of Fixed Assets (924,340)', the same amount as the loss on sale. A person should decide whether the transfer is real money moved to governmental funds or an equity reclassification, and how the disposal should be treated"
-    },
-    {
-      "severity": "warning",
-      "path": "ending_investments",
-      "page": 2,
-      "extracted": null,
-      "on_page": "Certificate of Deposit 964,206; Cash held by county treasurer 14,393 (Total Governmental Funds)",
-      "issue": "ending_cash uses only 'Cash and cash equivalents' 1,721,385; the governmental CDs 964,206 are printed separately but not recorded as ending_investments. Defensible under the GAAP rule, but cash/investments are understated if someone reads only ending_cash"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[16].detail_category",
-      "page": 9,
-      "extracted": "other state aid",
-      "on_page": "Street Fund Intergovernmental 446,375",
-      "issue": "a Street Fund intergovernmental receipt is most likely highway allocation (and the p3 line reads 'Intergovernmental/Grants', so it may include grants). Judgment call"
-    },
-    {
-      "severity": "warning",
-      "path": "missing",
-      "page": null,
-      "extracted": null,
-      "on_page": "Statement of Activities (report p5) and reconciliation pages (report pp7, 9) not in trimmed PDF",
-      "issue": "the trimmed PDF jumps from report p4 to p6 and p8. The government-wide Statement of Activities usually breaks out general revenues by tax type (property, sales, motor vehicle\u2026), which could have been used to split the 679,270 'Taxes' line now kept as taxes (unlabeled). This is a trimming gap, not an extraction error"
-    }
+    {"severity": "warning", "path": "receipts[5].category", "page": 4,
+     "extracted": "other", "on_page": "Miscellaneous 117,281 (General 60,489; Other Governmental Funds 35,556, of which Keno fund 32,114 per p12)",
+     "issue": "Kept in 'other' with review. About 27% of it is the Keno fund's 'Miscellaneous' (p12), which is probably keno proceeds. That isn't the dominant part, so 'other' is defensible, but the user should know."},
+    {"severity": "warning", "path": "detail[39].category", "page": 12,
+     "extracted": "other / miscellaneous revenue", "on_page": "Keno (12) fund: Miscellaneous 32,114",
+     "issue": "This is the only non-interest revenue of the Keno fund, so it is most likely keno/lottery proceeds. The page doesn't say so (already marked review). Could be keno/lottery."},
+    {"severity": "warning", "path": "detail[27].category", "page": 13,
+     "extracted": "general government", "on_page": "Cemetery column: Public Building 21,562",
+     "issue": "The department-column rule says to use the department's function (Cemetery = health/welfare). general government matches the statement's 'Public Building' line on p4, so it ties, but it's a judgment call. Cemetery capital outlay 2,605 is fine."},
+    {"severity": "warning", "path": "receipts[9].category", "page": 6,
+     "extracted": "reimbursements/refunds", "on_page": "Miscellaneous income (expense) 84,190 = p7 'Contributions, reimbursements, and garnishment' 84,190",
+     "issue": "This is a mixed line (contributions, reimbursements, garnishment) and the dominant part isn't printed. It could be donations/contributions. Already marked review."},
+    {"severity": "warning", "path": "disbursements[19].category", "page": 6,
+     "extracted": "other", "on_page": "Loss on Sale of Assets (924,340), Care Center column",
+     "issue": "A non-cash loss is recorded as business-type spending under 'other'. p7 shows the same 924,340 as 'Purchase of Fixed Assets'. This is covered by decision_needed[0]; flagged so the category isn't taken as settled."},
+    {"severity": "warning", "path": "decision_needed", "page": 6,
+     "extracted": "only the loss-on-sale question", "on_page": "Care Center: Transfers Out - Equity (2,039,991); net position 3,395,196 to 0; General Fund 'EquityTransfer in' 2,039,991 (p4); no transfer line in the p7 cash flow statement",
+     "issue": "The Care Center was wound up and its equity was transferred to the General Fund. The p7 cash flows show no transfer of cash. A person should decide whether the 2,039,991 is a real cash transfer to governmental funds or an equity reclassification, since it accounts for most of the governmental fund-balance increase."},
+    {"severity": "warning", "path": "ending_investments", "page": 3,
+     "extracted": null, "on_page": "Certificate of Deposit 964,206; Cash held by county treasurer 14,393 (Total Governmental Funds)",
+     "issue": "ending_cash uses only 'Cash and cash equivalents' 1,721,385. The governmental CDs (964,206) and county treasurer cash (14,393) are printed but not recorded in ending_cash or ending_investments."},
+    {"severity": "warning", "path": "detail[47].detail_category", "page": 10,
+     "extracted": "other state aid", "on_page": "Street Fund: Intergovernmental 446,375",
+     "issue": "A Street Fund intergovernmental receipt is most likely highway allocation, and p2 shows 290,400 of operating grants for Public Works. Judgment call."}
   ]
 }
