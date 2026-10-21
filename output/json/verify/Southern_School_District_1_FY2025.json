@@ -1,54 +1,15 @@
 {
   "stem": "Southern_School_District_1_FY2025",
-  "values_checked": 266,
+  "values_checked": 297,
   "issues": [
-    {
-      "severity": "error",
-      "path": "detail[7].category",
-      "page": 8,
-      "extracted": "other / miscellaneous revenue",
-      "on_page": "1960 Miscellaneous revenues 3,428",
-      "issue": "[fixed] Extractor rules: school 1951/1960-type account lines are intergovernmental/state aid / county/other local governments, never other"
-    },
-    {
-      "severity": "warning",
-      "path": "detail",
-      "page": 18,
-      "extracted": "Exhibit N object detail stops after 2163 Occupational Therapy SPED 0-2; programs 2171 onward taken from Exhibit G as 'not itemized'",
-      "on_page": "trimmed p18 is the last page; Exhibit N continues in the source report but is not trimmed",
-      "issue": "Trimmed PDF is missing the rest of Exhibit N (General Fund disbursements by object for programs 2171+, ~3.2M). Not listed in the CLAUDE.md follow-ups; re-trim and re-extract. All 18 trimmed pages are captured and the totals tie to 8,062,131"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[99]",
-      "page": 13,
-      "extracted": "Activities Fund receipts 212,587 recorded entirely as student activity receipts",
-      "on_page": "Other Governmental Funds Transfers 205,312 (p4) = Nutrition 200,000 (p14) + 5,312 not shown on any fund schedule",
-      "issue": "The other 5,312 of the General Fund transfer most likely sits inside Activities Fund receipts (Other local receipts 215,902 on p4 ties only if 5,312 of Activities receipts is the transfer). It may be counted as revenue in detail; the page doesn't show which account"
-    },
-    {
-      "severity": "warning",
-      "path": "decision_needed",
-      "page": 10,
-      "extracted": "no decision_needed[]",
-      "on_page": "8000 Transfers 205,312 out of General; only 200,000 received is shown (School Nutrition p14)",
-      "issue": "One-sided transfer of 5,312: a person should confirm the receiving fund (probably Activities) and whether that fund's receipts need a contra/other financing line"
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[13]",
-      "page": 5,
-      "extracted": "Other student support split 384,015 food service / 188,596 student activities",
-      "on_page": "Other student support 572,611 (one line, Other Governmental Funds column p4; Exhibit B p2 prints 572,612)",
-      "issue": "Split is taken from the Nutrition (p14) and Activities (p13) fund schedules rather than a printed breakdown of the line itself. Defensible but a judgment call. The 1 difference (572,611 vs 384,015 + 188,597 = 572,612) is a rounding difference in the report and is not in report_discrepancies"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[95].detail_category",
-      "page": 11,
-      "extracted": "equipment purchases",
-      "on_page": "Books and periodicals 54,707",
-      "issue": "Books and periodicals is usually supplies and materials"
-    }
+    {"severity": "warning", "path": "detail_totals[1]", "page": 10,
+     "extracted": 8062131, "on_page": "Exhibit G Total Disbursements By All Programs 8,062,131; same total as detail_totals[14] (Exhibit N, p22)",
+     "issue": "The General Fund expenditure total is recorded twice: under Exhibit G (no Exhibit G expenditure items are in detail; marked includes_schedules) and under Exhibit N. A validator that ties detail by fund and section could count it twice."},
+    {"severity": "warning", "path": "detail[147].detail_category", "page": 11,
+     "extracted": "equipment purchases", "on_page": "Books and periodicals 54,707 (Depreciation Fund)",
+     "issue": "Books and periodicals are usually supplies and materials, not equipment. Judgment call."},
+    {"severity": "warning", "path": "disbursements[14].amount", "page": 13,
+     "extracted": 188596, "on_page": "Activities Fund Total disbursements 188,597 (p13); Other student support 572,611 (p4/p5) vs Nutrition 384,015 + Activities 188,597 = 572,612",
+     "issue": "The report has a $1 rounding difference between the fund schedules and the statement (the Other Governmental receipts 804,801 vs 149,592 + 442,623 + 212,587 = 804,802 also differ by 1). The extractor computed the activities portion as the remainder and noted it, but did not list it in report_discrepancies."}
   ]
 }

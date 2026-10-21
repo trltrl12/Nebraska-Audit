@@ -1,21 +1,15 @@
 {
   "stem": "Southeast_Community_College_FY2025",
-  "values_checked": 95,
+  "values_checked": 93,
   "issues": [
-    {"severity": "warning", "path": "business_type.other_financing", "page": 4,
-     "extracted": 16812995, "on_page": "Capital appropriations 16,671,213; Gain on disposal of capital assets 141,782",
-     "issue": "Capital appropriations are recorded as other financing. The cash flow statement (p5) shows them as 'Property taxes - Capital Improvement Fund' 16,471,149, so this is mainly property tax revenue. Leaving it out of receipts makes property tax look like 1,013,082 instead of about 17.7M. The placement is defensible because the line sits below income before other revenues, like capital contributions, but a person should confirm it. The roll-forward holds either way."},
-    {"severity": "warning", "path": "disbursements[0..2].category, disbursements[4].category", "page": 3,
-     "extracted": "instruction / other", "on_page": "Personnel services 86,450,048; Operating expenses 44,738,784; Travel 576,247; Depreciation 12,535,902",
-     "issue": "The statement lists spending by object only. All personnel, operating and travel spending (131.8M) is put under instruction, and depreciation under other. The budget-basis schedule (p7) shows only about 44% of General Fund spending is Instruction; the rest is support services. These lines are already flagged review. This is a category judgment call."},
-    {"severity": "warning", "path": "proprietary.beginning_cash, proprietary.ending_cash", "page": 5,
-     "extracted": null, "on_page": "Statement of Cash Flows continues on report p21, which is not in the trimmed PDF",
-     "issue": "Trim gap: the net change in cash and the beginning/ending cash lines (and the reconciliation) are on an untrimmed page. The four section totals give a net change of -1,009,471. That equals the change in College cash on the Statement of Net Position (108,267,016 to 107,257,545), so nothing else is missing."},
-    {"severity": "warning", "path": "detail[5]", "page": 6,
-     "extracted": -3124822, "on_page": "(Add) to/use cash reserves (3,124,822)",
-     "issue": "This is a budget balancing plug (a change in cash reserves), not a transfer or financing flow. Recording it as other financing printed_in revenue keeps the 111,900,098 total tied, and it is flagged review. A person should confirm the treatment."},
-    {"severity": "warning", "path": "balance_sheet.assets[10].original_label", "page": 1,
-     "extracted": "Prepaid expenses (noncurrent)", "on_page": "Prepaid expenses",
-     "issue": "The extractor added '(noncurrent)' to the printed label. The line is under Noncurrent assets, so the meaning is right, but the label is not exactly as printed."}
+    {"severity": "warning", "path": "disbursements[0].category", "page": 3,
+     "extracted": "instruction", "on_page": "Personnel services 86,450,048 (also Operating expenses 44,738,784 and Travel 576,247, disbursements[1], [2])",
+     "issue": "Object-only lines are all put under instruction. The General Fund schedule (p8) shows Instruction is only 49.3M of 111.9M; support services (academic support, student service, administration, plant) are the larger share. This is a judgment call; the lines are already marked review."},
+    {"severity": "warning", "path": "detail[26].category", "page": 8,
+     "extracted": "support services", "on_page": "STUDENT FINANCIAL SUPPORT - Operating expenses 101,918",
+     "issue": "Student financial support (scholarships/aid) is not really a support-services function. It could be other with review. Small amount."},
+    {"severity": "warning", "path": "detail[5].section", "page": 7,
+     "extracted": "other financing", "on_page": "(Add) to/use cash reserves (3,124,822)",
+     "issue": "This is a budgetary balancing line (a change in cash reserves) printed inside the revenue total, not a true financing source. It is defensible as recorded and already marked review."}
   ]
 }
