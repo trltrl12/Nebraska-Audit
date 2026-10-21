@@ -1,0 +1,33 @@
+{
+  "stem": "Stanton_FY2025",
+  "values_checked": 49,
+  "issues": [
+    {"severity": "warning", "path": "missing", "page": 7,
+     "extracted": null, "on_page": "Proprietary Fund Statement of Revenues, Expenses and Changes in Net Position (report pp10-12, PDF pp13-15) not in trimmed PDF; trim jumps from report p9 (trimmed p6) to report p13 (trimmed p7)",
+     "issue": "Business-type receipts/disbursements taken from the Statement of Activities (p2-3) instead; totals tie to the p7 cash flow (503,403 + 10,000 + 1,090; 203,722 + 109,004 + 44,613 + 270,360 capital purchases = 627,699), but the utilities expense lines by object are not captured. Re-trim needed."},
+    {"severity": "warning", "path": "detail", "page": 8,
+     "extracted": [], "on_page": "Budgetary Comparison Schedule - All Funds: Total Resources 9,755,352; Total Charges to Appropriations 8,838,354",
+     "issue": "Schedule left out entirely. Defensible because it combines governmental, utilities and nursing home in single lines and its city lines duplicate the statements, but it also prints lines not found elsewhere in this report: Nursing Home Charges 7,652,819, Nursing Home 6,697,509, Miscellaneous expenditure 4,253, and Operating Grants 17,995 / Investment Earnings 24,321 (statements show 10,000 / 19,578). The schedule's own totals add up (checked)."},
+    {"severity": "warning", "path": "decision_needed", "page": 8,
+     "extracted": null, "on_page": "Nursing Home Charges 7,652,819; Nursing Home 6,697,509",
+     "issue": "The city's all-funds budget schedule includes the Stanton Nursing Home (filed as its own report, Stanton_Nursing_Home_FY2025, June 30 year end). A person should decide whether these nursing home lines are to be ignored here, as now, to avoid double counting. decision_needed[] has no entry for this."},
+    {"severity": "warning", "path": "beginning_cash.amount", "page": 5,
+     "extracted": 601215, "on_page": "Fund Balances - Beginning of Year 601,215",
+     "issue": "beginning_cash/ending_cash are total governmental fund balances, not cash. Ending 807,151 includes Due From Other Funds 235,000 and Notes Receivable 74,232 (offset by Deferred Revenues 74,232); governmental cash is 560,325 + 11,718 + 108 = 572,151 (p4). The roll-forward ties only on the fund-balance measure. Disclosed in notes."},
+    {"severity": "warning", "path": "receipts[6].category", "page": 5,
+     "extracted": "taxes (unlabeled)", "on_page": "Other Taxes 404,161 (General 72,510, Street 331,651)",
+     "issue": "No breakdown in the trimmed PDF, so taxes (unlabeled) is defensible. The Street fund's 331,651 is probably sales tax or motor vehicle tax. Check the notes or source PDF."},
+    {"severity": "warning", "path": "business_type.other_financing", "page": 7,
+     "extracted": 235000, "on_page": "Due To Other Funds 235,000 (noncapital financing)",
+     "issue": "Interfund borrowing from the General Fund, recorded as business-type other_financing. The governmental side carries it as a receivable (Due From Other Funds), so no governmental outflow is recorded. Consistent, but it could also be treated as debt proceeds."},
+    {"severity": "warning", "path": "receipts[8].original_label", "page": 2,
+     "extracted": "Utilities - Charges for Services", "on_page": "Utilities (row), Charges for Services (column)",
+     "issue": "Labels for receipts[8] and [9], receipts[10] ('Interest Earnings (Business-Type Activities)', printed 'Interest Earnings') and disbursements[13] ('Utilities (Statement of Activities expenditures)', printed 'Utilities') were made up from the row and column headings; none is printed as-is."},
+    {"severity": "warning", "path": "disbursements[9].category", "page": 5,
+     "extracted": "economic development", "on_page": "Housing Rehabilitation 905",
+     "issue": "Could be 'housing'. Judgment call; already marked review."},
+    {"severity": "warning", "path": "receipts[3].category", "page": 5,
+     "extracted": "federal grants", "on_page": "Capital Grants and Contributions 8,782 (CDBG fund)",
+     "issue": "Assumed federal CDBG money (usually passed through the state). Defensible; already marked review."}
+  ]
+}
