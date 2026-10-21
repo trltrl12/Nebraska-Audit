@@ -1,54 +1,46 @@
 {
   "stem": "Otoe_County_FY2025",
-  "values_checked": 170,
+  "values_checked": 166,
   "issues": [
     {
       "severity": "error",
-      "path": "detail[61].category",
-      "page": 11,
-      "extracted": "other / miscellaneous revenue",
-      "on_page": "Miscellaneous 164,368 (Total Nonmajor Funds) = Keno Lottery Fund 155,473 (p10) + Veterans Aid 7,945 (p8) + Federal Treasury Equitable Sharing 850 + Local Grants - Sheriff 100 (p9)",
-      "issue": "[fixed] The same combining statement's fund columns show this line is 94.6% Keno Lottery Fund receipts. Under the rules a broad Miscellaneous line that is more than half one category takes that category (keno/lottery), or is split with split_from (keno/lottery 155,473 plus miscellaneous 8,895). The extractor's own review note cites the keno amount but leaves the line in other."
+      "path": "detail[51].category",
+      "page": 4,
+      "extracted": "other",
+      "on_page": "Capital Outlay 852,561 (COVID American Rescue Plan Fund column, p4)",
+      "issue": "[fixed 2026-10-21: set to capital outlay per p4] The ARPA Fund 'Disbursements' line (p8) is filed under 'other', but the governmental funds statement (p4) prints all 852,561 of it under Capital Outlay. Category should be capital outlay."
     },
     {
       "severity": "error",
-      "path": "detail[50].category",
-      "page": 6,
-      "extracted": "other / miscellaneous revenue",
-      "on_page": "COVID American Rescue Plan Fund RECEIPTS 9,483",
-      "issue": "[fixed] Statement of Activities Investment Income 337,055 (p2) ties exactly to General Fund 323,094 (p3) + nonmajor 4,478 (p11) + this ARPA receipt 9,483, and no other line ties. So the ARPA receipt is investment income (interest on unspent ARPA money). It should be investment income / investment income, not other."
+      "path": "detail[48].category",
+      "page": 4,
+      "extracted": "general government",
+      "on_page": "Capital Outlay 247,840 (Inheritance Fund column, p4)",
+      "issue": "[fixed 2026-10-21: set to capital outlay per p4] The Inheritance Fund 'Disbursements' line (p7) is filed as general government with review 'function not stated', but p4 prints all 247,840 of it under Capital Outlay. Category should be capital outlay."
     },
     {
       "severity": "warning",
-      "path": "receipts[11].category",
-      "page": 2,
-      "extracted": "other",
-      "on_page": "Miscellaneous 449,108",
-      "issue": "The fund schedules show this includes Keno Lottery receipts of 155,473 (p10), about 35%. That is not more than half, so other is defensible. But the fund-level Miscellaneous lines (136,966 + 126,545 + 15,312 + 164,368 = 443,191) don't tie exactly to 449,108; the 5,917 gap matches the Highway Bridge Buyback receipts that the statement appears to show under Miscellaneous. So no clean printed breakdown exists for a split. A person may want keno shown separately."
+      "path": "detail[53].category",
+      "page": 4,
+      "extracted": "streets/highways",
+      "on_page": "Capital Outlay 631,893 (Highway Bridge Buyback Program Fund column, p4)",
+      "issue": "[fixed 2026-10-21: set to capital outlay per p4] p4 puts all of this fund's spending under Capital Outlay. streets/highways is defensible for a bridge program, but capital outlay would tie to the statement's function rows."
     },
     {
       "severity": "warning",
-      "path": "missing",
-      "page": 2,
-      "extracted": null,
-      "on_page": "Governmental funds Statement of Cash Receipts, Disbursements and Changes in Cash Balances (report pp7-8) is not in the trimmed PDF (trim jumps from report p6 to p21)",
-      "issue": "Under the rules, receipts and disbursements should come from the governmental funds statement's Total Governmental Funds column. The extractor used the government-wide Statement of Activities instead, which nets out transfers, so top-level transfers_in/out are null. The fund schedules show gross transfers of 2,835,615 in and 2,835,615 out (General -2,640,682, Inheritance -179,999, nonmajor -14,934; Road +2,554,682, Equipment Sinking +89,200, nonmajor +191,733). Totals tie (receipts 16,823,470; disbursements 17,841,805; beginning 11,283,359; ending 10,265,024 all agree with the sums of the fund schedules), but the page should be re-trimmed and checked."
+      "path": "detail[44].category",
+      "page": 4,
+      "extracted": "streets/highways (5,361,064, not itemized)",
+      "on_page": "Road Fund on p4: Public Works 4,293,173; Capital Outlay 457,238; Debt Service Principal and Interest 610,653",
+      "issue": "The Road Fund budget schedule (p7) prints one Disbursements line, recorded as it is printed. p4 shows that it includes 610,653 of debt service and 457,238 of capital outlay, so detail by function does not tie to the statement."
     },
     {
       "severity": "warning",
-      "path": "receipts[6].split_from",
-      "page": 2,
-      "extracted": "Taxes split by fund: Inheritance 600,520 / Visitor Promotion 239,009 / General + 911 9,011,950",
-      "on_page": "Taxes 9,851,479",
-      "issue": "The split ties (8,972,891 + 600,520 + 239,009 + 39,059 = 9,851,479). But it is a split by fund from the fund schedules, not a breakdown of the statement line printed by tax type. The 9,011,950 item combines two funds' unlabeled tax lines, and calling Visitor Promotion taxes lodging tax is an assumption from the fund name (already marked review)."
-    },
-    {
-      "severity": "warning",
-      "path": "ending_investments",
-      "page": 1,
-      "extracted": 3199944,
-      "on_page": "Investments 3,199,944",
-      "issue": "Investments are already inside ending_cash 10,265,024, and beginning_investments is null. Anyone adding ending_cash + ending_investments would double count 3,199,944. This is informational only, but the notes should say that ending_cash includes investments."
+      "path": "disbursements[6].category",
+      "page": 4,
+      "extracted": "debt service principal",
+      "on_page": "Debt Service: Principal and Interest Payments 610,653",
+      "issue": "[fixed 2026-10-21: no page splits it; review note added] The line combines principal and interest and the page does not split it. Filing it all as principal is a judgment call (review already set)."
     }
   ]
 }
