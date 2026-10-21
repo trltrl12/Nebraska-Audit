@@ -174,8 +174,11 @@ These were diagnosed and fixed in find_pages v6; re-extract and re-verify them a
 - Budget forms whose Total All Funds page wasn't found (manifest flag no_budget_actuals_found; skipped, no
   JSON): Lewis_Township_Clay_County_B2526 and any others with that flag. Check why the finder misses it.
 - Filed under FY2025 but the PDF holds an earlier year (extracted as printed; check the Auditor's site for
-  the FY2025 filing): Bristow_FY2025 (period 10/1/23-9/30/24).
-- Blank waiver form (all fields empty or $0.00; skipped, no JSON): Youth_and_Family_Crisis_Response_Center_FY2025. Check the Auditor's site for a completed filing.
+  the FY2025 filing): Bristow_FY2025 (period 10/1/23-9/30/24). Checked 2026-10-21: the Auditor's only FY2025 file
+  (approved waiver for FY ending 2025) attaches the 10/1/23-9/30/24 statement; no other filing exists. Leave as is.
+- Blank waiver form (all fields $0.00; skipped, no JSON): Youth_and_Family_Crisis_Response_Center_FY2025. Checked 2026-10-21:
+  the Auditor's current file is the same approved waiver with $0.00 on every line (no other filing). Extract it as
+  all zeros, like Washington_County_SID_5, after the current validate run finishes.
 - Trimmed to a budget page only (skipped, no JSON): Cass_County_SID_9_FY2025, Cass_County_SID_10_FY2025.
   Also trimmed to one page (extracted from that page; check the source PDF for missing statements):
   Douglas_County_SID_520/575/583/584/615/640_FY2025, Hickman_FY2025 (all-fund-types budget schedule only;
