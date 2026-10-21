@@ -1,0 +1,24 @@
+{
+  "stem": "Thedford_Public_Schools_FY2025",
+  "values_checked": 489,
+  "issues": [
+    {"severity": "warning", "path": "reported_totals.governmental.disbursements", "page": 4,
+     "extracted": 3354280.65, "on_page": "line items in Total Governmental Funds column sum to 3,242,596.33; printed total 3,354,280.65",
+     "issue": "The printed Total column does not foot: the QCPU column shows only its total 111,684.32, with '-' on every disbursement line. The extractor itemized the 111,684.32 from p11 (disbursements[9]-[11], with split_from), so the JSON ties, but there is no report_discrepancies entry noting that the statement's own column does not add up."},
+    {"severity": "warning", "path": "disbursements[9].original_label", "page": 11,
+     "extracted": "5000 831 HVAC project - BOK prin + 5000 831 HVAC proj - Union bank prin", "on_page": "two printed lines: 70,000.00 and 36,068.14",
+     "issue": "Two printed lines are merged into one item (marked computed). disbursements[10] does the same with 2,790.84 + 1,775.34. The rule is one item per printed line. Amounts are correct."},
+    {"severity": "warning", "path": "disbursements[3].fund_type", "page": 3,
+     "extracted": "governmental", "on_page": "School Nutrition column of the governmental funds statement",
+     "issue": "The extractor rules list school nutrition as a business-type example. The report presents it as a governmental fund, and the extractor followed the report (see notes). Defensible, but it is an assumption (applies to disbursements[3]-[5], receipts[9] 'Sales of lunches' and the School Nutrition detail lines too)."},
+    {"severity": "warning", "path": "disbursements[7].category", "page": 4,
+     "extracted": "instruction", "on_page": "State programs 18,748.34 / Federal programs 139,385.83",
+     "issue": "The Statement of Activities (p2) lists State programs and Federal programs separately from Instruction, so the 'counted under Instruction' rule doesn't strictly apply. Already marked review. Applies to disbursements[8] too."},
+    {"severity": "warning", "path": "detail[138].detail_category", "page": 16,
+     "extracted": "dues, training and travel", "on_page": "332 Mileage to parents 10,105.16",
+     "issue": "This is mileage paid to parents for transporting pupils, not staff travel. It could be grants/payments to other entities."},
+    {"severity": "warning", "path": "detail[192].category", "page": 18,
+     "extracted": "charges for services/fees / student activity receipts", "on_page": "Beef in schools donation 500.00",
+     "issue": "The account name suggests a donation (donations/contributions). It is kept as student activity receipts because the 14,951.25 of donations can't be split by account. A judgment call."}
+  ]
+}

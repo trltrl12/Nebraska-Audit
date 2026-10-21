@@ -1,0 +1,21 @@
+{
+  "stem": "Uehling_FY2025",
+  "values_checked": 158,
+  "issues": [
+    {"severity": "warning", "path": "other_financing", "page": 4,
+     "extracted": 20500, "on_page": "Other Grants 500; Sale of Assets 20,000 (under OTHER FINANCING SOURCES (USES))",
+     "issue": "Other Grants 500 is grant revenue (the Statement of Activities, p2, shows it as Capital Grants and Contributions for general government); it could be a receipt with outside_printed_total: true rather than other financing. Sale of Assets 20,000 in other_financing is fine"},
+    {"severity": "warning", "path": "detail[47].detail_category", "page": 6,
+     "extracted": "miscellaneous expenditure", "on_page": "Commissions 644",
+     "issue": "Likely county treasurer commissions; the Debt Service Fund's 'County commissions' line is categorized 'tax refunds/treasurer fees' (detail[82]); use the same category"},
+    {"severity": "warning", "path": "detail[33].detail_category", "page": 6,
+     "extracted": "professional/contract services", "on_page": "Garbage 26,319 (General and Administrative)",
+     "issue": "Garbage collection contract (offsets Garbage income 25,686); kept under general government to tie to the G&A function total, but it is refuse service (utilities function); judgment call"},
+    {"severity": "warning", "path": "detail[40].category", "page": 6,
+     "extracted": "general government", "on_page": "Police contract 33,333 (General and Administrative)",
+     "issue": "Law enforcement contract printed in the G&A schedule; function kept as general government to tie to the statement, though it is public safety; judgment call"},
+    {"severity": "warning", "path": "detail_totals[1]", "page": 5,
+     "extracted": {"schedule": "General Fund Disbursements (G&A, Street, Parks)", "amount": 474585, "source_page": 5}, "on_page": "G&A Total 319,240 (p6); Street Total 135,113 (p7); Parks Total 20,232 (p8); General Fund disbursements Total 474,585 (p5)",
+     "issue": "One combined total whose schedule name matches none of the detail items' schedules (each department schedule prints its own total); amount ties (319,240 + 135,113 + 20,232 = 474,585) but per-schedule totals would let validation match"}
+  ]
+}
