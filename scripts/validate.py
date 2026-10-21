@@ -400,14 +400,25 @@ def category_checks(d, f, rv):
 def review_items(stem, d):
     """Things a person should know about, even when everything reconciles."""
     out = []
-    for where in ("receipts", "disbursements", "detail"):
-        for it in d.get(where) or []:
+    groups = [(w, d.get(w) or []) for w in ("receipts", "disbursements", "detail", "adjustments")]
+    bs = d.get("balance_sheet") or {}
+    groups += [(f"balance_sheet.{sec}", bs.get(sec) or []) for sec in BS_SECTIONS]
+    bt = d.get("business_type") or {}
+    groups.append(("business_type.adjustments", bt.get("adjustments") or []))
+    # Single money fields (balances, transfers, totals) can carry a review note too
+    singles = [(k, v) for k, v in d.items() if isinstance(v, dict) and "amount" in v]
+    singles += [(f"business_type.{k}", v) for k, v in bt.items() if isinstance(v, dict) and "amount" in v]
+    groups.append(("fields", [dict(v, original_label=k) for k, v in singles]))
+    for where, items in groups:
+        for it in items:
+            if not isinstance(it, dict):
+                continue
             reasons = []
             if it.get("review"):
                 reasons.append(str(it["review"]))
             if it.get("split_from"):
                 reasons.append(f"split from combined line: {it['split_from']}")
-            if it.get("computed"):
+            if it.get("computed") and where != "fields":
                 reasons.append(f"computed, not printed: {it['computed']}")
             cats = (it.get("category"), it.get("detail_category"))
             if "taxes (unlabeled)" in cats:
@@ -417,6 +428,11 @@ def review_items(stem, d):
                                 fund_type=it.get("fund_type"), original_label=it.get("original_label"),
                                 amount=it.get("amount"), reason="; ".join(dict.fromkeys(reasons)),
                                 source_page=it.get("source_page")))
+    for q in d.get("decision_needed") or []:
+        q = q if isinstance(q, dict) else {"question": str(q)}
+        out.append(dict(filename=stem, entity_name=d.get("entity_name"), where="decision_needed",
+                        fund_type="", original_label=q.get("recorded_as", ""), amount=q.get("amount"),
+                        reason=f"decision needed: {q.get('question', '')}", source_page=q.get("source_page")))
     return out
 
 
