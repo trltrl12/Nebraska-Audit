@@ -1,0 +1,15 @@
+{
+  "stem": "Twin_Rivers_Public_Schools_FY2025",
+  "values_checked": 490,
+  "issues": [
+    {"severity": "warning", "path": "transfers_in", "page": 5,
+     "extracted": 631290.51, "on_page": "Transfers From Other Funds 101,000.00; Non-Revenue Receipts 30,608,073.18 (includes Depreciation 500,000.00 and Employee Benefit 30,290.51)",
+     "issue": "The extractor assumed the '5200 Allocation from General Fund' receipts (500,000 on p14, 30,290.51 on p15) are transfers. The report itself counts them as Non-Revenue Receipts (p5) and as 'Other' general receipts (p3). The General Fund roll-forward (pp8, 10, 26) has no matching outflow, so governmental transfers_in exceeds transfers_out by 530,290.51. decision_needed already asks about this. Totals and the roll-forward still tie: 10,992,349.50 -> 33,334,957.51."},
+    {"severity": "warning", "path": "detail[150].split_from", "page": 26,
+     "extracted": "8000 Transfers printed within Total Disbursements 8,677,397.45 (p26)", "on_page": "Lunch and Other Funds 70,000.00",
+     "issue": "split_from is set on a line that is printed as-is and was not split. The signed -70,000 and the detail_totals 'includes: other financing' are right, but this tag will wrongly put the line on the review list as a split. It should carry no split_from (or a printed_in note instead)."},
+    {"severity": "warning", "path": "detail[85].detail_category", "page": 23,
+     "extracted": "professional/contract services", "on_page": "2310 Board of Education - Other Property Services 186,093.01",
+     "issue": "Every 'Other Property Services' line in Schedule M is mapped to professional/contract services. For Board of Education (186,093.01) and the SPED programs, this object is often insurance, tuition paid to other districts or other purchased services. This is a judgment call."}
+  ]
+}
