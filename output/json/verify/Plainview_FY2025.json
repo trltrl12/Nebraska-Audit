@@ -1,18 +1,21 @@
 {
   "stem": "Plainview_FY2025",
-  "values_checked": 194,
+  "values_checked": 220,
   "issues": [
-    {"severity": "warning", "path": "proprietary", "page": 9,
-     "extracted": null, "on_page": "Statement of Cash Flows - Proprietary Funds shows only Electric and Water columns; the Sewer, Sanitation and Total columns (continuation of report p23) are not in the trimmed PDF",
-     "issue": "The trimmed PDF is missing the continuation page of the proprietary cash flow statement. proprietary is null; with basis 'cash' that is allowed, but the enterprise funds use accrual accounting and their cash flow totals are lost. find_pages should keep the facing page."},
+    {"severity": "warning", "path": "missing", "page": 9,
+     "extracted": null, "on_page": "Statement of Cash Flows - Proprietary Funds (pp9-10) shows only Electric and Water columns; Sewer, Sanitation and Total columns not in the trimmed PDF",
+     "issue": "Trim lacks the right-hand cash flow pages (report p23-24 continuation). proprietary is null (allowed since basis is recorded as cash), but the enterprise funds are accrual and the total cash flow figures cannot be checked; check the source PDF"},
+    {"severity": "warning", "path": "receipts[9].category", "page": 5,
+     "extracted": "other", "on_page": "Loan collections 90,363 (Economic Development 29,724 p13, Housing Authority 60,639 p15)",
+     "issue": "Repayments of notes receivable, not unexplained revenue; no listed category fits exactly. Judgment call, already marked review"},
     {"severity": "warning", "path": "receipts[6].category", "page": 5,
      "extracted": "federal grants", "on_page": "Grants 83,119",
-     "issue": "No page says where the grants come from; they could be state or private. The same assumption is used in detail (Park, Handibus, Library and Economic Development grants)."},
-    {"severity": "warning", "path": "receipts[9].category", "page": 5,
-     "extracted": "other", "on_page": "Loan collections 90,363",
-     "issue": "These are repayments of economic development and housing loans receivable (Economic Development 29,724 p12, Housing Authority 60,639 p14), which is principal coming back rather than revenue. Recording them as 'other' is defensible but inflates other revenue. The same applies to detail[87] and detail[104]."},
+     "issue": "Grant source not printed (Park 20,493, Handibus 30,537, Library 7,277, Economic Development 24,812); could be state aid. Already marked review"},
+    {"severity": "warning", "path": "transfers_in.amount", "page": 5,
+     "extracted": 111110, "on_page": "Transfers in (out) 81,029 net (Total Governmental Funds)",
+     "issue": "Gross transfers_in 111,110 / transfers_out 30,081 are an extractor assumption: the statement prints only the net 81,029. Arithmetic holds (111,110 from Water p8; 30,081 Sales Tax Fund out p15 to the component unit; interfund 95,338 and 30,828 net to zero) and both fields are marked computed"},
     {"severity": "warning", "path": "balance_sheet.liabilities[7].category", "page": 1,
      "extracted": "accrued liabilities", "on_page": "Accrued compensated absences 37,682 (noncurrent liabilities)",
-     "issue": "This line sits under noncurrent liabilities, while the accrued liabilities category is meant for compensated absences due soon. 'other liabilities' may fit better."}
+     "issue": "Printed under noncurrent liabilities; the rule reserves accrued liabilities for compensated absences due soon. Could be other liabilities"}
   ]
 }
