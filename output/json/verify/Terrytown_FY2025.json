@@ -1,54 +1,150 @@
 {
   "stem": "Terrytown_FY2025",
-  "values_checked": 64,
+  "values_checked": 82,
   "issues": [
     {
       "severity": "error",
-      "path": "report_discrepancies[2].difference",
-      "page": 1,
-      "extracted": 2,
-      "on_page": -2,
-      "issue": "[fixed] Difference must be printed minus parts: printed total assets 5,842,040 - asset lines 5,842,042 = -2, not +2."
+      "path": "detail[0].budget_final",
+      "page": 9,
+      "extracted": null,
+      "on_page": 1978108,
+      "issue": "[fixed 2026-10-21: budget_final filled from the p9 budget column ('-' as 0)] Original and Final Budget column printed for General Government; budget_final left null"
     },
     {
-      "severity": "warning",
-      "path": "balance_sheet.total_equity",
-      "page": 1,
-      "extracted": 4418536,
-      "on_page": 4418536,
-      "issue": "Printed net position lines (2,101,711 + 192,145 + 1,800 + 25,393 + 416,021 + 82,997 + 1,598,470) sum to 4,418,537, 1 more than the printed TOTAL NET POSITION 4,418,536 (the Governmental Activities column is off by 1 too: 162,907 vs 162,906). This is rounding in the report, but report_discrepancies doesn't record it."
+      "severity": "error",
+      "path": "detail[1].budget_final",
+      "page": 9,
+      "extracted": null,
+      "on_page": 154791,
+      "issue": "[fixed 2026-10-21: budget_final filled from the p9 budget column ('-' as 0)] Original and Final Budget column printed for Public Safety; budget_final left null"
+    },
+    {
+      "severity": "error",
+      "path": "detail[2].budget_final",
+      "page": 9,
+      "extracted": null,
+      "on_page": 2086538,
+      "issue": "[fixed 2026-10-21: budget_final filled from the p9 budget column ('-' as 0)] Original and Final Budget column printed for Streets; budget_final left null"
+    },
+    {
+      "severity": "error",
+      "path": "detail[3].budget_final",
+      "page": 9,
+      "extracted": null,
+      "on_page": 0,
+      "issue": "[fixed 2026-10-21: budget_final filled from the p9 budget column ('-' as 0)] Budget printed as '-' for Culture and Recreation; should be 0, not null"
+    },
+    {
+      "severity": "error",
+      "path": "detail[4].budget_final",
+      "page": 9,
+      "extracted": null,
+      "on_page": 0,
+      "issue": "[fixed 2026-10-21: budget_final filled from the p9 budget column ('-' as 0)] Budget printed as '-' for Electric; should be 0, not null"
+    },
+    {
+      "severity": "error",
+      "path": "detail[5].budget_final",
+      "page": 9,
+      "extracted": null,
+      "on_page": 731020,
+      "issue": "[fixed 2026-10-21: budget_final filled from the p9 budget column ('-' as 0)] Original and Final Budget column printed for Water; budget_final left null"
+    },
+    {
+      "severity": "error",
+      "path": "detail[6].budget_final",
+      "page": 9,
+      "extracted": null,
+      "on_page": 1153410,
+      "issue": "[fixed 2026-10-21: budget_final filled from the p9 budget column ('-' as 0)] Original and Final Budget column printed for Sewer and sanitation; budget_final left null"
+    },
+    {
+      "severity": "error",
+      "path": "detail[7].budget_final",
+      "page": 9,
+      "extracted": null,
+      "on_page": 453000,
+      "issue": "[fixed 2026-10-21: budget_final filled from the p9 budget column ('-' as 0)] Original and Final Budget column printed for Principal; budget_final left null"
+    },
+    {
+      "severity": "error",
+      "path": "detail[8].budget_final",
+      "page": 9,
+      "extracted": null,
+      "on_page": 0,
+      "issue": "[fixed 2026-10-21: budget_final filled from the p9 budget column ('-' as 0)] Budget printed as '-' for Interest and charges; should be 0, not null"
+    },
+    {
+      "severity": "error",
+      "path": "detail[9].budget_final",
+      "page": 9,
+      "extracted": null,
+      "on_page": 164000,
+      "issue": "[fixed 2026-10-21: budget_final filled from the p9 budget column ('-' as 0)] Original and Final Budget column printed for Transfers out; budget_final left null"
     },
     {
       "severity": "error",
       "path": "missing",
-      "page": 7,
+      "page": 9,
       "extracted": null,
-      "on_page": "Budget and Actual - All Funds expenditures (Actual): General Government 631,701; Public Safety 137,540; Streets 274,739; Culture and Recreation 17,456; Electric 1,463; Water 356,481; Sewer and sanitation 347,585; Principal 46,484; Interest and charges 27,168; Transfers out 11,026; Total expenditures 1,851,643",
-      "issue": "[fixed] detail[] is empty, but p7 is a supplementary budget schedule with line items. The expenditure lines can each be given a fund type (General Government/Public Safety/Streets/Culture are governmental; Electric/Water/Sewer/Principal/Interest are business-type, since water bond principal and interest match p5-6). They also show a function split (Public Safety 137,540, Culture 17,456) that appears nowhere else in the JSON. The extractor left them out because the schedule mixes fund types and is on the budgetary basis."
+      "on_page": "Budget and Actual - All Funds REVENUES (Actual / Budget): Taxes and special assessments 162,628 / 167,493; Intergovernmental 377,968 / 354,883; Charges for services 805,825 / 1,325,000; Interest 51,428 / 29,000; Other 124,769 / 2,070,555; Insurance proceeds 1,694 / -; Transfers in - other than surplus fees 11,026 / 164,000; Total revenues 1,535,339 / 4,110,931",
+      "issue": "[fixed 2026-10-21: revenue section added to detail (Interest and Other split by fund type, Transfers in as other financing) with revenue detail_total 1,535,339 and a report_discrepancies entry for the 1 gap] The schedule's expenditure section was entered in detail, but its whole revenue section (6 revenue lines, the Transfers in other-financing line, and the detail_totals revenue entry 1,535,339) is missing. Taxes, Intergovernmental and Insurance proceeds are governmental and Charges for services is business-type (805,825 = p6), so they can be tagged. Interest (34,977 + 16,451) and Other (40,026 + 84,702 + keno 41) mix fund types and need a review note or a split. The printed lines sum to 1,535,338, 1 less than the printed total, which should go in report_discrepancies."
+    },
+    {
+      "severity": "error",
+      "path": "report_discrepancies",
+      "page": 1,
+      "extracted": "no entry",
+      "on_page": "Net position lines 2,101,711 + 192,145 + 1,800 + 25,393 + 416,021 + 82,997 + 1,598,470 = 4,418,537; printed TOTAL NET POSITION 4,418,536",
+      "issue": "[fixed 2026-10-21: report_discrepancies entry added for net position 4,418,537 vs 4,418,536] The balance_sheet.equity items sum to 1 more than total_equity (Governmental Activities column: 192,145 + 25,393 + 416,021 - 470,652 = 162,907 vs 162,906 printed). The report itself doesn't add up, but this is not recorded in report_discrepancies (difference -1)."
+    },
+    {
+      "severity": "error",
+      "path": "report_discrepancies",
+      "page": 7,
+      "extracted": "no entry",
+      "on_page": "Beginning cash 1,426,956 + net increase 107,134 = 1,534,090; printed end of year 1,534,091 (Water column: 55,559 + 885 = 56,444 vs 56,445 printed)",
+      "issue": "[fixed 2026-10-21: report_discrepancies entry added for the cash flow 1,534,090 vs 1,534,091 and operating 331,565 vs 331,566] The proprietary cash roll-forward is off by 1 in the printed report (proprietary.beginning_cash + flows does not equal proprietary.ending_cash), and this is not recorded in report_discrepancies. Operating section lines (788,505 + 84,702 - 413,179 - 128,463 = 331,565) are also 1 less than the printed 331,566."
     },
     {
       "severity": "warning",
       "path": "missing",
-      "page": 7,
+      "page": 9,
       "extracted": null,
-      "on_page": "Budget and Actual - All Funds revenues (Actual): Taxes and special assessments 162,628; Intergovernmental 377,968; Charges for services 805,825; Interest 51,428; Other 124,769; Insurance proceeds 1,694; Transfers in 11,026; Total revenues 1,535,339",
-      "issue": "The p7 revenue lines are not in detail. Interest and Other mix governmental and utility funds (34,977 + 16,451; 40,026 + 84,702 + keno 41), so tagging by fund type would need a split. Someone should decide whether to record them. Note that the budgetary 'Taxes and special assessments' 162,628 differs from the statement's taxes 166,519."
+      "on_page": "Miscellaneous: budget 997,650, actual -",
+      "issue": "[fixed 2026-10-21: zero-actual Miscellaneous line added with budget_final 997,650] This expenditure line is printed with a zero actual and is not in detail. It has no money effect, but its budget is needed for the budget total 7,718,517 to tie."
+    },
+    {
+      "severity": "warning",
+      "path": "notes",
+      "page": 9,
+      "extracted": "Detail left empty: the only supplementary schedule (p9 ...) combines governmental and utility funds on each line ...",
+      "on_page": "detail[] holds 10 expenditure lines from p9",
+      "issue": "[fixed 2026-10-21: notes rewritten to describe the detail and end with 'Read pages 1-9 of 9'] The notes contradict the JSON: detail is not empty. The notes also don't end with 'Read pages 1-9 of 9' (a parenthetical follows it). The page count of 9 is correct."
     },
     {
       "severity": "warning",
       "path": "disbursements[0].review",
-      "page": 7,
-      "extracted": "includes Keno Fund 17,456, which the budget schedule (p7) shows as Culture and Recreation",
-      "on_page": "General Government 631,701 + Public Safety 137,540 + Culture and Recreation 17,456 = 786,697",
-      "issue": "General government 786,697 on p3 also includes 137,540 of Public Safety per p7, not only the Keno culture/recreation spending. The review note should mention this."
+      "page": 4,
+      "extracted": "includes Keno Fund 17,456, which the budget schedule (p9) shows as Culture and Recreation",
+      "on_page": "General government 786,697 (p4) = General Government 631,701 + Public Safety 137,540 + Culture and Recreation 17,456 (p2 Statement of Activities and p9)",
+      "issue": "[fixed 2026-10-21: review note now mentions public safety 137,540] The statement line also includes 137,540 of public safety spending, not only the Keno culture/recreation amount. The review note should say so. Keeping the line unsplit is correct because the p4 line has no breakdown of its own."
     },
     {
       "severity": "warning",
       "path": "receipts[9].category",
-      "page": 5,
+      "page": 6,
       "extracted": "other",
       "on_page": "Other 84,702 (Electric 55,977, Water 2,247, Sewer and Sanitation 26,479)",
-      "issue": "9.3% of business-type receipts sits in 'other'. The Electric fund's only operating revenue is this line, so most of it may be electric charges or fees. The report doesn't say, so 'other' with review is defensible, but it is questionable."
+      "issue": "This puts 9.3% of business-type receipts in 'other'. The Electric fund's only operating revenue is this line, so it may be electric charges. The report doesn't say, so 'other' with review is defensible."
+    },
+    {
+      "severity": "warning",
+      "path": "ending_cash",
+      "page": 3,
+      "extracted": 162906,
+      "on_page": "TOTAL ASSETS 162,906; asset lines (602,501) + 10,865 + 25,393 + 729,150 = 162,907; General Fund assets (445,259) vs fund balance (445,261); fund balance lines 192,145 + 416,021 - 445,261 = 162,905",
+      "issue": "[fixed 2026-10-21: computed removed; p3 rounding gaps added to report_discrepancies] The governmental funds balance sheet has several 1-2 dollar rounding inconsistencies. The value used is the printed total, which is fine, but marking it 'computed' is unnecessary (it is printed). These page inconsistencies are not in report_discrepancies."
     }
   ]
 }
