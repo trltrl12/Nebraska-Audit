@@ -1,16 +1,30 @@
 {
   "stem": "Norris_Public_Power_District_FY2025",
-  "values_checked": 44,
+  "values_checked": 61,
   "issues": [
-    {"severity": "warning", "path": "balance_sheet.liabilities", "page": 1,
-     "extracted": [], "on_page": "Trimmed p1 is only the 'Assets and Deferred Outflows of Resources' half of the Statements of Net Position; the liabilities / deferred inflows / net position page is not in the trimmed PDF (implied liabilities + deferred inflows = 253,824,061 - 230,588,405 = 23,235,656)",
-     "issue": "Balance sheet incomplete because of the trim, not an extraction error: liabilities, deferred inflows and the net position components (net investment in capital assets, restricted, unrestricted) are missing, total_liabilities/total_deferred_inflows are null, and the balance check can't be run. Re-trim needed to include the second Statement of Net Position page (and the CLAUDE.md missing-pages follow-up list should get this report)."},
-    {"severity": "warning", "path": "balance_sheet.equity[0]", "page": 2,
-     "extracted": {"original_label": "Net Position, End of Year", "amount": 230588405, "source_page": 2},
-     "on_page": "Net Position, End of Year $230,588,405 (p2, Statement of Revenues, Expenses and Changes in Net Position)",
-     "issue": "Amount is correct, but it comes from the operating statement because the net position page is missing. It is one total line standing in for the balance sheet's net position components, so total_equity is not from the balance sheet."},
-    {"severity": "warning", "path": "receipts[1].original_label", "page": 2,
-     "extracted": "Other (operating revenues)", "on_page": "Other",
-     "issue": "The printed label is just 'Other'; the extractor added '(operating revenues)'. Same for balance_sheet.assets[3]/[4]/[8]/[9], printed 'Investments' / 'Restricted investments' and given '(noncurrent)'/'(current)' suffixes. Amounts are correct. Category charges for services/fees for an unexplained operating 'Other' is defensible and already marked review."}
+    {
+      "severity": "warning",
+      "path": "receipts[3].category",
+      "page": 3,
+      "extracted": "other",
+      "on_page": "Other income 710,745",
+      "issue": "nonoperating 'Other income' left in last-resort category 'other' (already marked review); no specific category is supported by the trimmed pages"
+    },
+    {
+      "severity": "warning",
+      "path": "balance_sheet.liabilities[8].category",
+      "page": 2,
+      "extracted": "accrued liabilities",
+      "on_page": "Current portion of compensated absences 898,652",
+      "issue": "[fixed 2026-10-21: both compensated absences portions now accrued liabilities] inconsistent with the noncurrent compensated absences line (812,133), which is categorized 'other liabilities'; one of the two should be changed so both portions share a category"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[4].category",
+      "page": 3,
+      "extracted": "sale of assets",
+      "on_page": "Gain on sale of a portion of service territory 192,099",
+      "issue": "defensible, but this is the amortized recognition of a deferred gain (a deferred inflow of 832,428 remains on p2), not cash sale proceeds this year"
+    }
   ]
 }
