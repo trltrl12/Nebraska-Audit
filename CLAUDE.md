@@ -158,6 +158,7 @@ These were diagnosed and fixed in find_pages v6; re-extract and re-verify them a
   Southern_School_District_1_FY2025 (Exhibit N cut off after program 2163; rest from Exhibit G, totals tie).
   Springfield_FY2025 (Note M, explaining 33.2M sales tax and 3.5M permits, not trimmed).
   South_Platte_Public_Schools_FY2025 (report p31, Activity Fund schedule, not trimmed).
+  St_Edward_FY2025 (report pp18-21, governmental fund statements, not trimmed: no cash roll-forward; government-wide only).
   Gering_Ft_Laramie_Irrigation_District_FY2025 (nonoperating/capital-grant statement page not trimmed; 9,257,241
   derived as an adjustment meanwhile).
 - Budget forms whose Total All Funds page wasn't found (manifest flag no_budget_actuals_found; skipped, no
