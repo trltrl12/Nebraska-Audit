@@ -1,0 +1,21 @@
+{
+  "stem": "Sarpy_County_SID_231_B2526",
+  "values_checked": 11,
+  "issues": [
+    {"severity": "warning", "path": "receipts[1].original_label", "page": 1,
+     "extracted": "State Receipts: Motor Vehicle Pro-Rate", "on_page": "155.00 (column 2, between line 7 and line 11)",
+     "issue": "The scan is skewed. Counting rows in column 1 (where 167 is clearly line 8 and every row can be counted down from line 2 and up from line 17) supports line 8, but in column 2 the 155 sits just below the line-9 shading, so it could be on line 10 (State Receipts: Other). The category, intergovernmental/state aid, is the same either way. Already marked review."},
+    {"severity": "warning", "path": "receipts[3].category", "page": 1,
+     "extracted": "other", "on_page": "Local Receipts: Other 36,326.00 (line 14)",
+     "issue": "Counting rows (column 1 has 39 on line 14 followed by dashes on lines 15 and 16, and column 2 matches) puts 36,326 on line 14, Local Receipts: Other, not line 15 Transfers In. The page doesn't explain it, so 'other' is a defensible last resort. It is about 31% of the year's receipts (36,326 of 115,911), so it goes to review. Already marked review."},
+    {"severity": "warning", "path": "disbursements[2].amount", "page": 1,
+     "extracted": 33193, "on_page": "Line 25 Debt Service: Other 33,193.00; line 19 Operating Expenses 33,193.00",
+     "issue": "Counting rows (column 1 has dashes on lines 25 to 28, and column 2's second 33,193 lines up with line 25) supports line 25, Debt Service: Other. The same amount, 33,193, is printed on both line 19 and line 25, and the budget column also repeats 36,400 on the matching lines. The printed total 114,591 includes both, so the extraction matches the page, but a person may want to confirm the form isn't double counting. Interest/fees is a guess for 'Debt Service: Other'. Already marked review."},
+    {"severity": "warning", "path": "disbursements[0].category", "page": 1,
+     "extracted": "general government", "on_page": "Operating Expenses 33,193.00",
+     "issue": "No function is printed. General government is the SID default used elsewhere, but it's a judgment call. Already marked review."},
+    {"severity": "warning", "path": "ending_cash.computed", "page": 1,
+     "extracted": 65950, "on_page": "Line 30 Balance Forward/Cash Reserve 65,950.00",
+     "issue": "The amount is correct and is printed on line 30, so the computed tag isn't needed (harmless)."}
+  ]
+}
