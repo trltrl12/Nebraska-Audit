@@ -1,0 +1,27 @@
+{
+  "stem": "South_Sioux_City_Community_Schools_FY2025",
+  "values_checked": 554,
+  "issues": [
+    {"severity": "warning", "path": "receipts[5].category", "page": 20,
+     "extracted": "charges for services/fees", "on_page": "Activity Fund receipts 278,617 include Interest 11,212 (p20)",
+     "issue": "The whole Activity Fund receipt total is placed in charges for services. Its own schedule prints an Interest account of 11,212, and the detail records that account as investment income. The same label gets different categories in receipts and detail."},
+    {"severity": "warning", "path": "receipts[11].category", "page": 9,
+     "extracted": "intergovernmental/state aid", "on_page": "County receipts 410,523 = 2110 County fines and license fees",
+     "issue": "Could be fines and forfeitures. South_Platte_Public_Schools_FY2025 classes the same code 2110 that way. The categories should be consistent across reports (also detail[15])."},
+    {"severity": "warning", "path": "disbursements[1].category", "page": 6,
+     "extracted": "student activities", "on_page": "Instruction row, Student Fee Fund column 8,345",
+     "issue": "The statement prints this spending in the Instruction row. The column split is printed, but moving it to student activities is a judgment call. disbursements[6] has the same issue: Activity Fund 555,860 is printed in the Central services row and was recorded as student activities."},
+    {"severity": "warning", "path": "disbursements[9].category", "page": 6,
+     "extracted": "instruction", "on_page": "Private and state categorical programs 217,856",
+     "issue": "Printed as its own function row, not under Instruction. Federal programs (disbursements[11], 3,016,010) is also classed as instruction. Both are judgment calls (marked review)."},
+    {"severity": "warning", "path": "disbursements[14].category", "page": 28,
+     "extracted": "debt service interest", "on_page": "Debt service: Debt services and miscellaneous 275",
+     "issue": "The object label is the mixed 'Debt services and miscellaneous', so the page does not say this is interest (also detail[235])."},
+    {"severity": "warning", "path": "missing", "page": 10,
+     "extracted": null, "on_page": "9000 Non-program receipts: Actual -, Budget 404,369 (General Fund, p10); Bond Fund Transfers: Actual -, Budget 463,506 (p14)",
+     "issue": "Two printed budget lines with zero actual are left out of the detail. Other zero-actual lines with budgets were included, such as 3599 State categorical programs and the Depreciation and Employee Benefit transfers. No actual amounts are affected."},
+    {"severity": "warning", "path": "ending_cash", "page": 6,
+     "extracted": 18389348, "on_page": "Total fund balances 18,389,348; Cash and cash equivalents 16,104,735 (p5)",
+     "issue": "ending_cash is the total governmental fund balance the statement rolls forward. It includes Due from County Treasurer 2,292,130 and is net of the 7,517 due to another government. This matches the roll-forward and is explained in notes, but it is not cash."}
+  ]
+}
