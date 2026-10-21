@@ -251,6 +251,9 @@ def check(stem, d):
         if it.get("fund_type") not in FUND_TYPES:
             f("schema", f"detail: fund_type must be one of {FUND_TYPES}, got {it.get('fund_type')!r} ({lab!r})")
         key = (it.get("fund") or "", it.get("schedule") or "", sec)
+        if it.get("outside_printed_total") and sec != "other financing":
+            sums.setdefault(key, 0.0)  # printed below the schedule's total line: not part of it
+            continue
         sums[key] = sums.get(key, 0.0) + float(it.get("amount") or 0)
         if sec == "other financing" and not it.get("outside_printed_total"):
             # signed: + in (counts toward revenue), − out (toward expenditure)
