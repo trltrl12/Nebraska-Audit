@@ -1,0 +1,18 @@
+{
+  "stem": "Union_Irrigation_District_FY2025",
+  "values_checked": 11,
+  "issues": [
+    {"severity": "warning", "path": "balance_sheet.equity[0].amount", "page": 1,
+     "extracted": 21364.87, "on_page": "Line 26 'Balance Forward/Ending Balance' is blank; 21,364.87 is printed only on lines 28 and 31",
+     "issue": "The label cites line 26, which is empty. The amount equals the line 31 total and line 16 minus line 25 (34,359.07 - 12,994.20), so it is right, but the value isn't printed on the row it is labelled with. Cite line 31 instead, or mark it computed."},
+    {"severity": "warning", "path": "disbursements[0].category", "page": 1,
+     "extracted": "utilities", "on_page": "Operating Expenses 12,994.20",
+     "issue": "The extractor rules list water and drainage districts under 'natural resources/conservation'. For an irrigation district that category may fit better than 'utilities'. Already marked review."},
+    {"severity": "warning", "path": "receipts[0].fund_type", "page": 1,
+     "extracted": "business-type", "on_page": "Total of All Funds (no fund type stated)",
+     "issue": "The extractor assumed the whole district is business-type. That is defensible, since the district is funded by assessments on irrigated land, but nothing on the page states it. It could be treated as governmental, like an NRD."},
+    {"severity": "warning", "path": "fiscal_year_end", "page": 1,
+     "extracted": "2025-12-31", "on_page": "2025 AUDIT WAIVER REQUEST (no period printed)",
+     "issue": "The fiscal year end is an assumption (disclosed in notes)."}
+  ]
+}

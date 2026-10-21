@@ -162,6 +162,7 @@ These were diagnosed and fixed in find_pages v6; re-extract and re-verify them a
   Superior_FY2025 (report pp17-18, governmental funds revenue/expenditure statement, and p66, Community Development Agency Fund, not trimmed: ~255k receipts incl. TIF proceeds 248,373 and ~15k spending missing; beginning_fund_balance null).
   Tekamah_Airport_Authority_FY2025 (trimmed to the Statement of Net Position only: revenue/expense statement not trimmed).
   Taylor_FY2025 (report pp14-22, governmental fund statements, not trimmed; governmental figures derived from the all-funds budget schedule, transfers unclear; left flagged for re-extraction).
+  Tekamah_Herman_Community_School_FY2025 (report p27, probably the Activity Fund schedule, not trimmed).
   Gering_Ft_Laramie_Irrigation_District_FY2025 (nonoperating/capital-grant statement page not trimmed; 9,257,241
   derived as an adjustment meanwhile).
 - Budget forms whose Total All Funds page wasn't found (manifest flag no_budget_actuals_found; skipped, no

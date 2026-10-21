@@ -1,0 +1,18 @@
+{
+  "stem": "Sutton_Public_Schools_FY2025",
+  "values_checked": 200,
+  "issues": [
+    {"severity": "warning", "path": "missing", "page": 11,
+     "extracted": null, "on_page": "Trimmed p10 is report p38 (Depreciation Fund budget schedule) and trimmed p11 is report p40 (combining other governmental funds); report p39 is not in the trimmed PDF",
+     "issue": "Report p39 is probably another fund budget schedule (Qualified Capital Purpose, Employee Benefit or Activity). Their actuals are complete from the p11 combining statement and all totals tie, so only budget figures are likely missing. Can't confirm without the page."},
+    {"severity": "warning", "path": "receipts[16].split_from", "page": 8,
+     "extracted": "Other 37,613 split into Fees 1,983, Rentals 6,952, Other categorical grants 24,279, Misc 4,399", "on_page": "p5 prints 'Other 37,613' with no breakdown; p8 lists the General Fund lines",
+     "issue": "The split was worked out by elimination (the p8 lines not shown on their own p5 row). The arithmetic is exact and the result is unique, but the report doesn't label it as the breakdown of 'Other'. Applies to receipts[16] to receipts[19]."},
+    {"severity": "warning", "path": "receipts[18].category", "page": 8,
+     "extracted": "donations/contributions", "on_page": "1925 Other categorical grants 24,279",
+     "issue": "Code 1925 'Other categorical grants' is under Local receipts. It could be a grant from a local government or other public source (intergovernmental) rather than a private donation. Already marked review. Same for detail[10]."},
+    {"severity": "warning", "path": "receipts[25].original_label", "page": 7,
+     "extracted": "Interest income (nonoperating)", "on_page": "Interest income",
+     "issue": "The label has a qualifier added; the amount 5 is correct."}
+  ]
+}

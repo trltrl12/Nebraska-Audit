@@ -1,0 +1,18 @@
+{
+  "stem": "Tekamah_Herman_Community_School_FY2025",
+  "values_checked": 290,
+  "issues": [
+    {"severity": "warning", "path": "missing", "page": 14,
+     "extracted": null, "on_page": "Trimmed p14 = report p26 (School Nutrition schedule), p15 = report p28 (Supporting Schedule of Cash Disbursements); report p27 is not in the trimmed PDF",
+     "issue": "The untrimmed report p27 is probably the Activity Fund schedule (Activity Fund receipts 304,896 and disbursements 399,319 on p6), so there are no Activity Fund detail lines. Every trimmed page is fully captured, and all totals tie without it. Re-trim and check."},
+    {"severity": "warning", "path": "disbursements[4].category", "page": 6,
+     "extracted": "support services", "on_page": "Central services 446,130 = General 40,455 + Employee Benefit 6,356 + Activity Fund 399,319",
+     "issue": "Most of the line (399,319) is Activity Fund spending, which the category rules put under 'student activities'. The matching Activity Fund receipts were split out on their own, but the spending was left inside Central services."},
+    {"severity": "warning", "path": "detail[7].detail_category", "page": 8,
+     "extracted": "tuition and fees", "on_page": "Postsecondary receipts (1955) 3,806",
+     "issue": "Code 1955 sits in the 1951/1960 range of receipts from other districts and postsecondary institutions, so 'county/other local governments' (intergovernmental) may fit better. The same applies to receipts[7]. Both are already marked review."},
+    {"severity": "warning", "path": "detail[58].detail_category", "page": 15,
+     "extracted": "professional/contract services", "on_page": "Other property services 325,730 (Support services - students)",
+     "issue": "'Other property services' is mapped to professional/contract services throughout. That is a judgment call: this object probably holds tuition and other purchased services, and could arguably be repairs and maintenance. The amounts are correct."}
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "stem": "Tilden_FY2025",
+  "values_checked": 108,
+  "issues": [
+    {"severity": "warning", "path": "missing", "page": 7,
+     "extracted": null, "on_page": "report page numbers jump -9- (p6) to -11- (p7) to -13- (p8), and -13- to -25- (p9)",
+     "issue": "Report pages 10, 12 and 14-24 are not in the trimmed PDF. They are probably blank pages, reconciliations and notes, and every statement total ties without them, but this could not be confirmed."},
+    {"severity": "warning", "path": "ending_cash", "page": 5,
+     "extracted": 1882610, "on_page": "FUND BALANCES - ENDING OF YEAR 1,882,610 (Total Governmental Funds)",
+     "issue": "beginning_cash and ending_cash hold modified-cash fund balances, not cash. The 1,882,610 includes notes receivable 138,941 and due from other funds 47,585, less the cash overdraft 175,774 and due to other funds 47,585 (p4). The amount is as printed; this was a choice of measure, which the notes explain."},
+    {"severity": "warning", "path": "business_type.beginning", "page": 7,
+     "extracted": 3146518, "on_page": "Proprietary NET POSITION - BEGINNING OF YEAR 3,146,518; government-wide Business-Type Net Position - Beginning 2,071,758 (p3)",
+     "issue": "business_type uses the accrual proprietary statement (net position 3,146,518 to 3,431,417, includes depreciation 130,555). The modified-cash government-wide statement shows 2,071,758 to 2,312,681. Both are printed, but they differ by about 1.1M, and decision_needed[] does not say which measure the user wants."},
+    {"severity": "warning", "path": "receipts[7].category", "page": 5,
+     "extracted": "donations/contributions", "on_page": "Operating Grants and Contributions 55,500 (Park 50,000, Library 3,000, Police 2,500 on p2)",
+     "issue": "The grantor is not stated. This could be government grants (intergovernmental/state aid) instead of private donations. It is marked review. The same applies to receipts[8] Capital Grants and Contributions 5,000 and the matching detail lines."},
+    {"severity": "warning", "path": "disbursements[9].category", "page": 5,
+     "extracted": "other", "on_page": "Lottery 110,263",
+     "issue": "Lottery/keno fund spending is in 'other' (marked review), with the same in detail[23]. The function is not shown on the page, so this is a judgment call."},
+    {"severity": "warning", "path": "disbursements[10].category", "page": 5,
+     "extracted": "health/welfare", "on_page": "Hospital Clinic 33,941",
+     "issue": "This could be hospital/health care instead. The same applies to detail[24]."},
+    {"severity": "warning", "path": "receipts[14].original_label", "page": 7,
+     "extracted": "Non-operating Miscellaneous", "on_page": "Miscellaneous (under NON-OPERATING REVENUES (EXPENSES))",
+     "issue": "The label was given a prefix the page does not print. The amount 1,001 is correct."},
+    {"severity": "warning", "path": "proprietary", "page": 8,
+     "extracted": null, "on_page": "Proprietary Fund Statement of Cash Flows: operating 297,431; noncapital 149,496; capital and related (246,447); investing 443; beginning 1,053,464; ending 1,254,387",
+     "issue": "A proprietary cash-flow statement is printed, but proprietary was left null because basis is recorded as cash. That follows the rule, but the data is available."},
+    {"severity": "warning", "path": "detail", "page": 9,
+     "extracted": "split governmental/business-type items for Interest Income, Charges for Services, Miscellaneous Receipts, Principal, Interest", "on_page": "single all-funds lines 86,587 / 708,992 / 148,022 / 119,123 / 73,422",
+     "issue": "The splits match the breakdowns printed on p2-p3 (Statement of Activities), and the totals tie to 2,258,665 and 1,715,861. However, budget_final is put entirely on the governmental split item (for example 2,590,461 misc and 192,089 principal), and the business-type charges of 492,925 are cash receipts from p2, not the accrual 485,357 on p7."}
+  ]
+}
