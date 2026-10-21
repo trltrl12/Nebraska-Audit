@@ -1,12 +1,15 @@
 {
   "stem": "Annie_Jeffrey_Memorial_Health_Center_FY2025",
-  "values_checked": 136,
+  "values_checked": 133,
   "issues": [
-    {"severity": "warning", "path": "receipts[3].category", "page": 3, "extracted": "property tax", "on_page": "Tax revenue 278,163", "issue": "The label does not name the tax. 'property tax' is supported by the 'Property tax receivable' line on p1, but no breakdown is printed. 'taxes (unlabeled)' would be the strict reading."},
-    {"severity": "warning", "path": "receipts[6].category", "page": 3, "extracted": "donations/contributions", "on_page": "Noncapital grants and contributions 60,049", "issue": "The source is not stated (government grant vs private gift), so this could be federal grants or state aid. Already marked review."},
-    {"severity": "warning", "path": "detail[*].detail_category (Schedule 7 'Supplies and Other' items, detail[29]-detail[82])", "page": 7, "extracted": "supplies and materials", "on_page": "Supplies and Other column (total 4,871,684, p8)", "issue": "This column also holds employee benefits (statement p3: benefits 1,221,678 + supplies and other 3,659,475 = 4,881,153), so 'supplies and materials' overstates supplies. A mixed category was used; the extractor's note discloses it."},
-    {"severity": "warning", "path": "detail_totals[2].amount", "page": 8, "extracted": 8906429, "on_page": "Schedule 7 Totals 8,906,429 vs statement operating expenses excluding depreciation 8,915,898 (p3)", "issue": "Schedule 7 is 9,469 less than the statement. Supplies and Other 4,871,684 vs benefits + supplies 4,881,153 on p3. The schedule adds up internally (all line items checked), but the report is inconsistent between schedule and statement. This is mentioned in notes but not in report_discrepancies."},
-    {"severity": "warning", "path": "balance_sheet.assets[6].category", "page": 1, "extracted": "other assets", "on_page": "Estimated third-party payor settlements 1,206,959", "issue": "This is an amount due from Medicare/Medicaid payors, so 'receivables' could fit. 'other assets' is defensible."},
-    {"severity": "warning", "path": "balance_sheet.liabilities[3].original_label", "page": 2, "extracted": "Accrued expenses: Compensated absences", "on_page": "Compensated absenses", "issue": "The printed spelling is 'absenses'. The label was corrected and the 'Accrued expenses:' heading added. The amount 315,099 is correct."}
+    {"severity": "warning", "path": "detail[30].detail_category", "page": 8,
+     "extracted": "supplies and materials", "on_page": "Nursing service, Supplies and Other 436,820",
+     "issue": "applies to every Schedule 7 'Supplies and Other' line (27 lines, total 4,871,684): the column mixes employee benefits (about 1.21M, compare p3 Employee benefits 1,221,678), purchased services and supplies, so supplies and materials overstates supplies. Lines carry no review flag"},
+    {"severity": "warning", "path": "receipts[6].category", "page": 3,
+     "extracted": "donations/contributions", "on_page": "Noncapital grants and contributions 60,049",
+     "issue": "source not stated; for a county health center these are often government grants (federal/state). Line carries review"},
+    {"severity": "warning", "path": "balance_sheet.assets[6].category", "page": 1,
+     "extracted": "other assets", "on_page": "Estimated third-party payor settlements 1,206,959",
+     "issue": "amount due from Medicare/Medicaid, arguably receivables (or due from other governments)"}
   ]
 }
