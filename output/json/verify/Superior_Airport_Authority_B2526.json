@@ -1,0 +1,22 @@
+{
+  "stem": "Superior_Airport_Authority_B2526",
+  "values_checked": 12,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "receipts[*].fund_type",
+      "page": 1,
+      "extracted": "governmental",
+      "on_page": "Superior Airport Authority (airport authority)",
+      "issue": "[fixed] The rules list airport authorities as entirely business-type entities: every receipt/disbursement line should be fund_type business-type, the balances should go in business_type (beginning 153,998, ending 93,687), the top-level governmental balances should be null, reported_totals.governmental should be null and reported_totals.business-type should hold 102,948 / 163,259. The extractor recorded everything as governmental and said in notes that this was its own choice because the budget form does not separate fund types. Same problem in disbursements[*].fund_type, beginning_cash, ending_cash and reported_totals. If a person decides that tax-levy airport budget forms should be governmental, this becomes a decision_needed item."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[0].category",
+      "page": 1,
+      "extracted": "other",
+      "on_page": "Operating Expenses",
+      "issue": "No transportation/airport function category exists, so 'other' with review is defensible. Still, the budget-form rule says to use the entity type's function for Operating Expenses; a person may prefer a different function (e.g. economic development or general government)."
+    }
+  ]
+}
