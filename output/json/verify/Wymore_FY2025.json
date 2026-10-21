@@ -2,20 +2,45 @@
   "stem": "Wymore_FY2025",
   "values_checked": 58,
   "issues": [
-    {"severity": "error", "path": "report_discrepancies[2].difference", "page": 6,
-     "extracted": 2147735, "on_page": "p6 ending net position 4,816,721 vs p1/p2 business-type 2,773,359 = 2,043,362 (beginning: 4,408,459 vs 2,527,496 = 1,880,963)",
-     "issue": "The difference is wrong. 4,816,721 - 2,773,359 = 2,043,362, and neither the ending nor the beginning gap is 2,147,735. Also, this is a basis difference (accrual proprietary statements vs the cash-basis government-wide statements), not a total that fails to add up."},
-    {"severity": "warning", "path": "balance_sheet", "page": 5,
-     "extracted": "p1 cash-basis Statement of Net Position only (cash 5,186,708, no liabilities)", "on_page": "Statement of Net Position - Business-type Activities (p5): accounts receivable 203,873, inventory 170,928, capital assets net 2,497,936, total assets 5,646,096; liabilities 829,375 (incl. current debt 110,000, long-term debt 465,000); net position 4,816,721",
-     "issue": "The business-type roll-forward uses the accrual net position from p5-6, but the balance sheet uses only the cash-basis p1 statement. The business-type receivables, capital assets and debt on p5 are recorded nowhere. Both business_type.measure 'net position' (accrual) and proprietary null (a cash flow statement is on p7) follow from this mixed-basis choice, which needs a person to confirm."},
-    {"severity": "warning", "path": "receipts[3].category", "page": 4,
-     "extracted": "federal grants", "on_page": "Grants and donations 566,064 (p2: Capital Grants and Contributions 556,064)",
-     "issue": "Nothing on the page says these grants are federal. It could be state aid or private donations. The line has a review note; this category is a judgment call."},
-    {"severity": "warning", "path": "detail", "page": 8,
-     "extracted": [], "on_page": "Budgetary Comparison Schedule (all funds combined): receipts by function 4,451,889, disbursements 4,944,134, one budget total each",
-     "issue": "The schedule is left out because it mixes governmental and utility funds with no fund columns. This is defensible, but the only supplementary schedule is unrecorded."},
-    {"severity": "warning", "path": "transfers_in", "page": 4,
-     "extracted": 71229, "on_page": "Interfund transfer in (out): General 142,823, Street (25,657), Other (45,937), Total 71,229",
-     "issue": "Only the net figure from the Total column is recorded. Between governmental funds 71,594 moved from Street/Other to General, which nets out. The net 71,229 matches the business-type transfers out (Light (87,721), Water 1,780, Sewer 14,712 = (71,229)) on p6."}
+    {
+      "severity": "error",
+      "path": "report_discrepancies[2].difference",
+      "page": 6,
+      "extracted": 2147735,
+      "on_page": "p6 ending net position 4,816,721 vs p1/p2 business-type 2,773,359 = 2,043,362 (beginning: 4,408,459 vs 2,527,496 = 1,880,963)",
+      "issue": "[fixed] The difference is wrong. 4,816,721 - 2,773,359 = 2,043,362, and neither the ending nor the beginning gap is 2,147,735. Also, this is a basis difference (accrual proprietary statements vs the cash-basis government-wide statements), not a total that fails to add up."
+    },
+    {
+      "severity": "warning",
+      "path": "balance_sheet",
+      "page": 5,
+      "extracted": "p1 cash-basis Statement of Net Position only (cash 5,186,708, no liabilities)",
+      "on_page": "Statement of Net Position - Business-type Activities (p5): accounts receivable 203,873, inventory 170,928, capital assets net 2,497,936, total assets 5,646,096; liabilities 829,375 (incl. current debt 110,000, long-term debt 465,000); net position 4,816,721",
+      "issue": "The business-type roll-forward uses the accrual net position from p5-6, but the balance sheet uses only the cash-basis p1 statement. The business-type receivables, capital assets and debt on p5 are recorded nowhere. Both business_type.measure 'net position' (accrual) and proprietary null (a cash flow statement is on p7) follow from this mixed-basis choice, which needs a person to confirm."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[3].category",
+      "page": 4,
+      "extracted": "federal grants",
+      "on_page": "Grants and donations 566,064 (p2: Capital Grants and Contributions 556,064)",
+      "issue": "Nothing on the page says these grants are federal. It could be state aid or private donations. The line has a review note; this category is a judgment call."
+    },
+    {
+      "severity": "warning",
+      "path": "detail",
+      "page": 8,
+      "extracted": [],
+      "on_page": "Budgetary Comparison Schedule (all funds combined): receipts by function 4,451,889, disbursements 4,944,134, one budget total each",
+      "issue": "The schedule is left out because it mixes governmental and utility funds with no fund columns. This is defensible, but the only supplementary schedule is unrecorded."
+    },
+    {
+      "severity": "warning",
+      "path": "transfers_in",
+      "page": 4,
+      "extracted": 71229,
+      "on_page": "Interfund transfer in (out): General 142,823, Street (25,657), Other (45,937), Total 71,229",
+      "issue": "Only the net figure from the Total column is recorded. Between governmental funds 71,594 moved from Street/Other to General, which nets out. The net 71,229 matches the business-type transfers out (Light (87,721), Water 1,780, Sewer 14,712 = (71,229)) on p6."
+    }
   ]
 }
