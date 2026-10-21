@@ -2,14 +2,29 @@
   "stem": "Sarpy_County_SID_351_FY2025",
   "values_checked": 78,
   "issues": [
-    {"severity": "error", "path": "balance_sheet.liabilities[1].category", "page": 1,
-     "extracted": "debt - due within one year", "on_page": "Warrants Payable 1,608,172 (no due-date split)",
-     "issue": "extractor rules: SID Warrants Payable with no due-date split goes to 'debt - due in more than one year', never 'debt - due within one year' (SIDs 348/350 follow the rule)"},
-    {"severity": "warning", "path": "missing", "page": 4,
-     "extracted": null, "on_page": "Schedule 1 General Fund Other Financing: Warrants Issued GAAP '-' (budget 123,650); Warrants Retired GAAP '-' (budget (130,000))",
-     "issue": "zero-GAAP-actual lines with a budget are recorded as 0 elsewhere (Debt Service Special Assessments, Engineering, Fiscal Agent Fees, Professional Fees) but these two General Fund other-financing lines are left out. Budgetary-basis actuals are 131,461 / (102,193)"},
-    {"severity": "warning", "path": "receipts[3].category", "page": 2,
-     "extracted": "intergovernmental/state aid", "on_page": "State Motor Vehicle Tax Allocation 236",
-     "issue": "label says motor vehicle tax; treated as pro-rate state aid (detail motor vehicle pro-rate). Defensible for an SID but a label/category mismatch"}
+    {
+      "severity": "error",
+      "path": "balance_sheet.liabilities[1].category",
+      "page": 1,
+      "extracted": "debt - due within one year",
+      "on_page": "Warrants Payable 1,608,172 (no due-date split)",
+      "issue": "[fixed] extractor rules: SID Warrants Payable with no due-date split goes to 'debt - due in more than one year', never 'debt - due within one year' (SIDs 348/350 follow the rule)"
+    },
+    {
+      "severity": "warning",
+      "path": "missing",
+      "page": 4,
+      "extracted": null,
+      "on_page": "Schedule 1 General Fund Other Financing: Warrants Issued GAAP '-' (budget 123,650); Warrants Retired GAAP '-' (budget (130,000))",
+      "issue": "zero-GAAP-actual lines with a budget are recorded as 0 elsewhere (Debt Service Special Assessments, Engineering, Fiscal Agent Fees, Professional Fees) but these two General Fund other-financing lines are left out. Budgetary-basis actuals are 131,461 / (102,193)"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[3].category",
+      "page": 2,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "State Motor Vehicle Tax Allocation 236",
+      "issue": "label says motor vehicle tax; treated as pro-rate state aid (detail motor vehicle pro-rate). Defensible for an SID but a label/category mismatch"
+    }
   ]
 }
