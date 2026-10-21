@@ -2,14 +2,29 @@
   "stem": "Sarpy_County_SID_347_FY2025",
   "values_checked": 112,
   "issues": [
-    {"severity": "error", "path": "balance_sheet.liabilities[1].category", "page": 1,
-     "extracted": "debt - due within one year", "on_page": "Warrants Payable 5,936,324 (no due-date split)",
-     "issue": "Extractor rules: SID 'Warrants Payable' with no due-date split must be 'debt - due in more than one year' (never 'debt - due within one year'). Notes repeat the wrong classification."},
-    {"severity": "warning", "path": "balance_sheet.assets[4].original_label", "page": 1,
-     "extracted": "Accrued Interest Receivable - Special Assessments", "on_page": "Accrued Interest on Special Assessments",
-     "issue": "Label not as printed (this report prints 'Accrued Interest on'; SID 346 prints 'Accrued Interest Receivable'). Amount 143,767 correct."},
-    {"severity": "warning", "path": "detail", "page": 4,
-     "extracted": "Actual on Budgetary Basis column", "on_page": "Columns: Actual on GAAP Basis / Adjustments / Actual on Budgetary Basis / Budget",
-     "issue": "Schedules 1-2 print two actual columns; extractor used budgetary-basis actuals (documented). They differ from the GAAP statement (e.g. Debt Service special assessments 1,748,476 budgetary vs 0 GAAP), so detail will not tie to receipts/disbursements. Defensible, but an assumption."}
+    {
+      "severity": "error",
+      "path": "balance_sheet.liabilities[1].category",
+      "page": 1,
+      "extracted": "debt - due within one year",
+      "on_page": "Warrants Payable 5,936,324 (no due-date split)",
+      "issue": "[fixed] Extractor rules: SID 'Warrants Payable' with no due-date split must be 'debt - due in more than one year' (never 'debt - due within one year'). Notes repeat the wrong classification."
+    },
+    {
+      "severity": "warning",
+      "path": "balance_sheet.assets[4].original_label",
+      "page": 1,
+      "extracted": "Accrued Interest Receivable - Special Assessments",
+      "on_page": "Accrued Interest on Special Assessments",
+      "issue": "Label not as printed (this report prints 'Accrued Interest on'; SID 346 prints 'Accrued Interest Receivable'). Amount 143,767 correct."
+    },
+    {
+      "severity": "warning",
+      "path": "detail",
+      "page": 4,
+      "extracted": "Actual on Budgetary Basis column",
+      "on_page": "Columns: Actual on GAAP Basis / Adjustments / Actual on Budgetary Basis / Budget",
+      "issue": "Schedules 1-2 print two actual columns; extractor used budgetary-basis actuals (documented). They differ from the GAAP statement (e.g. Debt Service special assessments 1,748,476 budgetary vs 0 GAAP), so detail will not tie to receipts/disbursements. Defensible, but an assumption."
+    }
   ]
 }
