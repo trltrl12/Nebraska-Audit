@@ -2,17 +2,37 @@
   "stem": "Douglas_County_SID_615_FY2025",
   "values_checked": 63,
   "issues": [
-    {"severity": "warning", "path": "detail[7].category", "page": 3,
-     "extracted": "debt service principal / not itemized", "on_page": "Debt service - bond principal and interest 31,654",
-     "issue": "The same 31,654 appears on p2 as 'Bond interest' (Total governmental funds column), and no bond principal was paid. The line is all interest, so 'debt service interest' / 'debt interest and fees' fits better."},
-    {"severity": "warning", "path": "detail[6].detail_category", "page": 3,
-     "extracted": "not itemized", "on_page": "Debt service - warrant principal and interest 1,579,893",
-     "issue": "This is an object line (warrant principal + interest = 1,349,094 + 230,799 on p2), not a function total with no breakdown. SID 584 uses 'debt principal' for the same line, so the two reports are inconsistent."},
-    {"severity": "warning", "path": "balance_sheet.liabilities[3].category", "page": 1,
-     "extracted": "accrued liabilities", "on_page": "Accrued interest on warrants - Due after one year 10,539",
-     "issue": "The 'accrued liabilities' category is meant for amounts due soon. This one is due after one year, so 'other liabilities' or 'debt - due in more than one year' may fit better. Judgment call."},
-    {"severity": "warning", "path": "disbursements[8].category", "page": 2,
-     "extracted": "utilities", "on_page": "Utilities 6,274 (General Fund)",
-     "issue": "The 'utilities' function is meant for water/sewer/electric utility operations. An SID General Fund utilities object line is probably street lighting (streets/highways). The line already carries a review flag."}
+    {
+      "severity": "warning",
+      "path": "detail[7].category",
+      "page": 3,
+      "extracted": "debt service principal / not itemized",
+      "on_page": "Debt service - bond principal and interest 31,654",
+      "issue": "[fixed 2026-10-21: bond interest line to debt service interest; warrant line detail_category debt principal as in SID 584] The same 31,654 appears on p2 as 'Bond interest' (Total governmental funds column), and no bond principal was paid. The line is all interest, so 'debt service interest' / 'debt interest and fees' fits better."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[6].detail_category",
+      "page": 3,
+      "extracted": "not itemized",
+      "on_page": "Debt service - warrant principal and interest 1,579,893",
+      "issue": "[fixed 2026-10-21: bond interest line to debt service interest; warrant line detail_category debt principal as in SID 584] This is an object line (warrant principal + interest = 1,349,094 + 230,799 on p2), not a function total with no breakdown. SID 584 uses 'debt principal' for the same line, so the two reports are inconsistent."
+    },
+    {
+      "severity": "warning",
+      "path": "balance_sheet.liabilities[3].category",
+      "page": 1,
+      "extracted": "accrued liabilities",
+      "on_page": "Accrued interest on warrants - Due after one year 10,539",
+      "issue": "The 'accrued liabilities' category is meant for amounts due soon. This one is due after one year, so 'other liabilities' or 'debt - due in more than one year' may fit better. Judgment call."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[8].category",
+      "page": 2,
+      "extracted": "utilities",
+      "on_page": "Utilities 6,274 (General Fund)",
+      "issue": "The 'utilities' function is meant for water/sewer/electric utility operations. An SID General Fund utilities object line is probably street lighting (streets/highways). The line already carries a review flag."
+    }
   ]
 }
