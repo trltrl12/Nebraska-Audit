@@ -1,0 +1,27 @@
+{
+  "stem": "Silver_Lake_Public_Schools_FY2025",
+  "values_checked": 468,
+  "issues": [
+    {"severity": "warning", "path": "receipts[15].category", "page": 21,
+     "extracted": "other", "on_page": "5200 Allocation from General Fund 90,000.00",
+     "issue": "This may be a transfer recorded as a receipt (detail[214] has the same issue). Account 5200 is the transfer-in code; Activities and Nutrition use it for their 'Transfers From General Fund'. The General Fund's Schedule M (p38) has 2710 Property for exactly 90,000.00, so the matching outflow may be inside spending. The page shows no elimination, so recording it as printed and adding decision_needed[0] is defensible, but it needs a person's decision."},
+    {"severity": "warning", "path": "disbursements[54].split_from", "page": 39,
+     "extracted": "General Fund 5000 Miscellaneous 13,531 (p40)", "on_page": "5000 Debt Service Miscellaneous 13,531.00 on p39",
+     "issue": "The split_from note cites p40, but the line is on trimmed p39. The 13,531 is printed only as 'Miscellaneous' under Debt Service, so treating it as interest rather than principal is a guess (marked review)."},
+    {"severity": "warning", "path": "disbursements[50].category", "page": 13,
+     "extracted": "other", "on_page": "Other Purchased Services 9,070.67 (Special Building 7,590.67 + Student Fees 1,480.00)",
+     "issue": "'other' is a last resort. The parts are Special Building 4500-coded spending (facilities acquisition/construction: professional services, supplies, misc) and Student Fee 2190-810 (support services). Capital outlay or support services may fit. It follows the statement's own grouping, so this is defensible."},
+    {"severity": "warning", "path": "detail[272].category", "page": 27,
+     "extracted": "other", "on_page": "4500-340 Other Professional Services 3,000.00",
+     "issue": "Function 4500 is building acquisition and construction, so capital outlay could fit. detail[274] (4500-610 Supplies 3,824.61) and detail[277] (4700-890 Miscellaneous 766.06) have the same issue. The extractor followed Exhibit III's 'Other Purchased Services' grouping."},
+    {"severity": "warning", "path": "detail[279].category", "page": 29,
+     "extracted": "other", "on_page": "2190-810 Dues and Fees 1,480.00",
+     "issue": "Function code 2190 is Support Services - Other, so category 'support services' fits better than 'other'."},
+    {"severity": "warning", "path": "detail[156].original_label", "page": 37,
+     "extracted": "Employee Benefits", "on_page": "2610 Operation of Buildings: Salaries (blank), Employee Benefits $5,283.89",
+     "issue": "The 5,283.89 is printed on the Employee Benefits row with the '$' sign, and the Salaries row is blank. That alignment is unusual: it could be a salaries figure shifted down one row. Recorded as printed."},
+    {"severity": "warning", "path": "detail_totals[12].amount", "page": 29,
+     "extracted": 1642, "on_page": "single line 1741 Extracurricular Activity Fees 1,642.00; no Total Receipts line",
+     "issue": "Schedule L prints no Total Receipts or Total Disbursements line. detail_totals[12] and [13] repeat the single line amounts."}
+  ]
+}
