@@ -145,8 +145,6 @@ These were diagnosed and fixed in find_pages v6; re-extract and re-verify them a
   Sargent_Public_Schools_FY2025 (report p50, rest of the per-account Activities Fund schedule, not trimmed; one-line budget schedule used).
   Springfield_FY2025 (Note M, explaining 33.2M sales tax and 3.5M permits, not trimmed).
   South_Platte_Public_Schools_FY2025 (report p31, Activity Fund schedule, not trimmed).
-  Tekamah_Airport_Authority_FY2025 (trimmed to the Statement of Net Position only: revenue/expense statement not trimmed).
-  Taylor_FY2025 (report pp14-22, governmental fund statements, not trimmed; governmental figures derived from the all-funds budget schedule, transfers unclear; left flagged for re-extraction).
   Tekamah_Herman_Community_School_FY2025 (report p27, probably the Activity Fund schedule, not trimmed).
   Upper_Loup_NRD_FY2025 (report p9, end of cash flow statement with cash balances, not trimmed; cash derived from net position).
   Two_Rivers_Public_Health_Department_FY2025 (report p10, Statement of Net Position, and pp34-36 not trimmed; fund balance sheet used).
@@ -174,6 +172,7 @@ These were diagnosed and fixed in find_pages v6; re-extract and re-verify them a
 - Blank waiver form (all fields $0.00; skipped, no JSON): Youth_and_Family_Crisis_Response_Center_FY2025. Checked 2026-10-21:
   the Auditor's current file is the same approved waiver with $0.00 on every line (no other filing). Extract it as
   all zeros, like Washington_County_SID_5, after the current validate run finishes.
+- Taylor_FY2025: trimmed pp2-8 are rotated, so the page-text check can't confirm the governmental amounts (checked visually).
 - Trimmed to one page (extracted from that page; check the source PDF for missing statements):
   Douglas_County_SID_640_FY2025.
 - Hickman_FY2025: v8 trim adds the Statement of Activities, governmental Balance Sheet and Other Governmental
