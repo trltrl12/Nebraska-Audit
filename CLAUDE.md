@@ -133,7 +133,6 @@ These were diagnosed and fixed in find_pages v6; re-extract and re-verify them a
   Lyons_FY2025 (report pp8-9, probably the utilities revenue/expense statement, and p21 not trimmed).
   Kimball_County_FY2025 (report p31 not trimmed), Kimball_FY2025 (report pp17, 19, 59 not trimmed); totals tie, check source.
   Lancaster_County_FY2025 (Veterans Aid and Broadband sub-fund budget pages, report pp85-86, not trimmed).
-  Humboldt_FY2025 (governmental fund statements, report pp5-7, not trimmed; budget schedule used).
   Hemingford_Public_Schools_FY2025 (report pp34-35, probably the Activity Fund schedule, not trimmed).
   Gothenburg_FY2025 (report pp42 and 49 not trimmed; may hold schedule lines).
   Grand_Island_Public_Schools_FY2025 (report p39, probably the Activities Fund schedule, not trimmed).
