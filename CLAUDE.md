@@ -153,6 +153,8 @@ These were diagnosed and fixed in find_pages v6; re-extract and re-verify them a
   Polk_FY2025 (odd report pages 27-35 of the combining schedules not trimmed: Bandstand/Playground/Total/budget columns; actuals from Exhibits III-IV).
   Sargent_Public_Schools_FY2025 (report p50, rest of the per-account Activities Fund schedule, not trimmed; one-line budget schedule used).
   Sarpy_County_SID_38_FY2025 (report p4, Balance Sheet/Statement of Net Position, not trimmed).
+  South_Sioux_City_FY2025 (report pp77, 91-92, nonmajor fund schedules, not trimmed; nonmajor detail revenue 6.72M vs 8.53M).
+  Southeast_Community_College_FY2025 (last page of the cash flow statement not trimmed).
   Gering_Ft_Laramie_Irrigation_District_FY2025 (nonoperating/capital-grant statement page not trimmed; 9,257,241
   derived as an adjustment meanwhile).
 - Budget forms whose Total All Funds page wasn't found (manifest flag no_budget_actuals_found; skipped, no
