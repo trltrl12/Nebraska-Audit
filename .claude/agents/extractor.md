@@ -292,7 +292,7 @@ keeps its signed amount and gets `"printed_in": "expenditure"` (or `"revenue"`).
 **Educational Service Units and school districts (state account codes):** 1951/1960-type lines
 ("Miscellaneous revenue from other districts / ESUs / other local government units") are
 `intergovernmental/state aid` / `county/other local governments`, never `other`; nameplate capacity tax
-is `other taxes` / `other local taxes`; interlocal-agreement and service-contract revenue is
+is `other taxes` / `other local taxes`; code 2110 (county fines and license fees passed to schools) is `fines and forfeitures`; interlocal-agreement and service-contract revenue is
 `charges for services/fees`; "Other state and federal" or program lines that the report's own
 statement counts under Instruction go to `instruction`.
 
