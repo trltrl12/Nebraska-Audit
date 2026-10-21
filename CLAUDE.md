@@ -168,9 +168,6 @@ These were diagnosed and fixed in find_pages v6; re-extract and re-verify them a
   the FY2025 filing): Bristow_FY2025 (period 10/1/23-9/30/24), Naper_FY2025 (period 10/1/23-9/30/24; not yet checked
   on the Auditor's site). Checked 2026-10-21: the Auditor's only FY2025 file
   (approved waiver for FY ending 2025) attaches the 10/1/23-9/30/24 statement; no other filing exists. Leave as is.
-- Blank waiver form (all fields $0.00; skipped, no JSON): Youth_and_Family_Crisis_Response_Center_FY2025. Checked 2026-10-21:
-  the Auditor's current file is the same approved waiver with $0.00 on every line (no other filing). Extract it as
-  all zeros, like Washington_County_SID_5, after the current validate run finishes.
 - Taylor_FY2025: trimmed pp2-8 are rotated, so the page-text check can't confirm the governmental amounts (checked visually).
 - Trimmed to one page (extracted from that page; check the source PDF for missing statements):
   Douglas_County_SID_640_FY2025.
