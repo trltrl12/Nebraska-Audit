@@ -1,0 +1,17 @@
+{
+  "stem": "Sterling_Public_Schools_FY2025",
+  "values_checked": 176,
+  "issues": [
+    {"severity": "warning", "path": "detail[66].original_label", "page": 13,
+     "extracted": "4700 Building Improvements (transfer to Depreciation Fund, shown as Facilities acquisition and construction on p7 and reclassified to transfers)",
+     "on_page": "4700 Building Improvements",
+     "issue": "the extractor added explanatory text to the printed label. Treating the amount (-100,000) as other financing is correct: p7 reclassifies it and p15 shows it as the Depreciation Fund's transfer in."},
+    {"severity": "warning", "path": "detail[71].fund_type", "page": 16,
+     "extracted": "governmental", "on_page": "School Nutrition Fund (nonmajor governmental fund, pp3-4, 8-9)",
+     "issue": "the rules give school nutrition as a business-type example, but this report presents it as a nonmajor governmental fund with no proprietary statement. Kept governmental, which is defensible. This affects receipts[17], disbursements[11] and detail[71]-detail[78]."},
+    {"severity": "warning", "path": "balance_sheet.statement", "page": 5,
+     "extracted": "Statement of Assets, Liabilities, and Fund Balances - Modified Cash Basis - Governmental Funds",
+     "on_page": "p2 government-wide net position: Cash and cash equivalents 2,354,005; Cash at county treasurer 655,829; Restricted debt services 341,422; capital outlay 846,746; Unrestricted 1,821,666; total 3,009,834",
+     "issue": "the extractor used the fund balance sheet (p5) instead of the government-wide Statement of Activities and Net Position (p2). The assets and totals are the same; only the equity lines differ (Committed/Assigned/Unassigned instead of Unrestricted 1,821,666). The rules allow either statement."}
+  ]
+}

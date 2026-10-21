@@ -1,0 +1,54 @@
+{
+  "stem": "Sterling_FY2025",
+  "values_checked": 122,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "receipts[9].category",
+      "page": 2,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "Carline Allocation 212",
+      "issue": "[fixed] the extractor rules list carline under 'other taxes' (in-lieu of tax, nameplate capacity, carline, public power district tax), even though this page prints it under Intergovernmental Revenues"
+    },
+    {
+      "severity": "error",
+      "path": "detail[9].category",
+      "page": 3,
+      "extracted": "intergovernmental/state aid / other state aid",
+      "on_page": "Carline Allocation 212",
+      "issue": "[fixed] should be other taxes / other local taxes under the carline rule (same fix as receipts[9])"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[0].category",
+      "page": 2,
+      "extracted": "property tax",
+      "on_page": "Taxes 141,081",
+      "issue": "assumes the bare 'Taxes' line is property tax. This is reasonable because sales and motor vehicle taxes are separate lines, but the page doesn't say so. The line is marked review. The same applies to detail[0]."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[13].category",
+      "page": 2,
+      "extracted": "reimbursements/refunds",
+      "on_page": "Public Power Reimbursement 58,661",
+      "issue": "a recurring payment of about 57,000-58,000 every year (see the p4 comparative). It may be a public power district lease or in-lieu payment, which would be other taxes or charges, not a reimbursement. Already marked review. The same applies to detail[10]."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[20].category",
+      "page": 2,
+      "extracted": "federal grants",
+      "on_page": "Grants 93,968",
+      "issue": "the report doesn't say where the grants come from; they could be state grants. Marked review. The same applies to detail[17] and detail[31]."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[1].fund_type",
+      "page": 2,
+      "extracted": "governmental",
+      "on_page": "Public Utilities 182,736 (General Fund column)",
+      "issue": "utility operations are reported inside the General Fund, and 'Charges for Services' 237,941 (receipts[14], detail[11] 'other charges for services') is probably mostly utility charges. Recorded as governmental because the report has no enterprise column. This is defensible but worth review."
+    }
+  ]
+}
