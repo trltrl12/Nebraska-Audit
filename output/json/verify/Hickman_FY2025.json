@@ -1,18 +1,15 @@
 {
   "stem": "Hickman_FY2025",
-  "values_checked": 18,
+  "values_checked": 61,
   "issues": [
-    {"severity": "warning", "path": "missing", "page": 1,
-     "extracted": null, "on_page": "Receipts and transfers (resource inflows) 9,534,274; Budgetary fund balance, beginning 6,417,103; ending 4,875,153 (all funds combined)",
-     "issue": "Printed schedule lines not entered in the JSON. Leaving them out is defensible because the page doesn't split them between governmental and business-type funds, and the extraction's decision_needed[] records it. Receipts, beginning balance and ending balance are therefore all null, and the identity can't be checked."},
-    {"severity": "warning", "path": "balance_sheet", "page": 1,
-     "extracted": null, "on_page": "Only page 26 (Budgetary Comparison Schedule - All Fund Types) is in the trimmed PDF",
-     "issue": "The trimmed PDF has no basic statements: no Statement of Net Position, no governmental funds statement, no proprietary statement. The report needs re-trimming. The extraction's decision_needed[] covers it."},
-    {"severity": "warning", "path": "basis", "page": 1,
-     "extracted": "GAAP", "on_page": "Actual Amounts (Budgetary Basis)",
-     "issue": "Basis is recorded as GAAP, but every disbursement figure is a budgetary-basis (cash) charge to appropriations, not a GAAP expenditure or expense. Governmental lines don't come from the governmental funds statement. Business-type lines don't come from the proprietary statement."},
-    {"severity": "warning", "path": "detail[].budget_final", "page": 1,
-     "extracted": null, "on_page": "Original Budget column; variance column headed 'Variance with Final Budget' equals Actual minus Original (e.g. 1,246,353 - 1,589,607 = -343,254)",
-     "issue": "The variance is computed against the original budget, so the original budget appears to be the final budget. budget_final could be the Original Budget figures (1,589,607; 140,636; 1,349,297; 861,092; 3,526,954; 214,246; 7,860,641). The extraction left them null."}
+    {"severity": "warning", "path": "receipts[6].category", "page": 1,
+     "extracted": "other", "on_page": "Miscellaneous 82,419",
+     "issue": "The only keno money in the trim is the Keno fund's 'Keno revenue' 54,531 (p4), which is 66% of this line, and no other general receipt line covers keno. If keno is inside 'Miscellaneous', the dominant category would be keno/lottery. The page doesn't show where keno is reported (it could also be inside 'City taxes and fees'), so 'other' with review is defensible, but this needs a check."},
+    {"severity": "warning", "path": "detail[0].budget_final", "page": 3,
+     "extracted": null, "on_page": "Original Budget 1,589,607 (and the other function lines)",
+     "issue": "budget_final is null on all 7 p3 lines because only 'Original Budget' is printed. The variance column is headed 'Variance with Final Budget' and equals Actual minus Original (e.g. 1,246,353 - 1,589,607 = -343,254), so the original budget is also the final budget and could have been recorded."},
+    {"severity": "warning", "path": "transfers_out", "page": 1,
+     "extracted": 644278, "on_page": "Interfund transfers, net, in (out) (644,278)",
+     "issue": "This is a net government-wide figure. The transfers within governmental funds (Law Enforcement transfer in 145,729; Keno and Reading Center out 26,705, p4) have no matching sending fund in the trim, because the governmental funds revenue/expenditure statement isn't there. The trim can't show whether the p3 governmental charges to appropriations (e.g. General government 1,246,353) include transfers out."}
   ]
 }
