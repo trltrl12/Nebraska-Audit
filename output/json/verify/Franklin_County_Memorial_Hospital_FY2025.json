@@ -1,22 +1,9 @@
 {
   "stem": "Franklin_County_Memorial_Hospital_FY2025",
-  "values_checked": 119,
+  "values_checked": 146,
   "issues": [
-    {"severity": "error", "path": "missing", "page": 5,
-     "extracted": null,
-     "on_page": "Schedule 1 Net Patient Service Revenue, 2025 Total column: Acute routine service 42,919; Swing-bed 34,212; Observation 217,354; Operating and recovery rooms 114,806; Anesthesiology 19,879; Radiology 1,534,467; Laboratory 825,541; Blood bank 9,708; Inhalation therapy 9,442; Physical therapy 620,141; Occupational therapy 77,248; Speech therapy 10,296; Electrocardiology 84,517; Cardiac rehabilitation 212,939; Pharmacy 532,966; Outpatient clinics 59,952; Emergency room 621,856; Rural health clinics Franklin 807,644; Red Cloud -; Gross patient service revenue 5,835,887; Charges forgone under charity care policy 19,511; Contractual adjustments: Medicare and Medicaid - Hospital 111,499; Medicaid directed payments 561,153; Other adjustments - Hospital (626,585); Adjustments and discounts - Clinics (62,447); Total contractual adjustments (16,380); Net patient service revenue 5,799,996",
-     "issue": "[fixed] Schedule 1 is a supplementary revenue schedule printed in the trimmed PDF, but none of its lines (and no detail_totals entry for 5,799,996) are in detail[]. The extractor's reason (that the signs 'do not foot cleanly') does not hold: 5,835,887 - 19,511 = 5,816,376, and 5,816,376 + 111,499 + 561,153 - 626,585 - 62,447 = 5,799,996, which matches the printed net. Adjustment lines print with mixed signs, so a person may need to settle the sign convention, but the schedule does foot."},
-    {"severity": "warning", "path": "receipts[3].category", "page": 3,
-     "extracted": "property tax", "on_page": "Tax revenue 253,495",
-     "issue": "The label does not name the tax. Property tax is inferred from the 'Property taxes receivable' asset (p1), which is reasonable for a county hospital, but it is an assumption. The strict rule for an unlabeled tax line would be 'taxes (unlabeled)'."},
     {"severity": "warning", "path": "receipts[4].category", "page": 3,
      "extracted": "donations/contributions", "on_page": "Noncapital grants and contributions 44,613",
-     "issue": "The page doesn't say whether this is government grants (state aid or federal grants) or private gifts. It is a judgment call and already marked review."},
-    {"severity": "warning", "path": "detail[3..26].detail_category", "page": 7,
-     "extracted": "supplies and materials", "on_page": "Professional care of patients - Supplies and Other (Radiology, Laboratory, Blood bank, Emergency room, etc.)",
-     "issue": "Department-level 'Supplies and Other' amounts under professional care of patients went to 'supplies and materials', while Pharmacy and Medical and surgical supplies went to 'medical supplies and services'. Lab, blood bank and radiology supplies are probably medical supplies. This is a judgment call, and the treatment is inconsistent within the schedule."},
-    {"severity": "warning", "path": "detail[39].detail_category", "page": 8,
-     "extracted": "utilities (power, gas, phone)", "on_page": "Plant operations - Supplies and Other 136,647",
-     "issue": "The schedule doesn't say plant operations is utilities. It is a judgment call and already marked review."}
+     "issue": "The line mixes grants and contributions, and the page doesn't say whether they came from a government or a private donor. If they are government grants, intergovernmental/state aid or federal grants fits better. The line is already marked review."}
   ]
 }
