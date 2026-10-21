@@ -1,0 +1,30 @@
+{
+  "stem": "Saline_County_Crete_Railroad_Transportation_Safety_District_B2526",
+  "values_checked": 9,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "receipts[3].amount",
+      "page": 1,
+      "extracted": 9176,
+      "on_page": 9178,
+      "issue": "[fixed 2026-10-21: Other receipts 9,178 as printed, discrepancies removed, decision_needed added for worksheet vs form] Line 14 'Local Receipts: Other', column 2 (Actual/Estimated 2024-2025) reads 9,178.00, not 9,176. With 9,178 the lines add up exactly to the printed Total Resources Available: 64,509 + 163 + 2,627 + 9,178 = 76,477."
+    },
+    {
+      "severity": "error",
+      "path": "report_discrepancies",
+      "page": 1,
+      "extracted": "2 entries (totals diff 2; reconcile diff 2)",
+      "on_page": "no discrepancy: 0 + 76,477 - 1,477 = 75,000",
+      "issue": "[fixed 2026-10-21: Other receipts 9,178 as printed, discrepancies removed, decision_needed added for worksheet vs form] Both report_discrepancies entries come from the misread 9,176. The page adds up (lines 6-16 = 76,477; 76,477 - 1,477 = 75,000 balance forward), so both entries should be removed."
+    },
+    {
+      "severity": "warning",
+      "path": "decision_needed",
+      "page": 4,
+      "extracted": null,
+      "on_page": "Worksheet 2024-25: property tax 45,313.46, Local Other 8,217.80, total 56,319.51, no disbursements, balance forward 56,319.51; filed form p1: 64,509 / 9,178 / 76,477 / 1,477 / 75,000",
+      "issue": "[fixed 2026-10-21: Other receipts 9,178 as printed, discrepancies removed, decision_needed added for worksheet vs form] The filed Total All Funds page (p1) and the 2024-25 worksheet (p4, 'Worksheet - Do Not Submit') disagree on every prior-year figure. The 2025-26 worksheet (p3) also starts from 56,319.51 cash while the form's 2025-26 column starts from 75,000. Neither page is crossed out. Using p1 is defensible, but which set of FY2025 actuals is right is for a person to decide, and the extraction has no decision_needed entry."
+    }
+  ]
+}
