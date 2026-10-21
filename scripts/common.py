@@ -14,6 +14,7 @@ FILE_LIST = OUTPUT / "file_list.csv"
 MANIFEST = OUTPUT / "manifest.csv"
 DOWNLOAD_ERRORS = OUTPUT / "download_errors.csv"
 FLAGGED = OUTPUT / "flagged.csv"
+VALIDATED = OUTPUT / "validated.csv"   # stem + hash of each JSON as last validated
 LONG_CSV = OUTPUT / "cashflow_long.csv"
 SUMMARY_CSV = OUTPUT / "cashflow_summary.csv"
 PROGRESS_CSV = OUTPUT / "progress.csv"
@@ -95,8 +96,9 @@ BS_SECTIONS = {
 }
 
 # Absolute tolerance in dollars, plus a relative tolerance on the largest figure involved.
-ABS_TOL = float(os.environ.get("RECONCILE_ABS_TOL", "10"))
-REL_TOL = float(os.environ.get("RECONCILE_REL_TOL", "0.0005"))
+# $1 and no relative slack, matching validate.py's rule (over $1 is flagged).
+ABS_TOL = float(os.environ.get("RECONCILE_ABS_TOL", "1"))
+REL_TOL = float(os.environ.get("RECONCILE_REL_TOL", "0"))
 
 
 def read_csv(path):
@@ -300,3 +302,16 @@ def reconcile_proprietary(d):
     comp = beg + sum(amt(p.get(k)) or 0 for k in PROPRIETARY_FIELDS)
     return dict(computed=round(comp, 2), ending=end, difference=round(end - comp, 2),
                 reconciles=abs(end - comp) <= tol(beg, end))
+
+
+def json_hash(stem):
+    """Short content hash of output/json/<stem>.json and its verify file (None if absent)."""
+    import hashlib
+    p = JSON_DIR / f"{stem}.json"
+    if not p.exists():
+        return None
+    h = hashlib.sha1(p.read_bytes())
+    v = JSON_DIR / "verify" / f"{stem}.json"
+    if v.exists():
+        h.update(v.read_bytes())
+    return h.hexdigest()[:16]

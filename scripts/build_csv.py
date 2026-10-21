@@ -10,7 +10,7 @@ from collections import OrderedDict
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from common import (BS_SECTIONS, DETAIL_CSV, DOWNLOAD_ERRORS, FILE_LIST, FLAGGED, LONG_CSV, MANIFEST,  # noqa: E402
+from common import (VALIDATED, json_hash, BS_SECTIONS, DETAIL_CSV, DOWNLOAD_ERRORS, FILE_LIST, FLAGGED, LONG_CSV, MANIFEST,  # noqa: E402
                     PROGRESS_CSV, PROPRIETARY_FIELDS, SUMMARY_CSV, amt, balance_sheet_check, bs_total,
                     REVIEW_CSV, fund_type, page_ranges, load_reports, page, read_csv, reconcile, reconcile_business,
                     reconcile_proprietary, write_csv)
@@ -62,6 +62,7 @@ def main():
     reviews = {}
     for r in read_csv(REVIEW_CSV):
         reviews[r["filename"]] = reviews.get(r["filename"], 0) + 1
+    validated = {r["filename"]: r.get("hash") for r in read_csv(VALIDATED)} if VALIDATED.exists() else {}
     flagged = {}
     for r in read_csv(FLAGGED):
         flagged.setdefault(r["filename"], []).append(f"{r['check']}: {r['reason']}")
@@ -169,6 +170,8 @@ def main():
         if not m.get("trimmed_file"):
             status = ("not_applicable" if (m.get("flag") or "").startswith("not_financial_report")
                       else "no_statements_found")
+        elif stem in extracted and validated.get(stem) != json_hash(stem):
+            status = "awaiting_validation"   # JSON changed since validate.py last checked it
         elif stem in flagged:
             status = "flagged"
         elif stem in extracted:

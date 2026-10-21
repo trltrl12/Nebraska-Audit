@@ -29,7 +29,7 @@ from common import (TRIMMED, DETAIL_EXPENSE_CATEGORIES, DETAIL_REVENUE_CATEGORIE
                     ASSET_CATEGORIES, BS_SECTIONS, LIABILITY_CATEGORIES, balance_sheet_check,
                     DISBURSEMENT_CATEGORIES, FLAGGED, FUND_TYPES, PROPRIETARY_FIELDS, REVIEW_CSV,
                     RECEIPT_CATEGORIES, amt, fund_type, load_reports, page, reconcile, reconcile_business,
-                    reconcile_proprietary, reported_total, sum_items, write_csv, JSON_DIR)
+                    reconcile_proprietary, reported_total, sum_items, write_csv, JSON_DIR, VALIDATED, json_hash)
 import pagecheck  # noqa: E402
 
 FLAG_OVER = 1.0      # dollars: larger differences are flagged
@@ -206,7 +206,9 @@ def check(stem, d):
     # Balance sheet / statement of net position
     bs = d.get("balance_sheet")
     if not bs:
-        f("balance", "no balance_sheet recorded")
+        # Budget forms have no balance sheet by design (extractor rules: balance_sheet null).
+        if not stem.endswith("_B2526"):
+            f("balance", "no balance_sheet recorded")
     else:
         for sec, cats in (("assets", ASSET_CATEGORIES), ("liabilities", LIABILITY_CATEGORIES)):
             for it in bs.get(sec) or []:
@@ -419,9 +421,10 @@ def review_items(stem, d):
 
 
 def main():
-    rows, review, n = [], [], 0
+    rows, review, n, stems = [], [], 0, []
     for stem, d, err in load_reports():
         n += 1
+        stems.append(stem)
         if err:
             rows.append(dict(filename=stem, check="schema", reason=err))
             continue
@@ -430,6 +433,7 @@ def main():
         review.extend(review_items(stem, d))
         review.extend(rvs)
     write_csv(FLAGGED, rows, FLAG_FIELDS)
+    write_csv(VALIDATED, [dict(filename=s, hash=json_hash(s)) for s in sorted(stems)], ["filename", "hash"])
     write_csv(REVIEW_CSV, review, REVIEW_FIELDS)
     print(f"validated {n} reports; {len({r['filename'] for r in rows})} flagged ({len(rows)} issues); "
           f"{len(review)} review items")
