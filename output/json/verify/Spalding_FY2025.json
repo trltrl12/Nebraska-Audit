@@ -1,0 +1,46 @@
+{
+  "stem": "Spalding_FY2025",
+  "values_checked": 71,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "missing",
+      "page": 15,
+      "extracted": null,
+      "on_page": "Budgetary Comparison Schedule, Business-Type Activities: Electric actual 854,534 (budget 1,354,900); Sewer 24,234 (budget 21,550); Water 105,315 (budget 120,400)",
+      "issue": "[fixed] The business-type funds have no other detail schedule. The rules say to record the budget schedule's lines for every fund without a more detailed schedule, including each utility fund, so these three lines belong in detail (fund_type business-type, section expenditure, category utilities, detail_category not itemized, with budget_final). They are 'Disbursements and Transfers', so the Electric transfer (62,013) is probably inside its line; flag that with review. The extractor left out the whole budget schedule."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[0].category",
+      "page": 17,
+      "extracted": "other",
+      "on_page": "Schedule of Expenditures - Governmental Funds, Total column (Personal Services 121,053; Contracted Services 70,350; Materials and Supplies 126,143; Other Operating Expenses 226,802)",
+      "issue": "544,348 of detail spending is in category other because only the Total column was recorded. The fund columns (General, Road, Lottery, Ambulance, Garbage, Fire Hall, Police, Library) each have a clear function, so recording them per fund would give real functions. The 8 columns are over the 6-fund cap, which makes this a judgment call. Applies to detail[0]-detail[3]."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[0].fund",
+      "page": 16,
+      "extracted": "Nonmajor funds (combined)",
+      "on_page": "Total (all 8 governmental funds, including General and Road)",
+      "issue": "The label is misleading: the Total column covers all governmental funds, major funds included, not only nonmajor ones."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[5].split_from",
+      "page": 16,
+      "extracted": "Debt Service 10,306 split 6,820 / 3,486",
+      "on_page": "Debt Service 10,306 (Road Fund p16; Total p17); Road Fund principal 6,820 / interest 3,486 on p7",
+      "issue": "The split comes from the fund statement (p7) and not from the schedule itself. It is defensible because it is the same Road Fund money, but check it."
+    },
+    {
+      "severity": "warning",
+      "path": "proprietary",
+      "page": 13,
+      "extracted": null,
+      "on_page": "Statement of Cash Flows - Proprietary Funds Totals: operating 89,968; noncapital financing (23,901); capital and related (106,286); investing 13,046; beginning 596,152; ending 568,979",
+      "issue": "The business-type funds are reported on the accrual basis and a proprietary cash-flow statement is printed, but proprietary is null because basis = cash. This is a schema judgment call."
+    }
+  ]
+}
