@@ -1,46 +1,15 @@
 {
   "stem": "Wayne_FY2025",
-  "values_checked": 220,
+  "values_checked": 217,
   "issues": [
-    {
-      "severity": "error",
-      "path": "receipts[15].category",
-      "page": 8,
-      "extracted": "other",
-      "on_page": "Other revenue 168,396 (operating revenue; SoA p2 counts all business-type operating revenue 11,895,435, incl. Transfer Station 12,000, as Charges for Services)",
-      "issue": "[fixed] The report's own Statement of Activities classifies this operating revenue as charges for services; category should be charges for services/fees (with review), not other"
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[8].category",
-      "page": 5,
-      "extracted": "federal grants",
-      "on_page": "Grant revenue 364,820 (General 150,000, nonmajor Community Development 214,820)",
-      "issue": "Grant source not printed; federal is an assumption (Community Development is likely CDBG, but the General Fund 150,000 may be state or private). Already marked review"
-    },
-    {
-      "severity": "warning",
-      "path": "balance_sheet.liabilities[5].category",
-      "page": 1,
-      "extracted": "accrued liabilities",
-      "on_page": "Compensated absences - noncurrent 281,857",
-      "issue": "Rules put compensated absences due soon in accrued liabilities; this is the noncurrent portion, so other liabilities or debt - due in more than one year may fit better"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[35].category",
-      "page": 13,
-      "extracted": "other",
-      "on_page": "LB840 Fund Other income 321,529 (budgetary basis)",
-      "issue": "Budget-basis other income is 321,529 while GAAP other income is 35,000; Note A (p15) shows a (286,529) cash-to-accrual adjustment, so the line is probably mostly LB840 loan repayments (principal), which are not revenue. Already marked review; the amount matches the page"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[25].detail_category",
-      "page": 12,
-      "extracted": "highway allocation",
-      "on_page": "Street Fund Intergovernmental 904,399",
-      "issue": "The page does not break out highway allocation; this is an assumption (already marked review)"
-    }
+    {"severity": "warning", "path": "receipts[8].category", "page": 5,
+     "extracted": "federal grants", "on_page": "Grant revenue 364,820 (General 150,000, Other Governmental 214,820)",
+     "issue": "grantor not stated; federal is an assumption (also detail General Grant revenue 32,784 and Community Development 214,820); marked review"},
+    {"severity": "warning", "path": "balance_sheet.liabilities[5].category", "page": 1,
+     "extracted": "accrued liabilities", "on_page": "Compensated absences - noncurrent 281,857 (noncurrent liabilities)",
+     "issue": "rules define accrued liabilities as compensated absences due soon; a noncurrent balance may fit other liabilities"},
+    {"severity": "warning", "path": "ending_investments", "page": 4,
+     "extracted": null, "on_page": "Investments 1,125,195 (Total Governmental Funds, balance sheet)",
+     "issue": "investments are a separate line on the governmental funds balance sheet but ending_investments is null (mentioned only in notes)"}
   ]
 }
