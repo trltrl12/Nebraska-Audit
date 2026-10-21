@@ -2,20 +2,18 @@
   "stem": "Clearwater_FY2025",
   "values_checked": 44,
   "issues": [
-    {"severity": "warning", "path": "receipts[8].category", "page": 5,
-     "extracted": "intergovernmental/state aid", "on_page": "Capital grants 6,543 (nonoperating receipts)",
-     "issue": "Grant source not stated (could be federal); capital grants might also be treated as business_type.other_financing (capital contribution) rather than a receipt. Amount and roll-forward are correct as entered."},
-    {"severity": "warning", "path": "disbursements[12].category", "page": 5,
-     "extracted": "debt service principal", "on_page": "Loan payments, principal and interest (100,999)",
-     "issue": "One printed line combines principal and interest; the whole amount is recorded as principal. The page gives no split."},
-    {"severity": "warning", "path": "receipts[4].category", "page": 3,
-     "extracted": "donations/contributions", "on_page": "Grants and donations 6,688",
-     "issue": "Mixed line: grants may be from governments (intergovernmental/federal grants). No breakdown printed. Needs a review flag naming the mix."},
-    {"severity": "warning", "path": "beginning_cash", "page": 3,
-     "extracted": 349028, "on_page": "BEGINNING FUND BALANCES 349,028",
-     "issue": "Modified cash basis: the governmental statement rolls forward fund balances (assets net of 9,769 accounts payable/accrued expenses on p2), not cash. Ending 381,719 is total fund balance; governmental cash and CDs total 391,488. Defensible under the cash-basis rule, but beginning_cash/ending_cash are not pure cash."},
-    {"severity": "warning", "path": "detail", "page": 6,
-     "extracted": [], "on_page": "Budgetary Comparison Information (report p17): budgetary-basis disbursements by function (General government 281,018, Police and fire 14,332, Street 129,273, Culture and recreation 16,155, Economic development 54,733, Transfers 100,292; Sewer 146,922, Water 47,099, Trash 47,987)",
-     "issue": "Budget schedule not recorded in detail. It isn't more detailed than the basic statements and mixes in transfers and capital outlay, so leaving it out to avoid double counting is defensible. Noted for review."}
+    {"severity": "error", "path": "missing", "page": 7,
+     "extracted": "detail: [] (budgetary comparison p7 left out as double counting)",
+     "on_page": "Budgetary Comparison Information, Actual (Budgetary Basis) / Final Budget: Receipts and transfers 860,035 / 652,922; General government 281,018 / 226,162; Police and fire 14,332 / 37,827; Street 129,273 / 497,600; Culture and recreation 16,155 / 94,626; Economic development 54,733 / 134,696; Transfers 100,292 / 75,000; Total governmental-type activities 595,803; Sewer 146,922 / 38,000; Water 47,099 / 176,524; Trash 47,987 / 108,050; Total business-type activities 242,008; Total disbursements 837,811",
+     "issue": "the only supplementary (budget-to-actual) schedule in the trim is not in detail[]. The rules say detail is extra detail kept separate from receipts/disbursements, and double counting is only across schedules, so recording the statements does not exclude it. Its lines (Transfers 100,292 as other financing) and totals should be in detail/detail_totals"},
+    {"severity": "warning", "path": "receipts[0].split_from", "page": 4,
+     "extracted": "Taxes 85,054 (p4); Statement of Activities p2 prints the whole amount as Property taxes 85,054", "on_page": "Taxes 85,054 (p4); Property taxes 85,054 (p2)",
+     "issue": "the line was not split (one item, full amount), so split_from is misused and will put it on the review list needlessly; the property tax category itself is supported by p2"},
+    {"severity": "warning", "path": "receipts[4].category", "page": 2,
+     "extracted": "donations/contributions", "on_page": "Grants and donations 6,688 = operating grants and contributions: Culture and recreation 985, Street 5,703 (Economic Development fund)",
+     "issue": "mixed label; the 5,703 street/economic development part is likely a government grant (intergovernmental/state aid). Needs the dominant category plus review naming the mix"},
+    {"severity": "warning", "path": "receipts[8]", "page": 6,
+     "extracted": "Capital grants 6,543 as a business-type receipt", "on_page": "Capital grants 6,543 (nonoperating receipts, Sewer)",
+     "issue": "capital grants/contributions can go in business_type.other_financing instead of receipts; defensible as printed among nonoperating receipts, but a judgment call"}
   ]
 }

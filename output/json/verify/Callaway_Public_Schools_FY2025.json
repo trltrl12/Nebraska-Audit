@@ -1,30 +1,18 @@
 {
   "stem": "Callaway_Public_Schools_FY2025",
-  "values_checked": 585,
+  "values_checked": 384,
   "issues": [
-    {
-      "severity": "warning",
-      "path": "detail[118].original_label",
-      "page": 14,
-      "extracted": "643 Web based software",
-      "on_page": "733 Furniture and equipment 0.09",
-      "issue": "[fixed directly] in 2320-30 Executive administration the 0.09 actual sits on the 733 Furniture and equipment row (the row whose 2024 budget is 500.00); the 643 Web based software row is '-' for 2025 (its 2024 budget is 1,000.00). Label should be 733 Furniture and equipment and detail_category equipment purchases; the note saying it is on the 643 row is also wrong"
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[7].category",
-      "page": 2,
-      "extracted": "intergovernmental/state aid",
-      "on_page": "Operating Grants and Contributions - School Nutrition 66,747.11 (p9: 3150 State reimbursements 827.29 + 4210 Federal reimbursements 65,919.82)",
-      "issue": "[fixed directly] mixed line must take the dominant category; 98.8% is federal, so it should be 'federal grants' (detail records the 65,919.82 as federal grants)"
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[11].category",
-      "page": 2,
-      "extracted": "other",
-      "on_page": "Corporate grants 2,000.00",
-      "issue": "function not stated on p2 or p15 (3400 Grants from Corporations); 'other' with review is defensible. Same for detail[163]"
-    }
+    {"severity": "warning", "path": "receipts", "page": 4,
+     "extracted": "16 lines from the Statement of Activities (p2)", "on_page": "Governmental Funds column p4: Local receipts 2,116,621.49; County receipts 11,887.66; State receipts 2,059,112.59; Federal receipts 270,387.97; Sales of lunches 61,269.88; Activities 247,311.32; Interest 52,841.94",
+     "issue": "rules call for governmental lines from the governmental funds statement's Total Governmental Funds column (now in the trim as pp3-4); the extractor kept the Statement of Activities lines because they are finer. Totals agree (4,819,432.85 / 5,276,934.63), but this departs from the rule and some SoA lines are mixed program-receipt groups (e.g. 'Operating Grants and Contributions - Instruction' 405,864.86, source not stated)"},
+    {"severity": "warning", "path": "reported_totals.governmental.receipts", "page": 4,
+     "extracted": {"amount": 4819432.85, "source_page": 2, "computed": "program receipts + general receipts (p2)"}, "on_page": "Total receipts, Governmental Funds column, 4,819,432.85 (p4)",
+     "issue": "the total is printed as-is on p4; source_page could be 4 and the computed flag is unnecessary (p2 prints no single receipts total)"},
+    {"severity": "warning", "path": "report_discrepancies[0].difference", "page": 17,
+     "extracted": 472271.88, "on_page": "2710 regular pupil transportation lines add to 237,086.88 vs printed total 245,408.08 (gap 8,321.20, not 8,319.20); printed 245,408.08 + 40,613.50 = 286,021.58 vs printed pupil transportation total 286,019.58",
+     "issue": "the gap for regular transportation measured against its own printed subtotal is 8,321.20 (total gap 472,273.88); the report also has a 2.00 footing error between its transportation subtotals and total. The report itself doesn't add up either way; this only corrects the stated figure"},
+    {"severity": "warning", "path": "notes", "page": 16,
+     "extracted": "The 0.09 amount in executive administration appears on the 643 row", "on_page": "733 Furniture and equipment ... 0.09",
+     "issue": "notes contradict the detail item, which (correctly, as far as the page shows) puts 0.09 on the 733 Furniture and equipment row"}
   ]
 }
