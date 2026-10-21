@@ -1,46 +1,62 @@
 {
   "stem": "Two_Rivers_Public_Health_Department_FY2025",
-  "values_checked": 224,
+  "values_checked": 236,
   "issues": [
     {
-      "severity": "error",
-      "path": "other_financing",
-      "page": 3,
-      "extracted": -53964,
+      "severity": "warning",
+      "path": "receipts[3].category",
+      "page": 4,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "Local grants 327,582",
+      "issue": "Source of 'Local grants' (local governments vs private grantors) is not stated; could be donations/contributions. Already marked review; same applies to the six detail 'Local' lines (detail[16]-detail[21], county/other local governments)."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[20]",
+      "page": 4,
+      "extracted": "debt service principal 53,964 (outside_printed_total)",
       "on_page": "OTHER FINANCING SOURCES (USES): Loan principal payments (53,964)",
-      "issue": "[fixed] Loan principal payments are debt service spending, not a financing source. Per the outside_printed_total rule (loan payments printed below the total), record as a disbursement, category 'debt service principal', amount 53,964, outside_printed_total: true, and set other_financing to null; reported_totals stay as printed. Roll-forward is unchanged"
+      "issue": "Recorded as a disbursement at the top level but as section 'other financing' in detail[172]; the two treatments are inconsistent. Roll-forward ties either way (2,259,789 + 3,539,202 - 3,096,493 - 53,964 = 2,648,534)."
     },
     {
       "severity": "warning",
-      "path": "detail[172].section",
+      "path": "beginning_cash",
       "page": 5,
-      "extracted": "other financing",
-      "on_page": "Loan principal payments (53,964) under OTHER FINANCING SOURCES (USES)",
-      "issue": "Principal repayment recorded as an other financing line; arguably an expenditure (category 'debt service principal', detail 'debt principal') printed outside the expenditure total"
+      "extracted": null,
+      "on_page": "CASH RESERVE, beginning of year (Actual) 1,550,023",
+      "issue": "[fixed 2026-10-21: beginning_cash 1,550,023 from p5 budget schedule] Beginning cash is printed on the p5 cash-basis budget schedule (its ending 2,207,607 equals ending_cash), but beginning_cash is null. Defensible because it is a budget-basis figure, but it is shown."
     },
     {
       "severity": "warning",
-      "path": "balance_sheet",
-      "page": 2,
-      "extracted": "Statement of Assets, Liabilities, and Fund Balance - Governmental Funds",
-      "on_page": "government-wide Statement of Net Position (report p10) not in trimmed PDF",
-      "issue": "GAAP report: the rules call for the government-wide Statement of Net Position (capital assets 3,368,432, note payable 2,128,587, pension items per the p2 reconciliation; net position 3,891,380). It was not trimmed (trimmed p1 = report p11), so the fund balance sheet was used. Also report pp34-36 (between trimmed p4 = report p33 and p5 = report p37) are not trimmed and may hold schedules; check the source PDF"
+      "path": "detail",
+      "page": 5,
+      "extracted": "p5 Budget and Actual - Cash Basis schedule not recorded",
+      "on_page": "Total revenues budget 4,336,147 / actual 3,756,760; total expenditures budget 4,336,147 / actual 3,099,176",
+      "issue": "The extractor kept the p6 program combining statement (the more detailed one, ties to the GAAP statement) and skipped the p5 cash-basis budget schedule under the no-double-counting rule, so all budget_final values are null and the budget figures are not captured. A defensible choice, noted in notes."
     },
     {
       "severity": "warning",
       "path": "detail[31].detail_category",
-      "page": 5,
+      "page": 6,
       "extracted": "repairs and maintenance",
-      "on_page": "Automobile expenses (detail[31]-detail[39])",
-      "issue": "Judgment call: automobile expenses may be mostly fuel/mileage (fuel or dues, training and travel) rather than repairs"
+      "on_page": "Automobile expenses",
+      "issue": "Judgment call: automobile expenses may be mostly fuel/mileage (applies to all 9 Automobile expenses lines, detail[31]-detail[39]). Likewise Computer expenses (detail[53]-detail[57]) are recorded as professional/contract services but could be supplies or equipment."
     },
     {
       "severity": "warning",
-      "path": "detail[53].detail_category",
-      "page": 5,
-      "extracted": "professional/contract services",
-      "on_page": "Computer expenses (detail[53]-detail[57])",
-      "issue": "Judgment call: computer expenses could be supplies/software or equipment purchases rather than contract services"
+      "path": "detail[1].budget_final",
+      "page": 6,
+      "extracted": "(field absent)",
+      "on_page": "no budget column on p6",
+      "issue": "detail[1] (Infrastructure funds) and detail[2] (Per capita funds) have no budget_final key, unlike every other detail line (null). Schema consistency only."
+    },
+    {
+      "severity": "warning",
+      "path": "missing",
+      "page": null,
+      "extracted": null,
+      "on_page": "report pp34-36 (between the p5 budget schedule, report p33, and the p6 combining statement, report p37) are not in the trimmed PDF",
+      "issue": "Known open trim item: those pages may hold further supplementary schedule lines. Everything on the 6 trimmed pages is in the JSON and every printed total ties."
     }
   ]
 }
