@@ -1,15 +1,15 @@
 {
   "stem": "Deshler_FY2025",
-  "values_checked": 54,
+  "values_checked": 100,
   "issues": [
-    {"severity": "error", "path": "missing", "page": null,
-     "extracted": null, "on_page": "Statement of Revenues, Expenditures, and Changes in Fund Balances - Governmental Funds (report p9) and Statement of Activities (report p7) are not in the trimmed PDF (trimmed pages = report pp5, 6, 8, 12, 13, 14, 30)",
-     "issue": "Governmental receipts, disbursements, transfers and beginning_fund_balance are all absent, so the governmental roll-forward to ending_fund_balance 436,184 cannot be checked. The extractor disclosed this in notes. Re-trim to include report p9 (and p7), then re-extract."},
-    {"severity": "error", "path": "missing", "page": 7,
-     "extracted": null, "on_page": "Budgetary Comparison Schedule - Cash Basis, All Funds (Actual): Taxes 157,258; Sales tax 74,655; Intergovernmental 164,108; Local 1,709,436; Transfers in 1,201,892; TOTAL RECEIPTS 3,307,349; General government 651,526; Public safety 83,942; Public works 223,322; Culture and recreation 152,769; Community development 36,229; Utility operations 1,546,975; Capital outlay 510,441; Debt service 179,847; Miscellaneous/transfers 1,201,892; TOTAL DISBURSEMENTS 4,586,943",
-     "issue": "[fixed] A supplementary schedule printed on the page was left out of detail/detail_totals entirely. The extractor's reason was that the schedule mixes fund types. 'Utility operations' is clearly business-type and transfers go to other financing, but the other lines cannot be split by fund type. Record these lines with a review note, or confirm that skipping them is acceptable."},
-    {"severity": "warning", "path": "ending_cash", "page": 3,
+    {"severity": "warning", "path": "ending_cash", "page": 4,
      "extracted": 210783, "on_page": "Cash 204,953; Cash with County Treasurer 5,830; Restricted cash 210,158 (Total Governmental Funds)",
-     "issue": "Restricted cash 210,158 is left out of ending_cash. This is defensible, but it is a judgment call that should be noted."}
+     "issue": "Restricted cash 210,158 is left out of ending_cash (the computed marker and arithmetic are correct). This is defensible, but it is a judgment call: including it would make ending cash 420,941."},
+    {"severity": "warning", "path": "detail[0..13].fund_type", "page": 9,
+     "extracted": "governmental (all lines except Local and Utility operations)", "on_page": "Budgetary Comparison Schedule - Cash Basis, All Funds",
+     "issue": "The all-funds schedule mixes fund types, and each line was given a single fund type. Several governmental-tagged lines clearly include utility money. For example, Debt service 179,847 is roughly governmental 65,203 (p5) plus utility 94,500 principal and 20,143 interest (p8 cash flows), and Capital outlay 510,441 is far above governmental 221,286. Local 1,709,436, tagged business-type, includes governmental Local 248,097. All of these are marked review, but the fund-type split is an assumption."},
+    {"severity": "warning", "path": "detail[13]", "page": 9,
+     "extracted": -1201892, "on_page": "Miscellaneous/transfers 1,201,892 (budget 420,000)",
+     "issue": "The whole line is treated as transfers out because it equals Transfers in 1,201,892. The label also says 'Miscellaneous', so some of it could be spending. This is defensible (already marked review)."}
   ]
 }

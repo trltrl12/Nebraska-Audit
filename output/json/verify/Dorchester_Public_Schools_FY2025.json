@@ -1,101 +1,54 @@
 {
- "stem": "Dorchester_Public_Schools_FY2025",
- "values_checked": 175,
- "issues": [
-  {
-   "severity": "error",
-   "path": "detail[57]",
-   "page": 7,
-   "extracted": {
-    "original_label": "2710 Vehicle operation",
-    "amount": 196287.81,
-    "section": "expenditure"
-   },
-   "on_page": "p7 Exhibit F Reclassifications column: (125,000.00) on 'Student transportation - regular' (213,033.70 = 2710 Vehicle operation 196,287.81 + 2730 Vehicle servicing 16,745.89); Depreciation Fund receives 'Fund transfers in 125,000.00' (p11)",
-   "issue": "[fixed] A 125,000 transfer to the Depreciation Fund is hidden inside the Exh G transportation spending lines and is also recorded as other financing in detail[68] (Depreciation transfer in), so the same money shows up as both spending and a transfer. Under the hidden-transfer rule, keep the printed lines, add a contra expenditure line of -125,000 (department transportation, split_from 'Student transportation - regular 213,033.70, reclass p7', review) and add an other financing line of -125,000."
-  },
-  {
-   "severity": "error",
-   "path": "detail[74..80]",
-   "page": 13,
-   "extracted": {
-    "Activities receipts total": 188317.73,
-    "section": "revenue"
-   },
-   "on_page": "p4 Other Governmental Funds 'Transfers 35,000.00' in receipts = General Fund 8000 Transfers 35,000 (p10); School Nutrition shows only 10,000 transfer in (p14). Other Gov receipts 386,439.65 = Activities 188,317.73 + Nutrition 197,441.22 + Special Building 680.70, so 25,000 of transfer in sits inside the Activities Fund receipts",
-   "issue": "[fixed] 25,000 transferred in from the General Fund is counted as student activity receipts (Exh J does not print which account holds it). Add a contra revenue line of -25,000 (split_from naming the Exh J receipts p13 and the p4 transfers line, review) and an other financing line of +25,000 for the Activities fund. At the moment detail double-counts the 25,000 as revenue and as the General Fund transfer out (detail[66])."
-  },
-  {
-   "severity": "error",
-   "path": "missing",
-   "page": 18,
-   "extracted": null,
-   "on_page": "Exhibit O Cash Disbursements for Operational Expenses - General Fund (pp18-19): object lines (Salaries and Wages, Benefits, Purchased Professional and Technical Services, Other Purchased Services, Supplies, Capital Assets, Other Expenses) for programs Regular Instruction 2,040,860.75, Flex Spending 42,799.74, LEP 3,574.32, Poverty 49,964.89, Early Childhood 107,623.77, Special Education 487,502.62, Summer School 37,588.55, Guidance 50,304.13, Health 1,428.12, Psych SPED 50,161.56, Psych SPED 3-5 2,640.08, Speech SPED 104,555.50, Speech SPED 3-5 9,193.07, OT SPED 8,857.38",
-   "issue": "[fixed] The object-level lines on pp18-19 are not in the JSON. For these 14 programs Exh O is more detailed than the Exh G 'not itemized' lines, so it should replace them (each program subtotal ties exactly to Exh G). Exh G can still cover the programs that Exh O does not reach in the trimmed PDF. The notes say this was left out on purpose to avoid double counting."
-  },
-  {
-   "severity": "warning",
-   "path": "missing",
-   "page": 19,
-   "extracted": null,
-   "on_page": "Exhibit O ends at 'Occupational Therapy - SPED School Age 8,857.38'; the rest of the schedule (2162 onward) is not in the trimmed PDF. Page 3 (Governmental Funds Balance Sheet) shows only General/Bond/Other columns, with no Exhibit C label and no Total column, so its right-hand half (spread page) also seems not to have been trimmed",
-   "issue": "The trimmed PDF is incomplete (find_pages issue). Page 3's missing Total column has no effect on the figures because the balance sheet uses Exhibit A."
-  },
-  {
-   "severity": "warning",
-   "path": "receipts[2].category",
-   "page": 5,
-   "extracted": "other taxes",
-   "on_page": "Taxes: Other 1,254,593.18 = General 1,219,136.17 (carline 1,620.26 + homestead 29,397.14 + property tax credit 1,082,377.72 + nameplate 97,882.54 + pro-rate MV 7,858.51, p8) + Bond 35,457.01 (126.46 + 2,294.40 + 24,732.98 + 7,639.55 + 663.62, p15)",
-   "issue": "About 91% of this line is property tax credit, homestead and pro-rate motor vehicle, which the rules class as intergovernmental/state aid. The Exh G/L lines reconcile to it to the cent (they are not just a partial breakdown, as the review note says), but no page labels them as the breakdown of 'Other', so leaving the line unsplit is defensible. The category and review note need a human decision."
-  },
-  {
-   "severity": "warning",
-   "path": "disbursements[17].source_page",
-   "page": 15,
-   "extracted": 5,
-   "on_page": "Bond principal 585,000.00 is printed on p15; p5 prints only Debt service 589,560.02",
-   "issue": "The split items cite p5, where only the combined figure is printed. The split is supported by Exh L (Bond Fund is the only fund with debt service), and disbursements[18] 4,560.02 is correctly marked computed (3,186.02 + 1,374.00). Page-text matching on p5 will not find 585,000.00 or 4,560.02."
-  },
-  {
-   "severity": "warning",
-   "path": "detail[26..65].department",
-   "page": 9,
-   "extracted": "Instruction / Support Services / Transportation / Other Programs / Federal/State Programs",
-   "on_page": "Program: / Program (cont'd):",
-   "issue": "Exh G prints only the heading 'Program'. The department names were made up by the extractor."
-  },
-  {
-   "severity": "warning",
-   "path": "missing",
-   "page": 9,
-   "extracted": null,
-   "on_page": "4516 IDEA part B pre-school actual '-' budget 3,000.00 (p9); 1291 Special education 3-5 actual '-' budget 25,000.00 (p9); 2171 Physical therapy SPED actual '-' budget 5,000.00 (p9)",
-   "issue": "Exh G lines with no actual amount were left out. Totals are unaffected, but their budget_final amounts are missing."
-  },
-  {
-   "severity": "warning",
-   "path": "detail[7].category",
-   "page": 8,
-   "extracted": "intergovernmental/state aid / county/other local governments",
-   "on_page": "2110 County fines and license fees 14,740.62",
-   "issue": "This is county-distributed fine and license money. It could be classed as fines and forfeitures; intergovernmental is defensible."
-  },
-  {
-   "severity": "warning",
-   "path": "detail[116].detail_category",
-   "page": 16,
-   "extracted": "land and buildings",
-   "on_page": "Other purchases property services 5,841.15",
-   "issue": "'Purchased property services' usually means repairs and maintenance, not land and buildings. The line already carries review."
-  },
-  {
-   "severity": "warning",
-   "path": "disbursements[15].category",
-   "page": 4,
-   "extracted": "student activities",
-   "on_page": "Other student support 388,409.36 (Activities 196,395.27 + School Nutrition 190,926.73 + Student Fee 1,087.36)",
-   "issue": "The line is about half food service. The dominant-category choice is defensible and carries review, but the notes do not mention the mix as the rules require."
-  }
- ]
+  "stem": "Dorchester_Public_Schools_FY2025",
+  "values_checked": 328,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "detail[7].category",
+      "page": 8,
+      "extracted": "intergovernmental/state aid / county/other local governments",
+      "on_page": "2110 County fines and license fees 14,740.62",
+      "issue": "[fixed 2026-10-21: code 2110 -> fines and forfeitures] Extractor rules say school code 2110 (county fines and license fees passed to schools) is 'fines and forfeitures' (category and detail_category), not county/other local governments."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[9].category",
+      "page": 5,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "County receipts 16,635.41",
+      "issue": "Exh G (p8) shows this line is 2110 County fines and license fees 14,740.62 (89%) + 2210 ESU receipts 1,894.79. Under the code-2110 rule and the dominant-category rule it would be 'fines and forfeitures' (review)."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[147]",
+      "page": 22,
+      "extracted": "contra -125,000 (Transportation) + other financing -125,000 (detail[149]); Vehicle Operation 'Capital Assets' 125,000 kept as equipment purchases (detail[130])",
+      "on_page": "Exhibit O Vehicle Operation: Capital Assets 125,000.00",
+      "issue": "Exhibit F reclassifies 125,000.00 out of Student transportation - regular as the transfer to the Depreciation Fund (p7, p11), and Exh O p22 prints a Vehicle Operation 'Capital Assets' line of exactly 125,000.00. That line is almost certainly the transfer, so a direct split of detail[130] would be cleaner than a contra line. The notes say Exh O 'does not show it separately', which is not accurate. The net totals are correct either way."
+    },
+    {
+      "severity": "warning",
+      "path": "missing",
+      "page": 9,
+      "extracted": null,
+      "on_page": "4516 IDEA part B pre-school: Actual '-', Final Budget 3,000.00",
+      "issue": "A zero-actual revenue line with a 3,000 budget is not recorded in detail, so its budget is dropped. No effect on actuals."
+    },
+    {
+      "severity": "warning",
+      "path": "detail",
+      "page": 9,
+      "extracted": "Exhibit O program lines with budget_final null",
+      "on_page": "Exh G pp9-10 prints final budgets per program (e.g. 1100 Regular instruction 3,065,727.42; 2610 Operation of buildings 290,000.00)",
+      "issue": "Exh O correctly replaces the Exh G function-only lines, but the General Fund program budgets printed on Exh G are now not recorded anywhere (budgets for programs 1291 and 2171, which had no actuals, are dropped as well)."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[201].detail_category",
+      "page": 16,
+      "extracted": "land and buildings (capital outlay)",
+      "on_page": "Other purchases property services 5,841.15",
+      "issue": "'Purchased property services' is mapped to repairs and maintenance everywhere else in this report. Special Building Fund spending may be capital, but the object label points to repairs and maintenance. Already marked review."
+    }
+  ]
 }

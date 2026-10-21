@@ -1,12 +1,15 @@
 {
   "stem": "Douglas_County_SID_520_FY2025",
-  "values_checked": 12,
+  "values_checked": 40,
   "issues": [
-    {"severity": "warning", "path": "beginning_cash", "page": 1,
-     "extracted": 852915, "on_page": "Fund balances at beginning of year 852,915 (Budgetary Basis)",
-     "issue": "Assumption: the only page trimmed is Schedule 1 (budgetary basis, unaudited); budgetary fund balances used as beginning/ending cash and basis set to cash per manifest. No basic statements or balance sheet in the trimmed PDF (balance_sheet empty), so the trim may have missed the statement pages."},
-    {"severity": "warning", "path": "ending_cash", "page": 1,
-     "extracted": 933915, "on_page": "Fund balances at end of year 933,915",
-     "issue": "Same assumption as beginning_cash: a budgetary fund balance, not a printed cash balance."}
+    {"severity": "warning", "path": "balance_sheet", "page": 1,
+     "extracted": "empty (no statement in trim)", "on_page": "Trimmed PDF is 2 pages: combined fund revenues/expenditures + Statement of Activities (p1) and Schedule 1 (p2); no Statement of Net Position / Balance Sheet",
+     "issue": "Balance sheet, cash and debt balances are not in the trimmed PDF (source likely has a combined Statement of Net Position and Governmental Funds Balance Sheet page). Extraction correctly left them empty/null; check the source PDF / page finder."},
+    {"severity": "warning", "path": "receipts[1].category", "page": 1,
+     "extracted": "property tax (-12,246)", "on_page": "Collection fees on property taxes - County Treasurer (12,246)",
+     "issue": "Treasurer collection fees printed as a negative revenue line and kept as negative property tax (as printed, flagged review). Defensible, but they are really a treasurer-fee expense (detail object 'tax refunds/treasurer fees'); confirm the treatment you want."},
+    {"severity": "warning", "path": "disbursements[4].category", "page": 1,
+     "extracted": "utilities", "on_page": "Utilities 21,719",
+     "issue": "SID 'Utilities' is probably street lighting (CLAUDE rules put street lighting under streets/highways). Judgment call; already marked review."}
   ]
 }
