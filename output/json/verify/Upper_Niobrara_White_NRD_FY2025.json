@@ -1,0 +1,18 @@
+{
+  "stem": "Upper_Niobrara_White_NRD_FY2025",
+  "values_checked": 100,
+  "issues": [
+    {"severity": "warning", "path": "report_discrepancies[3]", "page": 1,
+     "extracted": "balance diff 1 (assets lines 1,276,434 vs printed 1,276,435)", "on_page": "Total liabilities 56,435 + total net position 1,219,999 = 1,276,434; printed TOTAL LIABILITIES AND NET POSITION 1,276,435",
+     "issue": "The printed liabilities-plus-net-position total also exceeds its parts by 1 (rounding), so total_assets 1,276,435 vs total_liabilities + total_equity 1,276,434 will show a $1 balance gap. The entry's note only mentions the asset side."},
+    {"severity": "warning", "path": "disbursements[*].category", "page": 4,
+     "extracted": "natural resources/conservation (no review)", "on_page": "Expenditures listed by object only",
+     "issue": "Notes say 'listed by object' but the lines don't carry the review flag the rules call for."},
+    {"severity": "warning", "path": "detail[11].detail_category", "page": 5,
+     "extracted": "not itemized", "on_page": "Personnel expenses 14,297",
+     "issue": "'not itemized' is for function totals with no object breakdown; Personnel expenses is an object line."},
+    {"severity": "warning", "path": "detail[17].detail_category", "page": 5,
+     "extracted": "dues, training and travel", "on_page": "Licenses, fees, elections, commisions 8,864",
+     "issue": "Mixed line (licenses/fees, election costs, commissions); category is a judgment call."}
+  ]
+}

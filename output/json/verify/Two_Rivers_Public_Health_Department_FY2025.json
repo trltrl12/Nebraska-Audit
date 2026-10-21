@@ -1,0 +1,21 @@
+{
+  "stem": "Two_Rivers_Public_Health_Department_FY2025",
+  "values_checked": 224,
+  "issues": [
+    {"severity": "error", "path": "other_financing", "page": 3,
+     "extracted": -53964, "on_page": "OTHER FINANCING SOURCES (USES): Loan principal payments (53,964)",
+     "issue": "Loan principal payments are debt service spending, not a financing source. Per the outside_printed_total rule (loan payments printed below the total), record as a disbursement, category 'debt service principal', amount 53,964, outside_printed_total: true, and set other_financing to null; reported_totals stay as printed. Roll-forward is unchanged"},
+    {"severity": "warning", "path": "detail[172].section", "page": 5,
+     "extracted": "other financing", "on_page": "Loan principal payments (53,964) under OTHER FINANCING SOURCES (USES)",
+     "issue": "Principal repayment recorded as an other financing line; arguably an expenditure (category 'debt service principal', detail 'debt principal') printed outside the expenditure total"},
+    {"severity": "warning", "path": "balance_sheet", "page": 2,
+     "extracted": "Statement of Assets, Liabilities, and Fund Balance - Governmental Funds", "on_page": "government-wide Statement of Net Position (report p10) not in trimmed PDF",
+     "issue": "GAAP report: the rules call for the government-wide Statement of Net Position (capital assets 3,368,432, note payable 2,128,587, pension items per the p2 reconciliation; net position 3,891,380). It was not trimmed (trimmed p1 = report p11), so the fund balance sheet was used. Also report pp34-36 (between trimmed p4 = report p33 and p5 = report p37) are not trimmed and may hold schedules; check the source PDF"},
+    {"severity": "warning", "path": "detail[31].detail_category", "page": 5,
+     "extracted": "repairs and maintenance", "on_page": "Automobile expenses (detail[31]-detail[39])",
+     "issue": "Judgment call: automobile expenses may be mostly fuel/mileage (fuel or dues, training and travel) rather than repairs"},
+    {"severity": "warning", "path": "detail[53].detail_category", "page": 5,
+     "extracted": "professional/contract services", "on_page": "Computer expenses (detail[53]-detail[57])",
+     "issue": "Judgment call: computer expenses could be supplies/software or equipment purchases rather than contract services"}
+  ]
+}
