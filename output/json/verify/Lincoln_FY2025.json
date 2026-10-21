@@ -1,30 +1,28 @@
 {
   "stem": "Lincoln_FY2025",
-  "values_checked": 399,
+  "values_checked": 339,
   "issues": [
-    {
-      "severity": "warning",
-      "path": "report_discrepancies",
-      "page": 8,
-      "extracted": null,
-      "on_page": "Total Expenditures 51,386,753 vs line items 51,386,754",
-      "issue": "[fixed: recorded in report_discrepancies] Federal Grants Fund budget schedule: printed total expenditures (detail_totals[5] = 51,386,753) is $1 less than the sum of its printed lines (51,386,754). The cause is the General Government subtotal on p7: 271,463 + 125 + 2,985,922 = 3,257,510, but 3,257,509 is printed. The detail items are transcribed correctly, but this report discrepancy (difference -1, p8) is not recorded in report_discrepancies, unlike the matching General Fund and Street Construction rounding entries."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[10].category",
-      "page": 4,
-      "extracted": "charges for services/fees",
-      "on_page": "Reimbursement for Services 22,156,615",
-      "issue": "The label says 'Reimbursement' and the rules give reimbursements their own category (reimbursements/refunds). charges for services/fees is defensible because these are payments for services the city provides, but it is a judgment call. The same applies to detail[6] (General, 5,877,792), detail[42] (Street Construction, 5,332) and detail[58] (Federal Grants, 1,062,747), all detail_category 'other charges for services'."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[48].category",
-      "page": 6,
-      "extracted": "capital outlay",
-      "on_page": "Capital Outlay 119,818 (Expenditures -- Streets and Highways)",
-      "issue": "Capital outlay detail lines are categorized inconsistently. The Street Construction line uses category 'capital outlay'. The Federal Grants capital outlay lines (detail[69], [73], [77], [82]) and the nonmajor capital projects lines (detail[132]-[140]) use the function (public safety, streets/highways...). All use detail_category 'not itemized', although capital outlay is an object, so construction/infrastructure or equipment purchases could apply. The amounts are correct."
-    }
+    {"severity": "error", "path": "missing", "page": 15,
+     "extracted": null,
+     "on_page": "Combining Schedule - General Fund sub-fund columns: Athletic Field & Facilities Improvement (Reimbursement for Services 543,372; Investment Income 4,763; Miscellaneous 173,387; Total Revenues 721,522; Transfers Out (321,698)); Lincoln Area Agency on Aging (Intergovernmental 1,910,254; Permits and Fees 25,192; Reimbursement for Services 101,640; Investment Income 144,134; Donations 2,685; Miscellaneous 534; Total Revenues 2,184,439; Health and Welfare 4,032,200; Miscellaneous 36,152; Total Expenditures 4,068,352; Intrafund Transfers In 2,527,794; Transfers Out (247,635); Sale of Capital Assets 825); 911 Communication (Intergovernmental 946,042; Permits and Fees 756,811; Investment Income 360,095; Miscellaneous 604; Total Revenues 2,063,552; Public Safety 6,493,005; Interest 9,051; Total Expenditures 6,502,056; Intrafund Transfers In 5,968,009); Unemployment Compensation (Property 31); Fast Forward (Investment Income 205,749; Economic Opportunity 3,350,000)",
+     "issue": "detail[] has the General Fund only from the budget-basis schedule (p5), which covers the General Fund column alone: its Aging Assistance 170,164 and Job Programs 15,803 are GF payments, and Fast Forward's 3,350,000 and Aging's 4,032,200 are not in it. The five sub-fund columns on the combining page are printed on no other schedule, so their lines are missing. About 5.18M of revenue and 13.92M of spending are missing. This is the same situation as the county General Fund sub-fund rule."},
+    {"severity": "warning", "path": "decision_needed", "page": 11,
+     "extracted": null, "on_page": "Lincoln Electric System enterprise column: Charges for Services 359,817,000; Total Operating Revenues 382,769,000; Operating Expenses 281,684,000; Net Position 637,099,000",
+     "issue": "The city's business-type totals include LES, which has its own report (Lincoln_Electric_System_FY2025). Adding the two reports together double counts LES. decision_needed[] doesn't have this question."},
+    {"severity": "warning", "path": "receipts[10].category", "page": 4,
+     "extracted": "charges for services/fees", "on_page": "Reimbursement for Services 22,156,615",
+     "issue": "The label says reimbursement, and 'reimbursements/refunds' exists as a category. The amounts (e.g., West Haymarket JPA 10,321,429) look like reimbursed service costs, so charges for services is defensible. Judgment call; also applies to detail[6], detail[42], detail[58], detail[63] (p5-7, p17)."},
+    {"severity": "warning", "path": "receipts[8].category", "page": 4,
+     "extracted": "intergovernmental/state aid", "on_page": "Intergovernmental 114,004,201 (Federal Grants Fund column 47,108,416)",
+     "issue": "About 47.1M of this line is in the Federal Grants Fund column, so it is likely federal. It is kept whole as state aid with review. A person should decide whether to split it by fund column."},
+    {"severity": "warning", "path": "receipts[25].category", "page": 11,
+     "extracted": "intergovernmental/state aid", "on_page": "Grant Revenue 65,152,489 (Lincoln Water System 65,155,077)",
+     "issue": "The grantor isn't stated; it could be federal grants. Already marked for review."},
+    {"severity": "warning", "path": "detail[40].detail_category", "page": 6,
+     "extracted": "other state aid", "on_page": "Street Construction Fund - Intergovernmental 36,474,258",
+     "issue": "Street fund intergovernmental revenue is normally mostly state highway allocation ('highway allocation'). The page doesn't break it down, so this is a judgment call."},
+    {"severity": "warning", "path": "disbursements[22].category", "page": 11,
+     "extracted": "utilities", "on_page": "Personal Services / Contractual Services / Operation and Maintenance / Depreciation / Amortization / Administrative Costs (Total enterprise column)",
+     "issue": "Enterprise expenses by object are all put in 'utilities' (disbursements[22]-[31]). The total column also includes Golf, Parking, Municipal Arena, Emergency Medical Services and Broadband (Other Enterprise Funds 60,819,798 operating expenses), which belong to other functions. Already marked for review."}
   ]
 }
