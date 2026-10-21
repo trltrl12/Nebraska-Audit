@@ -193,9 +193,10 @@ These were diagnosed and fixed in find_pages v6; re-extract and re-verify them a
 - Blank waiver form (all fields $0.00; skipped, no JSON): Youth_and_Family_Crisis_Response_Center_FY2025. Checked 2026-10-21:
   the Auditor's current file is the same approved waiver with $0.00 on every line (no other filing). Extract it as
   all zeros, like Washington_County_SID_5, after the current validate run finishes.
-- Cass_County_SID_9_FY2025, Cass_County_SID_10_FY2025: v6/v7 trims hold their statements; extract them (no JSON yet).
+- Douglas_County_SID_520/575/583/584/615_FY2025: v8 trims add the governmental fund statement (rebuilt from it) but
+  still no balance sheet / Statement of Net Position page.
 - Trimmed to one page (extracted from that page; check the source PDF for missing statements):
-  Douglas_County_SID_520/575/583/584/615/640_FY2025, Hickman_FY2025 (all-fund-types budget schedule only;
+  Douglas_County_SID_640_FY2025, Hickman_FY2025 (all-fund-types budget schedule only;
   disbursements recorded).
 - ~97 Audit filings marked no_statements_found (mostly SIDs) and 72 with no balance statement: page
   finder misses their titles.
