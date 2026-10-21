@@ -2,14 +2,20 @@
   "stem": "Murray_FY2025",
   "values_checked": 75,
   "issues": [
-    {"severity": "warning", "path": "ending_cash", "page": 3,
-     "extracted": 1157412, "on_page": "Fund balances - end 1,157,412 (p3); actual cash on p1 = 309,125 + 37,727 CDs + 5,581 county treasurer = 352,433",
-     "issue": "Governmental beginning/ending 'cash' are fund balances that include 804,979 net due from the business-type funds (p1, gross 845,497 on p2). The water/sewer deficit (business_type.ending -791,279) mirrors the same interfund balance. This is disclosed in notes and the identity holds, but the 'cash' figures overstate cash on hand by about 805k."},
-    {"severity": "warning", "path": "detail", "page": 7,
-     "extracted": "only Water, Sewer, Debt Service lines from p7", "on_page": "Public Works 30,454 (budget 60,000); Capital Outlay 13,208 (budget 669,500)",
-     "issue": "The rules say to record budget-schedule lines for every fund not covered by a more detailed schedule. The Streets and Capital Improvement funds are not on the p6 General Fund schedule, and the p7 Public Works and Capital Outlay lines match Streets-fund amounts exactly (p3). The extractor left them out because p7 mixes funds. Defensible, but these lines and their budgets are missing from detail."},
-    {"severity": "warning", "path": "detail[20].category", "page": 7,
+    {"severity": "warning", "path": "ending_cash", "page": 4,
+     "extracted": 1157412, "on_page": "Fund balances - end 1,157,412 (p4); actual cash on p1 = 309,125 + 37,727 CDs + 5,581 county treasurer = 352,433",
+     "issue": "The governmental beginning/ending 'cash' figures are fund balances. They include 804,979 net due from the business-type funds (p1; gross 845,497 on p3). The water/sewer deficit (business_type.ending -791,279, p5-6) mirrors the same interfund balance. This is disclosed in notes, it follows the rule to use the balance the statement rolls forward, and the identity holds, but the 'cash' figures overstate cash on hand by about 805k."},
+    {"severity": "warning", "path": "detail", "page": 8,
+     "extracted": "only Water, Sewer and Debt Service lines from p8", "on_page": "Public Works 30,454 (budget 60,000); Capital Outlay 13,208 (budget 669,500)",
+     "issue": "[fixed 2026-10-21: added p8 Public Works 30,454 and Capital Outlay 13,208 as Streets fund detail lines with budgets; p8 has no Streets-only receipt lines] The rules say to record budget-schedule lines for every fund not covered by a more detailed schedule. The Streets and Capital Improvement funds are not on the p7 General Fund combining schedule, and the p8 Public Works and Capital Outlay lines match the Streets fund amounts exactly (p4). The extractor left them out because p8 mixes funds. Defensible, but these lines and their budgets are missing from detail."},
+    {"severity": "warning", "path": "detail[20].category", "page": 8,
      "extracted": "debt service principal", "on_page": "Debt Service 100,357",
-     "issue": "Combined loan administration 2,123 + principal 91,972 + interest 6,262 (p5), recorded under principal with review. Acceptable, noted for completeness."}
+     "issue": "This line combines loan administration 2,123, principal 91,972 and interest 6,262 (p6). It is recorded under principal with a review note. Acceptable; listed for completeness."},
+    {"severity": "warning", "path": "disbursements[4].review", "page": 6,
+     "extracted": "no review", "on_page": "Personnel services 17,522; Operating expenses 37,139; Supplies/materials 148,600",
+     "issue": "[fixed 2026-10-21: added listed-by-object review to disbursements[4-6]] Business-type spending is listed only by object. The function 'utilities' follows from the Water/Sewer funds and is correct, but the rule says to add review 'listed by object' to disbursements[4-6]."},
+    {"severity": "warning", "path": "notes", "page": 8,
+     "extracted": "...Read pages 1-8 of 8. Statement of Activities - Cash Basis (p2...) checked...", "on_page": "trimmed PDF has 8 pages",
+     "issue": "The coverage statement 'Read pages 1-8 of 8' matches the 8-page trim and every page is covered (p2 Statement of Activities checked and ties). However, the notes do not end with that phrase; more text follows it."}
   ]
 }
