@@ -1,0 +1,15 @@
+{
+  "stem": "Wayne_Airport_Authority_FY2025",
+  "values_checked": 57,
+  "issues": [
+    {"severity": "warning", "path": "business_type", "page": 4,
+     "extracted": "all lines governmental; business_type null", "on_page": "Balance Sheet - Governmental Fund / Statement of Revenues, Expenditures, and Changes in Fund Balance - Governmental Fund",
+     "issue": "the extractor rules list airport authorities as entirely business-type entities, but this report presents a single governmental fund (GAAP, modified accrual), so the governmental treatment follows the report. Expenditures are by object and were put under general government, since no airport function exists. Confirm this is the intended treatment"},
+    {"severity": "warning", "path": "receipts[1].category", "page": 4,
+     "extracted": "federal grants", "on_page": "Grant income 269,856",
+     "issue": "report doesn't say whether the grant is federal (FAA) or state (NDOT aeronautics); the Statement of Activities (p2) shows it as Capital grants and contributions. Category is an assumption; already marked review"},
+    {"severity": "warning", "path": "detail[6].category", "page": 5,
+     "extracted": "other / miscellaneous revenue", "on_page": "Loan collections 4,177",
+     "issue": "this is repayment of note receivable principal (note receivable - flying club, p3), a budgetary inflow rather than revenue; other financing might fit better than revenue in other. It sits inside the printed Total resources 478,174, so the total stays correct either way"}
+  ]
+}
