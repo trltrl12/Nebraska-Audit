@@ -1,15 +1,12 @@
 {
   "stem": "Douglas_County_SID_520_FY2025",
-  "values_checked": 40,
+  "values_checked": 62,
   "issues": [
-    {"severity": "warning", "path": "balance_sheet", "page": 1,
-     "extracted": "empty (no statement in trim)", "on_page": "Trimmed PDF is 2 pages: combined fund revenues/expenditures + Statement of Activities (p1) and Schedule 1 (p2); no Statement of Net Position / Balance Sheet",
-     "issue": "Balance sheet, cash and debt balances are not in the trimmed PDF (source likely has a combined Statement of Net Position and Governmental Funds Balance Sheet page). Extraction correctly left them empty/null; check the source PDF / page finder."},
-    {"severity": "warning", "path": "receipts[1].category", "page": 1,
-     "extracted": "property tax (-12,246)", "on_page": "Collection fees on property taxes - County Treasurer (12,246)",
-     "issue": "Treasurer collection fees printed as a negative revenue line and kept as negative property tax (as printed, flagged review). Defensible, but they are really a treasurer-fee expense (detail object 'tax refunds/treasurer fees'); confirm the treatment you want."},
-    {"severity": "warning", "path": "disbursements[4].category", "page": 1,
-     "extracted": "utilities", "on_page": "Utilities 21,719",
-     "issue": "SID 'Utilities' is probably street lighting (CLAUDE rules put street lighting under streets/highways). Judgment call; already marked review."}
+    {"severity": "warning", "path": "notes", "page": null,
+     "extracted": "... Read pages 1-3 of 3. Balance sheet from ...", "on_page": "trimmed PDF has 3 pages",
+     "issue": "notes contain 'Read pages 1-3 of 3' (correct N, all 3 pages covered, nothing missing) but the phrase is not at the end of notes as required; later balance-sheet text was appended after it"},
+    {"severity": "warning", "path": "balance_sheet.liabilities[4].category", "page": 1,
+     "extracted": "accrued liabilities", "on_page": "Accrued interest on warrants - Due after one year 21,771",
+     "issue": "accrued liabilities is meant for interest due soon; this interest is printed as due after one year, so 'debt - due in more than one year' or 'other liabilities' may fit better"}
   ]
 }
