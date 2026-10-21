@@ -2,20 +2,45 @@
   "stem": "Cross_County_Community_Schools_FY2025",
   "values_checked": 299,
   "issues": [
-    {"severity": "error", "path": "receipts[12].category", "page": 5,
-     "extracted": "intergovernmental/state aid", "on_page": "County receipts 18,311.55 (= General Fund 2110 County fines and license fees, p8)",
-     "issue": "The whole line is code 2110 county fines and license fees. The extractor rules say code 2110 is 'fines and forfeitures', not state aid."},
-    {"severity": "error", "path": "detail[10].category", "page": 8,
-     "extracted": "intergovernmental/state aid / county/other local governments", "on_page": "2110 County fines and license fees 18,311.55",
-     "issue": "Code 2110 should be category 'fines and forfeitures' with detail_category 'fines and forfeitures'."},
-    {"severity": "warning", "path": "receipts[9]", "page": 6,
-     "extracted": 2581.94, "on_page": "not printed (General Fund Other taxes 2,237,033.57 on p6 less the itemized p8 lines 2,234,451.63)",
-     "issue": "This residual is not a printed line; it plugs the General Fund schedule's own shortfall (p8 Local Sources lines add to 3,846,990.02 but print 3,849,571.96). It is marked computed, split_from and review, and the report_discrepancies entry records it, so it is defensible, but a person should decide whether to keep the plug or leave the Other taxes line partly unsplit."},
-    {"severity": "warning", "path": "receipts[3].computed", "page": 8,
-     "extracted": "General 52,247.64 (p9) ...", "on_page": "3130 Homestead exemption 52,247.64 is on p8",
-     "issue": "The General Fund state-source lines cited as p9 in the computed notes for homestead, property tax credit, nameplate and pro-rate (receipts[3], [4], [5], [6]) are actually on p8. The amounts are correct."},
-    {"severity": "warning", "path": "disbursements[14].category", "page": 5,
-     "extracted": "student activities", "on_page": "Other student support 584,859.25",
-     "issue": "The line combines Activities Fund (327,135.82) and School Nutrition (258,082.43). The dominant category was chosen and the line is marked review; food service is about 44% of it."}
+    {
+      "severity": "error",
+      "path": "receipts[12].category",
+      "page": 5,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "County receipts 18,311.55 (= General Fund 2110 County fines and license fees, p8)",
+      "issue": "[fixed 2026-10-21: category set to fines and forfeitures] The whole line is code 2110 county fines and license fees. The extractor rules say code 2110 is 'fines and forfeitures', not state aid."
+    },
+    {
+      "severity": "error",
+      "path": "detail[10].category",
+      "page": 8,
+      "extracted": "intergovernmental/state aid / county/other local governments",
+      "on_page": "2110 County fines and license fees 18,311.55",
+      "issue": "[fixed 2026-10-21: category and detail_category set to fines and forfeitures] Code 2110 should be category 'fines and forfeitures' with detail_category 'fines and forfeitures'."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[9]",
+      "page": 6,
+      "extracted": 2581.94,
+      "on_page": "not printed (General Fund Other taxes 2,237,033.57 on p6 less the itemized p8 lines 2,234,451.63)",
+      "issue": "This residual is not a printed line; it plugs the General Fund schedule's own shortfall (p8 Local Sources lines add to 3,846,990.02 but print 3,849,571.96). It is marked computed, split_from and review, and the report_discrepancies entry records it, so it is defensible, but a person should decide whether to keep the plug or leave the Other taxes line partly unsplit."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[3].computed",
+      "page": 8,
+      "extracted": "General 52,247.64 (p9) ...",
+      "on_page": "3130 Homestead exemption 52,247.64 is on p8",
+      "issue": "The General Fund state-source lines cited as p9 in the computed notes for homestead, property tax credit, nameplate and pro-rate (receipts[3], [4], [5], [6]) are actually on p8. The amounts are correct."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[14].category",
+      "page": 5,
+      "extracted": "student activities",
+      "on_page": "Other student support 584,859.25",
+      "issue": "The line combines Activities Fund (327,135.82) and School Nutrition (258,082.43). The dominant category was chosen and the line is marked review; food service is about 44% of it."
+    }
   ]
 }
