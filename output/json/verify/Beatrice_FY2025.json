@@ -1,14 +1,22 @@
 {
   "stem": "Beatrice_FY2025",
-  "values_checked": 481,
+  "values_checked": 530,
   "issues": [
     {
       "severity": "warning",
-      "path": "detail[123].category",
-      "page": 19,
+      "path": "detail[44].category",
+      "page": 16,
       "extracted": "other",
-      "on_page": "Capital Outlay - Improvements other than buildings 3,320,960",
-      "issue": "[fixed: recategorized with review note] Line printed under the Capital Outlay heading of B-4, and Exhibit 4 (p6) reports this amount as part of General Fund Capital outlay 3,561,945 (3,320,960 + 240,985 B-3 capital outlay). A specific category ('capital outlay') fits, so it should not be in 'other'. This is 3.3M of the 3.9M Airport spending sitting in 'other'."
+      "on_page": "Opiods Settlement 21,009",
+      "issue": "settlement proceeds are identified on the page; the same report's 'Reimbursements and settlements' line (detail[61]) is reimbursements/refunds, so this could be reimbursements/refunds rather than other"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[147..152].category",
+      "page": 21,
+      "extracted": "streets/highways",
+      "on_page": "C-1 Capital Outlay (Buildings 0, Improvements other than buildings 2,722,523, Machinery and equipment 99,566) and Debt Service (Principal 4,759, Interest 272, Bond issuance expense 40,933)",
+      "issue": "Exhibit 4 (p6) reports the Streets Fund's capital outlay 2,822,089 and debt service separately from highways and streets 1,585,971, and the other funds' identical labels (E-3, G-4) use capital outlay / debt service principal / debt service interest; the Streets lines are filed under the function instead, so the function split won't tie to the statement"
     },
     {
       "severity": "warning",
@@ -16,23 +24,15 @@
       "page": 19,
       "extracted": "other",
       "on_page": "Debt Service - Bond issuance costs 15,275",
-      "issue": "Printed under the Debt Service heading; 'debt service interest' (including fees) fits. Exhibit 4 includes this amount in Airport operations, so 'other' is arguable."
+      "issue": "debt fee filed as airport 'other'; rules put bond issuance costs under debt service interest (Exhibit 4 does include it in Airport operations 595,168, so it's defensible). Also detail[122] Airport 'Buildings' (capital outlay, 0) is 'other' while detail[123] Improvements is 'capital outlay': inconsistent"
     },
     {
       "severity": "warning",
-      "path": "detail[109..122].category",
-      "page": 19,
-      "extracted": "other",
-      "on_page": "Airport Fund personal services / other services and charges / supplies lines",
-      "issue": "No airport function category exists, so 'other' (with review) is defensible. Still, over 600k of Airport operating spending ends up in 'other'."
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[1].category",
-      "page": 6,
-      "extracted": "other",
-      "on_page": "Airport operations 595,168",
-      "issue": "No airport category; 'other' with review is defensible but questionable."
+      "path": "detail[24].detail_category",
+      "page": 15,
+      "extracted": "other state aid",
+      "on_page": "Victim assistance grants 67,199",
+      "issue": "grantor not stated; victim assistance grants are often federal (VOCA) money passed through the state"
     },
     {
       "severity": "warning",
@@ -40,66 +40,31 @@
       "page": 6,
       "extracted": "other",
       "on_page": "MFO payments - other entities 296,574",
-      "issue": "Purpose not stated on the page. 'other' with review is defensible."
+      "issue": "paid out of the Public Safety Capital Improvements Fund (G-3, p32; detail[182]), so public safety might fit better than other"
     },
     {
       "severity": "warning",
-      "path": "detail[148..152].category",
-      "page": 21,
-      "extracted": "streets/highways",
-      "on_page": "C-1 Capital Outlay and Debt Service lines (Improvements 2,722,523; Machinery 99,566; Principal 4,759; Interest 272; Bond issuance expense 40,933)",
-      "issue": "Inconsistent with E-3/F-3, where capital outlay and principal/interest lines use 'capital outlay', 'debt service principal' and 'debt service interest'. Exhibit 4 also prints the Streets Fund amounts under Capital outlay and Debt Service."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[1].category",
-      "page": 15,
-      "extracted": "property tax",
-      "on_page": "Homestead exemption allocation 191,820",
-      "issue": "The category rules put homestead under 'intergovernmental/state aid'. B-3 prints it under Taxes and A-1 property tax 3,227,805 includes it, so the choice is defensible."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[2].category",
-      "page": 15,
-      "extracted": "property tax",
-      "on_page": "Property tax credit 202,804",
-      "issue": "Same as the homestead line: the rules put tax credits under 'intergovernmental/state aid', but the report prints it under Taxes."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[44].category",
-      "page": 16,
-      "extracted": "other",
-      "on_page": "Opiods Settlement 21,009",
-      "issue": "Settlement proceeds printed under Charges for Services. Could be 'reimbursements/refunds' (settlements) instead of 'other'. Review flag is set."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[15].category",
-      "page": 9,
-      "extracted": "charges for services/fees",
-      "on_page": "Lease revenue and interest on leases 134,639",
-      "issue": "Line mixes rentals and lease interest (investment income). Under the mixed-line rule it should carry a review flag, which is missing."
-    },
-    {
-      "severity": "warning",
-      "path": "balance_sheet.liabilities[9]",
-      "page": 2,
-      "extracted": {
-        "category": "accrued liabilities",
-        "original_label": "Compensated absences (noncurrent)"
-      },
-      "on_page": "Noncurrent Liabilities: Compensated absences 1,242,754",
-      "issue": "The rules limit 'accrued liabilities' to compensated absences due soon; this is the noncurrent portion ('other liabilities' or 'debt - due in more than one year'). The label also has '(noncurrent)' added to the printed text."
-    },
-    {
-      "severity": "warning",
-      "path": "detail",
+      "path": "receipts[8].amount",
       "page": 6,
-      "extracted": "nonmajor detail revenue 2,545,126; expenditure 2,948,672",
-      "on_page": "Other Governmental Funds revenues 3,082,642; expenditures 5,004,339",
-      "issue": "The trimmed PDF skips report pages 83, 93-97 and 102-104 (page footers jump 82->84, 92->98, 101->105). Those are probably the other nonmajor fund budget/combining schedules (e.g. capital projects funds, MFO). 537,516 of nonmajor revenue and 2,055,667 of nonmajor spending have no detail. This is a trimming gap, not an extraction error, since every page in the trimmed PDF was read. Trimmed pages 29-31 are statistical tables with nothing to extract."
+      "extracted": 632131,
+      "on_page": 632131,
+      "issue": "the printed report doesn't add across: Exhibit 4's Interest row is 591,292 + 24,411 + 16,427 = 632,130 but the Total prints 632,131, and Miscellaneous (receipts[9]) is 189,686 + 121,135 + 467,061 = 777,882 but the Total prints 777,881. The two $1 rounding offsets cancel in Total Revenues 23,586,304, and neither is in report_discrepancies"
+    },
+    {
+      "severity": "warning",
+      "path": "balance_sheet.liabilities[9].category",
+      "page": 2,
+      "extracted": "accrued liabilities",
+      "on_page": "Noncurrent Liabilities - Compensated absences 1,242,754",
+      "issue": "noncurrent compensated absences; the rules give accrued liabilities as compensated absences due soon, so other liabilities may fit better"
+    },
+    {
+      "severity": "warning",
+      "path": "ending_investments",
+      "page": 4,
+      "extracted": null,
+      "on_page": "Investments 2,480,534; Cash on deposit - county treasurer 168,939 (Exhibit 3 Total)",
+      "issue": "[fixed 2026-10-21: ending_investments 2,480,534 (p4) recorded] ending_cash is only cash and cash equivalents 15,612,590. The GAAP rule calls for cash and cash equivalents/investments, and the separately printed investments 2,480,534 are not recorded anywhere (only mentioned in notes)"
     }
   ]
 }

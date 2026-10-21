@@ -1,27 +1,54 @@
 {
   "stem": "Aurora_Public_Schools_FY2025",
-  "values_checked": 238,
+  "values_checked": 352,
   "issues": [
-    {"severity": "warning", "path": "disbursements[17]", "page": 16,
-     "extracted": 17700, "on_page": "Bond interest 17,200.00; Bond fees 500.00",
-     "issue": "the debt service split is supported (Debt service 397,700 = Bond Fund p16 380,000 + 17,200 + 500), but two printed lines are merged into one item. It is marked computed; separate items would follow 'don't merge lines'"},
-    {"severity": "warning", "path": "detail[13].category", "page": 8,
-     "extracted": "intergovernmental/state aid (county/other local governments)", "on_page": "2110 County fines and license fees 211,162.94",
-     "issue": "fines and forfeitures fits the label (Auburn_Public_Schools codes the same 2110 line that way); judgment call noted by the extractor"},
-    {"severity": "warning", "path": "detail[118]", "page": 4,
-     "extracted": -40000, "on_page": "Exhibit D Other Governmental Funds 'Transfers' receipts 40,000.00, eliminated in Reclassifications (67,001.01)",
-     "issue": "the contra and other financing pair (detail[118]/[119]) is checked and nets to the printed Activities total 805,801.32. That the 40,000 sits in the Activities Fund is an assumption, but a sound one: the Nutrition, Bond, Special Building and QCPU schedules print every line with no transfer. Marked review"},
-    {"severity": "warning", "path": "detail[128]", "page": 4,
-     "extracted": -27001.01, "on_page": "Other student support 1,777,757.45 vs Activities 878,483.70 + Nutrition 926,274.76; Other Governmental Funds 'Transfers' 27,001.01",
-     "issue": "arithmetic is checked (878,483.70 + 926,274.76 - 1,777,757.45 = 27,001.01; other funds disbursements 2,438,609.19 tie). The fund is the 'Activities / School Nutrition (group)' pseudo-fund, which has no detail_totals entry, and the category student activities is assumed. Marked review"},
-    {"severity": "warning", "path": "disbursements[3].amount", "page": 5,
-     "extracted": 341627.70, "on_page": "Exhibit D 341,627.70 / 58,511.72; Exhibit B (p2) prints 337,742.40 / 62,397.02 for Special education school age / 0-5",
-     "issue": "the two basic statements split support services - special education differently (same 400,139.42 total). The extraction follows Exhibit D, which is correct for fund lines; noted for information"},
-    {"severity": "warning", "path": "detail", "page": 19,
-     "extracted": null, "on_page": "Exhibit O object breakdown of General Fund operating expenses (unaudited), p19-20, partial in trimmed PDF",
-     "issue": "the object-level detail is left out (program lines kept 'not itemized'); justified in notes because the trimmed PDF only has part of it"},
-    {"severity": "warning", "path": "receipts[9].category", "page": 5,
-     "extracted": "charges for services/fees", "on_page": "Miscellaneous local receipts 1,268,030.91",
-     "issue": "mixed line (activity receipts ~742k, nutrition sales ~375k, General fees/refunds/misc); dominant-category choice, marked review"}
+    {
+      "severity": "error",
+      "path": "receipts[10].category",
+      "page": 5,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "County receipts 218,726.22 = Exhibit G (p8) 2110 County fines and license fees 211,162.94 + 2210 ESU receipts 7,563.28",
+      "issue": "[fixed 2026-10-21: County receipts to fines and forfeitures (96.5% code 2110); notes corrected] 96.5% of this line is code 2110, which the rules classify as fines and forfeitures, and a mixed line takes its dominant category. detail[13] (2110) is correctly fines and forfeitures, so the statement line should be 'fines and forfeitures' with review naming the 7,563.28 ESU part."
+    },
+    {
+      "severity": "warning",
+      "path": "notes",
+      "page": 8,
+      "extracted": "2110 County fines and license fees kept as county/other local governments (judgment call)",
+      "on_page": "detail[13] '2110 County fines and license fees' is recorded as category/detail_category fines and forfeitures",
+      "issue": "[fixed 2026-10-21: County receipts to fines and forfeitures (96.5% code 2110); notes corrected] Stale sentence: the note contradicts the JSON, which (correctly) uses fines and forfeitures."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[14].category",
+      "page": 5,
+      "extracted": "food service",
+      "on_page": "Other student support 1,777,757.45 = School Nutrition 926,274.76 (p15) + Activities 878,483.70 (p14) - 27,001.01 transfer (p4)",
+      "issue": "Mixed line (food service vs student activities, about 52/48). Dominant category chosen with review; defensible."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[242].fund",
+      "page": 4,
+      "extracted": "Activities / School Nutrition (group)",
+      "on_page": "p4 Other Governmental Funds Transfers 27,001.01 (disbursements); School Nutrition schedule p15 lists only object lines and no transfer; Activities schedule p14 by account",
+      "issue": "The contra -27,001.01 (and the matching other financing detail[243]) is assigned to a combined fund group because no page names the fund. The handling follows the hidden-transfer rule and the totals tie, but the fund and category (student activities) are assumptions. There is no detail_totals entry for this group."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[196]",
+      "page": 7,
+      "extracted": "Contra -81,250 (student transportation) + other financing -81,250 (detail[197])",
+      "on_page": "Exhibit F Reclassifications (81,250.00) on 'Student transportation - regular' 699,838.79 -> 618,588.79; Depreciation 'Fund transfers in 81,250.00' (p12)",
+      "issue": "Correct hidden-transfer handling (the page doesn't say which of 2710/2730 holds it). Same approach for the Activities 40,000 transfer in (detail[232]/detail[233], p4 Reclassifications (67,001.01)). These are extractor assumptions, kept on review."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[14].fund_type",
+      "page": 4,
+      "extracted": "governmental",
+      "on_page": "School Nutrition reported inside Other Governmental Funds (Exhibits C/D); no proprietary statement",
+      "issue": "The extractor rules list school nutrition as business-type, but this report presents it as governmental. It was kept governmental (also detail[244]-detail[265])."
+    }
   ]
 }

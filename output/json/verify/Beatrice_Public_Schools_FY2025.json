@@ -1,86 +1,38 @@
 {
   "stem": "Beatrice_Public_Schools_FY2025",
-  "values_checked": 221,
+  "values_checked": 226,
   "issues": [
     {
       "severity": "warning",
-      "path": "receipts[0].source_page",
+      "path": "receipts[18].category",
+      "page": 4,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "County and ESU sources 120,400 (p10: entirely 2110 County fines and license fees 120,400)",
+      "issue": "[fixed 2026-10-21: to fines and forfeitures (code 2110)] the whole line is code 2110 county fines and license fees, which the rules class as fines and forfeitures (detail[13] uses fines and forfeitures). Receipt and detail categories disagree for the same money"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[7].source_page",
       "page": 1,
-      "extracted": 2,
-      "on_page": "Property taxes - general purpose 11,048,534 is printed on p1 (statement of activities, general receipts); p2 does not show it",
-      "issue": "[fixed directly] wrong source_page: amount cannot be found on cited page 2; should be 1"
+      "extracted": 10,
+      "on_page": "Transportation fees 38,828 (Statement of Activities general receipts, Total Governmental Activities column, p1)",
+      "issue": "the line is printed on the government-wide statement p1 (it is missing only from the fund statement p4, as report_discrepancies says); p1 could be cited instead of the budget schedule"
     },
     {
       "severity": "warning",
-      "path": "missing",
-      "page": 7,
-      "extracted": "GF detail O&M lines (detail[74]-detail[78]) total 3,495,850 and Student transportation lines (detail[79]-detail[81]) total 829,140 with no contra lines; Depreciation detail[104] records Transfer - General Fund +95,011 as other financing",
-      "on_page": "General Fund Components p7 Reclassifications: Operation and maintenance of plant (50,000), Student transportation (45,011), Transfers (95,011); Depreciation Fund p15 'Transfer - General Fund (as disbursed from the General Fund)' 95,011",
-      "issue": "[fixed directly] transfer hidden inside GF spending lines not separated: per the hidden-transfer rule the detail needs contra expenditure lines -50,000 (department Operation and maintenance of plant) and -45,011 (Student transportation) with split_from/review plus a GF other financing line -95,011; as extracted the same 95,011 is counted both as GF spending and as a transfer"
-    },
-    {
-      "severity": "warning",
-      "path": "missing",
-      "page": 4,
-      "extracted": "receipts[] rebuilt from fund schedules and statement of activities, marked computed",
-      "on_page": "trimmed p4 is 'DISBURSEMENTS (Continued)' of the governmental funds statement; the receipts/first disbursement page (report p7) is not in the trimmed PDF",
-      "issue": "the Total Governmental Funds receipts column cannot be checked against the page; reconstructed receipts sum to 35,490,525 = 32,383,603 + 3,106,922 (p4) and each computed sum was verified, but the line structure/labels of the missing page are unknown"
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[19]",
-      "page": 2,
-      "extracted": 16662159,
-      "on_page": "State sources 12,950,524 (p2 general receipts)",
-      "issue": "label 'State sources' matches a printed p2 line with a different amount; the extracted figure is a computed fund-schedule sum (15,766,666 p9-10 + 751,631 p19 + 143,862 p8, arithmetic correct) that also includes amounts shown as operating grants on p1; cited source_page 6 shows only the GF 15,766,666 part"
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[14].category",
-      "page": 8,
-      "extracted": "other",
-      "on_page": "Other local receipts 90,566 = Cooperative 75,904 + Student Fee 14,662",
-      "issue": "mixed line: the Student Fee Fund part (14,662) is postsecondary/summer school fees per p24 (charges for services/fees, as in detail[156]-[157]); only the Cooperative part is unexplained. original_label also has extractor text appended to the printed label"
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[9].category",
-      "page": 4,
-      "extracted": "debt service principal",
-      "on_page": "Debt services 1,994,284",
-      "issue": "combined principal and interest: includes QCPU interest 113,815 and other 1,150 (p21) plus 1,714,319 reclassified from Special Building O&M with no breakdown; all filed as principal"
-    },
-    {
-      "severity": "warning",
-      "path": "report_discrepancies",
-      "page": 6,
-      "extracted": null,
-      "on_page": "General Fund Components p6: General Fund total receipts 29,892,895, but the printed rows sum to 29,848,838 (Public power district sales tax 5,229 and Transportation fees 38,828 rows, shown on p9, are not printed on p6)",
-      "issue": "p6 combining schedule does not foot as printed (difference 44,057); no report_discrepancies entry. p6 lines are not used as detail, so the extracted figures are not affected"
+      "path": "detail[125].category",
+      "page": 19,
+      "extracted": "capital outlay",
+      "on_page": "School Nutrition Fund Capital outlay 112,024",
+      "issue": "p5 includes it in School Nutrition Program 1,612,602 (food service), not in Capital outlay 705,145, so the detail function split won't tie to the statement"
     },
     {
       "severity": "warning",
       "path": "detail[137].category",
-      "page": 19,
+      "page": 20,
       "extracted": "support services",
-      "on_page": "Operation and maintenance of plant 1,714,319 (Special Building); p4 reclassifies it to Debt services (Education Agency)",
-      "issue": "function differs from the top-level treatment (debt services in disbursements[9]); defensible as printed on the fund schedule, already marked review"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[155].category",
-      "page": 23,
-      "extracted": "capital outlay",
-      "on_page": "Other state categorical programs 68,631 (Cooperative Fund)",
-      "issue": "category follows p4/p8 classification (capital outlay) rather than the printed label; judgment call"
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[7].category",
-      "page": 4,
-      "extracted": "health/welfare",
-      "on_page": "Community service operations 1,084",
-      "issue": "function guess for a school district (could be support services/other); same in detail[83]"
+      "on_page": "Special Building Fund Operation and maintenance of plant 1,714,319",
+      "issue": "p5's Reclassifications column moves this 1,714,319 out of operation and maintenance and into Education Agency debt services, so the detail function differs from the statement (the review note already flags this). Likewise detail[140] 172,941 is moved into Education Agency capital outlay"
     }
   ]
 }
