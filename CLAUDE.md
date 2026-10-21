@@ -125,8 +125,6 @@ These were diagnosed and fixed in find_pages v6; re-extract and re-verify them a
   Beatrice_Public_Schools_FY2025 (report p7, governmental receipts page, not trimmed; receipts built from
   fund schedules, marked computed).
   Boelus_FY2025 (Exhibit A page 2, lines 29-52 spending by function, not trimmed; fund totals used).
-  Cross_County_Community_Schools_FY2025 (trim stops partway through Exhibit N; remaining programs from the
-  budget schedule).
   Deshler_FY2025 (governmental receipts/disbursements statement not trimmed; business-type data complete).
   Fillmore_County_School_District_25_FY2025 (trim stops partway through Exhibit N after 2162; later programs from the budget schedule).
   Fairbury_FY2025 (report pp42-47 Light/Water/Sewer budget schedules 6-9, plus pp8, 11, 62, not trimmed).
@@ -178,7 +176,7 @@ These were diagnosed and fixed in find_pages v6; re-extract and re-verify them a
   Blair_FY2025 (Debt Service budget schedule, report pp63-65, 67), Box_Butte_County_FY2025 (rest of nonmajor combining
   statement after report p24), Bradshaw_FY2025 (General Fund combining pages report pp32, 34),
   Central_City_Public_Schools_FY2025 (report p41 Bond Fund budget), Central_Platte_NRD_FY2025 (report p11 fund statement),
-  Cuming_County_FY2025 (governmental funds statement report pp7-8), Douglas_County_FY2025 (other nonmajor combining pages),
+  Douglas_County_FY2025 (other nonmajor combining pages),
   Falls_City_Public_Schools_FY2025 (report p6 governmental receipts/disbursements), Fillmore_County_FY2025 (report p34,
   right half of nonmajor combining), Furnas_County_FY2025 (second nonmajor combining page), Greeley_FY2025 (report p28,
   end of cash flow statement), Hooker_County_FY2025 (second half of nonmajor combining), Lincoln_FY2025 (nonmajor special
