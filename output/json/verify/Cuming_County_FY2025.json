@@ -1,12 +1,15 @@
 {
   "stem": "Cuming_County_FY2025",
-  "values_checked": 109,
+  "values_checked": 100,
   "issues": [
-    {"severity": "warning", "path": "detail[34].detail_category", "page": 4,
-     "extracted": "taxes (unlabeled)", "on_page": "Inheritance Tax Fund - Taxes 1,325,607",
-     "issue": "Line sits in the Inheritance Tax Fund. Inheritance tax fits better than unlabeled (already marked review). Also, the p2 Taxes line 5,647,186 equals GF Taxes 4,286,211 + Inheritance 1,325,607 + Visitor's funds 17,800 + 17,568, but no page prints that breakdown, so leaving it unsplit is defensible."},
-    {"severity": "warning", "path": "detail[13].detail_category", "page": 3,
-     "extracted": "not itemized", "on_page": "Insurance 965,767",
-     "issue": "General Government department line labelled Insurance. detail_category 'insurance' may fit better than 'not itemized'."}
+    {"severity": "warning", "path": "receipts[0].category", "page": 4,
+     "extracted": "inheritance tax", "on_page": "Taxes 1,325,607 (Inheritance Tax Fund column)",
+     "issue": "The page prints only 'Taxes' in the Inheritance Tax Fund column. Calling it inheritance tax is a reasonable assumption from the fund name, and the line is marked review. The same applies to detail[34]."},
+    {"severity": "warning", "path": "detail[5].budget_final", "page": 5,
+     "extracted": 301000, "on_page": "Other: budget 301,000 / actual 1,312,054",
+     "issue": "The whole budget of the 'Other' line was assigned to the charges-for-services piece of the split. The report does not split the budget. The same thing was done for detail[38] (Road/Bridge Sinking Public Works, budget 5,713,340 of the whole DISBURSEMENTS line) and detail[56] (Economic Development, budget 122,960 of the whole Receipts line). Budget-versus-actual comparisons on these pieces will be misleading."},
+    {"severity": "warning", "path": "disbursements[4].amount", "page": 4,
+     "extracted": 86903, "on_page": "Culture and Recreation total column 86,903; fund columns 34,999 + 54,571 = 89,570",
+     "issue": "Kept as printed, which is correct, and recorded in report_discrepancies. The printed total disbursements of 10,359,610 and the Statement of Activities (p2) both imply 89,570, so the 86,903 in the Total column looks like a misprint."}
   ]
 }
