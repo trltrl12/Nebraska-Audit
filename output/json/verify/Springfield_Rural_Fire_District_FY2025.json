@@ -1,0 +1,15 @@
+{
+  "stem": "Springfield_Rural_Fire_District_FY2025",
+  "values_checked": 104,
+  "issues": [
+    {"severity": "warning", "path": "receipts[5].category", "page": 2,
+     "extracted": "other", "on_page": "Miscellaneous Revenue 75,128 (General 75,037, Debt Service 91)",
+     "issue": "Unexplained Miscellaneous Revenue is 12.7% of governmental receipts (over the 10% threshold for `other`) and a third of General Fund revenue, with no budget for it (p4). It could be a one-time item such as insurance proceeds, a grant or a sale. The line is marked review, but decision_needed has no entry for it."},
+    {"severity": "warning", "path": "detail[23].detail_category", "page": 5,
+     "extracted": "debt interest and fees", "on_page": "Bank Charges 10",
+     "issue": "Inconsistent: category is general government (same as disbursements[1]) but the object is debt interest and fees. A bank charge in the Debt Service Fund fits either. Immaterial amount."},
+    {"severity": "warning", "path": "ending_cash", "page": 1,
+     "extracted": 567151, "on_page": "Cash on Deposit 7,256 + 559,895; Investments 266,356",
+     "issue": "For GAAP the rule asks for 'cash and cash equivalents/investments' from the Balance Sheet Total column. The extractor left out Investments 266,356 (kept in ending_investments), so cash and investments together are 833,507. This is an assumption the user may want to confirm."}
+  ]
+}

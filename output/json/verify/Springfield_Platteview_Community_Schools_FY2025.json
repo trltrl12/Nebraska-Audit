@@ -1,0 +1,21 @@
+{
+  "stem": "Springfield_Platteview_Community_Schools_FY2025",
+  "values_checked": 290,
+  "issues": [
+    {"severity": "warning", "path": "receipts[3].category", "page": 3,
+     "extracted": "intergovernmental/state aid", "on_page": "Homestead exemption 68,389 (General 2,186, Special Building 707, Bond 65,435, Other 61)",
+     "issue": "The p3 row seems mislabelled. The fund schedules show General 2,186 (p6/p9), Special Building 707 (p18) and QCPU 61 (p7/p20) as Penalties and interest on taxes, so 2,954 of property-tax penalties sits in state aid. Recorded as printed; flagged because the statement and the schedules disagree."},
+    {"severity": "warning", "path": "receipts[13].category", "page": 3,
+     "extracted": "intergovernmental/state aid", "on_page": "State receipts 12,138,293 (Special Building 2,202,204)",
+     "issue": "Special Building's 2,202,204 includes Public power district sales tax 504,848 (schedule p18: 1,616,021 + 73,032 + 8,303 + 504,848). Meanwhile its 85,214 shown as PPD sales tax in receipts[5] is 'Other local receipts' on p18. So the statement's tax and state lines don't match the fund schedule. This broad group has no 'broad group; detail on p.N' review flag."},
+    {"severity": "warning", "path": "detail[124].category", "page": 18,
+     "extracted": "other taxes / other local taxes", "on_page": "Other local receipts 85,214",
+     "issue": "The schedule labels this Other local receipts. The tax category comes from the p3 statement, whose labels for this fund look unreliable (see receipts[3] and receipts[13]). Doubtful but marked review."},
+    {"severity": "warning", "path": "detail[93].category", "page": 13,
+     "extracted": "capital outlay", "on_page": "Depreciation Fund Capital outlay 32,026",
+     "issue": "The General Fund components schedule (p6) and the statement (p4) put this 32,026 under Operation and maintenance of plant (support services), not capital outlay. So detail functions won't tie to the statement for this amount."},
+    {"severity": "warning", "path": "other_financing.review", "page": 4,
+     "extracted": "Sale of property", "on_page": "Sale of property 324,313",
+     "issue": "The review field holds the line label rather than a reason for doubt, so the item will land on the review list for no reason. Amount and placement are correct."}
+  ]
+}
