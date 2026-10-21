@@ -2,14 +2,14 @@
   "stem": "Gordon_Memorial_Hospital_District_FY2025",
   "values_checked": 173,
   "issues": [
-    {"severity": "warning", "path": "receipts[11].category", "page": 3,
-     "extracted": "property tax", "on_page": "Tax revenue 426,643",
-     "issue": "Printed only as 'Tax revenue'. Property tax is likely (a property taxes receivable line is on p1, and hospital districts levy property tax), but the page doesn't say the tax type, so 'taxes (unlabeled)' would also be defensible."},
-    {"severity": "warning", "path": "balance_sheet.liabilities[5].category", "page": 2,
-     "extracted": "accrued liabilities", "on_page": "Accrued compensated absences and related benefits, excluding current portion 319,222",
-     "issue": "This is the long-term (noncurrent) portion. The rules limit 'accrued liabilities' to compensated absences due soon, so 'other liabilities' may fit better."},
-    {"severity": "warning", "path": "detail[32..108].detail_category", "page": 8,
-     "extracted": "supplies and materials", "on_page": "Supplies and Other column (11,102,920 total, p9)",
-     "issue": "The Schedule 3 'Supplies and Other' column includes employee benefits and payroll taxes (1,823,916 on p3) and other objects, yet all of it is tagged supplies and materials. Benefits are understated and supplies overstated at the object level. The extractor's notes disclose this, but the object split is an approximation."}
+    {"severity": "warning", "path": "detail[].detail_category (Schedule 3 'Supplies and Other' lines)", "page": 10,
+     "extracted": "supplies and materials", "on_page": "Supplies and Other column 11,102,920 (includes employee benefits 1,823,916 per p3 and purchased services/professional fees)",
+     "issue": "The Supplies and Other column mixes supplies, purchased services and about 1.82M of employee benefits (p3 benefits 1,823,916 + supplies and other 8,759,878 + depreciation 519,126 = 11,102,920). Tagging every department's line as supplies and materials overstates that object. The extractor says so in notes, but the lines carry no review flag."},
+    {"severity": "warning", "path": "receipts[14].category", "page": 3,
+     "extracted": "donations/contributions", "on_page": "Noncapital grants and contributions 255,255",
+     "issue": "The line mixes grants and contributions. Hospital noncapital grants are often government money (federal grants or intergovernmental/state aid). This is a category guess and is already marked for review."},
+    {"severity": "warning", "path": "balance_sheet.assets[8].category", "page": 1,
+     "extracted": "receivables", "on_page": "Due from third-party payors: Medicaid direct payments 2,856,310",
+     "issue": "This amount is due from the state Medicaid program, so 'due from other governments' would also fit. Judgment call."}
   ]
 }
