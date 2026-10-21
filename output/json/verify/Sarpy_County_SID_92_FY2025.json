@@ -1,0 +1,21 @@
+{
+  "stem": "Sarpy_County_SID_92_FY2025",
+  "values_checked": 59,
+  "issues": [
+    {"severity": "warning", "path": "receipts[3].category", "page": 2,
+     "extracted": "intergovernmental/state aid", "on_page": "State Motor Vehicle Tax Allocation 110",
+     "issue": "Could be motor vehicle tax (motor vehicle tax distributed to the SID) rather than state aid; same choice in detail[3] (detail_category 'other state aid')"},
+    {"severity": "warning", "path": "disbursements[5].category", "page": 2,
+     "extracted": "utilities", "on_page": "Maintenance 32,795",
+     "issue": "Unspecified SID maintenance put in function utilities; could be streets/highways or general government. Judgment call, disclosed in notes"},
+    {"severity": "warning", "path": "disbursements[7].category", "page": 2,
+     "extracted": "utilities", "on_page": "Utilities 10,668",
+     "issue": "SID 'Utilities' is often street lighting, which the rules put under streets/highways; utilities is defensible"},
+    {"severity": "warning", "path": "detail", "page": 4,
+     "extracted": "Actual on GAAP Basis column", "on_page": "Schedule 1 prints both 'Actual on GAAP Basis' and 'Actual on Budgetary Basis' (e.g. Maintenance 32,795 vs 32,519; Professional Fees 28,262 vs 29,188; Utilities 10,668 vs 11,449; Property Taxes 49,770 vs 60,027)",
+     "issue": "Extractor used the GAAP-basis actual column, not the budgetary-basis actual; it ties to the statement but differs from the budget comparison actual. Disclosed in notes"},
+    {"severity": "warning", "path": "balance_sheet.assets[2].original_label", "page": 1,
+     "extracted": "Capital Assets, Net of Accumulated Depreciation", "on_page": "Capital Assests, Net of Accumulated Depreciation",
+     "issue": "Printed label has a typo ('Assests'); extractor corrected the spelling. Cosmetic only"}
+  ]
+}
