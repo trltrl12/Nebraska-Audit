@@ -29,7 +29,7 @@ from common import (AUDITS, FILE_LIST, MANIFEST, MANIFEST_FIELDS, TRIMMED,  # no
 
 # Bump whenever page selection changes: reports trimmed by an older version are re-trimmed
 # automatically on the next fetch run (see --drop-stale).
-FINDER_VERSION = 7
+FINDER_VERSION = 8
 
 HEADER_FRAC = 0.30         # statement titles sit in the top 30% of the page
 OCR_FRAC = 0.35            # how much of a scanned page to OCR
@@ -221,7 +221,10 @@ OCR_MIN_SHARE = 0.4        # less than this share of real words: try reading the
 def ocr_header(page):
     """OCR text of a scanned page's header. A landscape table scanned sideways onto a portrait page
     reads as noise from the top strip; then the left and right strips are read turned upright and
-    the one with the most real words (weighted by their share) is used."""
+    the one with the most real words (weighted by their share) is used. A sideways strip must
+    itself read as text (share >= OCR_MIN_SHARE): an upright page whose top strip is just a few
+    column headings ("Total Governmental Funds" over numbers) reads sideways as many short noise
+    "words" ("aineo fale feats ..."), which would otherwise outscore the real header."""
     text = ocr_region(page, OCR_FRAC)
     w, share = ocr_quality(text)
     if (w >= OCR_MIN_WORDS and share >= OCR_MIN_SHARE) or _ocr_ok is False:
@@ -230,7 +233,7 @@ def ocr_header(page):
     for side in ("left", "right"):
         alt = ocr_region(page, OCR_FRAC, side)
         aw, ashare = ocr_quality(alt)
-        if aw >= OCR_MIN_WORDS and aw * ashare > score:
+        if aw >= OCR_MIN_WORDS and ashare >= OCR_MIN_SHARE and aw * ashare > score:
             best, score = alt, aw * ashare
     return best
 
