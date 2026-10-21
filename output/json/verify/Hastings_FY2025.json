@@ -1,34 +1,54 @@
 {
   "stem": "Hastings_FY2025",
-  "values_checked": 274,
+  "values_checked": 209,
   "issues": [
-    {"severity": "warning", "path": "notes", "page": 19,
-     "extracted": "GF transfers out 6,286,241 matches receiving funds (Capital Projects 5,500,000, Fire Equipment 292,000, Bookmobile 6,000, Duncan Park 20,000, internal service 1,468,241 approx)",
-     "on_page": "listed receiving amounts sum to 7,286,241, not 6,286,241",
-     "issue": "The notes' transfer cross-check arithmetic is wrong. Part of the receipts listed (about 1,000,000) must come from the Debt Service Fund's 1,000,000 transfer out, not the General Fund. Recorded transfer figures are correct (in 5,979,871 / out 7,448,112, net -1,468,241 = internal service transfers in); only the note's explanation is off."},
-    {"severity": "warning", "path": "balance_sheet.liabilities[8].category", "page": 1,
-     "extracted": "accrued liabilities", "on_page": "Compensated absences - noncurrent 7,491,890",
-     "issue": "The rules limit accrued liabilities to compensated absences due soon. This line is noncurrent, so other liabilities may fit better."},
-    {"severity": "warning", "path": "disbursements[20]", "page": 7,
-     "extracted": "Payments in lieu of taxes 3,703,166 (business-type utilities)", "on_page": "Payments in lieu of taxes (3,703,166), nonoperating; governmental In lieu of tax 3,703,166 (p5)",
-     "issue": "This is an internal flow from the enterprise funds to the General Fund. It is counted as business-type spending and as governmental tax revenue, and the cash flow statement (p9) shows it under noncapital financing. It is recorded as the report prints it and is already marked review."},
-    {"severity": "warning", "path": "receipts[25]", "page": 7,
-     "extracted": "Contributions in aid of construction 3,911,155 as receipt", "on_page": "printed inside Total nonoperating revenues (expenses) 6,174,666",
-     "issue": "The field rules list capital contributions under business_type.other_financing. Keeping it as a receipt matches the printed nonoperating total, so this is defensible; already marked review."},
-    {"severity": "warning", "path": "disbursements[21].category", "page": 7,
-     "extracted": "other", "on_page": "Loss on disposal of capital assets (188,496)",
-     "issue": "Electric and Combined System Utilities funds; the function category utilities may apply instead of the last-resort other. It is a non-cash loss, so this is a judgment call."},
-    {"severity": "warning", "path": "receipts[11].category", "page": 5,
-     "extracted": "federal grants", "on_page": "Grants 995,342",
-     "issue": "The page does not say whether the grants are federal or state (Street Fund 587,453, Wireless E911 88,430, Library grant, etc.). The same assumption applies to receipts[33] (Grant revenue 130,605, p7) and to the detail Grants lines. Already marked review."},
-    {"severity": "warning", "path": "detail[40].detail_category", "page": 12,
-     "extracted": "highway allocation", "on_page": "Intergovernmental 3,742,296 (Street Fund)",
-     "issue": "Highway allocation is assumed for a broad Intergovernmental line; already marked review."},
-    {"severity": "warning", "path": "receipts[16].category", "page": 5,
-     "extracted": "other", "on_page": "Excess pension funding 1,213,815",
-     "issue": "This equals the Investments asset held in the pension plan (p1, p4), so it could be read as investment-type income. Nature unclear; already marked review."},
-    {"severity": "warning", "path": "detail[35].category", "page": 11,
-     "extracted": "culture/recreation", "on_page": "Airport 467,266 under Environment and leisure",
-     "issue": "An airport is not culture/recreation, and no category fits exactly. The extractor followed the report's own heading; already marked review."}
+    {
+      "severity": "error",
+      "path": "disbursements[29].category",
+      "page": 7,
+      "extracted": "other",
+      "on_page": "Loss on disposal of capital assets (188,496) (Electric 53,698, Combined System Utilities 134,798)",
+      "issue": "[fixed 2026-10-21: category utilities] a specific category fits: this is a nonoperating expense of the utility enterprise funds, and every other business-type line, including Miscellaneous expense and Non-utility plan depreciation, is filed under utilities. Using 'other' here breaks the last-resort rule"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[11].category",
+      "page": 5,
+      "extracted": "federal grants",
+      "on_page": "Grants 995,342",
+      "issue": "the source isn't printed (it covers GF 45,614, Street 587,453, Museum 9,000 and nonmajor 353,275 including Library, Public Safety and Wireless E911 grants). Some of it may be state money, so 'federal grants' is a guess. The same applies to detail grant lines and to receipts[23] Grant revenue 130,605"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[25]",
+      "page": 7,
+      "extracted": "donations/contributions 3,911,155 as business-type receipt",
+      "on_page": "Contributions in aid of construction 3,911,155 (inside Total nonoperating revenues)",
+      "issue": "this is printed inside nonoperating revenues, so keeping it as a receipt matches the printed totals. It is a capital contribution, though, and could instead go to business_type.other_financing. Judgment call"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[16].category",
+      "page": 5,
+      "extracted": "other",
+      "on_page": "Excess pension funding 1,213,815",
+      "issue": "equals the Investments line (1,213,815, p1/p4). It is a one-time non-tax item (about 3% of governmental revenue) and its nature isn't stated on the trimmed pages. Recording it in 'other' with review is acceptable, but a person may want to look at it"
+    },
+    {
+      "severity": "warning",
+      "path": "balance_sheet.liabilities[8].category",
+      "page": 1,
+      "extracted": "accrued liabilities",
+      "on_page": "Compensated absences - noncurrent 7,491,890",
+      "issue": "the rules give 'accrued liabilities' for compensated absences due soon. This is the noncurrent portion, so 'other liabilities' (or long-term) may fit better"
+    },
+    {
+      "severity": "warning",
+      "path": "notes",
+      "page": 5,
+      "extracted": "GF transfers out ... internal service 1,468,241 approx",
+      "on_page": "GF transfers out 6,286,241 - 5,818,000 to nonmajor = 468,241; Debt Service transfers out 1,000,000 (98,871 back in from Fire Equipment)",
+      "issue": "the 1,468,241 that goes to the internal service funds comes from GF 468,241 plus Debt Service 1,000,000, not from the GF alone. No amount is affected"
+    }
   ]
 }

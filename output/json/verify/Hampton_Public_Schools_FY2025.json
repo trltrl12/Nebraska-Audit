@@ -1,38 +1,21 @@
 {
   "stem": "Hampton_Public_Schools_FY2025",
-  "values_checked": 251,
+  "values_checked": 310,
   "issues": [
-    {
-      "severity": "error",
-      "path": "receipts[2].category",
-      "page": 6,
-      "extracted": "other taxes",
-      "on_page": "Taxes: Other 1,136,602.25 = GF 1,000,850.96 (p5) + Bond 84,924.47 + Special Building 50,826.82; fund schedules pp9,16,17 break it down: homestead exemption 22,459.23 + property tax credit 1,104,048.78 + pro-rate motor vehicle 5,975.68 (= 1,132,483.69 intergovernmental/state aid) + carline/other taxes 4,118.56",
-      "issue": "[fixed] 99.6% of this line is state homestead/property-tax-credit and pro-rate motor vehicle money, which the rules put under intergovernmental/state aid (the extractor uses that category for the same items in detail). The report prints the full breakdown, so split it (split_from) into intergovernmental/state aid 1,132,483.69 and other taxes 4,118.56, or at least use intergovernmental/state aid as the dominant category. Leaving it as 'other taxes' when a specific category fits is wrong."
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[14].category",
-      "page": 6,
-      "extracted": "food service",
-      "on_page": "Other student support 319,609.33 = Activities Fund 150,811.52 (p14) + School Nutrition 168,797.81 (p15)",
-      "issue": "Mixed line. Exhibits I and J print the breakdown, so it could be split into student activities 150,811.52 and food service 168,797.81. As recorded, 47% of the line is labelled food service."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[9].category",
-      "page": 9,
-      "extracted": "intergovernmental/state aid / county/other local governments",
-      "on_page": "2110 County fines and license fees 19,225.59",
-      "issue": "These are fines and license fees the county passes on to the school. They could be fines and forfeitures instead. The same choice applies to receipts[5] 'County receipts' (p6)."
-    },
-    {
-      "severity": "warning",
-      "path": "detail",
-      "page": 19,
-      "extracted": "Exhibit N object detail only for programs 1100-2130; programs 2141 onward taken from Exhibit G as 'not itemized'",
-      "on_page": "Trimmed PDF (19 pages) ends after Exhibit N Health Services; the rest of Exhibit N is not in the trimmed PDF",
-      "issue": "Trim cut off Exhibit N partway through, so the object breakdown is missing for most support-service programs. Re-extract once the trim includes the rest of Exhibit N. The fallback causes no double counting, and the GF expenditure items plus the 145,000 of transfers tie to 3,780,888.76."
-    }
+    {"severity": "warning", "path": "receipts[7].category", "page": 6,
+     "extracted": "intergovernmental/state aid", "on_page": "County receipts 19,225.59 (= GF 2110 County fines and license fees 19,225.59, p9)",
+     "issue": "the whole line is code 2110 county fines and license fees, which the rules map to fines and forfeitures (detail[9] already uses fines and forfeitures); the same money is categorised differently in receipts and detail"},
+    {"severity": "warning", "path": "detail[7].detail_category", "page": 9,
+     "extracted": "other charges for services", "on_page": "1955 Postsecondary receipts 590.00",
+     "issue": "postsecondary (dual-credit) receipts could be tuition and fees; judgment call"},
+    {"severity": "warning", "path": "detail[199-218].fund_type", "page": 15,
+     "extracted": "governmental", "on_page": "School Nutrition Fund (reported in Other Governmental Funds, Exhibits C/D)",
+     "issue": "the extractor rules list school nutrition among business-type funds, but this report puts it in its governmental funds totals with no proprietary statement; keeping it governmental is defensible and keeps the ties, but a person may want to confirm"},
+    {"severity": "warning", "path": "detail[158].original_label", "page": 11,
+     "extracted": "8000 Transfers (to School Nutrition Fund)", "on_page": "8000 Transfers",
+     "issue": "label has text added that isn't printed (the recipient comes from Exhibit N p25); amount -45,000 and budget -106,997 are correct"},
+    {"severity": "warning", "path": "detail[157]", "page": 7,
+     "extracted": -100000, "on_page": "Exhibit F Reclassifications (100,000.00) on Student transportation - reg; Exhibit N p24 Vehicle Operation Capital Assets 100,000.00",
+     "issue": "hidden-transfer contra line is filed under schedule 'Exhibit G' but cited to p7 (Exhibit F), and its label is made up; the treatment (contra -100,000 plus other financing -100,000, Depreciation Fund receives 100,000 p13) is correct and the GF detail still ties to 3,780,888.76"}
   ]
 }
