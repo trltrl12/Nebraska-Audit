@@ -1,18 +1,27 @@
 {
   "stem": "Valentine_FY2025",
-  "values_checked": 256,
+  "values_checked": 292,
   "issues": [
     {"severity": "warning", "path": "receipts[10].category", "page": 7,
      "extracted": "donations/contributions", "on_page": "Grants and donations 1,108,254",
-     "issue": "Statement of Activities (p2-3) shows 652,540 of this as Airport capital grants and contributions, which are almost certainly FAA/state aeronautics money, plus 362,816 of economic development operating grants. Government grants belong in federal grants or intergovernmental/state aid, not donations/contributions. The source isn't stated, so this stays a judgment call. The same applies to detail lines for the Airport (detail[112]) and Economic Development (detail[123]) grants."},
+     "issue": "Mostly Airport 667,540 (Statement of Activities p3 shows 652,540 airport capital grants, very likely FAA/state aeronautics) and Economic Development 362,816; the rules reserve donations/contributions for non-government sources, so much of this is probably federal grants / state aid. Kept as printed with review; the source can't be confirmed from the trimmed pages."},
+    {"severity": "warning", "path": "detail[112].category", "page": 16,
+     "extracted": "donations/contributions", "on_page": "Airport Fund Grants and donations 667,540",
+     "issue": "Same issue as receipts[10]: airport grants are probably government (FAA) grants, not private donations."},
     {"severity": "warning", "path": "receipts[11].category", "page": 7,
      "extracted": "other", "on_page": "Loan collections 76,960",
-     "issue": "These are economic development loan repayments (collections of notes receivable), which are probably principal returning rather than revenue. No category fits; a person may want to decide how to treat them."},
+     "issue": "Economic development loan repayments (notes receivable principal) printed as revenue. No receipt category fits, so 'other' is defensible, but it is a repayment of principal rather than income. Same treatment at detail[124]."},
+    {"severity": "warning", "path": "detail[103].detail_category", "page": 15,
+     "extracted": "highway allocation", "on_page": "Street Fund Intergovernmental 554,048",
+     "issue": "The extractor assumed this is highway allocation; the page doesn't break it down (could include motor vehicle pro-rate or other state aid)."},
+    {"severity": "warning", "path": "detail[111].detail_category", "page": 16,
+     "extracted": "rentals", "on_page": "Airport Fund Charges for services 557,624",
+     "issue": "The extractor assumed this is rentals; airport charges probably also include fuel sales. 'other charges for services' would be the safer choice."},
+    {"severity": "warning", "path": "detail[39].detail_category", "page": 22,
+     "extracted": "equipment purchases", "on_page": "Administrative Capital outlay 63,344",
+     "issue": "The object isn't stated. Every other capital outlay line in the detail uses 'not itemized', so this one is an inconsistent guess."},
     {"severity": "warning", "path": "disbursements[5].category", "page": 7,
      "extracted": "other", "on_page": "Airport 609,680",
-     "issue": "Airport operations have no specific category, so other is used with review. Defensible, but it is a judgment call; the matching detail line detail[115] (Operating expenditures 570,034) has the same issue."},
-    {"severity": "warning", "path": "detail[111].detail_category", "page": 14,
-     "extracted": "rentals", "on_page": "Charges for services 557,624 (Airport Fund)",
-     "issue": "The schedule doesn't break down airport charges, which may be mostly fuel sales rather than hangar rent. 'other charges for services' may fit better. The line is already flagged review."}
+     "issue": "Airport operations have no disbursement category. 'other' with review is defensible; also at detail[115]."}
   ]
 }
