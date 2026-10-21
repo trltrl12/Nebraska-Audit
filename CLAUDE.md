@@ -167,8 +167,6 @@ These were diagnosed and fixed in find_pages v6; re-extract and re-verify them a
   Wisner_Care_Center_FY2025 (trimmed to 3 pages, no revenue/expense statement: receipts/disbursements empty, net position change as placeholder adjustment).
   York_FY2025 (report p73, rest of the General Fund Departments combining schedule: Fire/EMS, Library, Total columns, not trimmed; departmental detail left out).
   York_Public_Schools_FY2025 (trim stops partway through Exhibit P at p20: object detail for programs 2130+, ~8.0M, missing; Exhibit G function lines used).
-  Gering_Ft_Laramie_Irrigation_District_FY2025 (nonoperating/capital-grant statement page not trimmed; 9,257,241
-  derived as an adjustment meanwhile).
   Found in the 2026-10-21 outside-review recheck (re-extract after the v7 re-trim):
   Beatrice_FY2025 (nonmajor/capital projects schedules), Beaver_Crossing_FY2025 (budget columns report pp26, 28, 30),
   Blair_FY2025 (Debt Service budget schedule, report pp63-65, 67), Box_Butte_County_FY2025 (rest of nonmajor combining
