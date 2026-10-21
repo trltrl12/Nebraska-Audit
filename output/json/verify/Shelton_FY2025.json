@@ -2,33 +2,77 @@
   "stem": "Shelton_FY2025",
   "values_checked": 244,
   "issues": [
-    {"severity": "error", "path": "disbursements[21].category", "page": 8,
-     "extracted": "other", "on_page": "Loss on disposal (167,166), Water Fund, nonoperating expenses",
-     "issue": "Business-type Water Fund line is filed under 'other' when a specific category fits. Every other enterprise line uses its fund's function (utilities), so this one should be utilities (with review: noncash loss)."},
-    {"severity": "warning", "path": "receipts[15].category", "page": 5,
-     "extracted": "donations/contributions", "on_page": "Contributions and grants 338,281 (Fire 41,360; Pool 281,000; Library 15,921 per p16)",
-     "issue": "The label mixes contributions and grants. The Pool 281,000 may be a government grant (state or federal). Already marked review."},
-    {"severity": "warning", "path": "receipts[11]", "page": 16,
-     "extracted": 14137, "on_page": "Municipal equalization 14,137, printed under the 'Licenses and permits' heading",
-     "issue": "Split from Intergovernmental 265,909 (p5). On p16 the line sits under Licenses and permits, not Intergovernmental. The arithmetic supports the split: General Fund Intergovernmental 104,303 = 75,889 + 14,277 + 14,137. Still, the page does not print it as part of the Intergovernmental line."},
-    {"severity": "warning", "path": "business_type.measure", "page": 9,
-     "extracted": "net position", "on_page": "Modified cash basis proprietary statement: Net position 3,109,786 to 3,150,433",
-     "issue": "The basis is cash, but the measure is net position, because the modified cash basis statement carries capital assets and depreciation. This is defensible since it is what the statement rolls forward, but it is an assumption."},
-    {"severity": "warning", "path": "detail[62,69,84,99,107,115].category", "page": 17,
-     "extracted": "culture/recreation", "on_page": "Cemetery Fund column (expenditures 37,362)",
-     "issue": "The rules list cemetery under health/welfare. The village's own budget schedule (p13) and the statement's Culture and Recreation total (374,619, p5) put Cemetery under culture/recreation."},
-    {"severity": "warning", "path": "detail[86].category", "page": 17,
-     "extracted": "general government", "on_page": "General Fund column: Garbage collection expense 65,760",
-     "issue": "Refuse collection would be the utilities function under the rules. It is assigned general government because of the department column. Already marked review."},
-    {"severity": "warning", "path": "detail[29].detail_category", "page": 16,
-     "extracted": "ambulance/rescue fees", "on_page": "Ambulance Fund: Rental and fees 13,342",
-     "issue": "The same label in the General Fund column (detail[7], 900) is 'rentals'. Ambulance fees are plausible (Statement of Activities p2 shows Public Safety charges for services 13,342), but the label says rental."},
-    {"severity": "warning", "path": "detail[116-118].detail_category", "page": 17,
-     "extracted": "construction/infrastructure", "on_page": "Capital outlay: Fire 66,521; Pool 132,349; Library 19,650",
-     "issue": "The object type is not printed. The Fire capital outlay could be equipment purchases. Already marked review."},
-    {"severity": "warning", "path": "detail", "page": 17,
-     "extracted": "General Fund department functions: general government 201,263; public safety 377,503 (incl. Fire capital 66,521, Ambulance debt 23,450)",
-     "on_page": "Statement p5: General government 181,613; Public Safety 155,183; Capital outlay 218,520; Debt service 23,450 (p6)",
-     "issue": "The detail function split does not tie to the statement's function lines, because the statement moves capital outlay and debt service out of the functions. Both total 953,385. This is explained in the notes."}
+    {
+      "severity": "error",
+      "path": "disbursements[21].category",
+      "page": 8,
+      "extracted": "other",
+      "on_page": "Loss on disposal (167,166), Water Fund, nonoperating expenses",
+      "issue": "[fixed 2026-10-21: Water Fund loss on disposal to utilities] Business-type Water Fund line is filed under 'other' when a specific category fits. Every other enterprise line uses its fund's function (utilities), so this one should be utilities (with review: noncash loss)."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[15].category",
+      "page": 5,
+      "extracted": "donations/contributions",
+      "on_page": "Contributions and grants 338,281 (Fire 41,360; Pool 281,000; Library 15,921 per p16)",
+      "issue": "The label mixes contributions and grants. The Pool 281,000 may be a government grant (state or federal). Already marked review."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[11]",
+      "page": 16,
+      "extracted": 14137,
+      "on_page": "Municipal equalization 14,137, printed under the 'Licenses and permits' heading",
+      "issue": "Split from Intergovernmental 265,909 (p5). On p16 the line sits under Licenses and permits, not Intergovernmental. The arithmetic supports the split: General Fund Intergovernmental 104,303 = 75,889 + 14,277 + 14,137. Still, the page does not print it as part of the Intergovernmental line."
+    },
+    {
+      "severity": "warning",
+      "path": "business_type.measure",
+      "page": 9,
+      "extracted": "net position",
+      "on_page": "Modified cash basis proprietary statement: Net position 3,109,786 to 3,150,433",
+      "issue": "The basis is cash, but the measure is net position, because the modified cash basis statement carries capital assets and depreciation. This is defensible since it is what the statement rolls forward, but it is an assumption."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[62,69,84,99,107,115].category",
+      "page": 17,
+      "extracted": "culture/recreation",
+      "on_page": "Cemetery Fund column (expenditures 37,362)",
+      "issue": "The rules list cemetery under health/welfare. The village's own budget schedule (p13) and the statement's Culture and Recreation total (374,619, p5) put Cemetery under culture/recreation."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[86].category",
+      "page": 17,
+      "extracted": "general government",
+      "on_page": "General Fund column: Garbage collection expense 65,760",
+      "issue": "Refuse collection would be the utilities function under the rules. It is assigned general government because of the department column. Already marked review."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[29].detail_category",
+      "page": 16,
+      "extracted": "ambulance/rescue fees",
+      "on_page": "Ambulance Fund: Rental and fees 13,342",
+      "issue": "The same label in the General Fund column (detail[7], 900) is 'rentals'. Ambulance fees are plausible (Statement of Activities p2 shows Public Safety charges for services 13,342), but the label says rental."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[116-118].detail_category",
+      "page": 17,
+      "extracted": "construction/infrastructure",
+      "on_page": "Capital outlay: Fire 66,521; Pool 132,349; Library 19,650",
+      "issue": "The object type is not printed. The Fire capital outlay could be equipment purchases. Already marked review."
+    },
+    {
+      "severity": "warning",
+      "path": "detail",
+      "page": 17,
+      "extracted": "General Fund department functions: general government 201,263; public safety 377,503 (incl. Fire capital 66,521, Ambulance debt 23,450)",
+      "on_page": "Statement p5: General government 181,613; Public Safety 155,183; Capital outlay 218,520; Debt service 23,450 (p6)",
+      "issue": "The detail function split does not tie to the statement's function lines, because the statement moves capital outlay and debt service out of the functions. Both total 953,385. This is explained in the notes."
+    }
   ]
 }
