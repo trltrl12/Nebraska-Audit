@@ -29,7 +29,7 @@ from common import (AUDITS, FILE_LIST, MANIFEST, MANIFEST_FIELDS, TRIMMED,  # no
 
 # Bump whenever page selection changes: reports trimmed by an older version are re-trimmed
 # automatically on the next fetch run (see --drop-stale).
-FINDER_VERSION = 6
+FINDER_VERSION = 7
 
 HEADER_FRAC = 0.30         # statement titles sit in the top 30% of the page
 OCR_FRAC = 0.35            # how much of a scanned page to OCR
@@ -37,7 +37,7 @@ OCR_DPI = 150
 MIN_TEXT_CHARS = 50        # below this a page is treated as scanned (image only)
 MAX_CONTINUATIONS = 8
 MAX_UNTITLED = 2           # untitled number-heavy pages accepted right after a statement
-MAX_DETAIL_PAGES = 20      # soft cap on supplementary detail pages per report (extraction cost)
+MAX_DETAIL_PAGES = 25      # soft cap on supplementary detail pages per report (extraction cost)
 MAX_DETAIL_PAGES_HARD = 30 # the top-priority schedule is never split below this
 TITLE_MAX_OFFSET = 30      # a title must start within this many characters of its line
 FLATTEN_DPI = 200          # layered scans are re-rendered to one black-and-white image at this dpi
@@ -47,12 +47,12 @@ FLATTEN_MARK = "flattened-v1"
 _OF = r"statements?\s+of\s*"
 _BASIS = r"((the\s+)?(modified\s+)?cash(\s+basis)?\s+)?"   # "cash" / "cash basis" / "modified cash basis"
 TITLES = [
-    ("receipts_disbursements", _OF + r"(the\s+)?" + _BASIS + r"receipts,?\s*(and\s+)?(disbursements|expenditures)"),
+    ("receipts_disbursements", _OF + r"(the\s+)?" + _BASIS + r"receipts,?\s*(and\s+)?(disburse?ments|expenditures)"),
     ("fund_balance_changes", _OF + _BASIS + r"(fund\s+balances?\s+and\s+)?changes\s+in\s+" + _BASIS + r"(cash|fund)\s+balances?"),
-    ("revenues_expenditures", _OF + r"revenues,?\s*expenditures"),
-    ("proprietary_revenues_expenses", _OF + r"revenues,?\s*(and\s+)?(support,?\s*(and\s+)?|gains,?\s*(and\s+)?)?expenses"),
+    ("revenues_expenditures", _OF + r"revenues?,?\s*expenditures"),
+    ("proprietary_revenues_expenses", _OF + r"revenues?,?\s*(and\s+)?(support,?\s*(and\s+)?|gains,?\s*(and\s+)?)?expenses"),
     ("activities", _OF + r"activities"),
-    ("cash_flows", _OF + r"cash\s+flows"),
+    ("cash_flows", _OF + r"cash\s+flows?\b"),
     ("assets_fund_balances", _OF + _BASIS + r"assets,?\s*(liabilities,?\s*)?(and|&)\s+(fund\s+balances?|net\s+(position|assets)|cash\s+balances?)"),
     ("net_position", _OF + r"(fund\s+)?net\s+(position|assets)|" + _OF + r"financial\s+position"),
     ("balance_sheet", r"balance\s+sheets?\b"),
@@ -73,31 +73,61 @@ WAIVER_INVESTMENTS_RE = re.compile(r"^schedule\s+of\s+investments\b", re.M)
 # explains column-2 transfers.
 BUDGET_FORM_RE = re.compile(r"\b(general|sid|city|village|county)\s+budget\s+form\b|this\s+budget\s+is\s+for\s+the\s+period")
 BUDGET_PAGES = [
-    ("budget_all_funds", re.compile(r"total\s+all\s+funds")),
+    ("budget_all_funds", re.compile(r"total\s*all\s*funds")),   # OCR may drop the spaces
     ("budget_fund_worksheet", re.compile(r"budget\s+form\s+worksheet")),
     ("budget_transfers", re.compile(r"documentation\s+of\s+transfers")),
 ]
+BUDGET_PAGES_RX = dict(BUDGET_PAGES)
 NOT_FINANCIAL_RE = re.compile(r"full[- ]time\s+equivalent\s+student\s+enrollment|enrollment\s+statements")
 BALANCE_TYPES = {"net_position", "balance_sheet", "assets_fund_balances", "waiver_summary", "budget_all_funds"}
 FLOW_TYPES = {"receipts_disbursements", "fund_balance_changes", "revenues_expenditures", "waiver_summary",
               "budget_all_funds"}
 # A header containing any of these is not a basic statement we want.
 EXCLUDE_RE = re.compile(
-    r"budget|combining|individual\s+fund|federal\s+awards|findings|fiduciary|custodial|"
-    r"agency\s+fund|pension|opeb|proportionate|contributions\s+to|notes\s+to|questioned|"
+    r"combining|individual\s+fund|federal\s+awards|findings|fiduciary|"
+    r"proportionate|contributions\s+to|notes\s+to|questioned|"
     r"schedule\s+of\s+(investments|outstanding|interfund|changes|expenditures|cash\s+disbursements\s+of)|"
     r"table\s+of\s+contents|\bindex\b|summary\s+schedule|county\s+officers?|office\s+activities|"
-    r"discussion\s+and\s+analysis|summary\s+statements?|condensed|\(unaudited\)|activity\s+funds?\b|"
+    r"discussion\s+and\s+analysis|summary\s+statements?|condensed|"
     r"independent\s+(auditor|accountant)|certified\s+public\s+accountants")
+# These words also name statement *columns* ("Special Education Agency Fund", "Police & Fire
+# Pension", "Budget", "2024 (unaudited)"), so they only count in the title lines above the date
+# line, never in the column headings below it. A community development agency is not an agency fund.
+AGENCY_FUND = r"(?<!development\s)agency\s+funds?"
+COLUMN_EXCLUDE_RE = re.compile(r"budget|custodial|" + AGENCY_FUND + r"|pension|opeb|\(unaudited\)|activity\s+funds?\b")
 # Reconciliation pages are excluded only when a header line *starts* with "reconciliation": SID
 # statements carry a "reconciliation" column ("fund fund total reconciliation net position").
+# A cash flow statement's own "Reconciliation of operating income (loss) to net cash ..." section
+# doesn't count: that page is the statement's continuation.
 RECONCIL_TITLE_RE = re.compile(r"^\W*(a\s+)?reconcil", re.M)
+CASH_FLOW_RECONCIL_RE = re.compile(r"^\W*reconcil\w*\s+of\s+(net\s+)?operating\s+(income|loss|revenues|\(loss\))")
+# The date line ends a statement title ("For the Year Ended June 30, 2025", "September 30, 2025").
+DATE_LINE_RE = re.compile(
+    r"\b(years?|period|months?)\s+end|\bended\b|\b(january|february|march|april|may|june|july|august|"
+    r"september|october|november|december)\s+\d{1,2}\b|\b\d{1,2}/\d{1,2}/\d{2,4}\b|\bfiscal\s+years\b|"
+    r"\bas\s+of\b")
 
 
-def excluded(lines, rx=None):
-    """True if a page header names a page we never want (see EXCLUDE_RE / RECONCIL_TITLE_RE)."""
+def title_lines(lines, default):
+    """Header lines up to and including the date line, or `default` if no date line is found."""
+    for k, ln in enumerate(lines[:12]):
+        if DATE_LINE_RE.search(ln):
+            return lines[:k + 1]
+    return default
+
+
+def reconcil_title(lines):
+    return bool(RECONCIL_TITLE_RE.search("\n".join(ln for ln in lines[:20] if not CASH_FLOW_RECONCIL_RE.search(ln))))
+
+
+def excluded(lines, rx=None, column_default=None):
+    """True if a page header names a page we never want (see EXCLUDE_RE / COLUMN_EXCLUDE_RE /
+    RECONCIL_TITLE_RE). column_default: the lines COLUMN_EXCLUDE_RE checks when the header has no
+    date line (default: the first 20 header lines)."""
     rx = rx or EXCLUDE_RE
-    return bool(rx.search(" ".join(lines[:20])) or RECONCIL_TITLE_RE.search("\n".join(lines[:20])))
+    cols = title_lines(lines, lines[:20] if column_default is None else column_default)
+    return bool(rx.search(" ".join(lines[:20])) or COLUMN_EXCLUDE_RE.search(" ".join(cols))
+                or reconcil_title(lines))
 
 
 # A matched "title" line that reads like a sentence is prose (MD&A, notes, opinion), not a title.
@@ -126,14 +156,23 @@ def norm(s):
 _ocr_ok = None
 
 
-def ocr_region(page, frac):
-    """OCR the top part of an image-only page (needs Tesseract; returns "" if unavailable)."""
+def ocr_region(page, frac, side="top", dpi=OCR_DPI):
+    """OCR one edge strip of an image-only page (needs Tesseract; returns "" if unavailable).
+    side "top" is the normal header; "left"/"right" read a landscape table scanned sideways onto a
+    portrait page (text running upward / downward), turned upright before OCR."""
     global _ocr_ok
     if _ocr_ok is False:
         return ""
     try:
         r = page.rect
-        pix = page.get_pixmap(dpi=OCR_DPI, clip=pymupdf.Rect(r.x0, r.y0, r.x1, r.y0 + r.height * frac))
+        if side == "top":
+            clip, rot = pymupdf.Rect(r.x0, r.y0, r.x1, r.y0 + r.height * frac), 0
+        elif side == "left":
+            clip, rot = pymupdf.Rect(r.x0, r.y0, r.x0 + r.width * frac, r.y1), 90
+        else:
+            clip, rot = pymupdf.Rect(r.x1 - r.width * frac, r.y0, r.x1, r.y1), -90
+        mat = pymupdf.Matrix(dpi / 72, dpi / 72).prerotate(rot)
+        pix = page.get_pixmap(matrix=mat, clip=clip)
         text = pymupdf.open("pdf", pix.pdfocr_tobytes())[0].get_text("text")
         _ocr_ok = True
         return text
@@ -144,26 +183,100 @@ def ocr_region(page, frac):
         return ""
 
 
+# Text-layer quality: a scanner's bad OCR layer (e.g. a landscape page OCR'd sideways) reads as
+# "rn 0 71- 0 rn 00 n n ..." - few real words or amounts. Such pages are OCR'd again instead.
+WORD_RE = re.compile(r"\(?[a-z][a-z.,:;)'\-/&]{2,}")
+AMOUNT_TOKEN_RE = re.compile(r"[$(]*\d{1,3}(,\d{3})*(\.\d+)?\)?|\$|-")
+GARBLED_MIN_TOKENS = 50
+GARBLED_MAX_GOOD = 0.5
+
+
+def good_token_share(text):
+    """Share of tokens that are real words (3+ letters with a vowel) or well-formed amounts."""
+    toks = text.lower().split()
+    good = sum(1 for t in toks if (WORD_RE.fullmatch(t) and re.search(r"[aeiouy]", t)) or AMOUNT_TOKEN_RE.fullmatch(t))
+    return (good / len(toks) if toks else 0.0), len(toks)
+
+
+def garbled(text):
+    share, n = good_token_share(text)
+    return n >= GARBLED_MIN_TOKENS and share < GARBLED_MAX_GOOD
+
+
+def n_words(text):
+    return sum(1 for t in text.lower().split() if WORD_RE.fullmatch(t) and re.search(r"[aeiouy]", t))
+
+
+def ocr_quality(text):
+    """(real words, their share of the non-amount tokens) of OCR output."""
+    toks = [t for t in text.lower().split() if not AMOUNT_TOKEN_RE.fullmatch(t)]
+    w = n_words(text)
+    return w, (w / len(toks) if toks else 0.0)
+
+
+OCR_MIN_WORDS = 5          # fewer real words than this in the OCR'd header, or
+OCR_MIN_SHARE = 0.4        # less than this share of real words: try reading the page sideways
+
+
+def ocr_header(page):
+    """OCR text of a scanned page's header. A landscape table scanned sideways onto a portrait page
+    reads as noise from the top strip; then the left and right strips are read turned upright and
+    the one with the most real words (weighted by their share) is used."""
+    text = ocr_region(page, OCR_FRAC)
+    w, share = ocr_quality(text)
+    if (w >= OCR_MIN_WORDS and share >= OCR_MIN_SHARE) or _ocr_ok is False:
+        return text
+    best, score = text, w * share
+    for side in ("left", "right"):
+        alt = ocr_region(page, OCR_FRAC, side)
+        aw, ashare = ocr_quality(alt)
+        if aw >= OCR_MIN_WORDS and aw * ashare > score:
+            best, score = alt, aw * ashare
+    return best
+
+
+def _junk(ln):
+    """OCR noise lines ("|", "i", "{") that would split a wrapped title."""
+    return len(re.sub(r"[^a-z0-9]", "", ln)) <= 1
+
+
 def rotated_header(page):
     """Header lines of a page whose text runs sideways (landscape tables printed on a portrait
     page), or None if the text is mostly horizontal. Text running upward has its top at the
-    left edge; text running downward has its top at the right edge."""
-    lines, hor, rot = [], 0, 0
+    left edge; text running downward has its top at the right edge. Positions are taken as
+    displayed, i.e. after the page's /Rotate; a rotated page whose text displays horizontally
+    gets its header from the displayed top of the page."""
+    lines, horiz, hor, rot = [], [], 0, 0
+    m = page.rotation_matrix
+    mdir = pymupdf.Matrix(m.a, m.b, m.c, m.d, 0, 0)
     for b in page.get_text("dict")["blocks"]:
         for ln in b.get("lines", []):
             txt = "".join(sp["text"] for sp in ln["spans"]).strip()
             if not txt:
                 continue
-            dx, dy = ln["dir"]
+            bb = pymupdf.Rect(ln["bbox"]) * m
+            d = pymupdf.Point(ln["dir"]) * mdir
+            dx, dy = d.x, d.y
             if abs(dx) > 0.9:
                 hor += len(txt)
+                horiz.append((bb, txt))
             else:
                 rot += len(txt)
-                lines.append((dy, ln["bbox"], txt))
-    if rot <= hor or not lines:
-        return None
-    up = sum(1 for dy, _, _ in lines if dy < 0) >= len(lines) / 2
+                lines.append((dy, bb, txt))
     r = page.rect
+    if rot <= hor or not lines:
+        if not page.rotation or not horiz:
+            return None
+        # displayed horizontally on a /Rotate'd page: get_text(clip=) would read the wrong edge
+        top = sorted((bb.y0, bb.x0, t) for bb, t in horiz if bb.y0 <= r.y0 + r.height * HEADER_FRAC)
+        out = []
+        for y, _, t in top:   # join pieces of one printed line
+            if out and abs(y - out[-1][0]) < 3:
+                out[-1][1].append(t)
+            else:
+                out.append((y, [t]))
+        return [norm(" ".join(ts)).strip() for _, ts in out]
+    up = sum(1 for dy, _, _ in lines if dy < 0) >= len(lines) / 2
     if up:   # reads bottom-to-top: header is the leftmost strip, lines ordered left to right
         sel = [(bb[0], -bb[3], t) for dy, bb, t in lines if dy < 0 and bb[0] <= r.x0 + r.width * HEADER_FRAC]
     else:    # reads top-to-bottom: header is the rightmost strip, lines ordered right to left
@@ -174,11 +287,12 @@ def rotated_header(page):
 def page_header(page):
     """(header lines in reading order, full text, source) for one page."""
     full = page.get_text("text")
-    if len(full.strip()) < MIN_TEXT_CHARS:
-        text, src = ocr_region(page, OCR_FRAC), "ocr"
-        full = text
-        lines = [norm(ln).strip() for ln in text.splitlines() if ln.strip()]
-        return lines, full, src
+    bad_layer = len(full.strip()) >= MIN_TEXT_CHARS and garbled(full)
+    if len(full.strip()) < MIN_TEXT_CHARS or bad_layer:
+        text = ocr_header(page)
+        if not (bad_layer and n_words(text) < OCR_MIN_WORDS):   # else keep the (bad) text layer
+            lines = [norm(ln).strip() for ln in text.splitlines() if ln.strip()]
+            return [ln for ln in lines if not _junk(ln)], text, "ocr"
     lines = rotated_header(page)
     if lines is not None:
         return lines, full, "text-rotated"
@@ -188,6 +302,9 @@ def page_header(page):
     return lines, full, "text"
 
 
+FUND_PREFIX_RE = re.compile(r"((governmental|proprietary|enterprise|business-type|major|nonmajor|and|&|funds?)\s+)+")
+
+
 def title_matches(lines):
     """Statement types whose title starts (near) the beginning of a header line.
     Two consecutive lines are joined so titles that wrap still match."""
@@ -195,12 +312,18 @@ def title_matches(lines):
     ok = [ln for ln in lines if len(ln) <= TITLE_MAX_LEN and not PROSE_RE.search(ln)
           and not NOTE_HEADING_RE.search(ln)]
     cands = ok + [f"{a} {b}" for a, b in zip(ok, ok[1:])]
+    # SID combined titles: "... changes in fund balances/net position/statement of activities"
+    cands += [p.strip() for ln in ok if "/" in ln for p in ln.split("/")[1:] if p.strip().startswith("statement")]
     for ln in cands:
         if len(ln.split()) > 2 * TITLE_MAX_WORDS:
             continue
+        # "Governmental and Proprietary Funds Balance Sheet/Statement of Net Position": a leading
+        # fund-type phrase doesn't count toward the title offset
+        pre = FUND_PREFIX_RE.match(ln)
+        start = pre.end() if pre else 0
         for t, rx in TITLES:
             m = rx.search(ln)
-            if m and m.start() <= TITLE_MAX_OFFSET and t not in found:
+            if m and m.start() - start <= TITLE_MAX_OFFSET and t not in found:
                 found.append(t)
     return found
 
@@ -221,7 +344,9 @@ DETAIL_TITLES = [
                          + r"(receipts|revenues|disbursements|expenditures)"),
     ("detail_departments", r"(statement|schedule)s?\s+of\s+(general\s+fund\s+)?" + _BASIS
                            + r"(operating\s+|functional\s+)?(disbursements|expenditures|expenses)\b|by\s+(department|function|object)"
-                             r"|departmental"),
+                             r"|departmental"
+                             # school districts' "Cash disbursements for operational expenses" (by program and object)
+                             r"|(cash\s+)?(disbursements|expenditures)\s+for\s+(operational|operating)\s+expen"),
     ("detail_schedule", r"(statement|schedule)s?\s+of\s+" + _BASIS
                         + r"(operating\s+|(net\s+)?patient\s+service\s+|net\s+)?(receipts|revenues?)\b"
                           r"(,?\s*(and\s+)?(disbursements|expenditures|expenses))?"),
@@ -234,30 +359,41 @@ BARE_DETAIL_RE = re.compile(r"^((net\s+)?patient\s+service\s+revenues?|other\s+(
                             r"(operating\s+)?revenues?|(operating\s+|departmental\s+)?expenses|"
                             r"(operating\s+)?expenses\s+by\s+(department|function))$")
 DETAIL_EXCLUDE_RE = re.compile(
-    r"federal\s+awards|findings|questioned|outstanding|investments|interfund|pension|opeb|"
+    r"federal\s+awards|findings|questioned|outstanding|investments|interfund|"
     r"contributions\s+to|notes\s+to|table\s+of\s+contents|independent\s+(auditor|accountant)|"
     r"certified\s+public\s+accountants|discussion\s+and\s+analysis|county\s+officers?|"
     r"office\s+activit|summary\s+schedule|debt(?!\s+service)|bonds?\s+payable|accountability|capital\s+assets|"
-    r"taxes\s+(levied|certified|collected)|tax\s+collections?|fiduciary|custodial|agency\s+funds?|"
-    r"reconcil|net\s+position|balance\s+sheet|assets\s+and|condensed|activity\s+funds?\b|"
+    r"taxes\s+(levied|certified|collected)|tax\s+collections?|fiduciary|"
+    r"reconcil|net\s+position|balance\s+sheet|assets\s+and|condensed|"
     r"our\s+audit|we\s+were\s+engaged|engaged\s+to\s+report|other\s+matters|in\s+our\s+opinion")
+# Fund names that also head columns ("police & fire pension", "community development agency fund"):
+# checked only in the title lines above the date line (see COLUMN_EXCLUDE_RE).
+DETAIL_COLUMN_EXCLUDE_RE = re.compile(r"pension|opeb|custodial|" + AGENCY_FUND + r"|activity\s+funds?\b")
 
 
-def title_block(lines, limit=10):
-    """The heading lines above the table body: stop at the first line with a dollar amount, so
-    body lines such as 'Interest on investments' or 'Debt service' don't trigger exclusions."""
+def title_block(lines, limit=10, lines_out=False):
+    """The heading lines above the table body: stop at the first line with a dollar amount or a
+    section label ("Receipts:", "Local sources:"), so body lines such as 'Interest on investments
+    150' or 'Debt service' don't trigger exclusions."""
     out = []
     for ln in lines[:limit]:
-        if NUMBER_RE.search(ln) or "$" in ln:
+        if NUMBER_RE.search(ln) or "$" in ln or ln.rstrip().endswith(":"):
             break
         out.append(ln)
-    return " ".join(out)
+    return out if lines_out else " ".join(out)
+
+
+def detail_excluded(lines, column_default=None):
+    """True if a detail page's title block names a schedule we never want. column_default: the
+    lines DETAIL_COLUMN_EXCLUDE_RE checks when there is no date line (default: the title block)."""
+    tb = title_block(lines, lines_out=True)
+    cols = title_lines(tb, tb if column_default is None else column_default)
+    return bool(DETAIL_EXCLUDE_RE.search(" ".join(tb)) or DETAIL_COLUMN_EXCLUDE_RE.search(" ".join(cols)))
 
 
 def classify_detail(lines, full_text=""):
     """Detail-schedule type for a page that isn't a basic statement, or None."""
-    head = title_block(lines)
-    if not lines or DETAIL_EXCLUDE_RE.search(head) or (full_text and is_toc(full_text)) \
+    if not lines or detail_excluded(lines) or (full_text and is_toc(full_text)) \
             or re.search(r"reconcil", " ".join(lines[:20])):
         return None
     ok = [ln for ln in lines[:20] if len(ln) <= TITLE_MAX_LEN and not PROSE_RE.search(ln)
@@ -367,6 +503,29 @@ def entity_type_from(meta, fn, first_text):
     return t if t != "unknown" or not st else st
 
 
+# The "Total All Funds" title sits in a boxed cell that OCR often misreads; the page is then known
+# by its column headings ("Actual 2023-2024 | Actual/Estimated 2024-2025 | Adopted Budget 2025-2026",
+# or "(Column 1) (Column 2) (Column 3)" over "Beginning Balances, Receipts, & Transfers").
+ALL_FUNDS_COLS_RE = [re.compile(r"\bactual"), re.compile(r"adopted\s+budget")]
+ALL_FUNDS_NUMBERED_RE = [re.compile(r"column\s*1"), re.compile(r"column\s*2"), re.compile(r"beginning")]
+
+
+def budget_all_funds_fallback(pages, keep, kept_types):
+    """Index of the Total All Funds page when its title wasn't read, or None: first a page with its
+    column headings, else the page just before "Documentation of Transfers" (form page 2 comes right
+    before form page 3) unless that is the cover page."""
+    for i, (lines, _, _) in enumerate(pages):
+        head = " ".join(lines[:12])
+        if i in keep or BUDGET_FORM_RE.search(head) or BUDGET_PAGES_RX["budget_fund_worksheet"].search(head):
+            continue
+        if all(rx.search(head) for rx in ALL_FUNDS_COLS_RE) or all(rx.search(head) for rx in ALL_FUNDS_NUMBERED_RE):
+            return i
+    tr = next((k for k, t in zip(keep, kept_types) if t == "budget_transfers"), None)
+    if tr and tr - 1 not in keep and not BUDGET_FORM_RE.search(" ".join(pages[tr - 1][0][:12])):
+        return tr - 1
+    return None
+
+
 def select_budget_form(pages):
     """Budget form filed in place of a waiver: keep only the pages that print prior-year actuals."""
     keep, kept_types = [], []
@@ -377,6 +536,12 @@ def select_budget_form(pages):
                 keep.append(i)
                 kept_types.append(t)
                 break
+    if "budget_all_funds" not in kept_types:
+        i = budget_all_funds_fallback(pages, keep, kept_types)
+        if i is not None:
+            n = sum(1 for k in keep if k < i)
+            keep.insert(n, i)
+            kept_types.insert(n, "budget_all_funds")
     n_ocr = sum(1 for _, _, src in pages if src == "ocr")
     flag = "budget_form" + ("" if "budget_all_funds" in kept_types else "; no_budget_actuals_found")
     if n_ocr:
@@ -423,13 +588,14 @@ def select_pages(pages, filename=""):
         kept_types.append(t)
         # Continuation pages: same title again, or "(continued)" with numbers and no other title.
         label = exhibit_label(pages[i][0])
-        excl = DETAIL_EXCLUDE_RE if t.startswith("detail_") else EXCLUDE_RE
+        detail = t.startswith("detail_")
         untitled = 0
         j = i + 1
         while j < len(pages) and j - i <= MAX_CONTINUATIONS:
             lines, full, src = pages[j]
-            head_j = title_block(lines) if t.startswith("detail_") else " ".join(lines[:20])
-            if types[j] or excl.search(head_j) or RECONCIL_TITLE_RE.search("\n".join(lines[:20])):
+            # (an untitled page has no date line, so fund names in its column headings don't count)
+            if types[j] or reconcil_title(lines) or \
+                    (detail_excluded(lines, []) if detail else excluded(lines, column_default=[])):
                 break  # a titled page is handled by the outer loop
             lab_j = exhibit_label(lines)
             head8 = " ".join(lines[:8])
