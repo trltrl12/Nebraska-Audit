@@ -1,0 +1,11 @@
+{
+  "stem": "Western_Community_College_FY2025",
+  "values_checked": 84,
+  "issues": [
+    {"severity": "warning", "path": "disbursements[0].category", "page": 2, "extracted": "other", "on_page": "Personal services 21,646,994; Operating expenses 11,110,867; Travel 418,102; Noncapitalized capital assets 535,234; Depreciation 3,062,996 (disbursements[0]-[4])", "issue": "Statement lists expenses by object only, so all 36.8M of operating expenses sit in 'other' (marked review). Rules say to use the fund's function for object-only statements; a community college has no single function (the p4 schedule splits instruction/support services), so this is a judgment call that leaves >10% of business-type spending in 'other'."},
+    {"severity": "warning", "path": "business_type.other_financing", "page": 2, "extracted": 3155768, "on_page": "Other Income: Capital appropriations 3,135,960; Insurance proceeds 19,808; Total other income 3,155,768", "issue": "Insurance proceeds 19,808 are a receipt category under the rules (reimbursements/refunds) but are folded into other_financing with capital appropriations. Treating capital appropriations as other_financing (below income before other revenues) is defensible. Computed value correctly marked and matches the printed total."},
+    {"severity": "warning", "path": "balance_sheet.liabilities[7].category", "page": 1, "extracted": "accrued liabilities", "on_page": "Compensated absences 1,042,809 (under Noncurrent liabilities)", "issue": "Rules put only compensated absences due soon in accrued liabilities; this one is noncurrent (other liabilities or debt - due in more than one year)."},
+    {"severity": "warning", "path": "detail[0].detail_category", "page": 4, "extracted": "salaries and wages", "on_page": "Personnel services (every program)", "issue": "Personnel services likely includes benefits; recorded entirely as salaries and wages."},
+    {"severity": "warning", "path": "balance_sheet.liabilities[5].original_label", "page": 1, "extracted": "Subscription Liability payable (current)", "on_page": "Subscription Liability payable", "issue": "Extractor added '(current)'/'(noncurrent)' to the printed label to tell the two lines apart; amounts 503,401 and 1,739,583 are correct."}
+  ]
+}
