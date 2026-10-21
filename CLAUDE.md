@@ -143,7 +143,6 @@ These were diagnosed and fixed in find_pages v6; re-extract and re-verify them a
   Plattsmouth_Airport_Authority_FY2025 (report p8, governmental funds revenues/expenditures statement, not trimmed; budget-basis schedule used).
   Polk_FY2025 (odd report pages 27-35 of the combining schedules not trimmed: Bandstand/Playground/Total/budget columns; actuals from Exhibits III-IV).
   Sargent_Public_Schools_FY2025 (report p50, rest of the per-account Activities Fund schedule, not trimmed; one-line budget schedule used).
-  Sarpy_County_SID_38_FY2025 (report p4, Balance Sheet/Statement of Net Position, not trimmed).
   South_Sioux_City_FY2025 (report pp77, 91-92, nonmajor fund schedules, not trimmed; nonmajor detail revenue 6.72M vs 8.53M).
   Southeast_Community_College_FY2025 (last page of the cash flow statement not trimmed).
   Southern_School_District_1_FY2025 (Exhibit N cut off after program 2163; rest from Exhibit G, totals tie).
