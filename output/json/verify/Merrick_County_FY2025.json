@@ -1,46 +1,21 @@
 {
   "stem": "Merrick_County_FY2025",
-  "values_checked": 135,
+  "values_checked": 132,
   "issues": [
-    {
-      "severity": "error",
-      "path": "detail_totals[1].amount",
-      "page": 3,
-      "extracted": 5232126,
-      "on_page": 5232136,
-      "issue": "[fixed] General Fund budget schedule prints TOTAL DISBURSEMENTS (Actual) as 5,232,136. The detail lines add to 5,232,126, which also matches the printed excess (1,332,325) and variance (527,084), so the printed total looks like a typo in the report. The extractor changed the printed total to 5,232,126 (its notes say so) instead of keeping 5,232,136 and adding a report_discrepancies entry (check 'detail', difference +10, p3). Printed totals must not be altered."
-    },
-    {
-      "severity": "warning",
-      "path": "missing",
-      "page": 2,
-      "extracted": null,
-      "on_page": "Trimmed PDF goes from report p7 (Statement of Activities) to report p21 (General Fund budget schedule)",
-      "issue": "The governmental funds Statement of Cash Receipts, Disbursements and Changes in Cash Balances and the fund-basis balance statement (normally report pp8-9) are not in the trimmed PDF. Receipts and disbursements were built from the Statement of Activities instead, and they tie to the fund schedules. All 17 trimmed pages were checked and every line on them is in the JSON. The source PDF should be re-trimmed."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[2]",
-      "page": 5,
-      "extracted": "inheritance/lodging/property tax split of Taxes 6,401,224",
-      "on_page": "Statement of Activities prints one 'Taxes' line; fund schedules print 'Taxes' per fund only",
-      "issue": "The Taxes split uses fund-level 'Taxes' lines. The tax type comes from each fund's purpose (Inheritance Fund = inheritance tax, Visitors Promotion = lodging tax, Courthouse and 4-H Building P&I bond funds = property tax), not from a printed tax-type breakdown. The amounts are right (434,543 + 6,802 + 225,695 + 5,734,184 = 6,401,224). Defensible, but receipts[3] (lodging) and receipts[4] (property tax, 77,766 + 147,929) and the matching detail[37]/detail[38] are inferences."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[32]",
-      "page": 6,
-      "extracted": "not recorded",
-      "on_page": "Street Bridge Buyback Fund DISBURSEMENTS: Actual -, Final Budget 1,314,113",
-      "issue": "Street Bridge Buyback's disbursements line (actual 0, budget 1,314,113) is not in detail. The actual is zero, so totals are unaffected; only the budget figure is lost."
-    },
-    {
-      "severity": "warning",
-      "path": "notes",
-      "page": 16,
-      "extracted": "Road Sinking 13,366",
-      "on_page": "County Sinking Fund: Public Works 13,366 (Road Sinking Fund disbursements are -)",
-      "issue": "The notes credit the 13,366 Public Works spending to the Road Sinking Fund. It is the County Sinking Fund's. Text only; the amounts are unaffected."
-    }
+    {"severity": "warning", "path": "receipts[4].category", "page": 17,
+     "extracted": "property tax", "on_page": "Taxes 77,766 (Courthouse Bond P & I Fund, p17) + Taxes 147,929 (County 4H Building P&I Fund, p18)",
+     "issue": "Page prints only 'Taxes'. Calling it property tax comes from the bond fund names, not from a printed label. Probably right (debt service levies), but it is an assumption. Same applies to detail[38]."},
+    {"severity": "warning", "path": "receipts[3].category", "page": 14,
+     "extracted": "lodging tax", "on_page": "Taxes 6,802 (Visitors Promotion Fund)",
+     "issue": "Lodging tax is inferred from the fund name. The page prints only 'Taxes'. Same applies to detail[37]."},
+    {"severity": "warning", "path": "detail[27].detail_category", "page": 7,
+     "extracted": "highway allocation", "on_page": "Intergovernmental 2,160,605 (Road Fund)",
+     "issue": "Assumed highway allocation for a broad 'Intergovernmental' line (already marked review). May include federal/state road grants or pro-rate money."},
+    {"severity": "warning", "path": "detail[3].detail_category", "page": 5,
+     "extracted": "other charges for services", "on_page": "Charges for Services 401,020 (General Fund)",
+     "issue": "For a county General Fund this is mostly fees of office (Statement of Activities p2 shows General Government fees 375,075). 'fees of office' may fit better."},
+    {"severity": "warning", "path": "receipts[1].review", "page": 4,
+     "extracted": "mix of state and federal grants (ARPA, road)", "on_page": "ARPA Fund receipts are '-' (p4, p8)",
+     "issue": "The review note says ARPA, but the ARPA Fund had no intergovernmental receipts this year. The amount 2,680,989 is correct; only the note is inaccurate."}
   ]
 }
