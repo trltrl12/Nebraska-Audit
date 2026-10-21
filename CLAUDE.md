@@ -120,8 +120,8 @@ These were diagnosed and fixed in find_pages v6; re-extract and re-verify them a
   report p17-18 spread; receipt labels inferred from fund schedules, marked review).
   Leigh_FY2025 (General Fund departments schedule continues past trimmed p12: Housing/Park/Pool/Library
   columns missing; p9 budget schedule used meanwhile).
-  Lawrence-Nelson_Public_Schools_FY2025 (student activities schedule, ~424,692 of receipts, not trimmed;
-  General Fund detail by object pp18-19 only partly there).
+  Lawrence-Nelson_Public_Schools_FY2025 (student activities schedule, ~424,692 of receipts, not trimmed; General Fund
+  Exhibit P now complete after v8).
   Beatrice_Public_Schools_FY2025 (report p7, governmental receipts page, not trimmed; receipts built from
   fund schedules, marked computed).
   Boelus_FY2025 (Exhibit A page 2, lines 29-52 spending by function, not trimmed; fund totals used).
