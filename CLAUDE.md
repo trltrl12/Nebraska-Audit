@@ -122,8 +122,6 @@ These were diagnosed and fixed in find_pages v6; re-extract and re-verify them a
   columns missing; p9 budget schedule used meanwhile).
   Lawrence-Nelson_Public_Schools_FY2025 (student activities schedule, ~424,692 of receipts, not trimmed; General Fund
   Exhibit P now complete after v8).
-  Beatrice_Public_Schools_FY2025 (report p7, governmental receipts page, not trimmed; receipts built from
-  fund schedules, marked computed).
   Boelus_FY2025 (Exhibit A page 2, lines 29-52 spending by function, not trimmed; fund totals used).
   Fairbury_FY2025 (report pp42-47 Light/Water/Sewer budget schedules 6-9, plus pp8, 11, 62, not trimmed).
   Chadron_Public_Schools_FY2025 (report p34 not trimmed: trimmed p15 = report p33, p16 = report p35).
@@ -163,7 +161,7 @@ These were diagnosed and fixed in find_pages v6; re-extract and re-verify them a
   York_FY2025 (report p73, rest of the General Fund Departments combining schedule: Fire/EMS, Library, Total columns, not trimmed; departmental detail left out).
   York_Public_Schools_FY2025 (trim stops partway through Exhibit P at p20: object detail for programs 2130+, ~8.0M, missing; Exhibit G function lines used).
   Found in the 2026-10-21 outside-review recheck (re-extract after the v7 re-trim):
-  Beatrice_FY2025 (nonmajor/capital projects schedules), Beaver_Crossing_FY2025 (budget columns report pp26, 28, 30),
+  Beaver_Crossing_FY2025 (budget columns report pp26, 28, 30),
   Blair_FY2025 (Debt Service budget schedule, report pp63-65, 67), Box_Butte_County_FY2025 (rest of nonmajor combining
   statement after report p24), Bradshaw_FY2025 (General Fund combining pages report pp32, 34),
   Central_City_Public_Schools_FY2025 (report p41 Bond Fund budget), Central_Platte_NRD_FY2025 (report p11 fund statement),
