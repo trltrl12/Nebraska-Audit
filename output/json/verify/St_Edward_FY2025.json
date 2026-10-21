@@ -1,22 +1,21 @@
 {
   "stem": "St_Edward_FY2025",
-  "values_checked": 170,
+  "values_checked": 181,
   "issues": [
-    {"severity": "warning", "path": "missing", "page": 3,
-     "extracted": "governmental receipts/disbursements taken from the Statement of Activities",
-     "on_page": "Trimmed PDF jumps from report p15 (Statement of Activities) to report p20 (proprietary net position); the governmental funds statements (report pp16-19, source PDF pages 18-21) and any nonmajor combining page (source PDF p54) are not trimmed",
-     "issue": "Without the governmental funds statement, disbursements are accrual-based: they include 166,210 non-cash depreciation and leave out capital outlay (101,596 GF + 46,062 Street) and debt principal 20,000. Beginning cash can't be shown and the cash identity can't be checked. Nonmajor fund detail (TIF 45,053, economic development 11,531, the fund sending the GF's 8,549 transfers in) is also missing. Re-trim and re-extract."},
-    {"severity": "warning", "path": "receipts[0].category", "page": 2,
-     "extracted": "charges for services/fees", "on_page": "Charges for Services - General government 2,065",
-     "issue": "The report's own breakdown shows all 2,065 is licenses and permits (GF departments p11: General 2,055 + Police 10; budget p8 'Licenses, fees, and permits' 2,065). It could be 'licenses and permits'."},
-    {"severity": "warning", "path": "receipts[3].category", "page": 3,
-     "extracted": "donations/contributions", "on_page": "Capital Grants and Contributions - General government 70,315",
-     "issue": "The grantor isn't stated. A 70,315 capital grant to a city is often a government grant (state/federal), so it could be intergovernmental/state aid or federal grants. The same question applies to receipts[2] (operating grant, public safety 10,000)."},
-    {"severity": "warning", "path": "disbursements[6].category", "page": 2,
-     "extracted": "other", "on_page": "Depreciation - unallocated 166,210",
-     "issue": "This is non-cash depreciation recorded as a disbursement. It is 21% of governmental disbursements, and it's there only because the Statement of Activities was used in place of the missing funds statement."},
-    {"severity": "warning", "path": "detail[75].detail_category", "page": 9,
+    {"severity": "warning", "path": "receipts[9].category", "page": 5,
+     "extracted": "donations/contributions", "on_page": "Grants and contributions 80,315 (Statement of Activities p2-3: 70,315 capital grants general government, 10,000 operating grants public safety)",
+     "issue": "The grantor is not stated. A 70,315 capital grant to a city is often a state or federal grant, so it could be intergovernmental/state aid or federal grants. The same question applies to detail[10] (70,315, General) and detail[11] (10,000, Fire). receipts[9] already has a review flag; detail[10] and detail[11] do not."},
+    {"severity": "warning", "path": "detail[75].detail_category", "page": 11,
      "extracted": "highway allocation", "on_page": "Intergovernmental 140,189 (Street Fund)",
-     "issue": "The label says only 'Intergovernmental', so 'highway allocation' is an assumption (likely, but the page doesn't say) and the line has no review flag."}
+     "issue": "The label says only 'Intergovernmental', so 'highway allocation' is an assumption. It is likely for a Street Fund, but the page doesn't say so and the line has no review flag."},
+    {"severity": "warning", "path": "detail[29].detail_category", "page": 14,
+     "extracted": "construction/infrastructure", "on_page": "Capital outlay 93,221 (General department)",
+     "issue": "The page doesn't say what the capital outlay bought. Construction/infrastructure is a guess; it could be equipment purchases or land and buildings. The same applies to detail[46] (Park capital outlay 8,375). Both lines have review flags."},
+    {"severity": "warning", "path": "detail[9].detail_category", "page": 15,
+     "extracted": "other charges for services", "on_page": "Charges for services 15,350 (Community Building)",
+     "issue": "Community building charges are usually hall rentals, so 'rentals' may fit better. This is a judgment call."},
+    {"severity": "warning", "path": "business_type.transfers_net", "page": 7,
+     "extracted": 22100, "on_page": "Other financing uses: Transfers to other funds 1,400 / 20,700 / 22,100, added in Change in net position (-33,246 + 22,100 = -11,146)",
+     "issue": "The report labels the line as a transfer out ('Other financing uses', 'Transfers to other funds'), but its own arithmetic adds it. The Statement of Activities (p3: business-type Transfers 22,100), the governmental funds statement (p5: (22,100) out) and the cash flows (p8-9: 'Transfers from other funds') all show it coming in. +22,100 is consistent with the arithmetic and the other statements, but the printed label contradicts it."}
   ]
 }
