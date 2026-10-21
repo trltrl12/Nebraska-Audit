@@ -1,58 +1,94 @@
 {
   "stem": "Omaha_FY2025",
-  "values_checked": 428,
+  "values_checked": 517,
   "issues": [
-    {"severity": "warning", "path": "missing", "page": 7,
-     "extracted": "business-type receipts/disbursements from Statement of Activities (p3-4)",
-     "on_page": "Trimmed p7 = Statement of Net Position - Proprietary Funds (report p23, assets/deferred outflows only); report p24 (proprietary liabilities/net position) and the Statement of Revenues, Expenses and Changes in Fund Net Position - Proprietary Funds (report p25) are not in the trimmed PDF",
-     "issue": "Trim gap, not an extraction miss: business-type lines are taken from the government-wide Statement of Activities instead of the proprietary fund statement the rules call for. Totals and roll-forward tie (1,284,177,144 + 282,024,221 - 175,252,256 + 18,740,799 = 1,409,689,908), but the operating/nonoperating line breakdown and capital contributions treatment can't be checked. Re-extract once report pp24-25 are trimmed."},
-    {"severity": "warning", "path": "detail[41]", "page": 9,
-     "extracted": "Other funds 8,306,755 recorded as general government expenditure",
-     "on_page": "Other agencies: Other funds, budget -, actual 8,306,755; GAAP statement p6 General Fund transfers out (8,558,895)",
-     "issue": "Probably transfers to other funds counted as spending in detail (zero budget, close to the GF transfers out). decision_needed already raises this; the money may be in detail both as spending and, at the top level, as transfers_out."},
-    {"severity": "warning", "path": "detail[29].category", "page": 9,
-     "extracted": "general government / not itemized",
-     "on_page": "Non-Departmental: Debt service (other accounts) 11,411,145",
-     "issue": "Debt service line put under general government. Defensible because the schedule prints it under General Government (marked review), but it could be debt service."},
-    {"severity": "warning", "path": "detail[10].detail_category", "page": 9,
-     "extracted": "category occupation/franchise tax, detail_category other local taxes",
-     "on_page": "Restaurant tax 44,995,058",
-     "issue": "Category and detail_category don't match. Omaha's restaurant tax is an occupation tax (p6 statement groups it under 'Business' taxes), so detail_category should probably be occupation/franchise tax."},
-    {"severity": "warning", "path": "detail[12].category", "page": 9,
-     "extracted": "other taxes / other local taxes",
-     "on_page": "Tobacco Tax 4,589,045",
-     "issue": "The p6 statement puts this under 'Taxes: Business', which was recorded as occupation/franchise tax. Omaha's tobacco tax is an occupation tax, so occupation/franchise tax would match better than other taxes."},
-    {"severity": "warning", "path": "detail[120].detail_category", "page": 22,
-     "extracted": "category occupation/franchise tax, detail_category other local taxes",
-     "on_page": "Taxes business 1,254,839",
-     "issue": "Same label as GF 'Business taxes' (detail occupation/franchise tax) but recorded with a different detail_category, and category/detail_category don't match. GOCVB funding is probably hotel occupation tax (lodging tax). Make them consistent."},
-    {"severity": "warning", "path": "detail[91].category", "page": 13,
-     "extracted": "fines and forfeitures",
-     "on_page": "Changes for services 251,074 (typo for Charges for services)",
-     "issue": "Category doesn't match the printed label (charges for services). The fund name 'Library Fine and Fees' makes fines plausible, so this is a judgment call (marked review)."},
-    {"severity": "warning", "path": "receipts[11].category", "page": 6,
-     "extracted": "donations/contributions",
-     "on_page": "Contributions and grants 83,765,425 (Grants Fund 72,409,142)",
-     "issue": "Most of this is the Grants Fund and is probably government (federal/state) grants, not private donations. Marked review. The same applies to the detail 'Contributions and grants' lines (Street, Storm Water, Household Chemical Disposal)."},
-    {"severity": "warning", "path": "disbursements[3].category", "page": 6,
-     "extracted": "health/welfare",
-     "on_page": "Other public services 43,487,738",
-     "issue": "No exact category; mixes solid waste/sewer (utilities) and flood control (natural resources/conservation). Detail mapping is inconsistent: GF solid waste and sewer lines -> utilities, but Interceptor Sewer 'Public works/interceptor division' (detail[111], p17) and Storm Water flood control (detail[107], p16) -> health/welfare."},
-    {"severity": "warning", "path": "disbursements[10].category", "page": 3,
-     "extracted": "other",
-     "on_page": "Parking 21,360,469",
-     "issue": "Parking facilities expenses in other (marked review); defensible, but could be streets/highways or economic development."},
-    {"severity": "warning", "path": "receipts[19]", "page": 3,
-     "extracted": "Capital grants and contributions - Parking 12,721 (receipts[19]) / Sewer 518,769 (receipts[20]) as intergovernmental/state aid receipts",
-     "on_page": "Statement of Activities capital grants and contributions column",
-     "issue": "Grantor isn't identified, and in a proprietary fund statement capital contributions usually sit below the line (business_type.other_financing). The total is unaffected (marked review)."},
-    {"severity": "warning", "path": "missing", "page": 18,
-     "extracted": "no expenditure line or expenditure detail_total for Community Park Development Fund",
-     "on_page": "Parks and recreation/community park development: budget 350,000, actual -; Total expenditures actual -",
-     "issue": "Zero-actual line with a budget was left out here, but zero-actual lines with budgets were included for the General Fund (e.g. County treasurer, Cash reserve). No money effect; inconsistent handling."},
-    {"severity": "warning", "path": "detail_totals[2].amount", "page": 11,
-     "extracted": 95190823,
-     "on_page": "Street and Highway Allocation budgetary schedule total revenues 95,190,823 vs statement p6 95,190,824 (charges for services 32,455,360 vs 32,455,361)",
-     "issue": "$1 rounding difference printed in the report itself (recorded in notes, not in report_discrepancies). Each figure is recorded as printed."}
+    {
+      "severity": "warning",
+      "path": "disbursements[3].category",
+      "page": 6,
+      "extracted": "health/welfare",
+      "on_page": "Other public services 43,487,738 (General Fund 40,116,444; p13 budget schedule shows General Fund Solid waste division 41,257,795)",
+      "issue": "The line is mostly solid waste (refuse), which the rules put under utilities. The detail records solid waste as utilities, so the statement line and the detail disagree. Dominant category is probably utilities."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[11].category",
+      "page": 6,
+      "extracted": "donations/contributions",
+      "on_page": "Contributions and grants 83,765,425 (Grants Fund 72,409,142)",
+      "issue": "Most of this is in the Grants Fund. The Statement of Activities (p3-4) shows 80.1M operating and 13.8M capital grants, which are probably government grants (federal or intergovernmental), not private donations. Already in decision_needed."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[70].category",
+      "page": 14,
+      "extracted": "donations/contributions",
+      "on_page": "Street and Highway Allocation Fund: Contributions and grants 1,496,205",
+      "issue": "Street fund grants are probably from a government (intergovernmental or federal), not private donations. Same question as the statement-level Contributions and grants line."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[41]",
+      "page": 12,
+      "extracted": 8306755,
+      "on_page": "Other agencies: Other funds 8,306,755 (budget -, actual 8,306,755)",
+      "issue": "This may be the General Fund's transfers to other funds recorded as spending. It has no budget, the budget schedule has no other-financing section, and GAAP p6 shows General Fund transfers out of 8,558,895 (e.g. Ballpark Revenue Fund transfers in 1,649,004, p25). If so, it should be other financing (signed), not expenditure. Already in decision_needed; recorded as expenditure meanwhile."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[111].category",
+      "page": 22,
+      "extracted": "health/welfare",
+      "on_page": "Public works/interceptor division 37,928 (Interceptor Sewer Construction Fund)",
+      "issue": "Sewer interceptor construction is a sewer function, so utilities fits better. The General Fund 'Sewer revenue general expense division' line is recorded as utilities."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[107].category",
+      "page": 21,
+      "extracted": "health/welfare",
+      "on_page": "Public works/flood control and water quality division 2,212,329",
+      "issue": "Flood control and water quality could be natural resources/conservation (water and drainage) rather than health/welfare."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[29].category",
+      "page": 12,
+      "extracted": "general government / not itemized",
+      "on_page": "Non-Departmental: Debt service (other accounts) 11,411,145",
+      "issue": "The schedule prints this under General Government, but the label says debt service, so it could be debt service principal/interest. It is not split. The line already carries review."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[10].category",
+      "page": 9,
+      "extracted": "other",
+      "on_page": "Parking Facilities Fund total operating expenses 15,011,384",
+      "issue": "Parking facilities were put in 'other' (also the Parking detail expense lines detail[150]-detail[155]). streets/highways (transportation) or economic development could fit. Judgment call; the line already carries review."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[12]",
+      "page": 3,
+      "extracted": "business-type operating revenues taken by activity from the Statement of Activities p3; nonmajor expenses from p3",
+      "on_page": "Proprietary statement p9 total column: operating revenues 263,380,113; Nonmajor Enterprise total operating expenses 10,274,087 + interest 30,889",
+      "issue": "The rules call for business-type lines from the proprietary statement's total column. The extractor used Statement of Activities activity lines for revenues and nonmajor expenses instead. All sums tie exactly to p9 (263,380,113; 10,304,976), so no amount is affected. Mixed source is the assumption."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[18].category",
+      "page": 3,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "Sewer operating grants and contributions 10,400",
+      "issue": "Grantor not identified. On p9 this amount sits inside 'Operating revenues, charges for services' (Sewer 237,929,810). detail[159] records that whole line as sewer charges, so receipts and detail categorize the same money differently."
+    },
+    {
+      "severity": "warning",
+      "path": "balance_sheet.liabilities[6].category",
+      "page": 2,
+      "extracted": "debt - due in more than one year",
+      "on_page": "Long-term liabilities: Due in more than one year 3,469,383,298",
+      "issue": "This assumes all long-term liabilities are debt. The amount includes net pension and OPEB liabilities (proprietary share alone, p8: net pension 50,258,979, OPEB 41,826,751), which the government-wide statement doesn't split out. Noted by the extractor."
+    }
   ]
 }
