@@ -181,6 +181,7 @@ These were diagnosed and fixed in find_pages v6; re-extract and re-verify them a
   Northeast_Nebraska_Economic_Development_District_FY2025 (cash flow statement report pp7-8), Omaha_FY2025 (report
   pp24-25 proprietary revenue/expense statement), Ord_FY2025 (also report p15 government-wide assets/liabilities),
   Otoe_County_FY2025 (governmental funds receipts/disbursements statement).
+  Hastings_Public_Schools_FY2025 (report pp51-54, probably the per-account Activity Fund schedule, and pp15, 49 not trimmed).
 - Budget forms whose Total All Funds page wasn't found (manifest flag no_budget_actuals_found; skipped, no
   JSON): Lewis_Township_Clay_County_B2526 and any others with that flag. Check why the finder misses it.
 - Filed under FY2025 but the PDF holds an earlier year (extracted as printed; check the Auditor's site for
