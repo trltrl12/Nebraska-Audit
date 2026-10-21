@@ -1,0 +1,38 @@
+{
+  "stem": "Sarpy_County_SID_344_FY2025",
+  "values_checked": 112,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "balance_sheet.liabilities[1].category",
+      "page": 1,
+      "extracted": "debt - due within one year",
+      "on_page": "Warrants Payable 10,027,810 (no due-date split)",
+      "issue": "[fixed] The rule says debt that isn't split by due date goes in 'debt - due in more than one year' (the line's own review note says it isn't split, and SID 341/343 used that category). Amount is right."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[3].category",
+      "page": 2,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "State Motor Vehicle Tax Allocation 329",
+      "issue": "Motor vehicle tax allocated by the county to the SID may be 'motor vehicle tax' rather than pro-rate state aid; same call in detail[2] (detail_category 'motor vehicle pro-rate'). Judgment call, amount is small."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[8].category",
+      "page": 2,
+      "extracted": "general government",
+      "on_page": "Interlocal Payments 96,809 (Debt Service Fund)",
+      "issue": "The function is a guess (review already set; also detail[29]). Paid from the Debt Service Fund, so it may be debt service or capital-related. Defensible as recorded."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[21].category",
+      "page": 5,
+      "extracted": "general government",
+      "on_page": "Engineering 448,675 (Debt Service Fund, Actual on Budgetary Basis)",
+      "issue": "Large engineering cost in the Debt Service Fund budgetary column is probably construction engineering (capital outlay / construction/infrastructure) rather than general government professional services."
+    }
+  ]
+}

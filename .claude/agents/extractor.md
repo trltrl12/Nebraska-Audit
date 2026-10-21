@@ -404,7 +404,8 @@ When a function line mixes categories, pick the dominant one and mention it in `
   `special assessments`), warrant/bond proceeds (→ `debt_proceeds`) and debt service. For SIDs:
   bond maintenance, bond issue costs and paying/fiscal agent fees → `debt service interest` (detail
   `debt interest and fees`); interest on special assessments → `special assessments`. Garbage/trash/refuse
-  collection → `utilities`.
+  collection → `utilities`. SID "Warrants Payable" with no due-date split →
+  `debt - due in more than one year` (never `debt - due within one year`).
 - **NRDs:** property tax and state/federal grants; function `natural resources/conservation`.
 
 ## Output to the caller
