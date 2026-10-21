@@ -1,24 +1,27 @@
 {
   "stem": "Cozad_Community_Schools_FY2025",
-  "values_checked": 255,
+  "values_checked": 262,
   "issues": [
+    {"severity": "warning", "path": "missing", "page": 12,
+     "extracted": null, "on_page": "Report page 53 (source PDF p57) not trimmed: trimmed p12 = report p52 (Bond Fund budget schedule), p13 = report p54 (combining other governmental funds)",
+     "issue": "One page inside the supplementary schedules is not in the trimmed PDF. It may hold another fund's budget schedule (e.g. Qualified Capital Purpose, Activity or Nutrition). All statement and combining totals tie without it, so no amounts appear to be missing, but check the source."},
     {"severity": "warning", "path": "disbursements[6].category", "page": 6,
      "extracted": "student activities", "on_page": "Support services: Other 1,008,312 (Depreciation 451,942 + Other Governmental 556,370)",
-     "issue": "Mixed line: Activity fund 547,377 (student activities) vs Depreciation fund 'Other support services' 451,942 + Employee Benefit 8,993 = 460,935 (support services). Dominant category chosen is only 54% of the line; defensible but borderline."},
+     "issue": "Mixed line: Activity fund 547,377 (student activities) vs Depreciation 'Other support services' 451,942 + Employee Benefit 8,993 = 460,935 (support services). The dominant category is only 54% of the line, so the choice is defensible but borderline. Already marked review."},
     {"severity": "warning", "path": "detail[40].category", "page": 9,
      "extracted": "other", "on_page": "3300 Community service operations 10,000",
-     "issue": "Category 'other' here, while the same 10,000 sits inside top-level 'Categorical programs' 272,694 (4,524 + 258,170 + 10,000), which is categorized instruction. Inconsistent treatment; pick one function for both."},
+     "issue": "This line is 'other', but the same 10,000 sits inside top-level 'Categorical programs' 272,694 (10,000 + 4,524 + 258,170), which is categorized as instruction. The treatment is inconsistent; pick one function for both."},
     {"severity": "warning", "path": "receipts[17].category", "page": 6,
-     "extracted": "other", "on_page": "Other income 42,519",
-     "issue": "General Fund portion 18,096 is identifiable on p9 as 1980 Refund of prior year expenditures 2,280 + 1990 Other local receipts 5,700 + 2210 ESU receipts 5,133 + 5690 Other non-revenue receipts 4,983, so part of this line is reimbursements/local government money. The rest (Activity 23,779, Employee Benefit 644) is unexplained, so 'other' plus review is defensible."},
+     "extracted": "other", "on_page": "Other income 42,519 (General 18,096 + Other Governmental 24,423)",
+     "issue": "The General Fund part 18,096 is itemized on p9: 1980 Refund 2,280, 1990 Other local 5,700, 2210 ESU receipts 5,133, 5690 Other non-revenue 4,983. The rest (Activity 23,779, Employee Benefit 644) is unexplained. No category is more than half, so 'other' with review is defensible."},
     {"severity": "warning", "path": "detail[29].budget_final", "page": 9,
      "extracted": null, "on_page": 7101090,
-     "issue": "Final budget printed for 1100 Instructional services is 7,101,090. It was left null because the actual was split for the hidden transfer; the printed budget is not recorded anywhere except in notes."},
+     "issue": "The final budget for 1100 Instructional services is printed (7,101,090) but was left null because the actual was split for the hidden 11,000 transfer. The figure is only in notes."},
     {"severity": "warning", "path": "detail[38].budget_final", "page": 9,
      "extracted": null, "on_page": 1843050,
-     "issue": "Final budget printed for 2600 Building and grounds is 1,843,050. It was left null because of the hidden-transfer split."},
+     "issue": "The final budget for 2600 Building and grounds is printed (1,843,050) but was left null because of the hidden-transfer split."},
     {"severity": "warning", "path": "detail[39].budget_final", "page": 9,
      "extracted": null, "on_page": 483000,
-     "issue": "Final budget printed for 2700 Pupil transportation is 483,000. It was left null because of the hidden-transfer split."}
+     "issue": "The final budget for 2700 Pupil transportation is printed (483,000) but was left null because of the hidden-transfer split."}
   ]
 }

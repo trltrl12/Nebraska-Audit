@@ -1,15 +1,24 @@
 {
   "stem": "Community_Memorial_Hospital_District_FY2025",
-  "values_checked": 144,
+  "values_checked": 145,
   "issues": [
     {"severity": "warning", "path": "receipts[3].category", "page": 3,
      "extracted": "donations/contributions", "on_page": "Noncapital grants and contributions 127,099",
-     "issue": "source not stated; grants may be governmental (intergovernmental/state aid or federal grants) rather than private donations. Already marked review."},
+     "issue": "The source is not stated. These grants may come from a government (intergovernmental/state aid or federal grants) rather than private donors. Already marked review."},
+    {"severity": "warning", "path": "receipts[1].category", "page": 3,
+     "extracted": "other", "on_page": "Other operating revenue 4,095,092",
+     "issue": "Nothing in the trimmed pages explains it, so 'other' with review is allowed. It is 10.3% of business-type receipts (above the 10% review threshold)."},
     {"severity": "warning", "path": "disbursements[7].category", "page": 3,
      "extracted": "other", "on_page": "Loss on disposal of capital assets (15,862)",
-     "issue": "non-cash loss on disposal recorded as a disbursement in 'other'. It is needed for the net position roll, so it is defensible. Already marked review."},
+     "issue": "A non-cash loss on disposal is recorded as a disbursement in 'other'. This is defensible because the net position roll-forward needs it. Already marked review."},
     {"severity": "warning", "path": "balance_sheet.liabilities[11].category", "page": 2,
      "extracted": "accrued liabilities", "on_page": "Long-term Compensated Absences, Less Current Obligations 601,794",
-     "issue": "noncurrent compensated absences. 'accrued liabilities' is meant for amounts due soon, so 'other liabilities' or 'debt - due in more than one year' may fit better"}
+     "issue": "This is the noncurrent part of compensated absences. 'accrued liabilities' is meant for amounts due soon, so 'other liabilities' may fit better."},
+    {"severity": "warning", "path": "balance_sheet.liabilities[7].category", "page": 2,
+     "extracted": "other liabilities", "on_page": "Estimated third party payor settlements - Medicare 311,863",
+     "issue": "Settlements owed to Medicare (a federal program) could be 'due to other governments'. Judgment call."},
+    {"severity": "warning", "path": "report_discrepancies[0]", "page": 6,
+     "extracted": 3, "on_page": "Plant operations: Salaries 216,685 + Other 600,677 = 817,362, printed Total 817,365",
+     "issue": "Confirmed that the report itself is off by 3, and it is recorded correctly. The gap comes from the Plant operations row (General Services subtotal 2,629,456 vs 1,006,304 + 1,623,149 = 2,629,453). The column totals 16,988,279 and 19,546,362 are right and agree with p3."}
   ]
 }
