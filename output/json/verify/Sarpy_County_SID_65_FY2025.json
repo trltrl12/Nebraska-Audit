@@ -1,0 +1,15 @@
+{
+  "stem": "Sarpy_County_SID_65_FY2025",
+  "values_checked": 86,
+  "issues": [
+    {"severity": "warning", "path": "balance_sheet", "page": 1,
+     "extracted": null, "on_page": "no Statement of Net Position / Balance Sheet in the trimmed PDF (trimmed p1 = report p5; report pp3-4 not trimmed)",
+     "issue": "Required balance sheet is missing because of the trim, so ending_cash is also null. Check the source PDF and re-trim; this is not an extraction error."},
+    {"severity": "warning", "path": "proprietary.capital_and_related_financing", "page": 2,
+     "extracted": 117527, "on_page": "CASH FLOWS FROM CAPITAL AND FINANCING ACTIVITIES - Net Transfers from Other Funds 117,527",
+     "issue": "The statement prints one combined 'capital and financing' section. Transfers from other funds would normally be noncapital financing; it was recorded as capital_and_related_financing. Judgment call."},
+    {"severity": "warning", "path": "detail", "page": 5,
+     "extracted": "omitted", "on_page": "Debt Service Fund: Engineering, Fiscal Agent Fees, Professional Fees show '-' actual (GAAP) with budgets 5,000 / 2,500 / 2,500; General Fund (p4) Warrants Issued/Retired '-' actual with budgets 186,000 / (197,447)",
+     "issue": "Lines with zero GAAP actual but a nonzero final budget were left out, so their budget figures are lost. Actual totals are not affected."}
+  ]
+}
