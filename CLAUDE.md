@@ -130,7 +130,7 @@ These were diagnosed and fixed in find_pages v6; re-extract and re-verify them a
   Grand_Island_Public_Schools_Foundation_FY2025 (all 5 trimmed pages cut off on the right: Total and Jack Martin
   columns missing; still cut off after the v8 re-trim, so check the source PDF page size/crop; skipped, no JSON).
   Garfield_County_Agricultural_Society_FY2025 (report p25 not trimmed: trimmed jumps p24 to p26).
-  Lyons_FY2025 (report pp8-9, probably the utilities revenue/expense statement, and p21 not trimmed).
+  Lyons_FY2025 (report p21 not trimmed; pp8-9 proprietary statement now in the v8 trim).
   Kimball_County_FY2025 (report p31 not trimmed), Kimball_FY2025 (report pp17, 19, 59 not trimmed); totals tie, check source.
   Lancaster_County_FY2025 (Veterans Aid and Broadband sub-fund budget pages, report pp85-86, not trimmed).
   Hemingford_Public_Schools_FY2025 (report pp34-35, probably the Activity Fund schedule, not trimmed).
