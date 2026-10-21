@@ -155,6 +155,7 @@ These were diagnosed and fixed in find_pages v6; re-extract and re-verify them a
   Sarpy_County_SID_38_FY2025 (report p4, Balance Sheet/Statement of Net Position, not trimmed).
   South_Sioux_City_FY2025 (report pp77, 91-92, nonmajor fund schedules, not trimmed; nonmajor detail revenue 6.72M vs 8.53M).
   Southeast_Community_College_FY2025 (last page of the cash flow statement not trimmed).
+  Southern_School_District_1_FY2025 (Exhibit N cut off after program 2163; rest from Exhibit G, totals tie).
   Gering_Ft_Laramie_Irrigation_District_FY2025 (nonoperating/capital-grant statement page not trimmed; 9,257,241
   derived as an adjustment meanwhile).
 - Budget forms whose Total All Funds page wasn't found (manifest flag no_budget_actuals_found; skipped, no
