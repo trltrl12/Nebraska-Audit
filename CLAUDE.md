@@ -175,11 +175,8 @@ These were diagnosed and fixed in find_pages v6; re-extract and re-verify them a
 - Taylor_FY2025: trimmed pp2-8 are rotated, so the page-text check can't confirm the governmental amounts (checked visually).
 - Trimmed to one page (extracted from that page; check the source PDF for missing statements):
   Douglas_County_SID_640_FY2025.
-- Hickman_FY2025: its text layer prints every word twice ("statementstatement ofof ..."), so find_pages missed the
-  Statement of Net Position, governmental revenues/expenditures and proprietary statements (beginning_fund_balance
-  null). Fixed (undouble in find_pages) and queued in config/retrim.csv: after the user's next fetch (expect source
-  pp7-9, 11-12, 14-16, 29, 32), re-extract and re-verify it (flagged at attempt 2: a new trim, so treat as a fresh
-  extraction and keep extraction_attempt).
+- Hickman_FY2025: re-trimmed (doubled-word text layer fix) and re-extracted 2026-10-22; fund balances and
+  proprietary statements now in; verified 0 errors.
 - ~97 Audit filings marked no_statements_found (mostly SIDs) and 72 with no balance statement: page
   finder misses their titles.
 - ~1,000 Waiver filings link only a budget form (Budgets_Filed/…_B2526.pdf): check
