@@ -110,9 +110,10 @@ agents' one-line statuses.
 ## Open follow-ups (remove each line once done)
 - Targeted re-trims (config/retrim.csv; FINDER_VERSION stays 8 so other reports are NOT re-trimmed; never bump it
   without the user's OK). Done 2026-10-22: 12 reports re-trimmed (find_pages v9 + Waterloo/Plainview fixes),
-  re-extracted and re-verified. Still missing after that re-trim (next find_pages fix, then queue in retrim.csv):
-  Sargent_Public_Schools_FY2025 (report p50, rest of the per-account Activities Fund schedule) and Blair_FY2025
-  (Debt Service budget schedule, report pp63-65, 67; trim unchanged).
+  re-extracted and re-verified. Queued next (OCR-garbled repeated title fix): Sargent_Public_Schools_FY2025 (source
+  p54 = report p50, rest of the per-account Activities Fund schedule); after the user's next fetch, re-extract and
+  re-verify it. Blair_FY2025 needs nothing: it has no Debt Service budget schedule (report pp63-65, 67 = source
+  pp64-66, 68: divider, combining balance sheet, and two pages already trimmed).
 - find_pages.py v7 is pushed (v6 debt-service fix plus: budget-form Total All Funds page, scanned/rotated/garbled
   page OCR, title variants, fund-name exclusions, detail soft cap 25). Butte_FY2025 (report p31 already in the trim:
   re-check the extraction) and Cass_County_SID_9/10 (v6 already keeps their statements) were stale entries. After
