@@ -29,7 +29,7 @@ from common import (AUDITS, FILE_LIST, MANIFEST, MANIFEST_FIELDS, ROOT, TRIMMED,
 
 # Bump whenever page selection changes: reports trimmed by an older version are re-trimmed
 # automatically on the next fetch run (see --drop-stale).
-FINDER_VERSION = 8
+FINDER_VERSION = 9
 
 HEADER_FRAC = 0.30         # statement titles sit in the top 30% of the page
 OCR_FRAC = 0.35            # how much of a scanned page to OCR
@@ -369,15 +369,19 @@ BARE_DETAIL_RE = re.compile(r"^((net\s+)?patient\s+service\s+revenues?|other\s+(
                             r"(operating\s+)?expenses\s+by\s+(department|function))$")
 DETAIL_EXCLUDE_RE = re.compile(
     r"federal\s+awards|findings|questioned|outstanding|investments|interfund|"
-    r"contributions\s+to|notes\s+to|table\s+of\s+contents|independent\s+(auditor|accountant)|"
+    r"contributions\s+to|notes?\s+to|table\s+of\s+contents|independent\s+(auditor|accountant)|"
     r"certified\s+public\s+accountants|discussion\s+and\s+analysis|county\s+officers?|"
-    r"office\s+activit|summary\s+schedule|debt(?!\s+service)|bonds?\s+payable|accountability|capital\s+assets|"
+    r"office\s+activit|summary\s+schedule|accountability|capital\s+assets|"
     r"taxes\s+(levied|certified|collected)|tax\s+collections?|fiduciary|"
     r"reconcil|net\s+position|balance\s+sheet|assets\s+and|condensed|"
     r"our\s+audit|we\s+were\s+engaged|engaged\s+to\s+report|other\s+matters|in\s+our\s+opinion")
 # Fund names that also head columns ("police & fire pension", "community development agency fund"):
 # checked only in the title lines above the date line (see COLUMN_EXCLUDE_RE).
-DETAIL_COLUMN_EXCLUDE_RE = re.compile(r"pension|opeb|custodial|" + AGENCY_FUND + r"|activity\s+funds?\b")
+# Student activity fund schedules are kept (category student activities). Debt schedules are
+# matched in the title lines only: a "Special Revenue | Debt Service" column heading wraps to
+# "special debt / revenue service" and must not exclude the page.
+DETAIL_COLUMN_EXCLUDE_RE = re.compile(r"pension|opeb|custodial|" + AGENCY_FUND
+                                      + r"|debt(?!\s+service)|bonds?\s+payable")
 
 
 def title_block(lines, limit=10, lines_out=False):
