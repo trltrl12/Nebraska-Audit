@@ -2,17 +2,37 @@
   "stem": "Naponee_FY2025",
   "values_checked": 34,
   "issues": [
-    {"severity": "warning", "path": "receipts[10].category", "page": 1,
-     "extracted": "other", "on_page": "Local Receipts: Other: Water Fund 31,802.52 + Sewer Fund 12,785.83",
-     "issue": "These are the only receipts of the Water and Sewer funds, so they are almost certainly water/sewer charges (charges for services/fees). Recording them as 'other' with review is defensible but leaves 100% of business-type receipts in 'other'."},
-    {"severity": "warning", "path": "receipts[9].category", "page": 1,
-     "extracted": "other", "on_page": "Local Receipts: Other: General 35,084.65 + Street 612.98",
-     "issue": "Nothing on the page breaks this line down, so 'other' with review is acceptable. It is 39% of governmental receipts (90,685.96), over the 10% review threshold."},
-    {"severity": "warning", "path": "disbursements[2].category", "page": 2,
-     "extracted": "debt service principal", "on_page": "Debt Service 14,400.00 (Water Fund column)",
-     "issue": "Principal and interest are combined on one line and the page gives no split. Defensible, already marked review."},
-    {"severity": "warning", "path": "transfers_in", "page": 3,
-     "extracted": 16500, "on_page": "Sewer Fund -> Reserve Fund 10,000.00; General Fund -> Street Fund 6,500.00",
-     "issue": "The Reserve Fund's only receipts are the 10,000 transfer from the Sewer Fund, so it may be a sewer/utility reserve (business-type) rather than a governmental fund. The extractor treated it as governmental, which makes this a 10,000 cross-type transfer that raises governmental cash. This is a judgment call; consider a decision_needed entry."}
+    {
+      "severity": "warning",
+      "path": "receipts[10].category",
+      "page": 1,
+      "extracted": "other",
+      "on_page": "Local Receipts: Other: Water Fund 31,802.52 + Sewer Fund 12,785.83",
+      "issue": "These are the only receipts of the Water and Sewer funds, so they are almost certainly water/sewer charges (charges for services/fees). Recording them as 'other' with review is defensible but leaves 100% of business-type receipts in 'other'."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[9].category",
+      "page": 1,
+      "extracted": "other",
+      "on_page": "Local Receipts: Other: General 35,084.65 + Street 612.98",
+      "issue": "Nothing on the page breaks this line down, so 'other' with review is acceptable. It is 39% of governmental receipts (90,685.96), over the 10% review threshold."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[2].category",
+      "page": 2,
+      "extracted": "debt service principal",
+      "on_page": "Debt Service 14,400.00 (Water Fund column)",
+      "issue": "Principal and interest are combined on one line and the page gives no split. Defensible, already marked review."
+    },
+    {
+      "severity": "warning",
+      "path": "transfers_in",
+      "page": 3,
+      "extracted": 16500,
+      "on_page": "Sewer Fund -> Reserve Fund 10,000.00; General Fund -> Street Fund 6,500.00",
+      "issue": "[fixed 2026-10-22: decision_needed entry added; Reserve Fund kept governmental] The Reserve Fund's only receipts are the 10,000 transfer from the Sewer Fund, so it may be a sewer/utility reserve (business-type) rather than a governmental fund. The extractor treated it as governmental, which makes this a 10,000 cross-type transfer that raises governmental cash. This is a judgment call; consider a decision_needed entry."
+    }
   ]
 }

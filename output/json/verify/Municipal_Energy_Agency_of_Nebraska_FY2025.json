@@ -2,14 +2,29 @@
   "stem": "Municipal_Energy_Agency_of_Nebraska_FY2025",
   "values_checked": 49,
   "issues": [
-    {"severity": "warning", "path": "receipts[1].category", "page": 2,
-     "extracted": "charges for services/fees", "on_page": "Transfer from (provision for) rate stabilization (1,500,000)",
-     "issue": "Label contains 'Transfer', but this is a regulatory rate-stabilization deferral (the deferred inflow rose from 27,600,000 to 29,100,000), not an inter-fund transfer. Recording it as negative operating revenue matches the printed Total operating revenues and is defensible. Line already marked review; the validator may flag it because of the word 'transfer'."},
-    {"severity": "warning", "path": "receipts[3].category", "page": 2,
-     "extracted": "reimbursements/refunds", "on_page": "Net costs to be recovered in future periods (1,292,170)",
-     "issue": "Category doesn't match the label. This is the amortization of a regulatory asset (Costs recoverable from future billings fell 40,805,737 to 39,513,567 = 1,292,170), not a reimbursement. It could go in 'other' as a negative receipt, or as a business-type disbursement of 1,292,170 (net effect is the same). Line already marked review."},
-    {"severity": "warning", "path": "balance_sheet.assets[4].category", "page": 1,
-     "extracted": "capital assets", "on_page": "Productive capacity operating assets 3,788,084 (Current Assets)",
-     "issue": "Printed as a current asset, so it is probably not a depreciable capital asset. 'inventories/prepaids' or 'other assets' may fit better. The notes pages that would explain it were not trimmed."}
+    {
+      "severity": "warning",
+      "path": "receipts[1].category",
+      "page": 2,
+      "extracted": "charges for services/fees",
+      "on_page": "Transfer from (provision for) rate stabilization (1,500,000)",
+      "issue": "[fixed 2026-10-22: checked, kept as negative operating revenue (regulatory deferral, not a fund transfer); decision_needed added] Label contains 'Transfer', but this is a regulatory rate-stabilization deferral (the deferred inflow rose from 27,600,000 to 29,100,000), not an inter-fund transfer. Recording it as negative operating revenue matches the printed Total operating revenues and is defensible. Line already marked review; the validator may flag it because of the word 'transfer'."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[3].category",
+      "page": 2,
+      "extracted": "reimbursements/refunds",
+      "on_page": "Net costs to be recovered in future periods (1,292,170)",
+      "issue": "Category doesn't match the label. This is the amortization of a regulatory asset (Costs recoverable from future billings fell 40,805,737 to 39,513,567 = 1,292,170), not a reimbursement. It could go in 'other' as a negative receipt, or as a business-type disbursement of 1,292,170 (net effect is the same). Line already marked review."
+    },
+    {
+      "severity": "warning",
+      "path": "balance_sheet.assets[4].category",
+      "page": 1,
+      "extracted": "capital assets",
+      "on_page": "Productive capacity operating assets 3,788,084 (Current Assets)",
+      "issue": "Printed as a current asset, so it is probably not a depreciable capital asset. 'inventories/prepaids' or 'other assets' may fit better. The notes pages that would explain it were not trimmed."
+    }
   ]
 }
