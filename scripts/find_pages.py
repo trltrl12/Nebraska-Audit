@@ -28,8 +28,10 @@ from common import (AUDITS, FILE_LIST, MANIFEST, MANIFEST_FIELDS, ROOT, TRIMMED,
                     append_csv, read_csv, write_csv)
 
 # Bump whenever page selection changes: reports trimmed by an older version are re-trimmed
-# automatically on the next fetch run (see --drop-stale).
-FINDER_VERSION = 9
+# automatically on the next fetch run (see --drop-stale). Bumping re-trims EVERY report; for a fix
+# that matters to a few reports, list them in config/retrim.csv instead and keep the version.
+# (The v9 and v10 page-selection changes are applied that way: targeted re-trims under version 8.)
+FINDER_VERSION = 8
 
 HEADER_FRAC = 0.30         # statement titles sit in the top 30% of the page
 OCR_FRAC = 0.35            # how much of a scanned page to OCR
@@ -52,7 +54,7 @@ TITLES = [
     ("revenues_expenditures", _OF + r"revenues?,?\s*expenditures"),
     ("proprietary_revenues_expenses", _OF + r"revenues?,?\s*(and\s+)?(support,?\s*(and\s+)?|gains,?\s*(and\s+)?)?expenses"),
     ("activities", _OF + r"activities"),
-    ("cash_flows", _OF + r"cash\s+flows?\b"),
+    ("cash_flows", _OF + r"(changes\s+in\s+)?cash\s+flows?\b"),   # "statement of changes in cash flow"
     ("assets_fund_balances", _OF + _BASIS + r"assets,?\s*(liabilities,?\s*)?(and|&)\s+(fund\s+balances?|net\s+(position|assets)|cash\s+balances?)"),
     ("net_position", _OF + r"(fund\s+)?net\s+(position|assets)|" + _OF + r"financial\s+position"),
     ("balance_sheet", r"balance\s+sheets?\b"),
@@ -373,7 +375,8 @@ DETAIL_EXCLUDE_RE = re.compile(
     r"certified\s+public\s+accountants|discussion\s+and\s+analysis|county\s+officers?|"
     r"office\s+activit|summary\s+schedule|accountability|capital\s+assets|"
     r"taxes\s+(levied|certified|collected)|tax\s+collections?|fiduciary|"
-    r"reconcil|net\s+position|balance\s+sheet|assets\s+and|condensed|"
+    # (an enterprise fund's "changes in net position - budget and actual" is a budget schedule)
+    r"reconcil|(?<!changes in )net\s+position|balance\s+sheet|assets\s+and|condensed|"
     r"our\s+audit|we\s+were\s+engaged|engaged\s+to\s+report|other\s+matters|in\s+our\s+opinion")
 # Fund names that also head columns ("police & fire pension", "community development agency fund"):
 # checked only in the title lines above the date line (see COLUMN_EXCLUDE_RE).
@@ -633,9 +636,13 @@ def select_pages(pages, filename=""):
                 kept_types.append(t + "(cont)")
                 j += 1
                 continue
-            # Second page of a wide statement: no title at all, just more columns of numbers.
+            # Second page of a wide statement: no title at all, just more columns of numbers. A scanned
+            # right-hand page may OCR few numbers ("(72 267)"), so there it is enough that its first
+            # line repeats a column heading of the page before ("enterprise funds").
+            same_head = src == "ocr" and bool(lines) and not DATE_LINE_RE.search(lines[0]) and \
+                lines[0] in pages[j - 1][0][:12] and lines[0] != pages[j - 1][0][0]
             if untitled < MAX_UNTITLED and not PROSE_RE.search(" ".join(lines[:6])) and \
-                    len(NUMBER_RE.findall(full)) >= (8 if src == "ocr" else 15):
+                    (same_head or len(NUMBER_RE.findall(full)) >= (8 if src == "ocr" else 15)):
                 untitled += 1
                 keep.append(j)
                 kept_types.append(t + "(cont)")

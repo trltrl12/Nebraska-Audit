@@ -108,6 +108,12 @@ Keep the main session lean: don't open PDFs or print JSON in the main conversati
 agents' one-line statuses.
 
 ## Open follow-ups (remove each line once done)
+- Targeted re-trim queued (config/retrim.csv; FINDER_VERSION stays 8 so the rest are NOT re-trimmed; never bump it
+  without the user's OK): find_pages v9 (student activity schedules, debt exclusion on title lines, RSI notes) plus
+  v10 fixes (Waterloo pp28-30 proprietary budget + "changes in cash flow"; Plainview pp27, 29 cash flow right halves)
+  for Platte_County, Crete_PS, Lawrence-Nelson_PS, Cody_Kilgore, Hemingford_PS, Grand_Island_PS, South_Platte_PS,
+  Tekamah_Herman, Hastings_PS, Sargent_PS, Blair, Plainview, Waterloo. After the user runs fetch, compare pages_kept
+  with output/json/_meta/pages_at_extraction.csv and re-extract + re-verify those whose pages changed.
 - find_pages.py v7 is pushed (v6 debt-service fix plus: budget-form Total All Funds page, scanned/rotated/garbled
   page OCR, title variants, fund-name exclusions, detail soft cap 25). Butte_FY2025 (report p31 already in the trim:
   re-check the extraction) and Cass_County_SID_9/10 (v6 already keeps their statements) were stale entries. After
