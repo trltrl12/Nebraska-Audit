@@ -110,9 +110,8 @@ agents' one-line statuses.
 ## Open follow-ups (remove each line once done)
 - Targeted re-trims (config/retrim.csv; FINDER_VERSION stays 8 so other reports are NOT re-trimmed; never bump it
   without the user's OK). Done 2026-10-22: 12 reports re-trimmed (find_pages v9 + Waterloo/Plainview fixes),
-  re-extracted and re-verified. Queued next (OCR-garbled repeated title fix): Sargent_Public_Schools_FY2025 (source
-  p54 = report p50, rest of the per-account Activities Fund schedule); after the user's next fetch, re-extract and
-  re-verify it. Blair_FY2025 needs nothing: it has no Debt Service budget schedule (report pp63-65, 67 = source
+  re-extracted and re-verified; Sargent_Public_Schools_FY2025 followed (OCR-garbled repeated title fix), Activities
+  Fund schedule now complete. Blair_FY2025 needs nothing: it has no Debt Service budget schedule (report pp63-65, 67 = source
   pp64-66, 68: divider, combining balance sheet, and two pages already trimmed).
 - find_pages.py v7 is pushed (v6 debt-service fix plus: budget-form Total All Funds page, scanned/rotated/garbled
   page OCR, title variants, fund-name exclusions, detail soft cap 25). Butte_FY2025 (report p31 already in the trim:
@@ -148,13 +147,12 @@ These were diagnosed and fixed in find_pages v6; re-extract and re-verify them a
   ONeill_FY2025 (report pp53, 57, 62 now trimmed: Other Governmental combining, CDBG and Debt Service schedules added; still not trimmed: report pp44, 61, 63-66, 69-72, 75+, probably the utility schedules).
   Plattsmouth_Airport_Authority_FY2025 (report p8, governmental funds revenues/expenditures statement, not trimmed; budget-basis schedule used).
   Polk_FY2025 (odd report pages 27-35 of the combining schedules not trimmed: Bandstand/Playground/Total/budget columns; actuals from Exhibits III-IV).
-  Sargent_Public_Schools_FY2025 (report p50, rest of the per-account Activities Fund schedule, not trimmed; one-line budget schedule used).
   Springfield_FY2025 (Note M, explaining 33.2M sales tax and 3.5M permits, not trimmed).
   Two_Rivers_Public_Health_Department_FY2025 (report pp34-36 not trimmed; Statement of Net Position now in the v8 trim).
   Wahoo_FY2025 (no General Fund budget schedule trimmed; source PDF p19 and pp23-27 not kept).
   Found in the 2026-10-21 outside-review recheck (re-extract after the v7 re-trim):
   Beaver_Crossing_FY2025 (budget columns report pp26, 28, 30),
-  Blair_FY2025 (Debt Service budget schedule, report pp63-65, 67), Box_Butte_County_FY2025 (rest of nonmajor combining
+  Box_Butte_County_FY2025 (rest of nonmajor combining
   statement after report p24), Bradshaw_FY2025 (General Fund combining pages report pp32, 34),
   Central_City_Public_Schools_FY2025 (report p41 Bond Fund budget), Central_Platte_NRD_FY2025 (report p11 fund statement),
   Douglas_County_FY2025 (other nonmajor combining pages),
