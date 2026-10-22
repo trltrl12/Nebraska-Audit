@@ -108,12 +108,11 @@ Keep the main session lean: don't open PDFs or print JSON in the main conversati
 agents' one-line statuses.
 
 ## Open follow-ups (remove each line once done)
-- Targeted re-trim queued (config/retrim.csv; FINDER_VERSION stays 8 so the rest are NOT re-trimmed; never bump it
-  without the user's OK): find_pages v9 (student activity schedules, debt exclusion on title lines, RSI notes) plus
-  v10 fixes (Waterloo pp28-30 proprietary budget + "changes in cash flow"; Plainview pp27, 29 cash flow right halves)
-  for Platte_County, Crete_PS, Lawrence-Nelson_PS, Cody_Kilgore, Hemingford_PS, Grand_Island_PS, South_Platte_PS,
-  Tekamah_Herman, Hastings_PS, Sargent_PS, Blair, Plainview, Waterloo. After the user runs fetch, compare pages_kept
-  with output/json/_meta/pages_at_extraction.csv and re-extract + re-verify those whose pages changed.
+- Targeted re-trims (config/retrim.csv; FINDER_VERSION stays 8 so other reports are NOT re-trimmed; never bump it
+  without the user's OK). Done 2026-10-22: 12 reports re-trimmed (find_pages v9 + Waterloo/Plainview fixes),
+  re-extracted and re-verified. Still missing after that re-trim (next find_pages fix, then queue in retrim.csv):
+  Sargent_Public_Schools_FY2025 (report p50, rest of the per-account Activities Fund schedule) and Blair_FY2025
+  (Debt Service budget schedule, report pp63-65, 67; trim unchanged).
 - find_pages.py v7 is pushed (v6 debt-service fix plus: budget-form Total All Funds page, scanned/rotated/garbled
   page OCR, title variants, fund-name exclusions, detail soft cap 25). Butte_FY2025 (report p31 already in the trim:
   re-check the extraction) and Cass_County_SID_9/10 (v6 already keeps their statements) were stale entries. After
@@ -125,14 +124,11 @@ These were diagnosed and fixed in find_pages v6; re-extract and re-verify them a
 - Trimmed PDF is missing pages: Arapahoe_FY2025 (other
   nonmajor combining page),
   Butte_FY2025 (report p31, rest of
-  General Fund spending), Cody_Kilgore_Public_School_FY2025 (p18 activity accounts cut off; residual
-  lines from p17 used meanwhile).
+  General Fund spending),
   Litchfield_Public_Schools_FY2025 (left half of the governmental receipts/disbursements statement,
   report p17-18 spread; receipt labels inferred from fund schedules, marked review).
   Leigh_FY2025 (General Fund departments schedule continues past trimmed p12: Housing/Park/Pool/Library
   columns missing; p9 budget schedule used meanwhile).
-  Lawrence-Nelson_Public_Schools_FY2025 (student activities schedule, ~424,692 of receipts, not trimmed; General Fund
-  Exhibit P now complete after v8).
   Boelus_FY2025 (Exhibit A page 2, lines 29-52 spending by function, not trimmed; fund totals used).
   Fairbury_FY2025 (report pp42-47 Light/Water/Sewer budget schedules 6-9, plus pp8, 11, 62, not trimmed).
   Chadron_Public_Schools_FY2025 (report p34 not trimmed: trimmed p15 = report p33, p16 = report p35).
@@ -142,9 +138,7 @@ These were diagnosed and fixed in find_pages v6; re-extract and re-verify them a
   Lyons_FY2025 (report p21 not trimmed; pp8-9 proprietary statement now in the v8 trim).
   Kimball_County_FY2025 (report p31 not trimmed), Kimball_FY2025 (report pp17, 19, 59 not trimmed); totals tie, check source.
   Lancaster_County_FY2025 (Veterans Aid and Broadband sub-fund budget pages, report pp85-86, not trimmed).
-  Hemingford_Public_Schools_FY2025 (report pp34-35, probably the Activity Fund schedule, not trimmed).
   Gothenburg_FY2025 (report pp42 and 49 not trimmed; may hold schedule lines).
-  Grand_Island_Public_Schools_FY2025 (report p39, probably the Activities Fund schedule, not trimmed).
   Grand_Island_FY2025 (nonmajor combining schedule's Total column page not trimmed; nonmajor detail left out).
   Niobrara_Public_Schools_FY2025 (report p27 not trimmed; totals tie without it).
   Omaha_Public_Schools_FY2025 (report pp81-89 and p94, possibly more fund budget schedules, not trimmed).
@@ -155,8 +149,6 @@ These were diagnosed and fixed in find_pages v6; re-extract and re-verify them a
   Polk_FY2025 (odd report pages 27-35 of the combining schedules not trimmed: Bandstand/Playground/Total/budget columns; actuals from Exhibits III-IV).
   Sargent_Public_Schools_FY2025 (report p50, rest of the per-account Activities Fund schedule, not trimmed; one-line budget schedule used).
   Springfield_FY2025 (Note M, explaining 33.2M sales tax and 3.5M permits, not trimmed).
-  South_Platte_Public_Schools_FY2025 (report p31, Activity Fund schedule, not trimmed).
-  Tekamah_Herman_Community_School_FY2025 (report p27, probably the Activity Fund schedule, not trimmed).
   Two_Rivers_Public_Health_Department_FY2025 (report pp34-36 not trimmed; Statement of Net Position now in the v8 trim).
   Wahoo_FY2025 (no General Fund budget schedule trimmed; source PDF p19 and pp23-27 not kept).
   Found in the 2026-10-21 outside-review recheck (re-extract after the v7 re-trim):
@@ -171,11 +163,6 @@ These were diagnosed and fixed in find_pages v6; re-extract and re-verify them a
   proprietary statement), Norfolk_FY2025 (beginning governmental cash still null: no prior-year balance sheet),
   Northeast_Nebraska_Economic_Development_District_FY2025 (cash flow statement report pp7-8),
   Ord_FY2025 (also report p15 government-wide assets/liabilities).
-  Hastings_Public_Schools_FY2025 (report pp51-54, probably the per-account Activity Fund schedule, and pp15, 49 not trimmed).
-  Found in the 2026-10-22 second-pass audit: Platte_County_FY2025 (report p26, rest of the nonmajor schedule with
-  debt service and Total columns), Crete_Public_Schools_FY2025 (report pp40-43, Activity Fund schedule),
-  Plainview_FY2025 (report p24, Sewer/Sanitation/Total columns of the proprietary statement),
-  Waterloo_FY2025 (proprietary Statement of Cash Flows after report p21; proprietary block null).
 - Rules the second-pass audit (2026-10-22) found applied inconsistently; waiting on the user's decision, then make
   all reports match: SID "Warrants issued not registered" (long-term
   debt on SIDs 235/321/324, current payable on SID 291); SID detail actual column (budgetary basis on most, GAAP on
