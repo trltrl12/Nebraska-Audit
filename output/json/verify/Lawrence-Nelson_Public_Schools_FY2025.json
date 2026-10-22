@@ -1,62 +1,18 @@
 {
   "stem": "Lawrence-Nelson_Public_Schools_FY2025",
-  "values_checked": 287,
+  "values_checked": 316,
   "issues": [
-    {
-      "severity": "error",
-      "path": "detail[8].category",
-      "page": 8,
-      "extracted": "intergovernmental/state aid / other state aid",
-      "on_page": "1925 Categorical grants 25,000.00 (Local Sources, p8); matching spending program is 'Categorical Grants from Corporations' (Exhibit P p24)",
-      "issue": "[fixed 2026-10-21: donations/contributions] The page itself says these grants come from corporations, a private source listed under Local Sources, so the category should be donations/contributions (detail donations/contributions). The review note's 'state grant' reasoning is contradicted by p24."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[33].category",
-      "page": 9,
-      "extracted": "revenue / other / miscellaneous revenue (5610 Cash balance from dissolved district 2,732,835.10; also the same line in Depreciation p11 305,633.89, Employee Benefit p12 1,519.81, School Nutrition p13 51,145.37, Special Building p14 1,435,610.90, QCPU p15 279,725.64)",
-      "on_page": "Non-Revenue Sources: 5610 Cash balance from dissolved district",
-      "issue": "At the statement level these 4,968,148.15 are an adjustment (Special Item, p2), but in detail they are revenue in 'other'. That puts about 4.8M into detail 'other' revenue. The same label gets two different treatments. It would be more consistent as section 'other financing' with 'includes' on the detail_totals."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[*].detail_category (Exhibit P 'Other Expenses' lines, pp18-24)",
-      "page": 18,
-      "extracted": "miscellaneous expenditure (no review flag)",
-      "on_page": "Other Expenses",
-      "issue": "The rules say miscellaneous expenditure is a last resort and must carry 'review'. None of the roughly 20 Exhibit P 'Other Expenses' lines has one."
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[14].amount",
-      "page": 5,
-      "extracted": 257852.74,
-      "on_page": "Other student support 513,679.23 (one printed line)",
-      "issue": "This residual split is not printed anywhere. Only the School Nutrition part (255,826.49, Exh K p13) and the Student Fee part (14,828.24, p17) are printed. The Activity Fund part (243,024.50) is derived because its schedule isn't trimmed. It is marked computed/review, but it goes beyond 'the report prints the breakdown of that line'."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[8].amount",
-      "page": 5,
-      "extracted": 402909.07,
-      "on_page": "Other local receipts 520,821.76",
-      "issue": "This is a residual after splitting out the Cooperative Fund's 117,912.69. It also holds about 227,014 of derived Activity Fund receipts plus General Fund categorical grants, donations and refunds. Note that the Statement of Activities (p2) shows the 117,912.69 as Special education charges for services, not as intergovernmental money. Category is a judgment call."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[10].category",
-      "page": 5,
-      "extracted": "intergovernmental/state aid",
-      "on_page": "County receipts 16,979.99 = 2110 County fines and license fees 12,600.78 + 2210 Educational service unit receipts 4,379.21 (Exh G p8)",
-      "issue": "Fines (code 2110, fines and forfeitures under the rules) make up 74% of this line. It could take fines and forfeitures, or be split using the p8 breakdown."
-    },
-    {
-      "severity": "warning",
-      "path": "detail",
-      "page": 24,
-      "extracted": "no Activity Fund lines; transfers out in detail -402,044.91 vs transfers in 366,044.91",
-      "on_page": "Exhibit P Transfers: Activity Fund 36,000.00 (p24); Activity Fund receipts about 424,691.77 (incl. 36,000 transfer, 161,677.44 dissolved-district cash) and disbursements about 243,024.50 implied by p4",
-      "issue": "The Activity Fund schedule is not in the trimmed PDF (known trim gap). The 36,000 transfer has no receiving line, and the per-account activity receipts and spending are missing from detail. Check the source PDF."
-    }
+    {"severity": "warning", "path": "receipts[13].amount", "page": 5,
+     "extracted": 227014.33, "on_page": "Other Governmental Funds Other local receipts 462,552.95 (p4); Exhibit J receipts 424,691.77 (p13)",
+     "issue": "The Activity Fund share of 'Other local receipts' isn't printed anywhere. It is the remainder of the printed Other Governmental line after the Student Fee, Nutrition, Cooperative and QCPU items (the same as 424,691.77 less the 36,000 transfer less 161,677.44 dissolved-district cash). The arithmetic is right and it is marked computed and review, but it rests on the assumption that Exhibit J receipts include those two amounts."},
+    {"severity": "warning", "path": "receipts[16].category", "page": 2,
+     "extracted": "intergovernmental/state aid 117,912.69", "on_page": "Statement of Activities: Special education Charges for Services 117,912.69; Cooperative Fund 'Received from other districts' (p17)",
+     "issue": "The report's own Statement of Activities counts this as charges for services (cooperative/interlocal payments from other districts). The extractor rules put interlocal-agreement revenue under charges for services/fees. Judgment call. The same applies to detail[230]."},
+    {"severity": "warning", "path": "detail[230].detail_category", "page": 17,
+     "extracted": "county/other local governments", "on_page": "Received from other districts 117,912.69",
+     "issue": "This could be other charges for services (cooperative/interlocal), matching the Statement of Activities on p2."},
+    {"severity": "warning", "path": "disbursements[13].fund_type", "page": 5,
+     "extracted": "governmental (School Nutrition 255,826.49; receipts[15] sales 102,635.65; detail[197]-[214])", "on_page": "School Nutrition Fund is reported inside Other Governmental Funds (p4, Exhibit K p14); no proprietary statement",
+     "issue": "School nutrition is normally business-type under the extractor rules, but this report presents it as a governmental fund with no proprietary statement. Kept governmental to tie to the printed totals. Confirm this is acceptable."}
   ]
 }
