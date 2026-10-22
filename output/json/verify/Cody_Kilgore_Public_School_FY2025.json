@@ -1,78 +1,9 @@
 {
   "stem": "Cody_Kilgore_Public_School_FY2025",
-  "values_checked": 211,
+  "values_checked": 244,
   "issues": [
-    {
-      "severity": "warning",
-      "path": "missing",
-      "page": 5,
-      "extracted": null,
-      "on_page": "Eliminations column removes (125,000) from Operation and Maintenance of Plant and from Transfers In (p5); the General Fund O&M lines in detail (Operation of Buildings 412,971 + Maintenance of Buildings 87,721 = 500,692, p11) include that 125,000 transfer to the Depreciation Fund, while detail also records Depreciation 'Transfers in from Other Funds' 125,000 (p12)",
-      "issue": "[fixed: contra + other financing added; Activities residual lines from p17 added] hidden transfer not handled in detail: per the rules a contra line (section expenditure, -125,000, department 'Operation and Maintenance of Plant', split_from naming the O&M lines and p5 elimination, review) plus a General Fund other financing line -125,000 are required; as is, the same 125,000 appears as both General Fund spending and a transfer"
-    },
-    {
-      "severity": "warning",
-      "path": "missing",
-      "page": 17,
-      "extracted": "Activity fund detail = Athletics and Academics subtotals only (receipts 82,835, disbursements 154,131, transfers 47,354; p18)",
-      "on_page": "Activities Fund budget schedule (p17): Activity Receipts 134,800, Transfers In 50,000, Activity Disbursements 209,544",
-      "issue": "[fixed: contra + other financing added; Activities residual lines from p17 added] the per-account schedule on p18 is cut off in the trimmed PDF, so using it instead of the complete one-line p17 schedule leaves out receipts 51,965, disbursements 55,413 and transfers in 2,646 of the Activities Fund. Detail for that fund is incomplete; record the remaining amounts (e.g. from p17 as residual lines with computed) or use p17"
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[5].category",
-      "page": 5,
-      "extracted": "fines and forfeitures",
-      "on_page": "County Fines and Licenses 11,001",
-      "issue": "label mixes fines and licenses; the rules ask for the dominant category plus a review note naming the mix, and there is no review note"
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[11]",
-      "page": 5,
-      "extracted": "Miscellaneous 1,007,448 kept as one 'other' line",
-      "on_page": "Miscellaneous: Special Building 530,320 + Other Governmental 477,128; the fund schedules show Other Governmental = Employee Benefit Miscellaneous 342,328 (p14) + Activity Receipts 134,800 (p17)",
-      "issue": "about 19% of governmental receipts are in 'other'. The 134,800 of activity receipts could arguably be identified from the fund schedules; it is defensible to keep the line as printed, but it should stay on the review list"
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[6].category",
-      "page": 5,
-      "extracted": "support services",
-      "on_page": "Operation and Maintenance of Plant 4,564,327 (includes Special Building 4,003,391 and Depreciation 185,230 site acquisition and improvements, p12-13)",
-      "issue": "about 4.19 million of this line is site acquisition/building construction, which could be capital outlay; it is kept as printed under its function (the extractor added a review note)"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[58].category",
-      "page": 12,
-      "extracted": "support services",
-      "on_page": "Site Acquisition and Improvements 185,230",
-      "issue": "could be capital outlay (detail_category land and buildings); same applies to detail[65] Special Building Site Acquisition and Improvements 4,003,391 (p13)"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[66]",
-      "page": 13,
-      "extracted": "Other Debt-related Costs 51,745 as section expenditure (debt service interest)",
-      "on_page": "Other Debt-related Costs 51,745 under Disbursements (p13); shown as Bond Issuance Costs (51,745) under Other Financing Sources (Uses) on p5",
-      "issue": "the governmental statement treats this as other financing (top-level other_financing -51,745) but detail treats it as an expenditure. That follows the budget schedule as printed, but the two places are inconsistent"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[68].category",
-      "page": 14,
-      "extracted": "support services",
-      "on_page": "Retirement Remittances - Employer/Employee Contributions 357,551",
-      "issue": "p5 reports this Other Governmental Funds disbursement under Instruction (357,551), so the function would be instruction, not support services"
-    },
-    {
-      "severity": "warning",
-      "path": "report_discrepancies[0]",
-      "page": 5,
-      "extracted": -1,
-      "on_page": "Property and Carline Taxes total 1,330,692 vs fund columns 1,112,224 + 87,131 + 131,336 = 1,330,691",
-      "issue": "this 1-dollar rounding difference is printed in the report itself and is recorded correctly. The governmental roll-forward is off by 1 (computes 2,172,504 vs 2,172,503)"
-    }
+    {"severity": "warning", "path": "detail[69].category", "page": 14,
+     "extracted": "support services", "on_page": "Retirement Remittances - Employer/Employee Contributions 357,551 (Employee Benefit Fund); p5 prints the Other Governmental Funds 357,551 on the Instruction row",
+     "issue": "function differs from the governmental funds statement, which counts this spending under Instruction; 'instruction' would tie the detail to the statement's function lines"}
   ]
 }

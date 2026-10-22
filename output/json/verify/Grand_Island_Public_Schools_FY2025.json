@@ -1,27 +1,9 @@
 {
   "stem": "Grand_Island_Public_Schools_FY2025",
-  "values_checked": 238,
+  "values_checked": 264,
   "issues": [
-    {"severity": "warning", "path": "missing", "page": 15,
-     "extracted": null, "on_page": "Report page 39 (between trimmed p14 = report p38 and p15 = report p40) is not in the trimmed PDF; probably the Activities Fund budgetary comparison schedule (statement shows Activities disbursements 3,078,381 and transfers in to other governmental funds of 1,497,365, of which only School Nutrition 600,000 is visible)",
-     "issue": "Trim gap, not an extraction error: the Activities Fund has no detail lines and 897,365 of the transfers in to other governmental funds can't be traced to a receiving fund. Extractor noted this in notes. Re-trim needed to finish detail and the transfer cross-check."},
-    {"severity": "warning", "path": "receipts[0].category", "page": 4,
-     "extracted": "property tax", "on_page": "Local receipts 46,817,144",
-     "issue": "Broad group recorded as property tax with review. Fund schedules (pp5, 8-15) show it also holds motor vehicle tax (4,741,238), carline tax, license fees, fines, private grants and all interest (the statement's Interest line is a dash). Defensible as the dominant category, but property tax is overstated by several million."},
-    {"severity": "warning", "path": "receipts[1].amount", "page": 4,
-     "extracted": 1398864, "on_page": "County receipts 1,398,864 (General 893,334 + Other Governmental 505,530)",
-     "issue": "Amount is right as printed. But the Other Governmental 505,530 equals the Qualified Capital Purpose Fund's 'Total state sources' on p13, and the statement's Other Governmental 'Sales of lunch' 315,300 is 1,443 below the School Nutrition schedule's 316,743 (p11), with State receipts 543,978 = 505,965 + 36,570 + 1,443. So the report's own statement puts some fund-schedule amounts on different lines. Totals still tie and the category impact is nil (all intergovernmental), so no report_discrepancies entry is strictly needed. Noted for review."},
-    {"severity": "warning", "path": "detail[3].detail_category", "page": 5,
-     "extracted": "county/other local governments", "on_page": "1323 Tuition received from other districts (SPED) 76,834",
-     "issue": "Tuition from other districts could be 'tuition and fees' / charges for services. Intergovernmental is defensible since the payer is another district."},
-    {"severity": "warning", "path": "detail[7].category", "page": 5,
-     "extracted": "intergovernmental/state aid", "on_page": "2110 County fines and license fees 893,334",
-     "issue": "These are county-collected fines and licence fees passed to schools. Recorded as county/other local governments, which matches the statement's 'County receipts' line, but 'fines and forfeitures' is a possible reading."},
-    {"severity": "warning", "path": "detail[131].fund_type", "page": 11,
-     "extracted": "governmental", "on_page": "Budgetary Comparison Schedule - Cash Basis - School Nutrition Fund",
-     "issue": "The extractor field rules list school nutrition among business-type funds. Here the report puts it in Other Governmental Funds (p4 statement; restricted net position p1), with no proprietary statement, so governmental follows the report. This is a judgment call (also applies to detail[132]-detail[137], receipts[4] and disbursements[11])."},
-    {"severity": "warning", "path": "balance_sheet.liabilities[0].original_label", "page": 1,
-     "extracted": "Note payable (current)", "on_page": "Note payable",
-     "issue": "All six liability labels have '(current)' / '(long-term)' added. The printed labels are 'Note payable', 'Limited tax obligation bonds payable' and 'General obligation bonds payable' under the Current liabilities and Long-term liabilities headings. The amounts and categories are correct."}
+    {"severity": "warning", "path": "receipts[9].amount", "page": 4,
+     "extracted": 51100, "on_page": "Local receipts 46,817,144 (Other Governmental Funds column 5,258,813); no page prints a 51,100 piece",
+     "issue": "balancing residual, not printed anywhere (marked computed and review). The split also assumes School Nutrition and Cooperative interest sit in Local receipts while Special Building 'Other' 211,715 sits in the Other line; the statement prints Interest as a dash, so how the Other Governmental column is mapped is the extractor's inference. The General Fund and Debt Service columns tie exactly. The 51,100 plus the unexplained ~495,714 inside 'Other' equals the Cooperative Fund's unshown 546,814 (see report_discrepancies)"}
   ]
 }
