@@ -12,7 +12,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from common import (VALIDATED, json_hash, BS_SECTIONS, DETAIL_CSV, DOWNLOAD_ERRORS, FILE_LIST, FLAGGED, LONG_CSV, MANIFEST,  # noqa: E402
                     PROGRESS_CSV, PROPRIETARY_FIELDS, SUMMARY_CSV, amt, balance_sheet_check, bs_total,
-                    REVIEW_CSV, fund_type, page_ranges, load_reports, page, read_csv, reconcile, reconcile_business,
+                    REVIEW_CSV, fund_type, gov_items, page_ranges, load_reports, page, read_csv, reconcile, reconcile_business,
                     reconcile_proprietary, write_csv)
 
 LONG_FIELDS = ["entity_name", "entity_type", "filename", "fiscal_year_end", "basis", "fund_type", "section",
@@ -39,6 +39,13 @@ PROGRESS_FIELDS = ["filename", "entity_name", "entity_type", "county", "subdivis
                    "flag_reasons", "source_url"]
 
 
+
+
+def has_governmental(d):
+    """True if the report shows any governmental lines or governmental balances."""
+    return bool(gov_items(d.get("receipts")) or gov_items(d.get("disbursements")) or any(
+        amt(d.get(k)) is not None for k in ("beginning_cash", "ending_cash", "beginning_fund_balance",
+                                            "ending_fund_balance")))
 
 def filing_label(m):
     """Audit / Waiver, or "Waiver/budget only" when the filing links only a budget form."""
@@ -144,7 +151,10 @@ def main():
             debt_proceeds=amt(d.get("debt_proceeds")), other_financing=amt(d.get("other_financing")),
             adjustments=round(sum(float(i.get("amount") or 0) for i in d.get("adjustments") or []), 2),
             ending_balance=r["ending"], computed_ending=r["computed_ending"], difference=r["difference"],
-            reconciles={True: "yes", False: "no", None: ""}[r["reconciles"]],
+            # "n/a": an entirely business-type entity has no governmental roll-forward to test
+            # (bt_reconciles tests its utility funds); blank means the governmental data is incomplete
+            reconciles="n/a" if r["reconciles"] is None and not has_governmental(d)
+            else {True: "yes", False: "no", None: ""}[r["reconciles"]],
             beginning_cash=amt(d.get("beginning_cash")), ending_cash=amt(d.get("ending_cash")),
             beginning_investments=amt(d.get("beginning_investments")),
             ending_investments=amt(d.get("ending_investments")),
