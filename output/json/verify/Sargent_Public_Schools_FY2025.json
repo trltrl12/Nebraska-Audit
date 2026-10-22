@@ -1,16 +1,18 @@
 {
   "stem": "Sargent_Public_Schools_FY2025",
-  "values_checked": 212,
+  "values_checked": 215,
   "issues": [
-    {"severity": "error", "path": "missing", "page": 22,
-     "extracted": null,
-     "on_page": "Schedule of Receipts, Disbursements, Transfers and Fund Balance - Activities Fund (report p49), per-account lines Athletic Equipment through Library Fines (e.g. Athletic Equipment disb 183; Concessions rec 20,186 / disb 11,308 / transfers (6,750); FBLA rec 25,237 / disb 24,898; FFA rec 48,324 / disb 39,917; ...)",
-     "issue": "Trimmed p22 prints per-account Activities Fund schedule lines that are not in the JSON. The schedule continues on report p50, which is not trimmed, so it can't be completed or tied to the 205,266 / 218,220 totals. The extractor used the one-line Activities budget schedule (p19) instead and said so in notes. Needs the re-trim to add report p50, then re-extract account by account."},
+    {"severity": "warning", "path": "report_discrepancies", "page": 22,
+     "extracted": 597, "on_page": "Interest receipts 597 in the per-account Activities Fund schedule (p22) vs 598 in the Activities Fund column (p7) and budget schedule 1510 Interest (p19)",
+     "issue": "The report is $1 inconsistent across schedules: the per-account receipts total 205,864 with Interest 597, so the non-interest accounts sum to 205,267, but p19 prints Activities Receipts as 205,266 (used for receipts[8]). Detail investment income (6,492 + 2,942 + 4,333 + 597 = 14,364) is therefore $1 off the statement's Interest line of 14,365. Every figure is entered as printed, but the JSON has no report_discrepancies entry for this."},
+    {"severity": "warning", "path": "detail[65].category", "page": 22,
+     "extracted": "charges for services/fees", "on_page": "Athletic Transfer, Receipts 3,000",
+     "issue": "This account is labelled 'Transfer' and is printed in the Receipts column (inside the 205,864 total), so it stays a receipt. Unlike the 'Transfer' account (detail[93], detail[125]), it has no review flag."},
+    {"severity": "warning", "path": "detail[94].category", "page": 23,
+     "extracted": "charges for services/fees / student activity receipts", "on_page": "Twin Loup Co-op, Receipts 53,059",
+     "issue": "This is 26% of Activities Fund receipts. It may be the partner district's share of a sports co-op, which would make it county/other local governments (intergovernmental). Student activity receipts is defensible."},
     {"severity": "warning", "path": "detail[52].original_label", "page": 15,
      "extracted": "8000 Transfers (to Activities 33,200 and School Nutrition 52,028)", "on_page": "8000 Transfers",
-     "issue": "label has added explanation; printed label is just 'Transfers' (amount -85,228 and budget -35,000 are correct)"},
-    {"severity": "warning", "path": "receipts[10].category", "page": 13,
-     "extracted": "charges for services/fees", "on_page": "1955 Postsecondary Receipts 3,563",
-     "issue": "category is a judgement call (postsecondary/dual-credit receipts may come from colleges, i.e. other local governments); already marked review"}
+     "issue": "The extractor added the split to the label. The amount (-85,228) and the split (33,200 + 52,028, from p9-p10) are correct, but the label is not as printed."}
   ]
 }
