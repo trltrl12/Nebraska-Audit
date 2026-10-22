@@ -244,14 +244,6 @@
       "review": "unexplained non-revenue receipts (GF)"
     },
     {
-      "fund_type": "governmental",
-      "category": "other",
-      "original_label": "Interfund loan",
-      "amount": 39922,
-      "source_page": 6,
-      "review": "interfund loan from Bond Fund to QCPUF; offset by disbursement of the same amount"
-    },
-    {
       "fund_type": "business-type",
       "category": "charges for services/fees",
       "original_label": "Lunchroom sales",
@@ -713,14 +705,6 @@
     },
     {
       "fund_type": "governmental",
-      "category": "other",
-      "original_label": "Interfund Loan to QCPUF Fund",
-      "amount": 39922,
-      "source_page": 9,
-      "review": "interfund loan; offset by receipt of same amount"
-    },
-    {
-      "fund_type": "governmental",
       "category": "instruction",
       "original_label": "Reclass - Instruction (GF payments to ELC / GF-to-Depreciation transfer)",
       "amount": -50000,
@@ -806,13 +790,14 @@
     }
   ],
   "transfers_in": {
-    "amount": 599601,
-    "source_page": 17
+    "amount": 639523,
+    "source_page": 17,
+    "computed": "Depreciation Fund transfers from general fund 599,601 (p17) + interfund loan received by QCPUF 39,922 (p6/p19)"
   },
   "transfers_out": {
-    "amount": 599601,
+    "amount": 639523,
     "source_page": 17,
-    "computed": "GF to Depreciation transfer 599,601 (p17), hidden inside General Fund disbursement lines (reclass column p9)"
+    "computed": "GF to Depreciation transfer 599,601 (p17), hidden inside General Fund disbursement lines (reclass column p9) + interfund loan from Bond Fund to QCPUF 39,922 (p9/p18)"
   },
   "debt_proceeds": null,
   "other_financing": null,
@@ -822,12 +807,26 @@
       "receipts": {
         "amount": 13978141,
         "source_page": 6,
-        "includes": []
+        "includes": [],
+        "includes_split": [
+          {
+            "amount": 39922,
+            "source_page": 6,
+            "computed": "Interfund loan (code 9002, QCPUF column, p6) inside printed total receipts; recorded in transfers_in"
+          }
+        ]
       },
       "disbursements": {
         "amount": 13571413,
         "source_page": 9,
-        "includes": []
+        "includes": [],
+        "includes_split": [
+          {
+            "amount": 39922,
+            "source_page": 9,
+            "computed": "Interfund Loan to QCPUF Fund (code 9004, Bond column, p9) inside printed total disbursements; recorded in transfers_out"
+          }
+        ]
       }
     },
     "business-type": {
@@ -1763,14 +1762,14 @@
       "fund_type": "governmental",
       "fund": "Bond",
       "department": null,
-      "section": "expenditure",
-      "category": "other",
-      "detail_category": "miscellaneous expenditure",
+      "section": "other financing",
+      "category": null,
+      "detail_category": null,
       "original_label": "Inter-fund loan",
-      "amount": 39922,
+      "amount": -39922,
       "budget_final": 0,
       "source_page": 18,
-      "review": "interfund loan to QCPUF"
+      "review": "interfund loan to QCPUF, printed inside Bond Fund total disbursements; recorded as other financing (interfund, not spending)"
     },
     {
       "schedule": "Budgetary Comparison Schedule - Bond Fund",
@@ -1842,14 +1841,14 @@
       "fund_type": "governmental",
       "fund": "Qualified Capital Purpose Undertaking",
       "department": "Local receipts",
-      "section": "revenue",
-      "category": "other",
-      "detail_category": "miscellaneous revenue",
+      "section": "other financing",
+      "category": null,
+      "detail_category": null,
       "original_label": "Inter-fund loan",
       "amount": 39922,
       "budget_final": 0,
       "source_page": 19,
-      "review": "interfund loan from Bond Fund, printed inside Total receipts"
+      "review": "interfund loan from Bond Fund, printed inside QCPUF total receipts; recorded as other financing (interfund, not revenue)"
     },
     {
       "schedule": "Budgetary Comparison Schedule - QCPUF Fund",
@@ -2123,14 +2122,20 @@
       "fund": "Bond",
       "section": "expenditure",
       "amount": 844036,
-      "source_page": 18
+      "source_page": 18,
+      "includes": [
+        "other financing"
+      ]
     },
     {
       "schedule": "Budgetary Comparison Schedule - QCPUF Fund",
       "fund": "Qualified Capital Purpose Undertaking",
       "section": "revenue",
       "amount": 208350,
-      "source_page": 19
+      "source_page": 19,
+      "includes": [
+        "other financing"
+      ]
     },
     {
       "schedule": "Budgetary Comparison Schedule - QCPUF Fund",
@@ -2169,5 +2174,5 @@
       "source_page": 12
     }
   ],
-  "notes": "Modified cash basis school district (Washington County School District No. 3). Governmental figures use Total Governmental Funds column (GF, Special Building, Depreciation, Bond, QCPUF, Educational Leasing Corp, net of Reclass column). The first disbursement page's right-hand columns (Total Governmental Funds column for instruction through career education lines, report p9) are not in the trimmed PDF; the printed line amounts for those lines are therefore the General Fund column (p7), except 2900 Other support services 733,050 (Depreciation Fund). The Reclass column (total 1,290,885) removes General Fund payments to the Educational Leasing Corp (ELC) and the GF-to-Depreciation transfer from those function lines; the Statement of Activities (p2) shows the reclass by function, so one signed contra line per function was added (computed from p2: Instruction -50,000; Pupil support -178,001; Support services business -154,000; Maintenance and operations -758,284; Pupil transportation -150,600; total -1,290,885), so each function nets to its Total column figure and disbursements tie to the printed total 13,571,413. Which individual lines carry the reclass is not shown. Debt related costs (row 5000) stays at the full printed 1,672,186: the Reclass column shows '-' on that row and p2 Debt service is 1,672,186 (it includes the ELC's own 691,284 debt payment). ELC lease revenue 691,284 is on row 1990 Miscellaneous local receipts (ELC column 691,284, Reclass (691,284), p6; Total column 3,827); recorded as a printed ELC line plus an offsetting reclass line (net zero), so receipts still tie to the printed total 13,978,141. Business-type = School Lunch Fund (p10-11); USDA and state subsidy 119,480 split 1,955 state / 117,525 federal per budget schedule p21. Activities Funds (p12) and Student Fees Fund (p13) are not in the district's net position or governmental fund totals; skipped entirely (see decision_needed). TRANSFER CROSS-CHECK: Depreciation Fund receives 'Transfers from general fund' 599,601 (p17). The General Fund budget schedule (p15) and statement (p7) show no transfer out; GF disbursement lines (sum 11,854,694) and fund balance roll (2,392,650 + 12,350,919 - 11,854,694 = 2,888,875) show the transfer is hidden inside GF disbursement lines and removed by the Reclass column. Recorded as transfers_in 599,601 / transfers_out 599,601; in detail, a contra expenditure plus other financing -599,601 for General and +599,601 for Depreciation. Interfund loan 39,922 recorded as printed in both receipts and disbursements (net zero; Bond Fund to QCPUF). Beginning cash = governmental funds beginning fund balance 7,013,317 (p9; equals p3 net position beginning); ending cash = governmental total assets/fund balance 7,420,045 (p4, cash + restricted cash + County Treasurer). business_type measure cash; beginning 190,019 and ending 141,085 per p11; business-type receipts total 431,675 per p21 (operating 312,195 + nonoperating 119,480 on p11). Balance sheet uses Statement of Net Position Total column (p1), which includes business-type cash 141,085; no liabilities. GF budget schedule (p14-15, function-level) recorded in detail as the only GF schedule (program lines on p7-8 are basic statement lines); GF budget schedule actuals differ by rounding of 1 from statement (12,350,918 vs 12,350,919; 11,854,693 vs 11,854,694). Public power district sales tax and nameplate capacity tax categorized as other taxes. Debt related costs 1,672,186 (p9) split by fund column using the Bond Fund (p18: principal 650,000, interest 153,914, fees 200) and QCPUF (p19: principal 165,000, interest 11,788) schedules; ELC column 691,284 kept as principal (no split printed). County fines and license fees (code 2110) categorized as fines and forfeitures. Read pages 1-22 of 22"
+  "notes": "Modified cash basis school district (Washington County School District No. 3). Governmental figures use Total Governmental Funds column (GF, Special Building, Depreciation, Bond, QCPUF, Educational Leasing Corp, net of Reclass column). The first disbursement page's right-hand columns (Total Governmental Funds column for instruction through career education lines, report p9) are not in the trimmed PDF; the printed line amounts for those lines are therefore the General Fund column (p7), except 2900 Other support services 733,050 (Depreciation Fund). The Reclass column (total 1,290,885) removes General Fund payments to the Educational Leasing Corp (ELC) and the GF-to-Depreciation transfer from those function lines; the Statement of Activities (p2) shows the reclass by function, so one signed contra line per function was added (computed from p2: Instruction -50,000; Pupil support -178,001; Support services business -154,000; Maintenance and operations -758,284; Pupil transportation -150,600; total -1,290,885), so each function nets to its Total column figure and disbursements tie to the printed total 13,571,413. Which individual lines carry the reclass is not shown. Debt related costs (row 5000) stays at the full printed 1,672,186: the Reclass column shows '-' on that row and p2 Debt service is 1,672,186 (it includes the ELC's own 691,284 debt payment). ELC lease revenue 691,284 is on row 1990 Miscellaneous local receipts (ELC column 691,284, Reclass (691,284), p6; Total column 3,827); recorded as a printed ELC line plus an offsetting reclass line (net zero), so receipts still tie to the printed total 13,978,141. Business-type = School Lunch Fund (p10-11); USDA and state subsidy 119,480 split 1,955 state / 117,525 federal per budget schedule p21. Activities Funds (p12) and Student Fees Fund (p13) are not in the district's net position or governmental fund totals; skipped entirely (see decision_needed). TRANSFER CROSS-CHECK: Depreciation Fund receives 'Transfers from general fund' 599,601 (p17). The General Fund budget schedule (p15) and statement (p7) show no transfer out; GF disbursement lines (sum 11,854,694) and fund balance roll (2,392,650 + 12,350,919 - 11,854,694 = 2,888,875) show the transfer is hidden inside GF disbursement lines and removed by the Reclass column. Recorded as transfers_in 599,601 / transfers_out 599,601; in detail, a contra expenditure plus other financing -599,601 for General and +599,601 for Depreciation. Interfund loan 39,922 (Bond Fund to QCPUF; codes 9002/9004, printed inside both governmental totals) is not revenue or spending: recorded in transfers_in/transfers_out (with the 599,601 GF-to-Depreciation transfer, total 639,523) and as includes_split on reported_totals; in detail as other financing (-39,922 Bond, +39,922 QCPUF). Beginning cash = governmental funds beginning fund balance 7,013,317 (p9; equals p3 net position beginning); ending cash = governmental total assets/fund balance 7,420,045 (p4, cash + restricted cash + County Treasurer). business_type measure cash; beginning 190,019 and ending 141,085 per p11; business-type receipts total 431,675 per p21 (operating 312,195 + nonoperating 119,480 on p11). Balance sheet uses Statement of Net Position Total column (p1), which includes business-type cash 141,085; no liabilities. GF budget schedule (p14-15, function-level) recorded in detail as the only GF schedule (program lines on p7-8 are basic statement lines); GF budget schedule actuals differ by rounding of 1 from statement (12,350,918 vs 12,350,919; 11,854,693 vs 11,854,694). Public power district sales tax and nameplate capacity tax categorized as other taxes. Debt related costs 1,672,186 (p9) split by fund column using the Bond Fund (p18: principal 650,000, interest 153,914, fees 200) and QCPUF (p19: principal 165,000, interest 11,788) schedules; ELC column 691,284 kept as principal (no split printed). County fines and license fees (code 2110) categorized as fines and forfeitures. Read pages 1-22 of 22"
 }
