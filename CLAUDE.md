@@ -109,7 +109,8 @@ agents' one-line statuses.
   re-check the extraction) and Cass_County_SID_9/10 (v6 already keeps their statements) were stale entries. After
   the next fetch re-trims, compare each extracted report's manifest `pages_kept` with
   `output/json/_meta/pages_at_extraction.csv`; re-extract and re-verify every report whose pages
-  changed (their source_page numbers no longer match).
+  changed (their source_page numbers no longer match). Checked 2026-10-22: 0 of the 870 tracked reports had
+  changed pages; check again after each fetch.
 These were diagnosed and fixed in find_pages v6; re-extract and re-verify them after the re-trim:
 - Trimmed PDF is missing pages: Arapahoe_FY2025 (other
   nonmajor combining page),
@@ -161,6 +162,15 @@ These were diagnosed and fixed in find_pages v6; re-extract and re-verify them a
   Northeast_Nebraska_Economic_Development_District_FY2025 (cash flow statement report pp7-8),
   Ord_FY2025 (also report p15 government-wide assets/liabilities).
   Hastings_Public_Schools_FY2025 (report pp51-54, probably the per-account Activity Fund schedule, and pp15, 49 not trimmed).
+  Found in the 2026-10-22 second-pass audit: Platte_County_FY2025 (report p26, rest of the nonmajor schedule with
+  debt service and Total columns), Crete_Public_Schools_FY2025 (report pp40-43, Activity Fund schedule),
+  Plainview_FY2025 (report p24, Sewer/Sanitation/Total columns of the proprietary statement).
+- Rules the second-pass audit (2026-10-22) found applied inconsistently; waiting on the user's decision, then make
+  all reports match: budget-form "Debt Service: Other" (principal with review on ~19 forms; interest with
+  decision_needed on Richardson_County_RWD_2, Ridgeley_Township); SID "Warrants issued not registered" (long-term
+  debt on SIDs 235/321/324, current payable on SID 291); SID detail actual column (budgetary basis on most, GAAP on
+  SIDs 297-300); unlabeled SID "Maintenance" (utilities vs streets/highways); motor vehicle fees printed under
+  intergovernmental (Sutherland: state aid; rule: motor vehicle tax).
 - Filed under FY2025 but the PDF holds an earlier year (extracted as printed; check the Auditor's site for
   the FY2025 filing): Bristow_FY2025 (period 10/1/23-9/30/24), Naper_FY2025 (period 10/1/23-9/30/24; not yet checked
   on the Auditor's site). Checked 2026-10-21: the Auditor's only FY2025 file
