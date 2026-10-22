@@ -17,6 +17,7 @@ import datetime as dt
 import io
 import os
 import re
+from difflib import SequenceMatcher
 import sys
 from concurrent.futures import ProcessPoolExecutor
 from pathlib import Path
@@ -632,6 +633,13 @@ def select_pages(pages, filename=""):
             # OCR only covers the top of the page, so don't require many numbers there
             if CONTINUED_RE.search(" ".join(lines[:12])) and \
                     len(NUMBER_RE.findall(full)) >= (0 if src == "ocr" else 10):
+                keep.append(j)
+                kept_types.append(t + "(cont)")
+                j += 1
+                continue
+            # Same title as the page before, garbled by OCR ("receip1's", "activitifs fund")
+            if src == "ocr" and len(lines) >= 3 and SequenceMatcher(
+                    None, " ".join(lines[:3]), " ".join(pages[j - 1][0][:3])).ratio() >= 0.9:
                 keep.append(j)
                 kept_types.append(t + "(cont)")
                 j += 1
