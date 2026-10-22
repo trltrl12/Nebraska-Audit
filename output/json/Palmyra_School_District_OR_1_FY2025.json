@@ -151,11 +151,11 @@
       "fund_type": "governmental",
       "category": "other",
       "original_label": "Other",
-      "amount": 438953,
+      "amount": 23588,
       "source_page": 4,
-      "split_from": "Other 758,895 (p4) less Activity Fund 319,942",
-      "computed": "758,895 - 319,942 (Activity Fund column, p4)",
-      "review": "General Fund column Other 436,628 (probably includes interfund transfers into Depreciation and Employee Benefit funds, 415,365), Nutrition 922, Building 1,403"
+      "split_from": "Other 758,895 (p4) less Activity Fund 319,942 less transfers in 415,365 (Depreciation Fund Transfer In 375,000 p10 + Employee Benefit Transfers In 40,365 p11, inside the General Fund column's Other 436,628)",
+      "computed": "758,895 - 319,942 - 375,000 - 40,365",
+      "review": "General Fund column Other 436,628 less transfers 415,365 = 21,263 (General misc items incl. insurance adjustments 12,903, summer school tuition 4,630, p7; Depreciation Other 2,834, p10), Nutrition 922, Building 1,403"
     }
   ],
   "disbursements": [
@@ -296,9 +296,9 @@
     }
   ],
   "transfers_in": {
-    "amount": 82280,
+    "amount": 497645,
     "source_page": 5,
-    "computed": "Activity Fund 60,000 + School Nutrition 22,280 (p5)"
+    "computed": "Activity Fund 60,000 + School Nutrition 22,280 (p5) + Depreciation Fund Transfer In 375,000 (p10) + Employee Benefit Transfers In 40,365 (p11), the last two printed inside statement Other receipts (p4)"
   },
   "transfers_out": {
     "amount": 82280,
@@ -313,7 +313,14 @@
       "receipts": {
         "amount": 14775472,
         "source_page": 4,
-        "includes": []
+        "includes": [],
+        "includes_split": [
+          {
+            "amount": 415365,
+            "source_page": 4,
+            "computed": "Depreciation 375,000 (p10) + Employee Benefit 40,365 (p11) transfers in, inside printed Other receipts and total 14,775,472; recorded in transfers_in"
+          }
+        ]
       },
       "disbursements": {
         "amount": 18103016,
@@ -2368,11 +2375,11 @@
     {
       "question": "The Depreciation (375,000) and Employee Benefit (40,365) funds show transfers in, and the statement's General Fund column counts them in total receipts (11,296,987 = General 10,877,757 + Depreciation 378,223 + Employee Benefit 41,007), but the General Fund schedule shows no matching transfer out (only 82,280 to Activities and Nutrition). Are these interfund transfers inflating receipts?",
       "amount": 415365,
-      "recorded_as": "left inside Other receipts as printed (statement total 14,775,472 kept); not moved to transfers",
+      "recorded_as": "moved out of Other receipts into transfers_in (statement total 14,775,472 kept, includes_split); no matching transfer out recorded, so transfers_in 497,645 vs transfers_out 82,280",
       "source_page": 4
     }
   ],
-  "notes": "Modified cash basis school district; all funds incl. School Nutrition and Activity are in the governmental funds statement (Total Governmental Funds column, pp4-5). Beginning/ending cash = total fund balances (p5; ending = Cash in Bank 8,911,900 + County Treasurer 969,311, p3). Net transfers 82,280 in and out (p5). Statement of Net Position p1 used for balance sheet. Statement of Activities p2 consistent. Statement 'Other' receipts split: Activity Fund column 319,942 as charges for services, remainder other (review). Debt Service split into principal and interest from fund schedules pp14, 16 (adds to 2,234,274). 'Support Services Other' 410,813 split General 19,033 vs Activity Fund 391,780. Detail: each fund's budget-and-actual schedule recorded once (General Fund pp7-9 has function lines only, no object breakdown, so not itemized); General Fund statement column also includes Depreciation and Employee Benefit funds, whose schedules are separate detail. Detail transfers in recorded as other financing; fund schedule totals include them (includes other financing). Combining schedule p6 not recorded to avoid double counting. Read pages 1-16 of 16",
+  "notes": "Modified cash basis school district; all funds incl. School Nutrition and Activity are in the governmental funds statement (Total Governmental Funds column, pp4-5). Beginning/ending cash = total fund balances (p5; ending = Cash in Bank 8,911,900 + County Treasurer 969,311, p3). Transfers 82,280 in and out (p5), plus 415,365 one-sided transfers in from pp10-11. Statement of Net Position p1 used for balance sheet. Statement of Activities p2 consistent. Statement 'Other' receipts split: Activity Fund column 319,942 as charges for services; Depreciation and Employee Benefit transfers in 375,000 + 40,365 (pp10-11, inside the General Fund column's Other) moved to transfers_in (no matching transfer out appears in any schedule; see decision_needed); remainder 23,588 other (review). Debt Service split into principal and interest from fund schedules pp14, 16 (adds to 2,234,274). 'Support Services Other' 410,813 split General 19,033 vs Activity Fund 391,780. Detail: each fund's budget-and-actual schedule recorded once (General Fund pp7-9 has function lines only, no object breakdown, so not itemized); General Fund statement column also includes Depreciation and Employee Benefit funds, whose schedules are separate detail. Detail transfers in recorded as other financing; fund schedule totals include them (includes other financing). Combining schedule p6 not recorded to avoid double counting. Read pages 1-16 of 16",
   "report_discrepancies": [
     {
       "check": "detail",
