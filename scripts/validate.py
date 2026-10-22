@@ -340,6 +340,11 @@ LABEL_RULES = [
     (r"highway allocation", "intergovernmental/state aid", "highway allocation"),
 ]
 TRANSFER_RE = re.compile(r"\btransfers?\b(?! station)", re.I)
+# A catch-all category is right when the report's own label says "other"/"miscellaneous".
+OTHER_LABEL_RE = re.compile(r"\b(other|misc\w*|sundry|various)\b", re.I)
+# Budget forms: the workbook's filing_type column already marks the Actual/Estimated column.
+BUDGET_FORM_RE = re.compile(r"_B\d{4}$")
+ESTIMATED_RE = re.compile(r"actual/estimated|estimated column|prior-year actual column|^budget form$", re.I)
 OTHER_SHARE = 0.10   # "other" above this share of a fund type's receipts/disbursements → review
 
 
@@ -372,8 +377,9 @@ def category_checks(d, f, rv):
                        + f", recorded as {' / '.join(str(x) for x in got[: 2 if k == 'detail' else 1])}",
                        lab, amt(it), it.get("source_page", ""), it.get("fund_type", ""))
                 break
-        if it.get("category") in ("other", "other taxes") or it.get("detail_category") in (
-                "miscellaneous revenue", "miscellaneous expenditure", "other local taxes"):
+        if (it.get("category") in ("other", "other taxes") or it.get("detail_category") in (
+                "miscellaneous revenue", "miscellaneous expenditure", "other local taxes")) \
+                and not OTHER_LABEL_RE.search(lab):
             rv("other", f"in a catch-all category ({it.get('category')}"
                + (f" / {it.get('detail_category')}" if k == "detail" else "") + "); confirm nothing more specific fits",
                lab, amt(it), it.get("source_page", ""), it.get("fund_type", ""))
@@ -394,7 +400,8 @@ def category_checks(d, f, rv):
             items = [it for it in d.get(key) or [] if isinstance(it, dict) and fund_type(it) == ft
                      and amt(it) is not None]
             total = sum(abs(amt(it)) for it in items)
-            other = sum(abs(amt(it)) for it in items if it.get("category") == "other")
+            other = sum(abs(amt(it)) for it in items if it.get("category") == "other"
+                        and not OTHER_LABEL_RE.search(str(it.get("original_label") or "")))
             if total and other / total > OTHER_SHARE:
                 rv("other", f"{other / total:.0%} of {ft} {key} ({other:,.0f} of {total:,.0f}) is in 'other'",
                    amount=round(other, 2), ftype=ft)
@@ -417,8 +424,12 @@ def review_items(stem, d):
             if not isinstance(it, dict):
                 continue
             reasons = []
-            if it.get("review"):
-                reasons.append(str(it["review"]))
+            rv = it.get("review")
+            if rv and BUDGET_FORM_RE.search(stem):
+                rv = "; ".join(c for c in re.split(r";\s*", str(rv)) if c.strip() and c.strip() != "True"
+                               and not ESTIMATED_RE.search(c.strip())) if rv is not True else ""
+            if rv:
+                reasons.append(str(rv))
             if it.get("split_from"):
                 reasons.append(f"split from combined line: {it['split_from']}")
             if it.get("computed") and where != "fields":

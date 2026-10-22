@@ -53,17 +53,21 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
   every output by build_csv.py; it is not stored in the JSON.
 - Money values are `{"amount", "source_page"}`, where source_page is the page within the trimmed PDF.
   List items are `{category, original_label, amount, source_page}`.
-- Receipt categories: property tax, sales tax, motor vehicle tax, occupation/franchise tax, lodging tax,
+- Receipt categories: property tax, sales tax, motor vehicle tax (incl. state motor vehicle tax allocation;
+  pro-rate is state aid), occupation/franchise tax, lodging tax,
   inheritance tax, special assessments, keno/lottery, other taxes, taxes (unlabeled),
   intergovernmental/state aid, federal grants, charges for services/fees, licenses and permits,
   fines and forfeitures, investment income, donations/contributions, reimbursements/refunds,
   sale of assets, other. `other`/`other taxes`/miscellaneous are last resorts; every such line,
-  any category that doesn't match its label, and any fund type with >10% in `other` goes to review.
+  any category that doesn't match its label, and any fund type with >10% in `other` goes to review,
+  except lines whose printed label itself says other/miscellaneous. Budget-form (waiver) reports are
+  marked by the workbook's filing_type column ("Waiver/budget only"), not by per-line review notes.
 - Transfers are never revenue or spending: transfers_in/out (detail section `other financing`,
   signed); a line labelled "transfer" anywhere else is flagged.
 - Disbursement categories: general government, public safety, streets/highways,
   culture/recreation, health/welfare, economic development, utilities, debt service principal,
-  debt service interest, capital outlay, instruction, support services, student transportation,
+  debt service interest, debt service (principal and interest combined) (unsplit lines; workbook adds a
+  debt service total column), capital outlay, instruction, support services, student transportation,
   food service, student activities (school districts/community colleges), hospital/health care, housing,
   natural resources/conservation, agriculture/fair, other.
 - Asset categories: cash and investments, receivables, due from other governments,
@@ -78,7 +82,7 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
   detail_totals[] {schedule, fund, section, amount, source_page} for the printed totals.
   No double counting across schedules.
 - Detailed revenue categories: property tax, sales tax, motor vehicle tax, occupation/franchise tax, lodging tax, inheritance tax, special assessments, keno/lottery, other local taxes, taxes (unlabeled), highway allocation, motor vehicle pro-rate, municipal equalization, homestead/tax credits, state school aid (TEEOSA), other state aid, county/other local governments, federal grants, water charges, sewer charges, electric charges, gas charges, refuse/sanitation charges, other utility charges, licenses and permits, fines and forfeitures, fees of office, rentals, recreation/pool/park fees, cemetery fees, tuition and fees, school lunch sales, ambulance/rescue fees, patient service revenue, tenant rent, fair/event revenue, student activity receipts, other charges for services, investment income, donations/contributions, reimbursements/refunds, sale of assets, miscellaneous revenue.
-- Detailed expenditure categories: salaries and wages, employee benefits and payroll taxes, professional/contract services, supplies and materials, utilities (power, gas, phone), fuel, repairs and maintenance, insurance, rent/leases, dues, training and travel, printing, publishing and postage, grants/payments to other entities, law enforcement contract, equipment purchases, construction/infrastructure, land and buildings, debt principal, debt interest and fees, tax refunds/treasurer fees, purchased power/cost of sales, depreciation, medical supplies and services, student activity spending, not itemized (function total with no object breakdown), miscellaneous expenditure.
+- Detailed expenditure categories: salaries and wages, employee benefits and payroll taxes, professional/contract services, supplies and materials, utilities (power, gas, phone), fuel, repairs and maintenance, insurance, rent/leases, dues, training and travel, printing, publishing and postage, grants/payments to other entities, law enforcement contract, equipment purchases, construction/infrastructure, land and buildings, debt principal, debt interest and fees, debt principal and interest (combined), tax refunds/treasurer fees, purchased power/cost of sales, depreciation, medical supplies and services, student activity spending, not itemized (function total with no object breakdown), miscellaneous expenditure.
 - Balance check: assets + deferred outflows = liabilities + deferred inflows + equity.
 - Identity: beginning + receipts − disbursements + transfers_in − transfers_out + debt_proceeds +
   other_financing + adjustments = ending (cash for cash basis, fund balance for GAAP).
@@ -167,11 +171,9 @@ These were diagnosed and fixed in find_pages v6; re-extract and re-verify them a
   Plainview_FY2025 (report p24, Sewer/Sanitation/Total columns of the proprietary statement),
   Waterloo_FY2025 (proprietary Statement of Cash Flows after report p21; proprietary block null).
 - Rules the second-pass audit (2026-10-22) found applied inconsistently; waiting on the user's decision, then make
-  all reports match: budget-form "Debt Service: Other" (principal with review on ~19 forms; interest with
-  decision_needed on Richardson_County_RWD_2, Ridgeley_Township); SID "Warrants issued not registered" (long-term
+  all reports match: SID "Warrants issued not registered" (long-term
   debt on SIDs 235/321/324, current payable on SID 291); SID detail actual column (budgetary basis on most, GAAP on
-  SIDs 297-300); unlabeled SID "Maintenance" (utilities vs streets/highways); motor vehicle fees printed under
-  intergovernmental (Sutherland: state aid; rule: motor vehicle tax).
+  SIDs 297-300); unlabeled SID "Maintenance" (utilities vs streets/highways).
 - Filed under FY2025 but the PDF holds an earlier year (extracted as printed; check the Auditor's site for
   the FY2025 filing): Bristow_FY2025 (period 10/1/23-9/30/24), Naper_FY2025 (period 10/1/23-9/30/24; not yet checked
   on the Auditor's site). Checked 2026-10-21: the Auditor's only FY2025 file

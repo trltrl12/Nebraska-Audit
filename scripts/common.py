@@ -40,7 +40,7 @@ RECEIPT_CATEGORIES = [
 DISBURSEMENT_CATEGORIES = [
     "general government", "public safety", "streets/highways", "culture/recreation",
     "health/welfare", "economic development", "utilities", "debt service principal",
-    "debt service interest", "capital outlay",
+    "debt service interest", "debt service (principal and interest combined)", "capital outlay",
     "instruction", "support services", "student transportation", "food service",   # school districts
     "student activities",                                                           # school activity funds
     "hospital/health care", "housing", "natural resources/conservation", "agriculture/fair",
@@ -81,6 +81,7 @@ DETAIL_EXPENSE_CATEGORIES = [
     "insurance", "rent/leases", "dues, training and travel", "printing, publishing and postage",
     "grants/payments to other entities", "law enforcement contract", "equipment purchases",
     "construction/infrastructure", "land and buildings", "debt principal", "debt interest and fees",
+    "debt principal and interest (combined)",
     "tax refunds/treasurer fees", "purchased power/cost of sales", "depreciation",
     "medical supplies and services", "student activity spending",
     "not itemized",   # a function/department total printed with no object breakdown

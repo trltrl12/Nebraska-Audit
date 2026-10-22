@@ -241,7 +241,7 @@ independent verifier, so unmarked computed values show up as errors. If a value 
 - Detailed revenue categories (`detail_category` for revenue; use exactly these strings):
   `property tax`, `sales tax`, `motor vehicle tax`, `occupation/franchise tax`, `lodging tax`, `inheritance tax`, `special assessments`, `keno/lottery`, `other local taxes`, `taxes (unlabeled)`, `highway allocation`, `motor vehicle pro-rate`, `municipal equalization`, `homestead/tax credits`, `state school aid (TEEOSA)`, `other state aid`, `county/other local governments`, `federal grants`, `water charges`, `sewer charges`, `electric charges`, `gas charges`, `refuse/sanitation charges`, `other utility charges`, `licenses and permits`, `fines and forfeitures`, `fees of office`, `rentals`, `recreation/pool/park fees`, `cemetery fees`, `tuition and fees`, `school lunch sales`, `ambulance/rescue fees`, `patient service revenue`, `tenant rent`, `fair/event revenue`, `student activity receipts`, `other charges for services`, `investment income`, `donations/contributions`, `reimbursements/refunds`, `sale of assets`, `miscellaneous revenue`.
 - Detailed expenditure categories (`detail_category` for expenditure; use exactly these strings):
-  `salaries and wages`, `employee benefits and payroll taxes`, `professional/contract services`, `supplies and materials`, `utilities (power, gas, phone)`, `fuel`, `repairs and maintenance`, `insurance`, `rent/leases`, `dues, training and travel`, `printing, publishing and postage`, `grants/payments to other entities`, `law enforcement contract`, `equipment purchases`, `construction/infrastructure`, `land and buildings`, `debt principal`, `debt interest and fees`, `tax refunds/treasurer fees`, `purchased power/cost of sales`, `depreciation`, `medical supplies and services`, `student activity spending`, `not itemized` (function/department total with no object breakdown), `miscellaneous expenditure` (last resort, with `"review"`).
+  `salaries and wages`, `employee benefits and payroll taxes`, `professional/contract services`, `supplies and materials`, `utilities (power, gas, phone)`, `fuel`, `repairs and maintenance`, `insurance`, `rent/leases`, `dues, training and travel`, `printing, publishing and postage`, `grants/payments to other entities`, `law enforcement contract`, `equipment purchases`, `construction/infrastructure`, `land and buildings`, `debt principal`, `debt interest and fees`, `debt principal and interest (combined)`, `tax refunds/treasurer fees`, `purchased power/cost of sales`, `depreciation`, `medical supplies and services`, `student activity spending`, `not itemized` (function/department total with no object breakdown), `miscellaneous expenditure` (last resort, with `"review"`).
   Examples: officer/clerk/teacher pay → `salaries and wages`; FICA, retirement, health insurance →
   `employee benefits and payroll taxes`; legal, audit, engineering, contract labor →
   `professional/contract services`; street lighting/electricity → `utilities (power, gas, phone)`;
@@ -250,8 +250,8 @@ independent verifier, so unmarked computed values show up as errors. If a value 
 
 ### Receipt categories (use exactly these strings)
 `property tax` (including penalties and interest on property taxes), `sales tax`,
-`motor vehicle tax` (motor vehicle tax, wheel tax, motor vehicle fees; but *pro-rate* motor vehicle
-is state aid), `occupation/franchise tax`, `lodging tax`, `inheritance tax`, `special assessments`,
+`motor vehicle tax` (motor vehicle tax, wheel tax, motor vehicle fees, "State Motor Vehicle Tax
+Allocation"/"State Motor Vehicle Taxes" on budget forms; but *pro-rate* motor vehicle is state aid), `occupation/franchise tax`, `lodging tax`, `inheritance tax`, `special assessments`,
 `keno/lottery` (keno, lottery, gaming proceeds), `other taxes` (only taxes that fit none of these:
 in-lieu of tax, nameplate capacity, carline, public power district tax; a school "Taxes: Other" /
 "Other taxes" statement line is usually mostly homestead, property tax credit and pro-rate
@@ -332,7 +332,9 @@ as printed with its best category and `"review": "broad group; detail on p.N"`.
 (roads, bridges, street lighting), `culture/recreation` (parks, pool, library, community
 center), `health/welfare` (health, cemetery, senior services, assistance), `economic
 development` (LB840, TIF, CRA, tourism), `utilities` (water, sewer, electric, gas, refuse),
-`debt service principal`, `debt service interest` (including fees), `capital outlay`,
+`debt service principal`, `debt service interest` (including fees), `debt service (principal and
+interest combined)` (one amount the report never splits, e.g. "Debt Service", "Bond Principal &
+Interest Payments", budget-form "Debt Service: Other"; no `review` needed), `capital outlay`,
 school districts and community colleges: `instruction` (regular, special education, vocational),
 `support services` (pupil, instructional staff, general and school administration,
 business, operation and maintenance of plant), `student transportation`, `food service`,
@@ -353,8 +355,9 @@ When a function line mixes categories, pick the dominant one and mention it in `
 
 ## Budget forms (`*_B2526` files: Waiver filings that only filed a budget)
 - Use the prior-year actual column: FY2025 = column 2 ("Actual 2024-2025" or "Actual/Estimated
-  2024-2025"), never the budget year. Put "budget form, prior-year actual column" in notes and set
-  `review: true` on every line if the column is labelled "estimated".
+  2024-2025"), never the budget year. Put "budget form, prior-year actual column" in notes. Don't
+  add `review` for the Actual/Estimated column label: the workbook's filing_type column marks
+  budget-form reports.
 - If there are two versions of the "Total All Funds" page, a page crossed out (red X, diagonal line,
   "Do Not Submit") is void: use the unmarked page, even if a worksheet agrees with the crossed-out
   one. Record the other version's differing figures in report_discrepancies and add a review note.
@@ -371,8 +374,9 @@ When a function line mixes categories, pick the dominant one and mention it in `
 - `fiscal_year_end`: use the year printed on the form; if none is printed, 2025-06-30, and say it
   was assumed in notes.
 - "Operating Expenses" with no function: use the entity type's function (fire districts public
-  safety, townships streets/highways, cemeteries health/welfare…) with `review`. Combined bond
-  principal & interest takes debt service principal with `review`.
+  safety, townships streets/highways, cemeteries health/welfare…) with `review`. Bond principal &
+  interest, bank-loan payments and "Debt Service: Other" take `debt service (principal and interest
+  combined)`.
 - Transfers come from the Documentation of Transfers page; if that page is blank or not in the
   trimmed PDF, use lines 16/28 of column 2 (or null if blank) and say so in notes.
 
