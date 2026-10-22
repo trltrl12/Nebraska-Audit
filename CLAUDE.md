@@ -164,7 +164,8 @@ These were diagnosed and fixed in find_pages v6; re-extract and re-verify them a
   Hastings_Public_Schools_FY2025 (report pp51-54, probably the per-account Activity Fund schedule, and pp15, 49 not trimmed).
   Found in the 2026-10-22 second-pass audit: Platte_County_FY2025 (report p26, rest of the nonmajor schedule with
   debt service and Total columns), Crete_Public_Schools_FY2025 (report pp40-43, Activity Fund schedule),
-  Plainview_FY2025 (report p24, Sewer/Sanitation/Total columns of the proprietary statement).
+  Plainview_FY2025 (report p24, Sewer/Sanitation/Total columns of the proprietary statement),
+  Waterloo_FY2025 (proprietary Statement of Cash Flows after report p21; proprietary block null).
 - Rules the second-pass audit (2026-10-22) found applied inconsistently; waiting on the user's decision, then make
   all reports match: budget-form "Debt Service: Other" (principal with review on ~19 forms; interest with
   decision_needed on Richardson_County_RWD_2, Ridgeley_Township); SID "Warrants issued not registered" (long-term
