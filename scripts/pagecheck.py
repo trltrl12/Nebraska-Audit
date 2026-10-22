@@ -80,8 +80,8 @@ def numbers(text):
 def values(d):
     """(where, label, amount, source_page, fund_type, computed_note) for every money value."""
     def item(where, it, label=None):
-        if not isinstance(it, dict) or amt(it) is None:
-            return None
+        if not isinstance(it, dict) or amt(it) is None or it.get("checked"):
+            return None  # "checked": confirmed against the page image by a person or agent
         note = it.get("computed") or (f"split from {it['split_from']}" if it.get("split_from") else "")
         return (where, label or it.get("original_label") or where, amt(it), page(it),
                 fund_type(it) if "fund_type" in it else "", note)

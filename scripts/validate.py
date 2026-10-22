@@ -17,7 +17,9 @@ Checks per report:
 Every comparison is exact: a difference over $1 is flagged; any difference from 1 cent to $1 goes
 to the review list (possible report rounding). Also writes output/review.csv: items a person should
 look at even when the numbers check out (lines marked "review" by the extractor, split or unlabeled
-tax lines, computed values, amounts not found on their page, verifier notes).
+tax lines, computed values, amounts not found on their page, verifier notes). A value marked
+"checked" (confirmed against the page image), a report_discrepancies entry marked "checked" (listed
+on the workbook's Mistakes tab instead) and a verifier issue marked "resolved" stay off the list.
 """
 import json
 import re
@@ -96,6 +98,8 @@ def check(stem, d):
         if best is not None:
             x = declared[best]
             used.add(best)
+            if x.get("checked"):  # confirmed against the report; listed on the Mistakes tab only
+                return
             rv(chk, f"THE REPORT ITSELF DOESN'T ADD UP: {reason}: off by {diff:+,.2f} as printed; "
                     f"{x.get('note', '')}".strip("; "), amount=round(float(actual), 2),
                src_page=str(x.get("source_page") or ""))
@@ -307,6 +311,8 @@ def check(stem, d):
         for i in ver.get("issues") or []:
             text = f"verifier: {i.get('issue', '')}" + (f" (page shows {i['on_page']})" if i.get("on_page") not in
                                                         (None, "") else "")
+            if i.get("resolved"):  # checked against the page and settled
+                continue
             if i.get("severity") == "error" and not str(i.get("issue", "")).startswith("[fixed"):
                 f("verifier", f"{i.get('path', '')}: {text}", pages=str(i.get("page", "")))
             else:
@@ -359,6 +365,8 @@ def category_checks(d, f, rv):
     for k, i, it in lines:
         lab, sec = str(it.get("original_label") or ""), it.get("section")
         where = f"{k}[{i}]"
+        if it.get("checked"):  # category confirmed against the report
+            continue
         # Transfers are financing, never revenue or spending
         if TRANSFER_RE.search(lab) and (k != "detail" or sec != "other financing") \
                 and not it.get("split_from") and not re.search(r"intergovernmental transfer", lab, re.I):
@@ -386,7 +394,7 @@ def category_checks(d, f, rv):
     # Same label categorized differently within one report
     seen = {}
     for k, i, it in lines:
-        if not (k == "receipts" or (k == "detail" and it.get("section") == "revenue")):
+        if it.get("checked") or not (k == "receipts" or (k == "detail" and it.get("section") == "revenue")):
             continue  # spending labels like "Supplies" rightly differ by function
         key = ("rev" if k == "receipts" or it.get("section") == "revenue" else "exp", _norm(it.get("original_label")))
         seen.setdefault(key, set()).add(it.get("category"))
@@ -400,7 +408,7 @@ def category_checks(d, f, rv):
             items = [it for it in d.get(key) or [] if isinstance(it, dict) and fund_type(it) == ft
                      and amt(it) is not None]
             total = sum(abs(amt(it)) for it in items)
-            other = sum(abs(amt(it)) for it in items if it.get("category") == "other"
+            other = sum(abs(amt(it)) for it in items if it.get("category") == "other" and not it.get("checked")
                         and not OTHER_LABEL_RE.search(str(it.get("original_label") or "")))
             if total and other / total > OTHER_SHARE:
                 rv("other", f"{other / total:.0%} of {ft} {key} ({other:,.0f} of {total:,.0f}) is in 'other'",
@@ -421,7 +429,7 @@ def review_items(stem, d):
     groups.append(("fields", [dict(v, original_label=k) for k, v in singles]))
     for where, items in groups:
         for it in items:
-            if not isinstance(it, dict):
+            if not isinstance(it, dict) or it.get("checked"):
                 continue
             reasons = []
             rv = it.get("review")
