@@ -296,9 +296,24 @@ def rotated_header(page):
     return [norm(t).strip() for _, _, t in sorted(sel)]
 
 
+def _halve(tok):
+    h = len(tok) // 2
+    return tok[:h] if len(tok) >= 2 and len(tok) % 2 == 0 and tok[:h] == tok[h:] else None
+
+
+def undouble(text):
+    """Some PDFs fake bold by printing the text twice, so the text layer reads every word doubled
+    ("statementstatement ofof netnet positionposition"). When most words on a page are doubled,
+    keep one half of each."""
+    toks = [t for t in text.split() if len(t) >= 2]
+    if len(toks) < 5 or sum(_halve(t) is not None for t in toks) < 0.6 * len(toks):
+        return text
+    return re.sub(r"\S+", lambda m: _halve(m.group(0)) or m.group(0), text)
+
+
 def page_header(page):
     """(header lines in reading order, full text, source) for one page."""
-    full = page.get_text("text")
+    full = undouble(page.get_text("text"))
     bad_layer = len(full.strip()) >= MIN_TEXT_CHARS and garbled(full)
     if len(full.strip()) < MIN_TEXT_CHARS or bad_layer:
         text = ocr_header(page)
@@ -310,6 +325,7 @@ def page_header(page):
         return lines, full, "text-rotated"
     r = page.rect
     text = page.get_text("text", clip=pymupdf.Rect(r.x0, r.y0, r.x1, r.y0 + r.height * HEADER_FRAC), sort=True)
+    text = undouble(text)
     lines = [norm(ln).strip() for ln in text.splitlines() if ln.strip()]
     return lines, full, "text"
 
