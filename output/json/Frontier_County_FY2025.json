@@ -13,11 +13,38 @@
   "receipts": [
     {
       "fund_type": "governmental",
-      "category": "taxes (unlabeled)",
+      "category": "property tax",
       "original_label": "Taxes",
-      "amount": 2335449,
-      "source_page": 4,
-      "review": "p2 general receipts list property 2,172,068, motor vehicle 144,615, lodging 10,112, other 8,656 (sum 2,335,451, off by 2 from this line), so not split"
+      "amount": 2172066,
+      "source_page": 2,
+      "split_from": "Taxes 2,335,449 (p4)",
+      "computed": "Statement of Activities Property 2,172,068 (p2) less 2 so the split ties to the p4 Taxes line (p2 tax breakdown sums to 2,335,451, 2 more than p4)",
+      "review": "split from combined Taxes line; 2 rounding difference taken from property tax"
+    },
+    {
+      "fund_type": "governmental",
+      "category": "motor vehicle tax",
+      "original_label": "Taxes",
+      "amount": 144615,
+      "source_page": 2,
+      "split_from": "Taxes 2,335,449 (p4)"
+    },
+    {
+      "fund_type": "governmental",
+      "category": "lodging tax",
+      "original_label": "Taxes",
+      "amount": 10112,
+      "source_page": 2,
+      "split_from": "Taxes 2,335,449 (p4)"
+    },
+    {
+      "fund_type": "governmental",
+      "category": "other taxes",
+      "original_label": "Taxes",
+      "amount": 8656,
+      "source_page": 2,
+      "split_from": "Taxes 2,335,449 (p4)",
+      "review": "Statement of Activities \"Other\" taxes, nature not stated"
     },
     {
       "fund_type": "governmental",
@@ -906,5 +933,13 @@
       "source_page": 8
     }
   ],
-  "notes": "Cash-basis county, FY ending 6/30/2025. Receipts/disbursements from Statement of Receipts, Disbursements and Changes in Fund Balances, Total Governmental Funds column (p4). Beginning cash = fund balances beginning of year (6,624,673, same before and after the Note 10 restatement, which only moves 1,440,797 from the Inheritance Fund to the General Fund). ending_cash 4,328,675 = cash 2,025,243 + investments 95,341 + restricted cash and investments 2,208,091 (p1/p3), the balance the statement rolls forward; investments are inside ending_cash, so ending_investments is left null. Taxes line not split: the Statement of Activities (p2) lists Property 2,172,068, Motor vehicle 144,615, Lodging 10,112, Other 8,656 which sum to 2,335,451, $2 more than the 2,335,449 on p4, so kept as taxes (unlabeled). Principal and interest 65,555 split using the Nonmajor Total column (p8: principal 45,000, interest 20,555). Local receipts 603,655 mixed category (charges, interest, miscellaneous per p2), recorded as charges for services/fees with review. Detail: General Fund budget schedule (p9) is the departmental detail for the General Fund column; p5 combining General Fund page (function-level) not double counted except its Inheritance Tax Fund column (not in the budget schedule). Function split in p9 departments differs from the p5 function lines (e.g. general government 1,355,106 vs 1,346,035) but both total 2,636,403; capital outlay 97,732 is embedded in departments. Road fund and Courthouse Building budget schedules have a single disbursements line (not itemized). Nonmajor combining has 9 funds (p6-8), so only the Total column (p8) is recorded. No business-type funds; no utility schedules. Transfer cross-check: General Fund 1,157 + Inheritance Tax Fund 700,000 = 701,157 out, matches Courthouse Building transfers in 701,157 (p4, p11); nonmajor transfers 10,163 out of 911 Emergency Fund to 911 Wireless Service Fund net to zero within nonmajor funds; total transfers in 711,320 = out 711,320. No transfers hidden in spending lines. Read pages 1-11 of 11"
+  "notes": "Cash-basis county, FY ending 6/30/2025. Receipts/disbursements from Statement of Receipts, Disbursements and Changes in Fund Balances, Total Governmental Funds column (p4). Beginning cash = fund balances beginning of year (6,624,673, same before and after the Note 10 restatement, which only moves 1,440,797 from the Inheritance Fund to the General Fund). ending_cash 4,328,675 = cash 2,025,243 + investments 95,341 + restricted cash and investments 2,208,091 (p1/p3), the balance the statement rolls forward; investments are inside ending_cash, so ending_investments is left null. Taxes line split using the Statement of Activities (p2): Property 2,172,068, Motor vehicle 144,615, Lodging 10,112, Other 8,656 sum to 2,335,451, $2 more than the 2,335,449 on p4, so property tax is recorded as 2,172,066 (computed) to tie p4; the $2 is in report_discrepancies. Principal and interest 65,555 split using the Nonmajor Total column (p8: principal 45,000, interest 20,555). Local receipts 603,655 mixed category (charges, interest, miscellaneous per p2), recorded as charges for services/fees with review. Detail: General Fund budget schedule (p9) is the departmental detail for the General Fund column; p5 combining General Fund page (function-level) not double counted except its Inheritance Tax Fund column (not in the budget schedule). Function split in p9 departments differs from the p5 function lines (e.g. general government 1,355,106 vs 1,346,035) but both total 2,636,403; capital outlay 97,732 is embedded in departments. Road fund and Courthouse Building budget schedules have a single disbursements line (not itemized). Nonmajor combining has 9 funds (p6-8), so only the Total column (p8) is recorded. No business-type funds; no utility schedules. Transfer cross-check: General Fund 1,157 + Inheritance Tax Fund 700,000 = 701,157 out, matches Courthouse Building transfers in 701,157 (p4, p11); nonmajor transfers 10,163 out of 911 Emergency Fund to 911 Wireless Service Fund net to zero within nonmajor funds; total transfers in 711,320 = out 711,320. No transfers hidden in spending lines. Read pages 1-11 of 11",
+  "report_discrepancies": [
+    {
+      "check": "totals",
+      "difference": 2,
+      "source_page": 2,
+      "note": "Statement of Activities tax breakdown (Property 2,172,068 + Motor vehicle 144,615 + Lodging 10,112 + Other 8,656 = 2,335,451) is 2 more than the Taxes line 2,335,449 on the governmental funds statement (p4); split ties to p4 with property tax reduced by 2 (computed)"
+    }
+  ]
 }
