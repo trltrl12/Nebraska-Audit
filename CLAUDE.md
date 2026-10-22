@@ -165,6 +165,8 @@ These were diagnosed and fixed in find_pages v6; re-extract and re-verify them a
   the FY2025 filing): Bristow_FY2025 (period 10/1/23-9/30/24), Naper_FY2025 (period 10/1/23-9/30/24; not yet checked
   on the Auditor's site). Checked 2026-10-21: the Auditor's only FY2025 file
   (approved waiver for FY ending 2025) attaches the 10/1/23-9/30/24 statement; no other filing exists. Leave as is.
+- Ruskin_FY2025: trimmed p1 is the crossed-out Exhibit A page 1; the corrected replacement (source p5) and the
+  debt schedule (source p10) are not trimmed. Balance sheet built from source p5 meanwhile.
 - Taylor_FY2025: trimmed pp2-8 are rotated, so the page-text check can't confirm the governmental amounts (checked visually).
 - Trimmed to one page (extracted from that page; check the source PDF for missing statements):
   Douglas_County_SID_640_FY2025.
