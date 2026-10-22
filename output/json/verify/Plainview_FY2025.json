@@ -1,21 +1,24 @@
 {
   "stem": "Plainview_FY2025",
-  "values_checked": 220,
+  "values_checked": 224,
   "issues": [
-    {"severity": "warning", "path": "missing", "page": 9,
-     "extracted": null, "on_page": "Statement of Cash Flows - Proprietary Funds (pp9-10) shows only Electric and Water columns; Sewer, Sanitation and Total columns not in the trimmed PDF",
-     "issue": "Trim lacks the right-hand cash flow pages (report p23-24 continuation). proprietary is null (allowed since basis is recorded as cash), but the enterprise funds are accrual and the total cash flow figures cannot be checked; check the source PDF"},
+    {"severity": "warning", "path": "report_discrepancies[0]", "page": 12,
+     "extracted": {"check": "proprietary", "difference": -22318}, "on_page": "Total column: lines (54,521) + 142,590 + (1,678) + 1,821 + 20,438 + 1,528 + (1,350) + (26,988) + 3,693 + 22,318 = 107,851, but printed total is 85,533",
+     "issue": "'proprietary' is not one of the allowed check values (business|reconcile|balance|totals|detail). Also, the reconciliation column doesn't add up by itself: its printed total leaves out the 22,318 accrued compensated absences line. It isn't only a mismatch with p10. Difference -22,318 is correct."},
+    {"severity": "warning", "path": "decision_needed", "page": 17,
+     "extracted": "transfers_out 30,081 (Sales Tax Fund transfer out)", "on_page": "Transfers out (30,081); government-wide p3 shows 30,081 going to the component unit (Plainview Manor)",
+     "issue": "One-sided transfer: money leaves the primary government for a component unit. Recorded as transfers_out, but a person should decide if it's a transfer or a payment/grant to another entity. Not in decision_needed[]."},
     {"severity": "warning", "path": "receipts[9].category", "page": 5,
-     "extracted": "other", "on_page": "Loan collections 90,363 (Economic Development 29,724 p13, Housing Authority 60,639 p15)",
-     "issue": "Repayments of notes receivable, not unexplained revenue; no listed category fits exactly. Judgment call, already marked review"},
+     "extracted": "other", "on_page": "Loan collections 90,363",
+     "issue": "principal repayments on notes receivable (ED Fund 29,724, Housing Authority 60,639); no category fits and it is arguably not revenue; marked review"},
     {"severity": "warning", "path": "receipts[6].category", "page": 5,
      "extracted": "federal grants", "on_page": "Grants 83,119",
-     "issue": "Grant source not printed (Park 20,493, Handibus 30,537, Library 7,277, Economic Development 24,812); could be state aid. Already marked review"},
-    {"severity": "warning", "path": "transfers_in.amount", "page": 5,
-     "extracted": 111110, "on_page": "Transfers in (out) 81,029 net (Total Governmental Funds)",
-     "issue": "Gross transfers_in 111,110 / transfers_out 30,081 are an extractor assumption: the statement prints only the net 81,029. Arithmetic holds (111,110 from Water p8; 30,081 Sales Tax Fund out p15 to the component unit; interfund 95,338 and 30,828 net to zero) and both fields are marked computed"},
+     "issue": "no page says where the grants come from (Park 20,493, Handibus 30,537, Library 7,277, Econ Dev 24,812); some may be state aid; same for the matching detail lines; marked review"},
+    {"severity": "warning", "path": "receipts[14].category", "page": 8,
+     "extracted": "charges for services/fees", "on_page": "Other revenue 222,989 (Electric 219,264)",
+     "issue": "Electric fund's revenue is almost all 'Other revenue' (consumer sales only 93), so it may be lease/rental income rather than utility sales; defensible; marked review"},
     {"severity": "warning", "path": "balance_sheet.liabilities[7].category", "page": 1,
      "extracted": "accrued liabilities", "on_page": "Accrued compensated absences 37,682 (noncurrent liabilities)",
-     "issue": "Printed under noncurrent liabilities; the rule reserves accrued liabilities for compensated absences due soon. Could be other liabilities"}
+     "issue": "listed under noncurrent liabilities; the rules use accrued liabilities for compensated absences due soon, so other liabilities may fit better"}
   ]
 }

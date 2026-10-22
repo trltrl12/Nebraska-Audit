@@ -1,24 +1,15 @@
 {
   "stem": "Waterloo_FY2025",
-  "values_checked": 261,
+  "values_checked": 540,
   "issues": [
-    {"severity": "warning", "path": "other_financing", "page": 5,
-     "extracted": 196681, "on_page": "FEMA Grant 83,022; Grant - Other 2,990; Insurance proceeds 110,669 (under Other Financing Sources)",
-     "issue": "The FEMA grant (federal) and the other grant are printed under Other Financing Sources, and the Statement of Activities (p2) shows them as operating grants of 86,012. They are really grant revenue, but recording them as other financing follows the printed statement."},
-    {"severity": "warning", "path": "receipts[18].category", "page": 4,
-     "extracted": "charges for services/fees", "on_page": "Rural fire reimbursements 153,823",
-     "issue": "The label says reimbursements, but these are most likely rural fire district contract payments, which fit charges for services under the rules. It could also be read as intergovernmental. This is a judgment call and the line is large."},
-    {"severity": "warning", "path": "receipts[30].category", "page": 15,
-     "extracted": "sale of assets", "on_page": "Sale of Assets (7,548) (nonoperating; 'Gain on capital assets' on p2)",
-     "issue": "A loss on sale is entered as a negative receipt. Under the rules it could go in business_type.other_financing (sale of assets) instead. The roll-forward holds either way."},
-    {"severity": "warning", "path": "receipts[28].category", "page": 15,
-     "extracted": "charges for services/fees", "on_page": "Other income 875 (operating revenues)",
-     "issue": "'Other income' is not explained on the page. It is put in charges for services because it sits in operating revenues (already marked review)."},
-    {"severity": "warning", "path": "detail[44].detail_category", "page": 7,
-     "extracted": "dues, training and travel", "on_page": "School licenses 1,700",
-     "issue": "It's unclear what 'School licenses' is (it could be software or license fees). The object category is a guess."},
-    {"severity": "warning", "path": "missing", "page": null,
-     "extracted": null, "on_page": "Trimmed report pages jump 6->8, 9->11, 18->20, and stop at 21",
-     "issue": "Report pages 7, 10, 19 and 22+ are not in the trimmed PDF. They are probably reconciliations and the proprietary Statement of Cash Flows (proprietary is null). Page 19 might be another fund schedule, such as Keno. Nothing on the pages that were trimmed is missing from the JSON, and the statement totals tie."}
+    {"severity": "warning", "path": "decision_needed", "page": 5,
+     "extracted": "other_financing includes Insurance proceeds 110,669", "on_page": "Insurance proceeds 110,669 under Other Financing Sources (Uses), General Fund",
+     "issue": "decision_needed[] asks only about the FEMA and other grants. Insurance proceeds are also printed outside total revenues, and the rules list them under reimbursements/refunds, so the same question applies to them."},
+    {"severity": "warning", "path": "receipts[30]", "page": 15,
+     "extracted": -7548, "on_page": "Sale of Assets (7,548); p2 calls it 'Gain on capital assets (7,548)'; cash flow p18 shows sale proceeds 7,750",
+     "issue": "a loss on disposal is recorded as a negative sale of assets receipt; amount and sign are as printed, but it is a loss rather than proceeds; marked review"},
+    {"severity": "warning", "path": "receipts[10].category", "page": 4,
+     "extracted": "licenses and permits", "on_page": "Fireworks 13,500",
+     "issue": "category guessed (fireworks stand permit/fee vs sales/charges); marked review"}
   ]
 }
