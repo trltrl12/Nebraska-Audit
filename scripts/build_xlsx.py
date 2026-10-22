@@ -81,12 +81,15 @@ def add_sheet(wb, title, header, rows, money_cols=(), status_col=None):
         width = max([len(str(h))] + [len(str(r[i - 1])) for r in rows[:500] if i - 1 < len(r) and r[i - 1] is not None])
         ws.column_dimensions[get_column_letter(i)].width = min(max(width + 2, 10), 60)
     if "page_link" in idx:  # clickable link to the PDF on the Auditor's website
+        # HYPERLINK formulas, not cell hyperlinks: Excel allows only 65,530 of those per sheet and
+        # reports the file as damaged beyond that.
         ws.column_dimensions[get_column_letter(idx["page_link"])].width = 14
         for (cell,) in ws.iter_rows(min_row=2, min_col=idx["page_link"], max_col=idx["page_link"]):
             v = str(cell.value or "")
             if v.startswith("http"):
-                cell.hyperlink = v
-                cell.value = f"Open p.{v.rsplit('#page=', 1)[1]}" if "#page=" in v else "Open PDF"
+                label = f"Open p.{v.rsplit('#page=', 1)[1]}" if "#page=" in v else "Open PDF"
+                url = v.replace('"', '""')
+                cell.value = f'=HYPERLINK("{url}","{label}")'
                 cell.font = Font(color="0563C1", underline="single")
     ws.freeze_panes = "B2" if title != "Notes" else "A2"
     if rows:
@@ -128,6 +131,7 @@ def main():
         return ref_pages(stem, kept(stem))
 
     wb = Workbook()
+    wb.calculation.fullCalcOnLoad = True  # openpyxl stores no cached values for the link formulas
     wb.remove(wb.active)
     ident = ["entity_name", "entity_type", "filename", "fiscal_year_end", "basis"]
 
