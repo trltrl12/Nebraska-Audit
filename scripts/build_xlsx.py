@@ -67,6 +67,11 @@ CORE_SHEETS = ["Summary", "Review", "Line Items", "Detail Lines", "Revenue by So
                "Spending by Department", "Receipts", "Disbursements", "Financing & Balances", "Proprietary",
                "Balance Sheet"]
 _scope = None   # set of report stems to keep, while building the focused workbook
+_collect = None  # {sheet title: (header, rows)} gathered for the one-tab workbook
+ONE_XLSX = OUTPUT / "cashflow_one_tab.xlsx"
+# Sheets stacked into the one-tab workbook, and what each row is.
+ONE_SOURCES = {"Line Items": "statement", "Detail Lines": "schedule detail", "Financing & Balances": "balances/financing",
+               "Proprietary": "proprietary cash flows", "Balance Sheet": "balance sheet"}
 
 
 def core_stems():
@@ -84,6 +89,8 @@ def add_sheet(wb, title, header, rows, money_cols=(), status_col=None):
         if "filename" in header:
             i = header.index("filename")
             rows = [r for r in rows if Path(str(r[i] or "")).stem in _scope]
+    if _collect is not None and title in ONE_SOURCES:
+        _collect[title] = (header, rows)
     ws = wb.create_sheet(title)
     ws.append(header)
     for c in ws[1]:
@@ -132,8 +139,56 @@ def main():
     build(XLSX)
     _scope = core_stems()
     if _scope:
+        global _collect
+        _collect = {}
         build(CORE_XLSX)
+        one_tab(_collect)
+        _collect = None
     _scope = None
+
+
+ONE_COLS = ["entity_name", "entity_type", "county", "filename", "filing_type", "fiscal_year_end", "basis", "level",
+            "section", "fund_type", "schedule", "fund", "department", "category", "detail_category",
+            "original_label", "amount", "pages", "page_link"]
+
+
+def one_tab(collected):
+    """output/cashflow_one_tab.xlsx: every line of the focused workbook in one sheet, one amount column.
+    `level` says where a row comes from; statement and schedule-detail rows describe the same money
+    at two levels, so sum one level at a time."""
+    county = {Path(r["filename"]).stem: r.get("county", "") for r in read_csv(FILE_LIST)}
+    out = []
+    for title, level in ONE_SOURCES.items():
+        if title not in collected:
+            continue
+        header, rows = collected[title]
+        ix = {h: i for i, h in enumerate(header)}
+        get = lambda r, h: r[ix[h]] if h in ix else None  # noqa: E731
+        if title == "Proprietary":   # one row per report: one output row per cash-flow item
+            items = [h for h in header if h not in ONE_COLS and h not in REF]
+            for r in rows:
+                for h in items:
+                    if get(r, h) not in (None, ""):
+                        out.append({**{c: get(r, c) for c in ONE_COLS}, "level": level, "section": "cash flows",
+                                    "original_label": h, "amount": get(r, h)})
+            continue
+        for r in rows:
+            row = {c: get(r, c) for c in ONE_COLS}
+            row["level"] = level
+            row["section"] = get(r, "section") or get(r, "item") or level
+            if title == "Balance Sheet":
+                row["schedule"] = get(r, "statement")
+            out.append(row)
+    for row in out:
+        row["county"] = county.get(Path(str(row["filename"] or "")).stem, "")
+    global _scope
+    keep, _scope = _scope, None   # rows are already limited to the focused reports
+    wb = Workbook()
+    wb.remove(wb.active)
+    add_sheet(wb, "All Data", ONE_COLS, [[r.get(c) for c in ONE_COLS] for r in out], ["amount"])
+    _scope = keep
+    wb.save(ONE_XLSX)
+    print(f"wrote {ONE_XLSX.relative_to(OUTPUT.parent)} ({len(out)} rows)")
 
 
 def build(xlsx):
