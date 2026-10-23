@@ -263,11 +263,14 @@ Allocation"/"State Motor Vehicle Taxes" on budget forms; but *pro-rate* motor ve
 (public power district sales/in-lieu tax), `In Lieu of Tax`, `Nameplate Capacity Tax` (each also as its
 detail_category), `other taxes` (only taxes that fit none of these; a school "Taxes: Other" /
 "Other taxes" statement line is usually mostly homestead, property tax credit and pro-rate
-motor vehicle money, which is state aid: split it by summing those lines from the fund schedules,
+motor vehicle money: split it by summing those lines from the fund schedules,
 with `split_from`), `taxes (unlabeled)` (only
 when a combined tax line can't be split), `intergovernmental/state aid` (state aid, highway
-allocation, county or other local government payments, pro-rate motor vehicle, homestead,
-municipal equalization, TEEOSA), `federal grants`, `charges for services/fees` (utility sales,
+allocation, county or other local government payments, pro-rate motor vehicle,
+municipal equalization, TEEOSA; NOT homestead, property tax credit or ESU receipts), `Homestead Exemption`
+(homestead exemption reimbursement), `Property Tax Credit` (state property tax credit / relief),
+`ESU Receipts` (Educational Service Unit receipts, school code 1951 from ESUs) (each also as its detail_category;
+a line combining several of these stays intergovernmental/state aid with a review note), `federal grants`, `charges for services/fees` (utility sales,
 rentals, fees of office, program fees, rural fire contracts), `licenses and permits`,
 `fines and forfeitures`, `investment income` (interest, dividends), `donations/contributions`
 (private gifts, donations, grants and contributions not from a government), `reimbursements/refunds`
