@@ -348,7 +348,7 @@ LABEL_RULES = [
     (r"private sector share|developer contribution", "Private Sector Share of Projects", "Private Sector Share of Projects"),
     (r"donation|contribution", "donations/contributions", "donations/contributions"),
     (r"licen[cs]e|permit", "licenses and permits", "licenses and permits"),
-    (r"\bfines?\b|forfeit", "fines and forfeitures", "fines and forfeitures"),
+    (r"\bfines?\b|forfeit", "Fines and Licenses", "Fines and Licenses"),
     (r"\bTEEOSA\b|state equalization aid", "intergovernmental/state aid", "state school aid (TEEOSA)"),
     (r"highway allocation", "intergovernmental/state aid", "highway allocation"),
 ]

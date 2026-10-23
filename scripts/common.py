@@ -34,7 +34,7 @@ RECEIPT_CATEGORIES = [
     "property tax", "sales tax", "motor vehicle tax", "occupation/franchise tax", "lodging tax",
     "inheritance tax", "special assessments", "keno/lottery", "other taxes", "taxes (unlabeled)",
     "intergovernmental/state aid", "federal grants", "charges for services/fees",
-    "licenses and permits", "fines and forfeitures", "investment income", "donations/contributions",
+    "licenses and permits", "Fines and Licenses", "investment income", "donations/contributions",
     "reimbursements/refunds", "sale of assets", "other",
     # user decision 2026-10-23: these taxes are reported on their own, not under other taxes
     "Carline Tax",
@@ -92,7 +92,7 @@ DETAIL_REVENUE_CATEGORIES = [
     "county/other local governments", "federal grants",
     "water charges", "sewer charges", "electric charges", "gas charges", "refuse/sanitation charges",
     "other utility charges",
-    "licenses and permits", "fines and forfeitures", "fees of office", "rentals",
+    "licenses and permits", "Fines and Licenses", "fees of office", "rentals",
     "recreation/pool/park fees", "cemetery fees", "tuition and fees", "school lunch sales",
     "ambulance/rescue fees", "patient service revenue", "tenant rent", "fair/event revenue",
     "student activity receipts", "other charges for services",
