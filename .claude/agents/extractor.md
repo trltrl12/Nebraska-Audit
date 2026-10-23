@@ -272,7 +272,7 @@ municipal equalization, TEEOSA; NOT pro-rate motor vehicle, homestead, property 
 `Tuition Received` (all tuition: regular, preschool, summer school, from individuals or other districts; a line mixing tuition with other receipts stays where it fits best), `ESU Receipts` (Educational Service Unit receipts, school code 1951 from ESUs) (each also as its detail_category;
 a line combining several of these stays intergovernmental/state aid with a review note), `federal grants`, `charges for services/fees` (utility sales,
 rentals, fees of office, program fees, rural fire contracts), `licenses and permits`,
-`fines and forfeitures`, `investment income` (interest, dividends), `donations/contributions`
+`fines and forfeitures`, `Interest Income` (interest, interest income, interest on investments), `investment income` (dividends, gains, lines labelled only "investment income/earnings"), `Extracurricular Receipts` (school/college extracurricular and activity receipts, admissions), `donations/contributions`
 (private gifts, donations, grants and contributions not from a government), `reimbursements/refunds`
 (including insurance proceeds), `sale of assets` (sale of property/equipment, gain on sale), and
 `other`.

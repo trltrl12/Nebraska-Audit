@@ -66,8 +66,9 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
   user's detail_category (`config/category_decisions.csv`, `category_decision` on each line). Carline Tax,
   Public Power District Sales Tax, In Lieu of Tax, Nameplate Capacity Tax, Private Sector Share of Projects
   (developer/private payments toward public projects) and Penalties and Interest on Taxes (never inside property tax),
-  Homestead Exemption, Property Tax Credit, ESU Receipts and Motor Vehicle Pro-Rate (never inside state aid), and Tuition Received (all tuition incl.
-  preschool) are top-level receipt categories. The 29 unclear lines were
+  Homestead Exemption, Property Tax Credit, ESU Receipts and Motor Vehicle Pro-Rate (never inside state aid), Tuition Received (all tuition incl.
+  preschool), Interest Income (interest lines; investment income keeps dividends/gains) and Extracurricular Receipts
+  (school activity receipts/admissions) are top-level receipt categories. The 29 unclear lines were
   settled from their PDFs.
 - Transfers are never revenue or spending: transfers_in/out (detail section `other financing`,
   signed); a line labelled "transfer" anywhere else is flagged.
