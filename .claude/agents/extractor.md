@@ -28,8 +28,8 @@ health, psychological, speech/OT/PT, SPED related services) and Staff (2200: ins
 improvement of instruction) with detail_category `Pupils` / `Staff` on statement lines, `General Administration`
 (2300, board, executive admin, legal), `School Administration` (2400, principal), `Business` (2500, central/fiscal
 services), `Building and Grounds` (2600, operation and maintenance of plant, security), `Community Service
-Operations`, `State Categorical Programs` (incl. high ability learners, career education), `Federal Programs`
-(incl. Title I, IDEA, REAP, Perkins), `Other Support Services` (support services that are none of these),
+Operations`, `State Categorical Programs` (lines labelled state categorical / state programs), `Federal Programs`
+(lines labelled federal programs); other support services lines stay `support services`;
 `Debt Service` (detail_category `Principal`, `Interest` (incl. bond fees) or `Principal and Interest (combined)`
 on statement lines); transportation, capital outlay, food service and student activities as before.
 Schedule detail lines keep the object (salaries, supplies ...) as detail_category.

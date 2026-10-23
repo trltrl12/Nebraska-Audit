@@ -72,7 +72,7 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
   settled from their PDFs.
 - **School district disbursement functions (user, 2026-10-23):** Instruction, Special Education Programs, support services
   (Pupils and Staff only), General Administration, School Administration, Business, Building and Grounds, Community
-  Service Operations, State Categorical Programs, Federal Programs, Other Support Services, Debt Service (Principal /
+  Service Operations, State Categorical Programs, Federal Programs (only lines labelled so), Debt Service (Principal /
   Interest incl. bond fees); rules in the extractor agent.
 - Transfers are never revenue or spending: transfers_in/out (detail section `other financing`,
   signed); a line labelled "transfer" anywhere else is flagged.

@@ -69,7 +69,6 @@ DISBURSEMENT_CATEGORIES = [
     "Community Service Operations",
     "State Categorical Programs",
     "Federal Programs",
-    "Other Support Services",
     "Debt Service",
 ]
 PROPRIETARY_FIELDS = ["operating", "noncapital_financing", "capital_and_related_financing", "investing"]
