@@ -259,7 +259,7 @@ independent verifier, so unmarked computed values show up as errors. If a value 
 `property tax` (including penalties and interest on property taxes), `sales tax`,
 `motor vehicle tax` (motor vehicle tax, wheel tax, motor vehicle fees, "State Motor Vehicle Tax
 Allocation"/"State Motor Vehicle Taxes" on budget forms; but *pro-rate* motor vehicle is state aid), `occupation/franchise tax`, `lodging tax`, `inheritance tax`, `special assessments`,
-`keno/lottery` (keno, lottery, gaming proceeds), `Carline Tax`, `Public Power District Sales Tax`
+`keno/lottery` (keno, lottery, gaming proceeds), `Private Sector Share of Projects` (developers/private parties paying toward public projects, e.g. Lincoln's "Private Sector Share of Projects", SID "Developer Contribution"), `Carline Tax`, `Public Power District Sales Tax`
 (public power district sales/in-lieu tax), `In Lieu of Tax`, `Nameplate Capacity Tax` (each also as its
 detail_category), `other taxes` (only taxes that fit none of these; a school "Taxes: Other" /
 "Other taxes" statement line is usually mostly homestead, property tax credit and pro-rate

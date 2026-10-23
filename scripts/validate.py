@@ -341,6 +341,7 @@ LABEL_RULES = [
      "investment income"),
     (r"sale of (property|assets|capital|equipment)|gain on sale", "sale of assets", "sale of assets"),
     (r"reimburse|refund", "reimbursements/refunds", "reimbursements/refunds"),
+    (r"private sector share|developer contribution", "Private Sector Share of Projects", "Private Sector Share of Projects"),
     (r"donation|contribution", "donations/contributions", "donations/contributions"),
     (r"licen[cs]e|permit", "licenses and permits", "licenses and permits"),
     (r"\bfines?\b|forfeit", "fines and forfeitures", "fines and forfeitures"),

@@ -41,6 +41,7 @@ RECEIPT_CATEGORIES = [
     "Public Power District Sales Tax",
     "In Lieu of Tax",
     "Nameplate Capacity Tax",
+    "Private Sector Share of Projects",  # user decision 2026-10-23 (developer/private payments toward public projects)
 ]
 DISBURSEMENT_CATEGORIES = [
     "general government", "public safety", "streets/highways", "culture/recreation",
@@ -122,6 +123,7 @@ DETAIL_REVENUE_CATEGORIES = [
     "State Receipts",
     "TIF Revenue",
     "Telephone Patronage",
+    "Private Sector Share of Projects",  # user decision 2026-10-23 (developer/private payments toward public projects)
 ]
 # Expenditure: what the money is spent on (object of expenditure).
 DETAIL_EXPENSE_CATEGORIES = [
