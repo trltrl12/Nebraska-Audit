@@ -59,6 +59,18 @@ DISBURSEMENT_CATEGORIES = [
     "student activities",                                                           # school activity funds
     "hospital/health care", "housing", "natural resources/conservation", "agriculture/fair",
     "other",
+    # school district functions (user decision 2026-10-23); support services = Pupils and Staff only
+    "Instruction",
+    "Special Education Programs",
+    "General Administration",
+    "School Administration",
+    "Business",
+    "Building and Grounds",
+    "Community Service Operations",
+    "State Categorical Programs",
+    "Federal Programs",
+    "Other Support Services",
+    "Debt Service",
 ]
 PROPRIETARY_FIELDS = ["operating", "noncapital_financing", "capital_and_related_financing", "investing"]
 

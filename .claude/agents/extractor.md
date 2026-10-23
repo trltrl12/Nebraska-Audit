@@ -22,6 +22,18 @@ report filenames (e.g. `Lincoln_FY2025.pdf`). For each one:
 
 ## User category decisions (2026-10-23)
 
+**School district disbursements (function):** `Instruction` (regular instruction, summer school, early
+childhood, poverty, LEP), `Special Education Programs`, `support services` only for Pupils (2100: guidance,
+health, psychological, speech/OT/PT, SPED related services) and Staff (2200: instructional staff, library/media,
+improvement of instruction) with detail_category `Pupils` / `Staff` on statement lines, `General Administration`
+(2300, board, executive admin, legal), `School Administration` (2400, principal), `Business` (2500, central/fiscal
+services), `Building and Grounds` (2600, operation and maintenance of plant, security), `Community Service
+Operations`, `State Categorical Programs` (incl. high ability learners, career education), `Federal Programs`
+(incl. Title I, IDEA, REAP, Perkins), `Other Support Services` (support services that are none of these),
+`Debt Service` (detail_category `Principal`, `Interest` (incl. bond fees) or `Principal and Interest (combined)`
+on statement lines); transportation, capital outlay, food service and student activities as before.
+Schedule detail lines keep the object (salaries, supplies ...) as detail_category.
+
 Before putting any receipt, disbursement or detail line in `other` / `other taxes` / a miscellaneous
 detail category, Grep `config/category_decisions.csv` for its label (lowercase, punctuation removed):
 when a row matches, use its `detail_category` (and, for revenue, its category column) and add
