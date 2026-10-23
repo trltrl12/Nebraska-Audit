@@ -431,12 +431,13 @@ def build(xlsx):
         b0 = base(s, d)
         for sec, tot in BS_SECTIONS.items():
             for it in bs.get(sec) or []:
-                rows.append(b0 + [bs.get("statement", ""), sec, it.get("category", ""), it.get("original_label"),
-                                    it.get("amount")] + ref(s, it))
+                rows.append(b0 + [bs.get("statement", ""), bs.get("column", ""), it.get("fund_type", ""), sec,
+                                  it.get("category", ""), it.get("original_label"), it.get("amount")] + ref(s, it))
             if amt(bs.get(tot)) is not None:
-                rows.append(b0 + [bs.get("statement", ""), sec, tot, "(total as stated)", amt(bs.get(tot))]
-                            + ref(s, bs.get(tot)))
-    add_sheet(wb, "Balance Sheet", ident + ["statement", "section", "category", "original_label", "amount"] + REF,
+                rows.append(b0 + [bs.get("statement", ""), bs.get("column", ""), "", sec, tot, "(total as stated)",
+                                  amt(bs.get(tot))] + ref(s, bs.get(tot)))
+    add_sheet(wb, "Balance Sheet", ident + ["statement", "column", "fund_type", "section", "category", "original_label",
+                                            "amount"] + REF,
               rows, ["amount"])
 
     # ---- Flagged
