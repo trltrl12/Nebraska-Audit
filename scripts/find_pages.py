@@ -774,6 +774,15 @@ def process(pdf_path, meta):
     doc = pymupdf.open(pdf_path)
     pages = [page_header(p) for p in doc]
     keep, kept_types, basis, flag = select_pages(pages, Path(pdf_path).name)
+    # config/extra_pages.csv (stem,pages): source pages (1-based, ";"-separated) the finder misses
+    extra = {r["stem"]: r["pages"] for r in read_csv(ROOT / "config" / "extra_pages.csv")}
+    for p in str(extra.get(Path(pdf_path).stem, "")).split(";"):
+        if p.strip().isdigit() and 0 < int(p) <= len(pages) and int(p) - 1 not in keep:
+            keep.append(int(p) - 1)
+            kept_types.append("manual")
+    if keep:
+        order = sorted(range(len(keep)), key=lambda n: keep[n])
+        keep, kept_types = [keep[n] for n in order], [kept_types[n] for n in order]
     trimmed_name = ""
     if keep:
         out = pymupdf.open()
