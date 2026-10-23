@@ -74,13 +74,14 @@ DISBURSEMENT_CATEGORIES = [
 PROPRIETARY_FIELDS = ["operating", "noncapital_financing", "capital_and_related_financing", "investing"]
 
 ASSET_CATEGORIES = [
-    "cash and investments", "Cash and Cash Equivalents", "Investments", "receivables", "due from other governments", "inventories/prepaids", "Inventories", "Prepaid Items", "Plant Operation Assets",
+    "cash and investments", "Cash and Cash Equivalents", "Investments", "receivables", "due from other governments", "inventories/prepaids", "Inventories", "Prepaid Items", "Plant Operation Assets", "Internal Balances",
     "restricted assets", "capital assets", "other assets", "Other Assets",
 ]
 LIABILITY_CATEGORIES = [
     "accounts payable", "accrued liabilities", "due to other governments", "unearned revenue",
     "debt - due within one year", "debt - due in more than one year", "net pension/OPEB liability",
     "other liabilities",
+    "Internal Balances",
 ]
 # Fine-grained categories for line items in the supplementary detail schedules.
 # Revenue: where the money comes from.
