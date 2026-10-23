@@ -82,7 +82,7 @@ LIABILITY_CATEGORIES = [
     "debt - due within one year", "debt - due in more than one year", "net pension/OPEB liability",
     "other liabilities",
     "Internal Balances",
-    "Accrued Interest Payable", "Accrued Liabilities",
+    "Accrued Interest Payable", "Accrued Liabilities", "Commercial Paper",
 ]
 # Fine-grained categories for line items in the supplementary detail schedules.
 # Revenue: where the money comes from.
