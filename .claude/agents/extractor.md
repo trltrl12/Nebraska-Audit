@@ -208,7 +208,8 @@ independent verifier, so unmarked computed values show up as errors. If a value 
   - Record printed totals in the `total_*` fields. It must balance: total_assets +
     total_deferred_outflows = total_liabilities + total_deferred_inflows + total_equity.
   - Asset categories: `Cash and Cash Equivalents` (cash, deposits, checking/savings, cash with county treasurer),
-    `Investments` (investments, certificates of deposit, securities), `cash and investments` (only a line combining both),
+    `Investments` (investments, certificates of deposit, securities), `cash and investments` (only a line combining both), `Inventories`, `Prepaid Items`,
+    `Plant Operation Assets`, `Other Assets` (instead of inventories/prepaids and other assets),
     `receivables` (taxes, accounts, special
     assessments, loans), `due from other governments`, `inventories/prepaids`, `restricted assets`,
     `capital assets` (land, construction in progress, depreciable assets net of depreciation),

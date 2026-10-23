@@ -74,8 +74,8 @@ DISBURSEMENT_CATEGORIES = [
 PROPRIETARY_FIELDS = ["operating", "noncapital_financing", "capital_and_related_financing", "investing"]
 
 ASSET_CATEGORIES = [
-    "cash and investments", "Cash and Cash Equivalents", "Investments", "receivables", "due from other governments", "inventories/prepaids",
-    "restricted assets", "capital assets", "other assets",
+    "cash and investments", "Cash and Cash Equivalents", "Investments", "receivables", "due from other governments", "inventories/prepaids", "Inventories", "Prepaid Items", "Plant Operation Assets",
+    "restricted assets", "capital assets", "other assets", "Other Assets",
 ]
 LIABILITY_CATEGORIES = [
     "accounts payable", "accrued liabilities", "due to other governments", "unearned revenue",

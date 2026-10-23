@@ -82,7 +82,8 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
   debt service total column), capital outlay, instruction, support services, student transportation,
   food service, student activities (school districts/community colleges), hospital/health care, housing,
   natural resources/conservation, agriculture/fair, other.
-- Asset categories: Cash and Cash Equivalents, Investments, cash and investments (only lines combining both), receivables, due from other governments,
+- Asset categories: Cash and Cash Equivalents, Investments, cash and investments (only lines combining both), Inventories, Prepaid Items, Plant Operation Assets,
+  Other Assets, receivables, due from other governments,
   inventories/prepaids, restricted assets, capital assets, other assets.
 - Liability categories: accounts payable, accrued liabilities, due to other governments, unearned
   revenue, debt - due within one year, debt - due in more than one year, net pension/OPEB
