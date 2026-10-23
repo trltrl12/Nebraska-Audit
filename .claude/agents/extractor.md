@@ -86,7 +86,7 @@ independent verifier, so unmarked computed values show up as errors. If a value 
     "statement": "Statement of Net Position (as printed)",
     "scope": "government-wide | governmental funds | cash basis",
     "column": "Total Primary Government",
-    "assets": [{"category": "cash and investments", "original_label": "Cash and Cash Equivalents", "amount": 0, "source_page": 3}],
+    "assets": [{"category": "Cash and Cash Equivalents", "original_label": "Cash and Cash Equivalents", "amount": 0, "source_page": 3}],
     "deferred_outflows": [],
     "liabilities": [{"category": "accounts payable", "original_label": "Accounts Payable", "amount": 0, "source_page": 3}],
     "deferred_inflows": [],
@@ -207,7 +207,9 @@ independent verifier, so unmarked computed values show up as errors. If a value 
     investment in capital assets, unrestricted…) with their printed labels; no category needed.
   - Record printed totals in the `total_*` fields. It must balance: total_assets +
     total_deferred_outflows = total_liabilities + total_deferred_inflows + total_equity.
-  - Asset categories: `cash and investments`, `receivables` (taxes, accounts, special
+  - Asset categories: `Cash and Cash Equivalents` (cash, deposits, checking/savings, cash with county treasurer),
+    `Investments` (investments, certificates of deposit, securities), `cash and investments` (only a line combining both),
+    `receivables` (taxes, accounts, special
     assessments, loans), `due from other governments`, `inventories/prepaids`, `restricted assets`,
     `capital assets` (land, construction in progress, depreciable assets net of depreciation),
     `other assets`.
