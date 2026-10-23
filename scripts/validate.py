@@ -327,7 +327,7 @@ def check(stem, d):
 LABEL_RULES = [
     (r"special assess", "special assessments", "special assessments"),
     (r"keno|lottery", "keno/lottery", "keno/lottery"),
-    (r"pro[- ]?rate", "intergovernmental/state aid", "motor vehicle pro-rate"),
+    (r"pro[- ]?rat", "Motor Vehicle Pro-Rate", "Motor Vehicle Pro-Rate"),
     (r"homestead", "Homestead Exemption", "Homestead Exemption"),
     (r"property tax credit|^(\d+ )?(state )?tax credits?$|property tax relief", "Property Tax Credit", "Property Tax Credit"),
     (r"^(\d+ )?(esu|educational service unit)( receipts)?$", "ESU Receipts", "ESU Receipts"),

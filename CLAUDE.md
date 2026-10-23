@@ -54,7 +54,7 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
 - Money values are `{"amount", "source_page"}`, where source_page is the page within the trimmed PDF.
   List items are `{category, original_label, amount, source_page}`.
 - Receipt categories: property tax, sales tax, motor vehicle tax (incl. state motor vehicle tax allocation;
-  pro-rate is state aid), occupation/franchise tax, lodging tax,
+  pro-rate is its own category, Motor Vehicle Pro-Rate), occupation/franchise tax, lodging tax,
   inheritance tax, special assessments, keno/lottery, other taxes, taxes (unlabeled),
   intergovernmental/state aid, federal grants, charges for services/fees, licenses and permits,
   fines and forfeitures, investment income, donations/contributions, reimbursements/refunds,
@@ -66,7 +66,7 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
   user's detail_category (`config/category_decisions.csv`, `category_decision` on each line). Carline Tax,
   Public Power District Sales Tax, In Lieu of Tax, Nameplate Capacity Tax, Private Sector Share of Projects
   (developer/private payments toward public projects) and Penalties and Interest on Taxes (never inside property tax),
-  Homestead Exemption, Property Tax Credit and ESU Receipts (never inside state aid) are top-level receipt categories. The 29 unclear lines were
+  Homestead Exemption, Property Tax Credit, ESU Receipts and Motor Vehicle Pro-Rate (never inside state aid) are top-level receipt categories. The 29 unclear lines were
   settled from their PDFs.
 - Transfers are never revenue or spending: transfers_in/out (detail section `other financing`,
   signed); a line labelled "transfer" anywhere else is flagged.

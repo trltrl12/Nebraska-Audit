@@ -258,7 +258,7 @@ independent verifier, so unmarked computed values show up as errors. If a value 
 ### Receipt categories (use exactly these strings)
 `property tax` (not its penalties and interest), `Penalties and Interest on Taxes` (penalties and/or interest on taxes, e.g. school code 1140, "Interest on property taxes", "Penalties and interest on delinquent taxes"; a line that combines the tax itself with its penalties stays property tax), `sales tax`,
 `motor vehicle tax` (motor vehicle tax, wheel tax, motor vehicle fees, "State Motor Vehicle Tax
-Allocation"/"State Motor Vehicle Taxes" on budget forms; but *pro-rate* motor vehicle is state aid), `occupation/franchise tax`, `lodging tax`, `inheritance tax`, `special assessments`,
+Allocation"/"State Motor Vehicle Taxes" on budget forms; but *pro-rate* motor vehicle is `Motor Vehicle Pro-Rate`), `occupation/franchise tax`, `lodging tax`, `inheritance tax`, `special assessments`,
 `keno/lottery` (keno, lottery, gaming proceeds), `Private Sector Share of Projects` (developers/private parties paying toward public projects, e.g. Lincoln's "Private Sector Share of Projects", SID "Developer Contribution"), `Carline Tax`, `Public Power District Sales Tax`
 (public power district sales/in-lieu tax), `In Lieu of Tax`, `Nameplate Capacity Tax` (each also as its
 detail_category), `other taxes` (only taxes that fit none of these; a school "Taxes: Other" /
@@ -266,8 +266,8 @@ detail_category), `other taxes` (only taxes that fit none of these; a school "Ta
 motor vehicle money: split it by summing those lines from the fund schedules,
 with `split_from`), `taxes (unlabeled)` (only
 when a combined tax line can't be split), `intergovernmental/state aid` (state aid, highway
-allocation, county or other local government payments, pro-rate motor vehicle,
-municipal equalization, TEEOSA; NOT homestead, property tax credit or ESU receipts), `Homestead Exemption`
+allocation, county or other local government payments,
+municipal equalization, TEEOSA; NOT pro-rate motor vehicle, homestead, property tax credit or ESU receipts), `Motor Vehicle Pro-Rate` (pro-rate motor vehicle), `Homestead Exemption`
 (homestead exemption reimbursement), `Property Tax Credit` (state property tax credit / relief),
 `ESU Receipts` (Educational Service Unit receipts, school code 1951 from ESUs) (each also as its detail_category;
 a line combining several of these stays intergovernmental/state aid with a review note), `federal grants`, `charges for services/fees` (utility sales,
