@@ -332,8 +332,10 @@ LABEL_RULES = [
     (r"occupation|franchise", "occupation/franchise tax", "occupation/franchise tax"),
     (r"lodging", "lodging tax", "lodging tax"),
     (r"inheritance", "inheritance tax", "inheritance tax"),
-    (r"nameplate", "other taxes", "other local taxes"),
-    (r"in[- ]lieu", "other taxes", "other local taxes"),
+    (r"name ?plate", "Nameplate Capacity Tax", "Nameplate Capacity Tax"),
+    (r"in[- ]lieu", "In Lieu of Tax", "In Lieu of Tax"),
+    (r"car ?line", "Carline Tax", "Carline Tax"),
+    (r"public power.*tax", "Public Power District Sales Tax", "Public Power District Sales Tax"),
     (r"penalt(y|ies).*interest.*tax", "property tax", "property tax"),
     (r"^(\d+ )?interest( income| earned| on investments)?$|investment (income|earnings)", "investment income",
      "investment income"),
@@ -387,7 +389,7 @@ def category_checks(d, f, rv):
                 break
         if (it.get("category") in ("other", "other taxes") or it.get("detail_category") in (
                 "miscellaneous revenue", "miscellaneous expenditure", "other local taxes")) \
-                and not OTHER_LABEL_RE.search(lab):
+                and not OTHER_LABEL_RE.search(lab) and not it.get("category_decision"):  # decided by the user
             rv("other", f"in a catch-all category ({it.get('category')}"
                + (f" / {it.get('detail_category')}" if k == "detail" else "") + "); confirm nothing more specific fits",
                lab, amt(it), it.get("source_page", ""), it.get("fund_type", ""))

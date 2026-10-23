@@ -20,6 +20,13 @@ report filenames (e.g. `Lincoln_FY2025.pdf`). For each one:
    `extraction_attempt` to the previous value + 1.
 4. Write `output/json/<stem>.json` (`<stem>` = filename without `.pdf`). Never write anywhere else.
 
+## User category decisions (2026-10-23)
+
+Before putting any receipt, disbursement or detail line in `other` / `other taxes` / a miscellaneous
+detail category, Grep `config/category_decisions.csv` for its label (lowercase, punctuation removed):
+when a row matches, use its `detail_category` (and, for revenue, its category column) and add
+`"category_decision": "user 2026-10-23"` to the line. Spending keeps its function as `category`.
+
 ## JSON schema
 
 Every money value is an object `{"amount": <number>, "source_page": <int>}` or `null` when the report
@@ -252,8 +259,9 @@ independent verifier, so unmarked computed values show up as errors. If a value 
 `property tax` (including penalties and interest on property taxes), `sales tax`,
 `motor vehicle tax` (motor vehicle tax, wheel tax, motor vehicle fees, "State Motor Vehicle Tax
 Allocation"/"State Motor Vehicle Taxes" on budget forms; but *pro-rate* motor vehicle is state aid), `occupation/franchise tax`, `lodging tax`, `inheritance tax`, `special assessments`,
-`keno/lottery` (keno, lottery, gaming proceeds), `other taxes` (only taxes that fit none of these:
-in-lieu of tax, nameplate capacity, carline, public power district tax; a school "Taxes: Other" /
+`keno/lottery` (keno, lottery, gaming proceeds), `Carline Tax`, `Public Power District Sales Tax`
+(public power district sales/in-lieu tax), `In Lieu of Tax`, `Nameplate Capacity Tax` (each also as its
+detail_category), `other taxes` (only taxes that fit none of these; a school "Taxes: Other" /
 "Other taxes" statement line is usually mostly homestead, property tax credit and pro-rate
 motor vehicle money, which is state aid: split it by summing those lines from the fund schedules,
 with `split_from`), `taxes (unlabeled)` (only
@@ -292,7 +300,7 @@ keeps its signed amount and gets `"printed_in": "expenditure"` (or `"revenue"`).
 **Educational Service Units and school districts (state account codes):** 1951/1960-type lines
 ("Miscellaneous revenue from other districts / ESUs / other local government units") are
 `intergovernmental/state aid` / `county/other local governments`, never `other`; nameplate capacity tax
-is `other taxes` / `other local taxes`; code 2110 (county fines and license fees passed to schools) is `fines and forfeitures`; interlocal-agreement and service-contract revenue is
+is `Nameplate Capacity Tax` / `Nameplate Capacity Tax`; code 2110 (county fines and license fees passed to schools) is `fines and forfeitures`; interlocal-agreement and service-contract revenue is
 `charges for services/fees`; "Other state and federal" or program lines that the report's own
 statement counts under Instruction go to `instruction`.
 

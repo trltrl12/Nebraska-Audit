@@ -177,9 +177,10 @@ def main():
         b0 = base(s, d)
         for section in ("receipts", "disbursements"):
             for it in d.get(section) or []:
-                lines.append(b0 + [fund_type(it), section, it.get("category"), it.get("original_label"),
-                                     it.get("amount")] + ref(s, it))
-    add_sheet(wb, "Line Items", ident + ["fund_type", "section", "category", "original_label", "amount"] + REF,
+                lines.append(b0 + [fund_type(it), section, it.get("category"), it.get("detail_category"),
+                                     it.get("original_label"), it.get("amount")] + ref(s, it))
+    add_sheet(wb, "Line Items", ident + ["fund_type", "section", "category", "detail_category", "original_label",
+                                         "amount"] + REF,
               lines, ["amount"])
 
     # ---- Detail Lines (supplementary schedules)
