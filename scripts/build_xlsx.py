@@ -211,11 +211,13 @@ def one_tab(collected):
                             "source": "statement", "line": n, "original_label": label, "amount": v})
     for r in rows_of("Line Items"):
         out.append({**{c: r.get(c) for c in ONE_COLS if c in r}, "level": "revenue and expenses",
-                    "section": {"receipts": "revenue", "disbursements": "expense"}.get(r.get("section"), r.get("section")),
+                    "section": r.get("section"),   # receipts / disbursements
                     "source": "statement"})
     for r in rows_of("Detail Lines"):
         out.append({**{c: r.get(c) for c in ONE_COLS if c in r}, "level": "revenue and expenses",
-                    "section": {"expenditure": "expense"}.get(r.get("section"), r.get("section")), "source": "schedule"})
+                    "section": {"revenue": "receipts", "expenditure": "disbursements"}.get(r.get("section"),
+                                                                                         r.get("section")),
+                    "source": "schedule"})
     for r in rows_of("Balance Sheet"):
         out.append({**{c: r.get(c) for c in ONE_COLS if c in r}, "level": "balance sheet",
                     "schedule": r.get("statement"), "source": "statement"})
