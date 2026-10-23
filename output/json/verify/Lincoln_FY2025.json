@@ -1,39 +1,106 @@
 {
-  "stem": "Lincoln_FY2025",
-  "values_checked": 498,
-  "issues": [
-    {"severity": "error", "path": "balance_sheet.assets[0].category", "page": 1,
-     "extracted": "Cash and Cash Equivalents", "on_page": "Cash and Cash Equivalents 81,975,915 (Governmental Activities)",
-     "issue": "category is not one of the asset categories; should be 'cash and investments' (amount, label and fund_type are correct)"},
-    {"severity": "error", "path": "balance_sheet.assets[1].category", "page": 1,
-     "extracted": "Investments", "on_page": "Investments 574,444,856 (Governmental Activities)",
-     "issue": "category is not one of the asset categories; should be 'cash and investments' (amount, label and fund_type are correct)"},
-    {"severity": "error", "path": "balance_sheet.assets[13].category", "page": 1,
-     "extracted": "Cash and Cash Equivalents", "on_page": "Cash and Cash Equivalents 58,608,151 (Business-Type Activities)",
-     "issue": "category is not one of the asset categories; should be 'cash and investments' (amount, label and fund_type are correct)"},
-    {"severity": "error", "path": "balance_sheet.assets[14].category", "page": 1,
-     "extracted": "Investments", "on_page": "Investments 184,806,213 (Business-Type Activities)",
-     "issue": "category is not one of the asset categories; should be 'cash and investments' (amount, label and fund_type are correct)"},
-    {"severity": "warning", "path": "balance_sheet.equity[5]", "page": 1,
-     "extracted": "Trust Donations: Expendable (no category)", "on_page": "Restricted for: ... Trust Donations: Expendable 3,831,118",
-     "issue": "Trust Donations (Expendable/Nonexpendable) and Health Care (Expendable/Nonexpendable), equity[5]-[8], are printed under 'Restricted for:' but, unlike the other restricted lines, have no category 'Restricted'; the labels also leave out the 'Restricted for:' prefix. Amounts are correct"},
-    {"severity": "warning", "path": "notes", "page": 1,
-     "extracted": "Balance sheet: government-wide Statement of Net Position Total column (p1);", "on_page": "Governmental Activities / Business-Type Activities / Total columns",
-     "issue": "the notes still say the Total column was used, but the last sentence and balance_sheet.column say the two activity columns were recorded separately (which is what the lines hold). Stale sentence"},
-    {"severity": "warning", "path": "receipts[10].category", "page": 4,
-     "extracted": "charges for services/fees", "on_page": "Reimbursement for Services 22,156,615",
-     "issue": "the label says reimbursement; charges for services is defensible (payments for services provided), but reimbursements/refunds is the literal fit. The same choice applies to every 'Reimbursement for Services' detail line"},
-    {"severity": "warning", "path": "receipts[4].category", "page": 4,
-     "extracted": "intergovernmental/state aid", "on_page": "Taxes: Turnback 2,505,626",
-     "issue": "the turnback is a state sales-tax turnback, printed under Taxes and listed as a tax in the Statement of Activities general revenues (p2). State aid is defensible (already marked review); the same applies to the detail turnback lines on p18-19"},
-    {"severity": "warning", "path": "detail[1].category", "page": 5,
-     "extracted": "taxes (unlabeled)", "on_page": "Taxes Collected by Others 109,336,318",
-     "issue": "budget-basis line; the GAAP General Fund column (p15) shows Sales and Use 109,891,604 and Motor Vehicle 7,969,757, so this is mostly sales tax. Keeping it unlabeled follows the no-split rule because the page doesn't break down this exact figure"},
-    {"severity": "warning", "path": "detail[48].category", "page": 6,
-     "extracted": "capital outlay", "on_page": "Street Construction: Capital Outlay 119,818",
-     "issue": "inconsistent: Street Construction capital outlay uses category 'capital outlay', but the Federal Grants (p7-8) and nonmajor capital projects (p19) capital outlay lines use the function (public safety, streets/highways...). Pick one approach"},
-    {"severity": "warning", "path": "detail_totals[1]", "page": 5,
-     "extracted": 189529279, "on_page": "Total Public Safety 97,928,585 (lines 97,928,586); Total Streets and Highways 6,644,081 (lines 6,644,082); Total Health and Welfare 545,500 (lines 545,499)",
-     "issue": "the General Fund budget schedule also has $1 rounding differences in its subtotals; they net to the -1 already in report_discrepancies. For information only"}
-  ]
+ "stem": "Lincoln_FY2025",
+ "values_checked": 498,
+ "issues": [
+  {
+   "severity": "error",
+   "path": "balance_sheet.assets[0].category",
+   "page": 1,
+   "extracted": "Cash and Cash Equivalents",
+   "on_page": "Cash and Cash Equivalents 81,975,915 (Governmental Activities)",
+   "issue": "category is not one of the asset categories; should be 'cash and investments' (amount, label and fund_type are correct)",
+   "resolved": true,
+   "resolution": "User decision 2026-10-23: Cash and Cash Equivalents and Investments are separate asset categories"
+  },
+  {
+   "severity": "error",
+   "path": "balance_sheet.assets[1].category",
+   "page": 1,
+   "extracted": "Investments",
+   "on_page": "Investments 574,444,856 (Governmental Activities)",
+   "issue": "category is not one of the asset categories; should be 'cash and investments' (amount, label and fund_type are correct)",
+   "resolved": true,
+   "resolution": "User decision 2026-10-23: Cash and Cash Equivalents and Investments are separate asset categories"
+  },
+  {
+   "severity": "error",
+   "path": "balance_sheet.assets[13].category",
+   "page": 1,
+   "extracted": "Cash and Cash Equivalents",
+   "on_page": "Cash and Cash Equivalents 58,608,151 (Business-Type Activities)",
+   "issue": "category is not one of the asset categories; should be 'cash and investments' (amount, label and fund_type are correct)",
+   "resolved": true,
+   "resolution": "User decision 2026-10-23: Cash and Cash Equivalents and Investments are separate asset categories"
+  },
+  {
+   "severity": "error",
+   "path": "balance_sheet.assets[14].category",
+   "page": 1,
+   "extracted": "Investments",
+   "on_page": "Investments 184,806,213 (Business-Type Activities)",
+   "issue": "category is not one of the asset categories; should be 'cash and investments' (amount, label and fund_type are correct)",
+   "resolved": true,
+   "resolution": "User decision 2026-10-23: Cash and Cash Equivalents and Investments are separate asset categories"
+  },
+  {
+   "severity": "warning",
+   "path": "balance_sheet.equity[5]",
+   "page": 1,
+   "extracted": "Trust Donations: Expendable (no category)",
+   "on_page": "Restricted for: ... Trust Donations: Expendable 3,831,118",
+   "issue": "Trust Donations (Expendable/Nonexpendable) and Health Care (Expendable/Nonexpendable), equity[5]-[8], are printed under 'Restricted for:' but, unlike the other restricted lines, have no category 'Restricted'; the labels also leave out the 'Restricted for:' prefix. Amounts are correct",
+   "resolved": true,
+   "resolution": "fixed 2026-10-23"
+  },
+  {
+   "severity": "warning",
+   "path": "notes",
+   "page": 1,
+   "extracted": "Balance sheet: government-wide Statement of Net Position Total column (p1);",
+   "on_page": "Governmental Activities / Business-Type Activities / Total columns",
+   "issue": "the notes still say the Total column was used, but the last sentence and balance_sheet.column say the two activity columns were recorded separately (which is what the lines hold). Stale sentence",
+   "resolved": true,
+   "resolution": "fixed 2026-10-23"
+  },
+  {
+   "severity": "warning",
+   "path": "receipts[10].category",
+   "page": 4,
+   "extracted": "charges for services/fees",
+   "on_page": "Reimbursement for Services 22,156,615",
+   "issue": "the label says reimbursement; charges for services is defensible (payments for services provided), but reimbursements/refunds is the literal fit. The same choice applies to every 'Reimbursement for Services' detail line"
+  },
+  {
+   "severity": "warning",
+   "path": "receipts[4].category",
+   "page": 4,
+   "extracted": "intergovernmental/state aid",
+   "on_page": "Taxes: Turnback 2,505,626",
+   "issue": "the turnback is a state sales-tax turnback, printed under Taxes and listed as a tax in the Statement of Activities general revenues (p2). State aid is defensible (already marked review); the same applies to the detail turnback lines on p18-19"
+  },
+  {
+   "severity": "warning",
+   "path": "detail[1].category",
+   "page": 5,
+   "extracted": "taxes (unlabeled)",
+   "on_page": "Taxes Collected by Others 109,336,318",
+   "issue": "budget-basis line; the GAAP General Fund column (p15) shows Sales and Use 109,891,604 and Motor Vehicle 7,969,757, so this is mostly sales tax. Keeping it unlabeled follows the no-split rule because the page doesn't break down this exact figure"
+  },
+  {
+   "severity": "warning",
+   "path": "detail[72].category",
+   "page": 6,
+   "extracted": "capital outlay",
+   "on_page": "Street Construction: Capital Outlay 119,818",
+   "issue": "inconsistent: Street Construction capital outlay uses category 'capital outlay', but the Federal Grants (p7-8) and nonmajor capital projects (p19) capital outlay lines use the function (public safety, streets/highways...). Pick one approach"
+  },
+  {
+   "severity": "warning",
+   "path": "detail_totals[1]",
+   "page": 5,
+   "extracted": 189529279,
+   "on_page": "Total Public Safety 97,928,585 (lines 97,928,586); Total Streets and Highways 6,644,081 (lines 6,644,082); Total Health and Welfare 545,500 (lines 545,499)",
+   "issue": "the General Fund budget schedule also has $1 rounding differences in its subtotals; they net to the -1 already in report_discrepancies. For information only"
+  }
+ ]
 }
