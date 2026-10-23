@@ -47,6 +47,7 @@ RECEIPT_CATEGORIES = [
     "Property Tax Credit",  # user decision 2026-10-23: out of intergovernmental/state aid
     "ESU Receipts",  # user decision 2026-10-23: out of intergovernmental/state aid
     "Motor Vehicle Pro-Rate",  # user decision 2026-10-23: out of intergovernmental/state aid
+    "Tuition Received",  # user decision 2026-10-23: all tuition incl. preschool and summer school
 ]
 DISBURSEMENT_CATEGORIES = [
     "general government", "public safety", "streets/highways", "culture/recreation",
@@ -133,6 +134,7 @@ DETAIL_REVENUE_CATEGORIES = [
     "Homestead Exemption",  # user decision 2026-10-23: out of intergovernmental/state aid
     "Property Tax Credit",  # user decision 2026-10-23: out of intergovernmental/state aid
     "ESU Receipts",  # user decision 2026-10-23: out of intergovernmental/state aid
+    "Tuition Received",  # user decision 2026-10-23: all tuition incl. preschool and summer school
 ]
 # Expenditure: what the money is spent on (object of expenditure).
 DETAIL_EXPENSE_CATEGORIES = [

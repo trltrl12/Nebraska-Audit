@@ -269,7 +269,7 @@ when a combined tax line can't be split), `intergovernmental/state aid` (state a
 allocation, county or other local government payments,
 municipal equalization, TEEOSA; NOT pro-rate motor vehicle, homestead, property tax credit or ESU receipts), `Motor Vehicle Pro-Rate` (pro-rate motor vehicle), `Homestead Exemption`
 (homestead exemption reimbursement), `Property Tax Credit` (state property tax credit / relief),
-`ESU Receipts` (Educational Service Unit receipts, school code 1951 from ESUs) (each also as its detail_category;
+`Tuition Received` (all tuition: regular, preschool, summer school, from individuals or other districts; a line mixing tuition with other receipts stays where it fits best), `ESU Receipts` (Educational Service Unit receipts, school code 1951 from ESUs) (each also as its detail_category;
 a line combining several of these stays intergovernmental/state aid with a review note), `federal grants`, `charges for services/fees` (utility sales,
 rentals, fees of office, program fees, rural fire contracts), `licenses and permits`,
 `fines and forfeitures`, `investment income` (interest, dividends), `donations/contributions`
