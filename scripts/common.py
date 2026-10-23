@@ -35,7 +35,7 @@ RECEIPT_CATEGORIES = [
     "inheritance tax", "special assessments", "keno/lottery", "other taxes", "taxes (unlabeled)",
     "intergovernmental/state aid", "federal grants", "charges for services/fees",
     "licenses and permits", "Fines and Licenses", "investment income", "donations/contributions",
-    "reimbursements/refunds", "sale of assets", "other",
+    "reimbursements/refunds", "Sale of Property", "other",
     # user decision 2026-10-23: these taxes are reported on their own, not under other taxes
     "Carline Tax",
     "Public Power District Sales Tax",
@@ -96,7 +96,7 @@ DETAIL_REVENUE_CATEGORIES = [
     "recreation/pool/park fees", "cemetery fees", "tuition and fees", "school lunch sales",
     "ambulance/rescue fees", "patient service revenue", "tenant rent", "fair/event revenue",
     "student activity receipts", "other charges for services",
-    "investment income", "donations/contributions", "reimbursements/refunds", "sale of assets",
+    "investment income", "donations/contributions", "reimbursements/refunds", "Sale of Property",
     "miscellaneous revenue",
     # user decisions 2026-10-23 for lines that were in other/miscellaneous (config/category_decisions.csv)
     "Annexation Income",

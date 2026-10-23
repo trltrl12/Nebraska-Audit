@@ -343,7 +343,7 @@ LABEL_RULES = [
     (r"penalt|interest on (delinquent |property )?tax", "Penalties and Interest on Taxes", "Penalties and Interest on Taxes"),
     (r"^(\d+ )?interest( income| earned| on investments| received)?$", "Interest Income", "Interest Income"),
     (r"investment (income|earnings)", "investment income", "investment income"),
-    (r"sale of (property|assets|capital|equipment)|gain on sale", "sale of assets", "sale of assets"),
+    (r"sale of (property|assets|capital|equipment)|gain on sale", "Sale of Property", "Sale of Property"),
     (r"reimburse|refund", "reimbursements/refunds", "reimbursements/refunds"),
     (r"private sector share|developer contribution", "Private Sector Share of Projects", "Private Sector Share of Projects"),
     (r"donation|contribution", "donations/contributions", "donations/contributions"),
