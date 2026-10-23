@@ -433,8 +433,16 @@ def build(xlsx):
             for it in bs.get(sec) or []:
                 rows.append(b0 + [bs.get("statement", ""), bs.get("column", ""), it.get("fund_type", ""), sec,
                                   it.get("category", ""), it.get("original_label"), it.get("amount")] + ref(s, it))
+            # a balance sheet split by fund type: one subtotal row per fund type (sum of its lines)
+            fts = sorted({it.get("fund_type") for it in bs.get(sec) or [] if it.get("fund_type")})
+            if len(fts) > 1 or (fts and any(it.get("fund_type") != fts[0] for k in BS_SECTIONS for it in bs.get(k) or [])):
+                for ft in fts:
+                    its = [it for it in bs.get(sec) or [] if it.get("fund_type") == ft]
+                    rows.append(b0 + [bs.get("statement", ""), bs.get("column", ""), ft, sec, tot,
+                                      f"(total {ft}, sum of lines)", round(sum(float(i.get("amount") or 0) for i in its), 2)]
+                                + ref(s, its))
             if amt(bs.get(tot)) is not None:
-                rows.append(b0 + [bs.get("statement", ""), bs.get("column", ""), "", sec, tot, "(total as stated)",
+                rows.append(b0 + [bs.get("statement", ""), bs.get("column", ""), "total", sec, tot, "(total as stated)",
                                   amt(bs.get(tot))] + ref(s, bs.get(tot)))
     add_sheet(wb, "Balance Sheet", ident + ["statement", "column", "fund_type", "section", "category", "original_label",
                                             "amount"] + REF,
