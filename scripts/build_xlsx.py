@@ -60,7 +60,30 @@ def num(v):
         return v
 
 
+# The focused workbook (output/cashflow_core.xlsx): only the subdivision types the user reviews and only
+# the cash flow, balance sheet and revenue/expense detail sheets. Types are listed in config/review_scope.txt.
+CORE_XLSX = OUTPUT / "cashflow_core.xlsx"
+CORE_SHEETS = ["Summary", "Review", "Line Items", "Detail Lines", "Revenue by Source", "Spending by Type",
+               "Spending by Department", "Receipts", "Disbursements", "Financing & Balances", "Proprietary",
+               "Balance Sheet"]
+_scope = None   # set of report stems to keep, while building the focused workbook
+
+
+def core_stems():
+    """Report stems whose subdivision type is listed in config/review_scope.txt."""
+    f = OUTPUT.parent / "config" / "review_scope.txt"
+    types = {ln.strip() for ln in f.read_text().splitlines() if ln.strip() and not ln.startswith("#")} \
+        if f.exists() else set()
+    return {Path(r["filename"]).stem for r in read_csv(FILE_LIST) if r.get("subdivision_type") in types}
+
+
 def add_sheet(wb, title, header, rows, money_cols=(), status_col=None):
+    if _scope is not None:
+        if title not in CORE_SHEETS:
+            return None
+        if "filename" in header:
+            i = header.index("filename")
+            rows = [r for r in rows if Path(str(r[i] or "")).stem in _scope]
     ws = wb.create_sheet(title)
     ws.append(header)
     for c in ws[1]:
@@ -103,6 +126,17 @@ def add_sheet(wb, title, header, rows, money_cols=(), status_col=None):
 
 
 def main():
+    """Build the full workbook, then the focused one (see CORE_SHEETS / config/review_scope.txt)."""
+    global _scope
+    _scope = None
+    build(XLSX)
+    _scope = core_stems()
+    if _scope:
+        build(CORE_XLSX)
+    _scope = None
+
+
+def build(xlsx):
     manifest = {Path(r["filename"]).stem: r for r in read_csv(MANIFEST)}
     reports = [(s, d) for s, d, e in load_reports(scaled=True) if d and not e]
     file_urls = {Path(r["filename"]).stem: r.get("url", "") for r in read_csv(FILE_LIST)}
@@ -360,8 +394,9 @@ def main():
     add_sheet(wb, "Notes", ["filename", "entity_name", "notes"] + REF,
               [[s, d.get("entity_name"), d.get("notes")] + ref_all(s) for s, d in reports if d.get("notes")])
 
-    wb.save(XLSX)
-    print(f"wrote {XLSX.relative_to(OUTPUT.parent)} ({len(reports)} reports, {len(lines)} line items)")
+    wb.save(xlsx)
+    n = len(reports) if _scope is None else len([s for s, _ in reports if s in _scope])
+    print(f"wrote {xlsx.relative_to(OUTPUT.parent)} ({n} reports)")
 
 
 if __name__ == "__main__":

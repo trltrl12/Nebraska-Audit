@@ -112,6 +112,11 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
 Keep the main session lean: don't open PDFs or print JSON in the main conversation. Rely on the
 agents' one-line statuses.
 
+## Review scope (user, 2026-10-23)
+The user reviews only cities, villages, school districts and counties (`config/review_scope.txt`), and only
+the cash flow, balance sheet and revenue/expense detail. `output/cashflow_core.xlsx` (built with cashflow.xlsx)
+holds just those reports and sheets. Prioritise fixes and re-checks for these types; the others stay extracted.
+
 ## Open follow-ups (remove each line once done)
 - Targeted re-trims (config/retrim.csv; FINDER_VERSION stays 8 so other reports are NOT re-trimmed; never bump it
   without the user's OK). Done 2026-10-22: 12 reports re-trimmed (find_pages v9 + Waterloo/Plainview fixes),
