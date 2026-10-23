@@ -69,9 +69,8 @@ CORE_SHEETS = ["Summary", "Review", "Line Items", "Detail Lines", "Revenue by So
 _scope = None   # set of report stems to keep, while building the focused workbook
 _collect = None  # {sheet title: (header, rows)} gathered for the one-tab workbook
 ONE_XLSX = OUTPUT / "cashflow_one_tab.xlsx"
-# Sheets stacked into the one-tab workbook, and what each row is.
-ONE_SOURCES = {"Line Items": "statement", "Detail Lines": "schedule detail", "Financing & Balances": "balances/financing",
-               "Proprietary": "proprietary cash flows", "Balance Sheet": "balance sheet"}
+# Sheets the one-tab workbook is built from
+ONE_SOURCES = ["Summary", "Line Items", "Detail Lines", "Proprietary", "Balance Sheet"]
 
 
 def core_stems():
@@ -148,39 +147,82 @@ def main():
 
 
 ONE_COLS = ["entity_name", "entity_type", "county", "filename", "filing_type", "fiscal_year_end", "basis", "level",
-            "section", "fund_type", "schedule", "fund", "department", "category", "detail_category",
-            "original_label", "amount", "pages", "page_link"]
+            "fund_type", "section", "source", "line", "schedule", "fund", "department", "category",
+            "detail_category", "original_label", "amount", "pages", "page_link"]
+# Cash flow roll-forward lines (Summary columns): (column, label, sign)
+GOV_FLOW = [("beginning_balance", "beginning {}", 1), ("total_receipts", "receipts", 1),
+            ("total_disbursements", "disbursements", -1), ("transfers_in", "transfers in", 1),
+            ("transfers_out", "transfers out", -1), ("debt_proceeds", "debt proceeds", 1),
+            ("other_financing", "other financing", 1), ("adjustments", "adjustments", 1),
+            ("ending_balance", "ending {}", 1)]
+PROP_FLOW = [("beginning_cash", "beginning cash"), ("operating", "operating activities"),
+             ("noncapital_financing", "noncapital financing activities"),
+             ("capital_and_related_financing", "capital and related financing activities"),
+             ("investing", "investing activities"), ("ending_cash", "ending cash")]
 
 
 def one_tab(collected):
-    """output/cashflow_one_tab.xlsx: every line of the focused workbook in one sheet, one amount column.
-    `level` says where a row comes from; statement and schedule-detail rows describe the same money
-    at two levels, so sum one level at a time."""
+    """output/cashflow_one_tab.xlsx: one sheet, one amount column, three levels:
+    cash flow (governmental and business-type roll-forwards; utility cash flow statements),
+    balance sheet, and revenue and expenses (statement lines and schedule detail, told apart by `source`:
+    both describe the same money, so sum one source at a time). Cash-flow outflows are negative."""
     county = {Path(r["filename"]).stem: r.get("county", "") for r in read_csv(FILE_LIST)}
     out = []
-    for title, level in ONE_SOURCES.items():
-        if title not in collected:
-            continue
-        header, rows = collected[title]
+
+    def rows_of(title):
+        header, rows = collected.get(title, ([], []))
         ix = {h: i for i, h in enumerate(header)}
-        get = lambda r, h: r[ix[h]] if h in ix else None  # noqa: E731
-        if title == "Proprietary":   # one row per report: one output row per cash-flow item
-            items = [h for h in header if h not in ONE_COLS and h not in REF]
-            for r in rows:
-                for h in items:
-                    if get(r, h) not in (None, ""):
-                        out.append({**{c: get(r, c) for c in ONE_COLS}, "level": level, "section": "cash flows",
-                                    "original_label": h, "amount": get(r, h)})
-            continue
-        for r in rows:
-            row = {c: get(r, c) for c in ONE_COLS}
-            row["level"] = level
-            row["section"] = get(r, "section") or get(r, "item") or level
-            if title == "Balance Sheet":
-                row["schedule"] = get(r, "statement")
-            out.append(row)
+        return [{h: r[i] for h, i in ix.items()} for r in rows]
+
+    def num_(v):
+        try:
+            return float(v)
+        except (TypeError, ValueError):
+            return None
+
+    for r in rows_of("Summary"):
+        ident_ = {c: r.get(c) for c in ("entity_name", "entity_type", "filename", "filing_type", "fiscal_year_end",
+                                        "basis", "pages", "page_link")}
+        bt = (r.get("balance_type") or "balance").replace("_", " ")
+        for n, (col, label, sign) in enumerate(GOV_FLOW, 1):
+            v = num_(r.get(col))
+            if v is not None and (v or col in ("beginning_balance", "ending_balance")):
+                out.append({**ident_, "level": "cash flow", "fund_type": "governmental", "section": "roll-forward",
+                            "source": "statement", "line": n, "original_label": label.format(bt), "amount": sign * v})
+        b, rc, ds, e = (num_(r.get(k)) for k in ("bt_beginning", "bt_receipts", "bt_disbursements", "bt_ending"))
+        m = r.get("bt_measure") or "balance"
+        lines = [(1, f"beginning {m}", b, "statement"), (2, "receipts", rc, "statement"),
+                 (3, "disbursements", -ds if ds is not None else None, "statement")]
+        if None not in (b, e):
+            other = round(e - b - (rc or 0) + (ds or 0), 2)
+            if other:
+                lines.append((4, "transfers, financing and adjustments (net)", other, "computed"))
+        lines.append((5, f"ending {m}", e, "statement"))
+        for n, label, v, src in lines:
+            if v is not None and (b is not None or e is not None):
+                out.append({**ident_, "level": "cash flow", "fund_type": "business-type", "section": "roll-forward",
+                            "source": src, "line": n, "original_label": label, "amount": v})
+    for r in rows_of("Proprietary"):
+        for n, (col, label) in enumerate(PROP_FLOW, 1):
+            v = num_(r.get(col))
+            if v is not None:
+                out.append({**{c: r.get(c) for c in ONE_COLS if c in r}, "level": "cash flow",
+                            "fund_type": "business-type", "section": "utility cash flow statement",
+                            "source": "statement", "line": n, "original_label": label, "amount": v})
+    for r in rows_of("Line Items"):
+        out.append({**{c: r.get(c) for c in ONE_COLS if c in r}, "level": "revenue and expenses",
+                    "section": {"receipts": "revenue", "disbursements": "expense"}.get(r.get("section"), r.get("section")),
+                    "source": "statement"})
+    for r in rows_of("Detail Lines"):
+        out.append({**{c: r.get(c) for c in ONE_COLS if c in r}, "level": "revenue and expenses",
+                    "section": {"expenditure": "expense"}.get(r.get("section"), r.get("section")), "source": "schedule"})
+    for r in rows_of("Balance Sheet"):
+        out.append({**{c: r.get(c) for c in ONE_COLS if c in r}, "level": "balance sheet",
+                    "schedule": r.get("statement"), "source": "statement"})
     for row in out:
-        row["county"] = county.get(Path(str(row["filename"] or "")).stem, "")
+        row["county"] = county.get(Path(str(row.get("filename") or "")).stem, "")
+    out.sort(key=lambda x: (str(x.get("entity_name") or ""), ["cash flow", "revenue and expenses", "balance sheet"]
+                            .index(x["level"])))
     global _scope
     keep, _scope = _scope, None   # rows are already limited to the focused reports
     wb = Workbook()
