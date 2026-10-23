@@ -256,7 +256,7 @@ independent verifier, so unmarked computed values show up as errors. If a value 
   to other entities`.
 
 ### Receipt categories (use exactly these strings)
-`property tax` (including penalties and interest on property taxes), `sales tax`,
+`property tax` (not its penalties and interest), `Penalties and Interest on Taxes` (penalties and/or interest on taxes, e.g. school code 1140, "Interest on property taxes", "Penalties and interest on delinquent taxes"; a line that combines the tax itself with its penalties stays property tax), `sales tax`,
 `motor vehicle tax` (motor vehicle tax, wheel tax, motor vehicle fees, "State Motor Vehicle Tax
 Allocation"/"State Motor Vehicle Taxes" on budget forms; but *pro-rate* motor vehicle is state aid), `occupation/franchise tax`, `lodging tax`, `inheritance tax`, `special assessments`,
 `keno/lottery` (keno, lottery, gaming proceeds), `Private Sector Share of Projects` (developers/private parties paying toward public projects, e.g. Lincoln's "Private Sector Share of Projects", SID "Developer Contribution"), `Carline Tax`, `Public Power District Sales Tax`

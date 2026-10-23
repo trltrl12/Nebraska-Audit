@@ -42,6 +42,7 @@ RECEIPT_CATEGORIES = [
     "In Lieu of Tax",
     "Nameplate Capacity Tax",
     "Private Sector Share of Projects",  # user decision 2026-10-23 (developer/private payments toward public projects)
+    "Penalties and Interest on Taxes",  # user decision 2026-10-23: kept apart from property tax
 ]
 DISBURSEMENT_CATEGORIES = [
     "general government", "public safety", "streets/highways", "culture/recreation",
@@ -124,6 +125,7 @@ DETAIL_REVENUE_CATEGORIES = [
     "TIF Revenue",
     "Telephone Patronage",
     "Private Sector Share of Projects",  # user decision 2026-10-23 (developer/private payments toward public projects)
+    "Penalties and Interest on Taxes",  # user decision 2026-10-23: kept apart from property tax
 ]
 # Expenditure: what the money is spent on (object of expenditure).
 DETAIL_EXPENSE_CATEGORIES = [

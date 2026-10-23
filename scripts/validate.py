@@ -336,7 +336,7 @@ LABEL_RULES = [
     (r"in[- ]lieu", "In Lieu of Tax", "In Lieu of Tax"),
     (r"car ?line", "Carline Tax", "Carline Tax"),
     (r"public power.*tax", "Public Power District Sales Tax", "Public Power District Sales Tax"),
-    (r"penalt(y|ies).*interest.*tax", "property tax", "property tax"),
+    (r"penalt|interest on (delinquent |property )?tax", "Penalties and Interest on Taxes", "Penalties and Interest on Taxes"),
     (r"^(\d+ )?interest( income| earned| on investments)?$|investment (income|earnings)", "investment income",
      "investment income"),
     (r"sale of (property|assets|capital|equipment)|gain on sale", "sale of assets", "sale of assets"),

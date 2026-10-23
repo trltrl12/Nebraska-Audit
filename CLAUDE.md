@@ -64,8 +64,9 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
   marked by the workbook's filing_type column ("Waiver/budget only"), not by per-line review notes.
 - **User category decisions (2026-10-23):** 9,490 lines that were in other/miscellaneous now carry the
   user's detail_category (`config/category_decisions.csv`, `category_decision` on each line). Carline Tax,
-  Public Power District Sales Tax, In Lieu of Tax, Nameplate Capacity Tax and Private Sector Share of Projects
-  (developer/private payments toward public projects) are top-level receipt categories. The 29 unclear lines were
+  Public Power District Sales Tax, In Lieu of Tax, Nameplate Capacity Tax, Private Sector Share of Projects
+  (developer/private payments toward public projects) and Penalties and Interest on Taxes (never inside property tax)
+  are top-level receipt categories. The 29 unclear lines were
   settled from their PDFs.
 - Transfers are never revenue or spending: transfers_in/out (detail section `other financing`,
   signed); a line labelled "transfer" anywhere else is flagged.
