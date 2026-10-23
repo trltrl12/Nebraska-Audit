@@ -1,15 +1,15 @@
 {
   "stem": "Orleans_FY2025",
-  "values_checked": 100,
+  "values_checked": 105,
   "issues": [
-    {"severity": "warning", "path": "detail[45].budget_final", "page": 9,
-     "extracted": 86665, "on_page": "Original Budget 86,665 (no Final Budget column printed)",
-     "issue": "The all-funds budget schedule prints only an Original Budget column. budget_final for detail[45]-detail[48] (Public works 86,665, Water 127,470, Sewer 26,530, Solid waste 59,230) is the original budget. The figures match the page, but the column is not labelled final."},
-    {"severity": "warning", "path": "detail[9].detail_category", "page": 10,
-     "extracted": "salaries and wages", "on_page": "Salaries and benefits",
-     "issue": "One printed line mixes salaries and benefits. It is recorded as salaries and wages for General, Park, Pool and RV Park (detail[9]-detail[12]) with no review flag. Defensible, but benefits are inside it."},
-    {"severity": "warning", "path": "business_type.measure", "page": 7,
-     "extracted": "net position", "on_page": "Fund balances - September 30, 2024 464,935 / Net position - September 30, 2025 525,908 (modified cash basis)",
-     "issue": "The report is cash basis, but measure is 'net position'. The balance includes certificates of deposit 123,438, which the p8 cash flow statement excludes from cash (cash 344,502 to 402,470). Defensible because the statement rolls forward net position, but it differs from the rule that cash basis means measure 'cash'."}
+    {"severity": "warning", "path": "missing", "page": 9,
+     "extracted": null, "on_page": "Budgetary Comparison Schedule revenue lines: Property 92,565; Motor vehicle tax 6,621; State intergovernmental 128,665; Other local receipts 333,788",
+     "issue": "The budget schedule's revenue lines are left out of detail. Property and part of the other lines are already in the General Fund departments schedule, and Other local receipts mixes governmental and business revenue, so the omission is explained in notes. Street Fund revenue (motor vehicle tax 6,621, which is Street-only on this schedule) therefore has no detail line."},
+    {"severity": "warning", "path": "detail_totals[2..5]", "page": 9,
+     "extracted": "per-fund totals Street 92,907 / Water 101,337 / Sewer 15,219 / Solid Waste 55,320", "on_page": "single lines Public works / Water / Sewer / Solid waste; printed totals are Total governmental 292,229 and Total business-type 171,876",
+     "issue": "These detail_totals repeat the line amounts rather than printed total lines. The amounts are correct as printed."},
+    {"severity": "warning", "path": "beginning_cash", "page": 5,
+     "extracted": 65111, "on_page": "Fund balances - September 30, 2024 65,111",
+     "issue": "The governmental roll-forward uses fund balance (modified cash: cash 108,260 less payroll taxes withheld 6,588 at year end) in the cash fields. This is explained in notes. ending_cash 101,672 is likewise fund balance, not cash."}
   ]
 }
