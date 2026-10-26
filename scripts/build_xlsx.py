@@ -25,6 +25,7 @@ of those pages).
 Run after validate.py and build_csv.py (it reads their outputs).
 """
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -40,9 +41,12 @@ from common import (BS_SECTIONS, DETAIL_EXPENSE_CATEGORIES, DETAIL_REVENUE_CATEG
 
 from build_csv import filing_label  # noqa: E402
 
+CATEGORY_NAMES = set(RECEIPT_CATEGORIES) | set(DISBURSEMENT_CATEGORIES) | set(DETAIL_REVENUE_CATEGORIES) | \
+    set(DETAIL_EXPENSE_CATEGORIES)
+
 XLSX = OUTPUT / "cashflow.xlsx"
 # Principal, interest and unsplit principal-and-interest lines, summed into a "debt service total" column
-DEBT_CATS = ["Interest", "Fiscal Charges", "Bond Retirement", "Leases and SBITA Principal", "Leases and SBITA Interest", "debt service principal", "debt service interest", "debt service (principal and interest combined)",
+DEBT_CATS = ["Interest", "Fiscal Charges", "Bond Retirement", "Leases and SBITA", "debt service principal", "debt service interest", "debt service (principal and interest combined)",
              "Debt Service"]
 DEBT_DETAIL = ["debt principal", "debt interest and fees", "debt principal and interest (combined)"]
 MONEY = '#,##0.00;[Red](#,##0.00)'
@@ -82,6 +86,26 @@ def core_stems():
     return {Path(r["filename"]).stem for r in read_csv(FILE_LIST) if r.get("subdivision_type") in types}
 
 
+# User 2026-10-26: categories and labels are shown capitalized in the workbooks ("capital outlay" -> "Capital Outlay").
+# Words that already contain a capital (SBITA, TEEOSA, LB840) are kept; small words stay lowercase.
+CAP_COLS = {"category", "detail_category", "original_label"}
+_SMALL = {"and", "or", "of", "the", "in", "for", "to", "a", "an", "on", "at", "by", "with", "from", "per", "vs", "as"}
+
+
+def cap(v):
+    if not isinstance(v, str):
+        return v
+    n = [0]
+
+    def word(m):
+        w = m.group(0)
+        n[0] += 1
+        if any(ch.isupper() for ch in w) or (n[0] > 1 and w in _SMALL):
+            return w
+        return w[0].upper() + w[1:]
+    return re.sub(r"[A-Za-z][A-Za-z']*", word, v)
+
+
 def add_sheet(wb, title, header, rows, money_cols=(), status_col=None):
     if _scope is not None:
         if title not in CORE_SHEETS:
@@ -92,13 +116,14 @@ def add_sheet(wb, title, header, rows, money_cols=(), status_col=None):
     if _collect is not None and title in ONE_SOURCES:
         _collect[title] = (header, rows)
     ws = wb.create_sheet(title)
-    ws.append(header)
+    ws.append([cap(h) if h in CATEGORY_NAMES else h for h in header])
     for c in ws[1]:
         c.font = Font(bold=True, color="FFFFFF")
         c.fill = HEAD_FILL
         c.alignment = Alignment(wrap_text=True, vertical="top")
     for r in rows:
-        ws.append([num(v) if header[i] in money_cols else v for i, v in enumerate(r)])
+        ws.append([num(v) if header[i] in money_cols else cap(v) if header[i] in CAP_COLS else v
+                   for i, v in enumerate(r)])
     idx = {h: i + 1 for i, h in enumerate(header)}
     for h in money_cols:
         if h in idx:

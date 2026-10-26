@@ -82,10 +82,12 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
 - **Capital outlay (user, 2026-10-26, all reports):** every capital outlay line, including one inside a department
   (e.g. Sheriff -> Capital outlay), is category capital outlay, labelled "Capital Outlay: <function>" (printed text in
   printed_label, function in computed). Capital outlay lines that are debt/lease payments stay in debt service.
-- **Own disbursement categories (user, 2026-10-26):** Mass Transit, Bond Retirement, Leases and SBITA Principal, Leases and
-  SBITA Interest (lines labelled so; Lincoln and Clay Center). The last three count in the workbook debt service total.
+- **Own disbursement categories (user, 2026-10-26):** Mass Transit, Bond Retirement, Leases and SBITA (lines labelled
+  Leases and SBITA Principal / Interest) (Lincoln and Clay Center). The last two count in the workbook debt service total.
   Lincoln only: Interest and Fiscal Charges are own categories (in the debt service total); Exp_Miscellaneous relabelled Miscellaneous.
   Developer Purchased TIF Payments is its own disbursement category (out of economic development).
+- **Workbook capitalization (user, 2026-10-26):** build_xlsx.py shows every category, detail_category and original_label
+  capitalized (cap(): words already containing a capital kept, small words lowercase). JSON values are unchanged.
 - **School district disbursement functions (user, 2026-10-23):** Instruction, Special Education Programs, support services
   (Pupils and Staff only), General Administration, School Administration, Business, Building and Grounds, Community
   Service Operations, State Categorical Programs, Federal Programs (only lines labelled so), Debt Service (Principal /

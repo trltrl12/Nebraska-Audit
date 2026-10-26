@@ -64,8 +64,7 @@ DISBURSEMENT_CATEGORIES = [
     "Equipment Maintenance",  # user decision 2026-10-26: Lincoln function line, out of general government
     "Mass Transit",  # user decision 2026-10-26: own category
     "Bond Retirement",  # user decision 2026-10-26: own category
-    "Leases and SBITA Principal",  # user decision 2026-10-26: own category
-    "Leases and SBITA Interest",  # user decision 2026-10-26: own category
+    "Leases and SBITA",  # user decision 2026-10-26: lease and SBITA principal and interest
     "Interest",  # user decision 2026-10-26: Lincoln debt interest line, own category
     "Fiscal Charges",  # user decision 2026-10-26: own category
     "Developer Purchased TIF Payments",  # user decision 2026-10-26: own category
