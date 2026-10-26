@@ -446,3 +446,7 @@ Don't return extracted data. Return exactly one line per report, nothing else:
 `<filename>: OK` or `<filename>: OK (reconciles: no, diff 123.45)` or
 `<filename>: SKIPPED <short reason>` (e.g. unreadable scan, wrong pages trimmed: write no JSON in
 that case).
+
+Courts (user, 2026-10-26): a detail expenditure line whose department or label names a court (District/County/Juvenile
+Court, Clerk of the District Court, Drug Court, Court Services) gets category `Courts` (not general government/public
+safety), unless it is a capital outlay line (category capital outlay).
