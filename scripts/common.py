@@ -62,6 +62,10 @@ DISBURSEMENT_CATEGORIES = [
     "hospital/health care", "housing", "natural resources/conservation", "agriculture/fair",
     "other",
     "Equipment Maintenance",  # user decision 2026-10-26: Lincoln function line, out of general government
+    "Mass Transit",  # user decision 2026-10-26: own category
+    "Bond Retirement",  # user decision 2026-10-26: own category
+    "Leases and SBITA Principal",  # user decision 2026-10-26: own category
+    "Leases and SBITA Interest",  # user decision 2026-10-26: own category
     # school district functions (user decision 2026-10-23); support services = Pupils and Staff only
     "Instruction",
     "Special Education Programs",

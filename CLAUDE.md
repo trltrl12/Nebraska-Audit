@@ -82,6 +82,8 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
 - **Capital outlay (user, 2026-10-26, all reports):** every capital outlay line, including one inside a department
   (e.g. Sheriff -> Capital outlay), is category capital outlay, labelled "Capital Outlay: <function>" (printed text in
   printed_label, function in computed). Capital outlay lines that are debt/lease payments stay in debt service.
+- **Own disbursement categories (user, 2026-10-26):** Mass Transit, Bond Retirement, Leases and SBITA Principal, Leases and
+  SBITA Interest (lines labelled so; Lincoln and Clay Center). The last three count in the workbook debt service total.
 - **School district disbursement functions (user, 2026-10-23):** Instruction, Special Education Programs, support services
   (Pupils and Staff only), General Administration, School Administration, Business, Building and Grounds, Community
   Service Operations, State Categorical Programs, Federal Programs (only lines labelled so), Debt Service (Principal /

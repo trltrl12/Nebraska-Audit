@@ -42,7 +42,7 @@ from build_csv import filing_label  # noqa: E402
 
 XLSX = OUTPUT / "cashflow.xlsx"
 # Principal, interest and unsplit principal-and-interest lines, summed into a "debt service total" column
-DEBT_CATS = ["debt service principal", "debt service interest", "debt service (principal and interest combined)",
+DEBT_CATS = ["Bond Retirement", "Leases and SBITA Principal", "Leases and SBITA Interest", "debt service principal", "debt service interest", "debt service (principal and interest combined)",
              "Debt Service"]
 DEBT_DETAIL = ["debt principal", "debt interest and fees", "debt principal and interest (combined)"]
 MONEY = '#,##0.00;[Red](#,##0.00)'
