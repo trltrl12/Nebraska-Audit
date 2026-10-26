@@ -106,6 +106,8 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
 - Asset categories: Cash and Cash Equivalents, Investments, cash and investments (only lines combining both), Inventories, Prepaid Items, Plant Operation Assets, Internal Balances,
   Other Assets, receivables, due from other governments,
   inventories/prepaids, restricted assets, capital assets, other assets.
+- Deferred outflow categories (user, 2026-10-26, all reports): Deferred Loss on Refunding (refunding lines), Deferred
+  Outflows for Other Postemployment Benefits (OPEB lines), Deferred Outflows for Pensions (pension lines); others unchanged.
 - Liability categories: accounts payable, Accrued Interest Payable, Accrued Liabilities, Commercial Paper, due to other governments, unearned
   revenue, debt - due within one year, debt - due in more than one year, net pension/OPEB
   liability, other liabilities.
