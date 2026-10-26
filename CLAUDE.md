@@ -79,6 +79,9 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
   Workbook (cashflow_one_tab.xlsx): the detail section "other financing" is shown as "Total Other Financing Sources (Uses)".
   Lincoln: "Equipment Maintenance" is its own disbursement category (out of general government); schedule lines under a
   "Capital Outlay" heading are category capital outlay (function kept in computed), matching the governmental funds statement.
+- **Capital outlay (user, 2026-10-26, all reports):** every capital outlay line, including one inside a department
+  (e.g. Sheriff -> Capital outlay), is category capital outlay, labelled "Capital Outlay: <function>" (printed text in
+  printed_label, function in computed). Capital outlay lines that are debt/lease payments stay in debt service.
 - **School district disbursement functions (user, 2026-10-23):** Instruction, Special Education Programs, support services
   (Pupils and Staff only), General Administration, School Administration, Business, Building and Grounds, Community
   Service Operations, State Categorical Programs, Federal Programs (only lines labelled so), Debt Service (Principal /

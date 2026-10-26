@@ -360,7 +360,10 @@ center), `health/welfare` (health, cemetery, senior services, assistance), `econ
 development` (LB840, TIF, CRA, tourism), `utilities` (water, sewer, electric, gas, refuse),
 `debt service principal`, `debt service interest` (including fees), `debt service (principal and
 interest combined)` (one amount the report never splits, e.g. "Debt Service", "Bond Principal &
-Interest Payments", budget-form "Debt Service: Other"; no `review` needed), `capital outlay`,
+Interest Payments", budget-form "Debt Service: Other"; no `review` needed), `capital outlay` (user rule
+2026-10-26: EVERY capital outlay line, including one inside a department or function, gets category `capital outlay`
+and original_label "Capital Outlay: <function>", e.g. "Capital Outlay: Public Safety"; keep the printed text in
+`printed_label`; capital outlay lines that are really debt/lease payments stay in debt service),
 school districts and community colleges: `instruction` (regular, special education, vocational),
 `support services` (pupil, instructional staff, general and school administration,
 business, operation and maintenance of plant), `student transportation`, `food service`,
