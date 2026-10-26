@@ -85,6 +85,7 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
 - **Own disbursement categories (user, 2026-10-26):** Mass Transit, Bond Retirement, Leases and SBITA Principal, Leases and
   SBITA Interest (lines labelled so; Lincoln and Clay Center). The last three count in the workbook debt service total.
   Lincoln only: Interest and Fiscal Charges are own categories (in the debt service total); Exp_Miscellaneous relabelled Miscellaneous.
+  Developer Purchased TIF Payments is its own disbursement category (out of economic development).
 - **School district disbursement functions (user, 2026-10-23):** Instruction, Special Education Programs, support services
   (Pupils and Staff only), General Administration, School Administration, Business, Building and Grounds, Community
   Service Operations, State Categorical Programs, Federal Programs (only lines labelled so), Debt Service (Principal /
