@@ -216,7 +216,8 @@ def one_tab(collected):
                     "source": "statement"})
     for r in rows_of("Detail Lines"):
         out.append({**{c: r.get(c) for c in ONE_COLS if c in r}, "level": "revenue and expenses",
-                    "section": {"revenue": "receipts", "expenditure": "disbursements"}.get(r.get("section"),
+                    "section": {"revenue": "receipts", "expenditure": "disbursements",  # user 2026-10-26: statement heading
+                                "other financing": "Total Other Financing Sources (Uses)"}.get(r.get("section"),
                                                                                          r.get("section")),
                     "source": "schedule"})
     for r in rows_of("Balance Sheet"):
