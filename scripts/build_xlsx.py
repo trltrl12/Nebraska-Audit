@@ -122,7 +122,8 @@ def add_sheet(wb, title, header, rows, money_cols=(), status_col=None):
         c.fill = HEAD_FILL
         c.alignment = Alignment(wrap_text=True, vertical="top")
     for r in rows:
-        ws.append([num(v) if header[i] in money_cols else cap(v) if header[i] in CAP_COLS else v
+        ws.append([num(v) if header[i] in money_cols else cap(v) if header[i] in CAP_COLS
+                   else v[:1].upper() + v[1:] if header[i] == "section" and isinstance(v, str) else v
                    for i, v in enumerate(r)])
     idx = {h: i + 1 for i, h in enumerate(header)}
     for h in money_cols:
