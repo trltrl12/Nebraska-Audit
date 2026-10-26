@@ -87,9 +87,6 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
   Leases and SBITA Principal / Interest) (Lincoln and Clay Center). The last two count in the workbook debt service total.
   Lincoln only: Interest and Fiscal Charges are own categories (in the debt service total); Exp_Miscellaneous relabelled Miscellaneous.
   Developer Purchased TIF Payments is its own disbursement category (out of economic development).
-  Courts is its own disbursement category (all reports): detail spending lines whose department or label names a
-  court (District/County/Juvenile Court, Clerk of the District Court, Drug Court...), out of general government/public
-  safety; their capital outlay lines stay capital outlay. Salaries etc. show in detail_category only where itemized.
 - **Workbook capitalization (user, 2026-10-26):** build_xlsx.py shows every category, detail_category and original_label
   capitalized (cap(): words already containing a capital kept, small words lowercase), and the first letter of every
   section value ("Receipts", "Other financing", underscores removed), level, fund_type and source values
