@@ -108,6 +108,8 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
   inventories/prepaids, restricted assets, capital assets, other assets.
 - Deferred outflow categories (user, 2026-10-26, all reports): Deferred Loss on Refunding (refunding lines), Deferred
   Outflows for Other Postemployment Benefits (OPEB lines), Deferred Outflows for Pensions (pension lines); others unchanged.
+  Deferred inflows likewise: Deferred Gain on Refunding, Deferred Inflows for Leases, Deferred Inflows for Other
+  Postemployment Benefits, Deferred Inflows for Pensions. Liability "Due to pension trust fund" -> Due to Pension Trust Fund.
 - Liability categories: accounts payable, Accrued Interest Payable, Accrued Liabilities, Commercial Paper, due to other governments, unearned
   revenue, debt - due within one year, debt - due in more than one year, net pension/OPEB
   liability, other liabilities.
