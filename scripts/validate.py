@@ -328,6 +328,7 @@ LABEL_RULES = [
     (r"special assess", "special assessments", "special assessments"),
     (r"keno|lottery", "keno/lottery", "keno/lottery"),
     (r"pro[- ]?rat", "Motor Vehicle Pro-Rate", "Motor Vehicle Pro-Rate"),
+    (r"turnback", "Turnback", "Turnback"),
     (r"homestead", "Homestead Exemption", "Homestead Exemption"),
     (r"tuition", "Tuition Received", "Tuition Received"),
     (r"property tax credit|^(\d+ )?(state )?tax credits?$|property tax relief", "Property Tax Credit", "Property Tax Credit"),

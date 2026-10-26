@@ -70,6 +70,10 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
   preschool), Interest Income (interest lines; investment income keeps dividends/gains) and Extracurricular Receipts
   (school activity receipts/admissions) are top-level receipt categories. The 29 unclear lines were
   settled from their PDFs.
+- **User label decisions (2026-10-26, all reports):** receipt/detail revenue labels renamed (printed text kept in
+  `printed_label`): Sales and Use / Sales and use tax -> Sales and Use Tax; Property / Taxes: Property / Real Property and
+  Personal Property Tax -> Property Tax; Occupation / Occupation tax -> Occupation Tax; Investment income / Investment
+  earnings -> Investment Earnings; Turnback / Turnback Tax -> Turnback, its own receipt category (out of state aid).
 - **School district disbursement functions (user, 2026-10-23):** Instruction, Special Education Programs, support services
   (Pupils and Staff only), General Administration, School Administration, Business, Building and Grounds, Community
   Service Operations, State Categorical Programs, Federal Programs (only lines labelled so), Debt Service (Principal /

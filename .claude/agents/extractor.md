@@ -282,7 +282,7 @@ motor vehicle money: split it by summing those lines from the fund schedules,
 with `split_from`), `taxes (unlabeled)` (only
 when a combined tax line can't be split), `intergovernmental/state aid` (state aid, highway
 allocation, county or other local government payments,
-municipal equalization, TEEOSA; NOT pro-rate motor vehicle, homestead, property tax credit or ESU receipts), `Motor Vehicle Pro-Rate` (pro-rate motor vehicle), `Homestead Exemption`
+municipal equalization, TEEOSA; NOT pro-rate motor vehicle, turnback, homestead, property tax credit or ESU receipts), `Motor Vehicle Pro-Rate` (pro-rate motor vehicle), `Turnback` (turnback / turnback tax), `Homestead Exemption`
 (homestead exemption reimbursement), `Property Tax Credit` (state property tax credit / relief),
 `Tuition Received` (all tuition: regular, preschool, summer school, from individuals or other districts; a line mixing tuition with other receipts stays where it fits best), `ESU Receipts` (Educational Service Unit receipts, school code 1951 from ESUs) (each also as its detail_category;
 a line combining several of these stays intergovernmental/state aid with a review note), `federal grants`, `charges for services/fees` (utility sales,

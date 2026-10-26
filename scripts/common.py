@@ -50,6 +50,7 @@ RECEIPT_CATEGORIES = [
     "Tuition Received",  # user decision 2026-10-23: all tuition incl. preschool and summer school
     "Interest Income",  # user decision 2026-10-23: interest (investment income keeps dividends/gains)
     "Extracurricular Receipts",  # user decision 2026-10-23: school extracurricular/activity receipts
+    "Turnback",  # user decision 2026-10-26: turnback tax, out of intergovernmental/state aid
 ]
 DISBURSEMENT_CATEGORIES = [
     "general government", "public safety", "streets/highways", "culture/recreation",
@@ -147,6 +148,7 @@ DETAIL_REVENUE_CATEGORIES = [
     "Private Sector Share of Projects",  # user decision 2026-10-23 (developer/private payments toward public projects)
     "Penalties and Interest on Taxes",  # user decision 2026-10-23: kept apart from property tax
     "Homestead Exemption",  # user decision 2026-10-23: out of intergovernmental/state aid
+    "Turnback",  # user decision 2026-10-26
     "Property Tax Credit",  # user decision 2026-10-23: out of intergovernmental/state aid
     "ESU Receipts",  # user decision 2026-10-23: out of intergovernmental/state aid
     "Tuition Received",  # user decision 2026-10-23: all tuition incl. preschool and summer school
