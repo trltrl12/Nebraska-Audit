@@ -61,6 +61,7 @@ DISBURSEMENT_CATEGORIES = [
     "student activities",                                                           # school activity funds
     "hospital/health care", "housing", "natural resources/conservation", "agriculture/fair",
     "other",
+    "Equipment Maintenance",  # user decision 2026-10-26: Lincoln function line, out of general government
     # school district functions (user decision 2026-10-23); support services = Pupils and Staff only
     "Instruction",
     "Special Education Programs",

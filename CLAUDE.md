@@ -77,6 +77,8 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
   "Reimbursement for Services" lines are their own receipt category, Reimbursement for Services.
   Sundry and In Lieu / Sundry and In Lieu Tax -> Sundry and in Lieu (category unchanged: In Lieu of Tax).
   Workbook (cashflow_one_tab.xlsx): the detail section "other financing" is shown as "Total Other Financing Sources (Uses)".
+  Lincoln: "Equipment Maintenance" is its own disbursement category (out of general government); schedule lines under a
+  "Capital Outlay" heading are category capital outlay (function kept in computed), matching the governmental funds statement.
 - **School district disbursement functions (user, 2026-10-23):** Instruction, Special Education Programs, support services
   (Pupils and Staff only), General Administration, School Administration, Business, Building and Grounds, Community
   Service Operations, State Categorical Programs, Federal Programs (only lines labelled so), Debt Service (Principal /
