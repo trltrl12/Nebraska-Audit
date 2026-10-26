@@ -89,7 +89,8 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
   Developer Purchased TIF Payments is its own disbursement category (out of economic development).
 - **Workbook capitalization (user, 2026-10-26):** build_xlsx.py shows every category, detail_category and original_label
   capitalized (cap(): words already containing a capital kept, small words lowercase), and the first letter of every
-  section value ("Receipts", "Other financing"). JSON values are unchanged.
+  section value ("Receipts", "Other financing", underscores removed), level, fund_type and source values
+  capitalized, and column headers capitalized without underscores ("Entity Name"). JSON values are unchanged.
 - **School district disbursement functions (user, 2026-10-23):** Instruction, Special Education Programs, support services
   (Pupils and Staff only), General Administration, School Administration, Business, Building and Grounds, Community
   Service Operations, State Categorical Programs, Federal Programs (only lines labelled so), Debt Service (Principal /

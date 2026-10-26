@@ -88,7 +88,7 @@ def core_stems():
 
 # User 2026-10-26: categories and labels are shown capitalized in the workbooks ("capital outlay" -> "Capital Outlay").
 # Words that already contain a capital (SBITA, TEEOSA, LB840) are kept; small words stay lowercase.
-CAP_COLS = {"category", "detail_category", "original_label"}
+CAP_COLS = {"category", "detail_category", "original_label", "level", "fund_type", "source"}
 _SMALL = {"and", "or", "of", "the", "in", "for", "to", "a", "an", "on", "at", "by", "with", "from", "per", "vs", "as"}
 
 
@@ -116,14 +116,14 @@ def add_sheet(wb, title, header, rows, money_cols=(), status_col=None):
     if _collect is not None and title in ONE_SOURCES:
         _collect[title] = (header, rows)
     ws = wb.create_sheet(title)
-    ws.append([cap(h) if h in CATEGORY_NAMES else h for h in header])
+    ws.append([cap(h) if h in CATEGORY_NAMES else cap(h.replace("_", " ")) for h in header])
     for c in ws[1]:
         c.font = Font(bold=True, color="FFFFFF")
         c.fill = HEAD_FILL
         c.alignment = Alignment(wrap_text=True, vertical="top")
     for r in rows:
         ws.append([num(v) if header[i] in money_cols else cap(v) if header[i] in CAP_COLS
-                   else v[:1].upper() + v[1:] if header[i] == "section" and isinstance(v, str) else v
+                   else v[:1].upper() + v[1:].replace("_", " ") if header[i] == "section" and isinstance(v, str) else v
                    for i, v in enumerate(r)])
     idx = {h: i + 1 for i, h in enumerate(header)}
     for h in money_cols:
