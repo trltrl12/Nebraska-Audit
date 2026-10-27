@@ -51,6 +51,7 @@ RECEIPT_CATEGORIES = [
     "Interest Income",  # user decision 2026-10-23: interest (investment income keeps dividends/gains)
     "Extracurricular Receipts",  # user decision 2026-10-23: school extracurricular/activity receipts
     "Turnback",  # user decision 2026-10-26: turnback tax, out of intergovernmental/state aid
+    "Miscellaneous Tax",  # user decision 2026-10-27: Douglas County miscellaneous taxes (Tourism fund), was lodging tax
     "Reimbursement for Services",  # user decision 2026-10-26: own category
 ]
 DISBURSEMENT_CATEGORIES = [
