@@ -113,6 +113,8 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
   Liability lines labelled "<X> - Due Within One Year" / "<X> - Due in More Than One Year" for X = Bonds Payable, Leases
   Payable, Subscriptions, Compensated Absences, Landfill Postclosure Costs, Workers' Compensation Claims, Other
   Postemployment Benefit Liability: category X, original_label the "Due ..." part (printed text in printed_label).
+- Equity lines for net investment in capital assets (any wording, incl. "Invested in capital assets, net of related
+  debt") have category Net Investment in Capital Assets (user, 2026-10-27, all reports).
 - Liability categories: accounts payable, Accrued Interest Payable, Accrued Liabilities, Commercial Paper, due to other governments, unearned
   revenue, debt - due within one year, debt - due in more than one year, net pension/OPEB
   liability, other liabilities.
