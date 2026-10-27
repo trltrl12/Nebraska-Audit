@@ -53,6 +53,7 @@ RECEIPT_CATEGORIES = [
     "Turnback",  # user decision 2026-10-26: turnback tax, out of intergovernmental/state aid
     "Miscellaneous Tax",  # user decision 2026-10-27: Douglas County miscellaneous taxes (Tourism fund), was lodging tax
     "Categorical Grants",  # user decision 2026-10-27: Lincoln Public Schools 1925, out of donations/contributions
+    "Other Non-Revenue Receipts",  # user decision 2026-10-27: Lincoln Public Schools 5300 / 5690
     "Reimbursement for Services",  # user decision 2026-10-26: own category
 ]
 DISBURSEMENT_CATEGORIES = [

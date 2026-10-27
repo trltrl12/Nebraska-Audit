@@ -100,6 +100,8 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
   Lincoln Public Schools "1925 Categorical Grants" 530,334 is category Categorical Grants (out of donations/contributions);
   the p6 "Grants and donations" 6,488,219 is split into Contributions and Donations from Private Sources 5,957,885 and
   Categorical Grants 530,334 (split_from, from the p7 schedule).
+  Lincoln Public Schools "5690 Other Receipts" 317,143 and "5300 Sale of Property" 63,387 (p8) are category Other
+  Non-Revenue Receipts.
 - **Balance sheet basis (user, 2026-10-27):** cash-basis reports take governmental balance-sheet lines from the
   governmental funds statement of assets, liabilities and fund balances (Total column; fund balance by classification)
   where its totals equal the government-wide figures; reports whose government-wide figures include capital assets,
