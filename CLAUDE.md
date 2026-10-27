@@ -179,8 +179,8 @@ Works for any year. Upload the Auditor's search export as config/export_<year>.x
 fetch workflow with input year=<year>; without an export file it uses the live search. Files are
 named <entity>_FY2024, so nothing collides with 2025; the workbooks then hold both years (filter on fiscal year end).
 Then follow the batch procedure above; the extractor carries the user's rules (section "User naming and category
-rules") and scripts/user_rules.py re-applies them. One-report rulings (Lincoln, Lincoln Public Schools, Douglas
-County) are not automatic: review those entities again for the new year.
+rules") and scripts/user_rules.py re-applies them. Entity rulings (Lincoln, Clay Center, Lincoln Public Schools,
+Douglas County) are matched by entity name, so user_rules.py applies them to every year; the extractor carries them too.
 
 ## Review scope (user, 2026-10-23)
 The user reviews only cities, villages, school districts and counties (`config/review_scope.txt`), and only

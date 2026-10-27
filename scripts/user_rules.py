@@ -4,9 +4,10 @@ Run after every extraction, before validating:
     python3 scripts/user_rules.py <stem> [<stem> ...]      # or --all
     python3 scripts/user_rules.py --check --all             # report what would change, write nothing
 
-The rules are the ones that apply to all reports (CLAUDE.md "User ... decisions"). One-report rulings
-(Lincoln, Lincoln Public Schools, Douglas County) are not here. Every rule is idempotent: running it on
-data that already follows the rules changes nothing.
+The rules are the ones that apply to all reports (CLAUDE.md "User ... decisions"), plus the entity
+rulings for Lincoln, Clay Center, Lincoln Public Schools and Douglas County, matched by entity (the stem
+without _FY<year>), so they apply to every year. Every rule is idempotent: running it on data that
+already follows the rules changes nothing.
 """
 import argparse
 import csv
@@ -180,7 +181,88 @@ def balance_sheet_rules(bs, log):
             setcat(x, "category", "Net Investment in Capital Assets", "category: Net Investment in Capital Assets", log)
 
 
-def apply(d):
+# --- entity rulings (any year): entity = stem without _FY<year> / _B<yyyy> ---
+def entity_of(stem):
+    return re.sub(r"_(FY\d{4}|B\d{4})$", "", stem or "")
+
+
+OWN_SPENDING = {  # label (after "Current: ") -> own disbursement category
+    "Lincoln": {"equipment maintenance": "Equipment Maintenance", "interest": "Interest", "fiscal charges": "Fiscal Charges"},
+    "*": {"mass transit": "Mass Transit", "bond retirement": "Bond Retirement",
+          "leases and sbita principal": "Leases and SBITA", "leases and sbita interest": "Leases and SBITA",
+          "developer purchased tif payments": "Developer Purchased TIF Payments"},
+}
+OWN_SPENDING_ENTITIES = {"Lincoln", "Clay_Center"}
+
+
+def amt(x):
+    a = x.get("amount")
+    return a.get("amount") if isinstance(a, dict) else a
+
+
+def entity_rules(d, ent, log):
+    spend = [x for x in d.get("disbursements") or []] + [x for x in d.get("detail") or [] if x.get("section") == "expenditure"]
+    rev_detail = [x for x in d.get("detail") or [] if x.get("section") == "revenue"]
+    if ent in OWN_SPENDING_ENTITIES:
+        table = {**OWN_SPENDING["*"], **OWN_SPENDING.get(ent, {})}
+        for x in spend:
+            key = re.sub(r"^current:\s*", "", (x.get("original_label") or "").strip(), flags=re.I).lower()
+            if key in table:
+                setcat(x, "category", table[key], "entity: " + table[key], log)
+    if ent == "Lincoln":
+        for x in spend:
+            if (x.get("original_label") or "").strip().lower() == "exp_miscellaneous":
+                relabel(x, "Miscellaneous", "entity: Exp_Miscellaneous -> Miscellaneous", log)
+    if ent == "Lincoln_Public_Schools":
+        for x in d.get("disbursements") or []:
+            lab = (x.get("original_label") or "").strip().lower()
+            if lab == "staff":
+                setcat(x, "category", "Instruction", "entity: LPS Staff -> Instruction", log)
+            elif lab == "other" and x.get("category") in ("Debt Service", "debt service", "debt service principal",
+                                                          "debt service interest"):
+                setcat(x, "category", "other", "entity: LPS Other out of Debt Service", log)
+        cat_grants = None
+        for x in rev_detail:
+            lab = label_of(x).lower()
+            general = (x.get("fund") or "").lower().startswith("general")
+            if general and re.match(r"^3180 pro-?rate motor vehicle$", lab):
+                setcat(x, "category", "intergovernmental/state aid", "entity: LPS 3180 Prorate -> state aid", log)
+            elif re.match(r"^1925 categorical grants$", lab):
+                setcat(x, "category", "Categorical Grants", "entity: LPS 1925 -> Categorical Grants", log)
+                setcat(x, "detail_category", "Categorical Grants", "entity: LPS 1925 -> Categorical Grants", log)
+                if general:
+                    cat_grants = x
+            elif general and re.match(r"^(5690 other receipts|5300 sale of property)$", lab):
+                setcat(x, "category", "Other Non-Revenue Receipts", "entity: LPS 5690/5300 -> Other Non-Revenue Receipts", log)
+        # statement "Grants and donations" -> Contributions and Donations from Private Sources + Categorical Grants
+        rec = d.get("receipts") or []
+        for i, x in enumerate(rec):
+            if x.get("split_from") or not re.match(r"^grants and donations$", label_of(x), re.I) or not cat_grants:
+                continue
+            total, part = amt(x), amt(cat_grants)
+            if not isinstance(total, (int, float)) or not isinstance(part, (int, float)) or not 0 < part < total:
+                continue
+            how = f"split of p{x.get('source_page')} Grants and donations {total:,.0f} using the General Fund schedule: "
+            a = dict(x, category="donations/contributions", original_label="Contributions and Donations from Private Sources",
+                     amount=total - part, split_from="Grants and donations",
+                     computed=how + f"Contributions and Donations from Private Sources {total - part:,.0f}")
+            b = dict(x, category="Categorical Grants", original_label="Categorical Grants", amount=part,
+                     split_from="Grants and donations", computed=how + f"1925 Categorical Grants {part:,.0f}")
+            if isinstance(x.get("amount"), dict):
+                a["amount"] = dict(x["amount"], amount=total - part)
+                b["amount"] = dict(x["amount"], amount=part)
+            for y in (a, b):
+                y.pop("printed_label", None)
+            rec[i:i + 1] = [a, b]
+            log["entity: LPS Grants and donations split"] += 1
+            break
+    if ent == "Douglas_County":
+        for x in rev_detail:
+            if re.match(r"^miscellaneous \(taxes\)$", label_of(x), re.I) and re.search(r"nonmajor|tourism", x.get("fund") or "", re.I):
+                setcat(x, "category", "Miscellaneous Tax", "entity: Douglas nonmajor Miscellaneous (taxes) -> Miscellaneous Tax", log)
+
+
+def apply(d, stem=""):
     log = Counter()
     # fund-name rule: only reports whose detail was built per fund from the statements (cities and villages)
     per_fund = "per-fund lines from the fund statements" in (d.get("notes") or "") or bool(d.get("_per_fund"))
@@ -205,6 +287,7 @@ def apply(d):
         fund_name_rule(x, log, per_fund)
     if isinstance(d.get("balance_sheet"), dict):
         balance_sheet_rules(d["balance_sheet"], log)
+    entity_rules(d, entity_of(stem), log)
     return log
 
 
@@ -223,7 +306,7 @@ def main():
             continue
         if not isinstance(d, dict):
             continue
-        log = apply(d)
+        log = apply(d, f.stem)
         if log:
             changed += 1
             total.update(log)

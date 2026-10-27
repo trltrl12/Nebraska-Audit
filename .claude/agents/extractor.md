@@ -478,6 +478,18 @@ These are the user's decisions; apply them while extracting. After extraction th
   statement (never the Total column), `fund` = the column heading ending in "Fund" (add it unless already there); if a
   single fund has its own schedule that ties to its column, keep that schedule for that fund and add the other funds.
 
+- **Entity rulings (any year; match the entity, not the year):**
+  - Lincoln (city): Equipment Maintenance, Interest, Fiscal Charges, Mass Transit, Bond Retirement, Leases and SBITA
+    (Principal / Interest lines) and Developer Purchased TIF Payments are their own disbursement categories;
+    "Exp_Miscellaneous" -> "Miscellaneous"; schedule lines under a "Capital Outlay" heading are category capital
+    outlay (function in `computed`). Clay Center: Mass Transit, Bond Retirement, Leases and SBITA likewise.
+  - Lincoln Public Schools: statement "Staff" -> Instruction; statement "Other" spending -> other (never Debt Service);
+    General Fund "3180 Prorate Motor Vehicle" -> intergovernmental/state aid (other funds' 3180 stay Motor Vehicle
+    Pro-Rate); "1925 Categorical Grants" -> Categorical Grants; the statement's "Grants and donations" is split
+    (`split_from`) into Contributions and Donations from Private Sources and Categorical Grants using the General Fund
+    1920/1925 lines; General Fund "5690 Other Receipts" and "5300 Sale of Property" -> Other Non-Revenue Receipts.
+  - Douglas County: the nonmajor (Tourism) "Miscellaneous (taxes)" -> Miscellaneous Tax.
+
 ## Output to the caller
 Don't return extracted data. Return exactly one line per report, nothing else:
 `<filename>: OK` or `<filename>: OK (reconciles: no, diff 123.45)` or
