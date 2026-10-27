@@ -93,6 +93,13 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
   service interest -> "Debt Service" (old part kept in `debt_service_part`).
   Douglas County: the nonmajor "Miscellaneous (taxes)" 5,452,600 (Tourism fund) is category Miscellaneous Tax, not
   lodging tax (the only lodging-tax line labelled miscellaneous in any report).
+- **School spending (user, 2026-10-27):** spending lines labelled categorical grants from corporations / private
+  interests are category "Categorical Corporation and Private" (out of Instruction; all reports). Lincoln Public Schools:
+  the statement's "Staff" line is category Instruction; its "Other" 14,686 line is category other (out of Debt Service).
+- **Balance sheet basis (user, 2026-10-27):** cash-basis reports take governmental balance-sheet lines from the
+  governmental funds statement of assets, liabilities and fund balances (Total column; fund balance by classification)
+  where its totals equal the government-wide figures; reports whose government-wide figures include capital assets,
+  debt or interfund amounts keep the Statement of Net Position. GAAP reports keep the Statement of Net Position.
 - **Workbook capitalization (user, 2026-10-26):** build_xlsx.py shows every category, detail_category and original_label
   capitalized (cap(): words already containing a capital kept, small words lowercase), and the first letter of every
   section value ("Receipts", "Other financing", underscores removed), level, fund_type and source values

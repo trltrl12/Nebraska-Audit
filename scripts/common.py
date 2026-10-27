@@ -69,6 +69,7 @@ DISBURSEMENT_CATEGORIES = [
     "Interest",  # user decision 2026-10-26: Lincoln debt interest line, own category
     "Fiscal Charges",  # user decision 2026-10-26: own category
     "Developer Purchased TIF Payments",  # user decision 2026-10-26: own category
+    "Categorical Corporation and Private",  # user decision 2026-10-27: out of Instruction (school districts)
     # school district functions (user decision 2026-10-23); support services = Pupils and Staff only
     "Instruction",
     "Special Education Programs",
