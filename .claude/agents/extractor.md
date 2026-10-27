@@ -446,3 +446,7 @@ Don't return extracted data. Return exactly one line per report, nothing else:
 `<filename>: OK` or `<filename>: OK (reconciles: no, diff 123.45)` or
 `<filename>: SKIPPED <short reason>` (e.g. unreadable scan, wrong pages trimmed: write no JSON in
 that case).
+
+Labels and debt (user, 2026-10-27): other-financing transfer lines are labelled "Transfers In" / "Transfers Out";
+property tax receipt lines are labelled "Property and Real Estate Taxes" (printed text in printed_label); debt service
+principal and interest lines get category "Debt Service" with `debt_service_part` "principal" or "interest".

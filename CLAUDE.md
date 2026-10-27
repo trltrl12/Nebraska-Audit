@@ -87,6 +87,10 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
   Leases and SBITA Principal / Interest) (Lincoln and Clay Center). The last two count in the workbook debt service total.
   Lincoln only: Interest and Fiscal Charges are own categories (in the debt service total); Exp_Miscellaneous relabelled Miscellaneous.
   Developer Purchased TIF Payments is its own disbursement category (out of economic development).
+- **User label decisions (2026-10-27, all reports):** detail other-financing "Transfer(s) in/out" -> "Transfers In" /
+  "Transfers Out"; receipt/detail revenue labels "Property Tax" / "Property and real estate (taxes)" -> "Property and
+  Real Estate Taxes" (category unchanged; printed text in printed_label). Categories debt service principal and debt
+  service interest -> "Debt Service" (old part kept in `debt_service_part`).
 - **Workbook capitalization (user, 2026-10-26):** build_xlsx.py shows every category, detail_category and original_label
   capitalized (cap(): words already containing a capital kept, small words lowercase), and the first letter of every
   section value ("Receipts", "Other financing", underscores removed), level, fund_type and source values
