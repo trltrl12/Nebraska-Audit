@@ -93,6 +93,9 @@ LIABILITY_CATEGORIES = [
     "other liabilities",
     "Internal Balances",
     "Accrued Interest Payable", "Accrued Liabilities", "Commercial Paper",
+    # user decisions 2026-10-26: "<X> - Due ..." lines use X as category; due to pension trust fund
+    "Bonds Payable", "Leases Payable", "Subscriptions", "Compensated Absences", "Landfill Postclosure Costs",
+    "Workers' Compensation Claims", "Other Postemployment Benefit Liability", "Due to Pension Trust Fund",
 ]
 # Fine-grained categories for line items in the supplementary detail schedules.
 # Revenue: where the money comes from.
