@@ -106,6 +106,9 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
   governmental funds statement of assets, liabilities and fund balances (Total column; fund balance by classification)
   where its totals equal the government-wide figures; reports whose government-wide figures include capital assets,
   debt or interfund amounts keep the Statement of Net Position. GAAP reports keep the Statement of Net Position.
+- **Per-fund detail (user, 2026-10-27, cities and villages):** where detail had only a combined all-funds schedule (or
+  none), detail is one line per individual fund column of the governmental funds and proprietary funds statements
+  (Total column never used); the combined schedule lines are removed.
 - **Workbook capitalization (user, 2026-10-26):** build_xlsx.py shows every category, detail_category and original_label
   capitalized (cap(): words already containing a capital kept, small words lowercase), and the first letter of every
   section value ("Receipts", "Other financing", underscores removed), level, fund_type and source values
