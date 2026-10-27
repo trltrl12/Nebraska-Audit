@@ -441,12 +441,45 @@ When a function line mixes categories, pick the dominant one and mention it in `
   `debt - due in more than one year` (never `debt - due within one year`).
 - **NRDs:** property tax and state/federal grants; function `natural resources/conservation`.
 
+## User naming and category rules (all reports, any year)
+These are the user's decisions; apply them while extracting. After extraction the main session also runs
+`python3 scripts/user_rules.py <stem>`, which re-applies the label/category ones mechanically.
+- **Revenue labels** (receipts and detail revenue; printed text in `printed_label`): Sales and Use / Sales and use tax
+  -> "Sales and Use Tax"; Property / Property Tax / Taxes: Property / Real Property and Personal Property Tax / Property
+  and real estate (taxes) -> "Property and Real Estate Taxes"; Occupation (tax) -> "Occupation Tax"; Investment income /
+  earnings -> "Investment Earnings"; Turnback (Tax) -> "Turnback" (category Turnback, never state aid); Sundry and In
+  Lieu (Tax) -> "Sundry and in Lieu" (category In Lieu of Tax).
+- **Own receipt categories:** Carline Tax, Public Power District Sales Tax (incl. "NPPD 5%"), In Lieu of Tax, Nameplate
+  Capacity Tax, Private Sector Share of Projects, Penalties and Interest on Taxes (never inside property tax); Homestead
+  Exemption, Property Tax Credit, ESU Receipts, Motor Vehicle Pro-Rate (never inside state aid: split a combined state
+  aid line using the report's own breakdown); Tuition Received; Interest Income (interest lines; investment income keeps
+  dividends/gains); Extracurricular Receipts (school activity receipts); Reimbursement for Services; Turnback.
+- **Spending:** every capital outlay line, also inside a department, is category capital outlay labelled
+  "Capital Outlay: <function>" (printed text in printed_label); capital outlay that is a debt/lease payment stays debt
+  service. Debt service principal/interest lines are category "Debt Service" with `debt_service_part`
+  "principal"/"interest". Spending labelled categorical grants from corporations / private interests -> "Categorical
+  Corporation and Private". School functions as in the school district section.
+- **Other financing (detail):** transfer lines labelled "Transfers In" / "Transfers Out" (printed text in printed_label).
+- **Balance sheet:** deferred outflows -> Deferred Loss on Refunding / Deferred Outflows for Other Postemployment
+  Benefits / Deferred Outflows for Pensions; deferred inflows -> Deferred Gain on Refunding / Deferred Inflows for
+  Leases / Deferred Inflows for Other Postemployment Benefits / Deferred Inflows for Pensions. Liabilities printed as
+  "<X> - Due Within One Year" / "- Due in More Than One Year" (X = Bonds Payable, Leases Payable, Subscriptions,
+  Compensated Absences, Landfill Postclosure Costs, Workers' Compensation Claims, Other Postemployment Benefit
+  Liability): category X, label the "Due ..." part. "Due to pension trust fund" -> Due to Pension Trust Fund. Equity
+  "net investment in capital assets" (any wording) -> Net Investment in Capital Assets; fund balance lines by
+  classification (Nonspendable, Restricted: <purpose>, Committed: <purpose>, Assigned: <purpose>, Unassigned).
+- **Cash-basis balance sheet:** take governmental lines from the governmental funds statement of assets, liabilities
+  and fund balances (Total column) when its totals equal the government-wide figures; otherwise (capital assets, debt
+  or interfund amounts on the government-wide statement) keep the Statement of Net Position. GAAP: Statement of Net
+  Position.
+- **Per-fund detail (cities and villages):** when the only supplementary schedule is a combined all-funds one (or none),
+  detail is one line per individual fund column of the governmental funds statement and the proprietary funds
+  statement (never the Total column), `fund` = the column heading ending in "Fund" (add it unless already there); if a
+  single fund has its own schedule that ties to its column, keep that schedule for that fund and add the other funds.
+
 ## Output to the caller
 Don't return extracted data. Return exactly one line per report, nothing else:
 `<filename>: OK` or `<filename>: OK (reconciles: no, diff 123.45)` or
 `<filename>: SKIPPED <short reason>` (e.g. unreadable scan, wrong pages trimmed: write no JSON in
 that case).
 
-Labels and debt (user, 2026-10-27): other-financing transfer lines are labelled "Transfers In" / "Transfers Out";
-property tax receipt lines are labelled "Property and Real Estate Taxes" (printed text in printed_label); debt service
-principal and interest lines get category "Debt Service" with `debt_service_part` "principal" or "interest".

@@ -163,7 +163,8 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
    parallel is fine). Pass only the filenames.
 4. Send the same reports to the `verifier` agent (about 3 per agent). It re-reads each trimmed PDF
    and writes `output/json/verify/<stem>.json` with every discrepancy (errors and warnings).
-5. `git add output/json/ && git commit -m "extract: N reports"`, then `git pull --rebase && git push`.
+5. Run `python3 scripts/user_rules.py <stems>` (re-applies the user's naming/category rules; `--check` to preview).
+   Then `git add output/json/ && git commit -m "extract: N reports"`, then `git pull --rebase && git push`.
    GitHub Actions validates (exact math: >$1 flagged, any smaller difference to review; every
    amount checked against its page text/OCR; verifier errors flagged, warnings to review) and
    updates progress.
@@ -172,6 +173,13 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
 
 Keep the main session lean: don't open PDFs or print JSON in the main conversation. Rely on the
 agents' one-line statuses.
+
+## Running another fiscal year (e.g. 2024)
+Run the fetch workflow with input year=2024 (no export file for that year, so it uses the live search). Files are
+named <entity>_FY2024, so nothing collides with 2025; the workbooks then hold both years (filter on fiscal year end).
+Then follow the batch procedure above; the extractor carries the user's rules (section "User naming and category
+rules") and scripts/user_rules.py re-applies them. One-report rulings (Lincoln, Lincoln Public Schools, Douglas
+County) are not automatic: review those entities again for the new year.
 
 ## Review scope (user, 2026-10-23)
 The user reviews only cities, villages, school districts and counties (`config/review_scope.txt`), and only
