@@ -87,9 +87,6 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
   Leases and SBITA Principal / Interest) (Lincoln and Clay Center). The last two count in the workbook debt service total.
   Lincoln only: Interest and Fiscal Charges are own categories (in the debt service total); Exp_Miscellaneous relabelled Miscellaneous.
   Developer Purchased TIF Payments is its own disbursement category (out of economic development).
-- **Detail basis (user, 2026-10-27, all reports):** detail must come from the governmental funds Statement of Revenues,
-  Expenditures and Changes in Fund Balances (fund columns; nonmajor combining statements for nonmajor funds), not
-  budget-basis schedules, unless the report has only budget schedules. Done: Lincoln, Douglas County.
 - **Workbook capitalization (user, 2026-10-26):** build_xlsx.py shows every category, detail_category and original_label
   capitalized (cap(): words already containing a capital kept, small words lowercase), and the first letter of every
   section value ("Receipts", "Other financing", underscores removed), level, fund_type and source values
@@ -159,10 +156,6 @@ the cash flow, balance sheet and revenue/expense detail. `output/cashflow_core.x
 holds just those reports and sheets. Prioritise fixes and re-checks for these types; the others stay extracted.
 
 ## Open follow-ups (remove each line once done)
-- Detail-basis rebuild (paused by the user 2026-10-27): 192 cities/villages/schools/counties whose governmental detail
-  doesn't tie to the fund statement still need rebuilding from the statement fund columns (22 done incl. Lincoln,
-  Douglas County). Find them: detail revenue/expenditure/other financing vs governmental receipts/disbursements/
-  transfers+financing differ by >$5. Reports whose budget detail already ties are left as is (user's choice).
 - Targeted re-trims (config/retrim.csv; FINDER_VERSION stays 8 so other reports are NOT re-trimmed; never bump it
   without the user's OK). Done 2026-10-22: 12 reports re-trimmed (find_pages v9 + Waterloo/Plainview fixes),
   re-extracted and re-verified; Sargent_Public_Schools_FY2025 followed (OCR-garbled repeated title fix), Activities
