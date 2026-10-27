@@ -175,7 +175,8 @@ Keep the main session lean: don't open PDFs or print JSON in the main conversati
 agents' one-line statuses.
 
 ## Running another fiscal year (e.g. 2024)
-Run the fetch workflow with input year=2024 (no export file for that year, so it uses the live search). Files are
+Works for any year. Upload the Auditor's search export as config/export_<year>.xlsx (as was done for 2025), then run the
+fetch workflow with input year=<year>; without an export file it uses the live search. Files are
 named <entity>_FY2024, so nothing collides with 2025; the workbooks then hold both years (filter on fiscal year end).
 Then follow the batch procedure above; the extractor carries the user's rules (section "User naming and category
 rules") and scripts/user_rules.py re-applies them. One-report rulings (Lincoln, Lincoln Public Schools, Douglas
