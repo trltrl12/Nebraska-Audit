@@ -52,6 +52,7 @@ RECEIPT_CATEGORIES = [
     "Extracurricular Receipts",  # user decision 2026-10-23: school extracurricular/activity receipts
     "Turnback",  # user decision 2026-10-26: turnback tax, out of intergovernmental/state aid
     "Miscellaneous Tax",  # user decision 2026-10-27: Douglas County miscellaneous taxes (Tourism fund), was lodging tax
+    "Categorical Grants",  # user decision 2026-10-27: Lincoln Public Schools 1925, out of donations/contributions
     "Reimbursement for Services",  # user decision 2026-10-26: own category
 ]
 DISBURSEMENT_CATEGORIES = [
@@ -163,6 +164,7 @@ DETAIL_REVENUE_CATEGORIES = [
     "Homestead Exemption",  # user decision 2026-10-23: out of intergovernmental/state aid
     "Turnback",  # user decision 2026-10-26
     "Motor Vehicle Pro-Rate",  # user decision 2026-10-23 (validator LABEL_RULES assign this name)
+    "Categorical Grants",  # user decision 2026-10-27: Lincoln Public Schools 1925, out of donations/contributions
     "Reimbursement for Services",  # user decision 2026-10-26
     "Property Tax Credit",  # user decision 2026-10-23: out of intergovernmental/state aid
     "ESU Receipts",  # user decision 2026-10-23: out of intergovernmental/state aid

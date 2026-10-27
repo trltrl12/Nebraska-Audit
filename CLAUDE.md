@@ -97,6 +97,9 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
   interests are category "Categorical Corporation and Private" (out of Instruction; all reports). Lincoln Public Schools:
   the statement's "Staff" line is category Instruction; its "Other" 14,686 line is category other (out of Debt Service).
   Lincoln Public Schools "3180 Prorate Motor Vehicle" 653,562 (p7) is category intergovernmental/state aid (one line only).
+  Lincoln Public Schools "1925 Categorical Grants" 530,334 is category Categorical Grants (out of donations/contributions);
+  the p6 "Grants and donations" 6,488,219 is split into Contributions and Donations from Private Sources 5,957,885 and
+  Categorical Grants 530,334 (split_from, from the p7 schedule).
 - **Balance sheet basis (user, 2026-10-27):** cash-basis reports take governmental balance-sheet lines from the
   governmental funds statement of assets, liabilities and fund balances (Total column; fund balance by classification)
   where its totals equal the government-wide figures; reports whose government-wide figures include capital assets,
