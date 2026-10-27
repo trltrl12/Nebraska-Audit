@@ -5,7 +5,7 @@
     {
       "severity": "error",
       "path": "missing",
-      "page": 22,
+      "page": 24,
       "extracted": null,
       "on_page": "Schedule of Expenditures - Modified Cash Basis - Governmental Funds (report p62), Total column: 754,343; 227,893; 119,361; 553,321; 268,053; 450,749; 319,543; 91,472; total 2,784,735",
       "issue": "Trimmed p22 is only the right half of this schedule. The left half with row labels and the General/Public Health/Culture and Recreation/Debt Service/Public Works columns (report p61, PDF page 65) was not trimmed, so the schedule's lines are missing from detail[]. This is a trim problem (find_pages): re-trim to include PDF p65, then re-extract."
@@ -13,7 +13,7 @@
     {
       "severity": "error",
       "path": "detail[11]",
-      "page": 21,
+      "page": 22,
       "extracted": "governmental function lines detail[11]-detail[16] recorded as section 'expenditure', total 4,854,720",
       "on_page": "DISBURSEMENTS AND TRANSFERS: General Government 1,419,009; Public Safety 382,548; Public Works 764,387; Public Health and Social Services 129,436; Culture and Recreation 532,828; Community Development 1,626,512",
       "issue": "[fixed] These lines include transfers and other financing uses. 4,854,720 - statement expenditures 2,784,735 (p10) = 2,069,985, which is exactly gross governmental transfers out 1,294,735 (584,002 + 116,615 + 26,296 + 4,660 + 297,941 + 265,221, pp11-12) + Sales Tax Loan Advances 769,250 + Purchase of Assets for Resale 6,000. Gross transfers in (1,374,195) are already recorded as other financing (detail[10]), so the transfers end up counted as spending. Per the hidden-transfer rule, add a negative contra line per affected group (split_from naming p21 and pp11-12, review) plus the matching other-financing lines. detail_totals[1] (10,696,715) should then carry includes ['other financing']."
@@ -21,7 +21,7 @@
     {
       "severity": "error",
       "path": "detail[9].category",
-      "page": 20,
+      "page": 21,
       "extracted": "other",
       "on_page": "Local Receipts: Other 6,693,542",
       "issue": "[fixed] Broad group whose make-up can be traced: business-type operating revenues alone are 5,313,719 (p15: charges for services 4,295,851, NPPD 473,237, merchandise 469,425...), well over half the line. The rule says to use the dominant category, charges for services/fees (detail 'other charges for services' or electric charges), with review naming the mix, not 'other'."
@@ -29,7 +29,7 @@
     {
       "severity": "warning",
       "path": "detail[9].fund_type",
-      "page": 20,
+      "page": 21,
       "extracted": "governmental",
       "on_page": "Local Receipts: Other 6,693,542 (Total Primary Government schedule)",
       "issue": "Most of this line is business-type (utility and golf receipts), but it is tagged governmental. The revenue lines on this all-funds schedule mix both fund types."
@@ -37,7 +37,7 @@
     {
       "severity": "warning",
       "path": "detail[5].detail_category",
-      "page": 20,
+      "page": 21,
       "extracted": "other state aid",
       "on_page": "State Receipts: Other 122,566",
       "issue": "Equals Homestead 48,051 + Property Tax Credit 61,321 + State Highway Maintenance 13,194 (p8). That is 89% homestead/tax credits, so detail_category 'homestead/tax credits' with review fits better."
@@ -45,7 +45,7 @@
     {
       "severity": "warning",
       "path": "disbursements[10].category",
-      "page": 15,
+      "page": 16,
       "extracted": "utilities",
       "on_page": "Totals column incl. Golf Course Fund 639,597 of operating expenses",
       "issue": "Business-type expense lines (disbursements[10]-[14]) are all 'utilities', but the Golf Course Fund (639,597, p2) is culture/recreation. The same applies to detail[20] 'Business-Type Activities: Other' 644,388 (Gas + Golf). Judgment call when using the Totals column."
@@ -53,7 +53,7 @@
     {
       "severity": "warning",
       "path": "balance_sheet",
-      "page": 6,
+      "page": 7,
       "extracted": "governmental funds Balance Sheet total column only",
       "on_page": "Proprietary funds Statement of Net Position pp13-14: total assets 12,068,111, total liabilities 2,795,934, net position 9,272,177; government-wide net position p1: 26,420,384",
       "issue": "The government-wide statement (p1) prints only net position lines, so the extractor used the governmental funds balance sheet. Business-type assets and liabilities (capital assets, bonds 2,280,000, receivables, inventories) and the governmental net investment in capital assets 5,636,994 are therefore absent from the balance sheet. Disclosed in notes; needs a scope decision."
@@ -61,7 +61,7 @@
     {
       "severity": "warning",
       "path": "ending_cash",
-      "page": 12,
+      "page": 13,
       "extracted": 7632690,
       "on_page": "Fund balance end of year 7,632,690; cash on p6 = Cash in Bank 7,709,962 + Cash at County Treasurer 41,053 = 7,751,015",
       "issue": "ending_cash and beginning_cash are fund balances (cash less net due to other funds 118,325), not cash. This follows the rule for the balance the statement rolls forward and is disclosed in notes."
