@@ -175,13 +175,12 @@ the cash flow, balance sheet and revenue/expense detail. `output/cashflow_core.x
 holds just those reports and sheets. Prioritise fixes and re-checks for these types; the others stay extracted.
 
 ## Open follow-ups (remove each line once done)
-- Missing-page re-trim queued 2026-10-27 (cities/villages/schools/counties only): 29 reports added to
-  config/extra_pages.csv (exact source pages found from the source PDFs) and config/retrim.csv. After the next fetch,
-  re-extract and re-verify each of them (Arapahoe, Litchfield PS, Leigh, Boelus, Fairbury, Lyons, Kimball, Lancaster
-  County, Gothenburg, Grand Island, Niobrara PS, Omaha PS, Ogallala, Ord, ONeill, Polk, Wahoo, Beaver Crossing, Box Butte
-  County, Bradshaw, Central City PS, Douglas County, Falls City PS, Fillmore County, Furnas County, Greeley, Hooker
-  County, Logan County, Niobrara). No page needed: Butte (p31 already kept; re-check its extraction), Kimball County,
-  Chadron PS (budget notes only), Springfield (Note M is subsequent events).
+- Missing-page re-trim 2026-10-27 (cities/villages/schools/counties): 24 reports re-trimmed with config/extra_pages.csv,
+  source pages remapped, new pages added, verified and verifier errors fixed (all 0 flags). Still waiting on a second
+  fetch: Furnas County, Logan County, Box Butte County, Fairbury, ONeill (each lost a previously kept page on the re-trim;
+  those pages are now pinned in extra_pages.csv and they are re-queued in retrim.csv). After that fetch: remap pages
+  (scratchpad tool remap_pages.py logic: old manifest pages_kept -> new), add the new pages, verify. No page needed:
+  Butte (re-check its extraction), Kimball County, Chadron PS, Springfield.
 - Targeted re-trims (config/retrim.csv; FINDER_VERSION stays 8 so other reports are NOT re-trimmed; never bump it
   without the user's OK). Done 2026-10-22: 12 reports re-trimmed (find_pages v9 + Waterloo/Plainview fixes),
   re-extracted and re-verified; Sargent_Public_Schools_FY2025 followed (OCR-garbled repeated title fix), Activities
