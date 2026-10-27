@@ -1,24 +1,19 @@
 {
   "stem": "Polk_FY2025",
-  "values_checked": 185,
+  "values_checked": 205,
   "issues": [
-    {"severity": "warning", "path": "missing", "page": 11,
-     "extracted": null, "on_page": "Trimmed pp11-15 are report pages 26, 28, 30, 32, 34 only; report pp27, 29, 31, 33, 35 are not in the trimmed PDF",
-     "issue": "The notes say the right-hand columns are 'cut off', but whole facing pages are missing: the Bandstand/Playground/Total/budget columns of the governmental combining receipts and disbursements schedules, the Sewer Fund and total columns of the proprietary budget schedule, and the rest of the combined statement on p15. Every actual line shown is captured from Exhibit III/IV, so the totals tie, but per-line budget_final values are missing. Add this report to the find_pages missing-pages follow-up."},
-    {"severity": "warning", "path": "disbursements[0].category", "page": 7,
-     "extracted": "general government", "on_page": "Exhibit III Street Fund column: Salaries 12,145.69, Payroll Taxes 3,612.57, Insurance 10,150.06, Utilities 7,231.14 ... (Street operating lines total 45,286.54)",
-     "issue": "All 13 object lines (disbursements[0]-[12]) are general government, but Exhibit III prints them per fund. The Street Fund share is streets/highways, and detail already uses streets/highways for it. A defensible split by fund column (split_from) would move about 45,287 to streets/highways."},
-    {"severity": "warning", "path": "receipts[8].category", "page": 6,
-     "extracted": "intergovernmental/state aid", "on_page": "Highway Allocation & Motor Vehicle Fees 68,455.07",
-     "issue": "Mixed label (highway allocation plus motor vehicle fees) with no review naming the mix, which the rule for mixed lines requires. The category is probably right because highway allocation dominates."},
-    {"severity": "warning", "path": "receipts[22].category", "page": 9,
-     "extracted": "sales tax", "on_page": "Sales Tax 10,525.51 (Light Fund); Sales Tax Remittance 25,542.90 disbursed",
-     "issue": "This is sales tax collected on electric bills and passed on to the state, not the village's own local sales tax revenue. Recording it as 'sales tax' overstates local sales tax. Already marked review."},
-    {"severity": "warning", "path": "detail_totals[3].schedule", "page": 19,
-     "extracted": "Combined Statement of Cash Receipts, Disbursements and Changes in Fund Balances", "on_page": "detail[24], detail[25], detail[58] use schedule 'Exhibit III Governmental Funds (Other Governmental Fund column)'",
-     "issue": "The schedule names on detail_totals[3], [4] and [8] (Bandstand, Playground) do not match their detail items. detail_totals[10] (Water revenue 490,539.34) cites p15 but carries the Exhibit IV name. A tie check that matches by schedule name may fail."},
-    {"severity": "warning", "path": "detail[24].fund", "page": 6,
-     "extracted": "Bandstand", "on_page": "Exhibit III column 'Other Governmental Fund': Donations 45,500.00, Interest 0.28, Improvements 46,421.53",
-     "issue": "The page prints no fund for these lines. Bandstand and Playground Equipment were inferred from the p15 fund totals (45,500.00 / 0.28 / 46,421.53). The inference is consistent, but it is an assumption."}
+    {"severity": "error", "path": "balance_sheet.statement", "page": 8,
+     "extracted": "Statement of Net Position - Modified Cash Basis (Exhibit I, p1): governmental Cash on Hand 150.00, Deposits 55,314.72, Cash - County Treasurer 3,613.12; equity 'Fund Balances: Unrestricted' 59,077.84",
+     "on_page": "Exhibit III p3 (trimmed p8), Total Governmental Funds: Cash and Deposits 55,464.72; County Treasurers' Balance 3,613.12; Total Assets 59,077.84; Committed 246.56; Assigned 36,992.45; Unassigned 21,838.83",
+     "issue": "User rule 2026-10-27 (balance sheet basis): cash-basis reports take governmental balance-sheet lines from the governmental funds statement of assets and fund balances (Total column, fund balance by classification) where its totals equal the government-wide figures. Exhibit III total 59,077.84 equals Exhibit I governmental 59,077.84, so governmental assets/equity should come from p8 (business-type lines unchanged). The Exhibit I amounts as recorded are transcribed correctly."},
+    {"severity": "warning", "path": "receipts[21].original_label", "page": 9,
+     "extracted": "Property Taxes (business-type)", "on_page": "Property Taxes 6,167.48 (Water Fund, Exhibit IV)",
+     "issue": "User label decision (2026-10-27): property tax receipt lines are labelled 'Property and Real Estate Taxes' (printed text in printed_label); applied to the governmental line but not this business-type line (nor detail Water 'Property Taxes'). Similarly the capital outlay rule (2026-10-26, 'Capital Outlay: <function>') was not applied to disbursements[29] 'Capital Outlay: Equipment', disbursements[30] 'Capital Outlay: Improvements other than Buildings', disbursements[39] business 'Capital Outlay' and the detail General/Street equipment and Light/Water/Sewer capital outlay lines."},
+    {"severity": "warning", "path": "decision_needed[0].question", "page": 15,
+     "extracted": "combining budget schedule (p13) calls it 'Bond Proceeds'", "on_page": "Schedule 3 'Bond Proceeds' 370,000.00 is on trimmed p15",
+     "issue": "Stale page reference (p13 -> p15) in decision_needed, the Water Grant detail review note and report_discrepancies note; the substantive question (grant vs. debt proceeds for the 370,000) remains open and is correctly raised."},
+    {"severity": "warning", "path": "receipts[13].category", "page": 6,
+     "extracted": "charges for services/fees", "on_page": "Meter Deposit 1,200.00 (General Fund)",
+     "issue": "Customer meter deposits are normally refundable liabilities rather than service revenue; category is a judgment call (extractor flagged review)."}
   ]
 }

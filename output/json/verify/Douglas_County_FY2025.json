@@ -1,19 +1,18 @@
 {
   "stem": "Douglas_County_FY2025",
-  "values_checked": 279,
+  "values_checked": 224,
   "issues": [
-    {"severity": "warning", "path": "missing", "page": 6,
-     "extracted": "nonmajor detail = Total Nonmajor Special Revenue Funds column only (revenue 46,212,263; expenditure 38,744,158, p13)",
-     "on_page": "p6 Nonmajor column: Total revenues 52,241,505, Total expenditures 43,748,013 (incl. bond principal 4,005,000, bond interest 1,000,947 absent from the special revenue total)",
-     "issue": "The nonmajor debt service/capital projects combining pages (source report p88+) are still not in the trimmed PDF, so about 6.03M of revenue and 5.0M of spending have no detail lines. This is a trim gap, not an extraction error; the extraction says so in its notes. Re-extract after the page finder keeps those pages."},
     {"severity": "warning", "path": "receipts[5].category", "page": 6,
-     "extracted": "other taxes", "on_page": "Miscellaneous 8,237,000 (General 2,784,400 + Nonmajor 5,452,600; the nonmajor part is all Tourism Fund, p12)",
-     "issue": "The Tourism Fund's 5,452,600 of 'Miscellaneous' taxes is most likely lodging (hotel occupation) tax, but no page in the trim labels it, so 'other taxes' with review is defensible. Someone should check the notes in the source PDF. The same applies to detail[5] and the nonmajor detail Miscellaneous (taxes) line."},
-    {"severity": "warning", "path": "disbursements[2].category", "page": 6,
-     "extracted": "health/welfare", "on_page": "Ecological services 2,428,807 (Environmental Services, Landfill, Escrow Liability)",
-     "issue": "The function is a judgment call: environmental services/landfill could be 'utilities' (refuse) or 'natural resources/conservation'. Already marked review; the same applies to the detail lines."},
-    {"severity": "warning", "path": "receipts[2].amount", "page": 6,
-     "extracted": 26674466, "on_page": "Motor vehicle 26,674,466 (p6); Statement of Activities 26,674,467 (p4). PILOT 1,571,018 (p6) vs 1,571,017 (p4)",
-     "issue": "$1 rounding differences between statements printed in the report itself. The extraction correctly uses the p6 fund statement figures."}
+     "extracted": "other taxes (Miscellaneous (taxes) 8,237,000; review: 'nonmajor part 5,452,600 appears in Tourism fund (likely lodging tax)')", "on_page": "Miscellaneous 8,237,000 = General 2,784,400 + Nonmajor 5,452,600 (Tourism fund, p12)",
+     "issue": "The user ruled (2026-10-27) that the Tourism fund's 5,452,600 'Miscellaneous (taxes)' is category Miscellaneous Tax, not lodging tax, and the detail line already uses it. The statement line holding it is still 'other taxes', with a stale review note pointing to lodging tax. Statement and detail categories are inconsistent."},
+    {"severity": "warning", "path": "detail[63].category", "page": 9,
+     "extracted": "property tax 141,076 (Road Fund)", "on_page": "Road Fund budget schedule p9: 'Property tax' 141,076; governmental funds statement p6 puts the Road column's 141,076 on the 'Motor vehicle' row (Total motor vehicle 26,674,466 includes it)",
+     "issue": "The report labels the same Road Fund 141,076 as motor vehicle tax on p6 and as property tax on p9. The detail follows p9 and the receipts follow p6. Arguably a report_discrepancies entry; the user may want one category."},
+    {"severity": "warning", "path": "detail[10].category", "page": 7,
+     "extracted": "general government / not itemized (Capital improvement 999,999)", "on_page": "General government: Capital improvement 999,999 (budget 1,000,000)",
+     "issue": "Under the user's capital outlay rule, a capital line inside a function could be category capital outlay ('Capital Outlay: General Government'). The label suggests capital spending, but the budget-basis schedule doesn't say whether it is capital outlay or a transfer to a capital fund. Judgment call."},
+    {"severity": "warning", "path": "notes", "page": 6,
+     "extracted": "'Homestead taxes categorized as intergovernmental/state aid.'", "on_page": "Homestead 6,000,278",
+     "issue": "Stale note: receipts[1] and the detail Homestead lines now carry the user's Homestead Exemption category."}
   ]
 }

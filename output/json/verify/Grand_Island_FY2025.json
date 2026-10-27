@@ -1,41 +1,30 @@
 {
   "stem": "Grand_Island_FY2025",
-  "values_checked": 164,
+  "values_checked": 268,
   "issues": [
-    {
-      "severity": "error",
-      "path": "missing",
-      "page": 16,
-      "extracted": null,
-      "on_page": "Combining Statement of Revenues, Expenditures, and Changes in Fund Balances - Nonmajor Governmental Funds, trimmed pp16-19 (report pp84-87): 21 fund columns (Library Trust, Cemetery Trust, Enhanced 911, PSC Wireless, Keno, Transportation, Community Youth Council, Program Income Reuse, Housing Reuse, Community Development, Metropolitan Planning Organization, Police Grants, Occupation Tax, Parking District No. 1 and No. 2, Local Assistance, HUD Entitlements, Economic Developments, Community Grants, Public Safety Stabilization, Good Life District); revenues on these pages total 18,343,141",
-      "issue": "[fixed 2026-10-22: the 21 printed nonmajor fund columns (pp16-19) added to detail[] per fund with each column's printed totals as detail_totals; the remaining nonmajor column(s) (72,305 revenue, 925,925 expenditures vs p6) are not in the trim and are noted in notes] The schedule's revenue, expenditure and transfer lines are printed on pages 16-19 but none of them are in detail[]. The extractor left them out because the Total column page is not trimmed. The printed fund columns add to 18,343,141 of revenue, against 18,415,446 for Other Governmental Funds on p6. That 72,305 gap means at least one more nonmajor fund column (probably debt service or capital projects) is also missing from the trim. This is a known trim gap (CLAUDE.md follow-up). Once the Total column page is trimmed, re-extract and record the nonmajor lines as 'Nonmajor funds (combined)'."
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[20]",
-      "page": 9,
-      "extracted": {
-        "original_label": "Special assessments (nonoperating)",
-        "amount": 37124
-      },
-      "on_page": "Special assessments (37,124), nonoperating, Total column",
-      "issue": "The printed label is just 'Special assessments'; the extractor added '(nonoperating)'. The negative nonoperating item is recorded as a positive disbursement, marked computed and for review. The p11 cash flow shows it as a payment ('Special assessment collections (37,124)'), so the treatment is defensible."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[18].category",
-      "page": 9,
-      "extracted": "charges for services/fees",
-      "on_page": "Other revenue 4,776,017 (enterprise Total; Electric 4,113,280)",
-      "issue": "Operating 'Other revenue' with no breakdown was put in charges for services rather than 'other'. Plausible for utility operating revenue, but a guess (already marked for review)."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[12].category",
-      "page": 6,
-      "extracted": "donations/contributions",
-      "on_page": "Contributions and grants 2,008,680 (p19: Community Grants fund 1,932,838, Local Assistance 75,842)",
-      "issue": "Most of this line is the Community Grants special revenue fund, which may hold government grants (federal grants or intergovernmental/state aid) rather than private donations. Category guess, already marked for review."
-    }
+    {"severity": "error", "path": "missing", "page": 21,
+     "extracted": "notes contain 'Read pages 1-19 of 19' mid-text and do not end with a 'Read pages 1-N of N' statement", "on_page": "The trimmed PDF has 23 pages: p20 nonmajor Capital Projects / Special Assessments / Debt Service / Total Nonmajor columns; p21 internal service funds revenues/expenses; p22 internal service cash flows; p23 discretely presented component units",
+     "issue": "The notes' page statement doesn't match the 23-page PDF. Content check: p20 is fully in detail. pp21-23 are internal service funds (left out of the enterprise totals, as the notes say) and component units (excluded), so no in-scope lines are missing. Notes must end 'Read pages 1-23 of 23'."},
+    {"severity": "warning", "path": "detail[22]", "page": 20,
+     "extracted": "nonmajor combining statement itemized per fund (24 fund columns, detail[22]-[105])", "on_page": "Total Nonmajor Governmental Funds column now printed on p20 (revenues 18,415,446; expenditures 15,499,031; transfers in 3,782,936, out (150,936))",
+     "issue": "Extractor rule: a combining schedule with more than 6 fund columns is recorded from its Total column as fund 'Nonmajor funds (combined)'. Per-fund lines were recorded instead (all amounts verified correct, and they sum to the Total column), which goes against that rule."},
+    {"severity": "warning", "path": "detail[36].original_label", "page": 17,
+     "extracted": "Capital outlay", "on_page": "Keno 111,865; Transportation 533,925 (detail[41]); Occupation Tax 1,836,631 (detail[65], p18)",
+     "issue": "User rule 2026-10-26: capital outlay lines are labelled 'Capital Outlay: <function>' with printed text in printed_label and the function in computed. These keep the bare label."},
+    {"severity": "warning", "path": "detail[92].category", "page": 19,
+     "extracted": "intergovernmental/state aid / other state aid", "on_page": "Good Life District: Intergovernmental 8,096,409",
+     "issue": "Good Life District revenue is normally the state sales-tax turnback, and the user rule makes Turnback its own category. The printed label says only 'Intergovernmental', so this is a judgment call. Consider a review note."},
+    {"severity": "warning", "path": "receipts[12].category", "page": 6,
+     "extracted": "donations/contributions", "on_page": "Contributions and grants 2,008,680 (Community Grants fund 1,932,838, Local Assistance 75,842, p19)",
+     "issue": "Most of this is the Community Grants fund, which may be government grants rather than private gifts. Already marked review (also detail[90] and detail[81])."},
+    {"severity": "warning", "path": "receipts[18].category", "page": 9,
+     "extracted": "charges for services/fees", "on_page": "Other revenue 4,776,017 (operating)",
+     "issue": "Operating 'Other revenue' with no breakdown was put in charges for services. Plausible for utility operating revenue, but a guess (marked review)."},
+    {"severity": "warning", "path": "disbursements[20]", "page": 9,
+     "extracted": {"original_label": "Special assessments (nonoperating)", "amount": 37124}, "on_page": "Special assessments (37,124) nonoperating, Total column",
+     "issue": "The printed label is 'Special assessments'. A negative nonoperating item is recorded as a positive disbursement (marked computed and review). This is defensible, but the label was changed."},
+    {"severity": "warning", "path": "detail[0].category", "page": 14,
+     "extracted": "taxes (unlabeled)", "on_page": "GF budget schedule Taxes 44,832,048; p6 GF tax lines total 45,049,555 (budgetary vs GAAP basis); Streets Taxes 2,965,175 vs p6 sales tax 2,920,410",
+     "issue": "Correctly left unsplit, because the report doesn't print a breakdown that ties. Goes to the review list as taxes (unlabeled), as designed (also detail[15])."}
   ]
 }
