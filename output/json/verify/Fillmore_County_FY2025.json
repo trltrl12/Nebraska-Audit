@@ -2,12 +2,24 @@
   "stem": "Fillmore_County_FY2025",
   "values_checked": 162,
   "issues": [
-    {"severity": "error", "path": "balance_sheet.statement", "page": 4,
-     "extracted": "Statement of Net Position - Cash Basis (p1): Restricted for ... / Unrestricted 7,891,378", "on_page": "Statement of Assets and Fund Balances - Governmental Funds (p3-4), Total Governmental Funds: Restricted lines; Committed for Road maintenance 17,901; Unassigned 7,873,477; total 9,580,910",
-     "issue": "Under the 2026-10-27 balance-sheet rule, a cash-basis report whose governmental funds statement totals match the government-wide figures (9,580,910 on both) takes its lines from the governmental funds statement, with fund balance by classification. The JSON uses the p1 government-wide statement, so Committed 17,901 and Unassigned 7,873,477 are missing and Unrestricted 7,891,378 is used instead. The p1 amounts themselves are correct."},
-    {"severity": "error", "path": "detail_totals[23]", "page": 9,
-     "extracted": "fund 'Total Non-Major Funds' revenue 271,741 and detail_totals[24] expenditure 265,330", "on_page": "Total Non-Major Funds column: receipts 271,741, disbursements 265,330",
-     "issue": "No detail items carry fund 'Total Non-Major Funds', so these two totals have nothing to add up against (the items sum to 0). Either the per-fund totals or a combined total should be used, not both. The per-fund items do sum to 271,741 and 265,330."},
+    {
+      "severity": "fixed",
+      "path": "balance_sheet.statement",
+      "page": 4,
+      "extracted": "Statement of Net Position - Cash Basis (p1): Restricted for ... / Unrestricted 7,891,378",
+      "on_page": "Statement of Assets and Fund Balances - Governmental Funds (p3-4), Total Governmental Funds: Restricted lines; Committed for Road maintenance 17,901; Unassigned 7,873,477; total 9,580,910",
+      "issue": "Under the 2026-10-27 balance-sheet rule, a cash-basis report whose governmental funds statement totals match the government-wide figures (9,580,910 on both) takes its lines from the governmental funds statement, with fund balance by classification. The JSON uses the p1 government-wide statement, so Committed 17,901 and Unassigned 7,873,477 are missing and Unrestricted 7,891,378 is used instead. The p1 amounts themselves are correct.",
+      "resolution": "fixed 2026-10-27: balance sheet switched to the p4 Total Governmental Funds column (8 Restricted lines, Committed: Road maintenance 17,901, Unassigned 7,873,477; totals 9,580,910 unchanged)"
+    },
+    {
+      "severity": "fixed",
+      "path": "detail_totals[23]",
+      "page": 9,
+      "extracted": "fund 'Total Non-Major Funds' revenue 271,741 and detail_totals[24] expenditure 265,330",
+      "on_page": "Total Non-Major Funds column: receipts 271,741, disbursements 265,330",
+      "issue": "No detail items carry fund 'Total Non-Major Funds', so these two totals have nothing to add up against (the items sum to 0). Either the per-fund totals or a combined total should be used, not both. The per-fund items do sum to 271,741 and 265,330.",
+      "resolution": "fixed 2026-10-27: dropped the two Total Non-Major Funds detail_totals; per-fund totals kept"
+    },
     {"severity": "warning", "path": "detail[50]", "page": 9,
      "extracted": "nonmajor combining recorded per fund (8 funds with activity, 9 columns)", "on_page": "Non-Major combining statement, 9 fund columns plus Total",
      "issue": "The detail rule says a combining schedule with more than 6 funds should use its Total column with fund 'Nonmajor funds (combined)'. Recording per fund is more detailed and every amount checks, but it doesn't follow the rule."},
