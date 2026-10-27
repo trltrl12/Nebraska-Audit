@@ -2,18 +2,38 @@
   "stem": "Polk_FY2025",
   "values_checked": 205,
   "issues": [
-    {"severity": "error", "path": "balance_sheet.statement", "page": 8,
-     "extracted": "Statement of Net Position - Modified Cash Basis (Exhibit I, p1): governmental Cash on Hand 150.00, Deposits 55,314.72, Cash - County Treasurer 3,613.12; equity 'Fund Balances: Unrestricted' 59,077.84",
-     "on_page": "Exhibit III p3 (trimmed p8), Total Governmental Funds: Cash and Deposits 55,464.72; County Treasurers' Balance 3,613.12; Total Assets 59,077.84; Committed 246.56; Assigned 36,992.45; Unassigned 21,838.83",
-     "issue": "User rule 2026-10-27 (balance sheet basis): cash-basis reports take governmental balance-sheet lines from the governmental funds statement of assets and fund balances (Total column, fund balance by classification) where its totals equal the government-wide figures. Exhibit III total 59,077.84 equals Exhibit I governmental 59,077.84, so governmental assets/equity should come from p8 (business-type lines unchanged). The Exhibit I amounts as recorded are transcribed correctly."},
-    {"severity": "warning", "path": "receipts[21].original_label", "page": 9,
-     "extracted": "Property Taxes (business-type)", "on_page": "Property Taxes 6,167.48 (Water Fund, Exhibit IV)",
-     "issue": "User label decision (2026-10-27): property tax receipt lines are labelled 'Property and Real Estate Taxes' (printed text in printed_label); applied to the governmental line but not this business-type line (nor detail Water 'Property Taxes'). Similarly the capital outlay rule (2026-10-26, 'Capital Outlay: <function>') was not applied to disbursements[29] 'Capital Outlay: Equipment', disbursements[30] 'Capital Outlay: Improvements other than Buildings', disbursements[39] business 'Capital Outlay' and the detail General/Street equipment and Light/Water/Sewer capital outlay lines."},
-    {"severity": "warning", "path": "decision_needed[0].question", "page": 15,
-     "extracted": "combining budget schedule (p13) calls it 'Bond Proceeds'", "on_page": "Schedule 3 'Bond Proceeds' 370,000.00 is on trimmed p15",
-     "issue": "Stale page reference (p13 -> p15) in decision_needed, the Water Grant detail review note and report_discrepancies note; the substantive question (grant vs. debt proceeds for the 370,000) remains open and is correctly raised."},
-    {"severity": "warning", "path": "receipts[13].category", "page": 6,
-     "extracted": "charges for services/fees", "on_page": "Meter Deposit 1,200.00 (General Fund)",
-     "issue": "Customer meter deposits are normally refundable liabilities rather than service revenue; category is a judgment call (extractor flagged review)."}
+    {
+      "severity": "fixed",
+      "path": "balance_sheet.statement",
+      "page": 8,
+      "extracted": "Statement of Net Position - Modified Cash Basis (Exhibit I, p1): governmental Cash on Hand 150.00, Deposits 55,314.72, Cash - County Treasurer 3,613.12; equity 'Fund Balances: Unrestricted' 59,077.84",
+      "on_page": "Exhibit III p3 (trimmed p8), Total Governmental Funds: Cash and Deposits 55,464.72; County Treasurers' Balance 3,613.12; Total Assets 59,077.84; Committed 246.56; Assigned 36,992.45; Unassigned 21,838.83",
+      "issue": "User rule 2026-10-27 (balance sheet basis): cash-basis reports take governmental balance-sheet lines from the governmental funds statement of assets and fund balances (Total column, fund balance by classification) where its totals equal the government-wide figures. Exhibit III total 59,077.84 equals Exhibit I governmental 59,077.84, so governmental assets/equity should come from p8 (business-type lines unchanged). The Exhibit I amounts as recorded are transcribed correctly.",
+      "resolution": "fixed 2026-10-27: governmental balance-sheet lines switched to Exhibit III p8 Total Governmental Funds (Cash and Deposits 55,464.72, County Treasurers' Balance 3,613.12; Committed/Assigned/Unassigned; totals match 59,077.84); business-type lines kept"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[21].original_label",
+      "page": 9,
+      "extracted": "Property Taxes (business-type)",
+      "on_page": "Property Taxes 6,167.48 (Water Fund, Exhibit IV)",
+      "issue": "User label decision (2026-10-27): property tax receipt lines are labelled 'Property and Real Estate Taxes' (printed text in printed_label); applied to the governmental line but not this business-type line (nor detail Water 'Property Taxes'). Similarly the capital outlay rule (2026-10-26, 'Capital Outlay: <function>') was not applied to disbursements[29] 'Capital Outlay: Equipment', disbursements[30] 'Capital Outlay: Improvements other than Buildings', disbursements[39] business 'Capital Outlay' and the detail General/Street equipment and Light/Water/Sewer capital outlay lines."
+    },
+    {
+      "severity": "warning",
+      "path": "decision_needed[0].question",
+      "page": 15,
+      "extracted": "combining budget schedule (p13) calls it 'Bond Proceeds'",
+      "on_page": "Schedule 3 'Bond Proceeds' 370,000.00 is on trimmed p15",
+      "issue": "Stale page reference (p13 -> p15) in decision_needed, the Water Grant detail review note and report_discrepancies note; the substantive question (grant vs. debt proceeds for the 370,000) remains open and is correctly raised."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[13].category",
+      "page": 6,
+      "extracted": "charges for services/fees",
+      "on_page": "Meter Deposit 1,200.00 (General Fund)",
+      "issue": "Customer meter deposits are normally refundable liabilities rather than service revenue; category is a judgment call (extractor flagged review)."
+    }
   ]
 }

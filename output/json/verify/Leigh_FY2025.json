@@ -2,21 +2,46 @@
   "stem": "Leigh_FY2025",
   "values_checked": 168,
   "issues": [
-    {"severity": "error", "path": "balance_sheet.statement", "page": 4,
-     "extracted": "Statement of Net Position - Modified Cash Basis (p1), governmental lines Cash 15,393 / County treasurer cash 12,084 / CDs 55,019 / Restricted cash 11,266 / Restricted CDs 27,625 / Restricted county treasurer cash 750; equity Unrestricted 82,496",
-     "on_page": "Balance Sheet - Modified Cash Basis - Governmental Funds, Total Governmental Funds: Cash and cash equivalents 26,659; Certificates of deposit 82,644; County treasurer cash 12,834; Total assets 122,137; Restricted for Debt service 9,674, Library improvements 29,967; Unassigned 82,496",
-     "issue": "User rule 2026-10-27 (balance sheet basis): cash-basis reports take governmental balance-sheet lines from the governmental funds statement (Total column, fund balance by classification) where its totals equal the government-wide figures. Here p4 total 122,137 equals p1 governmental 122,137, so the governmental lines should come from p4 (business-type lines unchanged). All p1 amounts as recorded are correctly transcribed."},
-    {"severity": "warning", "path": "receipts[8].category", "page": 5,
-     "extracted": "donations/contributions", "on_page": "Contributions and grants 16,179",
-     "issue": "Mixed label; Statement of Activities (p2) shows 10,710 operating grants and 5,469 capital grants; the General department's 10,000 'Grants and contributions' has no source shown, so it could be governmental grants rather than private donations. Same applies to detail[15..17] 'Grants and contributions' (General 10,000, Street 500, Park 5,000)."},
-    {"severity": "warning", "path": "disbursements[17].original_label", "page": 7,
-     "extracted": "Nonoperating: Capital outlay", "on_page": "Capital outlay (16,831)",
-     "issue": "Capital outlay rule (2026-10-26) labels capital outlay lines 'Capital Outlay: <function>' (here 'Capital Outlay: Utilities') with printed text in printed_label; the business-type statement line was not relabelled (the detail lines were)."},
-    {"severity": "warning", "path": "detail[23].detail_category", "page": 12,
-     "extracted": "salaries and wages", "on_page": "Salaries, taxes, and benefits",
-     "issue": "Line combines salaries, payroll taxes and benefits; all five department lines (detail[23..27]: 30,701; 26,832; 2,101; 15,374; 20,286) put wholly in salaries and wages (extractor noted it)."},
-    {"severity": "warning", "path": "detail[57].detail_category", "page": 12,
-     "extracted": "equipment purchases", "on_page": "Capital outlay 75,113 (Street)",
-     "issue": "Capital outlay object not stated on the page; equipment purchases is an assumption (could be construction/infrastructure). Same for Pool 3,250 (p13) and the Water/Sewer nonoperating capital outlay lines 10,536 / 6,295 (p14)."}
+    {
+      "severity": "fixed",
+      "path": "balance_sheet.statement",
+      "page": 4,
+      "extracted": "Statement of Net Position - Modified Cash Basis (p1), governmental lines Cash 15,393 / County treasurer cash 12,084 / CDs 55,019 / Restricted cash 11,266 / Restricted CDs 27,625 / Restricted county treasurer cash 750; equity Unrestricted 82,496",
+      "on_page": "Balance Sheet - Modified Cash Basis - Governmental Funds, Total Governmental Funds: Cash and cash equivalents 26,659; Certificates of deposit 82,644; County treasurer cash 12,834; Total assets 122,137; Restricted for Debt service 9,674, Library improvements 29,967; Unassigned 82,496",
+      "issue": "User rule 2026-10-27 (balance sheet basis): cash-basis reports take governmental balance-sheet lines from the governmental funds statement (Total column, fund balance by classification) where its totals equal the government-wide figures. Here p4 total 122,137 equals p1 governmental 122,137, so the governmental lines should come from p4 (business-type lines unchanged). All p1 amounts as recorded are correctly transcribed.",
+      "resolution": "fixed 2026-10-27: governmental balance-sheet lines switched to p4 Balance Sheet - Governmental Funds Total column (assets 122,137, fund balances Restricted: Debt service / Restricted: Library improvements / Unassigned; totals match); business-type lines kept"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[8].category",
+      "page": 5,
+      "extracted": "donations/contributions",
+      "on_page": "Contributions and grants 16,179",
+      "issue": "Mixed label; Statement of Activities (p2) shows 10,710 operating grants and 5,469 capital grants; the General department's 10,000 'Grants and contributions' has no source shown, so it could be governmental grants rather than private donations. Same applies to detail[15..17] 'Grants and contributions' (General 10,000, Street 500, Park 5,000)."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[17].original_label",
+      "page": 7,
+      "extracted": "Nonoperating: Capital outlay",
+      "on_page": "Capital outlay (16,831)",
+      "issue": "Capital outlay rule (2026-10-26) labels capital outlay lines 'Capital Outlay: <function>' (here 'Capital Outlay: Utilities') with printed text in printed_label; the business-type statement line was not relabelled (the detail lines were)."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[23].detail_category",
+      "page": 12,
+      "extracted": "salaries and wages",
+      "on_page": "Salaries, taxes, and benefits",
+      "issue": "Line combines salaries, payroll taxes and benefits; all five department lines (detail[23..27]: 30,701; 26,832; 2,101; 15,374; 20,286) put wholly in salaries and wages (extractor noted it)."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[57].detail_category",
+      "page": 12,
+      "extracted": "equipment purchases",
+      "on_page": "Capital outlay 75,113 (Street)",
+      "issue": "Capital outlay object not stated on the page; equipment purchases is an assumption (could be construction/infrastructure). Same for Pool 3,250 (p13) and the Water/Sewer nonoperating capital outlay lines 10,536 / 6,295 (p14)."
+    }
   ]
 }
