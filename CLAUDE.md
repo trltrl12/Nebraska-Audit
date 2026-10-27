@@ -159,6 +159,10 @@ the cash flow, balance sheet and revenue/expense detail. `output/cashflow_core.x
 holds just those reports and sheets. Prioritise fixes and re-checks for these types; the others stay extracted.
 
 ## Open follow-ups (remove each line once done)
+- Detail-basis rebuild (paused by the user 2026-10-27): 192 cities/villages/schools/counties whose governmental detail
+  doesn't tie to the fund statement still need rebuilding from the statement fund columns (22 done incl. Lincoln,
+  Douglas County). Find them: detail revenue/expenditure/other financing vs governmental receipts/disbursements/
+  transfers+financing differ by >$5. Reports whose budget detail already ties are left as is (user's choice).
 - Targeted re-trims (config/retrim.csv; FINDER_VERSION stays 8 so other reports are NOT re-trimmed; never bump it
   without the user's OK). Done 2026-10-22: 12 reports re-trimmed (find_pages v9 + Waterloo/Plainview fixes),
   re-extracted and re-verified; Sargent_Public_Schools_FY2025 followed (OCR-garbled repeated title fix), Activities
