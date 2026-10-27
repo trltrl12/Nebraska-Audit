@@ -1,15 +1,21 @@
 {
   "stem": "Central_City_Public_Schools_FY2025",
-  "values_checked": 208,
+  "values_checked": 168,
   "issues": [
-    {"severity": "warning", "path": "receipts[17].review", "page": 6,
-     "extracted": "General 9,084 + Depreciation 10,604", "on_page": "General Fund Other 9,104 (p6); Depreciation Other 10,604; total 19,708",
-     "issue": "Amount 19,708 is correct, but the review note's breakdown is wrong: p6 prints General Fund 'Other' as 9,104 (= p10 '1990 Other' 9,084 + '1910 Rental of school equipment' 20). 9,084 + 10,604 = 19,688, not 19,708. Only the note text is wrong."},
-    {"severity": "warning", "path": "detail[43]", "page": 7,
-     "extracted": "4000 Facilities -450,000 as other financing (split_from)", "on_page": "Facilities 450,000 disbursement in General Fund (p6/p10), eliminated (450,000) against Depreciation 'Transfer from other funds' in the Eliminations column (p7)",
-     "issue": "Extractor's assumption: the whole printed disbursement line is reclassified as an interfund transfer, using split_from even though nothing is split. This matches the elimination on p7 and is already marked review. detail_totals[1] (13,132,507, includes other financing) only ties if the validator adds the absolute values of the signed -450,000 and -65,000 lines."},
-    {"severity": "warning", "path": "detail[11].category", "page": 10,
-     "extracted": "donations/contributions", "on_page": "1920 Grants and donations 33,361",
-     "issue": "On p2 the auditor counts this 33,361 in Instruction operating grants and contributions (1,613,005 + 31,727 + 33,361 + 841 = 1,678,934), so it may include grants from governments. The category is defensible and already marked review. The same applies to receipts[15] (75,361)."}
+    {"severity": "warning", "path": "balance_sheet.total_assets", "page": 1,
+     "extracted": 10331321, "on_page": "Asset lines used: Cash 8,417,892 + Cash with County Treasurers 1,888,685 (p5 Total Governmental Funds) + business-type Cash 24,745 (p1) = 10,331,322",
+     "issue": "Asset lines now come from the governmental funds balance sheet (p5, total 10,306,577), but total_assets is still the government-wide p1 figure (10,331,321, which has the report's own $1 rounding). So the asset lines don't add up to total_assets (off by 1). total_liabilities is null although p1 and p5 print liabilities as '-' (0). notes still say 'Balance sheet uses government-wide Total column', which contradicts the final sentence."},
+    {"severity": "warning", "path": "receipts[17].review", "page": 7,
+     "extracted": "Printed only as Other (General 9,084 + Depreciation 10,604)", "on_page": "General Fund Other 9,104 (p6) + Depreciation 10,604 = 19,708; budget schedule p10 splits General's 9,104 into 1990 Other 9,084 and 1910 Rental of school equipment 20",
+     "issue": "The amount 19,708 is right, but the review note's breakdown is wrong (9,084 + 10,604 = 19,688). General's statement Other is 9,104."},
+    {"severity": "warning", "path": "detail[5].category", "page": 10,
+     "extracted": "charges for services/fees / tuition and fees", "on_page": "1312 Summer school 12,510",
+     "issue": "The statement line 'Tuition/GED fees' 33,675 (= summer school 12,510 + tuition 4,350 + preschool 16,815) is Tuition Received, and the user rule puts all tuition, including summer school, in Tuition Received. Detail summer school uses a different category from the statement line that holds it."},
+    {"severity": "warning", "path": "detail[43].split_from", "page": 10,
+     "extracted": "4000 Facilities -450,000 as other financing (split_from)", "on_page": "4000 Facilities 450,000 in General Fund disbursements; Eliminations column (450,000) on p7 against Depreciation 'Transfer from other funds' 450,000",
+     "issue": "Treating it as a hidden transfer is supported by the Eliminations column. It is a whole-line reclassification, not a printed split, so it is a judgment call; review is already set."},
+    {"severity": "warning", "path": "disbursements[11].review", "page": 7,
+     "extracted": "function guessed as instruction (category State Categorical Programs)", "on_page": "State categorical programs 171,814; Federal programs 510,851",
+     "issue": "Stale review text: the category is now the user's State Categorical Programs / Federal Programs, not instruction. The same text is on disbursements[12] and the matching detail lines."}
   ]
 }

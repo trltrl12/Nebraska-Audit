@@ -1,70 +1,33 @@
 {
   "stem": "Fillmore_County_FY2025",
-  "values_checked": 154,
+  "values_checked": 162,
   "issues": [
-    {
-      "severity": "error",
-      "path": "detail[36].category",
-      "page": 12,
-      "extracted": "other / miscellaneous revenue",
-      "on_page": "Road Fund 'Local' 129,527 = Local 39,411 + Insurance proceeds 11,599 + Sale of surplus 78,517 (Road column, p5)",
-      "issue": "[fixed] The report prints this line's breakdown (p5). Most of it (78,517, 61%) is sale of surplus, so under the mixed-line rule the category should be the dominant 'sale of assets' (or split with split_from using p5), not 'other'."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[5].category",
-      "page": 6,
-      "extracted": "other",
-      "on_page": "Local 1,119,380",
-      "issue": "'Local' is a broad group, not an unidentified line. The statement of activities (p2) shows charges for services 606,284, interest income 468,452 and miscellaneous 53,810, so the dominant category is probably charges for services/fees. The page doesn't print a direct breakdown of 'Local', so 'other' with review is defensible."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[2].category",
-      "page": 10,
-      "extracted": "other / miscellaneous revenue",
-      "on_page": "Local 1,062,325",
-      "issue": "Same broad 'Local' group as receipts[5]. It includes sale of surplus 7,306 (p7). 'Other' is defensible with review, but likely mostly charges for services/fees."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[44].category",
-      "page": 14,
-      "extracted": "agriculture/fair",
-      "on_page": "Disbursements 72,573 (p6: general government 775, principal 70,000, interest 1,798)",
-      "issue": "Mixed line. Under the 'pick the dominant one' rule this would be 'debt service principal' (96%). Agriculture/fair follows the fund's purpose and is flagged for review."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[37].category",
-      "page": 12,
-      "extracted": "streets/highways",
-      "on_page": "Disbursements 4,355,313 (p5: public works 2,104,865, capital outlay 2,250,448)",
-      "issue": "Mixed line. Capital outlay is slightly the larger part. Streets/highways (the fund's function) is defensible, but neither the mix nor the choice is noted."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[12].detail_category",
-      "page": 10,
-      "extracted": "not itemized",
-      "on_page": "Health Insurance 707,002",
-      "issue": "The label names an object of expenditure, so 'employee benefits and payroll taxes' fits better than 'not itemized'."
-    },
-    {
-      "severity": "warning",
-      "path": "missing",
-      "page": 8,
-      "extracted": null,
-      "on_page": "Non-Major Funds totals (p6): receipts 271,741, disbursements 265,330; only 4 funds on trimmed p8 (receipts 65,226, disbursements 93,319)",
-      "issue": "The rest of the nonmajor combining statement (report p27 or later: about 206,515 receipts and 172,011 disbursements, including the debt service funds) isn't in the trimmed PDF, so detail for those funds is missing. This is a trimming problem; every line on the trimmed pages is in the JSON. The notes mention it."
-    },
-    {
-      "severity": "warning",
-      "path": "balance_sheet.equity[7].original_label",
-      "page": 1,
-      "extracted": "Restricted for: Opioid settlement",
-      "on_page": "Opiod settlement",
-      "issue": "The label's spelling was corrected; the page prints 'Opiod settlement'."
-    }
+    {"severity": "error", "path": "balance_sheet.statement", "page": 4,
+     "extracted": "Statement of Net Position - Cash Basis (p1): Restricted for ... / Unrestricted 7,891,378", "on_page": "Statement of Assets and Fund Balances - Governmental Funds (p3-4), Total Governmental Funds: Restricted lines; Committed for Road maintenance 17,901; Unassigned 7,873,477; total 9,580,910",
+     "issue": "Under the 2026-10-27 balance-sheet rule, a cash-basis report whose governmental funds statement totals match the government-wide figures (9,580,910 on both) takes its lines from the governmental funds statement, with fund balance by classification. The JSON uses the p1 government-wide statement, so Committed 17,901 and Unassigned 7,873,477 are missing and Unrestricted 7,891,378 is used instead. The p1 amounts themselves are correct."},
+    {"severity": "error", "path": "detail_totals[23]", "page": 9,
+     "extracted": "fund 'Total Non-Major Funds' revenue 271,741 and detail_totals[24] expenditure 265,330", "on_page": "Total Non-Major Funds column: receipts 271,741, disbursements 265,330",
+     "issue": "No detail items carry fund 'Total Non-Major Funds', so these two totals have nothing to add up against (the items sum to 0). Either the per-fund totals or a combined total should be used, not both. The per-fund items do sum to 271,741 and 265,330."},
+    {"severity": "warning", "path": "detail[50]", "page": 9,
+     "extracted": "nonmajor combining recorded per fund (8 funds with activity, 9 columns)", "on_page": "Non-Major combining statement, 9 fund columns plus Total",
+     "issue": "The detail rule says a combining schedule with more than 6 funds should use its Total column with fund 'Nonmajor funds (combined)'. Recording per fund is more detailed and every amount checks, but it doesn't follow the rule."},
+    {"severity": "warning", "path": "receipts[5].category", "page": 6,
+     "extracted": "other (category_decision 'local')", "on_page": "Local 1,119,380; p2 shows charges for services 606,284, interest income 468,452, miscellaneous 53,810",
+     "issue": "The user decision maps 'local' to Other / Miscellaneous Receipts, but the statement of activities shows charges for services (about 54%) and interest make up most of it. Flagged for the user's awareness."},
+    {"severity": "warning", "path": "detail[55].category", "page": 8,
+     "extracted": "other", "on_page": "911 Emergency Services Local 18,133 (p2: Public safety charges for services 18,133)",
+     "issue": "The statement of activities identifies this exact amount as public-safety charges for services, so charges for services/fees fits better than 'other'."},
+    {"severity": "warning", "path": "detail[59].detail_category", "page": 9,
+     "extracted": "miscellaneous revenue (no category_decision)", "on_page": "Preservation & Modernization Local 4,996",
+     "issue": "Every other 'Local' line uses detail_category 'Other / Miscellaneous Receipts' under the user decision, but this one uses 'miscellaneous revenue'. Preservation and modernization receipts are register-of-deeds fees, so fees of office would fit better."},
+    {"severity": "warning", "path": "detail[12].detail_category", "page": 10,
+     "extracted": "not itemized", "on_page": "Health Insurance 707,002",
+     "issue": "The label names an object of expenditure, so 'employee benefits and payroll taxes' fits better than 'not itemized'."},
+    {"severity": "warning", "path": "detail[2].amount", "page": 10,
+     "extracted": 1062325, "on_page": "Local 1,062,325 (budget schedule) = Local 1,055,019 + Sale of surplus 7,306 (p7)",
+     "issue": "The budget schedule's Local includes the 7,306 sale of surplus, which the statement shows as other financing. Recorded as printed, with a review note. Road Local (detail[36]) similarly includes insurance proceeds 11,599 and sale of surplus 78,517."},
+    {"severity": "warning", "path": "balance_sheet.equity[7].original_label", "page": 1,
+     "extracted": "Restricted for: Opioid settlement", "on_page": "Opiod settlement",
+     "issue": "The label's spelling was corrected; the page prints 'Opiod settlement'."}
   ]
 }

@@ -1,78 +1,25 @@
 {
   "stem": "Ord_FY2025",
-  "values_checked": 129,
+  "values_checked": 152,
   "issues": [
-    {
-      "severity": "error",
-      "path": "missing",
-      "page": 24,
-      "extracted": null,
-      "on_page": "Schedule of Expenditures - Modified Cash Basis - Governmental Funds (report p62), Total column: 754,343; 227,893; 119,361; 553,321; 268,053; 450,749; 319,543; 91,472; total 2,784,735",
-      "issue": "Trimmed p22 is only the right half of this schedule. The left half with row labels and the General/Public Health/Culture and Recreation/Debt Service/Public Works columns (report p61, PDF page 65) was not trimmed, so the schedule's lines are missing from detail[]. This is a trim problem (find_pages): re-trim to include PDF p65, then re-extract."
-    },
-    {
-      "severity": "error",
-      "path": "detail[11]",
-      "page": 22,
-      "extracted": "governmental function lines detail[11]-detail[16] recorded as section 'expenditure', total 4,854,720",
-      "on_page": "DISBURSEMENTS AND TRANSFERS: General Government 1,419,009; Public Safety 382,548; Public Works 764,387; Public Health and Social Services 129,436; Culture and Recreation 532,828; Community Development 1,626,512",
-      "issue": "[fixed] These lines include transfers and other financing uses. 4,854,720 - statement expenditures 2,784,735 (p10) = 2,069,985, which is exactly gross governmental transfers out 1,294,735 (584,002 + 116,615 + 26,296 + 4,660 + 297,941 + 265,221, pp11-12) + Sales Tax Loan Advances 769,250 + Purchase of Assets for Resale 6,000. Gross transfers in (1,374,195) are already recorded as other financing (detail[10]), so the transfers end up counted as spending. Per the hidden-transfer rule, add a negative contra line per affected group (split_from naming p21 and pp11-12, review) plus the matching other-financing lines. detail_totals[1] (10,696,715) should then carry includes ['other financing']."
-    },
-    {
-      "severity": "error",
-      "path": "detail[9].category",
-      "page": 21,
-      "extracted": "other",
-      "on_page": "Local Receipts: Other 6,693,542",
-      "issue": "[fixed] Broad group whose make-up can be traced: business-type operating revenues alone are 5,313,719 (p15: charges for services 4,295,851, NPPD 473,237, merchandise 469,425...), well over half the line. The rule says to use the dominant category, charges for services/fees (detail 'other charges for services' or electric charges), with review naming the mix, not 'other'."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[9].fund_type",
-      "page": 21,
-      "extracted": "governmental",
-      "on_page": "Local Receipts: Other 6,693,542 (Total Primary Government schedule)",
-      "issue": "Most of this line is business-type (utility and golf receipts), but it is tagged governmental. The revenue lines on this all-funds schedule mix both fund types."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[5].detail_category",
-      "page": 21,
-      "extracted": "other state aid",
-      "on_page": "State Receipts: Other 122,566",
-      "issue": "Equals Homestead 48,051 + Property Tax Credit 61,321 + State Highway Maintenance 13,194 (p8). That is 89% homestead/tax credits, so detail_category 'homestead/tax credits' with review fits better."
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[10].category",
-      "page": 16,
-      "extracted": "utilities",
-      "on_page": "Totals column incl. Golf Course Fund 639,597 of operating expenses",
-      "issue": "Business-type expense lines (disbursements[10]-[14]) are all 'utilities', but the Golf Course Fund (639,597, p2) is culture/recreation. The same applies to detail[20] 'Business-Type Activities: Other' 644,388 (Gas + Golf). Judgment call when using the Totals column."
-    },
-    {
-      "severity": "warning",
-      "path": "balance_sheet",
-      "page": 7,
-      "extracted": "governmental funds Balance Sheet total column only",
-      "on_page": "Proprietary funds Statement of Net Position pp13-14: total assets 12,068,111, total liabilities 2,795,934, net position 9,272,177; government-wide net position p1: 26,420,384",
-      "issue": "The government-wide statement (p1) prints only net position lines, so the extractor used the governmental funds balance sheet. Business-type assets and liabilities (capital assets, bonds 2,280,000, receivables, inventories) and the governmental net investment in capital assets 5,636,994 are therefore absent from the balance sheet. Disclosed in notes; needs a scope decision."
-    },
-    {
-      "severity": "warning",
-      "path": "ending_cash",
-      "page": 13,
-      "extracted": 7632690,
-      "on_page": "Fund balance end of year 7,632,690; cash on p6 = Cash in Bank 7,709,962 + Cash at County Treasurer 41,053 = 7,751,015",
-      "issue": "ending_cash and beginning_cash are fund balances (cash less net due to other funds 118,325), not cash. This follows the rule for the balance the statement rolls forward and is disclosed in notes."
-    },
-    {
-      "severity": "warning",
-      "path": "missing",
-      "page": null,
-      "extracted": null,
-      "on_page": "Report pp22, 29, 59-60 (PDF pp25, 32, 63-64) not in trimmed PDF",
-      "issue": "Gaps in the trim (manifest pages_kept skip 25, 32, 63-65). pp59-60 probably hold a governmental funds schedule of revenues (it sits just before the schedule of expenditures, pp61-62); pp22 and 29 may be reconciliations. Not verifiable from the trim."
-    }
+    {"severity": "error", "path": "detail[14].amount", "page": 22,
+     "extracted": "Business-Type Activities: Electric 4,279,247 recorded wholly as utilities spending",
+     "on_page": "Budget schedule 'Disbursements and Transfers' (p22) with Transfers In 1,374,195 (p21) = governmental transfers out 1,294,735 + Electric transfers out 79,460 (p17: Electric Transfers (79,460); Sewer +55,460, Golf +30,000)",
+     "issue": "Hidden transfer: the extraction backs the governmental transfers out (1,294,735) out of the governmental lines with a contra other-financing line, but the Electric Fund's 79,460 transfer out stays inside the Electric spending line, while the matching 85,460 business-type transfers in are counted in the 1,374,195 Transfers In line. The same money is both spending and a transfer; needs a -79,460 contra (split_from Electric 4,279,247, p17) plus an other-financing line. Relatedly detail[9] Transfers In 1,374,195 is tagged governmental although 85,460 of it is Sewer/Golf (business-type)."},
+    {"severity": "error", "path": "detail[17].category", "page": 22,
+     "extracted": "utilities", "on_page": "Business - Type Activities: Other 644,388 (Gas + Golf Course)",
+     "issue": "Gas Fund has no expenses (p16 operating expenses 0; cash flow p18 payments 0), so this line is essentially the Golf Course Fund (p16 expenses 639,597); the dominant function is culture/recreation, not utilities."},
+    {"severity": "warning", "path": "receipts[0].original_label", "page": 9,
+     "extracted": "Property Taxes", "on_page": "Property Taxes 938,486",
+     "issue": "User label decision (2026-10-27): property tax receipt lines are labelled 'Property and Real Estate Taxes' with printed text in printed_label; not applied (also detail[0])."},
+    {"severity": "warning", "path": "detail[8].fund_type", "page": 21,
+     "extracted": "business-type", "on_page": "Local Receipts: Other 6,693,542 (all funds)",
+     "issue": "All-funds line mixes business-type operating revenue with governmental receipts (sanitation, pool, interest, sales tax loan repayments...); tagged wholly business-type and categorised charges for services. Flagged review by the extractor; judgment call."},
+    {"severity": "warning", "path": "detail[24].original_label", "page": 23,
+     "extracted": "Capital Outlay: Public Health", "on_page": "Public Health Fund Capital Outlay 16,315",
+     "issue": "Other Public Health Fund lines are tagged public safety (dominant function) while this capital outlay label/computed note says public health / 'public safety/public health'; inconsistent function labelling."},
+    {"severity": "warning", "path": "reported_totals.business-type.receipts.computed", "page": 16,
+     "extracted": "total operating revenues 5,313,719 (p15) + interest income 144,510 (p16)", "on_page": "Total Operating Revenues on p16; Interest Income on p17",
+     "issue": "Stale page references in computed/notes text (p12 for fund balances/other financing totals, which are on p13; p15/p16 for p16/p17). The source_page fields themselves are correct."}
   ]
 }
