@@ -161,6 +161,7 @@ DETAIL_REVENUE_CATEGORIES = [
     "Penalties and Interest on Taxes",  # user decision 2026-10-23: kept apart from property tax
     "Homestead Exemption",  # user decision 2026-10-23: out of intergovernmental/state aid
     "Turnback",  # user decision 2026-10-26
+    "Motor Vehicle Pro-Rate",  # user decision 2026-10-23 (validator LABEL_RULES assign this name)
     "Reimbursement for Services",  # user decision 2026-10-26
     "Property Tax Credit",  # user decision 2026-10-23: out of intergovernmental/state aid
     "ESU Receipts",  # user decision 2026-10-23: out of intergovernmental/state aid
