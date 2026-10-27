@@ -1,38 +1,28 @@
 {
   "stem": "ONeill_FY2025",
-  "values_checked": 440,
+  "values_checked": 478,
   "issues": [
-    {
-      "severity": "error",
-      "path": "receipts[14].category",
-      "page": 24,
-      "extracted": "other (57,380 remainder of Miscellaneous revenue)",
-      "on_page": "Keno Fund revenues 1,188 (p29; KENO column of 'Loan repayments and other', p24); General Fund Lot sales 12,208, Rural fire 2,000, Other park 2,930 (p16-17)",
-      "issue": "[fixed 2026-10-21: split remainder into keno/lottery 1,188, charges for services/fees 17,138 and other 39,054] The computed remainder of Miscellaneous revenue (p6) includes Keno Fund receipts of 1,188, which have their own category (keno/lottery; the detail already records them that way, detail[164]). It also includes 17,138 of General Fund charges for services (lot sales, rural fire, other park) that the detail files under charges for services. The printed breakdowns make these splits possible, so filing them under 'other' breaks the same-label-same-category rule. Only Other revenues 29,953, Street Other 6,471 and CDBG loan repayments 2,630 (39,054) are actually unexplained."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[12].category",
-      "page": 31,
-      "extracted": "other",
-      "on_page": "LB 840 Fund: Loan repayments 299,387",
-      "issue": "[fixed 2026-10-21: decision_needed entry added; kept as other] LB 840 revolving-loan repayments are filed as 'other' with review. The Statement of Activities (p2) counts them as Economic Development operating grants and contributions. Repaid loan principal is arguably not revenue, so a person may want to decide how to treat it (not in decision_needed)."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[7].category",
-      "page": 25,
-      "extracted": "intergovernmental/state aid (1,122,342)",
-      "on_page": "Street Fund Intergovernmental includes Motor vehicle fees 36,527",
-      "issue": "[fixed 2026-10-21: Street Motor vehicle fees 36,527 split out of intergovernmental as motor vehicle tax, matching detail] The receipts line includes Street Fund Motor vehicle fees 36,527. detail[138] files these as motor vehicle tax, which is what the category rules call for. The receipts and detail categories for the same money disagree."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[155].detail_category",
-      "page": 6,
-      "extracted": "debt principal (debt service lines 152-155, total 1,234,882)",
-      "on_page": "Street Fund on p6: Principal 1,088,254; Interest and bond costs 169,367",
-      "issue": "[fixed 2026-10-21: p6 splits only at fund level, no per-line split printed; kept as principal, review note updated] All four Street debt-service lines are filed as debt principal (review 'principal and interest combined'). The governmental funds statement shows 169,367 of Street interest, so the function and object split in detail won't tie to p6. The Street schedule doesn't print the split, so this is a judgment call."
-    }
+    {"severity": "error", "path": "receipts[4].category", "page": 14,
+     "extracted": "other taxes", "on_page": "NPPD 5% tax 65,972 (General NPPD 5% 52,258 p16 + Debt Service NPPD 13,714 p33)",
+     "issue": "The NPPD 5% tax is a public power district tax. Under the user decision of 2026-10-23 it is category 'Public Power District Sales Tax', which detail[3] (NPPD 5%, p16) already uses. The same label has to get the same category everywhere in the report."},
+    {"severity": "error", "path": "detail[177].category", "page": 33,
+     "extracted": "other taxes", "on_page": "Debt Service Fund Taxes: NPPD 13,714",
+     "issue": "Same problem as receipts[4]: this should be 'Public Power District Sales Tax', matching the General Fund 'NPPD 5%' line."},
+    {"severity": "error", "path": "receipts[7].amount", "page": 6,
+     "extracted": 1085815,
+     "on_page": "Intergovernmental revenues 1,122,342 (p6). It includes Homestead exemption 47,747 and Property tax credit 63,874 (p14; General 37,829/50,606 p16 + Debt Service 9,918/13,268 p33) and Prorate motor vehicle 1,818 (General 1,436 p16 + Debt Service 382 p33).",
+     "issue": "The user rule of 2026-10-23 says Homestead Exemption, Property Tax Credit and Motor Vehicle Pro-Rate are never inside state aid. The report prints their breakdown (p14, p16, p33), and the extractor already split Motor vehicle fees out of this same line, so these three should be split out with split_from too. intergovernmental/state aid would then drop to 972,376."},
+    {"severity": "error", "path": "detail[98].category", "page": 20,
+     "extracted": "health/welfare", "on_page": "Cemetery: Capital expenditures 26,943 (budget 34,000)",
+     "issue": "The user capital outlay rule of 2026-10-26 says every capital outlay line inside a department is category 'capital outlay', labelled 'Capital Outlay: Health/Welfare' with the printed text in printed_label. The other General Fund 'Capital outlay' lines follow this rule. The same applies to detail[38], 'Capital expenditures' 2,295 (General government - administration, p17)."},
+    {"severity": "warning", "path": "detail[156].original_label", "page": 25,
+     "extracted": "Capital outlay - other", "on_page": "Capital outlay - other 558,115",
+     "issue": "The category is correctly capital outlay, but under the user label rule the line should read 'Capital Outlay: Streets/Highways', with the printed text in printed_label, as the General Fund lines do."},
+    {"severity": "warning", "path": "receipts[21].original_label", "page": 10,
+     "extracted": "Miscellaneous (operating revenues)", "on_page": "Miscellaneous",
+     "issue": "A qualifier was added to the printed label. The same happens in disbursements[22] ('Miscellaneous (operating expenditures)')."},
+    {"severity": "warning", "path": "disbursements[6].category", "page": 6,
+     "extracted": "culture/recreation", "on_page": "Public Building 74,855 (Community Center, p21)",
+     "issue": "This is a function guess. Public building could also be general government. It is already marked for review."}
   ]
 }

@@ -1,38 +1,20 @@
 {
   "stem": "Furnas_County_FY2025",
-  "values_checked": 87,
+  "values_checked": 121,
   "issues": [
-    {
-      "severity": "error",
-      "path": "detail[18].category",
-      "page": 8,
-      "extracted": "streets/highways",
-      "on_page": "Public Works: Noxious Weed 57,691",
-      "issue": "[fixed] the disbursement category rules list noxious weed control under 'natural resources/conservation'; the printed Public Works heading does not override that rule"
-    },
-    {
-      "severity": "warning",
-      "path": "missing",
-      "page": 6,
-      "extracted": null,
-      "on_page": "Non-Major Funds column (p4): total receipts 624,626, total disbursements 1,042,721; the p6 combining page (report p24) covers only 18,208 receipts / 18,359 disbursements",
-      "issue": "the trimmed PDF skips report p23 (trimmed p5 = report p22, p6 = report p24). That page is presumably the other non-major combining page (Emergency 911, Road and bridge, American Rescue Plan, Courthouse building bond, and likely the Visitor's improvement part of the 34,256 restricted balance). About 606,418 of receipts and 1,024,362 of disbursements have no fund-level detail. This is a trimming gap, not an extraction error. The statement-level totals are complete."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[5].category",
-      "page": 4,
-      "extracted": "charges for services/fees",
-      "on_page": "Local 897,029",
-      "issue": "p2 shows Local = charges for services 590,186 + interest income 279,199 + miscellaneous 27,644 (these add exactly to 897,029), so about 31% is investment income. The extractor correctly did not split the line, because p2 is not printed as a breakdown of 'Local', and the line is already marked review."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[13]",
-      "page": 8,
-      "extracted": "general government / not itemized, 1,661,009",
-      "on_page": "General Government: Miscellaneous 1,661,009",
-      "issue": "a large 'Miscellaneous' budget line that, compared with p5, appears to include capital outlay (136,472), debt service (44,289), public assistance (52,035) and other items. Recording the whole amount as general government is a judgment call. It is already marked review."
-    }
+    {"severity": "error", "path": "receipts[6].category", "page": 2,
+     "extracted": "investment income", "on_page": "Interest income 279,199",
+     "issue": "Split part printed as 'Interest income' on the Statement of Activities. Under the user rule of 2026-10-23, interest lines are category 'Interest Income'; 'investment income' is only for dividends and gains."},
+    {"severity": "error", "path": "balance_sheet.statement", "page": 3,
+     "extracted": "Statement of Net Position - Cash Basis (p1): Unassigned 5,069,220",
+     "on_page": "Statement of Assets and Fund Balances - Cash Basis, Governmental Funds (p3), Total column: Committed to Road maintenance 1,204,562; Unassigned 3,864,658; total 6,156,413",
+     "issue": "The balance-sheet basis rule (user, 2026-10-27) says cash-basis reports take governmental balance-sheet lines from the governmental funds statement (Total column, fund balance by classification) when its totals equal the government-wide totals. They do here (6,156,413). The equity lines should come from p3, which adds the Committed line of 1,204,562 and makes Unassigned 3,864,658. The assets are the same on both pages."},
+    {"severity": "warning", "path": "detail", "page": 6,
+     "extracted": "13 nonmajor fund columns recorded fund by fund (p6-7)",
+     "on_page": "Total Non-Major Funds column: receipts 624,626, disbursements 1,042,721 (p7)",
+     "issue": "The extractor rule says a combining schedule with more than 6 fund columns uses its Total column (fund = 'Nonmajor funds (combined)'). The per-fund rule of 2026-10-27 covers only cities and villages. The per-fund lines do tie to the Total column, and there is no double counting."},
+    {"severity": "warning", "path": "detail[2].detail_category", "page": 8,
+     "extracted": "other charges for services", "on_page": "Local 860,562",
+     "issue": "'Local' is a broad group that mixes fees, interest and miscellaneous receipts. Charges are probably the dominant part. The line already has a review note."}
   ]
 }
