@@ -9,6 +9,7 @@ The rules are the ones that apply to all reports (CLAUDE.md "User ... decisions"
 data that already follows the rules changes nothing.
 """
 import argparse
+import csv
 import json
 import re
 import sys
@@ -59,6 +60,22 @@ DUE_SPLIT = ["Bonds Payable", "Leases Payable", "Subscriptions", "Compensated Ab
 DUE_SPLIT_RE = re.compile(r"^(" + "|".join(re.escape(x) for x in DUE_SPLIT) + r")\s*-\s*(due within one year|due in more than one year)$", re.I)
 DUE_PARTS = {"due within one year": "Due Within One Year", "due in more than one year": "Due in More Than One Year"}
 NICA = re.compile(r"invest\w* (\(deficit\) )?in capital", re.I)
+# --- the user's category decisions for other/miscellaneous lines (config/category_decisions.csv) ---
+DECISIONS_CSV = ROOT / "config" / "category_decisions.csv"
+OTHER_CATS = {"other", "other taxes"}
+OTHER_DCATS = {"other local taxes", "miscellaneous revenue", "miscellaneous expenditure"}
+norm = lambda s: re.sub(r"\s+", " ", re.sub(r"[^a-z ]", " ", s.lower())).strip()
+
+
+def load_decisions():
+    if not DECISIONS_CSV.exists():
+        return {}
+    with DECISIONS_CSV.open(newline="") as fh:
+        return {(r["section"], r["label_normalized"]): (r["detail_category"], r["category (revenue)"])
+                for r in csv.DictReader(fh)}
+
+
+DECISIONS = load_decisions()
 STATEMENT_SCHEDULE = re.compile(r"^(statement|exhibit|governmental funds statement|proprietary funds? statement)", re.I)
 
 
@@ -77,6 +94,20 @@ def setcat(x, key, new, why, log):
     if x.get(key) != new:
         x[key] = new
         log[why] += 1
+
+
+def decision_rule(x, sec, log):
+    """Lines still in other/miscellaneous get the user's decision for the same (normalized) label."""
+    if x.get("category_decision") or not (x.get("category") in OTHER_CATS or x.get("detail_category") in OTHER_DCATS):
+        return
+    hit = DECISIONS.get((sec, norm(label_of(x))))
+    if not hit:
+        return
+    dcat, cat = hit
+    setcat(x, "detail_category", dcat, "decision: detail_category", log)
+    if sec == "revenue" and cat:
+        setcat(x, "category", cat, "decision: category", log)
+    x["category_decision"] = "user (category_decisions.csv)"
 
 
 def revenue_rules(x, log):
@@ -154,14 +185,18 @@ def apply(d):
     # fund-name rule: only reports whose detail was built per fund from the statements (cities and villages)
     per_fund = "per-fund lines from the fund statements" in (d.get("notes") or "") or bool(d.get("_per_fund"))
     for x in d.get("receipts") or []:
+        decision_rule(x, "revenue", log)
         revenue_rules(x, log)
     for x in d.get("disbursements") or []:
+        decision_rule(x, "expenditure", log)
         spending_rules(x, log)
     for x in d.get("detail") or []:
         sec = x.get("section")
         if sec == "revenue":
+            decision_rule(x, "revenue", log)
             revenue_rules(x, log)
         elif sec == "expenditure":
+            decision_rule(x, "expenditure", log)
             spending_rules(x, log)
         elif sec == "other financing":
             other_financing_rules(x, log)

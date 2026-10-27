@@ -382,9 +382,9 @@ Other) is a detail schedule: enter every object line per program in `detail` (it
 function-only General Fund lines from other schedules, so don't double count), tied to its totals.
 When a function line mixes categories, pick the dominant one and mention it in `notes`.
 
-## Budget forms (`*_B2526` files: Waiver filings that only filed a budget)
-- Use the prior-year actual column: FY2025 = column 2 ("Actual 2024-2025" or "Actual/Estimated
-  2024-2025"), never the budget year. Put "budget form, prior-year actual column" in notes. Don't
+## Budget forms (`*_B<yy><yy>` files, e.g. `_B2526`: Waiver filings that only filed a budget)
+- Use the prior-year actual column: the report's fiscal year = column 2 (FY2025: "Actual 2024-2025" or
+  "Actual/Estimated 2024-2025"; FY2024: "Actual 2023-2024"), never the budget year. Put "budget form, prior-year actual column" in notes. Don't
   add `review` for the Actual/Estimated column label: the workbook's filing_type column marks
   budget-form reports.
 - If there are two versions of the "Total All Funds" page, a page crossed out (red X, diagonal line,
@@ -400,7 +400,8 @@ When a function line mixes categories, pick the dominant one and mention it in `
 - Receipts are the individual resource lines of column 2 (property tax, motor vehicle, state aid,
   local receipts…); `reported_totals` receipts = Total Resources Available minus the line 5 subtotal
   (`computed`).
-- `fiscal_year_end`: use the year printed on the form; if none is printed, 2025-06-30, and say it
+- `fiscal_year_end`: use the year printed on the form; if none is printed, June 30 of the report's fiscal year (the
+  FY in the filename, e.g. FY2024 -> 2024-06-30), and say it
   was assumed in notes.
 - "Operating Expenses" with no function: use the entity type's function (fire districts public
   safety, townships streets/highways, cemeteries health/welfare…) with `review`. Bond principal &

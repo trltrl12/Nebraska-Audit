@@ -211,7 +211,7 @@ def check(stem, d):
     bs = d.get("balance_sheet")
     if not bs:
         # Budget forms have no balance sheet by design (extractor rules: balance_sheet null).
-        if not stem.endswith("_B2526"):
+        if not re.search(r"_B\d{4}$", stem):
             f("balance", "no balance_sheet recorded")
     else:
         for sec, cats in (("assets", ASSET_CATEGORIES), ("liabilities", LIABILITY_CATEGORIES)):

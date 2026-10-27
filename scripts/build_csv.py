@@ -5,6 +5,7 @@ workbook output/cashflow.xlsx.
 source_page in the JSON is the page number inside the trimmed PDF; the *_original
 columns map it back to the page number of the full audit via output/manifest.csv.
 """
+import re
 import sys
 from collections import OrderedDict
 from pathlib import Path
@@ -49,7 +50,7 @@ def has_governmental(d):
 
 def filing_label(m):
     """Audit / Waiver, or "Waiver/budget only" when the filing links only a budget form."""
-    if "Budgets_Filed" in (m.get("url") or "") or "_B2526" in (m.get("filename") or ""):
+    if "Budgets_Filed" in (m.get("url") or "") or re.search(r"_B\d{4}$", Path(m.get("filename") or "").stem):
         return "Waiver/budget only"
     return m.get("filing_type")
 
