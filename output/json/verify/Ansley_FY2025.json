@@ -1,22 +1,21 @@
 {
   "stem": "Ansley_FY2025",
-  "values_checked": 196,
+  "values_checked": 240,
   "issues": [
-    {"severity": "error", "path": "missing", "page": 22,
-     "extracted": "governmental expenditure detail = function lines from the fund statement columns (p8-9), all detail_category 'not itemized' (detail[63]-[74])",
-     "on_page": "Schedule of Expenditures - Modified Cash Basis - Governmental Funds, fund x object: General 44,085 / 23,291 / 6,280 / 0 / 63,656 / 0 = 137,312; Street and Alley 49,079 / 3,459 / 5,457 / 86,172 / 49,047 / 1,800 = 195,014; City Hall 1,255 / 396 / 1,033 / 0 / 12,095 / 0 = 14,779; Park 12,500 / 1,731 / 17,643 / 2,744 / 7,327 / 1,000 = 42,945; Pool 19,437 / 384 / 6,141 / 0 / 9,736 / 0 = 35,698 (Personal Services / Contracted Services / Materials and Supplies / Capital Expenditures / Other Operating Expenses / Debt Service)",
-     "issue": "[fixed 2026-10-28: replaced the fund statement function lines and principal/interest lines with the 24 non-zero p22 object lines per fund (General, Street and Alley, City Hall, Park, Pool; each fund ties to its printed total; capital lines labelled Capital Outlay: <function>)] This is a per-fund schedule whose columns tie to each fund's Total Expenditures on p8-9. The per-fund rule says to keep such a schedule ('if a single fund has its own schedule that ties to its column, keep that schedule'), but its 30 object lines are absent and only 'not itemized' function lines remain. They should replace the statement function lines for these funds; otherwise the object detail printed in the report is lost."},
+    {"severity": "warning", "path": "receipts[18].category", "page": 9,
+     "extracted": "intergovernmental/state aid", "on_page": "Grants 23,500 (General 18,000, Park 5,000, Pool 500); p3 shows 18,000 as operating grants (General Government) and 5,500 as capital grants and contributions (Culture and Recreation)",
+     "issue": "The report never names the grantor, so the line could be federal or private. It is already marked review, and the same applies to detail Grants lines detail[52]-[54]."},
+    {"severity": "warning", "path": "detail[63]", "page": 22,
+     "extracted": "General Fund p22 object lines (44,085 + 23,291 + 6,280 + 63,656 = 137,312) all category general government", "on_page": "p8 General Fund: General Government 136,876 + Public Safety 436",
+     "issue": "The object schedule doesn't separate the 436 of Public Safety spending, so the detail function split is 436 off the statement (already noted with review). The p22 lines tie to every fund's Total Expenditures: General 137,312, Street and Alley 195,014, City Hall 14,779, Park 42,945, Pool 35,698 = 425,748. The fund statement's function and principal/interest lines are not repeated, so nothing is double counted."},
     {"severity": "warning", "path": "disbursements[10].category", "page": 16,
-     "extracted": "utilities (no function field)", "on_page": "Other Operating Expenses 176,139 (listed among cost types: Personal Services, Contracted Services, Materials and Supplies, Depreciation)",
-     "issue": "Under the user's utility cost-type rule, a cost-type line labelled other operating expenses would be 'other' with function utilities, not a 'utilities' function line. The same applies to detail[105]-[108]."},
+     "extracted": "utilities", "on_page": "Other Operating Expenses 176,139",
+     "issue": "Judgment call under the utility cost-type rule (2026-10-28). The other lines here are by cost type (Personal Services, Contracted Services, Materials and Supplies, Depreciation), so this one may belong in 'other' (miscellaneous) with function utilities rather than 'utilities'. The per-fund detail lines (92,345 / 16,448 / 44,920 / 22,426) have the same question."},
     {"severity": "warning", "path": "basis", "page": 8,
-     "extracted": "GAAP", "on_page": "Governmental funds statements are titled 'Modified Cash Basis'; proprietary funds are accrual",
-     "issue": "basis GAAP (fund-balance roll-forward) is a judgment call for a modified-cash governmental presentation. The ending fund balance 477,800 includes Due from Proprietary Funds 25,733, so it is not cash. The identity holds as recorded."},
-    {"severity": "warning", "path": "ending_cash", "page": 7,
-     "extracted": 442402, "on_page": "Cash and Cash Equivalents 442,402; Cash at County Treasurer 9,665",
-     "issue": "ending_cash leaves out Cash at County Treasurer 9,665, a separate cash line on the governmental funds balance sheet."},
-    {"severity": "warning", "path": "receipts[18].category", "page": 8,
-     "extracted": "intergovernmental/state aid", "on_page": "Grants 23,500 (General 18,000, Park 5,000, Pool 500); Statement of Activities p3: operating grants 18,000 (General Government), capital grants 5,500 (Culture and Recreation)",
-     "issue": "The grantor isn't stated; these could be federal or private. A review note is already present."}
+     "extracted": "GAAP", "on_page": "Statement of Revenues, Expenditures and Changes in Fund Balances - Modified Cash Basis - Governmental Funds",
+     "issue": "The governmental funds are modified cash basis. GAAP was chosen because the statement rolls fund balance forward and the proprietary funds use accrual accounting; the notes explain this. The roll-forward ties: 396,510 + 489,754 - 425,748 + 9,600 + 7,684 = 477,800."},
+    {"severity": "warning", "path": "detail_totals[1]", "page": 8,
+     "extracted": "191,742 (computed: 196,682 less Loan Proceeds 4,940); Park detail_totals[3] 38,457 (41,201 less 2,744)", "on_page": "Total Revenue Street and Alley 196,682, Park 41,201 (Loan Proceeds printed inside revenues)",
+     "issue": "The loan proceeds are printed inside Total Revenue, and the extractor reduced the printed totals instead of keeping them. The rules would keep the printed totals and add printed_in: 'revenue' to the other-financing lines (detail[61], detail[62]). The arithmetic is right and the values are marked as computed."}
   ]
 }
