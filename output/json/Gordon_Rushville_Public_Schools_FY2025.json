@@ -3,7 +3,7 @@
   "entity_type": "school district",
   "fiscal_year_end": "2025-08-31",
   "basis": "cash",
-  "extraction_attempt": 1,
+  "extraction_attempt": 2,
   "beginning_cash": {
     "amount": 7912562,
     "source_page": 5
@@ -45,17 +45,56 @@
     {
       "fund_type": "governmental",
       "category": "Fines and Licenses",
-      "original_label": "County sources",
-      "amount": 84323,
+      "original_label": "County sources: 2110 County fines and license fees",
+      "amount": 83050,
       "source_page": 4,
-      "review": "County sources = 2110 County fines and license fees 83,050 + 2130 Other county sources 1,273 (General Fund schedule p7); dominant fines and forfeitures (code 2110 rule)"
+      "split_from": "County sources 84,323 (p4); breakdown General Fund schedule p7",
+      "computed": "General Fund 2110 County fines and license fees 83,050 (p7)"
+    },
+    {
+      "fund_type": "governmental",
+      "category": "intergovernmental/state aid",
+      "original_label": "County sources: 2130 Other county sources",
+      "amount": 1273,
+      "source_page": 4,
+      "split_from": "County sources 84,323 (p4); breakdown General Fund schedule p7",
+      "computed": "General Fund 2130 Other county sources 1,273 (p7)"
+    },
+    {
+      "fund_type": "governmental",
+      "category": "Homestead Exemption",
+      "original_label": "State receipts: Homestead exemption",
+      "amount": 93570,
+      "source_page": 4,
+      "split_from": "State receipts 5,124,220 (p4); breakdown fund schedules p7, p12",
+      "computed": "General Fund 3130 91,564 (p7) + Qualified Capital Purpose Undertaking 2,006 (p12)"
+    },
+    {
+      "fund_type": "governmental",
+      "category": "Property Tax Credit",
+      "original_label": "State receipts: Property tax credit",
+      "amount": 994852,
+      "source_page": 4,
+      "split_from": "State receipts 5,124,220 (p4); breakdown fund schedules p7, p12",
+      "computed": "General Fund 3131 928,973 (p7) + Qualified Capital Purpose Undertaking 65,879 (p12)"
+    },
+    {
+      "fund_type": "governmental",
+      "category": "Motor Vehicle Pro-Rate",
+      "original_label": "State receipts: Pro-rate motor vehicle",
+      "amount": 17578,
+      "source_page": 4,
+      "split_from": "State receipts 5,124,220 (p4); breakdown fund schedules p7, p12",
+      "computed": "General Fund 3180 17,244 (p7) + Qualified Capital Purpose Undertaking 334 (p12)"
     },
     {
       "fund_type": "governmental",
       "category": "intergovernmental/state aid",
       "original_label": "State receipts",
-      "amount": 5124220,
-      "source_page": 4
+      "amount": 4018220,
+      "source_page": 4,
+      "split_from": "State receipts 5,124,220 (p4); breakdown fund schedules p7, p12",
+      "computed": "remainder: 5,124,220 - homestead 93,570 - property tax credit 994,852 - pro-rate motor vehicle 17,578 (includes Special Building 'State sources' 97,852, p13, printed without breakdown)"
     },
     {
       "fund_type": "governmental",
@@ -195,7 +234,6 @@
       "original_label": "State programs",
       "amount": 13010,
       "source_page": 5,
-      "review": "state categorical programs listed separately from Instruction; classed as instruction",
       "category_decision": "user 2026-10-23"
     },
     {
@@ -204,7 +242,6 @@
       "original_label": "Federal programs",
       "amount": 654437,
       "source_page": 5,
-      "review": "federal programs (Title I, IDEA etc.) listed separately from Instruction; classed as instruction",
       "category_decision": "user 2026-10-23"
     },
     {
@@ -290,22 +327,22 @@
     }
   ],
   "balance_sheet": {
-    "statement": "Statement of Activities and Net Position - Cash Basis (assets and net position section)",
+    "statement": "Statement of Assets and Fund Balances - Cash Basis - Governmental Funds",
     "scope": "cash basis",
-    "column": "Total Governmental Activities (Primary Government)",
+    "column": "Total Governmental Funds (p6; total 9,700,778 equals the government-wide Statement of Activities and Net Position p3)",
     "assets": [
       {
         "category": "Cash and Cash Equivalents",
         "original_label": "Cash",
         "amount": 8627287,
-        "source_page": 3,
+        "source_page": 6,
         "fund_type": "governmental"
       },
       {
         "category": "Cash and Cash Equivalents",
-        "original_label": "Cash at county treasurers",
+        "original_label": "County treasurers balances",
         "amount": 1073491,
-        "source_page": 3,
+        "source_page": 6,
         "fund_type": "governmental"
       }
     ],
@@ -316,42 +353,56 @@
       {
         "original_label": "Restricted for Capital outlay",
         "amount": 265754,
-        "source_page": 3,
+        "source_page": 6,
         "category": "Restricted",
         "fund_type": "governmental"
       },
       {
         "original_label": "Restricted for Debt services",
         "amount": 741870,
-        "source_page": 3,
+        "source_page": 6,
         "category": "Restricted",
         "fund_type": "governmental"
       },
       {
         "original_label": "Restricted for School Nutrition Program",
         "amount": 11206,
-        "source_page": 3,
+        "source_page": 6,
         "category": "Restricted",
         "fund_type": "governmental"
       },
       {
-        "original_label": "Unrestricted",
-        "amount": 8681948,
-        "source_page": 3,
-        "category": "Unrestricted",
+        "original_label": "Committed",
+        "amount": 173667,
+        "source_page": 6,
+        "category": "Committed",
+        "fund_type": "governmental"
+      },
+      {
+        "original_label": "Assigned",
+        "amount": 883998,
+        "source_page": 6,
+        "category": "Assigned",
+        "fund_type": "governmental"
+      },
+      {
+        "original_label": "Unassigned",
+        "amount": 7624283,
+        "source_page": 6,
+        "category": "Unassigned",
         "fund_type": "governmental"
       }
     ],
     "total_assets": {
       "amount": 9700778,
-      "source_page": 3
+      "source_page": 6
     },
     "total_deferred_outflows": null,
     "total_liabilities": null,
     "total_deferred_inflows": null,
     "total_equity": {
       "amount": 9700778,
-      "source_page": 3
+      "source_page": 6
     }
   },
   "ending_cash": {
@@ -846,7 +897,7 @@
       "fund": "General",
       "department": "Instruction",
       "section": "expenditure",
-      "category": "Instruction",
+      "category": "Special Education Programs",
       "detail_category": "not itemized",
       "original_label": "1200 Special education programs",
       "amount": 1060102,
@@ -916,7 +967,7 @@
       "fund": "General",
       "department": "Support services - general administration",
       "section": "expenditure",
-      "category": "General Administration",
+      "category": "School Administration",
       "detail_category": "not itemized",
       "original_label": "2410 Office of the Principal",
       "amount": 641865,
@@ -1338,7 +1389,8 @@
       "original_label": "State sources",
       "amount": 97852,
       "budget_final": null,
-      "source_page": 13
+      "source_page": 13,
+      "review": "broad group; no breakdown printed (may hold homestead/property tax credit)"
     },
     {
       "schedule": "Budget and Actual - Special Building Fund",
@@ -1623,5 +1675,5 @@
       "source_page": 16
     }
   ],
-  "notes": "Cash-basis school district; all funds governmental (School Nutrition and Activities are governmental funds here), so business_type is null. Receipts/disbursements from the Total Governmental Funds column (trimmed pp4-5). Beginning 7,912,562 and ending 9,700,778 are the printed fund balances (p5). Printed total receipts 13,814,355 is 1 more than the lines add to (13,814,354); roll-forward ties with the lines. Transfers: General in 11,607 (from Cooperative), out 100,000 (School Nutrition 80,000 + Activities 20,000); cross-check ties. Activities Fund schedule prints 282,289 receipts which includes the 20,000 transfer; split using statement. General Fund schedule (pp7-10) is more detailed than the statement; the Depreciation Fund is combined into the General Fund column of the statement (statement GF beginning 6,860,874 = 5,099,540 + 1,761,334); it has its own detail schedule (p11). General Fund state sources lines add to 2,861,292 versus printed total 4,955,347 (see report_discrepancies). Detail budget-only lines with no actual (6310, 6421-6423, 6990, 6992, depreciation 'Other local receipts', coop local receipts) omitted. Detail 'budget_final' on Activities receipts is the budget for the combined line. Public power district sales tax classed as other taxes. State/federal program disbursements classed as instruction (review). Balance sheet from the cash-basis net position statement (p3); no liabilities. Read pages 1-16 of 16 Recheck: 'County sources' 84,323 recategorized to fines and forfeitures (83,050 is 2110 County fines and license fees, p7), detail 2110 likewise. Cooperative Fund schedule (p15) prints no total line, only the Transfers 11,607 disbursement (recorded as other financing), so it has no detail_totals entry."
+  "notes": "Cash-basis school district; all funds governmental (School Nutrition and Activities are governmental funds here), so business_type is null. Receipts/disbursements from the Total Governmental Funds column (trimmed pp4-5). Beginning 7,912,562 and ending 9,700,778 are the printed fund balances (p5). Printed total receipts 13,814,355 is 1 more than the lines add to (13,814,354); roll-forward ties with the lines. Transfers: General in 11,607 (from Cooperative), out 100,000 (School Nutrition 80,000 + Activities 20,000); cross-check ties. Activities Fund schedule prints 282,289 receipts which includes the 20,000 transfer; split using statement. General Fund schedule (pp7-10) is more detailed than the statement; the Depreciation Fund is combined into the General Fund column of the statement (statement GF beginning 6,860,874 = 5,099,540 + 1,761,334); it has its own detail schedule (p11). General Fund state sources lines add to 2,861,292 versus printed total 4,955,347 (see report_discrepancies). Detail budget-only lines with no actual (6310, 6421-6423, 6990, 6992, depreciation 'Other local receipts', coop local receipts) omitted. Detail 'budget_final' on Activities receipts is the budget for the combined line. Cooperative Fund schedule (p15) prints no total line, only the Transfers 11,607 disbursement (recorded as other financing), so it has no detail_totals entry. Attempt 2 (targeted re-check): statement 'State receipts' 5,124,220 split per the fund schedules into Homestead Exemption 93,570, Property Tax Credit 994,852, Motor Vehicle Pro-Rate 17,578 and state aid remainder 4,018,220 (Special Building 'State sources' 97,852 has no breakdown and stays in the remainder); 'County sources' 84,323 split into 2110 Fines and Licenses 83,050 and 2130 other county sources 1,273 (p7); balance sheet now from the governmental funds Statement of Assets and Fund Balances (p6, Total column, fund balance by classification), whose total equals the government-wide p3 figures; detail 2410 Office of the Principal -> School Administration, 1200 -> Special Education Programs. Read pages 1-16 of 16"
 }
