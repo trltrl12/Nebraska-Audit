@@ -3,7 +3,7 @@
   "entity_type": "school district",
   "fiscal_year_end": "2025-08-31",
   "basis": "cash",
-  "extraction_attempt": 2,
+  "extraction_attempt": 3,
   "beginning_cash": {
     "amount": 4676806,
     "source_page": 4
@@ -14,12 +14,23 @@
     {
       "fund_type": "governmental",
       "category": "property tax",
-      "original_label": "Local receipts - property taxes and penalties/interest",
-      "amount": 4790989,
+      "original_label": "Local receipts - property taxes",
+      "amount": 4753576,
       "source_page": 6,
       "split_from": "Local receipts 6,206,987 (p3)",
-      "computed": "General Fund 1110 Property taxes 4,649,762 + 1140 Penalties and interest 36,522 (p6) + Special Building property taxes 103,815 + penalties and interest 891 (p12), less 1 because the General Fund local lines add to 5,436,631 but p3/p6 print the General column/Total local sources as 5,436,630",
+      "computed": "General Fund 1110 Property taxes 4,649,762 (p6) + Special Building property taxes 103,815 (p12), less 1 because the General Fund local lines add to 5,436,631 but p3/p6 print the General column/Total local sources as 5,436,630",
       "review": "split of combined Local receipts line by fund schedules"
+    },
+    {
+      "fund_type": "governmental",
+      "category": "Penalties and Interest on Taxes",
+      "original_label": "Local receipts - penalties and interest on taxes",
+      "amount": 37413,
+      "source_page": 6,
+      "split_from": "Local receipts 6,206,987 (p3)",
+      "computed": "General Fund 1140 Penalties and interest on taxes 36,522 (p6) + Special Building 891 (p12)",
+      "review": "split of combined Local receipts line by fund schedules",
+      "detail_category": "Penalties and Interest on Taxes"
     },
     {
       "fund_type": "governmental",
@@ -149,10 +160,42 @@
     },
     {
       "fund_type": "governmental",
+      "category": "Homestead Exemption",
+      "original_label": "State receipts - homestead exemption",
+      "amount": 188403,
+      "source_page": 6,
+      "split_from": "State receipts 9,635,055 (p3)",
+      "computed": "General Fund 3130 Homestead exemption 184,312 (p6) + Special Building Homestead exemption 4,091 (p12)",
+      "detail_category": "Homestead Exemption"
+    },
+    {
+      "fund_type": "governmental",
+      "category": "Property Tax Credit",
+      "original_label": "State receipts - property tax credit",
+      "amount": 2345902,
+      "source_page": 6,
+      "split_from": "State receipts 9,635,055 (p3)",
+      "computed": "General Fund 3131 Property tax credit 2,294,964 (p6) + Special Building Property tax credit 50,938 (p12)",
+      "detail_category": "Property Tax Credit"
+    },
+    {
+      "fund_type": "governmental",
+      "category": "Motor Vehicle Pro-Rate",
+      "original_label": "State receipts - pro-rate motor vehicle",
+      "amount": 18010,
+      "source_page": 6,
+      "split_from": "State receipts 9,635,055 (p3)",
+      "computed": "General Fund 3180 Pro-rate motor vehicle 17,616 (p6) + Special Building Pro-rate motor vehicle 394 (p12)",
+      "detail_category": "Motor Vehicle Pro-Rate"
+    },
+    {
+      "fund_type": "governmental",
       "category": "intergovernmental/state aid",
       "original_label": "State receipts",
-      "amount": 9635055,
-      "source_page": 3
+      "amount": 7082740,
+      "source_page": 3,
+      "split_from": "State receipts 9,635,055 (p3)",
+      "computed": "State receipts 9,635,055 (p3) less homestead 188,403, property tax credit 2,345,902 and pro-rate motor vehicle 18,010 (pp6, 12); remainder = General Fund state aid 5,558,923, special education 1,146,560, flex funding 57,387, state apportionment 305,554, state categorical 11,338, other 62 (p6; lines add to 7,079,824, printed General state subtotal is 1 higher) + School Nutrition state reimbursement 2,915 (p11)"
     },
     {
       "fund_type": "governmental",
@@ -195,6 +238,7 @@
       "original_label": "Student support",
       "amount": 893694,
       "source_page": 3,
+      "detail_category": "Pupils",
       "split_from": "Student support 1,396,122 (p3; General Fund column 893,694 + Student Activity Fund column 502,428)"
     },
     {
@@ -256,12 +300,11 @@
     },
     {
       "fund_type": "governmental",
-      "category": "Instruction",
+      "category": "Categorical Corporation and Private",
       "original_label": "Private grants",
       "amount": 30103,
       "source_page": 3,
-      "review": "private and state categorical programs, function guessed",
-      "category_decision": "user 2026-10-23"
+      "review": "private categorical grants (code 3400, printed under 'Private and state categorical programs'); funded by 1925 Categorical grants from corporations"
     },
     {
       "fund_type": "governmental",
@@ -269,7 +312,6 @@
       "original_label": "State categorical programs",
       "amount": 25177,
       "source_page": 3,
-      "review": "categorical programs, function guessed",
       "category_decision": "user 2026-10-23"
     },
     {
@@ -278,7 +320,6 @@
       "original_label": "Federal programs",
       "amount": 761269,
       "source_page": 4,
-      "review": "federal programs, function guessed",
       "category_decision": "user 2026-10-23"
     },
     {
@@ -295,6 +336,7 @@
       "amount": 210426,
       "source_page": 4,
       "detail_category": "Principal and Interest (combined)",
+      "debt_service_part": "principal and interest (combined)",
       "category_decision": "user 2026-10-23"
     },
     {
@@ -337,22 +379,22 @@
   "business_type": null,
   "proprietary": null,
   "balance_sheet": {
-    "statement": "Statement of Activities and Net Position - Cash Basis (assets and net position)",
-    "scope": "cash basis",
-    "column": "Primary Government Total Governmental Activities",
+    "statement": "Statement of Assets and Fund Balances - Cash Basis, Governmental Funds",
+    "scope": "governmental funds",
+    "column": "Total Governmental Funds",
     "assets": [
       {
         "category": "Cash and Cash Equivalents",
         "original_label": "Cash in bank",
         "amount": 5270298,
-        "source_page": 2,
+        "source_page": 5,
         "fund_type": "governmental"
       },
       {
         "category": "Cash and Cash Equivalents",
         "original_label": "Cash at county treasurer",
         "amount": 1164282,
-        "source_page": 2,
+        "source_page": 5,
         "fund_type": "governmental"
       }
     ],
@@ -363,35 +405,56 @@
       {
         "original_label": "Restricted for Capital projects",
         "amount": 428158,
-        "source_page": 2,
-        "category": "Restricted",
+        "source_page": 5,
+        "category": "Restricted: Capital projects",
         "fund_type": "governmental"
       },
       {
         "original_label": "Restricted for School Nutrition Program",
         "amount": 275978,
-        "source_page": 2,
-        "category": "Restricted",
+        "source_page": 5,
+        "category": "Restricted: School Nutrition Program",
         "fund_type": "governmental"
       },
       {
-        "original_label": "Unrestricted",
-        "amount": 5730445,
-        "source_page": 2,
-        "category": "Unrestricted",
+        "original_label": "Committed Student activities",
+        "amount": 338658,
+        "source_page": 5,
+        "category": "Committed: Student activities",
+        "fund_type": "governmental"
+      },
+      {
+        "original_label": "Assigned Asset acquisitions",
+        "amount": 420366,
+        "source_page": 5,
+        "category": "Assigned: Asset acquisitions",
+        "fund_type": "governmental"
+      },
+      {
+        "original_label": "Assigned Student activities",
+        "amount": 67376,
+        "source_page": 5,
+        "category": "Assigned: Student activities",
+        "fund_type": "governmental"
+      },
+      {
+        "original_label": "Unassigned",
+        "amount": 4904046,
+        "source_page": 5,
+        "category": "Unassigned",
         "fund_type": "governmental"
       }
     ],
     "total_assets": {
       "amount": 6434581,
-      "source_page": 2
+      "source_page": 5
     },
     "total_deferred_outflows": null,
     "total_liabilities": null,
     "total_deferred_inflows": null,
     "total_equity": {
       "amount": 6434581,
-      "source_page": 2
+      "source_page": 5
     }
   },
   "ending_cash": {
@@ -872,7 +935,7 @@
       "fund": "General",
       "department": "Instructional services",
       "section": "expenditure",
-      "category": "Instruction",
+      "category": "Special Education Programs",
       "detail_category": "not itemized",
       "original_label": "1200 Special education instructional programs",
       "amount": 1271266,
@@ -983,14 +1046,13 @@
       "fund": "General",
       "department": "Private and state categorical programs",
       "section": "expenditure",
-      "category": "State Categorical Programs",
+      "category": "Categorical Corporation and Private",
       "detail_category": "not itemized",
       "original_label": "3400 Private grants",
       "amount": 30103,
       "budget_final": 26000,
       "source_page": 8,
-      "review": "function guessed",
-      "category_decision": "user 2026-10-23"
+      "review": "private categorical grants; funded by 1925 Categorical grants from corporations"
     },
     {
       "schedule": "Budget and Actual - General Fund",
@@ -1004,7 +1066,6 @@
       "amount": 25177,
       "budget_final": 250000,
       "source_page": 8,
-      "review": "function guessed",
       "category_decision": "user 2026-10-23"
     },
     {
@@ -1019,7 +1080,6 @@
       "amount": 184964,
       "budget_final": 184962,
       "source_page": 8,
-      "review": "function guessed",
       "category_decision": "user 2026-10-23"
     },
     {
@@ -1034,7 +1094,6 @@
       "amount": 29960,
       "budget_final": 29960,
       "source_page": 8,
-      "review": "function guessed",
       "category_decision": "user 2026-10-23"
     },
     {
@@ -1049,7 +1108,6 @@
       "amount": 8327,
       "budget_final": 8317,
       "source_page": 8,
-      "review": "function guessed",
       "category_decision": "user 2026-10-23"
     },
     {
@@ -1064,7 +1122,6 @@
       "amount": 271359,
       "budget_final": 275379,
       "source_page": 8,
-      "review": "function guessed",
       "category_decision": "user 2026-10-23"
     },
     {
@@ -1079,7 +1136,6 @@
       "amount": 7935,
       "budget_final": null,
       "source_page": 8,
-      "review": "function guessed",
       "category_decision": "user 2026-10-23"
     },
     {
@@ -1094,7 +1150,6 @@
       "amount": 25851,
       "budget_final": 25549,
       "source_page": 8,
-      "review": "function guessed",
       "category_decision": "user 2026-10-23"
     },
     {
@@ -1109,7 +1164,6 @@
       "amount": 198168,
       "budget_final": 150050,
       "source_page": 8,
-      "review": "function guessed",
       "category_decision": "user 2026-10-23"
     },
     {
@@ -1124,7 +1178,6 @@
       "amount": 15405,
       "budget_final": 12177,
       "source_page": 8,
-      "review": "function guessed",
       "category_decision": "user 2026-10-23"
     },
     {
@@ -1139,7 +1192,6 @@
       "amount": 19299,
       "budget_final": 113606,
       "source_page": 8,
-      "review": "function guessed",
       "category_decision": "user 2026-10-23"
     },
     {
@@ -1148,7 +1200,8 @@
       "fund": "General",
       "department": null,
       "section": "other financing",
-      "original_label": "8000 Transfers",
+      "original_label": "Transfers Out",
+      "printed_label": "8000 Transfers",
       "amount": -160569,
       "budget_final": -200000,
       "source_page": 8
@@ -1339,6 +1392,7 @@
       "amount": 210426,
       "budget_final": 243064,
       "source_page": 12,
+      "debt_service_part": "principal and interest (combined)",
       "category_decision": "user 2026-10-23"
     },
     {
@@ -1588,7 +1642,7 @@
       "fund": "Student Activity",
       "department": "Activity accounts (receipts group)",
       "section": "revenue",
-      "category": "charges for services/fees",
+      "category": "Extracurricular Receipts",
       "detail_category": "student activity receipts",
       "original_label": "Less transfers in included in account receipts",
       "amount": -150000,
@@ -1848,8 +1902,14 @@
     {
       "check": "balance",
       "difference": 1,
-      "source_page": 2,
-      "note": "Asset lines Cash in bank 5,270,298 + Cash at county treasurer 1,164,282 = 6,434,580; printed TOTAL ASSETS 6,434,581 (equity lines add to 6,434,581). p5 Cash in bank fund columns add to 5,270,299 vs printed 5,270,298."
+      "source_page": 5,
+      "note": "Asset lines Cash in bank 5,270,298 + Cash at county treasurer 1,164,282 = 6,434,580; printed TOTAL ASSETS 6,434,581. Cash in bank fund columns add to 5,270,299 vs printed 5,270,298."
+    },
+    {
+      "check": "balance",
+      "difference": -1,
+      "source_page": 5,
+      "note": "Fund balance lines 428,158 + 275,978 + 338,658 + 420,366 + 67,376 + 4,904,046 = 6,434,582 vs printed TOTAL FUND BALANCES 6,434,581."
     },
     {
       "check": "totals",
@@ -1864,5 +1924,5 @@
       "note": "p3-4 General Fund column: disbursement lines (including Federal programs 761,269) add to 14,221,857 vs printed Total disbursements 14,221,856."
     }
   ],
-  "notes": "Cash basis. Governmental funds Total column used (pages 3-4); School Nutrition Fund is a governmental fund column here so no business-type. Local receipts 6,206,987 (p3) is one printed line mixing taxes and other local receipts; p3 prints it by fund column and each fund's schedule itemizes its part (General p6, School Nutrition p11, Special Building p12, Student Fee p13, Cooperative p14, Activities p15), so it is split by category with split_from/computed/review. The General Fund local lines add to 5,436,631 vs the printed 5,436,630, so the property tax split part is 1 less than its lines to keep the split equal to 6,206,987. Student support 1,396,122 split by fund column (General 893,694 / Student Activity 502,428). Transfers in/out 160,569 each in total column; net zero. Federal programs on p4 (761,269) differs by 1 from General Fund schedule lines (761,268); recorded as printed. Detail: General Fund budget schedule (pp6-8); School Nutrition (p11), Special Building (p12), Student Fee (p13), Cooperative (p14) fund schedules, all itemized by printed line. 1990 Other local receipts had budget 40 and no actual, omitted. Depreciation Fund schedule (p10) has no actual activity (budget capital outlay 420,365), omitted. Student Fee Fund has one receipt and one disbursement line with no printed totals, so no detail_totals for it. Activities Fund: per-account schedule (p16) recorded instead of the one-line budget schedule on p15; account receipts total 582,276 includes the 150,000 transfer in shown on p15, so a review contra line (-150,000, revenue) and an other financing +150,000 line are recorded, detail_totals revenue 582,276 includes other financing. Nutrition, Cooperative total receipts printed on schedules include transfers in (10,272; 297), recorded as other financing with includes. Balance sheet from the cash-basis statement of net position (p2) which has no liabilities. Page numbers: 1 activities statement, 2 net position, 3-5 governmental funds statements, 6-9 General Fund, 10 Depreciation, 11-14 fund schedules, 15-16 Activities Fund. Read pages 1-16 of 16."
+  "notes": "Cash basis. Governmental funds Total column used (pages 3-4); School Nutrition Fund is a governmental fund column here so no business-type. Local receipts 6,206,987 (p3) is one printed line mixing taxes and other local receipts; p3 prints it by fund column and each fund's schedule itemizes its part (General p6, School Nutrition p11, Special Building p12, Student Fee p13, Cooperative p14, Activities p15), so it is split by category with split_from/computed/review; penalties and interest on taxes are split out of property tax (attempt 3). The General Fund local lines add to 5,436,631 vs the printed 5,436,630, so the property tax split part is 1 less than its lines to keep the split equal to 6,206,987. State receipts 9,635,055 (p3) split (attempt 3) using the General Fund (p6) and Special Building (p12) schedules into Homestead Exemption 188,403, Property Tax Credit 2,345,902, Motor Vehicle Pro-Rate 18,010 and remaining state aid 7,082,740. Student support 1,396,122 split by fund column (General 893,694 Pupils / Student Activity 502,428). 3400 Private grants spending is Categorical Corporation and Private (attempt 3). 1200 Special education detail line is Special Education Programs. Debt service 210,426 is never split into principal and interest in the report (combined). Transfers in/out 160,569 each in total column; net zero. Federal programs on p4 (761,269) differs by 1 from General Fund schedule lines (761,268); recorded as printed. Detail: General Fund budget schedule (pp6-8); School Nutrition (p11), Special Building (p12), Student Fee (p13), Cooperative (p14) fund schedules, all itemized by printed line. 1990 Other local receipts had budget 40 and no actual, omitted. Depreciation Fund schedule (p10) has no actual activity (budget capital outlay 420,365), omitted. Student Fee Fund has one receipt and one disbursement line with no printed totals, so no detail_totals for it. Activities Fund: per-account schedule (p16) recorded instead of the one-line budget schedule on p15; account receipts total 582,276 includes the 150,000 transfer in shown on p15, so a review contra line (-150,000, revenue) and an other financing +150,000 line are recorded, detail_totals revenue 582,276 includes other financing. Nutrition, Cooperative total receipts printed on schedules include transfers in (10,272; 297), recorded as other financing with includes. Balance sheet (attempt 3): the governmental funds Statement of Assets and Fund Balances - Cash Basis (p5, Total Governmental Funds column, fund balance by classification) is used because its totals (6,434,581) equal the government-wide cash-basis net position statement (p2); no liabilities. Page numbers: 1 activities statement, 2 net position, 3-5 governmental funds statements, 6-9 General Fund, 10 Depreciation, 11-14 fund schedules, 15-16 Activities Fund. Report page 34 is not in the trimmed PDF. Read pages 1-16 of 16."
 }

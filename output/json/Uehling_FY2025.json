@@ -3,7 +3,7 @@
   "entity_type": "village",
   "fiscal_year_end": "2025-09-30",
   "basis": "cash",
-  "extraction_attempt": 1,
+  "extraction_attempt": 2,
   "beginning_cash": {
     "amount": 400290,
     "source_page": 4,
@@ -294,14 +294,16 @@
       "category": "utilities",
       "original_label": "Utilities",
       "amount": 7116,
-      "source_page": 11
+      "source_page": 11,
+      "function": "utilities"
     },
     {
       "fund_type": "business-type",
       "category": "utilities",
       "original_label": "Communications",
       "amount": 1156,
-      "source_page": 11
+      "source_page": 11,
+      "function": "utilities"
     },
     {
       "fund_type": "business-type",
@@ -313,10 +315,11 @@
     },
     {
       "fund_type": "business-type",
-      "category": "utilities",
+      "category": "Purchased Power/Cost of Sales",
       "original_label": "Cost of Water",
       "amount": 16734,
-      "source_page": 11
+      "source_page": 11,
+      "function": "utilities"
     },
     {
       "fund_type": "business-type",
@@ -352,25 +355,30 @@
     },
     {
       "fund_type": "business-type",
-      "category": "utilities",
+      "category": "Dues, Training and Travel",
       "original_label": "School",
       "amount": 1026,
-      "source_page": 11
+      "source_page": 11,
+      "function": "utilities"
     },
     {
       "fund_type": "business-type",
-      "category": "utilities",
+      "category": "Repairs and Maintenance",
       "original_label": "Water Tower Maintenance",
       "amount": 74278,
-      "source_page": 11
+      "source_page": 11,
+      "function": "utilities",
+      "review": "large water tower maintenance project in Water Fund operating disbursements; cost type assumed repairs and maintenance"
     },
     {
       "fund_type": "business-type",
       "category": "capital outlay",
-      "original_label": "Capital Outlay",
+      "original_label": "Capital Outlay: Utilities",
+      "printed_label": "Capital Outlay",
       "amount": 3350,
       "source_page": 11,
-      "outside_printed_total": true
+      "outside_printed_total": true,
+      "computed": "capital outlay under function utilities"
     },
     {
       "fund_type": "business-type",
@@ -442,36 +450,36 @@
   },
   "proprietary": null,
   "balance_sheet": {
-    "statement": "Statement of Net Position - Modified Cash Basis",
+    "statement": "Balance Sheet - Governmental Funds, Modified Cash Basis (governmental lines, p3); Statement of Net Position - Modified Cash Basis (business-type lines and totals, p1)",
     "scope": "cash basis",
-    "column": "Governmental Activities | Business-Type Activities | Total (each line tagged fund_type)",
+    "column": "Governmental funds Total column (p3) | Business-Type Activities (p1); each line tagged fund_type",
     "assets": [
       {
         "fund_type": "governmental",
         "category": "Cash and Cash Equivalents",
         "original_label": "Cash and Equivalents",
         "amount": 392753,
-        "source_page": 1
-      },
-      {
-        "fund_type": "business-type",
-        "category": "Cash and Cash Equivalents",
-        "original_label": "Cash and Equivalents",
-        "amount": 283509,
-        "source_page": 1
+        "source_page": 3
       },
       {
         "fund_type": "governmental",
         "category": "restricted assets",
         "original_label": "Restricted Cash",
         "amount": 40154,
-        "source_page": 1
+        "source_page": 3
       },
       {
         "fund_type": "governmental",
-        "category": "due from other governments",
+        "category": "Cash and Cash Equivalents",
         "original_label": "Due from County Treasurer",
         "amount": 3058,
+        "source_page": 3
+      },
+      {
+        "fund_type": "business-type",
+        "category": "Cash and Cash Equivalents",
+        "original_label": "Cash and Equivalents",
+        "amount": 283509,
         "source_page": 1
       }
     ],
@@ -482,19 +490,19 @@
         "category": "Accrued Liabilities",
         "original_label": "Payroll taxes",
         "amount": 0,
-        "source_page": 1
-      },
-      {
-        "fund_type": "business-type",
-        "category": "Accrued Liabilities",
-        "original_label": "Payroll taxes",
-        "amount": 0,
-        "source_page": 1
+        "source_page": 3
       },
       {
         "fund_type": "governmental",
         "category": "other liabilities",
         "original_label": "Deposits",
+        "amount": 0,
+        "source_page": 3
+      },
+      {
+        "fund_type": "business-type",
+        "category": "Accrued Liabilities",
+        "original_label": "Payroll taxes",
         "amount": 0,
         "source_page": 1
       },
@@ -510,17 +518,17 @@
     "equity": [
       {
         "fund_type": "governmental",
-        "original_label": "Restricted for debt service",
-        "amount": 41156,
-        "source_page": 1,
-        "category": "Restricted"
+        "original_label": "Fund balance - unassigned",
+        "amount": 394809,
+        "source_page": 3,
+        "category": "Unassigned"
       },
       {
         "fund_type": "governmental",
-        "original_label": "Unrestricted",
-        "amount": 394809,
-        "source_page": 1,
-        "category": "Unrestricted"
+        "original_label": "Fund balance - restricted",
+        "amount": 41156,
+        "source_page": 3,
+        "category": "Restricted"
       },
       {
         "fund_type": "business-type",
@@ -1695,11 +1703,25 @@
       "source_page": 5
     },
     {
-      "schedule": "General Fund Disbursements (G&A, Street, Parks)",
+      "schedule": "General Fund Disbursements - General and Administrative",
       "fund": "General",
       "section": "expenditure",
-      "amount": 474585,
-      "source_page": 5
+      "amount": 319240,
+      "source_page": 6
+    },
+    {
+      "schedule": "General Fund Disbursements - Street Department",
+      "fund": "General",
+      "section": "expenditure",
+      "amount": 135113,
+      "source_page": 7
+    },
+    {
+      "schedule": "General Fund Disbursements - Parks",
+      "fund": "General",
+      "section": "expenditure",
+      "amount": 20232,
+      "source_page": 8
     },
     {
       "schedule": "Budget and Actual - Debt Service Fund",
@@ -1716,5 +1738,5 @@
       "source_page": 9
     }
   ],
-  "notes": "Village of Uehling, modified cash basis, fiscal year ended Sept 30, 2025; basis recorded as cash. Governmental receipts/disbursements from the Total column of the governmental funds statement (p4: General + Debt Service). Beginning/ending cash = total governmental fund balances (sums of General and Debt Service, computed); the ending balance 435,965 includes due from county treasurer 3,058 (balance sheet cash 392,753 + restricted cash 40,154). Other financing: bond proceeds 300,000 -> debt_proceeds; Other Grants 500 + Sale of Assets 20,000 -> other_financing; transfers (out) 82,171 -> transfers_out. Roll-forward: 400,290 + 312,461 - 515,115 + 300,000 + 20,500 - 82,171 = 435,965. Business-type (Water + Sewer, proprietary statement p11, Total column): operating receipts 125,071 and operating disbursements 160,568 are the printed totals; interest income 8,462, capital outlay 3,350 and debt service 32,962 are printed below the net operating receipts line and recorded with outside_printed_total; transfer from other funds 82,171 -> business_type.transfers_net. Roll-forward: 264,685 + 133,533 - 196,880 + 82,171 = 283,509. Business-type 'Debt service' 32,962 is not split between principal and interest. Balance sheet: Statement of Net Position (p1) Total column (governmental + business-type). Detail: General Fund revenue lines from the p5 budget-and-actual schedule; General Fund disbursements by object from the department schedules pp6-8 (General and Administrative, Street, Parks), which supersede the one-line function disbursements on p5 (not duplicated); Debt Service Fund from p9. Within the G&A schedule all lines carry the department's function (general government) even for Police contract, Garbage and Auditorium expenses, so function totals tie to the statement. Water and Sewer fund columns on p11 not repeated in detail (no separate utility budget schedule). Read pages 1-11 of 11"
+  "notes": "Village of Uehling, modified cash basis, fiscal year ended Sept 30, 2025; basis recorded as cash. Governmental receipts/disbursements from the Total column of the governmental funds statement (p4: General + Debt Service). Beginning/ending cash = total governmental fund balances (sums of General and Debt Service, computed); the ending balance 435,965 includes due from county treasurer 3,058 (balance sheet cash 392,753 + restricted cash 40,154). Other financing: bond proceeds 300,000 -> debt_proceeds; Other Grants 500 + Sale of Assets 20,000 -> other_financing; transfers (out) 82,171 -> transfers_out. Roll-forward: 400,290 + 312,461 - 515,115 + 300,000 + 20,500 - 82,171 = 435,965. Business-type (Water + Sewer, proprietary statement p11, Total column): operating receipts 125,071 and operating disbursements 160,568 are the printed totals; interest income 8,462, capital outlay 3,350 and debt service 32,962 are printed below the net operating receipts line and recorded with outside_printed_total; transfer from other funds 82,171 -> business_type.transfers_net. Roll-forward: 264,685 + 133,533 - 196,880 + 82,171 = 283,509. Business-type 'Debt service' 32,962 is not split between principal and interest. Detail: General Fund revenue lines from the p5 budget-and-actual schedule; General Fund disbursements by object from the department schedules pp6-8 (General and Administrative, Street, Parks), which supersede the one-line function disbursements on p5 (not duplicated); Debt Service Fund from p9. Within the G&A schedule all lines carry the department's function (general government) even for Police contract, Garbage and Auditorium expenses, so function totals tie to the statement. Water and Sewer fund columns on p11 not repeated in detail (no separate utility budget schedule). Re-check (attempt 2): balance sheet governmental lines now from the Balance Sheet - Governmental Funds (p3, Total column; fund balance unassigned/restricted), whose totals (435,965) equal the government-wide governmental column on p1; business-type lines and the printed all-funds totals stay from the Statement of Net Position (p1). Utility spending by cost type: Cost of Water -> Purchased Power/Cost of Sales, School -> Dues, Training and Travel, Water Tower Maintenance -> Repairs and Maintenance (review), utility bills (Utilities, Communications) stay utilities; all with function utilities; business-type Capital Outlay relabelled 'Capital Outlay: Utilities'. General Fund disbursement detail totals now recorded per department schedule (G&A 319,240 p6, Street 135,113 p7, Parks 20,232 p8; sum 474,585 = p5). Read pages 1-11 of 11"
 }

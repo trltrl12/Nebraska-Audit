@@ -3,7 +3,7 @@
   "entity_type": "school district",
   "fiscal_year_end": "2025-08-31",
   "basis": "cash",
-  "extraction_attempt": 1,
+  "extraction_attempt": 2,
   "beginning_cash": {
     "amount": 5135831,
     "source_page": 5
@@ -108,14 +108,43 @@
       "original_label": "County receipts",
       "amount": 15897,
       "source_page": 4,
-      "review": "printed as County receipts; budget schedule p8 labels it Fines and licenses (county)"
+      "review": "printed as County receipts; budget schedule p8 labels it 2110 Fines and licenses (county)"
+    },
+    {
+      "fund_type": "governmental",
+      "category": "Homestead Exemption",
+      "original_label": "State receipts",
+      "amount": 73066,
+      "source_page": 4,
+      "split_from": "State receipts 2,600,023 (p4); 3130 Homestead exemption: General 64,805 (p8) + Bond 7,461 (p14) + Special Building 800 (p15)",
+      "computed": "64,805 + 7,461 + 800"
+    },
+    {
+      "fund_type": "governmental",
+      "category": "Property Tax Credit",
+      "original_label": "State receipts",
+      "amount": 1487876,
+      "source_page": 4,
+      "split_from": "State receipts 2,600,023 (p4); 3131 Property tax credit: General 1,424,469 (p8) + Bond 45,821 (p14) + Special Building 17,586 (p15)",
+      "computed": "1,424,469 + 45,821 + 17,586"
+    },
+    {
+      "fund_type": "governmental",
+      "category": "Motor Vehicle Pro-Rate",
+      "original_label": "State receipts",
+      "amount": 10922,
+      "source_page": 4,
+      "split_from": "State receipts 2,600,023 (p4); 3180 Pro-rate motor vehicle: General 9,708 (p8) + Bond 1,135 (p14) + Special Building 79 (p15)",
+      "computed": "9,708 + 1,135 + 79"
     },
     {
       "fund_type": "governmental",
       "category": "intergovernmental/state aid",
       "original_label": "State receipts",
-      "amount": 2600023,
-      "source_page": 4
+      "amount": 1028159,
+      "source_page": 4,
+      "split_from": "State receipts 2,600,023 (p4); remainder after homestead 73,066, property tax credit 1,487,876 and pro-rate motor vehicle 10,922 (state aid, special education, apportionment, other state receipts, nutrition state reimbursement)",
+      "computed": "2,600,023 - 73,066 - 1,487,876 - 10,922"
     },
     {
       "fund_type": "governmental",
@@ -138,8 +167,22 @@
       "fund_type": "governmental",
       "category": "Instruction",
       "original_label": "Instruction",
-      "amount": 3096460,
+      "amount": 2616079,
       "source_page": 5,
+      "split_from": "Instruction 3,096,460 (p5): General Fund instruction 2,886,525 (p7) less special education codes 1200/1291/1292/1295 480,381 (p9), plus reclassification 209,935 (p7)",
+      "computed": "3,096,460 - 480,381",
+      "review": "statement Instruction split by the p9 function codes",
+      "category_decision": "user 2026-10-23"
+    },
+    {
+      "fund_type": "governmental",
+      "category": "Special Education Programs",
+      "original_label": "Instruction",
+      "amount": 480381,
+      "source_page": 5,
+      "split_from": "Instruction 3,096,460 (p5): codes 1200 434,977 + 1291 33,777 + 1292 10,238 + 1295 1,389 (p9)",
+      "computed": "434,977 + 33,777 + 10,238 + 1,389",
+      "review": "statement Instruction split by the p9 function codes",
       "category_decision": "user 2026-10-23"
     },
     {
@@ -174,8 +217,22 @@
       "fund_type": "governmental",
       "category": "General Administration",
       "original_label": "General administraton",
-      "amount": 831121,
+      "amount": 306032,
       "source_page": 5,
+      "split_from": "General administraton 831,121 (p5): codes 2310 67,745 + 2320 234,817 + 2330 3,470 (p9)",
+      "computed": "67,745 + 234,817 + 3,470",
+      "review": "statement line split by the p9 function codes (2300s vs 2400s)",
+      "category_decision": "user 2026-10-23"
+    },
+    {
+      "fund_type": "governmental",
+      "category": "School Administration",
+      "original_label": "General administraton",
+      "amount": 525089,
+      "source_page": 5,
+      "split_from": "General administraton 831,121 (p5): codes 2410 Office of the principal 511,897 + 2490 School administration - other 13,192 (p9)",
+      "computed": "511,897 + 13,192",
+      "review": "statement line split by the p9 function codes (2300s vs 2400s)",
       "category_decision": "user 2026-10-23"
     },
     {
@@ -254,22 +311,22 @@
   "business_type": null,
   "proprietary": null,
   "balance_sheet": {
-    "statement": "Statement of Activities and Net Position - Modified Cash Basis (assets and net position, p3)",
+    "statement": "Statement of Assets and Fund Balances - Modified Cash Basis - Governmental Funds",
     "scope": "cash basis",
-    "column": "Primary Government Total Governmental Activities",
+    "column": "Total Governmental Funds",
     "assets": [
       {
         "category": "Cash and Cash Equivalents",
         "original_label": "Cash",
         "amount": 4557945,
-        "source_page": 3,
+        "source_page": 6,
         "fund_type": "governmental"
       },
       {
         "category": "Cash and Cash Equivalents",
         "original_label": "Cash at county treasurers",
         "amount": 719737,
-        "source_page": 3,
+        "source_page": 6,
         "fund_type": "governmental"
       }
     ],
@@ -278,51 +335,79 @@
     "deferred_inflows": [],
     "equity": [
       {
-        "original_label": "Restricted for capital outlay",
-        "amount": 318437,
-        "source_page": 3,
-        "category": "Restricted",
-        "fund_type": "governmental"
-      },
-      {
-        "original_label": "Restricted for debt service",
+        "original_label": "Restricted for: Debt service",
         "amount": 741460,
-        "source_page": 3,
+        "source_page": 6,
         "category": "Restricted",
         "fund_type": "governmental"
       },
       {
-        "original_label": "Restricted for nutrition program",
+        "original_label": "Restricted for: Capital outlay",
+        "amount": 318437,
+        "source_page": 6,
+        "category": "Restricted",
+        "fund_type": "governmental"
+      },
+      {
+        "original_label": "Restricted for: Nutrition program",
         "amount": 49830,
-        "source_page": 3,
+        "source_page": 6,
         "category": "Restricted",
         "fund_type": "governmental"
       },
       {
-        "original_label": "Restricted for scholarship endowment",
+        "original_label": "Restricted for: Scholarship endowment",
         "amount": 8512,
-        "source_page": 3,
+        "source_page": 6,
         "category": "Restricted",
         "fund_type": "governmental"
       },
       {
-        "original_label": "Unrestricted",
-        "amount": 4159443,
-        "source_page": 3,
-        "category": "Unrestricted",
+        "original_label": "Committed: Student activities",
+        "amount": 148443,
+        "source_page": 6,
+        "category": "Committed",
+        "fund_type": "governmental"
+      },
+      {
+        "original_label": "Assigned for: Capital outlay",
+        "amount": 806143,
+        "source_page": 6,
+        "category": "Assigned",
+        "fund_type": "governmental"
+      },
+      {
+        "original_label": "Assigned for: Employee benefits",
+        "amount": 56482,
+        "source_page": 6,
+        "category": "Assigned",
+        "fund_type": "governmental"
+      },
+      {
+        "original_label": "Assigned for: Future year's budget",
+        "amount": 1159618,
+        "source_page": 6,
+        "category": "Assigned",
+        "fund_type": "governmental"
+      },
+      {
+        "original_label": "Unassigned",
+        "amount": 1988757,
+        "source_page": 6,
+        "category": "Unassigned",
         "fund_type": "governmental"
       }
     ],
     "total_assets": {
       "amount": 5277682,
-      "source_page": 3
+      "source_page": 6
     },
     "total_deferred_outflows": null,
     "total_liabilities": null,
     "total_deferred_inflows": null,
     "total_equity": {
       "amount": 5277682,
-      "source_page": 3
+      "source_page": 6
     }
   },
   "ending_cash": {
@@ -465,8 +550,7 @@
       "original_label": "2110 Fines and licenses",
       "amount": 15897,
       "budget_final": 6000,
-      "source_page": 8,
-      "review": "county fines and licenses mix; fines dominant"
+      "source_page": 8
     },
     {
       "schedule": "Budget and Actual - General Fund",
@@ -782,7 +866,7 @@
       "fund": "General",
       "department": "Instruction",
       "section": "expenditure",
-      "category": "Instruction",
+      "category": "Special Education Programs",
       "detail_category": "not itemized",
       "original_label": "1200 Special education programs",
       "amount": 434977,
@@ -796,7 +880,7 @@
       "fund": "General",
       "department": "Instruction",
       "section": "expenditure",
-      "category": "Instruction",
+      "category": "Special Education Programs",
       "detail_category": "not itemized",
       "original_label": "1291 Special education programs - ages 3-5",
       "amount": 33777,
@@ -810,7 +894,7 @@
       "fund": "General",
       "department": "Instruction",
       "section": "expenditure",
-      "category": "Instruction",
+      "category": "Special Education Programs",
       "detail_category": "not itemized",
       "original_label": "1292 Special education programs - ages 0-2",
       "amount": 10238,
@@ -824,7 +908,7 @@
       "fund": "General",
       "department": "Instruction",
       "section": "expenditure",
-      "category": "Instruction",
+      "category": "Special Education Programs",
       "detail_category": "not itemized",
       "original_label": "1295 Special education programs - unified sports",
       "amount": 1389,
@@ -1090,7 +1174,7 @@
       "fund": "General",
       "department": "Support services - general administration",
       "section": "expenditure",
-      "category": "General Administration",
+      "category": "School Administration",
       "detail_category": "not itemized",
       "original_label": "2410 Office of the principal",
       "amount": 511897,
@@ -1104,7 +1188,7 @@
       "fund": "General",
       "department": "Support services - general administration",
       "section": "expenditure",
-      "category": "General Administration",
+      "category": "School Administration",
       "detail_category": "not itemized",
       "original_label": "2490 School administration - other",
       "amount": 13192,
@@ -1253,13 +1337,14 @@
       "fund": "General",
       "department": "Community Services Operations",
       "section": "expenditure",
-      "category": "student transportation",
+      "category": "Community Service Operations",
       "detail_category": "not itemized",
       "original_label": "3300 Community Services Operations",
       "amount": 199,
       "budget_final": null,
       "source_page": 10,
-      "review": "p7 transportation column (473,057) includes this 199, so placed under student transportation"
+      "review": "school code 3300 is Community Service Operations; the p7 statement counts these 199 inside Student transportation 473,057",
+      "category_decision": "user 2026-10-23"
     },
     {
       "schedule": "Budget and Actual - General Fund",
@@ -1396,7 +1481,8 @@
       "fund": "General",
       "department": null,
       "section": "other financing",
-      "original_label": "8000 Transfers (to Nutrition 50,000 and Activities 50,000 per p13, p16)",
+      "original_label": "Transfers Out",
+      "printed_label": "8000 Transfers",
       "amount": -100000,
       "budget_final": -575000,
       "source_page": 10
@@ -2082,16 +2168,5 @@
       "computed": "total disbursements line printed blank; equals the single line 2900 (228,293)"
     }
   ],
-  "decision_needed": [
-    {
-      "question": "GF budget line '3300 Community Services Operations' 199 (p10) is not a transportation code, but the report's own p7 General Fund statement includes it in Student transportation 473,057 (2710-2730 lines add to 472,858). Keep it under student transportation to match p7, or move it to other/support services?",
-      "amount": {
-        "amount": 199,
-        "source_page": 10
-      },
-      "recorded_as": "detail category student transportation, with review",
-      "source_page": 10
-    }
-  ],
-  "notes": "Modified cash basis school district; governmental funds only (no business-type funds; nutrition is a governmental fund here). Receipts/disbursements from Total Governmental Funds column (p4-5); beginning/ending cash = fund balances 5,135,831 / 5,277,682 (cash and cash at county treasurers). Balance sheet from p3 (net position, cash basis, no liabilities). Transfers 100,000 in (Other Governmental Funds: Nutrition 50,000 + Activities 50,000) and 100,000 out (General Fund). Detail: p7 General Fund components combining schedule not recorded (same GF lines as the more detailed budget schedule p8-10; double counting avoided). General Fund budget schedule lines tie to p7 GF column; p7 Reclassifications column shows 225,000 of transfers (to Depreciation 200,000 and Employee Benefit 25,000) hidden in GF spending, so contra lines and other financing lines were added (matching Depreciation p11 and Employee Benefit p12 transfers in). GF budget schedule printed total disbursements 5,712,886 includes 8000 Transfers 100,000. Detail budget_final given only where printed on the same line (group heading budgets omitted). Statement of Activities p1-2 not used for detail. Receipts category for 'Other' and 'Other local receipts' left as other with review. Activities Fund spending (228,293) is printed within 'Student support services' on the p5 statement (Other Governmental Funds column); split out as student activities by column. Read pages 1-16 of 16."
+  "notes": "Modified cash basis school district; governmental funds only (no business-type funds; nutrition is a governmental fund here). Receipts/disbursements from Total Governmental Funds column (p4-5); beginning/ending cash = fund balances 5,135,831 / 5,277,682 (cash and cash at county treasurers). Transfers 100,000 in (Other Governmental Funds: Nutrition 50,000 + Activities 50,000) and 100,000 out (General Fund). Detail: p7 General Fund components combining schedule not recorded (same GF lines as the more detailed budget schedule p8-10; double counting avoided). General Fund budget schedule lines tie to p7 GF column; p7 Reclassifications column shows 225,000 of transfers (to Depreciation 200,000 and Employee Benefit 25,000) hidden in GF spending, so contra lines and other financing lines were added (matching Depreciation p11 and Employee Benefit p12 transfers in). GF budget schedule printed total disbursements 5,712,886 includes 8000 Transfers 100,000. Detail budget_final given only where printed on the same line (group heading budgets omitted). Statement of Activities p1-2 not used for detail. Activities Fund spending (228,293) is printed within 'Student support services' on the p5 statement (Other Governmental Funds column); split out as student activities by column. Attempt 2 (targeted re-check): (1) 'State receipts' 2,600,023 split using the fund schedules into Homestead Exemption 73,066, Property Tax Credit 1,487,876, Motor Vehicle Pro-Rate 10,922 and remaining state aid 1,028,159 (GF p8 2,523,894 + Bond p14 54,417 + Special Building p15 21,074 + Nutrition p13 638). (2) Balance sheet now from the governmental funds Statement of Assets and Fund Balances (p6, Total Governmental Funds, fund balance by classification) since its total 5,277,682 equals the government-wide p3 figure. (3) School function codes: 1200/1291/1292/1295 -> Special Education Programs, 2410/2490 -> School Administration, 3300 -> Community Service Operations (this settles the earlier decision_needed question; the p7 statement still counts the 199 in Student transportation). Statement lines split by the p9 codes: Instruction 3,096,460 = Instruction 2,616,079 + Special Education Programs 480,381; General administraton 831,121 = General Administration 306,032 + School Administration 525,089. (4) GF '8000 Transfers' relabelled Transfers Out (printed text in printed_label). Read pages 1-16 of 16."
 }

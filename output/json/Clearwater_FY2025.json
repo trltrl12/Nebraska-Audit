@@ -3,7 +3,7 @@
   "entity_type": "village",
   "fiscal_year_end": "2025-09-30",
   "basis": "cash",
-  "extraction_attempt": 1,
+  "extraction_attempt": 2,
   "beginning_cash": {
     "amount": 349028,
     "source_page": 4
@@ -146,7 +146,8 @@
       "category": "utilities",
       "original_label": "Utilities",
       "amount": 53618,
-      "source_page": 6
+      "source_page": 6,
+      "function": "utilities"
     },
     {
       "fund_type": "business-type",
@@ -239,16 +240,16 @@
   },
   "proprietary": null,
   "balance_sheet": {
-    "statement": "Statement of Net Position - Modified Cash Basis",
+    "statement": "Balance Sheet - Modified Cash Basis - Governmental Funds (governmental lines) / Statement of Net Position - Modified Cash Basis (business-type lines and totals)",
     "scope": "cash basis",
-    "column": "Governmental Activities | Business-type Activities | Total (each line tagged fund_type)",
+    "column": "Total Governmental Funds (p3) | Business-type Activities (p1); totals from the p1 Total column (each line tagged fund_type)",
     "assets": [
       {
         "fund_type": "governmental",
         "category": "Cash and Cash Equivalents",
         "original_label": "Cash and cash equivalents",
         "amount": 200100,
-        "source_page": 1
+        "source_page": 3
       },
       {
         "fund_type": "business-type",
@@ -262,21 +263,21 @@
         "category": "restricted assets",
         "original_label": "Restricted cash",
         "amount": 66039,
-        "source_page": 1
+        "source_page": 3
       },
       {
         "fund_type": "governmental",
         "category": "Cash and Cash Equivalents",
         "original_label": "Cash at county treasurer",
         "amount": 2602,
-        "source_page": 1
+        "source_page": 3
       },
       {
         "fund_type": "governmental",
         "category": "Investments",
         "original_label": "Certificates of deposit",
         "amount": 122747,
-        "source_page": 1
+        "source_page": 3
       },
       {
         "fund_type": "business-type",
@@ -297,10 +298,11 @@
     "liabilities": [
       {
         "fund_type": "governmental",
-        "category": "Accrued Liabilities",
-        "original_label": "Payroll withholdings",
+        "category": "accounts payable",
+        "original_label": "Accounts payable and accrued expenses",
         "amount": 9769,
-        "source_page": 1
+        "source_page": 3,
+        "review": "line mixes accounts payable and accrued expenses; government-wide p1 prints it as Payroll withholdings"
       },
       {
         "fund_type": "business-type",
@@ -316,15 +318,22 @@
         "fund_type": "governmental",
         "original_label": "Restricted",
         "amount": 66039,
-        "source_page": 1,
+        "source_page": 3,
         "category": "Restricted"
       },
       {
         "fund_type": "governmental",
-        "original_label": "Unrestricted",
-        "amount": 315680,
-        "source_page": 1,
-        "category": "Unrestricted"
+        "original_label": "Committed",
+        "amount": 142679,
+        "source_page": 3,
+        "category": "Committed"
+      },
+      {
+        "fund_type": "governmental",
+        "original_label": "Unassigned",
+        "amount": 173001,
+        "source_page": 3,
+        "category": "Unassigned"
       },
       {
         "fund_type": "business-type",
@@ -342,7 +351,7 @@
     "total_liabilities": {
       "amount": 15708,
       "source_page": 1,
-      "computed": "only liability line, Payroll withholdings (p1)"
+      "computed": "only liability line, Payroll withholdings, Total column (p1); governmental 9,769 (p3) + business-type 5,939 (p1)"
     },
     "total_deferred_inflows": null,
     "total_equity": {
@@ -780,7 +789,8 @@
       "original_label": "Utilities",
       "amount": 6477,
       "budget_final": null,
-      "source_page": 6
+      "source_page": 6,
+      "function": "utilities"
     },
     {
       "schedule": "Statement of Receipts, Disbursements and Changes in Net Position - Modified Cash Basis - Business-Type Activities",
@@ -793,7 +803,8 @@
       "original_label": "Utilities",
       "amount": 3100,
       "budget_final": null,
-      "source_page": 6
+      "source_page": 6,
+      "function": "utilities"
     },
     {
       "schedule": "Statement of Receipts, Disbursements and Changes in Net Position - Modified Cash Basis - Business-Type Activities",
@@ -806,7 +817,8 @@
       "original_label": "Utilities",
       "amount": 44041,
       "budget_final": null,
-      "source_page": 6
+      "source_page": 6,
+      "function": "utilities"
     },
     {
       "schedule": "Statement of Receipts, Disbursements and Changes in Net Position - Modified Cash Basis - Business-Type Activities",
@@ -1073,5 +1085,5 @@
       "source_page": 6
     }
   ],
-  "notes": "Modified cash basis village, FY ended Sept 30, 2025. Governmental beginning/ending are the governmental funds fund balances (p4), which include cash, CDs and restricted cash net of payables. Business-type measure is net position (modified cash); no single total receipts printed so receipts/disbursements totals computed. Capital grants and loan payments recorded as receipts/disbursements so roll-forward 655,853+212,804-242,008+9,511=636,160 holds. The governmental total column prints transfers in 218,986 and out 228,497 (net 9,511 to enterprise funds). Budgetary comparison p7 (report p17) is recorded in detail (actual budgetary basis, final budget): governmental functions plus Transfers -100,292 (other financing, inside the printed governmental total 595,803), and Sewer/Water/Trash (business-type total 242,008); Total disbursements 837,811 = 595,803 + 242,008. Its single receipts line, Receipts and transfers 860,035 (budget 652,922), combines all funds' receipts with transfers in and has no breakdown, so it is not in detail (it cannot be put in revenue or other financing without guessing a split; the statement receipts and transfers_in hold the figures). The Statement of Activities (p2, report p5, gained in the v7 re-trim) labels the governmental Taxes line as Property taxes 85,054, so it is categorized as property tax; it adds no other new lines (its figures match pp4 and 6). Read pages 1-7 of 7 Detail (user 2026-10-27): per-fund lines from the fund statements' columns (p4, p6) added for the funds that had no schedule. No fund had its own schedule: the combined Budgetary Comparison Information lines (p7, by activity, budgetary basis) are removed so nothing is counted twice."
+  "notes": "Modified cash basis village, FY ended Sept 30, 2025. Governmental beginning/ending are the governmental funds fund balances (p4), which include cash, CDs and restricted cash net of payables. Business-type measure is net position (modified cash); no single total receipts printed so receipts/disbursements totals computed. Capital grants and loan payments recorded as receipts/disbursements so roll-forward 655,853+212,804-242,008+9,511=636,160 holds. The governmental total column prints transfers in 218,986 and out 228,497 (net 9,511 to enterprise funds). The Budgetary Comparison Information (p7, report p17) is not in detail: its single receipts line, Receipts and transfers 860,035, combines all funds' receipts with transfers in and has no breakdown, and per user rule 2026-10-27 the combined all-funds schedule was replaced by per-fund lines from the fund statements' columns (p4, p6). The Statement of Activities (p2, report p5) labels the governmental Taxes line as Property taxes 85,054, so it is categorized as property tax; it adds no other new lines (its figures match pp4 and 6). Balance sheet (re-check attempt 2, user rule 2026-10-27): governmental lines taken from the Balance Sheet - Modified Cash Basis - Governmental Funds (p3, Total Governmental Funds column), whose totals (assets 391,488, liabilities 9,769, fund balances 381,719) equal the government-wide governmental column (p1); fund balance by classification (Restricted 66,039, Committed 142,679, Unassigned 173,001). Business-type lines and the combined totals stay from the government-wide Statement of Net Position (p1). Read pages 1-7 of 7"
 }
