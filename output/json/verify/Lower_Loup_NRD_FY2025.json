@@ -1,30 +1,62 @@
 {
   "stem": "Lower_Loup_NRD_FY2025",
-  "values_checked": 115,
+  "values_checked": 113,
   "issues": [
     {
       "severity": "error",
-      "path": "detail[21].category",
+      "path": "receipts[7].category",
       "page": 7,
-      "extracted": "charges for services/fees",
-      "on_page": "Well Permits 2,550",
-      "issue": "[fixed] a well permit belongs in 'licenses and permits' (its own detail_category already says licenses and permits). The high-level category doesn't match the label and is inconsistent with the line's detail_category."
+      "extracted": "other taxes",
+      "on_page": "Carline Tax 3,994",
+      "issue": "[fixed 2026-10-28: category set as the verifier says] split line is Carline Tax, which has its own receipt category (Carline Tax); detail[1] already uses it. 'other taxes' when a specific category fits"
+    },
+    {
+      "severity": "error",
+      "path": "receipts[8].category",
+      "page": 7,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "Homestead 104,854",
+      "issue": "[fixed 2026-10-28: category set as the verifier says] homestead is never state aid; category should be Homestead Exemption (as detail[2])"
+    },
+    {
+      "severity": "error",
+      "path": "receipts[9].category",
+      "page": 7,
+      "extracted": "other taxes",
+      "on_page": "In-Lieu-Of Taxes 1,939",
+      "issue": "[fixed 2026-10-28: category set as the verifier says] category should be In Lieu of Tax (as detail[3])"
+    },
+    {
+      "severity": "error",
+      "path": "receipts[10].category",
+      "page": 7,
+      "extracted": "other taxes",
+      "on_page": "Nameplate Capacity Tax 19,925",
+      "issue": "[fixed 2026-10-28: category set as the verifier says] category should be Nameplate Capacity Tax (as detail[4])"
+    },
+    {
+      "severity": "error",
+      "path": "receipts[11].category",
+      "page": 7,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "Pro Rate 14,578",
+      "issue": "[fixed 2026-10-28: category set as the verifier says] pro-rate motor vehicle is never state aid; category should be Motor Vehicle Pro-Rate (as detail[5])"
+    },
+    {
+      "severity": "error",
+      "path": "receipts[12].category",
+      "page": 7,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "Property Tax Credit 742,254",
+      "issue": "[fixed 2026-10-28: category set as the verifier says] property tax credit is never state aid; category should be Property Tax Credit (as detail[6])"
     },
     {
       "severity": "warning",
-      "path": "receipts[1]",
-      "page": 5,
-      "extracted": "split of 'Federal and State Funding' 1,718,253 into 912,412 + 805,841, and receipts[7]-[13] split of 'Other Taxes and State Payments' 887,933 into seven lines",
-      "on_page": "Schedule of Revenues p7 lists Federal Grants and Funds 912,412, State Grants and Funds 805,841, and Carline/Homestead/In-Lieu/Nameplate/Pro Rate/PTC/US Ent Lands lines",
-      "issue": "the p7 schedule doesn't print the statement's group headings. The splits rest on labels and on exact sums, which tie (1,718,253 and 887,933). Clearly the same revenues (same 9,199,193 total), so this looks right, but a person should confirm the split basis."
-    },
-    {
-      "severity": "warning",
-      "path": "detail_totals[1]",
-      "page": 9,
-      "extracted": "Schedule of Expenses 7,470,048, fund 'General'",
-      "on_page": "Total Expenses 7,470,048",
-      "issue": "this schedule is the government-wide accrual expense list (it ties to Statement of Activities p2, includes depreciation 615,476 and excludes capital outlay 1,555,201), not fund expenditures (8,409,773). Labelled fund 'General', and it won't tie to the fund statement. The notes disclose this."
+      "path": "receipts[7].split_from",
+      "page": 7,
+      "extracted": "Other Taxes and State Payments 887,933 split into 7 lines",
+      "on_page": "p7 Schedule of Revenues lists Carline, Homestead, In-Lieu, Nameplate, Pro Rate, Property Tax Credit, US Ent Lands Sec 3 without a heading tying them to 'Other Taxes and State Payments'",
+      "issue": "split composition is inferred (the seven lines add exactly to 887,933, arithmetic correct), not printed as a breakdown of that line; same applies to receipts[8]-[13] and to the Federal and State Funding split receipts[1]-[2] (912,412 + 805,841 = 1,718,253)"
     },
     {
       "severity": "warning",
@@ -32,7 +64,23 @@
       "page": 8,
       "extracted": "repairs and maintenance",
       "on_page": "Auto and Truck Expenses 80,953",
-      "issue": "could be fuel or a mix. Also detail[46] 'Information and Education' 129,683 as printing, publishing and postage is a judgment call."
+      "issue": "vehicle expenses may be mostly fuel; category is a judgment call"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[46].detail_category",
+      "page": 8,
+      "extracted": "printing, publishing and postage",
+      "on_page": "Information and Education 129,683",
+      "issue": "public information/education program; may not be printing/postage (could be professional/contract services or not itemized)"
+    },
+    {
+      "severity": "warning",
+      "path": "detail_totals[1].amount",
+      "page": 9,
+      "extracted": 7470048,
+      "on_page": 7470048,
+      "issue": "Schedule of Expenses is the accrual government-wide expense total (includes depreciation 615,476, excludes capital outlay 1,555,201); it does not tie to fund expenditures 8,409,773. Amount correct and items sum to it; noted for the user"
     }
   ]
 }

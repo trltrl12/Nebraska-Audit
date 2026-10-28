@@ -1,49 +1,11 @@
 {
   "stem": "Plattsmouth_Airport_Authority_FY2025",
-  "values_checked": 32,
+  "values_checked": 34,
   "issues": [
-    {
-      "severity": "error",
-      "path": "missing",
-      "page": 3,
-      "extracted": null,
-      "on_page": "Statement of Revenues, Expenditures and Changes in Fund Balances - Governmental Funds (report p8; trimmed pages are report pp5, 6, 7, 20)",
-      "issue": "[fixed 2026-10-22: partial: beginning_fund_balance derived from the p4 reconciliation (368,064 + 35,095 = 403,159) and accrual changes (29,180) added as an adjustment, so the GAAP fund-balance identity ties; revenue by source and GAAP expenditures still need report p8 re-trimmed (CLAUDE.md follow-up)] The governmental funds operating statement wasn't trimmed, so a GAAP-basis report has no revenue lines by source, no GAAP expenditures, no beginning fund balance and no transfers. Receipts and disbursements come from the budget-basis schedule instead. The PDF needs re-trimming (the extractor's decision_needed already raises this)."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[0]",
-      "page": 4,
-      "extracted": {
-        "category": "other",
-        "amount": 1245009
-      },
-      "on_page": "Receipts and transfers (resource inflows) 1,245,009",
-      "issue": "[fixed 2026-10-22: removed transfers_in from reported_totals includes; line kept as printed with review/decision_needed (all-funds total, no net transfers possible)] The single line combines receipts and transfers but is recorded as revenue, category other. reported_totals includes ['transfers_in'] while transfers_in is null. The Statement of Activities (p2) shows revenues of 1,202,552 (charges 290,139, capital grants 763,940, property tax 141,041, misc 7,432); the 42,457 difference may be interfund transfers counted as receipts. Capital grants are more than half, so 'other' may not be the best category, but the budget line itself isn't broken down."
-    },
-    {
-      "severity": "warning",
-      "path": "missing",
-      "page": 4,
-      "extracted": null,
-      "on_page": "Budgetary Comparison Schedule: Receipts and transfers (resource inflows) actual 1,245,009, budget 1,300,853",
-      "issue": "The schedule's expenditure lines are in detail[], but its receipts line isn't (no revenue detail or detail_totals entry). It is in receipts[], so it's arguably left out on purpose because it mixes transfers."
-    },
-    {
-      "severity": "warning",
-      "path": "beginning_cash",
-      "page": 4,
-      "extracted": 350208,
-      "on_page": "Budgetary fund balance, beginning 350,208",
-      "issue": "Printed as budgetary fund balance, not cash. Treating it as beginning cash relies on the budgetary ending balance equalling cash (344,293 = cash on p4 reconciliation), which is a fair assumption but still an assumption."
-    },
-    {
-      "severity": "warning",
-      "path": "business_type",
-      "page": 1,
-      "extracted": null,
-      "on_page": "Statement of Net Position - Governmental Activities column only",
-      "issue": "The extractor rules list airport authorities as entirely business-type, but this report presents only governmental activities and governmental funds. Recording it as governmental follows the statements and is defensible; noting the conflict for the user."
-    }
+    {"severity": "warning", "path": "receipts[0].checked", "page": 4, "extracted": "no net interfund transfer can be inside 1,245,009 (inflows minus outflows equal the change in cash)", "on_page": "Receipts and transfers (resource inflows) 1,245,009; outflows General government 282,466, Debt service 42,792, Capital outlays 925,666", "issue": "agree the page prints one combined line that cannot be split, but the review reasoning does not hold: on an all-fund-types schedule a General-to-Debt transfer would be grossed up on both sides (inside inflows and inside an outflow line) and still net to the change in cash. Budgetary inflows exceed the p2 accrual revenues (290,139 + 763,940 + 141,041 + 7,432 = 1,202,552) by 42,457, close to debt service 42,792, so a gross transfer to the Debt fund may be inside both receipts and disbursements. Already in decision_needed"},
+    {"severity": "warning", "path": "receipts[0].category", "page": 2, "extracted": "other", "on_page": "Statement of Activities: Capital grants and contributions 763,940 of 1,202,552 revenues", "issue": "grants are more than half of the year's revenues on p2 (different basis); a grants category could be argued for the dominant part. Judgment call"},
+    {"severity": "warning", "path": "entity_type", "page": 1, "extracted": "airport authority, all lines governmental", "on_page": "Statement of Net Position - Governmental Activities", "issue": "extractor rules list airport authorities as entirely business-type, but this report presents only governmental activities/funds; treating it as governmental follows the page but conflicts with the type rule"},
+    {"severity": "warning", "path": "adjustments[0].original_label", "page": 4, "extracted": "Governmental activities accrual changes, net (budgetary to GAAP fund balance reconciliation)", "on_page": "Governmental activities accrual changes, net", "issue": "label has added text; amount (29,180) negative is correct"},
+    {"severity": "warning", "path": "detail", "page": 4, "extracted": "expenditure lines only", "on_page": "Receipts and transfers (resource inflows) 1,245,009 (budget 1,300,853)", "issue": "the schedule's inflow line is in receipts but not in detail (no revenue detail line or detail_total); acceptable since it mixes receipts and transfers, noted for completeness"}
   ]
 }
