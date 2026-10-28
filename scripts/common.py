@@ -72,6 +72,11 @@ DISBURSEMENT_CATEGORIES = [
     "Fiscal Charges",  # user decision 2026-10-26: own category
     "Developer Purchased TIF Payments",  # user decision 2026-10-26: own category
     "Categorical Corporation and Private",  # user decision 2026-10-27: out of Instruction (school districts)
+    # user decision 2026-10-28: utility (business-type) spending listed by cost type takes the cost type
+    "Salaries and Wages", "Employee Benefits and Payroll Taxes", "Professional/Contract Services",
+    "Supplies and Materials", "Fuel", "Repairs and Maintenance", "Insurance", "Depreciation",
+    "Dues, Training and Travel", "Printing, Publishing and Postage", "Rent/Leases", "Purchased Power/Cost of Sales",
+    "Grants/Payments to Other Entities", "Tax Refunds/Treasurer Fees", "Equipment Purchases", "Other Taxes Paid",
     # school district functions (user decision 2026-10-23); support services = Pupils and Staff only
     "Instruction",
     "Special Education Programs",

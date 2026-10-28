@@ -24,7 +24,7 @@ JSON_DIR = ROOT / "output" / "json"
 REV_LABELS = [
     (r"^(taxes:\s*)?sales and use( tax)?$", "Sales and Use Tax", None),
     (r"^(taxes:\s*)?(property|property tax|real property and personal property tax|property and real estate( taxes)?)$",
-     "Property and Real Estate Taxes", None),
+     "Property Tax", None),
     (r"^(taxes:\s*)?occupation( tax)?$", "Occupation Tax", None),
     (r"^investment (income|earnings)$", "Investment Earnings", None),
     (r"^(taxes:\s*)?turnback( tax)?$", "Turnback", "Turnback"),
@@ -44,6 +44,84 @@ FUNCTION_NAMES = {
     "instruction": "Instruction", "support services": "Support Services", "food service": "Food Service",
     "student transportation": "Student Transportation", "student activities": "Student Activities", "other": "Other",
 }
+
+# --- utility (business-type) spending listed by cost type: category = the cost type (user 2026-10-28) ---
+# The fund column (Water Fund, Sewer Fund...) still says which utility; function lines (Water Distribution,
+# Sewer Treatment, not itemized) keep "utilities". The original function is kept in `function`.
+OBJECT_FROM_DETAIL = {
+    "salaries and wages": "Salaries and Wages", "employee benefits and payroll taxes": "Employee Benefits and Payroll Taxes",
+    "professional/contract services": "Professional/Contract Services", "supplies and materials": "Supplies and Materials",
+    "utilities (power, gas, phone)": "utilities", "fuel": "Fuel", "Fuel / Vehicle": "Fuel",
+    "repairs and maintenance": "Repairs and Maintenance", "insurance": "Insurance", "depreciation": "Depreciation",
+    "dues, training and travel": "Dues, Training and Travel", "printing, publishing and postage": "Printing, Publishing and Postage",
+    "rent/leases": "Rent/Leases", "purchased power/cost of sales": "Purchased Power/Cost of Sales",
+    "grants/payments to other entities": "Grants/Payments to Other Entities",
+    "tax refunds/treasurer fees": "Tax Refunds/Treasurer Fees", "equipment purchases": "Equipment Purchases",
+    "miscellaneous expenditure": "other", "Other Taxes Paid": "Other Taxes Paid", "Other / Miscellaneous Expenses": "other",
+}
+OBJECT_LABELS = [  # label (whole line is one cost type) -> category; first match wins
+    (r"purchased power|power purchase|cost of (sales|goods|power)|wholesale power", "Purchased Power/Cost of Sales"),
+    (r"depreciation|amortization", "Depreciation"),
+    (r"benefit|payroll tax|retirement|pension|fica|social security|health insurance", "Employee Benefits and Payroll Taxes"),
+    (r"salar|wages|personal services|personnel|payroll|compensation", "Salaries and Wages"),
+    (r"insurance", "Insurance"),
+    (r"repair|maint", "Repairs and Maintenance"),
+    (r"professional|contract|consult|legal|audit|engineering|accounting", "Professional/Contract Services"),
+    (r"dues|training|travel|meeting|education|mileage", "Dues, Training and Travel"),
+    (r"print|publish|postage|advertis", "Printing, Publishing and Postage"),
+    (r"^fuel|gas and oil|gasoline|vehicle", "Fuel"),
+    (r"purchased services", "Professional/Contract Services"),
+    (r"purchased water", "Purchased Power/Cost of Sales"),
+    (r"bad debt", "other"),
+    (r"suppl|material|office|chemical|commodit", "Supplies and Materials"),
+    (r"^rent|lease", "Rent/Leases"),
+    (r"^(utilities|utility expense|telephone|electricity)$", "utilities"),
+    (r"^(misc\w*|other|other expenses?|miscellaneous expenses?)$", "other"),
+]
+UTILITY_FUNCTION_LABEL = re.compile(r"water|sewer|electric|light|gas system|refuse|sanitation|garbage|solid waste|trash|landfill"
+                                    r"|distribution|treatment|pumping|transmission|production|generation|operating|operations"
+                                    r"|debt|bond|interest|capital|transfer", re.I)
+
+
+TAX_PAID = re.compile(r"^(?!.*(payroll|salar|wage|benefit)).*(\btax(es)?\b|franchise fee|in lieu of tax)", re.I)
+
+
+def utility_object(x, borrowed=None):
+    lab = re.sub(r"^\d+\s+", "", label_of(x)).strip()
+    if TAX_PAID.search(lab):
+        return "Other Taxes Paid"
+    dc = x.get("detail_category")
+    if dc in OBJECT_FROM_DETAIL:
+        return OBJECT_FROM_DETAIL[dc]
+    if borrowed:
+        return borrowed
+    if re.search(r"insurance", lab, re.I) and not re.search(r"health|group|benefit", lab, re.I):
+        return "Insurance"
+    if UTILITY_FUNCTION_LABEL.search(lab) and not re.match(r"^(utilities|utility expense)$", lab, re.I):
+        return None
+    for pat, cat in OBJECT_LABELS:
+        if re.search(pat, lab, re.I):
+            return cat
+    return None
+
+
+def utility_object_rule(d, log):
+    det = [x for x in d.get("detail") or [] if x.get("section") == "expenditure" and x.get("fund_type") == "business-type"]
+    by_label = {}
+    for x in det:
+        if x.get("category") == "utilities" or x.get("function") == "utilities":
+            c = utility_object(x)
+            if c:
+                by_label.setdefault(label_of(x).lower(), set()).add(c)
+    for x in det + [x for x in d.get("disbursements") or [] if x.get("fund_type") == "business-type"]:
+        if x.get("category") != "utilities":
+            continue
+        b = by_label.get(label_of(x).lower())
+        c = utility_object(x, next(iter(b)) if b and len(b) == 1 else None)
+        if c and c != "utilities":
+            x["function"] = "utilities"
+            setcat(x, "category", c, "utility cost type: " + c, log)
+
 
 # --- balance sheet ---
 DEFERRED = {
@@ -287,6 +365,7 @@ def apply(d, stem=""):
         fund_name_rule(x, log, per_fund)
     if isinstance(d.get("balance_sheet"), dict):
         balance_sheet_rules(d["balance_sheet"], log)
+    utility_object_rule(d, log)
     entity_rules(d, entity_of(stem), log)
     return log
 

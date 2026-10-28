@@ -447,7 +447,7 @@ These are the user's decisions; apply them while extracting. After extraction th
 `python3 scripts/user_rules.py <stem>`, which re-applies the label/category ones mechanically.
 - **Revenue labels** (receipts and detail revenue; printed text in `printed_label`): Sales and Use / Sales and use tax
   -> "Sales and Use Tax"; Property / Property Tax / Taxes: Property / Real Property and Personal Property Tax / Property
-  and real estate (taxes) -> "Property and Real Estate Taxes"; Occupation (tax) -> "Occupation Tax"; Investment income /
+  and real estate (taxes) -> "Property Tax"; Occupation (tax) -> "Occupation Tax"; Investment income /
   earnings -> "Investment Earnings"; Turnback (Tax) -> "Turnback" (category Turnback, never state aid); Sundry and In
   Lieu (Tax) -> "Sundry and in Lieu" (category In Lieu of Tax).
 - **Own receipt categories:** Carline Tax, Public Power District Sales Tax (incl. "NPPD 5%"), In Lieu of Tax, Nameplate
@@ -460,6 +460,13 @@ These are the user's decisions; apply them while extracting. After extraction th
   service. Debt service principal/interest lines are category "Debt Service" with `debt_service_part`
   "principal"/"interest". Spending labelled categorical grants from corporations / private interests -> "Categorical
   Corporation and Private". School functions as in the school district section.
+- **Utility (business-type) spending listed by cost type** (Personal Services, Supplies, Repairs, Insurance...): the
+  category is the cost type, not "utilities": Salaries and Wages, Employee Benefits and Payroll Taxes,
+  Professional/Contract Services, Supplies and Materials, Fuel, Repairs and Maintenance, Insurance, Depreciation, Dues,
+  Training and Travel, Printing, Publishing and Postage, Rent/Leases, Purchased Power/Cost of Sales, Other Taxes Paid
+  (taxes, sales tax, franchise fees, in lieu of tax paid), utilities (utility bills: power, phone), other (miscellaneous);
+  set `function: "utilities"`. Lines that are a function (Water, Sewer, Distribution, Operating expenses) stay
+  "utilities". The fund column names the utility.
 - **Other financing (detail):** transfer lines labelled "Transfers In" / "Transfers Out" (printed text in printed_label).
 - **Balance sheet:** deferred outflows -> Deferred Loss on Refunding / Deferred Outflows for Other Postemployment
   Benefits / Deferred Outflows for Pensions; deferred inflows -> Deferred Gain on Refunding / Deferred Inflows for

@@ -17,6 +17,9 @@ only read trimmed PDFs (via the `extractor` subagent) and write JSON.
   `output/file_list.csv` records each filing's county, subdivision type and filing type (Audit/Waiver).
 - `scripts/find_pages.py` saves the statement pages to `trimmed/` and writes `output/manifest.csv`.
 - `scripts/validate.py` checks `output/json/` and writes `output/flagged.csv`.
+- `scripts/user_rules.py` re-applies the user's naming/category rules after extraction (any year): label renames,
+  category_decisions.csv for other/miscellaneous lines, utility cost types, balance-sheet categories and the entity
+  rulings (Lincoln, Clay Center, Lincoln Public Schools, Douglas County).
 - `scripts/build_csv.py` writes `output/cashflow_long.csv`, `cashflow_summary.csv`, `progress.csv`
   and `cashflow.xlsx`.
 - `.github/workflows/fetch.yml` is run manually. `validate.yml` runs on each push to `output/json/`.
@@ -72,7 +75,7 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
   settled from their PDFs.
 - **User label decisions (2026-10-26, all reports):** receipt/detail revenue labels renamed (printed text kept in
   `printed_label`): Sales and Use / Sales and use tax -> Sales and Use Tax; Property / Taxes: Property / Real Property and
-  Personal Property Tax -> Property Tax; Occupation / Occupation tax -> Occupation Tax; Investment income / Investment
+  Personal Property Tax -> Property Tax (also "Property and real estate (taxes)", user 2026-10-28); Occupation / Occupation tax -> Occupation Tax; Investment income / Investment
   earnings -> Investment Earnings; Turnback / Turnback Tax -> Turnback, its own receipt category (out of state aid).
   "Reimbursement for Services" lines are their own receipt category, Reimbursement for Services.
   Sundry and In Lieu / Sundry and In Lieu Tax -> Sundry and in Lieu (category unchanged: In Lieu of Tax).
@@ -88,11 +91,15 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
   Lincoln only: Interest and Fiscal Charges are own categories (in the debt service total); Exp_Miscellaneous relabelled Miscellaneous.
   Developer Purchased TIF Payments is its own disbursement category (out of economic development).
 - **User label decisions (2026-10-27, all reports):** detail other-financing "Transfer(s) in/out" -> "Transfers In" /
-  "Transfers Out"; receipt/detail revenue labels "Property Tax" / "Property and real estate (taxes)" -> "Property and
-  Real Estate Taxes" (category unchanged; printed text in printed_label). Categories debt service principal and debt
+  "Transfers Out"; (property labels: "Property Tax", see 2026-10-26; the 2026-10-27
+  "Property and Real Estate Taxes" label was reverted by the user 2026-10-28). Categories debt service principal and debt
   service interest -> "Debt Service" (old part kept in `debt_service_part`).
   Douglas County: the nonmajor "Miscellaneous (taxes)" 5,452,600 (Tourism fund) is category Miscellaneous Tax, not
   lodging tax (the only lodging-tax line labelled miscellaneous in any report).
+- **Utility spending by cost type (user, 2026-10-28, all reports):** business-type spending lines printed by cost type
+  (Personal Services, Supplies, Repairs, Insurance...) have the cost type as category (Salaries and Wages,
+  Professional/Contract Services, Supplies and Materials, Repairs and Maintenance, Depreciation, Insurance, Other Taxes
+  Paid, other, ...), with `function: "utilities"`; function lines (Water, Sewer, Distribution) stay utilities.
 - **School spending (user, 2026-10-27):** spending lines labelled categorical grants from corporations / private
   interests are category "Categorical Corporation and Private" (out of Instruction; all reports). Lincoln Public Schools:
   the statement's "Staff" line is category Instruction; its "Other" 14,686 line is category other (out of Debt Service).
