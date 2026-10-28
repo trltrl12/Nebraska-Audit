@@ -1,110 +1,102 @@
 {
   "stem": "Hall_County_FY2025",
-  "values_checked": 319,
+  "values_checked": 257,
   "issues": [
     {
       "severity": "error",
-      "path": "detail[108].original_label",
-      "page": 10,
-      "extracted": "Personal Service 27,902 (detail_category salaries and wages)",
-      "on_page": "Capital Outlay 27,902 (Probation Officer column)",
-      "issue": "[fixed] Probation Officer 27,902 is on the Capital Outlay row, not Personal Service (Probation Personal Service is '-'). Proof: JSON capital outlay lines sum to 417,187 vs printed memo total 445,089 (short 27,902); JSON personal service lines sum to 24,241,793 vs printed 24,213,891 (over 27,902). Should be original_label 'Capital Outlay', detail_category 'equipment purchases'. Department total 68,474 is unaffected."
+      "path": "receipts[5].category",
+      "page": 4,
+      "extracted": "State (remainder) 8,153,017 as intergovernmental/state aid",
+      "on_page": "GF State lines (p4): Homestead Exemption 845,125; Property Tax Credit 1,735,279; Pro-Rate Motor Vehicle 71,972; Airline and Carline Tax Allocation 36,894; Insurance Tax Allocation 234,383. Govt-wide general receipts (p1): Property Tax Credit 1,954,994, Homestead 934,194, Pro-rate Motor Vehicle 77,813, Airline and Carline 39,120",
+      "issue": "The remainder of the p3 State line still contains Homestead Exemption, Property Tax Credit, Motor Vehicle Pro-Rate and Carline Tax. The user rules say these are never inside state aid and must be split out using the report's own breakdown. The breakdown is printed on p4 (General Fund) and p1 (all funds, which also covers the Courthouse Bond State 316,791), so they should be split out the same way lodging and gaming tax were."
     },
     {
       "severity": "error",
-      "path": "report_discrepancies[1].difference",
-      "page": 5,
-      "extracted": -52,
-      "on_page": "19,490,529 (p5) vs 19,490,476 (p3/p2)",
-      "issue": "[fixed] The gap is 53, not 52 (19,490,529 - 19,490,476 = 53), the same 53 as the disbursement gap in report_discrepancies[0]."
-    },
-    {
-      "severity": "error",
-      "path": "detail[127].category",
+      "path": "receipts[5].category",
       "page": 6,
-      "extracted": "other / miscellaneous revenue",
-      "on_page": "Other Receipts 1,180,837; p3 Inheritance column shows Federal 675,000 + Interest Income 445,837 + Other 1,937,412 (= Inheritance Tax 1,877,412 + 60,000)",
-      "issue": "[fixed] The report shows what this line is: 1,180,837 = federal 675,000 + interest 445,837 + 60,000 other. Under the rules a mixed line takes its dominant category (federal grants) plus a review note, or gets split by the p3 column the way Courthouse Project 'Other' was (detail[169]/[170]). Leaving 1.18M in 'other' is wrong."
+      "extracted": "State (remainder) includes Road Fund 'Motor vehicle Fee' 249,124",
+      "on_page": "Road Fund State: Highway Allocations 3,696,565 + Motor vehicle Fee 249,124 + ... = 4,476,305 (p3 Road State column)",
+      "issue": "The Road Fund motor vehicle fee is printed in the p3 State row and sits inside the state-aid remainder. In detail[136] it is motor vehicle tax. It should be its own motor vehicle tax split (split_from p6) so receipts and detail agree."
+    },
+    {
+      "severity": "error",
+      "path": "detail[128].category",
+      "page": 3,
+      "extracted": "investment income 445,837",
+      "on_page": "p3 Inheritance Fund column 'Interest Income' 445,837",
+      "issue": "This is the interest piece of the Inheritance 'Other Receipts' split. Under the user rule, interest lines are category Interest Income. Top-level receipts[7] and every other interest detail line use Interest Income, so this is inconsistent."
     },
     {
       "severity": "warning",
-      "path": "receipts[6].category",
-      "page": 3,
-      "extracted": "other 15,703,241",
-      "on_page": "Other 56,535,494 less bond proceeds 40,832,253",
-      "issue": "26% of governmental receipts are in 'other' (well over the 10% review threshold). The fund schedules show what makes it up: inheritance tax 1,877,412, Insurance interfund 5,356,069, GF fees of office, commissary, lottery 542,352 and more. A split would need to be built from schedules, not from this line's own breakdown, so leaving it unsplit with a review note is defensible. Flagged for the user."
+      "path": "receipts[18]",
+      "page": 7,
+      "extracted": "reimbursements/refunds 5,356,069 in receipts; detail[160] the same amount as other financing 'Transfers In'",
+      "on_page": "Insurance Fund 'Other Receipts Interfund Transfers' 5,356,069 (p7); p3 counts it in Other receipts; transfers in/out 6,508,776 balance without it; p1 shows Public Health operating grants 5,356,569",
+      "issue": "Confirmed that the Insurance revenue detail_totals entry still ties: 5,356,069 + 668,362 (both other financing, includes ['other financing']) = 6,024,431. However, the same money is revenue at the top level and a transfer in the detail. In the detail it is a one-sided transfer: no fund records a matching transfer out, and the paying funds booked it as spending. The p1 government-wide statement treats it as program revenue. This is already in decision_needed. If it stays revenue, charges for services/fees (internal insurance charges) fits better than reimbursements/refunds."
     },
     {
       "severity": "warning",
-      "path": "receipts[3]",
-      "page": 3,
-      "extracted": "State 10,533,599 as intergovernmental/state aid, no review",
-      "on_page": "State 10,533,599",
-      "issue": "Broad group: per p1/p4/p6/p9 it includes lodging tax 1,371,078, gaming tax 1,009,504, insurance tax allocation, carline tax, homestead and property tax credit, and highway allocation. The rules say to add review: 'broad group; detail on p.N'."
+      "path": "receipts[19]",
+      "page": 6,
+      "extracted": "other 2,512,443 incl. 'Road misc 26,352'",
+      "on_page": "Road Fund: Sales Tax Commission 17,149 + Miscellaneous Revenue 9,203 = 26,352",
+      "issue": "The 'remaining unexplained' piece includes the Road Fund Sales Tax Commission 17,149, which is labelled and has its own category in detail[144] (other taxes). Only 9,203 of the Road piece is truly miscellaneous."
+    },
+    {
+      "severity": "warning",
+      "path": "report_discrepancies",
+      "page": 4,
+      "extracted": "335 noted only inside receipts[19].computed",
+      "on_page": "GF State on p3 3,136,931 vs p4 State lines 3,136,596; GF Other on p3 4,673,624 vs p4 local lines 4,673,959 (total 37,610,573 agrees)",
+      "issue": "The report classifies 335 differently between the statement and the budget schedule. This is not recorded in report_discrepancies, unlike the similar 898 Courthouse Bond shift."
     },
     {
       "severity": "warning",
       "path": "detail[29].split_from",
       "page": 10,
       "extracted": "Interfund Transfers 2,562,009 inside Personal Service column on department schedule p10",
-      "on_page": "Interfund Transfers row, 'Other - Transfers' column 2,562,009; Personal Service total 24,213,891 excludes it",
-      "issue": "The description is wrong. On p10 the transfer is its own row and column, not inside Personal Service, and the amount is printed as-is on p5 (Transfers Out (2,562,009)), so it isn't really a split. The amount and its exclusion from spending are correct."
+      "on_page": "p10: Interfund Transfers row, Transfers column 2,562,009; Personal Service memo total 24,213,891 excludes it; p5 prints Transfers Out (2,562,009)",
+      "issue": "The description is wrong. The transfer is a separate row and column on p10 and is printed as-is on p5, so it is not a split. The amount and its exclusion from the p10 spending lines are correct: the p10 lines tie to 35,245,217."
     },
     {
       "severity": "warning",
-      "path": "detail[166].category",
-      "page": 7,
-      "extracted": "other / miscellaneous revenue",
-      "on_page": "Intergovernmental Receipts - Other 532,954",
-      "issue": "It's printed under the 'Intergovernmental Receipts' heading, so intergovernmental/state aid (county/other local governments) may fit better than 'other'. The p3 statement does put it in its Other row, though."
-    },
-    {
-      "severity": "warning",
-      "path": "report_discrepancies",
-      "page": 7,
-      "extracted": "not recorded",
-      "on_page": "Courthouse Bond State 317,689 / Other 532,954 (p7) vs State 316,791 / Other 533,852 (p3); GF State lines on p4 sum to 3,136,596 vs p3 GF State 3,136,931 (diff 335)",
-      "issue": "The report classifies the same receipts differently between the statement and the schedules (totals agree). This is only noted in a review note on detail[165]; it may belong in report_discrepancies."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[142].category",
+      "path": "detail[127]",
       "page": 6,
-      "extracted": "other / miscellaneous revenue",
-      "on_page": "Sales Tax Commission 17,149",
-      "issue": "The label says what this is (a commission). GF 'Commissions' (detail[24]) is in charges for services/fees / other charges for services, so this is inconsistent."
+      "extracted": "Other Receipts 1,180,837 split 675,000 / 445,837 / 60,000, each with budget_final 115,000",
+      "on_page": "Other Receipts 1,180,837, budget 115,000 (p6); split per p3 Inheritance column",
+      "issue": "The split comes from the same fund's p3 column (acceptable), but the 115,000 budget is repeated on all three pieces (detail[127]-[129]), which triples the budget."
     },
     {
       "severity": "warning",
-      "path": "detail[158].category",
+      "path": "detail[132].original_label",
+      "page": 6,
+      "extracted": "Capital Outlay",
+      "on_page": "Capital Outlay 874,208",
+      "issue": "The user rule label 'Capital Outlay: <function>' (printed text in printed_label) is not applied here, or on the ARPA (detail[165]) and Courthouse Project (detail[174]) capital outlay lines. The p10/Road lines do have it."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[168].category",
       "page": 7,
-      "extracted": "other / miscellaneous revenue",
-      "on_page": "Other Receipts Interfund Transfers 5,356,069",
-      "issue": "The label says interfund transfers, but p3 counts it as Other receipts (no matching transfer outflow). It's already in decision_needed. If it is revenue, it's interfund charges for insurance (charges for services/fees) rather than miscellaneous."
+      "extracted": "other 532,954",
+      "on_page": "Courthouse Bond receipts: Intergovernmental Receipts / State 317,689 / Other 532,954",
+      "issue": "'Other' is printed directly beneath State in the Intergovernmental Receipts group, so county/other local government aid may fit. The p3 statement does put 533,852 in its Other row."
     },
     {
       "severity": "warning",
-      "path": "detail[160].detail_category",
+      "path": "detail[162].detail_category",
       "page": 7,
       "extracted": "salaries and wages",
-      "on_page": "Insurance Fund - Personal Service 1,323,500",
-      "issue": "Personal Service paid from the county Insurance Fund is more likely employee benefits (health insurance) than wages: employee benefits and payroll taxes."
+      "on_page": "Insurance Fund Personal Service 1,323,500",
+      "issue": "Personal Service paid from the county Insurance Fund is more likely employee benefits (health insurance claims/premiums) than wages."
     },
     {
       "severity": "warning",
-      "path": "detail[188].category",
+      "path": "detail[190].category",
       "page": 9,
-      "extracted": "other (detail[188]-[192], nonmajor combined spending 3,960,318)",
-      "on_page": "p3 Other Governmental Funds: General Government 1,072,913, Public Safety 1,092,344, Public Works 123,504, Public Welfare 437,184, Culture and Recreation 1,234,373",
-      "issue": "Nonmajor spending by object is all in category 'other'. The statement gives the function split, but the Total column can't be tied to functions line by line. This is a last-resort category, already marked review."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[130].category",
-      "page": 3,
-      "extracted": "Inheritance Capital Outlay 874,208 as capital outlay; Operating Expense 829 as general government",
-      "on_page": "p3 Inheritance column: General Government 31,550, Public Safety 843,487",
-      "issue": "The detail functions don't tie to the statement's function columns. The same applies to ARPA (detail[162]/[163]) and Courthouse Project capital outlay (detail[172]), both of which p3 puts entirely in General Government."
+      "extracted": "other (nonmajor Operating Expense 2,917,378 and the other object lines detail[189]-[193])",
+      "on_page": "p3 Other Governmental Funds by function: GG 1,072,913; PS 1,092,344; PW 123,504; Welfare 437,184; Culture 1,234,373",
+      "issue": "This is a last-resort function category for the combined nonmajor object lines. The function split exists only for the column total. It is already marked review."
     }
   ]
 }
