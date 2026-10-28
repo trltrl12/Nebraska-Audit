@@ -3,7 +3,7 @@
   "entity_type": "school district",
   "fiscal_year_end": "2025-08-31",
   "basis": "cash",
-  "extraction_attempt": 2,
+  "extraction_attempt": 3,
   "beginning_cash": {
     "amount": 63186389,
     "source_page": 7
@@ -21,13 +21,12 @@
     },
     {
       "fund_type": "governmental",
-      "category": "Motor Vehicle Pro-Rate",
+      "category": "motor vehicle tax",
       "original_label": "Motor vehicle pro-rate",
       "amount": 8378243,
       "source_page": 7,
-      "review": "labelled pro-rate on statement but GF schedule p11 line 1125 calls it Motor vehicle taxes and p5 'Motor vehicle' under Taxes",
-      "detail_category": "Motor Vehicle Pro-Rate",
-      "category_decision": "user 2026-10-23"
+      "detail_category": "motor vehicle tax",
+      "review": "statement label says pro-rate, but the General Fund schedule (p11) prints the same 8,378,243 as 1125 Motor vehicle taxes; pro-rate (3180, 192,739) is inside State receipts"
     },
     {
       "fund_type": "governmental",
@@ -84,8 +83,44 @@
       "fund_type": "governmental",
       "category": "intergovernmental/state aid",
       "original_label": "State receipts",
-      "amount": 77454637,
-      "source_page": 7
+      "amount": 45052084,
+      "source_page": 7,
+      "split_from": "State receipts 77,454,637 (p7)",
+      "computed": "fund schedules: General Fund 3110 State aid 21,261,221 + 3400 State apportionment 4,755,122 + 3120 Special education 17,713,446 + 3125 SPED transportation 1,080,555 + 3166 Flex funding 85,051 + state categorical 3535/3540/3541 156,689 (p11)",
+      "review": "split of State receipts using the fund schedules (pp11, 17, 18); config/category_decisions.csv maps the bare label 'state receipts' to state aid"
+    },
+    {
+      "fund_type": "governmental",
+      "category": "Homestead Exemption",
+      "original_label": "State receipts",
+      "amount": 5099539,
+      "source_page": 7,
+      "detail_category": "Homestead Exemption",
+      "split_from": "State receipts 77,454,637 (p7)",
+      "computed": "3130 Homestead exemption: General 4,150,464 (p11) + Bond 872,743 (p17) + Special Building 76,332 (p18)",
+      "review": "split of State receipts using the fund schedules"
+    },
+    {
+      "fund_type": "governmental",
+      "category": "Property Tax Credit",
+      "original_label": "State receipts",
+      "amount": 27110275,
+      "source_page": 7,
+      "detail_category": "Property Tax Credit",
+      "split_from": "State receipts 77,454,637 (p7)",
+      "computed": "3131 Property tax credit: General 25,644,108 (p11) + Bond 994,891 (p17) + Special Building 471,276 (p18)",
+      "review": "split of State receipts using the fund schedules"
+    },
+    {
+      "fund_type": "governmental",
+      "category": "Motor Vehicle Pro-Rate",
+      "original_label": "State receipts",
+      "amount": 192739,
+      "source_page": 7,
+      "detail_category": "Motor Vehicle Pro-Rate",
+      "split_from": "State receipts 77,454,637 (p7)",
+      "computed": "3180 Pro-rate motor vehicle: General 156,348 (p11) + Bond 33,151 (p17) + Special Building 3,240 (p18)",
+      "review": "split of State receipts using the fund schedules"
     },
     {
       "fund_type": "governmental",
@@ -254,21 +289,19 @@
     },
     {
       "fund_type": "governmental",
-      "category": "other",
+      "category": "Community Service Operations",
       "original_label": "Community services",
       "amount": 26595,
       "source_page": 7,
-      "review": "no matching function",
       "detail_category": "Community Services",
       "category_decision": "user 2026-10-23"
     },
     {
       "fund_type": "governmental",
-      "category": "Instruction",
+      "category": "State Categorical Programs",
       "original_label": "State and private categorical programs",
       "amount": 299801,
       "source_page": 7,
-      "review": "program lines counted as instruction; statement lists separately",
       "category_decision": "user 2026-10-23"
     },
     {
@@ -277,7 +310,6 @@
       "original_label": "Federal programs",
       "amount": 4774532,
       "source_page": 7,
-      "review": "program lines counted as instruction; statement lists separately",
       "category_decision": "user 2026-10-23"
     },
     {
@@ -1829,13 +1861,12 @@
       "fund": "General",
       "department": "Non-instructional services",
       "section": "expenditure",
-      "category": "other",
+      "category": "Community Service Operations",
       "detail_category": "Community Services",
       "original_label": "3300 Community services",
       "amount": 26595,
       "budget_final": 1492000,
       "source_page": 15,
-      "review": "no matching function",
       "category_decision": "user 2026-10-23"
     },
     {
@@ -1844,13 +1875,12 @@
       "fund": "General",
       "department": "State and private categorical programs",
       "section": "expenditure",
-      "category": "Instruction",
+      "category": "Categorical Corporation and Private",
       "detail_category": "not itemized",
       "original_label": "3400 Grants from corporations and other private interests",
       "amount": 46096,
       "budget_final": null,
-      "source_page": 15,
-      "category_decision": "user 2026-10-23"
+      "source_page": 15
     },
     {
       "schedule": "General Fund Budget and Actual",
@@ -1858,7 +1888,7 @@
       "fund": "General",
       "department": "State and private categorical programs",
       "section": "expenditure",
-      "category": "instruction",
+      "category": "State Categorical Programs",
       "detail_category": "not itemized",
       "original_label": "3535 High Ability Learners",
       "amount": 66491,
@@ -1871,7 +1901,7 @@
       "fund": "General",
       "department": "State and private categorical programs",
       "section": "expenditure",
-      "category": "instruction",
+      "category": "State Categorical Programs",
       "detail_category": "not itemized",
       "original_label": "3540 State Early Childhood",
       "amount": 104465,
@@ -1884,7 +1914,7 @@
       "fund": "General",
       "department": "State and private categorical programs",
       "section": "expenditure",
-      "category": "instruction",
+      "category": "State Categorical Programs",
       "detail_category": "not itemized",
       "original_label": "3541 Early Child Endowment Grants",
       "amount": 54499,
@@ -1897,7 +1927,7 @@
       "fund": "General",
       "department": "State and private categorical programs",
       "section": "expenditure",
-      "category": "instruction",
+      "category": "State Categorical Programs",
       "detail_category": "not itemized",
       "original_label": "3551 Career Education",
       "amount": 28250,
@@ -3051,5 +3081,5 @@
       "source_page": 23
     }
   ],
-  "notes": "Modified cash basis school district; amounts in whole dollars (Financial Highlights p2 in thousands not used). Governmental: p7 Total Governmental Funds column; beginning_cash/ending_cash are the governmental fund balances the statement rolls forward (63,186,389 to 109,566,695); identity reconciles: 63,186,389 + 174,111,270 - 230,569,386 (printed total 231,569,386 less the 1,000,000 transfer to the Depreciation Fund hidden in Support services - Staff, eliminated on p4) + 1,075,000 - 1,075,000 + 103,077,642 (Proceeds from new bond issuance, net) - 239,220 (bond issuance costs, shown in other_financing) = 109,566,695. Transfers: nonmajor funds in 1,075,000 (Activities 75,000 + Depreciation 1,000,000), General Fund out 1,075,000 (75,000 printed + 1,000,000 hidden in Support services - Staff); the total column prints net 1,000,000. Business-type: School Nutrition Fund (p9), cash measure: 10,827,895 + 7,070,487 - 6,587,441 = 11,310,941; business-type receipts total is the sum of printed operating 3,392,257 and nonoperating 3,678,230 and equals Total receipts on p23. Balance sheet: Statement of Net Position (p3) Total column. Total liabilities not printed; Payroll liabilities is the only liability. Detail: General Fund budget schedule (pp11-16) records every line; nonmajor combining statement (p10) not repeated because each nonmajor fund has its own schedule (pp19-22). Detail budget_final shown only where printed on the line. Detail is by program (no object breakdown), so not itemized. No Exhibit of General Fund operational expenses by object included in trimmed PDF. The p24 combined schedule and p10 were used as cross-checks only. Read pages 1-24 of 24"
+  "notes": "Modified cash basis school district; amounts in whole dollars (Financial Highlights p2 in thousands not used). Governmental: p7 Total Governmental Funds column; beginning_cash/ending_cash are the governmental fund balances the statement rolls forward (63,186,389 to 109,566,695); identity reconciles: 63,186,389 + 174,111,270 - 230,569,386 (printed total 231,569,386 less the 1,000,000 transfer to the Depreciation Fund hidden in Support services - Staff, eliminated on p4) + 1,075,000 - 1,075,000 + 103,077,642 (Proceeds from new bond issuance, net) - 239,220 (bond issuance costs, shown in other_financing) = 109,566,695. Transfers: nonmajor funds in 1,075,000 (Activities 75,000 + Depreciation 1,000,000), General Fund out 1,075,000 (75,000 printed + 1,000,000 hidden in Support services - Staff); the total column prints net 1,000,000. Business-type: School Nutrition Fund (p9), cash measure: 10,827,895 + 7,070,487 - 6,587,441 = 11,310,941; business-type receipts total is the sum of printed operating 3,392,257 and nonoperating 3,678,230 and equals Total receipts on p23. Balance sheet: Statement of Net Position (p3) Total column. Total liabilities not printed; Payroll liabilities is the only liability. Detail: General Fund budget schedule (pp11-16) records every line; nonmajor combining statement (p10) not repeated because each nonmajor fund has its own schedule (pp19-22). Detail budget_final shown only where printed on the line. Detail is by program (no object breakdown), so not itemized. No Exhibit of General Fund operational expenses by object included in trimmed PDF. The p24 combined schedule and p10 were used as cross-checks only. Attempt 3 (audit fixes): statement 'State receipts' 77,454,637 split (split_from) using the fund schedules into state aid 45,052,084, Homestead Exemption 5,099,539, Property Tax Credit 27,110,275 and Motor Vehicle Pro-Rate 192,739 (sum ties to the printed line); statement 'Motor vehicle pro-rate' 8,378,243 recategorized motor vehicle tax (General Fund schedule prints it as 1125 Motor vehicle taxes); Community services -> Community Service Operations; 'State and private categorical programs' 299,801 -> State Categorical Programs, and in detail the 3535/3540/3541/3551 lines printed under that heading -> State Categorical Programs (user 2026-10-28) while 3400 Grants from corporations and other private interests -> Categorical Corporation and Private (user 2026-10-27). Read pages 1-24 of 24"
 }

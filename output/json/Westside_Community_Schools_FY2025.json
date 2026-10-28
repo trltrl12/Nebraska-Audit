@@ -3,7 +3,7 @@
   "entity_type": "school district",
   "fiscal_year_end": "2025-08-31",
   "basis": "cash",
-  "extraction_attempt": 1,
+  "extraction_attempt": 2,
   "beginning_cash": {
     "amount": 86543925,
     "source_page": 4
@@ -45,11 +45,21 @@
     {
       "fund_type": "governmental",
       "category": "Tuition Received",
-      "original_label": "Tuition and fees",
-      "amount": 302849,
+      "original_label": "Tuition and fees (General Fund column)",
+      "amount": 186733,
       "source_page": 4,
+      "split_from": "Tuition and fees 302,849 (p4): General Fund column 186,733 (codes 1311-1370; 1410-1440, p7)",
+      "review": "General Fund tuition and fees; mostly tuition (codes 1311-1370)",
       "detail_category": "Tuition Received",
       "category_decision": "user 2026-10-23"
+    },
+    {
+      "fund_type": "governmental",
+      "category": "charges for services/fees",
+      "original_label": "Tuition and fees (Other Governmental Funds column = Student Fees Fund)",
+      "amount": 116116,
+      "source_page": 4,
+      "split_from": "Tuition and fees 302,849 (p4): Other Governmental Funds column 116,116 = Student Fees Fund receipts (p12)"
     },
     {
       "fund_type": "governmental",
@@ -166,7 +176,7 @@
     },
     {
       "fund_type": "governmental",
-      "category": "Building and Grounds",
+      "category": "School Administration",
       "original_label": "Support services: Building administration",
       "amount": 7195410,
       "source_page": 4,
@@ -201,7 +211,6 @@
       "original_label": "State categorical programs",
       "amount": 478676,
       "source_page": 4,
-      "review": "categorical program function assumed instruction",
       "category_decision": "user 2026-10-23"
     },
     {
@@ -219,7 +228,6 @@
       "original_label": "Federal programs",
       "amount": 3204724,
       "source_page": 4,
-      "review": "federal program function assumed instruction",
       "category_decision": "user 2026-10-23"
     },
     {
@@ -317,15 +325,22 @@
   },
   "proprietary": null,
   "balance_sheet": {
-    "statement": "Statement of Net Position - Modified Cash Basis",
+    "statement": "Balance Sheet - Modified Cash Basis - Governmental Funds (governmental lines, p3); Statement of Net Position - Modified Cash Basis (business-type lines and totals, p1)",
     "scope": "cash basis",
-    "column": "Governmental Activities | Business-type Activities | Total (each line tagged fund_type)",
+    "column": "Total Governmental Funds (p3) for governmental lines; Business-Type Activities (p1) for business-type lines; totals from the p1 Total column (each line tagged fund_type)",
     "assets": [
       {
         "category": "Cash and Cash Equivalents",
         "original_label": "Cash on deposit",
         "amount": 83557618,
-        "source_page": 1,
+        "source_page": 3,
+        "fund_type": "governmental"
+      },
+      {
+        "category": "Cash and Cash Equivalents",
+        "original_label": "Funds held by County Treasurer",
+        "amount": 2266759,
+        "source_page": 3,
         "fund_type": "governmental"
       },
       {
@@ -334,13 +349,6 @@
         "amount": 42870,
         "source_page": 1,
         "fund_type": "business-type"
-      },
-      {
-        "category": "Cash and Cash Equivalents",
-        "original_label": "Funds held by (County Treasurer per p3)",
-        "amount": 2266759,
-        "source_page": 1,
-        "fund_type": "governmental"
       }
     ],
     "deferred_outflows": [],
@@ -349,7 +357,7 @@
         "category": "Accrued Liabilities",
         "original_label": "Accrued payroll",
         "amount": 670885,
-        "source_page": 1,
+        "source_page": 3,
         "fund_type": "governmental"
       }
     ],
@@ -359,14 +367,28 @@
         "category": "Restricted",
         "original_label": "Restricted",
         "amount": 50231455,
-        "source_page": 1,
+        "source_page": 3,
         "fund_type": "governmental"
       },
       {
-        "category": "Unrestricted",
-        "original_label": "Unrestricted",
-        "amount": 34922037,
-        "source_page": 1,
+        "category": "Committed",
+        "original_label": "Committed",
+        "amount": 495267,
+        "source_page": 3,
+        "fund_type": "governmental"
+      },
+      {
+        "category": "Assigned",
+        "original_label": "Assigned",
+        "amount": 3357520,
+        "source_page": 3,
+        "fund_type": "governmental"
+      },
+      {
+        "category": "Unassigned",
+        "original_label": "Unassigned",
+        "amount": 31069250,
+        "source_page": 3,
         "fund_type": "governmental"
       },
       {
@@ -726,7 +748,7 @@
       "fund": "General",
       "department": "Support services",
       "section": "expenditure",
-      "category": "Building and Grounds",
+      "category": "School Administration",
       "detail_category": "not itemized",
       "original_label": "Building administration",
       "amount": 7195410,
@@ -787,7 +809,6 @@
       "amount": 478676,
       "budget_final": 489437,
       "source_page": 8,
-      "review": "function assumed instruction",
       "category_decision": "user 2026-10-23"
     },
     {
@@ -796,13 +817,13 @@
       "fund": "General",
       "department": null,
       "section": "expenditure",
-      "category": "Instruction",
+      "category": "Community Service Operations",
       "detail_category": "not itemized",
       "original_label": "Operation of non-instructional services",
       "amount": 1021,
       "budget_final": null,
       "source_page": 8,
-      "review": "p4 counts this under Other categorical programs",
+      "review": "function code 3300; p4 counts this inside Other categorical programs 433,515",
       "category_decision": "user 2026-10-23"
     },
     {
@@ -854,13 +875,12 @@
       "fund": "General",
       "department": "Categorical disbursements",
       "section": "expenditure",
-      "category": "Instruction",
+      "category": "Federal Programs",
       "detail_category": "not itemized",
       "original_label": "IDEA",
       "amount": 1930755,
       "budget_final": 2101477,
       "source_page": 8,
-      "review": "federal program function assumed instruction",
       "category_decision": "user 2026-10-23"
     },
     {
@@ -869,13 +889,13 @@
       "fund": "General",
       "department": "Categorical disbursements",
       "section": "expenditure",
-      "category": "instruction",
+      "category": "Federal Programs",
       "detail_category": "not itemized",
       "original_label": "ESSA - Title I",
       "amount": 894806,
       "budget_final": 882661,
       "source_page": 8,
-      "review": "federal program function assumed instruction"
+      "category_decision": "user 2026-10-23"
     },
     {
       "schedule": "Budgetary Comparison - General Fund",
@@ -883,13 +903,13 @@
       "fund": "General",
       "department": "Categorical disbursements",
       "section": "expenditure",
-      "category": "instruction",
+      "category": "Federal Programs",
       "detail_category": "not itemized",
       "original_label": "ESSA - Title II",
       "amount": 187202,
       "budget_final": 111009,
       "source_page": 8,
-      "review": "federal program function assumed instruction"
+      "category_decision": "user 2026-10-23"
     },
     {
       "schedule": "Budgetary Comparison - General Fund",
@@ -897,13 +917,13 @@
       "fund": "General",
       "department": "Categorical disbursements",
       "section": "expenditure",
-      "category": "instruction",
+      "category": "Federal Programs",
       "detail_category": "not itemized",
       "original_label": "ESSA - Title III",
       "amount": 39716,
       "budget_final": 53400,
       "source_page": 8,
-      "review": "federal program function assumed instruction"
+      "category_decision": "user 2026-10-23"
     },
     {
       "schedule": "Budgetary Comparison - General Fund",
@@ -911,7 +931,7 @@
       "fund": "General",
       "department": "Categorical disbursements",
       "section": "expenditure",
-      "category": "Instruction",
+      "category": "Federal Programs",
       "detail_category": "not itemized",
       "original_label": "Vocational education",
       "amount": 27807,
@@ -925,13 +945,12 @@
       "fund": "General",
       "department": "Categorical disbursements",
       "section": "expenditure",
-      "category": "Instruction",
+      "category": "Federal Programs",
       "detail_category": "not itemized",
       "original_label": "Homeless assistance",
       "amount": 5706,
       "budget_final": 1500,
       "source_page": 8,
-      "review": "federal program function assumed instruction",
       "category_decision": "user 2026-10-23"
     },
     {
@@ -940,7 +959,7 @@
       "fund": "General",
       "department": "Categorical disbursements",
       "section": "expenditure",
-      "category": "Instruction",
+      "category": "Federal Programs",
       "detail_category": "not itemized",
       "original_label": "Innovation",
       "amount": 118732,
@@ -1558,5 +1577,5 @@
       "source_page": 4
     }
   ],
-  "notes": "Modified cash basis school district; basis recorded as cash. Governmental data from the Total Governmental Funds column of the Statement of Receipts, Disbursements and Changes in Fund Balances (p4). beginning_cash/ending_cash are the fund balance roll-forward (86,543,925 to 85,153,492); the balance sheet cash plus funds held by County Treasurer is 85,824,377 less accrued payroll 670,885. Identity: 86,543,925 + 136,756,885 - 216,992,793 + 77,667,552 + 1,177,923 = 85,153,492. Debt proceeds = bond issuance + premium on bonds; other financing = insurance proceeds + sale of equipment + back-dated tax settlements (all printed under Other Financing Sources). 'Other' receipts 20,576,346 split by fund column (General 908,510; Special Building 17,956,024; Other Governmental/Activities 1,711,812). Business-type: Food Service fund, Total Proprietary Funds column (p6): beginning 784,160 (restated; Note 8 adjustment of 474,753 nets to zero in the total column) + receipts 7,370,941 - disbursements 8,112,231 = 42,870; Federal subsidy 1,921,390 and State subsidy 30,695 are nonoperating receipts. Business-type receipts total 7,370,941 is printed on p13 (budget schedule); p6 prints operating 5,418,856 and nonoperating 1,952,085 separately. Balance sheet = Statement of Net Position, Total column (p1); 'Funds held by' is County Treasurer per p3. Detail: budget schedules for every fund on pp7-14; the Employee Benefits, Student Fees and Activities funds are within Other Governmental Funds on p4 (472,541 beginning = 100,000 + 372,541; ending 495,267 = 52,478 + 442,789). No per-account student activity schedule printed; one-line Activities Fund schedule recorded. General Fund Discretionary (budget 5,023,943, actual none), ESSA Title IV disbursements (actual none) and Interfund loan out (budget -1,342,292, actual none) have no actual and are omitted. Transfer cross-check: no transfers in or out appear in any fund; no hidden transfers found. General Fund budget receipt 'County Treasurer - taxes' 46,451,351 plus other state receipts 75,590 equals the p4 General Fund property/motor vehicle/public power taxes 46,526,941. Student Fees salaries budget 90,000 and Employee Benefits/other budgets as printed. Read pages 1-14 of 14"
+  "notes": "Modified cash basis school district; basis recorded as cash. Governmental data from the Total Governmental Funds column of the Statement of Receipts, Disbursements and Changes in Fund Balances (p4). beginning_cash/ending_cash are the fund balance roll-forward (86,543,925 to 85,153,492); the balance sheet cash plus funds held by County Treasurer is 85,824,377 less accrued payroll 670,885. Identity: 86,543,925 + 136,756,885 - 216,992,793 + 77,667,552 + 1,177,923 = 85,153,492. Debt proceeds = bond issuance + premium on bonds; other financing = insurance proceeds + sale of equipment + back-dated tax settlements (all printed under Other Financing Sources). 'Other' receipts 20,576,346 split by fund column (General 908,510; Special Building 17,956,024; Other Governmental/Activities 1,711,812). 'Tuition and fees' 302,849 split by fund column (re-check 2026-10-28): General Fund 186,733 tuition (codes 1311-1370; 1410-1440) and Other Governmental Funds 116,116 = Student Fees Fund student fees (charges for services). Business-type: Food Service fund, Total Proprietary Funds column (p6): beginning 784,160 (restated; Note 8 adjustment of 474,753 nets to zero in the total column) + receipts 7,370,941 - disbursements 8,112,231 = 42,870; Federal subsidy 1,921,390 and State subsidy 30,695 are nonoperating receipts. Business-type receipts total 7,370,941 is printed on p13 (budget schedule); p6 prints operating 5,418,856 and nonoperating 1,952,085 separately. Balance sheet (re-check 2026-10-28): governmental lines from the Balance Sheet - Modified Cash Basis - Governmental Funds, Total Governmental Funds column (p3), whose totals (assets 85,824,377, liabilities 670,885, fund balances 85,153,492) equal the government-wide governmental column (p1); fund balance by classification (Restricted, Committed, Assigned, Unassigned). Business-type lines and the printed totals from the Statement of Net Position (p1). School functions (re-check 2026-10-28): Building administration (codes 2410-2490) is School Administration; the General Fund categorical disbursements IDEA..Innovation (p8) sum to 3,204,724 = the p4 'Federal programs' line, so they are Federal Programs; Operation of non-instructional services (code 3300) is Community Service Operations. Detail: budget schedules for every fund on pp7-14; the Employee Benefits, Student Fees and Activities funds are within Other Governmental Funds on p4 (472,541 beginning = 100,000 + 372,541; ending 495,267 = 52,478 + 442,789). No per-account student activity schedule printed; one-line Activities Fund schedule recorded. General Fund Discretionary (budget 5,023,943, actual none), ESSA Title IV disbursements (actual none) and Interfund loan out (budget -1,342,292, actual none) have no actual and are omitted. Transfer cross-check: no transfers in or out appear in any fund; no hidden transfers found. General Fund budget receipt 'County Treasurer - taxes' 46,451,351 plus other state receipts 75,590 equals the p4 General Fund property/motor vehicle/public power taxes 46,526,941; the 'other state receipts' lines (codes 3130-3180) are not broken down into homestead, property tax credit and pro-rate anywhere in the report, so the p4 State aid line is not split. Student Fees salaries budget 90,000 and Employee Benefits/other budgets as printed. Read pages 1-14 of 14"
 }

@@ -3,7 +3,7 @@
   "entity_type": "school district",
   "fiscal_year_end": "2025-08-31",
   "basis": "cash",
-  "extraction_attempt": 1,
+  "extraction_attempt": 2,
   "beginning_cash": {
     "amount": 1524744,
     "source_page": 10
@@ -60,10 +60,34 @@
     },
     {
       "fund_type": "governmental",
+      "category": "Homestead Exemption",
+      "original_label": "Other State Receipts (Homestead Exemption)",
+      "amount": 9396,
+      "source_page": 13,
+      "computed": "3130 Homestead Exemption General Fund 9,125 (p13) + Special Building Fund 271 (p18)",
+      "split_from": "Other State Receipts 242,518 (p8): General Fund 242,114 + Special Building Fund 404 (p7)",
+      "detail_category": "Homestead Exemption",
+      "category_decision": "user 2026-10-23"
+    },
+    {
+      "fund_type": "governmental",
+      "category": "Motor Vehicle Pro-Rate",
+      "original_label": "Other State Receipts (Pro-Rate Motor Vehicle)",
+      "amount": 4680,
+      "source_page": 14,
+      "computed": "3180 Pro-Rate Motor Vehicle General Fund 4,547 (p14) + Special Building Fund 133 (p18)",
+      "split_from": "Other State Receipts 242,518 (p8): General Fund 242,114 + Special Building Fund 404 (p7)",
+      "detail_category": "Motor Vehicle Pro-Rate",
+      "category_decision": "user 2026-10-23"
+    },
+    {
+      "fund_type": "governmental",
       "category": "intergovernmental/state aid",
       "original_label": "Other State Receipts",
-      "amount": 242518,
-      "source_page": 8
+      "amount": 228442,
+      "source_page": 8,
+      "computed": "Other State Receipts 242,518 (p8) - homestead exemption 9,396 - pro-rate motor vehicle 4,680; = General Fund codes 3120, 3125, 3165, 3400, 3512, 3535, 3551, 3990 (pp13-14)",
+      "split_from": "Other State Receipts 242,518 (p8): General Fund 242,114 + Special Building Fund 404 (p7)"
     },
     {
       "fund_type": "governmental",
@@ -359,7 +383,6 @@
       "original_label": "State Categorical Programs",
       "amount": 115301,
       "source_page": 10,
-      "review": "program line; counted under instruction",
       "category_decision": "user 2026-10-23"
     },
     {
@@ -375,7 +398,6 @@
       "original_label": "Federal Programs",
       "amount": 108094,
       "source_page": 10,
-      "review": "program line; counted under instruction",
       "category_decision": "user 2026-10-23"
     },
     {
@@ -441,15 +463,22 @@
   },
   "proprietary": null,
   "balance_sheet": {
-    "statement": "Statement of Net Position - Modified Cash Basis",
+    "statement": "Statement of Assets, Liabilities and Fund Balances - Modified Cash Basis - Governmental Funds (governmental lines, pp5-6); Statement of Net Position - Modified Cash Basis (business-type lines and totals, p1)",
     "scope": "cash basis",
-    "column": "Governmental Activities | Business-type Activity | Total (each line tagged fund_type)",
+    "column": "Total Governmental Funds (p6) for governmental lines; Business-Type Activity (p1) for business-type lines; totals from the p1 Total column (each line tagged fund_type)",
     "assets": [
       {
         "category": "Cash and Cash Equivalents",
         "original_label": "Cash and Cash Equivalents",
         "amount": 1660276,
-        "source_page": 1,
+        "source_page": 6,
+        "fund_type": "governmental"
+      },
+      {
+        "category": "Cash and Cash Equivalents",
+        "original_label": "Cash at County Treasurer",
+        "amount": 483971,
+        "source_page": 6,
         "fund_type": "governmental"
       },
       {
@@ -458,13 +487,6 @@
         "amount": 117516,
         "source_page": 1,
         "fund_type": "business-type"
-      },
-      {
-        "category": "Cash and Cash Equivalents",
-        "original_label": "Cash at County Treasurers",
-        "amount": 483971,
-        "source_page": 1,
-        "fund_type": "governmental"
       }
     ],
     "deferred_outflows": [],
@@ -473,7 +495,7 @@
         "category": "Accrued Liabilities",
         "original_label": "Due to Employees - 125 Plan",
         "amount": 859,
-        "source_page": 1,
+        "source_page": 6,
         "fund_type": "governmental"
       }
     ],
@@ -482,22 +504,29 @@
       {
         "category": "Restricted",
         "original_label": "Restricted for: Capital Projects",
-        "amount": 372669,
-        "source_page": 1,
+        "amount": 166813,
+        "source_page": 6,
         "fund_type": "governmental"
       },
       {
-        "category": "Restricted",
-        "original_label": "Restricted for: Student Activities",
+        "category": "Committed",
+        "original_label": "Committed to: Capital Projects",
+        "amount": 205856,
+        "source_page": 6,
+        "fund_type": "governmental"
+      },
+      {
+        "category": "Committed",
+        "original_label": "Committed to: Student Activities",
         "amount": 66559,
-        "source_page": 1,
+        "source_page": 6,
         "fund_type": "governmental"
       },
       {
-        "category": "Unrestricted",
-        "original_label": "Unrestricted",
+        "category": "Unassigned",
+        "original_label": "Unassigned, Reported in: General Fund",
         "amount": 1704160,
-        "source_page": 1,
+        "source_page": 6,
         "fund_type": "governmental"
       },
       {
@@ -1245,7 +1274,6 @@
       "amount": 115301,
       "budget_final": 4500,
       "source_page": 16,
-      "review": "program line; counted under instruction",
       "category_decision": "user 2026-10-23"
     },
     {
@@ -1260,7 +1288,6 @@
       "amount": 108094,
       "budget_final": 175731,
       "source_page": 16,
-      "review": "program line; counted under instruction",
       "category_decision": "user 2026-10-23"
     },
     {
@@ -1571,13 +1598,13 @@
       "fund": "Activities",
       "department": "Fund Balance",
       "section": "revenue",
-      "category": "investment income",
-      "detail_category": "investment income",
+      "category": "Interest Income",
+      "detail_category": "Interest Income",
       "original_label": "Fund Balance",
       "amount": 137,
       "budget_final": null,
       "source_page": 21,
-      "review": "account labeled Fund Balance; receipts 137 equal interest per Activities Fund budget schedule p19"
+      "review": "account labeled Fund Balance; receipts 137 equal the Activities Fund Interest 137 (p7) and the interest per the Activities Fund budget schedule p19"
     },
     {
       "schedule": "Activities Fund Receipts, Disbursements, Transfers and Fund Balance",
@@ -2069,5 +2096,5 @@
       "source_page": 20
     }
   ],
-  "notes": "Modified cash basis school district; basis recorded as cash. Governmental lines come from the Total Governmental Funds column (pp8, 10). Roll-forward: 1,524,744 + 4,757,806 - 4,101,070 - 38,092 (transfer to School Nutrition) = 2,143,388. beginning_cash/ending_cash are the governmental funds' beginning/ending fund balances (cash basis). Business-type: School Nutrition Fund (p12): beginning net position 150,104 + receipts 102,263 (operating 101,808 + interest 455) - disbursements 172,943 + transfers from General Fund 38,092 = 117,516. Statement of Receipts line 'Other' 101,206 split into rental 18,252, donations 450, refunds 15,471, miscellaneous 2,723, ESU 50, sale of property 2,250 (GF schedule pp13-15, sum 39,196) plus Activities Fund 'Other' 62,010 (p7); all tie. Hidden transfer: the General Fund column prints Regular Pupil Transportation 496,652, which includes a 200,000 transfer to the Depreciation Fund (Depreciation Fund shows Transfers from General Fund 200,000, p17); the Adjustments column (p10) removes it, so the Total column is 296,652. Transfer cross-check: GF transfers 88,155 = Activities 50,063 + School Nutrition 38,092 (p21), plus 200,000 to Depreciation; in the Total column only the 38,092 to School Nutrition remains as a transfer (Activities and Depreciation are both governmental, so they net out). Detail: General Fund by function (budget schedule, pp13-16; no Exhibit N in the trimmed PDF); its printed Total Disbursements and Transfers 4,214,956 includes 88,155 transfers and the 200,000 split; transfers shown in other financing. Activities Fund per-account schedule (pp21-22) recorded instead of the one-line Activities budget schedule (p19, receipts 112,210 incl. transfers 50,063; disbursements 84,632). Zero-actual lines omitted from detail; Depreciation Fund 'Transfers to General Fund' actual 0 (budget 5,743) omitted. Receipt category assignment: Public Power District tax = other taxes. Combined fund-level disbursement lines State Categorical Programs and Federal Programs counted under instruction (review). Read pages 1-22 of 22"
+  "notes": "Modified cash basis school district; basis recorded as cash. Governmental lines come from the Total Governmental Funds column (pp8, 10). Roll-forward: 1,524,744 + 4,757,806 - 4,101,070 - 38,092 (transfer to School Nutrition) = 2,143,388. beginning_cash/ending_cash are the governmental funds' beginning/ending fund balances (cash basis). Business-type: School Nutrition Fund (p12): beginning net position 150,104 + receipts 102,263 (operating 101,808 + interest 455) - disbursements 172,943 + transfers from General Fund 38,092 = 117,516. Statement of Receipts line 'Other' 101,206 split into rental 18,252, donations 450, refunds 15,471, miscellaneous 2,723, ESU 50, sale of property 2,250 (GF schedule pp13-15, sum 39,196) plus Activities Fund 'Other' 62,010 (p7); all tie. 'Other State Receipts' 242,518 (General 242,114 + Special Building 404, p7) split with the fund schedules (re-check 2026-10-28): Homestead Exemption 9,396 (9,125 + 271), Motor Vehicle Pro-Rate 4,680 (4,547 + 133), remainder 228,442 state aid (General codes 3120, 3125, 3165, 3400, 3512, 3535, 3551, 3990). Hidden transfer: the General Fund column prints Regular Pupil Transportation 496,652, which includes a 200,000 transfer to the Depreciation Fund (Depreciation Fund shows Transfers from General Fund 200,000, p17); the Adjustments column (p10) removes it, so the Total column is 296,652. Transfer cross-check: GF transfers 88,155 = Activities 50,063 + School Nutrition 38,092 (p21), plus 200,000 to Depreciation; in the Total column only the 38,092 to School Nutrition remains as a transfer (Activities and Depreciation are both governmental, so they net out). Balance sheet (re-check 2026-10-28): governmental lines from the Statement of Assets, Liabilities and Fund Balances - Governmental Funds, Total Governmental Funds column (p6; interfund due from/to 10,000 eliminated to 0 in the Adjustments column), whose totals (assets 2,144,247, liabilities 859, fund balances 2,143,388) equal the government-wide governmental column (p1); fund balances by classification (Restricted, Committed, Unassigned). Business-type lines and printed totals from the Statement of Net Position (p1). Detail: General Fund by function (budget schedule, pp13-16; no Exhibit N in the trimmed PDF); its printed Total Disbursements and Transfers 4,214,956 includes 88,155 transfers and the 200,000 split; transfers shown in other financing. Activities Fund per-account schedule (pp21-22) recorded instead of the one-line Activities budget schedule (p19, receipts 112,210 incl. transfers 50,063; disbursements 84,632); its 'Fund Balance' account receipts 137 are the Activities Fund interest (p7), so Interest Income. Zero-actual lines omitted from detail; Depreciation Fund 'Transfers to General Fund' actual 0 (budget 5,743) omitted. State Categorical Programs and Federal Programs are the report's own lines (pp10, 16). Read pages 1-22 of 22"
 }

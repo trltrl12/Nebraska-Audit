@@ -3,7 +3,7 @@
   "entity_type": "village",
   "fiscal_year_end": "2025-09-30",
   "basis": "cash",
-  "extraction_attempt": 2,
+  "extraction_attempt": 3,
   "beginning_cash": {
     "amount": 17517,
     "source_page": 4
@@ -134,11 +134,12 @@
     },
     {
       "fund_type": "business-type",
-      "category": "Professional/Contract Services",
+      "category": "Purchased Power/Cost of Sales",
       "original_label": "Purchased services",
       "amount": 393028,
       "source_page": 6,
-      "function": "utilities"
+      "function": "utilities",
+      "review": "mix: Electric purchased services 322,968 (82%, likely purchased power, p12) + Water 9,402 and Garbage 60,659 contract services; dominant part used"
     },
     {
       "fund_type": "business-type",
@@ -301,15 +302,29 @@
   },
   "proprietary": null,
   "balance_sheet": {
-    "statement": "Statement of Activities and Net Position - Cash Basis (assets and net position section)",
+    "statement": "Governmental: Statement of Assets and Fund Balances - Cash Basis - Governmental Activities (p3); business-type: Statement of Activities and Net Position - Cash Basis (p2)",
     "scope": "cash basis",
-    "column": "Governmental Activities | Business-type Activities | Total (each line tagged fund_type)",
+    "column": "Total Governmental Funds (p3) | Business-type Activities (p2); totals = Total column (p2) (each line tagged fund_type)",
     "assets": [
       {
         "category": "Cash and Cash Equivalents",
         "original_label": "Cash",
         "amount": -389260,
-        "source_page": 2,
+        "source_page": 3,
+        "fund_type": "governmental"
+      },
+      {
+        "category": "Investments",
+        "original_label": "Certificates of deposit",
+        "amount": 150580,
+        "source_page": 3,
+        "fund_type": "governmental"
+      },
+      {
+        "category": "Cash and Cash Equivalents",
+        "original_label": "Cash held by county treasurer",
+        "amount": 1545,
+        "source_page": 3,
         "fund_type": "governmental"
       },
       {
@@ -322,23 +337,9 @@
       {
         "category": "Investments",
         "original_label": "Certificates of deposit",
-        "amount": 150580,
-        "source_page": 2,
-        "fund_type": "governmental"
-      },
-      {
-        "category": "Investments",
-        "original_label": "Certificates of deposit",
         "amount": 63233,
         "source_page": 2,
         "fund_type": "business-type"
-      },
-      {
-        "category": "Cash and Cash Equivalents",
-        "original_label": "Cash held by county treasurer",
-        "amount": 1545,
-        "source_page": 2,
-        "fund_type": "governmental"
       },
       {
         "category": "restricted assets",
@@ -354,9 +355,24 @@
     "equity": [
       {
         "category": "Restricted",
-        "original_label": "Restricted for capital improvements",
+        "original_label": "Restricted: Capital improvements",
+        "printed_label": "Reserved for capital improvements",
         "amount": 152124,
-        "source_page": 2,
+        "source_page": 3,
+        "fund_type": "governmental"
+      },
+      {
+        "category": "Assigned",
+        "original_label": "Assigned",
+        "amount": 296927,
+        "source_page": 3,
+        "fund_type": "governmental"
+      },
+      {
+        "category": "Unassigned",
+        "original_label": "Unassigned",
+        "amount": -686187,
+        "source_page": 3,
         "fund_type": "governmental"
       },
       {
@@ -365,13 +381,6 @@
         "amount": 25601,
         "source_page": 2,
         "fund_type": "business-type"
-      },
-      {
-        "category": "Unrestricted",
-        "original_label": "Unrestricted",
-        "amount": -389260,
-        "source_page": 2,
-        "fund_type": "governmental"
       },
       {
         "category": "Unrestricted",
@@ -2052,9 +2061,9 @@
     {
       "check": "balance",
       "difference": 1,
-      "source_page": 2,
-      "note": "Statement of Net Position: governmental asset lines (389,260) + 150,580 + 1,545 = (237,135) vs printed total assets (237,136); Cash row (389,260) + 977,349 = 588,089 vs printed Total 588,088 (same 1 on p3). Split asset lines add to 829,048 vs printed total 829,047."
+      "source_page": 3,
+      "note": "Governmental funds statement (p3, same on p2): asset lines (389,260) + 150,580 + 1,545 = (237,135) vs printed total assets (237,136); fund balance lines add to (237,136). Split asset lines add to 829,048 vs printed total assets 829,047 (p2); equity lines add to 829,047."
     }
   ],
-  "notes": "Cash-basis village. Governmental data from p4 (Statement of Receipts, Disbursements, and Changes in Fund Balances - Governmental Activities, Total Governmental Funds): beginning 17,517 + receipts 196,349 - disbursements 451,002 = ending (237,136); the ending balance is total assets incl. CDs and county treasurer cash (General Fund cash is overdrawn, (686,187)). Business-type (Electric, Water, Sewer, Garbage, Leasing) from proprietary statement p6, roll-forward p7; measure recorded as cash-basis net position (equals cash + CDs + meter deposits). Business-type nonoperating interest income, misc income, interest charges and debt payments are printed below operating totals, marked outside_printed_total; reported_totals business-type use the budget schedule's printed totals on p12 (Total receipts 1,011,827; total disbursements 787,958), which equal operating + nonoperating. Balance sheet from p2 (Statement of Activities and Net Position - Cash Basis, Total column); no liabilities printed. General Fund detail uses the p11 departmental schedule (General and Administrative = general government, Police = public safety, Park = culture/recreation, Other column mixes functions so category other with review); the p8 General Fund budget schedule duplicates its Total column and is not recorded (no double counting). Only lines with an actual amount are recorded; budget-only lines (e.g., Street capital outlay 40,000, Street debt proceeds budget 1,440,000, budgeted transfers) are omitted. Street Fund detail from p10. Utility fund lines recorded per fund (Electric, Water, Sewer, Garbage, Leasing) from p12; Total Proprietary Funds column not recorded to avoid double counting. The p13 all-fund budget schedule is a summary and not recorded. Repairs and maintenance in General and Administrative column is blank (the 10,504 on that line in the image belongs to Supplies). Page map: p1-2 government-wide, p3 assets, p4 governmental receipts/disbursements, p5-7 proprietary, p8-9 General Fund budget, p10 Street, p11-12 combining schedules, p13 all funds. Read pages 1-13 of 13"
+  "notes": "Cash-basis village. Governmental data from p4 (Statement of Receipts, Disbursements, and Changes in Fund Balances - Governmental Activities, Total Governmental Funds): beginning 17,517 + receipts 196,349 - disbursements 451,002 = ending (237,136); the ending balance is total assets incl. CDs and county treasurer cash (General Fund cash is overdrawn, (686,187)). Business-type (Electric, Water, Sewer, Garbage, Leasing) from proprietary statement p6, roll-forward p7; measure recorded as cash-basis net position (equals cash + CDs + meter deposits). Business-type nonoperating interest income, misc income, interest charges and debt payments are printed below operating totals on p6; reported_totals business-type use the budget schedule's printed totals on p12 (Total receipts 1,011,827; total disbursements 787,958), which equal operating + nonoperating. Business-type statement 'Purchased services' 393,028 is mostly Electric purchased services 322,968 (p12, likely purchased power), so category Purchased Power/Cost of Sales with review (attempt 3). Balance sheet (attempt 3): governmental lines from the governmental funds Statement of Assets and Fund Balances (p3, Total Governmental Funds; fund balance by classification: Reserved for capital improvements 152,124, Assigned 296,927, Unassigned (686,187)), whose total (237,136) equals the government-wide governmental column on p2; business-type lines from p2 Business-Type Activities column; totals from the p2 Total column; no liabilities printed. General Fund detail uses the p11 departmental schedule (General and Administrative = general government, Police = public safety, Park = culture/recreation, Other column mixes functions so category other with review); the p8 General Fund budget schedule duplicates its Total column and is not recorded (no double counting). Only lines with an actual amount are recorded; budget-only lines (e.g., Street capital outlay 40,000, Street debt proceeds budget 1,440,000, budgeted transfers) are omitted. Street Fund detail from p10. Utility fund lines recorded per fund (Electric, Water, Sewer, Garbage, Leasing) from p12; Total Proprietary Funds column not recorded to avoid double counting. The p13 all-fund budget schedule is a summary and not recorded. Repairs and maintenance in General and Administrative column is blank (the 10,504 on that line in the image belongs to Supplies). Page map: p1-2 government-wide, p3 assets, p4 governmental receipts/disbursements, p5-7 proprietary, p8-9 General Fund budget, p10 Street, p11-12 combining schedules, p13 all funds. Read pages 1-13 of 13"
 }
