@@ -3,7 +3,7 @@
   "entity_type": "city",
   "fiscal_year_end": "2025-09-30",
   "basis": "cash",
-  "extraction_attempt": 1,
+  "extraction_attempt": 2,
   "beginning_cash": {
     "amount": 3382704,
     "source_page": 6
@@ -37,12 +37,12 @@
     },
     {
       "fund_type": "governmental",
-      "category": "other taxes",
+      "category": "Public Power District Sales Tax",
       "original_label": "Taxes (other taxes - NPPD)",
       "amount": 19036,
       "source_page": 2,
       "split_from": "Taxes 437,429 (p5)",
-      "detail_category": "Other / Miscellaneous Taxes",
+      "detail_category": "Public Power District Sales Tax",
       "category_decision": "user 2026-10-23"
     },
     {
@@ -56,9 +56,38 @@
       "fund_type": "governmental",
       "category": "intergovernmental/state aid",
       "original_label": "Intergovernmental",
-      "amount": 1129651,
+      "amount": 1096235,
       "source_page": 5,
-      "review": "includes rural fire cost share 648,212 and motor vehicle fees 13,646 per p16"
+      "split_from": "Intergovernmental 1,129,651 (p5) = General 219,675 (p14) + Street 235,475 + Fire Department 674,501 (p16)",
+      "computed": "Intergovernmental 1,129,651 less Homestead exemption 17,222, Property tax relief 15,790 and Motor vehicle prorate 404 (p14)",
+      "review": "remainder includes rural fire cost share 648,212 and motor vehicle fees 13,646 per p16"
+    },
+    {
+      "fund_type": "governmental",
+      "category": "Homestead Exemption",
+      "original_label": "Intergovernmental: Homestead exemption",
+      "amount": 17222,
+      "source_page": 14,
+      "split_from": "Intergovernmental 1,129,651 (p5); General Fund breakdown p14",
+      "detail_category": "Homestead Exemption"
+    },
+    {
+      "fund_type": "governmental",
+      "category": "Property Tax Credit",
+      "original_label": "Intergovernmental: Property tax relief",
+      "amount": 15790,
+      "source_page": 14,
+      "split_from": "Intergovernmental 1,129,651 (p5); General Fund breakdown p14",
+      "detail_category": "Property Tax Credit"
+    },
+    {
+      "fund_type": "governmental",
+      "category": "Motor Vehicle Pro-Rate",
+      "original_label": "Intergovernmental: Motor vehicle prorate",
+      "amount": 404,
+      "source_page": 14,
+      "split_from": "Intergovernmental 1,129,651 (p5); General Fund breakdown p14",
+      "detail_category": "Motor Vehicle Pro-Rate"
     },
     {
       "fund_type": "governmental",
@@ -2002,7 +2031,7 @@
       "source_page": 19
     }
   ],
-  "notes": "Modified cash basis city. Governmental lines from the Statement of Revenues, Expenditures and Changes in Fund Balances (p5), Total column. Cash basis roll-forward uses the governmental funds fund balances: 3,382,704 + 2,596,570 - 3,122,819 + insurance proceeds 11,244 = 2,867,699 (transfers in and out of 572,926 offset; Total column prints them blank, amounts summed from the fund columns). The 'Taxes' line 437,429 is split using the Statement of Activities general revenues (p2): property 204,433 + sales 187,462 + motor vehicle 26,498 + NPPD 19,036 = 437,429, which also agrees with the combining schedules (p14, p16, p19). Franchise fees 8,014 sit inside 'Other' on p5. Business-type: enterprise funds (Sewer, Water, Sanitation) from the Proprietary Funds statements (p9-p10), Total column; no single total printed, so reported totals add operating revenues/expenditures and nonoperating items (see computed); roll-forward 1,444,200 + 861,700 - 849,876 = 1,456,024 on a net position basis (modified cash basis, includes depreciation). Balance sheet is the government-wide Statement of Net Position, Total column (Internal balances are blank in the total column). Cash flow statement p11-12 not used (modified cash basis, proprietary field null). Detail: General Fund combining schedule by department (p14-15, per department), Special Revenue combining schedule (p16-17) for Street, Fire Department, Ambulance and CCC Inn (Community Development, Recycling and TIF columns skipped there as duplicates of the Nonmajor schedule, which is used for them; its Community Development operating/capital split differs slightly from the special revenue schedule, total 62,634 agrees), and Nonmajor combining schedule (p19) for Recycling, Community Development, TIF and Hoferer Trust. All-funds budget schedule (p13) skipped as less detailed. Detail expenditure objects other than Personnel services are not itemized by object. Pool sales tax 40,147 appears in the General Fund Pool column and also as Water fund city sales tax; recorded as printed. Fire fund transfer in 571,055 equals the General fund transfers out net. Business-type detail: the 'Public Works - Utility Funds' line of the all-funds budget schedule (p13) is recorded as not itemized; that schedule's revenues and totals mix governmental and business-type funds, so no business-type total entry. Read pages 1-19 of 19.",
+  "notes": "Modified cash basis city. Governmental lines from the Statement of Revenues, Expenditures and Changes in Fund Balances (p5), Total column. Cash basis roll-forward uses the governmental funds fund balances: 3,382,704 + 2,596,570 - 3,122,819 + insurance proceeds 11,244 = 2,867,699 (transfers in and out of 572,926 offset; Total column prints them blank, amounts summed from the fund columns). The 'Taxes' line 437,429 is split using the Statement of Activities general revenues (p2): property 204,433 + sales 187,462 + motor vehicle 26,498 + NPPD 19,036 = 437,429, which also agrees with the combining schedules (p14, p16, p19); the NPPD part is Public Power District Sales Tax. Attempt 2 (targeted re-check): the p5 'Intergovernmental' 1,129,651 (General 219,675 + Street 235,475 + Fire 674,501, broken down on p14/p16) is split into Homestead exemption 17,222, Property tax relief 15,790 and Motor vehicle prorate 404 (p14), remainder 1,096,235 stays intergovernmental/state aid (computed; includes rural fire cost share 648,212 and Street motor vehicle fees 13,646). Franchise fees 8,014 sit inside 'Other' on p5. Business-type: enterprise funds (Sewer, Water, Sanitation) from the Proprietary Funds statements (p9-p10), Total column; no single total printed, so reported totals add operating revenues/expenditures and nonoperating items (see computed); roll-forward 1,444,200 + 861,700 - 849,876 = 1,456,024 on a net position basis (modified cash basis, includes depreciation). Balance sheet is the government-wide Statement of Net Position, Total column (Internal balances are blank in the total column; kept because it includes capital assets and debt). Cash flow statement p11-12 not used (modified cash basis, proprietary field null). Detail: General Fund combining schedule by department (p14-15, per department), Special Revenue combining schedule (p16-17) for Street, Fire Department, Ambulance and CCC Inn (Community Development, Recycling and TIF columns skipped there as duplicates of the Nonmajor schedule, which is used for them; its Community Development operating/capital split differs slightly from the special revenue schedule, total 62,634 agrees), and Nonmajor combining schedule (p19) for Recycling, Community Development, TIF and Hoferer Trust. All-funds budget schedule (p13) skipped as less detailed. Detail expenditure objects other than Personnel services are not itemized by object. Pool sales tax 40,147 appears in the General Fund Pool column and also as Water fund city sales tax; recorded as printed. Fire fund transfer in 571,055 equals the General fund transfers out net. Business-type detail: the 'Public Works - Utility Funds' line of the all-funds budget schedule (p13) is recorded as not itemized; that schedule's revenues and totals mix governmental and business-type funds, so no business-type total entry. Read pages 1-19 of 19.",
   "report_discrepancies": [
     {
       "check": "detail",
