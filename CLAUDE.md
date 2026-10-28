@@ -125,7 +125,9 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
   Programs when the report groups them there, otherwise their own function); county treasurer / cash in bank ->
   Cash and Cash Equivalents; renames also cover "Taxes - property", "Personal and Real Property Taxes",
   "Transfers - in/out", "Operating transfers in/out"; capital outlay lines already in category capital outlay are
-  relabelled "Capital Outlay: <function>" too.
+  relabelled "Capital Outlay: <function>" too. New receipt categories out of charges for services: School Lunch Sales,
+  Rentals, Utility Charges, Drivers Education Fees; student fees/admissions/concessions -> Extracurricular Receipts;
+  Drivers Education spending is its own category (not Instruction). Food service lines stay food service.
   Fund names end in "Fund" (e.g. "Water" -> "Water Fund") unless the name already contains "Fund" (user 2026-10-27).
 - **Workbook capitalization (user, 2026-10-26):** build_xlsx.py shows every category, detail_category and original_label
   capitalized (cap(): words already containing a capital kept, small words lowercase), and the first letter of every

@@ -3,7 +3,7 @@
   "entity_type": "city",
   "fiscal_year_end": "2025-09-30",
   "basis": "cash",
-  "extraction_attempt": 1,
+  "extraction_attempt": 2,
   "beginning_cash": {
     "amount": 13656302,
     "source_page": 4
@@ -21,10 +21,33 @@
     },
     {
       "fund_type": "governmental",
+      "category": "Homestead Exemption",
+      "original_label": "Intergovernmental - state: Homestead exemption",
+      "amount": 47044,
+      "source_page": 8,
+      "detail_category": "Homestead Exemption",
+      "split_from": "Intergovernmental - state 345,325 (p4); General Fund breakdown on p8 (Homestead exemption 47,044)",
+      "computed": "split of Intergovernmental - state 345,325 (p4) using p8 General Fund line Homestead exemption 47,044"
+    },
+    {
+      "fund_type": "governmental",
+      "category": "Motor Vehicle Pro-Rate",
+      "original_label": "Intergovernmental - state: Motor vehicle pro rate",
+      "amount": 2337,
+      "source_page": 8,
+      "detail_category": "Motor Vehicle Pro-Rate",
+      "split_from": "Intergovernmental - state 345,325 (p4); General Fund breakdown on p8 (Motor vehicle pro rate 2,337)",
+      "computed": "split of Intergovernmental - state 345,325 (p4) using p8 General Fund line Motor vehicle pro rate 2,337"
+    },
+    {
+      "fund_type": "governmental",
       "category": "intergovernmental/state aid",
       "original_label": "Intergovernmental - state",
-      "amount": 345325,
-      "source_page": 4
+      "amount": 295944,
+      "source_page": 4,
+      "split_from": "Intergovernmental - state 345,325 (p4)",
+      "computed": "remainder: 345,325 - homestead exemption 47,044 - motor vehicle pro rate 2,337 (p8) = 295,944; holds highway allocation 241,900, motor vehicle fee and tax 46,000, Bond Fund intergovernmental 6,854 and library state 1,190",
+      "review": "remainder after split; includes motor vehicle fee and tax 46,000 (p8)"
     },
     {
       "fund_type": "governmental",
@@ -100,7 +123,7 @@
     },
     {
       "fund_type": "business-type",
-      "category": "charges for services/fees",
+      "category": "Utility Charges",
       "original_label": "Utility sales",
       "amount": 4327920,
       "source_page": 6
@@ -121,7 +144,7 @@
     },
     {
       "fund_type": "business-type",
-      "category": "charges for services/fees",
+      "category": "Rentals",
       "original_label": "Rents",
       "amount": 14728,
       "source_page": 6
@@ -243,7 +266,8 @@
       "category": "utilities",
       "original_label": "Utilities and telephone",
       "amount": 49875,
-      "source_page": 6
+      "source_page": 6,
+      "function": "utilities"
     },
     {
       "fund_type": "business-type",
@@ -277,10 +301,13 @@
     },
     {
       "fund_type": "business-type",
-      "category": "utilities",
+      "category": "other",
       "original_label": "Other miscellaneous",
       "amount": 12545,
-      "source_page": 6
+      "source_page": 6,
+      "function": "utilities",
+      "detail_category": "Other / Miscellaneous Expenses",
+      "category_decision": "user (category_decisions.csv)"
     },
     {
       "fund_type": "business-type",
@@ -444,15 +471,29 @@
   },
   "proprietary": null,
   "balance_sheet": {
-    "statement": "Statement of Net Position",
-    "scope": "government-wide",
-    "column": "Governmental Activities | Business-type Activities | Total (memo only) (each line tagged fund_type)",
+    "statement": "Statement of Assets, Liabilities and Fund Balances - Cash Basis - Governmental Funds (governmental lines, p3); Statement of Net Position (business-type lines and totals, p1)",
+    "scope": "cash basis",
+    "column": "Governmental funds Total column (p3) for governmental lines; Statement of Net Position Business-type Activities column (p1) for business-type lines; totals from the Statement of Net Position Total (memo only) column (each line tagged fund_type)",
     "assets": [
       {
         "category": "Cash and Cash Equivalents",
-        "original_label": "Cash",
-        "amount": 49163370,
-        "source_page": 1,
+        "original_label": "Cash in bank",
+        "amount": 49145520,
+        "source_page": 3,
+        "fund_type": "governmental"
+      },
+      {
+        "category": "Cash and Cash Equivalents",
+        "original_label": "Cash with county treasurer",
+        "amount": 17850,
+        "source_page": 3,
+        "fund_type": "governmental"
+      },
+      {
+        "category": "receivables",
+        "original_label": "Special assessments receivable",
+        "amount": 5337,
+        "source_page": 3,
         "fund_type": "governmental"
       },
       {
@@ -468,13 +509,6 @@
         "amount": 139155,
         "source_page": 1,
         "fund_type": "business-type"
-      },
-      {
-        "category": "receivables",
-        "original_label": "Special assessments",
-        "amount": 5337,
-        "source_page": 1,
-        "fund_type": "governmental"
       },
       {
         "category": "capital assets",
@@ -534,6 +568,26 @@
     "deferred_inflows": [],
     "equity": [
       {
+        "category": "Restricted",
+        "original_label": "Restricted",
+        "amount": 1176992,
+        "source_page": 3,
+        "fund_type": "governmental"
+      },
+      {
+        "original_label": "Assigned (see note M)",
+        "amount": 3500000,
+        "source_page": 3,
+        "fund_type": "governmental"
+      },
+      {
+        "category": "Unassigned",
+        "original_label": "Unassigned",
+        "amount": 44491715,
+        "source_page": 3,
+        "fund_type": "governmental"
+      },
+      {
         "category": "Net Investment in Capital Assets",
         "original_label": "Net investment in capital assets",
         "amount": 3604968,
@@ -541,31 +595,11 @@
         "fund_type": "business-type"
       },
       {
-        "original_label": "Assigned (see note M)",
-        "amount": 3500000,
-        "source_page": 1,
-        "fund_type": "governmental"
-      },
-      {
-        "category": "Restricted",
-        "original_label": "Restricted",
-        "amount": 1176992,
-        "source_page": 1,
-        "fund_type": "governmental"
-      },
-      {
         "category": "Restricted",
         "original_label": "Restricted",
         "amount": 2231218,
         "source_page": 1,
         "fund_type": "business-type"
-      },
-      {
-        "category": "Unrestricted",
-        "original_label": "Unrestricted",
-        "amount": 44491715,
-        "source_page": 1,
-        "fund_type": "governmental"
       },
       {
         "category": "Unrestricted",
@@ -942,7 +976,7 @@
       "fund": "Water",
       "department": null,
       "section": "revenue",
-      "category": "charges for services/fees",
+      "category": "Utility Charges",
       "detail_category": "water charges",
       "original_label": "Utility sales",
       "amount": 670066,
@@ -1009,7 +1043,7 @@
       "fund": "Sewer",
       "department": null,
       "section": "revenue",
-      "category": "charges for services/fees",
+      "category": "Utility Charges",
       "detail_category": "sewer charges",
       "original_label": "Utility sales",
       "amount": 3645021,
@@ -1129,5 +1163,5 @@
       "source_page": 10
     }
   ],
-  "notes": "Cash basis city. Governmental from Total column of the cash-basis governmental funds statement (p4: General + Bond). Grants and donations 70,233 printed below the Excess line as Other Financing Sources; recorded as a receipt with outside_printed_total (donations/contributions). Business-type (Water, Sewer) from proprietary statement p6 (Total column, accrual); depreciation included as an expense; bond proceeds 921,562 in business_type.debt_proceeds; net position used as measure. No printed single total for business-type receipts/disbursements, so computed. Several printed totals are off by 1 (see report_discrepancies). Balance sheet is the government-wide Statement of Net Position Total (memo only) column p1; debt (notes and bonds payable) not split by due date. Detail: General Fund recorded from the budget-and-actual schedule (p8) which gives the budget; the combining schedule of General sub-funds (p11: General, Sales Tax, Library, Auditorium, Park, Streets, Keno) was not entered to avoid double counting (it has 7 columns; totals tie to the same fund totals; Public buildings 57,514 and culture 541,002 = 598,516 on p8). Proprietary budget schedule p10 is budgetary basis (differs from p6 statement, negative capital improvements as printed). Hidden-transfer cross-check: no transfers printed. Ending cash 49,168,707 is the printed total fund balance / total assets the statement rolls forward (p3); it includes special assessments receivable 5,337, so cash alone is 49,163,370. Read pages 1-11 of 11."
+  "notes": "Cash basis city. Governmental from Total column of the cash-basis governmental funds statement (p4: General + Bond). Attempt 2: p4 'Intergovernmental - state' 345,325 split with the p8 General Fund breakdown into Homestead Exemption 47,044 and Motor Vehicle Pro-Rate 2,337; remainder 295,944 stays state aid (holds highway allocation, motor vehicle fee and tax 46,000 and Bond Fund intergovernmental 6,854). Business-type 'Other miscellaneous' expense set to cost type other (function utilities). Balance sheet governmental lines now come from the cash-basis governmental funds statement of assets, liabilities and fund balances (p3, Total column), whose totals (assets and fund balances 49,168,707, liabilities 0) equal the government-wide governmental column; business-type lines stay from the Statement of Net Position (p1), and totals are the p1 Total (memo only) column. Grants and donations 70,233 printed below the Excess line as Other Financing Sources; recorded as a receipt with outside_printed_total (donations/contributions). Business-type (Water, Sewer) from proprietary statement p6 (Total column, accrual); depreciation included as an expense; bond proceeds 921,562 in business_type.debt_proceeds; net position used as measure. No printed single total for business-type receipts/disbursements, so computed. Several printed totals are off by 1 (see report_discrepancies). Debt (notes and bonds payable) not split by due date. Detail: General Fund recorded from the budget-and-actual schedule (p8) which gives the budget; the combining schedule of General sub-funds (p11: General, Sales Tax, Library, Auditorium, Park, Streets, Keno) was not entered to avoid double counting (it has 7 columns; totals tie to the same fund totals; Public buildings 57,514 and culture 541,002 = 598,516 on p8). Proprietary budget schedule p10 is budgetary basis (differs from p6 statement, negative capital improvements as printed). Hidden-transfer cross-check: no transfers printed. Ending cash 49,168,707 is the printed total fund balance / total assets the statement rolls forward (p3); it includes special assessments receivable 5,337, so cash alone is 49,163,370. Read pages 1-11 of 11."
 }

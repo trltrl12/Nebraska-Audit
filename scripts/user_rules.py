@@ -38,6 +38,18 @@ DEBT = re.compile(r"debt|bond|lease|principal|interest", re.I)
 BARE_CAPITAL_OUTLAY = re.compile(r"^capital (outlay|expenditures|purchases)$", re.I)
 # school activity fund receipts -> Extracurricular Receipts, unless the label says what else they are
 ACTIVITY = re.compile(r"activit", re.I)
+# own receipt categories out of charges for services (user 2026-10-28)
+CHARGE_CATS = [
+    (re.compile(r"driver'?s'? ?ed", re.I), "Drivers Education Fees"),
+    (re.compile(r"lunch|meal|milk|breakfast|nutrition|lunchroom|cafeteria|food (service|sale)", re.I), "School Lunch Sales"),
+    (re.compile(r"^(\d+ )?(rent|rents|rentals?|rental income|rent income|rental of [a-z ]+|[a-z ]* rentals?|lease and rent|"
+                r"leases? and rentals?|building rent)$", re.I), "Rentals"),
+    (re.compile(r"utilit(y|ies) (sales|collections|charges|revenue)|consumer sales|water (sales|charges)|sewer "
+                r"(sales|charges)|electric(al)? (sales|charges)|sale of (water|electricity|power)", re.I), "Utility Charges"),
+    (re.compile(r"student fees|admission|concession|gate receipts", re.I), "Extracurricular Receipts"),
+]
+UTILITY_FUND = re.compile(r"water|sewer|electric|light|gas|utilit|refuse|sanitation|garbage|trash|solid waste", re.I)
+DRIVERS_ED = re.compile(r"driver'?s'? ?ed", re.I)
 NOT_EXTRACURRICULAR = re.compile(r"interest|tuition|lunch|meal|fine|donat|contribut|grant|reimburs|transfer", re.I)
 # county treasurer / bank cash -> Cash and Cash Equivalents (never "cash and investments")
 CASH_ONLY = re.compile(r"county treasurer|cash (in|at) bank|^cash$|^cash and cash equivalents", re.I)
@@ -241,6 +253,26 @@ def extracurricular_rule(x, log):
         setcat(x, "category", "Extracurricular Receipts", "category: Extracurricular Receipts", log)
 
 
+def charges_rule(x, school, log):
+    """Lines in charges for services that have their own category (user 2026-10-28)."""
+    if x.get("category") != "charges for services/fees":
+        return
+    lab = label_of(x)
+    for pat, cat in CHARGE_CATS:
+        if pat.search(lab) and (cat != "Extracurricular Receipts" or school):
+            setcat(x, "category", cat, "category: " + cat, log)
+            return
+    fund = str(x.get("fund") or "")
+    if x.get("fund_type") == "business-type" and UTILITY_FUND.search(fund) \
+            and re.search(r"sales|charges|collections|services|fees", lab, re.I):
+        setcat(x, "category", "Utility Charges", "category: Utility Charges", log)
+
+
+def drivers_ed_spending_rule(x, log):
+    if DRIVERS_ED.search(label_of(x) + " " + str(x.get("department") or "")) and x.get("category") != "Drivers Education":
+        setcat(x, "category", "Drivers Education", "category: Drivers Education", log)
+
+
 def department_capital_outlay_rule(detail, log):
     """Bare "Capital outlay" lines inside a department -> "Capital Outlay: <function>", the function being the one the
     department's other spending lines carry."""
@@ -399,9 +431,11 @@ def apply(d, stem=""):
         revenue_rules(x, log)
         if school:
             extracurricular_rule(x, log)
+        charges_rule(x, school, log)
     for x in d.get("disbursements") or []:
         decision_rule(x, "expenditure", log)
         spending_rules(x, log)
+        drivers_ed_spending_rule(x, log)
         if school and not lps:
             staff_label_rule(x, log)
     for x in d.get("detail") or []:
@@ -411,9 +445,11 @@ def apply(d, stem=""):
             revenue_rules(x, log)
             if school:
                 extracurricular_rule(x, log)
+            charges_rule(x, school, log)
         elif sec == "expenditure":
             decision_rule(x, "expenditure", log)
             spending_rules(x, log)
+            drivers_ed_spending_rule(x, log)
             if school and not lps:
                 staff_label_rule(x, log)
         elif sec == "other financing":

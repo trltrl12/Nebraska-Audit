@@ -3,7 +3,7 @@
   "entity_type": "village",
   "fiscal_year_end": "2025-09-30",
   "basis": "cash",
-  "extraction_attempt": 1,
+  "extraction_attempt": 2,
   "beginning_cash": {
     "amount": 311412,
     "source_page": 3
@@ -52,7 +52,7 @@
     },
     {
       "fund_type": "governmental",
-      "category": "charges for services/fees",
+      "category": "Rentals",
       "original_label": "Rent income",
       "amount": 320,
       "source_page": 3
@@ -139,7 +139,7 @@
       "original_label": "Supplies and repairs",
       "amount": 55743,
       "source_page": 6,
-      "review": "listed by object",
+      "review": "listed by object; supplies and repairs combined",
       "function": "utilities"
     },
     {
@@ -154,9 +154,11 @@
     {
       "fund_type": "business-type",
       "category": "capital outlay",
-      "original_label": "Capital outlay",
+      "original_label": "Capital Outlay: Utilities",
+      "printed_label": "Capital outlay",
       "amount": 48784,
-      "source_page": 6
+      "source_page": 6,
+      "function": "utilities"
     },
     {
       "fund_type": "business-type",
@@ -182,7 +184,8 @@
       "original_label": "Utilities and telephone",
       "amount": 7123,
       "source_page": 6,
-      "review": "listed by object"
+      "review": "listed by object",
+      "function": "utilities"
     },
     {
       "fund_type": "business-type",
@@ -195,19 +198,19 @@
     },
     {
       "fund_type": "business-type",
-      "category": "utilities",
+      "category": "other",
       "original_label": "Miscellaneous (operating expenditures)",
       "amount": 10574,
       "source_page": 6,
-      "review": "listed by object"
+      "function": "utilities"
     },
     {
       "fund_type": "business-type",
-      "category": "Fuel",
+      "category": "Repairs and Maintenance",
       "original_label": "Vehicle expense",
       "amount": 2854,
       "source_page": 6,
-      "review": "listed by object",
+      "review": "listed by object; vehicle expense mapped to repairs and maintenance (same as detail)",
       "function": "utilities"
     },
     {
@@ -283,15 +286,22 @@
   },
   "proprietary": null,
   "balance_sheet": {
-    "statement": "Statement of Activities and Net Position - Modified Cash Basis (net position section)",
+    "statement": "Statement of Assets and Fund Balances - Modified Cash Basis - Governmental Funds (governmental); Statement of Activities and Net Position - Modified Cash Basis (business-type)",
     "scope": "cash basis",
-    "column": "Governmental Activities | Business-Type Activities | Total (each line tagged fund_type)",
+    "column": "Total Governmental Funds (p4) | Business-Type Activities (p2) (each line tagged fund_type)",
     "assets": [
       {
         "category": "Cash and Cash Equivalents",
         "original_label": "Cash",
         "amount": 396272,
-        "source_page": 2,
+        "source_page": 4,
+        "fund_type": "governmental"
+      },
+      {
+        "category": "Cash and Cash Equivalents",
+        "original_label": "Cash held by county treasurer",
+        "amount": 6870,
+        "source_page": 4,
         "fund_type": "governmental"
       },
       {
@@ -307,13 +317,6 @@
         "amount": 596476,
         "source_page": 2,
         "fund_type": "business-type"
-      },
-      {
-        "category": "Cash and Cash Equivalents",
-        "original_label": "Cash held by county treasurer",
-        "amount": 6870,
-        "source_page": 2,
-        "fund_type": "governmental"
       }
     ],
     "deferred_outflows": [],
@@ -321,10 +324,31 @@
     "deferred_inflows": [],
     "equity": [
       {
-        "category": "Unrestricted",
-        "original_label": "Unrestricted",
-        "amount": 403142,
-        "source_page": 2,
+        "category": "Assigned: Street program",
+        "original_label": "Assigned: Street program",
+        "amount": 184071,
+        "source_page": 4,
+        "fund_type": "governmental"
+      },
+      {
+        "category": "Assigned: General departments",
+        "original_label": "Assigned: General departments",
+        "amount": 142871,
+        "source_page": 4,
+        "fund_type": "governmental"
+      },
+      {
+        "category": "Assigned: Subsequent year's budget",
+        "original_label": "Assigned: Subsequent year's budget",
+        "amount": 2750,
+        "source_page": 4,
+        "fund_type": "governmental"
+      },
+      {
+        "category": "Unassigned",
+        "original_label": "Unassigned",
+        "amount": 73450,
+        "source_page": 4,
         "fund_type": "governmental"
       },
       {
@@ -497,7 +521,7 @@
       "fund": "General Fund",
       "department": "Town Hall",
       "section": "revenue",
-      "category": "charges for services/fees",
+      "category": "Rentals",
       "detail_category": "rentals",
       "original_label": "Rent income",
       "amount": 320,
@@ -554,12 +578,12 @@
       "department": "Social Security",
       "section": "expenditure",
       "category": "general government",
-      "detail_category": "salaries and wages",
+      "detail_category": "employee benefits and payroll taxes",
       "original_label": "Personnel services",
       "amount": 15203,
       "budget_final": null,
       "source_page": 8,
-      "review": "Social Security department; function assumed general government (ties to p3 general government 90,172)"
+      "review": "Social Security department (own levy): personnel services taken as FICA/payroll taxes; function general government (ties to p3 general government 90,172)"
     },
     {
       "schedule": "General Fund combining schedule by department",
@@ -1161,7 +1185,8 @@
       "original_label": "Utilities and telephone",
       "amount": 7123,
       "budget_final": null,
-      "source_page": 9
+      "source_page": 9,
+      "function": "utilities"
     },
     {
       "schedule": "Enterprise Fund combining schedule by department",
@@ -1248,13 +1273,14 @@
       "section": "expenditure",
       "category": "capital outlay",
       "detail_category": "construction/infrastructure",
-      "original_label": "Capital Outlay: Salaries and Wages",
+      "original_label": "Capital Outlay: Utilities",
       "amount": 45979,
       "budget_final": null,
       "source_page": 9,
       "review": "capital outlay not itemized",
-      "computed": "capital outlay under function Salaries and Wages",
-      "printed_label": "Capital outlay"
+      "computed": "capital outlay under function utilities",
+      "printed_label": "Capital outlay",
+      "function": "utilities"
     },
     {
       "schedule": "Enterprise Fund combining schedule by department",
@@ -1264,13 +1290,14 @@
       "section": "expenditure",
       "category": "capital outlay",
       "detail_category": "construction/infrastructure",
-      "original_label": "Capital Outlay: Salaries and Wages",
+      "original_label": "Capital Outlay: Utilities",
       "amount": 2805,
       "budget_final": null,
       "source_page": 9,
       "review": "capital outlay not itemized",
-      "computed": "capital outlay under function Salaries and Wages",
-      "printed_label": "Capital outlay"
+      "computed": "capital outlay under function utilities",
+      "printed_label": "Capital outlay",
+      "function": "utilities"
     },
     {
       "schedule": "Enterprise Fund combining schedule by department",
@@ -1430,5 +1457,5 @@
       "source_page": 3
     }
   ],
-  "notes": "Modified cash basis village (Sept 30, 2025). Governmental receipts/disbursements/transfers from the Total Governmental Funds column on p3 (General + Street + Reclassifications); transfers in 17,326 is net after the reclassification column (transfers out net to zero). Beginning/ending cash = beginning/ending fund balance (cash-basis; ties to p4 assets 403,142). Business-type (Enterprise Fund: Sewer, Water, Light, Garbage) from p6; business-type receipts = operating revenues 468,032 + interest 12,384 and disbursements = operating expenditures 474,530 + debt principal and interest 42,117, which agrees with Statement of Activities business-type expenditures 516,647 (p1). Business-type roll-forward: 973,394 + 480,416 - 516,647 - 17,326 = 919,837. Balance sheet uses the net position section of the Statement of Activities and Net Position (p2), Total column (no liabilities shown). Detail: General Fund by department (p8) and Enterprise combining schedules (pp9-10) recorded; the all-funds budget schedule (p7, report p24) is not itemized because it combines funds and duplicates these schedules and the statements (budget column not captured). Street Fund (revenue 76,459, expenditures 28,605, transfers) has no detail schedule beyond p3. General Fund department functions: General, Social Security and Town Hall = general government (sum 90,172 ties to p3), Park = culture/recreation, Landfill = utilities (p3 'Public Works - Landfill'). Read pages 1-10 of 10 Detail (user 2026-10-27): per-fund lines from the fund statements' columns (p3) added for the funds that had no schedule."
+  "notes": "Modified cash basis village (Sept 30, 2025). Governmental receipts/disbursements/transfers from the Total Governmental Funds column on p3 (General + Street + Reclassifications); transfers in 17,326 is net after the reclassification column (transfers out net to zero). Beginning/ending cash = beginning/ending fund balance (cash-basis; ties to p4 assets 403,142). Business-type (Enterprise Fund: Sewer, Water, Light, Garbage) from p6; business-type receipts = operating revenues 468,032 + interest 12,384 and disbursements = operating expenditures 474,530 + debt principal and interest 42,117, which agrees with Statement of Activities business-type expenditures 516,647 (p1). Business-type roll-forward: 973,394 + 480,416 - 516,647 - 17,326 = 919,837. Balance sheet (attempt 2, user rule 2026-10-27): governmental lines from the governmental funds Statement of Assets and Fund Balances (p4, Total column, fund balance by classification; totals 403,142 equal the government-wide governmental column on p2); business-type lines from the net position section of the Statement of Activities and Net Position (p2); totals from p2 Total column. No liabilities shown. Detail: General Fund by department (p8) and Enterprise combining schedules (pp9-10) recorded; the all-funds budget schedule (p7, report p24) is not itemized because it combines funds and duplicates these schedules and the statements (budget column not captured). Street Fund (revenue 76,459, expenditures 28,605, transfers) has no detail schedule beyond p3. General Fund department functions: General, Social Security and Town Hall = general government (sum 90,172 ties to p3), Park = culture/recreation, Landfill = utilities (p3 'Public Works - Landfill'). Attempt 2: utility capital outlay relabelled 'Capital Outlay: Utilities'; utility Miscellaneous statement line category other (function utilities); statement Vehicle expense set to Repairs and Maintenance to match the detail; Social Security department personnel services set to employee benefits and payroll taxes. Intergovernmental 113,870 has no printed breakdown, kept as state aid. Detail (user 2026-10-27): per-fund lines from the fund statements' columns (p3) added for the funds that had no schedule. Read pages 1-10 of 10"
 }

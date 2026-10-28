@@ -459,7 +459,11 @@ These are the user's decisions; apply them while extracting. After extraction th
   Capacity Tax, Private Sector Share of Projects, Penalties and Interest on Taxes (never inside property tax); Homestead
   Exemption, Property Tax Credit, ESU Receipts, Motor Vehicle Pro-Rate (never inside state aid: split a combined state
   aid line using the report's own breakdown); Tuition Received; Interest Income (interest lines; investment income keeps
-  dividends/gains); Extracurricular Receipts (school activity receipts); Reimbursement for Services; Turnback.
+  dividends/gains); Extracurricular Receipts (school activity receipts, student fees, admissions, concessions);
+  Reimbursement for Services; Turnback; School Lunch Sales (lunch/meal/milk/nutrition sales); Rentals (rent, rental
+  income); Utility Charges (utility fund sales/charges/collections); Drivers Education Fees. Charges for services is
+  only for genuine fees for services; unexplained "Local receipts/Other" lines get their breakdown from the schedules.
+- **Drivers Education** spending is its own category (never Instruction).
 - **Spending:** every capital outlay line, also inside a department, is category capital outlay labelled
   "Capital Outlay: <function>" (printed text in printed_label); capital outlay that is a debt/lease payment stays debt
   service. Debt service principal/interest lines are category "Debt Service" with `debt_service_part`
