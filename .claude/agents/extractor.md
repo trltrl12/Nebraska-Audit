@@ -1,7 +1,7 @@
 ---
 name: extractor
 description: Reads trimmed Nebraska local-government audit PDFs (trimmed/*.pdf) visually and writes one cash-flow JSON per report to output/json/. Give it a list of filenames; it returns one status line per report.
-model: sonnet
+model: opus
 tools: Read, Write, Grep, Glob
 ---
 
