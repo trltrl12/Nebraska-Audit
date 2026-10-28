@@ -3,7 +3,7 @@
   "entity_type": "village",
   "fiscal_year_end": "2025-09-30",
   "basis": "cash",
-  "extraction_attempt": 2,
+  "extraction_attempt": 3,
   "beginning_cash": {
     "amount": 887676,
     "source_page": 4
@@ -22,12 +22,13 @@
     },
     {
       "fund_type": "governmental",
-      "category": "intergovernmental/state aid",
+      "category": "Property Tax Credit",
       "original_label": "Taxes",
       "amount": 4086,
       "source_page": 4,
       "split_from": "Taxes 70,348 (p4); General Fund property tax credit 4,037 (p10) + Street Fund property tax credit 49 (p13)",
-      "computed": "4,037 + 49 (p10, p13)"
+      "computed": "4,037 + 49 (p10, p13)",
+      "detail_category": "Property Tax Credit"
     },
     {
       "fund_type": "governmental",
@@ -39,20 +40,48 @@
     },
     {
       "fund_type": "governmental",
-      "category": "other taxes",
+      "category": "Public Power District Sales Tax",
       "original_label": "Taxes",
       "amount": 6839,
       "source_page": 4,
       "split_from": "Taxes 70,348 (p4); Nebraska public power district 6,839 (p10)",
-      "detail_category": "Other / Miscellaneous Taxes",
-      "category_decision": "user 2026-10-23"
+      "detail_category": "Public Power District Sales Tax"
     },
     {
       "fund_type": "governmental",
       "category": "intergovernmental/state aid",
       "original_label": "Intergovernmental - state",
-      "amount": 118271,
-      "source_page": 4
+      "amount": 110246,
+      "source_page": 4,
+      "split_from": "Intergovernmental - state 118,271 (p4); General Municipal equalization aid 39,220 (p10) + Street Highway allocation 70,426 + Incentive payment 600 (p13)",
+      "computed": "118,271 - Homestead 3,180 - Prorate motor vehicle 111 - Street motor vehicle fee 4,734 = 39,220 + 70,426 + 600 (p10, p13)"
+    },
+    {
+      "fund_type": "governmental",
+      "category": "Homestead Exemption",
+      "original_label": "Intergovernmental - state",
+      "amount": 3180,
+      "source_page": 4,
+      "split_from": "Intergovernmental - state 118,271 (p4); General Homestead exemption 3,142 (p10) + Street Homestead exemption 38 (p13)",
+      "computed": "3,142 + 38 (p10, p13)",
+      "detail_category": "Homestead Exemption"
+    },
+    {
+      "fund_type": "governmental",
+      "category": "Motor Vehicle Pro-Rate",
+      "original_label": "Intergovernmental - state",
+      "amount": 111,
+      "source_page": 4,
+      "split_from": "Intergovernmental - state 118,271 (p4); General Prorate motor vehicle 111 (p10)",
+      "detail_category": "Motor Vehicle Pro-Rate"
+    },
+    {
+      "fund_type": "governmental",
+      "category": "motor vehicle tax",
+      "original_label": "Intergovernmental - state",
+      "amount": 4734,
+      "source_page": 4,
+      "split_from": "Intergovernmental - state 118,271 (p4); Street Motor vehicle fee 4,734 (p13)"
     },
     {
       "fund_type": "governmental",
@@ -2156,12 +2185,12 @@
       "source_page": 2
     }
   ],
-  "notes": "Modified cash basis village (FY ended 9/30/2025). Governmental receipts/disbursements from the Total Governmental Funds column of the governmental funds statement (p4); the 'Taxes' line (70,348) is split using the General and Street fund statements (property tax credit 4,037 + 49 is recorded as intergovernmental/state aid per the extractor rules, although the p2/p4 statements print it under Taxes) and the 'Other' line (62,106) is split by the fund statements (p10, p13, p18, p19, p20); Intergovernmental - state 118,271 is kept as printed (it includes Street motor vehicle fee 4,734). Loan proceeds 255,001 and transfers 24,892 in/out are in their own fields. Business-type from the proprietary statement p6 (Totals column): balances are cash (modified cash basis; net position equals cash incl. restricted); Loan proceeds 82,060 are in business_type.debt_proceeds. Business-type receipts total 478,887 is not printed; computed (excludes loan proceeds); disbursements 527,775 agrees with p2 Total business-type activities. The proprietary statement prints Miscellaneous income 1,230 but p7 calls it Cash receipts from dividends; classified as investment income with review. Balance sheet: Statement of Net Position - Modified Cash Basis, Total column (p1); no liabilities printed, total_liabilities left null. Detail: the only budget schedule in the trimmed PDF is the All Funds combined budget-and-actual schedule (p9), with no per-fund budget columns and so no business-type per-fund budget lines; it is not recorded in detail to avoid double counting with the fund-level statements (budget_final is therefore null throughout). Detail instead uses the per-fund actual statements: General (p10-12, more detailed than p4), Street, Community Improvement, Cemetery, Cafe, Housing, Public Trust, Medical Center (p13-20) and Water/Sewer/Sanitation from p6. The Cafe, Community Improvement and Cemetery statements print no total expenditures line, so no expenditure detail_total is given for them; Housing and Medical Center expenditures are single unlabeled lines. General Fund loan proceeds (255,001) sit inside printed Total Revenues 486,513 so that total carries includes other financing; General transfers out and Street transfers in are printed below the expenditure totals (outside_printed_total). Community Improvement 'DONATION' 73,449 and Cafe 'Donations' 66,525 are treated as spending (they match Economic Development 139,974 on p4). Business-type fund expenditure totals use the per-fund total expenditures printed on p2 (statement of activities) because p6 prints only operating expenditure totals. Page mapping: trimmed p1-8 = report pages 5-12 (statements), p9 = report p28, p10-20 = report p30-40. Read pages 1-20 of 20 Balance sheet (user 2026-10-27): governmental lines from the governmental funds statement of assets, liabilities and fund balances (p3), Total Governmental Funds column.",
+  "notes": "Modified cash basis village (FY ended 9/30/2025). Governmental receipts/disbursements from the Total Governmental Funds column of the governmental funds statement (p4); the 'Taxes' line (70,348) is split using the General and Street fund statements (p10, p13): property tax 52,456, Property Tax Credit 4,086, motor vehicle tax 6,967, Public Power District Sales Tax 6,839. Attempt 3 (2026-10-28 re-check): 'Intergovernmental - state' 118,271 is now split using the General (p10) and Street (p13) fund statements into state aid 110,246 (municipal equalization 39,220 + highway allocation 70,426 + incentive 600), Homestead Exemption 3,180 (3,142 + 38), Motor Vehicle Pro-Rate 111 and Street motor vehicle fee 4,734 (motor vehicle tax); the 'Other' line (62,106) is split by the fund statements (p10, p13, p18, p19, p20). Loan proceeds 255,001 and transfers 24,892 in/out are in their own fields. Business-type from the proprietary statement p6 (Totals column): balances are cash (modified cash basis; net position equals cash incl. restricted); Loan proceeds 82,060 are in business_type.debt_proceeds. Business-type receipts total 478,887 is not printed; computed (excludes loan proceeds); disbursements 527,775 agrees with p2 Total business-type activities. The proprietary statement prints Miscellaneous income 1,230 but p7 calls it Cash receipts from dividends; classified as investment income with review. Balance sheet: Statement of Net Position - Modified Cash Basis, Total column (p1); no liabilities printed, total_liabilities left null. Detail: the only budget schedule in the trimmed PDF is the All Funds combined budget-and-actual schedule (p9), with no per-fund budget columns and so no business-type per-fund budget lines; it is not recorded in detail to avoid double counting with the fund-level statements (budget_final is therefore null throughout). Detail instead uses the per-fund actual statements: General (p10-12, more detailed than p4), Street, Community Improvement, Cemetery, Cafe, Housing, Public Trust, Medical Center (p13-20) and Water/Sewer/Sanitation from p6. The Cafe, Community Improvement and Cemetery statements print no total expenditures line, so no expenditure detail_total is given for them; Housing and Medical Center expenditures are single unlabeled lines. General Fund loan proceeds (255,001) sit inside printed Total Revenues 486,513 so that total carries includes other financing; General transfers out and Street transfers in are printed below the expenditure totals (outside_printed_total). Community Improvement 'DONATION' 73,449 and Cafe 'Donations' 66,525 are treated as spending (they match Economic Development 139,974 on p4). Business-type fund expenditure totals use the per-fund total expenditures printed on p2 (statement of activities) because p6 prints only operating expenditure totals. Page mapping: trimmed p1-8 = report pages 5-12 (statements), p9 = report p28, p10-20 = report p30-40. Balance sheet (user 2026-10-27): governmental lines from the governmental funds statement of assets, liabilities and fund balances (p3), Total Governmental Funds column. Read pages 1-20 of 20",
   "decision_needed": [
     {
       "question": "Housing Fund 'Principal collected on notes receivable' 17,196 (p18) is loan principal repaid to the village, printed inside Total revenues and inside the p4 'Other' receipts line: should it count as a receipt?",
       "amount": 17196,
-      "recorded_as": "receipts[17] / detail[67] category other (review), as printed",
+      "recorded_as": "receipts[20] / detail[67] category other (review), as printed",
       "source_page": 18
     },
     {
