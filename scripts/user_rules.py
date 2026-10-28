@@ -47,6 +47,15 @@ CHARGE_CATS = [
     (re.compile(r"utilit(y|ies) (sales|collections|charges|revenue)|consumer sales|water (sales|charges)|sewer "
                 r"(sales|charges)|electric(al)? (sales|charges)|sale of (water|electricity|power)", re.I), "Utility Charges"),
     (re.compile(r"student fees|admission|concession|gate receipts", re.I), "Extracurricular Receipts"),
+    (re.compile(r"reimburs|refund", re.I), "reimbursements/refunds"),
+    (re.compile(r"postsecondary|tuition|summer school|preschool", re.I), "Tuition Received"),
+    (re.compile(r"ambulance|rescue", re.I), "Ambulance Fees"),
+    (re.compile(r"cemetery|burial|sale of lots|lot sales", re.I), "Cemetery Fees"),
+    (re.compile(r"garbage|refuse|trash|landfill|solid waste|sanitation", re.I), "Utility Charges"),
+    (re.compile(r"fees? of office|county clerk|register of deeds|recording fees|clerk.*fees|treasurer.*fees|sheriff.*fees|"
+                r"court (costs|fees)|filing fees", re.I), "Fees of Office"),
+    (re.compile(r"licen[cs]e|permit", re.I), "licenses and permits"),
+    (re.compile(r"pool|park|recreation|golf|ball ?field|campground|swim", re.I), "Recreation Fees"),
 ]
 UTILITY_FUND = re.compile(r"water|sewer|electric|light|gas|utilit|refuse|sanitation|garbage|trash|solid waste", re.I)
 DRIVERS_ED = re.compile(r"driver'?s'? ?ed", re.I)

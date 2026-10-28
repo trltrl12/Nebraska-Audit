@@ -461,7 +461,10 @@ These are the user's decisions; apply them while extracting. After extraction th
   aid line using the report's own breakdown); Tuition Received; Interest Income (interest lines; investment income keeps
   dividends/gains); Extracurricular Receipts (school activity receipts, student fees, admissions, concessions);
   Reimbursement for Services; Turnback; School Lunch Sales (lunch/meal/milk/nutrition sales); Rentals (rent, rental
-  income); Utility Charges (utility fund sales/charges/collections); Drivers Education Fees. Charges for services is
+  income); Utility Charges (utility fund sales/charges/collections, garbage/refuse); Drivers Education Fees; Recreation
+  Fees (pool, park, golf, recreation); Cemetery Fees; Ambulance Fees (ambulance, rescue); Fees of Office (clerk, register
+  of deeds, recording, treasurer/sheriff/court fees); postsecondary/tuition -> Tuition Received; reimbursements ->
+  reimbursements/refunds; licenses/permits -> licenses and permits. Charges for services is
   only for genuine fees for services; unexplained "Local receipts/Other" lines get their breakdown from the schedules.
 - **Drivers Education** spending is its own category (never Instruction).
 - **Spending:** every capital outlay line, also inside a department, is category capital outlay labelled
