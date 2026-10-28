@@ -23,18 +23,25 @@ JSON_DIR = ROOT / "output" / "json"
 # --- revenue labels (receipts[] and detail[] revenue lines); printed text kept in printed_label ---
 REV_LABELS = [
     (r"^(taxes:\s*)?sales and use( tax)?$", "Sales and Use Tax", None),
-    (r"^(taxes:\s*)?(property|property tax|real property and personal property tax|property and real estate( taxes)?)$",
-     "Property Tax", None),
+    (r"^(taxes\s*[:\-–]?\s*)?(property|property tax(es)?|real property and personal property tax(es)?|"
+     r"personal and real property tax(es)?|property and real estate( taxes)?)$", "Property Tax", None),
     (r"^(taxes:\s*)?occupation( tax)?$", "Occupation Tax", None),
     (r"^investment (income|earnings)$", "Investment Earnings", None),
     (r"^(taxes:\s*)?turnback( tax)?$", "Turnback", "Turnback"),
     (r"^(taxes:\s*)?sundry and in lieu( tax)?$", "Sundry and in Lieu", None),
 ]
 REIMB_SERVICES = re.compile(r"^(\d+ )?reimbursements? for services$", re.I)
-TRANSFER_LABEL = re.compile(r"^transfers? (in|out)$", re.I)
+TRANSFER_LABEL = re.compile(r"^(?:operating )?transfers?\s*[-–]?\s*(in|out)$", re.I)
 CATEGORICAL_PRIVATE = re.compile(r"categorical.*(corporat|private)", re.I)
 CAPITAL_OUTLAY = re.compile(r"capital outlay", re.I)
 DEBT = re.compile(r"debt|bond|lease|principal|interest", re.I)
+BARE_CAPITAL_OUTLAY = re.compile(r"^capital (outlay|expenditures|purchases)$", re.I)
+# school activity fund receipts -> Extracurricular Receipts, unless the label says what else they are
+ACTIVITY = re.compile(r"activit", re.I)
+NOT_EXTRACURRICULAR = re.compile(r"interest|tuition|lunch|meal|fine|donat|contribut|grant|reimburs|transfer", re.I)
+# county treasurer / bank cash -> Cash and Cash Equivalents (never "cash and investments")
+CASH_ONLY = re.compile(r"county treasurer|cash (in|at) bank|^cash$|^cash and cash equivalents", re.I)
+NOT_CASH_ONLY = re.compile(r"invest|certificat|time deposit|savings|pooled", re.I)
 FUNCTION_NAMES = {
     "general government": "General Government", "public safety": "Public Safety",
     "streets/highways": "Streets and Highways", "culture/recreation": "Culture and Recreation",
@@ -219,6 +226,43 @@ def spending_rules(x, log):
         relabel(x, f"Capital Outlay: {fn}", "label: Capital Outlay: <function>", log)
 
 
+def staff_label_rule(x, log):
+    """Labels as printed: undo the school "Support services - instruction" -> "Staff" relabel (not Lincoln PS)."""
+    if x.get("original_label") == "Staff" and x.get("printed_label") and x["printed_label"] != "Staff":
+        x["original_label"] = x.pop("printed_label")
+        log["label: printed label instead of Staff"] += 1
+
+
+def extracurricular_rule(x, log):
+    """School activity fund receipts are Extracurricular Receipts (user 2026-10-23, 2026-10-28)."""
+    where = " ".join(str(x.get(k) or "") for k in ("fund", "schedule", "original_label", "printed_label"))
+    if x.get("category") == "charges for services/fees" and ACTIVITY.search(where) \
+            and not NOT_EXTRACURRICULAR.search(label_of(x)):
+        setcat(x, "category", "Extracurricular Receipts", "category: Extracurricular Receipts", log)
+
+
+def department_capital_outlay_rule(detail, log):
+    """Bare "Capital outlay" lines inside a department -> "Capital Outlay: <function>", the function being the one the
+    department's other spending lines carry."""
+    fn_of = {}
+    for x in detail:
+        cat = x.get("category") or ""
+        if x.get("section") == "expenditure" and x.get("department") and cat and cat != "capital outlay" \
+                and not DEBT.search(cat):
+            fn_of.setdefault((x.get("schedule"), x.get("fund"), x.get("department")), Counter())[cat] += 1
+    for x in detail:
+        if x.get("section") != "expenditure" or x.get("category") != "capital outlay" or not x.get("department") \
+                or not BARE_CAPITAL_OUTLAY.match((x.get("original_label") or "").strip()):
+            continue
+        c = fn_of.get((x.get("schedule"), x.get("fund"), x.get("department")))
+        if not c:
+            continue
+        cat = c.most_common(1)[0][0]
+        fn = FUNCTION_NAMES.get(cat.lower(), cat)
+        x["computed"] = (x["computed"] + "; " if x.get("computed") else "") + f"capital outlay under function {cat}"
+        relabel(x, f"Capital Outlay: {fn}", "label: Capital Outlay: <function> (department)", log)
+
+
 def other_financing_rules(x, log):
     m = TRANSFER_LABEL.match((x.get("original_label") or "").strip())
     if m:
@@ -254,6 +298,10 @@ def balance_sheet_rules(bs, log):
             relabel(x, DUE_PARTS[m.group(2).lower()], "label: Due ... part", log)
         elif re.match(r"^due to pension trust funds?$", lab, re.I):
             setcat(x, "category", "Due to Pension Trust Fund", "category: Due to Pension Trust Fund", log)
+    for x in bs.get("assets") or []:
+        if isinstance(x, dict) and x.get("category") == "cash and investments" and CASH_ONLY.search(label_of(x)) \
+                and not NOT_CASH_ONLY.search(label_of(x)):
+            setcat(x, "category", "Cash and Cash Equivalents", "category: Cash and Cash Equivalents", log)
     for x in bs.get("equity") or []:
         if isinstance(x, dict) and NICA.search(label_of(x)):
             setcat(x, "category", "Net Investment in Capital Assets", "category: Net Investment in Capital Assets", log)
@@ -344,25 +392,36 @@ def apply(d, stem=""):
     log = Counter()
     # fund-name rule: only reports whose detail was built per fund from the statements (cities and villages)
     per_fund = "per-fund lines from the fund statements" in (d.get("notes") or "") or bool(d.get("_per_fund"))
+    school = d.get("entity_type") == "school district"
+    lps = entity_of(stem) == "Lincoln_Public_Schools"
     for x in d.get("receipts") or []:
         decision_rule(x, "revenue", log)
         revenue_rules(x, log)
+        if school:
+            extracurricular_rule(x, log)
     for x in d.get("disbursements") or []:
         decision_rule(x, "expenditure", log)
         spending_rules(x, log)
+        if school and not lps:
+            staff_label_rule(x, log)
     for x in d.get("detail") or []:
         sec = x.get("section")
         if sec == "revenue":
             decision_rule(x, "revenue", log)
             revenue_rules(x, log)
+            if school:
+                extracurricular_rule(x, log)
         elif sec == "expenditure":
             decision_rule(x, "expenditure", log)
             spending_rules(x, log)
+            if school and not lps:
+                staff_label_rule(x, log)
         elif sec == "other financing":
             other_financing_rules(x, log)
         fund_name_rule(x, log, per_fund)
     for x in d.get("detail_totals") or []:
         fund_name_rule(x, log, per_fund)
+    department_capital_outlay_rule(d.get("detail") or [], log)
     if isinstance(d.get("balance_sheet"), dict):
         balance_sheet_rules(d["balance_sheet"], log)
     utility_object_rule(d, log)

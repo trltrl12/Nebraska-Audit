@@ -29,7 +29,11 @@ improvement of instruction) with detail_category `Pupils` / `Staff` on statement
 (2300, board, executive admin, legal), `School Administration` (2400, principal), `Business` (2500, central/fiscal
 services), `Building and Grounds` (2600, operation and maintenance of plant, security), `Community Service
 Operations`, `State Categorical Programs` (lines labelled state categorical / state programs), `Federal Programs`
-(lines labelled federal programs); other support services lines stay `support services`;
+(lines labelled federal programs); program lines (e.g. 3535 High Ability Learners, 6200 Title I, IDEA, REAP) follow
+the report's own grouping (user 2026-10-28): when the report prints them under a state categorical / federal programs
+heading or counts them in that statement line, use that function; when it doesn't group them, leave them in their
+own function. Other support services lines stay `support services`. Labels are as printed: never relabel
+"Support services - instruction" as "Staff" (only the Lincoln Public Schools ruling below uses "Staff");
 `Debt Service` (detail_category `Principal`, `Interest` (incl. bond fees) or `Principal and Interest (combined)`
 on statement lines); transportation, capital outlay, food service and student activities as before.
 Schedule detail lines keep the object (salaries, supplies ...) as detail_category.
@@ -300,7 +304,8 @@ the same category for the same label everywhere in a report (receipts and detail
 mixes two categories ("Permits, fees and licenses", "Miscellaneous and reimbursements") gets the
 dominant one plus `"review"` naming the mix. This includes broad statement lines ("Other local
 receipts", "Non-revenue receipts", "Local", "Other"): before putting one in `other`, look up what
-it is made of in the fund schedules (activity fund receipts → charges for services; insurance
+it is made of in the fund schedules (school activity fund receipts → Extracurricular Receipts, unless the report says
+they are for something else, e.g. tuition or a named fee; insurance
 adjustments → reimbursements; donations; interest; property tax…). For counties and cities, the Statement of
 Activities' charges for services by function/department also shows what a fund's "Local" line holds. If any category is more than
 half of it, use that category (or split with `split_from`). `other` is only for lines that stay
@@ -446,8 +451,8 @@ When a function line mixes categories, pick the dominant one and mention it in `
 These are the user's decisions; apply them while extracting. After extraction the main session also runs
 `python3 scripts/user_rules.py <stem>`, which re-applies the label/category ones mechanically.
 - **Revenue labels** (receipts and detail revenue; printed text in `printed_label`): Sales and Use / Sales and use tax
-  -> "Sales and Use Tax"; Property / Property Tax / Taxes: Property / Real Property and Personal Property Tax / Property
-  and real estate (taxes) -> "Property Tax"; Occupation (tax) -> "Occupation Tax"; Investment income /
+  -> "Sales and Use Tax"; Property / Property Tax / Taxes: Property / Taxes - property / Real Property and Personal
+  Property Tax / Personal and Real Property Taxes / Property and real estate (taxes) -> "Property Tax"; Occupation (tax) -> "Occupation Tax"; Investment income /
   earnings -> "Investment Earnings"; Turnback (Tax) -> "Turnback" (category Turnback, never state aid); Sundry and In
   Lieu (Tax) -> "Sundry and in Lieu" (category In Lieu of Tax).
 - **Own receipt categories:** Carline Tax, Public Power District Sales Tax (incl. "NPPD 5%"), In Lieu of Tax, Nameplate
@@ -467,7 +472,10 @@ These are the user's decisions; apply them while extracting. After extraction th
   (taxes, sales tax, franchise fees, in lieu of tax paid), utilities (utility bills: power, phone), other (miscellaneous);
   set `function: "utilities"`. Lines that are a function (Water, Sewer, Distribution, Operating expenses) stay
   "utilities". The fund column names the utility.
-- **Other financing (detail):** transfer lines labelled "Transfers In" / "Transfers Out" (printed text in printed_label).
+- **Other financing (detail):** transfer lines (incl. "Transfers - in", "Operating transfers in") labelled "Transfers
+  In" / "Transfers Out" (printed text in printed_label).
+- **County treasurer / cash in bank balances** are Cash and Cash Equivalents (not "cash and investments", which is only
+  for lines that combine cash with investments).
 - **Balance sheet:** deferred outflows -> Deferred Loss on Refunding / Deferred Outflows for Other Postemployment
   Benefits / Deferred Outflows for Pensions; deferred inflows -> Deferred Gain on Refunding / Deferred Inflows for
   Leases / Deferred Inflows for Other Postemployment Benefits / Deferred Inflows for Pensions. Liabilities printed as
@@ -480,10 +488,12 @@ These are the user's decisions; apply them while extracting. After extraction th
   and fund balances (Total column) when its totals equal the government-wide figures; otherwise (capital assets, debt
   or interfund amounts on the government-wide statement) keep the Statement of Net Position. GAAP: Statement of Net
   Position.
-- **Per-fund detail (cities and villages):** when the only supplementary schedule is a combined all-funds one (or none),
+- **Per-fund detail (cities and villages):** when the only supplementary schedule is a combined all-funds one,
   detail is one line per individual fund column of the governmental funds statement and the proprietary funds
   statement (never the Total column), `fund` = the column heading ending in "Fund" (add it unless already there); if a
   single fund has its own schedule that ties to its column, keep that schedule for that fund and add the other funds.
+  When the report has no supplementary schedule at all, leave detail empty; when some funds have their own schedules,
+  don't add statement lines for the other funds (user 2026-10-28: schedule lines show funds, statement lines don't).
 
 - **Entity rulings (any year; match the entity, not the year):**
   - Lincoln (city): Equipment Maintenance, Interest, Fiscal Charges, Mass Transit, Bond Retirement, Leases and SBITA

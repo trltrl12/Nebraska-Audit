@@ -113,9 +113,19 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
   governmental funds statement of assets, liabilities and fund balances (Total column; fund balance by classification)
   where its totals equal the government-wide figures; reports whose government-wide figures include capital assets,
   debt or interfund amounts keep the Statement of Net Position. GAAP reports keep the Statement of Net Position.
-- **Per-fund detail (user, 2026-10-27, cities and villages):** where detail had only a combined all-funds schedule (or
-  none), detail is one line per individual fund column of the governmental funds and proprietary funds statements
-  (Total column never used); the combined schedule lines are removed.
+- **Per-fund detail (user, 2026-10-27, cities and villages):** where detail had only a combined all-funds schedule,
+  detail is one line per individual fund column of the governmental funds and proprietary funds statements
+  (Total column never used); the combined schedule lines are removed. User 2026-10-28: when there is no schedule at
+  all, detail stays empty; when some funds have their own schedules, statement lines are not added for the others
+  (schedule lines show funds, statement lines don't). Reports that already have such lines keep them.
+- **User decisions 2026-10-28 (from the 100-report audit, all reports):** labels as printed (school "Support services -
+  instruction" is never relabelled "Staff"; only the Lincoln Public Schools ruling uses Staff); school activity fund
+  receipts -> Extracurricular Receipts unless the report says they are for something else; school program lines
+  (3535 High Ability Learners, 6200 Title I, IDEA...) follow the report's own grouping (State Categorical / Federal
+  Programs when the report groups them there, otherwise their own function); county treasurer / cash in bank ->
+  Cash and Cash Equivalents; renames also cover "Taxes - property", "Personal and Real Property Taxes",
+  "Transfers - in/out", "Operating transfers in/out"; capital outlay lines already in category capital outlay are
+  relabelled "Capital Outlay: <function>" too.
   Fund names end in "Fund" (e.g. "Water" -> "Water Fund") unless the name already contains "Fund" (user 2026-10-27).
 - **Workbook capitalization (user, 2026-10-26):** build_xlsx.py shows every category, detail_category and original_label
   capitalized (cap(): words already containing a capital kept, small words lowercase), and the first letter of every
