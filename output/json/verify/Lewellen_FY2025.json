@@ -1,18 +1,46 @@
 {
   "stem": "Lewellen_FY2025",
-  "values_checked": 40,
+  "values_checked": 42,
   "issues": [
-    {"severity": "error", "path": "reported_totals.business-type.disbursements.includes", "page": 2,
-     "extracted": [], "on_page": "Sewer 21,357.18 + Trash 47,827.19 = 69,184.37 incl. line 49 Transfers Out of Surplus Fees 3,000.00",
-     "issue": "[fixed 2026-10-28: includes set to [\"transfers_net\"], non-schema includes_split removed] The total includes the 3,000 transfer, but includes is [] (the transfer is noted only in a non-schema 'includes_split' field). Business disbursement lines sum to 66,184.37, so the totals check fails by 3,000. includes should be [\"transfers_net\"]."},
-    {"severity": "error", "path": "receipts[11].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Sewer Fund) 29,178.75",
-     "issue": "[fixed 2026-10-28: category Utility Charges, matching the Trash Fund line] Sewer fund charges are Utility Charges under the user rules, and the matching Trash fund line already uses Utility Charges. The two lines are inconsistent."},
-    {"severity": "warning", "path": "receipts[10].category", "page": 1,
-     "extracted": "keno/lottery", "on_page": "Local Receipts: Other (Lottery Fund) 43.32",
-     "issue": "Category guessed. A small 'Other' receipt in the Lottery fund (which holds a CD) is more likely interest."},
-    {"severity": "warning", "path": "balance_sheet.assets", "page": 1,
-     "extracted": null, "on_page": "County Treasurer Balance at September 30, 2025: 4,228.23 (October 1, 2024: 2,937.81)",
-     "issue": "[fixed 2026-10-28: county treasurer memo balances recorded in notes; not added to assets because they are outside the printed fund balances] The county treasurer balance is printed on Exhibit A but is not in the balance sheet or the notes."}
+    {
+      "severity": "error",
+      "path": "reported_totals.business-type.disbursements.amount",
+      "page": 2,
+      "extracted": 66184.37,
+      "on_page": "Line 52 Total Disbursements & Transfers: Sewer 21,357.18 + Trash 47,827.19 = 69,184.37 (includes line 49 Transfers Out of Surplus Fees 3,000.00, Sewer)",
+      "issue": "[fixed 2026-10-29: printed total restored with includes transfers_net] reported_totals must be the printed total (or the sum of the printed fund-column totals when there is no single total). 66,184.37 is just the sum of the two spending lines, so the totals check is circular. The governmental totals in the same report use the printed line 21/52 totals. Record 69,184.37 with the 3,000.00 transfer flagged as included: either includes [\"transfers_net\"] (validate.py lines 182-184 add -transfers_net to a disbursements total, so it ties) or includes_split [3,000.00] as in Burr/DuBois. The attempt-4 note says the validator subtracted the signed transfer, but the current validate.py does not."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[10].category",
+      "page": 1,
+      "extracted": "keno/lottery",
+      "on_page": "Local Receipts: Other (Lottery Fund) 43.32",
+      "issue": "This category is a guess. A small 'Other' receipt in the Lottery fund, whose 8,740.58 CD was cashed during the year, is more likely interest (Interest Income). Marked review."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[11].category",
+      "page": 1,
+      "extracted": "Utility Charges",
+      "on_page": "Local Receipts: Other, Sewer Fund 29,178.75 / Trash Fund 51,519.76 (receipts[12])",
+      "issue": "The printed label is only 'Other'. Treating these as sewer and refuse charges is an assumption (marked review)."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[9].original_label",
+      "page": 1,
+      "extracted": "Local Receipts: Other (General Fund)",
+      "on_page": "Local Receipts: Other",
+      "issue": "Fund names in parentheses are appended to the printed label on receipts[9]-[12]. The amounts are right."
+    },
+    {
+      "severity": "warning",
+      "path": "transfers_in",
+      "page": 3,
+      "extracted": 3000.0,
+      "on_page": "Schedule of Interfund Transfers: Sewer Fund -> Street Fund $3,000 (handwritten); printed TOTAL '-'",
+      "issue": "The schedule's total line shows '-' even though a 3,000 transfer is entered above it. This is a small inconsistency on the page itself. Exhibit A lines 19 and 49 both show 3,000.00, so the recorded figures are right."
+    }
   ]
 }

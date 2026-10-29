@@ -1,21 +1,21 @@
 {
   "stem": "Dunbar_FY2025",
-  "values_checked": 45,
+  "values_checked": 48,
   "issues": [
-    {"severity": "error", "path": "reported_totals.business-type.receipts.includes", "page": 1,
-     "extracted": [], "on_page": "Line 21 Water 177,818.69 + Sewer 132,160.61 = 309,979.30, including line 19/20 transfers in 206,500.44",
-     "issue": "[fixed 2026-10-28: includes set to [\"transfers_net\"], includes_split removed, gross transfers in noted in computed] The printed total includes transfers in, but `includes` is empty. The rules require [\"transfers_net\"], and the non-standard `includes_split` field won't be read. As recorded, the business-type receipt lines (103,478.86) don't tie to the reported total (309,979.30)."},
-    {"severity": "error", "path": "reported_totals.business-type.disbursements.includes", "page": 3,
-     "extracted": [], "on_page": "Line 52 Water 175,930.84 + Sewer 151,097.14 = 327,027.98, including line 50 transfers out 221,957.74",
-     "issue": "[fixed 2026-10-28: includes set to [\"transfers_net\"], includes_split removed, gross transfers out noted in computed] The printed total includes transfers out, but `includes` is empty (it should be [\"transfers_net\"]). As recorded, the business-type disbursement lines (105,070.24) don't tie to the reported total (327,027.98)."},
     {"severity": "warning", "path": "receipts[6].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other, Water 42,457.95",
-     "issue": "[fixed 2026-10-28: category Utility Charges, review kept] Printed label is only 'Other'. Treating it as utility charges is an assumption. If it is treated as utility charges, the user's 2026-10-28 rule uses the category Utility Charges."},
-    {"severity": "warning", "path": "receipts[7].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other, Sewer 61,020.91",
-     "issue": "[fixed 2026-10-28: category Utility Charges, review kept] Same as the Water line. The category would be Utility Charges under the 2026-10-28 rule."},
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other, Water 42,457.95 (and Sewer 61,020.91, receipts[7])",
+     "issue": "The printed label is only 'Other'. Treating the Water and Sewer column receipts as utility charges is an assumption (marked review)."},
     {"severity": "warning", "path": "receipts[5].category", "page": 1,
      "extracted": "donations/contributions", "on_page": "Local Receipts: Other, Donation column 11,824.55",
-     "issue": "Category is inferred from the fund name only. The page doesn't say what the receipts are (it is marked review)."}
+     "issue": "The category is inferred from the fund name only. The page doesn't say what the receipts are (marked review)."},
+    {"severity": "warning", "path": "receipts[4].original_label", "page": 1,
+     "extracted": "Local Receipts: Other (General Fund)", "on_page": "Local Receipts: Other",
+     "issue": "Fund names in parentheses are appended to the printed label on receipts[4]-[7]. The amounts are right."},
+    {"severity": "warning", "path": "transfers_in", "page": 5,
+     "extracted": "transfers in gov 262,589.53 / out 247,132.23; business-type gross in 206,500.44 / out 221,957.74", "on_page": "Schedule of Interfund Transfers: 'See attached supplement' -> Multiple/Various Accounts 468,369.97; General -> Water 720.00; total 469,089.97",
+     "issue": "The transfer pairings come from an 'attached supplement' that is not in the trimmed PDF, so who-pays-whom can't be confirmed. The totals tie to Exhibit A: lines 19+20 = 469,089.97 = lines 49+50. The governmental net +15,457.30 equals the business-type net -15,457.30. The large two-way transfers (General -> utilities 190,000 surplus fees; utilities -> General 221,957.74) are recorded as printed."},
+    {"severity": "warning", "path": "reported_totals.business-type", "page": 1,
+     "extracted": "includes [] + includes_split 206,500.44 (receipts) / 221,957.74 (disbursements)", "on_page": "Line 21 Water 177,818.69 + Sewer 132,160.61 = 309,979.30; line 52 Water 175,930.84 + Sewer 151,097.14 = 327,027.98",
+     "issue": "The amounts tie: 103,478.86 + 206,500.44 = 309,979.30 and 105,070.24 + 221,957.74 = 327,027.98. Business roll-forward: 74,411.83 + 103,478.86 - 105,070.24 - 15,457.30 = 57,363.15. Here gross transfers sit in both totals, so includes_split is the only way to tie them (includes [\"transfers_net\"] would add only the net). This is acceptable, but it isn't in the documented schema."}
   ]
 }

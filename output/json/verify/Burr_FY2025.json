@@ -1,9 +1,12 @@
 {
   "stem": "Burr_FY2025",
-  "values_checked": 32,
+  "values_checked": 35,
   "issues": [
     {"severity": "warning", "path": "receipts[7].category", "page": 1,
      "extracted": "Utility Charges", "on_page": "Local Receipts: Other 32,369.59 (Enterprise Funds column)",
-     "issue": "Category is an assumption: the printed label is only 'Other' with no breakdown; utility collections is plausible (enterprise funds spend only on Solid Waste and Water) but not stated on the page. Review note present."}
+     "issue": "This category is an assumption. The printed label is only 'Other' and no breakdown is given. Utility collections is plausible because the enterprise funds spend only on Solid Waste and Water, but the page doesn't say so. A review note is present."},
+    {"severity": "warning", "path": "notes", "page": 2,
+     "extracted": "'Business-type line 52 ... includes Enterprise transfers out 12,947.23 (line 49), so its includes lists transfers_net.'", "on_page": "Line 52 Enterprise 32,131.21 = Solid Waste 9,538.69 + Water 9,645.29 + line 49 transfers out 12,947.23",
+     "issue": "The notes are stale and contradict each other. The earlier sentence says includes lists transfers_net, but attempt 5 recorded the transfer through includes_split with includes []. The figures tie: 19,183.98 + 12,947.23 = 32,131.21. Business roll-forward: 60,059.85 + 32,369.59 - 19,183.98 - 12,947.23 = 60,298.23. Only the note text is inconsistent."}
   ]
 }

@@ -1,15 +1,21 @@
 {
   "stem": "DuBois_FY2025",
-  "values_checked": 40,
+  "values_checked": 45,
   "issues": [
-    {"severity": "error", "path": "reported_totals.business-type.disbursements.includes", "page": 3,
-     "extracted": [], "on_page": "Line 52 Enterprise Funds 64,157.84 = Solid Waste 11,856.00 + Wastewater 3,027.38 + Water 25,443.70 + line 50 transfers out 23,830.76",
-     "issue": "[fixed 2026-10-28: includes set to [\"transfers_net\"], includes_split removed] The printed total includes the 23,830.76 of transfers out, but `includes` is empty. The rules require [\"transfers_net\"]. The non-standard `includes_split` field won't be read. As recorded, the business-type disbursement lines (40,327.08) don't tie to the reported total (64,157.84)."},
     {"severity": "warning", "path": "receipts[8].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other, Enterprise Funds 66,062.67",
-     "issue": "[fixed 2026-10-28: category Utility Charges, review kept] Printed label is only 'Other'. Treating it as utility charges is an assumption (it is marked review). If it is treated as utility charges, the user's 2026-10-28 rule uses the category Utility Charges."},
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other, Enterprise Funds 66,062.67",
+     "issue": "The printed label is only 'Other'. Treating this as utility charges is an assumption (marked review)."},
     {"severity": "warning", "path": "disbursements[6]", "page": 3,
      "extracted": "governmental utilities 3,719.98 / 21,068.86 / 10,866.11", "on_page": "Wastewater and Water lines (Business-Type Activities section) in the General Fund and Capital Projects Fund columns",
-     "issue": "Utility function spending printed in governmental fund columns is kept governmental by column. This is defensible, but it puts 35,654.95 of water/sewer spending in governmental funds. It is already marked review."}
+     "issue": "Utility spending printed in governmental fund columns is kept governmental by column. This is needed for the General and Capital Projects columns to roll forward, but it puts 35,654.95 of water/sewer spending in governmental funds. It is marked review, but there is no decision_needed entry for it (Otoe has one for the same situation)."},
+    {"severity": "warning", "path": "disbursements[0].original_label", "page": 3,
+     "extracted": "General Government (General Fund)", "on_page": "General Government",
+     "issue": "Fund names in parentheses are appended to the printed labels of all receipts and disbursements lines (e.g. 'Local Receipts: Other (General Fund)', 'Water (Enterprise Funds)'). The amounts are right, but the labels are not exactly as printed."},
+    {"severity": "warning", "path": "disbursements[2]", "page": 3,
+     "extracted": "Public Works - Streets split into General 30,224.65 and Capital Projects 14,631.86 (two governmental lines)", "on_page": "Line 32 Public Works - Streets Total 44,856.51",
+     "issue": "Both parts are governmental, so splitting by fund column isn't needed. The user's 2026-10-29 rule says statement lines come from the Total column. The amounts tie either way."},
+    {"severity": "warning", "path": "reported_totals.business-type.disbursements.includes_split", "page": 3,
+     "extracted": "includes [] + includes_split 23,830.76", "on_page": "Line 52 Enterprise 64,157.84 = 11,856.00 + 3,027.38 + 25,443.70 + line 50 transfers out 23,830.76",
+     "issue": "The amounts tie: 40,327.08 + 23,830.76 = 64,157.84. Business roll-forward: 7,582.71 + 66,062.67 - 40,327.08 - 23,830.76 = 9,487.54. However, the extractor agent documents includes [\"transfers_net\"] for business-type totals, and validate.py now handles that correctly (it adds -transfers_net to disbursements). Using includes_split is a deviation from the documented convention, not a wrong figure."}
   ]
 }
