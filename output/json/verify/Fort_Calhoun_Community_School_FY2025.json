@@ -1,14 +1,24 @@
 {
   "stem": "Fort_Calhoun_Community_School_FY2025",
-  "values_checked": 245,
+  "values_checked": 296,
   "issues": [
-    {"severity": "warning", "path": "missing", "page": 7,
-     "extracted": "five reclass contra lines derived from p2 function totals (-50,000; -178,001; -154,000; -758,284; -150,600)",
-     "on_page": "right half of the first governmental disbursements spread (Special Building, QCPUF, ELC, Reclass and Total Governmental Funds columns for rows 1100-3551) is not in the trimmed PDF; p7 holds only the General, Depreciation and Bond columns",
-     "issue": "A trim gap: the page with the line-level Reclass and Total columns is missing. The contra lines add up exactly to the printed Reclass total (1,290,885), and disbursements tie to 13,571,413, so the totals are right. Which individual lines carry the reclass can't be checked. The extraction already raises this in decision_needed."},
-    {"severity": "warning", "path": "reported_totals.governmental", "page": 6,
-     "extracted": "receipts 13,978,141 / disbursements 13,571,413, includes [] plus a non-standard 'includes_split' field",
-     "on_page": "Total receipts 13,978,141 and Total disbursements 13,571,413 both contain the 39,922 interfund loan (codes 9002/9004)",
-     "issue": "Each printed total includes 39,922 that the JSON records in transfers_in/transfers_out, but 'includes' is empty. The amount is described only in 'includes_split', which is not a schema field. The validator may flag a 39,922 gap (receipt lines add to 13,938,219; disbursement lines add to 13,531,491)."}
+    {"severity": "warning", "path": "detail[52]", "page": 18,
+     "extracted": 599601, "on_page": "Transfers from general fund 599,601 (Depreciation Fund); the GF schedule p16 spending lines (total 11,854,693) and the statement's General Fund column p7 still include the 599,601 outflow, which only the p8/p10 Reclass column removes",
+     "issue": "transfer into Depreciation has no matching transfer-out in the GF detail; the same 599,601 is GF detail spending and a Depreciation transfer in (plus 733,050 Depreciation capital outlay). Kept as printed per the user's 2026-10-29 as-printed rule, but detail spending double counts it"},
+    {"severity": "warning", "path": "receipts[30].category", "page": 6,
+     "extracted": "other", "on_page": "Interfund loan 39,922 (code 9002, Total Governmental Funds)",
+     "issue": "interfund loan from Bond Fund to QCPUF Fund is a financing flow, not revenue; recorded as printed in 'other' with no review note (the matching detail[68] line has one)"},
+    {"severity": "warning", "path": "disbursements[53].category", "page": 10,
+     "extracted": "other", "on_page": "Interfund Loan to QCPUF Fund 39,922 (code 9004)",
+     "issue": "interfund loan outflow is a financing flow, not spending; recorded as printed in 'other' with no review note; it nets to zero against receipts[30]"},
+    {"severity": "warning", "path": "disbursements[41].category", "page": 8,
+     "extracted": "capital outlay", "on_page": "Other support services 733,050 (code 2900, Depreciation Fund)",
+     "issue": "category doesn't match the printed label; defensible because the Depreciation schedule p18 shows capital outlay 452,666 + bus acquisition 280,384 and the Statement of Activities p2 counts it in Capital outlay 1,295,496"},
+    {"severity": "warning", "path": "receipts[7].category", "page": 6,
+     "extracted": "Public Power District Sales Tax", "on_page": "Miscellaneous revenues 7,452 (code 1960)",
+     "issue": "category taken from the Bond Fund schedule p19 (Public power district sales tax 7,452), not from the statement label; defensible"},
+    {"severity": "warning", "path": "detail_totals[0].amount", "page": 16,
+     "extracted": 12350918, "on_page": "GF schedule Total receipts 12,350,918 vs statement General Fund 12,350,919 (p5); Other non-revenue receipts 25,729 (p16) vs 25,730 (p5); GF schedule disbursements 11,854,693 vs statement 11,854,694 (p9)",
+     "issue": "rounding difference of 1 printed in the report itself; noted in notes but not in report_discrepancies"}
   ]
 }
