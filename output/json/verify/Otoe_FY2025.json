@@ -4,15 +4,15 @@
   "issues": [
     {"severity": "error", "path": "reported_totals.business-type.disbursements.includes", "page": 2,
      "extracted": [], "on_page": "Sewer line 52 Total Disbursements & Transfers 97,894.00 = Wastewater 56,216.23 + Transfers Out 41,677.77",
-     "issue": "printed total includes the Sewer transfers out (recorded in business_type.transfers_net) but includes is empty; per the rules it should be [\"transfers_net\"] (the nonstandard includes_split field is not what the validator reads), otherwise items 56,216.23 do not tie to 97,894.00"},
+     "issue": "[fixed 2026-10-28: includes set to [\"transfers_net\"], nonstandard includes_split removed] printed total includes the Sewer transfers out (recorded in business_type.transfers_net) but includes is empty; per the rules it should be [\"transfers_net\"] (the nonstandard includes_split field is not what the validator reads), otherwise items 56,216.23 do not tie to 97,894.00"},
     {"severity": "warning", "path": "receipts[4]", "page": 1,
      "extracted": {"category": "charges for services/fees", "original_label": "Local Receipts: Other (Sewer column)"}, "on_page": "Local Receipts: Other 21,474.34 (Sewer column)",
-     "issue": "unlabeled Sewer-column receipt assumed to be sewer fees; under the user's 2026-10-28 rule utility fund charges are category Utility Charges; original_label has '(Sewer column)' appended to the printed label"},
+     "issue": "[fixed 2026-10-28: category Utility Charges, label 'Local Receipts: Other', column noted in computed] unlabeled Sewer-column receipt assumed to be sewer fees; under the user's 2026-10-28 rule utility fund charges are category Utility Charges; original_label has '(Sewer column)' appended to the printed label"},
     {"severity": "warning", "path": "disbursements[5].review", "page": 2,
      "extracted": "recorded as principal", "on_page": "Debt Service 20,361.56",
-     "issue": "review note says 'recorded as principal' but category is debt service (principal and interest combined), which needs no review note; note is stale/contradictory"},
+     "issue": "[fixed 2026-10-28: stale review note removed] review note says 'recorded as principal' but category is debt service (principal and interest combined), which needs no review note; note is stale/contradictory"},
     {"severity": "warning", "path": "balance_sheet.equity[0].original_label", "page": 1,
      "extracted": "Ending Balance (line 24)", "on_page": "Ending Balance",
-     "issue": "label has '(line 24)' appended; amounts correct"}
+     "issue": "[fixed 2026-10-28: label 'Ending Balance', line number moved to computed] label has '(line 24)' appended; amounts correct"}
   ]
 }

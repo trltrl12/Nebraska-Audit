@@ -4,21 +4,21 @@
   "issues": [
     {"severity": "error", "path": "receipts[11].category", "page": 7,
      "extracted": "charges for services/fees", "on_page": "Sales 343,988 (Water 165,200, Sewer 107,110, Garbage 71,678 enterprise funds)",
-     "issue": "utility fund sales, including garbage, belong in the user's Utility Charges category (rule of 2026-10-28), not charges for services/fees"},
+     "issue": "[fixed 2026-10-28: category set to Utility Charges] utility fund sales, including garbage, belong in the user's Utility Charges category (rule of 2026-10-28), not charges for services/fees"},
     {"severity": "error", "path": "receipts[5].category", "page": 12,
      "extracted": "licenses and permits", "on_page": "Licenses, rents, and fees 75,866 (p5); General fund breakdown p12: Licenses and permits 2,563, Rentals and fees 29,725 + 1,765 + 16,690 = 48,180; Street fund 25,123 not broken down",
-     "issue": "for a mixed line the rule is to use the dominant component. Licenses are only 2,563 of the 50,743 General fund part, so rentals/fees dominate and licenses and permits is not the dominant category (the line already has a review note)"},
+     "issue": "[fixed 2026-10-28: category set to Rentals (dominant component), review note updated] for a mixed line the rule is to use the dominant component. Licenses are only 2,563 of the 50,743 General fund part, so rentals/fees dominate and licenses and permits is not the dominant category (the line already has a review note)"},
     {"severity": "warning", "path": "receipts[12].category", "page": 7,
      "extracted": "charges for services/fees", "on_page": "Southern Power lease revenue 23,119",
-     "issue": "lease revenue is rental income; the user's Rentals category fits better"},
+     "issue": "[fixed 2026-10-28: category set to Rentals] lease revenue is rental income; the user's Rentals category fits better"},
     {"severity": "warning", "path": "receipts[6].category", "page": 13,
      "extracted": "charges for services/fees", "on_page": "Charges for services 52,374 = General 4,345, Yard 18,009, Community Building 400, Cemetery 2,450, Park 3,062, Pool 24,108 (pp12-13)",
-     "issue": "Pool and Park fees (27,170, 52%) fit the user's Recreation Fees category and Cemetery 2,450 fits Cemetery Fees. The detail lines also keep charges for services/fees: detail[23] (Cemetery -> Cemetery Fees), detail[30] and detail[32] (Park, Pool -> Recreation Fees)"},
+     "issue": "[fixed 2026-10-28: statement line category Recreation Fees (52%) with review; detail Cemetery -> Cemetery Fees, Park and Pool -> Recreation Fees] Pool and Park fees (27,170, 52%) fit the user's Recreation Fees category and Cemetery 2,450 fits Cemetery Fees. The detail lines also keep charges for services/fees: detail[23] (Cemetery -> Cemetery Fees), detail[30] and detail[32] (Park, Pool -> Recreation Fees)"},
     {"severity": "warning", "path": "detail[5].category", "page": 12,
      "extracted": "charges for services/fees", "on_page": "Rentals and fees 29,725",
-     "issue": "detail_category is rentals but category is charges for services/fees; under the user's 2026-10-28 rules the category would be Rentals. Same for detail[17] (1,765) and detail[29] (16,690)"},
+     "issue": "[fixed 2026-10-28: Rentals and fees detail lines (29,725, 1,765, 16,690) category Rentals] detail_category is rentals but category is charges for services/fees; under the user's 2026-10-28 rules the category would be Rentals. Same for detail[17] (1,765) and detail[29] (16,690)"},
     {"severity": "warning", "path": "detail[97].category", "page": 11,
      "extracted": "licenses and permits (detail_category rentals)", "on_page": "Licenses, rents, and fees 25,123 (Street fund)",
-     "issue": "category and detail_category disagree on the same mixed line; pick one consistently"}
+     "issue": "[fixed 2026-10-28: category Rentals, detail_category rentals, matching the statement line] category and detail_category disagree on the same mixed line; pick one consistently"}
   ]
 }

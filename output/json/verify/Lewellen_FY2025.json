@@ -4,15 +4,15 @@
   "issues": [
     {"severity": "error", "path": "reported_totals.business-type.disbursements.includes", "page": 2,
      "extracted": [], "on_page": "Sewer 21,357.18 + Trash 47,827.19 = 69,184.37 incl. line 49 Transfers Out of Surplus Fees 3,000.00",
-     "issue": "The total includes the 3,000 transfer, but includes is [] (the transfer is noted only in a non-schema 'includes_split' field). Business disbursement lines sum to 66,184.37, so the totals check fails by 3,000. includes should be [\"transfers_net\"]."},
+     "issue": "[fixed 2026-10-28: includes set to [\"transfers_net\"], non-schema includes_split removed] The total includes the 3,000 transfer, but includes is [] (the transfer is noted only in a non-schema 'includes_split' field). Business disbursement lines sum to 66,184.37, so the totals check fails by 3,000. includes should be [\"transfers_net\"]."},
     {"severity": "error", "path": "receipts[11].category", "page": 1,
      "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Sewer Fund) 29,178.75",
-     "issue": "Sewer fund charges are Utility Charges under the user rules, and the matching Trash fund line already uses Utility Charges. The two lines are inconsistent."},
+     "issue": "[fixed 2026-10-28: category Utility Charges, matching the Trash Fund line] Sewer fund charges are Utility Charges under the user rules, and the matching Trash fund line already uses Utility Charges. The two lines are inconsistent."},
     {"severity": "warning", "path": "receipts[10].category", "page": 1,
      "extracted": "keno/lottery", "on_page": "Local Receipts: Other (Lottery Fund) 43.32",
      "issue": "Category guessed. A small 'Other' receipt in the Lottery fund (which holds a CD) is more likely interest."},
     {"severity": "warning", "path": "balance_sheet.assets", "page": 1,
      "extracted": null, "on_page": "County Treasurer Balance at September 30, 2025: 4,228.23 (October 1, 2024: 2,937.81)",
-     "issue": "The county treasurer balance is printed on Exhibit A but is not in the balance sheet or the notes."}
+     "issue": "[fixed 2026-10-28: county treasurer memo balances recorded in notes; not added to assets because they are outside the printed fund balances] The county treasurer balance is printed on Exhibit A but is not in the balance sheet or the notes."}
   ]
 }

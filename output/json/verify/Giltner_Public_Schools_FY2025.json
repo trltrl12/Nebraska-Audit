@@ -4,15 +4,16 @@
   "issues": [
     {"severity": "error", "path": "detail[70].category", "page": 15,
      "extracted": "reimbursements/refunds", "on_page": "Daily sales - nonreimbursable program 23,557 (School Nutrition Fund)",
-     "issue": "These are meal sales (a la carte or nonreimbursable meals), not reimbursements. The category should be School Lunch Sales, matching its own detail_category and the statement's Nutrition Services 86,380 (54,986 + 7,837 + 23,557), which is recorded as School Lunch Sales. The 'reimburs' regex in user_rules.py probably matched 'nonreimbursable'."},
+     "issue": "[fixed 2026-10-28: category set to School Lunch Sales] These are meal sales (a la carte or nonreimbursable meals), not reimbursements. The category should be School Lunch Sales, matching its own detail_category and the statement's Nutrition Services 86,380 (54,986 + 7,837 + 23,557), which is recorded as School Lunch Sales. The 'reimburs' regex in user_rules.py probably matched 'nonreimbursable'."},
     {"severity": "warning", "path": "detail[8].detail_category", "page": 9,
      "extracted": "other charges for services", "on_page": "1955 Postsecondary receipts 1,611",
-     "issue": "Category is Tuition Received, but detail_category should be 'tuition and fees', not 'other charges for services'."},
+     "issue": "[fixed 2026-10-28: detail_category set to tuition and fees] Category is Tuition Received, but detail_category should be 'tuition and fees', not 'other charges for services'."},
     {"severity": "warning", "path": "notes", "page": 3,
      "extracted": "'Property taxes' 1,754,557 as printed excludes penalties", "on_page": "Property taxes, Other Governmental Funds column: 7,839 = QCPUT local property taxes 7,727 + penalties and interest 112 (p18)",
-     "issue": "The statement's Property taxes line includes QCPUT penalties and interest of 112, so the notes are wrong on this point. Under the combined-line rule the line still stays property tax, but penalties total 3,150, not the 3,038 recorded in receipts[3]."},
+     "issue": "[fixed 2026-10-28: notes corrected; line stays property tax under the combined-line rule] The statement's Property taxes line includes QCPUT penalties and interest of 112, so the notes are wrong on this point. Under the combined-line rule the line still stays property tax, but penalties total 3,150, not the 3,038 recorded in receipts[3]."},
     {"severity": "warning", "path": "receipts[7].category", "page": 3,
      "extracted": "other", "on_page": "Other local receipts 17,375 = GF 1990 Other local receipts 15,714 + 1955 Postsecondary receipts 1,611 + Nutrition other local 50",
-     "issue": "The line is mixed. It includes 1,611 of postsecondary receipts (Tuition Received), and the GF schedule prints that breakdown. Keeping it as other is defensible because the larger part is other and the label says other, and the line is already marked review."}
+     "issue": "The line is mixed. It includes 1,611 of postsecondary receipts (Tuition Received), and the GF schedule prints that breakdown. Keeping it as other is defensible because the larger part is other and the label says other, and the line is already marked review.",
+     "resolved": "kept as other with review: dominant part (15,764) is other local receipts, label says other"}
   ]
 }

@@ -4,24 +4,24 @@
   "issues": [
     {"severity": "error", "path": "receipts[11].category", "page": 6,
      "extracted": "charges for services/fees", "on_page": "Charges for services 3,486,213 = Water 426,944 + Sewer 344,388 + Sewer Treatment 2,300,058 + Garbage 129,300 + Golf Course 285,523",
-     "issue": "Utility fund charges (3,200,690, 92%) dominate this line. Under the user's 2026-10-28 rule they are Utility Charges, and the extraction's own detail lines use Utility Charges for these columns. A mixed line takes its dominant category plus a review note naming the golf course part (Recreation Fees); this line has neither."},
+     "issue": "[fixed 2026-10-28: split by p6 fund column into Utility Charges 3,200,690 (computed) and Recreation Fees 285,523 (Golf Course), split_from set] Utility fund charges (3,200,690, 92%) dominate this line. Under the user's 2026-10-28 rule they are Utility Charges, and the extraction's own detail lines use Utility Charges for these columns. A mixed line takes its dominant category plus a review note naming the golf course part (Recreation Fees); this line has neither."},
     {"severity": "warning", "path": "receipts[6].category", "page": 4,
      "extracted": "charges for services/fees", "on_page": "Charges for services 40,136 = Cemetery Fund 14,060 + Pool Fund 26,076 (combining schedule p8)",
-     "issue": "The p8 breakdown shows recreation (pool) fees, 65%, and cemetery fees. The user's 2026-10-28 rules give both their own categories (Recreation Fees / Cemetery Fees), so the dominant Recreation Fees, or a split, would fit better. Same for detail[13]."},
+     "issue": "[fixed 2026-10-28: split into Recreation Fees 26,076 and Cemetery Fees 14,060 from p8, in receipts and detail] The p8 breakdown shows recreation (pool) fees, 65%, and cemetery fees. The user's 2026-10-28 rules give both their own categories (Recreation Fees / Cemetery Fees), so the dominant Recreation Fees, or a split, would fit better. Same for detail[13]."},
     {"severity": "warning", "path": "receipts[7].category", "page": 4,
      "extracted": "charges for services/fees", "on_page": "Lease payments 9,900 (General Fund)",
-     "issue": "Lease payments received are rental income, which is its own Rentals receipt category under the user's 2026-10-28 rules. The extraction already gives detail_category rentals (detail[14])."},
+     "issue": "[fixed 2026-10-28: category Rentals in receipts and detail] Lease payments received are rental income, which is its own Rentals receipt category under the user's 2026-10-28 rules. The extraction already gives detail_category rentals (detail[14])."},
     {"severity": "warning", "path": "receipts[9].category", "page": 4,
      "extracted": "other", "on_page": "Other revenue 269,024; p8 nonmajor 'Other revenues' 178,501 by fund: Fire 115,731, Keno 41,354, Pool 9,259, Sales Tax 9,588, Cemetery 1,310, Library 1,021, Park 138, Street Lights 100",
-     "issue": "The printed label says 'other', so 'other' is allowed. But p8 shows 41,354 of it is Keno Fund receipts (keno/lottery) and 115,731 is Fire Fund receipts (possibly rural fire contracts). It could be split with split_from from p8. The review note says p8 shows it 'without detail', but p8 does print it by fund. Same for detail[21] (178,501)."},
+     "issue": "[fixed 2026-10-28: review notes corrected to say p8 prints the nonmajor part by fund; kept as other because p8 gives funds, not revenue types, and splitting by fund would be a guess] The printed label says 'other', so 'other' is allowed. But p8 shows 41,354 of it is Keno Fund receipts (keno/lottery) and 115,731 is Fire Fund receipts (possibly rural fire contracts). It could be split with split_from from p8. The review note says p8 shows it 'without detail', but p8 does print it by fund. Same for detail[21] (178,501)."},
     {"severity": "warning", "path": "receipts[13].category", "page": 6,
      "extracted": "charges for services/fees", "on_page": "Fees 65,309 (Water 4,542, Sewer 8,148, Sewer Treatment 52,619)",
-     "issue": "Doesn't match the detail lines for the same amounts (detail[46]-[48]), which use Utility Charges. These are utility fund fees, so Utility Charges is likely under the user rules."},
+     "issue": "[fixed 2026-10-28: category Utility Charges] Doesn't match the detail lines for the same amounts (detail[46]-[48]), which use Utility Charges. These are utility fund fees, so Utility Charges is likely under the user rules."},
     {"severity": "warning", "path": "detail[44].category", "page": 6,
      "extracted": "charges for services/fees", "on_page": "Golf Course Fund Charges for services 285,523",
-     "issue": "Golf fees are Recreation Fees under the user's 2026-10-28 rules (detail_category recreation/pool/park fees is fine)."},
+     "issue": "[fixed 2026-10-28: category Recreation Fees] Golf fees are Recreation Fees under the user's 2026-10-28 rules (detail_category recreation/pool/park fees is fine)."},
     {"severity": "warning", "path": "notes", "page": 8,
      "extracted": "'... Read pages 1-8 of 8. Detail (user 2026-10-27): per-fund lines ... replace the combined schedule.'", "on_page": "trimmed PDF has 8 pages",
-     "issue": "The notes don't end with 'Read pages 1-8 of 8', because a later sentence was appended. The page count is right and all 8 pages are covered, but the earlier note text still describes the old p7 all-funds detail and says 'Other local receipts' is in charges for services. That no longer matches the per-fund detail, so the notes contradict themselves."}
+     "issue": "[fixed 2026-10-28: notes rewritten to describe the per-fund detail and current categories; they end with 'Read pages 1-8 of 8'] The notes don't end with 'Read pages 1-8 of 8', because a later sentence was appended. The page count is right and all 8 pages are covered, but the earlier note text still describes the old p7 all-funds detail and says 'Other local receipts' is in charges for services. That no longer matches the per-fund detail, so the notes contradict themselves."}
   ]
 }

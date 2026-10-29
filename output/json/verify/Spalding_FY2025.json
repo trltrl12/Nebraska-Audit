@@ -4,15 +4,15 @@
   "issues": [
     {"severity": "error", "path": "notes", "page": null,
      "extracted": "... Read pages 1-17 of 17 Detail (user 2026-10-27): per-fund lines ...", "on_page": "PDF has 17 pages",
-     "issue": "The notes don't end with 'Read pages 1-17 of 17' because a later sentence was added after it. The page count (17) is correct and every page was checked, but the required ending is missing"},
+     "issue": "[fixed 2026-10-28: notes rewritten so they end with 'Read pages 1-17 of 17'; the detail sentence moved before it] The notes don't end with 'Read pages 1-17 of 17' because a later sentence was added after it. The page count (17) is correct and every page was checked, but the required ending is missing"},
     {"severity": "warning", "path": "detail", "page": 16,
      "extracted": "governmental detail = statement function lines per fund (pp7-8)", "on_page": "Schedule of Expenditures - Modified Cash Basis - Governmental Funds (pp16-17): per-fund columns by object (Personal Services, Contracted Services, Materials and Supplies, Other Operating Expenses, Capital Outlay, Debt Service), e.g. General 75,222 / 26,474 / 100,716 / 83,832 / 37,283",
      "issue": "This schedule has its own per-fund columns, so under the 2026-10-28 rule ('schedule lines show funds') its object lines could be the detail. Instead the detail uses statement function lines, and the object breakdown on pp16-17 is not in the JSON. A person should decide which applies"},
     {"severity": "warning", "path": "decision_needed[0]", "page": 15,
      "extracted": "Electric 'Disbursements and Transfers' 854,534 recorded as expenditure", "on_page": "Electric 854,534 (budget schedule p15)",
-     "issue": "Out of date: the p15 budget-schedule lines are no longer in detail (replaced by the p12 per-fund lines), so this question and the notes describing p15 detail lines no longer match the JSON"},
+     "issue": "[fixed 2026-10-28: stale decision_needed removed and notes updated to describe the current detail] Out of date: the p15 budget-schedule lines are no longer in detail (replaced by the p12 per-fund lines), so this question and the notes describing p15 detail lines no longer match the JSON"},
     {"severity": "warning", "path": "receipts[20].category", "page": 12,
      "extracted": "charges for services/fees", "on_page": "Charges for Services 908,217 (Electric/Sewer/Water)",
-     "issue": "The same utility-fund charges are category Utility Charges in detail (detail[39-41]). The statement line should use the same category (user rule: utility fund sales -> Utility Charges)"}
+     "issue": "[fixed 2026-10-28: category set to Utility Charges] The same utility-fund charges are category Utility Charges in detail (detail[39-41]). The statement line should use the same category (user rule: utility fund sales -> Utility Charges)"}
   ]
 }

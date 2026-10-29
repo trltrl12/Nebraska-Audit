@@ -4,10 +4,10 @@
   "issues": [
     {"severity": "error", "path": "reported_totals.business-type.disbursements.includes", "page": 3,
      "extracted": [], "on_page": "Line 52 Enterprise Funds 64,157.84 = Solid Waste 11,856.00 + Wastewater 3,027.38 + Water 25,443.70 + line 50 transfers out 23,830.76",
-     "issue": "The printed total includes the 23,830.76 of transfers out, but `includes` is empty. The rules require [\"transfers_net\"]. The non-standard `includes_split` field won't be read. As recorded, the business-type disbursement lines (40,327.08) don't tie to the reported total (64,157.84)."},
+     "issue": "[fixed 2026-10-28: includes set to [\"transfers_net\"], includes_split removed] The printed total includes the 23,830.76 of transfers out, but `includes` is empty. The rules require [\"transfers_net\"]. The non-standard `includes_split` field won't be read. As recorded, the business-type disbursement lines (40,327.08) don't tie to the reported total (64,157.84)."},
     {"severity": "warning", "path": "receipts[8].category", "page": 1,
      "extracted": "charges for services/fees", "on_page": "Local Receipts: Other, Enterprise Funds 66,062.67",
-     "issue": "Printed label is only 'Other'. Treating it as utility charges is an assumption (it is marked review). If it is treated as utility charges, the user's 2026-10-28 rule uses the category Utility Charges."},
+     "issue": "[fixed 2026-10-28: category Utility Charges, review kept] Printed label is only 'Other'. Treating it as utility charges is an assumption (it is marked review). If it is treated as utility charges, the user's 2026-10-28 rule uses the category Utility Charges."},
     {"severity": "warning", "path": "disbursements[6]", "page": 3,
      "extracted": "governmental utilities 3,719.98 / 21,068.86 / 10,866.11", "on_page": "Wastewater and Water lines (Business-Type Activities section) in the General Fund and Capital Projects Fund columns",
      "issue": "Utility function spending printed in governmental fund columns is kept governmental by column. This is defensible, but it puts 35,654.95 of water/sewer spending in governmental funds. It is already marked review."}

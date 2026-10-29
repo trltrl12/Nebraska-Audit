@@ -4,18 +4,18 @@
   "issues": [
     {"severity": "error", "path": "balance_sheet.total_equity", "page": 4,
      "extracted": 4523652, "on_page": "Fund balances Debt Service 1,781,957 + Activity Use 113,662 + Nutrition Program 42,540 + Unassigned 2,585,492 = 4,523,651; Total Fund Balances printed 4,523,652",
-     "issue": "the equity lines add to 4,523,651, $1 under the printed total (the page's own rounding: Other Governmental Funds column 189,072 + 113,662 + 42,540 = 345,274 vs printed 345,275), but report_discrepancies has no 'balance' entry for it"},
+     "issue": "[fixed 2026-10-28: report_discrepancies 'balance' entry added, difference +1, p4] the equity lines add to 4,523,651, $1 under the printed total (the page's own rounding: Other Governmental Funds column 189,072 + 113,662 + 42,540 = 345,274 vs printed 345,275), but report_discrepancies has no 'balance' entry for it"},
     {"severity": "error", "path": "receipts[8].category", "page": 5,
      "extracted": "charges for services/fees", "on_page": "Other Local Receipts 10,325 (Other Governmental Funds column = Activities Fund, p14)",
-     "issue": "Activities Fund receipt; the same line is Extracurricular Receipts in detail (detail[75], p14), and the user rule sends school activity fund receipts to Extracurricular Receipts unless the report says otherwise. Same label must have the same category in receipts and detail"},
+     "issue": "[fixed 2026-10-28: receipts[8] and detail Activities 'Other Local Receipts' both Extracurricular Receipts / student activity receipts] Activities Fund receipt; the same line is Extracurricular Receipts in detail (detail[75], p14), and the user rule sends school activity fund receipts to Extracurricular Receipts unless the report says otherwise. Same label must have the same category in receipts and detail"},
     {"severity": "warning", "path": "receipts[5].category", "page": 5,
      "extracted": "charges for services/fees", "on_page": "Food Services 90,982 (School Nutrition Fund 'Daily Sales', p15)",
-     "issue": "school meal sales; the 2026-10-28 rule moves lunch/meal sales to School Lunch Sales (detail[81] 'Daily Sales' likewise)"},
+     "issue": "[fixed 2026-10-28: Food Services and detail Daily Sales -> School Lunch Sales] school meal sales; the 2026-10-28 rule moves lunch/meal sales to School Lunch Sales (detail[81] 'Daily Sales' likewise)"},
     {"severity": "warning", "path": "receipts[15].computed", "page": 9,
      "extracted": "General 3110/3120/3125/3400/3535/3551 1,231,917 (p9) + School Nutrition 795", "on_page": "920,492 + 245,925 + 168 + 53,810 + 4,021 + 7,500 = 1,231,916",
-     "issue": "the remainder 1,232,712 is right as State Sources 3,735,386 minus the four splits, but the named General Fund lines add to 1,231,916 (the p9 'Total State Sources' 2,994,144 is $1 above its lines; Total Local Sources 1,882,886 is $1 below its lines). The grand total 5,064,433 ties, so only the computed note and the unrecorded subtotal rounding are off"},
+     "issue": "[fixed 2026-10-28: computed note corrected to 1,231,916 with $1 rounding; p9 subtotal rounding added to report_discrepancies] the remainder 1,232,712 is right as State Sources 3,735,386 minus the four splits, but the named General Fund lines add to 1,231,916 (the p9 'Total State Sources' 2,994,144 is $1 above its lines; Total Local Sources 1,882,886 is $1 below its lines). The grand total 5,064,433 ties, so only the computed note and the unrecorded subtotal rounding are off"},
     {"severity": "warning", "path": "receipts[7].original_label", "page": 5,
      "extracted": "Other Local Receipts (Winside Educational Facilities Leasing Corporation column)", "on_page": "Other Local Receipts",
-     "issue": "column-split labels carry the extractor's commentary (also receipts[8], receipts[15], receipts[17], disbursements[17]-[19]); amounts and split_from are correct"}
+     "issue": "[fixed 2026-10-28: labels set to the printed text, column named in split_from] column-split labels carry the extractor's commentary (also receipts[8], receipts[15], receipts[17], disbursements[17]-[19]); amounts and split_from are correct"}
   ]
 }

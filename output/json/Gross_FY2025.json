@@ -3,7 +3,7 @@
   "entity_type": "village",
   "fiscal_year_end": "2025-09-30",
   "basis": "cash",
-  "extraction_attempt": 1,
+  "extraction_attempt": 2,
   "beginning_cash": {"amount": 15142.93, "source_page": 1},
   "beginning_investments": null,
   "beginning_fund_balance": null,
@@ -32,7 +32,7 @@
     "statement": "Statement of Cash Receipts and Disbursements - All Funds (ending balances, lines 24-28)",
     "scope": "cash basis",
     "column": "TOTAL",
-    "assets": [{"category": "Cash and Cash Equivalents", "original_label": "Ending Balance (Net Cash Balance)", "amount": 10998.49, "source_page": 1, "fund_type": "governmental"}],
+    "assets": [{"category": "Cash and Cash Equivalents", "original_label": "Ending Balance (Net Cash Balance)", "amount": 10998.49, "source_page": 1, "fund_type": "governmental", "review": "line 24 Ending Balance 10,998.49 used; line 26 Net Cash Balance prints 10,998.00"}],
     "deferred_outflows": [],
     "liabilities": [],
     "deferred_inflows": [],
@@ -48,5 +48,9 @@
   "ending_fund_balance": null,
   "detail": [],
   "detail_totals": [],
-  "notes": "Waiver filing, cash basis, General Fund only. Beginning = line 3 subtotal (net cash 15,142.93, no investments). PDF p1 is the clean Exhibit A page 1; p2 is a duplicate of the same page crossed out with a red X (its line 26 net cash 18,599.80 is inconsistent) so p1 was used. Line 26 on p1 prints 10,998.00 vs ending balance 10,998.49 (line 24/28); line 24 used. No detail schedules; schedule of investments, debt and transfers are blank. Read pages 1-6 of 6"
+  "report_discrepancies": [
+    {"check": "reconcile", "difference": -0.49, "source_page": 1, "note": "Line 26/28 Net Cash Balance / Subtotal of Ending Balances prints 10,998.00 but line 24 Ending Balance (line 22 minus line 23) prints 10,998.49; the form says lines 24 and 28 must agree. Line 24 used for ending cash."},
+    {"check": "balance", "difference": 7601.80, "source_page": 2, "note": "Crossed-out (red X, void) duplicate of Exhibit A page 1 prints line 26/28 Net Cash Balance 18,599.80 vs 10,998.00 on the unmarked p1 (line 24 10,998.49 on both); p1 used.", "review": "voided duplicate page with differing ending net cash balance"}
+  ],
+  "notes": "Waiver filing, cash basis, General Fund only. Beginning = line 3 subtotal (net cash 15,142.93, no investments). PDF p1 is the clean Exhibit A page 1; p2 is a duplicate of the same page crossed out with a red X (its line 26 net cash 18,599.80 differs) so p1 was used; the difference is in report_discrepancies. Line 26 on p1 prints 10,998.00 vs ending balance 10,998.49 (line 24); line 24 used (ties to roll-forward), recorded in report_discrepancies. No detail schedules; schedule of investments, debt and transfers are blank. Attempt 2: added report_discrepancies. Read pages 1-6 of 6"
 }

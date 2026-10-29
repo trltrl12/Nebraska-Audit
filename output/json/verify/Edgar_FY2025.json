@@ -4,18 +4,19 @@
   "issues": [
     {"severity": "error", "path": "receipts[13].category", "page": 8,
      "extracted": "charges for services/fees", "on_page": "Charges for services 266,668 (Water 177,988 + Sewer 88,680, proprietary funds)",
-     "issue": "These are water and sewer fund charges, and the user's rule moves utility fund charges to category Utility Charges. The same lines in detail (detail[37], detail[38]) already use Utility Charges, so the report is inconsistent with itself."},
+     "issue": "[fixed 2026-10-28: receipts[13] category set to Utility Charges, matching detail[37]/[38]] These are water and sewer fund charges, and the user's rule moves utility fund charges to category Utility Charges. The same lines in detail (detail[37], detail[38]) already use Utility Charges, so the report is inconsistent with itself."},
     {"severity": "warning", "path": "receipts[8].category", "page": 5,
      "extracted": "charges for services/fees", "on_page": "Electric lease payments 60,822",
-     "issue": "Lease payments for the electric system are rental income. The user's Rentals category fits, and the matching detail line (detail[10]) already has detail_category 'rentals'."},
+     "issue": "[fixed 2026-10-28: receipts[8] and detail[10] category set to Rentals] Lease payments for the electric system are rental income. The user's Rentals category fits, and the matching detail line (detail[10]) already has detail_category 'rentals'."},
     {"severity": "warning", "path": "other_financing", "page": 6,
      "extracted": 30590, "on_page": "Rural fire reimbursement 30,590 (under Other Financing Sources (Uses))",
-     "issue": "Recorded as other financing because the report prints it there, which is defensible. But it is a rural fire contract payment, which the rules otherwise class as charges for services/fees (or reimbursements), so it is left out of receipts."},
+     "issue": "Recorded as other financing because the report prints it there, which is defensible. But it is a rural fire contract payment, which the rules otherwise class as charges for services/fees (or reimbursements), so it is left out of receipts.",
+     "resolved": "kept as printed under Other Financing Sources (Uses) on p6; moving it into receipts would change the printed receipts total"},
     {"severity": "warning", "path": "decision_needed[0]", "page": 9,
      "extracted": "question about p9 all-funds budget lines recorded as detail lines 3, 4, 8, 19, 20", "on_page": "p9 Budgetary Comparison Schedule - All Funds",
-     "issue": "Out of date: under the 2026-10-27 per-fund rule, detail now comes from the fund statement columns (pp5, 6, 8) and the p9 lines are no longer in detail. The notes text about p9 detail lines with review marks is out of date in the same way."},
+     "issue": "[fixed 2026-10-28: stale decision_needed entry removed] Out of date: under the 2026-10-27 per-fund rule, detail now comes from the fund statement columns (pp5, 6, 8) and the p9 lines are no longer in detail. The notes text about p9 detail lines with review marks is out of date in the same way."},
     {"severity": "warning", "path": "notes", "page": 10,
      "extracted": "... Read pages 1-10 of 10. Detail (user 2026-10-27): ...", "on_page": "10 pages",
-     "issue": "Page count statement is correct (10 of 10, all pages checked) but notes no longer end with it: a later note was appended after it."}
+     "issue": "[fixed 2026-10-28: notes rewritten, stale p9 text removed, now end with 'Read pages 1-10 of 10'] Page count statement is correct (10 of 10, all pages checked) but notes no longer end with it: a later note was appended after it."}
   ]
 }

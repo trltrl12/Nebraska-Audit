@@ -4,13 +4,13 @@
   "issues": [
     {"severity": "error", "path": "receipts[13].category", "page": 13,
      "extracted": "charges for services/fees", "on_page": "1910 Rental of School Property 18,252",
-     "issue": "Under the user's 2026-10-28 rule rental receipts are category Rentals. The same line in detail[6] already uses Rentals, so the report is inconsistent. user_rules.py won't match the label 'Other (rental of school property)'."},
+     "issue": "[fixed 2026-10-28: receipts[13] category set to Rentals, detail_category rentals] Under the user's 2026-10-28 rule rental receipts are category Rentals. The same line in detail[6] already uses Rentals, so the report is inconsistent. user_rules.py won't match the label 'Other (rental of school property)'."},
     {"severity": "error", "path": "receipts[20].category", "page": 12,
      "extracted": "charges for services/fees", "on_page": "School Nutrition Fund - Daily Sales 53,809",
-     "issue": "These are school lunch/meal sales of the School Nutrition Fund. Under the 2026-10-28 rule they are School Lunch Sales; the label 'Daily Sales' does not trigger the user_rules.py regex."},
+     "issue": "[fixed 2026-10-28: receipts[20] category set to School Lunch Sales, detail_category school lunch sales] These are school lunch/meal sales of the School Nutrition Fund. Under the 2026-10-28 rule they are School Lunch Sales; the label 'Daily Sales' does not trigger the user_rules.py regex."},
     {"severity": "error", "path": "detail[104].category", "page": 20,
      "extracted": "charges for services/fees", "on_page": "1600 Daily Sales 53,809 (School Nutrition Fund)",
-     "issue": "detail_category is school lunch sales, but category is still charges for services/fees. It should be School Lunch Sales."},
+     "issue": "[fixed 2026-10-28: detail 1600 Daily Sales category set to School Lunch Sales] detail_category is school lunch sales, but category is still charges for services/fees. It should be School Lunch Sales."},
     {"severity": "warning", "path": "receipts[13].original_label", "page": 13,
      "extracted": "Other (rental of school property)", "on_page": "Other 101,206 (p8); Rental of School Property (p13)",
      "issue": "The labels of the split pieces receipts[13]-[19] combine printed text from two pages. The split itself ties: 18,252+450+15,471+2,723+50+2,250+62,010 = 101,206."}
