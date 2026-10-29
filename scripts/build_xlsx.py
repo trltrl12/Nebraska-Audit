@@ -474,20 +474,29 @@ def build(xlsx):
     for s, d in reports:
         bs = d.get("balance_sheet") or {}
         b0 = base(s, d)
+        main = bs.get("statement", "")
+        # lines taken from another statement (e.g. business-type lines from the Statement of Net Position on a
+        # balance sheet built from the governmental funds statement) carry their own `statement`
+        st_of = {}
+        for k in BS_SECTIONS:
+            for it in bs.get(k) or []:
+                if it.get("statement"):
+                    st_of.setdefault(it.get("fund_type"), it["statement"])
+        combined = " + ".join(dict.fromkeys([main] + list(st_of.values()))) if st_of else main
         for sec, tot in BS_SECTIONS.items():
             for it in bs.get(sec) or []:
-                rows.append(b0 + [bs.get("statement", ""), bs.get("column", ""), it.get("fund_type", ""), sec,
+                rows.append(b0 + [it.get("statement") or main, bs.get("column", ""), it.get("fund_type", ""), sec,
                                   it.get("category", ""), it.get("original_label"), it.get("amount")] + ref(s, it))
             # a balance sheet split by fund type: one subtotal row per fund type (sum of its lines)
             fts = sorted({it.get("fund_type") for it in bs.get(sec) or [] if it.get("fund_type")})
             if len(fts) > 1 or (fts and any(it.get("fund_type") != fts[0] for k in BS_SECTIONS for it in bs.get(k) or [])):
                 for ft in fts:
                     its = [it for it in bs.get(sec) or [] if it.get("fund_type") == ft]
-                    rows.append(b0 + [bs.get("statement", ""), bs.get("column", ""), ft, sec, tot,
+                    rows.append(b0 + [st_of.get(ft, main), bs.get("column", ""), ft, sec, tot,
                                       f"(total {ft}, sum of lines)", round(sum(float(i.get("amount") or 0) for i in its), 2)]
                                 + ref(s, its))
             if amt(bs.get(tot)) is not None:
-                rows.append(b0 + [bs.get("statement", ""), bs.get("column", ""), "total", sec, tot, "(total as stated)",
+                rows.append(b0 + [combined, bs.get("column", ""), "total", sec, tot, "(total as stated)",
                                   amt(bs.get(tot))] + ref(s, bs.get(tot)))
     add_sheet(wb, "Balance Sheet", ident + ["statement", "column", "fund_type", "section", "category", "original_label",
                                             "amount"] + REF,

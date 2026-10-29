@@ -338,6 +338,24 @@ def fund_name_rule(x, log, per_fund=True):
         log["fund name + Fund"] += 1
 
 
+SNP_NAME = re.compile(r"(Statement of Net Position(?: - (?:Modified )?Cash Basis)?)", re.I)
+
+
+def statement_of_lines_rule(bs, log):
+    """Balance sheets built from the governmental funds statement with business-type lines taken from the
+    Statement of Net Position (user 2026-10-27 basis rule): those lines name their own statement (user 2026-10-29)."""
+    scope = str(bs.get("scope") or "")
+    m = SNP_NAME.search(scope)
+    if not scope.startswith("governmental funds statement") or not m:
+        return
+    name = m.group(1)
+    for k in ("assets", "deferred_outflows", "liabilities", "deferred_inflows", "equity"):
+        for x in bs.get(k) or []:
+            if isinstance(x, dict) and x.get("fund_type") != "governmental" and x.get("statement") != name:
+                x["statement"] = name
+                log["balance sheet: line statement"] += 1
+
+
 def balance_sheet_rules(bs, log):
     for sec, rules in DEFERRED.items():
         for x in bs.get(sec) or []:
@@ -493,6 +511,7 @@ def apply(d, stem=""):
     department_capital_outlay_rule(d.get("detail") or [], log)
     if isinstance(d.get("balance_sheet"), dict):
         balance_sheet_rules(d["balance_sheet"], log)
+        statement_of_lines_rule(d["balance_sheet"], log)
     utility_object_rule(d, log)
     entity_rules(d, entity_of(stem), log)
     return log
