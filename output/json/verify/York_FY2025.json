@@ -4,10 +4,10 @@
   "issues": [
     {"severity": "error", "path": "receipts[14].category", "page": 9,
      "extracted": "charges for services/fees", "on_page": "Sales 8,182,233 (Total Enterprise Funds: Water, Sewer, Landfill)",
-     "issue": "Enterprise-fund sales are utility charges. Under the user's 2026-10-28 rule (extractor 'Own receipt categories': Utility Charges = utility fund sales/charges/collections, garbage/refuse), this line should be category Utility Charges, not charges for services/fees."},
+     "issue": "[fixed 2026-10-28: receipts[14] Sales 8,182,233 category -> Utility Charges] Enterprise-fund sales are utility charges. Under the user's 2026-10-28 rule (extractor 'Own receipt categories': Utility Charges = utility fund sales/charges/collections, garbage/refuse), this line should be category Utility Charges, not charges for services/fees."},
     {"severity": "warning", "path": "receipts[15].category", "page": 9,
      "extracted": "charges for services/fees", "on_page": "Services charges 57,840; Tap fees 200 (enterprise funds)",
-     "issue": "These utility-fund service charges and tap fees probably also belong in Utility Charges under the 2026-10-28 rule (receipts[15] and receipts[16])."},
+     "issue": "[fixed 2026-10-28: receipts[15] Services charges and receipts[16] Tap fees category -> Utility Charges] These utility-fund service charges and tap fees probably also belong in Utility Charges under the 2026-10-28 rule (receipts[15] and receipts[16])."},
     {"severity": "warning", "path": "detail[11].category", "page": 22,
      "extracted": "charges for services/fees (detail_category recreation/pool/park fees / ambulance/rescue fees)", "on_page": "Charges for services: Parks 56,646, Aquatic Center 82,792, Ball Park 238,805, Soccer Complex 36,851, Fire/EMS 807,252",
      "issue": "The detail_category is recreation fees or ambulance fees, but the high-level category stayed charges for services/fees. The user's 2026-10-28 rule makes Recreation Fees and Ambulance Fees their own receipt categories (detail[11], [14], [15], [19] Recreation Fees; detail[17] Ambulance Fees, which was an assumption already marked review)."},
@@ -19,6 +19,6 @@
      "issue": "Property, Motor vehicle, Special assessments and Occupation/franchise (receipts[0]-[3]) cite p6, which holds the General/Street fund columns. The amounts match the Total Governmental Funds column printed on p7, so the cited page doesn't show the column used."},
     {"severity": "warning", "path": "notes", "page": 1,
      "extracted": "'due from/to other funds nets to zero and is omitted'; 'Business-type expense categories are all utilities by function'", "on_page": "balance_sheet includes Due from (to) other funds -63,427 / +63,427; business-type lines carry cost-type categories",
-     "issue": "The notes are out of date and contradict the JSON contents (the amounts themselves are correct and net to zero)."}
+     "issue": "[fixed 2026-10-28: notes rewritten to match the JSON (internal balances recorded; cost-type categories)] The notes are out of date and contradict the JSON contents (the amounts themselves are correct and net to zero)."}
   ]
 }

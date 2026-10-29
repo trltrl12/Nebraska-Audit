@@ -4,21 +4,21 @@
   "issues": [
     {"severity": "error", "path": "detail[7].category", "page": 14,
      "extracted": "intergovernmental/state aid / other state aid", "on_page": "In lieu of taxes 15,896",
-     "issue": "User rule: In Lieu of Tax is its own receipt category (config/category_decisions.csv 'in lieu of taxes' -> In Lieu of Tax / In Lieu of Tax); not state aid"},
+     "issue": "[fixed 2026-10-28: detail[7] In lieu of taxes now category/detail_category In Lieu of Tax with category_decision; receipts split adds In Lieu of Tax 15,896, state aid remainder 1,753,386] User rule: In Lieu of Tax is its own receipt category (config/category_decisions.csv 'in lieu of taxes' -> In Lieu of Tax / In Lieu of Tax); not state aid"},
     {"severity": "warning", "path": "receipts[7].amount", "page": 6,
      "extracted": 1769282, "on_page": "Intergovernmental revenues 1,819,286 (General Fund part includes In lieu of taxes 15,896, p14)",
-     "issue": "Split took out pro-rate and homestead but left In lieu of taxes 15,896 inside intergovernmental/state aid; under the same rule it would be split to In Lieu of Tax (remainder 1,753,386)"},
+     "issue": "[fixed 2026-10-28: split out In Lieu of Tax 15,896; remainder 1,753,386] Split took out pro-rate and homestead but left In lieu of taxes 15,896 inside intergovernmental/state aid; under the same rule it would be split to In Lieu of Tax (remainder 1,753,386)"},
     {"severity": "warning", "path": "detail[62].category", "page": 17,
      "extracted": "licenses and permits (detail_category other charges for services)", "on_page": "Permits and hookups",
-     "issue": "Category and detail_category disagree (also detail[66]); mixed permits/hookup-fee line, consider review note naming the mix"},
+     "issue": "[fixed 2026-10-28: detail_category licenses and permits, review note naming the mix] Category and detail_category disagree (also detail[66]); mixed permits/hookup-fee line, consider review note naming the mix"},
     {"severity": "warning", "path": "receipts[17].category", "page": 8,
      "extracted": "reimbursements/refunds", "on_page": "Capital facility charges and reimbursements 2,506,430",
      "issue": "Same line is category Utility Charges in detail[64] and detail[68]; same label should carry the same category"},
     {"severity": "warning", "path": "detail[25].original_label", "page": 15,
      "extracted": "Capital Outlay - General government", "on_page": "General government (under Capital Outlay heading)",
-     "issue": "Label is neither as printed nor in the 'Capital Outlay: <function>' format with printed_label (also detail[26], detail[27], detail[28], and detail[42] 'Capital outlay' Street fund)"},
+     "issue": "[fixed 2026-10-28: relabelled 'Capital Outlay: <function>' with printed_label and computed function] Label is neither as printed nor in the 'Capital Outlay: <function>' format with printed_label (also detail[26], detail[27], detail[28], and detail[42] 'Capital outlay' Street fund)"},
     {"severity": "warning", "path": "detail[72].category", "page": 17,
      "extracted": "utilities", "on_page": "Bad debts 551",
-     "issue": "Business-type cost-type schedule: miscellaneous cost lines take the cost type (other, function utilities), not 'utilities'; same for detail[83] Bad debts 182"}
+     "issue": "[fixed 2026-10-28: Bad debts lines category other, function utilities] Business-type cost-type schedule: miscellaneous cost lines take the cost type (other, function utilities), not 'utilities'; same for detail[83] Bad debts 182"}
   ]
 }
