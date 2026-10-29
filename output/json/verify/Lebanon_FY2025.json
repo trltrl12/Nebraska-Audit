@@ -1,9 +1,15 @@
 {
   "stem": "Lebanon_FY2025",
-  "values_checked": 34,
+  "values_checked": 28,
   "issues": [
     {"severity": "warning", "path": "receipts[10].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other 10,742.98 (Water column)",
-     "issue": "The Trash fund's matching line (receipts[11]) is category Utility Charges, and the user's 2026-10-28 rule puts utility fund sales and charges in Utility Charges. The Water line should probably match. The line is printed as 'Other', so its content is assumed."}
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other (Water 10,742.98)",
+     "issue": "the printed label is 'Other' with no breakdown. Treating it as water charges is a defensible assumption, already marked review. Same for receipts[11] (Trash 9,993.53)"},
+    {"severity": "warning", "path": "receipts[10].original_label", "page": 1,
+     "extracted": "Local Receipts: Other (Water fund)", "on_page": "Local Receipts: Other",
+     "issue": "the fund name was added to the printed label. Same for receipts[11] '(Trash fund)'"},
+    {"severity": "warning", "path": "balance_sheet.assets", "page": 1,
+     "extracted": null, "on_page": "County Treasurer Balance at September 30, 2025 745.69 (October 1, 2024 $92.24)",
+     "issue": "memo county treasurer balance printed below the statement is not recorded or mentioned in notes. It is outside the ending balance totals"}
   ]
 }

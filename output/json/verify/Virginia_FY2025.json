@@ -1,12 +1,18 @@
 {
   "stem": "Virginia_FY2025",
-  "values_checked": 34,
+  "values_checked": 35,
   "issues": [
+    {"severity": "warning", "path": "receipts[11].category", "page": 1,
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other 18,557.22 (Enterprise Fund)",
+     "issue": "label says 'Other' and no breakdown is printed; Utility Charges is an inference (it is the water/wastewater fund's only receipt line). Defensible, review note already present"},
     {"severity": "warning", "path": "disbursements[1].original_label", "page": 2,
-     "extracted": "Capital Improvements", "on_page": "Line 35 Capital Improvements, Street Fund 20,259.05",
-     "issue": "user rule relabels capital outlay lines 'Capital Outlay: <function>' (here 'Capital Outlay: Streets/Highways') with the printed text in printed_label; not applied"},
-    {"severity": "warning", "path": "receipts[10].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Line 18 Local Receipts: Other, Enterprise Fund 18,557.22",
-     "issue": "unlabelled enterprise (water/wastewater) receipts assumed to be utility charges; if so the user's category is Utility Charges, otherwise other; the page gives no breakdown"}
+     "extracted": "Capital Improvements", "on_page": "Capital Improvements 20,259.05 (Street Fund)",
+     "issue": "capital outlay line not relabelled 'Capital Outlay: <function>' (e.g. Capital Outlay: Streets) with printed_label, per the user's capital outlay rule"},
+    {"severity": "warning", "path": "balance_sheet.equity", "page": 1,
+     "extracted": "equity lines have no category", "on_page": "Ending Balance (Line 22 MINUS Line 23)",
+     "issue": "both equity items have no 'category' field"},
+    {"severity": "warning", "path": "balance_sheet.assets", "page": 1,
+     "extracted": "not included", "on_page": "County Treasurer Balance at September 30, 2025: 37.70 (October 1, 2024: 132.63)",
+     "issue": "county treasurer balance is printed separately from the line 24/28 balances and left out of cash and the balance sheet (explained in notes). Small, but by the user's rule county treasurer balances are Cash and Cash Equivalents"}
   ]
 }

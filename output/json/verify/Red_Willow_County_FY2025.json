@@ -1,16 +1,12 @@
 {
   "stem": "Red_Willow_County_FY2025",
-  "values_checked": 95,
+  "values_checked": 96,
   "issues": [
-    {"severity": "warning", "path": "detail[0].split_from", "page": 5,
-     "extracted": "Taxes (property tax portion) 3,559,210 / Taxes (motor vehicle portion) 534,489",
-     "on_page": "Taxes 4,093,699 (Exhibit F, one line)",
-     "issue": "Exhibit F prints one Taxes line; split uses the General column of Exhibit D (p4: Property Taxes 3,559,210, Motor Vehicle Tax 534,489), which does break down the same fund's taxes and sums exactly. Defensible, but the budget schedule itself does not print the split."},
-    {"severity": "warning", "path": "detail[33].detail_category", "page": 7,
-     "extracted": "charges for services/fees / other charges for services", "on_page": "Local 61,313",
-     "issue": "Road Fund 'Local' per Exhibit D Road column is Miscellaneous 32,373 + Charges for Services 28,645 + 295 intergovernmental; the larger part is miscellaneous, not charges. Already marked review."},
-    {"severity": "warning", "path": "detail[12].original_label", "page": 5,
-     "extracted": "Miscellaneous (General Government)", "on_page": "Miscellaneous",
-     "issue": "Label disambiguated with the function heading; printed label is just 'Miscellaneous' (same for Miscellaneous (Public Safety), (Public Health), (Public Assistance))."}
+    {"severity": "warning", "path": "detail[4].category", "page": 5,
+     "extracted": "charges for services/fees", "on_page": "Local 1,083,417",
+     "issue": "Broad group with mixed contents (Exhibit D p4 General column: charges 499,345, interest 491,444, misc 21,039, intergovernmental 71,589); no part is more than half, so charges for services is defensible but a judgment call (review note already present)"},
+    {"severity": "warning", "path": "detail[43..56].fund", "page": 10,
+     "extracted": "Nonmajor funds (combined)", "on_page": "Schedule 2: Special Revenue Funds (Schedule 4), Jail Bond, Nursing Home Bond, Total Nonmajor",
+     "issue": "Schedule 2 prints only 3 fund columns, but the extractor used the Total Nonmajor column because the Special Revenue column combines 14 funds (Schedule 4). Totals tie (receipts 2,203,897, disbursements 3,004,185); a person may prefer per-fund lines"}
   ]
 }

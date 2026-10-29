@@ -1,18 +1,24 @@
 {
   "stem": "Verdon_FY2025",
-  "values_checked": 58,
+  "values_checked": 60,
   "issues": [
-    {"severity": "warning", "path": "disbursements[5].original_label", "page": 2,
-     "extracted": "Capital Improvements", "on_page": "Line 35 Capital Improvements: Street 38,148.60, Parks 81,500.00, Enterprise 34,000.00",
-     "issue": "user rule relabels every capital outlay line 'Capital Outlay: <function>' (printed text in printed_label); not applied to disbursements[5], [6] and [9]"},
-    {"severity": "warning", "path": "disbursements[1].category", "page": 2,
-     "extracted": "streets/highways", "on_page": "Line 29 General Government, Street Fund 10,505.72",
-     "issue": "row printed as General Government; function taken from the fund column instead (also Cemetery 6,253.79 -> health/welfare, Parks 915.88 and Library 1,552.52 -> culture/recreation); defensible and marked review, but a judgment call"},
-    {"severity": "warning", "path": "receipts[19].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Line 18 Local Receipts: Other, Enterprise Fund 78,727.89",
-     "issue": "unlabelled enterprise (water/sewer) receipts assumed to be utility charges; if so the user's category is Utility Charges, otherwise other; the page does not say"},
+    {"severity": "warning", "path": "decision_needed", "page": 1,
+     "extracted": null, "on_page": "Local Receipts: Other: General 40,601.47, Street 1,336.81, Cemetery 9,470.91, Parks 36,487.11, Library 1,366.25 (total 89,262.55)",
+     "issue": "unexplained 'Other' local receipts are about 50% of governmental receipts excluding transfers (177,404.14). The Parks Fund's 36,487.11 sits next to debt service and 81,500 of capital spending, so it may be loan proceeds, grants or donations. The extraction has no decision_needed entry (Venango's matching case does)"},
     {"severity": "warning", "path": "receipts[11].category", "page": 1,
-     "extracted": "other", "on_page": "Line 18 Local Receipts: Other, Cemetery Fund 9,470.91",
-     "issue": "cemetery fund local receipts are probably Cemetery Fees (lot sales/burials), but the form gives no breakdown; left in other with review"}
+     "extracted": "other", "on_page": "Local Receipts: Other 9,470.91 (Cemetery Fund column)",
+     "issue": "this is the Cemetery Fund's only receipt, so it may be Cemetery Fees (lot sales, openings). Nothing on the page breaks it down; kept other with review"},
+    {"severity": "warning", "path": "disbursements[1].category", "page": 2,
+     "extracted": "streets/highways (also Cemetery -> health/welfare, Parks/Library -> culture/recreation)", "on_page": "line 29 General Government",
+     "issue": "the page prints line 29 'General Government' for every fund. The extractor assigned each fund column the function of its fund (disbursements[1]-[4]). That is a judgment call (the by-object rule doesn't strictly apply to a function line); marked review"},
+    {"severity": "warning", "path": "balance_sheet.liabilities", "page": 3,
+     "extracted": [], "on_page": "Schedule of Outstanding Debt: WATER BOND 132,185.99",
+     "issue": "the water bond outstanding is printed on p3 but has no liability line (cash-basis form; noted only in total_liabilities.computed)"},
+    {"severity": "warning", "path": "balance_sheet.equity[0].category", "page": 1,
+     "extracted": null, "on_page": "Ending Balance 204,558.88 / 134,677.92",
+     "issue": "the equity lines have no category field"},
+    {"severity": "warning", "path": "balance_sheet.assets", "page": 1,
+     "extracted": "net cash + investments only", "on_page": "County Treasurer Balance at September 30, 2025: 869.00",
+     "issue": "the county treasurer balance is a memo item and is not included; whether it belongs in the balance sheet is a judgment call"}
   ]
 }

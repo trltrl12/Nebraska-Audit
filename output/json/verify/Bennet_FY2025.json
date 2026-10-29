@@ -1,12 +1,18 @@
 {
   "stem": "Bennet_FY2025",
-  "values_checked": 110,
+  "values_checked": 125,
   "issues": [
-    {"severity": "warning", "path": "receipts[10].category", "page": 9,
-     "extracted": "charges for services/fees", "on_page": "Sales 631,216 (Water, Sewer, Trash enterprise funds)",
-     "issue": "These are utility fund sales, so the user's 2026-10-28 rule gives them the Utility Charges category. user_rules.py will not catch this: the label is just 'Sales' and the line has no fund name. The same applies to 'Service charges' 975 (receipts[11])."},
+    {"severity": "warning", "path": "disbursements[13].category", "page": 9,
+     "extracted": "utilities", "on_page": "Utilities 32,017",
+     "issue": "Business-type spending on p9 is listed by object. The 2026-10-28 cost-type rule calls for a cost-type category (utilities (power, gas, phone)) with function 'utilities'. This line has function category 'utilities' and no function field, unlike its sibling lines. Amount is correct."},
     {"severity": "warning", "path": "receipts[5].category", "page": 7,
-     "extracted": "charges for services/fees", "on_page": "Rental and fees 52,711",
-     "issue": "This line mixes rentals and fees. The detail line (detail[3]) uses detail_category rentals, so it could be the Rentals category under the user's 2026-10-28 rule. The mix is not marked review."}
+     "extracted": "Rentals", "on_page": "Rental and fees 52,711",
+     "issue": "The line mixes rentals and fees and no breakdown is printed. 'Rentals' as the dominant part is an assumption (already marked review). The p2 Statement of Activities shows it as general government charges for services. The same applies to detail[3]."},
+    {"severity": "warning", "path": "receipts[8].category", "page": 7,
+     "extracted": "donations/contributions", "on_page": "Contributions and grants 13,198",
+     "issue": "The Statement of Activities (p2) shows this as operating grants and contributions, so it may be government grants. The category is a judgment call (already marked review). The same applies to detail[5]."},
+    {"severity": "warning", "path": "disbursements[4].original_label", "page": 7,
+     "extracted": "Capital outlay", "on_page": "Capital outlay 71,970",
+     "issue": "Not relabelled 'Capital Outlay: <function>' (Street Fund, streets/highways) per the 2026-10-26 rule. The same applies to detail[16] (p13) and detail[10] (p12, 0). Amounts are correct."}
   ]
 }

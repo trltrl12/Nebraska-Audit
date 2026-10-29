@@ -1,12 +1,27 @@
 {
   "stem": "Bloomington_FY2025",
-  "values_checked": 40,
+  "values_checked": 36,
   "issues": [
     {"severity": "warning", "path": "receipts[9].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other 30,813.32 (Water Fund)",
-     "issue": "The extractor assumed this is water charges; nothing on the page says so. If that assumption holds, the user rule puts utility fund charges in Utility Charges; if not, the printed label 'Other' points to other"},
-    {"severity": "warning", "path": "balance_sheet", "page": 1,
-     "extracted": "assets exclude county treasurer balance; no liabilities", "on_page": "County Treasurer Balance at September 30, 2025 2,876.19 (p1); Schedule of Outstanding Debt: Bond 89,328.64 (p3)",
-     "issue": "Both amounts are printed outside Exhibit A's line 24-28 totals, so leaving them out keeps the statement tying. A person may still want the county treasurer cash (rule: Cash and Cash Equivalents) and the water bond shown. The notes mention both"}
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other (Water Fund) 30,813.32",
+     "issue": "Amount correct. Category is an assumption: the waiver form prints no breakdown of the Water Fund's 'Other' local receipts. It is probably water sales, but the page doesn't confirm it (the extraction marks it review)."},
+    {"severity": "warning", "path": "receipts[8].category", "page": 1,
+     "extracted": "intergovernmental/state aid", "on_page": "State Receipts: Other (Water Fund) 6,804.00",
+     "issue": "Amount correct. The nature of this state receipt is not printed, so the state aid category is a defensible guess (marked review)."},
+    {"severity": "warning", "path": "receipts[7].category", "page": 1,
+     "extracted": "other", "on_page": "Local Receipts: Other, General 34,393.40 + Street 1,279.83",
+     "issue": "The sum 35,673.23 is correct and marked computed. 'other' is about 31% of governmental receipts (over the 10% review threshold), but the 3 pages give no breakdown, so other is defensible."},
+    {"severity": "warning", "path": "disbursements[3]", "page": 2,
+     "extracted": "business-type capital outlay 4,420.00; debt service 7,277.00", "on_page": "Lines 35 and 39 printed under the 'Governmental' heading, in the Water Fund column",
+     "issue": "Water Fund amounts were moved to business-type even though they print under the governmental heading. This is reasonable and explained in the notes, but it is a judgment call."},
+    {"severity": "warning", "path": "disbursements[2].original_label", "page": 2,
+     "extracted": "Capital Improvements", "on_page": "Capital Improvements",
+     "issue": "The label matches the page, but the user's capital outlay rule (2026-10-26) relabels capital outlay lines 'Capital Outlay: <function>' and keeps the printed text in printed_label. This was not applied to disbursements[2] or [3]; user_rules.py may apply it."},
+    {"severity": "warning", "path": "ending_investments", "page": 1,
+     "extracted": 67396.25, "on_page": "Investments line 27: General 50,349.67 + Street 17,046.58",
+     "issue": "beginning_cash and ending_cash already include investments (lines 3 and 28 subtotals), yet beginning_investments and ending_investments are filled in too. A sum of cash + investments downstream would count investments twice."},
+    {"severity": "warning", "path": "balance_sheet.equity[0].original_label", "page": 1,
+     "extracted": "Ending Balance (line 24)", "on_page": "Ending Balance (Line 22 MINUS Line 23)",
+     "issue": "Small label mismatch. The equity lines also have no category."}
   ]
 }

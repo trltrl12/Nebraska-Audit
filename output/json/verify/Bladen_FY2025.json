@@ -1,9 +1,18 @@
 {
   "stem": "Bladen_FY2025",
-  "values_checked": 36,
+  "values_checked": 33,
   "issues": [
     {"severity": "warning", "path": "receipts[9].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other 119,154.28 (Enterprise Fund column)",
-     "issue": "the printed label is 'Other'; that these are utility charges is an assumption. If they are utility charges, the category should be Utility Charges (user rule 2026-10-28), not charges for services/fees"}
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other 119,154.28 (Enterprise Fund)",
+     "issue": "The printed label is 'Other'. Utility Charges is inferred only because all Enterprise Fund spending is utilities (p2) and no breakdown is printed. The inference is defensible but is an assumption (already marked review)."},
+    {"severity": "warning", "path": "ending_cash", "page": 1,
+     "extracted": 353476.06, "on_page": "line 26 Net Cash Balance: General/Street blank; line 27 Investments 319,116.38 + 34,359.68",
+     "issue": "The same 353,476.06 is entered as both ending_cash and ending_investments (computed). beginning_cash 371,311.38 likewise includes beginning_investments 336,616.17. The roll-forward ties, but a consumer adding cash and investments would double count."},
+    {"severity": "warning", "path": "balance_sheet.equity[0].category", "page": 1,
+     "extracted": null, "on_page": "Ending Balance (line 24)",
+     "issue": "Both equity lines have no category field. Amounts tie: 353,476.06 + 23,535.47 = 377,011.53."},
+    {"severity": "warning", "path": "balance_sheet.assets", "page": 1,
+     "extracted": "no county treasurer line", "on_page": "County Treasurer Balance at September 30, 2025 1,706.80",
+     "issue": "The county treasurer balance is printed below the statement and left out as outside fund balances (stated in notes). The user rule maps county treasurer cash to Cash and Cash Equivalents, so a person may want it shown."}
   ]
 }

@@ -1,18 +1,24 @@
 {
   "stem": "Wakefield_FY2025",
-  "values_checked": 210,
+  "values_checked": 189,
   "issues": [
-    {"severity": "warning", "path": "receipts[18]", "page": 7,
-     "extracted": "Grants 780,356 as business-type receipt (intergovernmental/state aid)", "on_page": "Nonoperating Grants 780,356 (p7); shown as Capital Grants and Contributions for Water (p3) and under capital and related financing in the cash flow statement (p8)",
-     "issue": "this is a capital grant to the Water Fund; it is printed among nonoperating revenues, so a receipt is defensible, but it could instead be business_type.other_financing (capital contribution). It is 15% of business-type receipts"},
-    {"severity": "warning", "path": "balance_sheet.liabilities[5].category", "page": 1,
-     "extracted": "Accrued Liabilities", "on_page": "Noncurrent liabilities: Accrued compensated absences 17,011",
-     "issue": "the extractor rules put only compensated absences that are due soon in accrued liabilities; this line is printed under noncurrent liabilities (debt - due in more than one year or a Compensated Absences category may fit better)"},
-    {"severity": "warning", "path": "detail[63].category", "page": 15,
-     "extracted": "health/welfare", "on_page": "Cemetery department 38,841; the governmental funds statement (p5) counts it in Public works (General Fund 38,841)",
-     "issue": "the cemetery department lines (detail[63]-detail[69]) are health/welfare, so the General Fund function split no longer ties to the statement's Public works column; the review note is present"},
-    {"severity": "warning", "path": "detail[70].original_label", "page": 15,
-     "extracted": "Transfers from (to) other funds (Total column)", "on_page": "TRANSFERS FROM (TO) OTHER FUNDS (40,000)",
-     "issue": "the label adds '(Total column)' and doesn't follow the user's 'Transfers Out' renaming (printed text would go in printed_label). The amount is correct; department-level transfers net out within the General Fund"}
+    {"severity": "warning", "path": "detail[11].category", "page": 14,
+     "extracted": "charges for services/fees", "on_page": "Park - Charges for services 2,140",
+     "issue": "user rule 2026-10-28: park/pool/recreation fees are category Recreation Fees, not charges for services"},
+    {"severity": "warning", "path": "detail[13].category", "page": 15,
+     "extracted": "charges for services/fees", "on_page": "Pool - Charges for services 21,800",
+     "issue": "user rule 2026-10-28: pool fees are category Recreation Fees"},
+    {"severity": "warning", "path": "detail[19].category", "page": 15,
+     "extracted": "charges for services/fees", "on_page": "Cemetery - Charges for services 15,005",
+     "issue": "user rule 2026-10-28: cemetery fees are category Cemetery Fees (detail_category already cemetery fees)"},
+    {"severity": "warning", "path": "receipts[6].category", "page": 5,
+     "extracted": "charges for services/fees (93,688)", "on_page": "Charges for services 93,688 = GF 39,185 (Admin 240, Park 2,140, Pool 21,800, Cemetery 15,005) + Sales Tax 9,501 + nonmajor 45,002 (Civic Center 17,593, Rescue 27,409)",
+     "issue": "the schedules print a breakdown (Rescue -> Ambulance Fees 27,409, Park/Pool -> Recreation Fees 23,940, Cemetery Fees 15,005...); no category is more than half, so keeping one line is defensible but could be split per the 2026-10-28 rule"},
+    {"severity": "warning", "path": "detail[69].original_label", "page": 15,
+     "extracted": "Transfers from (to) other funds (Total column)", "on_page": "TRANSFERS FROM (TO) OTHER FUNDS (40,000); budget schedule p10 'Transfer out' (40,000)",
+     "issue": "user label rule: detail other-financing transfer lines are labelled 'Transfers Out' (printed text in printed_label)"},
+    {"severity": "warning", "path": "detail[86]", "page": 13,
+     "extracted": "fund 'Nonmajor funds (combined)', Total Nonmajor Governmental Funds column", "on_page": "combining statement with seven fund columns (Micro Loan, CDBG, Civic Center, Sinking, Rescue, Hatchery, Perpetual Care)",
+     "issue": "nonmajor detail (detail[86]-detail[94]) uses the Total column instead of one line per fund column; amounts tie (59,506 / 156,206 / 40,000) but the funds are lost (e.g. Rescue charges 27,409 would be Ambulance Fees)"}
   ]
 }

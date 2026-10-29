@@ -1,12 +1,15 @@
 {
   "stem": "Lawrence_FY2025",
-  "values_checked": 52,
+  "values_checked": 42,
   "issues": [
-    {"severity": "warning", "path": "disbursements[6].category", "page": 4,
-     "extracted": "economic development", "on_page": "Community Development 5,852.93 (Cemetery Fund column, p2a)",
-     "issue": "The spending is printed only in the Cemetery Fund, and cemetery spending is health/welfare under the rules. The printed label says Community Development, so economic development is defensible. Judgment call."},
     {"severity": "warning", "path": "receipts[12].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other: Water 121,404.16 + Sewer 28,053.80",
-     "issue": "Water and sewer fund collections fall under the user's 2026-10-28 rule that moves utility fund sales and charges into Utility Charges. It is also an assumption: the line is printed as 'Other'."}
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other (Water 121,404.16, Sewer 28,053.80)",
+     "issue": "the printed label is 'Other' with no breakdown. Treating it as utility charges is a defensible assumption, already marked review"},
+    {"severity": "warning", "path": "disbursements[6].category", "page": 4,
+     "extracted": "economic development", "on_page": "Community Development 5,852.93 (Cemetery Fund column)",
+     "issue": "the printed label is Community Development, but the spending is from the Cemetery Fund, which suggests health/welfare (cemetery). This is a judgment call"},
+    {"severity": "warning", "path": "balance_sheet.assets", "page": 1,
+     "extracted": null, "on_page": "County Treasurer Balance at September 30, 2025 7451.95 (October 1, 2024 $2,707.41)",
+     "issue": "memo county treasurer balance printed below the statement is not recorded or mentioned in notes. It is outside the ending balance totals"}
   ]
 }

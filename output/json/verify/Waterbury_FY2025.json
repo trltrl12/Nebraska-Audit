@@ -3,7 +3,14 @@
   "values_checked": 36,
   "issues": [
     {"severity": "warning", "path": "receipts[9].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Water and Sewer column) 36,475.00",
-     "issue": "The printed label is 'Other' and the page gives no breakdown. If the extractor is right that this is water/sewer charges, the user's 2026-10-28 rule makes it Utility Charges, not charges for services/fees. If not, the label-based category would be other. Either way, the current category is a judgment call."}
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other 36,475 (Water and Sewer column)",
+     "issue": "This is an assumption: the form prints only 'Other', and the report never says these are utility collections. A review note is already present."},
+    {"severity": "warning", "path": "beginning_investments", "page": 1,
+     "extracted": "beginning_cash 52,719 (line 3 subtotal) and beginning_investments 23,453; ending_cash 39,696 (line 24) and ending_investments 23,690",
+     "on_page": "Line 1 Net Cash 29,266; line 2 Investments 23,453; line 3 subtotal 52,719",
+     "issue": "beginning_cash and ending_cash already include investments, but the investment fields are also filled. A consumer that adds the two fields would double count. Notes call the investments 'informational'."},
+    {"severity": "warning", "path": "balance_sheet.equity[0].category", "page": 1,
+     "extracted": null, "on_page": "Subtotal of Ending Balances (line 28) 39,695 / 37,508",
+     "issue": "Equity lines have no category field."}
   ]
 }

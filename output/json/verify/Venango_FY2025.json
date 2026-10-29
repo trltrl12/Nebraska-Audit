@@ -1,9 +1,24 @@
 {
   "stem": "Venango_FY2025",
-  "values_checked": 40,
+  "values_checked": 45,
   "issues": [
-    {"severity": "warning", "path": "receipts[0].original_label", "page": 1, "extracted": "Personal Property Taxes", "on_page": "Personal and Real Property Taxes", "issue": "the label doesn't match the printed row (line 4). Under the user's rename rule it should be 'Property Tax', with the printed text in printed_label."},
-    {"severity": "warning", "path": "receipts[10].category", "page": 1, "extracted": "Interest Income", "on_page": "Local Receipts: Other 2,881.41 (ICS Funds column)", "issue": "the page doesn't say this is interest; the category is assumed from the ICS deposit account (already flagged review)"},
-    {"severity": "warning", "path": "receipts[11].category", "page": 1, "extracted": "charges for services/fees", "on_page": "Local Receipts: Other 76,507.63 (Utilities Fund column)", "issue": "if these are utility collections as assumed, the user's category is Utility Charges, not charges for services/fees. The page doesn't say what they are."}
+    {"severity": "warning", "path": "receipts[0].original_label", "page": 1,
+     "extracted": "Personal Property Taxes", "on_page": "Personal and Real Property Taxes",
+     "issue": "label mismatch: line 4 reads 'Personal and Real Property Taxes' (user rename rule maps it to 'Property Tax' with printed_label); the recorded label drops 'and Real', so the rename rule will not match it"},
+    {"severity": "warning", "path": "receipts[10].category", "page": 1,
+     "extracted": "Interest Income", "on_page": "Local Receipts: Other 2,881.41 (ICS Funds column)",
+     "issue": "the category comes from an assumption (ICS deposit sweep, so interest). Nothing on the page says what the receipt is. Defensible; marked review"},
+    {"severity": "warning", "path": "receipts[9].category", "page": 1,
+     "extracted": "keno/lottery", "on_page": "Local Receipts: Other 32,314.68 (Keno Fund column)",
+     "issue": "the category is inferred from the fund name. Nothing on the page breaks the line down. Defensible; marked review"},
+    {"severity": "warning", "path": "beginning_investments", "page": 1,
+     "extracted": 879597.49, "on_page": "line 2 Investments 879,597.49; line 3 subtotal 1,385,600.98 used as beginning_cash",
+     "issue": "beginning_cash (line 3) already includes the investments, but beginning_investments/ending_investments are also filled in, so they could be counted twice. Other village Exhibit A extractions (e.g. Verdon) leave them null when they are already inside cash"},
+    {"severity": "warning", "path": "balance_sheet.equity[0].category", "page": 1,
+     "extracted": null, "on_page": "Ending Balance 1,715,164.80",
+     "issue": "the equity line has no category field"},
+    {"severity": "warning", "path": "balance_sheet.assets", "page": 1,
+     "extracted": "Net cash 578,194.12 + Investments 1,136,970.68", "on_page": "County Treasurer Balance at September 30, 2025: 31,612.32",
+     "issue": "the county treasurer balance is printed as a memo item and left out of assets and ending cash (the extraction notes say so). The rules treat county treasurer cash as Cash and Cash Equivalents, so a person may want to decide whether it belongs in the balance sheet"}
   ]
 }

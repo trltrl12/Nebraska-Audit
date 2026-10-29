@@ -1,15 +1,12 @@
 {
   "stem": "Wahoo_Public_Schools_FY2025",
-  "values_checked": 236,
+  "values_checked": 191,
   "issues": [
-    {"severity": "warning", "path": "receipts[6].split_from", "page": 10,
-     "extracted": "Other taxes 19,788 split into 132 (1190 Other taxes) + 19,656 (1960 Other local receipts)", "on_page": "Statement 'Other taxes' 19,788 (GF column p3); budget schedule 1190 Other taxes 132 and 1960 Other local receipts 19,656 (p10)",
-     "issue": "No page prints this split; it is inferred because 132 + 19,656 = 19,788. It is very likely right (the other GF tax lines tie exactly), but it is a reconstruction. receipts[7] carries the printed label 'Other taxes' with category intergovernmental/state aid."},
-    {"severity": "warning", "path": "detail[121].category", "page": 19,
-     "extracted": "charges for services/fees", "on_page": "Other receipts 922 (School Nutrition Fund)",
-     "issue": "detail_category is school lunch sales but category is charges for services/fees. These are inconsistent: use School Lunch Sales (it is counted in Nutrition Program receipts 307,128) or other."},
-    {"severity": "warning", "path": "disbursements[10].original_label", "page": 4,
-     "extracted": "Capital outlay", "on_page": "Capital outlay 10,725,901",
-     "issue": "Lines in category capital outlay should be labelled 'Capital Outlay: <function>', with the printed text in printed_label. The Depreciation Fund detail 'Capital outlay' 167,344 has the same issue."}
+    {"severity": "warning", "path": "receipts[7].category", "page": 10,
+     "extracted": "intergovernmental/state aid", "on_page": "1960 Other local receipts 19,656 (inside statement 'Other taxes' 19,788, p3)",
+     "issue": "the same label 'Other local receipts' is category other in the QCPU (detail[105], 3,790) and Special Building (detail[115], 107,685) schedules. Same label, different category; the page doesn't say what 1960 holds, so county/other local governments is a judgment call (also detail[8])"},
+    {"severity": "warning", "path": "detail[90].category", "page": 7,
+     "extracted": "Federal Programs (-633,535)", "on_page": "Reclassifications: Instruction +303,892, State categorical programs (82,138), Federal programs (855,289)",
+     "issue": "the contra line for the hidden transfer to the Depreciation Fund is all under Federal Programs, but the reclassification column also moves 82,138 out of State Categorical Programs and 303,892 into Instruction. The net amount is right; the function split is approximate"}
   ]
 }

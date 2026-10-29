@@ -1,15 +1,8 @@
 {
   "stem": "Inman_FY2025",
-  "values_checked": 34,
+  "values_checked": 33,
   "issues": [
-    {"severity": "warning", "path": "receipts[10].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Sewer Fund column) 19,171.00",
-     "issue": "Printed label is 'Other'; treating it as sewer charges is an assumption (review set). If it is sewer billing, the user's 2026-10-28 rule makes the category Utility Charges, not charges for services/fees. original_label also has '(Sewer Fund)' appended to the printed text."},
-    {"severity": "warning", "path": "receipts[11].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Sewer Reserve Fund column) 411.00",
-     "issue": "Sewer Reserve 'Other' receipt of 411 is assumed to be charges; a reserve fund's small receipt is more likely interest. Nothing on the page says which, and original_label has '(Sewer Reserve Fund)' appended."},
-    {"severity": "warning", "path": "balance_sheet.assets", "page": 1,
-     "extracted": null, "on_page": "County Treasurer Balance at September 30, 2025 762.17 (October 1, 2024 2,037.94)",
-     "issue": "The county treasurer balances printed below Exhibit A are not recorded or mentioned in the notes. They are outside the line 26 net cash balance, so the identity is unaffected, but the user rule counts cash with the county treasurer as Cash and Cash Equivalents."}
+    {"severity": "warning", "path": "receipts[10].category", "page": 1, "extracted": "Utility Charges", "on_page": "Local Receipts: Other 19,171 (Sewer Fund column)", "issue": "printed as 'Other' with no breakdown; Utility Charges is the extractor's inference from it being the Sewer Fund's only receipt (review set)"},
+    {"severity": "warning", "path": "balance_sheet.equity[0].category", "page": 1, "extracted": null, "on_page": "no equity lines printed (line 24 Ending Balance 25,867 + 33,854 | 39,031 + 9,550)", "issue": "both equity items (governmental 59,721, business-type 48,581) have no category field; amounts and sums are correct"}
   ]
 }

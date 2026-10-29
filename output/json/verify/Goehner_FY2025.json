@@ -1,21 +1,20 @@
 {
   "stem": "Goehner_FY2025",
-  "values_checked": 52,
+  "values_checked": 36,
   "issues": [
+    {"severity": "error", "path": "notes", "page": 5,
+     "extracted": "... Read pages 1-5 of 5 Recheck: ... (notes continue after the page statement)",
+     "on_page": "trimmed PDF has 5 pages",
+     "issue": "notes do not end with 'Read pages 1-5 of 5' (re-check text was appended after it). The page count is right (5 of 5) and every page's lines are in the JSON, but the required ending check fails"},
     {"severity": "warning", "path": "receipts[10].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Sewer 20,276.63, Water 20,989.29)",
-     "issue": "The extractor assumed these utility-column lines are utility charges. If so, the user's 2026-10-28 category is Utility Charges, not charges for services/fees. The printed label only says 'Other', so this is an assumption either way. It is already marked review."},
-    {"severity": "warning", "path": "disbursements[4].original_label", "page": 3,
-     "extracted": "Other Capital Outlay", "on_page": "line 36 Other Capital Outlay 293,992.50 (Fire Fund); line 35 Capital Improvements 10,000.00 (Street Fund)",
-     "issue": "Capital outlay lines are not relabelled 'Capital Outlay: <function>' (Public Safety for the Fire Fund, Streets/Highways for the Street Fund) with the printed text in printed_label, as the user's capital-outlay rule requires. This also applies to disbursements[3]."},
-    {"severity": "warning", "path": "balance_sheet.assets", "page": 1,
-     "extracted": "not recorded or mentioned in notes", "on_page": "County Treasurer Balance at October 1, 2024 $1,312.99; at September 30, 2025 1,757.34",
-     "issue": "The county treasurer balances printed below Exhibit A are left out of beginning/ending cash and the balance sheet, and the notes don't mention them. They are probably outside the fund balances, but the omission should be noted."},
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other (Sewer 20,276.63, Water 20,989.29)",
+     "issue": "the printed label is 'Other' and the report gives no breakdown. Treating it as utility charges is a defensible assumption (these are the utility funds' only receipts), but it is an assumption"},
     {"severity": "warning", "path": "balance_sheet.equity[0].original_label", "page": 1,
-     "extracted": "Subtotal of Ending Balances (all funds, governmental and business-type)", "on_page": "Subtotal of Ending Balances (Line 26 + 27)",
-     "issue": "The label is not as printed: the extractor's own description replaced the printed text. The same applies to equity[1]."},
-    {"severity": "warning", "path": "receipts[9]", "page": 2,
-     "extracted": "Local Receipts: Other 473,981.34 incl. TIF Fund 73,489.50", "on_page": "TIF Fund Local Receipts: Other 73,489.50 (p2)",
-     "issue": "The TIF fund's 'Other' receipts (73,489.50, alongside TIF property tax 119,761.86) may be developer or private payments (Private Sector Share of Projects) or a TIF-related receipt, but nothing on the page says so. Recording it as other is defensible, and the line is already marked review."}
+     "extracted": "Subtotal of Ending Balances (all funds, governmental and business-type)",
+     "on_page": "Subtotal of Ending Balances (Line 26 + 27)",
+     "issue": "label is not as printed, and on a governmental-only line it says 'all funds, governmental and business-type'. Same on equity[1]"},
+    {"severity": "warning", "path": "balance_sheet.assets", "page": 1,
+     "extracted": null, "on_page": "County Treasurer Balance at September 30, 2025 1,757.34 (October 1, 2024 $1,312.99)",
+     "issue": "memo county treasurer balance printed below the statement is not recorded or mentioned in notes. It is outside the ending balance totals, so leaving it out may be intended"}
   ]
 }

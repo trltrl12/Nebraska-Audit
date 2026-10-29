@@ -1,18 +1,21 @@
 {
   "stem": "Verdigre_Public_School_FY2025",
-  "values_checked": 186,
+  "values_checked": 190,
   "issues": [
-    {"severity": "warning", "path": "disbursements[13].original_label", "page": 6,
-     "extracted": "Capital outlay", "on_page": "Capital outlay 88,700 (Depreciation Fund, p12)",
-     "issue": "user rule relabels capital outlay lines 'Capital Outlay: <function>' with the printed text in printed_label; not applied here or on detail[52] (Depreciation Fund capital outlay 88,700); function not stated on the page"},
-    {"severity": "warning", "path": "detail[86].category", "page": 13,
-     "extracted": "charges for services/fees", "on_page": "Activities Fund account receipts 168,130 include Transfer from General Fund 15,000 (p12)",
-     "issue": "contra line removing the transfer from activity account receipts is categorised charges for services/fees; the receipts it offsets are Extracurricular Receipts, so the contra should carry that category"},
-    {"severity": "warning", "path": "detail[83].category", "page": 13,
-     "extracted": "reimbursements/refunds", "on_page": "Student Reimbursement Fund 8,886",
-     "issue": "activity account recorded as reimbursements/refunds while its detail_category is student activity receipts; defensible from the label, but inconsistent with the other activity accounts"},
-    {"severity": "warning", "path": "receipts[9].amount", "page": 6,
-     "extracted": 666066, "on_page": "State aid and grants 666,066; General Fund schedule components (p9) sum to 666,067",
-     "issue": "1-dollar rounding difference printed in the report itself (also 'Other' 1,667 vs 1,666); noted in notes but not in report_discrepancies"}
+    {"severity": "warning", "path": "detail[92].category", "page": 13,
+     "extracted": "reimbursements/refunds (detail_category student activity receipts)", "on_page": "Student Reimbursement Fund 8,886",
+     "issue": "category and detail_category disagree. Under the user rule, activity-fund receipts are Extracurricular Receipts unless the report says otherwise; if the label is taken as reimbursements, detail_category should be reimbursements/refunds"},
+    {"severity": "warning", "path": "detail[30].budget_final", "page": 9,
+     "extracted": null, "on_page": "2700 Pupil transportation: Budget 300,000, Actual 160,579",
+     "issue": "the printed final budget 300,000 is dropped because the actual is split (110,579 spending + 50,000 hidden transfer). The split itself is supported by the (50,000) elimination on p6"},
+    {"severity": "warning", "path": "detail[79].category", "page": 13,
+     "extracted": "donations/contributions", "on_page": "Great Plains Grant 2025 5,000",
+     "issue": "the grantor is not stated, so it is assumed to be non-government (marked review)"},
+    {"severity": "warning", "path": "receipts[13].category", "page": 6,
+     "extracted": "charges for services/fees", "on_page": "Other 1,667",
+     "issue": "the printed label is 'Other'. Recategorized from the p9 parts (1740 Fees 1,260 + 1990 misc 25 + 5690 other 381 = 1,666, 1 off, a rounding difference in the report). The kind of fee is not stated; defensible"},
+    {"severity": "warning", "path": "detail[93].amount", "page": 13,
+     "extracted": -15000, "on_page": "account receipts total 168,130 includes Transfer from General Fund 15,000 (p12)",
+     "issue": "the contra line the extractor built to take the hidden transfer out of activity account receipts is not printed as such. It is backed by the p12 combining statement and marked split_from/review"}
   ]
 }

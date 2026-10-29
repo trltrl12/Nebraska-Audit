@@ -1,12 +1,19 @@
 {
   "stem": "Gosper_County_FY2025",
-  "values_checked": 110,
+  "values_checked": 104,
   "issues": [
-    {"severity": "warning", "path": "detail[27].category", "page": 7,
-     "extracted": "charges for services/fees", "on_page": "Nonmajor Local 19,120 = Keno Lottery Fund 16,520 + STOP Fund 2,600",
-     "issue": "86% of the line is the Keno Lottery Fund's local receipts, which are almost certainly keno proceeds; under the 'more than half' rule keno/lottery fits better than charges for services (already marked review)"},
-    {"severity": "warning", "path": "detail[23].category", "page": 9,
-     "extracted": "charges for services/fees", "on_page": "Road Fund Local 9,244 (budget basis; statement p4 shows Road Local 5,402 plus Sale of surplus 3,842)",
-     "issue": "Mixed line: 3,842 of it is sale of surplus (Sale of Property) shown as other financing on the statement; 5,402 local receipts unexplained. Category is a judgment call (marked review)"}
+    {"severity": "error", "path": "detail[22]", "page": 9,
+     "extracted": "Local 5,402 (source_page 4, budget_final 3,866) + detail[23] Sale of surplus 3,842 (source_page 4), both split_from Road Fund Local 9,244",
+     "on_page": "Road Fund budget schedule p9: Local 9,244 (budget 3,866)",
+     "issue": "the budget schedule does not print a breakdown of its Local 9,244 line, and the budgetary note (p10) explains only the Inheritance Tax Fund difference. The split relies only on the statement's (p4) Road Fund Local 5,402 and Sale of surplus 3,842 adding up to 9,244, which the split rule forbids. Both lines also cite p4 although the schedule is on p9. Record Local 9,244 as printed (p9) with its best category and a review note"},
+    {"severity": "warning", "path": "receipts[4].category", "page": 4,
+     "extracted": "Interest Income", "on_page": "Local 666,010",
+     "issue": "broad 'Local' line: interest income 424,116 (p2) is the majority, but it also holds charges for services 222,035 and miscellaneous 21,994. The dominant-category choice follows the rule and is marked review. Same for detail[3] (General Fund Local 641,488)"},
+    {"severity": "warning", "path": "detail[20].amount", "page": 8,
+     "extracted": -1304206, "on_page": "Transfers - out Actual 1,304,206 (no parentheses; budget column (1,304,206))",
+     "issue": "the actual column prints the transfer out without parentheses. Recording it as an outflow is correct (it matches Road Fund transfers in and the p5 statement), but this is a presentation inconsistency in the printed report"},
+    {"severity": "warning", "path": "detail[26].category", "page": 6,
+     "extracted": "charges for services/fees", "on_page": "STOP Fund Local 2,600",
+     "issue": "assumed STOP program fees; the report does not say what the receipt is"}
   ]
 }
