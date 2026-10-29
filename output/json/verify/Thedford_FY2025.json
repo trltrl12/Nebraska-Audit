@@ -1,9 +1,27 @@
 {
   "stem": "Thedford_FY2025",
-  "values_checked": 40,
+  "values_checked": 41,
   "issues": [
+    {"severity": "warning", "path": "receipts[12].category", "page": 1,
+     "extracted": "Utility Charges / refuse/sanitation charges", "on_page": "Local Receipts: Other (Waste Fund) 470,679.20",
+     "issue": "The page doesn't break this line down. The Waste Fund also took out a 265,916.15 loan on 4/7/2025 (p3), and no debt proceeds line is printed, so this receipt line probably includes the loan proceeds. Calling it all refuse charges is an assumption. This is already in decision_needed and marked for review."},
     {"severity": "warning", "path": "receipts[10].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other, Sewer 36,025.79 / Water 60,453.56 / Waste 470,679.20",
-     "issue": "utility-fund 'Local Receipts: Other' lines (receipts[10]-[12]) are assumed to be utility charges; if so the user's 2026-10-28 rule puts utility fund collections in Utility Charges, not charges for services/fees. The Waste Fund line may also hold the 265,916.15 loan issued 4/7/2025 (p3), which is already in decision_needed"}
+     "extracted": "Utility Charges / sewer charges", "on_page": "Local Receipts: Other (Sewer Fund) 36,025.79",
+     "issue": "The printed label is 'Other' with no breakdown. Treating it as sewer charges is the extractor's assumption (marked for review)."},
+    {"severity": "warning", "path": "receipts[11].category", "page": 1,
+     "extracted": "Utility Charges / water charges", "on_page": "Local Receipts: Other (Water Fund) 60,453.56",
+     "issue": "The printed label is 'Other' with no breakdown. Treating it as water charges is the extractor's assumption (marked for review)."},
+    {"severity": "warning", "path": "disbursements[2].original_label", "page": 2,
+     "extracted": "Capital Improvements (Water Fund)", "on_page": "Capital Improvements",
+     "issue": "The fund name was added to the printed label, and the 'Capital Outlay: <function>' relabel (printed_label kept) hasn't been applied. user_rules.py should apply it."},
+    {"severity": "warning", "path": "disbursements[3].original_label", "page": 2,
+     "extracted": "Capital Improvements (Waste Fund)", "on_page": "Capital Improvements",
+     "issue": "The fund name was added to the printed label, and the 'Capital Outlay: <function>' relabel hasn't been applied."},
+    {"severity": "warning", "path": "disbursements[4].original_label", "page": 2,
+     "extracted": "Other Capital Outlay (Waste Fund)", "on_page": "Other Capital Outlay",
+     "issue": "The fund name was added to the printed label, and the 'Capital Outlay: <function>' relabel hasn't been applied."},
+    {"severity": "warning", "path": "balance_sheet.equity", "page": 1,
+     "extracted": "5 equity lines with no category", "on_page": "Line 24 Ending Balance by fund",
+     "issue": "The equity list items have no category field. The amounts are correct and add to 357,150.96."}
   ]
 }

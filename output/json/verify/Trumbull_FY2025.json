@@ -1,12 +1,12 @@
 {
   "stem": "Trumbull_FY2025",
-  "values_checked": 42,
+  "values_checked": 38,
   "issues": [
     {"severity": "warning", "path": "receipts[16].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Enterprise Funds) 115,424.81",
-     "issue": "The page says only 'Other'. The extractor assumes these are utility charges (solid waste, wastewater, water). That is plausible but not shown, and if it holds, the user's category would be Utility Charges, not charges for services/fees."},
-    {"severity": "warning", "path": "balance_sheet.assets", "page": 1,
-     "extracted": null, "on_page": "County Treasurer Balance at October 1, 2024 6,304.43; at September 30, 2025 2,263.36",
-     "issue": "The memo county treasurer balances are not recorded or mentioned in notes. They sit outside the line 24/28 balances, so it's unclear whether they are extra cash."}
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other 115,424.81 (Enterprise Funds column)",
+     "issue": "Category assumed: the line is printed as 'Local Receipts: Other' with no breakdown anywhere in the report; Utility Charges is plausible for the Enterprise Funds column but the page does not confirm it. Amount and column split are correct (29,183.98 + 112.48 + 115,424.81 = 144,721.27)."},
+    {"severity": "warning", "path": "receipts[11].original_label", "page": 1,
+     "extracted": "Personal and Real Property Taxes (Enterprise Funds)", "on_page": "Personal and Real Property Taxes",
+     "issue": "Label is not as printed (a fund suffix was added), and the user's rename rule (-> 'Property Tax', printed text in printed_label) was not applied, unlike the governmental line receipts[0]. The same suffix was added to receipts[12]-[16] and receipts[9]-[10] ('(General Fund)' / '(Street Fund)'). Amounts are correct."}
   ]
 }

@@ -1,9 +1,12 @@
 {
   "stem": "Eddyville_FY2025",
-  "values_checked": 38,
+  "values_checked": 36,
   "issues": [
     {"severity": "warning", "path": "receipts[9].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other, Enterprise Fund 20,406.49",
-     "issue": "The form line is printed only as 'Other'; treating it as wastewater charges is an assumption (already marked review). If it is utility charges, the user's category is Utility Charges rather than charges for services/fees."}
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other (Enterprise Fund) 20,406.49",
+     "issue": "assumption: form line is 'Local Receipts: Other' with no breakdown; treated as utility collections because it is the wastewater enterprise fund's only receipt (review note present)"},
+    {"severity": "warning", "path": "reported_totals.business-type.disbursements.includes", "page": 3,
+     "extracted": [], "on_page": "Line 52 Total Disbursements & Transfers 21,450.28 includes line 50 transfer out 7,500.00",
+     "issue": "printed total includes the 7,500 transfer (recorded in business_type.transfers_net); noted only via includes_split, 'includes' left empty"}
   ]
 }
