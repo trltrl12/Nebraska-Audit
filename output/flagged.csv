@@ -12,8 +12,12 @@ Ainsworth_FY2025,schema,receipts: unknown category 'Rentals' ('Lease and rent'),
 Ainsworth_FY2025,schema,detail: unknown revenue category 'Rentals' ('Lease and rent'),,,,
 Ainsworth_Housing_Authority_FY2025,schema,receipts: unknown category 'Rentals' ('Rental income'),,,,2
 Allen_Consolidated_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Food Services'),,,,5
+Allen_Consolidated_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Daily Sales'),,,,
 Alliance_FY2025,schema,receipts: unknown category 'Rentals' ('Rent income'),,,,11
 Alliance_Housing_Authority_FY2025,schema,receipts: unknown category 'Rentals' ('Rental income'),,,,2
+Alliance_Public_Schools_FY2025,schema,receipts: unknown category 'Rentals' ('Other (Receipts from Local Sources) - rental part'),,,,5
+Alliance_Public_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Charges for Sales and Services'),,,,8
+Alliance_Public_Schools_FY2025,schema,"detail: unknown revenue category 'Rentals' ('1910-000 Rental of School Equipment, Property, and Facilities')",,,,
 Alliance_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Lunchroom Sales'),,,,
 Alma_FY2025,schema,receipts: unknown category 'Rentals' ('Rent'),,,,5
 Alma_FY2025,schema,detail: unknown revenue category 'Rentals' ('Rent'),,,,
@@ -27,6 +31,7 @@ Alma_Housing_Authority_-_Parkview_Manor_FY2025,schema,receipts: unknown category
 Alma_Public_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Nutrition sales'),,,,4
 Alma_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Daily sales - school lunch program'),,,,
 Alma_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Daily sales - school breakfast program'),,,,
+Alma_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Daily sales - non-reimbursable programs'),,,,
 Alpine_Village_Retirement_Center_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Meals on Wheels'),,,,2
 Amherst_FY2025,schema,receipts: unknown category 'Rentals' ('Rent'),,,,4
 Amherst_FY2025,schema,detail: unknown revenue category 'Rentals' ('Rent'),,,,
@@ -57,35 +62,59 @@ Arlington_FY2025,schema,receipts: unknown category 'Rentals' ('Rental income'),,
 Arlington_FY2025,schema,receipts: unknown category 'Utility Charges' ('Utility sales'),,,,6
 Arlington_FY2025,schema,detail: unknown revenue category 'Rentals' ('Rental income'),,,,
 Arlington_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Utility sales'),,,,
+Arlington_FY2025,verifier,"other_financing: verifier: A donation is revenue, not other financing. Under the extractor rules (outside_printed_total) a revenue line printed below the statement's total should be a receipts item, category donations/contributions, with outside_printed_total: true, leaving reported_totals as printed. It is also inconsistent with detail, which records the same 3,000 as revenue (donations/contributions). (page shows Donations 3,000 (under Other Financing Sources, p4); 'Grants and donations' 3,000 counted in Total revenues 1,331,797 on the General Fund budget schedule (p8); 'Operating Grants and Contributions' 3,000 on the Statement of Activities (p2))",,,,4
 Arlington_Public_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Sale of lunches and milk'),,,,3
 Arlington_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Sale of lunches'),,,,
 Arnold_FY2025,schema,detail: unknown revenue category 'Recreation Fees' ('Swimming pool fees'),,,,
 Arnold_FY2025,schema,detail: unknown revenue category 'Recreation Fees' ('Swimming lessons'),,,,
+Arnold_FY2025,verifier,"detail[10].category: verifier: rental income has its own receipt category Rentals (user rule 2026-10-28: Rentals out of charges for services); detail_category is already 'rentals' (page shows Rentals - community center 12,094)",,,,10
 Arnold_Public_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Sales of lunches'),,,,4
 Arnold_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('1611 Sale of lunches'),,,,
 Arnold_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('1612 Sale of breakfast'),,,,
+Arnold_Public_Schools_FY2025,verifier,"balance_sheet.equity: verifier: user rule 2026-10-27: cash-basis reports take governmental balance-sheet lines from the governmental funds statement of assets and fund balances (Total column, fund balance by classification) when its totals equal the government-wide figures, as here (5,773,287.62 both). The Statement of Net Position was used instead; statement/scope/column and equity lines should come from p3-4. (page shows Governmental funds statement (p3-4) Total column: Cash and cash equivalents 5,427,199.52, Cash with county treasurer 346,088.10; Restricted fund balance 3,117,213.06, Assigned fund balance 542,821.52, Unassigned fund balance 2,113,253.04; totals 5,773,287.62)",,,,4
+Arthur_County_FY2025,verifier,"detail[4]: verifier: split_from on a broad budget-schedule group that the page does not break down; the 1,617 piece is not printed anywhere (derived as Exhibit D Intergovernmental 2,502 less Exhibit F State 885). Extractor rule: broad groups ('Taxes', 'State', 'Local') are recorded as printed with review 'broad group', not split from another statement. (page shows Exhibit F prints only the broad group 'Local' 103,944 (budget 67,147))",,,,5
+Arthur_County_FY2025,verifier,"detail[35].category: verifier: register of deeds fees are Fees of Office, a receipt category of its own (user rule 2026-10-28); detail_category already says fees of office (page shows Register of Deeds P&M - Charges for Services 333)",,,,9
+Arthur_County_Schools_FY2025,verifier,"receipts[5].category: verifier: Rent receipts have their own receipt category Rentals (user rule 2026-10-28: rent/rental income out of charges for services) (page shows 1910 Teacherage rent 7,888.00 (p3 statement of activities: Facility rental))",,,,9
+Arthur_County_Schools_FY2025,verifier,"detail[209].category: verifier: Should be category Rentals (detail_category rentals is already right); same label must use the same category as the receipt (page shows 1910 Teacherage rent 7,888.00)",,,,9
 Ashland_FY2025,schema,detail: unknown revenue category 'Ambulance Fees' ('Ambulance fees'),,,,
 Ashland_Greenwood_Public_School_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Meal sales'),,,,4
 Ashland_Greenwood_Public_School_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('School lunch program'),,,,
 Ashland_Greenwood_Public_School_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('School breakfast program'),,,,
+Ashland_Greenwood_Public_School_FY2025,verifier,"detail[114].category: verifier: These are a la carte meal sales, not reimbursements (p4 Meal sales 382,800 = lunch 114,103 + breakfast 37,943 + non-reimbursable sales 230,754). Category should be School Lunch Sales, matching its own detail_category. (page shows Non-reimbursable sales 230,754 (School Nutrition Fund))",,,,20
 Ashland_Housing_Authority_-_Golden_Manor_FY2025,schema,receipts: unknown category 'Rentals' ('Rental income'),,,,2
+Ashton_FY2025,verifier,"receipts[11].category: verifier: Recorded as assumed water charges, but utility fund sales/charges have their own receipt category Utility Charges (user rule 2026-10-28, out of charges for services) (page shows 18 Local Receipts: Other, WATER FUND column 45,967.55)",,,,1
+Ashton_FY2025,verifier,"receipts[12].category: verifier: Recorded as assumed sewer charges (the Sewer Fund also pays Solid Waste 23,297.08, so this likely includes garbage fees); category should be Utility Charges under the user rule 2026-10-28 (page shows 18 Local Receipts: Other, SEWER FUND column 72,250.88)",,,,1
 Atkinson_FY2025,schema,detail: unknown revenue category 'Rentals' ('Rentals'),,,,
 Atkinson_FY2025,schema,detail: unknown revenue category 'Recreation Fees' ('Park and pool'),,,,
 Atkinson_FY2025,schema,detail: unknown revenue category 'Cemetery Fees' ('Lot sales'),,,,
 Atkinson_FY2025,schema,detail: unknown revenue category 'Rentals' ('Rentals'),,,,
 Atkinson_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Sanitation'),,,,
+Atkinson_FY2025,verifier,"receipts[15].category: verifier: User rule: Rentals is its own receipt category (out of charges for services). The same line is category Rentals in detail[8], so the report is internally inconsistent. (page shows Rentals 25,531 (General Fund, inside statement 'Other'))",,,,18
+Atkinson_FY2025,verifier,"receipts[17].category: verifier: Cemetery lot sales should be Cemetery Fees (user rule). detail[15] gives the same line Cemetery Fees, so the categories don't match. (page shows Lot sales 5,150 (Cemetery department, p31))",,,,18
+Atkinson_FY2025,verifier,"receipts[21].category: verifier: User rule 2026-10-28: utility fund sales and charges, including garbage/refuse, are category Utility Charges, not charges for services/fees. (page shows User charges 622,083 (Sewer/Water/Sanitation))",,,,11
+Atkinson_FY2025,verifier,"detail[90].category: verifier: Utility fund charge should be Utility Charges. detail[92] (Sanitation) already uses Utility Charges, so the category is inconsistent within the same schedule. (page shows Sewer 228,050)",,,,15
+Atkinson_FY2025,verifier,"detail[91].category: verifier: Utility fund charge should be Utility Charges, the same as Sanitation detail[92]. (page shows Water 226,161)",,,,15
+Atkinson_FY2025,verifier,"detail[83].category: verifier: Rent receipts should be category Rentals (user rule). detail_category is already 'rentals', and detail[8] and [44] use Rentals. (page shows Rent receipts 18,000)",,,,28
 Auburn_Board_of_Public_Works_FY2025,schema,receipts: unknown category 'Utility Charges' ('Utility Sales'),,,,3
 Auburn_Board_of_Public_Works_FY2025,schema,receipts: unknown category 'Rentals' ('Rent'),,,,3
 Auburn_Housing_Authority_-_Valley_View_FY2025,schema,receipts: unknown category 'Rentals' ('Rental income'),,,,2
 Auburn_Public_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Sale of lunches'),,,,4
 Auburn_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('School Lunch Programs'),,,,
 Auburn_Public_Schools_FY2025,schema,detail: unknown revenue category 'Rentals' ('Farm Rental'),,,,
+Auburn_Public_Schools_FY2025,verifier,"receipts[21].category: verifier: The extraction's own review note says 71% (278,521) is Activities Fund receipts. Under the rules (school activity fund receipts go to Extracurricular Receipts; when one category is more than half of a broad line, use it), the category should be Extracurricular Receipts, not charges for services/fees. The amount 390,884 itself is right. (page shows Other local receipts 880,884 less 490,000 transfer = 390,884: Activities Fund 278,521 (p11) + General fees/rentals/licenses/refunds/other 26,184 (p6) + Employee Benefit Other Receipts 71,147 (p10) + Special Building 14,935 + Bond 65 + QCPU 32)",,,,4
+Auburn_Public_Schools_FY2025,verifier,"detail[9].category: verifier: User rule: Rentals is its own receipt category. The McGrew 'Farm Rental' line (detail[167]) uses Rentals, so the category is inconsistent within the report. (page shows 1910 Rentals Of School Equipment, Property and Facilities 25)",,,,6
 Aurora_FY2025,schema,receipts: unknown category 'Rentals' ('Lease and rent'),,,,5
 Aurora_FY2025,schema,detail: unknown revenue category 'Rentals' ('Lease and rent'),,,,
 Aurora_FY2025,schema,detail: unknown revenue category 'Rentals' ('Lease and rent'),,,,
 Aurora_FY2025,schema,detail: unknown revenue category 'Rentals' ('Lease and rent'),,,,
+Aurora_FY2025,verifier,"receipts[13].category: verifier: User rule 2026-10-28: utility fund sales and charges (including sanitation) are category Utility Charges, not charges for services/fees. (page shows Sales 2,957,530 (Water/Sewer/Sanitation enterprise funds))",,,,7
+Aurora_FY2025,verifier,"detail[9].category: verifier: detail_category is 'cemetery fees', but category should be Cemetery Fees (user rule: own receipt category out of charges for services). (page shows Cemetery - Charges for services 12,510)",,,,17
+Aurora_FY2025,verifier,"detail[10].category: verifier: detail_category is 'recreation/pool/park fees', but category should be Recreation Fees (user rule). (page shows Parks and Recreation - Charges for services 87,835)",,,,17
+Aurora_FY2025,verifier,"detail[97].category: verifier: detail_category is 'ambulance/rescue fees', but category should be Ambulance Fees (user rule). (page shows EMS Fund - Charges for services 841,358)",,,,13
+Aurora_FY2025,verifier,"detail[106].category: verifier: detail_category is 'cemetery fees', but category should be Cemetery Fees (user rule). (page shows Permanent Fund Perpetual Care - Charges for services 10,150)",,,,15
 Aurora_Public_Schools_FY2025,schema,detail: unknown revenue category 'Rentals' ('1910 Rental of school facilities'),,,,
 Aurora_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Sales - special milk'),,,,
+Aurora_Public_Schools_FY2025,verifier,"receipts[9].category: verifier: This is a broad line. About 58.5% of it (742,212.61) is student activity receipts, so under the broad-line rule (category over half) it should be Extracurricular Receipts, or split with split_from. Most of the rest is School Lunch Sales. Almost none of it is 'charges for services/fees' under the current category list, so the category is wrong, not just a judgment call. (page shows Miscellaneous local receipts 1,268,030.91 = General 138,380.75 (tuition 25,024.50, rent 1,270, licenses 2,240, contributions 19,721, categorical 885, refunds 11,366.81, other 77,873.44, p6/p8) + Other Governmental 1,129,650.16 (Activities receipts 805,801.32 less 40,000 transfer, 23,329.73 donations and 258.98 interest = 742,212.61; Nutrition sales 374,968.10 + misc 191.22; Bond misc 7,905.41; Special Building misc 4,372.82))",,,,5
 Axtell_Community_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Lunch sales'),,,,6
 Axtell_Community_Schools_FY2025,schema,detail: unknown revenue category 'Rentals' ('Rent'),,,,
 Axtell_FY2025,schema,receipts: unknown category 'Rentals' ('Rental income'),,,,7
@@ -100,15 +129,25 @@ Axtell_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Dump f
 Bancroft_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Charges for Services'),,,,
 Bancroft_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Charges for Services'),,,,
 Bancroft_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Charges for Services'),,,,
+Bancroft_FY2025,verifier,"receipts[8].category: verifier: utility fund charges belong in the user's Utility Charges category (2026-10-28 rule); the matching detail lines already use Utility Charges, so the report is inconsistent (page shows Charges for Services 348,037 (Water/Sewer/Sanitation enterprise funds))",,,,6
 Bancroft_Rosalie_Community_School_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Student Lunches'),,,,4
 Bancroft_Rosalie_Community_School_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Other Local Receipts (School Nutrition Fund column)'),,,,4
 Bancroft_Rosalie_Community_School_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Sale of Lunches'),,,,
+Bancroft_Rosalie_Community_School_FY2025,verifier,"detail[91].category: verifier: this is meal sales, not a reimbursement, so it belongs in School Lunch Sales. The statement's Student Lunches 4,248 (p4) = Sale of Lunches 3,120 + this 1,128 and is already in School Lunch Sales, and this line's own detail_category is school lunch sales (page shows Daily Sales - Non Reimburseable 1,128)",,,,13
+Bancroft_Rosalie_Community_School_FY2025,verifier,"detail[93].category: verifier: these are sales of non-reimbursable meals; the matching statement split receipts[18] is School Lunch Sales, so the category is inconsistent and does not fit the label (page shows Non Reimbursable Programs 5,390)",,,,13
+Bancroft_Rosalie_Community_School_FY2025,verifier,"detail[115].category: verifier: rental income has its own category (Rentals, detail rentals) under the user's 2026-10-28 rule; 'other' is wrong (page shows Other Rental 14,400)",,,,15
+Bancroft_Rosalie_Community_School_FY2025,verifier,"receipts[19].category: verifier: rental income belongs in Rentals, not charges for services/fees (user 2026-10-28) (page shows Other Local Receipts, Special Building column 14,400 (p15 Other Rental))",,,,4
+Bancroft_Rosalie_Community_School_FY2025,verifier,"receipts[21].category: verifier: student fees belong in Extracurricular Receipts (user 2026-10-28); detail[131] already uses Extracurricular Receipts, so the report is inconsistent (page shows Other Local Receipts, Student Fee column 471 (p17 Student Fees))",,,,4
 Banner_County_Public_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('1620 Non-Reimbursable Programs (School Nutrition Fund)'),,,,8
 Banner_County_Public_Schools_FY2025,schema,detail: unknown revenue category 'Rentals' ('1910 Teacherage Rental'),,,,
+Banner_County_Public_Schools_FY2025,verifier,"receipts[18].category: verifier: rental income belongs in the user's Rentals category (2026-10-28); the matching detail[83] already uses Rentals, so the report is inconsistent (page shows 1910 Teacherage Rental 16,890)",,,,11
+Banner_County_Public_Schools_FY2025,verifier,"detail[56].category: verifier: these are sales of non-reimbursable meals, not reimbursements. The matching statement split receipts[9] is School Lunch Sales and this line's own detail_category is school lunch sales (page shows 1620 Non-Reimbursable Programs 1,310)",,,,8
+Barneston_FY2025,verifier,"missing: verifier: notes do not end with 'Read pages 1-3 of 3' (the phrase is in the middle, followed by more text). All 3 pages were read and no statement lines are missing; only the required ending is wrong. (page shows trimmed PDF has 3 pages)",,,,3
 Bartley_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Charge for services'),,,,
 Bartley_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Charge for services'),,,,
 Bartley_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Charge for services'),,,,
 Bartley_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Charge for services'),,,,
+Bartley_FY2025,verifier,"missing: verifier: notes do not end with 'Read pages 1-9 of 9' (the phrase is in the middle, followed by re-check text). All 9 pages were read and no statement lines are missing; only the required ending is wrong. (page shows trimmed PDF has 9 pages)",,,,9
 Bassett_Housing_Authority_-_Meadow_View_FY2025,schema,receipts: unknown category 'Rentals' ('Rental income'),,,,2
 Battle_Creek_FY2025,schema,receipts: unknown category 'Utility Charges' ('Garbage - Charges for Services'),,,,2
 Battle_Creek_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Electric - Charges for Services'),,,,
@@ -117,15 +156,22 @@ Battle_Creek_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('
 Battle_Creek_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Garbage - Charges for Services'),,,,
 Battle_Creek_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('1611 Daily Sales - School Lunch Program'),,,,
 Battle_Creek_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('1612 Daily Sales - School Breakfast Program'),,,,
+Battle_Creek_Public_Schools_FY2025,verifier,"receipts[6].category: verifier: Activities Fund receipts are 392,547 of 709,699 (55%), more than half of the line. Under the rules, school activity fund receipts are Extracurricular Receipts, and a broad line takes the category that makes up more than half of it. Charges for services/fees is only for genuine service fees. (page shows Other Local Receipts 709,699 = General 47,726 + Activities Fund 392,547 + School Nutrition 269,426)",,,,4
+Battle_Creek_Public_Schools_FY2025,verifier,"detail[69].category: verifier: This line is food sales (a la carte / non-reimbursable meals), not a reimbursement, so the category should be School Lunch Sales. The extraction's own detail_category already says school lunch sales, so the two fields disagree. (page shows 1620 Daily Sales - Non-Reimbursable Programs 80,788)",,,,9
 Bayard_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Sales'),,,,
 Bayard_Housing_Agency_East_-_Lawn_Manor_FY2025,schema,receipts: unknown category 'Rentals' ('Rental income'),,,,2
 Bayard_Public_Schools_FY2025,schema,"receipts: unknown category 'School Lunch Sales' ('Local Sources (lunchroom sales, activity/gate receipts and fees)')",,,,4
 Bayard_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('1611 Lunchroom Sales'),,,,
+Bayard_Public_Schools_FY2025,verifier,"receipts[7].category: verifier: Activity fund receipts are 230,914 of this 265,234 item (87%), so the dominant category is Extracurricular Receipts, not School Lunch Sales. The review note says charges for services was kept, which matches neither the recorded category nor the dominant one. The fund schedules print both parts separately, so the item could instead be split into School Lunch Sales 34,320 and Extracurricular Receipts 230,914. (page shows Local Sources split: 1611 Lunchroom Sales 34,320 (p8) + Activities 1710 Gate 30,148, 1740 Other Fees 2,917, 1741 Extracurricular Activities Feed 11,960, 1790 Other Activity Income 185,889 (p9) = 265,234)",,,,4
 Beatrice_FY2025,schema,detail: unknown revenue category 'Ambulance Fees' ('Ambulance charges'),,,,
 Beatrice_FY2025,schema,detail: unknown revenue category 'Ambulance Fees' ('Ambulance contracted adjustments'),,,,
 Beatrice_FY2025,schema,detail: unknown revenue category 'Recreation Fees' ('Water park admissions'),,,,
 Beatrice_FY2025,schema,detail: unknown revenue category 'Recreation Fees' ('Water park concessions and sales'),,,,
 Beatrice_FY2025,schema,detail: unknown revenue category 'Recreation Fees' ('Swim lessons'),,,,
+Beatrice_FY2025,verifier,"detail[148].category: verifier: This line is printed under the Streets schedule's Capital Outlay heading. The user's capital outlay rule (2026-10-26) puts every capital outlay line, including one inside a function, in category capital outlay, labelled 'Capital Outlay: <function>'. The same applies to detail[149] Machinery and equipment 99,566 and detail[147] Buildings 0. As recorded, 2,822,089 of capital outlay is counted as streets spending. (page shows C-1 Capital Outlay: Improvements other than buildings 2,722,523)",,,,21
+Beatrice_FY2025,verifier,"detail[62].category: verifier: Lease income is rental income, so under the user's 2026-10-28 rule the category should be Rentals. The line's own detail_category already says rentals. (page shows Lease income - BASWA 75,276)",,,,16
+Beatrice_FY2025,verifier,"receipts[14].category: verifier: These are utility fund sales and charges. The user's 2026-10-28 rule puts utility fund sales/charges/collections, including garbage/refuse, in Utility Charges, not charges for services/fees. (page shows Enterprise funds Charges for services 29,767,427 (Electric, Water, Water Pollution Control, BASWA, Sanitation))",,,,9
+Beatrice_FY2025,verifier,"receipts[19].category: verifier: This is lease (rental) revenue, so under the user's 2026-10-28 rule the category should be Rentals. The line also includes interest on leases, so it needs a review note for the mix. (page shows Lease revenue and interest on leases 134,639)",,,,9
 Beatrice_Housing_Agency_FY2025,schema,receipts: unknown category 'Rentals' ('Rental income'),,,,2
 Beatrice_Public_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Sale of lunches and milk'),,,,4
 Beaver_City_Manor_FY2025,schema,"receipts: unknown category 'School Lunch Sales' ('Meals and Vending Revenue, Net')",,,,3
@@ -136,17 +182,26 @@ Beaver_Crossing_FY2025,schema,detail: unknown revenue category 'Utility Charges'
 Bee_FY2025,schema,receipts: unknown category 'Utility Charges' ('Local Receipts: Other (Garbage)'),,,,2
 Beemer_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Sales'),,,,
 Beemer_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Sales'),,,,
+Beemer_FY2025,verifier,"receipts[13].category: verifier: Utility fund sales should be category Utility Charges (user rule 2026-10-28); the same lines in detail[] are already Utility Charges, so the report is inconsistent (page shows Sales 326,493 (Water 195,234 + Sewer 131,259, Enterprise Funds operating revenues))",,,,7
 Beemer_Housing_Authority_FY2025,schema,receipts: unknown category 'Rentals' ('Rental income'),,,,2
 Belden_FY2025,schema,receipts: unknown category 'Utility Charges' ('Local Receipts: Other (Sanitation Fund)'),,,,1
+Belden_FY2025,verifier,"receipts[10].category: verifier: Utility fund receipts treated as charges should be Utility Charges (user rule 2026-10-28), as the Sanitation Fund line receipts[12] already is; inconsistent within the report (page shows Local Receipts: Other, Water Fund 47,094)",,,,1
+Belden_FY2025,verifier,"receipts[11].category: verifier: Same as receipts[10]: should be Utility Charges (page shows Local Receipts: Other, Sewer Fund 5,309)",,,,1
+Belgrade_FY2025,verifier,"receipts[11].category: verifier: Utility fund receipts treated as charges should be Utility Charges (user rule 2026-10-28) (page shows Local Receipts: Other 50,418.28 (third fund: solid waste/wastewater/water))",,,,1
+Bellevue_FY2025,verifier,"receipts[12].category: verifier: Utility fund charges should be category Utility Charges (user rule 2026-10-28) (page shows Waste Water Fund operating revenues: Charges for services 13,862,653)",,,,8
 Bellevue_Public_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Sales of lunches'),,,,6
 Bellevue_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Food sales'),,,,
 Bennington_Public_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Charges for sales and services - food sales'),,,,7
 Bennington_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Charges for sales and services - food sales'),,,,
+Bertrand_FY2025,verifier,"receipts[11].category: verifier: utility fund sales, including garbage, belong in the user's Utility Charges category (rule of 2026-10-28), not charges for services/fees (page shows Sales 343,988 (Water 165,200, Sewer 107,110, Garbage 71,678 enterprise funds))",,,,7
+Bertrand_FY2025,verifier,"receipts[5].category: verifier: for a mixed line the rule is to use the dominant component. Licenses are only 2,563 of the 50,743 General fund part, so rentals/fees dominate and licenses and permits is not the dominant category (the line already has a review note) (page shows Licenses, rents, and fees 75,866 (p5); General fund breakdown p12: Licenses and permits 2,563, Rentals and fees 29,725 + 1,765 + 16,690 = 48,180; Street fund 25,123 not broken down)",,,,12
 Bertrand_Nursing_Home_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Meal sales'),,,,2
 Bertrand_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Sales - lunch'),,,,
 Bertrand_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Sales - breakfast'),,,,
+Bertrand_Public_Schools_FY2025,verifier,"detail[188].category: verifier: these are meal/a-la-carte sales (not reimbursable by the federal program), not a reimbursement or refund; the category should be School Lunch Sales (its detail_category is already school lunch sales) (page shows Sales - non-reimbursable 6,092.05 (School Nutrition Fund cash receipts))",,,,13
 Big_Springs_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Charge for services'),,,,
 Big_Springs_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Charge for services'),,,,
+Big_Springs_FY2025,verifier,"receipts[12].category: verifier: utility fund charges belong in the Utility Charges category (user rule 2026-10-28). The detail lines for the same Water/Sewer 'Charge for services' already use Utility Charges, so the report is also inconsistent with itself (page shows Charge for services 328,687.11 (Water/Sewer proprietary funds))",,,,6
 Blair_Airport_Authority_FY2025,schema,detail: unknown revenue category 'Rentals' ('Rent income'),,,,
 Blair_Community_Schools_FY2025,schema,receipts: unknown category 'Rentals' ('Rental of school equipment and facilities'),,,,4
 Blair_Community_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Nutrition Program receipts'),,,,4
@@ -156,6 +211,7 @@ Blair_FY2025,schema,detail: unknown revenue category 'Rentals' ('Equipment renta
 Blair_FY2025,schema,detail: unknown revenue category 'Cemetery Fees' ('Cemetery lots'),,,,
 Blair_FY2025,schema,detail: unknown revenue category 'Ambulance Fees' ('Rescue Squad'),,,,
 Blair_FY2025,schema,detail: unknown revenue category 'Recreation Fees' ('RV park'),,,,
+Blair_FY2025,verifier,"balance_sheet.deferred_inflows[0].category: verifier: Nonrefundable deposits are not a gain on a debt refunding. This looks like scripts/user_rules.py's deferred-inflow regex 'refund' matching inside 'Nonrefundable'. The category should stay a generic deferred inflow (other), and the regex needs a word boundary (page shows Nonrefundable deposits 39,508)",,,,2
 Blair_Housing_Authority_-_Parkview_Manor_FY2025,schema,receipts: unknown category 'Rentals' ('Rental income'),,,,2
 Bloomfield_Community_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('School Nutrition Program sales'),,,,3
 Blue_Hill_Housing_Authority_-_West_Gate_Manor_FY2025,schema,receipts: unknown category 'Rentals' ('Rental income'),,,,2
@@ -163,6 +219,10 @@ Blue_Hill_Public_Schools_FY2025,schema,receipts: unknown category 'School Lunch 
 Blue_Hill_Public_Schools_FY2025,schema,detail: unknown revenue category 'Rentals' ('1910 Rentals'),,,,
 Blue_Hill_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('1611 Student Lunches'),,,,
 Blue_Hill_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('1612 Student Breakfast'),,,,
+Blue_Hill_Public_Schools_FY2025,verifier,"receipts[5].category: verifier: Rentals is its own receipt category (user rule 2026-10-28). The detail line for the same 1910 Rentals is already in category Rentals, so the receipt line doesn't match it. (page shows 1910 Rentals 4,930.00)",,,,14
+Blue_Hill_Public_Schools_FY2025,verifier,"detail[Sched G School Nutrition Fund, '1620 Non Reimbursable'].category: verifier: These are sales of non-reimbursable meals, not a reimbursement. The statement's Sales of Meals 65,533.71 (p6) = 63,460.66 + 789.94 + 1,283.11, and the line's own detail_category is school lunch sales, so the category should be School Lunch Sales. (page shows 1620 Non Reimbursable 1,283.11)",,,,20
+Blue_Hill_Public_Schools_FY2025,verifier,"detail[Sched M, departments '3535 High Ability Learners' (5 lines) and '3551 Career Education' (1 line)].category: verifier: The report counts these program lines in its State Programs line, so they belong in State Categorical Programs (user rule 2026-10-28), the same as the 3599 line, which already has it. Lowercase 'instruction' also doesn't match the 'Instruction' used elsewhere. (page shows Statement line State Programs 106,603.72 (p10) = 3535 5,203.97 + 3551 3,914.75 + 3599 97,485.00 (Sched B p17))",,,,29
+Blue_Hill_Public_Schools_FY2025,verifier,"detail[Sched M, departments 6200 Title I, 6310 Title II Part A, 6406 IDEA Preschool, 6408 IDEA Part B, 6990 Other Federal Categorical Programs, 6992 REAP (19 lines)].category: verifier: The report groups these program lines under its Federal Programs line, so their category should be Federal Programs, not instruction (user rule 2026-10-28). (page shows Statement line Federal Programs 224,926.07 (p10) = 47,977.17 + 8,878.68 + 2,116.00 + 72,632.92 + 9,689.00 + 83,632.30 (Sched B p17))",,,,30
 Blue_Springs_FY2025,schema,receipts: unknown category 'Utility Charges' ('Garbage collection'),,,,6
 Blue_Springs_FY2025,schema,receipts: unknown category 'Utility Charges' ('Utility collections'),,,,8
 Blue_Springs_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Garbage collection'),,,,
@@ -190,6 +250,9 @@ Brainard_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Char
 Bridgeport_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Charges for Services'),,,,
 Bridgeport_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Charges for Services'),,,,
 Bridgeport_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Charges for Services'),,,,
+Bridgeport_FY2025,verifier,"receipts[9].category: verifier: 97% of this business-type line is utility fund sales (electric, water, sewer and landfill/refuse), so it should be Utility Charges (user rule 2026-10-28, which includes garbage/refuse). The Water, Sewer and Electric detail lines already use Utility Charges. (page shows Charges for Services 3,181,716 (Electric 1,955,011, Water 613,686, Sewer 266,367, Community Center 84,837, Landfill 261,815))",,,,8
+Bridgeport_FY2025,verifier,"detail[Budgetary Comparison Schedule - Landfill Fund, 'Charges for Services'].category: verifier: Landfill/refuse fund charges are Utility Charges (user rule: utility charges include garbage/refuse). The detail_category is already refuse/sanitation charges. (page shows Charges for Services 261,815)",,,,18
+Bridgeport_FY2025,verifier,"receipts[4].category: verifier: Pool fees have their own receipt category, Recreation Fees (user rule 2026-10-28). The matching detail line (Swimming Pool 'Charges for Services', p22) has the same category problem. (page shows Charges for Services 5,901 (all in the Swimming Pool column, p22))",,,,5
 Bridgeport_Housing_Agency_-_Camp_Clark_FY2025,schema,receipts: unknown category 'Rentals' ('Rental income'),,,,2
 Bridgeport_Public_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Local sources: School Nutrition Fund'),,,,3
 Bristow_FY2025,schema,receipts: unknown category 'Utility Charges' ('Local Receipts: Other (Trash)'),,,,1
@@ -203,6 +266,9 @@ Broken_Bow_Public_Schools_FY2025,schema,detail: unknown revenue category 'Rental
 Bruning_Davenport_Unified_System_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Sales of Meals'),,,,9
 Bruning_Davenport_Unified_System_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('1611 Student Lunches'),,,,
 Bruning_Davenport_Unified_System_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('1613 Sale of Milk'),,,,
+Bruning_Davenport_Unified_System_FY2025,verifier,"detail[Sch G School Nutrition Fund, '1620 Non Reimbursable'].category: verifier: These are sales of non-reimbursable meals, not a reimbursement. The statement's Sales of Meals 53,236.67 (p9) = 40,580.63 + 512.39 + 12,143.65, and the line's own detail_category is school lunch sales, so the category should be School Lunch Sales. (page shows 1620 Non Reimbursable 12,143.65)",,,,25
+Bruning_Davenport_Unified_System_FY2025,verifier,"detail[Sch M, departments 3512 Distance Education, 3535 High Ability Learners, 3551 Career Education (5 lines)].category: verifier: The report counts these program lines in its State Programs line, so they belong in State Categorical Programs (user rule 2026-10-28), not instruction. (page shows Statement line State Programs 13,952.45 (p13) = 5,696.70 + 755.75 + 7,500.00 (Sch B p20))",,,,37
+Bruning_Davenport_Unified_System_FY2025,verifier,"detail[Sch M, departments 6200 Title I, 6406 IDEA Preschool, 6408 IDEA Part B, 6992 Reap (9 lines)].category: verifier: The report groups these program lines under its Federal Programs line, so their category should be Federal Programs, not instruction (user rule 2026-10-28). (page shows Statement line Federal Programs 126,998.27 (p13) = 44,179.16 + 1,080.00 + 43,350.00 + 38,389.11 (Sch B p20))",,,,37
 Bruning_FY2025,schema,receipts: unknown category 'Utility Charges' ('Utility collections'),,,,6
 Buffalo_County_Agricultural_Society_FY2025,schema,receipts: unknown category 'Rentals' ('Building and equipment rental'),,,,4
 Buffalo_County_Agricultural_Society_FY2025,schema,detail: unknown revenue category 'Rentals' ('Building and equipment rental'),,,,
@@ -222,6 +288,8 @@ Butte_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Charges
 Butte_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Charges for services'),,,,
 Byron_FY2025,schema,receipts: unknown category 'Utility Charges' ('Utility collections'),,,,6
 Byron_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Garbage collection fees'),,,,
+CO26-11052025-July_1_2024_through_June_30_2025_Audit_Report_and_Management_Letter,verifier,"detail[0].source_page: verifier: The General Fund Taxes split items detail[0]-detail[3] cite page 5, but their amounts are printed only on page 4, so the page-text check cannot find them. The amounts themselves are correct and add to 5,708,371. (page shows Property 5,081,261 / Motor Vehicle 316,607 / Nameplate Capacity 267,572 / Other 42,931 printed in the General Fund column on p4; p5 prints only Taxes 5,708,371)",,,,4
+CO65-12172025-July_1_2024_through_June_30_2025_Audit_Report_and_Management_Letter,verifier,"detail[38].category: verifier: The user's decision in config/category_decisions.csv is 'e payments' -> detail_category E911 Payments, category charges for services/fees. receipts[4] (the same 53,465) follows it. This detail line claims category_decision 'user 2026-10-23' but uses other taxes / Other / Miscellaneous Taxes, so the same label is categorized two ways in one report. (page shows Taxes: E911 Payments 53,465 (Total Nonmajor Funds))",,,,12
 Cairo_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Meals'),,,,
 Cairo_Housing_Authority_-_Hulett_Park_FY2025,schema,receipts: unknown category 'Rentals' ('Rental income'),,,,2
 Callaway_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Sales'),,,,
@@ -250,8 +318,10 @@ Cedar_Bluffs_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('
 Cedar_Bluffs_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Charges for services'),,,,
 Cedar_Bluffs_Public_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Meal sales'),,,,4
 Cedar_Bluffs_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Sale of lunches'),,,,
+Cedar_Bluffs_Public_Schools_FY2025,verifier,"receipts[8].category: verifier: The schedules break this broad line down, and 3,784 of 3,820 (99%) is Student Fee Fund activities receipts. The rules say to use the category that is more than half of the line, which is Extracurricular Receipts (student fees and activity receipts). The extraction uses that category for the same 3,784 in detail[124]. Charges for services/fees fits neither part. (page shows Other local receipts 3,820 = General Fund 36 (1323 Tuition received from other districts - SPED, p11) + Student Fee Fund 3,784 (Activities receipts, pp9, 22))",,,,4
 Cedar_County_FY2025,schema,detail: unknown revenue category 'Fees of Office' ('Register of Deeds Pre & Mod - Local'),,,,
 Cedar_Rapids_FY2025,schema,receipts: unknown category 'Utility Charges' ('Utility sales'),,,,7
+Centennial_Public_Schools_FY2025,schema,receipts: unknown category 'Rentals' ('Rental of facilities'),,,,9
 Centennial_Public_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Lunch sales'),,,,8
 Centennial_Public_Schools_FY2025,schema,detail: unknown revenue category 'Rentals' ('Rental of facilities'),,,,
 Central_City_FY2025,schema,receipts: unknown category 'Rentals' ('Rental income'),,,,7
@@ -262,6 +332,7 @@ Central_City_Public_Schools_FY2025,schema,receipts: unknown category 'School Lun
 Central_City_Public_Schools_FY2025,schema,"disbursements: unknown category 'Drivers Education' (""Summer school/driver's education"")",,,,7
 Central_City_Public_Schools_FY2025,schema,detail: unknown revenue category 'Rentals' ('1910 Rental of school equipment'),,,,
 Central_City_Public_Schools_FY2025,schema,"detail: unknown expenditure category 'Drivers Education' (""1300 Summer school/driver's education"")",,,,
+Central_Valley_School_District_60_FY2025,verifier,"receipts[15].category: verifier: These are school nutrition meal sales. The user rule (2026-10-28) gives lunch/meal/nutrition sales their own receipt category, School Lunch Sales, separate from charges for services. The same line in detail[89] has category charges for services/fees but detail_category school lunch sales, so the report is inconsistent with itself. Cedar Bluffs uses School Lunch Sales for its equivalent line. (page shows School Nutrition Fund - Daily Sales 121,758 (1600 Daily Sales, p18))",,,,10
 Centura_Public_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('School Nutrition Program receipts'),,,,3
 Centura_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Lunch sales'),,,,
 Ceresco_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Charges for services'),,,,
@@ -269,9 +340,12 @@ Ceresco_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Charg
 Ceresco_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Charges for services'),,,,
 Chadron_FY2025,schema,detail: unknown revenue category 'Rentals' ('Lease and rent'),,,,
 Chadron_FY2025,schema,detail: unknown revenue category 'Rentals' ('Lease and rent'),,,,
+Chadron_FY2025,verifier,"receipts[8].category: verifier: lease/rental income has its own receipt category Rentals (user rule 2026-10-28); the same money in detail (Lease and rent 100 + 92,146, p18-19) is already Rentals, so the report is inconsistent (page shows Lease income 92,246)",,,,7
+Chadron_FY2025,verifier,"receipts[15].category: verifier: utility fund sales belong in the Utility Charges receipt category (user rule 2026-10-28); user_rules.py does not catch it because the line has no fund name and the label is just 'Sales' (page shows Sales 2,153,787 (Water and Wastewater enterprise funds))",,,,9
 Chadron_Housing_Authority_FY2025,schema,receipts: unknown category 'Rentals' ('Rental income'),,,,2
 Chadron_Public_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Local receipts - lunch sales'),,,,11
 Chadron_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Lunch sales'),,,,
+Chambers_Public_Schools_FY2025,verifier,"receipts[18].category: verifier: school nutrition meal sales belong in the user's School Lunch Sales receipt category (lunch/meal/nutrition sales). The detail line (School Nutrition 'Daily Sales', p19) has the same category problem although its detail_category is already 'school lunch sales'; user_rules.py won't catch it because the label has no 'lunch/meal' keyword (page shows School Nutrition Fund: Daily Sales 33,692)",,,,11
 Chappell_FY2025,schema,detail: unknown revenue category 'Recreation Fees' ('Charges for services - Swimming pool'),,,,
 Chappell_FY2025,schema,detail: unknown revenue category 'Cemetery Fees' ('Charges for services - Cemetery lot sales'),,,,
 Chappell_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Charge for services'),,,,
@@ -284,23 +358,37 @@ Chase_County_Schools_FY2025,schema,detail: unknown revenue category 'Rentals' ('
 Chase_County_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Student lunches'),,,,
 Chase_County_Schools_FY2025,schema,"detail: unknown revenue category 'Drivers Education Fees' (""Drivers' education"")",,,,
 Chase_County_Schools_FY2025,schema,"detail: unknown expenditure category 'Drivers Education' (""Drivers' education"")",,,,
+Chase_County_Schools_FY2025,verifier,"receipts[9].category: verifier: 98% of the line is school activity fund receipts; the user rule makes activity receipts Extracurricular Receipts (dominant category, with review naming the mix). The detail line for the same 374,309 already uses Extracurricular Receipts, so the report is internally inconsistent (page shows Other local receipts 381,236 = Activity Fund 'Activities receipts' 374,309 (p11, p23) + General Fund 6,927)",,,,4
+Chase_County_Schools_FY2025,verifier,"disbursements[12].category: verifier: The line is entirely drivers' education spending; the user rule makes Drivers Education its own disbursement category (never Instruction). The matching detail line uses Drivers Education (page shows Other 5,342 = Student Fee Fund 'Drivers' education' 5,342 (p11, p22))",,,,6
 Chester_FY2025,schema,receipts: unknown category 'Utility Charges' ('Utility collections'),,,,8
+Chester_FY2025,verifier,"detail[35].category: verifier: Landfill receipts are garbage/refuse charges (its own detail_category says refuse/sanitation charges); category should be Utility Charges (garbage/refuse, user rule 2026-10-28), not reimbursements/refunds. (page shows Landfill: Materials and services sold and refunds 26,688 (Statement of Activities p2: Sanitation charges for services 26,688))",,,,11
+Clarks_FY2025,verifier,"receipts[12].category: verifier: These are water and sewer utility sales, so the category should be Utility Charges (utility fund sales/charges, user rule 2026-10-28). Chester_FY2025 uses Utility Charges for the same kind of line. (page shows Sales 217,985 (Water Fund 144,859 + Sewer Fund 73,126, operating revenues of the enterprise funds))",,,,7
+Clarkson_FY2025,verifier,"receipts[9].category: verifier: Utility fund sales belong in the user's own category Utility Charges. scripts/user_rules.py won't fix this, because the line has no fund field and the label 'Sales' doesn't match its patterns (page shows Sales 258,226 (Water Fund 156,650 + Sewer Fund 101,576))",,,,9
 Clarkson_Housing_Authority_-_Sunrise_Apartments_FY2025,schema,receipts: unknown category 'Rentals' ('Rental income'),,,,2
 Clarkson_Public_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Sales of Meals'),,,,5
 Clarkson_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('1611 Student Lunches'),,,,
+Clarkson_Public_Schools_FY2025,verifier,"detail[201].category: verifier: Non-reimbursable meals are meal sales (a la carte/adult meals not reimbursed by USDA), not a reimbursement/refund; the line's own detail_category is school lunch sales and the statement counts it in 'Sales of Meals' (p5). Category should be School Lunch Sales. (page shows 1620 Non Reimbursable 3,893.00 (School Nutrition receipts))",,,,18
 Clay_Center_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Garbage collection'),,,,
 Clay_Center_FY2025,schema,detail: unknown revenue category 'Rentals' ('Rent'),,,,
 Clay_Center_FY2025,schema,detail: unknown revenue category 'Rentals' ('Equipment rental'),,,,
 Clay_Center_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Charges for services'),,,,
 Clay_Center_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Late charges'),,,,
 Clay_Center_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Charges for services'),,,,
+Clay_Center_FY2025,verifier,"receipts[5].category: verifier: Homestead, tax credit and pro-rate were split out of the line, but motor vehicle tax 43,631 and in-lieu of tax 6,762 (plus occupation tax 93) were left inside state aid. The same fund schedules print their breakdown, and each has its own category (motor vehicle tax, In Lieu of Tax, occupation/franchise tax). They should be split out the same way. (page shows Fund schedules print the breakdown: motor vehicle taxes/fees 43,631 (General 3,509 p10, Street 3,082 + 9,486 p12, Sales Tax 27,554 p15), in-lieu of tax 6,762 (1,543 + 1,355 + 3,864), occupation tax 93)",,,,5
+Clay_Center_FY2025,verifier,"receipts[15].category: verifier: Under the user rule, utility fund charges are Utility Charges. The extraction's own Water/Sewer detail lines (pp19-20) use Utility Charges for the same money, so the two don't match. (page shows Charges for services 308,898 (Water and Sewer enterprise funds))",,,,8
+Clay_Center_FY2025,verifier,"detail[83].category: verifier: Pool charges have their own category, Recreation Fees (user rule 2026-10-28). The line's own detail_category is recreation/pool/park fees. The same applies to detail[124] Fitness Center charges 39 and detail[130] Parks and Recreation Board fees 440 (p21). (page shows Swimming Pool Fund: Charges for services 14,166)",,,,16
 Clearwater_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('User fees'),,,,
 Clearwater_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('User fees'),,,,
 Clearwater_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('User fees'),,,,
+Clearwater_FY2025,verifier,"receipts[6].category: verifier: Utility fund user fees go in the Utility Charges receipt category under the user's 2026-10-28 rule. The detail lines for the same label already use Utility Charges, so the receipts line and the detail lines disagree. (page shows User fees 198,617 (Sewer/Water/Garbage utility funds))",,,,6
+Cody_FY2025,verifier,missing: verifier: notes do not end with 'Read pages 1-3 of 3' (text was appended after it). The page count is right and all 3 pages' lines are in the JSON; the fix is to move 'Read pages 1-3 of 3' to the end of notes (page shows trimmed PDF has 3 pages),,,,3
 Cody_Kilgore_Public_School_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Lunchroom Sales'),,,,
+Cody_Kilgore_Public_School_FY2025,verifier,"receipts[3].category: verifier: the split item is public power district sales tax, which has its own receipt category 'Public Power District Sales Tax' (as used for the matching detail line on p8); recorded as 'other taxes' with detail_category 'Other / Miscellaneous Receipts' (page shows Other 46,851 split: Public Power District Sales Tax 13,741 (p8, 1120-000))",,,,5
+Cody_Kilgore_Public_School_FY2025,verifier,"detail[111].category: verifier: activity-fund 'Restricted grants' receipt is not a charge for services; it should be Extracurricular Receipts (activity fund receipts) or donations/contributions, and it is inconsistent with its own detail_category 'student activity receipts' (page shows Activity Fund, District: Restricted grants 500)",,,,19
 Coleridge_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Charges for services'),,,,
 Coleridge_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Charges for services'),,,,
 Coleridge_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Charges for services'),,,,
+Coleridge_FY2025,verifier,missing: verifier: notes do not end with 'Read pages 1-N of N' (re-check text was appended after it). All 10 pages were checked and no statement/schedule line is missing from the JSON; this is the notes-format requirement only (page shows trimmed PDF has 10 pages),,,,None
 Colonial_Acres_Nursing_Home_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Meals Income'),,,,3
 Columbus_Public_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Food Services'),,,,5
 Community_Pride_Care_Center_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Meals Revenue'),,,,3
@@ -309,6 +397,8 @@ Conestoga_Public_Schools_FY2025,schema,receipts: unknown category 'School Lunch 
 Conestoga_Public_Schools_FY2025,schema,detail: unknown revenue category 'Rentals' ('1910 Rental of school facilities'),,,,
 Conestoga_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Nutrition Program receipts'),,,,
 Cortland_FY2025,schema,receipts: unknown category 'Utility Charges' ('Utility collections'),,,,8
+Cortland_FY2025,verifier,"missing: verifier: Schedule 5 lines for the Street (Special Revenue) fund are not in detail, although the same schedule's Utility funds lines are. No other schedule covers this fund. The 140,666 includes transfers in 19,449 and the 142,976 includes principal 25,000 and interest 13,075 (p5/p6) (page shows Schedule 5 Governmental Funds: Special Revenue receipts 140,666 (budget 132,132), disbursements 142,976 (budget 210,000))",,,,12
+Cortland_FY2025,verifier,"missing: verifier: Schedule 5 lines for the Debt Service fund are not in detail. No other schedule covers this fund (page shows Schedule 5 Debt Service receipts 21,981 (budget 26,717), disbursements 21,798 (budget 27,600))",,,,12
 Cozad_Community_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Lunch sales'),,,,8
 Cozad_Community_Schools_FY2025,schema,detail: unknown revenue category 'Rentals' ('1910 Rent income'),,,,
 Cozad_Community_Schools_FY2025,schema,detail: unknown revenue category 'Rentals' ('1910 Rental income'),,,,
@@ -320,21 +410,26 @@ Crawford_Public_Schools_FY2025,schema,receipts: unknown category 'School Lunch S
 Creek_Valley_Public_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Local Sources - Lunchroom Sales'),,,,8
 Creek_Valley_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('1600 Lunchroom Sales'),,,,
 Creighton_Community_Public_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Nutrition Program receipts'),,,,3
+Creighton_Community_Public_Schools_FY2025,verifier,"detail[School Nutrition 'Sales' 96,769].category: verifier: Lunch/nutrition sales are their own receipt category School Lunch Sales (user rule 2026-10-28); the matching statement receipt 'Nutrition Program receipts' already uses School Lunch Sales, so the same money is categorized differently in detail (page shows Sales (School Nutrition Fund))",,,,14
+Creighton_FY2025,verifier,"receipts[13].category: verifier: Broad 'Other' line whose make-up is printed in the fund schedules: NPPD lease (rentals) is more than half of it, so the rule requires the dominant category (Rentals) or a split_from split (NPPD lease 169,922 / franchise 8,014 / other remainder). It was left in 'other' instead. (page shows Other 207,513 = General 101,045 + Street 88,510 + CCC Inn 218 + Fire 7,956 + Other Gov 9,784; schedules p14/p16 show NPPD lease 84,961 + 84,961 = 169,922 (82%) plus franchise fees 8,014)",,,,5
 Creighton_Housing_Authority_-_Bruce_Park_Terrace_FY2025,schema,receipts: unknown category 'Rentals' ('Rental income'),,,,2
 Crete_Housing_Authority_-_Centennial_Terrace_FY2025,schema,receipts: unknown category 'Rentals' ('Rental income'),,,,2
 Crete_Public_Schools_FY2025,schema,receipts: unknown category 'Rentals' ('Rental of school facilities'),,,,4
 Crete_Public_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Sale of lunches and milk'),,,,6
 Crete_Public_Schools_FY2025,schema,detail: unknown revenue category 'Rentals' ('Rental of school facilities'),,,,
 Crete_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Sale of lunches and milk'),,,,
+Crete_Public_Schools_FY2025,verifier,"detail[169].category: verifier: A line labelled Donations always takes donations/contributions (detail_category too). It is recorded as charges for services with detail_category student activity receipts. (page shows Activity account 'Donations' receipts 3,000)",,,,18
 Crofton_Community_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Food Services'),,,,5
 Crofton_Community_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Meal Sales'),,,,
-Crofton_Community_Schools_FY2025,verifier,"disbursements[11].category: verifier: Under the school function rule, lines for state categorical programs are category 'State Categorical Programs'. The whole 10,828 is state categorical spending, and the JSON's own detail lines for it (detail[71]-[74]) already use State Categorical Programs. The statement line uses Instruction and still carries the stale review note 'function guessed as instruction'. (page shows Private & Categorical Programs 10,828 (p6: 'Private & State Categorical Programs'; p10 detail = 3535 High Ability Learners 4,894 + 3551 Career Education 4,254 + 3599 Other State Categorical Programs 1,680))",,,,5
-Crofton_Community_Schools_FY2025,verifier,"balance_sheet: verifier: Wrong statement for the balance sheet basis rule (user 2026-10-27). For a cash-basis report, the balance sheet comes from the governmental funds statement (Total column, fund balance by classification) when its totals equal the government-wide figures. Here they do: both are 7,535,812 and the government-wide statement has no capital assets, debt or interfund amounts. So the equity should be the 8 fund-balance classification lines from p4, not the 3 net-position lines from p1. (page shows Balance Sheet - Modified Cash Basis - Governmental Funds (p4), Total Governmental Funds column: Cash at Bank 6,830,946, Cash at County Treasurer 704,866 (Total Assets 7,535,812); Restricted Debt Service 4,672, Restricted Capital Projects 2,360,980, Assigned School Nutrition Program 144,030, Assigned Capital Purchases 167,463, Assigned Employee Benefits 470,288, Assigned Student Activities 287,776, Assigned Cooperative Activities 3, Unassigned 4,100,602 (Total 7,535,812))",,,,4
+Crofton_Community_Schools_FY2025,verifier,"receipts[10].category: verifier: Rentals is its own receipt category under the user rules (out of charges for services); should be Rentals (page shows 1910 Rentals of School Facilities 5,435)",,,,8
+Crofton_Community_Schools_FY2025,verifier,"detail[8].category: verifier: should be category Rentals (user rule, own receipt category); detail_category rentals is right (page shows 1910 Rentals of School Facilities 5,435)",,,,8
 Crofton_FY2025,schema,receipts: unknown category 'Utility Charges' ('Consumer sales'),,,,7
 Cross_County_Community_Schools_FY2025,schema,detail: unknown revenue category 'Rentals' ('1910 Rental of school facilities'),,,,
 Cross_County_Community_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Sales - lunch'),,,,
 Cross_County_Community_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Sales - breakfast'),,,,
 Cross_County_Community_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Sales - milk'),,,,
+Cross_County_Community_Schools_FY2025,verifier,"receipts[12].category: verifier: the fund schedules (p14-15) show more than half of the line is school activity receipts, which the rules put in Extracurricular Receipts (or split with split_from using p14/p15); charges for services is only for genuine fees for services (page shows Other local receipts 411,785.99 = Other Governmental Funds 402,941.61 (Activities fund account receipts about 296,000 after the 70,467.23 transfer, school nutrition sales about 107,000) + General Fund 5,344.38 + Special Building 3,500.00)",,,,5
+Cross_County_Community_Schools_FY2025,verifier,"detail[196].category: verifier: these are meal sales that are not federally reimbursable (a la carte), not a reimbursement or refund; category should be School Lunch Sales, matching its detail_category school lunch sales and the other Sales lines (page shows Sales - non-reimbursable 3,965.58 (School Nutrition Fund))",,,,15
 Cuming_County_Rural_Water_District_1_FY2025,schema,receipts: unknown category 'Rentals' ('Rent income'),,,,2
 Curtis_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Charges for services'),,,,
 Curtis_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Charges for services'),,,,
@@ -353,12 +448,15 @@ Dalton_FY2025,schema,"receipts: unknown category 'Utility Charges' ('Local Recei
 Dannebrog_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Sales'),,,,
 Dannebrog_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Sales'),,,,
 Dannebrog_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Sales'),,,,
+Dannebrog_FY2025,verifier,"receipts[10].category: verifier: Utility fund sales are category Utility Charges (user rule 2026-10-28, incl. garbage/refuse); the same three Sales lines in detail already use Utility Charges, so receipts and detail disagree (page shows Sales (Water 67,731, Sewer 82,891, Trash 41,836; Total 192,458))",,,,7
 Davenport_FY2025,schema,receipts: unknown category 'Utility Charges' ('Utility collections'),,,,7
 David_City_FY2025,schema,receipts: unknown category 'Utility Charges' ('Consumer sales'),,,,7
 David_City_Housing_Authority_-_Sunshine_Court_FY2025,schema,receipts: unknown category 'Rentals' ('Rental income'),,,,2
 David_City_Public_Schools_FY2025,schema,"receipts: unknown category 'School Lunch Sales' ('Local Receipts (Student Fee, School Nutrition funds)')",,,,9
 David_City_Public_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Sales of Meals'),,,,16
 David_City_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Sales of Meals'),,,,
+David_City_Public_Schools_FY2025,verifier,"detail[department=3535 High Ability Learners].category (6 lines): verifier: User rule 2026-10-28: program lines follow the report's own grouping; the statement counts 3535 under State Programs, so the category should be State Categorical Programs (page shows 3535 High Ability Learners 13,349.40, counted in the statement's 'State Programs' 19,557.82 (p18 = 6,208.42 + 13,349.40))",,,,29
+David_City_Public_Schools_FY2025,verifier,"detail[department=6200/6310/6406/6408/6412/6969/6998].category (21 lines): verifier: The statement's Federal Programs line is exactly these Sch M program lines; under the user's grouping rule they should be category Federal Programs, not instruction (the statement line itself is recorded as Federal Programs, so detail and statement disagree) (page shows Title I 139,231.91 + Title II 21,008.75 + IDEA 3,151.00 + 187,033.47 + 54,721.10 + Title IV 11,672.50 + ESSER III 8,044.84 = Federal Programs 424,863.57 (p18))",,,,30
 Dawson_County_Agricultural_Society_FY2025,schema,receipts: unknown category 'Rentals' ('Rental income'),,,,4
 Dawson_County_Agricultural_Society_FY2025,schema,detail: unknown revenue category 'Rentals' ('Rental income'),,,,
 DeWitt_FY2025,schema,receipts: unknown category 'Utility Charges' ('Utility collections'),,,,6
@@ -382,6 +480,7 @@ Dodge_FY2025,schema,receipts: unknown category 'Utility Charges' ('Utility sales
 Dodge_FY2025,schema,detail: unknown revenue category 'Rentals' ('Rental Income'),,,,
 Dodge_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Utility sales'),,,,
 Dodge_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Capital user charges'),,,,
+Dodge_FY2025,verifier,"receipts[11].category: verifier: Utility fund charge; the user rule (2026-10-28) makes utility fund sales/charges category Utility Charges, and the same line in detail[15] is already Utility Charges, so receipts and detail disagree (page shows Capital user charges 20,328 (Combined Utilities Fund operating revenue))",,,,7
 Doniphan_Trumbull_Public_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('School Nutrition Program'),,,,4
 Doniphan_Trumbull_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Student lunches and milk'),,,,
 Doniphan_Trumbull_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Adult lunches'),,,,
@@ -389,7 +488,9 @@ Dorchester_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Ga
 Dorchester_FY2025,schema,detail: unknown revenue category 'Rentals' ('Rents'),,,,
 Dorchester_FY2025,schema,detail: unknown revenue category 'Ambulance Fees' ('Ambulance calls'),,,,
 Dorchester_FY2025,schema,detail: unknown revenue category 'Rentals' ('Rent'),,,,
+Dorchester_Public_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Other local receipts'),,,,14
 Douglas_County_SID_177_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Charges for services'),,,,
+Douglas_County_West_Community_Schools_FY2025,schema,receipts: unknown category 'Rentals' ('Local receipts'),,,,5
 Douglas_County_West_Community_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Sales of lunches'),,,,5
 Douglas_County_West_Community_Schools_FY2025,schema,detail: unknown revenue category 'Rentals' ('1942 Other textbook rentals'),,,,
 Douglas_County_West_Community_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('1611 School lunch program'),,,,
@@ -420,7 +521,11 @@ Elgin_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunc
 Elkhorn_Public_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Meal sales'),,,,3
 Elkhorn_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Meal sales'),,,,
 Elkhorn_Valley_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Food Services'),,,,5
+Elkhorn_Valley_Schools_FY2025,schema,receipts: unknown category 'Rentals' ('Other Local Receipts (rentals)'),,,,5
+Elkhorn_Valley_Schools_FY2025,schema,"detail: unknown revenue category 'Rentals' ('1910 Rental of School Equipment, Property, Facilities')",,,,
+Elkhorn_Valley_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Daily Sales'),,,,
 Elkhorn_Valley_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Day Care Lunch Fees'),,,,
+Elkhorn_Valley_Schools_FY2025,schema,detail: unknown revenue category 'Rentals' ('Rentals of School Equipment'),,,,
 Elm_Creek_FY2025,schema,receipts: unknown category 'Rentals' ('Rental'),,,,6
 Elm_Creek_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Charges for services'),,,,
 Elm_Creek_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Charges for services'),,,,
@@ -430,6 +535,7 @@ Elm_Creek_FY2025,schema,detail: unknown revenue category 'Rentals' ('Rental'),,,
 Elm_Creek_Public_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Nutrition services'),,,,3
 Elm_Creek_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Daily sales - School Lunch Program'),,,,
 Elm_Creek_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Daily sales - School Breakfast Program'),,,,
+Elm_Creek_Public_Schools_FY2025,verifier,"detail[93].category: verifier: Meal sales (a la carte / non-reimbursable meals), not a reimbursement or refund; its own detail_category is school lunch sales and the statement counts it in Nutrition services (School Lunch Sales). Category should be School Lunch Sales. (page shows Daily sales - non-reimbursable programs 6,117)",,,,19
 Elmwood_FY2025,schema,receipts: unknown category 'Rentals' ('Rent income'),,,,5
 Elmwood_FY2025,schema,detail: unknown revenue category 'Rentals' ('Rent income'),,,,
 Elmwood_Murdock_Public_School_FY2025,schema,receipts: unknown category 'Rentals' ('Rental of school facilities'),,,,4
@@ -454,23 +560,50 @@ Eustis_Farnam_Public_Schools_FY2025,schema,receipts: unknown category 'School Lu
 Ewing_FY2025,schema,receipts: unknown category 'Rentals' ('Rental income'),,,,5
 Ewing_FY2025,schema,detail: unknown revenue category 'Rentals' ('Rental income'),,,,
 Ewing_FY2025,schema,detail: unknown revenue category 'Rentals' ('Rental income'),,,,
+Ewing_FY2025,verifier,detail[32].category: verifier: Cemetery fund charges (detail_category already 'cemetery fees') should be category Cemetery Fees under the user's receipt categories (page shows Charges for services 450 (Cemetery column)),,,,12
 Exeter-Milligan_Public_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Local Receipts (Student Lunches)'),,,,22
 Exeter-Milligan_Public_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Local Receipts (Student Milk)'),,,,22
 Exeter-Milligan_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('1611 Student Lunches'),,,,
 Exeter-Milligan_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('1613 Student Milk'),,,,
 Exeter-Milligan_Public_Schools_FY2025,schema,detail: unknown revenue category 'Rentals' ('1910 Rental'),,,,
+Exeter-Milligan_Public_Schools_FY2025,verifier,"receipts[6].category: verifier: rental income is its own receipt category, Rentals (the matching detail line already uses Rentals) (page shows 1910 Rental 18,290.63)",,,,23
+Exeter-Milligan_Public_Schools_FY2025,verifier,"receipts[12].category: verifier: 1620 'Non-Reimbursable' means non-reimbursable meal sales (a la carte/adult meals), not a refund. It should be School Lunch Sales; the detail line already has detail_category school lunch sales (page shows 1620 Non-Reimbursable 4,087.90 (School Nutrition Fund receipts))",,,,22
+Exeter-Milligan_Public_Schools_FY2025,verifier,"detail[143].category: verifier: same as receipts[12]: should be School Lunch Sales (it doesn't match its own detail_category, school lunch sales) (page shows 1620 Non-Reimbursable 4,087.90)",,,,22
+Exeter-Milligan_Public_Schools_FY2025,verifier,"balance_sheet.equity: verifier: cash-basis rule (user 2026-10-27): Exhibit III totals (cash 6,521,444.61 + county treasurer 535,996.70 = 7,057,441.31) equal the government-wide figures, so the balance sheet should come from the governmental funds statement, with fund balance by classification (page shows Exhibit III Total Governmental Funds: Assigned 3,919,025.58, Unassigned 3,138,415.73)",,,,12
 Exeter_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('User fees'),,,,
 Exeter_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('User fees'),,,,
+Exeter_FY2025,verifier,"receipts[10].category: verifier: utility fund user fees are category Utility Charges under the user's receipt categories (the per-fund detail lines already use Utility Charges) (page shows User fees 224,203 (Water and Sewer operating receipts))",,,,6
+Exeter_FY2025,verifier,"detail[0].category: verifier: this is a combined tax line with no per-fund breakdown, so it should be taxes (unlabeled). Property total 466,496 less Debt Service 419,398 leaves at most 47,098 of property tax in the General and Street funds, so the General line is mostly sales, motor vehicle and other taxes, not property tax (page shows General Fund Taxes 247,193)",,,,4
+Exeter_FY2025,verifier,"detail[9].category: verifier: detail_category is cemetery fees, so category should be Cemetery Fees under the user's receipt categories (page shows Cemetery Fund Charges for services 3,950)",,,,4
 Fairbury_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('City services'),,,,
 Fairbury_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Public services'),,,,
 Fairbury_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('City services'),,,,
 Fairbury_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Sewer services'),,,,
+Fairbury_FY2025,verifier,"receipts[9].category: verifier: the dominant part is Sanitation/Landfill charges for services 920,676 (garbage collection; p2 Sanitation charges for services 922,916), so the line is charges, not reimbursements. Use Utility Charges (garbage/refuse) or charges for services/fees, with review (page shows Charges for services/reimbursements 1,076,544 (Landfill 920,676 + Street 60,267 + nonmajor 95,601))",,,,7
+Fairbury_FY2025,verifier,"receipts[17].category: verifier: utility fund sales are category Utility Charges under the user's receipt categories (page shows City services 6,242,747 (Light/Water))",,,,10
+Fairbury_FY2025,verifier,"receipts[18].category: verifier: utility fund sales are category Utility Charges (page shows Rural service 4,038,073)",,,,10
+Fairbury_FY2025,verifier,"receipts[19].category: verifier: utility fund sales are category Utility Charges (page shows Public services 240,185)",,,,10
+Fairbury_FY2025,verifier,"receipts[20].category: verifier: electric sales to other governments are category Utility Charges (page shows Intergovernmental service 210,094)",,,,10
+Fairbury_FY2025,verifier,"receipts[21].category: verifier: utility fund charges are category Utility Charges (detail[196] already uses it) (page shows Sewer services 918,975)",,,,10
+Fairbury_FY2025,verifier,"detail[171].category: verifier: doesn't match the Light Fund's City services and Public services lines (Utility Charges); electric sales are Utility Charges (page shows Light Fund Rural service 3,792,948)",,,,10
+Fairbury_FY2025,verifier,"detail[173].category: verifier: electric sales are Utility Charges (detail_category electric charges) (page shows Light Fund Intergovernmental service 210,094)",,,,10
+Fairbury_FY2025,verifier,"detail[185].category: verifier: doesn't match the Water Fund's City services line (Utility Charges); water sales are Utility Charges (page shows Water Fund Rural service 245,125)",,,,10
+Fairbury_FY2025,verifier,"detail[27].category: verifier: garbage/refuse charges are category Utility Charges under the user's rules (detail_category refuse/sanitation charges) (page shows Sanitation and Landfill Fund Charges for services 920,676)",,,,14
+Fairbury_FY2025,verifier,"detail[87].category: verifier: detail_category is recreation/pool/park fees, so category should be Recreation Fees (page shows Parks Fund Charges for services 28,676)",,,,26
+Fairbury_FY2025,verifier,"detail[102].category: verifier: pool charges are category Recreation Fees (page shows Swimming Pool Fund Charges for services 57,176)",,,,27
 Fairbury_Housing_Authority_-_Parkview_Manor_FY2025,schema,receipts: unknown category 'Rentals' ('Rental income'),,,,2
 Fairbury_Public_Schools_FY2025,schema,receipts: unknown category 'Rentals' ('Rental of school facilities'),,,,3
 Fairbury_Public_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Nutrition Program receipts'),,,,3
 Fairbury_Public_Schools_FY2025,schema,detail: unknown revenue category 'Rentals' ('1910 Rental of school facilities'),,,,
 Fairbury_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('School lunch program'),,,,
+Fairbury_Public_Schools_FY2025,verifier,"detail[97].category: verifier: Non-reimbursable programs are a la carte/non-program meal sales, not a reimbursement or refund; the p3 statement counts this line inside 'Nutrition Program receipts' 252,030 (212,431 + 20,691 + 18,908), which the extraction itself categorizes as School Lunch Sales. Category should be School Lunch Sales (detail_category school lunch sales); the category also contradicts the line's own detail_category (other charges for services). (page shows Non-reimbursable programs 20,691 (School Nutrition Fund receipts))",,,,19
+Fairfield_FY2025,verifier,"detail[10].category: verifier: garbage/refuse charges are category Utility Charges under the user rule (2026-10-28: Utility Charges incl. garbage/refuse, taken out of charges for services) (page shows Garbage Disposal: Charges for services 44,447)",,,,13
+Fairfield_FY2025,verifier,detail[11].category: verifier: landfill/refuse charges should be category Utility Charges (user rule 2026-10-28) (page shows Landfill: Charges for services 294),,,,13
+Fairfield_FY2025,verifier,detail[6].category: verifier: cemetery charges should be category Cemetery Fees (user rule 2026-10-28); detail_category is already cemetery fees (page shows Cemetery: Charges for services 482),,,,12
 Fairmont_Housing_Authority_-_Fairview_Apartments_FY2025,schema,receipts: unknown category 'Rentals' ('Rental income'),,,,2
+Falls_City_FY2025,verifier,"receipts[3].category: verifier: rent/lease income is category Rentals under the user rule (2026-10-28: Rentals (rent, rental income) taken out of charges for services) (page shows Rent/leases 133,546)",,,,4
+Falls_City_FY2025,verifier,"detail: verifier: City rule (user 2026-10-27): when the only schedule is a combined all-funds one, detail is one line per individual fund column of the governmental funds statement (p4: General, Economic Development, HUD, Capital Improvement, Other Governmental) and the proprietary statement (p6: Electric, Water, Gas, Sewer), and the combined schedule lines are removed. The JSON keeps the p8 fund totals instead. (page shows Budgetary Comparison Schedule - All Funds (p8) is the only supplementary schedule)",,,,8
+Falls_City_FY2025,verifier,"detail[4].category: verifier: about 65% of the line is capital grants (p2: Electric capital grants 15,014,344). Under the more-than-half rule its category should follow the grants, not electric charges (marked review). (page shows Electric receipts 23,181,004 = charges 7,630,953 + interest 474,785 + misc/grants 15,075,266 (p6))",,,,8
 Falls_City_Public_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Sale of lunches'),,,,4
 Farmers_Irrigation_District_FY2025,schema,receipts: unknown category 'Rentals' ('Rent'),,,,3
 Filley_FY2025,schema,"receipts: unknown category 'Utility Charges' ('Local Receipts: Other (Water, Sewer, Landfill columns)')",,,,1
@@ -478,12 +611,14 @@ Fillmore_County_School_District_25_FY2025,schema,receipts: unknown category 'Sch
 Fillmore_County_School_District_25_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Sales - lunch'),,,,
 Fillmore_County_School_District_25_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Sales - breakfast'),,,,
 Fillmore_County_School_District_25_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Sales - milk'),,,,
+Fillmore_County_School_District_25_FY2025,verifier,"detail[200].category: verifier: This is a school nutrition sales line (a la carte / non-reimbursable meal sales), not a reimbursement. Its category should be School Lunch Sales, matching its detail_category and the top-level receipts[12] School Lunch Sales total, which includes it. (page shows Sales - non-reimbursable 5,505.70)",,,,15
 Firth_FY2025,schema,receipts: unknown category 'Utility Charges' ('Charges for refuse service'),,,,4
 Firth_FY2025,schema,receipts: unknown category 'Rentals' ('Community building rental'),,,,4
 Firth_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Charges for refuse service'),,,,
 Firth_FY2025,schema,detail: unknown revenue category 'Rentals' ('Community building rental'),,,,
 Firth_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Receipts for services'),,,,
 Firth_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Receipts for services'),,,,
+Firth_FY2025,verifier,"receipts[16].category: verifier: These are utility fund sales, which the user's rule (2026-10-28) puts in Utility Charges. The matching detail lines (Water/Sewer 'Receipts for services') already use Utility Charges, so the category is inconsistent within the report. (page shows Receipts for services 261,676 (Water 167,252 + Sewer 94,424))",,,,6
 Fort_Calhoun_Community_School_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Lunchroom sales'),,,,11
 Fort_Calhoun_Community_School_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Breakfast'),,,,11
 Fort_Calhoun_Community_School_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Food sales'),,,,
@@ -492,9 +627,17 @@ Franklin_County_Memorial_Hospital_FY2025,schema,detail: unknown revenue category
 Franklin_Public_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('School Nutrition Services'),,,,4
 Franklin_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('School Nutrition Services'),,,,
 Freeman_Public_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Sale of Lunches'),,,,4
+Freeman_Public_Schools_FY2025,verifier,"receipts[24].category: verifier: school activity fund receipts belong in Extracurricular Receipts (user rule 2026-10-28; the same money is Extracurricular Receipts in detail, p10); charges for services/fees is wrong and inconsistent with detail (page shows Non-Revenue, Activity Fund column 391,319 (= Activities Fund 'District Activities - Admissions & Fees' 64,133 + 'Other Activity Income' 327,186, p10))",,,,4
+Freeman_Public_Schools_FY2025,verifier,"detail[75].category: verifier: school lunch/meal sales have their own receipt category School Lunch Sales (user rule 2026-10-28); the statement line for the same money ('Sale of Lunches', receipts[18]) already uses School Lunch Sales (page shows Daily Sales 165,829 (School Nutrition Fund))",,,,11
+Fremont_FY2025,verifier,"disbursements[12].category: verifier: this is a functional expense line (like Production, Distribution, Administrative and general), not a cost type; under the user's 2026-10-28 utility rule function lines stay 'utilities'. The extraction's own notes say attempt 2 set it to utilities, but the JSON still carries Professional/Contract Services (page shows Customer accounting and collections 7,082,136 (Enterprise Funds Total))",,,,6
 Fremont_Housing_Authority_-_Gifford_Stanton_Tower_FY2025,schema,receipts: unknown category 'Rentals' ('Rental income'),,,,2
 Fremont_Public_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Lunchroom sales'),,,,8
 Fremont_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Sale of lunches'),,,,
+Friend_FY2025,verifier,"receipts[10].category: verifier: utility fund sales belong in category Utility Charges (user rule 2026-10-28); user_rules.py will not catch it (label 'Sales', no fund field) (page shows Sales 527,001 (Electric/Water/Sewer/Trash enterprise funds))",,,,9
+Friend_FY2025,verifier,"detail[36].category: verifier: Park/Pool department charges are Recreation Fees (user rule 2026-10-28); detail_category already recreation/pool/park fees (page shows Park/Pool - Charges for services 43,512)",,,,16
+Friend_FY2025,verifier,"detail[45].category: verifier: ambulance charges are category Ambulance Fees (user rule 2026-10-28); detail_category already ambulance/rescue fees (page shows Ambulance - Charges for services 18,999)",,,,16
+Friend_FY2025,verifier,"detail[50].category: verifier: cemetery charges are category Cemetery Fees (user rule 2026-10-28); detail_category already cemetery fees (page shows Cemetery - Charges for services 5,100)",,,,16
+Friend_FY2025,verifier,"detail[15].category: verifier: detail_category is cemetery fees, so category should be Cemetery Fees (user rule 2026-10-28) (page shows Perpetual Care Fund - Charges for services 200)",,,,14
 Friend_Housing_Authority_-_Friendship_Terrace_FY2025,schema,receipts: unknown category 'Rentals' ('Rental income'),,,,2
 Friend_Public_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Sales of Meals'),,,,6
 Friend_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('1611 Student Lunches'),,,,
@@ -502,12 +645,20 @@ Fullerton_FY2025,schema,receipts: unknown category 'Rentals' ('Rental income'),,
 Fullerton_FY2025,schema,detail: unknown revenue category 'Rentals' ('Rental income'),,,,
 Fullerton_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('User charges'),,,,
 Fullerton_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('User charges'),,,,
+Fullerton_FY2025,verifier,"receipts[13].category: verifier: utility fund user charges are category Utility Charges (user rule 2026-10-28); the matching detail lines already use Utility Charges, and user_rules.py will not catch this label (page shows User charges 299,918 (Water 196,396 + Sewer 103,522))",,,,11
+Fullerton_FY2025,verifier,"detail[12].category: verifier: rescue unit charges belong in category Ambulance Fees (user rule 2026-10-28; the Statement of Activities p3 shows them as public safety charges 58,037); user_rules.py matches labels only and will not catch this (page shows Rescue Unit Fund - Charges for services 58,037)",,,,7
 Fullerton_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Sale of lunches/milk'),,,,
+Fullerton_Public_Schools_FY2025,verifier,"receipts[10].category: verifier: the split piece lumps School Lunch Sales 154,299 and Tuition Received 6,000 (own categories, user rule 2026-10-28) into charges for services; split it into School Lunch Sales 154,299, Tuition Received 6,000 and charges for services 2,627 (the matching detail lunch line already uses School Lunch Sales) (page shows Post secondary receipts 6,000 (p7) + Sale of lunches/milk 154,299 + Other local receipts 2,627 (p12))",,,,6
+Fullerton_Public_Schools_FY2025,verifier,"detail[7].category: verifier: postsecondary receipts are category Tuition Received (user rule 2026-10-28); user_rules.py's 'postsecondary' pattern won't match the printed 'Post secondary' (page shows 1955 Post secondary receipts 6,000)",,,,7
+Fullerton_Public_Schools_FY2025,verifier,"detail[53].category: verifier: function is Building and Grounds (2610 operation of buildings); the user's school rules limit support services to Pupils/Staff (page shows Depreciation Fund Supplies-Technology Related 13,635, shown under 'Operation of Buildings' on the General Fund combining schedule (p16))",,,,16
+Fullerton_Public_Schools_FY2025,verifier,"detail[55].category: verifier: function is Building and Grounds (2620 maintenance of buildings), not support services (page shows Depreciation Fund Other Property Services 4,386, shown under 'Maintenance of Buildings' (p16))",,,,16
 Garden_County_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Local Sources - Lunchroom Sales'),,,,11
 Garden_County_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('1600 Lunchroom Sales'),,,,
 Genoa_Housing_Authority_-_Sunrise_Villa_FY2025,schema,receipts: unknown category 'Rentals' ('Rental income'),,,,2
 Gering_FY2025,schema,receipts: unknown category 'Rentals' ('Rent'),,,,10
 Gering_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Lunchroom Sales'),,,,
+Gering_Public_Schools_FY2025,verifier,"receipts[7].category: verifier: Under the user rules neither part is charges for services: activity receipts are Extracurricular Receipts and lunchroom sales are School Lunch Sales. The p8 fund columns print the breakdown, so the line should be split (split_from) or take its dominant category (Extracurricular Receipts, 514,730) with a review note. It also doesn't match the detail lines, which use School Lunch Sales / Extracurricular Receipts. (page shows Program Sales and Charges 807,164 = School Nutrition Fund 292,434 (Lunchroom Sales, p21) + Student Activity Fund 514,730 (Activity Receipts, p26), by fund column on p8)",,,,4
+Gering_Public_Schools_FY2025,verifier,"detail[4].category: verifier: The report identifies this line: the General Fund column of the governmental funds statement (p4) and the combining schedule (p10) print the same 25,131 as In-Lieu-of Taxes, and the extractor's notes say so too. Category should be In Lieu of Tax, matching the statement line, not other taxes. (page shows 1190 Other Taxes 25,131)",,,,14
 Gibbon_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Charges for services'),,,,
 Gibbon_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Charges for services'),,,,
 Gibbon_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Charges for services'),,,,
@@ -515,17 +666,24 @@ Gibbon_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Charge
 Gibbon_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Fees'),,,,
 Gibbon_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Fees'),,,,
 Gibbon_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Fees'),,,,
+Gibbon_FY2025,verifier,"receipts[11].category: verifier: Utility fund charges (3,200,690, 92%) dominate this line. Under the user's 2026-10-28 rule they are Utility Charges, and the extraction's own detail lines use Utility Charges for these columns. A mixed line takes its dominant category plus a review note naming the golf course part (Recreation Fees); this line has neither. (page shows Charges for services 3,486,213 = Water 426,944 + Sewer 344,388 + Sewer Treatment 2,300,058 + Garbage 129,300 + Golf Course 285,523)",,,,6
 Gibbon_Housing_Authority_-_Colony_Acres_FY2025,schema,receipts: unknown category 'Rentals' ('Rental income'),,,,2
 Gibbon_Public_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Lunch sales'),,,,8
+Gibbon_Public_Schools_FY2025,verifier,"disbursements[3].category: verifier: Codes 2141-2183 are the SPED related support services (psychological, speech, OT/PT, visually impaired). The user's school rule puts these in support services with detail_category Pupils; Special Education Programs is for the 1200 instructional programs only. Gering, for example, records its 2141-2183 lines as Pupils. (page shows Support services: Special education 307,796 (budget schedule p10 function code 2141-2183))",,,,6
+Gibbon_Public_Schools_FY2025,verifier,"detail[24].category: verifier: Same issue as disbursements[3]: SPED related services (2141-2183) are support services (Pupils) under the user's school-district rule. (page shows 2141-2183 Special education (under Support services) 307,796)",,,,10
 Gilead_FY2025,schema,receipts: unknown category 'Utility Charges' ('Local Receipts: Other (Garbage Fund)'),,,,1
+Giltner_FY2025,verifier,"receipts[12].category: verifier: Enterprise utility sales belong in the user's Utility Charges category (CLAUDE.md 2026-10-28: utility fund sales/charges incl. garbage), not charges for services/fees. The line has no fund field, so user_rules.py's utility-fund rule will not catch it. (page shows Sales 859,035 (Electric, Water, Sewer, Garbage enterprise funds))",,,,7
 Giltner_Public_Schools_FY2025,schema,receipts: unknown category 'Rentals' ('Rental of school equipment and facilities'),,,,3
 Giltner_Public_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Nutrition Services'),,,,3
 Giltner_Public_Schools_FY2025,schema,detail: unknown revenue category 'Rentals' ('1910 Rental of school equipment and facilities'),,,,
 Giltner_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Daily sales - school lunch program'),,,,
 Giltner_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Daily sales - school breakfast program'),,,,
 Giltner_Public_Schools_FY2025,schema,detail: unknown revenue category 'Rentals' ('Rental of school equipment and facilities'),,,,
+Giltner_Public_Schools_FY2025,verifier,"detail[70].category: verifier: These are meal sales (a la carte or nonreimbursable meals), not reimbursements. The category should be School Lunch Sales, matching its own detail_category and the statement's Nutrition Services 86,380 (54,986 + 7,837 + 23,557), which is recorded as School Lunch Sales. The 'reimburs' regex in user_rules.py probably matched 'nonreimbursable'. (page shows Daily sales - nonreimbursable program 23,557 (School Nutrition Fund))",,,,15
 Gordon_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Charges for Services'),,,,
 Gordon_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Charges for Services'),,,,
+Gordon_FY2025,verifier,"receipts[9].category: verifier: Business-type water/sewer charges belong in Utility Charges (user rule: utility fund sales/charges); the same line in detail[] is already Utility Charges, so the report is also inconsistent for the same label (page shows Charges for Services 1,062,201 (Water 685,621 + Sewer 376,580, proprietary funds))",,,,7
+Gordon_FY2025,verifier,"missing: verifier: Extractor rules require each utility fund's budget schedule lines (operating, debt service, capital; actual and budget) in detail. The extractor used the p7 accrual statement columns instead (documented in notes), so the schedule lines, their budget_final values and the capital outlay/principal lines are not in the JSON (page shows Budgetary Comparison Schedule - Water Fund (p10) and Sewer Fund (p11): e.g. Water Capital Outlay (219,805) budget (219,805), Principal Retirement (177,286) budget (165,000); Sewer Capital Outlay (34,487), Principal Retirement (65,000); all lines with budget columns)",,,,10
 Gordon_Housing_Agency_FY2025,schema,receipts: unknown category 'Rentals' ('Rental income'),,,,2
 Gordon_Memorial_Hospital_District_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Other revenue - Cafeteria sales'),,,,8
 Gordon_Memorial_Hospital_District_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Cafeteria sales'),,,,
@@ -607,51 +765,86 @@ Henderson_Housing_Authority_-_Midtown_Apartments_FY2025,schema,receipts: unknown
 Hershey_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Charge for services'),,,,
 Hershey_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Charge for services'),,,,
 Hershey_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Charge for services'),,,,
+Hershey_Public_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Program Receipts - Charges for Services (School nutrition)'),,,,2
 Hershey_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('1611 Sale of lunches'),,,,
 Hershey_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('1620 Adult meals'),,,,
 High_Plains_Community_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Nutrition program receipts'),,,,3
 High_Plains_Community_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('1611 Daily sales - school lunch program'),,,,
 High_Plains_Community_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('1612 Daily sales - school breakfast program'),,,,
+High_Plains_Community_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('1620 Daily sales - non-reimbursable program'),,,,
 Hillcrest_Nursing_Home_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Meals Income'),,,,3
 Hitchcock_County_Public_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Nutrition program receipts'),,,,4
 Hitchcock_County_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('1611 Daily sales - school lunch program'),,,,
 Hitchcock_County_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('1612 Daily sales - school breakfast program'),,,,
+Hitchcock_County_Public_Schools_FY2025,verifier,"detail[89].category: verifier: This line is meal sales (a la carte / non-reimbursable meals), not a reimbursement or refund. Its detail_category is already 'school lunch sales', and the statement counts it in Nutrition program receipts 85,982 (69,605 + 6,830 + 9,547), which is category School Lunch Sales. The category should be School Lunch Sales (page shows 1620 Daily sales - non-reimburseable program 9,547)",,,,13
 Holdrege_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Sales'),,,,
 Holdrege_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Sales'),,,,
 Holdrege_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Sales'),,,,
+Holdrege_FY2025,verifier,"balance_sheet.assets: verifier: The asset and liability lists don't add up to their printed totals. The report itself adds up: the gap is the printed Eliminations column, which the extraction left out. This is not a report discrepancy, so report_discrepancies[0] is wrong. Add the eliminations (-7,482,286) as Internal Balances lines in both assets and liabilities, or drop the due-from/due-to lines. The notes also say these lines were 'omitted', which contradicts the JSON (page shows Total assets 46,340,765 and Total liabilities 10,855,458, after the printed Eliminations column (7,482,286) on Due from other funds and Due to other funds)",,,,1
+Holdrege_FY2025,verifier,"receipts[9].category: verifier: Under the user's 2026-10-28 rule, utility fund sales/charges (incl. garbage/refuse) go to category Utility Charges, not charges for services. The Water/Sewer/Electric detail lines already use Utility Charges (page shows Sales 15,044,105 (Water, Sewer, Electric, Landfill))",,,,6
+Holdrege_FY2025,verifier,"detail[78].category: verifier: Landfill (refuse) utility sales should be Utility Charges under the user's rule (incl. garbage/refuse). This also makes it inconsistent with the other three utility fund Sales lines (page shows Landfill Fund Sales 1,406,870)",,,,6
 Holdrege_Public_Schools_FY2025,schema,receipts: unknown category 'Rentals' ('Rent income'),,,,5
 Holdrege_Public_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Lunch sales'),,,,7
 Holdrege_Public_Schools_FY2025,schema,detail: unknown revenue category 'Rentals' ('Rent income'),,,,
 Holdrege_Public_Schools_FY2025,schema,detail: unknown revenue category 'Rentals' ('Rent income'),,,,
 Homer_Community_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Food Services'),,,,5
+Homer_Community_Schools_FY2025,verifier,"balance_sheet.equity: verifier: user balance-sheet rule (2026-10-27): cash-basis reports take governmental lines from the governmental funds balance sheet (Total column, fund balance by classification) when its totals equal the government-wide figures; here p4 totals (assets 1,914,184, fund balances 1,914,184) equal the p1 Statement of Net Position, and the report has no capital assets or debt, so p4 should be used (page shows Balance Sheet - Governmental Funds Total column (p4): Restricted Debt Service 171,308; Restricted Capital Outlay 217,829; Assigned Employee Benefits 4,055; Capital Purchases 296,876; Student Activities 98,833; Nutrition Program 18,620; Unassigned 1,106,664; total 1,914,184)",,,,4
+Homer_Community_Schools_FY2025,verifier,"detail[80].category: verifier: school lunch/nutrition sales take the user category School Lunch Sales (user 2026-10-28), as the statement line 'Food Services' already does in receipts[7]; same label must get the same category throughout the report (page shows Daily Sales 42,873 (School Nutrition Fund))",,,,15
 Homer_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Sales'),,,,
 Homer_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Sales'),,,,
 Homer_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Sales'),,,,
+Homer_FY2025,verifier,"receipts[10].category: verifier: lease/rental income takes the user receipt category Rentals (user 2026-10-28: Rentals = rent, rental income), not charges for services/fees (page shows Lease income 72,188)",,,,5
+Homer_FY2025,verifier,"detail[3].category: verifier: should be Rentals (detail_category is already rentals); same label must get the same category as in receipts (page shows Lease income 72,188 (Administration))",,,,10
+Homer_FY2025,verifier,"receipts[12].category: verifier: utility fund sales take the user category Utility Charges (user 2026-10-28), as the detail lines for the same Sales already do (page shows Sales 209,034 (Enterprise Fund: water, sewer, trash))",,,,7
 Hooper_FY2025,schema,receipts: unknown category 'Rentals' ('Rental income'),,,,4
 Hooper_FY2025,schema,receipts: unknown category 'Utility Charges' ('Utility sales'),,,,6
 Hooper_FY2025,schema,detail: unknown revenue category 'Rentals' ('Rental income'),,,,
 Hooper_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Utility sales'),,,,
 Hooper_Housing_Agency_FY2025,schema,receipts: unknown category 'Rentals' ('Rental income'),,,,2
+Hordville_FY2025,verifier,"missing: verifier: The notes don't end with 'Read pages 1-6 of 6': more text follows it. The page count is right (6 of 6) and no statement lines are missing, but the required ending is broken and validation may not recognise it. (page shows trimmed PDF has 6 pages)",,,,6
 Howells_Dodge_Consolidated_School_District_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Sales of Meals'),,,,6
 Howells_Dodge_Consolidated_School_District_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('1611 Student Lunches'),,,,
 Howells_Dodge_Consolidated_School_District_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('1612 Student Breakfast'),,,,
+Howells_Dodge_Consolidated_School_District_FY2025,verifier,"receipts[9].category: verifier: School activity fund receipts belong in Extracurricular Receipts (user rule; the same lines are Extracurricular Receipts in detail), not charges for services/fees (page shows Activities Fund 1710 Activity Receipts 39,965.00 + 1730 Dues and Fees 2,136.22 + 1790 Other Activity Income 192,737.80 (in Local Receipts 234,839.02))",,,,18
+Howells_Dodge_Consolidated_School_District_FY2025,verifier,receipts[4].category: verifier: Rental fees have their own receipt category Rentals (user 2026-10-28) (page shows 1910 Building/Facility Rental Fees 500.00),,,,12
+Howells_Dodge_Consolidated_School_District_FY2025,verifier,detail[5].category: verifier: Should be category Rentals (user 2026-10-28) (page shows 1910 Building/Facility Rental Fees 500.00),,,,12
+Howells_Dodge_Consolidated_School_District_FY2025,verifier,"detail[167].category: verifier: Non-reimbursable meal sales (part of Exhibit III 'Sales of Meals' 107,486.20 = 99,036.50 + 401.60 + 8,048.10) are School Lunch Sales, not reimbursements/refunds; detail_category already says school lunch sales (page shows 1620 Non Reimbursable 8,048.10)",,,,19
 Howells_FY2026,schema,detail: unknown revenue category 'Utility Charges' ('Charges for services'),,,,
 Howells_FY2026,schema,detail: unknown revenue category 'Utility Charges' ('Charges for services'),,,,
 Howells_FY2026,schema,detail: unknown revenue category 'Utility Charges' ('Charges for services'),,,,
+Howells_FY2026,verifier,"receipts[8].category: verifier: Proprietary charges are utility fund sales (430,684, 89%) plus apartment rent 52,992; the specific categories Utility Charges / Rentals fit (detail already uses Utility Charges for Water/Sewer/Trash). Should be Utility Charges (split by column like the expense lines, or dominant category with review) (page shows Charges for services 483,676 = Water 205,917 + Sewer 111,386 + Trash 113,381 + Apartment 52,992)",,,,7
 Hubbard_FY2025,schema,receipts: unknown category 'Utility Charges' ('Garbage and Recycling Collections'),,,,6
 Hubbard_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Garbage and Recycling Collections'),,,,
-Hubbard_FY2025,verifier,"missing: verifier: The detail records the Fire Department Fund's 'Operating Transfers In: General Fund' +5,000 (detail[16], p10). The General Fund's side, -5,000 as section other financing, fund General, is missing. The General Fund revenue lines were added from the same p4 column, so the transfer line is skipped and the detail transfers don't net to zero. Top-level transfers_in/out 5,000/5,000 are correct. (page shows General Fund column, Other Financing Sources (Uses): Transfers (5,000))",,,,4
+Hubbard_FY2025,verifier,"receipts[13].category: verifier: Utility fund collections are category Utility Charges (user 2026-10-28); Garbage and Recycling Collections on the same statement already is (page shows Sewer Collections 8,157)",,,,6
+Hubbard_FY2025,verifier,"receipts[14].category: verifier: Utility fund collections are category Utility Charges (user 2026-10-28) (page shows Water Collections 30,834)",,,,6
+Hubbard_FY2025,verifier,"detail[31].category: verifier: Should be Utility Charges, as for the Garbage line (page shows Sewer Collections 8,157)",,,,6
+Hubbard_FY2025,verifier,"detail[32].category: verifier: Should be Utility Charges, as for the Garbage line (page shows Water Collections 30,834)",,,,6
+Hubbard_FY2025,verifier,"receipts[9].category: verifier: Lease income for the electric system is rental income: category Rentals (user 2026-10-28); the detail line already has detail_category rentals (page shows Electrical Distribution System Lease 35,803)",,,,4
+Hubbard_FY2025,verifier,"detail[26].category: verifier: Should be category Rentals (detail_category rentals) (page shows Electrical Distribution System Lease 35,803)",,,,4
 Hubbell_FY2025,schema,receipts: unknown category 'Utility Charges' ('Local Receipts: Other (Garbage Fund)'),,,,1
+Hubbell_FY2025,verifier,"receipts[16].category: verifier: Utility fund sales are category Utility Charges (user 2026-10-28), as already used for the Garbage Fund line; also an assumption from an 'Other' label with no review note (page shows Local Receipts: Other - Electric Fund 79,521.00)",,,,1
+Hubbell_FY2025,verifier,"receipts[17].category: verifier: Should be Utility Charges, consistent with the Garbage Fund line (page shows Local Receipts: Other - Water Fund 18,943.00)",,,,1
+Hubbell_FY2025,verifier,"receipts[18].category: verifier: Should be Utility Charges, consistent with the Garbage Fund line (page shows Local Receipts: Other - Sewer Fund 4,430.00)",,,,1
+Humboldt_FY2025,verifier,"receipts[6].category: verifier: Lease/rent income has its own receipt category under the user's rules (Rentals: rent, rental income). Charges for services is only for genuine fees for services. (page shows Lease 135,635 (p9 schedule: Lease/Rents; p2: Rents/leases))",,,,4
+Humboldt_FY2025,verifier,"detail[12].category: verifier: Should be Rentals. The extractor's own detail_category is rentals; the category doesn't match it. (page shows Lease, General Fund 134,355)",,,,4
+Humboldt_FY2025,verifier,"detail[13].category: verifier: Should be Rentals, as for detail[12]. (page shows Lease, Non major Funds 1,280)",,,,4
+Humboldt_FY2025,verifier,"receipts[13].category: verifier: Water/sewer fund sales have their own category under the user's rules (Utility Charges: utility fund sales/charges). (page shows OPERATING REVENUE 339,742 (Water/Sewer enterprise fund; p10 'Water and sewer'))",,,,6
+Humboldt_FY2025,verifier,"detail[50].category: verifier: Should be Utility Charges. The detail_category is other utility charges; user_rules.py won't catch it because the label has no sales/charges wording. (page shows OPERATING REVENUE 339,742, Water/Sewer Fund)",,,,6
 Humboldt_Housing_Authority_-_Parkview_Heights_FY2025,schema,receipts: unknown category 'Rentals' ('Rental income'),,,,2
 Humboldt_Table_Rock_Steinauer_Public_Schools_FY2025,schema,receipts: unknown category 'Rentals' ('Rental of School Facility'),,,,5
 Humboldt_Table_Rock_Steinauer_Public_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Sale of Lunches'),,,,5
 Humboldt_Table_Rock_Steinauer_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Sale of Lunches'),,,,
+Humboldt_Table_Rock_Steinauer_Public_Schools_FY2025,verifier,detail[9].category: verifier: The same money on the statement (receipts[7] 'Rental of School Facility' 750) is category Rentals. Rentals is the user's own category for rental income; the same line must carry the same category everywhere in a report. (page shows 1910 Rental School Facilities 750),,,,8
 Humphrey_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Sales'),,,,
 Humphrey_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Sales'),,,,
 Humphrey_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Sales'),,,,
+Humphrey_FY2025,verifier,"receipts[11].category: verifier: Utility fund sales are category Utility Charges under the user's rules. The same money in detail[106]-[108] is Utility Charges, so the report is inconsistent. user_rules.py won't fix it because the receipts line has no fund field. (page shows Sales 589,010 (Water 305,000, Sewer 194,973, Trash 89,037))",,,,7
 Humphrey_Public_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Food Services'),,,,5
+Humphrey_Public_Schools_FY2025,verifier,"detail[90].category: verifier: This is school lunch sales: the same money is receipts[6] 'Food Services' 131,999 with category School Lunch Sales, and the detail_category is school lunch sales. The category must be School Lunch Sales (same line, same category). (page shows School Nutrition Fund: Daily Sales 131,999)",,,,15
 Hyannis_Area_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Local receipts: lunch sales'),,,,10
 Hyannis_Area_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Lunch sales'),,,,
+Imperial_FY2025,verifier,"detail[66].category: verifier: This is a debt service principal line. Under the rules it belongs in category 'Debt Service' with debt_service_part 'principal', not public safety. The governmental funds statement (p6) also counts it under 'Principal payments on debt' (General Fund 18,156). (page shows Police - Debt service: Principal 18,156)",,,,21
+Imperial_FY2025,verifier,"detail[67].category: verifier: This is a debt service interest line. It belongs in category 'Debt Service' with debt_service_part 'interest', not public safety. The p6 statement counts it under 'Interest on long-term debt' (General Fund 168). (page shows Police - Debt service: Interest 168)",,,,21
 Imperial_Housing_Authority_-_Sunset_Apartments_FY2025,schema,receipts: unknown category 'Rentals' ('Rental income'),,,,3
 Indianola_Housing_Authority_-_Valley_View_FY2025,schema,receipts: unknown category 'Rentals' ('Rental income'),,,,2
 Jackson_FY2025,schema,"detail: unknown revenue category 'Utility Charges' ('Water, Sewer, Garbage Collections')",,,,
@@ -659,6 +852,7 @@ Jansen_FY2025,schema,receipts: unknown category 'Utility Charges' ('Local Receip
 Johnson_Brock_Public_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Nutrition Program receipts'),,,,3
 Johnson_County_Central_Public_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Sale of lunches'),,,,4
 Johnson_County_Central_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Food Services'),,,,
+Johnson_County_Central_Public_Schools_FY2025,verifier,"detail[97].category: verifier: Non-reimbursable programs are meal/a la carte sales not reimbursed by the federal program, not a reimbursement or refund. The category contradicts the label, the line's own detail_category (other charges for services) and the statement split (receipts[21], where the same 7,341 is charges for services). Under the 2026-10-28 rule it fits School Lunch Sales (page shows Non-Reimbursable Programs 7,341 (School Nutrition Fund, Local Sources))",,,,12
 Johnson_County_Rural_Water_District_1,schema,"receipts: unknown category 'Utility Charges' ('Local Receipts -- water sales, hookup fees, interest, other')",,,,1
 Johnstown_FY2025,schema,receipts: unknown category 'Utility Charges' ('Local Receipts: Other (Solid Waste Fund)'),,,,1
 Julian_FY2025,schema,receipts: unknown category 'Utility Charges' ('Local Receipts: Other (Garbage Fund)'),,,,1
@@ -666,37 +860,55 @@ Juniata_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Charg
 Juniata_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Charges for services'),,,,
 Kearney_Housing_Authority_FY2025,schema,receipts: unknown category 'Rentals' ('Rental income'),,,,2
 Kearney_Public_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Lunch sales'),,,,7
+Kearney_Public_Schools_FY2025,verifier,"detail[80].category: verifier: User rule 2026-10-28: student fees go to Extracurricular Receipts; the same line in receipts[14] ('Student fees') is Extracurricular Receipts, so the detail line is miscategorized and inconsistent within the report (page shows Sudent fees 377,005 (Student Fees Fund))",,,,12
 Kenesaw_Public_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('School Nutrition Services'),,,,4
 Kenesaw_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Sale of lunches'),,,,
 Kennard_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Charges for services'),,,,
 Kennard_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Charges for services'),,,,
+Kennard_FY2025,verifier,"receipts[6].category: verifier: User rule 2026-10-28: utility fund sales/charges are category Utility Charges, not charges for services/fees. The matching Water and Sewer detail lines (detail[47], detail[57]) already use Utility Charges, so the statement line is miscategorized and inconsistent within the report. (page shows Charges for services 216,760 (proprietary funds: Water 132,409 + Sewer 84,351))",,,,6
 Keya_Paha_County_Schools_FY2025,schema,"receipts: unknown category 'School Lunch Sales' ('Lunches, breakfast, and milk')",,,,4
 Keya_Paha_County_Schools_FY2025,schema,detail: unknown revenue category 'Rentals' ('1910 Rental of school equipment'),,,,
 Keya_Paha_County_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Sales of lunches and breakfast'),,,,
+Keya_Paha_County_Schools_FY2025,verifier,"receipts[5].category: verifier: Line is ~90% school activity fund receipts; under the rules (school activity fund receipts -> Extracurricular Receipts; charges for services only for genuine fees) the dominant category is Extracurricular Receipts, which is also the category the extraction gives the same money in detail (detail[52]). charges for services/fees does not fit any component. (page shows Other local receipts 137,243 = General Fund 11,055 + Other Governmental 126,188, of which Activity Fund receipts 123,737 (p9, p16))",,,,9
 Kimball_County_Manor_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Meal/Laundry Income'),,,,4
+Kimball_FY2025,verifier,"receipts[14].category: verifier: Utility fund sales have their own receipt category under the user's rules (Utility Charges: utility fund sales/charges/collections, garbage/refuse). Charges for services/fees is no longer the category for these lines. (page shows Sales 5,870,371 (enterprise funds Total: Electric, Water, Sewer, Trash, Landfill))",,,,13
 Kimball_Housing_Agency_-_Park_Terrace_FY2025,schema,receipts: unknown category 'Rentals' ('Rental income'),,,,2
 Kimball_Housing_Agency_-_Park_Terrace_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Food service operations'),,,,2
 Kimball_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('1600 Food Services'),,,,
+Kimball_Public_Schools_FY2025,verifier,"receipts[4].category: verifier: The extractor computed this split itself but put school lunch sales (61,570) and activity admissions and income (26,488) under charges for services/fees. Both have their own categories under the user's rules: School Lunch Sales and Extracurricular Receipts, which is also how the same lines are categorized in detail[56], detail[64] and detail[65]. Only the 3,050 transportation fees fit charges for services/fees. (page shows 1423 Transportation Fees 3,050 (p5); 1600 Food Services 61,570 (p7); 1710 Admissions 12,632 and 1790 Other Activity Income 13,856 (p8))",,,,7
 Lakeview_Community_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Sale of lunches/milk'),,,,
+Lakeview_Community_Schools_FY2025,verifier,"receipts[11].category: verifier: Under the user's rule (2026-10-28), lunch/meal/milk sales are their own receipt category, School Lunch Sales; detail[72] already uses it. This split item merges two printed lines with different categories. It should be School Lunch Sales 364,349, with the 5,945 other local receipts as a separate item. (page shows Sale of lunches/milk 364,349; Other local receipts 5,945 (p12))",,,,12
+Lakeview_Community_Schools_FY2025,verifier,"receipts[13].category: verifier: Under the user's rule (2026-10-28), postsecondary/tuition receipts go to Tuition Received, not charges for services. (page shows 1955 Post secondary receipts 20,010)",,,,7
+Lakeview_Community_Schools_FY2025,verifier,"detail[10].category: verifier: The same postsecondary line in detail should be category Tuition Received (detail_category tuition and fees is fine). (page shows 1955 Post secondary receipts 20,010)",,,,7
 Lancaster_County_Rural_Water_District_1_FY2025,schema,receipts: unknown category 'Utility Charges' ('Metered water sales'),,,,3
 Lancaster_County_Rural_Water_District_1_FY2025,schema,receipts: unknown category 'Rentals' ('Rental income'),,,,3
 Laurel_Concord_Coleridge_Public_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('School Nutrition Program receipts'),,,,3
+Laurel_Concord_Coleridge_Public_Schools_FY2025,verifier,"detail[92].category: verifier: Under the user's rule (2026-10-28), lunch/meal sales are their own category, School Lunch Sales. receipts[16] already records the same 131,801 as School Lunch Sales, so receipts and detail disagree. (page shows School Nutrition Fund: Sales 131,801)",,,,16
 Laurel_Housing_Authority_FY2025,schema,receipts: unknown category 'Rentals' ('Rental income'),,,,2
 Lawrence-Nelson_Public_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Other local receipts (School Nutrition sales)'),,,,5
 Lawrence-Nelson_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Sales - lunch'),,,,
 Lawrence-Nelson_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Sales - breakfast'),,,,
+Lawrence-Nelson_Public_Schools_FY2025,verifier,"detail[200].category: verifier: This is a food sale (a la carte, not federally reimbursable), not a reimbursement or refund. Its detail_category is already school lunch sales, and the matching receipts line (receipts[17]) puts it in School Lunch Sales. The category should be School Lunch Sales. (page shows Sales - non-reimbursable 17,738.85 (School Nutrition Fund))",,,,14
+Lawrence-Nelson_Public_Schools_FY2025,verifier,"detail[187].category: verifier: The -197,677.44 contra line offsets the Activity Fund account receipts, which are all category Extracurricular Receipts. Filing it under charges for services/fees leaves Extracurricular Receipts overstated by 197,677.44 and charges for services negative by the same amount. Its category should be Extracurricular Receipts. (page shows Activity Fund account receipts (Extracurricular Receipts lines detail[179]-[186]))",,,,13
 Lebanon_FY2025,schema,receipts: unknown category 'Utility Charges' ('Local Receipts: Other (Trash fund)'),,,,1
 Leigh_Community_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Sale of lunches/milk'),,,,
+Leigh_Community_Schools_FY2025,verifier,"receipts[9].category: verifier: Activity fund receipts (218,303 incl. student fee, 61% of the part) go to Extracurricular Receipts and lunch sales 126,853 to School Lunch Sales under the user rules; charges for services/fees fits none of it. Postsecondary receipts 11,280 are Tuition Received. The remainder should be split by these sources from the same printed fund columns or take the dominant category, Extracurricular Receipts. (page shows Local receipts remainder 359,253 = Activities 218,172 + School Nutrition 126,853 + Student Fee 131 (p5-6) + Postsecondary 11,280 + Other local 2,817 (p7))",,,,6
 Leigh_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Sales'),,,,
 Leigh_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Sales'),,,,
 Leigh_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Sales'),,,,
+Leigh_FY2025,verifier,"receipts[12].category: verifier: User rule 2026-10-28 makes utility fund sales/charges Utility Charges, and the detail lines for the same Sales already use Utility Charges. The statement line should match. (page shows Sales 340,147 (Combined System Utilities Fund: Water/Sewer/Trash sales))",,,,7
+Leigh_FY2025,verifier,"detail[11].category: verifier: Park fees are their own receipt category, Recreation Fees, under the user rules (detail_category recreation/pool/park fees already says so). (page shows Park - Charges for services 11,345)",,,,13
+Leigh_FY2025,verifier,"detail[12].category: verifier: Pool fees are their own receipt category, Recreation Fees, under the user rules. (page shows Pool - Charges for services 13,307)",,,,13
 Lewellen_FY2025,schema,receipts: unknown category 'Utility Charges' ('Local Receipts: Other (Trash Fund)'),,,,1
+Lewellen_FY2025,verifier,"reported_totals.business-type.disbursements.includes: verifier: The total includes the 3,000 transfer, but includes is [] (the transfer is noted only in a non-schema 'includes_split' field). Business disbursement lines sum to 66,184.37, so the totals check fails by 3,000. includes should be [""transfers_net""]. (page shows Sewer 21,357.18 + Trash 47,827.19 = 69,184.37 incl. line 49 Transfers Out of Surplus Fees 3,000.00)",,,,2
+Lewellen_FY2025,verifier,"receipts[11].category: verifier: Sewer fund charges are Utility Charges under the user rules, and the matching Trash fund line already uses Utility Charges. The two lines are inconsistent. (page shows Local Receipts: Other (Sewer Fund) 29,178.75)",,,,1
 Lewis_and_Clark_NRD_FY2025,schema,receipts: unknown category 'Utility Charges' ('Water sales'),,,,8
 Lewis_and_Clark_NRD_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Customer charges'),,,,
 Lewis_and_Clark_NRD_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Pit move fees and non-water line charges'),,,,
 Lewis_and_Clark_NRD_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Connect charges and hookups'),,,,
 Lewis_and_Clark_NRD_FY2025,schema,detail: unknown revenue category 'Rentals' ('Rent'),,,,
 Lewiston_Consolidated_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Nutrition Program receipts'),,,,3
+Lewiston_Consolidated_Schools_FY2025,verifier,"detail[61].category: verifier: School lunch sales are their own receipt category (School Lunch Sales, user 2026-10-28); the statement line for the same money (receipts[7]) already uses School Lunch Sales (page shows Daily sales 18,964 (School Nutrition Fund))",,,,14
 Lexington_Area_Solid_Waste_Agency_FY2025,schema,receipts: unknown category 'Rentals' ('Rent income'),,,,2
 Lexington_FY2025,schema,receipts: unknown category 'Rentals' ('Rent'),,,,6
 Lexington_FY2025,schema,detail: unknown revenue category 'Rentals' ('Rent'),,,,
@@ -704,17 +916,21 @@ Lexington_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Cha
 Lexington_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Charges for services'),,,,
 Lexington_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Charges for services'),,,,
 Lexington_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Charges for services'),,,,
+Lexington_FY2025,verifier,"detail[81].category: verifier: the Ambulance Fund is not a utility; its operating expenses are public safety (ambulance/rescue), not utilities (page shows Operating expenses 13,844 (Ambulance Fund column))",,,,11
+Lexington_FY2025,verifier,"detail[55].category: verifier: ambulance charges have their own receipt category, Ambulance Fees (user 2026-10-28); detail_category ambulance/rescue fees is already set (page shows Charges for services 120,876 (Ambulance Fund column))",,,,11
 Lexington_Housing_Authority_-_Eastlawn_Pioneer_Homes_FY2025,schema,receipts: unknown category 'Rentals' ('Rental income'),,,,2
 Lexington_Public_Schools_FY2025,schema,receipts: unknown category 'Rentals' ('Rental of facilities'),,,,5
 Lexington_Public_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Lunch sales'),,,,7
 Lexington_Public_Schools_FY2025,schema,detail: unknown revenue category 'Rentals' ('Rental of facilities'),,,,
 Lexington_Public_Schools_FY2025,schema,detail: unknown revenue category 'Rentals' ('Rental of facilities'),,,,
+Leyton_Public_Schools_FY2025,verifier,"detail[48].category: verifier: Non-reimbursable (a la carte) meal sales are not reimbursements/refunds. Its own detail_category is school lunch sales and receipts[6] treats it as charges for services, so the category should be School Lunch Sales. As it stands the same money has two different categories. (page shows 1620 Non-Reimbursable Programs 14,588)",,,,8
 Lincoln_Airport_Authority_FY2025,schema,receipts: unknown category 'Recreation Fees' ('LNK Enterprise Park'),,,,3
 Lincoln_Airport_Authority_FY2025,schema,receipts: unknown category 'Recreation Fees' ('Air Park South'),,,,3
 Lincoln_Airport_Authority_FY2025,schema,detail: unknown revenue category 'Recreation Fees' ('Concessions - Standard Parking'),,,,
 Lincoln_Airport_Authority_FY2025,schema,detail: unknown revenue category 'Recreation Fees' ('LNK Enterprise Park'),,,,
 Lincoln_Airport_Authority_FY2025,schema,detail: unknown revenue category 'Recreation Fees' ('Enterprise Park aviation'),,,,
 Lincoln_Airport_Authority_FY2025,schema,detail: unknown revenue category 'Recreation Fees' ('Lincoln Air Park South'),,,,
+Lincoln_County_FY2025,verifier,"detail[54].category: verifier: On p4 this fund's spending is mostly capital outlay (96,010 of 107,980). The rule for a mixed line is to use the dominant category, which here is capital outlay, not general government. (page shows Courthouse Building Fund DISBURSEMENTS 107,980 (p4 column: General government 11,970 + Capital outlay 96,010))",,,,9
 Lincoln_FY2025,schema,receipts: unknown category 'Recreation Fees' ('Parking Revenue'),,,,11
 Lincoln_Housing_Authority_FY2025,schema,receipts: unknown category 'Rentals' ('Rental income'),,,,2
 Lincoln_Lancaster_Public_Building_Commission_FY2025,schema,receipts: unknown category 'Rentals' ('Rentals'),,,,4
@@ -792,8 +1008,14 @@ McCook_Public_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sal
 McCook_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Sale of breakfast and lunch'),,,,
 McCool_Junction_Public_Schools_FY2025,schema,detail: unknown revenue category 'Rentals' ('1910 Rental of property'),,,,
 McCool_Junction_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Sales - meals'),,,,
+McCool_Junction_Public_Schools_FY2025,verifier,"receipts[8].category: verifier: By the fund schedules, Other Governmental 'Other local receipts' 255,520.47 = School Nutrition sales/misc 80,701.93 (p14) + Special Building misc 6,081.15 (p16) + Activities Fund 168,737.39 (p13 receipts 293,334.14 less 25,000 transfer, 97,384.22 contributions and 2,212.53 interest). Activity receipts are about 65% of the line, so under the >half rule it should be Extracurricular Receipts (or split with split_from); charges for services/fees is no longer the category for school activity or lunch receipts. (page shows Other local receipts 258,315.47 (General 2,795.00 + Other Governmental 255,520.47, p4))",,,,5
+McCool_Junction_Public_Schools_FY2025,verifier,"detail[152].category: verifier: Non-reimbursable (a la carte) meal sales are School Lunch Sales, not reimbursements; the line's own detail_category is already school lunch sales (page shows Sales - non-reimbursable 9,544.00)",,,,14
+McCool_Junction_Public_Schools_FY2025,verifier,"detail[149].category: verifier: The contra line reduces Activities Fund receipts, which are all Extracurricular Receipts; categorised as charges for services/fees it understates that category by 25,000 and overstates Extracurricular Receipts by 25,000 (page shows Activities Fund receipts 293,334.14 (includes 25,000 transfer from General Fund, p24))",,,,13
 McPherson_County_Schools_FY2025,schema,detail: unknown revenue category 'Rentals' ('1910 Rental of facility'),,,,
 McPherson_County_Schools_FY2025,schema,"detail: unknown expenditure category 'Drivers Education' (""442 Driver's ed vehicle rental"")",,,,
+Mead_FY2025,verifier,"receipts[3].category: verifier: This is the public power district 5% gross revenue (in-lieu) tax. It is split between General and Debt Service in the same ratio as the property tax levy (5,696/3,949 = 1.44; 115,339/79,812 = 1.45), which is how that tax is distributed. The user's rules put it in Public Power District Sales Tax (incl. 'NPPD 5%'), not other taxes. The same applies to detail[2] (5,696, p5) and detail[114] (3,949, p13). (page shows 5% Gross tax 9,645 (General 5,696, Debt Service 3,949))",,,,4
+Mead_FY2025,verifier,"receipts[25].category: verifier: Utility fund user fees fall under the user's Utility Charges category (2026-10-28 rule: utility fund sales/charges/collections), not charges for services/fees. The same applies to receipts[26] Water hookups 850 and receipts[27] Water late fees 2,783. (page shows User fees 350,651 (Water 231,135, Sewer 119,516))",,,,15
+Mead_FY2025,verifier,"disbursements[13].category: verifier: Employee pension and insurance contributions are Employee Benefits and Payroll Taxes. The same label in the General Fund schedule (detail[29], p6) is employee benefits, so the report uses two categories for one label. (page shows Pension/Insurance 6,128)",,,,15
 Mead_Public_Schools_FY2025,schema,receipts: unknown category 'Rentals' ('Rental of school facilities'),,,,3
 Mead_Public_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Sale of lunches and milk'),,,,3
 Mead_Public_Schools_FY2025,schema,detail: unknown revenue category 'Rentals' ('1910 Rental of school facilities'),,,,
@@ -805,37 +1027,56 @@ Meridian_Public_Schools_FY2025,schema,receipts: unknown category 'School Lunch S
 Meridian_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Sale of lunches'),,,,
 Merna_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Sales'),,,,
 Merna_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Sales'),,,,
+Merna_FY2025,verifier,"receipts[7].category: verifier: utility fund sales belong in receipt category Utility Charges (user rule 2026-10-28); the same lines in detail[17]/detail[18] already use Utility Charges, so the report is inconsistent (page shows Sales 147,225 (Water and Sewer enterprise funds, operating revenues))",,,,7
 Middle_Niobrara_NRD_FY2025,schema,detail: unknown revenue category 'Rentals' ('Rent'),,,,
+Milford_FY2025,verifier,"receipts[10].category: verifier: Water and sewer fund charges belong in receipt category Utility Charges (user rule 2026-10-28). Same for receipts[11] (Sewer 203,513) and detail[7]/detail[8] (category charges for services/fees). (page shows Water 525,539 / Sewer 203,513 (business-type charges for services))",,,,2
+Milford_FY2025,verifier,"detail: verifier: User rule (2026-10-27, cities and villages): where the only supplementary schedule is a combined all-funds one, detail is one line per individual fund column of the governmental funds statement (p4) and proprietary funds statement (p6), and the combined schedule lines are removed. Milford's detail still holds the combined p8 fund-total lines (e.g. 'General' 1,526,603 filed under general government although p4 splits it into 6 functions). (page shows p8 is a single combined all-funds schedule; no fund has its own schedule. Fund columns are printed on p4 (General, Debt Service, Street, Fire, Other Governmental Funds) and p6 (Water, Sewer))",,,,8
 Milford_Public_Schools_FY2025,schema,detail: unknown revenue category 'Rentals' ('1910 Rental of school facilities'),,,,
 Milford_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Sales - lunch and breakfast'),,,,
 Millard_Public_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Sales of lunch'),,,,6
 Millard_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Sale of lunches/milk'),,,,
+Millard_Public_Schools_FY2025,verifier,"receipts[21].category: verifier: School activity fund receipts are 'Extracurricular Receipts' under the user rules (2026-10-23/28). detail[103] already uses Extracurricular Receipts for the same 8,951,773. (page shows Non-revenue receipts - Activities Fund column 8,951,773 (= 'Activities revenue', p14))",,,,5
+Millard_Public_Schools_FY2025,verifier,"receipts[22].category: verifier: Student fees and activity fees are 'Extracurricular Receipts' under the user's 2026-10-28 rule. detail[105] already uses Extracurricular Receipts. (page shows Non-revenue receipts - Student Fees Fund column 559,524 (= 'Activity fees', p15))",,,,6
 Milligan_FY2025,schema,receipts: unknown category 'Ambulance Fees' ('Fire & Rescue Receipts'),,,,2
 Milligan_FY2025,schema,receipts: unknown category 'Rentals' ('Rental Income'),,,,2
 Milligan_FY2025,schema,detail: unknown revenue category 'Ambulance Fees' ('Fire & Rescue Receipts'),,,,
 Milligan_FY2025,schema,detail: unknown revenue category 'Rentals' ('Rental Income'),,,,
+Milligan_FY2025,verifier,"receipts[6].category: verifier: In Lieu of Tax is its own receipt category under the user rules (2026-10-23), even when it is printed under Intergovernmental Revenues. It should be 'In Lieu of Tax'. (page shows In Lieu of Taxes 6,290)",,,,2
+Milligan_FY2025,verifier,"detail[6].detail_category: verifier: Category and detail_category should both be 'In Lieu of Tax' (the rules say 'each also as its detail_category'). (page shows In Lieu of Tax 6,290 (budget 7,017))",,,,3
 Minatare_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Charge for services'),,,,
 Minatare_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Charge for services'),,,,
 Minatare_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Charge for services'),,,,
+Minatare_FY2025,verifier,"receipts[8].category: verifier: Utility fund charges (incl. garbage/refuse) are their own category 'Utility Charges' under the user's 2026-10-28 rule. The matching detail lines (detail[25..27]) already use Utility Charges, so the receipt is wrong and inconsistent with them. (page shows Charge for services 380,587.52 (Water 220,352.92, Sewer 66,184.07, Sanitation 94,050.53))",,,,6
 Minatare_Public_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Sale of lunches and milk'),,,,3
 Minatare_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Sale of lunches'),,,,
+Minatare_Public_Schools_FY2025,verifier,"receipts[17].category: verifier: School activity fund receipts are 'Extracurricular Receipts' under the user rules (2026-10-23/28). detail[102] already uses Extracurricular Receipts for the same 53,817, so the two are inconsistent. (page shows Other nonrevenue receipts - Student Activity Fund 53,817 (p3; Activities Fund RECEIPTS 53,817, p16))",,,,3
 Minden_Housing_Authority_-_East_View_Court_FY2025,schema,receipts: unknown category 'Rentals' ('Rental income'),,,,2
 Minden_Public_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Nutrition sales'),,,,4
 Minden_Public_Schools_FY2025,schema,detail: unknown revenue category 'Rentals' ('1910 Rental of school facilities and equipment'),,,,
 Minden_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Daily sales - school lunch program'),,,,
 Minden_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Daily sales - school breakfast program'),,,,
+Minden_Public_Schools_FY2025,verifier,"detail[97].category: verifier: this is a la carte food sales (the word 'non-reimbursable' is not a reimbursement); it belongs in School Lunch Sales like the other daily sales lines (its own detail_category is already school lunch sales, and the p4 statement counts it in Nutrition sales 151,875) (page shows Daily sales - non-reimbursable programs 23,217)",,,,16
 Mitchell_Care_Center_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Guest and Employee Meals Revenue'),,,,3
 Mitchell_FY2025,schema,receipts: unknown category 'Rentals' ('Lease and rent'),,,,5
 Mitchell_FY2025,schema,detail: unknown revenue category 'Rentals' ('Lease and rent'),,,,
 Mitchell_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Lunch sales'),,,,
+Mitchell_Public_Schools_FY2025,verifier,"receipts[11].category: verifier: the fund columns print the breakdown: 69% is student activity receipts (Extracurricular Receipts under the user rules), 94,220 is lunch sales (School Lunch Sales), and 70,908 is employee benefit contributions. The line should be split by column (split_from) or at least take the dominant category Extracurricular Receipts with review; charges for services/fees fits none of the parts (page shows Program sales and charges 528,491 = Student Activity Fund 363,363 + School Nutrition 94,220 + General Fund column 70,908 (Employee Benefit 'Contributions received', p9))",,,,3
 Morrill_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('1600 Lunchroom Sales'),,,,
+Morrill_Public_Schools_FY2025,verifier,"receipts[6].category: verifier: Lunchroom sales have their own receipt category, School Lunch Sales (user rule 2026-10-28), and the detail line (detail[57]) already uses School Lunch Sales. The split should be School Lunch Sales 39,920 plus charges for services 27,380, not one charges-for-services item. (page shows School Nutrition Fund 1600 Lunchroom Sales 39,920 (p8), inside Local Sources 4,037,097 (p4))",,,,4
+Morrill_Public_Schools_FY2025,verifier,"detail[6].category: verifier: This is community services revenue (code 1800), not a student activity receipt. It also doesn't match the receipts split, which puts the same 27,380 in charges for services/fees (receipts[6]) with detail_category 'other charges for services'. The same label must have the same category in receipts and detail. (page shows 1800 Community Service Activities 27,380)",,,,5
+Morse_Bluff_FY2025,verifier,"receipts[11].category: verifier: The extractor treats this Enterprise (water) fund line as water charges. User rule 2026-10-28 moves utility fund sales/charges out of charges for services into the category Utility Charges, so the category should be Utility Charges (the review note can stay because the page prints the line as Other). (page shows Local Receipts: Other (Enterprise Fund) 38,207.88)",,,,1
 Mullen_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Charges for services'),,,,
 Mullen_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Charges for services'),,,,
 Mullen_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Charges for services'),,,,
+Mullen_FY2025,verifier,"receipts[20].category: verifier: Utility fund charges belong in the category Utility Charges (user rule 2026-10-28). The report's own detail lines (detail[36-38]) already use Utility Charges, so the receipts line is inconsistent with them. (page shows Charges for services 909,485 (Water 172,349 / Sewer 122,060 / Electric 615,076, proprietary funds))",,,,6
 Mullen_Public_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Local receipts: 1630 Special functions (School Nutrition)'),,,,4
 Mullen_Public_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Sales of lunches'),,,,4
 Mullen_Public_Schools_FY2025,schema,detail: unknown revenue category 'Rentals' ('1910 Facility rental'),,,,
+Mullen_Public_Schools_FY2025,verifier,"receipts[3].category: verifier: Rental income has its own category, Rentals (user rule 2026-10-28). detail[5] already uses Rentals, so the receipts line is inconsistent with it. (page shows 1910 Facility rental 75.00)",,,,6
+Mullen_Public_Schools_FY2025,verifier,"detail[192].category: verifier: Meal sales take the category School Lunch Sales (user rule 2026-10-28). The same money on the statement ('Sales of lunches', receipts[13]) is already School Lunch Sales. (page shows 1620 Sale of adult 12,823.87)",,,,11
 Murdock_FY2025,schema,receipts: unknown category 'Utility Charges' ('Local Receipts: Other (Garbage Fund)'),,,,2
+Murdock_FY2025,verifier,"receipts[12].category: verifier: Utility fund receipts take the category Utility Charges (user rule 2026-10-28). The Garbage Fund's identical line (receipts[14]) already uses Utility Charges, so this line is inconsistent with it. (page shows Local Receipts: Other (Water Fund) 78,029.29)",,,,1
+Murdock_FY2025,verifier,"receipts[13].category: verifier: Utility fund receipts take the category Utility Charges (user rule 2026-10-28). The Garbage Fund's identical line (receipts[14]) already uses Utility Charges, so this line is inconsistent with it. (page shows Local Receipts: Other (Sewer Fund) 24,555.00)",,,,1
 Nebraska_City_Electric_Gas_Water_and_Sanitation_Utilities_FY2025,schema,receipts: unknown category 'Utility Charges' ('Sanitation'),,,,2
 Nebraska_City_Housing_Authority_FY2025,schema,receipts: unknown category 'Rentals' ('Rental income'),,,,2
 Nebraska_City_Public_Schools_FY2025,schema,receipts: unknown category 'Rentals' ('Rental of school facilities'),,,,3
@@ -850,6 +1091,7 @@ Neligh_Housing_Authority_-_Pioneer_Homes_FY2025,schema,receipts: unknown categor
 Neligh_Oakdale_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Food Services'),,,,5
 Neligh_Oakdale_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('1611 Daily Sales - School Lunch Program'),,,,
 Neligh_Oakdale_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('1612 Daily Sales - School Breakfast Program'),,,,
+Neligh_Oakdale_Schools_FY2025,verifier,"detail[75].category: verifier: these are à la carte food sales, not reimbursements; category should be School Lunch Sales (its own detail_category is already school lunch sales, and the statement counts it in Food Services 102,856 = School Lunch Sales) (page shows 1620 Daily Sales - Non-Reimbursable Programs 27,603)",,,,11
 Nelson_FY2025,schema,receipts: unknown category 'Recreation Fees' ('Pool receipts'),,,,6
 Nelson_FY2025,schema,receipts: unknown category 'Cemetery Fees' ('Sale of lots'),,,,6
 Nelson_FY2025,schema,receipts: unknown category 'Rentals' ('Rental income'),,,,10
@@ -857,9 +1099,12 @@ Nelson_FY2025,schema,detail: unknown revenue category 'Recreation Fees' ('Pool r
 Nelson_FY2025,schema,detail: unknown revenue category 'Cemetery Fees' ('Sale of lots'),,,,
 Nelson_Housing_Agency_-_Elk_Creek_Manor_FY2025,schema,receipts: unknown category 'Rentals' ('Rental income'),,,,2
 Nemaha_County_Rural_Water_District_1_FY2025,schema,receipts: unknown category 'Utility Charges' ('Local Receipts - Water Sales'),,,,1
+Newman_Grove_FY2025,verifier,"balance_sheet.assets[4]: verifier: Internal balance included as an asset line although the printed Total column eliminates it; asset lines sum to 2,859,071 vs printed total_assets 2,743,168. Either omit the eliminated due-from/due-to lines or add the (115,903) elimination line. The page itself adds up, so report_discrepancies[1] is not a real report discrepancy. (page shows Due from other funds 115,903 in the Governmental column, eliminated (115,903) in the Eliminations column; Total column shows -)",,,,1
+Newman_Grove_FY2025,verifier,"balance_sheet.liabilities[1]: verifier: Eliminated internal balance included; liability lines sum to 383,684 vs printed total_liabilities 267,781. (page shows Due to other funds 115,903 (Business-type), eliminated (115,903); Total column shows -)",,,,1
 Newman_Grove_Housing_Authority_-_Golden_Age_Apartments_FY2025,schema,receipts: unknown category 'Rentals' ('Rental income'),,,,2
 Newman_Grove_Public_Schools_FY2025,schema,detail: unknown revenue category 'Rentals' ('1910 Rental of school property'),,,,
 Newman_Grove_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Sale of lunches/milk'),,,,
+Newman_Grove_Public_Schools_FY2025,verifier,"receipts[8].category: verifier: Under the user rules these have their own categories (Extracurricular Receipts 195,577, School Lunch Sales 69,636, Rentals 100), as the detail lines already use; lumping them into charges for services/fees is wrong. Split into separate split_from items. (page shows Local receipts parts: Activities receipts 194,312 (p11), Sale of lunches/milk 69,636 (p12), Extracurricular activities fees 1,265 (p14), Rental of school property 100 (p7))",,,,6
 Niobrara_FY2025,schema,receipts: unknown category 'Utility Charges' ('User fees - garbage'),,,,12
 Niobrara_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('User fees - garbage'),,,,
 Niobrara_Housing_Authority_-_Niobrara_Valley_Homes_FY2025,schema,receipts: unknown category 'Rentals' ('Rental income'),,,,2
@@ -971,7 +1216,8 @@ Paxton_Consolidated_Schools_FY2025,schema,detail: unknown revenue category 'Scho
 Pender_FY2025,schema,receipts: unknown category 'Utility Charges' ('Consumer sales'),,,,6
 Pender_Public_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Food Services'),,,,5
 Pender_Public_Schools_FY2025,schema,detail: unknown revenue category 'Rentals' ('1910 Rentals'),,,,
-Perkins_County_Schools_FY2025,schema,"receipts: unknown category 'School Lunch Sales' ('Local Sources (tuition, lunchroom sales, admissions, activity fees, enterprise, postsecondary)')",,,,4
+Pender_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Daily Sales'),,,,
+Perkins_County_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Local Sources (lunchroom sales)'),,,,4
 Perkins_County_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('1600 Lunchroom Sales'),,,,
 Peru_FY2025,schema,receipts: unknown category 'Rentals' ('User fees and rental'),,,,4
 Peru_FY2025,schema,detail: unknown revenue category 'Rentals' ('User fees and rental'),,,,
@@ -1009,18 +1255,22 @@ Polk_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Use Fees
 Ponca_FY2025,schema,receipts: unknown category 'Utility Charges' ('Consumer sales'),,,,7
 Ponca_Public_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('School Nutrition Program sales'),,,,4
 Ponca_Public_Schools_FY2025,schema,detail: unknown revenue category 'Rentals' ('1910 Rent'),,,,
+Ponca_Public_Schools_FY2025,verifier,"balance_sheet.equity: verifier: user rule 2026-10-27 (cash basis): governmental balance-sheet lines come from the governmental funds statement of assets and fund balances (Total column, fund balance by classification) when its totals equal the government-wide figures, which they do here (assets 5,526,584 + 871,689 = 6,398,273 on both). The notes say the funds statement 'prints fund balances only by fund, not by classification', but trimmed p6 prints them by classification. Statement/scope/column and the equity lines should come from p6 (page shows Statement of Assets and Fund Balances - Governmental Funds, Total column (p6): Restricted Debt service 850,993, Capital outlay 265,211, School Nutrition Program 89,673; Committed Student activities 223,241; Assigned Capital outlay 605,444, Employee benefits 5,152, Subsequent year's budget 1,149,680; Unassigned 3,208,879; total 6,398,273)",,,,6
 Ponderosa_Villa_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Employee and Guest Meals'),,,,4
 Potter_Dix_Public_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Sales of lunches'),,,,4
 Potter_Dix_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('1611 Sale of lunches - child'),,,,
 Potter_Dix_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('1612 Sale of breakfast'),,,,
 Potter_Dix_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('1620 Sale of lunches - adult'),,,,
+Potter_Dix_Public_Schools_FY2025,verifier,"balance_sheet.equity: verifier: user rule 2026-10-27 (cash basis): governmental balance-sheet lines come from the governmental funds statement of assets and fund balances (Total column, fund balance by classification) when its totals equal the government-wide figures, which they do here (3,137,761.77 on both). The balance sheet still uses the p1 Statement of Net Position; statement/scope/column and the equity lines should come from p4 (page shows Governmental funds statement, Total Governmental Funds column (p4): Restricted fund balance 803,788.97; Committed -; Assigned fund balance 429,153.00; Unassigned fund balance 1,904,819.80; total 3,137,761.77 (assets 2,552,980.22 + 584,781.55))",,,,4
 Potter_FY2025,schema,detail: unknown revenue category 'Recreation Fees' ('Prairie Pines Golf Club'),,,,
 Prague_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Charges for services'),,,,
 Prague_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Charges for services'),,,,
 Prague_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Charges for services'),,,,
 Ralston_Public_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Sale of lunches and milk'),,,,4
 Ralston_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Sale of lunches'),,,,
+Ralston_Public_Schools_FY2025,verifier,"receipts[19].category: verifier: The report's own breakdown shows this is tuition/charges from other districts, not state aid; the matching detail line is already Tuition Received. Statement line should be Tuition Received (same as detail[] Cooperative revenue). (page shows Cooperative receipts 1,503,416; Cooperative Fund schedule (p20) labels it 'Tuition and other receipts'; Statement of Activities (p1) shows 1,503,416 under Charges for Services for Cooperative expenses)",,,,4
 Randolph_FY2025,schema,receipts: unknown category 'Utility Charges' ('Consumer sales'),,,,7
+Randolph_FY2025,verifier,"missing: verifier: Notes do not end with 'Read pages 1-18 of 18' (text follows it). Page count 18 is correct and every page's lines are in the JSON (checked); only the notes ending is out of format, which the validator's page-read check may reject. (page shows PDF has 18 pages)",,,,18
 Randolph_Public_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Food Services'),,,,5
 Ravenna_FY2025,schema,receipts: unknown category 'Rentals' ('Rent'),,,,5
 Ravenna_FY2025,schema,detail: unknown revenue category 'Rentals' ('Rent'),,,,
@@ -1033,12 +1283,17 @@ Raymond_Central_School_FY2025,schema,receipts: unknown category 'School Lunch Sa
 Raymond_Central_School_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Food sales-daily lunch'),,,,
 Red_Cloud_Community_School_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('1611 Student Lunches'),,,,
 Red_Cloud_Community_School_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('1612 Student Breakfast'),,,,
+Red_Cloud_Community_School_FY2025,verifier,"receipts[9].category: verifier: This computed slice of Local Receipts mixes school activity receipts and student fees (category Extracurricular Receipts, as the same lines are in detail) with lunch/breakfast sales (category School Lunch Sales). Specific categories fit, so it should be split into Extracurricular Receipts 174,658.17 and School Lunch Sales 50,958.75 rather than sitting in charges for services/fees (page shows Activity Fund 1710/1730/1740/1750/1790 = 170,218.17 (p17); Student Fee 1741 Extracurricular Activity Fees 4,440.00 (p20); School Nutrition 1611 Student Lunches 38,478.65 + 1612 Student Breakfast 11,054.70 + 1620 Non Reimbursable 1,425.40 (p18))",,,,6
+Red_Cloud_Community_School_FY2025,verifier,"detail[179].category: verifier: 'Non Reimbursable' means meal sales not covered by federal reimbursement (a la carte/adult meals), not a refund. The line's own detail_category is school lunch sales, so the category should be School Lunch Sales (page shows 1620 Non Reimbursable 1,425.40)",,,,18
 Red_Cloud_Housing_Authority_-_Park_View_FY2025,schema,receipts: unknown category 'Rentals' ('Rental income'),,,,2
 Republican_City_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Fees and services'),,,,
 Republican_City_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Water deposits and late fees'),,,,
 Richardson_County_Rural_Water_District_2_FY2025,schema,receipts: unknown category 'Utility Charges' ('Local Receipts -- WATER CHARGES'),,,,1
+Riverside_School_District_75_FY2025,verifier,"ending_cash.source_page: verifier: Wrong source_page: 2,698,593 is not printed on p7. (page shows 2,698,593 (Total Governmental Funds, Total Assets) is on trimmed p8 (also p2 and p11); p7 shows only the General/Depreciation/Employee Benefit/Special Building columns)",,,,8
+Riverside_School_District_75_FY2025,verifier,"detail[116].category: verifier: School activity fund receipts are category Extracurricular Receipts (user rule). Every other activity account is categorized that way; this one is inconsistent. (page shows Fine Arts receipts 4,780 (Activities Fund by account))",,,,24
 Rock_County_Public_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Sales of meals'),,,,3
 Rock_County_Public_Schools_FY2025,schema,detail: unknown revenue category 'Rentals' ('1910 Rental'),,,,
+Rock_County_Public_Schools_FY2025,verifier,"receipts[7].category: verifier: The line is entirely activity fund receipts (the extractor's own review note says so), which are category Extracurricular Receipts under the user rule. The matching detail line (detail[110], Activities receipts, p16) is already Extracurricular Receipts, so the two are inconsistent. (page shows Other local receipts 214,678 (Other Governmental Funds column) = Activities Fund 'Activities receipts' 214,678 (p16))",,,,3
 Rosalie_FY2025,schema,receipts: unknown category 'Utility Charges' ('Local Receipts: Other (Garbage Fund)'),,,,1
 Rushville_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Charge for services'),,,,
 Rushville_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Charge for services'),,,,
@@ -1047,6 +1302,8 @@ Sandhills_Public_Schools_FY2025,schema,detail: unknown revenue category 'School 
 Sandy_Creek_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Other local receipts (school nutrition sales)'),,,,14
 Sandy_Creek_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Sales - lunch'),,,,
 Sandy_Creek_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Sales - breakfast'),,,,
+Sandy_Creek_Schools_FY2025,verifier,"detail[179].category: verifier: this is a meal sales line (a la carte / non-reimbursable meals), not a reimbursement; its own detail_category is 'school lunch sales' and the statement-level split (receipts[10]) counts it as School Lunch Sales. Category should be School Lunch Sales (page shows Sales - non-reimbursable 16,958.75 (School Nutrition Fund cash receipts))",,,,14
+Sandy_Creek_Schools_FY2025,verifier,"detail[224].category: verifier: wrong function: the other four Cooperative Fund object lines are 'support services', and the statement (p6, Other Governmental column) puts Cooperative spending in Special education 52,010.62 and Support services - general administration 89,141.15, never in operation and maintenance of plant (page shows Cooperative Fund: Social security 6,041.40)",,,,17
 Sargent_FY2025,schema,receipts: unknown category 'Rentals' ('Building Rent'),,,,8
 Sargent_FY2025,schema,receipts: unknown category 'Recreation Fees' ('Park Fees'),,,,8
 Sargent_FY2025,schema,receipts: unknown category 'Recreation Fees' ('Pool Receipts'),,,,8
@@ -1059,6 +1316,8 @@ Sargent_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Charg
 Sargent_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Charges for Services'),,,,
 Sargent_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Charges for Services'),,,,
 Sargent_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Charges for Services'),,,,
+Sargent_FY2025,verifier,"missing: verifier: The report prints a per-fund object schedule whose fund columns tie to the statement's fund totals. It is not a combined all-funds schedule, so the per-fund rule keeps it fund by fund. None of its lines are in detail; the object breakdown is lost. (page shows Schedule of Expenditures - Modified Cash Basis - Governmental Funds, per fund column (pp19-20): General Fund Personal Services 59,440, Contracted Services 21,164, Materials and Supplies 1,037, Public Safety 63,900, Other Operating Expenses 25,524 (=171,065); Street 56,839 / 115,432 / 20,900 / 0 / 31,900 (=225,071); Culture and Recreation 45,192 / 3,791 / 1,215 / 0 / 19,669 (=69,867); Airport 0 / 99,669 / 454 / 0 / 18,798 (=118,921); Community Development Other Operating 9,485; Community Center Materials 1,769, Other 4,410 (=6,179); Medical Center Contracted 88, Other 7,804 (=7,892))",,,,19
+Sargent_FY2025,verifier,"receipts[18].category: verifier: Utility fund charges fall under the user's Utility Charges receipt category (2026-10-28). The same line's detail items already use Utility Charges, so this is inconsistent. (page shows Charges for Services (Electric/Water/Sewer/Sanitation utility funds) 1,305,609)",,,,13
 Sargent_Housing_Authority_FY2025,schema,receipts: unknown category 'Rentals' ('Rental income'),,,,2
 Sarpy_County_Agricultural_Society_FY2025,schema,receipts: unknown category 'Rentals' ('Buildings and grounds rentals'),,,,4
 Sarpy_County_SID_158_FY2025,schema,receipts: unknown category 'Recreation Fees' ('Swimming pool'),,,,4
@@ -1068,6 +1327,7 @@ Sarpy_County_SID_65_FY2025,schema,receipts: unknown category 'Recreation Fees' (
 Sarpy_County_and_Cities_Wastewater_Agency_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Connection fees'),,,,
 Sarpy_County_and_Cities_Wastewater_Agency_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Flow meter collections'),,,,
 Saunders_County_Agricultural_Society_FY2025,schema,receipts: unknown category 'Rentals' ('Rental income'),,,,3
+Saunders_County_FY2025,verifier,"report_discrepancies: verifier: The statement's own Total column doesn't foot, by 1. The extracted lines are as printed, but the gap isn't recorded in report_discrepancies, so the identity (36,528,984 + 32,161,117 - 35,248,401 = 33,441,700 vs ending 33,441,699) is off by 1 with no explanation. (page shows Total Governmental Funds column: 8,403,542 + 15,900,579 + 8,828,750 + 220,184 + 22,796 + 1,594,971 + 277,579 = 35,248,401 vs printed TOTAL DISBURSEMENTS 35,248,402 (Nonmajor column lines add to 4,050,181 vs printed 4,050,182))",,,,4
 Schuyler_Community_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Nutrition program receipts'),,,,5
 Schuyler_FY2025,schema,detail: unknown revenue category 'Rentals' ('Equipment rentals'),,,,
 Schuyler_FY2025,schema,detail: unknown revenue category 'Recreation Fees' ('Park and pool fees'),,,,
@@ -1079,6 +1339,7 @@ Scottsbluff_Public_Schools_FY2025,schema,"receipts: unknown category 'School Lun
 Scottsbluff_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Lunch sales'),,,,
 Scribner_Snyder_Community_School_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Sales of Meals'),,,,6
 Scribner_Snyder_Community_School_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('1611 Student Lunches'),,,,
+Scribner_Snyder_Community_School_FY2025,verifier,"detail[192].category: verifier: a la carte meal sales, not a reimbursement; its own detail_category is school lunch sales and the statement counts it in 'Sales of Meals' 34,008.46 (receipts[13], School Lunch Sales). Category should be School Lunch Sales (page shows 1620 Daily Sales - Non-Reimbursable 7,393.70)",,,,19
 Seward_Airport_Authority_FY2025,schema,receipts: unknown category 'Rentals' ('Hangar rentals'),,,,2
 Seward_Airport_Authority_FY2025,schema,receipts: unknown category 'Rentals' ('Farm rentals'),,,,2
 Seward_Public_Schools_FY2025,schema,receipts: unknown category 'Rentals' ('Rental of school facilities'),,,,4
@@ -1181,6 +1442,7 @@ Superior_Public_Schools_FY2025,schema,detail: unknown revenue category 'School L
 Sutherland_Housing_Authority_-_Sandy_Acres_FY2025,schema,receipts: unknown category 'Rentals' ('Rental income'),,,,2
 Sutherland_Public_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Lunch sales'),,,,9
 Sutherland_Public_Schools_FY2025,schema,detail: unknown revenue category 'Rentals' ('1910 Rental of facilities'),,,,
+Sutherland_Public_Schools_FY2025,verifier,"receipts[13].category: verifier: rental income has its own receipt category Rentals (user rule 2026-10-28); the matching detail line (1910 Rental of facilities) is already category Rentals, so receipts and detail disagree (page shows Other (General Fund 1910 Rental of facilities 9,198, p10))",,,,7
 Sutton_FY2025,schema,receipts: unknown category 'Utility Charges' ('Light Fund: Consumer sales'),,,,8
 Sutton_FY2025,schema,receipts: unknown category 'Utility Charges' ('Water Fund: Consumer sales'),,,,8
 Sutton_FY2025,schema,receipts: unknown category 'Utility Charges' ('Sewer charges for services'),,,,2
@@ -1188,8 +1450,12 @@ Sutton_FY2025,schema,receipts: unknown category 'Utility Charges' ('Trash charge
 Sutton_FY2025,schema,detail: unknown revenue category 'Rentals' ('Rent'),,,,
 Sutton_Public_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Nutrition sales'),,,,7
 Sutton_Public_Schools_FY2025,schema,detail: unknown revenue category 'Rentals' ('1910 Rental of school facilities'),,,,
+Sutton_Public_Schools_FY2025,verifier,"missing: verifier: notes don't end with 'Read pages 1-N of N': a balance-sheet sentence was appended after it. The page count (11 of 11) is correct and every page's lines are in the JSON, but the required ending is broken (page shows trimmed PDF has 11 pages)",,,,None
+Sutton_Public_Schools_FY2025,verifier,"receipts[17].category: verifier: rental income has its own receipt category Rentals (user rule 2026-10-28); the detail line for the same 1910 rental is already Rentals (page shows 1910 Rental of school facilities 6,952 (part of statement Other 37,613, p5))",,,,8
 Syracuse_Dunbar_Avoca_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Sale of Lunches'),,,,4
 Syracuse_Dunbar_Avoca_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('School Lunch Program'),,,,
+Syracuse_Dunbar_Avoca_Schools_FY2025,verifier,"receipts[24].category: verifier: User rule 2026-10-28: rental income is its own receipt category, Rentals (out of charges for services). (page shows 1910 Other Rentals of School Equipment, Property, and Facilities 750)",,,,6
+Syracuse_Dunbar_Avoca_Schools_FY2025,verifier,"detail[9].category: verifier: Should be category Rentals (user rule 2026-10-28); detail_category 'rentals' is right. (page shows 1910 Other Rentals of School Equipment, Property, and Facilities 750)",,,,6
 Syracuse_FY2025,schema,receipts: unknown category 'Ambulance Fees' ('Income Ambulance'),,,,4
 Syracuse_FY2025,schema,receipts: unknown category 'Recreation Fees' ('Park Receipts'),,,,4
 Syracuse_FY2025,schema,receipts: unknown category 'Recreation Fees' ('Pool/ Rec/Concessions Receipts'),,,,4
@@ -1197,6 +1463,10 @@ Syracuse_FY2025,schema,receipts: unknown category 'Rentals' ('Farm Rental'),,,,6
 Syracuse_FY2025,schema,detail: unknown revenue category 'Ambulance Fees' ('Income Ambulance'),,,,
 Syracuse_FY2025,schema,"detail: unknown revenue category 'Utility Charges' ('Permits, fees, and rent')",,,,
 Syracuse_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Charges for services'),,,,
+Syracuse_FY2025,verifier,missing: verifier: Notes do not end with 'Read pages 1-8 of 8' (text was appended after it). All 8 pages are covered and no statement/schedule line is missing; this is a formatting failure of the required page-count marker only. (page shows trimmed PDF has 8 pages),,,,8
+Syracuse_FY2025,verifier,"receipts[12].category: verifier: User rule 2026-10-28: cemetery receipts are their own receipt category, Cemetery Fees. (page shows Cemetary Receipts 12,261)",,,,4
+Syracuse_FY2025,verifier,"receipts[18].category: verifier: User rule 2026-10-28: utility fund sales/charges are category Utility Charges (the matching detail[24] line already uses Utility Charges). (page shows Combined Utilities Fund: Charges for services 3,803,763)",,,,6
+Syracuse_FY2025,verifier,"detail[23].category: verifier: This is the Farm Rental 40,453 (p6), recorded as category Rentals in receipts[20] and detail_category rentals here; category should be Rentals, not Utility Charges. (page shows Combined Utilities Fund: Permits, fees, and rent 40,453)",,,,8
 Talmage_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Charges for services'),,,,
 Talmage_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Charges for services'),,,,
 Talmage_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Charges for services'),,,,
@@ -1206,6 +1476,8 @@ Tecumseh_FY2025,schema,receipts: unknown category 'Rentals' ('Rent'),,,,6
 Tecumseh_Housing_Authority_-_Tecumseh_Manor_FY2025,schema,receipts: unknown category 'Rentals' ('Rental income'),,,,2
 Tekamah_Airport_Authority_FY2025,schema,receipts: unknown category 'Rentals' ('Hangar Rentals'),,,,2
 Tekamah_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Charges for services'),,,,
+Tekamah_FY2025,verifier,"receipts[6].category: verifier: lease/rental income has its own receipt category Rentals (user rule 2026-10-28, out of charges for services); the matching detail line already uses detail_category rentals (page shows Lease revenue 236,877)",,,,4
+Tekamah_FY2025,verifier,"detail[9].category: verifier: should be Rentals, consistent with its own detail_category rentals (page shows Lease revenue 236,877 (General Fund))",,,,4
 Tekamah_Herman_Community_School_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Lunchroom sales'),,,,7
 Tekamah_Herman_Community_School_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Sale of lunches'),,,,
 Tekamah_Housing_Authority_-_The_Village_FY2025,schema,receipts: unknown category 'Rentals' ('Rental income'),,,,2
@@ -1219,6 +1491,8 @@ Thedford_Public_Schools_FY2025,schema,receipts: unknown category 'School Lunch S
 Thedford_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('1611 Sale of lunches'),,,,
 Thedford_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('1612 Sale of school breakfasts'),,,,
 Thedford_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('1613 Sale of milk'),,,,
+Thedford_Public_Schools_FY2025,verifier,"receipts[4].category: verifier: postsecondary/tuition receipts are category Tuition Received under the user rules, not charges for services/fees (page shows 1955 Post secondary receipts 4,631.25)",,,,6
+Thedford_Public_Schools_FY2025,verifier,"detail[6].category: verifier: postsecondary/tuition receipts are category Tuition Received (detail_category tuition and fees is fine) (page shows 1955 Post secondary receipts 4,631.25)",,,,6
 Tilden_FY2025,schema,receipts: unknown category 'Utility Charges' ('Water Charges'),,,,7
 Tilden_FY2025,schema,receipts: unknown category 'Utility Charges' ('Sewer Charges'),,,,7
 Tilden_FY2025,schema,receipts: unknown category 'Utility Charges' ('Garbage Charges'),,,,7
@@ -1226,22 +1500,39 @@ Tilden_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Water 
 Tilden_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Sewer Charges'),,,,
 Tilden_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Garbage Charges'),,,,
 Tilden_Housing_Agency_-_Westwood_Homes_FY2025,schema,receipts: unknown category 'Rentals' ('Rental income'),,,,2
+Tobias_FY2025,verifier,"receipts[10].category: verifier: the extractor treats these utility-fund receipts as utility charges, but under the user rules (2026-10-28) utility fund sales/charges have their own receipt category, Utility Charges, not charges for services/fees. The amount itself is correct (page shows Local Receipts: Other - Sewer Fund 8,052, Water Fund 45,608)",,,,1
 TriCounty_Public_School_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Sale of lunches'),,,,3
 TriCounty_Public_School_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Sale of lunches'),,,,
 Two_Rivers_Public_Health_Department_FY2025,schema,receipts: unknown category 'Rentals' ('Rental income'),,,,4
 Two_Rivers_Public_Health_Department_FY2025,schema,detail: unknown revenue category 'Rentals' ('Rental income'),,,,
 UMO_N_HO_N_Nation_Public_School_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Nutrition program receipts'),,,,4
 UMO_N_HO_N_Nation_Public_School_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('1620 Sale of Lunches/Milk'),,,,
+UMO_N_HO_N_Nation_Public_School_FY2025,verifier,"receipts[7].category: verifier: The split piece is printed as rentals, and the user's rules give Rentals its own receipt category (taken out of charges for services). Category should be Rentals. (page shows 1910 Rentals of school equipment 34,213)",,,,6
+UMO_N_HO_N_Nation_Public_School_FY2025,verifier,"detail[6].category: verifier: Should be the Rentals receipt category (detail_category rentals is already right). It should also match receipts[7]. (page shows 1910 Rentals of school equipment 34,213)",,,,6
+UMO_N_HO_N_Nation_Public_School_FY2025,verifier,"disbursements[7].category: verifier: This line is the General Fund facilities lines 4700 Building improvements 20,032 + 4900 Other facilities acquisition & construction 300,666 (p8). It is not instruction, and the line's own review note says 'categorized support services', which contradicts the category. It fits Building and Grounds, capital outlay or support services. (page shows Operation of non-instructional services 320,698)",,,,4
 Uehling_FY2025,schema,receipts: unknown category 'Utility Charges' ('Garbage income'),,,,4
 Uehling_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Garbage income'),,,,
 Upper_Loup_NRD_FY2025,schema,receipts: unknown category 'Rentals' ('Rent income'),,,,4
 Upper_Niobrara_White_NRD_FY2025,schema,receipts: unknown category 'Rentals' ('Rent income'),,,,4
 Upper_Niobrara_White_NRD_FY2025,schema,detail: unknown revenue category 'Rentals' ('Rent income'),,,,
 Upper_Republican_NRD_FY2025,schema,receipts: unknown category 'Rentals' ('Rental income'),,,,6
+Utica_FY2025,verifier,"receipts[12].category: verifier: Utility fund sales belong in the user's Utility Charges receipt category (2026-10-28 rule), not charges for services/fees (page shows Operating revenues: Sales 361,661 (Water and Sewer Fund sales))",,,,7
+Utica_FY2025,verifier,"detail[12].category: verifier: Pool fees belong in the user's Recreation Fees receipt category (2026-10-28 rule); detail_category recreation/pool/park fees is right (page shows Pool - Charges for services 8,925)",,,,13
+Utica_FY2025,verifier,detail[15].category: verifier: Park fees belong in the user's Recreation Fees receipt category (2026-10-28 rule) (page shows Park - Charges for services 268),,,,13
 Valentine_Community_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('School Nutrition Program receipts'),,,,4
 Valentine_Community_Schools_FY2025,schema,detail: unknown revenue category 'Rentals' ('1910 Rental'),,,,
+Valentine_Community_Schools_FY2025,verifier,"detail[108].category: verifier: School nutrition sales belong in the user's School Lunch Sales receipt category (2026-10-28 rule); the matching statement receipt (receipts[12]) already uses School Lunch Sales, so the report is inconsistent (page shows School Nutrition Fund - Sales 202,716)",,,,14
+Valentine_FY2025,verifier,"receipts[15].category: verifier: Utility fund charges belong in the user's Utility Charges receipt category (2026-10-28 rule), not charges for services/fees (page shows Operating revenues: Charges for services 5,935,768 (Electric, Water, Sewer, Landfill funds))",,,,9
+Valentine_FY2025,verifier,"detail[10].category: verifier: Pool fees belong in the user's Recreation Fees receipt category (2026-10-28 rule) (page shows Pool - Charges for services 26,104)",,,,23
+Valentine_FY2025,verifier,"detail[19].category: verifier: Cemetery charges belong in the user's Cemetery Fees receipt category (2026-10-28 rule); detail_category cemetery fees is right (page shows Cemetery - Charges for services 16,613)",,,,23
+Valentine_FY2025,verifier,"detail[24].category: verifier: Park fees belong in the user's Recreation Fees receipt category (2026-10-28 rule) (page shows Park - Charges for services 35,839)",,,,23
+Valentine_FY2025,verifier,"detail[129].category: verifier: Golf fees belong in the user's Recreation Fees receipt category (2026-10-28 rule) (page shows Golf Fund - Charges for services 674,120)",,,,19
 Valley_FY2025,schema,receipts: unknown category 'Rentals' ('Rent'),,,,6
+Valley_FY2025,verifier,"receipts[9].category: verifier: utility fund metered sales are sales of water/sewer service; user rule puts utility fund sales/charges in Utility Charges, not charges for services/fees (page shows Metered sales 2,133,150 (Utilities fund))",,,,6
+Valparaiso_FY2025,verifier,"receipts[6].category: verifier: utility fund water/sewer charges belong in the user's Utility Charges category, not charges for services/fees (page shows Charges for services: Combined sewer and water 264,873 (Enterprise Fund))",,,,6
 Verdigre_FY2025,schema,receipts: unknown category 'Utility Charges' ('Charges for services: Trash'),,,,6
+Verdigre_FY2025,verifier,"receipts[9].category: verifier: utility fund sewer charges belong in Utility Charges per the user rule (2026-10-28), as the Trash line in the same statement already is (page shows Charges for services: Sewer 177,413 (Enterprise Fund))",,,,6
+Verdigre_FY2025,verifier,"receipts[10].category: verifier: utility fund water charges belong in Utility Charges per the user rule (2026-10-28) (page shows Charges for services: Water 137,474 (Enterprise Fund))",,,,6
 Verdigre_Housing_Agency_-_Czech_Alps_Terrace_FY2025,schema,receipts: unknown category 'Rentals' ('Rental income'),,,,2
 Verdigre_Public_School_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Lunch sales'),,,,8
 Waco_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Charges for services'),,,,
@@ -1265,12 +1556,15 @@ Wakefield_Public_Schools_FY2025,schema,detail: unknown revenue category 'Rentals
 Wallace_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Charge for services'),,,,
 Wallace_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Charge for services'),,,,
 Wallace_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Charge for services'),,,,
+Wallace_FY2025,verifier,"detail[17].category: verifier: this per-fund detail line is printed in the Street Fund column; under the listed-by-object rule its function is streets/highways. The $1 rounding issue that kept the top-level 72,025 line unsplit doesn't apply to the individual fund cells (page shows Operating expenses, Street column 20,058)",,,,4
+Wallace_FY2025,verifier,"detail[18].category: verifier: this line is printed in the Library Fund column, so its function is culture/recreation, not general government (page shows Operating expenses, Library column 3,016)",,,,4
 Wallace_Public_School_District_65_R_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Lunch sales'),,,,8
 Wallace_Public_School_District_65_R_FY2025,schema,"disbursements: unknown category 'Drivers Education' (""Summer school/driver's education"")",,,,6
 Wallace_Public_School_District_65_R_FY2025,schema,"detail: unknown expenditure category 'Drivers Education' (""1300 Summer school/driver's education"")",,,,
 Walthill_Public_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Nutrition program receipts'),,,,3
 Walthill_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('1620 Sale of Lunches/Milk'),,,,
 Washington_County_Agricultural_Society_FY2025,schema,receipts: unknown category 'Rentals' ('Rental income'),,,,4
+Washington_County_FY2025,verifier,"receipts[9].category: verifier: These are county office fees, and the extractor's own detail line for the General Fund 'Offices' 1,183,385 (detail[6]) uses detail_category 'fees of office'. The user rule (2026-10-28) makes Fees of Office its own receipt category, separate from charges for services, so this line should be Fees of Office. detail[6].category has the same problem. (page shows Offices 1,211,990)",,,,4
 Waterloo_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('User fees - water'),,,,
 Waterloo_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Late fees'),,,,
 Waterloo_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Hookup fees'),,,,
@@ -1322,6 +1616,7 @@ Winnebago_Public_Schools_FY2025,schema,detail: unknown revenue category 'School 
 Wisner_Pilger_Public_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Nutrition program receipts'),,,,4
 Wisner_Pilger_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('1611 Daily sales - school lunch program'),,,,
 Wisner_Pilger_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('1612 Daily sales - school breakfast program'),,,,
+Wisner_Pilger_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('1620 Daily sales - non-reimbursable programs'),,,,
 Wood_River_Housing_Authority_-_Overland_Trails_Oasis_FY2025,schema,receipts: unknown category 'Rentals' ('Rental income'),,,,2
 Wood_River_Rural_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Lunch sales'),,,,9
 Wood_River_Rural_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Lunch sales'),,,,
@@ -1334,9 +1629,12 @@ Wynot_Public_Schools_FY2025,schema,detail: unknown revenue category 'Rentals' ('
 Wyuka_Cemetery_Operations_Fund_1_FY2025,schema,receipts: unknown category 'Rentals' ('Rental Income'),,,,3
 York_FY2025,schema,receipts: unknown category 'Rentals' ('Rent income'),,,,9
 York_Housing_Agency_-_Leisure_Home_FY2025,schema,receipts: unknown category 'Rentals' ('Rental Income'),,,,3
+York_Public_Schools_FY2025,schema,receipts: unknown category 'School Lunch Sales' ('Other local receipts (school nutrition sales)'),,,,14
 York_Public_Schools_FY2025,schema,detail: unknown revenue category 'Rentals' ('1910 Rental of school facilities'),,,,
 York_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Sales - lunch'),,,,
 York_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Sales - breakfast'),,,,
+York_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Sales - non-reimbursable'),,,,
+York_Public_Schools_FY2025,schema,detail: unknown revenue category 'School Lunch Sales' ('Sales - summer food program'),,,,
 Yutan_FY2025,schema,receipts: unknown category 'Utility Charges' ('Utility sales'),,,,6
 Yutan_FY2025,schema,receipts: unknown category 'Rentals' ('Rental income'),,,,6
 Yutan_FY2025,schema,detail: unknown revenue category 'Utility Charges' ('Utility sales'),,,,
