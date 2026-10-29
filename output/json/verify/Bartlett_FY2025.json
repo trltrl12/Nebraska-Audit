@@ -1,12 +1,9 @@
 {
   "stem": "Bartlett_FY2025",
-  "values_checked": 45,
+  "values_checked": 38,
   "issues": [
-    {"severity": "warning", "path": "receipts[11].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Sewer Fund column) 10,371.00",
-     "issue": "assumed to be utility charges, but the page prints only 'Other'. If that's right, the user's rule category is Utility Charges. The original_label adds '(Sewer Fund)', which isn't printed."},
-    {"severity": "warning", "path": "receipts[12].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Water Fund column) 14,438.00",
-     "issue": "assumed to be utility charges, but the page prints only 'Other'. If that's right, the user's rule category is Utility Charges. The original_label adds '(Water Fund)', which isn't printed."}
+    {"severity": "warning", "path": "receipts[11].category", "page": 1, "extracted": "Utility Charges", "on_page": "Local Receipts: Other 10,371.00 (Sewer Fund) / 14,438.00 (Water Fund)", "issue": "Category is assumed for both receipts[11] and receipts[12]. Each is its fund's only receipt, but the report gives no breakdown (review notes already present)."},
+    {"severity": "warning", "path": "receipts[11].original_label", "page": 1, "extracted": "Local Receipts: Other (Sewer Fund)", "on_page": "Local Receipts: Other", "issue": "The label has the fund name appended, so it is not as printed (same for receipts[12] '(Water Fund)'). Use the 'fund' field instead."},
+    {"severity": "warning", "path": "disbursements[4].fund_type", "page": 2, "extracted": "governmental", "on_page": "Solid Waste 21,390.00 (General Fund column, Business-Type Activities row)", "issue": "Kept as governmental because it is paid from the General Fund. This is defensible, but it sits on a business-type row (review note present)."}
   ]
 }

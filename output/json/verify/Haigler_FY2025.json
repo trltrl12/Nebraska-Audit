@@ -3,16 +3,19 @@
   "values_checked": 45,
   "issues": [
     {"severity": "warning", "path": "receipts[11].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other, Water Fund 85,393.34",
-     "issue": "Same assumed utility-charge line is 'Utility Charges' for Solid Waste (receipts[13]) but 'charges for services/fees' here; under the 2026-10-28 rule utility fund charges are Utility Charges. config/category_decisions.csv maps 'local receipts other water fund' to other. Inconsistent within the report."},
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other (Water Fund) 85,393.34",
+     "issue": "Printed only as 'Other' with no breakdown, so treating it as water collections is an assumption."},
     {"severity": "warning", "path": "receipts[12].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other, Wastewater Fund 33,582.88",
-     "issue": "Same inconsistency as receipts[11]: Utility Charges (as receipts[13]) or other per the decision table."},
-    {"severity": "warning", "path": "receipts[9].original_label", "page": 1,
-     "extracted": "Local Receipts: Other (General Fund)", "on_page": "Local Receipts: Other",
-     "issue": "Fund names appended in parentheses to printed labels (receipts[9]-[13], disbursements[6] 'Debt Service (Water Fund column)', balance-sheet '(line 26)/(line 27)' labels)."},
-    {"severity": "warning", "path": "reported_totals.business-type.disbursements.includes_split", "page": 3,
-     "extracted": "includes [] plus non-schema includes_split 40,973.31", "on_page": "line 52 total 155,730.10 includes transfers out 40,973.31",
-     "issue": "Printed total includes the transfers out (114,756.79 + 40,973.31 = 155,730.10, verified); recorded with a non-standard field that validation may not recognise."}
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other (Wastewater Fund) 33,582.88",
+     "issue": "Printed only as 'Other' with no breakdown, so treating it as wastewater collections is an assumption."},
+    {"severity": "warning", "path": "receipts[13].category", "page": 1,
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other (Solid Waste Fund) 37,162.09",
+     "issue": "Printed only as 'Other' with no breakdown, so treating it as solid waste collections is an assumption."},
+    {"severity": "warning", "path": "disbursements[6].fund_type", "page": 3,
+     "extracted": "business-type", "on_page": "Line 39 Debt Service 30,186.51 (Water Fund column, under the Governmental heading)",
+     "issue": "Printed under the Governmental heading but paid from the Water Fund; treated as business-type by column. Defensible."},
+    {"severity": "warning", "path": "notes", "page": null,
+     "extracted": "'Read pages 1-5 of 5' followed by later recheck text", "on_page": "5 pages",
+     "issue": "The notes don't end with 'Read pages 1-5 of 5' because later attempt notes follow it. All 5 pages were checked and no lines are missing."}
   ]
 }

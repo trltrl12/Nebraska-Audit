@@ -1,12 +1,15 @@
 {
   "stem": "Chambers_FY2025",
-  "values_checked": 46,
+  "values_checked": 41,
   "issues": [
-    {"severity": "warning", "path": "receipts[10].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other - Enterprise-Sewer 97,840; Enterprise-Water 111,259 (receipts[11])",
-     "issue": "these are assumed to be utility user charges; if so, the user's Utility Charges category (utility fund collections) applies rather than charges for services/fees. The printed label is only 'Other', so the extractor's assumption stays on review"},
+    {"severity": "warning", "path": "disbursements[4].fund_type", "page": 2,
+     "extracted": "governmental", "on_page": "Solid Waste 65,278.00 (line 45, Business-Type Activities section, General Fund column)",
+     "issue": "printed under Business-Type Activities but paid from the General Fund; kept governmental so the General Fund roll-forward ties. Defensible, already marked review"},
+    {"severity": "warning", "path": "disbursements[5].original_label", "page": 2,
+     "extracted": "Capital Improvements (Sewer)", "on_page": "Capital Improvements 8,791.00 (Enterprise - Sewer)",
+     "issue": "user rule: capital outlay lines labelled 'Capital Outlay: <function>' (printed text in printed_label); same for disbursements[6] 'Capital Improvements (Water)' 50,971 and disbursements[7] 'Other Capital Outlay (Sewer)' 2,191 and disbursements[2] 'Other Capital Outlay' 21,020; not applied (user_rules.py should relabel)"},
     {"severity": "warning", "path": "beginning_cash", "page": 1,
-     "extracted": -731, "on_page": "Net Cash Balance General (221,701) + Street 202,470 = (19,231); Investments 18,500",
-     "issue": "beginning_cash and ending_cash (93,381) are the cash + investments subtotals (lines 3/24), and beginning_/ending_investments are null although the statement reports investments separately. The roll-forward ties and the choice is explained in notes, but the field rules treat separately reported investments as informational"}
+     "extracted": -731, "on_page": "Line 3 subtotal: General (203,201.00) + Street 202,470.00 (includes General investments 18,500.00)",
+     "issue": "beginning_cash/ending_cash (93,381) include governmental investments (18,500 / 19,056) while beginning_investments/ending_investments are null; arithmetic is right and explained in notes, but cash alone is -19,231 / 74,325"}
   ]
 }

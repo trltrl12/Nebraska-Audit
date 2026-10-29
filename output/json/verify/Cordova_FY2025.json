@@ -1,15 +1,21 @@
 {
   "stem": "Cordova_FY2025",
-  "values_checked": 40,
+  "values_checked": 42,
   "issues": [
-    {"severity": "warning", "path": "receipts[9].fund_type", "page": 1,
-     "extracted": "governmental", "on_page": "Light Fund: Local Receipts: Other 20,540.16; General Government 1,080.56; Transfers Out 18,553.17",
-     "issue": "Light Fund treated as governmental. It may be an electric utility (or utility lease) fund; the statement prints its spending under General Government and no electric utility lines, so the choice is defensible but an assumption."},
     {"severity": "warning", "path": "receipts[10].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Water Fund 51,882.76; Sewer Fund 12,698.27 p2)",
-     "issue": "Water/Sewer 'Local Receipts: Other' presumed to be utility fees (also receipts[11]); the page doesn't describe them. If they are utility sales, the user's 2026-10-28 rule category would be Utility Charges."},
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other (Water Fund) 51,882.76",
+     "issue": "Printed label is 'Other' with no breakdown; Utility Charges presumed because it is the Water Fund's only receipt (already marked review)"},
+    {"severity": "warning", "path": "receipts[11].category", "page": 2,
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other (Sewer Fund) 12,698.27",
+     "issue": "Printed label is 'Other' with no breakdown; Utility Charges presumed because it is the Sewer Fund's only receipt (already marked review)"},
     {"severity": "warning", "path": "receipts[10].original_label", "page": 1,
      "extracted": "Local Receipts: Other (Water Fund)", "on_page": "Local Receipts: Other",
-     "issue": "Fund name appended to the printed label (same for receipts[11], disbursements[4], [5], [6])"}
+     "issue": "Fund name appended to the printed label (same for receipts[11] '(Sewer Fund)', disbursements[4-6]); not printed text"},
+    {"severity": "warning", "path": "receipts[9].fund_type", "page": 1,
+     "extracted": "governmental", "on_page": "Light Fund: Local Receipts: Other 20,540.16; General Government 1,080.56; transfers out 18,553.17",
+     "issue": "Light Fund treated as governmental (its only spending is on the governmental General Government line; no electric utility lines). Defensible, but a 'Light Fund' may be an electric/lighting enterprise fund; its 20,540.16 receipts sit in governmental 'other'"},
+    {"severity": "warning", "path": "disbursements[2].original_label", "page": 3,
+     "extracted": "Capital Improvements", "on_page": "Capital Improvements (Street 4,700.00 + CC Building 21,750.00 + Ballfield 1,998.93 = 28,448.93)",
+     "issue": "User rule relabels capital outlay lines 'Capital Outlay: <function>' with printed text in printed_label; this line spans several funds, so no single function applies and it was left as printed"}
   ]
 }

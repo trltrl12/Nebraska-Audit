@@ -1,18 +1,18 @@
 {
   "stem": "Palisade_FY2025",
-  "values_checked": 48,
+  "values_checked": 40,
   "issues": [
     {"severity": "warning", "path": "receipts[11].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other 134,413.77 (Water Fund column)",
-     "issue": "printed label is 'Other'; utility charges assumed (review set). Inconsistent with receipts[13] (Trash) which uses Utility Charges; the user's 2026-10-28 rule names utility fund sales Utility Charges (same for receipts[12] Sewer 64,407.59)"},
-    {"severity": "warning", "path": "receipts[11].original_label", "page": 1,
-     "extracted": "Local Receipts: Other (Water Fund)", "on_page": "Local Receipts: Other",
-     "issue": "fund name appended to the printed label (also receipts[12], receipts[13], disbursements[5] 'Debt Service (Water Fund column)')"},
-    {"severity": "warning", "path": "disbursements[5].fund_type", "page": 2,
-     "extracted": "business-type", "on_page": "Debt Service 42,962.00 (line 39, under 'Governmental:' heading, Water Fund column)",
-     "issue": "printed under the Governmental heading but in the Water Fund column; business-type treatment is defensible and ties to the Water Fund total 99,968.49 (review set)"},
-    {"severity": "warning", "path": "disbursements[3].original_label", "page": 2,
-     "extracted": "Other Capital Outlay", "on_page": "Other Capital Outlay (General Fund column)",
-     "issue": "capital outlay line not relabelled 'Capital Outlay: <function>' per user rule 2026-10-26; user_rules.py may apply it"}
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other (Water Fund) 134,413.77",
+     "issue": "label is 'Other' with no breakdown printed; utility charges is an assumption (review note present)"},
+    {"severity": "warning", "path": "receipts[12].category", "page": 1,
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other (Sewer Fund) 64,407.59",
+     "issue": "label is 'Other' with no breakdown printed; utility charges is an assumption (review note present)"},
+    {"severity": "warning", "path": "receipts[13].category", "page": 1,
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other (Trash Fund) 49,891.84",
+     "issue": "label is 'Other' with no breakdown printed; utility charges is an assumption (review note present)"},
+    {"severity": "warning", "path": "disbursements[5].original_label", "page": 2,
+     "extracted": "Debt Service (Water Fund column)", "on_page": "Debt Service",
+     "issue": "the fund name is added to the printed label (same on receipts[11]-[13] 'Local Receipts: Other (… Fund)'); amounts are correct"}
   ]
 }

@@ -2,8 +2,17 @@
   "stem": "Guide_Rock_FY2025",
   "values_checked": 40,
   "issues": [
+    {"severity": "warning", "path": "disbursements[6].fund_type", "page": 2,
+     "extracted": "governmental / utilities 33,268.15", "on_page": "Line 45 Solid Waste 33,268.15 (General Fund column, under Business-Type Activities heading)",
+     "issue": "Solid Waste is printed under the Business-Type Activities heading but paid from the General Fund; kept governmental by column. Defensible, but the user may prefer business-type."},
     {"severity": "warning", "path": "receipts[10].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Sewer Fund) 35,877.26; also receipts[11] Water Fund 89,894.69",
-     "issue": "Labelled Other on the form; if treated as utility fund collections, the user's 2026-10-28 rule puts utility fund sales/charges in Utility Charges rather than charges for services/fees"}
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other (Sewer Fund) 35,877.26",
+     "issue": "Printed only as 'Other'. The report gives no breakdown, so treating it as sewer collections is an assumption."},
+    {"severity": "warning", "path": "receipts[11].category", "page": 1,
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other (Water Fund) 89,894.69",
+     "issue": "Printed only as 'Other'. The report gives no breakdown, so treating it as water collections is an assumption."},
+    {"severity": "warning", "path": "receipts[9].category", "page": 1,
+     "extracted": "other 67,682.98", "on_page": "Local Receipts: Other General 67,032.98 + Street 650.00",
+     "issue": "About 30% of governmental receipts are in other. The General Fund also pays Solid Waste (33,268.15), so this line probably includes garbage collections (Utility Charges), but the page prints no breakdown."}
   ]
 }

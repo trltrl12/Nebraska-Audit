@@ -1,7 +1,15 @@
 {
   "stem": "Nickerson_FY2025",
-  "values_checked": 46,
+  "values_checked": 36,
   "issues": [
-    {"severity": "warning", "path": "receipts[11].category", "page": 1, "extracted": "charges for services/fees", "on_page": "Local Receipts: Other 57,130.81 (Sewer Fund)", "issue": "Printed only as 'Other'; treating it as sewer charges (charges for services / Utility Charges) is a reasonable guess but not stated on the page. Already marked review."}
+    {"severity": "warning", "path": "balance_sheet.equity[0].category", "page": 1,
+     "extracted": null, "on_page": "Subtotal of Ending Balances (Line 26 + 27)",
+     "issue": "equity lines have no category field (both governmental and business-type entries); amounts tie (545,778.91 / 72,025.49)"},
+    {"severity": "warning", "path": "balance_sheet.assets", "page": 1,
+     "extracted": "not included", "on_page": "County Treasurer Balance at September 30, 2025 2,857.19 (October 1, 2024 1,861.77)",
+     "issue": "county treasurer balances are printed outside lines 24/28 and left out (stated in notes); user rule treats county treasurer balances as Cash and Cash Equivalents, so whether they belong in the balance sheet is a judgment call"},
+    {"severity": "warning", "path": "receipts[11].category", "page": 1,
+     "extracted": "other", "on_page": "Local Receipts: Other (Sewer Fund) 57,130.81",
+     "issue": "Sewer Fund local receipts are probably sewer user charges (Utility Charges), but the page prints no breakdown and the user's category decision put it in other; kept as defensible"}
   ]
 }

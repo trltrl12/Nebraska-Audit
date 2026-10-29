@@ -1,18 +1,12 @@
 {
   "stem": "Maxwell_FY2025",
-  "values_checked": 40,
+  "values_checked": 36,
   "issues": [
     {"severity": "warning", "path": "receipts[9].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other, Enterprise Fund 121,548.77",
-     "issue": "The Enterprise fund's only receipt is presumably utility charges, which the user's rule (2026-10-28) puts in category Utility Charges. The label only says 'Other', so user_rules.py won't change it. The category is an assumption (marked review)."},
-    {"severity": "warning", "path": "decision_needed", "page": 3,
-     "extracted": "transfers_in 10,000 and transfers_out 10,000, both General Fund column", "on_page": "Schedule of Interfund Transfers: General -> Ambulance 10,000.00; Exhibit A line 20 and line 50 both in the General Fund column",
-     "issue": "The transfer goes to an 'Ambulance' fund that has no column, yet both the inflow and the outflow are in the General Fund column. Whether Ambulance is a separate fund that's missing from the statement is a question for a person, and decision_needed[] doesn't include it. The roll-forward still holds."},
-    {"severity": "warning", "path": "disbursements[4].original_label", "page": 2,
-     "extracted": "Capital Improvements", "on_page": "Line 35 Capital Improvements (Street 1,412.25, Enterprise 17,382.18)",
-     "issue": "The capital outlay lines (disbursements[4]-[7]) were not relabelled 'Capital Outlay: <function>' (user rule 2026-10-26/28)."},
-    {"severity": "warning", "path": "balance_sheet.assets", "page": 1,
-     "extracted": "not recorded", "on_page": "County Treasurer Balance at October 1, 2024 $2,270.94; at September 30, 2025 4,206.20",
-     "issue": "The county treasurer balances are not recorded or mentioned. They are outside the line 28 total, but the user's rule treats county treasurer cash as Cash and Cash Equivalents."}
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other (Enterprise Fund) 121,548.77",
+     "issue": "label is 'Other' with no breakdown printed; utility charges is an assumption (review note present)"},
+    {"severity": "warning", "path": "disbursements[4].split_from", "page": 2,
+     "extracted": "Capital Improvements total 18,794.43 (p2): Street Fund column", "on_page": "Street 1,412.25 / Enterprise 17,382.18 printed in separate fund columns",
+     "issue": "amounts are correct and printed per fund column, so they are not really splits; split_from (also on disbursements[5]-[7]) is unnecessary and may send these lines to review"}
   ]
 }

@@ -1,16 +1,21 @@
 {
   "stem": "Salem_FY2025",
-  "values_checked": 45,
+  "values_checked": 43,
   "issues": [
-    {"severity": "warning", "path": "receipts[12].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Enterprise Fund) 31,524.66",
-     "issue": "printed only as 'Local Receipts: Other'; treating it as water charges is an assumption (if accepted, the user's Utility Charges category would apply). Line carries review."},
-    {"severity": "warning", "path": "report_discrepancies", "page": 2,
-     "extracted": null, "on_page": "Voided (red X) duplicate of Exhibit A p1: lines 26-28 Street/Enterprise/Cemetery values shifted (e.g. Street net cash 29,009.47, investments 27,790.53)",
-     "issue": "the differing crossed-out version is described only in notes, not recorded in report_discrepancies; unmarked p1 correctly used (agrees with p4 investments schedule)"},
-    {"severity": "warning", "path": "balance_sheet.equity", "page": 1,
-     "extracted": "General Fund ending balance / Street Fund ending balance / Enterprise Fund ending balance / Cemetery Fund ending balance",
-     "on_page": "Line 24 'Ending Balance' / line 28 'Subtotal of Ending Balances' per fund column",
-     "issue": "equity original_labels are composed by the extractor, not the printed row label; amounts are right and sum to 283,639.26"}
+    {"severity": "warning", "path": "receipts[11].category", "page": 1,
+     "extracted": "other", "on_page": "Local Receipts: Other (Cemetery Fund column) 6,249.63",
+     "issue": "this is the Cemetery Fund's only receipt and is probably cemetery lot sales/fees (Cemetery Fees). The page gives no breakdown, so 'other' with review is defensible."},
+    {"severity": "warning", "path": "disbursements[1].category", "page": 3,
+     "extracted": "general government", "on_page": "General Government (line 29), Street Fund 16,797.45; Cemetery Fund 3,327.96",
+     "issue": "Street Fund spending (streets/highways) and Cemetery Fund spending (health/welfare, disbursements[2]) are printed on the General Government line and kept there. This is defensible as printed and already marked review."},
+    {"severity": "warning", "path": "receipts[0].original_label", "page": 1,
+     "extracted": "Personal and Real Property Taxes (General Fund)", "on_page": "Personal and Real Property Taxes",
+     "issue": "the user rename to 'Property Tax' has not been applied, and the '(General Fund)' suffix may stop user_rules.py from matching it. Fund suffixes on all receipt/disbursement labels are not printed text."},
+    {"severity": "warning", "path": "balance_sheet.equity[0].original_label", "page": 1,
+     "extracted": "General Fund ending balance", "on_page": "Subtotal of Ending Balances (Line 26 + 27)",
+     "issue": "equity labels (all 4 lines) are composed, not printed, and have no category. Amounts tie to line 28 (283,639.26 total)."},
+    {"severity": "warning", "path": "balance_sheet.assets[1].amount", "page": 1,
+     "extracted": -16989.61, "on_page": "(16,989.61) Enterprise Net Cash Balance",
+     "issue": "a negative cash balance (overdraft) is recorded as a negative asset, as printed. Note that the crossed-out duplicate p2 shows the line 26-28 columns shuffled, though with the same totals."}
   ]
 }

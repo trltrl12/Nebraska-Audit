@@ -1,9 +1,15 @@
 {
   "stem": "Manley_FY2025",
-  "values_checked": 34,
+  "values_checked": 32,
   "issues": [
-    {"severity": "warning", "path": "disbursements[1].category", "page": 2,
-     "extracted": "general government", "on_page": "Miscellaneous 65,716.45 (line 40, General Fund)",
-     "issue": "printed line is 'Miscellaneous' (a function line, not an object listing as the review note says); fund-function categories (general government / streets / culture-recreation for lines [1]-[3]) are a judgment call"}
+    {"severity": "warning", "path": "reported_totals.business-type.receipts.includes", "page": 1,
+     "extracted": [], "on_page": "Total Receipts Sewer 36,248.32 + Water 26,627.32 = 62,875.64, includes the 5,957.44 Sewer-to-Water transfer in (line 20)",
+     "issue": "the printed business-type totals (receipts 62,875.64 and disbursements 36,424.43) include the 5,957.44 internal transfer. The extractor documented this in the non-standard field 'includes_split' and left 'includes' empty. The listed lines add up to 56,918.20 and 30,466.99, and the roll-forward still holds because the transfer nets to zero."},
+    {"severity": "warning", "path": "receipts[7].category", "page": 1,
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other (Sewer 36,248.32; Water 20,669.88)",
+     "issue": "category is an assumption for receipts[7] and receipts[8]: the report prints no breakdown (already marked review). Amounts are correct."},
+    {"severity": "warning", "path": "disbursements[1].original_label", "page": 2,
+     "extracted": "Miscellaneous (General Fund)", "on_page": "Miscellaneous",
+     "issue": "the extractor added fund names to the printed labels (also disbursements[2], disbursements[3], receipts[7], receipts[8]). The function assigned by fund (general government / streets / culture-recreation) is a judgment call and is marked review."}
   ]
 }

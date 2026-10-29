@@ -1,18 +1,19 @@
 {
   "stem": "Crawford_FY2025",
-  "values_checked": 112,
+  "values_checked": 95,
   "issues": [
     {"severity": "warning", "path": "decision_needed", "page": 7,
-     "extracted": "General Fund 'Transfers In' 7,744 (detail, other financing); no decision_needed entry", "on_page": "p7 'Transfer in' 7,744; p3 shows the same 7,744 as Insurance Proceeds, General Fund Transfers In '-', and no fund prints a matching 7,744 transfer out",
-     "issue": "This is a one-sided transfer: a transfer in with no sending fund. The report labels the same money as insurance proceeds on one page and as a transfer on another. It is in report_discrepancies but not in decision_needed. A person needs to decide whether this is a transfer or insurance revenue."},
-    {"severity": "warning", "path": "detail[7].original_label", "page": 7,
-     "extracted": "Capital improvements (category capital outlay)", "on_page": "Capital improvements 141,410",
-     "issue": "Under the user rule (2026-10-26/28), a capital outlay line should be labelled 'Capital Outlay: <function>' with the printed text in printed_label. Detail lines 7, 8, 17 and 18 (Capital improvements / Other capital outlay) were not relabelled."},
-    {"severity": "warning", "path": "disbursements[8].function", "page": 5,
-     "extracted": "culture/recreation", "on_page": "Golf Fund column (business-type) cost-type lines",
-     "issue": "The Golf Fund cost-type lines (disbursements 8, 10, 12, 14, 16, 18, 20) have function culture/recreation. The rule for business-type cost-type lines says function 'utilities'. Culture/recreation is defensible for a golf course, but it is a judgment call."},
+     "extracted": "detail 'Transfers In' 7,744 (other financing); receipts Insurance Proceeds 7,744",
+     "on_page": "p7 General Fund 'Transfer in' 7,744; p3 shows the same 7,744 as Insurance Proceeds and General Fund Transfers In blank",
+     "issue": "one-sided transfer (no sending fund shows a 7,744 transfer out) recorded only in report_discrepancies; no decision_needed[] entry for the user to settle whether it is a transfer or insurance proceeds"},
     {"severity": "warning", "path": "detail[3].category", "page": 7,
-     "extracted": "intergovernmental/state aid (Other state receipts 467,473)", "on_page": "Other state receipts 467,473 (p3: operating grants 253,154 + sales taxes 214,319)",
-     "issue": "Mixed line: 46% of it is sales tax. The dominant category is used, and the line is flagged for review."}
+     "extracted": "intergovernmental/state aid / other state aid", "on_page": "Other state receipts 467,473",
+     "issue": "broad line holds General Fund sales tax 214,319 (p3) plus operating grants 253,154; state aid is only ~54%; review note present but sales tax share is large"},
+    {"severity": "warning", "path": "detail[7].original_label", "page": 7,
+     "extracted": "Capital improvements", "on_page": "Capital improvements 141,410",
+     "issue": "category capital outlay but label not 'Capital Outlay: <function>' per user rule 2026-10-26/28 (same for detail[8], detail[17], detail[18]); user_rules.py should relabel"},
+    {"severity": "warning", "path": "receipts[4].category", "page": 3,
+     "extracted": "keno/lottery", "on_page": "Charges for Services (Keno Fund column) 44,252",
+     "issue": "category inferred from the fund name; the page prints it as Charges for Services (review note already present)"}
   ]
 }

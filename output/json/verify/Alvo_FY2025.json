@@ -1,12 +1,8 @@
 {
   "stem": "Alvo_FY2025",
-  "values_checked": 34,
+  "values_checked": 30,
   "issues": [
-    {"severity": "warning", "path": "disbursements[4].category", "page": 3,
-     "extracted": "other", "on_page": "Miscellaneous: General 23.08, Street 30,273.06 (total 30,296.14)",
-     "issue": "Line is printed as Miscellaneous, so 'other' is defensible. But 30,273.06 of it is in the Street Fund column, and that part could be streets/highways under the fund-function rule."},
-    {"severity": "warning", "path": "receipts[6].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Water/Sewer column) 47,878.98",
-     "issue": "This is the Water/Sewer fund's only receipt line. Under the user's 2026-10-28 rule, utility fund sales/charges are category 'Utility Charges', not charges for services/fees. The printed label itself only says 'Other'."}
+    {"severity": "warning", "path": "receipts[6].category", "page": 1, "extracted": "Utility Charges", "on_page": "Local Receipts: Other 47,878.98 (Water/Sewer column)", "issue": "Category is assumed. The line is the Water/Sewer fund's only receipt, but the report gives no breakdown (review note already present)."},
+    {"severity": "warning", "path": "balance_sheet.assets[0].category", "page": 1, "extracted": "cash and investments", "on_page": "Net Cash Balance 26,338.55 / (1,673.90) / 4,350.35; Investments -", "issue": "Investments are zero, so the ending balance is all cash. Under the rules this should be Cash and Cash Equivalents ('cash and investments' is only for lines that combine both). The same applies to assets[1]."}
   ]
 }

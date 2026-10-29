@@ -1,15 +1,16 @@
 {
   "stem": "Swanton_FY2025",
-  "values_checked": 42,
+  "values_checked": 44,
   "issues": [
-    {"severity": "warning", "path": "receipts[16].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Enterprise Fund) 101,533",
-     "issue": "the extractor assumed these are utility charges. If so, the user rule category is Utility Charges (utility fund sales/charges), not charges for services/fees. The printed label is only 'Other', so the line could also be category other"},
     {"severity": "warning", "path": "decision_needed", "page": 1,
-     "extracted": "Local Receipts: Other (General Fund) 90,404 -> other", "on_page": "Local Receipts: Other 90,404 (58% of governmental receipts 155,810)",
-     "issue": "an unexplained line that is most of the year's governmental receipts. Under the rules this question needs a person to decide what it is (the village also has a credit line, p3), but decision_needed is empty"},
-    {"severity": "warning", "path": "receipts[0].original_label", "page": 1,
-     "extracted": "Personal and Real Property Taxes (General Fund)", "on_page": "Personal and Real Property Taxes",
-     "issue": "the user's label rule renames 'Personal and Real Property Taxes' to 'Property Tax' (printed text in printed_label), but it was not applied here or in receipts[11]. Likewise disbursements[3] 'Other Capital Outlay' was not relabelled 'Capital Outlay: <function>'"}
+     "extracted": [],
+     "on_page": "Local Receipts: Other - General Fund 90,404 (58% of governmental receipts excl. transfers); Enterprise Fund 101,533 (90% of business-type receipts)",
+     "issue": "Unexplained 'Other' lines are most of each fund type's receipts and, per the extractor's own note, could include credit-line draws (credit line 57,611, p3). This is a question only a person can settle, but decision_needed[] is empty."},
+    {"severity": "warning", "path": "receipts[16].category", "page": 1,
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other (Enterprise Fund) 101,533",
+     "issue": "Printed only as 'Other' with no breakdown anywhere in the PDF. Utility Charges is plausible for an enterprise fund, but it is an assumption (review note present)."},
+    {"severity": "warning", "path": "balance_sheet.equity", "page": 1,
+     "extracted": "no category on either equity line", "on_page": "Ending Balance (line 24) 131,196 + 7,901 / 65,680",
+     "issue": "Equity lines have no category field."}
   ]
 }

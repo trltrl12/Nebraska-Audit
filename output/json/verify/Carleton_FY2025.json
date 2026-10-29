@@ -1,18 +1,15 @@
 {
   "stem": "Carleton_FY2025",
-  "values_checked": 46,
+  "values_checked": 38,
   "issues": [
-    {"severity": "warning", "path": "receipts[8].category", "page": 1,
-     "extracted": "other", "on_page": "Local Receipts: Other 120,400.87 governmental (General 38,592.66 + Cemetery 2,021.63 + TIF 79,786.58)",
-     "issue": "TIF Fund 79,786.58 is two-thirds of the line and is almost certainly tax increment (property tax); the page doesn't say so, so 'other' is defensible, but worth a look"},
     {"severity": "warning", "path": "receipts[9].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other 46,162.22 (Utilities Fund)",
-     "issue": "If these are water/wastewater collections the user's category is Utility Charges, not charges for services/fees; the label itself says Other"},
-    {"severity": "warning", "path": "report_discrepancies", "page": 2,
-     "extracted": [], "on_page": "Void (red X) copy of Exhibit A p1: line 26 net cash 441,068.19 / line 27 investments 145,000.00 / Cemetery Endowment net cash 22,250.00",
-     "issue": "The crossed-out version's differing figures are only described in notes; the void-page rule asks for them in report_discrepancies"},
-    {"severity": "warning", "path": "disbursements[2].original_label", "page": 3,
-     "extracted": "Capital Improvements / Other Capital Outlay / Capital Improvements (Utilities Fund)", "on_page": "Capital Improvements 3,650.00 (Cemetery), Other Capital Outlay 32,220.00, Capital Improvements 78,382.42 (Utilities)",
-     "issue": "Capital outlay lines not relabelled 'Capital Outlay: <function>' with printed_label per user rule (disbursements[2], [3], [6])"}
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other (Utilities Fund) 46,162.22",
+     "issue": "page prints no breakdown; treating the Utilities Fund's only receipt line as utility charges is an assumption (likely right, already marked review)"},
+    {"severity": "warning", "path": "receipts[8].category", "page": 1,
+     "extracted": "other", "on_page": "Local Receipts: Other 38,592.66 + 2,021.63 + 79,786.58 (TIF Fund)",
+     "issue": "governmental 'other' is 63% of governmental receipts; the TIF Fund's 79,786.58 is probably tax increment (property tax), but the page does not say so; already marked review"},
+    {"severity": "warning", "path": "decision_needed", "page": 2,
+     "extracted": null, "on_page": "page 2 is a red-X copy of Exhibit A p1 with lines 26/27 ending split 441,068.19 / 145,000.00",
+     "issue": "possibly voided page with different figures; extractor used unmarked p1 (agrees with investments schedule p4, 164,950.00) but no decision_needed entry was added"}
   ]
 }

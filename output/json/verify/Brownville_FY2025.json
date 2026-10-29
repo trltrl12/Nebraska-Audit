@@ -1,22 +1,38 @@
 {
   "stem": "Brownville_FY2025",
-  "values_checked": 50,
+  "values_checked": 51,
   "issues": [
-    {"severity": "warning", "path": "receipts[14].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Water Fund) 48,754.20",
-     "issue": "Assumed to be water charges; if so the user's 2026-10-28 rule puts utility fund charges in Utility Charges, not charges for services/fees. The page only says 'Other'."},
-    {"severity": "warning", "path": "receipts[15].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Sewer Fund) 61,882.71",
-     "issue": "Assumed to be sewer charges; if so the category should be Utility Charges (user rule 2026-10-28). The page only says 'Other'."},
-    {"severity": "warning", "path": "disbursements[2].category", "page": 7,
-     "extracted": "general government", "on_page": "Volunteer Fire Dept column, line 29 General Government 2,968.98",
-     "issue": "This is fire department spending printed on the General Government row. Recording it as printed is defensible, but its function is public safety."},
-    {"severity": "warning", "path": "report_discrepancies", "page": 9,
-     "extracted": [], "on_page": "Schedule of Interfund Transfers: Special Account -> General 1,650.00; General -> Special Account 1,198.69; General -> Water 121.77",
-     "issue": "The transfer schedule contradicts Exhibit A (pp1, 3, 5, 7). There, General receives 1,198.69 and pays out 1,771.77 (1,650 + 121.77), and Special receives 1,650 and pays out 1,198.69. The direction between General and Special is reversed. The 2,970.46 total and the fund-type totals are not affected, but the conflict is not recorded."},
-    {"severity": "warning", "path": "decision_needed", "page": 1,
-     "extracted": "State Receipts: Other (General Fund) 237,538.53 recorded as intergovernmental/state aid",
-     "on_page": "line 12 State Receipts: Other 237,538.53 (revised page). The crossed-out page 2 had it in a Culvert Fund column, alongside Culvert capital improvements 263,719.75.",
-     "issue": "An unexplained line that is about 59% of the governmental receipts (405,313.21), seemingly tied to the 284,314.55 General Fund capital improvements. Only a person can settle what it is (state grant/aid or something else), and decision_needed[] has no entry for it."}
+    {
+      "severity": "warning",
+      "path": "receipts[14].category",
+      "page": 1,
+      "extracted": "Utility Charges (water charges)",
+      "on_page": "Local Receipts: Other (Water Fund column) 48,754.20",
+      "issue": "Printed label is only 'Local Receipts: Other'. config/category_decisions.csv row 'local receipts other water fund' maps this label to other / Other / Miscellaneous Receipts. Treating it as water charges is an assumption made because it is the fund's only receipt line. It is defensible, but it conflicts with the user's decision table."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[15].category",
+      "page": 1,
+      "extracted": "Utility Charges (sewer charges)",
+      "on_page": "Local Receipts: Other (Sewer Fund column) 61,882.71",
+      "issue": "Printed label is only 'Local Receipts: Other'. config/category_decisions.csv row 'local receipts other sewer fund' maps this label to other / Other / Miscellaneous Receipts. Treating it as sewer charges is an assumption that conflicts with the user's decision table."
+    },
+    {
+      "severity": "warning",
+      "path": "decision_needed",
+      "page": 1,
+      "extracted": "intergovernmental/state aid 237,538.53 (review note only, no decision_needed entry)",
+      "on_page": "State Receipts: Other (General Fund) 237,538.53",
+      "issue": "This unexplained 'Other' state receipt is about 59% of governmental receipts (405,313.21). On the crossed-out p2 version, 237,226.03 of it sat in the Culvert Fund. Its nature (state grant, reimbursement or loan) cannot be settled from the report, so it belongs in decision_needed[], which the extraction lacks."
+    },
+    {
+      "severity": "warning",
+      "path": "transfers_in",
+      "page": 9,
+      "extracted": "General in 1,198.69 (p1), Special in 1,650.00 (p3); General out 1,771.77 (p5), Special out 1,198.69 (p7)",
+      "on_page": "Schedule of Interfund Transfers: Special Account -> General 1,650.00; General -> Special Account 1,198.69; General -> Water 121.77",
+      "issue": "The report contradicts itself on direction. The statement has the General/Special transfers going the opposite way from the p9 schedule. Totals (2,970.46) and the governmental net (-121.77 to Water) match either way, so the JSON totals are unaffected. Still, this is an internal inconsistency in the report and is not recorded in notes or report_discrepancies."
+    }
   ]
 }

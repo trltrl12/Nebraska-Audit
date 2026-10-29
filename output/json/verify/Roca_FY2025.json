@@ -1,9 +1,15 @@
 {
   "stem": "Roca_FY2025",
-  "values_checked": 34,
+  "values_checked": 36,
   "issues": [
     {"severity": "warning", "path": "receipts[11].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Enterprise Fund) 103,313",
-     "issue": "Assumed utility charges; under the user's 2026-10-28 rule utility fund sales/charges are category Utility Charges, not charges for services/fees. The printed label is only 'Other'."}
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other, Enterprise Fund 103,313.00",
+     "issue": "the printed label is 'Other' and no breakdown is printed; Utility Charges is an assumption (the line is the enterprise fund's only receipt, so it is defensible). The review note is kept"},
+    {"severity": "warning", "path": "receipts[11].original_label", "page": 1,
+     "extracted": "Local Receipts: Other (Enterprise Fund)", "on_page": "Local Receipts: Other",
+     "issue": "the fund-column suffix is added to the printed label (same on receipts[7], [8], [10] and disbursements[3], [4]); amounts tie to the columns"},
+    {"severity": "warning", "path": "balance_sheet.equity[0].original_label", "page": 1,
+     "extracted": "Ending Balance (Line 24)", "on_page": "Subtotal of Ending Balances (Line 26 + 27)",
+     "issue": "the balance-statement section (lines 25-28) prints the equity line as 'Subtotal of Ending Balances'; the amounts are equal (1,190,162.00 + (251,099.00) = 939,063; Enterprise 326,862.00)"}
   ]
 }

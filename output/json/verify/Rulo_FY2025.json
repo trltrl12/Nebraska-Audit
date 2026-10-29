@@ -1,18 +1,16 @@
 {
   "stem": "Rulo_FY2025",
-  "values_checked": 40,
+  "values_checked": 35,
   "issues": [
     {"severity": "warning", "path": "disbursements[0].category", "page": 3,
-     "extracted": "general government", "on_page": "Line 29 General Government: General 84,465.47, Street 21,954.04, Cemetery 12,930.67, Fire 6,206.80, Keno 13,383.00",
-     "issue": "All spending printed on the General Government line; the Street, Cemetery and Fire columns are probably streets, cemetery (health/welfare) and public safety spending. Kept as printed with review"},
-    {"severity": "warning", "path": "receipts[9].category", "page": 1,
-     "extracted": "keno/lottery", "on_page": "Local Receipts: Other 34,885.87 (Keno Fund column)",
-     "issue": "Category inferred from the fund name only; the page does not say what the receipts are"},
-    {"severity": "warning", "path": "receipts[11].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other 52,989.55 (Enterprise Fund column)",
-     "issue": "Presumed utility charges (the page only says Other); config/category_decisions.csv has 'local receipts other enterprise fund' -> other / Other / Miscellaneous Receipts, while the 2026-10-28 rule would make utility charges Utility Charges"},
-    {"severity": "warning", "path": "disbursements[1].category", "page": 3,
-     "extracted": "utilities", "on_page": "General Government 50,116.84 (Enterprise Fund column)",
-     "issue": "Enterprise column spending printed on the General Government line; utilities assumed (enterprise fund's utility is not named)"}
+     "extracted": "general government", "on_page": "General Government (line 29): General 84,465.47, Street 21,954.04, Cemetery 12,930.67, Fire 6,206.80, Keno 13,383.00",
+     "issue": "the form prints every fund's spending on the General Government line, so Street (streets/highways), Cemetery (health/welfare) and Fire (public safety) spending is all counted as general government. This is defensible as printed and already marked review, but the function totals are distorted."},
+    {"severity": "warning", "path": "notes", "page": null,
+     "extracted": "...Read pages 1-6 of 6 Business-type printed disbursements total includes the 3,600.00 transfer out; tied via includes_split since transfers_net is signed.",
+     "on_page": "6 pages",
+     "issue": "notes contain 'Read pages 1-6 of 6' (the page count is correct) but text follows it, so the notes don't end with it. All 6 pages are reflected in the JSON."},
+    {"severity": "warning", "path": "balance_sheet.equity", "page": 1,
+     "extracted": "no category field", "on_page": "Subtotal of Ending Balances (line 28)",
+     "issue": "equity lines have no category. Amounts tie (244,910.68 + 24,411.91 = 269,322.59)."}
   ]
 }

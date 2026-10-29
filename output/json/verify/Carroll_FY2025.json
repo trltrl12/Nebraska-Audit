@@ -1,9 +1,15 @@
 {
   "stem": "Carroll_FY2025",
-  "values_checked": 44,
+  "values_checked": 38,
   "issues": [
     {"severity": "warning", "path": "receipts[10].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other 145,433.77 (Enterprise Funds: solid waste, wastewater, water)",
-     "issue": "If these are utility collections the user's category is Utility Charges, not charges for services/fees; the label itself says Other"}
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other (Enterprise Funds) 145,433.77",
+     "issue": "page prints no breakdown; treating the Enterprise Funds' only receipt line as utility charges is an assumption (likely right, already marked review)"},
+    {"severity": "warning", "path": "disbursements[3].category", "page": 2,
+     "extracted": "streets/highways", "on_page": "Public Works - Other 13,934.72 (General Fund)",
+     "issue": "function not stated on the page; streets/highways is an assumption (already marked review)"},
+    {"severity": "warning", "path": "balance_sheet.assets[0].amount", "page": 1,
+     "extracted": 51277.1, "on_page": "General Fund Net Cash Balance (52,331.19)",
+     "issue": "governmental cash nets the General Fund's negative cash (overdraft) against the other funds; arithmetic is right, but the overdraft could instead be shown as a liability"}
   ]
 }

@@ -1,15 +1,18 @@
 {
   "stem": "Marquette_FY2025",
-  "values_checked": 42,
+  "values_checked": 40,
   "issues": [
-    {"severity": "warning", "path": "beginning_cash", "page": 1,
-     "extracted": 542687.4, "on_page": "Net Cash Balance 508,114.57 + Investments 34,572.83 (General + Street)",
-     "issue": "beginning_cash and ending_cash include governmental investments (34,572.83 / 364,967.39); beginning_investments/ending_investments left null. Marked computed and explained in notes, but cash and investments are not separated"},
-    {"severity": "warning", "path": "disbursements[3].category", "page": 3,
-     "extracted": "streets/highways", "on_page": "Public Works - Other 22,182.41 (General Fund)",
-     "issue": "function not stated; streets/highways is a guess"},
-    {"severity": "warning", "path": "disbursements[6].category", "page": 3,
-     "extracted": "utilities", "on_page": "Electric Utility 5,038.22 (General) / 7,044.00 (Street)",
-     "issue": "electric line paid from governmental funds may be the village's own power bills or street lighting (general government / streets) rather than a utility operation"}
+    {"severity": "warning", "path": "receipts[10].category", "page": 1,
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other (Utility Fund 67,778.08; Sewer Fund 37,674.06)",
+     "issue": "category is an assumption for receipts[10] and receipts[11]: the report prints no breakdown (already marked review). Amounts are correct."},
+    {"severity": "warning", "path": "ending_investments", "page": 1,
+     "extracted": null, "on_page": "Investments line 2: 34,572.83 beginning; line 27: 364,967.39 ending (ties to the p5 schedule)",
+     "issue": "investments are printed separately, but beginning_cash and ending_cash include them (cash + investments, line 3 / line 24) and the investment fields are left null. This is defensible because the statement rolls the combined amount forward, but it differs from the field rule. Explained in notes."},
+    {"severity": "warning", "path": "disbursements[7].category", "page": 3,
+     "extracted": "utilities", "on_page": "Electric Utility, Street Fund column 7,044.00",
+     "issue": "electric costs paid from the Street Fund (and the General Fund's 5,038.22, disbursements[6]) are likely street lighting or facility power, so streets/highways or general government may fit better. Already marked review."},
+    {"severity": "warning", "path": "disbursements[5].original_label", "page": 3,
+     "extracted": "Debt Service (Street Fund)", "on_page": "Debt Service",
+     "issue": "the extractor added fund names to the printed labels (also the Electric Utility, Capital Improvements, Debt Service and Local Receipts: Other lines)"}
   ]
 }

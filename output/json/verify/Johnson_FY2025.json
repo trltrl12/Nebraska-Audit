@@ -3,10 +3,16 @@
   "values_checked": 33,
   "issues": [
     {"severity": "warning", "path": "receipts[9].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other, Water Fund 125,750.34",
-     "issue": "Water Fund receipts printed only as 'Local Receipts: Other'; treating them as charges is an assumption. If they are water sales, the user rule (2026-10-28) puts utility fund sales in Utility Charges, not charges for services/fees. user_rules.py will not catch this because the label has no sales/charges word and receipts carry no fund."},
-    {"severity": "warning", "path": "receipts[10].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other, Sewer Fund 58,573.96",
-     "issue": "Same as the Water Fund line: an assumed category. Utility Charges if these are sewer charges (user rule 2026-10-28)."}
+     "extracted": "Utility Charges (Water 125,750.34; also receipts[10] Sewer 58,573.96)", "on_page": "Local Receipts: Other (Water Fund / Sewer Fund columns)",
+     "issue": "Category inferred: the printed label is the unexplained 'Local Receipts: Other' with no breakdown. Treating it as utility collections is defensible because it is the utility funds' only receipt line, and the line is marked for review. The split_from is supported because each fund column cell is printed. The original_label adds a '(Water Fund)'/'(Sewer Fund)' qualifier that is not printed."},
+    {"severity": "warning", "path": "disbursements[3]", "page": 2,
+     "extracted": "Solid Waste (General Fund column), governmental, utilities, 27,590.03", "on_page": "Solid Waste 27,590.03 (General Fund column, under Business-Type Activities)",
+     "issue": "original_label adds text that is not printed ('(General Fund column)'). Classifying it as governmental (paid from the General Fund) and not business-type (the heading it is printed under) is a judgment call. It is already marked for review."},
+    {"severity": "warning", "path": "missing", "page": 1,
+     "extracted": null, "on_page": "County Treasurer Balance at October 1, 2024 $4,123.25; at September 30, 2025 7,871.21",
+     "issue": "The county treasurer balances printed below the statement are neither recorded nor mentioned in the notes. They sit outside the line 24/28 totals, so the roll-forward is unaffected, but they may be cash held for the village."},
+    {"severity": "warning", "path": "balance_sheet.equity[0].category", "page": 1,
+     "extracted": null, "on_page": "Ending Balance (Line 24)",
+     "issue": "Both equity lines have no category field. Amounts tie: 1,034,371.65 + 169,421.57 = 1,203,793.22."}
   ]
 }

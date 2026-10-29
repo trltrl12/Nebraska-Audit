@@ -1,12 +1,15 @@
 {
   "stem": "Cook_FY2025",
-  "values_checked": 38,
+  "values_checked": 40,
   "issues": [
     {"severity": "warning", "path": "receipts[6].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Enterprise Fund) 130,428.27",
-     "issue": "Enterprise Fund 'Local Receipts: Other' presumed to be utility fees; the page doesn't say what it is. If presumed utility sales, the user's 2026-10-28 rule category would be Utility Charges."},
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other (Enterprise Fund) 130,428.27",
+     "issue": "Printed label is 'Other' and the report prints no breakdown; Utility Charges is a reasonable presumption for the Enterprise Fund's only receipt line but is not confirmed on the page (already marked review)"},
     {"severity": "warning", "path": "disbursements[5].category", "page": 2,
      "extracted": "health/welfare", "on_page": "Miscellaneous (Cemetery Fund) 2,686.51",
-     "issue": "Line printed as Miscellaneous; health/welfare assumed because it is the Cemetery Fund's only spending line (defensible, already marked review)"}
+     "issue": "Printed label is 'Miscellaneous'; health/welfare is inferred from the Cemetery Fund column (defensible, already marked review)"},
+    {"severity": "warning", "path": "disbursements[2].original_label", "page": 2,
+     "extracted": "Other Capital Outlay", "on_page": "Other Capital Outlay (General 63,396.12 + Street 44,422.03)",
+     "issue": "User rule relabels capital outlay lines 'Capital Outlay: <function>' with printed text in printed_label; this combined line spans General and Street funds, so no single function applies and it was left as printed"}
   ]
 }

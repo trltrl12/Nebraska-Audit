@@ -1,12 +1,24 @@
 {
   "stem": "Chapman_FY2025",
-  "values_checked": 38,
+  "values_checked": 36,
   "issues": [
     {"severity": "warning", "path": "receipts[9].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other 95,180.88 (Enterprise Fund column)",
-     "issue": "Enterprise (water/wastewater) fund 'Local Receipts: Other' assumed to be utility charges; under the user's 2026-10-28 rule utility fund sales/charges are category Utility Charges, but the page doesn't say what the line holds"},
-    {"severity": "warning", "path": "ending_cash", "page": 1,
-     "extracted": 208236.62, "on_page": "County Treasurer Balance at September 30, 2025: 1,685.85 (Oct 1, 2024: 1,100.73)",
-     "issue": "County treasurer balances printed below the statement are not recorded anywhere; they appear to be held outside the village's cash (lines 24/28 agree without them), so the omission looks right, but they are not mentioned in notes"}
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other 95,180.88 (Enterprise Fund)",
+     "issue": "assumed utility charges; the report prints no breakdown of the Enterprise Fund's local receipts (review flag present, but the category does not match the printed label)"},
+    {"severity": "warning", "path": "disbursements[2].original_label", "page": 4,
+     "extracted": "Other Capital Outlay", "on_page": "Other Capital Outlay 16,799.00 (General 10,499.00 + Park 6,300.00)",
+     "issue": "user rule 2026-10-26 relabels capital outlay lines 'Capital Outlay: <function>' with printed text in printed_label; not applied (user_rules.py may re-apply)"},
+    {"severity": "warning", "path": "disbursements[4].fund_type", "page": 4,
+     "extracted": "business-type", "on_page": "line 39 Debt Service 49,604.73 printed under the 'Governmental' heading, Enterprise Fund column",
+     "issue": "defensible as business-type (Enterprise Fund column; schedule of debt lists WTFC loan and GO bonds), but the statement places it under governmental disbursements"},
+    {"severity": "warning", "path": "beginning_investments", "page": 1,
+     "extracted": 62557.27, "on_page": "Investments 62,557.27 (also included in beginning_cash 185,534.44 subtotal)",
+     "issue": "beginning_cash and ending_cash are cash+investments subtotals while beginning/ending_investments are also filled; adding them would double count investments"},
+    {"severity": "warning", "path": "balance_sheet.equity", "page": 1,
+     "extracted": "no category field", "on_page": "Subtotal of Ending Balances 208,236.62 / 23,471.26",
+     "issue": "equity lines carry no category"},
+    {"severity": "warning", "path": "decision_needed", "page": 2,
+     "extracted": null, "on_page": "Duplicate Exhibit A p1 crossed out with a red X; ending balance split differs (General Net Cash Balance 165,477.20, all other funds blank)",
+     "issue": "possibly voided page: the extractor used the unmarked p1 (totals identical) but recorded no decision_needed entry"}
   ]
 }

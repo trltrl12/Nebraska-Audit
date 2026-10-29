@@ -1,21 +1,24 @@
 {
   "stem": "Duncan_FY2025",
-  "values_checked": 82,
+  "values_checked": 102,
   "issues": [
-    {"severity": "error", "path": "receipts[10].category", "page": 7,
-     "extracted": "charges for services/fees", "on_page": "Sales 164,304 (Water Fund 84,889 + Sewer Fund 79,415, operating revenues)",
-     "issue": "[fixed 2026-10-28: category Utility Charges] Water and sewer fund sales are utility charges. The user's rule (extractor 'Own receipt categories', 2026-10-28) gives utility fund sales/charges their own category, Utility Charges."},
+    {"severity": "warning", "path": "receipts[6].category", "page": 5,
+     "extracted": "donations/contributions", "on_page": "Grants and contributions 550 (p2: Operating Grants and Contributions, General government)",
+     "issue": "source not printed; if the grant came from a government it would be intergovernmental/state aid or federal grants (extractor marked review)"},
+    {"severity": "warning", "path": "receipts[7].category", "page": 5,
+     "extracted": "licenses and permits", "on_page": "Licenses, fees, and permits 439",
+     "issue": "line mixes licenses/permits with fees; dominant category chosen but no review note naming the mix (also detail[7])"},
     {"severity": "warning", "path": "receipts[11].category", "page": 7,
-     "extracted": "charges for services/fees", "on_page": "Other revenue 15,904 (Water Fund operating revenue)",
-     "issue": "[fixed 2026-10-28: review flag added, category kept] The printed label is 'Other revenue' and nothing on the page explains it. It is an operating revenue, so it is plausibly a utility charge, but this is a judgment call with no review flag."},
-    {"severity": "warning", "path": "detail[5].category", "page": 9,
-     "extracted": "charges for services/fees", "on_page": "Rental fees 5,200",
-     "issue": "[fixed 2026-10-28: category Rentals] Inconsistent with the statement line 'Rent' 5,200, which is category Rentals (receipts[5]). The rule is the same category for the same item everywhere, and Rentals is the user's own receipt category."},
-    {"severity": "warning", "path": "detail[16].detail_category", "page": 10,
-     "extracted": "other state aid", "on_page": "Street Fund Intergovernmental 75,774 (Statement of Activities calls the total 'State allocation', p3)",
-     "issue": "A Street Fund state allocation is most likely highway allocation (detail category 'highway allocation'). The schedule does not say so explicitly."},
+     "extracted": "Utility Charges", "on_page": "Other revenue 15,904 (Water Fund operating revenue)",
+     "issue": "nature not printed; counted in Water charges for services 100,793 (p2) and receipts from customers (p8), so Utility Charges is defensible but an assumption (review kept)"},
     {"severity": "warning", "path": "receipts[12].category", "page": 7,
      "extracted": "federal grants", "on_page": "Grant income 492,651",
-     "issue": "The grant source is not stated (Statement of Activities: capital grants and contributions). This is already in decision_needed."}
+     "issue": "grantor not stated; could be state aid (already in decision_needed)"},
+    {"severity": "warning", "path": "decision_needed", "page": 3,
+     "extracted": "business_type.debt_proceeds 243,029", "on_page": "Water capital grants and contributions 735,680 = grant income 492,651 + loan proceeds 243,029",
+     "issue": "the Statement of Activities counts the Water Fund loan proceeds as capital grants and contributions (possibly a forgivable loan); recorded as debt proceeds; decision_needed does not ask about it"},
+    {"severity": "warning", "path": "detail[16].detail_category", "page": 10,
+     "extracted": "other state aid", "on_page": "Street Fund Intergovernmental 75,774 (p3: State allocation)",
+     "issue": "Street Fund state allocation is most likely highway allocation; source not itemized on the page"}
   ]
 }

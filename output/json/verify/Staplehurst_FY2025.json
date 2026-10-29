@@ -1,15 +1,12 @@
 {
   "stem": "Staplehurst_FY2025",
-  "values_checked": 34,
+  "values_checked": 32,
   "issues": [
     {"severity": "warning", "path": "receipts[8].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other, Water/Sewer Fund column 103,079.75",
-     "issue": "The line was assumed to be water/sewer user charges. If so, the user's category is Utility Charges, not charges for services/fees."},
-    {"severity": "warning", "path": "disbursements[3].original_label", "page": 2,
-     "extracted": "Capital Improvements (Street Fund column)", "on_page": "Capital Improvements (line 35)",
-     "issue": "Under the user's capital outlay rule the label should be 'Capital Outlay: <function>' with the printed text in printed_label. The '(Street Fund column)' suffix is not printed. disbursements[5] has the same problem."},
-    {"severity": "warning", "path": "disbursements[4].category", "page": 2,
-     "extracted": "debt service (principal and interest combined)", "on_page": "Debt Service 21,110.00 (Street Fund)",
-     "issue": "The review note says the line was 'recorded as principal' (0% Highway Allocation note), but the category is the combined one and there is no debt_service_part. The user rule calls for category Debt Service with debt_service_part."}
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other (Water/Sewer Fund) 103,079.75",
+     "issue": "category inferred because it is the Water/Sewer Fund's only receipt line; the form prints no breakdown"},
+    {"severity": "warning", "path": "disbursements[4].review", "page": 2,
+     "extracted": "debt service (principal and interest combined); review: 'recorded as principal'", "on_page": "Debt Service (Street Fund) 21,110.00",
+     "issue": "the review note says the line is recorded as principal (0% Highway Allocation note, p3), but the category is the combined debt-service category. The note and category disagree"}
   ]
 }

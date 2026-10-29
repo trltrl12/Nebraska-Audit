@@ -1,9 +1,12 @@
 {
   "stem": "Naper_FY2025",
-  "values_checked": 68,
+  "values_checked": 66,
   "issues": [
     {"severity": "warning", "path": "receipts[9].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other 35,473 (Combined Utilities Fund column)",
-     "issue": "This is the only receipt of the Combined Utilities Fund and is presumed to be utility charges. Under the user's 2026-10-28 rule, utility fund sales and charges are category Utility Charges, not charges for services/fees. The same applies to detail[12]. The label itself is only 'Other', so the extractor's presumption is still an assumption."}
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other 35,473.00 (Combined Utilities Fund column)",
+     "issue": "category inferred from the fund, not the label; no breakdown printed. Defensible as the utility fund's only receipt, but the category doesn't match the printed label (already marked review)"},
+    {"severity": "warning", "path": "detail[12].detail_category", "page": 1,
+     "extracted": "other utility charges", "on_page": "Local Receipts: Other 35,473.00",
+     "issue": "same assumption as receipts[9]: unlabeled utility-fund receipt treated as utility charges"}
   ]
 }

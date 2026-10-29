@@ -1,9 +1,12 @@
 {
   "stem": "Union_FY2025",
-  "values_checked": 40,
+  "values_checked": 36,
   "issues": [
     {"severity": "warning", "path": "receipts[10].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Enterprise Fund) 78,487.64",
-     "issue": "The extractor presumes these are utility charges. If so, the user's rules put them in Utility Charges, not charges for services/fees. The printed label is only 'Other', so the category is an assumption."}
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other 78,487.64 (Enterprise Fund column)",
+     "issue": "Printed only as 'Other' with no breakdown; Utility Charges is inferred from the fund's spending (Water, Wastewater, sewer loan). Defensible, and the line already carries review, but the category is an assumption."},
+    {"severity": "warning", "path": "receipts[10].original_label", "page": 1,
+     "extracted": "Local Receipts: Other (Enterprise Fund)", "on_page": "Local Receipts: Other",
+     "issue": "The extractor appended the fund name to the printed label; receipts[11] ('Local Receipts: Other (Sewer Reserve Fund)') has the same change. The amounts are correct."}
   ]
 }

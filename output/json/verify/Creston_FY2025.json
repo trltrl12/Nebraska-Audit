@@ -1,12 +1,15 @@
 {
   "stem": "Creston_FY2025",
-  "values_checked": 40,
+  "values_checked": 46,
   "issues": [
-    {"severity": "warning", "path": "decision_needed", "page": 1,
-     "extracted": "Local Receipts: Other 265,642 recorded as other", "on_page": "Line 18 Local Receipts: Other - General 262,228, Street 2,697, Fireworks 717",
-     "issue": "An unexplained 'Other' line makes up 69% of governmental receipts (265,642 of 386,219), and in the same year the General Fund spent 138,671 on Capital Improvements. It could be grant or loan proceeds. The trimmed PDF has no breakdown. This is a question for a person, and decision_needed[] doesn't include it."},
+    {"severity": "warning", "path": "disbursements[3].original_label", "page": 2,
+     "extracted": "Capital Improvements", "on_page": "Capital Improvements 206,886 (General 138,671 + Street 68,215)",
+     "issue": "category capital outlay but label not 'Capital Outlay: <function>' per user rule 2026-10-26/28; the line spans General and Street columns so the function is mixed"},
     {"severity": "warning", "path": "receipts[10].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Sewer Fund) 35,900",
-     "issue": "A line printed only as 'Other' was moved to charges for services on the presumption that it is sewer user charges. Nothing on the page says so (the line is marked for review). If it is user charges, the user's category is Utility Charges."}
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other (Sewer Fund) 35,900",
+     "issue": "page prints only 'Other'; Utility Charges is an assumption (review note present)"},
+    {"severity": "warning", "path": "receipts[11].category", "page": 1,
+     "extracted": "other", "on_page": "Local Receipts: Other (Lagoon Eq Rep 5,494, Lagoon Emer Res 1,095)",
+     "issue": "lagoon reserve funds hold only savings/CDs (p3) and are funded by Sewer transfers, so these may be interest; other is 15.5% of business-type receipts"}
   ]
 }

@@ -2,7 +2,14 @@
   "stem": "Dawson_FY2025",
   "values_checked": 32,
   "issues": [
-    {"severity": "warning", "path": "receipts[10].category", "page": 1, "extracted": "charges for services/fees", "on_page": "Local Receipts: Other, Sewer Fund 17,445.00 / Water Fund 28,588.24", "issue": "These are the only receipts of the Sewer and Water funds, so they are almost certainly utility collections. Under the user's 2026-10-28 rule that is category Utility Charges, not charges for services/fees. Applies to receipts[10] and receipts[11]. The printed label is only 'Other', so this remains an assumption."},
-    {"severity": "warning", "path": "disbursements[2].fund_type", "page": 3, "extracted": "governmental", "on_page": "Solid Waste 14,466.75 (line 45, under Business-Type Activities, General Fund column)", "issue": "The form lists Solid Waste under business-type activities, but it was paid from the General Fund column. Keeping it governmental (category utilities) keeps the General Fund roll-forward intact and is defensible; the line is already marked review."}
+    {"severity": "warning", "path": "receipts[11].category", "page": 1,
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other (Sewer Fund) 17,445.00",
+     "issue": "label is 'Other' with no breakdown; Utility Charges is an assumption (only receipt of the Sewer Fund column). Defensible, review already set"},
+    {"severity": "warning", "path": "receipts[12].category", "page": 1,
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other (Water Fund) 28,588.24",
+     "issue": "label is 'Other' with no breakdown; Utility Charges is an assumption (only receipt of the Water Fund column). Defensible, review already set"},
+    {"severity": "warning", "path": "disbursements[2].fund_type", "page": 3,
+     "extracted": "governmental / 'Solid Waste (General Fund column)'", "on_page": "line 45 Solid Waste 14,466.75 under 'Business-Type Activities', General Fund column",
+     "issue": "printed under the Business-Type Activities heading but paid from the General Fund; kept governmental (defensible, matches fund totals). original_label adds '(General Fund column)' to the printed 'Solid Waste'"}
   ]
 }

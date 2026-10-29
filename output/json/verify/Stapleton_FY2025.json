@@ -1,15 +1,12 @@
 {
   "stem": "Stapleton_FY2025",
-  "values_checked": 40,
+  "values_checked": 37,
   "issues": [
-    {"severity": "warning", "path": "receipts[6].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other, Sewer column 66,695.73",
-     "issue": "Assumed sewer user charges, but the category is not Utility Charges. receipts[8] (Solid Waste) uses Utility Charges, so the same kind of line is categorized inconsistently. receipts[7] (Water 39,398.11) has the same problem."},
-    {"severity": "warning", "path": "disbursements[5].category", "page": 3,
-     "extracted": "debt service (principal and interest combined)", "on_page": "Debt Service 12,307.38 (Solid Waste column)",
-     "issue": "The review note says 'recorded as principal', but the category is the combined one with no debt_service_part. The 4.25% equipment loan payment probably includes interest; the note and the category disagree."},
-    {"severity": "warning", "path": "disbursements[3].original_label", "page": 3,
-     "extracted": "Capital Improvements", "on_page": "Capital Improvements 43,386.00 (General Fund)",
-     "issue": "Under the user's capital outlay rule the label should be 'Capital Outlay: <function>', with the printed text in printed_label."}
+    {"severity": "warning", "path": "receipts[6].category", "page": 1, "extracted": "Utility Charges", "on_page": "Local Receipts: Other (Sewer column) 66,695.73", "issue": "assumed sewer user charges because it is the fund's only receipt line; the form prints no breakdown"},
+    {"severity": "warning", "path": "receipts[7].category", "page": 1, "extracted": "Utility Charges", "on_page": "Local Receipts: Other (Water column) 39,398.11", "issue": "assumed water user charges because it is the fund's only receipt line; the form prints no breakdown"},
+    {"severity": "warning", "path": "receipts[8].category", "page": 1, "extracted": "Utility Charges", "on_page": "Local Receipts: Other (Solid Waste column) 158,053.82", "issue": "assumed solid waste charges because it is a utility fund column; the form prints no breakdown"},
+    {"severity": "warning", "path": "disbursements[5].review", "page": 3, "extracted": "debt service (principal and interest combined); review says 'recorded as principal'", "on_page": "Debt Service 12,307.38 (Solid Waste column, printed under the Governmental heading)", "issue": "review note contradicts the category (recorded as combined, not principal); line sits under the Governmental heading but in the Solid Waste column, so business-type is a judgment call"},
+    {"severity": "warning", "path": "ending_investments", "page": 1, "extracted": 24665.02, "on_page": "line 27 Investments 24,665.02 (General Fund); line 24 Ending Balance 62,116.38 includes it", "issue": "ending_cash 79,168.66 already includes the 24,665.02 investments (line 24 = line 26 + 27) and ending_investments repeats them; anything adding ending_cash + ending_investments double counts. Beginning line 2 Investments is blank, so the CDs held at the start are inside beginning cash"},
+    {"severity": "warning", "path": "decision_needed", "page": 2, "extracted": null, "on_page": "voided (crossed-out) second copy of Exhibit A p1 and investments schedule with different General Fund figures (Local Receipts: Other 73,768.81, investments 24,507.53)", "issue": "two differing versions of the statement filed; which one is final is a question for a person (possibly voided page), but decision_needed[] is absent; only report_discrepancies records it"}
   ]
 }

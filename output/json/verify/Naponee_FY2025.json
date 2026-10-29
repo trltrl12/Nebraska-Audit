@@ -1,12 +1,12 @@
 {
   "stem": "Naponee_FY2025",
-  "values_checked": 40,
+  "values_checked": 41,
   "issues": [
-    {"severity": "warning", "path": "reported_totals.business-type.disbursements.includes", "page": 2,
-     "extracted": [], "on_page": "Line 52 Water 31,679.61 + Sewer 11,919.19 = 43,598.80, which includes the Sewer transfer out 10,000.00 (line 50)",
-     "issue": "The printed business-type total includes the 10,000 transfer, so includes should list transfers_net. It is only described in the non-standard includes_split field. The listed disbursements sum to 33,598.80."},
     {"severity": "warning", "path": "receipts[10].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Water 31,802.52 + Sewer 12,785.83)",
-     "issue": "This is the only receipt of the Water and Sewer funds and is presumed to be utility charges. Under the user's 2026-10-28 rule, utility fund charges are category Utility Charges. The printed label is only 'Other', so this is an assumption."}
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other (Water 31,802.52 + Sewer 12,785.83)",
+     "issue": "category inferred from the fund, not the label; no breakdown printed. Defensible as the Water/Sewer funds' only receipt line, but the category doesn't match the printed label (already marked review)"},
+    {"severity": "warning", "path": "disbursements[2].fund_type", "page": 2,
+     "extracted": "business-type", "on_page": "Debt Service 14,400.00 (line 39, under the 'Governmental' heading, Water Fund column)",
+     "issue": "the line sits under the statement's Governmental heading but in the Water Fund column; business-type follows the fund column and is defensible (already marked review)"}
   ]
 }

@@ -1,18 +1,10 @@
 {
   "stem": "Bayard_FY2025",
-  "values_checked": 147,
+  "values_checked": 150,
   "issues": [
-    {"severity": "warning", "path": "receipts[3].amount", "page": 4,
-     "extracted": 6785, "on_page": "Sales and other taxes, General Fund 101,643 (p4); p8 all-funds 'Other state receipts' 6,786",
-     "issue": "residual of the General Fund 'Sales and other taxes' cell after sales tax 94,858 is not printed anywhere (6,785 vs p8 Other state receipts 6,786); it is marked computed with a review note, but categorising a residual of a tax line as intergovernmental/state aid is an assumption (same for detail[3])"},
-    {"severity": "warning", "path": "receipts[11].category", "page": 6,
-     "extracted": "charges for services/fees", "on_page": "Sales 1,955,504 (Utilities)",
-     "issue": "the same line in detail[34] is category Utility Charges (user rule 2026-10-28: utility fund sales -> Utility Charges); receipts and detail are inconsistent"},
-    {"severity": "warning", "path": "detail[23].detail_category", "page": 4,
-     "extracted": "equipment purchases", "on_page": "Capital outlay 83,167",
-     "issue": "the page does not say what the capital outlay bought; equipment purchases is an assumption (also detail[27] 13,038 and detail[32] 4,124)"},
-    {"severity": "warning", "path": "notes", "page": 1,
-     "extracted": "'Balance sheet uses the government-wide Total column on p1'; 'Budget schedule p8 ... is recorded as detail'; 'Other local revenues 2,273,210 split'", "on_page": null,
-     "issue": "stale notes from earlier attempts contradict the current JSON (governmental balance-sheet lines come from p3; detail is per-fund statement lines; no p8 lines are in detail)"}
+    {"severity": "warning", "path": "receipts[3].amount", "page": 8, "extracted": 6785, "on_page": "Other state receipts 6,786 (p8); Sales and other taxes General Fund 101,643 (p4)", "issue": "The split of 'Sales and other taxes' uses the p8 budget schedule. Sales tax 94,858 + motor vehicle tax 27,756 + other state receipts 6,786 = 129,400, which is 1 more than the printed 129,399. The residual 6,785 is computed and marked as such. The same applies to detail[3]."},
+    {"severity": "warning", "path": "receipts[4].category", "page": 4, "extracted": "licenses and permits (whole 36,171)", "on_page": "Fees, taxes, permits and licenses: General 24,525, Street 11,646 (= p8 Motor vehicle fees)", "issue": "Inconsistent with the detail section, where detail[6] (Street 11,646) is motor vehicle tax but the receipts line keeps all 36,171 as licenses and permits. The 'Sales and other taxes' line, by contrast, was split by fund column."},
+    {"severity": "warning", "path": "receipts[6].category", "page": 2, "extracted": "charges for services/fees", "on_page": "Charges for services 56,918 (p2: Public health and safety program revenue)", "issue": "This is public health and safety program revenue and may be ambulance/rescue fees (Ambulance Fees), but the report does not say so."},
+    {"severity": "warning", "path": "notes", "page": 8, "extracted": "notes say the p8 budget schedule is recorded as detail and 'Other local revenues' 2,273,210 was split", "on_page": "detail[] holds no p8 lines (per-fund statement lines only)", "issue": "The notes are out of date and describe detail lines that are no longer in the JSON."}
   ]
 }

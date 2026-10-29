@@ -1,15 +1,18 @@
 {
   "stem": "Phillips_FY2025",
-  "values_checked": 44,
+  "values_checked": 33,
   "issues": [
     {"severity": "warning", "path": "receipts[10].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other - Enterprise Fund 245,818.39",
-     "issue": "Enterprise (water/sewer/solid waste) fund receipts fit the user's Utility Charges category. The split by column is printed and correct."},
-    {"severity": "warning", "path": "receipts[10].original_label", "page": 1,
-     "extracted": "Local Receipts: Other (Enterprise Fund)", "on_page": "Local Receipts: Other",
-     "issue": "The extractor added fund names to the printed labels: '(Enterprise Fund)' here and '(TIF Fund)' on disbursements[2] 'Miscellaneous'. The labels are therefore not exactly as printed."},
-    {"severity": "warning", "path": "notes", "page": 1,
-     "extracted": null, "on_page": "County Treasurer Balance at October 1, 2024 2,431.20; at September 30, 2025 6,581.38",
-     "issue": "County treasurer balances are printed below the statement but are neither recorded nor mentioned in notes. They appear to be outside the village's cash balances."}
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other (Enterprise Fund) 245,818.39",
+     "issue": "category inferred from the fund's spending lines (Solid Waste, Wastewater, Water); the form prints no breakdown of the Enterprise Fund's 'Local Receipts: Other'"},
+    {"severity": "warning", "path": "disbursements[2].category", "page": 2,
+     "extracted": "economic development", "on_page": "Miscellaneous (TIF Fund column) 153,788.23",
+     "issue": "line printed as 'Miscellaneous'; economic development is inferred from the TIF fund column. Defensible but a judgment call. original_label also adds '(TIF Fund)' to the printed label"},
+    {"severity": "warning", "path": "beginning_investments", "page": 1,
+     "extracted": null, "on_page": "Investments (line 2) Street 14,000.00; line 27 Street 14,000.00",
+     "issue": "investments are reported separately on lines 2/27 but beginning_investments/ending_investments are null. They are included in beginning/ending cash (line 3/28 subtotals). Pickrell and Staplehurst fill these fields for the same form"},
+    {"severity": "warning", "path": "balance_sheet.assets", "page": 1,
+     "extracted": "not recorded", "on_page": "County Treasurer Balance at September 30, 2025 6,581.38 (October 1, 2024 2,431.20)",
+     "issue": "the county treasurer balance printed below the statement is neither in the balance sheet nor explained in the notes. It looks like a memo item outside lines 24/28, but this is an assumption"}
   ]
 }

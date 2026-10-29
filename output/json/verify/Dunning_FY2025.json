@@ -1,12 +1,21 @@
 {
   "stem": "Dunning_FY2025",
-  "values_checked": 34,
+  "values_checked": 36,
   "issues": [
+    {"severity": "warning", "path": "disbursements[2].fund_type", "page": 2,
+     "extracted": "governmental", "on_page": "Lines 45 Solid Waste 15,333.06, 47 Wastewater 201,143.23, 48 Water 30,262.56 printed under 'Business-Type Activities' heading, General Fund column",
+     "issue": "report places these under Business-Type Activities but pays them from the General Fund; kept governmental by column (applies to disbursements[2]-[4]); judgment call"},
+    {"severity": "warning", "path": "receipts[8].original_label", "page": 1,
+     "extracted": "Local Receipts: Other (General Fund)", "on_page": "Local Receipts: Other",
+     "issue": "fund name appended to printed label (also receipts[9] and disbursements[2]-[5])"},
     {"severity": "warning", "path": "receipts[9].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "18 Local Receipts: Other (Enterprise Fund) 40,430.96",
-     "issue": "An unlabeled 'Other' line was assumed to be utility charges. If it is utility revenue, the user's Utility Charges category would apply; if it is not, the category is a guess"},
+     "extracted": "other", "on_page": "Local Receipts: Other 40,430.96 (Enterprise Fund)",
+     "issue": "no breakdown printed; likely utility charges but category other is the only supportable choice; 100% of business-type receipts in other (review kept)"},
     {"severity": "warning", "path": "balance_sheet.assets", "page": 1,
-     "extracted": "not recorded", "on_page": "County Treasurer Balance at September 30, 2025 1,961.62 (October 1, 2024: 327.61)",
-     "issue": "The county treasurer balances printed under Exhibit A are not in the JSON or the notes. They appear to be held outside the fund cash balances"}
+     "extracted": "not recorded", "on_page": "County Treasurer Balance at September 30, 2025 1,961.62 (October 1, 2024 327.61)",
+     "issue": "county treasurer balances printed below Exhibit A are held outside the fund balances and left out; they are Village cash held by the county (Cash and Cash Equivalents) - extractor explained in notes"},
+    {"severity": "warning", "path": "balance_sheet.equity[0].category", "page": 1,
+     "extracted": null, "on_page": "Subtotal of Ending Balances (Line 26 + 27)",
+     "issue": "equity lines carry no category field (also equity[1])"}
   ]
 }

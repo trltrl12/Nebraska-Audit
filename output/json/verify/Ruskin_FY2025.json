@@ -1,15 +1,16 @@
 {
   "stem": "Ruskin_FY2025",
-  "values_checked": 34,
+  "values_checked": 36,
   "issues": [
+    {"severity": "warning", "path": "decision_needed", "page": 6,
+     "extracted": "Local Receipts: Other (Utilities Fund) 125,665.76 recorded as Utility Charges; no decision_needed entry",
+     "on_page": "Schedule of outstanding debt: Midwest Bank loan issued 3/3/2025, 59,399.19 outstanding; Utilities capital improvements 65,047.25 (p4); no debt proceeds line on Exhibit A",
+     "issue": "the Utilities Fund took out a new loan during the year but Exhibit A has no proceeds line. Its only receipt (125,665.76, large for a village this size) may include about 59-65k of loan proceeds, which would belong in business_type.debt_proceeds rather than utility charges. A person needs to settle this."},
     {"severity": "warning", "path": "receipts[10].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other 125,665.76 (Utilities Fund column)",
-     "issue": "Presumed water/sewer charges (the page only says Other); under the 2026-10-28 rule utility fund charges are Utility Charges; already marked review"},
-    {"severity": "warning", "path": "disbursements[3]", "page": 4,
-     "extracted": "Capital Improvements (Street Fund) 8,172.47 / Capital Improvements (Utilities Fund) 65,047.25", "on_page": "Line 35 Capital Improvements: Street 8,172.47, Utilities 65,047.25, Total 73,219.72",
-     "issue": "Line split by printed fund column (amounts correct) but the two items carry no split_from naming the 73,219.72 total line, unlike the other column splits in this pipeline"},
-    {"severity": "warning", "path": "disbursements[5].fund_type", "page": 4,
-     "extracted": "business-type", "on_page": "Line 39 Debt Service 36,613.52 (Governmental section, Utilities Fund column)",
-     "issue": "Printed in the Governmental section but in the Utilities Fund column; business-type by column is correct under the rules, noted for awareness (p6 debt schedule lists USDA Water, NDEQ Sewer and Midwest Bank loans)"}
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other (Utilities Fund column) 125,665.76",
+     "issue": "category inferred from the fund name; the page gives no breakdown (see the decision_needed warning)."},
+    {"severity": "warning", "path": "disbursements[3].original_label", "page": 4,
+     "extracted": "Capital Improvements (Street Fund)", "on_page": "Capital Improvements (line 35)",
+     "issue": "capital outlay lines should be labelled 'Capital Outlay: <function>' under the 2026-10-26 user rule (also disbursements[4]). user_rules.py may re-apply this."}
   ]
 }

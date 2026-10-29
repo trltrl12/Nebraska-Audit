@@ -1,12 +1,18 @@
 {
   "stem": "Western_FY2025",
-  "values_checked": 52,
+  "values_checked": 45,
   "issues": [
     {"severity": "warning", "path": "receipts[10].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other - Water Fund 84,541.41 + Sewer Fund 82,462.50",
-     "issue": "These are utility-fund receipts. The page labels them only 'Other', so the category is assumed. If they are utility sales, the user's 2026-10-28 rule puts them in Utility Charges, not charges for services/fees."},
-    {"severity": "warning", "path": "reported_totals.business-type.disbursements.includes", "page": 3,
-     "extracted": [], "on_page": "Water 111,824.29 + Sewer 76,542.20 = 188,366.49, including line 50 Transfers Out 42,240.00",
-     "issue": "The total includes the 42,240 Sewer-to-Project transfer, but 'includes' is empty. It should list 'transfers_net'. The extractor recorded this in a non-standard 'includes_split' field instead. Every amount and the roll-forward (135,252.54 + 167,003.91 - 146,126.49 - 42,240 = 113,889.96) check out."}
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other (Water 84,541.41 + Sewer 82,462.50)",
+     "issue": "printed label is 'Other'; Utility Charges is an assumption (the utility funds' only receipt line, no breakdown printed). Defensible, already marked review"},
+    {"severity": "warning", "path": "disbursements[8].fund_type", "page": 3,
+     "extracted": "governmental", "on_page": "Solid Waste 17,104.00 (General Fund column, under 'Business-Type Activities' heading, line 45)",
+     "issue": "row sits under the business-type heading but is paid from the General Fund; kept governmental by fund column. Judgment call, already marked review"},
+    {"severity": "warning", "path": "decision_needed", "page": 1,
+     "extracted": null, "on_page": "Fire Fund 'Local Receipts: Other' 65,777.50 (part of receipts[9] 114,338.80)",
+     "issue": "unexplained line that is nearly all of the Fire Fund's receipts and about 26% of governmental receipts (could be a rural fire district payment, a reimbursement or loan proceeds); only a review note, no decision_needed entry"},
+    {"severity": "warning", "path": "balance_sheet.equity[0].category", "page": 1,
+     "extracted": null, "on_page": "Subtotal of Ending Balances 234,506.82 (governmental) / 113,889.96 (business-type)",
+     "issue": "both equity lines have no category field (list items should carry a category)"}
   ]
 }

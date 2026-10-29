@@ -1,12 +1,12 @@
 {
   "stem": "Bruno_FY2025",
-  "values_checked": 34,
+  "values_checked": 33,
   "issues": [
     {"severity": "warning", "path": "receipts[11].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Sewer Fund) 8,900.00",
-     "issue": "Utility fund 'Local Receipts: Other' assumed to be utility charges; nothing on the page says what it is (user rule would make utility collections 'Utility Charges')"},
-    {"severity": "warning", "path": "receipts[12].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Water Fund) 35,415.00",
-     "issue": "Same assumption as the Sewer line: utility fund 'Other' receipts presumed charges; category could be 'Utility Charges'"}
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other (Sewer Fund) 8,900.00",
+     "issue": "assumption: the form prints only 'Local Receipts: Other' for the Sewer and Water funds (also receipts[12], Water 35,415.00); utility charges is likely but no breakdown is printed (line already carries review)"},
+    {"severity": "warning", "path": "beginning_investments", "page": 1,
+     "extracted": null, "on_page": "Line 2 Investments: Street Fund 30,618.00 (beginning); line 27: 31,468.00 (ending)",
+     "issue": "investments are printed separately but beginning_investments/ending_investments are left null (they are informational only and already included in beginning_cash/ending_cash, which is correct); the similar Brule report fills them in, so this is inconsistent"}
   ]
 }

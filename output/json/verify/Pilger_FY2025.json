@@ -1,24 +1,12 @@
 {
   "stem": "Pilger_FY2025",
-  "values_checked": 168,
+  "values_checked": 166,
   "issues": [
-    {"severity": "warning", "path": "receipts[14].category", "page": 7,
-     "extracted": "charges for services/fees", "on_page": "Sales 265,558 (Water/Sewer/Trash enterprise funds)",
-     "issue": "utility fund sales; user rule puts utility fund sales/charges (incl. trash) in Utility Charges"},
-    {"severity": "warning", "path": "detail[12].category", "page": 12,
-     "extracted": "charges for services/fees", "on_page": "Fire/Rescue Charges for services 2,674 (detail_category ambulance/rescue fees)",
-     "issue": "category does not match detail_category; user rule has Ambulance Fees. Likewise detail[18] Park/Pool 21,779 (Recreation Fees) and detail[28] Cemetery 3,700 (Cemetery Fees); statement line receipts[6] 29,743 is 73% pool/park fees"},
-    {"severity": "warning", "path": "receipts[9].category", "page": 12,
-     "extracted": "federal grants", "on_page": "Grants 56,243 (grantor not named)",
-     "issue": "federal assumed; could be state/other grants (already in decision_needed)"},
+    {"severity": "warning", "path": "receipts[6].category", "page": 5,
+     "extracted": "charges for services/fees", "on_page": "Charges for services 29,743 (p12 breakdown: Park/Pool 21,779, Cemetery 3,700, Fire/Rescue 2,674, Library 1,585, General 5)",
+     "issue": "same label is categorised differently in detail (Recreation Fees / Cemetery Fees / Ambulance Fees). Recreation fees are 73% of the line, so under the user rules it could take Recreation Fees or be split (split_from p12). Judgment call"},
     {"severity": "warning", "path": "disbursements[8].category", "page": 7,
      "extracted": "Employee Benefits and Payroll Taxes", "on_page": "Personnel and benefits 85,497",
-     "issue": "line combines pay and benefits (cash flow p8 calls it payments to employees); Salaries and Wages is more likely the dominant part"},
-    {"severity": "warning", "path": "proprietary", "page": 8,
-     "extracted": null, "on_page": "Statement of Cash Flows - Proprietary Funds: operating 86,057; capital and related financing (58,071); investing (5,689); beginning cash 231,211; ending cash 253,508",
-     "issue": "accrual proprietary cash flow statement is printed but not captured (report basis is cash, so the rule's GAAP-only scope is arguable)"},
-    {"severity": "warning", "path": "detail[75].original_label", "page": 10,
-     "extracted": "Capital outlay", "on_page": "Capital outlay 11,437 (Street Fund)",
-     "issue": "user rule labels capital outlay lines 'Capital Outlay: <function>' (Capital Outlay: Streets) with printed_label; the other capital outlay lines in this report were relabelled"}
+     "issue": "the line combines wages and benefits (cash flow p8 shows the whole 85,497 as payments to employees). Salaries and Wages is the more likely dominant part, and the governmental detail maps 'Salaries and benefits' to salaries and wages"}
   ]
 }

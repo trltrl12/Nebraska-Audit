@@ -1,12 +1,15 @@
 {
   "stem": "Edison_FY2025",
-  "values_checked": 40,
+  "values_checked": 35,
   "issues": [
     {"severity": "warning", "path": "receipts[10].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other, Water & Sewer Fund 31,665.76",
-     "issue": "The form line is printed only as 'Other'; treating it as utility charges is an assumption (already marked review). If it is utility charges, the user's category is Utility Charges rather than charges for services/fees."},
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other (Water & Sewer Fund column) 31,665.76",
+     "issue": "category inferred from the fund column; the form prints only 'Local Receipts: Other' with no breakdown (review note present). Amount and split by column are correct (197,825.97 - 31,665.76 = 166,160.21)."},
+    {"severity": "warning", "path": "receipts[9].category", "page": 1,
+     "extracted": "other", "on_page": "Local Receipts: Other 166,160.21 (General Fund 157,782.48)",
+     "issue": "General Fund pays Solid Waste/Wastewater/Water 149,753.15 (p3), so most of its 157,782.48 'Local Receipts: Other' is probably utility charges; kept in other as printed (label says Other, review note present)."},
     {"severity": "warning", "path": "report_discrepancies[0]", "page": 3,
-     "extracted": "check 'detail', difference 0", "on_page": "Exhibit A p2 rows 45/47/48 in General Fund column; all totals add up",
-     "issue": "The report's own totals all add up (no difference), so this isn't a 'report itself doesn't add up' item. It repeats the classification question already in decision_needed[0] and will be listed to the user under the wrong heading."}
+     "extracted": "difference 0", "on_page": "Exhibit A totals add up (line 52 total 396,606.29 ties to its lines)",
+     "issue": "report_discrepancies is for reports that don't add up; this entry records a column-placement question (already in decision_needed) with difference 0 and may list the report as not adding up."}
   ]
 }
