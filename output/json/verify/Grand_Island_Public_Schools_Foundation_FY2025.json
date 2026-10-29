@@ -1,0 +1,30 @@
+{
+  "stem": "Grand_Island_Public_Schools_Foundation_FY2025",
+  "values_checked": 72,
+  "issues": [
+    {"severity": "warning", "path": "disbursements[0].detail_category", "page": 4,
+     "extracted": "category other, no detail_category / category_decision", "on_page": "Program expenses 1,492,530",
+     "issue": "config/category_decisions.csv has a row for 'program expenses' (Other / Miscellaneous Expenses); extractor rule says to apply it and stamp category_decision, as was done for the Fundraising line. user_rules.py should re-apply it."},
+    {"severity": "warning", "path": "detail[29].detail_category", "page": 5,
+     "extracted": "miscellaneous expenditure (no category_decision)", "on_page": "Miscellaneous 218 (Fundraising)",
+     "issue": "category_decisions.csv row 'miscellaneous' (Other / Miscellaneous Expenses) not stamped on this line."},
+    {"severity": "warning", "path": "disbursements[2].category", "page": 4,
+     "extracted": "General Administration", "on_page": "General and administrative 265,534",
+     "issue": "School-district function string used for a nonprofit foundation (entity_type other); 'general government' from the general disbursement list may fit better. Detail lines detail[11]-detail[20] use the same category."},
+    {"severity": "warning", "path": "entity_type", "page": 4,
+     "extracted": "other; all lines fund_type governmental; net assets treated as fund balance", "on_page": "Nonprofit foundation, Statements of Activities (net assets with/without donor restrictions)",
+     "issue": "Extractor's assumption: manifest lists it as a school district but it is a private nonprofit foundation; the governmental/business-type split doesn't apply. Not in decision_needed; the user may want to confirm how it is classified (or exclude it)."},
+    {"severity": "warning", "path": "receipts[5].amount", "page": 4,
+     "extracted": 154742, "on_page": "Administrative fees 154,742 (revenue, Total All Accounts) vs Administrative fees 154,248 (G&A expense, p5)",
+     "issue": "Fees charged between the foundation's own accounts are not eliminated in the Total column, so they inflate both receipts and disbursements by about 154K (the two sides also differ by 494). Figures are as printed; whether to keep them is a call for a person (not in decision_needed)."},
+    {"severity": "warning", "path": "receipts[3].category", "page": 4,
+     "extracted": "donations/contributions", "on_page": "Other fundraising income 678,019",
+     "issue": "Fundraising event income (booster/banquet events) could be charges for services/fees (event revenue) rather than donations; already marked review."},
+    {"severity": "warning", "path": "receipts[9].category", "page": 4,
+     "extracted": "reimbursements/refunds", "on_page": "Unclaimed scholarships 32,064 (donor restricted)",
+     "issue": "Reversal of scholarships expensed in earlier years, not a cash receipt; reimbursements/refunds is defensible but doubtful. Already marked review."},
+    {"severity": "warning", "path": "beginning_investments", "page": 2,
+     "extracted": null, "on_page": "Investments (notes A8 and D) 2024 Total All Accounts 8,131,299",
+     "issue": "ending_investments is filled in (9,743,816) but beginning_investments is null even though the 2024 column prints it. Also, ending_investments leaves out the certificates of deposit (122,256), which the balance sheet lists under Investments."}
+  ]
+}

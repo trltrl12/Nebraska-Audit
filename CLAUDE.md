@@ -228,8 +228,8 @@ holds just those reports and sheets. Prioritise fixes and re-checks for these ty
   2026-10-29), Chadron_Public_Schools_FY2025, Kimball_County_FY2025, Springfield_FY2025 (no page needed, totals tie),
   Norfolk_FY2025 (beginning governmental cash null: no prior-year balance sheet), and out-of-scope Central_Platte_NRD,
   Garfield_County_Agricultural_Society, Northeast_Nebraska_Economic_Development_District, Plattsmouth_Airport_Authority,
-  Two_Rivers_Public_Health_Department. Grand_Island_Public_Schools_Foundation_FY2025: re-trim queued (extra_pages.csv,
-  retrim.csv 2026-10-28); extract and verify after the next fetch run.
+  Two_Rivers_Public_Health_Department. Grand_Island_Public_Schools_Foundation_FY2025: re-trimmed 2026-10-29 (pp5-12), extracted and
+  verified (0 errors). Fetch 2026-10-29: 0 of 879 tracked reports had changed pages.
 - SIDs: user 2026-10-29: out of scope for now, leave as is. Rules the second-pass audit (2026-10-22) found applied
   inconsistently: SID "Warrants issued not registered" (long-term
   debt on SIDs 235/321/324, current payable on SID 291); SID detail actual column (budgetary basis on most, GAAP on
