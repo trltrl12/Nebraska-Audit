@@ -3,7 +3,7 @@
   "entity_type": "city",
   "fiscal_year_end": "2025-09-30",
   "basis": "cash",
-  "extraction_attempt": 1,
+  "extraction_attempt": 2,
   "beginning_cash": {
     "amount": 770610,
     "source_page": 4,
@@ -114,10 +114,11 @@
     },
     {
       "fund_type": "business-type",
-      "category": "charges for services/fees",
+      "category": "Utility Charges",
       "original_label": "Sales",
       "amount": 732503,
-      "source_page": 6
+      "source_page": 6,
+      "function": "utilities"
     },
     {
       "fund_type": "business-type",
@@ -235,7 +236,8 @@
       "category": "utilities",
       "original_label": "Utilities and telephone",
       "amount": 37373,
-      "source_page": 6
+      "source_page": 6,
+      "function": "utilities"
     },
     {
       "fund_type": "business-type",
@@ -356,7 +358,7 @@
   "balance_sheet": {
     "statement": "Statement of Net Position",
     "scope": "government-wide",
-    "column": "Governmental Activities (modified cash) | Business-type Activities (accrual) | Eliminations | Total Primary Government (each line tagged fund_type); the interfund due from/due to of 355,793 is eliminated in the Total column",
+    "column": "Governmental Activities (modified cash) | Business-type Activities (accrual), lines tagged fund_type; totals from Total Primary Government. The interfund Due from other funds / Due to other funds 355,793 is eliminated to zero in the Total column and is not recorded as lines",
     "assets": [
       {
         "category": "Cash and Cash Equivalents",
@@ -385,13 +387,6 @@
         "amount": 11753,
         "source_page": 1,
         "fund_type": "governmental"
-      },
-      {
-        "category": "Internal Balances",
-        "original_label": "Due from other funds",
-        "amount": 355793,
-        "source_page": 1,
-        "fund_type": "business-type"
       },
       {
         "category": "receivables",
@@ -465,13 +460,6 @@
         "amount": 42369,
         "source_page": 1,
         "fund_type": "business-type"
-      },
-      {
-        "category": "Internal Balances",
-        "original_label": "Due to other funds",
-        "amount": 355793,
-        "source_page": 1,
-        "fund_type": "governmental"
       },
       {
         "category": "Accrued Liabilities",
@@ -1071,13 +1059,5 @@
       "source_page": 11
     }
   ],
-  "notes": "Governmental activities are modified cash basis; business-type activities (water, sewer, compactor) are accrual. Governmental beginning/ending balances are governmental funds fund balances 770,610 to 623,042 (roll-forward ties). Transfers in and out each total 208,498 across funds (net zero in Total column). Business-type: net position from the proprietary statements (p6): 2,586,399 beginning (activities statement p2 prints 2,586,400, change 118,371 vs 118,372 on p6; rounding differences in the report); disbursements = total operating expenses 671,627 + interest expense 17,263 = 688,890 (activities statement p2 prints 688,891). Proprietary cash flow statement recorded from p7. Balance sheet is the government-wide Statement of Net Position Total Primary Government column (p1). Budget column on the schedules is Original and Final. Budget schedules for the 'Other' fund and the capital outlay lines with zero actual not listed. Pages: 1 net position, 2 activities, 3 gov balance sheet, 4 gov revenues/expenditures, 5 proprietary net position, 6 proprietary revenues/expenses, 7 cash flows, 8-11 budget schedules. Read pages 1-11 of 11.",
-  "report_discrepancies": [
-    {
-      "check": "balance",
-      "difference": 355793,
-      "source_page": 1,
-      "note": "Statement of Net Position has an Eliminations column of (355,793) on Due from other funds and Due to other funds. The split lines are the Governmental and Business-type columns before elimination (Internal Balances lines), so asset lines add to 9,003,758 and liability lines to 2,796,778, versus printed totals 8,647,965 and 2,440,985 after elimination. Net position is unaffected."
-    }
-  ]
+  "notes": "Governmental activities are modified cash basis; business-type activities (water, sewer, compactor) are accrual. Governmental beginning/ending balances are governmental funds fund balances 770,610 to 623,042 (roll-forward ties). Transfers in and out each total 208,498 across funds (net zero in Total column). Business-type: net position from the proprietary statements (p6): 2,586,399 beginning (activities statement p2 prints 2,586,400, change 118,371 vs 118,372 on p6; rounding differences in the report); disbursements = total operating expenses 671,627 + interest expense 17,263 = 688,890 (activities statement p2 prints 688,891). Proprietary cash flow statement recorded from p7. Balance sheet is the government-wide Statement of Net Position (p1); lines are the Governmental and Business-type columns tagged by fund_type, totals the Total Primary Government column. The Due from other funds (business-type) / Due to other funds (governmental) 355,793 is removed by the statement's Eliminations column and is zero in the Total column, so those two internal-balance lines are not recorded; assets then add to the printed 8,647,965 and liabilities to 2,440,985. Budget column on the schedules is Original and Final. Budget schedules for the 'Other' fund and the capital outlay lines with zero actual not listed. Pages: 1 net position, 2 activities, 3 gov balance sheet, 4 gov revenues/expenditures, 5 proprietary net position, 6 proprietary revenues/expenses, 7 cash flows, 8-11 budget schedules. Attempt 2 (verifier fixes 2026-10-28): proprietary 'Sales' 732,503 (water, sewer, compactor) category Utility Charges; eliminated internal-balance lines dropped and the wrong balance report_discrepancy removed (the page adds up); function utilities added to 'Utilities and telephone'. Read pages 1-11 of 11."
 }

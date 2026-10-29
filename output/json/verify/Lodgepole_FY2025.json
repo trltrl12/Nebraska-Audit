@@ -4,16 +4,16 @@
   "issues": [
     {"severity": "error", "path": "receipts[8].category", "page": 4,
      "extracted": "charges for services/fees", "on_page": "Pasture and building rent 2,100",
-     "issue": "Rent income has its own receipt category, Rentals (user rule 2026-10-28), not charges for services/fees."},
+     "issue": "[fixed 2026-10-28: category set to Rentals] Rent income has its own receipt category, Rentals (user rule 2026-10-28), not charges for services/fees."},
     {"severity": "error", "path": "detail[11].category", "page": 4,
      "extracted": "charges for services/fees", "on_page": "Pasture and building rent 2,100 (General)",
-     "issue": "Same line in detail: the category should be Rentals. Its detail_category is already rentals."},
+     "issue": "[fixed 2026-10-28: category set to Rentals] Same line in detail: the category should be Rentals. Its detail_category is already rentals."},
     {"severity": "error", "path": "receipts[15].category", "page": 6,
      "extracted": "charges for services/fees", "on_page": "Charge for services 324,988 (Water/Sewer/Electric funds)",
-     "issue": "Utility fund sales and charges have their own receipt category, Utility Charges (user rule 2026-10-28). The per-fund detail lines already use Utility Charges, so the top-level line doesn't match them."},
+     "issue": "[fixed 2026-10-28: category set to Utility Charges] Utility fund sales and charges have their own receipt category, Utility Charges (user rule 2026-10-28). The per-fund detail lines already use Utility Charges, so the top-level line doesn't match them."},
     {"severity": "warning", "path": "receipts[12].category", "page": 4,
      "extracted": "charges for services/fees", "on_page": "Charges for servcies 46,582 (General column); Statement of Activities p2 shows 46,582 charges for services on the Sanitation fund line",
-     "issue": "The Statement of Activities puts this 46,582 on the Sanitation fund (garbage/refuse) line, so Utility Charges (which includes garbage/refuse) probably fits better. The same applies to detail[15]."},
+     "issue": "[fixed 2026-10-28: receipts[12] and detail[15] set to Utility Charges / refuse/sanitation charges, with review note; p2 confirmed] The Statement of Activities puts this 46,582 on the Sanitation fund (garbage/refuse) line, so Utility Charges (which includes garbage/refuse) probably fits better. The same applies to detail[15]."},
     {"severity": "warning", "path": "disbursements[3].original_label", "page": 4,
      "extracted": "Capital outlay", "on_page": "Capital outlay 82,919",
      "issue": "User rule (2026-10-26/28): capital outlay lines are relabelled 'Capital Outlay: <function>', with the printed text kept in printed_label. Not applied here or on disbursements[6] (business-type 40,351). The function isn't printed, so the label may need a person's choice."},
@@ -22,6 +22,6 @@
      "issue": "Internal Balances is an asset category; the liability list has no interfund category, so other liabilities would follow the list. Judgment call."},
     {"severity": "warning", "path": "notes", "page": null,
      "extracted": "...Read pages 1-11 of 11. Detail (user 2026-10-27): ...", "on_page": "11 pages",
-     "issue": "The trimmed PDF has 11 pages and all 11 were read, but notes don't end with 'Read pages 1-11 of 11': a later note was appended after it."}
+     "issue": "[fixed 2026-10-28: notes now end with 'Read pages 1-11 of 11'] The trimmed PDF has 11 pages and all 11 were read, but notes don't end with 'Read pages 1-11 of 11': a later note was appended after it."}
   ]
 }

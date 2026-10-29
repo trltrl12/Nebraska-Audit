@@ -4,13 +4,13 @@
   "issues": [
     {"severity": "error", "path": "receipts[9].category", "page": 6,
      "extracted": "charges for services/fees", "on_page": "Other local receipts 238,809.63 = Other Governmental Funds 238,209.63 (Activities Fund receipts ~170,462 (Exhibit I p14, total 170,515.42) + School Nutrition sales 67,747.39 (lunch 48,091.10 + breakfast 15,963.64 + non-reimbursable 3,692.65, p15)) + General Fund 600",
-     "issue": "About 71% of the line is school activity fund receipts. Under the user's rules that is Extracurricular Receipts, and the dominant category is used (or the line is split with split_from), with the nutrition sales as School Lunch Sales. Charges for services/fees is only for genuine fees for services. The review note itself names the activity and nutrition sales."},
+     "issue": "[fixed 2026-10-28: split with split_from into Extracurricular Receipts 170,462.24, School Lunch Sales 67,747.39, Tuition Received 590.00 (GF 1955) and licenses and permits 10.00 (GF 1911); now receipts[9]-[12]] About 71% of the line is school activity fund receipts. Under the user's rules that is Extracurricular Receipts, and the dominant category is used (or the line is split with split_from), with the nutrition sales as School Lunch Sales. Charges for services/fees is only for genuine fees for services. The review note itself names the activity and nutrition sales."},
     {"severity": "error", "path": "detail[201].category", "page": 15,
      "extracted": "reimbursements/refunds", "on_page": "Sales - non-reimbursable 3,692.65 (School Nutrition Fund cash receipts)",
-     "issue": "This is meal/a-la-carte sales that federal meal reimbursement doesn't cover, not a reimbursement or refund. The category should be School Lunch Sales, matching its own detail_category 'school lunch sales' and the lunch/breakfast lines."},
+     "issue": "[fixed 2026-10-28: category changed to School Lunch Sales] This is meal/a-la-carte sales that federal meal reimbursement doesn't cover, not a reimbursement or refund. The category should be School Lunch Sales, matching its own detail_category 'school lunch sales' and the lunch/breakfast lines."},
     {"severity": "warning", "path": "detail[7].detail_category", "page": 9,
      "extracted": "other charges for services", "on_page": "1955 Postsecondary receipts 590.00",
-     "issue": "The category is Tuition Received, but detail_category is 'other charges for services'. 'tuition and fees' matches the category better."},
+     "issue": "[fixed 2026-10-28: detail_category changed to tuition and fees] The category is Tuition Received, but detail_category is 'other charges for services'. 'tuition and fees' matches the category better."},
     {"severity": "warning", "path": "detail[163].original_label", "page": 14,
      "extracted": "Art receipts (and '<account> receipts' / '<account> disbursements' for detail[163]-[198])", "on_page": "Art (row) under the Receipts / Disbursements columns",
      "issue": "The labels add 'receipts'/'disbursements' to the printed account name, which the page doesn't print. All amounts are correct and tie to 170,515.42 / 150,811.52."}
