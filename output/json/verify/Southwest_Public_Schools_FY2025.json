@@ -1,21 +1,18 @@
 {
   "stem": "Southwest_Public_Schools_FY2025",
-  "values_checked": 182,
+  "values_checked": 226,
   "issues": [
-    {"severity": "error", "path": "detail[93].category", "page": 14,
-     "extracted": "reimbursements/refunds", "on_page": "1620 Daily sales - non-reimbursable program 6,984",
-     "issue": "[fixed 2026-10-28: category changed to School Lunch Sales (p14 confirms meal sales line)] Line is meal sales (a la carte, 'non-reimbursable' program), not a reimbursement; category should be School Lunch Sales (its detail_category is already school lunch sales, and the statement's Nutrition program receipts 86,820 = 72,963 + 6,873 + 6,984 is School Lunch Sales)"},
-    {"severity": "warning", "path": "detail[6].category", "page": 7,
-     "extracted": "Extracurricular Receipts", "on_page": "1800 Community services activities 20,396",
-     "issue": "Community services receipts are not school activity receipts; the statement's Other local receipts line holding them is charges for services/fees and the detail_category is other charges for services, so the category doesn't match the label"},
+    {"severity": "warning", "path": "receipts[20].category", "page": 4,
+     "extracted": "Sale of Property", "on_page": "Other 22,171 (General Fund)",
+     "issue": "Only 12,162 is sale/disposal of property (5300 165 + 5320 11,997, p8); the remaining 10,009 matches the part of General Fund 5200 Fund transfers in 26,727 not explained by the Contingency Fund transfer 16,718 (p13), so it may be a transfer counted as a receipt. The extraction's decision_needed already covers this; the category is defensible because sale of property is the larger part."},
     {"severity": "warning", "path": "disbursements[3].category", "page": 5,
-     "extracted": "support services (Pupils) 582,417", "on_page": "Student support services: General Fund 312,688, Activities Fund 269,729",
-     "issue": "46% of the line is Activities Fund spending (student activities). The statement's fund columns show it, but it is kept as support services/Pupils (Southern Valley-type reports split this out as student activities)"},
-    {"severity": "warning", "path": "disbursements[0].split_from", "page": 5,
-     "extracted": "Instruction 3,944,345 split into 3,445,858 / 480,194 / 18,293", "on_page": "Instruction 3,944,345 (single line)",
-     "issue": "The split ties exactly, but it was put together from several schedule headings (1000 Instruction, 3300, 3500, 6000 on pp8-10), not from a printed breakdown of the statement line"},
+     "extracted": "support services (Pupils) 582,417", "on_page": "Student support services: General Fund 312,688 + Activities Fund 269,729",
+     "issue": "Activities Fund spending of 269,729 (46% of the line) is in this line. The detail records it as student activities (p18). It could be split by column, but keeping the line as printed is also defensible."},
     {"severity": "warning", "path": "detail[86].category", "page": 11,
      "extracted": "support services", "on_page": "Depreciation Fund 2900 Other support services 144,071",
-     "issue": "The statement counts this 144,071 in Operation and maintenance of plant (874,430 = 730,359 + 144,071), so detail and statement functions differ. Likewise Special Building 2620/2660 (detail[104], detail[105]) are Building and Grounds in detail but in Capital outlay 26,988 on the statement"}
+     "issue": "The statement counts this in Operation and maintenance of plant: General column O&M 874,430 = General Fund 2600 lines 730,359 + 144,071 (p5). Building and Grounds would match the statement."},
+    {"severity": "warning", "path": "detail[104].category", "page": 15,
+     "extracted": "Building and Grounds", "on_page": "Special Building Fund 2620 Maintenance of buildings 20,476",
+     "issue": "The statement puts all Special Building Fund spending (26,988) under Capital outlay (p5), not under Operation and maintenance of plant, so the detail function does not match the statement. Same for detail[105] 2660 Security 3,579."}
   ]
 }

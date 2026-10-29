@@ -1,21 +1,12 @@
 {
   "stem": "St_Edward_FY2025",
-  "values_checked": 176,
+  "values_checked": 188,
   "issues": [
-    {"severity": "error", "path": "receipts[13].category", "page": 7,
-     "extracted": "charges for services/fees", "on_page": "Sales 238,607 (Water/Sewer/Trash enterprise funds)",
-     "issue": "[fixed 2026-10-28: category set to Utility Charges] enterprise-fund utility sales belong in the user's own receipt category Utility Charges (utility fund sales/charges, garbage/refuse), not charges for services/fees; user_rules.py won't catch it because the receipts line has no fund name"},
-    {"severity": "warning", "path": "receipts[14].category", "page": 7,
-     "extracted": "charges for services/fees", "on_page": "Other revenue 3,100",
-     "issue": "the printed label is 'Other revenue', and nothing on the page says it is a service fee; the category is the extractor's assumption"},
-    {"severity": "warning", "path": "detail[7].category", "page": 15,
-     "extracted": "charges for services/fees", "on_page": "Park - Charges for services 50",
-     "issue": "[fixed 2026-10-28: category set to Recreation Fees] a Park department charge fits the user's own category Recreation Fees (pool, park, recreation)"},
-    {"severity": "warning", "path": "detail[8].category", "page": 15,
-     "extracted": "charges for services/fees", "on_page": "Pool - Charges for services 7,242",
-     "issue": "[fixed 2026-10-28: category set to Recreation Fees] a Pool department charge fits the user's own category Recreation Fees (pool, park, recreation)"},
-    {"severity": "warning", "path": "detail[78].original_label", "page": 11,
-     "extracted": "Capital outlay", "on_page": "Capital outlay 46,062 (Street Fund)",
-     "issue": "[fixed 2026-10-28: relabelled 'Capital Outlay: Streets/Highways', printed text in printed_label] user rule: capital outlay lines are labelled 'Capital Outlay: <function>' (here Streets/Highways), with the printed text in printed_label; the General Fund lines were relabelled but this one wasn't"}
+    {"severity": "warning", "path": "receipts[8].category", "page": 5,
+     "extracted": "charges for services/fees 22,642", "on_page": "Charges for services 22,642 = Park 50 + Pool 7,242 + Community Building 15,350 (p15)",
+     "issue": "The combining statement prints this line's breakdown. Under the user's rules, the 7,292 from Park and Pool is Recreation Fees (the detail already uses that), and Community Building charges of 15,350 (68%) are probably building rentals. The line could be split with split_from. The same question applies to detail[9] (Community Building 15,350, other charges for services)."},
+    {"severity": "warning", "path": "receipts[4].category", "page": 5,
+     "extracted": "property tax", "on_page": "Taxes: TIF 45,053 (CDA Fund 'TIF proceeds', p13)",
+     "issue": "TIF proceeds are property tax increment passed to the CDA. Property tax is defensible, but this is a judgment call (already marked review)."}
   ]
 }

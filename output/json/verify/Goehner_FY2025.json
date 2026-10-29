@@ -5,16 +5,16 @@
     {"severity": "error", "path": "notes", "page": 5,
      "extracted": "... Read pages 1-5 of 5 Recheck: ... (notes continue after the page statement)",
      "on_page": "trimmed PDF has 5 pages",
-     "issue": "notes do not end with 'Read pages 1-5 of 5' (re-check text was appended after it). The page count is right (5 of 5) and every page's lines are in the JSON, but the required ending check fails"},
+     "issue": "[fixed 2026-10-29: notes reordered so they end with 'Read pages 1-5 of 5'] notes do not end with 'Read pages 1-5 of 5' (re-check text was appended after it). The page count is right (5 of 5) and every page's lines are in the JSON, but the required ending check fails"},
     {"severity": "warning", "path": "receipts[10].category", "page": 1,
      "extracted": "Utility Charges", "on_page": "Local Receipts: Other (Sewer 20,276.63, Water 20,989.29)",
      "issue": "the printed label is 'Other' and the report gives no breakdown. Treating it as utility charges is a defensible assumption (these are the utility funds' only receipts), but it is an assumption"},
     {"severity": "warning", "path": "balance_sheet.equity[0].original_label", "page": 1,
      "extracted": "Subtotal of Ending Balances (all funds, governmental and business-type)",
      "on_page": "Subtotal of Ending Balances (Line 26 + 27)",
-     "issue": "label is not as printed, and on a governmental-only line it says 'all funds, governmental and business-type'. Same on equity[1]"},
+     "issue": "[fixed 2026-10-29: equity[0] and equity[1] labels set to the printed 'Subtotal of Ending Balances (Line 26 + 27)'] label is not as printed, and on a governmental-only line it says 'all funds, governmental and business-type'. Same on equity[1]"},
     {"severity": "warning", "path": "balance_sheet.assets", "page": 1,
      "extracted": null, "on_page": "County Treasurer Balance at September 30, 2025 1,757.34 (October 1, 2024 $1,312.99)",
-     "issue": "memo county treasurer balance printed below the statement is not recorded or mentioned in notes. It is outside the ending balance totals, so leaving it out may be intended"}
+     "issue": "[fixed 2026-10-29: memo county treasurer balances mentioned in notes; left out of assets because they are outside the ending balance totals] memo county treasurer balance printed below the statement is not recorded or mentioned in notes. It is outside the ending balance totals, so leaving it out may be intended"}
   ]
 }
