@@ -1,18 +1,18 @@
 {
   "stem": "Columbus_Public_Schools_FY2025",
-  "values_checked": 248,
+  "values_checked": 243,
   "issues": [
     {"severity": "warning", "path": "receipts[8].category", "page": 9,
-     "extracted": "other (26,967)", "on_page": "Other Local Receipts 26,967 = General 6,110 (p9: 1911 Local License Fees 3,735 + 1925 Categorical Grants 1,750 + 1960 Misc from Other Local Govts 625) + Special Building 'Other Local Receipts' 20,857 (p17)",
-     "issue": "The General Fund part (6,110) is broken down on p9 into licenses, donations and local-government receipts. The undescribed Special Building 20,857 is most of the line, so 'other' can be defended, but a split is possible."},
-    {"severity": "warning", "path": "detail[95].category", "page": 15,
-     "extracted": "charges for services/fees", "on_page": "Daily sales 795,909 (School Nutrition Fund)",
-     "issue": "The same money is 'School Lunch Sales' on the statement line (receipts[6], Food Services 795,909). Under the user's rule lunch sales are their own category, so detail should match."},
-    {"severity": "warning", "path": "detail", "page": 11,
-     "extracted": "General Fund schedule function groups", "on_page": "Instructional Staff lines sum 3,046,361 vs statement 3,046,359 (p5); Executive Admin 2310+2320 = 619,108 vs 619,107; O&M 4,798,241 vs 4,798,242; Transportation 879,115 vs 879,117",
-     "issue": "The schedule's function groups differ from the statement's function lines by $1-2 each (the net is 0, and the schedule total 56,812,329 ties). This is rounding in the report, but it is not listed in report_discrepancies."},
-    {"severity": "warning", "path": "disbursements[17].amount", "page": 2,
-     "extracted": 3753672, "on_page": "Debt Service 4,751,346 (p2, after elimination); principal from Bond 2,800,000 + Special Building 953,672",
-     "issue": "The principal/interest split of the post-elimination debt service assumes the Special Building Fund's principal and interest stand in for the Leasing Corp's eliminated payments. This is the extractor's assumption; the report doesn't print the Leasing Corp's own breakdown."}
+     "extracted": "other", "on_page": "Other Local Receipts remainder 26,967 = General 6,110 (1911 Local License Fees 3,735 + 1925 Categorical Grants 1,750 + 1960 Misc Revenues From Other Local Government Units 625, p9) + Special Building 20,857 (p17, undescribed)",
+     "issue": "The review note says the remainder has no description, but the General Fund's 6,110 part is itemized on p9. Keeping 'other' is defensible because the undescribed 20,857 is 77% of the line. It could be split instead (split_from p9/p17) into licenses and permits 3,735, donations/contributions 1,750, state aid/other local 625 and other 20,857."},
+    {"severity": "warning", "path": "receipts[10].amount", "page": 9,
+     "extracted": 477, "on_page": 478,
+     "issue": "p9 prints 2210 ESU Receipts 478. The extractor used 477 so the split ties to Intermediate Sources 219,568 (p5). This $1 rounding is in the report itself, and the value is marked computed."},
+    {"severity": "warning", "path": "report_discrepancies", "page": 11,
+     "extracted": null, "on_page": "General Fund schedule groups vs p5 statement lines: Support Services - Instruction lines 3,046,361 vs Instructional Staff 3,046,359; 2310+2320 = 619,108 vs Executive Administration 619,107; Operation and Maintenance lines 4,798,241 vs 4,798,242; Student Transportation lines 879,115 vs 879,117",
+     "issue": "These $1-2 rounding differences in the report offset each other: the schedule ties exactly to its printed total 56,812,329. They aren't listed in report_discrepancies. Every detail amount matches the page."},
+    {"severity": "warning", "path": "transfers_in", "page": 5,
+     "extracted": 3693931, "on_page": "Transfers In (Out) 2,619,454 (p6) + Leasing Corp Other Local Receipts 1,074,477 (p5)",
+     "issue": "The hidden-transfer split is supported by the p2 eliminations (Other Receipts 376,689 = 26,967 + 349,244 non-revenue + 478 ESU; Debt Service 4,751,346). The one-sided 2,619,454 into the Depreciation Fund has no matching General Fund outflow (p12 shows only 53,000), and decision_needed already covers it. The roll-forward ties: 23,833,586 + 69,083,533 - 69,914,804 + 3,693,931 - 1,074,478 + 6,891,264 = 32,513,032."}
   ]
 }

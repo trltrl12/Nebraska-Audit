@@ -1,12 +1,12 @@
 {
   "stem": "Stuart_Public_Schools_FY2025",
-  "values_checked": 134,
+  "values_checked": 140,
   "issues": [
-    {"severity": "warning", "path": "detail[95].category", "page": 16,
-     "extracted": "charges for services/fees", "on_page": "Student Fee Fund Receipts: Other local 2,160",
-     "issue": "This is Student Fee Fund money. The user rule of 2026-10-28 puts student fees in Extracurricular Receipts, not charges for services."},
+    {"severity": "warning", "path": "receipts[11].category", "page": 3,
+     "extracted": "other", "on_page": "Other 14,071 (General Fund 8,841 + Other Governmental 5,230)",
+     "issue": "line is printed 'Other' and its breakdown is printed (p6, p7, p13, p16: preschool tuition 650, local license fees 1,320, donations 1,875, other local 2,836, Student Fee Fund 2,160, nutrition other receipts 5,230); unexplained part (8,066) is the majority so 'other' is defensible, but it could be split with split_from so categories match the detail lines (Tuition Received, licenses and permits, donations, Extracurricular Receipts)"},
     {"severity": "warning", "path": "disbursements[1].category", "page": 3,
-     "extracted": "support services", "on_page": "Student support services 551,145 (General Fund 322,261 + Other Governmental 228,884)",
-     "issue": "The statement's own fund columns show 228,884 of this line is Activities Fund spending, which is student activities. It was kept whole as support services (it is marked review)."}
+     "extracted": "support services", "on_page": "Student support services 551,145 (General Fund 322,261 + Other Governmental Funds 228,884)",
+     "issue": "statement prints the fund split; 228,884 is Activities Fund spending (detail category student activities, p17). Kept whole as support services with review; a split_from split into support services 322,261 / student activities 228,884 is supported by the page"}
   ]
 }

@@ -1,15 +1,21 @@
 {
   "stem": "Johnson_Brock_Public_Schools_FY2025",
-  "values_checked": 158,
+  "values_checked": 162,
   "issues": [
     {"severity": "warning", "path": "disbursements[1].category", "page": 3,
-     "extracted": "support services (Pupils) 402,431", "on_page": "Support services - student: General 168,056 + Other Governmental 234,375 = 402,431",
-     "issue": "The Other Governmental part (234,375) is the Activities Fund 'Activities expenditures' (p7, p14), i.e. student activity spending, which the report prints inside the 'Support services - student' line. Kept as printed under support services/Pupils; the user may prefer student activities for that part (would need a split the statement doesn't print, so only a judgment note)"},
+     "extracted": "support services", "on_page": "Support services - student 402,431 = General Fund 168,056 + Other Governmental 234,375 (Activities Fund expenditures, p7/p14)",
+     "issue": "Most of the line (234,375 of 402,431) is Activities Fund spending, which detail[75] records as student activities. Under the dominant-category rule this could be student activities. Defensible because the report itself groups it under Support services - student, but notes don't mention the mix."},
     {"severity": "warning", "path": "disbursements[8].category", "page": 4,
-     "extracted": "support services", "on_page": "Contracted or secured services 123,173 (Special Building Fund)",
-     "issue": "Special Building Fund contracted services; function not printed. Could be Building and Grounds or capital outlay rather than generic support services (already marked review)"},
-    {"severity": "warning", "path": "detail[71].category", "page": 15,
-     "extracted": "charges for services/fees", "on_page": "Daily sales 109,341 (School Nutrition Fund)",
-     "issue": "Same money is category School Lunch Sales on the statement (receipts[11]); under the 2026-10-28 rule lunch/meal sales are School Lunch Sales, so the detail line's category is inconsistent"}
+     "extracted": "support services", "on_page": "Contracted or secured services 123,173 (Special Building Fund, p17)",
+     "issue": "This is Special Building Fund spending (building construction and repair), so Building and Grounds may fit better than generic support services. A review note is present."},
+    {"severity": "warning", "path": "receipts[10].category", "page": 3,
+     "extracted": "other", "on_page": "Other local receipts 17,239 = GF 1990 11,350 + Student Fee summer school fees 5,500 + Nutrition 389 (p7, p8, p19)",
+     "issue": "Of this line, 5,500 is printed as summer school fees (detail[102] is Tuition Received). It could be split out with split_from. Keeping it in other is defensible because the unexplained 11,350 is the majority. A review note is present."},
+    {"severity": "warning", "path": "disbursements[9].debt_service_part", "page": 4,
+     "extracted": null, "on_page": "Debt service: Principal 311,172 / Interest 97,830",
+     "issue": "Category 'Debt Service' lines (disbursements[9], [10] and detail Principal/Interest payments) don't have the debt_service_part field that the user rule calls for. The part appears only in detail_category."},
+    {"severity": "warning", "path": "balance_sheet.equity[2].category", "page": 5,
+     "extracted": null, "on_page": "Committed 59,696; Assigned 338,073; Unassigned 371,508",
+     "issue": "Fund balance lines Committed, Assigned and Unassigned (equity[2]-[4]) have no category field, while the Restricted lines do. Amounts tie: 15,333 + 66,282 + 59,696 + 338,073 + 371,508 = 850,892."}
   ]
 }

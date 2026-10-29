@@ -2,11 +2,20 @@
   "stem": "Rising_City_FY2025",
   "values_checked": 45,
   "issues": [
+    {"severity": "warning", "path": "receipts[9].category", "page": 1,
+     "extracted": "sales tax", "on_page": "Local Receipts: Other 2,950.80 (Sales Tax Fund column)",
+     "issue": "category inferred from the fund name only; the form's own line 16 'Local Receipts: Local Option Sales Tax' is blank for this fund, so the money may not be sales tax (on review already)"},
+    {"severity": "warning", "path": "receipts[11].category", "page": 2,
+     "extracted": "sales tax", "on_page": "Local Receipts: Other 58,466.73 (City Sales Tax/Capital Improve column)",
+     "issue": "category inferred from the fund name only; line 16 Local Option Sales Tax is blank. The whole amount is transferred straight out to Water/Sewer (p2a line 50, p5 schedule) (on review already)"},
+    {"severity": "warning", "path": "receipts[10].category", "page": 2,
+     "extracted": "keno/lottery", "on_page": "Local Receipts: Other 33,758.53 (Keno Fund column)",
+     "issue": "category inferred from the fund name; reasonable but not printed (on review already)"},
     {"severity": "warning", "path": "receipts[12].category", "page": 2,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other, Water Fund 61,649.75 / Sewer Fund 58,995.34",
-     "issue": "Water and Sewer Fund 'Other' local receipts are assumed to be utility charges (marked review). If so, the user's top-level category would be Utility Charges, but the page doesn't say what they are. This covers receipts[12] and receipts[13]."},
-    {"severity": "warning", "path": "balance_sheet.liabilities", "page": 5,
-     "extracted": [], "on_page": "Schedule of Outstanding Debt: NDEQ Loan 32,855.94 (issued 12/15/2006, 2.55%, matures 12/15/2026)",
-     "issue": "The cash-basis Exhibit A prints no liabilities, so the empty list is consistent with the rules. However, the report does disclose 32,855.94 of outstanding debt, which notes don't mention. Also, notes say the void p6 page has the 'same figures', but its transfer schedule is blank."}
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other 61,649.75 (Water Fund column)",
+     "issue": "assumed water charges; the report prints no breakdown (on review already)"},
+    {"severity": "warning", "path": "receipts[13].category", "page": 2,
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other 58,995.34 (Sewer Fund column)",
+     "issue": "assumed sewer charges; the report prints no breakdown (on review already)"}
   ]
 }

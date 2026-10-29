@@ -1,12 +1,18 @@
 {
   "stem": "Colon_FY2025",
-  "values_checked": 46,
+  "values_checked": 43,
   "issues": [
     {"severity": "warning", "path": "receipts[11].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other - Wastewater Sewer Fund 51,562.70 + Sewer Utility Security Deposits Fund 300.00",
-     "issue": "printed only as 'Local Receipts: Other'; the sewer fund part is presumably sewer charges, which the user's rules put in 'Utility Charges', and the 300.00 security deposits are customer deposits, not service charges (mixed line; assumption by the extractor)"},
-    {"severity": "warning", "path": "disbursements[3].category", "page": 2,
-     "extracted": "economic development", "on_page": "Community Development: Community Park Fund 57,424.75 + Federal & State ARPA & Hazard Mit. Grant 9,380.35",
-     "issue": "follows the printed form label, but 57,424.75 is Community Park Fund spending (culture/recreation) and 9,380.35 is hazard-mitigation grant spending; category is a judgment call"}
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other: Wastewater Sewer Fund 51,562.70; Sewer Utility Security Deposits Fund 300.00",
+     "issue": "Sewer user charges are assumed (no breakdown printed). The 300.00 from the security deposits fund is customer deposits, not charges. It is printed in its own column, so it could be kept as its own line."},
+    {"severity": "warning", "path": "decision_needed", "page": 3,
+     "extracted": null, "on_page": "Line of Credit, issued 6/11/2025, Haz Mit Proj., $35,000 max, outstanding 17,797.00",
+     "issue": "A line of credit was drawn during the fiscal year (17,797 outstanding at 9/30/25), but no loan proceeds appear on Exhibit A and debt_proceeds is null. The proceeds may sit inside 'Local Receipts: Other' (governmental 60,229.18, of which Community Park Fund 43,700.00 is unexplained and about 47% of governmental receipts) or may never have passed through the funds. Only a person can settle this; the extraction has no decision_needed entry."},
+    {"severity": "warning", "path": "beginning_investments", "page": 1,
+     "extracted": 61905.1, "on_page": "line 2 Investments (General 32,127.37 + Street 29,777.73), already inside line 3 subtotal",
+     "issue": "beginning_cash (line 3) and ending_cash (line 24) already include investments. Filling beginning_investments/ending_investments (63,309.76) as well risks double counting downstream. The notes say they are 'for information'."},
+    {"severity": "warning", "path": "disbursements[5].original_label", "page": 2,
+     "extracted": "Capital Improvements", "on_page": "Capital Improvements 19,687.43 (Wastewater Sewer Fund)",
+     "issue": "Per the capital outlay rule, the label should be 'Capital Outlay: Utilities' with the printed text in printed_label. The same applies to disbursements[6] 'Other Capital Outlay' 9,505.00."}
   ]
 }

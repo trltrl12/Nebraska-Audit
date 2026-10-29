@@ -1,24 +1,15 @@
 {
   "stem": "Loup_County_Public_Schools_FY2025",
-  "values_checked": 162,
+  "values_checked": 168,
   "issues": [
-    {"severity": "warning", "path": "receipts[16].category", "page": 12,
-     "extracted": "charges for services/fees", "on_page": "Daily Sales 11,918 (School Nutrition)",
-     "issue": "school meal sales; user rule 2026-10-28 makes this School Lunch Sales (same for detail 1611 Daily Sales, p21)"},
-    {"severity": "warning", "path": "receipts[12].category", "page": 13,
-     "extracted": "charges for services/fees", "on_page": "1540 Investment Income from Real Property 7,200",
-     "issue": "income from real property (rent); user rule 2026-10-28 has a Rentals receipt category; detail line already uses detail_category rentals"},
-    {"severity": "warning", "path": "receipts[11].split_from", "page": 8,
-     "extracted": "Other 87,460 (p9)", "on_page": "Other 87,460 is printed on p8 (Total Governmental Funds column)",
-     "issue": "split_from text cites the wrong page for the Other line (also on receipts[12]-[15]); amounts and split are correct"},
-    {"severity": "warning", "path": "detail[48].category", "page": 17,
-     "extracted": "Instruction", "on_page": "1100 Other Support Services 0 (Employee Benefit Fund)",
-     "issue": "label says Other Support Services but code 1100 is regular instruction; zero actual, category ambiguous"},
-    {"severity": "warning", "path": "detail[40].category", "page": 15,
-     "extracted": "capital outlay", "on_page": "2650 Vehicle Acquisition and Maintenance 0",
-     "issue": "line mixes acquisition and maintenance (school code 2650 under operation and maintenance); zero actual, category judgment call"},
+    {"severity": "warning", "path": "disbursements[13].source_page", "page": 9,
+     "extracted": 10, "on_page": "General Fund column 'Other Support Services' 131,255 is printed on p9 (and p15); p10 shows only the Activities 110,214 and Total 241,469",
+     "issue": "split item cites p10, where 131,255 is not printed; split_from already names the printed line and the split is right (131,255 + 110,214 = 241,469)"},
+    {"severity": "warning", "path": "detail[49].category", "page": 17,
+     "extracted": "Instruction", "on_page": "1100 Other Support Services (Employee Benefit Fund), actual 0, budget 250",
+     "issue": "label says Other Support Services, but code 1100 is regular instruction; the category could be either. Amount is 0"},
     {"severity": "warning", "path": "disbursements[15].review", "page": 10,
-     "extracted": "function not specified; counted as instruction", "on_page": "State Categorical Programs 13,542",
-     "issue": "stale review text: category is State Categorical Programs (and Federal Programs for disbursements[16] and detail[44]-[45]), not instruction"}
+     "extracted": "function not specified; counted as instruction", "on_page": "State Categorical Programs 13,542 / Federal Programs 137,377",
+     "issue": "review text on the State Categorical Programs and Federal Programs lines (statement and detail) is out of date: the category is now State Categorical Programs / Federal Programs, not instruction"}
   ]
 }

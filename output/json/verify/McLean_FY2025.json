@@ -1,15 +1,15 @@
 {
   "stem": "McLean_FY2025",
-  "values_checked": 38,
+  "values_checked": 30,
   "issues": [
     {"severity": "warning", "path": "receipts[9].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other, Enterprise Fund column 19,415.31",
-     "issue": "assumed utility charges (the only receipts of the solid waste/wastewater/water Enterprise Fund); if that holds, the user's 2026-10-28 category is Utility Charges; the page doesn't say what the line holds"},
-    {"severity": "warning", "path": "receipts[8].split_from", "page": 1,
-     "extracted": "no split_from", "on_page": "Local Receipts: Other total 29,714.57 = General 10,299.26 + Enterprise 19,415.31",
-     "issue": "row split by fund column (receipts[8] and [9]) without split_from as the column rule asks; amounts are printed column values and correct"},
-    {"severity": "warning", "path": "balance_sheet.equity[0].original_label", "page": 1,
-     "extracted": "Ending Balance (all funds)", "on_page": "Ending Balance (line 24) / Subtotal of Ending Balances (line 28)",
-     "issue": "label not as printed and the governmental/business-type items are per-column amounts, not all funds; amounts correct and marked computed"}
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other 19,415.31 (Enterprise Fund column)",
+     "issue": "Enterprise Fund's only receipt line is printed as 'Local Receipts: Other' with no breakdown; Utility Charges is assumed from the fund (solid waste/wastewater/water spending), already marked review"},
+    {"severity": "warning", "path": "receipts[8].category", "page": 1,
+     "extracted": "other", "on_page": "Local Receipts: Other 10,299.26 (General Fund column)",
+     "issue": "31% of governmental receipts are in 'other' (over the 10% review threshold); the filing has no breakdown, so 'other' is defensible and it is already marked review"},
+    {"severity": "warning", "path": "receipts[5].category", "page": 1,
+     "extracted": "intergovernmental/state aid", "on_page": "State Receipts: Other 505.56",
+     "issue": "Unspecified state receipt; state aid is the best fit, but its source is not printed"}
   ]
 }

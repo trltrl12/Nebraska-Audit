@@ -1,10 +1,15 @@
 {
   "stem": "Nehawka_FY2025",
-  "values_checked": 46,
+  "values_checked": 44,
   "issues": [
-    {"severity": "warning", "path": "receipts[7].category", "page": 1, "extracted": "Ambulance Fees", "on_page": "Local Receipts: Other, Ambulance Fund 40,877.87", "issue": "printed label is 'Local Receipts: Other'; ambulance fees is an assumption from the fund column (could include county/rural contracts or donations); review set"},
-    {"severity": "warning", "path": "receipts[8].category", "page": 1, "extracted": "charges for services/fees", "on_page": "Local Receipts: Other, Sewer Fund 46,592.51 / Water Fund 84,988.84", "issue": "if these are utility user charges (assumed), the user rule category is Utility Charges (applies to receipts[8] and receipts[9])"},
-    {"severity": "warning", "path": "reported_totals.business-type.receipts.includes", "page": 1, "extracted": [], "on_page": "line 21 Sewer 81,536.46 includes line 20 transfer in 34,943.95; line 52 Water 112,104.34 includes line 50 transfer out 34,943.95", "issue": "business-type totals include the gross transfer but `includes` is empty (the transfer is only described in a non-standard `includes_split`); lines tie only after adding 34,943.95 to each side"},
-    {"severity": "warning", "path": "balance_sheet.assets", "page": 1, "extracted": "not recorded", "on_page": "County Treasurer Balance at October 1, 2024 $2,408.66; at September 30, 2025 1,129.86", "issue": "memo county treasurer balances are outside the fund cash lines and not mentioned in notes; probably not village cash yet, but the user rule treats county treasurer balances as Cash and Cash Equivalents"}
+    {"severity": "warning", "path": "receipts[7].category", "page": 1,
+     "extracted": "Ambulance Fees", "on_page": "Local Receipts: Other (Ambulance Fund column) 40,877.87",
+     "issue": "category assumed from the fund column; the printed label is only 'Local Receipts: Other' and no breakdown is printed. Defensible (the Ambulance Fund's only receipt), already marked review"},
+    {"severity": "warning", "path": "receipts[8].category", "page": 1,
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other (Sewer Fund column) 46,592.51",
+     "issue": "assumed sewer user charges; label is only 'Local Receipts: Other', no breakdown printed (marked review)"},
+    {"severity": "warning", "path": "receipts[9].category", "page": 1,
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other (Water Fund column) 84,988.84",
+     "issue": "assumed water user charges; label is only 'Local Receipts: Other', no breakdown printed (marked review)"}
   ]
 }

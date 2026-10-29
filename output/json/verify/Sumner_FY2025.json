@@ -3,10 +3,10 @@
   "values_checked": 32,
   "issues": [
     {"severity": "warning", "path": "receipts[9].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Enterprise Fund column) 82,883.35",
-     "issue": "Enterprise Fund 'Other' local receipts assumed to be utility charges; under the user's 2026-10-28 rule utility fund charges are category Utility Charges, but the form does not say what the line is (review note present)"},
-    {"severity": "warning", "path": "reported_totals.business-type.disbursements.includes", "page": 2,
-     "extracted": [], "on_page": "Line 52 Total Disbursements & Transfers 104,706.06 includes line 50 Transfers Out 6,366.15",
-     "issue": "The printed business-type total includes the 6,366.15 transfer, but `includes` is empty. The extractor recorded it in a nonstandard `includes_split` field instead of the `includes: [\"transfers_net\"]` the schema calls for, so the disbursement lines (98,339.91) will not tie to the 104,706.06 total in validation."}
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other (Enterprise Fund) 82,883.35",
+     "issue": "printed only as 'Other'; utility charges inferred from the fund running water and solid waste (p2 lines 45, 48); likely includes CD interest (enterprise investments rose 78,537.16 -> 80,726.60). Review note present"},
+    {"severity": "warning", "path": "balance_sheet.equity[0].category", "page": 1,
+     "extracted": null, "on_page": "Ending Balance (Line 22 minus Line 23) 84,523.64 / 125,379.36",
+     "issue": "equity lines have no category field (amounts are correct and tie to total 209,903.00)"}
   ]
 }

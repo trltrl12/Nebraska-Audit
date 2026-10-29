@@ -1,16 +1,8 @@
 {
   "stem": "Furnas_County_FY2025",
-  "values_checked": 121,
+  "values_checked": 112,
   "issues": [
-    {"severity": "warning", "path": "detail", "page": 6,
-     "extracted": "nonmajor combining statement recorded fund by fund (13 columns, p6-7)",
-     "on_page": "Total Non-Major Funds column: receipts 624,626, disbursements 1,042,721 (p7)",
-     "issue": "The extractor rule says a combining schedule with more than 6 fund columns uses its Total column (fund 'Nonmajor funds (combined)'). The per-fund rule of 2026-10-27 covers only cities and villages. The per-fund lines tie to the Total column and nothing is double counted."},
-    {"severity": "warning", "path": "detail[2].detail_category", "page": 8,
-     "extracted": "other charges for services", "on_page": "Local 860,562",
-     "issue": "'Local' is a broad group that mixes fees, interest income and miscellaneous receipts. Charges are probably the dominant part. The line already has a review note."},
-    {"severity": "warning", "path": "detail[27].category", "page": 6,
-     "extracted": "taxes (unlabeled)", "on_page": "Visitor's Promotion Fund Taxes 12,505; Visitor's Improvement Fund Taxes 12,505 (p7)",
-     "issue": "The receipts split already treats these as lodging tax: p2 prints Lodging 25,010, which equals 12,505 + 12,505. The detail lines (detail[27] and detail[39]) are left as taxes (unlabeled), so the same money has two different categories in this report. Both detail lines have review notes."}
+    {"severity": "warning", "path": "detail[26].split_from", "page": 9, "extracted": "Local 32,591 split into Sale of Property 15,935 + other 16,656", "on_page": "Road Fund budget schedule Local 32,591 (p9); p4 Road column Local 16,656 and Sale of surplus 15,935", "issue": "The budget schedule prints Local as one line. The split comes from the p4 statement's Road column, where the parts tie exactly, but p9 does not print it. The line is marked review"},
+    {"severity": "warning", "path": "detail[2].category", "page": 8, "extracted": "charges for services/fees", "on_page": "Local 860,562 (= 860,310 Local + 252 sale of surplus per p5)", "issue": "Inconsistent with the Road Fund treatment: the General Fund budget Local also holds 252 of sale of surplus (and probably much of the 279,199 interest income), but it was not split. The dominant category is defensible, and the line is marked review"}
   ]
 }

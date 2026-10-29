@@ -2,8 +2,11 @@
   "stem": "Newport_FY2025",
   "values_checked": 52,
   "issues": [
-    {"severity": "warning", "path": "receipts[13].category", "page": 1, "extracted": "charges for services/fees", "on_page": "Local Receipts: Other 33.29 (Water) / 1,390.84 (Sewer, receipts[14])", "issue": "Printed only as 'Other' with no explanation; charges for services (or Utility Charges) is a guess. Already marked review."},
-    {"severity": "warning", "path": "receipts[9]", "page": 1, "extracted": "other 52,250.57", "on_page": "Local Receipts: Other 52,250.57 (General Fund)", "issue": "Unexplained line is about 47% of governmental receipts; no schedule explains it. Consider a decision_needed entry so a person can confirm what it is."},
-    {"severity": "warning", "path": "transfers_in", "page": 5, "extracted": 28778.99, "on_page": "Water Fund (reclassify from PY) to Housing 6,567.54 / Capital Improv 12,194.20 (18,761.74) and to Reserve Street 6,953.48", "issue": "25,715.22 of the Water Fund 'transfers' are labelled as prior-year reclassifications, i.e. balance corrections rather than current-year transfers. Recorded as transfers, which matches the form; a person may want to decide whether they are adjustments (decision_needed)."}
+    {"severity": "warning", "path": "decision_needed", "page": 1,
+     "extracted": "other 52,250.57 (review)", "on_page": "Local Receipts: Other General Fund 52,250.57",
+     "issue": "unexplained 'Local Receipts: Other' is about 47% of governmental receipts (110,049.45); the JSON has no decision_needed entry for it"},
+    {"severity": "warning", "path": "decision_needed", "page": 5,
+     "extracted": "business_type.transfers_net -16,075.22 incl. Water Fund transfers out 25,715.22", "on_page": "Water Fund (reclassify from PY) -> Housing 6567.54/Capital Improv 12194.20 18,761.74; Water Fund (reclassify from PY) -> Reserve Street 6,953.48",
+     "issue": "the interfund schedule describes the Water Fund transfers as reclassifications of prior-year amounts. They may be corrections of prior-year fund balances (adjustments) rather than current-year transfers. A person needs to decide this, and decision_needed[] does not raise it"}
   ]
 }

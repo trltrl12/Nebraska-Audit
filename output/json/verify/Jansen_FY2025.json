@@ -1,12 +1,18 @@
 {
   "stem": "Jansen_FY2025",
-  "values_checked": 42,
+  "values_checked": 40,
   "issues": [
     {"severity": "warning", "path": "receipts[9].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Water Fund column) 25,628.00",
-     "issue": "Water Fund 'Local Receipts: Other' assumed to be user charges; the Garbage Fund line with the same label and assumption is category Utility Charges, so the water (and sewer) lines are inconsistent with it. Under the 2026-10-28 rule utility fund collections are Utility Charges"},
-    {"severity": "warning", "path": "receipts[10].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Sewer Fund column) 26,621.00",
-     "issue": "Sewer Fund 'Local Receipts: Other' categorized charges for services/fees while the Garbage Fund line is Utility Charges; likely should be Utility Charges (assumption, page does not say what the receipts are)"}
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other (Water 25,628; Sewer 26,621; Garbage 17,016)",
+     "issue": "Water, Sewer and Garbage Fund 'Local Receipts: Other' (receipts[9]-[11]) are assumed to be utility collections; the report prints no breakdown. Defensible, since these are the utility funds' only own receipts, and review notes are present."},
+    {"severity": "warning", "path": "receipts[9].original_label", "page": 1,
+     "extracted": "Local Receipts: Other (Water Fund)", "on_page": "Local Receipts: Other",
+     "issue": "The extractor added fund names in parentheses to the printed labels (also receipts[10], receipts[11], disbursements[6], disbursements[7]). Printed text kept otherwise."},
+    {"severity": "warning", "path": "disbursements[2].original_label", "page": 3,
+     "extracted": "Capital Improvements / Other Capital Outlay", "on_page": "Capital Improvements (Street 37,773); Other Capital Outlay (General 715)",
+     "issue": "Category capital outlay is correct, but the 2026-10-28 rule relabels capital outlay lines as 'Capital Outlay: <function>' (printed text in printed_label). Not applied to disbursements[2] or [3]. The function can be inferred from the fund (Street Fund means streets/highways; General Fund means general government)."},
+    {"severity": "warning", "path": "balance_sheet.equity[0].category", "page": 1,
+     "extracted": null, "on_page": "Subtotal of Ending Balances (line 28)",
+     "issue": "Equity lines (equity[0] and equity[1]) have no category field. Amounts are correct: 297,192 + 29,522 = 326,714."}
   ]
 }

@@ -1,12 +1,15 @@
 {
   "stem": "Liberty_FY2025",
-  "values_checked": 34,
+  "values_checked": 32,
   "issues": [
     {"severity": "warning", "path": "receipts[11].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Line 18 Local Receipts: Other, Water Fund 15,599.83",
-     "issue": "The page prints only 'Other'. Reading it as water charges is an assumption, though a plausible one since it is the Water Fund's only receipt. If that reading holds, the user's 2026-10-28 rule puts utility fund sales in Utility Charges, not charges for services/fees."},
-    {"severity": "warning", "path": "receipts[*].original_label", "page": 1,
-     "extracted": "e.g. 'Personal and Real Property Taxes (General Fund)'", "on_page": "Personal and Real Property Taxes",
-     "issue": "Every original_label has the fund name added in parentheses, and disbursements do the same. The printed labels do not include the fund name."}
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other 15,599.83 (Water Fund)",
+     "issue": "assumed to be water charges; the waiver form has no breakdown (review note already present)"},
+    {"severity": "warning", "path": "receipts[0].original_label", "page": 1,
+     "extracted": "Personal and Real Property Taxes (General Fund)", "on_page": "Personal and Real Property Taxes",
+     "issue": "a fund name is appended to every receipt/disbursement label. By the user's rule this label should be 'Property Tax' with printed_label, and the suffix may keep user_rules.py from matching it"},
+    {"severity": "warning", "path": "disbursements[3].original_label", "page": 2,
+     "extracted": "Other Capital Outlay (Water Fund)", "on_page": "Other Capital Outlay (line 36, Water Fund column)",
+     "issue": "the capital outlay label rule calls for 'Capital Outlay: <function>' (e.g. Capital Outlay: Utilities) with printed_label; also printed under the Governmental heading but in the Water Fund column (treated as business-type, which is defensible)"}
   ]
 }

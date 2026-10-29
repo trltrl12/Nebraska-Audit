@@ -1,9 +1,18 @@
 {
   "stem": "Alda_FY2025",
-  "values_checked": 112,
+  "values_checked": 128,
   "issues": [
     {"severity": "warning", "path": "receipts[4].category", "page": 5,
-     "extracted": "charges for services/fees", "on_page": "Charges for services 11,554 = Rental and fees 9,853 + Licenses and permits 1,701 (p11)",
-     "issue": "85% of the line is 'Rental and fees' (Ballpark 3,103, Community Center 6,750); under the user's 2026-10-28 rule it could be category Rentals (the detail lines are detail_category rentals). The label mixes rentals and fees, so charges for services is defensible."}
+     "extracted": "charges for services/fees", "on_page": "Charges for services 11,554 = Licenses and permits 1,701 + Rental and fees 9,853 (p11)",
+     "issue": "The p11 combining statement prints this line's breakdown; the user rules send licenses/permits to licenses and permits and rent to Rentals, so it could be split (split_from p11) instead of kept as charges for services"},
+    {"severity": "warning", "path": "detail[7].category", "page": 11,
+     "extracted": "charges for services/fees", "on_page": "Rental and fees 3,103 (Ballpark)",
+     "issue": "detail_category is rentals but category is charges for services/fees; the user's Rentals receipt category could fit (label mixes rental and fees)"},
+    {"severity": "warning", "path": "detail[8].category", "page": 11,
+     "extracted": "charges for services/fees", "on_page": "Rental and fees 6,750 (Community Center)",
+     "issue": "Same as detail[7]: could be Rentals"},
+    {"severity": "warning", "path": "detail[52].original_label", "page": 10,
+     "extracted": "Capital outlay", "on_page": "Capital outlay 7,865 (Street Fund)",
+     "issue": "Not relabelled 'Capital Outlay: Streets/Highways' like the General Fund capital outlay detail lines (user rule 2026-10-26); user_rules.py should apply it"}
   ]
 }

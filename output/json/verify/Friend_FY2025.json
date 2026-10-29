@@ -1,16 +1,24 @@
 {
   "stem": "Friend_FY2025",
-  "values_checked": 192,
+  "values_checked": 203,
   "issues": [
-    {"severity": "error", "path": "receipts[10].category", "page": 9, "extracted": "charges for services/fees", "on_page": "Sales 527,001 (Electric/Water/Sewer/Trash enterprise funds)", "issue": "[fixed 2026-10-28: category set to Utility Charges] utility fund sales belong in category Utility Charges (user rule 2026-10-28); user_rules.py will not catch it (label 'Sales', no fund field)"},
-    {"severity": "error", "path": "detail[36].category", "page": 16, "extracted": "charges for services/fees", "on_page": "Park/Pool - Charges for services 43,512", "issue": "[fixed 2026-10-28: category set to Recreation Fees] Park/Pool department charges are Recreation Fees (user rule 2026-10-28); detail_category already recreation/pool/park fees"},
-    {"severity": "error", "path": "detail[45].category", "page": 16, "extracted": "charges for services/fees", "on_page": "Ambulance - Charges for services 18,999", "issue": "[fixed 2026-10-28: category set to Ambulance Fees] ambulance charges are category Ambulance Fees (user rule 2026-10-28); detail_category already ambulance/rescue fees"},
-    {"severity": "error", "path": "detail[50].category", "page": 16, "extracted": "charges for services/fees", "on_page": "Cemetery - Charges for services 5,100", "issue": "[fixed 2026-10-28: category set to Cemetery Fees] cemetery charges are category Cemetery Fees (user rule 2026-10-28); detail_category already cemetery fees"},
-    {"severity": "error", "path": "detail[15].category", "page": 14, "extracted": "charges for services/fees", "on_page": "Perpetual Care Fund - Charges for services 200", "issue": "[fixed 2026-10-28: category set to Cemetery Fees] detail_category is cemetery fees, so category should be Cemetery Fees (user rule 2026-10-28)"},
-    {"severity": "warning", "path": "detail[41].category", "page": 16, "extracted": "charges for services/fees (detail rentals)", "on_page": "Community Center - Charges for services 1,000", "issue": "[fixed 2026-10-28: category set to Rentals, review kept] rentals is an assumption; if kept, category should be Rentals rather than charges for services/fees"},
-    {"severity": "warning", "path": "receipts[11].category", "page": 9, "extracted": "charges for services/fees", "on_page": "Other revenue 308", "issue": "the Statement of Activities (p3) shows this 308 under general revenues 'Miscellaneous', not charges for services"},
-    {"severity": "warning", "path": "disbursements[9]", "page": 9, "extracted": "category utilities, no function", "on_page": "Utilities and telephone 20,694", "issue": "[fixed 2026-10-28: function utilities added] the other cost-type lines carry function 'utilities'; this one lacks the function field"},
-    {"severity": "warning", "path": "detail[8].original_label", "page": 12, "extracted": "Capital outlay", "on_page": "Capital outlay 10,500 (Street Fund)", "issue": "[fixed 2026-10-28: relabelled Capital Outlay: Streets/Highways, printed_label kept] not relabelled 'Capital Outlay: Streets/Highways' as the General Fund capital outlay lines were (user rule 2026-10-26)"},
-    {"severity": "warning", "path": "receipts[7].category", "page": 6, "extracted": "donations/contributions", "on_page": "Grants and contributions 92,025 (General Fund column, p6)", "issue": "made up of Ambulance 62,128, Cemetery 21,400, Fire 6,403, Library 1,547 and Park/Pool 547 (pp15-16); the source isn't stated (could be government grants). The split itself is printed in the fund columns (p6 General 92,025, p7 Other 16,807)"}
+    {"severity": "warning", "path": "receipts[7].category", "page": 7,
+     "extracted": "donations/contributions", "on_page": "Grants and contributions 92,025 (General Fund column p6; Statement of Activities p2 shows it as Operating Grants and Contributions: public safety 68,532, public works 21,400, environment and leisure 2,093)",
+     "issue": "Split from 108,832 is printed by fund column (General Fund 92,025 / Other Governmental Funds 16,807), so split_from is valid; but the category is a guess: the report calls these operating grants, and the Ambulance 62,128 portion may be government grants (intergovernmental/federal) rather than private donations. Same judgment applies to detail Grants and contributions lines (Fire, Park/Pool, Library, Ambulance, Cemetery)."},
+    {"severity": "warning", "path": "receipts[6].category", "page": 14,
+     "extracted": "federal grants", "on_page": "CDBG Fund Grants and contributions 16,807 (Capital Grants and Contributions on p3)",
+     "issue": "Split is printed (Other Governmental Funds column p7 = CDBG p14); federal category assumes the CDBG money is federal pass-through, which the trimmed pages do not state."},
+    {"severity": "warning", "path": "disbursements[2].category", "page": 7,
+     "extracted": "streets/highways (Public works 146,841)", "on_page": "Public works: General Fund 24,605 + Street Fund 122,236",
+     "issue": "The General Fund's Public works 24,605 equals the Ambulance department's non-capital spending on pp15-16 (68,898 - 44,293 capital outlay), which detail categorizes as public safety; the statement line is labelled Public works so streets/highways is defensible, but about 24,605 of it is ambulance spending."},
+    {"severity": "warning", "path": "disbursements[3].category", "page": 7,
+     "extracted": "culture/recreation (Environment and leisure 221,256)", "on_page": "Park/Pool 142,870 + Community Center 4,019 + Library 39,437 + Cemetery 34,930 = 221,256 (pp15-16)",
+     "issue": "Environment and leisure includes Cemetery 34,930, which detail categorizes health/welfare; top-level and detail function categories differ for the same money."},
+    {"severity": "warning", "path": "detail[3].detail_category", "page": 12,
+     "extracted": "other state aid", "on_page": "Street Fund Intergovernmental 100,402",
+     "issue": "Street Fund intergovernmental receipts are most likely highway allocation; the page does not say, so other state aid is defensible."},
+    {"severity": "warning", "path": "detail[*].fund", "page": 12,
+     "extracted": "Street, Debt Service, General, Perpetual Care, Keno, CDBG", "on_page": "Street Fund, Debt Service Fund, General Fund, Perpetual Care Fund, Keno Fund, CDBG Fund",
+     "issue": "User rule (2026-10-27): fund names end in 'Fund'; user_rules.py should rename these."}
   ]
 }

@@ -1,12 +1,21 @@
 {
   "stem": "Loup_County_FY2025",
-  "values_checked": 112,
+  "values_checked": 83,
   "issues": [
     {"severity": "warning", "path": "receipts[5].category", "page": 2,
-     "extracted": "charges for services/fees", "on_page": "Charges for Services 52,517 (General government 44,834, Public safety 1,997, Public assistance 5,686)",
-     "issue": "85% of this split is general government charges (county office fees); under the 2026-10-28 rule this could be Fees of Office rather than charges for services/fees. Judgment call."},
-    {"severity": "warning", "path": "detail[33].category", "page": 7,
-     "extracted": "charges for services/fees", "on_page": "Local 7,181 (Ambulance 5,686, Preservation & Modernization 695, STOP 800)",
-     "issue": "The line's own review note says it is 79% ambulance. Under the 2026-10-28 rule the dominant part points to Ambulance Fees, but detail_category is ambulance/rescue fees while category is still charges for services/fees."}
+     "extracted": "Fees of Office", "on_page": "Charges for Services 52,517 (general government 44,834, public safety 1,997, public assistance 5,686)",
+     "issue": "split_from Local 275,034 uses the Statement of Activities, which ties exactly (allowed for counties). 85% is general government charges, assumed to be county office fees, and 5,686 is ambulance (review note already present)"},
+    {"severity": "warning", "path": "other_financing", "page": 4,
+     "extracted": 12276, "on_page": "Sale of surplus 12,276 (other financing sources, p4; general receipts, p2)",
+     "issue": "kept as other financing as the fund statement prints it, so it is outside reported receipts. Sale of Property is a receipt category, and the Road Fund detail records the same 12,276 as revenue (Sale of Property), so the two are treated inconsistently"},
+    {"severity": "warning", "path": "detail[3].detail_category", "page": 8,
+     "extracted": "investment income", "on_page": "Local 267,360",
+     "issue": "the category is Interest Income but the detail_category is 'investment income'. Other interest lines use detail_category Interest Income (user decision). It is also a broad group (interest, charges, misc) (review present)"},
+    {"severity": "warning", "path": "receipts[4].category", "page": 4,
+     "extracted": "intergovernmental/state aid", "on_page": "Intergovernmental 884,793 = 524,760 general + 21,595 operating grants + 338,438 capital grants (p2)",
+     "issue": "capital grants 338,438 (public works; Bridge Fund 227,231 and Highway Buyback 56,630 lines) may be federal; the report doesn't say, so state aid is defensible"},
+    {"severity": "warning", "path": "detail[36].original_label", "page": 7,
+     "extracted": "Capital outlay", "on_page": "Capital outlay 444,366 (Total Non-Major)",
+     "issue": "not relabelled 'Capital Outlay: <function>' per the user's capital outlay rule (function: LATCF, Road Equipment, Highway Buyback and Ambulance columns)"}
   ]
 }

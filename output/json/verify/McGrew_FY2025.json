@@ -1,18 +1,15 @@
 {
   "stem": "McGrew_FY2025",
-  "values_checked": 30,
+  "values_checked": 27,
   "issues": [
-    {"severity": "warning", "path": "receipts[8].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other, Sewer Fund column 43,128.46",
-     "issue": "Assumed sewer charges; if so, the user's 2026-10-28 rule puts utility fund sales/charges in Utility Charges rather than charges for services/fees. The form doesn't print what the line is."},
     {"severity": "warning", "path": "receipts[7].category", "page": 1,
-     "extracted": "keno/lottery", "on_page": "Local Receipts: Other, Keno Fund column 17,143.58",
-     "issue": "Keno proceeds assumed from the fund column; the line itself is printed only as 'Other'"},
-    {"severity": "warning", "path": "disbursements[2].category", "page": 2,
-     "extracted": "other", "on_page": "40 Miscellaneous, General Fund 56,802.85",
-     "issue": "All General Fund spending is on the Miscellaneous line with no function; defensible as other (label says miscellaneous), but the fund rule (General Fund -> general government) could also apply"},
-    {"severity": "warning", "path": "balance_sheet.equity[0].original_label", "page": 1,
-     "extracted": "Ending Balance (all funds)", "on_page": "24 Ending Balance (Line 22 MINUS Line 23)",
-     "issue": "Label isn't printed exactly like this; the amount is the sum of the governmental fund columns (marked computed)"}
+     "extracted": "keno/lottery", "on_page": "Local Receipts: Other 17,143.58 (Keno Fund column)",
+     "issue": "Keno Fund's only receipt line is printed as 'Local Receipts: Other' with no breakdown; keno/lottery is a reasonable assumption from the fund name (could include interest), already marked review"},
+    {"severity": "warning", "path": "receipts[8].category", "page": 1,
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other 43,128.46 (Sewer Fund column)",
+     "issue": "Sewer Fund's only receipt line is printed as 'Local Receipts: Other' with no breakdown; Utility Charges is assumed from the fund, already marked review"},
+    {"severity": "warning", "path": "receipts[6].category", "page": 1,
+     "extracted": "other", "on_page": "Local Receipts: Other 38,275.25 (General Fund column)",
+     "issue": "36% of governmental receipts are in 'other' (over the 10% review threshold); the filing has no breakdown, so 'other' is defensible and it is already marked review"}
   ]
 }

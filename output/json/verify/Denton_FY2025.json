@@ -1,8 +1,18 @@
 {
   "stem": "Denton_FY2025",
-  "values_checked": 62,
+  "values_checked": 55,
   "issues": [
-    {"severity": "warning", "path": "receipts[9].category", "page": 3, "extracted": "keno/lottery", "on_page": "18 Local Receipts: Other (KENO column) 466,598.38", "issue": "printed only as Local Receipts: Other; keno proceeds assumed from the fund name (already marked review). Large relative to the fund's 1.79M investments, could include investment maturities or interest"},
-    {"severity": "warning", "path": "receipts[11].category", "page": 1, "extracted": "charges for services/fees", "on_page": "18 Local Receipts: Other - Water 149,919.28 / Sewer 57,834.91", "issue": "utility charges assumed for lines printed only as Other (already marked review; also receipts[12])"}
+    {"severity": "warning", "path": "receipts[9].category", "page": 3,
+     "extracted": "keno/lottery", "on_page": "Local Receipts: Other 466,598.38 (Keno column)",
+     "issue": "Assumption: the Keno fund's line 18 'Other' is treated as all keno proceeds. The fund holds about 1.79M in investments, so part of it is probably interest. There is no breakdown on the page. A review note is present."},
+    {"severity": "warning", "path": "receipts[11].category", "page": 1,
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other 149,919.28 (Water) / 57,834.91 (Sewer)",
+     "issue": "Assumption: the utility funds' 'Other' local receipts are treated as user charges (receipts[11] and receipts[12]). There is no breakdown on the page. A review note is present."},
+    {"severity": "warning", "path": "balance_sheet.equity", "page": 1,
+     "extracted": "fund ending balance lines with no category", "on_page": "Ending Balance per fund (line 24)",
+     "issue": "None of the equity lines has a category field. Amounts tie: the sum is 2,708,253.59."},
+    {"severity": "warning", "path": "decision_needed", "page": 2,
+     "extracted": "voided page figures only in notes", "on_page": "Exhibit A p1 crossed out (p2) and investments schedule crossed out (p7); revised p1 stamped 'Revision Received 3/20/26'",
+     "issue": "The differing figures on the crossed-out version (General local other 29,141.60, Water 149,681.67, Sewer 57,482.94, total ending 2,705,321.02) are recorded only in notes. They are not in report_discrepancies[] and have no review entry. Using the revised page is correct."}
   ]
 }

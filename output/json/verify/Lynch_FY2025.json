@@ -1,9 +1,21 @@
 {
   "stem": "Lynch_FY2025",
-  "values_checked": 44,
+  "values_checked": 46,
   "issues": [
+    {"severity": "warning", "path": "disbursements[3].original_label", "page": 2,
+     "extracted": "Other Capital Outlay", "on_page": "36 Other Capital Outlay 3,450.00 (General Fund)",
+     "issue": "the user's capital outlay rule relabels capital outlay lines 'Capital Outlay: <function>' (printed text in printed_label); not applied here (user_rules.py may apply it)"},
     {"severity": "warning", "path": "receipts[10].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other - Water Fund 41,115; Sewer & SW Fund 90,340",
-     "issue": "The utility fund receipts are labelled only 'Other' and are assumed to be service charges. If they are utility sales, the 2026-10-28 rule makes them Utility Charges. Applies to receipts[10] and receipts[11]."}
+     "extracted": "Utility Charges", "on_page": "18 Local Receipts: Other, Water Fund 41,115.00",
+     "issue": "assumed to be water charges; the page prints no breakdown (review already set)"},
+    {"severity": "warning", "path": "receipts[11].category", "page": 1,
+     "extracted": "Utility Charges", "on_page": "18 Local Receipts: Other, Sewer & SW Fund 90,340.00",
+     "issue": "assumed to be sewer/solid waste charges; the page prints no breakdown (review already set)"},
+    {"severity": "warning", "path": "balance_sheet.equity", "page": 1,
+     "extracted": "General Fund ending balance / Street Fund ending balance / ...", "on_page": "24 Ending Balance (Line 22 MINUS Line 23) / 26 Net Cash Balance",
+     "issue": "equity and asset original_labels are descriptions the extractor made up, not the printed row labels"},
+    {"severity": "warning", "path": "missing", "page": 1,
+     "extracted": null, "on_page": "County Treasurer Balance at September 30, 2025 1,930.87 (October 1, 2024 1,013.07)",
+     "issue": "printed below the statement but not recorded or mentioned in notes; it is not clear whether it is inside the Net Cash Balance (user rule: county treasurer balances are Cash and Cash Equivalents)"}
   ]
 }

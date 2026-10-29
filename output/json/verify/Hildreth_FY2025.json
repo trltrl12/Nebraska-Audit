@@ -1,12 +1,30 @@
 {
   "stem": "Hildreth_FY2025",
-  "values_checked": 122,
+  "values_checked": 118,
   "issues": [
-    {"severity": "warning", "path": "detail[14].detail_category", "page": 13,
-     "extracted": "other charges for services", "on_page": "Hall - Charges for services 360",
-     "issue": "Village hall charges are most likely hall rental, so Rentals / rentals may fit better than other charges for services"},
-    {"severity": "warning", "path": "detail[56].original_label", "page": 11,
+    {"severity": "error", "path": "detail[7].category", "page": 12,
+     "extracted": "charges for services/fees", "on_page": "Cemetery department: Charges for services 5,968",
+     "issue": "Cemetery department charges are cemetery fees (the extractor's own detail_category is 'cemetery fees'); user rule makes Cemetery Fees its own receipt category, out of charges for services"},
+    {"severity": "error", "path": "detail[16].category", "page": 13,
+     "extracted": "charges for services/fees", "on_page": "Summer Sports department: Charges for services 9,984",
+     "issue": "Summer Sports charges are recreation fees (detail_category already 'recreation/pool/park fees'); user rule makes Recreation Fees its own receipt category, out of charges for services"},
+    {"severity": "warning", "path": "detail[14].category", "page": 13,
+     "extracted": "charges for services/fees", "on_page": "Hall department: Charges for services 360",
+     "issue": "Village hall charges are probably hall rental (Rentals); not stated on the page"},
+    {"severity": "warning", "path": "receipts[6].category", "page": 6,
+     "extracted": "charges for services/fees", "on_page": "Charges for services 16,312",
+     "issue": "p12-13 show this line is Summer Sports 9,984 (61%, recreation), Cemetery 5,968 and Hall 360; under the mixed-line rule the dominant category Recreation Fees (with review) could apply, and no line here is a generic fee for services"},
+    {"severity": "warning", "path": "detail[29].category", "page": 12,
+     "extracted": "health/welfare", "on_page": "Cemetery department; budget schedule p10 lists Cemetery under 'Public works', and the statement's Public works 52,985 includes it",
+     "issue": "the cemetery follows the extractor rule (health/welfare), but the report counts it under Public works (streets/highways on the statement line), so the detail and statement functions differ (applies to detail[29], [30], [32])"},
+    {"severity": "warning", "path": "detail[55].original_label", "page": 11,
      "extracted": "Capital outlay", "on_page": "Capital outlay 36,307",
-     "issue": "The Street Fund capital outlay line (and the business-type statement line disbursements[14] 'Capital outlay' 49,645) is not labelled 'Capital Outlay: <function>', unlike the General Fund department lines. The user's capital outlay label rule is applied inconsistently (user_rules.py may fix)"}
+     "issue": "the user rule labels every capital outlay line 'Capital Outlay: <function>' (here 'Capital Outlay: Streets/Highways', printed text in printed_label); the General Fund department capital outlay lines were relabelled but this one was not"},
+    {"severity": "warning", "path": "receipts[14].category", "page": 8,
+     "extracted": "donations/contributions", "on_page": "Grant revenue 14,644 (Capital Grants and Contributions, p3)",
+     "issue": "grant source not stated; could be intergovernmental/state aid or federal grants (already in decision_needed)"},
+    {"severity": "warning", "path": "ending_cash", "page": 4,
+     "extracted": 591231, "on_page": "Cash 307,777 + Certificates of deposit 280,153 + County treasurer cash 3,301",
+     "issue": "ending_cash includes the 280,153 certificates of deposit, but the balance sheet puts them in Investments and ending_investments is null; beginning_cash 549,767 likewise is the total fund balance. The identity holds, but the cash/investment split doesn't match the balance sheet"}
   ]
 }

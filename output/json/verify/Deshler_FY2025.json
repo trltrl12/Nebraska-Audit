@@ -1,9 +1,15 @@
 {
   "stem": "Deshler_FY2025",
-  "values_checked": 164,
+  "values_checked": 180,
   "issues": [
-    {"severity": "warning", "path": "decision_needed[1]", "page": 9, "extracted": "p9 all-funds 'Capital outlay' 510,441 recorded in detail as governmental", "on_page": "Capital outlay 510,441 (Budgetary Comparison Schedule - Cash Basis, All Funds)", "issue": "stale: the p9 combined schedule lines were removed from detail (per-fund rule 2026-10-27), so this question no longer describes the JSON; the notes also still describe the p9 lines as recorded"},
-    {"severity": "warning", "path": "receipts[4].category", "page": 7, "extracted": "charges for services/fees", "on_page": "Charges for services 1,346,351 (Electric/Water/Sewer/Refuse total)", "issue": "utility fund sales; the same label is category Utility Charges in detail (user 2026-10-28 rule), so the receipt and detail categories disagree"},
-    {"severity": "warning", "path": "receipts[3].category", "page": 5, "extracted": "charges for services/fees", "on_page": "Local 248,097", "issue": "broad group; Statement of Activities shows charges 116,814 (47%), miscellaneous 91,789, interest 10,206, so no category is over half (already marked review)"}
+    {"severity": "warning", "path": "detail[6].category", "page": 3,
+     "extracted": "other (General Fund Local 198,855)", "on_page": "Statement of Activities charges for services: general government 3,518 + public safety 93,433 + culture-recreation 18,263",
+     "issue": "On the government-wide level, charges for services are only 47% of 'Local'. Most of the 116,814 belongs to General Fund functions, though, so charges for services may be more than half of the General Fund's Local 198,855. The fire/public safety split with the nonmajor funds is unclear. Defensible, but the category should be reviewed."},
+    {"severity": "warning", "path": "detail[5].detail_category", "page": 5,
+     "extracted": "other state aid", "on_page": "Intergovernmental 67,587 (Nonmajor Governmental Funds)",
+     "issue": "The nonmajor intergovernmental line may be mostly capital grants (Statement of Activities p3: economic development capital grants 72,242). Its detail category is an assumption."},
+    {"severity": "warning", "path": "decision_needed[1]", "page": 9,
+     "extracted": "question about p9 all-funds 'Capital outlay' 510,441 recorded in detail", "on_page": "Budgetary Comparison Schedule - Cash Basis, All Funds",
+     "issue": "This entry is stale. Under the user's 2026-10-27 per-fund rule, the p9 combined schedule lines were removed from detail, and no p9 line is in detail now. The notes also still describe the p9 schedule as recorded line by line, which contradicts the closing sentence of the notes."}
   ]
 }

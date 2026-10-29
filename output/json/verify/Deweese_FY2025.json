@@ -1,9 +1,21 @@
 {
   "stem": "Deweese_FY2025",
-  "values_checked": 40,
+  "values_checked": 38,
   "issues": [
-    {"severity": "warning", "path": "receipts[7].category", "page": 1,
-     "extracted": "charges for services/fees (Water 7,968; also receipts[8] Sewer 11,520)", "on_page": "Line 18 Local Receipts: Other, Water and Sewer fund columns",
-     "issue": "The Garbage column's identical 'Local Receipts: Other' line (receipts[9]) is Utility Charges, but the Water and Sewer columns were left in charges for services/fees. Utility fund collections belong in Utility Charges (user rule 2026-10-28). The categories are inconsistent within the report, and all three are assumed to be user charges."}
+    {"severity": "error", "path": "receipts[7].category", "page": 1,
+     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other 7,968.00 (Water column)",
+     "issue": "The extraction itself treats this as utility fund collections. Under the user rule of 2026-10-28, utility fund charges are category Utility Charges, not charges for services. The Garbage line in this same report already uses Utility Charges."},
+    {"severity": "error", "path": "receipts[8].category", "page": 1,
+     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other 11,520.00 (Sewer column)",
+     "issue": "Same issue as receipts[7]: Sewer fund collections should be Utility Charges, not charges for services/fees."},
+    {"severity": "warning", "path": "receipts[7].review", "page": 1,
+     "extracted": "assumed user charges", "on_page": "Local Receipts: Other (Water 7,968.00 / Sewer 11,520.00 / Garbage 7,530.00)",
+     "issue": "The utility funds' 'Other' local receipts have no printed breakdown. Treating them as user charges is an assumption (applies to receipts[7]-[9])."},
+    {"severity": "warning", "path": "beginning_investments", "page": 1,
+     "extracted": 19397.94, "on_page": "Investments 19,397.94 (already inside Subtotal of Beginning Balance 105,312.26)",
+     "issue": "beginning_investments (19,397.94) and ending_investments (19,625.06) are set while beginning_cash and ending_cash already include investments, since they are the line 3/28 subtotals. Anything that adds cash and investments would count them twice. Denton leaves these fields null in the same situation. The identity ties on cash alone: 165,032.63 + 56,511.26 - 57,433.88 = 164,110.01."},
+    {"severity": "warning", "path": "balance_sheet.equity", "page": 1,
+     "extracted": "fund ending balance lines with no category", "on_page": "Ending Balance per fund (line 24)",
+     "issue": "None of the equity lines has a category field. Amounts tie: the sum is 169,236.53."}
   ]
 }
