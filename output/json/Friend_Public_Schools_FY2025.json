@@ -3,7 +3,7 @@
   "entity_type": "school district",
   "fiscal_year_end": "2025-08-31",
   "basis": "cash",
-  "extraction_attempt": 2,
+  "extraction_attempt": 3,
   "beginning_cash": {
     "amount": 2510524.93,
     "source_page": 10
@@ -200,6 +200,14 @@
       "review": "only described as Other Non-Revenue Receipts",
       "detail_category": "Other Nonrevenue Receipts",
       "category_decision": "user 2026-10-23"
+    },
+    {
+      "fund_type": "governmental",
+      "category": "other",
+      "original_label": "Allocation from General Fund",
+      "amount": 122375.2,
+      "source_page": 6,
+      "review": "one-sided allocation from General Fund; no matching transfer out printed (Depreciation 100,000.00 + Employee Benefit 22,375.20, inside Total Receipts 5,658,194.26 p6); see decision_needed"
     }
   ],
   "disbursements": [
@@ -596,20 +604,14 @@
     "source_page": 10
   },
   "debt_proceeds": null,
-  "other_financing": {
-    "amount": 122375.2,
-    "source_page": 6,
-    "computed": "Allocation from General Fund printed as a receipt line: Depreciation 100,000.00 + Employee Benefit 22,375.20 (p6, p16, p17)"
-  },
+  "other_financing": null,
   "adjustments": [],
   "reported_totals": {
     "governmental": {
       "receipts": {
         "amount": 5658194.26,
         "source_page": 6,
-        "includes": [
-          "other_financing"
-        ]
+        "includes": []
       },
       "disbursements": {
         "amount": 5716928.21,
@@ -692,7 +694,7 @@
     {
       "question": "The Depreciation Fund (100,000.00) and Employee Benefit Fund (22,375.20) show 'Allocation from General Fund' as receipts, but the General Fund's disbursements/transfers (4,795,398.66 total, balance 936,119.64) never record paying them out. Is this a one-sided transfer that overstates total cash?",
       "amount": 122375.2,
-      "recorded_as": "other_financing +122,375.20 (not in receipts items); printed Total Receipts 5,658,194.26 includes it",
+      "recorded_as": "receipt line 'Allocation from General Fund' 122,375.20 (category other, review), as printed inside Total Receipts 5,658,194.26 (p6); detail keeps it as other financing in the Depreciation and Employee Benefit schedules; not in transfers_in/out",
       "source_page": 6
     }
   ],
@@ -4014,13 +4016,13 @@
       "source_page": 22
     }
   ],
-  "notes": "Modified cash basis school district, FY ended 2025-08-31. All funds in Exhibit III (General, Bond, Special Building, Depreciation, Employee Benefit, Activities, Student Fee, School Nutrition) are governmental funds, including School Nutrition; no proprietary funds, so business_type is null. Receipts/disbursements/balances use the Total Governmental Funds column (Exhibit III, trimmed pp6, 8, 10). Beginning cash = Total Governmental Funds beginning modified cash fund balance 2,510,524.93 (also net position beginning p3); ending 2,451,790.98. Receipt lines split from the combined Local/County/State/Non-Revenue lines using the fund schedules (pp12-13, 18-21); each split ties to its printed line. Attempt 2 (audit findings): Local Receipts split now separates property tax 2,561,467.75 from Penalties and Interest on Taxes 5,321.58, Carline Tax 1,912.54 and Public Power District Sales Tax 24,855.41 (no longer other taxes), activity receipts are Extracurricular Receipts; County Receipts ESU 3,095.23 is ESU Receipts; State Receipts 2,203,471.56 split into Homestead Exemption 46,127.45, Property Tax Credit 1,303,341.12, Motor Vehicle Pro-Rate 9,886.84, Nameplate Capacity Tax 34,381.82 and state aid 809,734.33 from the fund schedules. Transfers: printed Transfers From Other Funds 105,100 (nutrition 57,100 + activities 48,000) = transfers_in; matching General Fund outflow 105,100 (Schedule M p30). Cross-check: GF->Nutrition 57,100 and GF->Activities 48,000 match both sides. 'Allocation from General Fund' of 122,375.20 (Depreciation 100,000 + Employee Benefit 22,375.20) is printed as a receipt, but General Fund schedules (pp11, 14, 30) show no corresponding disbursement or transfer (General fund balance roll-forward ties without it), so it is a one-sided inflow: recorded in other_financing (not in receipts items), and the printed Total Receipts 5,658,194.26 includes it (includes: other_financing); see decision_needed. Identity: 2,510,524.93 + 5,535,819.06 - 5,716,928.21 + 105,100 - 105,100 + 122,375.20 = 2,451,790.98. Disbursement functions per the school rules: SPED related services (2141-2183) support services/Pupils; 2211, 2220, 2230 Instruction - Related Technology support services/Staff; 2510 General Administration - Business Support = Business; 2650 Vehicle Operation, Maintenance & Purchasing sits in the 2600 plant group (Schedule M p28) = Building and Grounds; High Ability and Title I/IDEA/REAP detail lines kept as instruction (not grouped by the report), statement 'Federal Programs' line = Federal Programs; Employee Benefits fund and Depreciation 'Purchased Services' (3,020) functions assumed (review). Debt Service split into principal 465,000 and interest/fees 55,236.50 using Bond Fund schedule p20. Detail: Schedule M (General Fund disbursements by program x object, p23-30) supersedes Schedule B (p14-15) so Schedule B is not recorded; Schedule A (receipts, p12-13) recorded for General revenue; the budget/actual summary Schedule A-1 (p11) and County Treasurers' schedules N and O (pp31-32, duplicate of General/Bond fund tax receipts) not recorded to avoid double counting. Object mapping of Schedule M: Purchased Professional/Technical and Other Property Services -> professional/contract services, Purchased Property Services -> repairs and maintenance, Property -> equipment purchases (4700 Building Improvements -> land and buildings), Other Items -> dues, training and travel. Schedule M is marked Unaudited but ties to the audited total 4,795,398.66; its printed total includes the 105,100 transfers (recorded as other financing -57,100 and -48,000). Student Fees Fund has only zero actuals. Balance sheet (attempt 2, user rule 2026-10-27): Exhibit III governmental funds statement Total Governmental Funds column (p10; totals 2,451,790.98 equal Exhibit I), fund balance by classification (Committed 310,197.33, Assigned 1,205,474.01, Unassigned 936,119.64); County Treasurers' Balance treated as cash; liabilities printed as 0.00 on Exhibit I (p1). Read pages 1-32 of 32",
+  "notes": "Modified cash basis school district, FY ended 2025-08-31. All funds in Exhibit III (General, Bond, Special Building, Depreciation, Employee Benefit, Activities, Student Fee, School Nutrition) are governmental funds, including School Nutrition; no proprietary funds, so business_type is null. Receipts/disbursements/balances use the Total Governmental Funds column (Exhibit III, trimmed pp6, 8, 10). Beginning cash = Total Governmental Funds beginning modified cash fund balance 2,510,524.93 (also net position beginning p3); ending 2,451,790.98. Receipt lines split from the combined Local/County/State/Non-Revenue lines using the fund schedules (pp12-13, 18-21); each split ties to its printed line. Attempt 2 (audit findings): Local Receipts split now separates property tax 2,561,467.75 from Penalties and Interest on Taxes 5,321.58, Carline Tax 1,912.54 and Public Power District Sales Tax 24,855.41 (no longer other taxes), activity receipts are Extracurricular Receipts; County Receipts ESU 3,095.23 is ESU Receipts; State Receipts 2,203,471.56 split into Homestead Exemption 46,127.45, Property Tax Credit 1,303,341.12, Motor Vehicle Pro-Rate 9,886.84, Nameplate Capacity Tax 34,381.82 and state aid 809,734.33 from the fund schedules. Transfers: printed Transfers From Other Funds 105,100 (nutrition 57,100 + activities 48,000) = transfers_in; matching General Fund outflow 105,100 (Schedule M p30). Cross-check: GF->Nutrition 57,100 and GF->Activities 48,000 match both sides. 'Allocation from General Fund' of 122,375.20 (Depreciation 100,000 + Employee Benefit 22,375.20) is printed as a receipt, but General Fund schedules (pp11, 14, 30) show no corresponding disbursement or transfer (General fund balance roll-forward ties without it), so it is a one-sided inflow: recorded (attempt 3, 2026-10-29) as a receipt line 'Allocation from General Fund' (category other, review) because p6 prints it inside Total Receipts 5,658,194.26; other_financing is null; see decision_needed. Identity: 2,510,524.93 + 5,658,194.26 - 5,716,928.21 + 105,100 - 105,100 = 2,451,790.98. Disbursement functions per the school rules: SPED related services (2141-2183) support services/Pupils; 2211, 2220, 2230 Instruction - Related Technology support services/Staff; 2510 General Administration - Business Support = Business; 2650 Vehicle Operation, Maintenance & Purchasing sits in the 2600 plant group (Schedule M p28) = Building and Grounds; High Ability and Title I/IDEA/REAP detail lines kept as instruction (not grouped by the report), statement 'Federal Programs' line = Federal Programs; Employee Benefits fund and Depreciation 'Purchased Services' (3,020) functions assumed (review). Debt Service split into principal 465,000 and interest/fees 55,236.50 using Bond Fund schedule p20. Detail: Schedule M (General Fund disbursements by program x object, p23-30) supersedes Schedule B (p14-15) so Schedule B is not recorded; Schedule A (receipts, p12-13) recorded for General revenue; the budget/actual summary Schedule A-1 (p11) and County Treasurers' schedules N and O (pp31-32, duplicate of General/Bond fund tax receipts) not recorded to avoid double counting. Object mapping of Schedule M: Purchased Professional/Technical and Other Property Services -> professional/contract services, Purchased Property Services -> repairs and maintenance, Property -> equipment purchases (4700 Building Improvements -> land and buildings), Other Items -> dues, training and travel. Schedule M is marked Unaudited but ties to the audited total 4,795,398.66; its printed total includes the 105,100 transfers (recorded as other financing -57,100 and -48,000). Student Fees Fund has only zero actuals. Balance sheet (attempt 2, user rule 2026-10-27): Exhibit III governmental funds statement Total Governmental Funds column (p10; totals 2,451,790.98 equal Exhibit I), fund balance by classification (Committed 310,197.33, Assigned 1,205,474.01, Unassigned 936,119.64); County Treasurers' Balance treated as cash; liabilities printed as 0.00 on Exhibit I (p1). Read pages 1-32 of 32",
   "report_discrepancies": [
     {
       "check": "reconcile",
       "difference": 122375.2,
       "source_page": 6,
-      "note": "Depreciation (100,000.00) and Employee Benefit (22,375.20) funds print 'Allocation from General Fund' as receipts (p6), but the General Fund (p9) shows only 105,100.00 of transfers out and no matching outflow, so the governmental totals include a one-sided 122,375.20 inflow; recorded as printed (other_financing)"
+      "note": "Depreciation (100,000.00) and Employee Benefit (22,375.20) funds print 'Allocation from General Fund' as receipts (p6), but the General Fund (p9) shows only 105,100.00 of transfers out and no matching outflow, so the governmental totals include a one-sided 122,375.20 inflow; recorded as printed (receipt line inside Total Receipts)"
     }
   ]
 }
