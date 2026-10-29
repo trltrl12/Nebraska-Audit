@@ -3,7 +3,7 @@
   "entity_type": "village",
   "fiscal_year_end": "2025-09-30",
   "basis": "GAAP",
-  "extraction_attempt": 1,
+  "extraction_attempt": 2,
   "beginning_cash": null,
   "beginning_investments": null,
   "beginning_fund_balance": {
@@ -57,10 +57,38 @@
     },
     {
       "fund_type": "governmental",
+      "category": "Rentals",
+      "original_label": "Charges, admission, and rental fees",
+      "amount": 8400,
+      "source_page": 5,
+      "split_from": "Charges, admission, and rental fees 11,925 (p5); General Fund Lease income 8,400 (p12)",
+      "computed": "Lease income 8,400 from General Fund departments combining statement (p12)"
+    },
+    {
+      "fund_type": "governmental",
+      "category": "Recreation Fees",
+      "original_label": "Charges, admission, and rental fees",
+      "amount": 2456,
+      "source_page": 5,
+      "split_from": "Charges, admission, and rental fees 11,925 (p5); Recreation charges for services 2,456 (p12)",
+      "computed": "Recreation department charges for services 2,456 (p12)"
+    },
+    {
+      "fund_type": "governmental",
+      "category": "Cemetery Fees",
+      "original_label": "Charges, admission, and rental fees",
+      "amount": 700,
+      "source_page": 5,
+      "split_from": "Charges, admission, and rental fees 11,925 (p5); Cemetery charges for services 700 (p13)",
+      "computed": "Cemetery department charges for services 700 (p13)"
+    },
+    {
+      "fund_type": "governmental",
       "category": "charges for services/fees",
       "original_label": "Charges, admission, and rental fees",
-      "amount": 11925,
-      "source_page": 5
+      "amount": 369,
+      "source_page": 5,
+      "split_from": "Charges, admission, and rental fees 11,925 (p5); Street Fund column 369 (p5, p11)"
     },
     {
       "fund_type": "governmental",
@@ -101,25 +129,27 @@
     },
     {
       "fund_type": "business-type",
-      "category": "charges for services/fees",
+      "category": "Utility Charges",
       "original_label": "Sales",
       "amount": 635282,
-      "source_page": 7
+      "source_page": 7,
+      "detail_category": "other utility charges"
     },
     {
       "fund_type": "business-type",
-      "category": "charges for services/fees",
+      "category": "Utility Charges",
       "original_label": "Service charges",
       "amount": 27957,
-      "source_page": 7
+      "source_page": 7,
+      "detail_category": "electric charges"
     },
     {
       "fund_type": "business-type",
-      "category": "charges for services/fees",
+      "category": "other",
       "original_label": "Other revenue",
       "amount": 9890,
       "source_page": 7,
-      "review": "other operating revenue of utilities"
+      "review": "other operating revenue of the utility funds; no breakdown printed"
     },
     {
       "fund_type": "business-type",
@@ -653,7 +683,7 @@
       "fund": "General",
       "department": "General",
       "section": "revenue",
-      "category": "charges for services/fees",
+      "category": "Rentals",
       "detail_category": "rentals",
       "original_label": "Lease income",
       "amount": 8400,
@@ -695,7 +725,7 @@
       "fund": "General",
       "department": "Recreation",
       "section": "revenue",
-      "category": "charges for services/fees",
+      "category": "Recreation Fees",
       "detail_category": "recreation/pool/park fees",
       "original_label": "Charges for services",
       "amount": 2456,
@@ -779,7 +809,7 @@
       "fund": "General",
       "department": "Cemetery",
       "section": "revenue",
-      "category": "charges for services/fees",
+      "category": "Cemetery Fees",
       "detail_category": "cemetery fees",
       "original_label": "Charges for services",
       "amount": 700,
@@ -1277,7 +1307,7 @@
     }
   ],
   "report_discrepancies": [],
-  "notes": "Governmental funds are modified cash basis but reported with fund balances (GAAP-style identity: 457,761 + 304,179 - 290,667 = 471,273); business-type funds are accrual. Governmental lines from the Total Governmental Funds column (p5); business-type from the proprietary revenues/expenses statement Total column (p7). Business-type reported totals are computed (no single total printed). Business net position 1,471,520 + 688,542 - 670,182 = 1,489,880. Proprietary cash flows (p8-9): no noncapital financing section printed (null); capital financing includes 14,225 trash fund proceeds. Balance sheet is the government-wide Statement of Net Position Total column (p1), which mixes the governmental modified cash basis with accrual business-type. Governmental ending_cash computed from p4 balance sheet (463,970 + 7,303 county treasurer). Detail: General Fund taken from the more detailed Combining Statement by department (pp12-13); the General Fund budget schedule (p10) left out to avoid double counting, so its budget figures are not carried. Street Fund from its budget schedule (p11). The CDBG fund (9,374 loan collection) has no schedule. No utility fund budget schedules in trim. No transfers. Read pages 1-13 of 13",
+  "notes": "Governmental funds are modified cash basis but reported with fund balances (GAAP-style identity: 457,761 + 304,179 - 290,667 = 471,273); business-type funds are accrual. Governmental lines from the Total Governmental Funds column (p5); business-type from the proprietary revenues/expenses statement Total column (p7). Business-type reported totals are computed (no single total printed). Business net position 1,471,520 + 688,542 - 670,182 = 1,489,880. Proprietary cash flows (p8-9): no noncapital financing section printed (null); capital financing includes 14,225 trash fund proceeds. Balance sheet is the government-wide Statement of Net Position Total column (p1), which mixes the governmental modified cash basis with accrual business-type. Governmental ending_cash computed from p4 balance sheet (463,970 + 7,303 county treasurer). Detail: General Fund taken from the more detailed Combining Statement by department (pp12-13); the General Fund budget schedule (p10) left out to avoid double counting, so its budget figures are not carried. Street Fund from its budget schedule (p11). The CDBG fund (9,374 loan collection) has no schedule. No utility fund budget schedules in trim. No transfers. Attempt 2 (charges re-check): governmental 'Charges, admission, and rental fees' 11,925 (p5) split per the fund schedules into Rentals 8,400 (lease income p12), Recreation Fees 2,456 (p12), Cemetery Fees 700 (p13) and charges for services 369 (Street Fund p11); matching detail lines recategorized. Business-type 'Sales' 635,282 (Electric/Water/Sewer/Trash) and Electric 'Service charges' 27,957 -> Utility Charges; 'Other revenue' 9,890 has no breakdown -> other with review. Read pages 1-13 of 13",
   "decision_needed": [
     {
       "question": "'Loan collection' 9,374 is a CDBG loan repayment. Is it revenue, or a return of principal that should be excluded?",
