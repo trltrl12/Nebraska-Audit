@@ -247,11 +247,21 @@ def one_tab(collected):
                 out.append({**ident_, "level": "cash flow", "fund_type": "business-type", "section": "roll-forward",
                             "source": src, "line": n, "original_label": label, "amount": v})
     for r in rows_of("Proprietary"):
+        # a report with no business-type activity (e.g. Lancaster County) has only internal service funds, which
+        # the report puts in governmental activities
+        try:
+            dj = json.loads((JSON_DIR / f"{r.get('filename')}.json").read_text())
+        except (OSError, ValueError):
+            dj = {}
+        has_bt = bool(dj.get("business_type")) or any(
+            x.get("fund_type") == "business-type" for k in ("receipts", "disbursements") for x in dj.get(k) or [])
+        pft, psec = ("business-type", "utility cash flow statement") if has_bt or not dj else \
+            ("internal service funds", "internal service funds cash flow statement")
         for n, (col, label) in enumerate(PROP_FLOW, 1):
             v = num_(r.get(col))
             if v is not None:
                 out.append({**{c: r.get(c) for c in ONE_COLS if c in r}, "level": "cash flow",
-                            "fund_type": "business-type", "section": "utility cash flow statement",
+                            "fund_type": pft, "section": psec,
                             "source": "statement", "line": n, "original_label": label, "amount": v})
     for r in rows_of("Line Items"):
         out.append({**{c: r.get(c) for c in ONE_COLS if c in r}, "level": "revenue and expenses",
