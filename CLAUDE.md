@@ -241,8 +241,10 @@ holds just those reports and sheets. Prioritise fixes and re-checks for these ty
   on the Auditor's site). Checked 2026-10-21: the Auditor's only FY2025 file
   (approved waiver for FY ending 2025) attaches the 10/1/23-9/30/24 statement; no other filing exists. Leave as is.
 - config/extra_pages.csv (stem,pages): source pages the finder must keep. Used for Ruskin_FY2025 (re-trimmed and
-- Re-trim queued 2026-10-29: Fort_Calhoun_Community_School_FY2025 + source p13 (right half of the governmental funds statement: Reclass and Total Governmental Funds columns). After the fetch: remap pages, re-extract the statement from the Total column (drop the 5 computed "Reclass" lines), verify.
   re-extracted 2026-10-26, verified 0 errors).
+- Re-trim queued 2026-10-29: Fort_Calhoun_Community_School_FY2025 + source p13 (right half of the governmental funds
+  statement: Reclass and Total Governmental Funds columns). After the fetch: remap pages, re-extract the statement from
+  the Total column (drop the 5 computed "Reclass" lines), verify.
 - Taylor_FY2025: trimmed pp2-8 are rotated, so the page-text check can't confirm the governmental amounts (checked visually).
 - Trimmed to one page (extracted from that page; check the source PDF for missing statements):
   Douglas_County_SID_640_FY2025.
