@@ -1,15 +1,12 @@
 {
   "stem": "Bee_FY2025",
-  "values_checked": 48,
+  "values_checked": 46,
   "issues": [
-    {"severity": "warning", "path": "receipts[8].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Water) 41,702.66",
-     "issue": "the Garbage fund's line of the same kind (receipts[10]) is Utility Charges; Water and Sewer use charges for services/fees. Same label, different category in one report"},
-    {"severity": "warning", "path": "receipts[9].category", "page": 2,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Sewer) 33,389.43",
-     "issue": "inconsistent with Garbage (Utility Charges); the user rule puts utility fund charges in Utility Charges"},
-    {"severity": "warning", "path": "balance_sheet.assets", "page": 1,
-     "extracted": null, "on_page": "County Treasurer Balance at September 30, 2025 753.39",
-     "issue": "printed below the form and not part of the line 26-28 balances or totals; not recorded or mentioned in notes (informational)"}
+    {"severity": "warning", "path": "receipts[0].original_label", "page": 1,
+     "extracted": "Personal and Real Property Taxes (General)", "on_page": "Personal and Real Property Taxes",
+     "issue": "user label rule renames 'Personal and Real Property Taxes' to 'Property Tax' (printed text in printed_label); the '(General)' suffix keeps scripts/user_rules.py's regex from matching, so the rename will not be applied"},
+    {"severity": "warning", "path": "missing", "page": 1,
+     "extracted": null, "on_page": "County Treasurer Balance at October 1, 2024 $1,507.09; at September 30, 2025 753.39",
+     "issue": "memo balances printed below the fund columns (outside lines 24/28) are not recorded or mentioned in notes; excluding them is defensible (Benedict notes them as outside the totals), but they should at least be noted"}
   ]
 }

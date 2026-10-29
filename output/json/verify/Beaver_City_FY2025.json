@@ -1,24 +1,15 @@
 {
   "stem": "Beaver_City_FY2025",
-  "values_checked": 205,
+  "values_checked": 214,
   "issues": [
-    {"severity": "warning", "path": "receipts[13].category", "page": 8,
-     "extracted": "charges for services/fees", "on_page": "Sales 1,181,520 (Electric/Water/Sewer/Trash enterprise funds)",
-     "issue": "user rule (2026-10-28) puts utility fund sales in Utility Charges; the extractor's base list still has utility sales under charges for services (rule conflict)"},
-    {"severity": "warning", "path": "detail[11].category", "page": 18,
-     "extracted": "charges for services/fees", "on_page": "Ambulance: Charges for services and rental fees 42,760",
-     "issue": "user rule gives ambulance fees their own category, Ambulance Fees (detail_category ambulance/rescue fees is right)"},
-    {"severity": "warning", "path": "detail[17].category", "page": 18,
-     "extracted": "charges for services/fees", "on_page": "Pool: Charges for services and rental fees 5,162",
-     "issue": "user rule category Recreation Fees for pool/park fees"},
-    {"severity": "warning", "path": "detail[20].category", "page": 18,
-     "extracted": "charges for services/fees", "on_page": "Park: Charges for services and rental fees 1,245",
-     "issue": "user rule category Recreation Fees for pool/park fees"},
-    {"severity": "warning", "path": "detail[27].category", "page": 18,
-     "extracted": "charges for services/fees", "on_page": "Community Building: Charges for services and rental fees 3,300",
-     "issue": "detail_category is rentals; user rule category is Rentals"},
+    {"severity": "warning", "path": "receipts[5].source_page", "page": 17,
+     "extracted": 18, "on_page": "General column 7,080 is printed on p17 (Charges for services and rental fees); p18 holds only the other departments and the Total 59,547",
+     "issue": "amount and split are right (7,080 + 42,760 + 6,407 + 3,300 = 59,547, the breakdown printed on pp17-18), but the cited page does not show 7,080 itself"},
+    {"severity": "warning", "path": "receipts[9].category", "page": 2,
+     "extracted": "donations/contributions", "on_page": "Grants and contributions 16,224 (Statement of Activities shows it as Operating Grants and Contributions: public safety 16,104, environment and leisure 120)",
+     "issue": "source not stated; could be government grants (intergovernmental/federal grants). Same for business-type 'Grant income' 192 (receipts[20]), shown as Grant proceeds in capital financing on the cash flow statement. Already marked review."},
     {"severity": "warning", "path": "detail[37].detail_category", "page": 17,
-     "extracted": "professional/contract services", "on_page": "Police: Contracted services 58,082",
-     "issue": "a police department's only spending is a contract, so law enforcement contract is likely (already marked review)"}
+     "extracted": "professional/contract services", "on_page": "Police: Contracted services 58,082 (the only Police spending line)",
+     "issue": "the entire police department is one contracted-services line; likely a sheriff/law enforcement contract (detail category law enforcement contract). Already marked review."}
   ]
 }

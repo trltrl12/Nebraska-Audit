@@ -1,18 +1,18 @@
 {
   "stem": "Davey_FY2025",
-  "values_checked": 44,
+  "values_checked": 48,
   "issues": [
     {"severity": "warning", "path": "decision_needed", "page": 2,
-     "extracted": "voided duplicate noted only in notes", "on_page": "Exhibit A p1 duplicate crossed out with red X: Community Center Local Receipts: Other 11,983.45 (vs 11,771.30), ending 55,157.01, total ending 837,433.87",
-     "issue": "Two versions of Exhibit A page 1; the crossed-out one differs (and its line 24 55,157.01 disagrees with its own line 28 54,944.86). The unmarked page was correctly used, but the differing figures are recorded only in notes, not in report_discrepancies/decision_needed, so the user's review list doesn't show them"},
-    {"severity": "warning", "path": "receipts[8].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Green Box / Sewer / Water fund columns) 31,119.71 / 46,686.64 / 20,623.25",
-     "issue": "Utility fund collections; under the 2026-10-28 user rule utility fund sales/charges (incl. garbage) are category Utility Charges. Same for receipts[9] and receipts[10]"},
-    {"severity": "warning", "path": "disbursements[3].original_label", "page": 4,
-     "extracted": "Capital Improvements", "on_page": "Capital Improvements: General 16,227.48 + Street 38,414.10 = 54,641.58",
-     "issue": "Capital outlay line spans two functions (general government / streets); the user's 'Capital Outlay: <function>' label can't be applied to the combined line without a split by fund column, which the page does print"},
+     "extracted": null, "on_page": "Voided duplicate of Exhibit A p1: Community Center Local Receipts: Other 11,983.45 (vs 11,771.30), total ending 837,433.87",
+     "issue": "Trimmed p2 is a duplicate of Exhibit A crossed out with a red X; the extraction used the unmarked p1, which correctly ties to its own line 28. The differing figures appear only in notes, with no report_discrepancies or decision_needed entry. A person should confirm that the unmarked page is the final one."},
+    {"severity": "warning", "path": "balance_sheet.equity[0].fund_type", "page": 3,
+     "extracted": "governmental", "on_page": "Improvement Fund 94,359.95",
+     "issue": "The report does not say what kind of fund the Improvement Fund is; the extractor assumed governmental (noted in notes). Its 9,596.67 receipts are also folded into the governmental Local Receipts: Other line."},
     {"severity": "warning", "path": "disbursements[4].category", "page": 4,
      "extracted": "economic development", "on_page": "Community Development 20,972.08 (Community Center Fund)",
-     "issue": "Paid from the Community Center Fund; could be culture/recreation (extractor flagged review)"}
+     "issue": "Paid entirely from the Community Center Fund, so this could be culture/recreation (extractor flagged it for review)."},
+    {"severity": "warning", "path": "receipts[8].category", "page": 1,
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other (Green Box 31,119.71; Sewer 46,686.64; Water 20,623.25)",
+     "issue": "The printed label is only 'Local Receipts: Other'. Treating these as utility collections is an inference from the fund columns (receipts[8]-[10], review notes present). original_label also adds the fund name in parentheses."}
   ]
 }
