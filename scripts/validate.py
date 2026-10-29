@@ -179,7 +179,10 @@ def check(stem, d):
             computed = sum_items(lines)
             src = d if fund == "governmental" else bt
             for inc in (rt.get("includes") or []) if isinstance(rt, dict) else []:
-                if inc in ("transfers_in", "transfers_out", "debt_proceeds", "other_financing", "transfers_net"):
+                if inc == "transfers_net":  # signed (+ in, - out): a net transfer out sits in a disbursements total
+                    v = amt(src.get(inc)) or 0
+                    computed += -v if key == "disbursements" else v
+                elif inc in ("transfers_in", "transfers_out", "debt_proceeds", "other_financing"):
                     computed += amt(src.get(inc)) or 0
             # hidden transfers split out of a printed line stay inside the printed total
             for x in (rt.get("includes_split") or []) if isinstance(rt, dict) else []:
