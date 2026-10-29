@@ -3,7 +3,7 @@
   "entity_type": "school district",
   "fiscal_year_end": "2025-08-31",
   "basis": "cash",
-  "extraction_attempt": 5,
+  "extraction_attempt": 6,
   "beginning_cash": {
     "amount": 15447356,
     "source_page": 5
@@ -146,7 +146,7 @@
       "amount": 6697,
       "source_page": 6,
       "split_from": "Other Local Receipts General column 39,377 (p4)",
-      "computed": "printed Other Local Receipts 39,377 (p4 General column) less 19,640 transfers into Depreciation (12,000, p10) and Employee Benefit (7,640, p11); remainder 19,737 = 1911 Other Local Licenses 6,697 + 1920 Other Contributions 13,040 (p6); this part 1911"
+      "computed": "Other Local Receipts 39,377 (p4 General column) = 1911 Other Local Licenses 6,697 + 1920 Other Contributions 13,040 (p6) + Depreciation Fund 12,000 (p10) + Employee Benefit Fund 7,640 (p11); this part 1911"
     },
     {
       "fund_type": "governmental",
@@ -155,7 +155,16 @@
       "amount": 13040,
       "source_page": 6,
       "split_from": "Other Local Receipts General column 39,377 (p4)",
-      "computed": "printed Other Local Receipts 39,377 (p4 General column) less 19,640 transfers into Depreciation (12,000, p10) and Employee Benefit (7,640, p11); remainder 19,737 = 1911 Other Local Licenses 6,697 + 1920 Other Contributions 13,040 (p6); this part 1920"
+      "computed": "Other Local Receipts 39,377 (p4 General column) = 1911 Other Local Licenses 6,697 + 1920 Other Contributions 13,040 (p6) + Depreciation Fund 12,000 (p10) + Employee Benefit Fund 7,640 (p11); this part 1920"
+    },
+    {
+      "fund_type": "governmental",
+      "category": "other",
+      "original_label": "Other Local Receipts (General Fund column) - Depreciation and Employee Benefit funds",
+      "amount": 19640,
+      "source_page": 4,
+      "split_from": "Other Local Receipts General column 39,377 (p4)",
+      "computed": "Other Local Receipts 39,377 (p4 General column) = 1911 Other Local Licenses 6,697 + 1920 Other Contributions 13,040 (p6) + Depreciation Fund 12,000 (p10) + Employee Benefit Fund 7,640 (p11); this part 12,000 + 7,640"
     },
     {
       "fund_type": "governmental",
@@ -326,33 +335,16 @@
       "original_label": "Nutrition Program",
       "amount": 270714,
       "source_page": 5
-    },
-    {
-      "fund_type": "governmental",
-      "category": "other",
-      "original_label": "Contra: transfers to Depreciation and Employee Benefit funds included in General column spending lines",
-      "amount": -19640,
-      "source_page": 5,
-      "split_from": "General column spending lines (Instruction through Federal programs) 5,153,882 (p5); transfers 12,000 (p10) + 7,640 (p11)",
-      "computed": "-(12,000 p10 + 7,640 p11)",
-      "review": "printed lines unchanged; page does not show which line(s) contain the 19,640 transfer, so this contra line offsets it; matches transfers_out",
-      "detail_category": "Salaries / Benefits",
-      "category_decision": "user 2026-10-23"
     }
   ],
   "transfers_in": {
-    "amount": 19640,
-    "source_page": 4,
-    "computed": "Depreciation Fund Transfer In 12,000 (p10) + Employee Benefit Transfer from General Fund 7,640 (p11); booked inside Other Local Receipts General column 39,377 (p4)",
-    "split_from": "Other Local Receipts General column 39,377 (p4)",
-    "review": "transfer hidden in receipts line"
+    "amount": 112008,
+    "source_page": 5,
+    "computed": "Transfers in(out) Activity Fund 40,908 + School Nutrition Fund 71,100 (p5)"
   },
   "transfers_out": {
-    "amount": 19640,
-    "source_page": 5,
-    "computed": "General fund payment to Depreciation 12,000 (p10) + Employee Benefit 7,640 (p11); sits inside General column spending lines on p5 (not in p9 Transfers (Outgoing) 112,008 = 40,908 + 71,100)",
-    "split_from": "General column disbursements 5,153,882 (p5)",
-    "review": "transfer hidden in spending lines; which line unknown, see contra line"
+    "amount": 112008,
+    "source_page": 5
   },
   "debt_proceeds": {
     "amount": 5103960,
@@ -366,16 +358,13 @@
         "amount": 12589329,
         "source_page": 4,
         "includes": [
-          "debt_proceeds",
-          "transfers_in"
+          "debt_proceeds"
         ]
       },
       "disbursements": {
         "amount": 14987939,
         "source_page": 5,
-        "includes": [
-          "transfers_out"
-        ]
+        "includes": []
       }
     },
     "business-type": null
@@ -1534,37 +1523,6 @@
       "source_page": 9
     },
     {
-      "schedule": "General Fund Budget and Actual",
-      "fund_type": "governmental",
-      "fund": "General",
-      "department": "Transfers to Other Funds",
-      "section": "other financing",
-      "original_label": "Transfers to Depreciation (12,000, p10) and Employee Benefit (7,640, p11) funds, paid within General fund spending",
-      "amount": -19640,
-      "budget_final": null,
-      "source_page": 9,
-      "computed": "-(12,000 p10 + 7,640 p11)",
-      "split_from": "General fund spending lines (p7-9); 8000 Transfers (Outgoing) 112,008 covers only Activities 40,908 + Nutrition 71,100",
-      "review": "transfer not printed separately on p9; offsets the contra expenditure line"
-    },
-    {
-      "schedule": "General Fund Budget and Actual",
-      "fund_type": "governmental",
-      "fund": "General",
-      "department": "General fund spending (group)",
-      "section": "expenditure",
-      "category": "other",
-      "detail_category": "Salaries / Benefits",
-      "original_label": "Contra: transfers to Depreciation and Employee Benefit funds included in General fund spending lines",
-      "amount": -19640,
-      "budget_final": null,
-      "source_page": 9,
-      "computed": "-(12,000 p10 + 7,640 p11)",
-      "split_from": "General fund expenditure lines 1100-6998 (p7-9); transfers 12,000 (p10) + 7,640 (p11)",
-      "review": "page does not show which line holds the transfer; contra offsets it",
-      "category_decision": "user 2026-10-23"
-    },
-    {
       "schedule": "Depreciation Fund Budget and Actual",
       "fund_type": "governmental",
       "fund": "Depreciation",
@@ -2443,5 +2401,5 @@
       "source_page": 18
     }
   ],
-  "notes": "Modified cash basis school district (FYE 8/31/2025). All funds including School Nutrition are in the governmental funds statement (no separate proprietary statement), so business_type is null and everything is governmental. Governmental lines use the Total Governmental Funds column (p4-5); the Transfers in(out) row nets to zero in the total column. Bond Proceeds 5,103,960 recorded as debt_proceeds. Printed total receipts 12,589,329 includes debt_proceeds and transfers_in 19,640 (see below); printed total disbursements 14,987,939 includes transfers_out 19,640 (via contra line). Combined lines split by fund column on p4: County Fines and Fees (General 12,251 = 2110 County Fines and Licenses, plus Cooperative 66,000 which p18 shows as ESU Receipts, now category ESU Receipts) and Other Local Receipts (six fund columns). The p4 General column combines the General, Depreciation and Employee Benefit funds. Its Other Local Receipts 39,377 = 1911 Other Local Licenses 6,697 + 1920 Other Contributions 13,040 (p6) + transfers 19,640 (Depreciation Fund Transfer In 12,000, p10; Employee Benefit Transfer from General Fund 7,640, p11); split into two receipts items plus transfers_in 19,640. The General fund's payment of that 19,640 is not in p9 Transfers (Outgoing) 112,008 (= Activities 40,908 + Nutrition 71,100) so it sits inside the General column spending lines on p5; the page does not say which line, so printed lines are unchanged and a group-level contra disbursement -19,640 (category other, review) plus transfers_out 19,640 were added, with matching detail contra expenditure -19,640 and other financing -19,640 in the General fund schedule (detail transfers net to zero). Beginning balance 15,447,356 is the printed total of beginning fund balances (p2 labels net position beginning 'Restated'). Re-check (attempt 4): balance sheet now from the p3 Statement of Assets and Fund Balances - Governmental Funds, Total Governmental Funds column (totals 13,048,746 equal the p1 Statement of Net Position), fund balance by classification (Restricted 11,047,183, Committed 116,582, Unassigned 1,884,981); 'Interest on Levied Taxes' 3,632 -> Penalties and Interest on Taxes; statement 'Community Service' and detail 3300 -> Community Service Operations; statement 'State Catergorical' -> State Categorical Programs (the p8 State Categorical Programs heading groups 3400-3590); detail 1200 and 1291 -> Special Education Programs. State Receipts 1,807,008 (General 1,805,215 + Nutrition 1,793) holds no homestead, credit or pro-rate money (those are separate p4 lines), so it is not split. General Fund schedule (p6-9) covers the General fund proper, excluding the Depreciation and Employee Benefit funds which are combined into the General column on p4-5; General fund schedule disbursements differ from the p4/5 General column by Employee Benefit 4,074. No budget column is shown for most lines (only fund totals), so budget_final is null (Student Fee lines carry the budget printed on its total lines). Fund-level schedules p10-18 are recorded per fund; school fund program lines carry no object breakdown so detail_category is not itemized. Attempt 5 (2026-10-28 verifier fixes, user 2026-10-28 categories): p13 'Daily Sales - Non Reimburseable' 1,128 and 'Non Reimbursable Programs' 5,390 -> School Lunch Sales (meal sales, not reimbursements); p15 'Other Rental' 14,400 and its statement split (Special Building column) -> Rentals; statement split Student Fee column 471 -> Extracurricular Receipts, matching the p17 detail line. Read pages 1-18 of 18"
+  "notes": "Modified cash basis school district (FYE 8/31/2025). All funds including School Nutrition are in the governmental funds statement (no separate proprietary statement), so business_type is null and everything is governmental. Governmental lines use the Total Governmental Funds column (p4-5); the Transfers in(out) row nets to zero in the total column. Bond Proceeds 5,103,960 recorded as debt_proceeds. Printed total receipts 12,589,329 includes debt_proceeds. Combined lines split by fund column on p4: County Fines and Fees (General 12,251 = 2110 County Fines and Licenses, plus Cooperative 66,000 which p18 shows as ESU Receipts, now category ESU Receipts) and Other Local Receipts (six fund columns). The p4 General column combines the General, Depreciation and Employee Benefit funds. Its Other Local Receipts 39,377 = 1911 Other Local Licenses 6,697 + 1920 Other Contributions 13,040 (p6) + transfers 19,640 (Depreciation Fund Transfer In 12,000, p10; Employee Benefit Transfer from General Fund 7,640, p11). Beginning balance 15,447,356 is the printed total of beginning fund balances (p2 labels net position beginning 'Restated'). Re-check (attempt 4): balance sheet now from the p3 Statement of Assets and Fund Balances - Governmental Funds, Total Governmental Funds column (totals 13,048,746 equal the p1 Statement of Net Position), fund balance by classification (Restricted 11,047,183, Committed 116,582, Unassigned 1,884,981); 'Interest on Levied Taxes' 3,632 -> Penalties and Interest on Taxes; statement 'Community Service' and detail 3300 -> Community Service Operations; statement 'State Catergorical' -> State Categorical Programs (the p8 State Categorical Programs heading groups 3400-3590); detail 1200 and 1291 -> Special Education Programs. State Receipts 1,807,008 (General 1,805,215 + Nutrition 1,793) holds no homestead, credit or pro-rate money (those are separate p4 lines), so it is not split. General Fund schedule (p6-9) covers the General fund proper, excluding the Depreciation and Employee Benefit funds which are combined into the General column on p4-5; General fund schedule disbursements differ from the p4/5 General column by Employee Benefit 4,074. No budget column is shown for most lines (only fund totals), so budget_final is null (Student Fee lines carry the budget printed on its total lines). Fund-level schedules p10-18 are recorded per fund; school fund program lines carry no object breakdown so detail_category is not itemized. Attempt 5 (2026-10-28 verifier fixes, user 2026-10-28 categories): p13 'Daily Sales - Non Reimburseable' 1,128 and 'Non Reimbursable Programs' 5,390 -> School Lunch Sales (meal sales, not reimbursements); p15 'Other Rental' 14,400 and its statement split (Special Building column) -> Rentals; statement split Student Fee column 471 -> Extracurricular Receipts, matching the p17 detail line. Read pages 1-18 of 18"
 }
