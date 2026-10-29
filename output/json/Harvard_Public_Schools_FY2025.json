@@ -3,7 +3,7 @@
   "entity_type": "school district",
   "fiscal_year_end": "2025-08-31",
   "basis": "cash",
-  "extraction_attempt": 3,
+  "extraction_attempt": 4,
   "beginning_cash": {
     "amount": 2006921.09,
     "source_page": 10
@@ -171,11 +171,8 @@
       "fund_type": "governmental",
       "category": "other",
       "original_label": "Non-Revenue Receipts",
-      "amount": 6721.1,
+      "amount": 276721.1,
       "source_page": 6,
-      "split_from": "Non-Revenue Receipts 276,721.10 (p6); 270,000 is Depreciation Fund 5200 Allocation from General Fund (p5, p16)",
-      "computed": "printed 276,721.10 (p6) minus 270,000.00 General-to-Depreciation allocation, moved to transfers_in",
-      "review": "Printed 276,721.10 less 270,000 interfund allocation treated as transfer; remaining 6,721.10 is General Fund 5690 Other Non-Revenue Receipts (p13), nature not stated",
       "detail_category": "Other Nonrevenue Receipts",
       "category_decision": "user 2026-10-23"
     }
@@ -476,11 +473,8 @@
       "fund_type": "governmental",
       "category": "capital outlay",
       "original_label": "Building Improvements",
-      "amount": 0.0,
-      "source_page": 8,
-      "split_from": "Building Improvements 270,000.00 (p8); General Fund 4700 Building Improvements (p25) is the allocation to the Depreciation Fund",
-      "computed": "printed 270,000.00 (p8) minus 270,000.00 General-to-Depreciation allocation, moved to transfers_out",
-      "review": "Entire printed 270,000 treated as transfer to Depreciation Fund (Depreciation 5200 Allocation from General Fund, p16)"
+      "amount": 270000.0,
+      "source_page": 8
     },
     {
       "fund_type": "governmental",
@@ -543,14 +537,12 @@
     }
   ],
   "transfers_in": {
-    "amount": 405400.0,
-    "source_page": 6,
-    "computed": "transfers 135,400.00 (p6) + 270,000.00 General-to-Depreciation allocation (Depreciation 5200 Allocation from General Fund, p16)"
+    "amount": 135400.0,
+    "source_page": 6
   },
   "transfers_out": {
-    "amount": 405400.0,
-    "source_page": 8,
-    "computed": "transfers 135,400.00 (p8) + 270,000.00 General Fund 4700 Building Improvements allocation to Depreciation Fund (p25)"
+    "amount": 135400.0,
+    "source_page": 8
   },
   "debt_proceeds": null,
   "other_financing": null,
@@ -560,26 +552,12 @@
       "receipts": {
         "amount": 6098323.75,
         "source_page": 6,
-        "includes": [],
-        "includes_split": [
-          {
-            "amount": 270000.0,
-            "source_page": 16,
-            "computed": "Depreciation Fund 5200 Allocation from General Fund, inside printed Non-Revenue Receipts, recorded in transfers_in"
-          }
-        ]
+        "includes": []
       },
       "disbursements": {
         "amount": 5975972.76,
         "source_page": 8,
-        "includes": [],
-        "includes_split": [
-          {
-            "amount": 270000.0,
-            "source_page": 25,
-            "computed": "General Fund 4700 Building Improvements allocation to Depreciation Fund, inside printed disbursements, recorded in transfers_out"
-          }
-        ]
+        "includes": []
       }
     },
     "business-type": null
@@ -646,14 +624,6 @@
   },
   "ending_investments": null,
   "ending_fund_balance": null,
-  "decision_needed": [
-    {
-      "question": "The 270,000 General Fund to Depreciation Fund allocation (General 4700 Building Improvements, Depreciation 5200 Allocation from General Fund) is printed in the statement as spending and Non-Revenue Receipts. It is now treated as a transfer (same 5200 code the Activities and Nutrition schedules print as Transfers From General Fund). Please confirm.",
-      "amount": 270000,
-      "recorded_as": "Transfer: removed from capital outlay disbursements and Non-Revenue Receipts, added to transfers_in and transfers_out; detail shows -270,000 other financing in General and +270,000 in Depreciation",
-      "source_page": 25
-    }
-  ],
   "detail": [
     {
       "schedule": "Sched A - Receipts vs Budget - General Fund",
@@ -1063,12 +1033,13 @@
       "fund_type": "governmental",
       "fund": "Depreciation",
       "department": null,
-      "section": "other financing",
+      "section": "revenue",
+      "category": "other",
+      "detail_category": "Other Nonrevenue Receipts",
       "original_label": "5200 Allocation from General Fund",
       "amount": 270000.0,
       "budget_final": 30000.0,
-      "source_page": 16,
-      "review": "Treated as transfer in; matches General Fund 4700 Building Improvements -270,000 (p25)"
+      "source_page": 16
     },
     {
       "schedule": "Sched C - Depreciation Fund",
@@ -2968,14 +2939,13 @@
       "fund_type": "governmental",
       "fund": "General",
       "department": "4700 Building Improvements",
-      "section": "other financing",
+      "section": "expenditure",
+      "category": "capital outlay",
+      "detail_category": "repairs and maintenance",
       "original_label": "Purchased Property Services",
-      "amount": -270000.0,
+      "amount": 270000.0,
       "budget_final": 150000.0,
-      "source_page": 25,
-      "split_from": "4700 Building Improvements - Purchased Property Services 270,000.00 expenditure (p25); matching Depreciation Fund 5200 Allocation from General Fund 270,000.00 (p16)",
-      "computed": "printed expenditure 270,000.00 (p25) reclassified as transfer out to Depreciation Fund: -270,000.00",
-      "review": "Hidden transfer: printed as expenditure on p25 but is the General-to-Depreciation allocation (same 5200 code as Activities/Nutrition transfers); recategorized as other financing"
+      "source_page": 25
     },
     {
       "schedule": "Sched M - Operational Expenses - General Fund",
@@ -3219,10 +3189,7 @@
       "fund": "Depreciation",
       "section": "revenue",
       "amount": 270644.56,
-      "source_page": 16,
-      "includes": [
-        "other financing"
-      ]
+      "source_page": 16
     },
     {
       "schedule": "Sched C - Depreciation Fund",
@@ -3280,5 +3247,5 @@
       "source_page": 19
     }
   ],
-  "notes": "Modified cash basis school district; all four funds (General, Depreciation, Special Building, School Nutrition, Activities) are governmental columns in the Total Governmental Funds column of Exhibit III (pp5-10), so no business-type funds. Receipts/disbursements from the total column (p6, p8); beginning/ending balances p10. Local Receipts split into tax types using Schedule A (p12) and Special Building schedule (p19) plus Activities Fund receipts (p17); the split sums to 2,481,965.09. Attempt 2 (audit findings): County Receipts 15,811.33 (General Fund only) split into 2110 County Fines and Licenses 14,189.33 and 2210 Educational Service Unit 1,622.00 (p12); State Receipts 2,800,689.58 split using the fund schedules (General 2,791,959.14 p12, Special Building 7,909.94 p19, School Nutrition 820.50 p18) into Homestead Exemption 42,341.28, Property Tax Credit 1,370,317.38, Motor Vehicle Pro-Rate 6,416.53 and state aid 1,381,614.39; balance sheet switched to the governmental funds statement (p10 Total Governmental Funds; its total 2,129,272.08 equals the p1 Statement of Net Position) with fund balance by classification (Assigned 556,352.09, Unassigned 1,572,919.99). Debt Services 18,009.74 split into principal/interest from Schedule I (p19); Purchased Services split by fund column (Depreciation 140,027.56 p7, Activities 104,746.01 p8). Transfers 135,400 in and out net to zero. Detail: Schedule M (object by program, pp20-26) supersedes Schedule B (program totals, pp14-15), so B is not recorded; Schedule A-1 (p11) is a summary and not recorded. Detail lines with blank actuals (budget only) are omitted. General Fund 2130 Health Services other lines had blank actuals. Schedule M includes the 135,400 transfer in its total, so those lines are other financing and the total carries includes. The 270,000 Depreciation 'Allocation from General Fund' (code 5200, same code as the Activities/Nutrition 'Transfers From General Fund') is treated as a transfer on both sides: detail has General 4700 Building Improvements as -270,000 other financing (p25) and Depreciation 5200 as +270,000 other financing (p16); at statement level 270,000 was removed from Building Improvements (disbursements, now 0) and from Non-Revenue Receipts (now 6,721.10), and added to transfers_in and transfers_out (405,400 each = 135,400 + 270,000). The printed statement totals (6,098,323.75 receipts, 5,975,972.76 disbursements) still contain the 270,000 (includes_split). See decision_needed. Attempt 3 (user rule 2026-10-28, program lines follow the report's grouping): Schedule M program lines 3535 High Ability Learners 8,456.33, 3551 Career Education 7,500.00, 3552 School Safety and Security 21,500.00 (= statement State Programs 37,456.33, p8) are category State Categorical Programs; 6200 Title I 88,610.93, 6212 Title I Part A 45,482.60, 6406 IDEA Preschool 6,397.95, 6408 IDEA Part B 64,399.94, 6992 REAP 3,014.73 (= statement Federal Programs 207,906.15, p8) are category Federal Programs; stale 'counted as instruction' review note removed from the State Programs statement line. Read pages 1-26 of 26"
+  "notes": "Modified cash basis school district; all four funds (General, Depreciation, Special Building, School Nutrition, Activities) are governmental columns in the Total Governmental Funds column of Exhibit III (pp5-10), so no business-type funds. Receipts/disbursements from the total column (p6, p8); beginning/ending balances p10. Local Receipts split into tax types using Schedule A (p12) and Special Building schedule (p19) plus Activities Fund receipts (p17); the split sums to 2,481,965.09. Attempt 2 (audit findings): County Receipts 15,811.33 (General Fund only) split into 2110 County Fines and Licenses 14,189.33 and 2210 Educational Service Unit 1,622.00 (p12); State Receipts 2,800,689.58 split using the fund schedules (General 2,791,959.14 p12, Special Building 7,909.94 p19, School Nutrition 820.50 p18) into Homestead Exemption 42,341.28, Property Tax Credit 1,370,317.38, Motor Vehicle Pro-Rate 6,416.53 and state aid 1,381,614.39; balance sheet switched to the governmental funds statement (p10 Total Governmental Funds; its total 2,129,272.08 equals the p1 Statement of Net Position) with fund balance by classification (Assigned 556,352.09, Unassigned 1,572,919.99). Debt Services 18,009.74 split into principal/interest from Schedule I (p19); Purchased Services split by fund column (Depreciation 140,027.56 p7, Activities 104,746.01 p8). Transfers 135,400 in and out net to zero. Detail: Schedule M (object by program, pp20-26) supersedes Schedule B (program totals, pp14-15), so B is not recorded; Schedule A-1 (p11) is a summary and not recorded. Detail lines with blank actuals (budget only) are omitted. General Fund 2130 Health Services other lines had blank actuals. Schedule M includes the 135,400 transfer in its total, so those lines are other financing and the total carries includes. Attempt 3 (user rule 2026-10-28, program lines follow the report's grouping): Schedule M program lines 3535 High Ability Learners 8,456.33, 3551 Career Education 7,500.00, 3552 School Safety and Security 21,500.00 (= statement State Programs 37,456.33, p8) are category State Categorical Programs; 6200 Title I 88,610.93, 6212 Title I Part A 45,482.60, 6406 IDEA Preschool 6,397.95, 6408 IDEA Part B 64,399.94, 6992 REAP 3,014.73 (= statement Federal Programs 207,906.15, p8) are category Federal Programs; stale 'counted as instruction' review note removed from the State Programs statement line. Read pages 1-26 of 26"
 }

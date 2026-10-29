@@ -3,7 +3,7 @@
   "entity_type": "school district",
   "fiscal_year_end": "2025-08-31",
   "basis": "cash",
-  "extraction_attempt": 6,
+  "extraction_attempt": 7,
   "beginning_cash": {
     "amount": 2711281.59,
     "source_page": 7
@@ -200,13 +200,8 @@
       "fund_type": "governmental",
       "category": "other",
       "original_label": "Non-Revenue Receipts",
-      "amount": 51836.3,
-      "source_page": 5,
-      "split_from": "Non-Revenue Receipts 776,836.30 (p5): General Fund 607.06 (p4) + Depreciation Fund 5200 Allocation from General Fund 725,000.00 (p15, moved to transfers_in) + Employee Benefit 51,229.24 (p5)",
-      "computed": "General Fund 607.06 (p12) + Employee Benefit 51,229.24 (p16); the Depreciation Fund 725,000 allocation is an interfund transfer",
-      "review": "remaining Non-Revenue Receipts: 51,229.24 Employee Benefit other non-revenue (p16) and 607.06 General Fund (p12), no description",
-      "detail_category": "Other Nonrevenue Receipts",
-      "category_decision": "user 2026-10-23"
+      "amount": 776836.3,
+      "source_page": 5
     }
   ],
   "disbursements": [
@@ -514,27 +509,15 @@
       "original_label": "Capital Outlay",
       "amount": 7000.0,
       "source_page": 7
-    },
-    {
-      "fund_type": "governmental",
-      "category": "other",
-      "original_label": "Contra: General Fund allocation to Depreciation Fund (inside General Fund disbursement lines)",
-      "amount": -725000.0,
-      "source_page": 15,
-      "split_from": "General Fund disbursements 4,909,725.75 (p6); Depreciation Fund 5200 Allocation from General Fund 725,000 (p15)",
-      "computed": "the General Fund lines (pp4-6) print no 725,000 transfer out (8000 Transfers only 144,666.25, p28) although the Depreciation Fund received it (p15); the outflow sits in an unidentified General Fund disbursement line",
-      "review": "contra for the 725,000 interfund allocation hidden in an unidentified General Fund disbursement line; recorded in transfers_out"
     }
   ],
   "transfers_in": {
-    "amount": 869666.25,
-    "source_page": 5,
-    "computed": "Transfers 144,666.25 (p5) + Depreciation Fund 5200 Allocation from General Fund 725,000 (p15, printed in Non-Revenue Receipts)"
+    "amount": 144666.25,
+    "source_page": 5
   },
   "transfers_out": {
-    "amount": 869666.25,
-    "source_page": 7,
-    "computed": "Transfers 144,666.25 (p7) + General Fund allocation to Depreciation Fund 725,000 (p15; hidden in General Fund disbursement lines, see contra line)"
+    "amount": 144666.25,
+    "source_page": 7
   },
   "debt_proceeds": {
     "amount": 14950000.0,
@@ -549,26 +532,12 @@
         "source_page": 5,
         "includes": [
           "debt_proceeds"
-        ],
-        "includes_split": [
-          {
-            "amount": 725000.0,
-            "source_page": 15,
-            "computed": "Depreciation Fund 5200 Allocation from General Fund, printed inside Non-Revenue Receipts and moved to transfers_in"
-          }
         ]
       },
       "disbursements": {
         "amount": 6436402.89,
         "source_page": 7,
-        "includes": [],
-        "includes_split": [
-          {
-            "amount": 725000.0,
-            "source_page": 15,
-            "computed": "General Fund allocation to Depreciation Fund inside General Fund disbursement lines, moved to transfers_out (contra line)"
-          }
-        ]
+        "includes": []
       }
     },
     "business-type": null
@@ -3200,37 +3169,6 @@
       "source_page": 28
     },
     {
-      "schedule": "Schedule M - General Fund Operational Disbursements",
-      "fund_type": "governmental",
-      "fund": "General",
-      "department": "General Fund disbursements (line not identified)",
-      "section": "expenditure",
-      "category": "other",
-      "detail_category": "miscellaneous expenditure",
-      "original_label": "Contra: allocation to Depreciation Fund inside disbursement lines",
-      "amount": -725000.0,
-      "budget_final": null,
-      "source_page": 15,
-      "split_from": "Schedule M General Fund lines (pp21-28); Depreciation Fund 5200 Allocation from General Fund 725,000 (p15)",
-      "computed": "725,000 received by the Depreciation Fund from the General Fund (p15); no Schedule M line shows it, so the outflow sits in an unidentified line",
-      "review": "contra for the 725,000 interfund allocation hidden in an unidentified General Fund line"
-    },
-    {
-      "schedule": "Schedule M - General Fund Operational Disbursements",
-      "fund_type": "governmental",
-      "fund": "General",
-      "department": "General Fund disbursements (line not identified)",
-      "section": "other financing",
-      "original_label": "Transfers Out",
-      "printed_label": "Allocation to Depreciation Fund (not printed as a line)",
-      "amount": -725000.0,
-      "budget_final": null,
-      "source_page": 15,
-      "split_from": "Schedule M General Fund lines (pp21-28); Depreciation Fund 5200 Allocation from General Fund 725,000 (p15)",
-      "computed": "matches Depreciation Fund 5200 Allocation from General Fund 725,000 (p15)",
-      "review": "transfer out hidden in an unidentified General Fund disbursement line"
-    },
-    {
       "schedule": "Schedule C - Depreciation Fund",
       "fund_type": "governmental",
       "fund": "Depreciation",
@@ -3249,13 +3187,13 @@
       "fund_type": "governmental",
       "fund": "Depreciation",
       "department": null,
-      "section": "other financing",
-      "original_label": "Transfers In",
-      "printed_label": "5200 Allocation from General Fund",
+      "section": "revenue",
+      "category": "other",
+      "detail_category": "miscellaneous revenue",
+      "original_label": "5200 Allocation from General Fund",
       "amount": 725000.0,
       "budget_final": 200000.0,
-      "source_page": 15,
-      "review": "interfund allocation from the General Fund (code 5200, as the other transfers); printed inside Total Receipts"
+      "source_page": 15
     },
     {
       "schedule": "Schedule C - Depreciation Fund",
@@ -3792,10 +3730,7 @@
       "fund": "Depreciation",
       "section": "revenue",
       "amount": 728128.69,
-      "source_page": 15,
-      "includes": [
-        "other financing"
-      ]
+      "source_page": 15
     },
     {
       "schedule": "Schedule C - Depreciation Fund",
@@ -3863,14 +3798,7 @@
       "source_page": 20
     }
   ],
-  "notes": "Modified cash basis school district (FY ended 2025-08-31). Governmental funds from Exhibit III total column (pp5, 7); beginning/ending cash is the governmental funds total fund balance (all cash plus county treasurer balance). Bond proceeds 14,950,000 are in debt_proceeds; printed Total Receipts 21,287,403.10 includes them. Transfers 144,666.25 (General to Activities 70,000 and School Nutrition 74,666.25). Balance sheet (re-check 3): taken from the governmental funds statement (Exhibit III, Total Governmental Funds column: assets p7, fund balances by classification p9) because its totals equal the government-wide Statement of Net Position (Exhibit I p1: 17,562,281.80, liabilities 0.00); county treasurers' balance is cash held by the county treasurers (Schedule N). No business-type funds (school nutrition is presented in governmental funds). Detail: General Fund disbursements use Schedule M (object detail by program, more detailed) and not Schedule B; Schedule M total 5,054,392.00 includes transfers 144,666.25 (shown as other financing, signed). Schedule M program lines 3535/3540/3551 are State Categorical Programs and 6200-6992 Federal Programs, following the statement's own State Programs 56,221.91 / Federal Programs 165,387.89 lines. General Fund receipts from Schedule A; blank-actual budget-only lines (3155, 4519, 1790, 2900-700, 3100-700, 2630 salaries/benefits/other items, 1200 other items, zero-amount lines 6990/6997/6998, Bond Fund 8000-911 transfer 0.00) omitted. Schedule N (county treasurer general fund) not recorded as detail to avoid double counting with Schedule A; Schedule B and Schedule N skipped. Schedule H (Bond Fund) and Schedule D disbursements print no total line so no detail_totals for those. Depreciation fund 5200 allocation from General Fund (725,000) is printed as a receipt, not a transfer, in Exhibit III; recorded as a transfer since re-check 6, see below (the General Fund 2710 Property line 736,656.00 vs budget 265,000 may hold it, but no page shows that). Re-check 3: Local Receipts property tax split from penalties & interest (1100 vs 1140 lines); State Receipts 2,369,912.79 split into Homestead Exemption, Property Tax Credit and Motor Vehicle Pro-Rate using Schedule A (p11) and Schedule I (p20), remainder state aid; 2230 Instruction - Related Technology moved to support services (Staff). Earlier recheck: Local Receipts split by fund schedules (GF Schedule A, Special Building Schedule I, Activities Schedule F); Other Expenses and Services split by fund schedules (Special Building, Depreciation, Employee Benefit). County Receipts split by Schedule A (2110 fines 27,799.97, 2210 ESU 2,059.72). Re-check 4 (2026-10-28 verifier fixes): School Nutrition 1620 Non Reimbursable 3,893.00 (p18) is non-reimbursable meal sales, counted in Exhibit III 'Sales of Meals', so category School Lunch Sales (was reimbursements/refunds); 1630 Special Functions Reimbursement kept as printed (reimbursements/refunds); stale 'categorized as instruction' review notes removed from the State Programs / Federal Programs statement lines (they are State Categorical Programs / Federal Programs as printed). Re-check 6 (2026-10-29, same fix as Blue Hill): the Depreciation Fund 5200 'Allocation from General Fund' 725,000 (Schedule C p15; Exhibit III Depreciation column Non-Revenue Receipts p4) is an interfund allocation, not revenue: it uses code 5200, the transfer code the Activities/Nutrition 'Transfers From General Fund' lines also use. It is moved out of receipts: Non-Revenue Receipts is now 51,836.30 (General Fund 607.06 + Employee Benefit 51,229.24; split_from the p5 line), and transfers_in = 144,666.25 + 725,000 = 869,666.25. The General Fund prints no 725,000 transfer (8000 Transfers 144,666.25 only, p28; Exhibit III Transfers 144,666.25 p6), so its outflow sits inside an unidentified General Fund disbursement line. Every printed line is kept as printed, with one contra disbursement -725,000 (review), and transfers_out = 144,666.25 + 725,000 = 869,666.25. Detail: Schedule C allocation is now an other-financing Transfers In (+725,000; Schedule C revenue total includes other financing); Schedule M has a contra expenditure -725,000 and a Transfers Out -725,000. Printed totals unchanged (reported_totals includes_split 725,000 on both sides); the earlier one-sided-allocation report_discrepancy is replaced by this treatment. Read pages 1-29 of 29.",
-  "decision_needed": [
-    {
-      "question": "The Depreciation Fund received 725,000 '5200 Allocation from General Fund' (p15), but no General Fund line shows the matching outflow (8000 Transfers only 144,666.25, p28). Which General Fund disbursement line holds it, so the contra can be placed on that line?",
-      "amount": 725000.0,
-      "recorded_as": "transfers_in/transfers_out +725,000 each; contra disbursement -725,000 (category other, review) against the unidentified General Fund line",
-      "source_page": 15
-    }
-  ],
+  "notes": "Modified cash basis school district (FY ended 2025-08-31). Governmental funds from Exhibit III total column (pp5, 7); beginning/ending cash is the governmental funds total fund balance (all cash plus county treasurer balance). Bond proceeds 14,950,000 are in debt_proceeds; printed Total Receipts 21,287,403.10 includes them. Transfers 144,666.25 (General to Activities 70,000 and School Nutrition 74,666.25). Balance sheet (re-check 3): taken from the governmental funds statement (Exhibit III, Total Governmental Funds column: assets p7, fund balances by classification p9) because its totals equal the government-wide Statement of Net Position (Exhibit I p1: 17,562,281.80, liabilities 0.00); county treasurers' balance is cash held by the county treasurers (Schedule N). No business-type funds (school nutrition is presented in governmental funds). Detail: General Fund disbursements use Schedule M (object detail by program, more detailed) and not Schedule B; Schedule M total 5,054,392.00 includes transfers 144,666.25 (shown as other financing, signed). Schedule M program lines 3535/3540/3551 are State Categorical Programs and 6200-6992 Federal Programs, following the statement's own State Programs 56,221.91 / Federal Programs 165,387.89 lines. General Fund receipts from Schedule A; blank-actual budget-only lines (3155, 4519, 1790, 2900-700, 3100-700, 2630 salaries/benefits/other items, 1200 other items, zero-amount lines 6990/6997/6998, Bond Fund 8000-911 transfer 0.00) omitted. Schedule N (county treasurer general fund) not recorded as detail to avoid double counting with Schedule A; Schedule B and Schedule N skipped. Schedule H (Bond Fund) and Schedule D disbursements print no total line so no detail_totals for those. Re-check 3: Local Receipts property tax split from penalties & interest (1100 vs 1140 lines); State Receipts 2,369,912.79 split into Homestead Exemption, Property Tax Credit and Motor Vehicle Pro-Rate using Schedule A (p11) and Schedule I (p20), remainder state aid; 2230 Instruction - Related Technology moved to support services (Staff). Earlier recheck: Local Receipts split by fund schedules (GF Schedule A, Special Building Schedule I, Activities Schedule F); Other Expenses and Services split by fund schedules (Special Building, Depreciation, Employee Benefit). County Receipts split by Schedule A (2110 fines 27,799.97, 2210 ESU 2,059.72). Re-check 4 (2026-10-28 verifier fixes): School Nutrition 1620 Non Reimbursable 3,893.00 (p18) is non-reimbursable meal sales, counted in Exhibit III 'Sales of Meals', so category School Lunch Sales (was reimbursements/refunds); 1630 Special Functions Reimbursement kept as printed (reimbursements/refunds); stale 'categorized as instruction' review notes removed from the State Programs / Federal Programs statement lines (they are State Categorical Programs / Federal Programs as printed). Read pages 1-29 of 29.",
+  "decision_needed": [],
   "report_discrepancies": []
 }

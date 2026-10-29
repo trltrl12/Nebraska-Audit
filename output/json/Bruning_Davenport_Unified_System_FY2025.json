@@ -3,7 +3,7 @@
   "entity_type": "school district",
   "fiscal_year_end": "2025-08-31",
   "basis": "cash",
-  "extraction_attempt": 5,
+  "extraction_attempt": 6,
   "beginning_cash": {
     "amount": 4682144.96,
     "source_page": 13
@@ -193,11 +193,8 @@
       "fund_type": "governmental",
       "category": "other",
       "original_label": "Non-Revenue Receipts",
-      "amount": 8613.07,
+      "amount": 308613.07,
       "source_page": 9,
-      "computed": "Non-Revenue Receipts 308,613.07 (p9) less Depreciation Fund 5200 Allocation from General Fund 300,000.00 (p21) moved to transfers_in",
-      "split_from": "Non-Revenue Receipts 308,613.07 (p9)",
-      "review": "remainder after splitting out the 300,000 Depreciation Fund allocation from General Fund (p21) as a transfer in",
       "detail_category": "Other Nonrevenue Receipts",
       "category_decision": "user 2026-10-23"
     }
@@ -504,11 +501,8 @@
       "fund_type": "governmental",
       "category": "Building and Grounds",
       "original_label": "Vehicle Operation, Maintenance, & Purchasing",
-      "amount": 9213.36,
+      "amount": 109213.36,
       "source_page": 11,
-      "computed": "Vehicle Operation, Maintenance, & Purchasing 109,213.36 (p11) less 100,000.00 General Fund 2650 Property (p36) moved to transfers_out",
-      "split_from": "Vehicle Operation, Maintenance, & Purchasing 109,213.36 (p11); Sch M 2650 Property 100,000 (p36)",
-      "review": "100,000 General Fund Property spending matches Depreciation Fund 5200 Allocation from General Fund (p21); treated as transfer out",
       "note": "code 2650, 2600 operation and maintenance of plant series (p36)",
       "category_decision": "user 2026-10-23"
     },
@@ -524,11 +518,8 @@
       "fund_type": "governmental",
       "category": "student transportation",
       "original_label": "Vehicle Operation & Purchasing - Regular Education",
-      "amount": 267573.69,
-      "source_page": 11,
-      "computed": "Vehicle Operation & Purchasing - Regular Education 467,573.69 (p11) less 200,000.00 General Fund 2710 Property (p36) moved to transfers_out",
-      "split_from": "Vehicle Operation & Purchasing - Regular Education 467,573.69 (p11); Sch M 2710 Property 200,000 (p36)",
-      "review": "200,000 General Fund Property spending matches Depreciation Fund 5200 Allocation from General Fund (p21); treated as transfer out"
+      "amount": 467573.69,
+      "source_page": 11
     },
     {
       "fund_type": "governmental",
@@ -588,14 +579,12 @@
     }
   ],
   "transfers_in": {
-    "amount": 565054.09,
-    "source_page": 9,
-    "computed": "265,054.09 printed transfers (p9) + 300,000.00 Depreciation Fund 5200 Allocation from General Fund (p21)"
+    "amount": 265054.09,
+    "source_page": 9
   },
   "transfers_out": {
-    "amount": 565054.09,
-    "source_page": 13,
-    "computed": "265,054.09 printed transfers (p13) + 300,000.00 General Fund Property 2650 100,000 + 2710 200,000 (p36)"
+    "amount": 265054.09,
+    "source_page": 13
   },
   "debt_proceeds": null,
   "other_financing": null,
@@ -605,26 +594,12 @@
       "receipts": {
         "amount": 6725419.38,
         "source_page": 9,
-        "includes": [],
-        "includes_split": [
-          {
-            "amount": 300000.0,
-            "source_page": 21,
-            "computed": "Depreciation Fund 5200 Allocation from General Fund, inside printed Non-Revenue Receipts (p9), recorded in transfers_in"
-          }
-        ]
+        "includes": []
       },
       "disbursements": {
         "amount": 6495626.91,
         "source_page": 13,
-        "includes": [],
-        "includes_split": [
-          {
-            "amount": 300000.0,
-            "source_page": 36,
-            "computed": "General Fund Property 2650 100,000 + 2710 200,000, inside printed disbursement lines (p11), recorded in transfers_out"
-          }
-        ]
+        "includes": []
       }
     },
     "business-type": null
@@ -688,14 +663,6 @@
   },
   "ending_investments": null,
   "ending_fund_balance": null,
-  "decision_needed": [
-    {
-      "question": "The Depreciation Fund shows a 300,000 '5200 Allocation from General Fund' (p21), but the General Fund shows only 265,000 of transfers out; its Sch M 2650 Property 100,000 and 2710 Property 200,000 (p36) match the amount. Should those 300,000 of General Fund Property spending be treated as a transfer out to the Depreciation Fund?",
-      "amount": 300000.0,
-      "recorded_as": "Transfer: 300,000 moved out of Non-Revenue Receipts into transfers_in and out of the two vehicle disbursement lines into transfers_out (Sch M contra and other financing lines added)",
-      "source_page": 21
-    }
-  ],
   "detail": [
     {
       "schedule": "Sch A Receipts Compared to Budget - General Fund",
@@ -1167,12 +1134,13 @@
       "fund_type": "governmental",
       "fund": "Depreciation",
       "department": null,
-      "section": "other financing",
+      "section": "revenue",
+      "category": "other",
+      "detail_category": "Other Nonrevenue Receipts",
       "original_label": "5200 Allocation from General Fund",
       "amount": 300000.0,
       "budget_final": 200000.0,
-      "source_page": 21,
-      "review": "printed as receipt inside Total Receipts; treated as transfer in, matching General Fund 2650/2710 Property 300,000 (p36) recorded as transfer out"
+      "source_page": 21
     },
     {
       "schedule": "Sch C Depreciation Fund",
@@ -3633,37 +3601,6 @@
       "schedule": "Sch M General Fund Operational Expenses",
       "fund_type": "governmental",
       "fund": "General",
-      "department": "2650 Vehicle Operation, Maintenance, & Purchasing",
-      "section": "expenditure",
-      "category": "Building and Grounds",
-      "detail_category": "equipment purchases",
-      "original_label": "Property (reclassified to transfer out)",
-      "amount": -100000.0,
-      "budget_final": null,
-      "source_page": 36,
-      "computed": "contra of 2650 Property 100,000 (p36)",
-      "split_from": "2650 Property 100,000 (p36); matches Depreciation Fund 5200 Allocation from General Fund 300,000 (p21)",
-      "review": "transfer to Depreciation Fund hidden in Property spending",
-      "category_decision": "user 2026-10-23"
-    },
-    {
-      "schedule": "Sch M General Fund Operational Expenses",
-      "fund_type": "governmental",
-      "fund": "General",
-      "department": "2650 Vehicle Operation, Maintenance, & Purchasing",
-      "section": "other financing",
-      "original_label": "Transfer to Depreciation Fund (in Property)",
-      "amount": -100000.0,
-      "budget_final": null,
-      "source_page": 36,
-      "computed": "2650 Property 100,000 treated as transfer out",
-      "split_from": "2650 Property 100,000 (p36); matches Depreciation Fund 5200 Allocation from General Fund 300,000 (p21)",
-      "review": "transfer to Depreciation Fund hidden in Property spending"
-    },
-    {
-      "schedule": "Sch M General Fund Operational Expenses",
-      "fund_type": "governmental",
-      "fund": "General",
       "department": "2670 Safety",
       "section": "expenditure",
       "category": "Building and Grounds",
@@ -3804,36 +3741,6 @@
       "amount": 200000.0,
       "budget_final": 100000.0,
       "source_page": 36
-    },
-    {
-      "schedule": "Sch M General Fund Operational Expenses",
-      "fund_type": "governmental",
-      "fund": "General",
-      "department": "2710 Vehicle Operation & Purchasing - Regular Education",
-      "section": "expenditure",
-      "category": "student transportation",
-      "detail_category": "equipment purchases",
-      "original_label": "Property (reclassified to transfer out)",
-      "amount": -200000.0,
-      "budget_final": null,
-      "source_page": 36,
-      "computed": "contra of 2710 Property 200,000 (p36)",
-      "split_from": "2710 Property 200,000 (p36); matches Depreciation Fund 5200 Allocation from General Fund 300,000 (p21)",
-      "review": "transfer to Depreciation Fund hidden in Property spending"
-    },
-    {
-      "schedule": "Sch M General Fund Operational Expenses",
-      "fund_type": "governmental",
-      "fund": "General",
-      "department": "2710 Vehicle Operation & Purchasing - Regular Education",
-      "section": "other financing",
-      "original_label": "Transfer to Depreciation Fund (in Property)",
-      "amount": -200000.0,
-      "budget_final": null,
-      "source_page": 36,
-      "computed": "2710 Property 200,000 treated as transfer out",
-      "split_from": "2710 Property 200,000 (p36); matches Depreciation Fund 5200 Allocation from General Fund 300,000 (p21)",
-      "review": "transfer to Depreciation Fund hidden in Property spending"
     },
     {
       "schedule": "Sch M General Fund Operational Expenses",
@@ -4095,10 +4002,7 @@
       "fund": "Depreciation",
       "section": "revenue",
       "amount": 331443.87,
-      "source_page": 21,
-      "includes": [
-        "other financing"
-      ]
+      "source_page": 21
     },
     {
       "schedule": "Sch C Depreciation Fund",
@@ -4166,5 +4070,5 @@
       ]
     }
   ],
-  "notes": "Modified cash basis school district; all funds governmental (School Nutrition and Activities are governmental funds here), no business-type funds, so business_type null. Receipts, disbursements, transfers and balances come from the Statement of Modified Cash Basis Assets and Fund Balances and Receipts, Disbursements and Changes (Exhibit III, pp8-15), Total Governmental Funds column (pp9, 11, 13). Printed transfers 265,054.09 = General 265,000 (to School Nutrition 150,000 and Activities 115,000) + Student Fee 54.09 to General; printed on pp9 and 13 outside receipts/disbursements totals. FIX PASS 3: the 300,000 Depreciation Fund 5200 Allocation from General Fund (p21) is now treated as a transfer everywhere. Non-Revenue Receipts (p9) reduced from 308,613.07 to 8,613.07 and the 300,000 added to transfers_in (565,054.09 = 265,054.09 + 300,000); General Fund Property spending (2650 100,000 + 2710 200,000, p36) split out of top-level lines 'Vehicle Operation, Maintenance, & Purchasing' (109,213.36 -> 9,213.36) and 'Vehicle Operation & Purchasing - Regular Education' (467,573.69 -> 267,573.69) and added to transfers_out (565,054.09). Printed totals (6,725,419.38 receipts; 6,495,626.91 disbursements) are unchanged and tie via includes_split of 300,000 each. Detail Sch M: contra expenditure lines (-100,000 and -200,000) plus other financing lines (-100,000 and -200,000) added, net zero against the printed total 5,959,371.64. Exhibit II (Statement of Activities, pp2-7) not used for amounts. Local Receipts 3,218,027.13 is split by category from the fund schedules (Sch A p17 without 1510 interest 58,042.37, which the statement shows as investment income; Sch I p26; Sch F p23; Sch G p25); the parts sum to the printed line. FIX PASS 4 (audit findings): balance sheet now from the governmental funds statement of modified cash basis assets and fund balances, Total Governmental Funds column (assets p13, fund balances Assigned 2,967,913.07 / Unassigned 1,944,024.36 p15), whose totals equal the government-wide Statement of Net Position (p1, Unrestricted 4,911,937.43); no liabilities printed on that statement. Penalties and Interest on Taxes (1140) split out of property tax; Carline Tax and Public Power District Sales Tax split out of other taxes; Activities Fund receipts are Extracurricular Receipts; County Receipts 2210 is ESU Receipts; State Receipts 2,713,123.97 split (Sch A p17, Sch I p26, Sch G p25) into state aid 737,772.69, Homestead Exemption 13,226.46, Property Tax Credit 1,953,585.80 and Motor Vehicle Pro-Rate 8,539.02. Instruction-Related Technology (2230) is support services / Staff; Vehicle Operation, Maintenance, & Purchasing (2650, 2600 series) is Building and Grounds (statement and Sch M lines); Community Services Operations (3300) is Community Service Operations. FIX PASS 5 (2026-10-28 verifier errors): Sch G 1620 Non Reimbursable 12,143.65 category set to School Lunch Sales (sales of non-reimbursable meals; statement Sales of Meals 53,236.67 = 40,580.63 + 512.39 + 12,143.65); Sch M program lines 3512/3535/3551 (5 lines) set to State Categorical Programs and 6200/6406/6408/6992 (9 lines) set to Federal Programs, since the report counts them in its State Programs 13,952.45 and Federal Programs 126,998.27 statement lines (p13 = Sch B p20 program totals); stale 'treated as instruction' review notes removed from those statement lines; decision_needed added for the inferred 300,000 General Fund to Depreciation Fund transfer. Detail: General Fund receipts from Sch A (pp17-18); General Fund spending from Sch M (operational expenses by program and object, pp28-38), which is more detailed than Sch B (pp19-20, program totals only), so Sch B and Sch A-1 (p16) were not recorded to avoid double counting. Sch M 8000 Transfers recorded as other financing (-150,000 and -115,000) inside the printed 5,959,371.64 total. Sch A 5200 transfer 54.09 and Sch C allocation 300,000, Sch F 115,000, Sch G 150,000 transfers recorded as other financing within printed receipt totals (includes other financing); Sch L (Student Fee) transfer -54.09 recorded as other financing, no totals printed. Sch D has no totals printed. Sch M zero-amount lines and blank-actual lines (budget only) were skipped; budget columns printed only on the last line of Sch F disbursements, Sch I disbursements and Sch C total are left null except Sch C 2900-700 (1,081,007 printed on that line). Object mapping used for Sch M: Other Property Services -> professional/contract services (except 2610 -> utilities, review), Purchased Property Services -> repairs and maintenance, Other Items -> dues, training and travel. Identity check: 4,682,144.96 + 6,425,419.38 - 6,195,626.91 + 565,054.09 - 565,054.09 = 4,911,937.43 (equals the original 4,682,144.96 + 6,725,419.38 - 6,495,626.91 + 265,054.09 - 265,054.09). Read pages 1-38 of 38."
+  "notes": "Modified cash basis school district; all funds governmental (School Nutrition and Activities are governmental funds here), no business-type funds, so business_type null. Receipts, disbursements, transfers and balances come from the Statement of Modified Cash Basis Assets and Fund Balances and Receipts, Disbursements and Changes (Exhibit III, pp8-15), Total Governmental Funds column (pp9, 11, 13). Printed transfers 265,054.09 = General 265,000 (to School Nutrition 150,000 and Activities 115,000) + Student Fee 54.09 to General; printed on pp9 and 13 outside receipts/disbursements totals. Exhibit II (Statement of Activities, pp2-7) not used for amounts. Local Receipts 3,218,027.13 is split by category from the fund schedules (Sch A p17 without 1510 interest 58,042.37, which the statement shows as investment income; Sch I p26; Sch F p23; Sch G p25); the parts sum to the printed line. FIX PASS 4 (audit findings): balance sheet now from the governmental funds statement of modified cash basis assets and fund balances, Total Governmental Funds column (assets p13, fund balances Assigned 2,967,913.07 / Unassigned 1,944,024.36 p15), whose totals equal the government-wide Statement of Net Position (p1, Unrestricted 4,911,937.43); no liabilities printed on that statement. Penalties and Interest on Taxes (1140) split out of property tax; Carline Tax and Public Power District Sales Tax split out of other taxes; Activities Fund receipts are Extracurricular Receipts; County Receipts 2210 is ESU Receipts; State Receipts 2,713,123.97 split (Sch A p17, Sch I p26, Sch G p25) into state aid 737,772.69, Homestead Exemption 13,226.46, Property Tax Credit 1,953,585.80 and Motor Vehicle Pro-Rate 8,539.02. Instruction-Related Technology (2230) is support services / Staff; Vehicle Operation, Maintenance, & Purchasing (2650, 2600 series) is Building and Grounds (statement and Sch M lines); Community Services Operations (3300) is Community Service Operations. FIX PASS 5 (2026-10-28 verifier errors): Sch G 1620 Non Reimbursable 12,143.65 category set to School Lunch Sales (sales of non-reimbursable meals; statement Sales of Meals 53,236.67 = 40,580.63 + 512.39 + 12,143.65); Sch M program lines 3512/3535/3551 (5 lines) set to State Categorical Programs and 6200/6406/6408/6992 (9 lines) set to Federal Programs, since the report counts them in its State Programs 13,952.45 and Federal Programs 126,998.27 statement lines (p13 = Sch B p20 program totals); stale 'treated as instruction' review notes removed from those statement lines. Detail: General Fund receipts from Sch A (pp17-18); General Fund spending from Sch M (operational expenses by program and object, pp28-38), which is more detailed than Sch B (pp19-20, program totals only), so Sch B and Sch A-1 (p16) were not recorded to avoid double counting. Sch M 8000 Transfers recorded as other financing (-150,000 and -115,000) inside the printed 5,959,371.64 total. Sch A 5200 transfer 54.09, Sch F 115,000, Sch G 150,000 transfers recorded as other financing within printed receipt totals (includes other financing); Sch L (Student Fee) transfer -54.09 recorded as other financing, no totals printed. Sch D has no totals printed. Sch M zero-amount lines and blank-actual lines (budget only) were skipped; budget columns printed only on the last line of Sch F disbursements, Sch I disbursements and Sch C total are left null except Sch C 2900-700 (1,081,007 printed on that line). Object mapping used for Sch M: Other Property Services -> professional/contract services (except 2610 -> utilities, review), Purchased Property Services -> repairs and maintenance, Other Items -> dues, training and travel. Identity check: 4,682,144.96 + 6,725,419.38 - 6,495,626.91 + 265,054.09 - 265,054.09 = 4,911,937.43. Read pages 1-38 of 38."
 }
