@@ -1,21 +1,15 @@
 {
   "stem": "Rosalie_FY2025",
-  "values_checked": 42,
+  "values_checked": 35,
   "issues": [
-    {"severity": "warning", "path": "receipts[11].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other - Water Fund 48,315.61",
-     "issue": "Inconsistent with the Garbage Fund line (receipts[10], Utility Charges). Under the user's 2026-10-28 rule, utility fund sales are Utility Charges."},
-    {"severity": "warning", "path": "receipts[12].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other - Sewer Fund 44,821.11",
-     "issue": "Same as receipts[11]: should probably be Utility Charges."},
-    {"severity": "warning", "path": "receipts[10].original_label", "page": 1,
-     "extracted": "Local Receipts: Other (Garbage Fund) / (Water Fund) / (Sewer Fund)", "on_page": "Local Receipts: Other",
-     "issue": "The extractor added fund names to the printed label on receipts[10]-[12]."},
-    {"severity": "warning", "path": "disbursements[2]", "page": 3,
-     "extracted": "culture/recreation, 'Public Works - Other (Park Fund)'", "on_page": "Public Works - Other 35,953.69 (Park Fund column)",
-     "issue": "The printed row is Public Works - Other, not culture/recreation. Using culture/recreation because the column is the Park Fund is a defensible judgment call. The label has '(Park Fund)' added. Already marked review."},
-    {"severity": "warning", "path": "receipts[9].category", "page": 1,
-     "extracted": "other", "on_page": "Local Receipts: Other 14,291.00 (General 7,114.45 + Street 3,271.25 + Park 3,905.30)",
-     "issue": "About 11.7% of governmental receipts is in 'other', with no breakdown in the trimmed PDF. The label says Other, and the line is marked review."}
+    {"severity": "warning", "path": "disbursements[2].category", "page": 3,
+     "extracted": "culture/recreation", "on_page": "Public Works - Other 35,953.69 (Park Fund column)",
+     "issue": "The row is printed as Public Works - Other, but the extraction categorises it by fund (Park). This is defensible, but it is a judgment call."},
+    {"severity": "warning", "path": "receipts[10].category", "page": 1,
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other (Garbage 21,176.06, Water 48,315.61, Sewer 44,821.11)",
+     "issue": "receipts[10]-[12]: the page has no breakdown, so treating these as utility charges is an assumption (each line has a review note). The fund names in original_label are added by the extractor and are not printed on the row."},
+    {"severity": "warning", "path": "balance_sheet.assets", "page": 1,
+     "extracted": null, "on_page": "County Treasurer Balance at September 30, 2025 2,976.58",
+     "issue": "The memo figure for the county treasurer balance is not recorded and not mentioned in the notes. It is probably outside the village cash, but this should be confirmed."}
   ]
 }

@@ -1,9 +1,21 @@
 {
   "stem": "Elsie_FY2025",
-  "values_checked": 38,
+  "values_checked": 42,
   "issues": [
-    {"severity": "warning", "path": "receipts[10].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Enterprise Fund) 99,664.02",
-     "issue": "Enterprise (water/wastewater/solid waste) fund receipts presumed to be utility charges; under the user's 2026-10-28 rule utility fund collections are Utility Charges. The label only says Other, so the presumption itself is an assumption."}
+    {"severity": "warning", "path": "disbursements[3].original_label", "page": 3,
+     "extracted": "Capital Improvements", "on_page": "Capital Improvements 521,588.24 (Street Fund)",
+     "issue": "User rule: capital outlay lines are labelled 'Capital Outlay: <function>' (e.g. 'Capital Outlay: Streets') with the printed text in printed_label; not applied (user_rules.py may re-apply)"},
+    {"severity": "warning", "path": "disbursements[4].original_label", "page": 3,
+     "extracted": "Other Capital Outlay", "on_page": "Other Capital Outlay 47,537.76 (Enterprise Fund)",
+     "issue": "User rule: label should be 'Capital Outlay: Utilities' with printed_label 'Other Capital Outlay'; not applied"},
+    {"severity": "warning", "path": "balance_sheet.equity[0].category", "page": 1,
+     "extracted": null, "on_page": "Ending Balance (Line 22 MINUS Line 23) 398,479.23 governmental / 8,604.25 Enterprise",
+     "issue": "Equity lines have no category; original_label 'Ending Balance (Line 24)' is not the printed wording 'Ending Balance (Line 22 MINUS Line 23)'"},
+    {"severity": "warning", "path": "ending_cash.amount", "page": 1,
+     "extracted": 398479.23, "on_page": "Net Cash Balance 370,102.59 (line 26) + Bond Fund Investments 28,376.64 (line 27, Pinnacle Bank CD, p5)",
+     "issue": "ending_cash includes the Bond Fund certificate of deposit 28,376.64 while ending_investments is null (balance_sheet lists it as Investments); disclosed in computed, but cash vs investments is inconsistent with the balance sheet"},
+    {"severity": "warning", "path": "balance_sheet.assets", "page": 1,
+     "extracted": "not included", "on_page": "County Treasurer Balance at September 30, 2025 5,223.60 (October 1, 2024: 3,660.55)",
+     "issue": "County treasurer balance printed on Exhibit A is left out of the balance sheet (user rule: county treasurer balances are Cash and Cash Equivalents); defensible because Exhibit A line 28 excludes it, but needs confirmation"}
   ]
 }

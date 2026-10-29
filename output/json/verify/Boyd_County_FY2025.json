@@ -1,16 +1,27 @@
 {
   "stem": "Boyd_County_FY2025",
-  "values_checked": 260,
+  "values_checked": 120,
   "issues": [
-    {"severity": "warning", "path": "receipts[7].category", "page": 5,
-     "extracted": "licenses and permits", "on_page": "Local Fees, Licenses, Commissions, and Miscellaneous remainder 1,704,152 (Bridge Local 1,518,973; General Local 170,517)",
-     "issue": "The category is a guess. 1,518,973 is unexplained Bridge Fund local receipts (the SoA p2 shows only 18,165 of Bridge as charges for services), and the General Fund part is mostly clerk/treasurer/sheriff fees (fees of office, p2). The same money is categorized 'other' in detail[5] and detail[59], so one label gets two categories in the same report."},
+    {"severity": "warning", "path": "receipts[8].category", "page": 5,
+     "extracted": "licenses and permits", "on_page": "Local Fees, Licenses, Commissions, and Miscellaneous (remainder 1,704,152, of which Bridge Local 1,518,973)",
+     "issue": "nothing in the report says licenses make up most of this remainder. The Statement of Activities (p2) shows only about 129,730 of it as charges for services (Clerk 26,185, Treasurer 69,227, Sheriff 5,305, Road 10,150, Bridge 18,165, S.T.O.P. 698); about 1.5M of Bridge 'Local' is unexplained general receipts (p3 1,574,422). The category is doubtful (review note present). Arithmetic 1,858,489 - 133,406 - 19,240 - 1,691 = 1,704,152 is correct"},
+    {"severity": "warning", "path": "decision_needed", "page": 13,
+     "extracted": null, "on_page": "Bridge: Local 1,518,973 (budget 1,571,116; 2024 1,061,072)",
+     "issue": "an unexplained 1.52M 'Local' receipt in the Bridge Fund (27% of the year's receipts; the same fund pays 395,630 debt service). It could be a reimbursement, a cost-share or financing. decision_needed[] is missing, and only a person can settle this"},
+    {"severity": "warning", "path": "detail[5].category", "page": 8,
+     "extracted": "other", "on_page": "Local 170,517 (General Fund)",
+     "issue": "Statement of Activities p2 shows General Fund departments' charges for services of 100,717 (Clerk 26,185, Treasurer 69,227, Sheriff 5,305), 59% of this line. By the rule this would be charges for services/fees (or Fees of Office). It is kept as other per the user's category_decision 2026-10-23"},
+    {"severity": "warning", "path": "detail[56].category", "page": 13,
+     "extracted": "other", "on_page": "Road: Local 10,918",
+     "issue": "Statement of Activities p2 shows Road charges for services 10,150 (93% of the line). By the rule this would be charges for services/fees. It is kept as other per the user's category_decision"},
+    {"severity": "warning", "path": "detail[61].category", "page": 13,
+     "extracted": "other", "on_page": "Stop Program: Local 697",
+     "issue": "Statement of Activities p2 shows S.T.O.P. charges for services 698. By the rule this would be charges for services/fees. It is kept as other per the user's category_decision"},
     {"severity": "warning", "path": "detail[48].category", "page": 11,
-     "extracted": "streets/highways", "on_page": "Noxious Weed (under Public Works): Personal Services 15,297, Operating 8,132, Supplies and Materials 4,609",
-     "issue": "The extractor rules list noxious weed control under natural resources/conservation; Box Butte County uses that category. Here detail[48]-[50] follow the report's Public Works heading."},
-    {"severity": "warning", "path": "detail[81].category", "page": 15,
-     "extracted": "general government (Grants Operating 3,132); public safety (Stop Program Operating 441, detail[80]); general government (Reg Deeds P&M Operating 3,319, detail[84])",
-     "on_page": "Statement p5 Other Governmental Funds: Public Welfare 3,573 (= 3,132 + 441), Public Works 3,319",
-     "issue": "The function assignments for these small special revenue lines don't match the statement's own function columns."}
+     "extracted": "streets/highways", "on_page": "Public Works: Noxious Weed (lines 48-51)",
+     "issue": "the extractor's disbursement category list puts noxious weed control under natural resources/conservation. The report groups it under Public Works, so streets/highways is defensible"},
+    {"severity": "warning", "path": "detail[80].category", "page": 14,
+     "extracted": "public safety (Stop Program), general government (Grants detail[81], Reg Deeds P & M detail[84])", "on_page": "Exhibit III p5 Other Governmental Funds: Public Works 3,319 (Reg Deeds), Public Welfare and Social Services 3,573 (Stop 441 + Grants 3,132)",
+     "issue": "the functions assumed for these small funds differ from the report's own statement classification. This is a judgment call"}
   ]
 }

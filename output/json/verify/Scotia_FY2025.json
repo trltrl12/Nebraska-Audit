@@ -1,15 +1,18 @@
 {
   "stem": "Scotia_FY2025",
-  "values_checked": 56,
+  "values_checked": 46,
   "issues": [
-    {"severity": "warning", "path": "receipts[13].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Enterprise - Sewer) 32,878.00",
-     "issue": "Inconsistent with receipts[12] (Garbage column, same printed line) which uses Utility Charges; user rule puts utility fund sales/charges in Utility Charges"},
-    {"severity": "warning", "path": "receipts[14].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Enterprise - Water) 73,550.00",
-     "issue": "Inconsistent with receipts[12]; user rule puts utility fund sales/charges in Utility Charges"},
     {"severity": "warning", "path": "disbursements[3].original_label", "page": 3,
      "extracted": "Capital Improvements (General Fund)", "on_page": "Capital Improvements",
-     "issue": "Capital outlay lines (disbursements[3],[4],[5],[7]) are not labelled 'Capital Outlay: <function>' with printed_label per the user rule, and fund names are appended to printed labels (also receipts[9]-[14]); user_rules.py should relabel"}
+     "issue": "capital outlay lines (disbursements[3], [4], [5], [7]) are not labelled 'Capital Outlay: <function>' with printed_label per the 2026-10-26 rule; user_rules.py should relabel them"},
+    {"severity": "warning", "path": "receipts[11].category", "page": 2,
+     "extracted": "keno/lottery", "on_page": "Local Receipts: Other 41,616 (Special Revenue - Keno column)",
+     "issue": "category inferred from the fund name only; the line is printed as Local Receipts: Other (already marked review)"},
+    {"severity": "warning", "path": "balance_sheet.assets", "page": 1,
+     "extracted": "Net Cash Balance only (437,040 governmental; 223,978 business-type)", "on_page": "County Treasurer Balance at September 30, 2025: 6,258 (at October 1, 2024: 11,227)",
+     "issue": "county treasurer balances are printed below the statement as memo items and left out of cash; defensible since line 28 excludes them, but the user may want them counted as Cash and Cash Equivalents"},
+    {"severity": "warning", "path": "balance_sheet.equity[0].category", "page": 1,
+     "extracted": null, "on_page": "Ending Balance (Line 24)",
+     "issue": "equity lines (equity[0], equity[1]) have no category field"}
   ]
 }

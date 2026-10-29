@@ -3,10 +3,19 @@
   "values_checked": 32,
   "issues": [
     {"severity": "warning", "path": "receipts[10].category", "page": 1,
-     "extracted": "charges for services/fees 86,535.12", "on_page": "Local Receipts: Other, Enterprise Fund 86,535.12",
-     "issue": "Enterprise (water/wastewater) fund receipts assumed to be utility charges; if so the user rule category is Utility Charges; nothing on the page says what they are"},
-    {"severity": "warning", "path": "disbursements[1].amount", "page": 4,
-     "extracted": 29799.95, "on_page": "printed 17,389.04 struck through, 29,799.95 handwritten (also Wastewater 24,578.73 -> 38,177.16 handwritten)",
-     "issue": "amounts are handwritten corrections, not printed figures; they agree with the clean final page 1 line 23 (Street 29,799.95, Enterprise 54,591.07), so used as is"}
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other 86,535.12 (Enterprise Fund)",
+     "issue": "assumption: the Enterprise Fund's only receipt line is printed as 'Local Receipts: Other' with no breakdown; utility charges is likely but not shown on the page (review note present)"},
+    {"severity": "warning", "path": "disbursements[2].amount", "page": 4,
+     "extracted": 38177.16, "on_page": "handwritten 38,17?.16 over struck 24,578.73",
+     "issue": "handwritten correction; the fourth digit is partly hidden by the strike-through. 38,177.16 agrees with the Enterprise total 54,591.07 - Water 16,413.91 and with p1 line 23. Streets 29,799.95 (disbursements[1]) is handwritten too, but it is clearly legible"},
+    {"severity": "warning", "path": "report_discrepancies", "page": 2,
+     "extracted": null, "on_page": "p2 and p3 are earlier, crossed-out versions of Exhibit A page 1 with different figures (e.g. Local Receipts: Other 41,692.33 / 80,290.15; ending balance 407,577.35 and 433,802.59)",
+     "issue": "the voided versions were correctly ignored in favour of the clean p1, which ties to the corrected p4/p5. The differing figures are not recorded in report_discrepancies, though this is the practice for voided budget-form pages"},
+    {"severity": "warning", "path": "balance_sheet.equity", "page": 1,
+     "extracted": "Ending Balance (line 24), no category", "on_page": "Ending Balance (Line 22 MINUS Line 23)",
+     "issue": "equity lines have no category, and the label is not the printed text. Amounts are correct (153,249.39 governmental; 248,214.66 enterprise; total 401,464.05 = line 28)"},
+    {"severity": "warning", "path": "balance_sheet.assets", "page": 1,
+     "extracted": null, "on_page": "County Treasurer Balance at September 30, 2025: 1,218.73 (Oct 1, 2024: 558.39)",
+     "issue": "county treasurer balances are left out (the notes say so). They sit outside the line 28 fund balances, so including them would break the tie. This is defensible but a judgment call (the rules treat county treasurer balances as Cash and Cash Equivalents)"}
   ]
 }

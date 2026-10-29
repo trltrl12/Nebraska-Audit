@@ -1,12 +1,16 @@
 {
   "stem": "Elmwood_FY2025",
-  "values_checked": 144,
+  "values_checked": 134,
   "issues": [
+    {"severity": "error", "path": "receipts[13].category", "page": 7,
+     "extracted": "charges for services/fees", "on_page": "Sales 340,546 (Water and Sewer enterprise funds, operating revenues)",
+     "issue": "Utility fund sales are category Utility Charges under the user's rules (utility fund sales/charges/collections); charges for services/fees is only for genuine fees for services",
+     "resolved": "Already corrected in extraction_attempt 2: receipts[13] 'Sales' 340,546 (p7, Water 178,422 + Sewer 162,124) is category Utility Charges in output/json/Elmwood_FY2025.json; rechecked 2026-10-29 against p7, no change needed"},
+    {"severity": "warning", "path": "receipts[14].category", "page": 7,
+     "extracted": "charges for services/fees", "on_page": "Other revenue 4,565 (Water 2,441, Sewer 2,124, operating revenues)",
+     "issue": "Printed label says 'Other revenue'; no breakdown printed. Recorded as charges for services/fees without a review note; could be Utility Charges (operating revenue of the utility funds) or other"},
     {"severity": "warning", "path": "receipts[11].category", "page": 5,
-     "extracted": "donations/contributions", "on_page": "Contributions and grants 13,801",
-     "issue": "the label mixes grants and contributions (p13: Park 6,991, Library 6,810; p2 shows it as operating grants and contributions). If any part is a government grant (e.g. state library aid) it is intergovernmental. A mixed label should get the dominant category plus review, and no review is set. Same for detail[10] and detail[11]"},
-    {"severity": "warning", "path": "receipts[16].category", "page": 7,
-     "extracted": "donations/contributions", "on_page": "Grant income 16,963 (Water Fund, nonoperating)",
-     "issue": "p3 shows this as a Water capital grant. The grantor isn't stated and it could be a state or federal grant (intergovernmental/federal grants) rather than a private contribution. Already marked review"}
+     "extracted": "donations/contributions", "on_page": "Contributions and grants 13,801 (p13: Park 6,991, Library 6,810 'Grants and contributions')",
+     "issue": "Line mixes grants and contributions (Statement of Activities p2 shows it as operating grants and contributions); grants may be governmental (state aid). Mixed line kept in donations/contributions without a review note"}
   ]
 }

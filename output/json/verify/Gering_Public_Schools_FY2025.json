@@ -1,24 +1,15 @@
 {
   "stem": "Gering_Public_Schools_FY2025",
-  "values_checked": 255,
+  "values_checked": 254,
   "issues": [
-    {"severity": "error", "path": "receipts[7].category", "page": 4,
-     "extracted": "charges for services/fees", "on_page": "Program Sales and Charges 807,164 = School Nutrition Fund 292,434 (Lunchroom Sales, p21) + Student Activity Fund 514,730 (Activity Receipts, p26), by fund column on p8",
-     "issue": "[fixed 2026-10-28: split by the p8 fund columns into School Lunch Sales 292,434 and Extracurricular Receipts 514,730, split_from set] Under the user rules neither part is charges for services: activity receipts are Extracurricular Receipts and lunchroom sales are School Lunch Sales. The p8 fund columns print the breakdown, so the line should be split (split_from) or take its dominant category (Extracurricular Receipts, 514,730) with a review note. It also doesn't match the detail lines, which use School Lunch Sales / Extracurricular Receipts."},
-    {"severity": "error", "path": "detail[4].category", "page": 14,
-     "extracted": "other taxes / Other / Miscellaneous Taxes", "on_page": "1190 Other Taxes 25,131",
-     "issue": "[fixed 2026-10-28: category and detail_category set to In Lieu of Tax, matching the p4 General Fund In-Lieu-of Taxes 25,131] The report identifies this line: the General Fund column of the governmental funds statement (p4) and the combining schedule (p10) print the same 25,131 as In-Lieu-of Taxes, and the extractor's notes say so too. Category should be In Lieu of Tax, matching the statement line, not other taxes."},
-    {"severity": "warning", "path": "receipts[9].category", "page": 4,
-     "extracted": "charges for services/fees", "on_page": "Other Local Revenue part: 1910 Rentals 2,710 (p14) + School Nutrition Other Local Revenue 1,290 (p21)",
-     "issue": "[fixed 2026-10-28: category Rentals, review names the 1,290 mix] The dominant part is rentals, and the user's 2026-10-28 rules make Rentals its own receipt category, separate from charges for services."},
-    {"severity": "warning", "path": "detail[8].category", "page": 14,
-     "extracted": "charges for services/fees", "on_page": "1910 Rentals of School Equipment, Property, and Facilities 2,710",
-     "issue": "[fixed 2026-10-28: category Rentals] Should be the Rentals receipt category under the user's 2026-10-28 rules (detail_category rentals is fine)."},
-    {"severity": "warning", "path": "disbursements[46].original_label", "page": 6,
-     "extracted": "Facilities Acquisition and Construction", "on_page": "Facilities Acquisitions and Construction",
-     "issue": "[fixed 2026-10-28: original_label 'Capital Outlay: Facilities Acquisitions and Construction', printed_label as printed] Label differs slightly from the printed text. Amount 95,199 is correct. The capital outlay relabel rule ('Capital Outlay: <function>') also applies."},
-    {"severity": "warning", "path": "detail[136].category", "page": 24,
-     "extracted": "other", "on_page": "QCPU Fund Purchased Services 45,328",
-     "issue": "Function not stated. A Qualified Capital Purchase Undertaking fund's purchased services are likely capital/building related, so 'other' is a judgment call. It is already marked review."}
+    {"severity": "warning", "path": "detail[4].computed", "page": 14,
+     "extracted": "computed: category from p4 ...", "on_page": "1190 Other Taxes 25,131 (p14); same amount printed as In-Lieu-of Taxes in the General Fund column on p4 and p10",
+     "issue": "the amount is printed as is, but the line carries a 'computed' field (used only to explain the category). The In Lieu of Tax category is defensible"},
+    {"severity": "warning", "path": "disbursements[85].original_label", "page": 6,
+     "extracted": "Capital Outlay and Maintenance", "on_page": "Capital Outlay and Maintenance 456,084",
+     "issue": "category capital outlay but not relabelled 'Capital Outlay: <function>' (user rule 2026-10-28); the same applies to detail 4900 Other Facilities Acquisition and Construction (p17) and Special Building Fund 'Capital Outlay' (p23). user_rules.py may fix this"},
+    {"severity": "warning", "path": "disbursements[43].category", "page": 6,
+     "extracted": "support services", "on_page": "Other Support Services 586,807 (code 2900)",
+     "issue": "school support services are limited to Pupils and Staff by the user's function list; 2900 Other Support Services fits neither group, and unlike the other support lines it has no detail_category"}
   ]
 }

@@ -1,15 +1,15 @@
 {
   "stem": "Douglas_FY2025",
-  "values_checked": 42,
+  "values_checked": 36,
   "issues": [
-    {"severity": "warning", "path": "receipts[11].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other, Water Fund 68,173.71",
-     "issue": "Printed label is only 'Other'. Treating it as utility charges is an assumption (it is marked review). If it is treated as utility charges, the user's 2026-10-28 rule puts utility fund sales/charges in the category Utility Charges, not charges for services/fees."},
-    {"severity": "warning", "path": "receipts[12].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other, Sewer Fund 25,129.40",
-     "issue": "Same as the Water line. The printed label is only 'Other', and the category would be Utility Charges under the 2026-10-28 rule if these are charges."},
-    {"severity": "warning", "path": "balance_sheet", "page": 1,
-     "extracted": "line 28 ending balances used as balance sheet", "on_page": "no balance statement printed (waiver Exhibit A only)",
-     "issue": "No balance statement exists, so the balance sheet is built from the Exhibit A line 26/28 ending balances. Governmental and business-type lines are computed sums of the fund columns. The arithmetic ties (283,362.09 + 4,104.03 = 287,466.12 printed)."}
+    {"severity": "warning", "path": "receipts[10].category", "page": 1,
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other (Water 68,173.71; Sewer 25,129.40 in receipts[11])",
+     "issue": "Utility-column 'Other' assumed to be utility charges; no breakdown printed (assumption, marked review)"},
+    {"severity": "warning", "path": "receipts[9].category", "page": 2,
+     "extracted": "other", "on_page": "Local Receipts: Other 654.57 (Street Sinking 528.57, Debt Service 18.03, Ext/Rpl 45.74, Special Projects 62.23)",
+     "issue": "Small amounts in reserve accounts are probably interest (Interest Income); kept as other with review"},
+    {"severity": "warning", "path": "notes", "page": 1,
+     "extracted": null, "on_page": "County Treasurer Balance at October 1, 2024 5,572.95; at September 30, 2025 4,099.26",
+     "issue": "County treasurer balances are printed but not included in balances and not mentioned in notes"}
   ]
 }

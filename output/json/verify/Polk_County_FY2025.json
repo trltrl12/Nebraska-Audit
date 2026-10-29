@@ -4,7 +4,8 @@
   "issues": [
     {"severity": "error", "path": "detail[38].category", "page": 10,
      "extracted": "charges for services/fees", "on_page": "Local 73,347 (Road Fund budget schedule); p4 prints the Road Fund breakdown: Local 35,284 + Sale of surplus 38,063",
-     "issue": "38,063 of the 73,347 (51.9%) is sale of surplus per the p4 Road Fund column, so the dominant category is Sale of Property (or split with split_from from p4); charges for services/fees does not fit the larger part. The sale of surplus is also other financing on p4, not revenue."},
+     "issue": "38,063 of the 73,347 (51.9%) is sale of surplus per the p4 Road Fund column, so the dominant category is Sale of Property (or split with split_from from p4); charges for services/fees does not fit the larger part. The sale of surplus is also other financing on p4, not revenue.",
+     "resolved": "Already fixed in extraction_attempt 3 (checked 2026-10-29 against p4 and p10): the Road Fund budget-schedule Local 73,347 is split with split_from into Local 35,284 (charges for services/fees, detail[38]) and Sale of surplus 38,063 (Sale of Property, detail[39]), both printed in the p4 Road Fund column. The sale stays in the revenue section because the p10 schedule counts it inside Local and its TOTAL RECEIPTS 1,554,918; the statement-level 38,063 is already other_financing."},
     {"severity": "warning", "path": "receipts[0].source_page", "page": 2,
      "extracted": 4, "on_page": "Property 3,472,462 printed on p2 (Statement of Activities); p4 prints only Taxes 3,831,331",
      "issue": "amount is printed on p2, not on the cited p4; receipts[1] (Motor vehicle 358,869) likewise cites p4 but is printed on p2. Split itself sums exactly to the p4 Taxes line."},

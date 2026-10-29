@@ -1,15 +1,18 @@
 {
   "stem": "Emerson_Hubbard_Public_Schools_FY2025",
-  "values_checked": 185,
+  "values_checked": 150,
   "issues": [
-    {"severity": "warning", "path": "disbursements[1].category", "page": 3,
-     "extracted": "support services (Pupils), 399,112", "on_page": "Student support services 399,112 = General 203,521 + Other Governmental 195,591",
-     "issue": "The 195,591 in the Other Governmental column is Activities Fund spending (p15 'Other expenses' 195,591), which would be 'student activities'. The extractor kept it as one printed line and mentioned it in notes; splitting it by column would be more accurate. Judgment call."},
     {"severity": "warning", "path": "detail[69].category", "page": 9,
      "extracted": "support services", "on_page": "4600 Site improvement 7,366",
-     "issue": "The statement's 'Operation and maintenance of plant' total (405,254 General) includes this 7,366, so the function is Building and Grounds. As facilities acquisition, it could also be capital outlay. Plain 'support services' matches neither."},
-    {"severity": "warning", "path": "detail[80].category", "page": 12,
-     "extracted": "charges for services/fees", "on_page": "School Nutrition Fund, Sales 66,289",
-     "issue": "The statement line (receipts[15]) for the same 66,289 uses 'School Lunch Sales', which is also the user rule for lunch and meal sales. The detail line doesn't match."}
+     "issue": "The statement counts this line in Operation and maintenance of plant (405,254 = 2610+2620+2650+3599+4600), so category Building and Grounds would match the other plant lines; 'support services' is inconsistent. Site improvement could also be capital outlay"},
+    {"severity": "warning", "path": "detail[97].original_label", "page": 13,
+     "extracted": "Capital outlay other", "on_page": "Capital outlay other 296,721 (Buildings and sites)",
+     "issue": "User rule: capital outlay lines labelled 'Capital Outlay: <function>' with printed text in printed_label (as done for the School Nutrition capital outlay line); not applied here"},
+    {"severity": "warning", "path": "receipts[16].category", "page": 3,
+     "extracted": "other", "on_page": "Other receipts 8,372 (General 4,619 = licenses 1,734, fines 672, rentals 25, corporate grants 500, other 750, sale of property 800, other nonrevenue 138 (p6-7); Other Governmental 3,753 = nutrition other local receipts (p12))",
+     "issue": "No single category exceeds half, so other with review is defensible; the schedules do print the full breakdown, so a split_from split (licenses, fines, rentals, donations, Sale of Property, other) was possible"},
+    {"severity": "warning", "path": "disbursements[1].category", "page": 3,
+     "extracted": "support services", "on_page": "Student support services 399,112 = General 203,521 + Other Governmental 195,591 (Activities Fund 'Other expenses', p15)",
+     "issue": "195,591 of the line is Activities Fund spending (student activities); the fund columns print the split, kept as one line under support services (noted in notes)"}
   ]
 }

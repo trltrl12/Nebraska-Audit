@@ -1,15 +1,15 @@
 {
   "stem": "Dix_FY2025",
-  "values_checked": 48,
+  "values_checked": 41,
   "issues": [
     {"severity": "warning", "path": "receipts[8].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other, Water Fund 142,684.68",
-     "issue": "This report puts the Garbage Fund's identical 'Other' line in Utility Charges but the Water and Sewer lines in charges for services/fees. Under the 2026-10-28 rule, utility fund charges are Utility Charges. The category is also an assumption, because the label is only 'Other'."},
-    {"severity": "warning", "path": "receipts[9].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other, Sewer Fund 13,144.03",
-     "issue": "Same inconsistency as the Water line: should probably be Utility Charges, like the Garbage line."},
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other (Water 142,684.68; also Sewer 13,144.03 and Garbage 37,740.31 in receipts[9], receipts[10])",
+     "issue": "Utility-column 'Local Receipts: Other' lines assumed to be utility charges; the form prints no breakdown (assumption, already marked review)"},
     {"severity": "warning", "path": "report_discrepancies", "page": 2,
-     "extracted": null, "on_page": "Crossed-out Exhibit A p1: Water local other 140,675.57, total receipts 323,289.13, ending 119,113.49",
-     "issue": "The voided page's figures that differ from p1 are described only in notes, not in report_discrepancies. The unmarked page 1 is correctly used."}
+     "extracted": null, "on_page": "Crossed-out version of Exhibit A p1: Water Local Receipts Other 140,675.57, total receipts 323,289.13, Water ending 3,176.44, total ending 119,113.49",
+     "issue": "The void (red X) version's differing figures are only in notes/review; the rules ask for them in report_discrepancies"},
+    {"severity": "warning", "path": "beginning_investments", "page": 1,
+     "extracted": 19434.63, "on_page": "Investments line 2: General 6,501.00 + Street 12,933.63; beginning_cash 86,260.98 is the line 3 subtotal that already includes them",
+     "issue": "Investments are inside beginning_cash/ending_cash (line 3/line 28 subtotals) and also reported separately in beginning_investments/ending_investments; risk of double counting if summed"}
   ]
 }

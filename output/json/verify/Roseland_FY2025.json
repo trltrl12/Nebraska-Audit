@@ -1,18 +1,18 @@
 {
   "stem": "Roseland_FY2025",
-  "values_checked": 42,
+  "values_checked": 34,
   "issues": [
     {"severity": "warning", "path": "receipts[8].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Water 40,024.00, Sewer 22,040.00)",
-     "issue": "Utility-fund 'Other' receipts are assumed to be utility sales. If so, the user's 2026-10-28 rule makes the category Utility Charges. Already marked review."},
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other (Water 40,024.00 + Sewer 22,040.00)",
+     "issue": "The page has no breakdown, so treating this line as utility charges is an assumption (it has a review note). The split_from on receipts[7]/[8] is a sum of fund columns that the page prints, so it is supported."},
     {"severity": "warning", "path": "disbursements[3].original_label", "page": 3,
-     "extracted": "Other Capital Outlay", "on_page": "Other Capital Outlay - General 28,586.00 + Street 120,818.00 = 149,404.00",
-     "issue": "Not relabelled 'Capital Outlay: <function>' with printed_label (user rule). The line mixes two functions (General Fund and Street Fund), so it could be split by column."},
-    {"severity": "warning", "path": "beginning_investments", "page": 1,
-     "extracted": null, "on_page": "Investments line 2 General Fund 5,000.00 (begin) and line 27 5,000.00 (end)",
-     "issue": "Investments are printed separately, so the rules say to fill beginning_investments/ending_investments (informational). They are left null; the 5,000 is correctly inside cash."},
+     "extracted": "Other Capital Outlay", "on_page": "Other Capital Outlay 149,404.00 (General 28,586.00 + Street 120,818.00)",
+     "issue": "The capital outlay label is not in the 'Capital Outlay: <function>' form. The line combines a General Fund amount and a Street Fund amount, so no single function applies."},
+    {"severity": "warning", "path": "balance_sheet.assets", "page": 1,
+     "extracted": null, "on_page": "County Treasurer Balance at September 30, 2025 2,905.00",
+     "issue": "The memo figure for the county treasurer balance is not recorded and not mentioned in the notes."},
     {"severity": "warning", "path": "transfers_out", "page": 3,
-     "extracted": 200000, "on_page": "Line 50 Street Fund 200,000.00; p5 schedule General Fund -> Sewer Fund 200,000.00",
-     "issue": "The statement and the transfer schedule disagree on which fund sent the money. This is already in decision_needed and report_discrepancies. Either way the sender is governmental, so the governmental totals are unaffected."}
+     "extracted": 200000, "on_page": "Street Fund line 50 200,000.00; p5 schedule says General Fund to Sewer Fund",
+     "issue": "The fund that sent the transfer conflicts between pages. This is already recorded in report_discrepancies and decision_needed. The governmental total is unaffected."}
   ]
 }
