@@ -1,26 +1,14 @@
 {
   "stem": "Wynot_FY2025",
-  "values_checked": 41,
+  "values_checked": 42,
   "issues": [
-    {"severity": "warning", "path": "decision_needed", "page": 1,
-     "extracted": "receipts[11] Local Receipts: Other 238,302.43 (governmental), category other, review only",
-     "on_page": "Line 18 Local Receipts: Other, General Fund 233,974.86 (total 240,178.74)",
-     "issue": "Unexplained General Fund 'Local Receipts: Other' is about 60% of the year's governmental receipts (391,270.44) and may be loan or grant proceeds (Capital Improvements 131,245.00 spent the same year). This is a question only a person can settle, but decision_needed[] is missing from the JSON."},
     {"severity": "warning", "path": "disbursements[6].fund_type", "page": 3,
      "extracted": "governmental (Solid Waste 18,198.63, Wastewater 31,991.77, Water 7,383.82, disbursements[6]-[8])",
      "on_page": "Lines 45, 47, 48 printed under 'Business-Type Activities', all in the General Fund column",
-     "issue": "Utility operating costs of 57,574.22 are kept governmental because of their column. That is defensible, but it means the business_type roll-forward has no water/sewer/refuse operating costs. A person may need to settle this; it is not in decision_needed."},
+     "issue": "utility operating costs of 57,574.22 are kept governmental because of their column (marked review). This is defensible, but it leaves the business_type roll-forward with no water, sewer or refuse operating costs. A person should confirm the treatment"},
     {"severity": "warning", "path": "receipts[12].fund_type", "page": 1,
      "extracted": "business-type (Recycling Fund 1,720.28)",
-     "on_page": "RECYCLING FUND column: receipts 1,720.28, no disbursements",
-     "issue": "Treating the Recycling Fund as business-type is an assumption (the notes say it is uncertain). Its solid waste spending is paid from the General Fund."},
-    {"severity": "warning", "path": "balance_sheet.equity[0].original_label", "page": 1,
-     "extracted": "Subtotal of Ending Balances (all funds)",
-     "on_page": "Subtotal of Ending Balances (Line 26 + 27)",
-     "issue": "The label does not match the printed row label. The amount 420,127.58 is correct."},
-    {"severity": "warning", "path": "notes", "page": 1,
-     "extracted": null,
-     "on_page": "County Treasurer Balance at October 1, 2024 $1,263.64; County Treasurer Balance at September 30, 2025 2,857.44",
-     "issue": "County treasurer balances are printed below the statement and are not mentioned in the JSON. They are not part of the line 3/24 balances, so they were correctly left out of cash, but the user may want them noted."}
+     "on_page": "RECYCLING FUND column: Local Receipts: Other 1,720.28, no disbursements",
+     "issue": "treating the Recycling Fund as business-type is an assumption (the notes call it uncertain). Its solid waste spending is paid from the General Fund"}
   ]
 }

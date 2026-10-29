@@ -1,21 +1,15 @@
 {
   "stem": "Central_City_Public_Schools_FY2025",
-  "values_checked": 168,
+  "values_checked": 152,
   "issues": [
-    {"severity": "warning", "path": "balance_sheet.total_assets", "page": 1,
-     "extracted": 10331321, "on_page": "Asset lines used: Cash 8,417,892 + Cash with County Treasurers 1,888,685 (p5 Total Governmental Funds) + business-type Cash 24,745 (p1) = 10,331,322",
-     "issue": "Asset lines now come from the governmental funds balance sheet (p5, total 10,306,577), but total_assets is still the government-wide p1 figure (10,331,321, which has the report's own $1 rounding). So the asset lines don't add up to total_assets (off by 1). total_liabilities is null although p1 and p5 print liabilities as '-' (0). notes still say 'Balance sheet uses government-wide Total column', which contradicts the final sentence."},
-    {"severity": "warning", "path": "receipts[17].review", "page": 7,
-     "extracted": "Printed only as Other (General 9,084 + Depreciation 10,604)", "on_page": "General Fund Other 9,104 (p6) + Depreciation 10,604 = 19,708; budget schedule p10 splits General's 9,104 into 1990 Other 9,084 and 1910 Rental of school equipment 20",
-     "issue": "The amount 19,708 is right, but the review note's breakdown is wrong (9,084 + 10,604 = 19,688). General's statement Other is 9,104."},
-    {"severity": "warning", "path": "detail[5].category", "page": 10,
-     "extracted": "charges for services/fees / tuition and fees", "on_page": "1312 Summer school 12,510",
-     "issue": "The statement line 'Tuition/GED fees' 33,675 (= summer school 12,510 + tuition 4,350 + preschool 16,815) is Tuition Received, and the user rule puts all tuition, including summer school, in Tuition Received. Detail summer school uses a different category from the statement line that holds it."},
-    {"severity": "warning", "path": "detail[43].split_from", "page": 10,
-     "extracted": "4000 Facilities -450,000 as other financing (split_from)", "on_page": "4000 Facilities 450,000 in General Fund disbursements; Eliminations column (450,000) on p7 against Depreciation 'Transfer from other funds' 450,000",
-     "issue": "Treating it as a hidden transfer is supported by the Eliminations column. It is a whole-line reclassification, not a printed split, so it is a judgment call; review is already set."},
-    {"severity": "warning", "path": "disbursements[11].review", "page": 7,
-     "extracted": "function guessed as instruction (category State Categorical Programs)", "on_page": "State categorical programs 171,814; Federal programs 510,851",
-     "issue": "Stale review text: the category is now the user's State Categorical Programs / Federal Programs, not instruction. The same text is on disbursements[12] and the matching detail lines."}
+    {"severity": "warning", "path": "receipts[8].split_from", "page": 7,
+     "extracted": "Fines and licenses 79,477 split into 77,067 + 2,410", "on_page": "Fines and licenses 79,477 (p7); p10: 2110 Fines and licenses 77,067, 1911 Local license fees 2,410",
+     "issue": "The split uses the General Fund budget schedule lines, which tie exactly to the statement line. The statement itself does not print the breakdown, so whether the split is allowed is a judgment call. receipts[9] has the same issue."},
+    {"severity": "warning", "path": "disbursements[2].category", "page": 7,
+     "extracted": "Drivers Education", "on_page": "Summer school/driver's education 23,609",
+     "issue": "The line mixes summer school (instruction) with driver's education. The report also shows 12,510 of summer school charges. The whole line is categorized Drivers Education, and so is detail[31]."},
+    {"severity": "warning", "path": "receipts[16].category", "page": 7,
+     "extracted": "donations/contributions", "on_page": "Grants and donations 75,361",
+     "issue": "Mixed label. The General Fund 1920 'Grants and donations' 33,361 may contain grants; the Building Fund 42,000 is donations."}
   ]
 }

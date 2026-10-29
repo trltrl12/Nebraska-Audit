@@ -1,38 +1,12 @@
 {
   "stem": "Gosper_County_FY2025",
-  "values_checked": 73,
+  "values_checked": 110,
   "issues": [
-    {
-      "severity": "error",
-      "path": "receipts[4].category",
-      "page": 4,
-      "extracted": "charges for services/fees",
-      "on_page": "Local 666,010; p2 breakdown: charges for services 222,035, interest income 424,116, miscellaneous 21,994",
-      "issue": "[fixed] This mixed line takes its dominant category under the rules. Per the Statement of Activities (p2), interest income (424,116, about 64%) is the dominant part, not charges for services (222,035). The category should be 'investment income' (keep the review note naming the mix)."
-    },
-    {
-      "severity": "error",
-      "path": "detail[3].category",
-      "page": 8,
-      "extracted": "charges for services/fees / other charges for services",
-      "on_page": "General Fund Local 641,488",
-      "issue": "[fixed] Countywide charges for services total only 222,035 (p2), so at least 419,453 of the General Fund's 641,488 Local receipts is interest or miscellaneous. The dominant category is investment income (detail 'investment income'), not charges for services."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[27].category",
-      "page": 7,
-      "extracted": "charges for services/fees / other charges for services",
-      "on_page": "Nonmajor Local 19,120 (Keno Lottery Fund 16,520, STOP Fund 2,600)",
-      "issue": "The Keno Lottery Fund's local receipts (86% of the line) are most likely keno proceeds, so 'keno/lottery' may be the dominant category."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[22].detail_category",
-      "page": 9,
-      "extracted": "highway allocation",
-      "on_page": "Road Fund Intergovernmental 959,077",
-      "issue": "Assumed to be highway allocation. The page doesn't itemize the line, and it may include other state or federal road aid. Already marked review."
-    }
+    {"severity": "warning", "path": "detail[27].category", "page": 7,
+     "extracted": "charges for services/fees", "on_page": "Nonmajor Local 19,120 = Keno Lottery Fund 16,520 + STOP Fund 2,600",
+     "issue": "86% of the line is the Keno Lottery Fund's local receipts, which are almost certainly keno proceeds; under the 'more than half' rule keno/lottery fits better than charges for services (already marked review)"},
+    {"severity": "warning", "path": "detail[23].category", "page": 9,
+     "extracted": "charges for services/fees", "on_page": "Road Fund Local 9,244 (budget basis; statement p4 shows Road Local 5,402 plus Sale of surplus 3,842)",
+     "issue": "Mixed line: 3,842 of it is sale of surplus (Sale of Property) shown as other financing on the statement; 5,402 local receipts unexplained. Category is a judgment call (marked review)"}
   ]
 }

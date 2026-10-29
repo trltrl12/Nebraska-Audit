@@ -1,30 +1,19 @@
 {
   "stem": "Adams_FY2025",
-  "values_checked": 140,
+  "values_checked": 125,
   "issues": [
-    {
-      "severity": "error",
-      "path": "detail[65].amount",
-      "page": 14,
-      "extracted": 419145,
-      "on_page": "Receipts - Proprietary Funds 419,145 (= operating receipts 233,426 + Transfers from other funds 185,719, p8)",
-      "issue": "[fixed] Detail line recorded in section revenue includes the 185,719 transfer from other funds; a transfer is recorded as revenue. The transfer part should be split out as an other financing line (split_from naming p14 line and p8), leaving 233,426 as revenue."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[5].category",
-      "page": 6,
-      "extracted": "intergovernmental/state aid (216,059)",
-      "on_page": "Intergovernmental revenues 216,059; p11 breakdown: Highway allocation 92,156, Motor vehicle fees 6,127, Homestead allocation 9,931, Other 107,845",
-      "issue": "The report prints the breakdown of this line (p10-11), so the 6,127 Motor vehicle fees could be split out as motor vehicle tax; as entered, the receipts list and detail[48] categorize the same 6,127 differently."
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[7]",
-      "page": 6,
-      "extracted": "Bond issue costs / Bond principal payments / Bond interest payments as disbursements (outside_printed_total)",
-      "on_page": "printed under Other financing sources (uses) on Exhibit E",
-      "issue": "Debt payments and issue costs printed as other financing uses were entered as disbursements outside the printed total; defensible (identity reconciles), but the detail[] records the same lines as section other financing."
-    }
+    {"severity": "warning", "path": "receipts[10].category", "page": 6,
+     "extracted": "charges for services/fees", "on_page": "NPPD lease payment 77,739",
+     "issue": "detail[6] gives the same line detail_category rentals. A lease payment received fits the user's Rentals category (as 'Rents' 3,100 does). The category is inconsistent across receipts and detail."},
+    {"severity": "warning", "path": "detail[28].category", "page": 10,
+     "extracted": "charges for services/fees", "on_page": "Rescue Squad: Charges for services 63,738",
+     "issue": "Rescue squad charges have detail_category ambulance/rescue fees. Under the user's 2026-10-28 rule, the category would be Ambulance Fees rather than charges for services/fees."},
+    {"severity": "warning", "path": "detail[24]", "page": 10,
+     "extracted": "Bond issue costs/fees, Bond principal payments, Bond interest payments in section other financing (detail[24]-[26], [52]-[54])",
+     "on_page": "printed under Other financing sources (uses) on Schedules 1-2",
+     "issue": "Top-level disbursements record these debt payments as Debt Service spending (outside_printed_total), while detail records them as other financing. This follows the page, but the treatment is inconsistent within the report."},
+    {"severity": "warning", "path": "detail[66].original_label", "page": 14,
+     "extracted": "Transfers from other funds (within Receipts - Proprietary Funds)", "on_page": "Proprietary Funds 419,145 (Schedule 5); Transfers from other funds 185,719 (p8)",
+     "issue": "The split of the 419,145 schedule line into 233,426 revenue + 185,719 transfer is inferred from p8 (the arithmetic is exact) and is marked split_from/review. The label is constructed, not printed. The 1,588,500 budget is attached to the revenue part only."}
   ]
 }

@@ -2,17 +2,14 @@
   "stem": "Winnebago_Public_Schools_FY2025",
   "values_checked": 152,
   "issues": [
-    {"severity": "warning", "path": "detail_totals[3]", "page": 11,
-     "extracted": {"fund": "Employee Benefit", "section": "revenue", "amount": 0}, "on_page": "1510 Interest '-' (no 'Total receipts' line printed on this schedule)",
-     "issue": "the Employee Benefit Fund schedule prints no receipts total; the 0 comes from the single Interest line's dash and is not marked computed. (Depreciation Fund's 'Total receipts -' on p10 is printed.)"},
+    {"severity": "error", "path": "receipts[6].category", "page": 4,
+     "extracted": "charges for services/fees", "on_page": "Other local receipts split: 1910 Rentals of school equipment 62,296 (p6)",
+     "issue": "User rule 2026-10-28: rent and rental lines have their own receipt category, Rentals, out of charges for services. scripts/user_rules.py will not fix this: the receipt label is 'Other local receipts', and the detail label '1910 Rentals of school equipment' doesn't match its rentals pattern. The same applies to detail[5] (category charges for services/fees)."},
     {"severity": "warning", "path": "beginning_cash", "page": 4,
      "extracted": 12890313, "on_page": "FUND BALANCES, as previously reported 9,399,049; Change in leasing corporation 3,491,265; FUND BALANCES, beginning of year 12,890,313",
-     "issue": "the restated beginning balance is used, so the 3,491,265 leasing-corporation restatement (Special Building Fund) is not shown as an adjustment. This is defensible and the roll-forward ties (12,890,313 + 26,188,669 - 21,622,280 = 17,456,702), but anyone comparing with the prior-year ending balance will see a 3.49M jump"},
-    {"severity": "warning", "path": "disbursements[10].category", "page": 14,
-     "extracted": "debt service principal", "on_page": "Debt Service 1,015,385 (Special Building Fund '5000 Debt service', no principal/interest split)",
-     "issue": "principal and interest are combined in one line. The whole amount is put under principal, with a review note"},
+     "issue": "The restated beginning balance is used, so the 3,491,265 leasing-corporation restatement (Special Building Fund) is not shown as an adjustment. This is defensible and the roll-forward ties, but it does not match the prior year's reported ending balance."},
     {"severity": "warning", "path": "disbursements[1].category", "page": 4,
-     "extracted": "support services", "on_page": "Student support services 892,708 = General 711,528 + Other Governmental Funds 181,180 (Activities Fund '2900 Support Services, Other', p12)",
-     "issue": "the statement line includes 181,180 of student activity spending; detail records that part as 'student activities', so the function split differs between receipts/disbursements and detail"}
+     "extracted": "support services (Pupils)", "on_page": "Student support services 892,708 = General 711,528 + Other Governmental Funds 181,180 (Activities Fund 2900, p12)",
+     "issue": "The statement line includes 181,180 of activity fund spending, which detail records as student activities. The line is recorded as printed, so the statement and detail function splits differ."}
   ]
 }

@@ -1,12 +1,21 @@
 {
   "stem": "Harvard_FY2025",
-  "values_checked": 190,
+  "values_checked": 164,
   "issues": [
+    {"severity": "error", "path": "receipts[12].category", "page": 8,
+     "extracted": "charges for services/fees", "on_page": "Sales 371,929 (Water, Sewer, Sanitation enterprise funds)",
+     "issue": "user rule 2026-10-28: utility fund sales/charges (incl. garbage/refuse) are category Utility Charges (out of charges for services)"},
     {"severity": "warning", "path": "basis", "page": 5,
-     "extracted": "GAAP", "on_page": "Modified Cash Basis - Governmental Funds (fund balance statement)",
-     "issue": "Governmental funds are printed as modified cash basis. The extractor recorded GAAP so it could roll fund balances (663,842 -> 1,363,842, which includes CDs and investments). The roll-forward reconciles exactly, but the basis label is an assumption."},
-    {"severity": "warning", "path": "detail[200].category", "page": 15,
-     "extracted": "capital outlay (Police dept capital outlay 39,900; also Cemetery dept mapped to health/welfare)", "on_page": "Statement p5: Public safety 242,685 = Fire+Police excluding 39,900; Environment and leisure 127,707 includes the 39,900; Public works 32,703 = Cemetery dept",
-     "issue": "Department-to-function mapping does not tie to the statement's function lines. Police capital 39,900 is counted under Environment and leisure on p5, and the Cemetery department (32,703) is under Public works there but health/welfare in detail. The extractor noted both and the totals tie, but a person should confirm the function choice."}
+     "extracted": "GAAP", "on_page": "Statement of Revenues, Expenditures, and Changes in Fund Balances - Modified Cash Basis - Governmental Funds",
+     "issue": "governmental statements are modified cash basis (governmental funds hold only cash, CDs, investments and county treasurer cash, no liabilities); other modified-cash reports in the same format (e.g. Greenwood) are recorded as basis cash with beginning/ending cash; recording GAAP leaves beginning_cash null and keeps the government-wide balance sheet instead of the governmental-funds one"},
+    {"severity": "warning", "path": "detail[Cemetery expenditure lines].category", "page": 14,
+     "extracted": "health/welfare", "on_page": "Cemetery department 32,703 is the General Fund 'Public works' 32,703 on p5 (budget p10 Public works 32,703)",
+     "issue": "department function doesn't tie to the statement's function column; the report counts Cemetery as public works (extractor noted this)"},
+    {"severity": "warning", "path": "detail[Police 'Capital Outlay: Public Safety'].computed", "page": 15,
+     "extracted": "capital outlay under function public safety (39,900)", "on_page": "Budget p10: Public safety 282,585 = Fire 49,760 + Police 272,725 - 39,900; Environment and leisure 143,123 = Library+Pool+Park 103,223 + 39,900",
+     "issue": "the report counts the Police column's 39,900 under Environment and leisure, so detail function totals don't tie to the statement (already marked review)"},
+    {"severity": "warning", "path": "disbursements[1].category", "page": 5,
+     "extracted": "economic development", "on_page": "Community betterment 20,610 (Lottery/Keno fund)",
+     "issue": "function guessed (already marked review)"}
   ]
 }

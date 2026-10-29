@@ -1,18 +1,18 @@
 {
   "stem": "Ord_Public_Schools_FY2025",
-  "values_checked": 157,
+  "values_checked": 172,
   "issues": [
-    {"severity": "warning", "path": "receipts[5].category", "page": 4,
-     "extracted": "motor vehicle tax 364,851", "on_page": "Motor vehicle tax: General 363,094, Bond 1,434, QCPU 323",
-     "issue": "The Bond (1,434, p12) and QCPU (323, p14) amounts in this statement line are printed as 'Pro-rate motor vehicle' on their fund schedules, which is state aid. So 1,757 of state aid sits inside the motor vehicle tax line. Amount is correct as printed; minor category mix."},
-    {"severity": "warning", "path": "detail[10].detail_category", "page": 7,
-     "extracted": "county/other local governments", "on_page": "2110 County fines and license fees 15,661",
-     "issue": "Fines and license fees the county passes on to schools could be fines and forfeitures or licenses and permits instead. Intergovernmental is defensible because the statement groups it under 'County receipts'."},
-    {"severity": "warning", "path": "receipts[*].fund_type (School Nutrition)", "page": 4,
-     "extracted": "governmental", "on_page": "School Nutrition Fund reported within Other Governmental Funds column",
-     "issue": "The extractor rules list school nutrition as a business-type example, but this report presents it as a governmental fund and has no proprietary statement. Treating it as governmental follows the report; confirm this is intended."},
-    {"severity": "warning", "path": "disbursements[3].category", "page": 5,
-     "extracted": "student activities 508,505", "on_page": "Support services - students, Other Governmental Funds column 508,505",
-     "issue": "The split by fund column is printed on the page and the Activities Fund disbursements (p19) tie to it. But the statement puts this amount under the support services function, so recategorizing it as student activities is a judgment call (already marked review)."}
+    {"severity": "error", "path": "receipts[13].category", "page": 4,
+     "extracted": "charges for services/fees", "on_page": "Other local receipts 527,499 (General 23,772; Other Governmental 503,727 = Activities receipts 467,652 p19 + nutrition Other receipts 36,075 p15)",
+     "issue": "467,652 of the 527,499 (89%) is Activities Fund receipts; the rules put school activity fund receipts in Extracurricular Receipts and use the dominant part's category for broad 'Other local receipts' lines. Charges for services/fees is only for genuine service fees. The category should be Extracurricular Receipts, keeping the review note."},
+    {"severity": "error", "path": "detail[7].category", "page": 7,
+     "extracted": "charges for services/fees", "on_page": "1910 Rental receipts 175",
+     "issue": "Rental receipts have their own receipt category, Rentals (user 2026-10-28), not charges for services/fees."},
+    {"severity": "warning", "path": "receipts[12].category", "page": 4,
+     "extracted": "licenses and permits", "on_page": "Local license fees and fines 155",
+     "issue": "The label mixes licence fees and fines, so the Fines and Licenses category may fit better. The line is already marked review."},
+    {"severity": "warning", "path": "detail[63].category", "page": 15,
+     "extracted": "charges for services/fees", "on_page": "School Nutrition Fund: Other receipts 36,075",
+     "issue": "The printed label is 'Other receipts' and the page doesn't say what it is. Charges for services/fees is an assumption (it could be School Lunch Sales or other). Already marked review."}
   ]
 }

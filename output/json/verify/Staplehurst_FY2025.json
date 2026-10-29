@@ -1,15 +1,15 @@
 {
   "stem": "Staplehurst_FY2025",
-  "values_checked": 32,
+  "values_checked": 34,
   "issues": [
     {"severity": "warning", "path": "receipts[8].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other 103,079.75 (Water/Sewer Fund column)",
-     "issue": "The page doesn't say what this is. Treating it as water/sewer user charges is a reasonable assumption, and it is already marked review."},
+     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other, Water/Sewer Fund column 103,079.75",
+     "issue": "The line was assumed to be water/sewer user charges. If so, the user's category is Utility Charges, not charges for services/fees."},
+    {"severity": "warning", "path": "disbursements[3].original_label", "page": 2,
+     "extracted": "Capital Improvements (Street Fund column)", "on_page": "Capital Improvements (line 35)",
+     "issue": "Under the user's capital outlay rule the label should be 'Capital Outlay: <function>' with the printed text in printed_label. The '(Street Fund column)' suffix is not printed. disbursements[5] has the same problem."},
     {"severity": "warning", "path": "disbursements[4].category", "page": 2,
-     "extracted": "debt service principal", "on_page": "Debt Service 21,110.00 (Street Fund)",
-     "issue": "Principal and interest are not separated on the page. Recording it all as principal is defensible because the only debt is a 0% Highway Allocation note (p3), but 21,110.00 is not a round payment. Already marked review."},
-    {"severity": "warning", "path": "beginning_investments", "page": 1,
-     "extracted": 30234.01, "on_page": "Line 2 Investments 30,234.01, already inside line 3 subtotal used for beginning_cash 292,799.94",
-     "issue": "beginning_cash and ending_cash (lines 3 and 24) already include the General Fund CD (30,234.01 beginning, 31,261.26 ending). The separate investment fields are informational only and must not be added to cash in the build."}
+     "extracted": "debt service (principal and interest combined)", "on_page": "Debt Service 21,110.00 (Street Fund)",
+     "issue": "The review note says the line was 'recorded as principal' (0% Highway Allocation note), but the category is the combined one and there is no debt_service_part. The user rule calls for category Debt Service with debt_service_part."}
   ]
 }

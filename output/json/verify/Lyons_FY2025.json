@@ -1,84 +1,39 @@
 {
   "stem": "Lyons_FY2025",
-  "values_checked": 212,
+  "values_checked": 262,
   "issues": [
-    {
-      "severity": "fixed",
-      "path": "missing",
-      "page": 14,
-      "extracted": null,
-      "on_page": "Combining Schedule of Revenue, Disbursements and Changes in Net Position - Proprietary Funds (report p23), Electric column: Consumer sales 865,077, Other miscellaneous 2,186 (total operating revenue 867,263); production 579,628, machinery 11,641, utilities 33,037, labor 111,933, professional 4,360, vehicle 6,057, deferred comp 10,767, insurance-general 24,098, insurance-group 45,697, miscellaneous 21,721, contracted 3,789, supplies-plant 10,180, supplies-office 4,120, payroll taxes 8,160, telephone 2,131 (total costs 877,320); depreciation 25,647; interest income 56,383; transfer to other funds (105,128)",
-      "issue": "Trimmed p14 is a per-fund combining schedule (5 funds, within the 6-fund per-fund limit), and none of its lines are in detail. The notes wrongly say p12 is 'source p23'; p12 is report p21 (budgetary-basis statement) and p14 is report p23.",
-      "resolution": "fixed 2026-10-27: p14 per-fund combining schedule lines added to detail (Electric) with per-fund detail_totals; notes corrected (p12 = report p21, p14 = report p23)"
-    },
-    {
-      "severity": "fixed",
-      "path": "missing",
-      "page": 14,
-      "extracted": null,
-      "on_page": "Gas column: Consumer sales 397,374, Other miscellaneous 1,000 (398,374); production 284,976, machinery 3,275, labor 100,144, line and maintenance 2,224, professional 3,317, vehicle 2,079, deferred 9,017, insurance-general 1,690, insurance-group 35,736, miscellaneous 20,568, contracted 774, supplies-plant 10,182, supplies-office 2,651, payroll taxes 7,237, telephone 1,604 (total costs 485,475); depreciation 14,307",
-      "issue": "Gas Fund lines from the p14 combining schedule are missing from detail.",
-      "resolution": "fixed 2026-10-27: Gas Fund p14 lines added to detail"
-    },
-    {
-      "severity": "fixed",
-      "path": "missing",
-      "page": 14,
-      "extracted": null,
-      "on_page": "Water column: Consumer sales 286,809, Other miscellaneous 12,000 (298,809); production 10,899, machinery 8,077, utilities 20,294, purification 13,311, labor 73,200, line 8,066, professional 2,180, vehicle 3,072, deferred 6,631, insurance-general 27,527, insurance-group 23,770, miscellaneous 18,912, contracted 774, supplies-office 2,423, payroll taxes 5,348, telephone 1,490 (total costs 225,974); depreciation 130,623; interest expense and loan fees (14,807)",
-      "issue": "Water Fund lines from the p14 combining schedule are missing from detail.",
-      "resolution": "fixed 2026-10-27: Water Fund p14 lines added to detail"
-    },
-    {
-      "severity": "fixed",
-      "path": "missing",
-      "page": 14,
-      "extracted": null,
-      "on_page": "Sewer column: Consumer sales 156,303; production 15,176, machinery 24,542, utilities 4,186, purification 1,884, labor 53,543, line 3,501, professional 4,045, vehicle 2,673, deferred 4,197, insurance-general 3,704, insurance-group 11,921, miscellaneous 4,580, supplies-office 837, payroll taxes 3,880 (total costs 138,668); depreciation 43,002; interest expense and loan fees (4,463)",
-      "issue": "Sewer Fund lines from the p14 combining schedule are missing from detail.",
-      "resolution": "fixed 2026-10-27: Sewer Fund p14 lines added to detail"
-    },
-    {
-      "severity": "fixed",
-      "path": "missing",
-      "page": 14,
-      "extracted": null,
-      "on_page": "Garbage column: Consumer sales 132,030; Contracted services 110,408 (total costs 110,408)",
-      "issue": "Garbage Fund lines from the p14 combining schedule are missing from detail. Once the p14 per-fund lines are added, the combined budgetary-basis p12 lines (detail[108]-[115]) duplicate the same fund activity and should be dropped under the no-double-counting rule.",
-      "resolution": "fixed 2026-10-27: Garbage Fund p14 lines added; combined budgetary-basis p12 lines (old detail[108]-[115]) and their detail_totals dropped (double counting)"
-    },
-    {
-      "severity": "fixed",
-      "path": "detail[79].category",
-      "page": 13,
-      "extracted": "general government (Capital expenditures 5,995, General dept)",
-      "on_page": "Capital expenditures: General 5,995, Police 4,104, Streets 25,268, Municipal Building 3,500, Parks 122,678, Pool 4,037, Library 10,526 (total 176,107)",
-      "issue": "User capital outlay rule (2026-10-26, all reports): every capital outlay line, including one inside a department, is category capital outlay, labelled 'Capital Outlay: <function>' (printed text in printed_label, function in computed). detail[79]-[85] keep the department function as category. The same report's p12 line was converted correctly.",
-      "resolution": "fixed 2026-10-27: p13 Capital expenditures lines (7) now category capital outlay, labelled 'Capital Outlay: <function>', printed_label and computed function set"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[101].section",
-      "page": 13,
-      "extracted": "other financing (Grant/donation income 46,432; detail[102] 620)",
-      "on_page": "Grant/donation income under OTHER FINANCING SOURCES: Parks 46,432, Library 620",
-      "issue": "The top-level receipts treat these grants and donations as revenue (donations/contributions, outside_printed_total), but detail puts them in the other financing section, so detail revenue and top-level receipts don't treat them the same way. Grants are not transfers, debt or asset sales."
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[11].original_label",
-      "page": 7,
-      "extracted": "Contracted services (production, operation and maintenance)",
-      "on_page": "Contracted services",
-      "issue": "The label has a section qualifier added that isn't printed. Same for disbursements[20] 'Contracted services (general and administrative)'."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[13].amount",
-      "page": 13,
-      "extracted": 1200,
-      "on_page": "Interest/dividends General 1,200 (Parks 291, total 1,492)",
-      "issue": "Cells add to 1,491 against a printed total of 1,492; the General column also adds to 586,013 against a printed 586,012. Small scan; the digit may be 1,201 or the schedule rounds. Already in review/report_discrepancies."
-    }
+    {"severity": "error", "path": "disbursements[11].category", "page": 7,
+     "extracted": "utilities", "on_page": "Contracted services 110,408",
+     "issue": "Business-type spending is listed by cost type; contracted services is a cost type (Professional/Contract Services, as the same Garbage line is categorised in detail). It should not be 'utilities'. The line also has no function: 'utilities' set."},
+    {"severity": "warning", "path": "disbursements[11].original_label", "page": 7,
+     "extracted": "Contracted services (production, operation and maintenance)", "on_page": "Contracted services",
+     "issue": "The label is expanded beyond the printed text and has no printed_label."},
+    {"severity": "warning", "path": "disbursements[20].original_label", "page": 7,
+     "extracted": "Contracted services (general and administrative)", "on_page": "Contracted services",
+     "issue": "The label is expanded beyond the printed text and has no printed_label."},
+    {"severity": "warning", "path": "disbursements[15].category", "page": 7,
+     "extracted": "Fuel", "on_page": "Vehicle expense 13,882",
+     "issue": "Inconsistent within the report: the same cost line in the p14 detail ('Vehicle') is Repairs and Maintenance."},
+    {"severity": "warning", "path": "disbursements[16].category", "page": 7,
+     "extracted": "Salaries and Wages", "on_page": "Deferred compensation 30,611",
+     "issue": "Deferred compensation is a benefit. The p14 detail lines ('Deferred compensation/benefits') are Employee Benefits and Payroll Taxes, so the report is inconsistent."},
+    {"severity": "warning", "path": "receipts[8].category", "page": 5,
+     "extracted": "donations/contributions", "on_page": "Grants and donations 47,052 (p10 budget schedule: 'Grants')",
+     "issue": "The grantor is not stated, so this could be governmental grants (intergovernmental). It is printed under other financing sources and recorded as revenue outside the printed total. This is a judgment call."},
+    {"severity": "warning", "path": "receipts[3].category", "page": 5,
+     "extracted": "charges for services/fees", "on_page": "Charges for services 50,854 (p13: Parks 21,575 + Pool 25,519 + Recycling 3,760)",
+     "issue": "Recreation fees are 47,094 of the 50,854 (more than half), so the user's Recreation Fees category may apply. The p13 Parks/Pool detail lines (detail_category recreation/pool/park fees) also keep the category charges for services/fees."},
+    {"severity": "warning", "path": "detail[*Transfers from other funds*].original_label", "page": 13,
+     "extracted": "Transfers from other funds", "on_page": "Transfers from other funds 105,128",
+     "issue": "Not relabelled to 'Transfers In' under the user's detail other-financing label rule, although the Electric 'Transfer to other funds' line was relabelled to 'Transfers Out'."},
+    {"severity": "warning", "path": "detail[Capital expenditures lines].detail_category", "page": 13,
+     "extracted": "equipment purchases / construction/infrastructure / land and buildings", "on_page": "Capital expenditures (no object given)",
+     "issue": "The object type was guessed for each department's capital expenditures line; the page does not print it."},
+    {"severity": "warning", "path": "balance_sheet.assets / balance_sheet.equity (governmental lines)", "page": 4,
+     "extracted": "Statement of Net Position governmental lines (cash unrestricted 299,666, restricted 149,618; Contributed capital/Restricted/Unrestricted)", "on_page": "Statement of Assets and Fund Balance - Cash Basis, Total: Cash in bank 449,284, county treasurer 16,211, investments 201,720 (667,215 = government-wide governmental assets); Contributed capital 201,720, Restricted 189,078, Unassigned 276,414",
+     "issue": "Under the user's 2026-10-27 cash-basis balance-sheet rule, governmental lines come from the governmental funds statement when its totals equal the government-wide figures, as they do here. The extraction kept the government-wide lines (the business-type column does include capital assets and debt). This is a judgment call."},
+    {"severity": "warning", "path": "report_discrepancies[4].note", "page": 2,
+     "extracted": "net position lines add to 4,402,622", "on_page": "lines add to 4,402,621 = printed Net Position",
+     "issue": "The note is slightly wrong. The Total column's net position lines tie to 4,402,621; the 1 gap is total assets 5,796,036 vs liabilities 1,393,414 + net position 4,402,621."}
   ]
 }

@@ -1,15 +1,21 @@
 {
   "stem": "Orleans_FY2025",
-  "values_checked": 105,
+  "values_checked": 118,
   "issues": [
-    {"severity": "warning", "path": "missing", "page": 9,
-     "extracted": null, "on_page": "Budgetary Comparison Schedule revenue lines: Property 92,565; Motor vehicle tax 6,621; State intergovernmental 128,665; Other local receipts 333,788",
-     "issue": "The budget schedule's revenue lines are left out of detail. Property and part of the other lines are already in the General Fund departments schedule, and Other local receipts mixes governmental and business revenue, so the omission is explained in notes. Street Fund revenue (motor vehicle tax 6,621, which is Street-only on this schedule) therefore has no detail line."},
-    {"severity": "warning", "path": "detail_totals[2..5]", "page": 9,
-     "extracted": "per-fund totals Street 92,907 / Water 101,337 / Sewer 15,219 / Solid Waste 55,320", "on_page": "single lines Public works / Water / Sewer / Solid waste; printed totals are Total governmental 292,229 and Total business-type 171,876",
-     "issue": "These detail_totals repeat the line amounts rather than printed total lines. The amounts are correct as printed."},
-    {"severity": "warning", "path": "beginning_cash", "page": 5,
-     "extracted": 65111, "on_page": "Fund balances - September 30, 2024 65,111",
-     "issue": "The governmental roll-forward uses fund balance (modified cash: cash 108,260 less payroll taxes withheld 6,588 at year end) in the cash fields. This is explained in notes. ending_cash 101,672 is likewise fund balance, not cash."}
+    {"severity": "error", "path": "receipts[8].category", "page": 7,
+     "extracted": "charges for services/fees", "on_page": "Sales 227,446 (Water 139,133, Sewer 31,792, Solid Waste 56,521; proprietary funds operating revenues)",
+     "issue": "These are utility fund sales, which have their own receipt category, Utility Charges (user 2026-10-28). user_rules.py won't catch this line because the label is just 'Sales' and the line has no fund field."},
+    {"severity": "error", "path": "detail[6].category", "page": 11,
+     "extracted": "charges for services/fees", "on_page": "Pool department: Charges for services 4,492",
+     "issue": "Pool fees belong in their own receipt category, Recreation Fees (user 2026-10-28). The extractor's own detail_category (recreation/pool/park fees) says the same."},
+    {"severity": "warning", "path": "detail[8].category", "page": 11,
+     "extracted": "charges for services/fees", "on_page": "RV Park department: Charges for services 21,695",
+     "issue": "RV park fees are probably Recreation Fees (park/campground); Rentals is also possible. Charges for services/fees is the generic category."},
+    {"severity": "warning", "path": "receipts[4].category", "page": 5,
+     "extracted": "charges for services/fees", "on_page": "Charges for services 26,247 = General 60 + Pool 4,492 + RV Park 21,695 (pp10-11)",
+     "issue": "26,187 of the 26,247 (99.8%) is pool and RV park fees, so Recreation Fees would fit better than generic charges for services."},
+    {"severity": "warning", "path": "disbursements[4].category", "page": 7,
+     "extracted": "Employee Benefits and Payroll Taxes", "on_page": "Personnel and benefits 18,426",
+     "issue": "The line combines pay and benefits, and pay is usually the larger part (the cash flow statement calls it 'Payments to employees'), so Salaries and Wages may fit better. The General Fund 'Salaries and benefits' lines in detail were recorded as salaries and wages, so the two are inconsistent."}
   ]
 }

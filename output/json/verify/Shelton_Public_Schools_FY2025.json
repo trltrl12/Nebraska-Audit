@@ -1,13 +1,18 @@
 {
   "stem": "Shelton_Public_Schools_FY2025",
-  "values_checked": 181,
+  "values_checked": 235,
   "issues": [
-    {"severity": "warning", "path": "detail[8].category", "page": 10, "extracted": "intergovernmental/state aid / county/other local governments", "on_page": "2110 County fines and license fees 21,445", "issue": "Label says fines and license fees; 'fines and forfeitures' fits the label better (county pass-through of fines to schools). Judgment call"},
-    {"severity": "warning", "path": "receipts[10].category", "page": 4, "extracted": "intergovernmental/state aid", "on_page": "County sources 26,370", "issue": "Broad line: 21,445 (81%) is County fines and license fees (p10), 4,925 ESU receipts; under the broad-line rule the dominant part could be fines and forfeitures. Judgment call"},
-    {"severity": "warning", "path": "detail[110].budget_final", "page": 18, "extracted": null, "on_page": 462434, "issue": "Bond Fund budget 462,434 is printed on the Principal row (equals the total disbursements budget); left null"},
-    {"severity": "warning", "path": "detail[121].budget_final", "page": 19, "extracted": null, "on_page": 191929, "issue": "QCPU Fund budget 191,929 is printed on the Debt service principal row (equals the total disbursements budget); left null"},
-    {"severity": "warning", "path": "detail[100].detail_category", "page": 17, "extracted": "not itemized", "on_page": "Building improvements 32,210", "issue": "Label names an object; construction/infrastructure or land and buildings would fit better than 'not itemized'"},
-    {"severity": "warning", "path": "disbursements[2].category", "page": 4, "extracted": "support services", "on_page": "Support services - Students 592,113 (General 318,222 + Other Governmental 273,891)", "issue": "273,891 of this line is Activities Fund spending (student activities, p20); line mixes categories, dominant support services kept but not mentioned in notes"},
-    {"severity": "warning", "path": "report_discrepancies", "page": 8, "extracted": null, "on_page": "Federal sources lines 222,415 vs Total federal sources 299,836", "issue": "General Fund components combining schedule omits the Title I line (77,421, shown on p10) but its total includes it; the page doesn't add up and no report_discrepancies entry records it (extractor mentions it in notes only)"}
+    {"severity": "warning", "path": "report_discrepancies", "page": 8,
+     "extracted": null, "on_page": "Federal sources lines 2,150 + 1,144 + 71,052 + 4,211 + 700 + 16,837 + 126,321 = 222,415 vs printed Total federal sources 299,836",
+     "issue": "The General Fund components combining schedule (p8) omits the Title I line 77,421 but its total includes it; the page doesn't add up and this isn't recorded in report_discrepancies (only mentioned in notes). The JSON detail uses the p10-11 budget schedule, which is complete."},
+    {"severity": "warning", "path": "detail[110].budget_final", "page": 18,
+     "extracted": null, "on_page": 462434,
+     "issue": "Bond Fund budget 462,434 is printed on the Principal row (also equal to total disbursements budget); left null while revenue-row budgets were recorded"},
+    {"severity": "warning", "path": "detail[121].budget_final", "page": 19,
+     "extracted": null, "on_page": 191929,
+     "issue": "QCPU Fund budget 191,929 is printed on the Debt service principal row (equal to total disbursements budget); left null"},
+    {"severity": "warning", "path": "detail[83].detail_category", "page": 15,
+     "extracted": "other state aid", "on_page": "State refund-credit 237",
+     "issue": "Employee Benefit Fund 'State refund-credit' may be a property tax credit/refund rather than general state aid; judgment call"}
   ]
 }

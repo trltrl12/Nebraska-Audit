@@ -1,11 +1,12 @@
 {
   "stem": "Alvo_FY2025",
-  "values_checked": 27,
+  "values_checked": 34,
   "issues": [
-    {"severity": "warning", "path": "receipts[6].category", "page": 1, "extracted": "other", "on_page": "Local Receipts: Other (WATER/SEWER column) 47,878.98", "issue": "Only receipt of the Water/Sewer fund; almost certainly utility charges, so 'charges for services/fees' is the likely category. Label also has '(Water/Sewer)' appended, which is not printed. Already marked review."},
-    {"severity": "warning", "path": "disbursements[3].category", "page": 3, "extracted": "debt service principal", "on_page": "Debt Service 9,856.70 (Street Fund)", "issue": "Principal and interest are combined (Road Loan, p5), so 'principal' is an assumption. Already marked review."},
-    {"severity": "warning", "path": "disbursements[4].category", "page": 3, "extracted": "other", "on_page": "Miscellaneous: General 23.08 + Street Fund 30,273.06 = 30,296.14", "issue": "30,273.06 of it is Street Fund spending, so 'streets/highways' could be argued for most of the line. 'other' is defensible because the label says only Miscellaneous. Already marked review."},
-    {"severity": "warning", "path": "balance_sheet.equity[0].original_label", "page": 1, "extracted": "Ending Balance (Line 24)", "on_page": "Ending Balance (Line 22 MINUS Line 23)", "issue": "Label is not exactly as printed. The amount 40,165.43 is correct."},
-    {"severity": "warning", "path": "notes", "page": 2, "extracted": "revised version used (pp1,3,5)", "on_page": "pp2,4,6 are an earlier, crossed-out original (total receipts 134,042.01, ending 39,935.43)", "issue": "Assumption: the 'Revision received' pages were used and the crossed-out original was ignored. This looks correct, and every cited figure matches the revised pages."}
+    {"severity": "warning", "path": "disbursements[4].category", "page": 3,
+     "extracted": "other", "on_page": "Miscellaneous: General 23.08, Street 30,273.06 (total 30,296.14)",
+     "issue": "Line is printed as Miscellaneous, so 'other' is defensible. But 30,273.06 of it is in the Street Fund column, and that part could be streets/highways under the fund-function rule."},
+    {"severity": "warning", "path": "receipts[6].category", "page": 1,
+     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Water/Sewer column) 47,878.98",
+     "issue": "This is the Water/Sewer fund's only receipt line. Under the user's 2026-10-28 rule, utility fund sales/charges are category 'Utility Charges', not charges for services/fees. The printed label itself only says 'Other'."}
   ]
 }

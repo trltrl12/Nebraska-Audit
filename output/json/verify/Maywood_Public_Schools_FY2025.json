@@ -1,57 +1,21 @@
 {
   "stem": "Maywood_Public_Schools_FY2025",
-  "values_checked": 195,
+  "values_checked": 147,
   "issues": [
-    {
-      "severity": "error",
-      "path": "detail[88]",
-      "page": 16,
-      "extracted": {
-        "section": "expenditure",
-        "category": "student activities",
-        "amount": 4115
-      },
-      "on_page": "Student Fees Fund: Extracurricular activity fees disbursement 4,115 (fund closed to 0); General Fund p8 line 5200 'Transfers' receipt 4,115",
-      "issue": "[fixed] Inconsistent transfer treatment in detail: the receiving side (detail[27], General Fund 'Transfers' +4,115) is recorded as other financing, but the sending fund's matching 4,115 outflow is still an expenditure. The same money is a transfer on one side and spending on the other. Either record the Student Fees outflow as other financing -4,115, or put the General Fund 4,115 back in revenue, depending on the decision_needed answer."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[13]",
-      "page": 3,
-      "extracted": {
-        "category": "other",
-        "amount": 18752
-      },
-      "on_page": "Other 18,752 (GF 18,403 = nonrevenue 15,880 incl. Transfers 4,115 + non-program 2,523; other funds 349)",
-      "issue": "Statement line contains the 4,115 interfund 'Transfers' (p8) as a receipt, and Student support services 409,593 contains the matching 4,115 Student Fees outflow. Kept as printed and raised in decision_needed. Defensible because the statement doesn't eliminate it, but both statement totals include a transfer."
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[1].category",
-      "page": 3,
-      "extracted": "support services",
-      "on_page": "Student support services 409,593 = GF 194,450 + Activities 211,028 + Student Fees 4,115 (pp9, 15, 16)",
-      "issue": "Activity-fund spending (215,143) is the larger part of this line, so under the 'dominant category' rule it could be 'student activities'. The line is already marked review."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[9]",
-      "page": 7,
-      "extracted": {
-        "original_label": "County Fines and licenses",
-        "category": "intergovernmental/state aid",
-        "detail_category": "county/other local governments"
-      },
-      "on_page": "2110 Fines and licenses (under County and ESU sources) 8,194",
-      "issue": "The printed label is 'Fines and licenses'; 'County' was added. Treating this as county pass-through is defensible, but 'fines and forfeitures' could also fit."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[27].original_label",
-      "page": 8,
-      "extracted": "Transfers (nonrevenue receipts)",
-      "on_page": "Transfers",
-      "issue": "The label has extra text and is not exactly as printed."
-    }
+    {"severity": "error", "path": "receipts[8].category", "page": 3,
+     "extracted": "charges for services/fees 17,904 (rental 16,850 + distance education 1,054)", "on_page": "Other local receipts 17,995; p7: 1910 Rental of school equipment and facilities 16,850, 1965 Distance education service receipts 1,054, 1990 Other local revenue 91",
+     "issue": "The split puts the 16,850 rental under charges for services/fees. The user rule (2026-10-28) gives rentals their own receipt category, Rentals, and detail[6] already uses Rentals for the same line. The rental should be a separate split item in Rentals, with 1,054 in charges for services/fees."},
+    {"severity": "error", "path": "receipts[17]", "page": 8,
+     "extracted": "Other 18,752 recorded entirely as revenue (category other)", "on_page": "General Fund 5200 Transfers 4,115 (inside Nonrevenue receipts 15,880, which is inside statement 'Other' 18,403/18,752)",
+     "issue": "The statement's 'Other' receipts include 4,115 that the General Fund schedule labels '5200 Transfers' (from the Student Fees Fund, whose matching 4,115 outflow is inside 'Student support services' spending, disbursements[2]). A labelled transfer is recorded as revenue at the top level, and its matching outflow as spending. Detail treats both sides as other financing, so the top level and detail disagree. decision_needed[0] raises the question, but the top-level lines still count the transfer as revenue and spending."},
+    {"severity": "warning", "path": "detail[64].original_label", "page": 11,
+     "extracted": "Improvements and equipment", "on_page": "Improvements and equipment 213,151 (Depreciation Fund)",
+     "issue": "This line is category capital outlay. The user rule says capital outlay lines already in category capital outlay are relabelled 'Capital Outlay: <function>', with printed_label kept. Not applied."},
+    {"severity": "warning", "path": "detail[59].budget_final", "page": 10,
+     "extracted": 150000, "on_page": "8000 Transfers budget 150,000 (actual 165,000, recorded as -165,000)",
+     "issue": "The amount is signed negative (a transfer out) but budget_final is positive, so the signs are inconsistent. The same applies to Student Fees detail[88] (amount -4,115, budget_final 4,114)."},
+    {"severity": "warning", "path": "detail[7].category", "page": 7,
+     "extracted": "charges for services/fees", "on_page": "1965 Distance education service receipts 1,054",
+     "issue": "This may be revenue from other districts for distance-learning services (interlocal-type revenue), so charges for services is defensible. Category judgment."}
   ]
 }

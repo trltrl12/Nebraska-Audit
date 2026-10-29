@@ -1,21 +1,15 @@
 {
   "stem": "Paxton_Consolidated_Schools_FY2025",
-  "values_checked": 288,
+  "values_checked": 195,
   "issues": [
-    {"severity": "warning", "path": "detail[7].category", "page": 2,
-     "extracted": "intergovernmental/state aid / county/other local governments", "on_page": "2110 Fines and license fees 29,276 (under County and ESU sources)",
-     "issue": "The printed label is fines and license fees. It is passed through by the county, so county/other local governments is defensible, but 'fines and forfeitures' is the literal category. The same applies to receipts[7] 'County and ESU sources' 29,276 (p1). No review flag set."},
-    {"severity": "warning", "path": "detail[6].detail_category", "page": 2,
-     "extracted": "rentals", "on_page": "1910 Rent and other local revenue 2,100",
-     "issue": "The label mixes rent with other local revenue. The rules want the dominant category plus a review naming the mix, but no review is set here or on receipts[6]."},
-    {"severity": "warning", "path": "detail[61].budget_final", "page": 6,
-     "extracted": 45000, "on_page": "8000 Transfers budget 45,000 / actual 45,000",
-     "issue": "The amount is signed -45,000 (transfer out) but budget_final is +45,000, so the signs are inconsistent within the line."},
+    {"severity": "warning", "path": "receipts[6].category", "page": 1,
+     "extracted": "charges for services/fees", "on_page": "Rent and other local revenue 2,100",
+     "issue": "Line is mostly rent; under the user's 2026-10-28 rule rent goes to Rentals. The matching detail line (1910, p2) has detail_category 'rentals', so receipts and detail disagree for the same label. Mixed label, so it is a judgment call."},
+    {"severity": "warning", "path": "disbursements[8].category", "page": 8,
+     "extracted": "capital outlay", "on_page": "Special Building Fund - Purchased services 113,957",
+     "issue": "The page doesn't say this is capital outlay (assumed from the fund's purpose; marked review). The detail line uses detail_category professional/contract services."},
     {"severity": "warning", "path": "balance_sheet.assets[0]", "page": 6,
-     "extracted": 3080095, "on_page": "Analysis of fund balance lines per fund (checking, county treasurers, NLAF pooled investments, certificates of deposit) on pp6-11",
-     "issue": "The balance sheet is one computed sum of the six fund balances, governmental plus School Nutrition. The printed cash component lines are not itemized one per line, and no Statement of Net Position is in the trimmed PDF. The arithmetic is correct (3,080,095)."},
-    {"severity": "warning", "path": "reported_totals.governmental", "page": 1,
-     "extracted": "computed from fund schedules", "on_page": "trimmed PDF starts at report p22",
-     "issue": "The basic statements (government-wide and governmental funds receipts/disbursements, report pages before p22) are not in the trimmed PDF. Governmental totals are rebuilt from fund schedules and tie (receipts 5,901,414; disbursements 5,284,367; roll-forward exact). Check whether find_pages should keep the basic statements."}
+     "extracted": "one computed governmental line, cash and investments 3,064,329", "on_page": "Analysis of fund balance per fund: checking accounts, county treasurers, NLAF pooled investments 185,627 (p8), certificates of deposit 15,205 (p11)",
+     "issue": "Five funds' cash lines were combined into one computed item instead of one item per printed line (Cash and Cash Equivalents vs Investments). The amount and the arithmetic are correct, and the item is marked computed."}
   ]
 }

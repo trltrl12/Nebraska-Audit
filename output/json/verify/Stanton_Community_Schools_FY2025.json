@@ -1,10 +1,12 @@
 {
   "stem": "Stanton_Community_Schools_FY2025",
-  "values_checked": 225,
+  "values_checked": 232,
   "issues": [
-    {"severity": "warning", "path": "detail[46].original_label, detail[54].original_label, detail[78].original_label", "page": 9,
-     "extracted": "Other (2190) / Other (2490) / Transfers (8000)",
-     "on_page": "Other / Other / Transfers (function codes 2190, 2490, 8000 printed in the code column)",
-     "issue": "Function codes were appended to the printed labels. This is harmless for telling the lines apart, but it is not the exact printed label. Amounts 12,252, 55,073 and 155,000 are correct."}
+    {"severity": "warning", "path": "receipts[7].category", "page": 3,
+     "extracted": "charges for services/fees", "on_page": "1540 Investment income from real property (facilities) 7,700",
+     "issue": "the review note says it is treated as rentals, but under the user's 2026-10-28 rule rentals have their own receipt category, Rentals (not charges for services/fees). Code 1540 sits in the interest/investment group, so investment income is also defensible. detail[6] has the same category with detail_category rentals"},
+    {"severity": "warning", "path": "disbursements[1].category", "page": 4,
+     "extracted": "support services (Pupils)", "on_page": "Student support services 785,914 (General 506,167 + Other Governmental 279,747)",
+     "issue": "279,747 of the printed line is Activities Fund 275,033 + Student Fee Fund 4,714 spending (p16-17), which is student activities. Recording the line as printed with the dominant category is allowed, but about 36% of it isn't support services"}
   ]
 }

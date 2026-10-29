@@ -1,15 +1,21 @@
 {
   "stem": "Duncan_FY2025",
-  "values_checked": 78,
+  "values_checked": 82,
   "issues": [
+    {"severity": "error", "path": "receipts[10].category", "page": 7,
+     "extracted": "charges for services/fees", "on_page": "Sales 164,304 (Water Fund 84,889 + Sewer Fund 79,415, operating revenues)",
+     "issue": "Water and sewer fund sales are utility charges. The user's rule (extractor 'Own receipt categories', 2026-10-28) gives utility fund sales/charges their own category, Utility Charges."},
+    {"severity": "warning", "path": "receipts[11].category", "page": 7,
+     "extracted": "charges for services/fees", "on_page": "Other revenue 15,904 (Water Fund operating revenue)",
+     "issue": "The printed label is 'Other revenue' and nothing on the page explains it. It is an operating revenue, so it is plausibly a utility charge, but this is a judgment call with no review flag."},
+    {"severity": "warning", "path": "detail[5].category", "page": 9,
+     "extracted": "charges for services/fees", "on_page": "Rental fees 5,200",
+     "issue": "Inconsistent with the statement line 'Rent' 5,200, which is category Rentals (receipts[5]). The rule is the same category for the same item everywhere, and Rentals is the user's own receipt category."},
+    {"severity": "warning", "path": "detail[16].detail_category", "page": 10,
+     "extracted": "other state aid", "on_page": "Street Fund Intergovernmental 75,774 (Statement of Activities calls the total 'State allocation', p3)",
+     "issue": "A Street Fund state allocation is most likely highway allocation (detail category 'highway allocation'). The schedule does not say so explicitly."},
     {"severity": "warning", "path": "receipts[12].category", "page": 7,
      "extracted": "federal grants", "on_page": "Grant income 492,651",
-     "issue": "grant source (federal vs state) not stated on any trimmed page; p3 shows it as Water capital grants and contributions. Category is a guess (already marked review)"},
-    {"severity": "warning", "path": "receipts[6].category", "page": 5,
-     "extracted": "donations/contributions", "on_page": "Grants and contributions 550",
-     "issue": "p2 shows it as general government operating grants and contributions; could be a government grant rather than a private donation (already marked review). Same applies to detail[6]"},
-    {"severity": "warning", "path": "detail[16].detail_category", "page": 10,
-     "extracted": "other state aid", "on_page": "Intergovernmental 75,774 (Street Fund)",
-     "issue": "Street Fund intergovernmental is most likely highway allocation, but the page does not say so; other state aid is defensible"}
+     "issue": "The grant source is not stated (Statement of Activities: capital grants and contributions). This is already in decision_needed."}
   ]
 }

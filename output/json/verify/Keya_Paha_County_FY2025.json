@@ -1,46 +1,5 @@
 {
   "stem": "Keya_Paha_County_FY2025",
-  "values_checked": 111,
-  "issues": [
-    {
-      "severity": "error",
-      "path": "receipts[4].category",
-      "page": 4,
-      "extracted": "other",
-      "on_page": "Local 296,521; statement of activities (p2) shows charges for services 116,165 + interest income 169,247 + miscellaneous 11,109 = 296,521",
-      "issue": "[fixed] The report breaks down this broad 'Local' line exactly: it ties to p2 to the dollar, the same way the extractor used p2 to split Taxes. Interest income is 57% of the line, so under the rules it must be investment income, or split into investment income 169,247 / charges for services/fees 116,165 / other 11,109 with split_from. It should not be 'other'. It is also 13% of governmental receipts, so the governmental 'other' share is over 10%."
-    },
-    {
-      "severity": "error",
-      "path": "detail[29].category",
-      "page": 9,
-      "extracted": "other / miscellaneous revenue",
-      "on_page": "Road Fund Local 28,646 = Local 6,551 + Sale of surplus 22,095 (p4 Road Fund column)",
-      "issue": "[fixed] The fund statement (p4) shows what this line is made of: 77% is sale of surplus. Under the rule (a category over half of the line), it should be sale of assets, or split with split_from. Leaving it in other / miscellaneous revenue is wrong; the extractor's own review note names the 22,095."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[2].category",
-      "page": 8,
-      "extracted": "other / miscellaneous revenue",
-      "on_page": "General Fund Local 285,419",
-      "issue": "No breakdown is printed for this fund. County-wide, Local is 169,247 interest + 116,165 charges + 11,109 misc (p2), and the other funds hold only 11,102 of Local. So at least about 158,000 (55%) of the General Fund's Local must be interest. Investment income (or charges for services) fits better than 'other'. In the same way, detail[38] (Preservation & Modernization Local 712) and detail[39] (E911 Local 3,839) are probably fees/charges, not miscellaneous."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[3..22].category",
-      "page": 8,
-      "extracted": "department functions summing to general government 789,313 / public safety 256,490 / streets 20,031 / natural resources 124,184 / health 7,572",
-      "on_page": "Statement p5/p4 General Fund: general government 753,735, public safety 251,289, public works 143,746, culture and recreation 9,000, capital outlay 32,248",
-      "issue": "The budget schedule's department lines include General Fund capital outlay 32,248 and culture/recreation 9,000 (35,578 in general government, 5,201 in public safety, 469 in public works departments). The detail function split therefore can't tie to the statement's function lines. This is a feature of the report, but the reviewer should know."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[34].detail_category",
-      "page": 10,
-      "extracted": "debt service principal / debt principal",
-      "on_page": "Road Bond Fund Disbursements 227,863 (p4: principal 195,000 + interest and other charges 32,863)",
-      "issue": "This single line mixes principal and interest. The category goes with the larger part (principal) and the extractor marked it for review."
-    }
-  ]
+  "values_checked": 94,
+  "issues": []
 }

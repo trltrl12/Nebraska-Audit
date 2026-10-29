@@ -1,17 +1,12 @@
 {
   "stem": "Perkins_County_FY2025",
-  "values_checked": 135,
+  "values_checked": 236,
   "issues": [
-    {"severity": "warning", "path": "receipts[0].split_from", "page": 3,
-     "extracted": "Taxes 3,809,062 split into property tax 3,288,657 / motor vehicle tax 234,513 / inheritance tax 285,892",
-     "on_page": "Exhibit B prints Taxes 3,809,062 only; Exhibit A (p1) Total taxes is 4,331,648 (also includes property tax relief 520,417 and carline/airline tax 2,169)",
-     "issue": "split inferred by picking the Exhibit A tax lines that add up to the Exhibit B line; the breakdown of this exact line is not printed. Supported by the Inheritance Fund column (285,892) and General + Other funds taxes 3,523,170 = property + motor vehicle, so defensible, but the property/motor vehicle split between funds is an inference (applies to receipts[0]-[2])"},
-    {"severity": "warning", "path": "receipts[3].split_from", "page": 3,
-     "extracted": "Local receipts 1,107,345 split into charges for services 804,054 / investment income 303,291",
-     "on_page": "Exhibit B prints Local receipts 1,107,345 only; Exhibit A (p1) program charges for services 804,054 and general receipt Interest on investments 303,291",
-     "issue": "split inferred from Exhibit A totals that add up exactly to the line (allowed by the broad-line rule for counties), but not a printed breakdown of the line itself (applies to receipts[3]-[4])"},
-    {"severity": "warning", "path": "detail[0].budget_final", "page": 6,
-     "extracted": "budget_final from 'Original Budget' column", "on_page": "Schedule 2 prints Original Budget and Actual only",
-     "issue": "General Fund schedule has no final budget column; budget_final holds the original budget for all General Fund lines (detail[0]-[74])"}
+    {"severity": "warning", "path": "receipts[5].category", "page": 3,
+     "extracted": "intergovernmental/state aid 1,932,296 (whole line)", "on_page": "State receipts 1,932,296 (p3); Exhibit A general receipts (p1): Property tax relief 520,417, Homestead exemption 26,351, Prorate motor vehicle 6,861, Carline and airline tax 2,169",
+     "issue": "The user's rule keeps Property Tax Credit, Homestead Exemption and Motor Vehicle Pro-Rate out of state aid. The same Exhibit A was used to split Taxes and Local receipts, but State receipts was kept whole because no schedule breaks that line down (marked review). Inconsistent treatment; a person should decide whether to split it the same way."},
+    {"severity": "warning", "path": "detail[66].category", "page": 9,
+     "extracted": "streets/highways (Noxious Weeds lines detail[66]-detail[68])", "on_page": "Public Works - Noxious Weeds (Personnel services 37,605, Operating expense 2,825, Supplies and materials 6,225)",
+     "issue": "The disbursement rules put noxious weed control under natural resources/conservation. streets/highways follows the report's Public Works heading (marked review)."}
   ]
 }

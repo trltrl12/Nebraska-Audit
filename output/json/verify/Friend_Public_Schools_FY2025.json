@@ -1,26 +1,12 @@
 {
   "stem": "Friend_Public_Schools_FY2025",
-  "values_checked": 560,
+  "values_checked": 490,
   "issues": [
-    {"severity": "warning", "path": "other_financing", "page": 6,
-     "extracted": 122375.20,
-     "on_page": "Allocation from General Fund: Depreciation 100,000.00 (p16), Employee Benefit 22,375.20 (p17); printed as a receipt in Exhibit III (p6) and as a General Receipt in Exhibit II (p4)",
-     "issue": "Step 3b check: no matching General Fund outflow can be found. Schedule M (pp23-30) itemizes every GF program by object, each program ties to Schedule B (pp14-15), and the only transfer lines are 8000 Transfers (Nutrition 57,100 + Activity 48,000 = 105,100). No object line is an allocation/transfer and there is no elimination column, so a hidden transfer can't be identified without guessing (no spending line was split, which is correct). The GF roll-forward ties without it (1,200,148.46 + 4,531,369.84 - 4,795,398.66 = 936,119.64, p9/p11) and the totals tie, so the report itself adds up. Because total cash ties, the 122,375.20 is either real outside cash put straight into these funds (in which case it is really revenue) or it sits unidentified inside GF spending (in which case spending is double counted by that amount). Recording it as other_financing is an assumption. The extractor already put this in decision_needed, so it stays a warning."},
-    {"severity": "warning", "path": "disbursements[7..18].category", "page": 6,
-     "extracted": "instruction",
-     "on_page": "2141-2183 Psychological / Speech Pathology / Occupational Therapy / Physical Therapy / Visually Impaired Related Services (12 lines, total 175,535.56; pp6, 8; detail pp25-26)",
-     "issue": "These are 2100-series pupil support services codes. The rules list pupil services under support services, so 'support services' may fit better. Judgment call."},
-    {"severity": "warning", "path": "receipts[6].category", "page": 6,
-     "extracted": "fines and forfeitures",
-     "on_page": "2110 County Fines and Licenses 18,847.20 (p12)",
-     "issue": "The line mixes fines and licenses. The rules give a mixed line the dominant category plus a 'review' naming the mix, and no review flag is set here (same for the detail line, detail[7])."},
-    {"severity": "warning", "path": "detail[180].detail_category", "page": 16,
-     "extracted": "professional/contract services",
-     "on_page": "2900-400 Purchased Property Services 2,000.00",
-     "issue": "Inconsistent with the extractor's own Schedule M mapping, where 'Purchased Property Services' goes to repairs and maintenance."},
-    {"severity": "warning", "path": "detail[28..177].detail_category", "page": 23,
-     "extracted": "Other Property Services -> professional/contract services; Other Items -> dues, training and travel",
-     "on_page": "Schedule M object lines 'Other Property Services' (e.g. 2610 Operation of Buildings 60,348.00 p28; 2790 Other Student Transportation 112,323.27 p29) and 'Other Items'",
-     "issue": "These object mappings are assumptions. Other Property Services may include insurance, contracted transportation or other purchased services, and Other Items is unspecified. The mappings are defensible but not printed."}
+    {"severity": "warning", "path": "detail (department 6200 Title I, 6406 IDEA Preschool, 6408 IDEA Part B, 6992 REAP).category", "page": 29, "extracted": "instruction", "on_page": "Exhibit III (p7/p8) prints these four programs as one 'Federal Programs' line 179,512.78 (97,174.44 + 3,512.00 + 70,618.34 + 8,208.00)", "issue": "User rule 2026-10-28: school program lines follow the report's own grouping (Federal Programs when the report groups them there). The report does group them, and the top-level disbursement uses Federal Programs, so the detail lines should be Federal Programs, not instruction."},
+    {"severity": "warning", "path": "disbursements[35].category", "page": 8, "extracted": "instruction", "on_page": "High Ability Learners 2,064.53", "issue": "Lowercase 'instruction' while the other instruction lines use 'Instruction' (detail 3535/3551 lines likewise). This is a case inconsistency."},
+    {"severity": "warning", "path": "disbursements[43].category", "page": 8, "extracted": "capital outlay", "on_page": "Purchased Services 3,020.00 (Depreciation Fund: 2900-400 Purchased Property Services 2,000 + 2900-600 Supplies 1,020, p16)", "issue": "The function was assumed. These are repair/supply spending, not property purchases, so capital outlay is doubtful (Building and Grounds may fit better). Same for detail Schedule C lines 2900-400 and 2900-600."},
+    {"severity": "warning", "path": "disbursements[39].category", "page": 8, "extracted": "support services", "on_page": "Employee Benefits 25,563.65 (Employee Benefit Fund)", "issue": "The function was assumed. School support services are limited to Pupils/Staff under the user's school rules, and this line has no such breakdown."},
+    {"severity": "warning", "path": "detail (other financing).original_label", "page": 30, "extracted": "School Nutrition Fund / Activity Fund / 5200 Transfers From General Fund / 5200 Transfers from General Fund", "on_page": "8000 Transfers: School Nutrition Fund (57,100), Activity Fund (48,000); 5200 Transfers From General Fund 48,000 (p18), 57,100 (p19)", "issue": "User label rule (2026-10-27): detail transfer lines should be labelled 'Transfers Out' / 'Transfers In', with the printed text kept in printed_label."},
+    {"severity": "warning", "path": "missing", "page": 12, "extracted": null, "on_page": "Budget-only lines with blank actuals: Schedule A 1911 Local License Fees (budget 1,000), 3599 Categorical Grants (7,500), 4105 E-Rate (2,400), 4510 Title IV-A (10,000); Schedule M 1300 Supplies (500), 2130 Purchased Prof. (300) and Other Property Services (100), 2211 Other Items (500), 2230 Purchased Property Services (3,000), 2310 Property (1,650), 2320 Purchased Prof. (2,305), 2410 Purchased Prof. (500), 2650 Property (19,000), 3535 Other Items (500), 3599 Property (17,000), 6992 Supplies (8,500)", "issue": "Zero-actual budget lines were left out inconsistently: others like 2142 Psychological Services (0 / 12,286), 3551 Career Education (0 / 1,000) and Schedule L are included. Actual totals are unaffected."}
   ]
 }

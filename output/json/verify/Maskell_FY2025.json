@@ -1,9 +1,21 @@
 {
   "stem": "Maskell_FY2025",
-  "values_checked": 36,
+  "values_checked": 48,
   "issues": [
-    {"severity": "warning", "path": "balance_sheet.equity", "page": 1,
-     "extracted": "General Fund ending balance (etc.)", "on_page": "Line 28 Subtotal of Ending Balances (Line 26 + 27), per fund column",
-     "issue": "equity original_labels are descriptive constructions, not the printed row label; amounts match line 24/28 (total 199,991.06)"}
+    {"severity": "warning", "path": "notes", "page": 4,
+     "extracted": "... Read pages 1-4 of 4 Investments rule: ...", "on_page": "4 pages",
+     "issue": "The notes say all 4 of 4 pages were read, but that statement is in the middle of the notes, not at the end. Coverage is complete: p1 is the revised Exhibit A, p2 the crossed-out version, p3 disbursements, p4 the schedules, and no lines are missing."},
+    {"severity": "warning", "path": "disbursements[1].original_label", "page": 3,
+     "extracted": "Capital Improvements", "on_page": "Capital Improvements 3,500.00 (General Fund)",
+     "issue": "Under the user rule of 2026-10-26/28, capital outlay lines are labelled 'Capital Outlay: <function>' with the printed text in printed_label. This line was not relabelled, and user_rules.py's regex ('capital outlay') will not catch it."},
+    {"severity": "warning", "path": "disbursements[3]", "page": 3,
+     "extracted": "business-type utilities 3,270.00", "on_page": "Line 29 General Government (Governmental section), Water Fund column 3,270.00",
+     "issue": "The line is printed in the governmental General Government row but in the Water Fund column. Treating it as business-type utilities is an assumption (it is marked review)."},
+    {"severity": "warning", "path": "balance_sheet.assets", "page": 1,
+     "extracted": "not recorded", "on_page": "County Treasurer Balance at October 1, 2024 $922.65; at September 30, 2025 1,367.92",
+     "issue": "The county treasurer balances printed below the statement are not recorded or mentioned anywhere. They are outside the line 28 total, but the user's rule treats county treasurer cash as Cash and Cash Equivalents."},
+    {"severity": "warning", "path": "balance_sheet.equity[0].original_label", "page": 1,
+     "extracted": "General Fund ending balance (and similar labels for the other 5 funds)", "on_page": "Line 24 Ending Balance / Line 28 Subtotal of Ending Balances, by fund column",
+     "issue": "The equity labels were made up by the extractor, not copied from the page. The amounts are correct."}
   ]
 }

@@ -1,27 +1,9 @@
 {
   "stem": "Stapleton_Public_Schools_FY2025",
-  "values_checked": 326,
+  "values_checked": 330,
   "issues": [
-    {"severity": "warning", "path": "report_discrepancies[0]", "page": 6,
-     "extracted": 1.40, "on_page": "Federal lines 19,862.00 + 26,665.02 + 1,544.00 + 33,627.00 + 2,531.06 + 10,000.00 + 85,198.68 = 179,427.76; printed Total federal receipts 179,429.16",
-     "issue": "Re-read visually and got the same digits. The 1.40 gap is in the printed report itself, so it is correctly recorded as a report discrepancy."},
-    {"severity": "warning", "path": "report_discrepancies", "page": 20,
-     "extracted": null, "on_page": "Activities Fund Total: Balance 9/1/2024 114,237.49 + Receipts 99,060.00 - Disbursements 131,835.77 + General Fund Support 35,000.00 = 116,461.72, but printed Balance 8/31/2025 total is 120,416.38",
-     "issue": "The per-account Activities schedule doesn't roll forward: its printed ending-balance total is 3,954.66 higher than its own columns give, and higher than the 116,461.72 on pp1, 3 and 9. The JSON's receipt and disbursement lines tie to their totals, but this page-level discrepancy is not recorded in report_discrepancies."},
-    {"severity": "warning", "path": "disbursements[10].category", "page": 4,
-     "extracted": "instruction", "on_page": "State programs 55,267.11; Federal programs 91,586.24 (disbursements[11])",
-     "issue": "The Statement of Activities (p2) shows State programs and Federal programs as functions separate from Instruction. Most of the spending is instructional (Title I, IDEA, REAP, early childhood, high ability), so instruction is defensible, but it is a judgment call. Already marked review."},
-    {"severity": "warning", "path": "receipts[13].category", "page": 4,
-     "extracted": "investment income", "on_page": "Interest 98,486.94",
-     "issue": "This line includes 3,797.62 of 1140 Interest on taxes (General 3,501.95 p6 + Bond 295.67 p11). In detail that is recorded as property tax, so the two places categorize the same money differently. The line is kept whole as printed and noted."},
-    {"severity": "warning", "path": "receipts[9].category", "page": 4,
-     "extracted": "intergovernmental/state aid", "on_page": "State receipts 1,916,807.59",
-     "issue": "This line includes 3133 Nameplate capacity tax (1,954.29 p6 + 140.42 p11), which the rules put under other taxes. State aid is the dominant category, but under the mixed-line rule the line has no review flag."},
-    {"severity": "warning", "path": "receipts[11].fund_type", "page": 3,
-     "extracted": "governmental", "on_page": "School Nutrition column of the Statement of ... Changes in Fund Balances - Governmental Funds",
-     "issue": "The report presents School Nutrition as a governmental fund, and the extraction follows the report. The rules list school nutrition among business-type examples, so this is a classification judgment."},
-    {"severity": "warning", "path": "detail[134].detail_category", "page": 17,
-     "extracted": "dues, training and travel", "on_page": "332 Mileage to parents 216.30 (pupil transportation)",
-     "issue": "These are transportation reimbursements paid to parents, not staff travel. 'grants/payments to other entities' could fit better."}
+    {"severity": "warning", "path": "detail[21].amount", "page": 6,
+     "extracted": 19862.0, "on_page": "Federal receipts lines 19,862.00 + 26,665.02 + 1,544.00 + 33,627.00 + 2,531.06 + 10,000.00 + 85,198.68 = 179,427.76 vs printed Total federal receipts 179,429.16",
+     "issue": "The General Fund federal receipt lines sum to 1.40 less than the printed total, which agrees with the p3 statement. Re-reading the page, the digits look the same as extracted, so this is either a printed inconsistency or a faint digit. It is recorded in report_discrepancies, and a person should check the source page."}
   ]
 }

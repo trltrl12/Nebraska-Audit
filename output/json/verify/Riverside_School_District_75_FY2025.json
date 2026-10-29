@@ -4,21 +4,21 @@
   "issues": [
     {"severity": "error", "path": "ending_cash.source_page", "page": 8,
      "extracted": 7, "on_page": "2,698,593 (Total Governmental Funds, Total Assets) is on trimmed p8 (also p2 and p11); p7 shows only the General/Depreciation/Employee Benefit/Special Building columns",
-     "issue": "Wrong source_page: 2,698,593 is not printed on p7."},
+     "issue": "[fixed 2026-10-28: ending_cash source_page set to 8] Wrong source_page: 2,698,593 is not printed on p7."},
     {"severity": "error", "path": "detail[116].category", "page": 24,
      "extracted": "charges for services/fees", "on_page": "Fine Arts receipts 4,780 (Activities Fund by account)",
-     "issue": "School activity fund receipts are category Extracurricular Receipts (user rule). Every other activity account is categorized that way; this one is inconsistent."},
+     "issue": "[fixed 2026-10-28: Fine Arts receipts category set to Extracurricular Receipts] School activity fund receipts are category Extracurricular Receipts (user rule). Every other activity account is categorized that way; this one is inconsistent."},
     {"severity": "warning", "path": "detail[94].category", "page": 24,
      "extracted": "investment income", "on_page": "Board receipts 451 (= Activities Fund Interest 451, p21)",
-     "issue": "The extractor itself notes this is the fund's interest. Interest lines are category Interest Income, not investment income."},
+     "issue": "[fixed 2026-10-28: category and detail_category set to Interest Income] The extractor itself notes this is the fund's interest. Interest lines are category Interest Income, not investment income."},
     {"severity": "warning", "path": "detail[7].detail_category", "page": 14,
      "extracted": "other charges for services", "on_page": "1955 Postsecondary Receipts 2,280",
-     "issue": "The category is Tuition Received, but the detail_category 'other charges for services' doesn't match it; 'tuition and fees' fits."},
+     "issue": "[fixed 2026-10-28: detail_category set to tuition and fees] The category is Tuition Received, but the detail_category 'other charges for services' doesn't match it; 'tuition and fees' fits."},
     {"severity": "warning", "path": "receipts[18].category", "page": 13,
      "extracted": "charges for services/fees", "on_page": "Daily Sales 86,435 (School Nutrition Fund)",
-     "issue": "Under the user's 2026-10-28 rule, lunch/meal/nutrition sales are category School Lunch Sales. The same applies to detail[83] (p23)."},
+     "issue": "[fixed 2026-10-28: receipts and detail Daily Sales set to School Lunch Sales] Under the user's 2026-10-28 rule, lunch/meal/nutrition sales are category School Lunch Sales. The same applies to detail[83] (p23)."},
     {"severity": "warning", "path": "disbursements[19].detail_category", "page": 11,
      "extracted": "Pupils", "on_page": "Other Support Services (Student Fee Fund) 7,977, code 2900",
-     "issue": "Code 2900 Other Support Services is neither 2100 Pupils nor 2200 Staff. Tagging it Pupils is a guess; the Depreciation and Employee Benefit 2900 lines carry no such tag."}
+     "issue": "[fixed 2026-10-28: Pupils tag removed, line stays support services] Code 2900 Other Support Services is neither 2100 Pupils nor 2200 Staff. Tagging it Pupils is a guess; the Depreciation and Employee Benefit 2900 lines carry no such tag."}
   ]
 }

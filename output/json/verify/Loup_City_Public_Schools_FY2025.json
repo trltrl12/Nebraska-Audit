@@ -1,20 +1,18 @@
 {
   "stem": "Loup_City_Public_Schools_FY2025",
-  "values_checked": 142,
+  "values_checked": 150,
   "issues": [
-    {"severity": "warning", "path": "report_discrepancies", "page": 11,
-     "extracted": "only the federal sources subtotal (460,430 vs 460,431) is recorded for p11",
-     "on_page": "Total nonrevenue receipts 226,431; lines 9,033 + 207 + 217,192 = 226,432",
-     "issue": "A second subtotal on the same page is also 1 short, and is not recorded. The printed subtotals (3,309,926 + 14,649 + 3,433,995 + 460,430 + 226,431 = 7,445,431) also don't add to the printed Total receipts of 7,445,432. The detail lines still sum to 7,445,433, so the recorded difference of -1 against the total is right."},
-    {"severity": "warning", "path": "report_discrepancies[0].note", "page": 4,
-     "extracted": "Printed total receipts 8,380,076 is 1 less than the sum of the printed lines (rounding)",
-     "on_page": "Nonmajor Funds column: lines sum to 577,419, printed total 577,418; nonmajor Interest 639 vs fund schedules 402 + 67 + 169 = 638",
-     "issue": "The 1-dollar gap comes from the Nonmajor Funds column, which prints Interest as 639 while the SNP, Bond and QCPUF schedules add to 638. The receipts line keeps the printed 103,496. Informational only."},
-    {"severity": "warning", "path": "detail[56].detail_category", "page": 16,
-     "extracted": "other state aid", "on_page": "Miscellaneous local receipts 46,651",
-     "issue": "The schedule's label says 'local', but the category is state aid because statement p4 prints the same 46,651 as 'Other state receipts'. The line is already marked review. Related: State reimbursement 1,269 (detail[57]) is other state aid in detail, but the statement folds it into the 'School Nutrition Program' charges line 91,892 (90,623 + 1,269)."},
-    {"severity": "warning", "path": "detail[5].detail_category", "page": 10,
-     "extracted": "county/other local governments", "on_page": "2110 County fines and licenses 12,734",
-     "issue": "Fines and license money passed through the county to schools could arguably be fines and forfeitures. county/other local governments is defensible because it matches the statement's 'County and ESU sources' line."}
+    {"severity": "warning", "path": "report_discrepancies[1].note", "page": 11,
+     "extracted": "attributes the 1 difference to federal sources only", "on_page": "Federal lines sum 460,431 vs printed 460,430; Nonrevenue lines 9,033 + 207 + 217,192 = 226,432 vs printed 226,431; Total receipts printed 7,445,432",
+     "issue": "Both printed subtotals are 1 below their lines, and the printed total is 1 above the sum of the subtotals. The net difference (lines 1 above the total) is recorded correctly, but the note's explanation is incomplete"},
+    {"severity": "warning", "path": "report_discrepancies[2].check", "page": 16,
+     "extracted": "label", "on_page": "46,651 printed as 'Miscellaneous local receipts' (p16) and 'Other state receipts' (p4)",
+     "issue": "\"label\" isn't one of the allowed check values (business | reconcile | balance | totals | detail); also, the line's state-aid category rests on the statement wording, while the fund schedule says local"},
+    {"severity": "warning", "path": "detail[42].original_label", "page": 13,
+     "extracted": "Capital outlay", "on_page": "Capital outlay 111,794 (Depreciation Fund)",
+     "issue": "Capital outlay labelling rule (\"Capital Outlay: <function>\", printed text in printed_label) not applied (also disbursements[15])"},
+    {"severity": "warning", "path": "detail[*].fund", "page": 10,
+     "extracted": "General / Depreciation / Special Building / Bond ...", "on_page": "General Fund, Depreciation Fund ...",
+     "issue": "Fund names don't end in \"Fund\", and transfer labels (5200 Transfers in, 8000 Transfers, Transfer from the General Fund) aren't normalised to Transfers In/Out, though the Bond Fund one is (user naming rules; user_rules.py may apply them)"}
   ]
 }

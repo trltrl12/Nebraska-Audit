@@ -1,14 +1,33 @@
 {
   "stem": "Raymond_Central_School_FY2025",
-  "values_checked": 310,
+  "values_checked": 320,
   "issues": [
-    {
-      "severity": "warning",
-      "path": "detail[fund=School Nutrition].fund_type",
-      "page": 16,
-      "extracted": "governmental",
-      "on_page": "School Nutrition Fund shown as a Major governmental fund column on the governmental funds statements (pp4, 6, 8, 10)",
-      "issue": "Extractor rules list school nutrition among business-type funds; here the report itself presents it as a governmental fund and the Total Governmental Funds column (used for receipts/disbursements) includes it. Kept governmental, which is defensible, but it is a judgment call."
-    }
+    {"severity": "error", "path": "disbursements[39].category", "page": 10,
+     "extracted": "instruction", "on_page": "Federal programs: Title I Part A 89,602 (code 6200, printed under the 'Federal programs:' heading, p9-10)",
+     "issue": "User rule (2026-10-28): program lines follow the report's own grouping; the statement prints this under a Federal programs heading (and the General Fund budget schedule p13 and Statement of Activities p2 count it in 'Federal programs' 248,148), so the function is Federal Programs. The detail line for the same money already uses Federal Programs."},
+    {"severity": "error", "path": "disbursements[40].category", "page": 10,
+     "extracted": "Instruction", "on_page": "Federal programs: IDEA Pt B Preschool Base 2,865 (6406)",
+     "issue": "Same as disbursements[39]: printed under the Federal programs heading; should be Federal Programs."},
+    {"severity": "error", "path": "disbursements[41].category", "page": 10,
+     "extracted": "Instruction", "on_page": "Federal programs: IDEA Pt B Base & Enrollment 148,047 (6408)",
+     "issue": "Same as disbursements[39]: should be Federal Programs."},
+    {"severity": "error", "path": "disbursements[42].category", "page": 10,
+     "extracted": "instruction", "on_page": "Federal programs: Vocational & Tech (Perkins) 7,634 (6700)",
+     "issue": "Same as disbursements[39]: should be Federal Programs."},
+    {"severity": "error", "path": "detail[114].category", "page": 20,
+     "extracted": "charges for services/fees", "on_page": "Student Fee Fund: Fees 43,734",
+     "issue": "Student fees are Extracurricular Receipts under the user's rules (2026-10-28), and the same money on the statement (receipts[9] 'Student fees') is Extracurricular Receipts; the detail line uses charges for services, so the same money is categorized two ways."},
+    {"severity": "warning", "path": "disbursements[32].category", "page": 9,
+     "extracted": "capital outlay", "on_page": "Other support services (2900) Depreciation Fund column 506,349; Depreciation Fund budget schedule labels it Capital outlay (p14)",
+     "issue": "The statement prints it as a support services line; capital outlay follows the fund schedule's label. Defensible, marked review."},
+    {"severity": "warning", "path": "detail[63].source_page", "page": 12,
+     "extracted": 13, "on_page": "Staff support - technology 493,546 is on p12",
+     "issue": "Contra transfer line 'Transfer inside Staff support - technology' cites p13; the printed line is on p12 (Reclass column (50,000) on p8)."},
+    {"severity": "warning", "path": "detail", "page": 9,
+     "extracted": "no Activity Fund detail lines", "on_page": "Activity Fund column: Interest on investments 6,485, Activities receipts 445,314, Other support services 453,273 (p5, p7, p9)",
+     "issue": "No budget schedule for the Activity Fund is in the trimmed PDF, so its receipts/disbursements appear only in the statement lines; noted in notes. Not a missing schedule line."},
+    {"severity": "warning", "path": "notes", "page": 20,
+     "extracted": "'Read pages 1-20 of 20.' appears mid-notes, followed by further text", "on_page": "20 pages",
+     "issue": "Notes do not end with 'Read pages 1-N of N'; the page count (20) is correct and every page's lines are in the JSON."}
   ]
 }

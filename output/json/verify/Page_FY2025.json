@@ -1,5 +1,18 @@
 {
   "stem": "Page_FY2025",
-  "values_checked": 33,
-  "issues": []
+  "values_checked": 72,
+  "issues": [
+    {"severity": "warning", "path": "reported_totals.business-type.disbursements.includes", "page": 2,
+     "extracted": [], "on_page": "Combined Utilities Total Disbursements & Transfers 108,261.00 includes line 50 transfer out 9,803.00",
+     "issue": "printed total includes the utility transfer out; rules call for includes [\"transfers_net\"] rather than the non-standard includes_split field (documented, amount itself correct)"},
+    {"severity": "warning", "path": "receipts[10].category", "page": 1,
+     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other 90,157.00 (Combined Utilities Fund)",
+     "issue": "printed label is 'Other'; treated as utility charges by assumption (review set). If kept as utility sales, the user's 2026-10-28 rule names the category Utility Charges"},
+    {"severity": "warning", "path": "receipts[10].original_label", "page": 1,
+     "extracted": "Local Receipts: Other (Combined Utilities Fund)", "on_page": "Local Receipts: Other",
+     "issue": "fund name appended to the printed label (same in detail[22].original_label)"},
+    {"severity": "warning", "path": "disbursements[2].original_label", "page": 2,
+     "extracted": "Capital Improvements", "on_page": "Capital Improvements (Street Fund column)",
+     "issue": "capital outlay line not relabelled 'Capital Outlay: <function>' per user rule 2026-10-26 (also detail[16]); user_rules.py may apply it"}
+  ]
 }

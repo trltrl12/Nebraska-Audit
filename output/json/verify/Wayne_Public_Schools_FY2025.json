@@ -1,15 +1,19 @@
 {
   "stem": "Wayne_Public_Schools_FY2025",
-  "values_checked": 270,
+  "values_checked": 334,
   "issues": [
-    {"severity": "warning", "path": "disbursements[6].category", "page": 4,
-     "extracted": "support services", "on_page": "Operation and maintenance of plant 13,642,602 (Special Building Fund 12,135,140, of which building improvements 11,730,176 on p19)",
-     "issue": "Follows the statement's function, but about 11.7M of it is construction (building improvements) that could be treated as capital outlay. Same judgment applies to detail[135] (Special Building Fund Building improvements, category support services)"},
-    {"severity": "warning", "path": "detail[101].category", "page": 14,
-     "extracted": "capital outlay", "on_page": "Depreciation Fund Capital outlay 32,231; General Fund components (p7) show it under Operation and maintenance of plant",
-     "issue": "The detail function differs from the function the report's own combining schedule assigns (already marked review)"},
-    {"severity": "warning", "path": "receipts[6].split_from", "page": 4,
-     "extracted": "State receipts 7,974,114 split into 7,656,985 state aid + 317,129 nameplate capacity tax", "on_page": "State receipts 7,974,114; nameplate capacity 317,129 printed on SoA p2 and in the fund schedules (245,590 + 48,956 + 11,123 + 11,460)",
-     "issue": "The split ties exactly and follows the rule for school 'other taxes' lines, but it rests on the fund schedules rather than a breakdown printed on the statement itself; flagging so a reviewer can confirm"}
+    {"severity": "error", "path": "receipts[16].category", "page": 9,
+     "extracted": "Tuition Received (35,580 = community services activities 20,600 + postsecondary receipts 14,980)",
+     "on_page": "1800 Community services activities 20,600; 1955 Postsecondary receipts 14,980",
+     "issue": "[fixed 2026-10-28: split into 1800 community services activities 20,600 (charges for services/fees, detail line 1800 changed to match) and 1955 postsecondary receipts 14,980 (Tuition Received)] This split item combines two different sources under Tuition Received. Most of it (20,600) is community services activities, which is not tuition, and the report's own detail (detail[6]) puts that line in Extracurricular Receipts, so the two disagree. Split the 1800 part into its own item with the same category as the detail line. Amounts tie (other receipts total 240,465)."},
+    {"severity": "warning", "path": "detail[6].category", "page": 9,
+     "extracted": "Extracurricular Receipts", "on_page": "1800 Community services activities 20,600",
+     "issue": "[fixed 2026-10-28: now charges for services/fees, matching the statement receipt] Community services activities (code 1800) are community program fees, not student activity receipts. charges for services/fees is arguably a better fit. This is a judgment call."},
+    {"severity": "warning", "path": "detail[106].category", "page": 16,
+     "extracted": "charges for services/fees", "on_page": "Sales 261,357 (School Nutrition Fund)",
+     "issue": "[fixed 2026-10-28: now School Lunch Sales] The statement receipt for the same money (receipts[12], Nutrition fund sales) is School Lunch Sales. The rules make School Lunch Sales its own category, so the detail line should match."},
+    {"severity": "warning", "path": "receipts[23].category", "page": 16,
+     "extracted": "School Lunch Sales", "on_page": "School Nutrition 'Other receipts' 10,341",
+     "issue": "[fixed 2026-10-28: detail Nutrition 'Other receipts' now School Lunch Sales too, both marked review] Unlabeled nutrition other receipts are recorded as School Lunch Sales here but as charges for services/fees in the detail (detail[108]). The same line has two different categories."}
   ]
 }

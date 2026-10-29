@@ -1,21 +1,18 @@
 {
   "stem": "Hampton_FY2025",
-  "values_checked": 88,
+  "values_checked": 150,
   "issues": [
+    {"severity": "error", "path": "receipts[9].category", "page": 7,
+     "extracted": "charges for services/fees", "on_page": "Sales 839,924 (Electric 658,352, Sewer 57,739, Water 123,833 enterprise funds)",
+     "issue": "Utility fund sales belong in the user's own receipt category Utility Charges, not charges for services/fees. The detail lines for the same Sales row (detail[23]-[25]) already use Utility Charges, so the report is inconsistent with itself."},
+    {"severity": "warning", "path": "receipts[5].category", "page": 5,
+     "extracted": "donations/contributions", "on_page": "Contributions 10,000 (p5); Capital Grants and Contributions under General government (p3); 'Grants' 10,000 on the budget schedule (p9)",
+     "issue": "This could be a government capital grant rather than a private donation. The page doesn't say who gave it."},
+    {"severity": "warning", "path": "detail[4].detail_category", "page": 5,
+     "extracted": "other state aid", "on_page": "Intergovernmental 75,806 (Street Fund only); 'State allocation' on p3",
+     "issue": "All of it is Street Fund state allocation, so it is likely highway allocation. 'other state aid' is less specific."},
     {"severity": "warning", "path": "transfers_in.amount", "page": 5,
      "extracted": 75000, "on_page": "Transfers in (out): General (10,000), Street 85,000, Total Governmental Funds 75,000",
-     "issue": "Net governmental transfer recorded as transfers_in with transfers_out null; gross is 85,000 in (Street) and 10,000 out (General). Net is what the Total Governmental Funds column prints and it reconciles, but the gross amounts are not shown."},
-    {"severity": "warning", "path": "beginning_cash.amount", "page": 5,
-     "extracted": 837201, "on_page": "Fund balance - September 30, 2024: 837,201",
-     "issue": "Beginning cash taken from the printed fund balance line (modified cash basis, no liabilities), not from a cash line. Equal under modified cash basis, but it is an assumption."},
-    {"severity": "warning", "path": "receipts[5].category", "page": 5,
-     "extracted": "donations/contributions", "on_page": "Contributions 10,000 (p5); shown as Capital Grants and Contributions (p3) and as 'Grants' on the budget schedule (p9)",
-     "issue": "Could be a government capital grant (intergovernmental/state aid or federal grants) rather than a private donation. The page doesn't say who gave it."},
-    {"severity": "warning", "path": "detail[3].detail_category", "page": 9,
-     "extracted": "other state aid", "on_page": "Intergovernmental 75,806 (Street Fund only, p5; 'State allocation' on p3)",
-     "issue": "All of it is in the Street Fund and is labelled State allocation, so it is likely highway allocation. 'other state aid' is defensible but less specific."},
-    {"severity": "warning", "path": "detail[4].split_from", "page": 9,
-     "extracted": "Miscellaneous / Charges for services / Interest income split by fund type", "on_page": "Miscellaneous 303,727; Charges for services 844,969; Interest income 38,188 (all-funds lines)",
-     "issue": "Combined all-funds budget lines are split by fund type (detail[4]-[7], [10]-[11]). The same lines are broken down by fund type on p2-3 (303,624/103; 5,045/839,924; 9,354/28,834), so the split matches printed figures, but split_from cites p5/p7 and budget_final is null on every split part (the combined budget can't be split)."}
+     "issue": "The net transfer from the Total Governmental Funds column is recorded as transfers_in, with transfers_out null. The gross amounts are 85,000 in and 10,000 out (General to Street, internal). It reconciles and matches the column as printed."}
   ]
 }

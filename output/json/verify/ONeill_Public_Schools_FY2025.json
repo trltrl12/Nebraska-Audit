@@ -1,18 +1,18 @@
 {
   "stem": "ONeill_Public_Schools_FY2025",
-  "values_checked": 193,
+  "values_checked": 248,
   "issues": [
-    {"severity": "warning", "path": "receipts[4].fund_type", "page": 4,
-     "extracted": "governmental", "on_page": "Nutrition Program receipts 162,835 / Nutrition Program 576,760 in Other Governmental Funds column",
-     "issue": "Extractor rules list school nutrition as a business-type example, but this report presents the School Nutrition Fund as a governmental fund (Other Governmental Funds, p4-6, p15). Keeping it governmental matches the report; same applies to disbursements[11] and the School Nutrition detail lines."},
-    {"severity": "warning", "path": "transfers_in", "page": 5,
-     "extracted": null, "on_page": "Interfund transfers (61,000) General Fund / 61,000 Other Governmental Funds; Total column blank",
-     "issue": "Printed interfund transfers left out of transfers_in/transfers_out because they net to zero in the Total Governmental Funds column. The identity still holds; this was a judgment call."},
-    {"severity": "warning", "path": "detail[98].budget_final", "page": 10,
-     "extracted": null, "on_page": "5000 Debt service: budget 1,125,000, actual 781,213",
-     "issue": "The combined debt-service line was split into principal 734,160 and interest 47,053 using the General Fund column on p5. That split is correct, but the printed final budget of 1,125,000 is not recorded on either item (detail[98] and detail[99])."},
-    {"severity": "warning", "path": "detail[90].amount", "page": 10,
-     "extracted": -80000, "on_page": "Student transportation 2710-2733 sum 436,770 vs statement 356,770; 4700 Building improvements 505,289",
-     "issue": "The 500,000 hidden transfer to the Depreciation Fund (note p18) was split into 80,000 from transportation (contra line) and 420,000 from 4700 (split, detail[97]/[110]). This is inferred by comparing the statement with the schedule. It ties exactly (every other function reconciles to the p4-5 General Fund column), but the report does not print the split itself."}
+    {"severity": "warning", "path": "receipts[19].category", "page": 7,
+     "extracted": "charges for services/fees", "on_page": "1910 Rental 50",
+     "issue": "Rental receipts have their own category 'Rentals' (user 2026-10-28). detail[9] for the same line already uses Rentals, so receipts and detail disagree."},
+    {"severity": "warning", "path": "detail[114].category", "page": 12,
+     "extracted": "Building and Grounds", "on_page": "Depreciation Fund, Building and sites: Supplies 234,551",
+     "issue": "The statement's 'Instructional support' 654,076 (p4) = General Fund 2200 lines 419,525 + exactly this 234,551, so the report counts these supplies as instructional support (Staff), not operation and maintenance of plant. The schedule's 'Building and sites' heading makes Building and Grounds defensible, but it doesn't tie to the statement function."},
+    {"severity": "warning", "path": "detail[118].category", "page": 13,
+     "extracted": "support services", "on_page": "Employee Benefit Fund: Employee benefits 1,983",
+     "issue": "The statement's School administration 656,720 (p4) = 2410 514,424 + 2490 140,313 + this 1,983, so the report counts it as School Administration."},
+    {"severity": "warning", "path": "detail[90].category", "page": 10,
+     "extracted": "support services", "on_page": "2900 Other support services 27,115",
+     "issue": "The statement's Central and business services 368,837 (p4) = 2500 lines 341,722 + this 27,115, so the report groups it under Business. Defensible as other support services."}
   ]
 }

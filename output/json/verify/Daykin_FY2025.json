@@ -2,8 +2,8 @@
   "stem": "Daykin_FY2025",
   "values_checked": 40,
   "issues": [
-    {"severity": "warning", "path": "receipts[10].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Line 18 Local Receipts: Other - Water Fund 82,038.16; Sewer Fund 37,481.00",
-     "issue": "the form only prints 'Local Receipts: Other'; treating utility-column Other as user charges is an assumption (already marked review). Labels are edited with '(Water Fund)'/'(Sewer Fund)'. Same for receipts[11]"}
+    {"severity": "warning", "path": "receipts[10].category", "page": 1, "extracted": "charges for services/fees", "on_page": "Local Receipts: Other, Water Fund 82,038.16 / Sewer Fund 37,481.00", "issue": "These are utility fund collections, which the user's 2026-10-28 rule puts in Utility Charges, not charges for services/fees. Applies to receipts[10] and receipts[11]. The printed label is only 'Other', so this remains an assumption."},
+    {"severity": "warning", "path": "disbursements[2].original_label", "page": 3, "extracted": "Other Capital Outlay", "on_page": "Other Capital Outlay 22,169.28 (Street Fund column)", "issue": "This capital outlay line is not relabelled 'Capital Outlay: Streets/Highways' (with printed_label) as the user's capital outlay rule requires."},
+    {"severity": "warning", "path": "beginning_investments", "page": 1, "extracted": 77918.52, "on_page": "Investments 77,918.52 (inside subtotal 104,619.05)", "issue": "beginning_cash and ending_cash are the cash-plus-investments subtotals, so beginning_investments (77,918.52) and ending_investments (40,368.21) are already included in them. The notes say the investment fields are informational, but anything that adds cash and investments would count these amounts twice."}
   ]
 }

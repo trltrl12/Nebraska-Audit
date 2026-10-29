@@ -1,12 +1,18 @@
 {
   "stem": "Boys_Town_FY2025",
-  "values_checked": 71,
+  "values_checked": 104,
   "issues": [
     {"severity": "warning", "path": "receipts[0].category", "page": 4,
      "extracted": "intergovernmental/state aid", "on_page": "Gas and water revenue allocation 11,696",
-     "issue": "Nothing in the trimmed PDF says where this allocation comes from (state, or a utility/FFBH revenue share). Intergovernmental is a reasonable guess but isn't confirmed. The same applies to detail[1] (detail_category 'other state aid', p5)."},
+     "issue": "The trimmed PDF doesn't say where this allocation comes from (the state, or a utility/FFBH revenue share). Intergovernmental is a reasonable guess but isn't confirmed. The same applies to detail[1] (other state aid, p5)."},
+    {"severity": "warning", "path": "detail[27].category", "page": 8,
+     "extracted": "general government / debt interest and fees", "on_page": "Interest 384,294 (printed under General Government - Operating expenses)",
+     "issue": "This is interest (a debt or financing cost) printed inside general government operating expenses. Leaving it under the printed heading is defensible, but it may belong to Debt Service (interest). The statement (p4) also holds it inside General government - Operating 2,538,369."},
+    {"severity": "warning", "path": "disbursements[0].original_label", "page": 4,
+     "extracted": "General government - Personnel / General government - Operating", "on_page": "Personnel / Operating (sub-lines under the General government heading)",
+     "issue": "The labels were built by joining the heading and the line; the page prints only 'Personnel' and 'Operating'. The amounts are correct."},
     {"severity": "warning", "path": "detail", "page": 5,
      "extracted": "budget-basis lines (p5 revenues, p8 expenditures)", "on_page": "GAAP Schedule of Expenditures p7 (total 4,256,919) vs budget-basis schedule p8 (total 4,092,157)",
-     "issue": "Assumption: the detail uses the budget-basis schedules, not the GAAP schedule on p7, so the detail totals don't tie to the statement (the gap is reconciled on p6). Both schedules are complete and add up. The choice is defensible, and only one schedule is recorded, so nothing is double counted."}
+     "issue": "Assumption: the detail uses the budget-basis schedules, not the GAAP schedule on p7, so the detail totals don't tie to the GAAP statement (p6 reconciles the gap). Both schedules add up and only one is recorded, so nothing is double counted."}
   ]
 }

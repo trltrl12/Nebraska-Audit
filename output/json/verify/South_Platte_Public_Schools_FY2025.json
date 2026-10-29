@@ -1,9 +1,12 @@
 {
   "stem": "South_Platte_Public_Schools_FY2025",
-  "values_checked": 252,
+  "values_checked": 248,
   "issues": [
-    {"severity": "warning", "path": "detail[63].detail_category", "page": 9,
-     "extracted": "donations/contributions", "on_page": "1920 Contributions and Donations 84,627 (Activity Fund)",
-     "issue": "Activity Fund receipt; the extractor rules say school activity funds use revenue detail 'student activity receipts'. The printed label supports donations, so this is a judgment call. The same 84,627 is also inside the receipts[5] donations split."}
+    {"severity": "warning", "path": "detail[67].original_label", "page": 10,
+     "extracted": "2900 Capital Outlay", "on_page": "2900 Capital Outlay (Depreciation Fund, actual -, budget 16,778)",
+     "issue": "capital outlay line not relabelled 'Capital Outlay: <function>' with printed_label per the user rule (amount 0); user_rules.py should apply it"},
+    {"severity": "warning", "path": "receipts[8].category", "page": 9,
+     "extracted": "donations/contributions", "on_page": "Activity Fund 1920 Contributions and Donations 84,627 (part of the 90,169 split)",
+     "issue": "activity fund receipts normally go to Extracurricular Receipts; kept as donations because the label says so, which is defensible but worth a look"}
   ]
 }

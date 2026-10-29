@@ -1,25 +1,18 @@
 {
   "stem": "Ogallala_FY2025",
-  "values_checked": 345,
+  "values_checked": 366,
   "issues": [
-    {"severity": "warning", "path": "detail[108].category", "page": 16,
-     "extracted": "public safety", "on_page": "Fire: Debt service: Principal 58,201; Interest 4,540 (detail[109])",
-     "issue": "Debt service lines inside the Fire department column are given the department's function, while the governmental funds statement (p6) carries the same 58,201 / 4,540 as 'Principal payments on debt' / 'Interest on long-term debt' (category Debt Service). Function totals from detail will not tie to the statement's debt service; consider category Debt Service with debt_service_part."},
-    {"severity": "warning", "path": "disbursements[10].category", "page": 6,
-     "extracted": "hospital/health care", "on_page": "Other - Hospital debt service 195,777 (Hospital Community Improvement Fund, p15)",
-     "issue": "Printed as hospital debt service paid from a city sales-tax fund; could be Debt Service (principal and interest combined) rather than hospital/health care. Same for detail[246]."},
-    {"severity": "warning", "path": "detail[24].category", "page": 16,
-     "extracted": "intergovernmental/state aid (county/other local governments)", "on_page": "Rural Fire reimbursements: Ambulance 67,877; Fire 11,808 (detail[12])",
-     "issue": "Extractor rules list rural fire contracts under charges for services/fees; the page prints them under 'Intergovernmental revenue', so either is defensible."},
-    {"severity": "warning", "path": "detail[83].category", "page": 17,
-     "extracted": "licenses and permits", "on_page": "Police: Licenses, permits, and fines 98,229",
-     "issue": "Mixed label; in the Police column this is most likely mainly fines (Fines and Licenses) rather than licenses and permits."},
-    {"severity": "warning", "path": "detail[232].original_label", "page": 12,
-     "extracted": "Capital outlay", "on_page": "Street Fund: Capital outlay 290,540",
-     "issue": "Capital outlay rule (2026-10-26): label 'Capital Outlay: <function>' with printed_label/computed; not applied here or to Public Transportation 'Capital outlay' 35,974 (detail[261], p15), unlike the GF department lines."},
-    {"severity": "warning", "path": "notes", "page": 6,
-     "extracted": "notes cite p5 (fund statement), p7 (proprietary), pp13-14 (GF departments), p9 (GF budget)",
-     "on_page": "Actual trimmed pages: fund statement p6, proprietary p9, GF departments pp16-17, GF budget p11",
-     "issue": "Page references in notes are stale (pre re-trim); the source_page values in the data itself are correct."}
+    {"severity": "warning", "path": "receipts[11].category", "page": 9,
+     "extracted": "charges for services/fees", "on_page": "Sales to customers 2,912,812 (Enterprise Funds Total: Water + Sewer)",
+     "issue": "Water/sewer sales to customers fit the user's Utility Charges receipt category (2026-10-28). user_rules.py won't catch this because receipt lines have no fund name and the label doesn't match its patterns. Tap fees 24,403 (receipts[12]) are similar."},
+    {"severity": "warning", "path": "disbursements[11].category", "page": 9,
+     "extracted": "Employee Benefits and Payroll Taxes", "on_page": "Salaries and benefits 66,792",
+     "issue": "A combined salaries-and-benefits line. Every governmental detail line with the same label uses salaries and wages, so Salaries and Wages would be consistent."},
+    {"severity": "warning", "path": "detail[18].category", "page": 16,
+     "extracted": "charges for services/fees", "on_page": "Cemetery: Rental and fees 41,326",
+     "issue": "Department fee lines keep category charges for services, but their detail_category points to the user's own receipt categories: Cemetery -> Cemetery Fees, Ambulance 635,537 (detail[25]) -> Ambulance Fees, Airport 181,490 (detail[31]) -> Rentals, Recreation Center/Pool/Park fees and admissions (detail[37], [43], [44], [50]) -> Recreation Fees. user_rules.py matches labels only ('Rental and fees') and won't move them."},
+    {"severity": "warning", "path": "detail[12].category", "page": 16,
+     "extracted": "intergovernmental/state aid (county/other local governments)", "on_page": "Rural Fire reimbursements 11,808 (Fire); 67,877 (Ambulance, detail[24]); CRA reimbursement 148,336 (Community Development, detail[69])",
+     "issue": "The extractor rules put rural fire contracts under charges for services/fees, and the user rule sends reimbursements to reimbursements/refunds. Intergovernmental can be defended (payments from the rural fire district or the CRA component unit), but it is a judgment call."}
   ]
 }

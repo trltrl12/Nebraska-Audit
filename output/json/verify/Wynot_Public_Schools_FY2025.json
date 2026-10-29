@@ -1,14 +1,22 @@
 {
   "stem": "Wynot_Public_Schools_FY2025",
-  "values_checked": 235,
+  "values_checked": 240,
   "issues": [
+    {"severity": "error", "path": "receipts[15].category", "page": 7,
+     "extracted": "charges for services/fees", "on_page": "1910 Rental 810",
+     "issue": "the user rules make Rentals its own receipt category (out of charges for services). The same line in detail[6] already uses Rentals, so the report is inconsistent with itself"},
+    {"severity": "error", "path": "detail[93].category", "page": 13,
+     "extracted": "charges for services/fees", "on_page": "School Nutrition Fund - Sales 94,794",
+     "issue": "the user rules make lunch/meal sales School Lunch Sales. The statement-level receipt receipts[12] (Nutrition Program receipts 94,794) already uses School Lunch Sales, so the report is inconsistent with itself"},
     {"severity": "warning", "path": "detail[75]", "page": 6,
-     "extracted": "Reclassification column contra lines detail[75]-[80]: Instruction +102,729; O&M (174,806); Transportation (90,000); State categorical (17,086); Facilities (194); Federal programs (130,643); net (310,000)",
-     "on_page": "General Fund Components Reclassification column, same figures; Transfers from other funds (310,000)",
-     "issue": "The reclassification column mixes a function reclassification (State categorical, Facilities and Federal programs 147,923 moved into Instruction 102,729) with the 310,000 hidden transfer to the Depreciation/Employee Benefit funds. So the per-function contra amounts are not purely transfer amounts. The net (310,000) and the schedule total 4,099,407 tie. Already marked review."},
-    {"severity": "warning", "path": "detail[106].category", "page": 14,
-     "extracted": "support services",
-     "on_page": "Activities Fund - Other expenses 123,371",
-     "issue": "The category list has 'student activities' for activity fund spending. The extractor followed the statement, which puts it under Student support services (p3). This is a defensible judgment call and is already marked review."}
+     "extracted": "Reclassification contra lines detail[75]-[80]: Instruction +102,729; O&M (174,806); Transportation (90,000); State categorical (17,086); Facilities (194); Federal programs (130,643); net (310,000)",
+     "on_page": "General Fund Components, Reclassification column (same figures); Transfers from other funds (310,000)",
+     "issue": "the reclassification column mixes a function reclassification (147,923 of State categorical, Facilities and Federal programs moved into Instruction) with the 310,000 hidden transfer to the Depreciation and Employee Benefit funds, so the per-function contra amounts are not pure transfer amounts. The net (310,000) and the schedule total 4,099,407 tie (marked review)"},
+    {"severity": "warning", "path": "disbursements[1]", "page": 3,
+     "extracted": "Student support services 358,279, support services / Pupils", "on_page": "Student support services: General Fund 234,908, Other Governmental Funds 123,371, Total 358,279",
+     "issue": "the 123,371 in the Other Governmental Funds column is Activities Fund spending (p14), which would be student activities under the category list. The printed line was kept whole as support services. This is defensible because it is one printed line, but 34% of it is activity-fund spending"},
+    {"severity": "warning", "path": "detail[116].original_label", "page": 17,
+     "extracted": "Public power district tax", "on_page": "Public power district",
+     "issue": "original_label differs from the printed label (the printed text is kept in printed_label), and no user rename rule covers this label"}
   ]
 }

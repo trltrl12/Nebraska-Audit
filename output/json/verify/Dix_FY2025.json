@@ -1,21 +1,15 @@
 {
   "stem": "Dix_FY2025",
-  "values_checked": 37,
+  "values_checked": 48,
   "issues": [
-    {"severity": "warning", "path": "beginning_cash", "page": 1,
-     "extracted": 86260.98, "on_page": "Line 3 Subtotal of Beginning Balance: General 18,622.63 + Street 67,638.35 (incl. investments 6,501.00 + 12,933.63)",
-     "issue": "beginning_cash/ending_cash are the form's cash+investments subtotals (correct roll-forward), but beginning_investments 19,434.63 and ending_investments 19,893.51 are also filled although they are already inside cash; anyone adding the fields would double count"},
-    {"severity": "warning", "path": "report_discrepancies", "page": 2,
-     "extracted": null, "on_page": "Crossed-out Exhibit A p1 version: Water Local Receipts Other 140,675.57, Water ending 3,176.44, total ending 119,113.49",
-     "issue": "unmarked page 1 (142,684.68 / 121,122.60) is correctly used and agrees with p3/p4/p5, but the void version's differing figures are only in notes and a line review, not in report_discrepancies as the voided-version rule asks"},
-    {"severity": "warning", "path": "receipts[7].category", "page": 1,
-     "extracted": "other", "on_page": "Local Receipts: Other General 8,258.18 + Street 10,100.77 = 18,358.95",
-     "issue": "nothing on the page says what this is; it is 13.9% of governmental receipts (>10% in other), so it goes to review"},
     {"severity": "warning", "path": "receipts[8].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Water 142,684.68 / Sewer 13,144.03 / Garbage 37,740.31)",
-     "issue": "receipts[8]-[10]: the line is printed only as 'Other'; treating it as utility user charges is an assumption (already marked review)"},
-    {"severity": "warning", "path": "disbursements[2].category", "page": 3,
-     "extracted": "debt service principal", "on_page": "Debt Service Street 12,382.46; Water 52,170.00 (disbursements[3])",
-     "issue": "the page doesn't split principal and interest; the whole line was put in principal (already marked review)"}
+     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other, Water Fund 142,684.68",
+     "issue": "This report puts the Garbage Fund's identical 'Other' line in Utility Charges but the Water and Sewer lines in charges for services/fees. Under the 2026-10-28 rule, utility fund charges are Utility Charges. The category is also an assumption, because the label is only 'Other'."},
+    {"severity": "warning", "path": "receipts[9].category", "page": 1,
+     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other, Sewer Fund 13,144.03",
+     "issue": "Same inconsistency as the Water line: should probably be Utility Charges, like the Garbage line."},
+    {"severity": "warning", "path": "report_discrepancies", "page": 2,
+     "extracted": null, "on_page": "Crossed-out Exhibit A p1: Water local other 140,675.57, total receipts 323,289.13, ending 119,113.49",
+     "issue": "The voided page's figures that differ from p1 are described only in notes, not in report_discrepancies. The unmarked page 1 is correctly used."}
   ]
 }

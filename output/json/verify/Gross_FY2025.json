@@ -1,15 +1,15 @@
 {
   "stem": "Gross_FY2025",
-  "values_checked": 13,
+  "values_checked": 14,
   "issues": [
-    {"severity": "warning", "path": "report_discrepancies", "page": 1,
-     "extracted": null, "on_page": "Line 24 Ending Balance 10,998.49 vs line 26/28 Net Cash Balance / Subtotal of Ending Balances 10,998.00",
-     "issue": "The form says lines 24 and 28 must agree, but they differ by 0.49. This is mentioned only in notes. There is no report_discrepancies entry."},
+    {"severity": "error", "path": "report_discrepancies", "page": 1,
+     "extracted": null, "on_page": "Line 24 Ending Balance 10,998.49 vs line 26/28 Net Cash Balance / Subtotal of Ending Balances 10,998.00 (form says lines 24 and 28 must agree)",
+     "issue": "The printed report doesn't agree with itself (difference 0.49); mentioned only in notes, report_discrepancies[] is missing"},
     {"severity": "warning", "path": "balance_sheet.assets[0].amount", "page": 1,
      "extracted": 10998.49, "on_page": "Net Cash Balance (line 26) 10,998.00",
-     "issue": "The asset is labelled Net Cash Balance but uses the line 24 Ending Balance figure (10,998.49), not the printed line 26 amount (10,998.00). It is not marked computed, and the label mixes the two lines."},
-    {"severity": "warning", "path": "decision_needed", "page": 2,
-     "extracted": null, "on_page": "Duplicate Exhibit A p1 crossed out with red X; line 26/28 Net Cash Balance 18,599.80",
-     "issue": "The voided duplicate page was correctly ignored. Its differing figure (18,599.80) is recorded only in notes, with no report_discrepancies or decision_needed entry. A person may want to confirm which version was filed."}
+     "issue": "Label names line 26 Net Cash Balance but the amount is the line 24 Ending Balance; defensible choice (ties to roll-forward) but the printed line 26 figure is 10,998.00"},
+    {"severity": "warning", "path": "notes", "page": 2,
+     "extracted": "p2 crossed-out duplicate ignored", "on_page": "Crossed-out Exhibit A page 1 with line 26/28 Net Cash Balance 18,599.80",
+     "issue": "Voided duplicate page with differing figures; per the crossed-out page rule its differing figure could be recorded in report_discrepancies with a review note"}
   ]
 }

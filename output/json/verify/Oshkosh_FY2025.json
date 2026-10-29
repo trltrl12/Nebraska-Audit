@@ -1,46 +1,25 @@
 {
   "stem": "Oshkosh_FY2025",
-  "values_checked": 89,
+  "values_checked": 198,
   "issues": [
-    {
-      "severity": "error",
-      "path": "missing",
-      "page": 9,
-      "extracted": "detail: [] (no lines)",
-      "on_page": "Budget and Actual - All Funds schedule: revenues Taxes and special assessments 503,132.38 (budget 574,535), Licenses and permits 3,819.00, Intergovernmental 191,305.81, Charges for services 750,041.79, Interest 71,826.50, Grants and donations 3,376.00, Keno proceeds 32,138.88, Other 166,986.19, Total revenues 1,722,626.55; expenditures General Government 487,189.08, Streets 247,490.33, Pool 55,735.35, Library 61,724.11, Auditorium 12,285.69, Culture and Recreation 35,712.59, Junkyard 189,829.60, Sewer 62,190.98, Water 157,432.11, Debt service Principal 168,917.25, Interest and charges 102,069.46, Total expenditures 1,580,576.55",
-      "issue": "[fixed] The only supplementary schedule was left out of detail[] because it mixes fund types. The expenditure lines can be separated: the six governmental function lines add to exactly 900,137.15 (the governmental statement total), and Junkyard/Sewer/Water are business-type. Revenue and debt lines are mixed and could be recorded with fund 'All funds' and a review note. The extractor rules ask for every budget-to-actual line with actual and budget_final."
-    },
-    {
-      "severity": "warning",
-      "path": "decision_needed",
-      "page": 4,
-      "extracted": "receipts[4] 'In Lieu' 12,516.74 recorded as other taxes (receipt)",
-      "on_page": "p4 prints 'In Lieu 12,516.74'; p2 Statement of Activities prints the same 12,516.74 as 'Bond proceeds' under general revenues",
-      "issue": "If this is bond/loan proceeds it belongs in debt_proceeds, not receipts. The line has a review note, but there is no decision_needed entry for this question, which only a person can settle."
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[21].category",
-      "page": 5,
-      "extracted": "debt service principal 53,200.00",
-      "on_page": "Debt service (53,200.00) under Other financing sources (uses)",
-      "issue": "Principal and interest are combined. p2 shows governmental interest expense 13,200.00, and p9 debt lines imply principal 40,000 (168,917.25 - 128,917.25 business principal on p8). Recording the whole 53,200 as principal is allowed (the line itself isn't split on p5), but 13,200 is interest."
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[0..20].category",
-      "page": 4,
-      "extracted": "general government for all object lines (about 720k)",
-      "on_page": "p9 prints the governmental function split: General Government 487,189.08, Streets 247,490.33, Pool 55,735.35, Library 61,724.11, Auditorium 12,285.69, Culture and Recreation 35,712.59 (sum 900,137.15); p2: Streets and Highways 247,490.33",
-      "issue": "Following the 'listed by object' rule puts the street, pool and library spending under general government. This is defensible under the rules, but it overstates general government by about 412k compared with the report's own function split."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[15].original_label",
-      "page": 7,
-      "extracted": "Other (operating revenue)",
-      "on_page": "Other",
-      "issue": "The label has a parenthetical added. It is not the printed text."
-    }
+    {"severity": "warning", "path": "notes", "page": null,
+     "extracted": "... Read pages 1-9 of 9 Detail (user 2026-10-27): per-fund lines ... replace the combined schedule.",
+     "on_page": "9 pages in trimmed PDF",
+     "issue": "Page count is right (1-9 of 9) and every page's lines are covered, but notes no longer END with the 'Read pages 1-N of N' marker: the user_rules text was appended after it. Notes also still describe the p9 all-funds budget schedule as recorded in detail ('fund All funds'), which is no longer true (stale text)."},
+    {"severity": "warning", "path": "disbursements[21].amount", "page": 5,
+     "extracted": 40000.0, "on_page": "Debt service (53,200.00) under Other financing sources (uses)",
+     "issue": "Debt service 53,200 split into principal 40,000 / interest 13,200. Not printed on p5 itself; interest 13,200 comes from the Statement of Activities (p2) and is consistent with p9 (principal 168,917.25 less business 128,917.25 on p8 = 40,000). Marked computed/split_from/review; defensible but the split is derived across statements."},
+    {"severity": "warning", "path": "receipts[13].category", "page": 7,
+     "extracted": "charges for services/fees", "on_page": "Charge for services 671,238.23 (Water 337,187.63, Sewer 178,506.76, Junkyard 155,543.84)",
+     "issue": "User rule: utility fund sales/charges -> Utility Charges. 515,694.39 of the line is water/sewer charges (detail lines use Utility Charges); the receipt line could be Utility Charges (dominant), with Junkyard the remainder."},
+    {"severity": "warning", "path": "decision_needed[0].recorded_as", "page": 2,
+     "extracted": "receipt, category other taxes (In Lieu), kept in receipts for now", "on_page": "In Lieu 12,516.74 (p4); Bond proceeds 12,516.74 (p2)",
+     "issue": "recorded_as is stale: the line is now category In Lieu of Tax, not other taxes."},
+    {"severity": "warning", "path": "reported_totals.governmental.disbursements", "page": 4,
+     "extracted": 900137.15, "on_page": "Total expenditures 900,137.15; printed lines sum to 894,115.97",
+     "issue": "Report itself doesn't add up by 6,021.18 (confirmed visually; all 21 expenditure lines match the page). Correctly recorded in report_discrepancies; listed for awareness."},
+    {"severity": "warning", "path": "business_type.ending", "page": 7,
+     "extracted": 4468447.96, "on_page": "Water Total operating expenses 368,127.34 vs lines 365,451.09",
+     "issue": "Report itself doesn't add up: Water column expense lines sum to 365,451.09 but 368,127.34 printed, so the business roll-forward is off by 2,676.25. Recorded in report_discrepancies; listed for awareness."}
   ]
 }

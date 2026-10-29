@@ -2,14 +2,7 @@
   "stem": "Dawson_FY2025",
   "values_checked": 32,
   "issues": [
-    {"severity": "warning", "path": "disbursements[2].fund_type", "page": 3,
-     "extracted": "governmental", "on_page": "Line 45 Solid Waste 14,466.75 (Business-Type Activities section, General Fund column)",
-     "issue": "Printed under Business-Type Activities but paid from the General Fund column; kept governmental (defensible because no separate solid-waste fund exists). original_label also has '(General Fund column)' added to the printed label 'Solid Waste'"},
-    {"severity": "warning", "path": "receipts[10].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Sewer 17,445.00 / Water 28,588.24)",
-     "issue": "Utility charges assumed from the fund columns (also applies to receipts[11]); the page labels them only 'Local Receipts: Other'. original_label has fund names added"},
-    {"severity": "warning", "path": "receipts[9].category", "page": 1,
-     "extracted": "other", "on_page": "Local Receipts: Other (General Fund) 49,747.47",
-     "issue": "Unlabeled 'other' line comes to about 42% of governmental receipts (over the 10% review threshold); nothing on the page says what it is"}
+    {"severity": "warning", "path": "receipts[10].category", "page": 1, "extracted": "charges for services/fees", "on_page": "Local Receipts: Other, Sewer Fund 17,445.00 / Water Fund 28,588.24", "issue": "These are the only receipts of the Sewer and Water funds, so they are almost certainly utility collections. Under the user's 2026-10-28 rule that is category Utility Charges, not charges for services/fees. Applies to receipts[10] and receipts[11]. The printed label is only 'Other', so this remains an assumption."},
+    {"severity": "warning", "path": "disbursements[2].fund_type", "page": 3, "extracted": "governmental", "on_page": "Solid Waste 14,466.75 (line 45, under Business-Type Activities, General Fund column)", "issue": "The form lists Solid Waste under business-type activities, but it was paid from the General Fund column. Keeping it governmental (category utilities) keeps the General Fund roll-forward intact and is defensible; the line is already marked review."}
   ]
 }

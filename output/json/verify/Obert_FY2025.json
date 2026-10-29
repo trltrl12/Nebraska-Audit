@@ -1,18 +1,21 @@
 {
   "stem": "Obert_FY2025",
-  "values_checked": 33,
+  "values_checked": 36,
   "issues": [
     {"severity": "warning", "path": "decision_needed", "page": 1,
-     "extracted": "receipts[8] Local Receipts: Other 23,489.76 in category other; no decision_needed entry",
-     "on_page": "Local Receipts: Other, General Fund 23,489.76 (of 35,159.30 total receipts)",
-     "issue": "An unexplained line that is about 67% of governmental receipts. The General Fund also pays Water 10,690.40 and Solid Waste 3,615.50, so this is probably water/refuse charges collected in the General Fund, but nothing on the page says so. Only a person can settle it, and decision_needed[] doesn't exist."},
+     "extracted": null, "on_page": "Local Receipts: Other 23,489.76 of total receipts 35,159.30 (67%)",
+     "issue": "An unexplained 'Other' line makes up most of the year's governmental receipts, which is the kind of question only a person can settle. It is marked review but has no decision_needed entry."},
     {"severity": "warning", "path": "disbursements[3].fund_type", "page": 3,
-     "extracted": "governmental (Solid Waste 3,615.50; also disbursements[4] Water 10,690.40)",
-     "on_page": "Business-Type Activities lines 45 and 48 printed in the GENERAL FUND column",
-     "issue": "Utility operations are accounted for in the General Fund. Keeping them governmental by column is defensible (the extractor flagged it with review), but these are business-type activities per the row heading."},
-    {"severity": "warning", "path": "disbursements[5].category", "page": 3,
-     "extracted": "debt service principal",
-     "on_page": "Debt Service 1,011.00 (Water Bond column); debt schedule p5: 5,278.07 outstanding at 5.00%",
-     "issue": "Principal and interest are combined (about 264 of it would be interest at 5% on roughly 5,278). Recorded as principal with review. Judgment call."}
+     "extracted": "governmental", "on_page": "Business-Type Activities: Solid Waste 3,615.50 and Water 10,690.40 in the General Fund column",
+     "issue": "The report lists these lines under Business-Type Activities but pays them from the General Fund, so the fund type is debatable (already marked review). Applies to disbursements[3] and [4]."},
+    {"severity": "warning", "path": "beginning_cash.amount", "page": 1,
+     "extracted": 10252.89, "on_page": "Net Cash Balance 4,275.70 + Investments 5,977.19 = Subtotal 10,252.89",
+     "issue": "beginning_cash and ending_cash (10,596.50) include investments, while beginning_investments and ending_investments are null. The roll-forward holds, but the cash figure is overstated relative to the cash-only line."},
+    {"severity": "warning", "path": "balance_sheet.equity", "page": 1,
+     "extracted": "equity lines have no category", "on_page": "Subtotal of Ending Balances 10,596.50 / 3,194.22",
+     "issue": "The equity items have no category field."},
+    {"severity": "warning", "path": "missing", "page": 1,
+     "extracted": null, "on_page": "County Treasurer Balance at October 1, 2024 $286.27; at September 30, 2025 123.83",
+     "issue": "Memo county treasurer balances are printed below the statement but not recorded. They are outside the fund balances, so leaving them out is probably fine."}
   ]
 }

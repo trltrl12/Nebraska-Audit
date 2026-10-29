@@ -1,30 +1,9 @@
 {
   "stem": "Whitney_FY2025",
-  "values_checked": 33,
+  "values_checked": 36,
   "issues": [
-    {
-      "severity": "error",
-      "path": "receipts[9].amount",
-      "page": 1,
-      "extracted": 11760.5,
-      "on_page": 11762.7,
-      "issue": "[fixed] Line 18 Local Receipts: Other, General 11,060.50 + Street 702.20 = 11,762.70, not 11,760.50 (addition error). With 11,760.50 governmental receipts sum to 35,944.83, 2.20 short of the printed 39,947.03 - 4,000 transfer = 35,947.03, and the roll-forward is off by 2.20. The JSON's own notes use 35,947.03."
-    },
-    {
-      "severity": "warning",
-      "path": "beginning_investments",
-      "page": 1,
-      "extracted": 37694.77,
-      "on_page": "Line 2 Investments, Street 37,694.77 (also inside line 3 subtotal)",
-      "issue": "beginning_cash/ending_cash already include the Street investments (line 3/28 subtotals), and beginning_/ending_investments repeat them. The rules say investments are 'informational and not added to cash', so anything that adds them would double count. This is explained in notes, but please confirm the convention."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[10].category",
-      "page": 1,
-      "extracted": "charges for services/fees",
-      "on_page": "Local Receipts: Other (Water column) 16,493.99",
-      "issue": "The page doesn't say what this is. Assuming water/sewer charges is reasonable (the line is already marked review). original_label adds '(Water column)', which isn't printed."
-    }
+    {"severity": "warning", "path": "receipts[10].category", "page": 1,
+     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other, Water column 16,493.99",
+     "issue": "The line is unlabeled 'Other' in the Water fund. If it is water sales, the user's 2026-10-28 rule puts utility fund charges in category Utility Charges, not charges for services/fees. Either way this is an assumption; the line already has a review note."}
   ]
 }

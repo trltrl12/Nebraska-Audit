@@ -1,86 +1,15 @@
 {
   "stem": "Papillion_La_Vista_Public_School_FY2025",
-  "values_checked": 252,
+  "values_checked": 402,
   "issues": [
-    {
-      "severity": "error",
-      "path": "disbursements[4].amount",
-      "page": 7,
-      "extracted": 4739240,
-      "on_page": "Support services - Staff 4,739,240 (p7); Statement of Activities p4 shows Support services - Instructional 3,739,240",
-      "issue": "[fixed] A transfer is counted as spending. The government-wide Statement of Activities (p4) reports this function as exactly 1,000,000 lower than the fund statement and the GF schedule (p14 Total support services - instructional 4,739,240, which includes 2230 Technology 1,000,006). The Depreciation Fund (p10, p22) shows a 1,000,000 'Transfer from general fund' that has no matching outflow in the General Fund's other financing (p16 shows only 75,000). The hidden-transfer rule applies: split into 3,739,240 spending plus a 1,000,000 transfer out, both with split_from (p14/p4) and review."
-    },
-    {
-      "severity": "error",
-      "path": "transfers_out.amount",
-      "page": 7,
-      "extracted": 75000,
-      "on_page": "GF Transfers in (out) (75,000) plus the 1,000,000 hidden in GF support services - instructional (p4 vs p7/p14)",
-      "issue": "[fixed] Should be 1,075,000 (computed: 75,000 printed + 1,000,000 reclassified from GF support services spending), which matches transfers_in 1,075,000. The identity still holds after the change because disbursements drop by the same 1,000,000."
-    },
-    {
-      "severity": "error",
-      "path": "missing",
-      "page": 14,
-      "extracted": null,
-      "on_page": "GF Support services - instructional group (total 4,739,240) contains the 1,000,000 transfer to the Depreciation Fund; the transfer is not in GF other financing",
-      "issue": "[fixed] detail lacks a contra expenditure line (-1,000,000, department 'Support services - instructional', split_from naming the group's lines on p14 and the p4 elimination, review) and a GF 'other financing' line of -1,000,000 (transfer to Depreciation Fund). As things stand, the same 1,000,000 shows up both as GF spending and as a Depreciation Fund transfer in (detail[163]). The p14 page does not say which line holds it; 2230 Technology 1,000,006 is the likely one, but the rules say not to guess."
-    },
-    {
-      "severity": "error",
-      "path": "receipts[11].category",
-      "page": 7,
-      "extracted": "other",
-      "on_page": "Other 951,926 = GF 87,846 (rental 19,269 + other local 68,577) + Special Building 594,826 (other local 175,000 + 3599 other state categorical programs 419,826) + Nonmajor 269,254 (Activities other local 181,942 + Cooperative receipts 87,312)",
-      "issue": "[fixed] The extractor's own breakdown puts 507,138 of this line (53%) under intergovernmental/state aid (419,826 state categorical, plus 87,312 Cooperative, which detail[160] codes as intergovernmental). The rule says a category above half sets the category, so this should be intergovernmental/state aid with review naming the mix. Note that without the Cooperative receipts the state share is 44%, so the fix depends on how the Cooperative receipts are classified."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[1].category",
-      "page": 7,
-      "extracted": "motor vehicle tax",
-      "on_page": "Motor vehicle pro-rate 8,378,243",
-      "issue": "The statement label says pro-rate, which the rules treat as state aid. But the GF schedule (p11, 1125 Motor vehicle taxes) and the Statement of Activities (p5 Taxes - Motor vehicle 8,378,243, with pro-rate shown separately at 192,739) both show it is motor vehicle tax. The category is defensible; the label is the report's mislabel. Already marked review."
-    },
-    {
-      "severity": "warning",
-      "path": "ending_cash",
-      "page": 7,
-      "extracted": 109566695,
-      "on_page": "Fund balances - ending 109,566,695; governmental cash and cash equivalents 110,453,097 (p6, p3)",
-      "issue": "beginning_cash and ending_cash are the modified-cash fund balances (they include inventories 252,570 and are net of payroll liabilities), not cash. The governmental cash figure is 110,453,097. The same applies to business_type: its measure is 'cash', but beginning and ending are net position (cash 11,312,046 less payroll liabilities 1,105). Defensible because these are the balances the statement rolls forward."
-    },
-    {
-      "severity": "warning",
-      "path": "report_discrepancies",
-      "page": 7,
-      "extracted": "only the p5 74,492 difference recorded",
-      "on_page": "Total Governmental Funds 'Transfers in (out)' 1,000,000; Total - All Funds other financing 103,838,422 (p24)",
-      "issue": "The fund statements' transfers do not net to zero (1,075,000 in vs 75,000 out). The Statement of Activities shows why (p4 Support services - Instructional 3,739,240 vs 4,739,240). decision_needed[0] asks where the 1,000,000 came from; the report itself answers that. The entry should be updated to describe the reclassification rather than an unexplained one-sided transfer."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[160].category",
-      "page": 21,
-      "extracted": "intergovernmental/state aid / county/other local governments",
-      "on_page": "5690 Receipts 87,312 (Cooperative Fund)",
-      "issue": "The source is not described; local-government cooperative money is a guess. Already marked review. This choice affects error receipts[11]."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[161].detail_category",
-      "page": 21,
-      "extracted": "salaries and wages",
-      "on_page": "1100 Instructional salaries and benefits 87,312",
-      "issue": "Line mixes salaries and benefits; no review flag here, unlike the School Nutrition 'Salaries and benefits' line."
-    },
-    {
-      "severity": "warning",
-      "path": "missing",
-      "page": 23,
-      "extracted": null,
-      "on_page": "report page 48 (between trimmed p23 = report p47 and p24 = report p49)",
-      "issue": "Report page 48 is not in the trimmed PDF, so its contents are unknown. It could be a supplementary schedule (for example a per-account activities schedule). The totals on p24 tie to the fund schedules, so no figures appear to be missing. Check the source PDF."
-    }
+    {"severity": "warning", "path": "receipts[14].category", "page": 7,
+     "extracted": "intergovernmental/state aid", "on_page": "Other 951,926 (GF rentals 19,269 + other local 68,577; Special Building other local 175,000 + 3599 state categorical 419,826; Activities other local 181,942; Cooperative 87,312)",
+     "issue": "State money is only 44% of this line (419,826 / 951,926), so no category is above half. Under the 'other' last-resort rule it should stay other with review unless the Cooperative receipts count as intergovernmental. This is already listed in decision_needed."},
+    {"severity": "warning", "path": "disbursements[17].original_label", "page": 7,
+     "extracted": "Buildings and sites", "on_page": "Buildings and sites 59,177,576",
+     "issue": "This line is category capital outlay but is not relabelled 'Capital Outlay: <function>' with printed_label, as the 2026-10-26/28 rule requires. The same applies to detail Special Building '4700 Building', '4700 Other professional services' and '4700 Technology hardware' (p18). user_rules.py may fix this."},
+    {"severity": "warning", "path": "disbursements[4].amount", "page": 7,
+     "extracted": 3739240, "on_page": "Support services - Staff 4,739,240 (Statement of Activities p4: Instructional 3,739,240)",
+     "issue": "Removing the hidden 1,000,000 transfer is supported by the p4 figure. The General Fund schedule, however, shows only 75,000 transferred out, and the line holding the 1,000,000 is not identified (contra line assumed). This is an assumption and is already in decision_needed."}
   ]
 }

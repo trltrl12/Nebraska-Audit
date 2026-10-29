@@ -4,15 +4,15 @@
   "issues": [
     {"severity": "error", "path": "receipts[3].category", "page": 5,
      "extracted": "other taxes", "on_page": "Other 46,851 split: Public Power District Sales Tax 13,741 (p8, 1120-000)",
-     "issue": "the split item is public power district sales tax, which has its own receipt category 'Public Power District Sales Tax' (as used for the matching detail line on p8); recorded as 'other taxes' with detail_category 'Other / Miscellaneous Receipts'"},
+     "issue": "[fixed 2026-10-28: category and detail_category set to Public Power District Sales Tax] the split item is public power district sales tax, which has its own receipt category 'Public Power District Sales Tax' (as used for the matching detail line on p8); recorded as 'other taxes' with detail_category 'Other / Miscellaneous Receipts'"},
     {"severity": "error", "path": "detail[111].category", "page": 19,
      "extracted": "charges for services/fees", "on_page": "Activity Fund, District: Restricted grants 500",
-     "issue": "activity-fund 'Restricted grants' receipt is not a charge for services; it should be Extracurricular Receipts (activity fund receipts) or donations/contributions, and it is inconsistent with its own detail_category 'student activity receipts'"},
+     "issue": "[fixed 2026-10-28: category set to Extracurricular Receipts (activity fund receipt)] activity-fund 'Restricted grants' receipt is not a charge for services; it should be Extracurricular Receipts (activity fund receipts) or donations/contributions, and it is inconsistent with its own detail_category 'student activity receipts'"},
     {"severity": "warning", "path": "receipts[17].category", "page": 7,
      "extracted": "charges for services/fees", "on_page": "Charges for Sales and Services 13,265 (= Lunchroom Sales 13,265, p16)",
-     "issue": "School Nutrition Fund sales; the user's rule moves lunch/meal sales to 'School Lunch Sales' (the p16 detail line already uses it)"},
+     "issue": "[fixed 2026-10-28: category set to School Lunch Sales] School Nutrition Fund sales; the user's rule moves lunch/meal sales to 'School Lunch Sales' (the p16 detail line already uses it)"},
     {"severity": "warning", "path": "disbursements[3].original_label", "page": 5,
      "extracted": "Instruction (Support Services)", "on_page": "Instruction",
-     "issue": "printed row label is 'Instruction' under the Support Services heading; the parenthetical was added by the extractor"}
+     "issue": "[fixed 2026-10-28: original_label set to 'Instruction' as printed] printed row label is 'Instruction' under the Support Services heading; the parenthetical was added by the extractor"}
   ]
 }

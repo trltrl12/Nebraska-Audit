@@ -1,68 +1,21 @@
 {
   "stem": "Weston_FY2025",
-  "values_checked": 82,
+  "values_checked": 78,
   "issues": [
-    {
-      "severity": "error",
-      "path": "report_discrepancies",
-      "page": 5,
-      "extracted": 88839,
-      "on_page": 88227,
-      "issue": "[fixed 2026-10-22: report_discrepancies has the 612 double count as totals and reconcile entries, p5 checked] The Total Governmental Funds disbursement lines as printed (General government 48,477 + Street 30,677 + Cemetery 901 + Weston 150 8,172 + Capital outlay 612) sum to 88,839, not the printed TOTAL DISBURSEMENTS 88,227. The total-column General government 48,477 = General Fund 47,865 + Keno Fund capital outlay 612, so the 612 is counted twice in the total column (p2 also shows General Government 48,477 inside total 88,227). The JSON has no report_discrepancies entry, so the governmental identity is off by 612 (68,435 + 161,811 - 88,839 = 141,407 vs ending 142,019). Add a report_discrepancies entry (check 'totals', difference -612, source_page 5). The notes' identity uses the printed total instead of the line sum."
-    },
-    {
-      "severity": "error",
-      "path": "detail[2]",
-      "page": 8,
-      "extracted": {
-        "original_label": "Other local sources (governmental part)",
-        "amount": 38233
-      },
-      "on_page": "Other local sources 220,850 (budget 199,203), one line",
-      "issue": "[fixed] The page doesn't print this split. 38,233 is a plug computed from the p7 proprietary totals (220,850 - 182,617), and it doesn't match the p5 governmental local receipts either (interest 2,378 + licenses 1,066 + other 35,089 = 38,533; the schedule's state sources 50,118 differ from p5 State receipts 49,818 by 300). The rule says to keep the line as printed (one item, 220,850, budget_final 199,203) with its best category and a review note. budget_final is also lost (null)."
-    },
-    {
-      "severity": "error",
-      "path": "detail[3]",
-      "page": 8,
-      "extracted": {
-        "original_label": "Other local sources (utility part)",
-        "amount": 182617
-      },
-      "on_page": "Other local sources 220,850 (budget 199,203), one line",
-      "issue": "[fixed] This is the other half of the unprinted split of 'Other local sources'. It is derived from p7, not printed on p8. It should be merged back into one printed line of 220,850."
-    },
-    {
-      "severity": "warning",
-      "path": "ending_cash",
-      "page": 5,
-      "extracted": 142019,
-      "on_page": "Fund Balance - End of year 142,019; balance sheet p4 cash 315,951 + county treasurer 2,570 + investments 82,359 = 400,880",
-      "issue": "beginning_cash/ending_cash are the fund-balance roll-forward, which nets due from other funds 148,771 and due to other funds 407,632. Actual governmental cash and investments are 400,880. This follows the roll-forward rule, but the 'cash' figure is far from the cash held."
-    },
-    {
-      "severity": "warning",
-      "path": "beginning_cash",
-      "page": 5,
-      "extracted": 68435,
-      "on_page": "Cemetery Fund: beginning previously reported 86,335, restated 86,355",
-      "issue": "The report has a typo: the Cemetery restated beginning balance 86,355 should be 86,335 (86,335 + 1,347 = 87,682 ending). The restated row's fund columns sum to 68,455, but the printed total 68,435 is right. No JSON value is affected."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[6].category",
-      "page": 5,
-      "extracted": "donations/contributions",
-      "on_page": "Other general receipts, Weston 150 Fund column 29,124; p2 shows it as Operating Grants and Contributions",
-      "issue": "The page doesn't say what this is. It could be grants from a government rather than private donations. Judgment call; it's already marked review."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[4].amount",
-      "page": 8,
-      "extracted": 46937,
-      "on_page": "Highway allocation and incentives 46,937 (p8) vs Streets and Public Works operating grants 46,637 (p2) and Streets Fund State receipts 46,637 (p5)",
-      "issue": "The budget schedule's highway allocation is 300 higher than the fund statements. As printed on p8, so the value is correct, but the two statements disagree by 300."
-    }
+    {"severity": "error", "path": "receipts[8].category", "page": 7,
+     "extracted": "charges for services/fees", "on_page": "Charges for services 178,183 (Electric, Water, Sewer, Garbage funds)",
+     "issue": "These are utility-fund charges (electric/water/sewer/garbage). Under the user's 2026-10-28 rule they belong in Utility Charges, not charges for services/fees. user_rules.py does not fix receipts that have no fund field."},
+    {"severity": "warning", "path": "detail", "page": 8,
+     "extracted": "combined all-funds Budgetary Comparison Schedule lines (pp8-9)", "on_page": "the only supplementary schedule is the all-funds Budgetary Comparison Schedule - Primary Government",
+     "issue": "The per-fund detail rule (user 2026-10-27/28, villages) says: when the only supplementary schedule is a combined all-funds one, detail is one line per fund column of the governmental (p5) and proprietary (p7) statements, and the combined lines are removed. The extractor kept the combined schedule instead. Its amounts and totals tie (344,428; 88,227; 167,951)."},
+    {"severity": "warning", "path": "detail[2]", "page": 8,
+     "extracted": "business-type, charges for services/fees, 220,850, split_from 'Other local sources 220,850 (p8)'", "on_page": "Other local sources 220,850 (all funds)",
+     "issue": "A single all-funds line that mixes governmental and utility receipts is tagged business-type. It carries split_from but was not actually split. The notes also say it 'was split into two lines', which contradicts the JSON. decision_needed covers the fund-type question."},
+    {"severity": "warning", "path": "balance_sheet.liabilities[0].category", "page": 1,
+     "extracted": "Internal Balances", "on_page": "Due to other funds 407,632 / 1,184",
+     "issue": "'Internal Balances' is an asset category and is not in the liability category list. 'other liabilities' (or a due-to-other-funds category) would fit. Same for liabilities[1]."},
+    {"severity": "warning", "path": "receipts[5].original_label", "page": 5,
+     "extracted": "Other general receipts (Keno Fund column)", "on_page": "Other general receipts",
+     "issue": "The extractor added fund-column text that is not printed in receipts[5]-[7]. The split by fund column matches the printed columns (2,833 / 29,124 / 2,433+299+400 = 3,132; total 35,089)."}
   ]
 }

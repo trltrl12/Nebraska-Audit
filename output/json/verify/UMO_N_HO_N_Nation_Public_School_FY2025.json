@@ -4,21 +4,21 @@
   "issues": [
     {"severity": "error", "path": "receipts[7].category", "page": 6,
      "extracted": "charges for services/fees", "on_page": "1910 Rentals of school equipment 34,213",
-     "issue": "The split piece is printed as rentals, and the user's rules give Rentals its own receipt category (taken out of charges for services). Category should be Rentals."},
+     "issue": "[fixed 2026-10-28: category set to Rentals, detail_category rentals] The split piece is printed as rentals, and the user's rules give Rentals its own receipt category (taken out of charges for services). Category should be Rentals."},
     {"severity": "error", "path": "detail[6].category", "page": 6,
      "extracted": "charges for services/fees", "on_page": "1910 Rentals of school equipment 34,213",
-     "issue": "Should be the Rentals receipt category (detail_category rentals is already right). It should also match receipts[7]."},
+     "issue": "[fixed 2026-10-28: category set to Rentals, matching receipts[7]] Should be the Rentals receipt category (detail_category rentals is already right). It should also match receipts[7]."},
     {"severity": "error", "path": "disbursements[7].category", "page": 4,
      "extracted": "Instruction", "on_page": "Operation of non-instructional services 320,698",
-     "issue": "This line is the General Fund facilities lines 4700 Building improvements 20,032 + 4900 Other facilities acquisition & construction 300,666 (p8). It is not instruction, and the line's own review note says 'categorized support services', which contradicts the category. It fits Building and Grounds, capital outlay or support services."},
+     "issue": "[fixed 2026-10-28: category set to Building and Grounds, review note corrected] This line is the General Fund facilities lines 4700 Building improvements 20,032 + 4900 Other facilities acquisition & construction 300,666 (p8). It is not instruction, and the line's own review note says 'categorized support services', which contradicts the category. It fits Building and Grounds, capital outlay or support services."},
     {"severity": "warning", "path": "detail[64].category", "page": 8,
      "extracted": "Building and Grounds", "on_page": "4700 Building improvements 20,032",
-     "issue": "Categorized differently from the sibling line detail[65] 4900 Other facilities acquisition & construction ('support services'). Both sit under the same 4000 Facilities acquisition heading and in the same statement line. They should share one category, and capital outlay may fit better."},
+     "issue": "[fixed 2026-10-28: 4700 and 4900 both Building and Grounds, matching the statement line] Categorized differently from the sibling line detail[65] 4900 Other facilities acquisition & construction ('support services'). Both sit under the same 4000 Facilities acquisition heading and in the same statement line. They should share one category, and capital outlay may fit better."},
     {"severity": "warning", "path": "detail[80].category", "page": 10,
      "extracted": "support services", "on_page": "Depreciation Fund 2900 Support Services, Other 70,150",
-     "issue": "The statement (p4) counts this in Maintenance and operation: 2,962,583 = 2610+2620+2660 (2,892,433) + 70,150. Building and Grounds would match the statement."},
+     "issue": "[fixed 2026-10-28: category set to Building and Grounds] The statement (p4) counts this in Maintenance and operation: 2,962,583 = 2610+2620+2660 (2,892,433) + 70,150. Building and Grounds would match the statement."},
     {"severity": "warning", "path": "disbursements[1].category", "page": 4,
      "extracted": "support services / Pupils", "on_page": "Student support services 1,249,345 (General 722,410 + Activities Fund 526,935)",
-     "issue": "This statement line mixes support services (Pupils) with 526,935 of Activities Fund student activity spending. The dominant part was picked, but the mix is not mentioned in the notes."}
+     "issue": "[fixed 2026-10-28: mix noted in a review note on the line and in notes] This statement line mixes support services (Pupils) with 526,935 of Activities Fund student activity spending. The dominant part was picked, but the mix is not mentioned in the notes."}
   ]
 }

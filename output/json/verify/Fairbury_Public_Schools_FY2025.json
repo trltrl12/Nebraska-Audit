@@ -4,10 +4,10 @@
   "issues": [
     {"severity": "error", "path": "detail[97].category", "page": 19,
      "extracted": "reimbursements/refunds", "on_page": "Non-reimbursable programs 20,691 (School Nutrition Fund receipts)",
-     "issue": "Non-reimbursable programs are a la carte/non-program meal sales, not a reimbursement or refund; the p3 statement counts this line inside 'Nutrition Program receipts' 252,030 (212,431 + 20,691 + 18,908), which the extraction itself categorizes as School Lunch Sales. Category should be School Lunch Sales (detail_category school lunch sales); the category also contradicts the line's own detail_category (other charges for services)."},
+     "issue": "[fixed 2026-10-28: category School Lunch Sales, detail_category school lunch sales (counted in p3 Nutrition Program receipts 252,030)] Non-reimbursable programs are a la carte/non-program meal sales, not a reimbursement or refund; the p3 statement counts this line inside 'Nutrition Program receipts' 252,030 (212,431 + 20,691 + 18,908), which the extraction itself categorizes as School Lunch Sales. Category should be School Lunch Sales (detail_category school lunch sales); the category also contradicts the line's own detail_category (other charges for services)."},
     {"severity": "warning", "path": "detail[98].category", "page": 19,
      "extracted": "charges for services/fees", "on_page": "Special functions 18,908 (School Nutrition Fund)",
-     "issue": "Nutrition fund special-function (catering) food sales; could be School Lunch Sales, consistent with the p3 Nutrition Program receipts line"},
+     "issue": "[fixed 2026-10-28: category School Lunch Sales, detail_category school lunch sales, consistent with p3 Nutrition Program receipts] Nutrition fund special-function (catering) food sales; could be School Lunch Sales, consistent with the p3 Nutrition Program receipts line"},
     {"severity": "warning", "path": "receipts[7].category", "page": 3,
      "extracted": "Fines and Licenses 50,770", "on_page": "Local license fees and fines: General 6,990 + Other Governmental 43,780 = 50,770",
      "issue": "The 43,780 Other Governmental Funds portion has no fines/licenses line in the nonmajor combining schedule (p8) or QCPU schedule (p16), which show only property tax, penalties, homestead 6,695, pro-rate 464 and interest, plus 37,816 unlisted. It is probably homestead/property tax credit money. The category follows the printed label and is marked review."},

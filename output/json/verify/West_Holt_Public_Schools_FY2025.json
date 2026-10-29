@@ -1,18 +1,21 @@
 {
   "stem": "West_Holt_Public_Schools_FY2025",
-  "values_checked": 220,
+  "values_checked": 235,
   "issues": [
-    {"severity": "warning", "path": "detail[36].budget_final", "page": 8,
+    {"severity": "error", "path": "detail[36].budget_final", "page": 8,
      "extracted": null, "on_page": 1560000,
-     "issue": "1200 Special education school age row prints Original and Final Budget 1,560,000. It may be the budget for the 1200 group (1200 + 1291), like the other heading budgets, but it is printed on the 1200 line itself."},
-    {"severity": "warning", "path": "receipts[17].category", "page": 3,
-     "extracted": "other", "on_page": "Other 26,990 (remainder 22,387 = GF other nonrevenue 1,083 + School Nutrition other local receipts 13,255 + Student Fee Fund Other 8,049, p6)",
-     "issue": "8,049 of the remainder is Student Fee Fund receipts (student fees), which could be charges for services/fees and not 'other'."},
-    {"severity": "warning", "path": "detail[113].detail_category", "page": 17,
-     "extracted": "miscellaneous revenue", "on_page": "Student Fee Fund - Other 8,049",
-     "issue": "The only receipt line in the Student Fee Fund is most likely student fees, so 'other charges for services' (category charges for services/fees) could fit better than miscellaneous/other."},
-    {"severity": "warning", "path": "detail[86].category", "page": 12,
-     "extracted": "capital outlay", "on_page": "Capital outlay 347,218 (Depreciation Fund); p5 puts all Depreciation spending under Student support services 81,469, O&M 300,602 and Student transportation 69,895",
-     "issue": "The function category doesn't match how the report's own statements classify this spending (no capital outlay function for the Depreciation Fund on p3/p5). It is already marked review."}
+     "issue": "1200 Special education school age prints Original and Final Budget 1,560,000 on its own row (not a heading line); budget_final left null"},
+    {"severity": "warning", "path": "detail[8].detail_category", "page": 7,
+     "extracted": "other charges for services", "on_page": "1955 Postsecondary receipts",
+     "issue": "category is Tuition Received but detail_category is the catch-all; 'tuition and fees' fits (and is what other reports use)"},
+    {"severity": "warning", "path": "receipts[8].category", "page": 7,
+     "extracted": "charges for services/fees", "on_page": "1910 Rent 200",
+     "issue": "rent should be category Rentals (user rule 2026-10-28); the matching detail line 1910 Rent uses Rentals, so the report is inconsistent"},
+    {"severity": "warning", "path": "detail[89].category", "page": 13,
+     "extracted": "charges for services/fees", "on_page": "Sales 149,315 (School Nutrition Fund)",
+     "issue": "school nutrition sales should be category School Lunch Sales (as the statement line receipts[11] is); detail_category school lunch sales is right"},
+    {"severity": "warning", "path": "detail[113].category", "page": 17,
+     "extracted": "other", "on_page": "Student Fee Fund - Other 8,049",
+     "issue": "Student Fee Fund receipts are student fees; user rule sends student fees to Extracurricular Receipts. Same 8,049 sits inside receipts[20] 'Other' 22,387"}
   ]
 }

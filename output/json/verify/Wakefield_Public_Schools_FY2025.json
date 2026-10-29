@@ -1,9 +1,12 @@
 {
   "stem": "Wakefield_Public_Schools_FY2025",
-  "values_checked": 184,
+  "values_checked": 190,
   "issues": [
-    {"severity": "warning", "path": "detail[115].budget_final", "page": 15,
-     "extracted": null, "on_page": "Loan repayment: budget 348,916, actual 538,648",
-     "issue": "Loan repayment was split into principal and interest using the Special Building column on p5. Both split items have budget_final null, so the printed budget of 348,916 is not carried anywhere. The same applies to detail[116]."}
+    {"severity": "error", "path": "receipts[9].category", "page": 7,
+     "extracted": "charges for services/fees", "on_page": "1910 Rental of school equipment and facilities 2,560",
+     "issue": "Rental income has its own receipt category Rentals (user rule 2026-10-28); the matching detail line (detail[6]) already uses Rentals, so the report is inconsistent"},
+    {"severity": "error", "path": "detail[91].category", "page": 13,
+     "extracted": "charges for services/fees", "on_page": "School Nutrition Fund: Sales 151,867",
+     "issue": "Lunch/meal sales have their own receipt category School Lunch Sales (user rule 2026-10-28); the same money in receipts[11] (Nutrition Program receipts) is School Lunch Sales"}
   ]
 }

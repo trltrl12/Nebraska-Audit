@@ -1,19 +1,15 @@
 {
   "stem": "York_County_FY2025",
-  "values_checked": 134,
+  "values_checked": 165,
   "issues": [
-    {"severity": "warning", "path": "detail[12].detail_category", "page": 14,
-     "extracted": "not itemized", "on_page": "Health Accident 1,123,385",
-     "issue": "The Health Accident department is the county's employee health insurance. 'employee benefits and payroll taxes' is more specific than 'not itemized'."},
+    {"severity": "warning", "path": "detail[2].detail_category", "page": 14,
+     "extracted": "charges for services/fees / other charges for services", "on_page": "Local 1,410,562",
+     "issue": "General Fund 'Local' is recorded as charges for services, but the Statement of Activities (p2) shows the county's Local receipts include interest income 605,590 and miscellaneous 127,970, most likely largely in the General Fund. The category is a judgment call (the line already has a review note). The same applies to the Inheritance Tax Local 7,238 (p5), Road Local 81,429 (p15) and Nonmajor Local 540,345 (p13)."},
+    {"severity": "warning", "path": "detail[52]", "page": 15,
+     "extracted": "DISBURSEMENTS 4,421,670 streets/highways", "on_page": "Road Fund DISBURSEMENTS 4,421,670 (p15); p4 Road column: Public works 4,235,343 + Capital outlay 186,327",
+     "issue": "The Road budget schedule prints one line, so it was recorded as streets/highways 'not itemized'. Of that, 186,327 is capital outlay on the governmental funds statement (p4). The amount is right; only the function split differs from the statement."},
     {"severity": "warning", "path": "detail[56].split_from", "page": 13,
-     "extracted": "lodging tax 466,796 = Visitors Promotion 233,398 (p7) + Visitors Improvement 233,398 (p12)",
-     "on_page": "Taxes 1,503,968 (Total Nonmajor Funds, p13)",
-     "issue": "The split is by fund column. Calling those columns lodging tax is an inference, though it is backed by Statement of Activities 'Lodging' 466,796 (p2), and the arithmetic holds. The remainder of 1,037,172 (detail[57]) = Emergency Mgmt 3 + Ambulance 303,938 + Highway Allocation Bond 733,231."},
-    {"severity": "warning", "path": "balance_sheet.assets[0].amount", "page": 1,
-     "extracted": 6027112, "on_page": "Cash 6,027,112 (p1) vs 6,022,154 on governmental funds statement (p3)",
-     "issue": "The report classifies 4,958 differently on two pages: restricted cash and investments is 3,961,643 on p1 but 3,346,044 + 620,557 = 3,966,601 on p3. Total assets agree (11,940,366). This is in notes but not in report_discrepancies."},
-    {"severity": "warning", "path": "detail[51].fund_type_note", "page": 15,
-     "extracted": null, "on_page": "Road Fund Local 81,429",
-     "issue": "Stray non-schema field 'fund_type_note' on this line. Harmless, but worth removing on re-extraction."}
+     "extracted": "Taxes (Visitors Promotion 233,398 + Visitors Improvement 233,398) 466,796 lodging tax; Taxes (remainder) 1,037,172", "on_page": "Total Nonmajor Funds Taxes 1,503,968",
+     "issue": "The nonmajor Taxes total is split using the fund columns (p7, p12) plus the Lodging 466,796 printed on p2. It is marked computed, the amounts tie (remainder = Emergency Mgmt 3 + Ambulance 303,938 + Highway Allocation Bond 733,231), and the labels aren't printed text. Defensible, but it's an assumption that the visitors funds' taxes are lodging tax."}
   ]
 }

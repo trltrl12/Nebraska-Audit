@@ -5,18 +5,18 @@
     {"severity": "error", "path": "balance_sheet.equity", "page": 4,
      "extracted": "Statement of Net Position (p1): Restricted - Capital Outlay 217,829; Restricted - Debt Service 171,308; Unrestricted 1,525,048",
      "on_page": "Balance Sheet - Governmental Funds Total column (p4): Restricted Debt Service 171,308; Restricted Capital Outlay 217,829; Assigned Employee Benefits 4,055; Capital Purchases 296,876; Student Activities 98,833; Nutrition Program 18,620; Unassigned 1,106,664; total 1,914,184",
-     "issue": "user balance-sheet rule (2026-10-27): cash-basis reports take governmental lines from the governmental funds balance sheet (Total column, fund balance by classification) when its totals equal the government-wide figures; here p4 totals (assets 1,914,184, fund balances 1,914,184) equal the p1 Statement of Net Position, and the report has no capital assets or debt, so p4 should be used"},
+     "issue": "[fixed 2026-10-28: balance_sheet now from the p4 Balance Sheet - Governmental Funds Total column (cash at bank, cash at county treasurer, 7 fund balance lines by classification, totals 1,914,184); 1 rounding difference recorded in report_discrepancies] user balance-sheet rule (2026-10-27): cash-basis reports take governmental lines from the governmental funds balance sheet (Total column, fund balance by classification) when its totals equal the government-wide figures; here p4 totals (assets 1,914,184, fund balances 1,914,184) equal the p1 Statement of Net Position, and the report has no capital assets or debt, so p4 should be used"},
     {"severity": "error", "path": "detail[80].category", "page": 15,
      "extracted": "charges for services/fees", "on_page": "Daily Sales 42,873 (School Nutrition Fund)",
-     "issue": "school lunch/nutrition sales take the user category School Lunch Sales (user 2026-10-28), as the statement line 'Food Services' already does in receipts[7]; same label must get the same category throughout the report"},
+     "issue": "[fixed 2026-10-28: category set to School Lunch Sales] school lunch/nutrition sales take the user category School Lunch Sales (user 2026-10-28), as the statement line 'Food Services' already does in receipts[7]; same label must get the same category throughout the report"},
     {"severity": "warning", "path": "receipts[5]", "page": 2,
      "extracted": 4, "on_page": "Taxes 2,512,304 (p5) vs Statement of Activities tax components 2,512,300 (p2)",
      "issue": "the 4 remainder was put into property tax by assumption (marked computed/review); the Employee Benefit Fund schedule (p13) shows its 5 as interest, though the combining statement (p7) shows it as Taxes"},
     {"severity": "warning", "path": "detail[64].original_label", "page": 11,
      "extracted": "5000 Debt Service", "on_page": "5000 Debt Serivce",
-     "issue": "printed label has a typo ('Serivce'); extractor corrected it"},
+     "issue": "[fixed 2026-10-28: printed text kept in printed_label] printed label has a typo ('Serivce'); extractor corrected it"},
     {"severity": "warning", "path": "detail[70].budget_final", "page": 11,
      "extracted": 165065, "on_page": "8000 Transfers budget 165,065 (an outflow in the disbursements section)",
-     "issue": "other financing amounts are signed (out = negative); budget for a transfer out recorded as positive"}
+     "issue": "[fixed 2026-10-28: budget_final -165,065, label Transfers Out, printed_label 8000 Transfers] other financing amounts are signed (out = negative); budget for a transfer out recorded as positive"}
   ]
 }

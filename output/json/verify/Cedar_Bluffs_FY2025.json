@@ -1,25 +1,12 @@
 {
   "stem": "Cedar_Bluffs_FY2025",
-  "values_checked": 156,
+  "values_checked": 115,
   "issues": [
-    {"severity": "warning", "path": "receipts[6]", "page": 4,
-     "extracted": {"category": "keno/lottery", "amount": 16809, "split_from": "Miscellaneous 57,642 (p4)"},
-     "on_page": "Miscellaneous: Other Governmental Funds column 16,809 (p4); Keno Fund schedule 'Miscellaneous' 16,809 (p12); Statement of Activities p2 shows 16,809 as Community betterment operating grants and Miscellaneous 40,833",
-     "issue": "The split is supported by printed fund columns and p2 (40,833 + 16,809 = 57,642). But the page never calls the 16,809 keno proceeds: it is labelled 'Miscellaneous' and p2 treats it as an operating grant/contribution. keno/lottery is inferred from the fund name. Same call in detail[24]."},
     {"severity": "warning", "path": "receipts[3].category", "page": 4,
-     "extracted": "intergovernmental/state aid", "on_page": "Grant revenue 5,915 (General Fund)",
-     "issue": "The grant's source is not printed (p2 shows it only as general government operating grants and contributions). It could be federal, state or private. The line is already marked review."},
-    {"severity": "warning", "path": "ending_cash", "page": 5,
-     "extracted": 547796, "on_page": "Total assets / fund balances 547,796 = Cash 438,634 + Investments 102,110 + Due from other governments 7,052",
-     "issue": "ending_cash (and beginning_cash 537,971) is total governmental fund balance. It includes 7,052 due from other governments, which is not cash, and 102,110 investments that are reported separately, while ending_investments is null. This is defensible because it is the balance the statement rolls forward, and the composition is in notes."},
-    {"severity": "warning", "path": "detail[18].detail_category", "page": 10,
-     "extracted": "debt principal", "on_page": "Debt service 27,791 (Street Fund); p4 Street Fund column: Principal 26,892, Interest and other charges 899",
-     "issue": "The combined principal-and-interest line is all assigned to principal. The report itself prints the split on p4, so a split_from split was possible. Marked review."},
-    {"severity": "warning", "path": "detail[47].detail_category", "page": 15,
-     "extracted": "debt principal", "on_page": "Debt service 43,853 (Sewer Fund); p8 cash flows: Principal paid 39,880, Interest paid 3,973",
-     "issue": "The combined principal-and-interest line is all assigned to principal. The breakdown is printed on p8. Marked review. The Debt Service Fund line detail[30] (67,095) is similar, but its budget-basis amount differs from p4's 65,000 + 3,155, so it can't be split cleanly."},
-    {"severity": "warning", "path": "detail[9].detail_category", "page": 9,
-     "extracted": "equipment purchases", "on_page": "Capital outlay 3,660",
-     "issue": "The object of the General Fund capital outlay is not stated. 'equipment purchases' is a guess; the line is already marked review."}
+     "extracted": "intergovernmental/state aid", "on_page": "Grant revenue 5,915 (operating grants, General government, p2)",
+     "issue": "grant source not stated; could be federal grants or a private grant (already marked review)"},
+    {"severity": "warning", "path": "receipts[7].category", "page": 7,
+     "extracted": "charges for services/fees", "on_page": "Charges for services 393,793 (Water and Sewer funds)",
+     "issue": "water/sewer charges are Utility Charges under the 2026-10-28 rule; the detail lines (p14-15) already use Utility Charges, so receipts and detail disagree"}
   ]
 }

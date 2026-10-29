@@ -1,25 +1,12 @@
 {
   "stem": "York_Public_Schools_FY2025",
-  "values_checked": 408,
+  "values_checked": 440,
   "issues": [
-    {"severity": "warning", "path": "detail (Exhibit I Employee Benefit Fund expenditure lines).category", "page": 12,
-     "extracted": "instruction (Benefits paid 3,305,894.11; Other professional services 279,842.31)",
-     "on_page": "p6 Employee Benefit Fund column splits its 3,585,736.42 by function: regular instruction 2,238,956.39, special education 306,631.94, guidance 74,562.41, SPED school age 69,140.27, support-instruction 114,349.02, general administration 19,449.97, principal 191,140.14, O&M of plant 221,119.91, transportation 31,036.74 + 23,778.51, state & private 122,217.98, federal programs 173,353.14",
-     "issue": "All Employee Benefit spending is put under instruction, but p6 prints a function split. That moves about 744,577 of support services and student transportation into instruction, so the detail function totals don't tie to the statement's function lines. Flagged review already; recording it by function from p6 would be more accurate."},
-    {"severity": "warning", "path": "detail (Exhibit P 'Other Purchased Services' lines).detail_category", "page": 23,
-     "extracted": "professional/contract services", "on_page": "Other Purchased Services (e.g. Operation of Buildings 187,370.12; Vehicle Operation 49,805.36, p24)",
-     "issue": "In the school chart of accounts, 'Other Purchased Services' is mostly insurance, communication, travel, tuition and printing, not professional services. Insurance might fit better for Operation of Buildings and Vehicle Operation. Judgment call."},
-    {"severity": "warning", "path": "detail (Exhibit P 'Other Expenses' lines).detail_category", "page": 19,
-     "extracted": "dues, training and travel", "on_page": "Other Expenses (e.g. Regular Instruction 55,440.86; Guidance 44,936.63, p20)",
-     "issue": "The 'Other Expenses' object is a catch-all (dues, fees, miscellaneous). Mapping all of it to dues, training and travel is a guess; it could be miscellaneous expenditure with review."},
-    {"severity": "warning", "path": "detail (Exhibit P Operation of Buildings Supplies).detail_category", "page": 23,
-     "extracted": "supplies and materials", "on_page": "Supplies 629,431.96",
-     "issue": "For plant operation, the school 'Supplies' object usually includes energy (electricity, natural gas). Part of this may belong in utilities (power, gas, phone). The page doesn't show the split, so the amount stays as printed."},
-    {"severity": "warning", "path": "detail (Exhibit P lines).budget_final", "page": 9,
-     "extracted": null, "on_page": "Exhibit G program budgets, e.g. 1100 Regular instruction budget 10,067,699.54",
-     "issue": "Replacing the Exhibit G program lines with Exhibit P drops the General Fund program budgets printed on pp9-10 (total budget 22,632,101.44). The actuals are not affected."},
-    {"severity": "warning", "path": "detail (Exhibit J contra line -85,630 and other financing +85,630)", "page": 13,
-     "extracted": -85630, "on_page": "Total for All Schools receipts 943,118.80 (no transfer line printed)",
-     "issue": "The location of the transfer is inferred, not printed. My check backs it up: the Other Governmental fund schedules' receipts (943,118.80 + 908,385.63 + 1,845,660.09 + 282,287.17 + 411.65 = 3,979,863.34) equal the p4 total including Transfers 85,630. The extraction's decision_needed already covers it."}
+    {"severity": "warning", "path": "detail[49].detail_category", "page": 19,
+     "extracted": "dues, training and travel", "on_page": "Other Expenses (Exhibit P object line, every program)",
+     "issue": "Every Exhibit P 'Other Expenses' object line (e.g. Regular Instruction 55,440.86; Guidance 44,936.63; Executive Administration 29,319.17) is mapped to dues, training and travel. The report doesn't say what the object holds, so this is an assumption; miscellaneous expenditure may fit better. The amounts are correct."},
+    {"severity": "warning", "path": "detail[134].category", "page": 22,
+     "extracted": "support services / equipment purchases", "on_page": "Instruction Related Technology - Capital Assets 30,017.56 (also Operation of Buildings Capital Assets 19,327.58 p23, Vehicle Operation Capital Assets 24,407.00 p24)",
+     "issue": "The 'Capital Assets' object lines inside programs keep the program's function. The user's capital outlay rule (every capital outlay line, including one inside a department, is category capital outlay labelled 'Capital Outlay: <function>') would make them capital outlay. Judgment call: the statement counts them in the function lines."}
   ]
 }

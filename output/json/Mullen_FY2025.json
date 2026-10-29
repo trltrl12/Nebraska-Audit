@@ -3,7 +3,7 @@
   "entity_type": "village",
   "fiscal_year_end": "2025-09-30",
   "basis": "cash",
-  "extraction_attempt": 2,
+  "extraction_attempt": 3,
   "beginning_cash": {
     "amount": 700590,
     "source_page": 4
@@ -154,10 +154,11 @@
     },
     {
       "fund_type": "governmental",
-      "category": "charges for services/fees",
+      "category": "Utility Charges",
       "original_label": "Charges for services",
       "amount": 168023,
-      "source_page": 4
+      "source_page": 4,
+      "review": "mix: Statement of Activities p2 shows Sanitation 159,672 (garbage, Utility Charges, 95%) and Park Pool 8,351 (recreation fees); dominant category used"
     },
     {
       "fund_type": "governmental",
@@ -179,7 +180,7 @@
     },
     {
       "fund_type": "business-type",
-      "category": "charges for services/fees",
+      "category": "Utility Charges",
       "original_label": "Charges for services",
       "amount": 909485,
       "source_page": 6
@@ -313,9 +314,11 @@
     {
       "fund_type": "business-type",
       "category": "capital outlay",
-      "original_label": "Capital outlay",
+      "original_label": "Capital Outlay: Utilities",
+      "printed_label": "Capital outlay",
       "amount": 982231,
-      "source_page": 6
+      "source_page": 6,
+      "computed": "function utilities (proprietary funds Water, Sewer, Electric)"
     },
     {
       "fund_type": "business-type",
@@ -756,12 +759,13 @@
       "fund": "General Fund",
       "department": null,
       "section": "revenue",
-      "category": "charges for services/fees",
-      "detail_category": "other charges for services",
+      "category": "Utility Charges",
+      "detail_category": "refuse/sanitation charges",
       "original_label": "Charges for services",
       "amount": 168023,
       "budget_final": null,
-      "source_page": 4
+      "source_page": 4,
+      "review": "mix: Statement of Activities p2 shows Sanitation 159,672 (garbage, 95%) and Park Pool 8,351 (recreation fees); dominant category used"
     },
     {
       "schedule": "Statement of Revenues, Expenditures, and Changes in Fund Balances - Cash Basis - Governmental Funds",
@@ -938,10 +942,13 @@
       "section": "expenditure",
       "category": "capital outlay",
       "detail_category": "not itemized",
-      "original_label": "Capital outlays",
+      "original_label": "Capital Outlay: General Government",
+      "printed_label": "Capital outlays",
       "amount": 124839,
       "budget_final": null,
-      "source_page": 4
+      "source_page": 4,
+      "computed": "function general government (placeholder: the General Fund column doesn't name the function; p2 capital grants are for general government)",
+      "review": "General Fund capital outlay function not printed; general government assumed"
     },
     {
       "schedule": "Statement of Revenues, Expenditures, and Changes in Fund Balances - Cash Basis - Governmental Funds",
@@ -1295,10 +1302,12 @@
       "section": "expenditure",
       "category": "capital outlay",
       "detail_category": "not itemized",
-      "original_label": "Capital outlay",
+      "original_label": "Capital Outlay: Utilities",
+      "printed_label": "Capital outlay",
       "amount": 398874,
       "budget_final": null,
-      "source_page": 6
+      "source_page": 6,
+      "computed": "function utilities (Water Fund)"
     },
     {
       "schedule": "Statement of Revenues, Expenses, and Changes in Net Position - Cash Basis - Proprietary Funds",
@@ -1308,10 +1317,12 @@
       "section": "expenditure",
       "category": "capital outlay",
       "detail_category": "not itemized",
-      "original_label": "Capital outlay",
+      "original_label": "Capital Outlay: Utilities",
+      "printed_label": "Capital outlay",
       "amount": 559547,
       "budget_final": null,
-      "source_page": 6
+      "source_page": 6,
+      "computed": "function utilities (Sewer Fund)"
     },
     {
       "schedule": "Statement of Revenues, Expenses, and Changes in Net Position - Cash Basis - Proprietary Funds",
@@ -1321,10 +1332,12 @@
       "section": "expenditure",
       "category": "capital outlay",
       "detail_category": "not itemized",
-      "original_label": "Capital outlay",
+      "original_label": "Capital Outlay: Utilities",
+      "printed_label": "Capital outlay",
       "amount": 23810,
       "budget_final": null,
-      "source_page": 6
+      "source_page": 6,
+      "computed": "function utilities (Electric Fund)"
     },
     {
       "schedule": "Statement of Revenues, Expenses, and Changes in Net Position - Cash Basis - Proprietary Funds",
@@ -1527,5 +1540,5 @@
       "computed": "Total operating expenses; nonoperating lines are outside_printed_total"
     }
   ],
-  "notes": "Cash-basis village, one fund-type split. Governmental receipts from Total Governmental Funds column (p4); disbursements by function from the Statement of Activities p2 (p4 shows only by object: personnel 198,638, operating 187,110, supplies 54,351, payroll taxes 83,599, capital 146,028; same 669,726 total). Business-type from proprietary statement p6 total column (Water, Sewer, Electric); loan proceeds 634,321 recorded in business_type.debt_proceeds, not receipts. Business-type receipts total is not printed as one number; computed as operating revenues plus interest income. Fund-level transfers 541 in/out net to zero in the total column. Attempt 2 (targeted re-check): the p4 'County treasurer receipts' 82,505 line (General Fund) is split with split_from using the County Treasurer's Fund schedule p8, which prints its breakdown: property taxes 57,846, motor vehicle taxes 12,574, motor vehicle prorate 133, personal property tax credit 7,869, homestead 4,438, carline 177, interest 47 (total 83,084) less collection fee 579 = 82,505 (the p7 budget schedule agrees: county treasurer receipts 74,326 + property tax credit 7,869 + pro rate 133 + carline 177). The collection fee is a negative property tax item. Same split applied to the General Fund detail line. The p8 schedule itself is not recorded as separate detail (its transfer to the Village Treasurer is the same money). Balance sheet: governmental lines now from the governmental funds Balance Sheet p3 (Total Governmental Funds; totals 809,669 equal the government-wide column on p1), fund balance by classification (Restricted 36,262, Unassigned 773,407); business-type lines from p1. Trimmed PDF has 8 pages; p1 report p8, p2 p9, p3 p10, p4 p11, p5 p12, p6 p13, p7 p27, p8 p28. Detail (user 2026-10-27): per-fund lines from the fund statements' columns (p4, p6) replace the combined p7 schedule. Read pages 1-8 of 8"
+  "notes": "Attempt 3 (2026-10-28): business-type Charges for services 909,485 recategorized to Utility Charges (matches its per-fund detail lines); governmental Charges for services 168,023 (receipts and General Fund detail) recategorized to Utility Charges / refuse-sanitation charges since p2 shows 159,672 of it is Sanitation (review notes the 8,351 Park Pool part); capital outlay lines relabelled 'Capital Outlay: <function>' (business-type: Utilities; General Fund: General Government, assumed, review). Cash-basis village, one fund-type split. Governmental receipts from Total Governmental Funds column (p4); disbursements by function from the Statement of Activities p2 (p4 shows only by object: personnel 198,638, operating 187,110, supplies 54,351, payroll taxes 83,599, capital 146,028; same 669,726 total). Business-type from proprietary statement p6 total column (Water, Sewer, Electric); loan proceeds 634,321 recorded in business_type.debt_proceeds, not receipts. Business-type receipts total is not printed as one number; computed as operating revenues plus interest income. Fund-level transfers 541 in/out net to zero in the total column. Attempt 2 (targeted re-check): the p4 'County treasurer receipts' 82,505 line (General Fund) is split with split_from using the County Treasurer's Fund schedule p8, which prints its breakdown: property taxes 57,846, motor vehicle taxes 12,574, motor vehicle prorate 133, personal property tax credit 7,869, homestead 4,438, carline 177, interest 47 (total 83,084) less collection fee 579 = 82,505 (the p7 budget schedule agrees: county treasurer receipts 74,326 + property tax credit 7,869 + pro rate 133 + carline 177). The collection fee is a negative property tax item. Same split applied to the General Fund detail line. The p8 schedule itself is not recorded as separate detail (its transfer to the Village Treasurer is the same money). Balance sheet: governmental lines now from the governmental funds Balance Sheet p3 (Total Governmental Funds; totals 809,669 equal the government-wide column on p1), fund balance by classification (Restricted 36,262, Unassigned 773,407); business-type lines from p1. Trimmed PDF has 8 pages; p1 report p8, p2 p9, p3 p10, p4 p11, p5 p12, p6 p13, p7 p27, p8 p28. Detail (user 2026-10-27): per-fund lines from the fund statements' columns (p4, p6) replace the combined p7 schedule. Read pages 1-8 of 8"
 }

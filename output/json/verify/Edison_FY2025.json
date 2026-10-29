@@ -1,15 +1,12 @@
 {
   "stem": "Edison_FY2025",
-  "values_checked": 33,
+  "values_checked": 40,
   "issues": [
-    {"severity": "warning", "path": "disbursements[5]", "page": 3,
-     "extracted": "governmental / utilities (Solid Waste 17,250.27, Wastewater 53,551.43, Water 78,951.45)", "on_page": "Business-Type Activities rows 45, 47, 48 printed in the GENERAL FUND column",
-     "issue": "The form puts 149,753.15 of utility spending under Business-Type Activities, but it is paid from the General Fund column, so the extractor treated it as governmental by column (marked review). The matching utility receipts are presumably inside General Fund 'Local Receipts: Other' 157,782.48 (receipts[9], category other). A person should decide whether these utility operations belong in business-type. Applies to disbursements[5], [6] and [7]"},
-    {"severity": "warning", "path": "receipts[9].category", "page": 1,
-     "extracted": "other", "on_page": "18 Local Receipts: Other 197,825.97 (governmental part 166,160.21)",
-     "issue": "'other' makes up about 52% of governmental receipts (well over the 10% review threshold). Most of it is likely water/sewer/refuse charges collected in the General Fund, but the form does not say so. Marked review"},
     {"severity": "warning", "path": "receipts[10].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "18 Local Receipts: Other (Water & Sewer Fund) 31,665.76",
-     "issue": "Assumed to be utility charges from the column. The form line is 'Other' (marked review)"}
+     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other, Water & Sewer Fund 31,665.76",
+     "issue": "The form line is printed only as 'Other'; treating it as utility charges is an assumption (already marked review). If it is utility charges, the user's category is Utility Charges rather than charges for services/fees."},
+    {"severity": "warning", "path": "report_discrepancies[0]", "page": 3,
+     "extracted": "check 'detail', difference 0", "on_page": "Exhibit A p2 rows 45/47/48 in General Fund column; all totals add up",
+     "issue": "The report's own totals all add up (no difference), so this isn't a 'report itself doesn't add up' item. It repeats the classification question already in decision_needed[0] and will be listed to the user under the wrong heading."}
   ]
 }

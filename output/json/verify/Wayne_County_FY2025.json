@@ -1,86 +1,25 @@
 {
   "stem": "Wayne_County_FY2025",
-  "values_checked": 164,
+  "values_checked": 175,
   "issues": [
-    {
-      "severity": "error",
-      "path": "detail[47].category",
-      "page": 4,
-      "extracted": "other / miscellaneous revenue",
-      "on_page": "County Improvement 'Other' 209 (p8) is printed in the Intergovernmental - Other row of the County Improvement Fund column on p4 (23,497 + 4 + 209 = 23,710)",
-      "issue": "[fixed 2026-10-21: category set as printed on p4] a specific category fits: should be intergovernmental/state aid, detail county/other local governments, not other"
-    },
-    {
-      "severity": "error",
-      "path": "detail[42].category",
-      "page": 4,
-      "extracted": "streets/highways",
-      "on_page": "Highway Bridge Buyback Fund disbursements 921,576 printed entirely as Capital Outlay on p4",
-      "issue": "[fixed 2026-10-21: category set as printed on p4] function contradicts the governmental funds statement; should be capital outlay (detail function totals then fail to tie to p4 Public Works 98,163 / Capital Outlay 3,264,306)"
-    },
-    {
-      "severity": "error",
-      "path": "detail[43].category",
-      "page": 4,
-      "extracted": "streets/highways",
-      "on_page": "Special Road, Snow Removal & Equipment Fund disbursements 934,530 printed entirely as Capital Outlay on p4",
-      "issue": "[fixed 2026-10-21: category set as printed on p4] function contradicts the governmental funds statement; should be capital outlay"
-    },
-    {
-      "severity": "error",
-      "path": "detail[50].category",
-      "page": 4,
-      "extracted": "general government (review: 'function not stated')",
-      "on_page": "COVID American Rescue Plan Fund disbursements 300,069 printed as Capital Outlay on p4",
-      "issue": "[fixed 2026-10-21: category set as printed on p4] function is stated on p4 and is capital outlay, not general government; the review note is wrong"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[36].category",
-      "page": 4,
-      "extracted": "streets/highways",
-      "on_page": "Road & Bridge disbursements 4,056,279 = General Government 3,170,520 + Principal and Interest Payments 370,023 + Capital Outlay 515,736 (p4)",
-      "issue": "p4 prints no Public Works spending for Road & Bridge; one line covers three functions including debt payments; at minimum needs a review note naming the mix"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[29].category",
-      "page": 5,
-      "extracted": "streets/highways",
-      "on_page": "Noxious Weed 25,371 (under Public Works)",
-      "issue": "extractor rules list noxious weed control under natural resources/conservation; kept under Public Works to tie to the statement (has review)"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[19].category",
-      "page": 4,
-      "extracted": "general government",
-      "on_page": "General Fund Miscellaneous 3,436,091 (p5); p4 shows General Fund Capital Outlay 281,432 and General Government 4,436,926, which together equal the p5 General Government lines (4,718,357, 1 rounding)",
-      "issue": "about 281,432 of this line is capital outlay per p4; whole line recorded as general government"
-    },
-    {
-      "severity": "warning",
-      "path": "report_discrepancies",
-      "page": 5,
-      "extracted": "only public safety 1 difference recorded",
-      "on_page": "p5 General Government lines sum 4,718,357 vs p4 General Government 4,436,926 + Capital Outlay 281,432 = 4,718,358",
-      "issue": "second offsetting 1 rounding difference not recorded; schedule total 5,729,778 ties"
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[2].category",
-      "page": 10,
-      "extracted": "lodging tax",
-      "on_page": "Visitors Promotion Fund Taxes 36,637",
-      "issue": "assumption that the Visitors Promotion tax is lodging tax (not stated on the page); same for detail[51]"
-    },
-    {
-      "severity": "warning",
-      "path": "detail_totals",
-      "page": 8,
-      "extracted": "no entry",
-      "on_page": "COVID American Rescue Plan Fund Total cash receipts 15,749",
-      "issue": "printed total not recorded in detail_totals (single line, ties)"
-    }
+    {"severity": "warning", "path": "detail[36].category", "page": 4,
+     "extracted": "general government", "on_page": "Road & Bridge Fund column: General Government 3,170,520 (p4)",
+     "issue": "Recorded as printed (p4 labels it General Government), but this is Road & Bridge Fund spending (road maintenance in substance), so streets/highways may fit better; the statement-level General Government line 7,610,724 also includes it. Judgment call (has review)"},
+    {"severity": "warning", "path": "detail[29].category", "page": 5,
+     "extracted": "streets/highways", "on_page": "Noxious Weed 25,371 (under Public Works)",
+     "issue": "extractor rules list noxious weed control under natural resources/conservation; kept under Public Works to tie to the statement (has review)"},
+    {"severity": "warning", "path": "detail[19].category", "page": 4,
+     "extracted": "general government", "on_page": "General Fund Miscellaneous 3,436,091 (p5); p4 shows General Fund Capital Outlay 281,432 and General Government 4,436,926, which together equal the p5 General Government lines (4,718,357, 1 rounding)",
+     "issue": "about 281,432 of this line is capital outlay per p4; whole line recorded as general government"},
+    {"severity": "warning", "path": "report_discrepancies", "page": 5,
+     "extracted": "only public safety 1 difference recorded; second entry uses check 'header year'",
+     "on_page": "p5 General Government lines sum 4,718,357 vs p4 General Government 4,436,926 + Capital Outlay 281,432 = 4,718,358",
+     "issue": "offsetting 1 rounding difference in General Government not recorded; 'header year' is not one of the defined check types (business/reconcile/balance/totals/detail)"},
+    {"severity": "warning", "path": "receipts[2].category", "page": 10,
+     "extracted": "lodging tax", "on_page": "Visitors Promotion Fund Taxes 36,637",
+     "issue": "assumption that the Visitors Promotion tax is lodging tax (not stated on the page); same for detail[53]"},
+    {"severity": "warning", "path": "detail_totals", "page": 6,
+     "extracted": "no entry", "on_page": "Road & Bridge DISBURSEMENTS 4,056,279 (p6); COVID American Rescue Plan Total cash receipts 15,749 (p8)",
+     "issue": "printed totals not recorded in detail_totals; the Road & Bridge expenditure lines are a column split (3,170,520 + 370,023 + 515,736 = 4,056,279, ties) so the printed total would let validation check it"}
   ]
 }

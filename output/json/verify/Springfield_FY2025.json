@@ -1,62 +1,18 @@
 {
   "stem": "Springfield_FY2025",
-  "values_checked": 114,
+  "values_checked": 112,
   "issues": [
-    {
-      "severity": "error",
-      "path": "report_discrepancies",
-      "page": 9,
-      "extracted": null,
-      "on_page": "Bond Fund receipts 198,351 + 6,854 + 24,103 + 19,960 = 249,268; printed Total receipts 249,267 (same on p4 Bond column)",
-      "issue": "[fixed] Printed Bond Fund total doesn't add up (difference -1) but no report_discrepancies entry; detail_totals[2] will not tie to detail[19..22]"
-    },
-    {
-      "severity": "error",
-      "path": "report_discrepancies",
-      "page": 1,
-      "extracted": null,
-      "on_page": "Liabilities 4,512 + 4,539 + 1,374 + 22,678 + 2,621,142 + 215,000 = 2,869,245; printed Total Liabilities 2,869,244",
-      "issue": "[fixed] Liability lines don't add to the printed total (difference -1); the existing balance entry covers only net position and assets vs L+NP"
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[2].amount",
-      "page": 4,
-      "extracted": 33243512,
-      "on_page": "Sales tax (see note M) 33,243,512",
-      "issue": "Confirmed digit by digit on p4, p2 (Statement of Activities), p8 (budget 700,000) and p11 (Sales Tax fund 33,175,366 + Streets 68,146 = 33,243,512). Report is in whole dollars (cash in bank $49,145,520, small lines like 22,814), every page is headed City of Springfield, Nebraska, and fund balance rolls 13,656,302 to 49,168,707. Note M, which explains it (and the Assigned 3,500,000), is not in the trimmed PDF; decision_needed already raised"
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[7].category",
-      "page": 2,
-      "extracted": "licenses and permits",
-      "on_page": "Licenses, fees and permits 3,555,784 (p4/p8); Permits and fees 3,554,384 General + 1,400 Park (p11); Statement of Activities p2 groups it as 'Franchise tax and fees 3,578,598' (= 22,814 + 3,555,784)",
-      "issue": "Amount confirmed digit by digit (budget 42,110). The government-wide statement treats it as franchise tax and fees, so occupation/franchise tax or charges for services may fit better; nature unknown without the notes. Same for detail[8]"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[30].amount",
-      "page": 10,
-      "extracted": 3645021,
-      "on_page": "Sewer Utility sales actual 3,645,021 vs budget 702,000 (p6: 3,693,241)",
-      "issue": "Sewer sales are about 5 times budget, alongside Sewer professional fees 2,990,389 and sewer connection fees 665,103 (p6); read correctly but part of the same unusual activity as sales tax/permits; decision_needed does not mention it"
-    },
-    {
-      "severity": "warning",
-      "path": "business_type.ending",
-      "page": 2,
-      "extracted": 8080091,
-      "on_page": "Statement of Activities prints business-type ending net position 8,080,090 and total 57,248,799",
-      "issue": "Report's own rounding difference between p2 and p1/p6 (8,080,091); value used matches p6"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[22].budget_final",
-      "page": 9,
-      "extracted": null,
-      "on_page": "Interest amended budget printed '-'",
-      "issue": "Dash means a zero budget; null vs 0 (same for Sewer Interest detail[31] on p10)"
-    }
+    {"severity": "warning", "path": "receipts[3].category", "page": 8,
+     "extracted": "intergovernmental/state aid (remainder 295,944)", "on_page": "Motor vehicle fee and tax 46,000 (p8); p11 Streets 'Intergovernmental - state' 48,338",
+     "issue": "The split of 'Intergovernmental - state' 345,325 takes out homestead and pro-rate but leaves 'Motor vehicle fee and tax' 46,000 inside the state aid remainder. The p8 breakdown names that amount, so it could be split out as motor vehicle tax in the same way. The remainder arithmetic is correct: 345,325 - 47,044 - 2,337 = 295,944."},
+    {"severity": "warning", "path": "disbursements[4].category", "page": 4,
+     "extracted": "general government", "on_page": "Public buildings 57,514",
+     "issue": "On p11 this spending is entirely in the Auditorium fund column, and the p8 budget schedule counts it in Culture and recreation (541,002 + 57,514 = 598,516). Category culture/recreation fits the report's own grouping better."},
+    {"severity": "warning", "path": "disbursements[7].category", "page": 6,
+     "extracted": "Employee Benefits and Payroll Taxes", "on_page": "Salaries and benefits 297,840",
+     "issue": "This line combines salaries and benefits. Salaries are normally the larger share, so the cost type would usually be Salaries and Wages (with a review note about the mix)."},
+    {"severity": "warning", "path": "detail[15].detail_category", "page": 8,
+     "extracted": "not itemized", "on_page": "Public safety 127,645 (p11: 'Public safety - police contract')",
+     "issue": "The p11 combining schedule shows this is a police contract, so detail_category 'law enforcement contract' fits."}
   ]
 }

@@ -1,12 +1,27 @@
 {
   "stem": "St_Edward_Public_Schools_FY2025",
-  "values_checked": 390,
+  "values_checked": 285,
   "issues": [
-    {"severity": "warning", "path": "receipts[14].category", "page": 8,
-     "extracted": "other (receipt) 110,108.17", "on_page": "Depreciation Fund Non-Revenue Receipts 110,108.17; Schedule C p19 '5200 Allocation from General Fund'",
-     "issue": "This is an interfund allocation, which is in effect a transfer, but it is recorded as revenue: here in receipts and in detail[167] (Schedule C), both as 'other'. The General Fund's schedules (B p17-18, M p23-29) show no matching outflow. Only its 25,000 transfer to School Nutrition is shown. decision_needed already asks about this, so it is a warning here. If it is a transfer, governmental receipts are overstated by 110,108.17."},
-    {"severity": "warning", "path": "detail[85].detail_category", "page": 25,
-     "extracted": "professional/contract services", "on_page": "2310 Board of Education - Other Property Services 134,227.99",
-     "issue": "This is a large Board of Education 'Other Property Services' line. In Nebraska school accounting it usually holds insurance and other purchased services, so 'insurance' may fit better. It is a judgment call."}
+    {"severity": "error", "path": "receipts[15].category", "page": 9,
+     "extracted": "charges for services/fees", "on_page": "Sales of Meals 8,036.43 (School Nutrition Fund)",
+     "issue": "meal sales belong in the user's own receipt category School Lunch Sales (lunch/meal/milk/nutrition sales), not charges for services/fees"},
+    {"severity": "error", "path": "detail[173].category", "page": 21,
+     "extracted": "charges for services/fees", "on_page": "1611 Student Lunches 4,671.48",
+     "issue": "should be category School Lunch Sales (the user's rule for lunch sales)"},
+    {"severity": "error", "path": "detail[174].category", "page": 21,
+     "extracted": "charges for services/fees", "on_page": "1613 Student Milk 2,585.00",
+     "issue": "should be category School Lunch Sales (the user's rule for milk/lunch sales)"},
+    {"severity": "error", "path": "detail[175].category", "page": 21,
+     "extracted": "charges for services/fees", "on_page": "1620 Non Reimbursable 779.95 (School Nutrition Fund)",
+     "issue": "these are non-reimbursable meal sales in the nutrition fund and belong in category School Lunch Sales; user_rules.py's regex won't catch this label"},
+    {"severity": "warning", "path": "receipts[19]", "page": 19,
+     "extracted": "other 110,108.17 (receipt)", "on_page": "5200 Allocation from General Fund 110,108.17",
+     "issue": "code 5200 is the same account the report uses for 'Transfers from General Fund' (Schedules F and G), so this is probably a transfer in, but the General Fund shows no matching outflow. It is already in decision_needed; recorded as revenue until the user decides"},
+    {"severity": "warning", "path": "disbursements[39].category", "page": 11,
+     "extracted": "capital outlay", "on_page": "Other Building Disbursements 1,588.17",
+     "issue": "Schedule I (p22) shows this is 4700-400 Purchased Property Services 156.55 + 4700-610 Supplies 1,431.62 (repairs and supplies), not capital outlay; detail[195] and detail[196] carry the same category"},
+    {"severity": "warning", "path": "detail[38].detail_category", "page": 23,
+     "extracted": "dues, training and travel", "on_page": "Other Items",
+     "issue": "every Schedule M 'Other Items' line is mapped to dues, training and travel; the printed label doesn't name the object, so this is the extractor's assumption"}
   ]
 }

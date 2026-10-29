@@ -1,24 +1,15 @@
 {
   "stem": "Wahoo_Public_Schools_FY2025",
-  "values_checked": 187,
+  "values_checked": 236,
   "issues": [
-    {"severity": "warning", "path": "receipts[17].category", "page": 3,
-     "extracted": "other", "on_page": "Other nonrevenue receipts 12,021,881 (GF 30,737 = 5301 Insurance adjustments 5,627 + 5690 Other 25,110; Special Building 107,685; Education Agency 11,879,669; Other Gov 3,790)",
-     "issue": "Line is 36% of governmental receipts and almost all Education Agency money with no breakdown in the trimmed pages; possibly bond/lease proceeds (already in decision_needed). The GF part includes 5,627 insurance adjustments (reimbursements) that cannot be split out on the statement."},
-    {"severity": "warning", "path": "disbursements[11].category", "page": 4,
-     "extracted": "debt service principal", "on_page": "Debt service 1,503,888 (Education Agency 1,317,578 + QCPUF 186,310)",
-     "issue": "Principal and interest are combined on the statement. The QCPUF part is split on p17 (principal 172,787, interest 13,523), but the Education Agency part isn't. The whole line is recorded as principal, so interest is understated."},
-    {"severity": "warning", "path": "detail[105].category", "page": 17,
-     "extracted": "other / miscellaneous revenue", "on_page": "Other local receipts 3,790",
-     "issue": "The same label 'Other local receipts' is categorized intergovernmental/state aid (county/other local governments) for the GF line 1960 (detail[8], p10) but 'other' here and for Special Building (detail[115], 107,685, p18). The rules require one category per label in a report. The statement shows these two under 'Other nonrevenue receipts', so the GF treatment may be the questionable one."},
-    {"severity": "warning", "path": "detail[115].category", "page": 18,
-     "extracted": "other / miscellaneous revenue", "on_page": "Other local receipts 107,685",
-     "issue": "Same label inconsistency as detail[105]. At 107,685 this is a sizeable unexplained line."},
-    {"severity": "warning", "path": "detail[121].detail_category", "page": 19,
-     "extracted": "school lunch sales", "on_page": "Other receipts 922",
-     "issue": "A guess: the line is labelled only 'Other receipts'. The statement does group it under Nutrition Program receipts, so the guess is defensible."},
-    {"severity": "warning", "path": "detail[127].detail_category", "page": 19,
-     "extracted": "miscellaneous expenditure", "on_page": "Other expenses 408,207",
-     "issue": "69% of School Nutrition spending is in a last-resort category. It is almost certainly food purchases (the budgeted 'Food supplies' line is blank), which would be supplies and materials or purchased power/cost of sales. Already marked review."}
+    {"severity": "warning", "path": "receipts[6].split_from", "page": 10,
+     "extracted": "Other taxes 19,788 split into 132 (1190 Other taxes) + 19,656 (1960 Other local receipts)", "on_page": "Statement 'Other taxes' 19,788 (GF column p3); budget schedule 1190 Other taxes 132 and 1960 Other local receipts 19,656 (p10)",
+     "issue": "No page prints this split; it is inferred because 132 + 19,656 = 19,788. It is very likely right (the other GF tax lines tie exactly), but it is a reconstruction. receipts[7] carries the printed label 'Other taxes' with category intergovernmental/state aid."},
+    {"severity": "warning", "path": "detail[121].category", "page": 19,
+     "extracted": "charges for services/fees", "on_page": "Other receipts 922 (School Nutrition Fund)",
+     "issue": "detail_category is school lunch sales but category is charges for services/fees. These are inconsistent: use School Lunch Sales (it is counted in Nutrition Program receipts 307,128) or other."},
+    {"severity": "warning", "path": "disbursements[10].original_label", "page": 4,
+     "extracted": "Capital outlay", "on_page": "Capital outlay 10,725,901",
+     "issue": "Lines in category capital outlay should be labelled 'Capital Outlay: <function>', with the printed text in printed_label. The Depreciation Fund detail 'Capital outlay' 167,344 has the same issue."}
   ]
 }

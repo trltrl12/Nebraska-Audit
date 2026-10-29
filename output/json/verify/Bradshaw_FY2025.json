@@ -1,23 +1,25 @@
 {
   "stem": "Bradshaw_FY2025",
-  "values_checked": 196,
+  "values_checked": 210,
   "issues": [
+    {"severity": "error", "path": "receipts[17].category", "page": 9,
+     "extracted": "charges for services/fees", "on_page": "Use Fees 470,270.45 (Electric 378,126.87, Water 69,913.86, Sewer 22,229.72 utility fund sales)",
+     "issue": "Utility fund use fees belong in the user's own category Utility Charges (2026-10-28 rule: utility fund sales/charges come out of charges for services). The detail lines for the same label (detail[67], [70], [78]) already use Utility Charges, so the report is inconsistent."},
     {"severity": "warning", "path": "decision_needed", "page": 9,
      "extracted": "business_type.debt_proceeds 287,315 (State Revolving Fund And Bond Proceeds)",
      "on_page": "Exhibit IV nonoperating 'State Revolving Fund And Bond Proceeds' 287,315 (Electric 260,000, Water 27,315); the Statement of Activities (p2) shows the same 260,000 / 27,315 in the 'Operating Grants and Contributions' column",
-     "issue": "The report itself treats this money as operating grants on p2 but as bond/SRF proceeds on p9. Whether it is loan proceeds (debt) or SRF grant/forgiveness is a question for a person; not in decision_needed."},
-    {"severity": "warning", "path": "balance_sheet.equity", "page": 8,
-     "extracted": "Unrestricted -179,731.11 (governmental, Exhibit I p1)",
-     "on_page": "Exhibit III governmental funds: Cash and Deposits (184,578.90), County Treasurers' Balance 4,847.79; Assigned 73,223.20, Unassigned (252,954.31); total (179,731.11) = government-wide",
-     "issue": "User balance-sheet basis rule (2026-10-27): cash-basis reports take governmental balance-sheet lines from the governmental funds statement (fund balance by classification) when its totals equal the government-wide figures, as here. Extraction still uses Exhibit I's single Unrestricted line."},
-    {"severity": "warning", "path": "disbursements[17].original_label", "page": 7,
-     "extracted": "Capital Outlay - Equipment", "on_page": "Capital Outlay: Equipment 9,323.86",
-     "issue": "User capital outlay rule (2026-10-26): label should be 'Capital Outlay: <function>' with printed text in printed_label and function in computed; not applied here, on business-type disbursements[25] 'Capital Outlay' 359,341.24 (p9), or on the detail capital outlay lines."},
+     "issue": "On p2 the report treats this money as operating grants; on p9 it treats it as bond/SRF proceeds. Only a person can settle whether it is loan proceeds (debt) or SRF grant/forgiveness. decision_needed doesn't cover it."},
     {"severity": "warning", "path": "disbursements[0].category", "page": 6,
      "extracted": "general government (whole 85,713.37)", "on_page": "Salaries: General Fund 69,414.50 (incl. Community Center 12,736.93, RV Park 7,733.67, Parks & Recreation 12,577.81 per p13-14), Street Fund 16,298.87",
-     "issue": "Mixed-fund object lines (Salaries, Professional Services, Insurance, Supplies, Capital Outlay) put wholly in one function without a split. The fund columns are printed on p6-7, so a split was possible (Beaver Crossing's extraction does split this way). Defensible under the dominant-category rule but inconsistent."},
+     "issue": "Lines that mix funds (Salaries, Professional Services, Insurance, Supplies - Operating, Capital Outlay - Equipment, Repair and Maintenance, Vehicle Expenses) are each put wholly under one function. p6-7 print the fund columns, so a split was possible. The dominant-category rule makes this defensible, but it hides about 32k of culture/recreation spending (Community Center, RV Park, Parks) inside general government."},
+    {"severity": "warning", "path": "disbursements[17].original_label", "page": 7,
+     "extracted": "Capital Outlay - Equipment", "on_page": "Capital Outlay: Equipment 9,323.86",
+     "issue": "User capital outlay rule (2026-10-26): the label should be 'Capital Outlay: <function>', with the printed text in printed_label. It isn't applied here, on business-type disbursements[25] 'Capital Outlay' 359,341.24 (p9), or on the detail capital outlay lines. user_rules.py may fix this."},
+    {"severity": "warning", "path": "detail[63].detail_category", "page": 15,
+     "extracted": "highway allocation (no review)", "on_page": "Highway Allocation & Motor Vehicle Fees 57,047.58",
+     "issue": "The printed line combines highway allocation with motor vehicle fees. Highway allocation is the likely dominant part, but a mixed line should carry a review note."},
     {"severity": "warning", "path": "report_discrepancies[0]", "page": 9,
      "extracted": "check 'detail', difference 0", "on_page": "Water Fund tax lines 22,931.31 / 83.64 / 52.00 / 1,161.12 / 2,019.26 vs Street Fund 22,931.31 / 83.64 / 52.01 / 1,161.12 / 2,019.26 (p6, p15)",
-     "issue": "Possible double reporting is recorded as a report_discrepancy with difference 0, although the report's own totals do add up. decision_needed already covers it. The governmental and business-type receipts may overstate taxes by 26,247.33."}
+     "issue": "The possible double reporting is filed as a report_discrepancy with difference 0, although the report's own totals add up. decision_needed already covers it. If the amounts are duplicated, governmental plus business-type receipts overstate taxes by 26,247.33."}
   ]
 }

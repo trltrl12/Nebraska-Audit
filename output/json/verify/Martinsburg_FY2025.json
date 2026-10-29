@@ -1,9 +1,12 @@
 {
   "stem": "Martinsburg_FY2025",
-  "values_checked": 36,
+  "values_checked": 39,
   "issues": [
-    {"severity": "warning", "path": "balance_sheet.equity", "page": 1,
-     "extracted": "General Fund ending balance (etc.)", "on_page": "Line 28 Subtotal of Ending Balances (Line 26 + 27), per fund column",
-     "issue": "equity original_labels are descriptive constructions, not the printed row label; amounts (133,040.82 / 127,613.23 / 81,759.31 / 77,154.40, total 419,567.76) match line 24/28"}
+    {"severity": "warning", "path": "ending_cash", "page": 1,
+     "extracted": 260654.05, "on_page": "Net Cash Balance 206,352.38 + Investments 54,301.67 (General + Street, lines 26-27)",
+     "issue": "ending_cash includes governmental investments; ending_investments left null. Explained in notes but cash and investments are not separated"},
+    {"severity": "warning", "path": "disbursements[5].category", "page": 3,
+     "extracted": "debt service (principal and interest combined)", "on_page": "Debt Service 178,723.55 (Water Fund)",
+     "issue": "likely a payoff/refinancing tied to the new 183,954.40 USDA loan (8/6/2025); covered by the existing decision_needed entry on the 273,225.06 State Receipts: Other"}
   ]
 }

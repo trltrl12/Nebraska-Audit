@@ -1,25 +1,18 @@
 {
   "stem": "Ord_FY2025",
-  "values_checked": 152,
+  "values_checked": 262,
   "issues": [
-    {"severity": "fixed", "resolution": "fixed 2026-10-27: Electric 4,279,247 split (split_from) into spending 4,199,787 and other financing Transfers Out -79,460 (p17); Transfers In 1,374,195 split into governmental 1,288,735 and business-type 85,460 (Sewer 55,460 + Golf 30,000, p17); printed totals unchanged", "path": "detail[13].amount", "page": 22,
-     "extracted": "Business-Type Activities: Electric 4,279,247 recorded wholly as utilities spending",
-     "on_page": "Budget schedule 'Disbursements and Transfers' (p22) with Transfers In 1,374,195 (p21) = governmental transfers out 1,294,735 + Electric transfers out 79,460 (p17: Electric Transfers (79,460); Sewer +55,460, Golf +30,000)",
-     "issue": "Hidden transfer: the extraction backs the governmental transfers out (1,294,735) out of the governmental lines with a contra other-financing line (detail[11]), but the Electric Fund's 79,460 transfer out stays inside the Electric spending line, while the matching 85,460 business-type transfers in are counted in the 1,374,195 Transfers In line. The same money is both spending and a transfer; needs a -79,460 contra (split_from Electric 4,279,247, p17) plus an other-financing line. Relatedly detail[10] Transfers In 1,374,195 is tagged governmental although 85,460 of it is Sewer/Golf (business-type)."},
-    {"severity": "fixed", "resolution": "fixed 2026-10-27: Business-Type Activities: Other 644,388 now culture/recreation (Golf Course Fund; Gas Fund has no expenses, p16)", "path": "detail[16].category", "page": 22,
-     "extracted": "utilities", "on_page": "Business - Type Activities: Other 644,388 (Gas + Golf Course)",
-     "issue": "Gas Fund has no expenses (p16 operating expenses 0; cash flow p18 payments 0), so this line is essentially the Golf Course Fund (p16 expenses 639,597); the dominant function is culture/recreation, not utilities."},
-    {"severity": "warning", "path": "receipts[0].original_label", "page": 9,
-     "extracted": "Property Taxes", "on_page": "Property Taxes 938,486",
-     "issue": "User label decision (2026-10-27): property tax receipt lines are labelled 'Property and Real Estate Taxes' with printed text in printed_label; not applied (also detail[0])."},
-    {"severity": "warning", "path": "detail[9].fund_type", "page": 21,
-     "extracted": "business-type", "on_page": "Local Receipts: Other 6,693,542 (all funds)",
-     "issue": "All-funds line mixes business-type operating revenue with governmental receipts (sanitation, pool, interest, sales tax loan repayments...); tagged wholly business-type and categorised charges for services. Flagged review by the extractor; judgment call."},
-    {"severity": "warning", "path": "detail[27].original_label", "page": 23,
-     "extracted": "Capital Outlay: Public Health", "on_page": "Public Health Fund Capital Outlay 16,315",
-     "issue": "Other Public Health Fund lines are tagged public safety (dominant function) while this capital outlay label/computed note says public health / 'public safety/public health'; inconsistent function labelling."},
-    {"severity": "warning", "path": "reported_totals.business-type.receipts.computed", "page": 16,
-     "extracted": "total operating revenues 5,313,719 (p15) + interest income 144,510 (p16)", "on_page": "Total Operating Revenues on p16; Interest Income on p17",
-     "issue": "Stale page references in computed/notes text (p12 for fund balances/other financing totals, which are on p13; p15/p16 for p16/p17). The source_page fields themselves are correct."}
+    {"severity": "warning", "path": "receipts[25].category", "page": 8,
+     "extracted": "charges for services/fees", "on_page": "Camping Fees 9,630 (Culture and Recreation Fund)",
+     "issue": "Camping fees are recreation/park fees: the user's 2026-10-28 rule gives them 'Recreation Fees', and detail[32] already uses detail_category recreation/pool/park fees. Category inconsistent with detail and with Pool Receipts."},
+    {"severity": "warning", "path": "receipts[31].category", "page": 16,
+     "extracted": "charges for services/fees", "on_page": "Charges for Services 4,295,851 (Electric 3,580,899, Water 444,835, Sewer 168,492, Golf Course 101,625)",
+     "issue": "The detail lines for the same row use 'Utility Charges' (Electric, Water, Sewer) and charges for services (Golf) instead of Recreation Fees. The top-level Totals line mixes utility charges with golf fees, so its category doesn't match the user's 2026-10-28 categories."},
+    {"severity": "warning", "path": "disbursements[10].function", "page": 16,
+     "extracted": "function utilities on Totals-column cost-type lines disbursements[10]-[14]", "on_page": "Totals include Golf Course Fund (Personal Services 220,768, Materials 204,934, Other 176,298, Depreciation 37,597)",
+     "issue": "The business-type cost-type lines are tagged function 'utilities', but 639,597 of them is the Golf Course Fund, which the detail puts in culture/recreation."},
+    {"severity": "warning", "path": "ending_cash.amount", "page": 13,
+     "extracted": 7632690, "on_page": "Fund balance end of year 7,632,690; cash in bank 7,709,962 + cash at county treasurer 41,053 = 7,751,015 (p7)",
+     "issue": "Governmental beginning/ending 'cash' are the fund balances the statement rolls forward. They differ from actual cash by the due to/from other funds (119,452 / 1,127). Assumption explained in notes."}
   ]
 }

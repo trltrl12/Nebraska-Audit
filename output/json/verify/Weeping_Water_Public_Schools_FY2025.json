@@ -1,54 +1,27 @@
 {
   "stem": "Weeping_Water_Public_Schools_FY2025",
-  "values_checked": 238,
+  "values_checked": 258,
   "issues": [
-    {
-      "severity": "error",
-      "path": "detail[81].amount",
-      "page": 5,
-      "extracted": 651749,
-      "on_page": "Employee Benefit 5690 Other non-revenue receipts 651,749 (p11) eliminated in the Reclassifications column (651,749) on the General Fund combining schedule (p5)",
-      "issue": "[fixed] Internal money is counted twice in detail. The p5 Reclassifications column removes 651,749 from both Employee Benefit receipts and its spending (658,990 out of student support services: 651,749 eliminated, 7,241 moved to Instruction). The GF budget schedule lines (pp8-9, 6,455,828 of spending) already include the payments into Employee Benefit. Detail spending adds up to 8,833,980, against 8,182,231 on the statement (p3), a gap of exactly 651,749. The hidden-transfer rule calls for splitting with split_from p5: Employee Benefit receipt 651,749 becomes other financing (+), and its 2900 spending 658,990 becomes 7,241 spending (instruction per p5) plus 651,749 other financing (-). decision_needed raises the question, but the lines are recorded as revenue and spending."
-    },
-    {
-      "severity": "error",
-      "path": "detail[82].category",
-      "page": 5,
-      "extracted": "support services (658,990)",
-      "on_page": "Employee Benefit spending 658,990: (658,990) reclassified out of Student support services, 7,241 of it into Instruction (623,762 = 482,058 + 134,463 + 7,241)",
-      "issue": "[fixed] Same issue on the spending side: 651,749 of this line is the eliminated internal amount. Only 7,241 is real spending, and p5 counts that under Instruction."
-    },
-    {
-      "severity": "error",
-      "path": "detail[122].category",
-      "page": 3,
-      "extracted": "instruction",
-      "on_page": "2191 Postsecondary education 6,414 (p16); counted in Other Governmental Funds Student support services 288,964 = 282,550 + 6,414 (p3)",
-      "issue": "[fixed] The report's own statement counts this line under student support services, and code 2191 is in the support-services range. The category should be support services, not instruction. The extractor's own review note admits the statement disagrees."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[9].category",
-      "page": 6,
-      "extracted": "charges for services/fees / miscellaneous revenue",
-      "on_page": "1990 Other local receipts 3,175",
-      "issue": "The category (charges for services) and detail_category (miscellaneous revenue) don't match. Nothing on the page explains this line, so 'other' is arguably the right category. It was copied from the broad statement line."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[87].category",
-      "page": 12,
-      "extracted": "charges for services/fees / miscellaneous revenue",
-      "on_page": "1990 Miscellaneous local receipts 32,513",
-      "issue": "Unexplained miscellaneous receipt in the School Nutrition Fund. The category and detail_category don't match. It may be meal charges, but nothing on the page says what it is."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[12].split_from",
-      "page": 7,
-      "extracted": "Other 4,714 split into 2,584 / 850 / 1,280",
-      "on_page": "Nonrevenue receipts 24,714 = 5200 transfers 20,000 + 5301 2,584 + 5320 850 + 5690 1,280",
-      "issue": "The split uses the p7 nonrevenue receipts group minus the transfer, which adds up to the p3/p5 'Other' 4,714. The page doesn't print the breakdown of 'Other' itself, but the match is exact. Acceptable, but the split rests on an inference."
-    }
+    {"severity": "error", "path": "detail[87].category", "page": 12,
+     "extracted": "reimbursements/refunds", "on_page": "1620 Daily sales - non-reimbursable programs 10,300",
+     "issue": "[fixed 2026-10-28: category now School Lunch Sales] This line is food sales (a la carte), not a reimbursement or refund. Its own detail_category is school lunch sales, and the statement counts it in Nutrition program receipts 92,000 (64,640 + 17,060 + 10,300), which is School Lunch Sales. The category should be School Lunch Sales."},
+    {"severity": "warning", "path": "receipts[6].category", "page": 3,
+     "extracted": "charges for services/fees", "on_page": "Other local receipts 209,194 (GF 174,486 incl. 1800 Community services activities 155,846; nutrition 1990 32,513; student fee 2,195)",
+     "issue": "[fixed 2026-10-28: detail 1800 changed to charges for services/fees, so statement line and detail now agree] The dominant part (1800 Community services activities 155,846) is Extracurricular Receipts in the detail (detail[6]) but charges for services/fees here, so the two disagree. The line could also be split by the fund-schedule lines, as was done for State receipts."},
+    {"severity": "warning", "path": "detail[6].category", "page": 6,
+     "extracted": "Extracurricular Receipts", "on_page": "1800 Community services activities 155,846",
+     "issue": "[fixed 2026-10-28: now charges for services/fees] Community services activities are community program fees, not student activity receipts. charges for services/fees may fit better. This is a judgment call."},
+    {"severity": "warning", "path": "disbursements[1].category", "page": 3,
+     "extracted": "support services (whole 536,753)", "on_page": "Student support services 536,753 = General 247,789 + Other Governmental Funds 288,964 (Activities Fund 282,550 + Student Fee 6,414, pp16-17)",
+     "issue": "282,550 of this line is Activities Fund spending. Under the rules it is student activities (the detail records it so), but here it sits in support services/Pupils. The Wayne Public Schools extraction splits the same situation by fund column."},
+    {"severity": "warning", "path": "detail[70].category", "page": 9,
+     "extracted": "Instruction (3535, 3541, 3551; also detail[71], detail[72])", "on_page": "p5 General Fund column prints 'State categorical programs 482,058' (3300 + 3535 + 3541 + 3551) and reclassifies it into Instruction; 6xxx are treated the same way as 'Federal programs 134,463'",
+     "issue": "The treatment is inconsistent. The 35xx program lines are moved to Instruction while the 6xxx lines, which the same page reclassifies the same way, keep Federal Programs. Under the 2026-10-28 rule ('counts them in that statement line'), the 35xx lines would be State Categorical Programs."},
+    {"severity": "warning", "path": "detail[83].budget_final", "page": 11,
+     "extracted": 645000, "on_page": "2900 Other Support Services budget 645,000 (single line)",
+     "issue": "[fixed 2026-10-28: budget_final null on the other-financing part; 645,000 kept on the spending part only] The 645,000 budget for the one printed 2900 line is repeated on both split parts (detail[82] spending 7,241 and detail[83] other financing -651,749), so it is double counted. It also has a positive sign on a negative other-financing line."},
+    {"severity": "warning", "path": "detail[9].category", "page": 6,
+     "extracted": "charges for services/fees", "on_page": "1990 Other local receipts 3,175 (also detail[88] Nutrition 1990 Miscellaneous local receipts 32,513)",
+     "issue": "The printed labels say other/miscellaneous and the detail_category is Other / Miscellaneous Receipts, but the category is charges for services/fees. The category and the label don't match."}
   ]
 }

@@ -1,7 +1,15 @@
 {
   "stem": "Deuel_County_FY2025",
-  "values_checked": 124,
+  "values_checked": 105,
   "issues": [
-    {"severity": "warning", "path": "detail[32].category", "page": 6, "extracted": "inheritance tax", "on_page": "Taxes 42,167 (Inheritance Tax Fund)", "issue": "Same label 'Taxes' is 'taxes (unlabeled)' in receipts[0] (p4) but 'inheritance tax' here; the p4 Inheritance Tax Fund column shows 42,167 of the 2,101,857 Taxes line is inheritance tax, so categories are inconsistent across receipts and detail (both defensible; flagged for review)"}
+    {"severity": "warning", "path": "receipts[1].category", "page": 4,
+     "extracted": "taxes (unlabeled) 2,059,690", "on_page": "Taxes: General 2,011,256 + Nonmajor 48,434 (nonmajor taxes are Visitors Promotion 12,753 + Visitors Improvement 12,753 + County Fair 22,928, p11)",
+     "issue": "The inheritance tax column was split out by fund column, but the nonmajor visitor promotion/improvement taxes (25,506, almost certainly lodging tax) and County Fair taxes (22,928) stay inside taxes (unlabeled). The same applies to detail[34]. This is a judgment call: the report never names the tax type."},
+    {"severity": "warning", "path": "detail[20].category", "page": 5,
+     "extracted": "natural resources/conservation", "on_page": "Noxious Weed Control 40,259 under the Public Works heading",
+     "issue": "The statement (p4) counts this in Public Works (recorded as streets/highways). Putting it under natural resources/conservation follows the category list, but the General Fund detail function split then no longer ties to the statement's Public Works 67,602."},
+    {"severity": "warning", "path": "detail[31]", "page": 6,
+     "extracted": "Road Fund Transfers Out -284,110 (other financing); Road expenditure 1,249,771", "on_page": "Budget schedule: Transfers out (284,110); basic statement p4: Road Fund Principal 235,000 + Interest 49,110 inside disbursements 1,533,881",
+     "issue": "The budget schedule prints the Road Fund debt service as a transfer out, so detail shows real debt service spending as a transfer. This is as printed and already noted, but Road detail spending is 284,110 lower than the statement."}
   ]
 }

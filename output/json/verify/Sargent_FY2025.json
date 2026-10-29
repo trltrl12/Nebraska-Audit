@@ -5,13 +5,13 @@
     {"severity": "error", "path": "missing", "page": 19,
      "extracted": "detail expenditure lines are the statement's function totals per fund (detail_category 'not itemized', pp9-10)",
      "on_page": "Schedule of Expenditures - Modified Cash Basis - Governmental Funds, per fund column (pp19-20): General Fund Personal Services 59,440, Contracted Services 21,164, Materials and Supplies 1,037, Public Safety 63,900, Other Operating Expenses 25,524 (=171,065); Street 56,839 / 115,432 / 20,900 / 0 / 31,900 (=225,071); Culture and Recreation 45,192 / 3,791 / 1,215 / 0 / 19,669 (=69,867); Airport 0 / 99,669 / 454 / 0 / 18,798 (=118,921); Community Development Other Operating 9,485; Community Center Materials 1,769, Other 4,410 (=6,179); Medical Center Contracted 88, Other 7,804 (=7,892)",
-     "issue": "The report prints a per-fund object schedule whose fund columns tie to the statement's fund totals. It is not a combined all-funds schedule, so the per-fund rule keeps it fund by fund. None of its lines are in detail; the object breakdown is lost."},
+     "issue": "[fixed 2026-10-28: governmental expenditure detail replaced by the pp19-20 Schedule of Expenditures lines, fund by fund and object by object (zero lines skipped), detail_totals per fund from pp19-20] The report prints a per-fund object schedule whose fund columns tie to the statement's fund totals. It is not a combined all-funds schedule, so the per-fund rule keeps it fund by fund. None of its lines are in detail; the object breakdown is lost."},
     {"severity": "error", "path": "receipts[18].category", "page": 13,
      "extracted": "charges for services/fees", "on_page": "Charges for Services (Electric/Water/Sewer/Sanitation utility funds) 1,305,609",
-     "issue": "Utility fund charges fall under the user's Utility Charges receipt category (2026-10-28). The same line's detail items already use Utility Charges, so this is inconsistent."},
+     "issue": "[fixed 2026-10-28: category set to Utility Charges] Utility fund charges fall under the user's Utility Charges receipt category (2026-10-28). The same line's detail items already use Utility Charges, so this is inconsistent."},
     {"severity": "warning", "path": "receipts[15].category", "page": 8,
      "extracted": "charges for services/fees", "on_page": "Farm Income 31,800 (Airport Fund)",
-     "issue": "Category is inconsistent with detail[30] (detail_category rentals). Airport farm income is probably farm lease rent, which would be Rentals. Use the same category in both."},
+     "issue": "[fixed 2026-10-28: Farm Income categorised Rentals in receipts and detail] Category is inconsistent with detail[30] (detail_category rentals). Airport farm income is probably farm lease rent, which would be Rentals. Use the same category in both."},
     {"severity": "warning", "path": "balance_sheet", "page": 1,
      "extracted": "governmental funds balance sheet Total (p6) + proprietary Statement of Net Position (pp11-12)",
      "on_page": "Statement of Net Position p1: governmental net position 2,981,904 (incl. Net Investment in Capital Assets 1,803,293, Restricted 567,572, Unrestricted 611,039) vs fund balances 843,768",
@@ -25,6 +25,6 @@
     {"severity": "warning", "path": "notes", "page": null,
      "extracted": "notes describe budget-schedule business-type detail lines and a -170,500 contra line; text after 'Read pages 1-20 of 20'",
      "on_page": "20-page PDF; all pages present",
-     "issue": "The notes are stale: the budget-schedule business-type lines and contra line they describe are no longer in detail. They also don't end with 'Read pages 1-20 of 20', because the user_rules sentence was appended after it. The page count (20) is correct."}
+     "issue": "[fixed 2026-10-28: notes rewritten, stale budget-schedule text removed, now end with 'Read pages 1-20 of 20'] The notes are stale: the budget-schedule business-type lines and contra line they describe are no longer in detail. They also don't end with 'Read pages 1-20 of 20', because the user_rules sentence was appended after it. The page count (20) is correct."}
   ]
 }

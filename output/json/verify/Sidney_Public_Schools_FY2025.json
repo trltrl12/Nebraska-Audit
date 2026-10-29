@@ -1,38 +1,18 @@
 {
   "stem": "Sidney_Public_Schools_FY2025",
-  "values_checked": 263,
+  "values_checked": 160,
   "issues": [
-    {
-      "severity": "error",
-      "path": "report_discrepancies",
-      "page": 4,
-      "extracted": null,
-      "on_page": "General Fund Total Receipts 17,085,134; lines sum to 17,065,134",
-      "issue": "[fixed] On Exhibit D (p4), the General Fund column prints Total Receipts as 17,085,134. Its lines (6,592,373 + 110,770 + 9,345,271 + 975,791 + 40,929) add up to 17,065,134, which matches Exhibit F's 17,065,134 (p5) and the column's excess of 1,139,751. The report itself doesn't add up here (difference +20,000), but this is only mentioned in notes. There is no report_discrepancies entry for it."
-    },
-    {
-      "severity": "warning",
-      "path": "reported_totals.governmental.receipts",
-      "page": 4,
-      "extracted": 19717181,
-      "on_page": "Total Major Governmental Funds column headed '2024'",
-      "issue": "The total column on Exhibit D is headed 2024, but the figures are FY2025 (they tie to Exhibits B and C). The extractor noted this; the printed label doesn't match the year."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[78].category",
-      "page": 10,
-      "extracted": "capital outlay",
-      "on_page": "2900 Purchased Services 61,441 (Depreciation Fund)",
-      "issue": "Exhibit D (p4) puts the Depreciation Fund's 80,941 in Instruction (26,528) and Operation and Maintenance of Plant (54,413), not in capital outlay. The function category in detail doesn't match the statement's function split. detail[79] (2900 Capital Outlay 19,500) has the same issue."
-    },
-    {
-      "severity": "warning",
-      "path": "detail_totals[2].amount",
-      "page": 7,
-      "extracted": 41844,
-      "on_page": "no Total Receipts line; single line 5690 Other Receipts 41,844, then Total Available Resources 93,478",
-      "issue": "Exhibit G prints no Total Receipts line. The detail_totals value is the single line amount, not a printed total."
-    }
+    {"severity": "error", "path": "receipts[6].category", "page": 4,
+     "extracted": "charges for services/fees", "on_page": "1611 Lunchroom Sales 272,112 (p8)",
+     "issue": "Lunchroom sales are category School Lunch Sales under the user's 2026-10-28 rule (out of charges for services); the same line in detail is already School Lunch Sales, so the report is inconsistent"},
+    {"severity": "warning", "path": "detail[27].original_label", "page": 5,
+     "extracted": "4525 Federal Vocational & Applied Technology Ed (Carl Perkins)", "on_page": "4525 Federal Vocational & Applied Tecnology Ed (Carl Perkins)",
+     "issue": "label was silently corrected: the page prints 'Tecnology'"},
+    {"severity": "warning", "path": "detail[78].category", "page": 10,
+     "extracted": "capital outlay", "on_page": "2900 Purchased Services 61,441",
+     "issue": "Purchased Services is put in capital outlay, but Exhibit D (p4) shows the Depreciation Fund's 80,941 as Instruction 26,528 and Operation & Maintenance 54,413; the category is a judgment call (the line is already marked review)"},
+    {"severity": "warning", "path": "detail[79].original_label", "page": 10,
+     "extracted": "2900 Capital Outlay", "on_page": "2900 Capital Outlay 19,500",
+     "issue": "capital outlay line not relabelled 'Capital Outlay: <function>' with printed_label, unlike the other capital outlay lines in this report (user rule 2026-10-28)"}
   ]
 }

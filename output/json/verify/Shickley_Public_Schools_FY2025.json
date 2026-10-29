@@ -1,12 +1,18 @@
 {
   "stem": "Shickley_Public_Schools_FY2025",
-  "values_checked": 155,
+  "values_checked": 165,
   "issues": [
-    {"severity": "warning", "path": "receipts[10].category", "page": 4,
-     "extracted": "intergovernmental/state aid", "on_page": "County and ESU sources 5,680 (p9: 2110 County fines and license fees 4,667 + 2210 ESU receipts 1,014)",
-     "issue": "The p9 breakdown shows 82% of this broad line is county fines and license fees. The extractor itself puts that line under fines and forfeitures in detail (detail[9]). The statement line could take the dominant category (fines and forfeitures, with review), or detail[9] could be treated as state/local aid. Either way the two should agree."},
-    {"severity": "warning", "path": "disbursements[12].original_label", "page": 5,
-     "extracted": "Facilities acquisition and construction", "on_page": "Facilities acquisitions and construction",
-     "issue": "Label differs slightly from the printed text ('acquisitions'). The amount 306,767 is correct."}
+    {"severity": "error", "path": "detail[53].category", "page": 14,
+     "extracted": "reimbursements/refunds", "on_page": "Non-reimbursable programs 7,678 (School Nutrition Fund receipts)",
+     "issue": "[fixed 2026-10-28: category set to School Lunch Sales] 'Non-reimbursable programs' are school nutrition sales outside the USDA-reimbursed meal program. The line's own detail_category is school lunch sales, and the statement's School Nutrition Program receipts 68,536 (= 60,858 + 7,678) are recorded as School Lunch Sales, so the category should be School Lunch Sales, not reimbursements/refunds"},
+    {"severity": "warning", "path": "detail[7].detail_category", "page": 9,
+     "extracted": "other charges for services", "on_page": "1955 Other postsecondary receipts 5,808",
+     "issue": "category is Tuition Received (as on the statement line) but detail_category is other charges for services; 'tuition and fees' would be consistent"},
+    {"severity": "warning", "path": "detail[51].category", "page": 13,
+     "extracted": "capital outlay", "on_page": "Vehicle acquisition 96,000 (Depreciation Fund)",
+     "issue": "the governmental funds statement (p5, combining p8) counts this 96,000 in Student transportation 220,171; capital outlay is defensible under the capital-outlay rule but differs from the statement's function"},
+    {"severity": "warning", "path": "detail[45].original_label", "page": 11,
+     "extracted": "4000 Facilities - transfer to Depreciation Fund (part of 102,020)", "on_page": "4000 Facilities acquisitions and construction 102,020",
+     "issue": "label is descriptive, not printed; the 95,000 hidden-transfer split is supported by the p8 Reclassifications column and marked split_from/review"}
   ]
 }

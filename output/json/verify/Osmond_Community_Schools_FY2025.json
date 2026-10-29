@@ -1,21 +1,12 @@
 {
   "stem": "Osmond_Community_Schools_FY2025",
-  "values_checked": 140,
+  "values_checked": 190,
   "issues": [
-    {"severity": "warning", "path": "missing", "page": 11,
-     "extracted": null, "on_page": "Report page 40 not in trimmed PDF (trimmed p10 = report p39, p11 = report p41)",
-     "issue": "Report p40 is probably another supplementary schedule (e.g. a budget schedule for the other governmental funds or Nutrition Fund). All statement totals tie, so nothing in the basic statements is missing, but the source PDF should be checked for detail lines."},
-    {"severity": "warning", "path": "detail[39].budget_final", "page": 8,
-     "extracted": null, "on_page": 50000,
-     "issue": "8000 Activities support prints a final budget of 50,000; recorded as null."},
-    {"severity": "warning", "path": "disbursements[11].category", "page": 5,
-     "extracted": "instruction", "on_page": "State categorical programs 54,289",
-     "issue": "Mapped to instruction, but the statement lists it as its own function, not under Instruction. Defensible; already marked review."},
-    {"severity": "warning", "path": "disbursements[12].category", "page": 5,
-     "extracted": "instruction", "on_page": "Federal programs 201,690",
-     "issue": "Mapped to instruction, but the statement lists it as its own function, not under Instruction. Defensible; already marked review."},
-    {"severity": "warning", "path": "detail[8].category", "page": 8,
-     "extracted": "other / miscellaneous revenue", "on_page": "1925 Other categorical grants 1,500",
-     "issue": "A categorical grant is listed under local receipts. It could be donations/contributions (a private grant) instead of other. Small amount; already marked review."}
+    {"severity": "warning", "path": "detail[37].original_label", "page": 8,
+     "extracted": "8000 Activities support (Transfer to other funds, p5)", "on_page": "8000 Activities support 17,250",
+     "issue": "Label is not exactly as printed (extractor added a parenthetical). Treating it as a transfer is supported: p5 prints the same 17,250 as 'Transfer to other funds' (15,000 Activities + 2,250 Nutrition). Its budget 50,000 is left null."},
+    {"severity": "warning", "path": "disbursements[12].review", "page": 5,
+     "extracted": "state programs counted under instruction", "on_page": "State categorical programs 54,289",
+     "issue": "Stale review notes: category is State Categorical Programs (and disbursements[13] Federal Programs), not instruction as the review text says."}
   ]
 }

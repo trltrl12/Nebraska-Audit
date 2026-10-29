@@ -1,30 +1,21 @@
 {
   "stem": "Oakland_Craig_Public_Schools_FY2025",
-  "values_checked": 196,
+  "values_checked": 225,
   "issues": [
-    {
-      "severity": "error",
-      "path": "report_discrepancies[3].difference",
-      "page": 12,
-      "extracted": -1,
-      "on_page": -2,
-      "issue": "[fixed] General Fund budget schedule disbursement lines (pp11-12) add to 7,121,604, not 7,121,603: instruction 4,427,725 + student support 359,435 + instructional support 284,376 + general administration 289,955 (63,833+217,653+8,469) + school administration 380,455 + central 103,661 + O&M 558,691 (423,587+124,009+4,224+6,871) + transportation 274,456 + categorical 74,982 (52,130+13,117+9,735) + federal programs 297,868 + transfers 70,000. Printed total 7,121,602, so the difference is -2. Every line amount was read correctly; only the note and difference are wrong."
-    },
-    {
-      "severity": "warning",
-      "path": "report_discrepancies",
-      "page": 4,
-      "extracted": "only a 'totals' entry for the 1 difference",
-      "on_page": "beginning 6,917,698 + receipt lines 9,856,744 - disbursements 8,312,452 = 8,461,990 vs printed ending 8,461,991",
-      "issue": "The 1 receipts rounding difference also puts the cash identity off by 1. Consider a matching 'reconcile' entry so the validator's off-by-1 isn't read as an extraction error."
-    },
-    {
-      "severity": "warning",
-      "path": "report_discrepancies[0].note",
-      "page": 3,
-      "extracted": "Receipt lines in Total Governmental Funds column add to 9,856,744 vs printed total 9,856,745 (rounding).",
-      "on_page": "Fund columns add to their printed totals (8,375,872 + 334,003 + 1,146,870 = 9,856,745), but three rows of the Total column don't cross-foot: Property taxes - general purpose 3,654,915 + 168,090 = 3,823,005 vs 3,823,004 printed; Carline tax 2,492 + 119 + 214 = 2,825 vs 2,824; Federal receipts 542,009 + 107,051 = 649,060 vs 649,061",
-      "issue": "Confirmed this is rounding in the report itself, not a misread: all Total column amounts match the page. The note could name the three rows (net -1 in the Total column)."
-    }
+    {"severity": "warning", "path": "disbursements[10].category", "page": 4,
+     "extracted": "Building and Grounds", "on_page": "Security technology supplies 94,780 (Depreciation Fund 'Technology' p7, 'Supplies and materials' p14)",
+     "issue": "The function is a guess. The matching detail line detail[86] (Depreciation Fund Supplies and materials 94,780) is categorized as support services, so the same spending has two different functions."},
+    {"severity": "warning", "path": "detail[59].original_label", "page": 7,
+     "extracted": "Contra: transfer to Depreciation Fund hidden in general administration", "on_page": "Reclassifications (100,000) on General administration row",
+     "issue": "This label is not printed. The contra line and detail[83] ('Transfer to Depreciation Fund hidden in general administration', -100,000) are the extractor's construction from the p7 Reclassifications column. The amount is supported by p7 and p14, and the two lines net to zero."},
+    {"severity": "warning", "path": "detail[73].category", "page": 12,
+     "extracted": "Federal Programs", "on_page": "heading 'Debt services' (6200-6993 lines)",
+     "issue": "The printed heading says 'Debt services', but the lines are federal programs (they sum to 297,868 = 'Federal programs' on p7). Federal Programs is defensible but goes against the 'only lines labelled so' rule; applies to detail[73]-[81]."},
+    {"severity": "warning", "path": "report_discrepancies[1]", "page": 5,
+     "extracted": "cites p2 net position lines", "on_page": "p5 fund balance lines 468,011+1,859,804+53,102+184,070+451,445+5,445,560 = 8,461,992 vs printed 8,461,991",
+     "issue": "The balance sheet comes from p5, whose fund balance section is also off by 1. The discrepancy entry cites only p2."},
+    {"severity": "warning", "path": "transfers_in", "page": 4,
+     "extracted": null, "on_page": "Transfers: General (70,000), Other Governmental 70,000; Total column blank",
+     "issue": "Transfers are left null because they net to zero in the Total column. The roll-forward is correct, but the gross 70,000 interfund transfer does not show in transfers_in/out."}
   ]
 }

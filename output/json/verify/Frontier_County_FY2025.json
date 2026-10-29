@@ -1,15 +1,12 @@
 {
   "stem": "Frontier_County_FY2025",
-  "values_checked": 92,
+  "values_checked": 120,
   "issues": [
-    {"severity": "warning", "path": "receipts[0].category", "page": 2,
-     "extracted": "taxes (unlabeled)", "on_page": "Statement of Activities general receipts: Property 2,172,068; Motor vehicle 144,615; Lodging 10,112; Other 8,656 (sum 2,335,451 vs Taxes 2,335,449 on p4)",
-     "issue": "The report does print a tax-type breakdown, $2 off the p4 Taxes line. The extractor kept the line unsplit (review flag set). It could instead be split per p2 with the $2 recorded in report_discrepancies. Judgment call for the reviewer."},
-    {"severity": "warning", "path": "detail[32].detail_category", "page": 11,
-     "extracted": "other charges for services", "on_page": "Local 26,638 (Courthouse Building Fund)",
-     "issue": "The 'Local' lines in the Road (detail[30], 11,974), Courthouse Building (detail[32]) and Nonmajor (detail[37], 2,583) schedules are categorized as charges for services without the review flag the General Fund 'Local' line carries. Courthouse Building Fund local receipts are likely interest, not fees."},
-    {"severity": "warning", "path": "notes", "page": 8,
-     "extracted": "Nonmajor combining has 9 funds (p6-8)", "on_page": "10 fund columns: Lodging Tax, Register of Deeds, Veterans' Aid (p6); Drug Law, ARPA, 911 Emergency, 911 Wireless (p7); Emergency Bridge, EDA/STPE, Courthouse Bond (p8)",
-     "issue": "Fund count in the notes is wrong. No effect on the data: the Total column was correctly used because there are more than 6 funds."}
+    {"severity": "warning", "path": "receipts[0].amount", "page": 2,
+     "extracted": 2172066, "on_page": "Property 2,172,068 (p2); Taxes 2,335,449 (p4)",
+     "issue": "Taxes split uses the government-wide Statement of Activities breakdown, which classifies receipts slightly differently from the fund statement (taxes +2, intergovernmental 1,835,522 + 18,180 grants vs 1,840,635). Property tax was reduced by 2 (marked computed, recorded in report_discrepancies). The split is defensible but approximate."},
+    {"severity": "warning", "path": "receipts[3].category", "page": 7,
+     "extracted": "other taxes", "on_page": "Other 8,656 (p2) = 911 Emergency Fund Taxes 8,656 (p7)",
+     "issue": "The 'Other' taxes are the 911 Emergency Fund's taxes (911 surcharge). other taxes is defensible, but the source can be identified."}
   ]
 }

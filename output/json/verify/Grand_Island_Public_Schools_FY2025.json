@@ -1,9 +1,46 @@
 {
   "stem": "Grand_Island_Public_Schools_FY2025",
-  "values_checked": 264,
+  "values_checked": 248,
   "issues": [
-    {"severity": "warning", "path": "receipts[9].amount", "page": 4,
-     "extracted": 51100, "on_page": "Local receipts 46,817,144 (Other Governmental Funds column 5,258,813); no page prints a 51,100 piece",
-     "issue": "balancing residual, not printed anywhere (marked computed and review). The split also assumes School Nutrition and Cooperative interest sit in Local receipts while Special Building 'Other' 211,715 sits in the Other line; the statement prints Interest as a dash, so how the Other Governmental column is mapped is the extractor's inference. The General Fund and Debt Service columns tie exactly. The 51,100 plus the unexplained ~495,714 inside 'Other' equals the Cooperative Fund's unshown 546,814 (see report_discrepancies)"}
+    {
+      "severity": "warning",
+      "path": "receipts[9]",
+      "page": 4,
+      "extracted": 51100,
+      "on_page": "Local receipts 46,817,144 (Total Governmental Funds); no 51,100 line printed anywhere",
+      "issue": "This piece of the Local receipts split is a computed residual (Other Governmental local 5,258,813 less schedule local lines 5,207,713), not a printed breakdown. It is marked computed and review and the arithmetic holds. Together with the unexplained ~495,714 inside the statement's 'Other' 724,871, it equals the Cooperative Fund's 546,814 of receipts that no schedule shows."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[11]",
+      "page": 13,
+      "extracted": "County receipts (Other Governmental column 505,530) split into Homestead 65,803, Property Tax Credit 435,911, Pro-Rate 3,742, other state 74",
+      "on_page": "p4 County receipts, Other Governmental Funds 505,530; p13 Qualified Capital Purpose Fund 'Total state sources' 505,530",
+      "issue": "The split of receipts[11]-[14] depends on matching the statement's County receipts column to the QCPF schedule's State sources by amount. The schedule calls these state sources, not county receipts, and the report doesn't say the two are the same money. The match is plausible and marked review, but it is an assumption."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[131].category",
+      "page": 8,
+      "extracted": "support services",
+      "on_page": "Depreciation Fund disbursements: Other support services 433,928",
+      "issue": "On the statement (p4) this 433,928 sits in 'Support Services - Central services' (4,320,747 = General 2510-2590 3,886,819 + 433,928), which the extraction maps to Business (as it did for 2510). Using category support services here doesn't match the statement's function."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[134].category",
+      "page": 9,
+      "extracted": "support services",
+      "on_page": "Employee Benefit Fund disbursements: Other support services 14,232",
+      "issue": "The statement counts this 14,232 in Instruction - Regular (65,655,218 = 1100+1150+1160 65,640,986 + 14,232), so its function there is Instruction, not support services."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[107].original_label",
+      "page": 7,
+      "extracted": "3400 Grants from corporations and other private interests",
+      "on_page": "3400 Categorical grants from corporations and other private interests",
+      "issue": "The label differs from the printed text: the word 'Categorical' was dropped. The amount 369,596 is correct."
+    }
   ]
 }

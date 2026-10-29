@@ -1,24 +1,15 @@
 {
   "stem": "Ainsworth_Community_Schools_FY2025",
-  "values_checked": 167,
+  "values_checked": 178,
   "issues": [
-    {"severity": "warning", "path": "disbursements[1].category", "page": 4,
-     "extracted": "support services (1,087,762)", "on_page": "Student support services: General Fund 706,080 / Other Governmental Funds 381,682 (Activities Fund, p18)",
-     "issue": "p4 prints the fund-column split; the 381,682 Activities part could be split out as student activities (split_from) as was done for Chadron. Kept whole with review; defensible but inconsistent across reports"},
-    {"severity": "warning", "path": "receipts[9].category", "page": 4,
-     "extracted": "charges for services/fees", "on_page": "Other receipts 426,799 = General 118,574 (tuition 4,864 + misc 4,604 + insurance adjustments 106,958 + other nonrevenue 2,148) + Special Building 1,409 + Activities 306,816",
-     "issue": "mixed line; dominant category (activity receipts ~72%) chosen with review; about 107k is reimbursements/refunds"},
-    {"severity": "warning", "path": "receipts[3].category", "page": 4,
-     "extracted": "investment income (151,766)", "on_page": "Interest 151,766 includes 1140 Interest on taxes 15,526 (p7)",
-     "issue": "detail[3] classes the same 15,526 as property tax; statement line can't be split (not a tax line), so only a consistency note"},
-    {"severity": "warning", "path": "disbursements[9].category", "page": 5,
-     "extracted": "health/welfare", "on_page": "Community services 10,200",
-     "issue": "function guessed from label (review set)"},
-    {"severity": "warning", "path": "detail[13].detail_category", "page": 7,
-     "extracted": "homestead/tax credits", "on_page": "3133 Tax wind energy 589 (shown as 'Personal property tax credit' on p2)",
-     "issue": "label could also be read as other local taxes; review set"},
-    {"severity": "warning", "path": "detail[73].amount", "page": 10,
-     "extracted": -200000, "on_page": "2600 O&M lines 2610-2650 total 847,807; Depreciation Fund p12 'Transfer from the General Fund' 200,000",
-     "issue": "contra line and matching other financing line detail[74] are inferred, not printed. Arithmetic confirmed: 847,807 + 84,941 (Depreciation capital outlay) - 200,000 = 732,748 statement O&M (p4), and the General schedule total 8,464,292 = 8,414,292 printed spending lines + 50,000 Activities support. Handling follows the hidden-transfer rule"}
+    {"severity": "warning", "path": "detail[99].category", "page": 14,
+     "extracted": "charges for services/fees", "on_page": "School Nutrition Fund: Sales 158,774",
+     "issue": "receipts[12] puts the same 158,774 in School Lunch Sales (user category), but the detail line uses charges for services/fees. Same label, different category."},
+    {"severity": "warning", "path": "detail[97].category", "page": 13,
+     "extracted": "support services", "on_page": "Employee Benefit Fund: Employee benefit 631",
+     "issue": "The p4 statement's Central and business services 250,907 = GF schedule 2510-2580 lines 250,276 + this 631, so the report counts it as Business. support services is a judgment call."},
+    {"severity": "warning", "path": "detail[73]", "page": 10,
+     "extracted": "contra -200,000 (O&M) and other financing -200,000 (detail[74])", "on_page": "O&M lines 2610-2650 = 847,807; Depreciation Fund 'Transfer from the General Fund' 200,000 (p12)",
+     "issue": "The contra line and the transfer line are inferred, not printed. The arithmetic holds (847,807 + 84,941 - 200,000 = 732,748 statement O&M), and the handling follows the hidden-transfer rule with review."}
   ]
 }

@@ -1,86 +1,24 @@
 {
   "stem": "York_FY2025",
-  "values_checked": 353,
+  "values_checked": 380,
   "issues": [
-    {
-      "severity": "warning",
-      "path": "receipts[0].source_page",
-      "page": 7,
-      "extracted": 6,
-      "on_page": "Total Governmental Funds column is on p7",
-      "issue": "receipts[0]-[3] (Property 2,162,400, Motor vehicle 243,398, Special assessments 61,667, Occupation/franchise 3,386,771) cite p6. The amounts are right, but they appear on p6 only because they equal the General/Street fund columns. The Total column that the rules call for is on p7."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[8].category",
-      "page": 7,
-      "extracted": "federal grants",
-      "on_page": "Grants 579,210 = General 42,096 + CDBG 101,461 + Capital Projects 188,390 + nonmajor 247,263 (Creative District 99,428, Aviation 147,835)",
-      "issue": "Creative District grants are probably state money (Nebraska Arts Council). The source of the General Fund department grants (Police 2,852, Convention Center 38,244, Library 1,000) and the Capital Projects grants is not stated, so 'federal grants' is uncertain. The same applies to detail[20], detail[21], detail[22], detail[216] and detail[221]. CDBG (detail[199]) is federal."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[9].category",
-      "page": 7,
-      "extracted": "other",
-      "on_page": "Loan collections 2,372",
-      "issue": "Repayments of CDBG loans are a loan-principal inflow, not unexplained revenue. Whether to keep them in 'other' or treat them as financing is a judgment call. The same applies to detail[200]."
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[5].category",
-      "page": 7,
-      "extracted": "other",
-      "on_page": "Airport 411,739",
-      "issue": "The list has no airport function, so 'other' with review is defensible. 'economic development' or 'general government' are alternatives. The same applies to detail[228]."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[54].category",
-      "page": 23,
-      "extracted": "culture/recreation",
-      "on_page": "Senior Center column (Salaries and benefits 437, Repairs 4,804, Utilities 8,956, total 14,197), part of Environment and leisure",
-      "issue": "The category rules put senior services under health/welfare. The report groups Senior Center under Environment and leisure (p14), so culture/recreation is defensible. The same applies to detail[111] and detail[130]."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[119].detail_category",
-      "page": 22,
-      "extracted": "dues, training and travel",
-      "on_page": "Operating expenses: Transportation (Parks 12,602, Police 30,770; p23 Ball Park 5,744, Fire/EMS 26,757)",
-      "issue": "'Transportation' could be vehicle costs (fuel, repairs) rather than travel. The lines carry review notes. The same applies to detail[120]-[122]."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[160].detail_category",
-      "page": 22,
-      "extracted": "equipment purchases",
-      "on_page": "Capital outlay (no object breakdown)",
-      "issue": "The extractor assumed the object for each department's capital outlay: equipment purchases for detail[160] and [162]-[170], and construction/infrastructure for detail[161] (Capital Projects department 5,908,201). The page prints no object, so 'not itemized' would also fit. The lines carry review notes."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[8].category",
-      "page": 23,
-      "extracted": "charges for services/fees",
-      "on_page": "Intergovernmental revenue: Rural fire district 80,000 (Fire/EMS)",
-      "issue": "Following the rules, the rural fire contract is filed under charges for services, but the page prints it under Intergovernmental revenue. On the statement (p6) it is inside General Fund Intergovernmental 662,701, so receipts[6] and the detail disagree on its category. The line carries a review note."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[190].detail_category",
-      "page": 15,
-      "extracted": "other state aid",
-      "on_page": "Street Fund: Intergovernmental 1,335,215",
-      "issue": "A Street Fund's intergovernmental revenue is usually mostly highway allocation, but the page doesn't say so. 'other state aid' is defensible."
-    },
-    {
-      "severity": "warning",
-      "path": "ending_investments",
-      "page": 5,
-      "extracted": null,
-      "on_page": "Total Governmental Funds: Certificates of deposit 12,384,934; County treasurer cash 113,132",
-      "issue": "ending_cash uses only 'Cash and cash equivalents' 6,040,239, and the 12.38M of certificates of deposit is recorded only in the notes. The CDs could go in ending_investments. The notes explain the choice."
-    }
+    {"severity": "error", "path": "receipts[14].category", "page": 9,
+     "extracted": "charges for services/fees", "on_page": "Sales 8,182,233 (Total Enterprise Funds: Water, Sewer, Landfill)",
+     "issue": "Enterprise-fund sales are utility charges. Under the user's 2026-10-28 rule (extractor 'Own receipt categories': Utility Charges = utility fund sales/charges/collections, garbage/refuse), this line should be category Utility Charges, not charges for services/fees."},
+    {"severity": "warning", "path": "receipts[15].category", "page": 9,
+     "extracted": "charges for services/fees", "on_page": "Services charges 57,840; Tap fees 200 (enterprise funds)",
+     "issue": "These utility-fund service charges and tap fees probably also belong in Utility Charges under the 2026-10-28 rule (receipts[15] and receipts[16])."},
+    {"severity": "warning", "path": "detail[11].category", "page": 22,
+     "extracted": "charges for services/fees (detail_category recreation/pool/park fees / ambulance/rescue fees)", "on_page": "Charges for services: Parks 56,646, Aquatic Center 82,792, Ball Park 238,805, Soccer Complex 36,851, Fire/EMS 807,252",
+     "issue": "The detail_category is recreation fees or ambulance fees, but the high-level category stayed charges for services/fees. The user's 2026-10-28 rule makes Recreation Fees and Ambulance Fees their own receipt categories (detail[11], [14], [15], [19] Recreation Fees; detail[17] Ambulance Fees, which was an assumption already marked review)."},
+    {"severity": "warning", "path": "disbursements[16].category", "page": 9,
+     "extracted": "utilities (no function)", "on_page": "Transportation 66,882; Closure/post-closure costs 134,314; Farm rental expenses 120,652",
+     "issue": "Business-type spending is listed by cost type, but these three lines (disbursements[16], [19], [20]) have category 'utilities' and no function:'utilities'. Transportation fits Fuel or Dues, Training and Travel; Farm rental expenses may fit Rent/Leases; closure costs may fit other. This is a category judgment."},
+    {"severity": "warning", "path": "receipts[0].source_page", "page": 7,
+     "extracted": "source_page 6", "on_page": "Total Governmental Funds column is on p7 (2,162,400; 243,398; 61,667; 3,386,771)",
+     "issue": "Property, Motor vehicle, Special assessments and Occupation/franchise (receipts[0]-[3]) cite p6, which holds the General/Street fund columns. The amounts match the Total Governmental Funds column printed on p7, so the cited page doesn't show the column used."},
+    {"severity": "warning", "path": "notes", "page": 1,
+     "extracted": "'due from/to other funds nets to zero and is omitted'; 'Business-type expense categories are all utilities by function'", "on_page": "balance_sheet includes Due from (to) other funds -63,427 / +63,427; business-type lines carry cost-type categories",
+     "issue": "The notes are out of date and contradict the JSON contents (the amounts themselves are correct and net to zero)."}
   ]
 }

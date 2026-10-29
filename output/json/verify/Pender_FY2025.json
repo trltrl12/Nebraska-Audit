@@ -1,86 +1,42 @@
 {
   "stem": "Pender_FY2025",
-  "values_checked": 227,
+  "values_checked": 232,
   "issues": [
-    {
-      "severity": "warning",
-      "path": "detail[69..78].category",
-      "page": 11,
-      "extracted": "general government",
-      "on_page": "Fire column, Total disbursements 46,685",
-      "issue": "Fire column spending is categorized as general government to tie to the p4 'Public buildings' line. The rules map fire to public safety, and the Statement of Activities (p2) counts it there: Public safety 484,297 = Rescue 437,612 + Fire 46,685."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[48..53].category",
-      "page": 11,
-      "extracted": "public safety",
-      "on_page": "Cemetary column, Total disbursements 23,799",
-      "issue": "Cemetery spending is categorized as public safety to tie to p4. The rules map cemetery to health/welfare (p9 labels the line 'Public health and safety'), and p2 puts it in Culture and recreation 290,081 = Parks + Pool + Library + Cemetery. Public safety is the least supported choice."
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[4].category",
-      "page": 4,
-      "extracted": "general government",
-      "on_page": "Public buildings 46,685 (p9: 'Public works - other'; p2: inside Public safety)",
-      "issue": "This line is the Fire column of the p11 combining schedule, so public safety (as on p2) is arguably right. Already marked review."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[34].category",
-      "page": 11,
-      "extracted": "general government",
-      "on_page": "TIF Expenditures 39,841",
-      "issue": "The rules list TIF under economic development. It was kept in general government to tie to the statement; already marked review."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[11].detail_category",
-      "page": 11,
-      "extracted": "other state aid",
-      "on_page": "Streets: Intergovernmental 236,878",
-      "issue": "Street fund intergovernmental revenue is most likely the state highway allocation (detail category 'highway allocation')."
-    },
-    {
-      "severity": "warning",
-      "path": "proprietary",
-      "page": 8,
-      "extracted": null,
-      "on_page": "Net cash from operating activities 572,507; capital financing (1,546,333); investing 1,239,455; cash beginning 355,973, ending 621,603",
-      "issue": "The proprietary fund reports on the accrual basis and has a Statement of Cash Flows (p8), but proprietary is null because the report's basis is 'cash'. Those cash flow totals are not captured."
-    },
-    {
-      "severity": "warning",
-      "path": "balance_sheet.liabilities[4].category",
-      "page": 5,
-      "extracted": "debt - due in more than one year",
-      "on_page": "Notes payable 240,488 = current 43,346 + long-term 197,142; Bonds payable 630,000 = current 170,000 + long-term 460,000",
-      "issue": "The p1 Total column doesn't split debt by due date, but the proprietary statement (p5) does. All of it is recorded as due in more than one year (same for liabilities[5]); the split is mentioned in notes."
-    },
-    {
-      "severity": "warning",
-      "path": "ending_cash",
-      "page": 4,
-      "extracted": 2548394,
-      "on_page": "Fund Balance - End of Year 2,548,394 (p3: cash 1,620,368 + treasurer 64,842 + investments 407,435 + due from 1,451,830 - due to 996,082)",
-      "issue": "The 'cash' figure is fund balance, which includes net interfund receivables of 455,748. Actual governmental cash and investments are 2,092,645. Follows the printed roll-forward and is explained in notes."
-    },
-    {
-      "severity": "warning",
-      "path": "report_discrepancies",
-      "page": 4,
-      "extracted": "entries [1], [3], [4], [5]",
-      "on_page": null,
-      "issue": "[fixed 2026-10-21: truncated discrepancy notes rewritten] Several notes are copied reviewer wording and are cut off mid-sentence ('Because of it, the governm', 'only covers the roll-for', 'This isn't recorded anywhere.'). The figures in them are correct (I checked them: 1,862,361 vs 1,862,363; 3,508,325 vs 3,508,326; 11,744,475 vs 11,744,474; 8,351,026 vs 8,351,027), but the text should be cleaned up."
-    },
-    {
-      "severity": "warning",
-      "path": "report_discrepancies",
-      "page": 11,
-      "extracted": null,
-      "on_page": "p11 row totals: Interest/dividends 42,661 (columns sum 42,662), Other miscellaneous 288,580 (288,581), Telephone and utilities 43,062 (43,064), Contract labor 248,895 (248,896), Grant/donation income 205,481 (205,480), Transfers to 781,303 (781,302), Transfers from 526,688 (526,689); p2 net position beginning/end 2,320,393 / 2,548,395 vs p4 2,320,392 / 2,548,394",
-      "issue": "Further rounding differences printed in the report are not recorded. None of them affects an extracted value."
-    }
+    {"severity": "error", "path": "detail[43].category", "page": 11,
+     "extracted": "public safety / Capital expenditures", "on_page": "Rescue - Capital expenditures 362,100",
+     "issue": "Under the user's capital outlay rule (2026-10-26), every capital outlay line, including one inside a department, is category capital outlay with the label 'Capital Outlay: Public Safety' (printed text in printed_label)."},
+    {"severity": "error", "path": "detail[65].category", "page": 11,
+     "extracted": "streets/highways / Capital expenditures", "on_page": "Streets - Capital expenditures 1,296",
+     "issue": "Capital outlay line: should be category capital outlay, labelled 'Capital Outlay: Streets/Highways'."},
+    {"severity": "error", "path": "detail[87].category", "page": 11,
+     "extracted": "culture/recreation / Capital expenditures", "on_page": "Parks - Capital expenditures 4,332",
+     "issue": "Capital outlay line: should be category capital outlay, labelled 'Capital Outlay: Culture/Recreation'."},
+    {"severity": "error", "path": "detail[110].category", "page": 11,
+     "extracted": "culture/recreation / Capital expenditures", "on_page": "Library - Capital expenditures 5,914",
+     "issue": "Capital outlay line: should be category capital outlay, labelled 'Capital Outlay: Culture/Recreation'."},
+    {"severity": "warning", "path": "detail[34].category", "page": 11,
+     "extracted": "general government", "on_page": "General - TIF Expenditures 39,841",
+     "issue": "The disbursement rules list TIF under economic development. It was kept in general government so it ties to the p4 statement line (marked review)."},
+    {"severity": "warning", "path": "detail[48].category", "page": 11,
+     "extracted": "public safety (Cemetery column lines detail[48]-detail[53])", "on_page": "Cemetery column, total 23,799",
+     "issue": "Cemetery spending is health/welfare under the rules. public safety was used only because p4 Public safety 461,411 = Rescue 437,612 + Cemetery 23,799. This is the report's own grouping, so it is a judgment call."},
+    {"severity": "warning", "path": "detail[69].category", "page": 11,
+     "extracted": "general government (Fire column lines detail[69]-detail[78])", "on_page": "Fire column, total 46,685 (= p4 'Public buildings' 46,685)",
+     "issue": "The column is headed Fire (public safety), but the statement reports its total as Public buildings. Mapped to general government; a person should confirm."},
+    {"severity": "warning", "path": "detail[7].category", "page": 11,
+     "extracted": "charges for services/fees", "on_page": "Rescue - Charges for services 46,536",
+     "issue": "Under the user's 2026-10-28 rule, rescue charges go to the receipt category Ambulance Fees (detail_category is already ambulance/rescue fees)."},
+    {"severity": "warning", "path": "detail[9].category", "page": 11,
+     "extracted": "charges for services/fees", "on_page": "Cemetery - Charges for services 20,300",
+     "issue": "Under the user's 2026-10-28 rule this belongs in Cemetery Fees."},
+    {"severity": "warning", "path": "detail[18].category", "page": 11,
+     "extracted": "charges for services/fees", "on_page": "Pool - Charges for services 16,308",
+     "issue": "Under the user's 2026-10-28 rule this belongs in Recreation Fees."},
+    {"severity": "warning", "path": "disbursements[14].category", "page": 6,
+     "extracted": "Fuel", "on_page": "Vehicle expense 42,107",
+     "issue": "Vehicle expense may include repairs and maintenance as well as fuel. The category is a guess."},
+    {"severity": "warning", "path": "report_discrepancies", "page": 11,
+     "extracted": "not recorded", "on_page": "Transfers to other funds: columns add to 781,302 vs printed Total 781,303; Transfers from other funds: 526,689 vs 526,688; Grant/donation income: 205,480 vs 205,481",
+     "issue": "Three more $1 rounding differences in the p11 other financing rows are not listed in report_discrepancies. The detail other-financing lines are as printed."}
   ]
 }

@@ -1,78 +1,18 @@
 {
   "stem": "McCook_Public_Schools_FY2025",
-  "values_checked": 410,
+  "values_checked": 375,
   "issues": [
-    {
-      "severity": "warning",
-      "path": "detail_totals[1].amount",
-      "page": 17,
-      "extracted": 19698086,
-      "on_page": 20328086,
-      "issue": "Printed General Fund exhibit Total Disbursements is 20,328,086 (includes 100,000 Transfers to Activities). Extractor stored a computed 19,698,086 (less 100,000 transfer and 530,000 contra) instead of the printed total with includes [\"other financing\"]. Marked computed and the arithmetic holds (exhibit lines 20,228,086 - 530,000 contra = 19,698,086), but the printed total is not recorded as printed."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[160].category",
-      "page": 11,
-      "extracted": "capital outlay",
-      "on_page": "Contracted services 37,924 (Special Building Fund)",
-      "issue": "The governmental funds statement (p4) puts Special Building's 73,434 (37,924 + 35,510) under 'Maintenance and operation of plant' (support services), not capital outlay. The function split in detail does not tie to the statement's function lines."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[162].category",
-      "page": 11,
-      "extracted": "capital outlay",
-      "on_page": "Building improvements 35,510 (Special Building Fund)",
-      "issue": "Same as detail[160]: p4 reports this under Maintenance and operation of plant (support services)."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[9].category",
-      "page": 4,
-      "extracted": "other",
-      "on_page": "Other 144,927 (General 90,015 = Insurance adjustments 49,860 + Other non-revenue receipts 40,155 on p8; Depreciation Other income 54,912 on p10)",
-      "issue": "No component is over half, so 'other' is defensible. But p8 prints the breakdown, so 49,860 could be split out as reimbursements/refunds (the detail already classes it that way). Inconsistent with detail[28]."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[0].amount",
-      "page": 4,
-      "extracted": 6020472,
-      "on_page": "Taxes: Property 6,020,472; General Fund 5,980,623 = Local district taxes 5,976,679 + Carline taxes 3,944 (p8)",
-      "issue": "Amount is correct as printed. The statement's Property line includes 3,944 of carline tax, which the detail classes as other taxes (detail[1]). Small category inconsistency between the statement and the schedule."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[55].detail_category",
-      "page": 13,
-      "extracted": "dues, training and travel",
-      "on_page": "Mileage paid 134,289 (Support Services - Pupils)",
-      "issue": "This is large for staff mileage. It is likely pupil-transportation mileage paid to parents (could be professional/contract services). Already marked review."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[116].detail_category",
-      "page": 16,
-      "extracted": "miscellaneous expenditure",
-      "on_page": "District transportation (175,035) (Central Services - Business Services)",
-      "issue": "A negative credit line, probably a transportation cost reallocation out of business services. 'miscellaneous expenditure' is a last resort; the amount and sign are correct."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[296].detail_category",
-      "page": 19,
-      "extracted": "student activity receipts",
-      "on_page": "NE Community Foundation 8,528",
-      "issue": "Receipts from a community foundation (and the Scholarships account, detail[231], 6,033) may be donations/contributions rather than activity receipts. This is a judgment call."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[290].category",
-      "page": 19,
-      "extracted": "investment income",
-      "on_page": "1st Central Bank CD receipts 14,992, disbursements 9,377",
-      "issue": "Receipts into a CD account are presumed to be interest. They may instead be deposits or redemptions moved between activity accounts. Already marked review."
-    }
+    {"severity": "warning", "path": "detail[233].category", "page": 18,
+     "extracted": "charges for services/fees (detail_category student activity receipts)", "on_page": "Activities Fund: Revolving Fund/Interest receipts 70,339",
+     "issue": "Every other activity account is Extracurricular Receipts, and the user rule puts school activity fund receipts in Extracurricular Receipts unless the report says otherwise. The label mentions interest, so part of this may be Interest Income, but the report gives no split. The same inconsistency applies to 'Senior High Fines' 40 (detail[255], p19), which is categorized charges for services/fees."},
+    {"severity": "warning", "path": "detail[116].detail_category", "page": 16,
+     "extracted": "Travel", "on_page": "Central Services - Business Services: District transportation (175,035)",
+     "issue": "This negative credit line (apparently a transportation cost allocation out of Business services) has detail_category 'Travel', which is not in the detailed expenditure category list. The line is marked review."},
+    {"severity": "warning", "path": "disbursements[24].category", "page": 4,
+     "extracted": "Business", "on_page": "Other 22,578 (Other Governmental Funds column; Early Retirement Fund benefits, p23 'Support services - Business')",
+     "issue": "A statement line printed as 'Other' was moved to Business on the strength of the Early Retirement Fund schedule heading. This is defensible but a judgment call, and the line is marked review."},
+    {"severity": "warning", "path": "receipts[13].category", "page": 4,
+     "extracted": "Extracurricular Receipts 915,391", "on_page": "Activities receipts 915,391 (p18-19 include Bank Interest 8,801 and 1st Central Bank CD 14,992)",
+     "issue": "The statement line is recorded wholly as Extracurricular Receipts, while the activity schedule detail puts 8,801 in Interest Income and 14,992 in investment income. This follows the printed line, but the top level and detail are categorized differently."}
   ]
 }

@@ -4,12 +4,13 @@
   "issues": [
     {"severity": "error", "path": "disbursements[12].category", "page": 6,
      "extracted": "Professional/Contract Services", "on_page": "Customer accounting and collections 7,082,136 (Enterprise Funds Total)",
-     "issue": "this is a functional expense line (like Production, Distribution, Administrative and general), not a cost type; under the user's 2026-10-28 utility rule function lines stay 'utilities'. The extraction's own notes say attempt 2 set it to utilities, but the JSON still carries Professional/Contract Services"},
+     "issue": "[fixed 2026-10-28: category set to utilities (functional line), function tag removed] this is a functional expense line (like Production, Distribution, Administrative and general), not a cost type; under the user's 2026-10-28 utility rule function lines stay 'utilities'. The extraction's own notes say attempt 2 set it to utilities, but the JSON still carries Professional/Contract Services"},
     {"severity": "warning", "path": "detail[42].category", "page": 12,
      "extracted": "intergovernmental/state aid", "on_page": "Intergovernmental 5,826,299 (Total Non-Major), of which American Rescue Plan column 3,132,206",
-     "issue": "the ARPA (federal) column is more than half of this line on the same page; under the 'more than half' rule the dominant category would be federal grants (or mark the mix). Already flagged review"},
+     "issue": "[fixed 2026-10-28: category and detail_category set to federal grants (ARPA >half), review names the mix] the ARPA (federal) column is more than half of this line on the same page; under the 'more than half' rule the dominant category would be federal grants (or mark the mix). Already flagged review"},
     {"severity": "warning", "path": "missing", "page": 12,
      "extracted": null, "on_page": "Nonmajor combining statement: the six printed columns (Airport..Special Projects) add to revenues 6,287,349 vs Total Non-Major 8,289,412; the other nonmajor fund columns (property tax 679,483, keno 978,897, debt service etc.) are on a combining page not in the trimmed PDF",
-     "issue": "trim is missing the companion combining page; detail correctly uses the Total Non-Major column so totals are complete, but per-fund detail for the remaining nonmajor funds cannot be checked"}
+     "issue": "trim is missing the companion combining page; detail correctly uses the Total Non-Major column so totals are complete, but per-fund detail for the remaining nonmajor funds cannot be checked",
+     "resolved": "trim limitation, not an extraction error; Total Non-Major column used as the rules require for more than 6 funds"}
   ]
 }

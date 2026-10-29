@@ -1,13 +1,21 @@
 {
   "stem": "Southwest_Public_Schools_FY2025",
-  "values_checked": 172,
+  "values_checked": 182,
   "issues": [
-    {"severity": "warning", "path": "notes", "page": 4,
-     "extracted": "statement General Fund column combines Depreciation, Employee Benefit, Contingency and Student Fee funds",
-     "on_page": "General Fund interest 178,074 = 150,528 + 27,163 + 240 + 143 (no Student Fee); Other Governmental interest 1,078 = 324 + 747 + 7 and fund balance 120,253 = 100,515 + 16,452 + 3,286",
-     "issue": "The Student Fee Fund sits in Other Governmental Funds, not the General Fund column. The note is wrong, but no amount is affected."},
-    {"severity": "warning", "path": "receipts[6].original_label", "page": 4,
-     "extracted": "Other local receipts 28,551", "on_page": "General 28,542 + Other Governmental 9",
-     "issue": "The 9 in Other Governmental is the QCPU Fund's 1140 penalties and interest on taxes (p16), which detail records as property tax. Immaterial, but the statement line is not purely charges."}
+    {"severity": "error", "path": "detail[93].category", "page": 14,
+     "extracted": "reimbursements/refunds", "on_page": "1620 Daily sales - non-reimbursable program 6,984",
+     "issue": "Line is meal sales (a la carte, 'non-reimbursable' program), not a reimbursement; category should be School Lunch Sales (its detail_category is already school lunch sales, and the statement's Nutrition program receipts 86,820 = 72,963 + 6,873 + 6,984 is School Lunch Sales)"},
+    {"severity": "warning", "path": "detail[6].category", "page": 7,
+     "extracted": "Extracurricular Receipts", "on_page": "1800 Community services activities 20,396",
+     "issue": "Community services receipts are not school activity receipts; the statement's Other local receipts line holding them is charges for services/fees and the detail_category is other charges for services, so the category doesn't match the label"},
+    {"severity": "warning", "path": "disbursements[3].category", "page": 5,
+     "extracted": "support services (Pupils) 582,417", "on_page": "Student support services: General Fund 312,688, Activities Fund 269,729",
+     "issue": "46% of the line is Activities Fund spending (student activities). The statement's fund columns show it, but it is kept as support services/Pupils (Southern Valley-type reports split this out as student activities)"},
+    {"severity": "warning", "path": "disbursements[0].split_from", "page": 5,
+     "extracted": "Instruction 3,944,345 split into 3,445,858 / 480,194 / 18,293", "on_page": "Instruction 3,944,345 (single line)",
+     "issue": "The split ties exactly, but it was put together from several schedule headings (1000 Instruction, 3300, 3500, 6000 on pp8-10), not from a printed breakdown of the statement line"},
+    {"severity": "warning", "path": "detail[86].category", "page": 11,
+     "extracted": "support services", "on_page": "Depreciation Fund 2900 Other support services 144,071",
+     "issue": "The statement counts this 144,071 in Operation and maintenance of plant (874,430 = 730,359 + 144,071), so detail and statement functions differ. Likewise Special Building 2620/2660 (detail[104], detail[105]) are Building and Grounds in detail but in Capital outlay 26,988 on the statement"}
   ]
 }

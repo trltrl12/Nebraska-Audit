@@ -1,54 +1,18 @@
 {
   "stem": "Hastings_FY2025",
-  "values_checked": 209,
+  "values_checked": 232,
   "issues": [
-    {
-      "severity": "error",
-      "path": "disbursements[29].category",
-      "page": 7,
-      "extracted": "other",
-      "on_page": "Loss on disposal of capital assets (188,496) (Electric 53,698, Combined System Utilities 134,798)",
-      "issue": "[fixed 2026-10-21: category utilities] a specific category fits: this is a nonoperating expense of the utility enterprise funds, and every other business-type line, including Miscellaneous expense and Non-utility plan depreciation, is filed under utilities. Using 'other' here breaks the last-resort rule"
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[11].category",
-      "page": 5,
-      "extracted": "federal grants",
-      "on_page": "Grants 995,342",
-      "issue": "the source isn't printed (it covers GF 45,614, Street 587,453, Museum 9,000 and nonmajor 353,275 including Library, Public Safety and Wireless E911 grants). Some of it may be state money, so 'federal grants' is a guess. The same applies to detail grant lines and to receipts[23] Grant revenue 130,605"
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[25]",
-      "page": 7,
-      "extracted": "donations/contributions 3,911,155 as business-type receipt",
-      "on_page": "Contributions in aid of construction 3,911,155 (inside Total nonoperating revenues)",
-      "issue": "this is printed inside nonoperating revenues, so keeping it as a receipt matches the printed totals. It is a capital contribution, though, and could instead go to business_type.other_financing. Judgment call"
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[16].category",
-      "page": 5,
-      "extracted": "other",
-      "on_page": "Excess pension funding 1,213,815",
-      "issue": "equals the Investments line (1,213,815, p1/p4). It is a one-time non-tax item (about 3% of governmental revenue) and its nature isn't stated on the trimmed pages. Recording it in 'other' with review is acceptable, but a person may want to look at it"
-    },
-    {
-      "severity": "warning",
-      "path": "balance_sheet.liabilities[8].category",
-      "page": 1,
-      "extracted": "accrued liabilities",
-      "on_page": "Compensated absences - noncurrent 7,491,890",
-      "issue": "the rules give 'accrued liabilities' for compensated absences due soon. This is the noncurrent portion, so 'other liabilities' (or long-term) may fit better"
-    },
-    {
-      "severity": "warning",
-      "path": "notes",
-      "page": 5,
-      "extracted": "GF transfers out ... internal service 1,468,241 approx",
-      "on_page": "GF transfers out 6,286,241 - 5,818,000 to nonmajor = 468,241; Debt Service transfers out 1,000,000 (98,871 back in from Fire Equipment)",
-      "issue": "the 1,468,241 that goes to the internal service funds comes from GF 468,241 plus Debt Service 1,000,000, not from the GF alone. No amount is affected"
-    }
+    {"severity": "warning", "path": "receipts[11].category", "page": 5,
+     "extracted": "federal grants", "on_page": "Grants 995,342",
+     "issue": "the report does not say whether the grants are federal or state (Street Fund grants 587,453 equal the public works capital grants); the category is a guess, already marked for review"},
+    {"severity": "warning", "path": "receipts[25]", "page": 7,
+     "extracted": "Contributions in aid of construction 3,911,155 as a business-type receipt (donations/contributions)", "on_page": "Contributions in aid of construction 3,911,155 (inside nonoperating revenues)",
+     "issue": "these are capital contributions. They are printed inside nonoperating revenues, so keeping them as a receipt can be defended, but they could go in business_type.other_financing instead"},
+    {"severity": "warning", "path": "balance_sheet.column", "page": 1,
+     "extracted": "Governmental Activities | Business-type Activities | Total (each line tagged fund_type)", "on_page": "Total column available",
+     "issue": "lines are entered per activity column, not from the Total primary government column the rules call for. Every line matches its column and the lines add up to the printed Total column (assets 444,419,079; liabilities 37,695,555; net position 406,723,524)"},
+    {"severity": "warning", "path": "balance_sheet.liabilities[13].category", "page": 1,
+     "extracted": "Accrued Liabilities", "on_page": "Compensated absences - noncurrent 3,002,872 (also [14] 4,489,018 business-type)",
+     "issue": "noncurrent compensated absences are under the noncurrent liabilities heading; under the rules, accrued liabilities is for compensated absences due soon"}
   ]
 }

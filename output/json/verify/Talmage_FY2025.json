@@ -1,15 +1,18 @@
 {
   "stem": "Talmage_FY2025",
-  "values_checked": 35,
+  "values_checked": 86,
   "issues": [
-    {"severity": "warning", "path": "receipts[2].category", "page": 4,
-     "extracted": "intergovernmental/state aid", "on_page": "Restricted for streets 125,937 (General Fund); p2 shows it inside Public Works - Street operating grants and contributions 168,491",
-     "issue": "The page doesn't name the grantor. State aid is a reasonable guess but could also be federal grants or donations/contributions. The line already has a review flag."},
-    {"severity": "warning", "path": "receipts[3].category", "page": 4,
-     "extracted": "donations/contributions", "on_page": "Other grants and contributions 25,422 (p2: operating grants general government 22,041 + culture and recreation 3,381)",
-     "issue": "The label mixes grants and contributions. If the grants come from a government, intergovernmental/state aid or federal grants would fit better. The line already has a review flag."},
-    {"severity": "warning", "path": "missing", "page": 7,
-     "extracted": null, "on_page": "Budget and actual, all funds: Taxes 35,773; Federal 0; State 67,422; Local 526,100; Total revenues 629,295; General government 111,658; Public Works 488,841; Culture and Recreation 6,820; Capital outlay 49,401; Debt service 22,095; Total expenditures 678,815",
-     "issue": "detail[] is empty, so this schedule's lines are not in the JSON. The extractor explained that the schedule mixes governmental and business-type funds. Every amount ties to lines already in the JSON (Local 526,100 = 125,937 + 25,422 + 2,084 + 2,508 + 362,292 + 7,857; Public Works 488,841 = 82,335 + 125,937 + 280,569), so nothing is lost. Leaving it out is still a judgment call."}
+    {"severity": "error", "path": "receipts[6].category", "page": 6,
+     "extracted": "charges for services/fees", "on_page": "Charges for services 362,292 (Water, Sewer, Electric, Sanitation proprietary funds)",
+     "issue": "Utility fund charges have their own receipt category, Utility Charges (user rule 2026-10-28). The detail lines for the same amounts already use Utility Charges, so the statement line disagrees with its own detail."},
+    {"severity": "warning", "path": "disbursements[4].original_label", "page": 4,
+     "extracted": "Capital outlay", "on_page": "Capital outlay 49,401 (General Fund; Statement of Activities p2 puts it in General government 161,059 = 111,658 + 49,401)",
+     "issue": "Capital outlay lines should be labelled 'Capital Outlay: <function>' (here General Government), with the printed text in printed_label. detail[11] has the same issue."},
+    {"severity": "warning", "path": "notes", "page": null,
+     "extracted": "...Read pages 1-7 of 7 Balance sheet (user 2026-10-27)...", "on_page": "7 pages",
+     "issue": "All 7 pages are covered, but 'Read pages 1-7 of 7' is no longer at the end of notes because later text was appended after it. The notes also still say 'Detail left empty', which contradicts the per-fund detail that is now in the file."},
+    {"severity": "warning", "path": "detail_totals[13].computed", "page": 6,
+     "extracted": "Operating expenses, the only operating expenditure (total line blank)", "on_page": "Sanitation subtotal 23,776 is printed",
+     "issue": "The amount is right, but the Sanitation expenditure subtotal is printed on p6, so the 'total line blank' note is inaccurate."}
   ]
 }

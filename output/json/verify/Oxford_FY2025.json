@@ -1,18 +1,15 @@
 {
   "stem": "Oxford_FY2025",
-  "values_checked": 188,
+  "values_checked": 214,
   "issues": [
-    {"severity": "warning", "path": "detail[5].category", "page": 18,
-     "extracted": "charges for services/fees (detail_category licenses and permits)", "on_page": "Permits and fees 132",
-     "issue": "High-level category and detail_category disagree; 'Permits and fees' would be licenses and permits at both levels (or the mix noted with review)."},
-    {"severity": "warning", "path": "detail[25].category", "page": 18,
-     "extracted": "economic development", "on_page": "Economic development 14,621 (General department, Operating expenses)",
-     "issue": "The governmental statement (p6) shows General Fund community development as '-', so this 14,621 is inside General government 527,039; the detail function split does not tie to the statement's function lines."},
-    {"severity": "warning", "path": "other_financing", "page": 7,
-     "extracted": -13696, "on_page": "Unrealized loss on investments (13,696) under Other Financing Sources (Uses)",
-     "issue": "Recorded as other financing as printed; it is an investment loss (the realized loss -12,226 is in receipts as investment income), so it could be treated as negative investment income."},
-    {"severity": "warning", "path": "proprietary", "page": 10,
-     "extracted": null, "on_page": "Statement of Cash Flows - Proprietary Funds total: operating 299,380; noncapital (11,232); capital and related (134,504); investing 44,676; beginning 1,635,630; ending 1,833,950 (p11)",
-     "issue": "Basis recorded as cash (governmental modified cash) while business-type funds are full accrual; the proprietary cash flow statement is printed but left null. Values were checked and are given in notes."}
+    {"severity": "warning", "path": "receipts[11..13].category", "page": 9,
+     "extracted": "charges for services/fees", "on_page": "Sales: Consumers 1,606,312 / Service charges 10,064 / Miscellaneous 7,445 (Electric, Water, Sewer, Sanitation enterprise funds)",
+     "issue": "utility fund sales/charges are category Utility Charges under the user's 2026-10-28 rule (user_rules.py may re-apply it)"},
+    {"severity": "warning", "path": "detail[11],detail[12],detail[20].category", "page": 18,
+     "extracted": "charges for services/fees", "on_page": "Pool charges 8,690, Park charges 1,890 (p18), Cemetery charges 13,975 (p19)",
+     "issue": "detail_category already says recreation/pool/park fees and cemetery fees; under the 2026-10-28 rule category should be Recreation Fees / Cemetery Fees"},
+    {"severity": "warning", "path": "transfers_in", "page": 7,
+     "extracted": {"amount": 11232, "transfers_out": null}, "on_page": "Transfers in (out): General 25,191, Street 4,066, Sinking (18,025); Total 11,232 (from Electric Fund)",
+     "issue": "governmental transfers recorded at the printed net Total-column figure (gross in 29,257, out 18,025 between governmental funds). Matches the printed total and the Electric Fund transfer out; noted only because the intra-governmental gross flows are not shown at the top level"}
   ]
 }

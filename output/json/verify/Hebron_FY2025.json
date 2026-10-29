@@ -1,66 +1,27 @@
 {
   "stem": "Hebron_FY2025",
-  "values_checked": 520,
+  "values_checked": 334,
   "issues": [
-    {
-      "severity": "error",
-      "path": "detail[202]",
-      "page": 36,
-      "extracted": {
-        "section": "expenditure",
-        "category": "utilities",
-        "amount": 771288
-      },
-      "on_page": "Sched 29 Disbursements: Electric 771,288; Sched 28 (p35): Electric accrual disbursements 85,425 (all depreciation, removed) + Inc (Dec) Prepaids/Due To 771,288 = cash basis 771,288",
-      "issue": "[fixed 2026-10-21: moved to section 'other financing', amount -771,288, interfund Due To per Sched 28 p35; Sched 29 Electric disbursements total now includes other financing] All of the Electric cash-basis 'disbursement' is an interfund due-to payment to other funds (an interfund loan or advance), not utility spending. It is recorded as a utilities expenditure. Sched 28 prints this breakdown, so it should go to other financing (or be left out), not expenditure."
-    },
-    {
-      "severity": "error",
-      "path": "detail[203].amount",
-      "page": 36,
-      "extracted": 890116,
-      "on_page": "Sched 29 Receipts: Water 890,116; Sched 28 (p35): accrual 389,842 + receivables 4,342 + Due Froms 495,932",
-      "issue": "[fixed 2026-10-21: split into water charges revenue 394,184 (computed) and other financing +495,932 interfund Due Froms (split_from, Sched 28 p35); Sched 29 Water receipts total now includes other financing] 495,932 of this water-charges revenue is interfund due-from money received from other funds, not water revenue. It is counted as revenue. Sched 28 prints the split: 394,184 is receipts and 495,932 is interfund, which belongs in other financing (split_from)."
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[7].category",
-      "page": 6,
-      "extracted": "debt service principal (61,727, review: principal and interest not split)",
-      "on_page": "Debt service 61,727 = Sched 24 (p34) Debt service-principal 55,000 + Debt service-interest 6,727",
-      "issue": "The report prints the breakdown of this line on p34. It could be split 55,000 principal / 6,727 interest with split_from. As recorded, 6,727 of interest is counted as principal."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[15]",
-      "page": 32,
-      "extracted": 397,
-      "on_page": "Exhibit E (p6) has no Lottery line; Total column lines add to 2,664,674 vs printed Total revenues 2,665,071; Sched 22 (p32) Keno Lottery 397",
-      "issue": "This receipt isn't printed on the governmental funds statement. The extractor built it, with a made-up label, so the lines tie to the printed total. It is marked computed and also listed in report_discrepancies. The rules say figures stay as printed when the report doesn't add up, so someone should confirm whether adding the line is acceptable."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[11].category",
-      "page": 6,
-      "extracted": "donations/contributions",
-      "on_page": "Contributions/grants 665,809 (incl. Grant Project grant income 434,445 p33, Parks contributions/grants 189,441 p20)",
-      "issue": "Exhibit B (p2) shows these as operating grants (448,490 economic development) and capital grants (185,965 culture and recreation). If the grantor is a government (e.g. CDBG, state grants), most of this belongs in intergovernmental/state aid or federal grants, not private donations. The grantor isn't stated."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[41]",
-      "page": 15,
-      "extracted": "section 'other financing', -19,083",
-      "on_page": "Payment of long-term liabilities-principal (19,083)",
-      "issue": "Debt principal and interest payments in fund schedules are recorded as 'other financing'. At the top level the same payments are disbursements (outside_printed_total). Because of this, detail never shows them as debt principal / debt interest and fees spending. Same for detail[42], [93], [94], [141], [142], [166], [167]."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[197].category",
-      "page": 34,
-      "extracted": "debt service interest / debt interest and fees",
-      "on_page": "Debt Service Fund Operating expenditures 226",
-      "issue": "Exhibit E (p5) counts this 226 under Policy/administration for the non-major funds, not under Debt service. The category is a guess: it could be paying-agent fees or general government."
-    }
+    {"severity": "error", "path": "detail[201].detail_category", "page": 36,
+     "extracted": "charges for services/fees / electric charges", "on_page": "Receipts: Electric 350,941 = accrual 347,450 (p35) = Lease agreement 257,243 + Charges for services 5,510 + Interest revenue 84,697 (p9)",
+     "issue": "the Electric Department has almost no electric sales (5,510, 1.6%). About 74% of its receipts are lease agreement income and 24% interest, so 'electric charges' is wrong. Use the dominant lease/rental category (Rentals / rentals) with a review note naming the mix"},
+    {"severity": "warning", "path": "receipts[20].category", "page": 10,
+     "extracted": "charges for services/fees", "on_page": "Lease agreement 257,243 (Electric Department)",
+     "issue": "lease income for the electric system. The user's 2026-10-28 rule moves rent/rental income out of charges for services into Rentals"},
+    {"severity": "warning", "path": "receipts[19].category", "page": 10,
+     "extracted": "charges for services/fees", "on_page": "Charges for services 685,819 (Electric 5,510, Water 379,378, Sewage 300,931)",
+     "issue": "utility fund charges; the user's 2026-10-28 rule puts utility fund sales/charges in Utility Charges"},
+    {"severity": "warning", "path": "receipts[13].category", "page": 6,
+     "extracted": "charges for services/fees", "on_page": "Charges for services 535,601 (Landfill 322,819, Recreation 35,875, Summer Rec 55,726, Parks 14,114, Cemetery 8,600, Community Center 35,003, Fire Truck Sinking 59,314, General 4,150)",
+     "issue": "about 60% is sanitary landfill/refuse charges, which the 2026-10-28 rule makes Utility Charges (garbage/refuse). Recreation, cemetery and rental parts also have their own categories now; the detail lines (detail[32], detail[74], detail[88], detail[108], detail[151], detail[163]) still use charges for services/fees"},
+    {"severity": "warning", "path": "receipts[14].category", "page": 6,
+     "extracted": "donations/contributions", "on_page": "Contributions/grants 665,809 (incl. Grant Project grant income 434,445 p33, Parks 189,441 p20)",
+     "issue": "Exhibit B (p2) shows 448,490 economic development operating grants and 185,965 culture/recreation capital grants. These are likely government grants (e.g. CDBG), not private donations. The category is doubtful (the line is already flagged for review)"},
+    {"severity": "warning", "path": "disbursements[12].category", "page": 10,
+     "extracted": "Repairs and Maintenance", "on_page": "Maintenance and operation 190,808",
+     "issue": "'Maintenance and operation' reads as an operating function line (the utilities' main operating cost), not a repairs cost type; under the user rule it may belong in utilities"},
+    {"severity": "warning", "path": "report_discrepancies[0].note", "page": 32,
+     "extracted": "receipts[15]", "on_page": "Lottery 397",
+     "issue": "the note points to receipts[15], but the computed keno/lottery line is receipts[18]. The figures themselves are right: Exhibit E lines add to 2,664,674 against the printed 2,665,071, and the 397 matches the nonmajor column's shortfall"}
   ]
 }

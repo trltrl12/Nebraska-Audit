@@ -1,24 +1,15 @@
 {
   "stem": "Logan_County_FY2025",
-  "values_checked": 104,
+  "values_checked": 96,
   "issues": [
-    {"severity": "fixed", "path": "balance_sheet.statement", "page": 3, "extracted": "Statement of Net Position - Cash Basis (p1): Cash 933,584; Restricted cash 121,656; Unrestricted 933,584", "on_page": "Statement of Assets and Fund Balances - Cash Basis, Governmental Funds (p3), Total column: Cash 1,003,610; Restricted cash 51,630; restricted lines as on p1; Committed to Road maintenance 90,091; Unassigned 843,493; total 1,055,240", "issue": "The balance-sheet basis rule (user, 2026-10-27) says cash-basis reports take governmental balance-sheet lines from the governmental funds statement (Total column, fund balance by classification) when its totals equal the government-wide totals. They do here (1,055,240). The asset and equity lines should come from p3.", "resolution": "fixed 2026-10-27: balance sheet from the p3 governmental funds statement (Total column): Cash 1,003,610, Restricted cash 51,630, Restricted lines, Committed: Road maintenance 90,091, Unassigned 843,493; totals 1,055,240 unchanged"},
-    {"severity": "warning", "path": "receipts[4].category", "page": 2,
-     "extracted": "other (Local 181,761)",
-     "on_page": "p2: charges for services 75,075 + capital grants and contributions 74,011 + interest income 27,897 + miscellaneous 4,778 = 181,761 exactly",
-     "issue": "Local adds up exactly from the Statement of Activities parts. In Furnas County the same structure was split with split_from. Here it was left in 'other'. No single part is more than half, so leaving it is defensible, but it is inconsistent."},
-    {"severity": "warning", "path": "detail[19].original_label", "page": 8,
-     "extracted": "Transfers - out", "on_page": "Transfers - out",
-     "issue": "The user label rule of 2026-10-27 renames detail other-financing transfer labels to 'Transfers Out' / 'Transfers In' and keeps the printed text in printed_label. That was not applied here or to detail[23] ('Transfers - in', p9)."},
-    {"severity": "warning", "path": "detail", "page": 6,
-     "extracted": "7 nonmajor fund columns recorded fund by fund (p6-7)",
-     "on_page": "Total Non-Major Funds column: receipts 81,155, disbursements 83,408 (p7)",
-     "issue": "The extractor rule says a combining schedule with more than 6 fund columns uses its Total column. The per-fund lines do tie to that Total column, and there is no double counting."},
+    {"severity": "warning", "path": "receipts[4].category", "page": 4,
+     "extracted": "other", "on_page": "Local 181,761; Statement of Activities p2: charges for services 75,075 + capital grants 74,011 + interest income 27,897 + miscellaneous 4,778 = 181,761 exactly",
+     "issue": "The Local line is fully explained by the p2 program receipts and general receipts, which add up to it exactly. The county rule sends Local lines to their p2 components, and none is over half, so splitting with split_from (Charges for services, Capital grants, Interest Income, other) looks possible. It is left as other with a review note because p2 doesn't label these as the Local line. Judgment call."},
     {"severity": "warning", "path": "detail[37].category", "page": 7,
-     "extracted": "other", "on_page": "Shop Building Fund Local 50,000",
-     "issue": "A 50,000 Local receipt into a debt fund is unexplained. It may be part of the capital grants and contributions of 74,011 shown on p2. It is already marked for review."},
-    {"severity": "warning", "path": "notes", "page": 8,
-     "extracted": "General Fund budget schedule cited as p7", "on_page": "the General Fund budgetary comparison is trimmed p8",
-     "issue": "Wrong page reference in notes and in the detail[40] review text. The amounts cite p8 correctly."}
+     "extracted": "other", "on_page": "Shop Building Fund (Debt) Local 50,000",
+     "issue": "The debt fund's 50,000 Local receipt exactly equals its 38,820 principal + 11,180 interest. It may be a contribution or reimbursement toward the shop building debt rather than miscellaneous revenue. Unexplained on the page, so it is kept as other with review."},
+    {"severity": "warning", "path": "detail[19].detail_category", "page": 9,
+     "extracted": "not itemized", "on_page": "Road Fund DISBURSEMENTS 798,010",
+     "issue": "The Road Fund schedule prints one disbursement total. Per p4 it holds public works 708,080 + capital outlay 55,630 + principal 31,345 + interest 2,955, so the whole line in streets/highways includes capital outlay and debt service. Recorded as printed; flagged for awareness."}
   ]
 }

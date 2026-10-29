@@ -1,14 +1,24 @@
 {
   "stem": "Bruning_FY2025",
-  "values_checked": 104,
+  "values_checked": 120,
   "issues": [
-    {"severity": "warning", "path": "disbursements[5].category", "page": 4,
-     "extracted": "debt service principal",
-     "on_page": "Debt service 16,131",
-     "issue": "Principal and interest not separated, and the whole amount is recorded as principal. The Statement of Activities (p2) shows debt service expense of 830, which suggests about 830 is interest. A review flag is already set. Same applies to detail[42]."},
-    {"severity": "warning", "path": "receipts[13]", "page": 6,
-     "extracted": "business-type Interest income 8,994 in receipts; business_type.debt_proceeds null",
-     "on_page": "Exhibit I (p7): Proceeds of long term loans 181,000; Payment of long-term liabilities (46,647)",
-     "issue": "On a net-position measure, loan proceeds and principal payments correctly stay out of the roll-forward. Note that the utility borrowed 181,000 during the year; this is not recorded anywhere in the JSON."}
+    {"severity": "error", "path": "receipts[4].amount", "page": 8,
+     "extracted": 75936, "on_page": "Intergovernmental revenues per Schedule 1 Totals: Highway allocation 54,629; Motor vehicle fees 3,634; Municipal equalization aid 1,610; Homestead allocation 960; Other 16,063",
+     "issue": "The line was split using the p8 breakdown but 'Motor vehicle fees' 3,634 was left inside intergovernmental/state aid. It is category motor vehicle tax: the rules give motor vehicle fees their own category, and the same line is motor vehicle tax in detail[28]. It should be split out as motor vehicle tax 3,634 (split_from), with state aid 72,302."},
+    {"severity": "error", "path": "receipts[5].category", "page": 4,
+     "extracted": "charges for services/fees", "on_page": "NPPD lease 96,682",
+     "issue": "This is lease income. Under the user's 2026-10-28 rule Rentals (rent, rental income) is its own receipt category taken out of charges for services. The extraction itself gives the detail line detail_category 'rentals'."},
+    {"severity": "error", "path": "detail[6].category", "page": 8,
+     "extracted": "charges for services/fees", "on_page": "NPPD lease 96,682",
+     "issue": "Category should be Rentals, consistent with its own detail_category 'rentals' and the user's Rentals rule."},
+    {"severity": "warning", "path": "receipts[7].category", "page": 4,
+     "extracted": "charges for services/fees", "on_page": "Opera house 1,160 (also Medical clinic 4,416)",
+     "issue": "These may be building rental income (Rentals) rather than service charges. The page doesn't say."},
+    {"severity": "warning", "path": "detail[44].split_from", "page": 7,
+     "extracted": "Proprietary Funds receipts 493,256 (p9) split into cash flow statement lines", "on_page": "Schedule 2 prints only 'Proprietary Funds 493,256' and '498,820'",
+     "issue": "Schedule 2's single proprietary lines were split using the Statement of Cash Flows (p7). The components tie exactly (493,256 and 498,820, with the 5,564 investment decrease as the difference), but the schedule itself doesn't print that breakdown. This split is defensible but not printed (applies to detail[44]-[53])."},
+    {"severity": "warning", "path": "detail[44].category", "page": 7,
+     "extracted": "charges for services/fees", "on_page": "Receipts from customers 149,776",
+     "issue": "These are utility fund collections (Exhibit H: Utility collections 144,971 + Sales tax 4,805). receipts[11] uses Utility Charges for the same money, so the categories are inconsistent."}
   ]
 }

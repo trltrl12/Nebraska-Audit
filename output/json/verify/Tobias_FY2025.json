@@ -4,7 +4,7 @@
   "issues": [
     {"severity": "error", "path": "receipts[10].category", "page": 1,
      "extracted": "charges for services/fees", "on_page": "Local Receipts: Other - Sewer Fund 8,052, Water Fund 45,608",
-     "issue": "the extractor treats these utility-fund receipts as utility charges, but under the user rules (2026-10-28) utility fund sales/charges have their own receipt category, Utility Charges, not charges for services/fees. The amount itself is correct"},
+     "issue": "[fixed 2026-10-28: category changed to Utility Charges] the extractor treats these utility-fund receipts as utility charges, but under the user rules (2026-10-28) utility fund sales/charges have their own receipt category, Utility Charges, not charges for services/fees. The amount itself is correct"},
     {"severity": "warning", "path": "beginning_cash", "page": 2,
      "extracted": "Debt Service Fund 6,025 counted as governmental", "on_page": "DEBT SERVICE FUND column; p5 interfund schedule calls it 'Water Bond Fund' -> Water Fund 6,025",
      "issue": "the fund is the Water bond fund and its only activity is a 6,025 transfer to the Water Fund, so it may belong with the business-type utility funds. Treating it as governmental puts a 6,025 inflow into the governmental beginning cash and transfers_out, and a +1,002 net transfer between fund types; the extractor's notes say so"}

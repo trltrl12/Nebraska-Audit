@@ -1,15 +1,24 @@
 {
   "stem": "Hayes_Center_Public_Schools_FY2025",
-  "values_checked": 195,
+  "values_checked": 152,
   "issues": [
-    {"severity": "warning", "path": "receipts[8].category", "page": 6,
-     "extracted": "fines and forfeitures", "on_page": "Fines and licenses 1,755 (= General Fund Fines and licenses 1,145 + Local license fees 610, p9)",
-     "issue": "Line mixes fines and licenses (610 of it is local license fees per p9). The rules want the dominant category plus a review note naming the mix; there is no review flag."},
-    {"severity": "warning", "path": "detail[34].original_label", "page": 9,
-     "extracted": "Categorical grants from corporations/private interests", "on_page": "Categorical grants from corportions/private interests",
-     "issue": "Label corrected from the printed typo; the amount 5,107 is right."},
-    {"severity": "warning", "path": "ending_cash.computed", "page": 4,
-     "extracted": 2486715, "on_page": 2486715,
-     "issue": "Value is right but it is printed as-is (Total Governmental Funds total assets on p4; governmental total assets on p1), so the 'computed' marker isn't needed."}
+    {"severity": "error", "path": "receipts[7].category", "page": 6,
+     "extracted": "charges for services/fees", "on_page": "Rental of property 13,909",
+     "issue": "Rental income goes in the user's Rentals receipt category (2026-10-28 rule), not charges for services."},
+    {"severity": "error", "path": "detail[57].category", "page": 12,
+     "extracted": "charges for services/fees", "on_page": "1910 Rental of property 13,909",
+     "issue": "Rental income goes in the user's Rentals category (detail_category is already rentals)."},
+    {"severity": "error", "path": "receipts[17].category", "page": 8,
+     "extracted": "charges for services/fees", "on_page": "Lunch sales 32,387 (Nutrition Fund)",
+     "issue": "Lunch sales go in the user's School Lunch Sales receipt category (2026-10-28 rule)."},
+    {"severity": "error", "path": "balance_sheet.total_assets.source_page", "page": 1,
+     "extracted": 4, "on_page": "Total assets 2,511,062 is printed on p1 (Statement of Net Position, Total column); p4 total assets is 2,486,715",
+     "issue": "Wrong source page. 2,511,062 isn't printed on p4, so the page check can't confirm it. The amount is also a combination of governmental (p4) and business-type (p1) lines."},
+    {"severity": "error", "path": "balance_sheet.total_equity.source_page", "page": 1,
+     "extracted": 4, "on_page": "Total net position 2,511,062 is printed on p1; p4 total fund balances is 2,486,715",
+     "issue": "Wrong source page for the combined total."},
+    {"severity": "warning", "path": "receipts[14].category", "page": 6,
+     "extracted": "Sale of Property", "on_page": "Insurance adjustments and sale of property 4,781",
+     "issue": "This line mixes insurance proceeds (reimbursements/refunds) with sale of property, and the page doesn't say which part is larger. detail[19] has the same issue."}
   ]
 }

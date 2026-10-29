@@ -1,62 +1,19 @@
 {
   "stem": "Elm_Creek_FY2025",
-  "values_checked": 102,
+  "values_checked": 205,
   "issues": [
-    {
-      "severity": "error",
-      "path": "detail[5].fund_type",
-      "page": 7,
-      "extracted": "governmental",
-      "on_page": "Charges for services 430,354 (all funds); p2 Statement of Activities: governmental 14,442 + business-type 415,912 = 430,354",
-      "issue": "[fixed] wrong fund type: 415,912 (97%) of this line is business-type (Water/Sewer/Garbage). The report prints the breakdown of this exact line on p2, so it could be split (split_from) into governmental 14,442 and business-type 415,912; as recorded the whole amount counts as governmental. The line's review note says it can't be split, but p2 shows the split"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[7].review",
-      "page": 7,
-      "extracted": "business-type sales tax 9,894 may be included in total on this schedule",
-      "on_page": "Sales tax 151,140",
-      "issue": "review note is wrong: 151,140 equals governmental sales tax alone (p4). The business-type sales tax 9,894 sits inside Charges for services 430,354 (= 14,442 + total business operating revenues 415,912, which include sales tax 9,894)"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[9].category",
-      "page": 7,
-      "extracted": "other / miscellaneous revenue",
-      "on_page": "Other 8,224",
-      "issue": "per the fund statement (p4) this is local donations 300 + insurance proceeds 7,278 + other revenues 646; dominant part (89%) is insurance proceeds, i.e. reimbursements/refunds. Defensible as printed 'Other' on p7 (review flag set)"
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[2].category",
-      "page": 4,
-      "extracted": "general government",
-      "on_page": "Repairs and maintenance 160,970 (General 5,219; Street 142,801; Park 7,496; Library 54; Cemetery 5,400)",
-      "issue": "object-only Total column line; 89% is Street Fund, so the dominant function is streets/highways, not general government"
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[3].category",
-      "page": 4,
-      "extracted": "general government",
-      "on_page": "Utilities 39,512 (General 10,759; Street 15,366; Park 10,167; Library 3,220)",
-      "issue": "object-only Total column line; largest share is Street Fund (streets/highways), General Fund is only 27%"
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[6].category",
-      "page": 4,
-      "extracted": "general government",
-      "on_page": "Lease 8,081 (General 1,766; Street 6,000; Park 315)",
-      "issue": "object-only Total column line; 74% is Street Fund, so the dominant function is streets/highways"
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[7].category",
-      "page": 4,
-      "extracted": "general government",
-      "on_page": "Supplies 42,987 (General 8,067; Street 13,586; Park 14,119; Library 3,891; Cemetery 3,324)",
-      "issue": "object-only Total column line; largest shares are Park (culture/recreation) and Street; General Fund is only 19%"
-    }
+    {"severity": "warning", "path": "receipts[12].category", "page": 6,
+     "extracted": "charges for services/fees", "on_page": "Charges for services 389,519 (Water 138,696; Sewer 148,013; Garbage 102,810)",
+     "issue": "All of this proprietary line is water/sewer/garbage utility billing; the user's 2026-10-28 rule puts utility fund charges in Utility Charges (the matching detail lines already use Utility Charges). user_rules.py will not change it because the receipt line has no fund name."},
+    {"severity": "warning", "path": "receipts[10].category", "page": 4,
+     "extracted": "charges for services/fees", "on_page": "Charges for services 14,442 (Park 12,842; Cemetery 1,600)",
+     "issue": "89% is Park Fund (Recreation Fees), the rest Cemetery (Cemetery Fees); the 2026-10-28 rule gives both their own categories. The same applies to detail Park 12,842 and Cemetery 1,600, which are still category charges for services/fees."},
+    {"severity": "warning", "path": "notes", "page": 7,
+     "extracted": "notes describe p7 all-funds budget lines (fund_type split, capital outlay/debt service split, items summing to 1,342,216 / 1,497,104)",
+     "on_page": "detail now holds only per-fund lines from p4 and p6",
+     "issue": "The notes are out of date: the p7 detail they describe was removed by the 2026-10-27 per-fund rule. 'Read pages 1-8 of 8' is in the notes, and 8 is the correct page count, but it is not at the end of the notes."},
+    {"severity": "warning", "path": "report_discrepancies", "page": 2,
+     "extracted": null, "on_page": "p2 Cemetery capital grants 13,610, total 248,891; p4 Cemetery state grants 13,310, total 248,591 (p4 also shows local donations 300 that p2 does not)",
+     "issue": "The Statement of Activities and the fund statement classify 300 of Cemetery revenue differently. The totals still tie (926,303), so this is informational and not recorded."}
   ]
 }

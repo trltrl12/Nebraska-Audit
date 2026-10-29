@@ -1,15 +1,8 @@
 {
   "stem": "Dawes_County_FY2025",
-  "values_checked": 92,
+  "values_checked": 140,
   "issues": [
-    {"severity": "warning", "path": "transfers_in", "page": 4,
-     "extracted": null, "on_page": "Total Governmental Funds: Transfers in 501,780; Transfers out (501,780)",
-     "issue": "The Total Governmental Funds column prints both transfer lines, but the fields were left null because they net to zero. The identity holds either way. Cuming County, which has the same layout, records them, so filling transfers_in and transfers_out with 501,780 (p4) would be more consistent."},
-    {"severity": "warning", "path": "receipts[0]", "page": 4,
-     "extracted": "Taxes 5,173,883 as taxes (unlabeled)", "on_page": "Inheritance Fund column Taxes 164,170 (p4); General 4,634,958; Road 196; Nonmajor 374,559",
-     "issue": "The fund columns on p4 show 164,170 of the taxes in the Inheritance Fund, and detail[38] already calls that line 'inheritance tax'. The receipts line could be split by fund column with split_from, as was done for Cuming County. As recorded, the same money is 'taxes (unlabeled)' in receipts and 'inheritance tax' in detail."},
-    {"severity": "warning", "path": "detail[26].category", "page": 5,
-     "extracted": "natural resources/conservation", "on_page": "Public Works: Noxious Weed Control 109,451",
-     "issue": "This follows the rule that noxious weed control is natural resources/conservation. However, the statement (p4) counts it in Public Works (General Fund Public Works 115,376 = 5,925 + 109,451), so the detail functions will not tie to the statement's Public Works line."}
+    {"severity": "warning", "path": "ending_investments", "page": 1, "extracted": 322246, "on_page": "Investments 322,246 (already inside total 6,182,841)", "issue": "ending_cash 6,182,841 already includes the 322,246 of investments, and ending_investments is filled as well, while beginning_investments is null. The field is meant to be informational, but anything that adds cash and investments would count the 322,246 twice. The notes explain this."},
+    {"severity": "warning", "path": "receipts[0].category", "page": 4, "extracted": "taxes (unlabeled)", "on_page": "Taxes 5,173,883 (Inheritance Fund column 164,170; nonmajor Visitors Promotion/Improvement 229,702 per p12)", "issue": "The fund columns show that 164,170 of the line is inheritance tax and 229,702 is visitors' promotion (lodging) tax. Keeping the whole line unlabeled is defensible because the line itself is not broken down by tax type, but part of it is identifiable. The detail line for nonmajor Taxes 374,559 (p14) is in the same position."}
   ]
 }

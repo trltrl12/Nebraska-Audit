@@ -1,17 +1,12 @@
 {
   "stem": "Sterling_Public_Schools_FY2025",
-  "values_checked": 176,
+  "values_checked": 185,
   "issues": [
-    {"severity": "warning", "path": "detail[66].original_label", "page": 13,
-     "extracted": "4700 Building Improvements (transfer to Depreciation Fund, shown as Facilities acquisition and construction on p7 and reclassified to transfers)",
-     "on_page": "4700 Building Improvements",
-     "issue": "the extractor added explanatory text to the printed label. Treating the amount (-100,000) as other financing is correct: p7 reclassifies it and p15 shows it as the Depreciation Fund's transfer in."},
-    {"severity": "warning", "path": "detail[71].fund_type", "page": 16,
-     "extracted": "governmental", "on_page": "School Nutrition Fund (nonmajor governmental fund, pp3-4, 8-9)",
-     "issue": "the rules give school nutrition as a business-type example, but this report presents it as a nonmajor governmental fund with no proprietary statement. Kept governmental, which is defensible. This affects receipts[17], disbursements[11] and detail[71]-detail[78]."},
-    {"severity": "warning", "path": "balance_sheet.statement", "page": 5,
-     "extracted": "Statement of Assets, Liabilities, and Fund Balances - Modified Cash Basis - Governmental Funds",
-     "on_page": "p2 government-wide net position: Cash and cash equivalents 2,354,005; Cash at county treasurer 655,829; Restricted debt services 341,422; capital outlay 846,746; Unrestricted 1,821,666; total 3,009,834",
-     "issue": "the extractor used the fund balance sheet (p5) instead of the government-wide Statement of Activities and Net Position (p2). The assets and totals are the same; only the equity lines differ (Committed/Assigned/Unassigned instead of Unrestricted 1,821,666). The rules allow either statement."}
+    {"severity": "warning", "path": "detail[66].original_label", "page": 13, "extracted": "4700 Building Improvements (transfer to Depreciation Fund, shown as Facilities acquisition and construction on p7 and reclassified to transfers)", "on_page": "4700 Building Improvements", "issue": "original_label has explanatory text added; printed label is '4700 Building Improvements'. Treatment as other financing -100,000 is correct (p7 reclassification, Depreciation Fund transfer in p15)"},
+    {"severity": "warning", "path": "receipts[7].category", "page": 3, "extracted": "Tuition Received", "on_page": "Preschool tuition and fees 11,350", "issue": "the same 11,350 is printed as '1421 Transportation fees from other school districts within the state (SPED)' on p6/p10, where detail[6] has charges for services/fees; the two categories disagree for the same money"},
+    {"severity": "warning", "path": "receipts[11].category", "page": 3, "extracted": "Extracurricular Receipts", "on_page": "Community service activities 8,593", "issue": "code 1800 community service activities is not student activity receipts; charges for services/fees may fit better (detail[9] has detail_category other charges for services)"},
+    {"severity": "warning", "path": "receipts[9].category", "page": 3, "extracted": "licenses and permits", "on_page": "Local license fees and fines 166", "issue": "line mixes license fees and fines; the Fines and Licenses category may fit better; same for detail[10]"},
+    {"severity": "warning", "path": "disbursements[10].category", "page": 4, "extracted": "capital outlay", "on_page": "Other support services (Special Building Fund column) 3,135", "issue": "printed under function 'Other support services'; recategorized as capital outlay from the p19 'Site acquisition and improvements' line; defensible but differs from the printed function"},
+    {"severity": "warning", "path": "detail[60].category", "page": 13, "extracted": "Community Service Operations", "on_page": "3300 Community services operations (under State programs heading) 3,522", "issue": "printed under the State programs group; user rule says program lines follow the report's grouping (State Categorical Programs)"}
   ]
 }

@@ -1,12 +1,12 @@
 {
   "stem": "Overton_Public_Schools_FY2025",
-  "values_checked": 104,
+  "values_checked": 148,
   "issues": [
-    {"severity": "warning", "path": "receipts[9].category", "page": 4,
-     "extracted": "other", "on_page": "Other local receipts 6,114 (all in School Nutrition Fund per p10)",
-     "issue": "Because the whole amount sits in the School Nutrition Fund, it is probably food service charges or reimbursements and not truly unexplained. Same for detail[31]."},
-    {"severity": "warning", "path": "detail[31]-detail[36] fund_type", "page": 10,
-     "extracted": "governmental", "on_page": "School Nutrition Fund shown as a nonmajor governmental fund",
-     "issue": "The extractor rules list school nutrition as a business-type example, but this report presents it inside Total Governmental Funds (p5, p10). Keeping it governmental is what makes the totals tie, so this is defensible. Noted for consistency across reports."}
+    {"severity": "error", "path": "missing", "page": null,
+     "extracted": "notes end '...Total Governmental Funds column.'", "on_page": "trimmed PDF has 18 pages",
+     "issue": "notes do not end with 'Read pages 1-18 of 18' (the phrase is followed by an appended balance-sheet sentence). All 18 pages were checked and every statement/schedule line is in the JSON; only the notes ending needs fixing"},
+    {"severity": "warning", "path": "notes", "page": 7,
+     "extracted": "Balance sheet from the government-wide net position section (p3) ... Balance sheet (user 2026-10-27): governmental lines from the governmental funds statement ... (pp6-7)", "on_page": "balance_sheet lines cite pp6-7 (governmental funds statement)",
+     "issue": "notes contradict each other on the balance-sheet source; the JSON follows pp6-7 (correct under the 2026-10-27 rule; totals equal p3's 6,906,671), so the p3 sentence is stale"}
   ]
 }

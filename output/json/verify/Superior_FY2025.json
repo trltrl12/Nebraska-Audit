@@ -1,62 +1,31 @@
 {
   "stem": "Superior_FY2025",
-  "values_checked": 381,
+  "values_checked": 370,
   "issues": [
-    {
-      "severity": "warning",
-      "path": "receipts[*]",
-      "page": 6,
-      "extracted": "41 governmental receipt lines and 21 disbursement lines taken per fund (General Fund from p24 Total column, Street p17, Sales Tax p18, Econ Dev p20, Grant p21, Nonmajor p22, CDA p5), with fund names added to labels, e.g. 'Property (General Fund)'",
-      "on_page": "Total Governmental Funds column p6: Property 355,877, Motor vehicle 46,926, Intergovernmental 628,082, Charges for services 105,920, Grants 372,102, Loan repayment 184,039, Interest income 43,181, Contributions 74,317, Sales/insurance proceeds 74,429, Other 6,848 ... total 2,816,066; expenditures total 3,511,494",
-      "issue": "The rules call for one line per row of the Total Governmental Funds column. The extractor used per-fund lines instead, and the labels are not exactly as printed. I checked every per-fund amount against its page and they add up to the printed totals 2,816,066 and 3,511,494. So the deviation is in form only, and it gives finer categories."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[21].category",
-      "page": 6,
-      "extracted": "other",
-      "on_page": "Loan repayment: Sales Tax 14,308, Economic Development 73,853, CDA 95,878 (total 184,039, receipts[21], [25], [36])",
-      "issue": "These are collections of loan principal receivable. The statement counts them as revenue, but they arguably aren't revenue. They make up most of the governmental 'other' total (about 191k of 2.82M). Each line is marked review, but there is no decision_needed entry. Judgment call."
-    },
-    {
-      "severity": "warning",
-      "path": "ending_cash",
-      "page": 4,
-      "extracted": 229604,
-      "on_page": "Cash and cash equivalents 229,604; County treasurer cash 19,997; Restricted cash 1,158,364; Restricted certificates of deposit 942,015 (Total Governmental Funds)",
-      "issue": "ending_cash uses only the unrestricted cash line. It leaves out county treasurer cash and restricted cash/CDs, although total assets of 2,349,980 are essentially all cash. Defensible, but it understates governmental cash."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[12].category",
-      "page": 24,
-      "extracted": "sale of assets",
-      "on_page": "Sales/insurance proceeds 29,427 (27,848 of it in Ambulance); CDA Sales/insurance proceeds 29,002 (receipts[39])",
-      "issue": "The line mixes sale proceeds and insurance proceeds, and insurance proceeds would be reimbursements/refunds. The Statement of Activities (p3) shows only a 5,058 gain on disposal. Already marked review."
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[2].amount",
-      "page": 5,
-      "extracted": 28326,
-      "on_page": "Statement p5 General Fund Public works 28,326; budget schedule p15 Total public works 28,325 (Zoning 796 + Cemetery 27,529, also p23-24)",
-      "issue": "[fixed 2026-10-21: review flags / rounding discrepancy recorded] There is a $1 rounding difference between the report's own schedules. The statement amount was used correctly, and the General Fund totals tie at 1,352,549 on both pages. Not recorded in report_discrepancies."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[*].detail_category",
-      "page": 23,
-      "extracted": "salaries and wages",
-      "on_page": "Salaries and benefits (all 10 General Fund departments, total 636,062)",
-      "issue": "[fixed 2026-10-21: review flags / rounding discrepancy recorded] The line combines salaries and benefits, and it was put under salaries and wages without a review flag. This is the dominant category, so it is defensible."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[*].detail_category",
-      "page": 23,
-      "extracted": "professional/contract services",
-      "on_page": "Administration: Interlocal agreement 6,600",
-      "issue": "It could instead be grants/payments to other entities, depending on what the agreement is for."
-    }
+    {"severity": "warning", "path": "receipts", "page": 5,
+     "extracted": "receipts/disbursements entered per fund column (e.g. 'Property (General Fund)' 351,410, 'Property (Street Fund)' 2,467, 'Property (Community Development Agency Fund)' 2,000)",
+     "on_page": "Total Governmental Funds column (p6): Property 355,877, Intergovernmental 628,082, Charges for services 105,920, etc.",
+     "issue": "The rules call for the governmental funds statement's Total Governmental Funds column. Instead, the lines are entered per fund, and the General Fund intergovernmental and charges lines are replaced by department-schedule lines (p24). Every amount is printed and all lines tie to the totals (2,816,066 / 3,511,494), but the column choice departs from the rules."},
+    {"severity": "warning", "path": "receipts[21].category", "page": 18,
+     "extracted": "other taxes (category_decision: user 2026-10-23)", "on_page": "Loan repayment 14,308 (Sales Tax Fund)",
+     "issue": "A loan principal repayment is categorized as other taxes, following config/category_decisions.csv row 'loan repayment sales tax fund'. The same label is 'other' / Loan Collections in detail[68] and for the Economic Development and CDA funds (receipts[24], [36]). This may be a slip in the CSV decision."},
+    {"severity": "warning", "path": "receipts[6].category", "page": 24,
+     "extracted": "charges for services/fees", "on_page": "Rental and fees 63,539 (Ambulance 50,248, Cemetery 6,095, Admin 3,125, Zoning 2,505, Library 1,566)",
+     "issue": "Ambulance fees are 79% of the line. Under the user's 2026-10-28 rule the dominant category would be Ambulance Fees. The matching detail lines (Ambulance, Cemetery, Admin rental) are also still in charges for services/fees instead of Ambulance Fees / Cemetery Fees / Rentals."},
+    {"severity": "warning", "path": "receipts[7].category", "page": 24,
+     "extracted": "charges for services/fees", "on_page": "Admission fees and concessions 14,346 (Pool)",
+     "issue": "These are pool admissions and concessions. The user's 2026-10-28 rule puts pool/recreation fees in category Recreation Fees. The same applies to receipts[32] (Cemetery Perpetual Care charges 1,050), which would be Cemetery Fees."},
+    {"severity": "warning", "path": "receipts[41].category", "page": 10,
+     "extracted": "charges for services/fees", "on_page": "Sales: Residential 2,204,375 (also Commercial, Municipal, Industrial, Sewer use fees, Customer charges)",
+     "issue": "These are utility fund sales and charges. The user's 2026-10-28 rule makes them category Utility Charges (receipts[41]-[46])."},
+    {"severity": "warning", "path": "disbursements[26].category", "page": 10,
+     "extracted": "utilities", "on_page": "Transportation expenses 27,606",
+     "issue": "Business-type spending here is listed by cost type, and the other cost-type lines carry a cost-type category with function utilities. This vehicle/transportation cost line was left as the function 'utilities' and has no function field."},
+    {"severity": "warning", "path": "balance_sheet.liabilities[6].category", "page": 1,
+     "extracted": "Internal Balances", "on_page": "Current portion of interfund notes payable 17,410 (also liabilities[9] Noncurrent portion 188,579)",
+     "issue": "Internal Balances is an asset category, not on the liability category list. Other liabilities may be the intended category."},
+    {"severity": "warning", "path": "basis", "page": 5,
+     "extracted": "GAAP", "on_page": "Governmental funds statements are 'Modified Cash Basis'; business-type is accrual",
+     "issue": "Governmental figures are modified cash basis but the report is marked GAAP, so fund-balance fields are used and beginning_cash is null. This is defensible because the statement rolls fund balances forward, but it is an assumption."}
   ]
 }

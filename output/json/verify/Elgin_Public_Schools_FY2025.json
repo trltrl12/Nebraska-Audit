@@ -1,25 +1,18 @@
 {
   "stem": "Elgin_Public_Schools_FY2025",
-  "values_checked": 213,
+  "values_checked": 196,
   "issues": [
-    {"severity": "error", "path": "missing", "page": 8,
-     "extracted": null,
-     "on_page": "GF budget-basis disbursements (p8, total 4,711,483) include the 100,000 transfer to the Depreciation Fund (note p15: 'transfers to the Depreciation and Employee Benefit Funds are included as disbursements of the General Fund'; Depreciation 'Transfer from other funds' 100,000 p9). Statement GF column p3-4 shows Pupil transportation 285,310 vs budget 335,310 and Regular instruction 2,218,809 vs 2,251,671.",
-     "issue": "[fixed] Hidden transfer not separated: the same 100,000 is in GF detail expenditure (detail[33] 1100 Regular instruction 2,251,671 and/or detail[38] 2700 Pupil transportation 335,310) and in detail[46] Depreciation other financing +100,000. Rules require a split (or a negative contra expenditure line with split_from + review) and a GF other financing line of -100,000; notes acknowledge the budget basis but no split/contra was entered."},
-    {"severity": "warning", "path": "receipts[10].category", "page": 3,
-     "extracted": "intergovernmental/state aid", "on_page": "State receipts 3,409,238",
-     "issue": "Broad group with no review flag: includes nameplate capacity tax 768,006 (724,036 GF p6 + 43,970 SB p12; printed separately on p2), which is 'other taxes' under the rules. Should carry review 'broad group; detail on p6-7, p12'."},
-    {"severity": "warning", "path": "receipts[9].category", "page": 3,
-     "extracted": "fines and forfeitures", "on_page": "County fines and licenses 13,070",
-     "issue": "Line includes 2210 ESU receipts 2,237 (p6, county/other local governments) along with fines 10,833; no review note."},
-    {"severity": "warning", "path": "receipts[8].category", "page": 3,
-     "extracted": "other", "on_page": "Other local sources 16,294",
-     "issue": "GF schedule p6 shows it is 1910 Rental of school equipment and facilities 804 + 1990 Other local receipts 15,490; 'other' is defensible as dominant part (review present) but rental portion identifiable."},
+    {"severity": "error", "path": "receipts[8].category", "page": 3,
+     "extracted": "charges for services/fees (detail_category rentals)", "on_page": "1910 Rental of school equipment and facilities 804 (p6), part of Other local sources 16,294",
+     "issue": "rental receipts are category Rentals under the user's 2026-10-28 rule, and the same line in detail is already category Rentals; the same label must get the same category in receipts and detail"},
+    {"severity": "warning", "path": "detail[33].amount", "page": 8,
+     "extracted": 2201671, "on_page": "1100 Regular instruction 2,251,671 (statement GF column p3: 2,218,809)",
+     "issue": "the 50,000 transfer taken out of 1100 is inferred, not printed: it assumes all Employee Benefit Fund spending 17,138 sits in Regular instruction (2,251,671 - 50,000 + 17,138 = 2,218,809). The figures tie (Depreciation transfer in 100,000 p9; note p15), but the per-line split is the extractor's assumption (marked split_from/review)"},
     {"severity": "warning", "path": "disbursements[2].category", "page": 3,
-     "extracted": "support services", "on_page": "Pupils 511,365 (GF 311,732; Other Governmental Funds 199,633)",
-     "issue": "199,633 of this line is Activities Fund spending (p14/p17), i.e. student activities; category per label is defensible but the mix is not noted/reviewed."},
-    {"severity": "warning", "path": "report_discrepancies", "page": 8,
-     "extracted": null, "on_page": "GF budget schedule: FUND BALANCE, end of year 3,878,151 vs TOTAL FUND BALANCE 3,878,150",
-     "issue": "1-dollar rounding difference printed in the GF budget schedule itself is not recorded in report_discrepancies (only the p2 and p4/p5 differences are)."}
+     "extracted": "support services / Pupils 511,365", "on_page": "Pupils: General Fund 311,732 + Other Governmental Funds 199,633 (Activities Fund other disbursements, p14)",
+     "issue": "199,633 of the printed line is student activity spending (category student activities); kept as printed with review, which is defensible, but the function total overstates Pupils support"},
+    {"severity": "warning", "path": "detail[48].original_label", "page": 9,
+     "extracted": "Capital outlay (Depreciation Fund 163,590)", "on_page": "Capital outlay",
+     "issue": "user rule relabels every capital outlay line 'Capital Outlay: <function>' with printed text in printed_label; the School Nutrition capital outlay line was relabelled but this one was not"}
   ]
 }

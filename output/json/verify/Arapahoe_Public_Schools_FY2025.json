@@ -1,54 +1,18 @@
 {
   "stem": "Arapahoe_Public_Schools_FY2025",
-  "values_checked": 247,
+  "values_checked": 196,
   "issues": [
-    {
-      "severity": "warning",
-      "path": "detail[44].amount",
-      "page": 8,
-      "extracted": 358664,
-      "on_page": "Central services: General Fund 358,664, Employee Benefit Fund 2,913, Reclassifications (2,325), Total 359,252 (p8); p7 eliminates 'Transfer from general fund' 2,325 in the Reclassifications column; p15 prints 'Transfer - General Fund (as expensed from the General Fund) 2,325'",
-      "issue": "[fixed: 2,325 split to other financing] This is a transfer hidden inside a spending line. The General Fund's 2500 Central services 358,664 includes 2,325 that went to the Employee Benefit Fund as a transfer, and the combining Total column eliminates it. detail[56] records the +2,325 transfer into the Employee Benefit Fund, and detail[57] records that fund's 2,913 of benefits, but the General Fund line was not split. So the same 2,325 is counted both as General Fund spending and as a transfer. Split it: 356,339 spending and -2,325 other financing, both with split_from 'Central services 358,664 (p8, reclassification column)' and review."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[30]",
-      "page": 4,
-      "extracted": "reimbursements/refunds, Insurance adjustments 24,030",
-      "on_page": "p4: Insurance adjustments 24,030; p2: Loan proceeds 24,030; p12: 5301 Insurance adjustments 24,030",
-      "issue": "The report labels this amount two different ways. If it is really loan proceeds, it belongs in debt_proceeds, not receipts. The extractor used the fund-statement label (noted in notes)."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[17].category",
-      "page": 4,
-      "extracted": "intergovernmental/state aid (detail[12]: county/other local governments)",
-      "on_page": "County receipts 23,065 / 2110 County fines and license fees 23,065 (p10)",
-      "issue": "The budget schedule calls this county fines and license fees. In Nebraska these are fines collected by the county and passed on to schools, so 'fines and forfeitures' could fit. Intergovernmental is still defensible."
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[4].category",
-      "page": 5,
-      "extracted": "support services (682,144)",
-      "on_page": "Support services - students: General Fund 370,157 + Other Governmental Funds 311,987 = 682,144",
-      "issue": "311,987 of this line is Activities Fund spending (p9, p23), which detail records as 'student activities'. The printed line is one line, so the category was kept as printed, but the two lists are inconsistent."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[16].category",
-      "page": 4,
-      "extracted": "charges for services/fees",
-      "on_page": "Other local receipts 258,564 = Activities Fund 243,890 + School Nutrition 14,674 (p9)",
-      "issue": "This line mixes student activity receipts with School Nutrition 'Other receipts' (categorized 'other' in detail[61]). The category is defensible, and the line is already marked review."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[29].category",
-      "page": 4,
-      "extracted": "charges for services/fees (112,644)",
-      "on_page": "School Nutrition Program 112,644 = Student lunches and milk 111,514 + State reimbursement 1,130 (p16)",
-      "issue": "This line includes 1,130 of state aid. That is minor, and it is not split on p4."
-    }
+    {"severity": "error", "path": "receipts[16].category", "page": 4,
+     "extracted": "charges for services/fees", "on_page": "Other local receipts 258,564 (Activities Fund 243,890 + School Nutrition other receipts 14,674, p9)",
+     "issue": "94% is activities fund receipts; the rules say a broad local-receipts line takes the category that is more than half of it (school activity fund receipts -> Extracurricular Receipts). user_rules.py won't fix it because the label has no 'activit'"},
+    {"severity": "warning", "path": "detail[57].category", "page": 15,
+     "extracted": "support services", "on_page": "Employee Benefit Fund: Benefits paid 2,913",
+     "issue": "the governmental funds statement and GF combining schedule (p8) count this 2,913 inside Central services (category Business); function marked as a guess"},
+    {"severity": "warning", "path": "disbursements[18]", "page": 5,
+     "extracted": "Debt Service, detail_category Principal, no debt_service_part", "on_page": "Principal 745,000 / Interest 120,125 / Wire fees 800",
+     "issue": "disbursements[18]-[20] are category Debt Service but lack debt_service_part (principal/interest), unlike disbursements[17]"},
+    {"severity": "warning", "path": "notes", "page": 23,
+     "extracted": "'Read pages 1-23 of 23' appears mid-notes, followed by re-check text", "on_page": "PDF has 23 pages",
+     "issue": "notes don't end with 'Read pages 1-N of N' (page count right and every page covered; no lines missing)"}
   ]
 }

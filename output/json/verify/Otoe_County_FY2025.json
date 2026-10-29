@@ -1,46 +1,15 @@
 {
   "stem": "Otoe_County_FY2025",
-  "values_checked": 166,
+  "values_checked": 180,
   "issues": [
-    {
-      "severity": "error",
-      "path": "detail[51].category",
-      "page": 4,
-      "extracted": "other",
-      "on_page": "Capital Outlay 852,561 (COVID American Rescue Plan Fund column, p4)",
-      "issue": "[fixed 2026-10-21: set to capital outlay per p4] The ARPA Fund 'Disbursements' line (p8) is filed under 'other', but the governmental funds statement (p4) prints all 852,561 of it under Capital Outlay. Category should be capital outlay."
-    },
-    {
-      "severity": "error",
-      "path": "detail[48].category",
-      "page": 4,
-      "extracted": "general government",
-      "on_page": "Capital Outlay 247,840 (Inheritance Fund column, p4)",
-      "issue": "[fixed 2026-10-21: set to capital outlay per p4] The Inheritance Fund 'Disbursements' line (p7) is filed as general government with review 'function not stated', but p4 prints all 247,840 of it under Capital Outlay. Category should be capital outlay."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[53].category",
-      "page": 4,
-      "extracted": "streets/highways",
-      "on_page": "Capital Outlay 631,893 (Highway Bridge Buyback Program Fund column, p4)",
-      "issue": "[fixed 2026-10-21: set to capital outlay per p4] p4 puts all of this fund's spending under Capital Outlay. streets/highways is defensible for a bridge program, but capital outlay would tie to the statement's function rows."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[44].category",
-      "page": 4,
-      "extracted": "streets/highways (5,361,064, not itemized)",
-      "on_page": "Road Fund on p4: Public Works 4,293,173; Capital Outlay 457,238; Debt Service Principal and Interest 610,653",
-      "issue": "The Road Fund budget schedule (p7) prints one Disbursements line, recorded as it is printed. p4 shows that it includes 610,653 of debt service and 457,238 of capital outlay, so detail by function does not tie to the statement."
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[6].category",
-      "page": 4,
-      "extracted": "debt service principal",
-      "on_page": "Debt Service: Principal and Interest Payments 610,653",
-      "issue": "[fixed 2026-10-21: no page splits it; review note added] The line combines principal and interest and the page does not split it. Filing it all as principal is a judgment call (review already set)."
-    }
+    {"severity": "warning", "path": "detail[43].category", "page": 7,
+     "extracted": "streets/highways", "on_page": "Road Fund DISBURSEMENTS 5,361,064",
+     "issue": "The Road Fund schedule prints one disbursement total. p4 shows it is Public Works 4,293,173 + Capital Outlay 457,238 + Debt Service 610,653, so the whole amount filed as streets/highways (not itemized) includes capital outlay and debt service. Other one-line major funds (Inheritance, ARPA, Highway Bridge Buyback) were filed by their p4 function, so Road is treated inconsistently. Defensible because the schedule doesn't break it down."},
+    {"severity": "warning", "path": "detail[66].category", "page": 13,
+     "extracted": "donations/contributions", "on_page": "Miscellaneous: Veterans Aid 7,945 (p10), Federal Treasury Equitable Sharing 850 (p11), Local Grants - Sheriff 100 (p11)",
+     "issue": "Miscellaneous receipts of three funds combined and filed as donations/contributions under the user category decision. The report doesn't say what they are (the Veterans Aid 7,945 may not be a donation). Judgment call."},
+    {"severity": "warning", "path": "receipts[1].category", "page": 4,
+     "extracted": "lodging tax", "on_page": "Taxes 239,009 (Visitor Promotion Fund column, p10)",
+     "issue": "Lodging tax is inferred from the fund name only; the report never labels it lodging tax (marked review). The same goes for detail[61]."}
   ]
 }

@@ -1,66 +1,21 @@
 {
   "stem": "Anselmo_Merna_Public_Schools_FY2025",
-  "values_checked": 312,
+  "values_checked": 320,
   "issues": [
-    {
-      "severity": "warning",
-      "path": "report_discrepancies[0]",
-      "page": 16,
-      "extracted": {
-        "check": "detail",
-        "difference": -1.0,
-        "note": "Pupil transportation line items ... sum to 260,882.75 ... likely a single digit misread"
-      },
-      "on_page": "Pupil transportation lines 166,550.07 + 16,371.84 + 12,366.84 + 15,138.91 + 480.00 + 5,087.25 + 8,547.56 + 325.00 + 5,133.41 + 27,573.72 + 3,307.15 = 260,881.75 = printed Total support services - pupil transportation 260,881.75",
-      "issue": "[fixed: wrong report_discrepancies entry removed] Spurious discrepancy. Every pupil-transportation detail amount in the JSON (detail lines 110 Salary - drivers through 810 Dues and fees) matches the page digit for digit, and they add exactly to the printed 260,881.75. The report does add up and no digit was misread. The $1 came from the extractor's own addition and must not be listed as 'the report itself doesn't add up'. Remove this entry; no amount needs changing."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[0]",
-      "page": 3,
-      "extracted": "Local receipts 2,463,842.55 split into 13 items (split_from)",
-      "on_page": "Local receipts: General/Depr/Emp Benefit 2,346,391.25, School Nutrition 52,159.15, Special Building 65,292.15 (p3); fund schedules p6, p11, p12",
-      "issue": "The split is rebuilt from three fund schedules, not from one printed breakdown of the line. The General column figure 2,346,391.25 is not printed on p6: p6 'Total local receipts' 2,419,851.63 includes 1510 Interest 73,460.38, which the fund statement moves to 'Interest'. Special Building's 3133 Nameplate capacity tax (25.65) is printed under state items on p12 but has to be counted in local receipts to reach 65,292.15. The arithmetic holds (sums equal 2,463,842.55), but this is an inference. 'State receipts' was left unsplit, which is inconsistent. Review whether the split is allowed under the split_from rule."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[13].category",
-      "page": 6,
-      "extracted": "fines and forfeitures",
-      "on_page": "2110 Fines and licenses 13,062.98",
-      "issue": "Label mixes fines and licenses, and neither this item nor detail[10] has the 'review' that the mixed-label rule requires."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[7].category",
-      "page": 6,
-      "extracted": "donations/contributions",
-      "on_page": "1925 Grants 11,976.10 (under Local receipts)",
-      "issue": "Grantor not stated; could be intergovernmental. Same for detail[8]. Already marked review."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[18].category",
-      "page": 4,
-      "extracted": "charges for services/fees",
-      "on_page": "Activities 199,897.77 (p10: 1710 Activity receipts 172,190.84 + 1920 Donation 27,706.93)",
-      "issue": "Line mixes student activity receipts and donations (27,706.93); dominant category is defensible. Already marked review."
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[1].category",
-      "page": 4,
-      "extracted": "support services",
-      "on_page": "Support services 1,963,022.99; p7 prints Pupil transportation 260,881.75 inside it",
-      "issue": "Includes 260,881.75 of pupil transportation, which has its own category (student transportation). Kept as one line with review. Defensible because the fund statement prints one line."
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[2].category",
-      "page": 4,
-      "extracted": "support services",
-      "on_page": "Other salaries and benefits 41,037.41 (Employee Benefit fund 2900 281 Health insurance deductible, p9)",
-      "issue": "Function guessed (also detail Employee Benefit expenditure). Already marked review."
-    }
+    {"severity": "warning", "path": "receipts[4].category", "page": 6,
+     "extracted": "charges for services/fees", "on_page": "1910 Laptop Computer Rental 2,700.00",
+     "issue": "Same line is category 'Rentals' in detail[5]. User rule (2026-10-28) moves rent/rental income out of charges for services into Rentals. Use one category for the same label throughout the report."},
+    {"severity": "warning", "path": "receipts[23]", "page": 3,
+     "extracted": "Interest 111,215.58 (Interest Income)", "on_page": "Interest: General 73,460.38 + Special Building 37,755.20 (= 1510 Interest 37,536.58 + 1140 Interest on taxes 218.62, p12)",
+     "issue": "The statement's Interest line includes Special Building's 1140 interest on taxes (218.62). The General Fund's 1140 line was split out as Penalties and Interest on Taxes but this one wasn't. The amount is small and the printed line is kept as printed."},
+    {"severity": "warning", "path": "disbursements[2].category", "page": 2,
+     "extracted": "support services", "on_page": "Other salaries and benefits 41,037.41 (Employee Benefit fund, 2900 281 Health insurance deductible)",
+     "issue": "The function was guessed. The report's own Statement of Activities (p2) counts this amount under Instruction (Instruction 2,397,070.70 = statement instructional services 2,356,033.29 + 41,037.41), so 'Instruction' fits better. The same applies to detail[174] (Employee Benefit 2900 281)."},
+    {"severity": "warning", "path": "disbursements[1].category", "page": 4,
+     "extracted": "support services 1,963,022.99", "on_page": "Support services 1,963,022.99 (p7 breakdown: Pupils 298,999.60, Staff 191,089.96, General administration 203,502.67, Office of principal 205,639.55, Central services 141,436.76, Operation of plant 661,472.70, Pupil transportation 260,881.75)",
+     "issue": "The one combined line is recorded as support services. The General Fund schedule (p7) prints its exact breakdown, so it could be split into the user's school functions (General Administration, School Administration, Business, Building and Grounds, student transportation). As one line, 260,881.75 of transportation and 1.2M of admin/plant sit in 'support services'."},
+    {"severity": "warning", "path": "report_discrepancies[0]", "page": 4,
+     "extracted": "difference 118,000 (report doesn't add up)", "on_page": "Fund columns 118,000 in / (118,000) out + Reclassification column 118,000 / (118,000) = Total 236,000 / (236,000)",
+     "issue": "The Total column does add across (fund columns + Reclassification), so the report's arithmetic holds. Listing this as 'the report itself doesn't add up' is misleading. The printed transfers (236,000 each way) are correctly recorded and net to zero."}
   ]
 }

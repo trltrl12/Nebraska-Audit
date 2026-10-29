@@ -1,38 +1,7 @@
 {
   "stem": "Deshler_Public_Schools_FY2025",
-  "values_checked": 364,
+  "values_checked": 295,
   "issues": [
-    {
-      "severity": "error",
-      "path": "detail[8].category",
-      "page": 8,
-      "extracted": "intergovernmental/state aid / county/other local governments",
-      "on_page": "2110 County fines and license fees 41,428.98",
-      "issue": "[fixed 2026-10-21: code 2110 -> fines and forfeitures] Under the extractor rules, code 2110 (county fines and license fees passed to schools) is fines and forfeitures, so category and detail_category should both be 'fines and forfeitures'."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[10].category",
-      "page": 5,
-      "extracted": "intergovernmental/state aid",
-      "on_page": "County receipts 41,428.98 (entirely 2110 County fines and license fees, p8)",
-      "issue": "This statement line is exactly the 2110 line, which the rules class as fines and forfeitures. It should probably follow detail[8] for consistency."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[170]",
-      "page": 7,
-      "extracted": -350000.0,
-      "on_page": "Exhibit F Reclassifications (350,000.00) on Student transportation - regular (722,281.59 -> 372,281.59); Depreciation Fund 'Allocation from general fund' 350,000 (p11)",
-      "issue": "The contra line and the other-financing line detail[172] (-350,000) match the pages, and the Exhibit G total ties. Exhibit N does not say which object line holds the transfer (Vehicle Operation Capital Assets 450,000 is the likely one), so the object detail for 2710 still includes it as equipment purchases. This is an assumption (already marked review)."
-    },
-    {
-      "severity": "warning",
-      "path": "report_discrepancies[0]",
-      "page": 13,
-      "extracted": 0.1,
-      "on_page": "Activities Fund balance 9/1/2024 161,238.95, 8/31/2025 134,067.77; analysis of fund balance and Exhibit C 134,067.67",
-      "issue": "Confirmed as printed. The beginning balance is off by the same 0.10, which the entry doesn't mention: Exhibit D other governmental funds beginning 643,091.11, less Nutrition 36,089.81, Special Building 443,555.49 and Student Fee 2,206.96, implies Activities 161,238.85, not 161,238.95."
-    }
+    {"severity": "error", "path": "receipts[10].category", "page": 5, "extracted": "charges for services/fees", "on_page": "Other local receipts 289,035.71 (remainder 283,460.51 after tuition): Activities Fund receipts about 191,026 (p13, net of grants and contributions 48,547.64), School Nutrition sales/misc 81,569.76 (p14), student fees 2,099.34 (p16), General license 762 and misc 7,743.34 (p8), Special Building misc 260.48 (p15)", "issue": "[fixed 2026-10-28: remainder 283,460.51 recategorized to Extracurricular Receipts (detail_category student activity receipts), matching the Activities detail; review note names the nutrition sales/license/misc mix] school activity fund receipts are about 67% of the remainder; the rules say activity receipts go to Extracurricular Receipts and a category over half of a broad line is used (or split). The same Activities receipts are Extracurricular Receipts in detail (p13), so the receipt and detail categories disagree. Charges for services/fees is not the dominant category"}
   ]
 }

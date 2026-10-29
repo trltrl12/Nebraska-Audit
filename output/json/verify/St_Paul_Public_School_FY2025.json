@@ -1,46 +1,24 @@
 {
   "stem": "St_Paul_Public_School_FY2025",
-  "values_checked": 185,
+  "values_checked": 192,
   "issues": [
-    {
-      "severity": "error",
-      "path": "receipts[0..18].source_page",
-      "page": 6,
-      "extracted": 5,
-      "on_page": 6,
-      "issue": "[fixed] All 19 governmental receipt amounts are taken from the Total Governmental Funds column, which is printed on trimmed p6 (right half of the spread). p5 shows only the General and Depreciation Fund columns, so none of these amounts (e.g. 4,641,432, 191,327, 2,440,369) appears on the cited page. Amounts themselves are correct."
-    },
-    {
-      "severity": "error",
-      "path": "reported_totals.governmental.receipts.source_page",
-      "page": 6,
-      "extracted": 5,
-      "on_page": 6,
-      "issue": "[fixed] Total receipts 11,433,205 (Total Governmental Funds) is printed on p6, not p5 (p5 shows General 10,808,221 and Depreciation 11,818)."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[18].review",
-      "page": 9,
-      "extracted": "Other income 22,935: components on p9 do not add exactly",
-      "on_page": "Other local receipts 191 + Rent income 1,125 + ESU receipts 2,005 + Other non-revenue receipts 19,614 = 22,935",
-      "issue": "The review note is wrong: the line ties exactly once ESU receipts 2,005 is included. It holds rent (1,125) and ESU/other-government money (2,005) as well as 19,614 of unexplained non-revenue receipts. Since that unexplained part dominates, 'other' is defensible, but the note should be corrected."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[10]",
-      "page": 6,
-      "extracted": "Fines and licenses 38,840 (fines and forfeitures)",
-      "on_page": "Other Governmental Funds column puts 797 on the Fines and licenses row (p6); the combining schedule (p12) prints that Bond Fund 797 as 'Penalties and interest on taxes'",
-      "issue": "The report is internally inconsistent: 797 of this line looks like property-tax penalties and interest. The value matches the printed statement; detail[63] records it as property tax."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[6]",
-      "page": 6,
-      "extracted": "Pro-rate motor vehicle 19,887 (intergovernmental/state aid)",
-      "on_page": "19,887 = General 19,060 + Building 402 + Other Governmental 425; p12 labels the Bond Fund 425 as 'Taxes: Motor vehicle'",
-      "issue": "The report is internally inconsistent: the basic statement treats Bond Fund 425 as pro-rate (state aid), but detail[60] follows p12 and categorizes it as motor vehicle tax. Both are recorded as printed."
-    }
+    {"severity": "error", "path": "receipts[19].category", "page": 9,
+     "extracted": "charges for services/fees", "on_page": "1910 Rent income 1,125",
+     "issue": "user rule (2026-10-28): rent/rental income is its own receipt category, Rentals, not charges for services/fees"},
+    {"severity": "error", "path": "detail[7].category", "page": 9,
+     "extracted": "charges for services/fees", "on_page": "1910 Rent income 1,125",
+     "issue": "rent income should be category Rentals (user rule 2026-10-28); detail_category rentals is right"},
+    {"severity": "warning", "path": "detail[6].category", "page": 9,
+     "extracted": "charges for services/fees / other charges for services", "on_page": "1740 Fees 2,258",
+     "issue": "the same 2,258 is printed on the p5 governmental funds statement as 'Student fees' and recorded in receipts as Extracurricular Receipts; student fees go to Extracurricular Receipts under the user rules, so the two categories don't match"},
+    {"severity": "warning", "path": "disbursements[4].category", "page": 6,
+     "extracted": "Special Education Programs", "on_page": "Support services: Special education 223,480",
+     "issue": "the rules put SPED related services (2141-2190) under support services (Pupils); Special Education Programs is defensible but it's a judgment call (detail[33] is the same)"},
+    {"severity": "warning", "path": "disbursements[19].original_label", "page": 8,
+     "extracted": "Capital outlay", "on_page": "Capital outlay 50,530",
+     "issue": "category capital outlay but not relabelled 'Capital Outlay: <function>' with printed_label, as the user's capital outlay rule requires (user_rules.py may fix this)"},
+    {"severity": "warning", "path": "detail[44].original_label", "page": 10,
+     "extracted": "Capital outlay", "on_page": "2900 Capital outlay 0 (budget 587,027)",
+     "issue": "not relabelled 'Capital Outlay: <function>' (the Building Fund line was); amount 0 so no effect on totals"}
   ]
 }

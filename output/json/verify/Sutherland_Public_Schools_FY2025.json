@@ -4,18 +4,18 @@
   "issues": [
     {"severity": "error", "path": "receipts[13].category", "page": 7,
      "extracted": "charges for services/fees", "on_page": "Other (General Fund 1910 Rental of facilities 9,198, p10)",
-     "issue": "rental income has its own receipt category Rentals (user rule 2026-10-28); the matching detail line (1910 Rental of facilities) is already category Rentals, so receipts and detail disagree"},
+     "issue": "[fixed 2026-10-28: receipts[13] category set to Rentals (detail_category rentals), matching detail 1910] rental income has its own receipt category Rentals (user rule 2026-10-28); the matching detail line (1910 Rental of facilities) is already category Rentals, so receipts and detail disagree"},
     {"severity": "warning", "path": "receipts[13]", "page": 7,
      "extracted": "Other (rental of facilities) 9,198 / Other 17,885", "on_page": "Other 27,083 (Total Governmental Funds)",
      "issue": "the split depends on the General Fund schedule (p10), where 1910 Rental 9,198 + 1990 Other 7,885 = General Fund Other 17,083 on p7. It is defensible, but the statement doesn't print the split, and the label 'Other (rental of facilities)' isn't printed anywhere"},
     {"severity": "warning", "path": "detail[12].detail_category", "page": 10,
      "extracted": "other state aid", "on_page": "3110 State aid 500,485",
-     "issue": "school code 3110 State aid is TEEOSA; the detail category 'state school aid (TEEOSA)' fits better and is the one used for the same code in other school reports"},
+     "issue": "[fixed 2026-10-28: detail_category set to state school aid (TEEOSA)] school code 3110 State aid is TEEOSA; the detail category 'state school aid (TEEOSA)' fits better and is the one used for the same code in other school reports"},
     {"severity": "warning", "path": "detail[30].original_label", "page": 12,
      "extracted": "1100 Property", "on_page": "1100 Property",
-     "issue": "the user's label rule renames 'Property' to 'Property Tax' (with the printed text in printed_label), but it was not applied to this coded label. user_rules.py may not match it because of the code prefix"},
+     "issue": "[fixed 2026-10-28: Building Fund line relabelled Property Tax, printed_label '1100 Property'] the user's label rule renames 'Property' to 'Property Tax' (with the printed text in printed_label), but it was not applied to this coded label. user_rules.py may not match it because of the code prefix"},
     {"severity": "warning", "path": "report_discrepancies", "page": 3,
      "extracted": null, "on_page": "Statement of Activities business-type interest income 106 and net expense (33,961) vs proprietary statement interest 105 and (33,960) (p9)",
-     "issue": "$1 rounding difference printed in the report itself; not recorded in report_discrepancies (no JSON value affected)"}
+     "issue": "[fixed 2026-10-28: added report_discrepancies entry (business, difference 1, p3)] $1 rounding difference printed in the report itself; not recorded in report_discrepancies (no JSON value affected)"}
   ]
 }

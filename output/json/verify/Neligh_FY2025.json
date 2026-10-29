@@ -1,21 +1,24 @@
 {
   "stem": "Neligh_FY2025",
-  "values_checked": 261,
+  "values_checked": 290,
   "issues": [
+    {"severity": "warning", "path": "receipts[7].category", "page": 5,
+     "extracted": "charges for services/fees", "on_page": "Charges for services 460,625 (General Fund 437,440, of which Solid Waste dept 347,599 per p16)",
+     "issue": "About 75% of this line is solid waste (garbage) charges, which the user's 2026-10-28 rule puts in Utility Charges (incl. garbage/refuse). Under the more-than-half rule, Utility Charges, or a split, may fit better."},
     {"severity": "warning", "path": "detail[3].detail_category", "page": 15,
      "extracted": "occupation/franchise tax", "on_page": "Taxes: In lieu 111,522 (Administrative)",
-     "issue": "The departments schedule labels this 'In lieu', which the rules put in other local taxes. The fund statement (p5) and the budget schedule (p10) call the same 215,439 total 'Occupation'. Occupation is defensible, but the labels conflict."},
+     "issue": "The departments schedule labels this 'In lieu' (In Lieu of Tax is its own category), but the fund statement (p5) and the budget schedule (p10) call the same 215,439 total 'Occupation'. Occupation is defensible, but the labels conflict."},
     {"severity": "warning", "path": "detail[25].detail_category", "page": 16,
      "extracted": "occupation/franchise tax", "on_page": "Taxes: In lieu 103,917 (Economic Development)",
      "issue": "Same 'In lieu' vs 'Occupation' label conflict as detail[3]."},
-    {"severity": "warning", "path": "receipts[19]", "page": 7,
-     "extracted": "intergovernmental/state aid 502,024 (receipts)", "on_page": "Nonoperating revenues: Grants 502,024 (Water Fund); shown as Capital Grants and Contributions on the Statement of Activities (p3)",
-     "issue": "This is a capital grant. It is printed inside nonoperating revenues, so recording it in receipts is defensible, but it could instead be business_type.other_financing. The grantor isn't stated, so it may be federal rather than state."},
-    {"severity": "warning", "path": "balance_sheet.liabilities[7].category", "page": 1,
-     "extracted": "accrued liabilities", "on_page": "Accrued compensated absences 41,419 (Noncurrent liabilities)",
-     "issue": "Printed under noncurrent liabilities, but the 'accrued liabilities' category is for amounts due soon. 'other liabilities' may fit better."},
-    {"severity": "warning", "path": "ending_cash", "page": 5,
-     "extracted": 2829351, "on_page": "Fund balances - September 30, 2025 2,829,351; total governmental assets (cash, CDs, restricted, county treasurer) 2,832,480 (p4)",
-     "issue": "beginning_cash/ending_cash hold modified-cash fund balances, not cash. Ending cash and investments are 2,832,480, less 3,129 payroll withholdings payable. The notes explain this, but the figure is not the cash balance."}
+    {"severity": "warning", "path": "receipts[19].category", "page": 7,
+     "extracted": "intergovernmental/state aid", "on_page": "Grants 502,024 (Water Fund, nonoperating); Capital Grants and Contributions on p3",
+     "issue": "This is a capital grant from an unnamed grantor, so it may be federal. Recording it in receipts is defensible because it is printed in nonoperating revenues."},
+    {"severity": "warning", "path": "detail[122].original_label", "page": 11,
+     "extracted": "Capital outlay", "on_page": "Capital outlay 29,262 (Street Fund)",
+     "issue": "The user's rule relabels capital outlay detail lines 'Capital Outlay: <function>' (e.g. Capital Outlay: Streets/Highways). This line, and the Keno and LB 840 capital outlay detail lines (p13), still carry the printed label. user_rules.py may fix this."},
+    {"severity": "warning", "path": "balance_sheet.liabilities[9].category", "page": 1,
+     "extracted": "Accrued Liabilities", "on_page": "Accrued compensated absences 41,419 (under Noncurrent liabilities)",
+     "issue": "This is a noncurrent item, but the Accrued Liabilities category is for amounts due soon. 'other liabilities' or a debt category may fit better."}
   ]
 }

@@ -1,18 +1,18 @@
 {
   "stem": "Palmyra_FY2025",
-  "values_checked": 48,
+  "values_checked": 82,
   "issues": [
-    {"severity": "warning", "path": "receipts[4].category", "page": 4,
-     "extracted": "donations/contributions", "on_page": "Grants and donations 104,445 (p2: operating 10,591, capital 93,854 incl. Fire and rescue 75,000)",
-     "issue": "Mixed grants and donations line; the 75,000 fire capital grant is likely from a government (federal/state grant), so donations/contributions may not be the dominant category. Already marked review."},
-    {"severity": "warning", "path": "report_discrepancies", "page": 7,
-     "extracted": null, "on_page": "Reconciliation: Receipts and transfers 832,443, Disbursements (924,983) vs budget schedule actuals 752,443 / 844,983",
-     "issue": "The p7 government-wide reconciliation is 80,000 higher on both sides than the schedule's own receipts and disbursements (net -92,540 agrees). Probably gross interfund transfers of 80,000 that the fund statements and the Statement of Activities show as none. This isn't in report_discrepancies or notes."},
-    {"severity": "warning", "path": "detail", "page": 7,
-     "extracted": "not recorded", "on_page": "Receipts and ransfers 752,443 (budget 652,922); Transfers budget 134,696, actual -",
-     "issue": "The budget schedule's single receipts line and the Transfers row (budget only) are not in detail. Defensible, since the receipts line is unitemized, mixes fund types and equals statement totals 539,958 + 212,485, but the budget figures are lost."},
-    {"severity": "warning", "path": "detail_totals[1].fund", "page": 7,
-     "extracted": "Business-type activities", "on_page": "Total business-type activities 282,836",
-     "issue": "The detail items are under funds Sewer/Water/Drop Off, but the total is under fund 'Business-type activities', so a per-fund tie-out finds no matching items. The sum is correct (112,815 + 130,640 + 39,381 = 282,836)."}
+    {"severity": "warning", "path": "detail[25].fund", "page": 6,
+     "extracted": "Sewer Fund", "on_page": "Capital purchases (49,759) printed only in the Total column",
+     "issue": "fund assignment inferred from the p7 budget schedule (Sewer 112,815 - 63,056 = 49,759); marked computed, but the statement itself does not say which utility bought the assets"},
+    {"severity": "warning", "path": "receipts[5].category", "page": 6,
+     "extracted": "charges for services/fees", "on_page": "User fees 212,485 (Sewer, Water, Drop Off)",
+     "issue": "utility fund user fees; the user's 2026-10-28 rule names these Utility Charges (incl. refuse). Detail is inconsistent: Sewer/Water lines use Utility Charges, Drop Off (detail[15]) uses charges for services/fees"},
+    {"severity": "warning", "path": "disbursements[7].category", "page": 6,
+     "extracted": "Supplies and Materials", "on_page": "Supplies and maintenance 154,044",
+     "issue": "label mixes supplies with maintenance; could be Repairs and Maintenance (judgment call, no review note)"},
+    {"severity": "warning", "path": "disbursements[4].original_label", "page": 4,
+     "extracted": "Capital outlay", "on_page": "Capital outlay 295,841",
+     "issue": "capital outlay lines not relabelled 'Capital Outlay: <function>' per user rule 2026-10-26 (also detail[11], detail[12]); user_rules.py may apply it"}
   ]
 }

@@ -1,30 +1,11 @@
 {
   "stem": "Northwest_Public_Schools_FY2025",
-  "values_checked": 362,
+  "values_checked": 305,
   "issues": [
-    {
-      "severity": "warning",
-      "path": "detail[119]",
-      "page": 17,
-      "extracted": {"original_label": "Transfers (to Nutrition Fund 200,000 and Activity Fund 25,000)", "amount": -225000, "budget_final": -125000, "source_page": 9},
-      "on_page": "Transfer to Nutrition Fund 200,000 (budget 100,000); Transfer to Activity Fund 25,000 (budget 25,000)",
-      "issue": "Now that the operational-expenses schedule (pp14-17) is the General Fund detail, p17 prints the transfers as two separate lines. The JSON keeps one merged item cited to p9 with a label it wrote itself. The amounts and totals are right; it would be cleaner as two items from p17 with their printed labels and budgets."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[102].detail_category",
-      "page": 16,
-      "extracted": "dues, training and travel",
-      "on_page": "Mileage to parents 11,694 (Support Services - Pupil Transportation)",
-      "issue": "This is mileage paid to parents for driving students, not staff travel. It could also fit grants/payments to other entities or professional/contract services. It is a judgment call."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[134].budget_final",
-      "page": 12,
-      "extracted": 12327,
-      "on_page": "$ 12,327.000",
-      "issue": "The Depreciation Fund 'Interest earned' budget is printed as '12,327.000', a typo in the report. Recording it as 12,327 is right: it matches the budget total of 627,327 and the variance of 666."
-    }
+    {"severity": "error", "path": "receipts[16].category", "page": 9, "extracted": "charges for services/fees", "on_page": "1910 Rent income 1,250 (part of statement 'Other' 13,818)", "issue": "rent income belongs in the user's Rentals receipt category (rule 2026-10-28); the same line in detail is already Rentals, so the report is inconsistent"},
+    {"severity": "warning", "path": "receipts[16].original_label", "page": 6, "extracted": "Other (rent income)", "on_page": "Other 13,818", "issue": "split items carry composed labels ('Other (rent income)', 'Other (other local receipts)') rather than the printed label; split_from is set"},
+    {"severity": "warning", "path": "detail[136].detail_category", "page": 13, "extracted": "tuition and fees", "on_page": "Student Fee Fund: Student fees 34,655", "issue": "category is Extracurricular Receipts while detail_category is tuition and fees; student activity receipts would match the category"},
+    {"severity": "warning", "path": "detail[91].detail_category", "page": 16, "extracted": "dues, training and travel", "on_page": "Pupil transportation: Mileage to parents 11,694", "issue": "mileage paid to parents for transporting pupils is a transportation reimbursement rather than staff travel; judgment call"},
+    {"severity": "warning", "path": "detail[124].original_label", "page": 10, "extracted": "Building acquisition/improvements", "on_page": "2610 Building acquisition/improvements 383,573", "issue": "capital outlay line not relabelled 'Capital Outlay: <function>' per the user's 2026-10-26 rule (also receipts-statement 'Capital outlay' 383,573 and Depreciation 'Capital outlay'); user_rules.py may apply it"}
   ]
 }

@@ -1,62 +1,22 @@
 {
   "stem": "Burwell_Public_Schools_FY2025",
-  "values_checked": 156,
+  "values_checked": 162,
   "issues": [
-    {
-      "severity": "error",
-      "path": "missing",
-      "page": null,
-      "extracted": "notes end 'Read pages 1-10 and 11-19 of 19.'",
-      "on_page": "trimmed PDF has 19 pages",
-      "issue": "[fixed] The notes don't end with 'Read pages 1-N of N'. validate.py's regex 'Read pages 1-(\\d+) of (\\d+)' does not match '1-10 and 11-19 of 19', so the report will be flagged as coverage not confirmed. Only the wording is wrong: I read all 19 pages, and every statement and schedule line is in the JSON. The notes should end 'Read pages 1-19 of 19'."
-    },
-    {
-      "severity": "warning",
-      "path": "report_discrepancies[0]",
-      "page": 4,
-      "extracted": "Total receipts difference 1",
-      "on_page": "p4 Pro-rate motor vehicle: General 8,666 + Special Building 685 + Nonmajor 175 = 9,526, printed Total 9,527; Special Building column lines 403,474 vs printed 403,475; Nonmajor 563,489 vs printed 563,490; Total-column lines 7,750,127 vs printed 7,750,128",
-      "issue": "Confirmed this is the printed report's error, not a misread. Every total-column line was checked on p4-p5 and cross-footed against the fund columns. The $1 comes from the Pro-rate motor vehicle row, which doesn't cross-foot. The note could also mention the Special Building column misfoot on p5."
-    },
-    {
-      "severity": "warning",
-      "path": "report_discrepancies[1]",
-      "page": 6,
-      "extracted": "Total disbursements difference 2",
-      "on_page": "p5-p6 Total-column lines 6,192,058 vs printed 6,192,060; General column 5,550,487 vs printed 5,550,489; p9 combining Total column lines 5,550,487 vs printed 5,550,488; p9 General Fund column lines (Regular instruction 2,599,454) 5,889,438 vs printed 5,889,439 (p12 prints 2,599,455)",
-      "issue": "Confirmed this is the printed report's error, not a misread. Each disbursement line matches p1 (statement of activities, same lines, total 6,192,060) and the p9 combining schedule. The gap is rounding carried through the General Fund components schedule. The p9 $1 misfoot is a further printed discrepancy not listed separately."
-    },
     {
       "severity": "warning",
       "path": "disbursements[2].category",
       "page": 5,
       "extracted": "support services",
-      "on_page": "Support services - students 634,192 = General 312,069 + Nonmajor 322,123 (= Activities Fund disbursements p19)",
-      "issue": "51% of this line is student activity spending, so the dominant category is arguably student activities. Support services is defensible (it is the printed label), but there is no review flag or note."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[7].category",
-      "page": 10,
-      "extracted": "intergovernmental/state aid / county/other local governments",
-      "on_page": "2110 County fines and licenses 20,402",
-      "issue": "County fines and license money distributed to schools could be fines and forfeitures (the Auburn extraction puts the same kind of line there). Also affects receipts[11] County and ESU sources."
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[11].category",
-      "page": 5,
-      "extracted": "debt service principal",
-      "on_page": "Debt service 115,706 (p18 QCPU: principal 110,000, interest 5,665, fees 40 = 115,705)",
-      "issue": "Mixed line given the dominant category, with review: OK. Statement 115,706 vs schedule 115,705 is a $1 printed rounding difference. Other $1 differences between statement and schedules are printed too: SB interest 3,359 vs 3,358, pro-rate 685 vs 686, nutrition federal 67,530 vs 67,529, other nonrevenue 1,096 vs 1,097, state apportionment 77,412 vs 77,411."
+      "on_page": "Support services - students 634,192 = General 312,069 + Nonmajor 322,123 (= Activities Fund disbursements, p19)",
+      "issue": "About 51% of this statement line is Activities Fund student activity spending, which p1 offsets with the 309,188 charges. support services (the printed function) is defensible, but the line carries no review flag or note about the mix."
     },
     {
       "severity": "warning",
       "path": "disbursements[13].fund_type",
       "page": 6,
       "extracted": "governmental",
-      "on_page": "School Nutrition Program in Nonmajor governmental funds column (p4-p7)",
-      "issue": "The extractor rules list school nutrition as business-type, but the report presents it as a nonmajor governmental fund. Kept governmental (also receipts[22], detail School Nutrition lines)."
+      "on_page": "School Nutrition Program in the Nonmajor Funds column of the governmental funds statement (p4-p7)",
+      "issue": "The extractor rules list school nutrition among business-type funds, but this report presents it as a nonmajor governmental fund. Keeping it governmental follows the report (also receipts[22] and the School Nutrition detail lines)."
     }
   ]
 }

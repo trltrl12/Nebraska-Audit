@@ -1,18 +1,21 @@
 {
   "stem": "Greenwood_FY2025",
-  "values_checked": 153,
+  "values_checked": 142,
   "issues": [
+    {"severity": "error", "path": "receipts[9].category", "page": 5,
+     "extracted": "charges for services/fees", "on_page": "Rental fees 1,300",
+     "issue": "user rule 2026-10-28: rent/rental income has its own receipt category Rentals (out of charges for services)"},
+    {"severity": "error", "path": "receipts[14].category", "page": 7,
+     "extracted": "charges for services/fees", "on_page": "Sales 826,856 (Electric/Water/Sewer enterprise funds)",
+     "issue": "user rule 2026-10-28: utility fund sales/charges are category Utility Charges (out of charges for services)"},
+    {"severity": "warning", "path": "receipts[8].category", "page": 5,
+     "extracted": "charges for services/fees", "on_page": "Charges for services 26,853 (all Rescue department, p14; p2 shows it under Public safety)",
+     "issue": "the whole line is rescue charges; Ambulance Fees (ambulance, rescue) fits and the detail line already uses ambulance/rescue fees"},
+    {"severity": "warning", "path": "detail[5].category", "page": 13,
+     "extracted": "charges for services/fees", "on_page": "Rental fees 1,300",
+     "issue": "should be Rentals, the same as the matching receipt line"},
     {"severity": "warning", "path": "disbursements[4].category", "page": 5,
-     "extracted": "other", "on_page": "Community betterment 4,978",
-     "issue": "Keno-funded community betterment spending is in 'other'. It could go under culture/recreation or economic development, but the page doesn't say what was bought, so this is a judgment call (review is already set)."},
-    {"severity": "warning", "path": "receipts[10].category", "page": 5,
-     "extracted": "donations/contributions", "on_page": "Grants and contributions 5,904",
-     "issue": "p2 shows this as 'Operating Grants and Contributions' (Environment and leisure: Library 856, Park & Recreation 5,048 on p14). Some of it may be government grants (intergovernmental/federal grants) rather than private donations. The category can be defended."},
-    {"severity": "warning", "path": "detail[39].category", "page": 13,
-     "extracted": "public safety", "on_page": "Fire: Capital outlay 21,704; Rescue: Capital outlay 10,317 (detail[39] and detail[47], p14)",
-     "issue": "Both department capital outlay lines have function public safety. The fund statement (p5) puts the 32,021 under its own Capital outlay function, so detail public safety (76,685 incl. law enforcement 9,600) doesn't tie to the statement's 44,664 unless these two lines are moved to category 'capital outlay'."},
-    {"severity": "warning", "path": "receipts[13].amount", "page": 3,
-     "extracted": 41401, "on_page": "Miscellaneous 41,402 (government-wide); Charges for services 35,044 vs fund lines 26,853+1,300+6,892=35,045",
-     "issue": "A $1 rounding difference printed in the report itself, between the Statement of Activities (p2-3) and the governmental funds statement (p5). Both reach the same total, 1,111,484. The extraction correctly uses the fund statement."}
+     "extracted": "other", "on_page": "Community betterment 4,978 (Keno-funded Other Funds)",
+     "issue": "spending function left in other; could be economic development or culture/recreation (already marked review)"}
   ]
 }

@@ -1,30 +1,18 @@
 {
   "stem": "Wausa_FY2025",
-  "values_checked": 89,
+  "values_checked": 150,
   "issues": [
-    {
-      "severity": "error",
-      "path": "missing",
-      "page": 6,
-      "extracted": null,
-      "on_page": "Charges for services 291,658 (proprietary funds Total column, operating revenues)",
-      "issue": "[fixed] Business-type receipt line missing from receipts[]: no business-type receipts recorded at all, although reported_totals.business-type.receipts (296,336) and the business_type roll-forward (501,882 + 296,336 - 262,742 = 535,476) depend on it"
-    },
-    {
-      "severity": "error",
-      "path": "missing",
-      "page": 6,
-      "extracted": null,
-      "on_page": "Interest income 4,678 (proprietary funds Total column, nonoperating revenues)",
-      "issue": "[fixed] Business-type receipt line missing from receipts[]; without it and charges for services the business-type identity fails by 296,336"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[24].detail_category",
-      "page": 8,
-      "extracted": "salaries and wages",
-      "on_page": "Personnel services",
-      "issue": "Personnel services (detail[24]-[27], and business-type disbursements[5]) likely include benefits/payroll taxes as well as wages; salaries and wages is a judgment call"
-    }
+    {"severity": "warning", "path": "detail[24].detail_category", "page": 8,
+     "extracted": "salaries and wages", "on_page": "Personnel services",
+     "issue": "Personnel services (detail[24]-[27], and business-type disbursements[5]) probably include benefits/payroll taxes as well as wages, so salaries and wages is a judgment call."},
+    {"severity": "warning", "path": "receipts[13].category", "page": 6,
+     "extracted": "charges for services/fees", "on_page": "Charges for services 291,658 (Water 166,881 / Sewer 65,414 / Sanitation 59,363)",
+     "issue": "Utility fund charges (including sanitation) fall under Utility Charges per the 2026-10-28 rule. The matching detail lines (p6) use Utility Charges, so the categories are inconsistent. user_rules.py only recategorizes lines that carry a fund name, so this receipt will not be fixed automatically."},
+    {"severity": "warning", "path": "receipts[7].category", "page": 4,
+     "extracted": "charges for services/fees", "on_page": "Charges for services 14,587 = Pool 9,147 + Park 40 + Woodlawn Cemetery 5,100 + Auditorium 300 (p8)",
+     "issue": "The breakdown is printed in the General Fund combining schedule. Pool/park fees are 63% of the line, so by the 'more than half' rule it could take Recreation Fees (or be split into Recreation Fees and Cemetery Fees)."},
+    {"severity": "warning", "path": "balance_sheet.assets[8]", "page": 1,
+     "extracted": "Internal blances -22,888 (governmental) and +22,888 (business-type) recorded", "on_page": "Internal blances (22,888) / 22,888, blank in the Total column",
+     "issue": "notes say internal balances 'net to zero in Total column and are omitted', but both lines are in assets[]. The amounts are as printed and net to zero, so totals are unaffected; the notes contradict the data."}
   ]
 }

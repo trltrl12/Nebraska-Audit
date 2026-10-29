@@ -1,24 +1,9 @@
 {
   "stem": "Manley_FY2025",
-  "values_checked": 31,
+  "values_checked": 34,
   "issues": [
-    {"severity": "warning", "path": "reported_totals.business-type.receipts", "page": 1,
-     "extracted": 62875.64, "on_page": "Sewer 36,248.32 + Water 26,627.32 (Water includes 5,957.44 transfer in, line 20)",
-     "issue": "Printed business-type totals include the gross Sewer-to-Water transfer (5,957.44 in receipts and 5,957.44 out in disbursements, 36,424.43), but business_type.transfers_net is 0. Any check of items + transfers_net against these totals will show a 5,957.44 gap on both sides even though the figures are right."},
     {"severity": "warning", "path": "disbursements[1].category", "page": 2,
-     "extracted": "general government", "on_page": "Line 40 Miscellaneous 65,716.45 (General Fund)",
-     "issue": "The printed function is 'Miscellaneous', not an object listing; review reason 'listed by object' doesn't fit. Fund-function mapping (General -> general government, Street -> streets/highways, Community Center -> culture/recreation for disbursements[2], [3]) is defensible but a judgment call. 65,716.45 is 66% of governmental spending."},
-    {"severity": "warning", "path": "disbursements[1].original_label", "page": 2,
-     "extracted": "Miscellaneous (General Fund)", "on_page": "Miscellaneous",
-     "issue": "Fund name added to the printed label (also disbursements[2], [3], receipts[7] '(Sewer)', receipts[8] '(Water)')."},
-    {"severity": "warning", "path": "receipts[7].split_from", "page": 1,
-     "extracted": null, "on_page": "Line 18 Local Receipts: Other total 98,565.45 = 17,418.61 + 13,020.38 + 11,054.32 + 36,248.32 + 20,669.88 + 153.94",
-     "issue": "Mixed row split by fund column (receipts[6] computed, receipts[7], [8]) without split_from naming the printed total-column line. Amounts match the fund columns."},
-    {"severity": "warning", "path": "receipts[6].category", "page": 1,
-     "extracted": "other", "on_page": "Local Receipts: Other 41,647.25 (governmental columns)",
-     "issue": "Unexplained, 37% of governmental receipts; nothing on the page breaks it down (review set). Infrastructure Savings 153.94 is probably interest but the page doesn't say."},
-    {"severity": "warning", "path": "notes", "page": 1,
-     "extracted": null, "on_page": "County Treasurer Balance at October 1, 2024 $1,388.28; at September 30, 2025 1,100.40",
-     "issue": "County treasurer balances printed below the statement are not mentioned in notes (correctly excluded from cash)."}
+     "extracted": "general government", "on_page": "Miscellaneous 65,716.45 (line 40, General Fund)",
+     "issue": "printed line is 'Miscellaneous' (a function line, not an object listing as the review note says); fund-function categories (general government / streets / culture-recreation for lines [1]-[3]) are a judgment call"}
   ]
 }

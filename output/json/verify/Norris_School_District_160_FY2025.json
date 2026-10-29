@@ -1,18 +1,24 @@
 {
   "stem": "Norris_School_District_160_FY2025",
-  "values_checked": 201,
+  "values_checked": 215,
   "issues": [
-    {"severity": "warning", "path": "disbursements[11].amount", "page": 4,
-     "extracted": 1554698, "on_page": "Debt service 2,002,504 (single statement line)",
-     "issue": "The statement prints one Debt service line. The principal/interest split adds up correctly (1,235,000+49,698+270,000 and 392,881+54,925 from the Bond, Special Building and QCPU schedules, pp17/19/21), but it is built from three fund schedules, not from a breakdown of the statement line itself. Defensible because the fund columns 1,468,385+155,119+379,000 tie to the line; the split is marked computed/split_from."},
-    {"severity": "warning", "path": "detail_totals[1].amount", "page": 12,
-     "extracted": 28245927, "on_page": 29097527,
-     "issue": "The printed General Fund Total disbursements is 29,097,527. The extractor recorded 29,097,527 less the 851,600 hidden-transfer contra (marked computed), so the detail items tie. This is not the printed figure."},
-    {"severity": "warning", "path": "receipts[11].category", "page": 3,
-     "extracted": "charges for services/fees", "on_page": "Postsecondary receipts (code 1955, p9)",
-     "issue": "Nature unclear. Code 1955 is in the 1950s miscellaneous-local series, which may be payments from postsecondary institutions (intergovernmental/county/other local governments), not tuition. Already marked review; same applies to detail[10]."},
-    {"severity": "warning", "path": "receipts[18].category", "page": 3,
-     "extracted": "other", "on_page": "Other receipts 19,272 (Depreciation Fund 'Other nonrevenue receipts', p13)",
-     "issue": "Nonrevenue receipts in school accounting are usually sale of property, insurance recoveries or refunds (sale of assets/reimbursements), but the page doesn't say which. 'other' with review is defensible. Same applies to detail[75]."}
+    {"severity": "error", "path": "detail[35].category", "page": 10,
+     "extracted": "Instruction", "on_page": "1200 Special education programs 2,073,445; 1291 ages 3-5 5,505; 1292 ages 0-2 2,712; 1295 unified sports 1,523 (detail[35]-detail[38])",
+     "issue": "The user's school-district function rule (2026-10-23) makes Special Education Programs its own category, separate from Instruction (regular, summer school, early childhood, poverty, LEP). These four special education program lines are filed as Instruction."},
+    {"severity": "error", "path": "receipts[19].category", "page": 3,
+     "extracted": "charges for services/fees", "on_page": "Daily sales 851,226 (School Nutrition Fund, p16)",
+     "issue": "School Nutrition daily (lunch) sales belong in the user's School Lunch Sales receipt category (2026-10-28 rule, taken out of charges for services)."},
+    {"severity": "error", "path": "detail[82].category", "page": 16,
+     "extracted": "charges for services/fees", "on_page": "Daily sales 851,226 (School Nutrition Fund)",
+     "issue": "Same problem as receipts[19]: category should be School Lunch Sales (detail_category 'school lunch sales' is already correct)."},
+    {"severity": "warning", "path": "detail[115].category", "page": 19,
+     "extracted": "Building and Grounds", "on_page": "School safety and security 32,500 (Special Building Fund)",
+     "issue": "The fund statement (p4) counts this 32,500 in the Special Building column under 'Instructional support', not under operation and maintenance of plant (32,457 = 20,495 + 11,962). Under the report's own grouping it would be support services (Staff)."},
+    {"severity": "warning", "path": "receipts[10].category", "page": 3,
+     "extracted": "Fines and Licenses", "on_page": "Local license fees and fines 6,548 (code 1911)",
+     "issue": "This line mixes local license fees and fines. Fines and Licenses is defensible (marked review), but licenses and permits is possible."},
+    {"severity": "warning", "path": "notes", "page": 7,
+     "extracted": "General Fund state/federal programs lines ... recorded as printed under category instruction", "on_page": "State programs 20,457 / Federal programs 647,934 reclassified to Instruction (p7)",
+     "issue": "The notes are stale. The detail lines (detail[65]-detail[71]) are actually State Categorical Programs / Federal Programs, which is correct under the user's 2026-10-28 grouping rule. The notes also say the balance sheet comes from p2, but it comes from p5. The hidden 851,600 transfer is handled correctly."}
   ]
 }

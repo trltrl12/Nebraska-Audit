@@ -1,18 +1,12 @@
 {
   "stem": "Bruno_FY2025",
-  "values_checked": 33,
+  "values_checked": 34,
   "issues": [
     {"severity": "warning", "path": "receipts[11].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Sewer 8,900.00 / Water 35,415.00)",
-     "issue": "Assumed to be utility charges (receipts[11] and [12]). This is reasonable but not stated; already marked review"},
-    {"severity": "warning", "path": "disbursements[2].category", "page": 2,
-     "extracted": "debt service principal", "on_page": "Debt Service 3,842.00 (Sewer Fund)",
-     "issue": "A single Debt Service line is recorded as all principal; the split between principal and interest is not printed"},
-    {"severity": "warning", "path": "receipts[*].original_label", "page": 1,
-     "extracted": "e.g. 'State Receipts: Property Tax Credit (General Fund)'", "on_page": "'State Receipts: Property Tax Credit'",
-     "issue": "Fund names in parentheses were added to the printed row labels (also in disbursements)"},
-    {"severity": "warning", "path": "balance_sheet.equity[0].original_label", "page": 1,
-     "extracted": "Ending Balance (Line 24/28)", "on_page": "Ending Balance (Line 22 MINUS Line 23) / Subtotal of Ending Balances (Line 26 + 27)",
-     "issue": "This label combines two printed rows; it is not a label printed on the page"}
+     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Sewer Fund) 8,900.00",
+     "issue": "Utility fund 'Local Receipts: Other' assumed to be utility charges; nothing on the page says what it is (user rule would make utility collections 'Utility Charges')"},
+    {"severity": "warning", "path": "receipts[12].category", "page": 1,
+     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Water Fund) 35,415.00",
+     "issue": "Same assumption as the Sewer line: utility fund 'Other' receipts presumed charges; category could be 'Utility Charges'"}
   ]
 }

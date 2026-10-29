@@ -1,62 +1,30 @@
 {
   "stem": "Overton_FY2025",
-  "values_checked": 106,
+  "values_checked": 92,
   "issues": [
-    {
-      "severity": "error",
-      "path": "report_discrepancies",
-      "page": 5,
-      "extracted": null,
-      "on_page": "Fire and Ambulance column lines add to 39,304 but print Total revenues 189,304; Total Governmental Funds lines add to 641,540 but print 791,540",
-      "issue": "[fixed] The printed governmental statement doesn't add up: a 150,000 revenue line (the grant shown on p2 as capital grants and on p9 as Grant proceeds) is missing from the page. The extractor added receipts[9] from p9 so the list ties, but there is no report_discrepancies entry (check 'totals', difference 150000, source_page 5). Per the rules the printed report not adding up must be recorded there."
-    },
-    {
-      "severity": "error",
-      "path": "detail[20]-detail[38]",
-      "page": 10,
-      "extracted": "County Treasurer schedule revenue lines (property taxes 152,871 + 56,522 = 209,393; motor vehicle taxes 16,143; homestead, pro-rate, in-lieu, carline, interest, state tax credit; collection fees; transfers to Village Treasurer)",
-      "on_page": "Budget schedule p9 'Property and motor vehicle taxes' 225,536 = 209,393 + 16,143 (the same amounts as p3 Property taxes / Motor vehicle taxes), plus Other state revenue 56,904 holds the county-collected state credits",
-      "issue": "[fixed] Double counting across schedules: the county treasurer pass-through schedule (p10) is the same money already in detail[0] and detail[4] from the All Funds budget schedule (p9). Only one schedule should be kept for this money (p10 is more detailed for the General and Street Bond portions), or the overlap must be removed."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[29].amount, detail[38].amount",
-      "page": 10,
-      "extracted": "other financing -200,806 / -68,661",
-      "on_page": "Transfer to Village Treasurer 200,806 / 68,661 (listed under Expenditures)",
-      "issue": "This is the county treasurer sending collected taxes on to the village, not a transfer between funds. Recording it as other financing is defensible because of the label, but it has no matching transfer in on the village side."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[9].category",
-      "page": 9,
-      "extracted": "federal grants",
-      "on_page": "Grant proceeds 150,000 (p9); Public Safety capital grants and contributions 150,000 (p2)",
-      "issue": "The page doesn't say who gave the grant; it could be a state grant or a private contribution. The line is also not printed on the governmental statement p5 (see the report_discrepancies error)."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[0].category",
-      "page": 9,
-      "extracted": "property tax (225,536)",
-      "on_page": "Property and motor vehicle taxes 225,536; p3 prints Property taxes 209,393 and Motor vehicle taxes 16,143 (sum 225,536)",
-      "issue": "Combined tax line put entirely in property tax. Under the combined-tax-line rule it could be split into property tax 209,393 and motor vehicle tax 16,143 with split_from, using the p3 general revenues breakdown."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[0].category",
-      "page": 5,
-      "extracted": "taxes (unlabeled) 270,982",
-      "on_page": "County treasurer revenues 270,982",
-      "issue": "Kept as unlabeled. Statement of Activities p3 implies 209,393 property tax + 16,143 motor vehicle tax + 45,446 state money (within Intergovernmental 123,769). That is derived, not a printed breakdown of this line, so leaving it unsplit is defensible. Noting the possible split for review."
-    },
-    {
-      "severity": "warning",
-      "path": "business_type.measure",
-      "page": 8,
-      "extracted": "net position",
-      "on_page": "NET POSITION (modified cash basis; assets are all cash/CDs)",
-      "issue": "The rules say measure = 'cash' for cash-basis statements. The amounts are the same either way."
-    }
+    {"severity": "error", "path": "missing", "page": null,
+     "extracted": "notes end '...replace the combined schedule.'", "on_page": "trimmed PDF has 10 pages",
+     "issue": "notes do not end with 'Read pages 1-10 of 10' (the phrase is in the middle of the notes, followed by later-added text). All 10 pages were checked and no statement/schedule lines are actually missing; only the notes ending needs fixing"},
+    {"severity": "error", "path": "balance_sheet.total_assets.source_page", "page": 1,
+     "extracted": {"amount": 838423, "source_page": 4}, "on_page": "TOTAL ASSETS 838,423 (Total column, p1); p4 total is 198,604",
+     "issue": "838,423 is not printed on p4 (governmental funds statement, total 198,604); it is the p1 Statement of Net Position Total column. Wrong source_page (or mark computed: 198,604 p4 + 639,819 p1)"},
+    {"severity": "error", "path": "balance_sheet.total_equity.source_page", "page": 1,
+     "extracted": {"amount": 838423, "source_page": 4}, "on_page": "TOTAL NET POSITION 838,423 (p1); p4 total fund balances 198,604",
+     "issue": "same as total_assets: amount is on p1, not the cited p4"},
+    {"severity": "warning", "path": "receipts[9]", "page": 9,
+     "extracted": {"original_label": "Grant proceeds", "amount": 150000}, "on_page": "not printed on the p5 governmental funds statement; Fire and Ambulance column lines add to 39,304 vs printed Total revenues 189,304; 'Grant proceeds 150,000' printed on p9 budget schedule, capital grants 150,000 Public Safety on p2",
+     "issue": "extractor added a line the governmental statement omits, so receipts tie to 791,540 while report_discrepancies also records the 150,000 gap. Reasonable but an assumption; grantor (state vs federal) not stated"},
+    {"severity": "warning", "path": "detail[18].source_page", "page": 5,
+     "extracted": 5, "on_page": "150,000 not printed on p5 (p9 budget schedule / p2)",
+     "issue": "detail grant line cites p5, where the amount does not appear; computed note explains it"},
+    {"severity": "warning", "path": "receipts[6].category", "page": 2,
+     "extracted": "licenses and permits", "on_page": "Licenses and fees 62,169; Statement of Activities p2 shows it as charges for services: General government 2,546, Public Safety 14,844, Trash 44,779",
+     "issue": "72% of the line (44,779, Other Governmental Funds) is trash charges (Utility Charges, garbage/refuse) and 14,844 is Fire and Ambulance (likely Ambulance Fees); licenses and permits is not the dominant category"},
+    {"severity": "warning", "path": "detail[9..11].category", "page": 5,
+     "extracted": "licenses and permits / detail_category other charges for services", "on_page": "Licenses and fees 2,546 / 14,844 / 44,779",
+     "issue": "category and detail_category disagree; per p2 the Other Governmental 44,779 is Trash (refuse/sanitation charges) and Fire 14,844 is public safety charges (likely ambulance/rescue fees)"},
+    {"severity": "warning", "path": "receipts[10].category", "page": 8,
+     "extracted": "charges for services/fees", "on_page": "Charges for services 163,243 (Water and Sewer proprietary funds)",
+     "issue": "utility fund charges are Utility Charges under the user's 2026-10-28 rule (detail lines already use Utility Charges)"}
   ]
 }

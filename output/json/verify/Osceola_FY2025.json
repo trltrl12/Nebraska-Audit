@@ -1,18 +1,21 @@
 {
   "stem": "Osceola_FY2025",
-  "values_checked": 115,
+  "values_checked": 128,
   "issues": [
-    {"severity": "warning", "path": "business_type.beginning", "page": 2,
-     "extracted": 2586399, "on_page": "p6 Net position Sept 30, 2024 2,586,399; p2 Net position -- beginning 2,586,400; change 118,372 (p6) vs 118,371 (p2); expenses 688,890 (p6) vs 688,891 (p2)",
-     "issue": "The report's own statements differ by 1 because of rounding. This is mentioned only in notes, not in report_discrepancies. (p2 also prints interest income 11,412 against 11,414 on p4.)"},
+    {"severity": "error", "path": "receipts[13].category", "page": 6,
+     "extracted": "charges for services/fees", "on_page": "Sales 732,503 (Water 354,070, Sewer 208,070, Compactor 170,363; proprietary funds operating revenues)",
+     "issue": "These are utility fund sales, which have their own receipt category, Utility Charges (user 2026-10-28). user_rules.py won't catch this line because the label is just 'Sales' and the line has no fund field."},
+    {"severity": "error", "path": "balance_sheet.assets[4]", "page": 1,
+     "extracted": 355793, "on_page": "Due from other funds: Business-type 355,793, Eliminations (355,793), Total Primary Government -",
+     "issue": "The asset lines add up to 9,003,758, but printed total_assets is 8,647,965. The liability lines (incl. liabilities[1] Due to other funds 355,793) add up to 2,796,778 against the printed 2,440,985. The page itself adds up, because its Eliminations column removes both 355,793 amounts. So this gap is not a report discrepancy. Either drop the two internal-balance lines (they are zero in the Total column) or add the printed (355,793) eliminations as lines."},
+    {"severity": "error", "path": "report_discrepancies[0]", "page": 1,
+     "extracted": {"check": "balance", "difference": 355793}, "on_page": "Eliminations column (355,793) on Due from other funds and Due to other funds; Total Primary Government totals tie",
+     "issue": "The printed statement doesn't fail to add up, so this entry would wrongly show the user the report as not adding up. The gap comes from how the lines were extracted (see balance_sheet.assets[4])."},
     {"severity": "warning", "path": "receipts[10].category", "page": 4,
-     "extracted": "donations/contributions", "on_page": "Grants and contributions 18,652",
-     "issue": "On p2 the Statement of Activities shows this money as operating grants and contributions for public safety (16,012) and environment and leisure (2,640), so it may be government grants rather than private gifts. The line already has a review flag; detail[7] is the same."},
-    {"severity": "warning", "path": "receipts[7].category", "page": 4,
-     "extracted": "licenses and permits", "on_page": "Licenses, fees, and permits 6,289",
-     "issue": "The label mixes licenses, permits and fees. The rules say a mixed line gets its dominant category plus a review flag, and this line has no review flag (detail[4] is the same)."},
-    {"severity": "warning", "path": "detail[17].detail_category", "page": 9,
-     "extracted": "other state aid", "on_page": "Street Fund Intergovernmental 179,329",
-     "issue": "Street Fund intergovernmental revenue is most likely highway allocation, but the page prints only 'Intergovernmental'. Keeping it as a broad group is defensible."}
+     "extracted": "donations/contributions", "on_page": "Grants and contributions 18,652; Statement of Activities p2 shows it as operating grants and contributions (public safety 16,012, environmental and leisure 2,640)",
+     "issue": "The report doesn't say whether these are government grants or private donations. Already marked review."},
+    {"severity": "warning", "path": "disbursements[13]", "page": 6,
+     "extracted": "category utilities, no function field", "on_page": "Utilities and telephone 37,373",
+     "issue": "Every other business-type cost-type line has function \"utilities\"; this one doesn't. The category utilities (utility bills) is right."}
   ]
 }

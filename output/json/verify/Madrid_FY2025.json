@@ -1,27 +1,12 @@
 {
   "stem": "Madrid_FY2025",
-  "values_checked": 88,
+  "values_checked": 115,
   "issues": [
-    {"severity": "warning", "path": "detail[4].split_from", "page": 9,
-     "extracted": "19,817 governmental (split of Other local receipts)", "on_page": "Other local receipts 107,354 (single line, no breakdown on p9)",
-     "issue": "Page 9 does not print the split. It was derived from p5 (governmental charges 3,361 + keno 3,172 + interest 5,894 + contributions 2,425 + sale of property 4,425 + misc 540 = 19,817) and p7 (business-type sales 87,489 + interest 48 = 87,537). The arithmetic is exact (19,817 + 87,537 = 107,354), and the split keeps fund types apart, but under the strict rule a split must be printed for that line. It is marked review and computed. Needs human confirmation."},
-    {"severity": "warning", "path": "detail[5].split_from", "page": 9,
-     "extracted": "87,537 business-type (split of Other local receipts)", "on_page": "Other local receipts 107,354",
-     "issue": "Business-type half of the same derived split (see detail[4]); arithmetic correct."},
-    {"severity": "warning", "path": "detail[15].fund_type", "page": 9,
-     "extracted": "governmental, Transfers in 162,775", "on_page": "Transfers in 162,775 (All funds budget schedule)",
-     "issue": "Governmental transfers in are only 82,775 (Street Fund, p5). The other 80,000 equals the business-type net transfers in (143,000 in - 63,000 out, p7), so part of this line belongs to business-type funds. Tagging the whole line governmental is questionable."},
-    {"severity": "warning", "path": "detail[3].detail_category", "page": 9,
-     "extracted": "other state aid", "on_page": "State intergovernmental 57,138",
-     "issue": "All 57,138 is in the Street Fund (p5), and the Statement of Activities (p3) calls it 'State allocation'. It is most likely highway allocation; this is a judgment call with no review flag."},
-    {"severity": "warning", "path": "business_type.measure", "page": 7,
-     "extracted": "net position (beginning 91,007)", "on_page": "Net position - September 30, 2024 91,007; cash beginning 80,263 (p8)",
-     "issue": "The proprietary statements are modified cash basis, and the rule says measure = 'cash' on a cash basis. Beginning net position 91,007 includes 10,744 of certificates of deposit, so the cash measure would begin at 80,263. Net position is used and reconciles (91,007 + 87,537 - 241,204 + 80,000 = 17,340). This is a defensible assumption the extractor made; notes explain it."},
-    {"severity": "warning", "path": "proprietary", "page": 8,
-     "extracted": "filled (operating -69,838, noncapital 80,000, capital -83,877, investing 10,792, beginning 80,263, ending 17,340)", "on_page": "same figures, Total column p8",
-     "issue": "All six figures match p8, but the rules fill proprietary for GAAP only (otherwise null), and this report is modified cash basis."},
-    {"severity": "warning", "path": "receipts[10].amount", "page": 7,
-     "extracted": 87489, "on_page": "p7 Sewer 17,219 / Trash 31,554 vs p2 Sewer 17,220 / Trash 31,553",
-     "issue": "Rounding difference printed in the report itself between the fund columns of p7 and the Statement of Activities p2. Both total 87,489, so the JSON total is unaffected. Notes mention only the Sewer difference, not Trash."}
+    {"severity": "error", "path": "receipts[10].category", "page": 7,
+     "extracted": "charges for services/fees", "on_page": "Sales (Water/Sewer/Trash enterprise funds) 87,489",
+     "issue": "utility fund sales belong in Utility Charges (user rule 2026-10-28); the matching detail lines in this report already use Utility Charges"},
+    {"severity": "warning", "path": "detail[3].detail_category", "page": 5,
+     "extracted": "other state aid", "on_page": "Intergovernmental 57,138 (Street Fund; 'State allocation' on p3)",
+     "issue": "a Street Fund state allocation is most likely highway allocation"}
   ]
 }

@@ -1,46 +1,18 @@
 {
   "stem": "Spalding_FY2025",
-  "values_checked": 71,
+  "values_checked": 169,
   "issues": [
-    {
-      "severity": "error",
-      "path": "missing",
-      "page": 15,
-      "extracted": null,
-      "on_page": "Budgetary Comparison Schedule, Business-Type Activities: Electric actual 854,534 (budget 1,354,900); Sewer 24,234 (budget 21,550); Water 105,315 (budget 120,400)",
-      "issue": "[fixed] The business-type funds have no other detail schedule. The rules say to record the budget schedule's lines for every fund without a more detailed schedule, including each utility fund, so these three lines belong in detail (fund_type business-type, section expenditure, category utilities, detail_category not itemized, with budget_final). They are 'Disbursements and Transfers', so the Electric transfer (62,013) is probably inside its line; flag that with review. The extractor left out the whole budget schedule."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[0].category",
-      "page": 17,
-      "extracted": "other",
-      "on_page": "Schedule of Expenditures - Governmental Funds, Total column (Personal Services 121,053; Contracted Services 70,350; Materials and Supplies 126,143; Other Operating Expenses 226,802)",
-      "issue": "544,348 of detail spending is in category other because only the Total column was recorded. The fund columns (General, Road, Lottery, Ambulance, Garbage, Fire Hall, Police, Library) each have a clear function, so recording them per fund would give real functions. The 8 columns are over the 6-fund cap, which makes this a judgment call. Applies to detail[0]-detail[3]."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[0].fund",
-      "page": 16,
-      "extracted": "Nonmajor funds (combined)",
-      "on_page": "Total (all 8 governmental funds, including General and Road)",
-      "issue": "The label is misleading: the Total column covers all governmental funds, major funds included, not only nonmajor ones."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[5].split_from",
-      "page": 16,
-      "extracted": "Debt Service 10,306 split 6,820 / 3,486",
-      "on_page": "Debt Service 10,306 (Road Fund p16; Total p17); Road Fund principal 6,820 / interest 3,486 on p7",
-      "issue": "The split comes from the fund statement (p7) and not from the schedule itself. It is defensible because it is the same Road Fund money, but check it."
-    },
-    {
-      "severity": "warning",
-      "path": "proprietary",
-      "page": 13,
-      "extracted": null,
-      "on_page": "Statement of Cash Flows - Proprietary Funds Totals: operating 89,968; noncapital financing (23,901); capital and related (106,286); investing 13,046; beginning 596,152; ending 568,979",
-      "issue": "The business-type funds are reported on the accrual basis and a proprietary cash-flow statement is printed, but proprietary is null because basis = cash. This is a schema judgment call."
-    }
+    {"severity": "error", "path": "notes", "page": null,
+     "extracted": "... Read pages 1-17 of 17 Detail (user 2026-10-27): per-fund lines ...", "on_page": "PDF has 17 pages",
+     "issue": "The notes don't end with 'Read pages 1-17 of 17' because a later sentence was added after it. The page count (17) is correct and every page was checked, but the required ending is missing"},
+    {"severity": "warning", "path": "detail", "page": 16,
+     "extracted": "governmental detail = statement function lines per fund (pp7-8)", "on_page": "Schedule of Expenditures - Modified Cash Basis - Governmental Funds (pp16-17): per-fund columns by object (Personal Services, Contracted Services, Materials and Supplies, Other Operating Expenses, Capital Outlay, Debt Service), e.g. General 75,222 / 26,474 / 100,716 / 83,832 / 37,283",
+     "issue": "This schedule has its own per-fund columns, so under the 2026-10-28 rule ('schedule lines show funds') its object lines could be the detail. Instead the detail uses statement function lines, and the object breakdown on pp16-17 is not in the JSON. A person should decide which applies"},
+    {"severity": "warning", "path": "decision_needed[0]", "page": 15,
+     "extracted": "Electric 'Disbursements and Transfers' 854,534 recorded as expenditure", "on_page": "Electric 854,534 (budget schedule p15)",
+     "issue": "Out of date: the p15 budget-schedule lines are no longer in detail (replaced by the p12 per-fund lines), so this question and the notes describing p15 detail lines no longer match the JSON"},
+    {"severity": "warning", "path": "receipts[20].category", "page": 12,
+     "extracted": "charges for services/fees", "on_page": "Charges for Services 908,217 (Electric/Sewer/Water)",
+     "issue": "The same utility-fund charges are category Utility Charges in detail (detail[39-41]). The statement line should use the same category (user rule: utility fund sales -> Utility Charges)"}
   ]
 }

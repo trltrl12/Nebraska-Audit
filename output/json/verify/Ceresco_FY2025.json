@@ -1,15 +1,15 @@
 {
   "stem": "Ceresco_FY2025",
-  "values_checked": 160,
+  "values_checked": 162,
   "issues": [
-    {"severity": "warning", "path": "ending_cash", "page": 5,
-     "extracted": 1428675, "on_page": "Fund balances - ending 1,428,675 (p5); cash 818,097 + investments 743,392 = 1,561,489 (p3)",
-     "issue": "beginning_cash and ending_cash hold the governmental fund balances that the statement rolls forward (cash + investments + due from funds - due to funds), not cash. This is defensible because p4-5 roll forward fund balances, but the label differs. Governmental cash plus investments at year end is 1,561,489."},
     {"severity": "warning", "path": "receipts[5].category", "page": 4,
-     "extracted": "other", "on_page": "Miscellaneous 256,764 (Park and Recreation 238,298)",
-     "issue": "The Statement of Activities (p2) puts culture and recreation operating grants and contributions at 126,912, but the culture funds' intergovernmental revenue is only 19,167 (Library 5,563 + Park & Rec 13,604). So about 107,745 of Park & Rec 'Miscellaneous' is likely donations/contributions. No breakdown is printed, so a split isn't allowed and 'other' with review stands. Same for detail[50]."},
-    {"severity": "warning", "path": "business_type", "page": 7,
-     "extracted": "measure net position; disbursements include Depreciation 114,154", "on_page": "Statement of Revenues, Expenses, and Changes in Net Position - Modified Cash Basis",
-     "issue": "On this cash-basis report, business-type disbursements follow the modified-cash net position statement: depreciation 114,154 is included and capital outlay 1,140,208 (p8, p17-18) is left out. The business-type detail schedules do the opposite. This matches the printed statement and reconciles, but the totals are not cash spending."}
+     "extracted": "other", "on_page": "Miscellaneous 256,764",
+     "issue": "The Statement of Activities (p2) shows only 129,852 as general-revenue Miscellaneous. The other 126,912 appears as Culture and recreation operating grants and contributions, so it probably comes from the Park and Recreation fund's 238,298 Miscellaneous (detail Park & Rec Miscellaneous, p15). That is about 49% of the line, just under the more-than-half rule, so other is defensible, but part of it is probably donations or grants."},
+    {"severity": "warning", "path": "receipts[6].category", "page": 7,
+     "extracted": "charges for services/fees", "on_page": "Charges for services 635,870 (Total Proprietary Funds: water, sewer, garbage)",
+     "issue": "These are utility fund charges. The detail records the same lines as Utility Charges, and the user rule makes utility fund charges Utility Charges, so the statement line is inconsistent with the detail."},
+    {"severity": "warning", "path": "missing", "page": 10,
+     "extracted": null, "on_page": "Budget-only lines with actual '-': Street Miscellaneous (budget 20,000, p10); Police Capital outlay (14,000, p12); Library Repairs and maintenance (1,500) and Capital outlay (4,000, p14); Water Repairs and maintenance (6,000, p17)",
+     "issue": "These printed schedule lines have no actual amount and are left out of detail, so their final budgets are not captured. No actual dollars are missing, and the totals tie."}
   ]
 }

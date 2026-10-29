@@ -1,18 +1,12 @@
 {
   "stem": "Halsey_FY2025",
-  "values_checked": 31,
+  "values_checked": 36,
   "issues": [
-    {"severity": "warning", "path": "receipts[9]", "page": 1,
-     "extracted": "two governmental items 23,032.84 (General) + 20.11 (Sales Tax), plus business-type 15,405.31 (Sewer)", "on_page": "Line 18 Local Receipts: Other, TOTAL 38,458.26",
-     "issue": "The mixed row is split by fund column, but none of the three items carries split_from naming line 18 (38,458.26), as the column-split rule asks. The governmental part is also kept as two items instead of one governmental line (23,052.95, computed). The amounts are as printed and the sums hold."},
-    {"severity": "warning", "path": "disbursements[0]", "page": 2,
-     "extracted": "30,026.97 (General) + 1,209.75 (Debit Card), as two items", "on_page": "Line 29 General Government, TOTAL 31,236.72",
-     "issue": "One printed line, all governmental, with its printed TOTAL column of 31,236.72, is entered as two per-fund items with no split_from. The sum is correct."},
-    {"severity": "warning", "path": "receipts[6].category", "page": 1,
-     "extracted": "intergovernmental/state aid", "on_page": "State Receipts: Other 4,269.00 (Sales Tax Fund column)",
-     "issue": "This sits in the Sales Tax Fund, and line 16 (Local Option Sales Tax) is blank, so it may be the local option sales tax the state sends back to the village (that would be sales tax). The extractor's choice can be defended and it already has a review note."},
-    {"severity": "warning", "path": "balance_sheet.equity[0].original_label", "page": 1,
-     "extracted": "Ending Balance (Line 24)", "on_page": "Ending Balance (Line 22 MINUS Line 23)",
-     "issue": "The label is paraphrased, not as printed. The amount, 70,100.22, is correct."}
+    {"severity": "warning", "path": "receipts[11].category", "page": 1,
+     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other, Sewer Fund 15,405.31",
+     "issue": "Presumed sewer charges; under the 2026-10-28 rule utility fund charges are Utility Charges, while config/category_decisions.csv maps 'local receipts other sewer fund' to other."},
+    {"severity": "warning", "path": "disbursements[0].original_label", "page": 2,
+     "extracted": "General Government (General Fund)", "on_page": "General Government",
+     "issue": "Fund names appended in parentheses to printed labels (receipts[9]-[11], disbursements[0], [1], [3]); the General Government row (31,236.72) is split by fund column into two governmental lines (both amounts printed)."}
   ]
 }

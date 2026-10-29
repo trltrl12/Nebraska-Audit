@@ -4,19 +4,19 @@
   "issues": [
     {"severity": "error", "path": "receipts[6].category", "page": 2,
      "extracted": "intergovernmental/state aid", "on_page": "In Lieu of Taxes 6,290",
-     "issue": "In Lieu of Tax is its own receipt category under the user rules (2026-10-23), even when it is printed under Intergovernmental Revenues. It should be 'In Lieu of Tax'."},
+     "issue": "[fixed 2026-10-28: category and detail_category set to In Lieu of Tax] In Lieu of Tax is its own receipt category under the user rules (2026-10-23), even when it is printed under Intergovernmental Revenues. It should be 'In Lieu of Tax'."},
     {"severity": "error", "path": "detail[6].detail_category", "page": 3,
      "extracted": "other state aid (category intergovernmental/state aid)", "on_page": "In Lieu of Tax 6,290 (budget 7,017)",
-     "issue": "Category and detail_category should both be 'In Lieu of Tax' (the rules say 'each also as its detail_category')."},
+     "issue": "[fixed 2026-10-28: category and detail_category set to In Lieu of Tax] Category and detail_category should both be 'In Lieu of Tax' (the rules say 'each also as its detail_category')."},
     {"severity": "warning", "path": "detail[3].detail_category", "page": 3,
      "extracted": "other charges for services", "on_page": "Fire & Rescue Receipts 38,853",
-     "issue": "The receipt line is categorised 'Ambulance Fees', but this detail line uses 'other charges for services'. 'ambulance/rescue fees' would match. The line may also include rural fire contract payments."},
+     "issue": "[fixed 2026-10-28: detail_category set to ambulance/rescue fees] The receipt line is categorised 'Ambulance Fees', but this detail line uses 'other charges for services'. 'ambulance/rescue fees' would match. The line may also include rural fire contract payments."},
     {"severity": "warning", "path": "receipts[13].category", "page": 2,
      "extracted": "reimbursements/refunds", "on_page": "Public Power Reimbursement 44,167",
      "issue": "This is probably the public power district's in-lieu/5% payment (Public Power District Sales Tax or In Lieu of Tax) rather than a reimbursement. Review is already set. The same applies to detail[10]."},
     {"severity": "warning", "path": "receipts[19].category", "page": 2,
      "extracted": "charges for services/fees", "on_page": "Fitness Center 1,538",
-     "issue": "Under the user's 2026-10-28 rule, recreation fees are their own category 'Recreation Fees'. detail[17] already uses recreation/pool/park fees, so the two are inconsistent."},
+     "issue": "[fixed 2026-10-28: receipt and detail category set to Recreation Fees] Under the user's 2026-10-28 rule, recreation fees are their own category 'Recreation Fees'. detail[17] already uses recreation/pool/park fees, so the two are inconsistent."},
     {"severity": "warning", "path": "receipts[14].category", "page": 2,
      "extracted": "charges for services/fees", "on_page": "Charges for Services 139,140 (General Fund, which also pays Public Utilities 219,173)",
      "issue": "The village runs its utilities inside the General Fund, so these charges are likely utility charges, which have their own category 'Utility Charges'. The page doesn't say, so this needs review."},
@@ -25,6 +25,6 @@
      "issue": "The utility operation runs inside the General Fund. It is recorded as governmental, as printed, so utility activity is mixed into the governmental totals."},
     {"severity": "warning", "path": "balance_sheet.equity[1].category", "page": 1,
      "extracted": "Unrestricted", "on_page": "Committed / Unrestricted 102,356",
-     "issue": "The fund balance classification is Committed (and Assigned / Unassigned for equity[2] and equity[3]). The categories use the net position side ('Unrestricted') rather than the fund balance classification."}
+     "issue": "[fixed 2026-10-28: equity categories set to Committed, Assigned, Unassigned] The fund balance classification is Committed (and Assigned / Unassigned for equity[2] and equity[3]). The categories use the net position side ('Unrestricted') rather than the fund balance classification."}
   ]
 }

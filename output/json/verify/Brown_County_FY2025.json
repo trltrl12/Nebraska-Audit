@@ -1,70 +1,21 @@
 {
   "stem": "Brown_County_FY2025",
-  "values_checked": 92,
+  "values_checked": 108,
   "issues": [
-    {
-      "severity": "warning",
-      "path": "missing",
-      "page": 5,
-      "extracted": null,
-      "on_page": "Combining Statement - General Fund, Inheritance Tax Fund column: Inheritance tax 151,924; Local 348; General government 18,641; Capital outlay 85,531; Transfers - in 55,190; Transfers - out (196,911); totals: receipts 152,272, disbursements 104,172",
-      "issue": "[fixed: lines added from p5] The General Fund budget schedule (p10) covers only the General Fund column of p5. The Inheritance Tax Fund lines on p5 are not in detail, and neither are their detail_totals. Adding them would not double count anything."
-    },
-    {
-      "severity": "warning",
-      "path": "missing",
-      "page": 5,
-      "extracted": null,
-      "on_page": "Combining Statement - General Fund, Veterans Aid Fund column: Capital outlay 2,124 (total disbursements 2,124)",
-      "issue": "[fixed: lines added from p5] The Veterans Aid Fund line on p5 is not in detail, and its total is not in detail_totals. The p10 budget schedule leaves this fund out."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[5].category",
-      "page": 2,
-      "extracted": "other",
-      "on_page": "Local 773,189 (p4) = Charges for services 447,257 + Interest income 192,725 + Miscellaneous 133,207 (Statement of Activities, p2)",
-      "issue": "[fixed: recategorized with review note] Local is recorded as 'other', but p2 shows what it is: mostly charges for services (58%), plus interest and miscellaneous. These three figures add up to the line exactly. Under the rules, 'other' is only for lines with nothing on the page that explains them, and a mixed line takes its dominant category (charges for services/fees) plus a review note. Splitting it with split_from, the same way Taxes was split, would also be defensible."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[2].category",
-      "page": 10,
-      "extracted": "other / miscellaneous revenue",
-      "on_page": "Local 379,383 (General Fund budget schedule)",
-      "issue": "Broad 'Local' group put in other/miscellaneous. The countywide breakdown on p2 suggests mostly charges for services or fees of office. Same applies to detail[29] (Road Local 95,932, which includes sale of surplus 41,132 per p4) and detail[35] (Nonmajor Local 275,990)."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[23].category",
-      "page": 10,
-      "extracted": "streets/highways",
-      "on_page": "Noxious Weed Control 44,806 (under Public Works)",
-      "issue": "The disbursement rules list noxious weed control under natural resources/conservation. The extractor followed the printed Public Works heading and added a review flag."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[28].detail_category",
-      "page": 11,
-      "extracted": "other state aid",
-      "on_page": "Road Fund Intergovernmental 1,022,678",
-      "issue": "Road Fund intergovernmental receipts are most likely highway allocation. The schedule does not say so."
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[7].category",
-      "page": 4,
-      "extracted": "debt service principal",
-      "on_page": "Principal and interest 950,614",
-      "issue": "Combined principal-and-interest line recorded entirely as principal. No split is printed, and a review flag is already set. Same applies to detail[43] (Nonmajor Principal and interest 840,248)."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[16].category",
-      "page": 10,
-      "extracted": "general government / not itemized",
-      "on_page": "Miscellaneous 755,984 (General Government)",
-      "issue": "Large miscellaneous department line. Classing it with its printed function heading is defensible; a review flag is already set."
-    }
+    {"severity": "error", "path": "detail[35].category", "page": 7,
+     "extracted": "other", "on_page": "Non-major 'Local' 275,990, of which Ambulance Fund 143,777 (p7); also Sanitary Landfill 79,032, 911 Wireless 37,693, 911 Emergency 9,663, Diversion 845, Preservation 2,111, ARPA 500, Capital Projects 2,369",
+     "issue": "The broad 'Local' line was put in other, but the combining pages show what it is made of: Ambulance Fund receipts are 52% of it (more than half), so the rule calls for Ambulance Fees / ambulance/rescue fees, or a split. Landfill 79,032 is refuse/Utility Charges."},
+    {"severity": "warning", "path": "detail[2].category", "page": 10,
+     "extracted": "other", "on_page": "General Fund Local 379,383",
+     "issue": "The budget-schedule Local line includes Sale of surplus 11,833 (p4: 367,550 + 11,833). Most of the rest is probably fees of office/charges and interest (Statement of Activities p2), so 'other' may not be the best category."},
+    {"severity": "warning", "path": "detail[29].category", "page": 11,
+     "extracted": "other", "on_page": "Road Fund Local 95,932",
+     "issue": "Includes Sale of surplus 41,132 (p4: Local 54,800 + Sale of surplus 41,132). The page prints it as one line, so this is recorded as printed, but 43% of it is Sale of Property."},
+    {"severity": "warning", "path": "detail[23].category", "page": 10,
+     "extracted": "streets/highways", "on_page": "Public Works: Noxious Weed Control 44,806",
+     "issue": "The extractor rules list noxious weed control under natural resources/conservation. It was kept with the statement's Public Works function (review is set)."},
+    {"severity": "warning", "path": "detail[33].category", "page": 6,
+     "extracted": "taxes (unlabeled)", "on_page": "Non-major Taxes 539,152: Visitor Promotion 25,230 + Visitor Improvement 25,230 (= lodging 50,460 on p2), Nursing Home 95,494, Hospital Bond 393,196, Reappraisal 2",
+     "issue": "The combining pages identify the lodging tax part (50,460, matching the Statement of Activities lodging line). Kept unlabeled; it could be split."}
   ]
 }

@@ -1,18 +1,15 @@
 {
   "stem": "Phillips_FY2025",
-  "values_checked": 31,
+  "values_checked": 44,
   "issues": [
+    {"severity": "warning", "path": "receipts[10].category", "page": 1,
+     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other - Enterprise Fund 245,818.39",
+     "issue": "Enterprise (water/sewer/solid waste) fund receipts fit the user's Utility Charges category. The split by column is printed and correct."},
     {"severity": "warning", "path": "receipts[10].original_label", "page": 1,
      "extracted": "Local Receipts: Other (Enterprise Fund)", "on_page": "Local Receipts: Other",
-     "issue": "The label has '(Enterprise Fund)' added; the printed row label is 'Local Receipts: Other' (line 18, Enterprise column)."},
-    {"severity": "warning", "path": "receipts[9].category", "page": 1,
-     "extracted": "other", "on_page": "Local Receipts: Other 55,532.47 (General 55,033.76 + Street 477.90 + CDBG 20.81)",
-     "issue": "13% of governmental receipts is in 'other', and the form doesn't say what it is. Marked review; a person may be able to identify it (e.g. from village records)."},
-    {"severity": "warning", "path": "disbursements[2].category", "page": 2,
-     "extracted": "economic development", "on_page": "Miscellaneous (line 40, TIF Fund) 153,788.23",
-     "issue": "Printed as Miscellaneous. Economic development is inferred from the TIF fund column; defensible and marked review."},
-    {"severity": "warning", "path": "balance_sheet.assets", "page": 1,
-     "extracted": null, "on_page": "County Treasurer Balance at October 1, 2024 $2,431.20; at September 30, 2025 6,581.38",
-     "issue": "County treasurer balances are printed below the statement but are not in the JSON or the notes. They are outside lines 1-28 (not part of the roll-forward), so this is not counted as cash, but it should be mentioned."}
+     "issue": "The extractor added fund names to the printed labels: '(Enterprise Fund)' here and '(TIF Fund)' on disbursements[2] 'Miscellaneous'. The labels are therefore not exactly as printed."},
+    {"severity": "warning", "path": "notes", "page": 1,
+     "extracted": null, "on_page": "County Treasurer Balance at October 1, 2024 2,431.20; at September 30, 2025 6,581.38",
+     "issue": "County treasurer balances are printed below the statement but are neither recorded nor mentioned in notes. They appear to be outside the village's cash balances."}
   ]
 }

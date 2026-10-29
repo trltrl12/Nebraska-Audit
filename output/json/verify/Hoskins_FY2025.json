@@ -1,15 +1,14 @@
 {
   "stem": "Hoskins_FY2025",
-  "values_checked": 29,
+  "values_checked": 31,
   "issues": [
     {"severity": "warning", "path": "receipts[10].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Enterprise Fund column) 107,598.27",
-     "issue": "Line printed only as 'Local Receipts: Other'; categorizing it as utility charges is an assumption (review already set). original_label also has '(Enterprise Fund)' appended, which is not printed on the row."},
-    {"severity": "warning", "path": "receipts", "page": 1,
-     "extracted": "Water Bond column treated as governmental", "on_page": "WATER BOND column (property tax 19,539.84, ending (751.44)); disbursement only Debt Service 24,770.00 (p3); Water Bonds 140,000 outstanding (p5)",
-     "issue": "Water Bond fund is a debt service fund for water bonds, funded by property tax; treating it as governmental is defensible but it services utility debt. Its negative ending balance (751.44) is included in governmental ending_cash."},
-    {"severity": "warning", "path": "notes", "page": 1,
-     "extracted": null, "on_page": "County Treasurer Balance at October 1, 2024 $2,564.09; at September 30, 2025 2,257.82",
-     "issue": "County Treasurer balances printed below the statement are not recorded or mentioned in notes; they are not included in lines 1-28, so balances as extracted are correct, but the omission should be noted."}
+     "extracted": "charges for services/fees",
+     "on_page": "Local Receipts: Other (Enterprise Fund column) 107,598.27",
+     "issue": "The printed label is 'Other'. Treating it as utility charges is an assumption, since nothing on the page says what it is. If it is utility collections, the user's 2026-10-28 rule puts it in category Utility Charges, not charges for services/fees."},
+    {"severity": "warning", "path": "decision_needed", "page": 1,
+     "extracted": "no decision_needed entries",
+     "on_page": "Local Receipts: Other General 125,618.45 + Street 15,612.73 = 141,231.18 of 281,013.45 governmental receipts",
+     "issue": "An unexplained 'Other' local receipt line makes up just over half of governmental receipts (64% of General Fund receipts). It is recorded as other/review, but there is no decision_needed entry asking what it is (for example, whether it could be loan proceeds or utility-type collections)."}
   ]
 }

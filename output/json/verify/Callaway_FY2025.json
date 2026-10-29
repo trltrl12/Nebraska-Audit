@@ -1,15 +1,21 @@
 {
   "stem": "Callaway_FY2025",
-  "values_checked": 129,
+  "values_checked": 210,
   "issues": [
-    {"severity": "warning", "path": "debt_proceeds", "page": 7,
-     "extracted": 61372, "on_page": "LB 840 loan proceeds 61,372 (LB 840 Fund, printed inside Total revenues; listed under General revenues on p3)",
-     "issue": "Assumed to be borrowing. In an LB 840 fund, 'loan proceeds' may be repayments of loans the village made to businesses, which would be revenue rather than debt proceeds. The report doesn't say which."},
-    {"severity": "warning", "path": "detail[24].detail_category", "page": 12,
-     "extracted": "dues, training and travel", "on_page": "Transportation 904",
-     "issue": "'Transportation' (also detail[32] 1,031, detail[50] 184, detail[55] 351) could be fuel/vehicle cost rather than travel"},
-    {"severity": "warning", "path": "disbursements[19].category", "page": 9,
-     "extracted": "utilities", "on_page": "Capital outlay 15,091 (Electric Fund)",
-     "issue": "enterprise capital outlay classed as utilities; capital outlay is also defensible"}
+    {"severity": "error", "path": "receipts[10].category", "page": 9,
+     "extracted": "charges for services/fees", "on_page": "Sales 1,092,214 (Electric/Water/Sewer/Trash enterprise funds, Total column)",
+     "issue": "utility fund sales belong in the user's Utility Charges receipt category (the detail lines for the same sales already use Utility Charges)"},
+    {"severity": "warning", "path": "receipts[5].category", "page": 7,
+     "extracted": "charges for services/fees", "on_page": "Charges for services 22,024 = Community Center 13,250 + Pool 7,464 + Cemetery 800 (p12-13) + Street 180",
+     "issue": "mixed line; community center charges (60%, recorded as rentals in detail) are more than half, so Rentals could apply"},
+    {"severity": "warning", "path": "receipts[6].category", "page": 7,
+     "extracted": "donations/contributions", "on_page": "Grants and contributions 42,217 (Statement of Activities p3: capital grants 39,452, operating grants 2,765)",
+     "issue": "the grantor isn't stated; it may be a government grant rather than a private gift (already marked review)"},
+    {"severity": "warning", "path": "disbursements[19].original_label", "page": 9,
+     "extracted": "Capital outlay", "on_page": "Capital outlay 15,091 (Electric Fund, enterprise funds)",
+     "issue": "the capital outlay label isn't in the user's form 'Capital Outlay: Utilities' (printed text goes in printed_label); the governmental detail lines were relabelled"},
+    {"severity": "warning", "path": "detail[117].original_label", "page": 9,
+     "extracted": "Capital outlay", "on_page": "Electric Fund Capital outlay 15,091",
+     "issue": "not relabelled 'Capital Outlay: Utilities' like the other capital outlay detail lines"}
   ]
 }

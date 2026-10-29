@@ -1,9 +1,18 @@
 {
   "stem": "Silver_Creek_FY2025",
-  "values_checked": 36,
+  "values_checked": 45,
   "issues": [
     {"severity": "warning", "path": "receipts[10].category", "page": 1,
-     "extracted": "keno/lottery", "on_page": "Local Receipts: Other, Lottery Fund column 62,391.00",
-     "issue": "This is an assumption. The page labels the line only 'Other'. It is categorized keno/lottery because it sits in the Lottery Fund column (marked review)."}
+     "extracted": "keno/lottery", "on_page": "Local Receipts: Other, Lottery Fund 62,391.00",
+     "issue": "assumed to be lottery proceeds only because the column is the Lottery Fund; the page prints only 'Other' (already marked review)"},
+    {"severity": "warning", "path": "receipts[12].category", "page": 1,
+     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other, Sewer Fund 33,445.00",
+     "issue": "assumed to be utility charges; if so, the user's 2026-10-28 rule puts utility fund sales and charges in Utility Charges, not charges for services/fees"},
+    {"severity": "warning", "path": "receipts[13].category", "page": 2,
+     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other, Water Fund 95,173.00",
+     "issue": "same as the Sewer line: assumed water charges; if so, the category should be Utility Charges"},
+    {"severity": "warning", "path": "disbursements[3].original_label", "page": 3,
+     "extracted": "Capital Improvements", "on_page": "Capital Improvements 8,172.00 (Lottery Fund)",
+     "issue": "capital outlay line not relabelled 'Capital Outlay: <function>' with printed_label (user rule 2026-10-26); the same applies to disbursements[4] 'Other Capital Outlay' 55,466"}
   ]
 }

@@ -1,36 +1,11 @@
 {
   "stem": "Greeley_FY2025",
-  "values_checked": 118,
+  "values_checked": 170,
   "issues": [
-    {
-      "severity": "fixed",
-      "path": "missing",
-      "page": 16,
-      "extracted": "notes say 'Read pages 1-15 of 15' (mid-notes, not at the end)",
-      "on_page": "trimmed PDF has 16 pages (p13 = report p28 added by re-trim; p16 = report p47)",
-      "issue": "The page-count statement is wrong (the PDF has 16 pages, not 15) and doesn't end the notes. Every statement and schedule line on pages 1-16 is in the JSON, so no lines are missing.",
-      "resolution": "fixed 2026-10-27: notes now end 'Read pages 1-16 of 16' (stale mid-notes 1-15 statement removed)"
-    },
-    {"severity": "warning", "path": "missing", "page": 9,
-     "extracted": null, "on_page": "Report pp22-23 (Proprietary Statement of Net Position: assets and current liabilities) not trimmed; p9 starts at Non-Current Liabilities",
-     "issue": "The first half of the proprietary statement of net position isn't in the trim. No JSON field needs it, because balance_sheet uses the government-wide p1, but the trim is incomplete."},
-    {"severity": "warning", "path": "decision_needed[0].recorded_as", "page": 6,
-     "extracted": "governmental receipt, category other taxes", "on_page": "HGRPPD/Black Hills Energy 57,921",
-     "issue": "The line is now category Public Power District Sales Tax under the user decision (config/category_decisions.csv row 'hgrppd black hills energy'). The decision_needed entry and the line's review text still say 'other taxes', so they're stale and the question looks already settled."},
-    {"severity": "warning", "path": "detail[5].category", "page": 15,
-     "extracted": "intergovernmental/state aid / other state aid (no review)", "on_page": "State Receipts: Other 26,326 (= Homestead 14,955 + Property Tax Credit 11,371, p3/p6)",
-     "issue": "This line is entirely homestead exemption plus property tax credit. Under the rules, a line combining those stays state aid but needs a review note, and it has none."},
-    {"severity": "warning", "path": "detail[9].fund_type", "page": 15,
-     "extracted": "governmental", "on_page": "Local Receipts: Other 479,810 (Total Primary Government schedule)",
-     "issue": "This line mixes governmental and business-type receipts (utility charges, enterprise sale of assets) but is tagged governmental. It already has a review note."},
-    {"severity": "warning", "path": "detail[10]", "page": 16,
-     "extracted": "General Government 119,201 + other financing -244,350 (split_from 363,551)", "on_page": "General Government 363,551",
-     "issue": "The schedule doesn't print the hidden-transfer split. It comes from p7 (119,201) and p8 (General Fund Transfers Out 244,350), and the arithmetic holds. It is defensible under the hidden-transfer rule but is an extractor assumption."},
-    {"severity": "warning", "path": "receipts[20].category", "page": 11,
-     "extracted": "business-type receipt, Sale of Property 48,038", "on_page": "Non-Operating Revenues: Sale of Assets 48,038 (Assisted Living)",
-     "issue": "The business_type rules list sale of assets under business_type.other_financing. Recording it as a receipt follows the printed non-operating revenue line, so it's a judgment call."},
-    {"severity": "warning", "path": "disbursements[7].category", "page": 10,
-     "extracted": "utilities (all business-type expense lines)", "on_page": "Totals column includes Assisted Living 14,679 and Airport 2,526",
-     "issue": "Assisted Living spending is health/welfare and Airport isn't a utility. The lines are combined totals with review notes, and the dominant-function choice is defensible."}
+    {"severity": "warning", "path": "notes", "page": 16, "extracted": "...Read pages 1-16 of 16 Detail (user 2026-10-27): ...", "on_page": "16 pages", "issue": "Notes do not end with 'Read pages 1-16 of 16' (a later note was appended after it); the page count of 16 matches and every page's statement lines are accounted for"},
+    {"severity": "warning", "path": "receipts[18].category", "page": 10, "extracted": "charges for services/fees", "on_page": "Charges for Service 269,912 (Water 184,312 + Sewer 85,600)", "issue": "The same lines in detail[36]/[37] are Utility Charges. The user rule gives utility fund charges the Utility Charges category, so receipts and detail disagree"},
+    {"severity": "warning", "path": "decision_needed[0].recorded_as", "page": 6, "extracted": "governmental receipt, category other taxes", "on_page": "HGRPPD/Black Hills Energy 57,921", "issue": "Stale: the line is now category Public Power District Sales Tax (receipts[15], detail[20]), and the review text on both also still says 'kept as other taxes'"},
+    {"severity": "warning", "path": "detail[52].function", "page": 10, "extracted": "utilities", "on_page": "Assisted Living Fund Materials and Supplies 553 / Other Operating Expenses 14,126 (detail[56])", "issue": "Assisted Living and Airport fund spending is tagged with function utilities. Those funds aren't utilities (Airport Fund: detail[50], [54], [58]). The same applies to the combined disbursements lines, which have review notes"},
+    {"severity": "warning", "path": "detail[29].original_label", "page": 7, "extracted": "Capital Expenditures", "on_page": "Capital Expenditures 30,443 (Recreation Fund)", "issue": "Capital outlay rule: should be labelled 'Capital Outlay: Culture and Recreation' with the printed text in printed_label"}
   ]
 }

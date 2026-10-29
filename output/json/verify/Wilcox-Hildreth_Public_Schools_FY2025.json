@@ -2,13 +2,8 @@
   "stem": "Wilcox-Hildreth_Public_Schools_FY2025",
   "values_checked": 262,
   "issues": [
-    {
-      "severity": "error",
-      "path": "report_discrepancies",
-      "page": 8,
-      "extracted": "business-type receipts 18,467 + 717 + 102,327 + 824 = 122,335 vs reported_totals business-type receipts 134,957; business roll-forward 46,334 + 122,335 - 274,422 + 210,000 = 104,247 vs ending 116,869 (off by 12,622)",
-      "on_page": "Nutrition Fund operating receipts lines (Lunch sales 18,467, State sources 717, Federal sources 102,327) add to 121,511 but Total operating receipts prints 134,133 (diff 12,622); p3 Statement of Activities shows business-type general receipt 'Other 12,621'",
-      "issue": "[fixed] The printed proprietary statement does not add up (an unlisted ~12,622 receipt is inside the 134,133 total) and the business-type identity fails by 12,622, but no report_discrepancies entry records it. Either record a 'business'/'totals' discrepancy of 12,622 on p8 or add the 'Other 12,621' business-type receipt from p3 (marked computed/review, with the 1 rounding noted)."
-    }
+    {"severity": "warning", "path": "receipts[8].category", "page": 6,
+     "extracted": "charges for services/fees", "on_page": "Student fees 1,861 (General 300 = 1312 Summer School Tuition & Fees p9; Student Fees Fund 1,561 p12)",
+     "issue": "User rule 2026-10-28: student fees go to Extracurricular Receipts (scripts/user_rules.py will recategorize this label). The line mixes 300 of summer school tuition with 1,561 of Student Fees Fund receipts. The same applies to detail[168] (Student Fees Fund 'Student fees' 1,561, detail_category tuition and fees)."}
   ]
 }

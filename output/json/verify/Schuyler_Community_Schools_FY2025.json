@@ -1,15 +1,18 @@
 {
   "stem": "Schuyler_Community_Schools_FY2025",
-  "values_checked": 288,
+  "values_checked": 235,
   "issues": [
-    {"severity": "warning", "path": "detail[9].category", "page": 9,
-     "extracted": "intergovernmental/state aid / county/other local governments", "on_page": "2110 County fines and licenses 218,316",
-     "issue": "The label says these are fines and license fees passed on by the county. fines and forfeitures may fit better; intergovernmental is defensible because the statement (p5) lists the money as 'County receipts'."},
-    {"severity": "warning", "path": "detail[119].category", "page": 17,
-     "extracted": "debt service interest", "on_page": "Other debt related cost 500 (QCPUF)",
-     "issue": "The governmental funds statement (p5) puts the QCPUF's 500 under 'Operation and maintenance of plant', not debt service interest (QCPUF interest there is 238,420 only). So the function category does not match the statement's own function split."},
-    {"severity": "warning", "path": "disbursements[7].fund_type", "page": 5,
-     "extracted": "governmental", "on_page": "Nutrition Fund column of the governmental funds statement",
-     "issue": "The extractor rules list school nutrition as business-type. Here the report presents the Nutrition Fund as a major governmental fund, and the extractor followed the report (stated in notes). This is a judgment call; it also affects receipts[7] and detail[146-157]."}
+    {"severity": "error", "path": "detail[146].category", "page": 20,
+     "extracted": "charges for services/fees", "on_page": "School Nutrition Fund: Sales 41,968",
+     "issue": "Nutrition fund meal sales should be category School Lunch Sales under the user's 2026-10-28 rule (lunch/meal/milk/nutrition sales are out of charges for services). The same money on the statement, receipts[7] 'Nutrition program receipts', already uses School Lunch Sales, so the categories are also inconsistent."},
+    {"severity": "warning", "path": "receipts[6].category", "page": 5,
+     "extracted": "charges for services/fees", "on_page": "Other local receipts 81,991",
+     "issue": "Per the fund schedules (pp9, 16, 18, 19, 21), this line is: Student Fee extracurricular fees 19,567 (Extracurricular Receipts) and postsecondary fees 14,020 (Tuition Received); 1800 community service 20,586; 1911 license fees 4,300; misc 13,559 + 3,347; Cooperative private grants 4,092; Bond/Special Building penalties and interest on taxes 1,642 + 734. Under the user rules no category is more than half, and actual charges for services are only about 25%. The review note's 'student fees + community service over half' treats student fees as charges, which contradicts the Extracurricular/Tuition rule. The schedules print the breakdown, so a split_from split (as was done for State and Nonrevenue receipts) is possible."},
+    {"severity": "warning", "path": "detail[6].category", "page": 9,
+     "extracted": "Extracurricular Receipts", "on_page": "1800 Revenue from community service activities 20,586",
+     "issue": "Community service activity revenue is not school activity / extracurricular receipts. The category also contradicts this line's own detail_category ('other charges for services')."},
+    {"severity": "warning", "path": "detail[164].review", "page": 5,
+     "extracted": "statement p5 shows other-governmental spending under Instruction", "on_page": "Other Governmental Funds 681,584 printed on the 'Student support services' row (General 1,160,069 + 681,584 = 1,841,653)",
+     "issue": "This review note, and the matching sentence in notes, misstate the statement. The Activities/Student Fee spending sits under Student support services, not Instruction. No amount is affected."}
   ]
 }

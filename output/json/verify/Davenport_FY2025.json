@@ -1,15 +1,18 @@
 {
   "stem": "Davenport_FY2025",
-  "values_checked": 94,
+  "values_checked": 92,
   "issues": [
-    {"severity": "warning", "path": "receipts[7].category", "page": 7,
-     "extracted": "sales tax", "on_page": "Sales tax 20,026 (Operating receipts, proprietary funds Totals 2025)",
-     "issue": "This is sales tax the utilities collect from customers and pass on to the state (matching 'Sales tax' disbursement 19,825 on p7). It is not the village's own sales tax revenue, so counting it as sales tax inflates that category. charges for services/fees (pass-through) may fit better. Fund type business-type is correct."},
-    {"severity": "warning", "path": "detail[40].category", "page": 12,
-     "extracted": "economic development", "on_page": "Grant project 11,356 (Special Revenue)",
-     "issue": "Exhibit E (p4) prints this 11,356 as Special Revenue 'Policy/administration', which disbursements[0] puts under general government. Exhibit B (p2) calls it 'Community development'. So the function in detail differs from the basic statement. economic development is defensible for CDBG, but the two series disagree."},
-    {"severity": "warning", "path": "detail[28].detail_category", "page": 12,
-     "extracted": "miscellaneous expenditure", "on_page": "Licenses-school district 310",
-     "issue": "Probably license fees remitted to the school district. grants/payments to other entities would fit better than the last-resort miscellaneous category."}
+    {"severity": "warning", "path": "detail[4].category", "page": 10,
+     "extracted": "reimbursements/refunds (detail_category other charges for services)", "on_page": "Materials and services sold and refunds 22,777 (General), 4,401 (Special Revenue, detail[11])",
+     "issue": "Within these lines, category (reimbursements/refunds) and detail_category (other charges for services) disagree. The same money is in the receipts 'Charges for services' line (29,066 = licenses 1,888 + materials/services/refunds 27,178), which is categorised charges for services/fees. The category for this mixed line should be consistent."},
+    {"severity": "warning", "path": "detail[26].category", "page": 12,
+     "extracted": "health/welfare", "on_page": "Dump expense 5,990 (General Fund operating expenditures)",
+     "issue": "Dump/refuse spending fits the 'utilities' function (refuse) better than health/welfare. This is a function guess (marked review)."},
+    {"severity": "warning", "path": "detail[14].category", "page": 12,
+     "extracted": "General Fund Schedule 2 lines split across general government / public safety / culture/recreation / health/welfare", "on_page": "Exhibit E (p4) General Fund: Policy/administration 101,469, Public works 0, Capital outlay 7,150",
+     "issue": "Detail function categories for General Fund operating lines (Fire department 21,351, Park 3,122, Dump 5,990) are the extractor's assignments. The statement puts all General Fund current spending under Policy/administration, so the detail functions don't tie to the statement's function lines."},
+    {"severity": "warning", "path": "decision_needed[0].recorded_as", "page": 7,
+     "extracted": "matching disbursement 19,825 under utilities", "on_page": "Sales tax 19,825 (Totals, operating disbursements)",
+     "issue": "The decision text says the 19,825 sales tax disbursement is under utilities, but disbursements[6] has category Other Taxes Paid. Wording mismatch only."}
   ]
 }

@@ -1,11 +1,14 @@
 {
   "stem": "Phelps_County_FY2025",
-  "values_checked": 104,
+  "values_checked": 106,
   "issues": [
-    {"severity": "warning", "path": "detail[49].category", "page": 10, "extracted": "taxes (unlabeled)", "on_page": "Taxes 258,456 = County Library 135,356 + Visitors Promotion 33,582 + Visitors Improvement 33,582 + Courthouse Building 55,936 (p9-10)", "issue": "This conflicts with the top-level receipts, which split taxes using the p2 general receipts. Visitor funds 33,582 x 2 = 67,164, which equals p2 'Lodging tax'. The rest (191,292) is library/courthouse levy, so this line could be split lodging/property. Kept as unlabeled with review, which is defensible."},
-    {"severity": "warning", "path": "detail[47].category", "page": 15, "extracted": "streets/highways", "on_page": "Road and Bridge Fund disbursements 251,042, all printed as Capital outlay on p6", "issue": "The fund statement classes all 251,042 as Capital outlay, but detail records it as streets/highways."},
-    {"severity": "warning", "path": "detail[41].category", "page": 13, "extracted": "streets/highways", "on_page": "Road Fund DISBURSEMENTS 2,760,786; p5 splits it Public works 2,374,822 + Capital outlay 385,964", "issue": "The single line is recorded entirely as streets/highways. 385,964 of it is capital outlay on p5. Not marked review."},
-    {"severity": "warning", "path": "detail[39].detail_category", "page": 13, "extracted": "highway allocation", "on_page": "Intergovernmental 2,263,665", "issue": "Printed only as 'Intergovernmental'. Highway allocation is an assumption: probably most of it, but it may include pro-rate, buyback or other aid. Not marked review."},
-    {"severity": "warning", "path": "receipts[5].category", "page": 6, "extracted": "charges for services/fees", "on_page": "Local 1,279,465", "issue": "Defensible, but from p2 Local works out to about 892,014 charges + 303,411 interest income + 84,040 miscellaneous. Charges is the dominant part (about 70%), but a large investment-income share is hidden in this line. Marked review."}
+    {"severity": "warning", "path": "receipts[5]", "page": 6,
+     "extracted": "charges for services/fees 892,014 (Local 1,279,465 minus interest 303,411 and miscellaneous 84,040)",
+     "on_page": "Local 1,279,465 (p6); Statement of Activities general receipts Interest income 303,411, Miscellaneous 84,040 (p2)",
+     "issue": "The report never prints the Local breakdown; the split assumes all SoA interest and miscellaneous sit in Local. The arithmetic ties (charges for services 1,897,510 = 892,014 + 1,005,496 of intergovernmental) and the line is marked computed/review, but the split is inferred."},
+    {"severity": "warning", "path": "detail[52].category", "page": 10,
+     "extracted": "taxes (unlabeled) 258,456 (Nonmajor Taxes)",
+     "on_page": "Combining nonmajor: County Library 135,356, Visitors Promotion 33,582, Visitors Improvement 33,582, Courthouse Building 55,936; SoA Lodging tax 67,164 = 33,582 x 2",
+     "issue": "The fund columns plus the SoA lodging line show this is property tax 191,292 + lodging tax 67,164, so it could be split instead of left unlabeled (it is marked review). Likewise the General Fund Taxes 4,391,091 (detail[0]) = property 3,786,723 + motor vehicle 604,368 by subtraction."}
   ]
 }

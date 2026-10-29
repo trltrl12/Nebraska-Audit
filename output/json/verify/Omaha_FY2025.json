@@ -1,94 +1,42 @@
 {
   "stem": "Omaha_FY2025",
-  "values_checked": 517,
+  "values_checked": 520,
   "issues": [
-    {
-      "severity": "warning",
-      "path": "disbursements[3].category",
-      "page": 6,
-      "extracted": "health/welfare",
-      "on_page": "Other public services 43,487,738 (General Fund 40,116,444; p13 budget schedule shows General Fund Solid waste division 41,257,795)",
-      "issue": "The line is mostly solid waste (refuse), which the rules put under utilities. The detail records solid waste as utilities, so the statement line and the detail disagree. Dominant category is probably utilities."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[11].category",
-      "page": 6,
-      "extracted": "donations/contributions",
-      "on_page": "Contributions and grants 83,765,425 (Grants Fund 72,409,142)",
-      "issue": "Most of this is in the Grants Fund. The Statement of Activities (p3-4) shows 80.1M operating and 13.8M capital grants, which are probably government grants (federal or intergovernmental), not private donations. Already in decision_needed."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[70].category",
-      "page": 14,
-      "extracted": "donations/contributions",
-      "on_page": "Street and Highway Allocation Fund: Contributions and grants 1,496,205",
-      "issue": "Street fund grants are probably from a government (intergovernmental or federal), not private donations. Same question as the statement-level Contributions and grants line."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[41]",
-      "page": 12,
-      "extracted": 8306755,
-      "on_page": "Other agencies: Other funds 8,306,755 (budget -, actual 8,306,755)",
-      "issue": "This may be the General Fund's transfers to other funds recorded as spending. It has no budget, the budget schedule has no other-financing section, and GAAP p6 shows General Fund transfers out of 8,558,895 (e.g. Ballpark Revenue Fund transfers in 1,649,004, p25). If so, it should be other financing (signed), not expenditure. Already in decision_needed; recorded as expenditure meanwhile."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[111].category",
-      "page": 22,
-      "extracted": "health/welfare",
-      "on_page": "Public works/interceptor division 37,928 (Interceptor Sewer Construction Fund)",
-      "issue": "Sewer interceptor construction is a sewer function, so utilities fits better. The General Fund 'Sewer revenue general expense division' line is recorded as utilities."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[107].category",
-      "page": 21,
-      "extracted": "health/welfare",
-      "on_page": "Public works/flood control and water quality division 2,212,329",
-      "issue": "Flood control and water quality could be natural resources/conservation (water and drainage) rather than health/welfare."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[29].category",
-      "page": 12,
-      "extracted": "general government / not itemized",
-      "on_page": "Non-Departmental: Debt service (other accounts) 11,411,145",
-      "issue": "The schedule prints this under General Government, but the label says debt service, so it could be debt service principal/interest. It is not split. The line already carries review."
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[10].category",
-      "page": 9,
-      "extracted": "other",
-      "on_page": "Parking Facilities Fund total operating expenses 15,011,384",
-      "issue": "Parking facilities were put in 'other' (also the Parking detail expense lines detail[150]-detail[155]). streets/highways (transportation) or economic development could fit. Judgment call; the line already carries review."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[12]",
-      "page": 3,
-      "extracted": "business-type operating revenues taken by activity from the Statement of Activities p3; nonmajor expenses from p3",
-      "on_page": "Proprietary statement p9 total column: operating revenues 263,380,113; Nonmajor Enterprise total operating expenses 10,274,087 + interest 30,889",
-      "issue": "The rules call for business-type lines from the proprietary statement's total column. The extractor used Statement of Activities activity lines for revenues and nonmajor expenses instead. All sums tie exactly to p9 (263,380,113; 10,304,976), so no amount is affected. Mixed source is the assumption."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[18].category",
-      "page": 3,
-      "extracted": "intergovernmental/state aid",
-      "on_page": "Sewer operating grants and contributions 10,400",
-      "issue": "Grantor not identified. On p9 this amount sits inside 'Operating revenues, charges for services' (Sewer 237,929,810). detail[159] records that whole line as sewer charges, so receipts and detail categorize the same money differently."
-    },
-    {
-      "severity": "warning",
-      "path": "balance_sheet.liabilities[6].category",
-      "page": 2,
-      "extracted": "debt - due in more than one year",
-      "on_page": "Long-term liabilities: Due in more than one year 3,469,383,298",
-      "issue": "This assumes all long-term liabilities are debt. The amount includes net pension and OPEB liabilities (proprietary share alone, p8: net pension 50,258,979, OPEB 41,826,751), which the government-wide statement doesn't split out. Noted by the extractor."
-    }
+    {"severity": "error", "path": "receipts[12].category", "page": 3,
+     "extracted": "Recreation Fees", "on_page": "Charges for services - Parking 15,969,850",
+     "issue": "Parking charges are not recreation (pool, park, golf, recreation) fees. They belong in charges for services/fees, as the Parking detail line detail[147] already has them."},
+    {"severity": "error", "path": "receipts[13].category", "page": 3,
+     "extracted": "charges for services/fees", "on_page": "Charges for services - Sewer 237,919,410",
+     "issue": "Under the user's 2026-10-28 rule, utility fund charges go in Utility Charges. The Sewer detail line (detail[159]) already uses Utility Charges, so receipts and detail disagree."},
+    {"severity": "error", "path": "detail[8].category", "page": 12,
+     "extracted": "charges for services/fees", "on_page": "Rent and royalties 20,198,416 (General Fund)",
+     "issue": "Rent/rental income has its own receipt category, Rentals (user 2026-10-28). detail_category is already 'rentals', but the category was left as charges for services/fees. The 'Rents, royalties and other' detail lines (detail[69], detail[92], detail[123]) have the same mismatch."},
+    {"severity": "error", "path": "detail[150].category", "page": 9,
+     "extracted": "other", "on_page": "Parking Facilities Fund: Personal services 1,408,483; Employer pension 351,932; Employer OPEB 136,091; Outside services 7,789,004; Operation and maintenance 2,287,389; Depreciation and amortization 3,038,485 (detail[150]-detail[155])",
+     "issue": "Business-type spending printed by cost type takes the cost type as category (user 2026-10-28): Salaries and Wages, Employee Benefits and Payroll Taxes, Professional/Contract Services, Repairs and Maintenance, Depreciation. The Sewer lines follow this; the six Parking lines sit in 'other' even though specific categories fit."},
+    {"severity": "warning", "path": "detail[173].category", "page": 9,
+     "extracted": "culture/recreation", "on_page": "Nonmajor Enterprise Funds object lines 4,715,258 / 439,378 / 52,155 / 1,852,369 / 1,884,454 / 537,668 / 792,805 (detail[173]-detail[179])",
+     "issue": "These are also printed by cost type. Under the 2026-10-28 rule the category would be the cost type (with function), not culture/recreation. This is inconsistent with the Sewer detail and the statement-level disbursements."},
+    {"severity": "warning", "path": "receipts[14].category", "page": 3,
+     "extracted": "charges for services/fees", "on_page": "Charges for services - Citywide Sports and tennis 1,199,283; Marinas 480,867",
+     "issue": "Sports, tennis and marina charges are recreation fees. The user's Recreation Fees category (used for Golf, receipts[16]) fits better. Same for receipts[15]."},
+    {"severity": "warning", "path": "receipts[10].category", "page": 6,
+     "extracted": "charges for services/fees", "on_page": "Rents, royalties, and other 5,711,397",
+     "issue": "The line's own review note says the dominant category is rentals, but the category is charges for services/fees. Rentals (with review for the mix) would match the note."},
+    {"severity": "warning", "path": "detail[114].category", "page": 24,
+     "extracted": "intergovernmental/state aid", "on_page": "State Turn Back Revenue Fund: Intergovernmental 526,531",
+     "issue": "The whole fund is state turnback revenue, and Turnback is the user's own receipt category (never state aid). The printed label is only 'Intergovernmental', so this is a judgment call."},
+    {"severity": "warning", "path": "detail[70].category", "page": 14,
+     "extracted": "donations/contributions", "on_page": "Street and Highway Allocation Fund: Contributions and grants 1,496,205",
+     "issue": "Street fund grants are probably from a government, not private donors. This is the same open question as the statement-level Contributions and grants in decision_needed. The same applies to Storm Water (detail[105]), Household Chemical Disposal (detail[137]) and Debt Service (detail[187]) contributions and grants."},
+    {"severity": "warning", "path": "detail[111].category", "page": 22,
+     "extracted": "health/welfare", "on_page": "Public works/interceptor division 37,928 (Interceptor Sewer Construction Fund)",
+     "issue": "Sewer interceptor work is a sewer (utilities) function. Storm-water flood control (detail[107], 2,212,329) is also in health/welfare, where natural resources/conservation or utilities may fit better."},
+    {"severity": "warning", "path": "detail[29].category", "page": 12,
+     "extracted": "general government", "on_page": "Non-Departmental: Debt service (other accounts) 11,411,145",
+     "issue": "The label says debt service, and the GAAP statement shows General Fund principal 7,741,752 + interest 5,642,060. 'debt service (principal and interest combined)' may fit better than general government. The line already carries review. Street and Highway 'Debt service (other accounts)' 100,968 (detail[75]) has the same issue."},
+    {"severity": "warning", "path": "balance_sheet.liabilities[10].category", "page": 2,
+     "extracted": "debt - due in more than one year", "on_page": "Long-term liabilities: Due in more than one year 2,724,368,017 (governmental) / 745,015,281 (business-type)",
+     "issue": "This assumes all long-term liabilities are debt. They include net pension and OPEB liabilities (proprietary share: net pension 50,258,979, OPEB 41,826,751, p8), which the government-wide statement doesn't split. The extractor noted this."}
   ]
 }

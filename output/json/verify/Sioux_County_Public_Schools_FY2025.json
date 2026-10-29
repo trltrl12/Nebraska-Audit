@@ -1,12 +1,18 @@
 {
   "stem": "Sioux_County_Public_Schools_FY2025",
-  "values_checked": 188,
+  "values_checked": 150,
   "issues": [
-    {"severity": "warning", "path": "missing", "page": 11,
-     "extracted": null, "on_page": "Trimmed PDF jumps from report p28 (trimmed p10, Depreciation Fund) to report p32 (trimmed p11, QCPUF). Report pp29-31 are not trimmed and probably hold the Activities Fund schedule: Other Governmental Funds receipts 64,191 'Other' + 22,000 transfers, disbursements 74,010 'Support Services: Students' (p4).",
-     "issue": "The student activities schedule is likely missing from the trim, so the activity fund has no detail lines. receipts[16] (64,191) is recorded as charges for services on an assumption. Re-trim and check."},
-    {"severity": "warning", "path": "missing", "page": 11,
-     "extracted": null, "on_page": "QCPUF Disbursements: Site Acquisition & Improvement, Actual 0 (-), Budget 6,848",
-     "issue": "Zero-actual expenditure line with a final budget is left out of detail. The Depreciation Fund's equivalent zero line (Equipment Replacement, budget 134,481) was included."}
+    {"severity": "warning", "path": "receipts[19].category", "page": 4,
+     "extracted": "Extracurricular Receipts", "on_page": "Other, Other Governmental Funds column 64,191",
+     "issue": "assumed to be student activity receipts. The Other Governmental Funds column is the Activities fund plus QCPUF, whose only receipt is interest of 103 (p11). The activity fund schedule is not in the trimmed PDF, so the make-up isn't shown (already marked review)"},
+    {"severity": "warning", "path": "missing", "page": 10,
+     "extracted": null, "on_page": "trimmed p10 = report p28, trimmed p11 = report p32; report pp29-31 not trimmed",
+     "issue": "the trim skips report pages 29-31, which probably hold the Activities fund (Other Governmental Funds) schedule. Every page in the trimmed PDF is fully captured, but that fund's detail can't be checked"},
+    {"severity": "warning", "path": "detail[30].category", "page": 7,
+     "extracted": "Special Education Programs", "on_page": "Special Education Instructional Programs - School Age 217,524 (under Instruction heading)",
+     "issue": "the schedule and the statement (p4) count these lines in Instruction. Detail puts them in Special Education Programs (also detail[31], 1,646), so detail by function no longer ties to the top-level Instruction 2,009,187. This is a defensible judgment call under the user's school function rules"},
+    {"severity": "warning", "path": "receipts[3].original_label", "page": 4,
+     "extracted": "Other (under Taxes)", "on_page": "Other",
+     "issue": "the extractor added '(under Taxes)' to the label; the row prints only 'Other' (also receipts[4], receipts[5])"}
   ]
 }

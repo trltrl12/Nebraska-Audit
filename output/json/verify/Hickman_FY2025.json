@@ -1,21 +1,15 @@
 {
   "stem": "Hickman_FY2025",
-  "values_checked": 92,
+  "values_checked": 93,
   "issues": [
     {"severity": "warning", "path": "receipts[2].category", "page": 4,
-     "extracted": "taxes (unlabeled)", "on_page": "City taxes and fees 713,709 (General 11,716; Street 149,276; Sales Tax Fund 552,717)",
-     "issue": "77% sits in the Sales Tax Fund, so sales tax is the dominant part. Keeping taxes (unlabeled) with review is defensible because the report prints no breakdown by tax type"},
-    {"severity": "warning", "path": "receipts[9].category", "page": 7,
-     "extracted": "charges for services/fees", "on_page": "Building and development fees 68,250",
-     "issue": "building/development fees could be licenses and permits"},
-    {"severity": "warning", "path": "detail_totals[1]", "page": 9,
-     "extracted": "Water 833,009 / Electric 464,707 / Sewer 7,430,560 entered as detail_totals", "on_page": "Total business-type charges to appropriations 8,728,276",
-     "issue": "the Water/Electric/Sewer detail_totals (detail_totals[1]-[3]) repeat the single line amounts and are not printed totals. The printed business-type total 8,728,276 is not recorded, although the three items add up to it"},
-    {"severity": "warning", "path": "detail[0].budget_final", "page": 9,
-     "extracted": 1589607, "on_page": "Original Budget column 1,589,607; variance column headed 'Variance with Final Budget'",
-     "issue": "budget_final comes from the column printed as 'Original Budget'. The variances equal actual minus original, so original = final looks true, but this is an assumption (applies to detail[0]-[6])"},
-    {"severity": "warning", "path": "ending_cash", "page": 3,
-     "extracted": 3560289, "on_page": "Total Governmental Funds: Cash 3,560,289; Cash on deposit - County Treasurer 16,937; Restricted cash 3,940",
-     "issue": "ending_cash covers only the 'Cash' line and leaves out cash on deposit with the County Treasurer and restricted cash (governmental total 3,581,166). The notes record this choice, but it is a judgment call"}
+     "extracted": "taxes (unlabeled)", "on_page": "City taxes and fees 713,709 = General 11,716 + Street 149,276 + Sales Tax Fund 552,717",
+     "issue": "77% of the line sits in the Sales Tax Fund column, so most of it is evidently sales tax; kept unlabeled because no tax-type breakdown is printed. Judgement call for review"},
+    {"severity": "warning", "path": "receipts[8].category", "page": 7,
+     "extracted": "charges for services/fees", "on_page": "User fees and charges 1,919,719 (Water/Electric/Sewer)",
+     "issue": "Utility fund user charges fall under Utility Charges per the 2026-10-28 rule"},
+    {"severity": "warning", "path": "disbursements[8].category", "page": 7,
+     "extracted": "Repairs and Maintenance", "on_page": "Supplies, repairs and maintenance 251,128",
+     "issue": "Line mixes supplies with repairs; dominant part not shown on the page, no review note"}
   ]
 }

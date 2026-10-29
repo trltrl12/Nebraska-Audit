@@ -1,11 +1,21 @@
 {
   "stem": "Cambridge_FY2025",
-  "values_checked": 185,
+  "values_checked": 190,
   "issues": [
-    {"severity": "warning", "path": "receipts[9].category", "page": 7, "extracted": "other", "on_page": "Loan collections 159,024", "issue": "Loan collections (repayments of LB840/street/housing rehab notes receivable) in 'other'; no listed category clearly fits, so defensible, but it is 9.5% of governmental receipts. Same for detail[9], detail[51], detail[58], detail[62] (miscellaneous revenue)"},
-    {"severity": "warning", "path": "receipts[8].category", "page": 7, "extracted": "donations/contributions", "on_page": "Grants and contributions 176,786", "issue": "Statement of Activities (pp2-3) shows governmental operating grants and contributions 70,613 and capital grants and contributions 250,545 by function, and the GF departments schedule (p20) puts 50,000 under Administrative and 106,948 under Ambulance; part may be government grants (intergovernmental/federal) rather than private donations. Same for detail[8]"},
-    {"severity": "warning", "path": "business-type receipts: receipts[17].category", "page": 11, "extracted": "intergovernmental/state aid", "on_page": "Grant income 107,669 (water 47,839, sewer 59,830)", "issue": "Statement of Activities (p3) reports these as capital grants and contributions; grantor (state vs federal) is not stated"},
-    {"severity": "warning", "path": "detail[13,19,23,27,35,39,43].detail_category", "page": 20, "extracted": "employee benefits and payroll taxes", "on_page": "Salaries and benefits", "issue": "combined salaries-and-benefits lines; salaries are usually the dominant part, so 'salaries and wages' may fit better"},
-    {"severity": "warning", "path": "detail[16,18,21,25,29,34,37,41,45].detail_category", "page": 20, "extracted": "not itemized", "on_page": "Operating expenses", "issue": "these are object lines inside each department's breakdown, not function totals without object detail; 'not itemized' is reserved for the latter (could be 'miscellaneous expenditure' with review)"}
+    {"severity": "error", "path": "receipts[13].category", "page": 11,
+     "extracted": "charges for services/fees", "on_page": "Sales 4,709,108 (enterprise funds Total: Electric, Water, Sewer, Trash)",
+     "issue": "utility fund sales belong in the user's Utility Charges receipt category"},
+    {"severity": "warning", "path": "receipts[7].category", "page": 21,
+     "extracted": "charges for services/fees", "on_page": "Charges for services 89,135 = Ambulance 66,021 (p20) + Recreation 22,484 + Cemetery 630 (p21)",
+     "issue": "ambulance fees are 74% of the line, so Ambulance Fees could apply; the General Fund detail revenue was taken from the Total column, which hides the department breakdown (Ambulance / Recreation / Cemetery fees)"},
+    {"severity": "warning", "path": "receipts[8].category", "page": 7,
+     "extracted": "donations/contributions", "on_page": "Grants and contributions 176,786 (Ambulance 106,948, Admin 50,000; Statement of Activities shows capital grants 106,173 public safety)",
+     "issue": "likely includes government grants; the category is doubtful (already marked review)"},
+    {"severity": "warning", "path": "detail[54].original_label", "page": 15,
+     "extracted": "Capital outlay", "on_page": "Street Fund Capital outlay 87,500",
+     "issue": "not relabelled 'Capital Outlay: Streets/Highways' like the General Fund capital outlay lines"},
+    {"severity": "warning", "path": "notes", "page": 1,
+     "extracted": "due from/(to) other funds nets to zero and is omitted", "on_page": "Due from (to) other funds (73,151) / 73,151",
+     "issue": "the notes contradict the JSON: balance_sheet.assets includes both Internal Balances lines (they net to zero, so totals are unaffected)"}
   ]
 }

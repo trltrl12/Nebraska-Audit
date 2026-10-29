@@ -1,20 +1,9 @@
 {
   "stem": "Litchfield_FY2025",
-  "values_checked": 37,
+  "values_checked": 46,
   "issues": [
-    {"severity": "warning", "path": "receipts[9].category", "page": 1,
-     "extracted": "other", "on_page": "Local Receipts: Other 129,358.85 (General) + 1,033.13 (Fire Hall) p1 + 1,205.99 (NPAIT) + 61,080.88 (TIFF XX599) p4",
-     "issue": "Amount and computed sum are correct, but 'other' is 61% of governmental receipts. The TIFF part (61,080.88, which equals the TIFF Community Development spending) is probably tax increment (property tax) passed through, and the General part probably includes solid waste/water charges (the General column pays Solid Waste 30,181.68 and Water 24,916.86). Nothing on the page says what these are, so 'other' plus review can be defended. Flagged for the user."},
-    {"severity": "warning", "path": "disbursements[5].fund_type", "page": 5,
-     "extracted": "governmental", "on_page": "Business-Type Activities: Solid Waste 30,181.68 / Water 24,916.86 in the GENERAL FUND column",
-     "issue": "Kept governmental because they are paid from the General Fund column, which follows the split-by-column rule. They are still utility operations printed under Business-Type Activities, and the matching receipts seem to sit in General 'Local Receipts: Other'. Same applies to disbursements[6]. This is a judgment call."},
-    {"severity": "warning", "path": "balance_sheet", "page": 1,
-     "extracted": "assets 46,756.15 + 20,936.56; equity 'Subtotal of Ending Balances' 67,692.71",
-     "on_page": "No balance statement printed; lines 26-28 of Exhibit A, TOTAL column (includes page 1a)",
-     "issue": "The figures match the TOTAL column and balance. But this is not a balance statement, the TOTAL column mixes governmental (62,839.57) and business-type (4,853.14) funds, and the equity item is the line 28 subtotal (the line 24 'Ending Balance' would also fit). This is defensible, and it is explained in the notes."},
-    {"severity": "warning", "path": "report_discrepancies", "page": 2,
-     "extracted": null,
-     "on_page": "Crossed-out earlier versions: p2 General Local Receipts Other 129,214.75, ending investments 20,792.46, ending 67,548.61; p3 General Local Receipts Other 142,719.27, ending 80,020.00 / 66,515.48; p8 investments 15,691.23 + 5,101.23 = 20,792.46",
-     "issue": "The extractor correctly used the revised pages (p1, p7 stamped 'Revision received 2/20/26'). The voided versions' different figures are only described in notes, not recorded in report_discrepancies. This is for information only."}
+    {"severity": "warning", "path": "reported_totals.business-type.receipts", "page": 1,
+     "extracted": 3851.86, "on_page": "line 21 Total Receipts: Water Deposit 850.00 + Sewer Reserve 1,501.86 + Water Reserve 1,500.00",
+     "issue": "The business-type reported totals (receipts 3,851.86, disbursements 3,854.32) include gross transfers of 3,850.00 in and 3,849.32 out, but `includes` is empty and the transfers are given only in a non-standard `includes_split` field. Business receipts items sum to 1.86 and disbursements to 5.00, so the totals don't tie unless includes_split is read. The notes also say the gross transfers were 'taken out' of these totals, but they are still in them"}
   ]
 }

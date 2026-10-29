@@ -4,12 +4,12 @@
   "issues": [
     {"severity": "error", "path": "detail[97].category", "page": 16,
      "extracted": "reimbursements/refunds", "on_page": "Daily sales - non-reimbursable programs 23,217",
-     "issue": "this is a la carte food sales (the word 'non-reimbursable' is not a reimbursement); it belongs in School Lunch Sales like the other daily sales lines (its own detail_category is already school lunch sales, and the p4 statement counts it in Nutrition sales 151,875)"},
+     "issue": "[fixed 2026-10-28: category set to School Lunch Sales (detail_category school lunch sales), matching the other daily sales lines; 108,634 + 20,024 + 23,217 = Nutrition sales 151,875] this is a la carte food sales (the word 'non-reimbursable' is not a reimbursement); it belongs in School Lunch Sales like the other daily sales lines (its own detail_category is already school lunch sales, and the p4 statement counts it in Nutrition sales 151,875)"},
     {"severity": "warning", "path": "detail[129].category", "page": 20,
      "extracted": "charges for services/fees", "on_page": "Student Fee Fund - Fees 9,997",
-     "issue": "user rule 2026-10-28: student fees are Extracurricular Receipts (detail_category student activity receipts); the statement also counts this fund in Student activities"},
+     "issue": "[fixed 2026-10-28: category Extracurricular Receipts, detail_category student activity receipts] user rule 2026-10-28: student fees are Extracurricular Receipts (detail_category student activity receipts); the statement also counts this fund in Student activities"},
     {"severity": "warning", "path": "receipts[10].category", "page": 4,
      "extracted": "charges for services/fees", "on_page": "Other (remaining other local sources) 597 = rentals 415 + refund 133 + misc 48 (p10)",
-     "issue": "mixed line whose dominant part is rentals (415 of 597); since the 2026-10-28 rule Rentals is its own receipt category, so Rentals (with review) fits better than charges for services/fees"}
+     "issue": "[fixed 2026-10-28: category Rentals with review naming the mix] mixed line whose dominant part is rentals (415 of 597); since the 2026-10-28 rule Rentals is its own receipt category, so Rentals (with review) fits better than charges for services/fees"}
   ]
 }

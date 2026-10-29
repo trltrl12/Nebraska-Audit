@@ -1,86 +1,33 @@
 {
   "stem": "Brady_FY2025",
-  "values_checked": 96,
+  "values_checked": 132,
   "issues": [
-    {
-      "severity": "error",
-      "path": "detail[13].category",
-      "page": 2,
-      "extracted": "other / miscellaneous revenue",
-      "on_page": "Library column 'Other' 304.00 (p10); Statement of Activities Culture and Recreation Charges for Services 304.00 (p2)",
-      "issue": "[fixed] The Statement of Activities shows this 304.00 as culture/recreation charges for services (SoA 'Other receipts' 60,200.09 = 60,504.09 - 304.00). Under the rules, a line that the SoA explains should not be in 'other'. Use charges for services/fees (detail 'other charges for services' or 'rentals')."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[9].category",
-      "page": 10,
-      "extracted": "other",
-      "on_page": "General Fund departments 'Other' 12,113.84 (General 90.36, Park 211.14, Police and Fire 1,411.58, Library 304.00, Brady Days 10,096.76)",
-      "issue": "304.00 of this split item is charges for services according to the Statement of Activities (p2). Total governmental charges for services there is 2,604.50, but receipts has 2,300.50. The rest is unexplained, so 'other' with review is defensible for the remainder."
-    },
-    {
-      "severity": "warning",
-      "path": "transfers_in",
-      "page": 4,
-      "extracted": 140826.69,
-      "on_page": "Row labelled 'Transfers out': General 150,972.72, Street (10,146.03), Total 140,826.69; 'Transfers in' row is blank",
-      "issue": "The amount is printed on the 'Transfers out' row but works as a net inflow (Total other financing sources 157,196.37 = 16,369.68 + 140,826.69), and it matches the proprietary transfers out of 140,826.69. Recording it as transfers_in is right, but the extractor reinterpreted the label and netted Street's 10,146.03 transfer to General."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[15].section",
-      "page": 11,
-      "extracted": "other financing",
-      "on_page": "Nonoperating receipts: Interest income 16,369.68 (below Total Receipts 282,402.11)",
-      "issue": "Interest income is revenue, not other financing (the rules limit that section to transfers, debt proceeds and sale of assets). Section 'revenue' with outside_printed_total: true would match how the line is treated in receipts[]. No double count."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[14].category",
-      "page": 10,
-      "extracted": "other",
-      "on_page": "Brady Days column, Other 10,096.76",
-      "issue": "The Brady Days (village festival) heading suggests event revenue (charges for services, detail 'fair/event revenue'), but the Statement of Activities counts it in general 'Other receipts'. 'other' with review is defensible."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[8].category",
-      "page": 10,
-      "extracted": "occupation/franchise tax",
-      "on_page": "Franchise/Capital/Patronage 47,827.57",
-      "issue": "The line mixes franchise fees with capital credits/patronage refunds, which are not taxes, and the Statement of Activities (p2) counts it in 'Other receipts'. The dominant part is unknown. Already marked review."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[7].category",
-      "page": 4,
-      "extracted": "donations/contributions",
-      "on_page": "Grants and contributions 22,381.46 (Police and Fire 22,316.46; SoA: Operating Grants and Contributions, General Government)",
-      "issue": "Fire/police grants often come from state or federal agencies. The source is not stated (marked review)."
-    },
-    {
-      "severity": "warning",
-      "path": "missing",
-      "page": 9,
-      "extracted": null,
-      "on_page": "Budget and Actual - All Funds: Streets actual 64,467, final budget 122,000 (Street Fund); other governmental function lines",
-      "issue": "The extractor recorded Water/Sewer/Garbage lines from this all-funds schedule but not the Streets line, which is the Street Fund's only detail (no other schedule covers it). The rules say to record budget-schedule lines for every fund that lacks a more detailed schedule."
-    },
-    {
-      "severity": "warning",
-      "path": "balance_sheet.liabilities[0].category",
-      "page": 1,
-      "extracted": "other liabilities",
-      "on_page": "Sales tax collected 328.48 (p5: Sales Taxes payable)",
-      "issue": "Sales tax collected and owed to the state fits 'due to other governments' better."
-    },
-    {
-      "severity": "warning",
-      "path": "report_discrepancies",
-      "page": 8,
-      "extracted": null,
-      "on_page": "Net cash provided by operating activities 106,869.56 (p7) vs reconciliation result 106,853.61 (p8, after (15.95) change in taxes payable)",
-      "issue": "The proprietary cash flow statement contradicts itself by 15.95. No extracted value depends on it (proprietary is null for cash basis, and business cash rolls forward exactly), but it could be listed in report_discrepancies."
-    }
+    {"severity": "error", "path": "receipts[12].category", "page": 6,
+     "extracted": "charges for services/fees", "on_page": "Charge for services 208,909.21 (Water 83,263.52, Sewer 77,254.54, Garbage 48,391.15)",
+     "issue": "Utility fund (water/sewer/garbage) charges belong in the user's own category Utility Charges (2026-10-28 rule). The detail lines for the same label (detail[50]-[52]) already use Utility Charges, so the report is inconsistent."},
+    {"severity": "warning", "path": "receipts[6].category", "page": 4,
+     "extracted": "charges for services/fees", "on_page": "Charges for services 2,300.50 (= Community Center 'Rental and fees' 2,300.50, p10)",
+     "issue": "The schedule shows the whole line is community center rental and fees. The user's Rentals category may fit better. detail[8] is likewise category charges for services but detail_category rentals."},
+    {"severity": "warning", "path": "transfers_in", "page": 4,
+     "extracted": 140826.69, "on_page": "Row labelled 'Transfers out': General 150,972.72, Street (10,146.03), Total 140,826.69; 'Transfers in' row is blank",
+     "issue": "The amount is printed on the 'Transfers out' row but works as a net inflow (Total other financing sources 157,196.37 = 16,369.68 + 140,826.69). It matches the proprietary transfers out of 140,826.69. Recording it as transfers_in is right, but it nets Street's 10,146.03 transfer to General (all-fund transfers sum to zero, checked)."},
+    {"severity": "warning", "path": "receipts[8].category", "page": 10,
+     "extracted": "occupation/franchise tax", "on_page": "Franchise/Capital/Patronage 47,827.57",
+     "issue": "The line mixes franchise fees with capital credits/patronage refunds, which are not taxes. The Statement of Activities (p2) counts it in 'Other receipts'. Its dominant part is unknown; already marked review."},
+    {"severity": "warning", "path": "receipts[7].category", "page": 4,
+     "extracted": "donations/contributions", "on_page": "Grants and contributions 22,381.46 (Police and Fire 22,316.46; SoA: Operating Grants and Contributions)",
+     "issue": "Police/fire grants often come from state or federal agencies. The source isn't stated (marked review)."},
+    {"severity": "warning", "path": "detail[14].category", "page": 10,
+     "extracted": "other", "on_page": "Brady Days column, Other 10,096.76",
+     "issue": "The Brady Days (village festival) heading suggests event revenue, but the printed label is 'Other' and the SoA counts it in general Other receipts. 'other' with review is defensible."},
+    {"severity": "warning", "path": "receipts[9].original_label", "page": 10,
+     "extracted": "Other - General Fund departments Other / Other - Street fund / Other (taxes) - Homestead", "on_page": "Other / Other / Homestead",
+     "issue": "The extractor built the labels for the split items (receipts[2], [3], [9], [10]) and for detail[47] ('Other - Street fund'). The printed labels are 'Homestead', 'Other' and 'Other'. The amounts and split arithmetic are correct (16,655.75 = 7,583.11 + 9,072.64; 60,504.09 = 47,827.57 + 12,113.84 + 562.68)."},
+    {"severity": "warning", "path": "balance_sheet.liabilities[0].category", "page": 1,
+     "extracted": "other liabilities", "on_page": "Sales tax collected 328.48 (p5: Sales Taxes payable)",
+     "issue": "Sales tax collected and owed to the state fits 'due to other governments' better."},
+    {"severity": "warning", "path": "report_discrepancies", "page": 8,
+     "extracted": null, "on_page": "Net cash provided by operating activities 106,869.56 (p7) vs reconciliation result 106,853.61 (p8, after (15.95) change in taxes payable)",
+     "issue": "The proprietary cash flow statement contradicts itself by 15.95. No extracted value depends on it (business cash rolls forward exactly), but it could be listed in report_discrepancies."}
   ]
 }

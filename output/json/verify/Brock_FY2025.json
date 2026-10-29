@@ -1,16 +1,12 @@
 {
   "stem": "Brock_FY2025",
-  "values_checked": 31,
+  "values_checked": 34,
   "issues": [
-    {"severity": "warning", "path": "disbursements[3].fund_type", "page": 2,
-     "extracted": "governmental (utilities)", "on_page": "Line 45 Solid Waste 11,615.02, printed under Business-Type Activities in the GENERAL FUND column",
-     "issue": "the fund column (General) was followed rather than the section heading; defensible (already marked review), but solid waste spending ends up in governmental totals"},
-    {"severity": "warning", "path": "receipts[8..9].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other — Sewer 23,163.60, Water 27,662.40",
-     "issue": "printed as 'Other'; assumed to be utility charges"},
-    {"severity": "warning", "path": "balance_sheet", "page": 1,
-     "extracted": "line 26 Net Cash Balance 332,606.76 + line 27 Investments 62,359.07 = line 24 394,965.83",
-     "on_page": "no balance statement in the trimmed PDF",
-     "issue": "the balance sheet is built from Exhibit A ending balances (an assumption); the amounts match the page and p3 investments schedule (29,243.28 + 33,115.79)"}
+    {"severity": "error", "path": "receipts[8].category", "page": 1,
+     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Sewer Fund) 23,163.60",
+     "issue": "Sewer utility fund collections should be Utility Charges (user rule 2026-10-28)"},
+    {"severity": "error", "path": "receipts[9].category", "page": 1,
+     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Water Fund) 27,662.40",
+     "issue": "Water utility fund collections should be Utility Charges (user rule 2026-10-28)"}
   ]
 }

@@ -1,21 +1,22 @@
 {
   "stem": "Stanton_FY2025",
-  "values_checked": 58,
+  "values_checked": 132,
   "issues": [
-    {"severity": "warning", "path": "receipts[3].category", "page": 5,
-     "extracted": "federal grants", "on_page": "Capital Grants and Contributions 8,782 (CDBG fund)",
-     "issue": "The page doesn't name the grantor. Calling it federal (CDBG) is a reasonable guess but not confirmed; it already carries a review note."},
-    {"severity": "warning", "path": "receipts[9].category", "page": 7,
-     "extracted": "intergovernmental/state aid", "on_page": "Operating Grant 10,000",
-     "issue": "The page doesn't name the grantor. It could be federal, state or private (donations/contributions). The category is a guess; it already carries a review note."},
-    {"severity": "warning", "path": "ending_cash.amount", "page": 5,
-     "extracted": 807151, "on_page": "Fund Balances - End of Year 807,151; cash 560,325 + County Treasurer 11,718 + restricted 108 = 572,151 (p4)",
-     "issue": "Beginning and ending 'cash' are the governmental fund balances the statement rolls forward. They include the 235,000 Due From Other Funds (the receivable from utilities), so actual cash is 235,000 lower. The notes say this, but anyone using it as cash should know."},
-    {"severity": "warning", "path": "business_type", "page": 7,
-     "extracted": "net position 1,803,774 -> 1,723,714 (accrual)", "on_page": "Government-wide business-type modified cash net position 80,415 -> (172,318) (p3, p1)",
-     "issue": "Business-type balances use the accrual proprietary statement, as the rules require. The balance_sheet Total column (p1) is modified cash and carries the utilities at (172,318) net position, so the two measures are inconsistent within the report. The Total column also holds the internal Due From/Due To Other Funds of 235,000 gross on both sides."},
+    {"severity": "error", "path": "receipts[8].category", "page": 7,
+     "extracted": "charges for services/fees", "on_page": "Charges for Services 500,270 (Utilities Fund, proprietary statement)",
+     "issue": "Utility fund charges belong in the user's Utility Charges receipt category (user 2026-10-28). The same line in detail[32] is already 'Utility Charges', so the report is inconsistent with itself."},
+    {"severity": "warning", "path": "detail[6].category", "page": 5,
+     "extracted": "charges for services/fees", "on_page": "Golf Fund column, Charges for Services 262,179",
+     "issue": "Golf course fees fall under the user's Recreation Fees category (golf/pool/park). detail_category is already recreation/pool/park fees."},
+    {"severity": "warning", "path": "receipts[4].category", "page": 5,
+     "extracted": "charges for services/fees", "on_page": "Charges for Services 366,257 (p2 by function: Golf 262,179, Rescue 36,582, Fire 26,274, General Govt 27,816, Pool 6,035, Streets 5,979, Library 687, Housing 705)",
+     "issue": "72% of this combined line is golf fees (Recreation Fees), and the rest includes rescue/ambulance fees. Consider Recreation Fees as the dominant category, or add a review note."},
+    {"severity": "warning", "path": "detail[3].detail_category", "page": 5,
+     "extracted": "other state aid", "on_page": "Street Fund Intergovernmental 254,340",
+     "issue": "Street Fund intergovernmental receipts are most likely highway allocation. The page doesn't say, so this is an assumption."},
     {"severity": "warning", "path": "decision_needed", "page": 9,
-     "extracted": "detail [] ; no decision_needed entry", "on_page": "Nursing Home Charges 7,652,819 / Nursing Home 6,697,509 (Budgetary Comparison - All Funds, actual)",
-     "issue": "The all-funds budget schedule shows nursing home operations (7.65M resources, 6.70M charges) that appear in none of the trimmed statements. A person should settle whether the nursing home is a separate entity or audit, or is missing from this report. Leaving the schedule out of detail is defensible, because it mixes fund types in single lines."}
+     "extracted": "recorded_as: detail only, business-type, fund 'All funds', review; not in receipts/disbursements",
+     "on_page": "Nursing Home Charges 7,652,819 / Nursing Home 6,697,509 (p9 all-funds budget schedule)",
+     "issue": "Stale entry. The p9 combined schedule lines were removed under the per-fund detail rule (user 2026-10-27), so the nursing home lines are no longer in detail. The notes also still describe the old p9 split detail. Update recorded_as and the notes."}
   ]
 }

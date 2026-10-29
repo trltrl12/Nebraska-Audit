@@ -1,7 +1,13 @@
 {
   "stem": "Wausa_Public_Schools_FY2025",
-  "values_checked": 180,
+  "values_checked": 265,
   "issues": [
+    {"severity": "warning", "path": "detail[84].category", "page": 16,
+     "extracted": "charges for services/fees", "on_page": "Sales 100,122 (School Nutrition Fund)",
+     "issue": "Same money is recorded as receipts 'Nutrition Program receipts' category School Lunch Sales (p4); the user's 2026-10-28 rule moves lunch/meal sales to School Lunch Sales, so the detail line's category is inconsistent with the receipt line"},
+    {"severity": "warning", "path": "detail[79].original_label", "page": 14,
+     "extracted": "Capital outlay", "on_page": "Capital outlay 62,212",
+     "issue": "User rule: capital outlay lines are labelled 'Capital Outlay: <function>' with printed text in printed_label; not applied here (user_rules.py may fix it)"},
     {"severity": "warning", "path": "detail[79].category", "page": 7,
      "extracted": "capital outlay", "on_page": "Depreciation Fund 62,212: Operation and maintenance of plant 32,212 + Student transportation 30,000 (combining schedule p7)",
      "issue": "The General Fund components combining schedule assigns the Depreciation Fund's capital outlay to O&M of plant (32,212) and student transportation (30,000); recording it as one capital outlay line doesn't tie to the statement's function lines"},

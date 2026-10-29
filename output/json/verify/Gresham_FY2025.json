@@ -1,15 +1,10 @@
 {
   "stem": "Gresham_FY2025",
-  "values_checked": 38,
+  "values_checked": 46,
   "issues": [
-    {"severity": "warning", "path": "beginning_investments", "page": 1,
-     "extracted": 142611.99, "on_page": "Line 2 Investments 142,611.99; also inside beginning_cash 388,231.32 (line 3 subtotal)",
-     "issue": "beginning_cash/ending_cash already include investments (needed for the line 3 / line 24 roll-forward) while beginning_investments/ending_investments are also filled; rules say investments are informational and not added to cash, so downstream use must not add them twice. Same for ending_investments 148,334.45."},
-    {"severity": "warning", "path": "receipts[11].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Water Fund) 74,885.06",
-     "issue": "Water and Sewer columns only print 'Local Receipts: Other'; utility charges is an assumption (already marked review). Sewer 95,893.67 may include NDEE loan proceeds (loan issued 12/15/2024, 172,718.18 outstanding p5); covered in decision_needed."},
-    {"severity": "warning", "path": "disbursements[6].category", "page": 3,
-     "extracted": "debt service principal", "on_page": "Debt Service 7,268.15 (Sewer Fund)",
-     "issue": "principal and interest not split on the page; whole line put in principal (marked review)."}
+    {"severity": "warning", "path": "receipts[11].category", "page": 1, "extracted": "charges for services/fees", "on_page": "Local Receipts: Other - Water Fund 74,885.06 / Sewer Fund 95,893.67 (receipts[12])", "issue": "Utility fund receipts; the user rule (2026-10-28) gives these the Utility Charges category. The Sewer part may include NDEE loan proceeds, which is already in decision_needed"},
+    {"severity": "warning", "path": "receipts[11].original_label", "page": 1, "extracted": "Local Receipts: Other (Water Fund)", "on_page": "Local Receipts: Other", "issue": "Label has the fund name added; it is not the printed text (same for receipts[12] '(Sewer Fund)' and disbursements[4] 'Capital Improvements (Water Fund)')"},
+    {"severity": "warning", "path": "disbursements[5].original_label", "page": 3, "extracted": "Other Capital Outlay", "on_page": "Other Capital Outlay 3,453.07 (Water Fund)", "issue": "Capital outlay rule: label should be 'Capital Outlay: <function>' with the printed text in printed_label (also disbursements[2] and [4] 'Capital Improvements')"},
+    {"severity": "warning", "path": "beginning_investments", "page": 1, "extracted": 142611.99, "on_page": "Investments 142,611.99 (line 2), included in line 3 subtotal 400,019.00", "issue": "beginning_cash/ending_cash already include investments (the line 3/24 roll-forward). beginning_investments/ending_investments are filled as well, so a reader adding cash and investments would double count 142,611.99 / 148,334.45"}
   ]
 }

@@ -1,18 +1,17 @@
 {
   "stem": "North_Bend_FY2025",
-  "values_checked": 288,
+  "values_checked": 176,
   "issues": [
     {"severity": "warning", "path": "detail[78].category", "page": 16,
-     "extracted": "other / miscellaneous revenue", "on_page": "Keno Fund: Miscellaneous 21,472",
-     "issue": "The only real revenue line of the Keno Fund is printed as 'Miscellaneous'. It is almost certainly keno proceeds (keno/lottery), but the label doesn't say so. Kept in other with review; a person should decide. The same amount sits inside governmental receipts[5] Miscellaneous 189,318 (p4)."},
-    {"severity": "warning", "path": "detail[15].detail_category", "page": 10,
-     "extracted": "other state aid", "on_page": "Street Fund: Intergovernmental 226,291",
-     "issue": "Street Fund intergovernmental revenue is most likely highway allocation (p2 shows it as public works operating grants), but the page doesn't name it. 'other state aid' is defensible."},
-    {"severity": "warning", "path": "proprietary", "page": 7,
-     "extracted": null, "on_page": "Statement of Cash Flows - Proprietary Funds, Total: operating 106,148; noncapital financing 181,099; capital and related financing (21,518); investing 3,120; beginning cash 65,682; ending cash 334,531",
-     "issue": "The business-type funds are on full accrual and a proprietary cash flow statement is printed, but proprietary was left null because the top-level basis is cash (governmental modified cash). This is defensible under the 'GAAP only' rule, but the data is available. Note that the 591,361 Sewer bond proceeds appear only on this page."},
-    {"severity": "warning", "path": "balance_sheet.assets[5].category", "page": 1,
-     "extracted": "inventories/prepaids", "on_page": "Other current assets 8,641 (shown as 'Deferred charges' on the proprietary net position statement p5)",
-     "issue": "Deferred charges could be 'other assets' rather than prepaids. Judgment call."}
+     "extracted": "other (Miscellaneous 21,472, Keno Fund)",
+     "on_page": "Keno Fund budgetary comparison: Miscellaneous 21,472, the fund's only real revenue",
+     "issue": "In a Keno Fund this is almost certainly keno proceeds (keno/lottery), but the printed label says only Miscellaneous. The same 21,472 sits inside the governmental receipts 'Miscellaneous' 189,318 (receipts[5]). Already marked review"},
+    {"severity": "warning", "path": "detail[94]", "page": 18,
+     "extracted": "other / Miscellaneous 597,494 (Sewer Fund revenue)",
+     "on_page": "Sewer budget schedule Miscellaneous 597,494; p7 cash flows show Sewer bond proceeds 591,361",
+     "issue": "Probably mostly bond proceeds shown as revenue on the budgetary schedule; no breakdown is printed. decision_needed already raises this"},
+    {"severity": "warning", "path": "receipts[6].category", "page": 6,
+     "extracted": "charges for services/fees", "on_page": "Charges for services 616,353 (Water and Sewer enterprise funds)",
+     "issue": "Utility fund charges fall under the user's Utility Charges category (2026-10-28), which the Water/Sewer detail lines already use; scripts/user_rules.py may re-map this"}
   ]
 }

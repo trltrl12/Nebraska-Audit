@@ -1,24 +1,12 @@
 {
   "stem": "Amherst_Public_Schools_FY2025",
-  "values_checked": 137,
+  "values_checked": 205,
   "issues": [
-    {"severity": "warning", "path": "report_discrepancies[0]", "page": 4,
-     "extracted": -10000, "on_page": "Total disbursements 6,772,394 printed; lines sum to 6,782,394 (General Fund column 5,655,591 printed vs lines 5,665,591)",
-     "issue": "Re-added independently: confirmed this is the report's own error, not a misread. p1 statement of activities lines also sum to 6,782,394 against printed 6,772,394. The printed total matches p7 (General Fund components Total column 5,710,591 less 55,000 transfers = 5,655,591, which includes a 'Federal programs (10,000)' net reclassification line, 174,114 less 184,114) and the printed roll-forward (7,000,684 - 6,772,394 = 228,290; 3,205,133 + 228,290 = 3,433,423). The governmental funds statement leaves that (10,000) line out. Summing the JSON disbursement lines gives an ending 10,000 short of 3,433,423; this is fully explained by the discrepancy entry."},
     {"severity": "warning", "path": "disbursements[7].category", "page": 3,
-     "extracted": "support services", "on_page": "Transportation 220,163 (General and administrative; Depreciation Fund)",
-     "issue": "Function is a judgment call: could be student transportation or capital outlay (likely bus purchases). Same applies to detail[46] (Depreciation Fund, p12). Both already marked review."},
-    {"severity": "warning", "path": "disbursements[11].category", "page": 4,
-     "extracted": "support services", "on_page": "Community services 127,128",
-     "issue": "Community services (daycare) is not support services in the school chart of accounts; category guess, already marked review. Same applies to detail[39]."},
-    {"severity": "warning", "path": "detail[37]", "page": 10,
-     "extracted": "248,355 expenditure + -75,000 other financing (detail[38])", "on_page": "2700 Pupil transportation 323,355, budget 325,000; p7 Reclassifications (75,000) -> 248,355",
-     "issue": "The split is supported by the p7 reclassification column and matches the Depreciation Fund transfer in of 75,000 (p12), and arithmetic holds. But budget_final 325,000 is for the whole printed line and sits on the split part, and the other-financing label is built by the extractor, not printed. Both are noted in review."},
-    {"severity": "warning", "path": "detail[57].detail_category", "page": 14,
-     "extracted": "land and buildings", "on_page": "Building construction services 20,000",
-     "issue": "Could be construction/infrastructure; judgment call."},
-    {"severity": "warning", "path": "detail[66].fund_type", "page": 16,
-     "extracted": "governmental", "on_page": "School Nutrition Fund shown as nonmajor governmental fund (p8, Total Other Governmental Funds)",
-     "issue": "The extractor rules list school nutrition as a business-type example, but this report classifies it as a governmental fund and includes it in the governmental totals. Governmental matches the report; noted for consistency only. Applies to all School Nutrition lines."}
+     "extracted": "student transportation", "on_page": "Transportation 220,163 (General and administrative; Depreciation Fund p12, whose only budget line is Capital outlay 403,629)",
+     "issue": "This is probably bus purchases, which would make it capital outlay. Student transportation follows the printed label, so it is defensible. It already carries a review note; the same applies to detail[45]."},
+    {"severity": "warning", "path": "disbursements[14].original_label", "page": 4,
+     "extracted": "Capital outlay", "on_page": "Capital outlay 22,374",
+     "issue": "The capital outlay rule (2026-10-26) relabels this as 'Capital Outlay: <function>' with the printed text kept in printed_label. This is not applied."}
   ]
 }

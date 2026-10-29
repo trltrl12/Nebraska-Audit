@@ -1,9 +1,12 @@
 {
   "stem": "Lindsay_FY2025",
-  "values_checked": 49,
+  "values_checked": 98,
   "issues": [
-    {"severity": "warning", "path": "receipts[3].category", "page": 5, "extracted": "other", "on_page": "Local 161,349", "issue": "Unexplained 'Local' receipts (14% of governmental receipts) kept in 'other' with review; the statement of activities (pp2-3) shows fees and charges 15,708, misc income 7,418 and capital grants/contributions, so this line is a mix of those. Defensible but needs human review."},
-    {"severity": "warning", "path": "receipts[6]", "page": 7, "extracted": "Capital contribution 85,604 as business-type receipt, category intergovernmental/state aid", "on_page": "Capital contribution 85,604 (non-operating receipts)", "issue": "Field rules list capital contributions under business_type.other_financing. Keeping it as a receipt is defensible because it is printed inside non-operating receipts and the 'Total non-operating' figure. The source (state or federal or private) is not stated, so the intergovernmental category is a guess."},
-    {"severity": "warning", "path": "detail", "page": 8, "extracted": [], "on_page": "Budgetary Comparison Schedule - Governmental and Proprietary Funds (Taxes, Intergovernmental, Local, ...; Actual column)", "issue": "The only supplementary schedule was left out because it combines governmental and proprietary funds in broad groups. The notes explain this, and including it would add no detail beyond the basic statements, but it is still an assumption. The schedule's own figures look odd (Transfers out 650,426 against 576,373 + 74,053 on the statements; total disbursements 2,205,963), so it is unreliable anyway."}
+    {"severity": "warning", "path": "receipts[5].category", "page": 7,
+     "extracted": "charges for services/fees", "on_page": "Fees and services 253,663 (Utility Fund operating receipts)",
+     "issue": "Utility fund sales/charges have their own receipt category Utility Charges; the matching detail line (detail[21]) already uses Utility Charges, so the two are inconsistent"},
+    {"severity": "warning", "path": "receipts[3].category", "page": 2,
+     "extracted": "other", "on_page": "Local 161,349",
+     "issue": "The Statement of Activities (pp2-3) implies Local = fees and charges 15,708 + capital grants and contributions not counted as intergovernmental about 138,223 (489,599 less the 351,376 gap between fund-statement Intergovernmental 483,826 and general-receipts Intergovernmental 132,450) + miscellaneous income 7,418. Capital grants/contributions are more than half of the line, so donations/contributions might fit better than other. The user's category decision is recorded on the line, so this is left for review"}
   ]
 }

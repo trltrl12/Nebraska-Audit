@@ -1,13 +1,9 @@
 {
   "stem": "Wilcox_FY2025",
-  "values_checked": 117,
+  "values_checked": 104,
   "issues": [
-    {"severity": "warning", "path": "detail[13].detail_category", "page": 8,
-     "extracted": "salaries and wages", "on_page": "Social Security department: Personnel services 15,203",
-     "issue": "Personnel services charged to the General Fund 'Social Security' department (funded by its own property tax levy) are most likely FICA/payroll taxes; employee benefits and payroll taxes probably fits better."},
-    {"severity": "warning", "path": "detail", "page": 7,
-     "extracted": "all-funds budget schedule not recorded; budget_final null on every detail line",
-     "on_page": "Schedule of Receipts, Disbursements and Changes in Fund Balance - Budget and Actual - All Funds (budget column, e.g. Charges for services 512,750, Electric Utility 871,500)",
-     "issue": "Leaving out the combined all-funds schedule avoids double counting and is defensible, but no budget figures are captured and the Street Fund has no detail beyond p3. Confirm this is acceptable."}
+    {"severity": "error", "path": "receipts[7].category", "page": 6,
+     "extracted": "charges for services/fees", "on_page": "Charges for services 462,070 (Enterprise Fund: Sewer 25,015, Water 86,377, Light 301,048, Garbage 49,630, p9)",
+     "issue": "These are utility fund charges. User rule 2026-10-28 gives them their own receipt category, Utility Charges (incl. garbage/refuse), out of charges for services. scripts/user_rules.py will not fix this: the receipt has no fund and the detail fund is 'Enterprise Fund', which its utility-fund pattern doesn't match. The same applies to detail[39]-detail[42] (Sewer, Water, Light, Garbage 'Charges for services')."}
   ]
 }

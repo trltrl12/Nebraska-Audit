@@ -1,38 +1,18 @@
 {
   "stem": "Loomis_Public_Schools_FY2025",
-  "values_checked": 229,
+  "values_checked": 230,
   "issues": [
-    {
-      "severity": "error",
-      "path": "receipts[14].category",
-      "page": 6,
-      "extracted": "sale of assets",
-      "on_page": "Sale of property/insurance proceeds 37,672 = Disposal of property 4,085 + Insurance proceeds 33,587 (General Fund schedule p9)",
-      "issue": "[fixed] Mixed line whose dominant part (89%) is insurance proceeds, which the rules put in reimbursements/refunds (the detail records Insurance proceeds 33,587 as reimbursements/refunds). It should be categorised reimbursements/refunds with a review note naming the mix, or split 33,587/4,085 using split_from p9, the same way the 'Other' line was split."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[8]",
-      "page": 6,
-      "extracted": "fines and forfeitures, no review",
-      "on_page": "Fines and licenses 7,037 = County fines and licenses 7,017 + Local license fees 20 (p9)",
-      "issue": "Line mixes fines and licenses. The dominant category is right, but the rules ask for a review note naming the mix."
-    },
-    {
-      "severity": "warning",
-      "path": "notes",
-      "page": 11,
-      "extracted": "notes list Bond Fund differences for property tax, carline and pro-rate only",
-      "on_page": "Bond Fund schedule Homestead exemption 1,007 vs statement p5 1,006",
-      "issue": "Homestead exemption also differs by 1 between the Bond Fund schedule and the governmental funds statement. The differences net to zero and both totals are 231,203, so this is a rounding inconsistency in the report itself, but the notes leave it out."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[140].detail_category",
-      "page": 15,
-      "extracted": "dues, training and travel",
-      "on_page": "Mileage to parents 3,464",
-      "issue": "This is transportation reimbursement paid to parents, not staff travel; grants/payments to other entities or professional/contract services would also be defensible."
-    }
+    {"severity": "error", "path": "receipts[17].category", "page": 6,
+     "extracted": "charges for services/fees", "on_page": "Other 8,026, of which Rental income 6,119 (p9, code 1910)",
+     "issue": "rental income belongs in the user's Rentals category (user 2026-10-28); detail[7] already uses Rentals for the same 6,119"},
+    {"severity": "warning", "path": "receipts[17].original_label", "page": 6,
+     "extracted": "Other (General Fund rental income)", "on_page": "Other",
+     "issue": "original_label is a constructed description, not the printed label; receipts[18] likewise ('Other (General Fund other non-revenue receipts)')"},
+    {"severity": "warning", "path": "detail[29].original_label", "page": 10,
+     "extracted": "Capital outlay", "on_page": "Capital outlay 370,422 (Depreciation Fund)",
+     "issue": "not relabelled 'Capital Outlay: <function>' with printed_label, unlike the other capital outlay detail lines (user rule 2026-10-26)"},
+    {"severity": "warning", "path": "report_discrepancies", "page": 11,
+     "extracted": "absent", "on_page": "Bond Fund: statement p5 property 192,321 / carline 12 / pro-rate 511 / homestead 1,006 vs schedule p11 192,322 / 11 / 510 / 1,007",
+     "issue": "the report's two schedules disagree by $1 on four lines (both total 231,203). This is mentioned only in notes, not in report_discrepancies"}
   ]
 }

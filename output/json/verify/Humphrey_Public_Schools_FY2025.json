@@ -4,7 +4,7 @@
   "issues": [
     {"severity": "error", "path": "detail[90].category", "page": 15,
      "extracted": "charges for services/fees", "on_page": "School Nutrition Fund: Daily Sales 131,999",
-     "issue": "This is school lunch sales: the same money is receipts[6] 'Food Services' 131,999 with category School Lunch Sales, and the detail_category is school lunch sales. The category must be School Lunch Sales (same line, same category)."},
+     "issue": "[fixed 2026-10-28: category set to School Lunch Sales] This is school lunch sales: the same money is receipts[6] 'Food Services' 131,999 with category School Lunch Sales, and the detail_category is school lunch sales. The category must be School Lunch Sales (same line, same category)."},
     {"severity": "warning", "path": "transfers_out", "page": 9,
      "extracted": 100469, "on_page": "8000 Transfers 77,969 (p11); 2190 Student - Other 10,000 (p9); 2900 Other Support Services 12,500 (p10)",
      "issue": "Treating 2190 (10,000) and 2900 (12,500) as hidden transfers out rests only on their matching the Cooperative and Employee Benefit transfers in. No page prints an elimination or reclassification, and the p5/p6 statements count both as disbursements. This is an assumption. It is disclosed in decision_needed and marked review, so it is not an error, but the user must confirm it."},
@@ -13,12 +13,12 @@
      "issue": "The statement (p5) prints the whole Special Building disbursements of 244,852 under Capital Outlay (280,091 = Depreciation 35,239 + Special Building 244,852), so this function doesn't tie to the statement's function lines."},
     {"severity": "warning", "path": "detail[115].category", "page": 19,
      "extracted": "charges for services/fees", "on_page": "Cooperative Fund: Miscellaneous Local Receipts 39,609",
-     "issue": "On the statement this money is inside 'Activity Receipts' 280,302 (230,812 + 39,609 + 9,880), which is categorised Extracurricular Receipts. The two are inconsistent. Cooperative activities receipts are probably extracurricular."},
+     "issue": "[fixed 2026-10-28: category set to Extracurricular Receipts, detail_category student activity receipts, review kept] On the statement this money is inside 'Activity Receipts' 280,302 (230,812 + 39,609 + 9,880), which is categorised Extracurricular Receipts. The two are inconsistent. Cooperative activities receipts are probably extracurricular."},
     {"severity": "warning", "path": "receipts[18].category", "page": 5,
      "extracted": "other", "on_page": "Non-revenue receipts remainder 55,092, of which Employee Benefit 'Other Non-Revenue Receipts' 44,737",
      "issue": "The Statement of Activities (p2) shows the 44,737 as Employee Benefits 'Charges for Services', so the page does explain the dominant part (employee benefit contributions/reimbursements), and 'other' is a weak fit. Same for detail[83]."},
     {"severity": "warning", "path": "missing", "page": 7,
      "extracted": null, "on_page": "Combining statement - Other Governmental Funds: only Activity, School Nutrition, Bond and QCPU columns; Cooperative, Student Fee and Total columns not trimmed",
-     "issue": "The continuation page (report p30) is not in the trimmed PDF. No lines are lost, because the Cooperative and Student Fee budget schedules (pp19-20) carry them. The notes wrongly say the Student Fee Fund is not a column in the combining statement."}
+     "issue": "[fixed 2026-10-28: notes corrected to say the continuation page is not trimmed] The continuation page (report p30) is not in the trimmed PDF. No lines are lost, because the Cooperative and Student Fee budget schedules (pp19-20) carry them. The notes wrongly say the Student Fee Fund is not a column in the combining statement."}
   ]
 }

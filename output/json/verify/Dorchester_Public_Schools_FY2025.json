@@ -1,54 +1,21 @@
 {
   "stem": "Dorchester_Public_Schools_FY2025",
-  "values_checked": 328,
+  "values_checked": 345,
   "issues": [
-    {
-      "severity": "error",
-      "path": "detail[7].category",
-      "page": 8,
-      "extracted": "intergovernmental/state aid / county/other local governments",
-      "on_page": "2110 County fines and license fees 14,740.62",
-      "issue": "[fixed 2026-10-21: code 2110 -> fines and forfeitures] Extractor rules say school code 2110 (county fines and license fees passed to schools) is 'fines and forfeitures' (category and detail_category), not county/other local governments."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[9].category",
-      "page": 5,
-      "extracted": "intergovernmental/state aid",
-      "on_page": "County receipts 16,635.41",
-      "issue": "Exh G (p8) shows this line is 2110 County fines and license fees 14,740.62 (89%) + 2210 ESU receipts 1,894.79. Under the code-2110 rule and the dominant-category rule it would be 'fines and forfeitures' (review)."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[147]",
-      "page": 22,
-      "extracted": "contra -125,000 (Transportation) + other financing -125,000 (detail[149]); Vehicle Operation 'Capital Assets' 125,000 kept as equipment purchases (detail[130])",
-      "on_page": "Exhibit O Vehicle Operation: Capital Assets 125,000.00",
-      "issue": "Exhibit F reclassifies 125,000.00 out of Student transportation - regular as the transfer to the Depreciation Fund (p7, p11), and Exh O p22 prints a Vehicle Operation 'Capital Assets' line of exactly 125,000.00. That line is almost certainly the transfer, so a direct split of detail[130] would be cleaner than a contra line. The notes say Exh O 'does not show it separately', which is not accurate. The net totals are correct either way."
-    },
-    {
-      "severity": "warning",
-      "path": "missing",
-      "page": 9,
-      "extracted": null,
-      "on_page": "4516 IDEA part B pre-school: Actual '-', Final Budget 3,000.00",
-      "issue": "A zero-actual revenue line with a 3,000 budget is not recorded in detail, so its budget is dropped. No effect on actuals."
-    },
-    {
-      "severity": "warning",
-      "path": "detail",
-      "page": 9,
-      "extracted": "Exhibit O program lines with budget_final null",
-      "on_page": "Exh G pp9-10 prints final budgets per program (e.g. 1100 Regular instruction 3,065,727.42; 2610 Operation of buildings 290,000.00)",
-      "issue": "Exh O correctly replaces the Exh G function-only lines, but the General Fund program budgets printed on Exh G are now not recorded anywhere (budgets for programs 1291 and 2171, which had no actuals, are dropped as well)."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[201].detail_category",
-      "page": 16,
-      "extracted": "land and buildings (capital outlay)",
-      "on_page": "Other purchases property services 5,841.15",
-      "issue": "'Purchased property services' is mapped to repairs and maintenance everywhere else in this report. Special Building Fund spending may be capital, but the object label points to repairs and maintenance. Already marked review."
-    }
+    {"severity": "error", "path": "detail[174].category", "page": 14,
+     "extracted": "charges for services/fees", "on_page": "Sales - lunch 33,742.88 (School Nutrition Fund)",
+     "issue": "lunch/meal sales belong in the user's receipt category School Lunch Sales (2026-10-28 rule); receipts[10] records the same money as School Lunch Sales, so the report is inconsistent"},
+    {"severity": "error", "path": "detail[175].category", "page": 14,
+     "extracted": "charges for services/fees", "on_page": "Sales - breakfast 10,711.00",
+     "issue": "should be School Lunch Sales (user rule: lunch/meal/milk/nutrition sales)"},
+    {"severity": "error", "path": "detail[176].category", "page": 14,
+     "extracted": "charges for services/fees", "on_page": "Sales - non-reimbursable 15,427.89",
+     "issue": "should be School Lunch Sales (user rule: lunch/meal/milk/nutrition sales)"},
+    {"severity": "warning", "path": "detail[31].category", "page": 18,
+     "extracted": "Instruction (detail_category equipment purchases)", "on_page": "Regular Instruction - Capital Assets 4,668.31",
+     "issue": "Exhibit O 'Capital Assets' object lines (also detail[53] 828.12, detail[115] 1,207.86, detail[130] 125,000.00, detail[146] 36,976.00) are capital purchases inside programs; the user's capital outlay rule (every capital outlay line, also inside a department, is category capital outlay) may apply. Judgment call"},
+    {"severity": "warning", "path": "receipts[9].amount", "page": 13,
+     "extracted": 135363.98, "on_page": "Activities Fund receipts 188,317.73 (p13); no single printed figure for the activities share of Other local receipts",
+     "issue": "remainder derived (195,245.75 - 59,881.77) and marked computed/review; arithmetic checks, but it rests on the assumption that the 25,000 General Fund transfer and the 27,953.75 contributions sit inside the Activities receipts"}
   ]
 }

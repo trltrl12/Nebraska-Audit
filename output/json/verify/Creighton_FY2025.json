@@ -4,7 +4,7 @@
   "issues": [
     {"severity": "error", "path": "receipts[13].category", "page": 5,
      "extracted": "other", "on_page": "Other 207,513 = General 101,045 + Street 88,510 + CCC Inn 218 + Fire 7,956 + Other Gov 9,784; schedules p14/p16 show NPPD lease 84,961 + 84,961 = 169,922 (82%) plus franchise fees 8,014",
-     "issue": "Broad 'Other' line whose make-up is printed in the fund schedules: NPPD lease (rentals) is more than half of it, so the rule requires the dominant category (Rentals) or a split_from split (NPPD lease 169,922 / franchise 8,014 / other remainder). It was left in 'other' instead."},
+     "issue": "[fixed 2026-10-28: receipt recategorized to dominant category Rentals (detail_category rentals), review notes the mix NPPD lease 169,922 / franchise 8,014 / other 29,577] Broad 'Other' line whose make-up is printed in the fund schedules: NPPD lease (rentals) is more than half of it, so the rule requires the dominant category (Rentals) or a split_from split (NPPD lease 169,922 / franchise 8,014 / other remainder). It was left in 'other' instead."},
     {"severity": "warning", "path": "receipts[5].category", "page": 16,
      "extracted": "intergovernmental/state aid 1,096,235 (remainder)", "on_page": "Street 'Motor vehicle fees' 13,646; Fire 'Rural Fire Department - cost share' 648,212",
      "issue": "The remainder of Intergovernmental includes Street motor vehicle fees 13,646, which detail[55] records as motor vehicle tax (same money, different category), and the rural fire contract cost share 648,212 (59% of the remainder), which could be charges for services (rural fire contracts) rather than state aid."},
@@ -13,15 +13,15 @@
      "issue": "Nebraska Mutual Finance Organization money is a state payment, so 'other state aid' fits better than county/other local governments."},
     {"severity": "warning", "path": "detail[75].category", "page": 16,
      "extracted": "charges for services/fees", "on_page": "Ambulance fund 'Charges for services' 106,019",
-     "issue": "User rule 2026-10-28 gives ambulance charges their own category, Ambulance Fees (detail_category already ambulance/rescue fees). user_rules.py matches labels only, so the generic label 'Charges for services' won't be re-categorized."},
+     "issue": "[fixed 2026-10-28: category Ambulance Fees] User rule 2026-10-28 gives ambulance charges their own category, Ambulance Fees (detail_category already ambulance/rescue fees). user_rules.py matches labels only, so the generic label 'Charges for services' won't be re-categorized."},
     {"severity": "warning", "path": "detail[12].category", "page": 14,
      "extracted": "charges for services/fees", "on_page": "Park 5,800 / Pool 13,408 'Charges for services' (also detail[13])",
-     "issue": "Park/pool charges (detail_category recreation/pool/park fees) belong to the user's own category, Recreation Fees. user_rules.py won't catch the generic label."},
+     "issue": "[fixed 2026-10-28: both lines category Recreation Fees] Park/pool charges (detail_category recreation/pool/park fees) belong to the user's own category, Recreation Fees. user_rules.py won't catch the generic label."},
     {"severity": "warning", "path": "detail[18].category", "page": 14,
      "extracted": "charges for services/fees", "on_page": "NPPD lease 84,961 (General p14; also detail[57] Street p16)",
-     "issue": "Lease income (detail_category rentals) belongs to the user's own category, Rentals. The label 'NPPD lease' doesn't match user_rules.py's rental regex."},
+     "issue": "[fixed 2026-10-28: both NPPD lease lines category Rentals] Lease income (detail_category rentals) belongs to the user's own category, Rentals. The label 'NPPD lease' doesn't match user_rules.py's rental regex."},
     {"severity": "warning", "path": "receipts[14].category", "page": 9,
      "extracted": "charges for services/fees", "on_page": "User charges 805,490 (Sewer/Water/Sanitation)",
-     "issue": "Enterprise user charges belong to the user's own category, Utility Charges. The receipt has no fund field, so user_rules.py won't map it. Recycling 'Charges for services' 1,000 (detail[86], refuse/sanitation charges) is the same case."}
+     "issue": "[fixed 2026-10-28: User charges and Recycling charges category Utility Charges] Enterprise user charges belong to the user's own category, Utility Charges. The receipt has no fund field, so user_rules.py won't map it. Recycling 'Charges for services' 1,000 (detail[86], refuse/sanitation charges) is the same case."}
   ]
 }

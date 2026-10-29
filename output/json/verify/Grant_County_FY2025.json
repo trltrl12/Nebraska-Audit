@@ -1,24 +1,12 @@
 {
   "stem": "Grant_County_FY2025",
-  "values_checked": 161,
+  "values_checked": 140,
   "issues": [
-    {"severity": "warning", "path": "detail[64].category", "page": 12,
-     "extracted": "investment income / investment income", "on_page": "Inheritance Fund: Interest on taxes 14,496",
-     "issue": "'Interest on taxes' is interest charged on late inheritance tax, not interest earned on investments. By analogy with the rule that interest on property taxes counts as property tax, 'inheritance tax' looks like the better category."},
-    {"severity": "warning", "path": "receipts[3].category", "page": 2,
-     "extracted": "other", "on_page": "Nonrevenue receipts 8,633 (Road and Bridge Fund)",
-     "issue": "Recorded as 'other' with a review flag. Exhibit A (p1) shows Sale of property 7,974, so this may be mostly sale of assets. The page doesn't say, so 'other' is defensible. The same applies to detail[49]."},
+    {"severity": "warning", "path": "transfers_in", "page": 2,
+     "extracted": null, "on_page": "Operating transfers in 86,000 / out (86,000) in fund columns, offset in the Eliminations column; Total Governmental Funds column blank",
+     "issue": "Transfers between governmental funds (General 40,000 and Road and Bridge 46,000 out; Road Sinking 46,000 and Other Governmental 40,000 in) are recorded as null because the Total column eliminates them. The identity still holds, but other county reports record gross transfers in and out. This is a consistency choice."},
     {"severity": "warning", "path": "receipts[0].category", "page": 2,
-     "extracted": "taxes (unlabeled) 966,493", "on_page": "Taxes row; Inheritance Fund column 77,003",
-     "issue": "The combined Taxes line was left unsplit because Exhibit A's tax breakdown (1,089,831) doesn't tie to it. That is correct, but the Inheritance Fund column (77,003) is plainly inheritance tax, and that part could have been split out by fund column."},
-    {"severity": "warning", "path": "detail[40].category", "page": 7,
-     "extracted": "natural resources/conservation", "on_page": "Noxious Weed Control 33,874, under 'Total public works'",
-     "issue": "The schedule and Exhibit B (p2) count this under Public Works (streets/highways), so the detail function split no longer ties to the statement's function lines. The extractor flagged it for review."},
-    {"severity": "warning", "path": "detail[*].detail_category (Operating expense lines)", "page": 5,
-     "extracted": "miscellaneous expenditure", "on_page": "Operating expense / Operating expenses",
-     "issue": "Every generic 'Operating expense' object line (General, Road and Bridge, Fair, Inheritance funds) is entered as 'miscellaneous expenditure' with a review flag. This is defensible because the object isn't itemized, but it puts a large share of spending (e.g. Inheritance 499,192, Miscellaneous-general 115,684) in the last-resort category."},
-    {"severity": "warning", "path": "missing", "page": 4,
-     "extracted": null, "on_page": "Schedule numbering skips Schedule 2 (trimmed p4 = Schedule 1, report p21; p5 = Schedule 3, report p22); schedules after report p29 also not trimmed",
-     "issue": "Schedule 2 and any schedules after Schedule 7 are not in the trimmed PDF, so their content can't be checked. Every page in the trimmed PDF is in the JSON."}
+     "extracted": "inheritance tax", "on_page": "Taxes, Inheritance Fund column 77,003",
+     "issue": "The Inheritance Fund's 'Taxes' is called inheritance tax only because of the fund name. Exhibit A's tax breakdown (p1) has no inheritance line, so the type is an assumption."}
   ]
 }

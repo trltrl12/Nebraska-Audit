@@ -1,12 +1,8 @@
 {
   "stem": "Oak_FY2025",
-  "values_checked": 20,
+  "values_checked": 34,
   "issues": [
-    {"severity": "warning", "path": "report_discrepancies", "page": 1,
-     "extracted": null, "on_page": "Line 24 Ending Balance total 114,914.08; line 28 Subtotal of Ending Balances '-' (the note says lines 24 and 28 must agree)",
-     "issue": "The report's own check doesn't hold because the Ending Balance Consists Of section (lines 26-28) was left blank. This isn't recorded in report_discrepancies. The balance sheet is empty as a result, and the validator will flag that it has no assets or equity."},
-    {"severity": "warning", "path": "receipts[5].category", "page": 1,
-     "extracted": "other", "on_page": "Local Receipts: Other - General 589.83, Street 184.75, Lottery Fund 50.56",
-     "issue": "The Lottery Fund part (50.56) could be keno/lottery proceeds, or it could be interest. 'other' is defensible because nothing on the page explains it. The line is already marked review."}
+    {"severity": "warning", "path": "receipts[6].category", "page": 1, "extracted": "charges for services/fees", "on_page": "Line 18 Local Receipts: Other, Sewer Fund 3,924.85", "issue": "printed label is only 'Other'; if presumed sewer fees (as the review note says), the user's Utility Charges category (utility fund charges/collections) would apply rather than charges for services/fees"},
+    {"severity": "warning", "path": "disbursements[2].original_label", "page": 2, "extracted": "Capital Improvements", "on_page": "Line 35 Capital Improvements 2,544.11 (Street Fund)", "issue": "capital outlay line not relabelled 'Capital Outlay: <function>' with printed_label per the user's 2026-10-26 rule (user_rules.py may apply it)"}
   ]
 }

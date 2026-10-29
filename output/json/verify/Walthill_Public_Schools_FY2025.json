@@ -1,15 +1,21 @@
 {
   "stem": "Walthill_Public_Schools_FY2025",
-  "values_checked": 225,
+  "values_checked": 185,
   "issues": [
+    {"severity": "error", "path": "receipts[8].category", "page": 6,
+     "extracted": "charges for services/fees", "on_page": "1910 Rentals of school equipment 23,520",
+     "issue": "Rental income has its own receipt category Rentals (user rule 2026-10-28)"},
+    {"severity": "error", "path": "detail[6].category", "page": 6,
+     "extracted": "charges for services/fees", "on_page": "1910 Rentals of school equipment 23,520",
+     "issue": "Rental income has its own receipt category Rentals (user rule 2026-10-28); detail_category is already rentals"},
+    {"severity": "warning", "path": "receipts[7].category", "page": 6,
+     "extracted": "Extracurricular Receipts", "on_page": "1800 Community Service Activities 12,420",
+     "issue": "Code 1800 is community services receipts, not student activity receipts; the matching detail line (detail[5]) uses detail_category other charges for services, so the two are inconsistent. Charges for services/fees may fit better"},
+    {"severity": "warning", "path": "disbursements[4].category", "page": 3,
+     "extracted": "General Administration", "on_page": "General administration 829,944",
+     "issue": "The statement line combines general administration 2310-2330 (407,814) with school administration 2410-2490 (422,130, the larger part) per the General Fund schedule pp7-8. The category follows the printed label, but by the dominant-part rule it would be School Administration, and the notes don't mention the mix"},
     {"severity": "warning", "path": "missing", "page": 5,
-     "extracted": null, "on_page": "General Fund Components combining schedule (report p28) cut off after 'General administration'; continuation (report p29, plus pp30-31) not trimmed",
-     "issue": "Rest of the combining schedule (remaining disbursement lines, transfers, fund balances) isn't in the trim. Every line is also on the General/Depreciation/Employee Benefit budget schedules (pp6-11), which are recorded and tie, so no amounts appear to be missing. Still, the page was not trimmed."},
-    {"severity": "warning", "path": "detail[102].category", "page": 12,
-     "extracted": "support services", "on_page": "Activities Fund 2900 Support Services, Other 106,294",
-     "issue": "Activity fund spending (detail_category 'student activity spending'). The rules' function for activity funds is 'student activities'. The statement (p3) prints it under Student support services, so 'support services' is defensible; already marked review."},
-    {"severity": "warning", "path": "receipts[5]", "page": 14,
-     "extracted": 2750000, "on_page": "Special Building 1920 Contributions & donations from private sources 2,750,000",
-     "issue": "Split of 'Other local receipts' 2,860,899 (p3) is correct and ties (2,750,000 + 74,909 + 12,420 + 23,520 + 50). Flagged only because a private contribution of 2.75M is nearly a fifth of the year's receipts and goes to the Special Building Fund; it may be worth confirming that it isn't a financing source."}
+     "extracted": null, "on_page": "General Fund Components combining schedule (report p28) continues on report p29, which is not in the trimmed PDF",
+     "issue": "The combining schedule is cut off after General administration. Its remaining lines duplicate the General, Depreciation and Employee Benefit budget schedules, which are all in detail, so no amounts appear to be lost. The trim is still incomplete"}
   ]
 }

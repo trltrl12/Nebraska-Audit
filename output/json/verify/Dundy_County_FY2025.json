@@ -1,24 +1,12 @@
 {
   "stem": "Dundy_County_FY2025",
-  "values_checked": 130,
+  "values_checked": 152,
   "issues": [
-    {"severity": "warning", "path": "receipts[5].category", "page": 2,
-     "extracted": "other", "on_page": "Health Insurance Settlements 4,166 + Miscellaneous 39,402 = 43,568",
-     "issue": "The Statement of Activities (p2) breaks the 43,568 Miscellaneous receipt line into Health Insurance Settlements 4,166 (reimbursements/refunds: insurance proceeds) and Miscellaneous 39,402. The 4,166 could be split out with split_from instead of sitting in 'other'. Kept as a warning because the fund statement (p4) prints the line as one figure."},
-    {"severity": "warning", "path": "report_discrepancies", "page": 13,
-     "extracted": null, "on_page": "Library Fund column: Public Works 78,518, Total Disbursements 78,518, Net Change 268",
-     "issue": "The combining statement doesn't add up. In the Library column, receipts 75,986 minus disbursements 78,518 = -2,532, but the page prints a net change of 268. The budget schedule (p8) shows Library disbursements of 75,718, and the Total Nonmajor column (p17: Public Works 124,273, total 690,767) uses 75,718. The fund columns add up to 693,567, which is 2,800 more than the printed 690,767. Extracted figures come from the Total column and tie, but report_discrepancies is missing an entry for this."},
-    {"severity": "warning", "path": "detail[45].category", "page": 17,
-     "extracted": "streets/highways", "on_page": "Public Works 124,273 (includes Library Fund 75,718 printed under Public Works, p13)",
-     "issue": "Most of the nonmajor 'Public Works' spending is Library Fund spending, which is really culture/recreation. The category follows the printed function, so this is defensible. The same amount flows into disbursements[2] (Public Works 1,528,385)."},
-    {"severity": "warning", "path": "detail[33].category", "page": 7,
-     "extracted": "streets/highways", "on_page": "Road Fund DISBURSEMENTS 1,559,521 (p4 splits it: Public Works 1,390,739, Principal Payments 120,019, Capital Outlay 48,763)",
-     "issue": "The whole one-line Road Fund disbursement total is categorized as streets/highways, even though p4 shows 120,019 of it is debt principal and 48,763 is capital outlay. This is a judgment call; the function mix isn't mentioned in notes."},
-    {"severity": "warning", "path": "detail[35].category", "page": 7,
-     "extracted": "inheritance tax", "on_page": "Taxes 48,196 (Inheritance Tax Fund)",
-     "issue": "The printed label is just 'Taxes'. The category is inferred from the fund name, while the same label is 'taxes (unlabeled)' everywhere else in the report. Defensible, but it is an assumption."},
-    {"severity": "warning", "path": "ending_investments", "page": 3,
-     "extracted": 500000, "on_page": "Investments 500,000; Total Governmental Funds 2,012,840",
-     "issue": "ending_cash 2,012,840 already includes these 500,000 of investments (cash 1,512,840 + investments 500,000). ending_investments is informational only, but beginning_investments is null, so the two years aren't comparable, and anyone adding investments to cash would count the 500,000 twice."}
+    {"severity": "warning", "path": "receipts[6].category", "page": 2,
+     "extracted": "other (Miscellaneous 43,568)", "on_page": "Statement of Activities: Health Insurance Settlements 4,166 + Miscellaneous 39,402 = 43,568",
+     "issue": "The p2 Statement of Activities shows 4,166 of the Miscellaneous receipts are health insurance settlements (reimbursements/refunds); the whole line is left in other"},
+    {"severity": "warning", "path": "detail[38].detail_category", "page": 13,
+     "extracted": "taxes (unlabeled) 312,869", "on_page": "Lodging Promotion Fund Taxes 4,787 + Lodging Improvement Fund Taxes 4,786 (lodging tax); Library 62,189; Hospital 241,107",
+     "issue": "Nonmajor Taxes line includes 9,573 of lodging-fund taxes identifiable by fund column; kept as taxes (unlabeled) (also inside receipts[1])"}
   ]
 }

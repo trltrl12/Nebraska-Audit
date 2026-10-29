@@ -1,15 +1,25 @@
 {
   "stem": "Southern_School_District_1_FY2025",
-  "values_checked": 297,
+  "values_checked": 270,
   "issues": [
-    {"severity": "warning", "path": "detail_totals[1]", "page": 10,
-     "extracted": 8062131, "on_page": "Exhibit G Total Disbursements By All Programs 8,062,131; same total as detail_totals[14] (Exhibit N, p22)",
-     "issue": "The General Fund expenditure total is recorded twice: under Exhibit G (no Exhibit G expenditure items are in detail; marked includes_schedules) and under Exhibit N. A validator that ties detail by fund and section could count it twice."},
+    {"severity": "error", "path": "detail[170].category", "page": 14,
+     "extracted": "reimbursements/refunds", "on_page": "Sales - non-reimbursable 9,596 (School Nutrition Fund)",
+     "issue": "Lunch sales are categorized as reimbursements/refunds even though the line's detail_category is school lunch sales. The user rule makes lunch/meal/nutrition sales receipt category School Lunch Sales."},
+    {"severity": "warning", "path": "balance_sheet", "page": 3,
+     "extracted": "Statement of Net Position - Modified Cash Basis (p1): Restricted 574,758 / 210,612, Unrestricted 3,185,729",
+     "on_page": "Balance Sheet - Governmental Funds (p3): Restricted 574,758 / 210,612; Assigned 507,470, 46,392, 195,410, 216,757; Unassigned 2,219,700 (total 3,971,099)",
+     "issue": "The user's 2026-10-27 cash-basis rule calls for governmental funds balance-sheet lines (fund balance by classification) when its totals equal the government-wide figures, and here they do (3,971,099). The trimmed p3 shows only the three fund columns with no Total Governmental Funds column. Its right-hand page, like Exhibit D's p5, appears not to be trimmed."},
+    {"severity": "warning", "path": "detail[38].category", "page": 17,
+     "extracted": "Instruction (detail_category equipment purchases)", "on_page": "Capital Assets 45,863 (Regular Instruction)",
+     "issue": "Exhibit N 'Capital Assets' object lines (also detail[54], [82], [88], [89], [107] and others) keep their function as category. Under the user's capital outlay rule they may need category capital outlay, labelled 'Capital Outlay: <function>'."},
+    {"severity": "warning", "path": "detail[7].detail_category", "page": 8,
+     "extracted": "county/other local governments (category intergovernmental/state aid)", "on_page": "1960 Miscellaneous revenues 3,428 (under Local Sources)",
+     "issue": "The report labels this line only 'Miscellaneous revenues' under Local Sources. The intergovernmental category is a guess based on the account code (review note present)."},
+    {"severity": "warning", "path": "receipts[0].category", "page": 5,
+     "extracted": "property tax 3,402,117", "on_page": "Property 3,402,117 includes 1140 Penalties and interest on taxes 13,100 (p8) and Special Building penalties & interest 992 (p15)",
+     "issue": "CLAUDE.md says Penalties and Interest on Taxes is never inside property tax, but the extractor rule keeps a combined statement line as property tax. The 14,092 is left inside property tax."},
     {"severity": "warning", "path": "detail[147].detail_category", "page": 11,
      "extracted": "equipment purchases", "on_page": "Books and periodicals 54,707 (Depreciation Fund)",
-     "issue": "Books and periodicals are usually supplies and materials, not equipment. Judgment call."},
-    {"severity": "warning", "path": "disbursements[14].amount", "page": 13,
-     "extracted": 188596, "on_page": "Activities Fund Total disbursements 188,597 (p13); Other student support 572,611 (p4/p5) vs Nutrition 384,015 + Activities 188,597 = 572,612",
-     "issue": "The report has a $1 rounding difference between the fund schedules and the statement (the Other Governmental receipts 804,801 vs 149,592 + 442,623 + 212,587 = 804,802 also differ by 1). The extractor computed the activities portion as the remainder and noted it, but did not list it in report_discrepancies."}
+     "issue": "Books and periodicals are recorded as equipment purchases. Supplies and materials may fit better."}
   ]
 }

@@ -1,24 +1,9 @@
 {
   "stem": "Antelope_County_FY2025",
-  "values_checked": 128,
+  "values_checked": 112,
   "issues": [
-    {"severity": "warning", "path": "detail[0].source_page", "page": 4,
-     "extracted": 5, "on_page": "General Fund column p4: Property 8,147,590; Motor Vehicle 501,435; Nameplate Capacity 661,876; Other 58,426 (p5 prints only Taxes 9,369,327)",
-     "issue": "The split of detail[0]-detail[3] is legitimate: p4 prints the breakdown for the same fund, and it sums exactly to 9,369,327. But the amounts are cited to p5, where only the combined line appears, and the original_label values ('Taxes (split: Property)' etc.) are not printed labels."},
-    {"severity": "warning", "path": "receipts[3].review", "page": 4,
-     "extracted": "Wind nameplate capacity tax; no specific category fits", "on_page": "Taxes: Nameplate Capacity 701,730",
-     "issue": "This review note is stale. 'Nameplate Capacity Tax' is now its own category, and the line is already in it. The note still sends the line to the review list. The same applies to detail[2] (661,876) and detail[40] (39,854)."},
-    {"severity": "warning", "path": "detail[43].category", "page": 13,
-     "extracted": "intergovernmental/state aid / other state aid", "on_page": "Intergovernmental 2,171,198 (Disaster Fund 2,170,319, p12)",
-     "issue": "Disaster Fund receipts are probably FEMA money (federal grants), but no source is printed. receipts[6] (Intergovernmental 5,044,721) includes them. Already marked review."},
-    {"severity": "warning", "path": "detail[30].detail_category", "page": 7,
-     "extracted": "other state aid", "on_page": "Road and Bridge Fund Intergovernmental 2,846,359",
-     "issue": "This is probably mostly highway allocation and pro-rate motor vehicle, but no breakdown is printed. Already marked review."},
-    {"severity": "warning", "path": "detail[28].detail_category", "page": 5,
-     "extracted": "grants/payments to other entities", "on_page": "Historical Society 15,684 (department line, no object breakdown)",
-     "issue": "Department lines with no object breakdown otherwise take 'not itemized'. 'Grants/payments to other entities' assumes this is an appropriation to an outside society."},
-    {"severity": "warning", "path": "disbursements[2].category", "page": 4,
-     "extracted": "streets/highways", "on_page": "Public Works 10,371,388",
-     "issue": "This includes General Fund Noxious Weed Control 93,552, which detail (p5) records as natural resources/conservation. It can't be separated on this statement. Already marked review."}
+    {"severity": "warning", "path": "receipts[6].category", "page": 4,
+     "extracted": "intergovernmental/state aid", "on_page": "Intergovernmental 5,044,721 (incl. Disaster Fund 2,170,319, p12)",
+     "issue": "Almost half of this line is Disaster Fund money, most likely federal (FEMA) grants. The report gives no federal/state breakdown, so state aid with review is defensible, but the federal share is probably understated. The same applies to the nonmajor detail Intergovernmental 2,171,198."}
   ]
 }

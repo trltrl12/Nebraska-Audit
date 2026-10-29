@@ -1,16 +1,21 @@
 {
   "stem": "Louisville_Public_Schools_FY2025",
-  "values_checked": 225,
+  "values_checked": 197,
   "issues": [
-    {"severity": "warning", "path": "disbursements[1].category", "page": 4,
-     "extracted": "support services", "on_page": "Student support services 741,340 = General Fund 355,108 + Other Governmental Funds (Activities Fund) 386,232",
-     "issue": "Most of this line (386,232, 52%) is Activities Fund spending, which is student activities. The rule says to pick the dominant category, or the line could be split by its printed p4 fund columns (355,108 support services / 386,232 student activities). The extractor kept the whole line as support services and does not mention the mix in notes."},
+    {"severity": "warning", "path": "transfers_in", "page": 4,
+     "extracted": "transfers_in 130,000 / transfers_out 130,000 (General net (129,829) + Bond (171))", "on_page": "Transfers in (out): General (129,829), Bond (171), Other Governmental 130,000; Total blank",
+     "issue": "Mixes gross and net: General Fund's (129,829) is already net of the 171 it received from the Bond Fund (p8 5200 Fund transfers in 171; p10 8000 Transfers to other funds 130,000). Gross figures would be in 130,171 / out 130,171. Net effect is zero, so the identity holds"},
+    {"severity": "warning", "path": "detail[87].original_label", "page": 11,
+     "extracted": "Capital outlay", "on_page": "Capital outlay 172,863 (Depreciation Fund); also detail[110] Capital outlay 727,704 (Special Building Fund, p14)",
+     "issue": "Capital outlay labelling rule (\"Capital Outlay: <function>\", printed text in printed_label) not applied"},
+    {"severity": "warning", "path": "detail[83].budget_final", "page": 10,
+     "extracted": 120301, "on_page": "8000 Transfers to other funds: budget 120,301, actual 130,000",
+     "issue": "amount is stored negative (-130,000) but budget_final is positive; signs are inconsistent on the same line"},
     {"severity": "warning", "path": "detail[81]", "page": 6,
-     "extracted": "contra -118,400 in group 'State categorical and federal programs' (category instruction)",
-     "on_page": "Reclassifications column: Instruction +219,736, Instructional support (23,400), Private and state categorical programs (68,603), Federal programs (246,133); total (118,400)",
-     "issue": "The page puts 95,000 of the hidden transfer in the categorical/federal group (68,603 + 246,133 - 219,736) and 23,400 in the Instructional support row. A single -118,400 contra under categorical/federal charges 23,400 to instruction that the page takes out of support services - instruction. Fund and function totals still tie (instruction 7,092,205; instructional support 550,266) because detail[90] offsets it, but splitting the contra into -95,000 (instruction) and -23,400 (support services, department Support services - instruction) would match the page more closely."},
-    {"severity": "warning", "path": "detail[90].category", "page": 12,
-     "extracted": "instruction", "on_page": "Employee Benefit Fund 'Benefits paid' 23,400; printed in the Instructional support row of the Employee Benefit column on p6",
-     "issue": "p6 prints this spending under Instructional support, so support services fits the page better. It is recorded as instruction only to offset the contra placement in detail[81]. Already marked review."}
+     "extracted": "contra -118,400 placed in State categorical/Federal programs; Employee Benefit 23,400 moved to Instruction (detail[90])", "on_page": "Reclassifications: Instruction 219,736; Instructional support (23,400); Private and state categorical (68,603); Federal programs (246,133); Transfers (118,400)",
+     "issue": "Interpretation of the reclassification column is an assumption (the functions tie to the p4 statement either way); review note present"},
+    {"severity": "warning", "path": "detail[*].fund", "page": 7,
+     "extracted": "General / Bond / Special Building / Depreciation ...", "on_page": "General Fund, Bond Fund, Special Building Fund ...",
+     "issue": "Fund names don't end in \"Fund\" (user naming rule 2026-10-27), and transfer labels (5200 Fund transfers in, 8000 Transfers to other funds, Transfers to general fund) aren't normalised to Transfers In/Out; user_rules.py may apply these"}
   ]
 }

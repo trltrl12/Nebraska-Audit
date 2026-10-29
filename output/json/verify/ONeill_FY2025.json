@@ -1,19 +1,21 @@
 {
   "stem": "ONeill_FY2025",
-  "values_checked": 478,
+  "values_checked": 520,
   "issues": [
-    {"severity": "fixed", "path": "receipts[4].category", "page": 14, "extracted": "other taxes", "on_page": "NPPD 5% tax 65,972 (General NPPD 5% 52,258 p16 + Debt Service NPPD 13,714 p33)", "issue": "The NPPD 5% tax is a public power district tax. Under the user decision of 2026-10-23 it is category 'Public Power District Sales Tax', which detail[3] (NPPD 5%, p16) already uses. The same label has to get the same category everywhere in the report.", "resolution": "fixed 2026-10-27: category Public Power District Sales Tax"},
-    {"severity": "fixed", "path": "detail[177].category", "page": 33, "extracted": "other taxes", "on_page": "Debt Service Fund Taxes: NPPD 13,714", "issue": "Same problem as receipts[4]: this should be 'Public Power District Sales Tax', matching the General Fund 'NPPD 5%' line.", "resolution": "fixed 2026-10-27: category Public Power District Sales Tax"},
-    {"severity": "fixed", "path": "receipts[7].amount", "page": 6, "extracted": 1085815, "on_page": "Intergovernmental revenues 1,122,342 (p6). It includes Homestead exemption 47,747 and Property tax credit 63,874 (p14; General 37,829/50,606 p16 + Debt Service 9,918/13,268 p33) and Prorate motor vehicle 1,818 (General 1,436 p16 + Debt Service 382 p33).", "issue": "The user rule of 2026-10-23 says Homestead Exemption, Property Tax Credit and Motor Vehicle Pro-Rate are never inside state aid. The report prints their breakdown (p14, p16, p33), and the extractor already split Motor vehicle fees out of this same line, so these three should be split out with split_from too. intergovernmental/state aid would then drop to 972,376.", "resolution": "fixed 2026-10-27: Homestead Exemption 47,747, Property Tax Credit 63,874, Motor Vehicle Pro-Rate 1,818 split out (split_from); state aid 972,376; total unchanged"},
-    {"severity": "fixed", "path": "detail[98].category", "page": 20, "extracted": "health/welfare", "on_page": "Cemetery: Capital expenditures 26,943 (budget 34,000)", "issue": "The user capital outlay rule of 2026-10-26 says every capital outlay line inside a department is category 'capital outlay', labelled 'Capital Outlay: Health/Welfare' with the printed text in printed_label. The other General Fund 'Capital outlay' lines follow this rule. The same applies to detail[38], 'Capital expenditures' 2,295 (General government - administration, p17).", "resolution": "fixed 2026-10-27: detail[98] and detail[38] category capital outlay, labelled Capital Outlay: Health and Welfare / General Government (printed_label Capital expenditures)"},
-    {"severity": "warning", "path": "detail[156].original_label", "page": 25,
-     "extracted": "Capital outlay - other", "on_page": "Capital outlay - other 558,115",
-     "issue": "The category is correctly capital outlay, but under the user label rule the line should read 'Capital Outlay: Streets/Highways', with the printed text in printed_label, as the General Fund lines do."},
-    {"severity": "warning", "path": "receipts[21].original_label", "page": 10,
-     "extracted": "Miscellaneous (operating revenues)", "on_page": "Miscellaneous",
-     "issue": "A qualifier was added to the printed label. The same happens in disbursements[22] ('Miscellaneous (operating expenditures)')."},
-    {"severity": "warning", "path": "disbursements[6].category", "page": 6,
-     "extracted": "culture/recreation", "on_page": "Public Building 74,855 (Community Center, p21)",
-     "issue": "This is a function guess. Public building could also be general government. It is already marked for review."}
+    {"severity": "warning", "path": "receipts[15].category", "page": 16,
+     "extracted": "charges for services/fees", "on_page": "NPPD lease 622,313 (Statement of Activities p3: 'Public power district lease payments')",
+     "issue": "lease income from NPPD; the user's Rentals receipt category (rent, rental income) fits better than charges for services, and the detail line (detail[16]) already uses detail_category 'rentals'"},
+    {"severity": "warning", "path": "receipts[12].category", "page": 6,
+     "extracted": "charges for services/fees", "on_page": "Charges for services 351,849 = Ambulance calls 291,195 + Community Center rent 25,130 + Library 6,699 + Carney Park 15,592 + Pool 13,233 (p16)",
+     "issue": "83% of the line is ambulance fees; under the 'more than half' rule and the user's Ambulance Fees category, the line could be categorized Ambulance Fees or split using the p16 breakdown"},
+    {"severity": "warning", "path": "receipts[19].category", "page": 16,
+     "extracted": "charges for services/fees (Lot sales 12,208 + Rural fire 2,000 + Other park 2,930 combined)", "on_page": "Lot sales 12,208; Rural fire 2,000; Other park 2,930",
+     "issue": "same labels are categorized differently in detail (Lot sales = Cemetery Fees detail[19], Other park = Recreation Fees detail[23]); one combined computed receipt in charges for services doesn't follow the same-label-same-category rule"},
+    {"severity": "warning", "path": "receipts[21].category", "page": 10,
+     "extracted": "charges for services/fees", "on_page": "Service fees 3,194,945; Other charges 15,032 (Combined Utilities Fund)",
+     "issue": "utility fund service fees/other charges (receipts[21], receipts[22]) should be 'Utility Charges' under the user's 2026-10-28 rule; the per-department detail lines already use Utility Charges"},
+    {"severity": "warning", "path": "detail[12].category", "page": 16,
+     "extracted": "charges for services/fees", "on_page": "Community Center rent 25,130",
+     "issue": "detail_category is 'rentals' but category is charges for services/fees; the user's Rentals category fits (same for detail[16] NPPD lease 622,313)"}
   ]
 }

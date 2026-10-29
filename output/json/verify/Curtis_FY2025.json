@@ -1,70 +1,12 @@
 {
   "stem": "Curtis_FY2025",
-  "values_checked": 89,
+  "values_checked": 158,
   "issues": [
-    {
-      "severity": "warning",
-      "path": "detail[3].fund_type",
-      "page": 7,
-      "extracted": "governmental",
-      "on_page": "Charges for services 2,039,625 (all funds) = governmental 9,407 + business-type 2,030,218 (p2, p4, p6)",
-      "issue": "[fixed directly] This all-funds budget line is 99.5% utility-fund (electric/water/sewer/garbage/golf) charges but is tagged governmental, which folds utility revenue into the governmental detail. The report prints the governmental/business-type breakdown of this exact line on p2 (Charges for Services column). Split it (split_from) or tag it business-type, with review."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[6].fund_type",
-      "page": 7,
-      "extracted": "governmental",
-      "on_page": "Interest income 99,312 (all funds) = governmental 15,676 + business-type 83,636 (p2 'Investment earnings')",
-      "issue": "[fixed directly] Mixed line, mostly business-type (84%), but tagged governmental. Same fix as detail[3]."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[16].fund_type",
-      "page": 7,
-      "extracted": "governmental",
-      "on_page": "Transfers out 371,224 = governmental 12,484 + business-type 358,739 (p2)",
-      "issue": "Other financing line tagged governmental, but 97% of it is business-type transfers."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[15].fund_type",
-      "page": 7,
-      "extracted": "governmental",
-      "on_page": "Other expense 197,457",
-      "issue": "All-funds schedule; nothing on the page shows which fund type this belongs to. Tagging it governmental is an assumption."
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[15]",
-      "page": 6,
-      "extracted": 2734,
-      "on_page": "Miscellaneous revenues (expenses) (2,734) total = Electric (6,670) + Garbage 3,936",
-      "issue": "The net total-column figure is recorded as one disbursement, so Garbage misc revenue 3,936 is netted against Electric misc expense 6,670. This is marked computed/review, and the amount and roll-forward are correct."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[5].category",
-      "page": 4,
-      "extracted": "donations/contributions",
-      "on_page": "Contributions and grants 332,015 (p2: Capital Grants and Contributions; Pool Fund 301,010 on p8)",
-      "issue": "The source isn't stated, so some of this may be government grants (intergovernmental/federal) rather than private donations. Already marked review."
-    },
-    {
-      "severity": "warning",
-      "path": "transfers_out",
-      "page": 4,
-      "extracted": 12484,
-      "on_page": "Operating transfers in (out): General 93,115, Sales tax (105,599), Total (12,484)",
-      "issue": "Recorded as the net of the total column (no transfers_in). The total column prints only the net (12,484), so this is acceptable. The gross amounts by fund are 93,115 in and 105,599 out."
-    },
-    {
-      "severity": "warning",
-      "path": "detail",
-      "page": 8,
-      "extracted": "not recorded",
-      "on_page": "Combining Schedule of Revenues, Expenditures, and Fund Balances (Deficit) - General Fund (8 sub-fund columns; total revenues 773,382, expenditures 651,910)",
-      "issue": "The supplementary combining schedule was left out of detail to avoid double counting with the p7 all-funds budget schedule (stated in notes). This is a judgment call: p8 is the more detailed schedule for the General Fund."
-    }
+    {"severity": "warning", "path": "decision_needed", "page": 2, "extracted": null, "on_page": "Transfers - operations: Governmental (12,484), Business-Type (358,739), Total (371,224); budget schedule p7 'Transfers out 371,224' with no transfers in", "issue": "Transfers net out of the primary government by 371,224, and no fund receives them. This is a one-sided transfer, and the report doesn't say where the money went. Also, the Garbage Fund 'Operating transfers out' is printed as a positive 4,182 (p6). The extraction has no decision_needed entry for this."},
+    {"severity": "warning", "path": "receipts[8].category", "page": 6, "extracted": "charges for services/fees", "on_page": "Charges for services 1,928,928 (Electric/Water/Sewer/Garbage)", "issue": "This line is all utility fund charges. Under the user's 2026-10-28 rule it fits Utility Charges, and the matching detail lines already use Utility Charges, so the two don't agree. The 'Fees' line receipts[9] has the same problem."},
+    {"severity": "warning", "path": "detail[26].category", "page": 6, "extracted": "charges for services/fees", "on_page": "Golf Course - Other operating 17,560", "issue": "Golf course operating revenue fits the user's Recreation Fees category (golf), and its detail_category is already recreation/pool/park fees. However, the printed label is only 'Other operating', so the source is assumed."},
+    {"severity": "warning", "path": "detail[51].function", "page": 6, "extracted": "utilities", "on_page": "Golf Course - Other operating 2,654", "issue": "Golf course spending is tagged function 'utilities', but a golf course is a recreation enterprise, not a utility."},
+    {"severity": "warning", "path": "detail", "page": 8, "extracted": "General Fund lines from the p4 General Fund column", "on_page": "Combining Schedule - General Fund (8 sub-fund columns; totals 773,382 / 651,910 tie to p4)", "issue": "The General Fund has its own combining schedule (p8) that ties to its p4 column. Under the per-fund detail rule that schedule should be the source. It has more than 6 columns, so its Total column would be used, and those amounts are the same as the ones recorded. No dollar effect; only the schedule attribution is off."},
+    {"severity": "warning", "path": "ending_cash", "page": 4, "extracted": 1135138, "on_page": "Total fund balances 1,135,138 (includes Notes receivable 80,300, p3)", "issue": "Ending 'cash' is total governmental fund balances and includes an 80,300 note receivable. Actual governmental cash is 1,054,838. The notes disclose this, but the figure overstates cash."}
   ]
 }

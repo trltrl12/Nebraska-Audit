@@ -1,78 +1,30 @@
 {
   "stem": "Sidney_FY2025",
-  "values_checked": 296,
+  "values_checked": 320,
   "issues": [
-    {
-      "severity": "error",
-      "path": "detail[166].category",
-      "page": 8,
-      "extracted": "other / miscellaneous revenue",
-      "on_page": "Debt Service Fund: Local Receipts Local 1,082,441",
-      "issue": "[fixed] The Debt Service Fund's local revenue is almost entirely special assessments: Exhibit E (p4) shows Debt Service special assessments of 1,051,658, about 97% of this line. The rules require the dominant category when one is more than half, so this should be special assessments with review ('broad group'), not other/miscellaneous."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[168].section",
-      "page": 8,
-      "extracted": "other financing -2,057,754",
-      "on_page": "Debt Service Fund: Other Financing Uses 2,057,754",
-      "issue": "Exhibit E (p4) shows no transfers out of the Debt Service Fund; its 2,238,128 of expenditures are debt service and lease/bond payments. So this budget-basis 'Other Financing Uses' is almost certainly debt service spending, not a transfer. It is already in decision_needed."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[0].category",
-      "page": 4,
-      "extracted": "taxes (unlabeled)",
-      "on_page": "Taxes 6,457,703",
-      "issue": "Kept unsplit. A full split isn't printed, but the General Fund's 4,158,810 share is broken down on p10 (property 1,493,432, motor vehicle 148,233, sales 2,491,768, occupation 25,377), and the Street and Debt Service sales tax shows on p8. A partial split is possible; this goes to review either way."
-    },
-    {
-      "severity": "warning",
-      "path": "ending_cash",
-      "page": 3,
-      "extracted": 15919300,
-      "on_page": "Cash and Cash Equivalents 15,919,300; Cash with Fiscal Agent 190,179; Equity in Pooled Cash and Investments 3,452,807",
-      "issue": "Uses only the cash and cash equivalents line. The rule says 'cash and cash equivalents/investments', so including pooled cash and investments (3,452,807) is arguable. The notes say what was excluded."
-    },
-    {
-      "severity": "warning",
-      "path": "other_financing",
-      "page": 4,
-      "extracted": -253947,
-      "on_page": "Capital Contributions (512,812); Statement of Activities p2 'Transfers of Capital (512,812)'",
-      "issue": "The General Fund's 512,812 capital contribution to the Sewer fund is labelled a transfer of capital on p2. It is recorded as governmental other_financing and business-type other_financing rather than as transfers_out / transfers_net. The two sides are consistent, but it's a classification call."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[5].category",
-      "page": 10,
-      "extracted": "intergovernmental/state aid / county/other local governments",
-      "on_page": "Bookmobile and Police Reimbursement 109,263; Economic Development Reimbursement 20,000 (detail[5], detail[6])",
-      "issue": "These are printed under Intergovernmental Revenues but labelled 'Reimbursement'. reimbursements/refunds is arguable."
-    },
-    {
-      "severity": "warning",
-      "path": "balance_sheet.liabilities[0].category",
-      "page": 1,
-      "extracted": "other liabilities",
-      "on_page": "Taxes Payable 42,810 (Electric fund)",
-      "issue": "This is probably sales tax collected and owed to the state, which would make it due to other governments."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[109].original_label",
-      "page": 14,
-      "extracted": "Employee Benefits",
-      "on_page": "Employees Benefits",
-      "issue": "Minor label mismatch on all four Exhibit T department lines (Park, Pool, Golf, Library: detail[109], [121], [131], [144])."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[159].category",
-      "page": 8,
-      "extracted": "other / miscellaneous revenue",
-      "on_page": "Street Fund: Local Receipts Local 341,572",
-      "issue": "A broad group. Exhibit E suggests it mixes insurance proceeds (151,140, about 44%), the part of the taxes not in sales tax (about 140,839), interest (39,226) and miscellaneous (10,350). No category is above half, so other is defensible, but it should carry review 'broad group; detail on p.4'."
-    }
+    {"severity": "error", "path": "detail[22].category", "page": 10,
+     "extracted": "charges for services/fees", "on_page": "Other Revenue - Rent 8,267",
+     "issue": "[fixed 2026-10-28: category set to Rentals] rent is its own receipt category, Rentals, under the user's rules (detail_category is already rentals); charges for services/fees is wrong"},
+    {"severity": "warning", "path": "receipts[0]", "page": 4,
+     "extracted": "Taxes 6,457,703 kept as taxes (unlabeled)", "on_page": "Taxes: General 4,158,810, Street 854,615, Debt Service 1,144,278, Other 300,000",
+     "issue": "the General Fund's 4,158,810 is broken down exactly on p10 (General Property 1,493,432 + Motor Vehicle 148,233 + Sales 2,491,768 + Occupation 25,377); only the Street/Debt Service/nonmajor parts lack a GAAP breakdown (Exhibit L is budgetary basis and doesn't tie). A partial split was possible; leaving the whole line unlabeled is a judgment call"},
+    {"severity": "warning", "path": "receipts[6].category", "page": 4,
+     "extracted": "federal grants 1,364,708 (General 1,174,718 + Other Governmental 189,990)", "on_page": "Grants 1,540,717; p10 'State and Federal Grants' 1,174,718; p9 Economic Development 'Grants' 189,990",
+     "issue": "the split of Grants by fund column into federal/state relies on Exhibit L labels (Federal Receipts / State Receipts Other); the Economic Development 189,990 has no stated source, so federal is a guess (marked review)"},
+    {"severity": "warning", "path": "detail[5].category", "page": 10,
+     "extracted": "intergovernmental/state aid", "on_page": "Bookmobile and Police Reimbursement 109,263; Economic Development Reimbursement 20,000 (under Intergovernmental Revenues)",
+     "issue": "lines labelled 'Reimbursement' normally take reimbursements/refunds; printed under Intergovernmental Revenues, so county/other local governments is defensible (same for detail[6])"},
+    {"severity": "warning", "path": "detail[178].category", "page": 9,
+     "extracted": "charges for services/fees", "on_page": "Cemetery fund Charges for Services 3,670",
+     "issue": "detail_category is cemetery fees and the General Fund cemetery line uses category Cemetery Fees; the category is inconsistent"},
+    {"severity": "warning", "path": "detail[168]", "page": 8,
+     "extracted": "Debt Service Fund 'Other Financing Uses' -2,057,754 recorded as other financing", "on_page": "Exhibit L Debt Service Fund Other Financing Uses 2,057,754; Exhibit E shows Debt Service Fund debt service expenditures 2,238,128 and no transfers out",
+     "issue": "these are almost certainly debt service payments, so recording them as financing leaves debt service spending out of the expenditure detail. Recorded as printed, and decision_needed already raises it"},
+    {"severity": "warning", "path": "other_financing", "page": 4,
+     "extracted": "Capital Contributions -512,812 inside other_financing", "on_page": "Capital Contributions (512,812) General Fund; Statement of Activities p2 calls it 'Transfers of Capital (512,812)'; Exhibit H Capital Contribution 512,812 (Sewer)",
+     "issue": "this General Fund-to-Sewer payment is a transfer between fund types per the government-wide statement; recording it as other financing (not transfers_out / transfers_net) is a judgment call. It is not counted as spending"},
+    {"severity": "warning", "path": "balance_sheet.liabilities[15].original_label", "page": 1,
+     "extracted": "Compensated Absences (non-current)", "on_page": "Compensated Absences (under Non-Current Liabilities)",
+     "issue": "labels have a qualifier added that isn't printed (also 'Bonds, Notes and Leases Payable (non-current)'); amounts are correct"}
   ]
 }

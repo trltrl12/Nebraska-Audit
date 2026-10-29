@@ -1,11 +1,18 @@
 {
   "stem": "Allen_FY2025",
-  "values_checked": 84,
+  "values_checked": 91,
   "issues": [
-    {"severity": "warning", "path": "receipts[4].category", "page": 5, "extracted": "other", "on_page": "Loan collections 392 (CDBG Fund); p2 shows it as Community development charges for services", "issue": "These are CDBG loan repayments. No category fits exactly, and the statement of activities classes them as charges for services. 'other' with review is defensible."},
-    {"severity": "warning", "path": "ending_cash.amount", "page": 5, "extracted": 385521, "on_page": "Fund balance 385,521; p4 total assets (cash 75,787 + CDs 153,216 + restricted cash 154,871 + county treasurer 4,326) 388,200 less payroll withholding 2,679", "issue": "The beginning (282,405) and ending (385,521) values are fund balances, not cash. Ending cash and investments are 388,200. Notes say 'cash balances equal fund balances', which is not true (2,679 of payroll withholding liability). The CDs (153,216) are shown separately, but ending_investments is null. The values are consistent with the roll-forward, but the label and note are inaccurate."},
-    {"severity": "warning", "path": "detail[13].detail_category", "page": 11, "extracted": "dues, training and travel", "on_page": "Fire: Meetings, seminars, and dues 13,890", "issue": "It equals the Rural fire revenue (13,890), so it is probably a pass-through payment to the fire entity (grants/payments to other entities), even though the printed label says dues (the extractor already flagged this)."},
-    {"severity": "warning", "path": "missing", "page": 10, "extracted": null, "on_page": "Street Fund: Motor vehicle actual '-' (budget 4,500); Other income actual '-' (budget 6,000)", "issue": "Two Street Fund revenue lines with zero actual and a nonzero budget are not in detail. They have no effect on the totals, so this is not counted as an error."},
-    {"severity": "warning", "path": "balance_sheet.liabilities[1].category", "page": 1, "extracted": "other liabilities", "on_page": "Sales tax payable 421", "issue": "Sales tax collected and owed to the State could be 'due to other governments'."}
+    {"severity": "error", "path": "receipts[7].category", "page": 7,
+     "extracted": "charges for services/fees", "on_page": "Sales 212,793 (Water/Sewer/Trash enterprise funds)",
+     "issue": "Utility fund sales (water, sewer, trash) fall under the user's Utility Charges receipt category (2026-10-28), not charges for services/fees. user_rules.py won't catch this because receipts carry no fund field."},
+    {"severity": "warning", "path": "receipts[3].category", "page": 11,
+     "extracted": "charges for services/fees", "on_page": "Charges for services 625 (p5) = Licenses and permits 625 in the p11 General Fund schedule",
+     "issue": "The fund schedule shows this line is licenses and permits, and detail[3] uses licenses and permits. The same money is in two categories."},
+    {"severity": "warning", "path": "detail[2].category", "page": 11,
+     "extracted": "intergovernmental/state aid", "on_page": "Rural fire 13,890 (under Intergovernmental revenue)",
+     "issue": "The extractor rules list rural fire contracts under charges for services/fees. The page prints it under intergovernmental, so this is a judgment call. The same money is inside receipts[2] Intergovernmental 107,623."},
+    {"severity": "warning", "path": "disbursements[9].function", "page": 7,
+     "extracted": null, "on_page": "Utilities 11,350 (proprietary operating expenses)",
+     "issue": "This is a business-type cost-type line kept in category utilities, but it has no function: \"utilities\" field, unlike the other cost-type lines."}
   ]
 }

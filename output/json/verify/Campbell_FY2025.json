@@ -1,62 +1,21 @@
 {
   "stem": "Campbell_FY2025",
-  "values_checked": 69,
+  "values_checked": 118,
   "issues": [
-    {
-      "severity": "warning",
-      "path": "detail[19].fund_type",
-      "page": 7,
-      "extracted": "governmental",
-      "on_page": "DISBURSEMENTS Transfers 14,500 (the transfer out comes from the enterprise funds: business-type TRANSFERS (14,500) on p2 and p6; governmental funds only receive transfers, +14,500 on p4)",
-      "issue": "[fixed: fund_type now business-type] the -14,500 transfer out belongs to the business-type funds, but it is tagged governmental. That leaves the governmental detail with both +14,500 and -14,500 and no business-type transfer"
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[2].split_from",
-      "page": 7,
-      "extracted": "Intergovernmental 92,111 (p4) split into Highway allocation 59,743, Municipal equalization 17,637, Motor vehicle fees 3,965, Other intergovernmental 10,766",
-      "on_page": "p4 prints only Intergovernmental 92,111 (General 10,766, Street 81,345); p7 budget schedule prints the four component lines",
-      "issue": "the split adds up exactly (92,111) and p2 confirms 10,766 + 81,345. But the components come from the all-fund budget schedule, not a breakdown printed for that line, so the user should confirm the split is allowed. Applies to receipts[2]-[5]; receipts[4] moves 3,965 out of Intergovernmental into motor vehicle tax"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[11].fund_type",
-      "page": 7,
-      "extracted": "governmental (3,448)",
-      "on_page": "Interest 3,448 = governmental 2,391 + business-type 1,057 (p2, p6)",
-      "issue": "one printed line mixes both fund types and is tagged governmental. The split is printed on p2, so it could be split. Already marked review"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[18].category",
-      "page": 7,
-      "extracted": "debt service interest",
-      "on_page": "Debt service 3,206",
-      "issue": "the label doesn't say whether this is principal or interest (water debt: p6 shows interest 10,065 and principal 13,271). The category is a guess. Already marked review"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[0].detail_category",
-      "page": 7,
-      "extracted": "other utility charges",
-      "on_page": "Utility charges for services 423,515 (Light 248,364, Water 98,014, Sewer 21,915, Garbage 55,222 per p2/p6)",
-      "issue": "combined line covering several utilities; electric is the largest part (59%), so 'electric charges' plus a review note would follow the mixed-line rule"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[13].amount",
-      "page": 7,
-      "extracted": 10079,
-      "on_page": "Miscellaneous 10,079 (p7) vs Other 10,080 (p4, p2)",
-      "issue": "the report itself has a $1 rounding difference between the two schedules; recorded as printed"
-    },
-    {
-      "severity": "warning",
-      "path": "business_type.beginning",
-      "page": 6,
-      "extracted": 92769,
-      "on_page": "92,769 (p6); 92,770 with change in net position 24,639 on p2",
-      "issue": "the report itself has a $1 rounding difference between p2 and p6 (also Light operating income 14,288 on p6 vs 14,287 on p2). p6 adds up as printed. Explained in notes but not entered in report_discrepancies"
-    }
+    {"severity": "error", "path": "receipts[12].category", "page": 6,
+     "extracted": "charges for services/fees", "on_page": "Charges for services 423,515 (Light, Sewer, Water, Water and Sewer Sinking, Garbage funds)",
+     "issue": "Utility fund sales are category Utility Charges under the user's 2026-10-28 rule (out of charges for services); the report's own detail lines for the same row already use Utility Charges, so receipts and detail disagree"},
+    {"severity": "warning", "path": "receipts[2].split_from", "page": 7,
+     "extracted": "Intergovernmental 92,111 split into highway allocation 59,743 / municipal equalization 17,637 / motor vehicle fees 3,965 / other intergovernmental 10,766", "on_page": "p4 prints one Intergovernmental line (General 10,766, Street 81,345); p7 all-fund budget schedule prints the four lines",
+     "issue": "Split is taken from the all-fund budgetary schedule rather than a breakdown of the statement line itself; arithmetic ties (sum 92,111, and 10,766 equals the p2 general-revenue Intergovernmental) so defensible, but confirm"},
+    {"severity": "warning", "path": "disbursements[5].category", "page": 6,
+     "extracted": "Repairs and Maintenance", "on_page": "Operation and maintenance 97,932 (incl. Garbage Fund 46,322, the whole garbage operation)",
+     "issue": "'Operation and maintenance' is a general operating line, not specifically repairs; Garbage 46,322 is probably hauling contract. Could be utilities/other; same for detail[27]-[30]"},
+    {"severity": "warning", "path": "disbursements[7].original_label", "page": 6,
+     "extracted": "Capital outlay", "on_page": "Capital outlay 35,443 (Water Fund)",
+     "issue": "User rule labels every capital outlay line 'Capital Outlay: <function>' with printed text in printed_label; not relabelled here or in detail[32]"},
+    {"severity": "warning", "path": "business_type.beginning", "page": 2,
+     "extracted": 92769, "on_page": "p6 92,769; p2 92,770 (change 24,640 on p6 vs 24,639 on p2)",
+     "issue": "Rounding difference printed in the report itself between the proprietary statement and the statement of activities; noted in notes but not in report_discrepancies"}
   ]
 }

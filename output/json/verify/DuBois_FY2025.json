@@ -2,53 +2,14 @@
   "stem": "DuBois_FY2025",
   "values_checked": 40,
   "issues": [
-    {
-      "severity": "error",
-      "path": "receipts[4].amount",
-      "page": 1,
-      "extracted": 13983.6,
-      "on_page": 13963.6,
-      "issue": "[fixed] State Receipts: Other is printed 13,963.60 in both the General Fund and Total columns (third digit 6, not 8). With 13,963.60 the General Fund column adds exactly: 16,187.53 + 38.61 + 30,646.06 + 15,629.10 + 13,963.60 + 1,369.20 + 2,896.98 + 46,577.51 + 16,160.69 = 143,469.28 (printed line 21). The Total column also reconciles: 143,469.28 + 25,497.97 + 66,062.67 = 235,029.92. This is the source of the 20.00 gap, and with the fix the governmental roll-forward ends at 129,086.87 as printed."
-    },
-    {
-      "severity": "error",
-      "path": "report_discrepancies[0]",
-      "page": 1,
-      "extracted": -20.0,
-      "on_page": 0,
-      "issue": "[fixed] The page itself adds up. The 20.00 gap was caused by misreading receipts[4] (13,983.60 vs printed 13,963.60), so this report_discrepancies entry is wrong and should be removed."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[7].review",
-      "page": 1,
-      "extracted": "unlabeled 'Other'; digits hard to read, parts exceed implied total by 20.00",
-      "on_page": 46577.51,
-      "issue": "46,577.51 is read correctly; the 'digits hard to read / exceed by 20.00' part of the review note is out of date (the misread was on State Receipts: Other). The 'Other' category itself is a defensible last resort."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[8].category",
-      "page": 1,
-      "extracted": "charges for services/fees",
-      "on_page": "Local Receipts: Other (Enterprise Funds) 66,062.67",
-      "issue": "Assumed to be utility charges; the page doesn't say so."
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[6]",
-      "page": 3,
-      "extracted": "governmental utilities (Wastewater 3,719.98; Water 21,068.86 General Fund; Water 10,866.11 Capital Projects)",
-      "on_page": "printed in General Fund / Capital Projects columns",
-      "issue": "Kept governmental by column, as the rules say; 35,654.95 of utility spending sits in governmental funds. A judgment call, already marked review."
-    },
-    {
-      "severity": "warning",
-      "path": "missing",
-      "page": 1,
-      "extracted": null,
-      "on_page": "County Treasurer Balance at October 1, 2024 981.05 (could also be read 961.05); at September 30, 2025 602.96",
-      "issue": "County Treasurer balances printed below the statement aren't recorded (they're informational and not part of line 24/28 balances)."
-    }
+    {"severity": "error", "path": "reported_totals.business-type.disbursements.includes", "page": 3,
+     "extracted": [], "on_page": "Line 52 Enterprise Funds 64,157.84 = Solid Waste 11,856.00 + Wastewater 3,027.38 + Water 25,443.70 + line 50 transfers out 23,830.76",
+     "issue": "The printed total includes the 23,830.76 of transfers out, but `includes` is empty. The rules require [\"transfers_net\"]. The non-standard `includes_split` field won't be read. As recorded, the business-type disbursement lines (40,327.08) don't tie to the reported total (64,157.84)."},
+    {"severity": "warning", "path": "receipts[8].category", "page": 1,
+     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other, Enterprise Funds 66,062.67",
+     "issue": "Printed label is only 'Other'. Treating it as utility charges is an assumption (it is marked review). If it is treated as utility charges, the user's 2026-10-28 rule uses the category Utility Charges."},
+    {"severity": "warning", "path": "disbursements[6]", "page": 3,
+     "extracted": "governmental utilities 3,719.98 / 21,068.86 / 10,866.11", "on_page": "Wastewater and Water lines (Business-Type Activities section) in the General Fund and Capital Projects Fund columns",
+     "issue": "Utility function spending printed in governmental fund columns is kept governmental by column. This is defensible, but it puts 35,654.95 of water/sewer spending in governmental funds. It is already marked review."}
   ]
 }

@@ -1,13 +1,24 @@
 {
   "stem": "Snyder_FY2025",
-  "values_checked": 237,
+  "values_checked": 252,
   "issues": [
-    {"severity": "warning", "path": "beginning_cash", "page": 3, "extracted": 335782, "on_page": "2024 total fund balances 335,783 (p3, p4 2024 column) vs 2025 beginning 335,782 (p4)", "issue": "report's own $1 rounding difference between prior-year ending and current-year beginning fund balance; not recorded in report_discrepancies"},
-    {"severity": "warning", "path": "ending_cash", "page": 3, "extracted": 407637, "on_page": "Cash 358,070 + Investments 26,867 + Due from other governments 22,700 = 407,637", "issue": "governmental 'cash' balances are total fund balances, which include separately reported investments and a 22,700 receivable; ending_investments left null. Defensible (it is the roll-forward measure) but not pure cash"},
-    {"severity": "warning", "path": "receipts[4].category", "page": 4, "extracted": "donations/contributions", "on_page": "Grants 11,329 (Fire Fund 'Grants/Donations' p13; shown as operating grants and contributions under Public safety p2)", "issue": "source not stated; could be a government grant (intergovernmental/federal grants). Same for detail[34] Fire 'Grants/Donations'"},
-    {"severity": "warning", "path": "detail[13].detail_category", "page": 10, "extracted": "highway allocation", "on_page": "Intergovernmental 53,916 (Street Fund)", "issue": "assumed highway allocation; page does not say (extractor marked review)"},
-    {"severity": "warning", "path": "detail[48].detail_category", "page": 15, "extracted": "professional/contract services", "on_page": "Contractual and professional services 15,619 (Police Fund)", "issue": "Police fund contractual services with only 452 personal services is likely a sheriff/law enforcement contract; could be 'law enforcement contract'"},
-    {"severity": "warning", "path": "detail[59].detail_category", "page": 17, "extracted": "professional/contract services", "on_page": "Contractual and professional services 613,996 (Light Fund, 77% of electric revenue)", "issue": "for an electric utility this is most likely wholesale power; could be 'purchased power/cost of sales'"},
-    {"severity": "warning", "path": "detail[10].detail_category", "page": 9, "extracted": "equipment purchases", "on_page": "Capital outlay 46,500 (General Fund)", "issue": "capital outlay object assumed equipment purchases; page does not say (proprietary cash flow p7 does say 'Acquisition of equipment' for the utility funds)"}
+    {"severity": "error", "path": "receipts[6].category", "page": 6,
+     "extracted": "charges for services/fees", "on_page": "Charges for services 934,542 (Light, Water and Other Enterprise funds: electric, water, sewer, landfill)",
+     "issue": "business-type utility fund sales belong in the user's Utility Charges receipt category (out of charges for services), as the Light/Water/Sewer detail lines already are"},
+    {"severity": "error", "path": "detail[80].category", "page": 20,
+     "extracted": "charges for services/fees", "on_page": "Landfill Fund - Charges for services 38,780",
+     "issue": "landfill/refuse charges are Utility Charges (incl. garbage/refuse) under the user rules; inconsistent with the Light/Water/Sewer charges lines"},
+    {"severity": "warning", "path": "detail[84].category", "page": 21,
+     "extracted": "charges for services/fees", "on_page": "Meter Deposit Fund - Charges for services 1,343",
+     "issue": "utility meter deposit fund charges; arguably Utility Charges like the other utility funds"},
+    {"severity": "warning", "path": "receipts[4].category", "page": 4,
+     "extracted": "donations/contributions", "on_page": "Grants 11,329 (Fire Fund 'Grants/Donations', p13; p2 shows it as public safety operating grants and contributions)",
+     "issue": "grant vs donation unclear; already in decision_needed"},
+    {"severity": "warning", "path": "detail[10].original_label", "page": 9,
+     "extracted": "Capital outlay", "on_page": "Capital outlay 46,500 (General Fund)",
+     "issue": "capital outlay lines (detail[10], [20], [31], [37], [62], [70], [79]) not relabelled 'Capital Outlay: <function>' with printed_label per the user rule; user_rules.py should apply it"},
+    {"severity": "warning", "path": "detail[13].detail_category", "page": 10,
+     "extracted": "highway allocation", "on_page": "Street Fund Intergovernmental 53,916",
+     "issue": "assumed highway allocation (not labelled); review note present"}
   ]
 }

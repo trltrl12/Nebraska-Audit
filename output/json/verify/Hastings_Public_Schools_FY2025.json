@@ -1,12 +1,24 @@
 {
   "stem": "Hastings_Public_Schools_FY2025",
-  "values_checked": 476,
+  "values_checked": 410,
   "issues": [
-    {"severity": "warning", "path": "detail[310].detail_category", "page": 18,
-     "extracted": "student activity receipts", "on_page": "Student Fines 19,305 (Student Fee Fund, Senior High)",
-     "issue": "Label says fines. 'fines and forfeitures' is arguably a better fit, though student fee fund receipts are defensibly student activity receipts."},
-    {"severity": "warning", "path": "missing", "page": 12,
-     "extracted": null, "on_page": "Cooperative Fund 3300 Community service: budget 600,000, actual - (zero)",
-     "issue": "A zero-actual line was left out of detail (the notes say so), so its 600,000 final budget is not captured. No money is missing from actuals."}
+    {"severity": "warning", "path": "receipts[20].category", "page": 7,
+     "extracted": "charges for services/fees", "on_page": "Nutrition sales 580,513",
+     "issue": "the user rules (2026-10-28) make lunch/nutrition sales their own category, School Lunch Sales. scripts/user_rules.py should reassign it"},
+    {"severity": "warning", "path": "receipts[16].category", "page": 8,
+     "extracted": "charges for services/fees", "on_page": "1910 Rental of facilities 5,552",
+     "issue": "under the user rules rental lines are category Rentals (the detail line has detail_category rentals but category charges for services/fees)"},
+    {"severity": "warning", "path": "detail[305..312].category", "page": 18,
+     "extracted": "charges for services/fees", "on_page": "Student Fee Fund: Voc Arts - Industrial Technology 68,610; Art 2,360; Family/Consumer/Science 222; Auto Tech 261; Building Trades 33,782; Student Fines 19,305; Computer Fees 17,891",
+     "issue": "these Student Fee Fund receipts are entered under charges for services, but the user rule says student fees go to Extracurricular Receipts (Activity Tickets and Activity Admin in the same fund were entered that way). Student Fines could also be Fines and Licenses. The p13 statement counts all of the fund's 188,813 as Extracurricular receipts"},
+    {"severity": "warning", "path": "detail[195].category", "page": 15,
+     "extracted": "charges for services/fees", "on_page": "Sales Tax/Interest 592 (Activity Fund account)",
+     "issue": "this Activity Fund account receipt is entered under charges for services, while every other activity account is under Extracurricular Receipts. The label suggests interest"},
+    {"severity": "warning", "path": "detail[13].original_label", "page": 8,
+     "extracted": "Fines and licenses (2110)", "on_page": "Fines and licenses",
+     "issue": "the extractor added the function code to the label; the printed label is 'Fines and licenses'"},
+    {"severity": "warning", "path": "disbursements[14].category", "page": 6,
+     "extracted": "Instruction", "on_page": "Categorical programs 648,055",
+     "issue": "the General Fund schedule (p9) prints this line as 3400 Categorical programs 497,006 plus 3500 State categorical programs 151,049. The 151,049 part could be State Categorical Programs (judgment call)"}
   ]
 }

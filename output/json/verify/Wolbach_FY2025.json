@@ -1,12 +1,21 @@
 {
   "stem": "Wolbach_FY2025",
-  "values_checked": 48,
+  "values_checked": 50,
   "issues": [
+    {"severity": "warning", "path": "receipts[14].category", "page": 1,
+     "extracted": "charges for services/fees", "on_page": "Line 18 Local Receipts: Other 52,409.00 (Enterprise - Wastewater column)",
+     "issue": "the line is printed only as 'Other'. Treating it as utility charges is an assumption (it is marked review). Under the user's 2026-10-28 rules, utility fund charges fall under Utility Charges, not charges for services/fees"},
+    {"severity": "warning", "path": "receipts[15].category", "page": 2,
+     "extracted": "charges for services/fees", "on_page": "Line 18 Local Receipts: Other 40,429.00 (Enterprise - Water column)",
+     "issue": "same as the Wastewater line: the category is assumed from an 'Other' line, and the user's rules would use Utility Charges"},
+    {"severity": "warning", "path": "receipts[10]", "page": 1,
+     "extracted": "Local Receipts: Other (General Fund) 130,178 (and the per-column items receipts[11]-[15])", "on_page": "Line 18 Local Receipts: Other, Total 231,104.00 split across 6 fund columns",
+     "issue": "row 18 mixes governmental and utility columns and was split by column. Each column amount is printed, but the items carry no split_from naming the 231,104 total row, which the column-split rule asks for. The General Fund's 130,178 is 31% of governmental receipts and is not explained anywhere in the trimmed pages"},
     {"severity": "warning", "path": "disbursements[6].fund_type", "page": 3,
      "extracted": "governmental", "on_page": "Line 45 Solid Waste 26,300.00 (General Fund column, under Business-Type Activities heading)",
-     "issue": "the form prints this under Business-Type Activities, but it is paid from the General Fund column; keeping it governmental keeps the General Fund roll-forward intact (the extractor marked it review). Someone should confirm the treatment"},
+     "issue": "the form prints this under Business-Type Activities, but it is paid from the General Fund column. Keeping it governmental keeps the General Fund roll-forward intact (marked review). A person should confirm this treatment"},
     {"severity": "warning", "path": "receipts[12].category", "page": 1,
      "extracted": "keno/lottery", "on_page": "Line 18 Local Receipts: Other 2,639.00 (Special Revenue - Keno column)",
-     "issue": "the category is assumed from the fund name; the line itself just says 'Other' (marked review)"}
+     "issue": "the category is assumed from the fund name; the line itself says only 'Other' (marked review)"}
   ]
 }

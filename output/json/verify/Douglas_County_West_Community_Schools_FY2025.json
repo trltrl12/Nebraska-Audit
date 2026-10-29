@@ -1,25 +1,15 @@
 {
   "stem": "Douglas_County_West_Community_Schools_FY2025",
-  "values_checked": 181,
+  "values_checked": 248,
   "issues": [
-    {"severity": "error", "path": "missing", "page": 8,
-     "extracted": "General Fund detail expenditures recorded as printed (16,762,964) with no contra line and no transfer-out; Depreciation detail[90] records +300,000 transfer in",
-     "on_page": "General Fund schedule total disbursements 16,762,964 (p8) include the 300,000 transfer to the Depreciation Fund: statement p4 General Fund column (General + Depreciation) disbursements 16,703,680 = 16,762,964 + 240,716 - 300,000; Depreciation p10 '5200 Transfers incoming 300,000'. Statement vs schedule differences: Instructional services 10,050,471 vs 10,072,971 (-22,500), Operations and maintenance 1,876,630 vs 1,913,414 (-36,784)",
-     "issue": "[fixed] The same 300,000 is in detail as General Fund spending and as a Depreciation transfer in. The extractor rule for transfers hidden in school-district spending lines requires a negative contra expenditure line (split_from naming the groups, review) and an other financing -300,000 line for the General Fund. Neither was added; the notes describe the gap but the detail double counts it."},
-    {"severity": "warning", "path": "receipts[0].category", "page": 5,
-     "extracted": "property tax, 11,812,750", "on_page": "Local receipts 11,812,750",
-     "issue": "Broad group recorded with its dominant category plus review, which the rules allow. But the fund schedules print the full breakdown and it reconciles exactly: GF 8,627,217 (p6) + Special Building 1,642,934 (p11, excluding interest 13,054) + School Nutrition 313 (p12) + Bond 1,176,086 (p13, including interest 33,568) + QCPU 366,200 (p14) = 11,812,750. It holds about 2.15M that is not property tax (motor vehicle tax 1,521,318, donations 470,686, tuition, Bond interest 33,568, etc.). Because Bond interest sits in this line, receipts[5] Interest 112,887 also understates investment income."},
-    {"severity": "warning", "path": "detail[12].detail_category", "page": 6,
-     "extracted": "county/other local governments", "on_page": "2110 County fines and license fees 23,375",
-     "issue": "Defensible because the money comes from the county, but it could be fines and forfeitures."},
+    {"severity": "warning", "path": "disbursements[1].category", "page": 5,
+     "extracted": "support services 3,661,429", "on_page": "Support services: General 3,369,377 (p4) + Other Governmental Funds 292,052 (p5) = 3,661,429",
+     "issue": "292,052 of the line is Activities (278,857, p15) + Student Fee (13,195, p16) spending, which the page prints as a separate fund column; student activities would fit that part (Doniphan-Trumbull and Dorchester PS split the same situation). Kept as printed; judgment call"},
+    {"severity": "warning", "path": "detail[88].category", "page": 8,
+     "extracted": "Building and Grounds (-300,000 contra)", "on_page": "statement p4 vs schedules: Instructional services -22,500, Operations and maintenance -36,784, and the Depreciation Fund's 2900 spending 240,716 (p10) does not appear as its own line on p4",
+     "issue": "putting the whole 300,000 transfer contra in Building and Grounds makes the detail function totals differ from the statement (Building and Grounds 1,613,414 vs 1,876,630 printed; Business carries 240,716 that the statement folds into other lines). Arithmetic is right and marked review; the function split is an assumption"},
     {"severity": "warning", "path": "detail[32].category", "page": 6,
-     "extracted": "federal grants / federal grants", "on_page": "4710 Grants from corporations and other private interests 0 (budget 50,000), printed under Federal receipts",
-     "issue": "The label says private, so donations/contributions fits better. Actual amount is 0."},
-    {"severity": "warning", "path": "detail[99].detail_category", "page": 11,
-     "extracted": "debt principal, 1,836,729", "on_page": "5000 Total debt service 1,836,729 (statement p4: Lease payments)",
-     "issue": "Lease payments with principal and interest not split are all recorded as principal. Same for disbursements[8] (Lease payments 1,836,729, debt service principal). Both lines already carry review."},
-    {"severity": "warning", "path": "notes", "page": 3,
-     "extracted": "Fund balance p9 total 14,092,919 agrees", "on_page": "p9 shows the General Fund balance 7,949,460; total fund balances 14,092,919 are on p3",
-     "issue": "[fixed] Wrong page reference in notes."}
+     "extracted": "federal grants", "on_page": "4710 Grants from corporations and other private interests (actual -, budget 50,000)",
+     "issue": "label is private-source grants, not federal (donations/contributions would fit); actual is 0, so no dollar effect"}
   ]
 }

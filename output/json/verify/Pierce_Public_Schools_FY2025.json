@@ -1,22 +1,15 @@
 {
   "stem": "Pierce_Public_Schools_FY2025",
-  "values_checked": 196,
+  "values_checked": 162,
   "issues": [
-    {
-      "severity": "error",
-      "path": "detail[62].budget_final",
-      "page": 10,
-      "extracted": null,
-      "on_page": 325000,
-      "issue": "[fixed] General Fund line '8000 Transfers' prints an Original and Final Budget of 325,000; recorded as null"
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[1].category",
-      "page": 3,
-      "extracted": "support services",
-      "on_page": "Student support services 981,188",
-      "issue": "Per p5 the line is General Fund 445,384 + Activities Fund 528,322 + Student Fee Fund 7,482; student activities (535,804, about 55%) is the dominant part, so under the 'pick the dominant category' rule it could be student activities (the detail records these funds as student activities). Mixed line not mentioned in notes."
-    }
+    {"severity": "warning", "path": "disbursements[1].category", "page": 3,
+     "extracted": "support services (detail_category Pupils)", "on_page": "Student support services 981,188 = General Fund 445,384 + Activities Fund 528,322 + Student Fee Fund 7,482 (General Fund Components p5)",
+     "issue": "More than half of this statement line (535,804) is Activities and Student Fee Fund spending, which detail records as 'student activities'. Labelling the whole line Pupils support services overstates support services. The mix isn't mentioned in notes."},
+    {"severity": "warning", "path": "detail[61].detail_category", "page": 6,
+     "extracted": "Depreciation & Amortization", "on_page": "Reclassifications column (300,000): transfer to the Depreciation Fund hidden in General Fund spending lines",
+     "issue": "The contra line removes a transfer to the Depreciation Fund. It is not depreciation expense, so the detail_category 'Depreciation & Amortization' (category 'other', category_decision) misdescribes it. Amount, sign and the paired -300,000 other financing line are correct, and decision_needed covers the question."},
+    {"severity": "warning", "path": "disbursements[9].category", "page": 3,
+     "extracted": "capital outlay", "on_page": "Purchased services 410,985 (Special Building 297,831 + QCPU 113,154, pp13-14)",
+     "issue": "Function guessed (already marked review). Special Building Fund purchased services may be building repairs (Building and Grounds) rather than capital outlay."}
   ]
 }

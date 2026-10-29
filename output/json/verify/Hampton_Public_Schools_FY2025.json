@@ -1,21 +1,18 @@
 {
   "stem": "Hampton_Public_Schools_FY2025",
-  "values_checked": 310,
+  "values_checked": 335,
   "issues": [
-    {"severity": "warning", "path": "receipts[7].category", "page": 6,
-     "extracted": "intergovernmental/state aid", "on_page": "County receipts 19,225.59 (= GF 2110 County fines and license fees 19,225.59, p9)",
-     "issue": "the whole line is code 2110 county fines and license fees, which the rules map to fines and forfeitures (detail[9] already uses fines and forfeitures); the same money is categorised differently in receipts and detail"},
+    {"severity": "error", "path": "receipts[9].category", "page": 6,
+     "extracted": "charges for services/fees", "on_page": "Other local receipts 238,809.63 = Other Governmental Funds 238,209.63 (Activities Fund receipts ~170,462 (Exhibit I p14, total 170,515.42) + School Nutrition sales 67,747.39 (lunch 48,091.10 + breakfast 15,963.64 + non-reimbursable 3,692.65, p15)) + General Fund 600",
+     "issue": "About 71% of the line is school activity fund receipts. Under the user's rules that is Extracurricular Receipts, and the dominant category is used (or the line is split with split_from), with the nutrition sales as School Lunch Sales. Charges for services/fees is only for genuine fees for services. The review note itself names the activity and nutrition sales."},
+    {"severity": "error", "path": "detail[201].category", "page": 15,
+     "extracted": "reimbursements/refunds", "on_page": "Sales - non-reimbursable 3,692.65 (School Nutrition Fund cash receipts)",
+     "issue": "This is meal/a-la-carte sales that federal meal reimbursement doesn't cover, not a reimbursement or refund. The category should be School Lunch Sales, matching its own detail_category 'school lunch sales' and the lunch/breakfast lines."},
     {"severity": "warning", "path": "detail[7].detail_category", "page": 9,
      "extracted": "other charges for services", "on_page": "1955 Postsecondary receipts 590.00",
-     "issue": "postsecondary (dual-credit) receipts could be tuition and fees; judgment call"},
-    {"severity": "warning", "path": "detail[199-218].fund_type", "page": 15,
-     "extracted": "governmental", "on_page": "School Nutrition Fund (reported in Other Governmental Funds, Exhibits C/D)",
-     "issue": "the extractor rules list school nutrition among business-type funds, but this report puts it in its governmental funds totals with no proprietary statement; keeping it governmental is defensible and keeps the ties, but a person may want to confirm"},
-    {"severity": "warning", "path": "detail[158].original_label", "page": 11,
-     "extracted": "8000 Transfers (to School Nutrition Fund)", "on_page": "8000 Transfers",
-     "issue": "label has text added that isn't printed (the recipient comes from Exhibit N p25); amount -45,000 and budget -106,997 are correct"},
-    {"severity": "warning", "path": "detail[157]", "page": 7,
-     "extracted": -100000, "on_page": "Exhibit F Reclassifications (100,000.00) on Student transportation - reg; Exhibit N p24 Vehicle Operation Capital Assets 100,000.00",
-     "issue": "hidden-transfer contra line is filed under schedule 'Exhibit G' but cited to p7 (Exhibit F), and its label is made up; the treatment (contra -100,000 plus other financing -100,000, Depreciation Fund receives 100,000 p13) is correct and the GF detail still ties to 3,780,888.76"}
+     "issue": "The category is Tuition Received, but detail_category is 'other charges for services'. 'tuition and fees' matches the category better."},
+    {"severity": "warning", "path": "detail[163].original_label", "page": 14,
+     "extracted": "Art receipts (and '<account> receipts' / '<account> disbursements' for detail[163]-[198])", "on_page": "Art (row) under the Receipts / Disbursements columns",
+     "issue": "The labels add 'receipts'/'disbursements' to the printed account name, which the page doesn't print. All amounts are correct and tie to 170,515.42 / 150,811.52."}
   ]
 }

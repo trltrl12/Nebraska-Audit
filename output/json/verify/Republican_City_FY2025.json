@@ -1,38 +1,15 @@
 {
   "stem": "Republican_City_FY2025",
-  "values_checked": 58,
+  "values_checked": 93,
   "issues": [
-    {
-      "severity": "warning",
-      "path": "detail[2].category",
-      "page": 8,
-      "extracted": "other",
-      "on_page": "Local 321,514",
-      "issue": "line is explained (sales tax 45,623 + franchise 57,200 + misc 6,445 + interest 12,683 + donations 27,763 + insurance 20,424 + utility receipts 151,376 = 321,514); the mixed-line rule calls for the dominant category (charges for services/fees, about 47%) with review rather than other. The line also mixes fund types (about 151,376 business-type) but is recorded governmental"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[0].detail_category",
-      "page": 8,
-      "extracted": "taxes (unlabeled)",
-      "on_page": "Taxes 62,367",
-      "issue": "amount equals Property taxes 62,367 (p5; sales tax is inside Local), and category is already property tax; detail_category property tax would be consistent"
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[12].outside_printed_total",
-      "page": 7,
-      "extracted": true,
-      "on_page": "Debt principal payments (24,297), Debt interest payments (34,328) within TOTAL NON-OPERATING RECEIPTS (DISBURSEMENTS)",
-      "issue": "[fixed 2026-10-22: removed outside_printed_total from the debt principal/interest lines; they are inside the printed non-operating total] disbursements[12] and [13] are flagged outside_printed_total but reported_totals.business-type.disbursements (137,037, computed) includes them; nonoperating receipts (interest 2,145, misc 1,483) are treated the opposite way. Flags are inconsistent with the computed totals"
-    },
-    {
-      "severity": "warning",
-      "path": "other_financing",
-      "page": 5,
-      "extracted": 20424,
-      "on_page": "Insurance proceeds 20,424 (General column; Total column prints 0); also printed 20,424 under governmental general receipts on p3",
-      "issue": "category rules list insurance proceeds under reimbursements/refunds; recording as other_financing follows the fund statement's OFS placement and is defensible. The amount is printed as-is in the governmental column on p3, which could be cited instead of computed"
-    }
+    {"severity": "warning", "path": "receipts[7].category", "page": 7,
+     "extracted": "charges for services/fees", "on_page": "Utility Fund: Fees and services 145,483 (also receipts[8] Water deposits and late fees 2,265)",
+     "issue": "Utility fund sales/charges go to Utility Charges under the user's rules (2026-10-28), and the detail lines for the same amounts (detail[18], detail[19]) already use Utility Charges; the statement lines keep charges for services/fees."},
+    {"severity": "warning", "path": "other_financing", "page": 5,
+     "extracted": 20424, "on_page": "Insurance proceeds: General 20,424, Total Governmental Funds column 0; total other financing (4,000)",
+     "issue": "Value taken from the General Fund column because the Total column prints 0 (the report's own roll-forward needs 20,424); correctly marked computed and recorded in report_discrepancies. Noted for review."},
+    {"severity": "warning", "path": "notes", "page": 8,
+     "extracted": "'Read pages 1-8 of 8.' appears mid-notes, followed by further text", "on_page": "8 pages",
+     "issue": "Notes do not end with 'Read pages 1-N of N'; page count (8) is correct and every page's lines are in the JSON."}
   ]
 }

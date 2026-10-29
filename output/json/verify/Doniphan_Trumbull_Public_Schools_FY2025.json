@@ -1,33 +1,9 @@
 {
   "stem": "Doniphan_Trumbull_Public_Schools_FY2025",
-  "values_checked": 224,
+  "values_checked": 362,
   "issues": [
-    {"severity": "error", "path": "reported_totals.governmental.disbursements", "page": 5,
-     "extracted": 10018236, "on_page": "Total Governmental Funds disbursement lines add to 10,018,234; printed Total disbursements 10,018,236 (also 10,018,236 on p1)",
-     "issue": "[fixed] The printed statement does not add up (the lines are 2 short of the printed total; the General Fund column is also 1 short: lines 8,864,256 vs printed 8,864,257). Every disbursement line matches the page, but this is not recorded in report_discrepancies, so the governmental roll-forward from the JSON items is off by 2 (7,779,408 + 10,127,544 + 589 - 10,018,234 = 7,889,307 vs ending 7,889,305). Add a report_discrepancies entry (check totals, difference 2, p5)."},
-    {"severity": "warning", "path": "balance_sheet.equity[2].original_label", "page": 3,
-     "extracted": "Restricted", "on_page": "Restricted 4,553,713",
-     "issue": "The label is printed as shown, but per the fund balance detail on p6 this amount is School Nutrition restricted 167,530 + committed 57,805 + 1,192 + assigned 48,390 + 63,770 + unassigned 4,215,026. It is probably a misprint for Unrestricted, so the user should know the label is misleading."},
-    {"severity": "warning", "path": "detail[36].computed", "page": 7,
-     "extracted": "printed 845,230 (p11) less 120,000 transfer to Depreciation Fund reclassified on p8", "on_page": "Reclassification (120,000) on Operation and maintenance of plant is on trimmed p7 (report p25)",
-     "issue": "The split itself is right (845,230 - 120,000 = 725,230, matching the Total column on p7 and the statement on p5), but the page reference is wrong: the reclassification is on trimmed p7, not p8. detail_totals[1].computed also cites p8."},
-    {"severity": "warning", "path": "disbursements[3].original_label", "page": 5,
-     "extracted": "Support services - students (Other Governmental Funds column = Activities Fund)", "on_page": "Support services - students",
-     "issue": "The label has extractor annotation added. The split by fund column (928,746 / 367,659) is printed on p5 and is correct."},
-    {"severity": "warning", "path": "detail[9].category", "page": 10,
-     "extracted": "intergovernmental/state aid / county/other local governments", "on_page": "2110 County fines and license fees 29,491",
-     "issue": "These are county-distributed fines and license fees. Arguably fines and forfeitures, though county/other local governments is defensible. receipts[10] 'County receipts' has the same question."},
-    {"severity": "warning", "path": "detail[40].category", "page": 12,
-     "extracted": "instruction", "on_page": "3535 Books and periodicals 181,140",
-     "issue": "The basic statement on p5 counts this inside Support services - instruction (375,832 = 194,692 + 181,140), so the function would be support services to stay consistent with the statement."},
-    {"severity": "warning", "path": "detail[67].category", "page": 16,
-     "extracted": "capital outlay", "on_page": "Operation and maintenance 63,433 (Special Building Fund)",
-     "issue": "The label says operation and maintenance, but the statement on p5 shows this 63,433 as Facilities acquisitions and construction, so capital outlay is defensible. Judgment call."},
-    {"severity": "warning", "path": "notes", "page": 4,
-     "extracted": "School Nutrition treated as governmental", "on_page": "School Nutrition Fund is a column of Other Governmental Funds",
-     "issue": "The extractor rules list school nutrition as a business-type example. This report presents it as a governmental (special revenue) fund, and the extractor followed the report. Defensible, but the user should know."},
-    {"severity": "warning", "path": "detail[41].amount", "page": 12,
-     "extracted": 211954, "on_page": "6000 Federal programs 211,954 + 6998 ESSER III 23 = 211,977 vs Federal programs 211,976 on p5/p8",
-     "issue": "This is a 1-dollar rounding difference between schedules in the report itself. It is mentioned in notes but not in report_discrepancies."}
+    {"severity": "warning", "path": "receipts[8].category", "page": 4,
+     "extracted": "charges for services/fees", "on_page": "Fees 9,328 (General Fund code 1740 Fees, p10)",
+     "issue": "school code 1740 'Fees' is usually student fees; under the user's 2026-10-28 rule student fees go to Extracurricular Receipts. Same for detail[7] (1740 Fees, detail_category other charges for services). Judgment call."}
   ]
 }

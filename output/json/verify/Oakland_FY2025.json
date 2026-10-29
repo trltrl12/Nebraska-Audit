@@ -1,70 +1,27 @@
 {
   "stem": "Oakland_FY2025",
-  "values_checked": 137,
+  "values_checked": 140,
   "issues": [
-    {
-      "severity": "error",
-      "path": "report_discrepancies",
-      "page": 8,
-      "extracted": "no entry for the p8 General Fund schedule",
-      "on_page": "General government 189,719 + Streets 412,398 + Public safety 510,341 + Culture and recreation 457,542 + Keno 3,799 + Public buildings 52,258 = 1,626,057 vs printed Total disbursements 1,626,056",
-      "issue": "[fixed] The p8 budget schedule itself doesn't add up: its expenditure lines come to 1 more than the printed total (detail_totals[1] = 1,626,056). The detail items are read correctly, but this needs a 'detail' entry with difference -1 in report_discrepancies. The p4 entry only covers the statement's Total column."
-    },
-    {
-      "severity": "warning",
-      "path": "report_discrepancies[0]",
-      "page": 4,
-      "extracted": 2,
-      "on_page": "175,141 + 1,934,412 - 1,791,425 = 318,128 using the printed totals",
-      "issue": "Confirmed this is rounding in the report, not a misread. Every line matches p4. The 2 comes from (a) the Total column's Interest income of 5,415 against the fund columns' 4,915 + 501 = 5,416, which leaves the receipt lines 1 short of the printed 1,934,412, and (b) the General column's disbursement lines summing to 1,626,057 against a printed 1,626,056, which leaves the disbursement lines 1 over the printed 1,791,425. The page has other rounding slips too: the printed excess of 142,988 should be 142,987, and the General excess of 130,620 should be 130,619. The entry is correct as recorded."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[3].category",
-      "page": 8,
-      "extracted": "intergovernmental/state aid (307,800, one line)",
-      "on_page": "Intergovernmental breakdown p8: highway allocation 205,321, homestead 32,883, Motor vehicle tax 37,216, Motor vehicle fees 13,616, MV pro-rate (1,190), In lieu of taxes 19,954",
-      "issue": "p8 prints the full breakdown of this General Fund line, and it includes 50,832 of motor vehicle tax/fees and 19,954 in-lieu tax. It could be split with split_from, the way Taxes was. If it stays as one line, it needs a review note naming the mix, and as it stands it doesn't match the detail categories."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[9].category",
-      "page": 4,
-      "extracted": "donations/contributions",
-      "on_page": "Grants and donations 78,398 (p2: Operating Grants and Contributions; p8: Library 2,685 + Grants and donations 75,713)",
-      "issue": "The source isn't stated, so some of this may be government grants (state/federal) rather than private donations. Judgment call."
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[8].category",
-      "page": 4,
-      "extracted": "debt service principal (79,224)",
-      "on_page": "p9 Bond Fund: Debt service 66,250, Interest 10,479, Bond Fees 880, County commissions 1,615",
-      "issue": "p9 prints this line's breakdown, so it could be split into principal 66,250 and interest/fees with split_from. As recorded, 12,974 of interest, fees and commissions is counted as principal (a review flag is present)."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[32].category",
-      "page": 9,
-      "extracted": "debt service interest / tax refunds/treasurer fees",
-      "on_page": "County commissions 1,615",
-      "issue": "County treasurer commissions on tax collections aren't debt interest; the function may be general government. Judgment call."
-    },
-    {
-      "severity": "warning",
-      "path": "balance_sheet.liabilities[3].category",
-      "page": 1,
-      "extracted": "debt - due in more than one year (Line of credit 845,164)",
-      "on_page": "p5 lists the business-type Line of credit 711,164 under CURRENT LIABILITIES, with current portions of bonds 80,400 and notes 94,141",
-      "issue": "The government-wide Total column doesn't split debt, so the default is defensible, but the report shows most of the line of credit as current."
-    },
-    {
-      "severity": "warning",
-      "path": "business_type.transfers_net",
-      "page": 6,
-      "extracted": -112817,
-      "on_page": "p6 Transfers to other funds (228,233); p7 cash flow and p10 budgetary schedule show only Transfer from other funds 115,416, with no 228,233 outflow",
-      "issue": "The utility funds' 228,233 transfer out matches the General Fund's transfers in, but it doesn't appear in the proprietary cash flow or the budget schedule. It may be a non-cash transfer settled through due to/from general (310,746). It is recorded correctly as a transfer, not as spending. A person may want to confirm it alongside the existing decision_needed entry on the 29,271 mismatch."
-    }
+    {"severity": "warning", "path": "receipts[12].category", "page": 4,
+     "extracted": "charges for services/fees", "on_page": "NPPD lease 169,396 (p8 'NPPD quarterly lease')",
+     "issue": "This is a lease receipt, and detail[12] already has detail_category rentals. The user's 2026-10-28 Rentals receipt category seems to fit better than charges for services/fees."},
+    {"severity": "warning", "path": "receipts[10].category", "page": 4,
+     "extracted": "charges for services/fees", "on_page": "Charges for services 18,287 (p2: Pool charges for services 18,287)",
+     "issue": "These are pool charges (detail[10] has recreation/pool/park fees). The user's Recreation Fees category may apply."},
+    {"severity": "warning", "path": "receipts[14].category", "page": 4,
+     "extracted": "donations/contributions", "on_page": "Grants and donations 78,398 (Library 2,685 + Grants and donations 75,713, p8)",
+     "issue": "These grants may be intergovernmental rather than private donations. detail[14] (Library 2,685) is also assumed to be a donation."},
+    {"severity": "warning", "path": "disbursements[7].category", "page": 4,
+     "extracted": "other", "on_page": "Keno 3,799",
+     "issue": "Keno spending was put in other because no function is printed. This is a judgment call (already marked review); detail[24] is the same."},
+    {"severity": "warning", "path": "disbursements[9].amount", "page": 9,
+     "extracted": 12974, "on_page": "Interest 10,479 + Bond Fees 880 + County commissions 1,615",
+     "issue": "The interest part of debt service includes 1,615 of county commissions, which are treasurer fees, not interest. They are inside the printed Debt service 79,224, so they are defensible here. Principal 66,250 is inferred from the line labelled 'Debt service'."},
+    {"severity": "warning", "path": "balance_sheet.liabilities[3].category", "page": 1,
+     "extracted": "debt - due in more than one year", "on_page": "Line of credit 134,000 (governmental, no due date printed)",
+     "issue": "The due-date classification is an assumption; no maturity is printed."},
+    {"severity": "warning", "path": "detail[39].budget_final", "page": 10,
+     "extracted": 278854, "on_page": "Debt service budget 278,854 (total, not split)",
+     "issue": "The total debt service budget is attached to the computed principal portion only (already marked review)."}
   ]
 }

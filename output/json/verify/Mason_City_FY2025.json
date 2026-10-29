@@ -1,13 +1,24 @@
 {
   "stem": "Mason_City_FY2025",
-  "values_checked": 57,
+  "values_checked": 70,
   "issues": [
-    {"severity": "warning", "path": "business_type.transfers_net", "page": 7,
-     "extracted": 0,
-     "on_page": "Schedule of Interfund Transfers: Sewer -> Sewer Construction 20,990.00 and Sewer Reserve -> Sewer Construction 25,840.00 (46,830.00 into Sewer Construction, nothing into Sewer Reserve); Exhibit A p3 line 20 shows Sewer Construction 34,960.00 and Sewer Reserve 11,870.00",
-     "issue": "fund-level transfers on Exhibit A page 1a don't match the interfund transfer schedule (11,870.00 shown going into Sewer Reserve instead of Sewer Construction). Totals agree (1,020,105.80 in and out) and all funds involved are business-type, so the net-zero figure stands; not in report_discrepancies"},
-    {"severity": "warning", "path": "balance_sheet.equity", "page": 1,
-     "extracted": "General Fund ending balance (etc.)", "on_page": "Line 28 Subtotal of Ending Balances (Line 26 + 27), per fund column (pp1, 3)",
-     "issue": "equity original_labels are descriptive constructions, not the printed row label; amounts match line 24/28 (total 302,996.83)"}
+    {"severity": "warning", "path": "receipts[17].category", "page": 1,
+     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Water & Water Deposit 56,820.55; Sewer 37,462.12; Trash 18,204.89)",
+     "issue": "Utility fund receipts belong in category Utility Charges (incl. trash/garbage) under the user rule of 2026-10-28. The same applies to receipts[18] and receipts[19]. The printed label only says 'Other', so user_rules.py will not recategorize them. Treating them as utility charges is an assumption (marked review)."},
+    {"severity": "warning", "path": "receipts[20].category", "page": 3,
+     "extracted": "investment income", "on_page": "Local Receipts: Other (Asset Mgmt 284.76, Water Bond 40.45, Water Reserve 88.19, Sewer Reserve 124.80)",
+     "issue": "These are savings-account funds and the extractor assumed the receipts are interest. If they are interest, the user's category is Interest Income, not investment income. Applies to receipts[20]-[23]."},
+    {"severity": "warning", "path": "disbursements[3].original_label", "page": 5,
+     "extracted": "Other Capital Outlay", "on_page": "Line 36 Other Capital Outlay, Sewer Fund 884,617.64",
+     "issue": "This capital outlay line was not relabelled 'Capital Outlay: <function>' (user rule 2026-10-26/28)."},
+    {"severity": "warning", "path": "balance_sheet.assets[3].source_page", "page": 3,
+     "extracted": 1, "on_page": "Water Bond 18,310.75 + Water Reserve 30,637.18 + Sewer Reserve 15,171.01 + Sewer Construction 34,998.29 = 99,117.23 (p3 line 27)",
+     "issue": "The amount is correct and marked computed, but its parts are printed on p3, not p1. p1 only shows the 110,978.45 investments total. Also, the investments are split into two lines with the same label (Asset Mgmt 11,861.22 and the other four funds), which isn't how the page presents them."},
+    {"severity": "warning", "path": "balance_sheet.assets", "page": 1,
+     "extracted": "not recorded", "on_page": "County Treasurer Balance at October 1, 2024 $791.99; at September 30, 2025 1,554.08",
+     "issue": "The county treasurer balances are not recorded or mentioned. They are outside the line 28 total, but the user's rule treats county treasurer cash as Cash and Cash Equivalents."},
+    {"severity": "warning", "path": "balance_sheet.equity[0].original_label", "page": 1,
+     "extracted": "General Fund ending balance (and similar labels)", "on_page": "Line 24 Ending Balance / Line 28 Subtotal of Ending Balances by fund column",
+     "issue": "The equity labels were made up by the extractor, not copied from the page. The amounts are correct."}
   ]
 }

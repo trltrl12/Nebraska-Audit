@@ -1,18 +1,12 @@
 {
   "stem": "Wilber_FY2025",
-  "values_checked": 251,
+  "values_checked": 262,
   "issues": [
-    {"severity": "warning", "path": "receipts[15].category", "page": 10,
-     "extracted": "intergovernmental/state aid", "on_page": "Intergovernmental transfer 275,370 (Care Center, nonoperating revenue)",
-     "issue": "label contains 'transfer' but this is the Care Center nursing-facility intergovernmental transfer program revenue, not an interfund transfer; recording it as revenue is defensible, but the validator's transfer-label check may flag it"},
-    {"severity": "warning", "path": "business_type.adjustments[0]", "page": 10,
-     "extracted": -644987, "on_page": "Employee Retention Credit Withdrawn (644,987) in non-operating revenues (expenses)",
-     "issue": "printed as a nonoperating item (reversal of Care Center ERC revenue), recorded as an adjustment rather than a disbursement or negative receipt; amount and roll-forward are right, treatment is a judgment call"},
+    {"severity": "warning", "path": "receipts[6].category", "page": 6,
+     "extracted": "intergovernmental/state aid 489,841", "on_page": "Intergovernmental revenues 508,418; Street schedule p16 'State of Nebraska-motor vehicle fee' 18,918",
+     "issue": "The statement remainder 489,841 still contains Street's state motor vehicle fee 18,918, while detail[37] records that same line as motor vehicle tax. The same money has a different category in receipts and detail. Under the rule that motor vehicle fees are motor vehicle tax, the remainder could be split the same way homestead and pro-rate were."},
     {"severity": "warning", "path": "detail[111].category", "page": 22,
      "extracted": "intergovernmental/state aid / county/other local governments", "on_page": "Rural fire district 62,278 (Fire fund)",
-     "issue": "extractor rules list rural fire contracts under charges for services/fees; the report's own statement (p6) counts it in Intergovernmental revenues, so the current category is defensible"},
-    {"severity": "warning", "path": "detail[37].detail_category", "page": 16,
-     "extracted": "other state aid", "on_page": "State of Nebraska-motor vehicle fee 18,918",
-     "issue": "rules put motor vehicle fees under motor vehicle tax; this is a state-distributed fee the statement counts as intergovernmental, so other state aid is defensible"}
+     "issue": "The extractor rules list rural fire contracts under charges for services/fees, but the statement (p6) counts this line inside Intergovernmental revenues. Defensible either way; it already has a review note."}
   ]
 }

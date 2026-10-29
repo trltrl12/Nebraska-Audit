@@ -1,15 +1,15 @@
 {
   "stem": "Diller_FY2025",
-  "values_checked": 113,
+  "values_checked": 125,
   "issues": [
-    {"severity": "warning", "path": "receipts[5].category", "page": 6,
-     "extracted": "charges for services/fees", "on_page": "Charges for services and refunds 61,966",
-     "issue": "label mixes charges and refunds; dominant category is defensible but the line has no review naming the mix as the rules require (same label in detail[8], detail[17], detail[25], detail[37], detail[44])"},
-    {"severity": "warning", "path": "detail[23].category", "page": 11,
-     "extracted": "motor vehicle tax", "on_page": "Motor vehicle fees 3,251 (printed under 'Intergovernmental revenues-' heading, p10 labels)",
-     "issue": "printed as an intergovernmental revenue (Special Revenue fund; included in the 51,896 Intergovernmental line on p5), so it may be the state motor vehicle fee/pro-rate distribution rather than a local motor vehicle tax; rules allow motor vehicle fees as motor vehicle tax, so judgment call"},
-    {"severity": "warning", "path": "detail[33].section", "page": 11,
-     "extracted": "other financing", "on_page": "Bond principal payments (26,000); Bond interest/fee payments (10,012) under Other financing sources (uses)",
-     "issue": "debt service payments recorded in detail section 'other financing' (as printed) while the same amounts are disbursements (outside_printed_total) in the basic statement list; consistent with the page, but other financing is meant for transfers/proceeds/sale of assets. Same for detail[34]"}
+    {"severity": "warning", "path": "receipts[7].category", "page": 6,
+     "extracted": "reimbursements/refunds 61,966", "on_page": "Charges for services and refunds: General 4,455, Garbage 40,794, Special Revenue 5, Nonmajor 16,712 (Park Shelter 15,347) (p5)",
+     "issue": "About 66% is garbage collection charges and most of the rest is park shelter fees. Statement of Activities charges for services is 63,263. A charges/Utility Charges category fits better, and the line has no review note naming the mix. Detail[17] likewise pairs category reimbursements/refunds with detail_category refuse/sanitation charges."},
+    {"severity": "warning", "path": "detail[51]-detail[56]", "page": 13,
+     "extracted": "Schedule 5 Sewer 34,034 and Water 99,534 receipt lines split into Exhibit H components (p8)", "on_page": "Schedule 5 (p13) prints only one receipts line per fund; Exhibit H (p8) prints the fund lines, which tie",
+     "issue": "The split uses another statement's lines for the same fund (they tie exactly, and the amounts are on cited p8). Defensible, but Schedule 5 itself doesn't print it. Water 'Deposits, hookup fees' is Utility Charges here but charges for services/fees in receipts[12], which is inconsistent."},
+    {"severity": "warning", "path": "detail[33],detail[34].section", "page": 11,
+     "extracted": "other financing (Bond principal -26,000, interest -10,012)", "on_page": "Bond principal/interest payments, printed under Other financing sources (uses)",
+     "issue": "Debt service spending is recorded in detail as other financing, but as disbursements at the top level. This is as printed, but detail expenditure excludes it."}
   ]
 }

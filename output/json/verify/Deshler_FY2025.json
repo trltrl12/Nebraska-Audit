@@ -1,15 +1,9 @@
 {
   "stem": "Deshler_FY2025",
-  "values_checked": 100,
+  "values_checked": 164,
   "issues": [
-    {"severity": "warning", "path": "ending_cash", "page": 4,
-     "extracted": 210783, "on_page": "Cash 204,953; Cash with County Treasurer 5,830; Restricted cash 210,158 (Total Governmental Funds)",
-     "issue": "Restricted cash 210,158 is left out of ending_cash (the computed marker and arithmetic are correct). This is defensible, but it is a judgment call: including it would make ending cash 420,941."},
-    {"severity": "warning", "path": "detail[0..13].fund_type", "page": 9,
-     "extracted": "governmental (all lines except Local and Utility operations)", "on_page": "Budgetary Comparison Schedule - Cash Basis, All Funds",
-     "issue": "The all-funds schedule mixes fund types, and each line was given a single fund type. Several governmental-tagged lines clearly include utility money. For example, Debt service 179,847 is roughly governmental 65,203 (p5) plus utility 94,500 principal and 20,143 interest (p8 cash flows), and Capital outlay 510,441 is far above governmental 221,286. Local 1,709,436, tagged business-type, includes governmental Local 248,097. All of these are marked review, but the fund-type split is an assumption."},
-    {"severity": "warning", "path": "detail[13]", "page": 9,
-     "extracted": -1201892, "on_page": "Miscellaneous/transfers 1,201,892 (budget 420,000)",
-     "issue": "The whole line is treated as transfers out because it equals Transfers in 1,201,892. The label also says 'Miscellaneous', so some of it could be spending. This is defensible (already marked review)."}
+    {"severity": "warning", "path": "decision_needed[1]", "page": 9, "extracted": "p9 all-funds 'Capital outlay' 510,441 recorded in detail as governmental", "on_page": "Capital outlay 510,441 (Budgetary Comparison Schedule - Cash Basis, All Funds)", "issue": "stale: the p9 combined schedule lines were removed from detail (per-fund rule 2026-10-27), so this question no longer describes the JSON; the notes also still describe the p9 lines as recorded"},
+    {"severity": "warning", "path": "receipts[4].category", "page": 7, "extracted": "charges for services/fees", "on_page": "Charges for services 1,346,351 (Electric/Water/Sewer/Refuse total)", "issue": "utility fund sales; the same label is category Utility Charges in detail (user 2026-10-28 rule), so the receipt and detail categories disagree"},
+    {"severity": "warning", "path": "receipts[3].category", "page": 5, "extracted": "charges for services/fees", "on_page": "Local 248,097", "issue": "broad group; Statement of Activities shows charges 116,814 (47%), miscellaneous 91,789, interest 10,206, so no category is over half (already marked review)"}
   ]
 }

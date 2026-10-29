@@ -1,70 +1,24 @@
 {
   "stem": "DeWitt_FY2025",
-  "values_checked": 143,
+  "values_checked": 170,
   "issues": [
-    {
-      "severity": "error",
-      "path": "receipts[3].category",
-      "page": 4,
-      "extracted": "charges for services/fees",
-      "on_page": "MFO payments received 27,278",
-      "issue": "[fixed] MFO = Mutual Finance Organization state aid to fire protection (Firemen fund, p11); the Statement of Activities (p2) lists it under General revenues, not program charges. Rural fire contract revenue is the separate 'Contracts' line (38,350). Should be intergovernmental/state aid"
-    },
-    {
-      "severity": "error",
-      "path": "detail[41].detail_category",
-      "page": 12,
-      "extracted": "other charges for services",
-      "on_page": "MFO payments received 27,278",
-      "issue": "[fixed] Same as receipts[3]: MFO state aid; category should be intergovernmental/state aid, detail_category other state aid"
-    },
-    {
-      "severity": "warning",
-      "path": "ending_cash.amount",
-      "page": 4,
-      "extracted": 359640,
-      "on_page": "Fund balances - ending 359,640; governmental cash 162,288 + 12,000 + 52,865 = 227,153 (p3)",
-      "issue": "beginning_cash/ending_cash hold modified-cash fund balances (which include Due from other funds 145,361 net of liabilities 12,874), not cash; documented in notes but the field is labelled cash"
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[10].category",
-      "page": 4,
-      "extracted": "donations/contributions",
-      "on_page": "Contributions/grants 30,597",
-      "issue": "Statement of Activities (p2) shows these as operating grants 28,097 and capital grants 2,500; Civic Board 14,911 and Area on Aging 7,100 (p12) may be government grants. Line mixes grants and contributions; no review flag set"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[14].category",
-      "page": 8,
-      "extracted": "motor vehicle tax",
-      "on_page": "Motor vehicle fee payment 6,673 (under Intergovernmental revenues)",
-      "issue": "Category follows the rule for motor vehicle fees, but the same 6,673 is inside the basic-statement 'Intergovernmental revenues' 169,098 recorded as intergovernmental/state aid (receipts[4]); inconsistent between receipts and detail"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[45].detail_category",
-      "page": 12,
-      "extracted": "other charges for services",
-      "on_page": "Materials & services sold and refunds 95,223 (Garbage 66,223, p12)",
-      "issue": "Most of the line is Garbage fund refuse collections; refuse/sanitation charges may fit better (line also mixes refunds)"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[49].category",
-      "page": 12,
-      "extracted": "other",
-      "on_page": "Schedule 4 Totals column, expenditures by object",
-      "issue": "detail[49]-[55], [58], [59] (about 218,000) use category 'other' because the combined Totals column has no function; the per-fund columns (p11-12: Firemen, Library, Park, Pool, Area on Aging...) show the function. Defensible under the >6 funds rule but leaves a large share in 'other'"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[39].section",
-      "page": 8,
-      "extracted": "other financing",
-      "on_page": "Principal paid on long-term liabilities (15,015); Interest paid (6,171) under Other financing sources (uses)",
-      "issue": "Debt service payments are recorded as other financing in detail (as printed), while the basic statement lines are recorded as disbursements (outside_printed_total). Same for detail[40], detail[62], detail[63]. Not double counted, but they are spending, not financing"
-    }
+    {"severity": "error", "path": "detail[64]-detail[70].source_page", "page": 13,
+     "extracted": "358,459; 63,121; 829,814; 273,235; 865,455; 40,000; 2,361; -177,878 cited on p13", "on_page": "p13 (Schedule 5) prints only Proprietary receipts 1,251,394 and disbursements 1,358,929; the split amounts are on p7 (Exhibit I cash flows)",
+     "issue": "The Schedule 5 one-line proprietary totals were split using another statement (Exhibit I cash flows) that Schedule 5 does not print, and every split line cites p13, where none of these amounts appear. 273,235 is itself a sum (106,330 + 166,905). Either record the Schedule 5 lines as printed or cite p7 and justify the split."},
+    {"severity": "warning", "path": "receipts[10].category", "page": 4,
+     "extracted": "reimbursements/refunds 120,082", "on_page": "Materials and services sold & refunds: General 24,203, Street 656, Nonmajor 95,223 (Garbage 66,223, Area on Aging 18,761, Swimming Pool 7,826..., p12)",
+     "issue": "Most of this line is service charges: garbage fees 66,223 (55%) and Statement of Activities Sanitation charges 66,223. Utility Charges/charges for services fits better than reimbursements/refunds. Detail lines [9], [15] and [44] also pair category reimbursements/refunds with detail_category other charges for services, which is inconsistent."},
+    {"severity": "warning", "path": "receipts[17].category", "page": 6,
+     "extracted": "charges for services/fees", "on_page": "Lease agreement 57,422 (Electric Fund)",
+     "issue": "Lease income is rental income, so it probably belongs in Rentals (user rule 2026-10-28)."},
+    {"severity": "warning", "path": "detail[52].detail_category", "page": 12,
+     "extracted": "Debt Services / Miscellaneous", "on_page": "Insurance, bond premiums 24,840",
+     "issue": "The same label in the General and Street funds (detail[19], [31]) is insurance. The category_decisions mapping gives 'Debt Services / Miscellaneous' here, which looks wrong for insurance premiums."},
+    {"severity": "warning", "path": "detail[48]-detail[54],detail[57],detail[58].category", "page": 12,
+     "extracted": "other (function unknown)", "on_page": "Schedule 4 prints per-fund columns (Firemen, Library, Park, Community Building, Ambulance, Marshall, Swimming Pool, Garbage, Civic Board, Area on Aging, Keno)",
+     "issue": "Nonmajor spending was taken from the Totals column with function 'other'. The fund columns do show the functions (public safety, culture/recreation...), so the detail function split can't tie to the statement (culture 197,822, public safety 58,408). The >6-fund total-column rule makes this defensible."},
+    {"severity": "warning", "path": "detail[38],detail[39],detail[61],detail[62].section", "page": 8,
+     "extracted": "other financing (principal -15,015/-15,372, interest -6,171/-3,193)", "on_page": "Principal/Interest paid on long-term liabilities, printed under Other financing sources (uses)",
+     "issue": "Debt service payments are recorded as other financing in detail, but as disbursements at the top level. This is as printed, but detail expenditure excludes debt service."}
   ]
 }

@@ -1,18 +1,8 @@
 {
   "stem": "Denton_FY2025",
-  "values_checked": 49,
+  "values_checked": 62,
   "issues": [
-    {"severity": "warning", "path": "ending_investments", "page": 1,
-     "extracted": null, "on_page": "line 27 Investments by fund: General 50,457.06 + Street 53,527.84 (p1) + Keno 1,790,961.71 (p3) = 1,894,946.61 governmental",
-     "issue": "Investments are printed separately per fund, so the governmental split is available (note says it cannot be split). Same for beginning_investments: line 2 General 49,257.17 + Street 52,384.74 + Keno 1,786,257.41 = 1,887,899.32. Informational fields only; cash totals are correct."},
-    {"severity": "warning", "path": "disbursements[4].category", "page": 4,
-     "extracted": "economic development", "on_page": "Community Development: General 300.00 + Community Center Fund 30,137.63 = 30,437.63",
-     "issue": "Almost all of it is Community Center Fund spending, which may be culture/recreation; the extractor flagged it for review."},
-    {"severity": "warning", "path": "receipts[9].category", "page": 3,
-     "extracted": "keno/lottery", "on_page": "Local Receipts: Other 466,598.38 (Keno column)",
-     "issue": "The line is printed as 'Other'. Calling it keno proceeds is an assumption from the fund name, and it may include interest on the Keno fund's 1.79M of investments."},
-    {"severity": "warning", "path": "receipts[11].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other - Water 149,919.28; Sewer 57,834.91 (receipts[12])",
-     "issue": "Utility 'Other' local receipts are assumed to be user charges. This is defensible, but the page does not say so."}
+    {"severity": "warning", "path": "receipts[9].category", "page": 3, "extracted": "keno/lottery", "on_page": "18 Local Receipts: Other (KENO column) 466,598.38", "issue": "printed only as Local Receipts: Other; keno proceeds assumed from the fund name (already marked review). Large relative to the fund's 1.79M investments, could include investment maturities or interest"},
+    {"severity": "warning", "path": "receipts[11].category", "page": 1, "extracted": "charges for services/fees", "on_page": "18 Local Receipts: Other - Water 149,919.28 / Sewer 57,834.91", "issue": "utility charges assumed for lines printed only as Other (already marked review; also receipts[12])"}
   ]
 }

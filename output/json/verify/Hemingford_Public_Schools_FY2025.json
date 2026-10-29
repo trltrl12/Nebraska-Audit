@@ -1,16 +1,13 @@
 {
   "stem": "Hemingford_Public_Schools_FY2025",
-  "values_checked": 333,
+  "values_checked": 335,
   "issues": [
-    {"severity": "warning", "path": "detail[34].section", "page": 9,
-     "extracted": "revenue (Non-program Receipts 10,834, category other); detail[35] Non-program Expenses -10,785 recorded as other financing",
-     "on_page": "Other Non-revenue Receipts: Insurance Adjustments 2,941, Sale of Property 548, Other Non-revenue Receipts 1,430, Non-program Receipts 10,834 (inside TOTAL RECEIPTS 9,151,628); p5 prints the same 15,753 as 'Non-program Receipts' under Other Financing Sources",
-     "issue": "Non-program receipts and their matching non-program expenses are treated differently: the receipts are revenue in detail, the expenses are other financing; top level puts both (net 4,968) in other_financing although 2,941 is insurance proceeds (reimbursements) and 548 is sale of property. Defensible because p5 prints them as other financing, but the user may want one consistent treatment"},
-    {"severity": "warning", "path": "receipts[0].amount", "page": 5,
-     "extracted": 4596346, "on_page": "Property and Carline Taxes 4,596,346; Other Governmental column 70,170 = QCPUF Property Taxes 44,539 + Penalties 10 + Property Tax Credit 25,621 (p20)",
-     "issue": "the printed property tax line includes 25,621 of state Property Tax Credit (intergovernmental/state aid) from the QCPUF; amount is as printed, category is overstated by that much"},
-    {"severity": "warning", "path": "detail[92].detail_category", "page": 12,
-     "extracted": "not itemized", "on_page": "Facilities Acquisitions and Construction: Building Improvements 200,000",
-     "issue": "object line, so 'land and buildings' fits better than 'not itemized'; the whole 200,000 is the hidden transfer to the Depreciation Fund (p5 eliminations), so the line could have been split outright rather than kept with a contra line"}
+    {"severity": "error", "path": "receipts[18].category", "page": 7,
+     "extracted": "charges for services/fees", "on_page": "Charges for Sales and Services 141,695 (School Nutrition Fund) = Lunchroom Sales 141,695 (p19)",
+     "issue": "these are school lunch sales; the user's 2026-10-28 rule moves lunch/meal sales to School Lunch Sales, and the report's own detail line Lunchroom Sales (detail[135]) already uses School Lunch Sales, so the two are inconsistent"},
+    {"severity": "warning", "path": "detail[34].category", "page": 9,
+     "extracted": "other (section revenue); detail[35] Non-program Expenses -10,785 in section other financing",
+     "on_page": "9000-000 Non-program Receipts 10,834 under Other Non-revenue Receipts (inside TOTAL RECEIPTS 9,151,628); p5 prints Non-program Receipts 15,753 under Other Financing Sources",
+     "issue": "non-program receipts are revenue (category other) in detail while their matching non-program expenses are other financing, and the top level puts the whole 15,753 (incl. insurance adjustments 2,941 and sale of property 548) in other_financing; defensible as printed, but the treatment is not consistent"}
   ]
 }

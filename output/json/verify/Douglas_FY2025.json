@@ -1,9 +1,15 @@
 {
   "stem": "Douglas_FY2025",
-  "values_checked": 40,
+  "values_checked": 42,
   "issues": [
-    {"severity": "warning", "path": "balance_sheet.assets[0].original_label", "page": 1,
-     "extracted": "Subtotal of Ending Balances (Line 26 + 27)", "on_page": "Net Cash Balance (line 26) 287,466.12",
-     "issue": "asset recorded under the line 28 subtotal label; the item line is line 26 Net Cash Balance (same amount, investments line 27 blank)"}
+    {"severity": "warning", "path": "receipts[11].category", "page": 1,
+     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other, Water Fund 68,173.71",
+     "issue": "Printed label is only 'Other'. Treating it as utility charges is an assumption (it is marked review). If it is treated as utility charges, the user's 2026-10-28 rule puts utility fund sales/charges in the category Utility Charges, not charges for services/fees."},
+    {"severity": "warning", "path": "receipts[12].category", "page": 1,
+     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other, Sewer Fund 25,129.40",
+     "issue": "Same as the Water line. The printed label is only 'Other', and the category would be Utility Charges under the 2026-10-28 rule if these are charges."},
+    {"severity": "warning", "path": "balance_sheet", "page": 1,
+     "extracted": "line 28 ending balances used as balance sheet", "on_page": "no balance statement printed (waiver Exhibit A only)",
+     "issue": "No balance statement exists, so the balance sheet is built from the Exhibit A line 26/28 ending balances. Governmental and business-type lines are computed sums of the fund columns. The arithmetic ties (283,362.09 + 4,104.03 = 287,466.12 printed)."}
   ]
 }

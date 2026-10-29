@@ -1,94 +1,44 @@
 {
   "stem": "Lincoln_Public_Schools_FY2025",
-  "values_checked": 293,
+  "values_checked": 280,
   "issues": [
-    {
-      "severity": "warning",
-      "path": "detail[139].amount",
-      "page": 6,
-      "extracted": -2183586,
-      "on_page": "Reclassifications column: Instruction (4,649,139); Categorical corporation and private (395,000)",
-      "issue": "[fixed: contra split by function per p6] The instruction part of the General Fund contra is set to the 1115 Career Academy amount, but p6 prints how the 32,149,602 eliminated from function lines splits by function: Instruction 4,649,139, Support services - Instruction 1,473,679, General administration 7,763,016, Central services 6,939,464, Operation and maintenance 9,225,010, Student transportation 1,704,294, Categorical corporation and private 395,000 (total 32,149,602). Under the extractor's own mapping (3400 categorical = instruction) the instruction contra should be -5,044,139 (-4,649,139 - 395,000), not -2,183,586. Matching 1115 to the Cooperative transfer is an inference the page doesn't print."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[138].amount",
-      "page": 6,
-      "extracted": -29966016,
-      "on_page": "Support services eliminations 1,473,679 + 7,763,016 + 6,939,464 + 9,225,010 = 25,401,169; Student transportation (1,704,294)",
-      "issue": "[fixed: contra split by function per p6] The 'support services' contra -29,966,016 also includes the 1,704,294 eliminated from Student transportation and 2,860,553 that p6 places in instruction/categorical. Per p6 it should be support services -25,401,169, plus a separate student transportation contra -1,704,294 (department Student Transportation), plus instruction -5,044,139. As it stands, detail student transportation is 18,964,093, while p6 Total Governmental Funds shows 17,259,799 (the difference is exactly 1,704,294). Grand totals are unaffected (contra still sums to -32,149,602)."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[144]",
-      "page": 6,
-      "extracted": -6648493,
-      "on_page": "Contracted services (6,648,493) in Reclassifications column",
-      "issue": "Treating the internal payment to ESU 18 as a transfer is defensible, since p6 eliminates it. Putting the paying side in the General Fund schedule is an assumption: the p5 'General Fund' column combines the General, Depreciation and Contingency funds (beginning 137,672,627 + 42,728,908 + 10,416,973 = 190,818,508). p6 only shows that the eliminated function-line total 32,149,602 equals 25,501,109 + 6,648,493, not which fund paid. Arithmetic checks: 7,480,305 - 6,648,493 = 831,812; 26,227,871 - 726,762 + 6,648,493 = 32,149,602."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[Cooperative Member Payments split]",
-      "page": 19,
-      "extracted": "234,843 revenue + 4,293,118 other financing",
-      "on_page": "Member Payments 4,527,961",
-      "issue": "p19 doesn't print this split. It is derived from p6: Other Governmental Funds 'Transfers - other funds' 7,203,466 = 4,293,118 + 2,183,586 + 726,762, and 'Reimbursements and other' 254,443 = 234,843 + 19,600. The arithmetic holds and it matches the ESU 18 Co-op contracts elimination. Also, p6 groups the 234,843 under 'Reimbursements and other', while the detail calls it other charges for services."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[13].category",
-      "page": 6,
-      "extracted": "reimbursements/refunds",
-      "on_page": "Reimbursements and other 5,492,248",
-      "issue": "The report's own detail shows this line is mostly not reimbursements: it includes Special Building 4,079,407 (donations 3,349,590, lease income 656,209, other 73,608), ESU other 466,465, Cooperative 254,443 and only 13,612 of refunds in the GF part. Donations are the dominant part; the review flag is already present."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[4].category",
-      "page": 6,
-      "extracted": "fines and forfeitures",
-      "on_page": "Fines and licenses 6,021,306",
-      "issue": "Includes 1911 Local License Fees 169,395 (p7): 1,896,413 + 3,955,498 + 169,395 = 6,021,306. Fines are dominant, so the category is defensible; already flagged for review."
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[15].category",
-      "page": 6,
-      "extracted": "debt service principal",
-      "on_page": "Other 14,686",
-      "issue": "This is the Bond Fund 'Other' line (p5), which the Statement of Activities (p2) includes in Debt service 42,100,213 = 42,085,527 + 14,686. Principal vs interest is not stated, and disbursements[14] Debt service also combines principal and interest."
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[11]",
-      "page": 6,
-      "extracted": "instruction",
-      "on_page": "Categorical corporation and private / State categorical programs / Federal programs",
-      "issue": "The function for these lines (and the matching GF 3400-3599 and 6200-6998 detail lines) is a guess; already flagged for review."
-    },
-    {
-      "severity": "warning",
-      "path": "ending_cash.amount",
-      "page": 6,
-      "extracted": 363680615,
-      "on_page": "Fund Balances, end of year 363,680,615; Cash 220,382; Investments 379,729,539",
-      "issue": "beginning_cash and ending_cash are the fund balance/net position the statement rolls forward (net of accrued expenses and encumbrances 18,744,256, including inventories 2,474,950), not cash and investments (379,949,921). This is explained in the notes."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[Contingency expenditures].category",
-      "page": 13,
-      "extracted": "general government",
-      "on_page": "Workers Compensation / Insurance Premiums / Other",
-      "issue": "For a school district, insurance/risk spending would more usually be support services (business services); general government is a judgment call."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[Activities expenditures].detail_category",
-      "page": 16,
-      "extracted": "salaries and wages / professional/contract services / supplies and materials / miscellaneous expenditure",
-      "on_page": "Salaries and Benefits / Purchased Services / Supplies and Materials / Other",
-      "issue": "The extractor rules say school activity funds use expense detail 'student activity spending'. Here object categories were used instead; Salaries and Benefits also combines benefits."
-    }
+    {"severity": "error", "path": "detail[138].category", "page": 6,
+     "extracted": "support services (contra -25,401,169)",
+     "on_page": "Reclassifications column p6: Support services - Instruction (1,473,679), General administration (7,763,016), Central services (6,939,464), Operation and maintenance of plant (9,225,010)",
+     "issue": "The contra line puts four eliminations into one category. The gross General Fund lines they offset are in General Administration (2310-2330), Business (2510-2590) and Building and Grounds (2610-2660), and on the statement 'Staff' is Instruction under the LPS ruling. So support services is understated and those other categories are overstated by the same amounts. The contra should be split by category: Instruction or support services 1,473,679, General Administration 7,763,016, Business 6,939,464, Building and Grounds 9,225,010"},
+    {"severity": "error", "path": "detail[152].category, detail[153].category, detail[154].category", "page": 5,
+     "extracted": "support services (Contingency Fund: Workers Compensation 1,748,776, Insurance Premiums 7,652,808, Other 308,175)",
+     "on_page": "p5 General Fund column General administration 21,333,386 = General Fund schedule 2310-2330 total 11,623,627 + Contingency Fund expenditures 9,709,759",
+     "issue": "The report puts the Contingency Fund's spending under General administration. Under the user's school-function rules, support services is only for Pupils and Staff, so these three lines should be General Administration"},
+    {"severity": "error", "path": "detail[185].category", "page": 17,
+     "extracted": "reimbursements/refunds", "on_page": "1620 Non-reimbursable Sales 2,297,583",
+     "issue": "These are cafeteria food sales, not a reimbursement or refund. The p6 statement includes them in 'Sales of lunches' 6,606,966 (3,987,685 + 318,527 + 3,171 + 2,297,583), so the category should be School Lunch Sales"},
+    {"severity": "warning", "path": "detail[184].category", "page": 17,
+     "extracted": "charges for services/fees", "on_page": "1614 After-school Sales 3,171",
+     "issue": "Food sales counted in the statement's 'Sales of lunches'. The user's own category School Lunch Sales fits better than charges for services (detail_category already says school lunch sales)"},
+    {"severity": "warning", "path": "detail[194].category", "page": 18,
+     "extracted": "charges for services/fees", "on_page": "1910 Lease income 656,209",
+     "issue": "Rentals is the user's own receipt category for rent and lease income (taken out of charges for services)"},
+    {"severity": "warning", "path": "receipts[19].category", "page": 6,
+     "extracted": "reimbursements/refunds", "on_page": "Reimbursements and other 5,492,248",
+     "issue": "Per the fund columns and schedules, most of this line is Special Building 1920 Donations from private sources 3,349,590 (61%), plus lease income 656,209, General Fund other local receipts, and so on. Actual refunds are only 1980 Refund of Prior Year Expenditures 13,612. Under the more-than-half rule, donations/contributions (or a split) would fit better"},
+    {"severity": "warning", "path": "detail[139].category", "page": 6,
+     "extracted": "Instruction (contra -5,044,139)", "on_page": "Reclassifications: Instruction (4,649,139) and Categorical corporation and private (395,000)",
+     "issue": "395,000 of this contra offsets the 3400 Categorical Grants line (detail[110]), which is in category Categorical Corporation and Private, not Instruction"},
+    {"severity": "warning", "path": "detail[149].category", "page": 5,
+     "extracted": "capital outlay", "on_page": "Depreciation Fund Equipment 12,785,752; p5 General Fund column Central services 29,315,611 = schedule 2510-2590 16,529,859 + 12,785,752",
+     "issue": "The report counts the Depreciation Fund's equipment spending under Central services (Business). Capital outlay is defensible for equipment, but it doesn't match the report's own function grouping"},
+    {"severity": "warning", "path": "disbursements[10].category", "page": 2,
+     "extracted": "support services", "on_page": "Other support services 2,607,278 (Statement of Activities labels it 'Community services')",
+     "issue": "The Statement of Activities shows this amount as Community services, so the user's Community Service Operations function may apply (same for detail[109], 2900 Other Support Services)"},
+    {"severity": "warning", "path": "disbursements[15].detail_category", "page": 6,
+     "extracted": "Principal", "on_page": "Other 14,686",
+     "issue": "A leftover detail_category 'Principal' is on a line now in category other under the LPS ruling. Its nature isn't stated"},
+    {"severity": "warning", "path": "receipts[1].original_label", "page": 6,
+     "extracted": "Property Tax", "on_page": "Taxes - Property 408,672,116 (split part: 3130 Homestead Exemption lines)",
+     "issue": "The split items for Homestead Exemption (receipts[1]) and Property Tax Credit (receipts[2]) keep original_label 'Property Tax', which doesn't match their category"},
+    {"severity": "warning", "path": "detail[227].category", "page": 23,
+     "extracted": "instruction", "on_page": "Other state and federal 2,606,617",
+     "issue": "Lower-case 'instruction' while every other line in the report uses 'Instruction'. This may produce a separate category in the workbook"}
   ]
 }

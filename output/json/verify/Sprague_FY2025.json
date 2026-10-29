@@ -1,9 +1,15 @@
 {
   "stem": "Sprague_FY2025",
-  "values_checked": 36,
+  "values_checked": 42,
   "issues": [
-    {"severity": "warning", "path": "receipts[10].category", "page": 3,
-     "extracted": "other", "on_page": "Local Receipts: Other 15,689.94 (Special Revenue Fund); Schedule of Investments: STFIIT #2-Keno 203,804.19 is the Special Revenue Fund's investment",
-     "issue": "Special Revenue Fund appears to be the keno fund, so its 'Other' receipts are likely keno/lottery; page does not say so explicitly. Governmental 'other' is about 22% of governmental receipts"}
+    {"severity": "warning", "path": "receipts[10].category", "page": 1,
+     "extracted": "other", "on_page": "Local Receipts: Other 15,689.94 (Special Revenue Fund column)",
+     "issue": "The Special Revenue Fund's investments are 195,590.05 at the start of the year and 203,804.19 at the end. The end figure equals 'STFIIT #2-Keno' on the p3 Schedule of Investments, so this fund appears to be the keno fund and its 'Other' receipts are probably keno/lottery proceeds. The printed label says Other and the user's category decision applies, so this is left as a judgment call."},
+    {"severity": "warning", "path": "receipts[11].category", "page": 1,
+     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other 68,813.33 (Enterprise Fund column)",
+     "issue": "Receipts of the utility (water/wastewater) Enterprise Fund. Under the user's 2026-10-28 rule, utility fund sales/charges go in the receipt category 'Utility Charges', not the general charges for services category. The amount and the split by fund column are correct."},
+    {"severity": "warning", "path": "disbursements[2].original_label", "page": 2,
+     "extracted": "Capital Improvements", "on_page": "Capital Improvements 45,634.07 (Street Fund)",
+     "issue": "This is a capital outlay line. The user's labelling rule calls for 'Capital Outlay: Streets/Highways' with the printed text kept in printed_label. The category and amount are correct; user_rules.py should apply the label."}
   ]
 }

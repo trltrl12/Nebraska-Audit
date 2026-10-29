@@ -1,18 +1,18 @@
 {
   "stem": "Alliance_FY2025",
-  "values_checked": 212,
+  "values_checked": 227,
   "issues": [
-    {"severity": "warning", "path": "receipts[5].category", "page": 7,
-     "extracted": "other taxes", "on_page": "Taxes: Enhanced Employment Area tax 67,154",
-     "issue": "Nebraska Enhanced Employment Area taxes are occupation taxes levied on businesses in the area (Neb. Rev. Stat. 18-2142.02), so 'occupation/franchise tax' may fit better than 'other taxes'. The same applies to the detail line (detail[45], p25, other local taxes)"},
-    {"severity": "warning", "path": "business_type.other_financing.computed", "page": 11,
-     "extracted": "computed: gain on sale of capital assets/insurance proceeds (p11)", "on_page": "Gain on sale of capital assets/insurance proceeds 71,410 (Total enterprise column, printed)",
-     "issue": "The amount is printed as-is, so it should not be marked computed. It is also handled differently from the governmental 'Sale of property/insurance proceeds' line, which is in receipts as sale of assets. Defensible, but inconsistent"},
-    {"severity": "warning", "path": "balance_sheet.liabilities[9].category", "page": 1,
-     "extracted": "accrued liabilities", "on_page": "Compensated absences - noncurrent 569,809",
-     "issue": "The rules limit accrued liabilities to compensated absences due soon. This line is noncurrent, so 'other liabilities' (or long-term debt) may fit better"},
-    {"severity": "warning", "path": "detail", "page": 17,
-     "extracted": "omitted", "on_page": "Street: Sale of property/insurance proceeds budget 2,500 actual -; Redevelopment (p20): Bond/loan proceeds budget 1,500,000 actual -; Airport (p21): Transfers in budget 906,900 actual -",
-     "issue": "Printed lines with zero actuals were left out (stated in notes), so their final budget figures are lost. Totals are unaffected"}
+    {"severity": "error", "path": "receipts[15].category", "page": 11,
+     "extracted": "charges for services/fees", "on_page": "User charges 17,721,402 (Electric/Water/Sewer/Refuse enterprise funds, Total column)",
+     "issue": "Utility fund user charges fall under the user's Utility Charges receipt category (2026-10-28), not charges for services/fees. Rent income was already moved to Rentals, but this line was not. user_rules.py won't catch it because receipts carry no fund field."},
+    {"severity": "warning", "path": "balance_sheet.liabilities[13].category", "page": 1,
+     "extracted": "Accrued Liabilities", "on_page": "Compensated absences - noncurrent 388,125 (governmental); also liabilities[14] 181,684 (business-type)",
+     "issue": "These are noncurrent compensated absences. The rules use accrued liabilities only for amounts due soon, so debt - due in more than one year or the Compensated Absences category would fit better."},
+    {"severity": "warning", "path": "receipts[13].category", "page": 7,
+     "extracted": "Sale of Property", "on_page": "Sale of property/insurance proceeds 2,125",
+     "issue": "The line mixes sale of property with insurance proceeds (reimbursements). The rules ask for a review note naming the mix, and none is present (same for detail[8])."},
+    {"severity": "warning", "path": "notes", "page": 1,
+     "extracted": "interfund due to/from lines net to zero in Total column and are omitted", "on_page": "Due (to) from other funds (3,859,970) / 3,859,970",
+     "issue": "The notes say the interfund lines are omitted, but balance_sheet.assets[12] and [13] record them (they net to zero, so the totals are unaffected). The notes are inaccurate."}
   ]
 }

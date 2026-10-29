@@ -1,18 +1,12 @@
 {
   "stem": "Shubert_FY2025",
-  "values_checked": 39,
+  "values_checked": 40,
   "issues": [
-    {"severity": "warning", "path": "report_discrepancies", "page": 2,
-     "extracted": null, "on_page": "Crossed-out pages 2, 4, 6: General ending 106,509 vs 65,093; transfers 46,366 vs 62,910; General Government 42,514 vs 41,130; Water 26,653 vs 28,037; Municipal Equalization in General column instead of Street",
-     "issue": "The extractor rightly used the unmarked pages, but it put the void versions' differing figures only in notes. By analogy with the budget-form rule, they belong in report_discrepancies with a review note."},
-    {"severity": "warning", "path": "balance_sheet.assets", "page": 1,
-     "extracted": "Net Cash Balance 144,880 + Investments 85,093", "on_page": "County Treasurer Balance at September 30, 2025 1,308.02",
-     "issue": "The county treasurer balance is printed outside the fund totals and isn't recorded. It may be cash the village holds at the county."},
-    {"severity": "warning", "path": "receipts[9].category", "page": 1,
-     "extracted": "other", "on_page": "Local Receipts: Other (General Fund) 23,364",
-     "issue": "Governmental 'other' is 24,111 of 119,565 (20%, above 10%). No breakdown is printed, so it's defensible, but it goes to review."},
-    {"severity": "warning", "path": "disbursements[5].category", "page": 3,
-     "extracted": "debt service principal", "on_page": "Debt Service 9,849 (Enterprise Fund)",
-     "issue": "Principal and interest on the USDA loan are combined and not split. Marked review."}
+    {"severity": "warning", "path": "receipts[11].category", "page": 1,
+     "extracted": "charges for services/fees", "on_page": "18 Local Receipts: Other, Enterprise Fund column 62,345.00",
+     "issue": "assumption: the Enterprise (water/wastewater/solid waste) fund's 'Local Receipts: Other' is taken as utility charges; nothing on the page says so, and under the user's 2026-10-28 rule utility fund collections would be category Utility Charges rather than charges for services/fees"},
+    {"severity": "warning", "path": "reported_totals.business-type.receipts.includes", "page": 1,
+     "extracted": [], "on_page": "Total Receipts 125,255.00 includes line 20 Transfers In 62,910.00",
+     "issue": "printed business-type totals (receipts 125,255 and disbursements 114,153) include gross transfers in 62,910 / out 20,966; 'includes' is empty and the transfers are recorded only in a non-schema 'includes_split' field, where the rules call for includes: [\"transfers_net\"]"}
   ]
 }

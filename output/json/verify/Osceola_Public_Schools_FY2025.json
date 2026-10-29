@@ -1,18 +1,21 @@
 {
   "stem": "Osceola_Public_Schools_FY2025",
-  "values_checked": 152,
+  "values_checked": 176,
   "issues": [
-    {"severity": "warning", "path": "missing", "page": 13,
-     "extracted": null, "on_page": "Report page 38 (between Bond Fund budget schedule p37 = trimmed p12 and Other Governmental Funds combining statement p39 = trimmed p13) not in trimmed PDF",
-     "issue": "The trimmed PDF skips report page 38. Given where it falls, it is probably another supplementary schedule (e.g. a Nutrition Fund or other-fund budget schedule, or an activity-account schedule). Any schedule lines on it are absent. The statement totals in the JSON all tie, so this affects detail only."},
-    {"severity": "warning", "path": "receipts[9].category", "page": 6,
-     "extracted": "fines and forfeitures", "on_page": "Fines and licenses 9,715",
-     "issue": "This line mixes 2110 Fines and licenses 8,385 with 1911 Other local license fees 1,330 (p9). Fines is the dominant part, but there is no review note naming the mix, which the rules require for mixed lines."},
+    {"severity": "error", "path": "detail[9].category", "page": 9,
+     "extracted": "other (detail_category Other / Miscellaneous Receipts, category_decision user 2026-10-23)", "on_page": "1911 Other local license fees 1,330",
+     "issue": "This is a licence fee, so the category should be licenses and permits (the statement counts it in 'Fines and licenses' 9,715 = 2110 8,385 + 1911 1,330). config/category_decisions.csv has no row for 'other local license fees', so the category_decision tag is unsupported."},
+    {"severity": "error", "path": "balance_sheet.total_assets.source_page", "page": 4,
+     "extracted": {"amount": 3418991, "source_page": 4}, "on_page": "p4 Total Governmental Funds total assets 3,349,875; 3,418,991 is printed only on p1 (Statement of Net Position, Total column)",
+     "issue": "The cited page doesn't show this amount. The source page should be 1."},
+    {"severity": "error", "path": "balance_sheet.total_equity.source_page", "page": 4,
+     "extracted": {"amount": 3418991, "source_page": 4}, "on_page": "p4 total fund balances 3,349,875; total net position 3,418,991 is on p1",
+     "issue": "The cited page doesn't show this amount. The source page should be 1."},
     {"severity": "warning", "path": "receipts[16].category", "page": 6,
-     "extracted": "sale of assets", "on_page": "Sale of property 36,822",
-     "issue": "The statement says 'Sale of property', but the General Fund schedule (p9) shows the same 36,822 as 5301 Insurance adjustments. The rules put insurance adjustments/proceeds under reimbursements/refunds. A person needs to decide which label wins."},
-    {"severity": "warning", "path": "detail[23].category", "page": 9,
-     "extracted": "sale of assets / sale of assets", "on_page": "5301 Insurance adjustments 36,822",
-     "issue": "The printed label is 'Insurance adjustments', and the extractor rules map insurance adjustments to reimbursements/refunds (detail: reimbursements/refunds). It was categorized as sale of assets to match the statement's 'Sale of property' label. Flagged review, but probably should be reimbursements/refunds."}
+     "extracted": "Sale of Property", "on_page": "Sale of property 36,822 (statement); the same 36,822 is '5301 Insurance adjustments' on the General Fund schedule p9",
+     "issue": "The statement and the schedule label the same money differently. The detail line uses reimbursements/refunds and the receipt line uses Sale of Property, so the two are inconsistent."},
+    {"severity": "warning", "path": "receipts[11].category", "page": 6,
+     "extracted": "Tuition Received", "on_page": "Tuition and driver's education fees 22,040 = 1311 Tuition and driver's education fees 8,400 + 1370 Preschool tuition 9,595 + 1740 Fees 4,045 (p9)",
+     "issue": "The line mixes tuition with driver's education fees and other fees. Tuition is the dominant part, but the line has no review note naming the mix."}
   ]
 }

@@ -1,21 +1,21 @@
 {
   "stem": "St_Edward_FY2025",
-  "values_checked": 181,
+  "values_checked": 176,
   "issues": [
-    {"severity": "warning", "path": "receipts[9].category", "page": 5,
-     "extracted": "donations/contributions", "on_page": "Grants and contributions 80,315 (Statement of Activities p2-3: 70,315 capital grants general government, 10,000 operating grants public safety)",
-     "issue": "The grantor is not stated. A 70,315 capital grant to a city is often a state or federal grant, so it could be intergovernmental/state aid or federal grants. The same question applies to detail[10] (70,315, General) and detail[11] (10,000, Fire). receipts[9] already has a review flag; detail[10] and detail[11] do not."},
-    {"severity": "warning", "path": "detail[75].detail_category", "page": 11,
-     "extracted": "highway allocation", "on_page": "Intergovernmental 140,189 (Street Fund)",
-     "issue": "The label says only 'Intergovernmental', so 'highway allocation' is an assumption. It is likely for a Street Fund, but the page doesn't say so and the line has no review flag."},
-    {"severity": "warning", "path": "detail[29].detail_category", "page": 14,
-     "extracted": "construction/infrastructure", "on_page": "Capital outlay 93,221 (General department)",
-     "issue": "The page doesn't say what the capital outlay bought. Construction/infrastructure is a guess; it could be equipment purchases or land and buildings. The same applies to detail[46] (Park capital outlay 8,375). Both lines have review flags."},
-    {"severity": "warning", "path": "detail[9].detail_category", "page": 15,
-     "extracted": "other charges for services", "on_page": "Charges for services 15,350 (Community Building)",
-     "issue": "Community building charges are usually hall rentals, so 'rentals' may fit better. This is a judgment call."},
-    {"severity": "warning", "path": "business_type.transfers_net", "page": 7,
-     "extracted": 22100, "on_page": "Other financing uses: Transfers to other funds 1,400 / 20,700 / 22,100, added in Change in net position (-33,246 + 22,100 = -11,146)",
-     "issue": "The report labels the line as a transfer out ('Other financing uses', 'Transfers to other funds'), but its own arithmetic adds it. The Statement of Activities (p3: business-type Transfers 22,100), the governmental funds statement (p5: (22,100) out) and the cash flows (p8-9: 'Transfers from other funds') all show it coming in. +22,100 is consistent with the arithmetic and the other statements, but the printed label contradicts it."}
+    {"severity": "error", "path": "receipts[13].category", "page": 7,
+     "extracted": "charges for services/fees", "on_page": "Sales 238,607 (Water/Sewer/Trash enterprise funds)",
+     "issue": "enterprise-fund utility sales belong in the user's own receipt category Utility Charges (utility fund sales/charges, garbage/refuse), not charges for services/fees; user_rules.py won't catch it because the receipts line has no fund name"},
+    {"severity": "warning", "path": "receipts[14].category", "page": 7,
+     "extracted": "charges for services/fees", "on_page": "Other revenue 3,100",
+     "issue": "the printed label is 'Other revenue', and nothing on the page says it is a service fee; the category is the extractor's assumption"},
+    {"severity": "warning", "path": "detail[7].category", "page": 15,
+     "extracted": "charges for services/fees", "on_page": "Park - Charges for services 50",
+     "issue": "a Park department charge fits the user's own category Recreation Fees (pool, park, recreation)"},
+    {"severity": "warning", "path": "detail[8].category", "page": 15,
+     "extracted": "charges for services/fees", "on_page": "Pool - Charges for services 7,242",
+     "issue": "a Pool department charge fits the user's own category Recreation Fees (pool, park, recreation)"},
+    {"severity": "warning", "path": "detail[78].original_label", "page": 11,
+     "extracted": "Capital outlay", "on_page": "Capital outlay 46,062 (Street Fund)",
+     "issue": "user rule: capital outlay lines are labelled 'Capital Outlay: <function>' (here Streets/Highways), with the printed text in printed_label; the General Fund lines were relabelled but this one wasn't"}
   ]
 }

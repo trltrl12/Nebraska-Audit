@@ -1,54 +1,19 @@
 {
   "stem": "McPherson_County_Schools_FY2025",
-  "values_checked": 293,
+  "values_checked": 286,
   "issues": [
-    {
-      "severity": "error",
-      "path": "detail[254]",
-      "page": 8,
-      "extracted": 50000,
-      "on_page": "5200 Transfer from general fund 50,000.00 (p8) = same money as the General Fund Support column 50,000.00 already recorded per account (detail[55]-detail[62], p16)",
-      "issue": "[fixed] The 50,000 General-to-Activities transfer in is recorded twice in detail (8 per-account lines from p16 totalling 50,000 plus this p8 line); double counted. Drop one of them"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[54].original_label",
-      "page": 16,
-      "extracted": "251 Neal Memorial Scholarship",
-      "on_page": "251 Neal Memoral Scholarship",
-      "issue": "label not exactly as printed (page has the typo 'Memoral'); same for detail[88]"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[227].split_from",
-      "page": 14,
-      "extracted": "split_from set",
-      "on_page": "732 Transfer to depreciation for vehicle 100,179.25 (printed as its own line)",
-      "issue": "Amount is printed as its own line, so it is not a split; split_from is unnecessary (treatment as other financing is correct and matches Depreciation 5200 100,179.25 on p7)"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[100].category",
-      "page": 3,
-      "extracted": "debt service interest",
-      "on_page": "Special Building column: Support services 5,327.12, Capital outlay 71,413.12 (= 4,282.13 + 20,452 + 27,109.50 + 19,569.49)",
-      "issue": "Statement counts Special Building interest on debt (19,569.49) and repairs (detail[96], 4,282.13, recorded as support services) as capital outlay; label-based categories are defensible but won't tie to the statement function lines"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[107].category",
-      "page": 10,
-      "extracted": "capital outlay",
-      "on_page": "4500 610 School Safety supplies 575.47; statement p3 puts all QCPU spending (82,690.04) under Debt service",
-      "issue": "function choice doesn't match the statement; judgment call"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[231].category",
-      "page": 14,
-      "extracted": "instruction",
-      "on_page": "3552 School Safety grants 58,066.50",
-      "issue": "school safety spending is more likely support services/capital than instruction; no review flag on the detail line (the statement-level line has one)"
-    }
+    {"severity": "error", "path": "receipts[3].category", "page": 5,
+     "extracted": "charges for services/fees (receipts[3] 1910 Rental of facility 50.00; receipts[4] 1910 Teacherage rent 16,835.69)",
+     "on_page": "1910 Rental of facility 50.00 (p5); 1910 Teacherage rent 16,835.69 (p9); the Statement of Activities (p2) calls it Facility rental 16,885.69",
+     "issue": "rent lines belong in the user's Rentals receipt category (2026-10-28), not charges for services; it's inconsistent too, because the detail line for 1910 Rental of facility is already category Rentals while the Special Building detail 1910 Teacherage rent is still charges for services/fees"},
+    {"severity": "warning", "path": "receipts[16].category", "page": 3,
+     "extracted": "Interest Income 7,085.82", "on_page": "Interest 7,085.82 = 1140 Interest on taxes (GF 1,635.64 p5 + Special Building 30.23 p9 + QCPU 39.95 p10) + 1510 interest lines",
+     "issue": "1,705.82 of the line is penalties/interest on taxes (own category Penalties and Interest on Taxes) and the fund schedules print the breakdown; the extractor split every other broad line but left this one whole"},
+    {"severity": "warning", "path": "disbursements[1].category", "page": 3,
+     "extracted": "support services 1,219,892.47", "on_page": "Support services (General/Deprec. 1,214,565.35 + Special Building 5,327.12)",
+     "issue": "broad statement line also holds general administration, principal, business, plant operation and pupil transportation (p6), which the school rules give their own functions; kept whole because the p3 figure can't be split cleanly (it nets the 100,179.25 depreciation transfer and depreciation fund spending)"},
+    {"severity": "warning", "path": "disbursements[8].review", "page": 3,
+     "extracted": "state grant programs (incl. school safety grants); function guessed as instruction", "on_page": "State programs/corp grants 71,573.91",
+     "issue": "stale review text: category is State Categorical Programs, not instruction (same for disbursements[9] Federal Programs)"}
   ]
 }

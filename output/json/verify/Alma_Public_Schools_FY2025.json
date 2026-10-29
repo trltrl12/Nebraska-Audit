@@ -1,9 +1,13 @@
 {
   "stem": "Alma_Public_Schools_FY2025",
-  "values_checked": 139,
+  "values_checked": 143,
   "issues": [
-    {"severity": "warning", "path": "detail[34..46]", "page": 9, "extracted": "General Fund expenditures from the General Fund Components combining schedule (13 function-level lines, detail_category 'not itemized')", "on_page": "General Fund budget schedule p12-14 itemizes spending account by account (about 45 lines, e.g. 1100 Regular instruction 3,255,753, 1160 Poverty programs 247,251, 2120 Guidance 94,182...). The Depreciation Fund schedule on p15 shows Student transportation services 25,000.", "issue": "The rules say to record the more detailed schedule. The extractor used the less detailed combining schedule and explained why (it covers the Depreciation Fund and applies the eliminations). Defensible, but the account-level spending detail on p12-14 is not captured."},
-    {"severity": "warning", "path": "receipts[9].category", "page": 4, "extracted": "intergovernmental/state aid", "on_page": "County sources 22,119 = County fines and license fees 14,926 + ESU receipts 7,193 (p7)", "issue": "Most of this line (14,926) is county fines and license fees, which detail[9] puts under fines and forfeitures. The same money gets a different category in receipts and in detail."},
-    {"severity": "warning", "path": "disbursements[2].category", "page": 4, "extracted": "support services", "on_page": "Support services - Students 785,437 (incl. Other Governmental Funds 368,402 = Activities Fund disbursements, p19)", "issue": "About 47% of this printed line is student activity spending. It can't be split on the statement; review is already set."}
+    {"severity": "error", "path": "missing", "page": 12,
+     "extracted": "General Fund detail taken from the function-level General Fund Components combining schedule (pp7-9, Total column, budget_final null)",
+     "on_page": "General Fund budget-and-actual schedule pp11-14 with program-code lines and final budgets, e.g. 1100 Regular instruction 3,255,753 (budget 3,463,700), 1160 Poverty programs 247,251, 1200 Special education programs 726,991, 2120 Guidance services 94,182, 2310 Board of Education 42,966, 2610 Operation of buildings 691,976, 2710 Vehicle operation and purchasing 390,045, 6210 Title I Part A 103,241 ...; total disbursements 6,918,392",
+     "issue": "The no-double-counting rule keeps the more detailed of two schedules for the same fund. The pp11-14 budget schedule breaks every function into program lines and has budgets, but none of its lines are in detail. The combining Total column only repeats the statement's function lines. The Depreciation Fund could be added from its own p15 schedule (interest 572, transfer in 200,000, student transportation 25,000). Its 200,000 transfer is disbursed inside the General Fund (p15 label) and would need the hidden-transfer treatment."},
+    {"severity": "warning", "path": "detail[45].category", "page": 9,
+     "extracted": "other", "on_page": "Non-program expenditures 6,493 (General Fund); p5 General Fund 'Federal programs' 243,847 = 237,354 + 6,493",
+     "issue": "The basic statement counts this line inside Federal programs (243,847 = 237,354 + 6,493). The report's own grouping would put it in Federal Programs rather than other."}
   ]
 }
