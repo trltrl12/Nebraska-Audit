@@ -63,7 +63,7 @@ UTILITY_FUND = re.compile(r"water|sewer|electric|light|gas|utilit|refuse|sanitat
 DRIVERS_ED = re.compile(r"driver'?s'? ?ed", re.I)
 COMMUNITY_BETTERMENT = re.compile(r"community better", re.I)
 OPERATING_LABEL = re.compile(r"^operating( expenses?| costs?)?$", re.I)
-NOT_EXTRACURRICULAR = re.compile(r"interest|tuition|lunch|meal|fine|donat|contribut|grant|reimburs|transfer", re.I)
+NOT_EXTRACURRICULAR = re.compile(r"interest|tuition|lunch|meal|fine|donat|contribut|grant|reimburs|transfer|community serv", re.I)
 # county treasurer / bank cash -> Cash and Cash Equivalents (never "cash and investments")
 CASH_ONLY = re.compile(r"county treasurer|cash (in|at) bank|^cash$|^cash and cash equivalents", re.I)
 NOT_CASH_ONLY = re.compile(r"invest|certificat|time deposit|savings|pooled", re.I)
