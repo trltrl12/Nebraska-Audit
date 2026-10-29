@@ -308,6 +308,31 @@ def operating_rule(x, log):
             x.pop("review")
 
 
+SCHOOL_CITY_CATS = {"Rentals": "School Facility Rentals", "licenses and permits": "School License Fees"}
+SCHOOL_WORD = re.compile(r"\bschools?\b", re.I)
+NOT_SCHOOL = re.compile(r"seminar|training|travel|meeting|conference|activities and events|^school$|^schools?,", re.I)
+
+
+def school_rule(x, school, revenue, log, entity_type=""):
+    """User 2026-10-29: school lines are kept apart. In school reports the city-style Rentals / licenses categories
+    become school categories; in other reports lines naming a school (school resource officer, license fees paid to
+    the school district, a school building) get School-Related Receipts / School-Related Spending."""
+    cat = x.get("category")
+    if school:
+        if revenue and cat in SCHOOL_CITY_CATS:
+            setcat(x, "category", SCHOOL_CITY_CATS[cat], "category: " + SCHOOL_CITY_CATS[cat], log)
+        return
+    if entity_type not in ("city", "village", "county"):
+        return
+    text = label_of(x).strip()
+    dep = str(x.get("department") or "")
+    if not (SCHOOL_WORD.search(text) and not NOT_SCHOOL.search(text)) and not SCHOOL_WORD.search(dep):
+        return
+    new = "School-Related Receipts" if revenue else "School-Related Spending"
+    if cat != new and cat != "capital outlay":
+        setcat(x, "category", new, "category: " + new, log)
+
+
 def department_capital_outlay_rule(detail, log):
     """Bare "Capital outlay" lines inside a department -> "Capital Outlay: <function>", the function being the one the
     department's other spending lines carry."""
@@ -477,7 +502,7 @@ def apply(d, stem=""):
     log = Counter()
     # fund-name rule: only reports whose detail was built per fund from the statements (cities and villages)
     per_fund = "per-fund lines from the fund statements" in (d.get("notes") or "") or bool(d.get("_per_fund"))
-    school = d.get("entity_type") == "school district"
+    school = d.get("entity_type") == "school district" or "Educational_Service_Unit" in stem
     lps = entity_of(stem) == "Lincoln_Public_Schools"
     for x in d.get("receipts") or []:
         decision_rule(x, "revenue", log)
@@ -485,12 +510,14 @@ def apply(d, stem=""):
         if school:
             extracurricular_rule(x, log)
         charges_rule(x, school, log)
+        school_rule(x, school, True, log, d.get("entity_type"))
     for x in d.get("disbursements") or []:
         decision_rule(x, "expenditure", log)
         spending_rules(x, log)
         drivers_ed_spending_rule(x, log)
         community_betterment_rule(x, log)
         operating_rule(x, log)
+        school_rule(x, school, False, log, d.get("entity_type"))
         if school and not lps:
             staff_label_rule(x, log)
     for x in d.get("detail") or []:
@@ -501,12 +528,14 @@ def apply(d, stem=""):
             if school:
                 extracurricular_rule(x, log)
             charges_rule(x, school, log)
+            school_rule(x, school, True, log, d.get("entity_type"))
         elif sec == "expenditure":
             decision_rule(x, "expenditure", log)
             spending_rules(x, log)
             drivers_ed_spending_rule(x, log)
             community_betterment_rule(x, log)
             operating_rule(x, log)
+            school_rule(x, school, False, log, d.get("entity_type"))
             if school and not lps:
                 staff_label_rule(x, log)
         elif sec == "other financing":

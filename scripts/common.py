@@ -64,6 +64,8 @@ RECEIPT_CATEGORIES = [
     "Ambulance Fees",  # user decision 2026-10-28: out of charges for services
     "Fees of Office",  # user decision 2026-10-28: out of charges for services
     "Program Revenue",  # user decision 2026-10-29: program income/revenue/fees, out of charges for services
+    "School Facility Rentals", "School License Fees",  # user 2026-10-29: school reports keep school categories
+    "School-Related Receipts",  # user 2026-10-29: school lines in city/village/county reports
 ]
 DISBURSEMENT_CATEGORIES = [
     "general government", "public safety", "streets/highways", "culture/recreation",
@@ -98,6 +100,7 @@ DISBURSEMENT_CATEGORIES = [
     "Federal Programs",
     "Debt Service",
     "Drivers Education",  # user decision 2026-10-28: out of instruction
+    "School-Related Spending",  # user decision 2026-10-29: school lines in city/village/county reports
     "Operating",  # user decision 2026-10-29: "Operating" lines that were in other
     "Community Betterment",  # user decision 2026-10-29: not keno, not economic development
 ]
@@ -198,6 +201,8 @@ DETAIL_REVENUE_CATEGORIES = [
     "Ambulance Fees",  # user decision 2026-10-28: out of charges for services
     "Fees of Office",  # user decision 2026-10-28: out of charges for services
     "Program Revenue",  # user decision 2026-10-29: program income/revenue/fees, out of charges for services
+    "School Facility Rentals", "School License Fees",  # user 2026-10-29: school reports keep school categories
+    "School-Related Receipts",  # user 2026-10-29: school lines in city/village/county reports
 ]
 # Expenditure: what the money is spent on (object of expenditure).
 DETAIL_EXPENSE_CATEGORIES = [
