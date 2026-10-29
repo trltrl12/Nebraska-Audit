@@ -31,6 +31,10 @@
      "issue": "the Student Fee Fund part (14,662) is postsecondary and summer school fees (p25, Tuition Received); the unexplained Cooperative part is most of the line, so other is defensible"},
     {"severity": "warning", "path": "detail[158].category", "page": 25,
      "extracted": "Instruction", "on_page": "Summer school 1,269 (Student Fee Fund)",
-     "issue": "p9 classifies the Student Fee Fund under Student support services; Instruction is defensible (already marked review)"}
+     "issue": "p9 classifies the Student Fee Fund under Student support services; Instruction is defensible (already marked review)"},
+    {"severity": "error", "field": "receipts[10].category / detail '1800 Community service activities' (p10) category", "page": 4,
+     "issue": "Community service activities 95,162 (state code 1800, community services) is categorized Extracurricular Receipts. It is not school activity, student fee or admissions money, and the user rule for Extracurricular Receipts explicitly excludes community service lines (scripts/user_rules.py NOT_EXTRACURRICULAR 'community serv'). Should be charges for services/fees (as its own detail_category 'other charges for services' says) in both receipts and detail."},
+    {"severity": "error", "field": "receipts[11].category / detail '1910 Rentals of school equipment, property, and facilities' (p10) category", "page": 4,
+     "issue": "Rentals 7,834 is category charges for services/fees in receipts and detail (detail_category already 'rentals'). Rentals is its own receipt category (user decision 2026-10-28, out of charges for services); the label is plainly rentals, so category should be Rentals in both places."}
   ]
 }

@@ -45,7 +45,7 @@ CHARGE_CATS = [
     (re.compile(r"driver'?s'? ?ed", re.I), "Drivers Education Fees"),
     (re.compile(r"lunch|meal|milk|breakfast|nutrition|lunchroom|cafeteria|food (service|sale)", re.I), "School Lunch Sales"),
     (re.compile(r"^(\d+ )?(rent|rents|rentals?|rental income|rent income|rental of [a-z ]+|[a-z ]* rentals?|lease and rent|"
-                r"leases? and rentals?|building rent)$", re.I), "Rentals"),
+                r"leases? and rentals?|building rent)$|^(\d+ )?rentals? of |^[a-z ]+ rent$", re.I), "Rentals"),
     (re.compile(r"utilit(y|ies) (sales|collections|charges|revenue)|consumer sales|water (sales|charges)|sewer "
                 r"(sales|charges)|electric(al)? (sales|charges)|sale of (water|electricity|power)", re.I), "Utility Charges"),
     (re.compile(r"student fees|admission|concession|gate receipts", re.I), "Extracurricular Receipts"),
@@ -59,6 +59,7 @@ CHARGE_CATS = [
     (re.compile(r"licen[cs]e|permit", re.I), "licenses and permits"),
     (re.compile(r"pool|park|recreation|golf|ball ?field|campground|swim", re.I), "Recreation Fees"),
 ]
+RECREATION_DEPT = re.compile(r"pool|park|recreation|golf|swim", re.I)
 UTILITY_FUND = re.compile(r"water|sewer|electric|light|gas|utilit|refuse|sanitation|garbage|trash|solid waste", re.I)
 DRIVERS_ED = re.compile(r"driver'?s'? ?ed", re.I)
 COMMUNITY_BETTERMENT = re.compile(r"community better", re.I)
@@ -275,6 +276,11 @@ def charges_rule(x, school, log):
         if pat.search(lab) and (cat != "Extracurricular Receipts" or school):
             setcat(x, "category", cat, "category: " + cat, log)
             return
+    # generic fee lines under a pool / park department are recreation fees (user 2026-10-28 rule, by department)
+    if not school and RECREATION_DEPT.search(str(x.get("department") or "")) \
+            and re.search(r"charges|fees|admission|concession|receipts", lab, re.I):
+        setcat(x, "category", "Recreation Fees", "category: Recreation Fees (department)", log)
+        return
     fund = str(x.get("fund") or "")
     if x.get("fund_type") == "business-type" and UTILITY_FUND.search(fund) \
             and re.search(r"sales|charges|collections|services|fees", lab, re.I):

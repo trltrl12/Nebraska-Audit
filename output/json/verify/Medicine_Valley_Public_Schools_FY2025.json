@@ -12,6 +12,8 @@
      "issue": "The same lines are category 'investment income' in detail (detail Depreciation/Employee Benefit 1510 Investment income) but are folded into Interest Income in receipts. The rule asks for the same category for the same label throughout a report. The amounts are correct."},
     {"severity": "warning", "path": "detail[ School Nutrition 1620 Ala carte ].category", "page": 10,
      "extracted": "charges for services/fees", "on_page": "1620 Ala carte 3,283.62; 1630 Special functions 1,311.12",
-     "issue": "The detail_category is school lunch sales, and the statement's 'Sales of lunches' 59,000.47 (p3), which includes both lines, is category School Lunch Sales in receipts. Under the 2026-10-28 rule, nutrition sales are School Lunch Sales, so category 'charges for services/fees' is inconsistent, at least for Ala carte."}
+     "issue": "The detail_category is school lunch sales, and the statement's 'Sales of lunches' 59,000.47 (p3), which includes both lines, is category School Lunch Sales in receipts. Under the 2026-10-28 rule, nutrition sales are School Lunch Sales, so category 'charges for services/fees' is inconsistent, at least for Ala carte."},
+    {"severity": "error", "field": "detail (Budget to Actual - School Nutrition Fund) '1620 Ala carte' 3,283.62 and '1630 Special functions' 1,311.12 category", "page": 10,
+     "issue": "Both are School Nutrition Fund food sales (detail_category school lunch sales) and the p3 statement line 'Sales of lunches' 59,000.47 = 1611 48,734.58 + 1612 5,671.15 + 1620 3,283.62 + 1630 1,311.12 is category School Lunch Sales in receipts, but these two detail lines are category charges for services/fees. School Lunch Sales is its own category (user 2026-10-28); both should be School Lunch Sales so detail matches the receipt line it makes up."}
   ]
 }
