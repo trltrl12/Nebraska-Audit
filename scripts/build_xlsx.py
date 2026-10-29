@@ -188,6 +188,10 @@ PROP_FLOW = [("beginning_cash", "beginning cash"), ("operating", "operating acti
              ("investing", "investing activities"), ("ending_cash", "ending cash")]
 
 
+def page_amount(v):
+    return v.get("amount") if isinstance(v, dict) else v
+
+
 def one_tab(collected):
     """output/cashflow_one_tab.xlsx: one sheet, one amount column, three levels:
     cash flow (governmental and business-type roll-forwards; utility cash flow statements),
@@ -216,6 +220,19 @@ def one_tab(collected):
             if v is not None and (v or col in ("beginning_balance", "ending_balance")):
                 out.append({**ident_, "level": "cash flow", "fund_type": "governmental", "section": "roll-forward",
                             "source": "statement", "line": n, "original_label": label.format(bt), "amount": sign * v})
+        # governmental activities net position from the Statement of Activities (user 2026-10-29); not part of the
+        # fund-balance roll-forward above
+        try:
+            gnp = json.loads((JSON_DIR / f"{r.get('filename')}.json").read_text()).get("governmental_net_position") or {}
+        except (OSError, ValueError):
+            gnp = {}
+        for n, (k, label) in enumerate([("beginning", "beginning net position"), ("restatement", "restatement"),
+                                        ("change", "change in net position"), ("ending", "ending net position")], 1):
+            v = num_(page_amount(gnp.get(k)))
+            if v is not None:
+                out.append({**ident_, "level": "cash flow", "fund_type": "governmental",
+                            "section": "net position (statement of activities)", "source": "statement", "line": n,
+                            "original_label": label, "amount": v})
         b, rc, ds, e = (num_(r.get(k)) for k in ("bt_beginning", "bt_receipts", "bt_disbursements", "bt_ending"))
         m = r.get("bt_measure") or "balance"
         lines = [(1, f"beginning {m}", b, "statement"), (2, "receipts", rc, "statement"),

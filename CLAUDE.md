@@ -156,6 +156,7 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
   Liability lines labelled "<X> - Due Within One Year" / "<X> - Due in More Than One Year" for X = Bonds Payable, Leases
   Payable, Subscriptions, Compensated Absences, Landfill Postclosure Costs, Workers' Compensation Claims, Other
   Postemployment Benefit Liability: category X, original_label the "Due ..." part (printed text in printed_label).
+- **Governmental net position (user 2026-10-29, GAAP reports):** `governmental_net_position{beginning, restatement, change, ending}` from the Statement of Activities governmental activities column; shown in the one-tab workbook as cash flow / Governmental / "Net position (statement of activities)" rows, next to the fund-balance roll-forward (which is unchanged).
 - Equity lines for net investment in capital assets (any wording, incl. "Invested in capital assets, net of related
   debt") have category Net Investment in Capital Assets (user, 2026-10-27, all reports).
 - Liability categories: accounts payable, Accrued Interest Payable, Accrued Liabilities, Commercial Paper, due to other governments, unearned

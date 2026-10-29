@@ -190,6 +190,15 @@ def check(stem, d):
             cmp("totals", f"sum of {fund} {key} lines vs printed total", float(stated), computed,
                 pages=f"{page(rt) or ''}")
 
+    # governmental activities net position (Statement of Activities, user 2026-10-29): beginning + restatement +
+    # change = ending
+    gnp = d.get("governmental_net_position") or {}
+    if all(amt(gnp.get(k)) is not None for k in ("beginning", "change", "ending")):
+        cmp("net position", "governmental net position: beginning + restatement + change vs ending",
+            float(amt(gnp["ending"])),
+            amt(gnp["beginning"]) + (amt(gnp.get("restatement")) or 0) + amt(gnp["change"]),
+            pages=f"{page(gnp['ending']) or ''}")
+
     # Business-type (utility) funds roll forward on their own
     if any(fund_type(i) == "business-type" for k in ("receipts", "disbursements") for i in d.get(k) or []):
         rb = reconcile_business(d)
