@@ -1,31 +1,54 @@
 {
   "stem": "Silver_Lake_Public_Schools_FY2025",
-  "values_checked": 364,
+  "values_checked": 385,
   "issues": [
-    {"severity": "error", "path": "receipts[10].category", "page": 9,
-     "extracted": "intergovernmental/state aid", "on_page": "County Receipts 16,273.27 = 2110 County Fines and Licenses 11,373.62 + 2210 Educational Service Receipts 4,899.65 (p17)",
-     "issue": "[fixed 2026-10-28: County Receipts split (split_from) into Fines and Licenses 11,373.62 and ESU Receipts 4,899.65 from Schedule A p17] Code 2110 is Fines and Licenses under the rules and makes up 70% of the line. The breakdown is printed (p17), so the line should be Fines and Licenses (dominant) or split into Fines and Licenses 11,373.62 and ESU Receipts 4,899.65. It is not state aid. The other broad lines in this report were split this way."},
-    {"severity": "error", "path": "receipts[6].category", "page": 9,
-     "extracted": "charges for services/fees", "on_page": "split item 17,780 = General 1740 Fees 380 + 1910 Rental 9,000 + Special Building 1910 Rental 8,400 (pp17, 27)",
-     "issue": "[fixed 2026-10-28: split into charges for services/fees 380 (1740 Fees) and Rentals 17,400 (General 9,000 + Special Building 8,400)] Rentals 17,400 are 98% of this split item, and under the user's 2026-10-28 rule Rentals is its own receipt category, out of charges for services. The detail lines already use Rentals. Split out Rentals 17,400 (fees 380 stay charges)."},
-    {"severity": "error", "path": "detail[237].category", "page": 24,
-     "extracted": "reimbursements/refunds", "on_page": "1620 Non-Reimbursable 7,526.40",
-     "issue": "[fixed 2026-10-28: category set to School Lunch Sales; statement Sales of Lunches 101,726.53 = 1611+1612+1613+1620] 'Non-Reimbursable' means non-reimbursable (a la carte/adult) meal sales, which the statement counts in 'Sales of Lunches' 101,726.53. The category should be School Lunch Sales, not reimbursements/refunds. This line's own detail_category is already school lunch sales."},
-    {"severity": "error", "path": "detail[201..210].category", "page": 39,
-     "extracted": "instruction", "on_page": "6200 Title I 76,466.50; 6406 4,939; 6408 63,214; 6992 REAP 31,119.97; 6998 ESSER III 19,962.64 (pp39-40)",
-     "issue": "[fixed 2026-10-28: all 6200/6406/6408/6992/6998 Schedule M lines set to Federal Programs; they sum to the statement's 195,702.11] The report counts these program lines in its 'Federal Programs' statement line (195,702.11 on p13). Under the user's 2026-10-28 rule, program lines follow the report's own grouping, so the category should be Federal Programs. The statement-level disbursement already uses it."},
-    {"severity": "error", "path": "detail[198..199].category", "page": 39,
-     "extracted": "instruction", "on_page": "3535 High Ability Learners 1,000; 3551 Career Education 7,500",
-     "issue": "[fixed 2026-10-28: 3535 and 3551 lines set to State Categorical Programs (statement State Programs 8,500)] The report counts these two lines in its 'State Programs' statement line (8,500 on p13). Under the user's 2026-10-28 rule they take State Categorical Programs, as the statement-level line does."},
-    {"severity": "warning", "path": "receipts[21]", "page": 21,
-     "extracted": "receipt 90,000 (other)", "on_page": "Depreciation Fund '5200 Allocation from General Fund' 90,000; General Fund 2710 'Property' 90,000.00 (p38)",
-     "resolved": "Kept as printed: no page shows an elimination or reclassification, so the hidden-transfer split is not allowed; the question stays in decision_needed for the user.",
-     "issue": "Code 5200 is the same code the Activities and Nutrition funds use for transfers from the General Fund, and General Fund 2710 Vehicle Operation prints a round 90,000 'Property' line. The same 90,000 is probably counted as both a receipt and spending, which would be a hidden transfer. The extractor recorded it as printed and put the question in decision_needed, which is correct. This flags the likely double count (detail[185] and detail[214])."},
-    {"severity": "warning", "path": "detail[11].category", "page": 17,
-     "extracted": "intergovernmental/state aid / county/other local governments", "on_page": "2210 Educational Service Receipts 4,899.65",
-     "issue": "[fixed 2026-10-28: category and detail_category set to ESU Receipts] These are ESU receipts, and the user's rules make ESU Receipts its own category (as used for 2210 ESU receipts in other reports)."},
-    {"severity": "warning", "path": "disbursements[42].category", "page": 13,
-     "extracted": "student transportation", "on_page": "Vehicle Operation, Maintenance & Purchasing 9,929.74 (code 2650)",
-     "issue": "[fixed 2026-10-28: statement line and Schedule M 2650 lines set to Building and Grounds] Code 2650 is in the 2600 operation and maintenance of plant group (Building and Grounds), not 2700 student transportation. Other reports (e.g. Schuyler 2650) put it in Building and Grounds. Detail lines 2650 (detail[173], detail[174]) likewise."}
+    {
+      "severity": "warning",
+      "path": "receipts[23].category",
+      "page": 21,
+      "extracted": "other 90,000.00 (Non-Revenue Receipts split; detail Schedule C '5200 Allocation from General Fund' in section revenue)",
+      "on_page": "Schedule C: 5200 Allocation from General Fund 90,000.00; Schedule M p38: 2710 Vehicle Operation & Purchasing - Regular Education, Property 90,000.00",
+      "issue": "Probably an interfund transfer: code 5200 is the code Schedules F and G use for 'Transfers From General Fund', and the General Fund's 2710 'Property' line is exactly 90,000. If so, governmental receipts and spending are both overstated by 90,000. No page shows an elimination, so the extractor kept it as printed and asked in decision_needed. Needs the user's ruling."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[22].category",
+      "page": 22,
+      "extracted": "other (includes Activities Fund 5690 Other Non-Revenue 44,993.91)",
+      "on_page": "Schedule F Activities Fund: 5690 Other Non-Revenue 44,993.91",
+      "issue": "Activity fund receipt left in other. The extractor rule (and user rule 2026-10-28) sends school activity fund receipts to Extracurricular Receipts unless the report says otherwise. This conflicts with the line's category_decision 'user 2026-10-23'. Same issue for the detail line."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[10].category",
+      "page": 22,
+      "extracted": "other (includes Activities Fund 1990 Miscellaneous 11,991.96)",
+      "on_page": "Schedule F Activities Fund: 1990 Miscellaneous 11,991.96",
+      "issue": "Activity fund receipt left in other. The school-activity-fund rule points to Extracurricular Receipts, but the user's 2026-10-23 category decision says Other / Miscellaneous. Same issue for the detail line."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[6].category",
+      "page": 17,
+      "extracted": "charges for services/fees",
+      "on_page": "1740 Fees 380.00",
+      "issue": "In the state chart, code 1740 falls in the 1700 student activities group. It may be a student fee (Extracurricular Receipts) rather than a general charge for services."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[50].category",
+      "page": 12,
+      "extracted": "capital outlay, original_label 'Capital Outlay: Facilities Acquisition and Construction'",
+      "on_page": "Other Purchased Services (Special Building Fund column) 7,590.67",
+      "issue": "Exhibit III prints this amount under 'Other Purchased Services', not Capital Outlay. The extractor moved it to capital outlay and relabelled it based on Schedule I function codes 4500/4700 (3,000.00 + 3,824.61 + 766.06 = 7,590.67, arithmetic correct). The fund-column split is printed, so it is valid; the category and label are a judgment call."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[21].detail_category",
+      "page": 11,
+      "extracted": "support services with no detail_category (also disbursements[24] Audio/Visual Services 18,054.00 and disbursements[25] Educational Television Services 3,514.44)",
+      "on_page": "Support Services - Other 26,412.13 (code 2190, pupils); Audio/Visual Services (2223) and Educational Television Services (2224) (instructional staff)",
+      "issue": "Every other support services line has Pupils or Staff, but these three have no detail_category. By function code: 2190 = Pupils; 2223/2224 = Staff."
+    }
   ]
 }

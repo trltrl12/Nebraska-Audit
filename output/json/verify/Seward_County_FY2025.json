@@ -1,18 +1,23 @@
 {
   "stem": "Seward_County_FY2025",
-  "values_checked": 123,
+  "values_checked": 124,
   "issues": [
-    {"severity": "warning", "path": "receipts[6]", "page": 2,
-     "extracted": "Miscellaneous 2,578,990 (other)", "on_page": "Statement of Activities general receipts: Health Insurance Settlements 21,020 + Miscellaneous 2,557,970 = 2,578,990; the 21,020 is the Opioid Recovery Fund 'Miscellaneous' (p21)",
-     "issue": "the report itself prints a breakdown of this line; the 21,020 settlement receipt could be split out (split_from p2) instead of sitting in other. Same 21,020 is inside detail[55] (nonmajor Miscellaneous 70,685)"},
-    {"severity": "warning", "path": "detail[27].category", "page": 5,
-     "extracted": "other", "on_page": "Abandoned Cemetery 4,200",
-     "issue": "cemetery spending normally maps to health/welfare; the statement (p4) counts it in its Miscellaneous function, and a user category_decision is attached, so left as a judgment call"},
-    {"severity": "warning", "path": "receipts[0].original_label", "page": 4,
-     "extracted": "Taxes (Inheritance Fund column)", "on_page": "Taxes",
-     "issue": "label is descriptive, not as printed (receipts[1] 'Taxes (all other funds)' likewise); the split by fund column is marked split_from/computed and adds to 11,009,457"},
+    {"severity": "warning", "path": "receipts[1]", "page": 4,
+     "extracted": {"category": "taxes (unlabeled)", "amount": 10246640},
+     "on_page": "Nonmajor combining statement p15: Taxes in Justice Center Debt Service Fund 615,632, Visitors Promotion Fund 30,009, Visitors Improvement Fund 30,009 (nonmajor total 675,650)",
+     "issue": "The extraction splits taxes by fund column for the Inheritance Fund, but not for the nonmajor columns printed on p15. The two visitor-fund columns (60,018) are lodging tax by fund purpose, and the debt service levy (615,632) is property tax. A consistent column split is possible; this is a judgment call because the rows are labelled only 'Taxes'."},
+    {"severity": "warning", "path": "detail[51].category", "page": 21,
+     "extracted": "taxes (unlabeled)", "on_page": "Total Nonmajor Funds Taxes 675,650 (p21); fund columns p15: Justice Center Debt Service 615,632, Visitors Promotion 30,009, Visitors Improvement 30,009",
+     "issue": "The same point as receipts[1]: the fund columns show this is debt-service property tax plus visitor (lodging) tax."},
+    {"severity": "warning", "path": "receipts[6]", "page": 4,
+     "extracted": {"category": "other", "amount": 2578990},
+     "on_page": "Statement of Activities p2: Health Insurance Settlements 21,020 + Miscellaneous 2,557,970 = 2,578,990; the 21,020 is the Opioid Recovery Fund (p21)",
+     "issue": "The printed label is Miscellaneous, and decision_needed already covers the Health Insurance Fund 2,398,135. The 21,020 opioid settlement inside it is not mentioned."},
+    {"severity": "warning", "path": "disbursements[6].category", "page": 4,
+     "extracted": "other", "on_page": "Miscellaneous 3,214,759 = Miscellaneous General 3,210,559 + Abandoned Cemetery 4,200 (p5)",
+     "issue": "The printed label is Miscellaneous, but detail puts Abandoned Cemetery 4,200 in health/welfare, so the statement and detail functions differ by 4,200."},
     {"severity": "warning", "path": "report_discrepancies[0].check", "page": 6,
-     "extracted": "schedule lines vs total", "on_page": "Inheritance Fund: Taxes 762,817, TOTAL RECEIPTS 827,219",
-     "issue": "discrepancy is real (difference 64,402 = Intergovernmental 49,199 + Charges 15,203 on p4) but 'check' is not one of business|reconcile|balance|totals|detail"}
+     "extracted": "schedule lines vs total", "on_page": "Inheritance Fund: Taxes 762,817; TOTAL RECEIPTS 827,219",
+     "issue": "The discrepancy is real (the schedule omits Intergovernmental 49,199 and Charges for Services 15,203), but the check value is not one of the allowed values (business|reconcile|balance|totals|detail); 'detail' or 'totals' fits."}
   ]
 }
