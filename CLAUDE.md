@@ -138,6 +138,7 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
   (Pupils and Staff only), General Administration, School Administration, Business, Building and Grounds, Community
   Service Operations, State Categorical Programs, Federal Programs (only lines labelled so), Debt Service (Principal /
   Interest incl. bond fees); rules in the extractor agent.
+- **As printed (user 2026-10-29, overrides older allocation/contra fixes):** statement and schedule lines keep exactly what the report prints. Never move a printed receipt or spending amount into transfers, never add contra/offset lines, never remove an amount the statement prints (e.g. interfund allocations, Leasing Corporation amounts). The user reads only Category and Original Label; notes and review text are not used, so do not spend effort on them.
 - Transfers are never revenue or spending: transfers_in/out (detail section `other financing`,
   signed); a line labelled "transfer" anywhere else is flagged.
 - Disbursement categories: general government, public safety, streets/highways,
