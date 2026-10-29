@@ -57,9 +57,9 @@ CHARGE_CATS = [
     (re.compile(r"fees? of office|county clerk|register of deeds|recording fees|clerk.*fees|treasurer.*fees|sheriff.*fees|"
                 r"court (costs|fees)|filing fees", re.I), "Fees of Office"),
     (re.compile(r"licen[cs]e|permit", re.I), "licenses and permits"),
-    (re.compile(r"pool|park|recreation|golf|ball ?field|campground|swim", re.I), "Recreation Fees"),
+    (re.compile(r"pool|\bparks?\b|recreation|golf|ball ?field|campground|swim", re.I), "Recreation Fees"),
 ]
-RECREATION_DEPT = re.compile(r"pool|park|recreation|golf|swim", re.I)
+RECREATION_DEPT = re.compile(r"pool|\bparks?\b|recreation|golf|swim", re.I)
 UTILITY_FUND = re.compile(r"water|sewer|electric|light|gas|utilit|refuse|sanitation|garbage|trash|solid waste", re.I)
 DRIVERS_ED = re.compile(r"driver'?s'? ?ed", re.I)
 COMMUNITY_BETTERMENT = re.compile(r"community better", re.I)
