@@ -63,6 +63,7 @@ RECEIPT_CATEGORIES = [
     "Cemetery Fees",  # user decision 2026-10-28: out of charges for services
     "Ambulance Fees",  # user decision 2026-10-28: out of charges for services
     "Fees of Office",  # user decision 2026-10-28: out of charges for services
+    "Program Revenue",  # user decision 2026-10-29: program income/revenue/fees, out of charges for services
 ]
 DISBURSEMENT_CATEGORIES = [
     "general government", "public safety", "streets/highways", "culture/recreation",
@@ -194,6 +195,7 @@ DETAIL_REVENUE_CATEGORIES = [
     "Cemetery Fees",  # user decision 2026-10-28: out of charges for services
     "Ambulance Fees",  # user decision 2026-10-28: out of charges for services
     "Fees of Office",  # user decision 2026-10-28: out of charges for services
+    "Program Revenue",  # user decision 2026-10-29: program income/revenue/fees, out of charges for services
 ]
 # Expenditure: what the money is spent on (object of expenditure).
 DETAIL_EXPENSE_CATEGORIES = [

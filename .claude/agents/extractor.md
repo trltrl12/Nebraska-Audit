@@ -464,7 +464,8 @@ These are the user's decisions; apply them while extracting. After extraction th
   income); Utility Charges (utility fund sales/charges/collections, garbage/refuse); Drivers Education Fees; Recreation
   Fees (pool, park, golf, recreation); Cemetery Fees; Ambulance Fees (ambulance, rescue); Fees of Office (clerk, register
   of deeds, recording, treasurer/sheriff/court fees); postsecondary/tuition -> Tuition Received; reimbursements ->
-  reimbursements/refunds; licenses/permits -> licenses and permits. Charges for services is
+  reimbursements/refunds; licenses/permits -> licenses and permits; Program Revenue (program income, program revenue,
+  program fees, program service income) (user 2026-10-29). Charges for services is
   only for genuine fees for services; unexplained "Local receipts/Other" lines get their breakdown from the schedules.
 - **Drivers Education** spending is its own category (never Instruction).
 - **Spending:** every capital outlay line, also inside a department, is category capital outlay labelled

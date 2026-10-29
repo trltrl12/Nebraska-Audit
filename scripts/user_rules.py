@@ -40,6 +40,8 @@ BARE_CAPITAL_OUTLAY = re.compile(r"^capital (outlay|expenditures|purchases)$", r
 ACTIVITY = re.compile(r"activit", re.I)
 # own receipt categories out of charges for services (user 2026-10-28)
 CHARGE_CATS = [
+    (re.compile(r"^(\d+ )?(other |management |340b )?program( service)?( income| revenue| fees)?( \(.*\))?$|^stop program|"
+                r"^340b program", re.I), "Program Revenue"),
     (re.compile(r"driver'?s'? ?ed", re.I), "Drivers Education Fees"),
     (re.compile(r"lunch|meal|milk|breakfast|nutrition|lunchroom|cafeteria|food (service|sale)", re.I), "School Lunch Sales"),
     (re.compile(r"^(\d+ )?(rent|rents|rentals?|rental income|rent income|rental of [a-z ]+|[a-z ]* rentals?|lease and rent|"
