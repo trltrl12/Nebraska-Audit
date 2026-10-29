@@ -55,6 +55,14 @@ RECEIPT_CATEGORIES = [
     "Categorical Grants",  # user decision 2026-10-27: Lincoln Public Schools 1925, out of donations/contributions
     "Other Non-Revenue Receipts",  # user decision 2026-10-27: Lincoln Public Schools 5300 / 5690
     "Reimbursement for Services",  # user decision 2026-10-26: own category
+    "School Lunch Sales",  # user decision 2026-10-28: out of charges for services
+    "Rentals",  # user decision 2026-10-28: out of charges for services
+    "Utility Charges",  # user decision 2026-10-28: out of charges for services
+    "Drivers Education Fees",  # user decision 2026-10-28: out of charges for services
+    "Recreation Fees",  # user decision 2026-10-28: out of charges for services
+    "Cemetery Fees",  # user decision 2026-10-28: out of charges for services
+    "Ambulance Fees",  # user decision 2026-10-28: out of charges for services
+    "Fees of Office",  # user decision 2026-10-28: out of charges for services
 ]
 DISBURSEMENT_CATEGORIES = [
     "general government", "public safety", "streets/highways", "culture/recreation",
@@ -88,6 +96,7 @@ DISBURSEMENT_CATEGORIES = [
     "State Categorical Programs",
     "Federal Programs",
     "Debt Service",
+    "Drivers Education",  # user decision 2026-10-28: out of instruction
 ]
 PROPRIETARY_FIELDS = ["operating", "noncapital_financing", "capital_and_related_financing", "investing"]
 
@@ -177,6 +186,14 @@ DETAIL_REVENUE_CATEGORIES = [
     "Tuition Received",  # user decision 2026-10-23: all tuition incl. preschool and summer school
     "Interest Income",  # user decision 2026-10-23: interest (investment income keeps dividends/gains)
     "Extracurricular Receipts",  # user decision 2026-10-23: school extracurricular/activity receipts
+    "School Lunch Sales",  # user decision 2026-10-28: out of charges for services
+    "Rentals",  # user decision 2026-10-28: out of charges for services
+    "Utility Charges",  # user decision 2026-10-28: out of charges for services
+    "Drivers Education Fees",  # user decision 2026-10-28: out of charges for services
+    "Recreation Fees",  # user decision 2026-10-28: out of charges for services
+    "Cemetery Fees",  # user decision 2026-10-28: out of charges for services
+    "Ambulance Fees",  # user decision 2026-10-28: out of charges for services
+    "Fees of Office",  # user decision 2026-10-28: out of charges for services
 ]
 # Expenditure: what the money is spent on (object of expenditure).
 DETAIL_EXPENSE_CATEGORIES = [
