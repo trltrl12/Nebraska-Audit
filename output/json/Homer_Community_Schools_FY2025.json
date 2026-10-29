@@ -3,7 +3,7 @@
   "entity_type": "school district",
   "fiscal_year_end": "2025-08-31",
   "basis": "cash",
-  "extraction_attempt": 4,
+  "extraction_attempt": 3,
   "beginning_cash": {
     "amount": 2535316,
     "source_page": 6
@@ -96,11 +96,9 @@
       "fund_type": "governmental",
       "category": "other",
       "original_label": "Other Local Receipts",
-      "amount": 943,
+      "amount": 333462,
       "source_page": 5,
-      "split_from": "Other Local Receipts 333,462 (p5): General Fund 943 + Homer Educational Facilities Leasing Corporation 332,519 (moved to transfers_in: lease payment from the district's Special Building Fund, eliminated in the p2 Statement of Activities)",
-      "computed": "Other Local Receipts 333,462 - Leasing Corporation 332,519 (p5)",
-      "review": "General Fund other local receipts 943, no description",
+      "review": "332,519 is Homer Educational Facilities Leasing Corporation receipts (matches its debt service); 943 is General Fund other local",
       "detail_category": "Other / Miscellaneous Receipts",
       "category_decision": "user 2026-10-23"
     },
@@ -179,11 +177,9 @@
       "fund_type": "governmental",
       "category": "other",
       "original_label": "Non-Revenue Receipts",
-      "amount": 13534,
+      "amount": 183797,
       "source_page": 5,
-      "split_from": "Non-Revenue Receipts 183,797 (p5): General Fund 13,534 + Other Governmental 170,262 (Special Building Non-Program Receipts p16, moved to transfers_in: paid by the QCPU Fund's Non-Program Expenditures 170,262, p17)",
-      "computed": "Non-Revenue Receipts 183,797 - Special Building Non-Program Receipts 170,262 (p5, p16)",
-      "review": "General/Employee Benefit non-revenue receipts, no description",
+      "review": "includes 170,262 Non-Program receipts in Special Building Fund offset by Non-Program Expenditures in QCPU Fund (looks like an internal transfer); rest is General/Employee Benefit non-revenue receipts",
       "detail_category": "Other Nonrevenue Receipts",
       "category_decision": "user 2026-10-23"
     }
@@ -351,25 +347,29 @@
     {
       "fund_type": "governmental",
       "category": "Debt Service",
-      "original_label": "Debt Service (General Fund, not split)",
-      "amount": 121908,
+      "original_label": "Debt Service (General Fund 121,908 + Leasing Corporation 332,519, not split)",
+      "amount": 454427,
       "source_page": 6,
-      "split_from": "Debt Service 916,297 (p6): General 121,908, QCPU 129,351, Other Governmental 332,519, Leasing Corporation 332,519; fund schedules pp16-17 print the QCPU and Special Building split; the Leasing Corporation 332,519 is the pass-through of the Special Building lease payment, moved to transfers_out (p2 Statement of Activities Debt Service 583,778 excludes it)",
+      "computed": "General 121,908 + Leasing Corporation 332,519 (p6)",
+      "split_from": "Debt Service 916,297 (p6): General 121,908, QCPU 129,351, Other Governmental 332,519, Leasing Corporation 332,519; fund schedules pp16-17 print the QCPU and Special Building split",
+      "review": "Leasing Corporation 332,519 equals Special Building debt service (see decision_needed)",
       "detail_category": "Principal and Interest (combined)",
       "debt_service_part": "principal and interest (combined)",
       "category_decision": "user 2026-10-23"
+    },
+    {
+      "fund_type": "governmental",
+      "category": "other",
+      "original_label": "Non-Program Expenditures",
+      "amount": 170262,
+      "source_page": 6,
+      "review": "QCPU Fund non-program expenditure matching Special Building non-program receipts (looks like an internal transfer)",
+      "detail_category": "Other / Miscellaneous Expenses",
+      "category_decision": "user 2026-10-23"
     }
   ],
-  "transfers_in": {
-    "amount": 502781,
-    "source_page": 5,
-    "computed": "Leasing Corporation Other Local Receipts 332,519 (p5; lease payment from the Special Building Fund) + Special Building Non-Program Receipts 170,262 (p5 Non-Revenue Receipts, p16; paid by the QCPU Fund); both printed inside receipts, moved here"
-  },
-  "transfers_out": {
-    "amount": 502781,
-    "source_page": 6,
-    "computed": "Leasing Corporation Debt Service 332,519 (p6; pass-through of the Special Building lease payment, eliminated in the p2 Statement of Activities) + QCPU Non-Program Expenditures 170,262 (p6, p17; paid to the Special Building Fund); both printed inside disbursements, moved here"
-  },
+  "transfers_in": null,
+  "transfers_out": null,
   "debt_proceeds": null,
   "other_financing": null,
   "adjustments": [],
@@ -378,26 +378,12 @@
       "receipts": {
         "amount": 8151624,
         "source_page": 5,
-        "includes": [],
-        "includes_split": [
-          {
-            "amount": 502781,
-            "source_page": 5,
-            "computed": "Leasing Corporation Other Local Receipts 332,519 + Special Building Non-Program Receipts 170,262, printed inside Total Cash Receipts and moved to transfers_in"
-          }
-        ]
+        "includes": []
       },
       "disbursements": {
         "amount": 8772756,
         "source_page": 6,
-        "includes": [],
-        "includes_split": [
-          {
-            "amount": 502781,
-            "source_page": 6,
-            "computed": "Leasing Corporation Debt Service 332,519 + QCPU Non-Program Expenditures 170,262, printed inside Total Disbursements and moved to transfers_out"
-          }
-        ]
+        "includes": []
       }
     },
     "business-type": null
@@ -544,13 +530,13 @@
     {
       "question": "Special Building Fund shows 170,262 Non-Program Receipts and the QCPU Fund shows 170,262 Non-Program Expenditures; is this an inter-fund transfer that should net out? The statement prints Transfers In (Out) as zero.",
       "amount": 170262,
-      "recorded_as": "transfers_in/transfers_out 170,262 each (split out of Non-Revenue Receipts and Non-Program Expenditures; detail section other financing); the p2 Statement of Activities still shows both gross",
+      "recorded_as": "receipts (other) and disbursements (other), as printed, with review",
       "source_page": 6
     },
     {
       "question": "Homer Educational Facilities Leasing Corporation shows 332,519 other local receipts and 332,519 debt service, the same amount as Special Building Fund debt service. Is this double counted pass-through lease money? The government-wide Statement of Activities (p2) shows Debt Service 583,778 and total disbursements 8,440,237, i.e. without the Leasing Corporation 332,519, while the fund statement Total column (pp5-6) includes it.",
       "amount": 332519,
-      "recorded_as": "transfers_in/transfers_out 332,519 each (Leasing Corporation receipt and its debt service payment moved out of receipts/disbursements, matching the p2 Statement of Activities); Special Building principal 320,000 / interest 12,519 stay debt service",
+      "recorded_as": "receipts (other) and part of debt service, as printed",
       "source_page": 5
     }
   ],
@@ -1895,13 +1881,15 @@
       "fund_type": "governmental",
       "fund": "Special Building",
       "department": "Non-Program Receipts",
-      "section": "other financing",
-      "original_label": "Transfers In",
-      "printed_label": "Non-Program Receipts",
+      "section": "revenue",
+      "category": "other",
+      "detail_category": "Other / Miscellaneous Receipts",
+      "original_label": "Non-Program Receipts",
       "amount": 170262,
       "budget_final": 0,
       "source_page": 16,
-      "review": "interfund: equals the QCPU Fund Non-Program Expenditures 170,262 (p17); recorded as a transfer in (printed inside Total Cash Receipts)"
+      "review": "matches QCPU Non-Program Expenditures; looks like a transfer",
+      "category_decision": "user 2026-10-23"
     },
     {
       "schedule": "Budget vs Actual - Special Building Fund",
@@ -2090,13 +2078,15 @@
       "fund_type": "governmental",
       "fund": "Qualified Capital Purpose Undertaking",
       "department": null,
-      "section": "other financing",
-      "original_label": "Transfers Out",
-      "printed_label": "Non-Program Expenditures",
-      "amount": -170262,
+      "section": "expenditure",
+      "category": "other",
+      "detail_category": "Other / Miscellaneous Expenses",
+      "original_label": "Non-Program Expenditures",
+      "amount": 170262,
       "budget_final": 0,
       "source_page": 17,
-      "review": "interfund: equals the Special Building Fund Non-Program Receipts 170,262 (p16); recorded as a transfer out (printed inside Total Disbursements)"
+      "review": "matches Special Building Non-Program Receipts; looks like a transfer",
+      "category_decision": "user 2026-10-23"
     }
   ],
   "detail_totals": [
@@ -2175,10 +2165,7 @@
       "fund": "Special Building",
       "section": "revenue",
       "amount": 496395,
-      "source_page": 16,
-      "includes": [
-        "other financing"
-      ]
+      "source_page": 16
     },
     {
       "schedule": "Budget vs Actual - Special Building Fund",
@@ -2199,11 +2186,8 @@
       "fund": "Qualified Capital Purpose Undertaking",
       "section": "expenditure",
       "amount": 299613,
-      "source_page": 17,
-      "includes": [
-        "other financing"
-      ]
+      "source_page": 17
     }
   ],
-  "notes": "Cash basis (modified cash), all funds governmental incl. School Nutrition and Activities; no business-type funds. Receipts/disbursements from the Total Governmental Fund column of the Statement of Cash Receipts, Disbursements, and Changes in Fund Balances (pp5-6). Beginning balance 2,535,316 is printed 'As Restated' (no separate adjustment shown). Taxes line 2,512,304 split using the Statement of Activities general receipts (p2); those components total 2,512,300, remaining 4 shown as separate property tax item. Printed disbursement lines add to 8,772,757 vs printed total 8,772,756 (rounding), so reconciliation is off by 1. Balance sheet (verifier fix 2026-10-28, user rule 2026-10-27): Balance Sheet - Modified Cash Basis - Governmental Funds, Total Governmental Funds column (p4), fund balance by classification, because its totals (assets and fund balances 1,914,184) equal the p1 Statement of Net Position and the report has no capital assets or debt; fund balance lines add to 1,914,185 (rounding, recorded in report_discrepancies). Detail: budget-vs-actual schedules for each fund (pp9-17); General Fund shown by function code (no object breakdown, so not itemized); zero-actual lines with no budget omitted. General Fund '5000 Debt Serivce' printed with a typo (printed_label kept). General Fund 8000 Transfers budget 165,065 is in the disbursements section, recorded as Transfers Out with budget_final -165,065. School Nutrition 'Daily Sales' -> School Lunch Sales (same as the statement 'Food Services' line). Schedule to Accounts with County Treasurers (pp18-19) is a pass-through of already-recorded General and Special Building receipts, not recorded to avoid double counting. Transfer cross-check: Depreciation Fund budgeted 175,201 transfer from General Fund and General Fund budgeted 165,065 transfer, but actual transfers are 0 on both. Debt Service 916,297 (p6) split by fund using the fund schedules (pp16-17): Special Building and QCPU principal/interest as printed; General Fund (single '5000 Debt Service' line) and Leasing Corporation are not split and are recorded as principal and interest (combined). Re-check 2026-10-28: Intermediate Sources 159,291 split per p9 (2110 County Fines and Licenses 15,734 -> Fines and Licenses, 2210 ESU Receipts 127,823 -> ESU Receipts, 2130 Other County Receipts 15,734 stays state aid); State Sources 4,143,826 split per fund schedules into Homestead Exemption 37,975, Property Tax Credit 1,299,777, Motor Vehicle Pro-Rate 11,387 and remaining state aid 2,794,687 (computed); statement 'State and Categorical Programs' -> State Categorical Programs; detail codes 1200 and 1292 -> Special Education Programs. Audit fix 2026-10-29 (attempt 4, Blue Hill PS pattern): (1) Homer Educational Facilities Leasing Corporation 332,519 is a blended pass-through: the Special Building Fund pays its lease (Redemption of Principal 320,000 + Interest 12,519, p16) and the Leasing Corporation books it as Other Local Receipts 332,519 and pays the same 332,519 as Debt Service (p5-6). The p2 Statement of Activities eliminates the Leasing Corporation side (Debt Service 583,778, total disbursements 8,440,237; receipts 7,819,105). Recorded as transfers_in/out 332,519: Other Local Receipts now 943 (General Fund), the combined debt service line now General Fund 121,908 only; Special Building principal/interest stay debt service. (2) Special Building Non-Program Receipts 170,262 (p16) and QCPU Non-Program Expenditures 170,262 (p17) are the same money moving between two of the district's own funds; recorded as transfers_in/out 170,262 (Non-Revenue Receipts now 13,534; Non-Program Expenditures line removed; detail lines moved to section other financing with includes on the fund totals). transfers_in = transfers_out = 502,781; printed totals 8,151,624 / 8,772,756 unchanged (includes_split); the roll-forward still ties (difference 1 = printed rounding). Read pages 1-19 of 19."
+  "notes": "Cash basis (modified cash), all funds governmental incl. School Nutrition and Activities; no business-type funds. Receipts/disbursements from the Total Governmental Fund column of the Statement of Cash Receipts, Disbursements, and Changes in Fund Balances (pp5-6). Beginning balance 2,535,316 is printed 'As Restated' (no separate adjustment shown). Taxes line 2,512,304 split using the Statement of Activities general receipts (p2); those components total 2,512,300, remaining 4 shown as separate property tax item. Printed disbursement lines add to 8,772,757 vs printed total 8,772,756 (rounding), so reconciliation is off by 1. Balance sheet (verifier fix 2026-10-28, user rule 2026-10-27): Balance Sheet - Modified Cash Basis - Governmental Funds, Total Governmental Funds column (p4), fund balance by classification, because its totals (assets and fund balances 1,914,184) equal the p1 Statement of Net Position and the report has no capital assets or debt; fund balance lines add to 1,914,185 (rounding, recorded in report_discrepancies). Detail: budget-vs-actual schedules for each fund (pp9-17); General Fund shown by function code (no object breakdown, so not itemized); zero-actual lines with no budget omitted. General Fund '5000 Debt Serivce' printed with a typo (printed_label kept). General Fund 8000 Transfers budget 165,065 is in the disbursements section, recorded as Transfers Out with budget_final -165,065. School Nutrition 'Daily Sales' -> School Lunch Sales (same as the statement 'Food Services' line). Schedule to Accounts with County Treasurers (pp18-19) is a pass-through of already-recorded General and Special Building receipts, not recorded to avoid double counting. Transfer cross-check: Depreciation Fund budgeted 175,201 transfer from General Fund and General Fund budgeted 165,065 transfer, but actual transfers are 0 on both. Debt Service 916,297 (p6) split by fund using the fund schedules (pp16-17): Special Building and QCPU principal/interest as printed; General Fund (single '5000 Debt Service' line) and Leasing Corporation are not split and are recorded as principal and interest (combined). Re-check 2026-10-28: Intermediate Sources 159,291 split per p9 (2110 County Fines and Licenses 15,734 -> Fines and Licenses, 2210 ESU Receipts 127,823 -> ESU Receipts, 2130 Other County Receipts 15,734 stays state aid); State Sources 4,143,826 split per fund schedules into Homestead Exemption 37,975, Property Tax Credit 1,299,777, Motor Vehicle Pro-Rate 11,387 and remaining state aid 2,794,687 (computed); statement 'State and Categorical Programs' -> State Categorical Programs; detail codes 1200 and 1292 -> Special Education Programs. Read pages 1-19 of 19."
 }
