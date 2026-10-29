@@ -16,6 +16,12 @@
      "issue": "The detail function does not tie to the statement function (Building and Grounds). Capital outlay is defensible from the 'Building improvements' label"},
     {"severity": "warning", "path": "decision_needed[1].recorded_as", "page": 22,
      "extracted": "detail: charges for services/fees, student activity receipts", "on_page": "Activities receipts 198,022",
-     "issue": "The decision text says the detail line is charges for services/fees, but the detail line actually has category Extracurricular Receipts"}
+     "issue": "The decision text says the detail line is charges for services/fees, but the detail line actually has category Extracurricular Receipts"},
+    {"severity": "error", "path": "receipts[6].category", "field": "receipts[6].category", "page": 4,
+     "extracted": "Extracurricular Receipts", "on_page": "Community services activities 36,107 (General Fund code 1800, p4 and p12)",
+     "issue": "Re-check 2026-10-29: code 1800 'Community services activities' is General Fund community-service revenue, not student activity, admissions or student-fee receipts, so Extracurricular Receipts does not fit. It should be charges for services/fees. Weeping Water PS records the same code 1800 line as charges for services/fees. The detail line's own detail_category is 'other charges for services'."},
+    {"severity": "error", "path": "detail[7].category", "field": "detail[7].category", "page": 12,
+     "extracted": "Extracurricular Receipts", "on_page": "1800 Community services activities 36,107 (General Fund budget schedule)",
+     "issue": "Re-check 2026-10-29: the category contradicts the line's own detail_category ('other charges for services'), and code 1800 is not a student activity receipt. It should be charges for services/fees, to match receipts[6] once that is fixed."}
   ]
 }
