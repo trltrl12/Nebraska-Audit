@@ -3,7 +3,7 @@
   "entity_type": "school district",
   "fiscal_year_end": "2025-08-31",
   "basis": "cash",
-  "extraction_attempt": 3,
+  "extraction_attempt": 4,
   "beginning_cash": {
     "amount": 10992349.5,
     "source_page": 9
@@ -180,10 +180,28 @@
       "original_label": "Non-Revenue Receipts",
       "amount": 22782.67,
       "source_page": 12,
-      "split_from": "Non-Revenue Receipts 30,608,073.18 (p5); rest is bond issuance 30,055,000 (debt_proceeds, p19) and allocations from General Fund 530,290.51 (transfers_in, p14-15)",
+      "split_from": "Non-Revenue Receipts 30,608,073.18 (p5); rest is bond issuance 30,055,000 (debt_proceeds, p19) and allocations from General Fund 530,290.51 (p5, p14-15)",
       "review": "5690 Other Non-Revenue Receipts, unexplained",
       "detail_category": "Other Nonrevenue Receipts",
       "category_decision": "user 2026-10-23"
+    },
+    {
+      "fund_type": "governmental",
+      "category": "other",
+      "original_label": "Non-Revenue Receipts",
+      "amount": 30290.51,
+      "source_page": 5,
+      "split_from": "Non-Revenue Receipts 30,608,073.18 (p5); Employee Benefit Fund 5200 Allocation from General Fund (p15)",
+      "detail_category": "Other Nonrevenue Receipts"
+    },
+    {
+      "fund_type": "governmental",
+      "category": "other",
+      "original_label": "Non-Revenue Receipts",
+      "amount": 500000.0,
+      "source_page": 5,
+      "split_from": "Non-Revenue Receipts 30,608,073.18 (p5); Depreciation Fund 5200 Allocation from General Fund (p14)",
+      "detail_category": "Other Nonrevenue Receipts"
     }
   ],
   "disbursements": [
@@ -486,9 +504,8 @@
     }
   ],
   "transfers_in": {
-    "amount": 631290.51,
-    "source_page": 5,
-    "computed": "Transfers From Other Funds 101,000 (p5) + Depreciation Fund allocation from General Fund 500,000 (p14) + Employee Benefit Fund allocation from General Fund 30,290.51 (p15)"
+    "amount": 101000.0,
+    "source_page": 5
   },
   "transfers_out": {
     "amount": 101000.0,
@@ -522,22 +539,6 @@
   },
   "business_type": null,
   "proprietary": null,
-  "report_discrepancies": [
-    {
-      "check": "reconcile",
-      "difference": 530290.51,
-      "source_page": 14,
-      "note": "Transfers do not match: Depreciation Fund (500,000, p14) and Employee Benefit Fund (30,290.51, p15) print '5200 Allocation from General Fund' receipts, but the General Fund shows transfers out of only 101,000 (p7, p26); the 530,290.51 is one-sided as printed (see decision_needed)."
-    }
-  ],
-  "decision_needed": [
-    {
-      "question": "The Depreciation Fund (500,000) and Employee Benefit Fund (30,290.51) show '5200 Allocation from General Fund' receipts, but the General Fund schedules (A, B, M) show no matching outflow (its transfers out are only 101,000 to Lunch, Bond, Activity). Are these real transfers that should reduce General Fund, or something else?",
-      "amount": 530290.51,
-      "recorded_as": "transfers_in (one-sided, no matching transfers_out); removed from Non-Revenue Receipts",
-      "source_page": 14
-    }
-  ],
   "balance_sheet": {
     "statement": "Statement of Modified Cash Basis Assets and Fund Balances and Modified Cash Receipts, Disbursements and Changes in Modified Cash Basis Fund Balances - Governmental Funds",
     "scope": "governmental funds",
@@ -2715,12 +2716,13 @@
       "fund_type": "governmental",
       "fund": "Depreciation",
       "department": null,
-      "section": "other financing",
+      "section": "revenue",
+      "category": "other",
+      "detail_category": "Other Nonrevenue Receipts",
       "original_label": "5200 Allocation from General Fund",
       "amount": 500000.0,
       "budget_final": 325000.0,
-      "source_page": 14,
-      "review": "no matching outflow in General Fund"
+      "source_page": 14
     },
     {
       "schedule": "Schedule C - Depreciation Fund",
@@ -2753,12 +2755,13 @@
       "fund_type": "governmental",
       "fund": "Employee Benefit",
       "department": null,
-      "section": "other financing",
+      "section": "revenue",
+      "category": "other",
+      "detail_category": "Other Nonrevenue Receipts",
       "original_label": "5200 Allocation from General Fund",
       "amount": 30290.51,
       "budget_final": 14256.0,
-      "source_page": 15,
-      "review": "no matching outflow in General Fund"
+      "source_page": 15
     },
     {
       "schedule": "Schedule D - Employee Benefit Fund",
@@ -3519,5 +3522,5 @@
       "source_page": 19
     }
   ],
-  "notes": "Modified cash basis, all funds governmental (School Nutrition and Activities are governmental funds here); no business-type funds. Receipts/disbursements from Exhibit III Total Governmental Funds column (labels p4/p6, amounts p5/p7); beginning/ending balances p9 (10,992,349.50 and 33,334,957.51, equal to net position on p1). Statement lines Local Receipts, County Receipts, State Receipts and Non-Revenue Receipts are split using the fund schedules (A, C, D, F, G, H, I); split items tie to the printed lines. Attempt 2 (audit fixes): State Receipts 4,937,991.71 now split into Homestead Exemption, Property Tax Credit, Motor Vehicle Pro-Rate (sums of 3130/3131/3180 on pp11, 18, 19), Nameplate Capacity Tax and the remaining state aid 1,488,447.11; penalties/interest, carline, public power district sales tax, tuition, activity receipts and ESU receipts moved to their own receipt categories; balance sheet switched to the governmental funds statement (Exhibit III, p9, Total Governmental Funds, fund balance by classification), whose totals equal the government-wide Statement of Net Position (p1, 33,334,957.51). Attempt 3 (verifier fixes 2026-10-28): Sales of Meals and School Nutrition 1611/1612 lunch/breakfast lines are category School Lunch Sales; Schedule M program lines follow the statement's grouping: 3551 Career Education 7,500 = statement State Categorical Programs (p7), 6200 Title I 55,139.00 + 6998 ESSER III 60,788.12 = statement Federal Programs 115,927.12 (p7). Non-Revenue Receipts 30,608,073.18 = Issuance of Bonds 30,055,000 (debt_proceeds, p19) + allocations from General Fund 500,000 and 30,290.51 (in transfers_in) + other non-revenue 22,782.67 (receipt, review). transfers_in 631,290.51 = 101,000 printed transfers + 530,290.51 allocations; transfers_out 101,000 (General Fund to Lunch 70,000, Bond 1,000, Activities 30,000, all matched in receiving funds). The 530,290.51 allocations have no matching outflow in the General Fund (see decision_needed). reported_totals use the printed Total Receipts and Other Financing Sources 44,465,862.34 (p5; includes debt_proceeds and transfers_in) and Total Disbursements and Other Financing Uses 22,123,254.33 (p7; includes transfers_out). Disbursement function mapping: State Categorical Programs (career education) and Federal Programs (Title I, ESSER) as printed; Employee Benefits line (Employee Benefit Fund) support services with review; Other Purchased Services and Supplies (special building construction) capital outlay; Debt Service all interest/fees per Schedule H (no principal paid). Detail: Schedule M (General Fund operational expenses by program and object) supersedes Schedule B (function-only), so Schedule B and A-1 (summary) are not recorded to avoid double counting; Schedule M lines with no actual amount are omitted; 8000 transfers recorded as negative other financing (printed inside Schedule M Total Disbursements, so that detail_totals entry has includes other financing). Fund schedules C-I record 5200 allocations/transfers and bond issuance as other financing (printed inside the schedule receipts totals, marked includes). Schedule N (county treasurers' schedule, pp27-28) is a pass-through of General Fund receipts and is not recorded. Object mapping: Other Property Services to professional/contract services, Purchased Property Services to repairs and maintenance, Property to equipment purchases. Read pages 1-28 of 28"
+  "notes": "Modified cash basis, all funds governmental (School Nutrition and Activities are governmental funds here); no business-type funds. Receipts/disbursements from Exhibit III Total Governmental Funds column (labels p4/p6, amounts p5/p7); beginning/ending balances p9 (10,992,349.50 and 33,334,957.51, equal to net position on p1). Statement lines Local Receipts, County Receipts, State Receipts and Non-Revenue Receipts are split using the fund schedules (A, C, D, F, G, H, I); split items tie to the printed lines. Attempt 2 (audit fixes): State Receipts 4,937,991.71 now split into Homestead Exemption, Property Tax Credit, Motor Vehicle Pro-Rate (sums of 3130/3131/3180 on pp11, 18, 19), Nameplate Capacity Tax and the remaining state aid 1,488,447.11; penalties/interest, carline, public power district sales tax, tuition, activity receipts and ESU receipts moved to their own receipt categories; balance sheet switched to the governmental funds statement (Exhibit III, p9, Total Governmental Funds, fund balance by classification), whose totals equal the government-wide Statement of Net Position (p1, 33,334,957.51). Attempt 3 (verifier fixes 2026-10-28): Sales of Meals and School Nutrition 1611/1612 lunch/breakfast lines are category School Lunch Sales; Schedule M program lines follow the statement's grouping: 3551 Career Education 7,500 = statement State Categorical Programs (p7), 6200 Title I 55,139.00 + 6998 ESSER III 60,788.12 = statement Federal Programs 115,927.12 (p7). Non-Revenue Receipts 30,608,073.18 = Issuance of Bonds 30,055,000 (debt_proceeds, p19) + allocations from General Fund 500,000 and 30,290.51 (receipts) + other non-revenue 22,782.67 (receipt, review). transfers_in and transfers_out 101,000 (General Fund to Lunch 70,000, Bond 1,000, Activities 30,000, all matched in receiving funds). reported_totals use the printed Total Receipts and Other Financing Sources 44,465,862.34 (p5; includes debt_proceeds and transfers_in) and Total Disbursements and Other Financing Uses 22,123,254.33 (p7; includes transfers_out). Disbursement function mapping: State Categorical Programs (career education) and Federal Programs (Title I, ESSER) as printed; Employee Benefits line (Employee Benefit Fund) support services with review; Other Purchased Services and Supplies (special building construction) capital outlay; Debt Service all interest/fees per Schedule H (no principal paid). Detail: Schedule M (General Fund operational expenses by program and object) supersedes Schedule B (function-only), so Schedule B and A-1 (summary) are not recorded to avoid double counting; Schedule M lines with no actual amount are omitted; 8000 transfers recorded as negative other financing (printed inside Schedule M Total Disbursements, so that detail_totals entry has includes other financing). Fund schedules F-I record transfers and bond issuance as other financing (printed inside the schedule receipts totals, marked includes). Schedule N (county treasurers' schedule, pp27-28) is a pass-through of General Fund receipts and is not recorded. Object mapping: Other Property Services to professional/contract services, Purchased Property Services to repairs and maintenance, Property to equipment purchases. Read pages 1-28 of 28"
 }

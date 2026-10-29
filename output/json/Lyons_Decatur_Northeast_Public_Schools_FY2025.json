@@ -3,7 +3,7 @@
   "entity_type": "school district",
   "fiscal_year_end": "2025-08-31",
   "basis": "cash",
-  "extraction_attempt": 3,
+  "extraction_attempt": 4,
   "beginning_cash": {
     "amount": 7877989.7,
     "source_page": 11
@@ -239,6 +239,15 @@
       "review": "unexplained other non-revenue receipts",
       "detail_category": "Other Nonrevenue Receipts",
       "category_decision": "user 2026-10-23"
+    },
+    {
+      "fund_type": "governmental",
+      "category": "other",
+      "original_label": "Non-Revenue Receipts",
+      "amount": 250000.0,
+      "source_page": 7,
+      "split_from": "Non-Revenue Receipts 260,764.74 (p7); Depreciation Fund 5200 Allocation from General Fund (p17)",
+      "detail_category": "Other Nonrevenue Receipts"
     }
   ],
   "disbursements": [
@@ -520,11 +529,8 @@
       "fund_type": "governmental",
       "category": "student transportation",
       "original_label": "Vehicle Operation & Purchasing - Regular Education",
-      "amount": 118895.78,
-      "source_page": 9,
-      "split_from": "Vehicle Operation & Purchasing - Regular Education 368,895.78 (p9); Property 250,000 in 2710 on p28 treated as transfer",
-      "computed": "368,895.78 - 250,000.00",
-      "review": "hidden transfer to Depreciation Fund inside 2710 Property line"
+      "amount": 368895.78,
+      "source_page": 9
     },
     {
       "fund_type": "governmental",
@@ -614,16 +620,8 @@
       "source_page": 9
     }
   ],
-  "transfers_in": {
-    "amount": 250000.0,
-    "source_page": 17,
-    "computed": "Depreciation Fund 5200 Allocation from General Fund 250,000 (p17); shown inside Non-Revenue Receipts 260,764.74 on p7"
-  },
-  "transfers_out": {
-    "amount": 250000.0,
-    "source_page": 28,
-    "computed": "Property 250,000.00 within 2710 Vehicle Operation & Purchasing - Regular Education (p28), matching the Depreciation Fund allocation; shown inside spending line 368,895.78 on p9"
-  },
+  "transfers_in": null,
+  "transfers_out": null,
   "debt_proceeds": null,
   "other_financing": null,
   "adjustments": [],
@@ -632,16 +630,12 @@
       "receipts": {
         "amount": 8958769.29,
         "source_page": 7,
-        "includes": [
-          "transfers_in"
-        ]
+        "includes": []
       },
       "disbursements": {
         "amount": 11101656.08,
         "source_page": 9,
-        "includes": [
-          "transfers_out"
-        ]
+        "includes": []
       }
     },
     "business-type": null
@@ -3077,13 +3071,13 @@
       "fund_type": "governmental",
       "fund": "General",
       "department": "2710 Vehicle Operation & Purchasing - Regular Education",
-      "section": "other financing",
+      "section": "expenditure",
+      "category": "student transportation",
+      "detail_category": "equipment purchases",
       "original_label": "Property",
-      "amount": -250000.0,
+      "amount": 250000.0,
       "budget_final": null,
-      "source_page": 28,
-      "split_from": "Property 250,000.00 printed under 2710 (p28); equals Depreciation Fund 5200 Allocation from General Fund 250,000 (p17)",
-      "review": "hidden transfer out to Depreciation Fund recorded as spending line"
+      "source_page": 28
     },
     {
       "schedule": "Schedule M - General Fund Operational Expenses by Object",
@@ -3613,7 +3607,9 @@
       "fund_type": "governmental",
       "fund": "Depreciation",
       "department": null,
-      "section": "other financing",
+      "section": "revenue",
+      "category": "other",
+      "detail_category": "Other Nonrevenue Receipts",
       "original_label": "5200 Allocation from General Fund",
       "amount": 250000.0,
       "budget_final": 32733.0,
@@ -3638,7 +3634,9 @@
       "fund_type": "governmental",
       "fund": "Employee Benefit",
       "department": null,
-      "section": "other financing",
+      "section": "revenue",
+      "category": "other",
+      "detail_category": "Other Nonrevenue Receipts",
       "original_label": "5200 Allocation from General Fund",
       "amount": 0.0,
       "budget_final": 0.0,
@@ -4140,20 +4138,14 @@
       "fund": "General",
       "section": "expenditure",
       "amount": 6275848.77,
-      "source_page": 30,
-      "includes": [
-        "other financing"
-      ]
+      "source_page": 30
     },
     {
       "schedule": "Schedule C - Depreciation Fund",
       "fund": "Depreciation",
       "section": "revenue",
       "amount": 253828.39,
-      "source_page": 17,
-      "includes": [
-        "other financing"
-      ]
+      "source_page": 17
     },
     {
       "schedule": "Schedule C - Depreciation Fund",
@@ -4205,13 +4197,5 @@
       "source_page": 22
     }
   ],
-  "decision_needed": [
-    {
-      "question": "General Fund 2710 'Property' 250,000 (Schedule M p28) exactly equals the Depreciation Fund 'Allocation from General Fund' 250,000 (p17), but nothing on the pages says the General Fund line is the transfer. Should it be treated as a transfer (as recorded) rather than student transportation spending plus other receipts?",
-      "amount": 250000,
-      "recorded_as": "transfers_out 250,000 (removed from 2710 spending) and transfers_in 250,000 (removed from Non-Revenue Receipts)",
-      "source_page": 28
-    }
-  ],
-  "notes": "Modified cash basis school district; all funds are governmental (School Nutrition and Activities are within the governmental funds statement, Exhibit III). Receipts/disbursements from Exhibit III Total Governmental Funds column (pp7, 9, 11); beginning/ending balance 7,877,989.70 / 5,735,102.91 (p11, ending also p1). Reconciles: 7,877,989.70 + 8,958,769.29 - 11,101,656.08 = 5,735,102.91. Local Receipts (4,382,089.65) split into categories by summing fund schedules (pp13, 19-22), items marked computed; fund-by-fund components add to the printed Local line. Attempt 2: penalties and interest on taxes (11,688.00) split out of property tax; carline split now category Carline Tax; activity income 206,677.42 -> Extracurricular Receipts and preschool tuition 3,647.59 -> Tuition Received; County Receipts 29,242.44 split into 2110 Fines and Licenses 14,392.93 and 2210 ESU Receipts 14,849.51 (p13); State Receipts 3,233,127.50 split into Homestead Exemption, Property Tax Credit, Motor Vehicle Pro-Rate and remaining state aid using the General, Bond and Nutrition fund schedules (pp13, 20, 21); Instruction-Related Technology (2230) moved to support services/Staff and Purchasing Services (2520) to Business, matching Schedule M. Attempt 3 (verifier fixes 2026-10-28): the former 10,798.35 fees split is now three items: 1423 Transportation Fees 5,663.35 (charges for services), 1740 Student Fees 4,135.00 (Extracurricular Receipts), 1955 Postsecondary Receipts 1,000.00 (Tuition Received); Schedule M program lines 3535/3551 now State Categorical Programs (the p9 statement line 12,575.63 = 3535 4,312.00 + 3551 7,500.00 + 3599 763.63) and 6200/6406/6408/6412/6968/6988/6992/6993/6998 now Federal Programs (the p9 line 284,701.79 equals their program totals); Nutrition 1620 Non Reimbursable 33,364.83 now School Lunch Sales (counted in Sales of Meals 121,286.00); 2650 Vehicle Operation, Maintenance & Purchasing (2600 operation and maintenance of plant group) moved to Building and Grounds; Debt Services label as printed. Non-Revenue Receipts 260,764.74 split into the 250,000 Depreciation allocation (transfer in) plus General Fund items on p14. Hidden transfer: 250,000 treated as transfer out of 2710 Vehicle Operation & Purchasing - Regular Education (368,895.78 printed -> 118,895.78 spending); printed totals kept and include transfers. Debt Service split principal/interest from Schedule H. Balance sheet (attempt 2, user rule 2026-10-27): governmental funds statement Exhibit III, Total Governmental Funds column (pp10-11 spread; amounts p11), fund balance by classification (Committed, Assigned, Unassigned); its total 5,735,102.91 equals the government-wide Statement of Net Position (p1); no liabilities printed. County Treasurers' Balance is Cash and Cash Equivalents. Detail: Schedule M (General Fund by object, program) supersedes Schedule B (function-only), so Schedule B and Schedule A-1 not recorded; budget_final only available at program-total level so object lines have null. Schedule A line 4525 Federal Vocational has budget only (10,000) and no actual, so omitted. Object mapping: Other Property Services -> professional/contract services, Purchased Property Services -> repairs and maintenance, Other Items -> dues, training and travel. Schedule N (County Treasurers' General Fund, p31) is a pass-through of the same General Fund tax receipts and not recorded again. Employee Benefit and Activities fund schedules have no printed receipt/expenditure totals so detail_totals omitted for them. Statement of Activities (pp2-5) not used for items; its Transfers label appears misaligned with columns. Read pages 1-31 of 31"
+  "notes": "Modified cash basis school district; all funds are governmental (School Nutrition and Activities are within the governmental funds statement, Exhibit III). Receipts/disbursements from Exhibit III Total Governmental Funds column (pp7, 9, 11); beginning/ending balance 7,877,989.70 / 5,735,102.91 (p11, ending also p1). Reconciles: 7,877,989.70 + 8,958,769.29 - 11,101,656.08 = 5,735,102.91. Local Receipts (4,382,089.65) split into categories by summing fund schedules (pp13, 19-22), items marked computed; fund-by-fund components add to the printed Local line. Attempt 2: penalties and interest on taxes (11,688.00) split out of property tax; carline split now category Carline Tax; activity income 206,677.42 -> Extracurricular Receipts and preschool tuition 3,647.59 -> Tuition Received; County Receipts 29,242.44 split into 2110 Fines and Licenses 14,392.93 and 2210 ESU Receipts 14,849.51 (p13); State Receipts 3,233,127.50 split into Homestead Exemption, Property Tax Credit, Motor Vehicle Pro-Rate and remaining state aid using the General, Bond and Nutrition fund schedules (pp13, 20, 21); Instruction-Related Technology (2230) moved to support services/Staff and Purchasing Services (2520) to Business, matching Schedule M. Attempt 3 (verifier fixes 2026-10-28): the former 10,798.35 fees split is now three items: 1423 Transportation Fees 5,663.35 (charges for services), 1740 Student Fees 4,135.00 (Extracurricular Receipts), 1955 Postsecondary Receipts 1,000.00 (Tuition Received); Schedule M program lines 3535/3551 now State Categorical Programs (the p9 statement line 12,575.63 = 3535 4,312.00 + 3551 7,500.00 + 3599 763.63) and 6200/6406/6408/6412/6968/6988/6992/6993/6998 now Federal Programs (the p9 line 284,701.79 equals their program totals); Nutrition 1620 Non Reimbursable 33,364.83 now School Lunch Sales (counted in Sales of Meals 121,286.00); 2650 Vehicle Operation, Maintenance & Purchasing (2600 operation and maintenance of plant group) moved to Building and Grounds; Debt Services label as printed. Non-Revenue Receipts 260,764.74 split into the 250,000 Depreciation allocation plus General Fund items on p14. Debt Service split principal/interest from Schedule H. Balance sheet (attempt 2, user rule 2026-10-27): governmental funds statement Exhibit III, Total Governmental Funds column (pp10-11 spread; amounts p11), fund balance by classification (Committed, Assigned, Unassigned); its total 5,735,102.91 equals the government-wide Statement of Net Position (p1); no liabilities printed. County Treasurers' Balance is Cash and Cash Equivalents. Detail: Schedule M (General Fund by object, program) supersedes Schedule B (function-only), so Schedule B and Schedule A-1 not recorded; budget_final only available at program-total level so object lines have null. Schedule A line 4525 Federal Vocational has budget only (10,000) and no actual, so omitted. Object mapping: Other Property Services -> professional/contract services, Purchased Property Services -> repairs and maintenance, Other Items -> dues, training and travel. Schedule N (County Treasurers' General Fund, p31) is a pass-through of the same General Fund tax receipts and not recorded again. Employee Benefit and Activities fund schedules have no printed receipt/expenditure totals so detail_totals omitted for them. Statement of Activities (pp2-5) not used for items; its Transfers label appears misaligned with columns. Read pages 1-31 of 31"
 }
