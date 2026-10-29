@@ -223,51 +223,15 @@ holds just those reports and sheets. Prioritise fixes and re-checks for these ty
   `output/json/_meta/pages_at_extraction.csv`; re-extract and re-verify every report whose pages
   changed (their source_page numbers no longer match). Checked 2026-10-22: 0 of the 870 tracked reports had
   changed pages; check again after each fetch.
-These were diagnosed and fixed in find_pages v6; re-extract and re-verify them after the re-trim:
-- Trimmed PDF is missing pages: Arapahoe_FY2025 (other
-  nonmajor combining page),
-  Butte_FY2025 (report p31, rest of
-  General Fund spending),
-  Litchfield_Public_Schools_FY2025 (left half of the governmental receipts/disbursements statement,
-  report p17-18 spread; receipt labels inferred from fund schedules, marked review).
-  Leigh_FY2025 (General Fund departments schedule continues past trimmed p12: Housing/Park/Pool/Library
-  columns missing; p9 budget schedule used meanwhile).
-  Boelus_FY2025 (Exhibit A page 2, lines 29-52 spending by function, not trimmed; fund totals used).
-  Fairbury_FY2025 (report pp42-47 Light/Water/Sewer budget schedules 6-9, plus pp8, 11, 62, not trimmed).
-  Chadron_Public_Schools_FY2025 (report p34 not trimmed: trimmed p15 = report p33, p16 = report p35).
-  Grand_Island_Public_Schools_Foundation_FY2025 (not a crop: the statements are two-page spreads and only the left
-  pages were kept; source pp6, 8, 12 hold the Jack Martin..Total All Accounts columns. Added to extra_pages.csv and
-  retrim.csv 2026-10-28; extract and verify after the next fetch run; no JSON yet).
-  Garfield_County_Agricultural_Society_FY2025 (report p25 not trimmed: trimmed jumps p24 to p26).
-  Lyons_FY2025 (report p21 not trimmed; pp8-9 proprietary statement now in the v8 trim).
-  Kimball_County_FY2025 (report p31 not trimmed), Kimball_FY2025 (report pp17, 19, 59 not trimmed); totals tie, check source.
-  Lancaster_County_FY2025 (Veterans Aid and Broadband sub-fund budget pages, report pp85-86, not trimmed).
-  Gothenburg_FY2025 (report pp42 and 49 not trimmed; may hold schedule lines).
-  Grand_Island_FY2025 (nonmajor combining schedule's Total column page not trimmed; nonmajor detail left out).
-  Niobrara_Public_Schools_FY2025 (report p27 not trimmed; totals tie without it).
-  Omaha_Public_Schools_FY2025 (report pp81-89 and p94, possibly more fund budget schedules, not trimmed).
-  Ogallala_FY2025 (report pp17, 19, 62 not trimmed; probably nonmajor balance sheet/reconciliations).
-  Ord_FY2025 (report p61, left half of the Schedule of Expenditures by fund, not trimmed; only the right half is p22).
-  ONeill_FY2025 (report pp53, 57, 62 now trimmed: Other Governmental combining, CDBG and Debt Service schedules added; still not trimmed: report pp44, 61, 63-66, 69-72, 75+, probably the utility schedules).
-  Plattsmouth_Airport_Authority_FY2025 (report p8, governmental funds revenues/expenditures statement, not trimmed; budget-basis schedule used).
-  Polk_FY2025 (odd report pages 27-35 of the combining schedules not trimmed: Bandstand/Playground/Total/budget columns; actuals from Exhibits III-IV).
-  Springfield_FY2025 (Note M, explaining 33.2M sales tax and 3.5M permits, not trimmed).
-  Two_Rivers_Public_Health_Department_FY2025 (report pp34-36 not trimmed; Statement of Net Position now in the v8 trim).
-  Wahoo_FY2025 (no General Fund budget schedule trimmed; source PDF p19 and pp23-27 not kept).
-  Found in the 2026-10-21 outside-review recheck (re-extract after the v7 re-trim):
-  Beaver_Crossing_FY2025 (budget columns report pp26, 28, 30),
-  Box_Butte_County_FY2025 (rest of nonmajor combining
-  statement after report p24), Bradshaw_FY2025 (General Fund combining pages report pp32, 34),
-  Central_City_Public_Schools_FY2025 (report p41 Bond Fund budget), Central_Platte_NRD_FY2025 (report p11 fund statement),
-  Douglas_County_FY2025 (other nonmajor combining pages),
-  Falls_City_Public_Schools_FY2025 (report p6 governmental receipts/disbursements), Fillmore_County_FY2025 (report p34,
-  right half of nonmajor combining), Furnas_County_FY2025 (second nonmajor combining page), Greeley_FY2025 (report p28,
-  end of cash flow statement), Hooker_County_FY2025 (second half of nonmajor combining), Logan_County_FY2025 (source pp26-27 nonmajor combining), Niobrara_FY2025 (report p15
-  proprietary statement), Norfolk_FY2025 (beginning governmental cash still null: no prior-year balance sheet),
-  Northeast_Nebraska_Economic_Development_District_FY2025 (cash flow statement report pp7-8),
-  Ord_FY2025 (also report p15 government-wide assets/liabilities).
-- Rules the second-pass audit (2026-10-22) found applied inconsistently; waiting on the user's decision, then make
-  all reports match: SID "Warrants issued not registered" (long-term
+- Missing-page reports (cleaned up 2026-10-29): 30 of the 40 listed earlier were re-trimmed with config/extra_pages.csv,
+  re-extracted and verified (2026-10-27). Not re-trimmed: Butte_FY2025 (page already in the trim; extraction re-check
+  2026-10-29), Chadron_Public_Schools_FY2025, Kimball_County_FY2025, Springfield_FY2025 (no page needed, totals tie),
+  Norfolk_FY2025 (beginning governmental cash null: no prior-year balance sheet), and out-of-scope Central_Platte_NRD,
+  Garfield_County_Agricultural_Society, Northeast_Nebraska_Economic_Development_District, Plattsmouth_Airport_Authority,
+  Two_Rivers_Public_Health_Department. Grand_Island_Public_Schools_Foundation_FY2025: re-trim queued (extra_pages.csv,
+  retrim.csv 2026-10-28); extract and verify after the next fetch run.
+- SIDs: user 2026-10-29: out of scope for now, leave as is. Rules the second-pass audit (2026-10-22) found applied
+  inconsistently: SID "Warrants issued not registered" (long-term
   debt on SIDs 235/321/324, current payable on SID 291); SID detail actual column (budgetary basis on most, GAAP on
   SIDs 297-300); unlabeled SID "Maintenance" (utilities vs streets/highways).
 - Filed under FY2025 but the PDF holds an earlier year (extracted as printed; check the Auditor's site for
