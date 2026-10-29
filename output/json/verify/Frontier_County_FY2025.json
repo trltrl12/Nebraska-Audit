@@ -1,12 +1,22 @@
 {
   "stem": "Frontier_County_FY2025",
-  "values_checked": 120,
+  "values_checked": 116,
   "issues": [
-    {"severity": "warning", "path": "receipts[0].amount", "page": 2,
-     "extracted": 2172066, "on_page": "Property 2,172,068 (p2); Taxes 2,335,449 (p4)",
-     "issue": "Taxes split uses the government-wide Statement of Activities breakdown, which classifies receipts slightly differently from the fund statement (taxes +2, intergovernmental 1,835,522 + 18,180 grants vs 1,840,635). Property tax was reduced by 2 (marked computed, recorded in report_discrepancies). The split is defensible but approximate."},
-    {"severity": "warning", "path": "receipts[3].category", "page": 7,
-     "extracted": "other taxes", "on_page": "Other 8,656 (p2) = 911 Emergency Fund Taxes 8,656 (p7)",
-     "issue": "The 'Other' taxes are the 911 Emergency Fund's taxes (911 surcharge). other taxes is defensible, but the source can be identified."}
+    {
+      "severity": "warning",
+      "path": "receipts[0].amount",
+      "page": 2,
+      "extracted": 2172066,
+      "on_page": "Statement of Activities Property 2,172,068; p4 Taxes 2,335,449",
+      "issue": "Taxes line (p4) split using the Statement of Activities general-receipts tax breakdown (a different statement, which totals 2,335,451, $2 more than p4). The split is marked split_from/computed and the $2 is in report_discrepancies. The fund columns support it: General 1,753,151 + Road 497,387 + EDA 3 + Courthouse Bond 66,140 - motor vehicle 144,615 = 2,172,066. Still, it is a cross-statement split, so a person should confirm it is acceptable."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[29].detail_category",
+      "page": 8,
+      "extracted": "taxes (unlabeled)",
+      "on_page": "Total Nonmajor Taxes 84,911 = Lodging Tax Fund 10,112 (p6) + 911 Emergency 8,656 (p7) + EDA/STPE 3 + Courthouse Bond 66,140 (p8)",
+      "issue": "the combining pages print the nonmajor Taxes by fund, so lodging tax (10,112) and the 911 taxes (8,656) can be identified. Recording it as taxes (unlabeled) is defensible because only the Total column is recorded."
+    }
   ]
 }

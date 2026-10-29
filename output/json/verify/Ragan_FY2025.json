@@ -1,17 +1,12 @@
 {
   "stem": "Ragan_FY2025",
-  "values_checked": 34,
+  "values_checked": 33,
   "issues": [
-    {"severity": "warning", "path": "disbursements[3]", "page": 2,
-     "extracted": {"fund_type": "business-type", "category": "debt service (principal and interest combined)", "amount": 5033.0},
-     "on_page": "Line 39 Debt Service (Governmental section), Water Well Constr Fund column 5,033.00",
-     "issue": "printed in the Governmental section of the form but in the Water Well Constr Fund column, so it was treated as business-type (marked review). That is defensible because the fund is funded by Water Fund transfers and the debt is the water loans. Notes call it 'business-type principal' but the category is principal and interest combined; the page doesn't split it."},
     {"severity": "warning", "path": "receipts[6].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other, Water 10,005.24 + Water Reserve 15.11",
-     "issue": "printed only as 'Other'; water charges assumed (marked review). The Water Reserve 15.11 is likely interest."},
-    {"severity": "warning", "path": "reported_totals.business-type", "page": 1,
-     "extracted": {"receipts": 21118.35, "disbursements": 19015.18, "includes": []},
-     "on_page": "line 21 / line 52 utility columns include business-type transfers of 11,098.00 each side",
-     "issue": "printed business-type totals include the gross 11,098.00 intra-utility transfers. They are recorded in a non-standard 'includes_split' field, and 'includes' is empty. The receipts lines (10,020.35) and disbursements lines (7,917.18) won't tie to reported_totals unless the validator reads includes_split. The amounts themselves are correct."}
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other: Water Fund 10,005.24, Water Reserve Fund 15.11",
+     "issue": "label says only Other with no breakdown; Utility Charges is a judgment call, and the combined line also holds Water Reserve 15.11 that is probably interest"},
+    {"severity": "warning", "path": "disbursements[3].fund_type", "page": 2,
+     "extracted": "business-type", "on_page": "line 39 Debt Service 5,033.00 (Water Well Constr Fund column, printed under the Governmental heading)",
+     "issue": "printed in the governmental section of Exhibit A; business-type is defensible from the fund name. Also notes say 'recorded as business-type principal' while the category is debt service (principal and interest combined)"}
   ]
 }

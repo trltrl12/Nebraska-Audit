@@ -1,18 +1,30 @@
 {
   "stem": "Page_FY2025",
-  "values_checked": 72,
+  "values_checked": 73,
   "issues": [
-    {"severity": "warning", "path": "reported_totals.business-type.disbursements.includes", "page": 2,
-     "extracted": [], "on_page": "Combined Utilities Total Disbursements & Transfers 108,261.00 includes line 50 transfer out 9,803.00",
-     "issue": "printed total includes the utility transfer out; rules call for includes [\"transfers_net\"] rather than the non-standard includes_split field (documented, amount itself correct)"},
-    {"severity": "warning", "path": "receipts[10].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other 90,157.00 (Combined Utilities Fund)",
-     "issue": "printed label is 'Other'; treated as utility charges by assumption (review set). If kept as utility sales, the user's 2026-10-28 rule names the category Utility Charges"},
-    {"severity": "warning", "path": "receipts[10].original_label", "page": 1,
-     "extracted": "Local Receipts: Other (Combined Utilities Fund)", "on_page": "Local Receipts: Other",
-     "issue": "fund name appended to the printed label (same in detail[22].original_label)"},
-    {"severity": "warning", "path": "disbursements[2].original_label", "page": 2,
-     "extracted": "Capital Improvements", "on_page": "Capital Improvements (Street Fund column)",
-     "issue": "capital outlay line not relabelled 'Capital Outlay: <function>' per user rule 2026-10-26 (also detail[16]); user_rules.py may apply it"}
+    {
+      "severity": "warning",
+      "path": "receipts[10].category",
+      "page": 1,
+      "extracted": "Utility Charges",
+      "on_page": "Local Receipts: Other (Combined Utilities Fund column) 90,157.00",
+      "issue": "Printed label is 'Local Receipts: Other'. Calling it Utility Charges is the extractor's inference: it is the utility fund's only receipt line and no breakdown is printed. This is defensible, but it is an assumption. The original_label also adds '(Combined Utilities Fund)', which is not printed text. The same applies to detail[22]."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[9].category",
+      "page": 1,
+      "extracted": "other",
+      "on_page": "Local Receipts: Other 22,400.00 (General) + 414.00 (Street) = 22,814",
+      "issue": "Governmental 'other' is 19% of governmental receipts excluding transfers (22,814 / 117,469), so it is above the 10% review threshold. The printed label is 'Other' and the trimmed pages give no breakdown, so other with review is correct as recorded."
+    },
+    {
+      "severity": "warning",
+      "path": "balance_sheet.assets",
+      "page": 1,
+      "extracted": "Net Cash Balance only (139,995 governmental; 194,290 business-type)",
+      "on_page": "County Treasurer Balance at September 30, 2025: 2,830.13 (October 1, 2024: 1,187.86)",
+      "issue": "County treasurer balances are left out of cash, as the notes say. The form prints them as a memo outside lines 24-28, so leaving them out is defensible. The project's 'county treasurer -> Cash and Cash Equivalents' rule might lead a person to include them."
+    }
   ]
 }

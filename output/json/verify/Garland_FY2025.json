@@ -1,13 +1,15 @@
 {
   "stem": "Garland_FY2025",
-  "values_checked": 34,
+  "values_checked": 31,
   "issues": [
     {"severity": "warning", "path": "receipts[8].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other 147,035.63 (Water & Sewer Fund column)",
-     "issue": "The extractor assumed these are utility charges; the page doesn't say. That is defensible and already marked review. Under the user's 2026-10-28 rule, utility fund sales and charges are category Utility Charges."},
-    {"severity": "warning", "path": "decision_needed", "page": 1,
-     "extracted": "Local Receipts: Other 174,252.76 in category other (incl. Fire Department Fund 130,363.08)",
-     "on_page": "Fire Department Fund Local Receipts: Other 130,363.08; Fire Department disbursements 157,500.17",
-     "issue": "The Fire Department Fund's unexplained 'Other' receipt (130,363.08) is about 46% of governmental receipts and is spent in the same year. It could be a rural fire district contract, a grant, or loan/financing proceeds for equipment. That question can only be settled from outside the form, and the extraction has no decision_needed entry for it."}
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other 147,035.63 (Water & Sewer Fund)",
+     "issue": "assumption: no breakdown printed; the Water & Sewer fund's only receipt is taken as utility charges (already marked review)"},
+    {"severity": "warning", "path": "receipts[7].category", "page": 1,
+     "extracted": "other", "on_page": "Local Receipts: Other 174,252.76 (General 40,889.68 + Fire Department 130,363.08 + Ball Park 3,000.00)",
+     "issue": "label says Other and nothing in the trimmed PDF explains it, so other is allowed, but it is 61% of governmental receipts (Fire Department 130,363.08 may be rural fire contracts or donations)"},
+    {"severity": "warning", "path": "notes", "page": 1,
+     "extracted": "...Read pages 1-5 of 5 Investments rule: ...", "on_page": "5 pages",
+     "issue": "notes contain 'Read pages 1-5 of 5' (page count matches, all pages checked, nothing missing) but more text follows it, so the notes don't end with that phrase"}
   ]
 }

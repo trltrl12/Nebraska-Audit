@@ -1,21 +1,21 @@
 {
   "stem": "Madison_FY2025",
-  "values_checked": 216,
+  "values_checked": 207,
   "issues": [
-    {"severity": "warning", "path": "receipts[7].category", "page": 5,
-     "extracted": "charges for services/fees", "on_page": "Charges for services 98,331 (p15: Rescue 64,803 + Park 16,710 + Pool 16,818)",
-     "issue": "Ambulance/rescue fees are 64,803 of the 98,331 (more than half), so the user's Ambulance Fees category may apply. The p15 Rescue, Park and Pool detail lines also keep the category charges for services/fees instead of Ambulance Fees / Recreation Fees."},
-    {"severity": "warning", "path": "receipts[8].category", "page": 5,
-     "extracted": "donations/contributions", "on_page": "Grants and contributions 21,994 (p2/p3: Operating Grants and Contributions)",
-     "issue": "The grantor is not stated, so this could be government grants. This is a judgment call; the line is marked review."},
     {"severity": "warning", "path": "decision_needed", "page": 5,
-     "extracted": "transfers_out 376,801 includes 20,000 to the CRA", "on_page": "Transfers out (20,000) General; p3 'Transfer from City to CRA (20,000)' received by a component unit",
-     "issue": "One-sided transfer: 20,000 leaves the primary government for the Community Redevelopment Authority, a component unit that the extraction excludes. Whether to treat it as a transfer or as economic development spending is a question for the user, and decision_needed[] is missing."},
-    {"severity": "warning", "path": "balance_sheet.assets / balance_sheet.equity (governmental lines)", "page": 4,
-     "extracted": "Statement of Net Position governmental lines (cash 1,280,120, restricted cash 617,952, unrestricted 1,346,587, restricted 617,952)", "on_page": "Balance Sheet - Governmental Funds Total: cash 1,898,072, county treasurer 66,467; restricted 386,867/89,919/141,166, assigned 54,821 + 210,201, unassigned 1,081,565 (total 1,964,539 = government-wide)",
-     "issue": "Under the user's 2026-10-27 cash-basis balance-sheet rule, governmental lines come from the governmental funds statement when its totals equal the government-wide figures, as they do here. The extraction kept the government-wide lines (the business-type column does include capital assets). This is a judgment call."},
-    {"severity": "warning", "path": "detail[Capital outlay lines].detail_category", "page": 14,
-     "extracted": "land and buildings", "on_page": "Capital outlay (Administrative 497,625, Police 102,084, Fire 39,945, Rescue 269,085, Park 21,009)",
-     "issue": "The object is not printed; 'land and buildings' is a guess for every department (police and rescue capital outlay is more likely vehicles/equipment)."}
+     "extracted": "transfers_out 376,801 incl. 20,000", "on_page": "Transfers out (20,000) General Fund; Statement of Activities p3: 'Transfer from City to CRA (20,000)', component unit receives 20,000",
+     "issue": "the 20,000 goes to the Community Redevelopment Authority, a component unit, so no fund of the primary government receives it. That makes it a one-sided transfer, which only a person can settle (transfer or economic development spending?), and decision_needed[] doesn't have it"},
+    {"severity": "warning", "path": "balance_sheet", "page": 4,
+     "extracted": "governmental lines from the government-wide Statement of Net Position (p1)", "on_page": "Balance Sheet - Modified Cash Basis - Governmental Funds (p4), total 1,964,539 = government-wide governmental column",
+     "issue": "the user's cash-basis balance-sheet rule (2026-10-27) takes governmental lines from the governmental funds statement (fund balance by classification: Assigned Nursing home 54,821, Budgetary stabilization 210,201, Unassigned 1,081,565) when its totals equal the government-wide figures, as they do here. The report mixes bases (business-type is accrual), so keeping the Statement of Net Position is defensible"},
+    {"severity": "warning", "path": "detail[42].detail_category", "page": 14,
+     "extracted": "land and buildings", "on_page": "Capital outlay 497,625 (Administrative); also Police 102,084, Fire 39,945, Rescue 269,085, Park 21,009",
+     "issue": "the object of the department capital outlay lines isn't printed; 'land and buildings' is a guess (rescue/fire capital may be equipment purchases)"},
+    {"severity": "warning", "path": "detail[110].original_label", "page": 11,
+     "extracted": "Capital outlay", "on_page": "Street Fund Capital outlay 9,000",
+     "issue": "the General Fund department capital outlay lines are relabelled 'Capital Outlay: <function>' but the Street (and Nursing Home) capital outlay lines are not; this is inconsistent with the user's capital outlay rule"},
+    {"severity": "warning", "path": "receipts[9].category", "page": 5,
+     "extracted": "donations/contributions", "on_page": "Grants and contributions 21,994 (Statement of Activities: operating grants and contributions)",
+     "issue": "the page doesn't say whether these are government grants or private gifts; the category is a judgment call (review already set)"}
   ]
 }

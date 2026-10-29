@@ -1,9 +1,22 @@
 {
   "stem": "Moorefield_FY2025",
-  "values_checked": 31,
+  "values_checked": 33,
   "issues": [
-    {"severity": "warning", "path": "receipts[8].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other, Water Fund column 26,296.05",
-     "issue": "Water Fund receipts are printed only as 'Local Receipts: Other'; treating them as water charges is an assumption (review note present). If they are water sales, the user's 2026-10-28 rule puts utility fund sales/charges in the 'Utility Charges' category rather than charges for services/fees."}
+    {
+      "severity": "warning",
+      "path": "receipts[8].category",
+      "page": 1,
+      "extracted": "Utility Charges",
+      "on_page": "18 Local Receipts: Other (Water Fund column) 26,296.05",
+      "issue": "Amount correct. Category Utility Charges is an assumption (water sales); the page prints only 'Local Receipts: Other' with no breakdown. Defensible as the Water Fund's only receipt line, review note present. original_label has '(Water Fund)' appended to the printed label."
+    },
+    {
+      "severity": "warning",
+      "path": "balance_sheet.equity[0].category",
+      "page": 1,
+      "extracted": null,
+      "on_page": "24 Ending Balance (Line 22 MINUS Line 23)",
+      "issue": "Equity lines (equity[0], equity[1]) have no category field; amounts 151,266.24 and -9,091.63 are correct."
+    }
   ]
 }

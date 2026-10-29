@@ -1,15 +1,15 @@
 {
   "stem": "Endicott_FY2025",
-  "values_checked": 45,
+  "values_checked": 46,
   "issues": [
     {"severity": "warning", "path": "receipts[10].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Enterprise Fund) 43,422.58",
-     "issue": "Enterprise (utility) fund receipts printed only as 'Other'; presumed utility charges. Under the user's 2026-10-28 rule utility fund charges are category Utility Charges, so if the presumption holds the category should be Utility Charges; otherwise other. Assumption not confirmed by the page."},
-    {"severity": "warning", "path": "reported_totals.business-type", "page": 1,
-     "extracted": "includes_split (non-standard field), no includes[]", "on_page": "Total Receipts 240,163.25 incl. transfers in 196,740.67; Total Disbursements & Transfers 231,222.32 incl. transfers out 10,564.00",
-     "issue": "Printed business-type totals include gross transfers but are recorded with a non-standard 'includes_split' field instead of includes ['transfers_net']; validation may not recognise it. Amounts themselves are correct."},
-    {"severity": "warning", "path": "disbursements[2].original_label", "page": 2,
-     "extracted": "Capital Improvements (Enterprise Fund column)", "on_page": "Capital Improvements",
-     "issue": "Label has extractor text appended (also receipts[8-10] '(General Fund)'/'(Street Fund)'/'(Enterprise Fund)' and disbursements[3] '(Enterprise Fund column)'); printed labels are 'Local Receipts: Other', 'Capital Improvements', 'Debt Service'."}
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other (Enterprise Fund) 43,422.58",
+     "issue": "Assumption: the form has no utility-sales line, so the Enterprise Fund's only non-transfer receipt is treated as utility charges. No breakdown is printed. It is already marked review."},
+    {"severity": "warning", "path": "disbursements[2]", "page": 2,
+     "extracted": "business-type, capital outlay, 'Capital Improvements (Enterprise Fund column)'", "on_page": "line 35 Capital Improvements 53,847.23, Enterprise Fund column, printed under the 'Governmental:' heading",
+     "issue": "Fund type follows the Enterprise column even though the row sits under the Governmental heading. That is defensible. The label is also not in the user's \"Capital Outlay: <function>\" form (printed text belongs in printed_label)."},
+    {"severity": "warning", "path": "disbursements[3].fund_type", "page": 2,
+     "extracted": "business-type", "on_page": "line 39 Debt Service 10,564.00, Enterprise Fund column, under the 'Governmental:' heading",
+     "issue": "Fund type follows the Enterprise column rather than the Governmental heading. The possible duplicate with the 10,564.00 Enterprise-to-Enterprise transfer is already in decision_needed."}
   ]
 }

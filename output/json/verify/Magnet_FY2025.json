@@ -1,9 +1,15 @@
 {
   "stem": "Magnet_FY2025",
-  "values_checked": 30,
+  "values_checked": 38,
   "issues": [
+    {"severity": "warning", "path": "disbursements[2].original_label", "page": 2,
+     "extracted": "Capital Improvements", "on_page": "35 Capital Improvements 66,600.00 (Street Fund)",
+     "issue": "the user's capital outlay rule relabels capital outlay lines 'Capital Outlay: <function>' (here Streets; printed text in printed_label); not applied (user_rules.py may apply it)"},
     {"severity": "warning", "path": "receipts[10].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other 34,971.00 (Combined Utilities Fund)",
-     "issue": "the line is assumed to be utility charges; if so, the user's rule puts it in Utility Charges, not charges for services/fees"}
+     "extracted": "Utility Charges", "on_page": "18 Local Receipts: Other, Combined Utilities Fund 34,971.00",
+     "issue": "assumed to be utility charges; the page prints no breakdown (review already set)"},
+    {"severity": "warning", "path": "notes", "page": 1,
+     "extracted": "County treasurer balance 125.71 at 9/30/25 (informational, included in cash)", "on_page": "County Treasurer Balance at September 30, 2025 125.71, printed outside the statement",
+     "issue": "nothing on the page shows the county treasurer balance is inside Net Cash Balance; the notes state this as fact, but it is an assumption"}
   ]
 }

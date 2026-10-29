@@ -1,18 +1,12 @@
 {
   "stem": "Glenvil_FY2025",
-  "values_checked": 56,
+  "values_checked": 40,
   "issues": [
     {"severity": "warning", "path": "receipts[16].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Water 62,135.71, Sewer 30,760.18, Trash 29,040.30)",
-     "issue": "The extractor assumed these utility-column lines are utility charges. If so, the user's 2026-10-28 category is Utility Charges (incl. trash/refuse), not charges for services/fees. The printed label only says 'Other', so this is an assumption either way. It is already marked review."},
-    {"severity": "warning", "path": "disbursements[3].original_label", "page": 2,
-     "extracted": "Capital Improvements / Other Capital Outlay / Capital Improvements", "on_page": "line 35 Capital Improvements (Street 9,750.00; Sewer 25,475.00), line 36 Other Capital Outlay (Street 1,850.00)",
-     "issue": "Capital outlay lines are not relabelled 'Capital Outlay: <function>' (Streets/Highways for the Street column, Utilities for the Sewer column) with the printed text in printed_label, as the user's capital-outlay rule requires. This also applies to disbursements[4] and disbursements[6]."},
-    {"severity": "warning", "path": "balance_sheet.assets", "page": 1,
-     "extracted": "not recorded or mentioned in notes", "on_page": "County Treasurer Balance at October 1, 2024 $2,476.33; at September 30, 2025 3,797.28",
-     "issue": "The county treasurer balances printed below Exhibit A are left out of beginning/ending cash and the balance sheet, and the notes don't mention them. They are probably outside the fund balances (not yet remitted), but the omission should be noted."},
-    {"severity": "warning", "path": "balance_sheet.equity[0].original_label", "page": 1,
-     "extracted": "Subtotal of Ending Balances (all funds, governmental and business-type)", "on_page": "Subtotal of Ending Balances (Line 26 + 27)",
-     "issue": "The label is not as printed: the extractor's own description replaced the printed text. The same applies to equity[1]."}
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other: Water 62,135.71 + Sewer 30,760.18 + Trash 29,040.30",
+     "issue": "assumption: no breakdown printed; the utility-column 'Other' receipts are taken as utility charges (already marked review). Sum checked: 121,936.19"},
+    {"severity": "warning", "path": "receipts[10].category", "page": 1,
+     "extracted": "other", "on_page": "Local Receipts: Other 37,302.85 (General 37,292.85 + Street 10.00)",
+     "issue": "the label says Other and nothing in the PDF explains it, so other is allowed, but it is 18% of governmental receipts excluding transfers (already marked review)"}
   ]
 }

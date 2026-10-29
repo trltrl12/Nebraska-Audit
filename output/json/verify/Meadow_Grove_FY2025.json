@@ -1,9 +1,15 @@
 {
   "stem": "Meadow_Grove_FY2025",
-  "values_checked": 45,
+  "values_checked": 41,
   "issues": [
     {"severity": "warning", "path": "receipts[11].category", "page": 2,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other - Sewer 48,801.66 + Water 59,761.72 + Sanitation 19,904.88",
-     "issue": "Under the user's 2026-10-28 rule, utility fund sales/charges (including sanitation) go to the category Utility Charges, not charges for services/fees. The printed label is only 'Other', so treating the line as user charges is an assumption (already marked review)."}
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other 128,468.26 (Sewer 48,801.66 + Water 59,761.72 + Sanitation 19,904.88)",
+     "issue": "printed label is 'Other'; Utility Charges is an assumption (only receipt line of the utility funds, so defensible, already marked review)"},
+    {"severity": "warning", "path": "balance_sheet.equity[0].computed", "page": 1,
+     "extracted": "Page 1 General 135,921.44 + Street 212,887.45 + Library (77,432.17) + ... (line 26 cash figures, sum 393,615.99)", "on_page": "line 24 Ending Balance: General 160,921.44 + Street 212,887.45 + Library (65,621.27) + Fire & Rescue 101,562.17 + Community Bldg 3,616.66 + Fire Hall 6,144.41 + Library Foundation 10,916.03 = 430,426.89",
+     "issue": "amount 430,426.89 is correct, but the computed note copies the line 26 net cash figures (which sum to 393,615.99), not the line 24 ending balances"},
+    {"severity": "warning", "path": "balance_sheet.equity", "page": 1,
+     "extracted": "no category field on either equity line", "on_page": "Ending Balance (line 24)",
+     "issue": "equity items lack a category (list items should carry category)"}
   ]
 }

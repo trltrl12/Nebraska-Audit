@@ -1,8 +1,18 @@
 {
   "stem": "Eagle_FY2025",
-  "values_checked": 88,
+  "values_checked": 85,
   "issues": [
-    {"severity": "warning", "path": "receipts[7].category", "page": 6, "extracted": "charges for services/fees", "on_page": "Charges for services: Sewer 301,691 (Enterprise Fund)", "issue": "Enterprise (water/sewer) fund sales; the user's 2026-10-28 rule makes utility fund charges category Utility Charges. Same for receipts[8] (Water 116,487). user_rules.py won't catch these because receipts have no fund field."},
-    {"severity": "warning", "path": "detail[6].original_label", "page": 7, "extracted": "Other capital outlay", "on_page": "Other capital outlay 0 (budget 50,000)", "issue": "Capital outlay lines that are already category capital outlay should be labelled 'Capital Outlay: <function>' (user rule 2026-10-28). Same for detail[5], [14], [15] ('Capital improvements' / 'Other capital outlay'). All have zero actuals."}
+    {"severity": "warning", "path": "receipts[4].category", "page": 4,
+     "extracted": "intergovernmental/state aid", "on_page": "Miscellaneous income/(expense) 408,531",
+     "issue": "category differs from printed label; supported by budget schedules p7-8 printing the same fund amounts (223,580 + 184,951) as 'Other state receipts' (review note present)"},
+    {"severity": "warning", "path": "receipts[10].category", "page": 6,
+     "extracted": "licenses and permits", "on_page": "Licenses, fees, and permits 1,200",
+     "issue": "mixed line (licenses, fees and permits) given the dominant category without a review note naming the mix"},
+    {"severity": "warning", "path": "receipts[11].amount", "page": 6,
+     "extracted": -112152, "on_page": "Miscellaneous (112,152)",
+     "issue": "large negative unexplained non-operating line (about a quarter of the enterprise fund's gross receipts) recorded as negative receipt in other; may be spending/capital netted here; consider decision_needed"},
+    {"severity": "warning", "path": "ending_cash", "page": 3,
+     "extracted": 1268075, "on_page": "Total assets 1,268,075 incl. Certificates of deposit 133,987",
+     "issue": "ending_cash includes certificates of deposit that the balance sheet categorizes as Investments while ending_investments is null; consistent with the fund balance but the cash/investment split is inconsistent"}
   ]
 }

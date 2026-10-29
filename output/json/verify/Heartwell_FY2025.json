@@ -1,9 +1,21 @@
 {
   "stem": "Heartwell_FY2025",
-  "values_checked": 26,
+  "values_checked": 29,
   "issues": [
+    {"severity": "warning", "path": "decision_needed", "page": 1,
+     "extracted": null, "on_page": "Local Receipts: Other 23,926.00 (General Fund), 62% of governmental receipts 38,638.00",
+     "issue": "An unexplained 'Other' line makes up most of the year's governmental receipts. Per the extractor rules that is a question for a person (it could be loan proceeds, a grant, etc.), but decision_needed[] is absent."},
     {"severity": "warning", "path": "receipts[9].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Line 18 Local Receipts: Other, Sewer Fund 10,390.00",
-     "issue": "the line is assumed to be sewer user fees (flagged for review). If that is right, the user's 2026-10-28 rule moves utility fund charges/collections out of charges for services into Utility Charges"}
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other 10,390.00 (Sewer Fund column)",
+     "issue": "The sewer receipts are assumed to be user fees, but the page prints only 'Other' with no breakdown. Review note is present."},
+    {"severity": "warning", "path": "disbursements[1].original_label", "page": 2,
+     "extracted": "Capital Improvements", "on_page": "Capital Improvements 3,608.00 (General Fund)",
+     "issue": "User rule 2026-10-26/28: capital outlay lines are labelled 'Capital Outlay: <function>' with the printed text in printed_label. Not applied here; the function isn't printed (General Fund)."},
+    {"severity": "warning", "path": "balance_sheet.equity", "page": 1,
+     "extracted": "no category", "on_page": "Ending Balance (Line 24) 24,047.00 / 44,414.00",
+     "issue": "Equity lines carry no category field (list items should have category)"},
+    {"severity": "warning", "path": "balance_sheet.assets", "page": 1,
+     "extracted": null, "on_page": "County Treasurer Balance at September 30, 2025 472.86 (Oct 1, 2024: 164.00)",
+     "issue": "Memo county treasurer balances are printed outside the line 24/28 totals. They are not recorded or mentioned in notes; probably correctly excluded, but the exclusion isn't documented."}
   ]
 }

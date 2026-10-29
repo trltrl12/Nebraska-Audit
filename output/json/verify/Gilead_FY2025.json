@@ -1,15 +1,15 @@
 {
   "stem": "Gilead_FY2025",
-  "values_checked": 42,
+  "values_checked": 38,
   "issues": [
+    {"severity": "warning", "path": "reported_totals.business-type.disbursements.includes", "page": 3,
+     "extracted": [], "on_page": "Total Disbursements & Transfers (line 52) 87,873 incl. Electric Fund transfer out 2,200 (line 49)",
+     "issue": "the printed business-type total includes the 2,200 transfer out; the rules call for includes: [\"transfers_net\"], but it is recorded only in a non-standard includes_split field (amounts correct: 85,673 + 2,200 = 87,873)"},
     {"severity": "warning", "path": "receipts[9].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other, Electric Fund 73,189",
-     "issue": "Inconsistent with receipts[11] (Garbage Fund, same line), which is Utility Charges. Utility fund collections are Utility Charges under the user's 2026-10-28 rules. The same applies to receipts[10] (Sewer Fund 11,978)."},
-    {"severity": "warning", "path": "receipts[10].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other, Sewer Fund 11,978",
-     "issue": "Utility fund receipts. Utility Charges would match the Garbage Fund line and the user's 2026-10-28 rule."},
-    {"severity": "warning", "path": "balance_sheet.liabilities", "page": 5,
-     "extracted": [], "on_page": "Schedule of Outstanding Debt: NDEQ loan 61,781.37 (issued 8/3/2017, 1.50%, matures 12/15/2037)",
-     "issue": "No balance statement is printed, so the balance sheet is built from Exhibit A cash only. The NDEQ loan, probably the Sewer Fund's (its debt service 6,107 is in the Sewer column), is printed on p5 but isn't recorded anywhere or mentioned in notes. A cash-basis balance sheet normally leaves it out, but the user may want it noted."}
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other 73,189.00 (Electric Fund)",
+     "issue": "assumption: no breakdown is printed. Utility Charges is likely for the Electric, Sewer (11,978) and Garbage (2,728) funds' only receipts (already marked review)"},
+    {"severity": "warning", "path": "receipts[8].category", "page": 1,
+     "extracted": "other", "on_page": "Local Receipts: Other 28,981.00 (General Fund)",
+     "issue": "the label says Other and nothing in the PDF explains it, so other is allowed, but it is 59% of governmental receipts (already marked review)"}
   ]
 }

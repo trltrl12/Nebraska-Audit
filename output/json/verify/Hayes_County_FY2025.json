@@ -1,21 +1,21 @@
 {
   "stem": "Hayes_County_FY2025",
-  "values_checked": 78,
+  "values_checked": 86,
   "issues": [
-    {"severity": "error", "path": "detail[37].category", "page": 9,
-     "extracted": "charges for services/fees", "on_page": "Register of Deeds P&M - Charges for Services 1,314",
-     "issue": "[fixed 2026-10-28: category set to Fees of Office] Register of deeds fees go in the user's Fees of Office receipt category (2026-10-28 rule). detail_category is already fees of office."},
-    {"severity": "warning", "path": "receipts[5].category", "page": 4,
-     "extracted": "charges for services/fees", "on_page": "Charges for Services 94,399 (91,665 under General Government on p2)",
-     "issue": "County general government charges are usually fees of office (clerk, treasurer, register of deeds), but the page doesn't break them down."},
-    {"severity": "warning", "path": "detail[29].detail_category", "page": 7,
-     "extracted": "other state aid", "on_page": "Road Fund State 835,195",
-     "issue": "County road fund state receipts are mostly highway allocation, but the schedule doesn't break them down."},
-    {"severity": "warning", "path": "detail[30].split_from", "page": 7,
-     "extracted": "Local 6,154 split into 278 charges + 5,876 miscellaneous", "on_page": "Local 6,154 (Exhibit G); Exhibit D Road column shows Charges 278 and Miscellaneous 5,876",
-     "issue": "The rules say a broad group like 'Local' stays as printed with a review note. The General Fund 'Local' 145,270 was kept unsplit, so the two funds are handled differently. detail[31] has the same issue."},
-    {"severity": "warning", "path": "detail[24].category", "page": 5,
-     "extracted": "streets/highways", "on_page": "Noxious Weed 5,082 (printed under Public Works)",
-     "issue": "The rules list noxious weed control under natural resources/conservation, but the report groups it under Public Works."}
+    {"severity": "warning", "path": "detail[7].amount", "page": 5,
+     "extracted": 2191, "on_page": "Local 145,270 (p5); Exhibit D General Intergovernmental 7,777 (p4)",
+     "issue": "Residual of the Local split, derived as Exhibit D Intergovernmental 7,777 - Exhibit F State 5,586. It is not printed anywhere. It is marked computed/review and the four Local split lines sum to 145,270, but the local-government source is an inference."},
+    {"severity": "warning", "path": "detail[5].detail_category", "page": 5,
+     "extracted": "investment income", "on_page": "Interest 42,013 (Exhibit D General column, p4)",
+     "issue": "The receipts line for the same Interest uses Interest Income (user rule 2026-10-23: interest lines are Interest Income). The detail_category here is inconsistent with that."},
+    {"severity": "warning", "path": "detail[31].original_label", "page": 6,
+     "extracted": "Operating Transfers (Out)", "on_page": "Operating Transfers (Out)",
+     "issue": "Not renamed to 'Transfers Out' with printed_label per the user's other-financing label rule; the Road Fund 'Operating Transfers In' line was renamed"},
+    {"severity": "warning", "path": "detail[27].category", "page": 5,
+     "extracted": "streets/highways", "on_page": "Noxious Weed 5,082 (under Public Works)",
+     "issue": "Disbursement rules list noxious weed control under natural resources/conservation. The report groups it under Public Works, so streets/highways is defensible."},
+    {"severity": "warning", "path": "detail[17].category", "page": 5,
+     "extracted": "economic development", "on_page": "Economic Development 8,122 (printed under General Government)",
+     "issue": "The schedule and statement count it in General Government (865,262). The detail line is recategorised to economic development, so detail functions won't match the statement; review note present."}
   ]
 }

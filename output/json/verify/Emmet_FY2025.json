@@ -1,9 +1,15 @@
 {
   "stem": "Emmet_FY2025",
-  "values_checked": 31,
+  "values_checked": 36,
   "issues": [
+    {"severity": "warning", "path": "receipts[0].original_label", "page": 1,
+     "extracted": "Personal and Real Property Taxes (General)", "on_page": "Personal and Real Property Taxes",
+     "issue": "User label rule (2026-10-28) renames this to \"Property Tax\" with the printed text in printed_label. It isn't applied here, though Endicott and Ericson have it. user_rules.py should apply it."},
+    {"severity": "warning", "path": "disbursements[2].original_label", "page": 2,
+     "extracted": "Capital Improvements (Street)", "on_page": "Capital Improvements 23,545.00 (Street Fund)",
+     "issue": "Category capital outlay is correct. The user rule calls for the label \"Capital Outlay: <function>\" (e.g. Capital Outlay: Streets) with the printed text in printed_label and the function in computed. Not applied."},
     {"severity": "warning", "path": "receipts[11].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Sewer Fund) 6,524.00",
-     "issue": "The category is an assumption ('presumably user fees'); the printed label says 'Other'. If these are sewer/solid-waste user fees, the user rule category is 'Utility Charges'. The page doesn't say what they are."}
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other (Sewer Fund) 6,524.00",
+     "issue": "Assumption: the form has no utility-sales line, so the Sewer Fund's only receipt is treated as utility charges. No breakdown is printed. It is already marked review."}
   ]
 }
