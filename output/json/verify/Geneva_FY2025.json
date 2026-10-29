@@ -4,7 +4,7 @@
   "issues": [
     {"severity": "error", "path": "receipts[16].category", "page": 7,
      "extracted": "charges for services/fees", "on_page": "Charges for services 1,059,117 (Water Fund 545,612 + Sewer Fund 513,505, enterprise funds)",
-     "issue": "water/sewer enterprise fund charges are utility fund sales/charges; the user's rule puts these in the receipt category Utility Charges, not charges for services/fees. user_rules.py won't fix this because the line has no fund field naming the utility"},
+     "issue": "[fixed 2026-10-29: category set to Utility Charges, fund Water Fund, Sewer Fund, detail_category other utility charges] water/sewer enterprise fund charges are utility fund sales/charges; the user's rule puts these in the receipt category Utility Charges, not charges for services/fees. user_rules.py won't fix this because the line has no fund field naming the utility"},
     {"severity": "warning", "path": "receipts[8].category", "page": 5,
      "extracted": "charges for services/fees", "on_page": "Charges for services 293,415 (p17 by department: Activity & Education 13,010, Park & Recreation 152,693, Youth Rec Center 250, Pool 63,070, Rescue 41,617, Cemetery 18,700, Library 3,400, Tree Dump 675)",
      "issue": "the General Fund combining schedule prints this line's breakdown. Recreation departments make up 229,023 (78%), so under the dominant-category / split_from rule this is mostly Recreation Fees, plus Ambulance Fees 41,617 and Cemetery Fees 18,700. The same applies to detail[5] (detail_category 'other charges for services')"},
@@ -16,7 +16,7 @@
      "issue": "a mixed grants and donations line. Part may be government grants, so donations/contributions is a judgment call"},
     {"severity": "warning", "path": "disbursements[10].function", "page": 7,
      "extracted": null, "on_page": "Utilities and telephone 97,934 (enterprise funds, by cost type)",
-     "issue": "the other cost-type utility lines carry function 'utilities' but this one has no function field; the category 'utilities' (utility bills) is right"},
+     "issue": "[fixed 2026-10-29: function utilities added] the other cost-type utility lines carry function 'utilities' but this one has no function field; the category 'utilities' (utility bills) is right"},
     {"severity": "warning", "path": "detail[99].detail_category", "page": 10,
      "extracted": "other state aid", "on_page": "Street Fund Intergovernmental 406,160",
      "issue": "Street Fund intergovernmental revenue is most likely the state highway allocation (detail category 'highway allocation'). The page doesn't say, so this is a judgment call"},
