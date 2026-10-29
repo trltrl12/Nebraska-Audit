@@ -4,7 +4,7 @@
   "issues": [
     {"severity": "error", "path": "receipts[12].category", "page": 6,
      "extracted": "charges for services/fees", "on_page": "Charges for services 423,515 (Light, Sewer, Water, Water and Sewer Sinking, Garbage funds)",
-     "issue": "Utility fund sales are category Utility Charges under the user's 2026-10-28 rule (out of charges for services); the report's own detail lines for the same row already use Utility Charges, so receipts and detail disagree"},
+     "issue": "[fixed 2026-10-28: receipts[12] category set to Utility Charges, matching the per-fund detail lines] Utility fund sales are category Utility Charges under the user's 2026-10-28 rule (out of charges for services); the report's own detail lines for the same row already use Utility Charges, so receipts and detail disagree"},
     {"severity": "warning", "path": "receipts[2].split_from", "page": 7,
      "extracted": "Intergovernmental 92,111 split into highway allocation 59,743 / municipal equalization 17,637 / motor vehicle fees 3,965 / other intergovernmental 10,766", "on_page": "p4 prints one Intergovernmental line (General 10,766, Street 81,345); p7 all-fund budget schedule prints the four lines",
      "issue": "Split is taken from the all-fund budgetary schedule rather than a breakdown of the statement line itself; arithmetic ties (sum 92,111, and 10,766 equals the p2 general-revenue Intergovernmental) so defensible, but confirm"},
@@ -13,7 +13,7 @@
      "issue": "'Operation and maintenance' is a general operating line, not specifically repairs; Garbage 46,322 is probably hauling contract. Could be utilities/other; same for detail[27]-[30]"},
     {"severity": "warning", "path": "disbursements[7].original_label", "page": 6,
      "extracted": "Capital outlay", "on_page": "Capital outlay 35,443 (Water Fund)",
-     "issue": "User rule labels every capital outlay line 'Capital Outlay: <function>' with printed text in printed_label; not relabelled here or in detail[32]"},
+     "issue": "[fixed 2026-10-28: relabelled 'Capital Outlay: Utilities' with printed_label 'Capital outlay' in disbursements[7] and detail[32]] User rule labels every capital outlay line 'Capital Outlay: <function>' with printed text in printed_label; not relabelled here or in detail[32]"},
     {"severity": "warning", "path": "business_type.beginning", "page": 2,
      "extracted": 92769, "on_page": "p6 92,769; p2 92,770 (change 24,640 on p6 vs 24,639 on p2)",
      "issue": "Rounding difference printed in the report itself between the proprietary statement and the statement of activities; noted in notes but not in report_discrepancies"}

@@ -3,7 +3,7 @@
   "entity_type": "school district",
   "fiscal_year_end": "2025-08-31",
   "basis": "cash",
-  "extraction_attempt": 2,
+  "extraction_attempt": 3,
   "beginning_cash": {
     "amount": 11118766,
     "source_page": 6
@@ -64,11 +64,72 @@
     },
     {
       "fund_type": "governmental",
-      "category": "charges for services/fees",
-      "original_label": "Other local receipts",
-      "amount": 81991,
+      "category": "Extracurricular Receipts",
+      "original_label": "Other local receipts (Student Fee extracurricular fees)",
+      "amount": 19567,
       "source_page": 5,
-      "review": "mix: student fees 33,587 and community service 20,586 (over half) plus misc local, license fees, penalties; see pp9, 21"
+      "split_from": "Other local receipts 81,991 (p5)",
+      "computed": "Student Fee Fund extracurricular fees 19,567 (p21)"
+    },
+    {
+      "fund_type": "governmental",
+      "category": "Tuition Received",
+      "original_label": "Other local receipts (Student Fee postsecondary fees)",
+      "amount": 14020,
+      "source_page": 5,
+      "split_from": "Other local receipts 81,991 (p5)",
+      "computed": "Student Fee Fund postsecondary fees 14,020 (p21)"
+    },
+    {
+      "fund_type": "governmental",
+      "category": "charges for services/fees",
+      "original_label": "Other local receipts (community service activities)",
+      "amount": 20586,
+      "source_page": 5,
+      "split_from": "Other local receipts 81,991 (p5)",
+      "computed": "General Fund 1800 revenue from community service activities 20,586 (p9)"
+    },
+    {
+      "fund_type": "governmental",
+      "category": "licenses and permits",
+      "original_label": "Other local receipts (local license fees and fines)",
+      "amount": 4300,
+      "source_page": 5,
+      "split_from": "Other local receipts 81,991 (p5)",
+      "computed": "General Fund 1911 local license fees and fines 4,300 (p9)",
+      "review": "mixes licenses and fines"
+    },
+    {
+      "fund_type": "governmental",
+      "category": "donations/contributions",
+      "original_label": "Other local receipts (categorical grants from private interests)",
+      "amount": 4092,
+      "source_page": 5,
+      "split_from": "Other local receipts 81,991 (p5)",
+      "computed": "Cooperative Fund other categorical grants from private interests 4,092 (p16)"
+    },
+    {
+      "fund_type": "governmental",
+      "category": "Penalties and Interest on Taxes",
+      "original_label": "Other local receipts (penalties and interest on taxes)",
+      "amount": 2376,
+      "source_page": 5,
+      "split_from": "Other local receipts 81,991 (p5)",
+      "computed": "Bond Fund penalties and interest on taxes 1,642 (p18) + Special Building 734 (p19)",
+      "detail_category": "Penalties and Interest on Taxes",
+      "category_decision": "user 2026-10-23"
+    },
+    {
+      "fund_type": "governmental",
+      "category": "other",
+      "original_label": "Other local receipts (miscellaneous)",
+      "amount": 17050,
+      "source_page": 5,
+      "split_from": "Other local receipts 81,991 (p5)",
+      "computed": "General 1990 miscellaneous local receipts 13,559 (p9) + Cooperative other miscellaneous local revenue 3,347 (p16) + Nutrition other 144 (p20)",
+      "review": "unexplained miscellaneous",
+      "detail_category": "Other / Miscellaneous Receipts",
+      "category_decision": "user 2026-10-23"
     },
     {
       "fund_type": "governmental",
@@ -503,7 +564,7 @@
       "fund": "General",
       "department": "Local sources",
       "section": "revenue",
-      "category": "Extracurricular Receipts",
+      "category": "charges for services/fees",
       "detail_category": "other charges for services",
       "original_label": "1800 Revenue from community service activities",
       "amount": 20586,
@@ -2419,7 +2480,7 @@
       "fund": "School Nutrition",
       "department": null,
       "section": "revenue",
-      "category": "charges for services/fees",
+      "category": "School Lunch Sales",
       "detail_category": "school lunch sales",
       "original_label": "Sales",
       "amount": 41968,
@@ -2666,7 +2727,7 @@
       "amount": 681831,
       "budget_final": 859658,
       "source_page": 22,
-      "review": "labelled central services; statement p5 shows other-governmental spending under Instruction"
+      "review": "labelled central services; statement p5 shows other-governmental spending (681,584 = Activities 681,831 + Student Fee (247)) under Student support services"
     },
     {
       "schedule": "Activities Fund budget and actual",
@@ -2851,7 +2912,7 @@
       "source_page": 6
     }
   ],
-  "notes": "Modified cash basis school district (FY ended 2025-08-31). Statement values from the Statement of Receipts, Disbursements and Changes in Fund Balances - Governmental Funds, Total Governmental Funds column (pp5-6); beginning 11,118,766 = fund balances beginning (p6), ending 15,509,314 = fund balances ending (p6) = Statement of Net Position (p1) = cash + cash at County Treasurer; investments not reported separately. All funds, including the Nutrition Fund, are treated as governmental because the statement reports them as governmental funds; no business-type funds, so business_type is null. 'Balance carried forward' lines on p5/p6 are carry-forward subtotals, not recorded. Nonrevenue receipts 987,276 split using the fund schedules (insurance adjustments, sale/disposal of property, other, QCPUF penalties). Attempt 2: State receipts 12,772,739 (p5) split using the fund schedules, which tie to each fund's state column (General 12,337,738, Nutrition 6,010, QCPUF 94,602, Bond 128,655, Special Building 205,734): Homestead Exemption 289,149, Property Tax Credit 5,784,392, Motor Vehicle Pro-Rate 38,826, state aid 6,660,372. Attempt 2 detail recategorized per user school rules: SPED instruction 1200/1291/1292 -> Special Education Programs; 2410/2490 -> School Administration (statement line 'General administration' 2,161,058 kept as printed); 3300 -> Community Service Operations; General Fund 'Transfers out' relabelled Transfers Out; Activities 'Other activities' detail_category Extracurricular Receipts. Other local receipts 81,991 kept as one line (charges for services dominant: student fees 33,587 + community service 20,586). Detail: used the per-fund budget-to-actual schedules (pp9-22) for all ten funds; the combining schedule for General Fund components (pp7-8) is summarized by those schedules and is not recorded separately (no double counting). General Fund schedule (pp9-13) covers the General component only (29,043,266 receipts excl. loan); Depreciation, Employee Benefit and Cooperative have separate schedules. General Fund detail lines with zero actual and budget-only lines (e.g. 2110 attendance 1,450,000, 4708/4709 Medicaid, Reappropriated Funds 1,924,081) are omitted; other schedules omit zero-actual lines too. Interfund loan 2,000,000 (General in, QCPUF out) recorded as other financing within printed totals. General Fund transfers out 700,000 on p13 is inside total disbursements and recorded as other financing. Hidden transfer: the Reclassifications column on p8 removes 124,293 (Employee Benefit 64,293 + Cooperative 60,000 transfers from General) from instruction/state categorical/federal program spending; recorded as a contra expenditure line plus a transfer out in other financing (review). Student Fee Fund shows negative support services spending (247) as printed. Activities Fund spending labelled central services; statement shows other governmental funds Instruction 681,584 = Activities 681,831 + Student Fee (247). Balance sheet (user 2026-10-27): governmental lines from the governmental funds statement of assets, liabilities and fund balances (p4), Total Governmental Funds column. Read pages 1-22 of 22",
+  "notes": "Modified cash basis school district (FY ended 2025-08-31). Statement values from the Statement of Receipts, Disbursements and Changes in Fund Balances - Governmental Funds, Total Governmental Funds column (pp5-6); beginning 11,118,766 = fund balances beginning (p6), ending 15,509,314 = fund balances ending (p6) = Statement of Net Position (p1) = cash + cash at County Treasurer; investments not reported separately. All funds, including the Nutrition Fund, are treated as governmental because the statement reports them as governmental funds; no business-type funds, so business_type is null. 'Balance carried forward' lines on p5/p6 are carry-forward subtotals, not recorded. Nonrevenue receipts 987,276 split using the fund schedules (insurance adjustments, sale/disposal of property, other, QCPUF penalties). Attempt 2: State receipts 12,772,739 (p5) split using the fund schedules, which tie to each fund's state column (General 12,337,738, Nutrition 6,010, QCPUF 94,602, Bond 128,655, Special Building 205,734): Homestead Exemption 289,149, Property Tax Credit 5,784,392, Motor Vehicle Pro-Rate 38,826, state aid 6,660,372. Attempt 2 detail recategorized per user school rules: SPED instruction 1200/1291/1292 -> Special Education Programs; 2410/2490 -> School Administration (statement line 'General administration' 2,161,058 kept as printed); 3300 -> Community Service Operations; General Fund 'Transfers out' relabelled Transfers Out; Activities 'Other activities' detail_category Extracurricular Receipts. Attempt 3 (verifier fixes 2026-10-28): Nutrition 'Sales' detail line category School Lunch Sales (matches statement line); Other local receipts 81,991 (p5) split using the fund schedules, which tie to its fund columns (General incl. Cooperative 45,884 = 20,586 + 4,300 + 13,559 + 4,092 + 3,347; Nutrition 144; Bond 1,642; Other governmental 34,321 = Student Fee 19,567 + 14,020 + Special Building 734): Extracurricular 19,567, Tuition Received 14,020, community service charges 20,586, licenses 4,300, private grants 4,092, penalties and interest 2,376, miscellaneous 17,050; 1800 community service detail line category charges for services/fees. Detail: used the per-fund budget-to-actual schedules (pp9-22) for all ten funds; the combining schedule for General Fund components (pp7-8) is summarized by those schedules and is not recorded separately (no double counting). General Fund schedule (pp9-13) covers the General component only (29,043,266 receipts excl. loan); Depreciation, Employee Benefit and Cooperative have separate schedules. General Fund detail lines with zero actual and budget-only lines (e.g. 2110 attendance 1,450,000, 4708/4709 Medicaid, Reappropriated Funds 1,924,081) are omitted; other schedules omit zero-actual lines too. Interfund loan 2,000,000 (General in, QCPUF out) recorded as other financing within printed totals. General Fund transfers out 700,000 on p13 is inside total disbursements and recorded as other financing. Hidden transfer: the Reclassifications column on p8 removes 124,293 (Employee Benefit 64,293 + Cooperative 60,000 transfers from General) from instruction/state categorical/federal program spending; recorded as a contra expenditure line plus a transfer out in other financing (review). Student Fee Fund shows negative support services spending (247) as printed. Activities Fund spending labelled central services; statement p5 shows other governmental funds Student support services 681,584 = Activities 681,831 + Student Fee (247). Balance sheet (user 2026-10-27): governmental lines from the governmental funds statement of assets, liabilities and fund balances (p4), Total Governmental Funds column. Read pages 1-22 of 22",
   "report_discrepancies": [
     {
       "check": "reconcile",
