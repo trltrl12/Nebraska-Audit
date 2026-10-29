@@ -1,54 +1,12 @@
 {
   "stem": "Nebraska_City_FY2025",
-  "values_checked": 163,
+  "values_checked": 172,
   "issues": [
-    {
-      "severity": "warning",
-      "path": "receipts[0].split_from",
-      "page": 2,
-      "extracted": "Taxes 5,339,520 split property 1,814,735 / PILOT 2,615 / sales 3,120,073 / occupation 402,097",
-      "on_page": "p4 prints only 'Taxes' 5,339,520; the breakdown comes from the Statement of Activities general revenues (p2), which totals the same 5,339,520",
-      "issue": "Split uses a different statement's breakdown. The totals tie, but the fund budget schedules imply a slightly different split: General Fund property 1,247,790 (incl. TIF 4,105) + Debt Service taxes 572,720 = 1,816,405 property vs 1,814,735 on p2; General 2,589,202 + Street 529,201 = 3,118,403 sales vs 3,120,073 on p2 (1,670 apart). Defensible, but worth review."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[7].category",
-      "page": 4,
-      "extracted": "federal grants",
-      "on_page": "Grant income 1,622,600",
-      "issue": "The page never says the grants are federal (Economic Development 697,256 could be state CDBG/pass-through; Street 330,000 and General 595,344 have no source given). The extractor assumed federal. It is marked review, and the same applies to detail[6], detail[23] and detail[31]."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[22].detail_category",
-      "page": 9,
-      "extracted": "other state aid",
-      "on_page": "Street Department Fund - State revenue 1,232,304",
-      "issue": "State revenue in the Street Department Fund is most likely highway allocation; the label doesn't say, so 'other state aid' is defensible."
-    },
-    {
-      "severity": "warning",
-      "path": "missing",
-      "page": 6,
-      "extracted": null,
-      "on_page": "Capital Contributions 320,205; Plant Cost Recovered through Capital Contributions (320,205)",
-      "issue": "Both lines are left out of the business-type receipts/disbursements. They net to zero, so the roll-forward still holds, and the notes explain it. This is a completeness judgment call."
-    },
-    {
-      "severity": "warning",
-      "path": "missing",
-      "page": 11,
-      "extracted": null,
-      "on_page": "LB840 Funds schedule: Sales tax transfer from City 347,521; Program income 87,294; Investment income 9,139; Loans 125,000; Grants 126,196; Administration 1,317; Total Revenues 443,954; Total Expenditures 252,513",
-      "issue": "The whole schedule is left out of detail[] as a subset of the Economic Development Fund (p10). That is plausible (same 347,521 transfer and 9,139 interest), but p11 is the only object-level breakdown of the economic development spending, and the report never says it is a subset. Judgment call, explained in notes."
-    },
-    {
-      "severity": "warning",
-      "path": "balance_sheet.liabilities[8].category",
-      "page": 1,
-      "extracted": "other liabilities",
-      "on_page": "Compensated absences - Payable in more than one year 589,358",
-      "issue": "[fixed 2026-10-21: long-term portion recategorized to accrued liabilities] Inconsistent with the current portion (liabilities[7], 264,851), which is categorized accrued liabilities. The two portions of the same item should probably share a category."
-    }
+    {"severity": "warning", "path": "receipts[14].category", "page": 6, "extracted": "charges for services/fees", "on_page": "Charges for services 25,410,126 (Proprietary Fund, combined utilities)", "issue": "utility fund charges; user rule (2026-10-28) puts utility fund sales/charges in Utility Charges"},
+    {"severity": "warning", "path": "receipts[16].category", "page": 6, "extracted": "charges for services/fees", "on_page": "Lease income 121,560", "issue": "lease/rental income; user rule category Rentals fits"},
+    {"severity": "warning", "path": "detail[22].detail_category", "page": 9, "extracted": "other state aid", "on_page": "Street Department Fund State revenue 1,232,304", "issue": "street fund state revenue is most likely highway allocation"},
+    {"severity": "warning", "path": "decision_needed", "page": 9, "extracted": "Street Department Miscellaneous 31,275 recorded as revenue (other)", "on_page": "Miscellaneous 31,275; Street Transfers out (31,275); General Fund Transfers in 31,275", "issue": "receipt equals the street fund's transfer out and the General Fund's transfer in exactly; may be a transfer or a reversal; extractor only added review, no decision_needed entry"},
+    {"severity": "warning", "path": "receipts[7].category", "page": 4, "extracted": "federal grants", "on_page": "Grant income 1,622,600", "issue": "grant source (federal vs state) not stated on the trimmed pages; category is an assumption (review set)"},
+    {"severity": "warning", "path": "balance_sheet.liabilities[3].category", "page": 1, "extracted": "net pension/OPEB liability / Accrued Liabilities", "on_page": "Total OPEB liability / Compensated absences - Payable within one year / in more than one year", "issue": "user rule for '<X> - Due within one year / more than one year' lines (Compensated Absences, Other Postemployment Benefit Liability) may apply to these 'Payable ...' lines (liabilities[3],[4],[7],[8])"}
   ]
 }

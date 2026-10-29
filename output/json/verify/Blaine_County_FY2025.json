@@ -1,70 +1,18 @@
 {
   "stem": "Blaine_County_FY2025",
-  "values_checked": 104,
+  "values_checked": 110,
   "issues": [
-    {
-      "severity": "warning",
-      "path": "report_discrepancies",
-      "page": 6,
-      "extracted": null,
-      "on_page": "Road/Bridge receipts: Intergovernmental 338,730 + Charges for Services 88 + Miscellaneous 12,548 = 351,366 vs printed TOTAL RECEIPTS 352,056",
-      "issue": "[fixed: entry added] Road/Bridge detail revenue items add to 351,366 but detail_totals is 352,056 (gap 690). The page leaves out the Investment Income line (690 per p4 Road/Bridge column), so the page itself doesn't add up. It must be recorded in report_discrepancies (check 'detail', difference 690). There is no report_discrepancies entry."
-    },
-    {
-      "severity": "warning",
-      "path": "detail_totals[1].amount",
-      "page": 5,
-      "extracted": 701459,
-      "on_page": "p5 TOTAL DISBURSEMENTS 701,459; p4 General Fund TOTAL DISBURSEMENTS 701,458",
-      "issue": "Rounding difference printed in the report (also p5 net change (67,308) and ending 307,005 vs p4 (67,307) and 307,006). Mentioned only in notes, not in report_discrepancies."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[31].amount",
-      "page": 8,
-      "extracted": 281,
-      "on_page": "p8 ROD Charges for Services 281; p7 ROD Receipts 282",
-      "issue": "Report prints different figures for the same fund (p7 ending balance 2,785 vs p8 2,784). The p8 figure was used, which is consistent with p4 and p1. Mentioned only in notes."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[5].category",
-      "page": 4,
-      "extracted": "other",
-      "on_page": "Miscellaneous 14,405; p2 general receipts: Health Insurance Settlements 340 + Miscellaneous 14,065",
-      "issue": "p2 shows 340 of this line is health insurance settlements (reimbursements/refunds). That isn't printed as a breakdown of this line, so keeping it as one line is defensible, but the line isn't fully unexplained."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[0].category",
-      "page": 4,
-      "extracted": "taxes (unlabeled)",
-      "on_page": "Taxes 697,634 (General Fund 696,850 + Nonmajor 784)",
-      "issue": "The fund columns on p4 and the combining statement on p8 show that 784 of the line is Lodging Tax Fund taxes. A lodging-tax split of 784 is possible; the rest stays unlabeled."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[16].category",
-      "page": 5,
-      "extracted": "general government",
-      "on_page": "County Attorney 27,457",
-      "issue": "The report counts County Attorney under Public Safety: p4 General Fund Public Safety 99,640 = Sheriff 69,997 + Attorney 27,457 + Emergency Mgmt 2,186. The rules list legal under general government, so this is defensible but differs from the report's own function."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[25].detail_category",
-      "page": 6,
-      "extracted": "other state aid",
-      "on_page": "Road/Bridge Intergovernmental 338,730",
-      "issue": "Probably mostly highway allocation, but not stated. Already marked review."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[28].category",
-      "page": 6,
-      "extracted": "streets/highways / not itemized",
-      "on_page": "DISBURSEMENTS 684,864",
-      "issue": "A single line that is also the schedule total. It includes capital outlay 167,110 (p4), so it is not purely streets/highways. Already marked review."
-    }
+    {"severity": "warning", "path": "detail[29]", "page": 6,
+     "extracted": "DISBURSEMENTS 684,864 (one line, streets/highways)", "on_page": "Road/Bridge Fund column, p4: Public Works 517,754 + Capital Outlay 167,110",
+     "issue": "the report prints this fund's split by function on p4, so the line could be two items (streets/highways 517,754 and capital outlay 167,110) under the capital outlay rule. As one line, 167,110 of capital outlay sits under streets/highways in detail"},
+    {"severity": "warning", "path": "disbursements[5].original_label", "page": 4,
+     "extracted": "Capital Outlay", "on_page": "Capital Outlay 167,110 (Road/Bridge Fund)",
+     "issue": "user rule: capital outlay lines are labelled 'Capital Outlay: <function>' with printed text in printed_label. Not applied; left to user_rules.py"},
+    {"severity": "warning", "path": "report_discrepancies", "page": 5,
+     "extracted": "only the Road/Bridge 690 difference is recorded", "on_page": "GF disbursements 701,458 (p4) vs 701,459 (p5); GF ending balance 307,006 (p4) vs 307,005 (p5); ROD receipts 281 / ending 2,784 (p8) vs 282 / 2,785 (p7)",
+     "issue": "the report's own $1 rounding differences between statements are mentioned in notes but not recorded in report_discrepancies"},
+    {"severity": "warning", "path": "receipts[5].category", "page": 2,
+     "extracted": "charges for services/fees", "on_page": "Charges for Services 30,916 (p2: General Government 30,378, Public Safety 538)",
+     "issue": "these county general government charges (and ROD Preservation 281 in detail[31], already detail_category fees of office) may belong in the Fees of Office receipt category (user 2026-10-28)"}
   ]
 }

@@ -1,15 +1,21 @@
 {
   "stem": "Bloomfield_FY2025",
-  "values_checked": 157,
+  "values_checked": 172,
   "issues": [
+    {"severity": "warning", "path": "receipts[9].category", "page": 4,
+     "extracted": "charges for services/fees", "on_page": "NPPD lease payment 93,207 (p11, under Intergovernmental)",
+     "issue": "lease income; user rule 2026-10-28 gives rent/rental income its own Rentals category (detail[8] already has detail_category rentals)"},
+    {"severity": "warning", "path": "receipts[11].category", "page": 4,
+     "extracted": "charges for services/fees", "on_page": "Charges for services 200,360 = General 57,126 + Ambulance Board 122,942 + Other 20,292",
+     "issue": "61% is Ambulance Board fees and 20,292 is Cemetery Board fees (p15); could be split by fund column into Ambulance Fees / Cemetery Fees / Recreation Fees (2026-10-28 categories)"},
+    {"severity": "warning", "path": "receipts[17].category", "page": 7,
+     "extracted": "charges for services/fees", "on_page": "Charges for services 556,174 (Combined Utility 448,230 + Sanitation 107,944)",
+     "issue": "utility fund charges incl. sanitation are category Utility Charges under the user rule of 2026-10-28"},
     {"severity": "warning", "path": "detail[22].detail_category", "page": 11,
-     "extracted": "county/other local governments", "on_page": "Mutual financial organization 18,437 (Public Health and Safety column, under Intergovernmental)",
-     "issue": "Nebraska Mutual Finance Organization payments are a state aid program for fire protection; 'other state aid' fits better than county/other local governments"},
-    {"severity": "warning", "path": "detail[26].original_label", "page": 11,
-     "extracted": "Other (intergovernmental)", "on_page": "Other",
-     "issue": "printed label is 'Other' (under the Intergovernmental heading); extractor added the parenthetical"},
-    {"severity": "warning", "path": "detail[34].detail_category", "page": 12,
-     "extracted": "professional/contract services", "on_page": "Operating expenses",
-     "issue": "governmental 'Operating expenses' lines (General, Public Health and Safety, Culture and Recreation, Street, Fire Board, Cemetery Board) all mapped to professional/contract services based on the proprietary cash flow wording; for governmental funds this is an assumption (likely a mix of utilities, insurance, repairs, contract services)"}
+     "extracted": "county/other local governments", "on_page": "Mutual financial organization 18,437",
+     "issue": "Nebraska mutual finance organization payments for fire protection come from the state; other state aid looks more apt"},
+    {"severity": "warning", "path": "detail[80]", "page": 10,
+     "extracted": "Water and Sewer 216,367; Sanitation 88,966 (detail[81])", "on_page": "Budget and Actual - All Funds (combined schedule)",
+     "issue": "business-type detail is taken from the combined all-funds budget schedule. The per-fund rule (user 2026-10-27/28) removes combined-schedule lines, and adds no statement lines when other funds have their own schedules. Amounts tie to p7 (operating expenses less depreciation 266,834 - 50,467; Sanitation 88,966)"}
   ]
 }

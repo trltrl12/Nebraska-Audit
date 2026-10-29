@@ -1,78 +1,12 @@
 {
   "stem": "Kenesaw_Public_Schools_FY2025",
-  "values_checked": 286,
+  "values_checked": 330,
   "issues": [
-    {
-      "severity": "error",
-      "path": "missing",
-      "page": 8,
-      "extracted": null,
-      "on_page": "Combining schedule p8: Operation and maintenance of plant, Reclassifications (160,000); p7 Nonrevenue receipts 'Transfers from other funds' Depreciation 160,000 / Reclassifications (160,000); p14 Depreciation 'Transfer from General Fund' 160,000",
-      "issue": "[fixed] Hidden transfer not handled. The Depreciation Fund detail records +160,000 'Transfer from General Fund' (other financing), but the General Fund budget schedule (pp11-13) has only the 140,000 'Transfer to other funds' line (matched by School Nutrition 115,000 + Activities 25,000). The other 160,000 sits inside the General Fund's Operation and maintenance of plant spending (2610/2620/2630 = 648,238), which the combining schedule removes through its Reclassifications column (648,238 + 217,513 - 160,000 = 705,751). So the 160,000 is counted as General Fund spending and spent again by Depreciation. Under the hidden-transfer rule, add a contra expenditure line of -160,000 (department 'Operation and maintenance of plant', split_from naming 2610/2620/2630 and p8, review) and an other financing line of -160,000 for the General Fund. Right now the detail other financing nets to +160,000 instead of 0."
-    },
-    {
-      "severity": "warning",
-      "path": "report_discrepancies[3].note",
-      "page": 10,
-      "extracted": "General Fund state sources lines add to 2,618,870 vs printed total 2,618,871 (rounding); total receipts 5,917,415 vs printed 5,917,416.",
-      "on_page": "Local sources lines add to 2,824,686 vs printed 2,824,685; state sources lines 2,618,870 vs printed 2,618,871; all General Fund receipt lines add to exactly 5,917,416 = printed Total receipts",
-      "issue": "The note is partly wrong. The two subtotal roundings cancel out, so the detail lines tie exactly to the printed 5,917,416 total (detail_totals[0] is fine). The local sources subtotal being off by 1 isn't mentioned, and the 'total receipts 5,917,415' claim is false."
-    },
-    {
-      "severity": "warning",
-      "path": "report_discrepancies",
-      "page": 4,
-      "extracted": "receipts/disbursements total-column differences only",
-      "on_page": "p4 Federal receipts row 378,481 + 44,582 = 423,063 vs printed Total 423,062; General Fund receipts column lines 5,941,894 vs printed 5,941,893; Other Governmental Funds receipts column 699,641 vs 699,640; General Fund disbursements column lines 5,606,914 vs 5,606,915; Special Building State receipts 116,128 vs p16 lines 116,129; column totals 5,606,915 + 485,323 + 861,399 = 6,953,637 vs printed 6,953,638; p5 beginning balances 3,981,280 + 1,060,158 + 688,472 = 5,729,910 vs printed 5,729,909",
-      "issue": "Confirmed visually: the 1-dollar total differences the extractor reports (receipts 6,987,330 vs printed 6,987,329; disbursements 6,953,637 vs printed 6,953,638) are the report's own rounding, not a misread. Every Total-column line matches the page, and the same 1-dollar slips show up in the fund columns and cross-foots listed here. These other in-report rounding slips aren't recorded; they're informational only, since no JSON value depends on them."
-    },
-    {
-      "severity": "warning",
-      "path": "report_discrepancies",
-      "page": 8,
-      "extracted": null,
-      "on_page": "Combining schedule p8: Depreciation Fund 'Student transportation - regular instruction' 77,406; Depreciation budget schedule p14 shows no 2025 'Vehicles and transportation' actual (77,406 is the 2024 actual)",
-      "issue": "The report doesn't agree with itself. The combining schedule assigns 77,406 of Depreciation spending to student transportation, but the fund's own schedule shows that figure only as the 2024 actual, so the function split on p4 (Student transportation 344,612; O&M 705,751) may be misallocated in the report. Totals still agree (217,513 + 77,406 = 294,919)."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[8].detail_category",
-      "page": 10,
-      "extracted": "county/other local governments",
-      "on_page": "2110 County fines and licenses",
-      "issue": "This could be fines and forfeitures: it is fine and license money passed through by the county. The current category is defensible."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[12].category",
-      "page": 4,
-      "extracted": "other",
-      "on_page": "Other 90,042",
-      "issue": "Combining schedule pp6-7 shows the General Fund's 89,371 is 76,788 other nonrevenue receipts + 11,783 Depreciation other non-revenue + 100 'Other' + 700 local license fees. The line mixes in licenses (700); it's kept as printed with review, which is fine. The review text could name the license fees."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[101].detail_category",
-      "page": 16,
-      "extracted": "rent/leases",
-      "on_page": "Building Rental 400,000",
-      "issue": "The function (capital outlay) and object (rent/leases) pairing is a judgment call: 400,000 of building rental paid from the Special Building Fund (budget 1,220,000) may be a lease-purchase payment, which would be debt service. Same question for disbursements[9] (capital outlay). Review flag already set."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[83].detail_category",
-      "page": 14,
-      "extracted": "not itemized",
-      "on_page": "Special items 41,905",
-      "issue": "'Special items' is an object line in an itemized list, not a function total. 'not itemized' doesn't fit; 'miscellaneous expenditure' (with review) would be the matching last-resort string."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[89].detail_category",
-      "page": 15,
-      "extracted": "purchased power/cost of sales",
-      "on_page": "Food 131,062",
-      "issue": "Judgment call: food for the lunch program could also be supplies and materials. Review flag already set."
-    }
+    {"severity": "warning", "path": "disbursements[4].category", "page": 4,
+     "extracted": "support services (detail_category Pupils) 585,546", "on_page": "Support services - Students: General Fund 298,578 + Other Governmental Funds 286,968 = 585,546",
+     "issue": "286,968 of this line is the Activities Fund's spending (p18 Activities Fund disbursements 286,968), i.e. student activities, which the statement prints in the Students row. Recorded as printed, but about half the line is not pupil support services."},
+    {"severity": "warning", "path": "detail[69].detail_category", "page": 12,
+     "extracted": "Repairs & Maintenance (contra line); detail[70] other financing also carries category 'other' and detail_category 'Repairs & Maintenance'", "on_page": "Operation and maintenance of plant 2610-2630; combining schedule p8 Reclassifications (160,000)",
+     "issue": "The hidden-transfer handling is correct (contra -160,000 plus other financing -160,000, matching the Depreciation Fund's Transfer from General Fund 160,000 on p14), but 'Repairs & Maintenance' is not one of the detail category strings (should be 'repairs and maintenance' or 'not itemized'). Other financing lines need no category."}
   ]
 }

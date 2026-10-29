@@ -1,19 +1,19 @@
 {
   "stem": "Arnold_Public_Schools_FY2025",
-  "values_checked": 275,
+  "values_checked": 318,
   "issues": [
-    {"severity": "warning", "path": "receipts[0].category", "page": 4,
-     "extracted": "taxes (unlabeled)", "on_page": "Local receipts 1,954,897.62",
-     "issue": "Broad group, not a combined tax line. It is mostly property tax (General Fund 1100 property taxes 1,801,452.11, p6), plus motor vehicle 127,351.53, donations, license fees and sale of property. The Statement of Activities (p2) prints Property 2,035,337.50 and Motor vehicle 127,351.53. 'property tax' with review 'broad group; detail on p6' would also be defensible."},
-    {"severity": "warning", "path": "receipts[1].category", "page": 4,
-     "extracted": "intergovernmental/state aid", "on_page": "County receipts 253,749.32",
-     "issue": "About 92% of this line is the Special Building Fund's 1100 Property taxes 233,885.39 (p3, p11). The rest is fines 16,570.99 and ESU 3,292.94 (p6). 'property tax' may be the better dominant category. The extractor already flagged it for review."},
-    {"severity": "warning", "path": "detail[205]", "page": 19,
-     "extracted": {"original_label": "Transfers & Adjustments (Total)", "amount": 70000.00},
-     "on_page": "Transfers & Adjustments column, account by account: Athletics 61,199.06; One act 2,648.95; Speech 1,092.81; Elem field trips 4,920.76; Special olympics 138.42; Total 70,000.00",
-     "issue": "The column's total line was entered as one item, but the per-account amounts are printed. The amount is right and it offsets the General Fund 913 transfer (-70,000, p18), so nothing is double counted."},
-    {"severity": "warning", "path": "detail[228].category", "page": 12,
-     "extracted": "intergovernmental/state aid / county/other local governments", "on_page": "1990 Dual Credit 9,564.73",
-     "issue": "The Statement of Activities (p2) shows this 9,564.73 as Charges for Services under Pupils. 'charges for services/fees' (detail 'tuition and fees') looks better supported. The extractor already flagged it for review."}
+    {"severity": "error", "path": "balance_sheet.equity", "page": 4,
+     "extracted": "Statement of Net Position - Modified Cash Basis (p1) lines: Restricted for Special building fund 3,083,661.32, School nutrition fund 33,551.74, Board designated Depreciation fund 247,314.89, Undesignated Activity 222,822.91 / Cooperative 70,549.88 / Student fee 2,133.84 / General 2,113,253.04",
+     "on_page": "Governmental funds statement (p3-4) Total column: Cash and cash equivalents 5,427,199.52, Cash with county treasurer 346,088.10; Restricted fund balance 3,117,213.06, Assigned fund balance 542,821.52, Unassigned fund balance 2,113,253.04; totals 5,773,287.62",
+     "issue": "user rule 2026-10-27: cash-basis reports take governmental balance-sheet lines from the governmental funds statement of assets and fund balances (Total column, fund balance by classification) when its totals equal the government-wide figures, as here (5,773,287.62 both). The Statement of Net Position was used instead; statement/scope/column and equity lines should come from p3-4."},
+    {"severity": "warning", "path": "receipts[7].category", "page": 12,
+     "extracted": "charges for services/fees", "on_page": "1990 Dual Credit 9,564.73 (Cooperative Fund)",
+     "issue": "dual credit receipts are postsecondary course fees; user rule maps postsecondary/tuition to Tuition Received (detail[229] also uses charges for services/fees with detail_category tuition and fees). The Statement of Activities shows it as Pupils charges for services, so judgment call."},
+    {"severity": "warning", "path": "detail[161].original_label", "page": 18,
+     "extracted": "913 Activity fund transfer", "on_page": "913 Activity fund (under 8000 Transfers)",
+     "issue": "label not exactly as printed (word 'transfer' added)"},
+    {"severity": "warning", "path": "disbursements[1].category", "page": 4,
+     "extracted": "support services", "on_page": "Support services 1,178,840.88",
+     "issue": "statement line mixes pupils, staff, general administration, principal, business, plant operation/maintenance and pupil transportation (GF schedule p7); user school functions keep support services only for Pupils/Staff. Line kept unsplit as printed, which is defensible, but most of it falls in other functions."}
   ]
 }

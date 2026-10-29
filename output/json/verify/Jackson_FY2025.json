@@ -1,21 +1,18 @@
 {
   "stem": "Jackson_FY2025",
-  "values_checked": 102,
+  "values_checked": 104,
   "issues": [
-    {"severity": "warning", "path": "detail[1].original_label", "page": 8,
-     "extracted": "Property Tax Credit", "on_page": "Proerty Tax Credit",
-     "issue": "the budget schedule's label is misspelled on the page; the extractor corrected the spelling instead of copying it as printed. Amount 11,144 is correct"},
-    {"severity": "warning", "path": "receipts[17].category", "page": 6,
-     "extracted": "other", "on_page": "Other Income 5,105",
-     "issue": "business-type Other Income 5,105 is all recorded as 'other'. The budget schedule (p8) shows it is Utility Fund License and Permits 700 plus Other Income 4,405, but the statement prints one line. Defensible as recorded (already has a review note); the category differs from detail[19]/[20]"},
-    {"severity": "warning", "path": "receipts[14].category", "page": 4,
-     "extracted": "donations/contributions", "on_page": "Grant Receipts 3,000",
-     "issue": "the grant source is not stated. The Statement of Activities (p2) lists it as Culture and Recreation operating grants and contributions, so it could be a government grant (state aid or federal). Same applies to detail[11]. Already has a review note"},
-    {"severity": "warning", "path": "detail[27].detail_category", "page": 8,
-     "extracted": "supplies and materials", "on_page": "Office Expense and Postage 2,521",
-     "issue": "could be 'printing, publishing and postage'. Same choice for detail[39] (Utility, 1,037, p9)"},
-    {"severity": "warning", "path": "detail[*].budget_final", "page": 8,
-     "extracted": null, "on_page": "Original Budget printed in the combined Current Year column only",
-     "issue": "the extractor left the budget out because there is no per-fund budget and the column is the original budget, not the final one. This is a reasonable assumption, noted here"}
+    {"severity": "warning", "path": "receipts[16].category", "page": 6,
+     "extracted": "charges for services/fees", "on_page": "Charges for Services 82,799 (= p8 'Water, Sewer, Garbage Collections' 82,799)",
+     "issue": "These are utility fund collections. The user's 2026-10-28 rule makes the category Utility Charges, and detail[18] already uses Utility Charges for the same money, so the receipt and detail lines disagree."},
+    {"severity": "warning", "path": "receipts[13].category", "page": 4,
+     "extracted": "charges for services/fees", "on_page": "Electrical Distribution System Lease 36,940",
+     "issue": "This is lease or rental income. The user's 2026-10-28 rule makes Rentals its own receipt category, out of charges for services, and detail[10] already has detail_category 'rentals'. The same applies to detail[10].category."},
+    {"severity": "warning", "path": "receipts[17]", "page": 6,
+     "extracted": "other 5,105 (Other Income)", "on_page": "p8 Utility Operating Fund: License and Permits 700 + Other Income 4,405 = 5,105",
+     "issue": "The statement's business-type Other Income includes 700 of licenses and permits, per the budget schedule. 'other' still dominates, but the review note should mention the mix."},
+    {"severity": "warning", "path": "notes", "page": 1,
+     "extracted": "Funds Held by County Treasurer treated as cash and investments", "on_page": "Funds Held by County Treasurer 9,646",
+     "issue": "The notes contradict the JSON: balance_sheet.assets[3].category is Cash and Cash Equivalents, which is correct under the rule."}
   ]
 }

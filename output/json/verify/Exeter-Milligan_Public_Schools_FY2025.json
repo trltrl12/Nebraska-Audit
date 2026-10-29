@@ -1,21 +1,21 @@
 {
   "stem": "Exeter-Milligan_Public_Schools_FY2025",
-  "values_checked": 278,
+  "values_checked": 330,
   "issues": [
-    {"severity": "warning", "path": "receipts[32]", "page": 9,
-     "extracted": {"category": "other", "amount": 19215.13}, "on_page": "Allocation From General Fund 19,215.13 (Employee Benefit column and Total Governmental Funds, p9; Schedule D p20)",
-     "issue": "Transfer cross-check: there is no General Fund outflow anywhere in the trimmed PDF. General Fund Total Disbursements 4,787,512.99 (p10) = the sum of its program lines (checked), and its only transfers are 135,000 (Activities 65,000 + School Nutrition 70,000, Schedule M p32). No Schedule M program/object line equals 19,215.13 or 300,000, there is no reclassification/elimination column, the General Fund budget (Schedule B p18) budgets only 160,000 of transfers, and Schedule N (pp33-34) ties exactly to the General Fund tax receipts. The government-wide Exhibit II itself counts 19,215.13 as Employee Benefits 'Charges for Services' (p4) and keeps it out of its 135,000 Transfers line. Keeping it as a receipt to match the printed total 6,733,808.11 is defensible. But it is labelled an interfund allocation, the same line is section 'other financing' in detail[133], and category 'other' is a last resort. decision_needed already covers this. The notes to the financial statements are not in the trimmed PDF, so they could not be checked."},
-    {"severity": "warning", "path": "receipts[33]", "page": 19,
-     "extracted": {"category": "other", "amount": 300000.00}, "on_page": "Depreciation Fund Non-Revenue Receipts 300,000.00 (p8); Schedule C 5200 Allocation from General Fund 300,000.00 (p19)",
-     "issue": "Same one-sided allocation: no matching General Fund disbursement or transfer, and no General Fund line holds it (see receipts[32]). Exhibit II puts it inside 'Other' general receipts 308,953.81 (p7), not under Transfers. It is a receipt here but 'other financing' in detail[130], so the two treatments don't match. The split from Non-Revenue Receipts 308,953.81 follows the printed fund columns (300,000.00 + 8,315.55 + 638.26) and is correct. Covered by decision_needed."},
-    {"severity": "warning", "path": "disbursements[40].category", "page": 11,
-     "extracted": "capital outlay", "on_page": "Other Purchased Services 940,461.75 (Special Building 940,305.58 + Student Fee 156.17)",
-     "issue": "Conflicts with the extraction's own detail. Special Building lines 2610/2620/2660 (584,746.29 of 940,305.58, Schedule I p23) are coded support services (operation/maintenance of plant, security); only 4700-400 (355,559.29) is capital outlay. 'support services' is the dominant function. Already marked review."},
-    {"severity": "warning", "path": "receipts[13].category", "page": 15,
-     "extracted": "intergovernmental/state aid (detail[7]: county/other local governments)", "on_page": "2110 County Fines and Licenses 6,602.51",
-     "issue": "These are fines and license money the counties pass through to schools. 'fines and forfeitures' (or licenses) could fit better than county aid. This is a judgment call."},
-    {"severity": "warning", "path": "detail[134].detail_category", "page": 20,
-     "extracted": "employee benefits and payroll taxes / support services", "on_page": "2900-890 Other 16,936.00",
-     "issue": "The object and function are inferred from the fund name (Employee Benefit Fund). The page prints only 'Other' (and disbursements[38] uses the same assumption). Already marked review."}
+    {"severity": "error", "path": "receipts[6].category", "page": 23,
+     "extracted": "charges for services/fees", "on_page": "1910 Rental 18,290.63",
+     "issue": "rental income is its own receipt category, Rentals (the matching detail line already uses Rentals)"},
+    {"severity": "error", "path": "receipts[12].category", "page": 22,
+     "extracted": "reimbursements/refunds", "on_page": "1620 Non-Reimbursable 4,087.90 (School Nutrition Fund receipts)",
+     "issue": "1620 'Non-Reimbursable' means non-reimbursable meal sales (a la carte/adult meals), not a refund. It should be School Lunch Sales; the detail line already has detail_category school lunch sales"},
+    {"severity": "error", "path": "detail[143].category", "page": 22,
+     "extracted": "reimbursements/refunds", "on_page": "1620 Non-Reimbursable 4,087.90",
+     "issue": "same as receipts[12]: should be School Lunch Sales (it doesn't match its own detail_category, school lunch sales)"},
+    {"severity": "error", "path": "balance_sheet.equity", "page": 12,
+     "extracted": "Unrestricted 7,057,441.31 (Exhibit I, p1)", "on_page": "Exhibit III Total Governmental Funds: Assigned 3,919,025.58, Unassigned 3,138,415.73",
+     "issue": "cash-basis rule (user 2026-10-27): Exhibit III totals (cash 6,521,444.61 + county treasurer 535,996.70 = 7,057,441.31) equal the government-wide figures, so the balance sheet should come from the governmental funds statement, with fund balance by classification"},
+    {"severity": "warning", "path": "receipts[32].category", "page": 9,
+     "extracted": "other (receipt)", "on_page": "Allocation From General Fund 19,215.13 (Employee Benefit column)",
+     "issue": "recorded as a receipt in receipts[] but as other financing in detail (detail[133]); the same happens with the Depreciation 300,000 allocation (receipts[33] vs detail[130]). decision_needed covers the missing General Fund outflow, but the treatment should be the same in both places"}
   ]
 }

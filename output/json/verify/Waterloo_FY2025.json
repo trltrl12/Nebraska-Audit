@@ -1,15 +1,24 @@
 {
   "stem": "Waterloo_FY2025",
-  "values_checked": 540,
+  "values_checked": 545,
   "issues": [
     {"severity": "warning", "path": "decision_needed", "page": 5,
      "extracted": "other_financing includes Insurance proceeds 110,669", "on_page": "Insurance proceeds 110,669 under Other Financing Sources (Uses), General Fund",
      "issue": "decision_needed[] asks only about the FEMA and other grants. Insurance proceeds are also printed outside total revenues, and the rules list them under reimbursements/refunds, so the same question applies to them."},
     {"severity": "warning", "path": "receipts[30]", "page": 15,
      "extracted": -7548, "on_page": "Sale of Assets (7,548); p2 calls it 'Gain on capital assets (7,548)'; cash flow p18 shows sale proceeds 7,750",
-     "issue": "a loss on disposal is recorded as a negative sale of assets receipt; amount and sign are as printed, but it is a loss rather than proceeds; marked review"},
+     "issue": "A loss on disposal is recorded as a negative Sale of Property receipt. The amount and sign are as printed, but it is a loss, not proceeds. Marked review."},
     {"severity": "warning", "path": "receipts[10].category", "page": 4,
      "extracted": "licenses and permits", "on_page": "Fireworks 13,500",
-     "issue": "category guessed (fireworks stand permit/fee vs sales/charges); marked review"}
+     "issue": "Category guessed: fireworks could be a stand permit/fee or sales/charges. Marked review."},
+    {"severity": "warning", "path": "receipts[24].category", "page": 15,
+     "extracted": "charges for services/fees", "on_page": "User fees 834,532 (Water + Sewer operating revenues)",
+     "issue": "Utility fund user fees fall under Utility Charges per the 2026-10-28 rule. The matching detail lines (p16-17) use Utility Charges, so the same revenue is categorized inconsistently. Late fees 7,866 (receipts[25]) and Hookups 25,506 (receipts[26]) have the same issue. user_rules.py only recategorizes lines that carry a fund name, so these receipts will not be fixed automatically."},
+    {"severity": "warning", "path": "receipts[27].category", "page": 15,
+     "extracted": "charges for services/fees", "on_page": "Tower rent 0",
+     "issue": "Rent belongs in its own Rentals category (amount is 0)."},
+    {"severity": "warning", "path": "detail[17].detail_category", "page": 6,
+     "extracted": "other charges for services", "on_page": "Rural Fire reimbursements 153,823",
+     "issue": "The category is reimbursements/refunds, but detail_category is other charges for services. Either 'reimbursements/refunds' (matching the label) or charges (rural fire contract) is defensible, but the two fields disagree."}
   ]
 }

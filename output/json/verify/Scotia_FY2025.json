@@ -1,10 +1,15 @@
 {
   "stem": "Scotia_FY2025",
-  "values_checked": 42,
+  "values_checked": 56,
   "issues": [
-    {"severity": "warning", "path": "receipts[9..14] / disbursements[3,4,7,8,9]", "page": 1,
-     "extracted": "per-column items with fund name added to the label, no split_from",
-     "on_page": "Line 18 Local Receipts: Other total 241,162 (p1, incl. Keno 41,616 from p2); line 35 Capital Improvements total 50,715 and line 39 Debt Service total 32,436 (p3)",
-     "issue": "Mixed rows split by fund column (amounts are printed per column and are correct), but the items have no split_from naming the printed row as the extractor rules ask for column splits, and original_label has a '(... Fund)' suffix that isn't printed"}
+    {"severity": "warning", "path": "receipts[13].category", "page": 1,
+     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Enterprise - Sewer) 32,878.00",
+     "issue": "Inconsistent with receipts[12] (Garbage column, same printed line) which uses Utility Charges; user rule puts utility fund sales/charges in Utility Charges"},
+    {"severity": "warning", "path": "receipts[14].category", "page": 1,
+     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Enterprise - Water) 73,550.00",
+     "issue": "Inconsistent with receipts[12]; user rule puts utility fund sales/charges in Utility Charges"},
+    {"severity": "warning", "path": "disbursements[3].original_label", "page": 3,
+     "extracted": "Capital Improvements (General Fund)", "on_page": "Capital Improvements",
+     "issue": "Capital outlay lines (disbursements[3],[4],[5],[7]) are not labelled 'Capital Outlay: <function>' with printed_label per the user rule, and fund names are appended to printed labels (also receipts[9]-[14]); user_rules.py should relabel"}
   ]
 }

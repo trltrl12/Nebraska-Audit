@@ -1,24 +1,15 @@
 {
   "stem": "Chambers_Public_Schools_FY2025",
-  "values_checked": 190,
+  "values_checked": 212,
   "issues": [
-    {"severity": "warning", "path": "receipts[11].amount", "page": 12,
-     "extracted": "General Fund Other 6,040 split into Textbook Sales 20, Postsecondary Receipts 1,811, Refund of Prior Year Expenditures 1,704, Miscellaneous 2,505 (receipts[11]-[14])", "on_page": "p6 prints General Fund Other 6,040; p12 lists the local receipt lines but does not label any of them 'Other'",
-     "issue": "The split of the General Fund's 6,040 rests on the p12 lines that are left over adding up to 6,040. The arithmetic holds (20+1,811+1,704+2,505 = 6,040, and the full Other split = 148,391), but the report never says these four lines make up 'Other'. Probably right; needs review against the rule that a split must come from a breakdown the report itself prints."},
-    {"severity": "warning", "path": "detail[59].detail_category", "page": 20,
-     "extracted": "Activities Fund account receipts total 140,778, all student activity receipts", "on_page": "p18 and p6: Activities Fund Interest 242 + Activities Receipts 140,536 = 140,778",
-     "issue": "The 242 of Activities Fund interest sits inside the per-account receipts (p20 doesn't separate it out), so detail investment income (8,735) is 242 lower than the statement's Interest Income 8,977 and detail activity receipts are 242 higher. The page doesn't show which account holds the interest, so this can't be fixed exactly."},
-    {"severity": "warning", "path": "disbursements[17].category", "page": 9,
-     "extracted": "debt service principal", "on_page": "Debt Services 37,194",
-     "issue": "Principal and interest aren't split anywhere in the trimmed PDF (p17 also shows only 'Debt Service'), so the whole amount is assumed to be principal."},
-    {"severity": "warning", "path": "disbursements[18].category", "page": 9,
-     "extracted": "instruction", "on_page": "Federal Programs 97,232",
-     "issue": "The function is a guess. Federal programs may include support-services spending (same for detail line 'Federal Programs')."},
-    {"severity": "warning", "path": "disbursements[15].category", "page": 9,
-     "extracted": "instruction", "on_page": "State Categorical Programs 11,739",
-     "issue": "The function is a guess (same for the matching detail line)."},
-    {"severity": "warning", "path": "receipts[3].category", "page": 7,
-     "extracted": "fines and forfeitures", "on_page": "Fines and Licenses 4,945 (p12: 2110 County Fines and Licenses)",
-     "issue": "The label mixes fines and licenses. Fines is the usual dominant part for school districts; the extractor already marked it for review."}
+    {"severity": "error", "path": "receipts[18].category", "page": 11,
+     "extracted": "charges for services/fees", "on_page": "School Nutrition Fund: Daily Sales 33,692",
+     "issue": "school nutrition meal sales belong in the user's School Lunch Sales receipt category (lunch/meal/nutrition sales). The detail line (School Nutrition 'Daily Sales', p19) has the same category problem although its detail_category is already 'school lunch sales'; user_rules.py won't catch it because the label has no 'lunch/meal' keyword"},
+    {"severity": "warning", "path": "missing", "page": 5,
+     "extracted": null, "on_page": "Statement of Assets, Liabilities and Fund Balances - Governmental Funds: only the Adjustments/Total column page (report p17) is trimmed; the labelled fund-column page (report p16) is not",
+     "issue": "because the trim is missing a page, the governmental funds balance sheet can't be labelled, so the balance sheet falls back to the government-wide Statement of Net Position (p1). That is explained in notes and its totals equal the fund statement's (1,507,552), but the cash-basis rule calls for the fund statement's fund balance classifications (170,626; 2,602; 33,672; 50,864; 1,249,788)"},
+    {"severity": "warning", "path": "detail[*] (Activities Fund revenue)", "page": 20,
+     "extracted": "all 140,778 as Extracurricular Receipts", "on_page": "account receipts total 140,778 = Activities Receipts 140,536 + Interest 242 (p18)",
+     "issue": "the account schedule mixes 242 of interest into the account receipts (probably inside 'Miscellaneous' 243), so 242 of interest income is categorised as student activity receipts in detail"}
   ]
 }

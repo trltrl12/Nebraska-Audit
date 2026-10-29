@@ -1,12 +1,16 @@
 {
   "stem": "Juniata_FY2025",
-  "values_checked": 67,
+  "values_checked": 96,
   "issues": [
-    {"severity": "warning", "path": "detail[8]", "page": 7,
-     "extracted": "Interest income 24,052, fund_type governmental", "on_page": "Interest income 24,052 (all funds)",
-     "issue": "This all-funds budget line includes business-type interest of 4,289 (p6; governmental 19,763 on p4), but it is all tagged governmental. The amount is right and the line is marked review. The fund type is mixed."},
-    {"severity": "warning", "path": "detail[9].amount", "page": 7,
-     "extracted": 15022, "on_page": 15022,
-     "issue": "The budget schedule prints Other 15,022, while the governmental funds statement (p4) and statement of activities (p2) print 15,021. This is a 1-dollar rounding difference in the report itself; it is not recorded in report_discrepancies. The notes also say interest differs by 1, but it does not (19,763 + 4,289 = 24,052)."}
+    {"severity": "warning", "path": "receipts[9].category", "page": 6,
+     "extracted": "charges for services/fees", "on_page": "Charges for services 323,300 (Water/Sewer proprietary funds)",
+     "issue": "Utility fund charges are category Utility Charges under the user rule; the same line in detail[24-25] is Utility Charges, so receipts and detail disagree"},
+    {"severity": "warning", "path": "disbursements[5].category", "page": 6,
+     "extracted": "Repairs and Maintenance", "on_page": "Operations and maintenance 134,262",
+     "issue": "'Operations and maintenance' is a broad operating cost line, not only repairs; category is a judgment call (also detail[30], detail[31])"},
+    {"severity": "warning", "path": "notes", "page": 7,
+     "extracted": "notes end '...replace the combined schedule.'; say property tax credit is state aid and describe p7 budget-schedule detail",
+     "on_page": "8 pages; all statement lines are in the JSON",
+     "issue": "Notes do not end with 'Read pages 1-8 of 8' (a later per-fund detail note was appended after it), and parts are stale: property tax credit is category Property Tax Credit and detail now comes from the p4/p6 fund columns, not the p7 schedule. Page coverage itself checked: complete"}
   ]
 }

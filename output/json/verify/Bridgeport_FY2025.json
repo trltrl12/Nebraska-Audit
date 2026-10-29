@@ -1,30 +1,30 @@
 {
   "stem": "Bridgeport_FY2025",
-  "values_checked": 328,
+  "values_checked": 241,
   "issues": [
-    {
-      "severity": "error",
-      "path": "receipts[7].category",
-      "page": 5,
-      "extracted": "other",
-      "on_page": "Miscellaneous 59,693 = General Fund 12,077 + Nonmajor 47,616 (the Nonmajor 47,616 is the Keno Special Revenue Fund 'Miscellaneous', p19)",
-      "issue": "[fixed 2026-10-21: category set per verifier] 80% of this line is keno proceeds (the extraction's own detail records the Keno 47,616 as keno/lottery). Under the broad-line rule this should be keno/lottery (or split with split_from: keno/lottery 47,616 from p19, other 12,077 from p11), not other"
-    },
-    {
-      "severity": "error",
-      "path": "receipts[9].category",
-      "page": 8,
-      "extracted": "other",
-      "on_page": "Other Revenues 149,099, of which Nursing Home 90,982 (p8 column; p3 Statement of Activities counts Nursing Home 90,982 as Charges for Services)",
-      "issue": "[fixed 2026-10-21: category set per verifier] 61% of this line is Nursing Home revenue that the report counts as charges for services (the extraction's detail also uses charges for services/fees). Dominant category is charges for services/fees, not other"
-    },
-    {
-      "severity": "warning",
-      "path": "report_discrepancies",
-      "page": 8,
-      "extracted": null,
-      "on_page": "Nonmajor proprietary Miscellaneous expense 12,133 (p8) vs Landfill 5,648 (p18) + Gas/Pace 6,484 (p21) = 12,132; Gas/Pace 6,485 on p3",
-      "issue": "$1 rounding difference printed in the report between the proprietary statement/Statement of Activities and the Gas/Pace budget schedule; noted only in a review string, not in report_discrepancies"
-    }
+    {"severity": "error", "path": "receipts[9].category", "page": 8,
+     "extracted": "charges for services/fees", "on_page": "Charges for Services 3,181,716 (Electric 1,955,011, Water 613,686, Sewer 266,367, Community Center 84,837, Landfill 261,815)",
+     "issue": "97% of this business-type line is utility fund sales (electric, water, sewer and landfill/refuse), so it should be Utility Charges (user rule 2026-10-28, which includes garbage/refuse). The Water, Sewer and Electric detail lines already use Utility Charges."},
+    {"severity": "error", "path": "detail[Budgetary Comparison Schedule - Landfill Fund, 'Charges for Services'].category", "page": 18,
+     "extracted": "charges for services/fees", "on_page": "Charges for Services 261,815",
+     "issue": "Landfill/refuse fund charges are Utility Charges (user rule: utility charges include garbage/refuse). The detail_category is already refuse/sanitation charges."},
+    {"severity": "error", "path": "receipts[4].category", "page": 5,
+     "extracted": "charges for services/fees", "on_page": "Charges for Services 5,901 (all in the Swimming Pool column, p22)",
+     "issue": "Pool fees have their own receipt category, Recreation Fees (user rule 2026-10-28). The matching detail line (Swimming Pool 'Charges for Services', p22) has the same category problem."},
+    {"severity": "warning", "path": "detail[Combining Schedule - General Fund, General dept, 'Miscellaneous' 237,905 and 8,648].split_from", "page": 22,
+     "extracted": "237,905 Sale of Property + 8,648 other", "on_page": "Miscellaneous 246,553 (General column); Sale of Assets 237,905 printed only for the whole General Fund (p11)",
+     "issue": "The page doesn't print this split. The arithmetic forces it (the other columns' miscellaneous is only 3,429), but the extractor assumed the sale of assets sits in the General column."},
+    {"severity": "warning", "path": "proprietary", "page": 9,
+     "extracted": null, "on_page": "Statement of Cash Flows - Proprietary Funds (pp9-10): operating 223,331; noncapital (141,001); capital and related (420,219); investing 52,828; beginning 1,997,381; ending 1,729,963",
+     "issue": "Business-type activities are on the accrual basis and the report prints a proprietary cash flow statement, but proprietary is null because the report as a whole was recorded as cash basis."},
+    {"severity": "warning", "path": "report_discrepancies", "page": 21,
+     "extracted": "none recorded", "on_page": "Gas/Pace Miscellaneous 6,484 and ending balance 44,214 (p21) vs 6,485 / 44,213 on p3/p10; cash flow transfers (121,358) on p9 vs (123,358) on p8",
+     "issue": "The report itself has $1 rounding differences between its own pages, plus a 2,000 transfer gap on the cash flow statement. Only a review note records them; report_discrepancies has no entry."},
+    {"severity": "warning", "path": "receipts[10].category", "page": 8,
+     "extracted": "charges for services/fees", "on_page": "Other Revenues 149,099",
+     "issue": "Mixed line: Nursing Home revenue 90,982 (61%) plus other revenues from the utility funds. Using the dominant category is defensible, but the per-fund detail lines put the other funds' Other Revenues in 'other'."},
+    {"severity": "warning", "path": "receipts[8].category", "page": 5,
+     "extracted": "keno/lottery", "on_page": "Miscellaneous 47,616 (Nonmajor column = Keno Special Revenue Fund Miscellaneous, p19)",
+     "issue": "The line is printed as Miscellaneous. Treating it as keno proceeds because it sits in the Keno fund is a reasonable inference, but the report doesn't say so."}
   ]
 }

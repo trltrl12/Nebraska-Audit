@@ -1,54 +1,16 @@
 {
   "stem": "Hooper_FY2025",
-  "values_checked": 192,
+  "values_checked": 228,
   "issues": [
-    {
-      "severity": "error",
-      "path": "detail[106].section",
-      "page": 11,
-      "extracted": "other financing (Grants and donations 220, 2,733, 500)",
-      "on_page": "Grants and donations 220 (General), 2,733 (Library), 500 (Cemetery), printed under Other financing sources (uses)",
-      "issue": "[fixed] Grants and donations are revenue, not transfers, debt proceeds or sale of assets. The extraction itself records the same 3,453 as a donations/contributions receipt (receipts[11], outside_printed_total). These three detail lines (detail[106], [107], [108]) should be section 'revenue', category 'donations/contributions', detail_category 'donations/contributions', with outside_printed_total: true. As entered they drop out of revenue detail and are treated like financing."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[7].amount",
-      "page": 11,
-      "extracted": 21811,
-      "on_page": "21,811 (could be 21,810)",
-      "issue": "With 21,811, both the General column (sum 580,850 vs printed 580,849) and the Interest row (21,811+1,763+840+108 = 24,522 vs printed 24,521) are off by 1. A value of 21,810 would make both tie, so this digit may be misread, or the report rounds. report_discrepancies mentions only the column difference, not the Interest row."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[95].category",
-      "page": 11,
-      "extracted": "public safety",
-      "on_page": "Cemetery column (23,630)",
-      "issue": "The category rules put cemetery under health/welfare. The extractor used public safety to tie to the statement's Public safety line (142,029 = Police 118,399 + Cemetery 23,630) and marked review. This applies to all Cemetery expenditure lines, detail[95]-[101]."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[27].category",
-      "page": 11,
-      "extracted": "other",
-      "on_page": "TIF column: Other miscellaneous 63,653",
-      "issue": "63,653 of the 66,972 'Other miscellaneous' receipts sits in the TIF column, which is most likely tax-increment (property tax) money passed through. Left as other/miscellaneous with review; a person should confirm. The same applies to receipts[10]."
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[6]",
-      "page": 4,
-      "extracted": "Debt service 234,275 split 187,909 / 46,066 / 300",
-      "on_page": "Debt service (234,275) under Other financing sources (uses), Bond column; Bond Fund schedule p9 prints principal 187,909, interest 46,066, Other 300",
-      "issue": "The split is backed by the Bond Fund schedule, the only fund with debt service. The 300 'Other' is assumed to be fees and recorded as interest."
-    },
-    {
-      "severity": "warning",
-      "path": "detail",
-      "page": 8,
-      "extracted": "General Fund budget schedule not recorded",
-      "on_page": "Other miscellaneous 66,984 and Total receipts 904,278 (budget schedule) vs 66,972 on p4/p11 (889,336 + 11,488 + 3,453 = 904,277)",
-      "issue": "The unrecorded budget schedule disagrees with the statement and combining schedule by 12 on Other miscellaneous and by 1 on the total. It does not affect the recorded figures but is an internal report inconsistency not listed in report_discrepancies."
-    }
+    {"severity": "warning", "path": "report_discrepancies", "page": 4,
+     "extracted": "no entry for the governmental disbursements total", "on_page": "General government 156,239 + Streets 223,464 + Public safety 142,029 + Culture and recreation 116,761 + Public buildings 14,339 + TIF 1,467 = 654,299; printed Total disbursements 654,298",
+     "issue": "The p4 statement's disbursement lines add up to $1 more than its printed total (rounding in the report). The JSON keeps the figures as printed, but there's no report_discrepancies entry for this one, so the governmental identity is off by $1."},
+    {"severity": "warning", "path": "detail[Cemetery expenditure lines].category", "page": 11,
+     "extracted": "public safety", "on_page": "Cemetery column (Salaries 13,362 ... Other miscellaneous 2,125; total 23,630)",
+     "issue": "Under the category rules a cemetery is health/welfare. The extractor used public safety so the lines tie to the statement's Public safety line (142,029 = Police 118,399 + Cemetery 23,630). Defensible, but a judgment call."},
+    {"severity": "warning", "path": "detail[Capital purchases lines].category", "page": 11,
+     "extracted": "function category (general government / public safety / streets/highways / culture/recreation) with detail_category equipment purchases",
+     "on_page": "Capital purchases: General 11,990, Police 1,233, Street 4,110, Pool 4,968, Park 4,110, Library 4,127, Cemetery 4,710",
+     "issue": "Under the user's capital-outlay rule (2026-10-26), each of these lines could be category capital outlay, labelled 'Capital Outlay: <function>'. The printed label says 'Capital purchases', not 'Capital outlay', so it is a judgment call."}
   ]
 }

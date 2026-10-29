@@ -1,46 +1,18 @@
 {
   "stem": "Homer_FY2025",
-  "values_checked": 120,
+  "values_checked": 112,
   "issues": [
-    {
-      "severity": "error",
-      "path": "receipts[7].category",
-      "page": 5,
-      "extracted": "donations/contributions",
-      "on_page": "Contributions and grants 47,691 (General 11,945; CDBG Fund 35,746)",
-      "issue": "[fixed] Mixed line: the dominant part (35,746 in the CDBG Fund, shown on p2 as an operating grant for economic development) is a CDBG grant, i.e. federal grants / intergovernmental, not private donations. The mixed-line rule calls for the dominant category (federal grants) plus review; the extractor took the minority part (11,945 contributions)."
-    },
-    {
-      "severity": "warning",
-      "path": "beginning_cash",
-      "page": 5,
-      "extracted": 550787,
-      "on_page": "Fund balances - September 30, 2024 550,787",
-      "issue": "Governmental beginning/ending cash are taken from the fund balance figures (modified cash basis). Ending fund balance 533,203 equals governmental cash and CDs 543,360 (p4) less payroll taxes withheld 10,157, so this is not pure cash. It is noted and marked computed, but it is still an assumption."
-    },
-    {
-      "severity": "warning",
-      "path": "business_type.measure",
-      "page": 7,
-      "extracted": "net position",
-      "on_page": "Fund balances - September 30, 2024 401,584 / Net position - September 30, 2025 455,765 (modified cash basis)",
-      "issue": "Modified cash basis statement, but measure is set to 'net position' rather than 'cash'. It is defensible because the statement rolls net position forward (cash 460,838 less 5,073 liabilities), but the cash-basis rule says 'cash'."
-    },
-    {
-      "severity": "warning",
-      "path": "balance_sheet.liabilities[1].category",
-      "page": 1,
-      "extracted": "other liabilities",
-      "on_page": "Sales tax payable 914",
-      "issue": "Sales tax collected and owed to the State could be 'due to other governments'."
-    },
-    {
-      "severity": "warning",
-      "path": "detail",
-      "page": 5,
-      "extracted": "no detail lines for Debt Service Fund (property 2,218, interest 5,378) or CDBG Fund (contributions and grants 35,746)",
-      "on_page": "only the all-funds budget schedule p9 covers these funds, and only in combined form",
-      "issue": "Debt Service and CDBG fund revenues have no detail lines. This is acceptable because no per-fund schedule exists, but the detail does not cover all governmental revenue (292,953 of 336,295)."
-    }
+    {"severity": "error", "path": "receipts[10].category", "page": 5,
+     "extracted": "charges for services/fees", "on_page": "Lease income 72,188",
+     "issue": "lease/rental income takes the user receipt category Rentals (user 2026-10-28: Rentals = rent, rental income), not charges for services/fees"},
+    {"severity": "error", "path": "detail[3].category", "page": 10,
+     "extracted": "charges for services/fees", "on_page": "Lease income 72,188 (Administration)",
+     "issue": "should be Rentals (detail_category is already rentals); same label must get the same category as in receipts"},
+    {"severity": "error", "path": "receipts[12].category", "page": 7,
+     "extracted": "charges for services/fees", "on_page": "Sales 209,034 (Enterprise Fund: water, sewer, trash)",
+     "issue": "utility fund sales take the user category Utility Charges (user 2026-10-28), as the detail lines for the same Sales already do"},
+    {"severity": "warning", "path": "receipts[7].category", "page": 5,
+     "extracted": "donations/contributions", "on_page": "Contributions and grants 11,945 (General Fund, Public Safety)",
+     "issue": "the line mixes contributions and grants; source not stated, so donations vs grants is a judgment call (marked review)"}
   ]
 }

@@ -1,27 +1,16 @@
 {
   "stem": "Boyd_County_FY2025",
-  "values_checked": 206,
+  "values_checked": 260,
   "issues": [
-    {"severity": "warning", "path": "receipts[4].category", "page": 5,
-     "extracted": "other", "on_page": "Local Fees, Licenses, Commissions, and Miscellaneous 1,858,489",
-     "issue": "Mixed line. The rules say a mixed line takes its dominant category plus review, not 'other'. Most of it is the undescribed Bridge Fund Local 1,518,973, so the dominant part is unknown. The report does show some pieces: Statement of Activities p2/p3 has charges for services 284,067 + general 'Local fees...' 1,574,422 = 1,858,489, and the Inheritance Tax Fund column (p4) puts 133,406 of inheritance tax in this line (detail[64] categorizes that as inheritance tax). Left as is, about 33% of governmental receipts are in 'other'."},
-    {"severity": "warning", "path": "disbursements[5].category", "page": 5,
-     "extracted": "debt service principal", "on_page": "Debt Service 395,630",
-     "issue": "Principal and interest are combined. The page doesn't split them; the whole amount went to principal (review flag already set)."},
-    {"severity": "warning", "path": "detail[79].detail_category", "page": 14,
-     "extracted": "debt principal", "on_page": "Bridge: Debt Service 395,630",
-     "issue": "Combined principal and interest assigned entirely to principal (review flag already set)."},
+    {"severity": "warning", "path": "receipts[7].category", "page": 5,
+     "extracted": "licenses and permits", "on_page": "Local Fees, Licenses, Commissions, and Miscellaneous remainder 1,704,152 (Bridge Local 1,518,973; General Local 170,517)",
+     "issue": "The category is a guess. 1,518,973 is unexplained Bridge Fund local receipts (the SoA p2 shows only 18,165 of Bridge as charges for services), and the General Fund part is mostly clerk/treasurer/sheriff fees (fees of office, p2). The same money is categorized 'other' in detail[5] and detail[59], so one label gets two categories in the same report."},
     {"severity": "warning", "path": "detail[48].category", "page": 11,
-     "extracted": "streets/highways", "on_page": "Public Works: Noxious Weed (lines 15,297 / 8,132 / 4,609 / 3,985)",
-     "issue": "The category rules list noxious weed control under natural resources/conservation. The schedule prints it under Public Works, so streets/highways is defensible. Applies to detail[48]-detail[51]; no review flag was set."},
+     "extracted": "streets/highways", "on_page": "Noxious Weed (under Public Works): Personal Services 15,297, Operating 8,132, Supplies and Materials 4,609",
+     "issue": "The extractor rules list noxious weed control under natural resources/conservation; Box Butte County uses that category. Here detail[48]-[50] follow the report's Public Works heading."},
     {"severity": "warning", "path": "detail[81].category", "page": 15,
-     "extracted": "general government", "on_page": "Grants: Operating 3,132",
-     "issue": "Function assumed. Statement p5 (Other Governmental Funds column) shows Public Welfare and Social Services 3,573 = Grants 3,132 + Stop 441, which puts this in health/welfare."},
-    {"severity": "warning", "path": "detail[80].category", "page": 14,
-     "extracted": "public safety", "on_page": "Stop Program: Operating 441",
-     "issue": "Statement p5 classes Stop Program spending under Public Welfare and Social Services (3,573 = 3,132 + 441), not public safety. The STOP program is law-enforcement related, so either category is defensible."},
-    {"severity": "warning", "path": "detail[84].category", "page": 15,
-     "extracted": "general government", "on_page": "Reg Deeds P & M: Operating 3,319",
-     "issue": "Statement p5 shows this 3,319 under Public Works in the Other Governmental Funds column. General government is the more logical function, but it differs from the report's own classification."}
+     "extracted": "general government (Grants Operating 3,132); public safety (Stop Program Operating 441, detail[80]); general government (Reg Deeds P&M Operating 3,319, detail[84])",
+     "on_page": "Statement p5 Other Governmental Funds: Public Welfare 3,573 (= 3,132 + 441), Public Works 3,319",
+     "issue": "The function assignments for these small special revenue lines don't match the statement's own function columns."}
   ]
 }

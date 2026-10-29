@@ -1,46 +1,36 @@
 {
   "stem": "Bancroft_Rosalie_Community_School_FY2025",
-  "values_checked": 222,
+  "values_checked": 210,
   "issues": [
-    {
-      "severity": "warning",
-      "path": "receipts[15].split_from",
-      "page": 4,
-      "extracted": "Other Local Receipts (General Fund column) split into licenses and permits 6,697 (receipts[15]) + donations/contributions 13,040 (receipts[16])",
-      "on_page": "Other Local Receipts, General Fund column 39,377 (p4), one line with no breakdown",
-      "issue": "[fixed: merged back into one 19,737 line with review] Unsupported split. No page prints a breakdown of the p4 'Other Local Receipts' line. 6,697 and 13,040 are the p6 General Fund lines 1911 Other Local Licenses and 1920 Other Contributions, and they tie exactly by arithmetic: 39,377 = 6,697 + 13,040 + 12,000 (p10) + 7,640 (p11). The rule allows split_from only when the report prints the breakdown of that line, and says never to split because another schedule's lines add up to it. Fix: after taking out the 19,640 transfer, keep one item 'Other Local Receipts (General Fund column)' of 19,737 (dominant category donations/contributions, review 'broad group; detail on p6: 1911 licenses 6,697 + 1920 contributions 13,040'). The same applies to receipts[16]. The p6 lines are already in detail[6] and detail[7]."
-    },
-    {
-      "severity": "warning",
-      "path": "transfers_in",
-      "page": 4,
-      "extracted": 19640,
-      "on_page": "no transfer or elimination printed for 19,640 on p4/p5; p10 Fund Transfer In 12,000, p11 Transfer from General Fund 7,640",
-      "issue": "The hidden transfer is inferred, not printed. It is well supported: p4 General column receipts 5,287,870 = p6 5,264,476 + p10 15,754 + p11 7,640, and p5 General column disbursements 5,153,882 = p6-9 spending 5,149,808 + EB 4,074, while p9 8000 Transfers (Outgoing) 112,008 = 40,908 + 71,100 only. So the 19,640 is inside Other Local Receipts 39,377 and inside the General column spending lines (which line is unknown). The contra lines (disbursements[15], detail[82]) and other financing line (detail[81]) follow the hidden-transfer rule and are marked computed/split_from/review. The arithmetic checks out."
-    },
-    {
-      "severity": "warning",
-      "path": "transfers_out",
-      "page": 5,
-      "extracted": 19640,
-      "on_page": "Transfers in(out): General (112,008), Activity 40,908, School Nutrition 71,100, Total '-'",
-      "issue": "transfers_in/out hold only the inferred 19,640, not the printed interfund transfers of 112,008 (these net to '-' in the Total column). This is defensible because the Total column shows nothing, but the scope is inconsistent. The identity is not affected, since both sides net to zero."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[88].category",
-      "page": 11,
-      "extracted": "support services",
-      "on_page": "Employee Benefit Fund: Other Support Services 4,074",
-      "issue": "On p5 this 4,074 sits in the General column 'Instruction' line: 2,757,409 = p7 Total Instruction 2,753,335 + 4,074. The category follows the label, but it does not match the basic statement and has no review flag (unlike the similar Cooperative line, detail[145])."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[140].budget_final",
-      "page": 17,
-      "extracted": 10000,
-      "on_page": "Budget 10,000 printed on the Total Cash Receipts and Total Cash Disbursements lines only",
-      "issue": "A total-line budget was put on single line items for the Student Fee fund (detail[140], detail[141]) but not for other single-line schedules: Bond Interest Paid 900,000 (p14), QCPU Interest Paid 682,000 (p16), Employee Benefit 27,000 (p11), Activities Support Services 340,000 (p12), Cooperative Regular Instruction 70,000 (p18). The treatment is inconsistent. The amounts themselves are correct."
-    }
+    {"severity": "error", "path": "detail[91].category", "page": 13,
+     "extracted": "reimbursements/refunds", "on_page": "Daily Sales - Non Reimburseable 1,128",
+     "issue": "this is meal sales, not a reimbursement, so it belongs in School Lunch Sales. The statement's Student Lunches 4,248 (p4) = Sale of Lunches 3,120 + this 1,128 and is already in School Lunch Sales, and this line's own detail_category is school lunch sales"},
+    {"severity": "error", "path": "detail[93].category", "page": 13,
+     "extracted": "reimbursements/refunds (detail_category other charges for services)", "on_page": "Non Reimbursable Programs 5,390",
+     "issue": "these are sales of non-reimbursable meals; the matching statement split receipts[18] is School Lunch Sales, so the category is inconsistent and does not fit the label"},
+    {"severity": "error", "path": "detail[115].category", "page": 15,
+     "extracted": "other / Other / Miscellaneous Receipts", "on_page": "Other Rental 14,400",
+     "issue": "rental income has its own category (Rentals, detail rentals) under the user's 2026-10-28 rule; 'other' is wrong"},
+    {"severity": "error", "path": "receipts[19].category", "page": 4,
+     "extracted": "charges for services/fees", "on_page": "Other Local Receipts, Special Building column 14,400 (p15 Other Rental)",
+     "issue": "rental income belongs in Rentals, not charges for services/fees (user 2026-10-28)"},
+    {"severity": "error", "path": "receipts[21].category", "page": 4,
+     "extracted": "charges for services/fees", "on_page": "Other Local Receipts, Student Fee column 471 (p17 Student Fees)",
+     "issue": "student fees belong in Extracurricular Receipts (user 2026-10-28); detail[131] already uses Extracurricular Receipts, so the report is inconsistent"},
+    {"severity": "warning", "path": "disbursements[15].detail_category", "page": 5,
+     "extracted": "Salaries / Benefits (category_decision user 2026-10-23)", "on_page": "not printed (contra line -19,640)",
+     "issue": "the synthetic contra line for the hidden General-to-Depreciation/Employee Benefit transfer carries a detail_category and category_decision the page does not support (also detail[81]). The contra amount and transfer treatment themselves tie: General column 5,153,882 = schedule 5,149,808 + Employee Benefit 4,074, and Other Local Receipts 39,377 = 6,697 + 13,040 + 19,640"},
+    {"severity": "warning", "path": "receipts[4].original_label", "page": 4,
+     "extracted": "Public power district tax", "on_page": "Public Power District",
+     "issue": "the label does not match the printed text (p2 reads 'Public Power District Sales Tax'); printed_label holds the p4 text"},
+    {"severity": "warning", "path": "balance_sheet.equity[1]", "page": 3,
+     "extracted": "Committed 116,582", "on_page": "Student Fee 5,281 appears on the Restricted row in the scan; Committed total 116,582 = 102,038 + 9,263 + 5,281",
+     "issue": "column/row alignment on p3 is ambiguous; the printed totals were used and they tie"},
+    {"severity": "warning", "path": "detail[120].category", "page": 15,
+     "extracted": "capital outlay", "on_page": "Operations and Maintenance of Plant - Building 7,952 / - Maintenance 51,902",
+     "issue": "operation and maintenance lines could be Building and Grounds; the extractor followed the p5 statement, which counts all Special Building spending as Capital outlay (also detail[121])"},
+    {"severity": "warning", "path": "disbursements[12].original_label", "page": 5,
+     "extracted": "Capital outlay", "on_page": "Capital outlay",
+     "issue": "not yet relabelled 'Capital Outlay: <function>' under the user's 2026-10-26 rule; user_rules.py is expected to apply this"}
   ]
 }

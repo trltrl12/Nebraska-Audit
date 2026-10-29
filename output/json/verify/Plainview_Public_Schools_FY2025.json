@@ -1,22 +1,18 @@
 {
   "stem": "Plainview_Public_Schools_FY2025",
-  "values_checked": 205,
+  "values_checked": 160,
   "issues": [
-    {"severity": "warning", "path": "detail[59]", "page": 9,
-     "extracted": {"original_label": "5000 Debt service - Other", "category": "debt service interest", "detail_category": "debt interest and fees", "amount": 6253},
-     "on_page": "5000 Debt service / Other 6,253",
-     "issue": "Printed label is just 'Other' under the '5000 Debt service' heading. Nothing on the page says whether it is principal or interest, so 'debt service interest' is an assumption. The governmental statement (p3-4) counts this 6,253 inside Instruction 3,849,657 (I confirmed the GF Instruction lines, including 6,253, add to 3,849,657), so the detail function does not tie to the statement's function line. Line already carries a review flag."},
-    {"severity": "warning", "path": "detail[86].detail_category", "page": 14,
-     "extracted": "land and buildings", "on_page": "Capital outlay 109,335",
-     "issue": "No object breakdown is printed for Special Building Fund capital outlay. 'not itemized' (function total with no object breakdown) probably fits better than assuming land and buildings."},
-    {"severity": "warning", "path": "detail[89].category", "page": 16,
-     "extracted": "support services", "on_page": "Support services pupils / Other disbursements 393,301",
-     "issue": "Activities fund spending. The category list has 'student activities' for activity funds, but the report itself puts this under Support services pupils (and Student support services on the statement, p3). Either choice is defensible."},
-    {"severity": "warning", "path": "detail[7].category", "page": 6,
-     "extracted": "licenses and permits", "on_page": "1911 Local fees 2,735",
-     "issue": "The schedule prints 'Local fees', which may be charges for services rather than licenses. The statement label 'Licenses and fees' (p3) supports the extractor's choice, so this is a judgment call."},
-    {"severity": "warning", "path": "detail_totals[3].amount", "page": 12,
-     "extracted": 763, "on_page": "no Total receipts line printed; Interest 763 is the only receipt line, then TOTAL FUNDS AVAILABLE 54,749",
-     "issue": "The Employee Benefit Fund schedule prints no receipts total. The 763 is the single Interest line, entered as a total without a computed note."}
+    {"severity": "warning", "path": "receipts[5].category", "page": 6,
+     "extracted": "licenses and permits", "on_page": "Licenses and fees 2,735 (p3) = GF 1911 Local fees 2,735 (p6)",
+     "issue": "the schedule line is 'Local fees', which reads more like charges for services than licenses/permits; same for detail[7]"},
+    {"severity": "warning", "path": "disbursements[1].category", "page": 3,
+     "extracted": "support services (detail_category Pupils)", "on_page": "Student support services 986,474 = General Fund 593,173 + Other Governmental (Activities Fund) 393,301",
+     "issue": "40% of the line is Activities Fund spending (student activities category); recorded as printed under one function, which is defensible, but the user may want the activity spending as student activities"},
+    {"severity": "warning", "path": "detail[70].category", "page": 13,
+     "extracted": "charges for services/fees", "on_page": "School Nutrition Fund - Sales 75,555",
+     "issue": "the same receipt is School Lunch Sales in receipts[9]; the user rule makes lunch/meal sales the School Lunch Sales category, so use one category for the line everywhere"},
+    {"severity": "warning", "path": "detail[86].original_label", "page": 14,
+     "extracted": "Capital outlay", "on_page": "Special Building Fund - Capital outlay 109,335",
+     "issue": "user rule labels capital outlay lines 'Capital Outlay: <function>' with printed_label (function here would be building/plant)"}
   ]
 }

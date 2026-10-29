@@ -1,46 +1,21 @@
 {
   "stem": "McCool_Junction_Public_Schools_FY2025",
-  "values_checked": 286,
+  "values_checked": 236,
   "issues": [
-    {
-      "severity": "warning",
-      "path": "receipts[14].split_from",
-      "page": 9,
-      "extracted": "Non-revenue receipts 26,837.48 (p5); sale of property 5320 printed p10",
-      "on_page": "5320 Sale of property 719.20 is on trimmed p9 (Exhibit G); the fund split of Non-revenue receipts (719.20 / 26,118.28) is printed on p6 (Exhibit E)",
-      "issue": "The page reference in the split_from and computed text is wrong (p10 instead of p9 or p6). The amount and split are correct."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[15].category",
-      "page": 12,
-      "extracted": "other",
-      "on_page": "Employee Benefit Fund: Other non-revenue receipts 26,118.28",
-      "issue": "Category is unexplained on the page. It could be employee or insurance reimbursements (reimbursements/refunds). Already marked review; a person should confirm. Same for detail[133]."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[151].fund_type",
-      "page": 14,
-      "extracted": "governmental",
-      "on_page": "School Nutrition Fund (Exhibit K), reported in Other Governmental Funds (Exhibits C/D)",
-      "issue": "The extractor rules list school nutrition as a business-type example. This report presents it as a governmental fund and the totals tie that way, so governmental is defensible. Applies to detail[151]-detail[165] and disbursements[16]."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[38].detail_category",
-      "page": 19,
-      "extracted": "professional/contract services",
-      "on_page": "Other Purchased Services",
-      "issue": "Exhibit P 'Other Purchased Services' is mapped to professional/contract services throughout. The state object group also covers insurance, communications, travel and tuition paid to other districts, so the mapping is a judgment call (e.g. SPED 105,436.78 detail[46], Speech SPED 121,223.75 detail[60])."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[100].detail_category",
-      "page": 22,
-      "extracted": "supplies and materials",
-      "on_page": "Operation of Buildings: Supplies 85,223.78",
-      "issue": "Operation of plant 'Supplies' usually includes energy (electricity, natural gas), so this could partly be utilities (power, gas, phone). The page does not break it down."
-    }
+    {"severity": "error", "path": "receipts[8].category", "page": 5,
+     "extracted": "charges for services/fees", "on_page": "Other local receipts 258,315.47 (General 2,795.00 + Other Governmental 255,520.47, p4)",
+     "issue": "By the fund schedules, Other Governmental 'Other local receipts' 255,520.47 = School Nutrition sales/misc 80,701.93 (p14) + Special Building misc 6,081.15 (p16) + Activities Fund 168,737.39 (p13 receipts 293,334.14 less 25,000 transfer, 97,384.22 contributions and 2,212.53 interest). Activity receipts are about 65% of the line, so under the >half rule it should be Extracurricular Receipts (or split with split_from); charges for services/fees is no longer the category for school activity or lunch receipts."},
+    {"severity": "error", "path": "detail[152].category", "page": 14,
+     "extracted": "reimbursements/refunds", "on_page": "Sales - non-reimbursable 9,544.00",
+     "issue": "Non-reimbursable (a la carte) meal sales are School Lunch Sales, not reimbursements; the line's own detail_category is already school lunch sales"},
+    {"severity": "error", "path": "detail[149].category", "page": 13,
+     "extracted": "charges for services/fees", "on_page": "Activities Fund receipts 293,334.14 (includes 25,000 transfer from General Fund, p24)",
+     "issue": "The contra line reduces Activities Fund receipts, which are all Extracurricular Receipts; categorised as charges for services/fees it understates that category by 25,000 and overstates Extracurricular Receipts by 25,000"},
+    {"severity": "warning", "path": "detail[40].category", "page": 19,
+     "extracted": "Instruction", "on_page": "Regular Instruction: Capital Assets 19,171.12",
+     "issue": "Exhibit P 'Capital Assets' object lines (also detail[87] 2,299.00, detail[106] 39,748.67, detail[122] 15,000.00, detail[129] 8,827.00) are capital purchases; the user rule puts every capital outlay line inside a function in category capital outlay"},
+    {"severity": "warning", "path": "detail[150].source_page", "page": 24,
+     "extracted": 4, "on_page": "Transfers: Activity Fund 25,000.00 (Exhibit P p24)",
+     "issue": "The 25,000 transfer to the Activity Fund is printed on p24; the line is marked computed from p4/p14 but could cite p24 directly"}
   ]
 }

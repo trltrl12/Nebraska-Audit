@@ -1,62 +1,17 @@
 {
   "stem": "Cherry_County_FY2025",
-  "values_checked": 109,
+  "values_checked": 158,
   "issues": [
-    {
-      "severity": "warning",
-      "path": "receipts[5].category",
-      "page": 6,
-      "extracted": "other",
-      "on_page": "Local 1,338,187",
-      "issue": "[fixed: now charges for services/fees with review] The line is labelled 'Local', not Miscellaneous, and p2 shows what it contains: charges for services 739,753 + capital grants 8,440 + interest income 490,469 + miscellaneous 99,525 = 1,338,187. Under the broad-group/mixed-line rule it should take its dominant category (charges for services/fees) with review, not 'other'. As recorded it puts 13.8% of governmental receipts in 'other'."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[2].category",
-      "page": 10,
-      "extracted": "other / miscellaneous revenue",
-      "on_page": "Local 1,137,320",
-      "issue": "Per-fund 'Local' groups are coded other/miscellaneous revenue, but county-wide Local is mostly charges for services and interest (p2). Same for detail[30] (16,084), [34] (96), [39] (45,065), [49] (9,872), [53] (129,750). If receipts[5] is recoded, these should match it for consistency."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[46].split_from",
-      "page": 12,
-      "extracted": "DISBURSEMENTS split into principal 2,072,717 + interest 207,298 (source_page 5)",
-      "on_page": "DISBURSEMENTS 2,280,015 (budget 1,067,082)",
-      "issue": "The budget schedule prints one line. The split uses the same fund's column on the governmental funds statement (p5); the arithmetic is correct. Defensible, but the budget schedule does not print it. Applies to detail[46] and detail[47]."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[40].category",
-      "page": 11,
-      "extracted": "streets/highways",
-      "on_page": "DISBURSEMENTS 3,531,459",
-      "issue": "p5 shows the Road Fund's 3,531,459 as public works 2,927,815 + capital outlay 603,644, but the whole amount is coded streets/highways. This is inconsistent with the Disaster Recovery treatment."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[23].category",
-      "page": 10,
-      "extracted": "streets/highways",
-      "on_page": "Public Works: Noxious Weed 47,945",
-      "issue": "The category rules list noxious weed control under natural resources/conservation."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[48].category",
-      "page": 13,
-      "extracted": "lodging tax",
-      "on_page": "Taxes 204,476",
-      "issue": "Inferred: the schedule prints only 'Taxes'. The inference is plausible (Visitor Improvement 204,476 + Visitor Promotion 204,476 = Lodging 408,952 on p2), and review is set."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[27].amount",
-      "page": 10,
-      "extracted": 36000,
-      "on_page": "Transfers - in 36,000; Transfers - out (456,831) on p10 vs 0 / (420,831) for the General Fund column on p7",
-      "issue": "The two schedules present the General Fund's gross transfers differently (the net is equal at -420,831). This is the report's own inconsistency, mentioned in notes but not in report_discrepancies. Applies to detail[27] and detail[28]."
-    }
+    {"severity": "warning", "path": "receipts[5]", "page": 2,
+     "extracted": "Local 1,338,187 split into charges 739,753 / contributions 8,440 / interest 490,469 / other 99,525",
+     "on_page": "p6 prints Local 1,338,187 as one line; p2 Statement of Activities prints charges for services, capital grants, interest income and miscellaneous",
+     "issue": "The split is inferred by arithmetic: it ties exactly once Intergovernmental is taken as general 3,357,476 + operating grants 62,444. The report does not print a breakdown of the Local line itself. The county Statement of Activities rule allows this, but it is an assumption."},
+    {"severity": "warning", "path": "receipts[6].category", "page": 2,
+     "extracted": "donations/contributions", "on_page": "Capital Grants and Contributions 8,440 (Public safety)",
+     "issue": "Grantor not stated; this may be a government capital grant (intergovernmental). The line already carries review."},
+    {"severity": "warning", "path": "detail[40]", "page": 11,
+     "extracted": "Road DISBURSEMENTS 3,531,459 as streets/highways, not itemized",
+     "on_page": "p5 Road Fund column: Public works 2,927,815 + Capital outlay 603,644",
+     "issue": "This is inconsistent with the Disaster Recovery line, which was split using the p5 fund column. Under the capital outlay rule, the 603,644 would be category capital outlay. The schedule itself prints one line, so this is a warning."}
   ]
 }

@@ -1,46 +1,13 @@
 {
   "stem": "Hyannis_FY2025",
-  "values_checked": 64,
+  "values_checked": 62,
   "issues": [
-    {
-      "severity": "error",
-      "path": "detail[0].category",
-      "page": 4,
-      "extracted": "other / miscellaneous revenue",
-      "on_page": "General Fund receipts 69,070 = Taxes 48,308 + Interest 46 + State receipts 10,072 + Other general receipts 10,644",
-      "issue": "[fixed 2026-10-21: dominant category with review] Broad fund-level line: taxes are 70% of it (and Taxes is recorded as property tax in receipts[0] per p2). Under the broad-line rule (>half) it should be property tax / property tax with review, not other."
-    },
-    {
-      "severity": "error",
-      "path": "detail[3].category",
-      "page": 6,
-      "extracted": "charges for services/fees / other utility charges",
-      "on_page": "Utilities and other local sources 1,042,705 = Charges for services 172,850 + Grant reimbursements 869,855 (p6)",
-      "issue": "[fixed 2026-10-21: dominant category with review] 83% of the line is Grant reimbursements (recorded as federal grants in receipts[6]); under the broad-line rule the dominant category is federal grants (detail federal grants), with review naming the mix. Current category is inconsistent with the receipts list."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[1].detail_category",
-      "page": 4,
-      "extracted": "other state aid",
-      "on_page": "Street 55,200 (State receipts 42,176 in Streets Fund)",
-      "issue": "State receipts in the Street Fund are most likely highway allocation; other state aid is defensible but highway allocation may fit better."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[6].category",
-      "page": 6,
-      "extracted": "federal grants",
-      "on_page": "Grant reimbursements 869,855 (Water)",
-      "issue": "Grantor not stated on the page; could be state (e.g. NDEE/state revolving) rather than federal. Review flag present."
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[17].original_label",
-      "page": 6,
-      "extracted": "Bond interest (non-operating)",
-      "on_page": "Bond interest",
-      "issue": "Label has extractor text added; printed label is 'Bond interest' under NON-OPERATING RECEIPTS (DISBURSEMENTS)."
-    }
+    {"severity": "warning", "path": "receipts[6].category", "page": 6,
+     "extracted": "federal grants", "on_page": "Grant reimbursements 869,855 (Water fund)",
+     "issue": "The report does not say who the grantor is (federal, state or other), so federal grants is a guess. The line already has a review note."},
+    {"severity": "warning", "path": "detail", "page": 7,
+     "extracted": "4 fund-level lines per section from the all-funds Budgetary Comparison Schedule",
+     "on_page": "One combined budget schedule for all funds (General, Street, Improvement fund, Utilities and other local sources)",
+     "issue": "The per-fund detail rule (user 2026-10-27/28, villages) says that when the only supplementary schedule is a combined all-funds one, detail should be one line per fund column of the governmental (p4) and proprietary (p6) statements. The extractor kept the combined schedule lines instead, and 'Utilities and other local sources' lumps the Landfill, Sewer and Water funds together. Which rule applies here is a judgement call."}
   ]
 }

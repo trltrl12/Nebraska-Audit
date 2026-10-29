@@ -1,15 +1,18 @@
 {
   "stem": "Royal_FY2025",
-  "values_checked": 34,
+  "values_checked": 38,
   "issues": [
-    {"severity": "warning", "path": "receipts[10].category", "page": 1,
-     "extracted": "keno/lottery", "on_page": "Local Receipts: Other, Lottery Fund column 57,471.35",
-     "issue": "The category comes from the fund name, not the line label. It's likely right, but the page doesn't say these are lottery proceeds (already marked review)."},
     {"severity": "warning", "path": "disbursements[6].fund_type", "page": 2,
-     "extracted": "governmental", "on_page": "Solid Waste 9,675.00 (Business-Type Activities section, General Fund column)",
-     "issue": "The line sits under Business-Type Activities but is paid from the General Fund column. Keeping it governmental is defensible (already marked review)."},
+     "extracted": "governmental", "on_page": "Line 45 Solid Waste 9,675.00 (Business-Type Activities section, General Fund column)",
+     "issue": "Printed under Business-Type Activities but paid from the General Fund column; kept governmental (defensible, already marked review)"},
+    {"severity": "warning", "path": "receipts[10].category", "page": 1,
+     "extracted": "keno/lottery", "on_page": "Local Receipts: Other 57,471.35 (Lottery Fund column)",
+     "issue": "Category inferred from the fund name only; the page does not say what the receipts are"},
     {"severity": "warning", "path": "receipts[12].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other, Water 8,286.08 / Sewer 4,727.14",
-     "issue": "Utility-fund 'Other' receipts are presumed to be charges for services. Nothing on the page says so."}
+     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other 8,286.08 (Water Fund column)",
+     "issue": "Presumed utility charges (the page only says Other); config/category_decisions.csv has 'local receipts other water fund' -> other / Other / Miscellaneous Receipts, while the 2026-10-28 rule would make utility charges Utility Charges"},
+    {"severity": "warning", "path": "receipts[13].category", "page": 1,
+     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other 4,727.14 (Sewer Fund column)",
+     "issue": "Presumed utility charges (the page only says Other); config/category_decisions.csv has 'local receipts other sewer fund' -> other / Other / Miscellaneous Receipts, while the 2026-10-28 rule would make utility charges Utility Charges"}
   ]
 }

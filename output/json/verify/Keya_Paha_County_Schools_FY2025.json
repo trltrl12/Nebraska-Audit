@@ -1,38 +1,12 @@
 {
   "stem": "Keya_Paha_County_Schools_FY2025",
-  "values_checked": 113,
+  "values_checked": 152,
   "issues": [
-    {
-      "severity": "error",
-      "path": "receipts[5].category",
-      "page": 4,
-      "extracted": "other",
-      "on_page": "Other local receipts 137,243 (General 11,055 + Other Governmental 126,188)",
-      "issue": "[fixed] The fund schedules break this line down (p9: Activity Fund 123,737 activities receipts + School Nutrition 2,451 private grants; p10: rentals 3,304, license fees/fines 1,650, donations 5,276, other 825). Activity receipts make up 90% of it, so under the mixed-line rule it should take the dominant category, charges for services/fees, with a review note naming the mix. 'other' is a last resort and doesn't fit here."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[60].category",
-      "page": 16,
-      "extracted": "support services",
-      "on_page": "Activities Fund DISBURSEMENTS 193,616",
-      "issue": "The category list has 'student activities' for activity funds. The statement (p4, p9) reports this spending under Support services - pupils, so the extractor's choice is defensible and already marked review, but 'student activities' may be intended."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[8].detail_category",
-      "page": 10,
-      "extracted": "county/other local governments",
-      "on_page": "2110 County fines and license fees 2,469",
-      "issue": "These are county-collected fines and license fees passed to the school. Treating them as county/other local governments money is defensible, but 'fines and forfeitures' could also apply."
-    },
-    {
-      "severity": "warning",
-      "path": "business_type",
-      "page": 9,
-      "extracted": null,
-      "on_page": "School Nutrition Fund shown as a nonmajor governmental fund (receipts 68,148, disbursements 112,622)",
-      "issue": "The extractor rules give school nutrition as an example of a business-type fund. This report presents it as governmental and the extraction follows the report. That is consistent with the statements, but it departs from the rules' default."
-    }
+    {"severity": "error", "path": "receipts[5].category", "page": 9,
+     "extracted": "charges for services/fees", "on_page": "Other local receipts 137,243 = General Fund 11,055 + Other Governmental 126,188, of which Activity Fund receipts 123,737 (p9, p16)",
+     "issue": "Line is ~90% school activity fund receipts; under the rules (school activity fund receipts -> Extracurricular Receipts; charges for services only for genuine fees) the dominant category is Extracurricular Receipts, which is also the category the extraction gives the same money in detail (detail[52]). charges for services/fees does not fit any component."},
+    {"severity": "warning", "path": "detail[5].category", "page": 10,
+     "extracted": "licenses and permits", "on_page": "1911 Local license fees and fines 1,650",
+     "issue": "Line mixes license fees and fines; Fines and Licenses is arguably the closer category (marked review already)."}
   ]
 }

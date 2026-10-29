@@ -1,25 +1,15 @@
 {
   "stem": "Box_Butte_County_FY2025",
-  "values_checked": 138,
+  "values_checked": 190,
   "issues": [
-    {"severity": "fixed", "path": "balance_sheet.statement", "page": 3, "extracted": "Statement of Net Position - Cash Basis (p1): Unrestricted 8,012,268", "on_page": "Statement of Assets and Fund Balances - Cash Basis, Governmental Funds (p3), Total column: Committed to Sinking fund 27, Courthouse building fund 62,607, Road maintenance 344,061, Health insurance claims 1,683,833; Unassigned 5,921,740; total 9,495,060", "issue": "The balance-sheet basis rule (user, 2026-10-27) says cash-basis reports take governmental balance-sheet lines from the governmental funds statement (Total column, fund balance by classification) when its totals equal the government-wide totals. They do here (9,495,060). The equity lines should come from p3. The assets are the same on both pages.", "resolution": "fixed 2026-10-27: balance sheet from the p3 governmental funds statement (Total column): Restricted lines, four Committed lines (27 / 62,607 / 344,061 / 1,683,833), Unassigned 5,921,740; totals 9,495,060 unchanged"},
-    {"severity": "fixed", "path": "detail[21].category", "page": 8, "extracted": "streets/highways", "on_page": "Public Works: Noxious Weed Control 64,338", "issue": "The extractor's disbursement categories list noxious weed control under 'natural resources/conservation'. Furnas County's Noxious Weed line uses that category.", "resolution": "fixed 2026-10-27: category natural resources/conservation (review note removed)"},
     {"severity": "warning", "path": "receipts[6].amount", "page": 2,
-     "extracted": 418704, "on_page": "Miscellaneous 418,554",
-     "issue": "The split of Local is not printed as such. The miscellaneous part carries a 150 residual plug (marked computed and review) because p4 Intergovernmental 2,577,560 is 150 below the p2 intergovernmental + grants of 2,577,710. The report's two statements disagree by 150, so the amount is the extractor's assumption."},
-    {"severity": "warning", "path": "report_discrepancies[0]", "page": 8,
-     "extracted": "difference 30,443 (detail)",
-     "on_page": "p8 and p5 both total General Fund disbursements 4,639,147",
-     "issue": "This entry describes different function groupings between the budget schedule and the combining statement. It is not a report that fails to add up: both totals agree. It will still be listed for the user as 'the report itself doesn't add up'."},
-    {"severity": "warning", "path": "detail[24].original_label", "page": 8,
-     "extracted": "Transfers - out", "on_page": "Transfers - out",
-     "issue": "The user label rule of 2026-10-27 ('Transfers In' / 'Transfers Out', printed text in printed_label) is applied to the nonmajor lines but not to detail[24], [28], [29] (p9) or [32] (p10), nor to [36] (p5)."},
+     "extracted": 418704, "on_page": "Statement of Activities Miscellaneous 418,554",
+     "issue": "Local 1,057,550 (p4) split with the Statement of Activities; the extractor put the unexplained 150 difference (p4 Intergovernmental 2,577,560 vs SoA 2,529,373 + 18,337 + 30,000 = 2,577,710) into Miscellaneous. This is marked computed/review, but it is an assumption."},
+    {"severity": "warning", "path": "detail[26].detail_category", "page": 9,
+     "extracted": "Other / Miscellaneous Receipts", "on_page": "Road Fund Local 26,558 = Local 10,933 + Sale of surplus 15,625 (p4)",
+     "issue": "Most of the Road Fund budget-schedule 'Local' line (59%) is sale of surplus property, per the p4 Road column, so Sale of Property could apply. The General Fund 'Local' 948,575 (detail[2]) likewise includes insurance proceeds of 11,962 and sale of surplus of 9,203."},
     {"severity": "warning", "path": "detail", "page": 6,
-     "extracted": "12 nonmajor fund columns recorded fund by fund (p6-7)",
-     "on_page": "Total Non-Major Funds: receipts 928,997, disbursements 1,082,958 (p7)",
-     "issue": "The extractor rule says a combining schedule with more than 6 fund columns uses its Total column. The per-fund lines do tie to that Total column, and there is no double counting."},
-    {"severity": "warning", "path": "detail[30].category", "page": 10,
-     "extracted": "other", "on_page": "Health Insurance Claim Fund RECEIPTS 117,407",
-     "issue": "The receipts of a self-insured health claims fund are most likely employee or employer contributions or reimbursements. 'other' is a last resort. The line already has a review note."}
+     "extracted": "nonmajor combining statement recorded per fund (10 non-zero funds)", "on_page": "12 fund columns plus Total Non-Major Funds (pp6-7)",
+     "issue": "Extractor rule: a combining schedule with more than 6 fund columns should use its Total column (fund 'Nonmajor funds (combined)'). Per-fund lines tie to the Total column and are not double counted, so this is a rule deviation, not a numeric error."}
   ]
 }

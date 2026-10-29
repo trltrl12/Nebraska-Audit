@@ -1,70 +1,13 @@
 {
   "stem": "Conestoga_Public_Schools_FY2025",
-  "values_checked": 208,
+  "values_checked": 215,
   "issues": [
-    {
-      "severity": "warning",
-      "path": "receipts[16].category",
-      "page": 3,
-      "extracted": "reimbursements/refunds",
-      "on_page": "Other nonrevenue receipts 192,250 (General 192,220 = Sale of property 15,116 + Insurance adjustments 100,696 + Other nonrevenue 29,859 (p10) + Depreciation Fund 46,549 (p14); Special Building 23; QCPU 7)",
-      "issue": "mixed line; dominant component (insurance adjustments, 52%) used with review, which is defensible. Note the same label '5690 Other nonrevenue receipts' is 'other' in detail[31], so the category differs across schedules for similar labels."
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[11].category",
-      "page": 4,
-      "extracted": "debt service principal",
-      "on_page": "Debt service 1,345,598",
-      "issue": "principal and interest combined in one printed line, all put under principal (already marked review). The fund schedules (p15-17) show principal 800,000 (190,000 QCPU + 610,000 Special Building) and interest/fees 545,598; principal is dominant (59%)."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[89].amount",
-      "page": 13,
-      "extracted": 161796,
-      "on_page": "4700 Building improvements 411,796",
-      "issue": "hidden-transfer split: 411,796 printed, split into 161,796 spending + detail[93] -250,000 other financing. Supported by the p7 Reclassifications column (Facilities acquisition (250,000); Transfers (250,000)) and the p14 Depreciation Fund transfer in 250,000; arithmetic holds and both items carry split_from/computed/review. Listed as an extractor assumption."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[96].detail_category",
-      "page": 14,
-      "extracted": "equipment purchases",
-      "on_page": "Depreciation Fund - Capital outlay 335,802",
-      "issue": "capital outlay is not itemized by type; equipment purchases is a guess (already marked review)."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[9].detail_category",
-      "page": 9,
-      "extracted": "county/other local governments",
-      "on_page": "2110 County fines and license fees 61,967",
-      "issue": "the label says fines and license fees distributed by the county; 'county/other local governments' is defensible but 'fines and forfeitures' could also apply (receipts[12] 'County and ESU receipts' is the same money)."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[146].category",
-      "page": 20,
-      "extracted": "student activities",
-      "on_page": "Activities Fund - Support services - pupils / Central services 339,864",
-      "issue": "categorized as student activities in detail, while the same money is inside disbursements[1] 'Support services - student' 1,010,755 (support services) on the basic statement. Defensible (the basic line follows its printed label), but the categories differ across schedules."
-    },
-    {
-      "severity": "warning",
-      "path": "fund_type",
-      "page": 3,
-      "extracted": "governmental (School Nutrition Fund lines)",
-      "on_page": "School Nutrition Fund shown as a nonmajor governmental fund (p3-4, p8)",
-      "issue": "the extractor rules list school nutrition among business-type funds, but this report carries it in the governmental funds statement and Total Governmental Funds column; keeping it governmental matches the report and the totals."
-    },
-    {
-      "severity": "warning",
-      "path": "report_discrepancies",
-      "page": 5,
-      "extracted": "two 1-dollar rounding entries",
-      "on_page": "Total assets 23,053,385 vs total liabilities and fund balances 23,053,384 (p5; General Fund column 5,316,781 vs 5,316,780); p2 total assets 23,053,385 vs total net position 23,053,384; p13 General Fund analysis TOTAL FUND BALANCE 4,842,112 vs fund balance end of year 4,842,111",
-      "issue": "rounding differences printed in the report itself; the first two are recorded in report_discrepancies. The p13 analysis-of-fund-balance difference is not recorded, but no JSON value uses it."
-    }
+    {"severity": "warning", "path": "disbursements[11].split_from", "page": 15,
+     "extracted": "Bond Fund p15 principal 190,000, interest 60,028, other 200; QCPU Fund p16 interest 94,262, fees 7,150",
+     "on_page": "p15 is the Qualified Capital Purpose Undertaking Fund (principal 190,000, interest 60,028, other 200); p16 is the Bond Fund (interest 94,262, wire fees 7,150)",
+     "issue": "The amounts and the arithmetic are correct (800,000 + 545,598 = 1,345,598), but the split_from text swaps the fund names for pp15-16. The same text is on disbursements[12]."},
+    {"severity": "warning", "path": "disbursements[1].detail_category", "page": 3,
+     "extracted": "Pupils (support services)", "on_page": "Support services - student 1,010,755 = General 670,891 + Other Governmental 339,864 (Activities Fund 'Support services - pupils / Central services', p20)",
+     "issue": "339,864 of this statement line is Activities Fund spending, which would normally be student activities. The line is recorded as printed; the mix is not noted on the line."}
   ]
 }

@@ -1,18 +1,24 @@
 {
   "stem": "Rushville_FY2025",
-  "values_checked": 116,
+  "values_checked": 182,
   "issues": [
-    {"severity": "warning", "path": "disbursements[9].category", "page": 6,
-     "extracted": "utilities", "on_page": "Total column object lines (Personal Services through Depreciation, disbursements[9]-[15]); Golf column total operating expenses 126,919",
-     "issue": "All business-type object lines are categorised as utilities, but the Golf fund (about 30% of operating expenses) is culture/recreation. The page prints the Water/Sewer/Golf columns, so the lines could be split by fund. This also doesn't match detail[16], where Golf is culture/recreation."},
-    {"severity": "warning", "path": "report_discrepancies", "page": 1,
-     "extracted": "no entry for the net position section", "on_page": "Net position lines 828,927 + 835,718 + 590,996 + 212,969 = 2,468,610 vs printed TOTAL NET POSITION 2,468,609 (governmental column 520,718 + 584,427 + 227,556 = 1,332,701 vs 1,332,700)",
-     "issue": "A $1 rounding difference printed in the report is not recorded in report_discrepancies. The balance entry covers only assets and total liabilities + net position."},
-    {"severity": "warning", "path": "proprietary.investing", "page": 7,
-     "extracted": -490, "on_page": "Total column lines (519) + 30 = (489); printed net investing (490); printed net increase 154,148 vs the four section totals 154,147",
-     "issue": "A $1 rounding difference in the printed cash flow statement (Water and Golf columns are also off by 1). The amounts match the page, but it is not in report_discrepancies."},
+    {"severity": "warning", "path": "receipts[5].category", "page": 2,
+     "extracted": "charges for services/fees", "on_page": "Charges for services 234,035 (p4); Statement of Activities (p2) shows all 234,035 under Parks and Recreation",
+     "issue": "Under the 2026-10-28 rule pool/park/recreation fees are category Recreation Fees; the page shows the whole line is Parks and Recreation charges (detail[8] likewise has detail_category other charges for services)"},
+    {"severity": "warning", "path": "receipts[11].category", "page": 6,
+     "extracted": "charges for services/fees", "on_page": "Charge for services 479,615 (Water 205,676 + Sewer 136,513 + Golf 137,426)",
+     "issue": "Mixed line; 342,189 of it is water/sewer utility charges (Utility Charges under the 2026-10-28 rule) and 137,426 golf fees; no review note naming the mix"},
+    {"severity": "warning", "path": "detail[39].category", "page": 6,
+     "extracted": "charges for services/fees", "on_page": "Golf Charge for services 137,426",
+     "issue": "Golf fees are Recreation Fees under the 2026-10-28 rule"},
+    {"severity": "warning", "path": "detail[46].original_label", "page": 6,
+     "extracted": "Personal Services (Water and Sewer)", "on_page": "Personal Services",
+     "issue": "Per-fund detail lines for Water Fund and Sewer Fund carry the suffix '(Water and Sewer)' (and Golf lines '(Golf)'), which is not printed; same on all business-type object lines in detail (Utilities, Insurance, Repairs and maintenance, Supplies, Other Services and Charges, Depreciation and amortization)"},
     {"severity": "warning", "path": "ending_cash", "page": 3,
-     "extracted": 104660, "on_page": "Cash 104,660; Certificates of Deposit 40,000; Cash held by County Treasurer 7,018; Restricted Cash in Bank 377,163; Restricted CDs 677,077",
-     "issue": "ending_cash is only the unrestricted cash line, and ending_investments is null even though CDs (40,000 + 677,077) are printed. This is defensible because the identity uses fund balance (GAAP), but it understates governmental cash and investments (total 1,205,918)."}
+     "extracted": 151678, "on_page": "Cash 104,660 + CDs 40,000 + County Treasurer 7,018; restricted Cash in Bank 377,163 and restricted CDs 677,077 also on the Total Governmental Fund column",
+     "issue": "Restricted cash and CDs (1,054,240) excluded from ending cash; defensible but an assumption (correctly marked computed)"},
+    {"severity": "warning", "path": "notes", "page": 9,
+     "extracted": "Detail: p9 Statement of Revenues and Expenditures - Budgetary Basis ... recorded line by line (fund = All Funds ...)", "on_page": "detail[] holds only per-fund lines from p4 and p6; no p9 lines",
+     "issue": "Notes still describe the p9 budget schedule as recorded in detail; stale text contradicts the closing sentence and the JSON (p9 lines correctly left out under the 2026-10-27 per-fund rule)"}
   ]
 }

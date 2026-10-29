@@ -1,21 +1,17 @@
 {
   "stem": "Hordville_FY2025",
-  "values_checked": 32,
+  "values_checked": 52,
   "issues": [
+    {"severity": "error", "path": "missing", "page": 6,
+     "extracted": "notes: '... Read pages 1-6 of 6 Balance sheet built from the Total column ending balances ... not in the total.'",
+     "on_page": "trimmed PDF has 6 pages",
+     "issue": "The notes don't end with 'Read pages 1-6 of 6': more text follows it. The page count is right (6 of 6) and no statement lines are missing, but the required ending is broken and validation may not recognise it."},
     {"severity": "warning", "path": "receipts[10].category", "page": 1,
      "extracted": "other", "on_page": "Local Receipts: Other - Water Fund 101,822.12, Sewer Fund 19,269.90",
-     "issue": "All business-type receipts are in 'other'. The page puts them in the Water and Sewer fund columns, so most is probably water/sewer charges (charges for services/fees), but the label says only 'Other' and some may be loan proceeds. Already marked review and covered in decision_needed."},
-    {"severity": "warning", "path": "receipts[9]", "page": 1,
-     "extracted": 414981.83, "on_page": "Local Receipts: Other - General 252,450.60, Gym 10,100.00 (p1), Event Center 2,400.00, House Account 150,031.23 (p3)",
-     "issue": "The amount is correct, but 85% of governmental receipts sit in 'other'. The House Account's 150,031.23 is matched by a 150,000 capital improvement, and the p6 debt schedule shows a 143,570 loan dated 2/20/25 and bonds dated 9/16/25. Part may be debt proceeds. Already in decision_needed."},
-    {"severity": "warning", "path": "disbursements[8].category", "page": 4,
-     "extracted": "debt service principal", "on_page": "Debt Service 13,332.39 (Sewer Fund)",
-     "issue": "Principal and interest are combined on the page; recorded as principal with review."},
-    {"severity": "warning", "path": "notes", "page": 2,
-     "extracted": "p2 ignored as void", "on_page": "Crossed-out Exhibit A p1: Sewer beginning (45,227.62), General Local Receipts: Other 252,246.35, General ending 62,943.21, Total ending 151,590.47",
-     "issue": "Ignoring the page crossed out in red is correct, but its differing figures are not in report_discrepancies or a review note (the budget-form rule asks for this). The unmarked p1 ties to its own totals."},
-    {"severity": "warning", "path": "balance_sheet", "page": 1,
-     "extracted": "assets [] (no statement)", "on_page": "Lines 25-28 Ending Balance Consists Of: Net Cash Balance 92,249.96, Investments 150,000.00, Subtotal 242,249.96; p6 Schedule of Outstanding Debt total 269,364.76",
-     "issue": "No separate net position statement is printed. The ending-balance breakdown on Exhibit A (cash vs investments, by fund) and the outstanding debt schedule could have filled cash-basis assets. Leaving it empty is defensible."}
+     "issue": "These are the only receipts of the Water and Sewer funds, so they are most likely utility charges (category Utility Charges). The printed label says 'Other' and the line may include loan proceeds, so 'other' with review is defensible."},
+    {"severity": "warning", "path": "notes", "page": 4,
+     "extracted": "Business 'Debt Service' recorded as principal with review",
+     "on_page": "Debt Service (Sewer) 13,332.39",
+     "issue": "The notes don't match the JSON: disbursements[8] is recorded as 'debt service (principal and interest combined)' with no review flag. The JSON is the correct treatment; only the note is stale."}
   ]
 }

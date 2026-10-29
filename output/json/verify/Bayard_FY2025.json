@@ -1,54 +1,18 @@
 {
   "stem": "Bayard_FY2025",
-  "values_checked": 93,
+  "values_checked": 147,
   "issues": [
-    {
-      "severity": "warning",
-      "path": "receipts[10].category",
-      "page": 6,
-      "extracted": "other",
-      "on_page": "Operating revenues: Charges for services: Other 11,096",
-      "issue": "[fixed per checker] line is printed under the 'Charges for services:' heading, so the page says what it is; should be charges for services/fees, not other. original_label 'Other (charges for services)' also isn't the printed label ('Other')"
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[1].category",
-      "page": 4,
-      "extracted": "taxes (unlabeled)",
-      "on_page": "Sales and other taxes 129,399 (General 101,643, Street 27,756)",
-      "issue": "the Street Fund portion 27,756 equals Motor vehicle tax 27,756 on the budget schedule (p8); General 101,643 doesn't tie to sales tax 94,858, so keeping it unsplit is defensible, but the motor vehicle portion is identifiable"
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[2].category",
-      "page": 4,
-      "extracted": "licenses and permits",
-      "on_page": "Fees, taxes, permits and licenses 36,171 (General 24,525, Street 11,646)",
-      "issue": "Street portion 11,646 equals Motor vehicle fees on p8 (classed motor vehicle tax in detail[3]); mixed line, inconsistent category with detail"
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[3].category",
-      "page": 4,
-      "extracted": "general government",
-      "on_page": "General government - TIF remittances 7,514",
-      "issue": "category rules list TIF under economic development; printed under the General government heading, so a judgment call"
-    },
-    {
-      "severity": "warning",
-      "path": "business_type.other_financing",
-      "page": 6,
-      "extracted": 1043,
-      "on_page": "Non-operating revenues (expenses): Bond premium 1,043",
-      "issue": "bond premium is printed as non-operating revenue (likely amortized premium), while the matching Amortization (2,124) is recorded as a disbursement; treating one as financing and the other as expense is inconsistent"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[8].fund_type",
-      "page": 8,
-      "extracted": "governmental",
-      "on_page": "Other local revenues 2,273,210 (all-funds budget schedule)",
-      "issue": "this line evidently includes utility sales (~1.96 million), so it is mostly business-type; also in other/miscellaneous revenue though its makeup is largely charges for services. Flagged review by extractor"
-    }
+    {"severity": "warning", "path": "receipts[3].amount", "page": 4,
+     "extracted": 6785, "on_page": "Sales and other taxes, General Fund 101,643 (p4); p8 all-funds 'Other state receipts' 6,786",
+     "issue": "residual of the General Fund 'Sales and other taxes' cell after sales tax 94,858 is not printed anywhere (6,785 vs p8 Other state receipts 6,786); it is marked computed with a review note, but categorising a residual of a tax line as intergovernmental/state aid is an assumption (same for detail[3])"},
+    {"severity": "warning", "path": "receipts[11].category", "page": 6,
+     "extracted": "charges for services/fees", "on_page": "Sales 1,955,504 (Utilities)",
+     "issue": "the same line in detail[34] is category Utility Charges (user rule 2026-10-28: utility fund sales -> Utility Charges); receipts and detail are inconsistent"},
+    {"severity": "warning", "path": "detail[23].detail_category", "page": 4,
+     "extracted": "equipment purchases", "on_page": "Capital outlay 83,167",
+     "issue": "the page does not say what the capital outlay bought; equipment purchases is an assumption (also detail[27] 13,038 and detail[32] 4,124)"},
+    {"severity": "warning", "path": "notes", "page": 1,
+     "extracted": "'Balance sheet uses the government-wide Total column on p1'; 'Budget schedule p8 ... is recorded as detail'; 'Other local revenues 2,273,210 split'", "on_page": null,
+     "issue": "stale notes from earlier attempts contradict the current JSON (governmental balance-sheet lines come from p3; detail is per-fund statement lines; no p8 lines are in detail)"}
   ]
 }

@@ -1,21 +1,21 @@
 {
   "stem": "Crete_FY2025",
-  "values_checked": 214,
+  "values_checked": 165,
   "issues": [
+    {"severity": "warning", "path": "disbursements[10].category", "page": 11,
+     "extracted": "Employee Benefits and Payroll Taxes", "on_page": "Salaries and benefits 2,905,620",
+     "issue": "This combined line is mostly salaries. The dominant cost type would be Salaries and Wages."},
+    {"severity": "warning", "path": "disbursements[16].category", "page": 11,
+     "extracted": "Fuel", "on_page": "Vehicle expense 72,389",
+     "issue": "Fuel and oil is printed as its own line (59,184), so 'Vehicle expense' is probably vehicle repairs/upkeep rather than fuel."},
+    {"severity": "warning", "path": "disbursements[21].category", "page": 11,
+     "extracted": "utilities", "on_page": "Bad debts 735",
+     "issue": "Bad debts is not a utility bill. Under the cost-type rule it would be 'other' with function utilities (the function field is missing)."},
+    {"severity": "warning", "path": "receipts[15].category", "page": 11,
+     "extracted": "charges for services/fees", "on_page": "Charges for services 14,118,326; Municipal sales 301,108; MEAN lease 173,141 (receipts[16], [17])",
+     "issue": "Under the user's 2026-10-28 categories, enterprise charges/municipal sales are Utility Charges and the MEAN lease is Rentals. These business-type receipts have no fund field, so user_rules.py won't re-map them."},
     {"severity": "warning", "path": "receipts[7].category", "page": 7,
-     "extracted": "federal grants", "on_page": "Grants 440,031",
-     "issue": "The page doesn't say whether these grants are federal or state. The Statement of Activities (p2-3) shows operating grants 410,736 and capital grants 246,100 with no source. The same assumption is made in detail[6], detail[35] and detail[45]. Review is already flagged."},
-    {"severity": "warning", "path": "receipts[10].category", "page": 7,
-     "extracted": "other", "on_page": "Loan collections 54,773",
-     "issue": "Economic development loan repayments (Economic Development Fund, p21). These are principal collections, not revenue in substance. 'other' with review is defensible, but they could also be treated as reimbursements or as a non-revenue inflow."},
-    {"severity": "warning", "path": "disbursements[3].category", "page": 7,
-     "extracted": "culture/recreation", "on_page": "Environment and leisure 1,406,672",
-     "issue": "This function line may mix environment (cemetery, sanitation) with parks and recreation. Recording the dominant category is defensible, but the notes don't mention the mix as the rules require."},
-    {"severity": "warning", "path": "detail[19].detail_category", "page": 17,
-     "extracted": "other state aid", "on_page": "Street Fund - Intergovernmental 1,026,150",
-     "issue": "Street Fund intergovernmental revenue is almost certainly the highway allocation, but the page doesn't state it. Review is already flagged."},
-    {"severity": "warning", "path": "notes", "page": 20,
-     "extracted": "9 nonmajor funds > 6, so combined", "on_page": "10 fund columns: CDBG, Owner Occupied Rehab, Business Improvement District, Keno, ARPA, Airport, Capital Outlay, LB357, FEMA Disaster, Economic Development",
-     "issue": "The notes miscount the nonmajor funds. Using the combined Total column is still correct because there are more than 6."}
+     "extracted": "federal grants", "on_page": "Grants 440,031 (General 229,492, Capital Projects 165,805, Other 44,734)",
+     "issue": "The grant source (federal/state/private) is not printed. Recorded as federal with review only."}
   ]
 }

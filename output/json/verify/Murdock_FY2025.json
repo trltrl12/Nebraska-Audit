@@ -1,12 +1,18 @@
 {
   "stem": "Murdock_FY2025",
-  "values_checked": 38,
+  "values_checked": 40,
   "issues": [
-    {"severity": "warning", "path": "beginning_cash", "page": 1,
-     "extracted": 254538.26, "on_page": "Line 3 Subtotal of Beginning Balance (Line 1 + 2), which includes Investments 30,000.00",
-     "issue": "beginning_cash and ending_cash (263,546.69) include the 30,000 CD held by the General Fund, and beginning_investments/ending_investments repeat the same 30,000. This is consistent with the line 3/line 24 roll-forward, and the identity holds as recorded, but a reader adding cash and investments would count the CD twice."},
-    {"severity": "warning", "path": "balance_sheet.equity[0].original_label", "page": 1,
-     "extracted": "Ending Balance (line 28 subtotal of ending balances), all funds", "on_page": "Subtotal of Ending Balances (Line 26 + 27)",
-     "issue": "Paraphrased label. The filing has no net position statement, so the balance sheet was built from Exhibit A ending balances (disclosed in notes); 455,634.99 matches the printed Total column."}
+    {"severity": "error", "path": "receipts[12].category", "page": 1,
+     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Water Fund) 78,029.29",
+     "issue": "Utility fund receipts take the category Utility Charges (user rule 2026-10-28). The Garbage Fund's identical line (receipts[14]) already uses Utility Charges, so this line is inconsistent with it."},
+    {"severity": "error", "path": "receipts[13].category", "page": 1,
+     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Sewer Fund) 24,555.00",
+     "issue": "Utility fund receipts take the category Utility Charges (user rule 2026-10-28). The Garbage Fund's identical line (receipts[14]) already uses Utility Charges, so this line is inconsistent with it."},
+    {"severity": "warning", "path": "receipts[10].category", "page": 1,
+     "extracted": "keno/lottery", "on_page": "Local Receipts: Other (Keno Fund) 5,031.22",
+     "issue": "The page prints this line as Other; keno/lottery is assumed from the Keno Fund column. The category is defensible but it is an assumption."},
+    {"severity": "warning", "path": "receipts[11].category", "page": 1,
+     "extracted": "other", "on_page": "Local Receipts: Other (Fire Fund) 16,500.00",
+     "issue": "A round 16,500 in the Fire Fund may be a rural fire district contract (charges for services/fees) rather than unexplained other. The page doesn't say."}
   ]
 }

@@ -1,46 +1,12 @@
 {
   "stem": "Elmwood_Murdock_Public_School_FY2025",
-  "values_checked": 229,
+  "values_checked": 190,
   "issues": [
-    {
-      "severity": "error",
-      "path": "detail_totals[1].includes",
-      "page": 14,
-      "extracted": null,
-      "on_page": "Total disbursements 7,199,781 (includes 239,658 of transfers to Depreciation and Employee Benefit funds, eliminated in the Reclassifications column on p8)",
-      "issue": "[fixed] The GF expenditure lines in the JSON include the contra line -239,658 (detail[65]), so they add up to 6,960,123. The transfer is recorded separately as other financing (detail[66], -239,658). The printed total 7,199,781 contains that transfer, but this detail_totals entry has no \"includes\": [\"other financing\"], so the lines miss the printed total by 239,658. Add includes [\"other financing\"]. With it the lines tie exactly (6,960,123 + 239,658 = 7,199,781)."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[65].category",
-      "page": 8,
-      "extracted": "support services (single contra -239,658, department 'Central services; State programs; Federal programs')",
-      "on_page": "Reclassifications column: Central services (39,658); State programs (16,648); Federal programs (226,668); Instruction +43,316",
-      "issue": "The p8 column shows where each transfer came out of the General Fund lines. The 39,658 came out of Central services (it equals the Employee Benefit transfer). The 200,000 came out of State and Federal programs (243,316 less the 43,316 moved into Instruction), and the extractor maps those lines to instruction. Recording the whole -239,658 under support services takes 200,000 too much out of support services and too little out of instruction. Better as two contra lines: -39,658 support services (Central services) and -200,000 instruction (State/Federal programs)."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[11].category",
-      "page": 11,
-      "extracted": "intergovernmental/state aid / county/other local governments",
-      "on_page": "2110 County fines and license fees 34,703",
-      "issue": "These are county fines and license fees passed to the school district. That fits county/other local governments (p4 calls it 'County and ESU receipts'), but fines and forfeitures is also defensible. It is a judgment call."
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[11].split_from",
-      "page": 5,
-      "extracted": "Debt service 691,449 split into principal 640,000 / interest and fees 51,449",
-      "on_page": "Debt service 691,449 (Bond Fund 606,327 + Other Governmental 85,122)",
-      "issue": "The split uses the fund-level breakdowns printed on p18 (Bond Fund: 555,000 / 49,953 / 1,374) and p10/p17 (QCPU: 85,000 / 122). These are the components of this line and the arithmetic is right, but the statement itself prints debt service as one line. Marked computed, split_from and review."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[104].budget_final",
-      "page": 20,
-      "extracted": 477457,
-      "on_page": "477,457 printed on the Purchased services row and again on Total disbursements",
-      "issue": "On the page, 477,457 sits on the Purchased services row, but it is clearly the budget for total disbursements. The extractor's note says so. This is ambiguous budget placement."
-    }
+    {"severity": "warning", "path": "receipts[9].category", "page": 4,
+     "extracted": "investment income", "on_page": "Investment income from real property 9,600",
+     "issue": "Code 1540 income from real property is rent/lease income on district land; Rentals may fit better than investment income (detail line on p11 likewise)."},
+    {"severity": "warning", "path": "disbursements[1]", "page": 4,
+     "extracted": "Student support services 855,965 as support services (Pupils)", "on_page": "General Fund 538,814 + Other Governmental Funds 317,151 (Activities Fund, p10)",
+     "issue": "317,151 of the line is Activities Fund spending (student activities); the statement prints it in a separate column, so it could be split as was done for Elm Creek. Likewise Instructional support 129,174 includes Student Fee Fund 10,753."}
   ]
 }

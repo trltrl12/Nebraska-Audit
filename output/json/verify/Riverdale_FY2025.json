@@ -1,9 +1,15 @@
 {
   "stem": "Riverdale_FY2025",
-  "values_checked": 29,
+  "values_checked": 36,
   "issues": [
-    {"severity": "warning", "path": "notes", "page": 1,
-     "extracted": null, "on_page": "County Treasurer Balance at October 1, 2024 $997.00; at September 30, 2025 648.84",
-     "issue": "The county treasurer balances printed below Exhibit A are outside the roll-forward, and the JSON doesn't record or mention them anywhere."}
+    {"severity": "warning", "path": "receipts[8].category", "page": 1,
+     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Water Fund) 30,307",
+     "issue": "Assumed utility charges; under the user's 2026-10-28 rule utility fund sales/charges are category Utility Charges, not charges for services/fees. The page doesn't say what the line is (label 'Other')."},
+    {"severity": "warning", "path": "receipts[9].category", "page": 1,
+     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Sewer Fund) 9,828",
+     "issue": "Same as the Water Fund line: should be Utility Charges if it really is utility charges. The printed label is only 'Other'."},
+    {"severity": "warning", "path": "balance_sheet.assets", "page": 1,
+     "extracted": null, "on_page": "County Treasurer Balance at September 30, 2025 648.84 (October 1, 2024 $997.00)",
+     "issue": "The county treasurer balance printed below Exhibit A is not recorded and not mentioned in notes. It is outside the line 24/28 balances, so leaving it out is defensible, but it isn't documented (Roca's extraction documents the same choice)."}
   ]
 }

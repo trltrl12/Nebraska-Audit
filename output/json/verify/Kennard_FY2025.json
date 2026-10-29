@@ -1,21 +1,12 @@
 {
   "stem": "Kennard_FY2025",
-  "values_checked": 193,
+  "values_checked": 190,
   "issues": [
-    {"severity": "warning", "path": "receipts[5].category", "page": 4,
-     "extracted": "other", "on_page": "Miscellaneous 19,319 (General 2,540, Auditorium & Park 5,708, Other Governmental 11,071 = Cemetery 1,628 + Fire 374 + Keno 9,069 per pp12-14)",
-     "issue": "Keno proceeds 9,069 are identifiable from the fund columns and the Keno Fund schedule (47% of the line, not a majority); the line could be split with split_from into keno/lottery 9,069 and other 10,250. Also detail[44] (Keno 'Miscellaneous') is keno/lottery while the same label is 'other' in receipts, which is inconsistent within the report"},
-    {"severity": "warning", "path": "detail[54].split_from", "page": 15,
-     "extracted": "Debt service 32,823 split 30,000 principal / 2,823 interest", "on_page": "Debt service 32,823 (one line on p15); principal 30,000 and interest 2,823 printed for the Water Fund on the cash flow statement p7",
-     "issue": "the split doesn't come from the budget schedule itself but from the cash flow statement for the same fund (it ties exactly). Budget 32,823 is dropped (budget_final null on both halves)"},
-    {"severity": "warning", "path": "detail[64].amount", "page": 16,
-     "extracted": 18464, "on_page": "Debt service 28,391 (p16); interest paid 18,465 and principal 9,927 (p7)",
-     "issue": "18,464 isn't printed anywhere: it is 28,391 less 9,927 (marked computed). p7 prints 18,465; the report has a 1 rounding difference between p16 and p7. Budget 28,392 dropped (budget_final null)"},
-    {"severity": "warning", "path": "missing", "page": 16,
-     "extracted": null, "on_page": "Sewer Fund Miscellaneous: budget 500, actual -",
-     "issue": "zero-actual line left out, while the zero-actual Cemetery capital outlay line (detail[35]) is included; no effect on totals"},
-    {"severity": "warning", "path": "ending_cash", "page": 4,
-     "extracted": 133930, "on_page": "Fund balances - ending 133,930 (p4); p3 shows cash 66,536, investments 53,353, due from other governments 16,180, bank overdraft (2,139)",
-     "issue": "beginning_cash/ending_cash are the modified-cash-basis fund balances, which include investments and 16,180 due from other governments and are net of the overdraft; explained in notes but this isn't strictly cash"}
+    {"severity": "error", "path": "receipts[6].category", "page": 6,
+     "extracted": "charges for services/fees", "on_page": "Charges for services 216,760 (proprietary funds: Water 132,409 + Sewer 84,351)",
+     "issue": "User rule 2026-10-28: utility fund sales/charges are category Utility Charges, not charges for services/fees. The matching Water and Sewer detail lines (detail[47], detail[57]) already use Utility Charges, so the statement line is miscategorized and inconsistent within the report."},
+    {"severity": "warning", "path": "receipts[3].category", "page": 4,
+     "extracted": "charges for services/fees 9,243", "on_page": "Charges for services: General 902 + Auditorium & Park 3,658 + Other Governmental (Cemetery) 4,683",
+     "issue": "Cemetery fees 4,683 are just over half of this line (50.7%; Cemetery Fund schedule p12), and Auditorium & Park 3,658 are recreation fees. Since 2026-10-28 Cemetery Fees and Recreation Fees are their own receipt categories, so the dominant-part rule would make this line Cemetery Fees, or it could be split by fund column. Judgment call."}
   ]
 }

@@ -1,21 +1,18 @@
 {
   "stem": "Inglewood_FY2025",
-  "values_checked": 31,
+  "values_checked": 34,
   "issues": [
+    {"severity": "warning", "path": "receipts[9]", "page": 1,
+     "extracted": "other 52,853.77 (General 28,902.36 + Street 23,951.41)", "on_page": "Local Receipts: Other - Street 23,951.41",
+     "issue": "The Street fund's 23,951.41 exactly equals the rise in its CD investments (572,810.03 to 596,761.44). It is very likely CD interest, which would make it Interest Income rather than other. Not labelled on the page."},
     {"severity": "warning", "path": "receipts[8].category", "page": 1,
-     "extracted": "other", "on_page": "Local Receipts: Other 95,791.29 (General 28,902.36, Street 23,951.41, Keno 42,937.52)",
-     "issue": "35% of governmental receipts sit in 'other'. The Keno Fund column (42,937.52) is very likely keno/lottery proceeds, and the Street column (23,951.41) equals exactly the increase in the Street CD (572,810.03 to 596,761.44), so it is likely interest. The page does not label them, so 'other' with review is defensible, but a person should decide."},
-    {"severity": "warning", "path": "report_discrepancies", "page": 1,
-     "extracted": "only the 100.00 difference (2,233.32 vs 2,333.32) recorded", "on_page": "Exhibit A line 20 puts the 2,333.32 transfer in under the General Fund (Keno column '-'), and line 50 also shows General transferring out 2,333.32; the p4 schedule says General to Keno",
-     "issue": "The General Fund shows the same 2,333.32 transfer both in and out, while the Keno Fund (the receiver per p4) shows none. Governmental totals are unaffected, but this fund-level inconsistency in the report is not recorded."},
-    {"severity": "warning", "path": "ending_investments", "page": 1,
-     "extracted": 596761.44, "on_page": "Line 27 Investments 596,761.44, included in line 28 subtotal 1,139,030.04",
-     "issue": "beginning_cash/ending_cash already include investments (line 3 / line 24), and beginning_investments/ending_investments repeat those amounts. Explained in notes, but anyone adding cash + investments would double count."},
-    {"severity": "warning", "path": "disbursements[2].original_label", "page": 3,
-     "extracted": "Community Development (Keno fund)", "on_page": "38 Community Development",
-     "issue": "Label adds '(Keno fund)', which is not printed. Row assignment confirmed: on the skewed scan the 43,397.22 in the Keno and Total columns lines up with row 38."},
-    {"severity": "warning", "path": "disbursements[3].original_label", "page": 3,
-     "extracted": "Debt Service (Bond fund)", "on_page": "39 Debt Service",
-     "issue": "Label adds '(Bond fund)', which is not printed. Row assignment confirmed (79,576.71 lines up with row 39). Principal and interest are not split; recorded as principal with review."}
+     "extracted": "keno/lottery", "on_page": "Local Receipts: Other - Keno Fund 42,937.52",
+     "issue": "keno/lottery is inferred from the fund name only; the line is not labelled keno proceeds. It is defensible and already has a review note."},
+    {"severity": "warning", "path": "disbursements[1].original_label", "page": 3,
+     "extracted": "Public Works - Streets", "on_page": "Street fund 45,389.14, scan tilted; the cell sits between line 32 (Public Works - Streets) and line 33 (Public Works - Other)",
+     "issue": "On the skewed scan, the Street column amount lines up more closely with line 33 'Public Works - Other'. The category (streets/highways) is the same either way, but the label may be wrong."},
+    {"severity": "warning", "path": "beginning_investments", "page": 1,
+     "extracted": "beginning_cash 1,093,423.34 and beginning_investments 572,810.03 (ending 1,139,030.04 / 596,761.44)", "on_page": "Line 3 subtotal includes line 2 investments",
+     "issue": "The cash balances already include the investments, and the investments are also filled in separately. The notes explain this, but downstream sums that add the two would double count."}
   ]
 }

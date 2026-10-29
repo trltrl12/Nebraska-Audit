@@ -1,21 +1,18 @@
 {
   "stem": "Davey_FY2025",
-  "values_checked": 34,
+  "values_checked": 44,
   "issues": [
-    {"severity": "warning", "path": "receipts[7].category", "page": 1,
-     "extracted": "other", "on_page": "Local Receipts: Other (General 42,528.35, Community Center 11,771.30, Improvement 9,596.67 p3)",
-     "issue": "Unlabeled 'other' line comes to about 49% of governmental receipts (over the 10% review threshold); nothing printed says what it is"},
+    {"severity": "warning", "path": "decision_needed", "page": 2,
+     "extracted": "voided duplicate noted only in notes", "on_page": "Exhibit A p1 duplicate crossed out with red X: Community Center Local Receipts: Other 11,983.45 (vs 11,771.30), ending 55,157.01, total ending 837,433.87",
+     "issue": "Two versions of Exhibit A page 1; the crossed-out one differs (and its line 24 55,157.01 disagrees with its own line 28 54,944.86). The unmarked page was correctly used, but the differing figures are recorded only in notes, not in report_discrepancies/decision_needed, so the user's review list doesn't show them"},
     {"severity": "warning", "path": "receipts[8].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Green Box 31,119.71 / Sewer 46,686.64 / Water 20,623.25)",
-     "issue": "Utility charges assumed from the fund columns (also applies to receipts[9] and receipts[10]); the page labels them only 'Local Receipts: Other'. original_label has fund names added in parentheses"},
+     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Green Box / Sewer / Water fund columns) 31,119.71 / 46,686.64 / 20,623.25",
+     "issue": "Utility fund collections; under the 2026-10-28 user rule utility fund sales/charges (incl. garbage) are category Utility Charges. Same for receipts[9] and receipts[10]"},
+    {"severity": "warning", "path": "disbursements[3].original_label", "page": 4,
+     "extracted": "Capital Improvements", "on_page": "Capital Improvements: General 16,227.48 + Street 38,414.10 = 54,641.58",
+     "issue": "Capital outlay line spans two functions (general government / streets); the user's 'Capital Outlay: <function>' label can't be applied to the combined line without a split by fund column, which the page does print"},
     {"severity": "warning", "path": "disbursements[4].category", "page": 4,
-     "extracted": "economic development", "on_page": "Community Development 20,972.08 (Community Center Fund column)",
-     "issue": "Paid from the Community Center Fund, so culture/recreation is plausible; already marked review"},
-    {"severity": "warning", "path": "beginning_cash", "page": 3,
-     "extracted": "Improvement Fund included as governmental", "on_page": "Improvement Fund 84,763.28 beginning / 94,359.95 ending, receipts 9,596.67 Local Receipts: Other",
-     "issue": "Fund type of the Improvement Fund is not stated; the extractor assumed governmental. Lagoon Equipment Replacement and Lagoon Emergency Reserve were assumed business-type (funded from Sewer), which looks reasonable"},
-    {"severity": "warning", "path": "report_discrepancies", "page": 2,
-     "extracted": null, "on_page": "Crossed-out duplicate of Exhibit A p1: Community Center Local Receipts: Other 11,983.45, Total Receipts 278,789.77, ending 837,433.87 (its own line 28 shows 837,221.72)",
-     "issue": "The voided page's differing figures are described only in notes, not in report_discrepancies (the rule for crossed-out duplicate pages asks for this). The unmarked page 1 was correctly used"}
+     "extracted": "economic development", "on_page": "Community Development 20,972.08 (Community Center Fund)",
+     "issue": "Paid from the Community Center Fund; could be culture/recreation (extractor flagged review)"}
   ]
 }

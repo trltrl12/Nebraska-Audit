@@ -1,15 +1,12 @@
 {
   "stem": "Utica_FY2025",
-  "values_checked": 140,
+  "values_checked": 152,
   "issues": [
-    {"severity": "warning", "path": "receipts[7].category", "page": 5,
-     "extracted": "donations/contributions", "on_page": "Grants and contributions 115,138",
-     "issue": "Statement of Activities (p2) shows these as operating grants and contributions to public safety (79,515), senior center (33,169) and environment/leisure (2,454). Senior center and fire grants may come from governments (area agency on aging, rural fire district/county), which would make them intergovernmental/state aid or federal grants. The report does not say where they come from. The same applies to the detail lines for Fire, Pool, Park and Senior Center grants."},
-    {"severity": "warning", "path": "detail[7].category", "page": 12,
-     "extracted": "other", "on_page": "Other revenues 35,754 (General department)",
-     "issue": "Statement of Activities (p3) shows governmental Insurance proceeds of 29,153 inside the fund statement's Other 48,082 (General 42,045). The General department's Other revenues line is probably mostly insurance proceeds (reimbursements/refunds), but the schedule doesn't break the line down, so other is kept."},
-    {"severity": "warning", "path": "detail[3].amount", "page": 12,
-     "extracted": 6480, "on_page": 6480,
-     "issue": "The amount is correct as printed. The General Fund Departments schedule prints TIF 6,480 and total interest 26,014, while the fund statement (p5) and budget schedule (p9) print 6,479 and 26,015. These are 1-dollar rounding differences in the report itself, mentioned in notes but not in report_discrepancies."}
+    {"severity": "error", "path": "receipts[12].category", "page": 7, "extracted": "charges for services/fees", "on_page": "Operating revenues: Sales 361,661 (Water and Sewer Fund sales)", "issue": "Utility fund sales belong in the user's Utility Charges receipt category (2026-10-28 rule), not charges for services/fees"},
+    {"severity": "error", "path": "detail[12].category", "page": 13, "extracted": "charges for services/fees", "on_page": "Pool - Charges for services 8,925", "issue": "Pool fees belong in the user's Recreation Fees receipt category (2026-10-28 rule); detail_category recreation/pool/park fees is right"},
+    {"severity": "error", "path": "detail[15].category", "page": 13, "extracted": "charges for services/fees", "on_page": "Park - Charges for services 268", "issue": "Park fees belong in the user's Recreation Fees receipt category (2026-10-28 rule)"},
+    {"severity": "warning", "path": "receipts[10].split_from", "page": 3, "extracted": "Other 48,082 split into reimbursements/refunds 29,153 + other 18,929", "on_page": "p5 fund statement prints only Other 48,082; p3 Statement of Activities general revenues print Insurance proceeds 29,153 and Miscellaneous 18,929", "issue": "Split uses the government-wide general revenue lines, not a printed breakdown of the fund statement's Other line; amounts tie exactly (48,082), so defensible, but the rule allows splits only from a breakdown of that line"},
+    {"severity": "warning", "path": "detail[73]", "page": 11, "extracted": "Senior center 120,889, health/welfare, not itemized", "on_page": "Senior center 120,889 (p11); p5 shows Senior Center Fund senior center 76,728 + capital outlay 44,161", "issue": "Budget schedule line includes 44,161 capital outlay per the fund statement; whole line categorised health/welfare"},
+    {"severity": "warning", "path": "detail[62].detail_category", "page": 10, "extracted": "other state aid", "on_page": "Street Fund Intergovernmental 136,694", "issue": "Street Fund intergovernmental is most likely highway allocation; report gives no breakdown"}
   ]
 }

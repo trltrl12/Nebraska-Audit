@@ -1,21 +1,15 @@
 {
   "stem": "Ravenna_FY2025",
-  "values_checked": 250,
+  "values_checked": 262,
   "issues": [
-    {"severity": "warning", "path": "detail[cemetery lines].category", "page": 16,
-     "extracted": "streets/highways", "on_page": "Cemetery department column (Salaries and benefits 27,495, Insurance 8,996, ... total 53,190)",
-     "issue": "category rules put cemetery under health/welfare; extractor followed the statement's 'Public works' line (53,190) so the function split ties. Judgment call (detail items with department 'Cemetery')"},
-    {"severity": "warning", "path": "detail[medical clinic lines].category", "page": 16,
-     "extracted": "general government", "on_page": "Medical Clinic department column (total 19,333)",
-     "issue": "medical clinic could be health/welfare; mapped to general government to tie to the statement's General government 467,673. Judgment call"},
+    {"severity": "warning", "path": "receipts[14].category", "page": 7,
+     "extracted": "charges for services/fees", "on_page": "Charges for services 754,015 (Water/Sewer/Trash enterprise funds)",
+     "issue": "Utility fund charges; the user's 2026-10-28 rule puts utility fund sales/charges (incl. trash) in Utility Charges, out of charges for services."},
+    {"severity": "warning", "path": "receipts[6].category", "page": 5,
+     "extracted": "charges for services/fees", "on_page": "Charges for services 145,809 (General Fund Departments p15-16: EMT 113,735, Pool 16,145, Cemetery 12,825, Library 2,954, Park 150)",
+     "issue": "About 78% is EMT (ambulance) charges; Ambulance Fees may be the better category under the user's 2026-10-28 rule (or keep with review)."},
     {"severity": "warning", "path": "receipts[7].category", "page": 5,
-     "extracted": "donations/contributions", "on_page": "Grants and donations 107,790; Statement of Activities shows operating grants and contributions 76,160 and capital grants 31,630 (p2-3)",
-     "issue": "grantor not stated; part may be governmental grants (intergovernmental or federal grants). Already marked review"},
-    {"severity": "warning", "path": "receipts[9].category", "page": 5,
-     "extracted": "other", "on_page": "Loan collections 49,406 (LB840 47,920, CDBG 1,486)",
-     "issue": "repayments of loans receivable; no category fits and they are recorded as revenue in 'other'. May need a person to decide whether they count as receipts"},
-    {"severity": "warning", "path": "ending_cash", "page": 4,
-     "extracted": 1529685, "on_page": "Cash and cash equivalents 1,529,685; Certificates of deposit 261,388; County treasurer cash 11,404 (Total Governmental Funds)",
-     "issue": "rule says cash and cash equivalents/investments; CDs and county treasurer cash (272,792) are left out of ending_cash and not put in ending_investments (noted in notes)"}
+     "extracted": "donations/contributions", "on_page": "Grants and donations 107,790 (operating grants 76,160 + capital grants 31,630, pp2-3)",
+     "issue": "Mixed grants and donations, grantors not stated; part may be governmental grants. Already marked review."}
   ]
 }

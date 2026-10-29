@@ -1,46 +1,18 @@
 {
   "stem": "Bellevue_FY2025",
-  "values_checked": 137,
+  "values_checked": 140,
   "issues": [
-    {
-      "severity": "error",
-      "path": "detail[7].category",
-      "page": 5,
-      "extracted": "other / miscellaneous revenue",
-      "on_page": "Miscellaneous and reimbursements 3,894,297",
-      "issue": "[fixed] The rules name 'Miscellaneous and reimbursements' as a mixed line that gets its dominant category plus review. It must not go to 'other'. On p4 (General Fund) Reimbursements 1,069,844 outweighs Miscellaneous 443,059, so the line should be reimbursements/refunds with detail_category reimbursements/refunds, and the review should name the mix."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[18]",
-      "page": 10,
-      "extracted": "LB840 schedule lines (investment income 89,605; economic development 13,508; transfers 750,000)",
-      "on_page": "Schedule of Revenues and Expenditures - LB840 Funds",
-      "issue": "Likely double counted with the General Fund budget schedule. The only governmental 'Restricted - Economic development' balance (2,982,415) sits in the General Fund column (p3), and LB840's ending balance of 2,415,152 fits inside it, which suggests LB840 is reported inside the General Fund. Applies to detail[18]-detail[20] and the LB840 detail_totals. Already marked review."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[1].category",
-      "page": 4,
-      "extracted": "other taxes",
-      "on_page": "Payments in-lieu of taxes and franchise taxes 1,473,417",
-      "issue": "Mixed line. In-lieu of tax looks dominant (p5 General Fund: in-lieu 851,413 vs franchise 532,508), so 'other taxes' is defensible. The review text says 'no single category fits' instead of naming the dominant part."
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[2].category",
-      "page": 4,
-      "extracted": "economic development",
-      "on_page": "Community development 4,605,293",
-      "issue": "Mapping 'Community development' to economic development is a judgment call. Same for detail[10] and detail[16]. Already marked review."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[5].category",
-      "page": 5,
-      "extracted": "charges for services/fees",
-      "on_page": "Permits, fees and licenses 10,316,690",
-      "issue": "Mixed line. Taking the dominant part from the p4 GAAP split (fees plus charges for services 8.4M vs permits 1.9M) is defensible. Already marked review."
-    }
+    {"severity": "error", "path": "receipts[12].category", "page": 8,
+     "extracted": "charges for services/fees", "on_page": "Waste Water Fund operating revenues: Charges for services 13,862,653",
+     "issue": "Utility fund charges should be category Utility Charges (user rule 2026-10-28)"},
+    {"severity": "warning", "path": "detail[5].category", "page": 5,
+     "extracted": "licenses and permits (detail_category other charges for services)", "on_page": "Permits, fees and licenses 10,316,690",
+     "issue": "Category and detail_category disagree; the line's own review says the dominant part is charges for services, so category charges for services/fees would match"},
+    {"severity": "warning", "path": "balance_sheet.liabilities[4..7].category", "page": 1,
+     "extracted": "Accrued Liabilities", "on_page": "Compensated absences - Payable within one year 4,300,000 / 120,000; Payable in more than one year 4,279,935 / 2,805",
+     "issue": "The user's '<X> - Due Within One Year / Due in More Than One Year' rule names Compensated Absences as its own category; the long-term portion in Accrued Liabilities is doubtful"},
+    {"severity": "warning", "path": "balance_sheet.liabilities[20..21].category", "page": 1,
+     "extracted": "debt - due within one year / debt - due in more than one year", "on_page": "Subscriptions payable - Payable within one year 18,274; Payable in more than one year 110,347",
+     "issue": "The user's due-date rule lists Subscriptions as its own category; printed wording is 'Payable' rather than 'Due', so it is a judgment call"}
   ]
 }

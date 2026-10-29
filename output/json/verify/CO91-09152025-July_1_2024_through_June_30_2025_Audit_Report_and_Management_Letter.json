@@ -1,18 +1,21 @@
 {
   "stem": "CO91-09152025-July_1_2024_through_June_30_2025_Audit_Report_and_Management_Letter",
-  "values_checked": 101,
+  "values_checked": 108,
   "issues": [
-    {"severity": "warning", "path": "detail[50].category", "page": 14,
+    {"severity": "warning", "path": "detail[0].source_page", "page": 5,
+     "extracted": 5, "on_page": "p5 prints only Taxes 4,131,556; the parts 3,614,456 / 181,226 / 335,874 are in the p4 General Fund column",
+     "issue": "Split lines cite a page that prints only the combined line (split_from names p4): GF taxes detail[0..2] cite p5; Road disbursement splits detail[29..31] (2,327,293 / 150,000 / 9,791) and Inheritance splits detail[34..35] (40,670 / 203,791) cite p6, but those amounts are printed only on p4"},
+    {"severity": "warning", "path": "detail[2].category", "page": 4,
+     "extracted": "other taxes", "on_page": "General Fund Taxes: Other 335,874; Statement of Activities p2: Nameplate Capacity 335,930, Other 32,068",
+     "issue": "The GF 'Other' tax line is almost certainly nameplate capacity tax (county-wide nameplate 335,930), but the report does not print it by fund, so other taxes is defensible (marked review)"},
+    {"severity": "warning", "path": "detail[48].detail_category", "page": 14,
+     "extracted": "other charges for services", "on_page": "Charges for Services 175,093 (Red Cloud Ambulance 101,345 + Blue Hill Ambulance 69,570, p14)",
+     "issue": "Nonmajor charges for services are about 98% ambulance fees (Ambulance Fees / ambulance/rescue fees category)"},
+    {"severity": "warning", "path": "detail[26].detail_category", "page": 6,
+     "extracted": "highway allocation", "on_page": "Intergovernmental 1,427,937 (Road Fund)",
+     "issue": "Highway allocation is assumed, not printed; the Road Fund intergovernmental line has no breakdown (marked review)"},
+    {"severity": "warning", "path": "detail[51].category", "page": 14,
      "extracted": "streets/highways", "on_page": "Public Works 81,852 (all Noxious Weed Fund, p14)",
-     "issue": "All of the nonmajor Public Works spending is Noxious Weed Fund, which the category rules put under natural resources/conservation. Judgment call because the report labels it Public Works."},
-    {"severity": "warning", "path": "detail[46].detail_category", "page": 14,
-     "extracted": "other charges for services", "on_page": "Charges for Services 175,093",
-     "issue": "170,915 of this is Red Cloud Ambulance 101,345 + Blue Hill Ambulance 69,570 (p14), so 'ambulance/rescue fees' is the dominant detail category."},
-    {"severity": "warning", "path": "detail[27].detail_category", "page": 6,
-     "extracted": "highway allocation", "on_page": "Road Fund Intergovernmental 1,427,937",
-     "issue": "Extractor assumption: the page does not say this is highway allocation."},
-    {"severity": "warning", "path": "detail[30].budget_final", "page": 6,
-     "extracted": null, "on_page": "Road Fund DISBURSEMENTS final budget 2,783,156; Inheritance Fund DISBURSEMENTS final budget 2,809,968",
-     "issue": "The single printed DISBURSEMENTS lines for the Road (detail[30]-[32]) and Inheritance (detail[35]-[36]) funds were split by function using the p4 fund columns. The split amounts add up (2,487,084; 244,461) and split_from is set, but the printed final budgets are now in no field."}
+     "issue": "The extractor rules put noxious weed control under natural resources/conservation; kept as streets/highways to match the statement's Public Works function"}
   ]
 }

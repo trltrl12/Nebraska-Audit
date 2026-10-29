@@ -1,21 +1,22 @@
 {
   "stem": "Potter_Dix_Public_Schools_FY2025",
-  "values_checked": 304,
+  "values_checked": 286,
   "issues": [
-    {"severity": "warning", "path": "receipts[0].category", "page": 2,
-     "extracted": "property tax 2,111,964.18", "on_page": "SoA Taxes Property 2,111,964.18 = GF 1100 2,052,232.14 + SB 1110 38,064.76 + SB 3131 Property tax credit 21,667.28 (p11)",
-     "issue": "The SoA split puts the Special Building property tax credit (21,667.28) under property tax, but detail records the same line as homestead/tax credits, which is state aid. Categories for the same money don't match. (The Interest line 68,059.03 likewise includes interest on taxes, 11,343.06 + 41.87.)"},
-    {"severity": "warning", "path": "disbursements[7].category", "page": 4,
-     "extracted": "instruction", "on_page": "State programs 22,730.35",
-     "issue": "The SoA (p2) lists State programs as its own function, not under Instruction, so 'instruction' is a judgment call (already marked review)."},
-    {"severity": "warning", "path": "disbursements[8].category", "page": 4,
-     "extracted": "instruction", "on_page": "Federal programs 156,571.89",
-     "issue": "The SoA (p2) lists Federal programs as its own function, not under Instruction, so 'instruction' is a judgment call (already marked review)."},
-    {"severity": "warning", "path": "detail[209].detail_category", "page": 17,
-     "extracted": "student activity receipts", "on_page": "Now interest 1,686.60",
-     "issue": "The account label says interest, so 'investment income' looks like the better category."},
-    {"severity": "warning", "path": "detail[215].detail_category", "page": 17,
-     "extracted": "student activity receipts", "on_page": "Policky scholarship MMA/CD 24,638.90; Scholarship savings 14,688.66; Scholarship CD's 428.45 (detail[215]-[217])",
-     "issue": "These three scholarship-account receipts add up to exactly 39,756.01, which equals Activities Fund '1510 Interest' on p9 (and the statement's Interest line counts it as interest). They are probably interest earnings and should be investment income, not activity receipts."}
+    {"severity": "error", "path": "balance_sheet.equity", "page": 4,
+     "extracted": "Statement of Net Position (p1): Restricted Special building 146,715.78 / Activities fund - scholarships 727,364.24; Unrestricted Depreciation 129,687.93 / Activities 223,855.62 / School nutrition 5,318.40 / General 1,904,819.80",
+     "on_page": "Governmental funds statement, Total Governmental Funds column (p4): Restricted fund balance 803,788.97; Committed -; Assigned fund balance 429,153.00; Unassigned fund balance 1,904,819.80; total 3,137,761.77 (assets 2,552,980.22 + 584,781.55)",
+     "issue": "user rule 2026-10-27 (cash basis): governmental balance-sheet lines come from the governmental funds statement of assets and fund balances (Total column, fund balance by classification) when its totals equal the government-wide figures, which they do here (3,137,761.77 on both). The balance sheet still uses the p1 Statement of Net Position; statement/scope/column and the equity lines should come from p4"},
+    {"severity": "warning", "path": "detail[205].category", "page": 17,
+     "extracted": "charges for services/fees", "on_page": "DI donations/world fund receipts 248.50",
+     "issue": "every other activity account receipt is Extracurricular Receipts; this one alone is charges for services/fees, and its label says donations (donations/contributions would also fit). The contra line detail[217] (-55,000) also has category charges for services/fees while the receipts it offsets are Extracurricular Receipts"},
+    {"severity": "warning", "path": "detail[214].category", "page": 17,
+     "extracted": "investment income", "on_page": "Policky scholarship MMA/CD 24,638.90; Scholarship savings 14,688.66; Scholarship CD's 428.45 (= 1510 Interest 39,756.01, p9)",
+     "issue": "these accounts make up the Activities Fund '1510 Interest', which the receipts list (receipts[15]) and the 'Now interest' line (detail[208]) categorize as Interest Income; under the user's rule (Interest Income for interest lines), detail[214]-detail[216] should probably be Interest Income too"},
+    {"severity": "warning", "path": "disbursements[15].original_label", "page": 4,
+     "extracted": "Capital outlay", "on_page": "Capital outlay 237,912.42",
+     "issue": "user rules 2026-10-26/28: capital outlay lines (including ones already in category capital outlay) are labelled 'Capital Outlay: <function>' with the printed text in printed_label; not applied here or on the Depreciation/Special Building capital outlay detail lines (detail[153], detail[175], detail[176])"},
+    {"severity": "warning", "path": "disbursements[1].amount", "page": 2,
+     "extracted": 93383.26, "on_page": "Statement of Activities Pupils 93,383.26; GF schedule 2100 Total support services - pupils 98,383.26 (p13)",
+     "issue": "the report removes the 5,000 transfer to Depreciation from Pupils on the Statement of Activities, but the schedule prints it under 2200 Staff ('650 Transfer to Depreciation - hardware', detail[148]), while Staff stays 88,678.68 on both. Recorded as printed and explained in notes; the function split of that 5,000 between Pupils and Staff is therefore inconsistent in the report itself"}
   ]
 }

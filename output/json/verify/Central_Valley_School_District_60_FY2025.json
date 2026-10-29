@@ -1,70 +1,15 @@
 {
   "stem": "Central_Valley_School_District_60_FY2025",
-  "values_checked": 344,
+  "values_checked": 255,
   "issues": [
-    {
-      "severity": "warning",
-      "path": "receipts[10].category",
-      "page": 7,
-      "extracted": "other",
-      "on_page": "Other 69,032 (General Fund column, p7) = 1311 Tuition from Individuals 2 + 1323 Tuition from Other Districts - SPED 36,200 + 1423 Transportation Fees - Other Districts - SPED 4,038 + 1910 Rental School Property 2,750 + 1965 Distance Education 21,992 + 1990 Miscellaneous 1,883 + 2210 ESU Receipts 2,167 (p11)",
-      "issue": "[fixed: now charges for services/fees with review] the General Fund budget schedule shows what this line is: 64,982 of 69,032 is tuition, fees, rentals and distance education. The dominant category is charges for services/fees (with review naming the mix), not other. The 'printed only as Other' review reason doesn't hold"
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[7].amount / receipts[8].amount / reported_totals.governmental.receipts",
-      "page": 7,
-      "extracted": "1188039 / 414665 / 10743658",
-      "on_page": "report page 20 (Activities Fund, Adjustments and Total Governmental Funds receipt columns) is not in the trimmed PDF",
-      "issue": "computed from the visible fund columns, assuming the Activities and Adjustments columns are 0 for these lines. The cross-check holds: SoA general receipts 9,353,918 + operating grants 1,389,740 = 10,743,658, and the p9 roll-forward reconciles. Still, the total column wasn't seen"
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[11].original_label / receipts[11].category",
-      "page": 17,
-      "extracted": "Activities Receipts (part of Other) / charges for services/fees",
-      "on_page": "1790 Activities Receipts 277,152 (p17); Other 346,184 (p4)",
-      "issue": "the split is supported (346,184 - General 69,032 = 277,152, printed on p17), but the label is extractor-made and the category for student activity receipts is a judgment call"
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[4].category",
-      "page": 4,
-      "extracted": "fines and forfeitures",
-      "on_page": "Fines and Licenses 26,049",
-      "issue": "mixed fines and licenses line; review flag present"
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[22].category / detail[87].category",
-      "page": 3,
-      "extracted": "debt service principal",
-      "on_page": "Debt Service 657,567",
-      "issue": "principal and interest aren't split on the page, so the whole amount is classed as principal; review flag present"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[76].detail_category / detail[77].detail_category",
-      "page": 15,
-      "extracted": "not itemized / not itemized",
-      "on_page": "4300 Architecture and Engineering 29,262; 4900 Other Facilities Construction 652,111",
-      "issue": "the labels describe the object (professional/contract services; construction/infrastructure), so not itemized is defensible but less specific"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[114].detail_category",
-      "page": 19,
-      "extracted": "student activity receipts",
-      "on_page": "Interest - Receipts 981 (activities account)",
-      "issue": "interest earned in the activities fund; investment income is arguable. The extractor noted its choice"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[55] / detail[56]",
-      "page": 13,
-      "extracted": "2710 Regular Pupil Transportation 226,627 (expenditure) + -300,000 (other financing)",
-      "on_page": "2710 Regular Pupil Transportation 526,627 (p13); Adjustments column (300,000) on Regular Pupil Transportation and on Transfers In (p9); Depreciation 5200 Transfers from General Fund 300,000 (p14)",
-      "issue": "hidden-transfer split done per the rules, with split_from/computed/review set and the arithmetic correct; listed for the user's review"
-    }
+    {"severity": "error", "path": "receipts[15].category", "page": 10,
+     "extracted": "charges for services/fees", "on_page": "School Nutrition Fund - Daily Sales 121,758 (1600 Daily Sales, p18)",
+     "issue": "These are school nutrition meal sales. The user rule (2026-10-28) gives lunch/meal/nutrition sales their own receipt category, School Lunch Sales, separate from charges for services. The same line in detail[89] has category charges for services/fees but detail_category school lunch sales, so the report is inconsistent with itself. Cedar Bluffs uses School Lunch Sales for its equivalent line."},
+    {"severity": "warning", "path": "reported_totals.governmental.receipts", "page": 7,
+     "extracted": 10743658, "on_page": "Report page 20 (Activities Fund / Adjustments / Total Governmental Funds columns for receipts) is not in the trimmed PDF: trimmed p7 = report p19, p8 = report p21",
+     "issue": "The printed Total Governmental Funds receipts column is not available. The total is computed from fund columns (and marked computed). It ties to the Statement of Activities (general receipts 9,353,918 + program receipts 1,389,740 = 10,743,658, pp3-4) and to the p9 roll-forward, but it cannot be checked against the printed Total column. Re-trimming to add report p20 would settle it."},
+    {"severity": "warning", "path": "detail[55].budget_final", "page": 13,
+     "extracted": 500000, "on_page": "2710 Regular Pupil Transportation: budget 500,000, actual 526,627",
+     "issue": "The budget for the whole printed line (526,627) is attached to the 226,627 spending part after the 300,000 hidden transfer is split out. Budget-vs-actual for this line is distorted."}
   ]
 }

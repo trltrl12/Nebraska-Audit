@@ -1,26 +1,18 @@
 {
   "stem": "Nelson_FY2025",
-  "values_checked": 152,
+  "values_checked": 162,
   "issues": [
-    {"severity": "warning", "path": "receipts[0].category", "page": 6,
-     "extracted": "property tax", "on_page": "General taxes 126,074 (no breakdown printed; detail lines on p14 likewise)",
-     "issue": "'General taxes' has no printed breakdown and may include motor vehicle tax. 'Taxes (unlabeled)' would also be defensible. Property tax is reasonable because franchise and sales tax have their own lines. Already marked review."},
-    {"severity": "warning", "path": "decision_needed", "page": 14,
-     "extracted": "Fire Maintenance Miscellaneous 256,954 recorded as receipts 'other'; no decision_needed entry",
-     "on_page": "Fire Maintenance Miscellaneous 256,954 vs Fire Maintenance capital outlay 255,652 (p14); Statement of Activities p4 also shows Gain on disposal of capital assets 41,147",
-     "issue": "This unexplained receipt is about 30% of governmental revenue and almost exactly matches the fire department's capital outlay. It may be loan/lease proceeds, an insurance recovery, a grant or donation, or trade-in proceeds. If it is financing, it belongs in debt_proceeds/other_financing, not receipts. A person should decide."},
     {"severity": "warning", "path": "receipts[5].category", "page": 6,
-     "extracted": "intergovernmental/state aid", "on_page": "Rural fire support 49,108 (operating grants, Public Safety, p3)",
-     "issue": "The receipt rules list rural fire contracts under charges for services/fees. The Statement of Activities shows this line as an operating grant, so intergovernmental is defensible. The same applies to detail[10] (county/other local governments). Already marked review."},
-    {"severity": "warning", "path": "detail[34].category", "page": 14,
-     "extracted": "economic development", "on_page": "Library column: Community Development 30,223; Community Center column: Community Development 15,533 (detail[33])",
-     "issue": "The schedule's function label is followed, and that ties to the statement's 'Community development' line (disbursements[5], 73,306). But library and community-center spending is culture/recreation under the rules. Already marked review for the Library line."},
-    {"severity": "warning", "path": "disbursements[28].category", "page": 10,
-     "extracted": "debt service interest", "on_page": "Debt service 11,826 (Sewer operating expense)",
-     "issue": "No principal/interest split is printed. Interest is likely, because principal payments of 14,450 appear separately in the cash flow statement (p11). Still an assumption; already marked review."},
-    {"severity": "warning", "path": "report_discrepancies", "page": 14,
-     "extracted": "only the State aid row rounding (60,828 vs 60,827) recorded for p14",
-     "on_page": "Column totals: General Department revenues 180,567 vs lines 180,566; Street 127,143 vs 127,144; Park and Recreation 49,559 vs 49,560; General Department expenditures 151,148 vs 151,147",
-     "issue": "Each of these printed department-column totals differs from its lines by $1 (rounding in the report). The overall detail totals are unaffected."}
+     "extracted": "intergovernmental/state aid", "on_page": "Rural fire support 49,108",
+     "issue": "Extractor rules list rural fire contracts under charges for services/fees. The Statement of Activities (p3) shows this as an operating grant, so state aid / county-other-local is defensible, but the user should confirm. Same for detail[10]."},
+    {"severity": "warning", "path": "receipts[7].category", "page": 6,
+     "extracted": "charges for services/fees", "on_page": "Community center receipts 9,385",
+     "issue": "Community center receipts are usually hall rental. They could fall under the user's Rentals category, but the page doesn't say. Same for detail[16]."},
+    {"severity": "warning", "path": "disbursements[19].amount", "page": 10,
+     "extracted": 21202, "on_page": "Insurance: Light 7,765 + Water 6,557 + Sewer 6,209 + Compactor 670 = 21,201; Totals 23,396 - Orner 2,194 = 21,202",
+     "issue": "The printed row doesn't crossfoot by 1, and the same is true for Utilities (utility columns 17,096 vs 17,097 derived, disbursements[23]) and Sales tax (column sum 54,932 vs Totals 54,933). These are rounding differences in the report itself and aren't listed in report_discrepancies. The JSON amounts tie to the printed Totals."},
+    {"severity": "warning", "path": "decision_needed", "page": 14,
+     "extracted": "receipts[9] other 303,195 (incl. Fire Maintenance Miscellaneous 256,954)", "on_page": "Fire Maintenance Department Miscellaneous 256,954; Capital outlay 255,652",
+     "issue": "An unexplained 'Miscellaneous' receipt of 256,954 (about 30% of governmental revenue) almost exactly matches the fire department's 255,652 capital outlay. It may be loan proceeds, a grant or donation, or a trade-in or sale (the Statement of Activities p4 shows a 41,147 gain on disposal). It's recorded as other with a review note, but there is no decision_needed entry."}
   ]
 }

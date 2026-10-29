@@ -1,21 +1,18 @@
 {
   "stem": "Seward_County_FY2025",
-  "values_checked": 116,
+  "values_checked": 123,
   "issues": [
+    {"severity": "warning", "path": "receipts[6]", "page": 2,
+     "extracted": "Miscellaneous 2,578,990 (other)", "on_page": "Statement of Activities general receipts: Health Insurance Settlements 21,020 + Miscellaneous 2,557,970 = 2,578,990; the 21,020 is the Opioid Recovery Fund 'Miscellaneous' (p21)",
+     "issue": "the report itself prints a breakdown of this line; the 21,020 settlement receipt could be split out (split_from p2) instead of sitting in other. Same 21,020 is inside detail[55] (nonmajor Miscellaneous 70,685)"},
     {"severity": "warning", "path": "detail[27].category", "page": 5,
      "extracted": "other", "on_page": "Abandoned Cemetery 4,200",
-     "issue": "Cemetery spending belongs in health/welfare under the disbursement category rules. The extractor used 'other' so the line ties to the p4 'Miscellaneous' function column, which is defensible but is a last-resort category."},
-    {"severity": "warning", "path": "receipts[1].category", "page": 16,
-     "extracted": "taxes (unlabeled) 10,246,640", "on_page": "Nonmajor Taxes 675,650 = Justice Center Debt Service Fund 615,632 (p15) + Visitors Promotion Fund 30,009 (p15) + Visitors Improvement Fund 30,009 (p16)",
-     "issue": "The Inheritance Fund column was split out by fund column, but the nonmajor taxes are also printed by fund. The visitor-promotion funds' 60,018 is very likely lodging tax and the debt-service fund's 615,632 is likely property tax. The split was not applied consistently. The same applies to detail[51] (Nonmajor 'Taxes' 675,650, taxes (unlabeled), p21)."},
+     "issue": "cemetery spending normally maps to health/welfare; the statement (p4) counts it in its Miscellaneous function, and a user category_decision is attached, so left as a judgment call"},
     {"severity": "warning", "path": "receipts[0].original_label", "page": 4,
      "extracted": "Taxes (Inheritance Fund column)", "on_page": "Taxes",
-     "issue": "The label is annotated rather than copied as printed. receipts[1] 'Taxes (all other funds)' has the same problem."},
-    {"severity": "warning", "path": "receipts[6].category", "page": 2,
-     "extracted": "other (Miscellaneous 2,578,990)", "on_page": "Statement of Activities General Receipts: Health Insurance Settlements 21,020; Miscellaneous 2,557,970",
-     "issue": "'other' is 11.6% of governmental receipts. 2,398,135 of it is the Health Insurance Fund (self-insurance premium contributions, not labelled). The 21,020 is the Opioid Recovery Fund settlement (p21), which p2 shows separately as settlements. decision_needed already covers recategorizing this."},
-    {"severity": "warning", "path": "detail[32].detail_category", "page": 6,
-     "extracted": "other state aid", "on_page": "Road Fund Intergovernmental 2,921,110",
-     "issue": "This is probably the highway allocation (p2 shows Public Works operating grants 3,250,603). The page does not say so. The extractor marked it for review."}
+     "issue": "label is descriptive, not as printed (receipts[1] 'Taxes (all other funds)' likewise); the split by fund column is marked split_from/computed and adds to 11,009,457"},
+    {"severity": "warning", "path": "report_discrepancies[0].check", "page": 6,
+     "extracted": "schedule lines vs total", "on_page": "Inheritance Fund: Taxes 762,817, TOTAL RECEIPTS 827,219",
+     "issue": "discrepancy is real (difference 64,402 = Intergovernmental 49,199 + Charges 15,203 on p4) but 'check' is not one of business|reconcile|balance|totals|detail"}
   ]
 }

@@ -1,62 +1,11 @@
 {
   "stem": "Ashland_Greenwood_Public_School_FY2025",
-  "values_checked": 206,
+  "values_checked": 205,
   "issues": [
-    {
-      "severity": "warning",
-      "path": "detail_totals[13].amount",
-      "page": 22,
-      "extracted": 325776,
-      "on_page": "Interest 59 + Activities receipts 246,212 + Other local receipts 79,504 = 325,775; Total receipts printed 325,776",
-      "issue": "[fixed: recorded in report_discrepancies] The Activities Fund receipt lines add to 325,775 but the printed total is 325,776 (a $1 rounding gap on the page). This is not recorded in report_discrepancies. The other $1 gaps were recorded, but this one was missed."
-    },
-    {
-      "severity": "warning",
-      "path": "balance_sheet.total_equity.amount",
-      "page": 3,
-      "extracted": 5002934,
-      "on_page": "Debt services 2,022,680 + Capital outlay 2,687,579 + Nutrition Program 121,584 + Unrestricted 171,090 = 5,002,933; TOTAL NET POSITION printed 5,002,934",
-      "issue": "[fixed: recorded in report_discrepancies] The net position lines add to 5,002,933, $1 short of the printed total. This is not recorded in report_discrepancies (check 'balance'). The same $1 gap appears in the total column on p5 (ending fund balances 3,032 + 2,687,579 + 2,022,680 + 289,642 = 5,002,933) and on p6 (fund balances add to 5,002,933)."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[13].category",
-      "page": 4,
-      "extracted": "intergovernmental/state aid",
-      "on_page": "County fines and license fees 106,236",
-      "issue": "The label says fines and license fees, and the Statement of Activities (p2) groups it as 'Licenses and fines' 107,086 (= 850 + 106,236). 'fines and forfeitures' fits the label. The extractor flagged it for review."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[14].category",
-      "page": 11,
-      "extracted": "intergovernmental/state aid / county/other local governments",
-      "on_page": "2110 County fines and license fees 99,760",
-      "issue": "Same judgment call as receipts[13]. 'fines and forfeitures' fits the label. It also has no review flag here, though the matching top-level line has one."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[6].category",
-      "page": 4,
-      "extracted": "other",
-      "on_page": "Other local receipts 169,738 (printed under the Taxes heading)",
-      "issue": "The fund schedules show what this is: Activities Fund other local receipts 79,504 (p22), Special Building other local receipts 74,164 (p19), General Fund postsecondary/misc/transport fees/private grants 13,606 (p11), School Nutrition other receipts 2,463 (p20). Leaving it in 'other' with review is defensible, since no single category is clearly dominant."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[110].section",
-      "page": 19,
-      "extracted": "revenue / other / miscellaneous revenue",
-      "on_page": "Other financing sources 2,066 (inside Total receipts 110,336)",
-      "issue": "Printed as 'Other financing sources'. It could be section 'other financing', but p4 counts it inside Total receipts as Other nonrevenue receipts, so recording it as revenue with review is defensible."
-    },
-    {
-      "severity": "warning",
-      "path": "missing",
-      "page": 23,
-      "extracted": null,
-      "on_page": "Flex Benefit Fund: Employee contributions 97,027; Interest 62; Total receipts 97,089; Employee claims 100,434",
-      "issue": "Left out on purpose: the fund is not in the governmental funds statements or the net position totals (it is likely fiduciary or agency in nature). The notes explain this. Listed only so the omission is visible."
-    }
+    {"severity": "error", "path": "detail[114].category", "page": 20, "extracted": "reimbursements/refunds", "on_page": "Non-reimbursable sales 230,754 (School Nutrition Fund)", "issue": "These are a la carte meal sales, not reimbursements (p4 Meal sales 382,800 = lunch 114,103 + breakfast 37,943 + non-reimbursable sales 230,754). Category should be School Lunch Sales, matching its own detail_category."},
+    {"severity": "warning", "path": "disbursements[1]", "page": 5, "extracted": "support services / Pupils 1,636,946", "on_page": "Student support services: General Fund 1,286,060 + Other Governmental Funds 350,886 (p10: Student Fee Fund 23,622 + Activities Fund 327,265)", "issue": "Statement line includes 350,886 of activities/student fee fund spending that the detail records as student activities; the fund columns print the breakdown, so a split (split_from) was possible. Judgment call."},
+    {"severity": "warning", "path": "receipts[22]", "page": 4, "extracted": "Extracurricular Receipts 261,320", "on_page": "Student activities 261,320 = Activities Fund 246,212 + Student Fee Fund 15,108 (p9), which p21 labels Postsecondary education", "issue": "About 15,108 of the line is postsecondary tuition (Tuition Received); kept whole under Extracurricular Receipts. Minor; judgment call."},
+    {"severity": "warning", "path": "detail[110].section", "page": 19, "extracted": "revenue (other)", "on_page": "Other financing sources 2,066 (inside Special Building Fund Total receipts; p4 shows it in Other nonrevenue receipts)", "issue": "Printed label says other financing sources; recorded as revenue line because the statement counts it as a receipt. Could belong in section other financing; review note present."},
+    {"severity": "warning", "path": "missing", "page": 23, "extracted": null, "on_page": "Flex Benefit Fund: Employee contributions 97,027, Interest 62, Total receipts 97,089; Employee claims 100,434", "issue": "Schedule lines on p23 not in the JSON; the extractor left them out because the fund is not in the governmental funds statements or the net position total (explained in notes). Probably correct (employee-held benefit fund), but a person should confirm."}
   ]
 }

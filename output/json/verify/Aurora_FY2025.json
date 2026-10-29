@@ -1,54 +1,36 @@
 {
   "stem": "Aurora_FY2025",
-  "values_checked": 220,
+  "values_checked": 232,
   "issues": [
-    {
-      "severity": "warning",
-      "path": "detail[28].outside_printed_total",
-      "page": 16,
-      "extracted": null,
-      "on_page": "OTHER FINANCING SOURCES (USES): Transfers in 447 (printed below Total revenues 4,238,156 and Total expenditures)",
-      "issue": "[fixed: outside_printed_total set] the newly added transfer is correct (447, + sign, other financing), but General's detail_totals revenue entry has includes ['other financing'] (because Loan proceeds 323,805 is inside Total revenues). This transfer is printed outside that total, so it needs outside_printed_total: true. Without it, General revenue + other financing = 4,238,156 + 447 - 908,500 = 3,330,103, not the printed 4,238,156"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[29].outside_printed_total",
-      "page": 16,
-      "extracted": null,
-      "on_page": "Transfers out (908,500) (printed below the totals)",
-      "issue": "[fixed: outside_printed_total set] amount -908,500 is correct, but the line is outside the printed total and needs outside_printed_total: true (see detail[28])"
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[9].category",
-      "page": 5,
-      "extracted": "donations/contributions",
-      "on_page": "Grants and contributions 554,899 (p2: General government Operating Grants and Contributions 554,462; capital grants 437)",
-      "issue": "grantor not stated, so it may be government grants. The 437 CDBG part is categorized federal grants in detail[104], so the same label gets two categories. Already marked review (same for detail[11])"
-    },
-    {
-      "severity": "warning",
-      "path": "ending_cash",
-      "page": 4,
-      "extracted": 4298911,
-      "on_page": "Cash and cash equivalents 4,298,911; County treasurer cash 62,193",
-      "issue": "governmental ending_cash leaves out the 62,193 county treasurer cash printed on the same balance sheet; an assumption"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[89].category",
-      "page": 11,
-      "extracted": "debt service principal",
-      "on_page": "Debt service 176,313",
-      "issue": "budget-schedule 'Debt service' lines (also detail[96] 513,675 p12, detail[101] 83,837 p13) combine principal and interest; already marked review"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[50].detail_category",
-      "page": 16,
-      "extracted": "equipment purchases",
-      "on_page": "Fire - Capital outlay 5,602",
-      "issue": "object not stated (Library capital outlay detail[71] uses 'not itemized'); assumption, already marked review"
-    }
+    {"severity": "error", "path": "receipts[13].category", "page": 7,
+     "extracted": "charges for services/fees", "on_page": "Sales 2,957,530 (Water/Sewer/Sanitation enterprise funds)",
+     "issue": "User rule 2026-10-28: utility fund sales and charges (including sanitation) are category Utility Charges, not charges for services/fees."},
+    {"severity": "error", "path": "detail[9].category", "page": 17,
+     "extracted": "charges for services/fees", "on_page": "Cemetery - Charges for services 12,510",
+     "issue": "detail_category is 'cemetery fees', but category should be Cemetery Fees (user rule: own receipt category out of charges for services)."},
+    {"severity": "error", "path": "detail[10].category", "page": 17,
+     "extracted": "charges for services/fees", "on_page": "Parks and Recreation - Charges for services 87,835",
+     "issue": "detail_category is 'recreation/pool/park fees', but category should be Recreation Fees (user rule)."},
+    {"severity": "error", "path": "detail[97].category", "page": 13,
+     "extracted": "charges for services/fees", "on_page": "EMS Fund - Charges for services 841,358",
+     "issue": "detail_category is 'ambulance/rescue fees', but category should be Ambulance Fees (user rule)."},
+    {"severity": "error", "path": "detail[106].category", "page": 15,
+     "extracted": "charges for services/fees", "on_page": "Permanent Fund Perpetual Care - Charges for services 10,150",
+     "issue": "detail_category is 'cemetery fees', but category should be Cemetery Fees (user rule)."},
+    {"severity": "warning", "path": "receipts[8].category", "page": 5,
+     "extracted": "charges for services/fees", "on_page": "Charges for services 951,853 = EMS 841,358 + General 100,345 (cemetery 12,510, parks 87,835) + Perpetual Care 10,150",
+     "issue": "88% of this line is ambulance fees (EMS Fund), so Ambulance Fees could be the dominant category, or the line could be split by fund column. It has no review note naming the mix."},
+    {"severity": "warning", "path": "receipts[9].category", "page": 5,
+     "extracted": "donations/contributions", "on_page": "Grants and contributions 554,899 (incl. CDBG 437)",
+     "issue": "The grantor isn't stated, so this may be government grants. The 437 CDBG part is federal grants in detail[104], so the same label gets two categories. Already in decision_needed."},
+    {"severity": "warning", "path": "ending_cash", "page": 4,
+     "extracted": 4298911, "on_page": "Cash and cash equivalents 4,298,911; County treasurer cash 62,193",
+     "issue": "Governmental ending_cash leaves out the 62,193 county treasurer cash printed on the same balance sheet (the notes say so); this is an assumption."},
+    {"severity": "warning", "path": "detail[88].original_label", "page": 11,
+     "extracted": "Capital outlay", "on_page": "Street Fund - Capital outlay 1,351,144",
+     "issue": "User rule: capital outlay lines are labelled 'Capital Outlay: <function>' (here Streets and Highways) with the printed text in printed_label. It is applied to the General Fund department lines but not here or to detail[113] (Capital Projects 114,727)."},
+    {"severity": "warning", "path": "detail[41].detail_category", "page": 16,
+     "extracted": "salaries and wages", "on_page": "Salaries and benefits (all departments)",
+     "issue": "Combined salaries and benefits recorded as salaries and wages (marked review on each department line); an assumption."}
   ]
 }

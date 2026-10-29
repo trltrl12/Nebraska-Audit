@@ -1,12 +1,13 @@
 {
   "stem": "Kearney_County_FY2025",
-  "values_checked": 95,
+  "values_checked": 122,
   "issues": [
-    {"severity": "warning", "path": "receipts[5].category", "page": 4,
-     "extracted": "other", "on_page": "Local 863,660",
-     "issue": "'Local' recorded as 'other' (with review). The Statement of Activities (p2) shows what it is made of: charges for services 391,003, interest income 256,875, central communications fee 86,658, miscellaneous 126,466. These can't be tied exactly to the 863,660 line, so a split would not be allowed, but most of it is charges/fees and interest, not unidentified money. Same issue for the 'Local' detail lines detail[2] (740,586), detail[36] (27,685) and detail[45] (95,389)."},
-    {"severity": "warning", "path": "detail[37].category", "page": 9,
-     "extracted": "streets/highways (2,594,034 not itemized)", "on_page": "DISBURSEMENTS 2,594,034; statement p4 Road Fund column: Public works 1,938,326, Capital outlay 655,708",
-     "issue": "All Road Fund disbursements are put under streets/highways, but the p4 Road column puts 655,708 under capital outlay, so the detail's function split doesn't tie to the statement. The Debt Service line, by contrast, was split using its p4 fund column (detail[41]/[42], split_from marked; the arithmetic 740,000 + 117,493 = 857,493 is correct). The two funds should be handled the same way, one way or the other."}
+    {"severity": "warning", "path": "receipts[5].split_from", "page": 2,
+     "extracted": "Local 863,660 split 391,003 / 256,875 / 86,658 / 126,466 / residual 2,658",
+     "on_page": "p4 Local 863,660; p2 Charges for services 391,003, Interest income 256,875, Central communications fee 86,658, Miscellaneous 126,466",
+     "issue": "The Statement of Activities does not print a breakdown of the Local line itself: its receipts total 7,411 less than p4, and charges for services 391,003 probably include the 4,753 Preservation & Modernization intergovernmental receipt (p4 intergovernmental 2,798,296 vs p2 2,686,091 + 107,452 = 2,793,543). The split is allowed by the county rule but does not tie, and the 2,658 residual (receipts[9]) is a plug"},
+    {"severity": "warning", "path": "detail[2].category", "page": 8,
+     "extracted": "other", "on_page": "Local 740,586 (also Road Local 27,685 p9, Non-Major Local 95,389 p7)",
+     "issue": "The statement's Local line is split into charges/interest/fees in receipts, but the same 'Local' label in detail is all 'other'. The Non-Major Local 95,389 is mostly the Central Communications Fund 86,628 (communications fee). The categories are inconsistent within the report"}
   ]
 }

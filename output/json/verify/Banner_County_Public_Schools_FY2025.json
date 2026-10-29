@@ -1,46 +1,18 @@
 {
   "stem": "Banner_County_Public_Schools_FY2025",
-  "values_checked": 260,
+  "values_checked": 187,
   "issues": [
-    {
-      "severity": "warning",
-      "path": "detail[50].amount",
-      "page": 6,
-      "extracted": -289086,
-      "on_page": -289066,
-      "issue": "[fixed: amount now 289,066 as printed] 9000 Interfund Loan Repayment is printed as 289,066. The page's own subtotal 50,000 + 289,066 = 339,066 and the total 4,313,503 + 339,066 = 4,652,569 both confirm it. On p4 the General column subtotal also checks: 375,541 - 50,000 - 289,066 + 200,000 = 236,475 printed."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[93].amount",
-      "page": 11,
-      "extracted": 289086,
-      "on_page": 289066,
-      "issue": "[fixed: amount now 289,066 as printed] 9003 Interfund Loan is printed as 289,066. The page confirms it: 461,617 - 623,717 + 289,066 = 126,966 ending balance printed. So does p4: -365,545 + 289,066 = -76,479. The notes also quote 289,086 incorrectly."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[5].category",
-      "page": 5,
-      "extracted": "intergovernmental/state aid",
-      "on_page": "1925 Other Categorical Grants 500 (under Local Sources)",
-      "issue": "The line is printed under Local Sources, so the grantor is probably local or private (donations/contributions), not the state. It is already marked for review. detail[5] has the same issue."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[20].category",
-      "page": 5,
-      "extracted": "fines and forfeitures",
-      "on_page": "2110 Fines and Licenses 48,602",
-      "issue": "The line mixes fines and licenses. Under the mixed-line rule it should keep the dominant category (fines) and add a 'review' naming the mix. No review flag is set here or on detail[7]."
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[10].category",
-      "page": 4,
-      "extracted": "capital outlay",
-      "on_page": "Operation & Maintenance of Plant, Special Building Fund column 451,017",
-      "issue": "The printed function is Operation & Maintenance of Plant (support services). The extractor moved it to capital outlay based on Exhibit K (p11): 442,184 Capital Improvements plus 773 of 2620 Purchased Services, 6,322 Supplies and 1,738 Other. The fund-column split matches the printed numbers and is marked for review. The category change is a judgment call."
-    }
+    {"severity": "error", "path": "receipts[18].category", "page": 11,
+     "extracted": "charges for services/fees", "on_page": "1910 Teacherage Rental 16,890",
+     "issue": "rental income belongs in the user's Rentals category (2026-10-28); the matching detail[83] already uses Rentals, so the report is inconsistent"},
+    {"severity": "error", "path": "detail[56].category", "page": 8,
+     "extracted": "reimbursements/refunds", "on_page": "1620 Non-Reimbursable Programs 1,310",
+     "issue": "these are sales of non-reimbursable meals, not reimbursements. The matching statement split receipts[9] is School Lunch Sales and this line's own detail_category is school lunch sales"},
+    {"severity": "warning", "path": "receipts[5].category", "page": 5,
+     "extracted": "intergovernmental/state aid", "on_page": "1925 Other Categorical Grants 500 (under Local Sources)",
+     "issue": "state code 1925 is categorical grants from corporations and other private interests, which points to donations/contributions (also detail[5]); already in decision_needed"},
+    {"severity": "warning", "path": "disbursements[10].category", "page": 4,
+     "extracted": "capital outlay 451,017 (split by fund column)", "on_page": "Operation & Maintenance of Plant, Special Building column 451,017",
+     "issue": "the statement prints this under Operation & Maintenance of Plant. Most of it is p11 4700 Capital Improvements 442,184, but it includes 2620 Purchased Services 773 (Building and Grounds in detail). The category is a defensible judgment and is marked review"}
   ]
 }

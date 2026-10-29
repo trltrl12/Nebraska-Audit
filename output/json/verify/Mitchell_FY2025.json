@@ -1,70 +1,27 @@
 {
   "stem": "Mitchell_FY2025",
-  "values_checked": 233,
+  "values_checked": 248,
   "issues": [
-    {
-      "severity": "error",
-      "path": "detail[136].original_label",
-      "page": 16,
-      "extracted": "Meetings, seminars, and dues (detail_category dues, training and travel)",
-      "on_page": "Transportation 1,980 (Cemetery column)",
-      "issue": "[fixed] Cemetery 1,980 is on the Transportation row, not Meetings, seminars, and dues. Row totals confirm it: Meetings total 16,552 has no Cemetery amount, and Transportation total 19,710 = 11,994 + 5,689 + 47 + 1,980. The label and detail_category are wrong (should be Transportation / fuel, as used for the other Transportation lines). The amount is correct."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[133..140].category",
-      "page": 5,
-      "extracted": "health/welfare",
-      "on_page": "Public works 64,261 (General Fund column, p5)",
-      "issue": "The report counts the Cemetery department in Public works: Cemetery total 67,234 less principal 2,973 = 64,261 = General Fund Public works on p5. The detail calls Cemetery health/welfare, so the General Fund function split doesn't tie to the statement. Also, receipts-side disbursements[2] 'Public works' 323,156 (streets/highways) includes this 64,261 of cemetery spending."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[77,98,99,100,116,140].category",
-      "page": 15,
-      "extracted": "department function (general government / public safety / culture/recreation / health/welfare)",
-      "on_page": "Capital outlay, Principal payments on debt, Interest on long-term debt rows in the department columns",
-      "issue": "The p5 statement reports these as separate Capital outlay / Principal / Interest functions (General government 310,891 = Admin 314,281 - 12,930 + Unemployment 9,540; Public safety 528,686 = 573,219 - 15,000 - 27,649 - 1,884). Putting them under the department function stops the function totals tying, and the Street Fund and nonmajor detail use capital outlay / debt service categories for the same kind of line."
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[8..21].category",
-      "page": 9,
-      "extracted": "utilities",
-      "on_page": "Total Enterprise column includes Golf Fund (expenses 314,724, p2/p9)",
-      "issue": "Every object line in the enterprise total column is categorized utilities, but Golf (culture/recreation) is 314,724 of the 3,068,746."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[16].category",
-      "page": 9,
-      "extracted": "occupation/franchise tax 120,000",
-      "on_page": "Nonoperating: Franchise fees 120,000 (Golf Fund only)",
-      "issue": "The enterprise funds also pay 333,000 of franchise fees as an operating expense (Electric 249,750, Water 56,610, Trash 26,640). The Golf Fund's 120,000 looks like an internal payment from other city funds, not a tax, and may be a transfer in substance. A person should decide; decision_needed is empty."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[6].category",
-      "page": 5,
-      "extracted": "donations/contributions",
-      "on_page": "Grants and contributions 22,000 (Operating Grants and Contributions, public safety, p2)",
-      "issue": "The grantor isn't stated, so this could be a government grant (state aid / federal grants). Already marked review."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[*].detail_category (Salaries and benefits lines)",
-      "page": 15,
-      "extracted": "salaries and wages",
-      "on_page": "Salaries and benefits",
-      "issue": "This line mixes wages and benefits, and it is recorded as salaries and wages with no review flag on the lines (mentioned only in notes)."
-    },
-    {
-      "severity": "warning",
-      "path": "proprietary",
-      "page": 10,
-      "extracted": null,
-      "on_page": "Statement of Cash Flows - Proprietary Funds, Total: operating 34,873; noncapital 0; capital and related (182,079); investing 109,026; beginning cash 1,752,705; ending 1,714,525",
-      "issue": "The extractor assumed a basis: it treated the report as cash basis because the governmental funds are modified cash, so it left out the accrual-basis proprietary cash-flow statement. This is defensible but is an assumption."
-    }
+    {"severity": "warning", "path": "receipts[13].category", "page": 9,
+     "extracted": "charges for services/fees", "on_page": "Sales 2,562,475 (Total enterprise funds; Electric/Water/Sewer/Trash 2,382,014 + Golf 180,461)",
+     "issue": "user rule 2026-10-28 puts utility fund sales in Utility Charges; the line is mostly utility sales (Golf 180,461 would be Recreation Fees), so charges for services/fees is questionable"},
+    {"severity": "warning", "path": "detail[133].category", "page": 16,
+     "extracted": "health/welfare", "on_page": "Cemetery department (expenditures 67,234 less principal 2,973 = 64,261)",
+     "issue": "the governmental funds statement (p5) counts the General Fund Cemetery department as 'Public works' 64,261; all Cemetery expenditure lines (detail[133]-[139]) are health/welfare, so the detail function split does not tie to the statement's function lines"},
+    {"severity": "warning", "path": "detail[44].category", "page": 16,
+     "extracted": "charges for services/fees", "on_page": "Rescue - Charges for services 29,599",
+     "issue": "user rule 2026-10-28: ambulance/rescue fees are category Ambulance Fees (detail_category already ambulance/rescue fees)"},
+    {"severity": "warning", "path": "detail[54].category", "page": 16,
+     "extracted": "charges for services/fees", "on_page": "Pool - Charges for services 5,267",
+     "issue": "user rule 2026-10-28: pool fees are category Recreation Fees"},
+    {"severity": "warning", "path": "detail[65].category", "page": 16,
+     "extracted": "charges for services/fees", "on_page": "Cemetery - Charges for services 8,450",
+     "issue": "user rule 2026-10-28: cemetery fees are category Cemetery Fees"},
+    {"severity": "warning", "path": "detail[6].original_label", "page": 13,
+     "extracted": "Capital outlay", "on_page": "Capital outlay 21,425 (Street Fund)",
+     "issue": "user rule 2026-10-26: capital outlay lines are labelled 'Capital Outlay: <function>' with printed_label; the General Fund department lines follow it but this one does not"},
+    {"severity": "warning", "path": "detail[13].original_label", "page": 14,
+     "extracted": "Capital outlay", "on_page": "Capital outlay 29,870 (Economic Development Fund)",
+     "issue": "user rule 2026-10-26: should be 'Capital Outlay: Economic Development' with printed_label"}
   ]
 }

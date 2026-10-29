@@ -1,38 +1,12 @@
 {
   "stem": "Scribner_FY2025",
-  "values_checked": 53,
+  "values_checked": 56,
   "issues": [
-    {
-      "severity": "warning",
-      "path": "missing",
-      "page": 10,
-      "extracted": null,
-      "on_page": "Trimmed pages are report pp4-11, 26 and 35; report pp27-34 (between the all-funds budget statement and the LB840 schedule) are not trimmed",
-      "issue": "probably notes to the budgetary statement and other supplementary pages; every printed total ties without them, but the source PDF should be checked for further fund/utility schedules"
-    },
-    {
-      "severity": "warning",
-      "path": "detail",
-      "page": 9,
-      "extracted": "not entered",
-      "on_page": "Statement of Receipts, Disbursements and Changes in Cash Balances - Budget and Actual - All Funds: State receipts 563,303, Other local receipts 3,012,556, Public Works 1,828,270, Capital outlay 237,726, Debt service 488,607, etc.",
-      "issue": "the supplementary budget-to-actual schedule is left out of detail because it combines governmental and utility funds in broad groups; defensible (explained in notes), but its budget figures are not captured anywhere"
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[9].category",
-      "page": 2,
-      "extracted": "donations/contributions",
-      "on_page": "Grants and contributions 5,787 (Statement of Activities: operating grants and contributions, Culture and Recreation)",
-      "issue": "the source isn't stated; if these are government grants they belong in intergovernmental/state aid or federal grants"
-    },
-    {
-      "severity": "warning",
-      "path": "balance_sheet.equity[0].amount",
-      "page": 1,
-      "extracted": 307812,
-      "on_page": "Restricted for Community Improvement 307,812; but the LB840 schedule (p10) shows the LB840 fund balance going from 307,812 at the beginning to 239,922 at year-end",
-      "issue": "[fixed 2026-10-21: report_discrepancies entry added] the report's restricted net position seems to be the LB840 balance at the beginning of the year, not the end; the figure is recorded as printed, but the inconsistency isn't noted"
-    }
+    {"severity": "warning", "path": "receipts[8].category", "page": 4,
+     "extracted": "charges for services/fees", "on_page": "Farm and rental income 29,732",
+     "issue": "User rule makes Rentals (rent, rental income) its own receipt category; farm rent fits Rentals"},
+    {"severity": "warning", "path": "disbursements[8].category", "page": 6,
+     "extracted": "Repairs and Maintenance", "on_page": "Operation and maintenance 441,987",
+     "issue": "Broad operating line (the cash flow statement p7 groups it under contractual services); Repairs and Maintenance is an assumption, and it could stay utilities as a function-type line"}
   ]
 }

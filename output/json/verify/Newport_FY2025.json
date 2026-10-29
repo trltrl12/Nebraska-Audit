@@ -1,23 +1,9 @@
 {
   "stem": "Newport_FY2025",
-  "values_checked": 44,
+  "values_checked": 52,
   "issues": [
-    {"severity": "warning", "path": "decision_needed", "page": 5,
-     "extracted": "transfers_in 28,778.99 / business_type.transfers_net -16,075.22 recorded as ordinary transfers",
-     "on_page": "Schedule of Interfund Transfers: Water Fund (reclassify from PY) -> Housing 6567.54/Capital Improv 12194.20 = 18,761.74; Water Fund (reclassify from PY) -> Reserve Street 6,953.48",
-     "issue": "25,715.22 of the Water Fund outflow is labelled a reclassification of prior-year money, so it may really be a correction of beginning balances (prior-period adjustment) rather than a current-year transfer. Housing Grant, Capital Improv and Reserve Street have blank beginning balances. Only a person can settle this, and decision_needed[] is missing."},
-    {"severity": "warning", "path": "receipts[9].category", "page": 1,
-     "extracted": "other", "on_page": "Local Receipts: Other 52,250.57 (General Fund)",
-     "issue": "This is 47% of governmental receipts and is unexplained. The General Fund also pays the Solid Waste, Wastewater and Water lines (p3), so this line probably holds utility/refuse charges. Already marked review."},
-    {"severity": "warning", "path": "disbursements[3].fund_type", "page": 3,
-     "extracted": "governmental", "on_page": "Solid Waste 12,376.57; Wastewater 1,036.36; Water 4,345.12 in GENERAL FUND column under Business-Type Activities",
-     "issue": "Business-type activity rows (17,758.05 in total) are paid from the General Fund column and kept governmental by column. This is defensible under the column rule but questionable. Applies to disbursements[3], [4] and [5]."},
-    {"severity": "warning", "path": "receipts[13].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other 33.29 (Water) / 1,390.84 (Sewer)",
-     "issue": "The category is an assumption (likely user fees) that the page does not explain. Applies to receipts[13] and [14]."},
-    {"severity": "warning", "path": "balance_sheet.equity[0].computed", "page": 1,
-     "extracted": "page 1 total column; line 24 ending balance 326,227.53 = 157,242.20 receipts etc.",
-     "on_page": "Subtotal of Ending Balances (Line 26 + 27) 326,227.53",
-     "issue": "The amount is printed and correct, but the computed note is garbled and misleading (157,242.20 is total receipts, not a part of the balance)."}
+    {"severity": "warning", "path": "receipts[13].category", "page": 1, "extracted": "charges for services/fees", "on_page": "Local Receipts: Other 33.29 (Water) / 1,390.84 (Sewer, receipts[14])", "issue": "Printed only as 'Other' with no explanation; charges for services (or Utility Charges) is a guess. Already marked review."},
+    {"severity": "warning", "path": "receipts[9]", "page": 1, "extracted": "other 52,250.57", "on_page": "Local Receipts: Other 52,250.57 (General Fund)", "issue": "Unexplained line is about 47% of governmental receipts; no schedule explains it. Consider a decision_needed entry so a person can confirm what it is."},
+    {"severity": "warning", "path": "transfers_in", "page": 5, "extracted": 28778.99, "on_page": "Water Fund (reclassify from PY) to Housing 6,567.54 / Capital Improv 12,194.20 (18,761.74) and to Reserve Street 6,953.48", "issue": "25,715.22 of the Water Fund 'transfers' are labelled as prior-year reclassifications, i.e. balance corrections rather than current-year transfers. Recorded as transfers, which matches the form; a person may want to decide whether they are adjustments (decision_needed)."}
   ]
 }

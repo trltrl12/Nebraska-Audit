@@ -1,12 +1,18 @@
 {
   "stem": "Blair_Community_Schools_FY2025",
-  "values_checked": 242,
+  "values_checked": 255,
   "issues": [
-    {"severity": "warning", "path": "receipts[4].amount", "page": 4,
-     "extracted": 1962358, "on_page": "Motor vehicle taxes 1,962,358 = General 1,954,493 + Special Building 7,865",
-     "issue": "The statement prints Special Building's 7,865 on the Motor vehicle taxes row, but the Special Building budget schedule (p21) shows 7,865 as 'Interest and penalty on property taxes'. So the statement's motor vehicle line looks overstated by 7,865 and the interest/penalties line (43,496) understated by the same amount. The figure is recorded as printed, which is correct, but this is not mentioned in notes or report_discrepancies, and the detail records the 7,865 as property tax."},
-    {"severity": "warning", "path": "detail[118].amount", "page": 8,
-     "extracted": -565000, "on_page": "Reclassifications: State programs (207,894), Federal programs (773,020), Instruction +415,914",
-     "issue": "The State/Federal programs contra line uses the net 565,000 (980,914 reclassified out less 415,914 moved into Instruction). That works because the extractor put those program lines under instruction, but it is an assumption about which lines held the hidden 1,040,000 transfer. The page only shows group-level reclassifications. Arithmetic checks: 80,000 + 145,000 + 250,000 + 565,000 = 1,040,000, which matches the Depreciation Fund transfer received on p17."}
+    {"severity": "warning", "path": "receipts[7].category", "page": 4,
+     "extracted": "Extracurricular Receipts", "on_page": "Community service activities 2,100 (General Fund code 1800, p11)",
+     "issue": "Community service activities (code 1800) are community-service fees, not student activity receipts; the matching detail line uses detail_category 'other charges for services', so the receipt and detail categories disagree. Charges for services/fees looks closer"},
+    {"severity": "warning", "path": "receipts[14].category", "page": 4,
+     "extracted": "other", "on_page": "Other local receipts 39,403 (Activities Fund 39,383 + General 20)",
+     "issue": "39,383 of this line comes from the Activities Fund (p25). The rule sends school activity fund receipts to Extracurricular Receipts, but the printed label says 'other', so 'other' is defensible. The same applies to detail[...] Activities Fund 'Other local receipts' 39,383"},
+    {"severity": "warning", "path": "detail (Less amount reclassified to transfer to Depreciation Fund (State and Federal programs)).category", "page": 8,
+     "extracted": "Federal Programs, -565,000", "on_page": "Reclassifications: Instruction +415,914, State programs (207,894), Federal programs (773,020)",
+     "issue": "The net contra is filed entirely under Federal Programs, but the p8 reclassification also removes all State programs spending (207,894) and moves 415,914 into Instruction. Function totals in detail therefore won't tie to the statement's function lines. Arithmetic is right and the line is marked computed/review"},
+    {"severity": "warning", "path": "disbursements[0]", "page": 5,
+     "extracted": "Instruction 15,166,244 / Special Education Programs 3,396,382", "on_page": "Instruction 18,562,626",
+     "issue": "The split assumes all of the 415,914 that the p8 reclassification moved into Instruction (from State/Federal programs, which include IDEA 6406/6408/6412) is regular instruction rather than special education. The arithmetic ties, but the allocation is an assumption"}
   ]
 }

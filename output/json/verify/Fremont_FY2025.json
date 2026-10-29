@@ -1,18 +1,15 @@
 {
   "stem": "Fremont_FY2025",
-  "values_checked": 176,
+  "values_checked": 262,
   "issues": [
-    {"severity": "warning", "path": "ending_cash", "page": 3,
-     "extracted": 44520832, "on_page": "Cash and cash equivalents 44,520,832; County treasurer cash 288,736 (Total Governmental Funds)",
-     "issue": "ending_cash excludes the separate County treasurer cash line 288,736, which is also cash; defensible but an assumption (noted in notes)"},
-    {"severity": "warning", "path": "other_financing", "page": 4,
-     "extracted": 51769, "on_page": "Insurance recoveries 51,769 (Other Financing Sources)",
-     "issue": "governmental insurance recoveries kept as other financing (as printed), while the business-type insurance recoveries 1,142,568 (p6) are recorded as receipts (reimbursements/refunds); inconsistent treatment of the same label across fund types"},
-    {"severity": "warning", "path": "receipts[6].category", "page": 4,
-     "extracted": "intergovernmental/state aid", "on_page": "Intergovernmental 11,922,186",
-     "issue": "line includes American Rescue Plan intergovernmental 3,132,206 (p12, federal), about 26% of the line; state aid is dominant but the mix is not flagged for review"},
-    {"severity": "warning", "path": "detail[21].detail_category", "page": 10,
-     "extracted": "other state aid", "on_page": "Street Fund: Intergovernmental 5,383,196",
-     "issue": "Street Fund intergovernmental revenue is most likely highway allocation; source not itemized on the page, so a judgment call"}
+    {"severity": "error", "path": "disbursements[12].category", "page": 6,
+     "extracted": "Professional/Contract Services", "on_page": "Customer accounting and collections 7,082,136 (Enterprise Funds Total)",
+     "issue": "this is a functional expense line (like Production, Distribution, Administrative and general), not a cost type; under the user's 2026-10-28 utility rule function lines stay 'utilities'. The extraction's own notes say attempt 2 set it to utilities, but the JSON still carries Professional/Contract Services"},
+    {"severity": "warning", "path": "detail[42].category", "page": 12,
+     "extracted": "intergovernmental/state aid", "on_page": "Intergovernmental 5,826,299 (Total Non-Major), of which American Rescue Plan column 3,132,206",
+     "issue": "the ARPA (federal) column is more than half of this line on the same page; under the 'more than half' rule the dominant category would be federal grants (or mark the mix). Already flagged review"},
+    {"severity": "warning", "path": "missing", "page": 12,
+     "extracted": null, "on_page": "Nonmajor combining statement: the six printed columns (Airport..Special Projects) add to revenues 6,287,349 vs Total Non-Major 8,289,412; the other nonmajor fund columns (property tax 679,483, keno 978,897, debt service etc.) are on a combining page not in the trimmed PDF",
+     "issue": "trim is missing the companion combining page; detail correctly uses the Total Non-Major column so totals are complete, but per-fund detail for the remaining nonmajor funds cannot be checked"}
   ]
 }

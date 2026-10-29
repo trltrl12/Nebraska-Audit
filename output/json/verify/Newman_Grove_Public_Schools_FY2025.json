@@ -1,38 +1,11 @@
 {
   "stem": "Newman_Grove_Public_Schools_FY2025",
-  "values_checked": 262,
+  "values_checked": 268,
   "issues": [
-    {
-      "severity": "error",
-      "path": "receipts[11].category",
-      "page": 2,
-      "extracted": "other (26,716 Permanent Fund local receipts)",
-      "on_page": "Statement of Activities (p2): Scholarships and financial aid operating grants and contributions 24,943; Investment interest - restricted 29,728 = Special Building 21,132 + Bond 6,576 + Nutrition 247 + 1,773 (Permanent Fund). 24,943 + 1,773 = 26,716",
-      "issue": "[fixed] The Bluejay Foundation local receipts are explained in the report: 24,943 are contributions (over half of the line) and 1,773 is interest. The line should be donations/contributions, not other. The p2 breakdown would also support splitting it into 24,943 donations/contributions and 1,773 investment income. Leaving it as is also understates investment income (receipts[6] 151,682 vs printed interest 29,728 + 123,727 = 153,455)."
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[8].category",
-      "page": 6,
-      "extracted": "instruction",
-      "on_page": "Scholarships and financial aid 20,798 (Permanent Fund)",
-      "issue": "Scholarships paid by the foundation are not really instruction. This is a judgment call (another option is other with a review flag), and the extractor already flagged it for review."
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[20].amount",
-      "page": 15,
-      "extracted": 247625,
-      "on_page": "Debt service interest 247,225 + Other miscellaneous expenses 400",
-      "issue": "The Bond Fund line 'Other miscellaneous expenses' 400 is assumed to be debt fees and folded into debt service interest (also detail[98]). It is defensible but not stated on the page."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[70].category",
-      "page": 6,
-      "extracted": "food service (all School Nutrition spending, 193,974)",
-      "on_page": "Statement p5/p6: School Nutrition column puts 107,382 in Student meals and 86,592 in Federal programs",
-      "issue": "The statement splits School Nutrition spending between two functions, but the detail lines carry only food service, so the detail function split won't tie to the statement for 86,592. This is a judgment call because the fund schedule gives no function breakdown."
-    }
+    {"severity": "error", "path": "receipts[8].category", "page": 6, "extracted": "charges for services/fees (265,313)", "on_page": "Local receipts parts: Activities receipts 194,312 (p11), Sale of lunches/milk 69,636 (p12), Extracurricular activities fees 1,265 (p14), Rental of school property 100 (p7)", "issue": "Under the user rules these have their own categories (Extracurricular Receipts 195,577, School Lunch Sales 69,636, Rentals 100), as the detail lines already use; lumping them into charges for services/fees is wrong. Split into separate split_from items."},
+    {"severity": "warning", "path": "receipts[12]", "page": 6, "extracted": "donations/contributions 24,943 and Interest Income 1,773 (receipts[13])", "on_page": "Permanent Fund (Bluejay Foundation) Local receipts 26,716 (p6); no schedule prints its breakdown", "issue": "Split derived from Statement of Activities scholarships grants/contributions 24,943 and by subtracting other funds' interest from investment interest - restricted 29,728 (p2). Arithmetic holds, but the page does not print this fund's breakdown directly."},
+    {"severity": "warning", "path": "disbursements[5].category", "page": 6, "extracted": "Special Education Programs", "on_page": "Support services - special education pupils 108,607", "issue": "Extractor rules list SPED related services (2100) under support services (Pupils); Special Education Programs is defensible but doubtful."},
+    {"severity": "warning", "path": "disbursements[8]", "page": 6, "extracted": "Instruction, no detail_category", "on_page": "Scholarships and financial aid 20,798", "issue": "Category guess (already marked review); config/category_decisions.csv maps 'scholarships and financial aid' to detail_category 'Scholarships / Student Aid', which the line lacks despite carrying category_decision."},
+    {"severity": "warning", "path": "disbursements[20].category", "page": 5, "extracted": "food service", "on_page": "Federal programs 86,592 (School Nutrition column)", "issue": "Line is labelled Federal programs on the statement; user rule puts lines labelled federal programs in Federal Programs. Recording it as food service is a judgment call."}
   ]
 }

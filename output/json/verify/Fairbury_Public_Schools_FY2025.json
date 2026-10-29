@@ -1,24 +1,18 @@
 {
   "stem": "Fairbury_Public_Schools_FY2025",
-  "values_checked": 229,
+  "values_checked": 175,
   "issues": [
+    {"severity": "error", "path": "detail[97].category", "page": 19,
+     "extracted": "reimbursements/refunds", "on_page": "Non-reimbursable programs 20,691 (School Nutrition Fund receipts)",
+     "issue": "Non-reimbursable programs are a la carte/non-program meal sales, not a reimbursement or refund; the p3 statement counts this line inside 'Nutrition Program receipts' 252,030 (212,431 + 20,691 + 18,908), which the extraction itself categorizes as School Lunch Sales. Category should be School Lunch Sales (detail_category school lunch sales); the category also contradicts the line's own detail_category (other charges for services)."},
+    {"severity": "warning", "path": "detail[98].category", "page": 19,
+     "extracted": "charges for services/fees", "on_page": "Special functions 18,908 (School Nutrition Fund)",
+     "issue": "Nutrition fund special-function (catering) food sales; could be School Lunch Sales, consistent with the p3 Nutrition Program receipts line"},
     {"severity": "warning", "path": "receipts[7].category", "page": 3,
-     "extracted": "fines and forfeitures", "on_page": "Local license fees and fines 50,770 (General 6,990 + Other Governmental Funds 43,780)",
-     "issue": "The 43,780 Other Governmental Funds part is QCPU money. The QCPU schedule (p16) and the nonmajor combining schedule (p8) show no license or fine line, so this is probably state tax credit/aid that p3 mislabels. p3's QCPU column ties to the printed 376,674 (330,597+731+464+120+982+43,780). The p8/p16 lines (330,597+120+6,695+464+982 = 338,858) are 37,816 short of that total (37,816 = 43,780 + 731 - 6,695). No line was missed or misread and the gap is not a transfer: it is the report's own error, correctly recorded in report_discrepancies. The category follows the p3 label as printed, which is defensible, but it is doubtful."},
-    {"severity": "warning", "path": "receipts[8].category", "page": 3,
-     "extracted": "other", "on_page": "Other local receipts 3,460; p9 General Fund breakdown: 1921 Police court fines 710 + 1990 Other local receipts 2,750",
-     "issue": "The report prints this line's breakdown, so 710 could be split out as fines and forfeitures. Only 2,750 is genuinely unexplained."},
-    {"severity": "warning", "path": "receipts[12].category", "page": 3,
-     "extracted": "intergovernmental/state aid", "on_page": "State receipts 5,098,607",
-     "issue": "This is a broad group with no review flag. The detail on p9-10 and p17 includes 3133 Nameplate capacity tax 7,470 (other taxes per the rules). Should carry review 'broad group; detail on p9-10'."},
-    {"severity": "warning", "path": "receipts[11].category", "page": 3,
-     "extracted": "fines and forfeitures", "on_page": "County fines and license fees 52,066",
-     "issue": "The label mixes fines and license fees and has no review note naming the mix. The same applies to detail[7] (1911 Local license fees and fines) and detail[10] (2110)."},
-    {"severity": "warning", "path": "disbursements[1].category", "page": 3,
-     "extracted": "support services", "on_page": "Student support services 723,383 (General 272,654 + Other Governmental Funds 450,729)",
-     "issue": "450,729 is Activities Fund spending (p8, p21), which the detail records as student activities. The label as printed supports support services, but the categories differ between receipts and detail."},
-    {"severity": "warning", "path": "detail[77].original_label", "page": 12,
-     "extracted": "8000 Transfers (to Nutrition 100,000 and Activities 75,000)", "on_page": "8000 Transfers",
-     "issue": "The parenthetical is the extractor's annotation, not printed text. The amount -175,000 and budget -140,000 are correct, and the transfer ties to Nutrition +100,000 (p19) and Activities +75,000 (p21)."}
+     "extracted": "Fines and Licenses 50,770", "on_page": "Local license fees and fines: General 6,990 + Other Governmental 43,780 = 50,770",
+     "issue": "The 43,780 Other Governmental Funds portion has no fines/licenses line in the nonmajor combining schedule (p8) or QCPU schedule (p16), which show only property tax, penalties, homestead 6,695, pro-rate 464 and interest, plus 37,816 unlisted. It is probably homestead/property tax credit money. The category follows the printed label and is marked review."},
+    {"severity": "warning", "path": "receipts[1].amount", "page": 3,
+     "extracted": "Carline tax 22,758 / Public power district sales tax 17,867", "on_page": "Other Governmental column: Carline tax 731, Public power district sales tax 464 (p3); p8 shows no carline/PPD lines for those funds (Pro-rate motor vehicle 464)",
+     "issue": "p3 and p8 label the Other Governmental Funds receipts differently. Only the QCPU total gap (37,816) is in report_discrepancies; the label mismatch between the two pages is not recorded."}
   ]
 }

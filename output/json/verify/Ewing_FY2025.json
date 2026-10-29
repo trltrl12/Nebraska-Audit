@@ -1,15 +1,15 @@
 {
   "stem": "Ewing_FY2025",
-  "values_checked": 148,
+  "values_checked": 150,
   "issues": [
-    {"severity": "warning", "path": "receipts[13].category", "page": 5,
-     "extracted": "other", "on_page": "Other revenues 73,351 (General Fund column)",
-     "issue": "The amount is correct, but nothing in the report explains this line, and it is about 16% of governmental receipts. Per the p12 combining schedule, 73,351 = Other 73,344 (Total column) + Donations 7, so a small donations part is folded in. The review note's 'General Fund other 70,893' is only the General department column; the General Fund Total column on p12 shows Other 73,344."},
-    {"severity": "warning", "path": "receipts[14].category", "page": 5,
-     "extracted": "other", "on_page": "Housing loan revenues 23,155 (p14: LB 840 loan revenues 14,627 + Housing Rehabilitation 8,528)",
-     "issue": "These look like repayments of loans the village made from its LB840 and housing rehabilitation programs (loan principal collected, not revenue). 'other' with review is defensible, but a person may want to decide whether this belongs in receipts at all."},
-    {"severity": "warning", "path": "detail", "page": 11,
-     "extracted": "budget schedule governmental lines not recorded", "on_page": "Streets and Highways 31,429 (budget 365,000); Community Development 87,074 incl. Keno Fund 10,000 (budget 437,032)",
-     "issue": "The Street Fund and Keno Fund have no detail schedule other than the all-funds budget schedule. Its Streets and Highways line is entirely Street Fund spending and could have been recorded with budget_final 365,000. The amounts are still in disbursements (p5), so nothing is missing from the totals. This is a judgment call because the budget schedule's revenue lines are combined across all funds."}
+    {"severity": "error", "path": "detail[32].category", "page": 12,
+     "extracted": "charges for services/fees", "on_page": "Charges for services 450 (Cemetery column)",
+     "issue": "Cemetery fund charges (detail_category already 'cemetery fees') should be category Cemetery Fees under the user's receipt categories"},
+    {"severity": "warning", "path": "receipts[8].category", "page": 5,
+     "extracted": "charges for services/fees", "on_page": "Charges for services 450",
+     "issue": "the whole 450 is the Cemetery column on the p12 combining schedule, so Cemetery Fees fits better"},
+    {"severity": "warning", "path": "receipts[11].category", "page": 5,
+     "extracted": "charges for services/fees", "on_page": "Public power district lease payments 36,415",
+     "issue": "the line's own review note and the detail lines (detail_category 'rentals') treat this as lease income; category Rentals would be consistent. Same for detail[9], [17], [25], [33] and the Police and Dump lease lines"}
   ]
 }

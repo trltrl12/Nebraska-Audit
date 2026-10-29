@@ -1,24 +1,15 @@
 {
   "stem": "Emerson_Hubbard_Public_Schools_FY2025",
-  "values_checked": 179,
+  "values_checked": 185,
   "issues": [
-    {"severity": "warning", "path": "notes", "page": 15,
-     "extracted": "Read pages 1-10 and 11-15 of 15.", "on_page": "15 pages in trimmed PDF",
-     "issue": "[fixed 2026-10-22: notes now end with 'Read pages 1-15 of 15'; all 15 pages were read in chunks 1-10 and 11-15] Notes do not end in the exact form 'Read pages 1-15 of 15'. All 15 pages were covered and nothing is missing, but a strict format check may flag it."},
     {"severity": "warning", "path": "disbursements[1].category", "page": 3,
-     "extracted": "support services", "on_page": "Student support services 399,112 (General 203,521 + Other Governmental 195,591)",
-     "issue": "The printed line includes 195,591 of Activities Fund spending (p15 'Other expenses'), which would be 'student activities'. Keeping one line as printed is defensible because support services is the larger part, but the notes don't mention the mix."},
-    {"severity": "warning", "path": "receipts[10].category", "page": 3,
-     "extracted": "other", "on_page": "Other receipts 8,372 (General 4,619 + Other Governmental 3,753)",
-     "issue": "The General Fund's 4,619 is broken down on p6-7: rentals 25, license fees 1,734, fines 672, corporate grants 500, other 750, sale of property 800, other nonrevenue 138 (these add up to 4,619). Only 888 is truly unidentified. Keeping it in 'other' with a review note is defensible, but most of it has specific categories."},
-    {"severity": "warning", "path": "detail[97].category", "page": 13,
-     "extracted": "capital outlay", "on_page": "Capital outlay other 296,721",
-     "issue": "The statement on p4 counts this 296,721 under 'Operation and maintenance of plant' (support services), so the detail function doesn't match the statement. Defensible either way."},
-    {"severity": "warning", "path": "detail[78].fund_type", "page": 12,
-     "extracted": "governmental", "on_page": "School Nutrition Fund reported within Other Governmental Funds (p3-5)",
-     "issue": "The extractor rules list school nutrition as a business-type example, but this report presents it as a governmental fund. Treating it as governmental matches the report; this is a judgment call."},
-    {"severity": "warning", "path": "detail[90].original_label", "page": 13,
-     "extracted": "Public power district sales tax", "on_page": "Statement p3 shows the Special Building 133 as 'Carline tax'; fund schedule p13 shows it as 'Public power district sales tax'",
-     "issue": "The report labels this 133 differently in two places. The amount and category ('other taxes') are the same either way. The extractor already flagged it for review."}
+     "extracted": "support services (Pupils), 399,112", "on_page": "Student support services 399,112 = General 203,521 + Other Governmental 195,591",
+     "issue": "The 195,591 in the Other Governmental column is Activities Fund spending (p15 'Other expenses' 195,591), which would be 'student activities'. The extractor kept it as one printed line and mentioned it in notes; splitting it by column would be more accurate. Judgment call."},
+    {"severity": "warning", "path": "detail[69].category", "page": 9,
+     "extracted": "support services", "on_page": "4600 Site improvement 7,366",
+     "issue": "The statement's 'Operation and maintenance of plant' total (405,254 General) includes this 7,366, so the function is Building and Grounds. As facilities acquisition, it could also be capital outlay. Plain 'support services' matches neither."},
+    {"severity": "warning", "path": "detail[80].category", "page": 12,
+     "extracted": "charges for services/fees", "on_page": "School Nutrition Fund, Sales 66,289",
+     "issue": "The statement line (receipts[15]) for the same 66,289 uses 'School Lunch Sales', which is also the user rule for lunch and meal sales. The detail line doesn't match."}
   ]
 }

@@ -1,46 +1,18 @@
 {
   "stem": "Schuyler_FY2025",
-  "values_checked": 170,
+  "values_checked": 180,
   "issues": [
-    {
-      "severity": "warning",
-      "path": "missing",
-      "page": 14,
-      "extracted": null,
-      "on_page": "Trimmed pages jump from report p27 (trimmed p7) to p29 (trimmed p8) and from report p34 (trimmed p13) to p36 (trimmed p14); report pp28 and 35 not trimmed",
-      "issue": "probably the Notes to Budgetary Comparison Schedule and an Other Governmental Funds combining balance sheet (no receipt/disbursement lines expected; every printed total ties), but the source PDF should be checked"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[111].detail_category",
-      "page": 14,
-      "extracted": "sales tax",
-      "on_page": "Sales and miscellaneous taxes 172,302 (LB840)",
-      "issue": "mixed label recorded as sales tax with no review note; the statement (p5) counts it inside Sales taxes 1,080,841, so sales tax is defensible"
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[13].category",
-      "page": 3,
-      "extracted": "other",
-      "on_page": "Miscellaneous 484,264; Statement of Activities shows 'Grants and contributions not restricted to specific programs' 199,404",
-      "issue": "the General Fund part (Other, including local grants 198,944) is what the Statement of Activities reports as unrestricted grants and contributions, so it could be donations/contributions; review note present"
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[11].category",
-      "page": 5,
-      "extracted": "other",
-      "on_page": "Loan repayments 6,323",
-      "issue": "repayments of loans made by the city (Special Projects/Facade); 'other' with review is defensible, but this is loan principal coming back, not revenue in the usual sense"
-    },
-    {
-      "severity": "warning",
-      "path": "adjustments[0].amount",
-      "page": 6,
-      "extracted": -315451,
-      "on_page": "General Fund budget schedule p6: beginning as originally stated 3,527,683, prior period adjustment 118,161 (vs p5/p8: 4,257,351 and (611,507))",
-      "issue": "[fixed 2026-10-21: report_discrepancies entry added] the report is inconsistent about the General Fund's originally stated balance and prior period adjustment (both reach restated 3,645,844); the extraction uses p5 correctly, but the inconsistency isn't noted in report_discrepancies or notes"
-    }
+    {"severity": "warning", "path": "detail[Nonmajor funds (combined) 'Sales and miscellaneous taxes'].category", "page": 14,
+     "extracted": "sales tax (no review)", "on_page": "Sales and miscellaneous taxes 172,302 (LB840 column)",
+     "issue": "The label mixes sales tax with miscellaneous taxes. The rules give such a line the dominant category plus a review note naming the mix; there is no review note."},
+    {"severity": "warning", "path": "detail[General Fund 'Ballroom' receipt].category", "page": 8,
+     "extracted": "charges for services/fees (detail_category rentals)", "on_page": "Charges for services: Ballroom 149,393",
+     "issue": "Category and detail_category disagree. If the ballroom receipts are rental income, the user's Rentals receipt category applies, as it does for Equipment rentals."},
+    {"severity": "warning", "path": "receipts[3].original_label", "page": 5,
+     "extracted": "Occupation taxes", "on_page": "Occupation taxes",
+     "issue": "The user's label rule renames Occupation / Occupation tax to 'Occupation Tax' (printed text kept in printed_label). The plural form was not renamed here or in the detail line. user_rules.py may need to cover the plural."},
+    {"severity": "warning", "path": "notes", "page": null,
+     "extracted": "notes contain 'Read pages 1-14 of 14' followed by a balance-sheet sentence", "on_page": "14-page PDF; all pages present",
+     "issue": "The notes don't end with 'Read pages 1-N of N' because later text was appended. The page count (14) is correct, and trimmed p1 is a table-of-contents fragment with no data."}
   ]
 }

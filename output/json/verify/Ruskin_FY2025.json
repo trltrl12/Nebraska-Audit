@@ -1,21 +1,15 @@
 {
   "stem": "Ruskin_FY2025",
-  "values_checked": 36,
+  "values_checked": 34,
   "issues": [
-    {"severity": "warning", "path": "decision_needed", "page": 1,
-     "extracted": "receipts[10] 125,665.76 recorded as charges for services/fees; no decision_needed entry", "on_page": "Line 18 Local Receipts: Other, Utilities Fund 125,665.76; p6 debt schedule shows Midwest Bank loan issued 3/3/2025, 59,399.19 outstanding",
-     "issue": "The utility's only receipt line (apart from the transfer) is unexplained 'Other' and a new bank loan was issued during the year while utility capital improvements were 65,047.25. The line may include loan proceeds. That question is for a person to settle, so it belongs in decision_needed[]."},
     {"severity": "warning", "path": "receipts[10].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Utilities Fund column)",
-     "issue": "Assumes these are water/sewer charges. The page prints only 'Other', with no breakdown. The line is flagged for review, but the category is the extractor's assumption."},
-    {"severity": "warning", "path": "receipts[9]", "page": 1,
-     "extracted": 41336.28, "on_page": "General 41,277.94 + Street 58.34",
-     "issue": "Local Receipts: Other is about 29% of governmental receipts (38% of General Fund) and nothing explains it. Computed correctly and flagged for review; no decision_needed entry."},
-    {"severity": "warning", "path": "report_discrepancies[0]", "page": 2,
-     "extracted": "check: balance, difference 360.00", "on_page": "crossed-out original page: lines 26/28 Utilities 6,953.53, Total 114,098.61",
-     "issue": "The figures are recorded correctly. However, the corrected page (p1) adds up, so this will show in the workbook as 'the report itself doesn't add up', which overstates it. The budget-form rule also asks for a review note on a voided-page discrepancy, and none was added."},
-    {"severity": "warning", "path": "disbursements[3].original_label", "page": 4,
-     "extracted": "Capital Improvements (Street Fund)", "on_page": "Capital Improvements",
-     "issue": "The extractor added the fund names in parentheses (same for disbursements[4] and receipts[10]). The amounts match their fund columns."}
+     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other 125,665.76 (Utilities Fund column)",
+     "issue": "Presumed water/sewer charges (the page only says Other); under the 2026-10-28 rule utility fund charges are Utility Charges; already marked review"},
+    {"severity": "warning", "path": "disbursements[3]", "page": 4,
+     "extracted": "Capital Improvements (Street Fund) 8,172.47 / Capital Improvements (Utilities Fund) 65,047.25", "on_page": "Line 35 Capital Improvements: Street 8,172.47, Utilities 65,047.25, Total 73,219.72",
+     "issue": "Line split by printed fund column (amounts correct) but the two items carry no split_from naming the 73,219.72 total line, unlike the other column splits in this pipeline"},
+    {"severity": "warning", "path": "disbursements[5].fund_type", "page": 4,
+     "extracted": "business-type", "on_page": "Line 39 Debt Service 36,613.52 (Governmental section, Utilities Fund column)",
+     "issue": "Printed in the Governmental section but in the Utilities Fund column; business-type by column is correct under the rules, noted for awareness (p6 debt schedule lists USDA Water, NDEQ Sewer and Midwest Bank loans)"}
   ]
 }

@@ -1,38 +1,36 @@
 {
   "stem": "Beatrice_Public_Schools_FY2025",
-  "values_checked": 226,
+  "values_checked": 232,
   "issues": [
-    {
-      "severity": "warning",
-      "path": "receipts[18].category",
-      "page": 4,
-      "extracted": "intergovernmental/state aid",
-      "on_page": "County and ESU sources 120,400 (p10: entirely 2110 County fines and license fees 120,400)",
-      "issue": "[fixed 2026-10-21: to fines and forfeitures (code 2110)] the whole line is code 2110 county fines and license fees, which the rules class as fines and forfeitures (detail[13] uses fines and forfeitures). Receipt and detail categories disagree for the same money"
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[7].source_page",
-      "page": 1,
-      "extracted": 10,
-      "on_page": "Transportation fees 38,828 (Statement of Activities general receipts, Total Governmental Activities column, p1)",
-      "issue": "the line is printed on the government-wide statement p1 (it is missing only from the fund statement p4, as report_discrepancies says); p1 could be cited instead of the budget schedule"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[125].category",
-      "page": 19,
-      "extracted": "capital outlay",
-      "on_page": "School Nutrition Fund Capital outlay 112,024",
-      "issue": "p5 includes it in School Nutrition Program 1,612,602 (food service), not in Capital outlay 705,145, so the detail function split won't tie to the statement"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[137].category",
-      "page": 20,
-      "extracted": "support services",
-      "on_page": "Special Building Fund Operation and maintenance of plant 1,714,319",
-      "issue": "p5's Reclassifications column moves this 1,714,319 out of operation and maintenance and into Education Agency debt services, so the detail function differs from the statement (the review note already flags this). Likewise detail[140] 172,941 is moved into Education Agency capital outlay"
-    }
+    {"severity": "warning", "path": "receipts[11].category", "page": 4,
+     "extracted": "charges for services/fees", "on_page": "Rentals of school equipment, property, and facilities 7,834",
+     "issue": "user rule (2026-10-28) makes rentals their own receipt category Rentals; the extractor's base category list still puts rentals under charges for services, so this is a rule conflict, not a clear error"},
+    {"severity": "warning", "path": "detail[10].category", "page": 10,
+     "extracted": "charges for services/fees", "on_page": "1910 Rentals of school equipment, property, and facilities 7,834",
+     "issue": "same as receipts[11]: user rule says category Rentals (detail_category rentals is right)"},
+    {"severity": "warning", "path": "detail[115].category", "page": 19,
+     "extracted": "charges for services/fees", "on_page": "Daily sales 463,176 (School Nutrition Fund)",
+     "issue": "the statement line Sale of lunches and milk (receipts[15]) uses School Lunch Sales; the user rule puts lunch/meal sales in School Lunch Sales, so the detail category doesn't match"},
+    {"severity": "warning", "path": "detail[119].category", "page": 19,
+     "extracted": "charges for services/fees", "on_page": "Other local receipts 4,640 (School Nutrition Fund)",
+     "issue": "p9 counts it in Sales of lunches and milk 467,816; should match the School Lunch Sales category used for that statement line"},
+    {"severity": "warning", "path": "receipts[10].category", "page": 4,
+     "extracted": "Extracurricular Receipts", "on_page": "Community service activities 95,162 (code 1800)",
+     "issue": "code 1800 is community service activity receipts, not school activity or admissions money; Extracurricular Receipts is doubtful (detail[9] gives it detail_category other charges for services, which doesn't match)"},
+    {"severity": "warning", "path": "receipts[7].source_page", "page": 1,
+     "extracted": 10, "on_page": "Transportation fees 38,828 (Statement of Activities, p1)",
+     "issue": "the line is printed on the government-wide statement p1, so it could cite p1. report_discrepancies[1] is right that the p4 fund statement leaves the line out even though its totals include it, but it suggests the line is printed nowhere on the statements"},
+    {"severity": "warning", "path": "detail[137].category", "page": 20,
+     "extracted": "Building and Grounds", "on_page": "Operation and maintenance of plant 1,714,319 (Special Building Fund)",
+     "issue": "the p5 Reclassifications column moves this amount to Education Agency debt services; the category follows the schedule label, but the money is debt service (already marked review)"},
+    {"severity": "warning", "path": "detail[155].category", "page": 24,
+     "extracted": "capital outlay", "on_page": "Other state categorical programs 68,631 (Cooperative Fund)",
+     "issue": "the label says state categorical programs while pp5/9 show it as capital outlay; category is a judgment call (already marked review)"},
+    {"severity": "warning", "path": "receipts[14].category", "page": 4,
+     "extracted": "other", "on_page": "Other local sources 90,566 = Cooperative Other local receipts 75,904 + Student Fee Fund 14,662 (p9)",
+     "issue": "the Student Fee Fund part (14,662) is postsecondary and summer school fees (p25, Tuition Received); the unexplained Cooperative part is most of the line, so other is defensible"},
+    {"severity": "warning", "path": "detail[158].category", "page": 25,
+     "extracted": "Instruction", "on_page": "Summer school 1,269 (Student Fee Fund)",
+     "issue": "p9 classifies the Student Fee Fund under Student support services; Instruction is defensible (already marked review)"}
   ]
 }

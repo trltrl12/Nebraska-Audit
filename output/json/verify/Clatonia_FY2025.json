@@ -1,15 +1,12 @@
 {
   "stem": "Clatonia_FY2025",
-  "values_checked": 31,
+  "values_checked": 32,
   "issues": [
-    {"severity": "warning", "path": "receipts[10].category", "page": 1,
-     "extracted": "other", "on_page": "Local Receipts: Other 439,926.00 (General Fund)",
-     "issue": "73% of governmental receipts are in 'other'. The General Fund also pays Solid Waste, Wastewater and Water, so this probably includes utility charges, but the page doesn't break it down. Flagged for review"},
-    {"severity": "warning", "path": "disbursements[7].fund_type", "page": 2,
-     "extracted": "governmental", "on_page": "Solid Waste 37,723 / Wastewater 1,546 / Water 23,121 under 'Business-Type Activities', General Fund column",
-     "issue": "Utility spending printed under the Business-Type Activities heading but paid from the General Fund. Kept as governmental with review; applies to disbursements[7]-[9]"},
-    {"severity": "warning", "path": "disbursements[6].category", "page": 2,
-     "extracted": "debt service principal", "on_page": "Debt Service 43,426.00",
-     "issue": "Principal and interest are combined on one line, so the category is a judgment call"}
+    {"severity": "warning", "path": "decision_needed", "page": 1,
+     "extracted": "receipts[10] Local Receipts: Other 439,926 (category other)", "on_page": "18 Local Receipts: Other 439,926.00 (General Fund)",
+     "issue": "This one unexplained line is 72% of the year's receipts (599,248 excluding transfers), and the year has 300,227 Other Capital Outlay. It may be a grant, loan proceeds or utility charges. The existing decision_needed entry only asks whether the utility lines are business-type. It does not ask what the 439,926 is, or whether it is debt proceeds."},
+    {"severity": "warning", "path": "balance_sheet.assets", "page": 1,
+     "extracted": "Net Cash Balance 666,669 only", "on_page": "County Treasurer Balance at September 30, 2025: 1,867.00 (memo box below the statement)",
+     "issue": "The county treasurer balance is printed as a memo below the statement and is not in the ending balance. It is left out of the JSON and the notes don't mention it."}
   ]
 }

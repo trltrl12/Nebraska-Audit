@@ -1,94 +1,18 @@
 {
   "stem": "Chappell_FY2025",
-  "values_checked": 200,
+  "values_checked": 310,
   "issues": [
-    {
-      "severity": "warning",
-      "path": "disbursements[42].category",
-      "page": 8,
-      "extracted": "other",
-      "on_page": "Merchandise (774.21) - Golf column only",
-      "issue": "[fixed per checker] 'other' used although a specific category fits: the line is printed only in the Golf fund column (golf merchandise cost), so it should be culture/recreation, the same as the Golf 'Concessions' line disbursements[43]"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[74].detail_category",
-      "page": 14,
-      "extracted": "miscellaneous expenditure",
-      "on_page": "Swimming pool 22,112.18 (Parks and Recreation)",
-      "issue": "[fixed per checker] program/department line with no object breakdown; the rules call for 'not itemized', not 'miscellaneous expenditure'"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[75].detail_category",
-      "page": 14,
-      "extracted": "miscellaneous expenditure",
-      "on_page": "Baseball 15,207.41 (Parks and Recreation)",
-      "issue": "[fixed per checker] program/department line with no object breakdown; the rules call for 'not itemized', not 'miscellaneous expenditure'"
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[44].category",
-      "page": 8,
-      "extracted": "health/welfare",
-      "on_page": "Oxygen and vaccination 2,013.15 (Other fund; p2 shows the Other fund is Trash + Ambulance)",
-      "issue": "ambulance/rescue spending is 'public safety' under the disbursement rules"
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[45].category",
-      "page": 8,
-      "extracted": "health/welfare",
-      "on_page": "Collection expense 4,144.92 (Other fund)",
-      "issue": "function guessed; most likely ambulance billing collections (public safety) or trash (utilities)"
-    },
-    {
-      "severity": "warning",
-      "path": "other_financing.amount",
-      "page": 5,
-      "extracted": -188792.6,
-      "on_page": "Note Payment (188,792.60) under Other Financing Sources (Uses)",
-      "issue": "amount and placement are as printed on the fund statement, but p2 shows the same 188,792.60 as 'Interest expense and bond fees' and p14 shows it as 'Debt Service and bond issue cost' expenditure (recorded that way in detail[69]). So governmental disbursements leave out a debt-service payment that the report's other statements treat as spending"
-    },
-    {
-      "severity": "warning",
-      "path": "ending_cash.amount",
-      "page": 3,
-      "extracted": 2262879.27,
-      "on_page": "Cash (including cash equivalents) 2,262,879.27; Cash held by County Treasurer 9,199.28; Certificates of deposit 701,539.07",
-      "issue": "only the first cash line was used; the rule's 'cash and cash equivalents/investments' could mean all three lines combined (2,973,617.62, computed). The notes explain the choice"
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[8].category",
-      "page": 4,
-      "extracted": "donations/contributions",
-      "on_page": "Grants and donations 244,874.07 (General 144,874.07; Street 100,000.00)",
-      "issue": "the Street fund's 100,000 and p2's capital grants (281,024 general government) suggest some of this is government grants rather than private donations; already marked review"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[54].detail_category",
-      "page": 14,
-      "extracted": "miscellaneous expenditure",
-      "on_page": "Community improvement 375,548.34",
-      "issue": "object unclear; could be grants/payments to other entities or construction/infrastructure. Already marked review"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[55].detail_category",
-      "page": 14,
-      "extracted": "dues, training and travel",
-      "on_page": "Licenses, fees, and permits 9,309.48 (General); also detail[56] 1,254.95 (Street)",
-      "issue": "questionable object category for license/permit fees paid; could be miscellaneous or professional/contract services"
-    },
-    {
-      "severity": "warning",
-      "path": "balance_sheet.liabilities[3].category",
-      "page": 1,
-      "extracted": "other liabilities",
-      "on_page": "Taxes payable 7,785.70",
-      "issue": "sales/utility taxes payable are normally owed to the state, so 'due to other governments' may fit better"
-    }
+    {"severity": "warning", "path": "receipts[10].category", "page": 4,
+     "extracted": "charges for services/fees", "on_page": "Charges for services 7,908.15 = Swimming pool 7,508.15 + Cemetery lot sales 400.00 (p13)",
+     "issue": "Line is 95% swimming pool fees; under the user's 2026-10-28 rule the dominant category is Recreation Fees (or split with split_from using the p13 breakdown, as was done for Intergovernmental). Detail already uses Recreation Fees / Cemetery Fees"},
+    {"severity": "warning", "path": "receipts[14].category", "page": 8,
+     "extracted": "charges for services/fees", "on_page": "Charge for services 2,075,147.40 (Electric 1,104,581.35, Water 399,124.84, Sewer 206,050.52, Golf 176,193.18, Other 189,197.51)",
+     "issue": "Utility funds are 1,709,756.71 of the line; user rule makes utility fund charges Utility Charges (detail lines use Utility Charges). Concessions 90,646.38 (golf) likewise could be Recreation Fees"},
+    {"severity": "warning", "path": "detail[69].category", "page": 4,
+     "extracted": "culture/recreation (General Fund Supplies 13,898.80) and detail[70] streets/highways (General Fund Gravel and concrete 4,286.87)", "on_page": "p14 shows no gravel outside the Street department; non-Street supplies are General 6,338.99, Parks 7,405.33, Library 4,441.35",
+     "issue": "General Fund statement cells used instead of the p14 department lines; the 4,286.87 General-column gravel is, per p14, supplies of the General/Parks/Library departments, so its streets/highways function is doubtful. Totals tie (General Fund expenditure 1,116,420.01)"},
+    {"severity": "warning", "path": "detail (Other Fund expenditure lines)", "page": 8,
+     "extracted": "function utilities", "on_page": "Other column = Trash + Ambulance (p2 Statement of Activities)",
+     "issue": "Other Fund cost-type lines (personal services 106,242.22, insurance, supplies, fuel, depreciation...) are tagged function utilities although part is the ambulance service (public safety); defensible default but mixed"}
   ]
 }

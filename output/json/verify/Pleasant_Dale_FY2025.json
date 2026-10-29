@@ -1,15 +1,8 @@
 {
   "stem": "Pleasant_Dale_FY2025",
-  "values_checked": 29,
+  "values_checked": 32,
   "issues": [
-    {"severity": "warning", "path": "receipts[8].category", "page": 1,
-     "extracted": "other", "on_page": "Local Receipts: Other 62,874.28 (Enterprise Fund (Water/Sewer) column)",
-     "issue": "Only receipt line of the water/sewer enterprise fund; almost certainly utility charges (charges for services/fees). Pleasanton_FY2025 categorised the identical line as charges for services/fees, so the two reports are inconsistent. Kept as a warning because the page doesn't break it down."},
-    {"severity": "warning", "path": "receipts[7].fund_type", "page": 1,
-     "extracted": "governmental", "on_page": "Internal Service Fund (Fire) column: Local Receipts: Other 82,378.77; Public Safety - Police & Fire 47,590.08",
-     "issue": "An internal service fund is technically a proprietary fund (the rules list proprietary under business-type). Treating it as governmental is defensible because it works as a fire fund (public safety spending), but it is an assumption. It also puts 82,378.77 (33% of governmental receipts) in 'other' with nothing explaining it (possibly rural fire contract payments)."},
-    {"severity": "warning", "path": "beginning_cash", "page": 1,
-     "extracted": 132937.28, "on_page": "County Treasurer Balance at October 1, 2024 $3,150.19; at September 30, 2025 4,072.56",
-     "issue": "County treasurer balances are printed below the statement and not recorded or mentioned in notes. They are outside the Exhibit A balances, so the roll-forward is unaffected."}
+    {"severity": "warning", "path": "receipts[8].category", "page": 1, "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Enterprise Fund Water/Sewer) 62,874.28", "issue": "Inferred as utility charges (the fund's only receipt); under the user's 2026-10-28 rule utility fund charges are 'Utility Charges'. Still an inference from a line printed as 'Other'."},
+    {"severity": "warning", "path": "balance_sheet.assets", "page": 1, "extracted": "not recorded", "on_page": "County Treasurer Balance at September 30, 2025 4,072.56 (October 1, 2024 3,150.19)", "issue": "County treasurer balances are printed below Exhibit A but are outside lines 26-28 and not recorded or mentioned in notes."}
   ]
 }

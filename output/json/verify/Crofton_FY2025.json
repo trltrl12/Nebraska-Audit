@@ -1,102 +1,15 @@
 {
   "stem": "Crofton_FY2025",
-  "values_checked": 157,
+  "values_checked": 182,
   "issues": [
-    {
-      "severity": "warning",
-      "path": "receipts[6].category",
-      "page": 2,
-      "extracted": "other",
-      "on_page": "Loan collections 1,148 (Statement of Activities p2 shows 1,148 as Charges for Services under Economic development)",
-      "issue": "[fixed: recategorized with review note] a labelled line was put in 'other' although the report itself classifies it as charges for services; use 'charges for services/fees' (with review) instead of the last-resort category"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[72].category",
-      "page": 14,
-      "extracted": "other / miscellaneous revenue",
-      "on_page": "CDBG Loan collection 1,148",
-      "issue": "[fixed: recategorized with review note] same line as receipts[6]: the report classifies it as charges for services (p2), so 'other'/'miscellaneous revenue' is not the last resort here"
-    },
-    {
-      "severity": "warning",
-      "path": "beginning_cash",
-      "page": 5,
-      "extracted": 643686,
-      "on_page": "Fund balances - September 30, 2024 643,686",
-      "issue": "the governmental funds are modified cash basis, so fund balances stand in for beginning/ending cash (ending_cash 1,095,895 = fund balance; balance sheet cash/CDs 1,096,376 less payroll liabilities 481). Both are marked computed, but this is the extractor's assumption"
-    },
-    {
-      "severity": "warning",
-      "path": "proprietary",
-      "page": 8,
-      "extracted": null,
-      "on_page": "Statement of Cash Flows - Proprietary Funds: operating 35,878; capital and related (105,494); investing (2,100); beginning 21,320; ending (50,396)",
-      "issue": "basis is set to 'cash' because the governmental funds are modified cash, but the business-type funds are accrual and print a cash flow statement; proprietary is left null and those lines aren't captured"
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[7].category",
-      "page": 2,
-      "extracted": "donations/contributions",
-      "on_page": "Contributions and grants 9,301 (operating grants and contributions: General government 510, Public works 5,000, Economic development 300, Capital outlay 3,491)",
-      "issue": "the source (government or private) isn't shown; part of it (e.g. Street Fund 5,000) may be an intergovernmental grant"
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[9].category",
-      "page": 5,
-      "extracted": "property tax",
-      "on_page": "TIF proceeds 3,175",
-      "issue": "TIF proceeds treated as property tax (also detail[70]); defensible, already marked for review"
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[14].category",
-      "page": 7,
-      "extracted": "intergovernmental/state aid",
-      "on_page": "Grant income 45,368 (shown as a Sewer capital grant on p2)",
-      "issue": "the grantor (state or federal) isn't shown; it's a capital grant, and the receivable side is 'Grant receivable'"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[14].detail_category",
-      "page": 15,
-      "extracted": "salaries and wages",
-      "on_page": "Personnel services: Salaries and benefits 31,320",
-      "issue": "the line combines salaries and benefits; the dominant object is assumed (also detail[27], detail[33], detail[37])"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[22].detail_category",
-      "page": 15,
-      "extracted": "equipment purchases",
-      "on_page": "Capital outlay 46,400 (Administrative)",
-      "issue": "the object of the capital outlay isn't shown; it could be construction or land and buildings"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[24].detail_category",
-      "page": 15,
-      "extracted": "law enforcement contract",
-      "on_page": "Police: Contracted services 50,155",
-      "issue": "the page doesn't say this is a sheriff/law enforcement contract; probable, but assumed"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[31].detail_category",
-      "page": 15,
-      "extracted": "miscellaneous expenditure",
-      "on_page": "Park: Transportation 1,172",
-      "issue": "the object is unclear; it could be fuel or travel"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[11].detail_category",
-      "page": 16,
-      "extracted": "other charges for services",
-      "on_page": "Auditorium: Charges for services 1,757",
-      "issue": "auditorium charges are probably facility rentals ('rentals')"
-    }
+    {"severity": "warning", "path": "disbursements[15].category", "page": 7,
+     "extracted": "utilities", "on_page": "Bad debt 2,726",
+     "issue": "utility spending listed by cost type takes the cost type as category (user rule 2026-10-28); bad debt fits none of the named cost types, so other (function utilities) may be more consistent"},
+    {"severity": "warning", "path": "receipts[6].category", "page": 5,
+     "extracted": "charges for services/fees", "on_page": "Loan collections 1,148 (CDBG Fund)",
+     "issue": "CDBG loan collections are repayments of loans, not fees for services; category is a judgement call (already marked review)"},
+    {"severity": "warning", "path": "disbursements[2].amount", "page": 5,
+     "extracted": 86097, "on_page": "Public works 86,097 = Street 84,015 + General Fund 2,082 (the General Fund 2,082 is the Cemetery department, p16)",
+     "issue": "whole line kept as streets/highways though 2,082 is cemetery (health/welfare) spending"}
   ]
 }

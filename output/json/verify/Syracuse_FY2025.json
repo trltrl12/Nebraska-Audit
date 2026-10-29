@@ -1,54 +1,28 @@
 {
   "stem": "Syracuse_FY2025",
-  "values_checked": 95,
+  "values_checked": 102,
   "issues": [
-    {
-      "severity": "error",
-      "path": "report_discrepancies",
-      "page": 6,
-      "extracted": null,
-      "on_page": "Operating income printed 427,970; 3,803,763 - 3,375,794 = 427,969. Statement of Activities (p2) prints Combined Utilities disbursements 3,418,713, but the p6 lines sum to 3,418,714 (3,375,794 + 8,935 + 33,985)",
-      "issue": "[fixed] The printed report is off by $1. Business-type items give 8,552,843 + 4,030,740 - 3,418,714 = 9,164,869, but the printed ending is 9,164,870, and the disbursement items (3,418,714) don't tie to reported_totals.business-type.disbursements (3,418,713). No report_discrepancies entry was recorded, and the notes wrongly say 3,375,794 + 8,935 + 33,985 = 3,418,713."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[16].category",
-      "page": 4,
-      "extracted": "other",
-      "on_page": "Tennants Deposits 13,975",
-      "issue": "The label says what this is (tenant deposits), so 'other' may not be needed. It could be charges for services/fees (rentals). It may also be refundable deposits and not revenue at all."
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[13].category",
-      "page": 6,
-      "extracted": "other",
-      "on_page": "Tennant Deposit Expense (8,935)",
-      "issue": "This is a nonoperating expense of the Combined Utilities Fund. 'utilities' (the fund's function) or 'housing' may fit better than 'other'."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[19].category",
-      "page": 6,
-      "extracted": "intergovernmental/state aid",
-      "on_page": "Grant Loan Forgiveness 171,625 (shown as Capital Grants on p2)",
-      "issue": "Capital grant / loan forgiveness. It could be a capital contribution (business_type.other_financing) and not a receipt. Judgment call."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[22]",
-      "page": 8,
-      "extracted": 571625,
-      "on_page": "Grants and contributions 571,625 (Combined Utilities); cash flow p7 shows Loan/GrantProceeds/Loan Forgiveness 805,321",
-      "issue": "About 400,000 of this line is beyond the 171,625 loan forgiveness on p6 and may be loan proceeds (debt proceeds / other financing), not revenue. A person should decide; decision_needed has no entry for it."
-    },
-    {
-      "severity": "warning",
-      "path": "proprietary",
-      "page": 7,
-      "extracted": null,
-      "on_page": "Statement of Cash Flows - Proprietary Fund: operating 1,079,147; capital and related financing (562,221); investing 14,899; beginning cash 2,288,059; ending cash 2,819,884",
-      "issue": "proprietary was left null because the report is cash basis, but the utility fund is accrual and a full cash flow statement is printed. This is allowed by the rules (GAAP only), but the cash flows are not captured."
-    }
+    {"severity": "error", "path": "missing", "page": 8,
+     "extracted": "notes: '... Read pages 1-8 of 8 Balance sheet (user 2026-10-27): ...'",
+     "on_page": "trimmed PDF has 8 pages",
+     "issue": "Notes do not end with 'Read pages 1-8 of 8' (text was appended after it). All 8 pages are covered and no statement/schedule line is missing; this is a formatting failure of the required page-count marker only."},
+    {"severity": "error", "path": "receipts[12].category", "page": 4,
+     "extracted": "charges for services/fees", "on_page": "Cemetary Receipts 12,261",
+     "issue": "User rule 2026-10-28: cemetery receipts are their own receipt category, Cemetery Fees."},
+    {"severity": "error", "path": "receipts[18].category", "page": 6,
+     "extracted": "charges for services/fees", "on_page": "Combined Utilities Fund: Charges for services 3,803,763",
+     "issue": "User rule 2026-10-28: utility fund sales/charges are category Utility Charges (the matching detail[24] line already uses Utility Charges)."},
+    {"severity": "error", "path": "detail[23].category", "page": 8,
+     "extracted": "Utility Charges", "on_page": "Combined Utilities Fund: Permits, fees, and rent 40,453",
+     "issue": "This is the Farm Rental 40,453 (p6), recorded as category Rentals in receipts[20] and detail_category rentals here; category should be Rentals, not Utility Charges."},
+    {"severity": "warning", "path": "detail[8].category", "page": 8,
+     "extracted": "licenses and permits", "on_page": "General Fund: Permits, fees, and rent 42,147",
+     "issue": "Equals 'Park Receipts' 42,147 on p4, which receipts[10] records as Recreation Fees; mixed label, category inconsistent with the statement line (detail_category 'other charges for services' also differs)."},
+    {"severity": "warning", "path": "disbursements[7].original_label", "page": 6,
+     "extracted": "Personnel services", "on_page": "Personel services",
+     "issue": "Label spelling corrected from the printed text."},
+    {"severity": "warning", "path": "detail[0].fund", "page": 8,
+     "extracted": "General / Combined Utilities", "on_page": "General Fund / Combined Utilities Fund",
+     "issue": "User rule 2026-10-27: fund names end in 'Fund' (applies to all detail lines)."}
   ]
 }

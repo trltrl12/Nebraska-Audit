@@ -1,13 +1,16 @@
 {
   "stem": "Mead_Public_Schools_FY2025",
-  "values_checked": 164,
+  "values_checked": 165,
   "issues": [
-    {"severity": "warning", "path": "detail[142]..detail[151] (Reclassification to transfers contra lines)", "page": 6,
-     "extracted": "ten contra lines totalling -370,590, incl. State programs -5,539, Other state categorical -7,500, Federal programs -161,302",
-     "on_page": "Reclassifications column: Instruction (82,468) ... State programs (5,539), Other state categorical programs (7,500), Federal programs (161,302); total (370,590); Transfers row (370,590)",
-     "issue": "The column nets to the 370,590 hidden transfer, but it removes the state and federal program lines entirely (Total column blank). It probably also moves those programs into the functions, so the per-group split between 'program reclassification' and 'hidden transfer' is an assumption. All ten lines are labelled under the budget schedule but their source is the combining schedule (p6). Every amount matches the page and the totals tie. The general treatment is already in decision_needed."},
-    {"severity": "warning", "path": "detail[9].detail_category", "page": 9,
-     "extracted": "county/other local governments", "on_page": "2110 County fines and license fees 13,707",
-     "issue": "This line mixes fines with license fees that the county passes through. 'fines and forfeitures' is also defensible. There is no review flag naming the mix. The same applies to receipts[15] 'County and ESU sources' 13,857 (intergovernmental/state aid), which is mostly this line."}
+    {"severity": "warning", "path": "notes", "page": 20,
+     "extracted": "... Read pages 1-20 of 20 Balance sheet (user 2026-10-27): ... (re-check text appended)",
+     "on_page": "PDF has 20 pages",
+     "issue": "'Read pages 1-20 of 20' is present with the correct page count but is no longer at the end of notes (later re-check text was appended after it). All 20 pages were checked and every statement/schedule line is in the JSON."},
+    {"severity": "warning", "path": "disbursements[1].category", "page": 3,
+     "extracted": "support services (Pupils)", "on_page": "Student support services 417,498 (General 248,483 + Other Governmental 169,015)",
+     "issue": "The statement line includes the Activities Fund's 169,015 of student activity spending (p8, p20). The category follows the printed label, but about 40% of the line is student activities."},
+    {"severity": "warning", "path": "detail[103].category", "page": 18,
+     "extracted": "support services", "on_page": "Student Fee Fund - Other expenses 23",
+     "issue": "The nonmajor combining schedule (p8) and the statement (p3) count this 23 under General administration, so it could be General Administration rather than support services. The amount is immaterial."}
   ]
 }

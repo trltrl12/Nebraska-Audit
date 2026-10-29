@@ -1,16 +1,12 @@
 {
   "stem": "Rising_City_FY2025",
-  "values_checked": 40,
+  "values_checked": 45,
   "issues": [
+    {"severity": "warning", "path": "receipts[12].category", "page": 2,
+     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other, Water Fund 61,649.75 / Sewer Fund 58,995.34",
+     "issue": "Water and Sewer Fund 'Other' local receipts are assumed to be utility charges (marked review). If so, the user's top-level category would be Utility Charges, but the page doesn't say what they are. This covers receipts[12] and receipts[13]."},
     {"severity": "warning", "path": "balance_sheet.liabilities", "page": 5,
-     "extracted": [], "on_page": "Schedule of Outstanding Debt: NDEQ Loan, issued 12/15/2006, 2.55%, matures 12/15/2026, 32,855.94",
-     "issue": "The outstanding NDEQ loan (Sewer Fund debt service) isn't recorded or mentioned. Leaving it out of a cash-basis balance sheet is defensible, but it should at least be in notes."},
-    {"severity": "warning", "path": "notes", "page": 6,
-     "extracted": "p6 schedules page crossed out with red line (void, not used; same figures)",
-     "on_page": "p6 (crossed out): investments 125,006.99 and debt 32,855.94 match p5, but its Schedule of Interfund Transfers is blank (TOTAL -)",
-     "issue": "The notes say the void page has the same figures, but its transfer schedule is empty, whereas p5 lists 124,000.00. Using p5 is correct; only the note is inaccurate."},
-    {"severity": "warning", "path": "notes", "page": 1,
-     "extracted": null, "on_page": "County Treasurer Balance at October 1, 2024 $2,695.71; at September 30, 2025 5,598.93",
-     "issue": "The county treasurer balances printed below Exhibit A are outside the roll-forward, and the JSON doesn't record or mention them anywhere."}
+     "extracted": [], "on_page": "Schedule of Outstanding Debt: NDEQ Loan 32,855.94 (issued 12/15/2006, 2.55%, matures 12/15/2026)",
+     "issue": "The cash-basis Exhibit A prints no liabilities, so the empty list is consistent with the rules. However, the report does disclose 32,855.94 of outstanding debt, which notes don't mention. Also, notes say the void p6 page has the 'same figures', but its transfer schedule is blank."}
   ]
 }

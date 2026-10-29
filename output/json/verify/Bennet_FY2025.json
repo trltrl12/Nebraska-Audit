@@ -1,21 +1,12 @@
 {
   "stem": "Bennet_FY2025",
-  "values_checked": 125,
+  "values_checked": 110,
   "issues": [
-    {"severity": "warning", "path": "proprietary", "page": 10,
-     "extracted": null, "on_page": "Statement of Cash Flows - Proprietary Funds, Total (p11): operating 127,268; noncapital financing 134,000; capital and related financing (678,818); investing 37,687; beginning cash 792,975; ending cash 413,112",
-     "issue": "a proprietary cash flow statement is printed (the business-type activities are accrual), but proprietary is null because the governmental basis is modified cash. The rules tie proprietary to GAAP, so this is defensible, but the printed figures go unused."},
-    {"severity": "warning", "path": "receipts[8].category", "page": 7,
-     "extracted": "donations/contributions", "on_page": "Contributions and grants 13,198 (shown as 'Operating Grants and Contributions' on p2)",
-     "issue": "the source is not stated; this may be government grants rather than private donations (review set)"},
-    {"severity": "warning", "path": "detail[3].detail_category", "page": 12,
-     "extracted": "rentals", "on_page": "Rental and fees 52,711",
-     "issue": "the line mixes rentals and fees; 'rentals' is a judgment call and the detail line has no review flag"},
-    {"severity": "warning", "path": "detail[13].detail_category", "page": 13,
-     "extracted": "highway allocation", "on_page": "Intergovernmental 156,378 (Street Fund; 'State allocation' on p3)",
-     "issue": "highway allocation is assumed; it is very likely right for the Street Fund, but the page does not say so (review set)"},
-    {"severity": "warning", "path": "receipts[12].category", "page": 9,
-     "extracted": "other", "on_page": "Other revenue 986 (Water Fund)",
-     "issue": "unspecified operating revenue; 'other' with review is defensible"}
+    {"severity": "warning", "path": "receipts[10].category", "page": 9,
+     "extracted": "charges for services/fees", "on_page": "Sales 631,216 (Water, Sewer, Trash enterprise funds)",
+     "issue": "These are utility fund sales, so the user's 2026-10-28 rule gives them the Utility Charges category. user_rules.py will not catch this: the label is just 'Sales' and the line has no fund name. The same applies to 'Service charges' 975 (receipts[11])."},
+    {"severity": "warning", "path": "receipts[5].category", "page": 7,
+     "extracted": "charges for services/fees", "on_page": "Rental and fees 52,711",
+     "issue": "This line mixes rentals and fees. The detail line (detail[3]) uses detail_category rentals, so it could be the Rentals category under the user's 2026-10-28 rule. The mix is not marked review."}
   ]
 }

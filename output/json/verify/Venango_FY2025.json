@@ -1,12 +1,9 @@
 {
   "stem": "Venango_FY2025",
-  "values_checked": 42,
+  "values_checked": 40,
   "issues": [
-    {"severity": "warning", "path": "receipts[0].original_label", "page": 1,
-     "extracted": "Personal Property Taxes", "on_page": "Personal and Real Property Taxes",
-     "issue": "Label not as printed (line 4). Amount 117,562.61 is correct."},
-    {"severity": "warning", "path": "receipts[10].category", "page": 1,
-     "extracted": "investment income", "on_page": "Local Receipts: Other 2,881.41 (ICS Funds column)",
-     "issue": "Assumption: the ICS Funds column's 'Other' local receipts were treated as interest. Nothing on the page says what they are. Review flag present."}
+    {"severity": "warning", "path": "receipts[0].original_label", "page": 1, "extracted": "Personal Property Taxes", "on_page": "Personal and Real Property Taxes", "issue": "the label doesn't match the printed row (line 4). Under the user's rename rule it should be 'Property Tax', with the printed text in printed_label."},
+    {"severity": "warning", "path": "receipts[10].category", "page": 1, "extracted": "Interest Income", "on_page": "Local Receipts: Other 2,881.41 (ICS Funds column)", "issue": "the page doesn't say this is interest; the category is assumed from the ICS deposit account (already flagged review)"},
+    {"severity": "warning", "path": "receipts[11].category", "page": 1, "extracted": "charges for services/fees", "on_page": "Local Receipts: Other 76,507.63 (Utilities Fund column)", "issue": "if these are utility collections as assumed, the user's category is Utility Charges, not charges for services/fees. The page doesn't say what they are."}
   ]
 }

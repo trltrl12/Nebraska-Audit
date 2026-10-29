@@ -1,30 +1,12 @@
 {
   "stem": "Boone_Central_Schools_FY2025",
-  "values_checked": 206,
+  "values_checked": 145,
   "issues": [
-    {
-      "severity": "warning",
-      "path": "detail[72].category",
-      "page": 12,
-      "extracted": "other / miscellaneous expenditure",
-      "on_page": "5000 Other miscellaneous expense 400 (Bond Fund, debt service code 5000); statement p6 prints it on the 'Debt service: Fees' row",
-      "issue": "[fixed: now debt service interest / debt interest and fees] The report identifies this as a debt service fee. Category should be 'debt service interest' and detail_category 'debt interest and fees', not other/miscellaneous. It also disagrees with disbursements[16], where the same 400 is debt service interest."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[13].category",
-      "page": 6,
-      "extracted": "other",
-      "on_page": "Other income 6,620 (p9: 1990 Other local receipts 1,639 + 2210 ESU receipts 3,706 + 1941 Sale of books 1,275)",
-      "issue": "The report says what this line is made of. Its largest part is ESU receipts (intergovernmental, county/other local governments), so 'other' is arguably not the best category for a mixed line."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[39].category",
-      "page": 9,
-      "extracted": "capital outlay",
-      "on_page": "4900 Facilities acquisition and construction 100,000",
-      "issue": "The statement (p5) folds this line into General Fund 'Building and grounds' 1,040,966 (= 940,966 + 100,000), which is support services. The extractor assumed the 100,000 Building-and-grounds elimination on p6 is this line and offset it with contra detail[40] plus transfer detail[41]. That handling follows the rules and nets to zero, but the page does not say which line holds the transfer."
-    }
+    {"severity": "warning", "path": "detail[46].category", "page": 10,
+     "extracted": "support services", "on_page": "2900 Other support services 106,948 (Depreciation Fund); statement p5 prints the Depreciation Fund's 106,948 on the Building and grounds row",
+     "issue": "the report's own statement counts this spending as Building and grounds; label says other support services"},
+    {"severity": "warning", "path": "receipts[19].category", "page": 9,
+     "extracted": "Sale of Property 87,296", "on_page": "5300 Sale of assets 71,288 + 5301 Insurance adjustment 16,008 (p9)",
+     "issue": "mixed line kept whole with dominant category (review set), although p9 prints the breakdown and the Fines and licenses / Other income lines were split the same way"}
   ]
 }

@@ -1,8 +1,12 @@
 {
   "stem": "Garrison_FY2025",
-  "values_checked": 23,
+  "values_checked": 18,
   "issues": [
-    {"severity": "warning", "path": "disbursements[2].fund_type", "page": 2, "extracted": "governmental", "on_page": "Line 45 Solid Waste (Business-Type Activities): General 315.94, Street 3,298.10, Total 3,614.04", "issue": "The form prints this under Business-Type Activities, but it was paid from governmental fund columns. Treating it as governmental is defensible and already marked review. Street Fund paying 3,298.10 of solid waste is unusual."},
-    {"severity": "warning", "path": "ending_fund_balance", "page": 1, "extracted": "(field absent)", "on_page": null, "issue": "The ending_fund_balance key is missing from the JSON. It should be present as null for a cash-basis report."}
+    {"severity": "warning", "path": "disbursements[2].fund_type", "page": 2,
+     "extracted": "governmental / utilities", "on_page": "Solid Waste 3,614.04 (line 45, under Business-Type Activities; General 315.94 + Street 3,298.10)",
+     "issue": "Printed under Business-Type Activities but paid from the General and Street fund columns (no utility fund column exists). Treating it as governmental is defensible, and the line is already marked for review."},
+    {"severity": "warning", "path": "balance_sheet.equity[0].original_label", "page": 1,
+     "extracted": "Ending Balance (Line 24)", "on_page": "Ending Balance (Line 22 MINUS Line 23) / Subtotal of Ending Balances (Line 26 + 27)",
+     "issue": "The label is paraphrased, not as printed. The amount 65,790.19 is correct."}
   ]
 }

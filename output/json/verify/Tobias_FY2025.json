@@ -1,18 +1,12 @@
 {
   "stem": "Tobias_FY2025",
-  "values_checked": 40,
+  "values_checked": 48,
   "issues": [
-    {"severity": "warning", "path": "decision_needed", "page": 1,
-     "extracted": 98890, "on_page": "Local Receipts: Other: General 18,140, Street 1,333, Fire 78,892 (p1), Park 525 (p2)",
-     "issue": "Governmental 'Local Receipts: Other' (98,890) is about 58% of governmental receipts (169,491) and is unexplained. The Fire Fund's 78,892 is that fund's only receipt. It could be rural fire contracts, a grant, or loan proceeds. The line is recorded as 'other' with a review note, but there is no decision_needed[] entry."},
-    {"severity": "warning", "path": "transfers_out", "page": 4,
-     "extracted": 18504, "on_page": "Debt Service Fund line 50 transfer out 6,025; p5 schedule: 'Water Bond Fund' to Water Fund 6,025",
-     "issue": "The p5 schedule calls the 'Debt Service Fund' column the Water Bond Fund, so it is probably part of the water enterprise. The extractor treated it as governmental: 6,025 is in the governmental beginning cash and transfers_out, and business_type.transfers_net is -1,002. If the column is business-type, governmental beginning cash would be 507,277 and transfers_out 12,479, and business-type would net +5,023 with beginning 42,749. Both versions reconcile; the classification is an assumption."},
-    {"severity": "warning", "path": "receipts[10].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Sewer 8,052 + Water 45,608)",
-     "issue": "The page prints only 'Other'. Treating the utility columns' amount as utility charges is an assumption (the line already has a review note)."},
-    {"severity": "warning", "path": "balance_sheet.equity[0].original_label", "page": 1,
-     "extracted": "Subtotal of Ending Balances (Line 26 + 27)", "on_page": "Line 24 Ending Balance 549,859; line 28 Subtotal of Ending Balances 549,859",
-     "issue": "The equity line uses the line 28 asset subtotal label. Line 24 'Ending Balance' is the balance line itself. The amounts are the same."}
+    {"severity": "error", "path": "receipts[10].category", "page": 1,
+     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other - Sewer Fund 8,052, Water Fund 45,608",
+     "issue": "the extractor treats these utility-fund receipts as utility charges, but under the user rules (2026-10-28) utility fund sales/charges have their own receipt category, Utility Charges, not charges for services/fees. The amount itself is correct"},
+    {"severity": "warning", "path": "beginning_cash", "page": 2,
+     "extracted": "Debt Service Fund 6,025 counted as governmental", "on_page": "DEBT SERVICE FUND column; p5 interfund schedule calls it 'Water Bond Fund' -> Water Fund 6,025",
+     "issue": "the fund is the Water bond fund and its only activity is a 6,025 transfer to the Water Fund, so it may belong with the business-type utility funds. Treating it as governmental puts a 6,025 inflow into the governmental beginning cash and transfers_out, and a +1,002 net transfer between fund types; the extractor's notes say so"}
   ]
 }

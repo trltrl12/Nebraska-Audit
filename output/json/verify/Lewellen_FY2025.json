@@ -1,24 +1,18 @@
 {
   "stem": "Lewellen_FY2025",
-  "values_checked": 36,
+  "values_checked": 40,
   "issues": [
+    {"severity": "error", "path": "reported_totals.business-type.disbursements.includes", "page": 2,
+     "extracted": [], "on_page": "Sewer 21,357.18 + Trash 47,827.19 = 69,184.37 incl. line 49 Transfers Out of Surplus Fees 3,000.00",
+     "issue": "The total includes the 3,000 transfer, but includes is [] (the transfer is noted only in a non-schema 'includes_split' field). Business disbursement lines sum to 66,184.37, so the totals check fails by 3,000. includes should be [\"transfers_net\"]."},
+    {"severity": "error", "path": "receipts[11].category", "page": 1,
+     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Sewer Fund) 29,178.75",
+     "issue": "Sewer fund charges are Utility Charges under the user rules, and the matching Trash fund line already uses Utility Charges. The two lines are inconsistent."},
     {"severity": "warning", "path": "receipts[10].category", "page": 1,
-     "extracted": "keno/lottery", "on_page": "Local Receipts: Other, Lottery Fund 43.32",
-     "issue": "Line printed as 'Other' in the Lottery Fund; extractor says it is probably interest (which would be investment income) but filed it as keno/lottery. Judgment call, already marked review"},
-    {"severity": "warning", "path": "receipts[11].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other, Sewer Fund 29,178.75",
-     "issue": "Printed as 'Other'; sewer charges is a sensible assumption but the page does not say so (already marked review)"},
-    {"severity": "warning", "path": "receipts[12].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other, Trash Fund 51,519.76",
-     "issue": "Printed as 'Other'; refuse charges is a sensible assumption but the page does not say so (already marked review)"},
-    {"severity": "warning", "path": "balance_sheet.equity[0].original_label", "page": 1,
-     "extracted": "Ending Balance (Subtotal of Ending Balances)", "on_page": "Line 28: Subtotal of Ending Balances (Line 26 + 27); Line 24: Ending Balance",
-     "issue": "Label combines two printed row labels; amount 159,658.23 (all-funds total) is correct"},
-    {"severity": "warning", "path": "transfers_in", "page": 3,
-     "extracted": 3000.00, "on_page": "Schedule of Interfund Transfers: Sewer Fund to Street Fund $3,000 (handwritten); printed TOTAL line shows '-'",
-     "issue": "The report's own transfer schedule total ('-') doesn't match its single $3,000 entry or Exhibit A lines 19/49 (3,000.00). Extracted amounts are right; this small inconsistency in the report is not recorded in report_discrepancies"},
-    {"severity": "warning", "path": "missing", "page": 1,
-     "extracted": null, "on_page": "County Treasurer Balance at October 1, 2024 $2,937.81; at September 30, 2025 4,228.23",
-     "issue": "Memo county treasurer balances, printed outside the statement totals, are not recorded or mentioned in notes; they are probably not part of village cash, but this should be confirmed"}
+     "extracted": "keno/lottery", "on_page": "Local Receipts: Other (Lottery Fund) 43.32",
+     "issue": "Category guessed. A small 'Other' receipt in the Lottery fund (which holds a CD) is more likely interest."},
+    {"severity": "warning", "path": "balance_sheet.assets", "page": 1,
+     "extracted": null, "on_page": "County Treasurer Balance at September 30, 2025: 4,228.23 (October 1, 2024: 2,937.81)",
+     "issue": "The county treasurer balance is printed on Exhibit A but is not in the balance sheet or the notes."}
   ]
 }

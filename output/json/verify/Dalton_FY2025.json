@@ -1,10 +1,9 @@
 {
   "stem": "Dalton_FY2025",
-  "values_checked": 39,
+  "values_checked": 45,
   "issues": [
-    {"severity": "warning", "path": "receipts[11].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Water, Sewer, Trash column) 204,986.93", "issue": "printed as 'Other'; utility charges assumed from the fund column"},
-    {"severity": "warning", "path": "disbursements[4].category", "page": 2,
-     "extracted": "debt service principal", "on_page": "Debt Service 12,702.68 (Water, Sewer, Trash column)", "issue": "principal and interest not split on the page (USDA-DEQ loan, 2.00%); whole line put in principal. Correctly business-type"}
+    {"severity": "warning", "path": "reported_totals.business-type", "page": 1,
+     "extracted": {"receipts": 221986.93, "disbursements": 234326.36, "includes": []}, "on_page": "Total Receipts 221,986.93 incl. line 20 transfers in 7,000; Total Disbursements & Transfers 234,326.36 incl. line 50 transfers out 3,500",
+     "issue": "Printed totals are correct, but they include gross transfers while 'includes' is empty; the gross amounts are carried in a non-schema field 'includes_split'. Business lines 214,986.93 / 230,826.36 + transfers in 7,000 / out 3,500 tie to the printed totals, but a validator reading only 'includes' will see a 7,000 / 3,500 gap"}
   ]
 }

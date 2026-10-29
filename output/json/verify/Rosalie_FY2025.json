@@ -1,12 +1,21 @@
 {
   "stem": "Rosalie_FY2025",
-  "values_checked": 31,
+  "values_checked": 42,
   "issues": [
-    {"severity": "warning", "path": "balance_sheet.assets[0].original_label", "page": 1,
-     "extracted": "Subtotal of Ending Balances (Net Cash Balance)", "on_page": "Net Cash Balance (line 26) 106,005.13",
-     "issue": "label combines lines 26 and 28; the asset row printed is 'Net Cash Balance'. Amount correct; line 24 total prints 106,005.33 (0.20 Water Fund difference already in report_discrepancies)"},
+    {"severity": "warning", "path": "receipts[11].category", "page": 1,
+     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other - Water Fund 48,315.61",
+     "issue": "Inconsistent with the Garbage Fund line (receipts[10], Utility Charges). Under the user's 2026-10-28 rule, utility fund sales are Utility Charges."},
+    {"severity": "warning", "path": "receipts[12].category", "page": 1,
+     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other - Sewer Fund 44,821.11",
+     "issue": "Same as receipts[11]: should probably be Utility Charges."},
+    {"severity": "warning", "path": "receipts[10].original_label", "page": 1,
+     "extracted": "Local Receipts: Other (Garbage Fund) / (Water Fund) / (Sewer Fund)", "on_page": "Local Receipts: Other",
+     "issue": "The extractor added fund names to the printed label on receipts[10]-[12]."},
+    {"severity": "warning", "path": "disbursements[2]", "page": 3,
+     "extracted": "culture/recreation, 'Public Works - Other (Park Fund)'", "on_page": "Public Works - Other 35,953.69 (Park Fund column)",
+     "issue": "The printed row is Public Works - Other, not culture/recreation. Using culture/recreation because the column is the Park Fund is a defensible judgment call. The label has '(Park Fund)' added. Already marked review."},
     {"severity": "warning", "path": "receipts[9].category", "page": 1,
      "extracted": "other", "on_page": "Local Receipts: Other 14,291.00 (General 7,114.45 + Street 3,271.25 + Park 3,905.30)",
-     "issue": "unexplained line is about 11.7% of governmental receipts (>10% in other); no breakdown in trimmed PDF, so 'other' with review is the only option"}
+     "issue": "About 11.7% of governmental receipts is in 'other', with no breakdown in the trimmed PDF. The label says Other, and the line is marked review."}
   ]
 }

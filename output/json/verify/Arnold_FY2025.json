@@ -1,46 +1,24 @@
 {
   "stem": "Arnold_FY2025",
-  "values_checked": 140,
+  "values_checked": 142,
   "issues": [
-    {
-      "severity": "warning",
-      "path": "receipts[8].category",
-      "page": 4,
-      "extracted": "other",
-      "on_page": "Other 36,529 (General 33,096 + Street 3,364 + Econ Dev 69)",
-      "issue": "[fixed per checker: now charges for services/fees] The report prints what this line is made of (p10, p12, p14), and most of it is charges for services: camping fees 16,208, community center rentals 12,094, supply sales and service 2,156, messages 25 (30,483 of 36,529). The rest is franchise fees 1,621, permits 446, street interest 913 and misc 3,066. The rule for mixed lines is the dominant category ('charges for services/fees') plus a review note naming the mix, not 'other'."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[5].category",
-      "page": 4,
-      "extracted": "other",
-      "on_page": "Loan repayments 6,540",
-      "issue": "Repayments of economic development loans. The Statement of Activities (p2) counts them as Community Development charges for services. They could also be seen as other financing (return of loan principal). 'other' is used, with a review note. Same for detail[36]."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[7].category",
-      "page": 4,
-      "extracted": "donations/contributions",
-      "on_page": "Grants 30,625 (General Fund 'Grant', p10)",
-      "issue": "The report does not say where the grant came from. Village grants usually come from a government (state or federal), and 'donations/contributions' is meant for non-government sources. Same for detail[12]."
-    },
-    {
-      "severity": "warning",
-      "path": "business_type.measure",
-      "page": 8,
-      "extracted": "net position",
-      "on_page": "NET POSITION (modified cash basis) 1,106,686 = cash and time deposits",
-      "issue": "The report is modified cash basis. Under the schema rules the measure would be 'cash'; the amounts are the same either way."
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[6..24].category",
-      "page": 6,
-      "extracted": "utilities",
-      "on_page": "Proprietary statement lists expenses by object (Salaries, Payroll tax, Supplies...)",
-      "issue": "The rule for spending listed only by object asks for review 'listed by object'; none of these lines has it. The function (utilities) is correct."
-    }
+    {"severity": "error", "path": "detail[10].category", "page": 10,
+     "extracted": "charges for services/fees", "on_page": "Rentals - community center 12,094",
+     "issue": "rental income has its own receipt category Rentals (user rule 2026-10-28: Rentals out of charges for services); detail_category is already 'rentals'"},
+    {"severity": "warning", "path": "detail[9].category", "page": 10,
+     "extracted": "charges for services/fees", "on_page": "Camping fees 16,208",
+     "issue": "camping (campground/park) fees likely belong in Recreation Fees, as the detail_category recreation/pool/park fees already says"},
+    {"severity": "warning", "path": "receipts[7].category", "page": 4,
+     "extracted": "charges for services/fees", "on_page": "Charges for services 9,738 (= Swimming pool fees 8,293 + Swimming lessons 1,445, p10)",
+     "issue": "the whole line is pool fees/lessons; Recreation Fees fits (the detail lines are already Recreation Fees)"},
+    {"severity": "warning", "path": "receipts[12].category", "page": 6,
+     "extracted": "charges for services/fees", "on_page": "Charges for services 1,256,234 (Electricity/Water/Sewer/Solid Waste columns)",
+     "issue": "utility fund charges for services; user category Utility Charges (utility fund sales/charges, garbage/refuse) appears to fit"},
+    {"severity": "warning", "path": "receipts[6].computed", "page": 12,
+     "extracted": "Motor vehicle fees 7,561 counted in the intergovernmental/state aid remainder 177,920", "on_page": "Motor vehicle fees 7,561 (Street Fund, under Intergovernmental)",
+     "issue": "same line is category motor vehicle tax in detail (detail[27]) but stays inside state aid in receipts; categories for the same label should match across receipts and detail"},
+    {"severity": "warning", "path": "disbursements[9].category", "page": 6,
+     "extracted": "Insurance", "on_page": "Insurance - group 152,055 (under Personnel services)",
+     "issue": "group (health) insurance printed under Personnel services is an employee benefit; Employee Benefits and Payroll Taxes may fit better"}
   ]
 }

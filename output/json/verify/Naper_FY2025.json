@@ -1,18 +1,9 @@
 {
   "stem": "Naper_FY2025",
-  "values_checked": 32,
+  "values_checked": 68,
   "issues": [
-    {"severity": "warning", "path": "decision_needed", "page": 1,
-     "extracted": null, "on_page": "FOR THE PERIOD 10/1/23 THROUGH 9/30/24",
-     "issue": "Filed under FY2025 but the statement covers FY2024 (fiscal_year_end 2024-09-30). The extraction mentions this in notes only; a filing for the wrong year is a question for a person, and decision_needed[] is missing."},
     {"severity": "warning", "path": "receipts[9].category", "page": 1,
-     "extracted": "other", "on_page": "Local Receipts: Other 35,473.00 (Combined Utilities Fund column)",
-     "issue": "This is the only receipt in the Combined Utilities Fund, so it is almost certainly utility charges (charges for services/fees). Recording it as 'other' with review is defensible but probably understates charges for services. As recorded, 100% of business-type receipts are in 'other'."},
-    {"severity": "warning", "path": "receipts[8].category", "page": 1,
-     "extracted": "other", "on_page": "Local Receipts: Other 9,620.00 (General Fund)",
-     "issue": "Nothing on the page breaks this line down, so 'other' with review is acceptable. It is 16% of governmental receipts (59,829), over the 10% review threshold."},
-    {"severity": "warning", "path": "balance_sheet.liabilities", "page": 3,
-     "extracted": [], "on_page": "Schedule of Outstanding Debt: G.O. Bond 29,066.39 + G.O. Bond 44,979.92 = 74,046.31",
-     "issue": "The cash-basis balance sheet correctly has no liabilities, but p3 prints 74,046.31 of outstanding G.O. bonds, and there are no Debt Service disbursements (line 39 blank) this year. Informational only; the debt is not captured anywhere in the JSON."}
+     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other 35,473 (Combined Utilities Fund column)",
+     "issue": "This is the only receipt of the Combined Utilities Fund and is presumed to be utility charges. Under the user's 2026-10-28 rule, utility fund sales and charges are category Utility Charges, not charges for services/fees. The same applies to detail[12]. The label itself is only 'Other', so the extractor's presumption is still an assumption."}
   ]
 }

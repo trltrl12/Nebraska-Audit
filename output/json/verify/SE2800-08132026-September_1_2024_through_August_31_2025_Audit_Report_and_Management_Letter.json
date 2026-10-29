@@ -1,9 +1,15 @@
 {
   "stem": "SE2800-08132026-September_1_2024_through_August_31_2025_Audit_Report_and_Management_Letter",
-  "values_checked": 40,
+  "values_checked": 48,
   "issues": [
-    {"severity": "warning", "path": "detail[5].detail_category", "page": 2,
-     "extracted": "not itemized", "on_page": "Elementary Learning Centers: Personnel 1,645,018; Contracted/purchased 11,219,862; Supplies 343,531; Occupancy 808,822; Other 254,665 (Administration and Coordinating Council also broken down)",
-     "issue": "The Statement of Activities (p2) prints an object breakdown for each function, but the detail lines record the functions as 'not itemized'. It is a basic statement, so leaving it out follows the rules, but this object detail is captured nowhere else."}
+    {"severity": "warning", "path": "entity_type", "page": 1,
+     "extracted": "school district", "on_page": "Learning Community of Douglas and Sarpy Counties",
+     "issue": "the Learning Community is not a school district (the notes themselves say 'entity type other'); if it stays 'school district', 'Administration' and 'Coordinating Council' would fall under the school functions (General Administration) rather than general government"},
+    {"severity": "warning", "path": "detail[11]", "page": 2,
+     "extracted": "Elementary Learning Centers Fund objects 1,645,018 / 11,219,862 / 343,531 / 254,665", "on_page": "Statement of Activities Elementary Learning Centers function column (both funds) 14,271,898",
+     "issue": "the page breaks the function down by object, not by fund; attributing every object except Occupancy 808,822 to the Elementary Learning Centers Fund is an inference (it ties exactly: 14,271,898 - 808,822 = 13,463,076, and Capital Projects spending is the 808,822 lease payments). Applies to detail[11]-[14]; these lines and detail[2]-[6] cite p2 but carry the budget schedule's name"},
+    {"severity": "warning", "path": "notes", "page": null,
+     "extracted": "...Read pages 1-7 of 7 Balance sheet (user 2026-10-27): ...", "on_page": "7 pages",
+     "issue": "page count is right (7 of 7) but the notes no longer end with 'Read pages 1-7 of 7' (a later sentence was appended), and the earlier note still says the balance sheet is from the Statement of Net Position (p1) while it now comes from p3"}
   ]
 }

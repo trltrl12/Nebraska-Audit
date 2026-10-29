@@ -1,15 +1,22 @@
 {
   "stem": "Firth_FY2025",
-  "values_checked": 85,
+  "values_checked": 190,
   "issues": [
-    {"severity": "warning", "path": "receipts[1].category", "page": 4,
-     "extracted": "other taxes", "on_page": "Public power lease rebate 61,375",
-     "issue": "A lease rebate from the public power district is not clearly a tax. It could be charges for services/fees (lease income) or other. It is defensible under the 'public power district tax' rule and already marked review."},
-    {"severity": "warning", "path": "receipts[12].amount", "page": 4,
-     "extracted": 65811, "on_page": "Insurance proceeds 21,937 in each of General, Street and Park (and 21,937 in each of Water and Sewer on p6)",
-     "issue": "The same 21,937 appears in five fund columns (109,685 in total). That could be one claim split equally, or the report may have repeated the figure. The amounts match the page; someone should check this against the source PDF notes."},
-    {"severity": "warning", "path": "receipts[17].category", "page": 6,
-     "extracted": "other", "on_page": "Loan forgiveness (note D) 40,807",
-     "issue": "This is principal forgiveness on a long-term obligation, which is non-cash on a modified cash basis. It is likely an SRF/state subsidy (intergovernmental/state aid) or other financing rather than operating revenue. The note D explanation is not on the trimmed pages. It is already marked review."}
+    {
+      "severity": "error",
+      "path": "receipts[16].category",
+      "page": 6,
+      "extracted": "charges for services/fees",
+      "on_page": "Receipts for services 261,676 (Water 167,252 + Sewer 94,424)",
+      "issue": "These are utility fund sales, which the user's rule (2026-10-28) puts in Utility Charges. The matching detail lines (Water/Sewer 'Receipts for services') already use Utility Charges, so the category is inconsistent within the report."
+    },
+    {
+      "severity": "warning",
+      "path": "notes",
+      "page": null,
+      "extracted": "notes contain 'Read pages 1-8 of 8' mid-text, followed by further notes",
+      "on_page": "trimmed PDF has 8 pages",
+      "issue": "The notes do not end with 'Read pages 1-N of N'. The page count is right (8 of 8), and all 8 pages were checked here."
+    }
   ]
 }

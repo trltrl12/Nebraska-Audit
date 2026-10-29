@@ -1,21 +1,11 @@
 {
   "stem": "Pleasanton_FY2025",
-  "values_checked": 54,
+  "values_checked": 62,
   "issues": [
-    {"severity": "warning", "path": "receipts[2].amount", "page": 1,
-     "extracted": 18105.49, "on_page": "18105 25/51 (handwritten-looking cell, Bond Fund, Personal and Real Property Taxes)",
-     "issue": "Cell can't be read as a clean figure. 18,105.49 is consistent with the row total 72,111.09 - 53,594.30 - 411.30 and with the Bond column total 22,017.60 less the other Bond lines 3,912.11. It is marked computed, as it should be."},
-    {"severity": "warning", "path": "transfers_in.amount", "page": 1,
-     "extracted": 104971.57, "on_page": "General Fund line 20 cell reads 57,546.73 at image resolution",
-     "issue": "57,548.73 was used. That is supported by the General column total 262,586.95 (non-transfer lines sum to 205,038.22), the line 20 total 229,296.17 and the p5 transfer schedule (Bond to General 57,548.73). Faint digit."},
-    {"severity": "warning", "path": "disbursements[8].fund_type", "page": 3,
-     "extracted": "governmental", "on_page": "Line 45 Solid Waste 29,643.00, printed under Business-Type Activities but in the General Fund column",
-     "issue": "Judgment call: kept governmental because it is paid from the General Fund column. Defensible, and the line already carries review."},
-    {"severity": "warning", "path": "decision_needed", "page": 1,
-     "extracted": null, "on_page": "Void (red X) version p2/p4/p6: General ending (57,548.73), Cemetery net cash (47,422.84), Water net cash (124,324.60), no transfers; unmarked version p1/p3/p5 adds transfers Bond->General 57,548.73, Bond->Cemetery 47,422.84, Sewer->Water 124,324.60",
-     "issue": "The transfers appear only in the re-filed version and exactly clear the negative balances in the void one. Bond (debt service) fund money is moved to General and Cemetery. Using the unmarked pages follows the rules, but whether these year-end deficit-clearing transfers are real is a question for a person, and the void version's differing figures aren't in report_discrepancies (only in notes)."},
-    {"severity": "warning", "path": "beginning_cash", "page": 1,
-     "extracted": 863443.26, "on_page": "County Treasurer Balance at October 1, 2024 $7,073.61; at September 30, 2025 5,100.85",
-     "issue": "County treasurer balances are printed below the statement and not recorded or mentioned in notes. They are outside the Exhibit A balances, so the roll-forward is unaffected."}
+    {"severity": "warning", "path": "receipts[2].amount", "page": 1, "extracted": 18105.49, "on_page": "18105 25/51 (handwritten overlay)", "issue": "Bond Fund property tax cell is a handwritten overlay; 18,105.49 is derived from the Total column 72,111.09 and the Bond column total 22,017.60 (both tie). It is marked computed/review, but the cell itself is ambiguous."},
+    {"severity": "warning", "path": "receipts[20].category", "page": 1, "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Water) 139,362.77", "issue": "The extractor assumed this is utility charges because the printed label only says 'Other'. If it is water sales, the user's category would be Utility Charges."},
+    {"severity": "warning", "path": "receipts[21].category", "page": 1, "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Sewer) 36,795.97", "issue": "Same assumption as the Water line: the printed label is 'Other', and if it is utility charges the user's category is Utility Charges."},
+    {"severity": "warning", "path": "disbursements[8].fund_type", "page": 3, "extracted": "governmental", "on_page": "Solid Waste 29,643.00 (Business-Type Activities heading, General Fund column)", "issue": "Printed under the Business-Type Activities heading but paid from the General Fund column. Keeping it governmental makes the General Fund total tie (275,733.08), so this is defensible."},
+    {"severity": "warning", "path": "decision_needed", "page": 2, "extracted": null, "on_page": "pp2, 4, 6 are red-X versions with different figures (General receipts 205,038.22, no transfers, General ending (57,548.73))", "issue": "The filing has two versions of every page. The unmarked versions were used, which is correct, but there is no decision_needed or report_discrepancies entry recording the conflicting voided version."}
   ]
 }

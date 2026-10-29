@@ -1,21 +1,54 @@
 {
   "stem": "Axtell_FY2025",
-  "values_checked": 285,
+  "values_checked": 290,
   "issues": [
-    {"severity": "warning", "path": "receipts[9].category", "page": 4,
-     "extracted": "other", "on_page": "Other receipts 21,361 (General column)",
-     "issue": "On p9 the General Fund schedule's lines not shown elsewhere on p4 add up exactly to 21,361: Rental income 10,643 + Franchise tax 2,885 + Miscellaneous General 6,783 + Cemetery 1,050. The review text saying there is no breakdown is inaccurate, and rentals are the largest part (charges for services/fees). Not split because the line isn't labelled; keeping 'other' is defensible."},
-    {"severity": "warning", "path": "transfers_out", "page": 5,
-     "extracted": 53004, "on_page": "Total Governmental Funds: Transfers in (78,042), Transfers out 25,038, Total other financing (53,004)",
-     "issue": "The Total column prints transfers in as negative and transfers out as positive after the Reclassifications column. The extractor recorded only the net (53,004) as transfers_out (marked computed; matches enterprise +53,004). The gross fund transfers (Road in 97,172; General/Debt/CDA out 150,176) are not captured. Defensible assumption."},
-    {"severity": "warning", "path": "disbursements[9].review", "page": 7,
-     "extracted": null, "on_page": "Operating expenditures listed by object (Salaries 42,040 ... Chemicals 6,744)",
-     "issue": "Business-type spending is listed only by object and assigned the utilities function. Rule requires review 'listed by object', but only disbursements[16] (Miscellaneous) has it; disbursements[9]-[15] and [17]-[18] lack it."},
-    {"severity": "warning", "path": "detail[32].category", "page": 10,
-     "extracted": "general government", "on_page": "Capital outlay 96,711 (General government)",
-     "issue": "Inconsistent function for capital outlay: General/Special Revenue capital outlay lines (detail[32] 96,711, [40] 3,425, [56] 71,452, [63] 7,352, [83] 12,019, and Street resurfacing [87] 126,487) take the department's function, while p4 reports them as 'Capital outlay' (General 178,940, Road 138,506) and the water/sewer detail lines ([106], [119]) use 'capital outlay'."},
-    {"severity": "warning", "path": "receipts[8].category", "page": 4,
-     "extracted": "property tax", "on_page": "TIF collections 91,649 (Community Development Agency)",
-     "issue": "TIF collections (tax increment) treated as property tax; defensible, review already set (also detail[77])."}
+    {
+      "severity": "warning",
+      "path": "receipts[9].category",
+      "page": 4,
+      "extracted": "charges for services/fees",
+      "on_page": "Charges for services 128,684 = Pool fees and pop 26,786 + Hall rental 2,130 + Garbage collection fees 99,568 + Sale of cemetery lots 200 (p9)",
+      "issue": "77% of the line is garbage collection fees, which the user's rules put in Utility Charges (the matching detail line already uses Utility Charges). The statement label is literally 'Charges for services', so this is defensible, but the dominant category would be Utility Charges."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[11].category",
+      "page": 4,
+      "extracted": "charges for services/fees",
+      "on_page": "Electric system lease 110,573",
+      "issue": "Lease income from the electric system fits Rentals. The matching General Fund detail line has detail_category 'rentals' but category charges for services/fees, so receipts and detail are inconsistent."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[14].category",
+      "page": 4,
+      "extracted": "other",
+      "on_page": "Other receipts 21,361 = Rental income 10,643 + Franchise tax 2,885 + Miscellaneous General 6,783 + Miscellaneous Cemetery 1,050 (p9)",
+      "issue": "The p9 General Fund schedule accounts for this line exactly. Rentals are 49.8% (just under half), so 'other' with review is defensible."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[15].category",
+      "page": 7,
+      "extracted": "charges for services/fees",
+      "on_page": "Utility billing 216,596; Tapping fees 5,000; Dump fees 1,000 (Enterprise Fund)",
+      "issue": "Utility fund sales/charges are category Utility Charges under the user's rules (2026-10-28). The lines are inconsistent: the Water 'Water tapping fees' and Sewer 'Dump fees' detail lines use Utility Charges, but the Water/Sewer 'Utility billing' detail lines and receipts[15]-[17] use charges for services/fees."
+    },
+    {
+      "severity": "warning",
+      "path": "transfers_out",
+      "page": 5,
+      "extracted": 53004,
+      "on_page": "Total Governmental Funds: Transfers in (78,042), Transfers out 25,038, Total other financing (53,004)",
+      "issue": "Only the net governmental transfer is recorded, as transfers_out (marked computed; equals enterprise +53,004). The gross fund-level transfers (Road in 97,172; General 127,655, Debt Service 21,252 and CDA 1,269 out) are netted by the report's Reclassifications column. Defensible."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[13].category",
+      "page": 4,
+      "extracted": "property tax",
+      "on_page": "TIF collections 91,649 (Community Development Agency)",
+      "issue": "TIF collections (tax increment) are treated as property tax. Defensible, and review is already set (also on the matching detail line)."
+    }
   ]
 }

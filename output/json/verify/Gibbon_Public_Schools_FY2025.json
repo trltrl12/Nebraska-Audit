@@ -1,27 +1,15 @@
 {
   "stem": "Gibbon_Public_Schools_FY2025",
-  "values_checked": 183,
+  "values_checked": 135,
   "issues": [
-    {"severity": "warning", "path": "receipts[7].category", "page": 6,
-     "extracted": "fines and forfeitures", "on_page": "Fines and licenses 48,752 (= Fines and licenses 46,602 + Local license fees 2,150 per p9/p12)",
-     "issue": "line mixes fines and licenses; dominant category is fine, but there's no review flag naming the mix as the rules require"},
-    {"severity": "warning", "path": "receipts[12].category", "page": 6,
-     "extracted": "other", "on_page": "Other 30,700 (= Other local receipts 22,944 + ESU receipts 6,756 + Non-revenue Other 1,000 per p9)",
-     "issue": "p9 shows what makes up this line, and 6,756 of it is ESU receipts (intergovernmental/state aid). 'other' with review is defensible because the line is printed only as Other"},
-    {"severity": "warning", "path": "receipts[11].category", "page": 6,
-     "extracted": "investment income", "on_page": "Interest income 50,822 includes Penalties and interest on taxes 15,003 (General, p9) + 2,356 (Bond, p12)",
-     "issue": "the statement's interest line includes 17,359 of tax penalties/interest, which detail[] files under property tax. Recorded as printed, but receipts and detail categorize it differently"},
-    {"severity": "warning", "path": "detail[26].original_label", "page": 10,
-     "extracted": "Contra: transfer to Other Governmental Funds (Activity/Depreciation) eliminated from Instructional staff", "on_page": "Eliminations (99,435) on Staff row, p6",
-     "issue": "99,435 + 155,672 = 255,107 is the Depreciation Fund transfer (p11), not Activity. The label is misleading; the amount is right"},
-    {"severity": "warning", "path": "detail[31]", "page": 6,
-     "extracted": "full lines kept plus contra lines -99,435 / -155,672", "on_page": "Eliminations column shows exactly which lines hold the transfer (Staff, Building and grounds)",
-     "issue": "the hidden-transfer rule says to split the named line when the page shows which line it is. The contra lines are only meant for when it doesn't. Totals are the same either way"},
-    {"severity": "warning", "path": "report_discrepancies", "page": 3,
-     "extracted": "only the 463 vs 464 interest difference recorded", "on_page": "State apportionment 205,799 (p3) vs 205,800 (p9); operating grants for Instruction 719,729 vs 715,177 + 4,551 = 719,728; expenses in excess (74,190) p3 vs (74,191) p8",
-     "issue": "$1 rounding differences printed in the report itself; not all of them are listed"},
+    {"severity": "error", "path": "disbursements[3].category", "page": 6,
+     "extracted": "Special Education Programs", "on_page": "Support services: Special education 307,796 (budget schedule p10 function code 2141-2183)",
+     "issue": "Codes 2141-2183 are the SPED related support services (psychological, speech, OT/PT, visually impaired). The user's school rule puts these in support services with detail_category Pupils; Special Education Programs is for the 1200 instructional programs only. Gering, for example, records its 2141-2183 lines as Pupils."},
+    {"severity": "error", "path": "detail[24].category", "page": 10,
+     "extracted": "Special Education Programs", "on_page": "2141-2183 Special education (under Support services) 307,796",
+     "issue": "Same issue as disbursements[3]: SPED related services (2141-2183) are support services (Pupils) under the user's school-district rule."},
     {"severity": "warning", "path": "missing", "page": 13,
-     "extracted": null, "on_page": "report page 40 (between Bond Fund budget schedule p39 and combining statement p41) is not in the trimmed PDF",
-     "issue": "the skipped page could hold another supplementary schedule (e.g. a Special Building, Activity or Nutrition fund budget schedule). Check the source PDF; this can't be confirmed from the trimmed PDF"}
+     "extracted": null, "on_page": "report page 40 (between trimmed p12 = report p39 Bond Fund budget schedule and p13 = report p41 combining statement)",
+     "issue": "The extractor's notes say report p40 is not in the trimmed PDF. It may hold another budget schedule (e.g. Special Building or Employee Benefit Fund) or a combining balance sheet. Totals tie without it, but check the source PDF."}
   ]
 }

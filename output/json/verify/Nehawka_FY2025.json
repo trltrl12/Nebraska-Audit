@@ -1,22 +1,10 @@
 {
   "stem": "Nehawka_FY2025",
-  "values_checked": 33,
+  "values_checked": 46,
   "issues": [
-    {
-      "severity": "warning",
-      "path": "receipts[6].category",
-      "page": 1,
-      "extracted": "other",
-      "on_page": "Local Receipts: Other - Ambulance Fund 40,877.87 (of 138,291.43)",
-      "issue": "The Ambulance Fund's 40,877.87 of 'Local Receipts: Other' is most likely ambulance/rescue fees (charges for services). The report doesn't say so, so leaving it in 'other' with review is defensible. A per-column split would follow the printed fund columns."
-    },
-    {
-      "severity": "warning",
-      "path": "decision_needed",
-      "page": 1,
-      "extracted": null,
-      "on_page": "Local Receipts: Other, governmental 138,291.43 of 224,446.61 (62%)",
-      "issue": "[fixed 2026-10-22: decision_needed entry added for the General Fund Other 95,887.56] An unexplained 'Other' line makes up most of the year's governmental receipts (General Fund 95,887.56). The extraction has no decision_needed entry asking a person what it holds."
-    }
+    {"severity": "warning", "path": "receipts[7].category", "page": 1, "extracted": "Ambulance Fees", "on_page": "Local Receipts: Other, Ambulance Fund 40,877.87", "issue": "printed label is 'Local Receipts: Other'; ambulance fees is an assumption from the fund column (could include county/rural contracts or donations); review set"},
+    {"severity": "warning", "path": "receipts[8].category", "page": 1, "extracted": "charges for services/fees", "on_page": "Local Receipts: Other, Sewer Fund 46,592.51 / Water Fund 84,988.84", "issue": "if these are utility user charges (assumed), the user rule category is Utility Charges (applies to receipts[8] and receipts[9])"},
+    {"severity": "warning", "path": "reported_totals.business-type.receipts.includes", "page": 1, "extracted": [], "on_page": "line 21 Sewer 81,536.46 includes line 20 transfer in 34,943.95; line 52 Water 112,104.34 includes line 50 transfer out 34,943.95", "issue": "business-type totals include the gross transfer but `includes` is empty (the transfer is only described in a non-standard `includes_split`); lines tie only after adding 34,943.95 to each side"},
+    {"severity": "warning", "path": "balance_sheet.assets", "page": 1, "extracted": "not recorded", "on_page": "County Treasurer Balance at October 1, 2024 $2,408.66; at September 30, 2025 1,129.86", "issue": "memo county treasurer balances are outside the fund cash lines and not mentioned in notes; probably not village cash yet, but the user rule treats county treasurer balances as Cash and Cash Equivalents"}
   ]
 }

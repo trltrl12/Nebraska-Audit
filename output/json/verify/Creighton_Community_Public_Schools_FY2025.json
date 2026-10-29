@@ -1,30 +1,18 @@
 {
   "stem": "Creighton_Community_Public_Schools_FY2025",
-  "values_checked": 192,
+  "values_checked": 152,
   "issues": [
-    {
-      "severity": "warning",
-      "path": "receipts[5].category",
-      "page": 3,
-      "extracted": "other",
-      "on_page": "Other local receipts 18,824 (p3); p6 breakdown 1421 312 + 1800 225 + 1920 10,050 + 1925 1,500 + 1955 6,187 + 1980 550 = 18,824",
-      "issue": "[fixed: donations/contributions with review note] The report does say what this line is: the p6 General Fund schedule prints its parts, and they add up exactly. Under the extractor rules, 'other' is only for lines with nothing on the page explaining them, and a mixed line gets its dominant category plus a review. Donations/contributions (1920 + 1925 = 11,550, 61%) is the dominant part, so the line should be 'donations/contributions' with a review naming the mix (charges 6,724, refunds 550). It should not be 'other'."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[82].category",
-      "page": 11,
-      "extracted": "capital outlay",
-      "on_page": "Depreciation Fund 'Other' 69,651 (p11); p3 Operation and maintenance of plant 598,250 = 503,460 + 1,726 + 14,933 + 8,480 + 69,651",
-      "issue": "[fixed: support services, department cleared] The report's own function statement (p3) counts this 69,651 under Operation and maintenance of plant, not Capital outlay (p3 General capital outlay 156,985 is the Depreciation capital outlay line only). The extractor moved 4300 Architecture to support services on this same basis but left this line in capital outlay. It should probably be 'support services' to match p3."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[82].department",
-      "page": 11,
-      "extracted": "Building improvements",
-      "on_page": "'Other' printed at the same indent as the 'Building improvements' heading, not under it",
-      "issue": "[fixed: support services, department cleared] On p11, 'Other' is a separate disbursement heading, not a line under Building improvements (only 'Capital outlay' sits under that heading). Department should be null or 'Other'."
-    }
+    {"severity": "error", "path": "detail[School Nutrition 'Sales' 96,769].category", "page": 14,
+     "extracted": "charges for services/fees", "on_page": "Sales (School Nutrition Fund)",
+     "issue": "Lunch/nutrition sales are their own receipt category School Lunch Sales (user rule 2026-10-28); the matching statement receipt 'Nutrition Program receipts' already uses School Lunch Sales, so the same money is categorized differently in detail"},
+    {"severity": "warning", "path": "detail[1800 Revenue from community service activities 225].category", "page": 6,
+     "extracted": "Extracurricular Receipts", "on_page": "1800 Revenue from community service activities 225",
+     "issue": "Community service activity revenue is not a student activity/admission; its own detail_category is 'other charges for services', so category charges for services/fees would be consistent"},
+    {"severity": "warning", "path": "detail[Contra: hidden transfer to Depreciation Fund inside instruction lines -100,000]", "page": 3,
+     "extracted": -100000, "on_page": "p3 Instruction 3,960,673 vs schedule instruction lines 4,060,673 (p7-9)",
+     "issue": "Inferred hidden transfer: arithmetic holds (General Fund items 5,781,633 + other financing 400,000 = printed 6,181,633) and the 250,000 matches Depreciation 200,000 + Employee Benefit 50,000 transfers, but the report never says which lines held the transfers (2710 and 4700 splits are also inferences)"},
+    {"severity": "warning", "path": "receipts[2].review", "page": 3,
+     "extracted": "public power district tax classed as other taxes", "on_page": "Public power district sales tax 43,514",
+     "issue": "Stale review note: the line is now category Public Power District Sales Tax, not other taxes"}
   ]
 }

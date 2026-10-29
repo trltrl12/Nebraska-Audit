@@ -1,18 +1,15 @@
 {
   "stem": "Clarkson_FY2025",
-  "values_checked": 145,
+  "values_checked": 158,
   "issues": [
-    {"severity": "warning", "path": "receipts[5].category", "page": 5,
-     "extracted": "donations/contributions", "on_page": "Grants and contributions 27,799 (shown as Operating Grants and Contributions, p2)",
-     "issue": "grantor not stated; Library 25,799 + Park 2,000 (p15) could be government grants (intergovernmental/state aid) rather than private donations. Same judgment applies to detail[18] and detail[22]"},
+    {"severity": "error", "path": "receipts[9].category", "page": 9,
+     "extracted": "charges for services/fees", "on_page": "Sales 258,226 (Water Fund 156,650 + Sewer Fund 101,576)",
+     "issue": "Utility fund sales belong in the user's own category Utility Charges. scripts/user_rules.py won't fix this, because the line has no fund field and the label 'Sales' doesn't match its patterns"},
+    {"severity": "warning", "path": "receipts[10].category", "page": 9,
+     "extracted": "charges for services/fees", "on_page": "Lease revenues 99,283 (Electric Fund 98,783 + Nursing Home Fund 500)",
+     "issue": "Lease revenue is rental income, so it probably belongs in the user's Rentals category"},
     {"severity": "warning", "path": "detail[11].detail_category", "page": 14,
-     "extracted": "ambulance/rescue fees", "on_page": "Fire - Charges for services 16,399",
-     "issue": "page does not say these are ambulance fees (inferred from the committed-for-ambulance fund balance); could be rural fire contract or other charges for services"},
-    {"severity": "warning", "path": "proprietary", "page": 11,
-     "extracted": null, "on_page": "Statement of Cash Flows - Proprietary Funds, Total: operating 187,423; capital and related financing (66,130); investing (4,649); beginning cash 645,106; ending cash 761,750",
-     "issue": "business-type funds are accrual and a proprietary cash flow statement is printed (p10-11), but proprietary was left null because the governmental basis is modified cash"},
-    {"severity": "warning", "path": "disbursements[35].category", "page": 9,
-     "extracted": "utilities", "on_page": "Repairs and maintenance 15,140 (incl. Nursing Home 4,536); Depreciation 66,418 (incl. Nursing Home 8,533)",
-     "issue": "business-type expenses all assigned function utilities, but the Nursing Home Fund (13,069 total, p9) is not a utility (housing or health/welfare-type); applies also to disbursements[42]"}
+     "extracted": "ambulance/rescue fees", "on_page": "Fire department: Charges for services 16,399",
+     "issue": "The page doesn't call this ambulance fees. That's an assumption, though the fund balance 'Committed for: Ambulance' (p4) supports it"}
   ]
 }

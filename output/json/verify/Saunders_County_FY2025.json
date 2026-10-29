@@ -1,102 +1,27 @@
 {
   "stem": "Saunders_County_FY2025",
-  "values_checked": 146,
+  "values_checked": 165,
   "issues": [
-    {
-      "severity": "error",
-      "path": "detail[60].category",
-      "page": 13,
-      "extracted": "intergovernmental/state aid / other state aid (label 'Intergovernmental')",
-      "on_page": "Veterans' Aid Fund 3,320 on the Investment Income row",
-      "issue": "[fixed] On the combining page (report p28), Veterans' Aid's 3,320 sits on the Investment Income row, one row above Intergovernmental (compare Transportation's 165,178 on the Intergovernmental row). The Statement of Activities (p2) also leaves it out of operating grants: Public Assistance grants are 165,178, which is Transportation only. Category, detail_category and original_label should be investment income / 'Investment Income'."
-    },
-    {
-      "severity": "error",
-      "path": "detail[43].category",
-      "page": 6,
-      "extracted": "streets/highways",
-      "on_page": "Noxious Weed Control 75,311",
-      "issue": "[fixed] The category rules put noxious weed control in natural resources/conservation."
-    },
-    {
-      "severity": "error",
-      "path": "detail[97].split_from",
-      "page": 11,
-      "extracted": "Disbursements (principal portion) 904,971 / (interest portion) 51,605",
-      "on_page": "Law Enforcement Center & Jail Bond Fund: Disbursements (956,576), single line",
-      "issue": "[fixed] The page doesn't print a principal/interest split for this fund. The split comes from the Nonmajor Funds column on p4, which covers all nonmajor funds, so it is inferred because the totals happen to match. That breaks the rule that a split must be printed for that line. Keep one line (also affects detail[98])."
-    },
-    {
-      "severity": "warning",
-      "path": "report_discrepancies",
-      "page": 4,
-      "extracted": "not recorded",
-      "on_page": "Total Governmental Funds TOTAL DISBURSEMENTS 35,248,402; lines add to 35,248,401",
-      "issue": "The statement's own disbursement lines add up to 1 less than its printed total. The cause is the Nonmajor column, whose lines add to 4,050,181 against a printed 4,050,182. This rounding difference is printed in the report but isn't in report_discrepancies."
-    },
-    {
-      "severity": "warning",
-      "path": "report_discrepancies",
-      "page": 5,
-      "extracted": "only the disbursement difference recorded",
-      "on_page": "General Fund TOTAL RECEIPTS 18,932,801; lines add to 18,932,800",
-      "issue": "On the General Fund budget schedule, the receipt lines (13,673,823 + 1,101,395 + 228,601 + 3,797,489 + 131,492) add to 18,932,800, not the printed 18,932,801. This $1 rounding difference isn't recorded."
-    },
-    {
-      "severity": "warning",
-      "path": "report_discrepancies",
-      "page": 4,
-      "extracted": "mentioned in notes only",
-      "on_page": "Nonmajor detail items: receipts 3,342,638 / disbursements 4,050,184 vs printed 3,342,639 / 4,050,182",
-      "issue": "The nonmajor rounding differences are described in the notes but not entered in report_discrepancies."
-    },
-    {
-      "severity": "warning",
-      "path": "missing",
-      "page": 14,
-      "extracted": "receipts recorded unitemized from budget schedules pp10-11",
-      "on_page": "Combining Statement Nonmajor Funds continues past report p29 (Emergency Management, Correctional Center Commissary, Law Enforcement Center & Jail Bond, County Building, Flood Control, Federal Drug Law, Total column); not in trimmed PDF",
-      "issue": "The trimmed PDF has 14 pages and the notes say 'Read pages 1-14 of 14'. The remaining combining pages (report pp30-31) were not trimmed, so receipts of 1,613,649 for five funds are in 'other' without a breakdown. Likely property tax, given the nonmajor property tax of 1,202,064 on p4. This needs a re-trim."
-    },
-    {
-      "severity": "warning",
-      "path": "detail_totals",
-      "page": 12,
-      "extracted": "none for nonmajor funds",
-      "on_page": "Combining pages pp12-14 print TOTAL RECEIPTS / TOTAL DISBURSEMENTS per fund",
-      "issue": "The per-fund printed totals from the combining schedule weren't recorded in detail_totals, so those items can't be checked against their totals."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[55].category",
-      "page": 12,
-      "extracted": "other taxes / other local taxes",
-      "on_page": "Visitors Promotion Fund - Taxes: Other 22,019",
-      "issue": "County Visitors Promotion and Visitors Improvement funds are funded by the county lodging tax, so lodging tax probably fits (also detail[57], 22,019). The page doesn't say 'lodging', so this is left as a warning. The same 44,038 sits inside receipts[4] 'Other' 212,716."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[38].detail_category",
-      "page": 6,
-      "extracted": "highway allocation",
-      "on_page": "Public Works Fund - Intergovernmental 4,720,593",
-      "issue": "The line is printed only as 'Intergovernmental'. Highway allocation is an assumption (it may include federal or other state road funds) and the line has no review note."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[103].category",
-      "page": 11,
-      "extracted": "streets/highways",
-      "on_page": "Flood Control Project Fund - Disbursements 652",
-      "issue": "Flood control fits natural resources/conservation (water and drainage) better than streets/highways."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[49].budget_final",
-      "page": 7,
-      "extracted": null,
-      "on_page": "Health Services Bond Fund DISBURSEMENTS final budget 5,101,823",
-      "issue": "Splitting the line into principal and interest (from the fund's own p4 column) dropped the printed final budget of 5,101,823."
-    }
+    {"severity": "error", "path": "report_discrepancies", "page": 4,
+     "extracted": "disbursements sum to 35,248,401; reported_totals.governmental.disbursements 35,248,402; no report_discrepancies entry for it",
+     "on_page": "Total Governmental Funds column: 8,403,542 + 15,900,579 + 8,828,750 + 220,184 + 22,796 + 1,594,971 + 277,579 = 35,248,401 vs printed TOTAL DISBURSEMENTS 35,248,402 (Nonmajor column lines add to 4,050,181 vs printed 4,050,182)",
+     "issue": "The statement's own Total column doesn't foot, by 1. The extracted lines are as printed, but the gap isn't recorded in report_discrepancies, so the identity (36,528,984 + 32,161,117 - 35,248,401 = 33,441,700 vs ending 33,441,699) is off by 1 with no explanation."},
+    {"severity": "warning", "path": "report_discrepancies[0]", "page": 5,
+     "extracted": "entry covers the disbursement rounding and the p4 vs p5 receipts difference",
+     "on_page": "General Fund budget schedule receipts actual: 13,673,823 + 1,101,395 + 228,601 + 3,797,489 + 131,492 = 18,932,800 vs printed TOTAL RECEIPTS 18,932,801",
+     "issue": "The p5 receipts column also fails to foot by 1 on its own, and this isn't stated explicitly. The detail items add to 18,932,800 against detail_totals 18,932,801."},
+    {"severity": "warning", "path": "ending_investments", "page": 3,
+     "extracted": 4542004, "on_page": "Investments 4,542,004 (included in ending_cash 33,441,699)",
+     "issue": "ending_cash already includes the investments (it is total cash basis fund balance). Filling ending_investments as well, while beginning_investments is null, risks double counting and makes the two ends asymmetric. Confirm the workbook treats it as informational only."},
+    {"severity": "warning", "path": "receipts[4].category", "page": 4,
+     "extracted": "other taxes", "on_page": "Taxes: Other 212,716 (incl. Visitors Promotion 22,019 and Visitors Improvement 22,019, p12)",
+     "issue": "County Visitors Promotion/Improvement funds are normally funded by the county lodging tax, so 44,038 may be lodging tax. The page labels it only 'Other' and prints no split, so it is defensible as recorded. The same applies to detail Visitors Promotion and Visitors Improvement 'Taxes: Other'."},
+    {"severity": "warning", "path": "detail[Law Enforcement Center & Jail Bond receipts].category", "page": 11,
+     "extracted": "property tax", "on_page": "Receipts 1,058,344 (budget schedule; no breakdown printed)",
+     "issue": "A broad 'Receipts' line was categorised as property tax by inference from the nonmajor property tax total (1,202,064, p4), not from a printed breakdown. It is flagged for review; this is a judgment call."},
+    {"severity": "warning", "path": "missing", "page": 14,
+     "extracted": "nonmajor combining statement ends at the 911 Wireless Service Fund column (p14)",
+     "on_page": "remaining combining columns (Emergency Management, Correctional Center Commissary, Law Enforcement Center & Jail Bond, County Building, Flood Control Project, Total) on report pp30-31, not in the trimmed PDF",
+     "issue": "The trimmed PDF lacks the rest of the nonmajor combining statement. Itemized receipts for 5 nonmajor funds (1,613,649 in all, shown only as one 'Receipts' line each on pp10-11) can't be categorised or checked. A re-trim is needed (add the pages to config/extra_pages.csv)."}
   ]
 }

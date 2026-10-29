@@ -1,30 +1,15 @@
 {
   "stem": "Endicott_FY2025",
-  "values_checked": 38,
+  "values_checked": 45,
   "issues": [
-    {
-      "severity": "error",
-      "path": "report_discrepancies[0]",
-      "page": 1,
-      "extracted": "General Fund Subtotal of Beginning Balance printed 78,890.65 (difference 200.00)",
-      "on_page": "78,690.65",
-      "issue": "[fixed] Line 3 General Fund prints 78,690.65, which equals 62,250.01 + 16,440.64; the Total column 186,869.67 (78,690.65 + 34,164.62 + 74,014.40) and line 22 309,161.49 (78,690.65 + 230,470.84) also tie to it. The report does add up here; this discrepancy entry is spurious and should be removed."
-    },
-    {
-      "severity": "warning",
-      "path": "beginning_cash.computed",
-      "page": 1,
-      "extracted": "...the printed General subtotal 78,890.65 is 200 higher than its lines",
-      "on_page": "78,690.65",
-      "issue": "Amount 112,855.27 is right, but the explanation text repeats the misread subtotal."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[10].category",
-      "page": 1,
-      "extracted": "charges for services/fees",
-      "on_page": "Local Receipts: Other (Enterprise Fund) 43,422.58",
-      "issue": "Assumption that the Enterprise Fund's 'Other' local receipts are utility charges; the page does not say so (already marked review)."
-    }
+    {"severity": "warning", "path": "receipts[10].category", "page": 1,
+     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Enterprise Fund) 43,422.58",
+     "issue": "Enterprise (utility) fund receipts printed only as 'Other'; presumed utility charges. Under the user's 2026-10-28 rule utility fund charges are category Utility Charges, so if the presumption holds the category should be Utility Charges; otherwise other. Assumption not confirmed by the page."},
+    {"severity": "warning", "path": "reported_totals.business-type", "page": 1,
+     "extracted": "includes_split (non-standard field), no includes[]", "on_page": "Total Receipts 240,163.25 incl. transfers in 196,740.67; Total Disbursements & Transfers 231,222.32 incl. transfers out 10,564.00",
+     "issue": "Printed business-type totals include gross transfers but are recorded with a non-standard 'includes_split' field instead of includes ['transfers_net']; validation may not recognise it. Amounts themselves are correct."},
+    {"severity": "warning", "path": "disbursements[2].original_label", "page": 2,
+     "extracted": "Capital Improvements (Enterprise Fund column)", "on_page": "Capital Improvements",
+     "issue": "Label has extractor text appended (also receipts[8-10] '(General Fund)'/'(Street Fund)'/'(Enterprise Fund)' and disbursements[3] '(Enterprise Fund column)'); printed labels are 'Local Receipts: Other', 'Capital Improvements', 'Debt Service'."}
   ]
 }

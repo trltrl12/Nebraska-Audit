@@ -1,18 +1,9 @@
 {
   "stem": "CO64-11132025-July_1_2024_through_June_30_2025_Audit_Report_and_Management_Letter",
-  "values_checked": 133,
+  "values_checked": 122,
   "issues": [
-    {"severity": "warning", "path": "receipts[3].category", "page": 4,
-     "extracted": "other taxes", "on_page": "Taxes: Other 123,374 (General 38,367 + Nonmajor 85,007)",
-     "issue": "Combining statement (p14-18) shows the nonmajor 85,007 is Visitors Promotion 12,137 + Visitors Improvement 12,137 (lodging tax, 24,274) and 911 Emergency Mgmt 17,780 + 911 Wireless 42,953 (911 surcharges, 60,733). Line is printed only as 'Other', so 'other taxes' is defensible, but about 24,274 is really lodging tax. Label is printed as 'Other' under Taxes, not 'Other (taxes)'."},
-    {"severity": "warning", "path": "detail[45].category", "page": 18,
-     "extracted": "other taxes", "on_page": "Taxes: Other 85,007 (Total Nonmajor Funds)",
-     "issue": "Same as receipts[3]: per-fund columns show 24,274 lodging (Visitors Promotion/Improvement) + 60,733 911 surcharges; kept whole because the Total column is used."},
-    {"severity": "warning", "path": "detail[39].source_page", "page": 7,
-     "extracted": 7, "on_page": "DISBURSEMENTS 103,488 on p7; 18,355 / 85,133 printed on p4 Inheritance Fund column",
-     "issue": "Function split is printed (p4) and adds to 103,488, but the split amounts (detail[39] 18,355 and detail[40] 85,133) cite p7, where only 103,488 appears. The amount-vs-page check will not find them on p7."},
-    {"severity": "warning", "path": "detail[0].original_label", "page": 4,
-     "extracted": "Taxes (property) / Taxes (motor vehicle) / Taxes (other)", "on_page": "Property / Motor Vehicle / Other (under Taxes, General Fund column)",
-     "issue": "Labels for the General Fund tax split (detail[0]-[2]) are made up, not printed. The split itself is printed on p4 and adds to Taxes 5,090,957 (p5)."}
+    {"severity": "warning", "path": "receipts[4].category", "page": 4, "extracted": "lodging tax", "on_page": "Taxes: Other (Visitors Promotion 12,137 + Visitors Improvement 12,137, p14)", "issue": "Lodging tax is inferred from the fund names. The page prints only 'Other' under Taxes. It is defensible and marked review."},
+    {"severity": "warning", "path": "detail[45].detail_category", "page": 18, "extracted": "lodging tax", "on_page": "Taxes: Other 85,007 (Total Nonmajor Funds)", "issue": "Same lodging-tax inference as receipts[4]."},
+    {"severity": "warning", "path": "detail[0].original_label", "page": 5, "extracted": "Taxes (property)", "on_page": "Taxes", "issue": "The p5 schedule prints only 'Taxes'. The parenthetical was added by the extractor; the same applies to detail[1] 'Taxes (motor vehicle)' and detail[2] 'Taxes (other)'. The split amounts are correct (4,682,957 + 369,633 + 38,367 = 5,090,957, p4 General Fund column)."}
   ]
 }

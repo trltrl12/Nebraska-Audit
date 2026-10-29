@@ -1,21 +1,18 @@
 {
   "stem": "Dodge_FY2025",
-  "values_checked": 96,
+  "values_checked": 78,
   "issues": [
-    {"severity": "warning", "path": "business_type.measure", "page": 7,
-     "extracted": "net position", "on_page": "Combined Utilities Fund, cash basis; Net Position - End of Year 500,398 = cash and CDs (p6)",
-     "issue": "The rules call for measure 'cash' on cash-basis statements. The amounts equal cash either way, so only the label is affected."},
-    {"severity": "warning", "path": "receipts[9].category", "page": 5,
-     "extracted": "donations/contributions", "on_page": "Grants and donations 3,927 (Other financing sources; Statement of Activities p3 shows it as operating grants and contributions)",
-     "issue": "The label mixes grants, which may come from a government, with donations. The dominant category isn't shown, and the line has no review flag."},
-    {"severity": "warning", "path": "reported_totals.business-type.receipts.computed", "page": 7,
-     "extracted": "printed Total operating revenues (includes interest income)", "on_page": "Total operating revenues 506,027",
-     "issue": "The value is printed as-is, so a 'computed' marker is misleading."},
+    {"severity": "error", "path": "receipts[11].category", "page": 7,
+     "extracted": "charges for services/fees", "on_page": "Capital user charges 20,328 (Combined Utilities Fund operating revenue)",
+     "issue": "Utility fund charge; the user rule (2026-10-28) makes utility fund sales/charges category Utility Charges, and the same line in detail[15] is already Utility Charges, so receipts and detail disagree"},
+    {"severity": "warning", "path": "missing", "page": 1,
+     "extracted": null, "on_page": "Auditor's report refers to 'nonmajor governmental fund combining statements and statement of general fund departmental revenue and expenditures' (supplementary information)",
+     "issue": "No such schedules are in the trimmed PDF (only the budget schedules, report pp15-16). It may be boilerplate since only a General Fund is reported, but the source PDF should be checked for a departmental schedule"},
     {"severity": "warning", "path": "disbursements[1].category", "page": 5,
      "extracted": "public safety", "on_page": "Public Health and Safety 208,830",
-     "issue": "The function mixes health and safety. public safety as the dominant category is defensible, but the notes don't mention the mix (detail[11] is the same)."},
-    {"severity": "warning", "path": "missing", "page": 1,
-     "extracted": null, "on_page": "Auditor's report (p1) lists supplementary 'nonmajor governmental fund combining statements and statement of general fund departmental revenue and expenditures'",
-     "issue": "The trimmed PDF has no departmental or combining schedule, only the budget schedules on pp8-9. It is probably boilerplate, since only a General Fund is reported, but that can't be confirmed from the trimmed file."}
+     "issue": "Line combines health and safety; public safety is the dominant guess"},
+    {"severity": "warning", "path": "receipts[9]", "page": 5,
+     "extracted": "Grants and donations 3,927, donations/contributions, outside_printed_total", "on_page": "Grants and donations 3,927 under OTHER FINANCING SOURCES (USES)",
+     "issue": "Printed as other financing but recorded as a receipt (the Statement of Activities treats it as operating grants and contributions); defensible, and marked outside_printed_total"}
   ]
 }

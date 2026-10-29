@@ -1,70 +1,15 @@
 {
   "stem": "Columbus_FY2025",
-  "values_checked": 182,
+  "values_checked": 171,
   "issues": [
-    {
-      "severity": "warning",
-      "path": "beginning_fund_balance.source_page",
-      "page": 6,
-      "extracted": 5,
-      "on_page": "Beginning of year 21,012,418 (Total Governmental Funds column, p6)",
-      "issue": "[fixed: page 6] amount is right but cited page is wrong: p5 shows only the four major-fund columns (8,943,739 / (644,257) / 5,326,786 / 580,203); 21,012,418 is printed on p6"
-    },
-    {
-      "severity": "warning",
-      "path": "ending_fund_balance.source_page",
-      "page": 6,
-      "extracted": 5,
-      "on_page": "End of year 22,100,764 (Total Governmental Funds column, p6; also total fund balances p4)",
-      "issue": "[fixed: page 6] amount is right but cited page is wrong: 22,100,764 is not printed on p5 (major-fund columns only); it is on p6 and p4"
-    },
-    {
-      "severity": "warning",
-      "path": "notes",
-      "page": 19,
-      "extracted": "Nonmajor combining statement has 12 funds (pp17-19)",
-      "on_page": "13 fund columns: Airport, Downtown, Gaming, E911 (p17); Wireless 911, 911 Equipment Share, Housing Rehab Loans, Progress and Jobs Growth, Keno, Library Foundation (p18); Debt Service, Library Endowment, Gerrard Park Trust (p19)",
-      "issue": "the fund count in the notes is wrong (13, not 12). It doesn't affect the figures: the combining statement is now complete across pp17-19, and the Total Other Governmental column (p19) agrees with every recorded detail line and with both totals (5,493,196 / 5,759,886)"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[30].category",
-      "page": 16,
-      "extracted": "debt service interest",
-      "on_page": "Other 669,970",
-      "issue": "the row is printed as 'Other'. Calling it interest relies on it matching 'Interest and fiscal charges' 669,970 in the 1/2 Cent Sales Tax column on p5. That is defensible and already marked review"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[35].detail_category",
-      "page": 19,
-      "extracted": "other charges for services",
-      "on_page": "Charges for services 675,990 (includes Keno fund 579,410 on p18)",
-      "issue": "most of the nonmajor 'Charges for services' is the Keno fund, which is probably keno proceeds (keno/lottery). It is kept as printed because the total column can't be split"
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[10].category",
-      "page": 10,
-      "extracted": "occupation/franchise tax",
-      "on_page": "Franchise fees 4,789,801 (Electric Fund)",
-      "issue": "the Statement of Activities (p2) shows these Electric fund receipts as charges for services, so 'charges for services/fees' could also fit. Already marked review"
-    },
-    {
-      "severity": "warning",
-      "path": "balance_sheet.liabilities[3].category",
-      "page": 1,
-      "extracted": "other liabilities",
-      "on_page": "Compensated absences - Payable after one year 881,835",
-      "issue": "a long-term compensated absences liability fits 'debt - due in more than one year' (or 'accrued liabilities') better than 'other liabilities'"
-    },
-    {
-      "severity": "warning",
-      "path": "ending_cash",
-      "page": 4,
-      "extracted": 4437273,
-      "on_page": "Cash and cash equivalents 4,437,273; Cash at county treasurer 510,105; Investments 17,025,046 (Total Governmental Funds)",
-      "issue": "ending_cash leaves out cash at county treasurer 510,105, and investments are kept separately in ending_investments. The rule asks for 'cash and cash equivalents/investments'. This is noted in the notes, so it is defensible"
-    }
+    {"severity": "warning", "path": "receipts[9].category", "page": 10,
+     "extracted": "charges for services/fees", "on_page": "Charges for services 16,642,897 (Water 4,999,031, Sewer 8,795,345, Solid Waste 2,848,521, p9-10)",
+     "issue": "enterprise (utility) fund charges; the user's 2026-10-28 rule puts utility fund sales/charges, including solid waste, in 'Utility Charges'"},
+    {"severity": "warning", "path": "detail[35].category", "page": 19,
+     "extracted": "charges for services/fees", "on_page": "Nonmajor Total 'Charges for services' 675,990, of which Keno fund 579,410 (p18), E911 71,440, Housing Rehab 17,394, Airport 7,746",
+     "issue": "86% of the line is the Keno fund's receipts, which are keno proceeds (keno/lottery has its own category); dominant-category rule would give keno/lottery with a review note. The same 579,410 sits inside the statement-level governmental 'Charges for services' 4,105,578 (receipts[4])"},
+    {"severity": "warning", "path": "detail[15].category", "page": 14,
+     "extracted": "sales tax", "on_page": "Fees, taxes, permits, and licenses 4,135,454 (Streets/Engineering budget schedule)",
+     "issue": "same printed label is 'licenses and permits' elsewhere in the report; the sales-tax choice relies on the GAAP statement (p5: Streets sales tax 3,440,668 + fees 729,735), which is defensible but a judgment call (review note present)"}
   ]
 }

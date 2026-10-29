@@ -1,18 +1,15 @@
 {
   "stem": "Stromsburg_FY2025",
-  "values_checked": 271,
+  "values_checked": 273,
   "issues": [
-    {"severity": "warning", "path": "receipts[8].category", "page": 5,
-     "extracted": "federal grants", "on_page": "Grants 2,225 (General Fund; Ambulance department p17)",
-     "issue": "The page doesn't name the grantor. It could be state or private, so federal is an assumption. Same assumption for the matching detail line (Ambulance Grants 2,225, p17)."},
-    {"severity": "warning", "path": "disbursements[18].review", "page": 7,
-     "extracted": "paid by Electric and Natural Gas funds to the city", "on_page": "Payments in lieu of taxes (146,243) Electric, (63,910) Natural Gas; total (210,153)",
-     "issue": "The amount and its treatment as a nonoperating disbursement are correct. The review note's claim that the money is paid 'to the city' isn't printed in the trimmed pages; in-lieu payments often go to other subdivisions."},
-    {"severity": "warning", "path": "detail[*].category (Cemetery, Compost Site departments)", "page": 17,
-     "extracted": "health/welfare (Cemetery), utilities (Compost Site)", "on_page": "Budget schedule p11 puts Cemetery and Compost site under Public works; statement Public works 205,863 maps to streets/highways",
-     "issue": "The categories follow the rules (cemetery is health/welfare, refuse is utilities), but the General Fund department functions won't tie to the statement's function lines: General Fund Public works 64,809 is in streets/highways in receipts/disbursements."},
-    {"severity": "warning", "path": "detail[1].detail_category", "page": 12,
-     "extracted": "highway allocation", "on_page": "Intergovernmental 215,550 (Street Fund)",
-     "issue": "Treating the whole line as highway allocation is an assumption; the page prints no breakdown. It already carries a review note."}
+    {"severity": "warning", "path": "disbursements[14].category", "page": 7,
+     "extracted": "utilities", "on_page": "Transportation 6,837",
+     "issue": "Business-type spending listed by cost type should take the cost type as category (user rule 2026-10-28), with function utilities. 'Transportation' was left as category utilities with no function. The governmental detail treats the same label as fuel."},
+    {"severity": "warning", "path": "disbursements[17].category", "page": 7,
+     "extracted": "utilities", "on_page": "Bad debt expenses 1,125",
+     "issue": "This is a cost-type line inside a by-object utility list, so it should be a cost-type category (probably other) with function utilities, not the function 'utilities'."},
+    {"severity": "warning", "path": "detail[26].original_label", "page": 15,
+     "extracted": "Capital outlay", "on_page": "Capital outlay 111,608 (ARPA Fund)",
+     "issue": "Capital outlay lines should be labelled 'Capital Outlay: <function>' with the printed text in printed_label (user rule 2026-10-26). This line and the zero-amount Street Fund line detail[7] were not relabelled."}
   ]
 }

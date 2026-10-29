@@ -1,45 +1,22 @@
 {
   "stem": "Fillmore_County_FY2025",
-  "values_checked": 162,
+  "values_checked": 150,
   "issues": [
     {
-      "severity": "fixed",
-      "path": "balance_sheet.statement",
-      "page": 4,
-      "extracted": "Statement of Net Position - Cash Basis (p1): Restricted for ... / Unrestricted 7,891,378",
-      "on_page": "Statement of Assets and Fund Balances - Governmental Funds (p3-4), Total Governmental Funds: Restricted lines; Committed for Road maintenance 17,901; Unassigned 7,873,477; total 9,580,910",
-      "issue": "Under the 2026-10-27 balance-sheet rule, a cash-basis report whose governmental funds statement totals match the government-wide figures (9,580,910 on both) takes its lines from the governmental funds statement, with fund balance by classification. The JSON uses the p1 government-wide statement, so Committed 17,901 and Unassigned 7,873,477 are missing and Unrestricted 7,891,378 is used instead. The p1 amounts themselves are correct.",
-      "resolution": "fixed 2026-10-27: balance sheet switched to the p4 Total Governmental Funds column (8 Restricted lines, Committed: Road maintenance 17,901, Unassigned 7,873,477; totals 9,580,910 unchanged)"
+      "severity": "warning",
+      "path": "receipts[5].category",
+      "page": 2,
+      "extracted": "other",
+      "on_page": "Local 1,119,380 (p6); Statement of Activities shows charges for services 606,284, interest income 468,452, miscellaneous 53,810",
+      "issue": "The Statement of Activities shows that more than half of 'Local' is charges for services (about 54%) and about 42% is interest. The 'other' category comes from the user's category decision (category_decisions.csv), so this is recorded only as a warning."
     },
     {
-      "severity": "fixed",
-      "path": "detail_totals[23]",
+      "severity": "warning",
+      "path": "detail",
       "page": 9,
-      "extracted": "fund 'Total Non-Major Funds' revenue 271,741 and detail_totals[24] expenditure 265,330",
-      "on_page": "Total Non-Major Funds column: receipts 271,741, disbursements 265,330",
-      "issue": "No detail items carry fund 'Total Non-Major Funds', so these two totals have nothing to add up against (the items sum to 0). Either the per-fund totals or a combined total should be used, not both. The per-fund items do sum to 271,741 and 265,330.",
-      "resolution": "fixed 2026-10-27: dropped the two Total Non-Major Funds detail_totals; per-fund totals kept"
-    },
-    {"severity": "warning", "path": "detail[50]", "page": 9,
-     "extracted": "nonmajor combining recorded per fund (8 funds with activity, 9 columns)", "on_page": "Non-Major combining statement, 9 fund columns plus Total",
-     "issue": "The detail rule says a combining schedule with more than 6 funds should use its Total column with fund 'Nonmajor funds (combined)'. Recording per fund is more detailed and every amount checks, but it doesn't follow the rule."},
-    {"severity": "warning", "path": "receipts[5].category", "page": 6,
-     "extracted": "other (category_decision 'local')", "on_page": "Local 1,119,380; p2 shows charges for services 606,284, interest income 468,452, miscellaneous 53,810",
-     "issue": "The user decision maps 'local' to Other / Miscellaneous Receipts, but the statement of activities shows charges for services (about 54%) and interest make up most of it. Flagged for the user's awareness."},
-    {"severity": "warning", "path": "detail[55].category", "page": 8,
-     "extracted": "other", "on_page": "911 Emergency Services Local 18,133 (p2: Public safety charges for services 18,133)",
-     "issue": "The statement of activities identifies this exact amount as public-safety charges for services, so charges for services/fees fits better than 'other'."},
-    {"severity": "warning", "path": "detail[59].detail_category", "page": 9,
-     "extracted": "miscellaneous revenue (no category_decision)", "on_page": "Preservation & Modernization Local 4,996",
-     "issue": "Every other 'Local' line uses detail_category 'Other / Miscellaneous Receipts' under the user decision, but this one uses 'miscellaneous revenue'. Preservation and modernization receipts are register-of-deeds fees, so fees of office would fit better."},
-    {"severity": "warning", "path": "detail[12].detail_category", "page": 10,
-     "extracted": "not itemized", "on_page": "Health Insurance 707,002",
-     "issue": "The label names an object of expenditure, so 'employee benefits and payroll taxes' fits better than 'not itemized'."},
-    {"severity": "warning", "path": "detail[2].amount", "page": 10,
-     "extracted": 1062325, "on_page": "Local 1,062,325 (budget schedule) = Local 1,055,019 + Sale of surplus 7,306 (p7)",
-     "issue": "The budget schedule's Local includes the 7,306 sale of surplus, which the statement shows as other financing. Recorded as printed, with a review note. Road Local (detail[36]) similarly includes insurance proceeds 11,599 and sale of surplus 78,517."},
-    {"severity": "warning", "path": "balance_sheet.equity[7].original_label", "page": 1,
-     "extracted": "Restricted for: Opioid settlement", "on_page": "Opiod settlement",
-     "issue": "The label's spelling was corrected; the page prints 'Opiod settlement'."}
+      "extracted": "per-fund lines for 8 non-major funds (pp8-9)",
+      "on_page": "Non-major combining statement has 9 fund columns plus Total Non-Major Funds (receipts 271,741 / disbursements 265,330)",
+      "issue": "The rule caps per-fund recording at 6 funds and says to use the Total column with fund = 'Nonmajor funds (combined)' for more. The per-fund lines are correct and add up to the Total column, but this departs from the rule."
+    }
   ]
 }

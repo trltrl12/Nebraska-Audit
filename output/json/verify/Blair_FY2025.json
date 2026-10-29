@@ -1,9 +1,21 @@
 {
   "stem": "Blair_FY2025",
-  "values_checked": 258,
+  "values_checked": 215,
   "issues": [
-    {"severity": "warning", "path": "detail[79].category", "page": 17,
-     "extracted": "general government", "on_page": "Administration (TIF 4-11 capital projects funds) 27,834",
-     "issue": "administration of TIF capital projects funds; economic development (TIF) is arguably the better function"}
+    {"severity": "error", "path": "balance_sheet.deferred_inflows[0].category", "page": 2,
+     "extracted": "Deferred Gain on Refunding", "on_page": "Nonrefundable deposits 39,508",
+     "issue": "Nonrefundable deposits are not a gain on a debt refunding. This looks like scripts/user_rules.py's deferred-inflow regex 'refund' matching inside 'Nonrefundable'. The category should stay a generic deferred inflow (other), and the regex needs a word boundary"},
+    {"severity": "warning", "path": "receipts[8].category", "page": 7,
+     "extracted": "charges for services/fees", "on_page": "Charges for services 10,575,965 (Water and Sewer enterprise funds)",
+     "issue": "Under the user rule (2026-10-28), utility fund sales/charges go to Utility Charges. user_rules.py only applies that rule to detail lines that carry a fund name, so this receipts line is not caught"},
+    {"severity": "warning", "path": "detail[11].category", "page": 12,
+     "extracted": "charges for services/fees", "on_page": "Grave openings 28,110",
+     "issue": "detail_category is cemetery fees and the neighbouring 'Cemetery lots' line is category Cemetery Fees, so grave openings should be Cemetery Fees too"},
+    {"severity": "warning", "path": "detail[Keno 'Other revenue' 248].category", "page": 15,
+     "extracted": "investment income", "on_page": "Other revenue 248 (equals Keno Fund interest income 248 on p5)",
+     "issue": "If the extractor is right that this is the Keno Fund's interest, the rule puts interest lines in Interest Income, not investment income. Otherwise the printed label 'Other revenue' points to other"},
+    {"severity": "warning", "path": "detail[Street Capital outlay lines].original_label", "page": 13,
+     "extracted": "Capital Outlay: Equipment / Capital Outlay: Street improvements", "on_page": "Capital outlay - Equipment 330,455; Street improvements 2,127,637",
+     "issue": "The capital outlay labelling rule is 'Capital Outlay: <function>' (here Streets/Highways), but the object was used instead. Amounts are correct"}
   ]
 }

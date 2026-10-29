@@ -1,46 +1,15 @@
 {
   "stem": "McPherson_County_FY2025",
-  "values_checked": 68,
+  "values_checked": 72,
   "issues": [
-    {
-      "severity": "error",
-      "path": "detail[23].category",
-      "page": 6,
-      "extracted": "other / miscellaneous revenue",
-      "on_page": "Local 15,030 = Senior Center Meals 13,146 + Fair 648 + Capital Fair Building 1,236 (pp6-7); p2 shows the 13,146 as Public assistance charges for services",
-      "issue": "[fixed] Nonmajor 'Local' line is 87% senior center meal charges per the combining page's own fund columns; category should be charges for services/fees (detail: other charges for services), not other"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[2].category",
-      "page": 8,
-      "extracted": "other / miscellaneous revenue",
-      "on_page": "Local 120,110",
-      "issue": "Same 'Local' label is categorized investment income in receipts[4] but other in detail; the rules require the same category for the same label. County-wide Local is mostly interest (73,118 of 132,925, p2), and the GF budget Local also includes the 2,751 sale of surplus (p4 vs p8)"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[29].category",
-      "page": 9,
-      "extracted": "other / miscellaneous revenue",
-      "on_page": "Local 1,578",
-      "issue": "Road budget 'Local' 1,578 = statement Local 571 + Sale of surplus 1,007 (p4); about 64% sale of assets, so other is doubtful (and inconsistent with receipts[4] investment income for the same label)"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[16].category",
-      "page": 8,
-      "extracted": "utilities",
-      "on_page": "Public Works: Waste Oil 37,074",
-      "issue": "Printed under Public Works; statement (p4) counts General Fund public works 39,948 = Waste Oil 37,074 + Noxious Weed 2,874, so streets/highways would tie to the statement function column"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[17].category",
-      "page": 8,
-      "extracted": "natural resources/conservation",
-      "on_page": "Public Works: Noxious Weed 2,874",
-      "issue": "Defensible per the noxious weed rule, but the statement counts it under public works; function split will not tie to p4"
-    }
+    {"severity": "warning", "path": "detail[2].category", "page": 8,
+     "extracted": "other", "on_page": "General Fund budget schedule Local 120,110",
+     "issue": "Interest income 73,118 (p2) has to sit mostly in the General Fund: nonmajor Local 15,030 is senior center meals and fair receipts (p6-7) and Road Local is only 571. That puts interest at roughly 60% of this line, so under the >half rule it could be Interest Income (with review) rather than other. This is worked out from the totals; the report doesn't print it per fund."},
+    {"severity": "warning", "path": "receipts[4].category", "page": 2,
+     "extracted": "charges for services/fees", "on_page": "Charges for Services 56,839 (general government 42,151, public safety 742, public works 400, public assistance 13,146, culture 400)",
+     "issue": "The county general government charges (42,151) are probably fees of office, which the user now keeps as their own category (Fees of Office). The report doesn't name them, so this is a judgment call."},
+    {"severity": "warning", "path": "detail[16].category", "page": 8,
+     "extracted": "utilities", "on_page": "Public Works: Waste Oil 37,074",
+     "issue": "Printed under Public Works. Utilities (sanitation) is defensible but uncertain; the line already carries a review note."}
   ]
 }

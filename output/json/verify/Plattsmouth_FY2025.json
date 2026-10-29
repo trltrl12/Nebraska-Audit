@@ -1,70 +1,11 @@
 {
   "stem": "Plattsmouth_FY2025",
-  "values_checked": 176,
+  "values_checked": 260,
   "issues": [
-    {
-      "severity": "error",
-      "path": "receipts[0].amount",
-      "page": 5,
-      "extracted": 2200410,
-      "on_page": "Taxes 4,288,935 (p5); General Fund taxes p13: General property taxes 1,344,622, Motor vehicle taxes 130,916, City sales taxes 844,873, Occupation taxes 163,689; Debt Service taxes 561,183",
-      "issue": "[fixed 2026-10-21: taxes split into property 1,905,805 / motor vehicle 130,916 / occupation 163,689 per p13; Other revenues to charges for services] The 'property tax' split piece takes the Statement of Activities 'Property taxes' 2,200,410, which includes motor vehicle taxes 130,916 and occupation taxes 163,689 (1,344,622 + 130,916 + 163,689 + 561,183 = 2,200,410). The report prints this breakdown (p13), so the split should be property tax 1,905,805, motor vehicle tax 130,916, occupation/franchise tax 163,689, sales tax 2,088,525. Motor vehicle and occupation taxes have their own categories"
-    },
-    {
-      "severity": "error",
-      "path": "receipts[13].category",
-      "page": 9,
-      "extracted": "other",
-      "on_page": "Other revenues 18,140 (p9); Statement of Activities p3 business-type general revenues: Leases and rentals 15,117 + Contributions and miscellaneous revenues 3,023 = 18,140",
-      "issue": "[fixed 2026-10-21: taxes split into property 1,905,805 / motor vehicle 130,916 / occupation 163,689 per p13; Other revenues to charges for services] The report explains this line: 83% is leases and rentals, so it should be charges for services/fees (with review naming the mix), not other"
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[9].category",
-      "page": 5,
-      "extracted": "other",
-      "on_page": "Miscellaneous (General Fund) 46,435 = Other revenues p13; Statement of Activities p3 governmental: Contributions and miscellaneous revenues 36,790, Gain on sale of capital assets 7,000",
-      "issue": "Probably mostly contributions/miscellaneous with a sale-of-assets piece. The figures don't tie exactly (43,790 vs 46,435), so other with review is defensible. Same applies to detail[23]"
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[3].category",
-      "page": 5,
-      "extracted": "intergovernmental/state aid",
-      "on_page": "Intergovernmental 2,168,341 (includes General Fund Federal grants 156,460, p13)",
-      "issue": "The line mixes state aid and federal grants. Dominant category is right, but there's no review flag naming the mix"
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[11].category",
-      "page": 9,
-      "extracted": "intergovernmental/state aid",
-      "on_page": "Intergovernmental grants 39,179,759 (capital grants, Water 6,819,301 / Sewer 32,360,458)",
-      "issue": "Source of the capital grants (state revolving fund, federal) is not printed. Could be federal grants. Already marked review"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[51].category",
-      "page": 15,
-      "extracted": "health/welfare",
-      "on_page": "Cemetery and Senior Citizen Center printed under 'Culture and Recreation' (p15); detail[51]-[55] and [65]-[69]",
-      "issue": "The category list puts cemetery/senior services under health/welfare, but the schedule and the statement (p5) count them in Culture and Recreation: 2,189,693 - capital outlay 562,673 = 1,627,020 ties to the statement only with them included. With this mapping the detail function split doesn't tie to the statement's Public Health and Welfare 95,826. Judgment call"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[32].category",
-      "page": 14,
-      "extracted": "public safety",
-      "on_page": "Capital outlay lines detail[32],[39],[45],[54],[59],[68],[73],[82] sum to 877,298 = General Fund Capital outlay on p5",
-      "issue": "The capital outlay lines are categorised by department function, while the debt service lines in the same schedule are mapped to debt categories and the statement prints capital outlay separately. Using category 'capital outlay' would make the function split tie to p5 (as in other reports)"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[89]",
-      "page": 12,
-      "extracted": "Water 10,072,074 / Sewer 36,551,327 (detail[89]-[90])",
-      "on_page": "Combined budgetary-basis all-funds statement p12: Water 10,072,074 (budget 17,812,570), Sewer 36,551,327 (budget 34,470,270)",
-      "issue": "Amounts are right, but the notes say the p12 statement 'is not recorded in detail', which contradicts these two lines. Recording the utility lines is what the rules ask for; the notes should be corrected. No detail_totals are given for them (none printed per fund)"
-    }
+    {"severity": "warning", "path": "receipts[14].category", "page": 9, "extracted": "charges for services/fees", "on_page": "Charges for services 2,550,360 (Water 1,345,200, Sewer 1,089,160, Impact Fees 116,000)", "issue": "Business-type utility charges; the user's 2026-10-28 rule makes utility fund charges 'Utility Charges' (the detail lines for Water/Sewer already use Utility Charges). Impact fees 116,000 are a small part."},
+    {"severity": "warning", "path": "receipts[17].category", "page": 9, "extracted": "charges for services/fees", "on_page": "Other revenues 18,140 (p3: leases and rentals 15,117 + contributions and miscellaneous 3,023)", "issue": "The extractor's own review note shows the line is mostly leases and rentals; the dominant-category rule points to Rentals (same for the Water Fund 'Other revenues' 18,140 detail line)."},
+    {"severity": "warning", "path": "detail[20].category", "page": 13, "extracted": "charges for services/fees", "on_page": "NPPD lease agreement 886,929", "issue": "The same money is category Rentals in receipts[9] (Leases and rentals 886,929); the same line should have the same category in receipts and detail."},
+    {"severity": "warning", "path": "detail[14].category", "page": 13, "extracted": "charges for services/fees", "on_page": "EMS 522,963; Community center 307,257; Aquatic center 65,660", "issue": "Under the user's 2026-10-28 rule these have their own receipt categories (Ambulance Fees for EMS; Recreation Fees for community/aquatic center, detail[18], detail[19]); detail_category is right but category is still charges for services/fees."},
+    {"severity": "warning", "path": "receipts[7].category", "page": 13, "extracted": "intergovernmental/state aid 2,069,608", "on_page": "General Fund Federal grants 156,460 (p13)", "issue": "The report prints the General Fund federal grants 156,460 inside Intergovernmental 2,168,341. It was left in state aid (noted in review) while homestead and pro-rate were split out; it could be split out as federal grants."}
   ]
 }

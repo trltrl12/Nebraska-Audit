@@ -1,22 +1,18 @@
 {
   "stem": "Leigh_Community_Schools_FY2025",
-  "values_checked": 148,
+  "values_checked": 165,
   "issues": [
-    {"severity": "warning", "path": "receipts[6].category", "page": 6,
-     "extracted": "charges for services/fees",
-     "on_page": "Local receipts 517,772 = General 114,210 + Activities 218,172 + School Nutrition 126,853 + Student Fee 131 + Special Building 44,085 + Bond 14,321 (p5-6); p2 shows investment interest restricted 58,406 + unrestricted 81,870 = 140,276 within it",
-     "issue": "mixed line: about 140,276 (27%) is investment interest, plus 14,335 donations and 3,908 license fees; charges for services (about 356,436) is the dominant part, so the category is defensible; review flag set"},
-    {"severity": "warning", "path": "receipts[7].category", "page": 6,
-     "extracted": "intergovernmental/state aid",
-     "on_page": "County receipts 29,095 = 2110 County fines and license fees 24,889 + 2210 Educational service unit receipts 4,206 (p7); p2 labels it 'County fines and licenses'",
-     "issue": "dominant component (86%) is county fines and license fees, which detail[8] records as fines and forfeitures; category inconsistent with the detail and with the dominant-category rule"},
-    {"severity": "warning", "path": "disbursements[20].category", "page": 6,
-     "extracted": "instruction",
-     "on_page": "Federal programs 181,120 = General 120,980 + School Nutrition 60,140 (p5)",
-     "issue": "60,140 of the line is School Nutrition federal programs (food service); function of the General part is unstated; review flag set"},
-    {"severity": "warning", "path": "detail[47].category", "page": 8,
-     "extracted": "other (amount -425,000, contra line)",
-     "on_page": "General budget schedule (p8) expenditure lines 1100-6000 sum 4,813,022; p16 General column disbursements 4,388,022 and transfers to other funds (575,000); Depreciation 'Transfer from general fund' 425,000 (p9)",
-     "issue": "hidden-transfer handling checked and correct: lines kept as printed, contra -425,000 plus General other financing -425,000 (detail[49]) and Depreciation +425,000 (detail[52]); General net spending 4,388,022 + Depreciation 133,065 = 4,521,087 = statement General column (p5), so no double counting. Only note: the contra sits in category 'other' as a negative amount, so category totals for the General schedule overstate support services/transportation (2600s 638,707 vs 413,707 and 27X0 298,930 vs 98,140 on p16) and show -425,000 in 'other'; the page does not say which line holds the transfer"}
+    {"severity": "error", "path": "receipts[9].category", "page": 6,
+     "extracted": "charges for services/fees", "on_page": "Local receipts remainder 359,253 = Activities 218,172 + School Nutrition 126,853 + Student Fee 131 (p5-6) + Postsecondary 11,280 + Other local 2,817 (p7)",
+     "issue": "Activity fund receipts (218,303 incl. student fee, 61% of the part) go to Extracurricular Receipts and lunch sales 126,853 to School Lunch Sales under the user rules; charges for services/fees fits none of it. Postsecondary receipts 11,280 are Tuition Received. The remainder should be split by these sources from the same printed fund columns or take the dominant category, Extracurricular Receipts."},
+    {"severity": "warning", "path": "disbursements[19].original_label", "page": 5,
+     "extracted": "Facilities acquistion and improvements", "on_page": "Facilities acquisition and improvements",
+     "issue": "The label uses the Statement of Activities misspelling (p2). The cited governmental funds statement (p5) prints 'acquisition'. disbursements[21]/[22] labels 'Federal programs (General Fund)' / '(School Nutrition Fund)' add fund names that are not printed."},
+    {"severity": "warning", "path": "detail[47].detail_category", "page": 8,
+     "extracted": "Depreciation & Amortization", "on_page": "contra line for 425,000 hidden transfer to Depreciation Fund (not printed)",
+     "issue": "The category_decision mapping gave this hidden-transfer contra line the detail_category Depreciation & Amortization, but the line is a transfer reversal, not depreciation."},
+    {"severity": "warning", "path": "detail[54].category", "page": 9,
+     "extracted": "capital outlay / equipment purchases", "on_page": "Supplies & Equipment 35,513",
+     "issue": "Depreciation Fund 'Supplies & Equipment' is treated entirely as capital equipment. Defensible, but it may be partly supplies."}
   ]
 }

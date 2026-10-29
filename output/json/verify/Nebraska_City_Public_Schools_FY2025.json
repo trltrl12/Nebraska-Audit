@@ -1,24 +1,10 @@
 {
   "stem": "Nebraska_City_Public_Schools_FY2025",
-  "values_checked": 208,
+  "values_checked": 318,
   "issues": [
-    {"severity": "warning", "path": "ending_cash.amount", "page": 4,
-     "extracted": 14409380, "on_page": "Fund balances end of year 14,409,380; total assets (cash, CDs, county treasurer) 14,443,998 (p5)",
-     "issue": "beginning/ending_cash are the fund balance totals (cash net of payroll withholdings payable 34,618), not cash assets. The identity holds on that basis and notes say so, but it is an assumption the extractor made."},
-    {"severity": "warning", "path": "detail[187].fund_type", "page": 16,
-     "extracted": "governmental", "on_page": "School Nutrition Fund, shown within Other Governmental Funds on p3-5",
-     "issue": "The extractor rules list school nutrition as a business-type example. The report presents it as a governmental (special revenue) fund, so governmental is defensible, but the rules don't settle it. This also covers receipts[13], disbursements[8] and detail[187]-[192]."},
-    {"severity": "warning", "path": "receipts[10].category", "page": 3,
-     "extracted": "intergovernmental/state aid", "on_page": "County receipts 122,966 (p8: 2110 County fines and license fees 121,788; 2130 Other county receipts 1,178)",
-     "issue": "Most of the line is county fines and license fees passed to the school. Recording it as intergovernmental (county/other local governments) is defensible, but it could be read as fines and forfeitures."},
-    {"severity": "warning", "path": "detail[165].budget_final", "page": 11,
-     "extracted": null, "on_page": "5000 Debt services budget 40,000",
-     "issue": "The line's printed budget of 40,000 is missing from both split items (detail[165], detail[166])."},
-    {"severity": "warning", "path": "detail[176].amount", "page": 7,
-     "extracted": -800000, "on_page": "Reclassifications: Regular instruction +546,681, State programs (239,486), Federal programs (1,107,195)",
-     "issue": "The contra line nets the full state and federal program reclassifications against the +546,681 added to Regular instruction. The arithmetic is right (1,346,681 - 546,681 = 800,000) and the function totals tie to the statement, but the netting is the extractor's assumption."},
-    {"severity": "warning", "path": "detail[196].original_label", "page": 17,
-     "extracted": "Other taxes", "on_page": "Bond Fund schedule prints 'Other taxes' 842; the governmental funds statement (p3) shows Bond Fund 842 on the 'Public power district sales tax' row",
-     "issue": "The two schedules label this line differently. The JSON follows p17 as printed, and the category (other taxes / other local taxes) is the same either way."}
+    {"severity": "warning", "path": "disbursements[1].category", "page": 3, "extracted": "support services (Pupils) 1,892,814", "on_page": "Student support services: General Fund 1,162,084 + Other Governmental Funds 730,730", "issue": "the Other Governmental 730,730 equals Activities Fund 'Other expenses' 728,378 + Student Fee 'Extracurricular activity fees' 2,352 (pp15, 20), so student activity spending sits inside this statement line; a column split could put it in student activities"},
+    {"severity": "warning", "path": "detail[62].category", "page": 7, "extracted": "contra lines -250,000 (detail[62], Business), -250,000 (detail[69], Building and Grounds), -800,000 (detail[89], Federal Programs)", "on_page": "Reclassifications column: Regular instruction +546,681, Central services (250,000), O&M (250,000), State programs (239,486), Federal programs (1,107,195), Transfers (1,300,000)", "issue": "the page does not say which lines held the 1,300,000 transfer; allocating it to central services/O&M/state-federal programs is the extractor's inference (review set); the -800,000 contra covers State and Federal programs but is categorized Federal Programs only"},
+    {"severity": "warning", "path": "detail[109].category", "page": 17, "extracted": "other taxes (Bond Fund 'Other taxes' 842)", "on_page": "Bond Fund schedule prints 842 as Other taxes; governmental funds statement (p3) prints Bond Fund 842 on the Public power district sales tax row (total 6,449 = 5,284 + 842 + 323)", "issue": "the report contradicts itself on what the 842 is; top-level receipts follow the statement (PPD), detail follows the schedule"},
+    {"severity": "warning", "path": "beginning_fund_balance", "page": 4, "extracted": 12367024, "on_page": "FUND BALANCES, beginning of year 12,367,024 / end of year 14,409,380", "issue": "basis is cash; field rules say leave *_fund_balance null for cash basis (beginning_fund_balance and ending_fund_balance duplicate beginning/ending_cash)"}
   ]
 }

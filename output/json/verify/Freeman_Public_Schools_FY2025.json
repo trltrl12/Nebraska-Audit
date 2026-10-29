@@ -1,15 +1,18 @@
 {
   "stem": "Freeman_Public_Schools_FY2025",
-  "values_checked": 188,
+  "values_checked": 205,
   "issues": [
-    {"severity": "warning", "path": "receipts[24].category", "page": 4,
-     "extracted": "other (receipt)", "on_page": "Non-Revenue, General Fund column 32,155 (= General 5690 Other Non-Revenue Receipts 8,155, printed under 'Total Other Financing Sources' on p6, + Depreciation Fund 24,000, p9)",
-     "issue": "the same 8,155 is a receipt (category other) in receipts[] but section 'other financing' in detail[30]. The General Fund schedule calls it an other financing source, so it could belong in other_financing (reported_totals includes) rather than receipts. The 24,000 part is already in decision_needed"},
-    {"severity": "warning", "path": "receipts[25].category", "page": 4,
-     "extracted": "other (receipt)", "on_page": "Non-Revenue, School Nutrition column 6,040 (p11 'Other Non-Revenue Receipts', inside Total Receipts)",
-     "issue": "recorded as a receipt in receipts[] but as section 'other financing' in detail[78]; the two treatments don't match"},
-    {"severity": "warning", "path": "receipts[5].category", "page": 4,
-     "extracted": "fines and forfeitures", "on_page": "Fines and licenses 28,041 (= 2110 County Fines and License Fees 25,606 + 2210 ESU Receipts 2,435, p6)",
-     "issue": "the line mixes fines/license fees with ESU receipts (intergovernmental); the dominant category is right, but there is no 'review' note naming the mix as the rules require"}
+    {"severity": "error", "path": "receipts[24].category", "page": 4,
+     "extracted": "charges for services/fees", "on_page": "Non-Revenue, Activity Fund column 391,319 (= Activities Fund 'District Activities - Admissions & Fees' 64,133 + 'Other Activity Income' 327,186, p10)",
+     "issue": "school activity fund receipts belong in Extracurricular Receipts (user rule 2026-10-28; the same money is Extracurricular Receipts in detail, p10); charges for services/fees is wrong and inconsistent with detail"},
+    {"severity": "error", "path": "detail[75].category", "page": 11,
+     "extracted": "charges for services/fees", "on_page": "Daily Sales 165,829 (School Nutrition Fund)",
+     "issue": "school lunch/meal sales have their own receipt category School Lunch Sales (user rule 2026-10-28); the statement line for the same money ('Sale of Lunches', receipts[18]) already uses School Lunch Sales"},
+    {"severity": "warning", "path": "detail[7].category", "page": 6,
+     "extracted": "Extracurricular Receipts", "on_page": "1800 Community Service Activities 33,070",
+     "issue": "same money is 'Community Service' charges for services/fees in receipts[21]; the notes say the detail line was set to charges for services to match, but it carries Extracurricular Receipts. Community service receipts are not student activity receipts; categories should agree"},
+    {"severity": "warning", "path": "detail[25].original_label", "page": 6,
+     "extracted": "4505 Title I, Part A ESSA Improving Basic Programs", "on_page": "4505 Title I, Part A Essa Improving Basic Programs Operated by Local Educational Agencies",
+     "issue": "label truncated (also detail 6200 on p8, printed '...Operated by Local Educational Agencies'); amounts correct"}
   ]
 }

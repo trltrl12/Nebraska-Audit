@@ -1,54 +1,12 @@
 {
   "stem": "CO24-01212026-July_1_2024_through_June_30_2025_Audit_Report_and_Management_Letter",
-  "values_checked": 109,
+  "values_checked": 125,
   "issues": [
-    {
-      "severity": "warning",
-      "path": "detail[42].category",
-      "page": 8,
-      "extracted": "other / miscellaneous revenue",
-      "on_page": "Insurance Fund Miscellaneous 1,628,375",
-      "issue": "[fixed: now reimbursements/refunds with review] 'other' used where a specific category fits. Government-wide general receipts (p2) show Insurance Reimbursements 1,411,338, and the only other Miscellaneous lines (General 106,752, Road 136,279, nonmajor non-keno 67,439) total just 310,470. So at least 1,100,868 (68%) of this Insurance (self-insurance) Fund line must be insurance reimbursements. Under the mixed-line rule it should be 'reimbursements/refunds' / 'reimbursements/refunds' with a review note. It is also inconsistent with receipts[8], where the same money is categorized reimbursements/refunds."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[8].original_label",
-      "page": 2,
-      "extracted": "Miscellaneous",
-      "on_page": "Insurance Reimbursements 1,411,338 / Keno Proceeds 184,365 / Miscellaneous 527,507 (p2)",
-      "issue": "The split of p4 Miscellaneous 2,123,210 using the p2 general receipts is valid (sums exactly). But receipts[8] and receipts[9] keep the label 'Miscellaneous' instead of the printed p2 labels."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[0].original_label",
-      "page": 4,
-      "extracted": "Taxes",
-      "on_page": "Property 12,043,888 / Motor Vehicle 1,112,660 / Other 132,995 (General Fund column, p4); Taxes 13,289,543 (p5)",
-      "issue": "The split of the General Fund Taxes line (detail[0..2]) is valid and sums to 13,289,543. But every item is labelled 'Taxes' rather than the p4 row labels, and budget_final 13,216,535 (whole line) sits on detail[2] only."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[6].budget_final",
-      "page": 5,
-      "extracted": null,
-      "on_page": "-",
-      "issue": "Final budget is printed as a dash (zero) and entered as null, while other dash budgets (e.g. Road Charges for Services, Insurance Investment Income) are entered as 0. Inconsistent."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[21].detail_category",
-      "page": 5,
-      "extracted": "not itemized",
-      "on_page": "General Government - Miscellaneous 2,451,729",
-      "issue": "A large department line printed as 'Miscellaneous' is coded 'not itemized'. It is arguably 'miscellaneous expenditure' with review."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[33].detail_category",
-      "page": 7,
-      "extracted": "highway allocation",
-      "on_page": "Road Fund Intergovernmental 3,652,870",
-      "issue": "Assumption: the page doesn't say the Road Fund intergovernmental receipts are highway allocation. The line is already marked review."
-    }
+    {"severity": "warning", "path": "detail[42].category", "page": 8,
+     "extracted": "reimbursements/refunds (1,628,375)", "on_page": "Insurance Fund Miscellaneous 1,628,375; p2 Insurance Reimbursements 1,411,338",
+     "issue": "The receipts and detail lists categorize this money differently. In receipts, only 1,411,338 of Miscellaneous counts as reimbursements and the other 527,507 is other. In detail, the whole Insurance Fund Miscellaneous 1,628,375 is reimbursements, which is 217,037 more than the government-wide reimbursements figure."},
+    {"severity": "warning", "path": "detail[2].budget_final", "page": 5,
+     "extracted": 13216535, "on_page": "Taxes final budget 13,216,535 (whole line)",
+     "issue": "The final budget for the whole Taxes line is attached to the 132,995 other-taxes split item only, so budget-vs-actual for that item is meaningless. A review note is present."}
   ]
 }

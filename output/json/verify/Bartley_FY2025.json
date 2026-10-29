@@ -1,12 +1,19 @@
 {
   "stem": "Bartley_FY2025",
-  "values_checked": 85,
+  "values_checked": 112,
   "issues": [
-    {"severity": "warning", "path": "receipts[11].category", "page": 4, "extracted": "charges for services/fees", "on_page": "Fire MFO 11,949", "issue": "MFO is most likely Nebraska Mutual Finance Organization aid for fire protection, which the state pays out. That would make it intergovernmental/state aid, not a rural fire contract fee. Already flagged for review."},
-    {"severity": "warning", "path": "detail[5].detail_category", "page": 9, "extracted": "other charges for services", "on_page": "Fire MFO 11,949", "issue": "Same question as receipts[11]: if MFO is state aid, the detail category should be other state aid."},
-    {"severity": "warning", "path": "receipts[9].category", "page": 4, "extracted": "charges for services/fees", "on_page": "Charges for services 11,171 (p2 Statement of Activities labels this 'Electric, gas, and cable lease')", "issue": "p2 shows this is electric/gas/cable lease or franchise money. Rentals or occupation/franchise tax may fit better than charges for services."},
-    {"severity": "warning", "path": "detail[3].fund_type", "page": 9, "extracted": "governmental", "on_page": "Interest 18,984 (governmental 7,974 + business-type 11,010)", "issue": "The notes say mixed lines take the dominant fund type, but business-type is the larger share of this line (11,010 vs 7,974)."},
-    {"severity": "warning", "path": "detail[16].fund_type", "page": 9, "extracted": "governmental", "on_page": "Transfers out 200,000", "issue": "Per p6 the transfer out comes from the Electric fund (business-type); the Transfers In side goes to the General fund (governmental)."},
-    {"severity": "warning", "path": "detail[0].category", "page": 9, "extracted": "taxes (unlabeled)", "on_page": "Taxes 124,039", "issue": "Under its 'Taxes' heading p4 itemizes this line (lines sum to 124,038, 1 dollar short). About 70,000 of it is not tax: State Highway Allocation 60,806, Homestead, State Tax Credit, Pro Rate. Keeping it unsplit is defensible because of the 1 dollar gap, but the category overstates taxes."}
+    {"severity": "error", "path": "missing", "page": 9,
+     "extracted": "notes end: '... (they equal the p5 proprietary statement).'",
+     "on_page": "trimmed PDF has 9 pages",
+     "issue": "notes do not end with 'Read pages 1-9 of 9' (the phrase is in the middle, followed by re-check text). All 9 pages were read and no statement lines are missing; only the required ending is wrong."},
+    {"severity": "warning", "path": "receipts[15].category", "page": 6,
+     "extracted": "charges for services/fees", "on_page": "Charge for services 743,337 (proprietary funds: Electric/Water/Sewer/Sanitation)",
+     "issue": "the detail lines for the same amounts use the user's category Utility Charges, but the receipts line uses charges for services/fees. Use one category for the same label."},
+    {"severity": "warning", "path": "detail[25].category", "page": 4,
+     "extracted": "general government", "on_page": "Personnel services, Street column 1,818",
+     "issue": "this line is listed by object in the Street Fund column; the rule gives the fund's function, streets/highways"},
+    {"severity": "warning", "path": "detail[27].category", "page": 4,
+     "extracted": "streets/highways", "on_page": "Operating expenses, Community Redevelopment column 610",
+     "issue": "this Community Redevelopment Fund line is listed by object; the fund's function is economic development (CRA), not streets/highways"}
   ]
 }

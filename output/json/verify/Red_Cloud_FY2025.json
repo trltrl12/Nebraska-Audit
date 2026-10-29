@@ -1,9 +1,16 @@
 {
   "stem": "Red_Cloud_FY2025",
-  "values_checked": 158,
+  "values_checked": 205,
   "issues": [
-    {"severity": "warning", "path": "receipts[11].category", "page": 17, "extracted": "intergovernmental/state aid", "on_page": "State CDBG block grant 616,106", "issue": "CDBG is a federal HUD program passed through the state; federal grants is arguable. Already marked review. Same applies to detail[60] (detail_category other state aid)."},
-    {"severity": "warning", "path": "detail[66].detail_category", "page": 19, "extracted": "other charges for services", "on_page": "Charges for services 203,525 (Trash Fund 157,837, Compost Site 11,982, Fire 13,368, Community Center 8,345, Park 475; p18-19)", "issue": "Trash Fund refuse charges are about 78% of the combined line, so refuse/sanitation charges is the dominant detail category"},
-    {"severity": "warning", "path": "receipts[15].original_label", "page": 8, "extracted": "Other (operating revenues)", "on_page": "Other", "issue": "label has added text; printed label is 'Other' under OPERATING REVENUES"}
+    {"severity": "warning", "path": "receipts[11].category", "page": 19,
+     "extracted": "charges for services/fees (203,525)",
+     "on_page": "Nonmajor columns: Compost Site 11,982 + Trash 157,837 = 169,819 (Statement of Activities p2: Sanitation charges 169,819), Cemetery 5,950, Swimming Pool 5,568, Park 475, Community Center 8,345, Fire 13,368",
+     "issue": "About 83% of this line is refuse/compost (sanitation) charges, which the user's 2026-10-28 rule puts in Utility Charges; cemetery and pool/park fees also have their own categories. Kept as one generic line with no review note (detail[186] likewise)"},
+    {"severity": "warning", "path": "disbursements[12].category", "page": 8,
+     "extracted": "utilities", "on_page": "Direct electric and water expense 1,695,436 (Electric 1,642,174, Water 50,717, C & D 2,545)",
+     "issue": "Under the utility cost-type rule this is probably Purchased Power/Cost of Sales (the electric fund's power purchases), not a function line"},
+    {"severity": "warning", "path": "detail[20].category", "page": 12,
+     "extracted": "intergovernmental/state aid / highway allocation", "on_page": "Highway allocation and MV fees 185,794",
+     "issue": "The line mixes highway allocation with motor vehicle fees (motor vehicle tax). The dominant category is defensible, but the rule calls for a review note naming the mix, and there is none"}
   ]
 }

@@ -1,54 +1,19 @@
 {
   "stem": "Howard_County_FY2025",
-  "values_checked": 91,
+  "values_checked": 112,
   "issues": [
-    {
-      "severity": "error",
-      "path": "detail[38].category",
-      "page": 7,
-      "extracted": "property tax",
-      "on_page": "Taxes 13,918 (Tourism Promotion 6,959 + Tourism Improvement 6,959, p6-p7); Lodging tax 13,918 (p2)",
-      "issue": "[fixed] Nonmajor 'Taxes' is entirely the two tourism funds' lodging tax (equals p2 Lodging tax 13,918, and receipts[] already records it as lodging tax). Category should be 'lodging tax' (detail_category 'lodging tax'), not property tax; category and detail_category ('taxes (unlabeled)') also disagree."
-    },
-    {
-      "severity": "error",
-      "path": "detail_totals",
-      "page": 5,
-      "extracted": null,
-      "on_page": "Inheritance Tax Fund: TOTAL RECEIPTS 447,342; TOTAL DISBURSEMENTS 1,334,127",
-      "issue": "[fixed] Detail lines detail[27] and detail[28] (Inheritance Tax sub-fund, p5) have no detail_totals entries; the printed fund totals on p5 are missing, so this schedule is not tied."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[0].detail_category",
-      "page": 8,
-      "extracted": "taxes (unlabeled)",
-      "on_page": "Taxes 2,563,551",
-      "issue": "category 'property tax' and detail_category 'taxes (unlabeled)' disagree. The line equals Property 2,183,812 + Motor vehicle 379,739 (p2), but the budget schedule itself prints no breakdown, so leaving it unsplit is correct; the two category fields should be consistent."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[23].category",
-      "page": 8,
-      "extracted": "streets/highways",
-      "on_page": "Noxious Weed 63,994 (under Public Works heading)",
-      "issue": "Category rules list noxious weed control under 'natural resources/conservation'; following the printed Public Works heading is defensible."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[20].category",
-      "page": 8,
-      "extracted": "streets/highways",
-      "on_page": "Communications 291,148 (under Public Works heading)",
-      "issue": "County communications (dispatch) is usually public safety; the printed heading is Public Works, and the budget-schedule function groups do not tie to the p5 statement function lines (GG 2,364,333 / PS 1,097,571 / PW 169,869), so the split between functions is uncertain."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[5].category",
-      "page": 4,
-      "extracted": "charges for services/fees",
-      "on_page": "Local 751,752",
-      "issue": "Broad group; p2 shows it mixes charges for services 458,746, interest income 167,106, miscellaneous 76,076 and contributions. Dominant category is defensible (review already set)."
-    }
+    {"severity": "warning", "path": "detail[3..5].split_from", "page": 8,
+     "extracted": "Local 697,138 split into Local 666,627 + insurance proceeds 20,852 + sale of surplus 9,659 (likewise Road Local 58,848 = 20,040 + 38,808, detail[9..10], p9)",
+     "on_page": "Budget schedule prints one line, Local 697,138 (Road: Local 58,848)",
+     "issue": "The budget schedules don't print this split. It comes from the p4/p5 fund statements, where the same fund's Local, Insurance proceeds and Sale of surplus lines add up to it exactly. Defensible, but it isn't a breakdown printed for this line."},
+    {"severity": "warning", "path": "detail[26].category", "page": 8,
+     "extracted": "streets/highways", "on_page": "Public Works: Noxious Weed 63,994",
+     "issue": "The category rules put noxious weed control in natural resources/conservation (Hooker County's extraction does this). Here it follows the schedule's Public Works heading."},
+    {"severity": "warning", "path": "detail[23].category", "page": 8,
+     "extracted": "streets/highways", "on_page": "Public Works: Communications 291,148",
+     "issue": "A county 'Communications' department is usually dispatch/911, which is public safety. It is printed under Public Works, so the category follows the schedule; it is already flagged for review."},
+    {"severity": "warning", "path": "detail[44].category", "page": 7,
+     "extracted": "charges for services/fees", "on_page": "Local 65,085 = Highway Safety 1,571 + 911 Emergency 9,540 + Canine (K9) 49,000 + Preservation and Modernization 4,974",
+     "issue": "75% of this line is the Canine (K9) fund's 49,000, which is probably donations or grants, not charges for services. The page doesn't say what it is, so the category is uncertain."}
   ]
 }

@@ -1,24 +1,18 @@
 {
   "stem": "Plainview_FY2025",
-  "values_checked": 224,
+  "values_checked": 205,
   "issues": [
-    {"severity": "warning", "path": "report_discrepancies[0]", "page": 12,
-     "extracted": {"check": "proprietary", "difference": -22318}, "on_page": "Total column: lines (54,521) + 142,590 + (1,678) + 1,821 + 20,438 + 1,528 + (1,350) + (26,988) + 3,693 + 22,318 = 107,851, but printed total is 85,533",
-     "issue": "'proprietary' is not one of the allowed check values (business|reconcile|balance|totals|detail). Also, the reconciliation column doesn't add up by itself: its printed total leaves out the 22,318 accrued compensated absences line. It isn't only a mismatch with p10. Difference -22,318 is correct."},
-    {"severity": "warning", "path": "decision_needed", "page": 17,
-     "extracted": "transfers_out 30,081 (Sales Tax Fund transfer out)", "on_page": "Transfers out (30,081); government-wide p3 shows 30,081 going to the component unit (Plainview Manor)",
-     "issue": "One-sided transfer: money leaves the primary government for a component unit. Recorded as transfers_out, but a person should decide if it's a transfer or a payment/grant to another entity. Not in decision_needed[]."},
-    {"severity": "warning", "path": "receipts[9].category", "page": 5,
-     "extracted": "other", "on_page": "Loan collections 90,363",
-     "issue": "principal repayments on notes receivable (ED Fund 29,724, Housing Authority 60,639); no category fits and it is arguably not revenue; marked review"},
     {"severity": "warning", "path": "receipts[6].category", "page": 5,
-     "extracted": "federal grants", "on_page": "Grants 83,119",
-     "issue": "no page says where the grants come from (Park 20,493, Handibus 30,537, Library 7,277, Econ Dev 24,812); some may be state aid; same for the matching detail lines; marked review"},
+     "extracted": "federal grants", "on_page": "Grants 83,119 (General 58,307: Park 20,493, Handibus 30,537, Library 7,277; Economic Development 24,812)",
+     "issue": "grantor not printed; federal is an assumption (Handibus/library/park grants could be state). Same for detail grant lines [10], [17], [21] and the Economic Development grants line"},
     {"severity": "warning", "path": "receipts[14].category", "page": 8,
-     "extracted": "charges for services/fees", "on_page": "Other revenue 222,989 (Electric 219,264)",
-     "issue": "Electric fund's revenue is almost all 'Other revenue' (consumer sales only 93), so it may be lease/rental income rather than utility sales; defensible; marked review"},
-    {"severity": "warning", "path": "balance_sheet.liabilities[7].category", "page": 1,
-     "extracted": "accrued liabilities", "on_page": "Accrued compensated absences 37,682 (noncurrent liabilities)",
-     "issue": "listed under noncurrent liabilities; the rules use accrued liabilities for compensated absences due soon, so other liabilities may fit better"}
+     "extracted": "charges for services/fees", "on_page": "Other revenue 222,989 (Electric Fund 219,264, whose consumer sales are only 93)",
+     "issue": "the page doesn't say what the Electric Fund's 'Other revenue' is (likely system lease/wholesale income); category is a judgment call (already marked review)"},
+    {"severity": "warning", "path": "detail[13].category", "page": 19,
+     "extracted": "charges for services/fees", "on_page": "Pool - Charges for services 12,947 (detail_category recreation/pool/park fees)",
+     "issue": "category does not match its detail_category; user rule has a Recreation Fees receipt category for pool fees"},
+    {"severity": "warning", "path": "detail[81].original_label", "page": 14,
+     "extracted": "Capital outlay", "on_page": "Capital outlay 621,857 (Street Fund)",
+     "issue": "user rule labels capital outlay lines 'Capital Outlay: <function>' (Capital Outlay: Streets) with printed_label; the General Fund capital outlay lines were relabelled but this one wasn't"}
   ]
 }

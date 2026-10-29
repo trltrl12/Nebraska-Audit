@@ -1,38 +1,24 @@
 {
   "stem": "Millard_Public_Schools_FY2025",
-  "values_checked": 287,
+  "values_checked": 290,
   "issues": [
-    {
-      "severity": "error",
-      "path": "detail[77].budget_final",
-      "page": 9,
-      "extracted": 72922649,
-      "on_page": 72922399,
-      "issue": "[fixed] Building Fund 'Buildings, acquisition and improvement' Original and Final Budget is printed 72,922,399 (same as Total disbursements budget 72,922,399; variance (54,719,750) = 18,202,649 - 72,922,399 confirms). 72,922,649 mixes in the actual's last digits (18,202,649). The line's review note and the notes text about this should be cleared."
-    },
-    {
-      "severity": "error",
-      "path": "missing",
-      "page": 8,
-      "extracted": null,
-      "on_page": "General Fund schedule total disbursements 285,062,114 includes the 39,573,163 operational transfers to Employee Benefit (37,048,088, p11) and Depreciation (2,525,075, p12)",
-      "issue": "[fixed] Transfer counted as spending. The statement's General Fund column (p5) combines General + Employee Benefit + Depreciation + Contingency: its receipts 304,845,668 = 302,753,468 + 1,276,165 + 686,634 + 129,401 exactly (transfers excluded), and its disbursements 286,681,772 = 285,062,114 + 36,889,501 + 4,290,441 + 12,940 - 39,573,163 (+/-61). The General Fund budgetary balance also rolls with no transfers line (56,859,061 + 302,753,468 - 285,062,114 = 74,550,415). So the 39,573,163 sits inside the General Fund program lines (detail[42]-[64]), and those lines also feed the receiving funds' spending in detail. The notes claim it is 'not hidden in a spending line', but their own arithmetic shows it is. The page doesn't say which program lines hold it, so under the hidden-transfer rule add one contra expenditure line (-39,573,163, fund General, split_from naming p8 lines and the p5 elimination, review) plus an other financing line -39,573,163. The detail_totals entry stays 285,062,114 as printed."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[7].detail_category",
-      "page": 7,
-      "extracted": "county/other local governments",
-      "on_page": "2110 Fines and licenses (County sources) 677,397",
-      "issue": "Labelled fines and licenses (county-distributed fines that go to schools); recorded as county money while 1921 'Local fines and license fees' is fines and forfeitures. Defensible, but could be fines and forfeitures."
-    },
-    {
-      "severity": "warning",
-      "path": "report_discrepancies[0]",
-      "page": 5,
-      "extracted": 24876,
-      "on_page": "School Nutrition column lines 5,393,913 + 33,573 + 7,787,042 + 1,686 = 13,216,214 vs printed Total disbursements 13,241,090",
-      "issue": "Checked: NOT a misread. Every Total Governmental Funds row on p6 equals the sum of its fund columns on p5-6, and the General, Special Building, Activities, Student Fees and Debt Service columns all tie to their totals. Only the School Nutrition column is short, by exactly the 24,876 Equipment line shown on p10. Lines add to 352,496,436 vs printed 352,521,312. The governmental identity is therefore 24,876 off, and that comes from the report itself. Recorded correctly as printed; listed here so a person can see it."
-    }
+    {"severity": "error", "path": "receipts[21].category", "page": 5,
+     "extracted": "charges for services/fees", "on_page": "Non-revenue receipts - Activities Fund column 8,951,773 (= 'Activities revenue', p14)",
+     "issue": "School activity fund receipts are 'Extracurricular Receipts' under the user rules (2026-10-23/28). detail[103] already uses Extracurricular Receipts for the same 8,951,773."},
+    {"severity": "error", "path": "receipts[22].category", "page": 6,
+     "extracted": "charges for services/fees", "on_page": "Non-revenue receipts - Student Fees Fund column 559,524 (= 'Activity fees', p15)",
+     "issue": "Student fees and activity fees are 'Extracurricular Receipts' under the user's 2026-10-28 rule. detail[105] already uses Extracurricular Receipts."},
+    {"severity": "warning", "path": "detail[105].detail_category", "page": 15,
+     "extracted": "other charges for services", "on_page": "Activity fees 559,524",
+     "issue": "The category is Extracurricular Receipts, but detail_category is 'other charges for services'. 'student activity receipts' would be consistent."},
+    {"severity": "warning", "path": "receipts[12].category", "page": 7,
+     "extracted": "Property Tax Credit (incl. General 3131 'Personal property tax' 46,771,332)", "on_page": "3131 Personal property tax 46,771,332 (under State sources)",
+     "issue": "The label is printed 'Personal property tax' but sits under State sources with code 3131. Treating it as the state property tax credit is an assumption, and it is 30% of state receipts. Review is set (also detail[13]); a person should confirm."},
+    {"severity": "warning", "path": "detail[64]", "page": 8,
+     "extracted": "contra expenditure -39,573,163 (category other, detail_category 'Salaries / Benefits') plus detail[65] other financing -39,573,163", "on_page": "General Fund schedule total 285,062,114 (no transfer line); Employee Benefit p11 37,048,088 + Depreciation p12 2,525,075 transfers from the General Fund",
+     "issue": "The hidden-transfer contra is inferred from the statement's combined General Fund column (ties within 61), as the rules allow, with review set. The contra line's category 'other' doesn't name a function. This is an assumption a person should accept."},
+    {"severity": "warning", "path": "report_discrepancies[0]", "page": 5,
+     "extracted": 24876, "on_page": "School Nutrition column lines 5,393,913 + 33,573 + 7,787,042 + 1,686 = 13,216,214 vs printed 13,241,090; Total column lines add to 352,496,436 vs printed 352,521,312",
+     "issue": "Confirmed this comes from the report itself, not a misread. The governmental identity is 24,876 off because of it. It is recorded in report_discrepancies."}
   ]
 }

@@ -1,18 +1,15 @@
 {
   "stem": "Wallace_FY2025",
-  "values_checked": 61,
+  "values_checked": 78,
   "issues": [
-    {"severity": "warning", "path": "disbursements[3].category", "page": 4,
-     "extracted": "general government", "on_page": "Operating expenses 72,025 (General 48,952, Street 20,058, Library 3,016)",
-     "issue": "The whole line is recorded under general government. The rule for statements listed by object is to use each fund column's function, as was done for Personnel services. That would put Street 20,058 under streets/highways and Library 3,016 under culture/recreation. The extractor did not split it because the columns add to 72,026, not the printed 72,025, so this is a judgment call. Splitting would need a $1 adjustment."},
-    {"severity": "warning", "path": "receipts[8].category", "page": 4,
-     "extracted": "other", "on_page": "Other 29,473 (General 28,637, Library 836)",
-     "issue": "This line is 11% of governmental receipts. The Statement of Activities (p2) shows 'Pass Thru Income & Expense - Legion (23,574)' next to 'Other receipts 29,473', so most of it may be American Legion pass-through money matching the 23,574 pass-through expense. A person should confirm what the line holds."},
-    {"severity": "warning", "path": "disbursements[4].category", "page": 4,
-     "extracted": "other", "on_page": "Pass Thru Expenses - Legion 23,574",
-     "issue": "Recorded in the last-resort category other. It is a pass-through payment to the American Legion; general government (payment to another entity) is a possible alternative."},
-    {"severity": "warning", "path": "report_discrepancies", "page": 4,
-     "extracted": "not recorded", "on_page": "General column: 19,864 + 74,823 + 48,952 + 23,574 = 167,213 vs printed TOTAL DISBURSEMENTS 167,211; Excess printed (19,757) vs 147,455 - 167,211 = (19,756)",
-     "issue": "The General Fund column itself does not add up by $2 (rounding). No extracted figure is affected, since the Total column was used, but this is not listed in report_discrepancies."}
+    {"severity": "error", "path": "detail[17].category", "page": 4,
+     "extracted": "general government", "on_page": "Operating expenses, Street column 20,058",
+     "issue": "this per-fund detail line is printed in the Street Fund column; under the listed-by-object rule its function is streets/highways. The $1 rounding issue that kept the top-level 72,025 line unsplit doesn't apply to the individual fund cells"},
+    {"severity": "error", "path": "detail[18].category", "page": 4,
+     "extracted": "general government", "on_page": "Operating expenses, Library column 3,016",
+     "issue": "this line is printed in the Library Fund column, so its function is culture/recreation, not general government"},
+    {"severity": "warning", "path": "receipts[10].category", "page": 6,
+     "extracted": "charges for services/fees", "on_page": "Charge for services 155,264 (Water, Sewer, Sanitation)",
+     "issue": "utility fund charges fall under the user's Utility Charges receipt category (2026-10-28); the matching per-fund detail lines already use Utility Charges"}
   ]
 }

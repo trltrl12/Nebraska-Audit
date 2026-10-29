@@ -1,21 +1,15 @@
 {
   "stem": "Wahoo_FY2025",
-  "values_checked": 132,
+  "values_checked": 140,
   "issues": [
-    {"severity": "fixed", "resolution": "fixed 2026-10-27: notes now end with Read pages 1-6 of 6.", "path": "missing", "page": 6,
-     "extracted": "notes contain 'Read pages 1-6 of 6.' mid-text, followed by a balance-sheet sentence", "on_page": "trimmed PDF has 6 pages",
-     "issue": "The notes don't end with 'Read pages 1-6 of 6' as required, though the count is right. All 6 pages are fully captured and every printed line is in the JSON, so no data is missing."},
-    {"severity": "warning", "path": "missing", "page": 6,
-     "extracted": null, "on_page": "Trim ends at report p20 (New 1/2 Cent Sales Tax budget schedule). The Debt Service, Capital Projects, Chestnut Street Project and Other Governmental funds have no schedule in the trim.",
-     "issue": "CLAUDE.md notes source pp23-27 were not kept. Further budget or combining schedules (e.g. Debt Service 822,005 of spending) may sit there, so check the source PDF. The General Fund budget schedule (p3) is now present."},
-    {"severity": "warning", "path": "disbursements[6].category", "page": 2,
-     "extracted": "Debt Service (principal)", "on_page": "Debt Service: Tax Increment Finance Payments 259,468",
-     "issue": "The rules list TIF under economic development, but the report prints this line under the Debt Service heading (Debt Service fund). It's already marked review and isn't in decision_needed. The user should decide."},
+    {"severity": "warning", "path": "receipts[7].category", "page": 2,
+     "extracted": "reimbursements/refunds", "on_page": "Charges & Reimbursements for Services 1,188,063",
+     "issue": "a mixed line; charges for services is probably the dominant part (General 855,526 in a fund with heavy culture/recreation spending; Fire and EMS 313,017 is entered in detail as ambulance/rescue fees), so charges for services/fees (or the Reimbursement for Services category) may fit better than reimbursements/refunds; review note present"},
+    {"severity": "warning", "path": "detail[5].category", "page": 3,
+     "extracted": "reimbursements/refunds", "on_page": "Charges & Reimbursements for Services 855,526",
+     "issue": "the category reimbursements/refunds conflicts with detail_category 'other charges for services' (and with 'ambulance/rescue fees' on detail[34], p5, and detail[22], p4); the category and detail_category should agree"},
     {"severity": "warning", "path": "detail[4].detail_category", "page": 3,
-     "extracted": "county/other local governments", "on_page": "Intergovernmental 440,108 (General Fund)",
-     "issue": "The page doesn't say whether this is state money (e.g. municipal equalization) or county money, so other state aid would fit equally well. There's no review flag. The same applies to detail[20] (Street 74,860) and detail[31] (Fire and EMS 99,301)."},
-    {"severity": "warning", "path": "balance_sheet.equity[0].original_label", "page": 1,
-     "extracted": "Restricted (also Committed, Assigned, Unassigned)", "on_page": "Restricted / Restricted; Committed / Unrestricted; Assigned / Unrestricted; Unassigned / Unrestricted",
-     "issue": "The printed labels combine the fund-balance and net-position class. The JSON keeps only the fund-balance part. Amounts all match."}
+     "extracted": "county/other local governments", "on_page": "Intergovernmental 440,108",
+     "issue": "the source of the Intergovernmental line (state vs county/local) is not printed; this detail_category is an assumption (same for Street detail[20] p4 and Fire and EMS detail[32] p5)"}
   ]
 }

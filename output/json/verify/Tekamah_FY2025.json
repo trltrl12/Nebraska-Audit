@@ -1,18 +1,15 @@
 {
   "stem": "Tekamah_FY2025",
-  "values_checked": 75,
+  "values_checked": 82,
   "issues": [
-    {"severity": "warning", "path": "detail[3].detail_category", "page": 7,
-     "extracted": "other charges for services", "on_page": "Local receipts (governmental part 384,080 = licenses and permits 49,780 + charges for services 97,423 + lease revenue 236,877, p4)",
-     "issue": "The mixed line is mostly lease revenue (62%), so 'rentals' is the dominant detail category. It also includes licenses and permits."},
-    {"severity": "warning", "path": "detail[15].category", "page": 4,
-     "extracted": "debt service principal", "on_page": "Debt service 439,636 = Principal 300,000 + Interest expense 139,636 (p4)",
-     "issue": "The governmental debt service split of the budget line mixes principal and interest. p4 prints the breakdown, so it could be two items. The amounts are correct."},
-    {"severity": "warning", "path": "detail[5].budget_final", "page": 7,
-     "extracted": null, "on_page": "Interest income and Miscellaneous final budget printed as '-' (0)",
-     "issue": "budget_final is null for the split Interest income and Miscellaneous lines (detail[5]-[8]), but the page prints a zero budget for both, so 0 applies to every part."},
-    {"severity": "warning", "path": "detail_totals", "page": 7,
-     "extracted": "fund 'All Funds' totals 3,764,063 / 3,790,353", "on_page": "All Funds budgetary schedule totals (governmental + water/sewer)",
-     "issue": "The totals cover both fund types, and the detail items under fund 'All Funds' mix governmental and business-type lines. They tie when summed together (checked), but the totals would not tie if checked per fund type."}
+    {"severity": "error", "path": "receipts[6].category", "page": 4,
+     "extracted": "charges for services/fees", "on_page": "Lease revenue 236,877",
+     "issue": "lease/rental income has its own receipt category Rentals (user rule 2026-10-28, out of charges for services); the matching detail line already uses detail_category rentals"},
+    {"severity": "error", "path": "detail[9].category", "page": 4,
+     "extracted": "charges for services/fees", "on_page": "Lease revenue 236,877 (General Fund)",
+     "issue": "should be Rentals, consistent with its own detail_category rentals"},
+    {"severity": "warning", "path": "receipts[9].category", "page": 6,
+     "extracted": "charges for services/fees", "on_page": "Charges for services 830,217 (Water and Sewer Fund)",
+     "issue": "utility fund charges; detail[22] for the same line is Utility Charges, receipts line is not (same label should carry the same category)"}
   ]
 }

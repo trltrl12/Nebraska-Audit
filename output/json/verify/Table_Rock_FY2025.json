@@ -1,18 +1,12 @@
 {
   "stem": "Table_Rock_FY2025",
-  "values_checked": 31,
+  "values_checked": 38,
   "issues": [
-    {"severity": "warning", "path": "receipts[9].category", "page": 1,
-     "extracted": "other", "on_page": "Local Receipts: Other 89,683.80 (General Fund)",
-     "issue": "The page gives no breakdown, so 'other' with review follows the rules. But with the Street Fund line it is 39% of governmental receipts (90,130.93 of 227,984.89), well over the 10% review threshold. The source of this money should be confirmed."},
     {"severity": "warning", "path": "receipts[11].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other 68,434.54 (Water Fund) / 42,889.86 (Sewer Fund)",
-     "issue": "Assumed to be utility charges. The page only says 'Other' (also applies to receipts[12])."},
-    {"severity": "warning", "path": "receipts[9]", "page": 1,
-     "extracted": "no split_from", "on_page": "Line 18 Local Receipts: Other total 201,455.33 split across General/Street/Water/Sewer columns; Line 29 General Government 327,053.24 split across four columns",
-     "issue": "The rules say mixed rows split by column should carry split_from. The column amounts are printed, but none of the column-split items (receipts[9-12], disbursements[0,1,3,4]) has split_from. Their labels also add a '(Fund)' suffix that is not printed."},
+     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other - Water Fund 68,434.54; Sewer Fund 42,889.86",
+     "issue": "Printed only as 'Local Receipts: Other'; the extractor assumed water/sewer charges. If that assumption is kept, the user rule (2026-10-28) category is Utility Charges, not charges for services/fees (also receipts[12])."},
     {"severity": "warning", "path": "disbursements[1].category", "page": 2,
-     "extracted": "general government", "on_page": "General Government (Street Fund) 22,101.03",
-     "issue": "This is Street Fund spending. It is printed on the General Government line, but streets/highways may fit better."}
+     "extracted": "general government", "on_page": "General Government - Street Fund 22,101.03",
+     "issue": "Street Fund spending printed on the General Government line; kept as general government (as printed) though the fund's function is streets/highways. Judgment call, already marked review."}
   ]
 }

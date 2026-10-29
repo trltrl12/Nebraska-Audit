@@ -1,15 +1,12 @@
 {
   "stem": "Richland_FY2025",
-  "values_checked": 28,
+  "values_checked": 40,
   "issues": [
-    {"severity": "warning", "path": "balance_sheet", "page": 1,
-     "extracted": null, "on_page": "Line 25 Ending Balance Consists Of: Net Cash Balance 146,702.59; Investments 576,346.19; Subtotal 723,048.78 (Total column)",
-     "issue": "balance_sheet is null, but Exhibit A lines 25-28 print the ending cash/investments composition. Other Exhibit A villages (e.g. Rising_City_FY2025, Riverdale_FY2025) record these lines as a cash-basis balance sheet, and the rules ask for empty lists rather than null on a cash basis. Not a wrong number, but the reports are handled inconsistently."},
     {"severity": "warning", "path": "receipts[10].category", "page": 1,
      "extracted": "other", "on_page": "Local Receipts: Other, Community Development Fund 16,773.74",
-     "issue": "Kept as 'other' with review. The p5 transfer schedule calls the fund that received the 200.00 the 'Lottery Fund', but Exhibit A puts that 200.00 in the Community Development column. So that column may be a lottery fund, and its Local Other could be keno/lottery proceeds (or interest on its ~360,000 of CDs). The page doesn't say which; a person should check."},
-    {"severity": "warning", "path": "notes", "page": 1,
-     "extracted": null, "on_page": "County Treasurer Balance at October 1, 2024 $199.13; at September 30, 2025 5,557.53",
-     "issue": "The county treasurer balances printed below Exhibit A are outside the roll-forward, and the JSON doesn't record or mention them anywhere."}
+     "issue": "The p5 transfer schedule names the fund receiving the 200.00 transfer 'Lottery Fund', and that 200.00 sits in the Community Development column on p1, so this fund looks like the village's lottery fund. Its local receipts may be keno/lottery proceeds, or interest on its 360,951.03 of CDs. The report doesn't say which, so other with review is defensible, but keno/lottery should be considered."},
+    {"severity": "warning", "path": "receipts[11].category", "page": 1,
+     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other, Sewer Fund 11,567.97",
+     "issue": "Sewer Fund 'Other' local receipts are assumed to be sewer charges (marked review). If so, the user's top-level category would be Utility Charges, but the page doesn't say what they are."}
   ]
 }

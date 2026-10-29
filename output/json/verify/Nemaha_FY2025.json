@@ -1,12 +1,12 @@
 {
   "stem": "Nemaha_FY2025",
-  "values_checked": 28,
+  "values_checked": 40,
   "issues": [
-    {"severity": "warning", "path": "receipts[9].category", "page": 1,
-     "extracted": "other taxes", "on_page": "Local Receipts: In Lieu of Tax 77,106.00 (Enterprise Fund column)",
-     "issue": "Under the rules, in-lieu of tax goes to 'other taxes'. But this is 98% of the Enterprise Fund's receipts, and no water, sewer or solid waste charges are printed even though the fund spends 102,670 on those utilities. Utility charges may have been entered on the wrong form line. Already marked review."},
     {"severity": "warning", "path": "disbursements[2].original_label", "page": 2,
-     "extracted": "Capital Improvements (General Fund)", "on_page": "Capital Improvements: General 104,099.00 / Enterprise 31,225.00 / Total 135,324.00",
-     "issue": "Line 35 is split by fund column. The column amounts are printed, so they aren't computed, but these items have no split_from (the rules call for one on rows split by column). The fund name was also added to the printed label. Same for disbursements[3]."}
+     "extracted": "Capital Improvements (General Fund) 104,099 / Capital Improvements (Enterprise Fund) 31,225", "on_page": "35 Capital Improvements: General 104,099.00, Enterprise 31,225.00, Total 135,324.00",
+     "issue": "The mixed row is split by column. Both amounts are printed, but disbursements[2] and [3] carry no split_from, and the '(General Fund)'/'(Enterprise Fund)' suffixes aren't printed. The split is only explained in notes."},
+    {"severity": "warning", "path": "decision_needed[0].recorded_as", "page": 1,
+     "extracted": "business-type receipt, category 'other taxes' as printed", "on_page": "17 Local Receipts: In Lieu of Tax 77,106.00 (Enterprise Fund)",
+     "issue": "The decision_needed entry says the line is recorded as 'other taxes', but receipts[9] actually has category 'In Lieu of Tax'. The description doesn't match the JSON."}
   ]
 }

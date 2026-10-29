@@ -1,81 +1,18 @@
 {
   "stem": "Falls_City_Public_Schools_FY2025",
-  "values_checked": 171,
+  "values_checked": 176,
   "issues": [
-    {
-      "severity": "fixed",
-      "path": "missing",
-      "page": 13,
-      "extracted": "notes end '... p13=p27.'",
-      "on_page": "trimmed PDF has 13 pages",
-      "issue": "The notes don't end with 'Read pages 1-13 of 13'. All 13 pages hold lines that are in the JSON, so nothing is actually missing, but the required page-count statement is absent.",
-      "resolution": "fixed 2026-10-27: notes now end 'Read pages 1-13 of 13'"
-    },
-    {
-      "severity": "fixed",
-      "path": "detail[7].category",
-      "page": 5,
-      "extracted": "other / Other / Miscellaneous Receipts (category_decision 'user 2026-10-23')",
-      "on_page": "1911 Other Local License Fees 6,516",
-      "issue": "The label says license fees, so this should be licenses and permits. config/category_decisions.csv has no row for 'other local license fees', which means the category_decision tag isn't backed by a real decision.",
-      "resolution": "fixed 2026-10-27: category and detail_category licenses and permits; unbacked category_decision tag removed"
-    },
-    {
-      "severity": "fixed",
-      "path": "balance_sheet.assets[1].category",
-      "page": 1,
-      "extracted": "cash and investments",
-      "on_page": "Funds held by County Treasurer 1,229,222",
-      "issue": "The rules put cash held by the county treasurer under Cash and Cash Equivalents. 'cash and investments' is only for a line that combines both.",
-      "resolution": "fixed 2026-10-27: balance sheet rebuilt from the p3 governmental funds statement; both cash lines are Cash and Cash Equivalents"
-    },
-    {
-      "severity": "fixed",
-      "path": "balance_sheet.statement",
-      "page": 3,
-      "extracted": "Statement of Net Position - Modified Cash Basis (p1): Restricted/Board Designated/Undesignated lines",
-      "on_page": "Statement of Assets and Fund Balances - Governmental Funds (p3), Total column: Restricted 1,983,650; Committed 152,053; Assigned -; Unassigned 3,928,516; total 6,064,219",
-      "issue": "Under the 2026-10-27 balance-sheet rule, a cash-basis report whose governmental funds statement totals match the government-wide figures (6,064,219 on both pages) takes its balance sheet from the governmental funds statement, with fund balance by classification. The amounts used here are correct for p1, but they come from the wrong statement.",
-      "resolution": "fixed 2026-10-27: balance sheet switched to the p3 governmental funds statement, Total column (Restricted 1,983,650, Committed 152,053, Unassigned 3,928,516; totals 6,064,219 unchanged)"
-    },
-    {
-      "severity": "fixed",
-      "path": "detail[34].category",
-      "page": 6,
-      "extracted": "Instruction",
-      "on_page": "1200 Special Education Instructional Programs-School Age 1,649,018",
-      "issue": "Special education should be category Special Education Programs (user school-function rule). The statement-level split (disbursements[1]) already treats this line that way, so detail and statement don't match.",
-      "resolution": "fixed 2026-10-27: category Special Education Programs"
-    },
-    {
-      "severity": "fixed",
-      "path": "detail[35].category",
-      "page": 6,
-      "extracted": "Instruction",
-      "on_page": "1291 SPED Ages 3-5 54,760",
-      "issue": "SPED ages 3-5 is special education, so the category should be Special Education Programs.",
-      "resolution": "fixed 2026-10-27: category Special Education Programs"
-    },
-    {"severity": "warning", "path": "disbursements[1].amount", "page": 6,
-     "extracted": 1649018, "on_page": "1200 SPED School Age 1,649,018 + 1291 SPED Ages 3-5 54,760 = 1,703,778",
-     "issue": "The Special Education Programs split takes only code 1200. If 1291 SPED Ages 3-5 is also special education, the split should be 1,703,778 and Instruction 7,096,466."},
-    {"severity": "warning", "path": "detail[74].category", "page": 8,
-     "extracted": "Business", "on_page": "Central Services - Other Support Services 220,209",
-     "issue": "The statement-level Instruction line (disbursements[0]) counts this Depreciation Fund spending under Instruction, but the detail line puts it under Business. The two treatments don't match. The Employee Benefit line (detail[76]) is categorized Instruction."},
+    {"severity": "warning", "path": "detail[81].category", "page": 11,
+     "extracted": "charges for services/fees", "on_page": "Daily Sales 194,878",
+     "issue": "School Nutrition Fund daily (lunch) sales; the same 194,878 is category School Lunch Sales in receipts[14]. Per the user's 2026-10-28 rule this should be School Lunch Sales, and user_rules.py's lunch/meal regex will not catch the label 'Daily Sales'."},
+    {"severity": "warning", "path": "receipts[19].category", "page": 4,
+     "extracted": "other", "on_page": "Other 190,491",
+     "issue": "Printed label is 'Other' (permitted), but 160,315 of it (84%) is General Fund 1925 Other Categorical (p5, detail[8], also in 'other'), with 1911 Other Local License Fees 6,516, 1190 Other Taxes 300 and Nutrition Other Local Revenue 23,360. 1925 is categorical grants from private sources (see the Lincoln PS ruling), so a specific category could fit."},
+    {"severity": "warning", "path": "detail[76].category", "page": 9,
+     "extracted": "Instruction", "on_page": "Employee Benefit Fund - Other Support Services 88,322",
+     "issue": "Inconsistent with detail[74]: Depreciation Fund 'Central Services - Other Support Services' is category Business, but this line is Instruction. The statement (p4) counts both under Instruction. The two lines should be treated the same way."},
     {"severity": "warning", "path": "detail[105].category", "page": 12,
      "extracted": "support services", "on_page": "Elementary & Secondary School Emergency Relief (ESSERIII) 21,950",
-     "issue": "The statement (p4) shows all Special Building spending, 144,649, as Capital outlay, and ESSER is a federal program. Support services is a judgment call."},
-    {"severity": "warning", "path": "detail[89].detail_category", "page": 11,
-     "extracted": "dues, training and travel", "on_page": "Milage to Parents 1,394",
-     "issue": "Mileage paid to parents is likely pupil transportation reimbursement rather than staff travel."},
-    {"severity": "warning", "path": "detail[75].budget_final", "page": 9,
-     "extracted": null, "on_page": "Other Non-Revenue Receipts: Budget 103,085",
-     "issue": "The budget 103,085 is printed on this line itself, but budget_final is null."},
-    {"severity": "warning", "path": "disbursements[2].original_label", "page": 4,
-     "extracted": "Support Services: Pupils 519,745 / Staff 556,940", "on_page": "Schedule p6: 2100-coded lines (pupil services) total 556,940 under heading 'Support Services - Staff'; 2200 lines total 519,442",
-     "issue": "The Pupils and Staff labels look swapped between the statement and the codes. They are recorded as printed with a review note. The detail_category Pupils/Staff therefore follows the label, not the function codes."},
-    {"severity": "warning", "path": "report_discrepancies[0]", "page": 8,
-     "extracted": "check 'detail', difference 145,081; cites p7 and p6", "on_page": "Funds Transfer In 145,081 is on trimmed p8; 8000 Transfers 211,030 on trimmed p7",
-     "issue": "The page numbers in the note are off by one (report-relative). This is also a one-sided transfer rather than a schedule that doesn't add up; every printed total does add up. decision_needed already covers it."}
+     "issue": "Special Building Fund spending; the statement (p4) puts the whole Special Building column (144,649) on the Capital outlay line. Capital outlay or Federal Programs could fit better (judgment call)."}
   ]
 }

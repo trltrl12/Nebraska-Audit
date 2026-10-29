@@ -3,7 +3,7 @@
   "entity_type": "school district",
   "fiscal_year_end": "2025-08-31",
   "basis": "cash",
-  "extraction_attempt": 2,
+  "extraction_attempt": 3,
   "beginning_cash": {
     "amount": 3069857,
     "source_page": 5
@@ -92,19 +92,64 @@
     },
     {
       "fund_type": "governmental",
-      "category": "intergovernmental/state aid",
-      "original_label": "Intermediate Sources",
-      "amount": 6686,
-      "source_page": 5,
-      "review": "county fines and licenses 6,424 and other county receipts 262 (p8)"
+      "category": "Fines and Licenses",
+      "original_label": "Intermediate Sources (2110 County Fines and Licenses)",
+      "amount": 6424,
+      "source_page": 8,
+      "split_from": "Intermediate Sources 6,686 (p5); breakdown on p8"
     },
     {
       "fund_type": "governmental",
       "category": "intergovernmental/state aid",
-      "original_label": "State Sources",
-      "amount": 2215789,
+      "original_label": "Intermediate Sources (2130 Other County Receipts)",
+      "amount": 262,
+      "source_page": 8,
+      "split_from": "Intermediate Sources 6,686 (p5); breakdown on p8"
+    },
+    {
+      "fund_type": "governmental",
+      "category": "Homestead Exemption",
+      "original_label": "State Sources (Homestead Exemption)",
+      "amount": 19779,
       "source_page": 5,
-      "review": "broad group; detail on p8 and p16 (includes nameplate capacity tax 446,221 + 10,312, recorded as other taxes in detail, and property tax credit 1,030,549 + 23,682)"
+      "split_from": "State Sources 2,215,789 (p5); breakdown on p8 and p16",
+      "computed": "General 3130 Homestead Exemption 19,335 (p8) + Special Building Homestead Exemption 444 (p16)"
+    },
+    {
+      "fund_type": "governmental",
+      "category": "Property Tax Credit",
+      "original_label": "State Sources (Property Tax Credit)",
+      "amount": 1054231,
+      "source_page": 5,
+      "split_from": "State Sources 2,215,789 (p5); breakdown on p8 and p16",
+      "computed": "General 3131 Property Tax Credit 1,030,549 (p8) + Special Building Property Tax Credit 23,682 (p16)"
+    },
+    {
+      "fund_type": "governmental",
+      "category": "Nameplate Capacity Tax",
+      "original_label": "State Sources (Nameplate Capacity Tax)",
+      "amount": 456533,
+      "source_page": 5,
+      "split_from": "State Sources 2,215,789 (p5); breakdown on p8 and p16",
+      "computed": "General 3133 Nameplate Capacity Tax 446,221 (p8) + Special Building Namplate Taxes 10,312 (p16)"
+    },
+    {
+      "fund_type": "governmental",
+      "category": "Motor Vehicle Pro-Rate",
+      "original_label": "State Sources (Pro-Rate Motor Vehicle)",
+      "amount": 4992,
+      "source_page": 5,
+      "split_from": "State Sources 2,215,789 (p5); breakdown on p8 and p16",
+      "computed": "General 3180 Pro-Rate Motor Vehicle 4,879 (p8) + Special Building Pro-Rate Motor Vehicle 113 (p16)"
+    },
+    {
+      "fund_type": "governmental",
+      "category": "intergovernmental/state aid",
+      "original_label": "State Sources (state aid, special education, apportionment and other)",
+      "amount": 680254,
+      "source_page": 5,
+      "split_from": "State Sources 2,215,789 (p5); breakdown on p8 and p16",
+      "computed": "remainder: 2,215,789 - 19,779 - 1,054,231 - 456,533 - 4,992 = 680,254 (General 3110 279,683 + 3120 337,941 + 3125 17,219 + 3400 44,999 + School Nutrition state reimbursements 411 = 680,253; report's own 1 dollar rounding: fund columns on p5 add to 2,215,788)"
     },
     {
       "fund_type": "governmental",
@@ -369,6 +414,12 @@
       "difference": 1,
       "source_page": 18,
       "note": "Cooperative Fund total cash receipts printed 135,902 vs lines 135,901 (rounding)"
+    },
+    {
+      "check": "totals",
+      "difference": 1,
+      "source_page": 5,
+      "note": "State Sources Total Governmental Funds 2,215,789 vs fund columns General 2,180,826 + Special Building 34,551 + Other 411 = 2,215,788 (rounding); the 1 dollar stays in the state aid remainder of the split"
     }
   ],
   "detail": [
@@ -792,7 +843,7 @@
       "fund": "General",
       "department": "Instruction",
       "section": "expenditure",
-      "category": "Instruction",
+      "category": "Special Education Programs",
       "detail_category": "not itemized",
       "original_label": "1200 Special Education School Age",
       "amount": 296792,
@@ -806,7 +857,7 @@
       "fund": "General",
       "department": "Instruction",
       "section": "expenditure",
-      "category": "Instruction",
+      "category": "Special Education Programs",
       "detail_category": "not itemized",
       "original_label": "1291 Special Education Ages 3-5",
       "amount": 1451,
@@ -820,7 +871,7 @@
       "fund": "General",
       "department": "Instruction",
       "section": "expenditure",
-      "category": "Instruction",
+      "category": "Special Education Programs",
       "detail_category": "not itemized",
       "original_label": "1292 Special Education Ages 0-2",
       "amount": 5644,
@@ -974,7 +1025,7 @@
       "fund": "General",
       "department": "Support Services - General Administration",
       "section": "expenditure",
-      "category": "General Administration",
+      "category": "School Administration",
       "detail_category": "not itemized",
       "original_label": "2410 Office of the Principal",
       "amount": 132724,
@@ -1232,7 +1283,7 @@
       "fund": "School Nutrition",
       "department": null,
       "section": "revenue",
-      "category": "charges for services/fees",
+      "category": "School Lunch Sales",
       "detail_category": "school lunch sales",
       "original_label": "Daily Sales",
       "amount": 44039,
@@ -1431,13 +1482,12 @@
       "fund": "Special Building",
       "department": null,
       "section": "revenue",
-      "category": "other taxes",
-      "detail_category": "Other / Miscellaneous Taxes",
+      "category": "Nameplate Capacity Tax",
+      "detail_category": "Nameplate Capacity Tax",
       "original_label": "Namplate Taxes",
       "amount": 10312,
       "budget_final": 0,
-      "source_page": 16,
-      "category_decision": "user 2026-10-23"
+      "source_page": 16
     },
     {
       "schedule": "Actual and Budget - Special Building Fund",
@@ -1628,5 +1678,5 @@
       "source_page": 18
     }
   ],
-  "notes": "Modified cash basis school district; all funds governmental (no business-type; school nutrition is in Other Governmental Funds). Trimmed page N maps to printed page: 1=5, 2=6, 3=7, 4=8, 5=9, 6=26, 7=28, 8-10=29-31, 11=32 ... 20=41. beginning/ending cash are Total Governmental Funds fund balances (p5). Tax line 1,743,651 split using the Statement of Activities general receipts (p2), which sums exactly. Transfers In (Out) printed as net 46,083 (p5). The General Fund account 2900 Other Support Services 46,083 (inside Student Transportation 255,006 on p5 and p10) is the transfer to the Cooperative Fund; the government-wide statement eliminates it (disbursements 4,545,716, Transfers In (Out) nil), so it is split out as transfers_out 46,083 and student transportation shown as 208,923 (p2 prints 208,922). Printed total disbursements 4,591,799 is kept and flagged as including transfers_out. Cooperative Fund Miscellaneous Local Receipts 43,426 and Non-Revenue Receipts 46,000 are categorized as charges for services/fees because the p2 Statement of Activities shows Cooperative Activities charges for services of 89,426 (= 43,426 + 46,000); the top-level Non-Revenue Receipts line (103,220) mixes funds and stays 'other' (dominant 57,220 is 'Other Receipts' on p2) with review. Detail: General Fund recorded from the actual-and-budget schedule (p8-10), not the General Fund components combining statement (p6) or the combining other governmental funds statement (p7), to avoid double counting; separate fund schedules used for other funds. Depreciation Fund (p11) has no activity. County treasurer pass-through schedules (p19-20) not recorded. Zero/dash lines skipped. Budget schedule revenue/expenditure totals include the 5200 and 8000 transfers (shown as other financing). Balance sheet is the Statement of Net Position (p1), governmental funds column; no liabilities. Read pages 1-20 of 20."
+  "notes": "Modified cash basis school district; all funds governmental (no business-type; school nutrition is in Other Governmental Funds). Trimmed page N maps to printed page: 1=5, 2=6, 3=7, 4=8, 5=9, 6=26, 7=28, 8-10=29-31, 11=32 ... 20=41. beginning/ending cash are Total Governmental Funds fund balances (p5). Tax line 1,743,651 split using the Statement of Activities general receipts (p2), which sums exactly. Transfers In (Out) printed as net 46,083 (p5). The General Fund account 2900 Other Support Services 46,083 (inside Student Transportation 255,006 on p5 and p10) is the transfer to the Cooperative Fund; the government-wide statement eliminates it (disbursements 4,545,716, Transfers In (Out) nil), so it is split out as transfers_out 46,083 and student transportation shown as 208,923 (p2 prints 208,922). Printed total disbursements 4,591,799 is kept and flagged as including transfers_out. Cooperative Fund Miscellaneous Local Receipts 43,426 and Non-Revenue Receipts 46,000 are categorized as charges for services/fees because the p2 Statement of Activities shows Cooperative Activities charges for services of 89,426 (= 43,426 + 46,000); the top-level Non-Revenue Receipts line (103,220) mixes funds and stays 'other' (dominant 57,220 is 'Other Receipts' on p2) with review. Detail: General Fund recorded from the actual-and-budget schedule (p8-10), not the General Fund components combining statement (p6) or the combining other governmental funds statement (p7), to avoid double counting; separate fund schedules used for other funds. Depreciation Fund (p11) has no activity. County treasurer pass-through schedules (p19-20) not recorded. Zero/dash lines skipped. Budget schedule revenue/expenditure totals include the 5200 and 8000 transfers (shown as other financing). Balance sheet is the Statement of Net Position (p1), governmental funds column; no liabilities. Re-check (attempt 3): statement 'Intermediate Sources' 6,686 split into 2110 County Fines and Licenses 6,424 (Fines and Licenses) and 2130 Other County Receipts 262 (p8); statement 'State Sources' 2,215,789 split with the General (p8) and Special Building (p16) schedules into Homestead Exemption 19,779, Property Tax Credit 1,054,231, Nameplate Capacity Tax 456,533, Motor Vehicle Pro-Rate 4,992 and state aid remainder 680,254 (fund columns add to 2,215,788; the 1 dollar rounding stays in the remainder); detail 1200/1291/1292 -> Special Education Programs, 2410 -> School Administration, Special Building 'Namplate Taxes' -> Nameplate Capacity Tax, Daily Sales -> School Lunch Sales. Read pages 1-20 of 20."
 }

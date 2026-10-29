@@ -1,46 +1,25 @@
 {
   "stem": "Cross_County_Community_Schools_FY2025",
-  "values_checked": 299,
+  "values_checked": 330,
   "issues": [
-    {
-      "severity": "error",
-      "path": "receipts[12].category",
-      "page": 5,
-      "extracted": "intergovernmental/state aid",
-      "on_page": "County receipts 18,311.55 (= General Fund 2110 County fines and license fees, p8)",
-      "issue": "[fixed 2026-10-21: category set to fines and forfeitures] The whole line is code 2110 county fines and license fees. The extractor rules say code 2110 is 'fines and forfeitures', not state aid."
-    },
-    {
-      "severity": "error",
-      "path": "detail[10].category",
-      "page": 8,
-      "extracted": "intergovernmental/state aid / county/other local governments",
-      "on_page": "2110 County fines and license fees 18,311.55",
-      "issue": "[fixed 2026-10-21: category and detail_category set to fines and forfeitures] Code 2110 should be category 'fines and forfeitures' with detail_category 'fines and forfeitures'."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[9]",
-      "page": 6,
-      "extracted": 2581.94,
-      "on_page": "not printed (General Fund Other taxes 2,237,033.57 on p6 less the itemized p8 lines 2,234,451.63)",
-      "issue": "This residual is not a printed line; it plugs the General Fund schedule's own shortfall (p8 Local Sources lines add to 3,846,990.02 but print 3,849,571.96). It is marked computed, split_from and review, and the report_discrepancies entry records it, so it is defensible, but a person should decide whether to keep the plug or leave the Other taxes line partly unsplit."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[3].computed",
-      "page": 8,
-      "extracted": "General 52,247.64 (p9) ...",
-      "on_page": "3130 Homestead exemption 52,247.64 is on p8",
-      "issue": "The General Fund state-source lines cited as p9 in the computed notes for homestead, property tax credit, nameplate and pro-rate (receipts[3], [4], [5], [6]) are actually on p8. The amounts are correct."
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[14].category",
-      "page": 5,
-      "extracted": "student activities",
-      "on_page": "Other student support 584,859.25",
-      "issue": "The line combines Activities Fund (327,135.82) and School Nutrition (258,082.43). The dominant category was chosen and the line is marked review; food service is about 44% of it."
-    }
+    {"severity": "error", "path": "receipts[12].category", "page": 5,
+     "extracted": "charges for services/fees", "on_page": "Other local receipts 411,785.99 = Other Governmental Funds 402,941.61 (Activities fund account receipts about 296,000 after the 70,467.23 transfer, school nutrition sales about 107,000) + General Fund 5,344.38 + Special Building 3,500.00",
+     "issue": "the fund schedules (p14-15) show more than half of the line is school activity receipts, which the rules put in Extracurricular Receipts (or split with split_from using p14/p15); charges for services is only for genuine fees for services"},
+    {"severity": "error", "path": "detail[196].category", "page": 15,
+     "extracted": "reimbursements/refunds", "on_page": "Sales - non-reimbursable 3,965.58 (School Nutrition Fund)",
+     "issue": "these are meal sales that are not federally reimbursable (a la carte), not a reimbursement or refund; category should be School Lunch Sales, matching its detail_category school lunch sales and the other Sales lines"},
+    {"severity": "warning", "path": "detail[138]", "page": 23,
+     "extracted": "Vehicle Operation Capital Assets 200,000.00 kept as spending, offset by contra detail[163] -200,000 and other financing detail[164] -200,000",
+     "on_page": "Exhibit N Vehicle Operation Capital Assets 200,000.00; p7 Reclassifications (200,000.00) on Student transportation - regular; Depreciation Fund Transfers from general fund 200,000.00 (p12)",
+     "issue": "the hidden transfer is handled with a contra line rather than by splitting the printed line; net is right, but the page does identify the exact line"},
+    {"severity": "warning", "path": "detail[131].category", "page": 23,
+     "extracted": "Building and Grounds", "on_page": "Vehicle Purchasing 6,033.62 (2650 Vehicle operation & maintenance)",
+     "issue": "Student transportation - regular 528,394.32 (p6) = 2650 6,033.62 + 2710 230,852.66 + 2730 7,610.37 + 2790 283,897.67, so the report itself groups 2650 with student transportation; applies to detail[131]-[133] (already marked review)"},
+    {"severity": "warning", "path": "detail[40].category", "page": 18,
+     "extracted": "Instruction (detail_category equipment purchases)", "on_page": "Regular Instruction - Capital Assets 9,109.28",
+     "issue": "Exhibit N 'Capital Assets' object lines (also Library 2,413.93, Instruction Related Technology 85,328.90, Principal 1,253.70, Fiscal Services 30,165.95, Vehicle Operation 200,000.00) keep their program as category; the user's capital outlay rule (every capital outlay line inside a function is category capital outlay) may apply"},
+    {"severity": "warning", "path": "disbursements[14].category", "page": 5,
+     "extracted": "student activities", "on_page": "Other student support 584,859.25 = Activities 327,135.82 + School Nutrition 258,082.43 (less 359.00 unexplained)",
+     "issue": "mixed line; dominant function chosen (already marked review)"}
   ]
 }

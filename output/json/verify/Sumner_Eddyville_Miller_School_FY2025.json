@@ -1,9 +1,15 @@
 {
   "stem": "Sumner_Eddyville_Miller_School_FY2025",
-  "values_checked": 181,
+  "values_checked": 150,
   "issues": [
-    {"severity": "warning", "path": "report_discrepancies", "page": 4,
-     "extracted": null, "on_page": "Total Governmental Funds receipt lines sum to 6,487,513 but printed Total receipts is 6,491,888 (General Fund column lines 5,223,290 vs printed 5,227,665); same 4,375 gap on the Statement of Activities p2 (general receipts lines 5,218,796 vs printed 5,223,171)",
-     "issue": "The p4 statement leaves out the 'Other state receipts' 4,375 line that its totals include. The extractor added receipts[18] from p7 (marked review), which is a reasonable fix, but there is no report_discrepancies entry recording that the printed statement doesn't add up."}
+    {"severity": "warning", "path": "detail[44].category", "page": 14,
+     "extracted": "support services", "on_page": "Insurance co-pay benefits 19,467 (Employee Reimbursement Fund; p8 combines it into Central services 226,668)",
+     "issue": "the combining schedule p8 puts this fund's spending in the Central services row, which the statement and the other detail line (2500 Central services) categorise as Business; the notes say detail ties to Central services 207,201 + 19,467 = 226,668, so the function should probably be Business, not support services"},
+    {"severity": "warning", "path": "notes", "page": 19,
+     "extracted": "... Read pages 1-19 of 19 Balance sheet (user 2026-10-27) ... Re-check 2026-10-28 ...", "on_page": "19 pages",
+     "issue": "the page count is right (19 of 19) and every page is covered, but the notes no longer end with 'Read pages 1-19 of 19' because later text was appended. The notes also still say the balance sheet comes from the Statement of Net Position (p3), which contradicts the p6 governmental funds statement actually used"},
+    {"severity": "warning", "path": "receipts[19]", "page": 7,
+     "extracted": 4375, "on_page": "Other state receipts 4,375 is printed on p7 (General Fund components) and as 3599 on p9, but not on the p4 statement whose Total receipts 6,491,888 includes it",
+     "issue": "the extractor added this line so the items tie to the printed total; it is already recorded in report_discrepancies and marked review. This is the extractor's assumption and is noted here only for transparency"}
   ]
 }

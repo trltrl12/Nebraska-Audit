@@ -1,12 +1,18 @@
 {
   "stem": "Platte_Center_FY2025",
-  "values_checked": 37,
+  "values_checked": 52,
   "issues": [
-    {"severity": "warning", "path": "receipts[10].category", "page": 1,
-     "extracted": "other", "on_page": "Local Receipts: Other 60,964.05 (General 16,198.92, Street 42,900.13, Auditorium 1,165.00, Park 700.00)",
-     "issue": "Unexplained line is about 18% of governmental receipts (over the 10% 'other' threshold). The Street Fund's 42,900.13 is large for a street fund and may be a grant, reimbursement or local contribution. Nothing in the trimmed PDF breaks it down, so 'other' with review is defensible."},
+    {"severity": "warning", "path": "receipts[13].category", "page": 1,
+     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other - Water 130,140.94, Sewer 34,613.42 (p1), Garbage 40,876.92 (p2)",
+     "issue": "the user rule puts utility fund collections (incl. garbage) in Utility Charges; contents are assumed (not itemized), already marked review"},
+    {"severity": "warning", "path": "reported_totals.business-type", "page": 3,
+     "extracted": "includes: [] (custom includes_split 3,600 / 45,000)", "on_page": "line 21 receipts 255,011.21 incl. Garbage transfer in 3,600; line 52 disbursements 268,679.60 incl. transfers out 45,000",
+     "issue": "the printed totals include gross transfers, but includes[] is empty and the gross amounts sit in a non-schema 'includes_split' field. The listed lines add to 251,411.21 / 223,679.60, so a validator reading only includes[] will see a 3,600 / 45,000 gap. Figures and arithmetic are otherwise right"},
+    {"severity": "warning", "path": "balance_sheet.liabilities", "page": 5,
+     "extracted": [], "on_page": "Schedule of Outstanding Debt: NDEQ 203,211.33 + 44,113.64 + 81,165.99 = 328,490.96",
+     "issue": "the cash-basis statement has no liabilities; the debt schedule is mentioned in notes only. Defensible under the cash-basis rule, but the user wants all liabilities on the balance sheet"},
     {"severity": "warning", "path": "balance_sheet.equity[0].original_label", "page": 1,
-     "extracted": "Ending Balance (net cash balance)", "on_page": "Ending Balance (Line 22 MINUS Line 23)",
-     "issue": "Label is paraphrased, not exactly as printed. The amount 225,251.78 is correct."}
+     "extracted": "Ending Balance (net cash balance)", "on_page": "Ending Balance (line 24)",
+     "issue": "label not exactly as printed (also equity[1])"}
   ]
 }

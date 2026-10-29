@@ -1,25 +1,12 @@
 {
   "stem": "Saronville_FY2025",
-  "values_checked": 18,
+  "values_checked": 24,
   "issues": [
     {"severity": "warning", "path": "disbursements[5].fund_type", "page": 2,
-     "extracted": "governmental", "on_page": "Business-Type Activities: 44 Electric Utility 2,562.15 (General Fund column)",
-     "issue": "Line is printed under the Business-Type Activities heading but recorded as governmental. The extractor did this on purpose because there is no separate utility cash balance, but it is not in decision_needed[]. A person should decide whether it should be business-type with a business_type roll-forward."},
-    {"severity": "warning", "path": "report_discrepancies[0]", "page": 3,
-     "extracted": "lists only crossed-out beginning, receipts and ending figures",
-     "on_page": "Crossed-out pp3-4 also differ on: property tax blank (vs 6,686.64), highway allocation 12,588.03 (vs 12,626.74), local other 6,630.92 (vs 5,630.98), General Government 8,216.20 (vs 6,654.05), Streets 5,899.79 (vs 6,354.61), Public Works Other 3,592.64 (vs 3,179.95), Miscellaneous 15,051.28 (vs 17,602.01), Electric Utility 3,592.86 (vs 2,562.15)",
-     "issue": "The discrepancy entry leaves out most of the line-level differences between the two versions. Both versions total 38,453.56 in disbursements."},
-    {"severity": "warning", "path": "ending_cash", "page": 1,
-     "extracted": 58636.53, "on_page": "Line 24 Ending Balance 58,636.53; lines 26-28 (Ending Balance Consists Of) blank/-",
-     "issue": "[fixed 2026-10-22: recorded in report_discrepancies; balance_sheet uses line 24 as cash] The form says lines 24 and 28 must agree, but line 28 is blank, so the ending balance has no breakdown into cash and investments. The figure is as printed, but the form itself doesn't reconcile."},
-    {"severity": "warning", "path": "disbursements[1].amount", "page": 2,
-     "extracted": 2100.79, "on_page": "Public Safety - Police & Fire 2,100.79",
-     "issue": "This matches the page, but it is exactly equal to the County Treasurer Balance at October 1, 2024 (2,100.79). That may be an entry error in the village's form. Same figure on the crossed-out version."},
-    {"severity": "warning", "path": "entity_name", "page": 1,
-     "extracted": "Village of Saronville", "on_page": "Village of , Nebraska",
-     "issue": "The pages used (pp1-2) leave the village name blank. The name comes from the crossed-out pp3-5. decision_needed already covers which version to use."},
-    {"severity": "warning", "path": "disbursements[3].category", "page": 2,
-     "extracted": "streets/highways", "on_page": "Public Works - Other 3,179.95",
-     "issue": "Category is a guess: 'Public Works - Other' on the village form is separate from Streets. Already marked review."}
+     "extracted": "governmental (utilities)", "on_page": "Business-Type Activities: 44 Electric Utility 2,562.15 (General Fund column)",
+     "issue": "The line is printed under Business-Type Activities but is kept with the governmental lines. The rules say utility activity is not folded into governmental, but there is no separate utility cash, so this is defensible. It is already listed in decision_needed."},
+    {"severity": "warning", "path": "balance_sheet.assets[0].category", "page": 1,
+     "extracted": "cash and investments", "on_page": "Ending Balance 58,636.53; Schedule of Investments (p5): NONE",
+     "issue": "'cash and investments' is only for lines that combine both, and the report shows no investments. Cash and Cash Equivalents fits better."}
   ]
 }

@@ -1,9 +1,12 @@
 {
   "stem": "Concord_FY2025",
-  "values_checked": 29,
+  "values_checked": 33,
   "issues": [
     {"severity": "warning", "path": "receipts[10].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other 61,797.36 (Enterprise Fund)",
-     "issue": "presumed utility charges; page only says Local Receipts: Other (marked review)"}
+     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other 61,797.36 (Enterprise Fund column, line 18)",
+     "issue": "This is the Enterprise Fund's only receipt line, so it is presumably utility collections. Under the user's 2026-10-28 rule that is 'Utility Charges'. The label printed is only 'Other', so this is a judgment call."},
+    {"severity": "warning", "path": "beginning_investments", "page": 1,
+     "extracted": 3407.73, "on_page": "Line 2 Investments 3,407.73 (General); line 3 subtotal 13,879.89 already includes it",
+     "issue": "beginning_cash (20,626.70, line 3) already includes the 3,407.73 investments, and beginning_investments repeats it. That is informational only, but a sum of cash + investments would double count it."}
   ]
 }

@@ -1,15 +1,15 @@
 {
   "stem": "Belgrade_FY2025",
-  "values_checked": 35,
+  "values_checked": 44,
   "issues": [
-    {"severity": "warning", "path": "receipts[11].fund_type", "page": 1,
-     "extracted": "business-type", "on_page": "\"ENTER OTHER FUND NAME\" column: Local Receipts: Other 50,418.28",
-     "issue": "third fund column is unnamed; treating it as a business-type utility fund is an assumption (its spending is Solid Waste, Wastewater, Water and Capital Improvements, so it is reasonable). Applies to all third-column lines and business_type balances. Already marked review."},
-    {"severity": "warning", "path": "receipts[9].category", "page": 1,
-     "extracted": "other", "on_page": "Local Receipts: Other 16,437.47 (General); 7,907.72 (Street)",
-     "issue": "26% of governmental receipts (excluding transfer) in 'other'; form gives no breakdown, defensible. Already marked review."},
-    {"severity": "warning", "path": "balance_sheet.equity[0].original_label", "page": 1,
-     "extracted": "Ending Balance (Line 24)", "on_page": "Ending Balance (Line 22 MINUS Line 23)",
-     "issue": "label paraphrased rather than as printed; amount 304,623.33 correct"}
+    {"severity": "error", "path": "receipts[11].category", "page": 1,
+     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other 50,418.28 (third fund: solid waste/wastewater/water)",
+     "issue": "Utility fund receipts treated as charges should be Utility Charges (user rule 2026-10-28)"},
+    {"severity": "warning", "path": "disbursements[1].original_label", "page": 2,
+     "extracted": "Capital Improvements (General)", "on_page": "Capital Improvements 26,118.69",
+     "issue": "Capital outlay lines not relabelled 'Capital Outlay: <function>' with printed_label (also disbursements[3] 1,455.43, [4] 10,853.77, [5] 5,599.40)"},
+    {"severity": "warning", "path": "missing", "page": 1,
+     "extracted": null, "on_page": "County Treasurer Balance at October 1, 2024 $1,006.58; at September 30, 2025 833.54",
+     "issue": "Printed county treasurer balances are not recorded or mentioned in notes (informational)"}
   ]
 }

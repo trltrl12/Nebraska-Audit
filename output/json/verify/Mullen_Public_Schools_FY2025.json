@@ -1,18 +1,21 @@
 {
   "stem": "Mullen_Public_Schools_FY2025",
-  "values_checked": 373,
+  "values_checked": 374,
   "issues": [
-    {"severity": "warning", "path": "detail_totals[10].amount", "page": 20,
-     "extracted": 162160.74, "on_page": "p20 receipts 162,160.74 + Adjustments 45,000.00; p10 Activities Fund receipts 207,160.74 (1510 interest 8,425.78 + 1710 activity receipts 161,234.96 + transfer 37,500)",
-     "issue": "The p20 account-by-account schedule ties to its printed total, but the Activities Fund's receipts excluding the transfer are 169,660.74 (p3/p10), which is 7,500.00 more than p20's 162,160.74. That 7,500 sits in p20's Adjustments column (45,000 = 37,500 transfer + 7,500) and no activity account carries it. So the Activities detail is 7,500 short of the statement receipts, and the notes don't mention it. Consider a report_discrepancies 'detail' entry or a note."},
-    {"severity": "warning", "path": "receipts[*].fund_type (School Nutrition lines)", "page": 3,
-     "extracted": "governmental", "on_page": "School Nutrition column in STATEMENT OF ... CHANGES IN FUND BALANCES - GOVERNMENTAL FUNDS",
-     "issue": "The extractor rules list school nutrition as an example of a business-type fund. Here the report prints it as a governmental fund column, with no proprietary statement, so 'governmental' is defensible. Flagged only because it departs from the rule's example."},
-    {"severity": "warning", "path": "receipts[0].split_from", "page": 3,
-     "extracted": "Local receipts 1,769,346.05 split into 1100/1115/1125/1910/1920/1990/1630", "on_page": "Local receipts 1,768,540.05 (Gen/EB/Dep) + 806.00 (Nutrition) = 1,769,346.05",
-     "issue": "The split adds up exactly (1,769,346.05), but p6's 'Total local receipts' is 1,827,508.23. The statement moved 1510 interest received 57,344.52 and 1140 interest on taxes 1,623.66 into its Interest line. So the breakdown is rebuilt from the schedules rather than printed for this exact line. The Statement of Activities (p2) does show property, motor vehicle, carline, rent and other separately, which supports it. Also, the 1,623.66 of interest on taxes (property tax under the rules) stays inside the 'Interest' receipt as investment income."},
-    {"severity": "warning", "path": "detail[152].detail_category", "page": 17,
-     "extracted": "dues, training and travel", "on_page": "332 Mileage to parents 11,828.17",
-     "issue": "These are transportation payments to parents, not staff travel. 'grants/payments to other entities' or 'professional/contract services' may fit better."}
+    {"severity": "error", "path": "receipts[3].category", "page": 6,
+     "extracted": "charges for services/fees", "on_page": "1910 Facility rental 75.00",
+     "issue": "Rental income has its own category, Rentals (user rule 2026-10-28). detail[5] already uses Rentals, so the receipts line is inconsistent with it."},
+    {"severity": "error", "path": "detail[192].category", "page": 11,
+     "extracted": "charges for services/fees", "on_page": "1620 Sale of adult 12,823.87",
+     "issue": "Meal sales take the category School Lunch Sales (user rule 2026-10-28). The same money on the statement ('Sales of lunches', receipts[13]) is already School Lunch Sales."},
+    {"severity": "warning", "path": "detail[193].category", "page": 11,
+     "extracted": "charges for services/fees", "on_page": "1630 Special functions 806.00",
+     "issue": "This line is inconsistent with receipts[6], which records the same 806 as School Lunch Sales. One category should be used for both."},
+    {"severity": "warning", "path": "detail[134].original_label", "page": 17,
+     "extracted": "110 Salary - custodian", "on_page": "110 Salary - custodial",
+     "issue": "The label differs from the printed text."},
+    {"severity": "warning", "path": "disbursements[5].original_label", "page": 4,
+     "extracted": "Capital outlay", "on_page": "Capital outlay 224,425.00",
+     "issue": "Capital outlay lines should be labelled 'Capital Outlay: <function>' (user rule 2026-10-26). The page gives no function (the Depreciation Fund's building capital replacement), so the label is left as printed."}
   ]
 }

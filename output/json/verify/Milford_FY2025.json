@@ -1,54 +1,46 @@
 {
   "stem": "Milford_FY2025",
-  "values_checked": 72,
+  "values_checked": 92,
   "issues": [
     {
       "severity": "error",
-      "path": "receipts[0].amount",
-      "page": 4,
-      "extracted": 1204965,
-      "on_page": 1204964,
-      "issue": "[fixed] The Taxes split (receipts[0]-[5], from the p2 general receipts) adds to 1,204,965, but the line being split is printed as 1,204,964 on p4. So governmental receipts add to 2,587,421 against the printed Total receipts of 2,587,420, and the cash roll-forward is 1 over. Split items must add to the original line: either put the 1 on one split item (marked computed) or record the p2/p4 rounding difference in report_discrepancies. Neither is done; the line only has a review note."
+      "path": "receipts[10].category",
+      "page": 2,
+      "extracted": "charges for services/fees",
+      "on_page": "Water 525,539 / Sewer 203,513 (business-type charges for services)",
+      "issue": "Water and sewer fund charges belong in receipt category Utility Charges (user rule 2026-10-28). Same for receipts[11] (Sewer 203,513) and detail[7]/detail[8] (category charges for services/fees)."
     },
     {
       "severity": "error",
-      "path": "detail[0].category",
+      "path": "detail",
       "page": 8,
-      "extracted": "other / miscellaneous revenue",
-      "on_page": "General 1,755,697 (p4 General column: Taxes 1,054,006 = 60%, Intergovernmental 398,913, Charges 149,079, Investment 43,943, Grants and donations 109,756)",
-      "issue": "[fixed] Fund-total receipts line put in 'other' although p4 shows one category is more than half of it. Use the dominant category (taxes (unlabeled)) with review."
+      "extracted": "13 revenue / 13 expenditure lines from the all-funds Budgetary Comparison Schedule (fund totals only: General 1,755,697 ... Transfers 1,131,500)",
+      "on_page": "p8 is a single combined all-funds schedule; no fund has its own schedule. Fund columns are printed on p4 (General, Debt Service, Street, Fire, Other Governmental Funds) and p6 (Water, Sewer)",
+      "issue": "User rule (2026-10-27, cities and villages): where the only supplementary schedule is a combined all-funds one, detail is one line per individual fund column of the governmental funds statement (p4) and proprietary funds statement (p6), and the combined schedule lines are removed. Milford's detail still holds the combined p8 fund-total lines (e.g. 'General' 1,526,603 filed under general government although p4 splits it into 6 functions)."
     },
     {
-      "severity": "error",
-      "path": "detail[1].category",
-      "page": 8,
-      "extracted": "other / miscellaneous revenue",
-      "on_page": "Debt service 70,499 (p4 Debt Service column: Taxes 70,499 = 100%)",
-      "issue": "[fixed] All of it is taxes per p4; it should not be in 'other'."
+      "severity": "warning",
+      "path": "receipts[1].source_page",
+      "page": 2,
+      "extracted": 4,
+      "on_page": "Property tax credit 52,201 (p2 general receipts); p4 prints only Taxes 1,204,964",
+      "issue": "The six Taxes split items cite p4, but their amounts (751,791/52,201/56,923/292,487/28,095/23,468) are printed on p2; a page-text check against p4 will not find them. Split arithmetic is right: 751,790 (1 rounding, marked computed) + 52,201 + 56,923 + 292,487 + 28,095 + 23,468 = 1,204,964."
     },
     {
-      "severity": "error",
-      "path": "detail[2].category",
-      "page": 8,
-      "extracted": "other / miscellaneous revenue",
-      "on_page": "Street 365,709 (p4 Street column: Intergovernmental 297,329 = 81%, Taxes 57,688)",
-      "issue": "[fixed] Dominant category is intergovernmental/state aid (highway allocation); it should not be in 'other'."
-    },
-    {
-      "severity": "error",
-      "path": "detail[3].category",
-      "page": 8,
-      "extracted": "other / miscellaneous revenue",
-      "on_page": "Fire 171,505 (p4 Fire column: Grants and donations 153,490 = 89%)",
-      "issue": "[fixed] Dominant category is grants/donations (donations/contributions, as receipts[9] is recorded); it should not be in 'other'."
+      "severity": "warning",
+      "path": "receipts[6].category",
+      "page": 2,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "Intergovernmental 696,242 (p4); p2 general receipts include NPPD payments 218,879 and State aid and equalization 180,034",
+      "issue": "p4 Intergovernmental + Grants and donations (1,094,388) correspond to p2 operating grants 695,476 + state aid 180,034 + NPPD payments 218,879. NPPD payments would be Public Power District Sales Tax under the user rules, but the report does not print a breakdown of the p4 line itself, so the line is correctly not split; a person may want to settle this."
     },
     {
       "severity": "warning",
       "path": "receipts[9].category",
       "page": 4,
       "extracted": "donations/contributions",
-      "on_page": "Grants and donations 398,146",
-      "issue": "p2 shows this money as Operating Grants and Contributions by function (general government 165,316, public safety 7,878, culture and recreation 224,953). Much of it may be government grants (federal or state aid), not private donations. Defensible; already marked review."
+      "on_page": "Grants and donations 398,146; p2 shows operating grants by function (general government 165,316, public safety 7,878, culture and recreation 224,953)",
+      "issue": "Much of this may be government grants rather than private donations. Defensible; already marked review."
     },
     {
       "severity": "warning",
@@ -56,7 +48,7 @@
       "page": 2,
       "extracted": "other",
       "on_page": "Gain on debt extinguishment 32,550 (business-type general receipts)",
-      "issue": "A gain on debt extinguishment is debt forgiveness, not a cash receipt. It may fit better in business_type.other_financing or adjustments. detail[10] treats it the same way. Recorded as the statement prints it, with review."
+      "issue": "A gain on debt extinguishment is debt forgiveness, not a cash receipt; it may fit business_type.other_financing or adjustments. Recorded as the statement prints it, with review (same for detail[10])."
     },
     {
       "severity": "warning",
@@ -64,47 +56,39 @@
       "page": 2,
       "extracted": "Water (charges for services)",
       "on_page": "Water",
-      "issue": "Labels changed from the printed text. Same for receipts[11] ('Sewer (charges for services)' vs 'Sewer'), disbursements[9] ('Water (disbursements)') and disbursements[10] ('Sewer (disbursements)')."
+      "issue": "Labels altered from printed text; same for receipts[11] ('Sewer (charges for services)'), disbursements[9] ('Water (disbursements)'), disbursements[10] ('Sewer (disbursements)'), detail[12] ('Transfers (receipts side)') and detail[25] ('Transfers (disbursements side)'; printed 'Transfers', user rule label 'Transfers In'/'Transfers Out')."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[8].original_label",
+      "page": 4,
+      "extracted": "Capital outlay",
+      "on_page": "Capital outlay 703,904",
+      "issue": "User rule: capital outlay lines are relabelled 'Capital Outlay: <function>' with printed text in printed_label; not applied (user_rules.py may re-apply)."
+    },
+    {
+      "severity": "warning",
+      "path": "detail_totals[1].amount",
+      "page": 8,
+      "extracted": 4450713,
+      "on_page": "Total disbursements 4,450,713; disbursements excluding transfers 3,319,213 vs 3,319,212 on p2; investment earnings 38,079 (p8) vs 38,078 (p2)",
+      "issue": "1-dollar rounding differences printed in the report itself are not in report_discrepancies. Totals tie only if the transfer lines (+1,131,500 / -1,131,500, 'includes: other financing') are counted gross."
+    },
+    {
+      "severity": "warning",
+      "path": "decision_needed",
+      "page": 8,
+      "extracted": null,
+      "on_page": "Transfers 1,131,500 in both receipts and disbursements of the budget schedule; governmental interfund transfers on p4 total 330,000",
+      "issue": "Gross budget-schedule transfers are much larger than the statement's interfund transfers and are not explained; a person may need to confirm how they are treated."
     },
     {
       "severity": "warning",
       "path": "missing",
       "page": 6,
       "extracted": null,
-      "on_page": "Accrual business-type Statement of Revenues, Expenditures and Changes in Fund Net Position (p6): User fees 689,436; Miscellaneous income 27,384; 15 operating expense objects (Salaries 119,415 ... Depreciation 119,616, Miscellaneous 2,366; total 698,849); Interest expense (15,115); Loan fees (9,173). Also cash flows (p7).",
-      "issue": "The extractor used the modified-cash statement of activities (p2) for business-type and did not enter the p6 lines anywhere, so the expense-by-object detail for Water and Sewer is lost. The basis choice is explained in notes and is defensible, but these printed lines are not in the JSON."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[13].category",
-      "page": 8,
-      "extracted": "general government",
-      "on_page": "General 1,526,603",
-      "issue": "The whole General Fund spending total is filed under general government. p4 shows general government is only 344,076 of it (capital outlay 392,065, public safety 388,529, culture and recreation 368,229, TIF 23,007, public welfare 10,697). The schedule prints only the fund total, so it can't be split, but the function shown is misleading."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[11].amount",
-      "page": 8,
-      "extracted": 38079,
-      "on_page": 38079,
-      "issue": "Rounding difference printed in the report: budget schedule investment earnings 38,079 vs 38,078 on p2. The budget schedule's disbursements excluding transfers add to 3,319,213 vs total disbursements of 3,319,212 on p2. Neither is in report_discrepancies."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[24].amount",
-      "page": 8,
-      "extracted": -1131500,
-      "on_page": 1131500,
-      "issue": "The printed Total disbursements 4,450,713 includes +1,131,500 of transfers. With the transfer signed negative, expenditure items plus other financing add to 2,187,713, not 4,450,713. The totals tie only if the validator uses the absolute value of 'includes: other financing' lines. Also, the 1,131,500 gross transfers are much larger than the 330,000 governmental interfund transfers on p4 and are not explained."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[20].category",
-      "page": 8,
-      "extracted": "other",
-      "on_page": "Special gifts 1,684; Gaming 31,471 (detail[23])",
-      "issue": "Function unknown, so 'other' with review. Gaming fund spending may be culture/recreation or economic development; a person should check."
+      "on_page": "Accrual business-type Statement of Revenues, Expenditures and Changes in Fund Net Position (p6): User fees 689,436; Miscellaneous income 27,384; 15 operating expense objects (Salaries 119,415 ... Depreciation 119,616, Miscellaneous 2,366; total 698,849); Interest expense (15,115); Loan fees (9,173)",
+      "issue": "Business-type amounts use the modified-cash statement of activities (p2), explained in notes; the p6 lines are not entered anywhere, so the Water/Sewer expense-by-object detail is lost (see the per-fund detail error)."
     }
   ]
 }

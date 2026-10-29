@@ -1,20 +1,15 @@
 {
   "stem": "Gilead_FY2025",
-  "values_checked": 35,
+  "values_checked": 42,
   "issues": [
-    {"severity": "warning", "path": "decision_needed", "page": 1,
-     "extracted": "receipts[8] 'Local Receipts: Other' 28,981 recorded as other (review); no decision_needed entry",
-     "on_page": "Line 18 Local Receipts: Other, General Fund 28,981.00",
-     "issue": "An unexplained line that is 59% of governmental receipts (28,981 of 48,903); General Fund spent only 2,942 and its balance rose from 10,268 to 40,134. Nothing on the page says what it is (could be utility reimbursement, grant, loan proceeds). A person should settle this; it is not in decision_needed[]."},
-    {"severity": "warning", "path": "receipts[9].original_label", "page": 1,
-     "extracted": "Local Receipts: Other (Electric Fund) / (Sewer Fund) / (Garbage Fund) (receipts[9]-[11])",
-     "on_page": "Local Receipts: Other (line 18; total column 116,876.00)",
-     "issue": "Fund names were added to the printed label, and the split of the 116,876 row by fund column has no split_from. Amounts 73,189 / 11,978 / 2,728 match the column values and the charges for services category is an assumption (extractor marked review)."},
-    {"severity": "warning", "path": "disbursements[2]", "page": 3,
-     "extracted": "business-type, debt service principal, 6,107", "on_page": "Line 39 Debt Service (Governmental section), Sewer Fund column 6,107.00",
-     "issue": "Printed under the Governmental section but in the Sewer Fund column; treating it as business-type follows the per-column rule. Principal and interest are not split (NDEQ loan at 1.50%, p5), so the debt service principal category is a judgment call."},
-    {"severity": "warning", "path": "balance_sheet.equity[0]", "page": 1,
-     "extracted": "Ending cash and investment balance, all funds (line 28) 105,344", "on_page": "28 Subtotal of Ending Balances (Line 26 + 27) 105,344.00",
-     "issue": "No balance sheet is printed. The extractor built one from Exhibit A lines 26-28, entering the line 28 subtotal as the only equity item, with a label that isn't the printed one. Amounts are correct (68,530 + 36,814 = 105,344)."}
+    {"severity": "warning", "path": "receipts[9].category", "page": 1,
+     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other, Electric Fund 73,189",
+     "issue": "Inconsistent with receipts[11] (Garbage Fund, same line), which is Utility Charges. Utility fund collections are Utility Charges under the user's 2026-10-28 rules. The same applies to receipts[10] (Sewer Fund 11,978)."},
+    {"severity": "warning", "path": "receipts[10].category", "page": 1,
+     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other, Sewer Fund 11,978",
+     "issue": "Utility fund receipts. Utility Charges would match the Garbage Fund line and the user's 2026-10-28 rule."},
+    {"severity": "warning", "path": "balance_sheet.liabilities", "page": 5,
+     "extracted": [], "on_page": "Schedule of Outstanding Debt: NDEQ loan 61,781.37 (issued 8/3/2017, 1.50%, matures 12/15/2037)",
+     "issue": "No balance statement is printed, so the balance sheet is built from Exhibit A cash only. The NDEQ loan, probably the Sewer Fund's (its debt service 6,107 is in the Sewer column), is printed on p5 but isn't recorded anywhere or mentioned in notes. A cash-basis balance sheet normally leaves it out, but the user may want it noted."}
   ]
 }

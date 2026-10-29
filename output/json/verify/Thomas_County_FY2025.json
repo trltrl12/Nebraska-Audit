@@ -1,38 +1,15 @@
 {
   "stem": "Thomas_County_FY2025",
-  "values_checked": 114,
+  "values_checked": 105,
   "issues": [
-    {
-      "severity": "error",
-      "path": "detail[4].category",
-      "page": 5,
-      "extracted": "other / miscellaneous revenue",
-      "on_page": "Local 165,704 (Exhibit F); Exhibit D General column (p4): Interest 108,320, Charges for Services 51,923, Miscellaneous 2,225",
-      "issue": "[fixed] The broad 'Local' line is put in other/miscellaneous revenue, but the fund's own Exhibit D column shows interest is about 65% of it. Under the broad-line rule the dominant category applies: investment income (detail investment income), with review naming the mix. That the groups don't tie exactly (3,236 gap) doesn't justify 'other'."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[19].category",
-      "page": 5,
-      "extracted": "streets/highways",
-      "on_page": "Public Works: Noxious Weed 3,030",
-      "issue": "The category rules put noxious weed control under natural resources/conservation. The report prints it under Public Works, and this choice keeps the tie to the statement's function column. A judgment call."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[35].detail_category",
-      "page": 10,
-      "extracted": "county/other local governments",
-      "on_page": "Intergovernmental 130,429 (Highway/Bridge Buyback 24,115, Visitor's Promotion 10,726, Visitor's Improvement 10,726, Central Sandhills Extension 73,836, Library 340, Bookmobile 10,686)",
-      "issue": "Highway/Bridge Buyback is a state program (other state aid), and the Visitor's fund receipts are probably lodging tax passed through by the state. One 'county/other local governments' label for the whole Total column is doubtful. Already marked review."
-    },
-    {
-      "severity": "warning",
-      "path": "notes",
-      "page": 9,
-      "extracted": "the 10 nonmajor special revenue funds",
-      "on_page": "11 fund columns on Schedule 2 (pp9-10)",
-      "issue": "The notes miscount the nonmajor funds. Using the Total column is still correct, since there are more than 6 funds."
-    }
+    {"severity": "warning", "path": "detail[0].split_from", "page": 5,
+     "extracted": "Taxes 872,366 split into property tax 823,333 + motor vehicle tax 49,033", "on_page": "Exhibit F Taxes 872,366 (one line); Exhibit D General column p4: Property Taxes 823,333, Motor Vehicle Tax 49,033",
+     "issue": "the split comes from the Exhibit D General column, not from the budget schedule. It ties exactly, but Exhibit F's Federal/State/Local groups don't match Exhibit D (Federal 128,643 vs 10,448), so the two schedules group things differently; this applies to detail[0] and detail[1]"},
+    {"severity": "warning", "path": "detail[7].split_from", "page": 7,
+     "extracted": "Road Local 13,430 split into charges 128 + miscellaneous 13,302", "on_page": "Exhibit G Local 13,430 (one line); Exhibit D Road column p4: Charges for Services 128, Miscellaneous 13,302",
+     "issue": "split taken from the Exhibit D Road column, not printed on the budget schedule; it ties, but it is an assumption (applies to detail[7] and detail[8])"},
+    {"severity": "warning", "path": "detail[19].category", "page": 5,
+     "extracted": "streets/highways", "on_page": "Public Works: Noxious Weed 3,030",
+     "issue": "the category rules list noxious weed control under natural resources/conservation; the report prints it under Public Works, so streets/highways can be defended"}
   ]
 }

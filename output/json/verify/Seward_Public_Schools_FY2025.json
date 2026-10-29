@@ -1,12 +1,21 @@
 {
   "stem": "Seward_Public_Schools_FY2025",
-  "values_checked": 310,
+  "values_checked": 245,
   "issues": [
     {"severity": "warning", "path": "disbursements[14].original_label", "page": 5,
      "extracted": "Other (debt service fees)", "on_page": "Other",
-     "issue": "label printed on the governmental funds statement is just 'Other' (the Statement of Activities, p1, calls it 'Wire fees'); amount 300 and category are fine"},
-    {"severity": "warning", "path": "receipts[24]", "page": 4,
-     "extracted": "Nonrevenue receipts - Revenue from other districts (1951) 1,500", "on_page": "General Fund Nonrevenue receipts 49,726 (p4) vs 48,226 on the combining schedule (p7), which prints 'Revenue from other districts 1,500' as a separate local line",
-     "issue": "the split assumes p4 put the 1,500 into Nonrevenue receipts. The arithmetic fits exactly (49,726 - 48,226 = 1,500, and the split items add to 65,726), but no page says so outright"}
+     "issue": "label on the governmental funds statement is just 'Other' (the Statement of Activities p1 calls it 'Wire fees'); amount 300 is correct"},
+    {"severity": "warning", "path": "receipts[29].source_page", "page": 9,
+     "extracted": 10, "on_page": "1951 Miscellaneous revenue from other school districts within the state 1,500 (p9; also p7)",
+     "issue": "the 1,500 is not printed on p10; it is on p9 (budget schedule) and p7 (components schedule). Amount and split arithmetic are correct (17,062 + 47,164 + 1,500 = 65,726)"},
+    {"severity": "warning", "path": "detail[97].category", "page": 8,
+     "extracted": "Federal Programs", "on_page": "Reclassifications: Instruction 564,334, State programs (35,789), Federal programs (628,545)",
+     "issue": "contra line of -100,000 for the hidden Depreciation Fund transfer spans Instruction / State programs / Federal programs; assigning it to Federal Programs is a judgment call (amounts and ties are correct: General Fund detail = 20,483,473)"},
+    {"severity": "warning", "path": "disbursements[10].category", "page": 5,
+     "extracted": "Instruction", "on_page": "Cooperative expense 196,425 (Cooperative Fund funded by 'State categorical programs' 170,111, p23)",
+     "issue": "category assumed Instruction; could be State Categorical Programs. Same for detail[149]"},
+    {"severity": "warning", "path": "disbursements[1].category", "page": 5,
+     "extracted": "support services (Pupils)", "on_page": "Support services - student 1,820,220 = General 1,069,275 + Other Governmental (Activities) 750,945",
+     "issue": "line includes Activities Fund expenses 750,945 (student activity spending) shown in a separate fund column; kept whole as support services/Pupils per printed line"}
   ]
 }

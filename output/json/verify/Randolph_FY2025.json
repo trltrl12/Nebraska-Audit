@@ -1,102 +1,19 @@
 {
   "stem": "Randolph_FY2025",
-  "values_checked": 250,
+  "values_checked": 236,
   "issues": [
-    {
-      "severity": "warning",
-      "path": "basis",
-      "page": 5,
-      "extracted": "GAAP",
-      "on_page": "Statement of Revenues, Expenditures, and Changes in Fund Balances - Modified Cash Basis - Governmental Funds",
-      "issue": "The governmental funds are modified cash basis, but basis is recorded as GAAP because the roll-forward is fund balance. Ponca_FY2025 has the same layout from the same auditor and was recorded as 'cash' with fund balances in the cash fields and proprietary null. The two reports are treated inconsistently."
-    },
-    {
-      "severity": "warning",
-      "path": "ending_cash.amount",
-      "page": 4,
-      "extracted": -69774,
-      "on_page": "Cash and cash equivalents (69,774); Certificates of deposit 12,687; Restricted cash and cash equivalents 683,539; County treasurer cash 13,521; Total assets 639,973",
-      "issue": "ending_cash is only the overdrawn unrestricted cash line. The governmental funds also hold 709,747 of restricted cash, CDs and county treasurer cash, so all their cash totals 639,973 (= total assets). The figure follows the printed line, but it understates the cash held."
-    },
-    {
-      "severity": "warning",
-      "path": "report_discrepancies",
-      "page": 4,
-      "extracted": "only the p1 1-dollar imbalance is recorded",
-      "on_page": "Governmental funds balance sheet: Total assets 639,973 vs Total liabilities and fund balances 639,972 (General Fund column (451,869) vs (451,870))",
-      "issue": "The governmental funds balance sheet on p4 also prints a 1-dollar rounding difference, and it isn't in report_discrepancies. This page is not the balance_sheet source (p1 is), so it doesn't affect recorded figures."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[5].category",
-      "page": 5,
-      "extracted": "other",
-      "on_page": "Loan collections 17,397 (Community Betterment Fund, p15)",
-      "issue": "The Statement of Activities (p2) counts this line in charges for services: Economic development 18,117 = 720 + 17,397. It is repayment of loan principal, so 'other' with review is defensible. Charges for services would match the report's own classification."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[6].category",
-      "page": 5,
-      "extracted": "donations/contributions",
-      "on_page": "Contributions and grants 254,935 (operating grants 190,387 + capital grants 64,548, pp2-3)",
-      "issue": "This mixes grants and contributions and the grantors aren't stated. Part (e.g. Economic Development 64,548, Recycling 15,761) may be government grants (state aid). Already marked review."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[14]",
-      "page": 7,
-      "extracted": "Grant income 10,000 as business-type receipt (donations/contributions)",
-      "on_page": "Grant income 10,000 (Water, nonoperating); p3 Capital Grants and Contributions 10,000; p8 Grant proceeds under capital and related financing",
-      "issue": "This is a capital grant. It could go in business_type.other_financing (capital contributions), and the source (government vs private) isn't stated."
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[13]",
-      "page": 7,
-      "extracted": "Franchise fee 143,636 (utilities)",
-      "on_page": "Franchise fee 143,636 (Electric Fund operating expense)",
-      "issue": "This is probably the Electric Fund's franchise payment to the city. It would make up most of General Fund 'Taxes: Franchise' 151,524 (Administrative 151,519). The same money appears as business-type spending and governmental revenue. That is acceptable as a quasi-external transaction, but it is internal."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[30].detail_category",
-      "page": 16,
-      "extracted": "other charges for services",
-      "on_page": "Charges for services 85,324 (Rescue Fund 48,483, Library Board 18,760, Youth Activity 18,081; p15-16)",
-      "issue": "Most of this line (57%) is Rescue Fund money, so 'ambulance/rescue fees' is the dominant category. The rules call for the dominant category plus a review note naming the mix."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[132..138].category",
-      "page": 18,
-      "extracted": "streets/highways (Cemetery); also detail[156..160] Recycling",
-      "on_page": "Cemetery 15,330 + Recycling 1,212 = General Fund Public works 16,542 (p5)",
-      "issue": "The rules list cemetery under health/welfare and recycling is refuse. The extractor used streets/highways so the split ties to the statement's Public works line, and that does tie. Judgment call, review already set on detail[132]."
-    },
-    {
-      "severity": "warning",
-      "path": "detail_totals[6]",
-      "page": 14,
-      "extracted": 3308,
-      "on_page": "Debt Service budget schedule prints only 'Interest income 3,308'; no Total resources line",
-      "issue": "No total is printed on this schedule. The detail_totals entry repeats the single line amount and isn't marked computed. The amount is correct."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[82].detail_category",
-      "page": 17,
-      "extracted": "salaries and wages",
-      "on_page": "Salaries and benefits (also detail[85], [101], [107], [115], [121], [124], [132], [147])",
-      "issue": "[fixed 2026-10-21: review note added to combined salaries and benefits lines] These lines combine salaries and benefits but are recorded as salaries and wages with no review note. Ponca's identical lines carry review."
-    },
-    {
-      "severity": "warning",
-      "path": "notes",
-      "page": null,
-      "extracted": "... Read pages 1-18 of 18; trimmed p9 (v8 re-trim, report p23) is the proprietary cash flow reconciliation ..., nothing new",
-      "on_page": "trimmed PDF has 18 pages",
-      "issue": "The page count is right (18 of 18) and all pages are covered, but the notes don't end with 'Read pages 1-18 of 18' because more text follows it. An automated check that looks at the end of the string may miss it."
-    }
+    {"severity": "error", "path": "missing", "page": 18,
+     "extracted": "notes end '...Read pages 1-18 of 18; trimmed p9 (v8 re-trim, report p23) is the proprietary cash flow reconciliation ... nothing new'",
+     "on_page": "PDF has 18 pages",
+     "issue": "Notes do not end with 'Read pages 1-18 of 18' (text follows it). Page count 18 is correct and every page's lines are in the JSON (checked); only the notes ending is out of format, which the validator's page-read check may reject."},
+    {"severity": "warning", "path": "basis", "page": 5,
+     "extracted": "GAAP", "on_page": "Governmental funds statements are 'Modified Cash Basis' (pp4-5); only business-type activities are accrual",
+     "issue": "Governmental side is modified cash basis but recorded as GAAP (fund balance roll-forward used). Defensible since fund balance includes restricted cash/CDs, but a person may want basis cash."},
+    {"severity": "warning", "path": "receipts[4].category", "page": 5,
+     "extracted": "charges for services/fees", "on_page": "Charges for services 666,988 (Golf Board 467,473; General Fund pool 16,049 / golf 15,221 on pp17-18)",
+     "issue": "About 75% of this line is golf/pool fees; under the user's 2026-10-28 rule Recreation Fees may be the better category (or keep with review)."},
+    {"severity": "warning", "path": "receipts[6].category", "page": 5,
+     "extracted": "donations/contributions", "on_page": "Contributions and grants 254,935 (operating grants and contributions 190,387 + capital grants 64,548, pp2-3)",
+     "issue": "Mixed grants and contributions; grantors not stated, part may be governmental grants. Already marked review."}
   ]
 }

@@ -1,12 +1,12 @@
 {
   "stem": "Bloomington_FY2025",
-  "values_checked": 33,
+  "values_checked": 40,
   "issues": [
-    {"severity": "warning", "path": "receipts[8].category", "page": 1, "extracted": "intergovernmental/state aid", "on_page": "12 State Receipts: Other (Water Fund) 6,804.00", "issue": "nature of Water Fund state receipt not stated (already marked review)"},
-    {"severity": "warning", "path": "receipts[9].category", "page": 1, "extracted": "charges for services/fees", "on_page": "18 Local Receipts: Other (Water Fund) 30,813.32", "issue": "assumed water charges; not stated on the page (already marked review)"},
-    {"severity": "warning", "path": "receipts[7].category", "page": 1, "extracted": "other", "on_page": "18 Local Receipts: Other 34,393.40 (General) + 1,279.83 (Street)", "issue": "35,673.23 in other is 31% of governmental receipts; unlabeled on page"},
-    {"severity": "warning", "path": "disbursements[4].category", "page": 2, "extracted": "debt service principal", "on_page": "39 Debt Service (Water Fund) 7,277.00", "issue": "principal and interest not separated; all assigned to principal (already marked review)"},
-    {"severity": "warning", "path": "disbursements[3].fund_type", "page": 2, "extracted": "business-type", "on_page": "35 Capital Improvements (under 'Governmental:' heading), Water Fund column 4,420.00", "issue": "Water Fund amounts printed under the governmental heading were assigned to business-type by fund column; correct by fund, noted for review"},
-    {"severity": "warning", "path": "balance_sheet.equity[0].original_label", "page": 1, "extracted": "Ending Balance (line 24)", "on_page": "24 Ending Balance (Line 22 MINUS Line 23)", "issue": "label paraphrased"}
+    {"severity": "warning", "path": "receipts[9].category", "page": 1,
+     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other 30,813.32 (Water Fund)",
+     "issue": "The extractor assumed this is water charges; nothing on the page says so. If that assumption holds, the user rule puts utility fund charges in Utility Charges; if not, the printed label 'Other' points to other"},
+    {"severity": "warning", "path": "balance_sheet", "page": 1,
+     "extracted": "assets exclude county treasurer balance; no liabilities", "on_page": "County Treasurer Balance at September 30, 2025 2,876.19 (p1); Schedule of Outstanding Debt: Bond 89,328.64 (p3)",
+     "issue": "Both amounts are printed outside Exhibit A's line 24-28 totals, so leaving them out keeps the statement tying. A person may still want the county treasurer cash (rule: Cash and Cash Equivalents) and the water bond shown. The notes mention both"}
   ]
 }

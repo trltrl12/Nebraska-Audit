@@ -1,70 +1,15 @@
 {
   "stem": "Johnson_Brock_Public_Schools_FY2025",
-  "values_checked": 201,
+  "values_checked": 158,
   "issues": [
-    {
-      "severity": "error",
-      "path": "missing",
-      "page": 11,
-      "extracted": null,
-      "on_page": "General Fund budget-and-actual 'Total disbursements' 5,278,742 (Actual; budget 5,748,526), includes transfer 52,000 and interfund loan 56,000",
-      "issue": "[fixed] Printed GF expenditure total is not in detail_totals. The extractor left it out because it believed part of the schedule was missing, but it isn't (see notes issue). The GF expenditure detail lines add up exactly: instruction 3,246,626 + support-student 168,056 + support-instruction 73,580 + general admin 623,828 + central 91,583 + O&M 473,742 + transportation 224,787 + state programs 16,127 + federal programs 252,413 + transfer 52,000 + interfund loan 56,000 = 5,278,742. Add {schedule 'Budget and Actual - General Fund', fund General, section expenditure, amount 5278742, source_page 11, includes ['other financing']}."
-    },
-    {
-      "severity": "error",
-      "path": "detail[68].category",
-      "page": 11,
-      "extracted": "federal grants / detail_category federal grants",
-      "on_page": "6992 REAP 59,600 (Disbursements, Federal programs)",
-      "issue": "[fixed] This is an expenditure line but it has a revenue category and a revenue detail_category. Like the other federal program lines (6200, 6406, 6408), it should be category 'instruction' (p6 reclassifies federal programs 252,413 into Instruction) with detail_category 'not itemized'."
-    },
-    {
-      "severity": "warning",
-      "path": "notes",
-      "page": 9,
-      "extracted": "trimmed PDF omits part of that schedule (instruction lines after 1292 between report pp25-26, and lines after 2730 on report p26 to 3535 on p27), so GF expenditure detail is incomplete",
-      "on_page": "Trimmed pp8-11 = report pp24, 25, 26, 27, with no gaps",
-      "issue": "Not true. Nothing is missing from the GF budget schedule. Report p25 ends with 1292 and p26 starts with 'Support services - student'. Report p26 ends with 2730 and p27 starts with 'State programs 3535'. Every function's lines add up to the p6 combining schedule (instruction 3,246,626; support-student 168,056; transportation 224,787; state 16,127; federal 252,413), and the whole list ties to the printed total 5,278,742. The trimmed PDF has all 19 pages: report pp4-8 and pp22-35. Notes should be corrected so the report isn't treated as incomplete."
-    },
-    {
-      "severity": "warning",
-      "path": "notes",
-      "page": 9,
-      "extracted": "GF revenue detail 4310 REAP grant item is category 'donations/contributions' by mistake",
-      "on_page": "4310 REAP grant 40,475 (Federal sources)",
-      "issue": "Note is wrong. In the JSON, detail 4310 (detail[21]) is correctly 'federal grants'. The category mistake is on expenditure line 6992 REAP (detail[68], see error above)."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[13].category",
-      "page": 3,
-      "extracted": "intergovernmental/state aid",
-      "on_page": "County fines and license fees 25,014",
-      "issue": "Label points to fines and forfeitures. Per p8 the line is 16,991 county fines/license fees (2110) plus 8,023 ESU receipts (2210), so the dominant part is fines/licenses. 'fines and forfeitures' with a mix review is arguably better. Same question for detail 2110 (detail[10])."
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[8].category",
-      "page": 4,
-      "extracted": "support services",
-      "on_page": "Contracted or secured services 123,173 (Special Building Fund)",
-      "issue": "Function not stated. Special Building Fund spending is building construction/repair, so 'capital outlay' may fit better. Already marked review. Same for detail[99]."
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[3].original_label",
-      "page": 3,
-      "extracted": "Support services - general administration",
-      "on_page": "Support services - general",
-      "issue": "On cited p3 the label is printed as 'Support services - general'. The full wording 'general administration' appears on p1 and p6. Minor label mismatch."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[77].fund_type",
-      "page": 15,
-      "extracted": "governmental",
-      "on_page": "School Nutrition Fund (reported under Other Governmental Funds, p3/p7)",
-      "issue": "Applies to detail[77]-[87]. The extractor rules list school nutrition as a business-type example, but this report presents it as a governmental (nonmajor) fund. Following the report is defensible. Flagged for consistency across reports."
-    }
+    {"severity": "warning", "path": "disbursements[1].category", "page": 3,
+     "extracted": "support services (Pupils) 402,431", "on_page": "Support services - student: General 168,056 + Other Governmental 234,375 = 402,431",
+     "issue": "The Other Governmental part (234,375) is the Activities Fund 'Activities expenditures' (p7, p14), i.e. student activity spending, which the report prints inside the 'Support services - student' line. Kept as printed under support services/Pupils; the user may prefer student activities for that part (would need a split the statement doesn't print, so only a judgment note)"},
+    {"severity": "warning", "path": "disbursements[8].category", "page": 4,
+     "extracted": "support services", "on_page": "Contracted or secured services 123,173 (Special Building Fund)",
+     "issue": "Special Building Fund contracted services; function not printed. Could be Building and Grounds or capital outlay rather than generic support services (already marked review)"},
+    {"severity": "warning", "path": "detail[71].category", "page": 15,
+     "extracted": "charges for services/fees", "on_page": "Daily sales 109,341 (School Nutrition Fund)",
+     "issue": "Same money is category School Lunch Sales on the statement (receipts[11]); under the 2026-10-28 rule lunch/meal sales are School Lunch Sales, so the detail line's category is inconsistent"}
   ]
 }

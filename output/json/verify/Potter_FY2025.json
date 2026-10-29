@@ -1,18 +1,12 @@
 {
   "stem": "Potter_FY2025",
-  "values_checked": 142,
+  "values_checked": 160,
   "issues": [
-    {"severity": "warning", "path": "report_discrepancies[0]", "page": 4,
-     "extracted": "totals difference 1,385 (Licenses and permits 1,225)", "on_page": "p4 General/Total: Licenses and permits 1,225.00; there is no Building permits row on p4, but Total Receipts 221,966.11 / 346,152.45 includes it. p10: Building permits 1,385 printed separately. SoA p2: Licenses and permits 2,610.00",
-     "issue": "Checked as asked: this is neither a misread nor a skipped p4 line. The p4 lines really do add to 344,767.45, and the printed total includes the 1,385 Building permits that only p10 and the SoA show. Recording it as a report discrepancy is correct. However, with the lines as recorded, the governmental roll-forward falls short by 1,385 (483,940.50 + 625,039.70 - 769,682.36 + 22,000 - 4,000 = 357,297.84 vs ending 358,682.84). Only a 'totals' entry was recorded, so either add a 'reconcile' entry or add a 'Building permits' 1,385 licenses-and-permits line citing p10 with review."},
-    {"severity": "warning", "path": "receipts[3]", "page": 4,
-     "extracted": "Other (Taxes) - remainder 5,091.65 (computed)", "on_page": "Taxes Other: General 9,828.00 + Street 1,855.65 = 11,683.65; p10 breaks down only the General part (Homestead 6,592 + Other 3,236)",
-     "issue": "This is a partial split: the report prints a breakdown only for the General Fund part of the line. The remainder (3,236 + Street 1,855.65) has no printed breakdown. The split is marked and the arithmetic holds."},
-    {"severity": "warning", "path": "disbursements[8].amount", "page": 6,
-     "extracted": -8150, "on_page": "Capital outlay 8,150.00 (positive, under Nonoperating revenues (expenses), Garbage)",
-     "issue": "The page prints 8,150 as a positive revenue item; it was recorded as a negative capital outlay disbursement. The sign was flipped, and the line has no `computed` note saying so. The roll-forward is unaffected, and decision_needed already covers the treatment."},
-    {"severity": "warning", "path": "balance_sheet.liabilities[0].category", "page": 1,
-     "extracted": "other liabilities", "on_page": "Sales tax collected 355.50",
-     "issue": "Sales tax collected is owed to the state, so 'due to other governments' fits better."}
+    {"severity": "warning", "path": "receipts[7].category", "page": 4,
+     "extracted": "charges for services/fees", "on_page": "Charges for services 94,104.59 (General Fund departments p10: Prairie Pines Golf Club 92,013 + Rental and fees 2,091)",
+     "issue": "98% of the line is golf club revenue, which the matching detail line (detail[5]) categorizes as Recreation Fees; under the user's 2026-10-28 rule (Recreation Fees its own category; dominant category > half) the statement line could be Recreation Fees"},
+    {"severity": "warning", "path": "receipts[15].category", "page": 6,
+     "extracted": "charges for services/fees", "on_page": "Charge for services 257,950.56 (Water/Sewer/Garbage operating revenues)",
+     "issue": "user rule 2026-10-28: utility fund sales/charges (incl. garbage) are category Utility Charges"}
   ]
 }

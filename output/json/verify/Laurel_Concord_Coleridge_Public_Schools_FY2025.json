@@ -1,38 +1,19 @@
 {
   "stem": "Laurel_Concord_Coleridge_Public_Schools_FY2025",
-  "values_checked": 214,
+  "values_checked": 260,
   "issues": [
-    {
-      "severity": "error",
-      "path": "detail[76].category",
-      "page": 7,
-      "extracted": "support services",
-      "on_page": "Reclassifications column p6-7: Student transportation (103,066), State categorical programs (58,726), Federal programs (251,792), Instruction +303,391; net (110,193)",
-      "issue": "[fixed] The hidden-transfer contra line (-110,193, label 'Contra: transfers hidden in spending lines') is put in support services, but none of the reclassified lines are support services. The combining schedule shows 103,066 coming out of Student transportation (General 541,321 to Total 438,255) and the other 7,127 out of the state categorical and federal programs group, which the reclassification moves into Instruction (58,726 + 251,792 - 303,391 = 7,127). As recorded, support services detail is understated by 110,193 against the statement, and student transportation is overstated by 103,066 and instruction by 7,127. It should be a student transportation contra of -103,066 and an instruction contra of -7,127 (or one contra in student transportation with review). Amount and other financing offset are correct."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[15].category",
-      "page": 3,
-      "extracted": "other",
-      "on_page": "Other 29,902",
-      "issue": "Kept as other with review. By fund it is: General Fund 26,878 (sale of property 8,832 + other nonrevenue receipts 18,046, p9), Special Building 164 (other local receipts), and Other Governmental 2,860 (School Nutrition other 2,405 + Bond other local 147 + QCPU other local 27 + QCPU public power district taxes 281). No category is more than half, so other is defensible; it is listed for review."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[9].category",
-      "page": 3,
-      "extracted": "intergovernmental/state aid",
-      "on_page": "State sources 4,939,881",
-      "issue": "State sources includes nameplate capacity tax of 8,831 (6,733 + 926 + 1,039 + 133, from the fund schedules; also printed as 'Nameplate capacity 8,831' on p2), which is other taxes under the rules. It was kept as one broad line, which is acceptable because the statement line has no breakdown of its own; this is a note only."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[7].split_from",
-      "page": 6,
-      "extracted": "Local sources 90,444 split into 64,790 + 24,254 + 1,400",
-      "on_page": "p6 Total column: Tuition received from educational entities 64,790; Preschool tuition and fees 24,254; Local license fees and fines 1,400",
-      "issue": "The split ties exactly and comes from the General Fund components schedule, which is the same General Fund column. The 64,790 includes the Cooperative Fund's 5,422 distance-learning tuition. Accepted, but it is a split, so it is noted."
-    }
+    {"severity": "error", "path": "detail[92].category", "page": 16,
+     "extracted": "charges for services/fees", "on_page": "School Nutrition Fund: Sales 131,801",
+     "issue": "Under the user's rule (2026-10-28), lunch/meal sales are their own category, School Lunch Sales. receipts[16] already records the same 131,801 as School Lunch Sales, so receipts and detail disagree."},
+    {"severity": "warning", "path": "receipts[19].category", "page": 3,
+     "extracted": "other", "on_page": "Other 29,902 = General 26,878 (5300 Sale of property 8,832 + 5690 Other nonrevenue receipts 18,046, p9) + Special Building 164 + Other Governmental 2,860",
+     "issue": "No category is more than half, so other is defensible. The 8,832 sale of property is printed on p9 and could be split out as Sale of Property. It is already marked review."},
+    {"severity": "warning", "path": "disbursements[1].category", "page": 3,
+     "extracted": "support services (Pupils)", "on_page": "Student support services 1,028,179 = General 588,872 + Other Governmental 439,307 (Activities 438,749 + Student Fee 558)",
+     "issue": "About 43% of this statement line is Activities Fund spending (student activities in detail). It is kept as printed."},
+    {"severity": "warning", "path": "detail[75]", "page": 6,
+     "extracted": "contra -103,066 (student transportation) and -7,127 (instruction, detail[76]) with other financing -110,193 (detail[79])",
+     "on_page": "Reclassifications column pp6-7: Student transportation (103,066); State categorical (58,726) and Federal programs (251,792) moved to Instruction +303,391; Transfers in (336,085), out +225,892",
+     "issue": "The hidden-transfer treatment ties to the reclassification column. Putting the 7,127 net in Instruction is the extractor's own allocation, since the report does not print which line holds it. This is already in decision_needed."}
   ]
 }

@@ -1,15 +1,17 @@
 {
   "stem": "Ragan_FY2025",
-  "values_checked": 29,
+  "values_checked": 34,
   "issues": [
+    {"severity": "warning", "path": "disbursements[3]", "page": 2,
+     "extracted": {"fund_type": "business-type", "category": "debt service (principal and interest combined)", "amount": 5033.0},
+     "on_page": "Line 39 Debt Service (Governmental section), Water Well Constr Fund column 5,033.00",
+     "issue": "printed in the Governmental section of the form but in the Water Well Constr Fund column, so it was treated as business-type (marked review). That is defensible because the fund is funded by Water Fund transfers and the debt is the water loans. Notes call it 'business-type principal' but the category is principal and interest combined; the page doesn't split it."},
     {"severity": "warning", "path": "receipts[6].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Water Fund 10,005.24, Water Reserve Fund 15.11)",
-     "issue": "The label only says Other. Treating it as water charges is a reasonable assumption (it is the Water Fund's only receipt), but the page doesn't confirm it. Review flag already set."},
-    {"severity": "warning", "path": "disbursements[3].category", "page": 2,
-     "extracted": "debt service principal", "on_page": "Debt Service 5,033.00 (Water Well Constr Fund)",
-     "issue": "The line combines principal and interest and the page doesn't split them. The loans on p3 carry 4.25%-4.50% interest, so part of this is interest. Treating it as business-type (utility column) is correct even though the form prints it under Governmental."},
-    {"severity": "warning", "path": "balance_sheet.equity[0].original_label", "page": 1,
-     "extracted": "Ending Balance (cash and investments, all funds)", "on_page": "Ending Balance (Line 22 MINUS Line 23)",
-     "issue": "This label isn't printed on the page; the extractor wrote a description. The balance sheet is built from Exhibit A line 24 because the filing has no net position statement."}
+     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other, Water 10,005.24 + Water Reserve 15.11",
+     "issue": "printed only as 'Other'; water charges assumed (marked review). The Water Reserve 15.11 is likely interest."},
+    {"severity": "warning", "path": "reported_totals.business-type", "page": 1,
+     "extracted": {"receipts": 21118.35, "disbursements": 19015.18, "includes": []},
+     "on_page": "line 21 / line 52 utility columns include business-type transfers of 11,098.00 each side",
+     "issue": "printed business-type totals include the gross 11,098.00 intra-utility transfers. They are recorded in a non-standard 'includes_split' field, and 'includes' is empty. The receipts lines (10,020.35) and disbursements lines (7,917.18) won't tie to reported_totals unless the validator reads includes_split. The amounts themselves are correct."}
   ]
 }

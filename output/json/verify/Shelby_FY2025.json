@@ -1,9 +1,21 @@
 {
   "stem": "Shelby_FY2025",
-  "values_checked": 125,
+  "values_checked": 132,
   "issues": [
-    {"severity": "warning", "path": "detail[25].category", "page": 12,
-     "extracted": "streets/highways", "on_page": "Cemetery department Operating expenses 8,719",
-     "issue": "the category rules put cemetery under health/welfare. The extractor followed the statement, which counts cemetery under Public works (p5, p9). Defensible, but the same applies to disbursements[2] 'Public works' 151,810, which includes this 8,719 (already marked review)"}
+    {"severity": "warning", "path": "detail[9].category", "page": 12,
+     "extracted": "charges for services/fees", "on_page": "Cemetery department - Charges for services 1,250",
+     "issue": "user rule (2026-10-28) makes Cemetery Fees its own receipt category out of charges for services; detail_category already 'cemetery fees'"},
+    {"severity": "warning", "path": "detail[12].category", "page": 12,
+     "extracted": "charges for services/fees", "on_page": "Park department - Charges for services 5,525",
+     "issue": "user rule (2026-10-28) makes Recreation Fees its own receipt category; detail_category already 'recreation/pool/park fees'"},
+    {"severity": "warning", "path": "receipts[11].category", "page": 7,
+     "extracted": "charges for services/fees", "on_page": "Sales 409,482 (Water, Sewer, Garbage funds)",
+     "issue": "user rule (2026-10-28): utility fund sales/charges incl. garbage are category Utility Charges"},
+    {"severity": "warning", "path": "receipts[7].category", "page": 5,
+     "extracted": "charges for services/fees", "on_page": "Charges for services 8,275 = General 1,500 + Cemetery 1,250 + Park 5,525 (p12)",
+     "issue": "mixed line; park/recreation fees are 67% of it (could be Recreation Fees with review)"},
+    {"severity": "warning", "path": "disbursements[9].category", "page": 7,
+     "extracted": "Repairs and Maintenance", "on_page": "Repairs and supplies 70,929",
+     "issue": "line mixes repairs and supplies; Repairs and Maintenance is a defensible dominant choice but not certain"}
   ]
 }

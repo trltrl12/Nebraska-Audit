@@ -1,27 +1,12 @@
 {
   "stem": "Benkelman_FY2025",
-  "values_checked": 144,
+  "values_checked": 150,
   "issues": [
-    {"severity": "warning", "path": "receipts[7].category", "page": 5,
-     "extracted": "federal grants", "on_page": "Grants and contributions 80,216 (GF 5,000 + CDBG 75,216)",
-     "issue": "Line mixes GF 5,000 (categorized donations/contributions in detail[14], p14) with CDBG 75,216 assumed federal; category inconsistent with detail for the GF portion and federal source of CDBG not stated on page"},
-    {"severity": "warning", "path": "disbursements[4].category", "page": 5,
-     "extracted": "debt service principal", "on_page": "Debt service 50,000 (Street Fund)",
-     "issue": "Street budget schedule p11 shows the same 50,000 as Capital outlay (detail[59] categorized capital outlay); principal vs interest not shown; category is an assumption and differs between receipts/disbursements and detail"},
-    {"severity": "warning", "path": "detail[55].detail_category", "page": 11,
-     "extracted": "other state aid", "on_page": "Intergovernmental 194,583",
-     "issue": "Street Fund intergovernmental is likely highway allocation; label does not say"},
-    {"severity": "warning", "path": "receipts[12].category", "page": 7,
-     "extracted": "intergovernmental/state aid", "on_page": "Grant income 15,558 (Disposal Fund)",
-     "issue": "Grantor not stated; could be federal or private"},
-    {"severity": "warning", "path": "detail[18].detail_category", "page": 14,
-     "extracted": "salaries and wages", "on_page": "Salaries and benefits",
-     "issue": "Combined salaries and benefits line (also detail[19]-detail[21]) recorded entirely as salaries and wages"},
-    {"severity": "warning", "path": "detail[26].category", "page": 14,
-     "extracted": "public safety", "on_page": "Interlocal agreement 131,332 (General department column)",
-     "issue": "Printed under the General department; reassigned to public safety based on p10 Police 131,332 (supported, but an extractor assumption)"},
-    {"severity": "warning", "path": "detail[45].detail_category", "page": 14,
-     "extracted": "equipment purchases", "on_page": "Capital outlay 25,816 (Recreation)",
-     "issue": "Object of capital outlay not stated; equipment purchases assumed"}
+    {"severity": "warning", "path": "receipts[10].category", "page": 7,
+     "extracted": "charges for services/fees", "on_page": "Sales 2,716,385 (Electric, Water, Sewer, Disposal, C&D Site enterprise funds)",
+     "issue": "These are utility fund sales, so the user's 2026-10-28 rule gives them the Utility Charges category. user_rules.py will not catch this: the label is just 'Sales' and the line has no fund name."},
+    {"severity": "warning", "path": "receipts[5].category", "page": 5,
+     "extracted": "charges for services/fees", "on_page": "Charges for services 9,951 (all of it is Recreation department, p14)",
+     "issue": "Under the user's 2026-10-28 rule this could be the Recreation Fees category. The detail line (detail[9]) already uses detail_category recreation/pool/park fees."}
   ]
 }

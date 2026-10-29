@@ -1,18 +1,14 @@
 {
   "stem": "Cody_FY2025",
-  "values_checked": 26,
+  "values_checked": 27,
   "issues": [
-    {"severity": "warning", "path": "disbursements[3].fund_type", "page": 2,
-     "extracted": "governmental", "on_page": "Solid Waste 35,663.42 (under Business-Type Activities, General Fund column)",
-     "issue": "printed under Business-Type Activities heading; treated as governmental because it is paid from the General Fund column and the related receipts are not separable (likely inside Local Receipts: Other). Defensible, already marked review"},
-    {"severity": "warning", "path": "disbursements[4].fund_type", "page": 2,
-     "extracted": "governmental", "on_page": "Water 24,179.45 (under Business-Type Activities, General Fund column)",
-     "issue": "same as Solid Waste: business-type line kept in governmental; already marked review"},
-    {"severity": "warning", "path": "disbursements[0].category", "page": 2,
-     "extracted": "general government", "on_page": "General Government 115,284.55 (incl. Street Fund 42,285.28)",
-     "issue": "42,285.28 of this line is Street Fund spending printed as General Government; category follows the printed label, but it is likely streets/highways in substance"},
-    {"severity": "warning", "path": "disbursements[2].category", "page": 2,
-     "extracted": "debt service principal", "on_page": "Debt Service 12,864.14",
-     "issue": "combined principal and interest line; principal assumed (marked review)"}
+    {"severity": "error", "path": "missing", "page": 3,
+     "extracted": "notes: '... Read pages 1-3 of 3 Investments (46,634.04 beginning / 47,929.40 ending, line 2 / line 27) are already inside beginning/ending cash, so beginning_investments/ending_investments are left null.'",
+     "on_page": "trimmed PDF has 3 pages",
+     "issue": "notes do not end with 'Read pages 1-3 of 3' (text was appended after it). The page count is right and all 3 pages' lines are in the JSON; the fix is to move 'Read pages 1-3 of 3' to the end of notes"},
+    {"severity": "warning", "path": "decision_needed", "page": 1,
+     "extracted": "receipts[9] Local Receipts: Other 151,737.05 (category other)",
+     "on_page": "Line 18 Local Receipts: Other 151,737.05 (General 144,956.40, Street 6,780.65)",
+     "issue": "One unexplained 'Other' line is 66% of the year's receipts. It is probably solid waste/water fees, but the page doesn't say, and the extraction has no decision_needed entry asking what it is"}
   ]
 }

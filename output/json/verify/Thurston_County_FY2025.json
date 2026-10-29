@@ -1,15 +1,12 @@
 {
   "stem": "Thurston_County_FY2025",
-  "values_checked": 258,
+  "values_checked": 190,
   "issues": [
-    {"severity": "warning", "path": "detail[100]", "page": 6,
-     "extracted": "property tax 335,972 (split_from Taxes 339,918)", "on_page": "Schedule 1 Taxes row: 3300 Jail Bond Fund 335,972; 990 Visitors Promotion 1,973; 995 Visitors Improvement 1,973; Totals 339,918",
-     "issue": "The nonmajor Taxes total is split by fund column, and each tax type is inferred from the fund's name (debt-service levy = property tax, visitors funds = lodging tax). The page prints the split by fund, not by tax type. The inference is defensible, and the lodging part (3,946) matches the Statement of Activities lodging tax (3,945, p2) within rounding."},
-    {"severity": "warning", "path": "detail[101]", "page": 5,
-     "extracted": "lodging tax 3,946 (computed 1,973 + 1,973)", "on_page": "Visitors Promotion 1,973; Visitors Improvement 1,973 (p5)",
-     "issue": "Same fund-column split as detail[100]: tax type inferred from fund names. Arithmetic is correct and marked computed."},
-    {"severity": "warning", "path": "detail[73].category", "page": 11,
-     "extracted": "streets/highways", "on_page": "Public works: Noxious weed (Personnel 22,323; Operating 2,246; Supplies 265; Capital outlay 0)",
-     "issue": "The category list puts noxious weed control under 'natural resources/conservation'. The report prints it under Public works, and the extractor kept it there with a review note so it ties to Exhibit D. This applies to detail[73]-detail[76]."}
+    {"severity": "warning", "path": "detail[99].original_label", "page": 15,
+     "extracted": "Capital outlay", "on_page": "Capital outlay (actual -, budget 1,510,060)",
+     "issue": "every other capital outlay line is relabelled 'Capital Outlay: <function>' under the user rule; this zero-actual Buyback Program line was left as printed (would be 'Capital Outlay: Streets and Highways', function in computed)"},
+    {"severity": "warning", "path": "receipts[6].category", "page": 4,
+     "extracted": "charges for services/fees", "on_page": "Local receipts 1,174,355",
+     "issue": "broad line. The Statement of Activities (p2) suggests about 906,945 in charges, plus interest 177,355 (Interest Income), miscellaneous 30,984 and some local grants. The report doesn't break down the line itself, so the dominant category with a review note is defensible"}
   ]
 }

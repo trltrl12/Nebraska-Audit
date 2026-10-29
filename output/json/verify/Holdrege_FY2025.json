@@ -1,12 +1,25 @@
 {
   "stem": "Holdrege_FY2025",
-  "values_checked": 132,
+  "values_checked": 230,
   "issues": [
-    {"severity": "warning", "path": "disbursements[0].category", "page": 4,
-     "extracted": "general government", "on_page": "Personnel 3,475,915 (General 215,395; Street 895,741; Police 1,211,349; Park 313,605; Equip. 47,892; Other 791,933)",
-     "issue": "Object-only lines (Personnel, Operating, Supplies; disbursements[0-2], 7,083,151 total) are all filed as general government, but most of the spending sits in the Street, Police and Park fund columns that the page prints (and the p2 Statement of Activities shows by function). Has a review flag; the function mix is overstated toward general government."},
-    {"severity": "warning", "path": "detail[23].category", "page": 8,
-     "extracted": "other", "on_page": "Special assessments 35,988",
-     "issue": "Special Assessments fund spending is likely debt service (p4 shows 35,572 interest in that fund). 'other' is a last resort; flagged review already."}
+    {"severity": "error", "path": "balance_sheet.assets", "page": 1,
+     "extracted": "asset lines sum to 53,823,051 and liability lines to 18,337,744 (Governmental + Business-type columns incl. Due from/Due to other funds 4,601,724 + 2,880,562 / 5,367,535 + 2,114,751)",
+     "on_page": "Total assets 46,340,765 and Total liabilities 10,855,458, after the printed Eliminations column (7,482,286) on Due from other funds and Due to other funds",
+     "issue": "The asset and liability lists don't add up to their printed totals. The report itself adds up: the gap is the printed Eliminations column, which the extraction left out. This is not a report discrepancy, so report_discrepancies[0] is wrong. Add the eliminations (-7,482,286) as Internal Balances lines in both assets and liabilities, or drop the due-from/due-to lines. The notes also say these lines were 'omitted', which contradicts the JSON"},
+    {"severity": "error", "path": "receipts[9].category", "page": 6,
+     "extracted": "charges for services/fees", "on_page": "Sales 15,044,105 (Water, Sewer, Electric, Landfill)",
+     "issue": "Under the user's 2026-10-28 rule, utility fund sales/charges (incl. garbage/refuse) go to category Utility Charges, not charges for services. The Water/Sewer/Electric detail lines already use Utility Charges"},
+    {"severity": "error", "path": "detail[78].category", "page": 6,
+     "extracted": "charges for services/fees", "on_page": "Landfill Fund Sales 1,406,870",
+     "issue": "Landfill (refuse) utility sales should be Utility Charges under the user's rule (incl. garbage/refuse). This also makes it inconsistent with the other three utility fund Sales lines"},
+    {"severity": "warning", "path": "disbursements[17].original_label", "page": 4,
+     "extracted": "Capital outlay", "on_page": "Capital outlay 1,182,117",
+     "issue": "Capital outlay lines (statement and per-fund detail[61]-[65]) are not labelled 'Capital Outlay: <function>' as the user's capital outlay rule requires (user_rules.py may fix)"},
+    {"severity": "warning", "path": "disbursements[5].category", "page": 4,
+     "extracted": "other", "on_page": "Personnel/Operating/Supplies - Other Governmental Funds 791,933 / 1,235,701 / 30,752",
+     "issue": "2,058,386 of governmental spending is in category other because the Other Governmental Funds column mixes several funds. The Statement of Activities (p2) does give function expenses (fire, library, pool, emergency communications, keno, ARPA), so this is a judgment call the user may want to settle"},
+    {"severity": "warning", "path": "notes", "page": 8,
+     "extracted": "'Detail: only the cash-basis budget-to-actual schedule ... (p8) is recorded'", "on_page": "detail[] holds per-fund lines from p4/p6",
+     "issue": "The notes are stale and contradict the JSON: detail now holds per-fund statement lines, not the p8 schedule"}
   ]
 }

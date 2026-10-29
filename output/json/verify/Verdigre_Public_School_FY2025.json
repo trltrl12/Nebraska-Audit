@@ -1,11 +1,18 @@
 {
   "stem": "Verdigre_Public_School_FY2025",
-  "values_checked": 196,
+  "values_checked": 186,
   "issues": [
-    {"severity": "warning", "path": "receipts[7].category", "page": 6, "extracted": "fines and forfeitures", "on_page": "Fines and licenses 3,912 (= 2110 Fines and licenses 3,302 + 1911 Local license fees 610 on p9)", "issue": "line mixes fines and license fees; dominant category is right but the rule asks for a review note naming the mix, and none is set"},
-    {"severity": "warning", "path": "receipts[9].amount", "page": 6, "extracted": 666066, "on_page": "State aid and grants 666,066; General Fund state lines on p9 sum to 666,067", "issue": "1 rounding difference printed in the report itself; mentioned in notes but not in report_discrepancies"},
-    {"severity": "warning", "path": "receipts[13]", "page": 6, "extracted": 1667, "on_page": "Other 1,667; p9 Fees 1,260 + Other misc local revenue 25 + Other revenue 381 = 1,666", "issue": "1 rounding difference in the report itself; charges for services (fees are 76%) is defensible and review is set"},
-    {"severity": "warning", "path": "detail[66].category", "page": 13, "extracted": "charges for services/fees / student activity receipts", "on_page": "Interest 1,236 (Activities Fund account)", "issue": "an account labelled Interest is recorded as activity receipts, while the basic statement (p6) counts the Activity Fund's 2,171 interest as investment income; the same label is categorized differently in the report (review is set)"},
-    {"severity": "warning", "path": "detail[30].budget_final", "page": 9, "extracted": null, "on_page": "Pupil transportation budget 300,000", "issue": "budget left null on the split line; documented in review"}
+    {"severity": "warning", "path": "disbursements[13].original_label", "page": 6,
+     "extracted": "Capital outlay", "on_page": "Capital outlay 88,700 (Depreciation Fund, p12)",
+     "issue": "user rule relabels capital outlay lines 'Capital Outlay: <function>' with the printed text in printed_label; not applied here or on detail[52] (Depreciation Fund capital outlay 88,700); function not stated on the page"},
+    {"severity": "warning", "path": "detail[86].category", "page": 13,
+     "extracted": "charges for services/fees", "on_page": "Activities Fund account receipts 168,130 include Transfer from General Fund 15,000 (p12)",
+     "issue": "contra line removing the transfer from activity account receipts is categorised charges for services/fees; the receipts it offsets are Extracurricular Receipts, so the contra should carry that category"},
+    {"severity": "warning", "path": "detail[83].category", "page": 13,
+     "extracted": "reimbursements/refunds", "on_page": "Student Reimbursement Fund 8,886",
+     "issue": "activity account recorded as reimbursements/refunds while its detail_category is student activity receipts; defensible from the label, but inconsistent with the other activity accounts"},
+    {"severity": "warning", "path": "receipts[9].amount", "page": 6,
+     "extracted": 666066, "on_page": "State aid and grants 666,066; General Fund schedule components (p9) sum to 666,067",
+     "issue": "1-dollar rounding difference printed in the report itself (also 'Other' 1,667 vs 1,666); noted in notes but not in report_discrepancies"}
   ]
 }

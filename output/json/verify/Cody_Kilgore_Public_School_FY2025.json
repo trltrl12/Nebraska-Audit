@@ -1,9 +1,18 @@
 {
   "stem": "Cody_Kilgore_Public_School_FY2025",
-  "values_checked": 244,
+  "values_checked": 232,
   "issues": [
-    {"severity": "warning", "path": "detail[69].category", "page": 14,
-     "extracted": "support services", "on_page": "Retirement Remittances - Employer/Employee Contributions 357,551 (Employee Benefit Fund); p5 prints the Other Governmental Funds 357,551 on the Instruction row",
-     "issue": "function differs from the governmental funds statement, which counts this spending under Instruction; 'instruction' would tie the detail to the statement's function lines"}
+    {"severity": "error", "path": "receipts[3].category", "page": 5,
+     "extracted": "other taxes", "on_page": "Other 46,851 split: Public Power District Sales Tax 13,741 (p8, 1120-000)",
+     "issue": "the split item is public power district sales tax, which has its own receipt category 'Public Power District Sales Tax' (as used for the matching detail line on p8); recorded as 'other taxes' with detail_category 'Other / Miscellaneous Receipts'"},
+    {"severity": "error", "path": "detail[111].category", "page": 19,
+     "extracted": "charges for services/fees", "on_page": "Activity Fund, District: Restricted grants 500",
+     "issue": "activity-fund 'Restricted grants' receipt is not a charge for services; it should be Extracurricular Receipts (activity fund receipts) or donations/contributions, and it is inconsistent with its own detail_category 'student activity receipts'"},
+    {"severity": "warning", "path": "receipts[17].category", "page": 7,
+     "extracted": "charges for services/fees", "on_page": "Charges for Sales and Services 13,265 (= Lunchroom Sales 13,265, p16)",
+     "issue": "School Nutrition Fund sales; the user's rule moves lunch/meal sales to 'School Lunch Sales' (the p16 detail line already uses it)"},
+    {"severity": "warning", "path": "disbursements[3].original_label", "page": 5,
+     "extracted": "Instruction (Support Services)", "on_page": "Instruction",
+     "issue": "printed row label is 'Instruction' under the Support Services heading; the parenthetical was added by the extractor"}
   ]
 }

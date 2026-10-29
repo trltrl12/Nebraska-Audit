@@ -1,15 +1,9 @@
 {
   "stem": "Valentine_Community_Schools_FY2025",
-  "values_checked": 184,
+  "values_checked": 205,
   "issues": [
-    {"severity": "warning", "path": "detail[25].original_label", "page": 8,
-     "extracted": "4521 IDEA Part B (611) proportionate share", "on_page": "4521 IDEA Part B proportionate share",
-     "issue": "The label doesn't match the page: '(611)' is not printed on this line. The amount 6,879 is correct."},
-    {"severity": "warning", "path": "detail[97].original_label", "page": 11,
-     "extracted": "6412 IDEA Part B (611) proportionate share", "on_page": "6412 IDEA Part B proportionate share",
-     "issue": "The label doesn't match the page: '(611)' is not printed on this line. The amount 7,162 is correct."},
-    {"severity": "warning", "path": "balance_sheet.equity[1].amount", "page": 3,
-     "extracted": 150228, "on_page": 150228,
-     "issue": "The amount is correct as printed. However, the report contradicts itself: the Statement of Net Position shows Restricted for Nutrition Program 150,228, which is the nutrition fund's beginning balance (p14). The fund statement (p6) and the nutrition schedule (p14) show the ending nutrition balance as 73,734, so unrestricted is likely overstated by 76,494 and restricted understated by the same amount. Totals still tie, so this is noted in notes only, not in report_discrepancies."}
+    {"severity": "error", "path": "detail[108].category", "page": 14, "extracted": "charges for services/fees", "on_page": "School Nutrition Fund - Sales 202,716", "issue": "School nutrition sales belong in the user's School Lunch Sales receipt category (2026-10-28 rule); the matching statement receipt (receipts[12]) already uses School Lunch Sales, so the report is inconsistent"},
+    {"severity": "warning", "path": "receipts[14].category", "page": 7, "extracted": "charges for services/fees 8,106 (1740 Fees 6,906 + 1910 Rental 1,200)", "on_page": "1740 Fees 6,906; 1910 Rental 1,200", "issue": "Combines rental income (own Rentals category under the 2026-10-28 rule) with fees; detail[6] already uses Rentals. Could be split into 6,906 charges and 1,200 Rentals"},
+    {"severity": "warning", "path": "detail[81]", "page": 12, "extracted": -300000, "on_page": "Depreciation Fund 'Transfer from the General Fund' 300,000 (p12); General Fund 8000 Transfers 45,000 only (p11); statement O&M 1,262,006 (p4) vs schedule 2600 lines 1,371,889 + Depreciation capital outlay 190,117", "issue": "Hidden-transfer contra line is inferred by the extractor (arithmetic ties exactly); the report does not say which 2600 line holds the 300,000"}
   ]
 }

@@ -1,15 +1,21 @@
 {
   "stem": "Howells_FY2026",
-  "values_checked": 148,
+  "values_checked": 168,
   "issues": [
-    {"severity": "warning", "path": "decision_needed", "page": 1, "extracted": "fiscal_year_end 2025-09-30, file named FY2026", "on_page": "Statement of Net Position - Cash Basis, September 30, 2025", "issue": "The file is labelled FY2026 but covers the year ended 9/30/2025 (possibly the same year as an FY2025 filing). This is a possible wrong-year filing and is not in decision_needed (the extraction has no decision_needed list)."},
-    {"severity": "warning", "path": "decision_needed", "page": 8, "extracted": {"business_type.debt_proceeds": 843782}, "on_page": "Proceeds from long term debt 843,782 (p8, p13); Statement of Activities p2: Loan proceeds 506,269 plus Water capital grants and contributions 337,513", "issue": "The report's own government-wide statement treats 337,513 of this money as a capital grant (possibly loan forgiveness), not debt. Which treatment applies needs a person; this is only mentioned in notes."},
-    {"severity": "warning", "path": "disbursements[31]", "page": 7, "extracted": "utilities (business-type lines 31-35, 37)", "on_page": "Total Proprietary Funds column includes Apartment Fund 10,364 contractual, 6,686 utilities, 18,730 repairs, 5,149 other supplies, 24,890 capital outlay", "issue": "The total-column lines mix housing (Apartments) with utilities, and everything is coded utilities. In detail the same Apartments lines are coded housing, so the two disagree. Defensible because the statement prints one total column, but no review flag is set on the lines."},
-    {"severity": "warning", "path": "disbursements[36].category", "page": 7, "extracted": "debt service interest", "on_page": "Debt service (743)", "issue": "Principal vs interest not printed; recorded as interest (review set). Same for detail[59]."},
-    {"severity": "warning", "path": "detail[48]", "page": 11, "extracted": 12650, "on_page": "Debt service 107,650 (p11); statement p4 Debt Service Fund: Principal 95,000, Interest and other charges 13,050", "issue": "Interest 12,650 assumes the 400 'Other supplies and expenses' line is inside the statement's 13,050 interest line. The arithmetic holds and the value is marked computed, but it is an assumption. Also budget_final is null though the Debt service budget 108,050 is printed (applies to detail[47])."},
-    {"severity": "warning", "path": "detail[38]", "page": 10, "extracted": {"split": "26,314 principal + 1,649 interest", "budget_final": null}, "on_page": "Debt service 27,963, budget 27,963 (p10); Street Fund column principal 26,314 / interest 1,649 (p4)", "issue": "The split comes from the same fund's column on p4, so it is defensible, but the printed budget 27,963 was dropped (budget_final null on detail[38] and detail[39])."},
-    {"severity": "warning", "path": "detail[14].detail_category", "page": 17, "extracted": "professional/contract services", "on_page": "Police: Contractual and professional services 56,084; no personal services", "issue": "A police department with no staff and one contract line is likely a sheriff contract, which would be 'law enforcement contract'."},
-    {"severity": "warning", "path": "balance_sheet.assets[1].category", "page": 1, "extracted": "cash and investments", "on_page": "Cash and cash equivalents - restricted 147,681", "issue": "There is a 'restricted assets' category for this; the choice is a judgment call."},
-    {"severity": "warning", "path": "ending_cash", "page": 5, "extracted": 748493, "on_page": "Fund balances - ending 748,493; governmental cash 677,140 + restricted 115,046 = 792,186 less due to other funds 57,388 (p3)", "issue": "The values are total fund balances, not cash. Beginning 827,980 includes due from other funds 350,965. They roll forward correctly and the notes say so, but the field is labelled cash."}
+    {"severity": "error", "path": "receipts[8].category", "page": 7,
+     "extracted": "charges for services/fees", "on_page": "Charges for services 483,676 = Water 205,917 + Sewer 111,386 + Trash 113,381 + Apartment 52,992",
+     "issue": "Proprietary charges are utility fund sales (430,684, 89%) plus apartment rent 52,992; the specific categories Utility Charges / Rentals fit (detail already uses Utility Charges for Water/Sewer/Trash). Should be Utility Charges (split by column like the expense lines, or dominant category with review)"},
+    {"severity": "warning", "path": "detail[77].category", "page": 16,
+     "extracted": "charges for services/fees", "on_page": "Apartments Fund Charges for services 52,992",
+     "issue": "Apartment rent: Rentals is now its own receipt category (user 2026-10-28); detail_category tenant rent"},
+    {"severity": "warning", "path": "receipts[4].category", "page": 2,
+     "extracted": "charges for services/fees", "on_page": "Charges for services 23,409 (Statement of Activities: general government 12,235, culture and recreation 11,174)",
+     "issue": "Line mixes general government fees with culture/recreation (likely pool/park) fees; Recreation Fees may fit part; kept as charges for services without a review note"},
+    {"severity": "warning", "path": "detail[14].detail_category", "page": 17,
+     "extracted": "professional/contract services", "on_page": "Police - Contractual and professional services 56,084",
+     "issue": "Village police spending that is entirely contractual is likely a sheriff contract (law enforcement contract)"},
+    {"severity": "warning", "path": "balance_sheet.assets[2].category", "page": 1,
+     "extracted": "Cash and Cash Equivalents", "on_page": "Cash and cash equivalents - restricted 115,046 / 32,635",
+     "issue": "Restricted cash could be category restricted assets; judgment call"}
   ]
 }

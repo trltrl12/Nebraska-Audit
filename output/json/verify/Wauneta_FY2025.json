@@ -1,15 +1,27 @@
 {
   "stem": "Wauneta_FY2025",
-  "values_checked": 166,
+  "values_checked": 190,
   "issues": [
     {"severity": "warning", "path": "decision_needed", "page": 5,
      "extracted": {"transfers_out": 221568}, "on_page": "Transfer to Care Center (100,000) in the Sales Tax Fund column; Statement of Activities p3 shows Interfund transfers (100,000) in the Total primary government column and +100,000 in the Component Unit column",
-     "issue": "one-sided transfer: 100,000 leaves the primary government to the Wauneta Care and Therapy Center (a component unit that books it as 'Village support' revenue), so it is recorded as a transfer out with no matching transfer in; a person should decide whether it stays a transfer or is spending (payment to another entity). The extraction has no decision_needed entry"},
+     "issue": "One-sided transfer: 100,000 leaves the primary government for the Wauneta Care and Therapy Center (a component unit), so it is recorded as a transfer out with no matching transfer in. A person should decide whether it stays a transfer or counts as spending (a payment to another entity). The extraction has no decision_needed entry for it."},
     {"severity": "warning", "path": "detail[73].detail_category", "page": 11,
      "extracted": "construction/infrastructure", "on_page": "Capital outlay 6,500 (Street Fund)",
-     "issue": "object not shown on the page; construction/infrastructure is a guess with no review flag (the General Fund capital outlay lines carry a review note for the same reason)"},
+     "issue": "The page doesn't show the object, so construction/infrastructure is a guess with no review flag (the General Fund capital outlay lines carry a review note for the same reason)."},
     {"severity": "warning", "path": "missing", "page": 13,
-     "extracted": null, "on_page": "report p49 (source PDF p53) not trimmed: trimmed p12 = report p48 (Sales Tax budget schedule), p13 = report p50 (nonmajor combining revenues statement)",
-     "issue": "skipped page is probably the nonmajor combining balance sheet (no revenue/expenditure lines), but this can't be confirmed from the trimmed PDF; all printed totals tie without it"}
+     "extracted": null, "on_page": "report p49 not trimmed: trimmed p12 = report p48 (Sales Tax budget schedule), p13 = report p50 (nonmajor combining revenues statement)",
+     "issue": "The skipped page is probably the nonmajor combining balance sheet (no revenue/expenditure lines), but this can't be confirmed from the trimmed PDF. All printed totals tie without it."},
+    {"severity": "warning", "path": "disbursements[7].category", "page": 7,
+     "extracted": "Employee Benefits and Payroll Taxes", "on_page": "Salaries, taxes, and benefits 271,026",
+     "issue": "This combined line is mostly salaries, so Salaries and Wages is the dominant cost type. The same label in governmental detail (p14-15) is recorded as salaries and wages, so the categories are inconsistent."},
+    {"severity": "warning", "path": "receipts[11].category", "page": 7,
+     "extracted": "charges for services/fees", "on_page": "Sales 947,861 (Electric/Water/Sewer operating revenues)",
+     "issue": "Utility fund sales fall under Utility Charges per the 2026-10-28 rule. user_rules.py only recategorizes lines that carry a fund name, so this receipt will not be fixed automatically."},
+    {"severity": "warning", "path": "receipts[5].category", "page": 5,
+     "extracted": "charges for services/fees", "on_page": "Rental and fees 3,625 (all Community Building, p15)",
+     "issue": "This is community building rental, which fits the Rentals category better (detail[3] already uses detail_category rentals)."},
+    {"severity": "warning", "path": "receipts[6].category", "page": 5,
+     "extracted": "charges for services/fees", "on_page": "Charges for services 11,954 = Cemetery 6,981 + Park 4,973 (p14-15)",
+     "issue": "The breakdown is printed in the departments schedule. Cemetery Fees is more than half (58%), so by the 'more than half' rule the line could take Cemetery Fees (or be split into Cemetery Fees and Recreation Fees)."}
   ]
 }

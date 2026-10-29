@@ -1,21 +1,18 @@
 {
   "stem": "CO75-11032025-July_1_2024_through_June_30_2025_Audit_Report_and_Management_Letter",
-  "values_checked": 113,
+  "values_checked": 112,
   "issues": [
-    {"severity": "warning", "path": "receipts[3].category", "page": 4,
-     "extracted": "other taxes", "on_page": "Taxes: Other 74,181",
-     "issue": "Combining statement (p13-15) shows by fund where this comes from: Visitor Promotion 3,868 + Visitor Improvement 3,868 (lodging tax funds), 911 Emergency Mgmt 4,594 + 911 Wireless 41,354 (911 surcharges), General 17,181, others small. The printed line has no type breakdown, so 'other taxes' is defensible, but part of it is probably lodging tax."},
+    {"severity": "warning", "path": "detail[0].source_page", "page": 5,
+     "extracted": 5, "on_page": "p5 prints only Taxes 2,443,212; the parts 2,320,265 / 105,766 / 17,181 are printed in the p4 General Fund column",
+     "issue": "Split tax lines detail[0..2] cite p5, but their amounts appear only on p4 (split_from names p4); a page-text check against p5 will not find them"},
+    {"severity": "warning", "path": "detail[44].source_page", "page": 8,
+     "extracted": 8, "on_page": "p8 prints only Taxes 72,574; the parts 72,227 / 347 are in the p4 Ambulance Replacement Fund column",
+     "issue": "Split tax lines detail[44..45] cite p8, but their amounts appear only on p4"},
     {"severity": "warning", "path": "detail[26].category", "page": 5,
-     "extracted": "streets/highways", "on_page": "Public Works - Noxious Weed Control 32,142",
-     "issue": "Category rules list noxious weed control under natural resources/conservation. The report prints it under the Public Works heading, so this is a judgment call."},
-    {"severity": "warning", "path": "detail[27].category", "page": 5,
-     "extracted": "streets/highways", "on_page": "Public Works - Noxious Weed Chemical 8,307",
-     "issue": "Same as Noxious Weed Control: natural resources/conservation under the category rules."},
+     "extracted": "streets/highways", "on_page": "Noxious Weed Control 32,142 and Noxious Weed Chemical 8,307 (under Public Works)",
+     "issue": "The extractor rules put noxious weed control under natural resources/conservation; kept as streets/highways to tie to the statement's Public Works column (detail[26] and detail[27])"},
     {"severity": "warning", "path": "detail[33].detail_category", "page": 7,
-     "extracted": "highway allocation", "on_page": "Road Fund Intergovernmental 902,533",
-     "issue": "Extractor assumption: the page does not say the Road Fund intergovernmental receipts are highway allocation (they could include pro-rate/federal or other aid)."},
-    {"severity": "warning", "path": "detail[57].category", "page": 15,
-     "extracted": "health/welfare", "on_page": "Health and Sanitation 297,466 (Hospital Maintenance Fund)",
-     "issue": "This is all Hospital Maintenance Fund spending (p15), so hospital/health care could apply. Same judgment call for disbursements[3]."}
+     "extracted": "highway allocation", "on_page": "Intergovernmental 902,533 (Road Fund)",
+     "issue": "Highway allocation is assumed, not printed; the Road Fund intergovernmental line has no breakdown (marked review)"}
   ]
 }

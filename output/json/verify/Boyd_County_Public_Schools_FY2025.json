@@ -1,38 +1,9 @@
 {
   "stem": "Boyd_County_Public_Schools_FY2025",
-  "values_checked": 155,
+  "values_checked": 260,
   "issues": [
-    {
-      "severity": "warning",
-      "path": "receipts[10].category",
-      "page": 4,
-      "extracted": "other",
-      "on_page": "Other 38,853 (GF 38,557 = 5300 Sale of property 31,936 + 5301 Insurance adjustments 1,004 + 5690 Other nonrevenue 5,617, p10; Special Building PPD sales tax 296, p18)",
-      "issue": "[fixed: now sale of assets with review] The report prints the breakdown of this mixed line, and sale of property is 82% of it. Under the mixed-line rule it should be 'sale of assets' with a review note naming the mix, not 'other'."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[4].category",
-      "page": 4,
-      "extracted": "other",
-      "on_page": "Other local receipts 74,042 (GF 60,491 = tuition 8,634 + fees 2,950 + contributions and donations 40,000 + other local 8,907, p9; School Nutrition other receipts 13,551, p17)",
-      "issue": "Mixed line with a printed breakdown. Donations (40,000, 54%) is the largest part, so 'donations/contributions' plus review would follow the mixed-line rule. 'Other' is defensible because 18% is unspecified."
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[1].category",
-      "page": 4,
-      "extracted": "support services",
-      "on_page": "Student support services 695,351 (GF 320,614 + Other Governmental Funds 374,737 activities spending)",
-      "issue": "Activities Fund spending (374,737, 54%) is the larger part of this line, so the dominant function would be 'student activities'. The label says support services and the extractor flagged it for review."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[68]",
-      "page": 8,
-      "extracted": -150000,
-      "on_page": "Reclassifications column: Student transportation (150,000), Transfers (150,000); GF column student transportation 499,141 = 2710 426,831 + 2730 72,310",
-      "issue": "Assumption: the 150,000 transfer to the Depreciation Fund is taken to sit inside the GF student transportation lines, recorded as a contra expenditure (with detail[81] as the other financing line). This is consistent with p8 and p14 and correctly marked computed/split_from/review, but it is the extractor's reading of the reclassification."
-    }
+    {"severity": "warning", "path": "detail[91].category", "page": 17,
+     "extracted": "charges for services/fees", "on_page": "School Nutrition Fund Sales 123,681",
+     "issue": "Under the user's 2026-10-28 rule, lunch/meal sales are category School Lunch Sales; the matching receipts[8] line already uses it. The detail line still has charges for services/fees."}
   ]
 }

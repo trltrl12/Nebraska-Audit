@@ -1,30 +1,22 @@
 {
   "stem": "Merna_FY2025",
-  "values_checked": 65,
+  "values_checked": 87,
   "issues": [
     {
       "severity": "error",
-      "path": "detail[3].category",
-      "page": 9,
-      "extracted": "other / miscellaneous revenue",
-      "on_page": "Other local receipts (governmental portion 76,485 = charges for services 64,804 + interest 3,879 + contributions 2,039 + miscellaneous 5,763 per p5)",
-      "issue": "[fixed] charges for services are 85% of this portion; rule says a broad line whose components are more than half one category takes that category: should be charges for services/fees / other charges for services (with review naming the mix), not other"
+      "path": "receipts[7].category",
+      "page": 7,
+      "extracted": "charges for services/fees",
+      "on_page": "Sales 147,225 (Water and Sewer enterprise funds, operating revenues)",
+      "issue": "utility fund sales belong in receipt category Utility Charges (user rule 2026-10-28); the same lines in detail[17]/detail[18] already use Utility Charges, so the report is inconsistent"
     },
     {
       "severity": "warning",
-      "path": "detail[3].split_from",
-      "page": 9,
-      "extracted": "Other local receipts 225,953 (p9)",
-      "on_page": "Other local receipts 225,953 (single all-funds line; p9 prints no governmental/business-type split)",
-      "issue": "split by fund type uses p5 and p7 statement lines rather than a breakdown printed for this line; arithmetic ties exactly (76,485 + 149,468 = 225,953) and the fund-type rule requires separating them, but it is a split the budget page itself does not print"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[4].detail_category",
-      "page": 9,
-      "extracted": "other charges for services",
-      "on_page": "business-type portion = Water sales 109,034 + Sewer sales 38,191 (p7)",
-      "issue": "utility sales; other utility charges (or water/sewer charges) fits better than other charges for services"
+      "path": "disbursements[4].original_label",
+      "page": 5,
+      "extracted": "Capital outlay",
+      "on_page": "Capital outlay 66,204",
+      "issue": "user rule: capital outlay lines are relabelled 'Capital Outlay: <function>' (printed text in printed_label); not applied here, nor on disbursements[11] (14,467, p7) or detail[15], detail[16], detail[28] (user_rules.py may re-apply)"
     },
     {
       "severity": "warning",
@@ -36,11 +28,11 @@
     },
     {
       "severity": "warning",
-      "path": "beginning_cash",
-      "page": 5,
-      "extracted": 47076,
-      "on_page": "Fund balances - September 30, 2024: 47,076",
-      "issue": "beginning cash taken from fund balance (no prior-year cash printed); reasonable under modified cash with no liabilities, marked computed"
+      "path": "disbursements[5].category",
+      "page": 7,
+      "extracted": "Salaries and Wages",
+      "on_page": "Personnel and benefits 21,121",
+      "issue": "line combines salaries and benefits; Salaries and Wages is the dominant-category choice but the split is not shown"
     }
   ]
 }

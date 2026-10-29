@@ -1,21 +1,10 @@
 {
   "stem": "Arlington_Public_Schools_FY2025",
-  "values_checked": 270,
+  "values_checked": 196,
   "issues": [
-    {"severity": "warning", "path": "disbursements[1]", "page": 3,
-     "extracted": "Student support services (General Fund column) 579,853 + disbursements[2] (Other Governmental Funds column) 495,426 as student activities", "on_page": "Student support services 1,075,279 (General 579,853, Other 495,426)",
-     "issue": "split by the fund columns printed on p3 (adds to 1,075,279; marked split_from/computed); the 495,426 matches Activities Fund Supplies (p19). Labels have a column suffix added; category for the activities part is a judgment call"},
-    {"severity": "warning", "path": "disbursements[10]", "page": 3,
-     "extracted": "principal 1,210,000 + disbursements[11] interest/other costs 59,608", "on_page": "Debt service 1,269,608",
-     "issue": "split taken from the Bond (p16), Special Building (p17) and QCPU (p18) schedules rather than p3; arithmetic confirmed (500,000 + 365,000 + 345,000 = 1,210,000; 49,109 + 8,288 + 1,811 + 200 + 200 = 59,608; fund parts 549,309 + 373,288 + 347,011 = 1,269,608 on p8); marked split_from/computed"},
-    {"severity": "warning", "path": "detail[8].detail_category", "page": 9,
-     "extracted": "county/other local governments", "on_page": "2110 County fines and license fees 51,222",
-     "issue": "label says fines and license fees (county-collected fines passed to schools); fines and forfeitures is arguably the better fit"},
-    {"severity": "warning", "path": "detail[89]", "page": 12,
-     "extracted": "contra -50,000 in State and federal programs group (+ detail[91] other financing -50,000)", "on_page": "p6 Reclassifications: Instruction +248,613, State programs (10,799), Other state categorical (7,637), Federal programs (280,177); total (150,000); p7 Depreciation transfer 150,000",
-     "issue": "amount confirmed (298,613 - 248,613 = 50,000; with the 100,000 Student transportation reclass = 150,000). But p6 shows only a net, so the 50,000 could be in the Instruction lines (1100-1291) as easily as in the 3535/3551/6200-6998 group; function is instruction either way. The -100,000 Student transportation contra (detail[88]/[90]) is confirmed: p6 Student transportation 309,042 = 2710 299,198 + 2712 6,744 + 2713 3,100"},
-    {"severity": "warning", "path": "detail[119]", "page": 17,
-     "extracted": "label 'Interest and penalties on taxes' 433 categorized other taxes; detail[120] label 'Public power district sales tax' 1,375 categorized motor vehicle tax; detail[121] label 'Motor vehicle taxes' 206 categorized property tax", "on_page": "p17 labels as extracted; p8 Special Building column: public power district sales tax 433, motor vehicle taxes 1,375, interest and penalties 206",
-     "issue": "p17 row labels look misprinted against p8; amounts and labels are as printed and categories follow p8 (review flags present). Label/category mismatch is intentional but should be reviewed"}
+    {"severity": "warning", "path": "detail[119].category", "page": 17,
+     "extracted": "Public Power District Sales Tax (433), motor vehicle tax (1,375, detail[120]), Penalties and Interest on Taxes (206, detail[121])",
+     "on_page": "p17 prints 'Interest and penalties on taxes' 433, 'Public power district sales tax' 1,375, 'Motor vehicle taxes' 206; p8 combining schedule shows 433 as public power, 1,375 as motor vehicle, 206 as interest and penalties",
+     "issue": "Special Building Fund rows on p17 appear mislabelled in the report; the extractor kept the p17 labels but took categories from p8 (recorded in report_discrepancies). Defensible, but label and category disagree on these three lines; confirm."}
   ]
 }

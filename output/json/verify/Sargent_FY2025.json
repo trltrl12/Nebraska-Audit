@@ -1,30 +1,30 @@
 {
   "stem": "Sargent_FY2025",
-  "values_checked": 71,
+  "values_checked": 182,
   "issues": [
-    {
-      "severity": "warning",
-      "path": "receipts[10].category",
-      "page": 7,
-      "extracted": "licenses and permits",
-      "on_page": "Fees, Permits and Licenses 1,146 (General Fund; Total p8)",
-      "issue": "[fixed 2026-10-21: review note added naming the fees/permits/licenses mix] The label mixes fees with permits and licenses. The rules say a mixed line gets its dominant category plus a review note, and this line has no review note. The amount is correct."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[0].category",
-      "page": 19,
-      "extracted": "other (detail[0]-[4], fund 'Governmental funds (combined)')",
-      "on_page": "Schedule of Expenditures by fund column (pp19-20): General 171,065, Street 225,071, Culture and Recreation 69,867, Airport 118,921, Community Development 9,485, Community Center 6,179, Medical Center 7,892, Keno 0",
-      "issue": "Only the Total column (p20) was recorded, so the object lines carry function 'other', even though the fund columns give the function split (7 funds have activity). This follows the more-than-6-funds rule, but the rule names the fund 'Nonmajor funds (combined)'. Amounts and the total 608,480 tie."
-    },
-    {
-      "severity": "warning",
-      "path": "balance_sheet.scope",
-      "page": 6,
-      "extracted": "governmental funds balance sheet only",
-      "on_page": "Proprietary Statement of Net Position pp11-12: total assets 3,454,025, total liabilities 723,244 (bonds and notes 60,000 current + 555,000 long-term), net position 2,730,781",
-      "issue": "[fixed 2026-10-21: proprietary Statement of Net Position (pp11-12) lines added as business-type balance_sheet lines; scope and computed totals updated, balance ties] The re-trim added the proprietary Statement of Net Position, but the balance sheet still covers only the governmental funds. Business-type cash (1,020,401), receivables, capital assets and the 615,000 of bonds are not captured. The government-wide p1 prints net position only, so the choice can be defended, but it leaves out the utility assets and debt."
-    }
+    {"severity": "error", "path": "missing", "page": 19,
+     "extracted": "detail expenditure lines are the statement's function totals per fund (detail_category 'not itemized', pp9-10)",
+     "on_page": "Schedule of Expenditures - Modified Cash Basis - Governmental Funds, per fund column (pp19-20): General Fund Personal Services 59,440, Contracted Services 21,164, Materials and Supplies 1,037, Public Safety 63,900, Other Operating Expenses 25,524 (=171,065); Street 56,839 / 115,432 / 20,900 / 0 / 31,900 (=225,071); Culture and Recreation 45,192 / 3,791 / 1,215 / 0 / 19,669 (=69,867); Airport 0 / 99,669 / 454 / 0 / 18,798 (=118,921); Community Development Other Operating 9,485; Community Center Materials 1,769, Other 4,410 (=6,179); Medical Center Contracted 88, Other 7,804 (=7,892)",
+     "issue": "The report prints a per-fund object schedule whose fund columns tie to the statement's fund totals. It is not a combined all-funds schedule, so the per-fund rule keeps it fund by fund. None of its lines are in detail; the object breakdown is lost."},
+    {"severity": "error", "path": "receipts[18].category", "page": 13,
+     "extracted": "charges for services/fees", "on_page": "Charges for Services (Electric/Water/Sewer/Sanitation utility funds) 1,305,609",
+     "issue": "Utility fund charges fall under the user's Utility Charges receipt category (2026-10-28). The same line's detail items already use Utility Charges, so this is inconsistent."},
+    {"severity": "warning", "path": "receipts[15].category", "page": 8,
+     "extracted": "charges for services/fees", "on_page": "Farm Income 31,800 (Airport Fund)",
+     "issue": "Category is inconsistent with detail[30] (detail_category rentals). Airport farm income is probably farm lease rent, which would be Rentals. Use the same category in both."},
+    {"severity": "warning", "path": "balance_sheet", "page": 1,
+     "extracted": "governmental funds balance sheet Total (p6) + proprietary Statement of Net Position (pp11-12)",
+     "on_page": "Statement of Net Position p1: governmental net position 2,981,904 (incl. Net Investment in Capital Assets 1,803,293, Restricted 567,572, Unrestricted 611,039) vs fund balances 843,768",
+     "issue": "The user's cash-basis rule keeps the Statement of Net Position when government-wide figures include capital assets. Here that statement prints only net position lines, so the extractor used fund balances instead. Governmental capital assets of 1,803,293 are therefore not in the balance sheet. A judgment call worth confirming."},
+    {"severity": "warning", "path": "balance_sheet.assets[3].category", "page": 11,
+     "extracted": "Other Assets", "on_page": "Due From Other Funds 7,500",
+     "issue": "An interfund receivable fits Internal Balances better. Its offset is liabilities[0], Due to Other Funds 7,500, categorised as other liabilities."},
+    {"severity": "warning", "path": "disbursements[4].category", "page": 10,
+     "extracted": "other", "on_page": "Airport 118,921",
+     "issue": "There is no airport function category, so it is in other (category_decision Airport). Confirm this is acceptable; it is about 20% of governmental spending."},
+    {"severity": "warning", "path": "notes", "page": null,
+     "extracted": "notes describe budget-schedule business-type detail lines and a -170,500 contra line; text after 'Read pages 1-20 of 20'",
+     "on_page": "20-page PDF; all pages present",
+     "issue": "The notes are stale: the budget-schedule business-type lines and contra line they describe are no longer in detail. They also don't end with 'Read pages 1-20 of 20', because the user_rules sentence was appended after it. The page count (20) is correct."}
   ]
 }

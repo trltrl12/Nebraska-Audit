@@ -1,94 +1,18 @@
 {
   "stem": "Bertrand_Public_Schools_FY2025",
-  "values_checked": 343,
+  "values_checked": 340,
   "issues": [
-    {
-      "severity": "warning",
-      "path": "receipts[11].category",
-      "page": 5,
-      "extracted": "intergovernmental/state aid",
-      "on_page": "County receipts 16,537.33 (= 2110 County fines and license fees 16,067.33 + 2210 Educational service unit receipts 470.00, p8)",
-      "issue": "97% of this line is code 2110, which the rules class as fines and forfeitures, and detail[9] already uses that category. The statement line could be fines and forfeitures (dominant component) or split using p8. Judgment call; disclosed in notes."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[10].category",
-      "page": 5,
-      "extracted": "charges for services/fees",
-      "on_page": "Other local receipts 448,108.46",
-      "issue": "This is a mixed line: activity receipts 219,689.93, coop tuition 130,523.21, lunch sales 85,718.45, pre-school tuition 3,500, local license fees 789.76, corporate grants 4,500 and misc 3,387.11. Charges for services is dominant and the line is marked review. The arithmetic holds: 8,789.76 + 1,935.49 + 437,383.21 = 448,108.46."
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[14]",
-      "page": 5,
-      "extracted": "Other student support split 242,408.55 (activities) / 254,584.29 (school nutrition)",
-      "on_page": "Other student support 496,992.84 (Other Governmental Funds column only; no split printed on p4/p5)",
-      "issue": "The split comes from the fund schedule totals (p12, p13), which add up exactly: 242,408.55 + 254,584.29 = 496,992.84. Cooperative spending sits in the instruction lines (90,436.75 + 127,927.26 = 218,364.01) and Bond/QCPUF in Debt service, so the split is very likely right. But Exh D itself doesn't print it. The same applies to disbursements[15]."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[178]",
-      "page": 24,
-      "extracted": "Activities contra -45,000 revenue (p4, computed) and detail[179] +45,000 other financing",
-      "on_page": "Exh O Transfers: Activity Fund 45,000.00 (p24); Exh D Other Governmental Funds Transfers 212,840.80 (p4)",
-      "issue": "The amount is right. The newly trimmed p24 now prints the 45,000 General-to-Activity transfer directly, which confirms the derivation 212,840.80 - 80,000 - 87,840.80 = 45,000. The lines still cite p4 as computed. Citing p24 would be stronger. The review note's claim that the account holding the 45,000 is unknown still stands, because Exh I (p12) doesn't show it."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[36].computed",
-      "page": 5,
-      "extracted": "-(45,203.38 + 42,637.42) per reclassification column (p5)",
-      "on_page": "Reclassifications: Regular instruction (45,203.38); Special education school age (42,637.42)",
-      "issue": "The amounts are correct (-45,203.38 and -42,637.42). But both contra lines carry the formula for the combined -87,840.80 instead of their own single figure. This is a cosmetic description error; detail[37].computed has the same problem."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[236].category",
-      "page": 17,
-      "extracted": "instruction (Cooperative fund detail[236]-[241], 218,364.01)",
-      "on_page": "Exh D Other Governmental Funds: Regular instruction 90,436.75 + Support services SPED school age 127,927.26 (p4)",
-      "issue": "Exh D puts 127,927.26 of the Cooperative fund's spending under support services. The object lines can't be split by function, so all of it is booked as instruction, and the detail function split doesn't tie to the statement. Judgment call."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[172].detail_category",
-      "page": 12,
-      "extracted": "student activity receipts (Activities receipts 288,004.13)",
-      "on_page": "Exh D Contributions and donations 23,314.20 (Other Governmental Funds, p4)",
-      "issue": "Exh D shows 23,314.20 of the Activities fund's receipts as contributions and donations. The per-account schedule can't separate them, so detail revenue has no donations line for this fund. Disclosed in notes."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[17]",
-      "page": 6,
-      "extracted": "Non-revenue receipts split includes Depreciation fund other non-revenue receipts 4,932.10",
-      "on_page": "Exh E/F (p6-7) put 4,932.10 on the Other local receipts row (13,721.86); Exh D (p4) and Exh H (p11) treat it as non-revenue (13,266.92)",
-      "issue": "The report classifies this amount inconsistently across exhibits. The extractor follows Exh D, which matches the total column it used. The same applies to detail[167]."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[48].detail_category",
-      "page": 18,
-      "extracted": "miscellaneous expenditure (no review flag)",
-      "on_page": "Other Expenses 18,924.07",
-      "issue": "[fixed 2026-10-21: county receipts to fines and forfeitures; Other Expenses lines flagged review] Ten Exh O 'Other Expenses' lines are recorded as miscellaneous expenditure without the review flag the rules require: detail[48], [54], [60], [101], [107], [114], [122], [127], [132], [149], about 46,776 in total. Board of Education Other Expenses 14,134.75 (detail[101]) may be dues/fees. Nothing on the page defines them, so the category itself is defensible."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[83].detail_category",
-      "page": 19,
-      "extracted": "professional/contract services",
-      "on_page": "Other Purchased Services 45,327.22 (Occupational Therapy - SPED School Age)",
-      "issue": "Every Exh O 'Other Purchased Services' line is booked as professional/contract services. In the school chart of accounts this object also covers insurance, communication, travel and tuition. Fiscal Services 11,351.84 (detail[119]) and Operation of Buildings 30,460.00 (detail[125]) may be insurance. Judgment call."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[186].fund_type",
-      "page": 13,
-      "extracted": "governmental (School Nutrition fund)",
-      "on_page": "School Nutrition fund reported within Other Governmental Funds (p3-p4)",
-      "issue": "The extractor rules list school nutrition as an example of a business-type fund. Here the report presents it as a governmental (special revenue) fund inside the Total Governmental Funds column, so keeping it governmental matches the statement and its totals. Noted for consistency with other reports."
-    }
+    {"severity": "error", "path": "detail[188].category", "page": 13,
+     "extracted": "reimbursements/refunds", "on_page": "Sales - non-reimbursable 6,092.05 (School Nutrition Fund cash receipts)",
+     "issue": "these are meal/a-la-carte sales (not reimbursable by the federal program), not a reimbursement or refund; the category should be School Lunch Sales (its detail_category is already school lunch sales)"},
+    {"severity": "warning", "path": "receipts[10].category", "page": 4,
+     "extracted": "charges for services/fees", "on_page": "Other local receipts 448,108.46 = Activities receipts 219,689.93 (288,004.13 less 45,000 transfer and 23,314.20 contributions) + school lunch sales 85,718.45 (p13) + Cooperative tuition from other districts 130,523.21 (p17) + General 8,789.76 (pre-school tuition 3,500, local license fees 789.76, categorical grants 4,500) + miscellaneous local receipts 3,387.11 (Bond 516.13, SB 1,935.49, QCPUF 935.49)",
+     "issue": "none of the components is a genuine charge for services under the user's rules. The dominant one is Extracurricular Receipts (about 49%); tuition (134,023.21) and School Lunch Sales also have their own categories. A split from the fund schedules is possible"},
+    {"severity": "warning", "path": "receipts[0]", "page": 4,
+     "extracted": 3658323.43, "on_page": "Property 3,658,323.43 includes penalties and interest on taxes 1,653.41 (Bond 251.54 p14, Special Building 987.70 p15, QCPUF 414.17 p16)",
+     "issue": "the user's rule says Penalties and Interest on Taxes is never inside property tax, and the fund schedules print the breakdown. The extractor rule keeps a combined statement line as property tax, so this is left for the user to decide"},
+    {"severity": "warning", "path": "disbursements[14]", "page": 4,
+     "extracted": "Other student support split 242,408.55 (student activities) + 254,584.29 (food service)", "on_page": "Other student support 496,992.84 (Other Governmental Funds column, p4)",
+     "issue": "Exhibit D does not print this split. It is inferred from the Activities (p12) and School Nutrition (p13) fund totals, which add up exactly; marked split_from and noted in notes as inferred"}
   ]
 }

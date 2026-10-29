@@ -1,5 +1,15 @@
 {
   "stem": "Lewiston_Consolidated_Schools_FY2025",
-  "values_checked": 133,
-  "issues": []
+  "values_checked": 128,
+  "issues": [
+    {"severity": "error", "path": "detail[61].category", "page": 14,
+     "extracted": "charges for services/fees", "on_page": "Daily sales 18,964 (School Nutrition Fund)",
+     "issue": "School lunch sales are their own receipt category (School Lunch Sales, user 2026-10-28); the statement line for the same money (receipts[7]) already uses School Lunch Sales"},
+    {"severity": "warning", "path": "disbursements[1].category", "page": 3,
+     "extracted": "support services / Pupils", "on_page": "Student support services 339,927 (GF 237,243 + Other Governmental 102,684)",
+     "issue": "102,684 of this statement line is Activities Fund spending (student activity spending per p13); the line is kept whole as printed, but most of the nonmajor part is student activities rather than pupil support"},
+    {"severity": "warning", "path": "notes", "page": 5,
+     "extracted": "Balance sheet from the net position section of the Statement of Activities and Net Position (p2)", "on_page": "balance_sheet lines cite p5 (governmental funds statement of assets, liabilities and fund balances)",
+     "issue": "notes contradict themselves on the balance-sheet source; the JSON values match p5 (and the p2 totals); the 'Read pages 1-17 of 17' statement is correct (17 pages) but is not at the end of notes"}
+  ]
 }

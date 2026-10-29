@@ -1,70 +1,39 @@
 {
   "stem": "Beatrice_FY2025",
-  "values_checked": 530,
+  "values_checked": 360,
   "issues": [
-    {
-      "severity": "warning",
-      "path": "detail[44].category",
-      "page": 16,
-      "extracted": "other",
-      "on_page": "Opiods Settlement 21,009",
-      "issue": "settlement proceeds are identified on the page; the same report's 'Reimbursements and settlements' line (detail[61]) is reimbursements/refunds, so this could be reimbursements/refunds rather than other"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[147..152].category",
-      "page": 21,
-      "extracted": "streets/highways",
-      "on_page": "C-1 Capital Outlay (Buildings 0, Improvements other than buildings 2,722,523, Machinery and equipment 99,566) and Debt Service (Principal 4,759, Interest 272, Bond issuance expense 40,933)",
-      "issue": "Exhibit 4 (p6) reports the Streets Fund's capital outlay 2,822,089 and debt service separately from highways and streets 1,585,971, and the other funds' identical labels (E-3, G-4) use capital outlay / debt service principal / debt service interest; the Streets lines are filed under the function instead, so the function split won't tie to the statement"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[125].category",
-      "page": 19,
-      "extracted": "other",
-      "on_page": "Debt Service - Bond issuance costs 15,275",
-      "issue": "debt fee filed as airport 'other'; rules put bond issuance costs under debt service interest (Exhibit 4 does include it in Airport operations 595,168, so it's defensible). Also detail[122] Airport 'Buildings' (capital outlay, 0) is 'other' while detail[123] Improvements is 'capital outlay': inconsistent"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[24].detail_category",
-      "page": 15,
-      "extracted": "other state aid",
-      "on_page": "Victim assistance grants 67,199",
-      "issue": "grantor not stated; victim assistance grants are often federal (VOCA) money passed through the state"
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[9].category",
-      "page": 6,
-      "extracted": "other",
-      "on_page": "MFO payments - other entities 296,574",
-      "issue": "paid out of the Public Safety Capital Improvements Fund (G-3, p32; detail[182]), so public safety might fit better than other"
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[8].amount",
-      "page": 6,
-      "extracted": 632131,
-      "on_page": 632131,
-      "issue": "the printed report doesn't add across: Exhibit 4's Interest row is 591,292 + 24,411 + 16,427 = 632,130 but the Total prints 632,131, and Miscellaneous (receipts[9]) is 189,686 + 121,135 + 467,061 = 777,882 but the Total prints 777,881. The two $1 rounding offsets cancel in Total Revenues 23,586,304, and neither is in report_discrepancies"
-    },
-    {
-      "severity": "warning",
-      "path": "balance_sheet.liabilities[9].category",
-      "page": 2,
-      "extracted": "accrued liabilities",
-      "on_page": "Noncurrent Liabilities - Compensated absences 1,242,754",
-      "issue": "noncurrent compensated absences; the rules give accrued liabilities as compensated absences due soon, so other liabilities may fit better"
-    },
-    {
-      "severity": "warning",
-      "path": "ending_investments",
-      "page": 4,
-      "extracted": null,
-      "on_page": "Investments 2,480,534; Cash on deposit - county treasurer 168,939 (Exhibit 3 Total)",
-      "issue": "[fixed 2026-10-21: ending_investments 2,480,534 (p4) recorded] ending_cash is only cash and cash equivalents 15,612,590. The GAAP rule calls for cash and cash equivalents/investments, and the separately printed investments 2,480,534 are not recorded anywhere (only mentioned in notes)"
-    }
+    {"severity": "error", "path": "detail[148].category", "page": 21,
+     "extracted": "streets/highways", "on_page": "C-1 Capital Outlay: Improvements other than buildings 2,722,523",
+     "issue": "This line is printed under the Streets schedule's Capital Outlay heading. The user's capital outlay rule (2026-10-26) puts every capital outlay line, including one inside a function, in category capital outlay, labelled 'Capital Outlay: <function>'. The same applies to detail[149] Machinery and equipment 99,566 and detail[147] Buildings 0. As recorded, 2,822,089 of capital outlay is counted as streets spending."},
+    {"severity": "error", "path": "detail[62].category", "page": 16,
+     "extracted": "charges for services/fees", "on_page": "Lease income - BASWA 75,276",
+     "issue": "Lease income is rental income, so under the user's 2026-10-28 rule the category should be Rentals. The line's own detail_category already says rentals."},
+    {"severity": "error", "path": "receipts[14].category", "page": 9,
+     "extracted": "charges for services/fees", "on_page": "Enterprise funds Charges for services 29,767,427 (Electric, Water, Water Pollution Control, BASWA, Sanitation)",
+     "issue": "These are utility fund sales and charges. The user's 2026-10-28 rule puts utility fund sales/charges/collections, including garbage/refuse, in Utility Charges, not charges for services/fees."},
+    {"severity": "error", "path": "receipts[19].category", "page": 9,
+     "extracted": "charges for services/fees", "on_page": "Lease revenue and interest on leases 134,639",
+     "issue": "This is lease (rental) revenue, so under the user's 2026-10-28 rule the category should be Rentals. The line also includes interest on leases, so it needs a review note for the mix."},
+    {"severity": "warning", "path": "detail[46].category", "page": 16,
+     "extracted": "charges for services/fees", "on_page": "Land use agreements 30,079 / Auditorium use fee 59,068 / Farm income 17,392",
+     "issue": "detail_category is rentals but category is charges for services/fees. If these are rents, the receipt category should be Rentals (also detail[47] and detail[53])."},
+    {"severity": "warning", "path": "detail[52].category", "page": 16,
+     "extracted": "charges for services/fees", "on_page": "Camping receipts 117,032",
+     "issue": "detail_category is recreation/pool/park fees, which corresponds to the Recreation Fees receipt category. The other water park lines use Recreation Fees, but this line uses charges for services/fees."},
+    {"severity": "warning", "path": "receipts[7]", "page": 6,
+     "extracted": "Intergovernmental remainder 8,403,780 as intergovernmental/state aid", "on_page": "Intergovernmental 8,411,742; B-3 (p15) prints Motor vehicle tax 308,350 inside General Fund intergovernmental; fund schedules print federal grants 3,556,377",
+     "issue": "Pro-Rate motor vehicle was split out using the B-3 breakdown, but Motor vehicle tax 308,350 from the same breakdown was left in state aid. Motor vehicle tax has its own category. About 42% of the line is federal grants. Splitting is inconsistent."},
+    {"severity": "warning", "path": "receipts[5]", "page": 6,
+     "extracted": "Occupation Tax 581,491 as occupation/franchise tax", "on_page": "B-3 (p15): Utilities 422,888, Beer and liquor 23,165, Lodging occupation tax 132,485, Miscellaneous 2,953",
+     "issue": "Lodging tax 132,485 (23%) is inside this line. The report prints the breakdown, and the property tax line was split on the same basis, but this one was not."},
+    {"severity": "warning", "path": "detail[125].category", "page": 19,
+     "extracted": "other", "on_page": "Airport Debt Service: Bond issuance costs 15,275",
+     "issue": "Bond issuance costs normally go to Debt Service (interest/fees), as the Streets bond issuance expense does (detail[152]). The category_decision gives 'Debt Services / Miscellaneous' but the category is other."},
+    {"severity": "warning", "path": "detail[178].category", "page": 30,
+     "extracted": "Interest Income", "on_page": "Interest on assessments 417",
+     "issue": "The rules put interest on special assessments in special assessments. Exhibit 4 does count it in the Interest line, so this is a judgment call."},
+    {"severity": "warning", "path": "disbursements[12].category", "page": 9,
+     "extracted": "Professional/Contract Services", "on_page": "Customer accounting expenses 594,963",
+     "issue": "Customer accounting (billing) is a utility function rather than a contracted-services cost type. Category utilities may fit better."}
   ]
 }

@@ -1,10 +1,9 @@
 {
   "stem": "Ashton_FY2025",
-  "values_checked": 40,
+  "values_checked": 44,
   "issues": [
-    {"severity": "warning", "path": "receipts[11].category", "page": 1, "extracted": "charges for services/fees", "on_page": "18 Local Receipts: Other, Water Fund 45,967.55 / Sewer Fund 72,250.88", "issue": "page does not say these are user charges; assumption is reasonable for water/sewer funds (applies to receipts[11] and receipts[12]). Already marked review"},
-    {"severity": "warning", "path": "disbursements[5].fund_type", "page": 2, "extracted": "business-type", "on_page": "39 Debt Service 9,052.00 (Water) / 27,888.00 (Sewer), printed under the 'Governmental' heading", "issue": "assigned by fund column (Water/Sewer) rather than the form's heading; defensible. Combined principal and interest recorded as debt service principal (already marked review)"},
-    {"severity": "warning", "path": "balance_sheet.total_liabilities", "page": 3, "extracted": 0, "on_page": "Schedule of Outstanding Debt TOTAL 647,728.72 (GO Bonds 110,034.87; Sewer Rev Bonds 537,693.85)", "issue": "outstanding debt is listed on p3 but not in liabilities; acceptable for a cash statement and disclosed in the computed note"},
-    {"severity": "warning", "path": "ending_cash", "page": 1, "extracted": 241621.09, "on_page": "General Fund line 24/28 241,621.09 (net cash 144,533.83 + investments 97,087.26)", "issue": "governmental cash includes investments while ending_investments is null; line 26 General Fund figure has a faint leading mark but is positive (column total 229,112.41 confirms)"}
+    {"severity": "error", "path": "receipts[11].category", "page": 1, "extracted": "charges for services/fees", "on_page": "18 Local Receipts: Other, WATER FUND column 45,967.55", "issue": "Recorded as assumed water charges, but utility fund sales/charges have their own receipt category Utility Charges (user rule 2026-10-28, out of charges for services)"},
+    {"severity": "error", "path": "receipts[12].category", "page": 1, "extracted": "charges for services/fees", "on_page": "18 Local Receipts: Other, SEWER FUND column 72,250.88", "issue": "Recorded as assumed sewer charges (the Sewer Fund also pays Solid Waste 23,297.08, so this likely includes garbage fees); category should be Utility Charges under the user rule 2026-10-28"},
+    {"severity": "warning", "path": "receipts[11].original_label", "page": 1, "extracted": "Local Receipts: Other (Water Fund)", "on_page": "Local Receipts: Other", "issue": "Printed label is only 'Other'; treating it as utility charges is the extractor's assumption (review note present). Same applies to receipts[12]."}
   ]
 }

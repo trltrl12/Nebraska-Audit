@@ -1,54 +1,9 @@
 {
   "stem": "Holdrege_Public_Schools_FY2025",
-  "values_checked": 190,
+  "values_checked": 140,
   "issues": [
-    {
-      "severity": "error",
-      "path": "receipts[17].category",
-      "page": 8,
-      "extracted": "other",
-      "on_page": "Other income 18,935 = Fees 17,522 + Textbook fees/fines 394 + Other local receipts 799 + Other non-revenue receipts 220 (GF schedule p8)",
-      "issue": "[fixed] The report shows what Other income is: 92.5% is Fees (1740). A specific category fits, so this should be 'charges for services/fees' with a review note naming the mix, not 'other'."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[14].category",
-      "page": 8,
-      "extracted": "intergovernmental/state aid / county/other local governments",
-      "on_page": "2110 County fines and license fees 42,311",
-      "issue": "This is inconsistent with receipts[8] 'Fines and licenses' (fines and forfeitures), which is mostly this same 42,311. County fines and license fees are fine money passed through to schools, so 'fines and forfeitures' is arguably better. Either way, the two places should use the same category."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[15].detail_category",
-      "page": 8,
-      "extracted": "other state aid",
-      "on_page": "3110 State aid 1,723,255",
-      "issue": "Account 3110 State aid is equalization aid (TEEOSA). 'state school aid (TEEOSA)' looks like the better fit."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[34].original_label",
-      "page": 8,
-      "extracted": "Special education (support)",
-      "on_page": "Special education",
-      "issue": "The extractor added '(support)' to the label. The page prints 'Special education' under Support services (code 2141-2183). The amount 534,719 is correct."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[57].detail_category",
-      "page": 10,
-      "extracted": "not itemized",
-      "on_page": "2515 Building improvements 680,376",
-      "issue": "'Building improvements' names an object, not a function total, so 'construction/infrastructure' or 'land and buildings' may fit better than 'not itemized'."
-    },
-    {
-      "severity": "warning",
-      "path": "detail",
-      "page": 11,
-      "extracted": "no Bond Fund schedule",
-      "on_page": "trimmed p10 = report p44, trimmed p11 = report p46",
-      "issue": "Report page 45 is not in the trimmed PDF. It is most likely the Bond Fund budgetary comparison schedule. Bond Fund receipts 996,711 and disbursements 1,030,243 are on the governmental statement (p5), so the basic statement totals are complete, but the Bond Fund detail is missing."
-    }
+    {"severity": "warning", "path": "detail[34].original_label", "page": 8,
+     "extracted": "Special education (support)", "on_page": "Special education",
+     "issue": "label printed as 'Special education' under Support services (2141-2183); extractor added '(support)' to distinguish it from 1200 Special education"}
   ]
 }

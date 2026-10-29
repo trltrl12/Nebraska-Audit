@@ -1,118 +1,21 @@
 {
   "stem": "Sutherland_Public_Schools_FY2025",
-  "values_checked": 175,
+  "values_checked": 160,
   "issues": [
-    {
-      "severity": "error",
-      "path": "missing",
-      "page": 9,
-      "extracted": null,
-      "on_page": "Nutrition Fund operating receipts: Lunch sales 97,870",
-      "issue": "[fixed] no business-type receipt lines in receipts[]; reported_totals.business-type.receipts 173,891 and the business_type roll-forward assume them"
-    },
-    {
-      "severity": "error",
-      "path": "missing",
-      "page": 9,
-      "extracted": null,
-      "on_page": "Nutrition Fund operating receipts: State sources 506",
-      "issue": "[fixed] business-type receipt line missing"
-    },
-    {
-      "severity": "error",
-      "path": "missing",
-      "page": 9,
-      "extracted": null,
-      "on_page": "Nutrition Fund operating receipts: Federal sources 62,897",
-      "issue": "[fixed] business-type receipt line missing"
-    },
-    {
-      "severity": "error",
-      "path": "missing",
-      "page": 9,
-      "extracted": null,
-      "on_page": "Nutrition Fund operating receipts: USDA commodities 12,513",
-      "issue": "[fixed] business-type receipt line missing"
-    },
-    {
-      "severity": "error",
-      "path": "missing",
-      "page": 9,
-      "extracted": null,
-      "on_page": "Nutrition Fund nonoperating receipts: Interest income 105",
-      "issue": "[fixed] business-type receipt line missing (it is inside the computed reported total 173,891)"
-    },
-    {
-      "severity": "error",
-      "path": "missing",
-      "page": 9,
-      "extracted": null,
-      "on_page": "Nutrition Fund operating disbursements: Salaries and employee benefits 97,744",
-      "issue": "[fixed] no business-type disbursement lines in disbursements[]; reported total 207,746 is recorded but its lines are not"
-    },
-    {
-      "severity": "error",
-      "path": "missing",
-      "page": 9,
-      "extracted": null,
-      "on_page": "Nutrition Fund operating disbursements: Food and food service supplies 107,123",
-      "issue": "[fixed] business-type disbursement line missing"
-    },
-    {
-      "severity": "error",
-      "path": "missing",
-      "page": 9,
-      "extracted": null,
-      "on_page": "Nutrition Fund operating disbursements: Other 2,879",
-      "issue": "[fixed] business-type disbursement line missing"
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[8].category",
-      "page": 7,
-      "extracted": "fines and forfeitures",
-      "on_page": "Fines and licenses 32,597 = 2110 Fines and licenses 31,708 + 2130 Other county receipts 889 (p10)",
-      "issue": "the statement line mixes fines with 889 of other county receipts; the dominant category is right, but there is no review note naming the mix"
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[13]",
-      "page": 7,
-      "extracted": "Other (rental of facilities) 9,198 / Other 17,885",
-      "on_page": "Other 27,083 (General 17,083 = budget lines 1910 Rental 9,198 + 1990 Other 7,885; Depreciation 10,000)",
-      "issue": "split of the statement's Other line using the General Fund budget schedule; the breakdown is printed for the General Fund part, so it is defensible, but the label 'Other (rental of facilities)' is not printed"
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[10].category",
-      "page": 7,
-      "extracted": "instruction",
-      "on_page": "State programs 15,903; Federal programs 167,173",
-      "issue": "the Statement of Activities (p2) shows State programs and Federal programs as separate functions, not under Instruction; the instruction category is a judgment call (also disbursements[11])"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[42].amount",
-      "page": 11,
-      "extracted": 159567,
-      "on_page": "2900 Capital outlay 159,567; statement p6 splits Depreciation Fund spending into Building and grounds 101,956 + Capital outlay 57,611",
-      "issue": "all 159,567 is recorded as capital outlay, but the statement puts 101,956 under Building and grounds (support services)"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[37].original_label",
-      "page": 10,
-      "extracted": "8000 Transfers (65,000 to Nutrition Fund + 20,000 to Activity Fund)",
-      "on_page": "8000 Transfers 85,000",
-      "issue": "the extractor added an explanation to the printed label; amount -85,000 is correct and ties to p6 (Transfer to other funds 65,000 + Extracurricular activities 20,000)"
-    },
-    {
-      "severity": "warning",
-      "path": "reported_totals.business-type.receipts",
-      "page": 2,
-      "extracted": 173891,
-      "on_page": "Statement of Activities: Nutrition operating grants 75,915 (fund statement 506+62,897+12,513 = 75,916); interest 106 (fund statement 105); General administration 207,418 (fund statement 207,419)",
-      "issue": "the report itself has 1-dollar rounding differences between the Statement of Activities and the fund statements; the JSON uses the fund statements"
-    }
+    {"severity": "error", "path": "receipts[13].category", "page": 7,
+     "extracted": "charges for services/fees", "on_page": "Other (General Fund 1910 Rental of facilities 9,198, p10)",
+     "issue": "rental income has its own receipt category Rentals (user rule 2026-10-28); the matching detail line (1910 Rental of facilities) is already category Rentals, so receipts and detail disagree"},
+    {"severity": "warning", "path": "receipts[13]", "page": 7,
+     "extracted": "Other (rental of facilities) 9,198 / Other 17,885", "on_page": "Other 27,083 (Total Governmental Funds)",
+     "issue": "the split depends on the General Fund schedule (p10), where 1910 Rental 9,198 + 1990 Other 7,885 = General Fund Other 17,083 on p7. It is defensible, but the statement doesn't print the split, and the label 'Other (rental of facilities)' isn't printed anywhere"},
+    {"severity": "warning", "path": "detail[12].detail_category", "page": 10,
+     "extracted": "other state aid", "on_page": "3110 State aid 500,485",
+     "issue": "school code 3110 State aid is TEEOSA; the detail category 'state school aid (TEEOSA)' fits better and is the one used for the same code in other school reports"},
+    {"severity": "warning", "path": "detail[30].original_label", "page": 12,
+     "extracted": "1100 Property", "on_page": "1100 Property",
+     "issue": "the user's label rule renames 'Property' to 'Property Tax' (with the printed text in printed_label), but it was not applied to this coded label. user_rules.py may not match it because of the code prefix"},
+    {"severity": "warning", "path": "report_discrepancies", "page": 3,
+     "extracted": null, "on_page": "Statement of Activities business-type interest income 106 and net expense (33,961) vs proprietary statement interest 105 and (33,960) (p9)",
+     "issue": "$1 rounding difference printed in the report itself; not recorded in report_discrepancies (no JSON value affected)"}
   ]
 }

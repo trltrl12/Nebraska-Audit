@@ -2,20 +2,14 @@
   "stem": "Crete_Public_Schools_FY2025",
   "values_checked": 455,
   "issues": [
-    {"severity": "warning", "path": "disbursements[4].category", "page": 4,
-     "extracted": "support services 2,504,082", "on_page": "Pupils: General 1,789,012 + Other Governmental Funds 715,070",
-     "issue": "715,070 of the printed Pupils line is Activity Fund spending (p19 Total activity account 715,070), which is student activities rather than support services. The line is kept as printed; consider flagging it for review."},
-    {"severity": "warning", "path": "disbursements[18].category", "page": 4,
-     "extracted": "capital outlay 2,710,580", "on_page": "Capital outlay 2,710,580 (Special Building 2,637,288 includes 5000 Loan repayment 395,625, p22)",
-     "issue": "Debt repayment of 395,625 is printed inside Capital outlay. It is kept as printed with a review note, but it is debt service (principal and interest combined)."},
-    {"severity": "warning", "path": "detail[368].category", "page": 22,
-     "extracted": "capital outlay", "on_page": "5000 Loan repayment 395,625",
-     "issue": "The function is capital outlay but detail_category is 'debt principal and interest (combined)'. The function for a loan repayment would be 'debt service (principal and interest combined)'. The extractor followed the p4 statement's classification."},
-    {"severity": "warning", "path": "detail[169].detail_category", "page": 18,
-     "extracted": "student activity receipts (charges for services/fees)", "on_page": "Donations 3,000 (activity account)",
-     "issue": "The activity account is labelled 'Donations'. The category rules give donations their own category (donations/contributions), but the school activity-fund rule uses student activity receipts. Judgment call."},
-    {"severity": "warning", "path": "receipts[15].category", "page": 4,
-     "extracted": "intergovernmental/state aid 21,790,630", "on_page": "State sources (includes Nameplate capacity tax 1,425 p10 + 180 p21 + 151 p22 = 1,756)",
-     "issue": "State sources holds 1,756 of nameplate capacity tax (other taxes) that wasn't split out (immaterial; the notes mention it)."}
+    {"severity": "error", "path": "detail[169].category", "page": 18,
+     "extracted": "charges for services/fees", "on_page": "Activity account 'Donations' receipts 3,000",
+     "issue": "A line labelled Donations always takes donations/contributions (detail_category too). It is recorded as charges for services with detail_category student activity receipts."},
+    {"severity": "warning", "path": "receipts[7].category", "page": 4,
+     "extracted": "Extracurricular Receipts", "on_page": "Community service activities 4,194 (General Fund; also detail[6])",
+     "issue": "This General Fund community services revenue is not a student activity fund receipt. Extracurricular Receipts looks like an automatic match on 'activities'. Charges for services fits better (detail[6] already uses other charges for services)."},
+    {"severity": "warning", "path": "detail[137].category", "page": 17,
+     "extracted": "Extracurricular Receipts", "on_page": "Activity account 'Preschool' 11,890; 'Dual credit' 4,941 (detail[170], p18)",
+     "issue": "These activity-fund accounts may be preschool/dual-credit tuition, which the user's rules put under Tuition Received. It is a judgment call: the accounts sit in the activity fund."}
   ]
 }

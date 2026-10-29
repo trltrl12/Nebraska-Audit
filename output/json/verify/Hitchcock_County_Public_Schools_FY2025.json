@@ -1,46 +1,15 @@
 {
   "stem": "Hitchcock_County_Public_Schools_FY2025",
-  "values_checked": 174,
+  "values_checked": 186,
   "issues": [
-    {
-      "severity": "error",
-      "path": "receipts[14].category",
-      "page": 4,
-      "extracted": "other",
-      "on_page": "Other 44,064 (GF 43,767 = 5300 Proceeds of disposal of property 100 + 5301 Insurance adjustments 30,855 + 5690 Other non-revenue receipts 2,268 on p9; Employee Benefit 5690 10,544 p12; Nutrition 1990 297 p13)",
-      "issue": "[fixed] The report itself breaks this line down, and insurance adjustments (30,855, 70%) are the dominant part. Under the mixed-line rule the line takes the dominant category (reimbursements/refunds, consistent with detail[27]) with a review naming the mix, not 'other'."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[77].original_label",
-      "page": 10,
-      "extracted": "8000 Transfers (to Nutrition 50,000 and Activities 50,000 per p13, p16)",
-      "on_page": "8000 Transfers",
-      "issue": "The extractor added an explanation to the printed label. The amount (-100,000) and budget (575,000) are correct."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[76]",
-      "page": 7,
-      "extracted": -25000,
-      "on_page": "Reclassifications column: Instruction 209,935; State categorical programs (38,408); Federal programs (196,527); Transfers in (225,000)",
-      "issue": "This contra line and the -25,000 other-financing line in detail[79] are the net of three printed reclassification figures (25,000 is not printed as one figure on the expenditure side). The arithmetic holds, it matches the Employee Benefit transfer in (p12), and GF detail ties to the p5 instruction total 3,096,460. Still, the extractor inferred where the transfer sits; it is marked split_from and review."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[114].category",
-      "page": 15,
-      "extracted": "support services",
-      "on_page": "2610 Operation of buildings 16,591 (Special Building Fund); p5 statement puts all Special Building spending (58,164) under Capital outlay",
-      "issue": "The function doesn't tie to the governmental statement: there, Special Building Fund spending is all capital outlay. 'Support services' fits the label but conflicts with how the report classifies it."
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[1].category",
-      "page": 5,
-      "extracted": "support services",
-      "on_page": "Student support services 676,907 (General 448,614 + Other Governmental Funds 228,293 = Activities Fund 2900)",
-      "issue": "The line includes 228,293 of Activities Fund spending, which the detail classes as student activities. The extractor kept it as printed, with review; this is a judgment call."
-    }
+    {"severity": "error", "path": "detail[89].category", "page": 13,
+     "extracted": "reimbursements/refunds", "on_page": "1620 Daily sales - non-reimburseable program 9,547",
+     "issue": "This line is meal sales (a la carte / non-reimbursable meals), not a reimbursement or refund. Its detail_category is already 'school lunch sales', and the statement counts it in Nutrition program receipts 85,982 (69,605 + 6,830 + 9,547), which is category School Lunch Sales. The category should be School Lunch Sales"},
+    {"severity": "warning", "path": "receipts[7].category", "page": 4,
+     "extracted": "Extracurricular Receipts", "on_page": "Revenue from Community Services Activities 55,261 (code 1800, General Fund)",
+     "issue": "Code 1800 is community services revenue, not student activity receipts. The matching detail line detail[7] uses detail_category 'other charges for services' while its category is Extracurricular Receipts, so the same line is categorized two ways. Charges for services/fees may fit better"},
+    {"severity": "warning", "path": "disbursements[2].detail_category", "page": 5,
+     "extracted": "Pupils", "on_page": "Student support services 448,614 (General Fund column)",
+     "issue": "The p7 combining schedule shows that 141,310 of this General Fund column amount (31%) is Depreciation Fund 90,663 and Employee Benefit Fund 50,647, both '2900 Other Support Services'. Only 307,304 is pupil support (2100 codes), so detail_category 'Pupils' overstates it"}
   ]
 }

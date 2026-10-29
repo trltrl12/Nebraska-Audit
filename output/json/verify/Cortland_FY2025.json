@@ -1,18 +1,24 @@
 {
   "stem": "Cortland_FY2025",
-  "values_checked": 86,
+  "values_checked": 104,
   "issues": [
-    {"severity": "warning", "path": "disbursements[5].category", "page": 6,
-     "extracted": "debt service principal", "on_page": "Debt service 21,798 (Debt Service fund)",
-     "issue": "Whole line recorded as principal. Statement of Activities (p2) shows governmental Debt service expense 14,873; minus Street fund interest 13,075 that implies about 1,798 interest and 20,000 principal in this line. The split isn't printed, so it can't be split, but the line is not all principal"},
+    {"severity": "error", "path": "missing", "page": 12,
+     "extracted": null, "on_page": "Schedule 5 Governmental Funds: Special Revenue receipts 140,666 (budget 132,132), disbursements 142,976 (budget 210,000)",
+     "issue": "Schedule 5 lines for the Street (Special Revenue) fund are not in detail, although the same schedule's Utility funds lines are. No other schedule covers this fund. The 140,666 includes transfers in 19,449 and the 142,976 includes principal 25,000 and interest 13,075 (p5/p6)"},
+    {"severity": "error", "path": "missing", "page": 12,
+     "extracted": null, "on_page": "Schedule 5 Debt Service receipts 21,981 (budget 26,717), disbursements 21,798 (budget 27,600)",
+     "issue": "Schedule 5 lines for the Debt Service fund are not in detail. No other schedule covers this fund"},
+    {"severity": "warning", "path": "missing", "page": 12,
+     "extracted": null, "on_page": "Schedule 5 Governmental Funds: General receipts 429,372, disbursements 304,550",
+     "issue": "Not in detail. The line combines General + Fire + nonmajor funds (incl. transfers), so recording it would overlap the Schedule 4 nonmajor lines. The omission is defensible but isn't explained in notes"},
     {"severity": "warning", "path": "receipts[10].category", "page": 8,
      "extracted": "sales tax", "on_page": "Sales tax 3,573 (Water Fund operating receipts)",
-     "issue": "This is sales tax collected from water customers (a pass-through, not the village's own sales tax revenue); counting it as 'sales tax' revenue may overstate local sales tax"},
-    {"severity": "warning", "path": "detail[1].detail_category", "page": 10,
-     "extracted": "other charges for services", "on_page": "Ball Park Summer Rec - Materials & services sold 5,458",
-     "issue": "Ball park/summer recreation receipts; 'recreation/pool/park fees' fits better"},
-    {"severity": "warning", "path": "missing", "page": 12,
-     "extracted": null, "on_page": "Schedule 5 budget comparison: Receipts General 429,372 (budget 412,536), Special Revenue 140,666 (132,132), Utility funds 311,845 (260,000), Debt Service 21,981 (26,717); Disbursements General 304,550 (1,144,000), Special revenue 142,976 (210,000), Utility funds 304,907 (340,000), Debt Service 21,798 (27,600)",
-     "issue": "Budget-to-actual schedule left out of detail. It prints only fund-level totals on a budgetary basis (they include transfers/financing), so leaving it out is defensible, but these budget figures appear nowhere in the JSON"}
+     "issue": "This is sales tax the utility collects on water sales, not the village's local sales tax revenue. Putting it in 'sales tax' mixes it with local option sales tax"},
+    {"severity": "warning", "path": "detail[24].category", "page": 12,
+     "extracted": "charges for services/fees", "on_page": "Proprietary Funds: Utility funds 311,845 (286,424 operating = utility collections 282,846 + sales tax 3,573 + misc 5)",
+     "issue": "Its category doesn't match the statement's Utility Charges for the same receipts. Utility Charges is dominant"},
+    {"severity": "warning", "path": "detail[26].category", "page": 12,
+     "extracted": "utilities", "on_page": "Proprietary Funds: Utility funds disbursements 304,907",
+     "issue": "This budgetary cash line includes principal 70,000, interest 19,535 and capital purchases 38,438 (Exhibit I p9), all recorded under utilities, not itemized"}
   ]
 }

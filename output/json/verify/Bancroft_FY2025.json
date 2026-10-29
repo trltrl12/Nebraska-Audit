@@ -1,18 +1,21 @@
 {
   "stem": "Bancroft_FY2025",
-  "values_checked": 66,
+  "values_checked": 99,
   "issues": [
-    {"severity": "warning", "path": "detail[1].fund_type", "page": 7,
-     "extracted": "governmental", "on_page": "State 380,727 (all funds)",
-     "issue": "the all-funds 'State' line exceeds governmental State Receipts 131,735 by 248,992, so it evidently includes other sources, possibly sales/keno tax and enterprise grants. The report doesn't split it, so the governmental tag and 'other state aid' are a guess (marked review)"},
-    {"severity": "warning", "path": "detail[2].fund_type", "page": 7,
-     "extracted": "governmental", "on_page": "Local 372,876 (all funds)",
-     "issue": "this line must contain the enterprise Charges for Services 348,037 (p6), so most of it is business-type but it is tagged governmental. As a result, governmental detail revenue (861,774) far exceeds governmental receipts (495,996). The page doesn't split it (marked review)"},
-    {"severity": "warning", "path": "receipts[6].category", "page": 4,
-     "extracted": "donations/contributions", "on_page": "Grants & Contributions 8,509 (p2: 'Grants and contributions not restricted to specific program')",
-     "issue": "the source isn't stated; government grants would be intergovernmental/state aid or federal grants"},
+    {"severity": "error", "path": "receipts[8].category", "page": 6,
+     "extracted": "charges for services/fees", "on_page": "Charges for Services 348,037 (Water/Sewer/Sanitation enterprise funds)",
+     "issue": "utility fund charges belong in the user's Utility Charges category (2026-10-28 rule); the matching detail lines already use Utility Charges, so the report is inconsistent"},
+    {"severity": "warning", "path": "receipts[4]", "page": 2,
+     "extracted": "State Receipts 131,735 as intergovernmental/state aid", "on_page": "p2: intergovernmental 44,963 + public works operating grants 81,341 + Motor vehicle fee 5,431 = 131,735",
+     "issue": "the Street Fund's 86,772 equals 81,341 + motor vehicle fee 5,431, so 5,431 is likely motor vehicle tax. It was left unsplit because p4 does not break the line down. This is defensible and already marked review"},
     {"severity": "warning", "path": "receipts[9].category", "page": 6,
-     "extracted": "donations/contributions", "on_page": "Grants 17,500 (Water)",
-     "issue": "a water-fund grant is more likely intergovernmental/state aid or federal grants than a private donation (already marked review)"}
+     "extracted": "donations/contributions", "on_page": "Grants 17,500 (Operating Grants and Contributions, p2)",
+     "issue": "the grant source is not stated; it may be state or federal. Already in decision_needed"},
+    {"severity": "warning", "path": "balance_sheet.equity[4].original_label", "page": 1,
+     "extracted": "Restricted", "on_page": "p1 Business-Type Restricted 218,523; p5 enterprise funds statement shows the same 218,523 as Unrestricted",
+     "issue": "the report classifies business-type net position inconsistently; the extractor followed p1"},
+    {"severity": "warning", "path": "disbursements[4].original_label", "page": 4,
+     "extracted": "Capital Outlay/Projects (also Capital Improvements, enterprise Capital Outlay)", "on_page": "Capital Outlay/Projects",
+     "issue": "the capital outlay lines are not yet relabelled 'Capital Outlay: <function>' under the user's 2026-10-26 rule; user_rules.py is expected to apply this"}
   ]
 }

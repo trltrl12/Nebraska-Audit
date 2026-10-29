@@ -1,21 +1,21 @@
 {
   "stem": "Ralston_FY2025",
-  "values_checked": 132,
+  "values_checked": 150,
   "issues": [
     {"severity": "warning", "path": "other_financing", "page": 4,
-     "extracted": 480752, "on_page": "Insurance recoveries 480,752 (Other Financing Sources)",
-     "issue": "Governmental insurance recoveries recorded as other_financing (as printed under Other Financing Sources), while the business-type 'Insurance recoveries' 526,552 (p6) is a receipt (reimbursements/refunds). The Statement of Activities (p2) counts both as general revenues. Defensible, but the same label is treated two ways."},
-    {"severity": "warning", "path": "disbursements[12].category", "page": 6,
-     "extracted": "general government", "on_page": "General and administrative: Sewer 428,263 + Arena 613,735 = 1,041,998",
-     "issue": "Mixed-fund line. Depreciation and Repairs and maintenance were given the dominant fund's function (Arena, culture/recreation), but this one was not, although Arena is also dominant here. Judgment call (review flag already set)."},
-    {"severity": "warning", "path": "detail[12].detail_category", "page": 8,
-     "extracted": "not itemized", "on_page": "Debt service 47,754 (p4 prints principal 31,988 + interest 15,766)",
-     "issue": "Combined debt service is recorded as debt service principal / not itemized. p4 prints the principal/interest split for this fund, so detail_category 'debt principal' (or a split) could also be argued. Same for detail[20] Street Fund debt service 186,418 (170,000 + 16,418). Amounts are correct."},
-    {"severity": "warning", "path": "balance_sheet.assets[1].category", "page": 1,
-     "extracted": "restricted assets", "on_page": "Cash held with trustee 791,036",
-     "issue": "Cash held with trustee is in the Community Development Fund's fund balance and counts toward governmental ending cash 6,017,638. Category 'cash and investments' is also defensible."},
+     "extracted": 480752, "on_page": "Other Financing Sources (Uses): Insurance recoveries 480,752",
+     "issue": "governmental insurance recoveries kept in other_financing as printed, while the Arena Fund's insurance recoveries 526,552 (p6, nonoperating) are a receipt (reimbursements/refunds). This is defensible because the page prints the governmental line under other financing, but the report is inconsistent and the extractor rules list insurance proceeds under reimbursements/refunds."},
+    {"severity": "warning", "path": "disbursements[14].category", "page": 6,
+     "extracted": "culture/recreation", "on_page": "Depreciation: Sewer 62,296 + Arena 931,300 = 993,596",
+     "issue": "a cost-type line that mixes Sewer (utilities) and Arena, put wholly in culture/recreation (marked review). Under the user's 2026-10-28 cost-type rule for business-type spending this should become category Depreciation."},
+    {"severity": "warning", "path": "disbursements[15].category", "page": 6,
+     "extracted": "culture/recreation", "on_page": "Repairs and maintenance: Sewer 119,876 + Arena 1,240,641 = 1,360,517",
+     "issue": "same as Depreciation: mixed Sewer/Arena line in culture/recreation (marked review). The cost-type rule would make it Repairs and Maintenance."},
+    {"severity": "warning", "path": "detail[22].budget_final", "page": 9,
+     "extracted": null, "on_page": "Street Fund Debt service: final budget 186,418, actual 186,418",
+     "issue": "the combined Debt service line was split into principal 170,000 and interest 16,418 using the p4 Street Fund column (split_from noted, arithmetic correct), so the printed budget 186,418 no longer appears on any detail line."},
     {"severity": "warning", "path": "proprietary", "page": 7,
-     "extracted": null, "on_page": "Statement of Cash Flows - Proprietary Funds: operating (2,395,284), noncapital financing 526,552, capital and related financing 1,142,349, investing 92,479, beginning cash 3,534,723, ending cash 2,900,819",
-     "issue": "Set to null because the entity basis is 'cash'. The enterprise funds are reported on the accrual basis, though, and the printed cash flow statement is not captured anywhere. Values checked and they foot: -2,395,284 + 526,552 + 1,142,349 + 92,479 = -633,904; 3,534,723 - 633,904 = 2,900,819."}
+     "extracted": null, "on_page": "Statement of Cash Flows - Proprietary Funds, Total: operating (2,395,284); noncapital 526,552; capital and related 1,142,349; investing 92,479; beginning cash 3,534,723; ending cash 2,900,819",
+     "issue": "the governmental funds are cash basis but the proprietary funds are on full accrual with a printed cash flow statement. proprietary was left null because basis = cash. This is an assumption: the figures are available on p7."}
   ]
 }

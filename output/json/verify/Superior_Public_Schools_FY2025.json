@@ -1,15 +1,21 @@
 {
   "stem": "Superior_Public_Schools_FY2025",
-  "values_checked": 192,
+  "values_checked": 205,
   "issues": [
-    {"severity": "warning", "path": "receipts[16].category", "page": 3,
-     "extracted": "intergovernmental/state aid", "on_page": "County and ESU sources 252,426",
-     "issue": "Broad group kept as printed with no review flag. It holds General Fund 2110 Fines and license fees 20,941 (p6), which belongs in fines and forfeitures, plus homestead, property tax credit and pro-rate money from the Bond, Special Building and QCPU funds. Intergovernmental is the dominant category, but the rule for broad groups asks for review: 'broad group; detail on p.N'."},
-    {"severity": "warning", "path": "receipts[11].split_from", "page": 6,
-     "extracted": "General Fund 1990 Miscellaneous local receipts 24,004 (p7)", "on_page": "1990 Miscellaneous local receipts 24,004 is on trimmed p6",
-     "issue": "The page cited in split_from is wrong: the line is on p6, not p7. The amount is right."},
-    {"severity": "warning", "path": "detail[86].fund_type", "page": 13,
-     "extracted": "governmental", "on_page": "School Nutrition Fund (shown in Other Governmental Funds column, p3)",
-     "issue": "The extractor rules list school nutrition as a business-type example. Here the report presents it as a governmental fund, so governmental is defensible, but it is an assumption (see notes). The same applies to receipts/disbursements 'Nutrition Program' lines."}
+    {"severity": "warning", "path": "transfers_in", "page": 4,
+     "extracted": null, "on_page": "Interfund transfers in (out): General Fund (133,878), Other Governmental Funds 133,878, Total column blank",
+     "issue": "the top-level transfers_in and transfers_out are null. The Total column nets to zero, so the roll-forward holds, but the 133,878 moved between governmental funds is printed by fund and could be recorded as 133,878 in and out, as other reports do. This is a judgment call"},
+    {"severity": "warning", "path": "detail[?original_label=='General Fund support (as expensed in the General Fund)'].category", "page": 16,
+     "extracted": "other (revenue)", "on_page": "Cooperative Fund: General Fund support (as expensed in the General Fund) 5,504",
+     "issue": "this is General Fund money, and the General Fund also records it as spending. It may be a hidden transfer, so the same 5,504 appears as both GF spending and a Cooperative receipt. The report doesn't eliminate it, and the extractor lists it in decision_needed, so it is a question for a person, not a clear error. Note that the extractor treated the similar 'General Fund support' lines in the Depreciation and Activities funds as other financing (receipts[29] 43,996 includes this 5,504)"},
+    {"severity": "warning", "path": "detail[?original_label=='6000 Federal programs'].category", "page": 8,
+     "extracted": "Federal Programs (and 3500 State categorical programs -> State Categorical Programs)", "on_page": "p3 statement Instruction 4,919,879 = p5 Instruction 4,478,141 + Private and state categorical programs 56,150 + Federal programs 384,218 + Nonprogram 1,369 (less 1 rounding)",
+     "issue": "the statement counts these lines inside Instruction, and the extractor used that reasoning for 9000 Nonprogram (Instruction). Under the program-grouping rule, 3500 and 6000 could also be Instruction. They are labelled state categorical / federal programs, so the current categories are defensible, but detail functions won't tie to the statement's Instruction line"},
+    {"severity": "warning", "path": "detail[?original_label=='1955 Postsecondary receipts'].detail_category", "page": 6,
+     "extracted": "other charges for services", "on_page": "1955 Postsecondary receipts 2,440",
+     "issue": "the category is Tuition Received, but the detail_category is 'other charges for services'. 'tuition and fees' would be consistent"},
+    {"severity": "warning", "path": "notes", "page": 16,
+     "extracted": "... Read pages 1-16 of 16. Re-check 2026-10-28 (attempt 2): ...", "on_page": "16 pages",
+     "issue": "the page count is right (16 of 16) and all pages are covered, but the notes no longer end with 'Read pages 1-16 of 16' because re-check text was appended"}
   ]
 }

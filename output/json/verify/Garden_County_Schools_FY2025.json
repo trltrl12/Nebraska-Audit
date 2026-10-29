@@ -1,16 +1,16 @@
 {
   "stem": "Garden_County_Schools_FY2025",
-  "values_checked": 164,
+  "values_checked": 168,
   "issues": [
     {"severity": "warning", "path": "receipts", "page": 7,
-     "extracted": "Local Sources split into 9 items (carline 15,183, licenses 1,500, donations 116,130, lunch 29,280, activity fees 66,680, etc.)",
+     "extracted": "Local Sources split into 10 items (property 2,146,799, carline 15,183, licenses 1,500, donations 116,130, lunch 29,280, activity receipts 66,680, etc.); State Sources split into 8 items",
      "on_page": "Exhibit D prints only broad groups: Local Sources 2,658,140, County 30,887, State 2,464,977, Federal 698,629, Other 35,543",
-     "issue": "The split uses the per-fund budget schedules (Exhibits F-L), whose Local Sources subtotals do tie to the Exhibit D fund columns, plus Exhibit B for property, PPD, motor vehicle and interest. All the arithmetic checks (items sum to 2,658,140; total 5,888,176). But carline, licenses, donations, lunch sales and activity fees are not printed as Total-column lines anywhere, and the rule allows split_from only when the report prints the breakdown of that line. The alternative is to keep the broad groups with review."},
-    {"severity": "warning", "path": "detail_totals[8].computed", "page": 13,
-     "extracted": "computed: single receipt line; no total line printed", "on_page": "Total Receipts 270",
-     "issue": "Exhibit J prints a Total Receipts line (270), so this total is printed rather than computed. The amount is correct."},
+     "issue": "The split uses the per-fund budget schedules (Exhibits F-L), whose subtotals tie to the Exhibit D fund columns, plus Exhibit B for property, PPD, motor vehicle and interest. The arithmetic holds: Local 2,658,140, County 30,887, State 2,464,977, Federal 698,629 and Other 35,543 all re-add, and the total is 5,888,176. But carline, licenses, donations, lunch sales and activity receipts are not printed as Total-column lines anywhere. They are sums across fund schedules, which is a reasonable reading of 'the report prints the breakdown', but it is still a judgment call."},
     {"severity": "warning", "path": "detail[97].category", "page": 15,
-     "extracted": "capital outlay", "on_page": "2620 Building Improvements 185,464",
-     "issue": "Exhibit D puts all Special Building spending (280,663) under Operation & Maintenance of Plant, and the top-level disbursements follow that (support services). Capital outlay is defensible for building improvements, but it does not match the statement's function."}
+     "extracted": "Building and Grounds", "on_page": "2620 Building Improvements 185,464",
+     "issue": "This matches Exhibit D, which puts all Special Building spending (280,663) under Operation & Maintenance of Plant. Building improvements could also be read as capital outlay, so it is a judgment call."},
+    {"severity": "warning", "path": "other_financing", "page": 7,
+     "extracted": 154026, "on_page": "Sale of Property 234 + Insurance Proceeds 153,792 (Other Financing Sources)",
+     "issue": "This follows the statement's own placement. Note that the General Fund schedule (p8) counts the 234 and 6,952 inside receipts (detail revenue lines), and the receipt rules list insurance proceeds under reimbursements/refunds. The treatment is consistent with the printed statement."}
   ]
 }

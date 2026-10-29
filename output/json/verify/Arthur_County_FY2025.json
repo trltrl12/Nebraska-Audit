@@ -1,30 +1,27 @@
 {
   "stem": "Arthur_County_FY2025",
-  "values_checked": 100,
+  "values_checked": 88,
   "issues": [
-    {
-      "severity": "warning",
-      "path": "detail[4].category",
-      "page": 5,
-      "extracted": "other / miscellaneous revenue",
-      "on_page": "Local 103,944",
-      "issue": "[fixed per checker: now charges for services/fees / other charges for services] Exhibit D (p4, General column) shows what 'Local' is made of: charges for services 62,386, interest 35,813, miscellaneous 4,128, local intergovernmental 1,617. The broad-group rule asks for the best (dominant) category, which is 'charges for services/fees' / 'other charges for services', with a review note. It also conflicts with how the extractor handled the Road Fund 'Local' line (split using the same Exhibit D)."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[27].split_from",
-      "page": 7,
-      "extracted": "Local 4,892 split into charges 4,762 + misc 130",
-      "on_page": "Local 4,892 (Exhibit G prints only the group)",
-      "issue": "Exhibit G prints only the 'Local' group. The split comes from the Road column of Exhibit D (p4); it adds up, but the broad-group rule says not to split groups like 'Local' and to record them with the best category and a review note. Same for detail[28]."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[32..37].budget_final",
-      "page": 9,
-      "extracted": "200 / 23,146 / 17,255 / 1,100",
-      "on_page": "Schedule 2 (p9) has no budget column",
-      "issue": "These budget figures are fund-level budget totals from Schedule 3 on p10, not from the cited p9. They are attached to single lines, which is reasonable only because each fund has one line per section."
-    }
+    {"severity": "error", "path": "detail[4]", "page": 5,
+     "extracted": "Exhibit F 'Local' 103,944 split into charges for services 62,386, interest 35,813, miscellaneous 4,128 and intergovernmental residual 1,617 (detail[4]-detail[7])",
+     "on_page": "Exhibit F prints only the broad group 'Local' 103,944 (budget 67,147)",
+     "issue": "split_from on a broad budget-schedule group that the page does not break down; the 1,617 piece is not printed anywhere (derived as Exhibit D Intergovernmental 2,502 less Exhibit F State 885). Extractor rule: broad groups ('Taxes', 'State', 'Local') are recorded as printed with review 'broad group', not split from another statement."},
+    {"severity": "error", "path": "detail[35].category", "page": 9,
+     "extracted": "charges for services/fees", "on_page": "Register of Deeds P&M - Charges for Services 333",
+     "issue": "register of deeds fees are Fees of Office, a receipt category of its own (user rule 2026-10-28); detail_category already says fees of office"},
+    {"severity": "warning", "path": "detail[0]", "page": 5,
+     "extracted": "Exhibit F 'Taxes' 384,487 split into property tax 350,125 and motor vehicle tax 34,362 (detail[0]-detail[1])",
+     "on_page": "Exhibit F prints only 'Taxes' 384,487 (budget 356,529); Exhibit D General column prints Property Taxes 350,125 and Motor Vehicle Tax 34,362",
+     "issue": "split of a broad budget-schedule group using Exhibit D; the parts are printed for the same fund and add up exactly, but the rules prefer recording broad groups as printed"},
+    {"severity": "warning", "path": "detail[30]", "page": 7,
+     "extracted": "Road Fund 'Local' 4,892 split into charges for services 4,762 and miscellaneous 130 (detail[30]-detail[31])",
+     "on_page": "Exhibit G prints only 'Local' 4,892; Exhibit D Road column prints Charges for Services 4,762 and Miscellaneous 130",
+     "issue": "same broad-group split as above; parts are printed on Exhibit D and tie"},
+    {"severity": "warning", "path": "receipts[5].category", "page": 4,
+     "extracted": "charges for services/fees", "on_page": "Charges for Services 68,502 (Exhibit B: General Government 39,831, Public Safety 2,639, Public Works 4,762, Public Assistance 21,270)",
+     "issue": "county charges for services are largely general-government fees (likely Fees of Office); category kept broad, judgment call"},
+    {"severity": "warning", "path": "detail[22].category", "page": 5,
+     "extracted": "natural resources/conservation", "on_page": "Public Works: Noxious Weed 4,097",
+     "issue": "printed under Public Works and counted in the statement's Public Works line (streets/highways); detail function differs from the statement"}
   ]
 }

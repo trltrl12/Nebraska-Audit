@@ -1,12 +1,18 @@
 {
   "stem": "Roseland_FY2025",
-  "values_checked": 31,
+  "values_checked": 42,
   "issues": [
     {"severity": "warning", "path": "receipts[8].category", "page": 1,
      "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Water 40,024.00, Sewer 22,040.00)",
-     "issue": "The page doesn't say what utility-fund 'Other' receipts are. Treating them as utility charges is likely but is an assumption (already marked review)."},
+     "issue": "Utility-fund 'Other' receipts are assumed to be utility sales. If so, the user's 2026-10-28 rule makes the category Utility Charges. Already marked review."},
+    {"severity": "warning", "path": "disbursements[3].original_label", "page": 3,
+     "extracted": "Other Capital Outlay", "on_page": "Other Capital Outlay - General 28,586.00 + Street 120,818.00 = 149,404.00",
+     "issue": "Not relabelled 'Capital Outlay: <function>' with printed_label (user rule). The line mixes two functions (General Fund and Street Fund), so it could be split by column."},
+    {"severity": "warning", "path": "beginning_investments", "page": 1,
+     "extracted": null, "on_page": "Investments line 2 General Fund 5,000.00 (begin) and line 27 5,000.00 (end)",
+     "issue": "Investments are printed separately, so the rules say to fill beginning_investments/ending_investments (informational). They are left null; the 5,000 is correctly inside cash."},
     {"severity": "warning", "path": "transfers_out", "page": 3,
-     "extracted": 200000, "on_page": "Line 50: Street Fund 200,000.00; p5 transfer schedule: General Fund to Sewer Fund 200,000.00",
-     "issue": "Statement and transfer schedule disagree on which fund sent the money. It is already in report_discrepancies and decision_needed. Either way the money is governmental, so the governmental totals are unaffected."}
+     "extracted": 200000, "on_page": "Line 50 Street Fund 200,000.00; p5 schedule General Fund -> Sewer Fund 200,000.00",
+     "issue": "The statement and the transfer schedule disagree on which fund sent the money. This is already in decision_needed and report_discrepancies. Either way the sender is governmental, so the governmental totals are unaffected."}
   ]
 }

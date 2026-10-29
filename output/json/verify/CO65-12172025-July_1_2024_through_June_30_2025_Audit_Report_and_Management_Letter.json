@@ -1,15 +1,8 @@
 {
   "stem": "CO65-12172025-July_1_2024_through_June_30_2025_Audit_Report_and_Management_Letter",
-  "values_checked": 121,
+  "values_checked": 112,
   "issues": [
-    {"severity": "warning", "path": "receipts[3].category", "page": 4,
-     "extracted": "other taxes", "on_page": "Insurance Tax Allocation 15,260",
-     "issue": "State-distributed insurance premium tax allocation; could arguably be intergovernmental/state aid. Same call made at detail[2] (detail_category 'other local taxes', where 'other state aid' may fit better)."},
-    {"severity": "warning", "path": "detail[39].category", "page": 12,
-     "extracted": "other taxes", "on_page": "Taxes: Other 6,668 (Total Nonmajor Funds)",
-     "issue": "Per-fund columns (p11) show 6,587 of the 6,668 is in the Visitors' Promotion Fund (lodging tax) and 81 in Noxious Weed Control. Kept whole because the Total column is used; it also feeds receipts[5] 'Other' 19,862."},
-    {"severity": "warning", "path": "detail[0].original_label", "page": 4,
-     "extracted": "Taxes (property) / Taxes (motor vehicle) / Taxes (insurance tax allocation) / Taxes (other)", "on_page": "Property / Motor Vehicle / Insurance Tax Allocation / Other (General Fund column)",
-     "issue": "Labels for the General Fund tax split (detail[0]-[3]) are made up, not printed. The split itself is printed on p4 and adds to Taxes 3,503,045 (p5)."}
+    {"severity": "error", "path": "detail[38].category", "page": 12, "extracted": "other taxes / Other / Miscellaneous Taxes", "on_page": "Taxes: E911 Payments 53,465 (Total Nonmajor Funds)", "issue": "The user's decision in config/category_decisions.csv is 'e payments' -> detail_category E911 Payments, category charges for services/fees. receipts[4] (the same 53,465) follows it. This detail line claims category_decision 'user 2026-10-23' but uses other taxes / Other / Miscellaneous Taxes, so the same label is categorized two ways in one report."},
+    {"severity": "warning", "path": "detail[0].original_label", "page": 5, "extracted": "Taxes (property)", "on_page": "Taxes", "issue": "The p5 schedule prints only 'Taxes'. The parentheticals on detail[0]-[3] were added by the extractor. The split amounts are correct (3,217,946 + 256,645 + 15,260 + 13,194 = 3,503,045, p4 General Fund column)."}
   ]
 }

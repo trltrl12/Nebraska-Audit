@@ -1,15 +1,27 @@
 {
   "stem": "Mullen_FY2025",
-  "values_checked": 116,
+  "values_checked": 136,
   "issues": [
-    {"severity": "warning", "path": "receipts[0].category", "page": 4,
-     "extracted": "property tax", "on_page": "County treasurer receipts 82,505",
-     "issue": "Line mixes property tax with state aid and other taxes: p7 shows County treasurer receipts 74,326 + Property tax credit 7,869 + Motor vehicle pro rate 133 + Carline 177 = 82,505, and p8 shows the county collections include motor vehicle taxes 12,574 and homestead 4,438. Property tax is the dominant part, so the category holds, but the line has no review note naming the mix."},
-    {"severity": "warning", "path": "receipts[6].category", "page": 4,
+    {"severity": "error", "path": "receipts[20].category", "page": 6,
+     "extracted": "charges for services/fees", "on_page": "Charges for services 909,485 (Water 172,349 / Sewer 122,060 / Electric 615,076, proprietary funds)",
+     "issue": "Utility fund charges belong in the category Utility Charges (user rule 2026-10-28). The report's own detail lines (detail[36-38]) already use Utility Charges, so the receipts line is inconsistent with them."},
+    {"severity": "warning", "path": "receipts[17].category", "page": 2,
+     "extracted": "charges for services/fees", "on_page": "Charges for services 168,023 (Statement of Activities: Sanitation 159,672, Park Pool 8,351)",
+     "issue": "95% of this governmental line is sanitation (garbage) charges, which fall under Utility Charges per the user rules. The Park Pool part would be Recreation Fees. detail[19] (detail_category 'other charges for services') has the same issue."},
+    {"severity": "warning", "path": "receipts[12].category", "page": 4,
+     "extracted": "intergovernmental/state aid", "on_page": "Grants and contributions 69,548 (capital grants and contributions, general government, p2)",
+     "issue": "The grantor isn't stated, so state aid is an assumption; it could be federal or private (donations/contributions). detail[12] has the same issue."},
+    {"severity": "warning", "path": "receipts[13].category", "page": 4,
      "extracted": "licenses and permits", "on_page": "Licenses and fees 36,667",
-     "issue": "Line mixes licenses and fees (actual 36,667 against a 1,640 budget, p7), so fees may dominate. It has no review note, though the same kind of line is flagged in other reports. detail[8] has the same issue."},
-    {"severity": "warning", "path": "detail[34]", "page": 8,
-     "extracted": "County Treasurer's Fund lines detail[34]-detail[42]", "on_page": "Schedule of County Treasurer's Fund (allocated to General)",
-     "issue": "Possible double counting across schedules. The County Treasurer's Fund belongs to the General Fund (p8 allocates its ending balance to General), and its Property tax credit 7,869, Motor vehicle prorate 133 and Carline 177 (detail[37], detail[36], detail[39]) also appear as separate lines in the p7 all-funds schedule (detail[4], detail[6], detail[7]). The p8 Transfer to Village Treasurer 81,496 is the same money that comes in as County treasurer receipts on p7/p4. The extractor disclosed this in its notes; a person should decide whether p8 stays in detail."}
+     "issue": "The line mixes licenses and fees, and the actual is far above budget (1,640). The dominant part is unclear."},
+    {"severity": "warning", "path": "receipts[18].category", "page": 4,
+     "extracted": "reimbursements/refunds", "on_page": "Payroll taxes and benefits 80,834 (Payroll Fund; p2 lists 'Payroll' under general revenues)",
+     "issue": "The Payroll Fund's receipts are probably charges to the other funds. If so they could be interfund (transfer-like) money that double counts spending. The category is an assumption."},
+    {"severity": "warning", "path": "receipts[7].amount", "page": 8,
+     "extracted": -579, "on_page": "Collection fee 579 (County Treasurer's Fund disbursement)",
+     "issue": "The collection fee is recorded as a negative property tax receipt so the split ties to County treasurer receipts 82,505 (p4). The arithmetic holds (83,084 - 579 = 82,505), but treating a fee as negative revenue is an assumption."},
+    {"severity": "warning", "path": "detail[32].original_label", "page": 4,
+     "extracted": "Capital outlays", "on_page": "Capital outlays 124,839 (General column)",
+     "issue": "Capital outlay lines should be labelled 'Capital Outlay: <function>' (user rule 2026-10-26); the Street line was relabelled but this General Fund line was not. The business-type capital outlay lines (detail[58-60], receipts-level disbursements[12]) are not relabelled either."}
   ]
 }

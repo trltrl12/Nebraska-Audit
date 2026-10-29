@@ -1,14 +1,15 @@
 {
   "stem": "Culbertson_FY2025",
-  "values_checked": 37,
+  "values_checked": 44,
   "issues": [
     {"severity": "warning", "path": "receipts[10].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Water column) 188,026.33", "issue": "printed as 'Other'; utility charges assumed from the Water column (reasonable, but an assumption)"},
+     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Water) 188,026.33",
+     "issue": "Line is printed only as 'Other'; if it is treated as utility charges (as the review note assumes), the user's category for utility fund sales/charges is Utility Charges (user 2026-10-28), not charges for services/fees"},
     {"severity": "warning", "path": "receipts[11].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Sewer column) 93,467.34", "issue": "printed as 'Other'; utility charges assumed from the Sewer column"},
-    {"severity": "warning", "path": "disbursements[7].category", "page": 2,
-     "extracted": "debt service principal", "on_page": "Debt Service 38,528.06 (Sewer column)", "issue": "principal and interest not split on the page; whole line put in principal. Correctly business-type (Sewer column)"},
+     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Sewer) 93,467.34",
+     "issue": "Same as Water: printed 'Other'; if assumed utility charges, category should be Utility Charges"},
     {"severity": "warning", "path": "ending_cash", "page": 1,
-     "extracted": 579225.72, "on_page": "line 24 General 548,714.85 + Street 30,510.87; line 28 General 945,371.34, Water/Sewer blank", "issue": "the ending-balance composition (lines 26-28) puts Water/Sewer cash in the General column, so per-fund line 28 doesn't match line 24; extractor correctly used line 24. Totals agree (974,652.50)"}
+     "extracted": 579225.72, "on_page": "Line 24 General+Street 579,225.72; line 28 General+Street 974,652.50",
+     "issue": "Report's own lines 24 and 28 disagree by fund (recorded in report_discrepancies); line 28 shows all cash incl. utility cash held in the General column. Line 24 used; arithmetic of every figure checked and correct"}
   ]
 }

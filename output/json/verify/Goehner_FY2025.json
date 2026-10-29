@@ -1,21 +1,21 @@
 {
   "stem": "Goehner_FY2025",
-  "values_checked": 34,
+  "values_checked": 52,
   "issues": [
-    {"severity": "warning", "path": "receipts[9]", "page": 2,
-     "extracted": "Local Receipts: Other 473,981.34 (category other, includes TIF 73,489.50)", "on_page": "TIF Fund Local Receipts: Other 73,489.50 (p2)",
-     "issue": "The TIF Fund's 73,489.50 'Local Receipts: Other' is unexplained and may be TIF bond/note proceeds or a developer payment rather than revenue. Only the Fire Fund amount is in decision_needed."},
-    {"severity": "warning", "path": "receipts[9].category", "page": 1,
-     "extracted": "other", "on_page": "Building Permit Fund Local Receipts: Other 171.50",
-     "issue": "The Building Permit Fund part (171.50) is probably permit fees ('licenses and permits'), but it is merged into the 'other' line. Small amount."},
     {"severity": "warning", "path": "receipts[10].category", "page": 1,
      "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Sewer 20,276.63, Water 20,989.29)",
-     "issue": "Assumed to be utility charges because they sit in the utility fund columns. The page only says 'Other' (already marked review)."},
-    {"severity": "warning", "path": "beginning_cash", "page": 1,
-     "extracted": 840582.47, "on_page": "Street 201,732.00; Fire 160,129.00; Building Permit 105,362.00; Sewer 13,405.00; Water (14,042.00)",
-     "issue": "Every beginning balance except the General Fund is a whole-dollar figure, which suggests estimated or plugged amounts. They are recorded as printed and they foot, but a person may want to check them against the prior-year filing."},
-    {"severity": "warning", "path": "notes", "page": 1,
-     "extracted": null, "on_page": "County Treasurer Balance at October 1, 2024 $1,312.99; at September 30, 2025 1,757.34",
-     "issue": "The County Treasurer balances printed below the statement are not mentioned. They are outside the rollforward, so leaving them out is probably right."}
+     "issue": "The extractor assumed these utility-column lines are utility charges. If so, the user's 2026-10-28 category is Utility Charges, not charges for services/fees. The printed label only says 'Other', so this is an assumption either way. It is already marked review."},
+    {"severity": "warning", "path": "disbursements[4].original_label", "page": 3,
+     "extracted": "Other Capital Outlay", "on_page": "line 36 Other Capital Outlay 293,992.50 (Fire Fund); line 35 Capital Improvements 10,000.00 (Street Fund)",
+     "issue": "Capital outlay lines are not relabelled 'Capital Outlay: <function>' (Public Safety for the Fire Fund, Streets/Highways for the Street Fund) with the printed text in printed_label, as the user's capital-outlay rule requires. This also applies to disbursements[3]."},
+    {"severity": "warning", "path": "balance_sheet.assets", "page": 1,
+     "extracted": "not recorded or mentioned in notes", "on_page": "County Treasurer Balance at October 1, 2024 $1,312.99; at September 30, 2025 1,757.34",
+     "issue": "The county treasurer balances printed below Exhibit A are left out of beginning/ending cash and the balance sheet, and the notes don't mention them. They are probably outside the fund balances, but the omission should be noted."},
+    {"severity": "warning", "path": "balance_sheet.equity[0].original_label", "page": 1,
+     "extracted": "Subtotal of Ending Balances (all funds, governmental and business-type)", "on_page": "Subtotal of Ending Balances (Line 26 + 27)",
+     "issue": "The label is not as printed: the extractor's own description replaced the printed text. The same applies to equity[1]."},
+    {"severity": "warning", "path": "receipts[9]", "page": 2,
+     "extracted": "Local Receipts: Other 473,981.34 incl. TIF Fund 73,489.50", "on_page": "TIF Fund Local Receipts: Other 73,489.50 (p2)",
+     "issue": "The TIF fund's 'Other' receipts (73,489.50, alongside TIF property tax 119,761.86) may be developer or private payments (Private Sector Share of Projects) or a TIF-related receipt, but nothing on the page says so. Recording it as other is defensible, and the line is already marked review."}
   ]
 }

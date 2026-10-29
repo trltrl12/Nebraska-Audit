@@ -1,12 +1,18 @@
 {
   "stem": "Scribner_Snyder_Community_School_FY2025",
-  "values_checked": 298,
+  "values_checked": 305,
   "issues": [
-    {"severity": "warning", "path": "receipts[12].category", "page": 17,
-     "extracted": "other (receipt)", "on_page": "5200 Allocation from General Fund 47,956.47",
-     "issue": "The same line appears as a receipt (category other) in receipts[] and as section 'other financing' in detail (detail entry for Schedule D 5200). The rules ask for the same treatment everywhere in a report. The General Fund shows no matching outflow, and decision_needed already asks about it."},
-    {"severity": "warning", "path": "detail[].detail_category", "page": 22,
-     "extracted": "dues, training and travel", "on_page": "Other Items (Schedule M, all programs)",
-     "issue": "Every Schedule M 'Other Items' line (state object 800) is mapped to dues, training and travel. Object 800 also covers miscellaneous items, so this mapping is a judgment call. The 'Other Property Services' -> professional/contract services mapping is likewise a judgment call."}
+    {"severity": "error", "path": "detail[192].category", "page": 19,
+     "extracted": "reimbursements/refunds", "on_page": "1620 Daily Sales - Non-Reimbursable 7,393.70",
+     "issue": "a la carte meal sales, not a reimbursement; its own detail_category is school lunch sales and the statement counts it in 'Sales of Meals' 34,008.46 (receipts[13], School Lunch Sales). Category should be School Lunch Sales"},
+    {"severity": "warning", "path": "receipts[17]", "page": 17,
+     "extracted": "other (Non-Revenue Receipts) 47,956.47", "on_page": "5200 Allocation from General Fund 47,956.47 (Employee Benefit Fund)",
+     "issue": "recorded as revenue here but as 'other financing' in detail[183]; the General Fund shows no matching transfer out, so the money may also be inside General Fund spending (double count). Already in decision_needed; the two treatments should agree once decided"},
+    {"severity": "warning", "path": "detail[180].original_label", "page": 31,
+     "extracted": "Transfer to School Nutrition Fund", "on_page": "School Nutrition Fund (under 8000 Transfers)",
+     "issue": "label reworded, not as printed (detail[181] likewise: printed 'Activity Fund')"},
+    {"severity": "warning", "path": "receipts[6].category", "page": 21,
+     "extracted": "Tuition Received", "on_page": "1743 Summer or Night School Fees 2,270.00 (Student Fee Fund, whose only budgeted spending is 1300-890 Drivers Education)",
+     "issue": "could be Drivers Education Fees rather than tuition; same for detail[219]"}
   ]
 }

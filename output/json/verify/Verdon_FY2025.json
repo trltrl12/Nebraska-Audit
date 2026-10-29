@@ -1,15 +1,18 @@
 {
   "stem": "Verdon_FY2025",
-  "values_checked": 46,
+  "values_checked": 58,
   "issues": [
-    {"severity": "warning", "path": "decision_needed", "page": 1,
-     "extracted": "Local Receipts: Other recorded as other in all five governmental funds (89,262.55 total)", "on_page": "Local Receipts: Other: General 40,601.47, Street 1,336.81, Cemetery 9,470.91, Parks 36,487.11, Library 1,366.25",
-     "issue": "Unexplained 'other' is about 50% of governmental receipts. Parks' 36,487.11 is that fund's only receipt in a year with 81,500 capital and 20,651.52 debt service, so it could be grant or loan money. decision_needed[] has no entry."},
-    {"severity": "warning", "path": "receipts[18].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other 78,727.89 (Enterprise Fund)",
-     "issue": "The printed label is 'Other'. Utility charges is a reasonable assumption for the water/sewer enterprise fund but is not shown on the page (review note present)."},
-    {"severity": "warning", "path": "disbursements[1..4].category", "page": 2,
-     "extracted": "streets/highways, health/welfare, culture/recreation, culture/recreation", "on_page": "General Government (Street 10,505.72, Cemetery 6,253.79, Parks 915.88, Library 1,552.52)",
-     "issue": "The printed function 'General Government' was replaced with each fund's function. This is defensible (review notes present) but differs from the printed row."}
+    {"severity": "warning", "path": "disbursements[5].original_label", "page": 2,
+     "extracted": "Capital Improvements", "on_page": "Line 35 Capital Improvements: Street 38,148.60, Parks 81,500.00, Enterprise 34,000.00",
+     "issue": "user rule relabels every capital outlay line 'Capital Outlay: <function>' (printed text in printed_label); not applied to disbursements[5], [6] and [9]"},
+    {"severity": "warning", "path": "disbursements[1].category", "page": 2,
+     "extracted": "streets/highways", "on_page": "Line 29 General Government, Street Fund 10,505.72",
+     "issue": "row printed as General Government; function taken from the fund column instead (also Cemetery 6,253.79 -> health/welfare, Parks 915.88 and Library 1,552.52 -> culture/recreation); defensible and marked review, but a judgment call"},
+    {"severity": "warning", "path": "receipts[19].category", "page": 1,
+     "extracted": "charges for services/fees", "on_page": "Line 18 Local Receipts: Other, Enterprise Fund 78,727.89",
+     "issue": "unlabelled enterprise (water/sewer) receipts assumed to be utility charges; if so the user's category is Utility Charges, otherwise other; the page does not say"},
+    {"severity": "warning", "path": "receipts[11].category", "page": 1,
+     "extracted": "other", "on_page": "Line 18 Local Receipts: Other, Cemetery Fund 9,470.91",
+     "issue": "cemetery fund local receipts are probably Cemetery Fees (lot sales/burials), but the form gives no breakdown; left in other with review"}
   ]
 }

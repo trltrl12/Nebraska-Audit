@@ -1,15 +1,21 @@
 {
   "stem": "LaVista_FY2025",
-  "values_checked": 141,
+  "values_checked": 212,
   "issues": [
-    {"severity": "warning", "path": "disbursements[4].category", "page": 9,
-     "extracted": "economic development", "on_page": "Community betterment 724,557 (Keno Fund)",
-     "issue": "Keno-funded community betterment could also be culture/recreation; same judgment applies to detail[19] (Keno Fund 'Community betterment' 715,270, p15). Already marked review."},
-    {"severity": "warning", "path": "detail[21].detail_category", "page": 16,
-     "extracted": "county/other local governments", "on_page": "Intergovernmental 274,426 (Police Academy Fund)",
-     "issue": "Source not stated; the Statement of Activities (p2) shows the same 274,426 as Public safety 'Charges for Service', so it may be academy tuition/fees (other charges for services) rather than local government aid."},
-    {"severity": "warning", "path": "balance_sheet.liabilities[4].category", "page": 1,
-     "extracted": "other liabilities", "on_page": "Compensated absences - Payable in more than one year 1,915,865",
-     "issue": "Long-term compensated absences put in other liabilities; defensible, but could be accrued liabilities. Separately, the 700 gap in total liabilities (already in report_discrepancies) matches the General Fund 'Unearned revenue' 700 on p5, which the government-wide statement leaves out of its lines."}
+    {"severity": "warning", "path": "balance_sheet.column", "page": 1,
+     "extracted": "Governmental Activities | Business-type Activities (each line tagged fund_type)",
+     "on_page": "Total column", "issue": "Balance sheet lines are taken per activity column instead of the Total column the rules call for; the tagged lines do add to the printed Total column and all totals (177,911,084 / 623,181 / 85,146,292 / 93,387,973) match, so only the layout differs."},
+    {"severity": "warning", "path": "balance_sheet.liabilities[5].category", "page": 1,
+     "extracted": "Accrued Liabilities / other liabilities", "on_page": "Compensated absences - Payable within one year / Payable in more than one year",
+     "issue": "Under the user's balance-sheet rule, compensated absences due-within/more-than-one-year lines may belong in category Compensated Absences. The same applies to liabilities[6], [7] and [8]."},
+    {"severity": "warning", "path": "disbursements[12].category", "page": 12,
+     "extracted": "utilities", "on_page": "Tuition Reimbursement 495 (Sewer Fund operating expense)",
+     "issue": "Cost-type line in the Sewer Fund list (Maintenance and Depreciation are given cost-type categories). Employee tuition reimbursement probably belongs in Employee Benefits and Payroll Taxes, with function utilities."},
+    {"severity": "warning", "path": "receipts[12].category", "page": 12,
+     "extracted": "licenses and permits", "on_page": "Permits and hookups 112,447",
+     "issue": "Mixed line: hookup fees are utility charges. Defensible, but it has no review note naming the mix."},
+    {"severity": "warning", "path": "detail[0]", "page": 14,
+     "extracted": "Taxes 24,683,172 taxes (unlabeled)", "on_page": "Taxes 24,683,172",
+     "issue": "The General Fund budget schedule doesn't break taxes down by type. The GAAP statement p7 does, but on a different basis. Left unsplit correctly; noted for review."}
   ]
 }

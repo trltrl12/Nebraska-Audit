@@ -1,30 +1,9 @@
 {
   "stem": "Reynolds_FY2025",
-  "values_checked": 22,
+  "values_checked": 30,
   "issues": [
-    {
-      "severity": "warning",
-      "path": "receipts[8].category",
-      "page": 1,
-      "extracted": "charges for services/fees",
-      "on_page": "Local Receipts: Other (Enterprise Fund) 141,022.04",
-      "issue": "Enterprise Fund receipts are assumed to be utility charges (electric/wastewater/water). This is plausible because the only spending is on those utilities, but the page does not break the line down. Already marked review."
-    },
-    {
-      "severity": "warning",
-      "path": "balance_sheet",
-      "page": 1,
-      "extracted": null,
-      "on_page": "Lines 25-28 Ending Balance Consists Of: Net Cash Balance 60,098.21 / 50,398.59 / 56,647.03, total 167,143.83; Investments blank",
-      "issue": "[fixed 2026-10-22: balance_sheet built from Exhibit A lines 25-28 TOTAL column] balance_sheet is null. There is no separate net position statement, but Exhibit A lines 25-28 print the year-end cash composition by fund. The cash-basis rule asks for empty lists rather than null, and these lines could be used as a cash-only balance sheet."
-    },
-    {
-      "severity": "warning",
-      "path": "beginning_cash",
-      "page": 1,
-      "extracted": 96197.85,
-      "on_page": "County Treasurer Balance at October 1, 2024 $751.30; at September 30, 2025 644.16",
-      "issue": "County Treasurer balances are left out of governmental cash (the notes say so). This is defensible because the statement's lines 24/28 leave them out too, but it is an assumption."
-    }
+    {"severity": "warning", "path": "receipts[8].category", "page": 1,
+     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Enterprise Fund) 141,022.04",
+     "issue": "Enterprise Fund 'Other' local receipts assumed to be utility charges (already marked review); if they are utility sales the user's top-level category is Utility Charges, but the page does not say what they are."}
   ]
 }

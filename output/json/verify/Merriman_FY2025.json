@@ -5,15 +5,12 @@
     {"severity": "warning", "path": "receipts[9].original_label", "page": 1,
      "extracted": "Local Receipts: Other (22,641.84 General); receipts[10] '(Airport Fund)' 600.00; receipts[11] '(Combined Utility Fund)' 64,760.82",
      "on_page": "Line 18 Local Receipts: Other, one row printed across General 22,641.84 / Airport 600.00 / Combined Utility 64,760.82 (Total 88,002.66)",
-     "issue": "Mixed row split by column. Each amount is printed in its own column, so this isn't computed, but the extractor rules say column splits carry split_from and none of the three items has one. Labels also have the fund name added in parentheses, which isn't printed on the row."},
+     "issue": "Mixed row split by fund column; each amount is printed in its own column (not computed), but the rules ask column splits to carry split_from and none does. Labels on receipts[10]/[11] add the fund name in parentheses, which is not printed on the row."},
     {"severity": "warning", "path": "receipts[11].category", "page": 1,
      "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Combined Utility Fund) 64,760.82",
-     "issue": "Assumed to be utility charges. Nothing on the page breaks it down. Likely correct, but it's an assumption (already marked review)."},
-    {"severity": "warning", "path": "disbursements[4].category", "page": 2,
-     "extracted": "other", "on_page": "41 Airport 1,200.44",
-     "issue": "Airport operations are in 'other' because no listed function fits. Defensible, but a person may prefer a different function."},
+     "issue": "The review note says it is assumed to be utility charges; if so, the user rule (2026-10-28) category is Utility Charges, not charges for services/fees. Nothing on the page breaks the line down, so the category is an assumption either way."},
     {"severity": "warning", "path": "notes", "page": 1,
      "extracted": "not recorded", "on_page": "County Treasurer Balance at October 1, 2024 $884.79; at September 30, 2025 1,080.41",
-     "issue": "County Treasurer balances are printed below the statement but aren't in the cash balances and aren't mentioned in notes. Leaving them out matches the statement's own totals; noting this for completeness."}
+     "issue": "County Treasurer balances printed below the statement are not in the balances or notes. Leaving them out matches the statement's own totals; noted for completeness."}
   ]
 }

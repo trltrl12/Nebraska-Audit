@@ -1,15 +1,9 @@
 {
   "stem": "Strang_FY2025",
-  "values_checked": 24,
+  "values_checked": 30,
   "issues": [
-    {"severity": "warning", "path": "receipts[9].category", "page": 1,
-     "extracted": "other", "on_page": "Local Receipts: Other 9,385.61",
-     "issue": "32% of governmental receipts in 'other'; nothing in the 3-page waiver explains it (already marked review)."},
-    {"severity": "warning", "path": "disbursements[2].amount", "page": 2,
-     "extracted": 10127.22, "on_page": "Capital Improvements: General 1,830.00 + Street 8,297.22; total 10,127.22 printed one row low (skewed scan)",
-     "issue": "The skewed scan prints the TOTAL column about one row below its label. The fund columns confirm the amount belongs to line 35 (1,830.00 + 8,297.22 = 10,127.22), so the value is right; noted only because the placement is ambiguous."},
-    {"severity": "warning", "path": "report_discrepancies[0]", "page": 3,
-     "extracted": 0.01, "on_page": "Schedule of Investments 30,474.04 vs Exhibit A line 27 30,474.05",
-     "issue": "The report itself has a one-cent difference; it is correctly recorded as a report discrepancy."}
+    {"severity": "warning", "path": "disbursements[2].original_label", "page": 2,
+     "extracted": "Capital Improvements", "on_page": "35 Capital Improvements: General 1,830.00, Street 8,297.22, Total 10,127.22",
+     "issue": "The category (capital outlay) and amount are right. The user's capital outlay rule wants the label 'Capital Outlay: <function>', with the printed text in printed_label. This line spans the General and Street funds and no function is printed, so the function is a judgment call. user_rules.py may relabel it."}
   ]
 }

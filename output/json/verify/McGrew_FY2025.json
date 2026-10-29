@@ -1,15 +1,18 @@
 {
   "stem": "McGrew_FY2025",
-  "values_checked": 25,
+  "values_checked": 30,
   "issues": [
-    {"severity": "warning", "path": "receipts[6]", "page": 1,
-     "extracted": "Local Receipts: Other (General Fund) 38,275.25, no split_from", "on_page": "Line 18 Local Receipts: Other, TOTAL 98,547.29 (General 38,275.25, Sewer 43,128.46, Keno 17,143.58)",
-     "issue": "Mixed row split by fund column (governmental vs Sewer) but receipts[6], [7], [8] carry no split_from as the column-split rule asks; amounts themselves match the printed fund columns"},
+    {"severity": "warning", "path": "receipts[8].category", "page": 1,
+     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other, Sewer Fund column 43,128.46",
+     "issue": "Assumed sewer charges; if so, the user's 2026-10-28 rule puts utility fund sales/charges in Utility Charges rather than charges for services/fees. The form doesn't print what the line is."},
+    {"severity": "warning", "path": "receipts[7].category", "page": 1,
+     "extracted": "keno/lottery", "on_page": "Local Receipts: Other, Keno Fund column 17,143.58",
+     "issue": "Keno proceeds assumed from the fund column; the line itself is printed only as 'Other'"},
     {"severity": "warning", "path": "disbursements[2].category", "page": 2,
-     "extracted": "other", "on_page": "Line 40 Miscellaneous, General Fund 56,802.85",
-     "issue": "Only General Fund spending, with no function given; the General Fund default (general government) could apply instead of other. Already marked review"},
+     "extracted": "other", "on_page": "40 Miscellaneous, General Fund 56,802.85",
+     "issue": "All General Fund spending is on the Miscellaneous line with no function; defensible as other (label says miscellaneous), but the fund rule (General Fund -> general government) could also apply"},
     {"severity": "warning", "path": "balance_sheet.equity[0].original_label", "page": 1,
-     "extracted": "Ending Balance (all funds)", "on_page": "Line 24 Ending Balance (Line 22 MINUS Line 23) / Line 28 Subtotal of Ending Balances, TOTAL 315,271.50",
-     "issue": "Label not exactly as printed. Balance sheet uses the all-funds TOTAL column, which mixes governmental and Sewer (business-type) cash"}
+     "extracted": "Ending Balance (all funds)", "on_page": "24 Ending Balance (Line 22 MINUS Line 23)",
+     "issue": "Label isn't printed exactly like this; the amount is the sum of the governmental fund columns (marked computed)"}
   ]
 }

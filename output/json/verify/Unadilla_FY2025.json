@@ -1,18 +1,9 @@
 {
   "stem": "Unadilla_FY2025",
-  "values_checked": 32,
+  "values_checked": 34,
   "issues": [
-    {"severity": "warning", "path": "disbursements[5].fund_type", "page": 3,
-     "extracted": "governmental", "on_page": "Business-Type Activities: Solid Waste 30,861.69, Wastewater 17,260.69, Water 73,563.09 (General Fund column)",
-     "issue": "Exhibit A prints these three rows (disbursements[5]-[7], 121,685.47) under Business-Type Activities, but they are paid from the General Fund column. Keeping them governmental is defensible, and decision_needed already raises it. Amounts are correct."},
     {"severity": "warning", "path": "receipts[8].category", "page": 1,
-     "extracted": "other", "on_page": "Local Receipts: Other 168,173.49 (General 157,058.87)",
-     "issue": "This line is 38% of governmental receipts and is in 'other' (marked review). The General Fund pays water, wastewater and solid waste costs (121,685.47) but shows no utility receipt line, so most of the General Fund's 157,058.87 is probably utility charges. The trimmed PDF has no breakdown."},
-    {"severity": "warning", "path": "transfers_in", "page": 4,
-     "extracted": 92672.25, "on_page": "Schedule of Interfund Transfers: Bond -> General 47,985.00; Keno 31,000; Sales Tax 13,687.25",
-     "issue": "The schedule names a 'Bond' fund as the source of 47,985, but Exhibit A p3 line 50 shows it leaving the Street Fund column, and the General Fund then pays Debt Service of exactly 47,985. The amounts tie and both sides are recorded as transfers, but the sending fund is inconsistent in the report."},
-    {"severity": "warning", "path": "balance_sheet.equity", "page": 1,
-     "extracted": "General Fund ending balance / Street Fund ending balance / Keno ending balance / Local Sales Tax ending balance", "on_page": "Line 28 'Subtotal of Ending Balances (Line 26 + 27)' (also line 24 'Ending Balance'), per fund column",
-     "issue": "The equity labels were made up by the extractor; the page prints fund columns, not these labels. The amounts are correct."}
+     "extracted": "other", "on_page": "Local Receipts: Other 168,173.49 (General 157,058.87, Street 89.60, Keno 5,555.46, Local Sales Tax 5,469.56)",
+     "issue": "The Keno fund column's only receipt, 5,555.46, sits in this line and is probably keno/lottery proceeds. The report doesn't name it, so leaving it in other is defensible, but it is worth a person's look."}
   ]
 }

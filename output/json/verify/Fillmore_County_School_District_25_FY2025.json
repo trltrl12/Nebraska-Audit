@@ -1,15 +1,46 @@
 {
   "stem": "Fillmore_County_School_District_25_FY2025",
-  "values_checked": 296,
+  "values_checked": 330,
   "issues": [
-    {"severity": "warning", "path": "receipts[14].category", "page": 8,
-     "extracted": "intergovernmental/state aid", "on_page": "County receipts 43,943.75 = 2110 County fines and licenses 26,722.65 + 2210 Educational service unit receipts 17,221.10",
-     "issue": "61% of this broad line is code 2110 county fines and licenses, which the rules map to fines and forfeitures. Detail[7] uses fines and forfeitures for that code. The statement line could take the dominant category or be split using the p8 breakdown."},
-    {"severity": "warning", "path": "disbursements[19].category", "page": 16,
-     "extracted": "debt service interest", "on_page": "Bond issuance costs 363,116.70 (inside Capital projects 907,067.62, p5)",
-     "issue": "The Statement of Activities (p2) shows bond issuance costs as a special item netted against the 20,000,000 bond proceeds. Recording them as negative other_financing would also be defensible. The split from Capital projects is supported by the p16 Special Building schedule and the sums tie."},
-    {"severity": "warning", "path": "detail[28].original_label", "page": 9,
-     "extracted": "4998 ESSER III", "on_page": "4998 ESSERS III",
-     "issue": "Small label mismatch: the page prints 'ESSERS III'."}
+    {
+      "severity": "error",
+      "path": "detail[200].category",
+      "page": 15,
+      "extracted": "reimbursements/refunds",
+      "on_page": "Sales - non-reimbursable 5,505.70",
+      "issue": "This is a school nutrition sales line (a la carte / non-reimbursable meal sales), not a reimbursement. Its category should be School Lunch Sales, matching its detail_category and the top-level receipts[12] School Lunch Sales total, which includes it."
+    },
+    {
+      "severity": "warning",
+      "path": "balance_sheet",
+      "page": 3,
+      "extracted": "Statement of Net Position (p1): Restricted 21,559,944.46, Unrestricted 5,111,811.54",
+      "on_page": "Governmental funds balance sheet (p3) totals 26,671,756.00, same as p1: Restricted capital projects 21,559,944.46; Assigned capital purchases 123,692.59, school employee benefits 118,314.57, school nutrition 152,309.13, student activities 376,445.37; Unassigned 4,341,049.88",
+      "issue": "User rule 2026-10-27: cash-basis reports take balance-sheet lines from the governmental funds statement (fund balance by classification) when its totals equal the government-wide figures, and here they do. p3 prints no Total column; its Total column may be on a report page that was not trimmed (p3 has no exhibit label). So the lines would have to be computed."
+    },
+    {
+      "severity": "warning",
+      "path": "notes",
+      "page": null,
+      "extracted": "notes contain 'Read pages 1-24 of 24.' mid-text, followed by attempt-2 re-check text",
+      "on_page": "trimmed PDF has 24 pages",
+      "issue": "The notes do not end with 'Read pages 1-N of N'. The page count is right (24 of 24), and all 24 pages were checked here."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[186].category",
+      "page": 24,
+      "extracted": "charges for services/fees",
+      "on_page": "Activities receipts 380,665.51 (p14); Exhibit N Transfers: Activity Fund 9,000.00 (p24)",
+      "issue": "The -9,000 contra line against Activities receipts is categorized 'charges for services/fees', while the receipts it offsets are Extracurricular Receipts. It should probably be Extracurricular Receipts."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[36].category",
+      "page": 18,
+      "extracted": "Instruction (detail_category equipment purchases) for Exhibit N 'Capital Assets' object lines",
+      "on_page": "Capital Assets lines: 1100 71,098.22; 1200 1,497.88; 2510 1,740.50; 2610 27,158.83; 2630 12,816.44; 2710 185,612.39; 2712 102,150.00; 3551 4,840.30 (detail[36], [47], [116], [123], [129], [141], [149], [161])",
+      "issue": "User rule 2026-10-26 says every capital outlay line, including one inside a function, is category capital outlay ('Capital Outlay: <function>'). These lines keep their function category, which ties to the statement's function totals. This is a judgment call."
+    }
   ]
 }

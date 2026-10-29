@@ -1,12 +1,9 @@
 {
   "stem": "Surprise_FY2025",
-  "values_checked": 26,
+  "values_checked": 32,
   "issues": [
     {"severity": "warning", "path": "receipts[8].category", "page": 1,
-     "extracted": "keno/lottery", "on_page": "18 Local Receipts: Other 40,904.72 (General 5,035.34, Street 309.70, Keno 21,469.72, Keno Reserve 14,089.96)",
-     "issue": "The whole line is recorded as keno/lottery because the Keno and Keno Reserve columns are 87% of it. That fits the dominant-category rule and is flagged review, but the page does not say the Keno fund receipts are keno proceeds (some could be interest), and the 5,345.04 from General/Street is not keno. The page prints the split by column, so a split_from by fund column is another option."},
-    {"severity": "warning", "path": "beginning_investments", "page": 1,
-     "extracted": 8526.46, "on_page": "line 2 Investments 8,526.46; line 3 Subtotal 238,450.98 used as beginning_cash",
-     "issue": "beginning_cash/ending_cash already include investments (lines 3 and 28), and beginning_investments/ending_investments are filled as well. The validator does not add them, and notes explain it, but downstream users could count the 8,526.46 / 8,793.11 twice. Also, beginning_cash is marked computed even though line 3 prints the subtotal (harmless)."}
+     "extracted": "keno/lottery", "on_page": "Line 18 Local Receipts: Other - Keno column 21,469.72, Keno Reserve column 14,089.96",
+     "issue": "the fund columns print the split, but keno/lottery is inferred from the fund names, not from a printed label. It is probably right, but it is the extractor's assumption"}
   ]
 }

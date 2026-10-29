@@ -1,89 +1,18 @@
 {
   "stem": "Columbus_Public_Schools_FY2025",
-  "values_checked": 280,
+  "values_checked": 248,
   "issues": [
-    {
-      "severity": "warning",
-      "path": "disbursements[17].amount",
-      "page": 2,
-      "extracted": 4751347,
-      "on_page": 4751346,
-      "issue": "[fixed: Debt Service 4,751,346 as printed p2, transfers_out 1,074,478, both $1-2 gaps in report_discrepancies] Hidden-transfer elimination is not symmetric on the page. Receipt side: Other Local Receipts 1,101,444 (p5) less Leasing Corp 1,074,477 = 26,967, which matches Other Receipts 376,689 on p2 (26,967 + non-revenue 349,244 + ESU 478). Disbursement side: Debt Service 5,825,824 (p6) less 4,751,346 on p2 = 1,074,478, and the p2 Disbursements column adds to 69,914,804, not the printed 69,914,805. The extraction used 1,074,477 on both sides, so Debt Service is 4,751,347 and the $1 is absorbed. The difference is mentioned only in notes and in this line's review text. report_discrepancies has no entry for it (it needs e.g. check 'totals', difference 1, source_page 2)."
-    },
-    {
-      "severity": "warning",
-      "path": "report_discrepancies",
-      "page": 6,
-      "extracted": null,
-      "on_page": "Debt Service row: 0 + 3,610,874 + 65,974 + 1,074,497 + 1,074,477 = 5,825,822 vs printed Total 5,825,824; Total Disbursements row: 57,242,379 + 3,610,874 + 3,628,273 + 5,433,278 + 1,074,477 = 70,989,281 vs printed 70,989,282",
-      "issue": "[fixed: Debt Service 4,751,346 as printed p2, transfers_out 1,074,478, both $1-2 gaps in report_discrepancies] On the governmental funds statement the fund columns don't add across to the Total column ($2 on Debt Service, $1 on Total Disbursements). The page doesn't add up, and this isn't recorded in report_discrepancies. It is the same $1-2 that turns up as the 1,074,478 elimination on p2."
-    },
-    {
-      "severity": "warning",
-      "path": "reported_totals.governmental",
-      "page": 5,
-      "extracted": {
-        "receipts": 77049275,
-        "disbursements": 70989282
-      },
-      "on_page": "printed totals include Leasing Corp 1,074,477 receipts and 1,074,477 debt service",
-      "issue": "After the hidden-transfer split, the printed totals still contain the 1,074,477 that was moved into transfers_in and transfers_out, but the 'includes' fields don't say so (receipts includes only debt_proceeds, disbursements includes nothing). Recorded lines + debt_proceeds = 75,974,797 vs 77,049,275, and lines = 69,914,805 vs 70,989,282. The validator totals check will flag gaps of about $1.07M unless it is told."
-    },
-    {
-      "severity": "warning",
-      "path": "transfers_in",
-      "page": 6,
-      "extracted": 3693931,
-      "on_page": "Transfers In (Out) 2,619,454 net (GF column +2,566,454, Other Governmental +53,000)",
-      "issue": "The report's own governmental transfers don't net to zero. The Depreciation Fund shows 2,619,454 'Transfers from General Fund' (p13), but the General Fund schedule (p12) shows only 8000 Transfers 53,000 out, and its roll-forward has no 2,619,454 outflow. This is recorded as printed and explained in notes, but it is a substantive report inconsistency and arguably belongs in report_discrepancies (check 'reconcile')."
-    },
-    {
-      "severity": "warning",
-      "path": "report_discrepancies",
-      "page": 9,
-      "extracted": null,
-      "on_page": "General Fund schedule: Beginning 15,208,731 + Total Cash Receipts 59,023,951 = 74,232,682 vs printed Total Funds Available 74,232,683; 74,232,683 - 56,812,329 = 17,420,354 (End of Year as printed)",
-      "issue": "The General Fund budget schedule's Total Funds Available is $1 off its parts. This is report rounding and isn't recorded in report_discrepancies. No JSON field depends on it."
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[4].amount",
-      "page": 5,
-      "extracted": 3046359,
-      "on_page": "GF schedule (p11) lines 2211-2290 sum 3,046,361; 2310+2320 = 619,108 vs Executive Administration 619,107; O&M lines sum 4,798,241 vs 4,798,242; Student Transportation lines sum 879,115 vs 879,117",
-      "issue": "Several basic-statement function totals differ by $1-2 from the General Fund schedule lines. The differences offset, so the schedule total of 56,812,329 holds. These are report rounding differences and aren't recorded anywhere."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[8].category",
-      "page": 9,
-      "extracted": "other",
-      "on_page": "Other Local Receipts 26,967 = GF 6,110 + Special Building 20,857",
-      "issue": "The GF part (6,110) is exactly 1911 Local License Fees 3,735 + 1925 Categorical Grants From Corps & Other Private Sources 1,750 + 1960 Misc Revenues From Other Local Government Units 625 (p9). Only the Special Building 20,857 is undescribed, so the 'other' share could be narrowed."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[9].category",
-      "page": 9,
-      "extracted": "intergovernmental/state aid",
-      "on_page": "Intermediate Sources 219,568 = 2110 County Fines and Licenses 219,091 + 2210 ESU Receipts 478",
-      "issue": "Almost all of this is county fines and license money distributed to the district, which could be 'fines and forfeitures'. The same judgment applies to detail[9] (2110 County Fines and Licenses). Already marked review."
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[17].category",
-      "page": 6,
-      "extracted": "debt service principal",
-      "on_page": "Debt Service (combined)",
-      "issue": "This line combines principal and interest. The fund schedules print the breakdown: principal 2,800,000 + 953,672; interest/fees 810,224 + 650 + 120,805 + 20 + 65,974. Principal is dominant, so the category is defensible. Already marked review."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[88].department",
-      "page": 12,
-      "extracted": "Private & State Categorical Programs",
-      "on_page": "Student Transportation (Continued)",
-      "issue": "The printed heading for lines 3535-3599 (detail[88]-detail[92]) is 'Student Transportation (Continued)'. The extractor reassigned them to Private & State Categorical Programs. That is consistent with p6 (391,331 + 17,046 + 237,021 + 165,347 + 17,438 + 3,237 = 831,420), but it doesn't match the printed label. Already marked review."
-    }
+    {"severity": "warning", "path": "receipts[8].category", "page": 9,
+     "extracted": "other (26,967)", "on_page": "Other Local Receipts 26,967 = General 6,110 (p9: 1911 Local License Fees 3,735 + 1925 Categorical Grants 1,750 + 1960 Misc from Other Local Govts 625) + Special Building 'Other Local Receipts' 20,857 (p17)",
+     "issue": "The General Fund part (6,110) is broken down on p9 into licenses, donations and local-government receipts. The undescribed Special Building 20,857 is most of the line, so 'other' can be defended, but a split is possible."},
+    {"severity": "warning", "path": "detail[95].category", "page": 15,
+     "extracted": "charges for services/fees", "on_page": "Daily sales 795,909 (School Nutrition Fund)",
+     "issue": "The same money is 'School Lunch Sales' on the statement line (receipts[6], Food Services 795,909). Under the user's rule lunch sales are their own category, so detail should match."},
+    {"severity": "warning", "path": "detail", "page": 11,
+     "extracted": "General Fund schedule function groups", "on_page": "Instructional Staff lines sum 3,046,361 vs statement 3,046,359 (p5); Executive Admin 2310+2320 = 619,108 vs 619,107; O&M 4,798,241 vs 4,798,242; Transportation 879,115 vs 879,117",
+     "issue": "The schedule's function groups differ from the statement's function lines by $1-2 each (the net is 0, and the schedule total 56,812,329 ties). This is rounding in the report, but it is not listed in report_discrepancies."},
+    {"severity": "warning", "path": "disbursements[17].amount", "page": 2,
+     "extracted": 3753672, "on_page": "Debt Service 4,751,346 (p2, after elimination); principal from Bond 2,800,000 + Special Building 953,672",
+     "issue": "The principal/interest split of the post-elimination debt service assumes the Special Building Fund's principal and interest stand in for the Leasing Corp's eliminated payments. This is the extractor's assumption; the report doesn't print the Leasing Corp's own breakdown."}
   ]
 }

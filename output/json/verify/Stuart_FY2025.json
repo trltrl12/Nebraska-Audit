@@ -1,18 +1,21 @@
 {
   "stem": "Stuart_FY2025",
-  "values_checked": 217,
+  "values_checked": 234,
   "issues": [
-    {"severity": "warning", "path": "detail[11].detail_category", "page": 14,
-     "extracted": "other state aid", "on_page": "Motor vehicle fee 8,488 (Intergovernmental; p12 'State - motor vehicle fees')",
-     "issue": "Rules list motor vehicle fees under motor vehicle tax; the report prints it as intergovernmental state revenue. Judgment call, already marked review."},
-    {"severity": "warning", "path": "detail[12].detail_category", "page": 14,
-     "extracted": "other state aid", "on_page": "Incentive payment 600 (p12 budget schedule: 'State - highway allocation and incentive' 143,218 = 142,618 + 600)",
-     "issue": "Budget schedule groups the incentive payment with highway allocation; 'highway allocation' may fit better."},
-    {"severity": "warning", "path": "missing", "page": 13,
-     "extracted": null, "on_page": "Nursing Home Bonds 27,418; Airport 13,596 (expenditures, all-fund-types budget schedule); p12 Property taxes 156,052 vs General levy 142,456 (diff 13,596 = airport levy)",
-     "issue": "These budget-schedule lines appear in no fund statement and are not in the JSON. The extractor left the whole budget schedule out because more detailed fund schedules exist, but these lines have no other schedule. They are probably pass-through or fiduciary amounts (the notes mention them). A person should confirm leaving them out is right."},
-    {"severity": "warning", "path": "ending_cash", "page": 5,
-     "extracted": 335143, "on_page": "Fund balances end of year 335,143 (p3: cash 139,689 + due from other funds 188,601 + county treasurer 6,853)",
-     "issue": "Ending (and beginning) 'cash' is the modified-cash fund balance and includes an interfund receivable of 188,601. This matches the statement's roll-forward, but it is not pure cash."}
+    {"severity": "warning", "path": "detail[13].category", "page": 14,
+     "extracted": "Recreation Fees", "on_page": "Park, building, and equipment rental 7,131",
+     "issue": "The line is rental income, which the user rule puts in the Rentals category. Its own detail_category is already 'rentals', so the category and detail_category disagree."},
+    {"severity": "warning", "path": "receipts[14].category", "page": 5,
+     "extracted": "charges for services/fees", "on_page": "Lot sales 50 (p14)",
+     "issue": "The same line is Cemetery Fees in detail[19]. The rules say the same label gets the same category in receipts and detail."},
+    {"severity": "warning", "path": "receipts[15].category", "page": 18,
+     "extracted": "keno/lottery", "on_page": "Lottery Fund Revenues: Other 3,019",
+     "issue": "The Lottery Fund line is printed only as 'Other'. On the p12 budget schedule, Sales tax actual is 144,320, which equals General Fund sales tax 141,301 + 3,019. That suggests this 3,019 may be sales tax, not lottery proceeds. detail[57] has the same issue."},
+    {"severity": "warning", "path": "detail", "page": 12,
+     "extracted": "Nursing Home Bonds 27,418 and Airport 13,596 recorded as spending only", "on_page": "Budget schedule Property taxes 156,052 vs General Fund levy 142,456 (difference 13,596 = Airport)",
+     "issue": "The spending from the all-fund-types budget schedule was added to detail, but the matching receipts were not: the extra 13,596 of property tax, and possibly Nursing Home money inside 'Other' 68,899. Detail now shows spending with no funding. decision_needed covers the spending only."},
+    {"severity": "warning", "path": "balance_sheet.liabilities[0].category", "page": 1,
+     "extracted": "Internal Balances", "on_page": "Due to other funds 264,452",
+     "issue": "'Internal Balances' is an asset category and is not in the liability category list. 'other liabilities' would follow the rules."}
   ]
 }

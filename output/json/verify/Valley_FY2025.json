@@ -1,27 +1,14 @@
 {
   "stem": "Valley_FY2025",
-  "values_checked": 130,
+  "values_checked": 152,
   "issues": [
-    {"severity": "warning", "path": "receipts[1].category", "page": 4,
-     "extracted": "property tax 8,940,030 (remainder of Taxes 11,086,765 after Sales Tax fund)", "on_page": "Taxes: General 2,502,807, Bond 379,812, TIF 6,057,411; SoA p2 Property 8,967,603",
-     "issue": "This assumes all General Fund taxes are property tax. A city General Fund often holds motor vehicle, occupation/franchise and other taxes, and the report doesn't print a breakdown of that column. It is also inconsistent with detail[0] and detail[16], where the same 'Taxes' lines are left as taxes (unlabeled). The line is marked computed/review."},
-    {"severity": "warning", "path": "detail[1].amount", "page": 8,
-     "extracted": 424217, "on_page": "Licenses and permits 424,217 (budget schedule); 425,217 on governmental funds statement p4",
-     "issue": "The amount is recorded as printed, and the budget schedule's total 12,064,875 ties with 424,217. The report prints a figure 1,000 lower than the statement's General Fund (the only fund with licenses). It looks like a typo in the report, and it isn't noted in report_discrepancies or notes."},
-    {"severity": "warning", "path": "other_financing", "page": 4,
-     "extracted": -5998844, "on_page": "Tax increment financing (5,998,844) under Other Financing Sources (Uses)",
-     "issue": "It is recorded as printed (other financing use), but the Statement of Activities (p2) reports it as a 5,998,844 expense. It is really TIF pass-through spending (economic development), and it is excluded from governmental disbursements. A person may want to decide how to treat it."},
-    {"severity": "warning", "path": "receipts[5].category", "page": 4,
-     "extracted": "federal grants", "on_page": "Grant income 80,456 (SoA: operating grants, general services)",
-     "issue": "The grantor isn't stated, so the line could be state grants. It is already marked review."},
-    {"severity": "warning", "path": "receipts[14].category", "page": 6,
-     "extracted": "federal grants", "on_page": "Grant Income 1,307,203 (non-operating; SoA shows it as capital grants and contributions for Utilities)",
-     "issue": "The grantor isn't stated. It is a capital grant, so it could arguably go to business_type.other_financing instead of receipts; it is kept as printed in non-operating revenues. It is already marked review."},
-    {"severity": "warning", "path": "disbursements[15].category", "page": 6,
-     "extracted": "utilities", "on_page": "Depreciation and amortization 568,313 (Utilities 514,855 + Nursing Home 53,458)",
-     "issue": "The Nursing Home fund's expenses (depreciation 53,458, professional fees 829, and interest 61,431 inside interest expense) are categorized utilities, although the Nursing Home is not a utility. The amounts are small, and the line is marked review."},
-    {"severity": "warning", "path": "balance_sheet.deferred_inflows[0].original_label", "page": 1,
-     "extracted": "Lease receivable (deferred inflow)", "on_page": "Lease receivable",
-     "issue": "The label is annotated, not as printed."}
+    {"severity": "error", "path": "receipts[9].category", "page": 6, "extracted": "charges for services/fees", "on_page": "Metered sales 2,133,150 (Utilities fund)", "issue": "utility fund metered sales are sales of water/sewer service; user rule puts utility fund sales/charges in Utility Charges, not charges for services/fees"},
+    {"severity": "warning", "path": "receipts[10].category", "page": 6, "extracted": "charges for services/fees", "on_page": "Connection fees 546,837 (Utilities fund)", "issue": "utility connection fees could be Utility Charges, the user's category for utility fund charges"},
+    {"severity": "warning", "path": "receipts[1]", "page": 4, "extracted": 8940030, "on_page": "Taxes 11,086,765 (General 2,502,807 + Bond 379,812 + TIF 6,057,411 + Sales Tax 2,146,735)", "issue": "the property tax figure is the remainder after the Sales Tax fund column, not a printed property tax figure. The General Fund taxes may include motor vehicle or other taxes. The Statement of Activities (p2) shows Property 8,967,603 on the accrual basis. It is marked computed/split_from/review, but this is an assumption."},
+    {"severity": "warning", "path": "receipts[5].category", "page": 4, "extracted": "federal grants", "on_page": "Grant income 80,456", "issue": "the grantor isn't stated; it could be state or other grants"},
+    {"severity": "warning", "path": "receipts[15].category", "page": 6, "extracted": "federal grants", "on_page": "Grant Income 1,307,203 (capital grants per p2)", "issue": "the grantor isn't stated; it could be state aid"},
+    {"severity": "warning", "path": "disbursements[7].category", "page": 6, "extracted": "Employee Benefits and Payroll Taxes", "on_page": "Salaries and benefits 45,023", "issue": "this line combines salaries and benefits, and salaries are usually the larger part, so Salaries and Wages may fit better"},
+    {"severity": "warning", "path": "balance_sheet.deferred_inflows[0].original_label", "page": 1, "extracted": "Lease receivable (deferred inflow)", "on_page": "Lease receivable", "issue": "the label has text added that isn't printed on the page"},
+    {"severity": "warning", "path": "detail[14].original_label", "page": 8, "extracted": "Transfers from other funds", "on_page": "Transfers from other funds", "issue": "under the user's label rule this should be 'Transfers In' (printed text in printed_label). The same applies to detail[15] and detail[20] ('Transfers Out'). user_rules.py may apply this."}
   ]
 }

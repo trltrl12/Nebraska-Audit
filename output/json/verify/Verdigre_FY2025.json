@@ -1,62 +1,21 @@
 {
   "stem": "Verdigre_FY2025",
-  "values_checked": 65,
+  "values_checked": 62,
   "issues": [
-    {
-      "severity": "error",
-      "path": "detail[7].category",
-      "page": 8,
-      "extracted": "motor vehicle tax / motor vehicle tax",
-      "on_page": "Motor vehicle 6,619 (Special Fund); p4 Special Revenue Fund 'Motor vehicle prorate' 6,619 and no motor vehicle tax line",
-      "issue": "[fixed] The governmental funds statement (p4) shows this 6,619 is motor vehicle pro-rate. It should be intergovernmental/state aid with detail_category motor vehicle pro-rate, matching receipts[2]."
-    },
-    {
-      "severity": "error",
-      "path": "detail[9].category",
-      "page": 8,
-      "extracted": "other / miscellaneous revenue",
-      "on_page": "Other local receipts 66,616 = p4 Special Revenue Fund Local sales tax 65,616 + Charges for services 1,000",
-      "issue": "[fixed] p4 shows the line is 98% local sales tax, so it should be sales tax / sales tax (dominant-category rule, with a review note naming the mix). The review note 'no breakdown' is wrong."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[4].category",
-      "page": 4,
-      "extracted": "other",
-      "on_page": "Miscellaneous income/(expense) 201,328 (General 151,709, Special 40,572, Debt Service 9,047)",
-      "issue": "The budget schedules suggest part of this is state aid. The Special Fund's 40,572 equals its 'Other state receipts' on p8 exactly. General 'Other state receipts' 82,267 (p7) less operating grants 57,990 leaves 24,277 that can only come from General misc. That makes about 64,849 state aid and about 136,479 still unexplained. No split is printed, so 'other' plus decision_needed is defensible, but the reviewer should know."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[3].review",
-      "page": 7,
-      "extracted": "broad group, no breakdown",
-      "on_page": "Other local receipts 228,645",
-      "issue": "p4 does break it down. General sales tax 56,297, interest 23,893, franchise 2,077 and charges 18,946 make 101,213; the remaining ~127,432 (56%) is misc income. 'Other' as the dominant part is defensible, but the review note should name the mix."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[4].category",
-      "page": 7,
-      "extracted": "general government",
-      "on_page": "Operating expenses 766,017; p4 General Fund: general government 633,534, public safety 132,306, miscellaneous 177",
-      "issue": "This one line spans three functions; all of it is recorded as general government. The extractor marked it for review."
-    },
-    {
-      "severity": "warning",
-      "path": "disbursements[4].category",
-      "page": 4,
-      "extracted": "debt service principal",
-      "on_page": "Debt service 45,113",
-      "issue": "Principal and interest are not split on the page, so the whole line is recorded as principal. The extractor marked it for review."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[0].detail_category",
-      "page": 7,
-      "extracted": "property tax",
-      "on_page": "Personal and real property taxes 130,590 = p4 General property taxes 120,394 + homestead exemption 10,196",
-      "issue": "The budget-schedule property tax line includes homestead credit (state aid), and so does detail[6] (8,243 = 7,574 + 669). The dominant part is property tax, but there is no review note naming the mix."
-    }
+    {"severity": "error", "path": "receipts[9].category", "page": 6,
+     "extracted": "charges for services/fees", "on_page": "Charges for services: Sewer 177,413 (Enterprise Fund)",
+     "issue": "utility fund sewer charges belong in Utility Charges per the user rule (2026-10-28), as the Trash line in the same statement already is"},
+    {"severity": "error", "path": "receipts[10].category", "page": 6,
+     "extracted": "charges for services/fees", "on_page": "Charges for services: Water 137,474 (Enterprise Fund)",
+     "issue": "utility fund water charges belong in Utility Charges per the user rule (2026-10-28)"},
+    {"severity": "warning", "path": "detail[0].split_from", "page": 7,
+     "extracted": "Property Tax 120,394 + Homestead exemption 10,196", "on_page": "Personal and real property taxes 130,590",
+     "issue": "budget-schedule line split using the General Fund column of the p4 statement, not a breakdown printed on p7 itself; marked computed/review (same for detail[7]/detail[8], Special 7,574 + 669 = 8,243)"},
+    {"severity": "warning", "path": "receipts[4].category", "page": 4,
+     "extracted": "other", "on_page": "Miscellaneous income/(expense) 201,328",
+     "issue": "fund columns imply about 64,849 is state receipts (General 24,277 = Other state receipts 82,267 - operating grants 57,990; Special 40,572 = its Other state receipts p8), but the statement prints no split; left in other, flagged in decision_needed"},
+    {"severity": "warning", "path": "receipts[8].category", "page": 4,
+     "extracted": "intergovernmental/state aid", "on_page": "Operating grants and contributions 57,990",
+     "issue": "grant source (state vs federal) not stated; budget schedule counts it in Other state receipts, so state aid is defensible"}
   ]
 }

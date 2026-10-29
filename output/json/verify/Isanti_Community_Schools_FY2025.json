@@ -1,24 +1,21 @@
 {
   "stem": "Isanti_Community_Schools_FY2025",
-  "values_checked": 159,
+  "values_checked": 124,
   "issues": [
-    {"severity": "warning", "path": "detail[35].amount", "page": 10,
-     "extracted": 105267, "on_page": 355267,
-     "issue": "Extractor's assumption: the schedule prints 2700 Student transportation as 355,267, and the extractor split it into 105,267 of spending plus a 250,000 transfer to the Depreciation Fund (detail[41]). The figures support this: statement p5 shows 105,267 for this line, and GF statement disbursements 7,973,295 = schedule 8,168,544 + Depreciation 54,751 - 250,000. But the schedule never says the 250,000 is a transfer. It is marked split_from/review."},
-    {"severity": "warning", "path": "detail[41].original_label", "page": 10,
-     "extracted": "Transfer to Depreciation Fund (inside 2700 Student transportation)", "on_page": "2700 Student transportation",
-     "issue": "This label was written by the extractor for the split transfer line; it is not printed on the page. The matching inflow is printed on p11 as 'Transfer - General Fund' 250,000."},
+    {"severity": "warning", "path": "detail[44].category", "page": 11,
+     "extracted": "capital outlay", "on_page": "Depreciation Fund: DISBURSEMENTS 54,751",
+     "issue": "The report puts this spending under Other support services: statement p5 Other support services 75,971 = General Fund 2900 21,220 + Depreciation 54,751. Using capital outlay instead is a guess that doesn't match the report's own classification."},
+    {"severity": "warning", "path": "detail[37].review", "page": 10,
+     "extracted": "function assumed instruction (statement p5 folds it into Regular instruction)", "on_page": "3500 State categorical programs 165,899",
+     "issue": "The review note is stale: the category is State Categorical Programs, not instruction. detail[39] (6000 Federal programs 155,732, category Federal Programs) has the same stale note. The categories themselves follow the rule."},
     {"severity": "warning", "path": "detail[40].original_label", "page": 10,
      "extracted": "8000 Transfers (to Nutrition 500,000 and Activities 350,000)", "on_page": "8000 Transfers",
-     "issue": "The extractor added an explanation in parentheses to the printed label. The amounts are correct (-850,000; budget 745,000)."},
-    {"severity": "warning", "path": "detail[44].category", "page": 11,
-     "extracted": "capital outlay", "on_page": "DISBURSEMENTS 54,751 (Depreciation Fund)",
-     "issue": "Statement p5 counts this under 'Other support services' (75,971 = GF 2900 21,220 + Depreciation 54,751), so with capital outlay as the function the detail won't tie to the statement's function lines. support services may be the better fit."},
-    {"severity": "warning", "path": "detail[6].detail_category", "page": 8,
-     "extracted": "county/other local governments", "on_page": "2110 County fines and licenses",
-     "issue": "A judgment call. The label describes fines and license money paid out through the county, so 'fines and forfeitures' or 'licenses and permits' could also fit. The statement p4 label 'County and ESU sources' supports the intergovernmental reading."},
-    {"severity": "warning", "path": "disbursements[11].category", "page": 5,
-     "extracted": "debt service principal", "on_page": "Debt service 179,308",
-     "issue": "The whole debt service line is recorded as principal. The trimmed pages don't split principal and interest (same for detail[38], 5000 Debt services). It is flagged review."}
+     "issue": "The label has the extractor's own text appended to the printed label."},
+    {"severity": "warning", "path": "detail[35]", "page": 10,
+     "extracted": "105,267 spending + detail[41] -250,000 transfer (split_from)", "on_page": "2700 Student transportation 355,267; statement p5 Student transportation 105,267; Depreciation Fund p11 Transfer - General Fund 250,000",
+     "issue": "This applies the hidden-transfer rule, and the elimination can be seen by comparing p5 with p10/p11, but the 250,000 split is not printed on any single line. It is marked review, so the user should confirm it."},
+    {"severity": "warning", "path": "notes", "page": 7,
+     "extracted": "'Balance sheet from the cash-basis Statement of Net Position (p3)' ... 'governmental lines from ... (p7)'", "on_page": "p3 Statement of Net Position; p7 governmental funds statement of assets and fund balances",
+     "issue": "The notes contradict each other about where the balance sheet comes from. The JSON follows p7 (Total Governmental Funds), which is correct under the 2026-10-27 rule because totals tie to p3 at 11,422,858."}
   ]
 }
