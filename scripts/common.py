@@ -98,6 +98,7 @@ DISBURSEMENT_CATEGORIES = [
     "Federal Programs",
     "Debt Service",
     "Drivers Education",  # user decision 2026-10-28: out of instruction
+    "Community Betterment",  # user decision 2026-10-29: not keno, not economic development
 ]
 PROPRIETARY_FIELDS = ["operating", "noncapital_financing", "capital_and_related_financing", "investing"]
 

@@ -61,6 +61,7 @@ CHARGE_CATS = [
 ]
 UTILITY_FUND = re.compile(r"water|sewer|electric|light|gas|utilit|refuse|sanitation|garbage|trash|solid waste", re.I)
 DRIVERS_ED = re.compile(r"driver'?s'? ?ed", re.I)
+COMMUNITY_BETTERMENT = re.compile(r"community better", re.I)
 NOT_EXTRACURRICULAR = re.compile(r"interest|tuition|lunch|meal|fine|donat|contribut|grant|reimburs|transfer", re.I)
 # county treasurer / bank cash -> Cash and Cash Equivalents (never "cash and investments")
 CASH_ONLY = re.compile(r"county treasurer|cash (in|at) bank|^cash$|^cash and cash equivalents", re.I)
@@ -284,6 +285,13 @@ def drivers_ed_spending_rule(x, log):
         setcat(x, "category", "Drivers Education", "category: Drivers Education", log)
 
 
+def community_betterment_rule(x, log):
+    """Community betterment spending (keno-funded or not) is its own category (user 2026-10-29); capital outlay stays."""
+    if COMMUNITY_BETTERMENT.search(label_of(x) + " " + str(x.get("department") or "")) \
+            and x.get("category") not in ("Community Betterment", "capital outlay"):
+        setcat(x, "category", "Community Betterment", "category: Community Betterment", log)
+
+
 def department_capital_outlay_rule(detail, log):
     """Bare "Capital outlay" lines inside a department -> "Capital Outlay: <function>", the function being the one the
     department's other spending lines carry."""
@@ -447,6 +455,7 @@ def apply(d, stem=""):
         decision_rule(x, "expenditure", log)
         spending_rules(x, log)
         drivers_ed_spending_rule(x, log)
+        community_betterment_rule(x, log)
         if school and not lps:
             staff_label_rule(x, log)
     for x in d.get("detail") or []:
@@ -461,6 +470,7 @@ def apply(d, stem=""):
             decision_rule(x, "expenditure", log)
             spending_rules(x, log)
             drivers_ed_spending_rule(x, log)
+            community_betterment_rule(x, log)
             if school and not lps:
                 staff_label_rule(x, log)
         elif sec == "other financing":

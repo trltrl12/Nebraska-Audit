@@ -468,6 +468,7 @@ These are the user's decisions; apply them while extracting. After extraction th
   program fees, program service income) (user 2026-10-29). Charges for services is
   only for genuine fees for services; unexplained "Local receipts/Other" lines get their breakdown from the schedules.
 - **Drivers Education** spending is its own category (never Instruction).
+- **Community Betterment** spending (keno-funded or not) is its own category (not keno, not economic development; user 2026-10-29); capital outlay lines stay capital outlay. Keno/lottery receipts stay keno/lottery.
 - **Spending:** every capital outlay line, also inside a department, is category capital outlay labelled
   "Capital Outlay: <function>" (printed text in printed_label); capital outlay that is a debt/lease payment stays debt
   service. Debt service principal/interest lines are category "Debt Service" with `debt_service_part`
