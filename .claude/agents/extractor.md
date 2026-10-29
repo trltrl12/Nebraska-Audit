@@ -2,7 +2,7 @@
 name: extractor
 description: Reads trimmed Nebraska local-government audit PDFs (trimmed/*.pdf) visually and writes one cash-flow JSON per report to output/json/. Give it a list of filenames; it returns one status line per report.
 model: opus
-tools: Read, Write, Grep, Glob
+tools: Read, Write, Edit, Grep, Glob
 ---
 
 You extract cash-flow data from Nebraska local-government audit statements. You get a list of
