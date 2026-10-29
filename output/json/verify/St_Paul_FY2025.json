@@ -4,7 +4,7 @@
   "issues": [
     {"severity": "error", "path": "receipts[10].category", "page": 8,
      "extracted": "charges for services/fees", "on_page": "Sales 4,250,078 (Light/Water/Sewer/Landfill enterprise funds)",
-     "issue": "enterprise-fund utility sales belong in the user's own receipt category Utility Charges, not charges for services/fees; user_rules.py won't catch it because the receipts line has no fund name"},
+     "issue": "[fixed 2026-10-28: category set to Utility Charges] enterprise-fund utility sales belong in the user's own receipt category Utility Charges, not charges for services/fees; user_rules.py won't catch it because the receipts line has no fund name"},
     {"severity": "warning", "path": "receipts[0].category", "page": 5,
      "extracted": "property tax", "on_page": "Taxes: Property and motor vehicle 1,049,828",
      "issue": "a combined property and motor vehicle tax line went to property tax as the dominant part. The fund columns show 725,043 (General, labelled 'Property' on p10-11) and 149,299 (Debt Service, 'Property taxes' p14) are property tax; only Street's 175,486 is printed as combined. The rule for unsplittable combined tax lines is taxes (unlabeled); detail[74] likewise"},
@@ -16,15 +16,15 @@
      "issue": "the statement's Public Works includes 36,415 of Cemetery spending (the General Fund budget schedule p11 lists Cemetery under Public Works), but the detail lines put Cemetery under health/welfare, so the function split doesn't tie between statement and detail"},
     {"severity": "warning", "path": "detail[15].category", "page": 10,
      "extracted": "charges for services/fees", "on_page": "Ambulance Fund - Charges for services 90,754",
-     "issue": "fits the user's own category Ambulance Fees (its detail_category is already ambulance/rescue fees)"},
+     "issue": "[fixed 2026-10-28: category set to Ambulance Fees] fits the user's own category Ambulance Fees (its detail_category is already ambulance/rescue fees)"},
     {"severity": "warning", "path": "detail[18].category", "page": 10,
      "extracted": "charges for services/fees", "on_page": "Cemetery Fund - Charges for services 15,360",
-     "issue": "fits the user's own category Cemetery Fees"},
+     "issue": "[fixed 2026-10-28: category set to Cemetery Fees] fits the user's own category Cemetery Fees"},
     {"severity": "warning", "path": "detail[22].category", "page": 10,
      "extracted": "charges for services/fees", "on_page": "Pool Fund - Charges for services 43,769",
-     "issue": "fits the user's own category Recreation Fees"},
+     "issue": "[fixed 2026-10-28: category set to Recreation Fees] fits the user's own category Recreation Fees"},
     {"severity": "warning", "path": "detail[82].original_label", "page": 13,
      "extracted": "Capital outlay", "on_page": "Capital outlay 2,016,915 (Street Fund)",
-     "issue": "user rule: capital outlay lines are labelled 'Capital Outlay: <function>' (here Streets/Highways), with the printed text in printed_label; the General Fund lines were relabelled but this one wasn't"}
+     "issue": "[fixed 2026-10-28: relabelled 'Capital Outlay: Streets/Highways', printed text in printed_label] user rule: capital outlay lines are labelled 'Capital Outlay: <function>' (here Streets/Highways), with the printed text in printed_label; the General Fund lines were relabelled but this one wasn't"}
   ]
 }
