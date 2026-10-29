@@ -5,19 +5,19 @@
     {"severity": "error", "path": "receipts[6].category", "page": 13,
      "extracted": "charges for services/fees 10,798.35 (1423 5,663.35 + 1740 4,135.00 + 1955 1,000.00)",
      "on_page": "1423 Transportation Fees Other Districts (SPED) 5,663.35; 1740 Student Fees 4,135.00; 1955 Postsecondary Receipts 1,000.00",
-     "issue": "split item lumps student fees (Extracurricular Receipts) and postsecondary receipts (Tuition Received) into charges for services; the detail lines (detail[8], detail[12]) use those categories and the user rule 2026-10-28 requires them, so 5,135.00 is in the wrong receipt category; should be three split items"},
+     "issue": "[fixed 2026-10-28: split into three receipts: 1423 5,663.35 charges for services/fees, 1740 4,135.00 Extracurricular Receipts, 1955 1,000.00 Tuition Received] split item lumps student fees (Extracurricular Receipts) and postsecondary receipts (Tuition Received) into charges for services; the detail lines (detail[8], detail[12]) use those categories and the user rule 2026-10-28 requires them, so 5,135.00 is in the wrong receipt category; should be three split items"},
     {"severity": "error", "path": "detail[218].category", "page": 20,
      "extracted": "reimbursements/refunds", "on_page": "1620 Non Reimbursable 33,364.83 (School Nutrition)",
-     "issue": "non-reimbursable meal sales (a la carte), counted by the statement in Sales of Meals 121,286.00 (69,278.77 + 18,642.40 + 33,364.83); category should be School Lunch Sales, not reimbursements/refunds"},
+     "issue": "[fixed 2026-10-28: category School Lunch Sales] non-reimbursable meal sales (a la carte), counted by the statement in Sales of Meals 121,286.00 (69,278.77 + 18,642.40 + 33,364.83); category should be School Lunch Sales, not reimbursements/refunds"},
     {"severity": "error", "path": "detail[181].category", "page": 29,
      "extracted": "instruction", "on_page": "3535 High Ability Learners / 3551 Career Education lines (4,312.00 + 7,500.00) counted in statement line State Categorical Programs 12,575.63 (p9 = 3535 + 3551 + 3599)",
-     "issue": "user rule 2026-10-28: program lines follow the report's own grouping; the statement counts 3535 and 3551 in State Categorical Programs, so detail[181]-[184] should be State Categorical Programs (as 3599, detail[185], already is)"},
+     "issue": "[fixed 2026-10-28: 3535 and 3551 Schedule M lines now category State Categorical Programs] user rule 2026-10-28: program lines follow the report's own grouping; the statement counts 3535 and 3551 in State Categorical Programs, so detail[181]-[184] should be State Categorical Programs (as 3599, detail[185], already is)"},
     {"severity": "error", "path": "detail[186].category", "page": 29,
      "extracted": "instruction", "on_page": "6200 Title I, 6406, 6408, 6412, 6968, 6988, 6992, 6993, 6998 totals 284,701.79 = statement line Federal Programs 284,701.79 (p9)",
-     "issue": "the statement counts these federal program lines in Federal Programs; detail[186]-[208] should be category Federal Programs (user rule 2026-10-28), not instruction"},
+     "issue": "[fixed 2026-10-28: 6200-6998 Schedule M lines now category Federal Programs] the statement counts these federal program lines in Federal Programs; detail[186]-[208] should be category Federal Programs (user rule 2026-10-28), not instruction"},
     {"severity": "warning", "path": "disbursements[30].category", "page": 9,
      "extracted": "student transportation", "on_page": "Vehicle Operation, Maintenance & Purchasing 6,760.35 (code 2650)",
-     "issue": "code 2650 sits in the 2600 operation and maintenance of plant group (listed between Care & Upkeep of Grounds and Security); Building and Grounds may fit better (also detail[160]-[161])"},
+     "issue": "[fixed 2026-10-28: 2650 statement line and its two Schedule M lines moved to Building and Grounds] code 2650 sits in the 2600 operation and maintenance of plant group (listed between Care & Upkeep of Grounds and Security); Building and Grounds may fit better (also detail[160]-[161])"},
     {"severity": "warning", "path": "transfers_out", "page": 28,
      "extracted": 250000, "on_page": "2710 Vehicle Operation & Purchasing - Regular Education: Property 250,000.00",
      "issue": "assumption: the report never says this Property line is the transfer to the Depreciation Fund (it could be a bus purchase); recorded as hidden transfer (disbursements[33] reduced to 118,895.78, detail[171]); already in decision_needed"},
@@ -26,6 +26,6 @@
      "issue": "category judgment: building-project professional services and supplies counted as capital outlay"},
     {"severity": "warning", "path": "disbursements[42].original_label", "page": 9,
      "extracted": "Debt Service", "on_page": "Debt Services",
-     "issue": "printed label is 'Debt Services' (also disbursements[43])"}
+     "issue": "[fixed 2026-10-28: original_label now 'Debt Services' as printed on both split items] printed label is 'Debt Services' (also disbursements[43])"}
   ]
 }

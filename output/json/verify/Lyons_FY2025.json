@@ -4,19 +4,19 @@
   "issues": [
     {"severity": "error", "path": "disbursements[11].category", "page": 7,
      "extracted": "utilities", "on_page": "Contracted services 110,408",
-     "issue": "Business-type spending is listed by cost type; contracted services is a cost type (Professional/Contract Services, as the same Garbage line is categorised in detail). It should not be 'utilities'. The line also has no function: 'utilities' set."},
+     "issue": "[fixed 2026-10-28: category Professional/Contract Services with function utilities, label 'Contracted services' as printed] Business-type spending is listed by cost type; contracted services is a cost type (Professional/Contract Services, as the same Garbage line is categorised in detail). It should not be 'utilities'. The line also has no function: 'utilities' set."},
     {"severity": "warning", "path": "disbursements[11].original_label", "page": 7,
      "extracted": "Contracted services (production, operation and maintenance)", "on_page": "Contracted services",
-     "issue": "The label is expanded beyond the printed text and has no printed_label."},
+     "issue": "[fixed 2026-10-28: label as printed] The label is expanded beyond the printed text and has no printed_label."},
     {"severity": "warning", "path": "disbursements[20].original_label", "page": 7,
      "extracted": "Contracted services (general and administrative)", "on_page": "Contracted services",
-     "issue": "The label is expanded beyond the printed text and has no printed_label."},
+     "issue": "[fixed 2026-10-28: label as printed; detail lines also use the printed label] The label is expanded beyond the printed text and has no printed_label."},
     {"severity": "warning", "path": "disbursements[15].category", "page": 7,
      "extracted": "Fuel", "on_page": "Vehicle expense 13,882",
-     "issue": "Inconsistent within the report: the same cost line in the p14 detail ('Vehicle') is Repairs and Maintenance."},
+     "issue": "[fixed 2026-10-28: Repairs and Maintenance, matching p14 detail] Inconsistent within the report: the same cost line in the p14 detail ('Vehicle') is Repairs and Maintenance."},
     {"severity": "warning", "path": "disbursements[16].category", "page": 7,
      "extracted": "Salaries and Wages", "on_page": "Deferred compensation 30,611",
-     "issue": "Deferred compensation is a benefit. The p14 detail lines ('Deferred compensation/benefits') are Employee Benefits and Payroll Taxes, so the report is inconsistent."},
+     "issue": "[fixed 2026-10-28: Employee Benefits and Payroll Taxes] Deferred compensation is a benefit. The p14 detail lines ('Deferred compensation/benefits') are Employee Benefits and Payroll Taxes, so the report is inconsistent."},
     {"severity": "warning", "path": "receipts[8].category", "page": 5,
      "extracted": "donations/contributions", "on_page": "Grants and donations 47,052 (p10 budget schedule: 'Grants')",
      "issue": "The grantor is not stated, so this could be governmental grants (intergovernmental). It is printed under other financing sources and recorded as revenue outside the printed total. This is a judgment call."},
@@ -25,7 +25,7 @@
      "issue": "Recreation fees are 47,094 of the 50,854 (more than half), so the user's Recreation Fees category may apply. The p13 Parks/Pool detail lines (detail_category recreation/pool/park fees) also keep the category charges for services/fees."},
     {"severity": "warning", "path": "detail[*Transfers from other funds*].original_label", "page": 13,
      "extracted": "Transfers from other funds", "on_page": "Transfers from other funds 105,128",
-     "issue": "Not relabelled to 'Transfers In' under the user's detail other-financing label rule, although the Electric 'Transfer to other funds' line was relabelled to 'Transfers Out'."},
+     "issue": "[fixed 2026-10-28: relabelled Transfers In, printed text in printed_label] Not relabelled to 'Transfers In' under the user's detail other-financing label rule, although the Electric 'Transfer to other funds' line was relabelled to 'Transfers Out'."},
     {"severity": "warning", "path": "detail[Capital expenditures lines].detail_category", "page": 13,
      "extracted": "equipment purchases / construction/infrastructure / land and buildings", "on_page": "Capital expenditures (no object given)",
      "issue": "The object type was guessed for each department's capital expenditures line; the page does not print it."},
@@ -34,6 +34,6 @@
      "issue": "Under the user's 2026-10-27 cash-basis balance-sheet rule, governmental lines come from the governmental funds statement when its totals equal the government-wide figures, as they do here. The extraction kept the government-wide lines (the business-type column does include capital assets and debt). This is a judgment call."},
     {"severity": "warning", "path": "report_discrepancies[4].note", "page": 2,
      "extracted": "net position lines add to 4,402,622", "on_page": "lines add to 4,402,621 = printed Net Position",
-     "issue": "The note is slightly wrong. The Total column's net position lines tie to 4,402,621; the 1 gap is total assets 5,796,036 vs liabilities 1,393,414 + net position 4,402,621."}
+     "issue": "[fixed 2026-10-28: note corrected] The note is slightly wrong. The Total column's net position lines tie to 4,402,621; the 1 gap is total assets 5,796,036 vs liabilities 1,393,414 + net position 4,402,621."}
   ]
 }

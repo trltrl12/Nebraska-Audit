@@ -4,24 +4,24 @@
   "issues": [
     {"severity": "error", "path": "detail[49].category", "page": 14,
      "extracted": "charges for services/fees / other charges for services", "on_page": "Other receipts 1,046 (School Nutrition Fund)",
-     "issue": "Unexplained 'Other receipts' line put in charges for services; config/category_decisions.csv maps 'other receipts' to category other / detail_category 'Other / Miscellaneous Receipts' (category_decision should be set). Nothing on the page says it is a fee for services."},
+     "issue": "[fixed 2026-10-28: category other, detail_category 'Other / Miscellaneous Receipts', category_decision user 2026-10-23, review] Unexplained 'Other receipts' line put in charges for services; config/category_decisions.csv maps 'other receipts' to category other / detail_category 'Other / Miscellaneous Receipts' (category_decision should be set). Nothing on the page says it is a fee for services."},
     {"severity": "error", "path": "detail[78].category", "page": 17,
      "extracted": "charges for services/fees / other charges for services", "on_page": "Other receipts 326 (Qualified Capital Purpose Undertaking Fund)",
-     "issue": "Same as detail[49]: user decision for 'other receipts' is other / 'Other / Miscellaneous Receipts'; recorded as charges for services with no basis on the page."},
+     "issue": "[fixed 2026-10-28: category other, detail_category 'Other / Miscellaneous Receipts', category_decision user 2026-10-23, review] Same as detail[49]: user decision for 'other receipts' is other / 'Other / Miscellaneous Receipts'; recorded as charges for services with no basis on the page."},
     {"severity": "warning", "path": "receipts[11].category", "page": 4,
      "extracted": "charges for services/fees", "on_page": "Other local receipts 5,291 (General 4,965 = 1910 Rental of school equipment p9; QCPU Other receipts 326 p17)",
-     "issue": "Review note says the dominant category was used, but the dominant part (4,965 of 5,291) is rental, which is its own receipt category Rentals (as detail[7] is). category_decisions.csv maps 'other local receipts' to other. Either Rentals (dominant) or other fits better than charges for services."},
+     "issue": "[fixed 2026-10-28: category Rentals (dominant 4,965), review names the mix] Review note says the dominant category was used, but the dominant part (4,965 of 5,291) is rental, which is its own receipt category Rentals (as detail[7] is). category_decisions.csv maps 'other local receipts' to other. Either Rentals (dominant) or other fits better than charges for services."},
     {"severity": "warning", "path": "detail[0].schedule", "page": 9,
      "extracted": "General Fund Components combining (receipts)", "on_page": "General Fund Budget and Actual schedule (1100 Property taxes - general purpose)",
-     "issue": "Line cites the p9 budget schedule (budget_final 3,845,000 is from it) but its schedule name says combining schedule; inconsistent with the other General Fund receipt lines."},
+     "issue": "[fixed 2026-10-28: schedule renamed General Fund Budget and Actual (receipts)] Line cites the p9 budget schedule (budget_final 3,845,000 is from it) but its schedule name says combining schedule; inconsistent with the other General Fund receipt lines."},
     {"severity": "warning", "path": "detail[29].original_label", "page": 12,
      "extracted": "Interest received (Depreciation Fund)", "on_page": "Interest received",
-     "issue": "Fund name appended to the printed label (likewise detail[30] 'Interest (Employee Benefit Fund)' vs printed 'Interest' on p13)."},
+     "issue": "[fixed 2026-10-28: labels restored as printed ('Interest received', 'Interest'); fund name moved to department] Fund name appended to the printed label (likewise detail[30] 'Interest (Employee Benefit Fund)' vs printed 'Interest' on p13)."},
     {"severity": "warning", "path": "detail[31]", "page": 8,
      "extracted": "General Fund spending from combining Total column after reclassifications", "on_page": "Reclassifications column moves 500,000 (State categorical 10,277, Facilities acquisition 230,000, Federal programs 127,428, Support services - instruction 68,000, Student transportation 152,000, less 29,177/58,528 added to instruction lines) out of spending; Depreciation Fund shows it as Transfer - General Fund 500,000 (p12)",
      "issue": "Extractor's approach (Total column, transfer eliminated) ties to the statement and avoids double counting the hidden 500,000 transfer; noted for review because the General Fund budget schedule lines (p11: State categorical programs, Facilities acquisitions and construction, Federal programs) do not appear in detail."},
     {"severity": "warning", "path": "notes", "page": 18,
      "extracted": "'Read pages 1-18 of 18.' appears mid-notes, followed by attempt-2 text", "on_page": "18 pages",
-     "issue": "Notes do not end with 'Read pages 1-N of N' as required; page count (18) is correct and every page's lines are in the JSON."}
+     "issue": "[fixed 2026-10-28: notes now end with 'Read pages 1-18 of 18'] Notes do not end with 'Read pages 1-N of N' as required; page count (18) is correct and every page's lines are in the JSON."}
   ]
 }

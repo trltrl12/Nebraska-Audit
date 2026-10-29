@@ -5,14 +5,14 @@
     {"severity": "error", "path": "balance_sheet.equity", "page": 1,
      "extracted": "equity lines -116,873 + 97,456 + 10,148 + 663,184 = 653,915; total_equity 653,916",
      "on_page": "p1 Proprietary Restricted 10,148 + Unrestricted 663,184 = 673,332 vs printed Total Net Position 673,333 (Total column -106,725 + 760,640 = 653,915 vs 653,916; p5 Water 10,148 + 411,158 = 421,306 vs 421,307)",
-     "issue": "Equity lines are $1 short of total_equity because the printed net position lines don't add to the printed total; this report-side gap is not recorded in report_discrepancies"},
+     "issue": "[fixed 2026-10-28: added report_discrepancies 'balance' entry, difference +1, p1, describing the printed net position lines adding to $1 less than the printed totals; figures kept as printed] Equity lines are $1 short of total_equity because the printed net position lines don't add to the printed total; this report-side gap is not recorded in report_discrepancies"},
     {"severity": "warning", "path": "report_discrepancies[0]", "page": 6,
      "extracted": "difference -1; roll-forward 673,334 vs 673,333",
      "on_page": "TOTAL RECEIPTS printed 429,249; lines 424,674 + 3,890 + 684 = 429,248 (fund columns 173,628 + 119,857 + 135,763 = 429,248)",
-     "issue": "The real discrepancy is the printed Total Receipts (429,249, $1 above its lines); using the line items the roll-forward ties exactly to 673,333 (and -96,752). The note and the same claim in notes misdescribe it; difference should be +1 on the receipts total"},
+     "issue": "[fixed 2026-10-28: discrepancy rewritten as printed Total Receipts 429,249 vs lines 429,248, difference +1; notes corrected] The real discrepancy is the printed Total Receipts (429,249, $1 above its lines); using the line items the roll-forward ties exactly to 673,333 (and -96,752). The note and the same claim in notes misdescribe it; difference should be +1 on the receipts total"},
     {"severity": "warning", "path": "receipts[14].category", "page": 6,
      "extracted": "charges for services/fees", "on_page": "Charge for services (Water/Sewer/Sanitation)",
-     "issue": "Utility fund charges are Utility Charges under the 2026-10-28 rule; the matching detail lines already use Utility Charges"},
+     "issue": "[fixed 2026-10-28: category set to Utility Charges] Utility fund charges are Utility Charges under the 2026-10-28 rule; the matching detail lines already use Utility Charges"},
     {"severity": "warning", "path": "receipts[7].category", "page": 4,
      "extracted": "donations/contributions", "on_page": "Grant funds 1,222",
      "issue": "Grant source not stated; could be intergovernmental/state or federal grant rather than a private donation (also detail line)"},
@@ -25,6 +25,6 @@
     {"severity": "warning", "path": "decision_needed", "page": 10,
      "extracted": "two questions about p10 'Taxes' 299,348 and 'Interest' 19,019 detail lines recorded as taxes (unlabeled)/investment income",
      "on_page": "p10 all-funds budget schedule",
-     "issue": "Stale: detail no longer contains any p10 lines (replaced by per-fund statement lines), so the recorded_as text describes lines that don't exist; amount also given as an object instead of a number"}
+     "issue": "[fixed 2026-10-28: stale decision_needed entries removed] Stale: detail no longer contains any p10 lines (replaced by per-fund statement lines), so the recorded_as text describes lines that don't exist; amount also given as an object instead of a number"}
   ]
 }

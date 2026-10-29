@@ -3,7 +3,7 @@
   "entity_type": "village",
   "fiscal_year_end": "2025-09-30",
   "basis": "cash",
-  "extraction_attempt": 2,
+  "extraction_attempt": 3,
   "beginning_cash": {
     "amount": 37759,
     "source_page": 4
@@ -128,7 +128,7 @@
     },
     {
       "fund_type": "business-type",
-      "category": "charges for services/fees",
+      "category": "Utility Charges",
       "original_label": "Charge for services",
       "amount": 424674,
       "source_page": 6
@@ -1191,9 +1191,15 @@
   "report_discrepancies": [
     {
       "check": "business",
-      "difference": -1,
+      "difference": 1,
       "source_page": 6,
-      "note": "Proprietary statement: net change in net position printed (96,752) but total receipts 429,249 - disbursements 379,084 + other (146,916) = (96,751); beginning 770,085 + parts gives 673,334 vs printed ending 673,333."
+      "note": "Proprietary statement TOTAL RECEIPTS printed 429,249, but its lines (Charge for services 424,674 + Customer Deposits 3,890 + Other 684) and its fund columns (173,628 + 119,857 + 135,763) add to 429,248. Using the line items, the roll-forward ties: 770,085 + 429,248 - 379,084 - 146,916 = 673,333 (net change -96,752 as printed)."
+    },
+    {
+      "check": "balance",
+      "difference": 1,
+      "source_page": 1,
+      "note": "Statement of Net Position (p1): Total column net position lines Restricted (106,725) + Unrestricted 760,640 = 653,915 vs printed TOTAL NET POSITION 653,916; Proprietary column Restricted 10,148 + Unrestricted 663,184 = 673,332 vs printed 673,333 (same on p5: Total 673,332 vs 673,333; Water 10,148 + 411,158 = 421,306 vs 421,307). Equity lines recorded as printed, so they sum to 653,915 against total_equity 653,916."
     },
     {
       "check": "totals",
@@ -1256,25 +1262,5 @@
       "note": "Capital outlay fund cells 11,809 + 143,440 + 3,582 = 158,831; Total column prints 158,830."
     }
   ],
-  "decision_needed": [
-    {
-      "question": "p10 all-funds 'Taxes' 299,348 mixes governmental taxes 245,444 (p4) with the Water bond property tax 53,905 (p6); the pieces add to 299,349, so the line can't be split exactly. Split by fund type using p4/p6, or keep as one governmental line?",
-      "amount": {
-        "amount": 299348,
-        "source_page": 10
-      },
-      "recorded_as": "one detail line, fund_type governmental, taxes (unlabeled), review",
-      "source_page": 10
-    },
-    {
-      "question": "p10 all-funds 'Interest' 19,019 mixes governmental 14,268 (p4) and proprietary 4,752 (p6); the pieces add to 19,020. Split by fund type, or keep as one governmental line?",
-      "amount": {
-        "amount": 19019,
-        "source_page": 10
-      },
-      "recorded_as": "one detail line, fund_type governmental, investment income, review",
-      "source_page": 10
-    }
-  ],
-  "notes": "Cash-basis village. Governmental data from Statement of Receipts, Disbursements and Changes in Fund Balances (Total column, p4); General, Street, Keno are governmental. Water, Sewer, Sanitation are business-type (p6 total column). Interest income, bond principal/interest printed below the Total Receipts/Disbursements on p4 and the 'Other receipts (disbursements)' block on p6 are recorded as normal items with outside_printed_total. Business-type: 770,085 + 429,249 + 4,752 + 53,905 - 379,084 - 30,000 - 16,743 - 158,830 = 673,334 vs printed 673,333 (report is off by 1). Cash flow statement (pp7-8) shows beginning 770,084 vs 770,085 on p6; p6 used. Balance sheet (attempt 2, user rule 2026-10-27): governmental lines now come from the Statement of Assets and Fund Balances - Cash Basis - Governmental Funds (p3, Total column: cash -25,218, cash with County Treasurer 5,801; fund balances Restricted -116,873, Unassigned 97,456), whose total (-19,417) equals the government-wide governmental column on p1; business-type lines from the p1 Proprietary column; totals from the p1 Total column (governmental -19,417 + proprietary 673,333 = 653,916 net position). Governmental cash is negative (Street fund -116,873). General Fund statement on p9 shows the combined governmental totals (278,824 / 241,635) despite its title, so it is a duplicate and not recorded in detail. Personnel services 114,714 on p4 is split by its printed General 71,354 / Street 43,360 columns. Charges for services 21,920 on p4 is the franchise fee (p10 'Franchise Fees', p2 'Electric, gas, and cable lease'), so it is recorded as occupation/franchise tax. Zero line Keno omitted. Detail (user 2026-10-27): per-fund lines from the fund statements' columns (p4, p6) replace the combined all-funds budget schedule (p10). Read pages 1-10 of 10"
+  "notes": "Cash-basis village. Governmental data from Statement of Receipts, Disbursements and Changes in Fund Balances (Total column, p4); General, Street, Keno are governmental. Water, Sewer, Sanitation are business-type (p6 total column). Interest income, bond principal/interest printed below the Total Receipts/Disbursements on p4 and the 'Other receipts (disbursements)' block on p6 are recorded as normal items with outside_printed_total. Business-type: the line items roll forward exactly (770,085 + 487,905 - 584,657 = 673,333); the printed p6 TOTAL RECEIPTS 429,249 is $1 above its lines (429,248), recorded in report_discrepancies. Cash flow statement (pp7-8) shows beginning 770,084 vs 770,085 on p6; p6 used. Balance sheet (user rule 2026-10-27): governmental lines come from the Statement of Assets and Fund Balances - Cash Basis - Governmental Funds (p3, Total column: cash -25,218, cash with County Treasurer 5,801; fund balances Restricted -116,873, Unassigned 97,456), whose total (-19,417) equals the government-wide governmental column on p1; business-type lines from the p1 Proprietary column; totals from the p1 Total column (net position 653,916). The printed net position lines on p1 add to 653,915, $1 below the printed total (report_discrepancies). Governmental cash is negative (Street fund -116,873). General Fund statement on p9 shows the combined governmental totals (278,824 / 241,635) despite its title, so it is a duplicate and not recorded in detail. Personnel services 114,714 on p4 is split by its printed General 71,354 / Street 43,360 columns. Charges for services 21,920 on p4 is the franchise fee (p10 'Franchise Fees', p2 'Electric, gas, and cable lease'), so it is recorded as occupation/franchise tax. Business-type 'Charge for services' is Utility Charges (user 2026-10-28). Zero line Keno omitted. Detail (user 2026-10-27): per-fund lines from the fund statements' columns (p4, p6) replace the combined all-funds budget schedule (p10); the earlier decision_needed questions about the p10 'Taxes'/'Interest' lines were removed because those lines are no longer recorded. Attempt 3 (2026-10-28): verifier fixes (equity discrepancy recorded, receipts discrepancy corrected, utility charges category, stale decision_needed removed). Read pages 1-10 of 10"
 }

@@ -3,7 +3,7 @@
   "entity_type": "city",
   "fiscal_year_end": "2025-09-30",
   "basis": "cash",
-  "extraction_attempt": 1,
+  "extraction_attempt": 2,
   "beginning_cash": {
     "amount": 3099878,
     "source_page": 6
@@ -78,11 +78,10 @@
     },
     {
       "fund_type": "governmental",
-      "category": "charges for services/fees",
+      "category": "Rentals",
       "original_label": "Lease payments",
       "amount": 270874,
-      "source_page": 5,
-      "review": "lease payments treated as rentals/charges"
+      "source_page": 5
     },
     {
       "fund_type": "governmental",
@@ -96,7 +95,7 @@
     },
     {
       "fund_type": "business-type",
-      "category": "charges for services/fees",
+      "category": "Utility Charges",
       "original_label": "Operating revenues - Charge for services",
       "amount": 444168,
       "source_page": 8
@@ -704,13 +703,12 @@
       "fund": "General Fund",
       "department": null,
       "section": "revenue",
-      "category": "charges for services/fees",
+      "category": "Rentals",
       "detail_category": "rentals",
       "original_label": "Lease payments",
       "amount": 270874,
       "budget_final": null,
-      "source_page": 5,
-      "review": "lease payments treated as rentals/charges"
+      "source_page": 5
     },
     {
       "schedule": "Statement of Revenues, Expenditures, and Changes in Fund Balances - Modified Cash Basis - Governmental Funds",
@@ -880,7 +878,9 @@
       "section": "expenditure",
       "category": "capital outlay",
       "detail_category": "not itemized",
-      "original_label": "Capital outlay",
+      "original_label": "Capital Outlay: Streets/Highways",
+      "printed_label": "Capital outlay",
+      "computed": "capital outlay under function streets/highways (Street Fund column)",
       "amount": 120574,
       "budget_final": null,
       "source_page": 5
@@ -1241,7 +1241,9 @@
       "section": "expenditure",
       "category": "capital outlay",
       "detail_category": "not itemized",
-      "original_label": "Capital outlay",
+      "original_label": "Capital Outlay: Utilities",
+      "printed_label": "Capital outlay",
+      "computed": "capital outlay under function utilities (Water Fund column)",
       "amount": 317548,
       "budget_final": null,
       "source_page": 8,
@@ -1255,7 +1257,9 @@
       "section": "expenditure",
       "category": "capital outlay",
       "detail_category": "not itemized",
-      "original_label": "Capital outlay",
+      "original_label": "Capital Outlay: Utilities",
+      "printed_label": "Capital outlay",
+      "computed": "capital outlay under function utilities (Sewer Fund column)",
       "amount": 581955,
       "budget_final": null,
       "source_page": 8,
@@ -1482,13 +1486,5 @@
       "computed": "Loan proceeds (nonoperating; no other financing total printed)"
     }
   ],
-  "notes": "Modified cash basis city. Governmental balances: statement prints fund balances (beginning 3,099,878 p6, ending 2,866,804 p4/p6) which equal governmental net position = cash + county treasurer + investments, used as beginning/ending cash. Governmental column used from Total Governmental Funds (p5). Business-type (Lottery, Water, Sewer) from proprietary statement p8: loan proceeds 936,595 recorded as debt_proceeds; capital outlay and debt service recorded as disbursements (total 1,255,857 ties to p2). Business receipts total computed since no single total printed. No interfund transfers. Detail: only the all-funds budget schedule (p9) exists; it mixes governmental and utility funds (e.g. Debt service principal 216,403 = 168,398 gov + 48,005 BT) so it cannot be assigned to a fund type and was omitted (detail empty). Note p9 actual receipts (2,550,923) and disbursements (3,579,241) combine both fund types. Balance sheet from government-wide Total column, no liabilities printed. Read pages 1-9 of 9 Proprietary Miscellaneous 16,015 split by column: Water+Sewer 10,550 utilities, Lottery 5,465 economic development (p9 community development). Detail (user 2026-10-27): per-fund lines from the fund statements' columns (p5, p8) replace the combined schedule.",
-  "decision_needed": [
-    {
-      "question": "The only detail schedule (p9, budget and actual, all funds) mixes governmental and utility funds (e.g. Debt service principal 216,403 = 168,398 governmental + 48,005 business-type). Should its lines be recorded in detail with fund type assigned where determinable (Water 507,221, Wastewater 688,115, Community development 5,465 are business-type), or left out as now?",
-      "amount": 3579241,
-      "recorded_as": "omitted; detail empty",
-      "source_page": 9
-    }
-  ]
+  "notes": "Modified cash basis city. Governmental balances: statement prints fund balances (beginning 3,099,878 p6, ending 2,866,804 p4/p6) which equal governmental net position = cash + county treasurer + investments, used as beginning/ending cash (investments 2,443,179 are inside these balances, so ending_investments is null). Governmental column used from Total Governmental Funds (p5). Business-type (Lottery, Water, Sewer) from proprietary statement p8: loan proceeds 936,595 recorded as debt_proceeds; capital outlay and debt service recorded as disbursements (total 1,255,857 ties to p2). Business receipts total computed since no single total printed. Proprietary Miscellaneous 16,015 split by column: Water+Sewer 10,550 utilities, Lottery 5,465 economic development (p9 community development). No interfund transfers. Detail: the only supplementary schedule is the all-funds budget schedule (p9), which mixes governmental and utility funds (e.g. Debt service principal 216,403 = 168,398 gov + 48,005 BT); per the user rule of 2026-10-27 (combined all-funds schedule only), detail holds one line per individual fund column of the governmental funds statement (p5) and proprietary funds statement (p8) instead, and the combined schedule lines are not recorded. Note p9 actual receipts (2,550,923) and disbursements (3,579,241) combine both fund types. Balance sheet from government-wide Total column, no liabilities printed. Attempt 2 (2026-10-28 verifier fixes): 'Lease payments' 270,874 (receipts and detail) moved to category Rentals; proprietary 'Charge for services' 444,168 receipt moved to Utility Charges to match its detail lines; Street/Water/Sewer capital outlay detail lines relabelled 'Capital Outlay: <function>'; stale decision on the p9 schedule removed (settled by the user's per-fund detail rule). Read pages 1-9 of 9"
 }
