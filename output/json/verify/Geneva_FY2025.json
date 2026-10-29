@@ -1,18 +1,27 @@
 {
   "stem": "Geneva_FY2025",
-  "values_checked": 225,
+  "values_checked": 254,
   "issues": [
-    {"severity": "warning", "path": "receipts[16].category", "page": 7,
-     "extracted": "charges for services/fees", "on_page": "Charges for services 1,059,117 (Water and Sewer enterprise funds)",
-     "issue": "Under the user rule of 2026-10-28, utility fund sales and charges go in category Utility Charges, not charges for services/fees."},
+    {"severity": "error", "path": "receipts[16].category", "page": 7,
+     "extracted": "charges for services/fees", "on_page": "Charges for services 1,059,117 (Water Fund 545,612 + Sewer Fund 513,505, enterprise funds)",
+     "issue": "water/sewer enterprise fund charges are utility fund sales/charges; the user's rule puts these in the receipt category Utility Charges, not charges for services/fees. user_rules.py won't fix this because the line has no fund field naming the utility"},
+    {"severity": "warning", "path": "receipts[8].category", "page": 5,
+     "extracted": "charges for services/fees", "on_page": "Charges for services 293,415 (p17 by department: Activity & Education 13,010, Park & Recreation 152,693, Youth Rec Center 250, Pool 63,070, Rescue 41,617, Cemetery 18,700, Library 3,400, Tree Dump 675)",
+     "issue": "the General Fund combining schedule prints this line's breakdown. Recreation departments make up 229,023 (78%), so under the dominant-category / split_from rule this is mostly Recreation Fees, plus Ambulance Fees 41,617 and Cemetery Fees 18,700. The same applies to detail[5] (detail_category 'other charges for services')"},
     {"severity": "warning", "path": "receipts[9].category", "page": 5,
-     "extracted": "charges for services/fees", "on_page": "Rental and fees 3,520 (Auditorium column, p17)",
-     "issue": "Mostly rental income (detail line uses detail_category rentals); the receipt category could be Rentals under the 2026-10-28 rule. The label mixes rental and fees."},
+     "extracted": "charges for services/fees", "on_page": "Rental and fees 3,520 (all Auditorium, p17)",
+     "issue": "inconsistent with the detail line (detail[6] detail_category 'rentals'). Auditorium rental fits the Rentals receipt category; the same label should get the same category throughout the report"},
+    {"severity": "warning", "path": "receipts[11].category", "page": 5,
+     "extracted": "donations/contributions", "on_page": "Grants and donations 25,475 (Statement of Activities: Operating Grants and Contributions; p17: Rescue 4,008, Fire 4,008, Activity & Education 1,020, Library 8,689, Cemetery 7,750)",
+     "issue": "a mixed grants and donations line. Part may be government grants, so donations/contributions is a judgment call"},
     {"severity": "warning", "path": "disbursements[10].function", "page": 7,
-     "extracted": null, "on_page": "Utilities and telephone 97,934",
-     "issue": "This is a business-type cost-type line and has no function: \"utilities\" field, unlike the other cost-type lines."},
-    {"severity": "warning", "path": "balance_sheet.column", "page": 1,
-     "extracted": "Governmental Activities | Business-type Activities", "on_page": "Total column",
-     "issue": "Lines are taken from the governmental and business-type columns separately, not from the Total column. The pairs do add up to the printed totals (assets 22,241,597; liabilities 7,114,531; net position 15,127,066)."}
+     "extracted": null, "on_page": "Utilities and telephone 97,934 (enterprise funds, by cost type)",
+     "issue": "the other cost-type utility lines carry function 'utilities' but this one has no function field; the category 'utilities' (utility bills) is right"},
+    {"severity": "warning", "path": "detail[99].detail_category", "page": 10,
+     "extracted": "other state aid", "on_page": "Street Fund Intergovernmental 406,160",
+     "issue": "Street Fund intergovernmental revenue is most likely the state highway allocation (detail category 'highway allocation'). The page doesn't say, so this is a judgment call"},
+    {"severity": "warning", "path": "detail[109].budget_final", "page": 11,
+     "extracted": null, "on_page": "Net transfers budget: Sales Tax (16,597) p11; Debt Service (1,578,108) p12 (detail[117]); Capital Projects 300,000 p13 (detail[123])",
+     "issue": "the budget figures for the Net transfers lines are printed but recorded as null (the actual amounts are correct)"}
   ]
 }

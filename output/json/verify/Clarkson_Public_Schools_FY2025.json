@@ -1,21 +1,38 @@
 {
   "stem": "Clarkson_Public_Schools_FY2025",
-  "values_checked": 300,
+  "values_checked": 309,
   "issues": [
-    {"severity": "error", "path": "detail[201].category", "page": 18,
-     "extracted": "reimbursements/refunds", "on_page": "1620 Non Reimbursable 3,893.00 (School Nutrition receipts)",
-     "issue": "[fixed 2026-10-28: category set to School Lunch Sales (non-reimbursable meal sales, counted in Sales of Meals p5)] Non-reimbursable meals are meal sales (a la carte/adult meals not reimbursed by USDA), not a reimbursement/refund; the line's own detail_category is school lunch sales and the statement counts it in 'Sales of Meals' (p5). Category should be School Lunch Sales."},
-    {"severity": "warning", "path": "detail[202].category", "page": 18,
-     "extracted": "reimbursements/refunds", "on_page": "1630 Special Functions Reimbursement 2,364.17",
-     "issue": "Counted in 'Sales of Meals' on Exhibit III; likely meal charges for special functions (School Lunch Sales) rather than a refund. Label says reimbursement, so defensible."},
-    {"severity": "warning", "path": "detail[211].detail_category", "page": 18,
-     "extracted": "dues, training and travel", "on_page": "3100-800 Other 837.65",
-     "issue": "Printed only as 'Other'; dues/training/travel is a guess (review note present)."},
-    {"severity": "warning", "path": "detail[71].detail_category", "page": 22,
-     "extracted": "repairs and maintenance", "on_page": "2141 Psychology Services - School Age: Other Property Services 8,664.45",
-     "issue": "All 'Other Property Services' lines are mapped to repairs and maintenance; under psychology, speech, IDEA, REAP and Board of Education they are almost certainly contracted services (professional/contract services). Review notes are present."},
-    {"severity": "warning", "path": "disbursements[26].review", "page": 7,
-     "extracted": "state categorical programs ...; categorized as instruction", "on_page": "State Programs 56,221.91",
-     "issue": "[fixed 2026-10-28: stale review notes removed from disbursements[26] and [27]] Stale review text: the line is category State Categorical Programs, not instruction. Same for disbursements[27] Federal Programs 165,387.89."}
+    {
+      "severity": "warning",
+      "path": "receipts[19].category",
+      "page": 15,
+      "extracted": "other (Non-Revenue Receipts 776,836.30, of which 725,000.00 is Depreciation Fund 5200 Allocation from General Fund)",
+      "on_page": "5200 Allocation from General Fund 725,000.00 (p15); Activities and School Nutrition use the same code 5200 for 'Transfers From General Fund' / 'Transfer'",
+      "issue": "93% of this line is probably an interfund transfer counted as revenue. The General Fund shows only 144,666.25 of transfers out (p28). Its 2710 Vehicle Operation 'Property' line is 736,656.00 against a 265,000.00 budget (p25), so it may hold the 725,000 outflow, but no page shows that. Already in decision_needed and report_discrepancies; the outcome is up to the user."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[211].detail_category",
+      "page": 18,
+      "extracted": "dues, training and travel",
+      "on_page": "3100-800 Other 837.65",
+      "issue": "Nothing on the page supports the dues/training category; the printed label is only 'Other', so miscellaneous expenditure fits better"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[202].category",
+      "page": 18,
+      "extracted": "reimbursements/refunds (detail_category school lunch sales)",
+      "on_page": "1630 Special Functions Reimbursement 2,364.17",
+      "issue": "The category and detail_category disagree. The statement receipt line 'Sales of Meals' 82,985.70 (receipts[17], School Lunch Sales) includes this 2,364.17, so the report categorises the same money two ways"
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[33].detail_category",
+      "page": 16,
+      "extracted": "Salaries / Benefits",
+      "on_page": "2900-890 Other Charges 53,396.84",
+      "issue": "Doesn't match the matching detail line (detail[193], 'Other / Miscellaneous Expenses') for the same 53,396.84; the page only says 'Other Charges' (Employee Benefit Fund)"
+    }
   ]
 }

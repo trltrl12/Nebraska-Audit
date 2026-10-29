@@ -3,7 +3,7 @@
   "entity_type": "city",
   "fiscal_year_end": "2025-09-30",
   "basis": "GAAP",
-  "extraction_attempt": 4,
+  "extraction_attempt": 5,
   "beginning_cash": null,
   "beginning_investments": null,
   "beginning_fund_balance": {
@@ -197,7 +197,7 @@
       "original_label": "Airport operations",
       "amount": 595168,
       "source_page": 6,
-      "review": "no airport category; airport operations",
+      "review": "no airport category; airport operations (report prints Airport as its own function, p3/p6; re-check 2026-10-29: no listed function fits, kept other; includes airport bond issuance costs 15,275 per p19)",
       "detail_category": "Airport",
       "category_decision": "user 2026-10-23"
     },
@@ -255,11 +255,12 @@
     },
     {
       "fund_type": "governmental",
-      "category": "other",
+      "category": "public safety",
       "original_label": "MFO payments - other entities",
       "amount": 296574,
       "source_page": 6,
-      "review": "payments to other entities, purpose not stated; PDF check: MFO not defined; in Public Safety Capital Improvements fund with police/fire equipment; payments to other entities, purpose not stated",
+      "computed": "function from Schedule G-3 (p32): paid from the Public Safety Capital Improvements Capital Projects Fund alongside police and fire equipment",
+      "review": "re-check 2026-10-29: moved from other to public safety; MFO (mutual finance organization) payments in the Public Safety Capital Improvements fund (p32)",
       "detail_category": "grants/payments to other entities",
       "category_decision": "pdf check 2026-10-23"
     },
@@ -2584,13 +2585,15 @@
       "fund": "Airport",
       "department": null,
       "section": "expenditure",
-      "category": "other",
-      "detail_category": "Buildings",
-      "original_label": "Buildings",
+      "category": "capital outlay",
+      "detail_category": "land and buildings",
+      "original_label": "Capital Outlay: Airport",
+      "printed_label": "Buildings",
+      "computed": "function: Airport (printed under Capital Outlay heading, p19)",
       "amount": 0,
       "budget_final": 20000,
       "source_page": 19,
-      "review": "airport operations; no airport category",
+      "review": "re-check 2026-10-29: printed under the Capital Outlay heading; moved from other to capital outlay",
       "category_decision": "user 2026-10-23"
     },
     {
@@ -2628,13 +2631,14 @@
       "fund": "Airport",
       "department": null,
       "section": "expenditure",
-      "category": "other",
-      "detail_category": "Debt Services / Miscellaneous",
+      "category": "Debt Service",
+      "debt_service_part": "interest",
+      "detail_category": "debt interest and fees",
       "original_label": "Bond issuance costs",
       "amount": 15275,
       "budget_final": 15000,
       "source_page": 19,
-      "review": "airport operations; no airport category",
+      "review": "re-check 2026-10-29: printed under Debt Service on p19, moved from other; Exhibit 4 (p6) counts it inside Airport operations 595,168",
       "category_decision": "user 2026-10-23"
     },
     {
@@ -3404,13 +3408,13 @@
       "fund": "Public Safety Capital Improvements",
       "department": null,
       "section": "expenditure",
-      "category": "other",
+      "category": "public safety",
       "detail_category": "grants/payments to other entities",
       "original_label": "MFO payments - other entities",
       "amount": 296574,
       "budget_final": 305500,
       "source_page": 32,
-      "review": "payments to other entities, purpose not stated (budgeted under Capital Projects in the Public Safety Capital Improvements fund); PDF check: MFO not defined; in Public Safety Capital Improvements fund with police/fire equipment; payments to other entities, purpose not stated",
+      "review": "re-check 2026-10-29: moved from other to public safety; MFO (mutual finance organization) payments under Capital Projects in the Public Safety Capital Improvements fund with police/fire equipment",
       "category_decision": "pdf check 2026-10-23"
     },
     {
@@ -3764,5 +3768,13 @@
       "source_page": 33
     }
   ],
-  "notes": "GAAP city, FYE 9/30/2025. Governmental receipts/disbursements/fund balances from Exhibit 4 (p6) Total Governmental Funds column; ending_cash from Exhibit 3 total (p4) cash and cash equivalents 15,612,590 (investments 2,480,534 and county treasurer cash 168,939 separate); beginning_cash not shown. Governmental roll-forward: 18,141,096 + 23,586,304 - 26,553,740 + transfers 0 net + bonds 3,285,000 + other financing 79,171 = 18,537,831. Re-check attempt 3 (2026-10-28): Exhibit 4 'Property tax' 3,343,443 = General Fund B-3 property tax 2,822,762 + homestead exemption allocation 191,820 + property tax credit 202,804 + interest on delinquent taxes 10,419 (p15) + Airport 3,749 (p19) + GO Debt Service 111,889 (p29), so it is split (split_from) into property tax 2,938,400, Homestead Exemption 191,820, Property Tax Credit 202,804 and Penalties and Interest on Taxes 10,419; the B-3 detail homestead and property tax credit lines now carry those categories; Pro-Rate motor vehicle 7,962 (B-3 p15) split out of Intergovernmental 8,411,742 (remainder 8,403,780); business-type 'Electric energy purchased' 12,029,972 now category Purchased Power/Cost of Sales (function utilities). Attempt 4 (2026-10-28 verifier fixes): C-1 Streets lines under the 'Capital Outlay' heading (Buildings 0, Improvements other than buildings 2,722,523, Machinery and equipment 99,566, p21) now category capital outlay labelled 'Capital Outlay: Streets and Highways' (printed text in printed_label); business-type Charges for services 29,767,427 (p9, Electric/Water/WPC/BASWA/Sanitation) now Utility Charges; 'Lease revenue and interest on leases' 134,639 (p9) and B-3 'Lease income - BASWA', 'Land use agreements', 'Auditorium use fee', 'Farm income' now Rentals; B-3 'Camping receipts' now Recreation Fees. Business-type from Exhibit 7 (p9) enterprise funds Total column: no single total printed, so receipts = operating revenues + investment earnings + gain on disposal + misc + grant revenues + lease revenue; disbursements = operating expenses + interest expense + bond issuance cost (sum equals income before contributions 2,153,256); capital contributions 58,668 in business_type.other_financing; 54,345,759 + 2,153,256 + 58,668 = 56,557,683. Internal service fund excluded (governmental activities). Proprietary cash flow figures from Exhibit 8 (p10) enterprise Total column; no noncapital financing section printed. Balance sheet is the government-wide Statement of Net Position Total primary government column (pp1-2); component units excluded. Detail: recorded the more detailed fund schedules only: General Fund B-3 (p15-18, excludes Airport which is a separate B-4 schedule on p19-20; B-2 combining p14 and A-1 p12 not recorded to avoid double counting), Streets C-1 (A-2 p13 skipped as duplicate), Economic Development E-3, CDBG E-4, Keno E-5, 911 E-6, GO Debt Service F-3, Unbonded Assessments F-4, Public Safety Capital Improvements G-3 (p32) and Capital Improvements G-4 (p33) (the nonmajor combining statements E-2 p23, F-2 p28 and G-2 p31 are not recorded, to avoid double counting with the fund budget schedules). Zero-actual G-4 lines (Public building improvements, Lodging tax projects) omitted. B-3 'Other services and charges' and 'Contingency' recorded as not itemized; 'Personal services' as salaries and wages (includes benefits). Printed budget_final shown as final budget; '-' recorded as 0. Printed report shows B-3 revenue variance 846,392 vs A-1 846,391 (printed rounding, not recorded). Read pages 1-36 of 36."
+  "decision_needed": [
+    {
+      "question": "Beatrice prints Airport as its own governmental function (Exhibit 2 p3, Exhibit 4 'Airport operations' p6). There is no airport/transportation spending category; should airport operations get their own category (or be grouped under another function) instead of other?",
+      "amount": 595168,
+      "recorded_as": "disbursements: other 595,168 (review); B-4 Airport fund operating detail lines (p19) also other",
+      "source_page": 6
+    }
+  ],
+  "notes": "GAAP city, FYE 9/30/2025. Governmental receipts/disbursements/fund balances from Exhibit 4 (p6) Total Governmental Funds column; ending_cash from Exhibit 3 total (p4) cash and cash equivalents 15,612,590 (investments 2,480,534 and county treasurer cash 168,939 separate); beginning_cash not shown. Governmental roll-forward: 18,141,096 + 23,586,304 - 26,553,740 + transfers 0 net + bonds 3,285,000 + other financing 79,171 = 18,537,831. Re-check attempt 3 (2026-10-28): Exhibit 4 'Property tax' 3,343,443 = General Fund B-3 property tax 2,822,762 + homestead exemption allocation 191,820 + property tax credit 202,804 + interest on delinquent taxes 10,419 (p15) + Airport 3,749 (p19) + GO Debt Service 111,889 (p29), so it is split (split_from) into property tax 2,938,400, Homestead Exemption 191,820, Property Tax Credit 202,804 and Penalties and Interest on Taxes 10,419; the B-3 detail homestead and property tax credit lines now carry those categories; Pro-Rate motor vehicle 7,962 (B-3 p15) split out of Intergovernmental 8,411,742 (remainder 8,403,780); business-type 'Electric energy purchased' 12,029,972 now category Purchased Power/Cost of Sales (function utilities). Attempt 4 (2026-10-28 verifier fixes): C-1 Streets lines under the 'Capital Outlay' heading (Buildings 0, Improvements other than buildings 2,722,523, Machinery and equipment 99,566, p21) now category capital outlay labelled 'Capital Outlay: Streets and Highways' (printed text in printed_label); business-type Charges for services 29,767,427 (p9, Electric/Water/WPC/BASWA/Sanitation) now Utility Charges; 'Lease revenue and interest on leases' 134,639 (p9) and B-3 'Lease income - BASWA', 'Land use agreements', 'Auditorium use fee', 'Farm income' now Rentals; B-3 'Camping receipts' now Recreation Fees. Business-type from Exhibit 7 (p9) enterprise funds Total column: no single total printed, so receipts = operating revenues + investment earnings + gain on disposal + misc + grant revenues + lease revenue; disbursements = operating expenses + interest expense + bond issuance cost (sum equals income before contributions 2,153,256); capital contributions 58,668 in business_type.other_financing; 54,345,759 + 2,153,256 + 58,668 = 56,557,683. Internal service fund excluded (governmental activities). Proprietary cash flow figures from Exhibit 8 (p10) enterprise Total column; no noncapital financing section printed. Balance sheet is the government-wide Statement of Net Position Total primary government column (pp1-2); component units excluded. Detail: recorded the more detailed fund schedules only: General Fund B-3 (p15-18, excludes Airport which is a separate B-4 schedule on p19-20; B-2 combining p14 and A-1 p12 not recorded to avoid double counting), Streets C-1 (A-2 p13 skipped as duplicate), Economic Development E-3, CDBG E-4, Keno E-5, 911 E-6, GO Debt Service F-3, Unbonded Assessments F-4, Public Safety Capital Improvements G-3 (p32) and Capital Improvements G-4 (p33) (the nonmajor combining statements E-2 p23, F-2 p28 and G-2 p31 are not recorded, to avoid double counting with the fund budget schedules). Zero-actual G-4 lines (Public building improvements, Lodging tax projects) omitted. B-3 'Other services and charges' and 'Contingency' recorded as not itemized; 'Personal services' as salaries and wages (includes benefits). Printed budget_final shown as final budget; '-' recorded as 0. Printed report shows B-3 revenue variance 846,392 vs A-1 846,391 (printed rounding, not recorded). Attempt 5 (2026-10-29 governmental 'other' spending re-check): 'MFO payments - other entities' 296,574 (statement p6 and G-3 p32) moved from other to public safety (paid from the Public Safety Capital Improvements fund under Capital Projects with police/fire equipment); B-4 Airport 'Bond issuance costs' 15,275 (printed under Debt Service, p19) moved to Debt Service (interest part) and B-4 'Buildings' 0 (under Capital Outlay heading) to capital outlay 'Capital Outlay: Airport'. 'Airport operations' 595,168 (p6; = B-4 personal services 354,850 + other services 55,695 + supplies 169,348 + bond issuance costs 15,275) and the B-4 airport operating lines stay other with review: the report prints Airport as its own function (p3, p6) and no listed function category fits (see decision_needed). Totals and identity unchanged. Read pages 1-36 of 36."
 }
