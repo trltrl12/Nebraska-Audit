@@ -19,6 +19,14 @@
      "issue": "the extractor added the function code to the label; the printed label is 'Fines and licenses'"},
     {"severity": "warning", "path": "disbursements[14].category", "page": 6,
      "extracted": "Instruction", "on_page": "Categorical programs 648,055",
-     "issue": "the General Fund schedule (p9) prints this line as 3400 Categorical programs 497,006 plus 3500 State categorical programs 151,049. The 151,049 part could be State Categorical Programs (judgment call)"}
+     "issue": "the General Fund schedule (p9) prints this line as 3400 Categorical programs 497,006 plus 3500 State categorical programs 151,049. The 151,049 part could be State Categorical Programs (judgment call)"},
+    {"severity": "error", "field": "detail[schedule='Budgetary Comparison - General Fund', original_label='Categorical grants'].category",
+     "path": "detail[Budgetary Comparison - General Fund / Categorical grants 2,097].category", "page": 8,
+     "extracted": "donations/contributions", "on_page": "1925 Categorical grants 2,097 (General Fund budget schedule, p8)",
+     "issue": "A grant is entered as a donation. Code 1925 Categorical Grants is a grant line separate from 1920 Donations, and the Lincoln Public Schools ruling makes 1925 Categorical Grants its own category, Categorical Grants, out of donations/contributions. That the statement's 'Donations' line includes it is no reason to call it a donation. The category should be Categorical Grants."},
+    {"severity": "error", "field": "detail[schedule='Budgetary Comparison - Cooperative Fund', original_label='Categorical grants'].category",
+     "path": "detail[Budgetary Comparison - Cooperative Fund / Categorical grants 22,324].category", "page": 12,
+     "extracted": "donations/contributions", "on_page": "1925 Categorical grants 22,324 (Cooperative Fund budget schedule, p12)",
+     "issue": "Same as the General Fund line: code 1925 categorical grants entered as donations/contributions. It should be Categorical Grants. Note that the p6 'Donations' 242,434 receipt line (kept as printed) includes these 24,421 of categorical grants; the schedules provide the breakdown if the line is to be split (split_from)."}
   ]
 }

@@ -31,6 +31,13 @@
      "issue": "label not as printed (commentary added); amount and sign (+, transfer in per p5) are right"},
     {"severity": "warning", "path": "balance_sheet.scope", "page": 4,
      "extracted": "government-wide", "on_page": "Balance Sheet - Modified Cash Basis - Governmental Funds totals 5,210,237 = governmental activities column p1",
-     "issue": "user rule 2026-10-27: cash-basis governmental lines come from the governmental funds balance sheet when totals equal (fund balance by classification: Assigned capital projects 1,222,357 + Unassigned 1,312,559 instead of Unrestricted 2,534,916); kept the Statement of Net Position, defensible because the business-type columns carry capital assets and debt"}
+     "issue": "user rule 2026-10-27: cash-basis governmental lines come from the governmental funds balance sheet when totals equal (fund balance by classification: Assigned capital projects 1,222,357 + Unassigned 1,312,559 instead of Unrestricted 2,534,916); kept the Statement of Net Position, defensible because the business-type columns carry capital assets and debt"},
+    {"severity": "error", "field": "receipts[9].category", "path": "receipts[9].category", "page": 5,
+     "extracted": "donations/contributions", "on_page": "Contributions and grants 2,228,209 (p5: General 62,193, Debt Service 1,790,022, Other Governmental 375,994); p3 Statement of Activities: capital grants and contributions 1,893,814 (Public works 1,793,814), operating grants and contributions 390,905",
+     "issue": "A mixed grants/contributions line is entered as donations. The report's own breakdown shows grants dominate: the Debt Service Fund's 1,790,022 (80%) is the Public works capital grant, and the rest matches operating grants. Nothing on the page shows private donations, so donations/contributions is unsupported (the rule is grants, not donations). Use a grant category (intergovernmental/state aid with a review note on the grantor, as in other reports), or other if no part is taken as dominant."},
+    {"severity": "error", "field": "detail[schedule='Budgetary Comparison - Debt Service Fund', original_label='Contributions and grants'].category",
+     "path": "detail[Budgetary Comparison - Debt Service Fund / Contributions and grants 1,790,022].category", "page": 12,
+     "extracted": "donations/contributions", "on_page": "Contributions and grants 1,790,022 (Debt Service Fund, p12) = Statement of Activities public works capital grants (p3)",
+     "issue": "Same issue in detail: the capital grant is entered as a donation. The nonmajor 'Contributions and grants' 375,994 (p13) and the General Fund department lines (Fire 27,426, Rescue 27,426, Park 3,841, p14) should be reviewed the same way; none of them shows a private donor."}
   ]
 }
