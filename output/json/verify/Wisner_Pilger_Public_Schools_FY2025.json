@@ -2,14 +2,23 @@
   "stem": "Wisner_Pilger_Public_Schools_FY2025",
   "values_checked": 235,
   "issues": [
+    {"severity": "warning", "path": "detail[65].category", "page": 9,
+     "extracted": "Federal Programs", "on_page": "Contra -109,337 (hidden transfer to the Employee Benefit Fund)",
+     "issue": "The contra line covers the instruction, state categorical and federal program groups. On p5 the elimination comes out of the statement's Instruction line (General column 5,945,859 = schedule lines 5,949,486 + Employee Benefit 105,710 - 109,337), so Instruction would match the statement better. The arithmetic and review note are correct."},
     {"severity": "warning", "path": "detail[69].category", "page": 10,
      "extracted": "support services", "on_page": "Depreciation Fund 2900 Other support services 101,259",
-     "issue": "the statement (p5) counts this in Operation and maintenance of plant: General Fund schedule 2610-2680 lines 774,993 + 101,259 = 876,252. Building and Grounds would tie the function split to the statement"},
+     "issue": "The statement on p5 counts this 101,259 in Operation and maintenance of plant (876,252 = General schedule 774,993 + 101,259), so Building and Grounds would match the statement. The label supports the current category, so this is a judgment call."},
     {"severity": "warning", "path": "detail[72].category", "page": 11,
      "extracted": "support services", "on_page": "Employee Benefit Fund 2900 Other support services 105,710",
-     "issue": "statement p5 General Fund column counts this spending under Instruction (GF instruction/state categorical/federal lines 5,949,486 + 105,710 - 109,337 hidden transfer = 5,945,859); flagged review by the extractor"},
-    {"severity": "warning", "path": "detail[65].category", "page": 9,
-     "extracted": "Federal Programs", "on_page": "no printed line; contra -109,337 for the General Fund transfer to the Employee Benefit Fund (p11 5200 Transfers from General Fund 109,337)",
-     "issue": "hidden-transfer contra line is correctly built (ties the statement's Instruction 5,945,859) but the page does not say which group carries the transfer; putting the whole -109,337 in Federal Programs reduces that function arbitrarily (the statement folds it into Instruction)"}
+     "issue": "The statement on p5 counts this spending under Instruction. The line already has a review note, so this is a judgment call."},
+    {"severity": "warning", "path": "receipts[8].category", "page": 4,
+     "extracted": "charges for services/fees", "on_page": "Cooperative Fund 1990 Miscellaneous local receipts 7,733",
+     "issue": "The printed label is 'Miscellaneous local receipts'. The category follows the Statement of Activities p1, which shows 7,733 as Instruction charges for services. Defensible (already marked review)."},
+    {"severity": "warning", "path": "disbursements[10].original_label", "page": 5,
+     "extracted": "Capital outlay", "on_page": "Capital outlay",
+     "issue": "Under the 2026-10-28 rule, capital outlay lines are relabelled 'Capital Outlay: <function>'. This one was left as printed; user_rules.py may apply the rule."},
+    {"severity": "warning", "path": "detail", "page": 8,
+     "extracted": "budget_final null on the 2120-2173 and 3535-3551 lines", "on_page": "group budgets 2100 Support services - students 870,000 (p8) and 3500 State categorical programs 150,000 (p9)",
+     "issue": "These budgets are printed only on the group heading lines and are not recorded anywhere. Actual amounts are not affected."}
   ]
 }

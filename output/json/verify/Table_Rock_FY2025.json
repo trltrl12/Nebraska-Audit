@@ -1,12 +1,24 @@
 {
   "stem": "Table_Rock_FY2025",
-  "values_checked": 38,
+  "values_checked": 36,
   "issues": [
     {"severity": "warning", "path": "receipts[11].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other - Water Fund 68,434.54; Sewer Fund 42,889.86",
-     "issue": "Printed only as 'Local Receipts: Other'; the extractor assumed water/sewer charges. If that assumption is kept, the user rule (2026-10-28) category is Utility Charges, not charges for services/fees (also receipts[12])."},
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other (Water Fund column) 68,434.54",
+     "issue": "printed label is 'Local Receipts: Other'; treating it as water charges is an inference (it is the Water Fund's only receipt line), not stated on the page."},
+    {"severity": "warning", "path": "receipts[12].category", "page": 1,
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other (Sewer Fund column) 42,889.86",
+     "issue": "printed label is 'Local Receipts: Other'; treating it as sewer charges is an inference (it is the Sewer Fund's only receipt line), not stated on the page."},
     {"severity": "warning", "path": "disbursements[1].category", "page": 2,
-     "extracted": "general government", "on_page": "General Government - Street Fund 22,101.03",
-     "issue": "Street Fund spending printed on the General Government line; kept as general government (as printed) though the fund's function is streets/highways. Judgment call, already marked review."}
+     "extracted": "general government", "on_page": "General Government (Street Fund column) 22,101.03",
+     "issue": "Street Fund spending printed on the General Government line; streets/highways could be argued. Category kept as printed is defensible."},
+    {"severity": "warning", "path": "disbursements[3].category", "page": 2,
+     "extracted": "utilities", "on_page": "General Government (Water Fund column) 28,405.29",
+     "issue": "printed on line 29 General Government, not line 48 Water; utilities is an inference from the fund column."},
+    {"severity": "warning", "path": "disbursements[4].category", "page": 2,
+     "extracted": "utilities", "on_page": "General Government (Sewer Fund column) 41,206.49",
+     "issue": "printed on line 29 General Government, not line 47 Wastewater; utilities is an inference from the fund column."},
+    {"severity": "warning", "path": "beginning_investments", "page": 1,
+     "extracted": null, "on_page": "Investments (line 2) beginning 397,666.12 (General 367,656.72 + Street 30,009.40); ending (line 27) 410,656.00",
+     "issue": "investments are printed separately but beginning_investments/ending_investments are null; the rolled cash figures are the line 3/28 subtotals (cash plus investments), which is consistent with the identity but the separate investment amounts are not recorded in those fields."}
   ]
 }

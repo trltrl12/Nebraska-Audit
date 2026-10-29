@@ -1,9 +1,15 @@
 {
   "stem": "Whitney_FY2025",
-  "values_checked": 36,
+  "values_checked": 35,
   "issues": [
     {"severity": "warning", "path": "receipts[10].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other, Water column 16,493.99",
-     "issue": "The line is unlabeled 'Other' in the Water fund. If it is water sales, the user's 2026-10-28 rule puts utility fund charges in category Utility Charges, not charges for services/fees. Either way this is an assumption; the line already has a review note."}
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other (Water column) 16,493.99",
+     "issue": "Assumes the Water column's only receipt line is utility charges. The form has no utility-sales line, so this is plausible, but the page gives no breakdown (the line is already marked review)."},
+    {"severity": "warning", "path": "receipts[10].original_label", "page": 1,
+     "extracted": "Local Receipts: Other (Water column)", "on_page": "Local Receipts: Other",
+     "issue": "The label has '(Water column)' added, so it is not the printed text. Winnetoon kept the printed label for the same line."},
+    {"severity": "warning", "path": "balance_sheet.equity", "page": 1,
+     "extracted": "no category", "on_page": "Subtotal of Ending Balances (Line 28)",
+     "issue": "The equity lines have no category field. The amounts are correct and the balance sheet ties (233,756.06)."}
   ]
 }
