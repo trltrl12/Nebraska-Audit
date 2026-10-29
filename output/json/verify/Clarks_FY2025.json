@@ -4,13 +4,13 @@
   "issues": [
     {"severity": "error", "path": "receipts[6].category", "page": 5,
      "extracted": "charges for services/fees", "on_page": "Charges for services 4,301 = Cemetery 950 + Pool 3,351 (p12, General Fund departments)",
-     "issue": "The report prints the breakdown of this line: pool fees 3,351 (78%) and cemetery fees 950. Under the user rules (2026-10-28) Recreation Fees and Cemetery Fees are their own receipt categories out of charges for services. It should be split (split_from, p12) into Recreation Fees 3,351 and Cemetery Fees 950, or at least take the dominant Recreation Fees with a review note."},
+     "issue": "[fixed 2026-10-29: split (split_from p5 line, p12 breakdown) into Recreation Fees 3,351 and Cemetery Fees 950] The report prints the breakdown of this line: pool fees 3,351 (78%) and cemetery fees 950. Under the user rules (2026-10-28) Recreation Fees and Cemetery Fees are their own receipt categories out of charges for services. It should be split (split_from, p12) into Recreation Fees 3,351 and Cemetery Fees 950, or at least take the dominant Recreation Fees with a review note."},
     {"severity": "error", "path": "detail[10].category", "page": 12,
      "extracted": "charges for services/fees", "on_page": "Cemetery column: Charges for services 950",
-     "issue": "Cemetery department charges belong in category Cemetery Fees (detail_category already 'cemetery fees'). scripts/user_rules.py matches on the label only, so it won't fix this."},
+     "issue": "[fixed 2026-10-29: category set to Cemetery Fees] Cemetery department charges belong in category Cemetery Fees (detail_category already 'cemetery fees'). scripts/user_rules.py matches on the label only, so it won't fix this."},
     {"severity": "error", "path": "detail[15].category", "page": 12,
      "extracted": "charges for services/fees", "on_page": "Pool column: Charges for services 3,351",
-     "issue": "Pool department charges belong in category Recreation Fees (detail_category already 'recreation/pool/park fees'). The label-only rule script won't catch it."},
+     "issue": "[fixed 2026-10-29: category set to Recreation Fees] Pool department charges belong in category Recreation Fees (detail_category already 'recreation/pool/park fees'). The label-only rule script won't catch it."},
     {"severity": "warning", "path": "receipts[7].category", "page": 5,
      "extracted": "donations/contributions", "on_page": "Contributions and grants 133,425",
      "issue": "p2 shows 112,371 as operating grants for general government and 19,439 as capital grants (park). The grantor isn't stated, so some of it may be government grants (state aid/federal) and not private donations."},
@@ -22,6 +22,6 @@
      "issue": "Assumed to be the highway allocation; the report doesn't say."},
     {"severity": "warning", "path": "detail[62].original_label", "page": 10,
      "extracted": "Capital outlay", "on_page": "Capital outlay 23,256 (Street Fund budget schedule)",
-     "issue": "Capital outlay lines in category capital outlay should be labelled 'Capital Outlay: <function>' (here 'Capital Outlay: Streets/Highways'), with the printed text in printed_label, as was done for the Library and Park lines."}
+     "issue": "[fixed 2026-10-29: relabelled 'Capital Outlay: Streets/Highways', printed text in printed_label] Capital outlay lines in category capital outlay should be labelled 'Capital Outlay: <function>' (here 'Capital Outlay: Streets/Highways'), with the printed text in printed_label, as was done for the Library and Park lines."}
   ]
 }

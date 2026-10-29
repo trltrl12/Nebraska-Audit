@@ -1,15 +1,27 @@
 {
   "stem": "Sherman_County_FY2025",
-  "values_checked": 240,
+  "values_checked": 317,
   "issues": [
-    {"severity": "error", "path": "receipts[6].category", "page": 5,
-     "extracted": "licenses and permits", "on_page": "Local Fees, Licenses, Commissions, and Miscellaneous 475,555 (non-inheritance part); Statement of Activities p2-3 shows charges for services 404,579 (Clerk 25,713, Treasurer 124,327, Election 8,052, Clerk of District Court 1,351, Sheriff 194,889, Road 32,740...)",
-     "issue": "[fixed 2026-10-28: receipts[6] category changed to charges for services/fees, review note kept and expanded] The report's own Statement of Activities shows that about 85% of this line is charges for services (county office/sheriff fees), and the same General Fund 'Local' line is categorized charges for services/fees in detail[4]. Licenses and permits isn't supported by the page; per the rules it should be charges for services/fees (or Fees of Office), keeping the review note on the mix."},
+    {"severity": "warning", "path": "receipts[6].category", "page": 5,
+     "extracted": "licenses and permits", "on_page": "Local Fees, Licenses, Commissions, and Miscellaneous 664,743 less Inheritance Tax 189,188 = 475,555",
+     "issue": "This follows the user's category_decisions.csv mapping for this label. But 417,555 of the 475,555 is the General Fund 'Local' line, which detail[4] now puts in Fees of Office (85% office fees per the Statement of Activities p2). Statement and detail categories disagree; consider Fees of Office."},
+    {"severity": "warning", "path": "receipts[2].split_from", "page": 5,
+     "extracted": "State 1,613,110 / Federal 92,144", "on_page": "Intergovernmental Receipts 1,705,254 (single line)",
+     "issue": "The split comes from summing the fund schedules' Federal/State lines (pp8, 13-15), which tie exactly. That is defensible as the report's own breakdown of the fund columns, but no single page prints the split of this line."},
     {"severity": "warning", "path": "detail[101].category", "page": 15,
-     "extracted": "lodging tax", "on_page": "Visitors Improvement: Local 5,427",
-     "issue": "Lodging tax was assumed from the fund name; the Statement of Activities (p2) lists the Visitors Improvement and Visitors Promotion receipts as charges for services. Same for detail[102] (Visitors Promotion 5,427)."},
-    {"severity": "warning", "path": "detail[95].detail_category", "page": 14,
-     "extracted": "other charges for services", "on_page": "CDBG Fund: Local 3,718",
-     "issue": "CDBG fund local receipts are usually loan repayments/program income rather than charges for services; judgment call"}
+     "extracted": "lodging tax", "on_page": "Visitors Improvement: Local 5,427 (Statement of Activities p2 shows it as charges for services)",
+     "issue": "Lodging tax is assumed from the fund name; the report never calls it a tax. The same applies to detail[102] (Visitors Promotion 5,427)."},
+    {"severity": "warning", "path": "detail[100].category", "page": 15,
+     "extracted": "other", "on_page": "Opiod Settlement: Local 3,298",
+     "issue": "The fund name shows these are opioid settlement proceeds. No specific category fits, so 'other' is defensible."},
+    {"severity": "warning", "path": "detail[152].original_label", "page": 20,
+     "extracted": "Capital Outlay", "on_page": "Capital Project Fund Capital Outlay 12,232",
+     "issue": "Not relabelled 'Capital Outlay: <function>' per the user's capital outlay rule (2026-10-28). The zero-amount Special Road, Highway Buyback, STOP and Bowman Park capital outlay lines (detail[112], [128], [136], [145]) aren't relabelled either."},
+    {"severity": "warning", "path": "detail[*].detail_category", "page": 8,
+     "extracted": "professional/contract services", "on_page": "Operating Disbursements (every department)",
+     "issue": "'Operating Disbursements' is a broad object group, not specifically contract services. Mapping it to professional/contract services is an assumption (noted in notes)."},
+    {"severity": "warning", "path": "missing", "page": 15,
+     "extracted": null, "on_page": "Bowman Park: State (actual blank, budget blank, 2024 actual 880)",
+     "issue": "A zero-actual line is left out, although other zero-actual lines (e.g. Environmental Trust State) are included. No effect on any amount."}
   ]
 }

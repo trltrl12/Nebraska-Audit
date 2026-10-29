@@ -1,21 +1,21 @@
 {
   "stem": "Shelby_FY2025",
-  "values_checked": 132,
+  "values_checked": 138,
   "issues": [
-    {"severity": "warning", "path": "detail[9].category", "page": 12,
-     "extracted": "charges for services/fees", "on_page": "Cemetery department - Charges for services 1,250",
-     "issue": "user rule (2026-10-28) makes Cemetery Fees its own receipt category out of charges for services; detail_category already 'cemetery fees'"},
-    {"severity": "warning", "path": "detail[12].category", "page": 12,
-     "extracted": "charges for services/fees", "on_page": "Park department - Charges for services 5,525",
-     "issue": "user rule (2026-10-28) makes Recreation Fees its own receipt category; detail_category already 'recreation/pool/park fees'"},
-    {"severity": "warning", "path": "receipts[11].category", "page": 7,
-     "extracted": "charges for services/fees", "on_page": "Sales 409,482 (Water, Sewer, Garbage funds)",
-     "issue": "user rule (2026-10-28): utility fund sales/charges incl. garbage are category Utility Charges"},
     {"severity": "warning", "path": "receipts[7].category", "page": 5,
-     "extracted": "charges for services/fees", "on_page": "Charges for services 8,275 = General 1,500 + Cemetery 1,250 + Park 5,525 (p12)",
-     "issue": "mixed line; park/recreation fees are 67% of it (could be Recreation Fees with review)"},
-    {"severity": "warning", "path": "disbursements[9].category", "page": 7,
-     "extracted": "Repairs and Maintenance", "on_page": "Repairs and supplies 70,929",
-     "issue": "line mixes repairs and supplies; Repairs and Maintenance is a defensible dominant choice but not certain"}
+     "extracted": "charges for services/fees", "on_page": "Charges for services 8,275 (p12: General 1,500, Cemetery 1,250, Park 5,525)",
+     "issue": "Park recreation fees 5,525 (67%) are most of this line and the p12 department statement prints the breakdown. The matching detail lines are Recreation Fees / Cemetery Fees, but the statement line stays generic. Could be Recreation Fees, or split with split_from from p12."},
+    {"severity": "warning", "path": "detail[25].category", "page": 12,
+     "extracted": "health/welfare", "on_page": "Cemetery Operating expenses 8,719 (statement p5 counts it under Public works)",
+     "issue": "The detail puts cemetery in health/welfare, but disbursements[2] (Public works 151,810, streets/highways) still includes the same 8,719. The function split differs between the statement and the detail."},
+    {"severity": "warning", "path": "detail[38].detail_category", "page": 10,
+     "extracted": "highway allocation", "on_page": "Intergovernmental 127,046",
+     "issue": "The extractor assumed this is highway allocation; the report doesn't name the source."},
+    {"severity": "warning", "path": "detail[41].original_label", "page": 10,
+     "extracted": "Capital outlay", "on_page": "Capital outlay 82,530 (Street Fund)",
+     "issue": "Not relabelled 'Capital Outlay: Streets/Highways' (no printed_label/computed) as the 2026-10-28 capital outlay rule asks; the General Fund capital outlay lines were relabelled."},
+    {"severity": "warning", "path": "ending_cash", "page": 4,
+     "extracted": 844199, "on_page": "Total fund balances 844,199; total assets (cash 761,427 + CDs 81,335 + county treasurer 7,248) 850,010",
+     "issue": "ending_cash/beginning_cash are total fund balances, not cash. Actual cash and CDs are 850,010, the difference being payroll withholding 5,811. ending_investments is null although the funds hold CDs of 81,335. The notes explain this."}
   ]
 }

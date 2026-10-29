@@ -4,16 +4,16 @@
   "issues": [
     {"severity": "error", "path": "missing", "page": 10,
      "extracted": null, "on_page": "Nonoperating revenues: Interest income 30,551 (Total column; Allocated Administration)",
-     "issue": "This business-type receipt is counted in reported_totals.business-type.receipts (6,894,291) but is not in receipts[]."},
+     "issue": "[fixed 2026-10-29: added business-type receipt Interest income 30,551 (Interest Income, p10)] This business-type receipt is counted in reported_totals.business-type.receipts (6,894,291) but is not in receipts[]."},
     {"severity": "error", "path": "missing", "page": 10,
      "extracted": null, "on_page": "Nonoperating revenues: Grant revenue 1,063,191 (Total column; Water 1,061,191 + Allocated Administration 2,000)",
-     "issue": "This business-type receipt is counted in reported_totals but is not in receipts[]. Business-type receipts[] sum to 5,797,856 vs the reported 6,894,291 (gap 1,096,435 = 30,551 + 1,063,191 + 2,693), so the net position roll-forward does not tie from the line items."},
+     "issue": "[fixed 2026-10-29: added business-type receipt Grant revenue 1,063,191 (federal grants, review on source); business-type receipts now sum to 6,894,291] This business-type receipt is counted in reported_totals but is not in receipts[]. Business-type receipts[] sum to 5,797,856 vs the reported 6,894,291 (gap 1,096,435 = 30,551 + 1,063,191 + 2,693), so the net position roll-forward does not tie from the line items."},
     {"severity": "error", "path": "missing", "page": 10,
      "extracted": null, "on_page": "Nonoperating revenues: Miscellaneous income 2,693 (Total column; Allocated Administration)",
-     "issue": "This business-type receipt is counted in reported_totals but is not in receipts[]."},
+     "issue": "[fixed 2026-10-29: added business-type receipt Miscellaneous income 2,693 (other, review)] This business-type receipt is counted in reported_totals but is not in receipts[]."},
     {"severity": "warning", "path": "receipts[25].category", "page": 18,
      "extracted": "other taxes", "on_page": "Loan repayment (Sales Tax Fund) 14,308",
-     "issue": "A loan principal repayment is not a tax. The same label in the Economic Development and CDA funds (receipts[28], [40]) and the Sales Tax detail line (detail[] p18) are category other / Loan Collections. The value comes from config/category_decisions.csv ('loan repayment sales tax fund' -> other taxes), which looks like an inconsistent decision worth re-checking."},
+     "issue": "[fixed 2026-10-29: recategorized other / Loan Collections, matching the other loan repayment lines and its detail line] A loan principal repayment is not a tax. The same label in the Economic Development and CDA funds (receipts[28], [40]) and the Sales Tax detail line (detail[] p18) are category other / Loan Collections. The value comes from config/category_decisions.csv ('loan repayment sales tax fund' -> other taxes), which looks like an inconsistent decision worth re-checking."},
     {"severity": "warning", "path": "receipts[13].category", "page": 24,
      "extracted": "federal grants", "on_page": "Grants (General Fund) 39,552",
      "issue": "The report never says the grants are federal (they could be state grants). Same for receipts[33] Grants (Grant Fund) 332,550 on p21. Review notes are present."},
@@ -22,9 +22,9 @@
      "issue": "The line mixes sales and insurance proceeds, and insurance proceeds belong in reimbursements/refunds. The Ambulance 27,848 could be either. Same for receipts[43] CDA 29,002 (the p19 schedule calls it 'Sale proceeds')."},
     {"severity": "warning", "path": "disbursements[24].category", "page": 10,
      "extracted": "utilities", "on_page": "Utilities 124,434 (cost-type line in the enterprise operating expenses)",
-     "issue": "Under the utility cost-type rule, this object line would be a cost type (utilities power/gas/phone) with function utilities. It has no function field, unlike the neighbouring cost-type lines."},
+     "issue": "[fixed 2026-10-29: added function utilities; category utilities is the cost type for utility bills] Under the utility cost-type rule, this object line would be a cost type (utilities power/gas/phone) with function utilities. It has no function field, unlike the neighbouring cost-type lines."},
     {"severity": "warning", "path": "disbursements[26].category", "page": 10,
      "extracted": "utilities", "on_page": "Transportation expenses 27,606",
-     "issue": "This is a cost-type line (transportation/vehicle), not a utility function. It should probably be a cost-type category (e.g. fuel or travel) with function utilities."}
+     "issue": "[fixed 2026-10-29: recategorized Fuel with function utilities, review] This is a cost-type line (transportation/vehicle), not a utility function. It should probably be a cost-type category (e.g. fuel or travel) with function utilities."}
   ]
 }

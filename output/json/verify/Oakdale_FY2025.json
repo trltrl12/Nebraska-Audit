@@ -1,18 +1,12 @@
 {
   "stem": "Oakdale_FY2025",
-  "values_checked": 76,
+  "values_checked": 77,
   "issues": [
-    {"severity": "warning", "path": "notes", "page": 3,
-     "extracted": "... Read pages 1-3 of 3 Detail (user 2026-10-27): per-fund lines ...", "on_page": "3 pages in trimmed PDF",
-     "issue": "Notes do not end with 'Read pages 1-3 of 3' (text appended after it). All 3 pages were read and every Exhibit A line is in the JSON, so this is a formatting issue only."},
     {"severity": "warning", "path": "receipts[10].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Enterprise Fund) 138,360.00",
-     "issue": "The printed label is 'Local Receipts: Other'. Treating it as utility fees is an assumption: no breakdown is printed, and it is 100% of business-type receipts. detail[16] has the same issue. The original_label also adds '(Enterprise Fund)', which is not printed."},
-    {"severity": "warning", "path": "balance_sheet.equity", "page": 1,
-     "extracted": "equity lines have no category", "on_page": "Ending Balance 352,689 / 42,294",
-     "issue": "The equity items have no category field."},
-    {"severity": "warning", "path": "missing", "page": 1,
-     "extracted": null, "on_page": "County Treasurer Balance at October 1, 2024 $2,034.98; at September 30, 2025 4,912.89",
-     "issue": "Memo county treasurer balances are printed below the statement but not recorded. They are outside the fund balances (line 28), so leaving them out is probably fine, but the user should know they are there."}
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other, Enterprise Fund 138,360.00",
+     "issue": "the page labels this line 'Other' with no breakdown. Calling it utility collections is an assumption (it is marked review), and original_label adds '(Enterprise Fund)', which isn't printed. The same applies to detail[16]"},
+    {"severity": "warning", "path": "receipts[9].category", "page": 1,
+     "extracted": "other", "on_page": "Local Receipts: Other, General 77,486.00 + Street 879.00",
+     "issue": "78,365 is about 29% of governmental receipts (46% of the General Fund's) and stays unexplained in other. It is marked review, and the report prints no breakdown"}
   ]
 }

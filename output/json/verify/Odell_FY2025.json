@@ -1,13 +1,21 @@
 {
   "stem": "Odell_FY2025",
-  "values_checked": 46,
+  "values_checked": 44,
   "issues": [
     {"severity": "warning", "path": "receipts[12].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Enterprise Fund) 177,048.82",
-     "issue": "The Enterprise Fund's only receipt is printed as 'Other' with no breakdown. Calling it charges for services is an assumption; if it is utility billing, the user's category is Utility Charges. It is all of the business-type receipts, so it may also need a person's decision (Oconto's similar line is in decision_needed)."},
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other, Enterprise Fund 177,048.82",
+     "issue": "the page labels this line 'Other' with no breakdown. Calling it utility collections is an assumption (it is marked review), and original_label adds '(Enterprise Fund)', which isn't printed"},
+    {"severity": "warning", "path": "receipts[10].category", "page": 1,
+     "extracted": "other", "on_page": "Local Receipts: Other, General 40,601.49 (+ Street 832.57)",
+     "issue": "41,434 is about 18.5% of governmental receipts and is unexplained in other (over the 10% review threshold; marked review). Labels add '(General Fund)'/'(Street Fund)', which aren't printed"},
+    {"severity": "warning", "path": "disbursements[3].original_label", "page": 2,
+     "extracted": "Capital Improvements (Street Fund)", "on_page": "Capital Improvements: Street 74,396.73, Enterprise 38,005.92",
+     "issue": "the label isn't as printed and isn't 'Capital Outlay: <function>' with printed_label, as the capital outlay rule requires. The same applies to disbursements[4]. The amounts are printed in their fund columns"},
+    {"severity": "warning", "path": "reported_totals.business-type.disbursements.includes", "page": 2,
+     "extracted": [], "on_page": "Line 52 Enterprise 203,542.68 includes line 50 transfer out 75,000.00",
+     "issue": "the printed total includes the transfer, but 'includes' is empty. The extractor used a non-schema field 'includes_split' instead of [\"transfers_net\"], so validation may show a 75,000 gap. The total matches the page"},
     {"severity": "warning", "path": "decision_needed", "page": 3,
-     "extracted": "transfers_in 156,376.02 / transfers_out 81,376.02 include a General -> General 55,978.52 transfer",
-     "on_page": "Schedule of Interfund Transfers: General -> General 55,978.52; Exhibit A line 20 and line 50 General column",
-     "issue": "A transfer from the General Fund to itself (printed on both the in and out lines) inflates the governmental transfers in and out equally. It may be a mislabelled transfer between other funds. A person should settle this; it is mentioned only in notes, not in decision_needed[]."}
+     "extracted": null, "on_page": "Schedule of Interfund Transfers: General -> General 55,978.52 (also on line 20 and line 50, General column)",
+     "issue": "a transfer from the General Fund to itself inflates governmental transfers_in/out by 55,978.52 (it nets to zero). Whether it is really from or to another fund is a question for a person, and decision_needed[] doesn't include it"}
   ]
 }

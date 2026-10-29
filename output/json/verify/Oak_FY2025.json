@@ -1,8 +1,15 @@
 {
   "stem": "Oak_FY2025",
-  "values_checked": 34,
+  "values_checked": 26,
   "issues": [
-    {"severity": "warning", "path": "receipts[6].category", "page": 1, "extracted": "charges for services/fees", "on_page": "Line 18 Local Receipts: Other, Sewer Fund 3,924.85", "issue": "printed label is only 'Other'; if presumed sewer fees (as the review note says), the user's Utility Charges category (utility fund charges/collections) would apply rather than charges for services/fees"},
-    {"severity": "warning", "path": "disbursements[2].original_label", "page": 2, "extracted": "Capital Improvements", "on_page": "Line 35 Capital Improvements 2,544.11 (Street Fund)", "issue": "capital outlay line not relabelled 'Capital Outlay: <function>' with printed_label per the user's 2026-10-26 rule (user_rules.py may apply it)"}
+    {"severity": "warning", "path": "receipts[6].category", "page": 1,
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other (Sewer Fund) 3,924.85",
+     "issue": "the page labels this line 'Other' with no breakdown. Calling it sewer collections (Utility Charges) is an assumption; it is marked review"},
+    {"severity": "warning", "path": "receipts[5].category", "page": 1,
+     "extracted": "other", "on_page": "Local Receipts: Other, Lottery Fund 50.56 (part of 825.14)",
+     "issue": "the 50.56 in the Lottery Fund column could be lottery/keno proceeds or interest, and the page doesn't say which; left in other (defensible because the printed label says Other)"},
+    {"severity": "warning", "path": "disbursements[2].original_label", "page": 2,
+     "extracted": "Capital Improvements", "on_page": "Capital Improvements (Street Fund 2,544.11)",
+     "issue": "the line is in category capital outlay but isn't relabelled 'Capital Outlay: <function>' with printed_label, as the 2026-10-26/10-28 rule requires (user_rules.py may apply it)"}
   ]
 }

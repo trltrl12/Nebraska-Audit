@@ -1,12 +1,15 @@
 {
   "stem": "Benkelman_FY2025",
-  "values_checked": 150,
+  "values_checked": 157,
   "issues": [
-    {"severity": "warning", "path": "receipts[10].category", "page": 7,
-     "extracted": "charges for services/fees", "on_page": "Sales 2,716,385 (Electric, Water, Sewer, Disposal, C&D Site enterprise funds)",
-     "issue": "These are utility fund sales, so the user's 2026-10-28 rule gives them the Utility Charges category. user_rules.py will not catch this: the label is just 'Sales' and the line has no fund name."},
-    {"severity": "warning", "path": "receipts[5].category", "page": 5,
-     "extracted": "charges for services/fees", "on_page": "Charges for services 9,951 (all of it is Recreation department, p14)",
-     "issue": "Under the user's 2026-10-28 rule this could be the Recreation Fees category. The detail line (detail[9]) already uses detail_category recreation/pool/park fees."}
+    {"severity": "warning", "path": "disbursements[8].category", "page": 7,
+     "extracted": "utilities", "on_page": "Operating expenses 488,387",
+     "issue": "Business-type spending is printed by cost type (Cost of power, Personnel services, Operating expenses, Supplies, Depreciation). The 2026-10-28 cost-type rule gives each such line a cost-type category plus function 'utilities'. 'Operating expenses' was left as function category 'utilities' with no function field. It is a generic cost type (probably 'other'). Amount is correct."},
+    {"severity": "warning", "path": "disbursements[5].original_label", "page": 5,
+     "extracted": "Capital outlay", "on_page": "Capital outlay 25,816",
+     "issue": "Not relabelled 'Capital Outlay: <function>' per the 2026-10-26 rule. The matching p14 detail line was relabelled 'Capital Outlay: Culture and Recreation'. Street Fund detail[59] 'Capital outlay' 50,000 (p11) is also not relabelled. Amounts are correct."},
+    {"severity": "warning", "path": "decision_needed", "page": 3,
+     "extracted": "transfers_out 13,616 (no decision_needed entry)", "on_page": "Interfund transfers (13,616) governmental; 13,616 into Component Unit column",
+     "issue": "The net 13,616 transfer leaves the primary government for the component unit (Community Redevelopment Authority, excluded from this extraction). Fund transfers are GF +61,600, Street +184,804, Sales Tax -184,804, CDBG -75,216. With the receiving side excluded, this is a one-sided transfer. A person should confirm it stays a transfer out rather than spending (economic development)."}
   ]
 }
