@@ -1,21 +1,10 @@
 {
   "stem": "Maywood_Public_Schools_FY2025",
-  "values_checked": 147,
+  "values_checked": 154,
   "issues": [
-    {"severity": "error", "path": "receipts[8].category", "page": 3,
-     "extracted": "charges for services/fees 17,904 (rental 16,850 + distance education 1,054)", "on_page": "Other local receipts 17,995; p7: 1910 Rental of school equipment and facilities 16,850, 1965 Distance education service receipts 1,054, 1990 Other local revenue 91",
-     "issue": "[fixed 2026-10-28: split into Rentals 16,850, charges for services/fees 1,054 and other 91, each with split_from] The split puts the 16,850 rental under charges for services/fees. The user rule (2026-10-28) gives rentals their own receipt category, Rentals, and detail[6] already uses Rentals for the same line. The rental should be a separate split item in Rentals, with 1,054 in charges for services/fees."},
-    {"severity": "error", "path": "receipts[17]", "page": 8,
-     "extracted": "Other 18,752 recorded entirely as revenue (category other)", "on_page": "General Fund 5200 Transfers 4,115 (inside Nonrevenue receipts 15,880, which is inside statement 'Other' 18,403/18,752)",
-     "issue": "[fixed 2026-10-28: hidden transfer split out of 'Other' receipts (now 14,637) and 'Student support services' Other Governmental Funds part (now 211,028); transfers_in/out 169,115 each (165,000 + 4,115, computed); printed totals kept, noted] The statement's 'Other' receipts include 4,115 that the General Fund schedule labels '5200 Transfers' (from the Student Fees Fund, whose matching 4,115 outflow is inside 'Student support services' spending, disbursements[2]). A labelled transfer is recorded as revenue at the top level, and its matching outflow as spending. Detail treats both sides as other financing, so the top level and detail disagree. decision_needed[0] raises the question, but the top-level lines still count the transfer as revenue and spending."},
-    {"severity": "warning", "path": "detail[64].original_label", "page": 11,
-     "extracted": "Improvements and equipment", "on_page": "Improvements and equipment 213,151 (Depreciation Fund)",
-     "issue": "[fixed 2026-10-28: relabelled 'Capital Outlay: Building and Grounds', printed_label kept] This line is category capital outlay. The user rule says capital outlay lines already in category capital outlay are relabelled 'Capital Outlay: <function>', with printed_label kept. Not applied."},
-    {"severity": "warning", "path": "detail[59].budget_final", "page": 10,
-     "extracted": 150000, "on_page": "8000 Transfers budget 150,000 (actual 165,000, recorded as -165,000)",
-     "issue": "[fixed 2026-10-28: budget_final signed -150,000 and Student Fees -4,114] The amount is signed negative (a transfer out) but budget_final is positive, so the signs are inconsistent. The same applies to Student Fees detail[88] (amount -4,115, budget_final 4,114)."},
-    {"severity": "warning", "path": "detail[7].category", "page": 7,
-     "extracted": "charges for services/fees", "on_page": "1965 Distance education service receipts 1,054",
-     "issue": "This may be revenue from other districts for distance-learning services (interlocal-type revenue), so charges for services is defensible. Category judgment."}
+    {"severity": "warning", "path": "detail[49]-detail[58].category", "page": 10,
+     "extracted": "State Categorical Programs (15,138: 6,513 + 8,625) / Federal Programs (208,159: seven lines)",
+     "on_page": "Budget schedule groups them under 'Private and state categorical programs' (p9) and 'Federal programs' (p10). The combining schedule reclassifies both groups into Instruction (p6: 223,297 = 15,138 + 208,159; statement Instruction 2,325,120)",
+     "issue": "Judgment call. The user's 2026-10-28 rule (follow the report's grouping) supports the current categories. The extractor rule ('program lines the report's own statement counts under Instruction go to instruction') points to Instruction. The extraction's notes also say these were 'assigned to instruction per reclassification column on p6', which contradicts the categories actually recorded"}
   ]
 }
