@@ -3,7 +3,7 @@
   "entity_type": "school district",
   "fiscal_year_end": "2025-08-31",
   "basis": "cash",
-  "extraction_attempt": 3,
+  "extraction_attempt": 4,
   "beginning_cash": {
     "amount": 7013317,
     "source_page": 9
@@ -869,16 +869,8 @@
       "source_page": 11
     }
   ],
-  "transfers_in": {
-    "amount": 639523,
-    "source_page": 17,
-    "computed": "Depreciation Fund transfers from general fund 599,601 (p17) + interfund loan received by QCPUF 39,922 (p6/p19)"
-  },
-  "transfers_out": {
-    "amount": 639523,
-    "source_page": 17,
-    "computed": "GF to Depreciation transfer 599,601 (p17), hidden inside General Fund disbursement lines (reclass column p9) + interfund loan from Bond Fund to QCPUF 39,922 (p9/p18)"
-  },
+  "transfers_in": null,
+  "transfers_out": null,
   "debt_proceeds": null,
   "other_financing": null,
   "adjustments": [],
@@ -887,26 +879,12 @@
       "receipts": {
         "amount": 13978141,
         "source_page": 6,
-        "includes": [],
-        "includes_split": [
-          {
-            "amount": 39922,
-            "source_page": 6,
-            "computed": "Interfund loan (code 9002, QCPUF column, p6) inside printed total receipts; recorded in transfers_in"
-          }
-        ]
+        "includes": []
       },
       "disbursements": {
         "amount": 13571413,
         "source_page": 9,
-        "includes": [],
-        "includes_split": [
-          {
-            "amount": 39922,
-            "source_page": 9,
-            "computed": "Interfund Loan to QCPUF Fund (code 9004, Bond column, p9) inside printed total disbursements; recorded in transfers_out"
-          }
-        ]
+        "includes": []
       }
     },
     "business-type": {
@@ -2282,7 +2260,7 @@
     {
       "question": "The Reclass column (1,290,885) removes the GF-to-Depreciation transfer (599,601) and the General Fund's payments to the Educational Leasing Corp (691,284) from the General Fund function lines. The page with the line-level Total column (report p9) is not trimmed, and p2 shows only function totals. Is it acceptable to keep the printed General Fund lines and book one contra per function (Instruction -50,000, Pupil support -178,001, Support services business -154,000, Maintenance and operations -758,284, Pupil transportation -150,600) instead of reducing individual lines?",
       "amount": 1290885,
-      "recorded_as": "Five signed contra disbursement lines from p2 function differences; transfers_in/out 599,601 recorded separately; ELC lease revenue 691,284 and its Reclass (691,284) on row 1990 recorded as an offsetting pair in receipts",
+      "recorded_as": "Five signed Reclass disbursement lines from p2 function differences (so disbursements tie to the printed Total column 13,571,413); no transfers recorded; receipts at the Total column (row 1990 3,827, Transfers (incoming) row '-')",
       "source_page": 2
     },
     {
@@ -2292,5 +2270,5 @@
       "source_page": 12
     }
   ],
-  "notes": "Modified cash basis school district (Washington County School District No. 3). Governmental figures use Total Governmental Funds column (GF, Special Building, Depreciation, Bond, QCPUF, Educational Leasing Corp, net of Reclass column). The first disbursement page's right-hand columns (Total Governmental Funds column for instruction through career education lines, report p9) are not in the trimmed PDF; the printed line amounts for those lines are therefore the General Fund column (p7), except 2900 Other support services 733,050 (Depreciation Fund; p2 counts it in Capital outlay 1,295,496). The Reclass column (total 1,290,885) removes General Fund payments to the Educational Leasing Corp (ELC) and the GF-to-Depreciation transfer from those function lines; the Statement of Activities (p2) shows the reclass by function, so one signed contra line per function was added (computed from p2: Instruction -50,000; Pupil support -178,001; Support services business -154,000; Maintenance and operations -758,284; Pupil transportation -150,600; total -1,290,885), so disbursements tie to the printed total 13,571,413. Which individual lines carry the reclass is not shown. Debt related costs (row 5000) stays at the full printed 1,672,186: the Reclass column shows '-' on that row and p2 Debt service is 1,672,186 (it includes the ELC's own 691,284 debt payment, recorded as Principal and Interest (combined) since no split is printed). ELC lease revenue 691,284 is on row 1990 Miscellaneous local receipts (ELC column 691,284, Reclass (691,284), p6; Total column 3,827); recorded as a printed ELC line plus an offsetting reclass line (net zero), so receipts still tie to the printed total 13,978,141. Business-type = School Lunch Fund (p10-11); USDA and state subsidy 119,480 split 1,955 state / 117,525 federal per budget schedule p21. Activities Funds (p12) and Student Fees Fund (p13) are not in the district's net position or governmental fund totals; skipped entirely (see decision_needed). TRANSFER CROSS-CHECK: Depreciation Fund receives 'Transfers from general fund' 599,601 (p17). The General Fund budget schedule (p15) and statement (p7) show no transfer out; GF disbursement lines (sum 11,854,694) and fund balance roll (2,392,650 + 12,350,919 - 11,854,694 = 2,888,875) show the transfer is hidden inside GF disbursement lines and removed by the Reclass column. Recorded as transfers_in 599,601 / transfers_out 599,601; in detail, a contra expenditure plus other financing -599,601 for General and +599,601 for Depreciation. Interfund loan 39,922 (Bond Fund to QCPUF; codes 9002/9004, printed inside both governmental totals) is not revenue or spending: recorded in transfers_in/transfers_out (with the 599,601 GF-to-Depreciation transfer, total 639,523) and as includes_split on reported_totals; in detail as other financing (-39,922 Bond, +39,922 QCPUF). Beginning cash = governmental funds beginning fund balance 7,013,317 (p9; equals p3 net position beginning); ending cash = governmental total assets/fund balance 7,420,045 (p4, cash + restricted cash + County Treasurer). business_type measure cash; beginning 190,019 and ending 141,085 per p11; business-type receipts total 431,675 per p21 (operating 312,195 + nonoperating 119,480 on p11). Balance sheet (attempt 2): governmental lines from the governmental funds Statement of Assets, Liabilities and Fund Balances (p4, Total Governmental Funds; fund balance by classification Restricted/Committed/Assigned/Unassigned), whose totals 7,420,045 equal the government-wide governmental column (p1); business-type cash 141,085 and the 7,561,130 totals from the p1 Statement of Net Position. No liabilities. GF budget schedule (p14-15, function-level) recorded in detail as the only GF schedule (program lines on p7-8 are basic statement lines); GF budget schedule actuals differ by rounding of 1 from statement (12,350,918 vs 12,350,919; 11,854,693 vs 11,854,694). Attempt 2 recategorisation: school function codes per user rules (129x Special Education Programs; 21xx support services/Pupils; 2230 Staff; 2300s General Administration; 2410 School Administration; 2580 Business; 2650 Building and Grounds; 3535/3551 State Categorical Programs because p2's State categorical programs 35,878 = 28,378 + 7,500; 6200-6969 lines under the 'Federal programs' heading p8 = Federal Programs); Bond Fund 'Miscellaneous revenues' 7,452 = Public Power District Sales Tax per the Bond budget schedule p18; Personal property tax credit = Property Tax Credit. Debt related costs 1,672,186 (p9) split by fund column using the Bond Fund (p18: principal 650,000, interest 153,914, fees 200) and QCPUF (p19: principal 165,000, interest 11,788) schedules. County fines and license fees (code 2110) categorized as Fines and Licenses. Attempt 3 (charges-for-services re-check): School Lunch Fund 'Ala carte' 53,296 and 'Other' 14,265 (p11) are School Lunch Sales (the Lunch Fund budget schedule p21 counts all 312,195 operating receipts as Food sales); the ELC lease revenue pair on row 1990 (691,284 and its (691,284) reclass, net zero) is Rentals; 'Option bus fee' 11,025 is a genuine fee and stays charges for services; no drivers' education spending in this report. Read pages 1-22 of 22"
+  "notes": "Modified cash basis school district (Washington County School District No. 3). Governmental figures use Total Governmental Funds column (GF, Special Building, Depreciation, Bond, QCPUF, Educational Leasing Corp, net of Reclass column). The first disbursement page's right-hand columns (Total Governmental Funds column for instruction through career education lines, report p9) are not in the trimmed PDF; the printed line amounts for those lines are therefore the General Fund column (p7), except 2900 Other support services 733,050 (Depreciation Fund; p2 counts it in Capital outlay 1,295,496). The Reclass column (total 1,290,885) removes General Fund payments to the Educational Leasing Corp (ELC) and the GF-to-Depreciation transfer from those function lines; the Statement of Activities (p2) shows the reclass by function, so one signed contra line per function was added (computed from p2: Instruction -50,000; Pupil support -178,001; Support services business -154,000; Maintenance and operations -758,284; Pupil transportation -150,600; total -1,290,885), so disbursements tie to the printed total 13,571,413. Which individual lines carry the reclass is not shown. Debt related costs (row 5000) stays at the full printed 1,672,186: the Reclass column shows '-' on that row and p2 Debt service is 1,672,186 (it includes the ELC's own 691,284 debt payment, recorded as Principal and Interest (combined) since no split is printed). Business-type = School Lunch Fund (p10-11); USDA and state subsidy 119,480 split 1,955 state / 117,525 federal per budget schedule p21. Activities Funds (p12) and Student Fees Fund (p13) are not in the district's net position or governmental fund totals; skipped entirely (see decision_needed). Beginning cash = governmental funds beginning fund balance 7,013,317 (p9; equals p3 net position beginning); ending cash = governmental total assets/fund balance 7,420,045 (p4, cash + restricted cash + County Treasurer). business_type measure cash; beginning 190,019 and ending 141,085 per p11; business-type receipts total 431,675 per p21 (operating 312,195 + nonoperating 119,480 on p11). Balance sheet (attempt 2): governmental lines from the governmental funds Statement of Assets, Liabilities and Fund Balances (p4, Total Governmental Funds; fund balance by classification Restricted/Committed/Assigned/Unassigned), whose totals 7,420,045 equal the government-wide governmental column (p1); business-type cash 141,085 and the 7,561,130 totals from the p1 Statement of Net Position. No liabilities. GF budget schedule (p14-15, function-level) recorded in detail as the only GF schedule (program lines on p7-8 are basic statement lines); GF budget schedule actuals differ by rounding of 1 from statement (12,350,918 vs 12,350,919; 11,854,693 vs 11,854,694). Attempt 2 recategorisation: school function codes per user rules (129x Special Education Programs; 21xx support services/Pupils; 2230 Staff; 2300s General Administration; 2410 School Administration; 2580 Business; 2650 Building and Grounds; 3535/3551 State Categorical Programs because p2's State categorical programs 35,878 = 28,378 + 7,500; 6200-6969 lines under the 'Federal programs' heading p8 = Federal Programs); Bond Fund 'Miscellaneous revenues' 7,452 = Public Power District Sales Tax per the Bond budget schedule p18; Personal property tax credit = Property Tax Credit. Debt related costs 1,672,186 (p9) split by fund column using the Bond Fund (p18: principal 650,000, interest 153,914, fees 200) and QCPUF (p19: principal 165,000, interest 11,788) schedules. County fines and license fees (code 2110) categorized as Fines and Licenses. Attempt 3 (charges-for-services re-check): School Lunch Fund 'Ala carte' 53,296 and 'Other' 14,265 (p11) are School Lunch Sales (the Lunch Fund budget schedule p21 counts all 312,195 operating receipts as Food sales); 'Option bus fee' 11,025 is a genuine fee and stays charges for services; no drivers' education spending in this report. Read pages 1-22 of 22"
 }
