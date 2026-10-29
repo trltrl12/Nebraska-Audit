@@ -1,18 +1,15 @@
 {
   "stem": "Melbeta_FY2025",
-  "values_checked": 30,
+  "values_checked": 27,
   "issues": [
-    {"severity": "warning", "path": "decision_needed", "page": 2,
-     "extracted": null, "on_page": "Trimmed pp2 and 4 are red-crossed earlier versions of Exhibit A (total receipts 111,235.05, disbursements 93,585.78, ending 330,956.19)",
-     "issue": "unmarked pages 1 and 3 used (correct), but the crossed-out version's differing figures are only in notes: not in report_discrepancies or decision_needed"},
-    {"severity": "warning", "path": "receipts[6].category", "page": 1,
-     "extracted": "charges for services/fees", "on_page": "Local Receipts: Other (Sewer Fund column) 21,509.68",
-     "issue": "page gives no breakdown, so sewer charges is an assumption (already marked review). Under the 2026-10-28 rule it would be Utility Charges. original_label adds '(Sewer Fund)', which is not printed"},
+    {"severity": "warning", "path": "report_discrepancies", "page": 2,
+     "extracted": null, "on_page": "Crossed-out Exhibit A versions (pp2, 4): total receipts 111,235.05, disbursements 93,585.78, ending 330,956.19",
+     "issue": "The void crossed-out pages are mentioned only in notes. There is no report_discrepancies entry recording the differing figures, as the crossed-out page rule asks for. The figures used (unmarked pp1, 3) are correct."},
     {"severity": "warning", "path": "balance_sheet.assets[0].computed", "page": 1,
-     "extracted": "General 149,063.40 + Street 522.37 (cash); General 53,375.50 + Street 22,275.34 (investments)", "on_page": "Net Cash Balance: General 149,063.40, Street 522.37",
-     "issue": "the amount 149,585.77 is correct (cash only), but the computed text also names the investment parts, which are not in this amount"},
-    {"severity": "warning", "path": "balance_sheet.equity[0].original_label", "page": 1,
-     "extracted": "Subtotal of Ending Balances (Line 28)", "on_page": "Subtotal of Ending Balances (Line 26 + 27)",
-     "issue": "label is paraphrased, and a subtotal line is used as the equity line (amounts correct: 225,236.61 + 104,257.03 = 329,493.64)"}
+     "extracted": "General 149,063.40 + Street 522.37 (cash); General 53,375.50 + Street 22,275.34 (investments)", "on_page": "149,063.40 + 522.37 = 149,585.77",
+     "issue": "The amount 149,585.77 is correct as cash only, but the computed note also lists the investment parts, which belong to assets[2]. The note is misleading."},
+    {"severity": "warning", "path": "balance_sheet.assets", "page": 1,
+     "extracted": null, "on_page": "County Treasurer Balance at September 30, 2025: 657.57 (October 1, 2024: 681.12)",
+     "issue": "The printed county treasurer balance is not recorded and not mentioned in notes. It is outside the form's line 28 total, but CLAUDE.md treats county treasurer balances as Cash and Cash Equivalents. A person should confirm whether to leave it out."}
   ]
 }

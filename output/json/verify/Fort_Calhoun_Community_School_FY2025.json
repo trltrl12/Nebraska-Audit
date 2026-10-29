@@ -1,16 +1,14 @@
 {
   "stem": "Fort_Calhoun_Community_School_FY2025",
-  "values_checked": 232,
+  "values_checked": 245,
   "issues": [
-    {"severity": "warning", "path": "disbursements", "page": 7,
-     "extracted": "General Fund column amounts for instruction through career education lines plus five computed contra lines",
-     "on_page": "right half of the first disbursement page (Special Building/QCPUF/ELC/Reclass/Total Governmental Funds columns, report p9) is not in the trimmed PDF",
-     "issue": "source page not trimmed; line-level Total column cannot be confirmed. Contras were checked against p2 function totals (-50,000; -178,001; -154,000; -758,284; -150,600 = -1,290,885) and disbursements tie to the printed 13,571,413. Already raised in decision_needed"},
-    {"severity": "warning", "path": "receipts[33].category", "page": 11,
-     "extracted": "charges for services/fees", "on_page": "Ala carte 53,296 (School Lunch Fund charges for services)",
-     "issue": "a la carte food sales in the lunch fund look like School Lunch Sales (user rule: lunch/meal/milk/nutrition sales), like Lunchroom sales and Breakfast"},
-    {"severity": "warning", "path": "detail[43].detail_category", "page": 17,
-     "extracted": "Depreciation & Amortization", "on_page": "contra for the hidden GF transfer to Depreciation Fund 599,601",
-     "issue": "detail_category doesn't fit a transfer contra line (looks like a category_decisions lookup on the word 'Depreciation')"}
+    {"severity": "warning", "path": "missing", "page": 7,
+     "extracted": "five reclass contra lines derived from p2 function totals (-50,000; -178,001; -154,000; -758,284; -150,600)",
+     "on_page": "right half of the first governmental disbursements spread (Special Building, QCPUF, ELC, Reclass and Total Governmental Funds columns for rows 1100-3551) is not in the trimmed PDF; p7 holds only the General, Depreciation and Bond columns",
+     "issue": "A trim gap: the page with the line-level Reclass and Total columns is missing. The contra lines add up exactly to the printed Reclass total (1,290,885), and disbursements tie to 13,571,413, so the totals are right. Which individual lines carry the reclass can't be checked. The extraction already raises this in decision_needed."},
+    {"severity": "warning", "path": "reported_totals.governmental", "page": 6,
+     "extracted": "receipts 13,978,141 / disbursements 13,571,413, includes [] plus a non-standard 'includes_split' field",
+     "on_page": "Total receipts 13,978,141 and Total disbursements 13,571,413 both contain the 39,922 interfund loan (codes 9002/9004)",
+     "issue": "Each printed total includes 39,922 that the JSON records in transfers_in/transfers_out, but 'includes' is empty. The amount is described only in 'includes_split', which is not a schema field. The validator may flag a 39,922 gap (receipt lines add to 13,938,219; disbursement lines add to 13,531,491)."}
   ]
 }

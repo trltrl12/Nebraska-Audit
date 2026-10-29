@@ -1,18 +1,22 @@
 {
   "stem": "Falls_City_Public_Schools_FY2025",
-  "values_checked": 176,
+  "values_checked": 160,
   "issues": [
-    {"severity": "warning", "path": "detail[81].category", "page": 11,
-     "extracted": "charges for services/fees", "on_page": "Daily Sales 194,878",
-     "issue": "School Nutrition Fund daily (lunch) sales; the same 194,878 is category School Lunch Sales in receipts[14]. Per the user's 2026-10-28 rule this should be School Lunch Sales, and user_rules.py's lunch/meal regex will not catch the label 'Daily Sales'."},
-    {"severity": "warning", "path": "receipts[19].category", "page": 4,
-     "extracted": "other", "on_page": "Other 190,491",
-     "issue": "Printed label is 'Other' (permitted), but 160,315 of it (84%) is General Fund 1925 Other Categorical (p5, detail[8], also in 'other'), with 1911 Other Local License Fees 6,516, 1190 Other Taxes 300 and Nutrition Other Local Revenue 23,360. 1925 is categorical grants from private sources (see the Lincoln PS ruling), so a specific category could fit."},
-    {"severity": "warning", "path": "detail[76].category", "page": 9,
-     "extracted": "Instruction", "on_page": "Employee Benefit Fund - Other Support Services 88,322",
-     "issue": "Inconsistent with detail[74]: Depreciation Fund 'Central Services - Other Support Services' is category Business, but this line is Instruction. The statement (p4) counts both under Instruction. The two lines should be treated the same way."},
-    {"severity": "warning", "path": "detail[105].category", "page": 12,
-     "extracted": "support services", "on_page": "Elementary & Secondary School Emergency Relief (ESSERIII) 21,950",
-     "issue": "Special Building Fund spending; the statement (p4) puts the whole Special Building column (144,649) on the Capital outlay line. Capital outlay or Federal Programs could fit better (judgment call)."}
+    {
+      "severity": "warning",
+      "path": "detail[8].category",
+      "page": 5,
+      "extracted": "other",
+      "on_page": "1925 Other Categorical 160,315",
+      "issue": "Local-source categorical grant. The General Fund spends a similar amount on '3400 Categorical Grants From Corporations/Private Interests' (211,631, p7), so donations/contributions (or a Categorical Grants category, as ruled for Lincoln Public Schools code 1925) may fit better than other. The printed label does say 'Other', so this is left as a warning."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[76].category",
+      "page": 9,
+      "extracted": "Instruction",
+      "on_page": "Employee Benefit Fund: Other Support Services 88,322",
+      "issue": "The printed label is a support-services line, but it is categorized Instruction (following the statement's Instruction total), while the Depreciation Fund's 'Central Services - Other Support Services' 220,209 (detail[74], also counted under Instruction on the statement) is categorized Business. The two are treated inconsistently."
+    }
   ]
 }

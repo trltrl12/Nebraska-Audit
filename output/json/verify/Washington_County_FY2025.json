@@ -4,20 +4,21 @@
   "issues": [
     {"severity": "error", "path": "detail[104].category", "page": 17,
      "extracted": "charges for services/fees", "on_page": "E911 System Fund 'County Sheriff' 27,505",
-     "issue": "Sheriff fees are Fees of Office under the user's rule (treasurer/sheriff/court fees). The statement p4 also counts this amount in the 'Offices' row (nonmajor 28,605 = 1,100 + 27,505), which the extraction puts under Fees of Office at statement level, so the detail is inconsistent with it."},
+     "issue": "[fixed 2026-10-29: category and detail_category changed to Fees of Office / fees of office] Sheriff fees are Fees of Office under the user's rule (treasurer/sheriff/court fees). The statement p4 also counts this amount in the 'Offices' row (nonmajor 28,605 = 1,100 + 27,505), which the extraction puts under Fees of Office at statement level, so the detail is inconsistent with it."},
     {"severity": "error", "path": "detail[81].category", "page": 14,
      "extracted": "licenses and permits", "on_page": "Register of Deeds P & M 'Filing & Recording Fees' 14,948",
-     "issue": "Recording/register of deeds fees are category Fees of Office under the user's rule; detail_category is already 'fees of office', so category and detail_category disagree. (The statement's 'Licenses and Permits' row includes the amount, but the statement line itself is recorded as printed.)"},
+     "issue": "[fixed 2026-10-29: category changed to Fees of Office to match detail_category] Recording/register of deeds fees are category Fees of Office under the user's rule; detail_category is already 'fees of office', so category and detail_category disagree. (The statement's 'Licenses and Permits' row includes the amount, but the statement line itself is recorded as printed.)"},
     {"severity": "warning", "path": "detail[91].category", "page": 16,
      "extracted": "charges for services/fees", "on_page": "Juvenile Services Grant Fund 'County Attorney' 1,100",
-     "issue": "Statement p4 counts this in the 'Offices' row (Fees of Office at statement level). It is probably a county attorney fee, so Fees of Office would fit."},
+     "issue": "[fixed 2026-10-29: category and detail_category changed to Fees of Office / fees of office, review note added] Statement p4 counts this in the 'Offices' row (Fees of Office at statement level). It is probably a county attorney fee, so Fees of Office would fit."},
     {"severity": "warning", "path": "receipts[0]", "page": 4,
      "extracted": "taxes (unlabeled) 14,374,590 / inheritance tax 796,948 (split_from Taxes 15,171,538)",
      "on_page": "Taxes 15,171,538; Inheritance Fund column 796,948",
-     "issue": "The split uses the Inheritance Fund column of the same printed row, so it is defensible, but inheritance tax is inferred from the fund name (the p7 schedule only says 'Taxes'). receipts[1].original_label 'Taxes (Inheritance Fund column)' is not printed text. The fund columns of the Taxes row add to 15,171,537, not 15,171,538, so the computed remainder 14,374,590 is 1 more than the columns show (14,374,589)."},
+     "issue": "The split uses the Inheritance Fund column of the same printed row, so it is defensible, but inheritance tax is inferred from the fund name (the p7 schedule only says 'Taxes'). receipts[1].original_label 'Taxes (Inheritance Fund column)' is not printed text. The fund columns of the Taxes row add to 15,171,537, not 15,171,538, so the computed remainder 14,374,590 is 1 more than the columns show (14,374,589).",
+     "resolved": "Split kept: remainder is computed from the printed total so the split items add to the printed line; the 1 rounding difference is now in report_discrepancies and notes."},
     {"severity": "warning", "path": "report_discrepancies", "page": 4,
      "extracted": "4 detail-schedule discrepancies only",
      "on_page": "p4 rows don't cross-foot: Taxes columns 15,171,537 vs total 15,171,538; Intergovernmental 5,651,637 vs 5,651,636; Miscellaneous 2,814,098 vs 2,814,097; Total Receipts columns 26,592,476 vs 26,592,475. Ending balances by column also differ from p3/schedules by 1-4 (e.g. General 5,671,264 vs 5,671,260)",
-     "issue": "These $1-4 rounding differences printed in the report are described only in notes, or not at all, and should be listed in report_discrepancies."}
+     "issue": "[fixed 2026-10-29: added p4 cross-foot rounding and ending-balance entries to report_discrepancies] These $1-4 rounding differences printed in the report are described only in notes, or not at all, and should be listed in report_discrepancies."}
   ]
 }

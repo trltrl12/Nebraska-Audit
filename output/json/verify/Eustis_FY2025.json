@@ -1,15 +1,22 @@
 {
   "stem": "Eustis_FY2025",
-  "values_checked": 110,
+  "values_checked": 106,
   "issues": [
-    {"severity": "warning", "path": "receipts[8].category", "page": 7,
-     "extracted": "charges for services/fees", "on_page": "Fees and services 202,459 (Sanitation and Water and Sewer proprietary funds)",
-     "issue": "Utility fund charges; under the user's 2026-10-28 rule they are Utility Charges (the matching detail lines already use Utility Charges), so the statement line is inconsistent with detail."},
-    {"severity": "warning", "path": "disbursements[12].category", "page": 7,
-     "extracted": "debt service (principal and interest combined)", "on_page": "Debt service (8,450); p10 schedule labels the same amount 'Interest expense and debt issuance costs'",
-     "issue": "The report's own schedule says this is interest/issuance costs, so debt service interest may fit better than combined (review set)."},
-    {"severity": "warning", "path": "receipts[5].category", "page": 2,
-     "extracted": "donations/contributions", "on_page": "Operating Grants and Contributions, Culture and recreation 17,347",
-     "issue": "The grantor isn't stated; it could be a government (e.g. state library) grant rather than a private donation (the balance sheet shows a restricted 'Library grant'). Same for detail[14] Library 'Local' 17,542."}
+    {
+      "severity": "warning",
+      "path": "detail[0].amount",
+      "page": 9,
+      "extracted": 81241,
+      "on_page": "General schedule: Property taxes 81,241, Intergovernmental 19,617, Local 72,067 + Library 17,542, Interest 419; statement p5 General column: Property taxes 62,326, Motor vehicle taxes 11,424, Intergovernmental 27,108, Local 89,414, Interest 614",
+      "issue": "The p9 schedule classifies General Fund receipts differently from the p5 statement (same total, 276,577). The schedule's Property taxes 81,241 = statement property 62,326 + motor vehicle 11,424 + 7,491 the statement calls intergovernmental, and 195 sits in Local on the schedule but in Interest on the statement. Figures are recorded as printed, but no report_discrepancies/notes entry explains that the detail property tax line includes motor vehicle tax."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[5].category",
+      "page": 2,
+      "extracted": "donations/contributions",
+      "on_page": "Culture and recreation: Operating Grants and Contributions 17,347",
+      "issue": "Library operating grants could be a state library grant (government, so intergovernmental/state aid) rather than private donations; the grantor is not stated (the extractor's review note already says so). The same applies to detail[15] (Library Local 17,542)."
+    }
   ]
 }

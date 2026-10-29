@@ -4,10 +4,10 @@
   "issues": [
     {"severity": "error", "path": "receipts[3].category", "page": 2,
      "extracted": "other taxes", "on_page": "Other (Taxes) 526,191 = Public Safety Sales Tax Fund 411,224 (p9) + E-911 Emergency Management Fund 26,241 (p8) + Road Fund 88,726 (p4)",
-     "issue": "The fund statements show what this line is made of: 411,224 of the 526,191 (78%) is the Public Safety Sales Tax Fund's taxes. Under the dominant-category rule it should be sales tax, or split with split_from. 'other taxes' is a last resort and does not apply here."},
+     "issue": "[fixed 2026-10-29: category changed to sales tax (dominant 411,224 of 526,191), review note names the mix, other-taxes category_decision removed] The fund statements show what this line is made of: 411,224 of the 526,191 (78%) is the Public Safety Sales Tax Fund's taxes. Under the dominant-category rule it should be sales tax, or split with split_from. 'other taxes' is a last resort and does not apply here."},
     {"severity": "error", "path": "detail[47].category", "page": 13,
      "extracted": "general government", "on_page": "ARPA DISBURSEMENTS 1,210,545; p4 ARPA column: General government 269,022, Capital outlay 941,523",
-     "issue": "The report's own p4 column shows this line is 78% capital outlay. The dominant category is capital outlay (or split), not general government."},
+     "issue": "[fixed 2026-10-29: split per the p4 ARPA column into general government 269,022 and capital outlay 941,523 ('Capital Outlay: General Government'), split_from set; detail total 1,210,545 unchanged] The report's own p4 column shows this line is 78% capital outlay. The dominant category is capital outlay (or split), not general government."},
     {"severity": "warning", "path": "receipts[9].split_from", "page": 7,
      "extracted": 86000, "on_page": "Minority Health Initiative Grant Fund Local 86,000",
      "issue": "The Local 2,697,636 split ties (1,798,848 + 408,532 + 404,256 + 86,000), but treating the 86,000 as counted in operating grants on p2 is the extractor's own reconciliation. The report does not print it."},
@@ -19,12 +19,12 @@
      "issue": "The county's general government charges are probably largely Fees of Office (clerk, register of deeds, treasurer). The p2 statement does not itemize them."},
     {"severity": "warning", "path": "detail[53].category", "page": 10,
      "extracted": "taxes (unlabeled)", "on_page": "Total Nonmajor Taxes 700,896 = Visitors Promotion 263,431 (p6) + E-911 26,241 (p8) + Public Safety Sales Tax 411,224 (p9)",
-     "issue": "The fund columns print this line's breakdown (lodging tax, E-911 tax, public safety sales tax), so it could be split instead of kept as unlabeled."},
+     "issue": "[fixed 2026-10-29: split per fund columns into lodging tax 263,431 (p6), other taxes 26,241 (p8, E-911) and sales tax 411,224 (p9) with split_from] The fund columns print this line's breakdown (lodging tax, E-911 tax, public safety sales tax), so it could be split instead of kept as unlabeled."},
     {"severity": "warning", "path": "detail[49].category", "page": 14,
      "extracted": "other", "on_page": "Insurance Fund Local 321,064",
      "issue": "This is the health and dental insurance fund's local receipts, likely employee premium contributions or reimbursements. 'other' is defensible because the report does not itemize them (review present)."},
-    {"severity": "warning", "path": "detail[28].category", "page": 11,
+    {"severity": "warning", "path": "detail[28].category", "page": 14,
      "extracted": "general government", "on_page": "County Surveyor (under Public Works) 0",
-     "issue": "Printed under the Public Works heading, so streets/highways may fit better. The amount is zero."}
+     "issue": "[fixed 2026-10-29: category changed to streets/highways] Printed under the Public Works heading, so streets/highways may fit better. The amount is zero."}
   ]
 }

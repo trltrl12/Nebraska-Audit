@@ -1,14 +1,10 @@
 {
   "stem": "Fordyce_FY2025",
-  "values_checked": 40,
+  "values_checked": 37,
   "issues": [
-    {
-      "severity": "warning",
-      "path": "receipts[11].category",
-      "page": 1,
-      "extracted": "charges for services/fees",
-      "on_page": "Local Receipts: Other (Enterprise Fund) 87,345.32; Enterprise disbursements are Solid Waste, Wastewater, Water",
-      "issue": "The extractor treated this unexplained Enterprise Fund line as service charges. If that is right, the user's rule puts utility fund charges in Utility Charges. If it is not, the line is unexplained and belongs in other. Either way this is a judgment call."
-    }
+    {"severity": "warning", "path": "receipts[11].category", "page": 1,
+     "extracted": "Utility Charges (original_label 'Local Receipts: Other (Enterprise Fund)')",
+     "on_page": "Local Receipts: Other 87,345.32 (Enterprise Fund column, line 18)",
+     "issue": "The printed label is 'Local Receipts: Other' with no breakdown. Treating it as utility charges is an inference: it is the Enterprise Fund's only receipt and that fund's spending is all solid waste, wastewater and water, so it is defensible, and the line is already marked review. original_label also has '(Enterprise Fund)' added, which is not printed on the row."}
   ]
 }

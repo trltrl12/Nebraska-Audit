@@ -3,7 +3,7 @@
   "entity_type": "county",
   "fiscal_year_end": "2025-06-30",
   "basis": "cash",
-  "extraction_attempt": 3,
+  "extraction_attempt": 4,
   "beginning_cash": {
     "amount": 8737595,
     "source_page": 4
@@ -40,15 +40,13 @@
     },
     {
       "fund_type": "governmental",
-      "category": "other taxes",
+      "category": "sales tax",
       "original_label": "Other (Taxes)",
       "amount": 526191,
       "source_page": 2,
       "split_from": "Taxes 8,683,033 (p4)",
       "computed": "split of Taxes 8,683,033 (p4) per general receipts on p2",
-      "review": "'Other' taxes not described (likely public safety sales tax and E-911 taxes plus road fund taxes)",
-      "detail_category": "Other / Miscellaneous Taxes",
-      "category_decision": "user 2026-10-23"
+      "review": "mixed line, dominant category used: fund columns show Public Safety Sales Tax Fund 411,224 (p9, 78%) + E-911 Emergency Management Fund taxes 26,241 (p8) + Road Fund taxes 88,726 (p4) = 526,191"
     },
     {
       "fund_type": "governmental",
@@ -727,7 +725,7 @@
       "fund": "General",
       "department": "Public Works",
       "section": "expenditure",
-      "category": "general government",
+      "category": "streets/highways",
       "detail_category": "not itemized",
       "original_label": "County Surveyor",
       "amount": 0,
@@ -976,10 +974,28 @@
       "category": "general government",
       "detail_category": "not itemized",
       "original_label": "DISBURSEMENTS",
-      "amount": 1210545,
-      "budget_final": 1408187,
-      "source_page": 13,
-      "review": "listed by object; p4 shows general government 269,022 and capital outlay 941,523"
+      "amount": 269022,
+      "budget_final": null,
+      "source_page": 4,
+      "split_from": "DISBURSEMENTS 1,210,545 (p13), split per the ARPA column of p4 (General government 269,022 + Capital outlay 941,523)",
+      "review": "single printed disbursement line split by the p4 ARPA fund column; final budget 1,408,187 (p13) not split"
+    },
+    {
+      "schedule": "Budgetary Comparison - COVID American Rescue Plan Act Fund",
+      "fund_type": "governmental",
+      "fund": "COVID American Rescue Plan Act",
+      "department": null,
+      "section": "expenditure",
+      "category": "capital outlay",
+      "detail_category": "not itemized",
+      "original_label": "Capital Outlay: General Government",
+      "printed_label": "DISBURSEMENTS",
+      "amount": 941523,
+      "budget_final": null,
+      "source_page": 4,
+      "split_from": "DISBURSEMENTS 1,210,545 (p13), split per the ARPA column of p4 (General government 269,022 + Capital outlay 941,523)",
+      "computed": "function general government (ARPA fund); capital outlay part of DISBURSEMENTS 1,210,545 (p13) per p4 ARPA column",
+      "review": "single printed disbursement line split by the p4 ARPA fund column; final budget 1,408,187 (p13) not split"
     },
     {
       "schedule": "Budgetary Comparison - COVID American Rescue Plan Act Fund",
@@ -1051,12 +1067,45 @@
       "fund": "Nonmajor funds (combined)",
       "department": null,
       "section": "revenue",
-      "category": "taxes (unlabeled)",
-      "detail_category": "taxes (unlabeled)",
-      "original_label": "Taxes",
-      "amount": 700896,
+      "category": "lodging tax",
+      "detail_category": "lodging tax",
+      "original_label": "Taxes (Visitors Promotion Fund)",
+      "printed_label": "Taxes",
+      "amount": 263431,
       "budget_final": null,
-      "source_page": 10
+      "source_page": 6,
+      "split_from": "Taxes 700,896 (p10 Total Nonmajor) = Visitors Promotion 263,431 (p6) + E-911 26,241 (p8) + Public Safety Sales Tax 411,224 (p9)"
+    },
+    {
+      "schedule": "Combining Statement - Nonmajor Funds",
+      "fund_type": "governmental",
+      "fund": "Nonmajor funds (combined)",
+      "department": null,
+      "section": "revenue",
+      "category": "other taxes",
+      "detail_category": "other local taxes",
+      "original_label": "Taxes (E-911 Emergency Management Fund)",
+      "printed_label": "Taxes",
+      "amount": 26241,
+      "budget_final": null,
+      "source_page": 8,
+      "split_from": "Taxes 700,896 (p10 Total Nonmajor) = Visitors Promotion 263,431 (p6) + E-911 26,241 (p8) + Public Safety Sales Tax 411,224 (p9)",
+      "review": "E-911 fund tax receipts (911 surcharge), no matching specific tax category"
+    },
+    {
+      "schedule": "Combining Statement - Nonmajor Funds",
+      "fund_type": "governmental",
+      "fund": "Nonmajor funds (combined)",
+      "department": null,
+      "section": "revenue",
+      "category": "sales tax",
+      "detail_category": "sales tax",
+      "original_label": "Taxes (Public Safety Sales Tax Fund)",
+      "printed_label": "Taxes",
+      "amount": 411224,
+      "budget_final": null,
+      "source_page": 9,
+      "split_from": "Taxes 700,896 (p10 Total Nonmajor) = Visitors Promotion 263,431 (p6) + E-911 26,241 (p8) + Public Safety Sales Tax 411,224 (p9)"
     },
     {
       "schedule": "Combining Statement - Nonmajor Funds",
@@ -1279,5 +1328,5 @@
       "source_page": 10
     }
   ],
-  "notes": "Cash basis county, governmental activities only (no business-type funds). Receipts/disbursements from p4 governmental funds Total column; Taxes 8,683,033 split using p2 general receipts (property, motor vehicle, lodging, other; sum agrees). Local 2,697,636 split using p2 (charges for services 1,798,848, interest 408,532, miscellaneous 404,256) plus the Minority Health Initiative fund's Local 86,000 (p7), which p2 counts as an operating grant; sum agrees. 'Intergovernmental' not itemized anywhere (no state aid breakdown printed), so not split. 'Other (Taxes)' 526,191 has no printed breakdown of that line, kept as other taxes. Debt proceeds = lease 251,280 + bond 1,273,173. Transfers in and out both 3,072,191 on p4. Attempt 2 (user rule 2026-10-27): balance sheet now taken from the p3 Statement of Assets and Fund Balances - Cash Basis, Total Governmental Funds column (fund balance by classification: restricted, committed, unassigned), because its totals (7,453,429) equal the p1 Statement of Net Position - Cash Basis; no liabilities. Detail: General Fund recorded from the p11 budget schedule (General Fund column only; p5 combining General Fund page not duplicated except the Inheritance Tax Fund column, which is not on p11). p11 department lines include capital outlay/debt (departments sum to 10,577,807, while function lines on p4 differ). Nonmajor funds (more than 6) recorded using the p10 Total Nonmajor column; p6-9 per-fund pages not duplicated. Road, ARPA and Insurance fund disbursements are single printed lines. Attempt 3 (charges re-check 2026-10-29): detail 'Local' lines re-examined. General Fund Local 2,207,650 stays charges for services (provably more than half charges, see its review). Road 13,546, ARPA 28,955 and Insurance 321,064 Local lines are not itemized anywhere and not shown to be mostly charges, so moved to other (category_decision 'local'). Nonmajor combined Local 126,421 moved to donations/contributions (Minority Health grant 86,000 of it, same category as the receipts line). Totals unchanged. Read pages 1-14 of 14."
+  "notes": "Cash basis county, governmental activities only (no business-type funds). Receipts/disbursements from p4 governmental funds Total column; Taxes 8,683,033 split using p2 general receipts (property, motor vehicle, lodging, other; sum agrees). Local 2,697,636 split using p2 (charges for services 1,798,848, interest 408,532, miscellaneous 404,256) plus the Minority Health Initiative fund's Local 86,000 (p7), which p2 counts as an operating grant; sum agrees. 'Intergovernmental' not itemized anywhere (no state aid breakdown printed), so not split. Debt proceeds = lease 251,280 + bond 1,273,173. Transfers in and out both 3,072,191 on p4. Attempt 2 (user rule 2026-10-27): balance sheet now taken from the p3 Statement of Assets and Fund Balances - Cash Basis, Total Governmental Funds column (fund balance by classification: restricted, committed, unassigned), because its totals (7,453,429) equal the p1 Statement of Net Position - Cash Basis; no liabilities. Detail: General Fund recorded from the p11 budget schedule (General Fund column only; p5 combining General Fund page not duplicated except the Inheritance Tax Fund column, which is not on p11). p11 department lines include capital outlay/debt (departments sum to 10,577,807, while function lines on p4 differ). Nonmajor funds (more than 6) recorded using the p10 Total Nonmajor column; p6-9 per-fund pages not duplicated. Road and Insurance fund disbursements are single printed lines. Attempt 3 (charges re-check 2026-10-29): detail 'Local' lines re-examined. General Fund Local 2,207,650 stays charges for services. Road 13,546, ARPA 28,955 and Insurance 321,064 Local lines are not itemized anywhere, so other. Nonmajor combined Local 126,421 donations/contributions (Minority Health grant 86,000 of it). Attempt 4 (verifier fixes 2026-10-29): receipts 'Other (Taxes)' 526,191 (p2) recategorized from other taxes to sales tax (dominant: Public Safety Sales Tax Fund 411,224 of it per p9, plus E-911 26,241 p8 and Road Fund 88,726 p4); ARPA DISBURSEMENTS 1,210,545 (p13) split per the p4 ARPA column into general government 269,022 and capital outlay 941,523 (budget not split); nonmajor Taxes 700,896 split per fund columns (lodging 263,431 p6, E-911 26,241 p8, sales tax 411,224 p9); County Surveyor (0, under Public Works) moved to streets/highways. Totals unchanged. Read pages 1-14 of 14."
 }
