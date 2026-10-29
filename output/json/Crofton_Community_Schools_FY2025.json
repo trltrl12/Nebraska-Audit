@@ -3,7 +3,7 @@
   "entity_type": "school district",
   "fiscal_year_end": "2025-08-31",
   "basis": "cash",
-  "extraction_attempt": 5,
+  "extraction_attempt": 6,
   "beginning_cash": {
     "amount": 6098253,
     "source_page": 5
@@ -355,21 +355,36 @@
       "original_label": "Activity Disbursements",
       "amount": 346010,
       "source_page": 5
+    },
+    {
+      "fund_type": "governmental",
+      "category": "other",
+      "original_label": "Contra: General Fund transfers to Depreciation and Employee Benefit Funds (inside General Fund disbursement lines)",
+      "amount": -200000,
+      "source_page": 6,
+      "split_from": "General Fund disbursements 6,428,525 (p6); Depreciation Fund Transfers from General Fund 100,000 (p12) + Employee Benefit Fund Transfer from General Fund 100,000 (p13)",
+      "computed": "the General Fund column (p6) and budget schedule (8000 Transfers 35,000 only, p10) print no 200,000 transfer out although the Depreciation and Employee Benefit Funds each received 100,000 from it (p6, p12, p13); the outflow sits in an unidentified General Fund disbursement line",
+      "review": "contra for the 200,000 interfund transfers hidden in an unidentified General Fund disbursement line; recorded in transfers_out"
     }
   ],
   "transfers_in": {
-    "amount": 200000,
-    "source_page": 5
+    "amount": 235000,
+    "source_page": 6,
+    "computed": "Depreciation Fund 100,000 + Employee Benefit Fund 100,000 (p6, p12, p13) + Activities Fund 35,000 (p7, p14); printed net Transfers In (Out) 200,000 (p5)"
   },
-  "transfers_out": null,
+  "transfers_out": {
+    "amount": 235000,
+    "source_page": 6,
+    "computed": "General Fund 8000 Transfers 35,000 (p6, p10) + General Fund transfers to Depreciation and Employee Benefit Funds 200,000 (p12, p13; not printed as a General Fund line, see contra line)"
+  },
   "debt_proceeds": null,
   "other_financing": null,
   "adjustments": [],
   "decision_needed": [
     {
-      "question": "Depreciation Fund (100,000) and Employee Benefit Fund (100,000) each show a transfer from the General Fund, but the General Fund shows only 35,000 transferred out (to Activities). Where did the other 200,000 come from?",
+      "question": "The Depreciation Fund (100,000, p12) and Employee Benefit Fund (100,000, p13) each received a transfer from the General Fund, but no General Fund line shows the matching outflow (8000 Transfers only 35,000, to Activities, p10). Which General Fund disbursement line holds it, so the contra can be placed on that line?",
       "amount": 200000,
-      "recorded_as": "transfers_in 200,000 (printed Total Transfers In (Out) on p5); no matching transfers_out",
+      "recorded_as": "transfers_in 235,000 and transfers_out 235,000 (each incl. the 200,000); contra disbursement -200,000 (category other, review) against the unidentified General Fund line",
       "source_page": 6
     }
   ],
@@ -383,7 +398,8 @@
       "disbursements": {
         "amount": 7418609,
         "source_page": 5,
-        "includes": []
+        "includes": [],
+        "includes_split": [{"amount": 200000, "source_page": 6, "computed": "General Fund transfers to Depreciation and Employee Benefit Funds inside General Fund disbursement lines, moved to transfers_out (contra line)"}]
       }
     },
     "business-type": null
@@ -418,12 +434,6 @@
       "difference": 1,
       "source_page": 15,
       "note": "School Nutrition Fund total receipts lines add to 290,590; printed 290,591. Disbursement lines add to 345,361; printed 345,360 (rounding)."
-    },
-    {
-      "check": "reconcile",
-      "difference": 165000,
-      "source_page": 6,
-      "note": "Depreciation and Employee Benefit funds each show 100,000 transferred from the General Fund (p6, schedules p12-13), but the General Fund shows only 35,000 transferred out (p6, p10, to Activities p14); its spending lines (6,428,525) don't include the 200,000 either, so governmental transfers net to +200,000 instead of zero (p5 Total Transfers In (Out) 200,000). Figures kept as printed."
     },
     {
       "check": "detail",
@@ -1690,6 +1700,8 @@
       "budget_final": -250000,
       "source_page": 10
     },
+    {"schedule": "Budgetary Comparison - General Fund", "fund_type": "governmental", "fund": "General", "department": "General Fund disbursements (line not identified)", "section": "expenditure", "category": "other", "detail_category": "miscellaneous expenditure", "original_label": "Contra: transfers to Depreciation and Employee Benefit Funds inside disbursement lines", "amount": -200000, "budget_final": null, "source_page": 12, "split_from": "General Fund budget schedule lines (pp8-10); Depreciation Fund Transfers from General Fund 100,000 (p12) + Employee Benefit Fund Transfer from General Fund 100,000 (p13)", "computed": "200,000 received by the Depreciation and Employee Benefit Funds from the General Fund (p12, p13); no General Fund line shows it, so the outflow sits in an unidentified line", "review": "contra for the 200,000 interfund transfers hidden in an unidentified General Fund line"},
+    {"schedule": "Budgetary Comparison - General Fund", "fund_type": "governmental", "fund": "General", "department": "General Fund disbursements (line not identified)", "section": "other financing", "original_label": "Transfers Out", "printed_label": "Transfers to Depreciation and Employee Benefit Funds (not printed as a line)", "amount": -200000, "budget_final": null, "source_page": 12, "split_from": "General Fund budget schedule lines (pp8-10); Depreciation Fund Transfers from General Fund 100,000 (p12) + Employee Benefit Fund Transfer from General Fund 100,000 (p13)", "computed": "matches Depreciation Fund 100,000 (p12) + Employee Benefit Fund 100,000 (p13) transfers from General Fund", "review": "transfer out hidden in an unidentified General Fund disbursement line"},
     {
       "schedule": "Budgetary Comparison - Depreciation Fund",
       "fund_type": "governmental",
@@ -1711,10 +1723,12 @@
       "fund": "Depreciation",
       "department": null,
       "section": "other financing",
-      "original_label": "Transfers from General Fund",
+      "original_label": "Transfers In",
+      "printed_label": "Transfers from General Fund",
       "amount": 100000,
       "budget_final": 0,
-      "source_page": 12
+      "source_page": 12,
+      "review": "transfer from the General Fund with no matching General Fund outflow line; printed inside Total Cash Receipts"
     },
     {
       "schedule": "Budgetary Comparison - Depreciation Fund",
@@ -1749,10 +1763,12 @@
       "fund": "Employee Benefit",
       "department": null,
       "section": "other financing",
-      "original_label": "Transfer from General Fund",
+      "original_label": "Transfers In",
+      "printed_label": "Transfer from General Fund",
       "amount": 100000,
       "budget_final": 0,
-      "source_page": 13
+      "source_page": 13,
+      "review": "transfer from the General Fund with no matching General Fund outflow line; printed inside Total Cash Receipts"
     },
     {
       "schedule": "Budgetary Comparison - Employee Benefit Fund",
@@ -2288,5 +2304,5 @@
       "source_page": 17
     }
   ],
-  "notes": "Cash basis (modified cash), school district, governmental funds only, no business-type funds. Top-level lines from Statement of Cash Receipts, Disbursements and Changes in Fund Balances (p5) Total Governmental Funds column; beginning/ending cash = total governmental fund balances (p5), also equal to the Statement of Net Position cash total (p1). Transfers In (Out) 200,000 is printed net on p5 and on the Statement of Activities p2 (GF -35,000 net, Depreciation +100,000, Employee Benefit +100,000, Activities +35,000; p6, p7). Taxes line split using the General Fund (p8) and Special Building Fund (p17) schedules and the Statement of Activities (p2); a residual 39 stays as taxes (unlabeled) (Bond Fund prints 38 as Taxes on p7 but as interest on p16, plus 1 rounding). State Sources 3,943,186 split using the Statement of Activities p2: Nameplate 96,434, Homestead 63,445, Property Tax Credit 2,023,464, Pro-Rate 10,750, remainder 1,749,093 state aid (attempt 3). Attempt 4: balance sheet now from the governmental funds Balance Sheet (p4, Total Governmental Funds, fund balance by classification; totals 7,535,812 equal the Statement of Net Position p1; its lines add to 7,535,814, report rounding recorded in report_discrepancies); statement line 'Private & Categorical Programs' 10,828 is State Categorical Programs (p10: 3535 4,894 + 3551 4,254 + 3599 1,680; 3400 corporations line is 0); stale 'function guessed as instruction' review notes removed. Attempt 5 (2026-10-28 verifier fixes): 1910 Rentals of School Facilities 5,435 (receipt split line and General Fund detail line) is category Rentals (user rule, out of charges for services); 1955 Postsecondary Receipts detail_category tuition and fees, matching its Tuition Received category. Detail: per-fund budgetary comparison schedules recorded (General p8-10, Depreciation p12, Employee Benefit p13, Activities p14, School Nutrition p15, Bond p16, Special Building p17-18); Cooperative Fund (p19) has no activity. Combining schedules (p6, p7) and County Treasurer schedules (p20-21) duplicate these and were not recorded in detail. General Fund 8000 Transfers 35,000 shown as other financing (negative) and the printed total 6,463,525 includes it; zero lines with zero budget omitted. Rounding differences of 1 exist in the report's own totals (see report_discrepancies). Read pages 1-21 of 21."
+  "notes": "Cash basis (modified cash), school district, governmental funds only, no business-type funds. Top-level lines from Statement of Cash Receipts, Disbursements and Changes in Fund Balances (p5) Total Governmental Funds column; beginning/ending cash = total governmental fund balances (p5), also equal to the Statement of Net Position cash total (p1). Transfers In (Out) 200,000 is printed net on p5 and on the Statement of Activities p2 (GF -35,000 net, Depreciation +100,000, Employee Benefit +100,000, Activities +35,000; p6, p7). Taxes line split using the General Fund (p8) and Special Building Fund (p17) schedules and the Statement of Activities (p2); a residual 39 stays as taxes (unlabeled) (Bond Fund prints 38 as Taxes on p7 but as interest on p16, plus 1 rounding). State Sources 3,943,186 split using the Statement of Activities p2: Nameplate 96,434, Homestead 63,445, Property Tax Credit 2,023,464, Pro-Rate 10,750, remainder 1,749,093 state aid (attempt 3). Attempt 4: balance sheet now from the governmental funds Balance Sheet (p4, Total Governmental Funds, fund balance by classification; totals 7,535,812 equal the Statement of Net Position p1; its lines add to 7,535,814, report rounding recorded in report_discrepancies); statement line 'Private & Categorical Programs' 10,828 is State Categorical Programs (p10: 3535 4,894 + 3551 4,254 + 3599 1,680; 3400 corporations line is 0); stale 'function guessed as instruction' review notes removed. Attempt 5 (2026-10-28 verifier fixes): 1910 Rentals of School Facilities 5,435 (receipt split line and General Fund detail line) is category Rentals (user rule, out of charges for services); 1955 Postsecondary Receipts detail_category tuition and fees, matching its Tuition Received category. Detail: per-fund budgetary comparison schedules recorded (General p8-10, Depreciation p12, Employee Benefit p13, Activities p14, School Nutrition p15, Bond p16, Special Building p17-18); Cooperative Fund (p19) has no activity. Combining schedules (p6, p7) and County Treasurer schedules (p20-21) duplicate these and were not recorded in detail. General Fund 8000 Transfers 35,000 shown as other financing (negative) and the printed total 6,463,525 includes it; zero lines with zero budget omitted. Rounding differences of 1 exist in the report's own totals (see report_discrepancies). Attempt 6 (2026-10-29, same fix as Blue Hill): the Depreciation Fund 'Transfers from General Fund' 100,000 (p12) and Employee Benefit Fund 'Transfer from General Fund' 100,000 (p13) are already printed as Transfers In on the statements (p5 net 200,000, p6), so receipts are unchanged; but the General Fund prints only 35,000 out (8000 Transfers p10, to Activities), so the 200,000 outflow sits inside an unidentified General Fund disbursement line (the General Fund column itself still rolls forward, p6). Transfers are now gross: transfers_in = 100,000 + 100,000 + 35,000 = 235,000; transfers_out = 35,000 + 200,000 = 235,000, with one contra disbursement -200,000 (review); printed totals unchanged (disbursements includes_split 200,000). Detail: Depreciation/Employee Benefit transfers relabelled Transfers In (review); General Fund schedule has a contra expenditure -200,000 and Transfers Out -200,000. The earlier one-sided-transfer report_discrepancy (165,000) is replaced by this treatment; decision_needed asks which General Fund line holds it. Read pages 1-21 of 21."
 }
