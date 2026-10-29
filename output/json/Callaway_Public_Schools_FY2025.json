@@ -3,7 +3,7 @@
   "entity_type": "school district",
   "fiscal_year_end": "2025-08-31",
   "basis": "cash",
-  "extraction_attempt": 2,
+  "extraction_attempt": 3,
   "beginning_cash": {
     "amount": 2293970.77,
     "source_page": 5
@@ -112,10 +112,46 @@
     },
     {
       "fund_type": "governmental",
+      "category": "Homestead Exemption",
+      "original_label": "State sources: Homestead exemption",
+      "amount": 27230.77,
+      "source_page": 2,
+      "split_from": "State sources 356,083.84 (p2)",
+      "computed": "3130 Homestead exemption: General Fund 26,821.26 (p6) + Special Building Fund 409.51 (p12)",
+      "detail_category": "Homestead Exemption",
+      "review": "split of State sources using the fund schedules' 3130 lines"
+    },
+    {
+      "fund_type": "governmental",
+      "category": "Nameplate Capacity Tax",
+      "original_label": "State sources: Nameplate capacity",
+      "amount": 3243.82,
+      "source_page": 2,
+      "split_from": "State sources 356,083.84 (p2)",
+      "computed": "3133 Nameplate capacity: General Fund 3,194.40 (p6) + Special Building Fund 49.42 (p12)",
+      "detail_category": "Nameplate Capacity Tax",
+      "review": "split of State sources using the fund schedules' 3133 lines"
+    },
+    {
+      "fund_type": "governmental",
+      "category": "Motor Vehicle Pro-Rate",
+      "original_label": "State sources: Pro-rate motor vehicle",
+      "amount": 7174.35,
+      "source_page": 2,
+      "split_from": "State sources 356,083.84 (p2)",
+      "computed": "3180 Pro-rate motor vehicle: General Fund 6,994.02 (p6) + Special Building Fund 180.33 (p12)",
+      "detail_category": "Motor Vehicle Pro-Rate",
+      "review": "split of State sources using the fund schedules' 3180 lines"
+    },
+    {
+      "fund_type": "governmental",
       "category": "intergovernmental/state aid",
       "original_label": "State sources",
-      "amount": 356083.84,
-      "source_page": 2
+      "amount": 318434.9,
+      "source_page": 2,
+      "split_from": "State sources 356,083.84 (p2)",
+      "computed": "State sources 356,083.84 - homestead 27,230.77 - nameplate 3,243.82 - pro-rate 7,174.35 (remainder: TEEOSA 256,294, apportionment 53,810.20 and other state receipts)",
+      "review": "remainder of State sources after splitting out homestead, nameplate capacity and pro-rate motor vehicle"
     },
     {
       "fund_type": "governmental",
@@ -217,7 +253,6 @@
       "original_label": "State programs",
       "amount": 26566.1,
       "source_page": 2,
-      "review": "state categorical programs (high ability learners, CTE, school safety); assumed instruction",
       "category_decision": "user 2026-10-23"
     },
     {
@@ -229,13 +264,10 @@
     },
     {
       "fund_type": "governmental",
-      "category": "other",
+      "category": "Categorical Corporation and Private",
       "original_label": "Corporate grants",
       "amount": 2000.0,
-      "source_page": 2,
-      "review": "grants from corporations spent; function not stated",
-      "detail_category": "Grants",
-      "category_decision": "user 2026-10-23"
+      "source_page": 2
     },
     {
       "fund_type": "governmental",
@@ -243,7 +275,6 @@
       "original_label": "Federal programs",
       "amount": 193141.56,
       "source_page": 2,
-      "review": "federal programs mainly instructional salaries/benefits (Title I etc.); assumed instruction",
       "category_decision": "user 2026-10-23"
     },
     {
@@ -270,9 +301,8 @@
     "governmental": {
       "receipts": {
         "amount": 4819432.85,
-        "source_page": 2,
-        "includes": [],
-        "computed": "program receipts: charges 288,915.17 + operating grants 706,405.09; plus total general receipts 3,824,112.59 (p2). The budget-comparison total receipts 4,989,594.64 (p5) also includes 170,161.79 of interfund transfers"
+        "source_page": 4,
+        "includes": []
       },
       "disbursements": {
         "amount": 5276934.63,
@@ -285,22 +315,22 @@
   "business_type": null,
   "proprietary": null,
   "balance_sheet": {
-    "statement": "Statement of Net Position - Modified Cash Basis",
-    "scope": "cash basis",
-    "column": "Governmental Activities",
+    "statement": "Statement of Fund Balances and Changes in Fund Balances - Modified Cash Basis - Governmental Funds",
+    "scope": "governmental funds (cash basis)",
+    "column": "Governmental Funds (total column, p4)",
     "assets": [
       {
         "category": "Cash and Cash Equivalents",
         "original_label": "Cash and cash equivalents",
         "amount": 1403496.67,
-        "source_page": 1,
+        "source_page": 4,
         "fund_type": "governmental"
       },
       {
         "category": "Cash and Cash Equivalents",
-        "original_label": "Cash held with county treasurers",
+        "original_label": "Cash with county treasurer",
         "amount": 432972.32,
-        "source_page": 1,
+        "source_page": 4,
         "fund_type": "governmental"
       }
     ],
@@ -309,58 +339,38 @@
     "deferred_inflows": [],
     "equity": [
       {
-        "original_label": "Restricted: Special building",
+        "original_label": "Restricted fund balance",
         "amount": 245450.06,
-        "source_page": 1,
+        "source_page": 4,
         "category": "Restricted",
+        "fund_type": "governmental",
+        "review": "the p3 row labels show only Assigned and Unassigned; this first row is the Special Building Fund balance, shown as Restricted: Special building on the Statement of Net Position (p1)"
+      },
+      {
+        "original_label": "Assigned fund balance",
+        "amount": 423804.01,
+        "source_page": 4,
+        "category": "Assigned",
         "fund_type": "governmental"
       },
       {
-        "original_label": "Unrestricted, Board designated: Depreciation fund",
-        "amount": 26266.92,
-        "source_page": 1,
-        "category": "Unrestricted",
-        "fund_type": "governmental"
-      },
-      {
-        "original_label": "Unrestricted, Board designated: Employee benefit fund",
-        "amount": 58423.76,
-        "source_page": 1,
-        "category": "Unrestricted",
-        "fund_type": "governmental"
-      },
-      {
-        "original_label": "Unrestricted, Undesignated: General fund",
+        "original_label": "Unassigned fund balance",
         "amount": 1167214.92,
-        "source_page": 1,
-        "category": "Unrestricted",
-        "fund_type": "governmental"
-      },
-      {
-        "original_label": "Unrestricted, Undesignated: School nutrition fund",
-        "amount": 56323.83,
-        "source_page": 1,
-        "category": "Unrestricted",
-        "fund_type": "governmental"
-      },
-      {
-        "original_label": "Unrestricted, Undesignated: Activities fund",
-        "amount": 282789.5,
-        "source_page": 1,
-        "category": "Unrestricted",
+        "source_page": 4,
+        "category": "Unassigned",
         "fund_type": "governmental"
       }
     ],
     "total_assets": {
       "amount": 1836468.99,
-      "source_page": 1
+      "source_page": 4
     },
     "total_deferred_outflows": null,
     "total_liabilities": null,
     "total_deferred_inflows": null,
     "total_equity": {
       "amount": 1836468.99,
-      "source_page": 1
+      "source_page": 4
     }
   },
   "ending_cash": {
@@ -372,9 +382,9 @@
   "report_discrepancies": [
     {
       "check": "detail",
-      "difference": 472271.88,
+      "difference": 472273.88,
       "source_page": 15,
-      "note": "General Fund Schedule of Cash Disbursements of Operational Expenses (pp14-19): printed department totals tie to the General Fund total disbursements of 4,727,463.67, but the printed lines under several departments do not add to their printed totals (printed total minus listed lines): support services - pupils 92,983.82; staff 386.98; board of education 3,392.12; executive administration 4,463.86; office of the principal 26,437.43; central services/business 12,213.08; operation of plant 205,658.57; maintenance of plant 118,416.82; regular pupil transportation 8,319.20; total 472,271.88. Lines are evidently omitted from the printed schedule. Line items are recorded as printed."
+      "note": "General Fund Schedule of Cash Disbursements of Operational Expenses (pp14-19): printed department totals tie to the General Fund total disbursements of 4,727,463.67, but the printed lines under several departments do not add to their printed totals (printed total minus listed lines): support services - pupils 92,983.82; staff 386.98; board of education 3,392.12; executive administration 4,463.86; office of the principal 26,437.43; central services/business 12,213.08; operation of plant 205,658.57; maintenance of plant 118,416.82; regular pupil transportation 8,321.20 (lines 237,086.88 vs printed subtotal 245,408.08); total 472,273.88. Lines are evidently omitted from the printed schedule. The report also has a 2.00 footing error: transportation subtotals 245,408.08 + 40,613.50 = 286,021.58 vs printed pupil transportation total 286,019.58. Line items are recorded as printed."
     }
   ],
   "detail": [
@@ -2630,14 +2640,12 @@
       "fund": "General",
       "department": "3400 Grants from Corporations",
       "section": "expenditure",
-      "category": "other",
-      "detail_category": "Grants",
+      "category": "Categorical Corporation and Private",
+      "detail_category": "not itemized",
       "original_label": "3400 Grants from Corporations",
       "amount": 2000.0,
       "budget_final": 0,
-      "source_page": 17,
-      "review": "function of corporate grant spending not stated",
-      "category_decision": "user 2026-10-23"
+      "source_page": 17
     },
     {
       "schedule": "Schedule of Cash Disbursements of Operational Expenses - General Fund",
@@ -2645,7 +2653,7 @@
       "fund": "General",
       "department": "3535 High Ability Learners",
       "section": "expenditure",
-      "category": "instruction",
+      "category": "State Categorical Programs",
       "detail_category": "salaries and wages",
       "original_label": "110 Salary",
       "amount": 920.4,
@@ -2658,7 +2666,7 @@
       "fund": "General",
       "department": "3535 High Ability Learners",
       "section": "expenditure",
-      "category": "instruction",
+      "category": "State Categorical Programs",
       "detail_category": "employee benefits and payroll taxes",
       "original_label": "210 Health insurance",
       "amount": 290.25,
@@ -2671,7 +2679,7 @@
       "fund": "General",
       "department": "3535 High Ability Learners",
       "section": "expenditure",
-      "category": "instruction",
+      "category": "State Categorical Programs",
       "detail_category": "employee benefits and payroll taxes",
       "original_label": "220 Social security",
       "amount": 69.96,
@@ -2684,7 +2692,7 @@
       "fund": "General",
       "department": "3535 High Ability Learners",
       "section": "expenditure",
-      "category": "instruction",
+      "category": "State Categorical Programs",
       "detail_category": "employee benefits and payroll taxes",
       "original_label": "230 Retirement",
       "amount": 88.2,
@@ -2697,7 +2705,7 @@
       "fund": "General",
       "department": "3535 High Ability Learners",
       "section": "expenditure",
-      "category": "instruction",
+      "category": "State Categorical Programs",
       "detail_category": "supplies and materials",
       "original_label": "610 Supplies",
       "amount": 3174.18,
@@ -2710,7 +2718,7 @@
       "fund": "General",
       "department": "3535 High Ability Learners",
       "section": "expenditure",
-      "category": "instruction",
+      "category": "State Categorical Programs",
       "detail_category": "supplies and materials",
       "original_label": "650 Computer hardware",
       "amount": 658.0,
@@ -2765,7 +2773,7 @@
       "fund": "General",
       "department": "6200 Title I",
       "section": "expenditure",
-      "category": "instruction",
+      "category": "Federal Programs",
       "detail_category": "salaries and wages",
       "original_label": "111 Salary - teachers",
       "amount": 66184.55,
@@ -2778,7 +2786,7 @@
       "fund": "General",
       "department": "6200 Title I",
       "section": "expenditure",
-      "category": "instruction",
+      "category": "Federal Programs",
       "detail_category": "employee benefits and payroll taxes",
       "original_label": "211 Health insurance",
       "amount": 20765.6,
@@ -2791,7 +2799,7 @@
       "fund": "General",
       "department": "6200 Title I",
       "section": "expenditure",
-      "category": "instruction",
+      "category": "Federal Programs",
       "detail_category": "employee benefits and payroll taxes",
       "original_label": "221 Social security",
       "amount": 5032.8,
@@ -2804,7 +2812,7 @@
       "fund": "General",
       "department": "6200 Title I",
       "section": "expenditure",
-      "category": "instruction",
+      "category": "Federal Programs",
       "detail_category": "employee benefits and payroll taxes",
       "original_label": "231 Retirement",
       "amount": 6266.31,
@@ -2817,7 +2825,7 @@
       "fund": "General",
       "department": "6200 Title I",
       "section": "expenditure",
-      "category": "instruction",
+      "category": "Federal Programs",
       "detail_category": "employee benefits and payroll taxes",
       "original_label": "271 Other benefits",
       "amount": 558.51,
@@ -2830,7 +2838,7 @@
       "fund": "General",
       "department": "6200 Title I",
       "section": "expenditure",
-      "category": "instruction",
+      "category": "Federal Programs",
       "detail_category": "professional/contract services",
       "original_label": "350 Title I Technical services",
       "amount": 461.0,
@@ -2843,7 +2851,7 @@
       "fund": "General",
       "department": "6200 Title I",
       "section": "expenditure",
-      "category": "instruction",
+      "category": "Federal Programs",
       "detail_category": "supplies and materials",
       "original_label": "610 Supplies",
       "amount": 427.96,
@@ -2856,7 +2864,7 @@
       "fund": "General",
       "department": "6310 Title II Part A",
       "section": "expenditure",
-      "category": "instruction",
+      "category": "Federal Programs",
       "detail_category": "salaries and wages",
       "original_label": "111 Salary - teachers",
       "amount": 800.0,
@@ -2869,7 +2877,7 @@
       "fund": "General",
       "department": "6310 Title II Part A",
       "section": "expenditure",
-      "category": "instruction",
+      "category": "Federal Programs",
       "detail_category": "employee benefits and payroll taxes",
       "original_label": "211 Health insurance",
       "amount": 248.51,
@@ -2882,7 +2890,7 @@
       "fund": "General",
       "department": "6310 Title II Part A",
       "section": "expenditure",
-      "category": "instruction",
+      "category": "Federal Programs",
       "detail_category": "employee benefits and payroll taxes",
       "original_label": "221 Social security",
       "amount": 60.55,
@@ -2895,7 +2903,7 @@
       "fund": "General",
       "department": "6310 Title II Part A",
       "section": "expenditure",
-      "category": "instruction",
+      "category": "Federal Programs",
       "detail_category": "employee benefits and payroll taxes",
       "original_label": "231 Retirement",
       "amount": 64.64,
@@ -2908,7 +2916,7 @@
       "fund": "General",
       "department": "6406 IDEA preschool",
       "section": "expenditure",
-      "category": "instruction",
+      "category": "Federal Programs",
       "detail_category": "professional/contract services",
       "original_label": "6406 591 IDEA preschool tuition paid",
       "amount": 2044.0,
@@ -2921,7 +2929,7 @@
       "fund": "General",
       "department": "6408 IDEA Base",
       "section": "expenditure",
-      "category": "instruction",
+      "category": "Federal Programs",
       "detail_category": "professional/contract services",
       "original_label": "591 Purchased services",
       "amount": 44594.0,
@@ -2934,7 +2942,7 @@
       "fund": "General",
       "department": "6412 IDEA Part B",
       "section": "expenditure",
-      "category": "instruction",
+      "category": "Federal Programs",
       "detail_category": "salaries and wages",
       "original_label": "111 Salary - teachers",
       "amount": 1988.0,
@@ -2947,7 +2955,7 @@
       "fund": "General",
       "department": "6412 IDEA Part B",
       "section": "expenditure",
-      "category": "instruction",
+      "category": "Federal Programs",
       "detail_category": "employee benefits and payroll taxes",
       "original_label": "211 Insurance",
       "amount": 392.48,
@@ -2960,7 +2968,7 @@
       "fund": "General",
       "department": "6412 IDEA Part B",
       "section": "expenditure",
-      "category": "instruction",
+      "category": "Federal Programs",
       "detail_category": "employee benefits and payroll taxes",
       "original_label": "221 Social security",
       "amount": 70.22,
@@ -2973,7 +2981,7 @@
       "fund": "General",
       "department": "6412 IDEA Part B",
       "section": "expenditure",
-      "category": "instruction",
+      "category": "Federal Programs",
       "detail_category": "employee benefits and payroll taxes",
       "original_label": "231 Retirement",
       "amount": 93.3,
@@ -2986,7 +2994,7 @@
       "fund": "General",
       "department": "6700 Carl Perkins Federal",
       "section": "expenditure",
-      "category": "instruction",
+      "category": "Federal Programs",
       "detail_category": "salaries and wages",
       "original_label": "111 Salary- Teachers",
       "amount": 1800.0,
@@ -2999,7 +3007,7 @@
       "fund": "General",
       "department": "6700 Carl Perkins Federal",
       "section": "expenditure",
-      "category": "instruction",
+      "category": "Federal Programs",
       "detail_category": "employee benefits and payroll taxes",
       "original_label": "211 Insurance-Teachers",
       "amount": 473.13,
@@ -3012,7 +3020,7 @@
       "fund": "General",
       "department": "6700 Carl Perkins Federal",
       "section": "expenditure",
-      "category": "instruction",
+      "category": "Federal Programs",
       "detail_category": "employee benefits and payroll taxes",
       "original_label": "221 Social security- teachers",
       "amount": 133.13,
@@ -3025,7 +3033,7 @@
       "fund": "General",
       "department": "6700 Carl Perkins Federal",
       "section": "expenditure",
-      "category": "instruction",
+      "category": "Federal Programs",
       "detail_category": "employee benefits and payroll taxes",
       "original_label": "231 Retirement- Teachers",
       "amount": 156.22,
@@ -3038,7 +3046,7 @@
       "fund": "General",
       "department": "6969 Title IV Part A",
       "section": "expenditure",
-      "category": "instruction",
+      "category": "Federal Programs",
       "detail_category": "salaries and wages",
       "original_label": "111 Salary - teachers",
       "amount": 950.0,
@@ -3051,7 +3059,7 @@
       "fund": "General",
       "department": "6969 Title IV Part A",
       "section": "expenditure",
-      "category": "instruction",
+      "category": "Federal Programs",
       "detail_category": "employee benefits and payroll taxes",
       "original_label": "211 Health insurance",
       "amount": 264.01,
@@ -3064,7 +3072,7 @@
       "fund": "General",
       "department": "6969 Title IV Part A",
       "section": "expenditure",
-      "category": "instruction",
+      "category": "Federal Programs",
       "detail_category": "employee benefits and payroll taxes",
       "original_label": "221 Social security",
       "amount": 72.3,
@@ -3077,7 +3085,7 @@
       "fund": "General",
       "department": "6969 Title IV Part A",
       "section": "expenditure",
-      "category": "instruction",
+      "category": "Federal Programs",
       "detail_category": "employee benefits and payroll taxes",
       "original_label": "231 Retirement",
       "amount": 93.83,
@@ -3090,7 +3098,7 @@
       "fund": "General",
       "department": "6988 American Rescue Plan",
       "section": "expenditure",
-      "category": "instruction",
+      "category": "Federal Programs",
       "detail_category": "supplies and materials",
       "original_label": "610 Supplies",
       "amount": 3956.08,
@@ -3103,7 +3111,7 @@
       "fund": "General",
       "department": "6992 REAP",
       "section": "expenditure",
-      "category": "instruction",
+      "category": "Federal Programs",
       "detail_category": "equipment purchases",
       "original_label": "6992 650 REAP computer hardware",
       "amount": 35190.43,
@@ -3525,13 +3533,12 @@
       "fund": "Special Building",
       "department": null,
       "section": "revenue",
-      "category": "intergovernmental/state aid",
-      "detail_category": "State Receipts",
+      "category": "Nameplate Capacity Tax",
+      "detail_category": "Nameplate Capacity Tax",
       "original_label": "3133 Name capacity",
       "amount": 49.42,
       "budget_final": 120.0,
-      "source_page": 12,
-      "category_decision": "user 2026-10-23"
+      "source_page": 12
     },
     {
       "schedule": "Budget to Actual - Special Building Fund",
@@ -4844,5 +4851,5 @@
       "source_page": 20
     }
   ],
-  "notes": "Modified cash basis; all funds treated as governmental because the report presents one Governmental Activities column (including School Nutrition and Activities funds; no proprietary statements). Receipts and disbursements are taken from the Statement of Activities (p2), which excludes interfund transfers, so beginning 2,293,970.77 + receipts 4,819,432.85 - disbursements 5,276,934.63 = ending 1,836,468.99 reconciles exactly. The budget-comparison statement (p5) prints total receipts 4,989,594.64 and disbursements 5,447,096.42, each including 170,161.79 of transfers among funds (GF 30,161.79 from QCPU close-out received; GF paid 80,000 to nutrition and 60,000 to activities). Top-level transfers are therefore null; detail lines carry the fund-level transfers as other financing. Re-check of the 472,271.88 gap: confirmed printed-report discrepancy. The General Fund operating-expense schedule (pp14-19) prints department totals that tie to total disbursements 4,727,463.67, but several departments list fewer lines than their totals (pupils 92,983.82; staff 386.98; board 3,392.12; executive administration 4,463.86; principal 26,437.43; central services 12,213.08; operation of plant 205,658.57; maintenance of plant 118,416.82; regular transportation 8,319.20 = 472,271.88). Detail double counting avoided: the General Fund receipts schedule (p6) and the object-level disbursement schedule (pp14-19) were recorded; the program-level General Fund disbursement schedule (p7) and fund summary (p5) were not. Activities fund recorded account by account from p20 (accounts with no 2025 activity omitted; receipts/disbursements/General Fund support columns); the one-line activities budget schedule (p10) not recorded; 2024 comparative schedule (p21) ignored. Zero-activity lines omitted. Mappings of function for federal and state program disbursements are assumptions (instruction). The 0.09 amount in executive administration appears on the 643 row. Balance sheet: Statement of Net Position - Modified Cash Basis (no liabilities printed). v7 re-trim added pp3-4 (Statement of Fund Balances and Changes in Fund Balances - Modified Cash Basis - Governmental Funds, original report pp9-10). It confirms the figures already recorded: Total Governmental Funds receipts 4,819,432.85 and disbursements 5,276,934.63, transfers 170,161.79 eliminated in its Reclassification column (so top-level transfers stay null), beginning 2,293,970.77, ending 1,836,468.99, cash 1,403,496.67 + county treasurer 432,972.32; receipt/disbursement lines kept from the Statement of Activities (p2), which categorizes them more finely; nothing added. Read pages 1-21 of 21."
+  "notes": "Modified cash basis; all funds treated as governmental because the report presents one Governmental Activities column (including School Nutrition and Activities funds; no proprietary statements). Receipts and disbursements are taken from the Statement of Activities (p2), which excludes interfund transfers, so beginning 2,293,970.77 + receipts 4,819,432.85 - disbursements 5,276,934.63 = ending 1,836,468.99 reconciles exactly. Total receipts 4,819,432.85 is printed as-is in the governmental funds statement's total column (p4). The budget-comparison statement (p5) prints total receipts 4,989,594.64 and disbursements 5,447,096.42, each including 170,161.79 of transfers among funds (GF 30,161.79 from QCPU close-out received; GF paid 80,000 to nutrition and 60,000 to activities). Top-level transfers are therefore null; detail lines carry the fund-level transfers as other financing. Re-check (attempt 3, targeted rules): (1) State sources 356,083.84 (p2) split with split_from: homestead exemption 27,230.77, nameplate capacity 3,243.82 and pro-rate motor vehicle 7,174.35 (sums of the 3130/3133/3180 lines in the General Fund p6 and Special Building Fund p12 schedules), remainder 318,434.90 state aid; property tax credit is already its own statement line (1,288,954.42 = 1,269,319.41 + 19,635.01). (2) Statement 'Corporate grants' 2,000 and detail '3400 Grants from Corporations' -> Categorical Corporation and Private. (3) Program lines follow the report's grouping: the statement's 'State programs' 26,566.10 = 3535 High Ability Learners 5,200.99 + 3551 CTE 7,861.11 + 3552 School Safety 13,504.00, so the 3535 lines are State Categorical Programs; its 'Federal programs' 193,141.56 = the Title I, Title II, IDEA, Perkins, Title IV, ARP and REAP lines (pp18-19), so those are Federal Programs. (4) Special Building '3133 Name capacity' 49.42 -> Nameplate Capacity Tax. (5) Balance sheet: the governmental funds statement (pp3-4) totals 1,836,468.99, equal to the Statement of Net Position (p1), so its total column (p4) is used: cash 1,403,496.67, county treasurer 432,972.32; fund balances 245,450.06 (Special Building, restricted), assigned 423,804.01 (General 84,690.68 + Activity 282,789.50 + School Nutrition 56,323.83) and unassigned 1,167,214.92; the p3 labels print only Assigned and Unassigned, so the first row's label is inferred (review). Report discrepancy: the General Fund operating-expense schedule (pp14-19) prints department totals that tie to total disbursements 4,727,463.67, but several departments list fewer lines than their totals (total gap 472,273.88; regular transportation 8,321.20 against its own subtotal; also a 2.00 footing error between the transportation subtotals and the printed transportation total). Detail double counting avoided: the General Fund receipts schedule (p6) and the object-level disbursement schedule (pp14-19) were recorded; the program-level General Fund disbursement schedule (p7) and fund summary (p5) were not. Activities fund recorded account by account from p20 (accounts with no 2025 activity omitted; receipts/disbursements/General Fund support columns); the one-line activities budget schedule (p10) not recorded; 2024 comparative schedule (p21) ignored. Zero-activity lines omitted. The 0.09 amount in executive administration is on the 733 Furniture and equipment row. Read pages 1-21 of 21."
 }

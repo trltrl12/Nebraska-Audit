@@ -3,7 +3,7 @@
   "entity_type": "village",
   "fiscal_year_end": "2025-09-30",
   "basis": "cash",
-  "extraction_attempt": 1,
+  "extraction_attempt": 2,
   "beginning_cash": {
     "amount": 294471.33,
     "source_page": 1,
@@ -159,14 +159,12 @@
     },
     {
       "fund_type": "governmental",
-      "category": "Debt Service",
+      "category": "debt service (principal and interest combined)",
       "original_label": "Debt Service",
       "amount": 2591.79,
       "source_page": 3,
       "split_from": "Debt Service 30,900.79 total column (p3)",
-      "computed": "total 30,900.79 less Water Reserve USDA Fund 28,309.00 (business-type column)",
-      "review": "debt service not split between principal and interest",
-      "debt_service_part": "principal"
+      "computed": "General Fund column 2,591.79 (total 30,900.79 less Water Reserve USDA Fund 28,309.00, business-type column)"
     },
     {
       "fund_type": "governmental",
@@ -194,13 +192,12 @@
     },
     {
       "fund_type": "business-type",
-      "category": "Debt Service",
+      "category": "debt service (principal and interest combined)",
       "original_label": "Debt Service",
       "amount": 28309.0,
       "source_page": 3,
       "split_from": "Debt Service 30,900.79 total column (p3)",
-      "review": "Water Reserve USDA Fund column; principal vs interest not split",
-      "debt_service_part": "principal"
+      "computed": "Water Reserve USDA Fund column 28,309.00 (p3)"
     }
   ],
   "transfers_in": {
@@ -310,14 +307,14 @@
     "equity": [
       {
         "fund_type": "governmental",
-        "original_label": "Subtotal of Ending Balances (all funds)",
+        "original_label": "Subtotal of Ending Balances (Line 26 + 27)",
         "source_page": 1,
         "amount": 307952.0,
         "computed": "line 28 subtotal of ending balances, governmental funds (General 88,560.47, Street 115,919.68, Lottery 10,439.04, Sales Tax 28,761.22, Siren Grant 33,635.41, Search Grant 30,636.18)"
       },
       {
         "fund_type": "business-type",
-        "original_label": "Subtotal of Ending Balances (all funds)",
+        "original_label": "Subtotal of Ending Balances (Line 26 + 27)",
         "source_page": 1,
         "amount": 112175.58,
         "computed": "line 28 subtotal of ending balances, business-type funds (Water Reserve 76,410.58, Water Reserve USDA 29,844.59, Recycling 5,920.41)"
@@ -344,5 +341,13 @@
   "ending_fund_balance": null,
   "detail": [],
   "detail_totals": [],
-  "notes": "Waiver filing, cash basis, Exhibit A all-funds statement (p1 page 1, p2 page 1a, p3 page 2, p4 page 2a, p5 schedules of investments, debt, interfund transfers). Columns: governmental = General, Street, Lottery, Sales Tax, Siren Grant, Search Grant; business-type = Water Reserve, Water Reserve USDA, Recycling. Recycling treated as business-type (solid waste/utility) with some uncertainty. Beginning/ending cash are subtotals of net cash plus investments (lines 3/24); investments left null because they are already inside; informational: total investments beginning 77,243.00 and ending 111,402.90 (all funds). The 'Business-Type Activities' disbursement rows 45-48 (Solid Waste 18,198.63, Wastewater 31,991.77, Water 7,383.82) are all in the General Fund column, so kept governmental by column. Disbursements by function are printed in total column only for functions; business-type column share only Debt Service 28,309.00 (USDA fund). Interfund transfers tie to schedule on p5 (145,867.37); the 0.08 difference between transfer in to USDA fund 28,309.08 and its debt payment 28,309.00 is as printed. Outstanding debt 536,347 (Rev Water 201,514.70, GO Water 334,832.30, p5) not on a balance statement; balance_sheet liabilities empty. No detail schedules. Governmental roll: 294,471.33 + 391,270.44 receipts - 327,596.69 disbursements + 95,674.29 - 145,867.37 = 307,952.00. Read pages 1-5 of 5"
+  "decision_needed": [
+    {
+      "question": "The General Fund 'Local Receipts: Other' of 233,974.86 is about 60% of the year's governmental receipts and is not explained anywhere in the filing; could it be loan or grant proceeds (Capital Improvements of 131,245.00 were spent the same year)?",
+      "amount": 238302.43,
+      "recorded_as": "governmental receipt, category other (with review)",
+      "source_page": 1
+    }
+  ],
+  "notes": "Waiver filing, cash basis, Exhibit A all-funds statement (p1 page 1, p2 page 1a, p3 page 2, p4 page 2a, p5 schedules of investments, debt, interfund transfers). Columns: governmental = General, Street, Lottery, Sales Tax, Siren Grant, Search Grant; business-type = Water Reserve, Water Reserve USDA, Recycling. Recycling treated as business-type (solid waste/utility) with some uncertainty. Beginning/ending cash are subtotals of net cash plus investments (lines 3/24); investments left null because they are already inside; informational: total investments beginning 77,243.00 and ending 111,402.90 (all funds). County treasurer balances printed below the statement (1,263.64 at 10/1/24, 2,857.44 at 9/30/25) are outside the line 3/24 balances and not included in cash. The 'Business-Type Activities' disbursement rows 45-48 (Solid Waste 18,198.63, Wastewater 31,991.77, Water 7,383.82) are all in the General Fund column, so kept governmental by column. Disbursements by function are printed in total column only for functions; business-type column share only Debt Service 28,309.00 (USDA fund). Debt Service is never split into principal and interest, so both parts are debt service (principal and interest combined) (attempt 2). Interfund transfers tie to schedule on p5 (145,867.37); the 0.08 difference between transfer in to USDA fund 28,309.08 and its debt payment 28,309.00 is as printed. Outstanding debt 536,347 (Rev Water 201,514.70, GO Water 334,832.30, p5) not on a balance statement; balance_sheet liabilities empty. No detail schedules. Governmental roll: 294,471.33 + 391,270.44 receipts - 327,596.69 disbursements + 95,674.29 - 145,867.37 = 307,952.00. Read pages 1-5 of 5"
 }
