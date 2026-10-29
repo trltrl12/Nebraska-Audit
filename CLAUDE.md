@@ -128,7 +128,7 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
   relabelled "Capital Outlay: <function>" too. New receipt categories out of charges for services: School Lunch Sales,
   Rentals, Utility Charges (incl. garbage/refuse), Drivers Education Fees, Recreation Fees, Cemetery Fees, Ambulance Fees,
   Fees of Office, Program Revenue (program income/revenue/fees, user 2026-10-29); postsecondary/tuition -> Tuition Received; reimbursements and licenses/permits to their categories; student fees/admissions/concessions -> Extracurricular Receipts;
-  Drivers Education spending is its own category (not Instruction). Food service lines stay food service. Community Betterment spending is its own category (not keno/lottery, not economic development; user 2026-10-29); keno/lottery receipts stay keno/lottery.
+  Drivers Education spending is its own category (not Instruction). Food service lines stay food service. Community Betterment spending is its own category (not keno/lottery, not economic development; user 2026-10-29); keno/lottery receipts stay keno/lottery. Spending lines labelled "Operating" that would be other are category Operating (user 2026-10-29).
   Fund names end in "Fund" (e.g. "Water" -> "Water Fund") unless the name already contains "Fund" (user 2026-10-27).
 - **Workbook capitalization (user, 2026-10-26):** build_xlsx.py shows every category, detail_category and original_label
   capitalized (cap(): words already containing a capital kept, small words lowercase), and the first letter of every

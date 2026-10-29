@@ -62,6 +62,7 @@ CHARGE_CATS = [
 UTILITY_FUND = re.compile(r"water|sewer|electric|light|gas|utilit|refuse|sanitation|garbage|trash|solid waste", re.I)
 DRIVERS_ED = re.compile(r"driver'?s'? ?ed", re.I)
 COMMUNITY_BETTERMENT = re.compile(r"community better", re.I)
+OPERATING_LABEL = re.compile(r"^operating( expenses?| costs?)?$", re.I)
 NOT_EXTRACURRICULAR = re.compile(r"interest|tuition|lunch|meal|fine|donat|contribut|grant|reimburs|transfer", re.I)
 # county treasurer / bank cash -> Cash and Cash Equivalents (never "cash and investments")
 CASH_ONLY = re.compile(r"county treasurer|cash (in|at) bank|^cash$|^cash and cash equivalents", re.I)
@@ -292,6 +293,15 @@ def community_betterment_rule(x, log):
         setcat(x, "category", "Community Betterment", "category: Community Betterment", log)
 
 
+def operating_rule(x, log):
+    """Spending lines labelled "Operating" that sit in other are category Operating (user 2026-10-29); Operating lines
+    under a function heading keep that function."""
+    if x.get("category") == "other" and OPERATING_LABEL.match(label_of(x).strip()):
+        setcat(x, "category", "Operating", "category: Operating", log)
+        if str(x.get("review", "")).startswith("printed cost type 'Operating'"):
+            x.pop("review")
+
+
 def department_capital_outlay_rule(detail, log):
     """Bare "Capital outlay" lines inside a department -> "Capital Outlay: <function>", the function being the one the
     department's other spending lines carry."""
@@ -456,6 +466,7 @@ def apply(d, stem=""):
         spending_rules(x, log)
         drivers_ed_spending_rule(x, log)
         community_betterment_rule(x, log)
+        operating_rule(x, log)
         if school and not lps:
             staff_label_rule(x, log)
     for x in d.get("detail") or []:
@@ -471,6 +482,7 @@ def apply(d, stem=""):
             spending_rules(x, log)
             drivers_ed_spending_rule(x, log)
             community_betterment_rule(x, log)
+            operating_rule(x, log)
             if school and not lps:
                 staff_label_rule(x, log)
         elif sec == "other financing":
