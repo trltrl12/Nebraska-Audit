@@ -367,7 +367,10 @@ def build(xlsx):
     for s, d in reports:
         b0 = base(s, d)
         for it in d.get("detail") or []:
-            det.append(b0 + [it.get("schedule"), fund_type(it), it.get("fund"), it.get("department"),
+            # lines for an entity outside the basic statements (e.g. Coleridge's nursing home) stay visible but
+            # out of the governmental / business-type totals
+            ft = "outside statements" if it.get("outside_statement") else fund_type(it)
+            det.append(b0 + [it.get("schedule"), ft, it.get("fund"), it.get("department"),
                                it.get("section"), it.get("category"), it.get("detail_category"),
                                it.get("original_label"), it.get("amount"), it.get("budget_final")] + ref(s, it))
     add_sheet(wb, "Detail Lines", ident + ["schedule", "fund_type", "fund", "department", "section", "category",
