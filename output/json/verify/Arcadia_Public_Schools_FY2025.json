@@ -5,12 +5,12 @@
     {"severity": "error", "path": "missing", "page": 20,
      "extracted": "Activities Fund detail taken from the one-line budget schedule (p18: 1510 Interest 649, 1700 Activities Receipts 228,514, 5200 Transfer 18,293, 2900 Other Support Services 251,501); the per-account schedule was deliberately skipped",
      "on_page": "Schedule of Receipts, Disbursements, Transfers and Fund Balance - Activities Fund (pp20-21): 38 accounts (Annual, Athletics 16,257/32,236, Band Trip, Concessions 14,226/6,724, FFA 24,063/22,809, Teachers' Assoc. 132,789/138,149, ...) totalling receipts 229,163, disbursements 251,501, transfers in (out) 18,293",
-     "issue": "extractor rule: when a per-account activities schedule is printed, record it account by account and leave out the one-line activities budget schedule. The account lines (receipts, disbursements, transfers per account) are missing and the p18 lines should be replaced"},
+     "issue": "[fixed 2026-10-28: p18 Activities lines replaced by the pp20-21 per-account schedule (27 receipt lines = 229,163, 28 disbursement lines = 251,501, 17 signed transfer lines = 18,293), with detail_totals] extractor rule: when a per-account activities schedule is printed, record it account by account and leave out the one-line activities budget schedule. The account lines (receipts, disbursements, transfers per account) are missing and the p18 lines should be replaced"},
     {"severity": "warning", "path": "receipts[16].category", "page": 11,
      "extracted": "charges for services/fees", "on_page": "Daily Sales 36,222 (School Nutrition Fund)",
-     "issue": "school lunch sales; user rule 2026-10-28 category School Lunch Sales (detail_category already school lunch sales; same for the detail '1600 Daily Sales' line). user_rules.py regex won't match 'Daily Sales'"},
+     "issue": "[fixed 2026-10-28: receipt and detail '1600 Daily Sales' set to School Lunch Sales] school lunch sales; user rule 2026-10-28 category School Lunch Sales (detail_category already school lunch sales; same for the detail '1600 Daily Sales' line). user_rules.py regex won't match 'Daily Sales'"},
     {"severity": "warning", "path": "notes", "page": 21,
      "extracted": "'Read pages 1-21 of 21.' followed by re-check text", "on_page": "PDF has 21 pages",
-     "issue": "notes don't end with 'Read pages 1-N of N' (page count right and every page covered)"}
+     "issue": "[fixed 2026-10-28: notes now end with 'Read pages 1-21 of 21'] notes don't end with 'Read pages 1-N of N' (page count right and every page covered)"}
   ]
 }

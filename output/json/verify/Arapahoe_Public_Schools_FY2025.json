@@ -4,15 +4,15 @@
   "issues": [
     {"severity": "error", "path": "receipts[16].category", "page": 4,
      "extracted": "charges for services/fees", "on_page": "Other local receipts 258,564 (Activities Fund 243,890 + School Nutrition other receipts 14,674, p9)",
-     "issue": "94% is activities fund receipts; the rules say a broad local-receipts line takes the category that is more than half of it (school activity fund receipts -> Extracurricular Receipts). user_rules.py won't fix it because the label has no 'activit'"},
+     "issue": "[fixed 2026-10-28: category and detail_category set to Extracurricular Receipts (Activities Fund 243,890 is 94%), review notes the mix] 94% is activities fund receipts; the rules say a broad local-receipts line takes the category that is more than half of it (school activity fund receipts -> Extracurricular Receipts). user_rules.py won't fix it because the label has no 'activit'"},
     {"severity": "warning", "path": "detail[57].category", "page": 15,
      "extracted": "support services", "on_page": "Employee Benefit Fund: Benefits paid 2,913",
-     "issue": "the governmental funds statement and GF combining schedule (p8) count this 2,913 inside Central services (category Business); function marked as a guess"},
+     "issue": "[fixed 2026-10-28: category set to Business per p8 Central services column, review removed] the governmental funds statement and GF combining schedule (p8) count this 2,913 inside Central services (category Business); function marked as a guess"},
     {"severity": "warning", "path": "disbursements[18]", "page": 5,
      "extracted": "Debt Service, detail_category Principal, no debt_service_part", "on_page": "Principal 745,000 / Interest 120,125 / Wire fees 800",
-     "issue": "disbursements[18]-[20] are category Debt Service but lack debt_service_part (principal/interest), unlike disbursements[17]"},
+     "issue": "[fixed 2026-10-28: debt_service_part principal/interest/interest added to disbursements[18]-[20] and the Bond Fund schedule lines] disbursements[18]-[20] are category Debt Service but lack debt_service_part (principal/interest), unlike disbursements[17]"},
     {"severity": "warning", "path": "notes", "page": 23,
      "extracted": "'Read pages 1-23 of 23' appears mid-notes, followed by re-check text", "on_page": "PDF has 23 pages",
-     "issue": "notes don't end with 'Read pages 1-N of N' (page count right and every page covered; no lines missing)"}
+     "issue": "[fixed 2026-10-28: notes now end with 'Read pages 1-23 of 23'] notes don't end with 'Read pages 1-N of N' (page count right and every page covered; no lines missing)"}
   ]
 }

@@ -4,13 +4,13 @@
   "issues": [
     {"severity": "error", "path": "receipts[12].category", "page": 7,
      "extracted": "charges for services/fees", "on_page": "Other 253,009 (Activities Fund column; p18 schedule: 1790 Other Activity Income 253,009)",
-     "issue": "This line is entirely Activities Fund 'Other Activity Income' (school activity receipts). User rule: school activity fund receipts -> Extracurricular Receipts unless the report says otherwise. The detail lines for the same money are already Extracurricular Receipts."},
+     "issue": "[fixed 2026-10-28: category -> Extracurricular Receipts, detail_category student activity receipts] This line is entirely Activities Fund 'Other Activity Income' (school activity receipts). User rule: school activity fund receipts -> Extracurricular Receipts unless the report says otherwise. The detail lines for the same money are already Extracurricular Receipts."},
     {"severity": "warning", "path": "receipts[13].category", "page": 11,
      "extracted": "charges for services/fees", "on_page": "Daily Sales 12,229 (School Nutrition Fund, code 1600)",
-     "issue": "School nutrition daily sales are meal sales. User rule (2026-10-28) moves lunch/meal sales out of charges for services into 'School Lunch Sales'. detail[...School Nutrition Daily Sales] already has detail_category 'school lunch sales' but category 'charges for services/fees'."},
+     "issue": "[fixed 2026-10-28: Daily Sales category -> School Lunch Sales in receipts and detail] School nutrition daily sales are meal sales. User rule (2026-10-28) moves lunch/meal sales out of charges for services into 'School Lunch Sales'. detail[...School Nutrition Daily Sales] already has detail_category 'school lunch sales' but category 'charges for services/fees'."},
     {"severity": "warning", "path": "detail[Activities - Wellness Grant revenue].category", "page": 21,
      "extracted": "charges for services/fees", "on_page": "Wellness Grant receipts 5,174",
-     "issue": "The category conflicts with its detail_category (student activity receipts) and with every other Activities Fund receipt (Extracurricular Receipts). A grant account is not a charge for services; it should be Extracurricular Receipts or donations/contributions."},
+     "issue": "[fixed 2026-10-28: category -> Extracurricular Receipts] The category conflicts with its detail_category (student activity receipts) and with every other Activities Fund receipt (Extracurricular Receipts). A grant account is not a charge for services; it should be Extracurricular Receipts or donations/contributions."},
     {"severity": "warning", "path": "detail[Special Building - Building Improvements].category", "page": 16,
      "extracted": "Building and Grounds", "on_page": "4700 Building Improvements 59,249",
      "issue": "Function code 4700 is facilities acquisition/construction, i.e. capital outlay. The statement folds it into Operation and Maintenance, so this is a judgment call (already marked review)."}

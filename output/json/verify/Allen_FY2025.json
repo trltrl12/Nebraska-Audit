@@ -4,15 +4,15 @@
   "issues": [
     {"severity": "error", "path": "receipts[7].category", "page": 7,
      "extracted": "charges for services/fees", "on_page": "Sales 212,793 (Water/Sewer/Trash enterprise funds)",
-     "issue": "Utility fund sales (water, sewer, trash) fall under the user's Utility Charges receipt category (2026-10-28), not charges for services/fees. user_rules.py won't catch this because receipts carry no fund field."},
+     "issue": "[fixed 2026-10-28: category set to Utility Charges, detail_category other utility charges] Utility fund sales (water, sewer, trash) fall under the user's Utility Charges receipt category (2026-10-28), not charges for services/fees. user_rules.py won't catch this because receipts carry no fund field."},
     {"severity": "warning", "path": "receipts[3].category", "page": 11,
      "extracted": "charges for services/fees", "on_page": "Charges for services 625 (p5) = Licenses and permits 625 in the p11 General Fund schedule",
-     "issue": "The fund schedule shows this line is licenses and permits, and detail[3] uses licenses and permits. The same money is in two categories."},
+     "issue": "[fixed 2026-10-28: category set to licenses and permits per p11] The fund schedule shows this line is licenses and permits, and detail[3] uses licenses and permits. The same money is in two categories."},
     {"severity": "warning", "path": "detail[2].category", "page": 11,
      "extracted": "intergovernmental/state aid", "on_page": "Rural fire 13,890 (under Intergovernmental revenue)",
      "issue": "The extractor rules list rural fire contracts under charges for services/fees. The page prints it under intergovernmental, so this is a judgment call. The same money is inside receipts[2] Intergovernmental 107,623."},
     {"severity": "warning", "path": "disbursements[9].function", "page": 7,
      "extracted": null, "on_page": "Utilities 11,350 (proprietary operating expenses)",
-     "issue": "This is a business-type cost-type line kept in category utilities, but it has no function: \"utilities\" field, unlike the other cost-type lines."}
+     "issue": "[fixed 2026-10-28: function utilities added] This is a business-type cost-type line kept in category utilities, but it has no function: \"utilities\" field, unlike the other cost-type lines."}
   ]
 }

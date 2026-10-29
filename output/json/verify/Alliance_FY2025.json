@@ -4,15 +4,15 @@
   "issues": [
     {"severity": "error", "path": "receipts[15].category", "page": 11,
      "extracted": "charges for services/fees", "on_page": "User charges 17,721,402 (Electric/Water/Sewer/Refuse enterprise funds, Total column)",
-     "issue": "Utility fund user charges fall under the user's Utility Charges receipt category (2026-10-28), not charges for services/fees. Rent income was already moved to Rentals, but this line was not. user_rules.py won't catch it because receipts carry no fund field."},
+     "issue": "[fixed 2026-10-28: category set to Utility Charges, detail_category other utility charges] Utility fund user charges fall under the user's Utility Charges receipt category (2026-10-28), not charges for services/fees. Rent income was already moved to Rentals, but this line was not. user_rules.py won't catch it because receipts carry no fund field."},
     {"severity": "warning", "path": "balance_sheet.liabilities[13].category", "page": 1,
      "extracted": "Accrued Liabilities", "on_page": "Compensated absences - noncurrent 388,125 (governmental); also liabilities[14] 181,684 (business-type)",
      "issue": "These are noncurrent compensated absences. The rules use accrued liabilities only for amounts due soon, so debt - due in more than one year or the Compensated Absences category would fit better."},
     {"severity": "warning", "path": "receipts[13].category", "page": 7,
      "extracted": "Sale of Property", "on_page": "Sale of property/insurance proceeds 2,125",
-     "issue": "The line mixes sale of property with insurance proceeds (reimbursements). The rules ask for a review note naming the mix, and none is present (same for detail[8])."},
+     "issue": "[fixed 2026-10-28: review note naming the mix added to receipts[13] and detail[8]] The line mixes sale of property with insurance proceeds (reimbursements). The rules ask for a review note naming the mix, and none is present (same for detail[8])."},
     {"severity": "warning", "path": "notes", "page": 1,
      "extracted": "interfund due to/from lines net to zero in Total column and are omitted", "on_page": "Due (to) from other funds (3,859,970) / 3,859,970",
-     "issue": "The notes say the interfund lines are omitted, but balance_sheet.assets[12] and [13] record them (they net to zero, so the totals are unaffected). The notes are inaccurate."}
+     "issue": "[fixed 2026-10-28: notes corrected to say the lines are recorded as Internal Balances] The notes say the interfund lines are omitted, but balance_sheet.assets[12] and [13] record them (they net to zero, so the totals are unaffected). The notes are inaccurate."}
   ]
 }
