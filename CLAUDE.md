@@ -242,6 +242,8 @@ holds just those reports and sheets. Prioritise fixes and re-checks for these ty
   (approved waiver for FY ending 2025) attaches the 10/1/23-9/30/24 statement; no other filing exists. Leave as is.
 - config/extra_pages.csv (stem,pages): source pages the finder must keep. Used for Ruskin_FY2025 (re-trimmed and
   re-extracted 2026-10-26, verified 0 errors).
+- Re-trim queued 2026-10-30: Sutton_FY2025 + source pp25, 27 (right halves of the proprietary statements: Sewer, Trash,
+  Total columns). After the fetch: remap pages, re-extract business-type lines and by-fund detail (Sewer/Trash), verify.
 - Fort_Calhoun_Community_School_FY2025: re-trimmed 2026-10-29 with source p13 (Total column page) and re-extracted from the
   Total Governmental Funds column (no reclass lines).
 - Taylor_FY2025: trimmed pp2-8 are rotated, so the page-text check can't confirm the governmental amounts (checked visually).
