@@ -226,9 +226,15 @@ def one_tab(collected):
             gnp = json.loads((JSON_DIR / f"{r.get('filename')}.json").read_text()).get("governmental_net_position") or {}
         except (OSError, ValueError):
             gnp = {}
-        for n, (k, label) in enumerate([("beginning", "beginning net position"), ("restatement", "restatement"),
-                                        ("change", "change in net position"), ("ending", "ending net position")], 1):
-            v = num_(page_amount(gnp.get(k)))
+        # with a printed restatement, "beginning net position" is the restated figure (user 2026-10-30); the
+        # previously reported figure and the restatement are shown above it
+        beg, rst = num_(page_amount(gnp.get("beginning"))), num_(page_amount(gnp.get("restatement")))
+        np_rows = ([("beginning net position, as previously reported", beg), ("restatement", rst),
+                    ("beginning net position", round(beg + rst, 2) if beg is not None else None)] if rst else
+                   [("beginning net position", beg)])
+        np_rows += [("change in net position", num_(page_amount(gnp.get("change")))),
+                    ("ending net position", num_(page_amount(gnp.get("ending"))))]
+        for n, (label, v) in enumerate(np_rows, 1):
             if v is not None:
                 out.append({**ident_, "level": "cash flow", "fund_type": "governmental",
                             "section": "net position (statement of activities)", "source": "statement", "line": n,
