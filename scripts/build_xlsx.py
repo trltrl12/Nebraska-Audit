@@ -223,9 +223,10 @@ def one_tab(collected):
         # governmental activities net position from the Statement of Activities (user 2026-10-29); not part of the
         # fund-balance roll-forward above
         try:
-            gnp = json.loads((JSON_DIR / f"{r.get('filename')}.json").read_text()).get("governmental_net_position") or {}
+            dj_gnp = json.loads((JSON_DIR / f"{r.get('filename')}.json").read_text())
         except (OSError, ValueError):
-            gnp = {}
+            dj_gnp = {}
+        gnp = dj_gnp.get("governmental_net_position") or {}
         # with a printed restatement, "beginning net position" is the restated figure (user 2026-10-30); the
         # previously reported figure and the restatement are shown above it
         beg, rst = num_(page_amount(gnp.get("beginning"))), num_(page_amount(gnp.get("restatement")))
@@ -241,6 +242,15 @@ def one_tab(collected):
                             "original_label": label, "amount": v})
         b, rc, ds, e = (num_(r.get(k)) for k in ("bt_beginning", "bt_receipts", "bt_disbursements", "bt_ending"))
         m = r.get("bt_measure") or "balance"
+        # printed business-type restatement (user 2026-10-30): previously reported, restatement, then the restated
+        # beginning the roll-forward starts from
+        btj = dj_gnp.get("business_type") or {}
+        b_prev, b_rst = num_(page_amount(btj.get("beginning_as_previously_reported"))), \
+            num_(page_amount(btj.get("restatement")))
+        if b_rst and b_prev is not None:
+            for n0, label, v in ((0, f"beginning {m}, as previously reported", b_prev), (0, "restatement", b_rst)):
+                out.append({**ident_, "level": "cash flow", "fund_type": "business-type", "section": "roll-forward",
+                            "source": "statement", "line": n0, "original_label": label, "amount": v})
         lines = [(1, f"beginning {m}", b, "statement"), (2, "receipts", rc, "statement"),
                  (3, "disbursements", -ds if ds is not None else None, "statement")]
         if None not in (b, e):
