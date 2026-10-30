@@ -1,21 +1,18 @@
 {
   "stem": "Sutton_FY2025",
-  "values_checked": 230,
+  "values_checked": 273,
   "issues": [
-    {"severity": "warning", "path": "missing", "page": 8,
-     "extracted": null, "on_page": "Report p21 (and pp22-23) right half: Sewer Fund, Trash Fund and Total columns of the proprietary revenues/expenses and cash flow statements are not in the trimmed PDF (trimmed p7 holds only the right half of the report p20 net position statement)",
-     "issue": "this is a trim gap, not an extraction error. Sewer and Trash revenue and expenses are function totals taken from the Statement of Activities (p2), and their cost-type lines and interest split can't be checked. They tie to the printed totals of 2,518,157 and 2,404,160. Re-trim to add the right-hand pages"},
+    {"severity": "warning", "path": "receipts[8].category", "page": 5,
+     "extracted": "federal grants", "on_page": "Grants and contributions 149,308",
+     "issue": "Mixed line: CDBG grant income 148,728 (p17) plus General Fund contributions 580. Federal is a fair call because CDBG is HUD money passed through the state, but the report never says federal. The extractor already flagged it for review."},
+    {"severity": "warning", "path": "disbursements[12].category", "page": 9,
+     "extracted": "Professional/Contract Services", "on_page": "Consumer accounting and collection 23,066",
+     "issue": "This is a billing/collection function line, not clearly a contract-services cost type. It could equally be utilities (function). The same applies to the by-fund detail lines for Light, Water and Sewer (pp8-9), whose detail_category is 'not itemized'. The category and the detail_category disagree."},
     {"severity": "warning", "path": "transfers_in", "page": 5,
-     "extracted": 277724, "on_page": "Transfers in (out) 277,724 net; fund columns General 5,000, Street (63,395), Debt Service 186,024, CDBG 150,095",
-     "issue": "the net figure is recorded as transfers_in and transfers_out is null. The gross amounts (in 341,119, out 63,395) are printed by fund. Already raised in decision_needed"},
-    {"severity": "warning", "path": "receipts[9].category", "page": 5,
-     "extracted": "charges for services/fees", "on_page": "Charges for services 334,121 = General 188,523 + Sales Tax 38,157 + Other governmental 107,441 (Nolde Trust Fund 'Rent', p17)",
-     "issue": "the line holds 107,441 of rent (category Rentals in detail). Charges stay dominant, but the line has no review note naming the mix"},
-    {"severity": "warning", "path": "receipts[22].original_label", "page": 2,
-     "extracted": "Sewer charges for services / Trash charges for services / Sewer expenses / Trash expenses", "on_page": "Sewer / Trash (rows under the Charges for Services and Expenses columns)",
-     "issue": "labels were built by the extractor from row and column headings, not printed as is (they are also in receipts[23] and disbursements[25-26])"},
-    {"severity": "warning", "path": "decision_needed[1].source_page", "page": 5,
-     "extracted": null, "on_page": "Nolde Trust support 141,400 (p5, General Fund)",
-     "issue": "the decision entry has no source page; the line is printed on p5"}
+     "extracted": 277724, "on_page": "Transfers in (out) 277,724 (net); fund columns: General +5,000, Debt Service +186,024, CDBG +150,095, Street (63,395)",
+     "issue": "Recorded as the printed net with transfers_out null. The page also prints the gross amounts by fund (in 341,119, out 63,395). As printed, this is defensible. The decision_needed entry covers only the 10,000 component-unit difference, not net vs gross."},
+    {"severity": "warning", "path": "ending_cash", "page": 5,
+     "extracted": 3309399, "on_page": "Fund balances - September 30, 2025 3,309,399; total assets (cash 3,258,122 + county treasurer cash 53,013) 3,311,135 on p4",
+     "issue": "ending_cash (and beginning_cash 3,613,206) hold total fund balances, not cash. They differ from cash by payroll withholdings payable of 1,736. The roll-forward is internally consistent and the note explains it."}
   ]
 }
