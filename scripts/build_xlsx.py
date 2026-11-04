@@ -27,6 +27,7 @@ Run after validate.py and build_csv.py (it reads their outputs).
 import json
 import re
 import sys
+from collections import Counter
 from pathlib import Path
 
 from openpyxl import Workbook
@@ -40,6 +41,7 @@ from common import (BS_SECTIONS, DETAIL_EXPENSE_CATEGORIES, DETAIL_REVENUE_CATEG
                     JSON_DIR, load_reports, page, page_ranges, read_csv, reported_total, write_csv)
 
 from build_csv import filing_label  # noqa: E402
+import best_fit  # noqa: E402
 
 CATEGORY_NAMES = set(RECEIPT_CATEGORIES) | set(DISBURSEMENT_CATEGORIES) | set(DETAIL_REVENUE_CATEGORIES) | \
     set(DETAIL_EXPENSE_CATEGORIES)
@@ -74,6 +76,8 @@ CORE_SHEETS = ["Summary", "Review", "Line Items", "Detail Lines", "Revenue by So
 _scope = None   # set of report stems to keep, while building the focused workbook
 _collect = None  # {sheet title: (header, rows)} gathered for the one-tab workbook
 ONE_XLSX = OUTPUT / "cashflow_one_tab.xlsx"
+BEST_FIT_LOG = OUTPUT / "best_fit_log.csv"            # every in-scope catch-all record and what happened to it
+BEST_FIT_SUMMARY = OUTPUT / "best_fit_summary.csv"    # counts and $ per catch-all category and rule
 # Sheets the one-tab workbook is built from
 ONE_SOURCES = ["Summary", "Line Items", "Detail Lines", "Proprietary", "Balance Sheet"]
 
@@ -88,7 +92,7 @@ def core_stems():
 
 # User 2026-10-26: categories and labels are shown capitalized in the workbooks ("capital outlay" -> "Capital Outlay").
 # Words that already contain a capital (SBITA, TEEOSA, LB840) are kept; small words stay lowercase.
-CAP_COLS = {"category", "detail_category", "original_label", "level", "fund_type", "source"}
+CAP_COLS = {"category", "detail_category", "original_label", "level", "fund_type", "source", "best_fit_category"}
 _SMALL = {"and", "or", "of", "the", "in", "for", "to", "a", "an", "on", "at", "by", "with", "from", "per", "vs", "as"}
 
 
@@ -106,15 +110,21 @@ def cap(v):
     return re.sub(r"[A-Za-z][A-Za-z']*", word, v)
 
 
-def add_sheet(wb, title, header, rows, money_cols=(), status_col=None):
+def add_sheet(wb, title, header, rows, money_cols=(), status_col=None, ids=None):
+    """ids: optional record_id per row (same order), carried to the one-tab workbook only."""
+    if ids is not None and len(ids) != len(rows):
+        raise SystemExit(f"{title}: {len(ids)} record ids for {len(rows)} rows")
     if _scope is not None:
         if title not in CORE_SHEETS:
             return None
         if "filename" in header:
             i = header.index("filename")
-            rows = [r for r in rows if Path(str(r[i] or "")).stem in _scope]
+            keep = [Path(str(r[i] or "")).stem in _scope for r in rows]
+            rows = [r for r, k in zip(rows, keep) if k]
+            if ids is not None:
+                ids = [x for x, k in zip(ids, keep) if k]
     if _collect is not None and title in ONE_SOURCES:
-        _collect[title] = (header, rows)
+        _collect[title] = (header, rows, ids)
     ws = wb.create_sheet(title)
     ws.append([cap(h) if h in CATEGORY_NAMES else cap(h.replace("_", " ")) for h in header])
     for c in ws[1]:
@@ -158,9 +168,15 @@ def add_sheet(wb, title, header, rows, money_cols=(), status_col=None):
     return ws
 
 
-def main():
-    """Build the full workbook, then the focused one (see CORE_SHEETS / config/review_scope.txt)."""
-    global _scope
+def main(xlsx_dir=None):
+    """Build the full workbook, then the focused one (see CORE_SHEETS / config/review_scope.txt).
+    xlsx_dir: write the workbooks and best-fit CSVs there instead of output/ (validation builds)."""
+    global _scope, XLSX, CORE_XLSX, ONE_XLSX, BEST_FIT_LOG, BEST_FIT_SUMMARY
+    if xlsx_dir:
+        d = Path(xlsx_dir)
+        d.mkdir(parents=True, exist_ok=True)
+        XLSX, CORE_XLSX, ONE_XLSX = d / XLSX.name, d / CORE_XLSX.name, d / ONE_XLSX.name
+        BEST_FIT_LOG, BEST_FIT_SUMMARY = d / BEST_FIT_LOG.name, d / BEST_FIT_SUMMARY.name
     _scope = None
     build(XLSX)
     _scope = core_stems()
@@ -175,7 +191,9 @@ def main():
 
 ONE_COLS = ["entity_name", "entity_type", "county", "filename", "filing_type", "fiscal_year_end", "basis", "level",
             "fund_type", "section", "source", "line", "schedule", "fund", "department", "category",
-            "detail_category", "original_label", "amount", "pages", "page_link"]
+            "detail_category", "original_label", "amount", "pages", "page_link",
+            # user 2026-11-04: appended last so the 21 columns above keep their positions (Power BI import)
+            "best_fit_category", "record_id"]
 # Cash flow roll-forward lines (Summary columns): (column, label, sign)
 GOV_FLOW = [("beginning_balance", "beginning {}", 1), ("total_receipts", "receipts", 1),
             ("total_disbursements", "disbursements", -1), ("transfers_in", "transfers in", 1),
@@ -192,6 +210,43 @@ def page_amount(v):
     return v.get("amount") if isinstance(v, dict) else v
 
 
+def best_fit_step(out):
+    """Add best_fit_category to every one-tab row (scripts/best_fit.py). Fails the build if any existing value
+    changes. Returns (log rows, summary rows)."""
+    def snapshot():
+        return [tuple((k, repr(v)) for k, v in sorted(r.items()) if k != "best_fit_category") for r in out]
+    before = snapshot()
+    rules, compounds, decisions = best_fit.load()
+    cache, info = {}, {}
+    for r in out:
+        if not best_fit.in_scope(r):
+            continue
+        stem, list_key, idx = (r["record_id"].split("|") + ["", "", ""])[:3]
+        if stem not in cache:
+            path = JSON_DIR / f"{stem}.json"
+            try:
+                cache[stem] = (best_fit.json_sha256(path), json.loads(path.read_text()))
+            except (OSError, ValueError):
+                cache[stem] = ("", {})
+        sha, dj = cache[stem]
+        try:
+            item = (dj.get(list_key) or [])[int(idx)]
+        except (ValueError, IndexError, TypeError):
+            item = None
+        info[r["record_id"]] = (sha, str(dj.get("extraction_attempt", "")),
+                                best_fit.fingerprint(stem, list_key, item) if item is not None else "")
+    log = best_fit.apply(out, rules, compounds, decisions, info)
+    if snapshot() != before:
+        raise SystemExit("best fit: an existing one-tab value changed; nothing written")
+    unknown = set(decisions) - {e["record_id"] for e in log}
+    if unknown:
+        print(f"best fit: {len(unknown)} verified decisions match no in-scope record (stale): {sorted(unknown)[:3]}")
+    summ = best_fit.summary(log)
+    st = Counter(e["status"] for e in log)
+    print("best fit:", ", ".join(f"{k} {v}" for k, v in sorted(st.items())))
+    return log, summ
+
+
 def one_tab(collected):
     """output/cashflow_one_tab.xlsx: one sheet, one amount column, three levels:
     cash flow (governmental and business-type roll-forwards; utility cash flow statements),
@@ -201,9 +256,10 @@ def one_tab(collected):
     out = []
 
     def rows_of(title):
-        header, rows = collected.get(title, ([], []))
+        header, rows, ids = collected.get(title, ([], [], None))
         ix = {h: i for i, h in enumerate(header)}
-        return [{h: r[i] for h, i in ix.items()} for r in rows]
+        ids = ids if ids is not None else [None] * len(rows)
+        return [{**{h: r[i] for h, i in ix.items()}, "_rid": rid} for r, rid in zip(rows, ids)]
 
     def num_(v):
         try:
@@ -282,19 +338,26 @@ def one_tab(collected):
     for r in rows_of("Line Items"):
         out.append({**{c: r.get(c) for c in ONE_COLS if c in r}, "level": "revenue and expenses",
                     "section": r.get("section"),   # receipts / disbursements
-                    "source": "statement"})
+                    "source": "statement", "record_id": r["_rid"]})
     for r in rows_of("Detail Lines"):
         out.append({**{c: r.get(c) for c in ONE_COLS if c in r}, "level": "revenue and expenses",
                     "section": {"revenue": "receipts", "expenditure": "disbursements"}.get(r.get("section"),
                                                                                          r.get("section")),
-                    "source": "schedule"})
+                    "source": "schedule", "record_id": r["_rid"]})
         if r.get("section") == "other financing" and not out[-1].get("category"):
             out[-1]["category"] = "Total Other Financing Sources (Uses)"   # user 2026-10-26: statement heading
     for r in rows_of("Balance Sheet"):
         out.append({**{c: r.get(c) for c in ONE_COLS if c in r}, "level": "balance sheet",
-                    "schedule": r.get("statement"), "source": "statement"})
+                    "schedule": r.get("statement"), "source": "statement", "record_id": r["_rid"]})
     for row in out:
         row["county"] = county.get(Path(str(row.get("filename") or "")).stem, "")
+        if not row.get("record_id"):   # cash-flow rows: one per report, fund type, section and line label
+            row["record_id"] = "|".join(str(row.get(k) or "") for k in ("filename", "level", "fund_type", "section",
+                                                                         "original_label"))
+    dup = [k for k, n in Counter(r["record_id"] for r in out).items() if n > 1]
+    if dup:
+        raise SystemExit(f"one-tab: {len(dup)} duplicate record ids, e.g. {dup[:3]}")
+    best_fit_log, best_fit_summary = best_fit_step(out)
     out.sort(key=lambda x: (str(x.get("entity_name") or ""), ["cash flow", "revenue and expenses", "balance sheet"]
                             .index(x["level"])))
     global _scope
@@ -302,9 +365,16 @@ def one_tab(collected):
     wb = Workbook()
     wb.remove(wb.active)
     add_sheet(wb, "All Data", ONE_COLS, [[r.get(c) for c in ONE_COLS] for r in out], ["amount"])
+    add_sheet(wb, "Best Fit Log", best_fit.LOG_COLS, [[e.get(c) for c in best_fit.LOG_COLS] for e in best_fit_log],
+              ["amount"])
+    add_sheet(wb, "Best Fit Summary", best_fit.SUMMARY_COLS,
+              [[e.get(c) for c in best_fit.SUMMARY_COLS] for e in best_fit_summary],
+              ["amount", "proposed_amount", "accepted_amount", "remaining_amount"])
     _scope = keep
     wb.save(ONE_XLSX)
-    print(f"wrote {ONE_XLSX.relative_to(OUTPUT.parent)} ({len(out)} rows)")
+    write_csv(BEST_FIT_LOG, best_fit_log, best_fit.LOG_COLS)
+    write_csv(BEST_FIT_SUMMARY, best_fit_summary, best_fit.SUMMARY_COLS)
+    print(f"wrote {ONE_XLSX} ({len(out)} rows), {BEST_FIT_LOG.name}, {BEST_FIT_SUMMARY.name}")
 
 
 def build(xlsx):
@@ -377,22 +447,24 @@ def build(xlsx):
                + [r.get(h) for h in rh[2:]] + ref(r["filename"], r.get("source_page")) for r in rv], ["amount"])
 
     # ---- Line Items (basic statements)
-    lines = []
+    lines, line_ids = [], []
     for s, d in reports:
         b0 = base(s, d)
         for section in ("receipts", "disbursements"):
-            for it in d.get(section) or []:
+            for n_it, it in enumerate(d.get(section) or []):
+                line_ids.append(f"{s}|{section}|{n_it}")
                 lines.append(b0 + [fund_type(it), section, it.get("category"), it.get("detail_category"),
                                      it.get("original_label"), it.get("amount")] + ref(s, it))
     add_sheet(wb, "Line Items", ident + ["fund_type", "section", "category", "detail_category", "original_label",
                                          "amount"] + REF,
-              lines, ["amount"])
+              lines, ["amount"], ids=line_ids)
 
     # ---- Detail Lines (supplementary schedules)
-    det = []
+    det, det_ids = [], []
     for s, d in reports:
         b0 = base(s, d)
-        for it in d.get("detail") or []:
+        for n_it, it in enumerate(d.get("detail") or []):
+            det_ids.append(f"{s}|detail|{n_it}")
             # lines for an entity outside the basic statements (e.g. Coleridge's nursing home) stay visible but
             # out of the governmental / business-type totals
             ft = "outside statements" if it.get("outside_statement") else fund_type(it)
@@ -401,7 +473,7 @@ def build(xlsx):
                                it.get("original_label"), it.get("amount"), it.get("budget_final")] + ref(s, it))
     add_sheet(wb, "Detail Lines", ident + ["schedule", "fund_type", "fund", "department", "section", "category",
                                            "detail_category", "original_label", "amount", "budget_final"] + REF,
-              det, ["amount", "budget_final"])
+              det, ["amount", "budget_final"], ids=det_ids)
 
     # ---- Revenue by Source / Spending by Type
     for title, sec, cats in (("Revenue by Source", "revenue", DETAIL_REVENUE_CATEGORIES),
@@ -499,7 +571,7 @@ def build(xlsx):
     add_sheet(wb, "Proprietary", ident + pk + REF, rows, pk)
 
     # ---- Balance Sheet
-    rows = []
+    rows, bs_ids = [], []
     for s, d in reports:
         bs = d.get("balance_sheet") or {}
         b0 = base(s, d)
@@ -513,7 +585,8 @@ def build(xlsx):
                     st_of.setdefault(it.get("fund_type"), it["statement"])
         combined = " + ".join(dict.fromkeys([main] + list(st_of.values()))) if st_of else main
         for sec, tot in BS_SECTIONS.items():
-            for it in bs.get(sec) or []:
+            for n_it, it in enumerate(bs.get(sec) or []):
+                bs_ids.append(f"{s}|balance_sheet.{sec}|{n_it}")
                 rows.append(b0 + [it.get("statement") or main, bs.get("column", ""), it.get("fund_type", ""), sec,
                                   it.get("category", ""), it.get("original_label"), it.get("amount")] + ref(s, it))
             # a balance sheet split by fund type: one subtotal row per fund type (sum of its lines)
@@ -521,15 +594,17 @@ def build(xlsx):
             if len(fts) > 1 or (fts and any(it.get("fund_type") != fts[0] for k in BS_SECTIONS for it in bs.get(k) or [])):
                 for ft in fts:
                     its = [it for it in bs.get(sec) or [] if it.get("fund_type") == ft]
+                    bs_ids.append(f"{s}|balance_sheet.{sec}|subtotal.{ft}")
                     rows.append(b0 + [st_of.get(ft, main), bs.get("column", ""), ft, sec, tot,
                                       f"(total {ft}, sum of lines)", round(sum(float(i.get("amount") or 0) for i in its), 2)]
                                 + ref(s, its))
             if amt(bs.get(tot)) is not None:
+                bs_ids.append(f"{s}|balance_sheet.{sec}|total")
                 rows.append(b0 + [combined, bs.get("column", ""), "total", sec, tot, "(total as stated)",
                                   amt(bs.get(tot))] + ref(s, bs.get(tot)))
     add_sheet(wb, "Balance Sheet", ident + ["statement", "column", "fund_type", "section", "category", "original_label",
                                             "amount"] + REF,
-              rows, ["amount"])
+              rows, ["amount"], ids=bs_ids)
 
     # ---- Flagged
     fr = read_csv(FLAGGED)
@@ -588,8 +663,9 @@ def build(xlsx):
 
     wb.save(xlsx)
     n = len(reports) if _scope is None else len([s for s, _ in reports if s in _scope])
-    print(f"wrote {xlsx.relative_to(OUTPUT.parent)} ({n} reports)")
+    print(f"wrote {xlsx} ({n} reports)")
 
 
 if __name__ == "__main__":
-    main()
+    args = sys.argv[1:]
+    main(args[args.index("--xlsx-dir") + 1] if "--xlsx-dir" in args else None)
