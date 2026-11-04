@@ -1,0 +1,12 @@
+{
+  "stem": "Emerson_FY2024",
+  "values_checked": 153,
+  "issues": [
+    {"severity": "warning", "path": "balance_sheet.statement", "page": 1,
+     "extracted": "Statement of Net Position - Modified Cash Basis, Total column (Unrestricted and not Committed or Assigned 1,491,852)", "on_page": "Governmental funds statement p3: Cash 551,104, Certificates of Deposit 150,764, Funds Held by County Treasurer 8,394, Sales Tax Payable 4,077, Payroll Withholdings 1,195, Unassigned 704,990; proprietary p5: Restricted 66,275, Unrestricted 786,862",
+     "issue": "The user's balance-sheet-basis rule (2026-10-27) takes cash-basis governmental lines from the governmental funds statement when its totals equal the government-wide figures. They do here: 710,262 / 5,272 / 704,990. The extraction used the combined Total column instead. Its amounts are correct as printed and the totals tie (1,563,399), but governmental Unassigned 704,990 is merged with proprietary 786,862."},
+    {"severity": "warning", "path": "receipts[15].category", "page": 6,
+     "extracted": "other", "on_page": "Meter deposits collected, net of refunds 6,531 (nonoperating revenues)",
+     "issue": "Customer meter deposits are refundable deposits, not earned revenue. The report prints them as nonoperating revenue, and the as-printed rule keeps them as a receipt, so this is defensible. However, detail[45] gives the same line detail_category 'other utility charges' while its category is 'other', which is inconsistent within the report."}
+  ]
+}
