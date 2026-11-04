@@ -1,0 +1,16 @@
+{
+  "stem": "Greenwood_FY2024",
+  "values_checked": 98,
+  "issues": [
+    {"severity": "error", "path": "missing", "page": 14,
+     "extracted": "no lines from p14; General Fund detail taken from the budget schedule (p10), which shows functions only",
+     "on_page": "Combining Statement of Revenues and Expenditures - General Fund Departments (report p43), General and Fire columns: e.g. General: Salaries and benefits 51,167, Insurance 20,845, Contracted services 10,321, Law enforcement 8,800, Professional fees 33,295, Meetings, seminars and dues 2,870, Repairs and maintenance 24,893, Printing, postage, and publications 6,514, Utilities and telephone 1,991, Supplies 19,402, Other expenses 9,633 (total 189,731); Fire: Insurance 4,136, Contracted services 46, Professional fees 1,784, Meetings 425, Repairs 1,474, Printing 229, Utilities 1,963, Supplies 8,922, Capital outlay 3,645 (total 22,624); revenue lines incl. General property tax 73,687 / 15,800",
+     "issue": "p14 prints object-level lines for the General Fund departments that are not in the JSON. The continuation page with the Rescue, Library, Parks and Total columns (report p44) is not in the trimmed PDF, so the department schedule can't be recorded in full. It ties to the budget schedule (General 189,731 = General government 180,931 + Law enforcement 8,800; Fire 22,624). Re-trim with the next source page (config/extra_pages.csv) and record the departments combining statement, which is more detailed, in place of the p10 function lines"},
+    {"severity": "warning", "path": "receipts[10].category", "page": 5,
+     "extracted": "donations/contributions", "on_page": "Grants and contributions 116,217 (Statement of Activities p2: public safety operating grants 112,000, general government 725, environment and leisure 3,492)",
+     "issue": "most of it is a public safety operating grant, probably from a government (intergovernmental), not private donations; the source is not stated (also detail[7])"},
+    {"severity": "warning", "path": "receipts[8].category", "page": 5,
+     "extracted": "Ambulance Fees", "on_page": "Charges for services 14,596 (p2: public safety charges for services 14,596)",
+     "issue": "the page shows public safety charges, not specifically rescue/ambulance; the fire and rescue departments are both public safety, so Ambulance Fees is an inference (also detail[5])"}
+  ]
+}
