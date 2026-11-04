@@ -1,0 +1,24 @@
+{
+  "stem": "Harvard_FY2024",
+  "values_checked": 276,
+  "issues": [
+    {"severity": "warning", "path": "receipts[22].category", "page": 6,
+     "extracted": "charges for services/fees", "on_page": "Charges for services 109,645 (Disposal Service Fund 94,845, Cemetery 12,550, General 2,250)",
+     "issue": "86% of the line is Disposal Service Fund disposal (garbage) fees (p25), so the dominant category would be Utility Charges (user rule: garbage/refuse charges are Utility Charges)"},
+    {"severity": "warning", "path": "receipts[19].category", "page": 6,
+     "extracted": "other", "on_page": "Other 113,332",
+     "issue": "label is Other so 'other' is allowed, but the fund schedules show it holds General Fund sales tax 51,230 (p11), expense reimbursements 20,336, interest 1,662, Street other 13,539, pool receipts 3,770, Park other 2,429 and Debt Service 'Income for bonds' 20,000; no single category is over half"},
+    {"severity": "warning", "path": "disbursements[6].category", "page": 6,
+     "extracted": "economic development", "on_page": "Community/Economic Development 27,345",
+     "issue": "this is the Keno Lottery Fund spending, mostly 'Community improvement' 19,264 (p26); could be Community Betterment under the user rule for community development/betterment lines (same question for detail[144])"},
+    {"severity": "warning", "path": "detail[144].category", "page": 26,
+     "extracted": "economic development", "on_page": "Community improvement 19,264",
+     "issue": "keno-funded community improvement spending; could be Community Betterment"},
+    {"severity": "warning", "path": "detail[7].category", "page": 11,
+     "extracted": "licenses and permits", "on_page": "Fines, licenses, and permits 2,219",
+     "issue": "line mixes fines with licenses/permits; Fines and Licenses would also fit"},
+    {"severity": "warning", "path": "disbursements[4].category", "page": 6,
+     "extracted": "streets/highways", "on_page": "Public Works - Other 99,955",
+     "issue": "mixed line (ARPA repairs 54,124, cemetery 27,358, street lights 18,473); streets/highways is a judgment call, already marked review"}
+  ]
+}

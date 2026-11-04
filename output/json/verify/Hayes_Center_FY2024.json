@@ -1,0 +1,46 @@
+{
+  "stem": "Hayes_Center_FY2024",
+  "values_checked": 105,
+  "issues": [
+    {
+      "severity": "warning",
+      "path": "detail_totals[1].amount",
+      "page": 4,
+      "extracted": 29344.26,
+      "on_page": "TOTAL DISBURSEMENTS General 29,344.26",
+      "issue": "printed with cents; General Fund lines 4,369 + 13,553 + 11,422 = 29,344, a 0.26 gap that is not in report_discrepancies"
+    },
+    {
+      "severity": "warning",
+      "path": "decision_needed",
+      "page": 6,
+      "extracted": "business_type.debt_proceeds 1,096,000",
+      "on_page": "USDA Rural Development Water Project proceeds 1,096,000 (budget schedule p9 shows it as 'Federal receipts')",
+      "issue": "a person should confirm whether the USDA money is loan proceeds or a federal grant; it is 2x the year's ordinary receipts, and the same year's water principal paid is 1,150,591. The JSON has no decision_needed entry"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[13].category",
+      "page": 6,
+      "extracted": "other",
+      "on_page": "Customer Deposits 1,000",
+      "issue": "customer meter deposits received are refundable deposits, not revenue; 'other' is a judgment call (already marked review)"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[14].category",
+      "page": 6,
+      "extracted": "federal grants",
+      "on_page": "Grants 282,743",
+      "issue": "the report doesn't say the grant is federal (the Statement of Activities p2 shows it as operating grants and contributions); this is an assumption"
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[2].category",
+      "page": 4,
+      "extracted": "general government",
+      "on_page": "Personnel services 26,203 (General 13,553, Street 12,650)",
+      "issue": "the line is listed by object across two funds; almost half is Street Fund (streets/highways), so general government is a judgment call"
+    }
+  ]
+}
