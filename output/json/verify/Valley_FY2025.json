@@ -1,14 +1,21 @@
 {
   "stem": "Valley_FY2025",
-  "values_checked": 152,
+  "values_checked": 158,
   "issues": [
-    {"severity": "error", "path": "receipts[9].category", "page": 6, "extracted": "charges for services/fees", "on_page": "Metered sales 2,133,150 (Utilities fund)", "issue": "[fixed 2026-10-28: category changed to Utility Charges] utility fund metered sales are sales of water/sewer service; user rule puts utility fund sales/charges in Utility Charges, not charges for services/fees"},
-    {"severity": "warning", "path": "receipts[10].category", "page": 6, "extracted": "charges for services/fees", "on_page": "Connection fees 546,837 (Utilities fund)", "issue": "[fixed 2026-10-28: category changed to Utility Charges] utility connection fees could be Utility Charges, the user's category for utility fund charges"},
-    {"severity": "warning", "path": "receipts[1]", "page": 4, "extracted": 8940030, "on_page": "Taxes 11,086,765 (General 2,502,807 + Bond 379,812 + TIF 6,057,411 + Sales Tax 2,146,735)", "issue": "the property tax figure is the remainder after the Sales Tax fund column, not a printed property tax figure. The General Fund taxes may include motor vehicle or other taxes. The Statement of Activities (p2) shows Property 8,967,603 on the accrual basis. It is marked computed/split_from/review, but this is an assumption."},
-    {"severity": "warning", "path": "receipts[5].category", "page": 4, "extracted": "federal grants", "on_page": "Grant income 80,456", "issue": "the grantor isn't stated; it could be state or other grants"},
-    {"severity": "warning", "path": "receipts[15].category", "page": 6, "extracted": "federal grants", "on_page": "Grant Income 1,307,203 (capital grants per p2)", "issue": "the grantor isn't stated; it could be state aid"},
-    {"severity": "warning", "path": "disbursements[7].category", "page": 6, "extracted": "Employee Benefits and Payroll Taxes", "on_page": "Salaries and benefits 45,023", "issue": "this line combines salaries and benefits, and salaries are usually the larger part, so Salaries and Wages may fit better"},
-    {"severity": "warning", "path": "balance_sheet.deferred_inflows[0].original_label", "page": 1, "extracted": "Lease receivable (deferred inflow)", "on_page": "Lease receivable", "issue": "the label has text added that isn't printed on the page"},
-    {"severity": "warning", "path": "detail[14].original_label", "page": 8, "extracted": "Transfers from other funds", "on_page": "Transfers from other funds", "issue": "[fixed 2026-10-28: relabelled Transfers In / Transfers Out with printed_label] under the user's label rule this should be 'Transfers In' (printed text in printed_label). The same applies to detail[15] and detail[20] ('Transfers Out'). user_rules.py may apply this."}
+    {"severity": "warning", "path": "receipts[0].original_label", "page": 2,
+     "extracted": "Taxes (Sales Tax fund)", "on_page": "Sales 2,146,735 (Statement of Activities, general revenues: Taxes - Sales)",
+     "issue": "The kept sales-tax piece is proven: the Sales Tax fund column of Taxes (p4) is 2,146,735, exactly equal to the Statement of Activities 'Sales' 2,146,735 (p2). But the evidence standard says original_label should be the printed breakdown label ('Sales'); 'Taxes (Sales Tax fund)' is not printed anywhere. The amount, split_from and category are correct."},
+    {"severity": "warning", "path": "disbursements[4].category", "page": 4,
+     "extracted": "economic development", "on_page": "Community development 98,078 (Keno fund; SoA function 'Keno'; fund balance 'Restricted for Community betterment')",
+     "issue": "The line is all Keno fund spending, and the Keno fund balance is restricted for community betterment. Under the user's 2026-10-29 rule this could be Community Betterment rather than economic development. Same question for detail[12]."},
+    {"severity": "warning", "path": "disbursements[7].category", "page": 6,
+     "extracted": "Employee Benefits and Payroll Taxes", "on_page": "Salaries and benefits 45,023",
+     "issue": "A combined salaries-and-benefits line is categorised Employee Benefits and Payroll Taxes, but the matching detail line (detail[29]) uses detail_category salaries and wages. Salaries and Wages is probably the dominant part."},
+    {"severity": "warning", "path": "detail[28].detail_category", "page": 6,
+     "extracted": "investment income", "on_page": "Interest income 45,617 (Utilities)",
+     "issue": "Category is Interest Income but detail_category is investment income. Every other interest line in this report uses Interest Income."},
+    {"severity": "warning", "path": "balance_sheet.deferred_inflows[0].original_label", "page": 1,
+     "extracted": "Lease receivable (deferred inflow)", "on_page": "Lease receivable",
+     "issue": "The label adds a qualifier that is not printed; the row under Deferred Inflows of Resources reads 'Lease receivable'."}
   ]
 }
