@@ -2,24 +2,57 @@
   "stem": "ONeill_FY2025",
   "values_checked": 520,
   "issues": [
-    {"severity": "warning", "path": "receipts[15].category", "page": 16,
-     "extracted": "charges for services/fees", "on_page": "NPPD lease 622,313 (Statement of Activities p3: 'Public power district lease payments')",
-     "issue": "lease income from NPPD; the user's Rentals receipt category (rent, rental income) fits better than charges for services, and the detail line (detail[16]) already uses detail_category 'rentals'"},
-    {"severity": "warning", "path": "receipts[12].category", "page": 6,
-     "extracted": "charges for services/fees", "on_page": "Charges for services 351,849 = Ambulance calls 291,195 + Community Center rent 25,130 + Library 6,699 + Carney Park 15,592 + Pool 13,233 (p16)",
-     "issue": "83% of the line is ambulance fees; under the 'more than half' rule and the user's Ambulance Fees category, the line could be categorized Ambulance Fees or split using the p16 breakdown"},
-    {"severity": "warning", "path": "receipts[19].category", "page": 16,
-     "extracted": "charges for services/fees (Lot sales 12,208 + Rural fire 2,000 + Other park 2,930 combined)", "on_page": "Lot sales 12,208; Rural fire 2,000; Other park 2,930",
-     "issue": "same labels are categorized differently in detail (Lot sales = Cemetery Fees detail[19], Other park = Recreation Fees detail[23]); one combined computed receipt in charges for services doesn't follow the same-label-same-category rule"},
-    {"severity": "warning", "path": "receipts[21].category", "page": 10,
-     "extracted": "charges for services/fees", "on_page": "Service fees 3,194,945; Other charges 15,032 (Combined Utilities Fund)",
-     "issue": "utility fund service fees/other charges (receipts[21], receipts[22]) should be 'Utility Charges' under the user's 2026-10-28 rule; the per-department detail lines already use Utility Charges"},
-    {"severity": "warning", "path": "detail[12].category", "page": 16,
-     "extracted": "charges for services/fees", "on_page": "Community Center rent 25,130",
-     "issue": "detail_category is 'rentals' but category is charges for services/fees; the user's Rentals category fits (same for detail[16] NPPD lease 622,313)"},
-    {"severity": "error", "field": "receipts (business-type) 'Service fees' 3,194,945 and 'Other charges' 15,032 category", "page": 10,
-     "issue": "[fixed 2026-10-29: business-type receipts Service fees 3,194,945 and Other charges 15,032 now Utility Charges, matching detail] Combined Utilities Fund (water, sewer, solid waste) operating 'Service fees' 3,194,945 and 'Other charges' 15,032 (p10) are category charges for services/fees in receipts, while the same amounts in detail (p36: Water 975,425 + Sewer 876,999 + Solid Waste 1,342,521; other charges 13,482 + 1,550) are Utility Charges. Utility charges (incl. refuse) are their own category (user 2026-10-28); receipts should be Utility Charges to match detail and the rule."},
-    {"severity": "error", "field": "detail (General Fund Budget and Actual) 'Community Center rent' 25,130 category", "page": 16,
-     "issue": "[fixed 2026-10-29: already category Rentals (applied by scripts/user_rules.py)] Label is plainly rent (detail_category already 'rentals') but category is charges for services/fees; Rentals is its own receipt category (user 2026-10-28), and the report's other rent lines (NPPD lease, utility 'Rent' 27,000) already use Rentals. Category should be Rentals."}
+    {
+      "severity": "warning",
+      "path": "receipts[15].category",
+      "page": 16,
+      "extracted": "charges for services/fees",
+      "on_page": "NPPD lease 622,313 (Statement of Activities p3: 'Public power district lease payments')",
+      "issue": "lease income from NPPD; the user's Rentals receipt category (rent, rental income) fits better than charges for services, and the detail line (detail[16]) already uses detail_category 'rentals'"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[12].category",
+      "page": 6,
+      "extracted": "charges for services/fees",
+      "on_page": "Charges for services 351,849 = Ambulance calls 291,195 + Community Center rent 25,130 + Library 6,699 + Carney Park 15,592 + Pool 13,233 (p16)",
+      "issue": "83% of the line is ambulance fees; under the 'more than half' rule and the user's Ambulance Fees category, the line could be categorized Ambulance Fees or split using the p16 breakdown"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[19].category",
+      "page": 16,
+      "extracted": "charges for services/fees (Lot sales 12,208 + Rural fire 2,000 + Other park 2,930 combined)",
+      "on_page": "Lot sales 12,208; Rural fire 2,000; Other park 2,930",
+      "issue": "same labels are categorized differently in detail (Lot sales = Cemetery Fees detail[19], Other park = Recreation Fees detail[23]); one combined computed receipt in charges for services doesn't follow the same-label-same-category rule"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[21].category",
+      "page": 10,
+      "extracted": "charges for services/fees",
+      "on_page": "Service fees 3,194,945; Other charges 15,032 (Combined Utilities Fund)",
+      "issue": "utility fund service fees/other charges (receipts[21], receipts[22]) should be 'Utility Charges' under the user's 2026-10-28 rule; the per-department detail lines already use Utility Charges"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[12].category",
+      "page": 16,
+      "extracted": "charges for services/fees",
+      "on_page": "Community Center rent 25,130",
+      "issue": "detail_category is 'rentals' but category is charges for services/fees; the user's Rentals category fits (same for detail[16] NPPD lease 622,313)"
+    },
+    {
+      "severity": "error",
+      "field": "receipts (business-type) 'Service fees' 3,194,945 and 'Other charges' 15,032 category",
+      "page": 10,
+      "issue": "[fixed 2026-10-29: business-type receipts Service fees 3,194,945 and Other charges 15,032 now Utility Charges, matching detail] Combined Utilities Fund (water, sewer, solid waste) operating 'Service fees' 3,194,945 and 'Other charges' 15,032 (p10) are category charges for services/fees in receipts, while the same amounts in detail (p36: Water 975,425 + Sewer 876,999 + Solid Waste 1,342,521; other charges 13,482 + 1,550) are Utility Charges. Utility charges (incl. refuse) are their own category (user 2026-10-28); receipts should be Utility Charges to match detail and the rule."
+    },
+    {
+      "severity": "error",
+      "field": "detail (General Fund Budget and Actual) 'Community Center rent' 25,130 category",
+      "page": 16,
+      "issue": "[fixed 2026-10-29: already category Rentals (applied by scripts/user_rules.py)] Label is plainly rent (detail_category already 'rentals') but category is charges for services/fees; Rentals is its own receipt category (user 2026-10-28), and the report's other rent lines (NPPD lease, utility 'Rent' 27,000) already use Rentals. Category should be Rentals."
+    }
   ]
 }
