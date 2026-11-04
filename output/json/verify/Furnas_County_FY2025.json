@@ -1,8 +1,15 @@
 {
   "stem": "Furnas_County_FY2025",
-  "values_checked": 112,
+  "values_checked": 155,
   "issues": [
-    {"severity": "warning", "path": "detail[26].split_from", "page": 9, "extracted": "Local 32,591 split into Sale of Property 15,935 + other 16,656", "on_page": "Road Fund budget schedule Local 32,591 (p9); p4 Road column Local 16,656 and Sale of surplus 15,935", "issue": "The budget schedule prints Local as one line. The split comes from the p4 statement's Road column, where the parts tie exactly, but p9 does not print it. The line is marked review"},
-    {"severity": "warning", "path": "detail[2].category", "page": 8, "extracted": "charges for services/fees", "on_page": "Local 860,562 (= 860,310 Local + 252 sale of surplus per p5)", "issue": "Inconsistent with the Road Fund treatment: the General Fund budget Local also holds 252 of sale of surplus (and probably much of the 279,199 interest income), but it was not split. The dominant category is defensible, and the line is marked review"}
+    {"severity": "warning", "path": "receipts[0].original_label", "page": 2,
+     "extracted": "Taxes", "on_page": "Property 3,038,628 / Motor vehicle 264,285 / Lodging 25,010",
+     "issue": "split items receipts[0-2] keep the original label 'Taxes' instead of the printed breakdown labels; receipts[5-7] likewise 'Local' instead of Charges for Services / Interest income / Miscellaneous (p2). Amounts right, sums exact (3,327,923 and 897,029)"},
+    {"severity": "warning", "path": "detail[25]", "page": 9,
+     "extracted": "Road Local 32,591 split into Sale of Property 15,935 + other 16,656", "on_page": "Local 32,591 (p9, one line)",
+     "issue": "the budget schedule prints Local as one line; the split comes from the p4 Road Fund column (Local 16,656 + Sale of surplus 15,935 = 32,591), not from a breakdown printed for this line. Defensible (same fund, same cash basis, ties exactly) but inferred; and the General Fund budget Local 860,562 (which likewise includes sale of surplus 252) was not split, so the treatment is inconsistent"},
+    {"severity": "warning", "path": "detail[29]", "page": 6,
+     "extracted": "nonmajor funds recorded per fund (13 columns)", "on_page": "Combining Statement - Non-Major Funds, 13 fund columns + Total (pp6-7)",
+     "issue": "the extractor rule says to use the Total Non-Major column (fund 'Nonmajor funds (combined)') when a combining schedule has more than 6 fund columns; recorded per fund instead. All per-fund lines tie to their columns and to the Total column (receipts 624,626, disbursements 1,042,721), so nothing is missing or double counted"}
   ]
 }
