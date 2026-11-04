@@ -1,0 +1,46 @@
+{
+  "stem": "Elm_Creek_FY2024",
+  "values_checked": 186,
+  "issues": [
+    {
+      "severity": "warning",
+      "path": "report_discrepancies",
+      "page": 4,
+      "extracted": "column-sum differences only",
+      "on_page": "Total column vs fund columns: Personnel services 272,318 vs 272,317; Repairs and maintenance 76,027 vs 76,026; Utilities 37,483 vs 37,484; Insurance 59,759 vs 59,760",
+      "issue": "Row cross-foot rounding differences in the governmental funds statement are not itemized (governmental receipts/disbursements use the Total column; detail uses fund columns, so detail lines for these objects differ from the receipts-level lines by 1 each)."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[0].category",
+      "page": 4,
+      "extracted": "general government",
+      "on_page": "Personnel services 272,318 (Total column; General, Street, Park, Library, Cemetery columns)",
+      "issue": "All governmental object lines (disbursements[0..7]) are general government although much of several (e.g. Street Fund personnel 71,771, repairs 52,157) belongs to streets, culture/recreation, cemetery; the SoA p2 gives the function split. Judgment call, review note present."
+    },
+    {
+      "severity": "warning",
+      "path": "other_financing",
+      "page": 4,
+      "extracted": 26300,
+      "on_page": "Gains (losses) on sale of assets 26,300 (Street Fund, under Other Financing Sources)",
+      "issue": "Recorded as other financing as printed; the receipt category Sale of Property (gain on sale) could also apply. Same for detail[40]."
+    },
+    {
+      "severity": "warning",
+      "path": "beginning_cash",
+      "page": 4,
+      "extracted": 428509,
+      "on_page": "NET POSITION, beginning of year (restated) 428,509",
+      "issue": "Beginning balance is a restated figure; the restatement amount and the prior-year unrestated balance are not on the trimmed pages, and adjustments[] is empty."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[22].category",
+      "page": 6,
+      "extracted": "Debt Service (interest)",
+      "on_page": "Bond discount (11,765) (Sewer, nonoperating)",
+      "issue": "Bond discount treated as a debt cost; it may be a non-cash amortization rather than a payment (review note present). Same for detail[99]."
+    }
+  ]
+}

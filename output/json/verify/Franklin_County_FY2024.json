@@ -1,0 +1,24 @@
+{
+  "stem": "Franklin_County_FY2024",
+  "values_checked": 240,
+  "issues": [
+    {"severity": "warning", "path": "receipts[4].category", "page": 2,
+     "extracted": "intergovernmental/state aid (Intergovernmental 1,746,937, p4)", "on_page": "Statement of Activities: Motor vehicle taxes 152,932",
+     "issue": "The report prints motor vehicle taxes of 152,932 as a separate tax line on the Statement of Activities. The fund statement's Intergovernmental line contains it, so no motor vehicle tax appears anywhere in the JSON. The extractor did not split it out and flagged it for review. Whether to split Intergovernmental (a non-tax line) by the Statement of Activities is a judgment call. The amount is likely inside the General Fund's intergovernmental receipts (detail[3] State 336,701 / detail[4] Local 526,530), but the schedules do not show which."},
+    {"severity": "warning", "path": "detail[4].category", "page": 5,
+     "extracted": "charges for services/fees", "on_page": "Local 526,530",
+     "issue": "The line is broad. The fund statement (p4) gives the General Fund 370,802 of charges for services and 492,428 of intergovernmental, while the schedule shows State 336,701 + Local 526,530. Charges for services is the most likely majority of Local (about 70% if all 370,802 is in it), but the split is not printed. The line already has a review note."},
+    {"severity": "warning", "path": "detail[85].category", "page": 13,
+     "extracted": "charges for services/fees / fees of office", "on_page": "Preservation and Modernization Fund: State 2,253",
+     "issue": "The printed label says State, but the combining schedule (p16) shows the amount as charges for services. The category follows p16, so the label and category do not match; the line already has a review note."},
+    {"severity": "warning", "path": "detail[86].category", "page": 13,
+     "extracted": "Interest Income", "on_page": "Veterans' Aid Fund: Local 5,043",
+     "issue": "The combining schedule (p16) shows interest 5,042 + intergovernmental 1, so Interest Income fits the dominant part. The line already has a review note."},
+    {"severity": "warning", "path": "detail[91].category", "page": 14,
+     "extracted": "general government", "on_page": "Building and Land Improvement Fund: Operating expenses 24,844",
+     "issue": "The combining schedule (p16) splits this fund's spending into general government 14,346 and public works 10,497, but the whole line is recorded under general government. The by-function detail therefore does not tie to the statement's Other Governmental Funds Public Works 10,497 (p4). The line already has a review note."},
+    {"severity": "warning", "path": "detail[65].category", "page": 10,
+     "extracted": "charges for services/fees", "on_page": "Road/Bridge Fund: Local 169,606",
+     "issue": "Broad line. The fund statement (p4) shows Road Fund charges for services of 169,606, which supports the category, but the line's label is just 'Local'."}
+  ]
+}
