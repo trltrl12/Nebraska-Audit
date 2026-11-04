@@ -1,0 +1,30 @@
+{
+  "stem": "Hall_County_FY2024",
+  "values_checked": 300,
+  "issues": [
+    {"severity": "warning", "path": "receipts[4].amount", "page": 1,
+     "extracted": 73614, "on_page": 73613,
+     "issue": "Pro-rate motor vehicle is taken from the fund schedules (73,611 p4 + 3 p9 = 73,614). The Statement of Activities general receipts (p1) print 73,613. The report disagrees with itself, and report_discrepancies doesn't record it."},
+    {"severity": "warning", "path": "receipts[5].amount", "page": 1,
+     "extracted": 789519, "on_page": 789696,
+     "issue": "Homestead is taken from the fund schedules (789,255 p4 + 264 p9 = 789,519). The Statement of Activities (p1) prints 789,696, a difference of 177. Not recorded in report_discrepancies."},
+    {"severity": "warning", "path": "receipts[46]", "page": 3,
+     "extracted": -926, "on_page": "General Fund column: State 2,984,571 / Other 3,591,141 vs p4 schedule lines (State 2,983,645, Other 3,592,067)",
+     "issue": "A -926 'Other' reconciling piece (and +926 inside the State remainder receipts[10]) is a computed line that no page prints. The arithmetic is right, but the statement and the budget schedule classify 926 differently, and report_discrepancies has no entry for it."},
+    {"severity": "warning", "path": "receipts[38].category", "page": 7,
+     "extracted": "reimbursements/refunds", "on_page": "Other Receipts Interfund Transfers 5,032,675",
+     "issue": "The label says interfund transfers (internal insurance charges). It stays a receipt as printed (p3 Other), and decision_needed already raises it. The reimbursements/refunds category is a judgment call (same line in detail[160])."},
+    {"severity": "warning", "path": "detail[128]", "page": 6,
+     "extracted": "Other Receipts 443,698 split into Interest Income 368,698 + other 75,000", "on_page": "Other Receipts 443,698 (p6); Inheritance column Interest Income 368,698 (p3)",
+     "issue": "The split relies on the statement's Inheritance Fund interest column, not on a breakdown printed on the schedule itself. It is defensible and reconciles exactly (also receipts[28])."},
+    {"severity": "warning", "path": "detail[124].detail_category", "page": 10,
+     "extracted": "grants/payments to other entities", "on_page": "Stuhr Museum - Operating Expense 900,000",
+     "issue": "The object is printed only as 'Operating Expense'. Treating it as a payment to another entity is an inference."},
+    {"severity": "warning", "path": "detail[178].category", "page": 9,
+     "extracted": "charges for services/fees", "on_page": "Weed Spraying Assessment 59,022",
+     "issue": "Could arguably be special assessments (assessed weed-control charges). The receipts line (receipts[43]) has the same question."},
+    {"severity": "warning", "path": "detail[183].original_label", "page": 9,
+     "extracted": "Capital Outlay: General Government", "on_page": "Capital Outlay 659,898 (Total Nonmajor column)",
+     "issue": "The nonmajor Total column mixes functions (Building & Land, Register of Deeds, Inmate Welfare, Noxious Weed, Drug Court...), so the 'General Government' function in the label is assumed."}
+  ]
+}
