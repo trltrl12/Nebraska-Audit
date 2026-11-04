@@ -1,0 +1,27 @@
+{
+  "stem": "Central_City_FY2024",
+  "values_checked": 250,
+  "issues": [
+    {"severity": "warning", "path": "receipts[0].category", "page": 7,
+     "extracted": "taxes (unlabeled)", "on_page": "Property and motor vehicle 1,114,910 (General 1,071,249 + Street 43,661); p21 General Fund combining schedule prints the General Fund's 1,071,249 under 'Property' in every sub-fund column",
+     "issue": "the p21 breakdown labels the General Fund part (1,071,249) as Property, so a split (property tax 1,071,249 from p21 + taxes (unlabeled) 43,661 Street) may be possible under the tax-split evidence standard; however p7, p4 and the p13 budget schedule call the same money 'Property and motor vehicle', so the labels conflict. Detail lines record the p21 amounts as property tax while the statement line stays unlabeled. Needs a judgment"},
+    {"severity": "warning", "path": "receipts[5].category", "page": 7,
+     "extracted": "intergovernmental/state aid", "on_page": "Grants 412,784 (Federal Assistance Fund 300,000, p19; General Fund sub-funds 105,326, Library Trust 7,458)",
+     "issue": "73% of the line is the Federal Assistance Fund grants that detail[99] records as federal grants; under the dominant-category rule the statement line could be federal grants"},
+    {"severity": "warning", "path": "receipts[4].category", "page": 7,
+     "extracted": "charges for services/fees", "on_page": "Charges for services 294,644 (Ambulance 150,596, Cemetery 15,225, Park and Pool 25,154, Library 728, Airport 41,117, General 61,824; p21)",
+     "issue": "ambulance fees are 51% of the line; kept as charges for services/fees (its printed meaning), which is defensible, but the dominant-category rule would give Ambulance Fees"},
+    {"severity": "warning", "path": "detail[113].category", "page": 19,
+     "extracted": "other", "on_page": "Keno Fund 'Other' 16,256",
+     "issue": "the Keno Fund's only receipt besides interest; probably keno proceeds (keno/lottery), but the page does not say so"},
+    {"severity": "warning", "path": "detail[114].category", "page": 19,
+     "extracted": "Community Betterment", "on_page": "Keno Fund 'Community improvements' 2,610",
+     "issue": "the same printed label 'Community improvements' is economic development for the Cemetery Trust Fund (detail[109]) and the statement line (disbursements[4]) but Community Betterment here; inconsistent categories for one label"},
+    {"severity": "warning", "path": "detail[65].category", "page": 21,
+     "extracted": "streets/highways", "on_page": "Airport Fund column (Personnel 40,624, Operating 61,349, Supplies 508, Other 527, Capital outlay 57,880)",
+     "issue": "there is no airport category; the statement counts Airport noncapital spending under Public Works (239,125 = Cemetery 136,117 + Airport 103,008), but the p13 budget schedule lists Airport under Environment and leisure. Category is a judgment call (detail[65]-[69])"},
+    {"severity": "warning", "path": "receipts[12].category", "page": 10,
+     "extracted": "other", "on_page": "Income from loan forgiveness 118,728 (Sewer Fund, nonoperating)",
+     "issue": "non-cash debt forgiveness shown as nonoperating revenue; recorded as printed in receipts, which is defensible, but it is debt-related rather than an operating receipt"}
+  ]
+}
