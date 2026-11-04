@@ -1,10 +1,21 @@
 {
   "stem": "CO36-10222025-July_1_2024_through_June_30_2025_Audit_Report_and_Management_Letter",
-  "values_checked": 96,
+  "values_checked": 124,
   "issues": [
-    {"severity": "warning", "path": "receipts[4].category", "page": 4, "extracted": "lodging tax", "on_page": "Taxes: Other 43,178 (Nonmajor column; Visitor Promotion 21,589 + Visitor Improvement 21,589, p12)", "issue": "Lodging tax is inferred from the fund names. The page prints only 'Other' under Taxes. It is defensible and marked review."},
-    {"severity": "warning", "path": "detail[38].detail_category", "page": 14, "extracted": "lodging tax", "on_page": "Taxes: Other 43,178", "issue": "Same lodging-tax inference as receipts[4]. The page does not label this as lodging tax."},
-    {"severity": "warning", "path": "detail[22].category", "page": 5, "extracted": "streets/highways", "on_page": "Public Works: Noxious Weed Control 58,731", "issue": "The extractor rules list noxious weed control under natural resources/conservation. Here it follows the statement's Public Works heading, which is defensible and marked review."},
-    {"severity": "warning", "path": "detail[42].detail_category", "page": 14, "extracted": "Other / Miscellaneous Receipts", "on_page": "Miscellaneous 13,953 (Keno Lottery Fund 8,598, Opioid Settlement 3,039, Library Memorial 1,708, Library 383, Visitor Promotion 225; pp12-14)", "issue": "Keno 8,598 is 62% of this nonmajor Miscellaneous line. The dominant-category rule would point to keno/lottery. A user category decision was applied, so this is left as a warning."}
+    {"severity": "warning", "path": "detail[0].original_label", "page": 4,
+     "extracted": "Taxes (detail[0], detail[1], detail[2])", "on_page": "Property 1,510,222 / Motor Vehicle 96,331 / Other 8,978 (General Fund column, p4)",
+     "issue": "Split of General Fund budget-schedule Taxes 1,615,531 (p5) is proven (the General Fund column on p4 prints the same fund's taxes by type and ties exactly), but the split items keep the label 'Taxes' instead of the printed breakdown labels, which the tax-split standard asks for"},
+    {"severity": "warning", "path": "receipts[3].category", "page": 4,
+     "extracted": "taxes (unlabeled)", "on_page": "Taxes: Other 52,156",
+     "issue": "Restored line matches the printed line exactly (label, amount, p4) and leaving it unsplit is correct: neither fund piece (General 8,978, Nonmajor 43,178) matches a printed tax-type line. But the same printed label 'Other' under Taxes is 'other taxes' for General Fund detail[2] and 'lodging tax' for nonmajor detail[38], so the same label gets three categories in one report"},
+    {"severity": "warning", "path": "detail[38].category", "page": 14,
+     "extracted": "lodging tax", "on_page": "Taxes: Other 43,178 (Visitor Promotion Fund 21,589 + Visitor Improvement Fund 21,589, p12)",
+     "issue": "The category rests only on the fund names (and statute). Nothing in the trimmed PDF or the full report's notes says lodging, so under the evidence standard ('fund names alone are never evidence') this is unproven. The statement line for the same money stays taxes (unlabeled)"},
+    {"severity": "warning", "path": "detail[22].category", "page": 5,
+     "extracted": "streets/highways", "on_page": "Public Works: Noxious Weed Control 58,731",
+     "issue": "Category rules list noxious weed control under natural resources/conservation (Loup County records the same kind of line that way). The report itself prints it under the Public Works heading"},
+    {"severity": "warning", "path": "detail[42].category", "page": 14,
+     "extracted": "other", "on_page": "Miscellaneous 13,953 (Keno Lottery Fund 8,598, p14)",
+     "issue": "62% of the nonmajor Miscellaneous line is the Keno Lottery Fund's receipts, so keno/lottery would be the dominant category. The line carries the user's category decision, so it is left as a warning"}
   ]
 }
