@@ -1,24 +1,18 @@
 {
   "stem": "Adams_County_FY2025",
-  "values_checked": 215,
+  "values_checked": 212,
   "issues": [
-    {"severity": "warning", "path": "receipts[5].category", "page": 4,
-     "extracted": "investment income", "on_page": "Investment income 1,109,343 (p4); the same money is '1510'-style 'Interest' 1,109,343 on the General Fund schedule (p5)",
-     "issue": "The statement line is categorized investment income, but detail[4] puts the same 1,109,343 in Interest Income. The p5 schedule shows it is interest, so Interest Income would be consistent."},
-    {"severity": "warning", "path": "detail[134].budget_final", "page": 14,
-     "extracted": null, "on_page": "Debt service: budget 4,721,018, actual 2,684,510",
-     "issue": "The printed final budget 4,721,018 is dropped: both split items (detail[134], detail[135]) have budget_final null. The split 1,325,000 + 1,359,510 = 2,684,510 is correct per p4."},
-    {"severity": "warning", "path": "detail[146].category", "page": 22,
-     "extracted": "other", "on_page": "Miscellaneous 1,307,738 = Visitors Promotion 5,327 + Health 385,690 + Escrow 898,012 + Keno 18,708 + Courthouse Bond 1 (pp21-22)",
-     "issue": "The combining schedule prints a Keno Fund column with 18,708 of this line (also receipts[8] Miscellaneous 1,832,273 includes it). Keno has its own category (keno/lottery). Keeping the whole Total-column line in other is defensible under the >6-funds rule, but the keno part is identifiable."},
-    {"severity": "warning", "path": "detail[143].category", "page": 22,
-     "extracted": "taxes (unlabeled)", "on_page": "Taxes 1,047,967 = Visitors Promotion 209,214 + Visitors Improvement 104,607 + Library 208,149 + Highway Bond 525,997 (pp17-18, 21-22)",
-     "issue": "The visitor funds' taxes (313,821) equal Lodging 313,821 on p2, so the lodging part is identifiable. The page never labels the split, so unlabeled is defensible."},
-    {"severity": "warning", "path": "detail", "page": 17,
-     "extracted": "nonmajor detail from the combining schedule Total column (p22) only", "on_page": "Nonmajor budgetary comparison schedule pp17-20 lists each fund's lines with budgets",
-     "issue": "pp17-20 are left out to avoid double counting. This follows the >6-funds rule, and the totals tie (2,719,955 - 34,028 = 2,685,927; 3,159,708 - 122,807 = 3,036,901), but the per-fund object lines and budgets are not captured."},
+    {"severity": "warning", "path": "detail[102].category", "page": 10,
+     "extracted": "natural resources/conservation", "on_page": "Noxious Weed listed under Public Works (Total Public Works 132,893; p4 General Fund Public Works 132,893)",
+     "issue": "Noxious Weed lines (88,273 / 5,839 / 9,216) are categorized natural resources/conservation per the category list, but the report places them under Public Works, so the General Fund detail by function will not tie to the p4 Public Works column (detail streets/highways 29,565 vs 132,893). Defensible either way."},
+    {"severity": "warning", "path": "detail[113].category", "page": 12,
+     "extracted": "taxes (unlabeled) 8,193", "on_page": "Road/Bridge budget schedule Taxes 8,193; p4 Road/Bridge column Taxes '-', Charges for services 36,046 (= 8,193 + 27,854 - 1)",
+     "issue": "The governmental funds statement reports no taxes in the Road/Bridge Fund; this 8,193 appears to be counted there as charges for services. Kept as printed on the budget schedule, which is acceptable, but the label and category may mislead."},
     {"severity": "warning", "path": "detail[123].original_label", "page": 12,
-     "extracted": "Capital outlay", "on_page": "Capital outlay 2,991,587 (Road/Bridge)",
-     "issue": "The General Fund capital outlay lines are relabelled 'Capital Outlay: <function>', but the Road/Bridge (detail[123]), Law Enforcement Center (detail[138]) and ARPA (detail[142]) capital outlay lines are not. The rule is inconsistently applied (user_rules.py should normalize it)."}
+     "extracted": "Capital outlay", "on_page": "Capital outlay 2,991,587",
+     "issue": "Standalone capital outlay lines in category capital outlay are not relabelled 'Capital Outlay: <function>' (also detail[138] LEC 1,911,892 p15, detail[142] ARPA 1,240,940 p16, detail[152] nonmajor 600,000 p22). The user rule (2026-10-28) covers these; user_rules.py should apply it."},
+    {"severity": "warning", "path": "detail", "page": 17,
+     "extracted": "nonmajor funds recorded from combining schedule Total column (p22), function-level only", "on_page": "Nonmajor budgetary comparison schedule pp17-20 prints per-fund object lines (e.g. Visitors Promotion and Improvement: Personnel services 68,538, Operating expenses 178,829...; Health Fund Personnel services 512,864)",
+     "issue": "The budget schedule is more detailed by object than the combining Total column. Choosing the combining schedule avoids the transfers mixed into the budget schedule's receipts/disbursements (34,028 in / 122,807 out) and ties to p4, so the choice is defensible, but some object detail is not captured."}
   ]
 }
