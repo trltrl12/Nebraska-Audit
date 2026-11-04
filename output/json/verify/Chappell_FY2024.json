@@ -1,0 +1,27 @@
+{
+  "stem": "Chappell_FY2024",
+  "values_checked": 330,
+  "issues": [
+    {"severity": "warning", "path": "disbursements[24]", "page": 5,
+     "extracted": "debt service (principal and interest combined) 198,759.40, outside_printed_total", "on_page": "OTHER FINANCING SOURCES (USES): Note Payment (198,759.40)",
+     "issue": "The statement prints this in other financing uses, below total expenditures; the extractor moved it into disbursements. The General Fund schedule (p14, 'Debt Service and bond issue cost', Street) and the Statement of Activities (p2, 'Interest expense and bond fees' 198,759.40) support treating it as spending. However, the SoA calls it interest and fees, not combined principal and interest. The identity still ties. Confirm the treatment."},
+    {"severity": "warning", "path": "receipts[12].category", "page": 4,
+     "extracted": "intergovernmental/state aid", "on_page": "Grants and donations 154,262.96",
+     "issue": "The source is mixed or unspecified (grants and donations). It could be partly donations/contributions. The detail line on p13 is the same."},
+    {"severity": "warning", "path": "disbursements[8].category", "page": 4,
+     "extracted": "Community Betterment", "on_page": "Community improvement 135,669.17",
+     "issue": "The printed label is 'Community improvement', not community betterment. The schedule (p14) puts it in the General department and the SoA counts it in General Government; general government or economic development may fit."},
+    {"severity": "warning", "path": "disbursements[33].category", "page": 8,
+     "extracted": "other", "on_page": "Licenses, fees, and permits 13,743.99",
+     "issue": "The same label is categorized inconsistently. At top level it is 'other'; in detail (Electric, Water, Sewer, detail[89], [109], [128]) it is 'Dues, Training and Travel'; in General Fund detail it is 'dues, training and travel'. Pick one."},
+    {"severity": "warning", "path": "detail[95].detail_category", "page": 8,
+     "extracted": "tax refunds/treasurer fees", "on_page": "Taxes 5,360.76 (Electric)",
+     "issue": "These are taxes paid by enterprise funds (likely sales tax remitted), not tax refunds or treasurer fees. The same applies to the Water, Sewer, Golf, Ambulance and Waste 'Taxes' detail lines."},
+    {"severity": "warning", "path": "disbursements[42].function", "page": 8,
+     "extracted": "Purchased Power/Cost of Sales, function utilities", "on_page": "Merchandise 6,746.92; Concessions 37,375.80; Chemicals 9,830.84 (Golf column only)",
+     "issue": "These business-type lines (disbursements[42], [43], [26]) come entirely from the Golf Fund but are tagged function 'utilities'. Golf detail lines use culture/recreation."},
+    {"severity": "warning", "path": "disbursements[15].category", "page": 4,
+     "extracted": "general government", "on_page": "Animal control 5,974.22",
+     "issue": "The schedule (p14) places it in the General department, but animal control is usually public safety."}
+  ]
+}
