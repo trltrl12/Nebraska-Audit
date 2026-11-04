@@ -1,0 +1,18 @@
+{
+  "stem": "Carroll_FY2024",
+  "values_checked": 47,
+  "issues": [
+    {"severity": "warning", "path": "disbursements[7].amount", "page": 2,
+     "extracted": 34264.82, "on_page": "Wastewater: Enterprise Funds column 34,254.82; TOTAL column 34,264.82",
+     "issue": "The report doesn't add up internally. The Enterprise column's lines sum to 109,435.27 against its printed line 52 of 109,445.27. The Total column figure 34,264.82 ties to line 52 and the roll-forward. This is correctly recorded in report_discrepancies (10.00). Same figure in detail[2]."},
+    {"severity": "warning", "path": "disbursements[3].category", "page": 2,
+     "extracted": "streets/highways", "on_page": "Public Works - Other 18,185.51 (General Fund column)",
+     "issue": "Function assumed. 'Public Works - Other' is printed separately from 'Public Works - Streets' and paid from the General Fund, so it may not be street spending."},
+    {"severity": "warning", "path": "receipts[10].category", "page": 1,
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other (Enterprise Funds column) 140,408.38",
+     "issue": "Printed label is 'Local Receipts: Other' with no breakdown. Utility Charges is inferred from the enterprise fund (defensible but assumed). Same in detail[0]."},
+    {"severity": "warning", "path": "detail", "page": 1,
+     "extracted": "4 lines, Enterprise Funds column only", "on_page": "All-funds statement only, no supplementary schedule; General, Street, Special Revenue columns not in detail",
+     "issue": "Per-fund detail rule: with no supplementary schedule detail stays empty; with only a combined statement it is one line per fund column for all funds. Only the business-type column is entered."}
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "stem": "Burchard_FY2024",
+  "values_checked": 45,
+  "issues": [
+    {"severity": "warning", "path": "receipts[8].category", "page": 1,
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other (Water 29,887.55, Sewer 6,524.46, Sanitation 7,495.02)",
+     "issue": "Printed label is 'Local Receipts: Other'; Utility Charges is a presumption from the fund names (defensible, but nothing on the page says these are user charges). Same assumption in detail[0..2] (water/sewer/refuse charges)."},
+    {"severity": "warning", "path": "detail", "page": 1,
+     "extracted": "6 lines, business-type fund columns only (Water, Sewer, Sanitation)", "on_page": "All-funds statement only, no supplementary schedule; governmental fund columns General, Street, Park, Police and Fire not in detail",
+     "issue": "Per-fund detail rule: with no supplementary schedule detail stays empty; with only a combined statement it is one line per fund column for all funds. Detail here covers only the business-type columns, which matches neither reading."},
+    {"severity": "warning", "path": "decision_needed", "page": 6,
+     "extracted": null, "on_page": "Crossed-out schedule page listing 'US DEPT OF AG 76,773.57' as an investment",
+     "issue": "The extraction treats page 6 as void and leaves it out (reasonable, since it is struck through and p5 lists the same amount as USDA debt). A possibly voided page is one of the listed questions for a person, though, and there is no decision_needed entry. Also note p5 prints a final maturity date of 2/7/1958, before the 2018 issue date (a typo in the report)."}
+  ]
+}

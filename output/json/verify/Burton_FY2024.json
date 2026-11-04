@@ -1,0 +1,15 @@
+{
+  "stem": "Burton_FY2024",
+  "values_checked": 20,
+  "issues": [
+    {"severity": "warning", "path": "receipts[2].category", "page": 1,
+     "extracted": "other", "on_page": "Local Receipts: Other 1,043.15 (General 945.39, Street 97.76)",
+     "issue": "The General Fund's 945.39 equals the exact growth of the General Fund CD (investments 15,025.41 -> 15,970.80, line 2 vs line 27; p3 lists only 'General Fund CD'), and the General Fund's net cash change (-109.27) equals state aid 307.98 minus disbursements 417.25. So the 945.39 is almost certainly reinvested CD interest (Interest Income). The page doesn't print this, so 'other' is defensible as printed. Flagged for a person to decide."},
+    {"severity": "warning", "path": "disbursements[4]", "page": 2,
+     "extracted": "fund_type governmental, category utilities", "on_page": "Line 44 Electric Utility 583.81 (General 349.81, Street 234.00), printed under Business-Type Activities",
+     "issue": "Paid from governmental funds, so fund_type governmental is reasonable. Category 'utilities' is a judgment call: these look like the village's power bills (the Street Fund part may be street lighting, i.e. streets/highways). The village has no utility enterprise."},
+    {"severity": "warning", "path": "beginning_cash", "page": 1,
+     "extracted": 33770.26, "on_page": "Line 3 Subtotal of Beginning Balance 33,770.26 (Net Cash 18,744.85 + Investments 15,025.41)",
+     "issue": "Cash fields are the line 3 / line 28 subtotals (cash plus investments), and beginning/ending_investments repeat the investment part as informational. This follows the cash-basis rule ('cash and investments'; investments not added), but anything that adds cash and investments together would double count 15,025.41 / 15,970.80."}
+  ]
+}

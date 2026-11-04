@@ -1,0 +1,21 @@
+{
+  "stem": "Bushnell_FY2024",
+  "values_checked": 44,
+  "issues": [
+    {"severity": "warning", "path": "receipts[6].category", "page": 1,
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other (Water Fund 25,677.54; Sewer Fund 10,954.93)",
+     "issue": "Printed label is 'Local Receipts: Other' with no breakdown. Utility Charges is inferred from the fund names. Also, the p5 transfer schedule shows Pump Emergency -> Sewer 5,000.00, but the Sewer column has no transfer-in line, so that transfer may sit inside the Sewer 10,954.93 as revenue. Applies to receipts[7] and detail[0], detail[2] too."},
+    {"severity": "warning", "path": "transfers_out", "page": 5,
+     "extracted": 26151.0, "on_page": "Transfer schedule: Water Project -> USDA 10,051.00; Checking -> Pump Emergency 11,100.00; Pump Emergency -> Sewer 5,000.00 (total 26,151.00)",
+     "issue": "The report's transfers (in and out, both in the Savings column) include 10,051 paid to USDA. That is a debt payment, also printed separately as line 39 Debt Service 10,051 in the same column, and the 5,000 to Sewer never shows as a Sewer transfer in. The page arithmetic holds and in/out offset, so the figures are as printed, but the report's own transfer amounts are internally inconsistent. Worth recording in report_discrepancies."},
+    {"severity": "warning", "path": "disbursements[2].category", "page": 2,
+     "extracted": "health/welfare", "on_page": "Public Works - Other 5,256.03 (Cemetery Park Fund column)",
+     "issue": "Cemetery assumed. The fund is Cemetery Park and the label says Public Works, so it could be parks (culture/recreation) or streets/public works."},
+    {"severity": "warning", "path": "detail", "page": 1,
+     "extracted": "4 lines, Water and Sewer fund columns only", "on_page": "All-funds statement only, no supplementary schedule; General, Street, Cemetery Park, Savings columns not in detail",
+     "issue": "Per-fund detail rule: with no supplementary schedule detail stays empty; with only a combined statement it is one line per fund column for all funds. Only the business-type columns are entered."},
+    {"severity": "warning", "path": "report_discrepancies", "page": 3,
+     "extracted": null, "on_page": "Crossed-out original Exhibit A (pp3-4): General beginning net cash 31,635.38 vs revised 31,072.39; General Local Receipts: Other 33,038.01 vs 33,601.00; Savings 10,051.00 as Transfers Out of Surplus Fees instead of Debt Service",
+     "issue": "The extraction correctly uses the REVISED pp1-2 and ignores the crossed-out pp3-4. The differing figures are only in notes, though, not in report_discrepancies (the void-version rule says to record them there)."}
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "stem": "Carleton_FY2024",
+  "values_checked": 43,
+  "issues": [
+    {"severity": "warning", "path": "receipts[9].category", "page": 1,
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other (Utilities Fund column) 46,494.74",
+     "issue": "Printed label is 'Local Receipts: Other' with no breakdown. Utility Charges is inferred from the fund name (defensible but assumed). Same in detail[0]."},
+    {"severity": "warning", "path": "receipts[8].category", "page": 1,
+     "extracted": "other", "on_page": "Local Receipts: Other: General 30,890.68, Cemetery 236.79, Cemetery Endowment 600.00, TIF Fund 42,157.05",
+     "issue": "The TIF Fund's 42,157.05 (57% of the line) is very likely tax increment (property tax), but it is printed as Local Receipts: Other, not a tax line. Under the tax-split rule the fund name doesn't make non-tax lines a tax, so 'other' is defensible. A person may want to decide."},
+    {"severity": "warning", "path": "detail", "page": 1,
+     "extracted": "4 lines, Utilities Fund column only", "on_page": "All-funds statement only, no supplementary schedule; General, Street, Cemetery, Cemetery Endowment, TIF columns not in detail",
+     "issue": "Per-fund detail rule: with no supplementary schedule detail stays empty; with only a combined statement it is one line per fund column for all funds. Only the business-type column is entered."}
+  ]
+}
