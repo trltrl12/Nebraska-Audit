@@ -158,11 +158,11 @@ def utility_object_rule(d, log):
 
 # --- balance sheet ---
 DEFERRED = {
-    "deferred_outflows": [(r"refund", "Deferred Loss on Refunding"),
+    "deferred_outflows": [(r"refunding", "Deferred Loss on Refunding"),
                           (r"\bOPEB\b|postemployment", "Deferred Outflows for Other Postemployment Benefits"),
                           (r"pension|cash balance plan", "Deferred Outflows for Pensions")],
     "deferred_inflows": [(r"liabilit", None),
-                         (r"refund", "Deferred Gain on Refunding"),
+                         (r"refunding", "Deferred Gain on Refunding"),
                          (r"leas|lessor", "Deferred Inflows for Leases"),
                          (r"\bOPEB\b|postemployment", "Deferred Inflows for Other Postemployment Benefits"),
                          (r"pension", "Deferred Inflows for Pensions")],
