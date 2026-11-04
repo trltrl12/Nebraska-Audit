@@ -1,10 +1,16 @@
 {
   "stem": "Valley_FY2025",
-  "values_checked": 158,
+  "values_checked": 160,
   "issues": [
     {"severity": "warning", "path": "receipts[0].original_label", "page": 2,
      "extracted": "Taxes (Sales Tax fund)", "on_page": "Sales 2,146,735 (Statement of Activities, general revenues: Taxes - Sales)",
      "issue": "The kept sales-tax piece is proven: the Sales Tax fund column of Taxes (p4) is 2,146,735, exactly equal to the Statement of Activities 'Sales' 2,146,735 (p2). But the evidence standard says original_label should be the printed breakdown label ('Sales'); 'Taxes (Sales Tax fund)' is not printed anywhere. The amount, split_from and category are correct."},
+    {"severity": "warning", "path": "receipts[1].original_label", "page": 4,
+     "extracted": "Taxes (General, Bond, TIF funds)", "on_page": "Taxes (p4 row label); SoA breakdown label 'Property' (p2)",
+     "issue": "The relaxed pass changed this label from 'Taxes' to 'Taxes (General, Bond, TIF funds)', which is not printed anywhere. Use 'Taxes', the printed row label, or 'Property', the breakdown label. The amount and category are supported (see the next issue)."},
+    {"severity": "warning", "path": "receipts[1].computed", "page": 2,
+     "extracted": "property tax 8,940,030 = Taxes 11,086,765 - Sales Tax fund 2,146,735", "on_page": "p4 Taxes: General 2,502,807 + Bond 379,812 + Sales Tax 2,146,735 + TIF 6,057,411 = 11,086,765; p2 SoA taxes: Property 8,967,603, Sales 2,146,735 (Intergovernmental 554,803 = fund Intergovernmental line)",
+     "issue": "Classification supported under the relaxed subtraction rule. The subtraction is exact, sales tax is proven entirely in the Sales Tax fund (fund column = SoA Sales), and the SoA's only other tax type is Property, so the statements establish the remainder as property. The remainder is 27,573 below SoA Property. The trimmed pages support this being a property-tax accrual: the only deferred inflow is 'Unavailable revenue - taxes receivable' 46,441, held in the General and Bond funds, and the Sales Tax fund has none. The cited reconciliation (full PDF p19), though, is not in the trimmed PDF, so the exact 27,573 attribution could not be confirmed here."},
     {"severity": "warning", "path": "disbursements[4].category", "page": 4,
      "extracted": "economic development", "on_page": "Community development 98,078 (Keno fund; SoA function 'Keno'; fund balance 'Restricted for Community betterment')",
      "issue": "The line is all Keno fund spending, and the Keno fund balance is restricted for community betterment. Under the user's 2026-10-29 rule this could be Community Betterment rather than economic development. Same question for detail[12]."},

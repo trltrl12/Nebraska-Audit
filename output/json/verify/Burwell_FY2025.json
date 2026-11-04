@@ -2,38 +2,85 @@
   "stem": "Burwell_FY2025",
   "values_checked": 196,
   "issues": [
-    {"severity": "error", "path": "receipts[5].category", "page": 6,
-     "extracted": "charges for services/fees", "on_page": "User fees 2,314,079 (Electric 1,738,240, Water 200,022, Sewer 198,137, Other Enterprise/Sanitation 177,680)",
-     "issue": "[fixed 2026-10-28: category set to Utility Charges] These are utility fund sales (electric, water, sewer and sanitation). The user rule (2026-10-28) makes them category Utility Charges, out of charges for services. The same label's detail lines (Electric/Water/Sewer) already carry Utility Charges, so the report is also inconsistent with itself."},
-    {"severity": "error", "path": "receipts[6].category", "page": 6,
-     "extracted": "charges for services/fees", "on_page": "Bulk power sales 81,586 (Electric)",
-     "issue": "[fixed 2026-10-28: category set to Utility Charges] This is an electric fund sale, so the user rule gives Utility Charges. The matching detail line (Electric Fund Bulk power sales) is already Utility Charges."},
-    {"severity": "error", "path": "detail[41].category", "page": 6,
-     "extracted": "charges for services/fees", "on_page": "Other Enterprise: User fees 177,680 (p2: Sanitation charges 178,738)",
-     "issue": "[fixed 2026-10-28: category set to Utility Charges, detail_category refuse/sanitation charges] The Other Enterprise column is sanitation (p2), so these are garbage/refuse charges, which the user rule puts in Utility Charges. The other three User fees detail lines are Utility Charges."},
-    {"severity": "warning", "path": "receipts[3].category", "page": 4,
-     "extracted": "donations/contributions", "on_page": "Grants and donations 594,305 (p2: operating grants 59,683 + capital grants 534,622; 553,137 is in the Local Option Sales Tax fund)",
-     "issue": "Mixed grants and donations line with no stated source. The large capital grant for the public welfare project (529,887) may be government money. This is already in decision_needed."},
-    {"severity": "warning", "path": "other_financing", "page": 4,
-     "extracted": -26332, "on_page": "Capital contributions (27,625) + Proceeds from sale 1,293; total other financing sources (uses) (26,332)",
-     "issue": "p2 labels the (27,625) 'Contributions - internal activities', and it matches business-type Capital contributions (net) +27,625 on p6. It is an internal transfer between governmental and business-type activities and arguably belongs in transfers_out / business_type.transfers_net. The arithmetic and computed marking are correct."},
-    {"severity": "warning", "path": "business_type.other_financing", "page": 6,
-     "extracted": 27625, "on_page": "CAPITAL CONTRIBUTIONS (NET) 27,625",
-     "issue": "The amount matches the page. It is the business-type side of the internal contribution from governmental funds (p2), so it is arguably transfers_net rather than other_financing."},
-    {"severity": "warning", "path": "detail[66].detail_category", "page": 6,
-     "extracted": "utilities (power, gas, phone)", "on_page": "Electric: Utilities 1,133,832 (62% of electric operating revenue)",
-     "issue": "In the electric fund, a 1.13M 'Utilities' line is almost certainly wholesale purchased power (purchased power/cost of sales), not utility bills. It was kept as printed because the label doesn't say so."},
-    {"severity": "warning", "path": "disbursements[16].category", "page": 6,
-     "extracted": "other", "on_page": "ARPA funds 42,207 (Water)",
-     "issue": "[fixed 2026-10-28: review note added to disbursements[16] and detail[96]] Category 'other' (and detail[96] 'miscellaneous expenditure') carries no review note, although the rules require one for last-resort categories. The line names a funding source, not an object."},
-    {"severity": "warning", "path": "ending_investments", "page": 3,
-     "extracted": 499331, "on_page": "Certificates of deposit 499,331 (inside Total assets / fund balances 2,441,972)",
-     "issue": "ending_cash 2,441,972 already includes the certificates of deposit. ending_investments is informational, and anything that adds it to cash will count it twice."},
-    {"severity": "warning", "path": "disbursements[5].category", "page": 4,
-     "extracted": "general government", "on_page": "Studies and research 18,635 (Infrastructure fund; p2 'Infrastructure')",
-     "issue": "Category is a guess. Infrastructure studies could equally be streets/highways or economic development."},
-    {"severity": "warning", "path": "detail[4].category", "page": 4,
-     "extracted": "sales tax", "on_page": "Infrastructure: Taxes 80,504 (p4)",
-     "issue": "The fund name 'Infrastructure' does not identify a tax. The classification rests only on note A in the full PDF (p12: the fund gets 22% of the 1.5% city sales tax), which is not in the trimmed PDF and not available locally, so I could not see it. The figures back it up: 80,504 = 164,668 x 22/45 exactly (the Local Option Sales Tax fund gets 45%). The same applies to the 80,504 inside receipts[0] (245,172 = 164,668 + 80,504; with the 768,485 remainder it adds to Taxes 1,013,657 exactly). The original_labels 'Infrastructure Fund Taxes', 'Local Option Sales Tax Fund Taxes' and 'Local Option Sales Tax and Infrastructure Fund Taxes' are made up (the page prints 'Taxes'), though printed_label keeps 'Taxes' on the detail lines."}
+    {
+      "severity": "error",
+      "path": "receipts[5].category",
+      "page": 6,
+      "extracted": "charges for services/fees",
+      "on_page": "User fees 2,314,079 (Electric 1,738,240, Water 200,022, Sewer 198,137, Other Enterprise/Sanitation 177,680)",
+      "issue": "[fixed 2026-10-28: category set to Utility Charges] These are utility fund sales (electric, water, sewer and sanitation). The user rule (2026-10-28) makes them category Utility Charges, out of charges for services. The same label's detail lines (Electric/Water/Sewer) already carry Utility Charges, so the report is also inconsistent with itself."
+    },
+    {
+      "severity": "error",
+      "path": "receipts[6].category",
+      "page": 6,
+      "extracted": "charges for services/fees",
+      "on_page": "Bulk power sales 81,586 (Electric)",
+      "issue": "[fixed 2026-10-28: category set to Utility Charges] This is an electric fund sale, so the user rule gives Utility Charges. The matching detail line (Electric Fund Bulk power sales) is already Utility Charges."
+    },
+    {
+      "severity": "error",
+      "path": "detail[41].category",
+      "page": 6,
+      "extracted": "charges for services/fees",
+      "on_page": "Other Enterprise: User fees 177,680 (p2: Sanitation charges 178,738)",
+      "issue": "[fixed 2026-10-28: category set to Utility Charges, detail_category refuse/sanitation charges] The Other Enterprise column is sanitation (p2), so these are garbage/refuse charges, which the user rule puts in Utility Charges. The other three User fees detail lines are Utility Charges."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[3].category",
+      "page": 4,
+      "extracted": "donations/contributions",
+      "on_page": "Grants and donations 594,305 (p2: operating grants 59,683 + capital grants 534,622; 553,137 is in the Local Option Sales Tax fund)",
+      "issue": "Mixed grants and donations line with no stated source. The large capital grant for the public welfare project (529,887) may be government money. This is already in decision_needed."
+    },
+    {
+      "severity": "warning",
+      "path": "other_financing",
+      "page": 4,
+      "extracted": -26332,
+      "on_page": "Capital contributions (27,625) + Proceeds from sale 1,293; total other financing sources (uses) (26,332)",
+      "issue": "p2 labels the (27,625) 'Contributions - internal activities', and it matches business-type Capital contributions (net) +27,625 on p6. It is an internal transfer between governmental and business-type activities and arguably belongs in transfers_out / business_type.transfers_net. The arithmetic and computed marking are correct."
+    },
+    {
+      "severity": "warning",
+      "path": "business_type.other_financing",
+      "page": 6,
+      "extracted": 27625,
+      "on_page": "CAPITAL CONTRIBUTIONS (NET) 27,625",
+      "issue": "The amount matches the page. It is the business-type side of the internal contribution from governmental funds (p2), so it is arguably transfers_net rather than other_financing."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[66].detail_category",
+      "page": 6,
+      "extracted": "utilities (power, gas, phone)",
+      "on_page": "Electric: Utilities 1,133,832 (62% of electric operating revenue)",
+      "issue": "In the electric fund, a 1.13M 'Utilities' line is almost certainly wholesale purchased power (purchased power/cost of sales), not utility bills. It was kept as printed because the label doesn't say so."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[16].category",
+      "page": 6,
+      "extracted": "other",
+      "on_page": "ARPA funds 42,207 (Water)",
+      "issue": "[fixed 2026-10-28: review note added to disbursements[16] and detail[96]] Category 'other' (and detail[96] 'miscellaneous expenditure') carries no review note, although the rules require one for last-resort categories. The line names a funding source, not an object."
+    },
+    {
+      "severity": "warning",
+      "path": "ending_investments",
+      "page": 3,
+      "extracted": 499331,
+      "on_page": "Certificates of deposit 499,331 (inside Total assets / fund balances 2,441,972)",
+      "issue": "ending_cash 2,441,972 already includes the certificates of deposit. ending_investments is informational, and anything that adds it to cash will count it twice."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[5].category",
+      "page": 4,
+      "extracted": "general government",
+      "on_page": "Studies and research 18,635 (Infrastructure fund; p2 'Infrastructure')",
+      "issue": "Category is a guess. Infrastructure studies could equally be streets/highways or economic development."
+    }
   ]
 }
