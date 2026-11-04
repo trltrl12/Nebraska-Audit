@@ -1,9 +1,12 @@
 {
   "stem": "Pawnee_County_FY2025",
-  "values_checked": 205,
+  "values_checked": 190,
   "issues": [
-    {"severity": "warning", "path": "detail[28].amount", "page": 5, "extracted": -1158200, "on_page": "(1,15?,200) - third digit faint, reads like 8", "issue": "Every figure on the same page implies 1,156,200: the variance (4,474) = 1,151,726 - 1,156,200, Total Other Financing (1,127,687) = 28,513 - 1,156,200, and the statement p4 prints (1,156,200); all-fund transfers out also tie only with 1,156,200 (1,156,200 + 25,513 + 3,000 = 1,184,713). The digit may be a 6 in the scan, in which case the report_discrepancies entry (difference 2,000) is spurious. Needs a human look at the source."},
-    {"severity": "warning", "path": "detail[23].category", "page": 5, "extracted": "streets/highways", "on_page": "Public Works: Noxious Weed 10,702", "issue": "Noxious weed control is listed as natural resources/conservation in the category rules; streets/highways follows the report's Public Works heading (defensible, already marked review)."},
-    {"severity": "warning", "path": "detail[58].category", "page": 12, "extracted": "public safety", "on_page": "American Rescue Plan Act Fund Disbursements 43,464; Opioid Settlement Disbursements 10,791", "issue": "Functions for ARPA and Opioid funds are inferred from the nonmajor Public Safety total 98,441 (p8, ties); the combining statement's remaining fund columns (911, Law Enforcement Grant, Veteran's Aid, 1184, Stop, Canine, ARPA, Opioid) are not in the trimmed PDF (p8 shows only Total + 5 funds), so the inference can't be confirmed per fund."}
+    {"severity": "warning", "path": "detail[28].amount", "page": 5,
+     "extracted": -1158200, "on_page": "(1,158,200) or (1,156,200) - low-resolution digit",
+     "issue": "Third digit reads as 8 but the page's own variance (4,474) = 1,151,726 - 1,156,200, its Total Other Financing (1,127,687) = 28,513 - 1,156,200, the statement p4 (1,156,200) and the transfer cross-check (Road-Bridge 1,127,429 + Handi Bus 25,513 + Drug 3,000 + Veterans 258 = 1,156,200) all point to 1,156,200; if the glyph is a 6, the amount and the report_discrepancies entry are wrong"},
+    {"severity": "warning", "path": "detail[35].category", "page": 7,
+     "extracted": "inheritance tax", "on_page": "Inheritance Tax Fund: Taxes 280,606",
+     "issue": "Tax type rests on the fund name only (SoA p2 prints one 'Taxes' line, no inheritance tax line); the same reasoning got the statement split merged back. Same for detail[38] and detail[40] (Visitor Promotion/Improvement 'Taxes' 3,470/3,471 -> lodging tax) and detail[49] (911 Emergency 'Taxes' 7,279 -> other taxes)"}
   ]
 }
