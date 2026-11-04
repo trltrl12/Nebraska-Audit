@@ -2,26 +2,45 @@
   "stem": "Arthur_County_FY2025",
   "values_checked": 92,
   "issues": [
-    {"severity": "error", "path": "detail[4]", "page": 5,
-     "extracted": "Exhibit F 'Local' 103,944 split into charges for services 62,386, interest 35,813, miscellaneous 4,128 and intergovernmental residual 1,617 (detail[4]-detail[7])",
-     "on_page": "Exhibit F prints only the broad group 'Local' 103,944 (budget 67,147)",
-     "issue": "[marked fixed 2026-10-28 (split removed), but re-checked 2026-11-04: the JSON still holds the four split_from 'Local 103,944 (p5)' pieces, including the unprinted 1,617 residual (Exhibit D Intergovernmental 2,502 less Exhibit F State 885)] split_from on a broad budget-schedule group that the page does not break down. Extractor rule: broad groups ('Taxes', 'State', 'Local') are recorded as printed with review 'broad group', not split from another statement."},
-    {"severity": "error", "path": "detail[35].category", "page": 9,
-     "extracted": "charges for services/fees", "on_page": "Register of Deeds P&M - Charges for Services 333",
-     "issue": "[fixed 2026-10-28: category set to Fees of Office] register of deeds fees are Fees of Office, a receipt category of its own (user rule 2026-10-28); detail_category already says fees of office"},
-    {"severity": "warning", "path": "detail[0]", "page": 5,
-     "extracted": "Exhibit F 'Taxes' 384,487 split into Property Tax 350,125 and Motor Vehicle Tax 34,362 (detail[0]-detail[1], now labelled as printed on Exhibit D p4)",
-     "on_page": "Exhibit F prints only 'Taxes' 384,487 (budget 356,529); Exhibit D General column prints Property Taxes 350,125 and Motor Vehicle Tax 34,362",
-     "issue": "split of a broad budget-schedule group using Exhibit D; the parts are printed for the same fund and add up exactly, but the rules prefer recording broad groups as printed. The 2026-11-04 label fix (Property Tax / printed 'Property Taxes', Motor Vehicle Tax, source_page 4) matches Exhibit D."},
-    {"severity": "warning", "path": "detail[30]", "page": 7,
-     "extracted": "Road Fund 'Local' 4,892 split into charges for services 4,762 and miscellaneous 130 (detail[30]-detail[31])",
-     "on_page": "Exhibit G prints only 'Local' 4,892; Exhibit D Road column prints Charges for Services 4,762 and Miscellaneous 130",
-     "issue": "[marked fixed 2026-10-28 (split removed), but the JSON still holds both split_from 'Local 4,892 (p7)' pieces as of 2026-11-04] same broad-group split as above; parts are printed on Exhibit D and tie"},
-    {"severity": "warning", "path": "receipts[5].category", "page": 4,
-     "extracted": "charges for services/fees", "on_page": "Charges for Services 68,502 (Exhibit B: General Government 39,831, Public Safety 2,639, Public Works 4,762, Public Assistance 21,270)",
-     "issue": "county charges for services are largely general-government fees (likely Fees of Office); category kept broad, judgment call"},
-    {"severity": "warning", "path": "detail[22].category", "page": 5,
-     "extracted": "natural resources/conservation", "on_page": "Public Works: Noxious Weed 4,097",
-     "issue": "printed under Public Works and counted in the statement's Public Works line (streets/highways); detail function differs from the statement"}
+    {
+      "severity": "error",
+      "path": "detail[35].category",
+      "page": 9,
+      "extracted": "charges for services/fees",
+      "on_page": "Register of Deeds P&M - Charges for Services 333",
+      "issue": "[fixed 2026-10-28: category set to Fees of Office] register of deeds fees are Fees of Office, a receipt category of its own (user rule 2026-10-28); detail_category already says fees of office"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[0]",
+      "page": 5,
+      "extracted": "Exhibit F 'Taxes' 384,487 split into Property Tax 350,125 and Motor Vehicle Tax 34,362 (detail[0]-detail[1], now labelled as printed on Exhibit D p4)",
+      "on_page": "Exhibit F prints only 'Taxes' 384,487 (budget 356,529); Exhibit D General column prints Property Taxes 350,125 and Motor Vehicle Tax 34,362",
+      "issue": "split of a broad budget-schedule group using Exhibit D; the parts are printed for the same fund and add up exactly, but the rules prefer recording broad groups as printed. The 2026-11-04 label fix (Property Tax / printed 'Property Taxes', Motor Vehicle Tax, source_page 4) matches Exhibit D."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[30]",
+      "page": 7,
+      "extracted": "Road Fund 'Local' 4,892 split into charges for services 4,762 and miscellaneous 130 (detail[30]-detail[31])",
+      "on_page": "Exhibit G prints only 'Local' 4,892; Exhibit D Road column prints Charges for Services 4,762 and Miscellaneous 130",
+      "issue": "[marked fixed 2026-10-28 (split removed), but the JSON still holds both split_from 'Local 4,892 (p7)' pieces as of 2026-11-04] same broad-group split as above; parts are printed on Exhibit D and tie"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[5].category",
+      "page": 4,
+      "extracted": "charges for services/fees",
+      "on_page": "Charges for Services 68,502 (Exhibit B: General Government 39,831, Public Safety 2,639, Public Works 4,762, Public Assistance 21,270)",
+      "issue": "county charges for services are largely general-government fees (likely Fees of Office); category kept broad, judgment call"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[22].category",
+      "page": 5,
+      "extracted": "natural resources/conservation",
+      "on_page": "Public Works: Noxious Weed 4,097",
+      "issue": "printed under Public Works and counted in the statement's Public Works line (streets/highways); detail function differs from the statement"
+    }
   ]
 }
