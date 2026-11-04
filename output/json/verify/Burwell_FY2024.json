@@ -1,0 +1,21 @@
+{
+  "stem": "Burwell_FY2024",
+  "values_checked": 180,
+  "issues": [
+    {"severity": "warning", "path": "receipts[4].category", "page": 4,
+     "extracted": "intergovernmental/state aid (Grants and donations 433,926)", "on_page": "Grants and donations 433,926; Statement of Activities p2: operating grants 39,768, capital grants 394,158 (public welfare 391,700)",
+     "issue": "The report does not say where the grants come from (state, federal or private donations), so the state aid category is a guess. The same applies to the per-fund detail lines detail[3], [15] and [22]."},
+    {"severity": "warning", "path": "detail[46].category", "page": 6,
+     "extracted": "utilities (Electric Utilities 1,059,273)", "on_page": "Utilities 1,059,273 (Electric column)",
+     "issue": "This is 58% of Electric operating expenses, so it is very likely purchased power (Purchased Power/Cost of Sales) rather than utility bills. The same applies to disbursements[15], 1,084,231."},
+    {"severity": "warning", "path": "business_type.other_financing", "page": 6,
+     "extracted": -46488, "on_page": "Capital contributions (net) (46,488); Statement of Activities p2 'Contributions - internal activities' 46,488 / (46,488); budget schedule p8 lists Contributions next to Transfers",
+     "issue": "This is money moving from the Water and Sewer funds to the governmental Debt Service fund (other_financing +46,488). It may be an interfund transfer rather than other financing. It is not counted as revenue or spending either way."},
+    {"severity": "warning", "path": "business_type.measure", "page": 6,
+     "extracted": "net position 3,287,733 -> 3,383,819", "on_page": "Statement of Activities p2 business-type cash basis: beginning 2,147,151, ending 2,444,784; balance sheet p1 business-type 2,444,784",
+     "issue": "The rest of the report is modified cash basis, but the business-type roll-forward uses the accrual-style fund statement (capital assets, depreciation). It does not tie to the cash-basis business-type figures used in the balance sheet."},
+    {"severity": "warning", "path": "balance_sheet.scope", "page": 1,
+     "extracted": "Statement of Net Position - Modified Cash Basis, Total column (incl. business-type)", "on_page": "Governmental funds balance sheet p3 total 2,237,278 = Statement of Net Position governmental column 2,237,278 (Restricted 503,749, Committed 534,823, Assigned 924,920, Unassigned 273,786)",
+     "issue": "The user's balance-sheet ruling (2026-10-27) takes governmental lines from the governmental funds statement, with fund balance by classification, when its totals equal the government-wide figures. Here they do, but the Statement of Net Position Total column was used instead. That is defensible because the report has business-type funds."}
+  ]
+}

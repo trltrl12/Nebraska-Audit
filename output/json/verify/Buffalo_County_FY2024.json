@@ -1,0 +1,24 @@
+{
+  "stem": "Buffalo_County_FY2024",
+  "values_checked": 156,
+  "issues": [
+    {"severity": "warning", "path": "receipts[6].category", "page": 4,
+     "extracted": "other (Other 10,672,326)", "on_page": "Inheritance Fund column Other 1,429,625; Statement of Activities p2 Inheritance 1,429,625",
+     "issue": "The statement 'Other' line includes 1,429,625 of inheritance tax (Inheritance Tax Fund column, tied to the Statement of Activities). It could be split out as an inheritance tax piece. The rest is a mixed group, so keeping it whole is defensible."},
+    {"severity": "warning", "path": "detail[1].category", "page": 5,
+     "extracted": "other (General Fund Local 5,197,333)", "on_page": "Statement of Activities p2: fees and charges for services 3,142,175 (general government 2,569,585, public safety 543,044)",
+     "issue": "The Statement of Activities suggests charges for services may be more than half of the General Fund 'Local' line. The category follows the user's decision for 'local' (other), so this is a judgment call."},
+    {"severity": "warning", "path": "detail[97].category", "page": 11,
+     "extracted": "other (Health Reserve Local 3,661,382)", "on_page": "Statement of Activities p2: Public health, Operating Grants and Contributions 3,661,382",
+     "issue": "The report classifies this exact amount as operating grants and contributions (probably employee health premium contributions). It could be donations/contributions rather than other."},
+    {"severity": "warning", "path": "detail[86].category", "page": 9,
+     "extracted": "Sale of Property", "on_page": "Local 38,795",
+     "issue": "The printed label is 'Local'. The category comes only from the amount matching Statement of Activities 'Sale of surplus property' 38,795 (p2). This is defensible but inferred."},
+    {"severity": "warning", "path": "detail[115].original_label", "page": 14,
+     "extracted": "Transfers In +550,000", "on_page": "Transfers out 550,000 (positive; County Bond 350,000, County Weed 200,000)",
+     "issue": "The combining schedule prints the inflow on its 'Transfers out' row. Recording it as Transfers In matches statement p4, but this mislabel in the report is not listed in report_discrepancies, and user_rules.py may relabel it from printed_label."},
+    {"severity": "warning", "path": "detail[108].amount", "page": 14,
+     "extracted": "Public Works 1,788,034 / Culture and Recreation 1,932,780 (detail[111])", "on_page": "statement p4 Other Governmental Funds: Public Works 1,932,780, Culture and Recreation 1,788,034",
+     "issue": "The combining schedule Totals and the governmental funds statement swap these two function amounts. The report contradicts itself, and this is only in review notes, not in report_discrepancies."}
+  ]
+}
