@@ -1,12 +1,18 @@
 {
   "stem": "Merrick_County_FY2025",
-  "values_checked": 142,
+  "values_checked": 147,
   "issues": [
     {"severity": "warning", "path": "detail[27].detail_category", "page": 7,
      "extracted": "highway allocation", "on_page": "Intergovernmental 2,160,605 (Road Fund)",
      "issue": "Assumed highway allocation for a broad 'Intergovernmental' line (already marked review); may include other state/federal road money."},
     {"severity": "warning", "path": "receipts[0].category", "page": 4,
      "extracted": "charges for services/fees", "on_page": "Charges for Services 444,480; Statement of Activities (p2) shows General Government fees, fines and charges 375,075 of it",
-     "issue": "For a county much of this is likely Fees of Office; the page does not label it, so charges for services is defensible. Same for detail[3] (General Fund 401,020)."}
+     "issue": "For a county much of this is likely Fees of Office; the page does not label it, so charges for services is defensible. Same for detail[3] (General Fund 401,020)."},
+    {"severity": "warning", "path": "receipts[2].original_label", "page": 4,
+     "extracted": "Inheritance Fund Taxes / Visitors Promotion Fund Taxes (receipts[2], receipts[3])", "on_page": "Taxes (Inheritance Fund column p4; Visitors Promotion Fund column p14)",
+     "issue": "Fund-name tax split is supported (inheritance 434,543, lodging 6,802; pieces sum to 6,401,224), but the original_label is a constructed label, not printed text, and no printed_label 'Taxes' is kept"},
+    {"severity": "warning", "path": "detail[37].original_label", "page": 14,
+     "extracted": "Visitors Promotion Fund Taxes", "on_page": "Taxes 6,802 (Visitors Promotion Fund column)",
+     "issue": "Constructed label with no printed_label 'Taxes' (detail[32] Inheritance keeps printed_label 'Taxes'); split itself is supported (6,802 + 225,695 = 232,497, p19)"}
   ]
 }
