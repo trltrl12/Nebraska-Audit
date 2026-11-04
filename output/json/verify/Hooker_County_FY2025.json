@@ -1,16 +1,25 @@
 {
   "stem": "Hooker_County_FY2025",
-  "values_checked": 102,
+  "values_checked": 150,
   "issues": [
-    {"severity": "warning", "path": "detail[0].split_from", "page": 8,
-     "extracted": "Taxes 864,071 split into property tax 820,926 / motor vehicle tax 43,145",
-     "on_page": "Taxes 864,071 (one line); p2 Statement of Activities prints Property 820,926 and Motor vehicle 43,145 for all governmental funds",
-     "issue": "The split uses the government-wide breakdown, not one printed for the General Fund line. It ties exactly because only the General Fund has non-lodging taxes, so it is defensible, but the schedule itself doesn't print the split."},
-    {"severity": "warning", "path": "receipts[5].category", "page": 2,
-     "extracted": "charges for services/fees", "on_page": "Charges for Services 43,183 (general government 16,080, public safety 21,976, public works 75, public assistance 5,052)",
-     "issue": "The general government charges are probably county officers' fees (Fees of Office). The report doesn't break them out, so the broad category is defensible."},
-    {"severity": "warning", "path": "detail (Combining - Non-Major Governmental Funds)", "page": 6,
-     "extracted": "per-fund lines for 7 of 8 non-major funds", "on_page": "8 fund columns plus Total Non-Major Funds (receipts 131,688, disbursements 133,793)",
-     "issue": "The rule says a combining schedule with more than 6 funds uses its Total column (fund = 'Nonmajor funds (combined)'). The per-fund lines tie to the Total column (Road Equipment is all zero), so nothing is lost, but this departs from the rule."}
+    {"severity": "warning", "path": "receipts[0].original_label", "page": 2,
+     "extracted": "Taxes (source_page 4)", "on_page": "Taxes: Property 820,926 (p2)",
+     "issue": "The split is fully proven: Property 820,926 + Motor vehicle 43,145 + Lodging 108,008 = 972,079 exactly, and Inheritance 94,022 is printed as its own statement line. But the evidence standard says each split item's original_label is the printed breakdown label ('Property', renamed 'Property Tax' by the user rule) and its source_page is the breakdown's page (p2). The JSON keeps 'Taxes' and p4."},
+    {"severity": "warning", "path": "receipts[1].original_label", "page": 2,
+     "extracted": "Taxes (source_page 4)", "on_page": "Motor vehicle 43,145 (p2)",
+     "issue": "Proven split piece, but original_label should be the printed breakdown label ('Motor vehicle') and source_page 2."},
+    {"severity": "warning", "path": "receipts[2].original_label", "page": 2,
+     "extracted": "Taxes (source_page 4)", "on_page": "Lodging 108,008 (p2)",
+     "issue": "Proven split piece, but original_label should be the printed breakdown label ('Lodging') and source_page 2."},
+    {"severity": "warning", "path": "detail[37].category", "page": 7,
+     "extracted": "lodging tax", "on_page": "Visitor Improvement Fund: Taxes 54,004",
+     "issue": "Printed label is only 'Taxes'. Lodging is supported only jointly: the Statement of Activities Lodging 108,008 = Visitor Promotion 54,004 + Visitor Improvement 54,004, and the full-PDF note 1 (report p13) names only Visitor Promotion as a lodging-tax fund. On its own, this fund's 54,004 is the lodging total minus the other fund (derived by subtraction plus the fund name). Defensible, because the statement Taxes columns (General 864,071 / Visitor Promotion 54,004 / Non-Major 54,004) and the four tax-type lines leave no other combination, but not proven line by line."},
+    {"severity": "warning", "path": "detail[26].category", "page": 10,
+     "extracted": "lodging tax", "on_page": "Visitor Promotion Fund: Taxes 54,004 (budget 40,000)",
+     "issue": "Printed label is only 'Taxes'. Supported by the full-PDF note 1 (report p13): 'Visitor Promotion is a special revenue fund that accounts for lodging tax receipts'. This is a narrative description, not a printed amount, so it is left for review."},
+    {"severity": "warning", "path": "notes", "page": 8,
+     "extracted": "Budget-schedule General Fund Taxes line (actual 864,071) split into property tax 820,926 and motor vehicle 43,145 per p2 ...",
+     "on_page": "Taxes 864,071 (budget 1,011,760), one line",
+     "issue": "Stale note: detail[0] has been merged back into the single printed line, which is correct because a budget-schedule line split by subtraction is not proven. The note no longer describes the JSON. It does not affect any figure."}
   ]
 }

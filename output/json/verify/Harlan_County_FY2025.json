@@ -1,18 +1,13 @@
 {
   "stem": "Harlan_County_FY2025",
-  "values_checked": 115,
+  "values_checked": 128,
   "issues": [
-    {"severity": "warning", "path": "receipts[1].category", "page": 4,
-     "extracted": "taxes (unlabeled) 2,711,240", "on_page": "Taxes: General 2,385,031 + Nonmajor 326,209 (p15: Visitors Promotion Fund 21,635, Hospital Bond Fund 304,574)",
-     "issue": "Inheritance Tax Fund taxes were split out by fund column and categorized from the fund name, but the same fund-column logic was not applied to the nonmajor taxes. Visitors Promotion Fund taxes 21,635 are almost certainly lodging tax and Hospital Bond Fund taxes 304,574 property tax. The treatment is inconsistent; review."},
-    {"severity": "warning", "path": "receipts[6].category", "page": 2,
-     "extracted": "other (Miscellaneous 68,398)", "on_page": "Statement of Activities general receipts: Health Insurance Settlements 5,581 + Miscellaneous 62,817 = 68,398",
-     "issue": "The Statement of Activities (p2) breaks out 5,581 of the Miscellaneous line as Health Insurance Settlements (Opioid Settlement Fund 5,580 on p13/p15). The line could be partly reimbursements/settlements; it is defensible as other because its printed label is Miscellaneous."},
-    {"severity": "warning", "path": "detail_totals[1].amount", "page": 5,
-     "extracted": 2744766, "on_page": "p5 General Fund total disbursements 2,744,766 vs p4 General Fund column 2,744,764; p6 Road Fund disbursements 2,674,310 vs p4 2,674,311",
-     "issue": "Rounding differences printed in the report itself. The notes mention only the receipt-side rounding (95,349/95,347; 1,666/1,665), not these disbursement differences. General Fund detail lines also total 990,961 general government vs 990,960 on p4 and 879,797 public safety vs 879,796."},
-    {"severity": "warning", "path": "decision_needed", "page": 5,
-     "extracted": "General Fund 'Inherit Tax' 682,227 recorded as spending, category other", "on_page": "Miscellaneous department: Inherit Tax 682,227 (budget 0)",
-     "issue": "An unbudgeted 682,227 General Fund disbursement labelled 'Inherit Tax' (10% of all spending, with no stated purpose) is in the same year as Inheritance Tax Fund transfers out of 765,000. Only a person can decide whether this is a real expenditure or a disguised transfer/pass-through. The line has a review note but there is no decision_needed[] entry."}
+    {"severity": "warning", "path": "detail[41].category", "page": 6,
+     "extracted": "inheritance tax", "on_page": "Inheritance Tax Fund schedule: Taxes 208,783",
+     "issue": "Printed label is only 'Taxes'; the category comes from the fund (Inheritance Tax Fund). The full PDF's note 1.B (report p11) says this fund accounts for receipts from inheritance taxes, so the category holds up, but no printed tax-type amount backs it. This is a printed line, not a split, so the evidence standard's split rules don't strictly apply. A person could still want it kept as taxes (unlabeled) to stay consistent with the restored statement line (receipts[0] Taxes 2,920,023 unlabeled)."},
+    {"severity": "warning", "path": "notes", "page": 4,
+     "extracted": "Taxes split by fund column (p4): Inheritance Tax Fund 208,783 as inheritance tax ...; the rest, 2,711,240 ... kept as taxes (unlabeled)",
+     "on_page": "Taxes 2,920,023 (one line)",
+     "issue": "Stale note: receipts[0] has been merged back into the single printed Taxes 2,920,023 line, so the note no longer describes the JSON. It does not affect any figure."}
   ]
 }
