@@ -1,14 +1,14 @@
 {
   "stem": "Johnson_County_FY2025",
-  "values_checked": 132,
+  "values_checked": 134,
   "issues": [
-    {"severity": "warning", "path": "detail[0].category", "page": 8,
-     "extracted": "taxes (unlabeled) 3,064,547", "on_page": "General Fund Taxes 3,064,547; p2 general receipts Property 2,863,731 + Motor vehicle 200,816 = 3,064,547 (the only other taxes are nonmajor lodging 16,656)",
-     "issue": "The statement-level Taxes line was split into property / motor vehicle / lodging using p2, but the General Fund detail line, which equals property + motor vehicle exactly, stays taxes (unlabeled). Inconsistent treatment; kept unsplit because the schedule doesn't print the breakdown for this fund itself"},
-    {"severity": "warning", "path": "detail[23].category", "page": 8,
+    {"severity": "warning", "path": "detail[0].budget_final", "page": 8,
+     "extracted": "3,404,100 on the Property piece (2,863,731)", "on_page": "General Fund Taxes budget 3,404,100 / actual 3,064,547",
+     "issue": "The budget covers the whole Taxes line (property + motor vehicle) but sits on the property piece only, so property budget-to-actual is overstated; noted in computed. Assumption by the extractor"},
+    {"severity": "warning", "path": "detail[24].category", "page": 8,
      "extracted": "streets/highways", "on_page": "Noxious Weed Control 9,191 (under Public Works heading)",
      "issue": "Category rules list noxious weed control under natural resources/conservation; streets/highways follows the schedule's Public Works heading. Judgment call"},
-    {"severity": "warning", "path": "detail[48].category", "page": 7,
+    {"severity": "warning", "path": "detail[49].category", "page": 7,
      "extracted": "other", "on_page": "Total Non-Major Local 174,927, of which Ambulance Fund 155,789, 911 Emergency Management 14,463, Keno Fund 216",
      "issue": "89% of the line is Ambulance Fund local receipts, likely Ambulance Fees (not stated on the page; p2 public safety charges for services are only 65,461), and 216 is the Keno Fund (keno/lottery). Left in other with review; the user may want Ambulance Fees"}
   ]
