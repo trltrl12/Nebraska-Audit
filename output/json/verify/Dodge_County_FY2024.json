@@ -1,0 +1,24 @@
+{
+  "stem": "Dodge_County_FY2024",
+  "values_checked": 250,
+  "issues": [
+    {"severity": "warning", "path": "receipts[4].category", "page": 5,
+     "extracted": "other", "on_page": "Local 4,501,514 (Statement of Activities p3: charges for services 1,968,482, interest and investment earnings 1,144,335, other local receipts 1,349,704)",
+     "issue": "broad 'Local' group kept in other; no single category exceeds half (charges ~44%), so defensible, but it is a large other line the user may want split or reclassified"},
+    {"severity": "warning", "path": "receipts[3].category", "page": 5,
+     "extracted": "intergovernmental/state aid", "on_page": "Intergovernmental 6,452,672",
+     "issue": "broad line; Statement of Activities shows operating grants 3,849,089 and capital grants 825,821 besides intergovernmental revenues 1,816,755, so it may include federal grants, homestead, pro-rate; no breakdown printed"},
+    {"severity": "warning", "path": "detail[64].category", "page": 18,
+     "extracted": "public safety", "on_page": "Public works: Emergency Manager: Personal services 65,224",
+     "issue": "Emergency Manager and Local Emergency Planning Committee lines (detail[64]-detail[69]) are printed under the Public works heading and the statement counts them in public works 155,923; recorded as public safety (rule-based, but differs from the report's own grouping)"},
+    {"severity": "warning", "path": "detail[97].category", "page": 11,
+     "extracted": "streets/highways", "on_page": "Flood Control Fund: Operating expense 382,898 (statement: Public works)",
+     "issue": "flood control could be natural resources/conservation; kept with the statement's public works function"},
+    {"severity": "warning", "path": "detail[80].detail_category", "page": 8,
+     "extracted": "highway allocation", "on_page": "Road/Bridge Fund: Intergovernmental 3,287,158",
+     "issue": "broad 'Intergovernmental' line; highway allocation detail_category is an assumption (no breakdown printed)"},
+    {"severity": "warning", "path": "notes", "page": 5,
+     "extracted": "tax-split log not written", "on_page": "Taxes 15,070,995 split by p3 breakdown; General Fund, Flood Control and nonmajor Taxes kept unlabeled",
+     "issue": "the evaluated tax lines are not logged in output/json/_meta/tax_splits.csv (no FY2024 rows there), which the tax-split rule requires"}
+  ]
+}
