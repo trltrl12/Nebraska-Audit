@@ -62,7 +62,8 @@ CHARGE_CATS = [
 RECREATION_DEPT = re.compile(r"pool|\bparks?\b|recreation|golf|swim", re.I)
 UTILITY_FUND = re.compile(r"water|sewer|electric|light|gas|utilit|refuse|sanitation|garbage|trash|solid waste", re.I)
 DRIVERS_ED = re.compile(r"driver'?s'? ?ed", re.I)
-COMMUNITY_BETTERMENT = re.compile(r"community better", re.I)
+COMMUNITY_BETTERMENT = re.compile(r"community (development/)?better", re.I)
+NOXIOUS_WEED = re.compile(r"noxious|\bweeds?\b", re.I)
 OPERATING_LABEL = re.compile(r"^operating( expenses?| costs?)?$", re.I)
 NOT_EXTRACURRICULAR = re.compile(r"interest|tuition|lunch|meal|fine|donat|contribut|grant|reimburs|transfer|community serv", re.I)
 # county treasurer / bank cash -> Cash and Cash Equivalents (never "cash and investments")
@@ -299,6 +300,13 @@ def community_betterment_rule(x, log):
         setcat(x, "category", "Community Betterment", "category: Community Betterment", log)
 
 
+def noxious_weed_rule(x, log):
+    """Noxious weed control spending is natural resources/conservation (user 2026-11-04); capital outlay stays."""
+    if NOXIOUS_WEED.search(label_of(x) + " " + str(x.get("department") or "")) \
+            and x.get("category") not in ("natural resources/conservation", "capital outlay"):
+        setcat(x, "category", "natural resources/conservation", "category: natural resources/conservation", log)
+
+
 def operating_rule(x, log):
     """Spending lines labelled "Operating" that sit in other are category Operating (user 2026-10-29); Operating lines
     under a function heading keep that function."""
@@ -516,6 +524,7 @@ def apply(d, stem=""):
         spending_rules(x, log)
         drivers_ed_spending_rule(x, log)
         community_betterment_rule(x, log)
+        noxious_weed_rule(x, log)
         operating_rule(x, log)
         school_rule(x, school, False, log, d.get("entity_type"))
         if school and not lps:
@@ -534,6 +543,7 @@ def apply(d, stem=""):
             spending_rules(x, log)
             drivers_ed_spending_rule(x, log)
             community_betterment_rule(x, log)
+            noxious_weed_rule(x, log)
             operating_rule(x, log)
             school_rule(x, school, False, log, d.get("entity_type"))
             if school and not lps:
