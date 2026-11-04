@@ -1,38 +1,19 @@
 {
   "stem": "Grant_County_FY2025",
-  "values_checked": 156,
+  "values_checked": 162,
   "issues": [
-    {
-      "severity": "warning",
-      "path": "receipts[3].category",
-      "page": 1,
-      "extracted": "intergovernmental/state aid",
-      "on_page": "State receipts 476,338 (p2); Exhibit A lists Property tax relief 194,289, Homestead exemption 2,832, Prorate motor vehicle 1,998",
-      "issue": "State receipts very likely includes property tax credit, homestead and pro-rate money, which the rules keep out of state aid. No breakdown of the line is printed, so state aid stands, but the rules call for a review note on a line that combines these, and this one has none."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[2]",
-      "page": 2,
-      "extracted": "Local receipts 331,819 all in other",
-      "on_page": "Inheritance Fund Local receipts 14,496 = Schedule 7 'Interest on taxes' (p12)",
-      "issue": "Taxes were split by fund column to pull out the Inheritance Fund's 77,003, but the Inheritance Fund's 14,496 interest on taxes (Penalties and Interest on Taxes in detail) was left inside Local receipts as other. This is inconsistent; a split by fund column would be just as well supported."
-    },
-    {
-      "severity": "warning",
-      "path": "balance_sheet.equity[11].category",
-      "page": 3,
-      "extracted": null,
-      "on_page": "Committed 470,482",
-      "issue": "equity line has no category field (the Restricted lines have one); probably Committed"
-    },
-    {
-      "severity": "warning",
-      "path": "balance_sheet.equity[12].category",
-      "page": 3,
-      "extracted": null,
-      "on_page": "Unassigned 547,166",
-      "issue": "equity line has no category field; probably Unassigned"
-    }
+    {"severity": "warning", "path": "detail[63].category", "page": 12,
+     "extracted": "inheritance tax", "on_page": "Taxes 77,003 (Schedule 7, Inheritance Fund)",
+     "issue": "The printed label is just 'Taxes'. The only evidence for 'inheritance tax' is the fund name and the fund description (full p16: 'Collects inheritance tax filed in County Court'). Exhibit A (p1) prints no inheritance-tax line. The governmental receipts line was restored to taxes (unlabeled) for exactly this reason, so this detail line is inconsistent with that ruling. A person should decide whether fund-name categorization of a whole detail line is acceptable."},
+    {"severity": "warning", "path": "notes", "page": 2,
+     "extracted": "the Inheritance Fund column's 77,003 is split out as inheritance tax (split_from); the remaining 889,490 stays taxes (unlabeled)",
+     "on_page": "Taxes 966,493 recorded unsplit",
+     "issue": "The notes still describe the old split. output/json/_meta/tax_splits.csv row 220 (receipts, 'remaining' 889,490) is also stale. The JSON now correctly holds the single printed line 966,493."},
+    {"severity": "warning", "path": "balance_sheet.equity[11].category", "page": 3,
+     "extracted": null, "on_page": "Committed 470,482",
+     "issue": "The category field is missing, though every other equity line has one. Expected 'Committed'."},
+    {"severity": "warning", "path": "balance_sheet.equity[12].category", "page": 3,
+     "extracted": null, "on_page": "Unassigned 547,166",
+     "issue": "The category field is missing. Expected 'Unassigned'."}
   ]
 }

@@ -1,18 +1,19 @@
 {
   "stem": "Blaine_County_FY2025",
-  "values_checked": 110,
+  "values_checked": 105,
   "issues": [
-    {"severity": "warning", "path": "detail[29]", "page": 6,
-     "extracted": "DISBURSEMENTS 684,864 (one line, streets/highways)", "on_page": "Road/Bridge Fund column, p4: Public Works 517,754 + Capital Outlay 167,110",
-     "issue": "the report prints this fund's split by function on p4, so the line could be two items (streets/highways 517,754 and capital outlay 167,110) under the capital outlay rule. As one line, 167,110 of capital outlay sits under streets/highways in detail"},
-    {"severity": "warning", "path": "disbursements[5].original_label", "page": 4,
-     "extracted": "Capital Outlay", "on_page": "Capital Outlay 167,110 (Road/Bridge Fund)",
-     "issue": "user rule: capital outlay lines are labelled 'Capital Outlay: <function>' with printed text in printed_label. Not applied; left to user_rules.py"},
-    {"severity": "warning", "path": "report_discrepancies", "page": 5,
-     "extracted": "only the Road/Bridge 690 difference is recorded", "on_page": "GF disbursements 701,458 (p4) vs 701,459 (p5); GF ending balance 307,006 (p4) vs 307,005 (p5); ROD receipts 281 / ending 2,784 (p8) vs 282 / 2,785 (p7)",
-     "issue": "the report's own $1 rounding differences between statements are mentioned in notes but not recorded in report_discrepancies"},
-    {"severity": "warning", "path": "receipts[5].category", "page": 2,
-     "extracted": "charges for services/fees", "on_page": "Charges for Services 30,916 (p2: General Government 30,378, Public Safety 538)",
-     "issue": "these county general government charges (and ROD Preservation 281 in detail[31], already detail_category fees of office) may belong in the Fees of Office receipt category (user 2026-10-28)"}
+    {"severity": "warning", "path": "detail[30].category", "page": 8,
+     "extracted": "lodging tax", "on_page": "Taxes 784 (Lodging Tax Fund column)",
+     "issue": "The printed line is just 'Taxes'. The only evidence for 'lodging tax' is the fund name. The governmental receipts line was restored to taxes (unlabeled) for the same reason (Note 3, full p16, gives no amounts), so this detail line is inconsistent with that ruling. A person should decide whether fund-name categorization of a whole detail line is acceptable."},
+    {"severity": "warning", "path": "notes", "page": 4,
+     "extracted": "Taxes line split by column: Nonmajor 784 is the Lodging Tax Fund (p8) -> lodging tax; General Fund 696,850 has no breakdown",
+     "on_page": "Taxes 697,634 recorded unsplit",
+     "issue": "The notes still describe the old split. output/json/_meta/tax_splits.csv row for receipts (696,850, 'the 784 Nonmajor piece is already split off as lodging tax') is also stale. The JSON now holds the single printed line 697,634."},
+    {"severity": "warning", "path": "detail[28].category", "page": 6,
+     "extracted": "streets/highways", "on_page": "DISBURSEMENTS 684,864",
+     "issue": "This single Road/Bridge disbursement line includes capital outlay 167,110 (p4 Road/Bridge column: Public Works 517,754 + Capital Outlay 167,110). Using the whole line as streets/highways is defensible because the schedule prints no breakdown."},
+    {"severity": "warning", "path": "detail_totals[1].amount", "page": 5,
+     "extracted": 701459, "on_page": "701,459 (p5) vs 701,458 (p4 General Fund TOTAL DISBURSEMENTS)",
+     "issue": "The report has a $1 rounding difference between statements. It is mentioned in notes but not in report_discrepancies. The p5 lines do add to 701,459."}
   ]
 }
