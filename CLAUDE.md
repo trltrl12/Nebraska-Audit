@@ -139,10 +139,12 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
   Service Operations, State Categorical Programs, Federal Programs (only lines labelled so), Debt Service (Principal /
   Interest incl. bond fees); rules in the extractor agent.
 - **As printed (user 2026-10-29, overrides older allocation/contra fixes):** statement and schedule lines keep exactly what the report prints. Never move a printed receipt or spending amount into transfers, never add contra/offset lines, never remove an amount the statement prints (e.g. interfund allocations, Leasing Corporation amounts). The user reads only Category and Original Label; notes and review text are not used, so do not spend effort on them.
-- **Tax-line splits (user 2026-11-04; counties, cities, villages, governmental):** a `taxes (unlabeled)` line is split
-  only when the report proves the breakdown of that money (rules in the extractor agent, "Tax-line splits, evidence
-  standard"); proven parts only, the unproven remainder stays unlabeled; full original PDF used when the trimmed one
-  lacks the context. Every evaluated line is logged in `output/json/_meta/tax_splits.csv`.
+- **Tax-line splits (user 2026-11-04, relaxed the same day; counties, cities, villages, governmental):** a tax line
+  gets a specific tax type from a printed breakdown, from a fund name that clearly identifies one tax (that fund's tax
+  receipts only), or from exact subtraction where the statements establish the remainder's type (never "the rest is
+  property tax" by default). Exact reconciliation; rounding only where the report itself shows it. Ambiguous amounts
+  stay unlabeled. Fund-name and subtraction classifications carry `computed`; every evaluated line is logged in
+  `output/json/_meta/tax_splits.csv` (rules: extractor agent, "Tax-line splits, evidence standard").
 - Transfers are never revenue or spending: transfers_in/out (detail section `other financing`,
   signed); a line labelled "transfer" anywhere else is flagged.
 - Disbursement categories: general government, public safety, streets/highways,

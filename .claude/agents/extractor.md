@@ -357,21 +357,27 @@ breakdown of *that* line. Never split a line just because some other statement's
 add up to it; if a schedule only prints broad groups ("Taxes", "State", "Local"), record each group
 as printed with its best category and `"review": "broad group; detail on p.N"`.
 
-**Tax-line splits, evidence standard (user 2026-11-04; counties, cities, villages, governmental lines).** A
-`taxes (unlabeled)` line is split only when all of these hold:
-1. The report prints a breakdown by tax type of the same money (Statement of Activities general revenues, a budget
-   or combining schedule, a schedule of taxes, the notes). Start from the trimmed PDF; when it lacks the context
-   (e.g. the reconciliation page), use the complete original PDF.
-2. The printed pieces sum to the line within $5 of rounding, or tie after an adjustment the report itself prints
-   and attributes to one tax type (e.g. the reconciliation's property-tax availability difference).
-3. The split items add up to the original line exactly: every piece is its printed amount except at most one,
-   computed as the remainder (the line minus the printed pieces), which must be within $5 of the figure the report
-   proves for that tax type and carries `computed` (including the rounding gap).
-4. Partial split: a piece may come off a line only when the line's own printed fund columns hold that amount and it
-   matches a printed tax-type line within $5. Fund names alone are never evidence. The unproven remainder stays one
-   `taxes (unlabeled)` item with `split_from` and `computed`.
-5. Never split budget-basis schedule lines measured differently from the breakdown, lines whose breakdown is only
-   implied by fund names, or breakdowns that merely add up by coincidence.
+**Tax-line splits, evidence standard (user 2026-11-04, relaxed the same day; counties, cities, villages,
+governmental lines).** A `taxes (unlabeled)` line (or a fund's "Taxes" detail line) gets a specific tax category, or is
+split, when the evidence below establishes the tax type of each piece:
+1. Printed breakdown: the report prints a breakdown by tax type of the same money (Statement of Activities general
+   revenues, a budget or combining schedule, a schedule of taxes, the notes). Start from the trimmed PDF; use the
+   complete original PDF when context is missing.
+2. Fund name: a fund whose name clearly identifies one tax (Inheritance Tax Fund, Lodging/Visitors Promotion fund,
+   911 Surcharge fund, Sales Tax fund, Keno fund...) makes that fund's *tax receipts* (its "Taxes" line or column)
+   that tax. Other receipts of the fund (charges, interest, "Local", miscellaneous) are not assumed to be that tax.
+   Mark the item `computed: "tax type from fund name <fund>"`.
+3. Subtraction: an amount worked out from printed figures counts only when it reconciles exactly and the financial
+   statements themselves establish the remainder's tax type (e.g. the Statement of Activities prints property and
+   motor vehicle, and every other fund's taxes are proven to be other types, so the General Fund's taxes are
+   exactly property + motor vehicle). Never call a remainder property tax just because the other taxes were
+   subtracted. Mark it `computed: "<how>"`.
+4. Exact reconciliation: pieces must add to the line exactly. A rounding difference is accepted only when the
+   source report shows it (its own printed pieces don't add to its printed total); no automatic tolerance.
+5. Ambiguous amounts stay `taxes (unlabeled)`: mixed funds, gaps with no printed explanation, budget-basis lines
+   that don't tie to the breakdown, and lines that aren't tax lines at all ("Local", "Local Fees...") keep their
+   printed meaning. A line the printed page shows to be something else (e.g. Charges for Services) takes that.
+Original totals are preserved and nothing is double counted.
 Each split item: category of its printed tax line (existing category strings and the user's rename rules),
 `original_label` = the printed breakdown label, `amount`, `source_page` (the breakdown's trimmed page, or the
 original line's page when the breakdown is only in the full PDF), the original line's fund_type / schedule / fund /
