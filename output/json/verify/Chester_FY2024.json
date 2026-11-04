@@ -1,0 +1,46 @@
+{
+  "stem": "Chester_FY2024",
+  "values_checked": 140,
+  "issues": [
+    {
+      "severity": "warning",
+      "path": "receipts[7].category",
+      "page": 6,
+      "extracted": "charges for services/fees",
+      "on_page": "Charges for services 51,216, of which Landfill 25,870 (50.5%, sanitation charges on p2)",
+      "issue": "Refuse/landfill charges are just over half of the line; the user's Utility Charges category (incl. garbage/refuse) could apply as the dominant part"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[39].section",
+      "page": 11,
+      "extracted": "other financing (-1,325; also detail[40] -1,617)",
+      "on_page": "Fire: Payment of long-term debt-principal (1,325), -interest (1,617) under Other financing sources (uses)",
+      "issue": "Debt payments are spending; the statement-level lines are recorded as disbursements (Debt Service, outside_printed_total) but the detail lines sit in other financing with no category"
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[10].category",
+      "page": 8,
+      "extracted": "Insurance",
+      "on_page": "Insurance 612 under Personal services",
+      "issue": "Printed under Personal services (detail[71] uses employee benefits and payroll taxes); Employee Benefits and Payroll Taxes may fit better"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[68..80].fund",
+      "page": 16,
+      "extracted": "Proprietary Funds (combined)",
+      "on_page": "p8 prints Electric, Water and Sewer fund columns",
+      "issue": "Per-fund detail rule (cities/villages): a combined schedule is replaced by one line per fund column of the proprietary statement; here governmental funds have own schedules, so the rule is ambiguous; confirm"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[10].detail_category",
+      "page": 10,
+      "extracted": "investment income",
+      "on_page": "Interest income 3,603",
+      "issue": "Interest lines (also detail[28], detail[34], detail[78]) use detail_category investment income; Interest Income is the user's category for interest"
+    }
+  ]
+}

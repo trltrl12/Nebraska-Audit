@@ -1,0 +1,18 @@
+{
+  "stem": "Brady_FY2024",
+  "values_checked": 130,
+  "issues": [
+    {"severity": "warning", "path": "receipts[8].category", "page": 10,
+     "extracted": "occupation/franchise tax", "on_page": "Franchise/Capital/Patronage 49,089.53",
+     "issue": "Printed label mixes franchise tax with capital credits/patronage refunds; occupation/franchise tax is the dominant guess only (same for detail[5])"},
+    {"severity": "warning", "path": "receipts[9].split_from", "page": 4,
+     "extracted": "Other 81,958.85 split into 49,089.53 / 31,854.44 / 1,014.88", "on_page": "Other: General 80,943.97, Street 1,014.88, Total 81,958.85 (p4); General breakdown Franchise/Capital/Patronage 49,089.53 + Other 31,854.44 (p10)",
+     "issue": "Split is supported by printed figures and adds up, but it splits a non-tax statement line by fund column (Street 1,014.88 kept as a separate item, receipts[10]); the rules only allow fund-column pieces for tax lines. Keeping General Other 31,854.44 + Street 1,014.88 as one Other 32,869.32 line would follow the Total-column rule"},
+    {"severity": "warning", "path": "detail[7].category", "page": 10,
+     "extracted": "charges for services/fees (detail_category rentals)", "on_page": "Rental and fees 2,690.00 (Community Center)",
+     "issue": "User rule makes rent/rental income its own receipt category (Rentals); line mixes rental and fees, so charges for services is defensible"},
+    {"severity": "warning", "path": "detail", "page": 4,
+     "extracted": "Street Fund and Water/Sewer/Garbage statement-column lines added to detail (detail[23]-[46])", "on_page": "General Fund has its own departments schedule (p10-11); no schedules for Street or proprietary funds",
+     "issue": "User rule 2026-10-28: when some funds have their own schedules, statement lines are not added for the other funds. Here the General Fund schedule does not tie to its statement column and an all-funds budget schedule (p9) exists, so adding per-fund statement lines is arguable; confirm"}
+  ]
+}
