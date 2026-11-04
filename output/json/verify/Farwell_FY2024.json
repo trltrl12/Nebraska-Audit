@@ -1,0 +1,24 @@
+{
+  "stem": "Farwell_FY2024",
+  "values_checked": 44,
+  "issues": [
+    {"severity": "warning", "path": "decision_needed", "page": 1,
+     "extracted": null, "on_page": "Street Fund Local Receipts: Other 72,387.62 (p1); Equipment loan issued 1/25/2024, 61,723.82 outstanding at 9/30/24 (p5); Street Fund Other Capital Outlay 70,777.47 and Debt Service 8,276.18 (p3)",
+     "issue": "A loan was taken out during the year (61,723.82 still owed after 8,276.18 of debt service, i.e. about 70,000 borrowed), but no debt proceeds line is printed. The Street Fund's unexplained 'Other' receipts of 72,387.62 (its largest receipt) are probably the loan proceeds. Recorded as receipt category other; the user should decide whether it is debt proceeds. No decision_needed entry was made"},
+    {"severity": "warning", "path": "receipts[9].category", "page": 1,
+     "extracted": "other", "on_page": "Local Receipts: Other 118,414.25 governmental (includes Keno Fund column 24,479.32, p2)",
+     "issue": "The Keno Fund's only receipt (24,479.32) is almost certainly keno proceeds, which would be keno/lottery. The page prints only 'Other' and the fund-name rule covers tax receipts, so keeping it in other is defensible, but the user may want it split out"},
+    {"severity": "warning", "path": "receipts[10].category", "page": 1,
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other (Water 29,039.41 + Sewer 13,409.49 + Water Reserve 17.96)",
+     "issue": "Page prints only 'Other'; treating the utility funds' 'Other' receipts as utility charges is an assumption (no breakdown printed). The Water Reserve 17.96 is probably interest"},
+    {"severity": "warning", "path": "disbursements[3].original_label", "page": 3,
+     "extracted": "Capital Outlay: General Government", "on_page": "Capital Improvements 41,808.57 (Street Fund 3,000.00 p3 + Keno Fund 38,808.57 p4)",
+     "issue": "The function is an assumption: the Keno Fund spending could be community betterment or culture/recreation, and the Street part is streets. Category capital outlay is correct"},
+    {"severity": "warning", "path": "disbursements[1].category", "page": 3,
+     "extracted": "general government", "on_page": "General Government, Water Fund 40,425.28 + Sewer Fund 11,656.18",
+     "issue": "Business-type spending printed on the General Government row; kept general government as printed. It could arguably be utilities (the Water/Sewer funds' operating costs)"},
+    {"severity": "warning", "path": "disbursements[6].fund_type", "page": 3,
+     "extracted": "governmental", "on_page": "Electric Utility (General 5,616.13 + Street 8,845.20) and Solid Waste 12,041.19 (General), printed under Business-Type Activities",
+     "issue": "Printed under the Business-Type Activities heading but paid from governmental fund columns. Kept governmental by fund column, which is defensible (disbursements[6] and disbursements[7])"}
+  ]
+}
