@@ -364,9 +364,14 @@ split, when the evidence below establishes the tax type of each piece:
    revenues, a budget or combining schedule, a schedule of taxes, the notes). Start from the trimmed PDF; use the
    complete original PDF when context is missing.
 2. Fund name: a fund whose name clearly identifies one tax (Inheritance Tax Fund, Lodging/Visitors Promotion fund,
-   911 Surcharge fund, Sales Tax fund, Keno fund...) makes that fund's *tax receipts* (its "Taxes" line or column)
-   that tax. Other receipts of the fund (charges, interest, "Local", miscellaneous) are not assumed to be that tax.
-   Mark the item `computed: "tax type from fund name <fund>"`.
+   Sales Tax fund, Keno fund, TIF fund = property tax increment...) makes that fund's *tax receipts* (its "Taxes"
+   line or column) that tax. Other receipts of the fund (charges, interest, "Local", miscellaneous) are not assumed
+   to be that tax. Mark the item `computed: "tax type from fund name <fund>"`. A printed tax-type label always beats
+   a fund name (e.g. a Visitors fund row printed "Property tax" stays property tax; a conflicting amount stays
+   unlabeled). **911 funds (user 2026-11-04):** a 911 fund's "Taxes" are `other taxes` only when the report
+   establishes 911 surcharge (a printed "Other"/surcharge tax line they tie to, or a note saying tax receipts include
+   911 surcharges, and nothing in the fund, e.g. a homestead line, points to a property levy); otherwise
+   `taxes (unlabeled)`. Homestead credits printed in a 911 fund are their own line (Homestead Exemption).
 3. Subtraction: an amount worked out from printed figures counts only when it reconciles exactly and the financial
    statements themselves establish the remainder's tax type (e.g. the Statement of Activities prints property and
    motor vehicle, and every other fund's taxes are proven to be other types, so the General Fund's taxes are
@@ -379,8 +384,13 @@ split, when the evidence below establishes the tax type of each piece:
    printed meaning. A line the printed page shows to be something else (e.g. Charges for Services) takes that.
 Original totals are preserved and nothing is double counted.
 Each split item: category of its printed tax line (existing category strings and the user's rename rules),
-`original_label` = the printed breakdown label, `amount`, `source_page` (the breakdown's trimmed page, or the
-original line's page when the breakdown is only in the full PDF), the original line's fund_type / schedule / fund /
+`original_label` = the printed row label of the breakdown amount exactly as printed (e.g. "Property taxes"), never
+made-up text like "Taxes (Property)" or "Inheritance Fund Taxes"; a fund-column or subtraction piece with no printed
+row of its own keeps the parent line's printed label (usually "Taxes"), and an unsplit line keeps its printed label
+(user 2026-11-04). `amount`, `source_page` (a page of the trimmed PDF: the breakdown's page, or the original line's
+page when the breakdown is only in the full PDF; never split a non-tax or total-receipts line from a full-PDF-only
+breakdown). Statement receipts come from the Total column and are not split by fund column except for these tax-type
+pieces; the original line's fund_type / schedule / fund /
 department, `split_from: "Taxes 120,655,538 (p7)"`, `computed` where derived. The split items replace the original
 line at its position; nothing else in the JSON changes; `extraction_attempt` is unchanged.
 
@@ -495,7 +505,8 @@ These are the user's decisions; apply them while extracting. After extraction th
   program fees, program service income) (user 2026-10-29). Charges for services is
   only for genuine fees for services; unexplained "Local receipts/Other" lines get their breakdown from the schedules.
 - **Drivers Education** spending is its own category (never Instruction).
-- **Community Betterment** spending (keno-funded or not) is its own category (not keno, not economic development; user 2026-10-29); capital outlay lines stay capital outlay. Keno/lottery receipts stay keno/lottery.
+- **Noxious weed** control spending is `natural resources/conservation` (never streets/highways or health/welfare; user 2026-11-04); capital outlay lines stay capital outlay.
+- **Community Betterment** spending, including lines printed "Community development/betterment" (user 2026-11-04), (keno-funded or not) is its own category (not keno, not economic development; user 2026-10-29); capital outlay lines stay capital outlay. Keno/lottery receipts stay keno/lottery.
 - **Operating**: spending lines labelled "Operating" with no function (they would otherwise be other) are category Operating (user 2026-10-29); Operating lines under a function heading keep that function. Statement lines always come from the Total column, never split by fund column.
 - **School lines (user 2026-10-29):** in school district / ESU reports, receipts that would be Rentals or licenses and permits are School Facility Rentals / School License Fees. In city, village and county reports, lines naming a school (school resource officer funding, license fees paid to the school district, a school building) are School-Related Receipts / School-Related Spending (not training lines like "schools, seminars and travel").
 - **As printed (user 2026-10-29):** statement and schedule lines keep exactly the figures, labels and placement the report prints. Never move a printed receipt or spending amount into transfers, never add contra/offset lines, never remove a printed amount (one-sided "Allocation from General Fund" receipts stay receipts, category other). The user reads only Category and Original Label; do not spend effort on notes or review text.

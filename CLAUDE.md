@@ -145,6 +145,13 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
   property tax" by default). Exact reconciliation; rounding only where the report itself shows it. Ambiguous amounts
   stay unlabeled. Fund-name and subtraction classifications carry `computed`; every evaluated line is logged in
   `output/json/_meta/tax_splits.csv` (rules: extractor agent, "Tax-line splits, evidence standard").
+  User 2026-11-04 additions: a printed tax-type label beats a fund name; TIF funds' taxes are property tax (fund name);
+  911 funds' taxes are other taxes only when the report establishes 911 surcharge (note or printed Other line; not when
+  the fund shows a property levy), otherwise unlabeled; split pieces carry the printed row label (never "Taxes (Property)"
+  or "<Fund> Taxes"), or the parent's "Taxes" when no row prints the amount; piece source_page is a trimmed page.
+- **Category fixes (user 2026-11-04, all reports, in user_rules.py):** Noxious weed spending -> natural
+  resources/conservation; "Community development/betterment" -> Community Betterment; lottery-fund gross keno receipts ->
+  keno/lottery (Waverly); statement receipts from the Total column (Roca local option sales tax is one line).
 - Transfers are never revenue or spending: transfers_in/out (detail section `other financing`,
   signed); a line labelled "transfer" anywhere else is flagged.
 - Disbursement categories: general government, public safety, streets/highways,
