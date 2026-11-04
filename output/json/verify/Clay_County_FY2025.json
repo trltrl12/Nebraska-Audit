@@ -1,12 +1,21 @@
 {
   "stem": "Clay_County_FY2025",
-  "values_checked": 111,
+  "values_checked": 146,
   "issues": [
-    {"severity": "warning", "path": "detail[19].category", "page": 10,
-     "extracted": "streets/highways", "on_page": "Public Works: Noxious Weed 78,430",
-     "issue": "The disbursement category rules put noxious weed control under natural resources/conservation. The report prints it under the Public Works heading (and the statement's Public works 78,430), so streets/highways is defensible. A review note is present."},
-    {"severity": "warning", "path": "detail[31].category", "page": 11,
-     "extracted": "other", "on_page": "Road Fund Local 1,233,488 (budget 53,500)",
-     "issue": "A large broad 'Local' group in the Road Fund is recorded as other. The Statement of Activities (p2) shows only 31,803 of public works charges for services, so most of it is unexplained (possibly reimbursements or FEMA money). It is far above budget and should be confirmed. The General Fund 'Local' 1,347,433 (detail[2]) is likewise recorded as other."}
+    {"severity": "warning", "path": "detail[44].source_page", "page": 2,
+     "extracted": 9, "on_page": "Lodging 10,450 (Statement of Activities p2); fund columns Visitor Promotion 5,225 (p8) + Visitors Improvement 5,225 (p9)",
+     "issue": "Lodging split is supported (fund columns of the p9 Total Non-Major Taxes 810,979 hold exactly 10,450 and it equals the printed SoA Lodging 10,450; no other column combination gives 10,450; split items sum to 810,979 exactly). The evidence standard asks source_page to be the breakdown's page; the printed 'Lodging' label is on p2, the fund columns on p8-p9. Defensible as is."},
+    {"severity": "warning", "path": "receipts[0].original_label", "page": 2,
+     "extracted": "Taxes", "on_page": "Property / Motor vehicle / Lodging",
+     "issue": "Split items receipts[0-2] keep the original line's label 'Taxes'; the evidence standard says original_label = the printed breakdown label (Property -> 'Property Tax' by the user rename, 'Motor vehicle', 'Lodging'). Amounts are correct (5,702,420 + 381,489 + 10,450 = 6,094,359)."},
+    {"severity": "warning", "path": "receipts[5].original_label", "page": 2,
+     "extracted": "Local", "on_page": "Charges for Services / Interest income / Miscellaneous",
+     "issue": "Split items receipts[5-7] keep the label 'Local' rather than the printed breakdown labels; amounts correct (560,651 + 711,090 + 1,320,567 = 2,592,308)."},
+    {"severity": "warning", "path": "detail[52].detail_category", "page": 9,
+     "extracted": "construction/infrastructure", "on_page": "Capital outlay 75,143 (no object printed)",
+     "issue": "Object not printed; 'not itemized' fits better. Label also not in the user's 'Capital Outlay: <function>' form (same for disbursements[5] 'Capital outlay' 6,122,427 p6); user_rules.py may relabel."},
+    {"severity": "warning", "path": "detail[32].budget_final", "page": 11,
+     "extracted": null, "on_page": "DISBURSEMENTS final budget 18,784,799",
+     "issue": "Road Fund DISBURSEMENTS split into detail[32-34] (pieces tie to p5 Road column: 2,944,295 + 6,007,348 + 176,250 = 9,127,893); the final budget 18,784,799 is carried on none of the pieces."}
   ]
 }
