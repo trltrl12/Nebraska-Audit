@@ -1,12 +1,18 @@
 {
   "stem": "Thurston_County_FY2025",
-  "values_checked": 190,
+  "values_checked": 257,
   "issues": [
+    {"severity": "warning", "path": "receipts[0].original_label", "page": 2,
+     "extracted": "Taxes (Property tax) / Taxes (Motor vehicle tax) / Taxes (Inheritance tax) / Taxes (Lodging tax) (receipts[0]-[3])",
+     "on_page": "Property tax 3,838,874 / Motor vehicle tax 203,795 / Inheritance tax 1,179,623 / Lodging tax 3,945",
+     "issue": "Split pieces of Taxes 5,226,237 (p4) are proven (Statement of Activities p2 ties exactly) and amounts are right, but original_label should be the printed breakdown label (e.g. 'Property tax'), not 'Taxes (Property tax)'"},
+    {"severity": "warning", "path": "detail[101].original_label", "page": 2,
+     "extracted": "Taxes (Visitors Promotion and Visitors Improvement columns), source_page 5",
+     "on_page": "Lodging tax 3,945 (p2); fund columns 1,973 + 1,973 (p5)",
+     "issue": "Lodging piece 3,946 is proven (two printed fund columns match the printed Lodging tax line within $1) and marked computed, but original_label should be the printed breakdown label 'Lodging tax' and source_page the breakdown page (p2)"},
     {"severity": "warning", "path": "detail[99].original_label", "page": 15,
-     "extracted": "Capital outlay", "on_page": "Capital outlay (actual -, budget 1,510,060)",
-     "issue": "every other capital outlay line is relabelled 'Capital Outlay: <function>' under the user rule; this zero-actual Buyback Program line was left as printed (would be 'Capital Outlay: Streets and Highways', function in computed)"},
-    {"severity": "warning", "path": "receipts[6].category", "page": 4,
-     "extracted": "charges for services/fees", "on_page": "Local receipts 1,174,355",
-     "issue": "broad line. The Statement of Activities (p2) suggests about 906,945 in charges, plus interest 177,355 (Interest Income), miscellaneous 30,984 and some local grants. The report doesn't break down the line itself, so the dominant category with a review note is defensible"}
+     "extracted": "Capital outlay",
+     "on_page": "Capital outlay - (budget 1,510,060)",
+     "issue": "Capital outlay line not relabelled 'Capital Outlay: <function>' per the user's capital outlay rule (actual is zero; function not printed)"}
   ]
 }

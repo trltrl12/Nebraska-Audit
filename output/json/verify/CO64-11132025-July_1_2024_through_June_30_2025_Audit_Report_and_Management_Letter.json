@@ -1,9 +1,22 @@
 {
   "stem": "CO64-11132025-July_1_2024_through_June_30_2025_Audit_Report_and_Management_Letter",
-  "values_checked": 122,
+  "values_checked": 143,
   "issues": [
-    {"severity": "warning", "path": "receipts[4].category", "page": 4, "extracted": "lodging tax", "on_page": "Taxes: Other (Visitors Promotion 12,137 + Visitors Improvement 12,137, p14)", "issue": "Lodging tax is inferred from the fund names. The page prints only 'Other' under Taxes. It is defensible and marked review."},
-    {"severity": "warning", "path": "detail[45].detail_category", "page": 18, "extracted": "lodging tax", "on_page": "Taxes: Other 85,007 (Total Nonmajor Funds)", "issue": "Same lodging-tax inference as receipts[4]."},
-    {"severity": "warning", "path": "detail[0].original_label", "page": 5, "extracted": "Taxes (property)", "on_page": "Taxes", "issue": "The p5 schedule prints only 'Taxes'. The parenthetical was added by the extractor; the same applies to detail[1] 'Taxes (motor vehicle)' and detail[2] 'Taxes (other)'. The split amounts are correct (4,682,957 + 369,633 + 38,367 = 5,090,957, p4 General Fund column)."}
+    {"severity": "warning", "path": "detail[0].original_label", "page": 4,
+     "extracted": "Taxes (property) / Taxes (motor vehicle) / Taxes (other) (detail[0]-[2])",
+     "on_page": "Property 4,682,957 / Motor Vehicle 369,633 / Other 38,367 (General Fund column)",
+     "issue": "General Fund Taxes 5,090,957 (p5) split is proven (the General Fund column on p4 prints the breakdown and it ties exactly), but original_label should be the printed breakdown labels"},
+    {"severity": "warning", "path": "detail[0].budget_final", "page": 5,
+     "extracted": null,
+     "on_page": "Taxes final budget 5,323,640",
+     "issue": "Printed budget of the split Taxes line is not recorded on any piece (only in review text)"},
+    {"severity": "warning", "path": "detail[39].budget_final", "page": 7,
+     "extracted": null,
+     "on_page": "Inheritance Fund DISBURSEMENTS final budget 924,074",
+     "issue": "Function split of DISBURSEMENTS 103,488 (18,355 / 85,133, p4) is printed and correct, but the line's budget 924,074 is dropped from both pieces (detail[39], detail[40])"},
+    {"severity": "warning", "path": "notes", "page": 4,
+     "extracted": "Tax 'Other' (123,374) split into lodging tax (visitors funds) and the remaining unlabeled other tax.",
+     "on_page": "Other 123,374",
+     "issue": "Stale note: the JSON correctly keeps the printed line as one taxes (unlabeled) item (the lodging split was merged back)"}
   ]
 }
