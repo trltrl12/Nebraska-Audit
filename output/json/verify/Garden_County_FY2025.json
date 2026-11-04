@@ -2,8 +2,14 @@
   "stem": "Garden_County_FY2025",
   "values_checked": 135,
   "issues": [
-    {"severity": "warning", "path": "receipts[0].category", "page": 4,
-     "extracted": "inheritance tax", "on_page": "Taxes 3,849,900; Inheritance Tax Fund column 107,008",
-     "issue": "The Taxes line was split by fund column, and the Inheritance Tax Fund's 'Taxes' are called inheritance tax only because of the fund name. This is a reasonable assumption but not a printed tax-type breakdown (already marked review)."}
+    {"severity": "warning", "path": "detail[31].category", "page": 6,
+     "extracted": "inheritance tax", "on_page": "Inheritance Tax Fund: Taxes 107,008",
+     "issue": "Printed label is only 'Taxes'; inheritance tax comes from the fund name (already marked review). No printed inheritance-tax amount exists (the Statement of Activities p2 prints one Taxes 3,849,900 line). Defensible, but it's the fund-name reasoning the tax-split standard rejects for the statement line."},
+    {"severity": "warning", "path": "detail[27].budget_final", "page": 6,
+     "extracted": 2250991, "on_page": "Road Fund DISBURSEMENTS budget 2,250,991 (whole line)",
+     "issue": "The whole printed budget is put on the 1,706,009 public-works piece of the split (review note, no computed tag); the capital-outlay piece detail[28] (180,401) gets null. The same applies to Inheritance Tax detail[33] (budget 1,099,833 on the 179,901 piece). Both pieces also keep original_label 'DISBURSEMENTS' instead of the p4 row labels (Public Works / Capital Outlay / General Government)."},
+    {"severity": "warning", "path": "receipts[0]", "page": 4,
+     "extracted": "Taxes 3,849,900 (single line)", "on_page": "Taxes 3,849,900 (Total Governmental Funds)",
+     "issue": "Restored line matches the page exactly. But output/json/_meta/tax_splits.csv still logs receipts index 1 as a 3,742,892 remainder after an Inheritance Tax Fund piece, and notes still describe the split. Neither matches the JSON; the log should record the 107,008 inheritance piece being merged back."}
   ]
 }
