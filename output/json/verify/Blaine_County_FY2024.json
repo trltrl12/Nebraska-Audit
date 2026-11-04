@@ -1,0 +1,16 @@
+{
+  "stem": "Blaine_County_FY2024",
+  "values_checked": 78,
+  "issues": [
+    {"severity": "warning", "path": "report_discrepancies", "page": 4,
+     "extracted": "no report_discrepancies entry (mentioned only in notes)",
+     "on_page": "p4 vs p5/p6/p9: General Investment Income 98,814 vs 98,815, General Miscellaneous 771 vs 770, Road Intergovernmental 345,346 vs 345,347 (Total Receipts 346,574 vs 346,575, ending balance 448,440 vs 448,441), Inheritance Taxes 181,137 vs 181,136 (ending 1,042,400 vs 1,042,399), Nonmajor Total Receipts 51,586 vs 51,584 (combining p9 includes Investment Income (2))",
+     "issue": "The report prints $1-2 rounding differences between the fund statement and the budget and combining schedules. Each page adds up on its own, but the user does not read notes. These differences could be listed in report_discrepancies so they appear for review."},
+    {"severity": "warning", "path": "receipts[7].category", "page": 4,
+     "extracted": "other", "on_page": "Miscellaneous 1,835 = Health Insurance Settlements 508 + Miscellaneous 1,327 (Statement of Activities p2)",
+     "issue": "The Statement of Activities prints a breakdown of this line. 508 of it is insurance settlements, which would be reimbursements/refunds. Most of the line (1,327) is printed as Miscellaneous, so keeping it unsplit as other is defensible."},
+    {"severity": "warning", "path": "disbursements[4].category", "page": 4,
+     "extracted": "general government", "on_page": "Miscellaneous 232,655 (function line; General Fund 'Miscellaneous General' p5)",
+     "issue": "The statement prints Miscellaneous as its own function. Assigning it to general government is an assumption (the line already has a review note). The same applies to detail[20]."}
+  ]
+}
