@@ -13,6 +13,12 @@
      "issue": "The detail lines for the same water and sewer charges (p7) use Utility Charges, but the business-type receipt line uses charges for services/fees. The categories are inconsistent within the report."},
     {"severity": "warning", "path": "detail[9].category", "page": 12,
      "extracted": "charges for services/fees", "on_page": "Insurance 206,861 (Charges for services)",
-     "issue": "The nature of this line is not stated. The p16 combining statement shows it as Insurance Fund charges for services, possibly premiums charged to other funds."}
+     "issue": "The nature of this line is not stated. The p16 combining statement shows it as Insurance Fund charges for services, possibly premiums charged to other funds."},
+    {"severity": "warning", "path": "receipts[2].category", "page": 17,
+     "extracted": "property tax", "on_page": "Other Governmental Funds Taxes 220,718 (p5) = TIF 4 150,784 + TIF 5 37,587 + TIF 6 9,403 + TIF 7 16,893 + TIF 9 6,051 (p17 Total)",
+     "issue": "Supported under the relaxed fund-name rule. The amounts tie exactly (p5 column = p17 Total), and in Nebraska a tax increment financing fund's 'Taxes' is the property tax increment, a single tax type. It is still a judgment call: TIF is not one of the rule's example fund names, and the report does not label the money property tax. The same applies to detail[76] (220,718, p17). The four receipts pieces (4,182,032 + 160,979 + 220,718 + 4,925,740) add to Taxes 9,489,469 exactly, and the remainder equals General 3,132,290 + Debt Service 331,006 + Street 1,462,444."},
+    {"severity": "warning", "path": "receipts[1].original_label", "page": 16,
+     "extracted": "Hotel/Motel Tax Fund Taxes", "on_page": "Taxes (Hotel/Motel Tax Fund column 160,979)",
+     "issue": "The fund-name pieces carry made-up labels. The page prints only 'Taxes', and the same goes for receipts[2] 'TIF Funds Taxes' (p17 prints 'Taxes'). The lodging classification (160,979, Hotel/Motel Tax Fund) is supported under the relaxed fund-name rule."}
   ]
 }

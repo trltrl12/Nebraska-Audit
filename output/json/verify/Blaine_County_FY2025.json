@@ -2,10 +2,9 @@
   "stem": "Blaine_County_FY2025",
   "values_checked": 106,
   "issues": [
-    {"severity": "warning", "path": "notes", "page": 4,
-     "extracted": "Taxes line split by column: Nonmajor 784 is the Lodging Tax Fund (p8) -> lodging tax; General Fund 696,850 has no breakdown",
-     "on_page": "Taxes 697,634 recorded unsplit",
-     "issue": "The notes still describe the old split. output/json/_meta/tax_splits.csv row for receipts (696,850, 'the 784 Nonmajor piece is already split off as lodging tax') is also stale. The JSON now holds the single printed line 697,634."},
+    {"severity": "warning", "path": "receipts[1].original_label", "page": 4,
+     "extracted": "Lodging Tax Fund Taxes", "on_page": "Taxes (Nonmajor Funds column 784, p4; Lodging Tax Fund 784, p8)",
+     "issue": "The 784 lodging tax piece is supported under the relaxed fund-name rule: p8 shows the Lodging Tax Fund holds all of the Nonmajor Funds 784 of Taxes. The two pieces add to the printed 697,634 exactly. But the original_label 'Lodging Tax Fund Taxes' is made up. The page prints only 'Taxes', and the matching detail line uses 'Taxes'."},
     {"severity": "warning", "path": "detail[28].category", "page": 6,
      "extracted": "streets/highways", "on_page": "DISBURSEMENTS 684,864",
      "issue": "This single Road/Bridge disbursement line includes capital outlay 167,110 (p4 Road/Bridge column: Public Works 517,754 + Capital Outlay 167,110). Using the whole line as streets/highways is defensible because the schedule prints no breakdown."},
