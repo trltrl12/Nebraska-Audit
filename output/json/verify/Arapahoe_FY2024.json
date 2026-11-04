@@ -1,0 +1,24 @@
+{
+  "stem": "Arapahoe_FY2024",
+  "values_checked": 203,
+  "issues": [
+    {"severity": "warning", "path": "receipts[5].category", "page": 7,
+     "extracted": "Recreation Fees", "on_page": "Charges for services 327,106",
+     "issue": "Mixed line: golf 162,005 + park 18,004 + theater 49,485 (recreation, about 70%), ambulance 72,562, medical building 19,200, administrative 5,850 (pp15, 18). Dominant category is defensible; review note present."},
+    {"severity": "warning", "path": "receipts[6].category", "page": 7,
+     "extracted": "intergovernmental/state aid", "on_page": "Grants and contributions 581,442 (capital grants 555,268, operating 26,174, p3)",
+     "issue": "Grant source (government vs private) not stated. Also the same label is categorized differently in detail: General Fund Administrative/Fire lines (detail[5], detail[8]) and Sales Tax Fund (detail[93]) are intergovernmental/state aid, but Golf 1,150 (detail[21]) and Crystal Theater 2,925 (detail[106]) are donations/contributions, contrary to 'same category for the same label everywhere in a report'."},
+    {"severity": "warning", "path": "detail[64].category", "page": 18,
+     "extracted": "health/welfare", "on_page": "Cemetery department expenditures 26,429 (shown as Public works 26,429 in the General Fund column, p6)",
+     "issue": "Cemetery lines (detail[64]-[66]) are categorized health/welfare per the cemetery rule, while the report's own statement counts the Cemetery department under Public works. Defensible, but the detail function differs from the statement."},
+    {"severity": "warning", "path": "detail[111].category", "page": 15,
+     "extracted": "Rentals", "on_page": "Medical Building Fund Charges for services 19,200",
+     "issue": "Medical building charges assumed to be building rent; the page prints only 'Charges for services'. Review note present."},
+    {"severity": "warning", "path": "detail[83].detail_category", "page": 12,
+     "extracted": "highway allocation", "on_page": "Street Fund Intergovernmental 241,224",
+     "issue": "Highway allocation is an assumption; the page prints only 'Intergovernmental'. Review note present."},
+    {"severity": "warning", "path": "balance_sheet.scope", "page": 1,
+     "extracted": "government-wide, Total (Primary Government)", "on_page": "Governmental funds balance sheet total 1,323,236 (pp4-5) equals government-wide governmental activities 1,323,236 (p1)",
+     "issue": "The governmental funds statement ties to the government-wide governmental column (no capital assets or debt there), so the cash-basis rule would take the governmental lines from the funds statement (fund balance by classification). The extractor kept the Statement of Net Position Total column because business-type activities carry capital assets and debt. Defensible for a mixed report, but an assumption."}
+  ]
+}
