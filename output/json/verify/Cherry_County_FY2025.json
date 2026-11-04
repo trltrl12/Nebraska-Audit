@@ -1,17 +1,18 @@
 {
   "stem": "Cherry_County_FY2025",
-  "values_checked": 158,
+  "values_checked": 170,
   "issues": [
-    {"severity": "warning", "path": "receipts[5]", "page": 2,
-     "extracted": "Local 1,338,187 split into charges 739,753 / contributions 8,440 / interest 490,469 / other 99,525",
-     "on_page": "p6 prints Local 1,338,187 as one line; p2 Statement of Activities prints charges for services, capital grants, interest income and miscellaneous",
-     "issue": "The split is inferred by arithmetic: it ties exactly once Intergovernmental is taken as general 3,357,476 + operating grants 62,444. The report does not print a breakdown of the Local line itself. The county Statement of Activities rule allows this, but it is an assumption."},
-    {"severity": "warning", "path": "receipts[6].category", "page": 2,
-     "extracted": "donations/contributions", "on_page": "Capital Grants and Contributions 8,440 (Public safety)",
-     "issue": "Grantor not stated; this may be a government capital grant (intergovernmental). The line already carries review."},
-    {"severity": "warning", "path": "detail[40]", "page": 11,
-     "extracted": "Road DISBURSEMENTS 3,531,459 as streets/highways, not itemized",
-     "on_page": "p5 Road Fund column: Public works 2,927,815 + Capital outlay 603,644",
-     "issue": "This is inconsistent with the Disaster Recovery line, which was split using the p5 fund column. Under the capital outlay rule, the 603,644 would be category capital outlay. The schedule itself prints one line, so this is a warning."}
+    {"severity": "warning", "path": "detail[51].amount", "page": 8,
+     "extracted": 204476, "on_page": "Visitor Promotion Fund Taxes 204,476 (p8); SoA Lodging 408,952 (p2); Visitor Improvement Fund Taxes 204,476 (p5)",
+     "issue": "Judged strictly, the trimmed PDF alone does not meet rule 4: 204,476 matches no printed lodging line by itself, and pairing it with the Visitor Improvement column (a different statement line) relies on fund names. The full PDF settles it. Note 10 (report p22) says the convention-center commitment 'is funded from the lodging tax collected in the Cherry County Tourism Promotion and Improvements Funds'. With that printed statement, Promotion 204,476 + Improvement 204,476 = SoA Lodging 408,952 exactly, which proves the whole 204,476 is lodging tax. Split accepted. The item's computed text should cite Note 10 (full PDF report p22) as the evidence. Remainder 235,320 = 439,796 - 204,476 is correct and marked computed."},
+    {"severity": "warning", "path": "receipts[5].amount", "page": 2,
+     "extracted": 739753, "on_page": "Local 1,338,187 (p6)",
+     "issue": "Local is split into charges for services 739,753, capital grants 8,440, interest 490,469 and miscellaneous 99,525 (receipts[5]-[8]) from SoA program and general receipts. The amounts tie exactly (and Intergovernmental 3,419,920 = 3,357,476 + 62,444), but the report never prints a breakdown of the Local line itself, so the split is inferred."},
+    {"severity": "warning", "path": "detail[23].category", "page": 10,
+     "extracted": "streets/highways", "on_page": "Noxious Weed (under Public Works)",
+     "issue": "The category rules list noxious weed control under natural resources/conservation, and Phelps and Kearney use that category for noxious weed lines. Here it follows the Public Works heading instead."},
+    {"severity": "warning", "path": "detail[46].budget_final", "page": 12,
+     "extracted": null, "on_page": "DISBURSEMENTS budget 1,067,082",
+     "issue": "The Disaster Recovery DISBURSEMENTS 2,280,015 is split into principal 2,072,717 and interest 207,298 per p5 (ties). The printed final budget 1,067,082 was dropped from both pieces."}
   ]
 }

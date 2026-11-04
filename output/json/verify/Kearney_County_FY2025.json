@@ -1,13 +1,15 @@
 {
   "stem": "Kearney_County_FY2025",
-  "values_checked": 122,
+  "values_checked": 160,
   "issues": [
-    {"severity": "warning", "path": "receipts[5].split_from", "page": 2,
-     "extracted": "Local 863,660 split 391,003 / 256,875 / 86,658 / 126,466 / residual 2,658",
-     "on_page": "p4 Local 863,660; p2 Charges for services 391,003, Interest income 256,875, Central communications fee 86,658, Miscellaneous 126,466",
-     "issue": "The Statement of Activities does not print a breakdown of the Local line itself: its receipts total 7,411 less than p4, and charges for services 391,003 probably include the 4,753 Preservation & Modernization intergovernmental receipt (p4 intergovernmental 2,798,296 vs p2 2,686,091 + 107,452 = 2,793,543). The split is allowed by the county rule but does not tie, and the 2,658 residual (receipts[9]) is a plug"},
-    {"severity": "warning", "path": "detail[2].category", "page": 8,
-     "extracted": "other", "on_page": "Local 740,586 (also Road Local 27,685 p9, Non-Major Local 95,389 p7)",
-     "issue": "The statement's Local line is split into charges/interest/fees in receipts, but the same 'Local' label in detail is all 'other'. The Non-Major Local 95,389 is mostly the Central Communications Fund 86,628 (communications fee). The categories are inconsistent within the report"}
+    {"severity": "warning", "path": "receipts[0].source_page", "page": 2,
+     "extracted": 4, "on_page": "Property 3,889,222 / Motor vehicle 436,728 / Lodging 18,190 (p2)",
+     "issue": "The Taxes split items receipts[0]-[2] cite p4, but their amounts are printed only on the Statement of Activities (p2); p4 prints Taxes 4,344,140. The source_page should be 2. The split itself ties exactly (3,889,222 + 436,728 + 18,190 = 4,344,140)."},
+    {"severity": "warning", "path": "receipts[5].amount", "page": 2,
+     "extracted": 391003, "on_page": "Local 863,660 (p4)",
+     "issue": "Local is split into charges for services 391,003, interest 256,875, central communications fee 86,658, miscellaneous 126,466 and a computed residual 2,658 (receipts[5]-[9]), using Statement of Activities figures. The report prints no breakdown of Local. The SoA nets 7,411 out of both receipts and disbursements compared with p4, so it is unproven that SoA charges for services 391,003 sits wholly in Local. The split is inferred, not printed."},
+    {"severity": "warning", "path": "detail[41].source_page", "page": 10,
+     "extracted": 10, "on_page": "DISBURSEMENTS 857,493 (p10); Principal 740,000 / Interest 117,493 (p4)",
+     "issue": "The Debt Service split items detail[41]-[42] cite p10, but 740,000 and 117,493 are printed only on p4. The printed budget 858,493 was dropped from both pieces. The split ties."}
   ]
 }

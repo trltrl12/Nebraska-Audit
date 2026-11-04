@@ -1,15 +1,15 @@
 {
   "stem": "Phelps_County_FY2025",
-  "values_checked": 120,
+  "values_checked": 158,
   "issues": [
     {"severity": "warning", "path": "receipts[5].amount", "page": 6,
-     "extracted": 892014, "on_page": "Local 1,279,465 (p6); Statement of Activities (p2) prints Interest income 303,411 and Miscellaneous 84,040 as general receipts but does not say they are inside Local",
-     "issue": "the Local split (charges 892,014 + interest 303,411 + miscellaneous 84,040) is derived, not printed. The 892,014 remainder appears nowhere in the report, and it rests on the assumption that all interest and miscellaneous receipts sit in Local (miscellaneous could be in Intergovernmental). The arithmetic is right, and the line is marked computed and review. Someone should confirm the split is acceptable."},
-    {"severity": "warning", "path": "detail[47].category", "page": 15,
-     "extracted": "streets/highways", "on_page": "Road and Bridge Fund DISBURSEMENTS 251,042; p6 shows the whole 251,042 as Capital outlay",
-     "issue": "the governmental funds statement classifies all Road and Bridge Fund spending as capital outlay, so category capital outlay would tie to the statement. Similarly, Road Fund DISBURSEMENTS 2,760,786 (detail[41], p13) includes Capital outlay 385,964 per p5, but the budget schedule prints it as one line."},
-    {"severity": "warning", "path": "detail[49].category", "page": 10,
-     "extracted": "taxes (unlabeled) 258,456", "on_page": "Nonmajor Taxes 258,456 = County Library 135,356 + Visitors Promotion 33,582 + Visitors Improvement 33,582 + Courthouse Building 55,936 (p9-10); Lodging tax 67,164 (p2)",
-     "issue": "the Visitors Promotion and Visitors Improvement taxes (67,164) equal the Statement of Activities lodging tax, so part of this line is identifiable lodging tax. It is kept as unlabeled with review, which is defensible because the combining Total column is used."}
+     "extracted": 892014, "on_page": "Local 1,279,465 (p6); SoA general receipts Interest income 303,411, Miscellaneous 84,040 (p2)",
+     "issue": "Local is split into charges for services 892,014 (computed remainder), Interest income 303,411 and Miscellaneous 84,040 (receipts[5]-[7]). The report never prints a breakdown of the Local line. The pieces come from Statement of Activities general receipts that can only sit in Local, and the arithmetic ties (892,014 + 303,411 + 84,040 = 1,279,465), but no printed figure supports the 892,014 remainder. SoA charges for services is 1,897,510."},
+    {"severity": "warning", "path": "detail[51].source_page", "page": 10,
+     "extracted": 10, "on_page": "Visitors Promotion 33,582 + Visitors Improvement 33,582 (p10); Lodging tax 67,164 (p2)",
+     "issue": "The lodging split is supported: both fund columns inside the nonmajor Taxes line add to exactly the printed SoA Lodging tax 67,164, so rule 4 is met, and the remainder 191,292 = County Library 135,356 + Courthouse Building 55,936. However, 67,164 appears as a single figure only on p2. The item cites p10 (where it is a column sum, marked computed); the evidence-standard rule asks for the breakdown's page (p2)."},
+    {"severity": "warning", "path": "detail[42].budget_final", "page": 13,
+     "extracted": null, "on_page": "DISBURSEMENTS budget 3,561,070",
+     "issue": "The Road Fund DISBURSEMENTS line is split into public works 2,374,822 and capital outlay 385,964 using the p5 Road column (ties to 2,760,786). The printed final budget 3,561,070 was dropped from both pieces."}
   ]
 }
