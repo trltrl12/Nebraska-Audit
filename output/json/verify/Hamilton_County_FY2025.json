@@ -2,9 +2,21 @@
   "stem": "Hamilton_County_FY2025",
   "values_checked": 255,
   "issues": [
-    {"severity": "warning", "path": "detail[92].category", "page": 12, "extracted": "inheritance tax", "on_page": "Inheritance Tax Fund: Taxes 1,979,274 (budget 400,000)", "issue": "Tax re-check 2026-11-04: amount, label, page and budget match the print. The line is not split, but 'inheritance tax' comes from the fund name. Exhibit A's Inheritance tax 1,979,716 (p1) does not match 1,979,274 within $5 (gap 442, equal to the fund's Interest 442, with no printed explanation). The statement line receipts[0] for the same money is now taxes (unlabeled). Defensible, but the user should decide."},
-    {"severity": "warning", "path": "decision_needed", "page": 1, "extracted": null, "on_page": "Exhibit A Inheritance tax 1,979,716 vs Inheritance Tax Fund Taxes 1,979,274 + Interest 442 = 1,979,716", "issue": "Only the user can say whether the exact 442 tie (fund interest folded into Exhibit A's inheritance tax line) proves that the fund's Taxes 1,979,274 are inheritance tax (detail[92]). This question is not in decision_needed[]."},
-    {"severity": "warning", "path": "report_discrepancies", "page": 1, "extracted": null, "on_page": "Exhibit A total taxes 7,351,263 / interest 711,588 vs Exhibit B taxes 7,345,202 / interest 712,030", "issue": "The report's two exhibits disagree on taxes (6,061) and interest (442). This is not recorded in report_discrepancies."},
-    {"severity": "warning", "path": "receipts[6].amount", "page": 3, "extracted": 1297431, "on_page": 1381081, "issue": "Exhibit B prints Local 1,381,081, and the extraction reduced it by the 83,650 loan proceeds moved to debt_proceeds. The user's 2026-10-29 'as printed' rule says never remove an amount the statement prints. This is already in decision_needed[] and computed is marked; it is noted so the user sees the conflict. (The path was receipts[7] before the tax lines were merged.)"}
+    {
+      "severity": "warning",
+      "path": "report_discrepancies",
+      "page": 1,
+      "extracted": null,
+      "on_page": "Exhibit A total taxes 7,351,263 / interest 711,588 vs Exhibit B taxes 7,345,202 / interest 712,030",
+      "issue": "The report's two exhibits disagree on taxes (6,061) and interest (442). This is not recorded in report_discrepancies."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[8].amount",
+      "page": 3,
+      "extracted": 1297431,
+      "on_page": 1381081,
+      "issue": "Exhibit B prints Local 1,381,081, and the extraction reduced it by the 83,650 loan proceeds moved to debt_proceeds. The user's 2026-10-29 'as printed' rule says never remove an amount the statement prints. This is already in decision_needed[] and computed is marked; it is noted so the user sees the conflict. (Path moved to receipts[8] after the tax split.)"
+    }
   ]
 }
