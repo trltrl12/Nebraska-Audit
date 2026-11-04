@@ -357,6 +357,27 @@ breakdown of *that* line. Never split a line just because some other statement's
 add up to it; if a schedule only prints broad groups ("Taxes", "State", "Local"), record each group
 as printed with its best category and `"review": "broad group; detail on p.N"`.
 
+**Tax-line splits, evidence standard (user 2026-11-04; counties, cities, villages, governmental lines).** A
+`taxes (unlabeled)` line is split only when all of these hold:
+1. The report prints a breakdown by tax type of the same money (Statement of Activities general revenues, a budget
+   or combining schedule, a schedule of taxes, the notes). Start from the trimmed PDF; when it lacks the context
+   (e.g. the reconciliation page), use the complete original PDF.
+2. The printed pieces sum to the line within $5 of rounding, or tie after an adjustment the report itself prints
+   and attributes to one tax type (e.g. the reconciliation's property-tax availability difference).
+3. The split items add up to the original line exactly: every piece is its printed amount except at most one,
+   computed as the remainder (the line minus the printed pieces), which must be within $5 of the figure the report
+   proves for that tax type and carries `computed` (including the rounding gap).
+4. Partial split: a piece may come off a line only when the line's own printed fund columns hold that amount and it
+   matches a printed tax-type line within $5. Fund names alone are never evidence. The unproven remainder stays one
+   `taxes (unlabeled)` item with `split_from` and `computed`.
+5. Never split budget-basis schedule lines measured differently from the breakdown, lines whose breakdown is only
+   implied by fund names, or breakdowns that merely add up by coincidence.
+Each split item: category of its printed tax line (existing category strings and the user's rename rules),
+`original_label` = the printed breakdown label, `amount`, `source_page` (the breakdown's trimmed page, or the
+original line's page when the breakdown is only in the full PDF), the original line's fund_type / schedule / fund /
+department, `split_from: "Taxes 120,655,538 (p7)"`, `computed` where derived. The split items replace the original
+line at its position; nothing else in the JSON changes; `extraction_attempt` is unchanged.
+
 ### Disbursement categories (use exactly these strings)
 `general government` (administration, clerk, legal, insurance, elections), `public safety`
 (police, fire, rescue, sheriff, corrections, emergency management, jail), `streets/highways`
