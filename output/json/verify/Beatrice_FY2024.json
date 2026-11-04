@@ -1,0 +1,33 @@
+{
+  "stem": "Beatrice_FY2024",
+  "values_checked": 326,
+  "issues": [
+    {"severity": "warning", "path": "disbursements[1].category", "page": 5,
+     "extracted": "other", "on_page": "Airport operations 533,370",
+     "issue": "airport function has no matching disbursement category; 'other' is defensible (review set) but it is a sizeable last-resort line; the B-4 Airport detail lines (detail[110]-detail[125] except capital outlay) are also category 'other' for the same reason"},
+    {"severity": "warning", "path": "disbursements[8].original_label", "page": 5,
+     "extracted": "Capital Outlay: Streets/Highways", "on_page": "Capital outlay 7,438,101 (General Fund 1,525,701, Streets 3,640,798, Other Governmental 2,271,602)",
+     "issue": "the statement line spans several functions; the function was taken from the largest part (Streets, 49%), an extractor assumption"},
+    {"severity": "warning", "path": "receipts[12].category", "page": 5,
+     "extracted": "intergovernmental/state aid 7,617,725", "on_page": "Intergovernmental 7,930,552",
+     "issue": "only motor vehicle tax and pro-rate were split out; the remainder still holds about 2,650,337 printed as federal grants in the schedules (Streets 1,787,319, CDBG 584,474, Airport 21,755, General Fund federal lines). It is under half, so the dominant category holds, but federal money sits in state aid"},
+    {"severity": "warning", "path": "receipts[17].category", "page": 5,
+     "extracted": "donations/contributions", "on_page": "Miscellaneous 945,917",
+     "issue": "printed label is Miscellaneous; donations (151,137 p15 + 367,531 p32 = 518,668) are 55% of it, so dominant-category rule applies, but the line also holds Economic Development miscellaneous 349,080 and BASWA lease income 73,080"},
+    {"severity": "warning", "path": "receipts[21].category", "page": 8,
+     "extracted": "federal grants", "on_page": "Grant revenues 4,965",
+     "issue": "grantor not stated (noncapital grant, Electric fund); federal is an assumption"},
+    {"severity": "warning", "path": "disbursements[16].category", "page": 8,
+     "extracted": "Other Taxes Paid", "on_page": "Municipal expenses 953,378",
+     "issue": "assumed to be in-lieu/municipal payments to the city; the page does not say what they are"},
+    {"severity": "warning", "path": "detail[23].category", "page": 14,
+     "extracted": "federal grants", "on_page": "Victim assistance grants 104,801",
+     "issue": "grantor not stated; federal pass-through assumed"},
+    {"severity": "warning", "path": "detail[171].detail_category", "page": 30,
+     "extracted": "special assessments", "on_page": "Interest on assessments 878",
+     "issue": "category is Interest Income but detail_category is special assessments; inconsistent pair (investment income would match the category)"},
+    {"severity": "warning", "path": "ending_cash", "page": 4,
+     "extracted": 14372169, "on_page": "Cash and cash equivalents 14,372,169; Cash on deposit - county treasurer 171,719",
+     "issue": "ending_cash excludes the county treasurer cash 171,719, which the user's rules classify as Cash and Cash Equivalents (GAAP report, so the roll-forward is unaffected)"}
+  ]
+}
