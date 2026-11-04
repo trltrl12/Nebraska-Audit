@@ -1,0 +1,30 @@
+{
+  "stem": "Crete_FY2024",
+  "values_checked": 200,
+  "issues": [
+    {
+      "severity": "warning",
+      "path": "detail[41..56].fund",
+      "page": 21,
+      "extracted": "fund \"Nonmajor funds (combined)\" - lines taken from the Total Other Governmental Funds column",
+      "on_page": "Combining statement pp20-21 prints 8 individual fund columns: CDBG, Owner Occupied Rehab, Keno, ARPA, Airport, Capital Outlay, FEMA Disaster, Economic Development",
+      "issue": "Wrong column. The nonmajor detail is entered from the Total column instead of one line per printed fund column, so it loses fund attribution (e.g. Sales tax 634,757 and Economic development 822,708 are Economic Development Fund; Keno 102,690 is Keno Fund; Charges for services 121,423 and Environment and leisure 126,477 are Airport Fund; Grant income 108,760 is Owner Occupied Rehab; transfers in 302,780 are Capital Outlay Fund). The user's per-fund rule says the Total column is never used. Totals tie (1,011,755 / 1,256,444 / 302,780), so the amounts themselves are right. (downgraded: extractor rule uses the Total column for combining statements with more than 6 funds)"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[21].category",
+      "page": 11,
+      "extracted": "investment income",
+      "on_page": "Gain on investments 136,458 (Electric Fund)",
+      "issue": "Category follows the printed label, but the Electric Fund cash flow statement (p12) shows the same 136,458 as 'Proceeds from sale of property and equipment', so it may be a gain on asset sales (Sale of Property)."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[6].category",
+      "page": 7,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "Intergovernmental 1,937,126",
+      "issue": "Broad line with no breakdown in the trim. It may include highway allocation, pro-rate, homestead or property tax credit, which have their own categories (the Statement of Activities p3 shows 'State allocation' 1,800,343). Already flagged for review."
+    }
+  ]
+}
