@@ -1,0 +1,14 @@
+{
+  "stem": "Bayard_FY2024",
+  "values_checked": 142,
+  "issues": [
+    {"severity": "warning", "path": "receipts[10].computed", "page": 8,
+     "extracted": "Other state receipts 6,775, split_from Sales and other taxes 146,454 (p4), no computed field",
+     "on_page": "Budget schedule p8 prints Other state receipts 6,775 as its own line; p4 prints General Fund Sales and other taxes 118,219",
+     "issue": "placing 6,775 inside 'Sales and other taxes' is a remainder match (118,219 - sales tax 111,444), so it is a subtraction-based assignment and should carry computed; the all-funds budget schedule does not itself say these lines make up the statement line. Arithmetic is exact (111,444 + 28,235 + 6,775 = 146,454)."},
+    {"severity": "warning", "path": "receipts[11].category", "page": 4,
+     "extracted": "licenses and permits (37,291, unsplit)",
+     "on_page": "Fees, taxes, permits and licenses: General 24,904, Street 12,387; budget p8 Motor vehicle fees 12,387",
+     "issue": "mixed line; the Street Fund part 12,387 matches budget 'Motor vehicle fees' (motor vehicle tax) the same way the Sales and other taxes line was split from p8, so the treatment is inconsistent. Licenses and permits as the dominant category is defensible."}
+  ]
+}
