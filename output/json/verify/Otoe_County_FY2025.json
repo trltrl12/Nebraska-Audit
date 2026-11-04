@@ -1,15 +1,19 @@
 {
   "stem": "Otoe_County_FY2025",
-  "values_checked": 180,
+  "values_checked": 128,
   "issues": [
-    {"severity": "warning", "path": "detail[43].category", "page": 7,
-     "extracted": "streets/highways", "on_page": "Road Fund DISBURSEMENTS 5,361,064",
-     "issue": "The Road Fund schedule prints one disbursement total. p4 shows it is Public Works 4,293,173 + Capital Outlay 457,238 + Debt Service 610,653, so the whole amount filed as streets/highways (not itemized) includes capital outlay and debt service. Other one-line major funds (Inheritance, ARPA, Highway Bridge Buyback) were filed by their p4 function, so Road is treated inconsistently. Defensible because the schedule doesn't break it down."},
-    {"severity": "warning", "path": "detail[66].category", "page": 13,
-     "extracted": "donations/contributions", "on_page": "Miscellaneous: Veterans Aid 7,945 (p10), Federal Treasury Equitable Sharing 850 (p11), Local Grants - Sheriff 100 (p11)",
-     "issue": "Miscellaneous receipts of three funds combined and filed as donations/contributions under the user category decision. The report doesn't say what they are (the Veterans Aid 7,945 may not be a donation). Judgment call."},
-    {"severity": "warning", "path": "receipts[1].category", "page": 4,
-     "extracted": "lodging tax", "on_page": "Taxes 239,009 (Visitor Promotion Fund column, p10)",
-     "issue": "Lodging tax is inferred from the fund name only; the report never labels it lodging tax (marked review). The same goes for detail[61]."}
+    {"severity": "warning", "path": "detail[48].category", "page": 7,
+     "extracted": "inheritance tax", "on_page": "INHERITANCE FUND: Taxes 600,520 (budget 505,000)",
+     "issue": "The printed label is 'Taxes' and inheritance tax comes only from the fund name. No printed inheritance-tax amount exists, and the governmental receipts line it feeds (receipts[0] Taxes 9,851,479) is now taxes (unlabeled). This isn't a split, so the evidence standard doesn't strictly apply, but taxes (unlabeled) would be consistent with the statement line. The amount and budget are right."},
+    {"severity": "warning", "path": "receipts[5].category", "page": 4,
+     "extracted": {"category": "keno/lottery", "amount": 155473, "split_from": "Miscellaneous 449,107 (p4); Keno Lottery Fund column 155,473 (p12)"},
+     "on_page": "Miscellaneous 449,107 (p4 Total Governmental Funds); Keno Lottery Fund Miscellaneous 155,473 (p12)",
+     "issue": "155,473 is printed in the Keno Lottery Fund column of the nonmajor combining statement (p12), inside the p4 Nonmajor column 164,368, so the amount is printed and not derived. But keno/lottery as the category rests on the fund name alone: the printed label is 'Miscellaneous', and no keno receipts line appears in the trimmed PDF. The split was not part of the tax-line rework. A person should decide whether a fund-name split of a Miscellaneous line stands."},
+    {"severity": "warning", "path": "detail[63].category", "page": 12,
+     "extracted": {"category": "keno/lottery", "amount": 155473}, "on_page": "Keno Lottery Fund: Miscellaneous 155,473 (p12)",
+     "issue": "Same as receipts[5]: the amount is printed in the fund column, but keno/lottery rests on the fund name; the printed label is Miscellaneous."},
+    {"severity": "warning", "path": "detail[44].budget_final", "page": 7,
+     "extracted": null, "on_page": "Road Fund DISBURSEMENTS final budget 6,318,719",
+     "issue": "The Road Fund one-line disbursements 5,361,064 are split into detail[44-46] by the p4 Road Fund column (4,293,173 + 457,238 + 610,653 = 5,361,064, correct). The printed final budget 6,318,719 is not carried on any of the three pieces."}
   ]
 }

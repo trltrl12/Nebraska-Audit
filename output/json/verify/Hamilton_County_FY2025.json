@@ -1,19 +1,10 @@
 {
   "stem": "Hamilton_County_FY2025",
-  "values_checked": 162,
+  "values_checked": 255,
   "issues": [
-    {"severity": "warning", "path": "receipts[3]", "page": 3,
-     "extracted": "Property Tax Credit 716,429; Homestead 54,460; Pro-rate 10,318; State remainder 2,565,565 (receipts[3]-[6])",
-     "on_page": "Exhibit B 'State' 3,346,772 (p3); the fund schedules print only 'State'. Property tax credit, homestead and pro-rate appear as Exhibit A general receipts (pp1-2), not as a breakdown of the State line",
-     "issue": "The split assumes all three Exhibit A general-receipt lines sit inside Exhibit B's State line. The arithmetic is right (sums to 3,346,772) and the parts are marked split_from/computed/review, and the user's rule keeps pro-rate and tax credits out of state aid. But the page doesn't print a breakdown of this particular line, so a person should confirm it."},
-    {"severity": "warning", "path": "detail[72].category", "page": 9,
-     "extracted": "natural resources/conservation", "on_page": "Noxious Weed (under Public Works heading): 702 / 3,612 / 3,157; Total Public Works 14,895",
-     "issue": "The schedule prints Noxious Weed under Public Works, and Exhibit B's General Fund Public Works 14,895 includes it. The category rule (noxious weed -> natural resources) makes it defensible, but the detail functions no longer tie to the statement's Public Works column. This applies to detail[72]-[74]."},
-    {"severity": "warning", "path": "detail[52].detail_category", "page": 8,
-     "extracted": "salaries and wages", "on_page": "Miscellaneous - Personnel services 1,520,013",
-     "issue": "A county 'Miscellaneous' department's personnel services line is usually county-wide employee benefits (health insurance, retirement, FICA), not wages. It may be employee benefits and payroll taxes; judgment call."},
-    {"severity": "warning", "path": "detail[84].detail_category", "page": 11,
-     "extracted": "other state aid", "on_page": "Road Fund - State 2,040,901",
-     "issue": "Road Fund state receipts are most likely highway allocation. 'other state aid' is defensible for an unlabeled broad group, but less specific."}
+    {"severity": "warning", "path": "detail[92].category", "page": 12, "extracted": "inheritance tax", "on_page": "Inheritance Tax Fund: Taxes 1,979,274 (budget 400,000)", "issue": "Tax re-check 2026-11-04: amount, label, page and budget match the print. The line is not split, but 'inheritance tax' comes from the fund name. Exhibit A's Inheritance tax 1,979,716 (p1) does not match 1,979,274 within $5 (gap 442, equal to the fund's Interest 442, with no printed explanation). The statement line receipts[0] for the same money is now taxes (unlabeled). Defensible, but the user should decide."},
+    {"severity": "warning", "path": "decision_needed", "page": 1, "extracted": null, "on_page": "Exhibit A Inheritance tax 1,979,716 vs Inheritance Tax Fund Taxes 1,979,274 + Interest 442 = 1,979,716", "issue": "Only the user can say whether the exact 442 tie (fund interest folded into Exhibit A's inheritance tax line) proves that the fund's Taxes 1,979,274 are inheritance tax (detail[92]). This question is not in decision_needed[]."},
+    {"severity": "warning", "path": "report_discrepancies", "page": 1, "extracted": null, "on_page": "Exhibit A total taxes 7,351,263 / interest 711,588 vs Exhibit B taxes 7,345,202 / interest 712,030", "issue": "The report's two exhibits disagree on taxes (6,061) and interest (442). This is not recorded in report_discrepancies."},
+    {"severity": "warning", "path": "receipts[6].amount", "page": 3, "extracted": 1297431, "on_page": 1381081, "issue": "Exhibit B prints Local 1,381,081, and the extraction reduced it by the 83,650 loan proceeds moved to debt_proceeds. The user's 2026-10-29 'as printed' rule says never remove an amount the statement prints. This is already in decision_needed[] and computed is marked; it is noted so the user sees the conflict. (The path was receipts[7] before the tax lines were merged.)"}
   ]
 }

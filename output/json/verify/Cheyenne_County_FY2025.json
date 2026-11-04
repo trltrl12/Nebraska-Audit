@@ -1,12 +1,12 @@
 {
   "stem": "Cheyenne_County_FY2025",
-  "values_checked": 128,
+  "values_checked": 98,
   "issues": [
-    {"severity": "warning", "path": "receipts[1].category", "page": 4,
-     "extracted": "taxes (unlabeled)", "on_page": "Local 8,835,831 less Inheritance Tax Fund 603,360 = 8,232,471",
-     "issue": "The 'Local' line is not a tax line. It mixes property and other taxes (6,657,697 on p2) with charges for services (1,669,793 on p2) and keno receipts (Keno Lottery Fund 119,797 on p11). Taxes are the dominant part, so the category is defensible, but taxes (unlabeled) is meant for combined tax lines. The same applies to the detail 'Local' lines (detail[0], [22], [31])."},
     {"severity": "warning", "path": "receipts[0].category", "page": 4,
-     "extracted": "inheritance tax", "on_page": "Inheritance Tax Fund column, Local 603,360",
-     "issue": "Inheritance tax is assumed from the fund name. The fund's Local receipts may include interest. The line already carries review."}
+     "extracted": "taxes (unlabeled)", "on_page": "Local 8,835,831 (Total Governmental Funds); p2: Property and other taxes 6,657,697, charges for services 1,669,793",
+     "issue": "Correctly restored as the printed line (label, amount and page match, with no split). But the broad 'Local' group is not all taxes: the p2 general receipts show Property and other taxes 6,657,697, about 75% of it, and the rest is mostly charges for services. taxes (unlabeled) is a defensible dominant-category choice, but the line is mixed."},
+    {"severity": "warning", "path": "detail[29].category", "page": 8,
+     "extracted": "inheritance tax", "on_page": "INHERITANCE TAX FUND RECEIPTS: Local 603,360 (budget 75,000)",
+     "issue": "The printed label is 'Local' and inheritance tax comes only from the fund name; no printed inheritance-tax amount exists. This isn't a split, so the evidence standard doesn't strictly apply, but the statement line it sits in (receipts[0] Local 8,835,831) is now taxes (unlabeled), so taxes (unlabeled) would be consistent. The amount and budget are right."}
   ]
 }

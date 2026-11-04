@@ -1,13 +1,12 @@
 {
   "stem": "Thayer_County_FY2025",
-  "values_checked": 112,
+  "values_checked": 124,
   "issues": [
-    {"severity": "warning", "path": "detail[0].split_from", "page": 8,
-     "extracted": "Taxes 3,399,575 split into property 3,043,382 + motor vehicle 356,193",
-     "on_page": "General Fund budget schedule prints only Taxes 3,399,575; the property/motor vehicle breakdown is government-wide (p2)",
-     "issue": "split inferred because the p2 property + motor vehicle amounts happen to equal the General Fund taxes (lodging 6,468 sits in nonmajor funds); the schedule itself does not print this breakdown"},
-    {"severity": "warning", "path": "detail[32].category", "page": 5,
+    {"severity": "warning", "path": "receipts[0].original_label", "page": 2,
+     "extracted": "Taxes (Property) / Taxes (Motor vehicle) / Taxes (Lodging)", "on_page": "Property / Motor vehicle / Lodging",
+     "issue": "The split of Taxes 3,406,043 (p4) is proven: p2 prints Property 3,043,382 + Motor vehicle 356,193 + Lodging 6,468 = 3,406,043 exactly, and every piece is its printed amount on p2. The evidence standard asks for original_label to be the printed breakdown label; receipts[0]-[2] use 'Taxes (Property)' etc. This is cosmetic: amounts, categories and pages are right."},
+    {"severity": "warning", "path": "detail[31].category", "page": 5,
      "extracted": "streets/highways", "on_page": "Noxious Weed column, Public works 155,867",
-     "issue": "the extractor rules list noxious weed control under natural resources/conservation; streets/highways follows the statement's Public works heading"}
+     "issue": "The extractor rules list noxious weed control under natural resources/conservation; streets/highways follows the statement's Public works heading."}
   ]
 }
