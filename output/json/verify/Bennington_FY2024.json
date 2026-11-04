@@ -1,0 +1,21 @@
+{
+  "stem": "Bennington_FY2024",
+  "values_checked": 136,
+  "issues": [
+    {"severity": "warning", "path": "receipts[1].category", "page": 6,
+     "extracted": "sales tax 1,166,279", "on_page": "Local option sales tax 1,090,852 + Motor vehicle tax 75,427 = 1,166,279 (all-funds budget schedule p6)",
+     "issue": "The p6 budget schedule implies the statement's 'Sales tax' line includes 75,427 of motor vehicle tax (exact tie). Kept as printed label (printed tax-type label wins), but the user may want to know; same applies to detail[1] and detail[2]"},
+    {"severity": "warning", "path": "detail[9].category", "page": 8,
+     "extracted": "licenses and permits", "on_page": "Parks: Licenses, fees and permits 337,748",
+     "issue": "Statement of Activities p2 shows 337,748 as Culture and recreation charges for services; Parks fees may be Recreation Fees rather than licenses and permits (also affects receipts[8], 706,060, of which Parks is 47.8%)"},
+    {"severity": "warning", "path": "receipts[13].category", "page": 4,
+     "extracted": "licenses and permits", "on_page": "Sewer: Licenses, fees, and permits 239,908",
+     "issue": "Statement of Activities p2 shows this Sewer 239,908 as Capital grants and contributions (likely connection/impact fees); licenses and permits is a judgment call"},
+    {"severity": "warning", "path": "disbursements[6].original_label", "page": 5,
+     "extracted": "Capital Outlay: Streets/Highways", "on_page": "Capital outlays 1,753,580 (Street 919,164 + Parks 834,416, p7-8)",
+     "issue": "Single statement line spans two functions; the 'Streets/Highways' function label covers 834,416 of Parks (culture/recreation) capital outlay"},
+    {"severity": "warning", "path": "missing", "page": 3,
+     "extracted": null, "on_page": "Statement of Fund Balances p3 shows only General, Sewer, Keno, TIF columns; Debt Service and Total columns (report p9) are not in the trim",
+     "issue": "Trim lacks the second half of the governmental funds Statement of Fund Balances; balance sheet uses the Statement of Net Position instead (totals tie at 4,318,925), so no figure is missing from the JSON"}
+  ]
+}
