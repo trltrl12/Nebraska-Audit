@@ -1,0 +1,18 @@
+{
+  "stem": "Eagle_FY2024",
+  "values_checked": 80,
+  "issues": [
+    {"severity": "warning", "path": "receipts[4].category", "page": 4,
+     "extracted": "intergovernmental/state aid", "on_page": "Miscellaneous income/(expense) (74,097) (General (253,985), Special Revenue 179,888); budget schedules pp7-8 call the same amounts 'Other state receipts'",
+     "issue": "The statement labels the line Miscellaneous and it is net negative; state aid is based on the budget-schedule label only. Defensible, but a negative state-aid receipt looks odd."},
+    {"severity": "warning", "path": "detail[0].category", "page": 7,
+     "extracted": "property tax 355,928", "on_page": "Personal and real property taxes 355,928 = p4 General column Property taxes 331,065 + Homestead exemption 24,863",
+     "issue": "Homestead exemption (its own category) stays inside the property tax line, while the same schedule's 'Other local receipts' was split using the same p4 column. The handling is inconsistent; the line could be split the same way. Same for detail[19] (Debt Service property taxes 162,671 = 152,016 + homestead 10,655)."},
+    {"severity": "warning", "path": "detail[3].budget_final", "page": 7,
+     "extracted": 174000, "on_page": "Other local receipts: budget 174,000, actual 262,485 (split into sales tax 178,253 + interest 7,911 + charges 76,321)",
+     "issue": "The whole line's budget is attached to the sales tax piece only."},
+    {"severity": "warning", "path": "receipts[11].category", "page": 6,
+     "extracted": "other", "on_page": "Enterprise Fund non-operating Miscellaneous 330,853",
+     "issue": "This unexplained line is 44% of business-type receipts and is what turns an operating loss of (275,533) into a gain. It may be a grant, loan or transfer; a person may need to check the notes."}
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "stem": "Curtis_FY2024",
+  "values_checked": 190,
+  "issues": [
+    {"severity": "warning", "path": "disbursements[0].amount", "page": 4,
+     "extracted": 332849, "on_page": "General government 332,849 (includes General Fund 'Transfer out' 91,518 per p10); Environment and leisure 99,960 includes Parks transfer out 6,000",
+     "issue": "The statement counts 97,518 of General Fund transfers out inside expenditures and also deducts net transfers (40,468) below, so the transfer is in spending as printed. Kept as printed under the 2026-10-29 as-printed rule and listed in decision_needed; flagged so a person confirms."},
+    {"severity": "warning", "path": "detail[69]", "page": 4,
+     "extracted": "Street Fund, Sales tax Fund and Electric/Water/Sewer/Trash/Golf fund lines taken from the basic statements (detail[69]-detail[116])",
+     "on_page": "General Fund has its own departmental schedule (p10); the only other schedule is the combined all-funds budgetary schedule (p11)",
+     "issue": "The 2026-10-28 user rule says statement lines are not added for other funds when some funds have their own schedules; the extractor followed the older 'keep the single-fund schedule and add the other funds' wording. Defensible but conflicts with the newer rule."},
+    {"severity": "warning", "path": "detail[115].function", "page": 7,
+     "extracted": "utilities", "on_page": "Golf - Maintenance of system 12,713",
+     "issue": "Golf course is not a utility; function would be culture/recreation (same for detail[116] Golf Miscellaneous 266)."},
+    {"severity": "warning", "path": "detail[114].category", "page": 7,
+     "extracted": "other", "on_page": "Golf - Other 16,730 (the Golf fund's only operating revenue)",
+     "issue": "Golf fund's only revenue is probably golf fees (Recreation Fees), but the page prints only 'Other'."},
+    {"severity": "warning", "path": "receipts[12].category", "page": 7,
+     "extracted": "reimbursements/refunds", "on_page": "MEAN distribution 68,150 (nonoperating)",
+     "issue": "Distribution from the Municipal Energy Agency of Nebraska; reimbursement is a guess (could be other / a power-supplier rebate)."}
+  ]
+}
