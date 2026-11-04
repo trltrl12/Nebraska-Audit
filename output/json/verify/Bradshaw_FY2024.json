@@ -1,0 +1,21 @@
+{
+  "stem": "Bradshaw_FY2024",
+  "values_checked": 195,
+  "issues": [
+    {"severity": "error", "path": "missing", "page": 11,
+     "extracted": null, "on_page": "Combining Statement of Modified Cash Receipts - General Fund, continuation page (source report p25, not in the trim): Bradshaw Days Fund receipts 8,224.34 (p16), i.e. Bradshaw Days Receipts 3,838.00 + Donations 4,386.34 (statement General Fund column p6; the General, Community Center and RV Park columns on p11 hold neither); Parks & Recreation receipts 0",
+     "issue": "The General Fund group's receipt detail is incomplete. The detail totals 80,900.77 + 17,295.06 + 2,844.00 = 101,039.83, but the statement's General Fund receipts are 109,264.17. The 8,224.34 Bradshaw Days Fund column is on source p25, which the trim skipped (trimmed p11 = report p24, p12 = report p26). Re-trim with that page (config/extra_pages.csv) and add the lines."},
+    {"severity": "error", "path": "missing", "page": 15,
+     "extracted": null, "on_page": "Budgetary Comparison Schedule - Proprietary Funds, Sewer Fund column (source report p30, not in the trim): Sewer receipts 35,408.53 (Use Fees 23,012.28, Miscellaneous 12,396.25) and disbursements 33,794.39 (Personal Services 18,673.99, Operating 11,344.37, Supplies 381.03, Repairs and Maintenance 795.00, Capital Outlay 2,600.00) per Exhibit IV p9",
+     "issue": "The proprietary detail covers only the Electric and Water funds; the Sewer Fund is missing from detail. Its schedule page (report p30, between trimmed p15 = report p29 and p16 = report p31) is not in the trim. Re-trim with that page, or add the Sewer lines from the Exhibit IV Sewer column under the per-fund rule."},
+    {"severity": "warning", "path": "balance_sheet", "page": 1,
+     "extracted": "Statement of Net Position Total column (governmental + business-type): Deposits 504,147.73, Cash - County Treasurer 2,610.15, Unrestricted 506,757.88", "on_page": "Governmental funds assets/fund balances (p8, Total Governmental Funds): Cash and Deposits (196,757.75), County Treasurers' Balance 1,874.92, Assigned 58,404.71, Unassigned (253,287.54); its total (194,882.83) equals the government-wide governmental column",
+     "issue": "The user's 2026-10-27 balance-sheet rule says cash-basis governmental lines come from the governmental funds statement, with fund balance by classification, when its totals equal the government-wide figures (they do here). This extraction uses the combined government-wide Total column, so fund-balance classification is lost and governmental and business-type amounts are mixed. All amounts match their pages."},
+    {"severity": "warning", "path": "receipts[17].category", "page": 6,
+     "extracted": "intergovernmental/state aid", "on_page": "Grants 20,500.00; Statement of Activities (p5) lists Grants 20,500.00 separately from State Receipts 58,524.79 (= Highway Allocation + Incentive + Equalization)",
+     "issue": "The report itself keeps Grants apart from state receipts, so the source may be federal or private. The category is uncertain (a review note is already present). The same applies to detail[10]."},
+    {"severity": "warning", "path": "disbursements[19].category", "page": 9,
+     "extracted": "utilities", "on_page": "Operating Disbursements 56,148.70 (business-type, listed by cost type)",
+     "issue": "The 2026-10-28 utility cost-type rule says cost-type lines take their cost type as category, and the 2026-10-29 rule says lines labelled 'Operating' that would be other become category Operating. This line keeps the function category utilities and has no function field. disbursements[22] (Utilities 5,701.69) is similar: it could be the cost type utilities (power, gas, phone)."}
+  ]
+}

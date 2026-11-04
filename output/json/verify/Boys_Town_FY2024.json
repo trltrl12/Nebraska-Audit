@@ -1,0 +1,15 @@
+{
+  "stem": "Boys_Town_FY2024",
+  "values_checked": 113,
+  "issues": [
+    {"severity": "warning", "path": "receipts[7].category", "page": 4,
+     "extracted": "other", "on_page": "Other revenues 58,501; Statement of Activities (p2): Capital Grants and Contributions 53,985 + general revenue Other 4,516 = 58,501",
+     "issue": "The Statement of Activities shows that 53,985 of 'Other revenues' (92%) is capital grants and contributions. Under the more-than-half rule that points to donations/contributions or a grant category, though the grantor isn't stated. The current value comes from the user's category decision, and the printed label says other. The same applies to detail[7]."},
+    {"severity": "warning", "path": "receipts[0].category", "page": 4,
+     "extracted": "charges for services/fees", "on_page": "Gas and water revenue allocation 17,318",
+     "issue": "This is an allocation of gas and water revenue, so it might belong in the newer Utility Charges category (split out of charges for services). Judgment call. The same applies to detail[1]."},
+    {"severity": "warning", "path": "detail", "page": 7,
+     "extracted": "expenditure detail from the budget-basis schedule p7 (total 3,726,536)", "on_page": "GAAP-basis Schedule of Expenditures p6, total 3,774,628, which ties to the governmental fund statement",
+     "issue": "The extractor's choice: expenditure detail is taken from the budget-basis schedule (p7, which matches the p5 revenue detail). The p6 schedule, which ties to the statement total, is not recorded, to avoid double counting. The detail lines therefore don't tie to the statement disbursements (gap of 48,092). This is defensible, but a person may want p6 instead."}
+  ]
+}
