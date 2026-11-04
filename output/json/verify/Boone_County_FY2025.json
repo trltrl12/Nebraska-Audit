@@ -1,9 +1,12 @@
 {
   "stem": "Boone_County_FY2025",
-  "values_checked": 80,
+  "values_checked": 86,
   "issues": [
+    {"severity": "warning", "path": "receipts[2].amount", "page": 4,
+     "extracted": "18,283 + 15,900 + 45,822 (receipts[2..4])", "on_page": "Nonmajor Funds Taxes 80,005 (p4); fund columns only in full PDF nonmajor schedule",
+     "issue": "The Visitors' Promotion (lodging tax), 911 Emergency Management and 911 Wireless Service (other taxes) pieces come from the full PDF's nonmajor schedule, which is not in the trimmed PDF and not available locally, so they could not be checked visually. They add exactly to the printed Nonmajor 80,005, and the same three figures appear in the earlier tax_splits.csv row (read from full p28; the JSON cites 'full report p26', probably the printed report page number)."},
     {"severity": "warning", "path": "receipts[0]", "page": 4,
-     "extracted": "Taxes 5,165,688 (single line)", "on_page": "Taxes 5,165,688",
-     "issue": "Restored line matches the page exactly. But output/json/_meta/tax_splits.csv (row for receipts index 1) still describes a 4,433,615 remainder line after an Inheritance Fund piece, and notes still say the line was split. Neither matches the JSON now; the log should record the 732,073 inheritance piece being merged back."}
+     "extracted": "Taxes 5,165,688 split into 5 pieces", "on_page": "Taxes 5,165,688",
+     "issue": "output/json/_meta/tax_splits.csv still has the older Boone rows (row 105: 4,433,615 remainder 'not split, fund names are not evidence'; row 348: 'older split: merged' back to a single line). Neither matches the current relaxed split. The notes field also still describes the 4,433,615 remainder. The log should record the new classification."}
   ]
 }
