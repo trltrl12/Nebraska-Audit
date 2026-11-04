@@ -1,0 +1,70 @@
+{
+  "stem": "Arlington_FY2024",
+  "values_checked": 148,
+  "issues": [
+    {
+      "severity": "warning",
+      "path": "receipts[0].category",
+      "page": 8,
+      "extracted": "property tax 622,044",
+      "on_page": "General Fund budget schedule: Property 532,625, Carline tax 144, Motor vehicle 38,156, Road tax 10,875, Wheel tax 12,929",
+      "issue": "the printed 'Property taxes' line includes motor vehicle, wheel, road and carline taxes. The p8 breakdown is 1,378 off the p4 General Fund amount 593,351, so it can't be split exactly and keeping the printed label is defensible. Still, about 62k of the 622,044 is not property tax."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[1].category",
+      "page": 8,
+      "extracted": "intergovernmental/state aid 261,871",
+      "on_page": "Highway allocation 182,319, Motor vehicle fees 13,037, Incentive 3,000, State equalization 20,664, Homestead exemption 38,459",
+      "issue": "the line includes homestead exemption (38,459) and motor vehicle fees, which have their own categories. The breakdown doesn't tie exactly (off by 1,376), so it isn't split. The review note is already present."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[4].category",
+      "page": 11,
+      "extracted": "Recreation Fees",
+      "on_page": "Charges for services 33,077 (Pool 27,277, Cemetery 5,800)",
+      "issue": "mixed line; dominant category used, and the review note names the mix"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[40].category",
+      "page": 4,
+      "extracted": "culture/recreation (Cemetery department lines detail[40]-[43])",
+      "on_page": "Cemetery column p11; the statement's Culture and recreation 244,430 = Cemetery + Park + Pool + Library",
+      "issue": "the rules put cemetery under health/welfare, but the report's own statement counts it in culture and recreation. Defensible, since it follows the statement."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[74].detail_category",
+      "page": 9,
+      "extracted": "other taxes / other local taxes",
+      "on_page": "Bond Fund 'Other local taxes' 3,016; the governmental funds statement p4 shows it under Intergovernmental",
+      "issue": "the category follows the printed label, but the statement classes the same money as intergovernmental (possibly state tax credits for the bond levy)"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[79].fund",
+      "page": 6,
+      "extracted": "Proprietary Funds (Water and Sewer Fund combined) budget schedule p10",
+      "on_page": "Proprietary statement p6 prints separate Water and Sewer columns",
+      "issue": "under the per-fund detail rule (cities/villages), a combined all-funds schedule is replaced by one line per fund column of the proprietary statement. Here the combined water+sewer budget schedule (detail[79]-[86]) was kept instead. This is a judgment call."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[12].category",
+      "page": 6,
+      "extracted": "utilities",
+      "on_page": "Utilities and telephone 40,648",
+      "issue": "cost-type line given category 'utilities', which is also the function name; a cost-type category such as 'Utilities (Power, Gas, Phone)' would be clearer"
+    },
+    {
+      "severity": "warning",
+      "path": "balance_sheet.liabilities[3].category",
+      "page": 1,
+      "extracted": "debt - due in more than one year 390,000",
+      "on_page": "Long-term debt 390,000 (proprietary statement p5: current portion of bonds 75,000, bonds payable 315,000)",
+      "issue": "the government-wide line isn't split by due date, so the 75,000 current portion is counted as long-term"
+    }
+  ]
+}
