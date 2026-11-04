@@ -1,22 +1,12 @@
 {
   "stem": "Frontier_County_FY2025",
-  "values_checked": 116,
+  "values_checked": 122,
   "issues": [
-    {
-      "severity": "warning",
-      "path": "receipts[0].amount",
-      "page": 2,
-      "extracted": 2172066,
-      "on_page": "Statement of Activities Property 2,172,068; p4 Taxes 2,335,449",
-      "issue": "Taxes line (p4) split using the Statement of Activities general-receipts tax breakdown (a different statement, which totals 2,335,451, $2 more than p4). The split is marked split_from/computed and the $2 is in report_discrepancies. The fund columns support it: General 1,753,151 + Road 497,387 + EDA 3 + Courthouse Bond 66,140 - motor vehicle 144,615 = 2,172,066. Still, it is a cross-statement split, so a person should confirm it is acceptable."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[29].detail_category",
-      "page": 8,
-      "extracted": "taxes (unlabeled)",
-      "on_page": "Total Nonmajor Taxes 84,911 = Lodging Tax Fund 10,112 (p6) + 911 Emergency 8,656 (p7) + EDA/STPE 3 + Courthouse Bond 66,140 (p8)",
-      "issue": "the combining pages print the nonmajor Taxes by fund, so lodging tax (10,112) and the 911 taxes (8,656) can be identified. Recording it as taxes (unlabeled) is defensible because only the Total column is recorded."
-    }
+    {"severity": "warning", "path": "receipts[0].original_label", "page": 2,
+     "extracted": "Taxes", "on_page": "Property / Motor vehicle / Lodging / Other (Statement of Activities general receipts, under Taxes)",
+     "issue": "Split items receipts[0]-[3] keep original_label 'Taxes'; the tax-line split standard says original_label = the printed breakdown label (Property, Motor vehicle, Lodging, Other), as the detail split items already do. Amounts and arithmetic are correct (2,172,066 + 144,615 + 10,112 + 8,656 = 2,335,449; property is the computed remainder, 2 below the printed 2,172,068, recorded in report_discrepancies)."},
+    {"severity": "warning", "path": "detail[29].detail_category", "page": 10,
+     "extracted": "highway allocation", "on_page": "Road Fund Intergovernmental 1,539,655 (not itemized)",
+     "issue": "Assumption: Road Fund intergovernmental treated as highway allocation; the page does not itemize it (review note present)."}
   ]
 }
