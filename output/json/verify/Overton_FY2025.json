@@ -1,6 +1,6 @@
 {
   "stem": "Overton_FY2025",
-  "values_checked": 92,
+  "values_checked": 95,
   "issues": [
     {"severity": "error", "path": "missing", "page": null,
      "extracted": "notes end '...replace the combined schedule.'", "on_page": "trimmed PDF has 10 pages",
@@ -11,20 +11,24 @@
     {"severity": "error", "path": "balance_sheet.total_equity.source_page", "page": 1,
      "extracted": {"amount": 838423, "source_page": 4}, "on_page": "TOTAL NET POSITION 838,423 (p1); p4 total fund balances 198,604",
      "issue": "[fixed 2026-10-28: source_page set to 1] same as total_assets: amount is on p1, not the cited p4"},
-    {"severity": "warning", "path": "receipts[9]", "page": 9,
+    {"severity": "warning", "path": "receipts[11]", "page": 9,
      "extracted": {"original_label": "Grant proceeds", "amount": 150000}, "on_page": "not printed on the p5 governmental funds statement; Fire and Ambulance column lines add to 39,304 vs printed Total revenues 189,304; 'Grant proceeds 150,000' printed on p9 budget schedule, capital grants 150,000 Public Safety on p2",
      "issue": "extractor added a line the governmental statement omits, so receipts tie to 791,540 while report_discrepancies also records the 150,000 gap. Reasonable but an assumption; grantor (state vs federal) not stated"},
     {"severity": "warning", "path": "detail[18].source_page", "page": 5,
      "extracted": 5, "on_page": "150,000 not printed on p5 (p9 budget schedule / p2)",
      "issue": "[fixed 2026-10-28: source_page set to 9, computed note kept] detail grant line cites p5, where the amount does not appear; computed note explains it"},
-    {"severity": "warning", "path": "receipts[6].category", "page": 2,
+    {"severity": "warning", "path": "receipts[8].category", "page": 2,
      "extracted": "licenses and permits", "on_page": "Licenses and fees 62,169; Statement of Activities p2 shows it as charges for services: General government 2,546, Public Safety 14,844, Trash 44,779",
      "issue": "[fixed 2026-10-28: category Utility Charges (dominant trash) with review naming the mix] 72% of the line (44,779, Other Governmental Funds) is trash charges (Utility Charges, garbage/refuse) and 14,844 is Fire and Ambulance (likely Ambulance Fees); licenses and permits is not the dominant category"},
     {"severity": "warning", "path": "detail[9..11].category", "page": 5,
      "extracted": "licenses and permits / detail_category other charges for services", "on_page": "Licenses and fees 2,546 / 14,844 / 44,779",
      "issue": "[fixed 2026-10-28: General 2,546 licenses and permits; Fire 14,844 Ambulance Fees / ambulance/rescue fees; Other Gov 44,779 Utility Charges / refuse/sanitation charges] category and detail_category disagree; per p2 the Other Governmental 44,779 is Trash (refuse/sanitation charges) and Fire 14,844 is public safety charges (likely ambulance/rescue fees)"},
-    {"severity": "warning", "path": "receipts[10].category", "page": 8,
+    {"severity": "warning", "path": "receipts[12].category", "page": 8,
      "extracted": "charges for services/fees", "on_page": "Charges for services 163,243 (Water and Sewer proprietary funds)",
-     "issue": "[fixed 2026-10-28: category Utility Charges] utility fund charges are Utility Charges under the user's 2026-10-28 rule (detail lines already use Utility Charges)"}
+     "issue": "[fixed 2026-10-28: category Utility Charges] utility fund charges are Utility Charges under the user's 2026-10-28 rule (detail lines already use Utility Charges)"},
+    {"severity": "warning", "path": "receipts[2].category", "page": 10,
+     "extracted": {"category": "intergovernmental/state aid", "original_label": "Other state revenue", "amount": 45446},
+     "on_page": "p10 county treasurer schedule (General + Street Bond only): Homestead exemption 16,849, Pro-rate 576, In-lieu-of taxes 14,851, Carline tax 718, State tax credit 14,005 (sum 46,999, does not tie to 45,446)",
+     "issue": "Relaxed-pass split of County treasurer revenues 270,982 (p5) checked and supported: property tax 209,393 (p3; also p10 152,871 + 56,522) + motor vehicle tax 16,143 (p3, p10) + 45,446 = 270,982 exactly. The 45,446 is established exactly by printed figures three ways: 270,982 - 225,536 (p9 'Property and motor vehicle taxes') = 45,446; p9 'Other state revenue' 56,904 - p5 'Other state revenues' 11,458 = 45,446; p3 'Intergovernmental sources' 123,769 - Equalization 60,161 - Motor vehicle fee 6,704 - Other state revenues 11,458 = 45,446 (every other p5 line ties to its own p2/p3 figure, so only County treasurer revenues can hold it). Its type is printed by the statements themselves (intergovernmental / other state revenue), not assumed, so it is not an error. Warning only: the piece is a mix of items the user's rules give their own categories (Homestead Exemption, Motor Vehicle Pro-Rate, In Lieu of Tax, Carline Tax, Property Tax Credit), which no printed figure lets be split exactly for the whole village; and original_label 'Other state revenue' is the p9 label of the 56,904 line, not of the 45,446 amount (marked computed)"}
   ]
 }
