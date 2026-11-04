@@ -1,0 +1,21 @@
+{
+  "stem": "Beaver_City_FY2024",
+  "values_checked": 205,
+  "issues": [
+    {"severity": "warning", "path": "receipts[7].category", "page": 6,
+     "extracted": "donations/contributions", "on_page": "Grants and contributions 617,803 (p3 Statement of Activities: operating grants and contributions 587,409 + capital grants and contributions 30,394)",
+     "issue": "Label mixes grants and contributions and the grantor is not stated (Library 472,312, Ambulance 87,300, Fire 56,561 on p18/p17). If any part comes from a government it belongs in intergovernmental/federal grants. Defensible, but a judgment call; same applies to detail[11], detail[15], detail[26]."},
+    {"severity": "warning", "path": "receipts[17].category", "page": 8,
+     "extracted": "federal grants", "on_page": "Grant income 46,113 (Water Fund, capital grants and contributions p3)",
+     "issue": "Grantor not printed; could be state aid rather than federal."},
+    {"severity": "warning", "path": "disbursements[5].original_label", "page": 6,
+     "extracted": "Capital Outlay: Culture/Recreation", "on_page": "Capital outlay 19,311 (General 15,514 = Park 6,300 + Library 9,214; Street Fund 3,797)",
+     "issue": "One statement line labelled with a single function, but 3,797 of it is Street Fund (streets/highways). Dominant function used; computed note present."},
+    {"severity": "warning", "path": "ending_investments", "page": 4,
+     "extracted": 588970, "on_page": "Investments 588,970 (Total Governmental Funds); certificates of deposit 667,686 on the same row block",
+     "issue": "ending_investments is already included in ending_cash 799,262 (total fund balance = cash + CDs + county treasurer + investments), and beginning_investments is null. If any output adds ending_investments to ending_cash it double counts; CDs 667,686 are not treated as investments. Asymmetric beginning/ending treatment."},
+    {"severity": "warning", "path": "detail[91].detail_category", "page": 12,
+     "extracted": "highway allocation", "on_page": "Intergovernmental 164,066 (Street Fund)",
+     "issue": "Assumption by the extractor: the schedule prints only 'Intergovernmental'; highway allocation is likely but not printed."}
+  ]
+}
