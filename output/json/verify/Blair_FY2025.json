@@ -1,21 +1,18 @@
 {
   "stem": "Blair_FY2025",
-  "values_checked": 215,
+  "values_checked": 300,
   "issues": [
-    {"severity": "error", "path": "balance_sheet.deferred_inflows[0].category", "page": 2,
-     "extracted": "Deferred Gain on Refunding", "on_page": "Nonrefundable deposits 39,508",
-     "issue": "[fixed 2026-10-28: category changed to other; p2 shows Nonrefundable deposits, not a refunding gain] Nonrefundable deposits are not a gain on a debt refunding. This looks like scripts/user_rules.py's deferred-inflow regex 'refund' matching inside 'Nonrefundable'. The category should stay a generic deferred inflow (other), and the regex needs a word boundary"},
-    {"severity": "warning", "path": "receipts[8].category", "page": 7,
-     "extracted": "charges for services/fees", "on_page": "Charges for services 10,575,965 (Water and Sewer enterprise funds)",
-     "issue": "Under the user rule (2026-10-28), utility fund sales/charges go to Utility Charges. user_rules.py only applies that rule to detail lines that carry a fund name, so this receipts line is not caught"},
-    {"severity": "warning", "path": "detail[11].category", "page": 12,
-     "extracted": "charges for services/fees", "on_page": "Grave openings 28,110",
-     "issue": "detail_category is cemetery fees and the neighbouring 'Cemetery lots' line is category Cemetery Fees, so grave openings should be Cemetery Fees too"},
-    {"severity": "warning", "path": "detail[Keno 'Other revenue' 248].category", "page": 15,
-     "extracted": "investment income", "on_page": "Other revenue 248 (equals Keno Fund interest income 248 on p5)",
-     "issue": "If the extractor is right that this is the Keno Fund's interest, the rule puts interest lines in Interest Income, not investment income. Otherwise the printed label 'Other revenue' points to other"},
-    {"severity": "warning", "path": "detail[Street Capital outlay lines].original_label", "page": 13,
-     "extracted": "Capital Outlay: Equipment / Capital Outlay: Street improvements", "on_page": "Capital outlay - Equipment 330,455; Street improvements 2,127,637",
-     "issue": "The capital outlay labelling rule is 'Capital Outlay: <function>' (here Streets/Highways), but the object was used instead. Amounts are correct"}
+    {"severity": "warning", "path": "balance_sheet.deferred_inflows[0].category", "page": 2,
+     "extracted": "Deferred Inflows", "on_page": "Nonrefundable deposits 39,508",
+     "issue": "The earlier error is resolved: this line is no longer Deferred Gain on Refunding, and user_rules.py's deferred-inflow pattern ('refunding') does not match 'Nonrefundable'. 'Deferred Inflows' is defensible, but no other report uses this category string. Confirm it is the generic category the user wants (rather than 'other')."},
+    {"severity": "warning", "path": "detail[72].category", "page": 15,
+     "extracted": "investment income", "on_page": "Keno Fund 'Other revenue' 248",
+     "issue": "The category is inferred from p5 Keno 'Interest income' 248. If that inference is accepted, interest lines are category Interest Income (user 2026-10-23), not investment income. If it isn't, the line is other."},
+    {"severity": "warning", "path": "receipts[9].category", "page": 7,
+     "extracted": "charges for services/fees", "on_page": "Charges for services 10,575,965 (Water 9,296,211 + Sewer 1,279,754)",
+     "issue": "The detail lines for the same water and sewer charges (p7) use Utility Charges, but the business-type receipt line uses charges for services/fees. The categories are inconsistent within the report."},
+    {"severity": "warning", "path": "detail[9].category", "page": 12,
+     "extracted": "charges for services/fees", "on_page": "Insurance 206,861 (Charges for services)",
+     "issue": "The nature of this line is not stated. The p16 combining statement shows it as Insurance Fund charges for services, possibly premiums charged to other funds."}
   ]
 }

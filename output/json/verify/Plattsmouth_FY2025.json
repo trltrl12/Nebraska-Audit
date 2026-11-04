@@ -1,11 +1,30 @@
 {
   "stem": "Plattsmouth_FY2025",
-  "values_checked": 260,
+  "values_checked": 290,
   "issues": [
-    {"severity": "warning", "path": "receipts[14].category", "page": 9, "extracted": "charges for services/fees", "on_page": "Charges for services 2,550,360 (Water 1,345,200, Sewer 1,089,160, Impact Fees 116,000)", "issue": "Business-type utility charges; the user's 2026-10-28 rule makes utility fund charges 'Utility Charges' (the detail lines for Water/Sewer already use Utility Charges). Impact fees 116,000 are a small part."},
-    {"severity": "warning", "path": "receipts[17].category", "page": 9, "extracted": "charges for services/fees", "on_page": "Other revenues 18,140 (p3: leases and rentals 15,117 + contributions and miscellaneous 3,023)", "issue": "The extractor's own review note shows the line is mostly leases and rentals; the dominant-category rule points to Rentals (same for the Water Fund 'Other revenues' 18,140 detail line)."},
-    {"severity": "warning", "path": "detail[20].category", "page": 13, "extracted": "charges for services/fees", "on_page": "NPPD lease agreement 886,929", "issue": "The same money is category Rentals in receipts[9] (Leases and rentals 886,929); the same line should have the same category in receipts and detail."},
-    {"severity": "warning", "path": "detail[14].category", "page": 13, "extracted": "charges for services/fees", "on_page": "EMS 522,963; Community center 307,257; Aquatic center 65,660", "issue": "Under the user's 2026-10-28 rule these have their own receipt categories (Ambulance Fees for EMS; Recreation Fees for community/aquatic center, detail[18], detail[19]); detail_category is right but category is still charges for services/fees."},
-    {"severity": "warning", "path": "receipts[7].category", "page": 13, "extracted": "intergovernmental/state aid 2,069,608", "on_page": "General Fund Federal grants 156,460 (p13)", "issue": "The report prints the General Fund federal grants 156,460 inside Intergovernmental 2,168,341. It was left in state aid (noted in review) while homestead and pro-rate were split out; it could be split out as federal grants."}
+    {"severity": "warning", "path": "receipts[1].category", "page": 5,
+     "extracted": "taxes (unlabeled) 561,183 (computed remainder = Debt Service column Taxes)",
+     "on_page": "p3 Property taxes 2,200,410 = General property 1,344,622 + Motor vehicle 130,916 + Occupation 163,689 (p13) + 561,183 exactly; no Debt Service schedule in the trimmed or full PDF",
+     "issue": "The remainder is arithmetically right and correctly marked. It falls entirely within the Statement of Activities 'Property taxes' line, but that line also holds motor vehicle and occupation taxes, so its label doesn't prove the tax type. Leaving it unlabeled is the conservative reading and is defensible."},
+    {"severity": "warning", "path": "receipts[4]", "page": 3,
+     "extracted": "sales tax 2,088,525 (Local option sales taxes, p3)",
+     "on_page": "p3 Property taxes 2,200,410 + Local option sales taxes 2,088,525 = Taxes 4,288,935 (p5) exactly",
+     "issue": "The piece is supported: a printed full breakdown of the same line ties to the dollar. But 1,243,652 of it (the Economic Development and Street and Sidewalk Maintenance fund columns, 621,826 each) shows as taxes (unlabeled) in the per-fund detail, which is right because single-fund pieces derived by subtraction are not evidence. The receipts and detail totals for sales tax therefore differ."},
+    {"severity": "warning", "path": "receipts[17].category", "page": 9,
+     "extracted": "charges for services/fees",
+     "on_page": "Other revenues 18,140 (p9); Statement of Activities business-type: Leases and rentals 15,117 + Contributions and miscellaneous 3,023 (p3)",
+     "issue": "The dominant part (83%) is rentals, so the user's Rentals category fits better. The same applies to the Water Fund 'Other revenues' 18,140 detail line."},
+    {"severity": "warning", "path": "detail[20].category", "page": 13,
+     "extracted": "charges for services/fees (NPPD lease agreement 886,929)",
+     "on_page": "NPPD lease agreement 886,929 = statement 'Leases and rentals' (receipts[10], category Rentals)",
+     "issue": "The same money is Rentals on the statement but charges for services in detail. EMS 522,963 (detail[14], could be Ambulance Fees) and Community center 307,257 / Aquatic center 65,660 (detail[18]-[19], could be Recreation Fees) also stay in charges for services, against the user's 2026-10-28 categories."},
+    {"severity": "warning", "path": "decision_needed[0].recorded_as", "page": 15,
+     "extracted": "detail[51]-[55] and detail[65]-[69], category health/welfare",
+     "on_page": "Cemetery and Senior Citizen Center printed under Culture and Recreation",
+     "issue": "Stale: the Cemetery lines are culture/recreation in the JSON. Only the Senior Citizen Center lines are health/welfare."},
+    {"severity": "warning", "path": "receipts[15].category", "page": 9,
+     "extracted": "intergovernmental/state aid",
+     "on_page": "Intergovernmental grants 39,179,759 (SoA p3: Capital grants and contributions)",
+     "issue": "The previous verifier found that the MD&A (full PDF) attributes these grants mainly to FEMA reimbursement. If so, federal grants may fit better. A review note is already set."}
   ]
 }
