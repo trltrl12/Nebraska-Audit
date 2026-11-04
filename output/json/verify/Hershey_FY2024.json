@@ -1,0 +1,28 @@
+{
+  "stem": "Hershey_FY2024",
+  "values_checked": 110,
+  "issues": [
+    {"severity": "warning", "path": "receipts[8].category", "page": 4,
+     "extracted": "charges for services/fees", "on_page": "Charges for services 22,548",
+     "issue": "The report's own schedules say what this 22,548 is: the Statement of Activities (p2) prints it as 'Electric, gas, and cable lease' under general revenues, and the budget schedule (p11) prints it as 'Franchise Fees 22,548'. So occupation/franchise tax fits better than charges for services. Same for detail[6]."},
+    {"severity": "warning", "path": "receipts[6].category", "page": 4,
+     "extracted": "occupation/franchise tax", "on_page": "5% Gross 3,540",
+     "issue": "A '5% gross' receipt is usually the public power district payment of 5% of gross revenue (the rules list 'NPPD 5%' under Public Power District Sales Tax). The Statement of Activities groups it with program charges (8,614 = 3,540 + 1,074 + 4,000). The category is a guess either way. Same for detail[4]."},
+    {"severity": "warning", "path": "disbursements[4].category", "page": 4,
+     "extracted": "Operating", "on_page": "Operating expenses 28,049 (Street column only)",
+     "issue": "The whole amount is in the Street Fund column, and the 'listed by object' rule (use the fund's function) would make it streets/highways, as was done for Supplies and materials 15,347. The Operating category is meant only for lines that would otherwise be other."},
+    {"severity": "warning", "path": "disbursements[3].category", "page": 4,
+     "extracted": "general government", "on_page": "Personnel services 97,867 (General 58,216 + Street 39,652)",
+     "issue": "This object line mixes two funds. general government is the larger share but isn't the function of 41% of the line."},
+    {"severity": "warning", "path": "disbursements[6].original_label", "page": 4,
+     "extracted": "Capital Outlay: General Government", "on_page": "Capital outlay 66,248 (General 38,871 + Street 27,377)",
+     "issue": "The label names one function, but 27,377 of it is Street Fund (streets/highways) capital outlay."},
+    {"severity": "warning", "path": "receipts[15].category", "page": 6,
+     "extracted": "intergovernmental/state aid", "on_page": "Grants 13,815 (Sanitation)",
+     "issue": "The grantor isn't stated. The budget schedule groups it as 'Grants, donations and misc.', so it could be a donation or a federal grant. Same for detail[44]."},
+    {"severity": "warning", "path": "balance_sheet", "page": 3,
+     "extracted": "Statement of Net Position - Cash Basis, Total column (governmental + proprietary)",
+     "on_page": "Statement of Assets and Fund Balances - Governmental Funds, Total 37,759 = government-wide governmental 37,759",
+     "issue": "Under the 2026-10-27 balance-sheet rule, governmental lines come from the governmental funds statement (fund balance by classification: Restricted (69,843), Unassigned 107,601) when its totals equal the government-wide figures, as they do here. The extraction instead uses the government-wide Total column with Restricted/Unrestricted net position."}
+  ]
+}

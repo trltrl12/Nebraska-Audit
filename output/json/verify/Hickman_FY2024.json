@@ -1,0 +1,38 @@
+{
+  "stem": "Hickman_FY2024",
+  "values_checked": 233,
+  "issues": [
+    {
+      "severity": "warning",
+      "path": "disbursements[3].amount",
+      "page": 4,
+      "extracted": 173111,
+      "on_page": "Culture and recreation: Total Governmental Funds column 173,111; Park Fund column 173,117",
+      "issue": "Answer to the Hickman question: the Total column prints 173,111, which the extraction records correctly. The Park Fund column (the only fund with this line) prints 173,117. The printed totals tie only with 173,117: Total expenditures 2,446,376 and Park Fund total 324,176 (173,117 + 151,059). So 173,111 is a print error in the report's Total column. The extraction keeps the printed figure and records the 6 difference in report_discrepancies, which is the right handling. The Park detail line (detail[31]) correctly uses 173,117."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[6].category",
+      "page": 4,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "Grants and contributions 137,708 (Street 133,192, Park 3,994, Other 522)",
+      "issue": "One label gets different categories across the report: governmental statement and Street detail use intergovernmental/state aid, Park and Reading Center detail use donations/contributions, and business-type receipts[12] (Water 188,000) uses donations/contributions. The grantor is never printed. The rules ask for the same category for the same label within a report."
+    },
+    {
+      "severity": "warning",
+      "path": "ending_cash",
+      "page": 3,
+      "extracted": 1544420,
+      "on_page": "Cash 1,527,483 + Cash on deposit - County Treasurer 16,937; Restricted cash 1,702,632 (Total Governmental Funds)",
+      "issue": "ending_cash leaves out the governmental restricted cash of 1,702,632, which is also cash. That is defensible (it is noted), but it is a judgment the user may want to settle."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[6].category",
+      "page": 4,
+      "extracted": "general government",
+      "on_page": "Sales tax 19,992 (Sales Tax Fund)",
+      "issue": "What this spending is isn't stated (it could be sales tax rebates or remittances). The category is a guess. Same for detail[25]."
+    }
+  ]
+}
