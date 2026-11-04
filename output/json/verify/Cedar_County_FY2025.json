@@ -1,10 +1,13 @@
 {
   "stem": "Cedar_County_FY2025",
-  "values_checked": 154,
+  "values_checked": 158,
   "issues": [
     {"severity": "warning", "path": "receipts[0].category", "page": 2,
      "extracted": "property tax", "on_page": "Property and motor vehicle taxes 7,168,449",
      "issue": "the line combines property and motor vehicle taxes and the report has no further breakdown; kept as property tax (marked review), but taxes (unlabeled) is arguable"},
+    {"severity": "warning", "path": "detail[0].category", "page": 5,
+     "extracted": "property tax (also detail[67] 69,484, detail[70] 306,017, detail[78] 2)", "on_page": "Taxes 6,792,946 (p5, General); Taxes 69,484 (911 Emergency), 306,017 (Debt Service), 2 (Transit) (p9); SoA p2 prints only 'Property and motor vehicle taxes' 7,168,449 and 'Inheritance taxes' 603,167",
+     "issue": "The subtraction meets the relaxed standard: 7,771,616 - 603,167 (Inheritance Tax fund) = 7,168,449, and 6,792,946 + 69,484 + 306,017 + 2 = 7,168,449 exactly (p4 nonmajor Taxes 69,486 = 69,484 + 2). The financial statements establish the remainder as property and motor vehicle taxes combined, not property tax alone. Category property tax matches the statement-level receipts[0] for the same combined money, so the classification is consistent. But these four lines carry no review flag, unlike receipts[0], and original_label was changed from the printed 'Taxes' to the SoA label (printed text kept in printed_label)."},
     {"severity": "warning", "path": "receipts[4].category", "page": 4,
      "extracted": "charges for services/fees", "on_page": "Local 1,439,611",
      "issue": "broad 'Local' line. Per the Statement of Activities (p2), the 1,439,611 probably includes most of the 293,836 interest income as well as charges for services, but the page prints no breakdown. Charges for services is the dominant part (already marked review)"},
