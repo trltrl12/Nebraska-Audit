@@ -1,0 +1,18 @@
+{
+  "stem": "Allen_FY2024",
+  "values_checked": 82,
+  "issues": [
+    {"severity": "warning", "path": "detail[2].category", "page": 11,
+     "extracted": "intergovernmental/state aid / county/other local governments", "on_page": "Rural fire 13,800 (printed under 'Intergovernmental revenue:')",
+     "issue": "Printed under the Intergovernmental heading and counted in the statement's Intergovernmental 44,058, so the category is defensible. But the extractor rules list rural fire contracts under charges for services/fees. This is a judgment call."},
+    {"severity": "warning", "path": "balance_sheet.scope", "page": 4,
+     "extracted": "Statement of Net Position - Modified Cash Basis, Total column", "on_page": "Governmental funds balance sheet (p4) totals 284,997 assets / 2,592 liabilities / 282,405 fund balance, equal to the government-wide governmental column (p1)",
+     "issue": "Under the user's 2026-10-27 balance-sheet basis rule, governmental lines would come from the governmental funds statement when its totals equal the government-wide figures, as they do here (no capital assets, debt or interfund amounts). That would give fund balance by classification (Restricted 47 / 89,115, Assigned 8,320, Unassigned 184,923) in place of Unrestricted. The extraction kept the Statement of Net Position, the same as Allen_FY2025."},
+    {"severity": "warning", "path": "detail[21]", "page": 11,
+     "extracted": "General Fund Transfers In 624", "on_page": "CDBG fund Transfers in (out) (624) on the governmental funds statement (p5)",
+     "issue": "The transfer is one-sided in detail. The CDBG fund has no schedule, so its matching outflow of -624 is not in detail. The outflow is a transfer, not spending, and the Total column nets to zero."},
+    {"severity": "warning", "path": "ending_cash", "page": 5,
+     "extracted": 282405, "on_page": "Fund balance - September 30, 2024 282,405; governmental cash 284,997 (p4)",
+     "issue": "ending_cash and beginning_cash hold the fund balances. Cash is 2,592 higher because of payroll withholding. The notes explain this and the roll-forward ties."}
+  ]
+}
