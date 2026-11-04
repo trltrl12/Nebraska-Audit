@@ -1,9 +1,15 @@
 {
   "stem": "Keith_County_FY2025",
-  "values_checked": 175,
+  "values_checked": 176,
   "issues": [
-    {"severity": "warning", "path": "detail[0].split_from", "page": 10,
-     "extracted": "property tax 4,686,910 + motor vehicle tax 480,879 (source_page 2)", "on_page": "General Fund budget schedule: Taxes 5,167,789 (one line; final budget 5,925,355)",
-     "issue": "The General Fund schedule prints one Taxes line, and no page prints its own property/motor vehicle breakdown. The split is deduced: Statement of Activities property + motor vehicle (p2) equal it exactly, and the nonmajor taxes 743,357 are printed per fund as Visitors (lodging) 717,516 and 911 (other) 25,841 (pp6-9). It is marked computed and the arithmetic holds, but the rule only allows splits whose breakdown the report prints for that line, so a person should confirm it. Same for detail[1]."}
+    {"severity": "warning", "path": "detail[41].original_label", "page": 2,
+     "extracted": "Taxes", "on_page": "Lodging (p2); detail[42] on_page: Other (p2)",
+     "issue": "The evidence standard asks for original_label = the printed breakdown label; these split pieces keep 'Taxes' (receipts[2]-[3] use 'Taxes - Lodging' / 'Taxes - Other'). Cosmetic."},
+    {"severity": "warning", "path": "receipts[6].category", "page": 4,
+     "extracted": "other (Local 2,172,072)", "on_page": "Statement of Activities (p2): charges for services 753,743 + interest income 564,954 + miscellaneous 763,375 + capital grants 90,000 = 2,172,072",
+     "issue": "The report prints the breakdown of this line exactly (Thayer's identical line was split this way); no category is over half, so keeping it whole as other is allowed but loses 564,954 of Interest Income and 753,743 of charges."},
+    {"severity": "warning", "path": "disbursements[5].category", "page": 4,
+     "extracted": "economic development", "on_page": "Community development/betterment 101,100",
+     "issue": "User rule (2026-10-29): Community Betterment spending is its own category, not economic development; the label mixes development and betterment."}
   ]
 }

@@ -1,30 +1,12 @@
 {
   "stem": "Dakota_County_FY2025",
-  "values_checked": 132,
+  "values_checked": 140,
   "issues": [
-    {"severity": "error", "path": "receipts[3].category", "page": 2,
-     "extracted": "other taxes", "on_page": "Other (Taxes) 526,191 = Public Safety Sales Tax Fund 411,224 (p9) + E-911 Emergency Management Fund 26,241 (p8) + Road Fund 88,726 (p4)",
-     "issue": "[fixed 2026-10-29: category changed to sales tax (dominant 411,224 of 526,191), review note names the mix, other-taxes category_decision removed] The fund statements show what this line is made of: 411,224 of the 526,191 (78%) is the Public Safety Sales Tax Fund's taxes. Under the dominant-category rule it should be sales tax, or split with split_from. 'other taxes' is a last resort and does not apply here."},
-    {"severity": "error", "path": "detail[47].category", "page": 13,
-     "extracted": "general government", "on_page": "ARPA DISBURSEMENTS 1,210,545; p4 ARPA column: General government 269,022, Capital outlay 941,523",
-     "issue": "[fixed 2026-10-29: split per the p4 ARPA column into general government 269,022 and capital outlay 941,523 ('Capital Outlay: General Government'), split_from set; detail total 1,210,545 unchanged] The report's own p4 column shows this line is 78% capital outlay. The dominant category is capital outlay (or split), not general government."},
-    {"severity": "warning", "path": "receipts[9].split_from", "page": 7,
-     "extracted": 86000, "on_page": "Minority Health Initiative Grant Fund Local 86,000",
-     "issue": "The Local 2,697,636 split ties (1,798,848 + 408,532 + 404,256 + 86,000), but treating the 86,000 as counted in operating grants on p2 is the extractor's own reconciliation. The report does not print it."},
-    {"severity": "warning", "path": "receipts[9].category", "page": 7,
-     "extracted": "donations/contributions", "on_page": "Local 86,000 (grant fund; p2 'Operating Grants and Contributions')",
-     "issue": "The grantor is not stated, so this could be intergovernmental. The same applies to detail[55] (nonmajor Local 126,421), which takes this category as dominant."},
-    {"severity": "warning", "path": "receipts[6].category", "page": 2,
-     "extracted": "charges for services/fees", "on_page": "Charges for Services 1,798,848 (general government 662,061, public safety 1,128,336, public works 7,946, welfare 505)",
-     "issue": "The county's general government charges are probably largely Fees of Office (clerk, register of deeds, treasurer). The p2 statement does not itemize them."},
-    {"severity": "warning", "path": "detail[53].category", "page": 10,
-     "extracted": "taxes (unlabeled)", "on_page": "Total Nonmajor Taxes 700,896 = Visitors Promotion 263,431 (p6) + E-911 26,241 (p8) + Public Safety Sales Tax 411,224 (p9)",
-     "issue": "[fixed 2026-10-29: split per fund columns into lodging tax 263,431 (p6), other taxes 26,241 (p8, E-911) and sales tax 411,224 (p9) with split_from] The fund columns print this line's breakdown (lodging tax, E-911 tax, public safety sales tax), so it could be split instead of kept as unlabeled."},
-    {"severity": "warning", "path": "detail[49].category", "page": 14,
-     "extracted": "other", "on_page": "Insurance Fund Local 321,064",
-     "issue": "This is the health and dental insurance fund's local receipts, likely employee premium contributions or reimbursements. 'other' is defensible because the report does not itemize them (review present)."},
-    {"severity": "warning", "path": "detail[28].category", "page": 11,
-     "extracted": "general government", "on_page": "County Surveyor (under Public Works) 0",
-     "issue": "[fixed 2026-10-29: category changed to streets/highways] Printed under the Public Works heading, so streets/highways may fit better. The amount is zero."}
+    {"severity": "warning", "path": "detail[0]", "page": 11,
+     "extracted": {"category": "taxes (unlabeled)", "amount": 7893411}, "on_page": "General Fund Taxes 7,893,411 (budget 8,926,966); p2 Property 7,166,466 + Motor vehicle 726,945 = 7,893,411",
+     "issue": "Correctly restored as printed (label, amount, budget and page match). It is kept unsplit, which is defensible: the p2 breakdown is county-wide and the General Fund line has no tax-type columns. But the tie is exact to the dollar. A person may want to settle whether that counts as a proven breakdown (rule 1) or a coincidence (rule 5)."},
+    {"severity": "warning", "path": "detail[43].category", "page": 12,
+     "extracted": "streets/highways", "on_page": "Road Fund DISBURSEMENTS 2,241,493 (p4 Road column: Public works 1,464,566 + Capital outlay 776,927)",
+     "issue": "The whole Road Fund line is filed as streets/highways, although p4 shows 776,927 of it is capital outlay. The ARPA one-line disbursement (detail[47-48]) was split by its p4 column instead, so the two are treated inconsistently. Amount and budget are right."}
   ]
 }
