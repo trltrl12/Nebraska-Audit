@@ -1,6 +1,6 @@
 {
   "stem": "Kimball_County_FY2025",
-  "values_checked": 112,
+  "values_checked": 115,
   "issues": [
     {
       "severity": "warning",
@@ -8,18 +8,15 @@
       "page": 2,
       "extracted": "computed: merged back 100,779 + 52,136",
       "on_page": "Other taxes 152,915",
-      "issue": "Label, amount, page and category now match the printed p2 line 'Other taxes' 152,915. The 'computed' field is unnecessary because the amount is printed as-is on p2."
+      "issue": "Label, amount, page and category now match the printed p2 line 'Other taxes' 152,915. The 'computed' field isn't needed because the amount is printed as-is on p2."
     },
     {
       "severity": "warning",
-      "path": "detail[0]",
-      "page": 5,
-      "extracted": {
-        "category": "taxes (unlabeled)",
-        "amount": 3870623
-      },
-      "on_page": "General Fund Taxes 3,870,623; p2 Property taxes 3,720,467 + Motor vehicle taxes 150,156 = 3,870,623",
-      "issue": "Kept unsplit, which is defensible: the breakdown is county-wide and the line has no tax-type columns. But it ties exactly to the dollar. A person may want to decide whether that counts as a proven breakdown (rule 1) or a coincidence (rule 5). tax_splits.csv has no Kimball_County_FY2025 rows at all, so neither this line nor the receipts merge-back is logged."
+      "path": "detail[0].computed",
+      "page": 2,
+      "extracted": "General Fund Taxes 3,870,623 split into property 3,720,467 + motor vehicle 150,156 (subtraction)",
+      "on_page": "p2 Property taxes 3,720,467, Motor vehicle taxes 150,156, Other taxes 152,915; p4 Taxes: General 3,870,623, Inheritance Tax Fund 100,779, Other Nonmajor 52,136",
+      "issue": "The arithmetic is exact and defensible under the relaxed rule 3. The Inheritance Tax Fund's 100,779 falls in 'Other taxes' by its fund name. The nonmajor 52,136, though, is a combined column whose tax type isn't printed (p12 'Taxes' 52,136; p14 shows only total receipts per fund). The nonmajor funds that could plausibly collect taxes are Visitor Promotion/Improvement (lodging) and 911/Wireless 911 (surcharge), all 'other' types, and no nonmajor fund is a property-tax levy fund, so General = property + motor vehicle is well supported. It is still an inference from fund names, not a printed fund-level figure."
     }
   ]
 }
