@@ -1,0 +1,21 @@
+{
+  "stem": "Blue_Hill_FY2024",
+  "values_checked": 169,
+  "issues": [
+    {"severity": "warning", "path": "receipts[0].category", "page": 7,
+     "extracted": "property tax", "on_page": "Property taxes 299,061 (p4) = Property taxes-county 276,255 + Motor vehicle taxes-county 22,806 (p7 budget schedule, Actual)",
+     "issue": "The printed property tax line includes 22,806 of motor vehicle tax according to the budget-basis schedule, and the County Treasurer's Fund schedule (p9) shows homestead, property tax credit, carline, prorate and housing authority money in the levy receipts. It is kept whole as printed. The County Treasurer's Fund schedule p9 is left out of the detail. Both are defensible, but the user should know."},
+    {"severity": "warning", "path": "detail[46].category", "page": 8,
+     "extracted": "charges for services/fees", "on_page": "Dump Fund Charges for services 108,407",
+     "issue": "detail_category is refuse/sanitation charges. Under the user's rule, garbage/refuse charges are category Utility Charges."},
+    {"severity": "warning", "path": "detail[59].category", "page": 8,
+     "extracted": "charges for services/fees", "on_page": "Pool Fund Charges for services 27,910",
+     "issue": "detail_category is recreation/pool/park fees. Under the user's rule (pool, park, golf), the category would be Recreation Fees. The Park department line (detail[10], 7,648) has the same mismatch, while the Cemetery line was given Cemetery Fees."},
+    {"severity": "warning", "path": "detail[55].category", "page": 8,
+     "extracted": "licenses and permits", "on_page": "Golf Course Fund: Fees, taxes, permits and licenses 3,300",
+     "issue": "A golf course fund's fees are more likely green/membership fees (Recreation Fees) than licenses and permits. The label is mixed, so this is a judgment call."},
+    {"severity": "warning", "path": "receipts[11].category", "page": 6,
+     "extracted": "charges for services/fees", "on_page": "Fees 17,650 (Water 150, Sewer 8,669, Electric 8,831), printed under Charges for services",
+     "issue": "These are utility fund fees printed under charges for services, so Utility Charges may fit better (the detail lines use detail_category other utility charges)."}
+  ]
+}
