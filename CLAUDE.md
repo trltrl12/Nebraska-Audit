@@ -79,7 +79,7 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
   earnings -> Investment Earnings; Turnback / Turnback Tax -> Turnback, its own receipt category (out of state aid).
   "Reimbursement for Services" lines are their own receipt category, Reimbursement for Services.
   Sundry and In Lieu / Sundry and In Lieu Tax -> Sundry and in Lieu (category unchanged: In Lieu of Tax).
-  Workbook (cashflow_one_tab.xlsx): detail lines in section "other financing" get category "Total Other Financing
+  Workbook (cashflow_one_tab_<year>.xlsx, one file per fiscal year, user 2026-11-04): detail lines in section "other financing" get category "Total Other Financing
   Sources (Uses)" (the section keeps its name).
   Lincoln: "Equipment Maintenance" is its own disbursement category (out of general government); schedule lines under a
   "Capital Outlay" heading are category capital outlay (function kept in computed), matching the governmental funds statement.

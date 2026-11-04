@@ -297,14 +297,31 @@ def one_tab(collected):
         row["county"] = county.get(Path(str(row.get("filename") or "")).stem, "")
     out.sort(key=lambda x: (str(x.get("entity_name") or ""), ["cash flow", "revenue and expenses", "balance sheet"]
                             .index(x["level"])))
+    # one workbook per fiscal year (user 2026-11-04: "each year needs to be by itself"):
+    # output/cashflow_one_tab_<year>.xlsx; the year is the filing year from file_list.csv
+    fy = {Path(r["filename"]).stem: str(r.get("fiscal_year") or "") for r in read_csv(FILE_LIST)}
+
+    def year_of(row):
+        stem = Path(str(row.get("filename") or "")).stem
+        if fy.get(stem):
+            return fy[stem]
+        m = re.search(r"_FY(\d{4})", stem)
+        return m.group(1) if m else str(row.get("fiscal_year_end") or "")[:4] or "unknown"
+    by_year = {}
+    for row in out:
+        by_year.setdefault(year_of(row), []).append(row)
     global _scope
     keep, _scope = _scope, None   # rows are already limited to the focused reports
-    wb = Workbook()
-    wb.remove(wb.active)
-    add_sheet(wb, "All Data", ONE_COLS, [[r.get(c) for c in ONE_COLS] for r in out], ["amount"])
+    for year, rows in sorted(by_year.items()):
+        wb = Workbook()
+        wb.remove(wb.active)
+        add_sheet(wb, "All Data", ONE_COLS, [[r.get(c) for c in ONE_COLS] for r in rows], ["amount"])
+        path = OUTPUT / f"cashflow_one_tab_{year}.xlsx"
+        wb.save(path)
+        print(f"wrote {path.relative_to(OUTPUT.parent)} ({len(rows)} rows)")
     _scope = keep
-    wb.save(ONE_XLSX)
-    print(f"wrote {ONE_XLSX.relative_to(OUTPUT.parent)} ({len(out)} rows)")
+    if ONE_XLSX.exists():   # the combined all-years file is replaced by the per-year files
+        ONE_XLSX.unlink()
 
 
 def build(xlsx):
