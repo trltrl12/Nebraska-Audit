@@ -1,12 +1,26 @@
 {
   "stem": "CO12-02242026-July_1_2024_through_June_30_2025_Audit_Report_and_Management_Letter",
-  "values_checked": 113,
+  "values_checked": 156,
   "issues": [
-    {"severity": "warning", "path": "receipts[3].category", "page": 15,
-     "extracted": "lodging tax (7,990 split from Taxes: Other 128,277)", "on_page": "Taxes: Other - Visitors Promotion Fund 3,995, Visitors Improvement Fund 3,995",
-     "issue": "Lodging-tax category is inferred from the fund names; the page labels these receipts only as 'Other' taxes. The split is printed per fund and the arithmetic holds (also applies to detail[48])."},
+    {"severity": "warning", "path": "detail[0].original_label", "page": 4,
+     "extracted": "Taxes / Taxes / Taxes (detail[0]-[2])",
+     "on_page": "Property 4,901,165 / Motor Vehicle 485,531 / Other 51,533 (General Fund column)",
+     "issue": "General Fund Taxes 5,438,229 (p5) split is proven (the General Fund column on p4 prints the breakdown and it ties exactly), but original_label should be the printed breakdown labels, not 'Taxes'"},
     {"severity": "warning", "path": "detail[2].budget_final", "page": 5,
-     "extracted": 5429490, "on_page": "Taxes final budget 5,429,490 (whole line; actual 5,438,229)",
-     "issue": "The final budget for the whole Taxes line is attached to the 51,533 'other taxes' split part, while the property tax (4,901,165) and motor vehicle (485,531) parts have a null budget. Budget-vs-actual for these split lines is misleading."}
+     "extracted": 5429490,
+     "on_page": "Final budget 5,429,490 is for the whole Taxes line 5,438,229",
+     "issue": "The budget for the whole Taxes line is placed on the 51,533 'other' piece, so the variance for that piece reads as -5.4 million"},
+    {"severity": "warning", "path": "receipts[3].category", "page": 4,
+     "extracted": "taxes (unlabeled)",
+     "on_page": "Taxes: Other 128,277",
+     "issue": "The same printed 'Other' tax row is 'taxes (unlabeled)' on the statement (and on the nonmajor detail[48]) but 'other taxes' in detail[2] and detail[35]; one category should be used for the same label"},
+    {"severity": "warning", "path": "decision_needed", "page": 18,
+     "extracted": "no CO12-02242026 rows in output/json/_meta/tax_splits.csv",
+     "on_page": "Taxes: Other 76,713 (Total Nonmajor Funds, p18), restored; General Fund Taxes 5,438,229 split kept",
+     "issue": "The evidence standard says every evaluated line is logged in tax_splits.csv, but this report has no rows: neither the restored nonmajor 'Taxes: Other' line nor the kept General Fund split. The restored line itself is correct (detail[48]: 'Taxes: Other' 76,713, p18, budget null, taxes (unlabeled))."},
+    {"severity": "warning", "path": "missing", "page": 5,
+     "extracted": null,
+     "on_page": "Law Enforcement Grant: actual -, final budget 10,000",
+     "issue": "Zero-actual General Fund line omitted (notes say dash lines omitted); its budget is lost"}
   ]
 }
