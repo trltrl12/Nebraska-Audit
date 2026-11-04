@@ -2,29 +2,37 @@
   "stem": "Plattsmouth_FY2025",
   "values_checked": 290,
   "issues": [
-    {"severity": "error", "path": "receipts[1].category", "page": 5,
-     "extracted": "property tax 561,183 (Debt Service Fund Taxes, computed as remainder of SoA Property taxes)",
-     "on_page": "p3 Property taxes 2,200,410 = General property 1,344,622 + Motor vehicle 130,916 + Occupation 163,689 (p13) + 561,183; Debt Service column Taxes 561,183 (p5); no Debt Service schedule or tax breakdown printed",
-     "issue": "The arithmetic is exact, but the Statement of Activities 'Property taxes' line is shown by this same subtraction to be a catch-all for every non-sales tax (it includes the General Fund's motor vehicle and occupation taxes). Placing the Debt Service taxes inside that line establishes only that they are not sales tax; it does not establish that they are property tax rather than, e.g., motor vehicle tax allocated to the bond levy. This is the 'rest is property tax' presumption the evidence standard forbids. It should stay taxes (unlabeled) 561,183 (split_from kept). The other four pieces still sum to the line: 1,344,622 + 561,183 + 130,916 + 163,689 + 2,088,525 = 4,288,935."},
-    {"severity": "error", "path": "detail[91].category", "page": 5,
-     "extracted": "property tax / detail_category property tax (Debt Service Fund, Taxes 561,183)",
-     "on_page": "Debt Service column Taxes 561,183 (p5)",
-     "issue": "Same issue as receipts[1]: the remainder falls in a Statement of Activities line that is proven mixed (property + motor vehicle + occupation), so its type isn't established. It should stay taxes (unlabeled)."},
-    {"severity": "warning", "path": "receipts[17].category", "page": 9,
-     "extracted": "charges for services/fees",
-     "on_page": "Other revenues 18,140 (p9); Statement of Activities business-type: Leases and rentals 15,117 + Contributions and miscellaneous 3,023 (p3)",
-     "issue": "The dominant part (83%) is rentals, so the user's Rentals category fits better. The same applies to the Water Fund 'Other revenues' 18,140 detail line."},
-    {"severity": "warning", "path": "detail[20].category", "page": 13,
-     "extracted": "charges for services/fees (NPPD lease agreement 886,929)",
-     "on_page": "NPPD lease agreement 886,929 = statement 'Leases and rentals' (receipts[10], category Rentals)",
-     "issue": "The same money is Rentals on the statement but charges for services in detail. EMS 522,963 (detail[14], could be Ambulance Fees) and Community center 307,257 / Aquatic center 65,660 (detail[18]-[19], could be Recreation Fees) also stay in charges for services, against the user's 2026-10-28 categories."},
-    {"severity": "warning", "path": "decision_needed[0].recorded_as", "page": 15,
-     "extracted": "detail[51]-[55] and detail[65]-[69], category health/welfare",
-     "on_page": "Cemetery and Senior Citizen Center printed under Culture and Recreation",
-     "issue": "Stale: the Cemetery lines are culture/recreation in the JSON. Only the Senior Citizen Center lines are health/welfare."},
-    {"severity": "warning", "path": "receipts[15].category", "page": 9,
-     "extracted": "intergovernmental/state aid",
-     "on_page": "Intergovernmental grants 39,179,759 (SoA p3: Capital grants and contributions)",
-     "issue": "The previous verifier found that the MD&A (full PDF) attributes these grants mainly to FEMA reimbursement. If so, federal grants may fit better. A review note is already set."}
+    {
+      "severity": "warning",
+      "path": "receipts[17].category",
+      "page": 9,
+      "extracted": "charges for services/fees",
+      "on_page": "Other revenues 18,140 (p9); Statement of Activities business-type: Leases and rentals 15,117 + Contributions and miscellaneous 3,023 (p3)",
+      "issue": "The dominant part (83%) is rentals, so the user's Rentals category fits better. The same applies to the Water Fund 'Other revenues' 18,140 detail line."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[20].category",
+      "page": 13,
+      "extracted": "charges for services/fees (NPPD lease agreement 886,929)",
+      "on_page": "NPPD lease agreement 886,929 = statement 'Leases and rentals' (receipts[10], category Rentals)",
+      "issue": "The same money is Rentals on the statement but charges for services in detail. EMS 522,963 (detail[14], could be Ambulance Fees) and Community center 307,257 / Aquatic center 65,660 (detail[18]-[19], could be Recreation Fees) also stay in charges for services, against the user's 2026-10-28 categories."
+    },
+    {
+      "severity": "warning",
+      "path": "decision_needed[0].recorded_as",
+      "page": 15,
+      "extracted": "detail[51]-[55] and detail[65]-[69], category health/welfare",
+      "on_page": "Cemetery and Senior Citizen Center printed under Culture and Recreation",
+      "issue": "Stale: the Cemetery lines are culture/recreation in the JSON. Only the Senior Citizen Center lines are health/welfare."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[15].category",
+      "page": 9,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "Intergovernmental grants 39,179,759 (SoA p3: Capital grants and contributions)",
+      "issue": "The previous verifier found that the MD&A (full PDF) attributes these grants mainly to FEMA reimbursement. If so, federal grants may fit better. A review note is already set."
+    }
   ]
 }
