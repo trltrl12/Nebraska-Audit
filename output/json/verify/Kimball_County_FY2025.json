@@ -1,15 +1,21 @@
 {
   "stem": "Kimball_County_FY2025",
-  "values_checked": 196,
+  "values_checked": 112,
   "issues": [
-    {"severity": "warning", "path": "receipts[3].category", "page": 14,
-     "extracted": "other taxes", "on_page": "Nonmajor Taxes 52,136; combining schedule p14 shows nonmajor receipts mainly in Visitor Promotion Fund 53,718 and Visitor Improvement Fund 45,852",
-     "issue": "The nonmajor tax receipts are probably lodging (visitor promotion) tax, but the report never says what kind of tax they are; other taxes is defensible because p2 prints them inside 'Other taxes'. Same for detail[50]."},
-    {"severity": "warning", "path": "missing", "page": 13,
-     "extracted": null, "on_page": "Report page 31 is not in the trimmed PDF (trimmed p13 = report p30, p14 = report p32)",
-     "issue": "Known gap (CLAUDE.md). Every schedule in the trim adds up to its printed total and ties to the fund statement, so no schedule lines appear to be missing, but the page could not be checked."},
-    {"severity": "warning", "path": "reported_totals.governmental", "page": 2,
-     "extracted": "receipts 10,140,193 / disbursements 10,202,078 (fund statement p4)", "on_page": "Statement of Activities p2: disbursements 9,579,187; program + general receipts 9,517,302 (General government 2,278,173 vs 2,901,064 on p4)",
-     "issue": "The government-wide statement removes 622,891 from both receipts and disbursements (General government). This may be internal charges or reimbursements between funds, which the fund totals then count twice. The extraction correctly uses the fund statement, but someone should check what the 622,891 is."}
+    {"severity": "warning", "path": "receipts[0].original_label", "page": 2,
+     "extracted": "Taxes", "on_page": "Property taxes 3,720,467",
+     "issue": "The split of Taxes 4,023,538 (p4) is proven: p2 Property taxes 3,720,467 + Motor vehicle taxes 150,156 + Other taxes 152,915 = 4,023,538 exactly, and every piece is a printed amount. But the evidence standard sets original_label to the printed breakdown label, and here it is 'Taxes'. It should be 'Property taxes', which the user's rename rules turn into 'Property Tax'."},
+    {"severity": "warning", "path": "receipts[1].original_label", "page": 2,
+     "extracted": "Taxes", "on_page": "Motor vehicle taxes 150,156",
+     "issue": "original_label should be the printed breakdown label 'Motor vehicle taxes'. Amount, page and category are right."},
+    {"severity": "warning", "path": "receipts[2].original_label", "page": 2,
+     "extracted": "Taxes", "on_page": "Other taxes 152,915",
+     "issue": "The restored (merged-back) line matches the printed p2 line in amount (152,915), page and category (other taxes). Its arithmetic is right: 100,779 Inheritance Tax Fund + 52,136 nonmajor = 152,915. Two small issues remain. original_label should be the printed 'Other taxes', not 'Taxes'. And the 'computed' field isn't needed, since 152,915 is printed on p2 as-is."},
+    {"severity": "warning", "path": "detail[44].category", "page": 10,
+     "extracted": "inheritance tax", "on_page": "INHERITANCE TAX FUND RECEIPTS: Taxes 100,779 (budget 100,000)",
+     "issue": "The receipts merge-back rejected 100,779 as inheritance tax because it was 'allocated by fund name only'. This detail line still uses that same fund-name inference: p2 prints no inheritance-tax line, only 'Other taxes' 152,915. It is not a split, so it is a consistency question, not a clear error. Amount and budget are right."},
+    {"severity": "warning", "path": "detail[0]", "page": 5,
+     "extracted": {"category": "taxes (unlabeled)", "amount": 3870623}, "on_page": "General Fund Taxes 3,870,623; p2 Property taxes 3,720,467 + Motor vehicle taxes 150,156 = 3,870,623",
+     "issue": "Kept unsplit, which is defensible: the breakdown is county-wide and the line has no tax-type columns. But it ties exactly to the dollar. A person may want to decide whether that counts as a proven breakdown (rule 1) or a coincidence (rule 5). tax_splits.csv has no Kimball_County_FY2025 rows at all, so neither this line nor the receipts merge-back is logged."}
   ]
 }
