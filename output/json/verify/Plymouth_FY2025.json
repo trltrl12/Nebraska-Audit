@@ -1,8 +1,22 @@
 {
   "stem": "Plymouth_FY2025",
-  "values_checked": 160,
+  "values_checked": 186,
   "issues": [
-    {"severity": "warning", "path": "receipts[12].category", "page": 6, "extracted": "charges for services/fees", "on_page": "Charges for services 91,022 (General 82,127 = Garbage collection p10; nonmajor 8,895)", "issue": "About 90% of the line is garbage collection. Under the user's 2026-10-28 rule that part is Utility Charges, and the matching detail line already uses Utility Charges, so the categories are inconsistent. Dominant-category judgment call."},
-    {"severity": "warning", "path": "detail[59].detail_category", "page": 11, "extracted": "rentals", "on_page": "Charges for services (Town Hall 1,875; Auditorium 4,020; Lammel Building 3,000 p12)", "issue": "The extractor assumed the nonmajor 'Charges for services' lines are rentals, but the page only says charges for services. If they are rentals, the user's receipt category would be Rentals, not charges for services/fees. Applies to detail[59], detail[64] and detail[73]."}
+    {"severity": "warning", "path": "missing", "page": null,
+     "extracted": null,
+     "on_page": "Full PDF p30 (report p28, Schedule 2 right half): Debt Service column of the Major Governmental Funds statement (Property tax 56,797; Homestead allocation 4,316; Intergovernmental Other 7,529; Other expenditure 613) and Totals 2025 column",
+     "issue": "Trimmed PDF holds only the left half of Schedule 2 (p10 = report p27); the Debt Service column page is not in the trim, so the Debt Service fund has no detail lines. Add source p30 to config/extra_pages.csv and re-extract if per-fund detail for Debt Service is wanted."},
+    {"severity": "warning", "path": "receipts[10].category", "page": 5,
+     "extracted": "intergovernmental/state aid 11,845 (Debt Service, 'not broken down')",
+     "on_page": "Full PDF p30 Debt Service column: Homestead allocation 4,316 + Other 7,529 = 11,845",
+     "issue": "The Debt Service intergovernmental line is broken down in the full PDF; 4,316 is Homestead allocation, which the rules put in Homestead Exemption, never inside state aid. Evidence is only in the full PDF (not the trim), so not counted as an error."},
+    {"severity": "warning", "path": "receipts[12].category", "page": 6,
+     "extracted": "charges for services/fees 91,022",
+     "on_page": "Charges for services 91,022 = General 82,127 (Garbage collection per p10) + nonmajor 8,895 (Town Hall 1,875, Auditorium 4,020, Lammel 3,000)",
+     "issue": "Dominant part (90%) is garbage collection, which the user's rules put in Utility Charges (the detail line for the same money is Utility Charges). Mixed line; consider Utility Charges with a review note."},
+    {"severity": "warning", "path": "detail[56].detail_category", "page": 11,
+     "extracted": "rentals",
+     "on_page": "Charges for services (Town Hall 1,875; same for Auditorium 4,020 detail[60] and Lammel Building 3,000 detail[70])",
+     "issue": "Printed label is only 'Charges for services'; 'rentals' is inferred from the fund names, not printed."}
   ]
 }
