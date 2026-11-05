@@ -1,0 +1,21 @@
+{
+  "stem": "Indianola_FY2024",
+  "values_checked": 252,
+  "issues": [
+    {"severity": "warning", "path": "receipts[5].category", "page": 4,
+     "extracted": "licenses and permits", "on_page": "Licenses, rents, and fees 2,492 (p11 Total: Licenses and permits 737, Rental and fees 1,755)",
+     "issue": "mixed line; by the extractor's own note the dominant part is rental and fees 1,755, so the dominant-category rule points to Rentals, not licenses and permits"},
+    {"severity": "warning", "path": "receipts[8].category", "page": 4,
+     "extracted": "donations/contributions", "on_page": "Grants and contributions 38,502 (budget schedule p8 prints it as 'Grants'; SoA p2 operating grants and contributions)",
+     "issue": "source not stated; grants may be governmental (intergovernmental/state aid) rather than private donations"},
+    {"severity": "warning", "path": "disbursements[4].original_label", "page": 4,
+     "extracted": "Capital Outlay: Streets/Highways", "on_page": "Capital outlay 194,315 (street 88,280, ambulance 75,000, park 24,652, general 6,383)",
+     "issue": "Total-column capital outlay spans several functions; Streets/Highways is only the largest piece"},
+    {"severity": "warning", "path": "detail[125].detail_category", "page": 6,
+     "extracted": "tax refunds/treasurer fees", "on_page": "Light Fund: Franchise fees 58,741",
+     "issue": "franchise fees paid by the utility; the statement-level line uses Other Taxes Paid; tax refunds/treasurer fees does not fit"},
+    {"severity": "warning", "path": "proprietary", "page": 7,
+     "extracted": null, "on_page": "Statement of Cash Flows - Proprietary Funds: only the Light Fund column is in the trim",
+     "issue": "the Water/Sewer/Trash/Total columns of the proprietary cash-flow statement are not in the trimmed PDF, so proprietary is null; a re-trim would be needed to fill it"}
+  ]
+}
