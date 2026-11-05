@@ -1,0 +1,33 @@
+{
+  "stem": "North_Platte_FY2024",
+  "values_checked": 196,
+  "issues": [
+    {"severity": "warning", "path": "disbursements[12].category", "page": 9,
+     "extracted": "Professional/Contract Services", "on_page": "Consumer accounting and collection 2,340,689",
+     "issue": "this is a utility function (customer accounts), not a contract-services cost type; 'utilities' (like Distribution operations / General and administration) may fit better"},
+    {"severity": "warning", "path": "receipts[9].category", "page": 7,
+     "extracted": "federal grants", "on_page": "Grants 2,428,927",
+     "issue": "grantor not stated (General Fund 1,498,780 + Grant Fund 339,787 + Opioid Settlement 69,226 + Capital Projects 521,134); opioid settlement money is not a federal grant; same assumption on detail[7] and detail[55]"},
+    {"severity": "warning", "path": "receipts[23].category", "page": 9,
+     "extracted": "federal grants", "on_page": "Grant revenue 2,009,861 (Industrial Wastewater Treatment Fund)",
+     "issue": "grantor not stated; Statement of Activities p3 shows it as capital grants and contributions"},
+    {"severity": "warning", "path": "detail[17].category", "page": 12,
+     "extracted": "general government", "on_page": "General government: Civil defense 32,610",
+     "issue": "civil defense/emergency management is public safety under the category list; kept under the printed General government heading"},
+    {"severity": "warning", "path": "detail[26].category", "page": 12,
+     "extracted": "streets/highways", "on_page": "Public works: Cemetery 151,409",
+     "issue": "cemetery is health/welfare under the category list; kept under the printed Public works heading"},
+    {"severity": "warning", "path": "detail[33].category", "page": 12,
+     "extracted": "culture/recreation", "on_page": "Environment and leisure: Senior center and RSVP 198,230",
+     "issue": "senior services are health/welfare under the category list; kept under the printed Environment and leisure heading"},
+    {"severity": "warning", "path": "detail[43].category", "page": 14,
+     "extracted": "culture/recreation", "on_page": "ARPA Fund: Public works 381,723",
+     "issue": "schedule prints 'Public works'; category taken from the p6 statement column (Environment and leisure) instead of the printed label"},
+    {"severity": "warning", "path": "balance_sheet.liabilities[7].category", "page": 1,
+     "extracted": "debt - due within one year", "on_page": "Warrants payable 18,595,016 (Assessments Fund, current liabilities)",
+     "issue": "registered warrants; classed as current debt (judgment call vs accounts payable/other liabilities)"},
+    {"severity": "warning", "path": "balance_sheet.liabilities[10].category", "page": 1,
+     "extracted": "Accrued Liabilities", "on_page": "Noncurrent liabilities: Accrued compensated absences 1,171,393",
+     "issue": "printed as a noncurrent liability; Accrued Liabilities is meant for items due soon (Compensated Absences / long-term category may fit better)"}
+  ]
+}
