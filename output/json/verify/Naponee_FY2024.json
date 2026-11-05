@@ -1,0 +1,8 @@
+{
+  "stem": "Naponee_FY2024",
+  "values_checked": 29,
+  "issues": [
+    {"severity": "warning", "path": "disbursements[2].fund_type", "page": 2, "extracted": "business-type", "on_page": "Line 39 Debt Service 14,400.00 (Water Fund column, printed under the 'Governmental' heading)", "issue": "The row sits in the governmental section of the form but the amount is in the Water Fund column. Calling it business-type follows the fund column, which is defensible, but the form's own heading says governmental."},
+    {"severity": "warning", "path": "transfers_in", "page": 1, "extracted": 21550.00, "on_page": "Street 6,550.00 + Reserve Fund 15,000.00", "issue": "The Reserve Fund (purpose not stated) is treated as governmental and gets 15,000 from the Sewer Fund. As a result the governmental transfers (in 21,550 / out 6,550) and business_type.transfers_net -15,000 are one-sided by fund type. This ties to the interfund schedule (p3), but the Reserve Fund's type is an assumption."}
+  ]
+}
