@@ -1,0 +1,18 @@
+{
+  "stem": "Lodgepole_FY2024",
+  "values_checked": 105,
+  "issues": [
+    {"severity": "warning", "path": "balance_sheet", "page": 3,
+     "extracted": "Statement of Net Position - Cash Basis (p1, Total column)", "on_page": "Governmental funds statement (p3) Total 255,233 equals the government-wide governmental 255,233",
+     "issue": "user balance-sheet rule (2026-10-27) takes governmental lines from the governmental funds statement when its totals equal the government-wide figures; extractor kept the SNP because the restricted/unassigned split differs (p3 Restricted 217,905 / Unassigned 37,328 vs p1 Restricted 220,483 / Unrestricted 34,751). Judgment call"},
+    {"severity": "warning", "path": "disbursements[8].category", "page": 6,
+     "extracted": "debt service interest", "on_page": "Debt service - interest 36,241",
+     "issue": "user rule 2026-10-27 renames debt service principal/interest categories to 'Debt Service' with debt_service_part; old category strings used here and in disbursements[9] and the detail debt lines (user_rules.py should re-apply)"},
+    {"severity": "warning", "path": "receipts[13].category", "page": 4,
+     "extracted": "other", "on_page": "Other 159,852 (General 157,414)",
+     "issue": "unexplained 'Other' is 42% of governmental receipts (prior year 31,314, p9); nothing in the trimmed PDF says what it is. May deserve a decision_needed entry"},
+    {"severity": "warning", "path": "receipts[12].category", "page": 4,
+     "extracted": "intergovernmental/state aid", "on_page": "Grants 2,675",
+     "issue": "grant source not printed; the Statement of Activities (p2) lumps it with donations as operating grants and contributions, so donations/contributions or federal grants are also possible"}
+  ]
+}
