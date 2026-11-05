@@ -1,0 +1,19 @@
+{
+  "stem": "Norfolk_FY2024",
+  "values_checked": 335,
+  "issues": [
+    {"severity": "warning", "path": "detail[68]", "page": 12,
+     "extracted": "Community Development Agency Fund column (Interest 12,596; TIF Bond Revenue 2,370,296; Community Improvement and Development 2,370,296)",
+     "on_page": "Combining Statement - Governmental Nonmajor Funds, 9 fund columns plus Total",
+     "issue": "The nonmajor combining statement has more than 6 fund columns, and the rule says to use its Total column. The extractor instead recorded the other 8 funds from their own budget schedules (pp13-15) and took the CDA column alone from p12. That avoids double counting, but it departs from the Total-column rule; a person should confirm the approach."},
+    {"severity": "warning", "path": "receipts[0].category", "page": 5,
+     "extracted": "taxes (unlabeled)", "on_page": "Taxes 19,453,131",
+     "issue": "Kept unlabeled, which is correct under the 2026-11-04 standard: the Statement of Activities breakdown (property 7,062,019 + sales 12,332,016 + other 284,911 = 19,678,946, p3) is accrual-based and does not tie to the fund figure. No fund-name or exact subtraction evidence exists. Listed for the user's awareness only."},
+    {"severity": "warning", "path": "disbursements[1].category", "page": 5,
+     "extracted": "streets/highways", "on_page": "Public Works 18,436,374",
+     "issue": "Public Works is a broad function, which includes engineering, fleet and capital construction. streets/highways is a defensible choice but a judgment call."},
+    {"severity": "warning", "path": "disbursements[7].category", "page": 7,
+     "extracted": "Salaries and Wages", "on_page": "Payroll and Related Taxes and Benefits 3,244,063",
+     "issue": "The line mixes wages with payroll taxes and benefits. It is recorded as Salaries and Wages, the dominant part, with no review note."}
+  ]
+}
