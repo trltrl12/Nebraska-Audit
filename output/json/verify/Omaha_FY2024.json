@@ -1,0 +1,46 @@
+{
+  "stem": "Omaha_FY2024",
+  "values_checked": 488,
+  "issues": [
+    {
+      "severity": "warning",
+      "path": "receipts[12]",
+      "page": 9,
+      "extracted": "6 lines receipts[12]-[17]: Parking 13,845,847; Sewer 224,452,587; Citywide sports and tennis 1,124,305; Marinas 427,349; Golf operations and concessions 6,654,181; Air quality 585,343 (labels 'Charges for services - <activity>', source_page 3)",
+      "on_page": "Operating revenues, charges for services 247,089,612 (Total Proprietary Funds column, p9)",
+      "issue": "the proprietary statement prints this as one line, and the six pieces are its fund/activity columns (Parking = Parking Facilities Fund, Sewer = Sewer Revenue Fund, the rest = Nonmajor Enterprise 8,791,178), taken from the Statement of Activities p3. Statement lines must come from the Total column and must not be split by fund column (tax-type pieces only). Record one line, 'Operating revenues, charges for services' 247,089,612 (p9); the pieces add up exactly, so the totals are unchanged (kept: same split as verified Omaha_FY2025, using the printed Statement of Activities pieces)"
+    },
+    {
+      "severity": "warning",
+      "path": "transfers_out",
+      "page": 6,
+      "extracted": 96145738,
+      "on_page": "governmental transfers out 96,145,738 - in 37,132,606 = net 59,013,132; proprietary in 59,076,059 - out 62,928 = 59,013,131 (p9); Statement of Activities prints (59,013,131) / 59,013,131 (p4); cash flow statement prints transfers out (62,929) (p10)",
+      "issue": "$1 rounding difference between the governmental and proprietary transfers, printed in the report itself; not recorded in report_discrepancies"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[11].category",
+      "page": 6,
+      "extracted": "federal grants",
+      "on_page": "Contributions and grants 81,173,429",
+      "issue": "mixed line (grants plus private contributions, e.g. nonmajor 24,122,248); the funder isn't stated, so federal grants is an assumption (it carries review)"
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[3].category",
+      "page": 6,
+      "extracted": "utilities",
+      "on_page": "Other public services 32,946,965",
+      "issue": "mixed function (solid waste, sewer/flood control, household chemical disposal); utilities is a judgment call"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[118].category",
+      "page": 24,
+      "extracted": "Turnback",
+      "on_page": "Intergovernmental 589,462 (State Turn Back Revenue Fund)",
+      "issue": "printed label is Intergovernmental; Turnback is inferred from the fund name (marked computed). Defensible, but the fund-name rule is written for tax lines"
+    }
+  ]
+}
