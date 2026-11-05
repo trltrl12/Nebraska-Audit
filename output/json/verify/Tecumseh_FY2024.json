@@ -1,0 +1,31 @@
+{
+ "stem": "Tecumseh_FY2024",
+ "values_checked": 102,
+ "issues": [
+  {
+   "severity": "warning",
+   "path": "disbursements[3].amount",
+   "page": 4,
+   "extracted": 478229,
+   "on_page": 396518,
+   "issue": "Culture and recreation in the governmental funds statement, Total column (p4), is 396,518. 478,229 is the Statement of Activities figure (p2), where capital outlay is allocated to functions. With 478,229 the disbursement lines add up to 2,351,791, not the printed Total disbursements of 2,270,080 (81,711 too high), and the cash roll-forward doesn't hold",
+   "resolution": "fixed: amount set to 396,518 (p4 Total column)"
+  },
+  {
+   "severity": "warning",
+   "path": "missing",
+   "page": 10,
+   "extracted": null,
+   "on_page": "Schedule of Receipts and Disbursements - LB840 Funds (p10): Sales tax transfer from City 155,154; Program income 33,714; Investment income 16,556; Total revenues 205,424; Economic development: Grants 77,177, Administration 167,153, Capital outlay 100,000; Total expenditures 344,330",
+   "issue": "the extractor left this schedule out of detail, treating it as a sub-account already inside the General Fund figures (avoiding double counting). That is defensible, but the trim doesn't confirm it. Its 'Sales tax transfer from City' would be a transfer, not revenue, if it were recorded"
+  },
+  {
+   "severity": "warning",
+   "path": "detail[18].schedule",
+   "page": 9,
+   "extracted": "Schedule of Receipts and Disbursements (titled LB840 Funds; Debt Service Fund figures)",
+   "on_page": "Schedule of Receipts and Disbursements - LB840 Funds",
+   "issue": "the p9 schedule is titled LB840 Funds, but every figure matches the Debt Service Fund column on p4 (ending fund balance 901,054). The extractor assigned it to the Debt Service Fund (an assumption; the printed title may be a typo in the report)"
+  }
+ ]
+}
