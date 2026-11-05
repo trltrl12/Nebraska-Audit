@@ -74,6 +74,7 @@ def main():
     groups = defaultdict(lambda: {"lines": 0, "reports": set(), "total": 0.0, "labels": defaultdict(float),
                                   "cats": set(), "types": set(), "years": set(), "where": set(), "decided": 0})
     n_lines = 0
+    used = {"Revenue": defaultdict(int), "Spending": defaultdict(int)}
     for f in sorted(JSON_DIR.glob("*.json")):
         try:
             d = json.loads(f.read_text())
@@ -83,6 +84,14 @@ def main():
         m = YEAR.search(stem)
         year = m.group(1) if m else str(d.get("fiscal_year_end") or "")[:4]
         etype = d.get("entity_type") or ""
+        for x in d.get("receipts") or []:
+            used["Revenue"][x.get("category") or ""] += 1
+        for x in d.get("disbursements") or []:
+            used["Spending"][x.get("category") or ""] += 1
+        for x in d.get("detail") or []:
+            sec = (x.get("section") or "").lower()
+            if sec in ("revenue", "expenditure"):
+                used["Revenue" if sec == "revenue" else "Spending"][x.get("category") or ""] += 1
         for where in ("receipts", "detail"):
             for x in d.get(where) or []:
                 cat = (x.get("category") or "").strip()
@@ -174,18 +183,29 @@ def main():
         row[3].number_format = "#,##0"
         row[5].fill = yellow
 
+    # every category in use (plus the documented ones), alphabetical; duplicates differing only in case merged
+    def cat_list(kind, documented):
+        seen = {}
+        for name in list(used[kind]) + documented:
+            if name and name.lower() not in seen:
+                seen[name.lower()] = name
+        return sorted(seen.values(), key=str.lower)
+    RECEIPT_CATS[:] = cat_list("Revenue", RECEIPT_CATS)
+    SPENDING_CATS[:] = cat_list("Spending", SPENDING_CATS)
     cs = wb.create_sheet("Categories")
-    cs.append(["Revenue categories", "Spending categories"])
+    cs.append(["Revenue categories", "Lines", "", "Spending categories", "Lines"])
     for c in cs[1]:
         c.font = Font(bold=True)
+    cnt = lambda kind, n: sum(v for k, v in used[kind].items() if k.lower() == n.lower())
     for i in range(max(len(RECEIPT_CATS), len(SPENDING_CATS))):
-        cs.append([RECEIPT_CATS[i] if i < len(RECEIPT_CATS) else None,
-                   SPENDING_CATS[i] if i < len(SPENDING_CATS) else None])
-    cs.column_dimensions["A"].width = 36
-    cs.column_dimensions["B"].width = 32
+        rc = RECEIPT_CATS[i] if i < len(RECEIPT_CATS) else None
+        sc = SPENDING_CATS[i] if i < len(SPENDING_CATS) else None
+        cs.append([rc, cnt("Revenue", rc) if rc else None, None, sc, cnt("Spending", sc) if sc else None])
+    for col, wdt in zip("ABCDE", (36, 8, 3, 40, 8)):
+        cs.column_dimensions[col].width = wdt
 
     # dropdown of allowed categories (typing your own is still allowed)
-    for kind, col, size in (("Revenue", "A", len(RECEIPT_CATS)), ("Spending", "B", len(SPENDING_CATS))):
+    for kind, col, size in (("Revenue", "A", len(RECEIPT_CATS)), ("Spending", "D", len(SPENDING_CATS))):
         dv = DataValidation(type="list", formula1=f"=Categories!${col}$2:${col}${size + 1}", allow_blank=True,
                             showErrorMessage=False)
         ws.add_data_validation(dv)
