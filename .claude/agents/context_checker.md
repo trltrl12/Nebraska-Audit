@@ -22,8 +22,11 @@ For each stem you are given:
      note becomes Employee Benefits and Payroll Taxes; "Transportation" in a school district's pupil-transportation section becomes
      student transportation; "Deposits" that are refundable customer deposits stays Deposits; "County Treasurer Receipts" that the
      report says are property taxes becomes property tax.
-     Use category names already in use: the receipt and disbursement categories in `.claude/agents/extractor.md`, or the
-     `category` values in `config/category_decisions.csv`.
+     Prefer a category name already in use: the receipt and disbursement categories in `.claude/agents/extractor.md`, or
+     the `category` values in `config/category_decisions.csv`. **That list is not complete.** If none of those fits what
+     the page shows, create a new category name that best describes this report's transaction, for example "Airport" or
+     "Opioid Settlement". Keep it short, in Title Case, and use the same name every time. A new name is better than forcing
+     the line into a category that doesn't fit, or into `other`.
    - If the page gives nothing beyond the label itself, the category is `unclear`.
      **Never decide from the wording of the label alone.** Never use another report, or what similar labels usually mean.
 4. `evidence` must be what you saw on the page, short and specific. Examples:

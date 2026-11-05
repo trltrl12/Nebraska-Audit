@@ -105,7 +105,7 @@ DISBURSEMENT_CATEGORIES = [
     "Community Betterment",  # user decision 2026-10-29: not keno, not economic development
 ]
 def _decision_categories():
-    """Category names the user decided in config/category_decisions.csv count as known categories."""
+    """Category names the user decided (config/category_decisions.csv) or a page check created count as known."""
     f = ROOT / "config" / "category_decisions.csv"
     out = {"revenue": [], "expenditure": []}
     if f.exists():
@@ -113,6 +113,13 @@ def _decision_categories():
             for r in csv.DictReader(fh):
                 c = (r.get("category") or r.get("category (revenue)") or "").strip()
                 if c and r.get("section") in out and c not in out[r["section"]]:
+                    out[r["section"]].append(c)
+    # new category names created by page-checked context decisions (output/json/_meta/context_decisions/*.csv)
+    for f in sorted((ROOT / "output" / "json" / "_meta" / "context_decisions").glob("*.csv")):
+        with f.open(newline="") as fh:
+            for r in csv.DictReader(fh):
+                c = (r.get("category") or "").strip()
+                if c and c.lower() != "unclear" and r.get("section") in out and c not in out[r["section"]]:
                     out[r["section"]].append(c)
     return out
 
