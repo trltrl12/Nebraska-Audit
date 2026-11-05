@@ -151,31 +151,31 @@ def main():
     from openpyxl.styles import Font, PatternFill
     from openpyxl.worksheet.datavalidation import DataValidation
 
+    # simple workbook: only the labels the user can decide, few columns (full detail stays in the CSV)
+    todo_rows = [r for r in rows if r["what_to_do"].startswith("DECIDE")]
+    head = ["Revenue or Spending", "Label", "Times Seen", "Total $", "Now In", "Your Category", "key"]
     wb = Workbook()
     ws = wb.active
     ws.title = "Decide"
-    ws.append(cols)
+    ws.append(head)
     for c in ws[1]:
         c.font = Font(bold=True)
-    for r in rows:
-        ws.append([r[c] for c in cols])
-    ws.freeze_panes = "C2"
-    ws.auto_filter.ref = ws.dimensions
-    widths = {"what_to_do": 34, "section": 12, "label_normalized": 38, "example_labels": 55, "current_category": 18, "lines": 7,
-              "reports": 8, "total_amount": 15, "entity_types": 22, "years": 10, "found_in": 16,
-              "example_reports": 45, "flag": 30, "your_category": 30, "your_detail_category": 26}
-    for i, c in enumerate(cols, 1):
-        ws.column_dimensions[ws.cell(1, i).column_letter].width = widths.get(c, 15)
-    money_col = cols.index("total_amount") + 1
+    for r in todo_rows:
+        ws.append(["Revenue" if r["section"] == "revenue" else "Spending",
+                   r["example_labels"].split(" | ")[0], r["lines"], r["total_amount"],
+                   r["current_category"], "", r["label_normalized"]])
+    ws.freeze_panes = "B2"
+    ws.auto_filter.ref = f"A1:F{len(todo_rows) + 1}"
+    for col, wdt in zip("ABCDEF", (18, 60, 11, 15, 22, 34)):
+        ws.column_dimensions[col].width = wdt
+    ws.column_dimensions["G"].hidden = True  # matching key for category_decisions.csv
     yellow = PatternFill("solid", fgColor="FFF2CC")
-    your_col = cols.index("your_category") + 1
     for row in ws.iter_rows(min_row=2):
-        row[money_col - 1].number_format = "#,##0"
-        row[your_col - 1].fill = yellow
-        row[your_col].fill = yellow
+        row[3].number_format = "#,##0"
+        row[5].fill = yellow
 
     cs = wb.create_sheet("Categories")
-    cs.append(["Receipt categories", "Spending categories"])
+    cs.append(["Revenue categories", "Spending categories"])
     for c in cs[1]:
         c.font = Font(bold=True)
     for i in range(max(len(RECEIPT_CATS), len(SPENDING_CATS))):
@@ -184,16 +184,14 @@ def main():
     cs.column_dimensions["A"].width = 36
     cs.column_dimensions["B"].width = 32
 
-    # dropdown of allowed categories (free text still allowed)
-    letter = ws.cell(1, your_col).column_letter
-    n = len(rows) + 1
-    for sec, col, size in (("revenue", "A", len(RECEIPT_CATS)), ("expenditure", "B", len(SPENDING_CATS))):
+    # dropdown of allowed categories (typing your own is still allowed)
+    for kind, col, size in (("Revenue", "A", len(RECEIPT_CATS)), ("Spending", "B", len(SPENDING_CATS))):
         dv = DataValidation(type="list", formula1=f"=Categories!${col}$2:${col}${size + 1}", allow_blank=True,
                             showErrorMessage=False)
         ws.add_data_validation(dv)
-        for i, r in enumerate(rows, 2):
-            if r["section"] == sec:
-                dv.add(f"{letter}{i}")
+        for i in range(2, len(todo_rows) + 2):
+            if ws.cell(i, 1).value == kind:
+                dv.add(f"F{i}")
     wb.save(OUT_XLSX)
 
     total = sum(abs(r["total_amount"]) for r in rows) or 1
