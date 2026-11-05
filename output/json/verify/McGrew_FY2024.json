@@ -1,0 +1,15 @@
+{
+  "stem": "McGrew_FY2024",
+  "values_checked": 29,
+  "issues": [
+    {"severity": "warning", "path": "receipts[7].amount", "page": 1,
+     "extracted": 81388.51, "on_page": "Local Receipts: Other Total 125,662.47 (General 62,317.30, Street 1,031.33, Sewer 44,273.96, Keno 18,039.88)",
+     "issue": "Statement line split by fund column into governmental (receipts[7]) and business-type (receipts[8]) pieces. The pieces match the printed columns and are marked split_from/computed, following the village fund-type rule. But this conflicts with the instruction that statement lines come only from the Total column. Confirm the fund-type split is intended."},
+    {"severity": "warning", "path": "beginning_cash.amount", "page": 1,
+     "extracted": 122979.30, "on_page": "Line 1 Net Cash Balance: General (114,114.04), Street 80,496.77, Keno 135,179.89; Line 2 Investments: General 15,128.85, Street 6,287.83",
+     "issue": "beginning_cash is the line 3 subtotal, which includes investments of 21,416.68 printed separately on line 2, and beginning_investments is null. The statement rolls the subtotal forward, so the identity holds, but this departs from the rule that separately reported investments go in beginning_investments."},
+    {"severity": "warning", "path": "disbursements[6].fund_type", "page": 2,
+     "extracted": "governmental", "on_page": "Line 45 Solid Waste 9,669.60, printed in the General Fund column under the Business-Type Activities heading",
+     "issue": "Solid Waste spending is printed under the Business-Type Activities heading but paid from the General Fund. Keeping it governmental keeps the General Fund roll-forward intact; the fund type is a judgment call."}
+  ]
+}

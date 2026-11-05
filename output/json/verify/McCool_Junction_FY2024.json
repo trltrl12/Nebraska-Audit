@@ -1,0 +1,54 @@
+{
+  "stem": "McCool_Junction_FY2024",
+  "values_checked": 131,
+  "issues": [
+    {
+      "severity": "warning",
+      "path": "disbursements[10].category",
+      "page": 8,
+      "extracted": "general government",
+      "on_page": "Supplies 17,279.28 = General 8,423.75 + Street 8,855.53",
+      "issue": "This line is almost evenly split, with Street slightly dominant (51%). Under the dominant-fund rule it would be streets/highways."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[9].category",
+      "page": 6,
+      "extracted": "other",
+      "on_page": "Miscellaneous 20,619.78 (General Fund only)",
+      "issue": "This is General Fund money in an object-only statement, so the fund-function rule gives general government, and the detail line for the same amount uses general government. The statement line is in other. The printed label says Miscellaneous, so other is defensible, but the two are inconsistent."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[19].category",
+      "page": 10,
+      "extracted": "donations/contributions",
+      "on_page": "Grants, Bonds & Loans 82,189.00 (Water Fund nonoperating); shown under Grants & Donations on the Statement of Activities (p5)",
+      "issue": "The label mixes grants with bond/loan proceeds. A water-project grant would more likely be intergovernmental/state aid or federal grants than a private donation, and loan or bond proceeds would be business_type.debt_proceeds."
+    },
+    {
+      "severity": "warning",
+      "path": "decision_needed",
+      "page": 10,
+      "extracted": null,
+      "on_page": "Grants, Bonds & Loans 82,189.00 (30% of business-type receipts)",
+      "issue": "decision_needed is missing the question whether this amount is a grant (receipt) or bond/loan proceeds (debt_proceeds). The label leaves it open."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[12].category",
+      "page": 6,
+      "extracted": "charges for services/fees",
+      "on_page": "Charges for Services & Sale of Assets 399,148.84; Statement of Activities (p5) lists the same amount as general receipts 'Use Fees'",
+      "issue": "This large General Fund line mixes charges, rentals (detail label 'Charges for Services, Rentals & Sale of Assets', p11) and sale of assets, and the report doesn't break it down. The category stays a judgment call (review is already set)."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[6].computed",
+      "page": 6,
+      "extracted": "tax type from fund name TIF Fund",
+      "on_page": "TIF Tax Collections 56,084.27 (TIF Fund column)",
+      "issue": "The property tax classification from the TIF fund name meets the 2026-11-04 standard, but the line isn't logged in output/json/_meta/tax_splits.csv as the rule requires."
+    }
+  ]
+}
