@@ -228,6 +228,16 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
 Keep the main session lean: don't open PDFs or print JSON in the main conversation. Rely on the
 agents' one-line statuses.
 
+## Context check procedure (lines whose label alone is not enough; user 2026-11-05)
+Run this when the user says "run the context check". Use a fresh session and do about 15-30 reports per session.
+1. `git pull --rebase`.
+2. List the next reports (stems in the queue that have no decision file yet):
+   `python3 -c "import csv,os;d='output/json/_meta/context_decisions';s=sorted({r['stem'] for r in csv.DictReader(open('output/json/_meta/context_check.csv'))}-{f[:-4] for f in os.listdir(d)});print(len(s),'left');print(' '.join(s[:15]))"`
+3. Send them to the `context_checker` agent, 3-5 stems per agent (several in parallel is fine). Pass only the stems.
+4. `python3 scripts/user_rules.py --all` applies the page-checked decisions and rebuilds the queue.
+5. `git add output/json/ && git commit -m "context check: N reports"`, then `git pull --rebase && git push`.
+6. Report how many reports and lines are left (step 2's count). Lines marked `unclear` go to the user's review list.
+
 ## Running another fiscal year (e.g. 2024)
 Works for any year. Upload the Auditor's search export as config/export_<year>.xlsx (as was done for 2025), then run the
 fetch workflow with input year=<year>; without an export file it uses the live search. Files are
