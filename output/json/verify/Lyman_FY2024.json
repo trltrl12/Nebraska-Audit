@@ -1,0 +1,46 @@
+{
+  "stem": "Lyman_FY2024",
+  "values_checked": 250,
+  "issues": [
+    {
+      "severity": "warning",
+      "path": "balance_sheet.equity",
+      "page": 3,
+      "extracted": "Total-column government-wide lines: Cash 652,037, Certificates of deposit 181,799, Cash held by county treasurer 1,422, Restricted cash - meter deposits 24,575; equity Restricted for utility deposits 24,575, Unrestricted 835,258 (p2)",
+      "on_page": "Governmental funds statement p3 (Total Governmental Funds): Cash (121,265), Certificates of deposit 137,360, Cash held by county treasurer 1,422; Fund balances Assigned 300,418, Unassigned (282,901); total 17,517 = government-wide governmental 17,517",
+      "issue": "User balance-sheet rule (2026-10-27): cash-basis governmental lines come from the governmental funds statement of assets and fund balances when its totals equal the government-wide figures (they do: 17,517). The extraction used only the government-wide Total column, so the governmental fund-balance classification (Assigned 300,418 / Unassigned -282,901) is replaced by a lumped Unrestricted line. Business-type lines would come from the proprietary statement (p5: Cash 773,302, CDs 44,439, Meter deposits 24,575; Restricted 24,575, Unrestricted 817,741). (deferred to the FY2024 balance-sheet-basis pass)"
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[6].category",
+      "page": 6,
+      "extracted": "Professional/Contract Services",
+      "on_page": "Purchased services 385,639 (Electric 313,423)",
+      "issue": "Electric fund purchased services are likely purchased power (Purchased Power/Cost of Sales); the page does not say. Same for detail[66]."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[37..46].category",
+      "page": 11,
+      "extracted": "public safety",
+      "on_page": "General Fund 'Other' department column (303,919)",
+      "issue": "The 'Other' department spans public health and safety, culture/recreation (20,760) and economic development (20,227) per the p4 statement; all its lines are put under public safety. Judgment call, flagged in review."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[4].category",
+      "page": 4,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "Grants 80,259",
+      "issue": "Grant source (state vs federal) not printed; category assumed."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[111].function",
+      "page": 12,
+      "extracted": "utilities",
+      "on_page": "Leasing Fund Repairs and maintenance 1,006",
+      "issue": "Leasing fund is not a utility; function 'utilities' is an assumption (minor)."
+    }
+  ]
+}
