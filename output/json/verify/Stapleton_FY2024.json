@@ -1,0 +1,31 @@
+{
+ "stem": "Stapleton_FY2024",
+ "values_checked": 114,
+ "issues": [
+  {
+   "severity": "warning",
+   "path": "report_discrepancies",
+   "page": 5,
+   "extracted": "no balance-sheet entry; equity lines sum to 266,428 vs total_equity 266,427",
+   "on_page": "p5 proprietary: Restricted 8,204 + Unrestricted 132,106 = 140,310 vs printed Total Cash Basis Net Position 140,309 (Water 7,704 + 23,464 = 31,168 vs 31,167); p1: Restricted 37,993 + Unrestricted 228,435 = 266,428 vs printed Total Net Position 266,427",
+   "issue": "The printed net position doesn't add up by 1 (report rounding), but report_discrepancies has no 'balance' entry for it. As extracted, the balance sheet equity lines don't tie to total_equity.",
+   "resolution": "balance rounding gap added to report_discrepancies"
+  },
+  {
+   "severity": "warning",
+   "path": "receipts[7].category",
+   "page": 4,
+   "extracted": "occupation/franchise tax",
+   "on_page": "Charges for services 4,811 (p2 'Electric, gas, and cable lease'; p8 'Franchise Fees')",
+   "issue": "The category doesn't match the printed label, though the report's own other statements support franchise fees. It is defensible."
+  },
+  {
+   "severity": "warning",
+   "path": "receipts[8].category",
+   "page": 4,
+   "extracted": "intergovernmental/state aid",
+   "on_page": "Grants and donations 102,948",
+   "issue": "The line mixes grants and donations and doesn't name the source. Could be donations/contributions. The business-type 'Grants' 16,117 (receipts[14]) is similarly unsourced."
+  }
+ ]
+}

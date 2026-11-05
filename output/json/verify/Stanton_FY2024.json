@@ -1,0 +1,21 @@
+{
+  "stem": "Stanton_FY2024",
+  "values_checked": 127,
+  "issues": [
+    {"severity": "warning", "path": "receipts[7].category", "page": 5,
+     "extracted": "other taxes", "on_page": "Other Taxes 417,929 (General 74,730 + Street 343,199)",
+     "issue": "The trimmed PDF has no breakdown by tax type, so 'other taxes' follows the printed label. The Street Fund's 343,199 may be local option sales tax. The full report's notes (not in the trim, not available locally) should be checked under the 2026-11-04 tax-split standard."},
+    {"severity": "warning", "path": "detail[17].category", "page": 5,
+     "extracted": "charges for services/fees (detail_category recreation/pool/park fees)", "on_page": "Golf Fund - Charges for Services 234,810 (p2: Golf charges for services 234,810)",
+     "issue": "The Golf fund's charges are entirely golf fees (p2), which fits the user's Recreation Fees category. The governmental statement line receipts[5] 'Charges for Services' 333,002 is about 73% golf and pool fees."},
+    {"severity": "warning", "path": "receipts[3].category", "page": 5,
+     "extracted": "intergovernmental/state aid", "on_page": "Operating Grants and Contributions 7,840 (Housing)",
+     "issue": "The source isn't named, so this could be donations/contributions."},
+    {"severity": "warning", "path": "receipts[4].category", "page": 5,
+     "extracted": "federal grants", "on_page": "Capital Grants and Contributions 139,722 (General 50,000 + CDBG 89,722)",
+     "issue": "Calling it federal is an assumption. The page doesn't name the source of the General Fund's 50,000."},
+    {"severity": "warning", "path": "disbursements[12].original_label", "page": 5,
+     "extracted": "Debt Service - Principal / Debt Service - Interest (category debt service principal / interest)", "on_page": "Principal 150,000 / Interest 23,918 under 'Debt Service' heading",
+     "issue": "The labels are not as printed (the heading was prefixed; the printed text is kept in printed_label). The categories still use the old 'debt service principal/interest' rather than 'Debt Service' with debt_service_part; user_rules.py should convert them. The same applies to detail[38] and detail[39]."}
+  ]
+}
