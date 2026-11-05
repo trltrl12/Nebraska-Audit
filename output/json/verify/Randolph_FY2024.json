@@ -1,0 +1,62 @@
+{
+  "stem": "Randolph_FY2024",
+  "values_checked": 258,
+  "issues": [
+    {
+      "severity": "warning",
+      "path": "disbursements[5].original_label",
+      "page": 5,
+      "extracted": "Capital outlay",
+      "on_page": "Capital outlay 296,007 (police, economic development, streets, golf, library, rescue)",
+      "issue": "capital outlay rule wants 'Capital Outlay: <function>'; mixed functions, left unrelabelled"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[8].category",
+      "page": 5,
+      "extracted": "property tax",
+      "on_page": "TIF proceeds 2,682 (CDA Fund; printed under general revenues, not under Taxes)",
+      "issue": "tax type from the TIF fund rule; item lacks the required computed: 'tax type from fund name' marking (same for detail[165])"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[169].category",
+      "page": 16,
+      "extracted": "economic development",
+      "on_page": "Economic development 29,456 (Total Nonmajor) = CDA 2,456 + Community Betterment Fund 27,000 (p15)",
+      "issue": "most of the line is Community Betterment Fund spending; Community Betterment category (user 2026-10-29) may fit"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[155].category",
+      "page": 13,
+      "extracted": "streets/highways",
+      "on_page": "Flood Control Fund: Public works 7,287",
+      "issue": "flood control spending could be natural resources/conservation"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[94].category",
+      "page": 18,
+      "extracted": "streets/highways",
+      "on_page": "Cemetery and Recycling departments (detail[94]-[100], [120]-[125]), counted in General Fund Public works 16,894 (p5)",
+      "issue": "set to public works to tie to the statement function; cemetery is normally health/welfare and recycling utilities"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[20].category",
+      "page": 18,
+      "extracted": "charges for services/fees",
+      "on_page": "Auditorium: Charges for services 7,250 (detail_category rentals)",
+      "issue": "category does not match detail_category; Rentals (user 2026-10-28) may fit. Similarly nonmajor Charges for services 113,673 (detail[162], mostly Rescue 69,919) could be Ambulance Fees"
+    },
+    {
+      "severity": "warning",
+      "path": "proprietary",
+      "page": 8,
+      "extracted": null,
+      "on_page": "Statement of Cash Flows - Proprietary Funds: operating 37,281, noncapital financing 78,777, capital and related (152,259), investing 9,193, cash 844,434 -> 817,426",
+      "issue": "business-type funds are accrual with a printed cash flow statement; left null because report basis is cash (rule says GAAP only)"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "stem": "Prague_FY2024",
+  "values_checked": 146,
+  "issues": [
+    {"severity": "warning", "path": "receipts[3].category", "page": 2, "extracted": "charges for services/fees", "on_page": "Charges for services 48,362 = General government 1,729 + Public health and social services (garbage) 46,633", "issue": "piece is mostly garbage collection fees; Utility Charges (incl. garbage/refuse, user 2026-10-28) may fit better"},
+    {"severity": "warning", "path": "receipts[4].original_label", "page": 3, "extracted": "Other general receipts", "on_page": "Licenses, fees and permits 5,785 / Miscellaneous 6,899", "issue": "split pieces of Other general receipts 61,046 (SoA breakdown ties exactly: 48,362 + 5,785 + 6,899) keep the parent label rather than the printed breakdown row labels; split itself is defensible (government-wide = fund figures, modified cash)"},
+    {"severity": "warning", "path": "receipts[6].category", "page": 7, "extracted": "charges for services/fees", "on_page": "Charges for services 492,111 (Electric 347,070, Sewer 36,781, Water 65,882, Apartments 42,378)", "issue": "449,733 of the line is utility charges; Utility Charges may be the dominant category"},
+    {"severity": "warning", "path": "disbursements[7].category", "page": 7, "extracted": "utilities", "on_page": "Licenses, fees and permits 1,589", "issue": "cost-type line given function category 'utilities' (reserved for utility bills under the 2026-10-28 cost-type rule); Other Taxes Paid or other may fit"},
+    {"severity": "warning", "path": "disbursements[5].function", "page": 7, "extracted": "utilities", "on_page": "Elevator expense 835 (Apartments Fund only)", "issue": "line belongs entirely to the Apartments Fund (housing), not a utility"},
+    {"severity": "warning", "path": "detail[18].category", "page": 7, "extracted": "charges for services/fees", "on_page": "Apartments Fund Charges for services 42,378", "issue": "tenant rent; Rentals category (user 2026-10-28) may apply"},
+    {"severity": "warning", "path": "business_type.measure", "page": 7, "extracted": "net position", "on_page": "Net Position - modified cash basis (includes due to other funds 39,052)", "issue": "report basis is cash; rule says measure 'cash' for cash basis, but the statement rolls forward modified-cash net position, not cash"},
+    {"severity": "warning", "path": "balance_sheet.liabilities[0].category", "page": 1, "extracted": "Internal Balances", "on_page": "Due to other funds 39,052", "issue": "Internal Balances is an asset category; not in the liability category list (other liabilities)"}
+  ]
+}
