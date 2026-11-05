@@ -31,6 +31,8 @@ REV_LABELS = [
     (r"^(taxes:\s*)?sundry and in lieu( tax)?$", "Sundry and in Lieu", None),
 ]
 REIMB_SERVICES = re.compile(r"^(\d+ )?reimbursements? for services$", re.I)
+# user 2026-11-05: loan repayments received (LB 840 / CDBG / revolving loans) are their own receipt category
+LOAN_REPAY = re.compile(r"\bloans?\s*repay", re.I)
 TRANSFER_LABEL = re.compile(r"^(?:operating )?transfers?\s*[-–]?\s*(in|out)$", re.I)
 CATEGORICAL_PRIVATE = re.compile(r"categorical.*(corporat|private)", re.I)
 CAPITAL_OUTLAY = re.compile(r"capital outlay", re.I)
@@ -233,6 +235,9 @@ def revenue_rules(x, log):
             return
     if REIMB_SERVICES.match(lab):
         setcat(x, "category", "Reimbursement for Services", "category: Reimbursement for Services", log)
+    if LOAN_REPAY.search(lab) and x.get("category") == "other":
+        setcat(x, "category", "Loan Repayments", "category: Loan Repayments", log)
+        setcat(x, "detail_category", "Loan Repayments", "detail_category: Loan Repayments", log)
 
 
 def spending_rules(x, log):

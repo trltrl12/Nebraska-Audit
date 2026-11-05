@@ -61,7 +61,7 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
   inheritance tax, special assessments, keno/lottery, other taxes, taxes (unlabeled),
   intergovernmental/state aid, federal grants, charges for services/fees, licenses and permits,
   Fines and Licenses, investment income, donations/contributions, reimbursements/refunds,
-  Sale of Property, other. `other`/`other taxes`/miscellaneous are last resorts; every such line,
+  Sale of Property, Loan Repayments (loan repayments received, e.g. LB 840 / CDBG loans; user 2026-11-05), other. `other`/`other taxes`/miscellaneous are last resorts; every such line,
   any category that doesn't match its label, and any fund type with >10% in `other` goes to review,
   except lines whose printed label itself says other/miscellaneous. Budget-form (waiver) reports are
   marked by the workbook's filing_type column ("Waiver/budget only"), not by per-line review notes.
