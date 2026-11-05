@@ -1,10 +1,47 @@
 {
-  "stem": "ONeill_FY2024",
-  "values_checked": 328,
-  "issues": [
-    {"severity": "warning", "path": "receipts[9].category", "page": 6, "extracted": "intergovernmental/state aid", "on_page": "Intergovernmental revenues 1,007,547", "issue": "Statement line includes Prorate motor vehicle 1,426, Property tax credit 38,922, Homestead exemption 35,732 (p16) and Street motor vehicle fees 38,573 (p25); rules say pro-rate/homestead/credit never sit inside state aid, but the Debt Service portion 20,728 has no breakdown, so an exact split isn't possible. Left unsplit with review; judgment call"},
-    {"severity": "warning", "path": "receipts[13].category", "page": 6, "extracted": "Rentals", "on_page": "Miscellaneous revenue 950,695", "issue": "Mixed line: NPPD lease 602,031 (63%, p16) plus LB 840 loan repayments 259,193 (p30), CDBG loan repayments 35,065 (p24), franchise payments, lot sales, other. Dominant-category rule supports Rentals, but the printed label says miscellaneous"},
-    {"severity": "warning", "path": "disbursements[6].category", "page": 6, "extracted": "culture/recreation", "on_page": "Public Building 67,420", "issue": "This is the Community center (pp21); culture/recreation is defensible, general government is the alternative"},
-    {"severity": "warning", "path": "proprietary", "page": 12, "extracted": "filled from Statement of Cash Flows - Modified Cash Basis", "on_page": "operating 714,033; investing 20,943; noncapital (213,563); capital (1,836,523); 1,885,103 -> 569,993", "issue": "Figures match the page, but the rule says proprietary is for GAAP reports only (otherwise null); this report is modified cash basis"}
-  ]
+ "stem": "ONeill_FY2024",
+ "values_checked": 324,
+ "issues": [
+  {
+   "severity": "warning",
+   "path": "receipts[9].category",
+   "page": 6,
+   "extracted": "intergovernmental/state aid 1,007,547 (unsplit)",
+   "on_page": "Intergovernmental revenues 1,007,547 = GF 395,216 (p16: muni equalization 316,316, prorate MV 1,426, property tax credit 38,922, homestead 35,732, other 2,820) + Street 591,603 (p25: highway allocation 539,361, incentive 4,000, county township levy 9,669, motor vehicle fees 38,573) + Debt Service 20,728 (p31: property tax credit 10,600, homestead 9,732, prorate MV 396); all-funds totals printed p14 (Homestead exemption 45,464, Property tax credit 49,522)",
+   "issue": "Rule: Homestead Exemption, Property Tax Credit and Motor Vehicle Pro-Rate are never inside state aid; split a combined state aid line using the report's own breakdown. The breakdown is printed and ties exactly (homestead 45,464, property tax credit 49,522, pro-rate 1,822, motor vehicle fees 38,573, state aid 872,166). The review note's claim that the Debt Service portion 20,728 is not itemized is wrong: p31 itemizes it",
+   "resolution": "fixed: intergovernmental split per printed breakdown"
+  },
+  {
+   "severity": "warning",
+   "path": "receipts[10].category",
+   "page": 6,
+   "extracted": "charges for services/fees",
+   "on_page": "Charges for services 287,014 (p16: Ambulance calls 223,910, Community Center rent 29,335, Library 6,414, Carney Park 13,359, Pool admissions 13,996)",
+   "issue": "78% of the line is ambulance fees (own category Ambulance Fees); the dominant-category rule could apply"
+  },
+  {
+   "severity": "warning",
+   "path": "receipts[13].category",
+   "page": 6,
+   "extracted": "Rentals",
+   "on_page": "Miscellaneous revenue 950,695",
+   "issue": "Mixed line: NPPD lease 602,031 (63%, p16) plus LB 840 loan repayments 259,193 (p30), CDBG loan repayments and other 35,065 (p24), franchise payments, lot sales, interest income 20,537, other. Dominant-category rule supports Rentals; judgment call"
+  },
+  {
+   "severity": "warning",
+   "path": "detail[39].category",
+   "page": 17,
+   "extracted": "economic development",
+   "on_page": "Interlocal - Holt County Economic Development 25,413 (under General government - administration)",
+   "issue": "Statement counts it in General government 429,350 (p6); function differs from the schedule heading. Defensible"
+  },
+  {
+   "severity": "warning",
+   "path": "proprietary",
+   "page": 12,
+   "extracted": "filled from Statement of Cash Flows - Modified Cash Basis",
+   "on_page": "operating 714,033; investing 20,943; noncapital (213,563); capital (1,836,523); cash 1,885,103 -> 569,993 (p13)",
+   "issue": "Figures match the pages, but the rule says proprietary is for GAAP reports only (otherwise null); this report is modified cash basis"
+  }
+ ]
 }
