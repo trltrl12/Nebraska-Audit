@@ -679,7 +679,8 @@ def main():
                 print(f"{f.stem}: {dict(log)}")
             else:
                 f.write_text(json.dumps(d, indent=2, ensure_ascii=False) + "\n")
-    write_context_queue({f.stem for f in files})
+    if not a.check:
+        write_context_queue({f.stem for f in files})
     for k, v in total.most_common():
         print(f"{v:6} {k}")
     print(f"{len(CONTEXT_QUEUE)} lines need a page check before their category is set ({CONTEXT_CHECK_CSV.name})")
