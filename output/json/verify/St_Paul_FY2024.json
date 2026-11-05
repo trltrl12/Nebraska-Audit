@@ -1,0 +1,15 @@
+{
+  "stem": "St_Paul_FY2024",
+  "values_checked": 140,
+  "issues": [
+    {"severity": "warning", "path": "receipts[0].category", "page": 14,
+     "extracted": "property tax (General Fund piece 736,361 of 'Property and motor vehicle' 1,033,141)", "on_page": "p5 General Fund column prints 736,361 on row 'Property and motor vehicle'; p14 General Fund budget schedule prints the same 736,361 as 'Property'",
+     "issue": "Two printed labels for the same money conflict: the governmental funds statement labels the General Fund amount 'Property and motor vehicle', the budget schedule only 'Property'. A city General Fund normally receives the motor vehicle tax, so 'Property' may be shorthand and the piece may include motor vehicle tax (tax-split standard rule 5: ambiguous amounts stay unlabeled). Arithmetic is exact (736,361 + 136,141 + 160,639 = 1,033,141); the Debt Service piece ('Property taxes', p17) is better supported."},
+    {"severity": "warning", "path": "receipts[8].category", "page": 5,
+     "extracted": "intergovernmental/state aid", "on_page": "Grants 840 (SoA p2: general government operating grants and contributions 840)",
+     "issue": "Grantor not stated; could be federal grants or a private contribution. Same for business-type 'Grant income' 1,406 (receipts[16], p8)."},
+    {"severity": "warning", "path": "ending_cash", "page": 6,
+     "extracted": 7293615, "on_page": "Fund balances, end of year 7,293,615 (p6); p4 assets include LB 840 loans receivable 52,750 + 150,120",
+     "issue": "beginning_cash/ending_cash are total fund balances, which include LB 840 loans receivable (202,870 at year end), not pure cash; roll-forward ties exactly."}
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "stem": "Springfield_FY2024",
+  "values_checked": 145,
+  "issues": [
+    {"severity": "warning", "path": "disbursements[14].category", "page": 6,
+     "extracted": "utilities", "on_page": "Testing 7,465 (proprietary operating expenses listed by cost type)",
+     "issue": "Proprietary expenses are listed by cost type; under the 2026-10-28 cost-type rule Testing is closer to Professional/Contract Services than the function category 'utilities' (and it lacks function: 'utilities' unlike its neighbours)."},
+    {"severity": "warning", "path": "receipts[2]", "page": 8,
+     "extracted": "Intergovernmental - state 331,812 split into MV 43,332 / Homestead 40,222 / Pro-rate 2,139 / Highway 239,786 / remainder 6,333", "on_page": "p8 General Fund Intergovernmental lines; p11 combining (Library 991); p9 Bond Intergovernmental - other 5,342",
+     "issue": "Split is arithmetically exact (remainder 6,333 = 991 + 5,342, confirmed on p11/p9) and is required by the Homestead/Pro-Rate rule, but the breakdown is of the General Fund schedule, not printed for the statement Total line itself; noted as an assumption."},
+    {"severity": "warning", "path": "ending_cash", "page": 4,
+     "extracted": 13656303, "on_page": "Fund Balances - End of Year 13,656,303 (cash in bank 13,647,805 + county treasurer 13,708 = 13,661,513 on p3)",
+     "issue": "ending_cash (and beginning_cash) are fund balances that include special assessments receivable and are net of payroll withholdings, not pure cash; roll-forward ties, so defensible."}
+  ]
+}
