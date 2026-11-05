@@ -1,0 +1,22 @@
+{
+  "stem": "Minden_FY2024",
+  "values_checked": 240,
+  "issues": [
+    {"severity": "warning", "path": "business_type.measure", "page": 11,
+     "extracted": "cash", "on_page": "TOTAL NET POSITION, beginning 18,497,002 / end 17,017,583",
+     "issue": "beginning/ending are modified-cash net position that includes capital assets (13,438,290) and long-term debt (p8-9), not a cash balance; 'net position' describes the figures better"},
+    {"severity": "warning", "path": "receipts[3].category", "page": 6,
+     "extracted": "intergovernmental/state aid", "on_page": "Intergovernmental 896,724",
+     "issue": "Statement of Activities (p3, p2) shows this equals Motor vehicle taxes 78,812 + Other intergovernmental sources 289,302 + Highways operating grants 528,610; the line includes motor vehicle tax. Not a tax line, so the split rule doesn't require a split; flagged for the user"},
+    {"severity": "warning", "path": "receipts[10].category", "page": 6,
+     "extracted": "federal grants", "on_page": "Grant income 299,488 (General 8,500 + Special Grants 290,988)",
+     "issue": "federal source is supported only for the Special Grants fund (fund balance restricted for federal grant requirements, p4); General Fund 8,500 (and detail[9]) has no stated source"},
+    {"severity": "warning", "path": "detail", "page": 13,
+     "extracted": "governmental per-fund statement lines (p6-7) plus Enterprise Fund departmental schedule (p13-14)",
+     "on_page": "only governmental schedule is the combined All-Purpose Fund budget schedule (p12); the Enterprise Fund has its own departmental combining schedule",
+     "issue": "the per-fund rule (user 2026-10-28) says statement lines are not added for other funds when some funds have their own schedules, but the same paragraph also says to add the other funds when one fund's schedule ties to its column (this one is accrual and does not tie). Rules conflict; check which applies"},
+    {"severity": "warning", "path": "disbursements[15].category", "page": 10,
+     "extracted": "Fuel", "on_page": "Vehicle expenses 134,660",
+     "issue": "vehicle expenses may include repairs/insurance, not just fuel; judgment call (same for detail Vehicle expenses lines)"}
+  ]
+}
