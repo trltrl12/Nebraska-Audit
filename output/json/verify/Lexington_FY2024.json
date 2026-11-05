@@ -1,0 +1,11 @@
+{
+  "stem": "Lexington_FY2024",
+  "values_checked": 228,
+  "issues": [
+    {"severity": "warning", "path": "receipts[13].category", "page": 11, "extracted": "charges for services/fees", "on_page": "Charges for services 23,581,983 (Total Enterprise Funds: Electric 18,780,569, Water 1,739,578, Sewer 2,301,778, Sanitation 678,401, Ambulance 81,657)", "issue": "user rule (2026-10-28) puts utility fund sales/charges in Utility Charges; 99.7% of this line is Electric/Water/Sewer/Sanitation. The same applies to the per-fund detail lines detail[52], detail[65], detail[75] and detail[84] (category charges for services/fees with detail_category electric/water/sewer/refuse charges) and the Ambulance line detail[92] (Ambulance Fees). user_rules.py may re-map these."},
+    {"severity": "warning", "path": "detail[37].category", "page": 6, "extracted": "property tax", "on_page": "Debt Service Fund 'Property' 1,835; Statement of Activities (p4) prints it as 'Property tax, special assessments'; the Debt Service fund balance sheet shows unavailable revenue - special assessments", "issue": "printed fund-statement label is Property, but the government-wide statement describes this 1,835 as special assessments"},
+    {"severity": "warning", "path": "detail[20].category", "page": 6, "extracted": "intergovernmental/state aid (detail_category federal grants)", "on_page": "Federal Grants Fund, Intergovernmental 42,741", "issue": "category and detail_category disagree (state aid vs federal grants); the fund name says federal grants"},
+    {"severity": "warning", "path": "detail[24].original_label", "page": 6, "extracted": "Capital Outlay: General Government", "on_page": "ARPA Fund, Capital outlay 671,014", "issue": "function is not printed for the ARPA Fund (computed says 'function not shown'); 'General Government' in the label is an assumption"},
+    {"severity": "warning", "path": "detail[60].detail_category", "page": 11, "extracted": "tax refunds/treasurer fees", "on_page": "Franchise fees 948,380 (Electric Fund expense; cash flow p12 calls them 'Payments to franchise taxes to city')", "issue": "franchise fees paid to the city are not tax refunds/treasurer fees; same for the Water and Sewer franchise fee lines (detail[72], detail[81])"}
+  ]
+}
