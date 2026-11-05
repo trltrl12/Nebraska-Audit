@@ -17,7 +17,8 @@ For each stem you are given:
    statement refers to (a note, a schedule) if it is in the trimmed PDF. Read the page visually: the row, its fund column
    header, the section heading it sits under, the rows around it, and any note reference.
 3. Decide each line:
-   - **The suggested category is a hint, not an answer.** Use it only if the page supports it.
+   - **The PDF comes first, always.** The suggested category and the lists are only hints; when the page shows something
+     else, the page wins.
    - If the page shows the line is something else, use the right category. For example, "Insurance" under a health-insurance
      note becomes Employee Benefits and Payroll Taxes; "Transportation" in a school district's pupil-transportation section becomes
      student transportation; "Deposits" that are refundable customer deposits stays Deposits; "County Treasurer Receipts" that the
@@ -25,7 +26,9 @@ For each stem you are given:
      Prefer a category name already in use: the receipt and disbursement categories in `.claude/agents/extractor.md`, or
      the `category` values in `config/category_decisions.csv`. **That list is not complete.** If none of those fits what
      the page shows, create a new category name that best describes this report's transaction, for example "Airport" or
-     "Opioid Settlement". Keep it short, in Title Case, and use the same name every time. A new name is better than forcing
+     "Opioid Settlement". **Keep new names consistent:** first check the names already in use (the `category` values in
+     `config/category_decisions.csv` and in `output/json/_meta/context_decisions/*.csv`) and reuse one that means the
+     same thing. Otherwise use short Title Case, "and" not "&", and one name per concept. A new name is better than forcing
      the line into a category that doesn't fit, or into `other`.
    - If the page gives nothing beyond the label itself, the category is `unclear`.
      **Never decide from the wording of the label alone.** Never use another report, or what similar labels usually mean.

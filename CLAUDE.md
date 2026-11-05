@@ -70,7 +70,8 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
   Local Receipts, Insurance, Deposits, Transportation, County Treasurer Receipts). Context labels are NEVER categorized from
   the label: user_rules.py queues each line in `output/json/_meta/context_check.csv`; the `context_checker` agent reads the
   page and writes `_meta/context_decisions/<stem>.csv` (category + evidence, or `unclear`), applied per line only. The category
-  list is not definitive (user 2026-11-05): a new category name may be created when nothing in use fits the report. Never
+  list is not definitive (user 2026-11-05): the PDF always comes first over any list or decision file; a new category
+  name may be created when nothing in use fits the report, reusing an existing name for the same concept (consistent names). Never
   extend a context decision to another line, report or similar label. Unchecked/unclear lines go to review; a context
   category without evidence is flagged. 316 labels decided 2026-11-05 (183 label, 133 context; config/category_cleanup.xlsx).
 - **User category decisions (2026-10-23):** 9,490 lines that were in other/miscellaneous now carry the

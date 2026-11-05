@@ -274,7 +274,16 @@ independent verifier, so unmarked computed values show up as errors. If a value 
   sheriff contract → `law enforcement contract`; payments to library/fire boards → `grants/payments
   to other entities`.
 
-### Receipt categories (use exactly these strings)
+### Categories: the PDF first, new names allowed (user 2026-11-05)
+Decide every category from what the PDF shows: the row, its fund column, the section heading, notes and schedules. The
+lists below and `config/category_decisions.csv` are starting points, not a definitive list, and never outrank the page.
+Use a listed name when it fits what the page shows. If nothing fits, create a new category name that best describes the
+transaction rather than forcing it into a near miss or `other`. Keep new names consistent: before creating one, check the
+names already in use (`category` values in `config/category_decisions.csv` and
+`output/json/_meta/context_decisions/*.csv`) and reuse an existing one that means the same thing. Use short Title Case,
+with "and" rather than "&", and one name per concept (e.g. always "Airport", never also "Airport Operations").
+
+### Receipt categories
 `property tax` (not its penalties and interest), `Penalties and Interest on Taxes` (penalties and/or interest on taxes, e.g. school code 1140, "Interest on property taxes", "Penalties and interest on delinquent taxes"; a line that combines the tax itself with its penalties stays property tax), `sales tax`,
 `motor vehicle tax` (motor vehicle tax, wheel tax, motor vehicle fees, "State Motor Vehicle Tax
 Allocation"/"State Motor Vehicle Taxes" on budget forms; but *pro-rate* motor vehicle is `Motor Vehicle Pro-Rate`), `occupation/franchise tax`, `lodging tax`, `inheritance tax`, `special assessments`,
@@ -394,7 +403,7 @@ pieces; the original line's fund_type / schedule / fund /
 department, `split_from: "Taxes 120,655,538 (p7)"`, `computed` where derived. The split items replace the original
 line at its position; nothing else in the JSON changes; `extraction_attempt` is unchanged.
 
-### Disbursement categories (use exactly these strings)
+### Disbursement categories
 `general government` (administration, clerk, legal, insurance, elections), `public safety`
 (police, fire, rescue, sheriff, corrections, emergency management, jail), `streets/highways`
 (roads, bridges, street lighting), `culture/recreation` (parks, pool, library, community
