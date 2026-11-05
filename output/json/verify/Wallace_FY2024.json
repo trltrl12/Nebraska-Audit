@@ -1,0 +1,31 @@
+{
+ "stem": "Wallace_FY2024",
+ "values_checked": 92,
+ "issues": [
+  {
+   "severity": "warning",
+   "path": "report_discrepancies",
+   "page": 5,
+   "extracted": "no balance-sheet entry; balance_sheet assets add to 110,327 and equity lines add to 110,327 vs total_assets / total_equity 110,326",
+   "on_page": "p5 proprietary: Cash 993,565 + Restricted cash 7,232 = 1,000,797 vs printed Total assets 1,000,796; Restricted 7,232 + Unrestricted 993,565 = 1,000,797 vs printed 1,000,796 (same 1 rounding carried to p1 Total 110,326)",
+   "issue": "printed rounding gap in the balance sheet is not recorded in report_discrepancies (check 'balance', difference -1); only the proprietary roll-forward gap is listed",
+   "resolution": "balance rounding gap added to report_discrepancies"
+  },
+  {
+   "severity": "warning",
+   "path": "receipts[5].category",
+   "page": 4,
+   "extracted": "donations/contributions",
+   "on_page": "Grants - Legion 66,600",
+   "issue": "pass-through grant for the Legion, grantor not stated; donations/contributions vs intergovernmental/state aid is a judgment call"
+  },
+  {
+   "severity": "warning",
+   "path": "disbursements[1].category",
+   "page": 4,
+   "extracted": "general government",
+   "on_page": "Personnel services 117,728 (General 61,787; Street 55,942)",
+   "issue": "statement line listed by object across two funds; nearly half is Street Fund (streets/highways)"
+  }
+ ]
+}

@@ -1,0 +1,19 @@
+{
+  "stem": "Washington_County_FY2024",
+  "values_checked": 330,
+  "issues": [
+    {"severity": "warning", "path": "disbursements[4].original_label", "page": 4,
+     "extracted": "Capital Outlay: General Government", "on_page": "Capital Outlay 2,451,506 (Road Fund 2,056,614 + nonmajor 394,892, mostly E911 System 359,510)",
+     "issue": "statement capital outlay is mostly Road Fund (streets/highways) and E911 (public safety); the General Government function in the label is an assumption"},
+    {"severity": "warning", "path": "detail[100].category", "page": 16,
+     "extracted": "public safety (911 Enhanced Wireless detail[100], Highway Safety Grant detail[103], E911 System detail[110]-[112]); economic development (County Visitors' Program detail[83]); health/welfare (Veterans' Aid detail[90])",
+     "on_page": "nonmajor combining statement (pp10-11) prints all of these funds' spending under General Government (E911 275,109 + Capital Outlay 359,510; 911 Enhanced 86,192; Highway Safety 21,567; Visitors 19,442; Veterans 2,500)",
+     "issue": "detail functions follow the fund's nature rather than the statement's printed function; defensible, but the detail function split will not tie to the fund statement's General Government / Public Safety lines"},
+    {"severity": "warning", "path": "report_discrepancies", "page": 2,
+     "extracted": "not recorded", "on_page": "Statement of Activities: Grants and Contributions not Restricted 2,974,280, total receipts 28,073,452, change in net assets 2,847,116 vs fund statement (p4) Intergovernmental 2,977,322, Total Receipts 28,076,494, net change 2,847,114",
+     "issue": "the two statements print receipts 3,042 apart (intergovernmental); only the 2-dollar beginning-balance difference is recorded. JSON uses the fund statement, so no value is wrong"},
+    {"severity": "warning", "path": "detail[50].category", "page": 6,
+     "extracted": "Homestead Exemption (also detail[61], detail[69], detail[107])", "on_page": "County Treasurer - Homestead Commission (5), (68), (272), (93)",
+     "issue": "negative treasurer commission withheld from homestead receipts; Homestead Exemption vs tax refunds/treasurer fees is a judgment call (amounts tiny)"}
+  ]
+}
