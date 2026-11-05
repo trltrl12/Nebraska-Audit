@@ -183,11 +183,57 @@ norm = lambda s: re.sub(r"\s+", " ", re.sub(r"[^a-z ]", " ", s.lower())).strip()
 
 
 def load_decisions():
+    """(section, normalized label) -> (detail_category, category, apply). apply 'label' = the label alone is enough;
+    'context' = never applied by label: each line is checked on its page first (CONTEXT_DECISIONS)."""
     if not DECISIONS_CSV.exists():
         return {}
     with DECISIONS_CSV.open(newline="") as fh:
-        return {(r["section"], r["label_normalized"]): (r["detail_category"], r["category (revenue)"])
+        return {(r["section"], r["label_normalized"]): (r.get("detail_category") or "",
+                                                        r.get("category") or r.get("category (revenue)") or "",
+                                                        (r.get("apply") or "label").strip().lower(),
+                                                        r.get("decided") or "")
                 for r in csv.DictReader(fh)}
+
+
+# per-line decisions for 'context' labels, made by reading the report page (context_checker agent)
+CONTEXT_DECISIONS_DIR = JSON_DIR / "_meta" / "context_decisions"  # one <stem>.csv per report (written by context_checker)
+CONTEXT_DECISION_FIELDS = ["stem", "where", "section", "label", "amount", "source_page", "suggested_category",
+                           "category", "evidence"]
+CONTEXT_CHECK_CSV = JSON_DIR / "_meta" / "context_check.csv"
+CONTEXT_FIELDS = ["stem", "where", "section", "label", "amount", "fund", "fund_type", "source_page",
+                  "current_category", "suggested_category"]
+LOOSE_CATS = OTHER_CATS | {"taxes (unlabeled)", "miscellaneous"}
+NEW_DECISIONS_FROM = "2026-11-05"
+
+
+def amt_key(x):
+    a = x.get("amount")
+    a = a.get("amount") if isinstance(a, dict) else a
+    try:
+        return f"{float(a):.2f}"
+    except (TypeError, ValueError):
+        return ""
+
+
+def line_key(stem, where, sec, label, amount):
+    return (stem, where, sec, norm(label), amount)
+
+
+def load_context_decisions():
+    out = {}
+    for f in sorted(CONTEXT_DECISIONS_DIR.glob("*.csv")):
+        with f.open(newline="") as fh:
+            for r in csv.DictReader(fh):
+                try:
+                    a = f"{float(r['amount']):.2f}"
+                except (TypeError, ValueError, KeyError):
+                    continue
+                out[line_key(r["stem"], r["where"], r["section"], r["label"], a)] = r
+    return out
+
+
+CONTEXT_DECISIONS = load_context_decisions()
+CONTEXT_QUEUE = []  # lines with a 'context' decision and no page check yet
 
 
 DECISIONS = load_decisions()
@@ -211,18 +257,46 @@ def setcat(x, key, new, why, log):
         log[why] += 1
 
 
-def decision_rule(x, sec, log):
-    """Lines still in other/miscellaneous get the user's decision for the same (normalized) label."""
-    if x.get("category_decision") or not (x.get("category") in OTHER_CATS or x.get("detail_category") in OTHER_DCATS):
-        return
-    hit = DECISIONS.get((sec, norm(label_of(x))))
+def decision_rule(x, sec, log, stem="", where=""):
+    """Lines still in other/miscellaneous get the user's decision for the same (normalized) label.
+    Decisions marked 'context' are never applied from the label: the line must have a page-checked
+    decision in _meta/context_decisions/<stem>.csv (with evidence); otherwise it is queued in context_check.csv."""
+    lab = label_of(x)
+    hit = DECISIONS.get((sec, norm(lab)))
     if not hit:
         return
-    dcat, cat = hit
-    setcat(x, "detail_category", dcat, "decision: detail_category", log)
-    if sec == "revenue" and cat:
+    dcat, cat, how, decided = hit
+    new = decided >= NEW_DECISIONS_FROM  # 2026-11-05 decisions also cover taxes (unlabeled) / miscellaneous lines
+    loose = x.get("category") in (LOOSE_CATS if new else OTHER_CATS)
+    if not (loose or x.get("detail_category") in OTHER_DCATS):
+        return
+    if x.get("category_decision") and not new:
+        return  # older decisions never re-decide a line (unchanged behaviour)
+    if how == "context":
+        cd = CONTEXT_DECISIONS.get(line_key(stem, where, sec, lab, amt_key(x)))
+        if not cd:
+            CONTEXT_QUEUE.append(dict(stem=stem, where=where, section=sec, label=lab, amount=amt_key(x),
+                                      fund=x.get("fund") or "", fund_type=x.get("fund_type") or "",
+                                      source_page=x.get("source_page") or "", current_category=x.get("category") or "",
+                                      suggested_category=cat))
+            return
+        if (cd.get("category") or "").strip().lower() in ("", "unclear"):
+            return  # page doesn't say: stays where it is, goes to review (validate.py)
+        if loose:
+            setcat(x, "category", cd["category"].strip(), "context decision: category", log)
+        if x.get("category_evidence") != cd.get("evidence"):
+            x["category_evidence"] = cd.get("evidence")
+            log["context decision: evidence"] += 1
+        x["category_decision"] = "context check (_meta/context_decisions)"
+        return
+    if x.get("category_decision") and not loose:
+        return
+    if dcat:
+        setcat(x, "detail_category", dcat, "decision: detail_category", log)
+    if cat and (sec == "revenue" or loose):
         setcat(x, "category", cat, "decision: category", log)
-    x["category_decision"] = "user (category_decisions.csv)"
+    x["category_decision"] = f"user {decided} (category_decisions.csv)" if new else \
+        (x.get("category_decision") or "user (category_decisions.csv)")
 
 
 def revenue_rules(x, log):
@@ -518,14 +592,14 @@ def apply(d, stem=""):
     school = d.get("entity_type") == "school district" or "Educational_Service_Unit" in stem
     lps = entity_of(stem) == "Lincoln_Public_Schools"
     for x in d.get("receipts") or []:
-        decision_rule(x, "revenue", log)
+        decision_rule(x, "revenue", log, stem, "receipts")
         revenue_rules(x, log)
         if school:
             extracurricular_rule(x, log)
         charges_rule(x, school, log)
         school_rule(x, school, True, log, d.get("entity_type"))
     for x in d.get("disbursements") or []:
-        decision_rule(x, "expenditure", log)
+        decision_rule(x, "expenditure", log, stem, "disbursements")
         spending_rules(x, log)
         drivers_ed_spending_rule(x, log)
         community_betterment_rule(x, log)
@@ -537,14 +611,14 @@ def apply(d, stem=""):
     for x in d.get("detail") or []:
         sec = x.get("section")
         if sec == "revenue":
-            decision_rule(x, "revenue", log)
+            decision_rule(x, "revenue", log, stem, "detail")
             revenue_rules(x, log)
             if school:
                 extracurricular_rule(x, log)
             charges_rule(x, school, log)
             school_rule(x, school, True, log, d.get("entity_type"))
         elif sec == "expenditure":
-            decision_rule(x, "expenditure", log)
+            decision_rule(x, "expenditure", log, stem, "detail")
             spending_rules(x, log)
             drivers_ed_spending_rule(x, log)
             community_betterment_rule(x, log)
@@ -565,6 +639,21 @@ def apply(d, stem=""):
     utility_object_rule(d, log)
     entity_rules(d, entity_of(stem), log)
     return log
+
+
+def write_context_queue(stems):
+    """Keep queued lines for reports not processed this run; replace those that were."""
+    rows = []
+    if CONTEXT_CHECK_CSV.exists():
+        with CONTEXT_CHECK_CSV.open(newline="") as fh:
+            rows = [r for r in csv.DictReader(fh) if r["stem"] not in stems]
+    rows += CONTEXT_QUEUE
+    rows.sort(key=lambda r: (r["stem"], r["where"], r["label"]))
+    CONTEXT_CHECK_CSV.parent.mkdir(parents=True, exist_ok=True)
+    with CONTEXT_CHECK_CSV.open("w", newline="") as fh:
+        w = csv.DictWriter(fh, fieldnames=CONTEXT_FIELDS)
+        w.writeheader()
+        w.writerows(rows)
 
 
 def main():
@@ -590,8 +679,10 @@ def main():
                 print(f"{f.stem}: {dict(log)}")
             else:
                 f.write_text(json.dumps(d, indent=2, ensure_ascii=False) + "\n")
+    write_context_queue({f.stem for f in files})
     for k, v in total.most_common():
         print(f"{v:6} {k}")
+    print(f"{len(CONTEXT_QUEUE)} lines need a page check before their category is set ({CONTEXT_CHECK_CSV.name})")
     print(f"{'would change' if a.check else 'changed'} {changed} of {len(files)} reports")
 
 

@@ -104,6 +104,23 @@ DISBURSEMENT_CATEGORIES = [
     "Operating",  # user decision 2026-10-29: "Operating" lines that were in other
     "Community Betterment",  # user decision 2026-10-29: not keno, not economic development
 ]
+def _decision_categories():
+    """Category names the user decided in config/category_decisions.csv count as known categories."""
+    f = ROOT / "config" / "category_decisions.csv"
+    out = {"revenue": [], "expenditure": []}
+    if f.exists():
+        with f.open(newline="") as fh:
+            for r in csv.DictReader(fh):
+                c = (r.get("category") or r.get("category (revenue)") or "").strip()
+                if c and r.get("section") in out and c not in out[r["section"]]:
+                    out[r["section"]].append(c)
+    return out
+
+
+_DECIDED = _decision_categories()
+RECEIPT_CATEGORIES += [c for c in _DECIDED["revenue"] if c not in RECEIPT_CATEGORIES]
+DISBURSEMENT_CATEGORIES += [c for c in _DECIDED["expenditure"] if c not in DISBURSEMENT_CATEGORIES]
+
 PROPRIETARY_FIELDS = ["operating", "noncapital_financing", "capital_and_related_financing", "investing"]
 
 ASSET_CATEGORIES = [

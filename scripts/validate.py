@@ -21,6 +21,7 @@ tax lines, computed values, amounts not found on their page, verifier notes). A 
 "checked" (confirmed against the page image), a report_discrepancies entry marked "checked" (listed
 on the workbook's Mistakes tab instead) and a verifier issue marked "resolved" stay off the list.
 """
+import csv
 import json
 import re
 import sys
@@ -294,7 +295,7 @@ def check(stem, d):
         cmp("detail", f"detail lines vs printed total for {key[2]} / {key[0] or 'all funds'} / {key[1]}",
             float(stated), sums[key], pages=str(tot.get("source_page", "")))
 
-    category_checks(d, f, rv)
+    category_checks(d, f, rv, stem)
 
     # The extractor must have read every page of the trimmed PDF ("Read pages 1-N of N" in notes)
     tp = TRIMMED / f"{stem}.pdf"
@@ -379,13 +380,54 @@ def _norm(label):
     return re.sub(r"^\d+\s+|[^a-z0-9]+", " ", str(label or "").lower()).strip()
 
 
-def category_checks(d, f, rv):
+# Labels whose category needs the report page, not just the label (config/category_decisions.csv apply=context):
+# lines still waiting for that page check, and lines the check found unclear, go to the review list.
+_META = Path(__file__).resolve().parents[1] / "output" / "json" / "_meta"
+
+
+def _ctx_key(stem, where, label, amount):
+    try:
+        a = f"{float(amount):.2f}"
+    except (TypeError, ValueError):
+        a = ""
+    return (stem, where, re.sub(r"\s+", " ", re.sub(r"[^a-z ]", " ", str(label or "").lower())).strip(), a)
+
+
+def _load_ctx():
+    pending, unclear = set(), {}
+    f = _META / "context_check.csv"
+    if f.exists():
+        with f.open(newline="") as fh:
+            pending = {_ctx_key(r["stem"], r["where"], r["label"], r["amount"]) for r in csv.DictReader(fh)}
+    for f in sorted((_META / "context_decisions").glob("*.csv")):
+        with f.open(newline="") as fh:
+            for r in csv.DictReader(fh):
+                if (r.get("category") or "").strip().lower() in ("", "unclear"):
+                    unclear[_ctx_key(r["stem"], r["where"], r["label"], r["amount"])] = r.get("evidence") or ""
+    return pending, unclear
+
+
+CTX_PENDING, CTX_UNCLEAR = _load_ctx()
+
+
+def category_checks(d, f, rv, stem=""):
     """Catch lines that are probably in the wrong category, and too much in 'other'."""
     lines = [(k, i, it) for k in ("receipts", "disbursements", "detail")
              for i, it in enumerate(d.get(k) or []) if isinstance(it, dict)]
     for k, i, it in lines:
         lab, sec = str(it.get("original_label") or ""), it.get("section")
         where = f"{k}[{i}]"
+        if str(it.get("category_decision") or "").startswith("context") and not it.get("category_evidence"):
+            f("category", f"{where} {lab!r}: category set from a context decision with no page evidence; "
+              f"context labels need a page check (context_checker)", pages=str(it.get("source_page", "")))
+        a = it.get("amount")
+        ck = _ctx_key(stem, k, it.get("printed_label") or lab, a.get("amount") if isinstance(a, dict) else a)
+        if ck in CTX_PENDING:
+            rv("context", "label alone is not enough for a category; waiting for a page check",
+               lab, amt(it), it.get("source_page", ""), it.get("fund_type", ""))
+        elif ck in CTX_UNCLEAR:
+            rv("context", f"page check could not tell what this is: {CTX_UNCLEAR[ck]}",
+               lab, amt(it), it.get("source_page", ""), it.get("fund_type", ""))
         if it.get("checked"):  # category confirmed against the report
             continue
         # Transfers are financing, never revenue or spending

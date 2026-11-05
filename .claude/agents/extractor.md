@@ -487,6 +487,10 @@ When a function line mixes categories, pick the dominant one and mention it in `
 ## User naming and category rules (all reports, any year)
 These are the user's decisions; apply them while extracting. After extraction the main session also runs
 `python3 scripts/user_rules.py <stem>`, which re-applies the label/category ones mechanically.
+- **Labels that need context (user 2026-11-05):** where `config/category_decisions.csv` marks a label `apply=context`
+  (e.g. Local Receipts, Insurance, Deposits, Transportation, County Treasurer Receipts, Interfund loan), never pick the
+  category from the label's wording. Decide from the page (fund column, section heading, note); if the page doesn't say,
+  leave the line in other / taxes (unlabeled). The main session's context check settles these per line.
 - **Revenue labels** (receipts and detail revenue; printed text in `printed_label`): Sales and Use / Sales and use tax
   -> "Sales and Use Tax"; Property / Property Tax / Taxes: Property / Taxes - property / Real Property and Personal
   Property Tax / Personal and Real Property Taxes / Property and real estate (taxes) -> "Property Tax"; Occupation (tax) -> "Occupation Tax"; Investment income /
