@@ -1,19 +1,12 @@
 {
   "stem": "Beaver_Crossing_FY2024",
-  "values_checked": 146,
+  "values_checked": 164,
   "issues": [
-    {"severity": "warning", "path": "detail", "page": 15,
-     "extracted": "detail has General, Street, Donation (pp13-14) and Pool and Park, Water (p15) only",
-     "on_page": "Combining schedules continue on report pp27, 29, 31 (trimmed pages jump report p26 -> 28 -> 30 -> 32): Fire Fund (receipts 8,378.75 / disbursements 28,591.36), Grant Fund (850.00 / 850.00, transfer in 500.00) and Sewer Fund (40,187.28 / 6,419.76) columns plus the governmental Total/Budget columns are not in the trim",
-     "issue": "Trim gap, not an extraction error: the detail schedules for Fire, Grant and Sewer funds are missing from the trimmed PDF. Statement totals are complete and tie. Add report pp27, 29, 31 to config/extra_pages.csv and re-extract the detail if per-fund detail is wanted."},
     {"severity": "warning", "path": "disbursements[20].category", "page": 12,
-     "extracted": "culture/recreation", "on_page": "Personal Services 30,279.37 (Pool and Park Fund only, p12)",
-     "issue": "Business-type spending is printed by cost type; under the utility cost-type rule this would be Salaries and Wages (function culture/recreation or utilities). Inconsistent with disbursements[22] Supplies, which also includes Pool 6,420.99 but is categorised Supplies and Materials. Same question for disbursements[21] Operating Disbursements 8,159.80 (could be Operating)."},
-    {"severity": "warning", "path": "disbursements[25].function", "page": 12,
-     "extracted": "category utilities, no function field", "on_page": "Utilities 14,036.79 (Pool 7,495.79, Water 4,664.00, Sewer 1,877.00)",
-     "issue": "Cost-type line (utilities expense) lacks function 'utilities' unlike the other cost-type business lines; ambiguous between the utilities function and the utilities (power, gas, phone) cost type."},
-    {"severity": "warning", "path": "receipts[18].category", "page": 7,
-     "extracted": "federal grants", "on_page": "Grants and Loans 850.00 (Grant Fund; 'Grants' under general receipts p9)",
-     "issue": "Grantor not printed; could be state or private."}
+     "extracted": "culture/recreation", "on_page": "Personal Services 30,279.37 (Pool and Park Fund column only)",
+     "issue": "Business-type spending is printed by cost type; under the utility cost-type rule (user 2026-10-28) this line would be Salaries and Wages, while Supplies/Repairs/Professional lines of the same statement were given cost-type categories. Same question for disbursements[21] 'Operating Disbursements' 8,159.80 (Operating/utilities vs culture/recreation) and detail[58..63] Pool and Park lines. Pool and Park is not a utility, so culture/recreation is defensible; inconsistent within the report."},
+    {"severity": "warning", "path": "detail[13].detail_category", "page": 13,
+     "extracted": "investment income", "on_page": "Interest 378.21",
+     "issue": "Interest lines carry category Interest Income but detail_category 'investment income' (also detail[19], detail[21]); other reports use detail_category Interest Income for interest lines. Likewise detail[3] Property Tax Credit and detail[6] Homestead Exemption use detail_category 'homestead/tax credits' although the user rule gives these own detail_category values."}
   ]
 }

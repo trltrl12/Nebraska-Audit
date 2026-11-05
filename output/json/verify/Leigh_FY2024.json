@@ -1,16 +1,12 @@
 {
   "stem": "Leigh_FY2024",
-  "values_checked": 150,
+  "values_checked": 161,
   "issues": [
-    {"severity": "error", "path": "missing", "page": 12,
-     "extracted": "General Fund detail: 'General government' 61,003, 'Street' 191,677 and 'Police protection' 53,916 recorded as function totals from the p9 budget schedule (not itemized / law enforcement contract)",
-     "on_page": "Combining Statement of Revenues and Expenditures - General Fund Departments: object lines for the General (Salaries, taxes, and benefits 24,665; Insurance 178; Contracted services 1,263; Professional fees 3,880; Dues and fees 4,866; Fuel and travel 2,085; Repairs and maintenance 3,440; Utilities and telephone 5,348; Supplies 8,323; Capital outlay 6,955 = 61,003), Street (Salaries, taxes, and benefits 26,019; Insurance 68; Professional fees 3,900; Fuel and travel 2,207; Repairs and maintenance 139,853; Utilities and telephone 19,547; Supplies 83 = 191,677) and Police (Contracted services 53,916) columns",
-     "issue": "None of the p12 schedule lines are in the JSON. For these three departments, p12 is the more detailed schedule and its column totals tie exactly to the p9 budget lines. Under the no-double-counting rule, use the p12 object lines for General, Street and Police and keep the p9 lines only for Housing project, Park, Pool and Library (their p12 columns are not in the trim). The p12 revenue columns are incomplete, so the p9 revenue lines can stay."},
-    {"severity": "warning", "path": "missing", "page": 12,
-     "extracted": null, "on_page": "General Fund Departments statement shows only the General, Street and Police columns",
-     "issue": "The trim appears to be missing the rest of this statement (the Park, Pool, Library, Housing and Total columns, probably the facing half of source p39). A re-trim may be needed to get object detail for those departments."},
+    {"severity": "warning", "path": "detail[7].detail_category", "page": 12,
+     "extracted": "investment income", "on_page": "Interest income 5,113",
+     "issue": "Interest lines carry category Interest Income but detail_category 'investment income' (also Housing Project, Special Library and Water interest detail lines); other reports use detail_category Interest Income."},
     {"severity": "warning", "path": "receipts[6].category", "page": 5,
-     "extracted": "charges for services/fees", "on_page": "Charges for services 25,570 (SoA p2: general government 2,390 + environment and leisure 23,180)",
-     "issue": "23,180 of this line is environment and leisure (park/pool/library) charges, which could be Recreation Fees under the user's rule. Defensible as one line."}
+     "extracted": "Recreation Fees", "on_page": "Charges for services 25,570",
+     "issue": "Mixed line: Park 10,050 + Pool 13,130 recreation fees and General department 2,390 (p12-13). Dominant-category choice is defensible (review note present)."}
   ]
 }
