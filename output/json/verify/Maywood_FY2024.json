@@ -1,0 +1,27 @@
+{
+  "stem": "Maywood_FY2024",
+  "values_checked": 121,
+  "issues": [
+    {"severity": "warning", "path": "transfers_in.amount", "page": 4,
+     "extracted": 70000, "on_page": "Transfers from (to) other funds: General 30,000, Street 40,000, Sales Tax (70,000), Total Governmental Funds -",
+     "issue": "the Total column prints '-'; the gross in/out amounts of 70,000 come from the fund columns and are marked computed (same for transfers_out). Net effect is zero and the roll-forward holds"},
+    {"severity": "warning", "path": "receipts[7].category", "page": 4,
+     "extracted": "donations/contributions", "on_page": "Contributions and grants 4,830",
+     "issue": "the Statement of Activities (p2) shows it as Operating Grants and Contributions for environment and leisure, and the p11 schedule shows it under Community Hall 'Grants and contributions'. Whether it is a private gift or a government grant is not stated"},
+    {"severity": "warning", "path": "receipts[5].category", "page": 4,
+     "extracted": "Recreation Fees", "on_page": "Charges for services 110",
+     "issue": "the printed label is generic; it is Recreation Fees only because p11 puts it all in the Park department. Defensible"},
+    {"severity": "warning", "path": "detail[9].detail_category", "page": 11,
+     "extracted": "salaries and wages", "on_page": "Salaries, taxes, and benefits 14,215",
+     "issue": "the line mixes wages with payroll taxes and benefits; salaries and wages as the dominant part is defensible (same for detail[21], Park 922)"},
+    {"severity": "warning", "path": "detail[11].budget_final", "page": 11,
+     "extracted": 28000, "on_page": "p11 prints no budget; 28,000 is the Law enforcement final budget on the p8 General Fund budget schedule",
+     "issue": "budget taken from a different schedule (p8) than the line's source_page (p11); the 28,000 itself is correct"},
+    {"severity": "warning", "path": "missing", "page": 9,
+     "extracted": null, "on_page": "Street Fund: Capital outlay, budget 17,000, actual -",
+     "issue": "a printed expenditure line with zero actual was left out (the notes say so). It has no effect on the totals"},
+    {"severity": "warning", "path": "ending_investments", "page": 3,
+     "extracted": null, "on_page": "Certificates of deposit 13,869 (Total Governmental Funds)",
+     "issue": "CDs are printed separately on the governmental funds balance sheet, so ending_investments could be 13,869 (informational only). ending_cash 354,310 includes them"}
+  ]
+}
