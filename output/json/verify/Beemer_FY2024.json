@@ -2,16 +2,8 @@
   "stem": "Beemer_FY2024",
   "values_checked": 152,
   "issues": [
-    {"severity": "warning", "path": "missing", "page": 10,
-     "extracted": "General Fund detail: Administration, Police, Fire, Park, School Building only",
-     "on_page": "Combining Statement - General Fund Departments (report p40) continues on a page not in the trim; General Fund totals on p5 are revenues 604,346 / expenditures 587,814, the five trimmed departments sum to 486,042 / 375,769, so 118,304 of revenue and 212,045 of expenditures (other departments, e.g. Compactor, Library, Senior services) have no detail lines",
-     "issue": "the trim misses the continuation page of the General Fund departments schedule, so the General Fund detail is incomplete. The extraction notes say so. Re-trimming to add the next source page (report p41) would fix it"},
-    {"severity": "warning", "path": "detail_totals", "page": 10,
-     "extracted": "no General Fund Departments totals",
-     "on_page": "Total revenues 453,191 / 2,320 / 437 / 880 / 29,214; Total expenditures 113,551 / 135,371 / 69,893 / 43,159 / 13,795",
-     "issue": "the department totals printed on p10 are not in detail_totals, so the validator can't tie the department lines (I checked them and every department ties exactly)"},
-    {"severity": "warning", "path": "detail[51].detail_category", "page": 5,
-     "extracted": "highway allocation", "on_page": "Intergovernmental 112,557 (Street Fund)",
-     "issue": "the statement doesn't name the source. Highway allocation is a likely guess for Street Fund intergovernmental receipts, but it is an assumption"}
+    {"severity": "warning", "path": "ending_cash.amount", "page": 4, "extracted": 501790, "on_page": "Cash 261,871 + Certificates of deposit 193,614 + County treasurer cash 17,084 + Restricted cash 29,221 = 501,790", "issue": "ending_cash is total fund balance and includes CDs 193,614 that balance_sheet categorizes as Investments; ending_investments is null (beginning_cash 417,661 likewise not split). Consistent cash+investments measure, but the CDs are not separated."},
+    {"severity": "warning", "path": "detail[13].category", "page": 10, "extracted": "charges for services/fees", "on_page": "School Building - Charges for services 29,214", "issue": "Village department named School Building: the 2026-10-29 rule (city/village lines naming a school -> School-Related Receipts / School-Related Spending) may apply to this receipt and to the four School Building expenditure lines (detail[59]-[62], tagged streets/highways)."},
+    {"severity": "warning", "path": "disbursements[2].category", "page": 5, "extracted": "streets/highways", "on_page": "Public works 168,446", "issue": "Public works includes Street Fund 122,169 plus General Fund School Building 13,795 and Cemetery 32,262 departments (pp10-11, which tie to GF public works 46,057); streets/highways is defensible for the printed function but cemetery/school building are not streets."}
   ]
 }
