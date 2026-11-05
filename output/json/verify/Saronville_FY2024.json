@@ -1,0 +1,18 @@
+{
+  "stem": "Saronville_FY2024",
+  "values_checked": 22,
+  "issues": [
+    {"severity": "warning", "path": "report_discrepancies", "page": 1,
+     "extracted": "totals -50 / reconcile +50", "on_page": "p1 line 23 Total Disbursements & Transfers 43,585.03; p3 line 52 43,635.03 (its lines add to 43,635.03); p1 line 24 Ending Balance 67,980.95",
+     "issue": "confirmed: the 50 gap is in the printed report itself (p1 carries 43,585.03 forward instead of the itemized 43,635.03), and it is recorded in report_discrepancies; figures kept as printed"},
+    {"severity": "warning", "path": "disbursements[5].category", "page": 3,
+     "extracted": "utilities (governmental)", "on_page": "Electric Utility 2,508.18 (Business-Type line 44, General Fund column)",
+     "issue": "the village has no utility fund; likely the General Fund's electricity bills / street lighting; category and fund_type are a judgment call"},
+    {"severity": "warning", "path": "disbursements[3].category", "page": 3,
+     "extracted": "streets/highways", "on_page": "Public Works - Other 3,000.00",
+     "issue": "function not stated; streets/highways is an assumption"},
+    {"severity": "warning", "path": "balance_sheet.assets[0]", "page": 1,
+     "extracted": "Ending Balance (Line 22 MINUS Line 23) 67,980.95 as Cash and Cash Equivalents", "on_page": "lines 26-28 Net Cash Balance / Investments left blank",
+     "issue": "asset taken from the ending balance line, not from a printed asset line; the printed ending balance itself is 50 off the itemized disbursements"}
+  ]
+}

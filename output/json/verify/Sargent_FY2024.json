@@ -1,0 +1,23 @@
+{
+  "stem": "Sargent_FY2024",
+  "values_checked": 107,
+  "issues": [
+    {"severity": "warning", "path": "balance_sheet.scope", "page": 1,
+     "extracted": "governmental funds balance sheet (p5-6) + proprietary statement of net position (p11-12)",
+     "on_page": "Statement of Net Position (p1) governmental: Net Investment in Capital Assets 1,896,362; Restricted Community Development 535,608; Unrestricted 407,644; Total 2,839,614",
+     "issue": "the government-wide statement includes governmental capital assets, so the cash-basis rule says keep the Statement of Net Position; its asset/liability page is not in the trim (only the net position page p1 is), so the fund balance sheet was used instead and the p1 governmental net position lines are not recorded. Likely needs a re-trim (config/extra_pages.csv) for the Statement of Net Position assets page"},
+    {"severity": "warning", "path": "detail[8].category", "page": 19,
+     "extracted": "streets/highways", "on_page": "Capital Outlay 95,200 (Street Fund)",
+     "issue": "capital outlay rule (user 2026-10-26): category capital outlay, label 'Capital Outlay: Streets/Highways' (the statement's Capital Outlay line 101,100 = 95,200 + 5,900); scripts/user_rules.py should apply this mechanically"},
+    {"severity": "warning", "path": "detail[13].category", "page": 19,
+     "extracted": "culture/recreation", "on_page": "Capital Outlay 5,900 (Culture and Recreation Fund)",
+     "issue": "capital outlay rule (user 2026-10-26): category capital outlay, label 'Capital Outlay: Culture/Recreation'; scripts/user_rules.py should apply this mechanically"},
+    {"severity": "warning", "path": "receipts[12].category", "page": 8,
+     "extracted": "intergovernmental/state aid", "on_page": "Grants 120,654 (Community Development Fund; operating grants p2)",
+     "issue": "grantor not stated; could be federal grants (CDBG, the fund also has grant loan advances/repayments)"},
+    {"severity": "warning", "path": "detail", "page": 17,
+     "extracted": "only the four business-type disbursement lines of the Budgetary Comparison Schedule - Total Primary Government",
+     "on_page": "revenue lines (Property Taxes 87,729 ... Local Receipts Other 1,575,056, Transfers In 114,541; Total Revenues 2,118,453) and governmental disbursement lines (p18)",
+     "issue": "revenue lines skipped because they combine governmental and business-type funds, governmental disbursements skipped as duplicates of the p19-20 schedule; defensible, but the business lines have no detail_totals entry (only the combined Total Disbursements 2,020,812 is printed)"}
+  ]
+}
