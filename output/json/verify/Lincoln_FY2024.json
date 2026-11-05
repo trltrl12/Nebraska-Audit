@@ -1,0 +1,20 @@
+{
+  "stem": "Lincoln_FY2024",
+  "values_checked": 337,
+  "issues": [
+    {"severity": "warning", "path": "disbursements[28].category", "page": 11, "extracted": "Debt Service (debt_service_part interest)", "on_page": "Interest Expense and Fiscal Charges (22,754,012)",
+     "issue": "Lincoln ruling: Interest and Fiscal Charges are their own disbursement categories. This combined business-type line stays 'Debt Service', the same as the verified FY2025 extraction; confirm that's intended."},
+    {"severity": "warning", "path": "disbursements[21].category", "page": 11, "extracted": "Repairs and Maintenance", "on_page": "Operation and Maintenance 292,669,180 (Electric 233,393,000)",
+     "issue": "'Operation and Maintenance' is a broad operating-expense line (for the Electric System it includes power supply), not a repairs object. Under the utility cost-type rule it could be a function line ('utilities'). FY2025 uses the same category."},
+    {"severity": "warning", "path": "detail", "page": 11, "extracted": "no business-type detail lines", "on_page": "Proprietary statement columns Lincoln Wastewater, Lincoln Water, Lincoln Electric, Other Enterprise Funds (p11)",
+     "issue": "Inconsistent with Lincoln_FY2025, which records the proprietary fund columns as detail ('Proprietary Funds Statement ... (by fund)'). Governmental major funds here are taken from statement columns, but enterprise funds aren't."},
+    {"severity": "warning", "path": "detail", "page": 5, "extracted": "General, Street Construction and Federal Grants detail from p4 fund columns", "on_page": "Budget-basis schedules pp5-8: General Fund by department (Legislative, Executive, Police, Fire...), Street Construction and Federal Grants by object",
+     "issue": "The budget schedules are the more detailed schedules for these funds. The p4 columns were used so detail ties to GAAP (same approach as FY2025). Defensible, but the department/object detail isn't captured."},
+    {"severity": "warning", "path": "receipts[14].detail_category", "page": 4, "extracted": "category other, no category_decision", "on_page": "Miscellaneous 4,881,756; also business-type Other Operating Revenue 24,012,764 (receipts[19], p11) and the detail Miscellaneous lines",
+     "issue": "category_decisions.csv has rows for revenue 'miscellaneous' and 'other operating revenue' and expenditure 'miscellaneous' (Other / Miscellaneous Receipts / Expenses, applied in FY2025). These lines lack category_decision. Detail labels 'Investment Income' (pp19-20) also aren't renamed to 'Investment Earnings'. user_rules.py should apply both; confirm after running it."},
+    {"severity": "warning", "path": "other_financing", "page": 4, "extracted": "1,427,588 (leases 904,559 + sale of capital assets 523,029)", "on_page": "Leases 904,559",
+     "issue": "Lease financing is a debt-like source; it could be debt_proceeds rather than other_financing (the identity holds either way)"},
+    {"severity": "warning", "path": "receipts[23].category", "page": 11, "extracted": "intergovernmental/state aid", "on_page": "Grant Revenue 14,212,144 (Water System 13,856,544)",
+     "issue": "Grantor (federal or state) not stated (review note present)"}
+  ]
+}

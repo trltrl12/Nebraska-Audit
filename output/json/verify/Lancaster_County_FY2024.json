@@ -1,0 +1,24 @@
+{
+  "stem": "Lancaster_County_FY2024",
+  "values_checked": 363,
+  "issues": [
+    {"severity": "warning", "path": "receipts[3].category", "page": 5, "extracted": "taxes (unlabeled) 109,000,654", "on_page": "Taxes 114,989,219 (p5); SoA (p3) property 87,791,391, inheritance 7,281,615, motor vehicle 11,564,403, in-lieu 1,852,752, occupation 14,375, nameplate 3,558 = 108,508,094; governmental funds unavailable revenue - property taxes 2,346,845 (p4)",
+     "issue": "The residual is 492,560 more than the SoA tax lines (accrual vs modified accrual), so leaving it unlabeled is correct under the 11-04 standard on the trimmed pages. But Lancaster_County_FY2025 was split fully from a printed property-tax availability reconciliation in the full PDF. The FY2024 full PDF may print the same reconciliation (the 492,560 difference), which would allow a printed-breakdown split. Check the full PDF."},
+    {"severity": "warning", "path": "detail", "page": 13, "extracted": "17 nonmajor funds recorded fund by fund from their budget schedules (pp15-31)", "on_page": "Combining Schedule - Nonmajor Governmental Funds, 17 fund columns with Total Nonmajor column (pp13-14)",
+     "issue": "The >6-fund rule (use the Total column) governs the combining statement, which isn't recorded; each nonmajor fund instead has its own, more detailed budget schedule. Defensible (no double counting), but the budget basis doesn't tie to the GAAP combining figures (e.g. Visitors taxes 2,353,261 budget vs 2,316,121 GAAP; Building 'Other revenues' 394,182 is other financing under GAAP)."},
+    {"severity": "warning", "path": "detail[52].category", "page": 11, "extracted": "public safety", "on_page": "Federal Grants Fund budget schedule lists objects only; GAAP column (p5): public safety 12,864,872, public health and human services 257,387, capital outlay 17,122,646",
+     "issue": "Function for the Federal Grants Fund object lines (detail[52]-detail[66]) is a guess (marked review)"},
+    {"severity": "warning", "path": "receipts[7].category", "page": 5, "extracted": "licenses and permits", "on_page": "License, fees, and rental income 1,243,954",
+     "issue": "Mixed line (licenses, fees, rental income). The same category is used in detail[131], detail[138] and detail[220]; the Sinking Fund's 250,480 (detail[220]) is shown as Charges for services on the GAAP combining statement (p14)."},
+    {"severity": "warning", "path": "receipts[5].category", "page": 5, "extracted": "intergovernmental/state aid", "on_page": "Intergovernmental 63,578,715 incl. Federal Grants Fund 30,829,849",
+     "issue": "About half is federal money in a Total-column line that can't be split (review note present)"},
+    {"severity": "warning", "path": "other_financing", "page": 5, "extracted": "733,099 (sale of capital assets 395,053 + issuance of IT subscriptions 338,046)", "on_page": "Issuance of IT subscriptions 338,046",
+     "issue": "SBITA issuance is a debt-like financing source; it could be debt_proceeds rather than other_financing (the identity holds either way)"},
+    {"severity": "warning", "path": "detail[7].detail_category", "page": 9, "extracted": "miscellaneous revenue (no category_decision)", "on_page": "Other income 946,649",
+     "issue": "config/category_decisions.csv has rows for revenue 'other income', 'other receipts', 'other revenue', 'other revenues' (Other / Miscellaneous Receipts). These other/miscellaneous lines (also receipts[9] and the Federal Grants, Mental Health, Weed, Assemble Lincoln, Bridge and Highway 'Other ...' lines) carry neither the decision detail_category nor category_decision. user_rules.py should apply them; confirm after running it."},
+    {"severity": "warning", "path": "proprietary", "page": 8, "extracted": "internal service funds cash flows", "on_page": "Statement of Cash Flows - Internal Service Funds (p8)",
+     "issue": "business_type is null (no enterprise funds), but proprietary holds the internal service funds' cash flows, which are governmental activities. They're informational, but a reader may take them for enterprise cash flows."},
+    {"severity": "warning", "path": "receipts[0]", "page": 13, "extracted": "tax split pieces (lodging 4,632,242, gaming 1,356,256, drug 67, unlabeled 109,000,654)", "on_page": "n/a",
+     "issue": "No Lancaster_County_FY2024 rows in output/json/_meta/tax_splits.csv; under the 11-04 standard every evaluated tax line should be logged there"}
+  ]
+}
