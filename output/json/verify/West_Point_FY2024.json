@@ -1,0 +1,31 @@
+{
+ "stem": "West_Point_FY2024",
+ "values_checked": 320,
+ "issues": [
+  {
+   "severity": "warning",
+   "path": "detail[167]-detail[215], detail_totals[8]-detail_totals[15]",
+   "page": 7,
+   "extracted": "49 detail lines and 8 detail_totals for Electric, Water, Sewer and Trash funds taken from the basic Statement of Revenues, Expenses, and Changes in Fund Net Position - Proprietary Funds (report p19)",
+   "on_page": "basic statement fund columns; the report's own supplementary schedules cover only the General Fund (departments, p14-15), Sales Tax and Pool Project Sales Tax (p11-12) and nonmajor funds (p13)",
+   "issue": "per-fund detail rule (user 2026-10-28): when some funds have their own schedules, statement lines are not added for the other funds. These proprietary statement lines should not be in detail (amounts themselves tie to p7)",
+   "resolution": "fixed: proprietary statement lines removed from detail"
+  },
+  {
+   "severity": "warning",
+   "path": "balance_sheet.equity[6]",
+   "page": 4,
+   "extracted": "Unrestricted 2,451,136 (governmental, Statement of Net Position p1)",
+   "on_page": "governmental funds balance sheet p4: Assigned for capital projects 1,045,581 + Unassigned 1,405,555 (totals 4,675,534 equal the government-wide governmental column)",
+   "issue": "cash-basis balance sheet rule says governmental lines come from the governmental funds statement when its totals equal the government-wide figures; the governmental column has no capital assets or debt (only the accrual business-type column does), so the fund-balance classifications (Assigned / Unassigned) arguably should be used. Assets are identical either way"
+  },
+  {
+   "severity": "warning",
+   "path": "receipts[9].category",
+   "page": 5,
+   "extracted": "intergovernmental/state aid",
+   "on_page": "Contributions and grants 963,573 (Pool Project 600,000 capital grants and contributions, nonmajor 294,650, General Fund 68,923)",
+   "issue": "grantor not printed; part may be private donations (donations/contributions). Same category used for the detail 'Contributions and grants' lines. Judgment call, already marked review"
+  }
+ ]
+}
