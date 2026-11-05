@@ -1,0 +1,47 @@
+{
+ "stem": "Sutherland_FY2024",
+ "values_checked": 192,
+ "issues": [
+  {
+   "severity": "warning",
+   "path": "missing",
+   "page": 10,
+   "extracted": null,
+   "on_page": "Budget and Actual - All Funds expenditure lines for funds with no other schedule: Streets 170,156 (budget 3,618,750), Keno 4,349 (12,725), Economic Development 225 (498,533), Water 226,783 (1,214,500), Wastewater 83,529 (2,647,150), Sanitation 180,023 (163,710)",
+   "issue": "Only the General Fund departments schedule (pp11-12) is in detail. The extractor rule says that when a more detailed schedule exists for one fund only, the budget schedule's lines are still recorded for every other fund, including utility funds. These six function lines each name a single fund. The revenue lines and the 'Principal and interest' line on p10 are combined across funds and can stay out.",
+   "resolution": "fixed: 6 p10 expenditure lines added"
+  },
+  {
+   "severity": "warning",
+   "path": "detail[11].category",
+   "page": 11,
+   "extracted": "charges for services/fees",
+   "on_page": "Rental and fees (Recycling) 4,442",
+   "issue": "Recycling fees are refuse/sanitation charges (detail_category says so), and refuse belongs to the Utility Charges receipt category."
+  },
+  {
+   "severity": "warning",
+   "path": "receipts[10].category",
+   "page": 4,
+   "extracted": "occupation/franchise tax",
+   "on_page": "NPPD lease 348,429 (Statement of Activities: NPPD franchise fees)",
+   "issue": "The statement calls it a lease and the Statement of Activities calls it a franchise fee. Franchise is defensible, but it could also be Rentals."
+  },
+  {
+   "severity": "warning",
+   "path": "ending_cash",
+   "page": 5,
+   "extracted": 1460175,
+   "on_page": "Total fund balance 1,460,175 (includes Due from Water and Sewer 70,486, p3)",
+   "issue": "The governmental 'cash' roll-forward is the modified-cash fund balance, which includes a 70,486 interfund receivable that isn't cash. Beginning cash 1,208,690 is on the same basis."
+  },
+  {
+   "severity": "warning",
+   "path": "detail[19..22].amount",
+   "page": 12,
+   "extracted": 55220,
+   "on_page": "Interest income Total 55,221",
+   "issue": "The department interest-income lines add to 55,220 against a printed Total of 55,221. This is a 1-dollar rounding gap in the report, and report_discrepancies doesn't record it."
+  }
+ ]
+}
