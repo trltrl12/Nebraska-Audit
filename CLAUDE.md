@@ -170,6 +170,11 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
   Liability lines labelled "<X> - Due Within One Year" / "<X> - Due in More Than One Year" for X = Bonds Payable, Leases
   Payable, Subscriptions, Compensated Absences, Landfill Postclosure Costs, Workers' Compensation Claims, Other
   Postemployment Benefit Liability: category X, original_label the "Due ..." part (printed text in printed_label).
+- **Waiver Exhibit A per-fund detail (user 2026-11-05, overrides the 2026-10-28 "no schedule -> detail empty" rule for
+  waiver forms):** waiver (all-funds Exhibit A) reports get one detail line per printed row per fund column (never the
+  Total column), with fund ("<Name> Fund"), fund_type governmental | business-type (same split as the statement lines),
+  section revenue / expenditure / other financing (signed transfers), and detail_totals per fund. FY2024: done for all
+  229 waiver reports 2026-11-05. FY2025: 49 waiver reports still have empty detail (not done yet).
 - **Balance-sheet fund type (user 2026-11-05, all years):** every balance_sheet line carries fund_type governmental or
   business-type (eliminations only where the statement prints an Eliminations column), read from the statement's
   Governmental / Business-type columns (waiver forms: governmental fund columns vs utility fund columns, summed per row);
