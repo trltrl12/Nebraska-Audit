@@ -361,6 +361,8 @@ def charges_rule(x, school, log):
     """Lines in charges for services that have their own category (user 2026-10-28)."""
     if x.get("category") != "charges for services/fees":
         return
+    if x.get("category_evidence"):
+        return  # set from a page check (user 2026-11-06: a generic label rule never overrides PDF evidence)
     lab = label_of(x)
     for pat, cat in CHARGE_CATS:
         if pat.search(lab) and (cat != "Extracurricular Receipts" or school):
