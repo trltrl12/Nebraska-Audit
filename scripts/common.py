@@ -36,6 +36,8 @@ RECEIPT_CATEGORIES = [
     "intergovernmental/state aid", "federal grants", "charges for services/fees",
     "licenses and permits", "Fines and Licenses", "investment income", "donations/contributions",
     "reimbursements/refunds", "Sale of Property", "other",
+    # user 2026-11-06: kept in the section where printed (loss on sale under nonoperating revenues; proceeds under revenues)
+    "Loss on Disposal of Assets", "Bond Proceeds", "Loan Proceeds",
     # user decision 2026-10-23: these taxes are reported on their own, not under other taxes
     "Carline Tax",
     "Public Power District Sales Tax",
@@ -180,6 +182,7 @@ DETAIL_REVENUE_CATEGORIES = [
     "Interest Income",
     "Licenses, Fees and Taxes",
     "Loan Collections",
+    "Bond Proceeds", "Loan Proceeds",  # user 2026-11-06: proceeds printed under revenues
     "Loan Repayments",  # user 2026-11-05 (loan repayments received); user_rules.py sets it as detail_category too
     "Loss on Disposal of Assets (non-cash)",
     "Miscellaneous Sales",
@@ -432,6 +435,12 @@ def reconcile(d):
     """
     basis = (d.get("basis") or "").lower()
     if basis == "gaap":
+        btype = "fund_balance"
+        beg = amt(d.get("beginning_fund_balance"))
+        end = amt(d.get("ending_fund_balance"))
+    elif amt(d.get("beginning_fund_balance")) is not None and amt(d.get("ending_fund_balance")) is not None:
+        # cash-basis report whose roll-forward is printed as fund balances (user 2026-11-06: cash and fund
+        # balance are recorded separately, each only where printed)
         btype = "fund_balance"
         beg = amt(d.get("beginning_fund_balance"))
         end = amt(d.get("ending_fund_balance"))
