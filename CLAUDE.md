@@ -224,7 +224,8 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
   - Inheritance Tax Fund receipts printed as "Local fees..." stay as printed (no fund-name inheritance tax).
   - Sales tax label variants (Sales tax, Local Option Sales Tax, Taxes: Sales, City sales tax, Sales ...) -> "Sales and
     Use Tax"; plain property tax variants (General property tax, Taxes levied, 1100 Local property taxes ...) ->
-    "Property Tax"; TIF variants (TIF proceeds/receipts, Tax increments ...) -> "TIF Proceeds" (category property tax).
+    "Property Tax" (incl. real and personal property / real estate and property); combined property + motor vehicle
+    rows -> "Property Tax and Motor Vehicle Taxes" (kept as one row); TIF variants (TIF proceeds/receipts, Tax increments ...) -> "TIF Proceeds" (category property tax).
     Qualified lines (motor vehicle / LB840 sales tax; debt service / special building property tax) keep their labels.
   - 103 label synonym pairs unified (output/json/_meta/label_synonyms_proposed.csv; printed text kept in printed_label).
   - Corrections from the audit review need two independent page reads that agree (a third read settles disagreements);
