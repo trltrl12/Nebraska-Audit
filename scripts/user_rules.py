@@ -203,7 +203,7 @@ CONTEXT_DECISION_FIELDS = ["stem", "where", "section", "label", "amount", "sourc
 CONTEXT_CHECK_CSV = JSON_DIR / "_meta" / "context_check.csv"
 CONTEXT_FIELDS = ["stem", "where", "section", "label", "amount", "fund", "fund_type", "source_page",
                   "current_category", "suggested_category"]
-LOOSE_CATS = OTHER_CATS | {"taxes (unlabeled)", "miscellaneous"}
+LOOSE_CATS = OTHER_CATS | {"taxes", "taxes (unlabeled)", "miscellaneous"}
 NEW_DECISIONS_FROM = "2026-11-05"
 
 
@@ -298,6 +298,15 @@ def decision_rule(x, sec, log, stem="", where=""):
         setcat(x, "category", cat, "decision: category", log)
     x["category_decision"] = f"user {decided} (category_decisions.csv)" if new else \
         (x.get("category_decision") or "user (category_decisions.csv)")
+
+
+def taxes_rule(x, log):
+    """Taxes (user 2026-11-06): the single category for tax revenue whose type cannot be established from the
+    report (replaces "taxes (unlabeled)"). No combined tax categories. Only the name changes here; which lines are
+    Taxes is still decided by the evidence rules (extractor agent, tax_splits.csv)."""
+    for k in ("category", "detail_category"):
+        if x.get(k) == "taxes (unlabeled)":
+            setcat(x, k, "taxes", f"Taxes: {k} taxes (unlabeled) -> taxes", log)
 
 
 def revenue_rules(x, log):
@@ -593,6 +602,7 @@ def apply(d, stem=""):
     school = d.get("entity_type") == "school district" or "Educational_Service_Unit" in stem
     lps = entity_of(stem) == "Lincoln_Public_Schools"
     for x in d.get("receipts") or []:
+        taxes_rule(x, log)
         decision_rule(x, "revenue", log, stem, "receipts")
         revenue_rules(x, log)
         if school:
@@ -612,6 +622,7 @@ def apply(d, stem=""):
     for x in d.get("detail") or []:
         sec = x.get("section")
         if sec == "revenue":
+            taxes_rule(x, log)
             decision_rule(x, "revenue", log, stem, "detail")
             revenue_rules(x, log)
             if school:

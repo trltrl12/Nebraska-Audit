@@ -32,7 +32,7 @@ MANIFEST_FIELDS = [
 
 RECEIPT_CATEGORIES = [
     "property tax", "sales tax", "motor vehicle tax", "occupation/franchise tax", "lodging tax",
-    "inheritance tax", "special assessments", "keno/lottery", "other taxes", "taxes (unlabeled)",
+    "inheritance tax", "special assessments", "keno/lottery", "other taxes", "taxes",  # "taxes": tax revenue whose type cannot be established (user 2026-11-06; was "taxes (unlabeled)")
     "intergovernmental/state aid", "federal grants", "charges for services/fees",
     "licenses and permits", "Fines and Licenses", "investment income", "donations/contributions",
     "reimbursements/refunds", "Sale of Property", "other",
@@ -148,7 +148,7 @@ LIABILITY_CATEGORIES = [
 # Revenue: where the money comes from.
 DETAIL_REVENUE_CATEGORIES = [
     "property tax", "sales tax", "motor vehicle tax", "occupation/franchise tax", "lodging tax",
-    "inheritance tax", "special assessments", "keno/lottery", "other local taxes", "taxes (unlabeled)",
+    "inheritance tax", "special assessments", "keno/lottery", "other local taxes", "taxes",
     "highway allocation", "motor vehicle pro-rate", "municipal equalization", "homestead/tax credits",
     "state school aid (TEEOSA)", "other state aid",
     "county/other local governments", "federal grants",

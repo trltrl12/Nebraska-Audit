@@ -506,7 +506,7 @@ def review_items(stem, d):
             if it.get("computed") and where != "fields":
                 reasons.append(f"computed, not printed: {it['computed']}")
             cats = (it.get("category"), it.get("detail_category"))
-            if "taxes (unlabeled)" in cats:
+            if "taxes" in cats or "taxes (unlabeled)" in cats:   # user 2026-11-06: Taxes (was "taxes (unlabeled)")
                 reasons.append("tax line with no tax type; could not be split from the report")
             if reasons:
                 out.append(dict(filename=stem, entity_name=d.get("entity_name"), where=where,

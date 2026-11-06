@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""List every receipt/detail line that ended up in other / other taxes / taxes (unlabeled) / miscellaneous,
+"""List every receipt/detail line that ended up in other / other taxes / taxes / miscellaneous,
 grouped by (section, normalized label), so the user can decide each label's category once.
 
 Read-only on output/json. Writes config/other_lines_to_decide.xlsx and .csv.
@@ -23,7 +23,7 @@ JSON_DIR = ROOT / "output" / "json"
 OUT_XLSX = ROOT / "config" / "other_lines_to_decide.xlsx"
 OUT_CSV = ROOT / "config" / "other_lines_to_decide.csv"
 
-LOOSE_CATS = {"other", "other taxes", "taxes (unlabeled)", "miscellaneous"}
+LOOSE_CATS = {"other", "other taxes", "taxes", "miscellaneous"}
 PRINTED_OTHER = re.compile(r"\b(other|misc|miscellaneous|sundry)\b", re.I)
 # combined/generic tax labels: a label rule can't type these, only the report's own breakdown can
 GENERIC_TAX = re.compile(r"\btax(es)?\b", re.I)
@@ -36,7 +36,7 @@ RECEIPT_CATS = [
     "property tax", "Penalties and Interest on Taxes", "sales tax", "motor vehicle tax", "Motor Vehicle Pro-Rate",
     "occupation/franchise tax", "lodging tax", "inheritance tax", "special assessments", "keno/lottery",
     "Private Sector Share of Projects", "Carline Tax", "Public Power District Sales Tax", "In Lieu of Tax",
-    "Nameplate Capacity Tax", "other taxes", "taxes (unlabeled)", "intergovernmental/state aid", "Turnback",
+    "Nameplate Capacity Tax", "other taxes", "taxes", "intergovernmental/state aid", "Turnback",
     "Reimbursement for Services", "Loan Repayments", "Homestead Exemption", "Property Tax Credit",
     "Tuition Received", "ESU Receipts", "federal grants", "charges for services/fees", "School Lunch Sales",
     "Rentals", "School Facility Rentals", "Utility Charges", "Drivers Education Fees", "Recreation Fees",
