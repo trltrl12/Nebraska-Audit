@@ -207,6 +207,26 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
 - Identity: beginning + receipts − disbursements + transfers_in − transfers_out + debt_proceeds +
   other_financing + adjustments = ending (cash for cash basis, fund balance for GAAP).
 
+- **User rulings 2026-11-06 (all reports):**
+  - Cash and fund balance are separate measures, each filled only where printed; fund balance is never treated as cash
+    and cash is never derived.
+  - Bond/loan proceeds follow the printed section: printed among revenues -> receipt lines "Bond Proceeds" / "Loan
+    Proceeds" (generic labels "Debt Proceeds"); printed under other financing -> debt_proceeds. Gibbon FY2024 and
+    Plattsmouth Community Schools FY2025 stay as printed. "taxes (unlabeled)" is now category "taxes" (Taxes and Other
+    Taxes stay separate). Scottsbluff FY2024 loss 2,342 stays in nonoperating, category Loss on Disposal of Assets.
+  - Mixed labels ("Licenses, fees and permits", "Rental and fees", "Grants and contributions") are split only when the
+    report prints a breakdown that adds up exactly; otherwise kept with their category. Grants and donations stay
+    separate categories; year-to-year category differences without printed evidence are left as they are. A generic
+    utility "Other revenue" stays charges for services only when the report counts it in Charges for Services.
+  - Split pieces carry the label of the printed row they came from (e.g. "3130 Homestead exemption", not "State
+    receipts"); fund-column cells of the parent row, sums and remainders keep the parent label. Capital outlay lines keep
+    "Capital Outlay: <function>".
+  - Inheritance Tax Fund receipts printed as "Local fees..." stay as printed (no fund-name inheritance tax).
+  - 103 label synonym pairs unified (output/json/_meta/label_synonyms_proposed.csv; printed text kept in printed_label).
+  - Corrections from the audit review need two independent page reads that agree (a third read settles disagreements);
+    every change is in output/json/_meta/corrections_log.csv, open items in _meta/mixed_label_open.csv and
+    _meta/held_items.csv, audit finding status in _meta/audit_findings_status.csv.
+
 ## Batch procedure
 1. `git pull --rebase`.
 2. Read `output/progress.csv`. Take the next `pending` reports, plus any `flagged` reports whose
