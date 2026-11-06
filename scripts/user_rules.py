@@ -679,6 +679,60 @@ def label_unify_assets(bs, log):
             relabel(x, "Capital Assets - Depreciable - Net of Depreciation", "label: capital assets depreciable", log)
 
 
+# ---- Label merges (user 2026-11-06, all levels, any year): config/label_merges.csv ----
+# Spellings that differ only in capitalization, spacing, punctuation, hyphenation, & or /, singular/plural, possessives,
+# Restricted/Assigned/Committed prefixes, footnote references or known typos share one label. Today's standard labels are
+# the targets where present. A label not in the file joins a group when its normalized form matches exactly one target.
+_MERGE = None
+_TYPO = {'buiding': 'building', 'blances': 'balances', 'witholding': 'withholding', 'country treasurer': 'county treasurer',
+         'cemetary': 'cemetery', 'husing': 'housing', 'lanfill': 'landfill', 'reapraisal': 'reappraisal', 'opiod': 'opioid',
+         'commited': 'committed', 'rehad': 'rehab', 'changes for services': 'charges for services', 'communcation': 'communication',
+         'communitcations': 'communications', 'develoment': 'development', 'contact labor': 'contract labor', 'econmic': 'economic',
+         'emrgency': 'emergency', 'enviroment': 'environment', 'rescources': 'resources', 'insitutions': 'institutions',
+         'instituions': 'institutions', 'licernse': 'license', 'miscellaneaous': 'miscellaneous', 'miscellanous': 'miscellaneous',
+         'utilties': 'utilities', 'tennant': 'tenant', 'operatingexpenses': 'operating expenses'}
+
+
+def merge_key(label):
+    t = (label or "").lower()
+    t = re.sub(r"\((see )?notes? [^)]*\)", "", t)
+    for a, b in _TYPO.items():
+        t = t.replace(a, b)
+    t = re.sub(r"^(restricted|assigned|committed)\s*,?\s*(for|to)?\s*[:\-]?\s*(for|to)?\s*[:\-]?\s*", r"\1: ", t)
+    t = re.sub(r"\s*[&/]\s*", " and ", t)
+    t = re.sub(r"\b(non|long|self|pro|in|k)\s*-\s*", r"\1", t)
+    t = re.sub(r"\b(long|pro|self) (term|rate|insurance)\b", r"\1\2", t)
+    t = re.sub(r"\bnon current\b", "noncurrent", t)
+    t = re.sub(r"\bin lieu\b", "inlieu", t)
+    t = re.sub(r"\blb\s*840\b", "lb840", t)
+    t = re.sub(r"'s\b|s'", "", t)
+    t = re.sub(r"[-:,()\.]", " ", t)
+    return " ".join(w[:-1] if len(w) > 3 and w.endswith("s") and not w.endswith("ss") else w for w in t.split())
+
+
+def _merges():
+    global _MERGE
+    if _MERGE is None:
+        f = Path(__file__).resolve().parent.parent / "config" / "label_merges.csv"
+        exact, bykey = {}, {}
+        if f.exists():
+            for r in csv.DictReader(open(f)):
+                exact[r["label"]] = r["combined_label"]
+                bykey.setdefault(merge_key(r["label"]), set()).add(r["combined_label"])
+        _MERGE = (exact, {k: next(iter(v)) for k, v in bykey.items() if len(v) == 1})
+    return _MERGE
+
+
+def label_merge(x, log):
+    exact, bykey = _merges()
+    L = x.get("original_label")
+    if not L:
+        return
+    new = exact.get(L) or (None if L in exact else bykey.get(merge_key(L)))
+    if new and new != L:
+        relabel(x, new, "label: merge", log)
+
+
 def apply(d, stem=""):
     log = Counter()
     # fund-name rule: only reports whose detail was built per fund from the statements (cities and villages)
@@ -745,6 +799,13 @@ def apply(d, stem=""):
     if isinstance(d.get("balance_sheet"), dict):
         label_unify_assets(d["balance_sheet"], log)
     entity_rules(d, entity_of(stem), log)
+    for k in ("receipts", "disbursements", "detail"):
+        for x in d.get(k) or []:
+            label_merge(x, log)
+    if isinstance(d.get("balance_sheet"), dict):
+        for sec in ("assets", "deferred_outflows", "liabilities", "deferred_inflows", "equity"):
+            for x in d["balance_sheet"].get(sec) or []:
+                label_merge(x, log)
     return log
 
 

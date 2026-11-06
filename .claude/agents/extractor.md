@@ -589,7 +589,8 @@ These are the user's decisions; apply them while extracting. After extraction th
     on that detail_totals entry when they do.
   - Labels are recorded as printed; scripts/user_rules.py then standardizes them (Sales and Use Tax, Property Tax,
     Property Tax and Motor Vehicle Taxes, TIF Proceeds, Interest on Property Taxes, Public safety, Capital Assets -
-    Depreciable - Net of Depreciation / Non-Depreciable, and the synonyms in config/label_synonyms.csv).
+    Depreciable - Net of Depreciation / Non-Depreciable, the synonyms in config/label_synonyms.csv and the spelling merges
+    in config/label_merges.csv).
 
 ## Output to the caller
 Don't return extracted data. Return exactly one line per report, nothing else:

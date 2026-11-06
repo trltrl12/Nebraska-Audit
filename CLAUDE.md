@@ -229,6 +229,11 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
     Qualified lines (motor vehicle / LB840 sales tax; debt service / special building property tax) keep their labels.
   - "Current: Public Safety" -> "Public safety"; capital asset lines -> "Capital Assets - Depreciable - Net of
     Depreciation" / "Capital Assets - Non-Depreciable" (all wordings).
+  - Label merges (all levels, all years): config/label_merges.csv (1,686 spellings -> one label each; built 2026-11-06
+    from the user's Combined_Labels rules: case, spacing, punctuation, hyphens, & and /, singular/plural, possessives,
+    Restricted/Assigned/Committed prefixes, footnote refs, typos; word order still matters; today's standard labels
+    win; no parentheses where avoidable). user_rules.py applies it (exact label, or a new spelling whose normalized
+    form matches one group).
   - 103 label synonym pairs unified (output/json/_meta/label_synonyms_proposed.csv; printed text kept in printed_label).
   - Corrections from the audit review need two independent page reads that agree (a third read settles disagreements);
     every change is in output/json/_meta/corrections_log.csv, open items in _meta/mixed_label_open.csv and
