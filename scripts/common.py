@@ -180,6 +180,7 @@ DETAIL_REVENUE_CATEGORIES = [
     "Interest Income",
     "Licenses, Fees and Taxes",
     "Loan Collections",
+    "Loan Repayments",  # user 2026-11-05 (loan repayments received); user_rules.py sets it as detail_category too
     "Loss on Disposal of Assets (non-cash)",
     "Miscellaneous Sales",
     "Nameplate Capacity Tax",
