@@ -146,12 +146,14 @@ def utility_object_rule(d, log):
     det = [x for x in d.get("detail") or [] if x.get("section") == "expenditure" and x.get("fund_type") == "business-type"]
     by_label = {}
     for x in det:
+        if x.get("category_evidence"):
+            continue  # page-checked category (user 2026-11-06)
         if x.get("category") == "utilities" or x.get("function") == "utilities":
             c = utility_object(x)
             if c:
                 by_label.setdefault(label_of(x).lower(), set()).add(c)
     for x in det + [x for x in d.get("disbursements") or [] if x.get("fund_type") == "business-type"]:
-        if x.get("category") != "utilities":
+        if x.get("category") != "utilities" or x.get("category_evidence"):
             continue
         b = by_label.get(label_of(x).lower())
         c = utility_object(x, next(iter(b)) if b and len(b) == 1 else None)
