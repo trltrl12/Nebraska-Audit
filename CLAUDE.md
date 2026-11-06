@@ -222,6 +222,10 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
     receipts"); fund-column cells of the parent row, sums and remainders keep the parent label. Capital outlay lines keep
     "Capital Outlay: <function>".
   - Inheritance Tax Fund receipts printed as "Local fees..." stay as printed (no fund-name inheritance tax).
+  - Sales tax label variants (Sales tax, Local Option Sales Tax, Taxes: Sales, City sales tax, Sales ...) -> "Sales and
+    Use Tax"; plain property tax variants (General property tax, Taxes levied, 1100 Local property taxes ...) ->
+    "Property Tax"; TIF variants (TIF proceeds/receipts, Tax increments ...) -> "TIF Proceeds" (category property tax).
+    Qualified lines (motor vehicle / LB840 sales tax; debt service / special building property tax) keep their labels.
   - 103 label synonym pairs unified (output/json/_meta/label_synonyms_proposed.csv; printed text kept in printed_label).
   - Corrections from the audit review need two independent page reads that agree (a third read settles disagreements);
     every change is in output/json/_meta/corrections_log.csv, open items in _meta/mixed_label_open.csv and
