@@ -152,8 +152,33 @@ def compare(before, after, log_path):
                     catchg.append((x[i], y[i]))
                 if x[i]["label"] != y[i]["label"]:
                     labchg.append((x[i], y[i]))
+    # second pass: a removed and an added row that differ only in the printed label are a label correction
+    lk = lambda r: (r["stem"], r["container"], r["amount"], r["source_page"], r["section"])
+    pool = defaultdict(list)
+    for r in added:
+        pool[lk(r)].append(r)
+    still_removed, printed_changes = [], []
+    for r in removed:
+        if pool.get(lk(r)):
+            printed_changes.append((r, pool[lk(r)].pop(0)))
+        else:
+            still_removed.append(r)
+    removed, added = still_removed, [r for v in pool.values() for r in v]
     unexpected = 0
     print(f"rows before {len(before)}, after {len(after)}")
+    c = Counter(("LOGGED" if x["stem"] in logged else "UNEXPECTED") for x, _ in printed_changes)
+    unexpected += c["UNEXPECTED"]
+    print(f"PRINTED-LABEL CHANGES (same amount, page, section): {len(printed_changes)} ({dict(c)})")
+    for x, y in [p for p in printed_changes if p[0]["stem"] not in logged][:20]:
+        print(f"   UNEXPECTED {x['stem']} '{x['printed']}' -> '{y['printed']}' {x['amount']}")
+    pc = [(x, y) for x, y in printed_changes
+          if (x["category"], x["detail_category"]) != (y["category"], y["detail_category"])]
+    print(f"   of which category/detail also changed: {len(pc)}")
+    for (o, n), k in Counter(((x["category"], x["detail_category"]), (y["category"], y["detail_category"]))
+                             for x, y in pc).most_common(20):
+        print(f"      {k:5d}  {o} -> {n}")
+    for x, y in printed_changes[:8]:
+        print(f"   e.g. {x['stem']} '{x['printed']}' -> '{y['printed']}' {x['amount']}")
     for name, lst in (("REMOVED", removed), ("ADDED", added)):
         c = Counter(("LOGGED" if r["stem"] in logged else "UNEXPECTED") for r in lst)
         unexpected += c["UNEXPECTED"]

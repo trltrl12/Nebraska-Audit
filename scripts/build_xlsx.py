@@ -88,7 +88,8 @@ def core_stems():
 
 # User 2026-10-26: categories and labels are shown capitalized in the workbooks ("capital outlay" -> "Capital Outlay").
 # Words that already contain a capital (SBITA, TEEOSA, LB840) are kept; small words stay lowercase.
-CAP_COLS = {"category", "detail_category", "original_label", "level", "fund_type", "source"}
+CAP_COLS = {"category", "detail_category", "original_label", "standardized_label", "level", "fund_type", "source"}
+# printed_label is never capitalized or edited: it is the text as printed (user 2026-11-06)
 _SMALL = {"and", "or", "of", "the", "in", "for", "to", "a", "an", "on", "at", "by", "with", "from", "per", "vs", "as"}
 
 
@@ -103,7 +104,7 @@ def cap(v):
         if any(ch.isupper() for ch in w) or (n[0] > 1 and w in _SMALL):
             return w
         return w[0].upper() + w[1:]
-    return re.sub(r"[A-Za-z][A-Za-z']*", word, v)
+    return re.sub(r"[^\W\d_](?:[^\W\d_]|')*", word, v)   # unicode letters only: "Façade" is one word
 
 
 def add_sheet(wb, title, header, rows, money_cols=(), status_col=None):
@@ -175,7 +176,10 @@ def main():
 
 ONE_COLS = ["entity_name", "entity_type", "county", "filename", "filing_type", "fiscal_year_end", "basis", "level",
             "fund_type", "section", "source", "line", "schedule", "fund", "department", "category",
-            "detail_category", "original_label", "amount", "pages", "page_link"]
+            "detail_category", "printed_label", "original_label", "amount", "pages", "page_link"]
+# one-tab header (user 2026-11-06): Printed Label = text as printed (blank on generated cash-flow rows, which are
+# descriptions, not printed lines); Standardized Label = the normalized label (JSON original_label)
+ONE_HEAD = [("standardized_label" if c == "original_label" else c) for c in ONE_COLS]
 # Cash flow roll-forward lines (Summary columns): (column, label, sign)
 GOV_FLOW = [("beginning_balance", "beginning {}", 1), ("total_receipts", "receipts", 1),
             ("total_disbursements", "disbursements", -1), ("transfers_in", "transfers in", 1),
@@ -186,6 +190,11 @@ PROP_FLOW = [("beginning_cash", "beginning cash"), ("operating", "operating acti
              ("noncapital_financing", "noncapital financing activities"),
              ("capital_and_related_financing", "capital and related financing activities"),
              ("investing", "investing activities"), ("ending_cash", "ending cash")]
+
+
+def printed_of(it):
+    """Text as printed: printed_label when a rule standardized the label, else the extracted label."""
+    return it.get("printed_label") or it.get("original_label")
 
 
 def page_amount(v):
@@ -253,10 +262,19 @@ def one_tab(collected):
                             "source": "statement", "line": n0, "original_label": label, "amount": v})
         lines = [(1, f"beginning {m}", b, "statement"), (2, "receipts", rc, "statement"),
                  (3, "disbursements", -ds if ds is not None else None, "statement")]
-        if None not in (b, e):
-            other = round(e - b - (rc or 0) + (ds or 0), 2)
-            if other:
-                lines.append((4, "transfers, financing and adjustments (net)", other, "computed"))
+        # user 2026-11-06: no computed balancing row. The printed transfers, financing and adjustments are shown as
+        # their own rows; when the report's own figures do not reconcile, the gap is a report discrepancy
+        # (report_discrepancies in the JSON), never a workbook row.
+        units = dj_gnp.get("units") or 1
+        for key, label in (("transfers_net", "transfers (net)"), ("debt_proceeds", "debt proceeds"),
+                           ("other_financing", "other financing")):
+            v = num_(page_amount(btj.get(key)))
+            if v:
+                lines.append((4, label, round(v * units, 2), "statement"))
+        for it in btj.get("adjustments") or []:
+            v = num_(page_amount(it))
+            if v:
+                lines.append((4, it.get("original_label") or "adjustment", round(v * units, 2), "statement"))
         lines.append((5, f"ending {m}", e, "statement"))
         for n, label, v, src in lines:
             if v is not None and (b is not None or e is not None):
@@ -315,7 +333,7 @@ def one_tab(collected):
     for year, rows in sorted(by_year.items()):
         wb = Workbook()
         wb.remove(wb.active)
-        add_sheet(wb, "All Data", ONE_COLS, [[r.get(c) for c in ONE_COLS] for r in rows], ["amount"])
+        add_sheet(wb, "All Data", ONE_HEAD, [[r.get(c) for c in ONE_COLS] for r in rows], ["amount"])
         path = OUTPUT / f"cashflow_one_tab_{year}.xlsx"
         wb.save(path)
         print(f"wrote {path.relative_to(OUTPUT.parent)} ({len(rows)} rows)")
@@ -399,10 +417,13 @@ def build(xlsx):
         b0 = base(s, d)
         for section in ("receipts", "disbursements"):
             for it in d.get(section) or []:
-                lines.append(b0 + [fund_type(it), section, it.get("category"), it.get("detail_category"),
-                                     it.get("original_label"), it.get("amount")] + ref(s, it))
-    add_sheet(wb, "Line Items", ident + ["fund_type", "section", "category", "detail_category", "original_label",
-                                         "amount"] + REF,
+                lines.append(b0 + [fund_type(it), it.get("fund"), section, it.get("category"),
+                                     it.get("detail_category"), printed_of(it), it.get("original_label"),
+                                     it.get("amount")] + ref(s, it))
+    # fund: set on statement lines that print one fund column (e.g. waiver Exhibit A), so two printed cells with the
+    # same label and amount in different funds stay distinguishable (user 2026-11-06)
+    add_sheet(wb, "Line Items", ident + ["fund_type", "fund", "section", "category", "detail_category",
+                                         "printed_label", "original_label", "amount"] + REF,
               lines, ["amount"])
 
     # ---- Detail Lines (supplementary schedules)
@@ -415,9 +436,11 @@ def build(xlsx):
             ft = "outside statements" if it.get("outside_statement") else fund_type(it)
             det.append(b0 + [it.get("schedule"), ft, it.get("fund"), it.get("department"),
                                it.get("section"), it.get("category"), it.get("detail_category"),
-                               it.get("original_label"), it.get("amount"), it.get("budget_final")] + ref(s, it))
+                               printed_of(it), it.get("original_label"), it.get("amount"), it.get("budget_final")]
+                       + ref(s, it))
     add_sheet(wb, "Detail Lines", ident + ["schedule", "fund_type", "fund", "department", "section", "category",
-                                           "detail_category", "original_label", "amount", "budget_final"] + REF,
+                                           "detail_category", "printed_label", "original_label", "amount",
+                                           "budget_final"] + REF,
               det, ["amount", "budget_final"])
 
     # ---- Revenue by Source / Spending by Type
@@ -532,20 +555,21 @@ def build(xlsx):
         for sec, tot in BS_SECTIONS.items():
             for it in bs.get(sec) or []:
                 rows.append(b0 + [it.get("statement") or main, bs.get("column", ""), it.get("fund_type", ""), sec,
-                                  it.get("category", ""), it.get("original_label"), it.get("amount")] + ref(s, it))
+                                  it.get("category", ""), printed_of(it), it.get("original_label"), it.get("amount")]
+                            + ref(s, it))
             # a balance sheet split by fund type: one subtotal row per fund type (sum of its lines)
             fts = sorted({it.get("fund_type") for it in bs.get(sec) or [] if it.get("fund_type")})
             if len(fts) > 1 or (fts and any(it.get("fund_type") != fts[0] for k in BS_SECTIONS for it in bs.get(k) or [])):
                 for ft in fts:
                     its = [it for it in bs.get(sec) or [] if it.get("fund_type") == ft]
-                    rows.append(b0 + [st_of.get(ft, main), bs.get("column", ""), ft, sec, tot,
+                    rows.append(b0 + [st_of.get(ft, main), bs.get("column", ""), ft, sec, tot, "",
                                       f"(total {ft}, sum of lines)", round(sum(float(i.get("amount") or 0) for i in its), 2)]
                                 + ref(s, its))
             if amt(bs.get(tot)) is not None:
-                rows.append(b0 + [combined, bs.get("column", ""), "total", sec, tot, "(total as stated)",
+                rows.append(b0 + [combined, bs.get("column", ""), "total", sec, tot, "", "(total as stated)",
                                   amt(bs.get(tot))] + ref(s, bs.get(tot)))
-    add_sheet(wb, "Balance Sheet", ident + ["statement", "column", "fund_type", "section", "category", "original_label",
-                                            "amount"] + REF,
+    add_sheet(wb, "Balance Sheet", ident + ["statement", "column", "fund_type", "section", "category",
+                                            "printed_label", "original_label", "amount"] + REF,
               rows, ["amount"])
 
     # ---- Flagged

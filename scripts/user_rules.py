@@ -24,7 +24,8 @@ JSON_DIR = ROOT / "output" / "json"
 REV_LABELS = [
     (r"^(taxes:\s*)?sales and use( tax)?$", "Sales and Use Tax", None),
     (r"^(taxes\s*[:\-–]?\s*)?(property|property tax(es)?|real property and personal property tax(es)?|"
-     r"personal and real property tax(es)?|property and real estate( taxes)?)$", "Property Tax", None),
+     r"personal and real property tax(es)?|property and real estate( taxes)?|"
+     r"real (and|estate and) personal property( tax(es)?)?)$", "Property Tax", None),   # word-order gap (user 2026-11-06)
     (r"^(taxes:\s*)?occupation( tax)?$", "Occupation Tax", None),
     (r"^investment (income|earnings)$", "Investment Earnings", None),
     (r"^(taxes:\s*)?turnback( tax)?$", "Turnback", "Turnback"),

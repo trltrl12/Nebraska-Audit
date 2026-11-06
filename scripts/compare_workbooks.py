@@ -35,8 +35,13 @@ def amt(r):
 KEY = ("Filename", "Level", "Fund Type", "Section", "Source", "Schedule", "Fund")
 
 
+def std(r):
+    return r.get("Standardized Label") if "Standardized Label" in r else r.get("Original Label")
+
+
 def key(r):
-    return tuple(str(r.get(k) or "") for k in KEY) + (printed(r), amt(r), str(r.get("Pages") or ""))
+    # the label is not part of the key: label corrections are reported as changes, not as removed/added rows
+    return tuple(str(r.get(k) or "") for k in KEY) + (amt(r), str(r.get("Pages") or ""))
 
 
 def main():
@@ -60,9 +65,8 @@ def main():
                 only_a.append(x[i])
             elif i >= len(x):
                 only_b.append(y[i])
-            elif (x[i].get("Category"), x[i].get("Detail Category"), x[i].get("Original Label"),
-                  x[i].get("Standardized Label")) != (y[i].get("Category"), y[i].get("Detail Category"),
-                                                       y[i].get("Original Label"), y[i].get("Standardized Label")):
+            elif (x[i].get("Category"), x[i].get("Detail Category"), std(x[i])) != \
+                    (y[i].get("Category"), y[i].get("Detail Category"), std(y[i])):
                 changed.append((x[i], y[i]))
     print(f"rows: before {len(a)}, after {len(b)}; only before {len(only_a)}, only after {len(only_b)}, "
           f"changed {len(changed)}")
@@ -74,7 +78,9 @@ def main():
     print("CATEGORY CHANGES:")
     for (o, n), k in Counter((x.get("Category"), y.get("Category")) for x, y in changed).most_common(40):
         print(f"   {k:6d}  {o} -> {n}")
-    tot = lambda rows: Counter({(r["Filename"], r.get("Level"), r.get("Section")): 0 for r in rows})
+    print("STANDARDIZED-LABEL CHANGES:")
+    for (o, n), k in Counter((std(x), std(y)) for x, y in changed if std(x) != std(y)).most_common(40):
+        print(f"   {k:6d}  {o} -> {n}")
     sa, sb = defaultdict(float), defaultdict(float)
     for r in a:
         sa[(r["Filename"], r.get("Level"), r.get("Section"))] += float(r.get("Amount") or 0)
