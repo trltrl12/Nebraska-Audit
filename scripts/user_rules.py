@@ -599,6 +599,86 @@ def entity_rules(d, ent, log):
                 setcat(x, "category", "Miscellaneous Tax", "entity: Douglas nonmajor Miscellaneous (taxes) -> Miscellaneous Tax", log)
 
 
+# ---- User label unification, 2026-11-06 (all years) ----
+_SYN = None
+SALES_LABELS = {'Sales tax', 'Local Receipts: Local Option Sales Tax', 'Sales', 'Sales taxes', 'Taxes: Sales', 'Taxes: Sales tax',
+    'City sales tax', 'Local Option Sales Tax', 'Sales tax collection', 'City sales taxes', 'Local sales tax', 'Sales tax collected',
+    'Taxes - City sales', 'Taxes - local sales tax', 'City sales and use tax', 'Taxes - Sales and use', 'Local option sales taxes',
+    'Taxes: City sales tax', 'City Sales', 'Sales and use taxes', 'Sales tax revenue', 'Taxes: City sales and use', 'Sales tax (see note M)',
+    'Local Receipts: Local Option Sales Tax (General)', 'Local Receipts: Local Option Sales Tax (Cemetery)',
+    'Local Receipts: Local Option Sales Tax (Water)', 'Other local receipts (Local sales tax)', 'City Sales Tax Fund Taxes'}
+PROPERTY_LABELS = {'General property tax', 'Taxes assessed', 'Local property taxes', '1100 Local property taxes', '1100 Property Taxes',
+    '1100 Taxes Levied', '1100 Local district taxes', 'Taxes collected', 'Property taxes levied', '1110 Property taxes', 'Taxes Levied',
+    'Local district taxes', '1110 Local property taxes', '1100 Taxes Levied/Assessed by the School District', 'General taxes', 'Tax revenue',
+    'General levy', 'General property taxes', 'Local receipts - property taxes', 'Property tax revenue', '1110 Taxes levied/assessed',
+    'Local Sources (property taxes)', 'Real estate and property', 'General Property', 'Levied property taxes',
+    'Taxes Levied/Assessed by the School District', '1100 Taxes Levied/Assessed by School District', '1100 Property',
+    '1100-000 Taxes Levied/Assessed by School District', '1110 Property', 'Taxes (Property taxes)', 'Local district property taxes',
+    'Personal & property tax', 'Nonoperating: Property taxes', 'Property taxes - levied for general purposes',
+    'Property taxes - general purpose', '1100 Property taxes - general purpose', '1110 Property taxes - general purpose',
+    'Real and property taxes', 'Personal and Real Property Taxes (General)', 'Personal and Real Property Taxes (Street)',
+    'Personal and Real Property Taxes (Bond)', 'Personal and Real Property Taxes (water taxes)', 'Personal and Real Property Taxes (line 6)',
+    'Property tax levy', 'Property taxes/Taxes Levied', 'Taxes: General property tax', '1100 Property tax', '1100 Property taxes',
+    'Local receipts: 1110 Local property taxes', 'Local sources: 1110 Property taxes', 'Local receipts: 1100 Local property taxes',
+    'Local receipts: 1100 Local property taxes (General)', 'Local Receipts: Property Tax', 'Local receipts - Property',
+    'Local receipts (local property taxes)', 'Taxes (local property taxes)', 'Local Sources (1100 Property Taxes)',
+    'Taxes (General Receipts: Property Taxes)', 'District property tax revenue', 'Local property receipts', 'Property taxes-county',
+    'Property taxes - general', 'Property - general purpose', 'Property tax, levied for general purposes',
+    'Local receipts: property taxes - general purpose', 'Property taxes - general levy', 'Local property taxes, net of fees',
+    "Property, Net of Treasurer's Fees", 'Property Taxes (non-operating)', 'Personal and Real Property Taxes'}
+PROP_MV_LABELS = {'Property and motor vehicle taxes', 'Property and Motor Vehicle Taxes/Fees', 'Property and motor vehicle',
+    'Taxes: Property and motor vehicle', 'Property and Motor Vehicle Taxes'}
+PROP_PURPOSE_RE = re.compile(r'(?i)^(property taxes? ?[-,]|property - |local receipts - local property taxes \(|local receipts: 1100 property taxes \(|'
+    r'county receipts: 1100 local property taxes \(|property tax receipts - |taxes - property - |property taxes allocated|property taxes, levied for sinking)')
+PROP_INTEREST_RE = re.compile(r'(?i)interest.*property tax|property taxes \(interest on\)|interest from property taxes')
+TIF_RE = re.compile(r'(?i)\btif\b|tax increment')
+
+
+def _synonyms():
+    global _SYN
+    if _SYN is None:
+        f = Path(__file__).resolve().parent.parent / "config" / "label_synonyms.csv"
+        _SYN = {r["current_standard_label"]: r["proposed_standard_label"] for r in csv.DictReader(open(f))} if f.exists() else {}
+    return _SYN
+
+
+def label_unify_revenue(x, log):
+    L, cat = x.get("original_label") or "", x.get("category")
+    if L in PROP_MV_LABELS:
+        relabel(x, "Property Tax and Motor Vehicle Taxes", "label: property and motor vehicle", log); return
+    if cat == "sales tax" and L in SALES_LABELS:
+        relabel(x, "Sales and Use Tax", "label: sales and use tax", log); return
+    if cat == "property tax":
+        if PROP_INTEREST_RE.search(L) and "penalt" not in L.lower() and "+" not in L:
+            relabel(x, "Interest on Property Taxes", "label: interest on property taxes", log)
+            setcat(x, "category", "Penalties and Interest on Taxes", "interest on property taxes out of property tax", log); return
+        if TIF_RE.search(L):
+            relabel(x, "TIF Proceeds", "label: TIF proceeds", log); return
+        if L in PROPERTY_LABELS or (PROP_PURPOSE_RE.search(L) and not re.search(r'(?i)fee|uncollect|interest|carline|intergovern|motor', L)):
+            relabel(x, "Property Tax", "label: property tax", log); return
+    if L in _synonyms():
+        relabel(x, _synonyms()[L], "label: synonym", log)
+
+
+def label_unify_spending(x, log):
+    L = (x.get("original_label") or "").strip()
+    if L in ("Current: Public Safety", "Public Safety"):
+        relabel(x, "Public safety", "label: public safety", log)
+    elif L in _synonyms():
+        relabel(x, _synonyms()[L], "label: synonym", log)
+
+
+def label_unify_assets(bs, log):
+    for x in bs.get("assets") or []:
+        L = x.get("original_label") or ""
+        if not re.search(r'(?i)capital', L) or (re.search(r'(?i)less|accumulated depreciation\)?$|gross', L) and not re.search(r'(?i)net of accumulated', L)):
+            continue
+        if re.search(r'(?i)non-?\s*depreciab', L):
+            relabel(x, "Capital Assets - Non-Depreciable", "label: capital assets non-depreciable", log)
+        elif re.search(r'(?i)depreciab', L):
+            relabel(x, "Capital Assets - Depreciable - Net of Depreciation", "label: capital assets depreciable", log)
+
+
 def apply(d, stem=""):
     log = Counter()
     # fund-name rule: only reports whose detail was built per fund from the statements (cities and villages)
@@ -653,6 +733,17 @@ def apply(d, stem=""):
         balance_sheet_rules(d["balance_sheet"], log)
         statement_of_lines_rule(d["balance_sheet"], log)
     utility_object_rule(d, log)
+    for x in d.get("receipts") or []:
+        label_unify_revenue(x, log)
+    for x in d.get("disbursements") or []:
+        label_unify_spending(x, log)
+    for x in d.get("detail") or []:
+        if x.get("section") == "revenue":
+            label_unify_revenue(x, log)
+        elif x.get("section") == "expenditure":
+            label_unify_spending(x, log)
+    if isinstance(d.get("balance_sheet"), dict):
+        label_unify_assets(d["balance_sheet"], log)
     entity_rules(d, entity_of(stem), log)
     return log
 

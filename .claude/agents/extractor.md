@@ -572,6 +572,25 @@ These are the user's decisions; apply them while extracting. After extraction th
     1920/1925 lines; General Fund "5690 Other Receipts" and "5300 Sale of Property" -> Other Non-Revenue Receipts.
   - Douglas County: the nonmajor (Tourism) "Miscellaneous (taxes)" -> Miscellaneous Tax.
 
+- **User rulings 2026-11-06:**
+  - Cash and fund balance are separate measures: fill each only where the report prints it; never treat fund balance as
+    cash and never derive cash.
+  - Bond/loan proceeds follow the printed section: printed among revenues -> receipt lines with category "Bond Proceeds" /
+    "Loan Proceeds" ("Debt Proceeds" for generic labels); printed under other financing sources -> `debt_proceeds`.
+    Combined tax lines with no printed breakdown have category "taxes" (Taxes and Other Taxes are separate).
+  - Mixed labels ("Licenses, fees and permits", "Rental and fees", "Grants and contributions") are split only when the
+    report prints a breakdown of that exact amount that adds up exactly; otherwise keep one line. Grants and donations are
+    separate categories; do not guess a grantor. A generic "Other revenue" of a utility fund is charges for services only
+    when the report counts it in Charges for Services (e.g. the Statement of Activities column ties); otherwise other.
+  - Every split piece carries the label of the printed row it came from, account code included (e.g. "3130 Homestead
+    exemption", "Principal"); fund-column cells of the parent row, sums and remainders keep the parent label.
+  - Inheritance Tax Fund receipts printed as "Local fees..." stay as printed (no fund-name inheritance tax).
+  - Detail by fund: waiver Exhibit A fund totals may include the fund's transfers; set `includes: ["other financing"]`
+    on that detail_totals entry when they do.
+  - Labels are recorded as printed; scripts/user_rules.py then standardizes them (Sales and Use Tax, Property Tax,
+    Property Tax and Motor Vehicle Taxes, TIF Proceeds, Interest on Property Taxes, Public safety, Capital Assets -
+    Depreciable - Net of Depreciation / Non-Depreciable, and the synonyms in config/label_synonyms.csv).
+
 ## Output to the caller
 Don't return extracted data. Return exactly one line per report, nothing else:
 `<filename>: OK` or `<filename>: OK (reconciles: no, diff 123.45)` or

@@ -177,9 +177,10 @@ def main():
 ONE_COLS = ["entity_name", "entity_type", "county", "filename", "filing_type", "fiscal_year_end", "basis", "level",
             "fund_type", "section", "source", "line", "schedule", "fund", "department", "category",
             "detail_category", "printed_label", "original_label", "amount", "pages", "page_link"]
-# one-tab header (user 2026-11-06): Printed Label = text as printed (blank on generated cash-flow rows, which are
-# descriptions, not printed lines); Standardized Label = the normalized label (JSON original_label)
-ONE_HEAD = [("standardized_label" if c == "original_label" else c) for c in ONE_COLS]
+# one-tab header: Printed Label = text as printed (blank on generated cash-flow rows, which are descriptions, not
+# printed lines); Original Label = the normalized label (JSON original_label; header renamed back from
+# "Standardized Label" by the user 2026-11-06)
+ONE_HEAD = list(ONE_COLS)
 # Cash flow roll-forward lines (Summary columns): (column, label, sign)
 GOV_FLOW = [("beginning_balance", "beginning {}", 1), ("total_receipts", "receipts", 1),
             ("total_disbursements", "disbursements", -1), ("transfers_in", "transfers in", 1),
