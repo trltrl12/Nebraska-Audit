@@ -1,0 +1,22 @@
+{
+  "stem": "Ashland_FY2023",
+  "values_checked": 102,
+  "issues": [
+    {"severity": "warning", "path": "balance_sheet", "page": 3,
+     "extracted": "governmental lines from Statement of Net Position (p1), equity 'Unrestricted' 2,044,950",
+     "on_page": "Balance Sheet - Governmental Funds (p3): same totals (assets 5,410,640, liabilities 308,100, fund balance 5,102,540), fund balance classified 'Unassigned' 2,044,950",
+     "issue": "Balance-sheet basis rule (user 2026-10-27): cash-basis reports take governmental lines from the governmental funds balance sheet when its totals equal the government-wide figures (they do here). Amounts are identical; only source page and the label (Unassigned vs Unrestricted) would change."},
+    {"severity": "warning", "path": "balance_sheet.equity", "page": 1,
+     "extracted": "no category on any equity line", "on_page": "Restricted for Debt service / Community betterment / Community development; Unrestricted",
+     "issue": "Equity lines have no category field (other reports use Restricted / Unrestricted)"},
+    {"severity": "warning", "path": "balance_sheet.liabilities[0].category", "page": 1,
+     "extracted": "other liabilities", "on_page": "Due to other funds 308,100",
+     "issue": "The matching asset 'Due from other funds' is Internal Balances; the liability could be Internal Balances as well"},
+    {"severity": "warning", "path": "detail[30].category", "page": 10,
+     "extracted": "other", "on_page": "Miscellaneous income 252,265 (accrual proprietary schedule)",
+     "issue": "The same label 'Miscellaneous income' in the business-type receipts (receipts[13], p6, 1,350) is charges for services/fees; the category for one label differs within the report. The printed label says miscellaneous, so 'other' is allowed"},
+    {"severity": "warning", "path": "receipts[8].category", "page": 4,
+     "extracted": "intergovernmental/state aid", "on_page": "Housing rehabilitation program 123,960 (General Fund 'Grant income' p7; operating grant, public works, p2)",
+     "issue": "Grantor not printed; housing rehabilitation grants are often federal CDBG passed through the state. The category is a judgment call"}
+  ]
+}

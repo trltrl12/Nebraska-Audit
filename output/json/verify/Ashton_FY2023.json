@@ -1,0 +1,21 @@
+{
+  "stem": "Ashton_FY2023",
+  "values_checked": 74,
+  "issues": [
+    {"severity": "warning", "path": "beginning_cash", "page": 1,
+     "extracted": 212403.82, "on_page": "line 1 Net Cash Balance 124,913.73; line 2 Investments 87,490.09; line 3 Subtotal 212,403.82",
+     "issue": "beginning_cash (and ending_cash 201,877.85 = line 24) include investments while beginning/ending_investments are null; the balance sheet splits the same ending balance into Net Cash Balance 113,234.76 and Investments 88,643.09. Consistent roll-forward, but cash vs investments is not separated"},
+    {"severity": "warning", "path": "receipts[10].category", "page": 1,
+     "extracted": "other", "on_page": "Local Receipts: Other 113,399.26 (Water 43,596.69, Sewer 68,726.19, Water Reserve 396.76, Sewer Reserve 679.62)",
+     "issue": "100% of business-type receipts are in 'other'; in utility fund columns these are most likely utility charges, but the page prints no breakdown. 'Local Receipts' is a context label, so it needs the context check"},
+    {"severity": "warning", "path": "detail[13].original_label", "page": 2,
+     "extracted": "Capital Outlay: General Government (function from computed)", "on_page": "Capital Improvements 89,803.14 (General Fund)",
+     "issue": "Function 'general government' is assumed; the page does not say what was improved. disbursements[3] keeps 'Capital Improvements' as its label while the detail line is relabelled"},
+    {"severity": "warning", "path": "report_discrepancies", "page": 3,
+     "extracted": null, "on_page": "Schedule of Interfund Transfers total '-' (should agree to Exh A lines 19+20 and 49+50 = 4,242.00)",
+     "issue": "The report's own interfund transfer schedule is blank even though Exhibit A shows 4,242.00 of transfers. This is noted in notes but not recorded in report_discrepancies[]"},
+    {"severity": "warning", "path": "balance_sheet.equity", "page": 1,
+     "extracted": "no category on equity lines", "on_page": "Ending Balance",
+     "issue": "Equity lines have no category field"}
+  ]
+}
