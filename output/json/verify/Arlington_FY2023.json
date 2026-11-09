@@ -1,0 +1,89 @@
+{
+  "stem": "Arlington_FY2023",
+  "values_checked": 166,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "beginning_cash",
+      "page": 4,
+      "extracted": 1161074,
+      "on_page": "Fund Balances - Beginning of Year 1,161,074 (no beginning cash printed)",
+      "issue": "A fund balance is recorded as beginning cash. User ruling 2026-11-06: cash and fund balance are separate measures, each filled only where printed; fund balance is never treated as cash. beginning_cash should be null and 1,161,074 should go in beginning_fund_balance.",
+      "resolved": "2026-11-09: fund balance fields set from p4, beginning_cash cleared (not printed); transfer gaps recorded in report_discrepancies"
+    },
+    {
+      "severity": "error",
+      "path": "missing",
+      "page": 4,
+      "extracted": "beginning_fund_balance null, ending_fund_balance null",
+      "on_page": "Fund Balances - Beginning of Year 1,161,074; Fund Balances - End of Year 1,129,445 (Total column)",
+      "issue": "The printed governmental fund balances are not recorded. ending_cash 1,129,445 (p3 cash in bank 1,114,459 + cash with county treasurer 14,986) is correct as printed and can stay.",
+      "resolved": "2026-11-09: fund balance fields set from p4, beginning_cash cleared (not printed); transfer gaps recorded in report_discrepancies"
+    },
+    {
+      "severity": "error",
+      "path": "report_discrepancies",
+      "page": 11,
+      "extracted": "no entry for transfers / other financing",
+      "on_page": "p11 General Fund other financing: Donations 3,275 + Transfer from other funds 67,203 - Transfer to other funds 71,841 = (1,363), printed Total other financing sources (1,364); transfers net (4,638) vs statement p4 General Transfers, net (4,639). p9 Bond Fund transfers in 35,150 - out 34,819 = 331 vs p4 Debt Service Transfers, net 330. Detail other-financing transfers net (4,307) vs transfers_out 4,309.",
+      "issue": "These are gaps in the report itself (the detail lines match the pages), but they are not in report_discrepancies, so the detail transfers do not tie to transfers_out (difference 2) and nothing explains it.",
+      "resolved": "2026-11-09: fund balance fields set from p4, beginning_cash cleared (not printed); transfer gaps recorded in report_discrepancies"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[0].category",
+      "page": 4,
+      "extracted": "property tax (564,225)",
+      "on_page": "Property taxes 564,225; p11 shows General Fund property 509,916 + Streets 11,093 + Wheel tax 12,695 = 533,704 = p4 General Fund Property taxes",
+      "issue": "The statement's Property taxes line seems to include wheel tax 12,695 (motor vehicle). It can't be split exactly (p11 Total column prints property 521,008, which is 1 off), so as-printed is defensible."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[5].category",
+      "page": 4,
+      "extracted": "debt service interest",
+      "on_page": "Debt Service 220 (p9 Bond Fund 'Other expenditures' 220)",
+      "issue": "The page doesn't say this is interest or fees. Treating it as interest is an assumption; 'debt service (principal and interest combined)' or Debt Service with no part would be closer to what is printed (same for detail[82])."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[12].category",
+      "page": 6,
+      "extracted": "utilities",
+      "on_page": "Utilities and telephone 39,146 (proprietary cost-type line)",
+      "issue": "This cost-type line uses the function name 'utilities' as its category, so it can't be told apart from the function lines; a cost-type name such as 'Utilities (Power, Gas, Phone)' may be intended."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[7].amount",
+      "page": 11,
+      "extracted": 11093,
+      "on_page": "11,093 (low-resolution scan; could be 11,092)",
+      "issue": "Streets property taxes reads as 11,093, but the printed Total column property 521,008 (509,916 + 11,092) and the Streets total revenues 215,032 both imply 11,092. Already listed as a report rounding gap in report_discrepancies; the digit should be confirmed in the source PDF."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[77].category",
+      "page": 9,
+      "extracted": "other taxes",
+      "on_page": "Bond Fund - Other local taxes 3,122 (statement p4 counts this 3,122 in Debt Service 'Intergovernmental')",
+      "issue": "The printed label says other local taxes, but the governmental funds statement treats the same money as intergovernmental. The category differs between the statement and the detail; this is a judgment call."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[87].category",
+      "page": 10,
+      "extracted": "utilities",
+      "on_page": "Personnel expenses 34,872 / Operating expenses 415,491 / Supplies 1,397 (proprietary budget schedule, cost-type lines)",
+      "issue": "Utility cost-type rule (user 2026-10-28): business-type spending lines printed by cost type take the cost type as category (Salaries and Wages, Operating, Supplies and Materials). detail[87], [88], [89] have category 'utilities', while the matching statement lines use cost types."
+    },
+    {
+      "severity": "warning",
+      "path": "balance_sheet.liabilities[3].category",
+      "page": 1,
+      "extracted": "debt - due in more than one year (465,000)",
+      "on_page": "Long-term debt 465,000 (p5 proprietary statement: Current portion of bonds 75,000; Bonds payable 390,000)",
+      "issue": "The government-wide line includes 75,000 due within one year. It is printed as one line, so not splitting it is defensible, but the category overstates noncurrent debt."
+    }
+  ]
+}
