@@ -1,0 +1,15 @@
+{
+  "stem": "Bladen_FY2023",
+  "values_checked": 56,
+  "issues": [
+    {"severity": "warning", "path": "decision_needed", "page": 4,
+     "extracted": null, "on_page": "pp4-5: earlier version of Exhibit A p1 and Schedule of Investments, crossed out with a red diagonal line (General Net Cash Balance 53,739.61 / Investments 347,016.90; investments total 382,643.18)",
+     "issue": "possibly voided duplicate pages with different ending cash/investment split. Recorded only in report_discrepancies, not in decision_needed[]. The unmarked pp1/3 were used, which looks right, but the extractor rules list a possibly voided page as a question for a person."},
+    {"severity": "warning", "path": "receipts[10].category", "page": 1,
+     "extracted": "other", "on_page": "Local Receipts: Other, Enterprise Fund 105,600.00",
+     "issue": "92% of business-type receipts are in other. In an electric/solid waste/wastewater/water enterprise fund, these are probably utility charges, but the page doesn't say so. The label itself says Other. The same applies to detail[13]."},
+    {"severity": "warning", "path": "ending_cash", "page": 1,
+     "extracted": 419881.55, "on_page": "line 24/28 Ending Balance (Net Cash Balance 12,881.46 + Investments 407,000.09)",
+     "issue": "ending_cash (and beginning_cash 391,338.74) include investments, while ending_investments/beginning_investments are null and the balance sheet separates Investments. The amounts are correct as line 3/28 subtotals, but cash and investments are combined."}
+  ]
+}
