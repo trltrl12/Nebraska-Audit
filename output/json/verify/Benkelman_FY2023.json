@@ -1,0 +1,18 @@
+{
+  "stem": "Benkelman_FY2023",
+  "values_checked": 156,
+  "issues": [
+    {"severity": "warning", "path": "ending_cash", "page": 4,
+     "extracted": null, "on_page": "Balance Sheet - Governmental Funds, Total Governmental Funds: Cash and cash equivalents 1,072,637; Certificates of deposit 159,994; County treasurer cash 9,259",
+     "issue": "Governmental ending cash is printed on p4 but left null (roll-forward uses fund balance, which is fine). Under the 2026-11-06 ruling (each measure filled where printed) ending_cash could be filled; beginning cash is not printed."},
+    {"severity": "warning", "path": "transfers_out", "page": 5,
+     "extracted": 160894, "on_page": "Transfer from (to) other funds: General 8, Street 277,181, Sales Tax (438,075), CDBG (8), Total (160,894)",
+     "issue": "Net transfer recorded as transfers_out with transfers_in null; the Total column prints only the net, so this is defensible, but gross governmental transfers are in 277,189 / out 438,083."},
+    {"severity": "warning", "path": "detail[17].detail_category", "page": 14,
+     "extracted": "salaries and wages", "on_page": "Salaries and benefits",
+     "issue": "Line combines salaries and benefits; salaries and wages is the dominant-category choice (same for detail[18]-detail[20])."},
+    {"severity": "warning", "path": "detail[55].detail_category", "page": 11,
+     "extracted": "other state aid", "on_page": "Intergovernmental 200,396 (Street Fund)",
+     "issue": "Street Fund intergovernmental is most likely highway allocation, but the label doesn't say so; already marked review."}
+  ]
+}
