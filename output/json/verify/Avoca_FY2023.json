@@ -1,0 +1,18 @@
+{
+  "stem": "Avoca_FY2023",
+  "values_checked": 70,
+  "issues": [
+    {"severity": "warning", "path": "receipts[6].category", "page": 1,
+     "extracted": "keno/lottery", "on_page": "Local Receipts: Other 36,867.63 (COMM IMPR/KENO column)",
+     "issue": "Category comes from the fund name of a mixed Community Improvement/Keno fund. The row is 'Local Receipts: Other' and nothing on the page says it is keno proceeds. Same for detail[10]. 'Local Receipts' is a context label, so this needs the context check."},
+    {"severity": "warning", "path": "beginning_cash", "page": 1,
+     "extracted": 227199.81, "on_page": "line 1 Net Cash Balance (governmental columns) 150,199.81; line 3 Subtotal 227,199.81",
+     "issue": "beginning_cash and ending_cash (201,536.14) are the line 3 / line 24 subtotals, which include the 77,000 of investments that are also recorded in beginning_investments / ending_investments. Anything that adds the two fields counts the 77,000 twice. Line 26 net cash at year end is 124,536.14. The arithmetic is right and the value is marked computed."},
+    {"severity": "warning", "path": "disbursements[6].fund_type", "page": 2,
+     "extracted": "business-type", "on_page": "line 39 Debt Service 23,097.00, printed under the 'Governmental:' heading but in the ENTERPRISE column",
+     "issue": "fund_type follows the Enterprise column rather than the row heading. This is defensible (the water bond is enterprise debt, p3), but the page shows it under Governmental."},
+    {"severity": "warning", "path": "disbursements[3].original_label", "page": 2,
+     "extracted": "Other Capital Outlay", "on_page": "Other Capital Outlay 34,820.64 (Federal ARPA column)",
+     "issue": "Capital outlay line not relabelled 'Capital Outlay: <function>' (no function printed; Federal ARPA fund). Same for detail[16]."}
+  ]
+}
