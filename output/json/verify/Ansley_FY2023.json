@@ -1,0 +1,24 @@
+{
+  "stem": "Ansley_FY2023",
+  "values_checked": 138,
+  "issues": [
+    {"severity": "warning", "path": "decision_needed", "page": 20,
+     "extracted": "Local Receipts: Other 2,674,318 recorded as other (business-type)", "on_page": "Local Receipts: Other 2,674,318 of Total Revenues 3,093,683",
+     "issue": "unexplained line that is most of the budget schedule's receipts and includes the 1,480,000 loan proceeds shown only in the proprietary cash flow statement (p18); decision_needed[] is absent"},
+    {"severity": "warning", "path": "detail[9].fund_type", "page": 20,
+     "extracted": "business-type", "on_page": "Local Receipts: Other 2,674,318 (Total Primary Government column)",
+     "issue": "the row mixes governmental and business-type receipts (and loan proceeds); tagging it all business-type is an assumption"},
+    {"severity": "warning", "path": "missing", "page": 21,
+     "extracted": null, "on_page": "Governmental: General Government 188,311; Public Safety 29,009; Public Works 188,538; Culture and Recreation 104,243; Miscellaneous 0; Total Disbursements and Transfers 1,644,712",
+     "issue": "budget-schedule governmental disbursement lines and the total left out on purpose (p22 object schedule used instead; budget lines also carry 36,201 of transfers). Defensible to avoid double counting, but printed lines are not in the JSON and no detail_total covers the p21 business-type lines"},
+    {"severity": "warning", "path": "receipts[25].category", "page": 16,
+     "extracted": "intergovernmental/state aid", "on_page": "Grants 500 (Electric Fund; Capital Grants and Contributions on p3)",
+     "issue": "grantor not printed; could be federal grants or donations/contributions"},
+    {"severity": "warning", "path": "detail[15].category", "page": 22,
+     "extracted": "general government", "on_page": "General Fund object lines (Personal Services 44,428 ... Other Operating Expenses 67,789)",
+     "issue": "General Fund object lines (detail[15]-detail[19]) are all given function general government, but the General Fund also carries Public Safety 29,009 (p8); function assumed from fund"},
+    {"severity": "warning", "path": "detail[23].detail_category", "page": 22,
+     "extracted": "construction/infrastructure", "on_page": "Capital Expenditures (Street and Alley Fund) 78,692",
+     "issue": "object not printed; detail_category of the capital lines (detail[18], [23], [32], [37]: equipment purchases / construction/infrastructure) is an assumption"}
+  ]
+}
