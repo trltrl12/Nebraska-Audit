@@ -1,0 +1,10 @@
+{
+  "stem": "Bee_FY2023",
+  "values_checked": 74,
+  "issues": [
+    {"severity": "warning", "path": "disbursements[3].original_label", "page": 3, "extracted": "Capital Outlay: Streets/Highways 86,444.48", "on_page": "Line 35 Capital Improvements: General 34,589.01, Street 43,642.25, Ballroom 8,213.22", "issue": "The whole printed row is labelled with the streets function, but only 43,642.25 is Street Fund money; the General (34,589.01) and Ballroom (8,213.22) parts are other functions, as the detail lines record them. Already marked review."},
+    {"severity": "warning", "path": "receipts[4].category", "page": 1, "extracted": "Utility Charges", "on_page": "Line 18 Local Receipts: Other - Water 41,722.33, Sewer 32,119.95 (p2), Garbage 18,701.44 (p2)", "issue": "The category comes only from the fund column (printed label 'Local Receipts: Other', a context label under the 2026-11-05 rule); very likely user charges but the page doesn't say so. The same applies to detail[19], detail[22] and detail[24]."},
+    {"severity": "warning", "path": "ending_investments", "page": 1, "extracted": 100878.80, "on_page": "Line 27 Investments (General 23,328.96, VFD 61,956.95, Ballroom 15,592.89); line 24 Ending Balance 225,749.90 already includes them", "issue": "beginning_cash/ending_cash are the line 3/line 24 subtotals (cash + investments), and beginning_investments/ending_investments are also filled with the investment part. They are noted as 'already inside', but anything that adds cash + investments will double count. The budget-form rule leaves investments null in this case."},
+    {"severity": "warning", "path": "balance_sheet.assets", "page": 1, "extracted": "no county treasurer line", "on_page": "County Treasurer Balance at September 30, 2023 1,284.25 (printed below the fund grid, not inside line 28)", "issue": "The county treasurer balance is printed but left out of the balance sheet (the extractor noted this). It is defensible because it sits outside the fund totals, but it is an asset the user's rules class as Cash and Cash Equivalents."}
+  ]
+}
