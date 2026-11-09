@@ -1,0 +1,59 @@
+{
+  "stem": "Bartley_FY2023",
+  "values_checked": 127,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "balance_sheet.equity[1]",
+      "page": 3,
+      "extracted": {
+        "original_label": "Unrestricted",
+        "amount": 405152,
+        "source_page": 1
+      },
+      "on_page": "Governmental funds statement of assets and fund balances (p3, Total Governmental Funds): Assigned to public works 70,725; Restricted to redevelopment projects 612,351; Unassigned 334,427 (total 1,017,503 = government-wide governmental total p1)",
+      "issue": "Cash-basis balance-sheet rule: the p3 totals equal the government-wide figures (1,017,503), so the governmental lines must come from p3 with fund balance by classification. The JSON uses the government-wide net position line 'Unrestricted' 405,152 instead of Assigned to public works 70,725 + Unassigned 334,427. The statement/column fields also name the government-wide statement.",
+      "resolved": "2026-11-09: governmental equity from the p3 funds statement (Assigned 70,725, Unassigned 334,427)"
+    },
+    {
+      "severity": "warning",
+      "path": "balance_sheet.equity[0].original_label",
+      "page": 3,
+      "extracted": "Restricted for: Redevelopment projects",
+      "on_page": "Restricted to redevelopment projects 612,351",
+      "issue": "The amount is right. Under the p3 basis the label should be the fund-balance classification 'Restricted to redevelopment projects'."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[10].category",
+      "page": 2,
+      "extracted": "licenses and permits",
+      "on_page": "Fees, permits and licenses 1,151; the Statement of Activities (p2) shows 1,151 as general government Charges for Services",
+      "issue": "Mixed label with no breakdown. The report counts the line in charges for services, so licenses and permits is a judgment call."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[13].category",
+      "page": 6,
+      "extracted": "charges for services/fees",
+      "on_page": "Sales 648,939 (Electric, Water, Sewer, Trash utility sales)",
+      "issue": "User rule (2026-10-28): utility fund sales/charges are category Utility Charges (out of charges for services). The label 'Sales' may not be caught by the user_rules.py label regex."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[12].category",
+      "page": 6,
+      "extracted": "Purchased Power/Cost of Sales",
+      "on_page": "Electric and water 256,160 (Electric 250,561, Water 5,599)",
+      "issue": "Mixed line: the Water fund part (5,599) is probably utility bills, not purchased power. Dominant category used; defensible."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[12].detail_category",
+      "page": 4,
+      "extracted": "equipment purchases",
+      "on_page": "Capital outlay 125,935 (also Street 6,890 detail[28], Community Redevelopment 50,125 detail[36])",
+      "issue": "The object of the capital outlay is not printed. Equipment purchases is an assumption (it could be construction or land/buildings)."
+    }
+  ]
+}

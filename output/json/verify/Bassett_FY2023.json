@@ -1,0 +1,27 @@
+{
+  "stem": "Bassett_FY2023",
+  "values_checked": 214,
+  "issues": [
+    {"severity": "warning", "path": "receipts[6..13].split_from", "page": 5,
+     "extracted": "Intergovernmental 410,124 split into 8 pieces from schedules pp15, 17, 18, 21",
+     "on_page": "Intergovernmental 410,124 (General 337,601 + Street 72,523); the pieces are printed on the General p15, Community Center p17, Fire p18 and Street p21 schedules",
+     "issue": "A non-tax statement line is split by combining rows from several fund and department schedules. The pieces add exactly to 410,124 and every piece is a printed row, but the breakdown is pieced together from several schedules rather than printed for the line itself. Check that this meets the 'report prints a breakdown of that line' standard."},
+    {"severity": "warning", "path": "receipts[17..28].split_from", "page": 5,
+     "extracted": "Other receipts 76,148 split into 12 pieces from schedules pp15-25",
+     "on_page": "Other receipts 76,148 (General 64,918, Street 3,775, Sales Tax 2,976, Cemetery 2,896, CDBG 1,583)",
+     "issue": "Same as above. The split adds exactly to 76,148 but is pieced together from fund schedules, and it leaves 5 separate 'Other revenues' items that differ only by fund."},
+    {"severity": "warning", "path": "receipts[29].category", "page": 8,
+     "extracted": "charges for services/fees", "on_page": "Charges for services 519,761 (Water, Sewer, Sanitation)",
+     "issue": "User rule: utility fund charges are category Utility Charges (out of charges for services). user_rules.py may not catch the statement label 'Charges for services'."},
+    {"severity": "warning", "path": "detail (Sewer/Water/Sanitation Fund lines)", "page": 33,
+     "extracted": "Detail revenue 521,174 / expense 515,173 from the individual fund statements pp33-35",
+     "on_page": "The business-type lines from p8 (modified cash) total revenue 521,145 / expense 506,929; pp30-35 are on a different basis (net position 1,242,840 vs 1,222,071)",
+     "issue": "The utility detail comes from statements on a different basis, so it does not tie to the business-type receipts/disbursements. The notes disclose this, but the validator may flag it."},
+    {"severity": "warning", "path": "detail[13].detail_category", "page": 15,
+     "extracted": "supplies and materials", "on_page": "Operating expenditures 74,008 (also detail[24], [33], [39], [49], [69], [74])",
+     "issue": "'Operating expenditures' does not name an object. Supplies and materials is a guess (the review note is present)."},
+    {"severity": "warning", "path": "detail[26].detail_category", "page": 18,
+     "extracted": "equipment purchases", "on_page": "Capital outlay 16,667 (also Street 82,614 as construction/infrastructure, CDA 3,000)",
+     "issue": "The object of the capital outlay is not printed. The detail category is an assumption."}
+  ]
+}
