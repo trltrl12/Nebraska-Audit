@@ -1,0 +1,15 @@
+{
+  "stem": "Alexandria_FY2023",
+  "values_checked": 78,
+  "issues": [
+    {"severity": "warning", "path": "disbursements[5].fund_type", "page": 3,
+     "extracted": "business-type", "on_page": "Line 39 Debt Service 37,001.00 (Water 10,356.00 + Sewer 26,645.00), printed under the 'Governmental:' heading",
+     "issue": "Debt Service is printed in the Governmental section of Exhibit A but sits only in the Water and Sewer columns; business-type follows the fund columns (also detail[17] and detail[20]). Defensible, but it contradicts the row heading."},
+    {"severity": "warning", "path": "receipts[9].category", "page": 1,
+     "extracted": "other", "on_page": "Local Receipts: Other 106,636.81 (Water 50,290.79 + Sewer 56,346.02)",
+     "issue": "Water/sewer fund receipts are almost certainly utility charges, but the form only prints 'Local Receipts: Other'. The printed label says Other, so 'other' is allowed. This is the only business-type receipt (100% in other); the same applies to detail[16] and detail[19]."},
+    {"severity": "warning", "path": "balance_sheet.assets", "page": 1,
+     "extracted": "Net Cash Balance lines only (342,166.95)", "on_page": "County Treasurer Balance at September 30, 2023 350.91",
+     "issue": "The county treasurer balance printed below Exhibit A is not in the balance sheet (the notes mention it). It sits outside the form's fund balances and line 28 total, so leaving it out keeps the printed totals intact. Flagged for awareness."}
+  ]
+}

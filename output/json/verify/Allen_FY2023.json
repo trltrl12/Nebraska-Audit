@@ -1,0 +1,22 @@
+{
+  "stem": "Allen_FY2023",
+  "values_checked": 91,
+  "issues": [
+    {"severity": "warning", "path": "balance_sheet", "page": 4,
+     "extracted": "Statement of Net Position - Modified Cash Basis (p1): governmental equity Restricted 277 / 63,749, Unrestricted 159,606",
+     "on_page": "Balance Sheet - Governmental Funds (p4) Total column: total assets 226,408 and total fund balances 223,632 equal the government-wide figures; fund balance Restricted 277 / 63,749, Assigned Budgetary stabilization 13,712, Unassigned 145,894",
+     "issue": "Under the user's 2026-10-27 balance-sheet basis rule, governmental lines would come from the governmental funds statement when its totals equal the government-wide figures, as they do here. Allen_FY2025 does this; FY2023 (like FY2024) kept the Statement of Net Position. All amounts are correct as printed on p1."},
+    {"severity": "warning", "path": "disbursements[12].category", "page": 7,
+     "extracted": "utilities", "on_page": "Utilities 8,385 (operating expense by cost type)",
+     "issue": "This cost-type line (power/gas/phone for the utility funds) has the function category 'utilities'. Under the cost-type rule it might be 'Utilities (Power, Gas, Phone)'; as recorded, it can't be told apart from the function category."},
+    {"severity": "warning", "path": "detail[26].detail_category", "page": 10,
+     "extracted": "highway allocation", "on_page": "Intergovernmental 58,554 (Street Fund)",
+     "issue": "The page prints only 'Intergovernmental'; 'highway allocation' is an inference from the fund name, not printed."},
+    {"severity": "warning", "path": "detail[2].category", "page": 11,
+     "extracted": "intergovernmental/state aid (county/other local governments)", "on_page": "Intergovernmental revenue: Rural fire 13,820",
+     "issue": "The extractor rules list rural fire contracts under charges for services/fees, but the page prints this under the 'Intergovernmental revenue' heading. Judgment call."},
+    {"severity": "warning", "path": "receipts[4].category", "page": 5,
+     "extracted": "charges for services/fees", "on_page": "Charges for services 225 (p5); the same 225 is 'Licenses and permits' on the General Fund departmental schedule (p11, detail[3])",
+     "issue": "The same money is categorized differently at statement and detail level. Both match their printed labels, so this is only flagged for consistency."}
+  ]
+}
