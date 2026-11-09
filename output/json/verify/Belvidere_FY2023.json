@@ -1,0 +1,12 @@
+{
+  "stem": "Belvidere_FY2023",
+  "values_checked": 57,
+  "issues": [
+    {"severity": "warning", "path": "disbursements[2].original_label", "page": 3, "extracted": "Other Capital Outlay", "on_page": "36 Other Capital Outlay 6,557.40 (Street Fund)", "issue": "Statement-level capital outlay line not relabelled 'Capital Outlay: Streets/Highways' (printed_label kept), unlike detail[12] and the Water line"},
+    {"severity": "warning", "path": "beginning_cash", "page": 1, "extracted": 74946.0, "on_page": "line 1 Net Cash Balance General 35,278.65; line 2 Investments 39,667.35; line 3 Subtotal 74,946.00", "issue": "beginning_cash/ending_cash hold cash plus investments (lines 3/24) while beginning_investments/ending_investments also hold the CD (39,667.35 / 40,440.58); adding the two fields double counts the investments. Printed cash-only figures are 35,278.65 and 34,878.98"},
+    {"severity": "warning", "path": "receipts[8].category", "page": 1, "extracted": "Utility Charges", "on_page": "18 Local Receipts: Other, Water Fund 12,330.76", "issue": "'Local Receipts' is a context label; Utility Charges inferred from the Water Fund column only (likely right, but not stated on the page)"},
+    {"severity": "warning", "path": "reported_totals.governmental.receipts.includes", "page": 1, "extracted": [], "on_page": "line 21 Total Receipts includes line 20 Transfers In 3,325.00", "issue": "Printed total includes the transfer; recorded via includes_split rather than includes ['other financing'] (same for disbursements / line 52 with Transfers Out 3,325.00)"},
+    {"severity": "warning", "path": "balance_sheet.equity", "page": 1, "extracted": "Ending Balance 75,319.56 / 3,058.05 (no category)", "on_page": "line 24 Ending Balance", "issue": "Equity lines carry no category field (amounts are correct)"},
+    {"severity": "warning", "path": "detail[12].detail_category", "page": 3, "extracted": "equipment purchases", "on_page": "36 Other Capital Outlay 6,557.40", "issue": "Object not stated on the page; equipment purchases is an assumption"}
+  ]
+}
