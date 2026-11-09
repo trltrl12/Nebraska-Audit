@@ -284,6 +284,12 @@ the cash flow, balance sheet and revenue/expense detail. `output/cashflow_core.x
 holds just those reports and sheets. Prioritise fixes and re-checks for these types; the others stay extracted.
 
 ## Open follow-ups (remove each line once done)
+- FY2023 extraction (started 2026-11-09, one extractor + one verifier at a time, 3 reports per batch, push after each
+  batch): 59 of 630 done (Adams_County .. Blaine_County, alphabetical); next Blair, Bloomfield, Bloomington. Re-trim
+  needed: Abie_FY2023 (trim kept only the schedules page, no Exhibit A); Beaver_Crossing_FY2023 (budget schedule
+  continuation pages, report pp27, 29, 31 missing: Fire, ARPA, Sewer detail). Brief the extractor with the 2026-11-06
+  rulings (utility other revenue, no new category names, cash vs fund balance, report_discrepancies only after
+  re-reading digits, waiver includes_split for transfers, Total column, funds-statement balance sheet).
 - Missing-page re-trim 2026-10-27 (cities/villages/schools/counties): done. 29 reports re-trimmed with
   config/extra_pages.csv, pages remapped, new pages added, verified, verifier errors fixed (0 flags). No page needed:
   Butte (re-check its extraction), Kimball County, Chadron PS, Springfield.
