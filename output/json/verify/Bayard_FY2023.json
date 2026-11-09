@@ -1,0 +1,23 @@
+{
+  "stem": "Bayard_FY2023",
+  "values_checked": 181,
+  "issues": [
+    {"severity": "warning", "path": "receipts[3]", "page": 8,
+     "extracted": "Other state receipts 7,845 (intergovernmental/state aid), split_from 'Sales and other taxes 122,972'",
+     "on_page": "p4 Sales and other taxes: General 102,069, Street 20,903 (total 122,972); p8 all-funds budget schedule: Sales tax 94,224, Motor vehicle tax 20,903, Other state receipts 7,845",
+     "issue": "No page prints a breakdown of 'Sales and other taxes' itself. The pieces come from matching all-funds budget-schedule lines (94,224 + 20,903 + 7,845 = 122,972 exactly), and the 7,845 piece is the General Fund remainder (102,069 - 94,224). The arithmetic is exact and the match is plausible because State shared receipts 337,164 = Equalization 166,908 + Highway 170,256. Still, it is an inference, and a state-aid piece is being placed inside a tax line. Same for detail[2]."},
+    {"severity": "warning", "path": "receipts[4].category", "page": 4,
+     "extracted": "licenses and permits (34,568 as one line)",
+     "on_page": "Fees, taxes, permits and licenses: General 23,161, Street 11,407; p8 budget 'Motor vehicle fees' 11,407",
+     "issue": "Inconsistent with detail. detail[24] classifies the Street Fund part (11,407) as motor vehicle tax, but the statement-level receipt keeps all 34,568 as licenses and permits. Mixed label: about a third is motor vehicle fees."},
+    {"severity": "warning", "path": "receipts[13].category", "page": 6,
+     "extracted": "other", "on_page": "Operating revenues: Charges for services: Other 7,911",
+     "issue": "The proprietary statement (p6) prints this 'Other' under the 'Charges for services' heading, but the Statement of Activities (p2) counts it in Miscellaneous. It is defensible as other, but the two pages conflict. The same applies to detail Other lines for Water 7,000, Electric 697 and Trash 214."},
+    {"severity": "warning", "path": "disbursements[4].category", "page": 4,
+     "extracted": "general government", "on_page": "General government: TIF remittances 7,535",
+     "issue": "It is printed under General government, but the disbursement rules put TIF in economic development. Judgment call. Same for detail[14]."},
+    {"severity": "warning", "path": "disbursements[22].category", "page": 6,
+     "extracted": "other", "on_page": "Non-operating: Amortization (2,124)",
+     "issue": "This is a non-cash amortization (probably of the deferred loss/gain on bond refunding shown on p1/p5), so other is a last resort. It could instead go with debt service or a new 'Amortization' category. Same for detail[29] (Water 820) and detail[48] (Electric 1,304)."}
+  ]
+}

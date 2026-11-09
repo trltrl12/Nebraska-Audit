@@ -1,0 +1,50 @@
+{
+  "stem": "Bazile_Mills_FY2023",
+  "values_checked": 52,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "ending_cash.amount",
+      "page": 1,
+      "extracted": 210101.0,
+      "on_page": 210103.0,
+      "issue": "General Fund ending balance misread: line 24 (and lines 26 and 28) print 65,298.00, not 65,296.00. General 65,298 + Street 144,805 = 210,103. The report adds up: 69,147 - 3,849 = 65,298 and 65,298 + 144,805 + 12,034 = 222,137 (printed TOTAL).",
+      "resolved": "2026-11-09: General Fund ending balance read as printed (65,298); ending cash/assets/equity 210,103; false report_discrepancies removed"
+    },
+    {
+      "severity": "error",
+      "path": "balance_sheet.assets[0].amount",
+      "page": 1,
+      "extracted": 210101.0,
+      "on_page": 210103.0,
+      "issue": "Governmental Net Cash Balance (line 26) = General 65,298.00 + Street 144,805.00 = 210,103.00; General Fund misread as 65,296.00. Its computed note needs the same fix.",
+      "resolved": "2026-11-09: General Fund ending balance read as printed (65,298); ending cash/assets/equity 210,103; false report_discrepancies removed"
+    },
+    {
+      "severity": "error",
+      "path": "balance_sheet.equity[0].amount",
+      "page": 1,
+      "extracted": 210101.0,
+      "on_page": 210103.0,
+      "issue": "Governmental Ending Balance (line 24) = General 65,298.00 + Street 144,805.00 = 210,103.00; General Fund misread as 65,296.00. Its computed note needs the same fix.",
+      "resolved": "2026-11-09: General Fund ending balance read as printed (65,298); ending cash/assets/equity 210,103; false report_discrepancies removed"
+    },
+    {
+      "severity": "error",
+      "path": "report_discrepancies",
+      "page": 1,
+      "extracted": "2 entries: General Fund ending 65,296 vs roll-forward 65,298 (-2.00); TOTAL 222,137 vs fund columns 222,135 (+2.00)",
+      "on_page": "General Fund line 24/26/28 = 65,298.00; 65,298 + 144,805 + 12,034 = 222,137.00",
+      "issue": "Both discrepancies are false. They come from the 65,296 misread, and the printed report adds up exactly. Remove both entries, and fix the note's statement that the governmental roll-forward is off by 2. Corrected: 196,935 + 22,349 - 9,181 = 210,103, which is the printed ending balance. The 2.00 reconciliation gap is an extraction error, not a report error.",
+      "resolved": "2026-11-09: General Fund ending balance read as printed (65,298); ending cash/assets/equity 210,103; false report_discrepancies removed"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[10].category",
+      "page": 1,
+      "extracted": "other",
+      "on_page": "Local Receipts: Other (Water Fund column) 5,673.00",
+      "issue": "This is the Water Fund's only receipt (it funds Water disbursements of 3,799), so it is probably water sales/charges. The page does not say so. 'Local Receipts' is a context label, so it belongs in the context check. Same for detail[15]."
+    }
+  ]
+}
