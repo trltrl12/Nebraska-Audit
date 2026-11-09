@@ -1,0 +1,47 @@
+{
+  "stem": "Albion_FY2023",
+  "values_checked": 228,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "receipts[16].category",
+      "page": 2,
+      "extracted": "other",
+      "on_page": "Business-type Charges for Services 994,269 = Sales 957,020 + Service charges 10,276 + Other revenue 26,973 (p7)",
+      "issue": "The Statement of Activities (p2) counts the utility 'Other revenue' 26,973 in Charges for Services. Under the user ruling of 2026-11-06 it should be charges for services (Utility Charges), not other. The older 2026-10-23 category_decision is superseded.",
+      "resolved": "2026-11-09: category set to charges for services/fees (Statement of Activities counts it in Charges for Services)"
+    },
+    {
+      "severity": "warning",
+      "path": "ending_cash",
+      "page": 4,
+      "extracted": null,
+      "on_page": "Cash and cash equivalents 328,255; County treasurer cash 13,431; Restricted cash 1,071,458 (Total Governmental Funds)",
+      "issue": "Governmental cash is printed on the governmental funds balance sheet but ending_cash is null, while ending_investments (1,000,248) was taken from the same page. Under the 2026-11-06 ruling, cash is filled wherever it is printed."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[10].category",
+      "page": 7,
+      "extracted": "utilities",
+      "on_page": "Utilities 48,976 (operating expense by cost type)",
+      "issue": "This is a cost-type line, but its category 'utilities' is the same as the function name. A cost-type name such as 'Utilities (Power, Gas, Phone)' may be intended."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[18].category",
+      "page": 17,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "Rural fire reimbursements 52,746 (Fire; printed under 'Intergovernmental revenue'; p2 public safety operating grants 52,746)",
+      "issue": "The extractor rules list rural fire contracts under charges for services/fees. The report prints this line under Intergovernmental revenue, so intergovernmental/state aid is defensible. This is a judgment call."
+    },
+    {
+      "severity": "warning",
+      "path": "detail",
+      "page": 16,
+      "extracted": "General dept non-capital spending 432,465; Police + Fire non-capital 405,918",
+      "on_page": "Statement General government 432,464; Public safety 405,919 (p5)",
+      "issue": "The report itself has a $1 rounding shift between the departmental schedule and the statement's function lines. Both totals (1,543,646) tie, and the figures are recorded as printed. This is not listed in report_discrepancies."
+    }
+  ]
+}

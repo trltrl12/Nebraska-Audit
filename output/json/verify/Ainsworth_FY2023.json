@@ -1,0 +1,47 @@
+{
+  "stem": "Ainsworth_FY2023",
+  "values_checked": 195,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "receipts[15].category",
+      "page": 2,
+      "extracted": "other",
+      "on_page": "Business-type Charges for Services 1,036,200 = Sales 1,008,036 + Other revenue 28,164 (p7)",
+      "issue": "The Statement of Activities (p2) counts the utility 'Other revenue' 28,164 in Charges for Services. Under the user ruling of 2026-11-06 it should be charges for services (Utility Charges), not other. The older 2026-10-23 category_decision is superseded.",
+      "resolved": "2026-11-09: category set to charges for services/fees (Statement of Activities counts it in Charges for Services)"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[17].category",
+      "page": 7,
+      "extracted": "federal grants",
+      "on_page": "Grant income 2,000 (Sewer); p2 shows it only as Operating Grants and Contributions",
+      "issue": "The report doesn't say who gave the grant, so 'federal grants' is an assumption. Albion_FY2023 records the same kind of line as intergovernmental/state aid."
+    },
+    {
+      "severity": "warning",
+      "path": "ending_cash",
+      "page": 4,
+      "extracted": null,
+      "on_page": "Cash and cash equivalents 1,700,616; County treasurer cash 18,116 (Total Governmental Funds)",
+      "issue": "Governmental cash is printed on the governmental funds balance sheet but ending_cash is null, while ending_investments (1,065,073) was taken from the same page. Under the 2026-11-06 ruling, cash is filled wherever it is printed."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[11].category",
+      "page": 7,
+      "extracted": "utilities",
+      "on_page": "Utilities 69,621 (operating expense by cost type)",
+      "issue": "This is a cost-type line, but its category 'utilities' is the same as the function name. A cost-type name such as 'Utilities (Power, Gas, Phone)' may be intended."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[40].category",
+      "page": 15,
+      "extracted": "health/welfare",
+      "on_page": "Cemetery department 46,591; statement Public works 68,554 = Street Lighting 21,963 + Cemetery 46,591 (p5)",
+      "issue": "The Cemetery department lines (detail[40]-detail[44]) are categorized health/welfare, but the governmental funds statement counts Cemetery under Public works (streets/highways). So the detail's function split doesn't tie to the statement's functions. The category is defensible."
+    }
+  ]
+}

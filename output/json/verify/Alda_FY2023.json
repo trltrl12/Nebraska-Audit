@@ -1,0 +1,39 @@
+{
+  "stem": "Alda_FY2023",
+  "values_checked": 129,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "receipts[9].category",
+      "page": 2,
+      "extracted": "other",
+      "on_page": "Business-type Charges for Services 237,977 = Sales 237,320 + Other revenue 657 (p7)",
+      "issue": "The Statement of Activities (p2) counts the utility 'Other revenue' 657 in Charges for Services. Under the user ruling of 2026-11-06 it should be charges for services (Utility Charges), not other. The older 2026-10-23 category_decision is superseded.",
+      "resolved": "2026-11-09: category set to charges for services/fees (Statement of Activities counts it in Charges for Services)"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[4].category",
+      "page": 11,
+      "extracted": "charges for services/fees",
+      "on_page": "Charges for services 14,387 (p5) = Licenses and permits 8,337 + Rental and fees 6,050 (department schedule p11)",
+      "issue": "The statement line is labelled Charges for services, but the General Fund department schedule shows it is all licenses and permits plus rental and fees. The category could be licenses and permits (the larger part) or a split could be considered. The schedule's two lines do add exactly to 14,387."
+    },
+    {
+      "severity": "warning",
+      "path": "ending_cash",
+      "page": 4,
+      "extracted": null,
+      "on_page": "Cash and cash equivalents 165,311; County treasurer cash 4,000 (Total Governmental Funds)",
+      "issue": "Governmental cash is printed on the governmental funds balance sheet but ending_cash is null, while ending_investments (341,483) was taken from the same page. Under the 2026-11-06 ruling, cash is filled wherever it is printed."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[12].category",
+      "page": 7,
+      "extracted": "utilities",
+      "on_page": "Utilities 9,879 (operating expense by cost type)",
+      "issue": "This is a cost-type line, but its category 'utilities' is the same as the function name. A cost-type name such as 'Utilities (Power, Gas, Phone)' may be intended."
+    }
+  ]
+}
