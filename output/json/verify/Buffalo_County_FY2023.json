@@ -1,0 +1,27 @@
+{
+  "stem": "Buffalo_County_FY2023",
+  "values_checked": 216,
+  "issues": [
+    {"severity": "warning", "path": "report_discrepancies[0]", "page": 8,
+     "extracted": "printed total 7,553,112 vs lines 7,553,110; 'the budget and variance columns tie'", "on_page": "Variance lines 372,448 + 105,965 - 351,840 + 46,817 - 71,306 = 102,084 vs printed total variance 102,082",
+     "issue": "the discrepancy is recorded correctly with amounts as printed, but the note is inaccurate: the variance column is also off by 2. Every line's variance equals budget minus actual, so the printed totals (7,553,112, which the statement p3 also prints) imply that one printed actual line is 2 low. It is not a rounding difference in the total line."},
+    {"severity": "warning", "path": "receipts[5].category", "page": 3,
+     "extracted": "other (Other 11,742,619)", "on_page": "Other 11,742,619, including the Inheritance Fund's 2,543,618, which the Statement of Activities (p1) prints as Inheritance tax",
+     "issue": "inconsistent treatment: the same 2,543,618 is inheritance tax in detail (Inheritance Tax Fund 'State', p9) but stays inside 'other' at statement level. It is not over half of the line, so keeping it is defensible, but the user may want the line split."},
+    {"severity": "warning", "path": "detail[1].category", "page": 4,
+     "extracted": "other", "on_page": "Local 5,576,672 (General Fund)",
+     "issue": "'Local' is a context label. The Statement of Activities (p1) shows fees and charges for services of 2,375,700 (general government) + 661,134 (public safety), which may be more than half of this line, so 'charges for services/fees' may fit. Needs the context check."},
+    {"severity": "warning", "path": "detail[128].category", "page": 13,
+     "extracted": "other", "on_page": "Keno Lottery 2850: Local 60,392",
+     "issue": "the only receipt of the Keno Lottery fund is very likely keno proceeds (keno/lottery). The fund-name rule does not cover 'Local' lines, so it is left to the context check."},
+    {"severity": "warning", "path": "detail[146].category", "page": 13,
+     "extracted": "other", "on_page": "911 Emergency Services 5907: Local 247,103",
+     "issue": "the Statement of Activities (p1) prints '911Surcharges' 309,622, so this line may be 911 surcharge (other taxes). The amounts do not tie exactly (247,103 + Wireless 91,939 = 339,042), so 'other' is defensible pending the context check."},
+    {"severity": "warning", "path": "detail[100].category", "page": 10,
+     "extracted": "other", "on_page": "Health Insurance Fund: Local 3,113,608",
+     "issue": "the Statement of Activities (p1) prints exactly 3,113,608 as Public health Operating Grants and Contributions. This is likely health-insurance contributions, so a specific category may fit. Needs the context check."},
+    {"severity": "warning", "path": "detail[111].category", "page": 12,
+     "extracted": "culture/recreation", "on_page": "Visitors Promotion 900 / 995: Public Works 859,616 / 859,615",
+     "issue": "the extractor followed the governmental funds statement (Culture and Recreation) instead of the combining schedule's Public Works row. Visitors promotion is tourism, which the disbursement rules list under economic development. Also detail[114]."}
+  ]
+}

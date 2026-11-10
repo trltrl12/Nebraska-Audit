@@ -1,0 +1,23 @@
+{
+  "stem": "Burchard_FY2023",
+  "values_checked": 83,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "reported_totals.business-type.disbursements.amount",
+      "page": 3,
+      "extracted": 48610.65,
+      "on_page": 48610.62,
+      "issue": "arithmetic error in a computed value: line 52 Water 28,848.64 + Sewer 8,525.03 + Sanitation 11,236.95 = 48,610.62, not 48,610.65. That also equals the Total column 86,634.87 minus governmental 38,024.25, and spending lines 31,465.61 + transfers out 17,145.01.",
+      "resolved": "2026-11-10: business-type disbursements total set to 48,610.62 (Water 28,848.64 + Sewer 8,525.03 + Sanitation 11,236.95, p3)"
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[5].fund_type",
+      "page": 3,
+      "extracted": "business-type",
+      "on_page": "Line 39 Debt Service 1,103.79 under the 'Governmental:' heading, Water Fund column",
+      "issue": "the row is printed under the Governmental heading but in the Water Fund column. The extractor treated it as business-type (the Water roll-forward ties). This is defensible but is an assumption."
+    }
+  ]
+}
