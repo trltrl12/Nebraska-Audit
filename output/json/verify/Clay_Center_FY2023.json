@@ -1,0 +1,21 @@
+{
+  "stem": "Clay_Center_FY2023",
+  "values_checked": 290,
+  "issues": [
+    {"severity": "warning", "path": "other_financing", "page": 6,
+     "extracted": -254298, "on_page": "Debt administrative cost (200), Debt principal payments (193,538), Debt interest payments (60,560) under OTHER FINANCING SOURCES (USES)",
+     "issue": "Confirmed: the governmental funds statement (p6) prints debt admin cost, principal and interest under Other Financing Sources (Uses), so other_financing follows the printed section and the identity ties (156,850 + 914,002 - 993,332 - 254,298 = -176,778). However, the same report's Statement of Activities (p2: Principal retirement 193,538, Interest and other charges 60,760 inside total governmental expenditures 1,247,630), the all-funds budget statement (p11: Debt service 60,760 as a disbursement) and the Debt Service Fund schedule (p16: Bond retirement 105,000, Interest on bonds 53,636, Agent fees 400 as disbursements, carried in detail as expenditure) treat this as spending. As a result, governmental debt service is missing from disbursements and the workbook debt service total for this report."},
+    {"severity": "warning", "path": "disbursements[8].category", "page": 8,
+     "extracted": "utilities", "on_page": "Operating expense 1,577 (Sewer), printed as 'Operating supplies' 1,577 on the Sewer schedule p20",
+     "issue": "In a by-cost-type list, the other lines get cost-type categories, but this one is the function category 'utilities'. Under the 2026-10-29 rule it could be 'Operating', or Supplies and Materials based on p20."},
+    {"severity": "warning", "path": "balance_sheet.assets[1].category", "page": 4,
+     "extracted": "Investments", "on_page": "Cash - certificates of deposit 264,858",
+     "issue": "The printed label calls the CDs cash, but they are categorized as Investments (same for the business-type assets[4], 31,311, p1). Defensible, but this is a judgment call."},
+    {"severity": "warning", "path": "business_type.measure", "page": 8,
+     "extracted": "net position 847,875", "on_page": "NET POSITION, end of year 847,875 (p8); CASH AND CASH EQUIVALENTS, end of year 816,564 (p10)",
+     "issue": "The FY2023 ending 847,875 equals the FY2024 JSON business_type.beginning 847,875, but FY2024 labels that figure measure 'cash'. 847,875 is net position (it includes certificates of deposit 31,311); printed cash is 816,564. This is an FY2024 labelling inconsistency, not an FY2023 value error."},
+    {"severity": "warning", "path": "ending_cash", "page": 1,
+     "extracted": null, "on_page": "cash lines printed by row only (p1: 208,684 / 264,858 CDs / 9,122 / restricted 533,864 / 3,940; p4 Total column 742,548 / 264,858 / 13,062; deficit cash liability 1,197,246); no total cash line and no prior-year comparative column",
+     "issue": "Null is consistent with the 2026-11-06 'cash is never derived' ruling. Clay_County_FY2023 fills ending_cash from TOTAL ASSETS (all cash), so the reports treat cash differently. Business-type cash is printed and filled (proprietary p10)."}
+  ]
+}

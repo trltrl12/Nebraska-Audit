@@ -1,0 +1,18 @@
+{
+  "stem": "Clearwater_FY2023",
+  "values_checked": 96,
+  "issues": [
+    {"severity": "warning", "path": "balance_sheet.equity[0].amount", "page": 3,
+     "extracted": 172885, "on_page": 172885,
+     "issue": "Re-read: the Total Governmental Funds column prints Restricted (Note 7) 172,885, while the fund columns show General 66,402, Street -, Economic Development -. 172,885 = 66,402 + 106,483, and 106,483 also prints on the Committed line, so the Total-column fund balance lines add to 587,126 against the printed total of 480,643. This is the report's own error and is correctly recorded in report_discrepancies; the p1 government-wide statement prints Restricted 66,402. It is listed only so the user sees the 106,483 balance-sheet gap."},
+    {"severity": "warning", "path": "detail[1].detail_category", "page": 4,
+     "extracted": "other state aid", "on_page": "Intergovernmental 88,934 (General); also detail[10] Street 75,435, detail[14] Economic Development 28,010",
+     "issue": "The Intergovernmental group (192,379) holds motor vehicle tax 65,435, sales and use tax 84,577, state aid 32,367 and a fire and rescue grant 10,000 (p2), split across funds in unprinted proportions. 'other state aid' is an assumption for each fund's piece."},
+    {"severity": "warning", "path": "receipts[7].category", "page": 2,
+     "extracted": "intergovernmental/state aid", "on_page": "Operating Grants and Contributions 6,525 (computed); Capital Grants and Contributions 124,829 (receipts[8]); business-type Capital grants 2,591,448 (receipts[13])",
+     "issue": "The grantor is not stated. These could be federal grants or private contributions, so the category is a judgment call (review notes are present)."},
+    {"severity": "warning", "path": "receipts[13].amount", "page": 6,
+     "extracted": 2591448, "on_page": "Capital grants 2,591,448; Loan payments, principal and interest (2,587,228)",
+     "issue": "One business-type receipt is 94% of utility receipts and is almost exactly offset by a loan payment (a grant or forgiveness paying off a loan). It is recorded as printed, but the user may want to confirm it should count as a receipt and a disbursement. There is no decision_needed entry."}
+  ]
+}
