@@ -1,0 +1,13 @@
+{
+  "stem": "Kenesaw_FY2023",
+  "values_checked": 168,
+  "issues": [
+    {"severity": "warning", "path": "detail[51].category", "page": 16, "extracted": "utilities", "on_page": "Garbage department Contracted services 94,643", "issue": "The statement counts the Garbage department in Public works (p5 General Fund Public works 94,643 = Garbage 94,643), and the statement line is recorded as streets/highways. The detail line uses utilities, so the detail function split does not tie to the statement's function. utilities (refuse) is defensible, but the two levels disagree."},
+    {"severity": "warning", "path": "disbursements[2].category", "page": 6, "extracted": "streets/highways", "on_page": "Public works 286,615", "issue": "Public works = Street Fund 191,972 + General Fund Garbage department 94,643 (refuse collection contract, p16). A third of it is refuse, so streets/highways is a judgment call."},
+    {"severity": "warning", "path": "disbursements[14].category", "page": 8, "extracted": "other", "on_page": "Vehicle expense 6,613", "issue": "Utility cost-type line kept in other. There is no exact cost-type match (fuel/repairs mix), so this is defensible, but it is a judgment call."},
+    {"severity": "warning", "path": "detail[57].detail_category", "page": 11, "extracted": "highway allocation", "on_page": "Street Fund Intergovernmental 149,063", "issue": "The page prints only 'Intergovernmental'. Highway allocation is assumed from the Street Fund, and nothing on the page says so."},
+    {"severity": "warning", "path": "ending_cash", "page": 4, "extracted": 1171240, "on_page": "Cash and cash equivalents 1,161,851 + County treasurer cash 9,389", "issue": "Ending cash is a sum of two printed lines (marked computed, arithmetic correct). Kenesaw_FY2024 leaves ending_cash null for the same statement layout, and the 2026-11-06 ruling says cash is never derived. The two years treat this differently."},
+    {"severity": "warning", "path": "detail[56..69].budget_final", "page": 11, "extracted": "original budget", "on_page": "Budget (Original)", "issue": "The Street, Debt Service and CDA schedules print only an original budget column, but its value is stored in budget_final. The variance column header says 'Final Budget', which suggests original = final. The extraction notes this assumption."}
+  ],
+  "year_link": "FY2023 ending fund balance 1,243,702 = Kenesaw_FY2024 beginning_fund_balance 1,243,702; business_type ending net position 1,196,337 = FY2024 business_type.beginning 1,196,337. Ties as printed."
+}

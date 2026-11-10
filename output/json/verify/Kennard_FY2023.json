@@ -1,0 +1,100 @@
+{
+  "stem": "Kennard_FY2023",
+  "values_checked": 152,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "detail[39..55]",
+      "page": 15,
+      "extracted": "Water/Sewer detail taken from the proprietary statement fund columns (p6), with budget_final copied from the budgetary schedules",
+      "on_page": "Water Fund and Sewer Fund Budgetary Comparison Schedules (pp15-16) print their own lines: Water - Charges for services 142,939; Investment earnings 20; Miscellaneous 17,753; Personal services 11,063; Contractual and professional services 56,061; Repairs and maintenance 52,689; Other supplies and expenses 17,237; Debt service 38,130; Capital outlay 63,281; totals 160,712 / 238,461. Sewer - Charges for services 88,655; Investment earnings 1,382; Personal services 9,290; Contractual and professional services 22,195; Repairs and maintenance 3,002; Other supplies and expenses 20,202; Debt service 28,392; totals 90,037 / 83,081",
+      "issue": "Detail must come from the supplementary schedules, recorded line by line as printed. Each utility fund's budget schedule lines (operating, debt service, capital; actual and budget) belong in detail. The JSON instead holds statement lines with statement labels ('Contractual services', 'Other operating revenues', 'Interest and investment revenue', Depreciation, Interest expense) that are not on the schedules, combined with the schedules' budget figures. Fix: replace detail[39..55] with the p15/p16 schedule lines as printed, including the schedule labels.",
+      "resolved": "Water/Sewer detail replaced from p15/p16 schedules 2026-11-10"
+    },
+    {
+      "severity": "error",
+      "path": "missing",
+      "page": 15,
+      "extracted": null,
+      "on_page": "Water Fund schedule: Capital outlay 63,281 (budget 200,000); Debt service 38,130 (budget 38,115)",
+      "issue": "Printed schedule lines are missing from detail. The notes say they were left out 'to avoid mixing bases', but the as-printed rule requires them.",
+      "resolved": "Water/Sewer detail replaced from p15/p16 schedules 2026-11-10"
+    },
+    {
+      "severity": "error",
+      "path": "missing",
+      "page": 16,
+      "extracted": null,
+      "on_page": "Sewer Fund schedule: Debt service 28,392 (budget 28,392)",
+      "issue": "Printed schedule line is missing from detail. detail[55] Interest expense 19,235 (statement p6) stands in for it but is not this line.",
+      "resolved": "Water/Sewer detail replaced from p15/p16 schedules 2026-11-10"
+    },
+    {
+      "severity": "error",
+      "path": "detail_totals[11].amount",
+      "page": 15,
+      "extracted": 162518,
+      "on_page": "Water Fund Total expenditures 238,461 (p15)",
+      "issue": "The expenditure total is computed from statement lines (operating expenses 159,388 + interest 3,130, as printed on p2) instead of the schedule's printed total 238,461. After the fix it should be 238,461 from p15.",
+      "resolved": "Water/Sewer detail replaced from p15/p16 schedules 2026-11-10"
+    },
+    {
+      "severity": "error",
+      "path": "detail_totals[13].amount",
+      "page": 16,
+      "extracted": 102261,
+      "on_page": "Sewer Fund Total expenditures 83,081 (p16)",
+      "issue": "Same problem: the schedule prints 83,081, and the JSON uses statement expenses 102,261 (from p2). Should be 83,081 from p16.",
+      "resolved": "Water/Sewer detail replaced from p15/p16 schedules 2026-11-10"
+    },
+    {
+      "severity": "warning",
+      "path": "detail_totals[10]",
+      "page": 15,
+      "extracted": "computed: total operating revenues 160,692 + interest 20",
+      "on_page": "Total revenues 160,712 (p15)",
+      "issue": "The amount is right, but it is printed on p15, so it doesn't need to be marked computed. The same applies to detail_totals[12] (90,037, p16)."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[5].category",
+      "page": 4,
+      "extracted": "other",
+      "on_page": "Miscellaneous 41,515",
+      "issue": "On the Statement of Activities (p2), 28,555 of this line (Cemetery Fund Miscellaneous 28,741) counts as Cemetery operating grants and contributions and 50 as Public safety operating grants; only 12,910 is general-revenue Miscellaneous. The printed label is Miscellaneous, so other is defensible, but the report shows that most of the line is grants/contributions (grantor not stated)."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[29].category",
+      "page": 12,
+      "extracted": "other",
+      "on_page": "Cemetery Fund Miscellaneous 28,741",
+      "issue": "The Statement of Activities (p2) shows 28,555 of it as Cemetery operating grants and contributions. That points to donations/contributions or grants, but the grantor is not printed."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[38].category",
+      "page": 14,
+      "extracted": "other",
+      "on_page": "Keno Fund Miscellaneous 7,376",
+      "issue": "This is the only receipt line of the Keno Fund (balance restricted for community betterment). It is probably keno proceeds (keno/lottery). It is kept as other per the as-printed label, but this is a judgment call."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[20].category",
+      "page": 11,
+      "extracted": "charges for services/fees",
+      "on_page": "Auditorium & Park Fund Charges for services 5,800",
+      "issue": "These may be auditorium rentals or park fees (Rentals / Recreation Fees). The page doesn't say, so this is a judgment call."
+    },
+    {
+      "severity": "warning",
+      "path": "beginning_cash",
+      "page": 3,
+      "extracted": 111700,
+      "on_page": "2022 Total Governmental Funds cash and cash equivalents 111,700; investments 48,159",
+      "issue": "Correct as printed (comparative column). Kennard_FY2024 has beginning_cash null although FY2023 ending_cash is 111,368 and ending_investments 48,290, so the years are linked only on fund balance."
+    }
+  ],
+  "year_link": "FY2023 ending fund balance 163,066 = Kennard_FY2024 beginning_fund_balance 163,066; business_type ending net position 937,127 = FY2024 business_type.beginning 937,127. Ties as printed."
+}
