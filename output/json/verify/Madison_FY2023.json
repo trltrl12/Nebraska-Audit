@@ -1,0 +1,18 @@
+{
+  "stem": "Madison_FY2023",
+  "values_checked": 201,
+  "issues": [
+    {"severity": "warning", "path": "receipts[7].category", "page": 5,
+     "extracted": "charges for services/fees", "on_page": "Charges for services 90,733 = Rescue 56,888 + Park 14,216 + Pool 19,619 (p11) + Nursing Home 10 (p5)",
+     "issue": "Ambulance fees are 62.7% of the line; the 'dominant category' rule would make it Ambulance Fees. The detail lines use Ambulance Fees / Recreation Fees. Madison_FY2024 handles it the same way (charges for services)."},
+    {"severity": "warning", "path": "receipts[8].category", "page": 5,
+     "extracted": "donations/contributions", "on_page": "Grants and contributions 1,224,420; SoA p2-3 shows Capital Grants and Contributions 1,193,663 (general government) + Operating Grants and Contributions 30,757",
+     "issue": "36% of governmental receipts. Mostly capital grants, but no grantor is printed; under the 2026-11-06 mixed-label ruling it stays one line with its category. donations/contributions is a judgment call (also detail[5], [25], [32])."},
+    {"severity": "warning", "path": "ending_cash", "page": 4,
+     "extracted": 1118930, "on_page": "Cash and cash equivalents 1,080,008 + County treasurer cash 38,922 = Total assets 1,118,930",
+     "issue": "ending_cash is the funds balance sheet Total assets (all cash lines; marked computed). The amount is right but it equals fund balance; check it against the 2026-11-06 'cash never derived' ruling."},
+    {"severity": "warning", "path": "receipts[13].category", "page": 7,
+     "extracted": "charges for services/fees", "on_page": "Other revenue 37,939 (operating; included in Total operating revenues 6,729,711 = SoA Charges for Services p2)",
+     "issue": "Correct under the 2026-11-06 utility 'Other revenue' rule (the SoA charges column ties). However, Madison_FY2024 puts its proprietary 'Other revenue' 90,798 in other, so the two years differ."}
+  ]
+}
