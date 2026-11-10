@@ -1,0 +1,10 @@
+{
+  "stem": "Emerson_FY2023",
+  "values_checked": 168,
+  "issues": [
+    {"severity": "warning", "path": "receipts[16].split_from", "page": 6, "extracted": "Donations and Grants 2,684 (p10) + Miscellaneous Income 6", "on_page": "Miscellaneous Income: Enterprise Fund 2,684, Debt Service Fund 6, Total 2,690 (p6); p10 prints the Enterprise 2,684 as 'Donations and Grants'", "issue": "The statement line is split by its fund columns, and the 2,684 piece takes the p10 label. Both amounts are printed and add up exactly, so this is defensible. But the rules say statement receipts come from the Total column and are not split by fund column, except tax-type pieces. A person should confirm whether to keep one line, Miscellaneous Income 2,690."},
+    {"severity": "warning", "path": "receipts[16].category", "page": 10, "extracted": "donations/contributions", "on_page": "Donations and Grants 2,684", "issue": "Mixed label (donations and grants). Under the 2026-11-06 ruling it stays as one line with a single category, but government grants would be a different category. Same for detail[46]."},
+    {"severity": "warning", "path": "receipts[15].category", "page": 6, "extracted": "other", "on_page": "Meter deposits collected, net of refunds 1,289", "issue": "This is a context label in config/category_decisions.csv (Deposits). The page shows these are utility customer deposits net of refunds (cash flow statement p7: receipts 9,874 / refunds 8,585 of customer utility deposits). The context check may assign Deposits. Same for detail[45]."},
+    {"severity": "warning", "path": "disbursements[11].category", "page": 6, "extracted": "Fuel", "on_page": "Vehicle Expense 1,388", "issue": "The page doesn't say whether vehicle expense is fuel or repairs. Fuel is a judgment call (already marked review). Same for detail[84..86]."}
+  ]
+}
