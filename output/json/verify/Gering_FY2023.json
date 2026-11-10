@@ -1,0 +1,79 @@
+{
+  "stem": "Gering_FY2023",
+  "values_checked": 198,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "detail[7].category",
+      "page": 16,
+      "extracted": "other / miscellaneous revenue",
+      "on_page": "Keno Fund budget schedule: Local 1,906,958 (the only revenue line of the Keno Fund; funds statement p7 shows the Keno Fund's revenue as charges for services 1,835,333 + interest 43,239)",
+      "issue": "Under the extractor rules a broad 'Local' line goes to the category that is more than half of it. Here that is keno receipts (about 98% of the Keno Fund's revenue), so it should be keno/lottery, not other. 'Local' is also a context label, so the context check may settle it.",
+      "resolved": "context label \"Local\": left for the context check (user rule 2026-11-05); evidence kept"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[3].category",
+      "page": 8,
+      "extracted": "charges for services/fees",
+      "on_page": "Charges for services 2,376,639 (Keno Fund column 1,835,333 = 77%)",
+      "issue": "Most of this line is the Keno Fund's charges for services (keno proceeds). The dominant-category rule would make it keno/lottery, but the statement never says 'keno', so this is left as a judgment call."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[11].category",
+      "page": 17,
+      "extracted": "other",
+      "on_page": "Streets Fund Local 568,825",
+      "issue": "On the GAAP statement (p7) the Street Fund's non-tax local revenue is mostly sales tax 436,745 (plus interest 61,296). The budget-basis 'Local' line may be mostly sales tax, but no breakdown is printed, so it is left in other. Context label."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[24].category",
+      "page": 20,
+      "extracted": "intergovernmental/state aid (detail_category federal grants)",
+      "on_page": "CDBG Fund: Intergovernmental and grants 134,598",
+      "issue": "category and detail_category disagree (state aid vs federal grants). This is a mixed label kept with one category under the 2026-11-06 ruling."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[3].amount",
+      "page": 15,
+      "extracted": 1148971,
+      "on_page": "General government actual reads 1,148,971; final budget 1,195,052, variance 46,080",
+      "issue": "Re-read for the claimed $1 gap (report_discrepancies[0]). At this scan resolution the digit reads ...971, but the variance column (1,195,052 - 46,080 = 1,148,972) and the printed total 5,148,748 both point to 1,148,972. The last digit is uncertain, so the gap may be a misread rather than a fault in the report."
+    },
+    {
+      "severity": "warning",
+      "path": "report_discrepancies[1]",
+      "page": 19,
+      "extracted": "Downtown Development total revenues 507,303 vs lines 507,302",
+      "on_page": "Taxes 481,310; Local 25,992; Total 507,303; excess 162,136; variances 121,310 / (43,608) / total 77,703",
+      "issue": "Re-read confirms a real gap in the report: 162,136 (= 507,302 - 345,166) and the line variances back the lines, while the total revenue row and its variance (77,703) are 1 higher. Recorded correctly."
+    },
+    {
+      "severity": "warning",
+      "path": "report_discrepancies",
+      "page": 21,
+      "extracted": "only p6 vs p8 fund-balance gap recorded",
+      "on_page": "Nonmajor combining p21: Other revenue 60,620, total revenues 2,237,404, net change (373,357), beginning 6,067,621, ending 5,694,264; funds statement p8 nonmajor column: 60,617 / 2,237,401 / (373,361) / 6,067,624 / 5,694,263; p8 nonmajor lines net to (373,360); p8 fund-column net changes sum to 520,902 vs Total 520,903; p2 governmental net position 32,583,790 vs p4 32,583,791",
+      "issue": "Re-read confirms report_discrepancies[2] (p6 12,923,132 / nonmajor 5,694,266 vs p8 12,923,130 / 5,694,263). The other $1-$4 gaps listed here, between the combining statement and the funds statement and inside p8, are not in report_discrepancies. The p2-vs-p4 net position gap is only in the notes."
+    },
+    {
+      "severity": "warning",
+      "path": "ending_fund_balance",
+      "page": 8,
+      "extracted": 12923130,
+      "on_page": "p8 12,923,130; p6 balance sheet 12,923,132; FY2024 beginning_fund_balance 12,923,132",
+      "issue": "Year tie: FY2023 ending (p8) does not equal FY2024 beginning (12,923,132, taken from the balance-sheet figure). The $2 gap is the report's own p6/p8 difference; no restatement explains it. FY2024 also adds an error correction of 3,697,718 after that figure. Left as printed."
+    },
+    {
+      "severity": "warning",
+      "path": "proprietary.ending_cash",
+      "page": 14,
+      "extracted": 8480487,
+      "on_page": "Cash & restricted cash, end of year 8,480,487 (Totals)",
+      "issue": "Year tie: FY2024 JSON proprietary.beginning_cash is 21,215,248, so it does not tie to the FY2023 printed 8,480,487. The FY2023 figure is correct as printed. The FY2024 statement likely uses a different cash definition (cash and investments); check the FY2024 page."
+    }
+  ]
+}
