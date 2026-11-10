@@ -1,0 +1,9 @@
+{
+  "stem": "Palisade_FY2023",
+  "values_checked": 76,
+  "issues": [
+    {"severity": "warning", "path": "ending_cash", "page": 1, "extracted": 75841.65, "on_page": "Line 26 Net Cash Balance, governmental funds: General 51,310.14 + Street 27.55 + CDBG 3,731.26 = 55,068.95; line 27 Investments: General 20,772.70", "issue": "ending_cash holds the line 28 subtotal (cash + investments), not the printed cash 55,068.95, and ending_investments 20,772.70 is also filled ('informational, already inside ending_cash'). Any sum of cash + investments would count 20,772.70 twice. The same applies to beginning_cash 159,416.69 (printed cash 139,247.71 + beginning_investments 20,168.98) and to business_type beginning/ending (measure 'cash', but includes Water investments 59,448.47 / 54,444.69). This matches the FY2024 convention and the roll-forward needs it, but it conflicts with the 2026-11-06 rule that cash is filled only as printed."},
+    {"severity": "warning", "path": "disbursements[2].category", "page": 2, "extracted": "streets/highways", "on_page": "Public Works - Other 22,345.90 (General Fund)", "issue": "The form keeps 'Public Works - Streets' (line 32) separate from 'Public Works - Other' (line 33), and this amount is General Fund money, not Street Fund. Calling it streets/highways is an assumption: nothing on the page names the function. The same applies to the matching detail line, detail[9]."},
+    {"severity": "warning", "path": "ending_cash", "page": 1, "extracted": 75841.65, "on_page": "County Treasurer Balance at October 1, 2022 $3,063.25; County Treasurer Balance at September 30, 2023 3,318.34 (printed below the Exhibit A grid)", "issue": "The county treasurer balances are printed but are not recorded as cash or as a balance-sheet asset. They sit outside the Exhibit A totals. The notes acknowledge the omission."}
+  ]
+}
