@@ -1,0 +1,22 @@
+{
+  "stem": "Fairbury_FY2023",
+  "values_checked": 322,
+  "issues": [
+    {"severity": "warning", "path": "disbursements[10].amount, disbursements[11].amount, detail[40], detail[41], other_financing", "page": 5,
+     "extracted": "Debt Service disbursements 5,113 (interest) and 32,316 (principal), outside_printed_total; detail section 'expenditure'; other_financing null",
+     "on_page": "Other financing sources (uses): Interest paid on long-term debt (5,113), Principal paid on long-term debt (32,316); Total other financing sources (uses) 44,606 (p6 Total col.; Landfill col. (37,429) p5; Sch 2 p12)",
+     "issue": "The report prints these two Landfill Fund payments in the Other financing sources (uses) section, not among expenditures. Under the user's printed-section rulings (2026-10-29 'as printed'; 2026-11-06 bond/loan proceeds follow the printed section), they belong in other_financing = -37,429 (computed: -5,113 - 32,316, p6), with detail[40]/[41] in section 'other financing' at -5,113 / -32,316. The governmental disbursements would then sum to the printed total 5,468,312. The roll-forward ties either way: 8,169,032 + 6,365,205 - 5,468,312 + 1,685,963 - 1,603,928 + 0 - 37,429 = 9,110,531 (p6). The current entry sums disbursements to 5,505,741 and also reaches 9,110,531. It follows the extractor's own outside_printed_total rule ('loan payments under Other Receipts (Disbursements)'). The budgetary Schedule 22 (p31) also counts them as Sanitation Landfill disbursements: 918,288 = 880,859 + 37,429. The rules conflict, so this is a warning and not an error. Recommend other_financing to follow the printed section. A person needs to settle the conflict, and decision_needed[] does not raise it."},
+    {"severity": "warning", "path": "receipts[21].category", "page": 6,
+     "extracted": "federal grants", "on_page": "Grants/awards 270,600",
+     "issue": "The report does not name the grantor (General 41,703, Landfill 3,634, Pool 9,449, Library 1,051, Grant Projects 'Grants' 214,763). 'federal grants' is a guess, and the same guess is used on detail[8], [25], the Pool and Library Grants/awards lines and the Grant Projects 'Grants' line. It is already marked review."},
+    {"severity": "warning", "path": "receipts[10].category", "page": 14,
+     "extracted": "motor vehicle tax", "on_page": "Intergovernmental revenues: Motor vehicle fees 39,942 (Street Fund)",
+     "issue": "This piece of the 'Intergovernmental revenues' row is classed as a tax. The Statement of Activities (p2) counts it in Intergovernmental, not in 'Motor vehicle taxes' 78,231. It could be intergovernmental/state aid. Defensible, and already marked review."},
+    {"severity": "warning", "path": "missing", "page": 31,
+     "extracted": "Read pages 1-31 of 31", "on_page": "Trim skips report pp43-47 (Schedules 7-9) and everything after report p63",
+     "issue": "All 31 trimmed pages are fully captured, and every per-fund schedule ties to the Exhibit E columns, so nothing on the trimmed pages is missing. The source pages that were not trimmed may hold utility (Light/Water/Sewer) expense schedules. Business-type detail is empty, so a re-trim check may be worthwhile. This cannot be verified from the trim."},
+    {"severity": "warning", "path": "ending_cash", "page": 4,
+     "extracted": 8625675, "on_page": "Total Governmental Funds 2023: Cash and cash equivalents 8,586,416 + Cash with county treasurer 39,259; Total fund balances 9,110,531",
+     "issue": "Cross-year check. The FY2023 figures are correct as printed. Fairbury_FY2024.json beginning_cash is 9,110,531, which is FY2023's ending fund balance, not its cash (8,625,675), and FY2024 beginning_fund_balance is null. That looks like an FY2024 entry treating fund balance as cash (2026-11-06 ruling), not an FY2023 problem. Business-type net position (21,429,287) and proprietary cash (11,353,234) match FY2024's beginning figures. No balances were changed."}
+  ]
+}
