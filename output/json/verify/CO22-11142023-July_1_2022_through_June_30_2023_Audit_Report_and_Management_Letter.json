@@ -1,0 +1,18 @@
+{
+  "stem": "CO22-11142023-July_1_2022_through_June_30_2023_Audit_Report_and_Management_Letter",
+  "values_checked": 176,
+  "issues": [
+    {"severity": "warning", "path": "detail[68].category", "page": 14,
+     "extracted": "lodging tax", "on_page": "Visitors' Promotion Fund - Taxes: Other 267,933",
+     "issue": "the row prints the tax as 'Other' and the extractor typed it lodging tax from the fund name. The rules say a printed tax-type label beats a fund name, so this is a judgment call. It is also inconsistent with receipts[3] 'Other' 920,799 (other taxes, unsplit), which includes this amount."},
+    {"severity": "warning", "path": "detail[93].category", "page": 17,
+     "extracted": "sales tax", "on_page": "Public Safety Sales Tax Fund - Taxes: Other 413,461",
+     "issue": "the row prints 'Other' and the extractor typed it sales tax from the fund name (same judgment call as detail[68]). The statement-level receipts[3] 'Other' 920,799 is not split the same way (104,644 GF + 81,502 Road + 267,933 Visitors + 53,259 E-911 + 413,461 Sales Tax = 920,799), so the statement and detail levels disagree."},
+    {"severity": "warning", "path": "detail[55].category", "page": 8,
+     "extracted": "other", "on_page": "Insurance Fund - Miscellaneous 688,034",
+     "issue": "Insurance (health and dental) fund receipts recorded as other. The Statement of Activities (p2) prints 'Insurance Reimbursements and Rebates 616,891' among general receipts, which likely sits mostly in this line. It cannot be tied exactly, so this is defensible, but reimbursements/refunds may fit better."},
+    {"severity": "warning", "path": "detail[85].category", "page": 16,
+     "extracted": "streets/highways", "on_page": "Juvenile Service Aid Fund - Public Works 66,848",
+     "issue": "the fund is juvenile services but the page prints the amount under Public Works, and the extractor kept it there (it has a review note). Same for detail[88], DCHD Covid 19 Activities Fund - Public Works 48,208. Kept as printed."}
+  ]
+}
