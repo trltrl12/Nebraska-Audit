@@ -1,0 +1,23 @@
+{
+  "stem": "Crawford_FY2023",
+  "values_checked": 113,
+  "issues": [
+    {"severity": "warning", "path": "ending_investments", "page": 4,
+     "extracted": null,
+     "on_page": "Certificates of Deposit 311,636 (Total Governmental Funds)",
+     "issue": "Investments are printed as their own asset line, so the field rule would allow ending_investments 311,636 (informational). Left null, consistent with Crawford_FY2024. Governmental cash null is correct: p4/p1 print no cash total (pooled cash, cash equivalents, county treasurer, CDs and restricted cash are separate lines; only TOTAL ASSETS 843,783), and no beginning cash is printed."},
+    {"severity": "warning", "path": "receipts[10].category", "page": 3,
+     "extracted": "other (Golf Fund 'Miscellaneous' 4,500)",
+     "on_page": "Statement of Activities p3: Golf capital grants and contributions 4,500; fund statement p8: operating revenue 'Miscellaneous' 4,500",
+     "issue": "The report itself shows this 4,500 as a capital contribution on p3; donations/contributions may fit better. 'Other' is allowed by the printed 'Miscellaneous' label."},
+    {"severity": "warning", "path": "disbursements[2].category", "page": 5,
+     "extracted": "streets/highways (Public Works 257,907)",
+     "on_page": "Public Works 257,907, General Fund; p2 Public Works charges for services 176,651; assigned fund balance 'Sanitation' 27,207",
+     "issue": "Generic Public Works in the General Fund, separate from Highways and Streets; it appears to include sanitation. Judgment call (extractor marked review)."},
+    {"severity": "warning", "path": "detail[17].detail_category", "page": 11,
+     "extracted": "other state aid (Streets Fund Intergovernmental 106,806)",
+     "on_page": "Intergovernmental 106,806 (Streets Special Revenue Fund)",
+     "issue": "Streets fund intergovernmental receipts are probably highway allocation, but the page doesn't say so; other state aid is defensible."}
+  ],
+  "fy2024_tie": "FY2023 ending governmental fund balance 843,783 equals Crawford_FY2024 beginning_fund_balance 843,783, and business-type ending net position 4,580,970 equals FY2024 business_type.beginning 4,580,970, as printed. Cash and investments null both years. No restatement."
+}
