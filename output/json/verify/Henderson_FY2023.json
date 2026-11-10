@@ -1,0 +1,52 @@
+{
+  "stem": "Henderson_FY2023",
+  "values_checked": 126,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "detail[34]",
+      "page": 10,
+      "extracted": {
+        "section": "expenditure",
+        "amount": 160000,
+        "outside_printed_total": true,
+        "printed_in": "other financing"
+      },
+      "on_page": "OTHER FINANCING SOURCES (USES): Debt service (160,000); Total other financing sources (160,000)",
+      "issue": "printed under Other Financing Sources (Uses), so by the printed-section rule it must not be a disbursement line marked outside_printed_total. Fix: section 'other financing', amount -160000 (category null), and add detail_totals {schedule 'Budget and Actual - Budgetary Basis - Proprietary Fund', fund 'Enterprise Fund', section 'other financing', amount -160000, source_page 10}.",
+      "resolved": "moved to other financing -160,000 (printed section) 2026-11-10"
+    },
+    {
+      "severity": "warning",
+      "path": "report_discrepancies[0]",
+      "page": 4,
+      "extracted": "Total receipts 1,506,284 vs lines 1,506,283",
+      "on_page": "Total Governmental column: Taxes 852,714 (fund columns 560,234+30,211+262,270 = 852,715) and Interest income 13,949 (13,490+460 = 13,950); printed Total receipts 1,506,284 = 989,330+229,862+287,092",
+      "issue": "Re-read every digit: the 1.00 is the report's own rounding, not a misread. The Total-column lines (as printed, also on SoA p2) add to 1,506,283 against a printed 1,506,284. It is in report_discrepancies, so it's correct. The note leaves out that the interest line (13,949 vs 13,950) also differs."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[15].category",
+      "page": 4,
+      "extracted": "Ambulance Fees (Ambulance 27,828)",
+      "on_page": "Special Revenue 'Ambulance' 27,828 = p8 Ambulance 18,128 + Interest income 473 + Other 9,227",
+      "issue": "the p8 schedule shows 9,700 of the line isn't ambulance fees. Keeping it whole is allowed under as-printed. A split_from would follow the exact printed breakdown."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[7].debt_service_part",
+      "page": 9,
+      "extracted": "interest (Other 2,851)",
+      "on_page": "Debt Service Fund disbursements: Other 2,851",
+      "issue": "the page doesn't say what 'Other' is. Recording it as interest/fees is an assumption (also detail[33])."
+    },
+    {
+      "severity": "warning",
+      "path": "balance_sheet.assets",
+      "page": 3,
+      "extracted": "governmental lines sum 1,417,401; business-type lines sum 171,703",
+      "on_page": "Total assets 1,417,402 (p3, p1); 171,702 (p1, p5)",
+      "issue": "the report's own $1 footing differences (p1 prints Cash-restricted 776,458 / Unrestricted 632,937 vs p3 776,457 / 632,936). Already in report_discrepancies; listed only so it's visible."
+    }
+  ]
+}

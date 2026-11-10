@@ -1,0 +1,18 @@
+{
+  "stem": "Hemingford_FY2023",
+  "values_checked": 120,
+  "issues": [
+    {"severity": "warning", "path": "receipts[10].category", "page": 5,
+     "extracted": "other (Miscellaneous 151,387)", "on_page": "Miscellaneous 151,387 = General Fund 138,312 + Debt Service Fund 13,075; p10 prints the Debt Service 13,075 as 'Keno Proceeds'",
+     "issue": "13,075 of the statement Miscellaneous line is printed keno money (fund column ties exactly to p10 Keno Proceeds). Kept whole as other; defensible since keno is under half the line and the printed label is Miscellaneous, but a split_from (138,312 other + 13,075 keno/lottery) is supported by the printed breakdown."},
+    {"severity": "warning", "path": "receipts[9].category", "page": 5,
+     "extracted": "intergovernmental/state aid", "on_page": "Grants 500 (SoA p2: General Government capital receipts and contributions)",
+     "issue": "grantor not printed; state aid is a guess (2026-11-06: do not guess a grantor). Same for detail[7] (detail_category 'other state aid')."},
+    {"severity": "warning", "path": "disbursements[11].category", "page": 7,
+     "extracted": "Operating", "on_page": "General Operating Expenses 381,133",
+     "issue": "utility cost-type rule says operating-expense lines of utility funds stay 'utilities'; 'Operating' is for lines that would otherwise be other. Judgment call."},
+    {"severity": "warning", "path": "balance_sheet.liabilities[3].category", "page": 1,
+     "extracted": "debt - due in more than one year", "on_page": "Line of Credit 155,597 (no current/noncurrent split printed)",
+     "issue": "maturity not printed; a line of credit may be current. Assumption."}
+  ]
+}
