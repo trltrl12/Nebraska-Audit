@@ -1,0 +1,144 @@
+{
+  "stem": "Hershey_FY2023",
+  "values_checked": 118,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "receipts[11].amount",
+      "page": 4,
+      "extracted": 5768,
+      "on_page": "Interest income 5,768 (General 3,325, Street 1,455, Keno 988) printed under OTHER FINANCING SOURCES (USES), below TOTAL RECEIPTS 271,681",
+      "issue": "Printed-section rule: amount printed under Other Financing Sources (Uses) must go in other_financing, not a receipt line marked outside_printed_total. Fix: remove this receipt line; other_financing = 5,768 - 95,000 - 20,677 = -109,909 (computed), which with debt_proceeds 213,829 forms the printed TOTAL OTHER FINANCING SOURCES (USES) 103,920.",
+      "resolved": "moved to other_financing / other financing section (printed section) 2026-11-10"
+    },
+    {
+      "severity": "error",
+      "path": "disbursements[7].amount",
+      "page": 4,
+      "extracted": 95000,
+      "on_page": "Bond payment - principal (95,000) (Street column) printed under OTHER FINANCING SOURCES (USES), below TOTAL DISBURSEMENTS 559,142",
+      "issue": "Printed under Other Financing Sources (Uses): belongs in other_financing (part of -109,909), not a disbursement line marked outside_printed_total.",
+      "resolved": "moved to other_financing / other financing section (printed section) 2026-11-10"
+    },
+    {
+      "severity": "error",
+      "path": "disbursements[8].amount",
+      "page": 4,
+      "extracted": 20677,
+      "on_page": "Bond payment - interest and fees (20,677) (Street column) printed under OTHER FINANCING SOURCES (USES)",
+      "issue": "Printed under Other Financing Sources (Uses): belongs in other_financing (part of -109,909), not a disbursement line marked outside_printed_total.",
+      "resolved": "moved to other_financing / other financing section (printed section) 2026-11-10"
+    },
+    {
+      "severity": "error",
+      "path": "other_financing",
+      "page": 4,
+      "extracted": null,
+      "on_page": "TOTAL OTHER FINANCING SOURCES (USES) 103,920 = Bond proceeds 213,829 + Bond payment - principal (95,000) + Bond payment - interest and fees (20,677) + Interest income 5,768",
+      "issue": "other_financing should be -109,909 (computed: interest income 5,768 - bond principal 95,000 - bond interest and fees 20,677, p4); debt_proceeds 213,829 is correct. Identity after the fix: 368,474 + 271,680 - 559,143 + 213,829 - 109,909 = 184,931 vs printed 184,933 (the $2 is the report's own Street receipts and Public safety cross-foot gaps, already in report_discrepancies).",
+      "resolved": "moved to other_financing / other financing section (printed section) 2026-11-10"
+    },
+    {
+      "severity": "error",
+      "path": "detail[9].section",
+      "page": 4,
+      "extracted": "revenue (General Fund Interest income 3,325, outside_printed_total)",
+      "on_page": "Interest income 3,325 under OTHER FINANCING SOURCES (USES), General column",
+      "issue": "Should be section 'other financing' (+3,325), as the page prints it.",
+      "resolved": "moved to other_financing / other financing section (printed section) 2026-11-10"
+    },
+    {
+      "severity": "error",
+      "path": "detail[17].section",
+      "page": 4,
+      "extracted": "revenue (Street Fund Interest income 1,455, outside_printed_total)",
+      "on_page": "Interest income 1,455 under OTHER FINANCING SOURCES (USES), Street column",
+      "issue": "Should be section 'other financing' (+1,455).",
+      "resolved": "moved to other_financing / other financing section (printed section) 2026-11-10"
+    },
+    {
+      "severity": "error",
+      "path": "detail[26].section",
+      "page": 4,
+      "extracted": "revenue (Keno Fund Interest income 988, outside_printed_total)",
+      "on_page": "Interest income 988 under OTHER FINANCING SOURCES (USES), Keno column",
+      "issue": "Should be section 'other financing' (+988).",
+      "resolved": "moved to other_financing / other financing section (printed section) 2026-11-10"
+    },
+    {
+      "severity": "error",
+      "path": "detail[24].section",
+      "page": 4,
+      "extracted": "expenditure 95,000 (Street Fund Bond payment - principal, outside_printed_total)",
+      "on_page": "Bond payment - principal (95,000) under OTHER FINANCING SOURCES (USES), Street column",
+      "issue": "Should be section 'other financing' with signed amount -95,000 (Street TOTAL OTHER FINANCING 99,607 = 213,829 - 95,000 - 20,677 + 1,455).",
+      "resolved": "moved to other_financing / other financing section (printed section) 2026-11-10"
+    },
+    {
+      "severity": "error",
+      "path": "detail[25].section",
+      "page": 4,
+      "extracted": "expenditure 20,677 (Street Fund Bond payment - interest and fees, outside_printed_total)",
+      "on_page": "Bond payment - interest and fees (20,677) under OTHER FINANCING SOURCES (USES), Street column",
+      "issue": "Should be section 'other financing' with signed amount -20,677.",
+      "resolved": "moved to other_financing / other financing section (printed section) 2026-11-10"
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[11]",
+      "page": 6,
+      "extracted": "business-type Interest income 1,964, Property tax receipts - Water Bond 54,440, Bond payment - principal 30,000, Bond payment - interest and fees 17,965, Capital outlay 202,169 as receipt/disbursement lines marked outside_printed_total (receipts[16], receipts[17], disbursements[11], disbursements[12], disbursements[13])",
+      "on_page": "Printed under 'OTHER RECEIPTS (DISBURSEMENTS)' (TOTAL (193,730)), not under 'Other Financing Sources (Uses)'; same heading on p11; the p7 cash flow statement puts the property tax, bond payments and capital outlay in capital and related financing",
+      "issue": "Heading is not Other Financing Sources (Uses), so the outside_printed_total treatment is defensible; flagging for consistency with the governmental fix. If treated as financing, business_type.other_financing would be -193,730 (printed total)."
+    },
+    {
+      "severity": "warning",
+      "path": "report_discrepancies",
+      "page": 6,
+      "extracted": "p6/p7/p8/p11 proprietary cross-foot gaps not recorded (only p8 beginning 891,741 vs 891,740 is)",
+      "on_page": "p6 & p11 Charge for services 160,018 + 118,177 + 139,472 = 417,667 vs Total 417,666; Personnel 36,212 + 36,310 + 18,642 = 91,164 vs 91,163; fund TOTAL RECEIPTS 160,572 + 118,177 + 156,291 = 435,040 vs 435,039; TOTAL DISBURSEMENTS 155,782 + 82,102 + 149,177 = 387,061 vs 387,060; Sanitation net change 156,291 - 149,177 + 492 = 7,606 vs printed 7,605; beginning cells 570,765 + 122,044 + 198,932 = 891,741 vs 891,740. p7 Cash received from customers 160,462 + 118,177 + 155,312 = 433,951 vs 433,950; p8 Water 570,764 - 190,373 = 380,391 vs 380,392, Sanitation 198,933 + 7,605 = 206,538 vs 206,537. p1 Total column TOTAL ASSETS 930,924 + 10,148 = 941,072 vs printed 941,071",
+      "issue": "Re-read digits: all printed as stated; the report itself doesn't add up by $1 in these places. Values were recorded correctly from the Total column (business-type lines tie to printed totals), but the gaps should be listed in report_discrepancies. The governmental $1 gaps (p4 Street receipts 137,048 vs 137,049, General disbursements 154,877 vs 154,878, Street disbursements 404,265 vs 404,264, Public safety 5,204 + 5,204 vs 10,409; p1 governmental total assets 184,935; p3 General 140,741 vs p4 140,740) were re-read and are genuine report gaps, correctly recorded."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[13].category",
+      "page": 6,
+      "extracted": "other",
+      "on_page": "Customer Deposits 444 (Water)",
+      "issue": "Label isn't other/miscellaneous; 'Deposits' is a context label (category_decisions) and needs a page-based context decision or review; customer deposits are refundable, not revenue. Same for detail[28]."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[14].category",
+      "page": 6,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "Grants 15,840 (Sanitation); p2 Operating Grants and Contributions; p9 budget 'Grants, donations and misc.'",
+      "issue": "Grantor not printed; state aid is an assumption (federal grants or donations equally possible). Same for detail[42]."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[10].category",
+      "page": 6,
+      "extracted": "utilities",
+      "on_page": "General operating 295,897",
+      "issue": "Utility cost-type rule (2026-10-28) / 'Operating' rule (2026-10-29) may call for category Operating with function utilities rather than utilities; judgment call. Same for detail[33], detail[40], detail[46]."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[13].computed",
+      "page": 6,
+      "extracted": "Capital Outlay: Utilities, no computed",
+      "on_page": "Capital outlay (202,169), Water column only",
+      "issue": "Function taken from the Water fund column; the governmental capital outlay line carries computed for this, the business-type one (and detail[36]) does not."
+    },
+    {
+      "severity": "warning",
+      "path": "balance_sheet.assets",
+      "page": 3,
+      "extracted": "governmental lines from the Statement of Net Position p1 (Cash 179,359, Cash at County Treasurer 5,575, Restricted 6,097, Unrestricted 178,837)",
+      "on_page": "p3 governmental funds statement: Cash and cash equivalents 179,359, Cash with County Treasurer 5,575, Restricted 6,097, Unassigned 178,837, total 184,934 (= p1 net position 184,934)",
+      "issue": "Balance-sheet basis rule (2026-10-27) prefers the governmental funds statement where its totals equal the government-wide figures; amounts are identical, only labels differ ('Unassigned' vs 'Unrestricted', 'Cash with County Treasurer')."
+    }
+  ],
+  "year_tie": "FY2023 ending fund balance 184,933 = Hershey_FY2024 beginning_fund_balance 184,933; business-type ending 745,989 = FY2024 business_type.beginning 745,989. Ties as printed."
+}
