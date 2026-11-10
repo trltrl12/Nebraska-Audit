@@ -1,0 +1,25 @@
+{
+  "stem": "Hall_County_FY2023",
+  "values_checked": 343,
+  "fy2024_check": "FY2023 ending fund balance 39,877,442 equals Hall_County_FY2024 beginning_fund_balance 39,877,442 as printed. Cash fields are null in both years (no single cash balance is printed).",
+  "issues": [
+    {"severity": "warning", "path": "receipts[21].category", "page": 3,
+     "extracted": "other", "on_page": "Other 13,885,533 (General 3,725,944; Inheritance 1,819,259; Road 222,445; Insurance 5,005,508; Other Governmental 3,112,377)",
+     "issue": "27% of governmental receipts are in 'other'. The fund schedules (pp4, 6-10) print what the line is made of: fees of office about 2.9M, inheritance tax 1,744,270, Insurance Fund interfund premiums 5,005,508, lottery 994,361, commissary 507,331, gaming tax 327,882, 911 surcharges 166,774, and more. No single category is more than half, so 'other' with review follows the rules. However, the State line was split from the same schedules and this line was not, so the treatment is inconsistent."},
+    {"severity": "warning", "path": "disbursements[7].category", "page": 3,
+     "extracted": "general government", "on_page": "Miscellaneous General 3,263,296",
+     "issue": "On the p11 department schedule this equals the sum of every 'Misc.' column: General Government 1,500,562 + Public Safety 804,980 + Public Works 167,515 + Public Welfare 104,998 + Culture 37,500 + Public Health 647,741 = 3,263,296. It is a mixed line, and general government is only 46% of it."},
+    {"severity": "warning", "path": "detail[182].category", "page": 9,
+     "extracted": "Operating", "on_page": "Special Revenue: Operating Expense 37,327",
+     "issue": "The statement (p3) nonmajor Public Safety 1,212,250 minus Drug Court 265,701, Drug Enforcement 7,200, Inmate Welfare 741,022 and Emergency Management 161,000 leaves exactly 37,327. This suggests the statement counts the line as public safety. 'Operating' (no printed function) is defensible."},
+    {"severity": "warning", "path": "detail[137]", "page": 6,
+     "extracted": "Interest Income 185,333 + Other Receipts 74,989 (split_from 'Other Receipts 260,322')", "on_page": "Inheritance Fund Other Receipts 260,322, budget 82,797 (p6); statement p3 Inheritance Interest Income 185,333",
+     "issue": "The split rests on the statement column's Interest Income cell, which is printed. The remainder 74,989 is computed and correctly marked. The printed budget 82,797 is dropped from both pieces (budget_final null). Acceptable, but it is an extractor assumption."},
+    {"severity": "warning", "path": "detail[198].category", "page": 9,
+     "extracted": "charges for services/fees", "on_page": "Noxious Weed: Weed Spraying Assessment 66,200",
+     "issue": "It is an 'assessment' for spraying done for landowners. Charges for services is defensible, but special assessments is also possible."},
+    {"severity": "warning", "path": "decision_needed", "page": 9,
+     "extracted": null, "on_page": "Sick & Vacation Fund Interfund Transfers (out) 59,076",
+     "issue": "This is a one-sided transfer. No fund records a matching transfer in, and the statement (p3) counts the 59,076 as a disbursement (nonmajor transfers out 612,832 vs combining schedule 671,908). It is listed in report_discrepancies, but decision_needed lacks the question of whether it is spending or a transfer."}
+  ]
+}

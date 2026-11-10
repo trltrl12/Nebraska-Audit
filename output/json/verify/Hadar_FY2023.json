@@ -1,0 +1,19 @@
+{
+  "stem": "Hadar_FY2023",
+  "values_checked": 54,
+  "fy2024_check": "FY2023 ending cash 423,388.67 and ending investments 128,320.70 equal Hadar_FY2024 beginning_cash 423,388.67 and beginning_investments 128,320.70 as printed; no restatement needed.",
+  "issues": [
+    {"severity": "warning", "path": "disbursements[7].fund_type", "page": 3,
+     "extracted": "governmental", "on_page": "Line 47 Wastewater 10,717.27, printed under 'Business-Type Activities' but in the GENERAL FUND column",
+     "issue": "The line is printed under the business-type heading but sits in the General Fund column, and there is no separate utility fund. Keeping it governmental is defensible but is a judgment call (detail[11] is the same)."},
+    {"severity": "warning", "path": "receipts[4].category", "page": 1,
+     "extracted": "intergovernmental/state aid", "on_page": "State Receipts: Other 130,307.28 (General Fund)",
+     "issue": "This is a large unexplained line (35% of governmental receipts excluding transfers) with no breakdown printed. 'State aid' follows the label, but the source (for example ARPA or another pass-through grant) cannot be confirmed from the trim."},
+    {"severity": "warning", "path": "detail[18].detail_category", "page": 3,
+     "extracted": "construction/infrastructure", "on_page": "Capital Improvements 60,674.94 (Street Fund)",
+     "issue": "No object breakdown is printed. 'not itemized' would match how 'Other Capital Outlay' (detail[19]) was treated, though 'Capital Improvements' can be read as naming the object."},
+    {"severity": "warning", "path": "balance_sheet.assets", "page": 1,
+     "extracted": null, "on_page": "County Treasurer Balance at October 1, 2022 1,038.50; at September 30, 2023 3,053.89",
+     "issue": "County treasurer cash is printed below the statement and is not in lines 26-28 or the roll-forward. It is not recorded anywhere except the notes. Kept out of the totals as printed."}
+  ]
+}
