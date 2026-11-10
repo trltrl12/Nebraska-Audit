@@ -1,0 +1,27 @@
+{
+  "stem": "Ogallala_FY2023",
+  "values_checked": 410,
+  "issues": [
+    {"severity": "warning", "path": "receipts[5].category", "page": 5,
+     "extracted": "intergovernmental/state aid", "on_page": "Grants 407,372 (General 236,016 + Other Governmental 171,356)",
+     "issue": "The report does not name the grantor, and the same label 'Grants' gets different categories in this report: the statement line and General Fund department lines (detail[26] Airport 96,463, detail[56] Library 2,490, detail[66] Community Development 135,000, detail[81] Police 2,063) are intergovernmental/state aid (other state aid), while nonmajor detail[256] Action/RSVP 50,000 and detail[264] Public Transportation 121,356 are federal grants (inferred from 'Restricted for federal programs' on p4). The rule is not to guess a grantor; the categories should be consistent or settled by the user."},
+    {"severity": "warning", "path": "detail[25].category", "page": 13,
+     "extracted": "charges for services/fees (detail_category rentals)", "on_page": "Airport: Rental and fees 174,580",
+     "issue": "category and detail_category disagree (charges for services vs rentals; Rentals is now its own receipt category). The same printed label 'Rental and fees' (a mixed label with no printed breakdown) also gets five different categories by department: charges for services (detail[5], [55], [65]), Cemetery Fees (detail[19]), Ambulance Fees (detail[22]), Recreation Fees (detail[39], [45]), so the department is used as context. Defensible, but a judgment call."},
+    {"severity": "warning", "path": "disbursements[3].category", "page": 5,
+     "extracted": "streets/highways", "on_page": "Public works 1,040,752 = Street Fund 820,947 + General Fund 219,805 (Cemetery, p9)",
+     "issue": "mixed function line put in the dominant category (streets); 21% is cemetery (health/welfare)"},
+    {"severity": "warning", "path": "detail[268].category", "page": 12,
+     "extracted": "Mass Transit", "on_page": "Public Transportation Fund: Environment and leisure 205,571",
+     "issue": "printed function is Environment and leisure, and the statement-level line (disbursements[4]) holding this amount is culture/recreation, so detail and statement disagree. Mass Transit (a Lincoln/Clay Center category) is inferred from the fund name."},
+    {"severity": "warning", "path": "detail[132].category", "page": 13,
+     "extracted": "Airport", "on_page": "Airport department (budget schedule p9 groups Airport under Environment and leisure)",
+     "issue": "new category name 'Airport' used for the General Fund Airport department lines (detail[132]-detail[142]); the report counts it under Environment and leisure. Defensible, but check it is an accepted category name."},
+    {"severity": "warning", "path": "detail[190].category", "page": 14,
+     "extracted": "general government", "on_page": "Community Development department: Community development grants 141,500, Meetings, seminars, and dues 93,507, Contracted services 92,879 (Committed for Community betterment 808,569 on p4; keno receipts 157,937 recorded in this department)",
+     "issue": "Community Development department lines (detail[190]-detail[200]) are general government, following the p9 grouping. Community Betterment or economic development could fit the content; judgment call."},
+    {"severity": "warning", "path": "detail[89].detail_category", "page": 13,
+     "extracted": "dues, training and travel", "on_page": "Transportation 525 (General); also Fire 2,380, Cemetery 8,228, Ambulance 2,291, Airport 1,678, Recreation Center 50, Park 10,229, Community Development 32, Planning 437, Police 17,185",
+     "issue": "'Transportation' is a context label in config/category_decisions.csv. Its object here (travel vs vehicle operation) is not stated on the page; detail[101], [115], [127], [137], [150], [173], [194], [206], [217] are the same."}
+  ]
+}
