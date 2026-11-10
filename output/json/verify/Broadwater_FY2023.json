@@ -1,0 +1,57 @@
+{
+  "stem": "Broadwater_FY2023",
+  "values_checked": 68,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "receipts[9].category",
+      "page": 1,
+      "extracted": "Utility Charges",
+      "on_page": "Local Receipts: Other (Sanitation and Sewer 32,383.55 + Water 47,047.74)",
+      "issue": "2026-11-06 ruling: a generic utility 'Other' receipt is charges for services only when the report counts it in Charges for Services; the waiver form gives no breakdown (p5 even lists a Water Deposits account), so category should stay other",
+      "resolved": "2026-11-10: \"Local Receipts: Other\" kept as other (context label; context check decides from the page)"
+    },
+    {
+      "severity": "error",
+      "path": "detail[19].category",
+      "page": 1,
+      "extracted": "Utility Charges / other utility charges",
+      "on_page": "Local Receipts: Other 32,383.55 (Sanitation and Sewer)",
+      "issue": "same as receipts[9]; should be other / miscellaneous revenue",
+      "resolved": "2026-11-10: \"Local Receipts: Other\" kept as other (context label; context check decides from the page)"
+    },
+    {
+      "severity": "error",
+      "path": "detail[23].category",
+      "page": 1,
+      "extracted": "Utility Charges / water charges",
+      "on_page": "Local Receipts: Other 47,047.74 (Water)",
+      "issue": "same as receipts[9]; should be other / miscellaneous revenue",
+      "resolved": "2026-11-10: \"Local Receipts: Other\" kept as other (context label; context check decides from the page)"
+    },
+    {
+      "severity": "warning",
+      "path": "beginning_cash",
+      "page": 1,
+      "extracted": 223214.5,
+      "on_page": "line 1 Net Cash Balance 45,177.56; line 2 Investments 178,036.94 (General Fund column)",
+      "issue": "cash includes investments that are printed separately; beginning_investments left null (allowed as the rolled-forward 'cash and investments', but the separate figure is printed). Ending investments 138,289.16 likewise only in balance_sheet"
+    },
+    {
+      "severity": "warning",
+      "path": "balance_sheet.assets",
+      "page": 1,
+      "extracted": "all 185,416.14 governmental",
+      "on_page": "lines 26-28 printed only in the General Fund column (pooled cash of all funds incl. Water and Sanitation/Sewer)",
+      "issue": "balance sheet fund type follows the printed column, but the pooled amount includes the business-type balance (-1,271.29 on line 24) and differs from governmental ending_cash 186,696.43; cannot be split from the page"
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[3].fund_type",
+      "page": 3,
+      "extracted": "business-type",
+      "on_page": "line 39 Debt Service 6,751.27, printed under Governmental: but in the Sanitation and Sewer column",
+      "issue": "fund type taken from the column rather than the section heading; defensible (USDA loan, p5) but a judgment call"
+    }
+  ]
+}
