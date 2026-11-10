@@ -1,0 +1,27 @@
+{
+  "stem": "Harvard_FY2023",
+  "values_checked": 300,
+  "issues": [
+    {"severity": "warning", "path": "receipts[19].category", "page": 6,
+     "extracted": "other 102,160 (Other)", "on_page": "Other 102,160 = General 66,656 (p11: sales tax 34,225, expense reimbursements 8,838, interest on investments 2,225, sale of property 50, other 21,318) + Street 599 + Park 10,127 (pool receipts 3,525, other 6,602) + Library 3,094 + Cemetery miscellaneous 1,684 + Debt Service income for bonds 20,000",
+     "issue": "Printed row is 'Other', so kept as printed (same treatment as Harvard_FY2024). But the fund schedules print a breakdown that adds up exactly, and Taxes and Intergovernmental were split from those same schedules while Other was not. As a result the statement-level sales tax is 34,225 (Street only) although the schedules print 68,450 (General 34,225 + Street 34,225). Needs a person to decide whether to split."},
+    {"severity": "warning", "path": "receipts[12].category", "page": 6,
+     "extracted": "charges for services/fees 90,329", "on_page": "Charges for services: General 1,750, Park 1,360, Cemetery 6,650, Disposal Service 80,569",
+     "issue": "80,569 of the line is disposal (refuse) fees, which the rules put in Utility Charges, as the detail line does (p25). The p6 fund columns add up exactly, so a split is possible. Kept as one printed row, consistent with FY2024."},
+    {"severity": "warning", "path": "disbursements[7].original_label", "page": 6,
+     "extracted": "Capital Outlay: Public Safety", "on_page": "Capital outlay 1,730 (General Fund column; no function on the row)",
+     "issue": "The function comes from the p13 Police schedule, not from the p6 row, its heading or the fund column. The amount ties to Police equipment 1,730, so this is defensible."},
+    {"severity": "warning", "path": "disbursements[4].category", "page": 6,
+     "extracted": "streets/highways 157,966", "on_page": "Public Works - other: Street Lights 19,487, Cemetery 21,987, ARPA 116,492",
+     "issue": "Mixed function line. The cemetery part is health/welfare in detail (p23), so the statement and detail levels disagree for 21,987."},
+    {"severity": "warning", "path": "disbursements[12].category", "page": 8,
+     "extracted": "Repairs and Maintenance 114,261", "on_page": "Operation and maintenance: Water 67,955, Sewer 14,101, Sanitation Fees 32,205",
+     "issue": "The line includes the sanitation system contract (32,205) and water utilities, insurance, contracted services, lab fees and sales tax (p29). 'Repairs and Maintenance' covers only part of it, so other/Operating could fit."},
+    {"severity": "warning", "path": "detail[7].category", "page": 11,
+     "extracted": "licenses and permits", "on_page": "Fines, licenses, and permits 2,837",
+     "issue": "The printed label includes fines, so the 'Fines and Licenses' category may fit better."},
+    {"severity": "warning", "path": "ending_investments", "page": 5,
+     "extracted": 29833, "on_page": "Investments 29,833 (Total Governmental Funds, 2023)",
+     "issue": "Year tie: ending fund balance 676,245 = Harvard_FY2024 beginning_fund_balance 676,245, and business_type ending 216,545 = FY2024 business_type.beginning 216,545 (both tie as printed, no restatement). But Harvard_FY2024 beginning_investments is null while FY2023 prints ending investments 29,833. FY2024's p5 2023 comparative column should be checked. This is not an error in this file."}
+  ]
+}
