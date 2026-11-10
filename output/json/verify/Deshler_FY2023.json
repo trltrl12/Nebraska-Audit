@@ -1,0 +1,39 @@
+{
+  "stem": "Deshler_FY2023",
+  "values_checked": 157,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "report_discrepancies",
+      "page": 5,
+      "extracted": "not recorded (notes call it a possible misread)",
+      "on_page": "General Fund REVENUE OVER (UNDER) EXPENDITURES AND OTHER FINANCING SOURCES (USES) printed (144,836); (128,909) + (16,059) = (144,968) and 457,559 - 144,968 = 312,591 (printed ending)",
+      "issue": "Re-read visually: the page prints (144,836), not (144,968). The report itself doesn't add up by 132, so this belongs in report_discrepancies. The fund balances are right as printed.",
+      "resolved": "added to report_discrepancies 2026-11-10"
+    },
+    {
+      "severity": "warning",
+      "path": "report_discrepancies",
+      "page": 2,
+      "extracted": "not recorded",
+      "on_page": "Business-type TOTAL NONCURRENT LIABILITIES 911,464; lines 5,127 + 28,060 + 878,278 = 911,465 (TOTAL LIABILITIES 1,146,889 ties to the lines)",
+      "issue": "A 1-dollar rounding difference printed in the report and not listed. No JSON value is affected because total_liabilities ties."
+    },
+    {
+      "severity": "warning",
+      "path": "report_discrepancies",
+      "page": 7,
+      "extracted": "not recorded",
+      "on_page": "Electric Fund NET INCOME 9,090 vs CHANGE IN NET POSITION 9,089; 672,778 + 9,089 = 681,867 vs printed ending 681,868",
+      "issue": "A 1-dollar rounding difference printed in the report and not listed. The Total Funds column (45,467; 887,643 to 933,110) ties. On p4 the governmental funds balance sheet also prints TOTAL ASSETS 1,233,295 vs lines 1,233,296, and Debt Service total liabilities and fund balances 268,812 vs total assets 268,811. That statement isn't used for the JSON totals."
+    },
+    {
+      "severity": "warning",
+      "path": "ending_cash",
+      "page": 4,
+      "extracted": 714812,
+      "on_page": "Cash 710,011 + Cash with County Treasurer 4,801; Restricted cash 408,564 (Total Governmental Funds)",
+      "issue": "ending_cash is computed (marked) from two printed lines and leaves out governmental restricted cash 408,564. The exclusion is the extractor's assumption. The rule says 'cash and cash equivalents/investments' from the funds balance sheet."
+    }
+  ]
+}
