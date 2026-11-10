@@ -1,0 +1,18 @@
+{
+  "stem": "Norfolk_FY2023",
+  "values_checked": 291,
+  "issues": [
+    {"severity": "warning", "path": "receipts[0].category", "page": 5,
+     "extracted": "taxes (Taxes 18,766,477, unsplit)", "on_page": "Taxes 18,766,477 (Total Governmental Funds); Statement of Activities p3: Property 6,809,444 + Sales 11,898,470 + Other 278,390 = 18,986,304",
+     "issue": "Keeping it unsplit is correct on the trimmed pages: the only breakdown is the accrual Statement of Activities, which differs by 219,827, and no fund schedule breaks taxes down by type (the General Fund 17,558,485, Debt Service 926,070, Vehicle Parking 98,371 and LB 840 156 schedule lines all print just 'Taxes'). The notes and MD&A in the full PDF (not in the trim) were not checked for a fund-basis breakdown."},
+    {"severity": "warning", "path": "business_type.other_financing", "page": 7,
+     "extracted": "1838404 = Capital Contributions 1,858,078 + (Loss) on Disposal of Capital Assets (19,674)", "on_page": "(Loss) on Disposal of Capital Assets (19,674) printed under Non-Operating Income (Expense)",
+     "issue": "The loss is printed in the nonoperating section, not under contributions or transfers. Under the Scottsbluff FY2024 precedent it would stay a nonoperating line (category Loss on Disposal of Assets). The detail lines 'Gain (Loss) on Disposal of Capital Assets' -10,785 and -8,889 (detail[101], detail[114], p18) are also in section 'other financing'. The roll-forward ties either way."},
+    {"severity": "warning", "path": "detail[10].detail_category", "page": 10,
+     "extracted": "investment income", "on_page": "Interest 174,797",
+     "issue": "category is Interest Income but detail_category is investment income. The same mismatch is on every Interest / Interest Income detail line (pp11-18)."},
+    {"severity": "warning", "path": "disbursements[7].category", "page": 7,
+     "extracted": "Salaries and Wages", "on_page": "Payroll and Related Taxes and Benefits 3,225,757",
+     "issue": "The line combines wages with payroll taxes and benefits. Salaries and Wages is used as the dominant cost type (the same applies to the detail lines on p18)."}
+  ]
+}
