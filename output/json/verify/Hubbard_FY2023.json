@@ -1,0 +1,71 @@
+{
+  "stem": "Hubbard_FY2023",
+  "values_checked": 107,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "detail[23]",
+      "page": 10,
+      "extracted": "Fire Department Fund Interest Income 10",
+      "on_page": "p8 all-funds combined schedule 'Claims, Refunds, Reimbursements, and Other Local Receipts' 98,393 already covers all funds' interest (statement interest 3,878 includes Fire 10)",
+      "issue": "Double counted across schedules. The p8 All Funds Combined receipts (recorded as detail[0..6]) already include the Fire Department Fund's interest. The p10 line repeats it (the extractor left out the p8 governmental disbursements for the same reason). Fix: drop detail[23] and detail_totals[2], or record revenue by fund consistently.",
+      "resolved": "duplicate removed 2026-11-10"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[6].fund_type",
+      "page": 8,
+      "extracted": "governmental",
+      "on_page": "Claims, Refunds, Reimbursements, and Other Local Receipts 98,393 (All Funds Combined)",
+      "issue": "This line mixes business-type utility collections (about 56k) with governmental receipts, but it is tagged governmental only."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[8..22].category",
+      "page": 9,
+      "extracted": "general government for all object lines except Dust Control (streets) and Capital Outlay",
+      "on_page": "Activity: General Government 88,058, Public Works 50,658, Community Center 3,627, Recreation 4,653",
+      "issue": "The functions assigned to the object lines (general government about 101,827) don't match the printed Activity split (88,058). The allocation is a judgment call."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[17].category",
+      "page": 6,
+      "extracted": "other",
+      "on_page": "Deposits 150 (Receipts of Customer Utility Deposits, p7)",
+      "issue": "Context label recorded as other. The cash flow statement says these are customer utility deposits."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[16].category",
+      "page": 6,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "Grants 5,343",
+      "issue": "The grantor is not stated, so this could be federal grants or donations."
+    },
+    {
+      "severity": "warning",
+      "path": "ending_cash",
+      "page": 3,
+      "extracted": 209601,
+      "on_page": "Cash 209,601; Funds Held by County Treasurer 1,492",
+      "issue": "ending_cash leaves out Funds Held by County Treasurer 1,492, which the balance sheet categorizes as Cash and Cash Equivalents (assets[4])."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[23].detail_category",
+      "page": 10,
+      "extracted": "investment income",
+      "on_page": "Interest Income 10",
+      "issue": "Category is Interest Income but detail_category is investment income."
+    },
+    {
+      "severity": "warning",
+      "path": "business_type.ending",
+      "page": 6,
+      "extracted": 280631,
+      "on_page": "Net Position, September 30 280,631",
+      "issue": "Year tie-out: FY2023 ending fund balance 268,240 = FY2024 beginning_fund_balance 268,240, and business-type 280,631 = FY2024 business_type.beginning 280,631, both as printed, with no restatement."
+    }
+  ]
+}
