@@ -1,0 +1,16 @@
+{
+  "stem": "Hastings_Utilities_FY2023",
+  "values_checked": 128,
+  "issues": [
+    {"severity": "warning", "path": "business_type.other_financing", "page": 6, "extracted": 240739, "on_page": "Contributions in aid of construction 240,739 (Total 2023), printed inside 'Nonoperating revenues (expenses)' and included in 'Total other income (expenses)' 1,092,221",
+     "issue": "Not printed under any other financing heading (the statement has none). Moved out of receipts into other_financing per the schema's capital-contributions rule; the roll-forward holds either way (237,648,343 + 90,194,792 - 86,990,993 + 240,739 = 241,092,881). Under a strict as-printed reading it would be a nonoperating receipt line. Same for detail[22] (Electric 170,166, p11), detail[52] (Water 56,157, p15) and detail[64] (Pollution Control 14,416, p16): all are printed under 'Other income (expenses)', not other financing, but are recorded as section 'other financing'."},
+    {"severity": "warning", "path": "balance_sheet.assets[14].original_label", "page": 4, "extracted": "Less accumulated depreciation (non-utility)", "on_page": "Less accumulated depreciation",
+     "issue": "original_label is not the printed text (the printed text is kept in printed_label). The amount (8,687,787) is correct."},
+    {"severity": "warning", "path": "detail[13].category", "page": 11, "extracted": "Reimbursement for Services", "on_page": "Reimbursement from PPGA 6,141,864",
+     "issue": "The label isn't 'Reimbursement(s) for Services'. The category rests on the MD&A wording (p2). reimbursements/refunds is the alternative. Same for detail[46] (Water 926, p15)."},
+    {"severity": "warning", "path": "detail[14].category", "page": 11, "extracted": "Purchased Power/Cost of Sales", "on_page": "Cost of services to PPGA (6,141,864)",
+     "issue": "This is the cost of services provided to PPGA, not purchased power. The category is a judgment call. Same for detail[47] (Water 926, p15)."},
+    {"severity": "warning", "path": "detail[32].category", "page": 14, "extracted": "other", "on_page": "Allocation of administration department revenue 333,853",
+     "issue": "p17 shows the allocated administration revenue (804,466) is interest income 644,729 (80%) plus miscellaneous income 159,737. The statement-level receipts split it that way, but the three department detail lines stay 'other' (also detail[45] Water 230,158 p15 and detail[60] Pollution Control 240,455 p16). This is inconsistent with receipts[3]/[4], and the 'more than half' rule would point to Interest Income."}
+  ]
+}

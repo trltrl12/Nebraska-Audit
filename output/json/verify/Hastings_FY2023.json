@@ -1,0 +1,22 @@
+{
+  "stem": "Hastings_FY2023",
+  "values_checked": 385,
+  "issues": [
+    {"severity": "warning", "path": "decision_needed", "page": 7, "extracted": null, "on_page": "Enterprise 'Payments in lieu of taxes' (3,967,590) under Nonoperating revenues (expenses) (p7); governmental 'In lieu of tax' 3,967,591 revenue (p5); 'In lieu of tax payable to City' 3,967,591 / 'Due from (to) other funds' 3,967,591 (p1, p6)",
+     "issue": "The same interfund money is counted as business-type spending (Other Taxes Paid) and as governmental revenue, as printed. Hastings_FY2025 and Hastings_Utilities_FY2023/FY2025 all raise this in decision_needed, but this report has no decision_needed entry."},
+    {"severity": "warning", "path": "business_type.other_financing", "page": 7, "extracted": 240739, "on_page": "Contributions in aid of construction 240,739, printed under 'Nonoperating revenues (expenses)' inside 'Total nonoperating revenues (expenses)' 1,386,166; the statement's 'OTHER FINANCING SOURCES' section holds only Transfers in",
+     "issue": "The amount is recorded in other_financing (capital-contribution rule) although it is printed among nonoperating revenues. The roll-forward holds. FY2024 handles it the same way."},
+    {"severity": "warning", "path": "receipts[11].category", "page": 5, "extracted": "federal grants", "on_page": "Grants 1,590,529",
+     "issue": "The page doesn't say whether these grants are federal or state. Same for the detail 'Grants' lines (General, Street, Museum, Community Development, Library Grant, Public Safety Grant, Wireless E911). The lines already carry review notes."},
+    {"severity": "warning", "path": "detail[133].category", "page": 20, "extracted": "general government", "on_page": "Keno Betterment fund column, row 'General government' 99,991",
+     "issue": "This is spending of the Keno Betterment fund. The Community Betterment rule could apply, but the row label is 'General government', so the category is defensible."},
+    {"severity": "warning", "path": "detail[62].computed", "page": 16, "extracted": "Debt Service Fund 'Other expenses' 800 as debt interest and fees", "on_page": "Other expenses 800",
+     "issue": "The amount is printed, but it carries a 'computed' field (used here to justify the category from the p5 'Bond/loan fees' 800). The category is reasonable."},
+    {"severity": "warning", "path": "detail[78].category", "page": 17, "extracted": "streets/highways", "on_page": "S Landfill Cap Fund, Public works 971",
+     "issue": "A landfill cap fund's public works spending could be refuse/utilities or natural resources. The line already carries a review note."},
+    {"severity": "warning", "path": "detail", "page": 17, "extracted": "nonmajor combining statement recorded per fund column (20 funds)", "on_page": "Combining statement, 20 nonmajor fund columns plus Total Nonmajor Governmental Funds",
+     "issue": "The extractor's combining-schedule rule says to use the Total column for more than 6 funds. The per-fund lines all tie to their columns and to the Total column (revenues 8,288,287, expenditures 6,261,772, net transfers 929,129), so this is a stated assumption, not a misstatement."},
+    {"severity": "warning", "path": "business_type.ending", "page": 7, "extracted": 254966044, "on_page": "Net position - September 30, 2023 254,966,044",
+     "issue": "FY2024 JSON business_type.beginning is 254,966,043, $1 lower than this printed ending (presumably a rounding in the FY2024 report). There is no restatement. The FY2023 figure is correct as printed. Governmental fund balance 47,500,695, governmental net position 128,167,494 and enterprise cash 52,118,788 all tie to FY2024's beginning figures."}
+  ]
+}
