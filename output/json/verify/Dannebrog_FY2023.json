@@ -1,0 +1,21 @@
+{
+  "stem": "Dannebrog_FY2023",
+  "values_checked": 124,
+  "issues": [
+    {"severity": "warning", "path": "ending_cash", "page": 4,
+     "extracted": 205548, "on_page": "Cash and cash equivalents 204,624 + County treasurer cash 924 (Total Governmental Funds)",
+     "issue": "Arithmetic is correct and marked computed, but no single ending-cash figure is printed. The 2026-11-06 ruling says never derive cash. Confirm that summing two printed cash rows is acceptable. Beginning cash is null because it is not printed, which is correct."},
+    {"severity": "warning", "path": "detail[35].original_label", "page": 7,
+     "extracted": "Capital Outlay: Utilities", "on_page": "Capital outlay (Water Fund column, nonoperating)",
+     "issue": "The function is taken from the fund column, not printed on the row. The governmental capital outlay lines (detail[10], detail[17], disbursements[3]) are left as plain 'Capital Outlay', so the treatment is inconsistent. Under 'function only when printed' this should be 'Capital Outlay'."},
+    {"severity": "warning", "path": "receipts[7].category", "page": 5,
+     "extracted": "donations/contributions", "on_page": "Contributions and grants 195,898 (Street Fund); p3 Capital Grants and Contributions 195,898",
+     "issue": "Mixed grants/contributions label with no printed breakdown. Kept as one line per the ruling, but grant vs donation cannot be determined from the page. The same applies to detail[15]."},
+    {"severity": "warning", "path": "detail[27].category", "page": 7,
+     "extracted": "Salaries and Wages", "on_page": "Personnel and benefits 23,393 (Water)",
+     "issue": "The line combines salaries and benefits, so the category is a judgment call. The same applies to detail[39] (Sewer 19,150)."},
+    {"severity": "warning", "path": "disbursements[2].category", "page": 5,
+     "extracted": "culture/recreation", "on_page": "Environment and leisure 16,003",
+     "issue": "Function assumed. 'Environment' could also mean health/sanitation or natural resources. The same applies to detail[9]."}
+  ]
+}

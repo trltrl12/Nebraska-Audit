@@ -1,0 +1,30 @@
+{
+  "stem": "Davenport_FY2023",
+  "values_checked": 148,
+  "issues": [
+    {"severity": "warning", "path": "receipts[9].category", "page": 2,
+     "extracted": "intergovernmental/state aid", "on_page": "Water row, Capital Grants and Contributions 10,000; p6 Water Fund 'Grant Income' 10,000",
+     "issue": "The grantor is not printed. Calling it state aid guesses a state grantor, and the 2026-11-06 ruling says not to guess. original_label is the SoA row 'Water'; the fund statement row is 'Grant Income'. The same applies to detail[56]."},
+    {"severity": "warning", "path": "detail[42].category", "page": 6,
+     "extracted": "sales tax", "on_page": "Sales tax 16,777 (Electric, operating receipts)",
+     "issue": "This is sales tax collected on utility bills and remitted (see the Sales tax expense line), not the village's own sales tax revenue. As 'sales tax' it inflates the village's sales-tax figure. The statement-level receipts put the same money inside Utility Charges (Electric 386,140), so receipts and detail disagree. The same applies to detail[55] (Water 791) and detail[69] (Sewer 2,110)."},
+    {"severity": "warning", "path": "detail[60].category", "page": 6,
+     "extracted": "Purchased Power/Cost of Sales", "on_page": "Utilities/purchased power 2,488 (Water Fund)",
+     "issue": "For the Water and Sewer funds this combined line is more likely utility bills (utilities (power, gas, phone)) than power bought for resale. The same applies to detail[73] (Sewer 606)."},
+    {"severity": "warning", "path": "detail[33].detail_category", "page": 12,
+     "extracted": "not itemized", "on_page": "Supplies: Vehicle expense 168 (General)",
+     "issue": "'not itemized' is meant for function totals with no object breakdown. This is an object line and could be repairs and maintenance or fuel. The same applies to detail[40] (Special Revenue 1,562)."},
+    {"severity": "warning", "path": "detail[27].category", "page": 12,
+     "extracted": "utilities", "on_page": "Dump expense 3,873 (General Fund, governmental)",
+     "issue": "A governmental General Fund line is given the utilities function. Defensible as refuse, but questionable: the statement counts it in Policy/administration."},
+    {"severity": "warning", "path": "receipts[4].category", "page": 4,
+     "extracted": "donations/contributions", "on_page": "Grants/Donations 500; p2 shows it as Public works Operating Grants and Contributions",
+     "issue": "Mixed grants/donations label with no breakdown. Kept as one line per the ruling. The same applies to detail[11]."},
+    {"severity": "warning", "path": "detail[4].category", "page": 10,
+     "extracted": "charges for services/fees", "on_page": "Materials and services sold and refunds 14,439",
+     "issue": "Mixed label (sales/services and refunds) with no breakdown. The same applies to detail[10] (3,251)."},
+    {"severity": "warning", "path": "ending_cash", "page": 3,
+     "extracted": 245111, "on_page": "Cash in bank 243,235 + Cash with county treasurer 1,876 (2023 Totals)",
+     "issue": "Correct and marked computed, but no single cash figure is printed (ruling: never derive cash). The same applies to beginning_cash 192,082 = 189,544 + 2,538 (2022 column)."}
+  ]
+}
