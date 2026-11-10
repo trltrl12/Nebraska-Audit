@@ -1,0 +1,13 @@
+{
+  "stem": "Plainview_FY2023",
+  "values_checked": 267,
+  "issues": [
+    {"severity": "warning", "path": "ending_cash", "page": 4, "extracted": 193064, "on_page": "Cash and cash equivalents 193,064; Restricted cash and cash equivalents 1,642,271; County treasurer cash 17,496 (Total Governmental Funds)", "issue": "ending_cash holds only the unrestricted 'Cash and cash equivalents' line; restricted cash and county treasurer cash are also printed cash and are not in the cash fields"},
+    {"severity": "warning", "path": "receipts[6].category", "page": 5, "extracted": "intergovernmental/state aid", "on_page": "Grants 1,026,064", "issue": "grantor not printed; category assumes a government grantor (rule: do not guess a grantor). Same for receipts[16] (Operating grants 37,750, Water) and detail[5], detail[12], detail[21], detail[25], detail[81], detail[92], detail[120]"},
+    {"severity": "warning", "path": "detail[79].category", "page": 14, "extracted": "sales tax", "on_page": "Sales tax - motor vehicles 51,929", "issue": "label is motor vehicle sales tax; sales tax matches the p5 statement row (Sales tax, Street Fund 51,929), but motor vehicle tax is arguable"},
+    {"severity": "warning", "path": "detail[93].detail_category", "page": 15, "extracted": "Loan Collections", "on_page": "Loan collections 25,744", "issue": "detail_category 'Loan Collections' is not an existing name; category is Loan Repayments. Same for detail[106] (Housing Authority Fund Loan collections 10,714)"},
+    {"severity": "warning", "path": "detail[150]", "page": 8, "extracted": 3083, "on_page": "Sanitation Fund: Gain (loss) on sale of assets (3,083), nonoperating revenues (expenses)", "issue": "printed as a negative amount on the gain/loss revenue row; recorded as a positive expenditure 'Loss on Disposal of Assets' (marked computed). Detail totals tie; flagged because the sign and section differ from the page"},
+    {"severity": "warning", "path": "decision_needed", "page": 5, "extracted": null, "on_page": "Other Governmental Funds (Sales Tax Fund) Transfers in (out) (49,846); Statement of Activities shows the component unit receiving 49,846", "issue": "one-sided transfer out of the primary government to the component unit (Plainview Manor); recorded as transfers_out with no matching inflow; decision_needed[] is absent"},
+    {"severity": "warning", "path": "ending_fund_balance", "page": 5, "extracted": 1865931, "on_page": "FY2023 ending 1,865,931 / business-type 2,921,233", "issue": "Plainview_FY2024 prints beginning fund balance 1,865,932 (Street 407,182 vs 407,181 here) and business-type beginning 2,921,234; 1-dollar rounding differences in the FY2024 report, no restatement printed. Both years are recorded as printed."}
+  ]
+}
