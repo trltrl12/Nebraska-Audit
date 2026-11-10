@@ -1,0 +1,40 @@
+{
+  "stem": "Colon_FY2023",
+  "values_checked": 79,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "detail_totals[0].amount",
+      "page": 1,
+      "extracted": 53325.08,
+      "on_page": 53325.06,
+      "issue": "General Fund line 21 'Total Receipts' looks like 53,325.06 on the scan, and the extractor read it that way too. The JSON records 53,325.08, the figure the lines add up to (27,892.94 + 70.04 + 62.52 + 1,004.58 + 1,597.96 + 2,435.09 + 1,419.97 + 15,031.92 + 3,810.06 = 53,325.08), and adds no report_discrepancies entry. Line 22 (109,423.62 = 56,098.54 + 53,325.08) and the Total column line 21 (124,616.92) also work only with .08, so the cell may be a blurred 8. At the available scan resolution, though, the last digit is not an 8. Under the as-printed rule, either record 53,325.06 with a report_discrepancies entry for the 0.02 (lines and lines 22/24 tie to .08), or settle .08 with a higher-resolution third read. A corrected figure must not stand in silently for a printed one.",
+      "resolved": "third read at 400 dpi (Claude, 2026-11-10) shows 53,325.08; the lines, line 22 and the Total column agree; kept .08"
+    },
+    {
+      "severity": "error",
+      "path": "reported_totals.governmental.receipts.amount",
+      "page": 1,
+      "extracted": 95142.87,
+      "on_page": "General 53,325.06 (as read) + Street 25,585.31 + Park 16,232.48 = 95,142.85",
+      "issue": "This computed sum uses the corrected General Fund 53,325.08, not the figure on the page (.06 as read), and the 0.02 gap is not in report_discrepancies. Same decision as detail_totals[0]: this total moves with it.",
+      "resolved": "third read at 400 dpi (Claude, 2026-11-10) shows 53,325.08; the lines, line 22 and the Total column agree; kept .08"
+    },
+    {
+      "severity": "warning",
+      "path": "balance_sheet.equity[0].category",
+      "page": 1,
+      "extracted": null,
+      "on_page": "line 24 Ending Balance",
+      "issue": "The two equity lines (Ending Balance, governmental 175,515.48 and business-type 22,891.75) have no category field. The amounts are correct."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[3].fund_type",
+      "page": 2,
+      "extracted": "business-type",
+      "on_page": "Miscellaneous 200.00 (line 40, under 'Governmental:' heading, Sewer Cust. Sec. Utility Deposits column)",
+      "issue": "The row is printed under the Governmental disbursements heading, but the amount is in the utility deposit fund column. Taking the fund type from the column follows the waiver split rule. It is probably a customer deposit refund."
+    }
+  ]
+}

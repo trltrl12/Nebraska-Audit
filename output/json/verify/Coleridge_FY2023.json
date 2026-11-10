@@ -1,0 +1,55 @@
+{
+  "stem": "Coleridge_FY2023",
+  "values_checked": 136,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "disbursements[9].category",
+      "page": 8,
+      "extracted": "other",
+      "on_page": "Operating expense 137,925 (Totals column, proprietary funds)",
+      "issue": "Business-type 'Operating expense' is in category 'other'. Under the utility cost-type rule a function/operating line stays 'utilities' (scripts/user_rules.py treats 'operating' as a function label), and the same line's per-fund detail entries (detail[67], [74], [78], [81]) use 'utilities' / 'public safety'. If it really falls outside utilities, the user's rule makes it 'Operating', not 'other'. Statement and detail categories disagree.",
+      "resolved": "business-type Operating expense -> category Operating (user rule 2026-10-29)"
+    },
+    {
+      "severity": "warning",
+      "path": "missing",
+      "page": 9,
+      "extracted": null,
+      "on_page": "Combined Budget and Actual schedule, General All-Purpose Fund Actual column: Nursing Home revenues 2,844,799; Public buildings - Nursing Home 2,873,030; cash balance 832,017 -> 796,356",
+      "issue": "Leaving out the p9 combined all-funds schedule is right: apart from the Nursing Home rows it duplicates the statements exactly (revenues 3,657,497 - 2,844,799 = 812,698 = governmental 468,749 + business-type 343,949; expenditures 3,693,158 - 2,873,030 = 820,128 = 414,567 + 405,561). The Nursing Home rows, though, are printed nowhere else in the PDF, so 2.84M of receipts and 2.87M of spending are missing from the JSON. Their cash balance (832,017 - 640,419 = 191,598 beginning, 796,356 - 632,989 = 163,367 ending) is also outside every balance. This is already in decision_needed[0], so it is a warning for the user to settle, not a silent omission."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[4].original_label",
+      "page": 5,
+      "extracted": "Capital Outlay: Streets/Highways",
+      "on_page": "Capital outlay 43,106 (General 10,606 = Fire 2,606 + Park 8,000; Street 32,500)",
+      "issue": "The statement prints one capital outlay line covering several functions. It is labelled with the dominant function (streets 32,500 of 43,106), so Fire 2,606 and Park 8,000 also appear under Streets/Highways. The page does not print the function; the extractor chose it."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[11].category",
+      "page": 8,
+      "extracted": "Utility Charges",
+      "on_page": "Charges for services 343,899 (Sewer 79,458, Ambulance 46,184, Water 174,162, Sanitation 44,095)",
+      "issue": "The Totals-column line includes Ambulance fees of 46,184, which are not utility charges. It is kept as one Total-column line, with a review note."
+    },
+    {
+      "severity": "warning",
+      "path": "balance_sheet.equity[0].category",
+      "page": 1,
+      "extracted": null,
+      "on_page": "Restricted for Customer deposit returns / Debt service; Unrestricted",
+      "issue": "The four equity lines have no category field. All amounts are correct and add to 632,989."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[6].detail_category",
+      "page": 10,
+      "extracted": "not itemized",
+      "on_page": "Operating expense 27,814 (an object row next to Personnel services and Supplies)",
+      "issue": "'Operating expense' rows (General, Community Building, Police, Fire, Park and the proprietary fund columns) are object lines within an itemized breakdown, not function totals with no breakdown. 'not itemized' is questionable; 'miscellaneous expenditure' may fit better."
+    }
+  ]
+}

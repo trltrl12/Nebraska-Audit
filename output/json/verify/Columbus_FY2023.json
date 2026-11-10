@@ -1,0 +1,64 @@
+{
+  "stem": "Columbus_FY2023",
+  "values_checked": 200,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "disbursements[5].original_label",
+      "page": 7,
+      "extracted": "Capital Outlay: General Government",
+      "on_page": "Capital outlay 25,511,110 (own line below the 'Current' functions; General Fund 16,018,674, Streets Engineering 9,057,194, Other Governmental 435,242, p6-7)",
+      "issue": "The page prints no function for capital outlay. It is its own expenditure line, and the MD&A (p1) lists 'Capital outlay' as a separate function. The label 'Capital Outlay: General Government' names a function that is not printed and is wrong for at least the 9,057,194 Streets Engineering share. The General Fund is not the general government function either. Without a printed function the label should stay 'Capital Outlay' (printed 'Capital outlay'). The amount and category are correct.",
+      "resolved": "relabelled \"Capital Outlay\" (no function printed)"
+    },
+    {
+      "severity": "error",
+      "path": "detail[12].original_label",
+      "page": 14,
+      "extracted": "Capital Outlay: General Government",
+      "on_page": "Capital outlay 18,210,618 (budget 22,287,115), General Fund budget schedule, listed after General government / Public safety / Parks and recreation / Community development",
+      "issue": "The General Fund schedule prints capital outlay with no function. The General Fund is not the general government function: the schedule prints General government 2,746,364 separately. The label should be 'Capital Outlay' (no function) rather than a function the page does not print. The amount and budget are correct.",
+      "resolved": "relabelled \"Capital Outlay\" (no function printed)"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[5].category",
+      "page": 14,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "Grants 864,926",
+      "issue": "The same printed label 'Grants' is 'federal grants' on the statement line (receipts[5], 5,215,949, which includes this 864,926) but 'intergovernmental/state aid' in the General Fund and Streets detail (detail[5], detail[15]). The grantor is not printed. The rules call for one category per label within a report."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[5].category",
+      "page": 7,
+      "extracted": "federal grants",
+      "on_page": "Grants 5,215,949 (ARP Act 3,419,634; General 864,926; Streets 702,750; Other 228,639)",
+      "issue": "'federal grants' rests on the ARP Act share (65%). The grantor of the other 1.8M is not printed, and the 2026-11-06 ruling says not to guess a grantor."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[11].category",
+      "page": 11,
+      "extracted": "sales tax",
+      "on_page": "Sales tax 636,135 (proprietary operating revenues; Statement of Activities p3 counts it in business-type Charges for Services 20,626,636)",
+      "issue": "This is sales tax collected on utility sales, which the city remits (Sales tax remitted 570,230 is an expense). Category 'sales tax' puts it next to the city's local option sales tax, though the report counts it as charges for services. It is a judgment call."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[13].category",
+      "page": 15,
+      "extracted": "licenses and permits",
+      "on_page": "Fees, taxes, permits, and licenses 3,928,783 (Streets/Engineering Fund)",
+      "issue": "This mixed line is mostly sales tax: the p6 GAAP column prints Streets sales tax 3,263,435 and fees/permits 658,712. The budget-basis 3,928,783 does not tie to that breakdown (3,922,147), so it stays one line, but the dominant content is sales tax, not licenses. The same label also gets 'licenses and permits' on the governmental statement (receipts[1]) and 'charges for services/fees' on the business-type statement (receipts[10])."
+    },
+    {
+      "severity": "warning",
+      "path": "balance_sheet.equity[2].category",
+      "page": 2,
+      "extracted": null,
+      "on_page": "Restricted for debt service; Unrestricted",
+      "issue": "The four equity lines (Restricted for debt service, Unrestricted, governmental and business-type) have no category field. The amounts are correct and the statement balances."
+    }
+  ]
+}
