@@ -1,0 +1,32 @@
+{
+  "stem": "Lancaster_County_FY2023",
+  "values_checked": 564,
+  "issues": [
+    {"severity": "warning", "path": "receipts[2]", "page": 3,
+     "extracted": {"category": "other taxes", "original_label": "Drug tax", "amount": 17351},
+     "on_page": "p5 Federal Grants Fund column, Taxes row 17,351; p3 Statement of Activities general revenues 'Drug tax' 17,351",
+     "issue": "Amount is right and the split adds up (4,399,836 + 972,056 + 17,351 + 106,807,507 = 112,196,750). The tax type does not come from the fund name (Federal Grants Fund names no tax). It rests only on the exact match with the accrual Statement of Activities row, which the rules accept as a printed breakdown. The same tax on the budgetary schedule (detail[47], Federal Grants Fund 'Taxes' 14,846, p11) stays category 'taxes', so the same tax has two categories in this report."},
+    {"severity": "warning", "path": "receipts[0].original_label", "page": 3,
+     "extracted": "Lodging tax", "on_page": "p13 Visitors Improvement 2,199,918 + County Visitors Promotion 2,199,918 (Taxes row); p3 'Lodging tax' 4,399,836",
+     "issue": "The category is supported by the fund names, and the amount ties exactly to the SoA 'Lodging tax' row, so the printed-row label is defensible. However, the piece is a sum of fund-column cells of the parent Taxes row. The 2026-11-06 rule says such sums keep the parent label, and Lancaster_County_FY2024 labels the same piece 'Taxes' (its SoA amount differed by 1). The two years label this line differently."},
+    {"severity": "warning", "path": "proprietary", "page": 8,
+     "extracted": "internal service funds cash flow statement (operating -2,521,920; noncapital 1,400,000; investing 24,033; cash 21,690,149 -> 20,592,262)",
+     "on_page": "Statement of Cash Flows - Internal Service Funds (only proprietary funds in the report)",
+     "issue": "All figures match p8 and roll forward. Filling proprietary from internal service funds matches Lancaster_County_FY2024 and FY2025 (same treatment; FY2024 beginning_cash 20,592,262 = this ending_cash). It also matches the extractor rule's literal 'Statement of Cash Flows - Proprietary Funds, total column'. It does not match Grand Island and Hastings (and Sarpy County), which exclude internal service funds because they take the enterprise-funds total. With business_type null there is no double count. Whether internal-service-only counties should carry proprietary at all is a cross-report policy question that is not in decision_needed."},
+    {"severity": "warning", "path": "detail[77].category", "page": 18,
+     "extracted": "Community Betterment", "on_page": "Not-for-profit contracts 95,650 / Miscellaneous fees & services 42,166 (Keno Fund)",
+     "issue": "The function is inferred from the committed fund balance ('Committed for: Community betterment' 5,330,884, p4 = Keno fund balance, p13). The report's own nonmajor combining statement (p13) classes Keno spending as public safety 85,536 and capital outlay 42,166. Defensible, but it is a judgment call. Same applies to detail[78]."},
+    {"severity": "warning", "path": "detail[52].category", "page": 11,
+     "extracted": "public safety", "on_page": "Federal Grants Fund object lines (Office supplies ... Repair and maintenance costs), no function printed",
+     "issue": "Function is a guess from p5, where most Federal Grants spending is public safety (12,686,589 of 16,626,258; also health 541,474). This applies to detail[52]-detail[63]. The lines are already marked review."},
+    {"severity": "warning", "path": "detail[131].category", "page": 22,
+     "extracted": "general government", "on_page": "Building Fund: Supplies 170,230, Other contracted services 117,537, Repair & maintenance 42,901, Rentals 147,000",
+     "issue": "The Building Fund budget schedule prints no function. The nonmajor combining statement (p13) classes Building Fund spending mostly as public safety (361,416) with general government 61,799, so general government for all four lines (detail[131]-detail[134]) is questionable."},
+    {"severity": "warning", "path": "detail[223].amount", "page": 29,
+     "extracted": 4517, "on_page": "Transfers out 4,517 (printed positive, added into Total other financing sources (uses) 2,894,007)",
+     "issue": "Confirmed as printed. The schedule adds the transfers-out line, while p14 combining shows Sinking Fund transfers out (4,517). The report_discrepancies entry is correct: difference 9,034 = 2 x 4,517; sign-corrected total 2,889,490 - 4,517 = 2,884,973. Because the line is kept positive, the workbook will read this Transfers Out as an inflow."},
+    {"severity": "warning", "path": "detail[184].category", "page": 27,
+     "extracted": "Sale of Property", "on_page": "Other revenue 20,450 (under Revenues; Total revenues 2,274,515 includes it)",
+     "issue": "Both readings are confirmed. p27 prints 'Other revenue' 20,450 inside revenues. p14 combining prints 'Sale of capital assets' 20,450 for Bridge & Special Road under other financing sources, and the p5 statement other_financing 37,583 = 11,873 + 5,260 + 20,450 includes it. The detail keeps it in revenue as printed, with the category taken from p14. That is defensible and is not double counted, because the statement-level other_financing and the detail are separate levels. The question is already in decision_needed."}
+  ]
+}
