@@ -1,0 +1,25 @@
+{
+  "stem": "Howard_County_FY2023",
+  "values_checked": 120,
+  "prior_year_check": "FY2023 ending fund balance 5,884,690 (p4) = Howard_County_FY2024 beginning_fund_balance 5,884,690. Ties as printed. Cash null in both years (no roll-forward of cash printed); FY2024 uses the same balance-sheet categories (Cash / Restricted cash -> restricted assets).",
+  "issues": [
+    {"severity": "warning", "path": "receipts[5].category", "page": 4,
+     "extracted": "other", "on_page": "Local 593,344; Statement of Activities p2: charges for services 461,525, interest income 109,207, miscellaneous 20,295",
+     "issue": "context label left in other; charges for services is about 78% of the line per p2 (pieces sum to 591,027, not 593,344, so no exact split); for the context check"},
+    {"severity": "warning", "path": "receipts[4].category", "page": 4,
+     "extracted": "intergovernmental/state aid", "on_page": "Intergovernmental 3,067,463 (incl. ARPA 625,933 and Local Assistance & Tribal Consistency 50,000, p4/p7)",
+     "issue": "statement line kept whole as state aid though at least 675,933 (22%) is federal (ARPA, LATCF); defensible under the Total-column rule"},
+    {"severity": "warning", "path": "detail[21].category", "page": 8,
+     "extracted": "streets/highways", "on_page": "Communications 278,457 (under Public Works heading)",
+     "issue": "follows the printed heading, but county 'Communications' is usually dispatch (public safety); same treatment as FY2024"},
+    {"severity": "warning", "path": "detail[31].detail_category", "page": 9,
+     "extracted": "highway allocation", "on_page": "Road Fund Intergovernmental 1,957,741",
+     "issue": "broad group; highway allocation is presumed, not printed"},
+    {"severity": "warning", "path": "detail[33].category", "page": 9,
+     "extracted": "streets/highways", "on_page": "Road Fund DISBURSEMENTS 2,583,201 (p4 column: public works 2,131,374, capital outlay 363,617, principal 85,509, interest 2,701)",
+     "issue": "single printed line; dominant function used. Not split (none printed on the schedule itself)"},
+    {"severity": "warning", "path": "detail[36].original_label", "page": 10,
+     "extracted": "Capital Outlay", "on_page": "DISBURSEMENTS 472,068",
+     "issue": "printed label is 'Disbursements'; relabelled and categorized capital outlay from the p4 ARPA column (all 472,068 capital outlay). Defensible, but the label is not as printed"}
+  ]
+}
