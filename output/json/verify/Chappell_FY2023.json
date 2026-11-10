@@ -1,0 +1,30 @@
+{
+  "stem": "Chappell_FY2023",
+  "values_checked": 272,
+  "issues": [
+    {"severity": "warning", "path": "report_discrepancies[0]", "page": 4,
+     "extracted": 150.00, "on_page": "Total expenditures 1,086,218.96; the 24 printed lines add to 1,086,068.96",
+     "issue": "Confirmed as the report's own gap, not an extraction error. Every line was re-read and every row of the p14 departmental schedule ties across the columns. The p14 General department column prints 477,608.16 but its lines add to 477,458.16 (Total column 2,773,034.66 vs 2,772,884.66), and p5 rolls forward from the printed total. This entry is the 150.00 difference the governmental identity shows; it is correctly in report_discrepancies."},
+    {"severity": "warning", "path": "disbursements[4].category", "page": 4,
+     "extracted": "general government (Repairs and maintenance 62,100.82)", "on_page": "p14: General 237.08, Street 25,879.58, Parks 24,433.03, Cemetery 333.93, Library 11,217.20",
+     "issue": "The object-listed statement lines are assigned functions inconsistently. Fuel, Gravel, Chemicals and Capital outlay take the Street function from p14, but Repairs, Utilities, Supplies, Salaries and Payroll stay general government although most of each sits in Street/Parks/Library. Defensible under the 'listed by object' rule, but the function totals don't match p14 (or the Statement of Activities, p2)."},
+    {"severity": "warning", "path": "disbursements[23].original_label", "page": 4,
+     "extracted": "Capital Outlay: Streets/Highways (50,761.54)", "on_page": "p14 Capital outlay: Street 47,774.56, Parks and Recreation 2,986.98",
+     "issue": "The whole amount is labelled Streets/Highways, but 2,986.98 of it is Parks capital outlay. The detail lines split it correctly."},
+    {"severity": "warning", "path": "receipts[14].category", "page": 4,
+     "extracted": "donations/contributions (Grants and donations 187,442.00)", "on_page": "Grants and donations 187,442.00; the Statement of Activities (p2) shows capital grants and contributions under General Government 209,898.39 and Culture 30,192.00",
+     "issue": "The mixed label has no printed breakdown. Under the 2026-11-06 ruling grants and donations are separate categories, so a person may need to decide which one applies. The extractor flagged it for review."},
+    {"severity": "warning", "path": "receipts[11].category", "page": 13,
+     "extracted": "intergovernmental/state aid (Housing Authority 1,724.04)", "on_page": "Housing Authority 1,724.04 under Intergovernmental",
+     "issue": "A payment from a housing authority may be a payment in lieu of tax (In Lieu of Tax). Already flagged for review."},
+    {"severity": "warning", "path": "disbursements[8].category", "page": 4,
+     "extracted": "general government (Community improvement 103,317.31)", "on_page": "Community improvement 103,317.31 (p14 General column)",
+     "issue": "Could be the user's Community Betterment category (community development/betterment). General government is defensible."},
+    {"severity": "warning", "path": "disbursements[43].category", "page": 8,
+     "extracted": "Supplies and Materials, function utilities (Oxygen and vaccination 17,148.44)", "on_page": "Oxygen and vaccination 17,148.44 (Other column = Ambulance, p15)",
+     "issue": "The matching detail line (p15) uses 'medical supplies and services' with function public safety, so the two disagree. Merchandise and Concessions (golf cost of sales) and Collection expense (ambulance) also carry function 'utilities' though they are not utility spending. The cost-type line 'Utilities' 40,444.76 (disbursements[36]) has category 'utilities', which reads as the function rather than the cost type 'utilities (power, gas, phone)'."},
+    {"severity": "warning", "path": "detail[53]", "page": 14,
+     "extracted": "expenditure, debt service (principal and interest combined), Debt Service and bond issue cost 1,626,815.70", "on_page": "p14 Street column 'Debt Service and bond issue cost' 1,626,815.70; p5 prints the same money as 'Note Payment' under Other Financing Sources (Uses)",
+     "issue": "Kept as printed on the schedule (allowed). The statement records it in other_financing, so detail and statement sections differ for the same 1.63 million. The Statement of Activities shows only 106,815.70 as interest and bond fees, so about 1,520,000 is principal on a note refunded with the 1,945,000 bond proceeds."}
+  ]
+}

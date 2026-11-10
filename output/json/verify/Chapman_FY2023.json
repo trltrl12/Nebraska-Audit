@@ -1,0 +1,24 @@
+{
+  "stem": "Chapman_FY2023",
+  "values_checked": 63,
+  "issues": [
+    {"severity": "warning", "path": "balance_sheet.assets[0].fund_type", "page": 1,
+     "extracted": "governmental (128,744.30 and investments 61,540.94)", "on_page": "Lines 26-28 printed only in the GENERAL FUND column (190,285.24) although line 24 shows Enterprise Fund ending balance 15,001.92",
+     "issue": "As printed, but the governmental assets (190,285.24) then exceed governmental equity (175,283.32) by the Enterprise Fund's 15,001.92 and business-type equity has no asset. The extractor already flagged it for review; a person may want to decide whether 15,001.92 of the cash belongs to business-type."},
+    {"severity": "warning", "path": "disbursements[2].original_label", "page": 3,
+     "extracted": "Capital Outlay: General Government (74,284.28)", "on_page": "Other Capital Outlay: General 58,490.53, Street 14,813.75, Park 980.00, Total 74,284.28",
+     "issue": "The statement-level line combines three funds, but the whole amount is labelled with the General Fund's function (the largest column). The detail lines carry the per-fund functions (General Government, Streets/Highways, Culture/Recreation)."},
+    {"severity": "warning", "path": "detail[7].detail_category", "page": 3,
+     "extracted": "equipment purchases / construction/infrastructure / equipment purchases (detail[7], detail[11], detail[13])", "on_page": "Other Capital Outlay (no object printed)",
+     "issue": "The object type of the capital outlay is assumed; the page does not say whether it is equipment or construction."},
+    {"severity": "warning", "path": "disbursements[4].fund_type", "page": 3,
+     "extracted": "business-type", "on_page": "Line 39 Debt Service 75,255.83, printed under the 'Governmental:' heading but in the Enterprise Fund column",
+     "issue": "Recording it as business-type follows the column (the Enterprise Fund pays the WTFC/GO bond debt, p5), but the row sits under the form's Governmental heading."},
+    {"severity": "warning", "path": "missing", "page": 1,
+     "extracted": null, "on_page": "County Treasurer Balance at October 1, 2022 $1,625.39; County Treasurer Balance at September 30, 2023 758.74",
+     "issue": "Cash held by the County Treasurer is printed below the statement but is not recorded anywhere (the notes say so). It is outside the line 24/28 balances, so adding it would break the printed totals. A person should decide whether it belongs on the balance sheet."},
+    {"severity": "warning", "path": "receipts[8].category", "page": 1,
+     "extracted": "other (Local Receipts: Other 90,230.19, Enterprise Fund)", "on_page": "Local Receipts: Other 90,230.19 in the Enterprise Fund column",
+     "issue": "This is almost certainly water/sewer user charges, but the form prints only 'Other' and nothing on the page breaks it down. 'other' is allowed because the label itself says Other, but it is the entire business-type revenue."}
+  ]
+}

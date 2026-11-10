@@ -1,0 +1,21 @@
+{
+  "stem": "Chase_County_FY2023",
+  "values_checked": 152,
+  "issues": [
+    {"severity": "warning", "path": "balance_sheet.assets[1].category", "page": 3,
+     "extracted": "Investments (Designated Deposits 121,658)", "on_page": "Exhibit C 'Designated Deposits' 121,658; Exhibit A (p1) 'Designated Investments' 121,658",
+     "issue": "The two statements label the same 121,658 differently (deposits vs investments), so it is unclear whether it is cash or investments. The extractor already flagged it for review."},
+    {"severity": "warning", "path": "detail[4].category", "page": 5,
+     "extracted": "charges for services/fees (General Fund 'Local' 557,242)", "on_page": "Exhibit F Local 557,242; Exhibit D General column: Charges for Services 365,029 + Interest 178,731 + Miscellaneous 13,482 = 557,242",
+     "issue": "The dominant-category rule allows this (charges are 65%), but Exhibit D prints an exact breakdown of the same money, so 178,731 of interest sits in charges for services. A split (split_from, as was done for Taxes) would be more precise."},
+    {"severity": "warning", "path": "detail[34].detail_category", "page": 7,
+     "extracted": "highway allocation (Road Fund 'State' 1,259,501)", "on_page": "State 1,259,501 (Exhibit D: Intergovernmental)",
+     "issue": "The page doesn't print that this is highway allocation; it is likely but assumed."},
+    {"severity": "warning", "path": "detail[56].category", "page": 11,
+     "extracted": "keno/lottery (KENO fund 'Charges for Services' 3,064)", "on_page": "KENO column, Charges for Services 3,064",
+     "issue": "Recategorized from the fund name although the row prints Charges for Services. It matches the Waverly lottery-fund ruling, but it is a judgment call. Already flagged for review."},
+    {"severity": "warning", "path": "detail[43].detail_category", "page": 10,
+     "extracted": "county/other local governments (Visitor's Promotion Intergovernmental 12,642)", "on_page": "Visitor's Promotion: Intergovernmental 12,642",
+     "issue": "The line's own review note says this is likely lodging tax remitted by the state, yet the detail_category says county/other local governments. The source of the money is not printed."}
+  ]
+}
