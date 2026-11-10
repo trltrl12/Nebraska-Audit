@@ -1,0 +1,63 @@
+{
+  "stem": "Fillmore_County_FY2023",
+  "values_checked": 165,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "ending_cash",
+      "page": 1,
+      "extracted": null,
+      "on_page": 7918741,
+      "issue": "Cash is printed: the Statement of Net Position - Cash Basis (p1) prints Cash 6,583,114 and Restricted cash 1,335,627, and TOTAL ASSETS 7,918,741 is made up only of those cash lines. The user's rule fills cash wherever it is printed. Fillmore_County_FY2024 fills ending_cash from the same statement's all-cash total. ending_cash should be 7,918,741 (p1, TOTAL ASSETS, all cash), or at least the printed cash lines. beginning_cash null is correct: no beginning cash is printed in the trim (p2's 8,717,870 is beginning net position).",
+      "resolved": "ending_cash filled from p1 2026-11-10"
+    },
+    {
+      "severity": "warning",
+      "path": "balance_sheet",
+      "page": 3,
+      "extracted": "Statement of Net Position (p1)",
+      "on_page": "Statement of Assets and Fund Balances - Governmental Funds, General and Road columns only",
+      "issue": "The trim has only the left half of the governmental funds assets statement (p3). The continuation page with the other fund columns and the Total Governmental Funds column was not trimmed, so the funds-statement balance sheet (Committed: Road maintenance, Unassigned) cannot be checked or used. A re-trim with the continuation page is needed if the funds statement should be the source."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[5].category",
+      "page": 2,
+      "extracted": "other",
+      "on_page": "Local 914,021 (p5)",
+      "issue": "This is a context label. The Statement of Activities (p2) prints charges for services 704,620 (77% of the line), interest income 170,208 and miscellaneous 37,123, which add to 911,951, 2,070 short of the line. The >50% rule would point to charges for services, but this needs the context check."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[59].category",
+      "page": 7,
+      "extracted": "other",
+      "on_page": "911 Emergency Services Fund, Local 21,881",
+      "issue": "Context label. The Statement of Activities (p2) prints public safety charges for services of exactly 21,881, which is evidence for charges for services. Needs the context check."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[64].category",
+      "page": 8,
+      "extracted": "Opioid Settlement",
+      "on_page": "Opioid Recovery Fund, Intergovernmental 1,292",
+      "issue": "The category is assumed from the fund name; the page prints only 'Intergovernmental'. Fillmore_County_FY2024 records the same fund's intergovernmental line as intergovernmental/state aid, so the two years are inconsistent."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[43]",
+      "page": 11,
+      "extracted": "Road Fund Disbursements 4,396,103 as one streets/highways line",
+      "on_page": "Disbursements 4,396,103 (p11); statement p4 Road column: Public works 1,971,649 + Capital outlay 2,424,454",
+      "issue": "The treatment is inconsistent. The Agriculture Society Building schedule's single Disbursements line was split using its statement column (detail[49], detail[50]), but the Road Fund line, which is mostly capital outlay, was not split the same way."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[41].detail_category",
+      "page": 11,
+      "extracted": "highway allocation",
+      "on_page": "Intergovernmental 1,563,718",
+      "issue": "Assumed to be highway allocation from the fund name (the review note says so). The page prints only 'Intergovernmental'."
+    }
+  ]
+}
