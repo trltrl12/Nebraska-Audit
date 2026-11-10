@@ -1,0 +1,16 @@
+{
+  "stem": "Hay_Springs_FY2023",
+  "values_checked": 94,
+  "issues": [
+    {"severity": "warning", "path": "proprietary.ending_cash", "page": 7,
+     "extracted": 281717, "on_page": "Cash flow statement CASH BALANCE - END OF YEAR 281,717 (Sewer 179,414); Statement of Net Position p1/p5 Equity in Pooled Cash 266,945 (Sewer 164,642)",
+     "issue": "Amount is as printed, but the report contradicts itself: the cash-flow ending cash is 14,772 (the Sewer due-from-other-funds amount) higher than the cash on the net position statements. FY2024 JSON proprietary.beginning_cash is 266,945, so FY2023 proprietary ending cash (281,717) does not tie to FY2024 beginning. No restatement is printed. Not recorded in report_discrepancies."},
+    {"severity": "warning", "path": "receipts[9].category", "page": 6,
+     "extracted": "Utility Charges", "on_page": "Charges for Services 264,731 (Water 148,598, Sewer 95,623, RV Park 20,510)",
+     "issue": "Total-column line includes 20,510 of RV Park fund charges, which are park/rental fees, not utility charges. The single printed line is defensible as Utility Charges, but the category covers a non-utility fund."},
+    {"severity": "warning", "path": "ending_cash", "page": 1,
+     "extracted": 102556, "on_page": "Cash and Cash Equivalents 98,564 + Cash on Deposit - County Treasurer 3,992",
+     "issue": "Sum of two printed cash lines, marked computed (arithmetic correct). Under the 2026-11-06 ruling (never derive cash), check that summing printed cash lines is acceptable."}
+  ],
+  "fy2024_tie": "FY2023 ending fund balance 131,347 = FY2024 beginning_fund_balance 131,347; business_type ending 1,173,095 = FY2024 business_type.beginning 1,173,095; proprietary ending cash 281,717 vs FY2024 proprietary beginning_cash 266,945 (differs by 14,772; no restatement printed; see the first issue)."
+}
