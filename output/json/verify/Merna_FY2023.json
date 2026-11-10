@@ -1,0 +1,40 @@
+{
+  "stem": "Merna_FY2023",
+  "values_checked": 95,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "disbursements[4].original_label",
+      "page": 4,
+      "extracted": "Capital Outlay: Culture/Recreation",
+      "on_page": "Capital outlay 24,485 (General Fund column; no function on the row, its heading or the fund column)",
+      "issue": "Capital outlay rule: a function goes on the label only when it is printed on the row, its heading or a fund column that clearly names it. Here it comes from another statement (Statement of Activities p2 / budget schedule p8: Environment and leisure 36,660 = 12,175 + 24,485). That tie holds, but the rule doesn't allow it as a source. Fix: label 'Capital Outlay' with no function, or have a person approve the Statement of Activities source. Same for detail[8].",
+      "resolved": "label set to plain Capital Outlay (function not printed)"
+    },
+    {
+      "severity": "error",
+      "path": "detail[8].original_label",
+      "page": 4,
+      "extracted": "Capital Outlay: Culture/Recreation",
+      "on_page": "Capital outlay 24,485 (General Fund)",
+      "issue": "Same as disbursements[4]: the function isn't printed on the row, its heading or a fund column naming it.",
+      "resolved": "label set to plain Capital Outlay (function not printed)"
+    },
+    {
+      "severity": "warning",
+      "path": "ending_cash",
+      "page": 3,
+      "extracted": 31452,
+      "on_page": "Cash and cash equivalents (8,374); Restricted cash 36,924; County treasurer cash 2,902 (Total Governmental Funds)",
+      "issue": "ending_cash adds three printed lines (the restricted Street Fund cash and the county treasurer cash) into one figure that isn't printed anywhere. It's marked computed and the arithmetic is right (-8,374 + 36,924 + 2,902 = 31,452), but the 2026-11-06 ruling says never derive cash. Confirm this sum is wanted."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[5].category",
+      "page": 4,
+      "extracted": "donations/contributions",
+      "on_page": "Contributions and grants 3,594 (Street Fund)",
+      "issue": "Mixed label, and no breakdown is printed (the Statement of Activities Operating Grants and Contributions column is blank). Kept as one line under the mixed-label rule. Grant vs donation is a judgment call; same for detail[13]."
+    }
+  ]
+}
