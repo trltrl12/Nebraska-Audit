@@ -1,0 +1,39 @@
+{
+  "stem": "Logan_County_FY2023",
+  "values_checked": 113,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "detail[4].category",
+      "page": 5,
+      "extracted": "other",
+      "on_page": "Local 94,625 (General Fund budget schedule)",
+      "issue": "Exhibit D (p4) General column breaks this down as charges for services 69,643 + interest 16,315 + miscellaneous 4,801 + the intergovernmental remainder 3,866 (9,659 - State 5,793) = 94,625 exactly. Charges for services is 73.6% of the line, so under the extractor rules (more than half -> that category) it should be charges for services/fees (or split), not other. 'Local' is also a context label for the context check.",
+      "resolved": "context label \"Local\": left for the context check (user rule 2026-11-05); Exhibit D breakdown kept as evidence"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[32].category",
+      "page": 9,
+      "extracted": "other",
+      "on_page": "Local 50,000 (Hanich Trust)",
+      "issue": "The Statement of Activities (p2) shows these 50,000 as Capital Grants and Contributions (Capital Outlay). A trust gift points to donations/contributions rather than other. The grantor is not stated."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[35].category",
+      "page": 11,
+      "extracted": "Fees of Office",
+      "on_page": "Charges for Services 590 (Register of Deeds P&M)",
+      "issue": "The same printed label 'Charges for Services' is Fees of Office here but charges for services/fees in Pre-Trial Diversion and Emergency 911 (detail[43], detail[47]). Register of Deeds preservation and modernization fees are defensible as fees of office, but the categories are inconsistent for one label."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[44].detail_category",
+      "page": 11,
+      "extracted": "county/other local governments",
+      "on_page": "Intergovernmental 6,650 (Drug Law Enforcement)",
+      "issue": "The other 'Intergovernmental' detail lines (Library, Courthouse Bond) use other state aid. The page doesn't say which level of government paid this; the extractor's own review note says the source is not stated."
+    }
+  ]
+}

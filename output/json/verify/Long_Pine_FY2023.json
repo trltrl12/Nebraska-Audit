@@ -1,0 +1,19 @@
+{
+  "stem": "Long_Pine_FY2023",
+  "values_checked": 165,
+  "issues": [
+    {"severity": "warning", "path": "business_type.ending", "page": 6,
+     "extracted": 237619, "on_page": "NET POSITION, end of year 237,619 (modified cash basis, p6); accrual-basis statement p18 prints 470,229",
+     "issue": "FY2023 uses the modified cash proprietary statement (correct basis, matches the Statement of Activities). Output/json/Long_Pine_FY2024.json starts business_type at 470,229, the accrual-basis figure, so the two years do not tie (237,619 vs 470,229). The difference is the change of basis, not a restatement. The governmental fund balance ties: FY2023 ending 477,400 = FY2024 beginning 477,400. No change to FY2023."},
+    {"severity": "warning", "path": "detail[63]", "page": 8,
+     "extracted": "Sanitation 45,465 / Sewer 30,644 / Water 156,112 from the combined all-funds budget schedule",
+     "on_page": "Combined budget and actual, all fund types (p8)",
+     "issue": "Per-fund detail rule: combined all-funds schedule lines are normally removed, and when some funds have their own schedules, no lines are added for the others. These three utility lines (detail[63]-[65]) come from the combined schedule and have no detail_totals. Water 156,112 includes the 29,789 debt service. Keeping them is defensible but contrary to the rule."},
+    {"severity": "warning", "path": "disbursements[3].category", "page": 4,
+     "extracted": "economic development", "on_page": "Community Development 1,243 (Lottery fund: Donation 1,200 + Miscellaneous 43, p13)",
+     "issue": "Lottery-fund donation spending labelled Community Development may fit the user's Community Betterment category better than economic development. Judgment call; detail[51]/[52] follow it."},
+    {"severity": "warning", "path": "detail[26].original_label", "page": 10,
+     "extracted": "Capital Outlay: Public Safety", "on_page": "Capital outlay 1,379 under heading 'Public Health and Safety - other'",
+     "issue": "The heading names health and safety together. The extractor chose Public Safety because statement p4 counts the 2,412 under Public Safety, which is reasonable but rests on an inference."}
+  ]
+}

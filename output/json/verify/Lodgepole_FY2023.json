@@ -1,0 +1,13 @@
+{
+  "stem": "Lodgepole_FY2023",
+  "values_checked": 125,
+  "issues": [
+    {"severity": "warning", "path": "report_discrepancies", "page": 6,
+     "extracted": "no entry for the Other Receipts (Disbursements) rows",
+     "on_page": "Interest income 4,256 + 3,662 + 4,727 = 12,645 vs Total 12,646; Debt service - interest (22,891) + (21,613) = (44,504) vs Total (44,505); Total-column lines 12,646 - 91,336 - 44,505 - 1,294,489 = (1,417,684) vs printed (1,417,683); Sewer 62,266 - 9,414 - 43,440 = 9,412 vs Net Change printed 9,413",
+     "issue": "$1 rounding gaps printed in the report's own proprietary statement are not listed in report_discrepancies. The JSON amounts are as printed (Total column), so no value is wrong. The per-fund detail interest (12,645) and debt interest (44,504) therefore differ by $1 from the statement-level lines."},
+    {"severity": "warning", "path": "receipts[16].category", "page": 6,
+     "extracted": "sales tax", "on_page": "Sales Tax 18,887 (Electric column)",
+     "issue": "Probably sales tax collected on electric bills. The Statement of Activities (p2, Electric charges for services 294,655 = 275,768 + 18,887) and the cash flow statement (p7, cash received from customers) count it as a customer receipt. Keeping the printed label is defensible, but it is not a local sales tax revenue. The same applies to detail[48]."}
+  ]
+}
