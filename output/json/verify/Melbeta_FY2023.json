@@ -1,0 +1,18 @@
+{
+  "stem": "Melbeta_FY2023",
+  "values_checked": 65,
+  "issues": [
+    {"severity": "warning", "path": "ending_cash", "page": 1,
+     "extracted": 237189.92, "on_page": "FY2023 p1: General line 24 220,540.73 / line 28 225,340.73 (net cash 202,551.33 + inv 22,789.40); Street line 24 16,649.19 / line 28 11,849.19 (net cash (40,249.44) + inv 52,098.63); governmental total 237,189.92 on both lines. FY2024 p1 beginning: General 202,551.33 + 22,789.40 = 225,340.73; Street (40,249.40) + 52,098.63 = 11,849.23; total line 1 238,270.19, line 3 313,158.22",
+     "issue": "Year tie, re-read visually. FY2024 opens each fund at FY2023 line 28, not line 24, so the +/-4,800 line-24 vs line-28 gap carries into FY2024 by fund; the governmental total is unaffected. FY2024 prints Street net cash (40,249.40), where FY2023 prints (40,249.44), so FY2024 beginning governmental cash 237,189.96 is 0.04 more than FY2023 ending 237,189.92 (Total column 313,158.22 vs 313,158.18). No restatement or prior-period adjustment is printed to explain the 0.04. Sewer ties at 75,968.26 and investments tie at 74,888.03. Balances are left as printed"},
+    {"severity": "warning", "path": "report_discrepancies[0]", "page": 1,
+     "extracted": 4800.0, "on_page": "General line 24 220,540.73 vs line 28 225,340.73; Street line 24 16,649.19 vs line 28 11,849.19",
+     "issue": "The +/-4,800 gaps are confirmed on re-read: the digits are clear, and each fund's lines 22-24 and 26-28 add up as printed. The gap is in the form itself (the 4,800 General-to-Street transfer is not reflected in the per-fund cash split), so report_discrepancies is correct. This is noted for the year-tie review only"},
+    {"severity": "warning", "path": "disbursements[4].fund_type", "page": 3,
+     "extracted": "governmental", "on_page": "line 45 Solid Waste 810.00 under Business-Type Activities, General Fund column",
+     "issue": "The row is a business-type function but the payment is in the General Fund column; keeping it governmental by column is defensible. The line already carries a review note"},
+    {"severity": "warning", "path": "receipts[10].category", "page": 1,
+     "extracted": "other", "on_page": "Local Receipts: Other 13,650.73 (Sewer Fund column)",
+     "issue": "This is the Sewer Fund's only receipt, so it is very likely sewer user charges, but the form doesn't say so. Local Receipts is a context label, so the line stays other until the context check decides it"}
+  ]
+}
