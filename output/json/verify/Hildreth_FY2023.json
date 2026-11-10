@@ -1,0 +1,80 @@
+{
+  "stem": "Hildreth_FY2023",
+  "values_checked": 136,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "detail[41]",
+      "page": 9,
+      "extracted": {
+        "section": "expenditure",
+        "amount": 20000,
+        "outside_printed_total": true
+      },
+      "on_page": "OTHER FINANCING SOURCES (USES): Debt service Principal (20,000) (Debt Service Fund)",
+      "issue": "The nonmajor combining schedule prints this line under Other Financing Sources (Uses), so under the printed-section rule it must not be an expenditure line marked outside_printed_total. Fix: section 'other financing', amount -20000, drop outside_printed_total. (The p4 governmental funds statement prints the same 20,000 among expenditures, so the statement-level disbursement Principal 23,999 is correct as is.)",
+      "resolved": "moved to other financing (printed section) 2026-11-10"
+    },
+    {
+      "severity": "error",
+      "path": "detail[42]",
+      "page": 9,
+      "extracted": {
+        "section": "expenditure",
+        "amount": 4706,
+        "outside_printed_total": true
+      },
+      "on_page": "OTHER FINANCING SOURCES (USES): Debt service Interest (4,706) (Debt Service Fund)",
+      "issue": "Same as detail[41]: printed under Other Financing Sources (Uses). Fix: section 'other financing', amount -4706, drop outside_printed_total.",
+      "resolved": "moved to other financing (printed section) 2026-11-10"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[7].category",
+      "page": 4,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "Intergovernmental 134,387 (General 64,241 = budget-schedule Sales tax 47,381 + Equalization 16,860, p7; SoA p2 prints Sales taxes 47,381)",
+      "issue": "Line contains the village's sales tax, but the report prints no breakdown of this exact line; left whole as intergovernmental/state aid. Already in decision_needed; noted for completeness."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[6].category",
+      "page": 10,
+      "extracted": "other",
+      "on_page": "Less: collection fees (984)",
+      "issue": "Negative county treasurer collection fee netted inside the County treasurer revenues breakdown; 'other' is defensible, but it is a treasurer fee (cost), not a receipt type. Same for detail[6], detail[11], detail[17]."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[10].category",
+      "page": 6,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "Grant revenues 2,500 (SoA p2: Operating Grants and Contributions)",
+      "issue": "Grantor not printed; state aid is an assumption (the rules say not to guess a grantor). Same for detail[44]."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[3].category",
+      "page": 4,
+      "extracted": "health/welfare",
+      "on_page": "Public welfare and social services 9,479 (p9 prints it as Culture and recreation: Cemetery 4,702 + Summer Sports 4,777; SoA p2 shows Cemetery 4,702 and puts 4,777 in Culture and recreation)",
+      "issue": "Category follows the p4 label, but half the amount is Summer Sports (culture/recreation) per p9/p2. Detail[37] (Cemetery, printed 'Culture and recreation') is categorized health/welfare from the fund name. Report inconsistency, not recorded in report_discrepancies."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[15].category",
+      "page": 6,
+      "extracted": "other",
+      "on_page": "Meter refunds 276",
+      "issue": "Specific label (meter deposit refunds) left in 'other' with no review flag on the statement line; detail[53] has a review note."
+    },
+    {
+      "severity": "warning",
+      "path": "ending_cash",
+      "page": 3,
+      "extracted": 249588,
+      "on_page": "Cash on hand 200 + Cash in bank 80,497 + Savings 166,260 + County treasurer cash 2,631; Certificates of deposit 270,198 shown separately",
+      "issue": "ending_cash is a computed sum (no single cash total is printed; total assets 519,786 includes CDs). Hildreth_FY2024 leaves ending_cash null, so the two years handle this differently; check it against the 2026-11-06 'cash is never derived' ruling."
+    }
+  ]
+}
