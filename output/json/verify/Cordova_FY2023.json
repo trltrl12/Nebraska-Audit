@@ -1,0 +1,18 @@
+{
+  "stem": "Cordova_FY2023",
+  "values_checked": 84,
+  "issues": [
+    {"severity": "warning", "path": "ending_cash.amount", "page": 1,
+     "extracted": 205119.34, "on_page": "line 24 Ending Balance Light Fund 7,181.94 (gov sum 205,119.34); line 26 Net Cash Balance Light Fund 7,818.94 (gov sum 205,756.34)",
+     "issue": "Re-read: both digits are clearly printed; 46,307.77 - 39,125.83 = 7,181.94, so line 26/28 (7,818.94; total column 372,399.66 vs line 24 371,762.66) is the report's own 637.00 gap, correctly in report_discrepancies. ending_cash takes the line 24 Ending Balance while the line printed as cash (line 26 Net Cash Balance) is 637.00 higher; under the 2026-11-06 cash-vs-fund-balance ruling which line is 'cash' is a call only the user can make, and decision_needed[] is empty. FY2024 beginning governmental cash is 205,119.34 (line 3), so FY2023 ending (line 24) = FY2024 beginning as printed; no restatement needed. Business-type ending 166,643.32 = FY2024 business_type.beginning 166,643.32."},
+    {"severity": "warning", "path": "decision_needed", "page": 1,
+     "extracted": [], "on_page": "Light Fund line 24 7,181.94 vs line 26 7,818.94",
+     "issue": "Which printed Light Fund figure is the ending cash (line 24 roll-forward vs line 26 Net Cash Balance) is not listed for the user."},
+    {"severity": "warning", "path": "disbursements[5].category", "page": 2,
+     "extracted": "utilities", "on_page": "Public Safety - Other (Water 28,048.42 p2 + Sewer 708.76 p4)",
+     "issue": "Category utilities does not match the printed label Public Safety - Other. Defensible because the amounts are in the Water/Sewer fund columns (same in detail[27] and detail[32]), but the label and category disagree."},
+    {"severity": "warning", "path": "receipts[9].fund_type", "page": 1,
+     "extracted": "governmental", "on_page": "Light Fund column: Local Receipts: Other 22,367.54; General Government 855.89; Transfers Out 38,269.94",
+     "issue": "The Light Fund name suggests an electric utility. It is kept governmental because its spending is printed on governmental line 29, which matches FY2024. This is a judgment call."}
+  ]
+}
