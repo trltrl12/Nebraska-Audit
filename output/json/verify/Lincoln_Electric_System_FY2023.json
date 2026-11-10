@@ -1,0 +1,22 @@
+{
+  "stem": "Lincoln_Electric_System_FY2023",
+  "values_checked": 67,
+  "issues": [
+    {"severity": "warning", "path": "proprietary", "page": 4,
+     "extracted": "cash flow figures used as FY2023 (operating 113,113; noncapital -24,298; capital -88,101; investing 13,515; beginning 20,790; ending 35,019)",
+     "on_page": "single column headed '2022' under title 'For the Year Ended December 31, 2023'",
+     "issue": "Header misprint; extractor's reading confirmed. The page has only one column. Its reconciliation (148,929 + 22,917 + 26,005 = 197,851 - 162,832 = 35,019) uses the 2023 balance sheet (p2). On the continuation page (p5), operating income 80,014 and depreciation 35,555 match the 2023 statement of revenues and expenses (p3). All sections add up (113,113 - 24,298 - 88,101 + 13,515 = 14,229; 20,790 + 14,229 = 35,019). This is an assumption only a reader of the page can confirm, so it is listed as a warning."},
+    {"severity": "warning", "path": "balance_sheet.total_deferred_inflows", "page": 2,
+     "extracted": 41759, "on_page": "Total deferred inflows of resources 41,759; second line also labelled 'Total deferred inflows of resources' 759,445",
+     "issue": "The second line is mislabelled. It is total liabilities and deferred inflows (170,585 + 547,101 + 41,759 = 759,445; 759,445 + 571,602 = 1,331,047). The extractor handled it correctly: it used 41,759 and did not enter 759,445 anywhere. This is a label misprint, not a math gap, so report_discrepancies is not needed. Listed for awareness only."},
+    {"severity": "warning", "path": "receipts[0].category", "page": 3,
+     "extracted": "Utility Charges", "on_page": "Electric retail 290,674; Electric wholesale 38,713",
+     "issue": "Inconsistent across years: Lincoln_Electric_System_FY2025 has the same labels under 'charges for services/fees'. FY2023 follows the 2026-10-28 Utility Charges rule, so FY2025 is probably the one to align. receipts[1] has the same issue."},
+    {"severity": "warning", "path": "disbursements[8].category", "page": 3,
+     "extracted": "other", "on_page": "City Dividend for Utility Ownership (11,890), nonoperating",
+     "issue": "'other' is a last resort. This is a payment to the City of Lincoln, printed as a nonoperating expense (correctly not a transfer under the as-printed rule). 'grants/payments to other entities' could fit. It matches FY2025's treatment."},
+    {"severity": "warning", "path": "balance_sheet.deferred_inflows[0].category", "page": 2,
+     "extracted": null, "on_page": "Reductions of future billings 34,932",
+     "issue": "No category. No existing deferred inflow category fits (regulatory deferral of future billings), so a category name is needed. The deferred outflow 'Deferred costs for asset retirement obligations' 5,190 is also uncategorized, the same as in FY2025."}
+  ]
+}
