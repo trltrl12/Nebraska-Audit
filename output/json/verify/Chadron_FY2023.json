@@ -1,0 +1,56 @@
+{
+  "stem": "Chadron_FY2023",
+  "values_checked": 315,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "disbursements[3].category",
+      "page": 7,
+      "extracted": "other",
+      "on_page": "Airport 586,322 (function row, Statement of Revenues, Expenditures and Changes in Fund Balances; also Airport function on the Statement of Activities p2)",
+      "issue": "The page prints an Airport function. The category 'Airport' is in use (config/category_decisions.csv 'airport' -> Airport; extractor rules name 'Airport' as the standard category), so 'other' is wrong when a specific category fits.",
+      "resolved": "category Airport applied 2026-11-10"
+    },
+    {
+      "severity": "error",
+      "path": "detail[94].category",
+      "page": 18,
+      "extracted": "other",
+      "on_page": "General Fund Airport department spending lines (Salaries and benefits 76,190 ... Other expenses 142,691)",
+      "issue": "Same problem for detail[94] through detail[104] (11 Airport department object lines): category 'other' where 'Airport' fits. detail[105] (Capital Outlay: Airport) is correct.",
+      "resolved": "category Airport applied 2026-11-10"
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[6].category",
+      "page": 7,
+      "extracted": "Community Betterment",
+      "on_page": "Community development 31,298 (Community Development 2,123 + Keno 8,048 + Grants 21,127, p16)",
+      "issue": "The printed label is plain 'Community development'. The user's rule maps 'Community development/betterment' to Community Betterment; category_decisions.csv gives 'community development' detail_category Community Services. A judgment call; the same applies to detail[165], detail[169] and detail[174]."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[84].category",
+      "page": 18,
+      "extracted": "streets/highways",
+      "on_page": "Handibus department (transit) spending, counted in Public works on the fund statement",
+      "issue": "Handibus is a transit service. Mass Transit exists as its own spending category, so this could be Mass Transit; streets/highways follows the report's Public works grouping. Applies to detail[84] through detail[93]."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[27].category",
+      "page": 18,
+      "extracted": "Recreation Fees",
+      "on_page": "Parks and Cemetery: Charges for services 18,750",
+      "issue": "Department mixes parks and cemetery. The line could include Cemetery Fees; there is no breakdown."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[10].category",
+      "page": 7,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "Grants and contributions 1,749,497",
+      "issue": "Mixed label with no printed split of grants vs contributions. Kept as state aid with review, per the 2026-11-06 ruling. Listed for awareness only."
+    }
+  ]
+}
