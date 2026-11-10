@@ -1,0 +1,64 @@
+{
+  "stem": "Maxwell_FY2023",
+  "values_checked": 68,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "disbursements[6].original_label",
+      "page": 2,
+      "extracted": "Capital Outlay: Utilities",
+      "on_page": "line 36 Other Capital Outlay, ENTERPRISE FUND column 7,588.07",
+      "issue": "Capital outlay rule: a function is added only when it is printed on the row, its heading, or a fund column that clearly names it. 'Enterprise Fund' doesn't name a function; the extractor inferred 'utilities' from the fund's other spending lines. Fix: original_label 'Capital Outlay' (printed_label 'Other Capital Outlay') and drop the inferred-function computed text.",
+      "resolved": "relabelled Capital Outlay (no function printed) 2026-11-10"
+    },
+    {
+      "severity": "error",
+      "path": "detail[17].original_label",
+      "page": 2,
+      "extracted": "Capital Outlay: Utilities",
+      "on_page": "line 36 Other Capital Outlay, ENTERPRISE FUND column 7,588.07",
+      "issue": "Same as disbursements[6]: the function isn't printed and the 'Enterprise Fund' column doesn't name one. Fix: original_label 'Capital Outlay'.",
+      "resolved": "relabelled Capital Outlay (no function printed) 2026-11-10"
+    },
+    {
+      "severity": "warning",
+      "path": "ending_cash",
+      "page": 1,
+      "extracted": "FY2023 ending: governmental 94,202.49 (General (9,935.94) + Street 104,138.43); business-type (36,916.68)",
+      "on_page": "FY2024 Exhibit A line 3 beginning: General (6,439.40), Street 104,287.33, Enterprise (36,738.41) = governmental 97,847.93, business-type (36,738.41)",
+      "issue": "FY2023 ending doesn't equal FY2024 beginning: governmental differs by 3,645.44 (General 3,496.54, Street 148.90) and business-type by 178.27. Investments do tie (18,032.45 / 472.04). Neither year prints a restatement or explanation. FY2023 figures match their page exactly. Not in decision_needed in either year."
+    },
+    {
+      "severity": "warning",
+      "path": "ending_investments",
+      "page": 3,
+      "extracted": "governmental 18,032.45; business-type 472.04 (balance_sheet.assets[3])",
+      "on_page": "Schedule of Investments TOTAL 18,032.45 ('Should agree to Exh A Page 1, Line 27'); Exh A line 27 TOTAL 18,504.49",
+      "issue": "The report's own Schedule of Investments (18,032.45) doesn't agree with line 27 TOTAL (18,504.49). The schedule leaves out the Enterprise Fund's 472.04. This isn't in report_discrepancies."
+    },
+    {
+      "severity": "warning",
+      "path": "beginning_cash",
+      "page": 1,
+      "extracted": "beginning_cash 97,439.39 / ending_cash 94,202.49 include investments 7,874.21 / 18,032.45, which are also in beginning_/ending_investments",
+      "on_page": "line 3 / line 24 rolled-forward balances (net cash 89,565.18 / 76,170.04 plus investments)",
+      "issue": "Cash fields hold the rolled-forward balances, including investments, so the identity holds. The same investment amounts are also in the investment fields, so anyone adding cash and investments would double count."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[8].fund_type",
+      "page": 2,
+      "extracted": "business-type, debt service (principal and interest combined) 14,377.75",
+      "on_page": "line 39 Debt Service under 'Governmental:' heading, ENTERPRISE FUND column 14,377.75",
+      "issue": "Recorded as business-type because of the fund column (sewer and water loans, p3). The form prints it in the Governmental section. This is defensible, but it is a judgment call."
+    },
+    {
+      "severity": "warning",
+      "path": "ending_cash",
+      "page": 1,
+      "extracted": "County Treasurer balances not recorded",
+      "on_page": "County Treasurer Balance at October 1, 2022 $2,919.73; at September 30, 2023 2,492.04",
+      "issue": "County Treasurer balances are printed below the statement and are not in cash or the balance sheet. This follows the form and is listed for awareness."
+    }
+  ]
+}
