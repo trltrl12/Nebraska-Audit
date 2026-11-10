@@ -1,0 +1,96 @@
+{
+  "stem": "Lyons_FY2023",
+  "values_checked": 281,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "report_discrepancies",
+      "page": 3,
+      "extracted": "not listed",
+      "on_page": "Cash in bank 364,213 + Cash with county treasurer 12,896 + Investments 175,346 = 552,455; Total Assets printed 552,456 (p3; also p1 Governmental Activities 552,456; General 216,193 + 7,693 + 175,346 = 399,232 vs 399,233; Bond 148,020 + 5,203 = 153,223 vs 153,224)",
+      "issue": "The report's governmental asset lines don't add up to its printed total, and this isn't recorded. As a result balance_sheet.assets add to 6,093,179 vs total_assets 6,093,180. Digits re-read on p1 and p3. Fix: add a report_discrepancies entry (difference 1). Figures stay as printed.",
+      "resolved": "report_discrepancies entries added 2026-11-10"
+    },
+    {
+      "severity": "error",
+      "path": "report_discrepancies",
+      "page": 1,
+      "extracted": "not listed",
+      "on_page": "Net investment in capital assets 2,085,022 + Restricted 137,962 + Unrestricted 1,760,352 = 3,983,336; Net Position printed 3,983,337 (p1 and p5)",
+      "issue": "The report's business-type net position lines don't add up to the printed total, and this isn't recorded. As a result balance_sheet.equity adds to 4,535,792 vs total_equity 4,535,793. Fix: add a report_discrepancies entry (difference 1).",
+      "resolved": "report_discrepancies entries added 2026-11-10"
+    },
+    {
+      "severity": "warning",
+      "path": "report_discrepancies",
+      "page": 12,
+      "extracted": "column gaps listed only",
+      "on_page": "Row gaps: Capital outlay 1,057+839+403 = 2,299 vs Total 2,298; Insurance - general 63,338 vs 63,339; Insurance - group 79,755 vs 79,754; Supplies - plant 23,295 vs 23,296; Labor 244,004 vs 244,005; Line and maintenance 86,568 vs 86,569. p11: Charges for services cells 43,795 vs Total 43,796. p11/p4: Parks 39,932 + Pool 126,242 + Library 51,910 = 218,084 vs Culture and recreation 218,083.",
+      "issue": "Re-read digits: the listed $1-3 gaps are real report rounding (each figure rounded separately; the p6 and p11 printed totals agree with p12/p2). Electric G&A on p12 adds to 179,112 vs printed 179,110. Reading Electric Capital outlay as 1,056 and Insurance - group as 31,901 would fix both rows but still leaves Electric total costs 1 off, so the digits are kept as read. These row-level gaps are not listed. The statement lines in the JSON use the printed Total column, so the detail cells differ from them by these dollars."
+    },
+    {
+      "severity": "warning",
+      "path": "balance_sheet.liabilities[4].category",
+      "page": 1,
+      "extracted": "debt - due in more than one year",
+      "on_page": "Bonds payable 310,000 (p5: current portion 55,000, long-term 255,000)",
+      "issue": "The p1 line is not split, but 55,000 of it is due within one year. The extractor flagged this."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[11].category",
+      "page": 7,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "Grant income 277,994",
+      "issue": "Grantor not printed (p2: Operating Grants and Contributions), so this guesses a grantor. Same for detail[107]."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[3].category",
+      "page": 4,
+      "extracted": "charges for services/fees",
+      "on_page": "Charges for services 43,796",
+      "issue": "Per the p11 schedule, 37,708 (86%) is Parks/Pool recreation fees (detail: Recreation Fees) and 6,087 is Recycling/Landfill (detail: Utility Charges). The dominant category would be Recreation Fees. Statement and detail categories disagree."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[15].category",
+      "page": 6,
+      "extracted": "Fuel",
+      "on_page": "Vehicle expense 52,858",
+      "issue": "Vehicle expense may be fuel, repairs or both. Same for detail[117], detail[137], detail[155], detail[172]."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[6].category",
+      "page": 6,
+      "extracted": "Purchased Power/Cost of Sales",
+      "on_page": "Production costs 884,608 (Electric 552,958, Gas 311,563, Water 14,954, Sewer 5,133)",
+      "issue": "Electric/gas production is likely purchased power/gas. The Water and Sewer production costs (detail[149], detail[166]) are not shown to be purchases."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[4].category",
+      "page": 4,
+      "extracted": "general government",
+      "on_page": "Public buildings 32,725 (p9: 'Public works - other')",
+      "issue": "Judgment call. The Municipal Building capital outlay (detail[67]) has no function, while that department's other lines are general government. Recycling/Landfill spending (detail[44]-detail[49]) is public safety because p4/p2 count it there."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[99].category",
+      "page": 10,
+      "extracted": "debt service (principal and interest combined) / debt interest and fees",
+      "on_page": "Other 60 (Bond Fund)",
+      "issue": "The nature of this line isn't printed. It is debt service only because the statement total counts it there."
+    },
+    {
+      "severity": "warning",
+      "path": "ending_fund_balance.amount",
+      "page": 4,
+      "extracted": 552456,
+      "on_page": "FY2024 report p6: Fund Balance - Beginning of Year 552,463 (General 399,240, Bond 153,223)",
+      "issue": "FY2023 ending 552,456 (as printed; General 399,233, Bond 153,224) does not equal the FY2024 beginning 552,463 (difference 7), and FY2024 prints no restatement. business_type ending 3,983,337 vs FY2024 beginning 3,983,296 (FY2024 p4; difference -41), also with no printed restatement. FY2023 figures are correct as printed. Leave as is."
+    }
+  ]
+}
