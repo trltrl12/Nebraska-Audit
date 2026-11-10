@@ -1,0 +1,84 @@
+{
+  "stem": "Crofton_FY2023",
+  "values_checked": 97,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "receipts[8..10].source_page",
+      "page": 2,
+      "extracted": 5,
+      "on_page": "Sewer 133,000 / Water 277,464 / Sanitation 54,583 printed in the Fees, Fines and Charges for Services column of the Statement of Activities, trimmed p2 (also p6)",
+      "issue": "Cited page 5 is the proprietary Statement of Net Position (cash only, 400,844); the extractor used the printed page number -5- instead of the trimmed page. Amounts are correct; source_page should be 2.",
+      "resolved": "source_page corrected 2026-11-10"
+    },
+    {
+      "severity": "error",
+      "path": "disbursements[5..7].source_page",
+      "page": 2,
+      "extracted": 5,
+      "on_page": "Sewer 181,882 / Water 307,029 / Sanitation 75,695 in the Disbursements column, trimmed p2",
+      "issue": "Trimmed p5 does not print these amounts (Sewer 181,882 is printed only on p2 and p7). Amounts are correct; source_page should be 2.",
+      "resolved": "source_page corrected 2026-11-10"
+    },
+    {
+      "severity": "error",
+      "path": "reported_totals.business-type.receipts.source_page / reported_totals.business-type.disbursements.source_page",
+      "page": 2,
+      "extracted": 5,
+      "on_page": "Total 465,047 (p2, p6) and Total 564,606 (p2)",
+      "issue": "Wrong source page: trimmed p5 does not print either total. Amounts are correct.",
+      "resolved": "source_page corrected 2026-11-10"
+    },
+    {
+      "severity": "error",
+      "path": "business_type.beginning_as_previously_reported / restatement / beginning / transfers_net .source_page",
+      "page": 6,
+      "extracted": 5,
+      "on_page": "746,599; Prior period adjustment (250,194); 496,405 as restated; transfers 3,998 (trimmed p2 and p6)",
+      "issue": "Wrong source page: trimmed p5 prints only the ending 400,844. Amounts are correct (business_type.ending on p5 is right).",
+      "resolved": "source_page corrected 2026-11-10"
+    },
+    {
+      "severity": "error",
+      "path": "report_discrepancies[0].source_page",
+      "page": 2,
+      "extracted": 5,
+      "on_page": "Transfers in (out) 3,998, Total 2,026 (trimmed p2); p7 transfers in 627,136 / out 625,110",
+      "issue": "Wrong source page: the 2,026 is printed on trimmed p2 (printed page -5-), not trimmed p5. The notes also cite 'Statement of Activities (p5)', which uses printed page numbers.",
+      "resolved": "source_page corrected 2026-11-10"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[1].detail_category / detail[23].detail_category",
+      "page": 4,
+      "extracted": "investment income",
+      "on_page": "Interest (General 6,510; Debt Service 2,167)",
+      "issue": "Category is Interest Income but detail_category is investment income. Other reports use detail_category 'Interest Income' for interest lines, so the two fields disagree."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[11].detail_category",
+      "page": 4,
+      "extracted": "highway allocation",
+      "on_page": "State receipts (Street Fund 124,123)",
+      "issue": "The page prints only 'State receipts'. Highway allocation is assumed from the Street Fund column; the Statement of Activities puts 128,478 of operating grants under Public Works but does not name it highway allocation."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[5].category / detail[15].category",
+      "page": 4,
+      "extracted": "donations/contributions",
+      "on_page": "Grants & contributions 5,597 (Statement of Activities p2: Operating Grants and Contributions, Culture & Recreation)",
+      "issue": "Mixed grants/contributions label with no breakdown. It could be a grant rather than a donation (user rule: grants and donations are separate categories). Defensible, but this is a judgment call."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[1].category / detail[6].category",
+      "page": 4,
+      "extracted": "public safety",
+      "on_page": "Public Health and Safety 253,907",
+      "issue": "This is a combined public health and safety line, and public safety is assumed to be the dominant part (the line has a review note). It is a judgment call."
+    }
+  ],
+  "year_to_year": "FY2023 ending governmental fund balance 842,285 (p4) = FY2024 beginning_fund_balance 842,285: ties. Business-type FY2023 ending 400,844 = FY2024 business_type.beginning_as_previously_reported 400,844: ties; FY2024 then records a printed restatement +250,597 (restated 651,441), so the difference in FY2024's restated beginning comes from that printed restatement. Cash: FY2023 ending_cash 842,285 (funds-statement Total Assets); FY2024 beginning_cash is null (not printed), so there is nothing to compare."
+}

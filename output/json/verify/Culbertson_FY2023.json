@@ -1,0 +1,17 @@
+{
+  "stem": "Culbertson_FY2023",
+  "values_checked": 65,
+  "issues": [
+    {"severity": "warning", "path": "beginning_cash / ending_cash", "page": 1,
+     "extracted": "beginning_cash 519,952.00 (line 3 General + Street) with beginning_investments 346,284.00; ending_cash 563,096.60 (line 28) with ending_investments 430,128.51",
+     "on_page": "Line 1 Net Cash Balance General 150,406.00 + Street 23,262.00; line 2 Investments General 346,284.00; line 26 General 76,193.80 + Street 56,774.29; line 27 Investments 430,128.51",
+     "issue": "Cash fields hold the cash + investments subtotals while the investments fields are filled too, so any consumer that adds cash and investments counts the CDs twice. This matches the FY2024 extraction's convention, but it is worth confirming."},
+    {"severity": "warning", "path": "disbursements[3].category / detail[10].category", "page": 2,
+     "extracted": "streets/highways", "on_page": "Public Works - Other 8,861.42 (General Fund)",
+     "issue": "The function is not printed, and the line is outside the Street Fund. Streets/highways is assumed (the line has a review note)."},
+    {"severity": "warning", "path": "disbursements[5].fund_type / detail[19].fund_type", "page": 2,
+     "extracted": "business-type", "on_page": "Line 39 Debt Service 39,095.22, printed under the Governmental heading but in the Sewer Fund column",
+     "issue": "fund_type follows the fund column (Sewer Fund; the p3 debt schedule shows a sewer project loan of 421,097), not the row heading. Defensible, but this is a judgment call."}
+  ],
+  "year_to_year": "FY2023 governmental ending_cash 563,096.60 = FY2024 beginning_cash 563,096.60; ending_investments 430,128.51 = FY2024 beginning_investments 430,128.51; business_type.ending 345,672.11 = FY2024 business_type.beginning 345,672.11. All tie as printed; no restatement."
+}
