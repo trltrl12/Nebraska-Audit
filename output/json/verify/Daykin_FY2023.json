@@ -1,0 +1,19 @@
+{
+  "stem": "Daykin_FY2023",
+  "values_checked": 68,
+  "issues": [
+    {"severity": "warning", "path": "beginning_cash", "page": 1,
+     "extracted": 204400.29, "on_page": "Line 1 Net Cash Balance General 124,158.15 + Street 3,637.43 = 127,795.58; line 2 Investments (General) 76,604.71; line 3 Subtotal 204,400.29",
+     "issue": "beginning_cash is the line 3 subtotal (cash + General Fund CDs) while beginning_investments 76,604.71 is recorded as well, so the CDs are in both fields; likewise ending_cash 192,569.79 includes ending_investments 77,257.92 (printed Net Cash Balance line 26 = 115,311.87). Same convention as Daykin_FY2024 and needed for the roll-forward, but cash + investments double counts"},
+    {"severity": "warning", "path": "balance_sheet.liabilities", "page": 5,
+     "extracted": [], "on_page": "Schedule of Outstanding Debt: DEQ, issued 3/27/2013, 2.00%, matures 12/15/2034, 286,690.79",
+     "issue": "printed outstanding loan is not a balance-sheet liability on this cash-basis form (mentioned in notes only); the user may want it shown"},
+    {"severity": "warning", "path": "balance_sheet.assets", "page": 1,
+     "extracted": null, "on_page": "County Treasurer Balance at September 30, 2023: 984.07 (October 1, 2022: 733.63)",
+     "issue": "printed county treasurer balance is outside the form's ending-balance lines and not recorded (notes only)"},
+    {"severity": "warning", "path": "disbursements[4].fund_type", "page": 3,
+     "extracted": "business-type", "on_page": "Line 39 Debt Service 31,062.43, printed under 'Governmental' in the WATER FUND column",
+     "issue": "fund_type follows the Water Fund column rather than the printed Governmental heading; defensible (DEQ loan), already marked review"}
+  ],
+  "year_link": "FY2023 ending_cash 192,569.79 = FY2024 beginning_cash 192,569.79; ending_investments 77,257.92 = FY2024 beginning_investments 77,257.92; business_type ending 248,796.24 = FY2024 business_type.beginning 248,796.24. All tie as printed; no restatement."
+}

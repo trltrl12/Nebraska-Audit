@@ -1,0 +1,56 @@
+{
+  "stem": "David_City_FY2023",
+  "values_checked": 298,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "detail[146].category",
+      "page": 16,
+      "extracted": "other",
+      "on_page": "Economic Development Fund 'Other income' 6,463 (p16); the same 6,463 is printed as 'Contributions and grants' in the Other Governmental Funds column of the governmental funds statement (p5, where Other income is '-') and as Capital Grants and Contributions, Economic development 6,463 in the Statement of Activities (p3)",
+      "issue": "category 'other' (detail_category Other / Miscellaneous Receipts) although the report's own statements classify this amount as contributions/grants; it should take the same category as the p5 'Contributions and grants' line (donations/contributions). The p16 vs p5 labelling difference is not recorded anywhere (not an arithmetic discrepancy; amounts tie).",
+      "resolved": "category donations/contributions applied 2026-11-10"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[122].section",
+      "page": 13,
+      "extracted": "other financing (printed_in revenue)",
+      "on_page": "Bond/loan proceeds 3,960,478 printed under RESOURCES (INFLOWS), inside Total resources 4,483,885",
+      "issue": "the statement-level line (receipts[11]) follows the 2026-11-06 ruling (printed among revenues -> receipt, category Debt Proceeds), but the detail line is filed as other financing; the same printed line is treated two ways in one report"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[149].section",
+      "page": 16,
+      "extracted": "other financing (printed_in revenue)",
+      "on_page": "Capital Projects Fund Bond/loan proceeds 900,000 printed under REVENUES, inside Total revenues 911,909",
+      "issue": "same as detail[122]: printed among revenues, statement line is category Debt Proceeds, detail line is other financing"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[133].category",
+      "page": 14,
+      "extracted": "Airport",
+      "on_page": "Public works 60,297 (Airport Fund)",
+      "issue": "same printed label 'Public works' is streets/highways in the Street Fund (detail[111]), Debt Service Fund (detail[140]) and the statement line (disbursements[2], which includes this 60,297); 'Airport' is an existing name and defensible from the fund, but the label is categorised two ways"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[42].detail_category",
+      "page": 17,
+      "extracted": "not itemized",
+      "on_page": "Transportation 4,686 (Police, an object line under Operating expenses)",
+      "issue": "'not itemized' is meant for function totals with no object breakdown; this is an object line (likely vehicle/fuel costs). Same for detail[54] (Summer Recreation 1,964), detail[62] (Park 4,020), detail[97] (Zoning 718). Transportation is a context label"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[17].category",
+      "page": 7,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "Grant income 729,335 (Water Fund; Statement of Activities p3 capital grants and contributions)",
+      "issue": "grantor not printed; the 2026-11-06 ruling says not to guess a grantor (state aid vs federal grants); already marked review"
+    }
+  ],
+  "year_link": "FY2023 ending fund balance 6,991,268 = FY2024 beginning_fund_balance 6,991,268 (tie as printed). Business-type: FY2023 ending net position 18,235,397 = FY2024 business_type.beginning_as_previously_reported 18,235,397; FY2024 restated beginning 19,611,677 is explained by the printed FY2024 restatement 1,376,280. FY2023 ending_cash 5,779,135 / ending_investments 1,212,133 have no FY2024 counterpart (FY2024 beginning_cash/investments null). Proprietary ending cash 5,569,168 (FY2024 proprietary null)."
+}

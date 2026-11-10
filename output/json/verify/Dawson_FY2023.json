@@ -1,0 +1,16 @@
+{
+  "stem": "Dawson_FY2023",
+  "values_checked": 65,
+  "issues": [
+    {"severity": "warning", "path": "beginning_cash", "page": 1,
+     "extracted": 135202.57, "on_page": "Line 1 Net Cash Balance General 154,993.46 + Street (21,844.20) = 133,149.26; line 2 Investments (Street) 2,053.31; line 3 Subtotal 135,202.57",
+     "issue": "beginning_cash is the line 3 subtotal (cash + Street CD) while beginning_investments 2,053.31 is recorded as well, so the CD is in both fields; likewise ending_cash 156,327.26 (line 24/28) includes ending_investments 2,068.98 (printed Net Cash Balance line 26 = 154,258.28). Same convention as Dawson_FY2024 and needed for the roll-forward, but a consumer summing cash + investments double counts"},
+    {"severity": "warning", "path": "balance_sheet.assets", "page": 1,
+     "extracted": null, "on_page": "County Treasurer Balance at September 30, 2023: 320.79 (October 1, 2022: 486.27)",
+     "issue": "printed county treasurer balance is outside the form's ending-balance lines and not recorded; left out of the totals as the form does (noted in notes only)"},
+    {"severity": "warning", "path": "disbursements[2].fund_type", "page": 3,
+     "extracted": "governmental", "on_page": "Line 45 Solid Waste 15,625.26, printed under 'Business-Type Activities' in the GENERAL FUND column",
+     "issue": "fund_type follows the fund column (governmental) rather than the printed Business-Type heading; defensible under the waiver fund-column rule, already marked review"}
+  ],
+  "year_link": "FY2023 ending_cash 156,327.26 = FY2024 beginning_cash 156,327.26; ending_investments 2,068.98 = FY2024 beginning_investments 2,068.98; business_type ending 23,602.68 = FY2024 business_type.beginning 23,602.68. All tie as printed; no restatement."
+}
