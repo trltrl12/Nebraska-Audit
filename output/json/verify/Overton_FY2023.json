@@ -1,0 +1,47 @@
+{
+  "stem": "Overton_FY2023",
+  "values_checked": 152,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "receipts[2].category",
+      "page": 5,
+      "extracted": "intergovernmental/state aid (remainder 34,186 of County treasurer revenues 226,004)",
+      "on_page": "No printed line equals 34,186. p11 County Treasurer schedule: homestead 5,990+3,107, prorate 271+191, in-lieu-of taxes 10,655+5,463, carline tax 557+243, interest 501+278, state tax credit 5,788+3,012 (=36,056) less collection fees 1,229+643 (=1,872) = 34,184; p3 Intergovernmental sources 101,225 - 49,084 - 6,605 - 11,351 = 34,185",
+      "issue": "The remainder's type is not printed. It mixes homestead, pro-rate, in lieu of tax, carline tax, interest and tax credit, net of collection fees, and it reconciles exactly to neither p11 (off by 2) nor p3 (off by 1). Putting it in state aid is a guess. Fix: keep the remainder 34,186 with the parent label 'County treasurer revenues' in the parent line's category 'taxes' (as the per-fund detail lines are recorded). Keep split_from and change computed to '226,004 - 177,278 - 14,540 = 34,186 remainder; type not printed'.",
+      "resolved": "remainder kept with parent label, category taxes"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[0]",
+      "page": 3,
+      "extracted": "Property taxes 177,278 / Motor vehicle taxes 14,540 split from County treasurer revenues 226,004",
+      "on_page": "p3 Property taxes 177,278 (= p11 116,375 + 60,903) and Motor vehicle taxes 14,540 (= p11); p9 budget schedule prints the whole 226,004 as 'Property taxes'",
+      "issue": "The two printed pieces tie exactly to the p3 and p11 figures, but they are not a complete exact breakdown of the 226,004 line: the rest is a mixed, fee-net remainder with rounding gaps, and the budget schedule labels the whole line property taxes. If the user requires the whole line to reconcile exactly, keep 226,004 unsplit (category taxes, label 'County treasurer revenues'). Otherwise keep the two pieces and apply the receipts[2] fix."
+    },
+    {
+      "severity": "warning",
+      "path": "balance_sheet.assets[3]",
+      "page": 7,
+      "extracted": "Cash and Cash Equivalents 553,745 (business-type, from p1)",
+      "on_page": "Proprietary statement of net position (p7): Cash and cash equivalents 548,611 + Certificates of deposit 5,134 = 553,745",
+      "issue": "Business-type investments (certificates of deposit 5,134) are printed on p7 but are recorded inside cash. The governmental side takes its certificates of deposit (42,431) from the funds statement (p4), so the two sides are treated inconsistently."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[8].category",
+      "page": 5,
+      "extracted": "Utility Charges",
+      "on_page": "Licenses and fees 50,753 (General 2,321; Fire and Ambulance 2,803; Other Governmental 45,629 = Trash Fund charges for services, p10)",
+      "issue": "The category does not match the printed label. It is a mixed line with Trash charges dominant (90%), so this is a defensible choice."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[24].category",
+      "page": 10,
+      "extracted": "public safety (Police Fund 26,000); detail[48] utilities (Trash Fund 56,686)",
+      "on_page": "Both printed on the 'General government' row of the nonmajor combining schedule; p5 Other Governmental column shows Public Safety 26,000 and Trash 56,686",
+      "issue": "Categories follow p5 rather than the row they are printed on in the schedule. The page itself is inconsistent, and the choice is defensible."
+    }
+  ]
+}
