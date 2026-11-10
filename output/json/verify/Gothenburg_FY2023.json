@@ -1,0 +1,90 @@
+{
+  "stem": "Gothenburg_FY2023",
+  "values_checked": 281,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "missing",
+      "page": 14,
+      "extracted": null,
+      "on_page": "Electric 4,798,518.37 (budget 7,000,114)",
+      "issue": "The all-funds budgetary schedule (p14) prints this utility expenditure line. Under the extractor rule, every other fund's budget-schedule lines, utility funds included, are recorded when only the General Fund has a more detailed schedule. It is not in detail; Gothenburg_FY2024 records the same p14 utility lines.",
+      "resolved": "p14 utility lines added to detail 2026-11-10"
+    },
+    {
+      "severity": "error",
+      "path": "missing",
+      "page": 14,
+      "extracted": null,
+      "on_page": "Waste 501,179.25 (budget 502,514)",
+      "issue": "Utility expenditure line on the all-funds budgetary schedule (p14) is not in detail.",
+      "resolved": "p14 utility lines added to detail 2026-11-10"
+    },
+    {
+      "severity": "error",
+      "path": "missing",
+      "page": 14,
+      "extracted": null,
+      "on_page": "Wastewater 602,143.34 (budget 857,668)",
+      "issue": "Utility expenditure line on the all-funds budgetary schedule (p14) is not in detail.",
+      "resolved": "p14 utility lines added to detail 2026-11-10"
+    },
+    {
+      "severity": "error",
+      "path": "missing",
+      "page": 14,
+      "extracted": null,
+      "on_page": "Water 444,915.53 (budget 840,797)",
+      "issue": "Utility expenditure line on the all-funds budgetary schedule (p14) is not in detail.",
+      "resolved": "p14 utility lines added to detail 2026-11-10"
+    },
+    {
+      "severity": "warning",
+      "path": "report_discrepancies[0]",
+      "page": 10,
+      "extracted": 9280.49,
+      "on_page": "14 operating expense rows; Total operating expenses 3,512,665.37",
+      "issue": "Re-read every row and every fund column on p10. All 14 Total-column amounts are exactly as extracted and add to 3,503,384.88. Each fund column is short by the amount the note gives (Electric 1,727,512.51 vs 1,733,461.89; Waste 500,490.83 vs 501,179.25). No other expense row is printed on p10, p11 or anywhere else in the 26-page trim. The printed total agrees with operating income 963,601.12 and with the Statement of Activities (6,612,303.22), so the gap is an unprinted row, not a misread. The FY2024 statement prints 'Bad debts' and 'Taxes' rows that FY2023 lacks, which suggests a dropped row. Recording it as a report discrepancy is correct; the full source PDF could be checked to confirm."
+    },
+    {
+      "severity": "warning",
+      "path": "report_discrepancies[2]",
+      "page": 19,
+      "extracted": 22.48,
+      "on_page": "Pool lines 40,000.00 + 8,994.44 + 11,782.96 + 17,299.64 + 1,666.66 + 649.90 + 191.06 = 80,584.66 vs Total 80,607.14",
+      "issue": "Confirmed visually: the printed pool rows do not add to the printed total. The report itself doesn't add up, and this is recorded correctly."
+    },
+    {
+      "severity": "warning",
+      "path": "ending_fund_balance",
+      "page": 7,
+      "extracted": 4346675.6,
+      "on_page": "FY2024 JSON beginning_fund_balance 4,346,775.60",
+      "issue": "FY2023 printed ending fund balance does not equal FY2024 beginning (difference 100). No restatement is recorded in FY2024. This matches the 100 gap between the p21 combining statement and the p7 funds statement (report_discrepancies[3]). business_type ending 9,564,581.76 = FY2024 beginning."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[18].category",
+      "page": 6,
+      "extracted": "other",
+      "on_page": "Other 123,403.84 (GF 105,872.27 = ACE dividends 3,671 + Municipal Co-op - fire 24,225.62 + Mowing 18,762.20 + Fees and fines 30,083.20 + Other 29,130.25, p15)",
+      "issue": "The review note says no category is over half. But the extraction's own detail puts Co-op fire, Mowing and Fees and fines in charges for services/fees: 73,071.02, which is 59% of the line. Under the 'more than half' rule this line could be charges for services/fees. It is defensible only if 'Fees and fines' is not counted as charges."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[16].category",
+      "page": 6,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "Grant receipts 2,750,000.00 (CDBG Loan Reuse column)",
+      "issue": "The grantor is not printed, so intergovernmental is an assumption (2026-11-06 rule: do not guess a grantor)."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[123].detail_category",
+      "page": 19,
+      "extracted": "miscellaneous expenditure",
+      "on_page": "Lodging tax 2,506.66 (Culture and Recreation - park)",
+      "issue": "This is a tax the park paid. A taxes-paid object could fit better than miscellaneous."
+    }
+  ]
+}

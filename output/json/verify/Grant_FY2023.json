@@ -1,0 +1,79 @@
+{
+  "stem": "Grant_FY2023",
+  "values_checked": 213,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "disbursements[20].category",
+      "page": 6,
+      "extracted": "other",
+      "on_page": "Bad debt expense 2,128",
+      "issue": "A specific category exists: config/category_decisions.csv decides 'bad debt expense' as Bad Debt (apply=label, 2026-11-05), and Gothenburg_FY2024 uses Bad Debt. The line should not be in other (user_rules.py should re-apply it).",
+      "resolved": "category Bad Debt applied 2026-11-10"
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[19].category",
+      "page": 6,
+      "extracted": "other",
+      "on_page": "Billing expense 54,594 (Electric Fund)",
+      "issue": "The cost type is not printed. Professional/Contract Services or Printing, Publishing and Postage could fit; other is defensible."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[6].category",
+      "page": 4,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "Grants and contributions 904,288 (Airport dept 879,391, p14)",
+      "issue": "Mixed grants/contributions label. The grantor is not printed in the trim, so intergovernmental is an assumption (2026-11-06: do not guess a grantor). The Statement of Activities page in the trim shows only 24,897 of operating grants; the capital grants column is not in the trim."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[13].category",
+      "page": 6,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "Grant proceeds 398,670 (Water Fund)",
+      "issue": "The grantor is not printed; the category is an assumption."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[22].category",
+      "page": 13,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "Contributions and grants 15,000 (Cemetery)",
+      "issue": "Mixed label with no grantor printed, so the category is a guess. The same applies to detail[35] (Library 7,750), detail[49] (Recreation 2,147) and detail[65] (Airport 879,391)."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[64].category",
+      "page": 14,
+      "extracted": "Recreation Fees",
+      "on_page": "Admission fees and concessions 6,594 (Airport department)",
+      "issue": "Recreation Fees for an Airport department receipt is questionable. The Statement of Activities counts it in Airport charges for services (53,742 = 47,148 + 6,594)."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[75].original_label",
+      "page": 14,
+      "extracted": "Capital Outlay",
+      "on_page": "Capital outlay 381,572 (Airport department column)",
+      "issue": "The other department capital outlay lines are labelled 'Capital Outlay: <function>' from their department column (General, Recreation). The Airport column names its function too, so 'Capital Outlay: Airport' would be consistent."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[2].category",
+      "page": 4,
+      "extracted": "streets/highways",
+      "on_page": "Public works 230,842 (Street 185,135 + General Fund Cemetery 45,707)",
+      "issue": "The statement line mixes streets with cemetery spending, which the detail categorizes as health/welfare. Streets is the dominant part, so this is defensible."
+    },
+    {
+      "severity": "warning",
+      "path": "missing",
+      "page": 2,
+      "extracted": null,
+      "on_page": "Statement of Activities: only Expenses, Charges for Services and Operating Grants columns are on trimmed p2",
+      "issue": "No capital grants, net (expense) revenue, general revenues or change in net position are in the trim, and report p16 is followed directly by p17. The original may print a wider or continued page. No statement receipts or disbursements depend on it (governmental_net_position is null for cash basis)."
+    }
+  ]
+}
