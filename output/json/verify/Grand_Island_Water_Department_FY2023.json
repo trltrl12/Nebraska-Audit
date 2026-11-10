@@ -1,0 +1,21 @@
+{
+  "stem": "Grand_Island_Water_Department_FY2023",
+  "values_checked": 55,
+  "issues": [
+    {"severity": "warning", "path": "proprietary.ending_cash.amount", "page": 4,
+     "extracted": 6987941, "on_page": "End of year 6,987,941; Total cash and cash equivalents (composition) 6,988,418",
+     "issue": "477 gap re-read and confirmed in the report itself: 6,686,517 + 301,901 = 6,988,418 exactly; 7,530,829 - 542,888 = 6,987,941 exactly; the four section totals (1,187,093 - 253,856 - 1,575,106 + 98,981) do sum to -542,888, and each section's lines add to its subtotal. The report_discrepancies entry is right. Note: the FY2025 report's 2024 column prints Beginning of year cash 6,988,418 (the composition total, which matches the Statement of Net Position), not 6,987,941, so the End of year line is the figure that does not carry forward."},
+    {"severity": "warning", "path": "balance_sheet.liabilities[3].category", "page": 2,
+     "extracted": "Accrued Liabilities", "on_page": "Compensated absences - current 10,622",
+     "issue": "Current compensated absences are Accrued Liabilities but noncurrent compensated absences (liabilities[6], 153,834) are other liabilities; same split in FY2025. Defensible but inconsistent."},
+    {"severity": "warning", "path": "balance_sheet.liabilities[4].category", "page": 2,
+     "extracted": "other liabilities", "on_page": "Accrual for payements in lieu of taxes 16,839",
+     "issue": "The FY2025 Water JSON puts the same line in Accrued Liabilities; the category differs between years for the same label."},
+    {"severity": "warning", "path": "disbursements[2].category", "page": 3,
+     "extracted": "Professional/Contract Services", "on_page": "Consumer accounting and collection 670,679",
+     "issue": "This is a utility function line (customer accounting), not a printed cost type; utilities is arguably more accurate. Matches FY2025."},
+    {"severity": "warning", "path": "disbursements[4].category", "page": 3,
+     "extracted": "Supplies and Materials", "on_page": "General office expense 16,799",
+     "issue": "Judgment call: general office expense is not clearly supplies (Electric's 'General office salaries and expense' went to Salaries and Wages). Matches FY2025 Water."}
+  ]
+}

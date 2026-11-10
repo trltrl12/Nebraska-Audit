@@ -1,0 +1,21 @@
+{
+  "stem": "Grand_Island_Electric_Department_FY2023",
+  "values_checked": 60,
+  "issues": [
+    {"severity": "warning", "path": "disbursements[5].category", "page": 3,
+     "extracted": "Salaries and Wages", "on_page": "General office salaries and expense 858,245",
+     "issue": "Mixed label (salaries and expense); Salaries and Wages is a judgment call (the same line in FY2025 also uses it)."},
+    {"severity": "warning", "path": "disbursements[3].category", "page": 3,
+     "extracted": "Professional/Contract Services", "on_page": "Consumer accounting and collection 1,768,555",
+     "issue": "This is a utility function line (customer accounting), not a printed cost type; utilities is arguably more accurate. Matches FY2025."},
+    {"severity": "warning", "path": "receipts[4].category", "page": 3,
+     "extracted": "other", "on_page": "Other revenue 3,068,968 (operating revenues, below Total sales)",
+     "issue": "Kept as other, which is defensible: the report does not count it in sales. The FY2025 Electric JSON puts Other revenue (and the energy sales lines) in charges for services/fees while FY2023 uses Utility Charges / other, so the categories differ between years."},
+    {"severity": "warning", "path": "balance_sheet.assets[4].category", "page": 1,
+     "extracted": "Other Assets", "on_page": "Due from other funds 251,297",
+     "issue": "Interfund receivable; Internal Balances or receivables could fit. Matches FY2025."},
+    {"severity": "warning", "path": "balance_sheet.liabilities[2].category", "page": 2,
+     "extracted": "Accrued Liabilities", "on_page": "Compensated absences-current 134,393",
+     "issue": "Current compensated absences are Accrued Liabilities but noncurrent compensated absences (liabilities[5], 1,528,444) are other liabilities; same split in FY2025. Defensible but inconsistent."}
+  ]
+}
