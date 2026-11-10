@@ -1,0 +1,22 @@
+{
+  "stem": "Funk_FY2023",
+  "values_checked": 76,
+  "issues": [
+    {"severity": "warning", "path": "receipts[8].category", "page": 1,
+     "extracted": "other", "on_page": "Local Receipts: Other 71,895.00 (Water & Sewer Fund column, the fund's only receipt line)",
+     "issue": "This is almost certainly water/sewer user charges (Utility Charges), but the page prints no breakdown. Leaving it in other follows the context-label rule. Flagged so the context check settles it. Same for detail[22]."},
+    {"severity": "warning", "path": "disbursements[7].fund_type", "page": 3,
+     "extracted": "governmental / utilities 888.00", "on_page": "Solid Waste 888.00, General Fund column, printed under Business-Type Activities",
+     "issue": "Kept governmental by fund column, which is defensible. The form itself prints the row as business-type, though, so the user may want to confirm."}
+  ],
+  "checks": {
+    "page_count": "5 pages; notes end 'Read pages 1-5 of 5'; pages 2 and 4 are blank continuation forms",
+    "governmental": "beginning 438,563 (line 3 governmental columns) + receipts 153,509 - disbursements 173,366 + transfers in 8,651 - transfers out 15,371 = 411,986 = line 24 governmental columns",
+    "business_type": "78,708 + 71,895 - 54,656 + 6,720 = 102,667 (Water & Sewer column)",
+    "reported_totals": "line 21 governmental 162,160 (includes transfers in 8,651) and line 52 188,737 (includes transfers out 15,371); business 78,615 with transfer 6,720 in includes_split (counted once)",
+    "balance_sheet": "net cash 394,389 + investments 17,597 + business 102,667 = 514,653 = line 28 Total; investments agree to the Schedule of Investments 17,597 (p5)",
+    "detail": "every fund column of Exhibit A recorded (Improvement Fund has no activity); per-fund totals tie to lines 21 and 52",
+    "transfers": "p5 schedule: General -> Street 8,651 and General -> Water & Sewer 6,720 = General line 50 15,371; all recorded as other financing",
+    "fy2024_tie": "FY2023 governmental ending 411,986 = Funk_FY2024 beginning_cash 411,986; Water & Sewer 102,667 = FY2024 business_type.beginning 102,667 (both tie)"
+  }
+}
