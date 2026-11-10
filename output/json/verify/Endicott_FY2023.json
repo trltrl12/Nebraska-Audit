@@ -1,0 +1,31 @@
+{
+  "stem": "Endicott_FY2023",
+  "values_checked": 73,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "report_discrepancies[0]",
+      "page": 1,
+      "extracted": "Street Fund line 22 printed 134,639.29; fund columns of line 22 add to 767,192.64 vs Total 767,192.63",
+      "on_page": "Street Fund line 22 Total Resources Available 134,639.28; Total column 767,192.63",
+      "issue": "Misread digit. Line 22 Street prints 134,639.28 = 98,259.47 + 36,379.81. The columns add up exactly: 357,892.80 + 134,639.28 + 274,660.55 = 767,192.63, the printed Total. The report itself adds up, so this report_discrepancies entry should be removed.",
+      "resolved": "misread entry removed 2026-11-10"
+    },
+    {
+      "severity": "warning",
+      "path": "beginning_investments",
+      "page": 1,
+      "extracted": 61969.33,
+      "on_page": "line 2 Investments General 50,449.86 + Street 11,519.47; line 3 subtotal 260,033.36 (used as beginning_cash)",
+      "issue": "beginning_cash is the line 3 subtotal, which already includes these investments, so the 61,969.33 is counted in both fields. The same applies at year end: ending_cash 70,150.45 (line 24) includes ending_investments 27,792.22 (line 27). The printed net cash is line 1, 198,064.03 (all governmental), and line 26, 42,358.23. FY2024 follows the same convention, and the notes say investments are informational. This is fine only if downstream code never adds the investments to the cash."
+    },
+    {
+      "severity": "warning",
+      "path": "balance_sheet.assets",
+      "page": 1,
+      "extracted": null,
+      "on_page": "County Treasurer Balance at October 1, 2022 $357.44; at September 30, 2023 380.61",
+      "issue": "County treasurer balances are printed below the statement and are recorded only in notes. They are outside the roll-forward, but county treasurer balances are Cash and Cash Equivalents under the user's rules."
+    }
+  ]
+}
