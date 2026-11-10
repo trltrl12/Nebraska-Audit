@@ -1,0 +1,41 @@
+{
+  "stem": "Obert_FY2023",
+  "values_checked": 57,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "receipts[3].amount",
+      "page": 1,
+      "extracted": 249.61,
+      "on_page": 249.81,
+      "issue": "Misread digit. Line 10 'State Receipts: State Aid' is printed 249.81 in both the General Fund and TOTAL columns. With 249.81 the General Fund lines 4-18 add to exactly 32,910.12 (line 21) and the TOTAL column to 34,624.97. The 0.20 gap the extractor reported comes from this misread, not from the report. Fix: 249.81.",
+      "resolved": "State Aid set to 249.81 (third read at 300 dpi); 0.20 discrepancies removed"
+    },
+    {
+      "severity": "error",
+      "path": "detail[3].amount",
+      "page": 1,
+      "extracted": 249.61,
+      "on_page": 249.81,
+      "issue": "The same misread in the General Fund detail line 'State Receipts: State Aid'. Fix: 249.81 (General Fund revenue detail then ties to its 32,910.12 total).",
+      "resolved": "State Aid set to 249.81 (third read at 300 dpi); 0.20 discrepancies removed"
+    },
+    {
+      "severity": "error",
+      "path": "report_discrepancies",
+      "page": 1,
+      "extracted": "3 entries (totals / reconcile / detail, 0.20 each)",
+      "on_page": "page adds up exactly once line 10 reads 249.81",
+      "issue": "All three 0.20 discrepancies come from the 249.61 misread, not from the report. Once the line is fixed, the roll-forward ties exactly (22,977.05 + 32,910.12 - 36,380.27 = 19,506.90). Remove the three entries.",
+      "resolved": "State Aid set to 249.81 (third read at 300 dpi); 0.20 discrepancies removed"
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[3].fund_type",
+      "page": 2,
+      "extracted": "governmental",
+      "on_page": "Business-Type Activities rows 45 Solid Waste 3,649.00 and 48 Water 9,986.45, printed in the GENERAL FUND column",
+      "issue": "Business-type rows are paid from the General Fund column and kept governmental by column, as in FY2024. This is defensible, but the user may want them treated as business-type. The same applies to disbursements[4] and detail[11], detail[12]. The General Fund's Local Receipts: Other 22,070.40 likely includes the matching water/solid waste collections."
+    }
+  ]
+}

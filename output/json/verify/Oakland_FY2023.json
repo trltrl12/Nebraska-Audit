@@ -1,0 +1,27 @@
+{
+  "stem": "Oakland_FY2023",
+  "values_checked": 124,
+  "issues": [
+    {"severity": "warning", "path": "report_discrepancies", "page": 1,
+     "extracted": "not recorded", "on_page": "Statement of Net Position Governmental Activities: Cash 300,960 (p3 fund statement prints 300,961); column lines 300,960 + 203,728 + 18,098 - 107,582 - 105,000 = 310,204 vs printed Total assets 310,205",
+     "issue": "The report itself doesn't add up here: p1 governmental cash is 1 below p3. The JSON uses the p3 figures, which tie, so no amount is wrong, but this gap isn't listed in report_discrepancies. The same goes for the p2 Statement of Activities general revenues (lines add to 1,455,712, printed 1,455,713; taxes 778,657 vs p4 778,658), which is cited only inside a computed note."},
+    {"severity": "warning", "path": "receipts[3].amount", "page": 4,
+     "extracted": 178000, "on_page": "Bond column Taxes 178,000 (p4); p2 Property 455,956 - GF property taxes 277,957 = 177,999",
+     "issue": "The amount is as printed. Calling the Bond Fund taxes property tax by subtraction leaves a 1 rounding gap. That gap is accepted only because the report shows the same rounding (p2 general revenues 1,455,712 vs 1,455,713). The same applies to detail[29]."},
+    {"severity": "warning", "path": "receipts[4].category", "page": 4,
+     "extracted": "intergovernmental/state aid", "on_page": "Intergovernmental revenues 286,958; p8 breakdown: highway allocation 197,004, homestead 18,179, motor vehicle tax 37,857, motor vehicle fees 13,226, pro-rate 2,505, in lieu 18,188 (= 286,959)",
+     "issue": "Kept unsplit because the p8 breakdown is 1 off. The line holds 51,083 of motor vehicle tax plus homestead, pro-rate and in-lieu money, so state aid only partly fits. This is defensible under the exact-breakdown ruling."},
+    {"severity": "warning", "path": "disbursements[7].category", "page": 4,
+     "extracted": "other", "on_page": "Keno 1,779",
+     "issue": "Keno spending has no function printed. 'other' is a judgment call (possibly Community Betterment). The same applies to detail[25]."},
+    {"severity": "warning", "path": "receipts[11].category", "page": 8,
+     "extracted": "reimbursements/refunds", "on_page": "Oakland Heights health insurance 316 (p4 'Oakland Heights')",
+     "issue": "The extractor assumed this is a reimbursement. Nothing on the page says what it is."},
+    {"severity": "warning", "path": "detail[14].category", "page": 8,
+     "extracted": "donations/contributions", "on_page": "Library 2,752",
+     "issue": "A bare 'Library' receipts line. p2 shows Library operating grants and contributions of 3,034, which supports donations, but it could be grants or library fees."},
+    {"severity": "warning", "path": "disbursements[11].debt_service_part", "page": 9,
+     "extracted": "interest (detail_category tax refunds/treasurer fees)", "on_page": "County commissions 1,597 (Bond Fund)",
+     "issue": "County treasurer commission recorded as debt service interest because the p4 Debt service line 82,945 includes it. The category and detail_category disagree (detail[33])."}
+  ]
+}
