@@ -1,0 +1,18 @@
+{
+  "stem": "Garrison_FY2023",
+  "values_checked": 45,
+  "issues": [
+    {"severity": "warning", "path": "receipts[0].amount", "page": 1,
+     "extracted": 5765.68, "on_page": "General 3,005.66 + Street 2,760.02 = 5,765.68; handwritten Total column figure (written one row low, on line 5) reads 5,165.68",
+     "issue": "the Total column figure looks like 5,165.68, which would not equal the fund cells (600.00 short) while the line 21 total 20,087.67 needs 5,765.68. If the digit is 1, the report's own Total column doesn't add up and belongs in report_discrepancies; the extraction only mentions it in notes. Ambiguous handwritten digit"},
+    {"severity": "warning", "path": "disbursements[3].original_label", "page": 2,
+     "extracted": "Capital Outlay", "on_page": "Capital Improvements 2,015.80 (Street Fund column only)",
+     "issue": "printed only in the Street Fund column, which names the function; the capital outlay rule allows 'Capital Outlay: Streets/Highways'. Same for detail[13]"},
+    {"severity": "warning", "path": "disbursements[2].category", "page": 2,
+     "extracted": "streets/highways", "on_page": "Public Works - Other 1,602.79 (General 182.66 + Street 1,420.13)",
+     "issue": "function not printed; streets/highways is an assumption (the General Fund part especially). Same for detail[6] and detail[12]"},
+    {"severity": "warning", "path": "balance_sheet.assets", "page": 1,
+     "extracted": null, "on_page": "County Treasurer Balance at September 30, 2023: 377.38 (October 1, 2022: 50.06)",
+     "issue": "printed county treasurer cash below the statement is not in the balance sheet or balances; it is outside the Exhibit A roll-forward, so leaving it out is defensible, but it is printed cash held for the village"}
+  ]
+}

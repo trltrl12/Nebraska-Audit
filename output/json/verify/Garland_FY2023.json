@@ -1,0 +1,18 @@
+{
+  "stem": "Garland_FY2023",
+  "values_checked": 150,
+  "issues": [
+    {"severity": "warning", "path": "disbursements[15].original_label", "page": 8,
+     "extracted": "Capital Outlay", "on_page": "Capital Outlay: Equipment 20,350.94 (Fire Department Fund column only)",
+     "issue": "capital outlay printed only in the Fire Department Fund column, which names the function (public safety); the capital outlay rule allows 'Capital Outlay: Public Safety'. Same for disbursements[16] (Buildings 6,700.00) and detail[32]/detail[33] (p14, Fire Department Fund column)"},
+    {"severity": "warning", "path": "receipts[18].category", "page": 12,
+     "extracted": "sales tax", "on_page": "Sales Tax 6,618.66 (Operating Receipts, Total Proprietary Funds)",
+     "issue": "sales tax collected on utility bills and remitted to the state ('Sales Tax Remittance' 6,671.32); the Statement of Activities (p2) counts it in Charges for Services (92,532.24 / 38,842.71). Recording it as the village's sales tax revenue may overstate local sales tax; same for detail[48] (Water 4,631.71) and detail[59] (Sewer 1,986.95). Remittance detail_category 'tax refunds/treasurer fees' (detail[55], detail[64]) is also a loose fit"},
+    {"severity": "warning", "path": "disbursements[18].category", "page": 12,
+     "extracted": "Operating", "on_page": "Operating Disbursements 8,158.16 (utility fund cost-type list)",
+     "issue": "utility cost-type rule says lines that are a function (e.g. 'Operating expenses') stay 'utilities'; the 'Operating' category rule applies to lines with no function. Judgment call; same for detail[50] and detail[61]"},
+    {"severity": "warning", "path": "ending_fund_balance", "page": 11,
+     "extracted": 509635.01, "on_page": "FY2024 JSON beginning_cash 257,855.51 + beginning_investments 34,552.75 = 292,408.26",
+     "issue": "cross-year: FY2023 ending governmental balance 509,635.01 (General 17,704.86, Fire Department 360,917.60, Ball Park 61,722.53, Street 66,955.85, Bank Building 2,334.17) does not equal the FY2024 waiver beginning (General 16,934.78, Fire Department 109,908.18; Street, Ball Park and Bank Building tie). No restatement is printed in the FY2023 report; the difference sits in the FY2024 filing's Fire Department and General columns. Business-type ending 2,388.15 = FY2024 beginning 2,388.15 (ties)"}
+  ]
+}
