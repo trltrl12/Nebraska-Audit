@@ -1,0 +1,11 @@
+{
+  "stem": "Loup_City_FY2023",
+  "values_checked": 154,
+  "issues": [
+    {"severity": "warning", "path": "beginning_cash", "page": 4, "extracted": 1563861, "on_page": "2022 Totals: Cash and cash equivalents (claim on cash) 824,528; Cash at county treasurer 16,889; Restricted cash and cash equivalents 722,444 (no total cash line printed)", "issue": "Cash is a sum the extractor worked out from three printed lines (marked computed, arithmetic correct). The 2026-11-06 ruling says cash is never derived, and Loup_City_FY2024 leaves beginning_cash null for the same statement. The same applies to ending_cash 281,569 = (481,421) + 25,451 + 737,539. A person should decide whether to keep these or set them to null."},
+    {"severity": "warning", "path": "business_type.measure", "page": 9, "extracted": "net position", "on_page": "NET POSITION, end of year 1,896,749 (modified cash basis)", "issue": "FY2023 ending 1,896,749 equals Loup_City_FY2024 business_type.beginning 1,896,749, but FY2024 labels the measure 'cash' while FY2023 labels it 'net position'. The measures differ between years."},
+    {"severity": "warning", "path": "detail[42].category", "page": 8, "extracted": "keno/lottery", "on_page": "Lottery fund 'Other' 6,018; Statement of Activities p2 prints Lottery 6,018 under Charges for Services", "issue": "This does not match receipts[12], where the same 6,018 is counted as 'charges for services/fees' (inside the business-type 'Other' 9,246). The same money has two categories. Either fits the page: the Statement of Activities counts it as charges for services, and the lottery-fund rule points to keno/lottery."},
+    {"severity": "warning", "path": "detail[20].detail_category", "page": 5, "extracted": "highway allocation", "on_page": "Street fund Intergovernmental 214,056", "issue": "This is an assumption. The page does not label it highway allocation, and the Statement of Activities p2 shows Street and Highway operating grants of 200,575, not 214,056."},
+    {"severity": "warning", "path": "detail[45].computed", "page": 8, "extracted": 3228, "on_page": 3228, "issue": "The Water 'Other' 3,228 is printed as-is, but the line has a 'computed' note that only explains the category. A printed amount could be read as a computed value."}
+  ]
+}
