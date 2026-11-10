@@ -1,0 +1,11 @@
+{
+  "stem": "Broken_Bow_FY2023",
+  "values_checked": 158,
+  "issues": [
+    {"severity": "warning", "path": "ending_cash", "page": 5, "extracted": 7957735, "on_page": "no single printed cash total; sum of 6,904,908 + 62,404 + 941,224 + 49,199", "issue": "ending_cash is derived by summing four governmental-funds cash lines (marked computed, arithmetic correct). The 2026-11-06 ruling says cash is never derived, and beginning_cash is null, so cash has no roll-forward."},
+    {"severity": "warning", "path": "disbursements[7].original_label", "page": 9, "extracted": "Capital Outlay: General Government", "on_page": "Capital outlay 1,202,726 (General column, no function printed)", "issue": "The function General Government is assumed (marked computed). The Statement of Activities (p3) spreads capital outlay across functions, for example Streets 1,244,837 in expenses against 622,457 in the funds statement, so the function is not established. Same assumption at detail[29]."},
+    {"severity": "warning", "path": "receipts[19].category", "page": 8, "extracted": "intergovernmental/state aid", "on_page": "Other grants 20,090 (under Grants and contributions)", "issue": "The grantor is not printed. State aid is a guess and could be federal or private. Same at detail[18]."},
+    {"severity": "warning", "path": "balance_sheet.equity", "page": 1, "extracted": "no category on Restricted for: ... / Unrestricted lines", "on_page": "Restricted for: Debt service 591,115 ... Unrestricted 7,025,537 / 13,906,237", "issue": "Eleven equity lines (equity[2]-equity[12]) have no category field. Only the two Net investment in capital assets lines are categorized."},
+    {"severity": "warning", "path": "decision_needed", "page": 15, "extracted": "not in decision_needed (only in notes)", "on_page": "Second proprietary Statement of Revenues, Expenses, and Changes in Net Position (report p53): charges for services 12,422,177, net position beginning 21,286,551 / ending 22,894,795, versus the modified cash statement (p11): 11,995,350 and 20,465,706 / 21,482,920", "issue": "The report prints two proprietary operating statements with different figures. The extractor used p11, which ties to the Statement of Activities (defensible), but a person should confirm which one is authoritative. This conflict is not in decision_needed or report_discrepancies."}
+  ]
+}

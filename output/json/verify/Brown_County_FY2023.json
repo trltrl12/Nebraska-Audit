@@ -1,0 +1,11 @@
+{
+  "stem": "Brown_County_FY2023",
+  "values_checked": 106,
+  "issues": [
+    {"severity": "warning", "path": "disbursements[5].original_label", "page": 4, "extracted": "Capital Outlay: General Government", "on_page": "Capital outlay 3,331,241 (General 282,498, Road 56,120, Capital Projects 2,228,641, Non-Major 763,982); no function printed", "issue": "The function General Government is assumed (marked computed). The Road Fund's 56,120 is road spending, and the Statement of Activities (p2) spreads capital outlay across functions, so the function is not established. The same assumption is at detail[31], detail[38] and detail[48]."},
+    {"severity": "warning", "path": "detail[45].category", "page": 8, "extracted": "utilities", "on_page": "Public works 75,522 (Sanitary Landfill Fund, p7)", "issue": "The same printed Public works money is streets/highways in disbursements[2] but utilities here. Landfill as utilities is defensible, but the report is inconsistent with itself."},
+    {"severity": "warning", "path": "detail[39].fund", "page": 8, "extracted": "Nonmajor funds (combined)", "on_page": "Combining statement pp6-8 prints 18 individual nonmajor fund columns plus Total Non-Major Funds", "issue": "The nonmajor detail is taken from the Total Non-Major Funds column, not per fund, so fund-level detail (Ambulance, ARPA, Highway Buyback, Hospital Bond, ...) is lost. The figures tie (875,163 / 1,721,331)."},
+    {"severity": "warning", "path": "ending_cash", "page": 3, "extracted": 5304437, "on_page": "Cash 3,122,128 + Restricted cash 2,182,309 = TOTAL ASSETS 5,304,437", "issue": "ending_cash is a computed sum (equal to printed Total Assets, arithmetic correct). The 2026-11-06 ruling says cash is never derived, and beginning_cash is null."},
+    {"severity": "warning", "path": "balance_sheet.equity", "page": 3, "extracted": "no category on any equity line", "on_page": "Restricted for: ... / Committed to: ... / Unassigned 3,060,263", "issue": "None of the 16 fund-balance lines has a category field."}
+  ]
+}
