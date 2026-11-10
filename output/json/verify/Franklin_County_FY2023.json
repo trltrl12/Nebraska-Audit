@@ -1,0 +1,18 @@
+{
+  "stem": "Franklin_County_FY2023",
+  "values_checked": 150,
+  "issues": [
+    {"severity": "warning", "path": "receipts[4].category", "page": 4,
+     "extracted": "intergovernmental/state aid 1,610,821", "on_page": "Intergovernmental 1,610,821; p2 Statement of Activities shows Motor vehicle taxes 155,081 inside it (operating grants 1,023,446 + motor vehicle 155,081 + state sources 438,662 + federal 56,368 = 1,610,821 + 56,368)",
+     "issue": "line holds 155,081 of motor vehicle taxes per the Statement of Activities; kept unsplit (no printed breakdown of this line itself), defensible"},
+    {"severity": "warning", "path": "detail[4].category", "page": 5,
+     "extracted": "other", "on_page": "Local 469,023 (p4 General Fund column: Charges for services 310,662, rest inside Intergovernmental)",
+     "issue": "context label; 66% is charges for services per the p4 General Fund column, so the >half rule would give charges for services/fees. Left for the context check"},
+    {"severity": "warning", "path": "detail[87].category", "page": 13,
+     "extracted": "Opioid Settlement", "on_page": "Opioid Recovery Fund - Local 3,630 (p16 combining schedule prints it as Intergovernmental)",
+     "issue": "category from the fund name while the page classes it as Intergovernmental; FY2024 JSON records the same fund's receipts as intergovernmental/state aid"},
+    {"severity": "warning", "path": "detail_totals", "page": 13,
+     "extracted": "per-fund totals for the nonmajor funds", "on_page": "TOTAL RECEIPTS 229,394 (p13), TOTAL DISBURSEMENTS 78,324 (p15)",
+     "issue": "the schedule's printed combined totals are not recorded; per-fund revenue entries for single-line funds (and Highway Bridge Buyback disbursements 59,136) are line amounts, not printed totals. Detail lines do sum to both printed totals"}
+  ]
+}
