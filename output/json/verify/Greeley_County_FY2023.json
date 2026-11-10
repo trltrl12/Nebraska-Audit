@@ -1,0 +1,82 @@
+{
+  "stem": "Greeley_County_FY2023",
+  "values_checked": 178,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "receipts[2].category",
+      "page": 1,
+      "extracted": "other",
+      "on_page": "Local receipts 259,615 (p2) = GF 203,182 + R&B 54,031 + Inheritance 446 + Other 1,956; Exhibit A charges for services 259,169 (GG 203,182, Public Works 54,031, Health and Welfare 1,956)",
+      "issue": "Exhibit A ties 259,169 of the 259,615 (99.8%) exactly, fund by fund, to charges for services. The rest is the 446 Inheritance interest. Under the more-than-half rule this should be charges for services/fees, not other.",
+      "resolved": "context label \"Local receipts\": left for the context check (user rule 2026-11-05); tie-out evidence kept for the checker"
+    },
+    {
+      "severity": "error",
+      "path": "detail[1].category",
+      "page": 5,
+      "extracted": "other",
+      "on_page": "General Fund Local receipts 203,182 = Exhibit A General government charges for services 203,182 (p1)",
+      "issue": "The page shows these are charges for services (the amount ties exactly), so other should be charges for services/fees. detail_category is also missing.",
+      "resolved": "context label \"Local receipts\": left for the context check (user rule 2026-11-05); tie-out evidence kept for the checker"
+    },
+    {
+      "severity": "error",
+      "path": "detail[56].category",
+      "page": 9,
+      "extracted": "other",
+      "on_page": "Road and Bridge Local receipts 54,031 = Exhibit A Public Works charges for services 54,031 (p1)",
+      "issue": "The amount ties exactly to charges for services, so this should be charges for services/fees. detail_category is also missing.",
+      "resolved": "context label \"Local receipts\": left for the context check (user rule 2026-11-05); tie-out evidence kept for the checker"
+    },
+    {
+      "severity": "error",
+      "path": "detail[71].category",
+      "page": 4,
+      "extracted": "other",
+      "on_page": "Preservation and Modernization Fund Local 1,956 = Exhibit A Public Health and Welfare charges for services 1,956 (p1)",
+      "issue": "The amount ties exactly to charges for services, so this should be charges for services/fees. detail_category is also missing.",
+      "resolved": "context label \"Local receipts\": left for the context check (user rule 2026-11-05); tie-out evidence kept for the checker"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[3].category",
+      "page": 1,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "Exhibit A general receipts, under Taxes: 'Property tax relief' 1,370,356 (= p2 State receipts: GF 371,838 + R&B 998,518)",
+      "issue": "Under the category rules, the printed label 'Property tax relief' supports Property Tax Credit ('state property tax credit / relief'), not Homestead Exemption: no homestead line is printed anywhere in the trim. Against that, 998,518 of it is the Road and Bridge Fund's 'State receipts' (p9). Those are normally highway allocation, and Exhibit A doesn't count them as Public Works operating grants (Public Works shows only 92,826). No breakdown is printed. decision_needed[0] already asks the user; it is kept as state aid until they decide. detail[2] (371,838) and detail[57] (998,518) depend on the same decision."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[67].category",
+      "page": 10,
+      "extracted": "Penalties and Interest on Taxes",
+      "on_page": "Schedule 4 row 'Interest on taxes' 446 (budget 252,000 on the same row); Exhibit A prints 446 as 'Interest on investments'",
+      "issue": "The row label supports Penalties and Interest on Taxes, but Exhibit A calls it interest on investments (Interest Income). The two printed labels conflict. The 252,000 budget is printed on this row, as recorded, but it looks like the fund's total budget."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[58].category",
+      "page": 9,
+      "extracted": "federal grants",
+      "on_page": "Road and Bridge 'Other receipts' 92,826 (in the p2 Federal receipts row; p1 Public Works operating grants 92,826)",
+      "issue": "The category doesn't match the printed label, though the evidence supports it. The same label 'Other receipts' is category other in the General Fund (detail[3], 3,782, Exhibit A 'Other'), so one label has two categories, each backed by different evidence."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[63].original_label",
+      "page": 9,
+      "extracted": "Capital Outlay",
+      "on_page": "Road and Bridge Fund schedule: Capital outlay 49,833",
+      "issue": "No function given. The Road and Bridge Fund column, which p2 prints entirely under Public Works, names the function, so 'Capital Outlay: Public Works' (function streets/highways) fits the capital outlay rule."
+    },
+    {
+      "severity": "warning",
+      "path": "beginning_fund_balance",
+      "page": 3,
+      "extracted": 2550719,
+      "on_page": "CASH BASIS FUND BALANCES, beginning of year (restated) 2,550,719 (p3); NET POSITION, beginning of year (restated) 2,550,719 (p1); each budget schedule pp8-11 also says '(restated)'",
+      "issue": "Confirmed: no restatement amount or as-previously-reported balance is printed anywhere in the 11 trimmed pages. It is recorded as printed with no adjustment, which is correct. The restatement's size (in the full PDF's notes) is unknown. Year tie: the ending 3,340,649 equals the FY2024 beginning 3,340,649 (FY2024 p3, not labelled restated), and every fund ties (1,387,277 / 186,316 / 1,251,867 / 457,656 / 57,533)."
+    }
+  ]
+}
