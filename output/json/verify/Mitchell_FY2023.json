@@ -1,0 +1,19 @@
+{
+  "stem": "Mitchell_FY2023",
+  "values_checked": 315,
+  "issues": [
+    {"severity": "warning", "path": "detail[194..203].category", "page": 9,
+     "extracted": "culture/recreation", "on_page": "Golf Fund operating expenses by cost type (Personnel costs 106,170, Utilities and telephone 25,988, Repairs and maintenance 35,724 ... Depreciation 25,000)",
+     "issue": "Golf Fund (business-type) cost-type lines keep the function culture/recreation while the Electric/Water/Sewer/Trash lines in the same statement take the cost type as category (Salaries and Wages, Repairs and Maintenance...). The cost-type rule is written for utility spending, so this is defensible, but the same printed labels get different categories within the report."},
+    {"severity": "warning", "path": "disbursements[2].category", "page": 5,
+     "extracted": "streets/highways", "on_page": "Public works 339,658 (Street Fund 282,514 + General Fund 57,144; p16 shows the GF 57,144 is the Cemetery department)",
+     "issue": "Mixed line: about 17% is cemetery spending, which the detail lines categorise as health/welfare (pp15-16). The statement line stays streets/highways (dominant), so detail and statement categories differ for the cemetery money. Already flagged with review."},
+    {"severity": "warning", "path": "detail[114..117]", "page": 16,
+     "extracted": "Transfers In 5,190 / 54,683 / 17,813; Transfers Out -129,846", "on_page": "Department columns: transfers in total 77,686, out (129,846), net (52,160); fund statement p5 shows GF transfers in 5,190, out (57,350)",
+     "issue": "Recorded as printed. The departmental schedule includes 72,496 of transfers between General Fund departments that the fund-level statement nets out, so detail transfers in/out are each 72,496 larger than the fund statement's (net agrees at -52,160)."},
+    {"severity": "warning", "path": "receipts[16].category", "page": 3,
+     "extracted": "occupation/franchise tax (Golf Fund Franchise fees 60,000)", "on_page": "Franchise fees 60,000 (business-type general revenues); utility funds pay Franchise fees 196,000 (p9 Total)",
+     "issue": "The franchise fees received by the Golf Fund (60,000) and most of the governmental 156,420 appear to be paid by the city's own Electric/Water/Sewer/Trash funds (196,000 of operating expense), so the same money is both utility spending and receipts. Kept as printed (correct under the as-printed rule); flagged for awareness only."}
+  ],
+  "year_tie": "FY2023 ending governmental fund balance 1,692,044 = FY2024 beginning_fund_balance 1,692,044; business-type net position 6,310,855 = FY2024 business_type.beginning 6,310,855; proprietary ending cash 2,165,645 = FY2024 proprietary.beginning_cash 2,165,645. FY2024 beginning_cash is null (not printed), so governmental cash 1,675,294 has no FY2024 counterpart. No restatement needed."
+}
