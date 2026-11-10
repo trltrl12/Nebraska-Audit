@@ -1,0 +1,13 @@
+{
+  "stem": "Norman_FY2023",
+  "values_checked": 45,
+  "issues": [
+    {"severity": "warning", "path": "receipts[8].category", "page": 1,
+     "extracted": "other", "on_page": "Local Receipts: Other (Solid Waste Fund) 3,504.00",
+     "issue": "This is 92% of Solid Waste Fund receipts and is probably garbage user fees (Utility Charges). The printed label is 'Other' and the page does not say what it is, so 'other' is allowed. It is flagged because it is more than 10% of business-type receipts. Same for detail[9]."},
+    {"severity": "warning", "path": "detail[3].detail_category", "page": 1,
+     "extracted": "Property Tax Credit", "on_page": "State Receipts: Property Tax Credit 170.28",
+     "issue": "The detailed revenue list uses 'homestead/tax credits' for this line. Naming consistency only."}
+  ],
+  "summary": "All 3 trimmed pages read; notes end 'Read pages 1-3 of 3'. Every amount matches Exhibit A in the right fund column. Governmental: 13,166.54 + 6,026.03 - 7,144.19 = 12,048.38. Solid Waste: 3,688.30 + 3,527.06 receipts + 300.00 transfer - 3,629.95 = 3,885.41. The transfer is counted once (includes_split on the 3,827.06 total). The fund-column splits of the In Lieu (179.60) and Other (3,644.34) rows are printed cells and keep the parent labels. Balance sheet 12,048.38 + 577.91 + 3,307.50 = 15,933.79 = Total. The one-sided 300.00 transfer in (no line 50 outflow; the interfund schedule on p3 is blank) is in report_discrepancies and decision_needed. Solid Waste beginning investments 3,284.44 are inside business_type.beginning; beginning_investments is null because the governmental fund has none. FY2024 JSON beginning cash 12,048.38 and business-type beginning 3,885.41 equal the FY2023 endings."
+}
