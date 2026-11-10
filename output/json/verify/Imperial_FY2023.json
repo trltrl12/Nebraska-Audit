@@ -1,0 +1,24 @@
+{
+  "stem": "Imperial_FY2023",
+  "values_checked": 333,
+  "issues": [
+    {"severity": "warning", "path": "receipts[9].category", "page": 6,
+     "extracted": "federal grants", "on_page": "Grant income 320,550 (General 500, Sales Tax 39,050, Capital Projects 281,000)",
+     "issue": "No page says who the grantor is. The user's 2026-11-06 ruling says not to guess a grantor, and config/label_synonyms.csv maps 'Grant income' to intergovernmental/state aid. The same applies to detail[27] (500, p22), detail[129] (39,050, p18) and detail[144] (281,000, p20)."},
+    {"severity": "warning", "path": "receipts[7].category", "page": 6,
+     "extracted": "intergovernmental/state aid", "on_page": "CRA reimbursement 166,017",
+     "issue": "The printed label says reimbursement, which could be reimbursements/refunds. It was put in intergovernmental/state aid because the CRA is a component unit. detail[126] (p18) has the same question."},
+    {"severity": "warning", "path": "detail[135].category", "page": 18,
+     "extracted": "Community Betterment", "on_page": "Community development 82,448 (Sales Tax Fund)",
+     "issue": "The printed label is just 'Community development'. The Community Betterment rule covers lines labelled betterment or 'Community development/betterment'. Imperial FY2024 puts the same Sales Tax Fund line in economic development, and the statement (p6) counts it in Environment and leisure."},
+    {"severity": "warning", "path": "detail[48].category", "page": 22,
+     "extracted": "charges for services/fees", "on_page": "Library: Admission fees and concessions 2,003",
+     "issue": "The same label gets different categories in this report: Recreation Fees for Park (detail[61], 16,988) and Pool (detail[76], 38,072), but charges for services/fees for Library. FY2024 does the same split."},
+    {"severity": "warning", "path": "detail[89].category", "page": 23,
+     "extracted": "Cemetery Fees", "on_page": "Cemetery: Rental and fees 4,750",
+     "issue": "'Rental and fees' gets two categories here: Rentals for Library (detail[47], 1,493) and Cemetery Fees for Cemetery. It is a mixed label with no printed breakdown. FY2024 does the same."},
+    {"severity": "warning", "path": "detail[197].detail_category", "page": 10,
+     "extracted": "rentals", "on_page": "Other Enterprise Fund (Auditorium Fund) Sales 51,894",
+     "issue": "No page shows these auditorium sales are rentals. Also, statement line receipts[16] 'Sales' 4,778,265 includes this 51,894 but is categorized Utility Charges (this is flagged in its review note)."}
+  ]
+}
