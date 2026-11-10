@@ -1,0 +1,28 @@
+{
+  "stem": "Ord_FY2023",
+  "values_checked": 288,
+  "issues": [
+    {"severity": "warning", "path": "balance_sheet.statement", "page": 1,
+     "extracted": "governmental funds balance sheet (p5-6) + proprietary Statement of Net Position (p13-14), combined totals computed",
+     "on_page": "Government-wide Statement of Net Position net-position half only (p1, report p16): governmental Total Net Position 16,396,767 incl. Net Investment in Capital Assets 6,086,212, Restricted for Grant Expenditures 345,221, Restricted for Economic Development 4,658,315, Unrestricted 2,215,367",
+     "issue": "Every recorded line matches its printed fund-statement row and the computed totals add up (assets 7,672,004 + 11,555,365 = 19,227,369; liabilities 57,751 + 2,184,225 = 2,241,976; equity 7,614,253 + 9,371,140 = 16,985,393; balances). But the government-wide figures include capital assets/debt, so the 2026-10-27 basis rule calls for the Statement of Net Position, whose asset/liability page (report p15) is not in the trim; p1 net-position lines are not recorded. The combined totals also carry the interfund balances on both sides (Due From/To Other Funds 57,751 and 802) with no elimination, so they are not a printed or government-wide figure. Needs re-trim with report p15 (config/extra_pages.csv)"},
+    {"severity": "warning", "path": "balance_sheet.liabilities[0].category", "page": 6,
+     "extracted": "other liabilities", "on_page": "Due to Other Funds 57,751",
+     "issue": "Interfund payables (liabilities[0] 57,751 and liabilities[1] 802) are other liabilities while the matching Due From Other Funds assets are Internal Balances; inconsistent treatment of the same interfund amounts"},
+    {"severity": "warning", "path": "receipts[28].category", "page": 10,
+     "extracted": "other", "on_page": "Tax Certificates 29,582 (Sales Tax Fund)",
+     "issue": "Label is not other/miscellaneous; nature of tax certificate receipts not printed (possibly tax sale certificate redemptions, i.e. property tax). Same for detail[79]. Left for review"},
+    {"severity": "warning", "path": "receipts[34].category", "page": 15,
+     "extracted": "Public Power District Sales Tax", "on_page": "NPPD Payments 472,912 (Electric Fund operating revenue)",
+     "issue": "Category is an inference; the report does not say what NPPD pays (could be lease/operating payments rather than PPD sales/in-lieu tax). Same as FY2024 and detail[93]"},
+    {"severity": "warning", "path": "detail[32].category", "page": 21,
+     "extracted": "public safety", "on_page": "Public Health Fund objects 581,892; statement p9 splits the fund into Public Safety 470,959, Public Health 82,933, Capital Outlay 28,000",
+     "issue": "All Public Health Fund object lines (detail[32]-[35]) are public safety; the fund also spends 82,933 on public health. Dominant-function choice, flagged by extractor"},
+    {"severity": "warning", "path": "detail[67].original_label", "page": 21,
+     "extracted": "Capital Outlay", "on_page": "Capital Outlay 35,705 in the Public Works Fund column",
+     "issue": "Fund column names the function, so the capital-outlay rule would allow \"Capital Outlay: Public Works\"; kept generic (statement p9 prints Capital Outlay as its own function line). Same question for detail[36] (Public Health Fund 28,000)"},
+    {"severity": "warning", "path": "detail[116].detail_category", "page": 16,
+     "extracted": "Sale of Property", "on_page": "Loss on Sale of Assets (767)",
+     "issue": "detail_category Sale of Property disagrees with category Loss on Disposal of Assets on the same line"}
+  ]
+}
