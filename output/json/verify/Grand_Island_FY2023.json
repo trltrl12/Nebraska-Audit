@@ -1,0 +1,81 @@
+{
+  "stem": "Grand_Island_FY2023",
+  "values_checked": 301,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "report_discrepancies[4]",
+      "page": 3,
+      "extracted": 124898264,
+      "on_page": 124898187,
+      "issue": "Statement of Activities 'Total business-type activities' Expenses column prints 124,898,187, which equals Electric 98,200,986 + Water 7,253,196 + Sewer 15,015,334 + Landfill 4,428,671 and ties to Total primary government 190,404,070 (65,505,883 + 124,898,187). 124,898,264 does not appear in the Expenses column; the extractor appears to have mixed in the last digits of the adjacent Charges for Services total 121,228,264. The page adds up, so this 77 'discrepancy' should be removed.",
+      "resolved": "applied 2026-11-10 (rows recorded from p7/p5; 77 gap removed)"
+    },
+    {
+      "severity": "error",
+      "path": "missing",
+      "page": 7,
+      "extracted": null,
+      "on_page": "Current portion of long-term obligation 6,960,000 (enterprise funds Total column, Statement of Net Position - Proprietary Funds)",
+      "issue": "The government-wide Statement of Net Position (p2) has no row for this amount in the Business-type column, but the trim prints it on p7. Government-wide business-type current liabilities 14,865,480 = 6,247,012 + 1,272,843 + 385,625 + 6,960,000 exactly (the p7 total of 15,846,816 also includes Due to other funds 981,336, which is eliminated as internal balances). Add it as a business-type liability (debt - due within one year, source_page 7, computed/note that p2 does not print the row) instead of listing the 6,960,000 only in report_discrepancies[1].",
+      "resolved": "applied 2026-11-10 (rows recorded from p7/p5; 77 gap removed)"
+    },
+    {
+      "severity": "error",
+      "path": "missing",
+      "page": 5,
+      "extracted": null,
+      "on_page": "Deferred Inflows of Resources: Lease receivable 85,721 (Total Governmental Funds column)",
+      "issue": "The trim prints the lease deferred inflow on p5. The government-wide total deferred inflows 1,101,834 = Deferred inflows for OPEB 1,016,113 + 85,721 exactly. Lease deferred inflows carry over unchanged to governmental activities, so add a governmental deferred_inflows line (Deferred Inflows for Leases, source_page 5, computed/note that p2 does not print the row) instead of listing it only in report_discrepancies[3].",
+      "resolved": "applied 2026-11-10 (rows recorded from p7/p5; 77 gap removed)"
+    },
+    {
+      "severity": "warning",
+      "path": "report_discrepancies[0]",
+      "page": 2,
+      "extracted": 2666518,
+      "on_page": "governmental current liability rows add to 5,926,896 against the printed total of 8,593,414",
+      "issue": "Confirmed visually: p2 is a complete page and has no 'Current portion of long-term obligations' row, so the gap is real on the printed statement. The amount is not printed anywhere in the trim (the governmental funds balance sheet carries no long-term debt; the notes are not in the trim), so recording it in report_discrepancies is correct. The FY2024 report prints this row (2,225,491 governmental, 7,005,000 business-type), so the FY2023 page probably hid the row. A person may want to pull the amount from the FY2023 long-term debt note."
+    },
+    {
+      "severity": "warning",
+      "path": "report_discrepancies[2]",
+      "page": 2,
+      "extracted": 26665,
+      "on_page": "governmental noncurrent liability rows add to 21,797,496 against the printed total of 21,824,161",
+      "issue": "Confirmed: no row on p2 or anywhere else in the trim prints 26,665 (the internal service subscription liability on p7 is 60,540, so it does not match). The gap is real on the printed page and is correctly recorded in report_discrepancies. The extractor's guess that it is the noncurrent IT subscription liability is plausible but unconfirmed."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[5].category",
+      "page": 6,
+      "extracted": "keno/lottery",
+      "on_page": "Casino 493,810",
+      "issue": "Casino (gaming) tax is not keno/lottery. 'other taxes' or a gaming-tax category could fit. FY2024 uses the same keno/lottery category, so the two years are consistent. This is a judgment call."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[90].detail_category",
+      "page": 17,
+      "extracted": "other state aid",
+      "on_page": "HUD Entitlements Fund: Intergovernmental 480,272",
+      "issue": "The fund name identifies HUD, which is federal money, so 'federal grants' may fit better than 'other state aid' (category intergovernmental/state aid). This is a judgment call."
+    },
+    {
+      "severity": "warning",
+      "path": "ending_cash",
+      "page": 4,
+      "extracted": 38632401,
+      "on_page": "Cash and cash equivalents 38,632,401; County treasurer cash 609,872; Restricted cash 189,100",
+      "issue": "ending_cash uses only the 'Cash and cash equivalents' row. The balance sheet puts county treasurer cash into Cash and Cash Equivalents, so the two treatments are inconsistent. The figure is as printed, so this is not an error."
+    },
+    {
+      "severity": "warning",
+      "path": "balance_sheet.equity[4].original_label",
+      "page": 2,
+      "extracted": "Restricted for - Closure/post-closure costs / Restricted: Library trust ...",
+      "on_page": "Restricted for (heading) + row labels",
+      "issue": "The restricted net-position labels use three different prefix styles ('Restricted for:', 'Restricted for -', 'Restricted:'). This is cosmetic."
+    }
+  ]
+}
