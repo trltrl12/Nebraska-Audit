@@ -1,0 +1,14 @@
+{
+  "stem": "Cedar_Bluffs_FY2023",
+  "values_checked": 119,
+  "issues": [
+    {"severity": "warning", "path": "beginning_cash", "page": 3, "extracted": null, "on_page": 1100166,
+     "issue": "Beginning governmental cash is left null, but p3 (Total Governmental Funds, 2022 column) prints Cash 1,100,166 (p1 2022 Total also shows 1,100,166, and proprietary cash was 0 in 2022). The 2026-11-06 ruling says cash is filled where printed. The extractor left it out because of the large 2022 interfund balances; a person should decide. FY2024 JSON also has beginning_cash null, so the years are consistent."},
+    {"severity": "warning", "path": "detail[29].category", "page": 13, "extracted": "keno/lottery", "on_page": "Keno Fund: Miscellaneous 17,329",
+     "issue": "The printed label is 'Miscellaneous'. The keno category comes from the fund name, but p2 shows this amount as community betterment operating grants and contributions. The same 17,329 sits inside the statement 'Miscellaneous' 95,771 (receipts[4]), which is categorized other, so one label gets two categories in this report."},
+    {"severity": "warning", "path": "detail[12].detail_category", "page": 10, "extracted": "highway allocation", "on_page": "Street Fund Intergovernmental 96,627",
+     "issue": "Highway allocation is assumed (the line is flagged for review). p2 shows public works operating grants of 96,004, not 96,627, so the mix inside the line is not printed."},
+    {"severity": "warning", "path": "detail[45].category", "page": 16, "extracted": "intergovernmental/state aid", "on_page": "Intergovernmental - grants 10,000",
+     "issue": "The grantor is not printed, so state aid is assumed. p7 and p2 show the line as a capital grant (recorded as business_type.other_financing)."}
+  ]
+}

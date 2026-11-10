@@ -1,0 +1,16 @@
+{
+  "stem": "Cedar_Creek_FY2023",
+  "values_checked": 89,
+  "issues": [
+    {"severity": "warning", "path": "report_discrepancies", "page": 4, "extracted": [], "on_page": "Street Fund schedule revenue 97,470, budgetary net 27,626 (p4) vs statement Street column revenue 97,864 (incl. Miscellaneous 394), change 28,020 (p2); Debt Service 150 shown as 'Motor vehicle taxes' on p2 but as 'Fees-permits-licenses' on p5",
+     "issue": "The report's own statements disagree with each other. Each page adds up internally. These differences are explained only in notes, not in report_discrepancies."},
+    {"severity": "warning", "path": "disbursements[17]", "page": 2, "extracted": {"original_label": "Capital Outlay: General Government", "category": "capital outlay"}, "on_page": "Capital outlay 156,533 (General 108,166 / Street 41,010 / Keno 7,357)",
+     "issue": "The function 'General Government' is the dominant fund's function, but the line has no 'computed' field naming it, unlike the detail capital outlay lines. Street and Keno capital outlay (48,367) are included in it."},
+    {"severity": "warning", "path": "disbursements[0..6]", "page": 2, "extracted": "general government", "on_page": "Salaries 19,728, Payroll taxes 4,345, Insurance 9,294, Utilities 8,167, Repairs and maintenance 12,869, Gas and oil 1,164, Professional fees and dues 18,911 (Total All Funds column)",
+     "issue": "These are listed by object and assigned the General Fund's function. Each line includes Street Fund amounts (8,610 / 1,653 / 3,869 / 2,303 / 4,059 / 692 / 7,306) that are streets/highways spending. This is defensible as the dominant function and is flagged for review."},
+    {"severity": "warning", "path": "disbursements[9].category", "page": 2, "extracted": "culture/recreation", "on_page": "Schools, activities & events 1,773",
+     "issue": "Category is a guess. The label names schools, and the 2026-10-29 rule says village lines naming a school are School-Related Spending."},
+    {"severity": "warning", "path": "receipts[4].category", "page": 2, "extracted": "intergovernmental/state aid", "on_page": "Street allocation & MV fees 78,116",
+     "issue": "This mixed label is kept as one line with the dominant category assumed (highway allocation). No breakdown is printed."}
+  ]
+}

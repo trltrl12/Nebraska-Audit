@@ -1,0 +1,20 @@
+{
+  "stem": "Cedar_County_FY2023",
+  "values_checked": 180,
+  "issues": [
+    {"severity": "warning", "path": "detail[85]", "page": 9, "extracted": {"fund": "Opioid Recovery Fund", "category": "other", "amount": 50000}, "on_page": "Opioid Recovery - Local 50,000 (p9); combining schedule p13 shows this 50,000 'Local' in the Local Assist & Tribal Consistency column (Opioid Recovery there = 7,800 federal only)",
+     "issue": "The report's own schedules disagree about which fund holds this 50,000. It is recorded as printed on p9 with a review note, but the conflict is not in report_discrepancies. Local Assistance and Tribal Consistency money is normally federal, so 'other' may be the wrong category. A person should settle the fund and category."},
+    {"severity": "warning", "path": "detail[67].category", "page": 9, "extracted": "charges for services/fees", "on_page": "Road - Local 62,243",
+     "issue": "Within this report the label 'Local' gets two categories: charges for services here (it equals p2 public works charges for services 62,243), but other on the statement line (receipts[4]) and on the General, 911, Debt Service, Transit and Inheritance 'Local' lines. config/category_decisions.csv decides 'local' as other (apply=label), so user_rules.py will probably overwrite this."},
+    {"severity": "warning", "path": "detail[88].category", "page": 10, "extracted": "other", "on_page": "Transit - Local 180,427",
+     "issue": "p2 public welfare charges for services are 180,437 (= Transit Local 180,427 + Transit taxes 10), which points to transit fares. The user's label decision ('local' -> other) keeps it in other."},
+    {"severity": "warning", "path": "receipts[4].category", "page": 4, "extracted": "other", "on_page": "Local 1,415,510",
+     "issue": "This follows the user's label decision for 'Local'. The extractor rules say to look at contents, and p2 shows charges for services 1,216,583 (86%) plus interest income 194,996 (3,931 not explained). The fund type has about 10% in other."},
+    {"severity": "warning", "path": "detail[77].section", "page": 9, "extracted": "other financing (printed_in revenue)", "on_page": "Debt Service: Proceeds from issuance of bonds 2,354,591 printed under Cash Receipts",
+     "issue": "The schedule prints the bond proceeds among receipts, while the fund statement (p4) prints them under other financing (debt_proceeds is correct). Under the 2026-11-06 ruling ('bond proceeds follow the printed section'), it is unclear whether the detail line should be a revenue 'Bond Proceeds' line. It is not double counted."},
+    {"severity": "warning", "path": "detail[115].category", "page": 11, "extracted": "general government", "on_page": "Inheritance Tax: Operating expense 657,946",
+     "issue": "Kept as printed. The fund statement (p4) splits this column into general government 105,451, public safety 156,053 and capital outlay 396,442, so general government is the extractor's choice of category for the whole amount."},
+    {"severity": "warning", "path": "detail_totals", "page": 10, "extracted": null, "on_page": "Total cash receipts 12,688,884 (p10); Total Cash Disbursements 11,568,987 (p12)",
+     "issue": "The governmental funds schedule's grand totals are printed but are not in detail_totals; they are only mentioned in notes. Both tie to the sum of the detail lines (transfers and bond proceeds included)."}
+  ]
+}
