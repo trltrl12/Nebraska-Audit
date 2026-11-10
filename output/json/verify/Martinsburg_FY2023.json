@@ -1,0 +1,15 @@
+{
+  "stem": "Martinsburg_FY2023",
+  "values_checked": 60,
+  "issues": [
+    {"severity": "warning", "path": "report_discrepancies", "page": 2,
+     "extracted": [], "on_page": "Crossed-out Exhibit A p1 versions (pp2-3): lines 26-28 blank/'-' (revised p1: Net Cash 250,660.84, Investments 74,465.36, subtotal 325,126.20). Crossed-out schedules page (p6): investments total '-' (revised p5: 74,465.36), transfers schedule blank (revised: General->sewer 1,920.00 + 18,927.00 = 20,847.00)",
+     "issue": "The revised pages (p1, p5, received 12/19/2023) were rightly used and the crossed-out pages (pp2, 3, 6) ignored. Every receipt, disbursement and line 3/21-24 figure is the same in both versions. The void versions' differing figures appear only in notes, not in report_discrepancies, which the crossed-out-page rule asks for."},
+    {"severity": "warning", "path": "ending_investments", "page": 1,
+     "extracted": 50326.56, "on_page": "line 27 General 23,381.42 + Street 26,945.14 (inside line 24/28)",
+     "issue": "ending_investments repeats money already inside ending_cash, while beginning_investments is null (line 2 blank). Martinsburg_FY2024.json leaves its investments fields null, so anything that adds cash + investments counts this twice. Not a wrong figure."},
+    {"severity": "warning", "path": "disbursements", "page": 4,
+     "extracted": "Wastewater 28,021.67 (Sewer), Water 877,186.93 (Water), line 49 20,847.00 (Sewer)", "on_page": "p4 figures print about half a row above their labels",
+     "issue": "Rows were assigned by column and totals, and this checks out: Sewer 28,021.67 + 20,847.00 = 48,868.67 and Water 877,186.93 = line 52. A person may still want to confirm the row placement."}
+  ]
+}

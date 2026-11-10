@@ -1,0 +1,24 @@
+{
+  "stem": "Marquette_FY2023",
+  "values_checked": 102,
+  "issues": [
+    {"severity": "warning", "path": "decision_needed", "page": 1,
+     "extracted": "ending total 707,481.18 (gov 625,682.72; business-type 81,798.46); no restatement", "on_page": "FY2023 p1 line 24/28: General 532,609.10, Street 93,073.62, Utility (68,467.57), Sewer 150,266.03 = 707,481.18. FY2024 p1 line 3: General 538,432.33, Street 39,728.94, Utility 68,147.93, Sewer 53,003.15 = 699,312.35",
+     "issue": "Year tie fails by 8,168.83 overall (FY2024 beginning lower). By fund: General +5,823.23, Street -53,344.68, Utility +136,615.50, Sewer -97,262.88; governmental 625,682.72 -> 578,161.27 (-47,521.45); business-type 81,798.46 -> 121,151.08 (+39,352.62). Investments 33,539.95 (FY2023 line 27) -> 33,634.35 (FY2024 line 2; Street 27,151.69 -> 27,246.09). The FY2023 report prints no restatement. The FY2024 filing's p6 software balance sheet (9/30/23) shows total assets 699,312.35. Its p7 shows total equity 707,480.30 and a handwritten note '699,312.35 / 707,481.18 / -8,168.83, Book as Prior Period Adj'. No Exhibit A line records the adjustment, and the funds also shift sharply between columns. FY2023 is recorded correctly as printed; a person should decide how to treat the break. Neither JSON's decision_needed[] has this question (FY2024 records it only in report_discrepancies)."},
+    {"severity": "warning", "path": "beginning_investments", "page": 1,
+     "extracted": 54228.71, "on_page": "line 2 General 27,077.02 + Street 27,151.69 (inside line 3 subtotal)",
+     "issue": "Investments fields (beginning 54,228.71, ending 33,540.13) repeat money already inside beginning_cash / ending_cash. Marquette_FY2024.json and the budget-form rule leave them null, so anything that adds cash + investments double counts. Not a wrong figure."},
+    {"severity": "warning", "path": "detail[2].detail_category", "page": 1,
+     "extracted": "highway allocation", "on_page": "State Receipts: MIRF 4,394.80 (General Fund)",
+     "issue": "MIRF (Municipal Infrastructure Redevelopment Fund) is a separate state program from highway allocation; 'other state aid' fits better. Its category (intergovernmental/state aid) is fine."},
+    {"severity": "warning", "path": "disbursements[10].category", "page": 3,
+     "extracted": "other", "on_page": "46 Transportation: General 3,777.48, Street 989.27, Utility 61.84 (under Business-Type Activities)",
+     "issue": "Transportation is a context label. The review text says 'decided by context check', but there is no context decision for Marquette_FY2023 in output/json/_meta. Same for disbursements[15] and detail rows 117, 128 and 136 (detail[17], detail[27], detail[35]). The detail_category is 'miscellaneous expenditure' even though the row is a function total with no object breakdown ('not itemized')."},
+    {"severity": "warning", "path": "disbursements[9].category", "page": 3,
+     "extracted": "utilities", "on_page": "44 Electric Utility: General 7,425.01, Street 5,697.89; 48 Water General 1,688.06",
+     "issue": "Business-type activity rows printed in governmental fund columns are recorded as governmental 'utilities'. They are probably the village's own power and water costs (e.g. street lighting), not a utility enterprise. The page doesn't say, so this is defensible (already has a review note)."},
+    {"severity": "warning", "path": "disbursements[4].category", "page": 3,
+     "extracted": "streets/highways", "on_page": "33 Public Works - Other, General Fund 9,274.25",
+     "issue": "The page doesn't name the function. streets/highways is a judgment call (it already has a review note)."}
+  ]
+}
