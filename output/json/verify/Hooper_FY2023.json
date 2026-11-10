@@ -1,0 +1,88 @@
+{
+  "stem": "Hooper_FY2023",
+  "values_checked": 205,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "receipts[11]",
+      "page": 5,
+      "extracted": {
+        "original_label": "Grants and donations",
+        "amount": 41189,
+        "outside_printed_total": true
+      },
+      "on_page": "OTHER FINANCING SOURCES (USES): Grants and donations 41,189 (Total column; General 41,189)",
+      "issue": "This line is printed under Other Financing Sources (Uses), not under RECEIPTS, so it must not be a receipt line (printed-section rule). Fix: remove receipts[11]. Set other_financing = {\"amount\": -167085, \"source_page\": 5, \"computed\": \"Grants and donations 41,189 + Debt service (208,274), printed under Other Financing Sources (Uses) p5\"}. That is +41,189 for this line, with disbursements[6] below. After the fix, governmental receipt lines add to 1,087,420 against printed 1,087,421, and the roll-forward gives (841,381) against printed (841,382). Both 1-dollar gaps are already in report_discrepancies.",
+      "resolved": "moved to other_financing (printed section) 2026-11-10"
+    },
+    {
+      "severity": "error",
+      "path": "disbursements[6]",
+      "page": 5,
+      "extracted": {
+        "original_label": "Debt service",
+        "amount": 208274,
+        "outside_printed_total": true
+      },
+      "on_page": "OTHER FINANCING SOURCES (USES): Debt service (208,274) (Total column; Bond 208,274)",
+      "issue": "This line is printed under Other Financing Sources (Uses) as a negative, not under DISBURSEMENTS, so it must not be a disbursement line. Fix: remove disbursements[6] and include -208,274 in other_financing. Combined with the grants line above, other_financing = -167,085 on p5, marked computed. After the fix, disbursement lines add to 2,153,440 against printed 2,153,441, a gap already recorded. The p3 Statement of Activities shows Debt service as a function, but the funds statement prints it in the financing section.",
+      "resolved": "moved to other_financing (printed section) 2026-11-10"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[14].amount",
+      "page": 12,
+      "extracted": 9207,
+      "on_page": "Street column, Motor vehicle tax: read as 9,207 (small print)",
+      "issue": "Both cross-checks point to 9,206. The row total is 35,640, and 26,434 + 9,207 = 35,641. The Street column total is 161,143, and the column lines add to 161,144. If 9,207 is really what's printed, the Street-column and Motor-vehicle-row gaps are rounding that report_discrepancies doesn't record. The digit needs a higher-resolution re-read."
+    },
+    {
+      "severity": "warning",
+      "path": "report_discrepancies",
+      "page": 12,
+      "extracted": "General Fund receipts lines add to 859,479",
+      "on_page": "Total receipts 859,481; JSON detail revenue lines add to 859,480",
+      "issue": "The note quotes the sum of the printed column totals (859,479), not the sum of the recorded detail lines (859,480). In the expenditures, Police (103,976 vs printed 103,975), Street (1,660,321 vs 1,660,322) and Pool (123,509 vs 123,510) are each 1 off. So are the Insurance (42,092 vs 42,093), Supplies (55,139 vs 55,140) and Other miscellaneous (6,398 vs 6,399) rows. This fits rounding, but the small print needs a re-read of those cells to rule out a misread digit."
+    },
+    {
+      "severity": "warning",
+      "path": "report_discrepancies",
+      "page": 10,
+      "extracted": null,
+      "on_page": "Bond Fund: Debt service - principal 162,536 + interest 45,399 + Other 340 = 208,275 (p10); statement Debt service (208,274) (p5)",
+      "issue": "This 1-dollar gap between the schedule and the statement isn't recorded. Neither is the p2 business-type liabilities gap: Accrued liabilities 11,973 + Customer deposits 23,175 + Due to other funds 52,000 + Bonds payable 1,600,591 = 1,687,739, but the page prints 1,687,738. JSON totals use the Total column, which does foot."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[84].category",
+      "page": 12,
+      "extracted": "health/welfare",
+      "on_page": "Cemetery department column; statement p5 'Public safety' 117,587 = Police 103,975 + Cemetery 13,612",
+      "issue": "The report counts Cemetery under Public safety, but detail[84]-[87] use health/welfare. Defensible, but it doesn't match the statement's grouping."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[23].category",
+      "page": 12,
+      "extracted": "other",
+      "on_page": "TIF column, Other miscellaneous 88,178",
+      "issue": "These are TIF-department receipts under a printed 'Other miscellaneous' label. They are possibly TIF proceeds (property tax), but the page doesn't say. Kept as other because the printed label is miscellaneous."
+    },
+    {
+      "severity": "warning",
+      "path": "ending_cash",
+      "page": 4,
+      "extracted": 529245,
+      "on_page": "Cash - unrestricted 417,988; Cash - restricted 97,221; Cash with county treasurer 14,036 (no cash total printed)",
+      "issue": "ending_cash is computed by adding three rows. The 2026-11-06 ruling says cash is never derived, and Hooper_FY2024 leaves ending_cash null, so the treatment differs between years."
+    },
+    {
+      "severity": "warning",
+      "path": "balance_sheet.liabilities[4].category",
+      "page": 2,
+      "extracted": "debt - due in more than one year",
+      "on_page": "Bonds payable 1,600,591 (p2); p6 proprietary statement: current portion 212,465, net of current portion 1,388,126",
+      "issue": "The whole bond balance is categorised as noncurrent, but the report prints the current/noncurrent split on p6 and the split adds up exactly."
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "stem": "Homer_FY2023",
+  "values_checked": 146,
+  "issues": [
+    {"severity": "warning", "path": "receipts[6].category", "page": 5,
+     "extracted": "donations/contributions", "on_page": "Contributions and grants 2,495 (p5); p9 budget schedule prints the same 2,495 as 'Grants'; p2 Statement of Activities shows it as Operating Grants and Contributions",
+     "issue": "Mixed label with no breakdown; the report's own budget schedule calls the amount 'Grants', so a grants category may fit better than donations/contributions. Same applies to detail[3]."},
+    {"severity": "warning", "path": "balance_sheet.liabilities[1].category", "page": 4,
+     "extracted": "other liabilities", "on_page": "Due to enterprise fund 13,881",
+     "issue": "The matching asset 'Due from general fund' 13,881 (assets[6]) is Internal Balances; the interfund liability is other liabilities. The two sides of the same interfund balance are categorised differently."},
+    {"severity": "warning", "path": "ending_cash", "page": 4,
+     "extracted": 348207, "on_page": "Cash and cash equivalents 348,207; County treasurer cash 4,073 (p4 Total Governmental Funds)",
+     "issue": "ending_cash uses only the 'Cash and cash equivalents' row, but balance_sheet.assets[2] puts County treasurer cash 4,073 in Cash and Cash Equivalents too. No total-cash figure is printed, so the value as printed is defensible. Flagged because the two fields don't match."}
+  ]
+}
