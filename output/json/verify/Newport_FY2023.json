@@ -1,0 +1,11 @@
+{
+  "stem": "Newport_FY2023",
+  "values_checked": 71,
+  "issues": [
+    {"severity": "warning", "path": "disbursements[4].fund_type", "page": 2, "extracted": "governmental", "on_page": "line 45 Solid Waste 10,656.00 (General Fund column, under Business-Type Activities)", "issue": "The row is printed under Business-Type Activities but sits in the General Fund column. The extractor recorded it as governmental by fund column, which is defensible and the totals tie. A person may prefer it as business-type; it is not in decision_needed."},
+    {"severity": "warning", "path": "balance_sheet.assets", "page": 1, "extracted": null, "on_page": "County Treasurer Balance at October 1, 2022 148.00; at September 30, 2023 396.00", "issue": "County Treasurer balances are printed but not recorded (the notes say they are outside the line 24/28 cash). The rules say county treasurer balances are Cash and Cash Equivalents; these are not in the statement's total, so leaving them out is defensible."},
+    {"severity": "warning", "path": "balance_sheet.liabilities", "page": 3, "extracted": [], "on_page": "Schedule of Outstanding Debt: GO Bond 41,353.47", "issue": "Outstanding debt is printed on the schedule but not on the cash statement. Liabilities are left empty, as usual for cash-basis waivers. Mentioned in notes only."},
+    {"severity": "warning", "path": "reported_totals.business-type.disbursements.includes", "page": 2, "extracted": "includes [] + includes_split 4,000", "on_page": "line 52 Sewer 9,087.00 includes line 49 Transfers Out of Surplus Fees 4,000.00", "issue": "The whole business-type transfers_net (-4,000) sits inside the printed total. includes ['transfers_net'] is the usual form. The arithmetic is the same and the transfer is counted once."}
+  ],
+  "year_tie": "FY2023 ending governmental cash 221,910.00 = FY2024 beginning_cash 221,910.00; business_type ending 91,556.00 = FY2024 beginning 91,556.00. Ties as printed."
+}
