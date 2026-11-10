@@ -1,0 +1,27 @@
+{
+  "stem": "Kearney_FY2023",
+  "values_checked": 201,
+  "issues": [
+    {"severity": "warning", "path": "report_discrepancies[1]", "page": 7,
+     "extracted": -12389, "on_page": "Transfers in 17,912,542 = 9,881,183 + 3,011,109 + 331,190 + 602,155 + 228,274 + 3,858,631; Transfers out (6,194,258) = 1,174,008 + 1,161,619 + 1,508,787 + 2,349,844 (pp6-7); enterprise Transfers out (11,730,673) = 5,058,262 + 5,058,261 + 1,614,150 (p16); SoA transfers 11,730,673 (p3)",
+     "issue": "Digits re-read and confirmed: every printed figure equals its column sum, so the 12,389 gap is real. The internal service funds column (p16) shows no transfers. This gap compares fund statements with the government-wide figures, and it is probably explained on the reconciliation to the Statement of Activities (report p21, not in the trim). It may not be a case of the report itself not adding up. Keeping it listed is harmless."},
+    {"severity": "warning", "path": "report_discrepancies[0].note", "page": 18,
+     "extracted": "fund columns differ by 1 each", "on_page": "p18 vs p14: Golf 285,600/285,600; Sanitation 991,367/991,366; Solid Waste 195,908/195,908; Sanitary Sewer 1,918,762/1,918,760; Water 1,296,679/1,296,680; Storm Water 203,256/203,255; Airport 401,990/401,989; totals 5,293,562/5,293,558",
+     "issue": "Digits re-read and confirmed: the 4 gap is real (both columns add to their printed totals). The note's wording is slightly off: Sanitary Sewer differs by 2, Water by -1, and Golf and Solid Waste don't differ. Also, the FY2024 JSON proprietary.beginning_cash is 5,293,558, while this report's proprietary.ending_cash is 5,293,562. The 4 difference is in the reports themselves."},
+    {"severity": "warning", "path": "receipts[11].category", "page": 16,
+     "extracted": "Utility Charges", "on_page": "Charges for services - Sales 32,628,173 (incl. Golf 1,322,580, Airport 3,775,305)",
+     "issue": "Total Enterprise sales include golf and airport sales, which aren't utility charges. The category is the dominant one; the line is already marked for review."},
+    {"severity": "warning", "path": "disbursements[22].original_label", "page": 16,
+     "extracted": "Capital Outlay: Utilities", "on_page": "Capital outlay 329,766 (Total Enterprise Funds; incl. Golf 25,384, Airport 257,763)",
+     "issue": "No function is printed on this row. 'Utilities' comes from the enterprise-funds convention, and most of the amount is Airport (257,763). The capital outlay rule allows a function only when it is printed."},
+    {"severity": "warning", "path": "disbursements[4].category", "page": 7,
+     "extracted": "streets/highways", "on_page": "Public works - other 431,059",
+     "issue": "Printed separately from 'Public works - streets', so streets/highways is a guess (already marked review). Same for detail[14] (434,982, p8)."},
+    {"severity": "warning", "path": "disbursements[14].original_label", "page": 7,
+     "extracted": "Capital Outlay", "on_page": "Capital outlay - Public works - other 33,189",
+     "issue": "The row prints a function, but the label has none. Every other capital outlay line carries its function. Same for detail[20] (33,189, p8)."},
+    {"severity": "warning", "path": "detail[44].category", "page": 11,
+     "extracted": "other", "on_page": "Lottery Trust Fund - Miscellaneous 825,111",
+     "issue": "Probably keno/lottery proceeds (by fund name), but the printed label is Miscellaneous and the report gives no breakdown. Already marked review."}
+  ]
+}
