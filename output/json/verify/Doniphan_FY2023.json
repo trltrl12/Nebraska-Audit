@@ -1,0 +1,49 @@
+{
+  "stem": "Doniphan_FY2023",
+  "values_checked": 191,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "receipts[18]",
+      "page": 8,
+      "extracted": "business-type receipt 'Loan proceeds' 771,773 (category Loan Proceeds, source_page 3)",
+      "on_page": "Proprietary funds statement p8 prints 'Loan proceeds 771,773' under OTHER FINANCING SOURCES (USES); the Sewer budget schedule p23 also prints it under other financing sources",
+      "issue": "Business-type lines come from the proprietary funds statement; there the loan proceeds are other financing, so they belong in business_type.debt_proceeds (2026-11-06 ruling: printed under other financing -> debt_proceeds), not in receipts. Doniphan_FY2024 records its sewer loan proceeds as business_type.debt_proceeds from p8, so the two years are inconsistent",
+      "resolved": "kept: the modified-cash Statement of Activities (the source for business-type figures in cash-basis reports) prints the loan proceeds among general revenues; user ruling 2026-11-06: proceeds printed among revenues are receipt lines"
+    },
+    {
+      "severity": "warning",
+      "path": "reported_totals.business-type.receipts",
+      "page": 8,
+      "extracted": 985679,
+      "on_page": "p8 prints Charges for services 167,824 as the only operating revenue (no total receipts line covering loan proceeds/other income)",
+      "issue": "Computed from the Statement of Activities (charges 167,824 + general revenues 817,855) instead of the proprietary statement; follows from the loan-proceeds placement above. Marked computed, arithmetic correct"
+    },
+    {
+      "severity": "warning",
+      "path": "ending_investments",
+      "page": 1,
+      "extracted": 154983,
+      "on_page": "Cash - certificates of deposit 154,983 (included in governmental TOTAL ASSETS 1,286,848)",
+      "issue": "ending_cash 1,286,848 already includes the CDs, so the same 154,983 appears in both fields; beginning_investments 152,302 comes from the 2022 Totals column of the governmental funds statement p4 while beginning_cash is null. Doniphan_FY2024 has beginning_investments null"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[40].original_label",
+      "page": 12,
+      "extracted": "Capital Outlay: Streets/Highways",
+      "on_page": "Capital outlay / Equipment 138,618 (no function printed)",
+      "issue": "Capital outlay rule: function only when printed. Same for detail[49] 'Capital Outlay: Culture/Recreation' (p14 'Capital outlay / Equipment' 13,197), detail[105] 'Capital Outlay: Utilities' (p23 'Capital outlay / Improvements' 583,315) and disbursements[14] 'Capital Outlay: Utilities' (p8 'Capital outlay'); the function comes from the fund name"
+    }
+  ],
+  "checks": {
+    "pages": "Trimmed PDF has 23 pages; notes end 'Read pages 1-23 of 23'; all pages read visually.",
+    "receipts": "Governmental lines sum 783,675 = printed Total revenues p5. Taxes 176,647 split 62,093 + 24,933 (GF schedule p10) + 89,621 (Debt Service schedule p20), exact. Franchises and leases 109,269 split 105,232 + 4,037 from p10 printed rows, exact.",
+    "disbursements": "Governmental sum 973,711 = printed p5; business-type sum 748,921 = printed p8.",
+    "roll_forward": "Governmental 1,426,884 + 783,675 - 973,711 + 156,170 - 106,170 = 1,286,848. Business-type -112,847 + 985,679 - 748,921 - 50,000 = 73,911.",
+    "balance_sheet": "Government-wide p1 used (funds statement total assets 1,441,697 includes deficit-cash liability 154,849, so totals differ). Governmental assets sum 1,286,848, business-type 73,911, total 1,360,759 = printed; equity sums match.",
+    "detail": "All lines on pp10-23 match printed actuals and budgets; per-fund totals tie (GF 223,667 / 292,259; Street 165,218 / 198,517; Park 59,212; Landfill 12,165; Lottery 18,349; Sales Tax 192,991; Hall Deposit 10,100; Building 33,985 / 164,565; Debt Service 109,545 / 105,868; Water 115,672 / 83,470; Sewer 98,234 / 665,451 / 821,773). Blank-actual lines correctly skipped.",
+    "transfers": "GF in 106,170 (Lottery 6,170 + Water 100,000); GF out 100,000 (Street 4,000 + Park 46,000 + Sewer 50,000); all recorded as transfers, none inside spending.",
+    "fy2024": "FY2023 ending fund balance 1,286,848 = Doniphan_FY2024 beginning_fund_balance 1,286,848; business-type ending 73,911 = FY2024 business_type.beginning 73,911 (ties). FY2024 ending_cash is null while FY2023 ending_cash is filled (cash measure printed only as total assets on p1)."
+  }
+}
