@@ -1,0 +1,19 @@
+{
+  "stem": "Elk_Creek_FY2023",
+  "values_checked": 43,
+  "issues": [
+    {"severity": "warning", "path": "detail[9].original_label", "page": 3,
+     "extracted": "Capital Outlay: Streets/Highways", "on_page": "Capital Improvements 6,592.00 (Street Fund column)",
+     "issue": "The function comes from the fund column name, not from a printed function (rule: function only when printed). It is also inconsistent with detail[13] (Public Works Fund Capital Improvements 17,650.00), which is labelled plain 'Capital Outlay'."},
+    {"severity": "warning", "path": "detail[9].detail_category", "page": 3,
+     "extracted": "construction/infrastructure", "on_page": "Capital Improvements",
+     "issue": "'Capital Improvements' is only arguably an object. If it is not treated as one, the rule calls for 'not itemized'. detail[13] has the same issue."},
+    {"severity": "warning", "path": "disbursements[2].category", "page": 3,
+     "extracted": "utilities", "on_page": "Public Works - Other 101,724.00 (Public Works Fund column, under Governmental)",
+     "issue": "The category is a guess; the page prints only 'Public Works - Other'. The fund-type question is already in decision_needed. detail[12] has the same issue."},
+    {"severity": "warning", "path": "balance_sheet.assets", "page": 1,
+     "extracted": null, "on_page": "County Treasurer Balance at October 1, 2022 $83.00; at September 30, 2023 450.00",
+     "issue": "The county treasurer cash balances are printed below the statement and are not in the line 28 total. They are recorded only in notes."}
+  ],
+  "cross_year": "FY2023 ending = FY2024 beginning exactly as printed: cash 138,850.00 = 138,850.00, investments 25,567.00 = 25,567.00. Page count 6 (p6 is the compilation report), notes end 'Read pages 1-6 of 6'. All lines tie to Exhibit A lines 21/23/24/52. The line 24 vs 28 differences in the General (+/-1) and Street funds are correctly in report_discrepancies."
+}

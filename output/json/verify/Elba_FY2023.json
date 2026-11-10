@@ -1,0 +1,48 @@
+{
+  "stem": "Elba_FY2023",
+  "values_checked": 118,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "detail[26].detail_category",
+      "page": 3,
+      "extracted": "equipment purchases",
+      "on_page": "Other Capital Outlay 275.00 (Street Fund column)",
+      "issue": "No object is printed for this capital outlay row, so per the capital outlay rule detail_category should be 'not itemized'. 'Equipment purchases' is a guess.",
+      "resolved": "detail_category not itemized 2026-11-10"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[25].original_label",
+      "page": 3,
+      "extracted": "Capital Outlay: Streets/Highways",
+      "on_page": "Capital Improvements 24,279.91 (Street Fund column)",
+      "issue": "The function comes from the fund column name, not from a printed function (rule: function only when printed). It is also inconsistent with detail[9], the General Fund 'Capital Improvements' 3,396.58, which is labelled plain 'Capital Outlay'. detail[26] has the same issue."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[9].detail_category",
+      "page": 3,
+      "extracted": "construction/infrastructure",
+      "on_page": "Capital Improvements 3,396.58 (General Fund column)",
+      "issue": "'Capital Improvements' is only arguably an object. If it is not treated as one, the rule calls for 'not itemized'. detail[25] (Street 24,279.91) has the same issue."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[6].fund_type",
+      "page": 3,
+      "extracted": "governmental (utilities)",
+      "on_page": "Solid Waste 228.00, printed under 'Business-Type Activities' in the General Fund column",
+      "issue": "The page puts this row under business-type activities but in a governmental fund column. Keeping it governmental is defensible (General Fund column) but it is a judgment call, and it is not in decision_needed. detail[11] has the same issue."
+    },
+    {
+      "severity": "warning",
+      "path": "balance_sheet.assets",
+      "page": 1,
+      "extracted": null,
+      "on_page": "County Treasurer Balance at October 1, 2022 $374.61; at September 30, 2023 843.07",
+      "issue": "The county treasurer cash balances are printed below the statement and are not in the line 28 total. They are recorded only in notes, not as a balance-sheet or cash figure. This is consistent with the printed roll-forward."
+    }
+  ],
+  "cross_year": "FY2023 ending = FY2024 beginning exactly as printed: governmental 415,629.00 (FY2024 beginning_cash 415,629.00), governmental investments 30,372.12 = 30,372.12, business-type 439,672.00 = 439,672.00. No restatement involved. Page count 4, notes end 'Read pages 1-4 of 4'. All receipts, disbursements, transfers, per-fund detail and detail_totals tie to Exhibit A lines 21/23/24/52, and the beginning/ending totals tie to the printed Total column (812,667.12 / 855,301.00)."
+}
