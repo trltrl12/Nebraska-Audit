@@ -1,0 +1,19 @@
+{
+  "stem": "Jansen_FY2023",
+  "values_checked": 118,
+  "issues": [
+    {"severity": "warning", "path": "receipts[8].category", "page": 4,
+     "extracted": "intergovernmental/state aid", "on_page": "Grant income 177,214 (p4); Statement of Activities p2: Operating Grants and Contributions 164,067 (Policy/administration), Capital Grants and Contributions 13,147 (Public works)",
+     "issue": "The report doesn't name the grantor. intergovernmental/state aid (and detail_category 'other state aid' on detail[5] and detail[11]) assumes a state grantor, against the 2026-11-06 rule 'do not guess a grantor'. Defensible, but unconfirmed."},
+    {"severity": "warning", "path": "detail[33].outside_printed_total", "page": 8,
+     "extracted": true, "on_page": "Bond principal paid (29,276) and Bond interest (21,968), inside 'Total other financing sources (uses)' (51,244)",
+     "issue": "Both other-financing lines (detail[33], detail[34]) are inside their own printed total, so outside_printed_total: true is misleading. The amounts and section are correct."},
+    {"severity": "warning", "path": "ending_cash", "page": 3,
+     "extracted": 215804, "on_page": "Total assets 215,804 = Cash in bank 215,069 + Cash with county treasurer 735 (p3)",
+     "issue": "Ending cash is taken from the printed 'Total assets' line, which is all cash, not from a line labelled cash. It carries a note but no computed field."},
+    {"severity": "warning", "path": "detail[35]", "page": 6,
+     "extracted": "per-fund proprietary lines from the basic statement p6 (Sewer, Water)", "on_page": "Schedule 4 p10: combined proprietary budget comparison (Total only)",
+     "issue": "Proprietary detail per fund comes from the basic statement's fund columns because the only proprietary schedule is combined. The governmental funds do have their own schedule (Schedule 2), and the 2026-10-28 rule says statement lines aren't added when schedules show funds. Judgment call."}
+  ],
+  "fy2024_tie": "FY2023 governmental ending_cash and ending fund balance 215,804 = FY2024 beginning_cash 215,804 (waiver form). FY2023 proprietary cash ending 41,440 = FY2024 business_type.beginning 41,440 (cash measure; FY2023 business_type uses net position 1,133,314, a different measure). Ties as printed."
+}
