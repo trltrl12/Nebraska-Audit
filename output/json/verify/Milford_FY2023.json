@@ -1,0 +1,72 @@
+{
+  "stem": "Milford_FY2023",
+  "values_checked": 100,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "detail[33..36]",
+      "page": 6,
+      "extracted": "Water Fund / Sewer Fund detail = 4 rows from the p8 combined all-funds budgetary schedule (Water 486,933 / 875,646; Sewer 211,619 / 245,339)",
+      "on_page": "p6 Statement of Revenues, Expenditures and Changes in Fund Net Position prints Water and Sewer fund columns: User fees 432,427 / 205,557; Miscellaneous income 26,247 / 2,646; Salaries 45,555 / 82,523; Payroll taxes 3,537 / 5,761; Employee benefits 17,030 / 11,794; Retirement 588 / 3,604; Meetings and training 3,648 / 4,168; Repairs and maintenance 93,598 / 64,678; Utilities 31,943 / 10,383; Telephone 313 / 487; Insurance 22,061 / 14,256; Operating supplies 22,557 / 16,137; Office supplies 3,582 / 3,356; Legal and professional 23,244 / 6,233; Gas and oil 2,421 / 2,368; Depreciation 102,093 / 51,910; Miscellaneous 4,559 / 3,449; Interest income 19,159 / 2,400; Interest expense (17,050) / -; Gain on debt extinguishment 328,908 / -; Loan fees (8,341) / -; totals 458,674 / 208,203 operating revenues, 376,729 / 281,107 operating expenses",
+      "issue": "Per-fund detail rule (cities and villages, 2026-10-27/28): when the only supplementary schedule is a combined all-funds one, detail is one line per individual fund column of the governmental funds statement AND the proprietary funds statement; combined-schedule lines are not used. p8 is that combined schedule. Fix: replace detail[33..36] with the p6 Water Fund and Sewer Fund column lines (utility cost-type categories, function utilities) and add their detail_totals. Milford_FY2024 already does this (Water/Sewer object lines).",
+      "resolved": "Water/Sewer detail replaced from p6 fund columns 2026-11-10"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[0]",
+      "page": 2,
+      "extracted": "Taxes 1,036,251 (p4), category taxes, not split",
+      "on_page": "p4 Total Governmental Funds Taxes 1,036,251 (fund cells 889,133 + 71,200 + 50,228 + - + 25,690 = 1,036,251). p2 general receipts, re-read digit by digit: Property taxes 590,158; Property tax credit 32,499; Motor vehicle tax 51,490; Sales and use tax 305,966; In lieu tax 26,975; Occupation tax 29,162 = 1,036,250. p2 Charges for services 257,368 vs p4 257,367; both statements total 2,196,494.",
+      "issue": "Digits confirmed: the report itself is off by 1 between statements, with an offsetting +1 in charges for services (p2 vs p4), i.e. rounding shown in the report. Rule 4 of the tax-split evidence standard accepts rounding the report itself shows, so a p2-based split (incl. Property Tax Credit 32,499 as its own category) is arguably allowed; keeping it unsplit is defensible. Either way the 1-dollar cross-statement differences (taxes, charges for services) should be in report_discrepancies, which the JSON lacks (only in notes/review)."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[1]",
+      "page": 2,
+      "extracted": "Intergovernmental 653,681, intergovernmental/state aid; review says 'no printed breakdown of this line'",
+      "on_page": "p2 prints Streets operating grants 285,405 + State aid and equalization 154,807 + NPPD payments 213,469 = 653,681 exactly (General Fund column 368,276 = 154,807 + 213,469; Street column 285,405)",
+      "issue": "A printed breakdown that adds up exactly does exist. NPPD payments 213,469 (58% of the General Fund line, detail[1] 368,276 'other state aid') may belong in Public Power District Sales Tax / another category rather than state aid; detail[17] Street 285,405 'highway allocation' is a reasonable reading of the Streets operating grant. Category judgment for the user."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[4]",
+      "page": 2,
+      "extracted": "Grants and donations 203,564, donations/contributions",
+      "on_page": "p2 Operating Grants and Contributions: General government 15,236 + Culture and recreation 188,328 = 203,564",
+      "issue": "Mixed label (grants vs donations) with no grantor breakdown; donations/contributions is a judgment call (same in detail[4], [24], [30] and in FY2024)."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[7].category",
+      "page": 2,
+      "extracted": "other",
+      "on_page": "Gain on debt extinguishment 328,908",
+      "issue": "No listed category fits; 'other' vs a new name (cf. 'Loss on Disposal of Assets' precedent). Already in decision_needed (cash flow statement p7 shows loan proceeds 730,906 and no gain)."
+    },
+    {
+      "severity": "warning",
+      "path": "business_type.measure",
+      "page": 2,
+      "extracted": "cash (beginning 1,843,811, ending 1,771,845)",
+      "on_page": "p2 Beginning/Ending net position business-type 1,843,811 / 1,771,845 (= Total cash 1,171,845 + Certificates of deposit 600,000, p1); p7 cash and cash equivalents 1,243,811 -> 1,171,845",
+      "issue": "Figures are modified-cash net position (includes CDs), not cash; measure label 'cash' is loose. Amounts are as printed and roll forward exactly; FY2024 uses the same treatment."
+    },
+    {
+      "severity": "warning",
+      "path": "ending_cash",
+      "page": 1,
+      "extracted": 3645861,
+      "on_page": "p1 governmental column: Cash and cash equivalents 2,578,608 + Restricted cash 1,067,253 = 'Total cash' 3,645,861 (printed subtotal); then printed separately below it: Cash at county treasurer 14,914, Restricted cash at county treasurer 1,503, Certificates of deposit 719,676; Total assets 4,381,954",
+      "issue": "ending_cash equals the printed 'Total cash' line, which excludes county treasurer cash 16,417 (14,914 + 1,503) printed below it; no printed line combines them. As printed, but county treasurer cash is Cash and Cash Equivalents in the balance sheet, so the user may want to know. Also Milford_FY2024 sets ending_cash null, so the treatment differs between years."
+    },
+    {
+      "severity": "warning",
+      "path": "detail (fund 'Other Governmental Funds')",
+      "page": 4,
+      "extracted": "Other Governmental Funds combined column lines (revenue 132,619; expenditure 252,587)",
+      "on_page": "No page of the trim prints individual nonmajor fund columns (no combining statements). p8 prints only fund totals: receipts Economic Development 91,417, Senior Center 36,012, Special Gifts 5,190 (= 132,619); disbursements Economic Development 144,168, Senior Center 108,420 (= 252,588, 1 more than p4 252,587)",
+      "issue": "Keeping the combined printed column is consistent with the rules since no individual columns are printed; noted because p8 gives per-fund totals (not by receipt type) and differs from p4 by 1 on disbursements (report rounding)."
+    }
+  ],
+  "checks": "Trimmed PDF 8 pages; notes end 'Read pages 1-8 of 8'. All p4 Total Governmental Funds and fund-column cells match; receipts 2,196,494, disbursements 2,445,977 tie; fund columns tie to their printed totals; fund balance 4,631,437 + 2,196,494 - 2,445,977 = 4,381,954. Transfers: General (307,650) out = Street 150,000 + Fire 87,650 + Other 70,000 in, recorded as transfers, not spending; Total column prints '-'. Business-type p2: 486,933 + 211,619 + 328,908 + 21,559 = 1,049,019; 875,646 + 245,339 = 1,120,985; 1,843,811 + 1,049,019 - 1,120,985 = 1,771,845. Proprietary p7: 409,982 - 503,508 + 21,560 = -71,966; 1,243,811 -> 1,171,845. Balance sheet p3/p1 lines tie to 4,381,954 and 1,771,845; total 6,153,799. FY2024 tie: FY2024 beginning_fund_balance 4,381,954 = FY2023 ending_fund_balance; FY2024 business_type.beginning 1,771,845 = FY2023 ending."
+}
