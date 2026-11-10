@@ -1,0 +1,32 @@
+{
+  "stem": "Hamilton_County_FY2023",
+  "values_checked": 300,
+  "issues": [
+    {"severity": "warning", "path": "receipts[5]", "page": 3,
+     "extracted": "State 3,013,672 split into Property tax credit 476,003, Homestead exemption payments 58,011, Prorate motor vehicle 10,624 and remainder State 2,469,034 (computed)",
+     "on_page": "Exhibit B prints State 3,013,672 with no breakdown; the three pieces are Exhibit A general receipts lines (p1-2)",
+     "issue": "split rests on the inference that these Exhibit A general receipts sit in the Exhibit B 'State' line (Taxes 6,162,492 ties exactly to Exhibit A total taxes, so they are not in Taxes). Arithmetic is exact and FY2024 does the same, but the report does not print a breakdown of the State line itself. Applies to receipts[5]-receipts[8]."},
+    {"severity": "warning", "path": "receipts[9].category", "page": 3,
+     "extracted": "other", "on_page": "Local 1,426,175",
+     "issue": "broad county 'Local' group; Exhibit A fees, fines and charges for services 1,178,029 (p1) are most of it, which under the extractor's broad-line rule would point to charges for services/fees. Kept as other, consistent with Hamilton_County_FY2024 (user category decision for 'Local'); context label, needs the context check."},
+    {"severity": "warning", "path": "detail[106].category", "page": 14,
+     "extracted": "lodging tax (Visitors Promotion Fund Taxes 9,443, computed from fund name)", "on_page": "Exhibit A general receipts 'Other taxes 9,442' (p1)",
+     "issue": "the statement-level piece receipts[3] is category other taxes from the printed Exhibit A label, while the detail line for the same money is lodging tax from the fund name; the two disagree (and differ by a $1 report rounding). A printed tax-type label beats a fund name."},
+    {"severity": "warning", "path": "detail[103].original_label", "page": 12,
+     "extracted": "Capital Outlay (no function)", "on_page": "Inheritance Tax Fund Capital outlay 50,000; Exhibit B (p3) reports the whole Inheritance Tax Fund column 173,190 under Public Works",
+     "issue": "the fund's Personnel and Operating lines take function streets/highways from Exhibit B, but its capital outlay line is left without a function; same for detail[105] ARPA Fund Capital outlay 201,681 (ARPA column 201,799 is under Public Works on p3). Inconsistent treatment within the fund."},
+    {"severity": "warning", "path": "receipts[2]", "page": 1,
+     "extracted": "Inheritance tax 565,314 (Exhibit A)", "on_page": "Exhibit B Inheritance Tax Fund Taxes 565,313 (p3, p12); Exhibit A interest 356,169 vs Exhibit B interest 356,170",
+     "issue": "$1 rounding differences printed in the report itself between Exhibit A and Exhibit B; the extraction ties exactly (split pieces sum to 6,162,492; Interest uses Exhibit B 356,170) and records them only in notes, not report_discrepancies."}
+  ],
+  "checks": {
+    "page_count": "15 pages; notes end 'Read pages 1-15 of 15'; every statement and schedule line on pp1-15 is in the JSON once (zero-activity funds Veterans' Aid, Federal Drug Law, E-911 Holding, GIS dept have no 2023 amounts)",
+    "governmental_receipts": "Taxes pieces 5,019,643 + 568,093 + 565,314 + 9,442 = 6,162,492; State pieces 476,003 + 58,011 + 10,624 + 2,469,034 = 3,013,672; total with Federal 1,092,908, Local 1,426,175, Interest 356,170 = 12,051,417 = printed Total receipts (p3)",
+    "governmental_disbursements": "7 lines sum 10,922,238 = printed Total disbursements (p3)",
+    "roll_forward": "11,985,381 + 12,051,417 - 10,922,238 + 1,738,715 - 1,738,715 = 13,114,560 = printed end of year (p4)",
+    "balance_sheet": "Cash 13,114,560; restricted lines sum 2,279,457 (= Exhibit A Restricted) + Committed 9,070,300 + Unassigned 1,764,803 = 13,114,560 (p4)",
+    "detail": "General Fund revenue 8,446,688; every department ties to its printed total; general government 4,322,582, public safety 1,958,548, public works 18,916, welfare 60,683 = 6,360,729 + transfer 1,738,715 = 8,099,444 printed; Road, Inheritance Tax, ARPA and each nonmajor fund column tie to printed totals (pp11-15)",
+    "transfers": "General Fund Transfer out 1,738,715 = Road Fund Transfers in 1,718,715 + Sinking Fund Operating transfers in 20,000; none inside spending lines",
+    "year_tie": "FY2023 ending fund balance 13,114,560 (p4) = Hamilton_County_FY2024 beginning_fund_balance 13,114,560 as printed on FY2024 Exhibit B p5 (General 1,764,803, Road 1,484,037, Inheritance Tax 7,078,233, Other 2,787,487 = FY2023 ARPA 1,422,224 + Other 1,365,263). No restatement or prior period adjustment printed in either year. FY2023 beginning 11,985,381 printed as-is."
+  }
+}

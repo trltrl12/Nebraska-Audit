@@ -1,0 +1,26 @@
+{
+  "stem": "Halsey_FY2023",
+  "values_checked": 63,
+  "issues": [
+    {"severity": "warning", "path": "detail[16].category", "page": 1,
+     "extracted": "intergovernmental/state aid (other state aid)", "on_page": "State Receipts: Other 1,834.56 in the SALES TAX FUND column",
+     "issue": "the only receipt of the Sales Tax Fund; may be local option sales tax remitted by the state. No review flag (Halsey_FY2024 flags the same line for review). receipts[4] (10,696.35 Total column) includes this 1,834.56 with General Fund 8,861.79."},
+    {"severity": "warning", "path": "receipts[9].category", "page": 1,
+     "extracted": "other", "on_page": "Local Receipts: Other 12,544.43 (SEWER FUND column, its only receipt)",
+     "issue": "100% of business-type receipts in other; Halsey_FY2024 records the same Sewer Fund line as Utility Charges (sewer charges). Same applies to detail[18]. Context label: needs a page-based decision so both years agree."},
+    {"severity": "warning", "path": "detail[13].computed", "page": 2,
+     "extracted": "Capital Outlay: Streets/Highways (no computed)", "on_page": "Capital Improvements 3,422.00 (STREET FUND column)",
+     "issue": "function taken from the fund column but not marked in computed (Hallam_FY2023 and disbursements[3] mark it); same for detail[19] 'Capital Outlay: Utilities' 17,366.67 (Sewer Fund)."}
+  ],
+  "checks": {
+    "page_count": "3 pages; notes end 'Read pages 1-3 of 3'; every non-blank Exhibit A row is present",
+    "governmental_receipts": "9 lines 64,846.69 + transfers in 461.21 = 65,307.90 = line 21 General 43,698.19 + Street 19,313.94 + Debit Card 361.21 + Sales Tax 1,934.56",
+    "governmental_disbursements": "3 lines 56,091.22 + transfers out 461.21 = 56,552.43 = line 52 General 42,747.40 + Street 13,443.82 + Debit Card 361.21",
+    "governmental_roll": "49,458.35 + 64,846.69 - 56,091.22 + 461.21 - 461.21 = 58,213.82 = line 24/26 governmental columns",
+    "business_type_roll": "23,597.64 + 12,544.43 - 24,504.58 = 11,637.49 (Sewer line 24)",
+    "balance_sheet": "58,213.82 + 11,637.49 = 69,851.31 = printed TOTAL lines 24/26/28",
+    "detail": "all fund-column cells recorded once; per-fund totals tie to lines 21 and 52",
+    "transfers": "General transfers out 461.21 = Debit Card 361.21 + Sales Tax 100.00 transfers in (p3 schedule); none left in spending",
+    "year_tie": "FY2023 ending governmental cash 58,213.82 = Halsey_FY2024 beginning_cash 58,213.82; Sewer ending 11,637.49 = FY2024 business_type.beginning 11,637.49 (ties as printed)"
+  }
+}
