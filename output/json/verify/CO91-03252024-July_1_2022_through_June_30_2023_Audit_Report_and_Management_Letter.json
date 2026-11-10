@@ -1,0 +1,26 @@
+{
+  "stem": "CO91-03252024-July_1_2022_through_June_30_2023_Audit_Report_and_Management_Letter",
+  "values_checked": 177,
+  "issues": [
+    {"severity": "warning", "path": "detail[59].category", "page": 13,
+     "extracted": "reimbursements/refunds", "on_page": "Miscellaneous 3,680 (Opioid Settlement Fund)",
+     "issue": "an opioid settlement receipt is not a reimbursement or refund. 'Opioid Settlement' is already a category in config/category_decisions.csv; otherwise the line should stay other, since its printed label is Miscellaneous"},
+    {"severity": "warning", "path": "detail[86].category", "page": 15,
+     "extracted": "charges for services/fees (detail_category ambulance/rescue fees)", "on_page": "Charges for Services 83,317 (Red Cloud Ambulance Fund)",
+     "issue": "category and detail_category disagree. Ambulance Fees is its own receipt category (user 2026-10-28), but the category was left as charges for services/fees"},
+    {"severity": "warning", "path": "detail[89].category", "page": 15,
+     "extracted": "charges for services/fees (detail_category ambulance/rescue fees)", "on_page": "Charges for Services 65,669 (Blue Hill Ambulance Fund)",
+     "issue": "category and detail_category disagree. Ambulance Fees is its own receipt category (user 2026-10-28), but the category was left as charges for services/fees"},
+    {"severity": "warning", "path": "disbursements[7].original_label", "page": 4,
+     "extracted": "Capital Outlay", "on_page": "Capital Outlay 101,245",
+     "issue": "the label does not follow the 'Capital Outlay: <function>' rule. The statement line combines Bladen Highway North Project Fund (59,245) and Remodeling Fund (42,000), and no function is printed"},
+    {"severity": "warning", "path": "detail[44].original_label", "page": 4,
+     "extracted": "Capital Outlay", "on_page": "Capital Outlay 59,245 (Bladen Highway North Project Fund)",
+     "issue": "the label does not follow the 'Capital Outlay: <function>' rule. The function would be Public Works (highway project fund), and printed_label is not set"},
+    {"severity": "warning", "path": "detail[75].original_label", "page": 14,
+     "extracted": "Capital Outlay", "on_page": "Capital Outlay 42,000 (Remodeling Fund)",
+     "issue": "the label does not follow the 'Capital Outlay: <function>' rule. The function would be General Government (Remodeling Fund), and printed_label is not set"}
+  ],
+  "year_tie": "FY2023 ending fund balance 7,555,114 (p4) = CO91-11082024 (FY2024) beginning_fund_balance 7,555,114 as printed. No restatement needed. FY2024 beginning_cash is null, while FY2023 ending cash is 7,555,114 (p3).",
+  "summary": "All 15 pages read (notes say 'Read pages 1-15 of 15'). Statement receipts sum to 7,385,271 and disbursements to 8,005,728, both as printed. Transfers in and out are 1,097,275 each, and the detail transfers tie to that by fund. Proceeds from Sale of Capital Assets (173,465) is printed under other financing, so it correctly sits in other_financing. The roll-forward 8,002,106 + 7,385,271 - 8,005,728 + 173,465 = 7,555,114 ties. Balance-sheet fund balances sum to 7,555,114. Every detail schedule ties to its printed totals, including nonmajor revenue of 555,992 and disbursements of 732,080. The GF Taxes split (3,576,626 + 170,890 + 352,030 + 21,895 = 4,121,441), the Road split (1,756,020 + 150,000 + 13,477 = 1,919,497) and the Bladen split (1,354,395 + 59,245 = 1,413,640) come from the printed p4 fund columns. Every source_page is correct. Two printed oddities affect no JSON value: in the p11 budget schedules, County Museum's beginning balance is 80,577 in the actual column against 80,876 in the budget columns, and COVID's is 674,886 against 674,885."
+}

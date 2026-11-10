@@ -1,0 +1,20 @@
+{
+  "stem": "Cody_FY2023",
+  "values_checked": 49,
+  "issues": [
+    {"severity": "warning", "path": "beginning_cash", "page": 1,
+     "extracted": 174196.85, "on_page": "Line 1 Net Cash Balance 130,149.62; Line 2 Investments 44,047.23; Line 3 Subtotal of Beginning Balance 174,196.85",
+     "issue": "beginning_cash holds the line 3 subtotal (cash plus investments). The printed cash is 130,149.62, and the investments of 44,047.23 are printed separately, yet beginning_investments is null. This matches the convention used in Cody_FY2024 (the years tie), but 44,047.23 of investments is counted as cash"},
+    {"severity": "warning", "path": "ending_cash", "page": 1,
+     "extracted": 178783.35, "on_page": "Line 26 Net Cash Balance 133,892.39; Line 27 Investments 44,890.96 (CDs, p3); Line 28 Subtotal 178,783.35",
+     "issue": "ending_cash holds the line 28 subtotal (cash plus investments). The printed cash is 133,892.39, and the investments of 44,890.96 are printed separately, yet ending_investments is null. balance_sheet.assets already splits these correctly"},
+    {"severity": "warning", "path": "disbursements[1].original_label", "page": 2,
+     "extracted": "Other Capital Outlay", "on_page": "Line 36 Other Capital Outlay 32,470.99 (General 27,471.00; Street 4,999.99)",
+     "issue": "the statement line does not follow the 'Capital Outlay: <function>' rule. The detail lines carry 'Capital Outlay: General Government' and 'Capital Outlay: Streets/Highways', both taken from the fund names, since the form prints no function"},
+    {"severity": "warning", "path": "balance_sheet.equity[0].category", "page": 1,
+     "extracted": null, "on_page": "Line 24 Ending Balance 178,783.35",
+     "issue": "the equity line has no category"}
+  ],
+  "year_tie": "FY2023 ending_cash 178,783.35 (p1 line 24/28) = Cody_FY2024.json beginning_cash 178,783.35 as printed (both use the cash-plus-investments subtotal). No restatement needed.",
+  "summary": "All 3 pages read (notes say 'Read pages 1-3 of 3'). Receipts sum to 196,406.91 and disbursements to 191,820.41, both matching the line 21 and line 52 totals. The roll-forward 174,196.85 + 196,406.91 - 191,820.41 = 178,783.35 ties. The per-fund detail ties: General Fund 146,346.03 / 157,347.33 and Street Fund 50,060.88 / 34,473.08. The Keno Fund has no activity. No transfers. decision_needed already covers the Solid Waste and Water lines that are printed under business-type activities but paid from the General Fund. The County Treasurer balances (1,457.37 at 10/1/22; 1,240.78 at 9/30/23) are memo items outside the fund balances. The p3 loan outstanding (127,118.64) is not on the cash statement. Neither is in the JSON, and neither is required."
+}
