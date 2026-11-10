@@ -1,0 +1,16 @@
+{
+  "stem": "Murdock_FY2023",
+  "values_checked": 75,
+  "issues": [
+    {"severity": "warning", "path": "receipts[9].category", "page": 1,
+     "extracted": "other", "on_page": "Local Receipts: Other: Water 70,440.28, Sewer 23,932.50 (p1), Garbage 29,800.00 (p2)",
+     "issue": "All business-type operating receipts (124,172.78) are in other; in the Water, Sewer and Garbage columns they are almost certainly utility/garbage charges (Utility Charges), but the printed row is the generic 'Local Receipts: Other' (context label). Left for the context check. Same for detail[16], detail[20], detail[22]."},
+    {"severity": "warning", "path": "detail[13].category", "page": 1,
+     "extracted": "other", "on_page": "Fire Fund, Local Receipts: Other 16,310.00",
+     "issue": "Only receipt of the Fire Fund (possibly rural fire contract / fire board money); not explained on the page, so other is defensible pending the context check."},
+    {"severity": "warning", "path": "missing", "page": 1,
+     "extracted": null, "on_page": "County Treasurer Balance at October 1, 2022 1,649.59; at September 30, 2023 992.29",
+     "issue": "Printed county treasurer balances are not recorded in any balance field or balance-sheet line (notes only). They sit outside the Exhibit A line 24/28 totals, so leaving them out of cash is defensible; flagging so the user knows they exist."}
+  ],
+  "fy2024_tie": "FY2023 ending governmental cash 209,715.12 = FY2024 beginning_cash 209,715.12; business-type ending 219,285.74 = FY2024 business_type.beginning 219,285.74. FY2024 beginning_investments is null although FY2023 ending_investments is 30,000.00 (informational field, inside cash; FY2024-side)."
+}

@@ -1,0 +1,31 @@
+{
+  "stem": "Mullen_FY2023",
+  "values_checked": 127,
+  "issues": [
+    {"severity": "warning", "path": "receipts[0].category", "page": 8,
+     "extracted": "property tax", "on_page": "County treasurer receipts 64,395 (p7) = County Treasurer's Fund: Property taxes 49,322 + Motor vehicle taxes 12,097 + Homestead 3,324 + Village fines 100 + Interest 46 - Collection fee 494 (p8)",
+     "issue": "Remainder piece is about 77% property tax but also holds 12,097 motor vehicle tax and 3,324 homestead; dominant-category choice is defensible (Statement of Activities p2 prints the full 69,368 as Property taxes), but it is a mixed line. Same for detail[0]. 'County treasurer receipts' is a context label."},
+    {"severity": "warning", "path": "receipts[8].category", "page": 4,
+     "extracted": "intergovernmental/state aid", "on_page": "Grants 24,100 (Street 5,800; CDBG 18,300)",
+     "issue": "Grantor not printed; state aid is an assumption (CDBG money is a federal program passed through the state). User ruling 2026-11-06: do not guess a grantor. Same for detail[18] and detail[27] (detail_category other state aid)."},
+    {"severity": "warning", "path": "receipts[11].category", "page": 4,
+     "extracted": "federal grants", "on_page": "Reuse monies 11,168 (CDBG fund)",
+     "issue": "CDBG re-use monies are usually repayments of CDBG loans (Loan Repayments category, user 2026-11-05); the Statement of Activities (p2) shows them as operating grants and contributions. Judgment call. Same for detail[28]."},
+    {"severity": "warning", "path": "receipts[13].category", "page": 2,
+     "extracted": "charges for services/fees", "on_page": "Charges for services 118,638 = Sanitation 113,054 + Park Pool 5,584 (Statement of Activities p2)",
+     "issue": "95% of the line is sanitation (garbage) charges, which the user's rules put in Utility Charges; the line mixes it with pool fees, so the generic category is defensible. Same for detail[8] (detail_category other charges for services; refuse/sanitation charges would fit the dominant part)."},
+    {"severity": "warning", "path": "receipts[14].category", "page": 4,
+     "extracted": "reimbursements/refunds", "on_page": "Payroll taxes and benefits 60,867 (Payroll Fund)",
+     "issue": "Payroll Fund receipts are most likely internal allocations from the other funds (printed as general revenue 'Payroll' on p2); category is an assumption. Same for detail[31]."},
+    {"severity": "warning", "path": "receipts[17].category", "page": 6,
+     "extracted": "sales tax", "on_page": "Electric: Sales taxes 41,325 (operating revenue); Sales tax 40,561 remitted (operating expense)",
+     "issue": "This is sales tax collected on electric bills and remitted to the state, not village sales tax; category sales tax follows the page (p2 lists it under Taxes) but it will add to the village's sales tax total. Same for detail[48]."},
+    {"severity": "warning", "path": "receipts[18].category", "page": 2,
+     "extracted": "other", "on_page": "Customer deposits 4,650 (Electric); Statement of Activities business-type charges for services 866,046 = 861,396 + 4,650",
+     "issue": "The report counts customer deposits in Charges for Services (Electric 634,806 = 630,156 + 4,650); context label left as other pending the context check. Same for detail[49]."},
+    {"severity": "warning", "path": "detail[55].detail_category", "page": 6,
+     "extracted": "tax refunds/treasurer fees", "on_page": "Sales tax 40,561 (Electric operating expense)",
+     "issue": "Sales tax remitted is not a tax refund or treasurer fee; no listed object fits exactly (category Other Taxes Paid is right)."}
+  ],
+  "fy2024_tie": "FY2023 ending fund balance 607,833 = FY2024 beginning_fund_balance 607,833; business-type ending 1,525,226 = FY2024 business_type.beginning 1,525,226. Ties as printed."
+}
