@@ -1,0 +1,15 @@
+{
+  "stem": "Pierce_FY2023",
+  "values_checked": 195,
+  "issues": [
+    {"severity": "warning", "path": "receipts[11].category", "page": 6,
+     "extracted": "other (302,574)", "on_page": "Other: General 263,200 (p15: Donations/contributions 220,669 + Other 42,531), Keno 33,283 (p3: 'Lottery proceeds' 33,283), Street 2,752, CDBG Housing Rehab 3,339",
+     "issue": "Donations/contributions make up 220,669 of the 302,574 line (73%), and Keno's 33,283 is lottery proceeds. The extractor rule for broad 'Other' lines says to use the dominant category (donations/contributions). The line is kept in other under the user's 2026-10-23 decision for the label 'Other', so this is left for the user."},
+    {"severity": "warning", "path": "decision_needed", "page": 10,
+     "extracted": "no entry", "on_page": "Water 'Operating transfers in (out)' 134,101 and Sewer 52,883 (p10); no matching governmental transfer out (p6). ARPA fund capital outlay 186,984 (p6); p12 noncash note 'Capital outlay from other funds (ARPA)' 186,984",
+     "issue": "The transfers are one-sided: Water and Sewer record 186,984 of transfers in that the governmental funds report as ARPA capital outlay spending. The figures are correctly kept as printed (user's 2026-10-29 as-printed rule), but this is a 'one-sided transfer' question only a person can settle, and decision_needed[] lacks it."},
+    {"severity": "warning", "path": "ending_cash", "page": 4,
+     "extracted": 2457971, "on_page": "Governmental funds balance sheet 2023 Totals: Cash and CDs 2,314,965 + Restricted cash - capital projects 128,343 + Cash at county treasurer 14,663 = TOTAL ASSETS 2,457,971",
+     "issue": "ending_cash (and beginning_cash 2,463,188 from the 2022 Totals) is TOTAL ASSETS, marked computed, and includes restricted cash. The figure is correct, but the user's 2026-11-06 ruling says cash is never derived. Also, Pierce_FY2024.json has beginning_cash null while beginning_fund_balance 2,457,971 ties, so the two years treat cash differently. Fund balance (2,457,971) and business-type net position (6,496,375) both tie to FY2024's beginning figures."}
+  ]
+}

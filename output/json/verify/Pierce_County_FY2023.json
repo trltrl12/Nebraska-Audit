@@ -1,0 +1,39 @@
+{
+  "stem": "Pierce_County_FY2023",
+  "values_checked": 128,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "detail[33].category",
+      "page": 4,
+      "extracted": "debt service (principal and interest combined)",
+      "on_page": "Bond Fund column p4: General Government 3,484; Principal Payments 250,000; Interest and Fiscal Charges 15,318; Capital Outlay 925,175 (total 1,193,977)",
+      "issue": "The Bond Fund budget schedule (p7) prints a single 'Disbursements' 1,193,977. The statement's Bond Fund column shows it is 77% capital outlay (925,175) and only 22% debt service (265,318). The extractor's own review note says capital outlay is dominant, but it recorded debt service. Under the rule for a line that mixes categories, the category should be capital outlay, the dominant one (detail_category stays 'not itemized').",
+      "resolved": "category capital outlay (925,175 of 1,193,977 is capital outlay per p4)"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[29].category",
+      "page": 7,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "Inheritance Tax Fund: Intergovernmental 625,642",
+      "issue": "Inheritance Tax Fund receipts are printed as Intergovernmental, not Taxes, so the fund-name rule (which covers tax receipts only) does not apply and the line stays as printed, as with the 2026-11-06 Inheritance Tax Fund 'Local fees' ruling. County inheritance tax is a local tax, though, so the user may want to confirm this."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[52].category",
+      "page": 14,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "Lottery/Keno Fund: Intergovernmental 1,365",
+      "issue": "The Lottery/Keno Fund's only receipt is printed as Intergovernmental. It could be keno/lottery proceeds (compare the Waverly lottery-fund ruling), but the page gives no keno evidence, so this is a judgment call."
+    },
+    {
+      "severity": "warning",
+      "path": "report_discrepancies",
+      "page": 7,
+      "extracted": "Bond Fund Taxes 122, Intergovernmental 1,530,377 (detail[31], detail[32])",
+      "on_page": "p7 budget schedule: Taxes 122 / Intergovernmental 1,530,377; p4 statement Bond Fund column: Taxes 123 / Intergovernmental 1,530,376 (both total 1,530,499)",
+      "issue": "Visually confirmed: the two statements disagree by 1 between rows. This is recorded only in notes, not in report_discrepancies. The detail lines are correctly recorded as printed on p7."
+    }
+  ]
+}
