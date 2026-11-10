@@ -1,0 +1,27 @@
+{
+  "stem": "Cozad_FY2023",
+  "values_checked": 186,
+  "issues": [
+    {"severity": "warning", "path": "receipts[7].category", "page": 6,
+     "extracted": "intergovernmental/state aid", "on_page": "Contributions 1,566,382.12 (p6); same amount printed as 'Federal/State grants' on the budget schedule (p13) and as 'Capital Grants and Contributions' on the Statement of Activities (p3)",
+     "issue": "category does not match the printed label 'Contributions'. The p13 label supports grants, but no grantor is printed (user rule: do not guess a grantor). Already in decision_needed[0]."},
+    {"severity": "warning", "path": "detail[6].category", "page": 14,
+     "extracted": "intergovernmental/state aid / other state aid", "on_page": "General: Grants and contributions 112,920.71",
+     "issue": "mixed grants/contributions label with no source printed, recorded as state aid (same judgment as receipts[7]). Kept unsplit, which is correct."},
+    {"severity": "warning", "path": "detail[15].category", "page": 14,
+     "extracted": "intergovernmental/state aid / other state aid", "on_page": "Library: Grants and contributions 1,322.00",
+     "issue": "same as detail[6]: mixed label recorded as state aid with no grantor printed"},
+    {"severity": "warning", "path": "detail[63].original_label", "page": 14,
+     "extracted": "Capital Outlay: Culture/Recreation", "on_page": "Park: Capital outlay 7,762.35 (function heading printed on p13: 'Enviroment and leisure')",
+     "issue": "the function comes from the department column and is marked computed, but the printed function name is 'Enviroment and leisure', not Culture/Recreation. The same applies to detail[71] (Pool 672,422.49), detail[81] (Library 94,344.77) and detail[86] (Sports Center 14,850.00). Police and Fire 'Capital Outlay: Public Safety' (detail[37], detail[46]) match the printed p13 heading 'Public Safety'."},
+    {"severity": "warning", "path": "detail[87].category", "page": 14,
+     "extracted": "streets/highways", "on_page": "Cemetery department (p13 lists Cemetery under 'Public works'; p6 General Public Works 228,730.10 = Cemetery total)",
+     "issue": "detail[87]-[93] (Cemetery department) are recorded as streets/highways to match the statement's Public Works function. The category rules put cemetery under health/welfare. The choice is defensible and matches FY2024."},
+    {"severity": "warning", "path": "detail[30].detail_category", "page": 14,
+     "extracted": "law enforcement contract", "on_page": "Police: Interlocal agreement 119,450.00",
+     "issue": "the purpose of the interlocal agreement is not printed; law enforcement contract is a guess (the line already has a review note)"},
+    {"severity": "warning", "path": "detail[94].category", "page": 13,
+     "extracted": "streets/highways (not itemized)", "on_page": "Streets 1,275,663.49 (budget schedule)",
+     "issue": "this one printed budget line contains Street Fund capital outlay 758,273.32 (p6). Keeping it as printed is correct, but its function category includes capital outlay."}
+  ]
+}
