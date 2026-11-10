@@ -1,0 +1,39 @@
+{
+  "stem": "Falls_City_FY2023",
+  "values_checked": 110,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "other_financing",
+      "page": 4,
+      "extracted": 51083,
+      "on_page": "Interest/Dividends 51,083 (printed under Other Financing Sources, below Total revenues)",
+      "issue": "Interest is a revenue printed below the statement's total; the extractor rules (outside_printed_total) say such lines (explicitly 'interest income under Other Financing Sources') are recorded as receipt items with outside_printed_total: true, not as other_financing. FY2024 made the same choice (other_financing 89,847), so both years would need the same fix. The p8 A-1 schedule counts it inside Total Revenues (6,644,739).",
+      "resolved": "kept in other_financing: printed under Other Financing Sources; user rule 2026-10-29/11-06 amounts follow the printed section (matches FY2024)"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[11].category",
+      "page": 6,
+      "extracted": "charges for services/fees",
+      "on_page": "Miscellaneous / Merchandise Sales 1,619,561 (nonoperating; net, Sewer (306,457))",
+      "issue": "SoA p2 counts it as general revenue 'Miscellaneous revenue (Expense)', not Charges for Services; under the 2026-11-06 utility other-revenue ruling it would be other. Carries a user category_decision (Sale of Merchandise), so left as a warning."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[0].fund",
+      "page": 8,
+      "extracted": "General Fund",
+      "on_page": "A-1 'General Fund' schedule whose actuals equal Total Governmental Funds",
+      "issue": "Confirmed: A-1 actuals tie to all governmental funds (revenue 6,644,739 = 6,593,656 + interest 51,083; expenditures 7,145,644 = total), so it already contains the B-2 nonmajor funds (Local 16,501 = 'Other governmental' charges for services; expenditures 31,860 = general government 8,553 + cemetery 23,307; interest 2,092). Leaving B-2 (p9) out avoids double counting and no amount is lost; only the per-fund split of the nonmajor funds (Steele Trust Cemetery, Library Project, Unemployment) is not shown, and the A-1 lines are tagged fund 'General Fund' although they cover every governmental fund."
+    },
+    {
+      "severity": "warning",
+      "path": "business_type.ending",
+      "page": 6,
+      "extracted": 39752828,
+      "on_page": "Total net position - ending 39,752,828 (FY2024 JSON beginning 39,113,011)",
+      "issue": "FY2023 ending does not equal FY2024 beginning (diff 639,817 = Gas Fund 7,183,282 vs FY2024's 6,543,465); the FY2024 proprietary statement prints no restatement. FY2023 value is correct as printed. Governmental: FY2023 ending fund balance 3,798,617 equals the FY2024 fund columns' sum, but FY2024 printed a Total beginning of 4,299,522 (already in FY2024 report_discrepancies). Governmental net position 12,282,959 and proprietary cash 3,410,636 tie."
+    }
+  ]
+}

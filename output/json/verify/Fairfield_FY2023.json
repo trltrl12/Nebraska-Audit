@@ -1,0 +1,47 @@
+{
+  "stem": "Fairfield_FY2023",
+  "values_checked": 117,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "missing",
+      "page": 12,
+      "extracted": null,
+      "on_page": "General Fund combining statement by department, right half only (report p50: Park, Garbage Disposal, Landfill, Total columns; Total column revenue 99,331 / 1,218 / 85,222 / 63,847 / 3,509 / 37,428 = 290,555; expenditure object rows 44,877, 8,030, 41,082, 20,204, 3,835, 862, 15,280, 1,403, 18,832 = 109,528, then 3,827, 11,371, 50,000, 35,577 = 255,180)",
+      "issue": "Confirmed: trimmed p12 is the right half of a two-page spread with no row labels; the left half (labels plus General/other department columns, also numbered p50 in the report, like the two SoA pages both numbered 14) is not in the trim. The object-level General Fund spending detail cannot be recorded without it. Re-trim needed (add the left-half source page via config/extra_pages.csv). Using the p9 budget schedule instead avoids double counting, and its totals tie to p12's Total column (290,555 / 255,180), so no amount is lost from the totals, only the object/department breakdown.",
+      "resolved": "re-trim needed (left half of report p50); totals intact from p9 — on the re-trim list"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[6].category",
+      "page": 5,
+      "extracted": "donations/contributions",
+      "on_page": "Grants and donations 63,847",
+      "issue": "Mixed label; SoA p2 shows it as general government Operating Grants and Contributions. Kept whole (no printed breakdown), but grantor not established; could be intergovernmental. Same for detail[4] (Grants and contributions, p9)."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[2].category",
+      "page": 5,
+      "extracted": "streets/highways",
+      "on_page": "Public works 190,227",
+      "issue": "Includes General Fund public works 52,901, which the p12 department columns show is mostly Garbage Disposal 39,702 and Landfill 7,114 (refuse, not streets). Defensible as printed function; same applies to detail[10]."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[18].category",
+      "page": 7,
+      "extracted": "utilities",
+      "on_page": "Grant expense (35,833), Water Fund nonoperating",
+      "issue": "Purpose not printed; 'utilities' is a guess (could be grants/payments to other entities)."
+    },
+    {
+      "severity": "warning",
+      "path": "ending_cash",
+      "page": 4,
+      "extracted": 270531,
+      "on_page": "Cash and cash equivalents 270,531; County treasurer cash 1,902 (Total Governmental Funds)",
+      "issue": "ending_cash takes only the 'Cash and cash equivalents' line; county treasurer cash 1,902 (category Cash and Cash Equivalents under the user's rules) is printed separately and not included. Defensible as 'as printed'."
+    }
+  ]
+}
