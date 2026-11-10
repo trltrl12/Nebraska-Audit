@@ -1,0 +1,19 @@
+{
+  "stem": "Morrill_County_FY2023",
+  "values_checked": 108,
+  "issues": [
+    {"severity": "warning", "path": "detail[50].amount", "page": 17,
+     "extracted": 6200, "on_page": "p17 Wireless 911 Fund Actual: Operating transfers in 6,200; Operating transfers out 6,626 (no parentheses); Total other financing sources (uses) (426). p25 E-911 Fund: transfers in 6,626; out (426); total 6,200",
+     "issue": "I re-read both pages and the digits are as quoted. p17 does not add up: (32,177) + (426) = (32,603), but p17 prints (25,977) and the balance moves 119,442 -> 93,465, which needs net transfers of +6,200. p25 ties, and so does p4: nonmajor transfers in 6,626, and nonmajor transfers out 759,738 = ARPA 9,312 + E-911 426 + Inheritance 750,000. The p17 figures look shifted by one row. The JSON keeps p17 as printed, and report_discrepancies and decision_needed record this, so it is not an error. As a result, detail transfers do not tie to the statement: detail transfers in 3,005,666 vs printed 3,006,092 (short 426), and detail transfers out 3,012,292 vs printed 3,006,092 (over 6,200). report_discrepancies does not mention that statement-level gap."},
+    {"severity": "warning", "path": "detail[51].amount", "page": 17,
+     "extracted": -6626, "on_page": "Operating transfers out 6,626 (printed without parentheses)",
+     "issue": "The sign comes from the printed total (426) and is marked computed. Per p25/p4 the fund's transfer out is (426), and 6,626 is its transfer in. See the previous issue."},
+    {"severity": "warning", "path": "receipts[1].category", "page": 4,
+     "extracted": "other", "on_page": "Local receipts 1,064,891",
+     "issue": "'Local receipts' is a context label and is left in other (14% of governmental receipts). The Statement of Activities (p2) shows charges for services 742,245 and Other taxes 155,316 in program/general receipts, so much of this line is probably charges and other taxes. Leave it for the context check; no printed breakdown ties exactly to this line."},
+    {"severity": "warning", "path": "detail[37].detail_category", "page": 11,
+     "extracted": "employee benefits and payroll taxes", "on_page": "Self-Insured Medical Insurance Fund, General government, Personnel services 851,592",
+     "issue": "Every other 'Personnel services' line is salaries and wages. Treating the self-insured medical fund's line as benefits is a defensible judgment, but it breaks same-label consistency. It is already marked for review."}
+  ],
+  "fy2024_tie": "FY2023 ending fund balance 4,192,170 (p4; cash and cash equivalents 4,192,170 p3) = Morrill_County_FY2024 beginning_fund_balance 4,192,170. FY2024 beginning_cash is null (not printed); no restatement."
+}

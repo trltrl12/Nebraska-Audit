@@ -1,0 +1,16 @@
+{
+  "stem": "Morrill_FY2023",
+  "values_checked": 177,
+  "issues": [
+    {"severity": "warning", "path": "receipts[9].category", "page": 7,
+     "extracted": "intergovernmental/state aid", "on_page": "Grant Proceeds 9,904 (Electric 1,000, Water 8,904); p3 shows them as Operating Receipts and Contributions",
+     "issue": "The report does not name the grantor, so it could be state or federal. Calling it state aid is an assumption, and it is already marked for review. detail[55] and detail[77] are the same."},
+    {"severity": "warning", "path": "detail[8].amount", "page": 12,
+     "extracted": -537170, "on_page": "General column Transfers Out (537,170); Eliminations column Transfers In (537,170) / Transfers Out 537,170",
+     "issue": "The General Fund's internal transfers are recorded gross per sub-fund. Sub-fund transfers in total 1,275,770, and the General column shows out (537,170). The printed Eliminations column is not recorded. Net 738,600 matches the statement, but gross detail transfers exceed the governmental transfers_in (757,692) and transfers_out (919,092) by 537,170 each. This is noted in the notes but not in report_discrepancies."},
+    {"severity": "warning", "path": "detail[43].detail_category", "page": 9,
+     "extracted": "highway allocation", "on_page": "Streets and Alley Fund, Intergovernmental 163,018",
+     "issue": "The page doesn't say this is highway allocation; it's inferred from the fund name. The category intergovernmental/state aid is fine. It is already marked for review."}
+  ],
+  "fy2024_tie": "Governmental: FY2023 p5 fund balances ending 603,750 (General 564,039, Streets and Alley (114,936), Sales Tax 154,647); FY2024 report p5 prints FUND BALANCES - BEGINNING 603,750 with the same three fund amounts, and Morrill_FY2024 beginning_fund_balance is 603,750, so it ties. Business-type: FY2023 p7 Net Position - Ending 5,635,052 (Electric 3,760,441, Sewer 326,580, Water 1,548,031). FY2024 report p7 prints 'Net Position - As Previously Stated' 5,635,052 (same fund amounts), then 'Prior Period Adjustment' 197,536 (Electric only), then 'Net Position - Restated' 5,832,588. FY2024 JSON carries 5,635,052 as previously reported, restatement 197,536, beginning 5,832,588. The FY2023 report itself prints no restatement. Proprietary cash: FY2023 ending 1,983,215 = FY2024 beginning 1,983,215. Governmental cash: neither year prints a single cash total, so cash is null in both JSONs."
+}
