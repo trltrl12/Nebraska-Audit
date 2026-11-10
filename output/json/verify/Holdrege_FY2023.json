@@ -1,0 +1,64 @@
+{
+  "stem": "Holdrege_FY2023",
+  "values_checked": 227,
+  "prior_year_tie": "FY2023 ending fund balance 3,886,065 = Holdrege_FY2024 beginning_fund_balance 3,886,065; business_type ending 13,893,410 = FY2024 beginning 13,893,410; proprietary ending cash 6,534,022 = FY2024 beginning_cash 6,534,022; governmental net position 17,902,892 = FY2024 beginning 17,902,892. All tie as printed.",
+  "issues": [
+    {
+      "severity": "error",
+      "path": "disbursements[0].category",
+      "page": 4,
+      "extracted": "other",
+      "on_page": "Personnel 3,072,574 (Total Governmental Funds)",
+      "issue": "object line put in last-resort 'other' although a specific category fits (Salaries and Wages); the sibling object line Supplies (disbursements[2]) is categorized Supplies and Materials, so the same treatment applies here. Fix: category Salaries and Wages",
+      "resolved": "category Salaries and Wages 2026-11-10"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[68].category",
+      "page": 4,
+      "extracted": "other",
+      "on_page": "Other Governmental Funds: Personnel 721,766",
+      "issue": "Personnel in the combined Other Governmental Funds column is 'other' while Supplies in the same column (detail[70]) is 'Supplies and Materials'; inconsistent treatment of object lines with no single function"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[61].category",
+      "page": 4,
+      "extracted": "Community Betterment",
+      "on_page": "Community Development Fund: Operating 998,253 (p2 function 'Community development')",
+      "issue": "the page prints Community development, not betterment; the Community Betterment rule covers betterment / 'Community development/betterment' labels, so economic development may fit better"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[3].category",
+      "page": 4,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "State taxes 1,441,860 (p2 lists it under Taxes; p8 budget schedule shows State 585,142 and Highway allocation 856,718)",
+      "issue": "label says taxes; state aid is defensible from the p8 breakdown but it is a judgment call"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[6].category",
+      "page": 4,
+      "extracted": "other",
+      "on_page": "Other 464,924; Park column Other 122,753 = Park Operating Grants and Contributions 122,753 (p2); p2 also prints Gain on sale of asset 20,500",
+      "issue": "printed label is 'Other', so other is allowed, but part of it is identifiable from p2 (operating grants 122,753, likely the 20,500 gain on sale); no exact printed breakdown of the line, so not split"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[39].category",
+      "page": 4,
+      "extracted": "other",
+      "on_page": "Park Fund: Other 122,753 (= p2 Park Operating Grants and Contributions 122,753)",
+      "issue": "amount ties exactly to Park operating grants and contributions on p2; a grants/contributions category may fit, grantor not stated"
+    },
+    {
+      "severity": "warning",
+      "path": "balance_sheet.liabilities[13].category",
+      "page": 1,
+      "extracted": "other liabilities",
+      "on_page": "Accrued closure and postclosure costs 3,004,736 (business-type)",
+      "issue": "a 'Landfill Postclosure Costs' liability category exists in the user's rules; other liabilities is a last resort"
+    }
+  ]
+}
