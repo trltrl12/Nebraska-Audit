@@ -1,0 +1,15 @@
+{
+  "stem": "DeWitt_FY2023",
+  "values_checked": 290,
+  "issues": [
+    {"severity": "warning", "path": "balance_sheet.liabilities[6].category", "page": 1,
+     "extracted": "other liabilities", "on_page": "Due to other funds 157,037 (Governmental)",
+     "issue": "the matching assets 'Due from other funds' (assets[6], assets[7]) are categorized Internal Balances while 'Due to other funds' is other liabilities (same for liabilities[7], business-type 574,784); the interfund categories don't match each other. Amounts correct."},
+    {"severity": "warning", "path": "detail[84].category", "page": 11,
+     "extracted": "Ambulance Fees", "on_page": "Materials & services sold and refunds 2,710 (Ambulance column)",
+     "issue": "the same printed label gets four categories depending on fund: charges for services/fees (receipts[13], detail General/Firemen/Civic Board/Area on Aging), Ambulance Fees (detail[84]), Recreation Fees (detail[95], Swimming Pool 7,574) and Utility Charges (detail[105], Garbage 61,123). The fund-based inference is defensible, but the label also says 'refunds' and the extractor rule asks for one category per label in a report."},
+    {"severity": "warning", "path": "disbursements[15].category", "page": 6,
+     "extracted": "Fuel", "on_page": "Vehicle expense 12,734",
+     "issue": "'Vehicle expense' taken as Fuel (also detail[129] Electric 6,404 and detail[157] Sewer 6,330); it could also be repairs/maintenance. Judgment call, consistent with FY2024."}
+  ]
+}

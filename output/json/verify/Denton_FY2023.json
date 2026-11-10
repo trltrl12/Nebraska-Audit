@@ -1,0 +1,15 @@
+{
+  "stem": "Denton_FY2023",
+  "values_checked": 104,
+  "issues": [
+    {"severity": "warning", "path": "detail[29].category", "page": 2,
+     "extracted": "other", "on_page": "Local Receipts: Other 391,944.01 (KENO column)",
+     "issue": "the page shows this amount in the Keno fund column. Under the 2026-11-04 rule ('lottery-fund gross keno receipts -> keno/lottery') it is likely keno/lottery, but 'Local Receipts' is a context label, so the context check has to settle it. It is 93% of the governmental receipts[8] line (422,039.97, category other)."},
+    {"severity": "warning", "path": "beginning_cash", "page": 1,
+     "extracted": 2449776.92, "on_page": "line 3 Subtotal of Beginning Balance (Net Cash Balance + Investments), governmental columns",
+     "issue": "beginning_cash/ending_cash are the line 3/24 subtotals that already include investments, while beginning_investments (842,085.86) and ending_investments (1,705,004.73) record the same investments again. Arithmetic is right and matches the FY2024 convention, but adding cash + investments would double count."},
+    {"severity": "warning", "path": "missing", "page": 1,
+     "extracted": null, "on_page": "County Treasurer Balance at October 1, 2022 769.20; at September 30, 2023 1,347.74",
+     "issue": "printed memo balances (outside the line 24/28 fund balances) are not recorded anywhere; probably intentional, since they are not part of the Exhibit A totals"}
+  ]
+}
