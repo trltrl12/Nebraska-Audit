@@ -1,0 +1,21 @@
+{
+  "stem": "Butte_FY2023",
+  "values_checked": 178,
+  "issues": [
+    {"severity": "warning", "path": "receipts[4].category", "page": 2,
+     "extracted": "other taxes", "on_page": "Township taxes 477 (p14); p2 'Property taxes - general purpose' 46,438 = General levy 43,119 + Property tax credit 2,811 + Township taxes 477 + Property tax credit 31; p10 'Property taxes' 46,438",
+     "issue": "The report's own Statement of Activities and budget schedule count Township taxes in property taxes. 'other taxes' comes from the 2026-10-23 user category decision, and the page points to property tax. Same for detail[40]."},
+    {"severity": "warning", "path": "disbursements[2].category", "page": 4,
+     "extracted": "public safety", "on_page": "Public Health and Safety 14,209 = Fire department - other 8,276 + Cemetery operating expenditures 5,306 (p12) + Medical Center expenditures 627 (p22)",
+     "issue": "This mixed line is kept whole under the dominant function. The fund schedules print the breakdown, so it could be split (fire / cemetery / medical). It has a review note."},
+    {"severity": "warning", "path": "disbursements[3].category", "page": 4,
+     "extracted": "Community Betterment", "on_page": "Community Improvement 29,955 (Public Trust Fund: management fees, insurance, real estate taxes, donations, equipment lease, loan advances 11,156, miscellaneous)",
+     "issue": "Using Community Betterment for 'Community Improvement' is a judgment call. Loan advances 11,156 (detail[78]) are loans made, not grants (detail_category grants/payments to other entities)."},
+    {"severity": "warning", "path": "detail[25].detail_category", "page": 12,
+     "extracted": "dues, training and travel", "on_page": "License fees 535 (General government)",
+     "issue": "License fees paid are not dues, training or travel. Miscellaneous expenditure, or a fees category, may fit better."},
+    {"severity": "warning", "path": "detail", "page": 6,
+     "extracted": "no business-type detail lines", "on_page": "p6 proprietary funds statement by fund (Water, Sewer, Sanitation): Utilities, Trash collections contract, Chemicals, Insurance, Repairs and supplies, Lab fees, Office supplies and postage, Professional fees, Salaries and payroll taxes; nonoperating Capital outlay, Debt service principal/interest",
+     "issue": "The proprietary statement's per-fund cost-type lines are not in detail. The extractor cites the 2026-10-28 rule ('when some funds have their own schedules, statement lines are not added for the others'). Burwell_FY2023 handles a similar case differently: it includes its proprietary statement lines. Please confirm the rule is meant to exclude these."}
+  ]
+}

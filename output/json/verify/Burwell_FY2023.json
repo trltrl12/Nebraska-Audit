@@ -1,0 +1,18 @@
+{
+  "stem": "Burwell_FY2023",
+  "values_checked": 174,
+  "issues": [
+    {"severity": "warning", "path": "receipts[4].category", "page": 4,
+     "extracted": "donations/contributions", "on_page": "Grants and donations 27,883 (p2 shows it as Operating Grants and Contributions 25,060 + Capital Grants and Contributions 2,823)",
+     "issue": "Mixed grants/donations line kept whole as donations/contributions; no breakdown by source is printed, so grants from governments may be inside. Same for the per-fund detail lines detail[3], detail[15], detail[22]."},
+    {"severity": "warning", "path": "other_financing", "page": 4,
+     "extracted": 90256, "on_page": "Capital Contributions 85,170 + Proceeds from sale 5,086; p2 labels the 85,170 'Contributions - internal activities' (85,170) business-type",
+     "issue": "The 85,170 is an internal flow from the Water/Sewer funds (p6 Capital Contributions (net) (42,430)/(42,740)) to the Debt Service fund. It is recorded as other financing on both sides (governmental +85,170, business_type.other_financing -85,170) and not as a transfer. It nets to zero and isn't counted as spending, but someone may want to call it a transfer."},
+    {"severity": "warning", "path": "detail[48].category", "page": 6,
+     "extracted": "utilities / utilities (power, gas, phone)", "on_page": "Utilities 1,067,804 (Electric)",
+     "issue": "Electric fund 'Utilities' is 66% of electric operating expenses and is most likely purchased power (purchased power/cost of sales), not utility bills. Kept as printed with a review note."},
+    {"severity": "warning", "path": "detail[78].category", "page": 6,
+     "extracted": "other", "on_page": "ARPA Funds 100,000 (Water)",
+     "issue": "Water fund ARPA-funded expense with no object given; left in other with a review note."}
+  ]
+}

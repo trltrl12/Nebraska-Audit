@@ -1,0 +1,18 @@
+{
+  "stem": "Bushnell_FY2023",
+  "values_checked": 68,
+  "issues": [
+    {"severity": "warning", "path": "disbursements[4].fund_type", "page": 2,
+     "extracted": "governmental / utilities", "on_page": "line 45 Solid Waste 16,705.00, printed under 'Business-Type Activities' but in the GENERAL FUND column",
+     "issue": "The form prints this as a business-type line, but it is paid from the General Fund. The extractor split by fund column, so it is governmental with category utilities. This is a judgment call."},
+    {"severity": "warning", "path": "disbursements[2].category", "page": 2,
+     "extracted": "health/welfare", "on_page": "line 33 Public Works - Other 4,444.85 (Cemetery Park Fund)",
+     "issue": "The cemetery purpose is assumed from the fund name, but the fund is 'Cemetery Park', so it could be parks (culture/recreation). It has a review note."},
+    {"severity": "warning", "path": "receipts[6].category", "page": 1,
+     "extracted": "other", "on_page": "line 18 Local Receipts: Other - Water 21,205.29, Sewer 8,623.17, Savings 21,214.64",
+     "issue": "This context label waits for the context check. The Water and Sewer fund amounts are almost certainly utility charges (Utility Charges). The 21,214.64 in Savings is unexplained."},
+    {"severity": "warning", "path": "detail[20]", "page": 2,
+     "extracted": "Savings Fund, Water 10,051.00, category utilities, fund_type business-type", "on_page": "line 48 Water 10,051.00 (SAVINGS); p3 Schedule of Interfund Transfers: Water Project -> USDA 10,051.00",
+     "issue": "The 10,051 matches the 'USDA' transfer on the p3 schedule. It is likely the payment on the USDA water loan (p3 debt 104,906.37), which is debt service rather than water operations. It is kept as printed under Water. The Savings column is treated as business-type because the p3 Schedule of Investments lists only water accounts. That assumption is reasonable, but the form does not state it."}
+  ]
+}
