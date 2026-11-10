@@ -1,0 +1,27 @@
+{
+  "stem": "Fremont_FY2023",
+  "values_checked": 264,
+  "issues": [
+    {"severity": "warning", "path": "disbursements[12].category", "page": 6,
+     "extracted": "Professional/Contract Services", "on_page": "Customer accounting and collections 5,438,729 (functional expense line beside Production, Distribution, Administrative and general)",
+     "issue": "This is a utility function line (like Distribution), which the cost-type rule says stays 'utilities'; nothing on the page says contract/professional services. FY2024 uses the same category, so flagged rather than called an error."},
+    {"severity": "warning", "path": "business_type.other_financing", "page": 6,
+     "extracted": 148020, "on_page": "Contributed capital 461,522; Cost recovered through CC (192,928); Gain (loss) on sale of assets (120,574) printed under Nonoperating revenues (expenses)",
+     "issue": "The (120,574) loss is printed inside nonoperating revenues (expenses); under the 2026-11-06 ruling (Scottsbluff loss stays in nonoperating as Loss on Disposal of Assets) it could be a business-type disbursement line instead of other_financing. Roll-forward ties either way; FY2024 treats it the same way."},
+    {"severity": "warning", "path": "receipts[16].category", "page": 6,
+     "extracted": "intergovernmental/state aid", "on_page": "Sewer Fund: Grant revenue 3,700",
+     "issue": "Grantor not printed; the rules say do not guess a grantor (could be federal or state)."},
+    {"severity": "warning", "path": "detail[73].category", "page": 13,
+     "extracted": "occupation/franchise tax", "on_page": "Enhanced & Wireless 911 Fund: Business 88,024",
+     "issue": "Printed 'Business' tax in the 911 fund is probably a 911 surcharge/telephone occupation tax; the Statement of Activities prints the Business total as 'Other taxes' (p2). Printed tax label kept, so defensible."},
+    {"severity": "warning", "path": "detail[71].category", "page": 13,
+     "extracted": "Airport", "on_page": "Airport Fund: Environment and leisure 456,947",
+     "issue": "Printed function is Environment and leisure; category Airport comes from the fund name (marked computed). Same for detail[84] Transit Lines Fund 77,203 -> Mass Transit (a category used so far only for Lincoln/Clay Center)."},
+    {"severity": "warning", "path": "detail[68].detail_category", "page": 13,
+     "extracted": "other state aid", "on_page": "Airport Fund: Intergovernmental 262,279",
+     "issue": "Airport intergovernmental money is often FAA (federal) grants; source not printed. Similarly CDBG Fund Intergovernmental 986,332 (detail[60]) recorded as federal grants from the fund name, and Street Fund Intergovernmental 4,260,072 (detail[20]) as highway allocation: assumptions, not printed."},
+    {"severity": "warning", "path": "detail", "page": 12,
+     "extracted": "14 nonmajor fund columns recorded per fund", "on_page": "Combining statement pp12-13, 14 fund columns plus Total Non-Major",
+     "issue": "Extractor rule says per fund for up to 6 funds, Total column ('Nonmajor funds (combined)') above that; per-fund recording conflicts with that rule though it matches the later per-fund preference. All 14 columns tie to their printed totals and to the Total column."}
+  ]
+}
