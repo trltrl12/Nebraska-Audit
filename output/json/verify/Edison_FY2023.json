@@ -1,0 +1,19 @@
+{
+  "stem": "Edison_FY2023",
+  "values_checked": 84,
+  "fy2024_check": "FY2023 governmental ending 603,364.25 = Edison_FY2024 beginning_cash 603,364.25; Water & Sewer ending 106,196.17 = FY2024 business_type.beginning 106,196.17. Ties.",
+  "issues": [
+    {"severity": "warning", "path": "receipts[8].category", "page": 1,
+     "extracted": "other", "on_page": "Line 18 Local Receipts: Other, General Fund 140,622.73",
+     "issue": "This is about 49% of governmental receipts. The General Fund also pays Solid Waste 17,853.00, Wastewater 19,781.10 and Water 45,936.78 (p3), so this line may include utility or garbage charges. It is a context label and the page does not break it down, so it goes to the context check or review. The same applies to detail[5]."},
+    {"severity": "warning", "path": "receipts[9].category", "page": 1,
+     "extracted": "other", "on_page": "Line 18 Local Receipts: Other, Water & Sewer Fund 16,361.98",
+     "issue": "This is the utility fund's only non-federal receipt and is probably water/sewer charges (Utility Charges). It is a context label and the page does not say what it is. The same applies to detail[28]."},
+    {"severity": "warning", "path": "disbursements[3]", "page": 3,
+     "extracted": "Solid Waste 17,853.00 / Wastewater 19,781.10 / Water 45,936.78 (governmental, General Fund)", "on_page": "Lines 45, 47, 48, General Fund column",
+     "issue": "Business-type rows printed in the governmental General Fund column. They are kept governmental under the printed fund column, which is consistent with the rules, but the user may want to know that utility spending sits in the governmental totals. The same applies to disbursements[4], disbursements[5] and detail[9-11]."},
+    {"severity": "warning", "path": "disbursements[6]", "page": 3,
+     "extracted": "general government 26,064.50 (business-type, Water & Sewer Fund)", "on_page": "Line 29 General Government, Water & Sewer Fund column 26,064.50",
+     "issue": "A governmental-function row printed in the utility fund column. It is kept business-type as printed. Utility-fund administration could arguably be category utilities. The same applies to detail[29]."}
+  ]
+}
