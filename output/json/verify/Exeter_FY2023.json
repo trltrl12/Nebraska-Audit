@@ -1,0 +1,18 @@
+{
+  "stem": "Exeter_FY2023",
+  "values_checked": 170,
+  "issues": [
+    {"severity": "warning", "path": "receipts[0].split_from", "page": 2,
+     "extracted": "pieces 372,429 + 150,797 + 50,147 + 1,000 + 16,125 = 590,498", "on_page": "fund statement Taxes 590,497 (p4); Statement of Activities tax lines sum 590,498 (p2)",
+     "issue": "Digits re-read: the gap is in the report itself, not a misread. On p2 the general receipts column adds exactly to its printed total 844,274 using 372,429 / 150,797 / 50,147 / 1,000 / 16,125 (with intergovernmental 131,968, miscellaneous 7,410, investment 9,015 + 174, transfers 105,209). On p4 the fund columns 222,531 + 1,148 + 366,818 = 590,497 and total receipts 923,175 also add exactly. The report offsets the 1 against internal transfers (105,209 on p2 vs 105,210 net on p4). The split pieces therefore sum to 923,176 governmental receipts, 1 over the printed 923,175, and the fund-balance roll-forward is off by 1. This is correctly logged in report_discrepancies; the split is not exact (rule 4)."},
+    {"severity": "warning", "path": "detail[28].category", "page": 4,
+     "extracted": "charges for services/fees", "on_page": "Keno Fund: Charges for services 14,211",
+     "issue": "These are Keno Fund receipts printed as charges for services. FY2024 recorded the same line as keno/lottery (user rule: lottery-fund gross keno receipts -> keno/lottery). This is inconsistent between years."},
+    {"severity": "warning", "path": "disbursements[6].category", "page": 4,
+     "extracted": "other", "on_page": "Keno 7,316 (Statement of Activities counts it under Miscellaneous)",
+     "issue": "Keno Fund spending with no purpose printed. other is a last resort. Community Betterment might fit, but nothing on the page proves it."},
+    {"severity": "warning", "path": "ending_cash", "page": 3,
+     "extracted": 921347, "on_page": "147,617 + 760,601 + 6,874 + 6,255 (no single printed cash total)",
+     "issue": "Cash is a computed sum of four printed cash lines (marked computed, arithmetic correct). Under the 2026-11-06 ruling cash is filled only where printed. Please confirm."}
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "stem": "Eustis_FY2023",
+  "values_checked": 99,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "receipts[3].category",
+      "page": 3,
+      "extracted": "other",
+      "on_page": "Local 84,293 = general government fees and charges for services 61,943 + culture and recreation operating grants and contributions 6,818 + miscellaneous 15,532 (Statement of Activities pp2-3)",
+      "issue": "Line left in other although the Statement of Activities shows 73% of it is charges for services. The extractor rule says to use the category that is more than half of the line, or to split it with split_from. The FY2024 extraction split the same line (charges for services / donations / other).",
+      "resolved": "context label \"Local\": left for the context check (user rule 2026-11-05); evidence kept for the checker"
+    },
+    {
+      "severity": "error",
+      "path": "detail[3].category",
+      "page": 9,
+      "extracted": "other",
+      "on_page": "General column Local 77,475 = fees and charges for services 61,943 + miscellaneous 15,532 (p2-3)",
+      "issue": "General sub-column Local is 80% charges for services according to the Statement of Activities, but it is left in other / Other / Miscellaneous Receipts.",
+      "resolved": "context label \"Local\": left for the context check (user rule 2026-11-05); evidence kept for the checker"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[17].category",
+      "page": 9,
+      "extracted": "other",
+      "on_page": "Library Local 6,818 = culture and recreation operating grants and contributions 6,818 (p2)",
+      "issue": "The amount ties exactly to operating grants and contributions. donations/contributions (as in FY2024) or intergovernmental fits better than other, but the grantor is not printed."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[17].fund",
+      "page": 9,
+      "extracted": "Library Fund",
+      "on_page": "General Fund > Library (sub-column of the General Fund)",
+      "issue": "The schedule prints Library as a sub-column of the General Fund, not as a separate fund. The JSON records it as 'Library Fund' (and the General sub-column as 'General Fund')."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[5].category",
+      "page": 9,
+      "extracted": "general government",
+      "on_page": "General sub-column object lines (Personnel services 53,627 ... Capital outlay 95,431)",
+      "issue": "The General sub-column mixes general government, public safety (Contracted services 40,000, function inferred from the amount) and culture/recreation (14,553 of the statement's 22,617 culture line is outside the Library column). All object lines except Contracted services are put in general government. This is listed by object, so the function is assumed."
+    }
+  ]
+}
