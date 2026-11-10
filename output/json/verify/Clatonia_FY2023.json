@@ -1,0 +1,18 @@
+{
+  "stem": "Clatonia_FY2023",
+  "values_checked": 66,
+  "issues": [
+    {"severity": "warning", "path": "missing", "page": 1,
+     "extracted": null, "on_page": "County Treasurer Balance at October 1, 2022 1,296.00; County Treasurer Balance at September 30, 2023 2,178.00",
+     "issue": "cash held by the county treasurer is printed below Exhibit A but recorded nowhere in the JSON (only mentioned in notes); it is outside the Exhibit A ending balance, so adding it to the balance sheet would need a person's decision"},
+    {"severity": "warning", "path": "missing", "page": 3,
+     "extracted": null, "on_page": "Schedule of Outstanding Debt: Note 892,115.00; Note 57,717.00; Total 949,832.00",
+     "issue": "notes payable printed on p3 are not in balance_sheet.liabilities (cash-basis Exhibit A carries no liabilities); recorded only in notes"},
+    {"severity": "warning", "path": "disbursements[4].original_label", "page": 2,
+     "extracted": "Capital Outlay: General Government", "on_page": "Capital Improvements 39,268 / Other Capital Outlay 41,842 (General Fund column)",
+     "issue": "function General Government assumed from the General Fund column (also disbursements[5], detail[12]-[13]); not printed and not marked computed"},
+    {"severity": "warning", "path": "disbursements[8].fund_type", "page": 2,
+     "extracted": "governmental", "on_page": "Solid Waste 36,649, Wastewater 5,882, Water 28,852 under Business-Type Activities, General Fund column",
+     "issue": "kept governmental by fund column (consistent with FY2024); already in decision_needed"}
+  ]
+}
