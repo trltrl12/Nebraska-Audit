@@ -1,0 +1,22 @@
+{
+  "stem": "Harrison_FY2023",
+  "values_checked": 106,
+  "issues": [
+    {"severity": "warning", "path": "detail[8].original_label", "page": 5,
+     "extracted": "Capital Outlay: General Government", "on_page": "Capital outlay 5,400 (General column)",
+     "issue": "The function is not printed on the row, its heading or the fund column (General). It comes from the SoA (p2 general government 103,093 = 97,693 + 5,400), which reconciles exactly, but this breaks the capital outlay rule (function only when printed on the row, heading or a fund column clearly naming it). Consider 'Capital Outlay'."},
+    {"severity": "warning", "path": "detail[19].original_label", "page": 5,
+     "extracted": "Capital Outlay: Streets/Highways", "on_page": "Capital outlay 39,468 (ARPA column)",
+     "issue": "The ARPA fund name does not name a function. Public works comes from the SoA reconciliation (p2 public works 110,795 = 44,377 + 26,950 + 39,468), which is exact, but it is outside the capital outlay rule's allowed sources."},
+    {"severity": "warning", "path": "report_discrepancies", "page": 3,
+     "extracted": null, "on_page": "SoA business-type beginning 275,720, miscellaneous income 4,502, change (14,260) vs p7 275,719 / 4,503 / (14,259)",
+     "issue": "$1 rounding differences between the government-wide SoA (p3) and the proprietary funds statement (p7). Each statement adds up internally. They are recorded only in notes; there is no report_discrepancies entry."},
+    {"severity": "warning", "path": "receipts[3].category", "page": 5,
+     "extracted": "other", "on_page": "Local 38,762 (SoA: fees/charges 7,467 + operating grants 9,333 + miscellaneous income 21,962)",
+     "issue": "Context label left in other. The SoA breakdown ties exactly and miscellaneous (57%) is the largest piece, so other is defensible. A split with split_from would also be possible. Leave it for the context check."},
+    {"severity": "warning", "path": "disbursements[7].category", "page": 7,
+     "extracted": "Professional/Contract Services", "on_page": "Garbage service 42,762 (Solid Waste)",
+     "issue": "Cost-type judgment call: a contracted garbage hauling service, so Professional/Contract Services is defensible (detail[38] same)."}
+  ],
+  "notes": "Read pages 1-8 of 8. Every amount matches its column (Total Governmental Funds p5, Total Proprietary Funds p7, Total p4/p1). Governmental 442,667 + 229,031 - 295,428 + 27,224 - 27,224 + 15,650 = 391,920. Business-type 275,719 + 255,034 - 269,293 = 261,460. Every per-fund detail list ties to its printed fund totals. Balance sheet 653,380 = 653,380. Transfers are one-sided pairs (General out 27,224 / Street in 27,224) and are not inside spending. FY2023 endings equal Harrison_FY2024 beginnings as printed (governmental fund balance 391,920; business-type 261,460)."
+}
