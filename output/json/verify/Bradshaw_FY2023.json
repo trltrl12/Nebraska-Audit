@@ -1,0 +1,30 @@
+{
+  "stem": "Bradshaw_FY2023",
+  "values_checked": 180,
+  "issues": [
+    {"severity": "warning", "path": "missing", "page": 12,
+     "extracted": null, "on_page": "Parks & Recreation Fund disbursements 19,300.18 (p17 combined statement); General Fund statement disbursements 239,526.37 (p7) vs combining columns 181,656.43 + 23,799.86 + 14,769.90 = 220,226.19",
+     "issue": "the Parks & Recreation column of the combining General Fund disbursements schedule (report p24/26) is not in the trimmed PDF, so that fund has no detail lines; re-trim needed (noted by the extractor, not a JSON error)"},
+    {"severity": "warning", "path": "missing", "page": 15,
+     "extracted": null, "on_page": "Sewer Fund: receipts 18,507.31, disbursements 27,519.67 (p9 statement column); budget schedule page report p29 not trimmed",
+     "issue": "Sewer Fund has no detail lines because its budgetary comparison page (report p29) is missing from the trim; re-trim needed"},
+    {"severity": "warning", "path": "decision_needed", "page": 10,
+     "extracted": "intergovernmental/state aid", "on_page": "State Revolving Fund 340,469.00 (nonoperating, Water Fund)",
+     "issue": "State Revolving Fund receipts are commonly loan proceeds (or loan forgiveness); 73% of the Water Fund's receipts. The Statement of Activities shows it as Operating Grants and Contributions, but whether it is a grant or SRF loan proceeds is a question for a person and is not in decision_needed"},
+    {"severity": "warning", "path": "disbursements[14].original_label", "page": 7,
+     "extracted": "Capital Outlay: General Government", "on_page": "Equipment 8,123.51 (General 3,550.00 + Street 4,573.51)",
+     "issue": "Total column line combines General Fund and Street Fund capital outlay; more than half (4,573.51) is Street Fund (streets/highways), so the function label General Government is questionable"},
+    {"severity": "warning", "path": "receipts[9].category", "page": 6,
+     "extracted": "intergovernmental/state aid", "on_page": "Incentive 600.00 (Street Fund)",
+     "issue": "assumed to be the state street superintendent incentive; nothing on the page says so"},
+    {"severity": "warning", "path": "detail[51].detail_category", "page": 13,
+     "extracted": "highway allocation", "on_page": "Highway Allocation & Motor Vehicle Fees 55,282.03",
+     "issue": "mixed label (highway allocation and motor vehicle fees) with no breakdown printed"},
+    {"severity": "warning", "path": "detail[72].detail_category", "page": 14,
+     "extracted": "miscellaneous expenditure", "on_page": "Refunds 3,080.00 (Electric Fund)",
+     "issue": "the same line on the statement (disbursements[24]) has category 'Refunds' while the detail line is miscellaneous expenditure; inconsistent treatment of one label within the report"},
+    {"severity": "warning", "path": "detail[45].amount", "page": 13,
+     "extracted": 36798.09, "on_page": "Street Fund Property Tax 36,798.09; Water Fund Property Taxes 36,798.08 (p9, p14)",
+     "issue": "Street Fund and Water Fund print nearly identical tax receipts and identical debt service (20,000 + 1,865); possible double reporting. Already in decision_needed; recorded as printed"}
+  ]
+}
