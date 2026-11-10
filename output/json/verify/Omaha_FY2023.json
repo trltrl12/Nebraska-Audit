@@ -1,0 +1,23 @@
+{
+  "stem": "Omaha_FY2023",
+  "values_checked": 340,
+  "issues": [
+    {"severity": "warning", "path": "receipts[12..17].original_label", "page": 3,
+     "extracted": "Charges for services - Parking / Charges for services: Sewer / Charges for services - Citywide sports and tennis / - Marinas / - Golf operations and concessions / - Air quality",
+     "on_page": "Rows Parking 11,416,816; Sewer 211,673,129; Citywide Sports and tennis 1,028,996; Marinas 492,343; Golf operations and concessions 6,682,658; Air quality 630,112 (Charges for Services column)",
+     "issue": "Amounts and the split are correct (pieces add exactly to 231,924,054 on p9). But the labels are made up, not the printed row labels (split pieces should carry the printed row label, e.g. 'Parking'), and Sewer uses ':' where the others use ' - '."},
+    {"severity": "warning", "path": "receipts[11].category", "page": 6,
+     "extracted": "federal grants", "on_page": "Contributions and grants 85,666,528",
+     "issue": "The page doesn't name a grantor (Grants fund 67,752,327 plus contributions). 'federal grants' assumes a federal source. Under the 2026-11-06 ruling (do not guess a grantor) the existing 'Grants' category may fit better."},
+    {"severity": "warning", "path": "detail[69,110,116,145,160].category", "page": 14,
+     "extracted": "federal grants / federal grants",
+     "on_page": "Contributions and grants: Street and Highway 4,140,677 (p14), Storm Water 277,197 (p21), City Street Maintenance 11,530 (p22), Household Chemical Disposal 555,681 (p30), Debt Service 122 (p32)",
+     "issue": "Same issue as receipts[11]: no grantor printed, and the label mixes grants with contributions."},
+    {"severity": "warning", "path": "disbursements[3].category", "page": 6,
+     "extracted": "utilities", "on_page": "Other public services 40,226,462",
+     "issue": "Mixed function line (solid waste, sewer general expense, flood control, household chemical disposal) in governmental funds. 'utilities' is defensible but is a judgment call."},
+    {"severity": "warning", "path": "detail[129].detail_category", "page": 28,
+     "extracted": "other state aid", "on_page": "Intergovernmental 5,688,435 (Greater Omaha Convention and Visitors Bureau Fund)",
+     "issue": "The page doesn't say the source is the state (it could be county/local lodging-tax money). Consider leaving it as generic intergovernmental."}
+  ]
+}
