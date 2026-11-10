@@ -1,0 +1,55 @@
+{
+  "stem": "Cedar_Rapids_FY2023",
+  "values_checked": 174,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "proprietary",
+      "page": 9,
+      "extracted": null,
+      "on_page": "Statement of Cash Flows - Proprietary Funds, Total column (pp8-9): net cash from operating 25,083; capital and related financing (94,179); noncapital financing none; investing 0 (CDs (877) + interest 877); cash and cash equivalents beginning 554,804, end 485,708",
+      "issue": "The proprietary cash flow statement is printed, and it shows business-type cash at the start and end of the year, but proprietary is null. Business-type beginning cash 554,804 and ending cash 485,708 are recorded nowhere. Check: 554,804 + 25,083 - 94,179 + 0 = 485,708.",
+      "resolved": "fixed 2026-11-10"
+    },
+    {
+      "severity": "warning",
+      "path": "ending_cash",
+      "page": 4,
+      "extracted": 511606,
+      "on_page": "Cash and cash equivalents 511,606; County treasurer cash 4,024 (Total Governmental Funds)",
+      "issue": "ending_cash leaves out County treasurer cash 4,024, even though balance_sheet.assets[4] puts that line in Cash and Cash Equivalents. Under the user rule (county treasurer = Cash and Cash Equivalents), ending cash would be 515,630. Governmental beginning cash is not printed (no prior-year balance sheet), so null is correct."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[7].category",
+      "page": 15,
+      "extracted": "charges for services/fees",
+      "on_page": "Rescue - Rental and fees 17,927",
+      "issue": "The 'Rental and fees' detail lines (Rescue 17,927, Cedar Valley Center 2,360, Park 10,418) stay generic charges for services/fees, while the Pool line in the same schedule uses 'Recreation Fees'. The 2026-10-28 categories Ambulance Fees, Rentals and Recreation Fees would fit these departments, but the label is mixed ('Rental and fees'), so this is a judgment call."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[7]",
+      "page": 5,
+      "extracted": "Rental and fees 30,705 (one line)",
+      "on_page": "Rental and fees 30,705; p16 Total column shows the same row by department: Rescue 17,927, Cedar Valley Center 2,360, Park 10,418",
+      "issue": "Mixed label kept as one line with category charges for services/fees. The department breakdown adds up exactly but does not split rentals from fees, so keeping one line is defensible."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[9].category",
+      "page": 16,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "Library - Grants 828 (Statement of Activities p2: Operating Grants and Contributions)",
+      "issue": "The grantor is not stated, so the state-aid category is an assumption. The same applies to detail[14]."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[5].original_label",
+      "page": 5,
+      "extracted": "Capital Outlay: Culture/Recreation",
+      "on_page": "Capital outlay 58,616 (Park 27,308, Street 15,375, Village Office 13,613, General 1,276, Rescue 1,044)",
+      "issue": "One statement line covers several functions. Culture/recreation is the largest part (27,308) but less than half of 58,616."
+    }
+  ]
+}

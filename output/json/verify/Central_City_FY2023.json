@@ -1,0 +1,63 @@
+{
+  "stem": "Central_City_FY2023",
+  "values_checked": 227,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "receipts[0]",
+      "page": 8,
+      "extracted": "Property Tax 989,060 + Property taxes 20,095 (split_from 'Property and motor vehicle 1,009,155'), both category property tax",
+      "on_page": "p8 'Property and motor vehicle' 1,009,155 (General 989,060, Street 20,095); p14 General Fund budget schedule prints the same 989,060 as 'Property and motor vehicle'; p22 combining schedule prints it as 'Property'",
+      "issue": "The split does not separate motor vehicle tax from property tax; it only reclassifies the whole combined line as property tax by fund column. The report labels the identical General Fund 989,060 'Property and motor vehicle' on p8 and p14, so p22's 'Property' is not a breakdown by tax type. The 2026-11-06 ruling keeps combined property + motor vehicle rows as one row, 'Property Tax and Motor Vehicle Taxes'. Same applies to receipts[1].",
+      "resolved": "fixed 2026-11-10"
+    },
+    {
+      "severity": "warning",
+      "path": "governmental_net_position.beginning",
+      "page": 4,
+      "extracted": 13837653,
+      "on_page": "NET POSITION, beginning of year, restated 13,837,653; p7 reconciliation 2022 column NET POSITION OF GOVERNMENTAL ACTIVITIES 13,388,222",
+      "issue": "The beginning balance is printed as 'restated' and is 449,431 above the prior-year figure on p7. No restatement line or amount is printed on the trimmed pages, so the restatement is not recorded. The amount is correct as printed."
+    },
+    {
+      "severity": "warning",
+      "path": "report_discrepancies",
+      "page": 4,
+      "extracted": [],
+      "on_page": "SoA business-type change 288,214 / beginning 11,064,625 vs p11 288,213 / 11,064,626; SoA gain 57,522 and state allocation 581,438 vs 57,521 / 581,437 on p11/p8; Street Fund total revenue 474,460 (p8) vs 474,461 (p16)",
+      "issue": "The report itself has $1 rounding differences between statements. They are mentioned in notes but not listed in report_discrepancies."
+    },
+    {
+      "severity": "warning",
+      "path": "ending_cash",
+      "page": 5,
+      "extracted": 1339201,
+      "on_page": "Cash and cash equivalents 1,339,201; Cash at county treasurer 22,833 (Total Governmental Funds)",
+      "issue": "ending_cash leaves out cash at county treasurer 22,833, even though balance_sheet.assets[5] puts it in Cash and Cash Equivalents. Beginning cash likewise leaves out the 2022 county treasurer cash 35,693 (p5)."
+    },
+    {
+      "severity": "warning",
+      "path": "decision_needed",
+      "page": 22,
+      "extracted": "no decision_needed entry",
+      "on_page": "Library Fund 'Other' 636,157 (General Fund 'Other' 721,655; statement 'Other' 735,858)",
+      "issue": "An unexplained 'Other' receipt of 636,157 in the Library sub-fund is 19% of governmental revenue. It came in the same year as 674,688 of library capital outlay, and the p14 budget lists 'Housing Project Financing' and a 3.1M 'Other'. It may be donations or financing rather than ordinary revenue, which only a person can settle."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[5].category",
+      "page": 8,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "Grants 96,863 (airport 76,080, ambulance 7,800, library 6,418, Library Trust 6,565)",
+      "issue": "The grantor is not stated, so the state-aid category is an assumption. The same applies to detail[10], detail[24], detail[29] and detail[98]."
+    },
+    {
+      "severity": "warning",
+      "path": "ending_fund_balance",
+      "page": 8,
+      "extracted": 2428147,
+      "on_page": "FY2024 p7: FUND BALANCES, beginning of year, restated 2,048,572",
+      "issue": "Cross-year check: the FY2023 ending balances are as printed, but they do not equal the FY2024 beginning figures. Fund balance 2,428,147 vs FY2024 restated 2,048,572 (difference 379,575: Sales Tax 1,404,300 -> 1,021,907, Other Governmental 461,780 -> 464,598). Business-type net position 11,352,839 vs FY2024 p10 beginning 11,008,620 (difference 344,219: Water, Sewer, Ethanol; that line is not labelled restated). Governmental net position 13,609,022 vs FY2024 restated 13,420,506 (difference 188,516). The FY2024 pages say 'restated' but print no restatement amount. Proprietary cash ties (1,230,980)."
+    }
+  ]
+}
