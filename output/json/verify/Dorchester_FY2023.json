@@ -1,0 +1,19 @@
+{
+  "stem": "Dorchester_FY2023",
+  "values_checked": 292,
+  "prior_year_tie": "FY2023 ending fund balance 940,109 = FY2024 beginning_fund_balance 940,109; business_type ending net position 2,358,896 = FY2024 beginning 2,358,896; proprietary ending cash 377,750 = FY2024 proprietary beginning cash 377,750; governmental net position ending 2,559,582 = FY2024 beginning 2,559,582. FY2024 beginning_cash/investments are null, so the FY2023 ending cash 786,129 / investments 165,392 have no FY2024 counterpart to compare. No restatement needed.",
+  "issues": [
+    {"severity": "warning", "path": "receipts[20].category", "page": 6,
+     "extracted": "other (Miscellaneous revenues 25,092)", "on_page": "Miscellaneous revenues 25,092 = General 9,447 (Rents 8,718 + Miscellaneous 729, p11) + Street 3,207 + Fire 11,368 + Non-major 1,070 (Rent 900 + 50, Miscellaneous 120, p14-15)",
+     "issue": "The schedules print 9,668 of rents inside this line (38%, not a majority), so 'other' is defensible under the printed 'Miscellaneous' label. The extractor did split Taxes, Intergovernmental and Charges for services from the same schedules, so a Rentals split piece would be consistent. Judgment call."},
+    {"severity": "warning", "path": "receipts[18].category", "page": 6,
+     "extracted": "donations/contributions", "on_page": "Grants/donations 8,980 (General 5,880, shown on the Statement of Activities p2 as Capital Grants and Contributions; Culture and Recreation 3,100, shown as Operating Grants and Contributions)",
+     "issue": "Mixed 'Grants/donations' label with no grantor breakdown. Keeping it as one line is allowed by the 2026-11-06 ruling, but the category could equally be grants."},
+    {"severity": "warning", "path": "detail[25].category", "page": 11,
+     "extracted": "general government / professional/contract services", "on_page": "Refuse 64,775 (General Fund schedule; the statement counts it in Policy/administration)",
+     "issue": "This is refuse collection paid for by the General Fund (garbage fees 66,449 are Utility Charges). general government follows the statement's function column, but a utilities function would also be defensible."},
+    {"severity": "warning", "path": "detail[92].original_label", "page": 14,
+     "extracted": "Capital Outlay: Culture/Recreation (computed from fund column heading)", "on_page": "Capital outlay 18,000 (Culture and Recreation fund column)",
+     "issue": "Inconsistent: the General, Street and Fire capital outlay detail lines are left as plain 'Capital Outlay', but this one takes its function from the fund name. No function is printed on the row itself."}
+  ]
+}
