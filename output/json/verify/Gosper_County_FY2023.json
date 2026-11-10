@@ -1,0 +1,18 @@
+{
+  "stem": "Gosper_County_FY2023",
+  "values_checked": 97,
+  "issues": [
+    {"severity": "warning", "path": "detail[4].category", "page": 5,
+     "extracted": "other", "on_page": "Local 363,336 (General Fund budget schedule); p4 General column: Charges for Services 210,043 + Interest 139,270 + Miscellaneous 6,061 + 7,962 of Intergovernmental (19,729 - State 11,767) = 363,336",
+     "issue": "This is a context label, so the context check settles it. The page shows the breakdown, though: charges for services (57.8%) is more than half, so under the 'more than half' rule it would be charges for services/fees rather than other."},
+    {"severity": "warning", "path": "detail[16].review", "page": 7,
+     "extracted": "other (Local 1,965)", "on_page": "Road column p4: Charges for Services 995 + Miscellaneous 946 + 24 of Intergovernmental (879,873 - Federal 1,908 - State 877,941) = 1,965",
+     "issue": "The review note's breakdown leaves out the 24 of intergovernmental. Charges (995) is just over half of the line. This is a context label, so the context check settles the category."},
+    {"severity": "warning", "path": "detail[29].category", "page": 10,
+     "extracted": "charges for services/fees", "on_page": "Charges for Services 13,468 (Keno-Lottery column)",
+     "issue": "The row is printed as Charges for Services, but it sits in the Keno-Lottery fund. The user's 2026-11-04 Waverly ruling (lottery-fund gross keno receipts -> keno/lottery) suggests keno/lottery. Judgment call."},
+    {"severity": "warning", "path": "detail[19]", "page": 9,
+     "extracted": "nonmajor combining schedule recorded per fund (8 active of 13 columns)", "on_page": "Schedule 2, 13 fund columns plus Total Nonmajor Special Revenue Funds",
+     "issue": "The extractor rule says to use the Total column as 'Nonmajor funds (combined)' when there are more than 6 funds. Recording per fund is more detailed and every line ties to its column, so this is defensible. FY2024 JSON beginning_fund_balance 9,493,167 ties to FY2023 ending as printed."}
+  ]
+}

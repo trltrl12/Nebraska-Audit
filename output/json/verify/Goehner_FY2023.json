@@ -1,0 +1,15 @@
+{
+  "stem": "Goehner_FY2023",
+  "values_checked": 70,
+  "issues": [
+    {"severity": "warning", "path": "report_discrepancies", "page": 2,
+     "extracted": null, "on_page": "crossed-out original Exhibit A: General Fund line 1 Net Cash Balance 245,788.97, line 2 Investments blank, line 3 626,757.21 total; revised p1: 244,551.09 + 179,941.58 = 424,492.67, line 3 total 805,460.91",
+     "issue": "The extractor used the revised (unmarked) Exhibit A on p1, which is correct. The differing figures on the void p2 version are only described in notes, not recorded in report_discrepancies as the crossed-out-page rule asks. Also, the revised General Fund beginning net cash (244,551.09) is 1,237.88 lower than the void version (245,788.97), not just reclassified into investments."},
+    {"severity": "warning", "path": "ending_cash", "page": 1,
+     "extracted": 829952.75, "on_page": "FY2024 JSON beginning_fund_balance 866,519 (governmental); business_type FY2024 beginning (26,571) ties",
+     "issue": "FY2023 governmental ending (829,952.75 line 24, incl. investments 181,487.68) does not equal FY2024 beginning governmental fund balance 866,519 (difference 36,566.25; adding the 9/30/23 county treasurer balance 1,149.56 still leaves 35,416.69). Neither report prints a restatement explaining it. Business-type ties: (26,571.24) vs FY2024 (26,571). Left as printed."},
+    {"severity": "warning", "path": "detail[13].category", "page": 1,
+     "extracted": "intergovernmental/state aid", "on_page": "State Receipts: Other 1,520.00 (Building Permit Fund column)",
+     "issue": "Recorded as printed (State Receipts), but a Building Permit Fund receipt is probably permit fees (licenses and permits). The form doesn't say, so this is a judgment call. The extractor already flagged it for review."}
+  ]
+}
