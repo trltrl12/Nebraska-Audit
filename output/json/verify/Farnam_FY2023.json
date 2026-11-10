@@ -1,0 +1,15 @@
+{
+  "stem": "Farnam_FY2023",
+  "values_checked": 70,
+  "issues": [
+    {"severity": "warning", "path": "receipts[11].category", "page": 1,
+     "extracted": "other", "on_page": "Local Receipts: Other (Water 255,009.32, Sewer 45,687.50)",
+     "issue": "Water/Sewer Fund 'Local Receipts: Other' is the utilities' only receipt line and is almost certainly utility charges, but nothing on the page says so (context label). Same for detail[18] and detail[20]. Left for the context check."},
+    {"severity": "warning", "path": "report_discrepancies", "page": 4,
+     "extracted": null, "on_page": "Crossed-out Exhibit A pp4-6: beginning total 266,741.62, General Local Receipts: Other 90,816.17, General Government 141,146.68, Water 224,594.20, ending total 335,645.00",
+     "issue": "The extractor correctly used the unmarked pp1-3 and not the version crossed out in red (pp4-6). The other version's differing figures appear only in notes. They are not in report_discrepancies, which the void-page rule asks for. Unmarked pp1-3 ending balances equal the FY2024 beginning balances (gov 120,544.35; business 127,106.75; investments 94,870.42)."},
+    {"severity": "warning", "path": "transfers_out", "page": 2,
+     "extracted": 41000.00, "on_page": "Line 49 Transfers Out of Surplus Fees 41,000.00 (General) vs line 20 Transfers In Other Than Surplus Fees 41,000.00 (Street); p3 interfund transfer schedule TOTAL '-'",
+     "issue": "The report's own cross-checks fail: line 49 should equal line 19, which is blank, and the valid p3 transfer schedule is empty. Amounts match (41,000 each way), so the recorded figures are as printed."}
+  ]
+}

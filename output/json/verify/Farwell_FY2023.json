@@ -1,0 +1,18 @@
+{
+  "stem": "Farwell_FY2023",
+  "values_checked": 88,
+  "issues": [
+    {"severity": "warning", "path": "detail[19].detail_category", "page": 2,
+     "extracted": "miscellaneous revenue (category other)", "on_page": "Keno Fund column, Local Receipts: Other 35,895.14",
+     "issue": "This is the Keno Fund's only receipt and is very likely keno/lottery proceeds. CLAUDE.md's Waverly ruling treats lottery-fund gross keno receipts as keno/lottery. It is kept in other only because the row label is the generic 'Local Receipts: Other'. It is also inside receipts[9] (71,877.51)."},
+    {"severity": "warning", "path": "receipts[10].category", "page": 1,
+     "extracted": "other", "on_page": "Local Receipts: Other (Water 28,657.56, Sewer 13,042.00, Water Reserve 10.44)",
+     "issue": "The utility funds' only receipt line is likely utility charges, but the page doesn't say so (context label). The context check should decide it."},
+    {"severity": "warning", "path": "disbursements[5].fund_type", "page": 3,
+     "extracted": "governmental / utilities", "on_page": "Line 44 Electric Utility, under Business-Type Activities: General 5,784.75, Street 7,938.02; line 45 Solid Waste: General 10,097.58",
+     "issue": "Amounts printed under the Business-Type heading but in governmental fund columns are kept governmental by column, which is defensible. The category 'utilities' for governmental electricity/garbage spending is a judgment call. Same for disbursements[7] and detail[10], [11], [17]."},
+    {"severity": "warning", "path": "business_type.transfers_net", "page": 5,
+     "extracted": 0, "on_page": "Exhibit A: in Water 25,000 + Water Reserve 400, out Water 400 + Sewer 25,000; p5 schedule: Water -> Water Reserve 400, Sewer -> Water Reserve 25,000",
+     "issue": "Exhibit A and the transfer schedule disagree on which fund received the 25,000, so the report is internally inconsistent. The total (25,400) and net (0) are the same. The amounts are recorded as Exhibit A prints them, and the conflict appears only in notes, not in report_discrepancies."}
+  ]
+}
