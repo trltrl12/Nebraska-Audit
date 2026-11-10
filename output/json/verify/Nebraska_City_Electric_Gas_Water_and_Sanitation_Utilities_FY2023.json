@@ -1,0 +1,21 @@
+{
+  "stem": "Nebraska_City_Electric_Gas_Water_and_Sanitation_Utilities_FY2023",
+  "values_checked": 55,
+  "issues": [
+    {"severity": "warning", "path": "balance_sheet.assets", "page": 1,
+     "extracted": "2023 column as shown on the page image", "on_page": "text layer swaps the 2023/2022 figures on several rows (Other assets 3,908,078 / 4,126,843, Operating 3,434,464 / 3,661,409, Restricted 98,250 / 98,202, Leases 76,619 / 72,356, Interest 161,683 / 231,655, Inventories 2,962,597 / 4,266,936, Unrestricted 18,493,696 / 19,269,706); p2 capital contributions and p3 beginning/ending cash are swapped too",
+     "issue": "The extraction matches the page image. The image's 2023 column adds up to every printed subtotal and to Total assets 68,817,294, and it ties to the cash-flow changes (inventories decrease 1,304,339). The automatic page-text check may flag these amounts because the text layer has the columns in the wrong order. Treat the image as correct."},
+    {"severity": "warning", "path": "disbursements[0].category", "page": 2,
+     "extracted": "utilities", "on_page": "Cost of electricity sold / Cost of gas sold / Cost of water sold / Cost of sanitation services",
+     "issue": "These 'cost of ... sold' lines might fit Purchased Power/Cost of Sales (cost-type rule). The extraction keeps them as the utilities function, which matches the FY2025 extraction. This is a judgment call."},
+    {"severity": "warning", "path": "receipts[5].category", "page": 2,
+     "extracted": "Rentals", "on_page": "Lease income 114,883",
+     "issue": "Rentals fits lease income, but the FY2025 extraction of the same line uses charges for services/fees. The two years are categorized inconsistently."},
+    {"severity": "warning", "path": "balance_sheet.deferred_inflows[0].category", "page": 1,
+     "extracted": null, "on_page": "Deferred inflows of resources - rate stabilization 1,500,000; Deferred inflows of resources - other 370,140",
+     "issue": "Two deferred-inflow lines (index 0 and 2) have no category."},
+    {"severity": "warning", "path": "business_type.ending", "page": 2,
+     "extracted": 58065359, "on_page": "Net Position, End of Year 58,065,359",
+     "issue": "Year-to-year check not possible: there is no FY2024 JSON for this entity (only FY2025), so the FY2023 ending net position 58,065,359 and cash 7,876,898 can't be compared with an FY2024 beginning."}
+  ]
+}

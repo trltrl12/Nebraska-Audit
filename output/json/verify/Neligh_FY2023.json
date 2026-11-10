@@ -1,0 +1,55 @@
+{
+  "stem": "Neligh_FY2023",
+  "values_checked": 316,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "detail[151..186]",
+      "page": 7,
+      "extracted": "36 detail lines (Electric, Water, Sewer fund columns of the proprietary Statement of Revenues, Expenses and Changes in Fund Net Position) plus detail_totals[20..25]",
+      "on_page": "proprietary statement fund columns; there is no supplementary schedule for the utility funds",
+      "issue": "This breaks the user's 2026-10-28 per-fund detail rule: when some funds have their own schedules (here the General Fund departments, Street and Debt Service budget schedules and the nonmajor combining statement), statement lines are not added for the other funds. The amounts are correct as printed (each fund ties to its printed totals 2,426,143/2,123,286, 314,865/349,020 and 377,633/309,707), but they duplicate the statement and are inconsistent with Neligh_FY2024, whose detail has no proprietary lines. Fix: remove detail[151..186] and detail_totals[20..25].",
+      "resolved": "proprietary statement lines removed (other funds have own schedules; user 2026-10-28; matches FY2024)"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[6].category",
+      "page": 5,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "Grants 171,237 (also business-type Grants 12,424, p7, and the detail 'Grants' lines)",
+      "issue": "The grantor is not printed, and the user's 2026-11-06 ruling says not to guess a grantor. Filing these under state aid is a judgment call, though it matches FY2024. The p2 Statement of Activities also counts the business-type grants inside Charges for Services 3,118,641."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[2].category",
+      "page": 5,
+      "extracted": "streets/highways",
+      "on_page": "Public works 683,254",
+      "issue": "Public works is a mix: Street Fund 322,547, General Fund Solid Waste department 270,980 (p16; the detail records it as utilities) and Dial-A-Ride 89,727. No single part is more than half, so streets/highways is defensible but debatable."
+    },
+    {
+      "severity": "warning",
+      "path": "ending_cash",
+      "page": 4,
+      "extracted": null,
+      "on_page": "Cash and cash equivalents (131,868); Certificate of deposits 1,151,036; Restricted cash and cash equivalents 1,325,288; Restricted certificate of deposits 322,868; County treasurer cash 13,968 (Total Governmental Funds)",
+      "issue": "The cash and investment pieces are printed, but no total governmental cash is. ending_cash and ending_investments are left null, as in FY2024. No prior-year cash is printed, so the beginning figures can't be filled either. This is acceptable under the never-derive rule; noted only for awareness."
+    },
+    {
+      "severity": "warning",
+      "path": "balance_sheet.equity[2].category",
+      "page": 1,
+      "extracted": null,
+      "on_page": "Restricted for: Debt service / Street improvements / Other; Unrestricted",
+      "issue": "The equity lines equity[2..7] (restricted and unrestricted) have no category."
+    },
+    {
+      "severity": "warning",
+      "path": "ending_fund_balance",
+      "page": 5,
+      "extracted": 2677257,
+      "on_page": "Fund balances - September 30, 2023 2,677,257",
+      "issue": "Informational, no action needed. Year-to-year check against Neligh_FY2024: FY2023 ending fund balance 2,677,257 equals FY2024 beginning_fund_balance; business_type ending 7,636,021 equals FY2024 business_type.beginning; proprietary ending cash 1,844,136 equals FY2024 proprietary.beginning_cash. All tie, and no restatement is needed."
+    }
+  ]
+}
