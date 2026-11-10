@@ -1,0 +1,15 @@
+{
+  "stem": "Lindsay_FY2023",
+  "values_checked": 91,
+  "issues": [
+    {"severity": "warning", "path": "receipts[3].category", "page": 2,
+     "extracted": "other", "on_page": "Local 163,033 (p5); Statement of Activities p2-3 governmental: fees and charges 14,611, operating grants 6,245, capital grants and contributions 166,093, miscellaneous income 13,349",
+     "issue": "Context label 'Local' left in other, and it is 22.6% of governmental receipts. The Statement of Activities suggests it is mostly capital grants and contributions: program receipts 186,949 + miscellaneous 13,349 - (intergovernmental 140,439 - 103,174) = 163,033, leaving about 135,073 of grants and contributions. That is derived, not printed, and the label mixes grants with contributions, so it is not an exact breakdown. Leave it for the context check or a person to decide. The same applies to detail[3]."},
+    {"severity": "warning", "path": "ending_cash", "page": 4,
+     "extracted": 418981, "on_page": "TOTAL ASSETS 418,981 (funds statement p4); government-wide cash total 418,982 (p1)",
+     "issue": "ending_cash is the funds statement's Total Assets (every line is cash), marked computed. The balance sheet uses the government-wide p1 figures (339,369 vs 339,368). The 1 dollar rounding is in report_discrepancies. This is defensible, but cash comes from one statement and the balance sheet from another."},
+    {"severity": "warning", "path": "ending_fund_balance", "page": 5,
+     "extracted": 418981, "on_page": "FY2023 FUND BALANCES - END OF YEAR 418,981; Lindsay_FY2024.json beginning_fund_balance 418,980",
+     "issue": "FY2023 ending fund balance as printed does not equal the FY2024 beginning (418,980), a 1 dollar gap. Lindsay_FY2024.json records no printed restatement, so this looks like report rounding. Business-type ties (23,334 = FY2024 beginning 23,334)."}
+  ]
+}
