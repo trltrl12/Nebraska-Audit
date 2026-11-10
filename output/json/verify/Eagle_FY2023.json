@@ -1,0 +1,22 @@
+{
+  "stem": "Eagle_FY2023",
+  "values_checked": 78,
+  "prior_year_tie": "FY2023 ending_fund_balance 1,186,752 = Eagle_FY2024 beginning_fund_balance 1,186,752; business-type ending 565,890 = FY2024 business_type.beginning 565,890 (tie as printed, no restatement). FY2024 beginning_cash is null like FY2023's (no beginning cash printed).",
+  "issues": [
+    {"severity": "warning", "path": "receipts[4].category", "page": 4,
+     "extracted": "intergovernmental/state aid", "on_page": "Miscellaneous income/(expense) 201,244 (p4, p2); budget schedules print General 29,668 (p7) and Special Revenue 171,576 (p8) as 'Other state receipts'",
+     "issue": "category taken from the budget schedules rather than the printed statement label; defensible and already in decision_needed (same treatment as FY2024)."},
+    {"severity": "warning", "path": "receipts[10].category", "page": 6,
+     "extracted": "licenses and permits", "on_page": "Licenses, fees and permits 180 (non-operating); Statement of Activities p2 Water charges for services 116,030 = 115,850 + 180",
+     "issue": "the report counts this 180 in charges for services (Water); could be Utility Charges. Mixed label kept whole, consistent with FY2024."},
+    {"severity": "warning", "path": "detail[29]", "page": 9,
+     "extracted": "Operating expenses 2, section expenditure, category Operating", "on_page": "p9 Operating expenses 2; p4 Debt Service Fund column prints this 2 as 'Transfers (in)/out' 2",
+     "issue": "inconsistent within the report: the General Fund 1 and Special Revenue (3) transfer pieces inside 'Operating expenses' were moved to other financing (detail[10], detail[22]), but the Debt Service Fund's 2 transfer stays as spending. Fund transfers only net to zero (General -106,728, Special Revenue +106,729, Debt Service -1) if the 2 is a transfer. Kept as printed on p9 (as-printed rule), so a warning; $2."},
+    {"severity": "warning", "path": "detail[15].category", "page": 8,
+     "extracted": "Motor Vehicle Pro-Rate", "on_page": "Motor vehicle 33,646 (p8); p4 Special Revenue Fund column prints 33,646 on the 'Motor vehicle prorate' row",
+     "issue": "printed schedule label 'Motor vehicle' would normally be motor vehicle tax; pro-rate taken from p4, which ties exactly. Defensible."},
+    {"severity": "warning", "path": "balance_sheet.equity[4]", "page": 1,
+     "extracted": "Unrestricted 565,890 (business-type, p1)", "on_page": "p5 proprietary fund statement: Assigned Sewer maintenance 60,401, Water maintenance 178,795, Unassigned 326,694",
+     "issue": "business-type equity taken from the government-wide statement (one Unrestricted line) while governmental equity comes from the funds balance sheet (p3); the proprietary statement's finer classification is not used. Totals agree either way."}
+  ]
+}

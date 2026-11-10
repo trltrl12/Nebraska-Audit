@@ -1,0 +1,17 @@
+{
+  "stem": "Dunning_FY2023",
+  "values_checked": 60,
+  "prior_year_tie": "FY2023 ending governmental 99,566.71 = Dunning_FY2024 beginning_cash 99,566.71; business-type ending 245,573.62 = FY2024 business_type.beginning 245,573.62 (tie as printed, no restatement).",
+  "issues": [
+    {"severity": "warning", "path": "beginning_cash", "page": 1,
+     "extracted": 119595.14, "on_page": "line 1 Net Cash Balance General 55,038.06 + Street 3,854.70 = 58,892.76; line 2 Investments 53,803.76 + 6,898.62 = 60,702.38; line 3 subtotal 119,595.14",
+     "issue": "beginning_cash/ending_cash use the line 3/28 cash-plus-investments subtotal while investments are printed separately (lines 2 and 27); beginning_investments/ending_investments left null. Consistent with Dunning_FY2024 and the Exhibit A roll-forward, but the separately printed cash (58,892.76 / 38,359.89) and investments (60,702.38 / 61,206.82) are not in the cash/investment fields."},
+    {"severity": "warning", "path": "disbursements[3]", "page": 2,
+     "extracted": "Solid Waste 12,960.00, Wastewater 17,508.74, Water 9,364.54 (disbursements[3..5]) fund_type governmental",
+     "on_page": "printed under Business-Type Activities heading but in the General Fund column",
+     "issue": "utility function lines kept governmental because they sit in the General Fund column; defensible (column decides), same as FY2024, but a person may want them business-type."},
+    {"severity": "warning", "path": "receipts[8].category", "page": 1,
+     "extracted": "other", "on_page": "Local Receipts: Other, Enterprise Fund 33,540.28",
+     "issue": "the Enterprise Fund's only receipt (100% of business-type receipts) is in other; likely utility charges but the page does not say (context label, needs the context check)."}
+  ]
+}
