@@ -1,0 +1,16 @@
+{
+  "stem": "Platte_Center_FY2023",
+  "values_checked": 85,
+  "issues": [
+    {"severity": "warning", "path": "ending_cash", "page": 1,
+     "extracted": 150604.07, "on_page": "Park Fund line 24/26 ending 1,423.09",
+     "issue": "FY2024 tie fails for the Park Fund. FY2023 prints Park ending 1,423.09 (7,012.52 - 5,589.43, correct as printed). The FY2024 report (Platte_Center_FY2024 p1) prints Park beginning 11,414.29, a difference of 9,991.20, with no restatement on its Exhibit A. So FY2024 beginning_cash 160,595.27 does not equal FY2023 ending_cash 150,604.07. The other funds tie (General 102,235.16, Street 46,113.70, Auditorium 832.12; business-type 216,467.81). This is in the reports themselves; balances were left as printed."},
+    {"severity": "warning", "path": "receipts[12].category", "page": 1,
+     "extracted": "other", "on_page": "Local Receipts: Other 183,568.34 (Water 119,945.77 + Sewer 32,610.78 + Garbage 31,011.79)",
+     "issue": "Utility funds' Local Receipts: Other are most likely water/sewer/garbage charges (Utility Charges; garbage/refuse charges are Utility Charges). Context label, so the context check settles it (same for detail[28], detail[30], detail[31])."},
+    {"severity": "warning", "path": "reported_totals.business-type.receipts.includes_split", "page": 2,
+     "extracted": [4000.0], "on_page": "Garbage Fund line 20 Transfers In Other Than Surplus Fees 4,000.00 inside Total Receipts 35,011.79",
+     "issue": "The whole business_type.transfers_net (4,000) is inside the printed total, so the standard form would be includes: [\"transfers_net\"] rather than includes_split. The validator treats both the same and the transfer is counted once, so the result is unaffected."}
+  ],
+  "notes": "Trimmed PDF has 5 pages and the notes end 'Read pages 1-5 of 5'. Every fund-column cell on Exhibit A pp1-4 matches the extraction. Governmental receipts 333,920.81 + transfers_in 26,500 = 360,420.81 and disbursements 299,652.76 + transfers_out 30,500 = 330,152.76, both tied to the lines 21/52 column sums. Business-type receipts 183,970.34 + 4,000 = 187,970.34 and disbursements 161,496.00 tie. Roll-forwards: governmental 120,336.02 + 333,920.81 - 299,652.76 + 26,500 - 30,500 = 150,604.07; business 189,993.47 + 183,970.34 - 161,496.00 + 4,000 = 216,467.81. Balance total 367,071.88 ties. Transfers match the p5 schedule (General out 30,500 = Park 6,000 + Auditorium 20,500 + Garbage 4,000) and are counted once. Street Fund Capital Improvements -> Capital Outlay: Streets/Highways is acceptable (the fund column names the function)."
+}

@@ -1,0 +1,19 @@
+{
+  "stem": "Phelps_County_FY2023",
+  "values_checked": 179,
+  "issues": [
+    {"severity": "warning", "path": "receipts[5].category", "page": 4,
+     "extracted": "other", "on_page": "Local 1,302,155",
+     "issue": "Context label 'Local' left in other. The Statement of Activities (p2) shows what it holds: Local 1,302,155 = interest income 182,491 + miscellaneous 39,230 + about 1,080,434 of charges for services (charges for services 1,545,092 less the 464,658 of Intergovernmental 4,060,086 not shown as grants/general intergovernmental). Charges for services is about 83%, so the extractor rule for county 'Local' lines points to charges for services/fees. The user's label decision for 'local' is other, and the context checker decides this line."},
+    {"severity": "warning", "path": "detail[54].category", "page": 6,
+     "extracted": "other", "on_page": "Commissary Fund Local 134,053",
+     "issue": "Commissary Fund local receipts are most likely commissary sales (charges for services). Context label, so the context check settles it."},
+    {"severity": "warning", "path": "detail[50].category", "page": 6,
+     "extracted": "other", "on_page": "Preservation and Modernization Fund Local 5,949",
+     "issue": "Preservation and modernization fund local receipts are most likely register of deeds fees (fees of office). Context label, so the context check settles it."},
+    {"severity": "warning", "path": "detail[40].detail_category", "page": 10,
+     "extracted": "highway allocation", "on_page": "Intergovernmental 1,875,518 (Road Fund)",
+     "issue": "The extractor assumed this is mostly highway allocation. The schedule prints only 'Intergovernmental', so other state aid would be the neutral choice."}
+  ],
+  "notes": "Trimmed PDF has 11 pages and the notes end 'Read pages 1-11 of 11'. Every statement, combining and budget-schedule amount matches the page. Statement receipts 10,676,226 and disbursements 10,548,890 tie. The Taxes split (Property 3,991,620 + Motor Vehicle 552,515 + Lodging tax 69,774 = 4,613,909) is printed on p2. Roll-forward ties: 12,173,207 + 10,676,226 - 10,548,890 + 22,194 = 12,322,737. The balance sheet ties (assets 12,322,737 = 18 fund-balance lines). Every detail schedule ties to its printed totals. The Road Fund OFS gap of 17,686 (sale of assets not printed as a line on p10) is already in report_discrepancies. Transfers cross-check: General Fund out 1,272,282 = Road 1,164,370 + Self-Health 56,022 + Noxious Weed 51,890; Road out 300,000 = Road and Bridge in 300,000. FY2024 check: FY2023 ending fund balance 12,322,737 = Phelps_County_FY2024 beginning_fund_balance 12,322,737 (ties as printed)."
+}
