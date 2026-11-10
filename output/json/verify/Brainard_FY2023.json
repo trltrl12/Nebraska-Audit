@@ -1,0 +1,39 @@
+{
+  "stem": "Brainard_FY2023",
+  "values_checked": 166,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "missing",
+      "page": 9,
+      "extracted": null,
+      "on_page": "Miscellaneous (General Fund, Park column) 10,742",
+      "issue": "Park department receipt line Miscellaneous 10,742 is not in detail. The Park lines in the JSON (56,461 + 15,332 + 25 + 440 = 72,258) do not add to the printed Park Total Receipts of 83,000; with 10,742 they do. The printed Total column Miscellaneous 21,995 = 377 + 10,876 + 10,742 confirms it. The General Fund detail lines add to 275,473, not the printed 286,215 (detail_totals[0]).",
+      "resolved": "2026-11-10: Park Miscellaneous 10,742 (p9) added to detail"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[0].category",
+      "page": 4,
+      "extracted": "property tax (Property 191,893, one line)",
+      "on_page": "Property 191,893 = General Fund 175,660 + Special Revenue 16,233",
+      "issue": "The fund schedules print a breakdown that adds up exactly. General Fund p9: Property tax 144,579 + Pro rate 288 + Carline tax 153 + Homestead exemption 4,185 + Property tax credit 6,950 + Personal property tax credit 7,689 + Motor vehicle tax 11,816 = 175,660, which is the p4 General Fund Property cell. Street Fund p11: Property tax 15,041 + Homestead exemption 435 + Property tax credit 757 = 16,233, which is the p4 Special Revenue cell. By type: property tax 159,620; motor vehicle tax 11,816; pro rate 288; carline 153; homestead 4,620; property tax credits 15,396 (6,950 + 7,689 + 757); total 191,893. A split_from split under the printed-breakdown rule is supported. It was kept as one property tax line, so 32,273 of non-property-tax money is categorized as property tax."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[60].category",
+      "page": 13,
+      "extracted": "sales tax",
+      "on_page": "Sales tax collected 1,725 (Garbage)",
+      "issue": "Sales tax collected from utility customers and remitted (p14 'Sales tax' paid) is not the village's local sales tax revenue. Category sales tax overstates local sales tax. The same applies to detail[63] 19,851, detail[68] 469 and detail[71] 5,007."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[75].computed",
+      "page": 14,
+      "extracted": "computed: sales tax paid ...",
+      "on_page": "Sales tax 1,644",
+      "issue": "The amount is printed as is, but the line carries a 'computed' note. This may make validation treat a printed value as derived. The same applies to detail[86], detail[96] and detail[107]. Their detail_category 'Sales Tax' could instead be the user's utility cost type 'Other Taxes Paid'."
+    }
+  ]
+}
