@@ -1,0 +1,21 @@
+{
+  "stem": "Plymouth_FY2023",
+  "values_checked": 191,
+  "issues": [
+    {"severity": "warning", "path": "receipts[14].category", "page": 6,
+     "extracted": "donations/contributions", "on_page": "Grant income/donations 11,153 (Street Special Revenue; Schedule 2 p10 prints 'Grant income'; Statement of Activities p2: Public works Capital Grants and Contributions 11,153)",
+     "issue": "The schedule row says 'Grant income' in the Street fund, so the money may come from a government (federal grants or intergovernmental) rather than private donations. Same question for detail[26]."},
+    {"severity": "warning", "path": "receipts[12].category", "page": 6,
+     "extracted": "other", "on_page": "Miscellaneous 1,845 (General 45 + Street 1,375 + Park 425)",
+     "issue": "The same label gets different categories in this report. The statement line and General Fund detail[7] are 'other', but Street detail[25] 1,375, Park detail[42] 425 and Water detail[81] 695 are 'charges for services/fees' (the Statement of Activities counts them as charges for services). Also, category_decisions.csv maps 'miscellaneous' to 'other' (apply=label), so user_rules.py will likely reset the detail lines."},
+    {"severity": "warning", "path": "receipts[8].category", "page": 11,
+     "extracted": "intergovernmental/state aid", "on_page": "Other 17,653 (under 'Intergovernmental revenues' heading; General 9,730 p10 + Debt Service 7,923 p11)",
+     "issue": "The row is printed under the Intergovernmental revenues heading, so state aid fits the page. But category_decisions.csv maps the bare label 'other' to 'other' (apply=label), which may override it (also detail[5], detail[38])."},
+    {"severity": "warning", "path": "detail[4].detail_category", "page": 10,
+     "extracted": "homestead/tax credits", "on_page": "Homestead allocation 5,475",
+     "issue": "The extractor rules say Homestead Exemption is also its own detail_category ('Homestead Exemption'). Same for detail[37] (4,469)."},
+    {"severity": "warning", "path": "detail[82].category", "page": 8,
+     "extracted": "utilities", "on_page": "Water/Sewer Exhibit H lines by cost type (Salaries and wages, Repairs, Insurance, Office supplies, Utilities, Other, Supplies, Depreciation)",
+     "issue": "The user's 2026-10-28 rule gives business-type cost-type lines the cost type as category, with function 'utilities'. These lines carry category 'utilities' and no function field (detail[82]-[89], detail[94]-[99]). user_rules.py is expected to re-apply this."}
+  ]
+}
