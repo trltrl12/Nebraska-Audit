@@ -1,0 +1,18 @@
+{
+  "stem": "Kearney_County_FY2022",
+  "values_checked": 330,
+  "issues": [
+    {"severity": "warning", "path": "detail[4].category", "page": 5,
+     "extracted": "other", "on_page": "Local 465,431 (General Fund); Exhibit D p4 prints the General Fund's 465,431 as Charges for services",
+     "issue": "Context label 'Local' kept as other under the FY2022 context-label ruling, but the page shows what it is. The same applies to detail[90] Road/Bridge Local 27,862 (Charges for services on p4), detail[107] Relief-Medical 1,810 (Charges for services p17), detail[109] Central Communications 95,020 (Intergovernmental 19,621 + Charges for services 75,399 p17), detail[111] Visitors Promotion 2,683 (Taxes on p17; the fund name suggests lodging tax), detail[112] Federal Grant 58 and detail[114] COVID ARP 889 (Interest on p17), and detail[116] Register of Deeds 5,544 and detail[117] STOP 1,170 (Charges for services p17). These are for the context checker."},
+    {"severity": "warning", "path": "ending_cash", "page": 3,
+     "extracted": 7454973, "on_page": "Cash and certificates of deposit 5,812,961; Restricted cash and certificates of deposit 1,642,012",
+     "issue": "Ending cash is computed (marked) as cash + CDs + restricted cash/CDs because the report prints cash and CDs combined. It includes investments and restricted amounts and equals fund balance. The 2026-11-06 ruling says cash is never derived, so check whether ending_cash should stay null or hold only the printed combined figure."},
+    {"severity": "warning", "path": "transfers_in", "page": 4,
+     "extracted": null, "on_page": "Transfers in (out): General Fund 400,000; Inheritance Tax Fund (400,000); Total Governmental Funds column blank",
+     "issue": "Statement-level transfers are left null because the Total column prints none, though the fund columns print 400,000 in and out (and nonmajor 37,624 on p17). They net to zero so the roll-forward is unaffected. Same for transfers_out. This is a consistency choice."},
+    {"severity": "warning", "path": "detail[95].original_label", "page": 11,
+     "extracted": "Capital Outlay: Streets/Highways", "on_page": "Capital outlay 1,257,570 (Road/Bridge Fund schedule)",
+     "issue": "The function comes from the fund name (computed 'function: Road/Bridge Fund'). Exhibit D prints this amount only under 'Capital outlay', with no function. Under the 2026-11-12 FY2022 ruling (function only when printed) this is defensible but not strictly printed. The Inheritance Tax Fund capital outlay (detail[98]) was left without a function."}
+  ]
+}

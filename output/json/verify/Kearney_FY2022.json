@@ -1,0 +1,47 @@
+{
+  "stem": "Kearney_FY2022",
+  "values_checked": 250,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "detail[24].amount",
+      "page": 8,
+      "extracted": -58742,
+      "on_page": 58742,
+      "issue": "The General Fund budget schedule's Actual column prints 'Transfers out 58,742' with no parentheses. The page's own arithmetic uses it as positive throughout: Total other financing sources & uses 8,283,419 = 8,158,225 + 58,742 + 64,952 + 1,500; net change (134,742) = (8,418,161) + 8,283,419; variance 117,484 = 58,742 - (-58,742). The extractor reversed the sign (citing the fund statement p6, which prints (58,742)), so the lines no longer tie to the printed total 8,283,419. The page does add up as printed, so report_discrepancies[4] ('lines total 8,165,935') describes the extractor's change, not a fault in the report. As printed means +58,742, with a note that it disagrees with p6.",
+      "resolved": "schema: detail other-financing transfers are signed (Transfers out negative); the printed total adds transfers out as positive, so the 117,484 gap stays in report_discrepancies"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[41].category",
+      "page": 11,
+      "extracted": "other",
+      "on_page": "Lottery Trust Fund: Miscellaneous 963,513",
+      "issue": "The printed label is 'Miscellaneous', so other is allowed, but the fund is the Lottery Trust Fund (see the Waverly ruling on lottery-fund receipts going to keno/lottery). It may be keno/lottery; needs a person's call. The statement line receipts[9] Miscellaneous 6,294,264 includes the fund's 931,912."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[4].category",
+      "page": 7,
+      "extracted": "streets/highways",
+      "on_page": "Public works - other 423,912",
+      "issue": "Public works other than streets is put under streets/highways even though the page separates it from 'Public works - streets'. The function is not described, so the category is a guess. Same for detail[14] (429,238, p8)."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[14].original_label",
+      "page": 7,
+      "extracted": "Capital outlay",
+      "on_page": "Capital outlay - Public works - other 107,617",
+      "issue": "Every other governmental capital outlay line is labelled 'Capital Outlay: <function>', but this one keeps the generic label even though the function ('Public works - other') is printed. Same for detail[20] (13,140, p8)."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[11].category",
+      "page": 16,
+      "extracted": "Utility Charges",
+      "on_page": "Sales 31,377,365 (Total Enterprise Funds)",
+      "issue": "Enterprise 'Sales' includes Golf 1,249,485 and Airport 3,280,226, which are not utility charges. Utility Charges is the dominant share (review note present)."
+    }
+  ]
+}
