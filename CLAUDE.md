@@ -286,8 +286,8 @@ holds just those reports and sheets. Prioritise fixes and re-checks for these ty
 ## Open follow-ups (remove each line once done)
 - FY2023: all 630 trimmed reports extracted (2026-11-12) and aligned with FY2024 choices (354 reports, brief items 1-10:
   same business-type source/measure, transfers, detail sources, categories, capital outlay labels; FY2023 printed amounts).
-  Held for re-trim (no JSON or missing pages): Abie, Cornlea, LaVista, Minatare, Pickrell, Rogers, Santee, Sargent, Superior,
-  Wilsonville, Winside; also Beaver_Crossing, Bradshaw, Clarkson, Wauneta (missing pages). Re-trims need the user's OK.
+  Re-trimmed 2026-11-12 (config/extra_pages.csv) and re-extracted/verified: 31 reports. Not re-trimmable (page not in the
+  Auditor's PDF): Fairfield, Lawrence, Wilsonville; Sutton and Wilcox needed no page.
 - Missing-page re-trim 2026-10-27 (cities/villages/schools/counties): done. 29 reports re-trimmed with
   config/extra_pages.csv, pages remapped, new pages added, verified, verifier errors fixed (0 flags). No page needed:
   Butte (re-check its extraction), Kimball County, Chadron PS, Springfield.
