@@ -1,0 +1,15 @@
+{
+  "stem": "Spencer_FY2023",
+  "values_checked": 171,
+  "issues": [
+    {"severity": "warning", "path": "ending_cash", "page": 3,
+     "extracted": 67631, "on_page": "Cash 67,631; Cash held by county treasurer 6,048 (Street); 2022: Cash 92,154, county treasurer 5,183",
+     "issue": "county treasurer cash is cash (category Cash and Cash Equivalents) but is left out of ending_cash and beginning_cash (92,154). The treatment is consistent for both years, but cash is understated by 6,048 / 5,183."},
+    {"severity": "warning", "path": "disbursements[4].category", "page": 4,
+     "extracted": "general government", "on_page": "Public building 29,498 (City Hall and Community Hall departments, p12)",
+     "issue": "the report prints Public building as its own function; general government is a judgment call (already marked review)"},
+    {"severity": "warning", "path": "disbursements[12].amount", "page": 7,
+     "extracted": 43642, "on_page": "operating statement p7: debt service principal (43,642), interest (7,089); cash flow statement p8: principal paid (43,552), interest paid (7,179) (Sewer 3,642/1,164 vs 3,552/1,254)",
+     "issue": "the report's two statements split the Sewer debt payment differently (90 moved between principal and interest; the total of 50,731 agrees). The JSON follows p7, which is right, but the inconsistency is not noted. Also applies to disbursements[13] 7,089."}
+  ]
+}

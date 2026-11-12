@@ -1,0 +1,15 @@
+{
+  "stem": "Spalding_FY2023",
+  "values_checked": 182,
+  "issues": [
+    {"severity": "warning", "path": "transfers_in", "page": 10,
+     "extracted": 336278, "on_page": "Total column: Transfers In 990, Transfers Out 0 (Adjustments column (335,288) / 335,288)",
+     "issue": "the gross transfers are summed from the fund columns (marked computed, arithmetic correct: 112,054+129,076+50,000+13,452+14,906+5,919+10,871 = 336,278; out 170,548+164,740 = 335,288), but the Total column prints net 990 in / 0 out. The net effect is the same (990); whether to use gross or the Total column is a judgment call. Also applies to transfers_out 335,288."},
+    {"severity": "warning", "path": "ending_cash", "page": 6,
+     "extracted": 681803, "on_page": "Cash and Cash Equivalents 681,803 + Cash at County Treasurer 6,823 = Total Assets 688,626",
+     "issue": "county treasurer cash 6,823 is also cash (Cash and Cash Equivalents on the balance sheet) but is left out of ending_cash, so ending cash is 6,823 below the fund balance the statement rolls forward"},
+    {"severity": "warning", "path": "receipts[4].category", "page": 8,
+     "extracted": "charges for services/fees", "on_page": "Charges for Services 53,802 = Garbage Fund 40,107 + Ambulance Fund 10,052 + General Fund 3,643 (p7)",
+     "issue": "74.5% of the line is garbage/refuse charges (Utility Charges); the category matches the printed label, so it is defensible"}
+  ]
+}
