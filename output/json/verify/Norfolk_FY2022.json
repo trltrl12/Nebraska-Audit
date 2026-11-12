@@ -1,0 +1,18 @@
+{
+  "stem": "Norfolk_FY2022",
+  "values_checked": 304,
+  "issues": [
+    {"severity": "warning", "path": "ending_cash", "page": 4,
+     "extracted": 49654030, "on_page": "Cash and Equity in Pooled Investment Account 48,789,081 + Cash at County Treasurer 864,949 (Total Governmental Funds); no single printed cash total",
+     "issue": "ending_cash is a sum the extractor computed (marked computed, arithmetic correct). The 2026-11-06 ruling says cash is filled only where printed and never derived, and beginning cash is null, so this one-sided figure may not belong in ending_cash."},
+    {"severity": "warning", "path": "balance_sheet.equity[2].category", "page": 2,
+     "extracted": null, "on_page": "Restricted for: Debt Service 5,032,126",
+     "issue": "the restricted and unrestricted equity lines (equity[2]-equity[7]) have no category; only the Net Investment in Capital Assets lines have one"},
+    {"severity": "warning", "path": "disbursements[9].category", "page": 7,
+     "extracted": "utilities", "on_page": "General and Administration 2,284,497 (operating expenses listed by cost type)",
+     "issue": "utility spending is listed by cost type, but this line is in the function category 'utilities'. Defensible because G&A has no matching cost-type category; same choice on the p18 detail lines."},
+    {"severity": "warning", "path": "disbursements[7].category", "page": 7,
+     "extracted": "Salaries and Wages", "on_page": "Payroll and Related Taxes and Benefits 3,002,970",
+     "issue": "this line combines wages, payroll taxes and benefits but is recorded as Salaries and Wages only (same on the p18 detail lines). Judgment call."}
+  ]
+}
