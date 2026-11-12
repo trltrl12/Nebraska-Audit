@@ -1,0 +1,21 @@
+{
+  "stem": "Plattsmouth_FY2023",
+  "values_checked": 251,
+  "issues": [
+    {"severity": "warning", "path": "receipts[6].category", "page": 3,
+     "extracted": "taxes", "on_page": "Debt Service Taxes 407,078 (p5); SoA Property taxes 1,922,627 (p3)",
+     "issue": "Subtraction is exact: SoA Property taxes 1,922,627 - General Fund property 1,177,214, motor vehicle 128,178 and occupation 210,157 (p13) = 407,078 = Debt Service Taxes. That places the cell inside the SoA 'Property taxes' line. But the same arithmetic shows that line also includes motor vehicle and occupation tax, so keeping it unlabeled is defensible. A person should decide whether this is property tax."},
+    {"severity": "warning", "path": "receipts[9].category", "page": 13,
+     "extracted": "intergovernmental/state aid", "on_page": "Highway allocation and motor vehicle fees 1,035,887",
+     "issue": "One printed row mixes highway allocation (state aid) with motor vehicle fees (motor vehicle tax). No breakdown is printed, so the dominant category plus a review note is defensible. The same applies to detail[8]."},
+    {"severity": "warning", "path": "receipts[23].category", "page": 9,
+     "extracted": "intergovernmental/state aid", "on_page": "Intergovernmental grants 13,970,933 (SoA capital grants and contributions p3)",
+     "issue": "The trimmed pages do not say whether these are state or federal grants. Most of the amount is the Sewer fund's 13,565,193 and could be federal. The category is a judgment call."},
+    {"severity": "warning", "path": "detail[123].detail_category", "page": 9,
+     "extracted": "Utility Charges / other utility charges", "on_page": "Impact Fees fund: Charges for services 119,182",
+     "issue": "Impact fees are development or connection fees, not utility service charges. Charges for services/fees may fit better. Judgment call."},
+    {"severity": "warning", "path": "beginning_cash", "page": 12,
+     "extracted": null, "on_page": "Combined budgetary-basis statement (all funds): CASH BALANCE beginning 6,901,608, end 8,742,103",
+     "issue": "Cash balances are printed only for all funds combined (governmental plus water/sewer, budgetary basis), so they cannot be put in the governmental-only fields. The p12 receipt and disbursement lines were left out to avoid double counting the fund statements. Also, ending_cash 4,261,271 leaves out cash at county treasurer 55,628 and restricted cash 1,398,628, which are printed as separate lines. All of this is defensible but should be noted."}
+  ]
+}
