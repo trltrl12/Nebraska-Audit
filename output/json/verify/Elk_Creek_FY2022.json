@@ -1,0 +1,12 @@
+{
+  "stem": "Elk_Creek_FY2022",
+  "values_checked": 45,
+  "issues": [
+    {"severity": "warning", "path": "beginning_cash.amount", "page": 1,
+     "extracted": 169068, "on_page": "Line 1 Net Cash Balance 143,829.00; Line 2 Investments 25,239.00; Line 3 Subtotal 169,068.00",
+     "issue": "beginning_cash is the line 3 subtotal, which already includes the 25,239 investments also recorded in beginning_investments (ending_cash 144,054 likewise includes ending_investments 25,275). The roll-forward ties, but anyone adding cash + investments would count the CDs twice."},
+    {"severity": "warning", "path": "detail[14].original_label", "page": 3,
+     "extracted": "Capital Outlay", "on_page": "Capital Improvements (Public Works Fund) 24,279.00",
+     "issue": "Capital outlay line not labelled 'Capital Outlay: <function>' because the page doesn't print the Public Works Fund's function. The statement-level disbursements[3] 'Capital Outlay' 51,169 also mixes Street and Public Works and has no function. Both are defensible but don't follow the label rule."}
+  ]
+}
