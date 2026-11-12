@@ -1,0 +1,15 @@
+{
+  "stem": "Hamilton_County_FY2022",
+  "values_checked": 212,
+  "issues": [
+    {"severity": "warning", "path": "receipts[8].amount", "page": 3,
+     "extracted": 2315853, "on_page": "State 2,907,793 (Exhibit B p3); Property tax credit 520,927 (p1), Homestead exemption payments 59,598 (p2), Prorate motor vehicle 11,415 (p2) are printed only as Exhibit A general receipts",
+     "issue": "The State line (receipts[5]-[8]) is split using Exhibit A general-receipt amounts, but no page prints a breakdown of the Exhibit B 'State' line itself, so it is an assumption that all three pieces sit in State. The arithmetic holds (520,927 + 59,598 + 11,415 + 2,315,853 = 2,907,793), but Exhibit A's 'Carline and airline tax' 11,931 (a user top-level category, Carline Tax), probably also in State, was not split out the same way. The extractor says this matches FY2023."},
+    {"severity": "warning", "path": "detail[104].category", "page": 14,
+     "extracted": "lodging tax", "on_page": "Visitors Promotion 990: Taxes 17,244; Exhibit A p1 prints the same 17,244 as 'Other taxes'",
+     "issue": "The same 17,244 is category 'other taxes' in receipts[3] and 'lodging tax' in detail (fund name). The categories don't match within the report, and the rules say a printed tax-type label beats a fund name."},
+    {"severity": "warning", "path": "detail[97].original_label", "page": 12,
+     "extracted": "Capital Outlay", "on_page": "Capital outlay 314,700 (Inheritance Tax Fund; Exhibit B p3 reports the whole fund under Public Works)",
+     "issue": "The user rule labels every capital outlay line 'Capital Outlay: <function>'. The fund's other spending lines were given streets/highways from Exhibit B, so this line could be 'Capital Outlay: Streets/Highways'."}
+  ]
+}
