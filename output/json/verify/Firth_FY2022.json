@@ -1,0 +1,21 @@
+{
+  "stem": "Firth_FY2022",
+  "values_checked": 120,
+  "issues": [
+    {"severity": "warning", "path": "receipts[17].category", "page": 6,
+     "extracted": "other", "on_page": "Grant proceeds 55,486 (Water; Statement of Activities p2: Capital Grants and Contributions)",
+     "issue": "a printed grant line is in 'other'; the grantor is not printed, so no grant category is certain, but 'other' is a last resort. A person should choose the category."},
+    {"severity": "warning", "path": "receipts[4].category", "page": 4,
+     "extracted": "intergovernmental/state aid", "on_page": "Incentive payment 1,000 (Street Fund)",
+     "issue": "payer not printed; state aid is a guess (likely the highway incentive payment, but unconfirmed). Same for detail[14]."},
+    {"severity": "warning", "path": "receipts[8].category", "page": 2,
+     "extracted": "charges for services/fees", "on_page": "Firth community center income 1,650; Statement of Activities counts 1,650 under Operating Grants and Contributions, not Charges for Services",
+     "issue": "the report's own classification points to grants/contributions rather than charges for services. Same for detail[5]."},
+    {"severity": "warning", "path": "detail[25].category", "page": 11,
+     "extracted": "other taxes", "on_page": "Other taxes 11 (Debt Service Fund)",
+     "issue": "the same printed label 'Other taxes' is category Carline Tax in detail[3] (General Fund 37) but 'other taxes' here. The statement p4 prints Debt Service Carline tax 10, so this is most likely carline tax too. Same label should get the same category within a report."},
+    {"severity": "warning", "path": "report_discrepancies", "page": 4,
+     "extracted": [], "on_page": "Debt Service column prints 57 on the 'Motor vehicle prorate' row (row Total 160), but the 'Motor vehicle fee' Total 19,481 = 13,831 + 5,593 + 57. The Debt Service budget schedule p11 shows Other taxes 11 / Motor vehicle fee 56 against the statement's Carline tax 10 / 57.",
+     "issue": "the printed statement does not cross-foot on these two rows, and the statement and budget schedule disagree by 1 between tax lines. The Total-column figures used are correct, but report_discrepancies is empty."}
+  ]
+}

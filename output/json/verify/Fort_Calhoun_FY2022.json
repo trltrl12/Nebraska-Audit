@@ -1,0 +1,21 @@
+{
+  "stem": "Fort_Calhoun_FY2022",
+  "values_checked": 132,
+  "issues": [
+    {"severity": "warning", "path": "receipts[15].category", "page": 6,
+     "extracted": "other", "on_page": "Grant revenue 10,000 (Statement of Activities p2: Operating Grants and Contributions 10,000)",
+     "issue": "a printed grant line is in 'other'. The grantor is not printed, but 'other' is a last resort; a person should choose the category."},
+    {"severity": "warning", "path": "disbursements[4].original_label", "page": 4,
+     "extracted": "Capital Outlay", "on_page": "Capital outlay 125,139 (General Fund 78,199 + Street Fund 46,940)",
+     "issue": "the user rule requires 'Capital Outlay: <function>'. The line spans two funds with no single function, so the extractor left it without a function. That is defensible, but it does not follow the label convention."},
+    {"severity": "warning", "path": "detail[21].detail_category", "page": 11,
+     "extracted": "professional/contract services", "on_page": "Police - Contracted services 73,925 (no police salaries printed)",
+     "issue": "police contracted services with no police payroll is likely a sheriff contract (law enforcement contract). The contractor is not printed."},
+    {"severity": "warning", "path": "missing", "page": 11,
+     "extracted": null, "on_page": "The General Fund departments combining statement continues past report p49 (Park, Enhancement and Christmas in Fort Calhoun columns, about source p53). That page is not in the trim, and the Debt Service and Lottery funds have no schedule in the trim.",
+     "issue": "this is a trim gap, not an extraction error. Those departments are recorded from the budget schedule p8 as not itemized, and the totals tie. Their object-level detail would need a re-trim (config/extra_pages.csv)."},
+    {"severity": "warning", "path": "transfers_out", "page": 4,
+     "extracted": 1838, "on_page": "Total column 'Transfers from (to) other funds' (1,838); fund columns print in 109,503 + 136,509 and out (132,149) + (87,691) + (28,010)",
+     "issue": "transfers are recorded net, from the Total column, with transfers_in null. The identity holds, but the gross governmental transfers (in 246,012, out 247,850) are printed by fund and not recorded."}
+  ]
+}
