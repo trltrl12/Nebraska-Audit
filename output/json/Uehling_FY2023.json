@@ -4,7 +4,11 @@
   "fiscal_year_end": "2023-09-30",
   "basis": "cash",
   "extraction_attempt": 1,
-  "beginning_cash": null,
+  "beginning_cash": {
+    "amount": 417123,
+    "source_page": 2,
+    "printed_label": "Net position at beginning of year (governmental activities)"
+  },
   "beginning_investments": null,
   "beginning_fund_balance": {
     "amount": 417123,
@@ -196,29 +200,25 @@
     {
       "fund_type": "business-type",
       "category": "Utility Charges",
-      "original_label": "Charges for services",
-      "department": "Water",
-      "amount": 53921,
-      "source_page": 2,
-      "printed_label": "Charges For Services"
+      "original_label": "User fees",
+      "amount": 112155,
+      "source_page": 11
     },
     {
       "fund_type": "business-type",
-      "category": "Utility Charges",
-      "original_label": "Charges for services",
-      "department": "Sewer",
-      "amount": 65774,
-      "source_page": 2,
-      "review": "Sewer charges for services include land rent 7,540 (p11, p13)",
-      "printed_label": "Charges For Services"
+      "category": "Rentals",
+      "original_label": "Land rent",
+      "amount": 7540,
+      "source_page": 11
     },
     {
       "fund_type": "business-type",
-      "category": "investment income",
-      "original_label": "Investment Earnings",
-      "printed_label": "Unrestricted investment earnings",
+      "category": "Interest Income",
+      "original_label": "Interest income",
       "amount": 3956,
-      "source_page": 2
+      "source_page": 11,
+      "outside_printed_total": true,
+      "printed_label": "Interest Income"
     }
   ],
   "disbursements": [
@@ -277,25 +277,128 @@
     },
     {
       "fund_type": "business-type",
-      "category": "utilities",
-      "original_label": "Water",
-      "amount": 65794,
-      "source_page": 2
+      "category": "Salaries and Wages",
+      "function": "utilities",
+      "original_label": "Salaries",
+      "amount": 37778,
+      "source_page": 11
+    },
+    {
+      "fund_type": "business-type",
+      "category": "Employee Benefits and Payroll Taxes",
+      "function": "utilities",
+      "original_label": "Payroll taxes",
+      "amount": 2494,
+      "source_page": 11
     },
     {
       "fund_type": "business-type",
       "category": "utilities",
-      "original_label": "Sewer",
-      "amount": 68906,
-      "source_page": 2
+      "function": "utilities",
+      "original_label": "Utilities",
+      "amount": 6589,
+      "source_page": 11
+    },
+    {
+      "fund_type": "business-type",
+      "category": "utilities",
+      "function": "utilities",
+      "original_label": "Communications",
+      "amount": 1155,
+      "source_page": 11
+    },
+    {
+      "fund_type": "business-type",
+      "category": "Repairs and Maintenance",
+      "function": "utilities",
+      "original_label": "Maintenance and repairs",
+      "amount": 15469,
+      "source_page": 11
+    },
+    {
+      "fund_type": "business-type",
+      "category": "Purchased Power/Cost of Sales",
+      "function": "utilities",
+      "original_label": "Cost of water",
+      "amount": 24210,
+      "source_page": 11,
+      "printed_label": "Cost of Water"
+    },
+    {
+      "fund_type": "business-type",
+      "category": "Insurance",
+      "function": "utilities",
+      "original_label": "Insurance",
+      "amount": 6112,
+      "source_page": 11
+    },
+    {
+      "fund_type": "business-type",
+      "category": "Professional/Contract Services",
+      "function": "utilities",
+      "original_label": "Testing",
+      "amount": 931,
+      "source_page": 11
+    },
+    {
+      "fund_type": "business-type",
+      "category": "Supplies and Materials",
+      "function": "utilities",
+      "original_label": "Supplies",
+      "amount": 4980,
+      "source_page": 11
+    },
+    {
+      "fund_type": "business-type",
+      "category": "Dues, Training and Travel",
+      "function": "utilities",
+      "original_label": "Dues",
+      "amount": 100,
+      "source_page": 11
+    },
+    {
+      "fund_type": "business-type",
+      "category": "Professional/Contract Services",
+      "function": "utilities",
+      "original_label": "Professional fees",
+      "amount": 113,
+      "source_page": 11,
+      "printed_label": "Professional Fees"
+    },
+    {
+      "fund_type": "business-type",
+      "category": "other",
+      "function": "utilities",
+      "original_label": "Misc. expense",
+      "amount": -795,
+      "source_page": 11,
+      "printed_label": "Misc. Expense",
+      "review": "Total column prints (795) although the Water column prints 795 and Sewer 0; kept as printed (see report_discrepancies)",
+      "detail_category": "Other / Miscellaneous Expenses",
+      "category_decision": "user (category_decisions.csv)"
+    },
+    {
+      "fund_type": "business-type",
+      "category": "Dues, Training and Travel",
+      "function": "utilities",
+      "original_label": "School",
+      "amount": 1012,
+      "source_page": 11,
+      "review": "'School' in utility funds assumed operator training (as FY2024)"
+    },
+    {
+      "fund_type": "business-type",
+      "category": "debt service (principal and interest combined)",
+      "original_label": "Debt Service",
+      "amount": 32962,
+      "source_page": 11,
+      "outside_printed_total": true,
+      "printed_label": "Debt service"
     }
   ],
-  "transfers_in": {
-    "amount": 73,
-    "source_page": 4
-  },
+  "transfers_in": null,
   "transfers_out": {
-    "amount": 2835,
+    "amount": 2762,
     "source_page": 4
   },
   "debt_proceeds": {
@@ -323,62 +426,36 @@
     },
     "business-type": {
       "receipts": {
-        "amount": 123651,
-        "source_page": 2,
-        "includes": [],
-        "computed": "Charges for services 119,695 + unrestricted investment earnings 3,956 (p2)"
+        "amount": 119695,
+        "source_page": 11,
+        "includes": []
       },
       "disbursements": {
-        "amount": 134700,
-        "source_page": 2,
+        "amount": 101738,
+        "source_page": 11,
         "includes": []
       }
     }
   },
   "business_type": {
-    "measure": "net position",
+    "measure": "cash",
     "beginning": {
       "amount": 287756,
-      "source_page": 2
+      "source_page": 11
     },
     "ending": {
       "amount": 279469,
-      "source_page": 2
+      "source_page": 11
     },
     "transfers_net": {
       "amount": 2762,
-      "source_page": 2
+      "source_page": 11
     },
     "debt_proceeds": null,
     "other_financing": null,
     "adjustments": []
   },
-  "proprietary": {
-    "operating": {
-      "amount": 17957,
-      "source_page": 14
-    },
-    "noncapital_financing": {
-      "amount": 2762,
-      "source_page": 14
-    },
-    "capital_and_related_financing": {
-      "amount": -32962,
-      "source_page": 14
-    },
-    "investing": {
-      "amount": 3956,
-      "source_page": 14
-    },
-    "beginning_cash": {
-      "amount": 287756,
-      "source_page": 14
-    },
-    "ending_cash": {
-      "amount": 279469,
-      "source_page": 14
-    }
-  },
+  "proprietary": null,
   "governmental_net_position": null,
   "balance_sheet": {
     "statement": "Balance Sheet - Governmental Funds - Modified Cash Basis (governmental lines); Statement of Net Position - Modified Cash Basis (business-type lines and totals)",
@@ -505,9 +582,9 @@
     }
   },
   "ending_cash": {
-    "amount": 420009,
+    "amount": 422728,
     "source_page": 3,
-    "computed": "Cash and Equivalents 366,650 + Restricted Cash 53,359 (governmental funds Total column p3); Due from County Treasurer 2,719 not included"
+    "printed_label": "Total Assets (governmental funds Total column)"
   },
   "ending_investments": null,
   "ending_fund_balance": {
@@ -950,12 +1027,13 @@
       "fund": "General Fund",
       "department": "General and Administrative",
       "section": "expenditure",
-      "category": "public safety",
+      "category": "general government",
       "detail_category": "law enforcement contract",
       "original_label": "Police contract",
       "amount": 40000,
       "budget_final": 40000,
-      "source_page": 6
+      "source_page": 6,
+      "review": "police contract printed under General and Administrative (as FY2024)"
     },
     {
       "schedule": "General Fund Disbursements - General and Administrative",
@@ -963,13 +1041,13 @@
       "fund": "General Fund",
       "department": "General and Administrative",
       "section": "expenditure",
-      "category": "utilities",
+      "category": "general government",
       "detail_category": "professional/contract services",
       "original_label": "Garbage",
       "amount": 26721,
       "budget_final": 30000,
       "source_page": 6,
-      "review": "Garbage collection paid from General Fund"
+      "review": "garbage collection contract printed under General and Administrative (as FY2024)"
     },
     {
       "schedule": "General Fund Disbursements - General and Administrative",
@@ -1083,7 +1161,7 @@
       "fund": "General Fund",
       "department": "General and Administrative",
       "section": "expenditure",
-      "category": "culture/recreation",
+      "category": "general government",
       "detail_category": "not itemized",
       "original_label": "Auditorium expenses",
       "amount": 16018,
@@ -1122,13 +1200,13 @@
       "fund": "General Fund",
       "department": "General and Administrative",
       "section": "expenditure",
-      "category": "School-Related Spending",
-      "detail_category": "miscellaneous expenditure",
+      "category": "general government",
+      "detail_category": "dues, training and travel",
       "original_label": "School",
       "amount": 518,
       "budget_final": 300,
       "source_page": 6,
-      "review": "Line printed 'School'; nature not stated"
+      "review": "'School' assumed clerk training (as FY2024)"
     },
     {
       "schedule": "General Fund Disbursements - General and Administrative",
@@ -1815,14 +1893,14 @@
       "fund": "Water Fund",
       "department": null,
       "section": "expenditure",
-      "category": "School-Related Spending",
+      "category": "Dues, Training and Travel",
       "function": "utilities",
-      "detail_category": "miscellaneous expenditure",
+      "detail_category": "dues, training and travel",
       "original_label": "School",
       "amount": 506,
       "budget_final": 500,
       "source_page": 12,
-      "review": "Line printed 'School'; nature not stated"
+      "review": "'School' assumed operator training (as FY2024)"
     },
     {
       "schedule": "Budget and Actual - Water Fund",
@@ -2093,12 +2171,12 @@
       "section": "expenditure",
       "category": "School-Related Spending",
       "function": "utilities",
-      "detail_category": "miscellaneous expenditure",
+      "detail_category": "dues, training and travel",
       "original_label": "School",
       "amount": 506,
       "budget_final": 600,
       "source_page": 13,
-      "review": "Line printed 'Schools'; nature not stated",
+      "review": "'School' assumed operator training (as FY2024)",
       "printed_label": "Schools"
     },
     {
@@ -2238,9 +2316,15 @@
       "check": "totals",
       "difference": 1590,
       "source_page": 11,
-      "note": "Combined Statement of Receipts, Disbursements and Changes in Net Position - Proprietary Fund Types, Total column: Misc. Expense printed (795) (negative) while the Water column prints 795 and Sewer 0; the Total column's operating disbursement lines add to 100,148 but the printed Total is 101,738 (= Water 61,014 + Sewer 40,724). Business-type statement lines are taken from the Statement of Activities (p2), which is unaffected."
+      "note": "Combined Statement of Receipts, Disbursements and Changes in Net Position - Proprietary Fund Types, Total column: Misc. Expense printed (795) (negative) while the Water column prints 795 and Sewer 0; the Total column's operating disbursement lines add to 100,148 but the printed Total is 101,738 (= Water 61,014 + Sewer 40,724). Lines kept as printed, so the business-type roll-forward from the Total-column lines (287,756 + 119,695 + 3,956 - 100,148 - 32,962 + 2,762 = 281,059) differs from the printed ending 279,469 by 1,590."
+    },
+    {
+      "check": "business",
+      "difference": 1590,
+      "source_page": 11,
+      "note": "Combined Statement of Receipts, Disbursements and Changes in Net Position - Proprietary Fund Types, Total column: Misc. Expense printed (795) (negative) while the Water column prints 795 and Sewer 0; the Total column's operating disbursement lines add to 100,148 but the printed Total is 101,738 (= Water 61,014 + Sewer 40,724). Lines kept as printed, so the business-type roll-forward from the Total-column lines (287,756 + 119,695 + 3,956 - 100,148 - 32,962 + 2,762 = 281,059) differs from the printed ending 279,469 by 1,590."
     }
   ],
   "decision_needed": [],
-  "notes": "Modified cash basis village. Governmental lines from the governmental funds Statement of Receipts, Disbursements and Changes in Fund Balance (p4, Total column); governmental fund balance roll-forward: 417,123 + 256,105 - 309,290 + transfers in 73 - transfers out 2,835 + bond proceeds 59,975 + other financing 1,577 (Grants 500 + Insurance proceeds 1,077) = 422,728. Beginning cash is not printed (no prior-year balance sheet), so beginning_cash is null; ending_cash = Cash and Equivalents + Restricted Cash (p3); Due from County Treasurer 2,719 is a separate asset. Business-type (Water, Sewer) lines come from the government-wide modified cash Statement of Activities (p2): 287,756 + 123,651 - 134,700 + transfers 2,762 = 279,469; business-type receipts total has no single printed figure (charges 119,695 + investment earnings 3,956). Bonding costs 400 and County commissions 224 (Debt Service Fund) are counted in General government on the Statement of Activities. Proprietary cash flow statement (p14, Total column) filled in proprietary. Balance sheet: governmental lines from the governmental funds Balance Sheet (p3, totals equal the government-wide governmental column), business-type lines from the Statement of Net Position (p1). Detail: General Fund revenue and other financing from the budget schedule (p5); General Fund spending from the department schedules (pp6-8), not the p5 department totals (no double counting); Debt Service Fund (p9); Water and Sewer fund budget schedules (pp12-13) incl. nonoperating lines printed below the operating totals (outside_printed_total). Read pages 1-14 of 14"
+  "notes": "Modified cash basis village. Governmental lines from the governmental funds Statement of Receipts, Disbursements and Changes in Fund Balance (p4, Total column); governmental fund balance roll-forward: 417,123 + 256,105 - 309,290 + transfers in 73 - transfers out 2,835 + bond proceeds 59,975 + other financing 1,577 (Grants 500 + Insurance proceeds 1,077) = 422,728. Beginning cash is not printed (no prior-year balance sheet), so beginning_cash is null; ending_cash = Cash and Equivalents + Restricted Cash (p3); Due from County Treasurer 2,719 is a separate asset. Business-type (Water, Sewer) lines come from the Total column of the proprietary Combined Statement of Receipts, Disbursements and Changes in Net Position (p11), measure cash, as in FY2024; interest income and debt service are printed below the operating totals (outside_printed_total); the Total column's Misc. Expense sign error is recorded in report_discrepancies. Bonding costs 400 and County commissions 224 (Debt Service Fund) are counted in General government on the Statement of Activities. proprietary left null (cash basis, as FY2024). Balance sheet: governmental lines from the governmental funds Balance Sheet (p3, totals equal the government-wide governmental column), business-type lines from the Statement of Net Position (p1). Detail: General Fund revenue and other financing from the budget schedule (p5); General Fund spending from the department schedules (pp6-8), not the p5 department totals (no double counting); Debt Service Fund (p9); Water and Sewer fund budget schedules (pp12-13) incl. nonoperating lines printed below the operating totals (outside_printed_total). Read pages 1-14 of 14 Aligned with FY2024 (2026-11-12): beginning_cash 417,123 (Statement of Activities p2) and ending_cash 422,728 (governmental funds Total Assets p3); transfers_out is the Total column's printed net transfers (2,762)."
 }
