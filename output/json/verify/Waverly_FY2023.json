@@ -1,0 +1,64 @@
+{
+  "stem": "Waverly_FY2023",
+  "values_checked": 144,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "business_type",
+      "page": 6,
+      "extracted": "business-type receipts/disbursements and business_type beginning 6,115,005 / ending 6,646,822 from the modified cash Statement of Activities (p2); detail from the accrual proprietary statement (p6)",
+      "on_page": "Statement of Revenues, Expenditures and Changes in Fund Net Position - Business-type Activities (p6) Total column: User fees 2,317,026; Miscellaneous income 227,641; Gain on sale of capital assets 5,500; Interest income 126,064; operating expenses by cost type totalling 1,605,580; Interest expense (60,416); Beginning net position 13,917,897; Ending net position 14,928,132",
+      "issue": "Business-type statement lines and balances must come from the proprietary funds statement total column (p6), the same statement the utility detail uses. The extraction mixes bases: statement lines/balances are modified cash (p2) while detail is accrual (p6). Waverly_FY2024 uses the accrual p6 statement (business_type.beginning 14,928,132 = this report's p6 ending), so the two years are NOT on the same basis: FY2023 business_type.ending 6,646,822 does not equal FY2024 business_type.beginning 14,928,132 and no restatement explains it. Fix: take p6 Total column (receipts 2,317,026 + 227,641 + 5,500 + 126,064 = 2,676,231; disbursements 1,605,580 + 60,416 = 1,665,996; beginning 13,917,897; ending 14,928,132; ties: 13,917,897 + 2,676,231 - 1,665,996 = 14,928,132).",
+      "resolved": "business-type from p6 Total column; Taxes split by fund"
+    },
+    {
+      "severity": "error",
+      "path": "receipts[0]",
+      "page": 4,
+      "extracted": "Taxes 3,977,664, category taxes, not split",
+      "on_page": "Taxes: General 1,677,094; Debt Service 806,107; City Sales Tax 828,698; Other Governmental Funds 665,765; Total 3,977,664",
+      "issue": "The City Sales Tax Fund's Taxes 828,698 have a clear fund-name tax type, so under the tax-split rule the statement line should be split: sales tax 828,698 (computed: tax type from fund name City Sales Tax) plus taxes remainder 3,148,966 (split_from 'Taxes 3,977,664 (p4)'). The detail already classifies this column as sales tax, and Waverly_FY2024 splits its statement line the same way.",
+      "resolved": "business-type from p6 Total column; Taxes split by fund"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[2].category",
+      "page": 4,
+      "extracted": "charges for services/fees 3,012,392",
+      "on_page": "Charges for services 3,012,392, of which Lottery column 2,396,337 (Statement of Activities p2: Lottery charges 2,396,337)",
+      "issue": "The statement line keeps the Lottery Fund gross keno receipts inside charges for services. Waverly_FY2024 splits the Lottery column out as keno/lottery (user ruling 'lottery-fund gross keno receipts -> keno/lottery (Waverly)'). Check that user_rules.py applies the same split here, otherwise the years differ."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[4].category",
+      "page": 4,
+      "extracted": "donations/contributions",
+      "on_page": "Grants and donations 1,491,249 (p2: operating grants and contributions, of which Public safety 1,205,715 and Culture and recreation 282,500)",
+      "issue": "This is a mixed grants/donations label. It is kept whole as the ruling says, but most of the amount is public safety operating grants, so donations/contributions is questionable. The same applies to detail General Fund 1,352,500 and Other Governmental Funds 138,749."
+    },
+    {
+      "severity": "warning",
+      "path": "ending_fund_balance",
+      "page": 4,
+      "extracted": 9933058,
+      "on_page": "FY2023 p4 ending fund balance 9,933,058 (Other Governmental Funds 1,542,028); FY2024 report prints beginning 9,933,060 (Other Governmental Funds 1,542,030)",
+      "issue": "FY2023 ending fund balance does not equal Waverly_FY2024 beginning_fund_balance; it is $2 off, and the FY2024 report prints no restatement. Both are recorded as printed, which is correct; the difference is in the FY2024 report."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[5].category",
+      "page": 4,
+      "extracted": "Lottery",
+      "on_page": "Lottery 2,163,739",
+      "issue": "'Lottery' is a context label (category_decisions apply=context), so the context check settles it. Waverly_FY2024 records the same line as category other (detail_category keno/lottery), so the two years are currently inconsistent."
+    },
+    {
+      "severity": "warning",
+      "path": "decision_needed",
+      "page": 2,
+      "extracted": "no entry",
+      "on_page": "Business-type activities are reported on two bases: modified cash Statement of Activities (net position 6,646,822) and accrual proprietary statements (net position 14,928,132)",
+      "issue": "Which business-type basis to use (and keep consistent with FY2024) is a question only a person can settle. It is missing from decision_needed."
+    }
+  ]
+}
