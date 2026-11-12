@@ -1,0 +1,88 @@
+{
+  "stem": "Sutherland_FY2023",
+  "values_checked": 241,
+  "issues": [
+    {
+      "severity": "warning",
+      "path": "detail[0].amount",
+      "page": 11,
+      "extracted": 312050,
+      "on_page": "312,050 as far as the scan shows (General column, Property taxes)",
+      "issue": "Page 11 is a low-resolution rotated scan, and I could only view the page as given, with no higher-resolution render. At that resolution the last digit looks like a closed 0, so I read 312,050, not 312,049. The cross-foots point to 312,049: General column cells add to 793,188 vs printed 793,187, and the Property taxes row 312,050 + 129,920 = 441,970 vs printed 441,969. But this report has 1-dollar rounding gaps on many rows and columns that the statement confirms, so the totals don't settle the digit. Keep 312,050 unless a third, higher-resolution read shows 9."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[17].amount",
+      "page": 11,
+      "extracted": 24403,
+      "on_page": "24,403 as far as the scan shows (Pool column, Rental and fees)",
+      "issue": "Same low-resolution scan. With 24,402 the Pool column (129,920 + 24,402 + 1,120 = 155,442) and the Rental and fees row (20,803 + 2,091 + 69,790 + 24,402 + 2,000 = 119,086) would both tie to the printed totals. As read, both are 1 off. The digit can't be confirmed at this resolution and needs a third read. Don't change it just to make the totals tie."
+    },
+    {
+      "severity": "error",
+      "path": "report_discrepancies",
+      "page": 11,
+      "extracted": "only column gaps recorded for pp11-12 (General, Pool, Planning, Ambulance)",
+      "on_page": "row gaps: Property taxes 441,970 vs 441,969; Rental and fees 119,087 vs 119,086; Personnel 253,044 vs 253,045; Meetings, seminars, and dues 15,059 vs 15,058; Insurance 54,830 vs 54,829; Repairs and maintenance 30,993 vs 30,994; Transportation 14,464 vs 14,463; Miscellaneous 511,030 vs 511,029; the expenditure Total column lines add to 1,790,900 vs printed Total expenditures paid 1,790,901",
+      "issue": "The combining statement's row cross-foot gaps (department cells vs the printed Total column) and the Total column footing gap aren't in report_discrepancies. Record them, unless a third read changes the two doubtful digits above, which would clear the Property taxes and Rental and fees rows.",
+      "resolved": "rounding gaps recorded; digits confirmed at 300 dpi; recycling fees Utility Charges"
+    },
+    {
+      "severity": "error",
+      "path": "detail[10].category",
+      "page": 11,
+      "extracted": "charges for services/fees (detail_category refuse/sanitation charges)",
+      "on_page": "Recycling department: Rental and fees 2,091",
+      "issue": "category and detail_category disagree. The project rule says garbage/refuse charges are Utility Charges, so a line given detail_category refuse/sanitation charges should have category Utility Charges. If the fees aren't refuse charges, the detail_category should be other charges for services instead.",
+      "resolved": "rounding gaps recorded; digits confirmed at 300 dpi; recycling fees Utility Charges"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[6].category",
+      "page": 11,
+      "extracted": "Rentals / Ambulance Fees / Recreation Fees / charges for services/fees",
+      "on_page": "'Rental and fees' rows in the General, Recycling, Ambulance, Pool and Park columns",
+      "issue": "The same printed label gets four different categories depending on the department column. This is defensible by department, but it is a mixed label (rentals and fees) with no printed breakdown, so it should follow the 'mixed labels kept with their category' ruling consistently."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[8].category",
+      "page": 4,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "Interlocal agreements 29,649 (Fire 17,728, Ambulance 11,921 on p11)",
+      "issue": "Fire and ambulance interlocal agreements are usually rural fire district service contracts, which the extractor rules list under charges for services/fees. The Statement of Activities (p2) counts them as operating grants and contributions, so the current category is defensible."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[0..16].category",
+      "page": 4,
+      "extracted": "general government (all 17 object lines)",
+      "on_page": "Total column object lines, incl. Street Fund 141,961 and Miscellaneous 511,029 (Ambulance 462,431 + Fire 46,376)",
+      "issue": "The statement lists spending only by object, and every object line in the Total column is categorized general government. That includes Street Fund money (e.g. Repairs and maintenance 35,532) and the 511,029 Miscellaneous line, which is 99% public safety. The extractor rule says to use the function of the fund each amount is printed under. As recorded, governmental spending by function is overstated for general government."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[123].category",
+      "page": 10,
+      "extracted": "other",
+      "on_page": "Keno 814 (budget schedule)",
+      "issue": "Keno Fund spending is in 'other'. The function isn't printed, so 'other' with review is defensible."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[*].detail_category (Transportation)",
+      "page": 11,
+      "extracted": "dues, training and travel",
+      "on_page": "Transportation (General 10,301, Planning 159, Ambulance 2,329, Pool 76, Park 1,599)",
+      "issue": "Transportation is a context label. It could be vehicle fuel or operating cost (fuel / repairs and maintenance) rather than travel. Judgment call."
+    },
+    {
+      "severity": "warning",
+      "path": "ending_cash",
+      "page": 3,
+      "extracted": 1038841,
+      "on_page": "Cash and cash equivalents 348,622 + Cash with County Treasurer 20,066 + Restricted cash 670,153 (no single printed cash total)",
+      "issue": "ending_cash is a sum of three printed lines and is marked computed, and the arithmetic is right. Under the 2026-11-06 ruling 'cash is never derived', a person may want it left null or tied to a printed line."
+    }
+  ]
+}

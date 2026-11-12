@@ -1,0 +1,39 @@
+{
+  "stem": "Sutton_FY2023",
+  "values_checked": 319,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "detail[126].category",
+      "page": 17,
+      "extracted": "other (detail_category miscellaneous revenue)",
+      "on_page": "LB840 Fund: Loan proceeds 78,529",
+      "issue": "'Other' is a last resort, and this line has a specific meaning either way. The same 78,529 is printed 'Loan collections' on the governmental funds statement (p5), where receipts[14] records it as Loan Repayments. It should match receipts[14] (Loan Repayments / Loan Collections) or, if the person rules it is borrowed money, the debt/loan proceeds treatment. The pending decision_needed entry covers which one, but the detail line shouldn't sit in other/miscellaneous revenue while the statement line has a specific category.",
+      "resolved": "kept other: \"loan proceeds\" is a context label (category_decisions apply=context); decision_needed covers it"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[11].category",
+      "page": 15,
+      "extracted": "federal grants (Grant income 22,059, split_from Grants and contributions 22,841)",
+      "on_page": "CDBG Fund budget schedule: Grant income 22,059; Statement of Activities: economic development operating grants 6,793 + capital grants 15,266",
+      "issue": "Split arithmetic checks out (22,059 + 782 = 22,841), and the pieces carry printed row labels ('Grant income' p18, 'Grants and contributions' p21). The federal source comes only from the fund name CDBG, though, and the fund-name rule is written for tax lines. The split also partly follows the p5 fund-column cells (General 782 / CDBG 22,059). That is allowed under the 2026-11-06 'printed breakdown that adds up exactly' ruling, but it is a judgment call. Intergovernmental 301,206 = Highway allocation 266,774 + Motor vehicle fees 17,985 (p15) + State assistance 16,447 (p20): exact, with printed row labels, so no issue there."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[8].category",
+      "page": 5,
+      "extracted": "other",
+      "on_page": "Nolde Trust support 90,000 (General Fund, Cemetery department p21)",
+      "issue": "The page doesn't say what the 90,000 is. The city has its own Nolde Trust special revenue fund, which spent 114,652 on Environment and leisure (p19). If the support came from that fund, it is an interfund payment shown as revenue in one fund and spending in the other; it stays as printed under the 2026-10-29 as-printed rule. If it came from an outside trust, donations/contributions would fit. Kept as other with review."
+    },
+    {
+      "severity": "warning",
+      "path": "missing",
+      "page": null,
+      "extracted": null,
+      "on_page": "Debt Service Fund budgetary comparison schedule (report p64), not in the trim",
+      "issue": "Known trim gap. The Debt Service Fund (property 305,811, other tax 709, principal 195,000, interest 42,363, transfers out 182,500 on p5) has no detail lines. All 21 trimmed pages were read and every statement/schedule line on them is in the JSON."
+    }
+  ]
+}

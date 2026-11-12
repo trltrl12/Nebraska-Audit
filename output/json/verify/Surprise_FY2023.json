@@ -1,0 +1,12 @@
+{
+  "stem": "Surprise_FY2023",
+  "values_checked": 41,
+  "issues": [
+    {"severity": "warning", "path": "detail[13..14].category", "page": 1,
+     "extracted": "other (Local Receipts: Other, Keno Fund 4,158.40 and Keno Reserve Fund 5,581.00)", "on_page": "Line 18 Local Receipts: Other, KENO and KENO RESERVE columns",
+     "issue": "Receipts printed in the Keno and Keno Reserve fund columns are most likely keno/lottery proceeds (the CLAUDE.md Waverly ruling assigns lottery-fund gross keno receipts to keno/lottery). The page doesn't print the receipt type, so 'other' can be defended. Keno columns make up 9,739.40 of the 15,833.96 statement line receipts[8] (61.5%), so that line is mostly keno money."},
+    {"severity": "warning", "path": "beginning_cash", "page": 1,
+     "extracted": 223220.71, "on_page": "Line 1 Net Cash Balance 197,821.00; line 2 Investments 25,399.71; line 3 Subtotal 223,220.71",
+     "issue": "beginning_cash and ending_cash (223,847.73) hold the line 3 / line 28 subtotals, which include investments. The investments are also recorded separately in beginning_investments 25,399.71 and ending_investments 8,302.68, so adding cash + investments counts them twice. Printed net cash is 197,821.00 at the start and 215,545.05 at the end. This is documented in notes and FY2024 uses the same convention (its beginning_cash 223,847.73 equals this ending), so it is a warning, not an error."}
+  ]
+}
