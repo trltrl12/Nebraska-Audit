@@ -1,0 +1,21 @@
+{
+  "stem": "Utica_FY2023",
+  "values_checked": 167,
+  "issues": [
+    {"severity": "warning", "path": "detail[27].original_label", "page": 13,
+     "extracted": "Capital Outlay: General Government", "on_page": "Capital outlay 64,730 (department column 'General')",
+     "issue": "The function is taken from the department column 'General'. That column also holds law enforcement, which the extractor itself moved to public safety, so the column does not clearly name a single function. general government is defensible."},
+    {"severity": "warning", "path": "detail[11].category", "page": 14,
+     "extracted": "Recreation Fees", "on_page": "Charges for services 10,855 (Pool column)",
+     "issue": "The same label 'Charges for services' is Recreation Fees in the Pool and Park columns (detail[11], detail[14]) but charges for services/fees elsewhere (General detail[5], Senior Center, statement receipts[7]). This rests on the department column and is defensible, but the same label has different categories."},
+    {"severity": "warning", "path": "detail[54].detail_category", "page": 10,
+     "extracted": "highway allocation", "on_page": "Intergovernmental 132,735 (Street Fund)",
+     "issue": "The label is only 'Intergovernmental'. Highway allocation is assumed from the fund name, and no breakdown is printed."},
+    {"severity": "warning", "path": "detail_totals[11].source_page", "page": 2,
+     "extracted": 241895, "on_page": "Water expenses 241,895 (Statement of Activities p2); p7 prints operating 90,135 and nonoperating (151,760) separately",
+     "issue": "The utility expenditure totals for Water (241,895) and Sewer (detail_totals[13], 84,243) cite the Statement of Activities. The amounts are right and equal the p7 operating plus nonoperating expenses, but they come from the government-wide statement, not the proprietary statement the detail lines are drawn from."},
+    {"severity": "warning", "path": "receipts[8].category", "page": 5,
+     "extracted": "donations/contributions", "on_page": "Grants and contributions 77,207 (Statement of Activities: Operating Grants and Contributions)",
+     "issue": "A mixed label with no printed breakdown, so it stays one line under the 2026-11-06 ruling. The grantor is not stated. This matches FY2024."}
+  ]
+}

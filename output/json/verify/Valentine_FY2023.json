@@ -1,0 +1,27 @@
+{
+  "stem": "Valentine_FY2023",
+  "values_checked": 336,
+  "issues": [
+    {"severity": "warning", "path": "receipts[13].category", "page": 7,
+     "extracted": "Loan Proceeds", "on_page": "Loan proceeds 1,228,783 (printed among REVENUES, Street column)",
+     "issue": "'loan proceeds' is apply=context in config/category_decisions.csv, so the batch instruction says it should stay other until the context check settles it. The 2026-11-06 ruling (proceeds printed among revenues -> Loan Proceeds receipt) supports the current category, and FY2024 uses it. The same applies to detail[108] (Street budget schedule p15). A person needs to settle the conflict between the two rules."},
+    {"severity": "warning", "path": "receipts[10].category", "page": 7,
+     "extracted": "donations/contributions", "on_page": "Grants and donations 4,922,996",
+     "issue": "Mostly Street 1,791,400 and Airport 3,026,555, which the Statement of Activities (p3) shows as capital grants. The mixed label has no exact printed breakdown, so it is kept as one line. The grantor is not stated. This matches FY2024."},
+    {"severity": "warning", "path": "receipts[18].category", "page": 9,
+     "extracted": "donations/contributions", "on_page": "Grant income 85,921 (Water Fund, nonoperating; SoA capital grants p3)",
+     "issue": "The label says only 'grant', but the category is donations/contributions. The user's rules keep grants and donations as separate categories. The same applies to detail[161]."},
+    {"severity": "warning", "path": "disbursements[17].category", "page": 9,
+     "extracted": "other", "on_page": "Licenses and fees 469,706 (Electric 457,230, Landfill 12,476)",
+     "issue": "The page does not say what these fees are, so other is defensible. The Electric amount may be franchise or in-lieu fees paid (Other Taxes Paid). Utility cost types are reapplied later by user_rules.py."},
+    {"severity": "warning", "path": "disbursements[20].category", "page": 9,
+     "extracted": "other", "on_page": "Landfill post-closure costs 120,000",
+     "issue": "This is a closure/postclosure accrual. No cost-type category fits, so other is a judgment call."},
+    {"severity": "warning", "path": "detail_totals[17].source_page", "page": 2,
+     "extracted": 4069296, "on_page": "Electric expenses 4,069,296 (Statement of Activities p2); p9 prints total operating expenses 4,046,176 and interest expense (23,120)",
+     "issue": "The amount is right and equals the p9 operating expenses plus interest expense, but the Electric expenditure total cites the Statement of Activities rather than the proprietary statement."},
+    {"severity": "warning", "path": "detail[104].detail_category", "page": 15,
+     "extracted": "highway allocation", "on_page": "Intergovernmental 535,790 (Street Fund)",
+     "issue": "The label is only 'Intergovernmental'. Highway allocation is assumed from the fund name, and no breakdown is printed."}
+  ]
+}
