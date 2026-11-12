@@ -1,0 +1,15 @@
+{
+  "stem": "Burr_FY2022",
+  "values_checked": 68,
+  "issues": [
+    {"severity": "warning", "path": "beginning_cash.amount", "page": 1,
+     "extracted": 54289.75, "on_page": "Line 1 Net Cash Balance: General 33,155.35 + Special Revenue 7,512.63 = 40,667.98; line 2 Investments (General) 13,621.77; line 3 Subtotal 54,289.75",
+     "issue": "beginning_cash is the line-3 subtotal, which includes the 13,621.77 of investments, and beginning_investments repeats the same 13,621.77. Any sum of cash + investments counts it twice. The printed cash-only figure is 40,667.98. The roll-forward to ending cash 31,516.05 ties only because the investments were cashed in during the year (line 27 is blank at year end)."},
+    {"severity": "warning", "path": "receipts[7].category", "page": 1,
+     "extracted": "other", "on_page": "Local Receipts: Other 26,301.91 (Enterprise Funds column)",
+     "issue": "This is all of the business-type receipts (excluding the transfer) and is likely utility charges (FY2024/FY2025 used Utility Charges). The page prints no breakdown, so 'other' is defensible, but the business-type side is 100% other. The same applies to detail[17]."},
+    {"severity": "warning", "path": "detail[15].original_label", "page": 3,
+     "extracted": "Capital Outlay", "on_page": "Other Capital Outlay 11,443.29 (Special Revenue Fund column)",
+     "issue": "The Street Fund piece (detail[12]) is labelled 'Capital Outlay: Streets/Highways', but this Special Revenue Fund piece stays plain 'Capital Outlay' with no function. That is inconsistent with the 'Capital Outlay: <function>' rule, although the page names no function for this fund."}
+  ]
+}
