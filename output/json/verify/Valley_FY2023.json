@@ -1,0 +1,100 @@
+{
+  "stem": "Valley_FY2023",
+  "values_checked": 185,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "report_discrepancies",
+      "page": 4,
+      "extracted": "not recorded",
+      "on_page": "General column Total revenues 2,971,873; its lines add to 2,971,874 (1,692,349 + 10,855 + 540,316 + 331,733 + 111,127 + 12,869 + 13,398 + 259,227). Total revenues row cross-foot: 2,971,873 + 421,881 + 1,790,323 + 3,475,690 + 105,308 = 8,765,075 vs Total 8,765,076",
+      "issue": "Unrecorded report rounding gap (1). The JSON receipts use the Total column, which adds to 8,765,076, so no amount changes; this needs a report_discrepancies entry (check totals, difference -1, p4).",
+      "resolved": "fixed: p6 fund-column detail; rounding gaps recorded"
+    },
+    {
+      "severity": "error",
+      "path": "report_discrepancies",
+      "page": 6,
+      "extracted": "not recorded",
+      "on_page": "Utilities column: Total non-operating 3,316,120 vs lines 2,229,181 + 71,221 - 180,281 + 1,196,000 = 3,316,121; Change in net position 3,574,641 vs 258,520 + 3,316,120 = 3,574,640. Interest expense row: 180,281 + 70,644 = 250,925 vs Total (250,926)",
+      "issue": "Unrecorded report rounding gaps (1) in the proprietary operating statement's fund columns. The Total column, used in the JSON, adds correctly; these need report_discrepancies entries.",
+      "resolved": "fixed: p6 fund-column detail; rounding gaps recorded"
+    },
+    {
+      "severity": "error",
+      "path": "report_discrepancies",
+      "page": 7,
+      "extracted": "only the operating reconciliation gap (1,412,680 vs 1,412,679) is recorded",
+      "on_page": "Utilities capital and related financing (818,933) vs lines 2,229,181 - 2,425,392 - 442,440 - 180,281 = (818,932). Interest and fiscal fees row: 180,281 + 65,687 = 245,968 vs Total (245,969)",
+      "issue": "Unrecorded report rounding gaps (1) on the cash flow schedule. The Total column figures used in proprietary{} tie (net -1,004,162; 4,736,501 + 1,675,738 = 6,412,239).",
+      "resolved": "fixed: p6 fund-column detail; rounding gaps recorded"
+    },
+    {
+      "severity": "error",
+      "path": "report_discrepancies",
+      "page": 5,
+      "extracted": "mentioned in notes only",
+      "on_page": "Proprietary SNP p5 Buildings 941,040, Infrastructure 17,309,270, Accumulated depreciation (8,960,834) vs government-wide p1 941,042 / 17,309,267 / (8,960,833)",
+      "issue": "A cross-statement rounding inconsistency printed by the report is recorded only in notes, not in report_discrepancies. The balance sheet correctly uses p1.",
+      "resolved": "fixed: p6 fund-column detail; rounding gaps recorded"
+    },
+    {
+      "severity": "error",
+      "path": "detail[21..38] (fund 'Proprietary Funds')",
+      "page": 10,
+      "extracted": "Combined 'Budget and Actual - Proprietary Funds' schedule (Utilities + Nursing Home together, budget basis incl. Capital Outlay 2,070,101 and Debt Services (principal) 487,445)",
+      "on_page": "No separate Utilities or Nursing Home budget schedule is printed; the proprietary statement p6 prints fund columns Utilities and Nursing Home",
+      "issue": "Per the utility-detail rule, business-type detail must come from each fund's own budget schedule, and failing that from the proprietary statement's fund columns. p10 is a combined schedule, not a fund's own schedule. The detail should be one line per row per fund column on p6 (Utilities Fund: Metered sales 1,607,861, Connection fees 208,814, Assessments 18,042, Misc 150,747, Grant 2,229,181, Interest 71,221, expenses ... Depreciation 391,623, Interest expense (180,281), Transfer 1,196,000; Nursing Home Fund: Rent 264,729, Misc 75,554, Depreciation 53,458, Interest expense (70,644)), with detail_totals per fund.",
+      "resolved": "fixed: p6 fund-column detail; rounding gaps recorded"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[0..15] (fund 'Governmental Funds')",
+      "page": 8,
+      "extracted": "Combined 'Budget and Actual - Governmental Funds' schedule (General, Sales Tax, TIF, Keno together)",
+      "on_page": "The p4 fund statement prints General, Bond, Sales Tax, TIF and Keno columns; only the Debt Service (Bond) fund has its own schedule (p9)",
+      "issue": "The per-fund detail rule (cities: combined all-funds schedule -> one line per fund column) may call for the p4 fund columns for General, Sales Tax, TIF and Keno instead of the combined schedule. The 2026-10-28 rule (some funds have own schedules -> don't add statement lines) points the other way. Needs a decision."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[0]",
+      "page": 4,
+      "extracted": "property tax 5,580,718 (computed remainder, label 'Taxes')",
+      "on_page": "Taxes 7,371,041 (p4); SoA p2 Taxes: Property 5,591,573, Sales 1,790,323",
+      "issue": "Subtraction check: the statements do establish the remainder's type. Sales 1,790,323 equals the Sales Tax fund column exactly. Every other governmental revenue ties to another SoA line: licenses 540,316, intergovernmental 331,733, interest 25,735, Miscellaneous 361,400 = other revenues 259,227 + keno 102,173, charges 111,127, operating grants 113,405 = grant 12,869 + sale of property 100,536. So SoA Property 5,591,573 can only be the non-sales Taxes 5,580,718 + special assessments 10,855, which is exact. The split is allowed and marked computed with the parent label. The residual risk is that the SoA lumps any General Fund motor vehicle/occupation taxes into 'Property'. Also, special assessments being inside Property is inferred by elimination, not printed."
+    },
+    {
+      "severity": "warning",
+      "path": "detail",
+      "page": 8,
+      "extracted": "Taxes 6,968,159; General government 1,036,093; Total revenues 8,343,194",
+      "on_page": "p4 non-Bond Taxes 6,957,305 + special assessments 10,855 = 6,968,160; GG General 1,025,362 + Keno 10,732 = 1,036,094; 8,343,194 + Bond 421,881 = 8,765,075 vs 8,765,076",
+      "issue": "Budget schedule vs fund statement rounding differences (1) printed in the report; not recorded."
+    },
+    {
+      "severity": "warning",
+      "path": "balance_sheet.equity[4].category",
+      "page": 1,
+      "extracted": "Restricted",
+      "on_page": "Restricted for Capital assets 4,021,919 (p1); p5 prints the same amount as 'Net invested in capital assets'",
+      "issue": "Could be Net Investment in Capital Assets under the equity rule; p1 prints it as restricted. Judgment call (already flagged for review)."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[6].category / receipts[15].category",
+      "page": 4,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "Grant income 12,869 (governmental); Grant income 2,229,181 (business-type, capital grants p2)",
+      "issue": "The grantor is not printed. The 2026-11-06 ruling says not to guess a grantor; a generic grants category may fit better."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[37].budget_final",
+      "page": 10,
+      "extracted": null,
+      "on_page": "-",
+      "issue": "The Depreciation and Amortization final budget is printed as a dash (zero); recorded as null rather than 0."
+    }
+  ],
+  "summary": "Pages 1-10 of 10 read; notes end 'Read pages 1-10 of 10'. Every amount matches its page. Governmental receipts sum to 8,765,076 (p4). Disbursement lines sum to 4,711,598 vs printed 4,711,597, and that gap is recorded. Roll-forward: 9,826,200 + 8,765,076 - 4,711,598 - 1,196,000 transfers out - 3,364,882 other financing (sale of property 100,536 - TIF 3,465,418, both printed under Other Financing Sources) - 1,680,975 prior period adjustment = 7,637,821. The TIF is correctly in other_financing and the prior period adjustment in adjustments[]. Business-type: 5,141,344 (restated) + 4,626,149 - 2,031,328 + 1,196,000 = 8,932,165. Proprietary cash flows tie. The balance sheet p1 balances (26,654,106 = 8,561,926 + 1,522,194 + 16,569,986). Detail schedules tie to printed totals. The transfer 1,196,000 from Sales Tax to the proprietary funds is recorded as a transfer on both sides. FY2024 ties: beginning_fund_balance 7,637,821, business_type.beginning 8,932,165, proprietary beginning_cash 6,412,239."
+}
