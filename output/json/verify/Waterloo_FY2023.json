@@ -1,0 +1,12 @@
+{
+  "stem": "Waterloo_FY2023",
+  "values_checked": 330,
+  "issues": [
+    {"severity": "warning", "path": "ending_cash", "page": 3, "extracted": 1116834, "on_page": "Cash and Equivalents 1,116,834; Restricted cash and equivalents 718,103 (Total column)", "issue": "ending_cash takes only the unrestricted Cash and Equivalents line; restricted cash and equivalents 718,103 (Debt Service 462,910, Keno 255,193) is also printed cash and is left out of the cash measure (recorded only in balance_sheet as restricted assets). Confirm which cash measure is wanted."},
+    {"severity": "warning", "path": "receipts[30].category", "page": 15, "extracted": "Sale of Property", "on_page": "Sale of Assets (5,333) (Sewer, nonoperating)", "issue": "A printed loss (negative) on disposal of assets is recorded as Sale of Property. The cash flow statement (p18) shows sale proceeds of 6,000, so this is a non-cash loss. The existing category 'Loss on Disposal of Assets' (Scottsbluff FY2024 ruling) would fit better. The same applies to detail[163] (p17)."},
+    {"severity": "warning", "path": "receipts[10].category", "page": 4, "extracted": "licenses and permits", "on_page": "Fireworks 13,500", "issue": "The page doesn't say what this receipt is. 'Licenses and permits' (fireworks stand permits) is a guess. Same for detail[10]."},
+    {"severity": "warning", "path": "receipts[22].category", "page": 4, "extracted": "intergovernmental/state aid", "on_page": "Incentive pay 1,000 (Street Fund)", "issue": "Treated as state highway incentive payment, but the page doesn't say so. Same for detail[116]."},
+    {"severity": "warning", "path": "detail[57].detail_category", "page": 8, "extracted": "utilities (power, gas, phone)", "on_page": "Trash 911", "issue": "Trash is coded utilities (power, gas, phone) here and in Library detail[96] (Trash 991, p11), but Street 'Trash pickup' detail[123] (p13) is professional/contract services. The same concept gets different detail_categories."},
+    {"severity": "warning", "path": "governmental_net_position", "page": 2, "extracted": "4,678,988 / 105,060 / 4,784,048", "on_page": "Statement of Activities headed 'For the year ended September 30, 2022'", "issue": "The Statement of Activities heading prints 2022, but its figures are FY2023 (ending 4,784,048 ties to p1, and the FY2024 JSON's beginning ties to it). The figures are recorded correctly. This is a misprint in the report, noted in notes but not in report_discrepancies."}
+  ]
+}
