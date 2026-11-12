@@ -1,0 +1,15 @@
+{
+  "stem": "Fullerton_FY2022",
+  "values_checked": 184,
+  "issues": [
+    {"severity": "warning", "path": "receipts[8].category", "page": 6,
+     "extracted": "other", "on_page": "Grant income 14,001 (Statement of Activities p3: Capital Grants and Contributions, General government 14,001)",
+     "issue": "Grant income is in 'other' with detail_category Grants because no grantor is printed. The report shows it as capital grants for general government. A grant category (federal grants, intergovernmental, or a 'Grants' category) may fit better than 'other'. The same applies to detail[8]."},
+    {"severity": "warning", "path": "disbursements[5].category", "page": 6,
+     "extracted": "other", "on_page": "Equipment sinking fund 6 (printed as its own function line under Current)",
+     "issue": "The report prints this as a function line named after the fund, with no function given, so it was put in 'other' (review set). The amount is trivial; the category is a judgment call. The same applies to detail[37]."},
+    {"severity": "warning", "path": "ending_cash", "page": 5,
+     "extracted": 1522725, "on_page": "Cash and cash equivalents (claim on cash) 1,289,471; Cash and cash equivalents, restricted 218,148; County treasurer cash 15,106",
+     "issue": "ending_cash is a sum of three printed lines and is marked computed. The arithmetic is correct, but it includes restricted cash and county treasurer cash, and the user ruling of 2026-11-06 says cash is filled only where printed. Please confirm that summing the printed cash lines is acceptable."}
+  ]
+}

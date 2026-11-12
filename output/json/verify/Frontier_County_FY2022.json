@@ -1,0 +1,31 @@
+{
+  "stem": "Frontier_County_FY2022",
+  "values_checked": 134,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "detail[4].category",
+      "page": 5,
+      "extracted": "other",
+      "on_page": "Local 355,156 (General Fund budget schedule); Exhibit D General column (p4): Charges for Services 326,446, Interest 8,006, Miscellaneous 15,914, rest intergovernmental 4,790",
+      "issue": "The General Fund 'Local' line is in 'other', but the report's own Exhibit D breakdown shows about 92% of it is Charges for Services. The extractor rules say a broad 'Local' line takes any category that makes up more than half of it, so this should be charges for services/fees (with review naming the mix), unless the context check rules otherwise. The amount is correct.",
+      "resolved": "'Local' is a context label: stays other until the context check (CLAUDE.md 2026-11-05 rule)"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[29].category",
+      "page": 8,
+      "extracted": "inheritance tax",
+      "on_page": "Local 468,023 (Inheritance Tax budget schedule); Exhibit D prints 'Inheritance Tax 468,023' in the Inheritance Tax column (p4)",
+      "issue": "The schedule line is printed 'Local' and was classed as inheritance tax from Exhibit D. A printed breakdown supports this (tax-split rule 1). However, the user ruling of 2026-11-06 keeps Inheritance Tax Fund receipts printed as 'Local fees...' as printed. Please confirm this case is treated as a printed breakdown and not a fund-name inference."
+    },
+    {
+      "severity": "warning",
+      "path": "detail",
+      "page": 4,
+      "extracted": "no Courthouse Building fund lines",
+      "on_page": "Exhibit D Courthouse Building column: Property Taxes 41,820, Intergovernmental 214, Interest 85, General Government 8,025, Bond/Loan Proceeds 1,003,995, Transfers In 125,000",
+      "issue": "The trim has no schedule for the Courthouse Building capital project fund, so its activity is not in detail. Its 125,000 transfer in (matching the Inheritance Tax 125,000 transfer out) and its 1,003,995 bond proceeds show only at the top level. This is consistent with the per-fund rule; noted for completeness."
+    }
+  ]
+}
