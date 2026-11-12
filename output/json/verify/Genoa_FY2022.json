@@ -1,0 +1,21 @@
+{
+  "stem": "Genoa_FY2022",
+  "values_checked": 169,
+  "issues": [
+    {"severity": "warning", "path": "missing", "page": 12,
+     "extracted": null, "on_page": "Right half of the General Fund departmental combining statement (Park, Auditorium, Fire, Fire Equipment, Museum, Ambulance, Police, Total; revenue and object-of-expenditure rows, total revenues 818,167, total expenditures 711,193). The row labels and the first department columns are not in the trim.",
+     "issue": "The department-by-object detail is not in the JSON because the page with the row labels is missing from the trim. The General Fund was taken from the budget schedule (p8), so nothing is double counted. Re-trimming with the left-half page (config/extra_pages.csv) would allow the full detail."},
+    {"severity": "warning", "path": "missing", "page": 2,
+     "extracted": null, "on_page": "Only the right half of the Statement of Activities is in the trim (net expense and general revenue columns); the expenses, charges for services and operating grants columns are missing",
+     "issue": "With the left half missing, the Sewer 'Other revenue' 463 (receipts[18]) and the 'Grants' lines cannot be checked against the program revenue columns."},
+    {"severity": "warning", "path": "receipts[8].category", "page": 4,
+     "extracted": "other", "on_page": "Grants 107,337",
+     "issue": "The label is 'Grants', not other/miscellaneous, so 'other' is a last resort here. No grantor is printed; the p2 capital grants and contributions column shows 97,937. A person should choose the category (intergovernmental, federal grants or donations)."},
+    {"severity": "warning", "path": "detail[8].category", "page": 8,
+     "extracted": "other", "on_page": "Grants 104,847",
+     "issue": "This is the same 'Grants' line kept in other; see receipts[8]."},
+    {"severity": "warning", "path": "detail[25].category", "page": 9,
+     "extracted": "other", "on_page": "Grants 2,490",
+     "issue": "This is the same 'Grants' line kept in other; see receipts[8]."}
+  ]
+}
