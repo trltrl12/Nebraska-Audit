@@ -1,0 +1,15 @@
+{
+  "stem": "Deuel_County_FY2022",
+  "values_checked": 120,
+  "issues": [
+    {"severity": "warning", "path": "detail[29]", "page": 8,
+     "extracted": "original_label 'Inheritance tax', source_page 4, split_from 'Local 22,788 (p8)'", "on_page": "Exhibit H (Inheritance Tax schedule) row 'Local' 22,788; Exhibit D (p4) prints the same cell as 'Inheritance Tax' 22,788",
+     "issue": "the schedule row prints 'Local'. The JSON uses the Exhibit D label and page and marks a one-to-one relabel as split_from (nothing was split). Amount and category are supported by the Exhibit D row, but the label and page aren't the schedule's. See the 2026-11-06 ruling that Inheritance Tax Fund 'Local' receipts stay as printed"},
+    {"severity": "warning", "path": "detail[4].category", "page": 5,
+     "extracted": "other", "on_page": "Local 369,331 (Exhibit F); the General column of Exhibit D (p4) shows Charges for Services 292,636, Interest 21,206, Miscellaneous 45,790",
+     "issue": "charges for services are about 79% of the General Fund's local receipts. The extractor rules say a broad 'Local' line takes its dominant category; this context label is waiting for the context check"},
+    {"severity": "warning", "path": "balance_sheet.assets[1].category", "page": 3,
+     "extracted": "Investments", "on_page": "Designated Investments 366,522 (Exhibit C); the same amount is labelled 'Designated Deposits' on Exhibit A (p1)",
+     "issue": "the government-wide statement calls it deposits, so it may be cash (CDs) rather than investments. This also affects ending_investments"}
+  ]
+}
