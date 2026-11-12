@@ -1,0 +1,22 @@
+{
+  "stem": "Wahoo_FY2023",
+  "values_checked": 125,
+  "issues": [
+    {"severity": "warning", "path": "missing", "page": null, "extracted": "trim pp1-5 (source pp7, 8, 21, 22, 23 of 29)", "on_page": "source pp24-29 not in trim (unseen)",
+     "issue": "Trim is 5 of 29 source pages. Proprietary funds: none expected; the city statements on pp1-2 print only governmental fund columns (utilities are a separate report, Wahoo_Utilities_FY2023), so nothing is missing there. Nonmajor funds: 'Other Governmental Funds' is one column on pp1-2; any combining nonmajor schedule or further budget schedules (Debt Service, Capital Projects, 1/2 cent Sales Tax, Chestnut Street) would sit in source pp24-29, which could not be checked. Nothing recorded depends on them: receipts, disbursements, financing, balances and the balance sheet come from the Total Governmental Funds column (pp1-2), and under the 2026-10-28 rule no statement fund-column lines are added for funds without their own schedule. Only the detail could gain lines if such schedules exist. All 5 trimmed pages read; notes end 'Read pages 1-5 of 5'."},
+    {"severity": "warning", "path": "receipts[2].category", "page": 2, "extracted": "motor vehicle tax", "on_page": "Motor Vehicle and Other Taxes 133,151",
+     "issue": "Mixed label with no printed breakdown; motor vehicle tax is the dominant guess (same in detail[2], detail[21])."},
+    {"severity": "warning", "path": "receipts[3].category", "page": 2, "extracted": "licenses and permits", "on_page": "Permits and Fees 117,324",
+     "issue": "Mixed label (permits and fees), kept as one line under licenses and permits; defensible (same in detail[3])."},
+    {"severity": "warning", "path": "receipts[7].category", "page": 2, "extracted": "charges for services/fees", "on_page": "Charges & Reimbursements for Services 1,331,464",
+     "issue": "Mixed label (charges and reimbursements for services). Fire and EMS fund share 477,598 (detail[29], p5) is probably ambulance/rescue fees, but the page does not say so."},
+    {"severity": "warning", "path": "receipts[13].category", "page": 2, "extracted": "intergovernmental/state aid", "on_page": "Grants 242,397",
+     "issue": "Grantor not printed (213,465 in Other Governmental Funds, 28,932 General). intergovernmental/state aid assumes a government grantor; CLAUDE.md says grants and donations are separate and not to guess a grantor. detail[8] detail_category 'other state aid' rests on the same assumption."},
+    {"severity": "warning", "path": "disbursements[6].category", "page": 2, "extracted": "debt service (principal and interest combined)", "on_page": "Debt Service: Tax Increment Finance Payments 287,846",
+     "issue": "Printed under the Debt Service heading in the Debt Service fund column, so this is defensible. TIF payments could also be economic development; the extractor flagged it for review."},
+    {"severity": "warning", "path": "balance_sheet.equity", "page": 1, "extracted": "no category on 4 fund-balance lines", "on_page": "Restricted / Restricted 1,747,505; Committed / Unrestricted 439,896; Assigned / Unrestricted 2,712,321; Unassigned / Unrestricted (235,502)",
+     "issue": "Fund-balance classification lines have no category. Amounts and labels are correct and sum to 4,664,220."},
+    {"severity": "warning", "path": "ending_cash", "page": 1, "extracted": 4664220, "on_page": "TOTAL ASSETS 4,664,220 (all three asset lines are cash)",
+     "issue": "Equals the printed TOTAL ASSETS, marked computed. Beginning cash is not printed and is correctly null. Cross-year: FY2023 ending fund balance 4,664,220 = FY2024 beginning_fund_balance 4,664,220 (ties as printed)."}
+  ]
+}

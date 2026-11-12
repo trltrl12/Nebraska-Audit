@@ -1,0 +1,20 @@
+{
+  "stem": "Wahoo_Utilities_FY2023",
+  "values_checked": 153,
+  "issues": [
+    {"severity": "warning", "path": "missing", "page": null, "extracted": "trim skips source p8 (report page 6)", "on_page": "report page 6 not trimmed (unseen; between Statements of Revenues and Expenses, report p5, and Statements of Cash Flows, report p7)",
+     "issue": "Report page 6 is probably the Statement of Changes in Net Position. business_type.beginning 21,275,103 is taken from the 2022 column of the Statement of Net Position (p1). That ties: 21,275,103 + 613,871 = 21,888,974. Any restatement or capital contribution printed only on page 6 could not be checked. All 10 trimmed pages read; notes end 'Read pages 1-10 of 10'. No FY2024 JSON exists for a cross-year check."},
+    {"severity": "warning", "path": "disbursements[1].category", "page": 2, "extracted": "Salaries and Wages / Repairs and Maintenance", "on_page": "Salaries, Wages, & Benefits; Maintenance & Supplies",
+     "issue": "Mixed cost-type labels (wages with benefits; maintenance with supplies) are given one cost type each, the same way in the statement and detail lines. Utility cost-type categories are re-applied by user_rules.py."},
+    {"severity": "warning", "path": "disbursements[3].category", "page": 2, "extracted": "Insurance", "on_page": "Insurance 99,014 (Production; also Distribution 49,813, G&A 9,297 and detail lines)",
+     "issue": "'insurance' is an apply=context expenditure label in config/category_decisions.csv. It is categorized from the label, though the utility cost-type rule lists Insurance as a cost type. Expect the context queue to pick it up."},
+    {"severity": "warning", "path": "receipts[1].category", "page": 2, "extracted": "charges for services/fees", "on_page": "Merchandise, Service & Other Sales 740,972",
+     "issue": "Mixed label (merchandise sales, service charges, other sales). It is counted as operating revenue in the utility fund, so the category is defensible."},
+    {"severity": "warning", "path": "balance_sheet.liabilities[6].category", "page": 1, "extracted": "debt - due in more than one year (-671,913)", "on_page": "Long-Term Liabilities: Less: Current Maturities (671,913)",
+     "issue": "Long-Term Debt 1,974,882 (liabilities[4]) is gross and includes the current portion; the contra line is put entirely against debt. Part of the current maturities may belong to Compensated Absences. Totals tie: 3,265,141."},
+    {"severity": "warning", "path": "balance_sheet.equity", "page": 1, "extracted": "no category on Restricted 45,017 and Unrestricted 6,985,784", "on_page": "Restricted 45,017; Unrestricted 6,985,784",
+     "issue": "Net position lines other than the net investment line have no category. Amounts are correct and sum to 21,888,974."},
+    {"severity": "warning", "path": "proprietary.investing", "page": 3, "extracted": 1164754, "on_page": "Cash flows from investing activities ... 'Net cash provided (used) by financing activities' 1,164,754",
+     "issue": "The report misprints the investing subtotal label as 'financing'. Recording it as investing is right (1,000,000 loan repayment from the City + 164,754 interest), and the sections tie to the 67,693 net increase. Noted in notes; this is not an arithmetic discrepancy."}
+  ]
+}

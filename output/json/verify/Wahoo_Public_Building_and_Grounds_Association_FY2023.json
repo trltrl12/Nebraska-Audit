@@ -1,0 +1,14 @@
+{
+  "stem": "Wahoo_Public_Building_and_Grounds_Association_FY2023",
+  "values_checked": 11,
+  "issues": [
+    {"severity": "warning", "path": "fiscal_year_end", "page": 1, "extracted": "2023-06-30", "on_page": "only '2023 AUDIT WAIVER REQUEST'; no period or date printed",
+     "issue": "Fiscal year end is not printed. 2023-06-30 is the extractor's assumption (budget-form default), stated in notes; a string field cannot carry computed. The PBGA serves the City of Wahoo, whose fiscal year ends September 30, so 2023-09-30 is equally plausible. Check the Auditor's filing or a prior/next-year filing. Not in decision_needed."},
+    {"severity": "warning", "path": "missing", "page": null, "extracted": "trim p1 only (source p3 of 5)", "on_page": "source pp1-2, 4-5 not in trim (unseen; manifest ocr_pages=4)",
+     "issue": "Only the Total of All Funds page was trimmed. If the other source pages print per-fund columns, the waiver per-fund detail rule would add detail lines; detail is empty now. All values recorded come from the Total column on p1 and do not depend on those pages. Notes end 'Read pages 1-1 of 1'."},
+    {"severity": "warning", "path": "entity_type", "page": 1, "extracted": "public power / utility (all lines business-type)", "on_page": "Wahoo Public Building & Grounds Assoc",
+     "issue": "The manifest class is 'Cities and Villages - Utilities', but a public building association is a building/leasing body, not a utility. Treating every line as business-type follows the manifest, not the page; Debt Service: Other 223,092.86 suggests it services building debt for the city. Only a person can settle the fund type."},
+    {"severity": "warning", "path": "disbursements[0].category", "page": 1, "extracted": "Operating", "on_page": "Operating Expenses 2,668.58",
+     "issue": "The budget-form rule calls for the entity type's function. No listed function fits a building association, so 'Operating' is defensible."}
+  ]
+}
