@@ -1,0 +1,30 @@
+{
+  "stem": "Pender_FY2022",
+  "values_checked": 326,
+  "issues": [
+    {"severity": "warning", "path": "disbursements[8]", "page": 10,
+     "extracted": "category other, 'Transfer out' 47,291 (split_from Debt service 216,174)", "on_page": "Bond Fund 'Transfer out' 47,291 inside Total disbursements 216,174 (p10); received by the Water Fund as 'Transfer from other funds' 47,291 (p12) and counted in business_type.transfers_net",
+     "issue": "a transfer is counted as governmental spending while the receiving side counts it as a transfer. It is kept as printed under the user's 2026-10-29 'as printed' ruling, and decision_needed[0] already asks about it. Under the verifier rule (no transfers in spending) this would be an error, so the user's ruling on decision_needed[0] settles it."},
+    {"severity": "warning", "path": "disbursements[7]", "page": 10,
+     "extracted": "Debt Service / interest, 'Other' 470", "on_page": "Bond Fund 'Other' 470",
+     "issue": "the page doesn't say what this is. Treating it as interest/fees is an assumption (marked review)."},
+    {"severity": "warning", "path": "disbursements[4].category", "page": 4,
+     "extracted": "public safety", "on_page": "Public buildings 56,970 (p4); 'Public works - other' on the GF budget schedule (p9); equals the Fire column total on p11",
+     "issue": "the category comes from the combining schedule's Fire column, not from the printed label. It's defensible, but the label and category don't match."},
+    {"severity": "warning", "path": "detail[43].category", "page": 11,
+     "extracted": "health/welfare (Cemetery department lines, detail[43]-detail[53])", "on_page": "Cemetery column total 12,333; the statement's Public safety 46,978 = Rescue 34,645 + Cemetery 12,333 (p4); p9 'Public health and safety'",
+     "issue": "detail puts Cemetery spending in health/welfare, but the statement line that holds it is in public safety. The function differs between detail and statement."},
+    {"severity": "warning", "path": "balance_sheet.liabilities[5].category", "page": 1,
+     "extracted": "debt - due in more than one year, Notes payable 692,337", "on_page": "p5 proprietary statement: Notes payable-current portion 266,793 + net of current portion 425,544",
+     "issue": "266,793 of these notes is due within one year according to p5. All of it is classed as long-term."},
+    {"severity": "warning", "path": "balance_sheet.liabilities[6].category", "page": 1,
+     "extracted": "debt - due in more than one year, Bonds payable 1,175,000", "on_page": "p5: Bonds payable-current portion 175,000 + net of current portion 1,000,000",
+     "issue": "175,000 of these bonds is due within one year according to p5. All of it is classed as long-term."},
+    {"severity": "warning", "path": "balance_sheet.liabilities[3].category", "page": 1,
+     "extracted": "other liabilities (Due to other funds 1,451,830; also liabilities[0] governmental 996,082)", "on_page": "Due to other funds",
+     "issue": "the matching 'Due from other funds' assets are categorized Internal Balances. The interfund liabilities would more consistently be Internal Balances too."},
+    {"severity": "warning", "path": "ending_cash", "page": 3,
+     "extracted": 1292641, "on_page": "Cash in bank 1,292,641; Cash with county treasurer 18,331 (p3 Total)",
+     "issue": "ending_cash leaves out the county treasurer cash 18,331, which the rules treat as Cash and Cash Equivalents. It is a choice carried over from FY2023, but governmental cash is understated by 18,331 compared with the balance-sheet cash lines."}
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "stem": "Polk_FY2022",
+  "values_checked": 184,
+  "issues": [
+    {"severity": "warning", "path": "disbursements[13].category", "page": 7,
+     "extracted": "general government", "on_page": "Sand and Gravel 908.00 (Street Fund column only, p7)",
+     "issue": "the whole line comes from the Street Fund; the 'listed by object' rule (use the function of the fund it's printed under) points to streets/highways, as the detail line (detail[52]) already has"},
+    {"severity": "warning", "path": "disbursements[10].category", "page": 7,
+     "extracted": "general government", "on_page": "Dues, Subscriptions and Licenses 525.00 (Street Fund column only, p7)",
+     "issue": "the whole line comes from the Street Fund; streets/highways would match the fund rule and the detail line (detail[50])"},
+    {"severity": "warning", "path": "detail[40].original_label", "page": 11,
+     "extracted": "Capital Outlay", "on_page": "Capital Outlay: Equipment 10,063.25 (General Fund column)",
+     "issue": "the General Fund capital outlay line has no function in its label, while the Street Fund line on the same row is labelled 'Capital Outlay: Streets/Highways' from its fund column; this is inconsistent (either both get a function from the fund or neither does)"},
+    {"severity": "warning", "path": "receipts[23].category", "page": 9,
+     "extracted": "sales tax", "on_page": "Sales Tax 17,036.70 (Light Fund operating receipt; Statement of Activities p2 puts it in Charges for Services next to Sales Tax Remittance 17,065.42)",
+     "issue": "this is sales tax collected on electric sales and passed through (remitted 17,065.42), not the village's own sales tax revenue; counting it as 'sales tax' overstates local sales-tax receipts. It could go in charges for services or a pass-through category"}
+  ]
+}

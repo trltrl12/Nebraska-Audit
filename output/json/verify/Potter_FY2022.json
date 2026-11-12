@@ -1,0 +1,18 @@
+{
+  "stem": "Potter_FY2022",
+  "values_checked": 145,
+  "issues": [
+    {"severity": "warning", "path": "other_financing", "page": 4,
+     "extracted": 79811.92, "on_page": "Total other financing sources (uses) 79,811.92 = Donations 6,882.06 + Interest income 498.22 + Interest expense (145,912.25) + TIF receipts 218,343.89",
+     "issue": "the amount is printed and the roll-forward ties. But this one net figure holds governmental receipts (TIF receipts, which are property tax increment, plus donations and interest) and spending (TIF interest expense 145,912.25). None of them appears in receipts[] or disbursements[], even though the Statement of Activities (p2) shows TIF proceeds as general revenue and interest expense as an expense, and the detail (detail[68], detail[70]-[79]) records them as revenue and debt service. The JSON follows the printed section, but a person may want to settle whether to keep it this way"},
+    {"severity": "warning", "path": "disbursements[0].amount", "page": 4,
+     "extracted": 275702.57, "on_page": "General government 275,702.57 (p4); Statement of Activities p2: General Government 219,973.43 and Principal payments 72,431.64",
+     "issue": "the printed General government line includes the TIF principal payment 72,431.64 (275,702.57 + 16,702.50 = 219,973.43 + 72,431.64). Keeping it as printed is correct, but about 72k of debt service sits in general government at the statement level"},
+    {"severity": "warning", "path": "report_discrepancies", "page": 11,
+     "extracted": "only the -2 disbursement rounding is recorded", "on_page": "Nonoperating Interest income cells 240 + 4 + 104 + 2 + 7 = 357; printed Total column 356",
+     "issue": "the report's own 1-dollar rounding gap in the nonoperating interest row is mentioned in notes but not listed in report_discrepancies"},
+    {"severity": "warning", "path": "ending_cash", "page": 3,
+     "extracted": 387114.45, "on_page": "no printed cash-only total; Equity in pooled cash 80,367.57 + Cash and cash equivalents 303,772.33 + Cash with County Treasurer 2,974.55 (Total assets 405,048.99 includes certificates of deposit 17,934.54)",
+     "issue": "ending_cash is a sum the extractor computed (marked computed, and the arithmetic is right), but the 2026-11-06 ruling says cash is never derived and is filled only where printed"}
+  ]
+}
