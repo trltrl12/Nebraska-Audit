@@ -1,0 +1,24 @@
+{
+  "stem": "Verdigre_FY2023",
+  "values_checked": 87,
+  "issues": [
+    {"severity": "warning", "path": "receipts[8].category", "page": 4,
+     "extracted": "intergovernmental/state aid", "on_page": "Operating grants and contributions 14,976 (General Fund)",
+     "issue": "The grantor is not printed. The General Fund budget schedule (p7) counts this amount in 'Other local receipts' (1,728 = -29,072 + 15,824 + 14,976), not in 'Other state receipts'. FY2024 recorded the same line as donations/contributions. State aid is a guessed grantor; the rule says not to guess a grantor."},
+    {"severity": "warning", "path": "detail[2].category", "page": 7,
+     "extracted": "intergovernmental/state aid / other state aid", "on_page": "Other state receipts 71,338",
+     "issue": "The label is kept as printed, but p4 shows the amount is General Fund local sales tax 56,906 + interest income 11,684 + franchise tax 2,748 = 71,338. FY2024 split the same line into sales tax, interest and franchise (split_from). Inconsistent between years; state aid is defensible only from the label."},
+    {"severity": "warning", "path": "detail[9].category", "page": 8,
+     "extracted": "other", "on_page": "Other local receipts 57,118 (Special Fund)",
+     "issue": "p4 Special Revenue Fund column shows this is local sales tax 56,118 + charges for services 1,000 = 57,118. The broad-line rule (category over half of the line) points to sales tax, but the label decision 'other local receipts' -> other was applied. Needs the user's call."},
+    {"severity": "warning", "path": "ending_cash", "page": 3,
+     "extracted": 824443, "on_page": "Cash or cash equivalents 824,443; Cash at county treasurer 6,138",
+     "issue": "ending_cash takes only the 'Cash or cash equivalents' line. The county treasurer cash 6,138 (category Cash and Cash Equivalents on the balance sheet) is in neither ending_cash nor ending_investments, so cash 824,443 + investments 380,294 = 1,204,737, not the 1,210,875 ending balance."},
+    {"severity": "warning", "path": "report_discrepancies[0].note", "page": 2,
+     "extracted": "Statement of Activities 'Miscellaneous income/(expense)' prints 74,738", "on_page": "74,738 is printed on the SOA row labelled 'Motor vehicle prorate'; the SOA 'Miscellaneous income/(expense)' row prints 16,824 / 73,325",
+     "issue": "The 1-dollar differences (74,738 vs 74,737; 14,975 vs 14,976) are recorded correctly, but the note names the wrong SOA row because the SOA general revenue labels are shifted. Only the description is wrong; the amounts are right."},
+    {"severity": "warning", "path": "business_type.measure", "page": 6,
+     "extracted": "net position", "on_page": "Net position -- beginning 411,408 / ending 466,867 (cash basis)",
+     "issue": "FY2024 JSON uses measure 'cash' for the same Enterprise Fund. The figures tie (FY2023 ending 466,867 = FY2024 beginning 466,867), but the measure label differs between years."}
+  ]
+}
