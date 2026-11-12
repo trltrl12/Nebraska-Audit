@@ -1,0 +1,19 @@
+{
+  "stem": "Uehling_FY2023",
+  "values_checked": 202,
+  "issues": [
+    {"severity": "warning", "path": "ending_cash", "page": 3,
+     "extracted": 420009, "on_page": "Cash and Equivalents 366,650; Restricted Cash 53,359; Due from County Treasurer 2,719; Total Assets 422,728",
+     "issue": "ending_cash leaves out Due from County Treasurer 2,719, but the balance sheet line is categorized Cash and Cash Equivalents (the county treasurer rule), and Trenton includes county treasurer cash. Uehling_FY2024.json beginning_cash = 422,728, so FY2023 ending cash 420,009 does not tie to FY2024 beginning (difference 2,719, no restatement). Fund balance 422,728 and business-type 279,469 tie."},
+    {"severity": "warning", "path": "receipts[3].category", "page": 4,
+     "extracted": "intergovernmental/state aid", "on_page": "Incentive 600",
+     "issue": "Nothing on the page says what 'Incentive' is. State aid is an assumption (probably a highway incentive payment)."},
+    {"severity": "warning", "path": "disbursements[7]", "page": 2,
+     "extracted": "Water 65,794 (utilities), Sewer 68,906 (utilities); receipts[24] Sewer Charges For Services 65,774 (Utility Charges)",
+     "on_page": "p11 proprietary statement: Water operating 61,014 + Debt service 4,780; Sewer operating 40,724 + Debt Service 28,182; Sewer receipts User fees 58,234 + Land rent 7,540",
+     "issue": "Business-type statement lines come from the Statement of Activities (allowed), but that puts 32,962 of debt service in utilities and land rent 7,540 in Utility Charges. The proprietary statement (p11) prints them separately. Its Total column has a printed gap (in report_discrepancies), but the fund columns are clean."},
+    {"severity": "warning", "path": "detail[33].category", "page": 6,
+     "extracted": "utilities", "on_page": "General and administrative schedule: Garbage 26,721",
+     "issue": "Garbage collection in the General Fund G&A schedule is categorized utilities (refuse), while the fund statement counts it in General and administrative. Defensible, but a judgment call."}
+  ]
+}
