@@ -1,0 +1,15 @@
+{
+  "stem": "Concord_FY2022",
+  "values_checked": 69,
+  "issues": [
+    {"severity": "warning", "path": "receipts[11].category", "page": 1,
+     "extracted": "other", "on_page": "Local Receipts: Other 50,272.93 (Enterprise Funds column)",
+     "issue": "The enterprise fund's only receipt line is almost certainly utility charges, but the page prints only 'Local Receipts: Other' (context label); kept as other. Same for detail[19]. Needs the context check"},
+    {"severity": "warning", "path": "disbursements[3].original_label", "page": 3,
+     "extracted": "Capital Outlay", "on_page": "Other Capital Outlay 22,764.83 (General 4,328.02 + Street 18,436.81)",
+     "issue": "Capital outlay rule wants 'Capital Outlay: <function>'; the line spans General and Street columns so it was left plain. detail[10] (General Fund Other Capital Outlay 4,328.02) is also plain 'Capital Outlay' with no function"},
+    {"severity": "warning", "path": "balance_sheet.assets[0].amount", "page": 1,
+     "extracted": 49478.79, "on_page": "line 26 Net Cash Balance 181,393.52 printed in the General column only",
+     "issue": "Governmental cash is derived (181,393.52 - Enterprise line 24 131,914.73), assuming the enterprise fund holds no investments; marked computed and in report_discrepancies. Also beginning_cash/ending_cash are line 3/line 24 balances that already include investments (6,493.52 / 6,552.25) while beginning_/ending_investments repeat them: do not add the two"}
+  ]
+}
