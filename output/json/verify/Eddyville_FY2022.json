@@ -1,0 +1,18 @@
+{
+  "stem": "Eddyville_FY2022",
+  "values_checked": 72,
+  "issues": [
+    {"severity": "warning", "path": "beginning_cash", "page": 1,
+     "extracted": 83452.99, "on_page": "line 1 Net Cash Balance 58,057.55 (General 18,195.02 + Street 39,862.53); line 2 Investments 25,395.44 (General 9,686.79 + Debt Service 15,708.65)",
+     "issue": "beginning_cash and ending_cash (103,176.87) include the separately printed Investments line, and beginning/ending_investments are null. The balance sheet records investments separately (34,951.00). Cash could be net cash 58,057.55 / 68,225.87 with investments 25,395.44 / 34,951.00."},
+    {"severity": "warning", "path": "disbursements[4].category", "page": 3,
+     "extracted": "utilities", "on_page": "47 Wastewater, Debt Service Fund column 7,547.00",
+     "issue": "Paid from the governmental Debt Service Fund, which receives the 7,500 Enterprise transfer. GO debt 74,437.57 is outstanding (p5). This is probably sewer bond payments (debt service), but the row prints Wastewater. Kept as printed with a review note. Judgment call."},
+    {"severity": "warning", "path": "receipts[11].category", "page": 1,
+     "extracted": "other", "on_page": "18 Local Receipts: Other, Enterprise Fund 22,293.34",
+     "issue": "This is the only receipt of the sewer Enterprise Fund, so it is most likely sewer charges. It is a context label, so it should go through the context check instead of staying other by default."},
+    {"severity": "warning", "path": "balance_sheet.equity[0].category", "page": 1,
+     "extracted": null, "on_page": "24 Ending Balance",
+     "issue": "Equity lines (equity[0], equity[1]) have no category field."}
+  ]
+}
