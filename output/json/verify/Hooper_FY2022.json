@@ -1,0 +1,86 @@
+{
+  "stem": "Hooper_FY2022",
+  "values_checked": 187,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "report_discrepancies",
+      "page": 3,
+      "extracted": "no entry",
+      "on_page": "Total column assets: 519,159 + 318,850 + 9,519 + 7,277 = 854,805 vs printed Total assets 854,806 (Bond column 299,513 + 2,783 + 7,277 = 309,573 vs printed 309,574; same 854,806 on p1 governmental column)",
+      "issue": "[fixed: report_discrepancies entry added] The governmental asset lines in balance_sheet.assets add to 854,805, but the printed total is 854,806. The printed page itself does not add up, so the difference has to be recorded in report_discrepancies. The existing entries cover only the p4 Bond fund balance 309,573 vs 309,574 and the p1 net position, not the asset addition. All balance_sheet.assets add to 5,156,349 vs total_assets 5,156,350."
+    },
+    {
+      "severity": "warning",
+      "path": "other_financing",
+      "page": 4,
+      "extracted": -81856,
+      "on_page": "Grants and donations 75,307; Debt service (157,163) under OTHER FINANCING SOURCES (USES)",
+      "issue": "Recorded as printed (computed net, arithmetic correct). However, the Statement of Activities (p2) counts the Debt service 157,163 as governmental disbursements and the 75,307 as operating grants and contributions. Because of this, governmental receipts and disbursements exclude both amounts. A person may want to decide whether bond principal and interest payments belong in other_financing; consider decision_needed."
+    },
+    {
+      "severity": "warning",
+      "path": "balance_sheet.liabilities[3].category",
+      "page": 1,
+      "extracted": "debt - due in more than one year (1,588,055)",
+      "on_page": "p5 proprietary: Bonds payable - current portion 127,465; net of current portion 1,460,590",
+      "issue": "The whole bond balance is categorized as long-term, but the proprietary statement (p5) prints a 127,465 current portion. A due-within-one-year split is printed in the report."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[74].original_label",
+      "page": 11,
+      "extracted": "Capital Outlay",
+      "on_page": "Capital purchases 1,735 (Auditorium column)",
+      "issue": "The capital outlay rule calls for 'Capital Outlay: <function>'. The other Auditorium lines are general government (statement 'Public buildings' 12,909 = Auditorium column), so 'Capital Outlay: General Government' would be consistent."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[107].original_label",
+      "page": 10,
+      "extracted": "Transfers In (+156,264)",
+      "on_page": "Transfers to other funds (156,264)",
+      "issue": "The sign and treatment are defensible: a negative line inside disbursements is an inflow, and it matches the p6 Transfers in 156,264. The printed label, though, says 'to other funds', the opposite direction."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[52].amount",
+      "page": 11,
+      "extracted": 15731,
+      "on_page": "15,731 (Pool, Salaries)",
+      "issue": "Low-resolution scan (dense p11 re-read digit by digit). The Pool column lines add to 30,941 vs printed 30,940, and the Salaries row adds to 282,471 vs printed 282,470. Reading this cell as 15,730 would make both tie; 15,731 is the most likely reading but cannot be confirmed. Recorded in report_discrepancies as rounding."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[69].amount",
+      "page": 11,
+      "extracted": 172,
+      "on_page": "172 (Auditorium, Employee benefits)",
+      "issue": "Low-resolution scan. The Auditorium column adds to 12,908 vs printed 12,909, and the Employee benefits row adds to 71,921 vs printed 71,922. Reading this cell as 173 would make both tie; not confirmable at this resolution."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[89].amount",
+      "page": 11,
+      "extracted": 27,
+      "on_page": "27 (TIF, Professional fees)",
+      "issue": "Low-resolution scan. The TIF column adds to 27,611 vs printed 27,610, and the Professional fees row adds to 23,614 vs printed 23,613. Reading this cell as 26 would make both tie; not confirmable at this resolution."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[15].amount",
+      "page": 11,
+      "extracted": 1301,
+      "on_page": "1,301 (Street, Intergovernmental - county)",
+      "issue": "Low-resolution scan. The Street receipts add to 153,179 vs printed 153,180, and the county row adds to 19,519 vs printed 19,520 (p4 also prints 19,520 for General). Reading this cell as 1,302 would make both tie; not confirmable at this resolution."
+    },
+    {
+      "severity": "warning",
+      "path": "detail",
+      "page": 11,
+      "extracted": "row sums: General insurance 43,504; Supplies 71,175; Maintenance 38,935; Capital purchases 54,696",
+      "on_page": "printed row totals 43,506; 71,174; 38,934; 54,697",
+      "issue": "All 108 p11 cells were re-read and the extracted values agree with my reading. The other row-total gaps (insurance -2, supplies +1, maintenance +1, capital -1) cannot all be explained by one alternative digit. Every column except Pool, Auditorium and TIF ties, so these look like rounding in the printed report (already in report_discrepancies) and not misreads. The p4 statement shows the same kind of 1-2 rounding gaps."
+    }
+  ]
+}
