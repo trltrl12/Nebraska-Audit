@@ -1,0 +1,110 @@
+{
+  "stem": "Lynch_FY2022",
+  "values_checked": 138,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "missing",
+      "page": 6,
+      "extracted": null,
+      "on_page": "Charges for services - water and sewer 110,208 (Total, operating revenues)",
+      "issue": "[fixed: business-type receipts added from p6 Total column] receipts[] has no business-type lines at all. The proprietary statement's revenue lines are absent, even though reported_totals.business-type.receipts (921,602) and business_type.beginning/ending depend on them. The business-type receipts in receipts[] sum to 0 instead of 921,602."
+    },
+    {
+      "severity": "error",
+      "path": "missing",
+      "page": 6,
+      "extracted": null,
+      "on_page": "Charges for services - sanitation (garbage) 27,456 (Total)",
+      "issue": "[fixed: business-type receipts added from p6 Total column] Business-type receipt line missing from receipts[]."
+    },
+    {
+      "severity": "error",
+      "path": "missing",
+      "page": 6,
+      "extracted": null,
+      "on_page": "Other 64 (Total, operating revenues)",
+      "issue": "[fixed: business-type receipts added from p6 Total column] Business-type receipt line missing from receipts[]."
+    },
+    {
+      "severity": "error",
+      "path": "missing",
+      "page": 6,
+      "extracted": null,
+      "on_page": "Interest income 82 (Total, nonoperating)",
+      "issue": "[fixed: business-type receipts added from p6 Total column] Business-type receipt line missing from receipts[]."
+    },
+    {
+      "severity": "error",
+      "path": "missing",
+      "page": 6,
+      "extracted": null,
+      "on_page": "Capital grants 484,328 (Total, nonoperating)",
+      "issue": "[fixed: business-type receipts added from p6 Total column] Business-type receipt line missing from receipts[]."
+    },
+    {
+      "severity": "error",
+      "path": "missing",
+      "page": 6,
+      "extracted": null,
+      "on_page": "NPPD lease 28,851 (Total, nonoperating)",
+      "issue": "[fixed: business-type receipts added from p6 Total column] Business-type receipt line missing from receipts[]."
+    },
+    {
+      "severity": "error",
+      "path": "missing",
+      "page": 6,
+      "extracted": null,
+      "on_page": "Other intergovernmental 17,534 (Total, nonoperating)",
+      "issue": "[fixed: business-type receipts added from p6 Total column] Business-type receipt line missing from receipts[]."
+    },
+    {
+      "severity": "error",
+      "path": "missing",
+      "page": 6,
+      "extracted": null,
+      "on_page": "Loan proceeds 253,079 (Total, nonoperating revenues)",
+      "issue": "[fixed: business-type receipts added from p6 Total column] Business-type receipt line missing from receipts[]. The notes say it is recorded as a receipt line (printed among nonoperating revenues), but it is not in receipts[]."
+    },
+    {
+      "severity": "warning",
+      "path": "ending_cash",
+      "page": 3,
+      "extracted": 179447,
+      "on_page": "Cash 174,356; Cash - restricted 4,074; Cash held by county treasurer 1,017; TOTAL ASSETS 179,447 (Total Governmental Funds; also p1 Governmental Activities)",
+      "issue": "Requested check. 179,447 is printed, but only as TOTAL ASSETS and never as a cash figure. No line labelled cash prints that amount; the printed cash lines are 174,356 (Cash), 4,074 (restricted) and 1,017 (county treasurer). The JSON marks it computed as a sum of those three lines. Under the 2026-11-06 ruling (cash is never derived), this is a derived cash figure. It also equals ending_fund_balance 179,447. Lyman_FY2022, which uses the same auditor format, leaves ending_cash null in this situation. The options are null, or the printed Cash line 174,356. A person should decide; Lynch FY2023 used the same approach and drew the same flag."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[8].category",
+      "page": 4,
+      "extracted": "other",
+      "on_page": "Other 7,839 = General 2,670 + Street 585 + Housing 4,581 + Flood Disaster 3",
+      "issue": "Housing's 4,581 (58% of the line) is printed as Charges for services on p11 and counted in Charges for Services on p2 (Community improvement). Under the extractor's broad-line rule, a category over half of the line would apply. The extraction kept the line as other (the label decision) and raised a decision_needed entry, which is defensible."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[39].category",
+      "page": 12,
+      "extracted": "intergovernmental/state aid / detail_category federal grants",
+      "on_page": "Intergovernmental - federal and state grants 422,207",
+      "issue": "The category (state aid) and detail_category (federal grants) disagree for one combined federal-plus-state line with no printed breakdown. Page 2 shows it as Capital Grants for Community improvement."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[41].original_label",
+      "page": 12,
+      "extracted": "Capital Outlay",
+      "on_page": "Capital projects - housing 250,261",
+      "issue": "The row names its function (housing), so under the capital outlay rule the label would be 'Capital Outlay: Housing'."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[60].computed",
+      "page": 6,
+      "extracted": "computed: counted in Charges for Services on the Statement of Activities (p2: Sewer 92,382)",
+      "on_page": "Other 64 (printed)",
+      "issue": "The amount is printed as-is. The 'computed' field holds a category justification, so the line will look like a derived value. The category itself is supported (p2 Sewer charges 92,382 = 64,862 + 27,456 + 64)."
+    }
+  ]
+}
