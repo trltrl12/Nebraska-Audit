@@ -1,0 +1,21 @@
+{
+  "stem": "Bee_FY2022",
+  "values_checked": 78,
+  "issues": [
+    {"severity": "warning", "path": "receipts[6].category", "page": 1,
+     "extracted": "other", "on_page": "Local Receipts: Other - Water 42,376.39 (p1), Sewer 30,232.43, Garbage 19,446.72 (p2)",
+     "issue": "These are the only receipts of the water, sewer and garbage funds, so they are almost certainly utility charges. Local Receipts is a context label, so it needs a page-checked context decision rather than staying in other. The same applies to detail[19], detail[22] and detail[24]."},
+    {"severity": "warning", "path": "receipts[5].category", "page": 1,
+     "extracted": "other", "on_page": "Local Receipts: Other - VFD Fund 46,221.57 (p1)",
+     "issue": "The VFD Fund portion (58% of the governmental line) is likely rural fire contract payments or donations. The page gives no breakdown, so this is a context-check candidate, not an error."},
+    {"severity": "warning", "path": "beginning_cash", "page": 1,
+     "extracted": 399538.53, "on_page": "Line 3 Subtotal of Beginning Balance (Net Cash Balance + Investments)",
+     "issue": "beginning_cash and ending_cash (366,223.70) are the line 3 / line 24 balances, which include investments. beginning_investments (38,480.89) and ending_investments (38,538.62) are also filled. The notes say the investments are 'already inside', but downstream sums of cash + investments would double count them. The printed Net Cash Balance for governmental funds is 361,057.64 at the beginning (sum of the p1 line 1 governmental columns) and 327,685.08 at the end."},
+    {"severity": "warning", "path": "detail[4].original_label", "page": 3,
+     "extracted": "Capital Outlay", "on_page": "Capital Improvements 5,290.00 (General Fund)",
+     "issue": "The Street and VFD capital outlay detail lines are labelled 'Capital Outlay: <function>', but the General Fund (5,290.00) and Ballroom Fund (detail[15], 7,000.00) lines keep a plain 'Capital Outlay' label. The capital outlay rule calls for 'Capital Outlay: General Government' / 'Capital Outlay: Culture/Recreation' by fund function."},
+    {"severity": "warning", "path": "detail[17].detail_category", "page": 2,
+     "extracted": "other state aid", "on_page": "State Receipts: State Aid 22,365.00 (CDBG Fund)",
+     "issue": "CDBG is a federal block grant passed through the state. It is kept as printed ('State Receipts: State Aid'), which is defensible, but it could be federal grants."}
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "stem": "Beaver_Crossing_FY2022",
+  "values_checked": 146,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "disbursements[9].category",
+      "page": 9,
+      "extracted": "other",
+      "on_page": "Miscellaneous 17,935.47 (General Fund 17,335.47 + Street Fund 600.00, p8)",
+      "issue": "Governmental spending is listed by object, so per the by-object rule the category is the function of the fund it is printed under. 97% of this line is General Fund, so it should be general government (with a 'listed by object' review note). The matching detail lines (detail[28] General, detail[40] Street) already use general government / streets/highways, so the report is inconsistent with itself.",
+      "resolved": "statement line mixes General and Street funds; kept other (as FY2023/FY2024); detail lines carry each fund's function"
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[1].category",
+      "page": 7,
+      "extracted": "general government",
+      "on_page": "Professional Services 72,670.52 = General 6,837.97 + Street 15,200.00 + Fire 1,083.60 + ARPA 49,548.95 (pp6-7)",
+      "issue": "The review note says 'General, Street, Fire and ARPA funds', but the largest share (49,548.95, 68%) is the ARPA Fund column, not the General Fund. Under the by-object rule the dominant fund's function would apply, and the ARPA fund's function is not printed. General government is defensible, but it is not the dominant fund's function."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[16].category",
+      "page": 7,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "Seward County Fire 68,084.44 (Fire Fund)",
+      "issue": "The receipt categories list rural fire contracts under charges for services/fees. The Statement of Activities (p2) shows the amount under Operating Grants and Contributions, so state aid is defensible, but a county fire contract payment could be charges for services."
+    },
+    {
+      "severity": "warning",
+      "path": "detail",
+      "page": 15,
+      "extracted": "Pool and Park Fund expenditure lines category culture/recreation (no function field)",
+      "on_page": "Pool and Park Fund cost-type lines p15",
+      "issue": "The statement-level business-type lines (disbursements[20-27]) and the Water Fund detail use cost-type categories with function utilities, but the Pool and Park Fund detail uses culture/recreation. This is inconsistent within the report. Pool and Park is not a utility, so the detail treatment is arguably the better one, and the statement lines then tag 29,168.30 of pool payroll as utilities."
+    },
+    {
+      "severity": "warning",
+      "path": "missing",
+      "page": null,
+      "extracted": null,
+      "on_page": "Report pp27, 29 (Fire Fund and ARPA Fund budget schedules) and p31 (Sewer Fund enterprise schedule) are not in the trimmed PDF",
+      "issue": "The trimmed PDF has 16 pages and the notes end 'Read pages 1-16 of 16'. Every trimmed page is captured. The trim skips the supplementary schedule pages for Fire, ARPA and Sewer, so those funds have no detail. This is a trim gap (config/extra_pages.csv), not an extraction error."
+    }
+  ]
+}
