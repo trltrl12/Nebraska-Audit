@@ -1,0 +1,47 @@
+{
+  "stem": "Sterling_FY2023",
+  "values_checked": 150,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "detail[34].budget_final",
+      "page": 3,
+      "extracted": null,
+      "on_page": 9588,
+      "issue": "Street Fund 'Debt Interest Payments' Budget (Original & Final) column prints 9,588 (Street budget expenditures 44,474 + 25,000 + 9,588 + 620,000 = 699,062 printed total); recorded as null",
+      "resolved": "fixed as described"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[3].category",
+      "page": 2,
+      "extracted": "Ambulance Fees",
+      "on_page": "Fire & Rescue Receipts 3,166",
+      "issue": "label mixes fire and rescue; could be rural fire contract (charges for services) rather than ambulance fees; detail[3] same (FY2024 uses the same category)"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[13].category",
+      "page": 2,
+      "extracted": "Public Power District Sales Tax",
+      "on_page": "Public Power Reimbursement 56,898",
+      "issue": "printed as a reimbursement; PPD in-lieu/sales tax is a judgment call (consistent with FY2024); detail[10] same"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[20].category",
+      "page": 2,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "Grants 71,194 (General 13,755, Street 57,439)",
+      "issue": "grant source (state vs federal) not printed on the trimmed pages; detail[18] and detail[31] same"
+    },
+    {
+      "severity": "warning",
+      "path": "ending_investments",
+      "page": 1,
+      "extracted": 55000,
+      "on_page": "Certificates of Deposit 55,000 (inside Cash, End of Year 1,342,368 on p4)",
+      "issue": "ending_cash 1,342,368 already includes the 55,000 CDs, so cash + investments would double count; beginning_investments null (prior-year CD amount not printed in the trim) so beginning and ending are not on the same basis. FY2024 JSON: beginning_fund_balance 1,342,368 ties to this ending_fund_balance; FY2024 beginning_cash is null although this report's ending_cash is 1,342,368"
+    }
+  ]
+}

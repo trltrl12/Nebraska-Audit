@@ -1,0 +1,39 @@
+{
+  "stem": "Stockville_FY2023",
+  "values_checked": 48,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "detail[5].detail_category",
+      "page": 1,
+      "extracted": "other local taxes",
+      "on_page": "Local Receipts: In Lieu of Tax 542.18",
+      "issue": "In Lieu of Tax has its own detail_category 'In Lieu of Tax' (extractor rules; receipts[7] category and FY2024 JSON use it); 'other local taxes' is wrong when a specific category fits",
+      "resolved": "fixed as described"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[3].detail_category",
+      "page": 1,
+      "extracted": "homestead/tax credits",
+      "on_page": "State Receipts: Property Tax Credit 134.02",
+      "issue": "rules give Property Tax Credit as its own detail_category (FY2024 JSON uses 'Property Tax Credit'); detail[13] (Street Fund 19.20) same"
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[2].category",
+      "page": 2,
+      "extracted": "streets/highways",
+      "on_page": "Public Works - Other 12,611.21 (General 10,398.86, Street 2,212.35)",
+      "issue": "form line 33 is public works other than streets (line 32); General Fund part may be utilities/other public works. Same in detail[8] and FY2024"
+    },
+    {
+      "severity": "warning",
+      "path": "ending_cash",
+      "page": 1,
+      "extracted": 35348.42,
+      "on_page": "County Treasurer Balance at October 1, 2022 446.74; at September 30, 2023 266.29",
+      "issue": "county treasurer balances are printed below the statement and not recorded anywhere (cash/investments wherever printed); notes mention them. FY2024 JSON beginning_cash 35,348.42 / beginning_investments 10,600.92 tie to this report's ending"
+    }
+  ]
+}
