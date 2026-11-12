@@ -1,0 +1,18 @@
+{
+  "stem": "Pickrell_FY2023",
+  "values_checked": 66,
+  "issues": [
+    {"severity": "warning", "path": "receipts[9].category", "page": 1,
+     "extracted": "Utility Charges", "on_page": "Local Receipts: Other 112,626.00 (Enterprise Fund column)",
+     "issue": "Category assumed from the fund type. The page prints no breakdown and 'Local Receipts' is a context label. Same for detail[13] (detail_category other utility charges)."},
+    {"severity": "warning", "path": "disbursements[2].original_label", "page": 3,
+     "extracted": "Capital Outlay", "on_page": "Capital Improvements 149,170.00 (General Fund column)",
+     "issue": "The capital outlay rule calls for 'Capital Outlay: <function>'. No function is printed, so the label has no function; under the fund-name convention this would be general government. Same for detail[8]."},
+    {"severity": "warning", "path": "reported_totals.business-type.receipts", "page": 1,
+     "extracted": "115626 with includes [] and a nonstandard includes_split of 3,000", "on_page": "line 21 Enterprise 115,626.00 includes line 20 Transfers In 3,000.00",
+     "issue": "The printed total includes the 3,000 transfer (business_type.transfers_net), but `includes` is empty and the transfer is recorded only in a nonstandard `includes_split` field. Validation may report a 3,000 gap against receipt lines of 112,626."},
+    {"severity": "warning", "path": "balance_sheet.liabilities", "page": 5,
+     "extracted": "[] (total_liabilities null)", "on_page": "Schedule of Outstanding Debt: SRF Loan 102,203.00 (final maturity printed 6/15/2023)",
+     "issue": "The SRF loan outstanding is printed on p5 but is not in the balance sheet. That is defensible for a cash-basis Exhibit A, but it is the only debt figure in the report, and its printed maturity date has already passed even though a balance is still outstanding."}
+  ]
+}
