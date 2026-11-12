@@ -1,13 +1,9 @@
 {
   "stem": "Gretna_FY2023",
-  "values_checked": 214,
+  "values_checked": 191,
   "issues": [
-    {"severity": "warning", "path": "missing", "page": 3,
-     "extracted": "ending_cash 42,454,149 from the Statement of Net Position (p1)",
-     "on_page": "Balance Sheet - Governmental Funds assets: trimmed p3 (report p18) shows only General, Debt Service, Keno and Street; the Incentive, TIF and Total Governmental Funds asset columns (report p19) are not in the trim (p4-p5 = report p20-21 liabilities/fund balance)",
-     "issue": "Confirmed: report p19 (the right half of the assets page) is missing. No JSON line needs it, because this is a GAAP report and the balance sheet comes from the Statement of Net Position. The substitute 42,454,149 is printed on p1 as Governmental Activities 'Total cash and investments' (38,182,707 + 41,219 + 4,230,223). It matches the funds statement: the implied Incentive cash 536,920 + TIF cash 15,558 (TIF fund balance end 15,558, p13) reconcile to the printed fund totals 1,273,275 / 26,425 (p5) and GW receivables. ending_cash carries a 'computed' tag although the amount is printed as-is (harmless). Re-trim with report p19 if the funds-statement cash is wanted."},
-    {"severity": "warning", "path": "receipts[21].category", "page": 9,
-     "extracted": "other", "on_page": "Capital facility charges and reimbursements 12,470,695",
-     "issue": "The printed label isn't other/miscellaneous. It mixes capital facility (connection) charges and reimbursements, and the Statement of Activities (p2) shows it as Capital Grants and Contributions. Gretna_FY2024 records the same line as reimbursements/refunds, so the two years don't match. A person should choose one category, e.g. a capital contributions/charges category. The same applies to detail[60] Water 10,360,888 and detail[76] Sewer 2,109,807 (p17)."}
+    {"severity": "warning", "path": "receipts[20].category", "page": 10, "extracted": "other", "on_page": "Capital facility charges and reimbursements 12,470,695", "issue": "The printed label isn't other/miscellaneous. It mixes capital facility (connection) charges with capital reimbursements, no breakdown is printed, and the Statement of Activities (p2) shows it as Capital Grants and Contributions. FY2024 also records it as other, so the years match. A person may want a specific category, e.g. a capital contributions/charges category. The same applies to detail[60] Water 10,360,888 and detail[76] Sewer 2,109,807 (p18)."},
+    {"severity": "warning", "path": "receipts[18].category", "page": 10, "extracted": "licenses and permits", "on_page": "Permits and hookups 1,880,619 (operating revenue)", "issue": "This is a mixed label. Utility hookup (connection) fees are usually charges for services, and the Statement of Activities (p2) counts all operating revenue (9,054,683) in Charges for Services. licenses and permits is defensible but debatable. The same applies to detail[58] Water 92,579 and detail[74] Sewer 1,788,040 (p18)."},
+    {"severity": "warning", "path": "detail[38].original_label", "page": 13, "extracted": "Capital Outlay", "on_page": "Keno Fund: Capital outlay 59,175", "issue": "The capital outlay label rule wants 'Capital Outlay: <function>'. This line has no function, and none is printed for this Keno Fund line."}
   ]
 }
