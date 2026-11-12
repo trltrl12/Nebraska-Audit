@@ -1,0 +1,99 @@
+{
+  "stem": "Ponca_FY2023",
+  "values_checked": 242,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "disbursements[13].category",
+      "page": 7,
+      "extracted": "Insurance",
+      "on_page": "Insurance 26,749 (Operating expenses, proprietary Total column)",
+      "issue": "'Insurance' is an apply=context expenditure label (config/category_decisions.csv); context labels must stay category other until the context check settles them, not be categorized from the label wording",
+      "resolved": "not applied: utility spending Insurance is a cost-type category (user 2026-10-28)"
+    },
+    {
+      "severity": "error",
+      "path": "detail[ Gas Fund 'Insurance' 2,849 ].category",
+      "page": 7,
+      "extracted": "Insurance",
+      "on_page": "Insurance 2,849 (Gas Fund column)",
+      "issue": "context label categorized from its wording; must stay category other (detail_category likewise not 'insurance')",
+      "resolved": "not applied: utility spending Insurance is a cost-type category (user 2026-10-28)"
+    },
+    {
+      "severity": "error",
+      "path": "detail[ Water Fund 'Insurance' 6,373 ].category",
+      "page": 7,
+      "extracted": "Insurance",
+      "on_page": "Insurance 6,373 (Water Fund column)",
+      "issue": "context label categorized from its wording; must stay category other",
+      "resolved": "not applied: utility spending Insurance is a cost-type category (user 2026-10-28)"
+    },
+    {
+      "severity": "error",
+      "path": "detail[ Sewer Fund 'Insurance' 17,527 ].category",
+      "page": 7,
+      "extracted": "Insurance",
+      "on_page": "Insurance 17,527 (Sewer Fund column)",
+      "issue": "context label categorized from its wording; must stay category other",
+      "resolved": "not applied: utility spending Insurance is a cost-type category (user 2026-10-28)"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[ General Fund departments 'Insurance' lines ].detail_category",
+      "page": 12,
+      "extracted": "insurance",
+      "on_page": "Insurance 25,146 (Admin), 5,559 (Police), 15,754 (Fire) p12; 107 (Cemetery), 3,463 (Park), 3,859 (Library) p13",
+      "issue": "category (function from department column) is fine, but detail_category 'insurance' is taken from a context label's wording while the same report's 'Transportation' context lines were left as miscellaneous expenditure; inconsistent handling of context labels"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[7].category",
+      "page": 5,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "Grants 88,055 (Statement of Activities p3: capital grants and contributions 650 general government, 87,405 environment and leisure)",
+      "issue": "grantor not printed; could be federal grants or donations/contributions. Same for detail Grants 650 (Admin), 52,600 (Park), 24,805 (Library), 10,000 (Auditorium) with detail_category 'other state aid'"
+    },
+    {
+      "severity": "warning",
+      "path": "balance_sheet.equity[6].category",
+      "page": 1,
+      "extracted": null,
+      "on_page": "Restricted for: Federal programs 144,521",
+      "issue": "business-type equity line has no category (amount and label correct)"
+    },
+    {
+      "severity": "warning",
+      "path": "balance_sheet.equity[7].category",
+      "page": 1,
+      "extracted": null,
+      "on_page": "Unrestricted 1,417,341",
+      "issue": "business-type equity line has no category (amount and label correct)"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[ Cemetery / Sanitation expenditure lines ].category",
+      "page": 13,
+      "extracted": "health/welfare (Cemetery), utilities (Sanitation)",
+      "on_page": "Statement p5 counts General Fund Public works 62,291 = Sanitation 57,149 + Cemetery 5,142",
+      "issue": "the report itself groups both departments under Public works; function choice differs from the statement's grouping (defensible)"
+    },
+    {
+      "severity": "warning",
+      "path": "detail",
+      "page": 10,
+      "extracted": "General Fund budgetary comparison schedule (p10) not recorded",
+      "on_page": "General Fund budget (original and final) by function, total 703,583",
+      "issue": "departmental schedule pp12-13 used instead to avoid double counting (correct), so General Fund budget_final figures are not captured anywhere"
+    },
+    {
+      "severity": "warning",
+      "path": "ending_cash",
+      "page": 4,
+      "extracted": 592021,
+      "on_page": "Cash and cash equivalents 235,055 + Restricted cash and cash equivalents 350,693 + County treasurer cash 6,273",
+      "issue": "sum is correct and marked computed, but includes restricted cash; no single printed governmental cash total"
+    }
+  ],
+  "year_tie": "FY2023 ending = FY2024 beginning as printed: governmental fund balance 631,555, business-type net position 3,069,994, proprietary cash 969,216. FY2024 beginning_cash null (as in FY2023 ending_cash computed 592,021; not printed as a single figure)."
+}

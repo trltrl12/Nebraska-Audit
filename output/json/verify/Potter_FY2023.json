@@ -1,0 +1,98 @@
+{
+  "stem": "Potter_FY2023",
+  "values_checked": 153,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "detail[66].section, detail[67].section",
+      "page": 11,
+      "extracted": "revenue, outside_printed_total (TIF receipts 49,130 General; 171,638 TIF Projects)",
+      "on_page": "TIF receipts 220,768 (schedule 'Nonoperating receipts', p11); the fund statement p4 prints them as TIF receipts 220,768.44 under OTHER FINANCING SOURCES (USES)",
+      "issue": "printed-section rule: amounts the statement prints under Other Financing Sources (Uses) must not be receipt lines marked outside_printed_total. Fix: set section 'other financing' (category Total Other Financing Sources (Uses)) and drop outside_printed_total, matching other_financing 154,644.50",
+      "resolved": "moved to other financing as printed on p4"
+    },
+    {
+      "severity": "error",
+      "path": "detail[68].section, detail[69].section, detail[70].section, detail[71].section",
+      "page": 11,
+      "extracted": "revenue, outside_printed_total (Donations 20,010 General; 45,379 Community Hall; 413 Library; 41 Museum)",
+      "on_page": "Donations 65,843 (p11); fund statement p4: Donations 65,843.29 under OTHER FINANCING SOURCES (USES)",
+      "issue": "same printed-section rule; fix: section 'other financing', no outside_printed_total",
+      "resolved": "moved to other financing as printed on p4"
+    },
+    {
+      "severity": "error",
+      "path": "detail[72].section, detail[73].section, detail[74].section, detail[75].section, detail[76].section",
+      "page": 11,
+      "extracted": "revenue, outside_printed_total (Interest income 1,809 General; 27 Youth Center; 617 Community Hall; 8 Library; 22 Museum)",
+      "on_page": "Interest income 2,483 (p11); fund statement p4: General Fund Interest income 2,483.14 under OTHER FINANCING SOURCES (USES)",
+      "issue": "same printed-section rule; fix: section 'other financing', no outside_printed_total",
+      "resolved": "moved to other financing as printed on p4"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[ 'Insurance' expenditure lines ].detail_category",
+      "page": 10,
+      "extracted": "insurance",
+      "on_page": "Insurance 14,647 / 1,567 / 1,113 / 3,317 / 3,319 / 1,477 / 5,360 (p10)",
+      "issue": "'Insurance' is an apply=context expenditure label; categories (functions from department columns) are fine but detail_category 'insurance' is taken from the label wording, which context labels should not be"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[2].category",
+      "page": 4,
+      "extracted": "other taxes",
+      "on_page": "Taxes: Other 9,795.43 (Statement of Activities p2: 'Homestead/other'); General Fund part = Homestead 5,183 + Other 3,158 (p10, whole dollars)",
+      "issue": "line mixes homestead exemption (state reimbursement) with other taxes; no exact breakdown for the Street Fund 1,454.17, so kept unsplit (defensible)"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[11].category",
+      "page": 6,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "Garbage Fund Grants 14,356.00",
+      "issue": "grantor not printed; could be federal grants"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[7].category",
+      "page": 10,
+      "extracted": "occupation/franchise tax",
+      "on_page": "Franchise/Capital/Patronage 4,812",
+      "issue": "mixed label (franchise fees plus capital credits/patronage refunds); counted in 'Other' on p4, not in taxes"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[ Visitor Center lines ].category",
+      "page": 10,
+      "extracted": "economic development",
+      "on_page": "Vistor Center (budget schedule p9 lists it under Current, separate from culture and recreation)",
+      "issue": "function assumed; not printed"
+    },
+    {
+      "severity": "warning",
+      "path": "balance_sheet.equity[0..5].category",
+      "page": 3,
+      "extracted": null,
+      "on_page": "Restricted 100,730.82; Assigned Street 15,880.82; Assigned Library 2,609.46; Unassigned 201,807.51 (p3); Restricted 7,339.00, Unrestricted 398,191.01 (p1)",
+      "issue": "equity lines carry no category (amounts and totals correct)"
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[5].function",
+      "page": 6,
+      "extracted": null,
+      "on_page": "General operating 144,686.68",
+      "issue": "business-type spending line lacks function 'utilities' that the other proprietary lines carry"
+    },
+    {
+      "severity": "warning",
+      "path": "report_discrepancies",
+      "page": 10,
+      "extracted": "-1 (receipts), -3 (disbursements)",
+      "on_page": "General column receipts cells add to 261,802 vs printed 261,801; Visitor Center 15,379 vs 15,378, Community Hall 110,625 vs 110,624, TIF Projects 171,639 vs 171,638",
+      "issue": "re-read: digits confirmed; the report's own whole-dollar rounding, correctly recorded"
+    }
+  ],
+  "year_tie": "FY2023 ending = FY2024 beginning as printed: governmental fund balance 321,028.61, business-type net position 405,530.01. FY2024 has no beginning_cash (none printed)."
+}
