@@ -1,0 +1,12 @@
+{
+  "stem": "Benedict_FY2022",
+  "values_checked": 84,
+  "issues": [
+    {"severity": "warning", "path": "reported_totals.business-type.receipts.includes", "page": 1,
+     "extracted": [], "on_page": "line 21 Sewer 32,438.48 + Water 98,492.97 = 130,931.45, which includes line 20 transfers in 15,000.00 + 17,000.00",
+     "issue": "the printed total includes the 32,000 transfers in, which are recorded in business_type.transfers_net. The extractor used a custom includes_split entry instead of includes: [\"transfers_net\"]. The validator handles both the same way, so the math ties (98,931.45 + 32,000 = 130,931.45), but the convention differs from the rules."},
+    {"severity": "warning", "path": "detail[10].original_label", "page": 2,
+     "extracted": "Capital Outlay", "on_page": "Capital Improvements 6,000.00 (General Fund column)",
+     "issue": "capital outlay rule wants 'Capital Outlay: <function>'; the General Fund column names no function, so the label was left as plain 'Capital Outlay'. disbursements[2] (31,070.52 = General 6,000 + Community Center 25,070.52) also keeps the plain label because it mixes two functions. This is a judgment call."}
+  ]
+}
