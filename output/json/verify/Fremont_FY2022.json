@@ -1,0 +1,62 @@
+{
+  "stem": "Fremont_FY2022",
+  "values_checked": 243,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "detail[27].category",
+      "page": 11,
+      "extracted": "other",
+      "on_page": "Sales Tax Fund: Other income 397,277; governmental funds statement p4 Sales Tax column prints Sales proceeds on capital assets 396,277 + Other income 1,000",
+      "issue": "[fixed per p4 majority] The page shows that 99.7% of this line is sale of capital assets, so it should be Sale of Property (dominant-category rule), not other. The review note itself states the composition."
+    },
+    {
+      "severity": "error",
+      "path": "detail[21].category",
+      "page": 10,
+      "extracted": "other",
+      "on_page": "Street Fund: Other income 372,890; governmental funds statement p4 Street column prints Donations 371,333 + Other income 1,557 = 372,890",
+      "issue": "[fixed per p4 majority] The page shows that 99.6% of this line is donations, so it should be donations/contributions (dominant-category rule), not other. It has no review note either."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[63].category",
+      "page": 13,
+      "extracted": "Airport",
+      "on_page": "Airport Fund: Environment and leisure 937,416",
+      "issue": "A new category was created from the fund name, but the page prints the function 'Environment and leisure' (culture/recreation), and the 2026-11-12 ruling says to use the function only as printed. This is a judgment call."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[53].category",
+      "page": 12,
+      "extracted": "federal grants",
+      "on_page": "CDBG Fund: Intergovernmental 871,154",
+      "issue": "The grantor was inferred from the fund name (CDBG). The 2026-11-12 ruling keeps 'Intergovernmental' as other state aid unless the page says otherwise, and Franklin_FY2022's CDBG grants were left as other/Grants, so the two reports are inconsistent."
+    },
+    {
+      "severity": "warning",
+      "path": "ending_cash",
+      "page": 3,
+      "extracted": 31893936,
+      "on_page": "Cash and cash equivalents 31,663,512; County treasurer cash 230,424 (Total Governmental Funds)",
+      "issue": "Ending cash is a computed sum of two printed lines (marked computed, arithmetic correct). The user's 2026-11-06 ruling says cash is never derived. The extractor says this matches FY2023."
+    },
+    {
+      "severity": "warning",
+      "path": "business_type.other_financing",
+      "page": 6,
+      "extracted": 293471,
+      "on_page": "Gain (loss) on sale of assets (43,410) printed under Nonoperating revenues (expenses)",
+      "issue": "A printed nonoperating line was folded into other_financing with the contributed-capital lines instead of being recorded as its own line (e.g. Loss on Disposal of Assets, as in the Scottsbluff ruling). The roll-forward still ties."
+    },
+    {
+      "severity": "warning",
+      "path": "balance_sheet.equity[2].category",
+      "page": 1,
+      "extracted": null,
+      "on_page": "Restricted for: Debt service / Fly ash disposal / Street improvements / Federal grant programs / Other purposes; Unrestricted",
+      "issue": "Equity lines equity[2]-equity[10] have no category. The amounts are correct."
+    }
+  ]
+}
