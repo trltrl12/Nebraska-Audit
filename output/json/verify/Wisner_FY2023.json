@@ -1,0 +1,24 @@
+{
+  "stem": "Wisner_FY2023",
+  "values_checked": 370,
+  "issues": [
+    {"severity": "warning", "path": "ending_cash", "page": 4,
+     "extracted": 2405475, "on_page": "Cash and cash equivalents 2,405,475; Certificates of deposit 730,396; County treasurer cash 11,144 (Total Governmental Funds)",
+     "issue": "ending_cash holds only the 'Cash and cash equivalents' line; the printed County treasurer cash 11,144 (category Cash and Cash Equivalents on the balance sheet) is in neither ending_cash nor ending_investments, so ending_cash + ending_investments (3,135,871) is 11,144 short of the 3,147,015 total assets/fund balance. Defensible (no derived cash), but the user may want it noted"},
+    {"severity": "warning", "path": "transfers_in", "page": 5,
+     "extracted": 306415, "on_page": "General Fund 255,415 (net), Street (118,357), Joint Fire 51,000; p14 General Fund departments: General +306,415, Fire (28,500), Ambulance (22,500)",
+     "issue": "computed and arithmetic holds (net 188,058 ties), but it mixes the General Fund's net column figure with gross figures: the p14 schedule shows the General Fund actually received 306,415 and sent 51,000 to Joint Fire, so gross governmental transfers are in 357,415 / out 169,357. Either presentation nets to 188,058"},
+    {"severity": "warning", "path": "receipts[17].category", "page": 7,
+     "extracted": "intergovernmental/state aid", "on_page": "Grant income 14,977 (p3: Capital Grants and Contributions)",
+     "issue": "grantor not printed; state aid is a guess (same for detail Grant income lines of Gas, Water, Electric, Sewer funds, detail[...] p7)"},
+    {"severity": "warning", "path": "detail[*Gas/Electric Franchise fees].detail_category", "page": 7,
+     "extracted": "tax refunds/treasurer fees", "on_page": "Franchise fees 76,472 (Gas), 147,143 (Electric)",
+     "issue": "franchise fees paid by the utility to the city are not tax refunds or treasurer fees; category Other Taxes Paid is right, but the detail_category is a near miss (miscellaneous expenditure or a new 'franchise fees paid' would fit better)"},
+    {"severity": "warning", "path": "detail[*General Fund departments 'Charges for services and rental fees'].detail_category", "page": 14,
+     "extracted": "other charges for services", "on_page": "Ambulance (4,862); Cemetery 9,550; Pool 9,170; Park 15,790; Auditorium 8,475",
+     "issue": "the department column identifies the fee type (ambulance/rescue fees, cemetery fees, recreation/pool/park fees, rentals for the auditorium); label is mixed 'charges for services and rental fees', so keeping the generic detail_category is defensible"},
+    {"severity": "warning", "path": "receipts[8].category", "page": 5,
+     "extracted": "donations/contributions", "on_page": "Grants and contributions 254,061 (General 48,947, Street 12,639, Dinklage Foundation 192,475)",
+     "issue": "mixed label kept as one line per the 2026-11-06 ruling; Dinklage Foundation (76%) supports donations, but the General and Street Fund portions (shown as operating grants on p2) may be government grants"}
+  ]
+}
