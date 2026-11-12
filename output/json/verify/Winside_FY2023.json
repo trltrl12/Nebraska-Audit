@@ -1,0 +1,15 @@
+{
+  "stem": "Winside_FY2023",
+  "values_checked": 111,
+  "issues": [
+    {"severity": "warning", "path": "disbursements[9].category", "page": 7,
+     "extracted": "utilities", "on_page": "Utilities 203,658 (Electric 192,852, Water 10,806)",
+     "issue": "Electric fund 'Utilities' is 56% of electric operating expenses and is probably purchased power for resale; detail[22].detail_category 'utilities (power, gas, phone)' could be 'purchased power/cost of sales'. The page doesn't say, so kept as a judgment call"},
+    {"severity": "warning", "path": "detail[20].detail_category", "page": 7,
+     "extracted": "tax refunds/treasurer fees", "on_page": "Sales tax 17,613",
+     "issue": "Sales tax paid by the utility funds is not a tax refund or treasurer fee; the statement line uses Other Taxes Paid. Same for detail[33] (Water 271) and detail[45] (Sewer 5,479)"},
+    {"severity": "warning", "path": "ending_cash", "page": 4,
+     "extracted": 397426, "on_page": "Total Assets 397,426 (Cash at bank 395,384 + Cash held by County Treasurer 2,042)",
+     "issue": "ending_cash comes from the printed Total Assets (all cash lines), while beginning_cash is null, so cash has no roll-forward. The figure is correct but the user ruling says cash is filled only where printed; Total Assets is not a cash line"}
+  ]
+}

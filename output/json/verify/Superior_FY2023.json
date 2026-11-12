@@ -1,0 +1,21 @@
+{
+  "stem": "Superior_FY2023",
+  "values_checked": 361,
+  "issues": [
+    {"severity": "warning", "path": "detail[63].category", "page": 22,
+     "extracted": "general government", "on_page": "Zoning department; General Fund budget schedule (p14) puts Zoning under 'Public works', and the fund statement (p5) General Fund Public works 216,537 = Zoning 189,388 + Cemetery non-capital 27,149",
+     "issue": "The report groups Zoning under public works (Zoning's 108,366 repairs and maintenance look like street work). All Zoning expenditure lines detail[63]-[67] use general government. This matches FY2024 but goes against the report's own grouping"},
+    {"severity": "warning", "path": "detail[101].category", "page": 23,
+     "extracted": "health/welfare", "on_page": "Cemetery department; the report groups it under 'Public works' (p14, p5)",
+     "issue": "Cemetery expenditure lines detail[101]-[107] are health/welfare (the listed category for cemetery), but the report groups them under public works. Defensible, but it doesn't match the statement"},
+    {"severity": "warning", "path": "detail[179].original_label", "page": 20,
+     "extracted": "Capital Outlay", "on_page": "Capital outlay 322,030 (Grant Fund)",
+     "issue": "The capital outlay rule calls for 'Capital Outlay: <function>' with the function in computed, as the other capital outlay detail lines have. The Grant Fund line has no function. Its other spending is general government"},
+    {"severity": "warning", "path": "disbursements[20].detail_category", "page": 10,
+     "extracted": "Debt Services / Miscellaneous", "on_page": "Bad debt expense 657",
+     "issue": "Bad debt expense (uncollectible accounts) is not debt service. The detail_category comes from category_decisions.csv, but its wording suggests debt service"},
+    {"severity": "warning", "path": "disbursements[13].category", "page": 10,
+     "extracted": "Dues, Training and Travel", "on_page": "Transportation expenses 40,244",
+     "issue": "Utility 'Transportation expenses' are probably vehicle and fuel costs rather than travel. Judgment call"}
+  ]
+}
