@@ -1,0 +1,18 @@
+{
+  "stem": "Stromsburg_FY2023",
+  "values_checked": 366,
+  "issues": [
+    {"severity": "warning", "path": "receipts[8].category", "page": 5,
+     "extracted": "federal grants", "on_page": "Grants 259,650 = General Fund 43,966 + Other Funds 215,684 (CDBG 179,627, ARPA 36,057, p16)",
+     "issue": "The General Fund's 43,966 (Ambulance department grants, p18) has no stated grantor, and the Statement of Activities shows it as public-safety capital/operating grants. Calling the whole line federal assumes the grantor. detail[31] (Ambulance 'Grants' 43,966, federal grants) has the same problem."},
+    {"severity": "warning", "path": "detail[6].category", "page": 17,
+     "extracted": "Rentals (General), charges for services/fees (Police, Library, Compost Site), Rentals (Airport, Viking Center), Ambulance Fees (Ambulance), Cemetery Fees (Cemetery)", "on_page": "Rentals and fees: General 10,886; Police 900; Airport 4,204; Library 767; Ambulance 37,230; Cemetery 12,100; Viking Center 8,625; Compost Site 121",
+     "issue": "The same mixed label 'Rentals and fees' gets five different categories depending on the department. Using the department as context is defensible, but the mixed label (rent plus fees) has no printed breakdown, so these are judgment calls. The General department's 10,886 as Rentals is the least certain."},
+    {"severity": "warning", "path": "ending_cash", "page": 4,
+     "extracted": 753094, "on_page": "Cash and cash equivalents 753,094; County treasurer cash 9,178 (separate line, Total Governmental Funds)",
+     "issue": "ending_cash takes the 'Cash and cash equivalents' line only and leaves out county treasurer cash 9,178, which the user rules class as Cash and Cash Equivalents (the balance sheet has it as cash). Stratton_FY2023 includes county treasurer cash in ending_cash, so the treatment is inconsistent across reports. Confirm which is wanted."},
+    {"severity": "warning", "path": "detail[181].detail_category", "page": 7,
+     "extracted": "grants/payments to other entities", "on_page": "Payments in lieu of taxes (149,224) Electric; (63,899) Natural Gas (nonoperating)",
+     "issue": "category is Other Taxes Paid but detail_category is grants/payments to other entities (detail[181] Electric and detail[231] Natural Gas). The two disagree, and no detailed category fits exactly."}
+  ]
+}

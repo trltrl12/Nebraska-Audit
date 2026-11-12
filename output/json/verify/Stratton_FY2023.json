@@ -1,0 +1,24 @@
+{
+  "stem": "Stratton_FY2023",
+  "values_checked": 193,
+  "issues": [
+    {"severity": "warning", "path": "receipts[6]", "page": 5,
+     "extracted": "receipts[6..8]: Lease income 3,500 (p12) / Charges for services 1,100 (p13) / Charges for services 329 (p11)", "on_page": "p5 'Charges, admission, and rental fees' General 4,600 + Street 329 = 4,929; p10 General Fund budget schedule Charges for services 1,100 + Lease income 3,500 = 4,600; p12-13 Lease income 3,500 (General dept), Charges for services 1,100 (Cemetery dept); p11 Street Fund Charges for services 329",
+     "issue": "Confirmed: each piece is printed with its label (Lease income 3,500; Charges for services 1,100; Charges for services 329) and the pieces add exactly to 4,929. Questionable: no single schedule prints the breakdown of 4,929. It is put together from two fund schedules, and the 329 piece (receipts[8]) is also the Street Fund column cell of the parent row, which under the 2026-11-06 rule would keep the parent label 'Charges, admission, and rental fees'. The rule says statement receipts are not split by fund column. The split is defensible but needs review."},
+    {"severity": "warning", "path": "receipts[16].category", "page": 7,
+     "extracted": "intergovernmental/state aid", "on_page": "Grant income 2,040 (Sewer Fund, nonoperating); Statement of Activities p3 Capital Grants and Contributions 2,040",
+     "issue": "The grantor is not stated anywhere in the trim, and calling it state aid assumes a government grantor (user rule: do not guess a grantor). Detail line detail[78] is the same."},
+    {"severity": "warning", "path": "business_type.debt_proceeds", "page": 9,
+     "extracted": null, "on_page": "Sewer Fund capital and related financing: Grant proceeds 2,040; Proceeds from issuance of long-term debt 2,040; Payments on long-term debt (10,583)",
+     "issue": "Checked: the revenue statement (p7) prints only Grant income 2,040, while the cash flow prints both a 2,040 grant and a 2,040 debt issuance. Leaving the debt proceeds out of the net-position roll-forward is correct (1,457,126 + 669,995 - 654,174 = 1,472,947 ties), and the question is already in decision_needed[0]. Listed only so the person who settles it sees it."},
+    {"severity": "warning", "path": "ending_cash", "page": 4,
+     "extracted": 401149, "on_page": "Cash and cash equivalents 398,957 + County treasurer cash 2,192 = Total assets 401,149 (Total Governmental Funds)",
+     "issue": "ending_cash is a computed sum of two cash lines (marked computed, arithmetic correct, and equal to the printed Total assets), while beginning_cash is null. Under the 2026-11-06 ruling cash is filled only where printed. Stromsburg_FY2023 records only the 'Cash and cash equivalents' line, so the two reports are not consistent."},
+    {"severity": "warning", "path": "receipts[10].category", "page": 5,
+     "extracted": "donations/contributions", "on_page": "Grants and contributions 6,135; Statement of Activities: Operating Grants and Contributions 5,600 general government + 535 environment and leisure",
+     "issue": "This is a mixed grants/contributions label with no breakdown printed, so it stays one line. Whether it is donations or grants is a judgment call. Detail lines detail[4], detail[8] and detail[10] are the same."},
+    {"severity": "warning", "path": "detail[61].detail_category", "page": 7,
+     "extracted": "grants/payments to other entities", "on_page": "Franchise fees 41,060 (Electric Fund operating expense)",
+     "issue": "category is Other Taxes Paid but detail_category is grants/payments to other entities. The two disagree, and no detailed expenditure category fits exactly."}
+  ]
+}
