@@ -1,0 +1,38 @@
+{
+  "stem": "Greeley_County_FY2022",
+  "values_checked": 170,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "detail[1].category",
+      "page": 5,
+      "extracted": "other",
+      "on_page": "General Fund Local receipts 183,873",
+      "issue": "[fixed: charges for services per Exhibit A sum] Exhibit A (p1) prints General government charges for services 517,951, which is exactly General Fund Local 183,873 + Inheritance 328,529 + General Fund Other 5,530 + ARP 19. So the report itself counts this line as charges for services. The rule is 'if any category is more than half of it, use that category', and the same evidence was applied to Road and Bridge Local receipts (detail[58], charges for services). It should be charges for services/fees, not other."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[1].category",
+      "page": 2,
+      "extracted": "other",
+      "on_page": "Local receipts 565,460",
+      "issue": "Exhibit A (p1) counts the whole line in charges for services (571,009 = 565,460 + 5,530 + 19). However, 328,529 of it is the Inheritance Fund receipt that its schedule (p10) prints as 'Interest on taxes' (already in decision_needed). The evidence conflicts, so other is defensible pending the context check."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[53].original_label",
+      "page": 8,
+      "extracted": "Capital Outlay",
+      "on_page": "Noxious Weed Control - Capital outlay 1,973",
+      "issue": "The user rule labels every capital outlay line 'Capital Outlay: <function>' (here 'Capital Outlay: Natural Resources/Conservation'). It was left as plain 'Capital Outlay'."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[60].category",
+      "page": 9,
+      "extracted": "other",
+      "on_page": "Road and Bridge Other receipts 11,834",
+      "issue": "The printed label is 'Other', but Exhibit A (p1) counts the same 11,834 as Public Works operating grants and contributions. A grant category may fit."
+    }
+  ]
+}
