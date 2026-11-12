@@ -1,0 +1,30 @@
+{
+  "stem": "Bennington_FY2022",
+  "values_checked": 123,
+  "issues": [
+    {"severity": "warning", "path": "balance_sheet.equity", "page": 3,
+     "extracted": "no category field", "on_page": "Restricted for Debt service / Community betterment / Street improvements / Sewer utility / Tax incentive payments; Unassigned",
+     "issue": "all 6 equity lines lack a category (other reports use Restricted / Unassigned); amounts are correct"},
+    {"severity": "warning", "path": "receipts[5]", "page": 5,
+     "extracted": "Motor vehicle fees 15,577 + Intergovernmental 82,260 (split of 97,837)", "on_page": "p5 all-funds budget schedule prints Intergovernmental: Motor vehicle fees 97,837 (whole amount)",
+     "issue": "split follows the p6 departmental schedule (15,577 + Library 81,627 = GF 97,204) and the remainder is arithmetic-correct, but p5 labels the full 97,837 as motor vehicle fees; the report is inconsistent"},
+    {"severity": "warning", "path": "receipts[1].category", "page": 5,
+     "extracted": "sales tax 1,064,013", "on_page": "Local option sales tax 991,170 + Motor vehicle tax 72,843 = 1,064,013",
+     "issue": "p5 breaks the sales tax line into local option sales tax and 'Motor vehicle tax' 72,843 (likely motor vehicle sales tax); kept whole as sales tax"},
+    {"severity": "warning", "path": "receipts[3].category", "page": 4,
+     "extracted": "In Lieu of Tax", "on_page": "Occupation and in lieu taxes 43,695 (p5: In-lieu of tax 43,695)",
+     "issue": "mixed label; In Lieu based on the p5 budget schedule label. Same for detail[2]"},
+    {"severity": "warning", "path": "receipts[11].category", "page": 4,
+     "extracted": "donations/contributions", "on_page": "Grants and contributions 27,764",
+     "issue": "mixed label; grants vs donations not distinguishable. Same for detail[6], detail[13], detail[16]"},
+    {"severity": "warning", "path": "receipts[13].category", "page": 4,
+     "extracted": "licenses and permits", "on_page": "Licenses, fees, and permits 148,187 (Sewer column; p2 shows it as capital grants and contributions)",
+     "issue": "sewer fees counted as capital grants on the Statement of Activities (likely connection fees); category is a judgment call"},
+    {"severity": "warning", "path": "disbursements[6].original_label", "page": 4,
+     "extracted": "Capital outlay", "on_page": "Capital outlays 170,858 (General/Parks 9,600 + Capital Projects 161,258)",
+     "issue": "not labelled 'Capital Outlay: <function>' (mixed funds; Capital Projects function not printed)"},
+    {"severity": "warning", "path": "report_discrepancies", "page": 5,
+     "extracted": null, "on_page": "Budget schedule actual: total receipts 4,957,303, net change 833,876; Public works - sewer 404,468",
+     "issue": "p5 all-funds schedule does not agree with the p4 statement (receipts 4,525,540, change 402,113): it counts Tax increment financing 431,763 on top of property taxes, and its sewer line includes Keno 12,347. p5 is not recorded, but the report's internal disagreement isn't noted in report_discrepancies"}
+  ]
+}
