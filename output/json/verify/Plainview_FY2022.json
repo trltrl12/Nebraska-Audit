@@ -1,0 +1,39 @@
+{
+  "stem": "Plainview_FY2022",
+  "values_checked": 210,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "proprietary",
+      "page": 10,
+      "extracted": null,
+      "on_page": "Statement of Cash Flows - Proprietary Funds, Total column (pp9-12): net cash provided by operating activities 630,967; noncapital financing (transfers to other funds) (396,396); capital and related financing (71,894); investing (2,673); cash and cash equivalents beginning 401,183, end 561,187",
+      "issue": "The trimmed PDF prints a full proprietary cash flow statement, but proprietary is null (notes: 'proprietary cash flows (pp9-12) not recorded'). Pierce_FY2022 and Pilger_FY2022 have the same layout (modified cash governmental funds, accrual business-type) and both fill proprietary.",
+      "resolved": "proprietary left null to match FY2023/FY2024 Plainview (non-GAAP; same convention as other FY2022 reports)"
+    },
+    {
+      "severity": "warning",
+      "path": "ending_cash",
+      "page": 4,
+      "extracted": -47487,
+      "on_page": "Cash and cash equivalents (47,487); Certificate of deposits 13,067; Restricted cash and cash equivalents 1,576,122; County treasurer cash 11,937 (Total Governmental Funds)",
+      "issue": "ending_cash uses only the negative 'Cash and cash equivalents' row. Restricted cash 1,576,122 and county treasurer cash 11,937 are left out of every cash field, so governmental cash shows as negative even though the fund balance is 1,553,639. Defensible under the 'only where printed' rule, but misleading."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[78].category",
+      "page": 14,
+      "extracted": "sales tax",
+      "on_page": "Street Fund - Sales tax - motor vehicles 31,914",
+      "issue": "This is motor vehicle sales tax, which could be motor vehicle tax. The p5 statement prints the Street Fund's 31,914 in its 'Sales tax' row, so sales tax is defensible."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[60].category",
+      "page": 19,
+      "extracted": "streets/highways",
+      "on_page": "Handibus department (Salaries and benefits 10,237, Insurance 3,325, Operating supplies 3,688, Printing 2,190, Utilities 1,197)",
+      "issue": "Handibus is a transit service. The extractor followed the p5 statement, which counts the General Fund's 20,637 under Public works. Applies to detail[60]-detail[64]. Judgment call (Mass Transit is an existing category)."
+    }
+  ]
+}
