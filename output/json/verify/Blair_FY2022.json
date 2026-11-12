@@ -1,0 +1,24 @@
+{
+  "stem": "Blair_FY2022",
+  "values_checked": 231,
+  "issues": [
+    {"severity": "warning", "path": "receipts[9].category", "page": 5,
+     "extracted": "intergovernmental/state aid", "on_page": "Intergovernmental 903,281 = General 710,176 (of which American Rescue Plan Act Fund 698,394, p16) + Street 193,105",
+     "issue": "Federal ARPA money is 77% of the line, so the dominant-category rule points to federal grants. Left as state aid with a review note"},
+    {"severity": "warning", "path": "receipts[7].category", "page": 5,
+     "extracted": "special assessments", "on_page": "Special assessment interest 48,856; the Statement of Activities (p3) puts 48,856 in 'Unrestricted investment earnings'",
+     "issue": "The report treats this as investment earnings, so Interest Income (or Penalties and Interest on Taxes) may fit better than special assessments"},
+    {"severity": "warning", "path": "receipts[14].category", "page": 7,
+     "extracted": "other", "on_page": "Other 5,356,423 (Water 5,257,142, Sewer 99,281); p3 shows it as business-type 'Other income'",
+     "issue": "Unexplained operating 'Other' is 31% of business-type receipts and 38% of Water operating revenue. 'other' is allowed by the printed label, but the size may need a person to check what it is"},
+    {"severity": "warning", "path": "disbursements[8].original_label", "page": 5,
+     "extracted": "Capital Outlay", "on_page": "Capital Outlay 46,973 (General Fund column)",
+     "issue": "The user rule labels capital outlay 'Capital Outlay: <function>'. No function is printed (General Fund sub-fund, p16), so the bare label was kept"},
+    {"severity": "warning", "path": "disbursements[11].category", "page": 5,
+     "extracted": "other", "on_page": "Keno expense 30,812 (Keno Fund; Statement of Activities function 'Keno')",
+     "issue": "Spending in other although the report prints its own function (Keno). A specific or new category may fit better than other"},
+    {"severity": "warning", "path": "disbursements[18].category", "page": 7,
+     "extracted": "utilities", "on_page": "Operating expenses 1,396,465 (proprietary cost-type list)",
+     "issue": "Other business-type cost-type lines carry their cost type as category with function 'utilities'. This line is 'utilities' with no function field, so it is inconsistent with them; 'Operating' (user 2026-10-29) may apply"}
+  ]
+}

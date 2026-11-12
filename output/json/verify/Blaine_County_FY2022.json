@@ -1,0 +1,39 @@
+{
+  "stem": "Blaine_County_FY2022",
+  "values_checked": 75,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "detail[4].category",
+      "page": 5,
+      "extracted": "other",
+      "on_page": "Local 56,035; p4 (Exhibit D) General column: Charges for Services 47,149, Interest 4,610, Miscellaneous 2,968",
+      "issue": "Broad 'Local' line put in other, but the report's own General Fund column shows charges for services are 84% of it. Under the extractor rule (more than half, use that category) it should be charges for services/fees with a review note naming the mix. The line also has no category_decision (context label)",
+      "resolved": "'Local' is a context label: stays other until the context check (CLAUDE.md 2026-11-05 rule)"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[26].category",
+      "page": 7,
+      "extracted": "other",
+      "on_page": "Local 2,947 = p4 Road column Charges for Services 1,692 + Miscellaneous 1,255 (exact)",
+      "issue": "Charges for services are 57% of the line, so the 'more than half' rule points to charges for services/fees. 'Local' is a context label, so this may be left to the context check"
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[2].category",
+      "page": 4,
+      "extracted": "streets/highways",
+      "on_page": "Public Works 529,688 = General Fund 14,595 (Noxious Weed, p5) + Road 515,093",
+      "issue": "Statement line includes 14,595 of noxious weed spending (natural resources/conservation under the user's rule); streets/highways is the dominant part, so this is defensible"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[30].category",
+      "page": 8,
+      "extracted": "inheritance tax",
+      "on_page": "Local 30,340 (Inheritance Tax budget schedule); p4 prints the same amount as 'Inheritance Tax'",
+      "issue": "Printed 'Local' on the schedule. The user rule (2026-11-06) keeps Inheritance Tax Fund 'Local fees...' receipts as printed. Here the p4 statement prints an Inheritance Tax row for the same money, so inheritance tax is defensible, but check it against that ruling"
+    }
+  ]
+}
