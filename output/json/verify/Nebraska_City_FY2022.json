@@ -1,0 +1,21 @@
+{
+  "stem": "Nebraska_City_FY2022",
+  "values_checked": 164,
+  "issues": [
+    {"severity": "warning", "path": "missing", "page": 11,
+     "extracted": null, "on_page": "LB840 Funds schedule: Sales tax transfer from City 280,007; Program income 141,275; Investment income 136; Loans 242,987; Grants 257,900; Administration 1,563",
+     "issue": "schedule lines not in detail. They look like a subset of the Economic Development Fund (investment income 136 matches), so adding them would double count. The extractor already raised this in decision_needed, so it is not counted as an error"},
+    {"severity": "warning", "path": "receipts[7].category", "page": 2,
+     "extracted": "other", "on_page": "Statement of Activities general revenues: American Rescue Plan Act stimulus funding 645,297",
+     "issue": "Grant income 1,125,674 (p4) includes ARPA funding of 645,297 (federal), printed on p2. That is 645,297 + operating grants 187,743 + capital grants 365,721 = 1,198,761, which equals grant income plus donations 73,087. The non-ARPA part can't be isolated exactly, so the whole line stays other/Grants under the FY2022 rule. Judgment call"},
+    {"severity": "warning", "path": "ending_cash", "page": 3,
+     "extracted": 11107398, "on_page": "Balance Sheet - Cash Basis, Total assets 11,107,398 (Cash and investments 11,043,607 + Cash at county treasurer 63,791)",
+     "issue": "ending cash is taken from the Total assets line (all cash), and beginning_cash is null. Under the 2026-11-06 ruling cash is filled only where printed; this is defensible but should be confirmed"},
+    {"severity": "warning", "path": "detail[25].original_label", "page": 9,
+     "extracted": "Capital Outlay: Streets/Highways", "on_page": "Capital outlay",
+     "issue": "the function is inferred from the fund name (computed is set). The 2026-11-12 FY2022 ruling says to add the function only when printed"},
+    {"severity": "warning", "path": "balance_sheet.equity[9].original_label", "page": 3,
+     "extracted": "Restricted: Capital projects", "on_page": "Restricted for Capital projects",
+     "issue": "label wording differs from the printed label and from the sibling lines ('Restricted for: ...')"}
+  ]
+}
