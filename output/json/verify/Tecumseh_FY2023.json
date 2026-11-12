@@ -1,0 +1,23 @@
+{
+  "stem": "Tecumseh_FY2023",
+  "values_checked": 143,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "detail[29]",
+      "page": 10,
+      "extracted": "LB840 Fund lines detail[29]-detail[35]: receipts 161,302 (as other financing) + 5,832 + 49,384 + 10,156; spending 46,290 + 69,298 + 3,850",
+      "on_page": "Schedule of Receipts and Disbursements - LB840 Funds (p10); the governmental funds statements (pp3-4) have only General Fund and Debt Service Fund columns",
+      "issue": "Double counting across schedules. The LB840 Funds have no column of their own, so they sit inside the General Fund, and the General Fund budget schedule (p8, detail[0]-detail[19]) already includes their money. General Fund Economic development 116,371 = LB840 Grants 46,290 + Administration 69,298 + 783, and LB840 investment income, program income and property-sale proceeds fall inside the General Fund's Investment income 90,186 and Miscellaneous receipts 99,390. As entered, detail by fund counts 65,372 of receipts and 119,438 of spending twice. The 'Sales tax transfer from City' 161,302 is a movement inside the General Fund (no fund prints a matching 161,302 transfer out), so it is an extra one-sided transfer. Fix: drop the LB840 lines from detail, or mark them clearly as a sub-schedule of the General Fund that is not added to the fund totals.",
+      "resolved": "LB840 sub-schedule removed from detail (inside General Fund schedule)"
+    },
+    {
+      "severity": "warning",
+      "path": "decision_needed",
+      "page": 10,
+      "extracted": null,
+      "on_page": "Sales tax transfer from City 161,302",
+      "issue": "One-sided transfer: no fund prints a matching transfer out (General Fund transfers out are 94,646, all to Debt Service 77,422 and Utilities 17,224). decision_needed[] has no entry for it (only a review note)."
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "stem": "Tekamah_FY2023",
+  "values_checked": 99,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "report_discrepancies[0]",
+      "page": 6,
+      "extracted": "Net income before operating transfers Total printed 8,756 vs 8,755 (difference 1)",
+      "on_page": "Water: Debt service (82,083) + Capital outlay (189,483) + Grants 54 = (271,512), but Total nonoperating printed (271,513); Total column (128,779) + (200,253) + 54 = (328,978), but printed (328,979); Water net income printed (209,420) vs 433,818 - 371,725 - 271,512 = (209,419)",
+      "issue": "The report's rounding gap is recorded at the wrong line, and the real gaps are not recorded. The printed Total 8,756 is correct (810,449 - 801,693 = 8,756; the Statement of Activities p2 also prints Water (209,419) and Total 8,756). The 1-dollar gaps are in the Water and Total 'Total nonoperating revenues (expenses)' lines and in Water net income (209,420). Fix: replace this entry with entries for Water nonoperating total (difference -1), Total nonoperating (difference -1) and Water net income before transfers (difference -1). Entries [1] (net income (94,150) vs (94,149)) and [2] (ending 871,537 vs 871,536) are correct. Digits re-read: 82,083 + 46,696 = 128,779 and 189,483 + 10,770 = 200,253 tie to the Total column, and 371,725 + 82,083 + 189,483 = 643,291 ties to p2.",
+      "resolved": "fixed as described"
+    },
+    {
+      "severity": "error",
+      "path": "receipts[10].category",
+      "page": 4,
+      "extracted": "Loan Proceeds",
+      "on_page": "Loan proceeds 48,000 (General Fund, printed among Cash Receipts)",
+      "issue": "'loan proceeds' is an apply=context label in config/category_decisions.csv. Under the context-label rule it must stay category other until the context check settles it from the page (the 2026-11-06 ruling would then give Loan Proceeds, since the line is printed among receipts).",
+      "resolved": "fixed as described"
+    },
+    {
+      "severity": "error",
+      "path": "detail[10].category",
+      "page": 4,
+      "extracted": "Loan Proceeds (detail_category Loan Proceeds)",
+      "on_page": "Loan proceeds 48,000",
+      "issue": "Same context label as receipts[10]: must stay category other. 'Loan Proceeds' is also not a name on the detailed revenue list.",
+      "resolved": "fixed as described"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[9].category",
+      "page": 4,
+      "extracted": "charges for services/fees",
+      "on_page": "LB840 receipts 11,087",
+      "issue": "LB840 program receipts are often repayments on LB840 loans (Loan Repayments). The Statement of Activities (p2) puts them under Fees, Fines and Charges for Services, so the current category is defensible."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[7].category",
+      "page": 4,
+      "extracted": "donations/contributions",
+      "on_page": "Grants & contributions 23,134",
+      "issue": "Mixed grants/contributions label with no printed breakdown. p2 shows operating grants of 1,047 (Public Health & Safety) and 21,366 (Culture & Recreation); the grantor is not printed. The category choice is a judgment call."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[15].category",
+      "page": 6,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "Grants 54 (Water, nonoperating)",
+      "issue": "The grantor is not printed. The 2026-11-06 ruling says not to guess a grantor, so state aid is an assumption. Same for detail[27]."
+    }
+  ]
+}
