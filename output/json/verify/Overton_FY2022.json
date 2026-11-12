@@ -1,0 +1,21 @@
+{
+  "stem": "Overton_FY2022",
+  "values_checked": 140,
+  "issues": [
+    {"severity": "warning", "path": "receipts[2]", "page": 11,
+     "extracted": {"category": "taxes", "amount": 35040}, "on_page": "County treasurer schedule: Homestead exemption 9,500; Prorate 628; In-lieu-of taxes 16,549; Carline tax 812; Interest 899; State tax credit 8,450; less Collection fee 1,798",
+     "issue": "the remainder 35,040 is kept as one 'taxes' line although p11 prints its full breakdown (reconciles exactly: 36,838 - 1,798 = 35,040); much of it is not tax (homestead, pro-rate, state tax credit). Keeping it unsplit is defensible because the collection fee is netted, but it could be split"},
+    {"severity": "warning", "path": "receipts[8].category", "page": 5,
+     "extracted": "Utility Charges", "on_page": "Licenses and fees 45,543 (General 2,338; Fire and Ambulance 7,548; Other Governmental 35,657)",
+     "issue": "the printed label is 'Licenses and fees' but the category is Utility Charges (Trash Fund charges 35,657 dominate, per p10 and p2); mixed line kept unsplit with a review note, so this is a judgment call"},
+    {"severity": "warning", "path": "transfers_in", "page": 10,
+     "extracted": 76449, "on_page": "Nonmajor transfers: Police (3,460); Cemetery 18,596; Street Light 8,673; Library 4,552; Park 47,924; Debt Service 164",
+     "issue": "transfers_in/transfers_out are the net fund-column figures from p6 (Other Governmental Funds 76,449); gross transfers are 79,909 in and 79,909 out (Police Fund's 3,460 out is netted inside the Other Governmental column). The roll-forward is unaffected"},
+    {"severity": "warning", "path": "detail[33].detail_category", "page": 10,
+     "extracted": "utilities (power, gas, phone)", "on_page": "Street Light Fund - Public works - other 25,507",
+     "issue": "object assumed from the fund name; the page prints only the function, so 'not itemized' would be the literal choice"},
+    {"severity": "warning", "path": "disbursements[0..2]", "page": 2,
+     "extracted": "General government 147,695; Public safety 56,697; Public works - street 77,113 (p5)", "on_page": "p2 Statement of Activities: 147,697; 56,696; 77,112 (same total 563,440)",
+     "issue": "the report's own government-wide and fund statements differ by 1-2 dollars of rounding on three functions (noted in notes but not in report_discrepancies); the extraction correctly uses p5"}
+  ]
+}
