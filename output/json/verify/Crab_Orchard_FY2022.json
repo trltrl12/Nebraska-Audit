@@ -1,0 +1,12 @@
+{
+  "stem": "Crab_Orchard_FY2022",
+  "values_checked": 70,
+  "issues": [
+    {"severity": "warning", "path": "disbursements[5].fund_type", "page": 3,
+     "extracted": "governmental", "on_page": "Line 45 Solid Waste 5,262.00 and line 48 Water 5,986.00, General Fund column, under the 'Business-Type Activities' heading",
+     "issue": "Business-type spending lines were tagged governmental because they are printed in the General Fund column. This is defensible (the column decides, as in FY2023), but it is a judgment call. The same applies to disbursements[6] and detail[13]/detail[14]."},
+    {"severity": "warning", "path": "reported_totals.business-type.receipts.includes", "page": 1,
+     "extracted": "[] (includes_split [6002])", "on_page": "Line 21 Enterprise Total Receipts 275,176.00 = State Receipts: Other 269,174.00 + line 20 Transfers In 6,002.00",
+     "issue": "The printed total includes the 6,002 transfer in, but `includes` is empty. The business-type receipt lines sum to 269,174, so a total-check may report a 6,002 gap unless includes_split is honoured."}
+  ]
+}
