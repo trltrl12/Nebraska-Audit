@@ -1,0 +1,10 @@
+{
+  "stem": "Lyman_FY2022",
+  "values_checked": 187,
+  "issues": [
+    {"severity": "warning", "path": "ending_cash", "page": 3, "extracted": null, "on_page": "Cash 145,129; Certificates of deposit 172,548; Cash held by county treasurer 1,422; TOTAL ASSETS 319,099 (Total Governmental Funds)", "issue": "ending_cash is null, but ending_investments (172,548) is filled from the same statement and the governmental Cash line 145,129 is printed. The statement rolls forward fund balance, not cash, so null is defensible (the other Lyman years are also null). However, filling investments but not cash is inconsistent."},
+    {"severity": "warning", "path": "disbursements[6].category", "page": 6, "extracted": "Professional/Contract Services", "on_page": "Purchased services 384,493 (Electric 315,970, Water 24,410, Garbage 44,113)", "issue": "The Electric fund's 315,970 is probably purchased power (Purchased Power/Cost of Sales), not professional services. The label alone doesn't settle it. The same applies to detail[66]."},
+    {"severity": "warning", "path": "detail[37].category", "page": 11, "extracted": "other", "on_page": "General Fund 'Other' department column, 82,546 total", "issue": "detail[37]-[46] put the 'Other' department's spending in category other. By p4, that 82,546 is public safety 39,748 + culture/recreation 30,938 + economic development 11,860, so no single function fits. Category other is defensible but is a judgment call."},
+    {"severity": "warning", "path": "detail[50].detail_category", "page": 10, "extracted": "other state aid", "on_page": "Highway incentive 600 (Street Fund)", "issue": "This could be detail_category highway allocation (a state highway incentive payment in the Street Fund)."}
+  ]
+}
