@@ -1,0 +1,18 @@
+{
+  "stem": "Dalton_FY2022",
+  "values_checked": 69,
+  "issues": [
+    {"severity": "warning", "path": "beginning_cash", "page": 1,
+     "extracted": 217158.15, "on_page": "Net Cash Balance 118,500.12 + 34,229.18 = 152,729.30; Subtotal of Beginning Balance (cash + investments) 217,158.15",
+     "issue": "beginning_cash/ending_cash hold the line 3 / line 24 subtotals that include investments, while beginning_investments/ending_investments (64,428.85 / 64,536.21) are recorded separately, so investments appear in both fields. Printed net cash is 152,729.30 beginning and 187,425.99 ending. Consistent with the extractor's FY2023 convention, but questionable under the 'cash is never derived' ruling."},
+    {"severity": "warning", "path": "receipts[11].category", "page": 1,
+     "extracted": "other", "on_page": "Local Receipts: Other 172,133.92 (Water, Sewer, Trash Fund)",
+     "issue": "100% of business-type receipts are in other. It is a context label and the page gives no breakdown, but in a utility fund it is almost certainly utility charges; needs the context check."},
+    {"severity": "warning", "path": "disbursements[3].fund_type", "page": 2,
+     "extracted": "business-type", "on_page": "Debt Service 19,887.58 under the 'Governmental:' heading, Water, Sewer, Trash Fund column",
+     "issue": "Recorded as business-type based on the fund column despite the governmental heading; the debt schedule (p3, USDA-DEQ, Well Repair) supports utility debt. Judgment call."},
+    {"severity": "warning", "path": "disbursements[2].category", "page": 2,
+     "extracted": "economic development", "on_page": "Community Development 1,682.56",
+     "issue": "No description printed; the user rule sends 'Community development/betterment' to Community Betterment, so plain 'Community Development' could also be Community Betterment."}
+  ]
+}
