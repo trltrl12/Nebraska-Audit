@@ -1,0 +1,25 @@
+{
+  "stem": "Ewing_FY2022",
+  "values_checked": 164,
+  "issues": [
+    {"severity": "warning", "path": "receipts[17].category", "page": 5,
+     "extracted": "other", "on_page": "Other revenues 19,623 (General 19,008 + Street 615); p12 prints General Fund Donations 1,850 + Other 17,158",
+     "issue": "Kept whole in other although p12 prints Donations 1,850 inside it; the extractor split the neighbouring Intergovernmental - other row by its p12 rows but not this one. Printed label says Other, so not an error, but inconsistent."},
+    {"severity": "warning", "path": "disbursements[6].category", "page": 5,
+     "extracted": "Community Betterment", "on_page": "Community Development 22,882 (Keno 4,231 + Other Governmental 18,651)",
+     "issue": "Statement line is labelled Community Development (not community betterment); 18,651 of it is the Housing Rehabilitation Fund, which detail[63] categorizes as economic development. Statement and detail categories disagree."},
+    {"severity": "warning", "path": "receipts[13].category", "page": 5,
+     "extracted": "Rentals", "on_page": "Public Power District lease payments 38,834",
+     "issue": "Lease of the electric system to the public power district; Rentals is a judgment call (also the per-column detail lines on p12)."},
+    {"severity": "warning", "path": "disbursements[4].category", "page": 5,
+     "extracted": "utilities", "on_page": "Public Works 7,130 (= Dump column p12)",
+     "issue": "Governmental Public Works (dump) put in utilities; defensible but could be health/welfare or a sanitation category."},
+    {"severity": "warning", "path": "business_type.other_financing", "page": 8,
+     "extracted": 98835, "on_page": "CAPITAL CONTRIBUTIONS 98,835 (p2: Water capital grants and contributions; p9: Grants received)",
+     "issue": "Capital grant recorded as other_financing rather than a business-type receipt; amount correct, treatment is an assumption."},
+    {"severity": "warning", "path": "detail[64]", "page": 11,
+     "extracted": "Budgetary Comparison Schedule - All Funds lines (Streets and Highways, Sanitation, Wastewater, Water, Debt service principal/interest)",
+     "on_page": "All-funds budget schedule p11 (budgetary basis; Water 286,266 includes capital purchases, excludes depreciation)",
+     "issue": "Detail mixes per-fund combining schedules with selected lines from the combined all-funds budget schedule (expenditure lines only; no Street or business-type revenue lines, no detail_totals). Budgetary-basis business-type lines differ from the proprietary statement amounts. Amounts match the page; the selective use is an assumption (detail[64]-[69])."}
+  ]
+}

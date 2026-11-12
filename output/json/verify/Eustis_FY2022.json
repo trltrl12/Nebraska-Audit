@@ -1,0 +1,18 @@
+{
+  "stem": "Eustis_FY2022",
+  "values_checked": 96,
+  "issues": [
+    {"severity": "warning", "path": "detail[6].category", "page": 9,
+     "extracted": "general government", "on_page": "General column object lines; statement p5 General column = General government 115,817 + Public safety 38,712 + Culture and recreation 12,517 + Capital outlay 10,331",
+     "issue": "All General (non-Library) object lines except Contracted services and Capital outlay are tagged general government (sum 123,317), but the statement puts 115,817 in general government and 7,500 in culture and recreation (12,517 - Library 5,017). Function split is not printed by object, so this is an approximation (affects detail[6]-[8], [10]-[13])."},
+    {"severity": "warning", "path": "disbursements[9].category", "page": 7,
+     "extracted": "Supplies and Materials", "on_page": "Supplies and repairs 146,377",
+     "issue": "Mixed label 'Supplies and repairs'; could equally be Repairs and Maintenance (also detail[40], and governmental detail[12], [18], [26])."},
+    {"severity": "warning", "path": "detail[41].detail_category", "page": 10,
+     "extracted": "tax refunds/treasurer fees", "on_page": "Sales tax 5,935 (Water and Sewer disbursement)",
+     "issue": "Sales tax remitted by the utility is not a tax refund or treasurer fee; category Other Taxes Paid is fine but the detail_category is a poor fit."},
+    {"severity": "warning", "path": "disbursements[7].category", "page": 7,
+     "extracted": "utilities", "on_page": "Utilities 17,783 (Water and Sewer operating disbursements)",
+     "issue": "Cost-type rule: this is the utility bill cost type (power/gas/phone), but the category 'utilities' is the same name as the function, so it is indistinguishable from function lines in the workbook."}
+  ]
+}
