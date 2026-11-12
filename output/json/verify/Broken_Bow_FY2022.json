@@ -1,0 +1,38 @@
+{
+  "stem": "Broken_Bow_FY2022",
+  "values_checked": 158,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "receipts[18].category",
+      "page": 8,
+      "extracted": "other",
+      "on_page": "Other grants 358,503 (under Grants and contributions)",
+      "issue": "[fixed: detail_category Grants; category other (no grantor printed, user 2026-11-12)] A grant line is put in 'other'. The page prints it as a grant (Statement of Activities p3 counts it in Operating/Capital Grants and Contributions: 358,503 + Donations 32,449 = 81,489 + 309,463). The category 'Grants' is already in use for revenue (config/category_decisions.csv, e.g. 'other categorical grants' -> Grants), so 'other' is not the last resort here."
+    },
+    {
+      "severity": "error",
+      "path": "detail[18].category",
+      "page": 8,
+      "extracted": "other",
+      "on_page": "Other grants 358,503 (General column)",
+      "issue": "[fixed: detail_category Grants; category other (no grantor printed, user 2026-11-12)] Same as receipts[18]: grant line in 'other' / 'miscellaneous revenue' when the existing 'Grants' category fits."
+    },
+    {
+      "severity": "warning",
+      "path": "decision_needed",
+      "page": 15,
+      "extracted": null,
+      "on_page": "Second proprietary Statement of Revenues, Expenses and Changes in Net Position (report p53): Charge for services 12,613,972, total operating expenses 10,826,473, net position 19,742,497 -> 21,286,551; p11 (modified cash basis) prints 13,056,402, 10,699,816, 18,352,565 -> 20,465,706",
+      "issue": "The report holds two conflicting proprietary operating statements for the same year. The extraction uses p11 (it ties to the Statement of Activities and Statement of Net Position) and says so in notes, but there is no decision_needed entry asking which statement is right."
+    },
+    {
+      "severity": "warning",
+      "path": "ending_cash",
+      "page": 5,
+      "extracted": 8851348,
+      "on_page": "No total cash line printed; sum of Cash and certificates of deposit 7,456,279 + Cash at county treasurer 37,224 + Restricted cash and CDs 1,343,028 + Restricted cash at county treasurer 14,817",
+      "issue": "Arithmetic correct and marked computed, but ending_cash is a derived sum (user 2026-11-06: cash filled only where printed, never derived); it also includes certificates of deposit."
+    }
+  ]
+}

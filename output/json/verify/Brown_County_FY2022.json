@@ -1,0 +1,62 @@
+{
+  "stem": "Brown_County_FY2022",
+  "values_checked": 183,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "receipts[6].category",
+      "page": 5,
+      "extracted": "other",
+      "on_page": "Grants 83,327",
+      "issue": "[fixed: detail_category Grants; category other (no grantor printed, user 2026-11-12)] A line printed 'Grants' is put in 'other'. The category 'Grants' is already in use for revenue (config/category_decisions.csv, e.g. 'other categorical grants' -> Grants), so 'other' is not the last resort here."
+    },
+    {
+      "severity": "error",
+      "path": "detail[5].category",
+      "page": 6,
+      "extracted": "other",
+      "on_page": "Grants 83,327 (General Fund budget schedule, Actual)",
+      "issue": "[fixed: detail_category Grants; category other (no grantor printed, user 2026-11-12)] Same as receipts[6]: 'Grants' line in 'other' / 'miscellaneous revenue' when the existing 'Grants' category fits."
+    },
+    {
+      "severity": "warning",
+      "path": "balance_sheet.equity[13]",
+      "page": 4,
+      "extracted": "Assigned for: Wireless E911 574,176; Assigned for: COVID ARP 19,385 (equity[14])",
+      "on_page": "p4 prints Wireless E911 574,176 and COVID ARP 19,385, but the combining statement (pp9-10) and budget schedules (pp16-17) give COVID ARP ending 574,176 and Wireless 911 ending 19,385",
+      "issue": "Kept as printed (correct under the as-printed rule), and mentioned in notes, but the report's own swapped labels are not recorded in report_discrepancies."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[68].category",
+      "page": 10,
+      "extracted": "streets/highways",
+      "on_page": "Wireless 911: Public Works 24,298",
+      "issue": "Inconsistent with detail[51] and detail[54] (E911 5,823 and Diversion 881, also printed in the Public Works row) which were given public safety; a 911 fund's spending is public safety in substance, while the printed row and the Total Nonmajor column count Wireless 911 in Public Works. Judgment call; pick one treatment."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[51].category",
+      "page": 8,
+      "extracted": "public safety",
+      "on_page": "E911 Fund: Public Works 5,823 (Diversion detail[54]: Public Works 881)",
+      "issue": "Category differs from the printed row (Public Works); justified by the Total Nonmajor column (Public Safety 6,704, p10), and the report's own inconsistency is in report_discrepancies. Category vs label mismatch for review."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[3].category",
+      "page": 5,
+      "extracted": "charges for services/fees",
+      "on_page": "Fees and Fines 350,079",
+      "issue": "Mixed label (fees and fines) with no printed breakdown; charges for services/fees is defensible (county fees of office likely dominant) but 'Fines and Licenses' / 'Fees of Office' are alternatives. Same for detail[2]."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[70].category",
+      "page": 10,
+      "extracted": "general government",
+      "on_page": "Highway Bond: General 127,177 (funded by Transfers in 127,177 from Emergency Road Fund)",
+      "issue": "Printed in the General row, so general government follows the page, but a Highway Bond fund's spending is probably bond payments (debt service). Judgment call."
+    }
+  ]
+}
