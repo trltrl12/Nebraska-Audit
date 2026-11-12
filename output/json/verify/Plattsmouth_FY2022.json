@@ -1,0 +1,21 @@
+{
+  "stem": "Plattsmouth_FY2022",
+  "values_checked": 242,
+  "issues": [
+    {"severity": "warning", "path": "receipts[6].category", "page": 5,
+     "extracted": "taxes", "on_page": "Debt Service Taxes 426,414 (p5); Statement of Activities Property taxes 1,847,245 (p3)",
+     "issue": "Subtraction reconciles exactly: SOA Property taxes 1,847,245 - General Fund property 1,103,299 - motor vehicle 128,384 - occupation 189,148 (p13) = 426,414, so the statements arguably establish the Debt Service fund taxes as property tax. Extractor left it unlabeled because the SOA 'Property taxes' line also holds the General Fund motor vehicle and occupation taxes. Judgment call."},
+    {"severity": "warning", "path": "receipts[23].category", "page": 9,
+     "extracted": "Utility Charges", "on_page": "Charges for service 2,239,149 (Water 1,075,844, Sewer 1,097,443, Impact Fees 65,862)",
+     "issue": "Total includes the Impact Fees fund 65,862, which is not a utility charge; category covers the whole line."},
+    {"severity": "warning", "path": "disbursements[14].category", "page": 9,
+     "extracted": "other", "on_page": "Administrative and general 331,062",
+     "issue": "Utility cost-type line placed in other; no more specific cost type printed. Governmental detail uses 'miscellaneous expenditure' for the same label. Acceptable but goes to review."},
+    {"severity": "warning", "path": "detail[53].category", "page": 15,
+     "extracted": "culture/recreation", "on_page": "Cemetery (under Culture and Recreation)",
+     "issue": "Cemetery (detail[53]-[57]) and Senior Citizen Center (detail[67]-[70]) follow the report's Culture and Recreation grouping; the category list puts cemetery and senior services under health/welfare. Defensible as printed."},
+    {"severity": "warning", "path": "ending_cash", "page": 4,
+     "extracted": 3277019, "on_page": "Cash and cash equivalents 3,277,019; Cash at county treasurer 46,739; restricted cash 1,253,374 (Total Governmental Funds)",
+     "issue": "ending_cash takes only the Cash and cash equivalents line; county treasurer cash and restricted cash are excluded. The rules allow this, but total governmental cash is 4,577,132."}
+  ]
+}
