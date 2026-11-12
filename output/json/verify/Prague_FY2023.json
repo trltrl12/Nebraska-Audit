@@ -1,0 +1,68 @@
+{
+  "stem": "Prague_FY2023",
+  "values_checked": 209,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "report_discrepancies",
+      "page": 15,
+      "extracted": "not recorded",
+      "on_page": "Office supplies Total 1,236; fund cells 957 + 85 + 106 + 87 = 1,235",
+      "issue": "The proprietary schedule's Office supplies Total column is 1 higher than its fund cells (it offsets the recorded Salaries -1 gap). This rounding gap in the report is not in report_discrepancies. Add {check: detail, difference: 1, source_page: 15}.",
+      "resolved": "report_discrepancies entry added"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[79..129].category",
+      "page": 15,
+      "extracted": "utilities",
+      "on_page": "Electric/Sewer/Water cost-type rows (Salaries, Payroll taxes, Insurance, Utilities purchased...)",
+      "issue": "Business-type utility spending listed by cost type should take the cost type as its category (Salaries and Wages, Insurance, Purchased Power/Cost of Sales...) with function utilities. The JSON leaves them as category utilities. scripts/user_rules.py converts them mechanically, so confirm that it runs. Capital outlay and debt rows are correct as they are."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[63].amount, detail[129].amount, detail[140].amount",
+      "page": 13,
+      "extracted": [
+        195499,
+        26985,
+        2553
+      ],
+      "on_page": "Transfers out 195,499 (p13); Water 26,985 and Apartments 2,553 (p15), printed without parentheses",
+      "issue": "These are kept positive as printed under 'Transfers out', but the signed convention makes outflows negative. Their signs are consistent with the printed proprietary total (65,142). None of the transfers are in any ending balance, and decision_needed already covers this."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[17].category",
+      "page": 7,
+      "extracted": "Utility Charges",
+      "on_page": "Sewer 367,115 (= Charges for services 31,847 + Deposits 335,268, p14)",
+      "issue": "The statement line is Utility Charges, as printed under Charges for services. The detail line Deposits 335,268 (a context label) is category other, so the same money has two categories. decision_needed already asks about it."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[14].category",
+      "page": 12,
+      "extracted": "Sale of Property",
+      "on_page": "Product sold 869",
+      "issue": "'Product sold' in the Street Fund may be materials sold (charges for services) rather than sale of property. Same for the detail line (detail[43])."
+    },
+    {
+      "severity": "warning",
+      "path": "detail (all Vehicle expense lines).detail_category",
+      "page": 11,
+      "extracted": "repairs and maintenance",
+      "on_page": "Vehicle expense",
+      "issue": "Vehicle expense may be mostly fuel. The object is not printed, so repairs and maintenance is a judgment call."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[31].detail_category",
+      "page": 11,
+      "extracted": "professional/contract services",
+      "on_page": "Garbage clean up day 872",
+      "issue": "No object is printed for this line, so the category is an assumption."
+    }
+  ],
+  "notes": "15 of 15 trimmed pages read; extraction notes end 'Read pages 1-15 of 15'. All statement and schedule lines are present: the p8-9 all-funds budget schedule is not in detail because every fund has a more detailed departmental schedule. Every list ties to its printed totals; governmental 461,699 + 240,844 - 383,977 = 318,566; business-type 467,780 + 776,921 - 709,544 = 535,157. FY2024 JSON: beginning fund balance 318,566 and business-type beginning 535,157 equal the FY2023 endings."
+}

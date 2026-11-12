@@ -1,0 +1,28 @@
+{
+  "stem": "Ralston_FY2023",
+  "values_checked": 134,
+  "issues": [
+    {"severity": "warning", "path": "detail[44].category, detail[45].category, disbursements[13].category, disbursements[14].category", "page": 6,
+     "extracted": "Depreciation / Repairs and Maintenance (no function on the Arena lines or the statement lines)", "on_page": "Arena Fund Depreciation 935,414, Repairs and maintenance 330,276; Total column 955,179 / 381,195 (Sewer + Arena)",
+     "issue": "The cost-type category rule is for utility spending. The Arena is not a utility, so its lines could keep the function culture/recreation (detail_category depreciation / repairs and maintenance). If the cost type is kept, the Arena and statement lines have no 'function' field, unlike the Sewer lines (function utilities)."},
+    {"severity": "warning", "path": "disbursements[12].category", "page": 6,
+     "extracted": "culture/recreation", "on_page": "General and administrative 854,959 (Sewer 453,857 + Arena 401,102)",
+     "issue": "The Total-column line mixes a utility fund and the Arena. Category culture/recreation is a judgment call (already marked review)."},
+    {"severity": "warning", "path": "receipts[6].category", "page": 4,
+     "extracted": "donations/contributions", "on_page": "Grants and donations 92,162 (Statement of Activities: Operating Grants and Contributions, General government, p2)",
+     "issue": "This mixed label has no printed breakdown, so it is kept as one line as the ruling says. Which category it takes (grants vs donations) is a judgment call. Same for detail[5]."},
+    {"severity": "warning", "path": "receipts[5].category", "page": 4,
+     "extracted": "licenses and permits", "on_page": "Permits and fees 506,094",
+     "issue": "This is a mixed label. The Statement of Activities counts it in General government Charges for Services (900,044 = 393,950 + 506,094, p2), so charges for services is also defensible."},
+    {"severity": "warning", "path": "receipts[12].category", "page": 6,
+     "extracted": "charges for services/fees", "on_page": "Facility use revenue 265,213 (Arena Fund)",
+     "issue": "Arena facility use revenue may fit the Rentals category. This is a judgment call; same for detail[33]."},
+    {"severity": "warning", "path": "ending_cash", "page": 3,
+     "extracted": 4119115, "on_page": "Cash and cash equivalents 4,119,115; Cash and investments held with trustee 1,694,352 (Community Development Fund)",
+     "issue": "ending_cash leaves out the trustee-held cash and investments (1,694,352). That amount is only on the balance sheet, as restricted assets, and the notes explain this. The governmental cash measure is 5,813,467 if the trustee balance is counted."},
+    {"severity": "warning", "path": "detail (General Fund budget schedule)", "page": 8,
+     "extracted": "expenditure 5,451,443", "on_page": "Statement General Fund expenditures 5,499,197 incl. Principal 28,676 + Interest 19,078 (p4)",
+     "issue": "The General Fund budget schedule leaves out the 47,754 of debt service that the fund statement prints, so the General Fund detail is 47,754 below the statement. It is recorded as printed and the notes explain it. The debt service is in the statement lines."}
+  ],
+  "notes": "12 of 12 trimmed pages read (pp11-12 are pension RSI, correctly not used); extraction notes end 'Read pages 1-12 of 12'. Every governmental statement column and row, the proprietary statement fund columns and the three budget schedules tie to their printed totals. Governmental 6,765,873 + 11,395,158 - 11,060,697 + 930,000 - 2,216,867 = 5,813,467; business-type 8,310,265 + 14,079,956 - 13,737,899 + 1,286,867 = 9,939,189. Transfers: General 468,297 + Lottery 818,570 out to the Arena (1,286,867 in); Debt Service 930,000 out to Street 930,000 in. None are inside spending lines. The proprietary cash flows tie (-1,473,489 + 1,207,398 + 30,485 = -235,606). The balance sheet balances (41,309,309 = 25,556,653 + 15,752,656). FY2024 JSON: beginning fund balance 5,813,467 and business-type beginning 9,939,189 equal the FY2023 endings."
+}

@@ -1,0 +1,13 @@
+{
+  "stem": "Ragan_FY2023",
+  "values_checked": 62,
+  "issues": [
+    {"severity": "warning", "path": "disbursements[2].fund_type", "page": 3,
+     "extracted": "business-type", "on_page": "Line 39 Debt Service 5,033.00 (under Governmental), Water Well Constr Fund column",
+     "issue": "The form prints this line under the governmental section, but the money is in a utility fund's column (paid from the Water Fund's 5,033.00 surplus transfer). Business-type is defensible, and the line is already marked review."},
+    {"severity": "warning", "path": "receipts[6].category", "page": 1,
+     "extracted": "other", "on_page": "Local Receipts: Other - Water Fund 10,917.12, Water Reserve Fund 15.41",
+     "issue": "All of the water fund's receipts are in other because the waiver form prints only 'Local Receipts: Other'. They are probably water charges, but the page doesn't say so, so other is correct under the context-label rule. More than 10% of business-type receipts are in other, so this goes to review."}
+  ],
+  "notes": "6 of 6 trimmed pages read (pp2 and 4 are the blank Exhibit A continuation pages 1a and 2a); extraction notes end 'Read pages 1-6 of 6'. Every filled Exhibit A cell is in detail exactly once. Line 21/23/24/28 totals tie for each fund. Transfers (516.00 + 5,033.00 in; 5,549.00 out) are all between utility funds and recorded as other financing, not as spending. Governmental 127,430.12 + 25,174.02 - 10,507.98 = 142,096.16; business-type 24,125.49 + 10,932.53 - 9,816.03 + 0 = 25,241.99. The balance sheet (p6) ties to 167,338.15. FY2024 JSON: beginning_cash 142,096.16, beginning_investments 34,532.23 and business-type beginning 25,241.99 equal the FY2023 endings. Equity lines have no fund_type because the single-column statement cannot be split (known item)."
+}
