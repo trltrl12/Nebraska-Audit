@@ -1,0 +1,40 @@
+{
+  "stem": "Red_Cloud_FY2023",
+  "values_checked": 306,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "detail[133..141,146..156,160..166,172..174].category",
+      "page": 8,
+      "extracted": "utilities",
+      "on_page": "Water/Electric/Sewer Use/C & D Fund operating expenses by cost type: Direct electric and water expense, Salaries - administrative, Office supplies and expense, Insurance, Payroll taxes and benefits - City's share, Supplies, Repairs, Professional fees, Utilities, Miscellaneous",
+      "issue": "Utility spending printed by cost type must take the cost type as category with function 'utilities' (user rule 2026-10-28), as the statement-level disbursements in this same JSON already do (Purchased Power/Cost of Sales, Salaries and Wages, Supplies and Materials, Insurance, Employee Benefits and Payroll Taxes, Repairs and Maintenance, Professional/Contract Services, utilities, other). The proprietary detail expense lines carry category 'utilities' (Electric 'Transportation' carries 'other') and no function field. Fix: set each line's category to its cost type (matching disbursements[12..22]) and add function: utilities. Amounts are correct.",
+      "resolved": "cost types applied by user_rules.py"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[13].category",
+      "page": 5,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "Grant income 487,455 (Cather CDBG: State CDBG block grant 256,095 + Other grants 229,860, p20; Park Fund 1,500, p22)",
+      "issue": "Only the 256,095 is printed as a state grant. The grantor of 'Other grants' 229,860 and of the Park 1,500 is not printed, so the state aid category assumes a grantor (2026-11-06: do not guess a grantor). The same applies to detail[59] 'Other grants' and detail[121] Park 'Grant income'. Defensible as the dominant piece, but worth a look."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[90].category",
+      "page": 21,
+      "extracted": "School-Related Receipts",
+      "on_page": "School District Fund - Licenses, fees, and permits 2,404",
+      "issue": "The same printed label gets two categories in one report: the statement line receipts[10] 'Licenses, fees, and permits' 8,847 (which includes this 2,404) is licenses and permits, while the detail piece is School-Related Receipts. The School-Related rule supports the detail line, but the statement line is not split, so the categories disagree."
+    },
+    {
+      "severity": "warning",
+      "path": "ending_cash",
+      "page": 1,
+      "extracted": 620754,
+      "on_page": "Cash and equity in pooled cash 620,754; Cash on deposit - county treasurer 7,043; Cash - debt service 26,529; County treasurer - long-term debt 3,413",
+      "issue": "ending_cash takes only the pooled-cash line. The other governmental cash lines (county treasurer cash, which is categorized Cash and Cash Equivalents, and the restricted cash) are left out, while Randolph_FY2023 in the same batch sums all governmental cash lines into ending_cash (computed). Not wrong as printed, but the reports handle it differently."
+    }
+  ],
+  "fy2024_tie": "FY2023 ending governmental fund balance 810,492 = Red_Cloud_FY2024 beginning_fund_balance 810,492; business_type ending net position 2,349,664 = FY2024 business_type.beginning 2,349,664. Both tie as printed; no restatement. FY2024 has no cash fields to compare."
+}

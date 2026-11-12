@@ -1,0 +1,49 @@
+{
+  "stem": "Ravenna_FY2023",
+  "values_checked": 316,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "detail[156..166,173..182,188..196].category",
+      "page": 7,
+      "extracted": "utilities",
+      "on_page": "Water/Sewer/Trash Fund operating expenses by cost type: Personnel services, Utilities and telephone, Repairs and maintenance, Contractual obligations, Supplies, Professional fees, Insurance, Fuel and transportation, Dues, memberships and training, Miscellaneous, Depreciation",
+      "issue": "Utility spending printed by cost type must take the cost type as category with function 'utilities' (user rule 2026-10-28), as the statement-level disbursements in this same JSON already do (Salaries and Wages, Utilities and Telephone/utilities, Repairs and Maintenance, Professional/Contract Services, Supplies and Materials, Insurance, Fuel, Dues, Training and Travel, other, Depreciation). All 30 proprietary detail expense lines carry category 'utilities' and no function field. Fix: set each line's category to its cost type (matching disbursements[9..19]) and add function: utilities. Amounts are correct.",
+      "resolved": "cost types applied by user_rules.py; loan proceeds set to other (context label)"
+    },
+    {
+      "severity": "error",
+      "path": "detail[140].category",
+      "page": 11,
+      "extracted": "Loan Proceeds",
+      "on_page": "Street Fund - Loan proceeds: Budget 100,000, Actual -",
+      "issue": "'loan proceeds' is a context label (config/category_decisions.csv apply=context); receipt context labels must stay category other until the context check settles them. The line is also an actual of zero (budget only), and detail_category 'miscellaneous revenue' is used. Fix: category other (or drop the zero budget-only line, as other zero-actual lines in the trimmed reports are not recorded).",
+      "resolved": "cost types applied by user_rules.py; loan proceeds set to other (context label)"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[124..130].category",
+      "page": 15,
+      "extracted": "health/welfare",
+      "on_page": "Cemetery department expenditures 43,449",
+      "issue": "The statement (p5) counts the Cemetery department in Public works (General Fund Public works 43,449 = Cemetery total), so the detail function does not match the statement's own grouping. Randolph_FY2023 in the same batch followed the statement (streets/highways) for the same situation, so the two reports are inconsistent. Keep one approach."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[139].detail_category",
+      "page": 11,
+      "extracted": "other state aid",
+      "on_page": "Street Fund - Intergovernmental 233,893",
+      "issue": "Street Fund intergovernmental receipts are most likely the state highway allocation (the Statement of Activities p3 calls the whole 318,194 'State allocation'). The page does not say so explicitly, so other state aid is defensible."
+    },
+    {
+      "severity": "warning",
+      "path": "ending_cash",
+      "page": 4,
+      "extracted": 1268215,
+      "on_page": "Cash and cash equivalents 1,268,215; County treasurer cash 7,157",
+      "issue": "The governmental funds balance sheet also prints County treasurer cash 7,157, which the balance sheet section categorizes as Cash and Cash Equivalents. ending_cash leaves it out, while Randolph_FY2023 includes the same line in ending_cash (computed). Not wrong as printed, but the two reports handle it differently."
+    }
+  ],
+  "fy2024_tie": "FY2023 ending fund balance 1,475,548 = Ravenna_FY2024 beginning_fund_balance 1,475,548; business_type ending 1,731,515 = FY2024 beginning 1,731,515; proprietary ending cash 664,456 = FY2024 proprietary beginning_cash 664,456; governmental net position ending 8,521,440 = FY2024 beginning 8,521,440. All tie as printed."
+}
