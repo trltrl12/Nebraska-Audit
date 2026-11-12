@@ -1,0 +1,19 @@
+{
+  "stem": "Alma_FY2022",
+  "values_checked": 231,
+  "issues": [
+    {"severity": "warning", "path": "receipts[9].category", "page": 3,
+     "extracted": "donations/contributions", "on_page": "Grants and donations 297,427 (p5: General 45,720, Street 100,972, Airport 150,735); SoA p3 shows 251,707 as Capital Grants and Contributions (public works 100,972, airport 150,735)",
+     "issue": "This is a mixed label. Most of it (Street and Airport) is capital grant money, so the dominant part is probably grants, not private donations. The page doesn't name the grantor, and the line has a review note."},
+    {"severity": "warning", "path": "receipts[14]", "page": 8,
+     "extracted": "Charges for services 1,506,720 split into Utility Charges 1,143,396 / Golf Recreation Fees 297,478 / RV Park 65,846",
+     "on_page": "Charges for services: Gas 550,512, Water 312,980, Sewer 77,717, Trash 202,187 (p8); Golf 297,478, RV Park 65,846, Total 1,506,720 (p9)",
+     "issue": "The amounts match the printed fund columns and are marked split_from/computed, following FY2023. However, the extractor rules say statement receipts come from the Total column and are not split by fund column, except for tax-type pieces. Applies to receipts[14]-[16]."},
+    {"severity": "warning", "path": "disbursements[11].category", "page": 9,
+     "extracted": "utilities", "on_page": "Utilities and telephone 61,188 (operating expense by cost type)",
+     "issue": "This cost-type line has the function category 'utilities', so it can't be told apart from the function category. Under the cost-type rule it might be 'Utilities (Power, Gas, Phone)'."},
+    {"severity": "warning", "path": "detail[93].detail_category", "page": 15,
+     "extracted": "highway allocation", "on_page": "Intergovernmental 178,179 (Street Fund)",
+     "issue": "The page prints only 'Intergovernmental'; 'highway allocation' is inferred from the fund name."}
+  ]
+}

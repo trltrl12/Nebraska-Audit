@@ -1,0 +1,46 @@
+{
+  "stem": "Allen_FY2022",
+  "values_checked": 98,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "report_discrepancies",
+      "page": 1,
+      "extracted": "no report_discrepancies entry",
+      "on_page": "Statement of Net Position p1, Business-type Activities: Restricted for federal programs 33,768 + Unrestricted 221,122 = 254,890, but Total net position is printed 288,658 (Total column: 34,091 + 105,543 + 378,768 = 518,402 vs printed 552,170)",
+      "issue": "[fixed: report_discrepancies entry added] The printed page doesn't add up (difference 33,768). The proprietary statement (p6) prints Unrestricted 254,890, so p1's 221,122 looks like a typo in the report. The equity lines are recorded as printed, so balance_sheet.equity sums to 518,402 against total_equity 552,170. This must be recorded in report_discrepancies, and it isn't."
+    },
+    {
+      "severity": "warning",
+      "path": "balance_sheet",
+      "page": 4,
+      "extracted": "Statement of Net Position - Modified Cash Basis (p1): governmental equity Restricted 323 / 105,543, Unrestricted 157,646",
+      "on_page": "Balance Sheet - Governmental Funds (p4) Total column: total assets 267,796 and total fund balances 263,512 equal the government-wide figures; fund balance Restricted 323 / 105,543, Assigned 150th anniversary 2,145, Budgetary stabilization 40,102, Unassigned 115,399",
+      "issue": "Under the user's 2026-10-27 balance-sheet basis rule, governmental lines would come from the governmental funds statement, because its totals equal the government-wide figures here. The extraction kept the Statement of Net Position, as FY2023 and FY2024 did; FY2025 uses the funds statement. All amounts match p1 as printed."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[12].category",
+      "page": 7,
+      "extracted": "utilities",
+      "on_page": "Utilities 9,079 (operating expense by cost type)",
+      "issue": "This cost-type line (power/gas/phone for the utility funds) has the function category 'utilities', so it can't be told apart from the function category. Under the cost-type rule it might be 'Utilities (Power, Gas, Phone)'."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[27].detail_category",
+      "page": 10,
+      "extracted": "highway allocation",
+      "on_page": "Intergovernmental 54,384 (Street Fund)",
+      "issue": "The page prints only 'Intergovernmental'; 'highway allocation' is inferred from the fund name, not printed."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[5].category",
+      "page": 5,
+      "extracted": "charges for services/fees",
+      "on_page": "Charges for services 550 (p5); the same 550 is 'Licenses and permits' on the General Fund departments schedule (p11, detail[3])",
+      "issue": "The same money is categorized differently at statement and detail level. Both match their printed labels, and decision_needed already raises this; flagged only for consistency."
+    }
+  ]
+}
