@@ -1,0 +1,31 @@
+{
+  "stem": "St_Paul_FY2023",
+  "values_checked": 250,
+  "fy2024_check": "FY2023 ending_fund_balance 6,828,772 = FY2024 beginning_fund_balance 6,828,772; business_type.ending 4,952,781 = FY2024 business_type.beginning 4,952,781 (FY2024 beginning_cash is null). Ties as printed.",
+  "issues": [
+    {"severity": "warning", "path": "detail[27].section", "page": 14,
+     "extracted": "other financing (printed_in revenue), Bond/loan proceeds 2,055,000",
+     "on_page": "Bond/loan proceeds 2,055,000 printed among REVENUES in the Fire Fund column of the General Fund combining schedule (inside Total revenues 3,453,229); p15 budget schedule also prints Loan proceeds under Resources (inflows)",
+     "issue": "Under the 2026-11-06 printed-section rule (printed among revenues -> receipt line 'Debt Proceeds'), this schedule line would be section revenue rather than other financing. Top-level debt_proceeds is right (p6 prints it under Other Financing Sources). Amount and totals tie either way."},
+    {"severity": "warning", "path": "detail[11].original_label", "page": 14,
+     "extracted": "Capital Outlay: General Government",
+     "on_page": "Capital Outlay 91,926 (General Fund column)",
+     "issue": "Function not printed on the row or column; inferred from the p15 budget schedule (Administrative 455,363 = General column total). The capital outlay rule says a function only when printed on the row, its heading or a fund column clearly naming it."},
+    {"severity": "warning", "path": "detail[46].category", "page": 15,
+     "extracted": "health/welfare (Cemetery department lines detail[46]-[48])",
+     "on_page": "Cemetery is printed under Public Works on the p15 budget schedule; statement p5 Public Works 422,377 includes General Fund 30,310 = Cemetery 32,666 - capital outlay 2,356",
+     "issue": "The department's function on the page is Public Works, so the department lines don't tie to the statement's function columns. health/welfare (cemetery) is defensible from the category list."},
+    {"severity": "warning", "path": "detail[49].original_label", "page": 14,
+     "extracted": "Capital Outlay: Health/Welfare",
+     "on_page": "Capital Outlay 2,356 (Cemetery Fund column; Cemetery under Public Works on p15)",
+     "issue": "The function label is the extractor's own. The page puts the Cemetery under Public Works."},
+    {"severity": "warning", "path": "receipts[6].category", "page": 5,
+     "extracted": "intergovernmental/state aid",
+     "on_page": "Grants 79,539 (Statement of Activities p2 column 'Operating Grants and Contributions'); same for detail[15] 2,800, detail[36] 75,000, detail[60] 1,739",
+     "issue": "Grantor not stated. The 2026-11-06 ruling says not to guess a grantor. State aid is a judgment call; the lines carry review notes."},
+    {"severity": "warning", "path": "detail[90]", "page": 5,
+     "extracted": "detail[90]-[148]: statement-column lines for Sales Tax, Economic Development and Keno Funds (p5-6) and Light/Water/Sewer/Landfill (p8-9)",
+     "on_page": "General, Street and Debt Service Funds have their own schedules (p14-18); the other funds appear only as statement columns",
+     "issue": "User rule 2026-10-28: when some funds have their own schedules, statement lines are not added for the others. The extractor added them; all amounts match the pages and tie to their column totals. Needs a decision on whether to keep them."}
+  ]
+}

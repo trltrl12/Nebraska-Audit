@@ -1,0 +1,24 @@
+{
+  "stem": "Stapleton_FY2023",
+  "values_checked": 73,
+  "fy2024_check": "No tie. FY2024 (audit) beginning_fund_balance 73,192 and business_type.beginning 71,540 equal FY2023 line 28 Subtotal of Ending Balances (governmental 73,192.01; business-type 71,539.78). They do not equal FY2023 ending_cash 168,050.08 or business_type.ending (23,318.29), which come from line 24. FY2024 beginning_cash is null. Nothing printed explains the difference as a restatement; the 94,858.07 gap is inside the FY2023 form itself (lines 24 vs 28 by fund).",
+  "rechecks": "Line 24 vs line 28 re-read digit by digit. Line 24: General 164,081.05, Street 3,969.03, Sewer 5,029.00, Water 20,369.13, Solid Waste (48,716.42), Total 144,731.79. Line 28: 65,159.04, 8,032.97, 23,333.30, 23,770.54, 24,435.94, Total 144,731.79. Governmental gap 73,192.01 - 168,050.08 = -94,858.07; business-type gap 71,539.78 - (23,318.29) = +94,858.07; the Total column agrees. Each line 24 cell equals line 22 - line 23 as printed. Both report_discrepancies entries are correct.",
+  "issues": [
+    {"severity": "warning", "path": "decision_needed", "page": 1,
+     "extracted": "[] (ending_cash 168,050.08 and business_type.ending -23,318.29 from line 24)",
+     "on_page": "line 28 Subtotal of Ending Balances: governmental 73,192.01, business-type 71,539.78; FY2024 audit beginning balances 73,192 / 71,540 agree with line 28",
+     "issue": "By fund, line 24 (roll-forward) and line 28 (cash + investments) differ by 94,858.07 between governmental and business-type, and the next year's audit follows line 28. Only a person can decide which figure is the governmental/business-type ending balance. This belongs in decision_needed."},
+    {"severity": "warning", "path": "balance_sheet.assets[1].fund_type", "page": 5,
+     "extracted": "governmental, Investments 44,773.48",
+     "on_page": "Printed in the General Fund column (line 27), but Schedule of Investments p5 lists Flex CD 40167 7,627.93, Sewer Flex CD 5,547.09 and Water Tank Savings CD 31,598.46",
+     "issue": "Tagged from the printed column as the rule requires, but 37,145.55 of it looks like utility (Sewer/Water) investments."},
+    {"severity": "warning", "path": "reported_totals.business-type.receipts.includes", "page": 1,
+     "extracted": "includes [] with includes_split [25,000.00]",
+     "on_page": "line 20 Transfers In Other Than Surplus Fees, Sewer 25,000.00, printed on its own row inside line 21 Total Receipts",
+     "issue": "The transfer is not hidden inside a receipt line, so includes ['transfers_net'] is the usual marker. includes_split gives the same totals check. The transfer is counted once in the roll-forward (business_type.transfers_net), so there is no double count."},
+    {"severity": "warning", "path": "balance_sheet.assets", "page": 1,
+     "extracted": "no county treasurer line",
+     "on_page": "County Treasurer Balance at October 1, 2022 $1,713.57; at September 30, 2023 3,051.90",
+     "issue": "Printed county treasurer cash is outside the fund totals and is not recorded (only in notes)."}
+  ]
+}
