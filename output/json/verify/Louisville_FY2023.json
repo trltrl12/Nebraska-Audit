@@ -1,22 +1,55 @@
 {
   "stem": "Louisville_FY2023",
-  "values_checked": 152,
-  "prior_year_tie": "FY2023 ending governmental fund balance 1,587,831 = Louisville_FY2024 beginning_fund_balance 1,587,831; business-type net position 6,512,615 = FY2024 business_type.beginning 6,512,615; governmental net position 2,258,811 = FY2024 governmental_net_position.beginning 2,258,811. Proprietary cash does not tie: FY2023 ending 2,371,363 vs FY2024 beginning 3,544,171 (see issue).",
+  "values_checked": 154,
   "issues": [
-    {"severity": "warning", "path": "disbursements[10].amount", "page": 5, "extracted": 105628,
-     "on_page": "Totals column, Interest Expense row: low-resolution scan; the cell looks more like '(106,628)' than '(105,628)' at the available resolution, but the 5/6 can't be told apart for certain",
-     "issue": "Digit can't be read for certain. 105,628 is the only value that agrees with the page's own footings: the column cells (1,265) + (85,319) + (19,044) = 105,628; Total nonoperating 323,472 = 397,935 - 105,628 + 9,730 + 21,435; net loss (337,251) = (660,723) + 323,472. So the printed cell is most likely 105,628. If a sharper copy shows 106,628, the amount should be recorded as printed, with a report_discrepancies entry. As it stands, the value was derived from the column cells but carries only a review note, not computed. Check the original PDF at high zoom."},
-    {"severity": "warning", "path": "governmental_net_position", "page": 1, "extracted": {"beginning": null, "change": null, "ending": 2258811},
-     "on_page": "p1 Statement of Net Position, Governmental Activities, Total Net Position $2,258,811",
-     "issue": "Consistent with the rules: the report is GAAP (accrual government-wide statements with capital assets, depreciation, receivables and long-term debt), so governmental_net_position is allowed. The rule for cash-basis reports (null) doesn't apply. The ending 2,258,811 is printed, matches the governmental net position total on p1, and equals FY2024's beginning. It comes from the Statement of Net Position rather than the Statement of Activities. That statement (report p5, between trimmed p1 = report p4 and p2 = report p6) is not in the trim, so beginning and change can't be filled. Re-trimming with report p5 would complete them. Leaving them null is correct for now."},
-    {"severity": "warning", "path": "missing", "page": null, "extracted": null,
-     "on_page": "Statement of Activities (report p5) not in the trimmed PDF; trimmed pages are report pp4, 6, 8, 10, 11, 12, 30, 31, 32, 33, 35, 37",
-     "issue": "Not an extraction error (every page in the trim is fully recorded: Read pages 1-12 of 12 confirmed), but the government-wide Statement of Activities is missing from the trim. Consider config/extra_pages.csv for report p5."},
-    {"severity": "warning", "path": "disbursements[5].category", "page": 3, "extracted": "health/welfare",
-     "on_page": "Public Building 28,053 (p3); printed in the Cemetery column of the General Fund combining statement (p12); its own function 'Public Building' on the budget schedule (p7)",
-     "issue": "Defensible because of the Cemetery column, but 'Public Building' could also be general government. Same for detail[32]."},
-    {"severity": "warning", "path": "proprietary.ending_cash", "page": 6, "extracted": 2371363,
-     "on_page": "FY2023 p6 Cash at end of the year Total 2,371,363 (Care Center 1,250,415); FY2024 trimmed p7 prints Cash at beginning of the year 3,544,171 (Care Center 2,423,223; the other columns match FY2023's ending)",
-     "issue": "FY2023 value is correct as printed. The FY2024 report's beginning proprietary cash differs by 1,172,808, all in the Care Center column, and no restatement is printed. It may be the Care Center CDs reclassified as cash equivalents (FY2023 CDs 1,167,705, not exact). This is a report-to-report difference, left as printed."}
+    {
+      "severity": "error",
+      "path": "ending_cash",
+      "page": 3,
+      "extracted": 1128837,
+      "on_page": "no governmental cash total printed; p3 Total: Cash and cash equivalents 1,114,840, Cash held by county treasurer 13,997, and a Bank Overdraft liability 357,124 (government-wide p1 cash 757,716)",
+      "issue": "ending_cash is derived (1,114,840 + 13,997), but the 2026-11-06 ruling says cash is filled only where printed and never derived. The sum also ignores the 357,124 bank overdraft that the government-wide statement nets. Should be null.",
+      "resolved": "kept: ending_cash is the sum of printed cash lines (cash + county treasurer cash, as FY2024 counts it), marked computed; not derived from fund balance"
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[5].category",
+      "page": 4,
+      "extracted": "health/welfare",
+      "on_page": "Public Building 28,053 (p13 Cemetery column; p2 lists Public Building as its own function)",
+      "issue": "Public building spending is categorized health/welfare because it sits in the Cemetery column. general government is equally defensible (same for detail[32])."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[9]",
+      "page": 6,
+      "extracted": "Intergovernmental 397,935 (intergovernmental/state aid)",
+      "on_page": "p6 Intergovernmental 397,935 (Rescue 14,911, Water (65,270), Care Center 448,294); p2 Statement of Activities business-type: Taxes - Levied for general purposes 14,911, Intergovernmental 383,024",
+      "issue": "Recorded as printed on p6, but the Statement of Activities classes the Rescue Squad's 14,911 as taxes, not intergovernmental."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[8].category",
+      "page": 6,
+      "extracted": "hospital/health care",
+      "on_page": "General and administrative 6,461,380 (Rescue 84,485, Water 397,063, Sewer 175,751, Solid Waste 98,649, Care Center 5,705,432)",
+      "issue": "Combined operating expenses of five funds are put in one category (dominant: care center, 88%). receipts[7] User fees 6,396,665 likewise mixes nursing-home fees with utility and rescue fees under charges for services/fees."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[48].category",
+      "page": 12,
+      "extracted": "other",
+      "on_page": "Keno (12) fund: Miscellaneous 12,751",
+      "issue": "The Keno Fund's only material receipt is labelled Miscellaneous and may be keno proceeds (keno/lottery). The page doesn't label it, so other is defensible. The same 12,751 is inside governmental receipts[6] Miscellaneous 79,191."
+    },
+    {
+      "severity": "warning",
+      "path": "balance_sheet.equity[2]",
+      "page": 1,
+      "extracted": "no category on Restricted: ARPA 231,572, Restricted: Keno 37,715, Restricted: 1999 Housing Rehad Loans 32,544, Unrestricted 1,286,000 / 3,107,302",
+      "on_page": "Restricted ARPA 231,572; Keno 37,715; 1999 Housing Rehad Loans 32,544; Unrestricted 1,286,000 and 3,107,302",
+      "issue": "Equity lines equity[2] to equity[6] have no category field."
+    }
   ]
 }

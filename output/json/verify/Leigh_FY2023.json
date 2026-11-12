@@ -1,91 +1,39 @@
 {
   "stem": "Leigh_FY2023",
-  "values_checked": 148,
+  "values_checked": 162,
   "issues": [
     {
       "severity": "error",
-      "path": "missing",
-      "page": 11,
-      "extracted": null,
-      "on_page": "General Fund departments statement continuation: Housing project, Park, Pool, Library (and Total) columns, revenues and expenditures by object. The manifest kept source pages 42 (report p39 = trimmed p11) and 44 (report p40 = trimmed p12) but not source p43, an unnumbered page between them. The p11 title is offset to the left, which fits a two-page spread. Revenue in those columns: 830,529 - 374,131 - 100,366 = 356,032. Spending: 567,282 - 375,596 = 191,686",
-      "issue": "Page missing from the trim, so the department detail for 4 of 7 General Fund departments is not on any trimmed page. Re-trim with config/extra_pages.csv (Leigh_FY2023, source page 43), then re-extract that schedule.",
-      "resolved": "subtracted lines removed; GF revenue detail from printed p8 schedule 2026-11-10; missing page on re-trim list"
-    },
-    {
-      "severity": "error",
-      "path": "detail[13].amount",
-      "page": 8,
-      "extracted": 5000,
-      "on_page": "not printed (General Fund Intergovernmental 113,758 on p8 minus General 28,465 and Street 80,293 on p11)",
-      "issue": "Remainder for the departments whose page is not in the trim. It is not printed anywhere. Under the as-printed rule it must not be a detail line, so remove it.",
-      "resolved": "subtracted lines removed; GF revenue detail from printed p8 schedule 2026-11-10; missing page on re-trim list"
-    },
-    {
-      "severity": "error",
-      "path": "detail[14].amount",
-      "page": 8,
-      "extracted": 25485,
-      "on_page": "not printed as a General Fund department line (28,585 on p8 minus General 3,100 on p11; 25,485 appears only as the Environment and leisure charges for services in the government-wide Statement of Activities on p2)",
-      "issue": "Remainder recorded as a departments-schedule line. It is not printed on any General Fund schedule, so remove it.",
-      "resolved": "subtracted lines removed; GF revenue detail from printed p8 schedule 2026-11-10; missing page on re-trim list"
-    },
-    {
-      "severity": "error",
-      "path": "detail[15].amount",
-      "page": 8,
-      "extracted": 73700,
-      "on_page": "not printed (Gain on sale of capital assets 96,200 on p8 minus General 22,500 on p11)",
-      "issue": "Remainder for the departments whose page is not in the trim. It is not printed anywhere, so remove it.",
-      "resolved": "subtracted lines removed; GF revenue detail from printed p8 schedule 2026-11-10; missing page on re-trim list"
-    },
-    {
-      "severity": "error",
-      "path": "detail[17].amount",
-      "page": 8,
-      "extracted": 1847,
-      "on_page": "not printed (Other 2,503 on p8 minus General 'Other revenues' 656 on p11)",
-      "issue": "Remainder for the departments whose page is not in the trim. It is not printed anywhere, so remove it.",
-      "resolved": "subtracted lines removed; GF revenue detail from printed p8 schedule 2026-11-10; missing page on re-trim list"
-    },
-    {
-      "severity": "warning",
-      "path": "detail[16]",
-      "page": 8,
-      "extracted": "Loan proceeds 250,000, schedule 'General Fund Departments', department 'Other departments (page not in trim)'",
-      "on_page": "Loan proceeds 250,000 is the p8 General Fund Actual figure; p11 shows '-' for General, Street and Police",
-      "issue": "The amount is printed (p8, also p4), but placing it in the departments schedule under an unnamed department is an inference. If the remainder lines are removed, it should either go with the p8 General Fund revenue lines (replace all General Fund revenue detail with the 13 p8 lines) or be dropped until source p43 is trimmed."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[38].schedule",
-      "page": 8,
-      "extracted": "Combining Statement of Revenues and Expenditures - General Fund Departments",
-      "on_page": "Budgetary Comparison Schedule - Modified Cash Basis - General Fund: Housing project 92,767 (final budget 250,000)",
-      "issue": "Amount and budget are correct and printed on p8, but the schedule name is the departments statement, which does not print this line in the trim. Applies equally to detail[39] Park 33,567 (18,875), detail[40] Pool 33,062 (26,800) and detail[41] Library 32,290 (27,750), all correct on p8. These four printed p8 lines can stay: they do not overlap the p11 General, Street and Police columns (p8 General government 166,819, Police protection 51,635 and Street 157,142 equal those column totals), and with the p11 object lines they add up to 567,282."
-    },
-    {
-      "severity": "warning",
-      "path": "detail_totals[0]",
-      "page": 8,
-      "extracted": 830529,
-      "on_page": "Total resources 830,529 (p8 budget schedule). The p11 departments page prints General 374,131 + Street 100,366 + Police '-'",
-      "issue": "Printed figure, but it is the p8 budget-schedule total filed under the departments schedule name. Once the remainder lines are removed, General Fund revenue detail adds to 474,497 (724,497 with the 250,000 loan line), not 830,529. Adding the p8 revenue lines alongside the p11 lines would double count 474,497. detail_totals[1] (567,282, p8) has the same schedule-name mismatch; the expenditure lines still add up to it."
-    },
-    {
-      "severity": "warning",
-      "path": "detail[37].budget_final",
-      "page": 11,
-      "extracted": 50600,
-      "on_page": "p11 prints no budget column; 50,600 is the p8 'Police protection' final budget",
-      "issue": "Budget taken from another schedule. The amount is right, but the other p11 lines have null budget_final."
-    },
-    {
-      "severity": "warning",
       "path": "ending_cash",
       "page": 3,
       "extracted": 248453,
-      "on_page": "Cash and cash equivalents 230,916 and County treasurer cash 17,537 (Total Governmental Funds); no single printed cash total",
-      "issue": "Computed sum of two printed cash lines; the 2026-11-06 ruling says cash is never derived. Arithmetic is correct and it is marked computed."
+      "on_page": "no governmental cash total printed; p3 prints Cash and cash equivalents 230,916 and County treasurer cash 17,537 separately",
+      "issue": "ending_cash is derived (230,916 + 17,537), but the 2026-11-06 ruling says cash is filled only where printed and never derived. The notes also say 'Ending cash left null as in FY2024', which contradicts the value. Should be null (the cash lines are already in balance_sheet).",
+      "resolved": "kept: ending_cash is the sum of printed cash lines (cash + county treasurer cash, as FY2024 counts it), marked computed; not derived from fund balance"
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[5].original_label",
+      "page": 4,
+      "extracted": "Capital outlay",
+      "on_page": "Capital outlay 88,777 (detail p12: Housing Project department)",
+      "issue": "The statement capital outlay line keeps the plain label while the detail line uses 'Capital Outlay: Economic Development'. The rule relabels capital outlay lines 'Capital Outlay: <function>'."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[6].category",
+      "page": 4,
+      "extracted": "charges for services/fees",
+      "on_page": "Charges for services 28,585 = General 3,100 + Park 11,646 + Pool 13,839 (pp11-12)",
+      "issue": "89% of the line is park/pool fees, which the detail categorizes as Recreation Fees. The statement line is kept as generic charges for services (a judgment call)."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[13].category",
+      "page": 6,
+      "extracted": "utilities",
+      "on_page": "Utilities 8,091 (operating expense object line)",
+      "issue": "This is a cost-type line (power/phone), but it is categorized 'utilities', the same as the function name. That makes it hard to tell apart from function lines under the utility cost-type rule (same for the Water/Sewer detail 'Utilities' lines)."
     }
   ]
 }
