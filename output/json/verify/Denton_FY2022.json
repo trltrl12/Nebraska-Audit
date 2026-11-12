@@ -1,0 +1,46 @@
+{
+  "stem": "Denton_FY2022",
+  "values_checked": 95,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "receipts[9].category",
+      "page": 2,
+      "extracted": "other (449,842.07, including Keno column 425,843.95)",
+      "on_page": "KENO column, line 18 Local Receipts: Other 425,843.95",
+      "issue": "[fixed: keno/lottery from Keno fund column] The Keno fund's only receipt (425,843.95, 95% of this line and 74% of governmental receipts) is kept in other. The Keno fund column identifies it as keno/lottery receipts (the user's Waverly ruling: lottery-fund gross keno receipts are keno/lottery). It should be a keno/lottery piece, with split_from and computed citing the fund name, apart from the remaining 24,000.12 (General 13,645.73, Street 1,152.39, Community Center 9,200.00). The matching detail line, detail[24] (Keno Fund 425,843.95), has the same problem. 'Local Receipts' is a context label, so the context check may settle it, but as recorded the category does not match what the page shows."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[10].category",
+      "page": 1,
+      "extracted": "other",
+      "on_page": "Local Receipts: Other (Water 92,515.19, Sewer 46,719.26)",
+      "issue": "These are the only receipts of the Water and Sewer funds, apart from transfers, so they are almost certainly water and sewer charges (Utility Charges). This is a context label and is left to the context check."
+    },
+    {
+      "severity": "warning",
+      "path": "ending_cash",
+      "page": 1,
+      "extracted": 2449776.92,
+      "on_page": "line 24 Ending Balance (net cash 1,607,691.06 + investments 842,085.86)",
+      "issue": "beginning_cash and ending_cash are line 3 and line 24 balances that already include investments, and beginning_investments and ending_investments repeat the investment part. Anyone adding cash and investments would double count 842,085.86 (1,091,714.87 at the beginning). This is consistent with the notes and FY2023."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[19].original_label",
+      "page": 3,
+      "extracted": "Capital Outlay",
+      "on_page": "Other Capital Outlay (Street Fund 6,585.97)",
+      "issue": "The capital outlay rule wants 'Capital Outlay: <function>'. The Street Fund column identifies Streets/Highways, but no function is given (General Fund 4,609.31, detail[11], likewise)."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[23].category",
+      "page": 3,
+      "extracted": "economic development",
+      "on_page": "Community Development (Community Center Fund 24,416.21)",
+      "issue": "This is Community Center fund spending on the 'Community Development' row. It is kept as economic development, as printed and as in FY2023/FY2024, but by fund it may be culture/recreation."
+    }
+  ]
+}

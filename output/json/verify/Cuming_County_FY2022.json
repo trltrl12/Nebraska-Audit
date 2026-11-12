@@ -1,0 +1,30 @@
+{
+  "stem": "Cuming_County_FY2022",
+  "values_checked": 150,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "disbursements[7].category",
+      "page": 2,
+      "extracted": "other",
+      "on_page": "Miscellaneous 858,950 (p4); Statement of Activities General Government 3,678,110 (p2)",
+      "issue": "[fixed: general government, as the Statement of Activities and budget schedule print it] The Statement of Activities counts Miscellaneous in General Government: 3,678,110 = General Government 2,819,160 + Miscellaneous 858,950. The General Fund budget schedule (p5) also lists Miscellaneous 843,873 under General Government. So the report itself shows the function, and the line should be general government, not other. The same applies to the detail Miscellaneous lines kept in other: detail[37] Inheritance Tax 14,056, detail[47] Wegner 704 and detail[55] Federal Grant 317."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[0].category",
+      "page": 4,
+      "extracted": "property tax 5,371,457 (whole Taxes row)",
+      "on_page": "Taxes: General 3,792,584 + Inheritance Tax 1,534,487 + Visitor's Promotion 44,386; Statement of Activities 'Property taxes' 5,371,457",
+      "issue": "The whole Taxes row is called property tax from the Statement of Activities label, but 1,534,487 is the Inheritance Tax fund's taxes and 44,386 the Visitor's Promotion fund's. In detail the extraction records these as inheritance tax and lodging tax, and the General Fund's 3,792,584 as taxes. The report's own label is defensible under 'a printed tax-type label beats a fund name', but the statement and detail now disagree, and about 29% of 'property tax' is inheritance tax."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[5].category",
+      "page": 4,
+      "extracted": "other",
+      "on_page": "Local 802,007",
+      "issue": "This is a broad 'Local' group (a context label). The Statement of Activities shows fees/charges 215,938, interest 35,020, in lieu 6,568 and other receipts 520,875, which do not tie exactly, so other with review is defensible. It is 7% of receipts."
+    }
+  ]
+}
