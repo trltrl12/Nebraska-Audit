@@ -1,0 +1,18 @@
+{
+  "stem": "Gretna_FY2022",
+  "values_checked": 195,
+  "issues": [
+    {"severity": "warning", "path": "receipts[16].category", "page": 6,
+     "extracted": "other", "on_page": "Other revenues 1,511,005 = Street 1,411,499 + General 99,506 (p5); Street budget schedule prints 'Reimbursements and other revenues' (p11)",
+     "issue": "93% of the line is the Street fund's 'Reimbursements and other revenues', which detail[38] categorizes as reimbursements/refunds; the statement line stays in other, so the same money gets two different categories. Printed label says 'Other', so this is defensible, but consider reimbursements/refunds for consistency."},
+    {"severity": "warning", "path": "receipts[21].category", "page": 8,
+     "extracted": "other", "on_page": "Capital facility charges and reimbursements 11,008,930",
+     "issue": "Mixed label kept in other (also detail[62] and detail[79], Water 5,750,511 / Sewer 5,258,419, p16). Rule is dominant category + review, with other as a last resort; the Statement of Activities (p2) counts it in Capital Grants and Contributions, and capital facility charges are fees (charges for services/fees). Judgment call."},
+    {"severity": "warning", "path": "detail[67].category", "page": 16,
+     "extracted": "utilities", "on_page": "Electricity 141,843",
+     "issue": "Cost-type line given category 'utilities', which is the same string as the function; detail_category is 'utilities (power, gas, phone)'. Same for detail[69] Utilities 8,794, detail[84] Electricity 52,889 and detail[86] Utilities 10,502. Check that the workbook keeps power costs apart from the utilities function."},
+    {"severity": "warning", "path": "detail[63].category", "page": 16,
+     "extracted": "Salaries and Wages", "on_page": "Salaries and benefits 419,434",
+     "issue": "The line combines salaries and benefits and was categorized as Salaries and Wages only (same for detail[80], Sewer 192,756). Defensible as the dominant part."}
+  ]
+}
