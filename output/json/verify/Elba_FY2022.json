@@ -1,0 +1,15 @@
+{
+  "stem": "Elba_FY2022",
+  "values_checked": 86,
+  "issues": [
+    {"severity": "warning", "path": "beginning_investments", "page": 1,
+     "extracted": 65261.30, "on_page": "line 2 Investments General 5,745.59 + Street 59,515.71; line 3 subtotal 408,256.95 already includes them",
+     "issue": "beginning_cash (408,256.95) and ending_cash (427,069.93) already include the investments, and beginning_investments / ending_investments (68,746.99) are filled as well. Any downstream sum of cash + investments double counts 65,261.30 / 68,746.99. Edison_FY2022 (same form) leaves the investment fields null."},
+    {"severity": "warning", "path": "reported_totals.business-type.receipts.includes", "page": 1,
+     "extracted": [], "on_page": "line 21 Total Receipts Water 83,564.11 includes line 20 Transfers In 14,736.42",
+     "issue": "Reported business-type receipts 95,926.04 include the 14,736.42 transfer in, but `includes` is []. The transfer is documented only in a non-standard `includes_split` field, so the validator may see a 14,736.42 gap against the receipt lines (81,189.62)."},
+    {"severity": "warning", "path": "disbursements[2].original_label", "page": 2,
+     "extracted": "Capital Outlay", "on_page": "Capital Improvements (General 8,659.55 + Street 20,958.37)",
+     "issue": "The capital outlay label has no function ('Capital Outlay: <function>' rule). The line combines the General Fund (no function printed) with the Street Fund (streets), and the detail line detail[10] is labelled plain 'Capital Outlay' too."}
+  ]
+}
