@@ -1,0 +1,24 @@
+{
+  "stem": "Lyons_FY2022",
+  "values_checked": 261,
+  "issues": [
+    {"severity": "warning", "path": "balance_sheet.liabilities[3].category", "page": 1,
+     "extracted": "debt - due within one year", "on_page": "Notes payable 1,122,346 (p5: Line of credit 1,085,524 current + Note payable - equipment 36,822 long-term)",
+     "issue": "single p1 line mixes current and long-term debt; whole amount put in due within one year"},
+    {"severity": "warning", "path": "balance_sheet.liabilities[4].category", "page": 1,
+     "extracted": "debt - due in more than one year", "on_page": "Bonds payable 365,000 (p5: current portion 55,000 + net of current portion 310,000)",
+     "issue": "single p1 line mixes current and long-term bonds; whole amount put in due in more than one year"},
+    {"severity": "warning", "path": "disbursements[6].category", "page": 6,
+     "extracted": "Purchased Power/Cost of Sales", "on_page": "Production costs 757,842 (p12: Electric 503,768, Gas 220,234, Water 29,562, Sewer 4,277)",
+     "issue": "water/sewer production costs are probably not purchased power or cost of sales; judgment call (detail lines for Water/Sewer production costs carry the same category)"},
+    {"severity": "warning", "path": "disbursements[14].category", "page": 6,
+     "extracted": "Fuel", "on_page": "Vehicle expense 35,203",
+     "issue": "vehicle expense may be fuel and/or repairs; not stated on the page (same for the per-fund Vehicle detail lines)"},
+    {"severity": "warning", "path": "detail[61].original_label", "page": 11,
+     "extracted": "Capital Outlay", "on_page": "Capital expenditures 5,992 (Municipal Building column)",
+     "issue": "other department capital lines are labelled 'Capital Outlay: <function>'; this one has no function (statement p4 counts Municipal Building as 'Public buildings')"},
+    {"severity": "warning", "path": "report_discrepancies", "page": 6,
+     "extracted": null, "on_page": "Total production, operation and maintenance costs 1,003,556 vs lines 1,003,557; Total general and administrative expenses 439,457 vs lines 439,456",
+     "issue": "p6 subtotal rounding differences (offsetting; Total costs 1,599,004 ties) not listed in report_discrepancies"}
+  ]
+}
