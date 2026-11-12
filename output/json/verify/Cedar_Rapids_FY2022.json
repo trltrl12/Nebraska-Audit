@@ -1,0 +1,47 @@
+{
+  "stem": "Cedar_Rapids_FY2022",
+  "values_checked": 190,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "proprietary",
+      "page": 9,
+      "extracted": null,
+      "on_page": "Statement of Cash Flows - Proprietary Funds, Total column (p8-9): net cash provided by operating activities 20,213; capital and related financing (Grant income) 31,858; net cash used by investing activities 0 (CDs (997), interest 997); cash and cash equivalents beginning 502,733, end 554,804",
+      "issue": "the business-type funds are accrual basis and print a cash-flow statement, and the notes say 'Proprietary cash flows from the Total column (p9)', but proprietary is null: the cash flows are missing from the JSON",
+      "resolved": "proprietary null on purpose: cash-basis report, FY2024/FY2025 leave it null (user 2026-11-12: match later years where the page allows)"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[7].category",
+      "page": 5,
+      "extracted": "charges for services/fees",
+      "on_page": "Rental and fees 25,533 (p16: Rescue 19,163, Cedar Valley Center 2,935, Park 3,435)",
+      "issue": "the Rescue part (75%) is ambulance/rescue fees, so the user's Ambulance Fees category may fit as the dominant one. In detail the same label gets three categories: detail[8] Rescue charges for services/fees, detail[14] Cedar Valley Center charges for services/fees (detail_category rentals; user category Rentals exists), detail[19] Park Recreation Fees"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[9].category",
+      "page": 16,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "Grants 3,902 (General 11, Library 3,891)",
+      "issue": "grantor not printed; the 2026-11-06 ruling says not to guess a grantor. Same for detail[5] and detail[15]. Grants are treated differently in receipts[18] (Water Fund 'Grant proceeds' 31,858 in other), so the report has two categories for unexplained grants"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[10].category",
+      "page": 15,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "Fire: Rural fire reimbursement 5,711",
+      "issue": "the extractor rules list rural fire contracts under charges for services/fees, and the label says reimbursement; county/other local governments is a judgment call"
+    },
+    {
+      "severity": "warning",
+      "path": "ending_cash",
+      "page": 4,
+      "extracted": 574710,
+      "on_page": "Cash and cash equivalents 574,710; County treasurer cash 4,368 (separate line, Total Governmental Funds)",
+      "issue": "ending_cash takes only the 'Cash and cash equivalents' line; the user rule treats county treasurer cash as Cash and Cash Equivalents (the balance sheet does too), so governmental cash could be read as 579,078. Recorded as printed"
+    }
+  ]
+}
