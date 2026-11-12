@@ -1,0 +1,31 @@
+{
+  "stem": "Chase_County_FY2022",
+  "values_checked": 155,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "detail[4].category",
+      "page": 5,
+      "extracted": "other",
+      "on_page": "Local 409,536 (Exhibit F); Exhibit D (p4) General column: Charges for Services 376,829, Interest 17,044, Miscellaneous 15,663",
+      "issue": "This broad 'Local' group is left in 'other', though the report shows what it holds: Charges for Services is 92% of it. The extractor rule says a category holding more than half of the line is used (or the line is split with split_from from the Exhibit D General column, which adds exactly to 409,536). It is a context label, so the context check may also settle it.",
+      "resolved": "'Local' is a context label: stays other until the context check (CLAUDE.md 2026-11-05 rule)"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[56].category",
+      "page": 11,
+      "extracted": "keno/lottery",
+      "on_page": "KENO fund: Charges for Services 7,726",
+      "issue": "The category comes from the fund name, not the printed row label (Charges for Services). This is consistent with the lottery-fund keno ruling, but it is an assumption, and the line has no 'computed' note saying the category is derived."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[33].category",
+      "page": 7,
+      "extracted": "intergovernmental/state aid / other state aid",
+      "on_page": "Road Fund: State 1,199,729",
+      "issue": "Road Fund state receipts are most likely highway allocation, but no breakdown is printed. 'Other state aid' is defensible."
+    }
+  ]
+}

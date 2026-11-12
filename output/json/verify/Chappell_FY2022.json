@@ -1,0 +1,62 @@
+{
+  "stem": "Chappell_FY2022",
+  "values_checked": 352,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "receipts[14].category",
+      "page": 4,
+      "extracted": "other",
+      "on_page": "Grants and donations 225,303.60",
+      "issue": "[fixed: donations/contributions, as FY2023 and the grants-donations label decision] Grants and donations is put in 'other', though specific categories fit (donations/contributions, or a grants category). The rule for mixed labels is the dominant category plus review. The Statement of Activities (p2) shows capital grants and contributions under General Government 221,967.23 and Culture and Recreation 117,633.00. The sibling years use donations/contributions (FY2023) and intergovernmental/state aid (FY2024)."
+    },
+    {
+      "severity": "error",
+      "path": "detail[14].category",
+      "page": 13,
+      "extracted": "other",
+      "on_page": "Grants and donations 225,303.60",
+      "issue": "[fixed: donations/contributions, as FY2023 and the grants-donations label decision] Same as receipts[14]: a grants/donations line in 'other' when a specific category fits."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[0..10]",
+      "page": 14,
+      "extracted": "general government (Salaries, Payroll related, Utilities, Repairs and maintenance, Insurance)",
+      "on_page": "Schedule p14: Payroll related Street 56,951.19 vs General 40,847.07; Utilities Parks 23,880.15 vs General 6,757.05; Repairs Street 11,056.33 vs General 234.00; Insurance Street 33,465.64 vs General 26,103.84",
+      "issue": "Applied inconsistently. Professional fees, Fuel and Meetings and training took the function of the schedule's largest department, but these lines defaulted to general government even though another department holds the largest share. Defensible under the 'listed by object' rule, but inconsistent."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[41].function",
+      "page": 8,
+      "extracted": "utilities",
+      "on_page": "Merchandise 14,036.31 and Concessions 39,778.39 (Golf column only)",
+      "issue": "Golf merchandise and concessions cost of sales are tagged function 'utilities'. Golf is culture/recreation, and the detail lines put these in culture/recreation. The same applies to disbursements[42] (Concessions)."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[44].function",
+      "page": 15,
+      "extracted": "utilities",
+      "on_page": "Collection expense 4,295.63 (Ambulance column only)",
+      "issue": "This is an Ambulance-only line, tagged function 'utilities'. Ambulance is public safety, as in the detail, and the statement line Oxygen and vaccination (disbursements[43]) uses public safety."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[32].category",
+      "page": 8,
+      "extracted": "other",
+      "on_page": "Licenses, fees, and permits 6,863.36",
+      "issue": "The business-type cost-type line was left as 'other' (context label for licenses/fees paid). This is a judgment call, but no specific cost-type category was tried. The same applies to the per-fund detail lines."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[146..161].category",
+      "page": 8,
+      "extracted": "culture/recreation (Golf Fund) / public safety (Ambulance Fund, detail[167..179])",
+      "on_page": "Golf and Ambulance operating expenses printed by cost type (Personal services, Insurance, Supplies...)",
+      "issue": "The cost-type rule (user 2026-10-28) says business-type spending printed by cost type takes the cost type as its category. The Electric, Water, Sewer and Waste detail follow it; the Golf and Ambulance detail use the function instead. This is inconsistent within the report."
+    }
+  ]
+}
