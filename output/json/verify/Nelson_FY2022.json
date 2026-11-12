@@ -1,0 +1,21 @@
+{
+  "stem": "Nelson_FY2022",
+  "values_checked": 153,
+  "issues": [
+    {"severity": "warning", "path": "detail[48].category", "page": 15,
+     "extracted": "sales tax (computed: tax type from fund name Sales Tax Fund)", "on_page": "REVENUES 78,098 (Sales Tax Fund column); the governmental funds statement p6 prints it inside Miscellaneous",
+     "issue": "the fund-name rule covers a fund's tax receipts; this row is the fund's undifferentiated REVENUES line that the report itself counts as Miscellaneous. Defensible (decision_needed already asks), but not a printed tax line"},
+    {"severity": "warning", "path": "detail[45].category", "page": 15,
+     "extracted": "federal grants (computed: revenue type from fund name ARPA)", "on_page": "REVENUES 39,380 (ARPA Fund column), counted in Miscellaneous on p6",
+     "issue": "the fund-name rule is for tax types; the 2026-11-12 ruling keeps grant lines with no printed grantor generic. ARPA is federal by name, so this is defensible, but it is an assumption"},
+    {"severity": "warning", "path": "detail[43].category", "page": 15,
+     "extracted": "keno/lottery (computed: revenue type from fund name Keno)", "on_page": "REVENUES 14,430 (Keno column), counted in Miscellaneous on p6",
+     "issue": "category inferred from the fund name for an undifferentiated REVENUES row; defensible"},
+    {"severity": "warning", "path": "detail[43].original_label", "page": 15,
+     "extracted": "Receipts", "on_page": "REVENUES",
+     "issue": "original_label 'Receipts' is not printed; the row is printed 'REVENUES' (same for detail[45] and detail[48])"},
+    {"severity": "warning", "path": "missing", "page": 13,
+     "extracted": null, "on_page": "All-funds budgetary schedule utility disbursement lines (Actual / Budget): Electric utility 489,834 / 626,685; Solid waste 42,625 / 54,313; Wastewater 72,928 / 91,275; Water 87,702 / 110,585; Orner Apartments 15,479 / 13,034",
+     "issue": "the extractor rule says an all-funds budget schedule's lines for funds without a more detailed schedule (including utility funds) are still recorded; these business-type lines appear in no detail. Skipped on purpose (single combined column, as in FY2023/FY2024), so a judgment call rather than a clear error"}
+  ]
+}
