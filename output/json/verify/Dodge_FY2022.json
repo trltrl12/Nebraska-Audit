@@ -1,0 +1,54 @@
+{
+  "stem": "Dodge_FY2022",
+  "values_checked": 89,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "report_discrepancies[0]",
+      "page": 4,
+      "extracted": "General Fund receipt lines add to 733,368 vs printed 734,368 (difference 1,000)",
+      "on_page": "Property 117,214 + Motor Vehicle 14,847 + Local option sales tax 110,598 + In lieu of 16,703 + Occupation and franchise 3,644 + Intergovernmental 218,610 + Permits and fees 2,796 + Charges for services 68,719 + Interest income 1,356 + Rental income 104,482 + Miscellaneous income 75,399 = 734,368 = printed Total receipts 734,368",
+      "issue": "[fixed: false 1,000 report_discrepancies removed; lines add to 734,368] False discrepancy: I re-read every General Fund receipt digit on p4, p2 and p7. All 11 lines match the JSON, and they add to exactly 734,368. The report does add up. Remove this entry. The p2 general receipts also tie: 665,649 = 734,368 - 68,719."
+    },
+    {
+      "severity": "error",
+      "path": "report_discrepancies[1]",
+      "page": 4,
+      "extracted": "roll-forward gap 1,000 (630,967 + 733,368 - 704,975 = 659,360 vs 660,360)",
+      "on_page": "630,967 + 734,368 - 704,975 = 660,360 = printed Fund balance - ending",
+      "issue": "[fixed: false 1,000 report_discrepancies removed; lines add to 734,368] False discrepancy: the fund-balance roll-forward ties exactly. This entry came from the misadded receipt sum. Remove it, and remove the matching sentence in notes."
+    },
+    {
+      "severity": "error",
+      "path": "report_discrepancies[2]",
+      "page": 7,
+      "extracted": "budget schedule General Fund lines add to 733,368 vs printed 734,368",
+      "on_page": "General Fund column lines on p7 add to 734,368 = printed Total cash receipts 734,368",
+      "issue": "[fixed: false 1,000 report_discrepancies removed; lines add to 734,368] False discrepancy: the p7 General Fund receipts column adds up exactly. Remove this entry."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[7].category",
+      "page": 6,
+      "extracted": "other",
+      "on_page": "Administrative costs 4,741",
+      "issue": "A utility cost-type line was put in 'other'. An administrative/general-government cost type may fit better. Judgment call."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[6].category",
+      "page": 6,
+      "extracted": "Repairs and Maintenance",
+      "on_page": "Operation and maintenance 128,813",
+      "issue": "'Operation and maintenance' is broader than repairs and maintenance. The category is defensible, but it is a judgment call."
+    },
+    {
+      "severity": "warning",
+      "path": "balance_sheet.assets[3].category",
+      "page": 1,
+      "extracted": "Cash and Cash Equivalents",
+      "on_page": "Cash in Bank - Restricted 247,125 (Business-type)",
+      "issue": "This is a restricted cash line. Other reports put such lines under 'restricted assets'. Consistency call."
+    }
+  ]
+}

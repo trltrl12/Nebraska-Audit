@@ -1,0 +1,70 @@
+{
+  "stem": "Emerson_FY2022",
+  "values_checked": 166,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "disbursements[17].category",
+      "page": 6,
+      "extracted": "other",
+      "on_page": "Vehicle Expense 4,022",
+      "issue": "[fixed: Repairs and Maintenance / Fuel / Vehicle per label decision] 'other' used for a line whose label is not other/miscellaneous; config/category_decisions.csv decides 'vehicle expenses' (apply=label) as Repairs and Maintenance"
+    },
+    {
+      "severity": "error",
+      "path": "detail[84].category",
+      "page": 10,
+      "extracted": "other",
+      "on_page": "Vehicle Expense (Electric) 3,650",
+      "issue": "[fixed: Repairs and Maintenance / Fuel / Vehicle per label decision] same as disbursements[17]: label decision for vehicle expenses is Repairs and Maintenance, not other / miscellaneous expenditure"
+    },
+    {
+      "severity": "error",
+      "path": "detail[85].category",
+      "page": 10,
+      "extracted": "other",
+      "on_page": "Vehicle Expense (Water) 372",
+      "issue": "[fixed: Repairs and Maintenance / Fuel / Vehicle per label decision] same as disbursements[17]: label decision for vehicle expenses is Repairs and Maintenance, not other / miscellaneous expenditure"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[16].category",
+      "page": 6,
+      "extracted": "other",
+      "on_page": "Meter deposits collected, net of refunds 5,700",
+      "issue": "label is not other/miscellaneous; category_decisions.csv lists this label as context label 'Deposits' (also detail[43]); needs the context check rather than other"
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[15].category",
+      "page": 6,
+      "extracted": "utilities",
+      "on_page": "Telephone and Utilities 26,975",
+      "issue": "a cost-type line (utility bills) given the function name 'utilities', so it can't be told apart from utility function lines; category_decisions.csv has this label as context 'Utilities and Telephone'. Same for detail[76], detail[77] (Telephone) and detail[82], detail[83] (Utilities)"
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[4].original_label",
+      "page": 4,
+      "extracted": "Capital outlay",
+      "on_page": "Capital Outlay 43,346",
+      "issue": "capital outlay rule wants 'Capital Outlay: <function>'; the p9 combining schedule shows it all in Library 23,123 + Cemetery 20,223 (both Culture & Recreation), and the detail lines use 'Capital Outlay: Culture/Recreation', but the statement line is left unlabelled"
+    },
+    {
+      "severity": "warning",
+      "path": "ending_cash",
+      "page": 3,
+      "extracted": 341948,
+      "on_page": "Cash 336,243; Funds Held by County Treasurer 5,705 (no single cash total printed)",
+      "issue": "ending_cash is a computed sum (marked computed, arithmetic correct); the 2026-11-06 ruling says cash is filled only where printed and never derived"
+    },
+    {
+      "severity": "warning",
+      "path": "balance_sheet.equity",
+      "page": 1,
+      "extracted": "no category on the 4 equity lines",
+      "on_page": "Unassigned 401,844; Restricted for Utility Customer Deposits 9,800; Debt Service 107,153; Unrestricted 597,134",
+      "issue": "equity lines have no category field (other reports carry e.g. Unassigned / Restricted)"
+    }
+  ]
+}
