@@ -1,0 +1,23 @@
+{
+  "stem": "Polk_FY2023",
+  "values_checked": 185,
+  "issues": [
+    {"severity": "warning", "path": "missing", "page": 11,
+     "extracted": null, "on_page": "Trim lacks report pp26, 28, 30 (right halves of the combining schedules): Playground Equipment Fund column (Interest 0.40, shown in the p6 Other Governmental column and p16 unaudited summary), schedule totals/budget columns, and the Sewer Fund column of the proprietary budget schedule",
+     "issue": "Known; re-trim pending. Note only. Sewer Fund detail was taken from the proprietary statement column (p9) and ties to its totals (31,316.78 / 57,978.62); Playground Equipment Fund 0.40 not in detail."},
+    {"severity": "warning", "path": "detail[5].detail_category", "page": 11,
+     "extracted": "homestead/tax credits", "on_page": "Homestead Exemption 3,352.56",
+     "issue": "Extractor rule: Homestead Exemption / Property Tax Credit are 'each also as its detail_category'; detail[5], detail[18] (Homestead Exemption) and detail[6], detail[19] (Property Tax Credit) use the generic 'homestead/tax credits' (Red_Cloud_FY2023 uses 'Homestead Exemption'). Existing list name, so not wrong, but inconsistent."},
+    {"severity": "warning", "path": "detail[66].detail_category", "page": 13,
+     "extracted": "tax refunds/treasurer fees", "on_page": "Sales Tax Remittance 18,289.10 (Light Fund)",
+     "issue": "Sales tax remitted to the state is neither a tax refund nor a treasurer fee; no better name in the detailed expenditure list (category Other Taxes Paid is right). Judgment call."},
+    {"severity": "warning", "path": "receipts[21].category", "page": 9,
+     "extracted": "sales tax", "on_page": "Sales Tax 16,832.52 (Light Fund operating receipts); Statement of Activities p4 counts it under Charges for Services against Sales Tax Remittance",
+     "issue": "Pass-through sales tax collected on electric sales and remitted (18,289.10). Printed label 'Sales Tax' supports the category, but it is not village sales-tax revenue; the report itself counts it in Charges for Services. Same on detail[59]."},
+    {"severity": "warning", "path": "disbursements[3].category", "page": 7,
+     "extracted": "general government", "on_page": "Total column by object; Street Fund share e.g. Insurance 7,946.28, Repair and Maintenance 5,410.49, Utilities 7,243.38 (p7)",
+     "issue": "Governmental statement lists spending only by object; every Total-column object line (disbursements[0]-[13], except Library) is general government although a large part is Street Fund spending (streets/highways in the by-fund detail). Follows the Total-column rule; flagged as a judgment call."}
+  ],
+  "year_tie": "FY2023 ending = FY2024 beginning as printed: governmental fund balance 59,915.66 = 59,915.66; business-type 436,413.44 = 436,413.44. No restatement.",
+  "checked": "Page count 16; notes end 'Read pages 1-16 of 16'. source_page values are trimmed pages (statements pp1-10, schedules pp11-16). All 23 receipts, 30 disbursements, transfers 81,400.00 / 15,400.00, business-type transfers net -66,000.00 (Light out 98,000 = General in 66,000 + Water in 32,000; General out 15,400 = Street in 15,400), reported totals, balances, balance-sheet lines/totals and all 94 detail lines and 12 detail_totals match the page; every list sums to its printed total and both roll-forwards close exactly (governmental 52,375.58 -> 59,915.66; business-type 532,674.53 -> 436,413.44). Transfers printed under Other Financing Sources/Uses are other financing, not revenue/spending. Context label 'Meter Deposit' kept in other. Business-type cost-type categories follow the cost-type rule."
+}
