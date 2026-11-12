@@ -1,0 +1,24 @@
+{
+  "stem": "Paxton_FY2023",
+  "values_checked": 235,
+  "issues": [
+    {"severity": "warning", "path": "balance_sheet", "page": 1,
+     "extracted": "governmental lines from the governmental funds balance sheet (total fund balance 550,234.80)", "on_page": "Statement of Activities governmental net position, end of year 786,678.80",
+     "issue": "The government-wide Statement of Net Position (report p4) is not in the trim. Government-wide governmental net position (786,678.80) differs from total fund balance (550,234.80), so it probably includes capital assets or debt. Under the 2026-10-27 balance-sheet ruling, the Statement of Net Position should then be kept. A re-trim is needed to settle which governmental lines belong on the balance sheet."},
+    {"severity": "warning", "path": "ending_cash", "page": 2,
+     "extracted": 927634.28, "on_page": "Cash (including cash equivalents) 927,634.28; Cash held by County Treasurer 11,907.27",
+     "issue": "ending_cash leaves out the separately printed 'Cash held by County Treasurer' 11,907.27. That line is in category Cash and Cash Equivalents on the balance sheet. Under the never-derive-cash rule this is defensible, but the user should know governmental cash on hand totals 939,541.55 across the two printed lines."},
+    {"severity": "warning", "path": "disbursements[4].category", "page": 3,
+     "extracted": "Community Betterment", "on_page": "Community development 8,128.64 (General Fund 5,128.64 = Community Center department p10; Keno Fund 3,000.00)",
+     "issue": "The printed label is 'Community development', not 'Community development/betterment'. The General Fund part is the Community Center department (supplies, services, utilities). Community Betterment is supported by the General Fund's restricted 'Community Betterment' fund balance and the keno funding. Economic development or culture/recreation are also defensible. This is a judgment call; the same applies to detail[50]-[53] and detail[78]."},
+    {"severity": "warning", "path": "detail[44].category", "page": 10,
+     "extracted": "general government", "on_page": "Ambulance department column (Supplies 6,447.69 ... Other expenses 5,951.24; total 21,630.67)",
+     "issue": "Ambulance department lines (detail[44]-[49]) are categorized general government to tie to the p3 fund statement. The Statement of Activities (p1) counts ambulance in Health and Welfare (54,093.67, charges 31,190.88), and the budget schedule (p9) shows Health and Welfare 21,630.67. The department name points to public safety or health/welfare."},
+    {"severity": "warning", "path": "disbursements[13].category", "page": 5,
+     "extracted": "other", "on_page": "Licenses, fees, and permits 2,906.15 (utility operating expense)",
+     "issue": "A utility cost-type line placed in other. 'Other Taxes Paid' (franchise fees/licenses paid) or a new name such as 'Licenses and Fees Paid' could fit. The same applies to detail[83], detail[96] and detail[110]."},
+    {"severity": "warning", "path": "detail", "page": 3,
+     "extracted": "Street, Sales Tax and Keno fund lines from the p3 statement columns; Electric/Water/Sewer/Waste lines from the p5-6 proprietary columns", "on_page": "General Fund has its own departments schedule (p10); the only other schedule is the combined all-funds budget schedule (p9)",
+     "issue": "CLAUDE.md (user 2026-10-28) says that when some funds have their own schedules, statement lines are not added for the other funds. The extractor rule's per-fund paragraph says to add the other funds. Detail[61]-[126] follow the extractor wording. The two rules conflict, so the user should confirm which applies."}
+  ]
+}

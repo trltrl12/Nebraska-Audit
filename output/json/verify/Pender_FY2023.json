@@ -1,0 +1,95 @@
+{
+  "stem": "Pender_FY2023",
+  "values_checked": 345,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "report_discrepancies",
+      "page": 3,
+      "extracted": "not recorded",
+      "on_page": "Governmental assets 1,325,061 + 61,415 + 1,451,830 + 458,276 = 3,296,582; printed Total Assets 3,296,581 (p3 and p1). Cash with county treasurer columns 45,120 + 16,294 = 61,414 vs printed Total 61,415",
+      "issue": "The report itself doesn't add up by $1 in the governmental assets. The balance_sheet asset lines add to 9,537,097 against the printed total_assets 9,537,096. Other $1 gaps were recorded, but this one is missing from report_discrepancies.",
+      "resolved": "report_discrepancies entry added"
+    },
+    {
+      "severity": "warning",
+      "path": "report_discrepancies",
+      "page": 11,
+      "extracted": "not recorded",
+      "on_page": "Grant/donation income Parks 5,620 + Library 8,311 = 13,931; printed Total 13,930 (also 13,930 on p4)",
+      "issue": "detail[118]-[119] add to 13,931, but other_financing (13,930) and the printed total are 13,930. This is a report rounding gap that isn't recorded."
+    },
+    {
+      "severity": "warning",
+      "path": "report_discrepancies",
+      "page": 11,
+      "extracted": "not recorded",
+      "on_page": "Department column sums vs printed totals: General 876,657 vs 876,658; Cemetery 24,964 vs 24,962; Fire 87,340 vs 87,339; Library 85,864 vs 85,865 (all columns together 1,578,043 = printed total)",
+      "issue": "Individual department columns on the combining schedule don't add to their printed column totals, although the fund total ties exactly. On a second read the Cemetery digits are 1,491 / 115 / 14,164 / 1,126 / 628 / 47 / 943 / 6,450. The page shows rounding throughout (row totals for Salaries, Supplies and Contract labor are also off by 1), so this is most likely the report's rounding. p12 utility subtotals are similar (Sewer production 112,891 vs 112,890; Electric/Water/Sewer G&A off by 1)."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[35].category",
+      "page": 11,
+      "extracted": "general government",
+      "on_page": "TIF Expenditures 258,148 (General column)",
+      "issue": "The category list puts TIF in economic development. The extractor kept general government because the p4 statement counts it there. This is inconsistent with recategorizing detail by what the line is (cf. noxious weed)."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[69].category",
+      "page": 11,
+      "extracted": "general government",
+      "on_page": "Fire department column (total 87,339)",
+      "issue": "Fire department lines (detail[69]-[78]) are categorized general government because the p4 statement prints the Fire column total as 'Public buildings'. The budget schedule (p9) calls it 'Public works - other'. The Statement of Activities (p2) spreads it between Public safety (126,194) and Culture and recreation (294,101). The column heading 'Fire' points to public safety. This is a judgment call; the same applies to disbursements[4] 'Public buildings' 87,339."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[47].category",
+      "page": 11,
+      "extracted": "public safety",
+      "on_page": "Cemetery department column (total 24,962)",
+      "issue": "Cemetery lines (detail[47]-[54]) are categorized public safety to tie to the p4 'Public safety' 63,817 (Rescue + Cemetery; the budget schedule calls it 'Public health and safety'). The category rules put cemetery in health/welfare."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[131].category",
+      "page": 10,
+      "extracted": "debt service interest",
+      "on_page": "Bond Fund - Other 820",
+      "issue": "An unlabeled 'Other' disbursement was assumed to be interest/fees. The statement counts it in Debt service 164,985, so debt service (principal and interest combined) would avoid the assumption."
+    },
+    {
+      "severity": "warning",
+      "path": "balance_sheet.liabilities[5].category",
+      "page": 5,
+      "extracted": "debt - due in more than one year",
+      "on_page": "p1: Notes payable 451,852; Bonds payable 1,000,000. p5: Notes payable-current portion 40,650; Bonds payable-current portion 145,000",
+      "issue": "The whole notes (451,852) and bonds (1,000,000, liabilities[6]) are categorized due in more than one year. The proprietary statement (p5) prints current portions of 40,650 and 145,000."
+    },
+    {
+      "severity": "warning",
+      "path": "ending_cash",
+      "page": 3,
+      "extracted": 1325061,
+      "on_page": "Cash in bank 1,325,061; Cash with county treasurer 61,415",
+      "issue": "ending_cash leaves out the separately printed county-treasurer cash 61,415 (category Cash and Cash Equivalents). This is defensible under the never-derive-cash rule, but the user should know."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[13].category",
+      "page": 6,
+      "extracted": "other",
+      "on_page": "Vehicle expense 15,664",
+      "issue": "Vehicle expense is placed in other. A specific cost type (fuel/repairs) or a new 'Vehicle Expense' category could fit. The same applies to the detail Vehicle lines (detail[141], [164], [187], [210], [230])."
+    },
+    {
+      "severity": "warning",
+      "path": "ending_fund_balance",
+      "page": 4,
+      "extracted": 2300500,
+      "on_page": "Fund Balance - End of Year 2,300,500",
+      "issue": "Pender_FY2024 beginning_fund_balance is 2,300,499, $1 below this ending figure, with no restatement. It is likely rounding in the FY2024 report. Business-type net position (3,238,851) and proprietary cash (501,545) carry forward exactly."
+    }
+  ]
+}
