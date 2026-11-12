@@ -1,0 +1,25 @@
+{
+  "stem": "Gothenburg_FY2022",
+  "values_checked": 302,
+  "issues": [
+    {"severity": "warning", "path": "disbursements[7].category", "page": 5,
+     "extracted": "other", "on_page": "Tree Lot/Compost 536.64",
+     "issue": "Function line put in other; the trim (incl. the p13 budget statement, which lists it as its own function) gives no function. Defensible but a last-resort category; the same applies to the four Tree lot/compost detail lines (detail[140]-detail[143]). Could be natural resources/conservation or general government."},
+    {"severity": "warning", "path": "disbursements[9].category", "page": 5,
+     "extracted": "economic development", "on_page": "Community Service 15,000.00 (Economic Development Sales Tax column)",
+     "issue": "Category inferred from the paying fund column; the label itself is 'Community Service' (could be Community Betterment). Judgment call."},
+    {"severity": "warning", "path": "receipts[21].category", "page": 9,
+     "extracted": "other", "on_page": "Other 143,689.69 (proprietary operating revenues)",
+     "issue": "Utility operating 'Other' kept in other (user label decision); the Statement of Activities program revenue page is not in the trim, so it can't be confirmed whether it is counted in Charges for Services."},
+    {"severity": "warning", "path": "detail[129].detail_category", "page": 18,
+     "extracted": "Sales Tax", "on_page": "Lodging tax 5,728.74 (Culture and Recreation - park)",
+     "issue": "A lodging tax paid out by the park is given detail_category 'Sales Tax' (from category_decisions.csv); 'Other Taxes Paid' would describe it better. Label mismatch."},
+    {"severity": "warning", "path": "detail_totals", "page": 20,
+     "extracted": null, "on_page": "Total other financing sources (uses): General Fund (149,343.32) p19; Keno (9,886.58), Owner Occupied Rehab 94,523.86 p20",
+     "issue": "Printed other-financing totals for these funds are not entered in detail_totals (the lines themselves are present and correct)."},
+    {"severity": "warning", "path": "report_discrepancies", "page": 16,
+     "extracted": "police lines sum 799,127.65 vs printed 801,603.55; library lines 264,995.33 vs 267,460.73",
+     "on_page": "every line re-read visually and matches the JSON",
+     "issue": "Confirmed: the printed department totals don't equal their printed lines (the report itself doesn't add up); both, plus Tree lot 90.00, capital outlay 1,026.50 and proprietary operating expenses 6,137.45, are correctly in report_discrepancies. Listed for the user's awareness."}
+  ]
+}
