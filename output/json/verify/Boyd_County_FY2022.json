@@ -1,0 +1,30 @@
+{
+  "stem": "Boyd_County_FY2022",
+  "values_checked": 128,
+  "issues": [
+    {"severity": "warning", "path": "receipts[2].category", "page": 5,
+     "extracted": "intergovernmental/state aid", "on_page": "Intergovernmental Receipts 2,876,022",
+     "issue": "Schedules 1-2 (pp8, 17, 19) print the exact breakdown: Federal 1,825,718 (General 21 + Bridge 1,639,326 + COVID 186,371) and State 1,050,304 (225,069 + 735,732 + 87,433 + 2,070), which add exactly to 2,876,022. The line was kept whole as state aid (to match FY2023), so 1.8M of federal money is counted as state aid."},
+    {"severity": "warning", "path": "receipts[4].category", "page": 5,
+     "extracted": "licenses and permits", "on_page": "Local Fees, Licenses, Commissions, and Miscellaneous 809,889",
+     "issue": "Mixed label. The Statement of Activities (pp2-3) counts 689,470 as charges for services, 546,813 of it Inheritance Tax, and 120,419 as general receipts. Licenses and permits is not the dominant part. The category comes from the user's 2026-10-23 decision, so it is left as a judgment call."},
+    {"severity": "warning", "path": "detail[61].category", "page": 17,
+     "extracted": "other", "on_page": "Road: Local 11,023",
+     "issue": "'Local' is a context label. The Statement of Activities (p2) shows Road charges for services 8,305, which is more than half, so the extractor rule points to charges for services."},
+    {"severity": "warning", "path": "detail[64].category", "page": 17,
+     "extracted": "other", "on_page": "Bridge: Local 37,020",
+     "issue": "The Statement of Activities (p2) shows Bridge charges for services 25,647 (69%), so the rule points to charges for services rather than other."},
+    {"severity": "warning", "path": "detail[66].category", "page": 17,
+     "extracted": "other", "on_page": "Stop Program: Local 78",
+     "issue": "The Statement of Activities (p2) shows S.T.O.P. charges for services 78 (100%), so this is charges for services, not other."},
+    {"severity": "warning", "path": "detail[70].category", "page": 19,
+     "extracted": "other", "on_page": "Reg Deeds P & M: Local 1,901",
+     "issue": "The Statement of Activities (p2) shows Reg Deeds P & M charges for services 1,901 (100%), so this is charges for services, not other."},
+    {"severity": "warning", "path": "detail[72].category", "page": 19,
+     "extracted": "other", "on_page": "Ambulance: Local 26,251",
+     "issue": "The Statement of Activities (p2) shows Ambulance charges for services 25,318 (96%), so the category should be Ambulance Fees or charges for services, not other."},
+    {"severity": "warning", "path": "detail[91].original_label", "page": 21,
+     "extracted": "Capital Outlay", "on_page": "COVID American Rescue Act: Capital Outlay 15,742",
+     "issue": "Every other capital outlay line is relabelled 'Capital Outlay: <function>' under the user's 2026-10-26 rule, but this one is not and has no function in computed. The statement p5 prints it in the Other Governmental Funds capital outlay column only, so the function is not printed."}
+  ]
+}

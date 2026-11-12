@@ -1,0 +1,18 @@
+{
+  "stem": "Bradshaw_FY2022",
+  "values_checked": 179,
+  "issues": [
+    {"severity": "warning", "path": "missing", "page": 13,
+     "extracted": null, "on_page": "Parks & Recreation Fund: receipts 1,772.82, disbursements 20,543.35 (p13, unaudited combined statement)",
+     "issue": "The General Fund detail is incomplete because of the trim, not the extraction. The combining schedules on pp9-10 print only the General, Community Center and RV Park columns. Their receipts total 141,186.15, while the statement's General Fund column (p6) prints 142,958.97; the gap of 1,772.82 is the Parks & Recreation column. Their disbursements total 96,657.20 against 117,200.55 on p7; the gap of 20,543.35 is the same fund. The page with the Parks & Recreation column (source report around pp22/24) and the Sewer Fund proprietary budget page are not in the trimmed PDF. The extractor disclosed this in notes. The pages should be added via config/extra_pages.csv and the report re-trimmed."},
+    {"severity": "warning", "path": "disbursements[4].category", "page": 6,
+     "extracted": "general government", "on_page": "Repair and Maintenance 38,779.87 (General 10,221.44, Street 28,558.43)",
+     "issue": "The line is listed by object, and 74% of it is in the Street Fund column, so streets/highways is arguably the dominant function. general government is a defensible call under the listed-by-object rule."},
+    {"severity": "warning", "path": "disbursements[14].original_label", "page": 7,
+     "extracted": "Capital Outlay", "on_page": "Capital Outlay: Equipment 9,637.89; Improvements other than Buildings 6,248.97",
+     "issue": "The capital outlay lines are not labelled 'Capital Outlay: <function>'. Equipment mixes General Fund and Street Fund money, but Improvements other than Buildings (disbursements[15]) is General Fund only. detail[27] (General Fund Equipment 3,637.89, p10) also lacks the function, while the Community Center, RV Park and Street lines have it."},
+    {"severity": "warning", "path": "balance_sheet.equity[0].category", "page": 7,
+     "extracted": null, "on_page": "Assigned 9,270.16; Unassigned (39,730.57); Unrestricted 590,598.32 (p1)",
+     "issue": "None of the three equity lines has a category field. The amounts and signs are correct."}
+  ]
+}
