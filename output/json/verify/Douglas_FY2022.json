@@ -1,0 +1,9 @@
+{
+  "stem": "Douglas_FY2022",
+  "values_checked": 95,
+  "issues": [
+    {"severity": "warning", "path": "receipts[8].category", "page": 1, "extracted": "other", "on_page": "Local Receipts: Other - Water Fund 62,905.88, Sewer Fund 30,759.04 (p1); Debt Service Account 8.73, W/S Ext/Rpl 30.55 (p2)", "issue": "Almost all of the business-type 'Local Receipts: Other' is in the Water and Sewer Fund columns, so it is most likely utility charges. It was kept as 'other' under the 2026-10-23 label decision. 'Local Receipts' is a context label, so the context check should settle it from the page. The same applies to detail[30] and detail[33]."},
+    {"severity": "warning", "path": "disbursements[6].fund_type", "page": 4, "extracted": "business-type", "on_page": "Line 39 Debt Service (Governmental section) - Debt Service Account 8,625.48", "issue": "The form prints this under Governmental disbursements. The extractor treats it as business-type because the account is funded only by Water Fund transfers (p5) and the 2017 water improvement debt is outstanding. This is defensible and matches FY2023/FY2024, but it is an assumption."},
+    {"severity": "warning", "path": "reported_totals.business-type.receipts.includes", "page": 1, "extracted": "includes: [] with includes_split 14,914.68", "on_page": "line 21 Total Receipts includes line 20 transfers in 8,797.32 + 6,117.36", "issue": "The business-type receipts total 108,618.88 includes 14,914.68 of transfers in (and disbursements 95,798.29 includes 14,914.68 of transfers out), but 'includes' is empty. Only the nonstandard 'includes_split' field records this. The figures reconcile: 93,704.20 + 14,914.68 and 80,883.61 + 14,914.68."}
+  ]
+}
