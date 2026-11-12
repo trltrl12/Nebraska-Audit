@@ -1,0 +1,82 @@
+{
+  "stem": "Wayne_FY2023",
+  "values_checked": 248,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "report_discrepancies",
+      "page": 3,
+      "extracted": "[] (notes mention the gap but do not record it)",
+      "on_page": "Statement of Activities general revenues Sales tax 1,568,839 (p3) vs governmental funds statement Sales tax 1,568,838 (p5)",
+      "issue": "The report's own $1 rounding gap is not recorded. Add a report_discrepancies entry (difference 1, source_page 3).",
+      "resolved": "fixed: gap recorded; spending detail_category set"
+    },
+    {
+      "severity": "error",
+      "path": "detail[72].detail_category",
+      "page": 8,
+      "extracted": "In Lieu of Tax",
+      "on_page": "Electric Fund: Payments in lieu of taxes 834,219 (operating expense)",
+      "issue": "'In Lieu of Tax' is a revenue detail category and is not in the expenditure detail_category list. Use an existing expenditure detail category (e.g. grants/payments to other entities or tax refunds/treasurer fees; category stays Other Taxes Paid).",
+      "resolved": "fixed: gap recorded; spending detail_category set"
+    },
+    {
+      "severity": "error",
+      "path": "detail[84].detail_category",
+      "page": 8,
+      "extracted": "In Lieu of Tax",
+      "on_page": "Water Fund: Payments in lieu of taxes 110,323 (operating expense)",
+      "issue": "Same problem: this revenue detail category is used on an expenditure line. It must come from the expenditure detail_category list.",
+      "resolved": "fixed: gap recorded; spending detail_category set"
+    },
+    {
+      "severity": "error",
+      "path": "detail[95].detail_category",
+      "page": 8,
+      "extracted": "In Lieu of Tax",
+      "on_page": "Sewer Fund: Payments in lieu of taxes 122,637 (operating expense)",
+      "issue": "Same problem: this revenue detail category is used on an expenditure line. It must come from the expenditure detail_category list.",
+      "resolved": "fixed: gap recorded; spending detail_category set"
+    },
+    {
+      "severity": "warning",
+      "path": "report_discrepancies",
+      "page": 3,
+      "extracted": "[]",
+      "on_page": "Statement of Activities governmental Interest income 218,082 vs fund interest 199,438 + internal service fund interest 18,645 (p8) = 218,083",
+      "issue": "There is a possible $1 rounding gap between the government-wide and fund statements. It is less certain than the sales tax gap because the internal service fund consolidation is not printed line by line."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[8].category",
+      "page": 5,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "Grant revenue 587,973 (Community Development Fund); grantor not printed",
+      "issue": "The grantor is not printed, so state aid is a guess (ruling: do not guess a grantor). This could be federal grants (e.g. CDBG). The same applies to detail[44]."
+    },
+    {
+      "severity": "warning",
+      "path": "missing",
+      "page": 16,
+      "extracted": null,
+      "on_page": "Debt Service Fund budget schedule: Other revenue, budget 211,641, actual -",
+      "issue": "The zero-actual revenue line is omitted, so its budget_final 211,641 is lost. No actual money is missing."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[59].original_label",
+      "page": 17,
+      "extracted": "Capital Outlay: Public Safety",
+      "on_page": "Capital outlay 29,779 (Wireless 911 column)",
+      "issue": "The function is taken from the fund name (Wireless 911). That is defensible, but the row prints no function. Street Fund 'Capital projects' -> Capital Outlay: Streets/Highways (p14) is likewise from the fund name."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[16].category",
+      "page": 8,
+      "extracted": "charges for services/fees",
+      "on_page": "Other revenue 167,642 (counted in Charges for Services on p2: each utility's charges = total operating revenues)",
+      "issue": "This is correct under the 2026-11-06 ruling. However, config/category_decisions.csv maps 'other revenue' (apply=label) to other, so user_rules.py may overwrite it. Check after user_rules runs (also detail[66], [78], [90], [101])."
+    }
+  ]
+}
