@@ -1,0 +1,11 @@
+{
+  "stem": "Hershey_FY2022",
+  "values_checked": 122,
+  "issues": [
+    {"severity": "warning", "path": "business_type.ending", "page": 6, "extracted": 902658, "on_page": "827,821 + 400,433 - 321,414 - 4,180 = 902,660 vs printed 902,658", "issue": "Roll-forward is off by 2, but this is the report's own rounding, not a misread digit. Every line was re-read on p6, p11 and p7: 165/266/107, 53,896, (30,000), (18,490), (10,124) and all receipt and disbursement cells are correct. The printed Total net change is 74,838 (p11 prints 74,837.93) against 74,839 from its lines. Water net change prints 53,206 against 53,205 computed. The fund-column beginning balances add to 827,820 against 827,821 printed, and the endings add to 902,659 against 902,658. Already recorded in report_discrepancies."},
+    {"severity": "warning", "path": "receipts[15].category", "page": 6, "extracted": "other", "on_page": "Customer Deposits 1,728", "issue": "Customer deposits received are refundable deposits, not revenue. 'Deposits' is a context label, so the context check should decide its category."},
+    {"severity": "warning", "path": "receipts[18].original_label", "page": 6, "extracted": "Property Tax", "on_page": "Property tax receipts - Water Bond", "issue": "Relabelled to plain 'Property Tax'. The 2026-11-06 ruling keeps qualified property tax labels (debt service / bond levies) as printed. detail[33] does the same with 'Property taxes allocated for water bond payments' (p11)."},
+    {"severity": "warning", "path": "receipts[6].category", "page": 4, "extracted": "occupation/franchise tax", "on_page": "5% Gross 3,861", "issue": "Calling this occupation tax is the extractor's assumption. The page prints only '5% Gross', counted under Taxes."},
+    {"severity": "warning", "path": "detail[17].original_label", "page": 4, "extracted": "Capital Outlay", "on_page": "Capital outlay (General column) 34,906", "issue": "The label has no ': <function>' part. The General Fund column prints no function, so the label was left generic. This is a judgment call against the capital outlay labelling rule."}
+  ]
+}
