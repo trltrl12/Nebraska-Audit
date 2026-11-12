@@ -1,0 +1,21 @@
+{
+  "stem": "Falls_City_FY2022",
+  "values_checked": 124,
+  "issues": [
+    {"severity": "warning", "path": "disbursements[14]", "page": 6,
+     "extracted": {"category": "Debt Service", "amount": 141329}, "on_page": "Interest expense / Other Income (141,329) Totals (Electric (152,383), Water 1,007,091, Gas (996,037))",
+     "issue": "net row mixing interest expense with Water other income (cash flow p7 shows Water 'Interest and dividends / Grants' 1,007,097); recording the net as debt service interest is defensible but the true interest is larger and the income is netted out"},
+    {"severity": "warning", "path": "other_financing.amount", "page": 4,
+     "extracted": 4958, "on_page": "Interest/Dividends 4,958 (under Other Financing Sources)",
+     "issue": "interest income kept in other_financing because the statement prints it under Other Financing Sources; as printed and consistent with FY2023/FY2024, but it is investment income, not financing"},
+    {"severity": "warning", "path": "transfers_in.amount", "page": 4,
+     "extracted": 15665, "on_page": "Transfer in 15,665 (CDBG); Transfer out '-' in every fund; proprietary cash flows p7 transfers '-'",
+     "issue": "one-sided transfer in the report itself; no matching outflow on any of the 9 pages (question is in decision_needed)"},
+    {"severity": "warning", "path": "detail[4].amount", "page": 8,
+     "extracted": 219410, "on_page": "A-1 Charges for services 219,410 / Transfers in 20,067 vs statement p4 Charges for services 223,812 / Transfer in 15,665",
+     "issue": "A-1 schedule and fund statement differ by 4,402 on both rows (offsetting), and A-1 Public safety / Community development include principal and capital outlay; recorded as printed, report-level inconsistency"},
+    {"severity": "warning", "path": "missing", "page": 9,
+     "extracted": null, "on_page": "B-2 nonmajor: Local 12,277; Interest Income 569/26/150 (745); Total Expenditures Total column 270,583 with every fund column '-'",
+     "issue": "B-2 intentionally not in detail (A-1 already covers all governmental funds, avoiding double counting); note that the B-2 page itself doesn't add up (Total Expenditures 270,583 and excess (258,306) while fund columns are '-' and the funds statement prints nonmajor expenditures '-')"}
+  ]
+}

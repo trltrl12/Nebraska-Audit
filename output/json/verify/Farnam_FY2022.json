@@ -1,0 +1,18 @@
+{
+  "stem": "Farnam_FY2022",
+  "values_checked": 70,
+  "issues": [
+    {"severity": "warning", "path": "detail[16].category", "page": 1,
+     "extracted": "other", "on_page": "Street Fund Local Receipts: Other 53,500.00 (void p6 version: 3,500.00); p5 Schedule of Outstanding Debt: Loan issued 8/17/2022, 49,290.75 outstanding",
+     "issue": "50,000.00 - Street Debt Service 709.25 = 49,290.75 exactly, so the extra 50,000 in this line is very likely the loan proceeds; kept as printed (no printed breakdown to split), question already in decision_needed; same applies to receipts[9] (governmental Local Receipts: Other 142,491.98)"},
+    {"severity": "warning", "path": "disbursements[7].fund_type", "page": 3,
+     "extracted": "governmental", "on_page": "line 45 Solid Waste 23,502.09, under 'Business-Type Activities:' but in the General Fund column",
+     "issue": "row is printed in the business-type section; governmental by fund column is defensible (General Fund roll-forward requires it), but the report's own section says business-type"},
+    {"severity": "warning", "path": "balance_sheet.equity[0].original_label", "page": 1,
+     "extracted": "Subtotal of Ending Balances (Line 26 + 27)", "on_page": "line 28 Subtotal of Ending Balances (Line 26 + 27)",
+     "issue": "a printed subtotal row used as the equity line (the waiver form prints no fund balance/net position line); acceptable for a waiver form but it is a subtotal label"},
+    {"severity": "warning", "path": "beginning_cash.amount", "page": 1,
+     "extracted": 202174.25, "on_page": "line 3 Subtotal of Beginning Balance (governmental columns) incl. investments 105,808.52",
+     "issue": "beginning/ending cash are cash-plus-investments subtotals while beginning/ending_investments also hold the investment amounts; correct per the cash-basis rule (investments informational) but anyone summing cash + investments would double count"}
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "stem": "Fairmont_FY2022",
+  "values_checked": 74,
+  "issues": [
+    {"severity": "warning", "path": "transfers_in.amount", "page": 4,
+     "extracted": 1611748, "on_page": "Transfers in 1,611,748 (GF 889,439 + Special Revenue 722,309) vs Transfers out 885,083 (GF)",
+     "issue": "Checked all 8 trimmed pages: no other transfer out exists (enterprise statement p6 prints none; SoA p2 folds transfers in into governmental 'Other general receipts' 1,758,936 = 147,188 + 1,611,748 and transfers out into General government 1,314,180 = 429,097 + 885,083). The 726,665 one-sided gap is in the report itself; amounts correctly kept as printed and the question is in decision_needed, but it is not recorded in report_discrepancies[]"},
+    {"severity": "warning", "path": "disbursements[3].category", "page": 4,
+     "extracted": "health/welfare", "on_page": "Aging services 71,232 (printed under the 'Culture and recreation' heading; SoA p2 Culture and recreation 212,893 = 71,232 + 68,060 + 73,601)",
+     "issue": "report groups Aging services in culture and recreation; health/welfare is defensible by nature but differs from the report's own grouping"},
+    {"severity": "warning", "path": "detail[4].category", "page": 7,
+     "extracted": "Operating", "on_page": "Operating expenses 1,650,724 (schedule Transfer out row '-')",
+     "issue": "GF schedule actual equals statement GF spending 765,641 + transfers out 885,083; kept as printed per the as-printed rule, so 885,083 of transfers sits inside a detail spending line (question already in decision_needed)"},
+    {"severity": "warning", "path": "detail[3].amount", "page": 7,
+     "extracted": 0, "on_page": "Transfer in other than surplus fees '-'",
+     "issue": "statement p4 prints GF transfers in 889,439, but the GF budget schedule shows no transfer in actual; schedule and statement disagree in the report itself"},
+    {"severity": "warning", "path": "detail[1].category", "page": 7,
+     "extracted": "motor vehicle tax", "on_page": "Other state receipts 14,408",
+     "issue": "printed label is 'Other state receipts'; category taken from the statement's 'Other (motor vehicle)' row (already in decision_needed)"}
+  ]
+}
