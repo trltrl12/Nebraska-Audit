@@ -1,0 +1,21 @@
+{
+  "stem": "Oxford_FY2022",
+  "values_checked": 258,
+  "issues": [
+    {"severity": "warning", "path": "transfers_in", "page": 7,
+     "extracted": 87406, "on_page": "Transfers in (out): General 113,390, Street 28,205, Sinking (48,923), Library Memorial (5,266); Total Governmental Funds 87,406 (net)",
+     "issue": "transfers_in holds the printed net Total column figure; gross transfers in 141,595 and out 54,189 are printed per fund (transfers_out null). Roll-forward holds either way; defensible since only the net is printed in the Total column"},
+    {"severity": "warning", "path": "detail[10].computed", "page": 19,
+     "extracted": "the Statement of Activities counts it in Public safety charges for services ...", "on_page": "Rural Fire 41,543 (printed as-is)",
+     "issue": "amount is printed as-is but carries a computed note (explanatory text in computed); same on detail[23] (Rural Fire 6,487, p20). Could make the value look derived"},
+    {"severity": "warning", "path": "detail[87].category", "page": 20,
+     "extracted": "streets/highways", "on_page": "Cemetery department lines (total 20,799), reported under Public works on p12",
+     "issue": "cemetery spending (7 lines detail[87]-detail[93], and inside the statement's Public works 155,718 line disbursements[2]) categorized streets/highways because the report groups Cemetery under Public works; the category list puts cemetery under health/welfare. Judgment call"},
+    {"severity": "warning", "path": "detail[111].original_label", "page": 13,
+     "extracted": "Capital Outlay: Streets/Highways", "on_page": "Capital outlay 2,064",
+     "issue": "function taken from the fund name (computed) although no function is printed; the 2026-11-12 FY2022 ruling says capital outlay function only when printed. Equipment Sinking Fund capital outlay (detail[128]) was left as plain 'Capital Outlay', so the two are inconsistent"},
+    {"severity": "warning", "path": "disbursements[10].category", "page": 9,
+     "extracted": "utilities", "on_page": "Utilities and telephone 38,720",
+     "issue": "business-type cost-type line given category 'utilities', which is also the function category; a cost-type name (utilities (power, gas, phone)) may be intended under the 2026-10-28 cost-type rule"}
+  ]
+}
