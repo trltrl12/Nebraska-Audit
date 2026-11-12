@@ -1,0 +1,22 @@
+{
+  "stem": "Sherman_County_FY2023",
+  "values_checked": 183,
+  "issues": [
+    {"severity": "warning", "path": "receipts[4].category", "page": 5,
+     "extracted": "licenses and permits (detail_category 'Licenses, Fees and Taxes', category_decision 'user 2026-10-23')",
+     "on_page": "Local Fees, Licenses, Commissions, and Miscellaneous 888,159",
+     "issue": "Mixed label with no printed breakdown. config/category_decisions.csv has no revenue-section decision for this label; 'Licenses, Fees and Taxes' is an expenditure-section decision value. The Statement of Activities (p2) counts most of these receipts as Charges for Services (594,094). The category is defensible as the dominant-part choice and matches FY2024, but category_decision cites a decision that does not exist for this label."},
+    {"severity": "warning", "path": "detail[61].detail_category", "page": 12,
+     "extracted": "other state aid", "on_page": "Road: State 1,023,407",
+     "issue": "Road Fund 'State' receipts are almost certainly the highway allocation (the Statement of Activities p2 shows Road operating grants 1,023,407). The specific detail_category 'highway allocation' may fit better. Judgment call."},
+    {"severity": "warning", "path": "detail[113].category", "page": 16,
+     "extracted": "general government",
+     "on_page": "Planning and Zoning: Personal Services 9,937; Operating Disbursements 4,159",
+     "issue": "The governmental funds statement (p5) puts Planning and Zoning in Public Works (other governmental funds 44,954 = Noxious Weed 30,858 + Planning and Zoning 14,096), so the function does not match the report's own grouping. Same for detail[114]. The extractor flagged this with a review note."},
+    {"severity": "warning", "path": "balance_sheet", "page": 1,
+     "extracted": "governmental funds statement p7 only (Cash and Deposits 4,971,527; Restricted/Committed/Assigned/Unassigned)",
+     "on_page": "Statement of Net Position p1: Cash and Deposits 4,945,209; Designated Deposits 26,318; Total Assets 4,971,527; Restricted 342,074; Unrestricted 4,629,453",
+     "issue": "The p1 balance-sheet lines are not recorded as items. They are only described in the notes. Under the user's cash-basis rule, using p7 is right because the totals agree. As a result, the separate Designated Deposits 26,318 line does not appear."}
+  ],
+  "fy2024_tie": "FY2023 ending fund balance 4,971,527 = Sherman_County_FY2024 beginning_fund_balance 4,971,527 (ties as printed; no restatement). Ending cash 4,971,527 is printed; beginning cash is not printed (null in both years)."
+}
