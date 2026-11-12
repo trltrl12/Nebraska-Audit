@@ -1,0 +1,47 @@
+{
+  "stem": "Hubbard_FY2022",
+  "values_checked": 108,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "detail[27]",
+      "page": 10,
+      "extracted": 75,
+      "on_page": "Center Usage Charges 75 (Fire Department Fund, p10); the same money is inside the p8 all-funds combined 'Claims, Refunds, Reimbursements, and Other Local Receipts' 97,366 (detail[8])",
+      "issue": "Double counted across schedules: the p8 Supplementary Budgetary Comparison Schedule covers all funds combined, so the Fire Department Fund's 75 revenue is already in detail[8]; adding the p10 line counts it twice in detail revenue",
+      "resolved": "fixed: duplicate Fire Department 'Center Usage Charges' 75 removed (already in the p8 all-funds line)"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[8].fund_type",
+      "page": 8,
+      "extracted": "governmental",
+      "on_page": "Claims, Refunds, Reimbursements, and Other Local Receipts 97,366 (all funds combined)",
+      "issue": "Line mixes governmental receipts with business-type utility collections (about 58k of the 97k is the proprietary fund's revenue, p6), yet is tagged governmental; category other for a mixed line whose dominant part is utility charges is a judgment call"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[11].category",
+      "page": 9,
+      "extracted": "other",
+      "on_page": "General Fund object lines: Car Allowance 300, ARPA Expenses 15,682, Insurance 10,857, Other 4,719, Printing 1,394, Rent Expense 6,600, General Cleanup 3,094, Services 5,187, Utilities 15,638 (detail[11], [12], [14], [16], [17], [19], [22], [23], [24])",
+      "issue": "Extractor rule says object-only spending takes the fund's function (General Fund -> general government, review 'listed by object'); these were left in other. Defensible since the General Fund also pays streets and recreation (p9 Activity section), but it puts about 63k of 139k governmental detail spending in other"
+    },
+    {
+      "severity": "warning",
+      "path": "ending_cash",
+      "page": 3,
+      "extracted": 208308,
+      "on_page": "Cash 208,308; Funds Held by County Treasurer 1,101",
+      "issue": "ending_cash excludes Funds Held by County Treasurer 1,101, while balance_sheet.assets[4] puts that line in Cash and Cash Equivalents (county treasurer balances are cash per the user's rule)"
+    },
+    {
+      "severity": "warning",
+      "path": "balance_sheet.assets[6]",
+      "page": 1,
+      "extracted": -17280,
+      "on_page": "Total column prints * (interfund amounts eliminated in total column); no Eliminations column",
+      "issue": "Eliminations lines (assets[6], liabilities[3]) were created although the rules allow fund_type eliminations only where an Eliminations column is printed; they are marked computed and make the lines tie to the printed totals 627,667 / 2,177"
+    }
+  ]
+}
