@@ -1,0 +1,48 @@
+{
+  "stem": "Steinauer_FY2023",
+  "values_checked": 72,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "report_discrepancies",
+      "page": 5,
+      "extracted": "only the blank lines 26-28 entry",
+      "on_page": "Schedule of Interfund Transfers TOTAL 1,578.00 ('Should agree to Exh A, Page 1 Lines 19+20 and Page 2 Lines 49+50'); Exhibit A line 19 Total 6,578.00 (p1) and line 49 Total 6,578.00 (p3)",
+      "issue": "the report is internally inconsistent: the transfer schedule leaves out the General-to-Street 5,000.00 transfer printed on Exhibit A lines 19/49, so it does not agree with Exhibit A as the form requires. Add a report_discrepancies entry (difference 5,000.00). The JSON amounts themselves are correct as printed",
+      "resolved": "fixed as described"
+    },
+    {
+      "severity": "error",
+      "path": "detail[6].detail_category",
+      "page": 1,
+      "extracted": "other local taxes",
+      "on_page": "Local Receipts: In Lieu of Tax 1,564.93 (General Fund)",
+      "issue": "In Lieu of Tax has its own detail_category ('In Lieu of Tax'); the 'other local taxes' bucket was used even though a specific category fits",
+      "resolved": "fixed as described"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[4].detail_category",
+      "page": 1,
+      "extracted": "homestead/tax credits",
+      "on_page": "State Receipts: Property Tax Credit 619.75",
+      "issue": "the rules make Property Tax Credit its own detail_category; 'homestead/tax credits' is a listed name, so this is defensible, but it is inconsistent with the line's category"
+    },
+    {
+      "severity": "warning",
+      "path": "ending_cash",
+      "page": 1,
+      "extracted": 108988.99,
+      "on_page": "line 26 Net Cash Balance blank; line 24 Ending Balance General 91,524.20 + Street 17,464.79",
+      "issue": "the ending cash and the balance_sheet.assets[0]/[1] Cash and Cash Equivalents figures (108,988.99 / 91,352.76) come from line 24 'Ending Balance', because the line 26 cash breakdown is printed blank. The 2026-11-06 ruling says cash is filled only where printed and is never derived. The p5 schedule shows no investments, so the figure is very likely cash, but a person should confirm this is acceptable"
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[3].fund_type",
+      "page": 3,
+      "extracted": "governmental",
+      "on_page": "Solid Waste 9,648.00, printed under Business-Type Activities in the GENERAL FUND column",
+      "issue": "the row heading says business-type but the column is the General Fund. Keeping it governmental by column is defensible (also detail[10])"
+    }
+  ]
+}

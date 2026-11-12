@@ -1,0 +1,23 @@
+{
+  "stem": "Steele_City_FY2023",
+  "values_checked": 66,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "detail[6].detail_category",
+      "page": 1,
+      "extracted": "other local taxes",
+      "on_page": "Local Receipts: In Lieu of Tax 127.00 (General Fund)",
+      "issue": "In Lieu of Tax has its own detail_category ('In Lieu of Tax', the name used in category_decisions.csv and other FY2023 reports); the 'other local taxes' bucket was used even though a specific category fits",
+      "resolved": "fixed as described"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[4].detail_category",
+      "page": 1,
+      "extracted": "homestead/tax credits",
+      "on_page": "State Receipts: Property Tax Credit 525.00",
+      "issue": "the extractor rules say Property Tax Credit is also its own detail_category ('Property Tax Credit'); 'homestead/tax credits' is in the list, so this is defensible, but it is inconsistent with the line's category"
+    }
+  ]
+}
