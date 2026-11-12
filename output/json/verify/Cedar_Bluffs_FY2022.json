@@ -1,0 +1,47 @@
+{
+  "stem": "Cedar_Bluffs_FY2022",
+  "values_checked": 160,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "receipts[3].category",
+      "page": 4,
+      "extracted": "other",
+      "on_page": "Grant revenue 51,592 (General Fund; Statement of Activities p2: Capital Grants and Contributions, general government)",
+      "issue": "a line printed as 'Grant revenue' is not a miscellaneous/other line, so 'other' is wrong under the last-resort rule. The same label is intergovernmental/state aid in config/label_synonyms.csv (80 lines) and in Cedar_Bluffs_FY2025 ('Grant revenue' 5,915). Should be intergovernmental/state aid with review (grantor not printed)",
+      "resolved": "user ruling 2026-11-12: no grantor printed, so no guessed state/federal; category other, detail_category Grants"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[5].category",
+      "page": 4,
+      "extracted": "other (Miscellaneous 35,693, incl. Other Governmental Funds 15,632)",
+      "on_page": "Miscellaneous 35,693; Keno Fund schedule p12 Miscellaneous 15,632",
+      "issue": "inconsistent with detail[25], where the same Keno Fund 15,632 is keno/lottery (fund name). Statement line kept as printed (one Total-column line), but the two levels disagree on what the 15,632 is. The Statement of Activities (p2) shows it as community betterment operating grants and contributions"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[13].detail_category",
+      "page": 10,
+      "extracted": "miscellaneous revenue (category Bond Proceeds)",
+      "on_page": "Bond warrants - (budget 300,000)",
+      "issue": "detail_category does not match the category (Bond Proceeds); zero actual, so no amount effect"
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[9].category",
+      "page": 7,
+      "extracted": "utilities",
+      "on_page": "Utilities 7,690 (proprietary operating expenses by cost type)",
+      "issue": "a cost-type line (power/phone) given the function name 'utilities' under the utility cost-type rule; could be its own cost-type category (Utilities (Power, Gas, Phone)). Same for detail[36] and detail[45]"
+    },
+    {
+      "severity": "warning",
+      "path": "proprietary",
+      "page": 8,
+      "extracted": null,
+      "on_page": "Statement of Cash Flows - Modified Cash Basis, Proprietary Funds: operating (19,957), noncapital financing 59,955, capital and related financing (39,998), cash beginning/ending 0",
+      "issue": "proprietary cash flow statement printed but not recorded (the extractor treats proprietary as GAAP only; notes say non-GAAP, as in later years). Not a revenue/expenditure omission"
+    }
+  ]
+}
