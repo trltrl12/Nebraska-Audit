@@ -1,0 +1,18 @@
+{
+  "stem": "Plymouth_FY2022",
+  "values_checked": 200,
+  "issues": [
+    {"severity": "warning", "path": "receipts[3].category", "page": 5,
+     "extracted": "Public Power District Sales Tax", "on_page": "Public power lease rebate 64,124; Statement of Activities (p2) counts it in Policy/administration Charges for Services 74,165 (= 64,124 + 4,591 + 1,561 + 889 + 3,000), not in Taxes 305,117",
+     "issue": "category follows the user's label decision (category_decisions.csv), but the report treats it as a lease/charge, not a tax"},
+    {"severity": "warning", "path": "receipts[12].category", "page": 6,
+     "extracted": "other", "on_page": "Miscellaneous 2,099 = General 889 + Street 735 + Park 475; Statement of Activities counts all three in Charges for Services (policy/admin, public works, culture and recreation)",
+     "issue": "same label categorized differently: detail[27] (Street 735) and detail[47] (Park 475) are charges for services/fees, while the statement line and detail[7] (General 889) stay other"},
+    {"severity": "warning", "path": "receipts[13].category", "page": 6,
+     "extracted": "other", "on_page": "Community development 3,000 (General Fund); included in Statement of Activities Policy/administration Charges for Services 74,165 (p2)",
+     "issue": "page supports charges for services/fees rather than other (same for detail[8])"},
+    {"severity": "warning", "path": "detail[33].original_label", "page": 10,
+     "extracted": "Capital Outlay: Streets/Highways (detail[33]); Capital Outlay: Culture/Recreation (detail[54])", "on_page": "Capital outlay (no function printed)",
+     "issue": "function taken from the fund column name, not printed (2026-11-12 FY2022 ruling: function only when printed); Auditorium and Recycle capital outlay lines were left as 'Capital outlay', so treatment is inconsistent"}
+  ]
+}
