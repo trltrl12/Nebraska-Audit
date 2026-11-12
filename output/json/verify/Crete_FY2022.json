@@ -1,0 +1,21 @@
+{
+  "stem": "Crete_FY2022",
+  "values_checked": 192,
+  "issues": [
+    {"severity": "warning", "path": "receipts[7].category", "page": 7,
+     "extracted": "other", "on_page": "Grants 800,782 (General 12,282, Capital Projects 143,508, Other Governmental 644,992 = ARPA 620,077 + FEMA Disaster 24,915 per p21)",
+     "issue": "Kept in other because no grantor is printed, but 644,992 of it sits in the ARPA and FEMA Disaster fund columns, and the detail records those as federal grants. The statement line and the detail are categorized differently. A Grants category might fit better than other; needs review."},
+    {"severity": "warning", "path": "detail[46].category", "page": 21,
+     "extracted": "federal grants", "on_page": "ARPA Fund - Grant income 620,077",
+     "issue": "The grantor comes from the fund name (marked computed). It is defensible, but the 2026-11-06 ruling says not to guess a grantor, and the matching statement line receipts[7] stays other."},
+    {"severity": "warning", "path": "detail[56].category", "page": 21,
+     "extracted": "federal grants", "on_page": "FEMA Disaster Fund - Grant income 24,915",
+     "issue": "Same as detail[46]: federal is assumed from the fund name."},
+    {"severity": "warning", "path": "disbursements[10].category", "page": 12,
+     "extracted": "Salaries and Wages", "on_page": "Salaries and benefits 2,180,570",
+     "issue": "The line combines salaries and benefits, and all of it is put in Salaries and Wages (judgment call)."},
+    {"severity": "warning", "path": "disbursements[16].category", "page": 12,
+     "extracted": "Repairs and Maintenance", "on_page": "Vehicle expense 28,314",
+     "issue": "Vehicle expense is put in Repairs and Maintenance. It may also include fuel or insurance (judgment call)."}
+  ]
+}

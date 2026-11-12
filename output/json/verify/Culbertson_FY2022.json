@@ -1,0 +1,21 @@
+{
+  "stem": "Culbertson_FY2022",
+  "values_checked": 108,
+  "issues": [
+    {"severity": "warning", "path": "disbursements[0].category", "page": 4,
+     "extracted": "Salaries and Wages", "on_page": "Personnel services 115,563 (General 55,064, Street 60,499)",
+     "issue": "This is a governmental statement line listed by object. The rule says to use the fund's function (general government / streets) with review; cost-type categories are meant for business-type lines. With the line mixed across General and Street it's a judgment call."},
+    {"severity": "warning", "path": "disbursements[2].category", "page": 4,
+     "extracted": "Supplies and Materials", "on_page": "Supplies 24,471 (General 13,179, Street 11,292)",
+     "issue": "Same as disbursements[0]: a cost-type category is used on a governmental statement line listed by object."},
+    {"severity": "warning", "path": "detail_totals[2].schedule", "page": 4,
+     "extracted": "Statement of Cash Receipts, Disbursements and Changes in Cash Basis Fund Balances - Governmental Funds", "on_page": "Street lines are recorded under schedule 'Budget to Actual - Governmental Funds' (p7)",
+     "issue": "The Street Fund revenue and expenditure totals (detail_totals[2], [3]) have a different schedule name from their detail lines, so a tie-out by schedule+fund+section won't match them. The amounts do tie (101,471 and 129,832)."},
+    {"severity": "warning", "path": "detail_totals[5].schedule", "page": 2,
+     "extracted": "Statements of Activities - Cash Basis", "on_page": "Water/Sewer expenditure lines are recorded under the p6 proprietary statement schedule name",
+     "issue": "The Water and Sewer expenditure totals (detail_totals[5], [7]) have a different schedule name from their detail lines. The amounts tie (193,035 and 101,982, which include debt service)."},
+    {"severity": "warning", "path": "missing", "page": 9,
+     "extracted": null, "on_page": "County Treasurer schedule: Property taxes 127,914; Motor vehicle taxes 12,387; Homestead exemption 7,002; Pro-rate 372; In-lieu of taxes 10,242; Carline 231; Interest 316; State tax credit 7,135; To Village Treasurer 162,586; County Treasurer fee 1,352",
+     "issue": "The schedule is left out on purpose because it is a collection account remitted to the village, and including it would double count. As a result, Carline 231 and the treasurer fee 1,352 never show up as their own lines (they are netted inside the village's receipts). Defensible; noted for review."}
+  ]
+}
