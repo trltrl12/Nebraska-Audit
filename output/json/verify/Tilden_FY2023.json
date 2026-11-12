@@ -1,0 +1,63 @@
+{
+  "stem": "Tilden_FY2023",
+  "values_checked": 113,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "missing",
+      "page": 7,
+      "extracted": "Utilities Fund detail taken from the Statement of Activities (p2-3): Charges for Services 471,567, Interest Income 367, Miscellaneous Receipts 194, Utilities 304,504, Principal 56,688, Interest 64,126, Transfers In 168,546",
+      "on_page": "Proprietary Fund Statement of Revenues, Expenses and Changes in Net Position, Utilities Fund column (p7): Water Charges 157,837; Sewer Charges 238,382; Garbage Charges 78,702 (Total Operating Revenues 474,921); Services 32,290; Parts and Supplies 59,747; Gas and Oil 2,493; Insurance 15,532; Utilities 14,385; Repairs and Equipment Expense 3,775; Miscellaneous 9,384; Garbage Service 76,267; Depreciation 120,425 (Total Operating Expenses 334,298); Non-operating Miscellaneous 194; Interest Income 367; Interest Expense (64,126) (total (63,565)); Transfers From Other Funds 168,546",
+      "issue": "Per-fund detail rule (cities/villages, user 2026-10-27; extractor 'Per-fund detail'): detail is one line per fund column of the governmental funds statement AND the proprietary funds statement. The Utilities Fund detail was taken from the government-wide Statement of Activities instead of the p7 proprietary funds statement, so the p7 lines are missing from detail. Fix: replace the 7 Utilities Fund detail lines (schedule 'Statement of Activities...') with the p7 lines above (Water/Sewer/Garbage Charges -> Utility Charges; cost types as printed; Interest Expense -> Debt Service interest; Transfers From Other Funds 168,546 in other financing), with detail_totals 474,921 (operating revenues) and 334,298 (operating expenses) from p7. Tilden_FY2024 uses the p7-equivalent statement. The business-type statement lines (receipts/disbursements from the modified cash Statement of Activities) are correct as recorded.",
+      "resolved": "utility detail replaced with p7 proprietary statement lines"
+    },
+    {
+      "severity": "warning",
+      "path": "business_type.ending",
+      "page": 3,
+      "extracted": 1520224,
+      "on_page": "Business-Type Activities Net Position - End of Year 1,520,224 (p3); proprietary accrual net position end 1,881,794 (p7)",
+      "issue": "Cross-year: FY2023 business-type ending 1,520,224 (modified cash Statement of Activities) does not equal Tilden_FY2024 business_type.beginning 1,881,794, which the FY2024 extraction took from the accrual proprietary fund statement. Not a restatement; the two years use different statements for the business-type measure. FY2023 value is correct as printed. Governmental: FY2023 ending fund balance 2,210,372 = FY2024 beginning_fund_balance 2,210,372."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[3].category",
+      "page": 5,
+      "extracted": "licenses and permits",
+      "on_page": "Licenses, Fees, and Fines 5,366",
+      "issue": "Mixed label (licenses, fees and fines), no breakdown printed; kept with dominant category per the 2026-11-06 ruling. 'Fines and Licenses' also exists as a category. Same treatment as FY2024. Also detail[3]."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[7].category",
+      "page": 5,
+      "extracted": "donations/contributions",
+      "on_page": "Operating Grants and Contributions 2,500 (p2: Park and Pool 1,000, Library 1,500)",
+      "issue": "Grantor not printed; could be a government grant (intergovernmental/state aid) rather than private contributions. Same treatment as FY2024. Also detail[7]."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[9].category",
+      "page": 5,
+      "extracted": "other",
+      "on_page": "Lottery 4,411",
+      "issue": "Spending label 'lottery' is a context label in config/category_decisions.csv (expenditure, apply=context); left in other for the context checker. p2 shows Lottery charges for services 23,742 (keno receipts), so this is the keno/lottery function. Also detail[17]."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[6].category",
+      "page": 2,
+      "extracted": "charges for services/fees 196,461",
+      "on_page": "Program receipts, Charges for Services by function (p2): General Government 1,100; Auditorium 649; Park and Pool 22,311; Library 1,451; Ambulance 17,749; Cemetery 1,500; Lottery 23,742; Hospital Clinic 127,959",
+      "issue": "Governmental Charges for Services 196,461 includes Lottery 23,742 (keno proceeds) and Ambulance/Cemetery/Recreation fees that have their own categories; kept as one printed line (no split rule requires it). Flagged so the keno amount is not overlooked."
+    },
+    {
+      "severity": "warning",
+      "path": "missing",
+      "page": null,
+      "extracted": "trim = source pp6-11, 13, 15, 28 (report pp4-9, 11, 13, 25)",
+      "on_page": "report pp10 and 12 (source pp12 and 14) not in the trim",
+      "issue": "Report p10 and p12 fall between the proprietary Statement of Net Position (p9), Statement of Revenues, Expenses and Changes in Net Position (p11) and Statement of Cash Flows (p13). Each of those three pages is complete and self-contained (p9 balances 4,853,254; p11 runs to ending net position 1,881,794 = p9; p13 includes its reconciliation and ends at 1,520,224 = p9 cash), so pp10 and 12 are most likely blank reverse sides or continuation-free filler pages; they cannot hold any proprietary statement lines. Nothing recorded in the JSON depends on them (all values cite trimmed pp1-5 and p8). Could not confirm visually because the source PDF is not in audits/."
+    }
+  ]
+}
