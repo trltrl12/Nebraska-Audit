@@ -1,0 +1,24 @@
+{
+  "stem": "Indianola_FY2022",
+  "values_checked": 260,
+  "issues": [
+    {"severity": "warning", "path": "proprietary", "page": 8,
+     "extracted": null, "on_page": "Statement of Cash Flows - Proprietary Funds, Total: operating 175,334; capital and related financing (53,668); investing (46,172); beginning cash 340,416; ending cash 415,910",
+     "issue": "proprietary cash flows are printed but left null ('as in FY2023-FY2025'). Imperial FY2022, which has the same layout, fills them"},
+    {"severity": "warning", "path": "detail", "page": 11,
+     "extracted": "treated as FY2022", "on_page": "pp7 and 11 headed 'For the year ended September 30, 2021'",
+     "issue": "the extractor assumed the header is a typo. The figures tie to the FY2022 statements (Light operating income 29,207; General Fund totals 239,497 / 195,766), so this looks right, but it is an assumption"},
+    {"severity": "warning", "path": "disbursements[2].category", "page": 4,
+     "extracted": "streets/highways", "on_page": "Public works 103,682 (includes General Fund Cemetery 7,687, p9)",
+     "issue": "cemetery spending is included in the line; the category is defensible but mixed"},
+    {"severity": "warning", "path": "detail[74..79].category", "page": 12,
+     "extracted": "health/welfare", "on_page": "Cemetery department expenditures (budget schedule p9: 'Public works: Cemetery')",
+     "issue": "the function is inferred; the report's own grouping is Public works"},
+    {"severity": "warning", "path": "detail[85].category", "page": 12,
+     "extracted": "donations/contributions", "on_page": "Grants and contributions 4,760 (Library)",
+     "issue": "the same 4,760 is category other / Grants at statement level (receipts[9], label 'Grants'). Both follow the 2026-11-12 ruling for their own labels, but the two levels disagree"},
+    {"severity": "warning", "path": "disbursements[8].category", "page": 6,
+     "extracted": "Other Taxes Paid", "on_page": "Franchise fees 60,663 (Light Fund)",
+     "issue": "this is likely the franchise fee paid to the city's General Fund (General Fund Franchise revenue 61,888, p11). It is kept as printed spending, but a person may want to check the category"}
+  ]
+}
