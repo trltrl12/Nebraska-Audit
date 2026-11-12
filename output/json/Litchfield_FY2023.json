@@ -3,16 +3,16 @@
   "entity_type": "village",
   "fiscal_year_end": "2023-09-30",
   "basis": "cash",
-  "extraction_attempt": 1,
+  "extraction_attempt": 2,
   "beginning_cash": {
     "amount": 275406.04,
     "source_page": 1,
-    "computed": "Subtotal of Beginning Balance line 3, governmental funds: General 46,890.01 + Street 89,530.57 + Fire Hall 45,323.00 + Comm Redev 49,592.52 (p1) + ARPA 44,069.94 (p2); net cash + investments"
+    "computed": "Subtotal of Beginning Balance line 3 (cash + investments), governmental funds: General 46,890.01 + Street 89,530.57 + Fire Hall 45,323.00 + Comm Redev 49,592.52 (p1) + ARPA 44,069.94 (p2)"
   },
   "beginning_investments": {
     "amount": 1115.98,
     "source_page": 1,
-    "note": "line 2 Investments, Fire Hall fund; already inside beginning cash"
+    "note": "line 2 Investments, Fire Hall fund (only governmental fund with investments); already inside beginning cash"
   },
   "beginning_fund_balance": null,
   "receipts": [
@@ -20,9 +20,9 @@
       "fund_type": "governmental",
       "category": "property tax",
       "original_label": "Property Tax",
+      "printed_label": "Personal and Real Property Taxes",
       "amount": 53535.14,
-      "source_page": 1,
-      "printed_label": "Personal and Real Property Taxes"
+      "source_page": 1
     },
     {
       "fund_type": "governmental",
@@ -77,8 +77,8 @@
       "amount": 93899.74,
       "source_page": 1,
       "split_from": "Local Receipts: Other 94,501.93 (p1)",
-      "computed": "General 93,861.29 + Street 35.48 + Fire Hall 2.97 (p1)",
-      "review": "Local Receipts: Other not explained on the waiver form"
+      "computed": "governmental fund columns: General 93,861.29 + Street 35.48 + Fire Hall 2.97 (p1)",
+      "review": "Local Receipts: Other not explained on the waiver form (context label)"
     },
     {
       "fund_type": "business-type",
@@ -89,7 +89,7 @@
       "amount": 602.19,
       "source_page": 2,
       "split_from": "Local Receipts: Other 94,501.93 (p1)",
-      "computed": "Water Deposit 600.00 + Sewer Reserve 2.19 (p2)",
+      "computed": "business-type fund columns: Water Deposit 600.00 + Sewer Reserve 2.19 (p2)",
       "review": "Water Deposit / Sewer Reserve funds Local Receipts: Other; context label"
     }
   ],
@@ -127,9 +127,9 @@
       "fund_type": "governmental",
       "category": "culture/recreation",
       "original_label": "Culture and Recreation",
+      "printed_label": "Culture & Recreation",
       "amount": 800.0,
-      "source_page": 3,
-      "printed_label": "Culture & Recreation"
+      "source_page": 3
     },
     {
       "fund_type": "governmental",
@@ -155,7 +155,7 @@
       "source_page": 3,
       "split_from": "Solid Waste 27,981.50 (p3)",
       "computed": "General Fund column",
-      "review": "utility spending printed in the General Fund column under Business-Type Activities; kept governmental by column"
+      "review": "Business-type activity line paid from the General Fund column; kept governmental"
     },
     {
       "fund_type": "governmental",
@@ -165,7 +165,7 @@
       "source_page": 3,
       "split_from": "Water 43,196.63 (p3)",
       "computed": "General Fund column",
-      "review": "utility spending printed in the General Fund column under Business-Type Activities; kept governmental by column"
+      "review": "Business-type activity line paid from the General Fund column; kept governmental"
     },
     {
       "fund_type": "business-type",
@@ -209,7 +209,7 @@
   "transfers_out": {
     "amount": 197364.05,
     "source_page": 3,
-    "computed": "line 50 governmental funds: Street 103,564.51 + Fire Hall 44,207.02 + Comm Redev 49,592.52 (p3)"
+    "computed": "line 50 governmental funds: Street 103,564.51 + Fire Hall 44,207.02 + Comm Redev 49,592.52 (p3); the Total column 474,808.43 also holds business-type transfers out 277,444.38 (in business_type.transfers_net)"
   },
   "debt_proceeds": null,
   "other_financing": null,
@@ -256,7 +256,7 @@
     "beginning": {
       "amount": 302246.05,
       "source_page": 1,
-      "computed": "line 3: Utility 42,540.22 + Sewer O/M 54,230.21 (p1) + Water Deposit 507.05 + Sewer Reserve 162,853.44 + Water Reserve 42,115.13 (p2); net cash + investments"
+      "computed": "line 3 (cash + investments): Utility 42,540.22 + Sewer O/M 54,230.21 (p1) + Water Deposit 507.05 + Sewer Reserve 162,853.44 + Water Reserve 42,115.13 (p2)"
     },
     "ending": {
       "amount": 4854.2,
@@ -275,7 +275,7 @@
   "proprietary": null,
   "governmental_net_position": null,
   "balance_sheet": {
-    "statement": "Statement of Cash Receipts and Disbursements - All Funds (Ending Balance Consists Of, Exhibit A lines 26-28)",
+    "statement": "Statement of Cash Receipts and Disbursements - All Funds (Ending Balance Consists Of, Exhibit A)",
     "scope": "cash basis",
     "column": "Exhibit A fund columns summed by fund type (governmental: General, Street, Fire Hall, Comm Redev, ARPA; business-type: Utility, Sewer O/M, Water Deposit, Sewer Reserve, Water Reserve); totals from the TOTAL column",
     "assets": [
@@ -309,17 +309,17 @@
     "equity": [
       {
         "fund_type": "governmental",
-        "original_label": "Subtotal of Ending Balances (Line 26 + 27)",
+        "original_label": "Ending Balance (Line 22 MINUS Line 23)",
         "amount": 402750.27,
         "source_page": 1,
-        "computed": "General 357,561.38 + Fire Hall 1,118.95 (p1) + ARPA 44,069.94 (p2)"
+        "computed": "line 24 governmental fund columns: General 357,561.38 + Fire Hall 1,118.95 (p1) + ARPA 44,069.94 (p2)"
       },
       {
         "fund_type": "business-type",
-        "original_label": "Subtotal of Ending Balances (Line 26 + 27)",
+        "original_label": "Ending Balance (Line 22 MINUS Line 23)",
         "amount": 4854.2,
         "source_page": 2,
-        "computed": "Water Deposit 1,007.05 + Sewer Reserve 1,233.21 + Water Reserve 2,613.94 (p2)"
+        "computed": "line 24: Water Deposit 1,007.05 + Sewer Reserve 1,233.21 + Water Reserve 2,613.94 (p2)"
       }
     ],
     "total_assets": {
@@ -337,12 +337,12 @@
   "ending_cash": {
     "amount": 402750.27,
     "source_page": 1,
-    "computed": "Subtotal of Ending Balances line 28, governmental funds: General 357,561.38 + Fire Hall 1,118.95 (p1) + ARPA 44,069.94 (p2); net cash + investments"
+    "computed": "Subtotal of Ending Balances line 28 (cash + investments), governmental funds: General 357,561.38 + Fire Hall 1,118.95 (p1) + ARPA 44,069.94 (p2)"
   },
   "ending_investments": {
     "amount": 160179.55,
     "source_page": 1,
-    "note": "line 27 Investments, General Fund; already inside ending cash"
+    "note": "line 27 Investments, General Fund (Schedule of Investments total 160,179.55, p5); already inside ending cash"
   },
   "ending_fund_balance": null,
   "detail": [
@@ -355,10 +355,10 @@
       "category": "property tax",
       "detail_category": "property tax",
       "original_label": "Property Tax",
+      "printed_label": "Personal and Real Property Taxes",
       "amount": 48155.3,
       "budget_final": null,
-      "source_page": 1,
-      "printed_label": "Personal and Real Property Taxes"
+      "source_page": 1
     },
     {
       "schedule": "Exhibit A - Statement of Cash Receipts and Disbursements - All Funds",
@@ -458,10 +458,12 @@
       "fund": "General Fund",
       "department": null,
       "section": "other financing",
-      "original_label": "Transfers In Other Than Surplus Fees",
+      "original_label": "Transfers In",
+      "printed_label": "Transfers In Other Than Surplus Fees",
       "amount": 474808.43,
       "budget_final": null,
-      "source_page": 1
+      "source_page": 1,
+      "printed_in": "revenue"
     },
     {
       "schedule": "Exhibit A - Statement of Cash Receipts and Disbursements - All Funds",
@@ -509,7 +511,7 @@
       "department": null,
       "section": "expenditure",
       "category": "capital outlay",
-      "detail_category": "not itemized",
+      "detail_category": "construction/infrastructure",
       "original_label": "Capital outlay",
       "printed_label": "Capital Improvements",
       "amount": 6999.0,
@@ -525,10 +527,10 @@
       "category": "culture/recreation",
       "detail_category": "not itemized",
       "original_label": "Culture and Recreation",
+      "printed_label": "Culture & Recreation",
       "amount": 800.0,
       "budget_final": null,
-      "source_page": 3,
-      "printed_label": "Culture & Recreation"
+      "source_page": 3
     },
     {
       "schedule": "Exhibit A - Statement of Cash Receipts and Disbursements - All Funds",
@@ -568,7 +570,7 @@
       "amount": 20300.0,
       "budget_final": null,
       "source_page": 3,
-      "review": "utility spending printed in the General Fund column"
+      "review": "Business-type activity line paid from the General Fund column; kept governmental"
     },
     {
       "schedule": "Exhibit A - Statement of Cash Receipts and Disbursements - All Funds",
@@ -582,7 +584,7 @@
       "amount": 36164.16,
       "budget_final": null,
       "source_page": 3,
-      "review": "utility spending printed in the General Fund column"
+      "review": "Business-type activity line paid from the General Fund column; kept governmental"
     },
     {
       "schedule": "Exhibit A - Statement of Cash Receipts and Disbursements - All Funds",
@@ -593,10 +595,10 @@
       "category": "property tax",
       "detail_category": "property tax",
       "original_label": "Property Tax",
+      "printed_label": "Personal and Real Property Taxes",
       "amount": 5379.84,
       "budget_final": null,
-      "source_page": 1,
-      "printed_label": "Personal and Real Property Taxes"
+      "source_page": 1
     },
     {
       "schedule": "Exhibit A - Statement of Cash Receipts and Disbursements - All Funds",
@@ -644,10 +646,12 @@
       "fund": "Street Fund",
       "department": null,
       "section": "other financing",
-      "original_label": "Transfers Out Other Than Surplus Fees",
+      "original_label": "Transfers Out",
+      "printed_label": "Transfers Out Other Than Surplus Fees",
       "amount": -103564.51,
       "budget_final": null,
-      "source_page": 3
+      "source_page": 3,
+      "printed_in": "expenditure"
     },
     {
       "schedule": "Exhibit A - Statement of Cash Receipts and Disbursements - All Funds",
@@ -669,10 +673,12 @@
       "fund": "Fire Hall Fund",
       "department": null,
       "section": "other financing",
-      "original_label": "Transfers Out Other Than Surplus Fees",
+      "original_label": "Transfers Out",
+      "printed_label": "Transfers Out Other Than Surplus Fees",
       "amount": -44207.02,
       "budget_final": null,
-      "source_page": 3
+      "source_page": 3,
+      "printed_in": "expenditure"
     },
     {
       "schedule": "Exhibit A - Statement of Cash Receipts and Disbursements - All Funds",
@@ -680,10 +686,12 @@
       "fund": "Comm Redev Fund",
       "department": null,
       "section": "other financing",
-      "original_label": "Transfers Out Other Than Surplus Fees",
+      "original_label": "Transfers Out",
+      "printed_label": "Transfers Out Other Than Surplus Fees",
       "amount": -49592.52,
       "budget_final": null,
-      "source_page": 3
+      "source_page": 3,
+      "printed_in": "expenditure"
     },
     {
       "schedule": "Exhibit A - Statement of Cash Receipts and Disbursements - All Funds",
@@ -717,10 +725,12 @@
       "fund": "Utility Fund",
       "department": null,
       "section": "other financing",
-      "original_label": "Transfers Out Other Than Surplus Fees",
+      "original_label": "Transfers Out",
+      "printed_label": "Transfers Out Other Than Surplus Fees",
       "amount": -27926.25,
       "budget_final": null,
-      "source_page": 3
+      "source_page": 3,
+      "printed_in": "expenditure"
     },
     {
       "schedule": "Exhibit A - Statement of Cash Receipts and Disbursements - All Funds",
@@ -754,10 +764,12 @@
       "fund": "Sewer O/M Fund",
       "department": null,
       "section": "other financing",
-      "original_label": "Transfers Out Other Than Surplus Fees",
+      "original_label": "Transfers Out",
+      "printed_label": "Transfers Out Other Than Surplus Fees",
       "amount": -48394.52,
       "budget_final": null,
-      "source_page": 3
+      "source_page": 3,
+      "printed_in": "expenditure"
     },
     {
       "schedule": "Exhibit A - Statement of Cash Receipts and Disbursements - All Funds",
@@ -798,7 +810,8 @@
       "original_label": "Local Receipts: Other",
       "amount": 2.19,
       "budget_final": null,
-      "source_page": 2
+      "source_page": 2,
+      "review": "Sewer Reserve Fund receipt, not explained (likely interest)"
     },
     {
       "schedule": "Exhibit A - Statement of Cash Receipts and Disbursements - All Funds",
@@ -806,10 +819,12 @@
       "fund": "Sewer Reserve Fund",
       "department": null,
       "section": "other financing",
-      "original_label": "Transfers Out Other Than Surplus Fees",
+      "original_label": "Transfers Out",
+      "printed_label": "Transfers Out Other Than Surplus Fees",
       "amount": -161622.42,
       "budget_final": null,
-      "source_page": 4
+      "source_page": 4,
+      "printed_in": "expenditure"
     },
     {
       "schedule": "Exhibit A - Statement of Cash Receipts and Disbursements - All Funds",
@@ -817,10 +832,12 @@
       "fund": "Water Reserve Fund",
       "department": null,
       "section": "other financing",
-      "original_label": "Transfers Out Other Than Surplus Fees",
+      "original_label": "Transfers Out",
+      "printed_label": "Transfers Out Other Than Surplus Fees",
       "amount": -39501.19,
       "budget_final": null,
-      "source_page": 4
+      "source_page": 4,
+      "printed_in": "expenditure"
     }
   ],
   "detail_totals": [
@@ -950,11 +967,11 @@
   "report_discrepancies": [],
   "decision_needed": [
     {
-      "question": "Every other fund (Street, Fire Hall, Comm Redev, Utility, Sewer O/M, Sewer Reserve, Water Reserve) transferred its balance into the General Fund (474,808.43), and the General Fund column then paid Solid Waste 20,300.00 and Water 36,164.16 printed under Business-Type Activities. Should that General Fund utility spending count as business-type instead of governmental?",
+      "question": "Every other fund (Street, Fire Hall, Comm Redev, Utility, Sewer O/M, Sewer Reserve, Water Reserve) transferred its balance into the General Fund (474,808.43, Schedule of Interfund Transfers p5), and the General Fund column then paid Solid Waste 20,300.00 and Water 36,164.16 printed under Business-Type Activities. Should that General Fund utility spending count as business-type instead of governmental?",
       "amount": 56464.16,
       "recorded_as": "governmental, category utilities (General Fund column), with review",
       "source_page": 3
     }
   ],
-  "notes": "Waiver filing (Exhibit A only), cash basis, period 10/1/22-9/30/23. Trim (4 pages = source pp23-26) holds Exhibit A pp1, 1a, 2, 2a; the page finder's 'no balance statement' flag is because there is no separate statement of net position / assets: the ending balances by fund (lines 25-28: net cash, investments) on p1/p2 serve as the balance sheet. Not in the trim: the Exhibit A schedules page (Schedule of Investments, Outstanding Debt, Interfund Transfers) and any notes, so the investment detail, debt outstanding and transfer documentation are not available. Page 1 / page 2 TOTAL columns include pages 1a / 2a. Governmental = General, Street, Fire Hall, Comm Redev, ARPA (no activity); business-type = Utility, Sewer O/M, Water Deposit, Sewer Reserve, Water Reserve. Mixed rows split by fund column (split_from). Cash fields are the line 3 / line 28 subtotals (net cash + investments); investments shown separately for information. Governmental identity: 275,406.04 + 206,114.86 - 356,215.01 + 474,808.43 - 197,364.05 = 402,750.27. Business-type: 302,246.05 + 602.19 - 20,549.66 - 277,444.38 = 4,854.20. Transfers in (474,808.43) = transfers out governmental 197,364.05 + business-type 277,444.38. County Treasurer balances 1,725.00 (10/1/22) and 9,923.16 (9/30/23) informational. Read pages 1-4 of 4"
+  "notes": "Re-extracted from the re-trimmed PDF (5 pages: Exhibit A pp1, 1a, 2, 2a and the schedules page p5). Waiver filing, cash basis, period 10/1/22-9/30/23. The ending balances by fund (lines 25-28: net cash, investments) on p1/p2 serve as the balance sheet. Page 1 / page 2 TOTAL columns include pages 1a / 2a. Governmental = General, Street, Fire Hall, Comm Redev, ARPA (no activity); business-type = Utility, Sewer O/M, Water Deposit, Sewer Reserve, Water Reserve (same split as FY2024). Mixed rows split by fund column (split_from). Cash fields are the line 3 / line 28 subtotals (net cash + investments); investments shown separately for information. p5: Schedule of Investments (two CDs, total 160,179.55 = line 27), no outstanding debt listed, Schedule of Interfund Transfers (seven transfers to the General Fund, total 474,808.43 = line 20 / line 50). Transfers_in is the printed Total-column figure (as FY2024); transfers_out is the governmental funds' share of line 50 because the Total column also holds the business-type funds' transfers (277,444.38, in business_type.transfers_net). Capital Improvements labelled plain Capital Outlay (no function printed). Governmental identity: 275,406.04 + 206,114.86 - 356,215.01 + 474,808.43 - 197,364.05 = 402,750.27. Business-type: 302,246.05 + 602.19 - 20,549.66 - 277,444.38 = 4,854.20. County Treasurer balances 1,725.00 (10/1/22) and 9,923.16 (9/30/23) informational. Read pages 1-5 of 5"
 }

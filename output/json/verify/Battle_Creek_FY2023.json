@@ -1,59 +1,15 @@
 {
   "stem": "Battle_Creek_FY2023",
-  "values_checked": 58,
+  "values_checked": 146,
   "issues": [
-    {
-      "severity": "error",
-      "path": "transfers_in",
-      "page": 4,
-      "extracted": 49512,
-      "on_page": "Transfers From (To) Other Funds, Total Governmental Funds column: (226,403); no transfers in printed in that column",
-      "issue": "Wrong column. Governmental transfers must come from the Total Governmental Funds column, which prints a single net (226,403). The 49,512 is the Streets 13,307 + Non-Major 36,205 fund-column inflows, i.e. transfers between governmental funds that the Total column eliminates. This records 49,512 on both sides. transfers_in should be null/0.",
-      "resolved": "2026-11-09: transfers from the Total column: in null, out 226,403"
-    },
-    {
-      "severity": "error",
-      "path": "transfers_out",
-      "page": 4,
-      "extracted": 275915,
-      "on_page": 226403,
-      "issue": "Wrong column. 275,915 is the General Fund column. The Total Governmental Funds column prints (226,403). The roll-forward holds either way (net -226,403), but the gross amount is not the printed total figure.",
-      "resolved": "2026-11-09: transfers from the Total column: in null, out 226,403"
-    },
-    {
-      "severity": "warning",
-      "path": "report_discrepancies[0]",
-      "page": 3,
-      "extracted": {
-        "check": "totals",
-        "difference": -591994
-      },
-      "on_page": "Transfers (To) Other Funds (226,403) + (365,591) = (591,994); the statement adds up",
-      "issue": "This is not an arithmetic discrepancy: the printed figures foot. It is a one-sided transfer, which belongs in decision_needed[] (already there). As recorded, it will list the report as 'doesn't add up'."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[8..11].category",
-      "page": 2,
-      "extracted": "charges for services/fees",
-      "on_page": "Electric 1,150,238; Water 304,512; Sewer 297,696; Garbage 104,144 (Charges for Services)",
-      "issue": "User rule: utility fund charges (incl. garbage) are category Utility Charges, not charges for services/fees. user_rules.py may only catch 'Garbage' from the label."
-    },
-    {
-      "severity": "warning",
-      "path": "receipts[1].category",
-      "page": 4,
-      "extracted": "intergovernmental/state aid",
-      "on_page": "Operating Grants and Contributions 20,080 (Park, p2)",
-      "issue": "The grantor is not stated and the line mixes grants and contributions. Treating it as state aid assumes a government grantor (user 2026-11-06: do not guess a grantor). The review note is present."
-    },
-    {
-      "severity": "warning",
-      "path": "missing",
-      "page": 5,
-      "extracted": null,
-      "on_page": "Trimmed PDF has no proprietary Statement of Revenues, Expenses and Changes in Net Position (report pp10-13 not trimmed); proprietary Statement of Net Position (p5) is headed September 30, 2022",
-      "issue": "The business-type lines come from Statement of Activities function rows only, with no cost-type or per-fund detail. The source PDF may hold the proprietary operating statement. The p5 header date 2022 is probably a typo (cash 14,090 and due from 267,153 match the 2023 figures)."
-    }
+    {"severity": "warning", "path": "receipts[1].category", "page": 5,
+     "extracted": "intergovernmental/state aid", "on_page": "Operating Grants and Contributions 20,080 (Park, p2)",
+     "issue": "grantor not stated anywhere in the trim; could be donations/contributions (private) rather than state aid. Judgment call, already marked review"},
+    {"severity": "warning", "path": "disbursements[1].category", "page": 5,
+     "extracted": "Community Betterment", "on_page": "Community Development 13,560",
+     "issue": "the Community Betterment rule names 'Community development/betterment'; this label is plain 'Community Development' (Litchfield_FY2023 puts the same label in economic development). Inconsistent across reports; detail[22] same"},
+    {"severity": "warning", "path": "detail[72].category", "page": 7,
+     "extracted": "Purchased Power/Cost of Sales", "on_page": "Purchased Services 86,318 (Non-Major Proprietary Fund = Garbage)",
+     "issue": "for the garbage fund, purchased services is more likely contract hauling (Professional/Contract Services) than purchased power/cost of sales"}
   ]
 }
