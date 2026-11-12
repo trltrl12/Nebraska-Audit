@@ -1,0 +1,56 @@
+{
+  "stem": "West_Point_FY2023",
+  "values_checked": 178,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "report_discrepancies",
+      "page": 11,
+      "extracted": "no entry for the Debt Service Fund schedule",
+      "on_page": "Debt Service Fund budget schedule (report p37) Actual: Property Taxes 58 + Special Assessments 21,103 + Interest Income 11,401 = 32,562, but Total Cash Receipts printed 33,396 (digits re-read)",
+      "issue": "The printed schedule doesn't add up: it is 834 short. The gap equals the Debt Service column's Miscellaneous 834 on the governmental funds statement (p4), which the schedule doesn't print as a line. detail[32..34] are recorded correctly as printed, but the gap must be logged: add {check: 'detail', difference: 834, source_page: 11, note: 'Debt Service schedule lines sum to 32,562; printed total 33,396; p4 shows Miscellaneous 834 in the Debt Service column'}.",
+      "resolved": "report_discrepancies entry added"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[10].category",
+      "page": 4,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "Grants/Donations 1,296,033 (Pool Capital Project 1,103,826; General 132,789; Other Governmental 59,418)",
+      "issue": "This is a mixed grants/donations label and the grantor isn't printed. The Statement of Activities (p2) shows the 1,103,826 as Capital Grants and Contributions for Culture and Recreation. The category is a judgment call, and so is detail_category 'other state aid' on detail[7] and detail[28]."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[9].category",
+      "page": 4,
+      "extracted": "culture/recreation",
+      "on_page": "Public Buildings: Auditorium 28,696; Nielsen Community Center 359,443",
+      "issue": "Printed under a 'Public Buildings' heading, and the Statement of Activities has a separate Public Buildings function (p2). Culture/recreation is defensible (already marked review). Also applies to disbursements[10], detail[18] and detail[19]."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[4].category",
+      "page": 4,
+      "extracted": "licenses and permits",
+      "on_page": "Fees and Permits 16,140",
+      "issue": "A mixed label with no breakdown printed; the dominant part is assumed (marked review)."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[13].computed",
+      "page": 6,
+      "extracted": "computed set on a printed amount",
+      "on_page": "Miscellaneous 25,411 (Total column)",
+      "issue": "The amount is printed as-is. The 'computed' text only explains the category choice (p2 counts it in Charges for Services, which is correct under the 2026-11-06 ruling), but it marks a printed value as computed. receipts[1] (TIF Taxes 18,136) is the same: a printed amount carrying computed."
+    }
+  ],
+  "checks": {
+    "page_count": "11 pages; notes end 'Read pages 1-11 of 11'; every page read visually; no statement/schedule lines missing (nonmajor governmental funds have no schedule; utility funds have no budget schedules, so their detail correctly comes from the p6 proprietary statement fund columns).",
+    "governmental": "Receipts sum 6,130,442 and disbursements sum 8,928,778 equal the printed Total Governmental Funds totals (p4). Roll-forward: 4,501,517 + 6,130,442 - 8,928,778 + 5,534,406 + 1,061,374 - 858,410 = 7,440,551. Proceeds from Long-term Debt are under Other Financing Sources and correctly in debt_proceeds.",
+    "business_type": "8,468,982 + 25,411 + 126,917 = 8,621,310; expenses sum 7,670,081 (p2); 11,372,386 + 8,621,310 - 7,670,081 - 202,964 = 12,120,651. Transfers net -202,964 = governmental net +202,964; no transfer is left inside spending lines.",
+    "proprietary_cash_flows": "p7 Total Enterprise Funds: 1,700,784 / (202,964) / (1,199,526) / 126,917 / 8,573,605 / 8,998,816 all match.",
+    "balance_sheet": "Governmental lines from p3 Total Governmental Funds (totals 7,440,551 = government-wide); business-type from p1. Total assets 25,185,825, liabilities 5,624,623, equity 19,561,202; all sections tie.",
+    "detail": "General (p9) 3,910,123 / 3,454,984, Pool Capital Project (p10) 1,561,396 / 3,760,540, Debt Service expenditure (p11) 1,136,548 and all utility fund columns (p6) tie. Debt Service revenue is 834 short, as printed (see error). The p9 vs p4 one-dollar rounding is recorded in report_discrepancies.",
+    "fy2024": "FY2023 ending fund balance 7,440,551 = FY2024 beginning_fund_balance 7,440,551. Business-type ending 12,120,651 = FY2024 beginning_as_previously_reported; the FY2024 beginning 12,905,245 is explained by a printed restatement of 784,594. FY2024 proprietary beginning_cash 7,874,270 differs from the FY2023 ending cash 8,998,816 (FY2023's figure includes restricted cash 1,124,546 and overdraft); this is an FY2024 matter, not an FY2023 error."
+  }
+}

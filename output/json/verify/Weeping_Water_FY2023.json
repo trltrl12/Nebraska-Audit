@@ -1,0 +1,21 @@
+{
+  "stem": "Weeping_Water_FY2023",
+  "values_checked": 114,
+  "issues": [
+    {"severity": "warning", "path": "transfers_in", "page": 4, "extracted": 56534, "on_page": "Total Governmental Funds column prints only net Transfers in (193,930); fund columns: General in 50,000, General out (200,464), Sales Tax out (50,000), Other Governmental 6,534 printed positive on the Transfers out row (an inflow: Rescue 35,027 - 2,205 + 6,534 = 39,356, p10)", "issue": "Gross fund-column transfers (in 56,534 / out 250,464, both marked computed) recorded instead of the Total column's net (193,930). Net and roll-forward tie (1,023,625 + 1,015,332 - 892,194 + 3,000 + 56,534 - 250,464 = 955,833) and the 6,534 has the right sign of money flow (inflow), but the gross split is the extractor's choice, not the Total column."},
+    {"severity": "warning", "path": "ending_cash", "page": 1, "extracted": 936170, "on_page": "Cash in bank 926,411; Cash at county treasurer 9,759 (governmental activities column; no single governmental cash total printed)", "issue": "Sum of two printed cash lines (marked computed). The 2026-11-06 ruling says cash is never derived; the governmental funds statement (p3) prints Cash 6,296,371 gross with a Claim on cash liability 5,369,960 instead. Confirm which governmental cash figure the user wants."},
+    {"severity": "warning", "path": "detail[23].detail_category", "page": 6, "extracted": "tax refunds/treasurer fees", "on_page": "Sales taxes 10,803 (Water Fund operating expense)", "issue": "Sales taxes paid by the utility; no exact detail category, already marked review."},
+    {"severity": "warning", "path": "detail[11].category", "page": 10, "extracted": "charges for services/fees", "on_page": "Community Building Fund: Charges for services 7,500", "issue": "Community building charges are probably rentals (Rentals / rentals); defensible as printed."},
+    {"severity": "warning", "path": "disbursements[4].category", "page": 4, "extracted": "general government", "on_page": "Public building 85,863 (Sales Tax fund)", "issue": "Function category is a guess (already marked review); no better existing category is clearly printed."}
+  ],
+  "checks": {
+    "page_count": "12 pages; notes end 'Read pages 1-12 of 12'; every page read visually; no statement/schedule lines missing.",
+    "governmental": "Receipts sum 1,015,332 = printed Total revenues; disbursements sum 892,194 = printed Total expenditures; roll-forward 1,023,625 -> 955,833 ties (p4).",
+    "business_type": "p6 Totals: 1,565,503 + 581,886 - 525,692 + 193,930 = 1,815,627; matches p2 and p5. Detail Water +194,930 / Sewer -1,000 recorded with the sign of money flow (Water's positive 'Transfers out' is an inflow).",
+    "p6_vs_p11": "Re-read both: p11 (report p36) prints Water charges 320,313 (p6 322,517), sales taxes 10,514 (p6 10,803), Water beginning 1,343,324 (p6 1,326,113), total beginning 1,582,714 and ending 1,830,923 (p6 1,565,503 / 1,815,627). The 15,296 ending-net-position gap is printed and is in report_discrepancies. Utility detail correctly taken from the basic proprietary statement fund columns (p6); no per-fund utility budget schedules are printed (p9 budget schedule is all funds combined).",
+    "proprietary_cash_flows": "p7 Totals: 229,638 / 193,930 / (278,387) / 530 / 686,437 / 832,148 all match (p12 repeats them).",
+    "balance_sheet": "Assets 4,873,189, liabilities 739,144, net position 4,134,045 tie; governmental equity 2,318,418 and business-type 1,815,627 tie to their columns.",
+    "detail": "p10 nonmajor fund columns and p6 proprietary fund columns all tie to their printed totals.",
+    "fy2024": "FY2023 ending fund balance 955,833 = FY2024 beginning_fund_balance 955,833; business-type ending 1,815,627 = FY2024 business_type.beginning 1,815,627. No restatement."
+  }
+}
