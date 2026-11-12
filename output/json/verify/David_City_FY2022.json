@@ -1,0 +1,39 @@
+{
+  "stem": "David_City_FY2022",
+  "values_checked": 301,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "receipts[16].category",
+      "page": 7,
+      "extracted": "other",
+      "on_page": "Grant income 252,385 (Electric Fund nonoperating; Statement of Activities p3 capital grants and contributions)",
+      "issue": "A line printed as 'Grant income' is in the last-resort category other although its label says what it is; config/label_synonyms.csv maps 'Grant income' to intergovernmental/state aid. Use a grant category (intergovernmental/state aid, or a capital grants category) instead of other.",
+      "resolved": "user ruling 2026-11-12 (CLAUDE.md): no grantor printed, so category other, detail_category Grants"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[8].category",
+      "page": 5,
+      "extracted": "donations/contributions",
+      "on_page": "Contributions and grants 495,945",
+      "issue": "Statement of Activities p2-3 shows 494,445 of this as capital grants and contributions (Airport 343,180 under public works, 151,265 environment and leisure) and 1,500 operating grants; the airport money is likely a government (FAA/state) grant. donations/contributions is defensible under the mixed-label ruling but may understate grants. Same applies to detail Airport 'Contributions and grants' 343,180 (p14) and the General Fund department lines."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[44].detail_category",
+      "page": 17,
+      "extracted": "not itemized",
+      "on_page": "Transportation 1,168 (Summer Recreation)",
+      "issue": "Transportation is an object-of-expenditure line inside an itemized department, not a function total; 'not itemized' does not fit (training and travel / fuel would). Same for Park Transportation 4,562 (detail[53]). 'Transportation' is a context label in category_decisions."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[90].original_label",
+      "page": 18,
+      "extracted": "Capital Outlay",
+      "on_page": "Capital outlay 9,995 (Zoning department)",
+      "issue": "Capital outlay lines should be labelled 'Capital Outlay: <function>'; this Zoning line and the CDA (p13, 224,228), Airport (p14, 820,228), Debt Service (p15, 306,808) and Capital Projects (p16, 77,685) capital outlay lines keep the bare label, while the other departments' lines carry a function."
+    }
+  ]
+}
