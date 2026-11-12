@@ -1,0 +1,21 @@
+{
+  "stem": "Giltner_FY2022",
+  "values_checked": 126,
+  "issues": [
+    {"severity": "warning", "path": "report_discrepancies[0]", "page": 1,
+     "extracted": -423375, "on_page": "Total assets 3,539,185; Total liabilities 1,309,885; Total net position 2,652,675",
+     "issue": "Checked as asked: the gap is the report's own, not a missed line. The p1 asset lines in the JSON add exactly to the printed Total assets 3,539,185 (Business-type column 932,310 + 851,669 = 1,783,979 as printed), and p1 prints only one capital asset row ('Other capital assets, net of depreciation' 819,192 business-type). The proprietary statement (p6) shows net capital assets 1,242,567 including Buildings and improvements 423,375, so the government-wide Business-type column leaves out 423,375 while its liabilities 693,227 + net position 1,514,127 = 2,207,354 match p6. No extraction fix possible; the report_discrepancies entry is correct."},
+    {"severity": "warning", "path": "receipts[6].category", "page": 5,
+     "extracted": "donations/contributions", "on_page": "Contributions and grants 35,864 (General 3,387 + Street 32,477)",
+     "issue": "Most of the line (Street Fund 32,477) is a capital grant (Statement of Activities p3, Capital Grants and Contributions, Public works). The balance sheet (p4) restricts exactly 32,477 of Street Fund balance for 'Federal program', so it is probably a federal grant. Kept as one mixed line under donations/contributions with review; a person should decide. Same for detail[37] (Street Fund 32,477)."},
+    {"severity": "warning", "path": "receipts[14].category", "page": 7,
+     "extracted": "other", "on_page": "Grant income 22,050 (Water Fund, nonoperating)",
+     "issue": "Grant put in other because no grantor is printed; a grant category (federal grants / intergovernmental) may fit better than other."},
+    {"severity": "warning", "path": "proprietary", "page": 8,
+     "extracted": null, "on_page": "Statement of Cash Flows - Proprietary Funds: operating 252,390; noncapital financing 0 ('-'); capital and related financing (101,433); investing (910); cash beginning 384,413; end 534,460",
+     "issue": "Business-type activities are on the accrual basis and a full proprietary cash flow statement is printed, but proprietary is null because the report's basis is set to cash (as FY2023, per notes). Consistent with the schema, but the printed cash flows are not captured."},
+    {"severity": "warning", "path": "decision_needed", "page": 5,
+     "extracted": "notes only", "on_page": "Governmental funds operating statement headed 'For the year ended September 30, 2021', balances labelled September 30, 2020/2021",
+     "issue": "The heading says FY2021 but the figures tie to the September 30, 2022 balance sheet (p4: fund balances 435,164) and the FY2022 Statement of Activities, so using it as FY2022 is well supported. The mismatch is recorded only in notes, which the user does not read; consider a decision_needed or report_discrepancies entry."}
+  ]
+}
