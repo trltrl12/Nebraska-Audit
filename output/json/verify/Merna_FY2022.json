@@ -1,0 +1,15 @@
+{
+  "stem": "Merna_FY2022",
+  "values_checked": 99,
+  "issues": [
+    {"severity": "warning", "path": "ending_cash", "page": 4,
+     "extracted": 59461, "on_page": "Cash and cash equivalents 28,753; Restricted cash 28,465; County treasurer cash 2,243 (no printed cash total)",
+     "issue": "ending_cash is a computed sum of three printed cash lines (marked computed, arithmetic correct); the 2026-11-06 ruling says cash is filled only where printed and never derived. beginning_cash is null, so the governmental roll-forward relies on fund balance."},
+    {"severity": "warning", "path": "proprietary", "page": 8,
+     "extracted": null, "on_page": "Statement of Cash Flows - Proprietary Funds: operating 84,460; noncapital (44,086); capital and related (65,548); investing 350; beginning cash 220,167; ending 195,343",
+     "issue": "Page 8 cash flow statement not captured (proprietary null because the report is modified cash basis, as in FY2023/FY2024 per notes). Figures tie: 84,460 - 44,086 - 65,548 + 350 = -24,824 = 195,343 - 220,167."},
+    {"severity": "warning", "path": "disbursements[5].category", "page": 7,
+     "extracted": "Salaries and Wages", "on_page": "Personnel and benefits 26,106",
+     "issue": "Line combines wages and benefits; Salaries and Wages is the dominant fit (same for detail[20] and detail[30])."}
+  ]
+}
