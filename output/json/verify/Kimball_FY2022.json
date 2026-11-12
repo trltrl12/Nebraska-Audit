@@ -1,0 +1,24 @@
+{
+  "stem": "Kimball_FY2022",
+  "values_checked": 252,
+  "issues": [
+    {"severity": "warning", "path": "disbursements[11].category", "page": 11,
+     "extracted": "utilities", "on_page": "Utilities and telephone 140,835 (enterprise funds Total)",
+     "issue": "cost-type rule: this is the object 'utilities and telephone', but category 'utilities' is the same string as the utility function; a cost-type name (e.g. Utilities (Power, Gas, Phone)) would avoid confusion"},
+    {"severity": "warning", "path": "disbursements[21].category", "page": 11,
+     "extracted": "other", "on_page": "Landfill closure costs 107,000",
+     "issue": "specific printed line left in other; a specific cost-type category (e.g. Landfill Closure Costs) could be created (review flag present)"},
+    {"severity": "warning", "path": "detail[41].category", "page": 20,
+     "extracted": "health/welfare (all Cemetery department lines)", "on_page": "Cemetery department; the governmental funds statement (p6) counts it in Public works 111,465",
+     "issue": "Cemetery detail lines (and 'Capital Outlay: Health/Welfare' 10,000) use health/welfare while the report's own statements put Cemetery under Public works; defensible under the category list but inconsistent with the statement"},
+    {"severity": "warning", "path": "detail[36].detail_category", "page": 19,
+     "extracted": "salaries and wages", "on_page": "Salaries and benefits",
+     "issue": "label combines salaries and benefits; detail_category salaries and wages (all 6 'Salaries and benefits' lines)"},
+    {"severity": "warning", "path": "balance_sheet.equity[4].original_label", "page": 1,
+     "extracted": "Restricted: Capital projects", "on_page": "Restricted for: Capital projects",
+     "issue": "label normalized differently from the sibling lines that keep 'Restricted for: ...'"},
+    {"severity": "warning", "path": "receipts[20].category", "page": 11,
+     "extracted": "other (detail_category Grants)", "on_page": "Grant income 209,996 (Sewer Fund; net position restricted for federal programs 209,996)",
+     "issue": "grantor not printed on the line, so other/Grants per the 2026-11-12 ruling; the restricted-for-federal-programs balance suggests federal grants"}
+  ]
+}
