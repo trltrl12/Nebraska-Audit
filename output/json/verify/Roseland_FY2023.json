@@ -1,0 +1,27 @@
+{
+  "stem": "Roseland_FY2023",
+  "values_checked": 79,
+  "issues": [
+    {"severity": "warning", "path": "receipts[8].category", "page": 1,
+     "extracted": "other", "on_page": "Local Receipts: Other 62,818.00 (Water 40,386.00 + Sewer 22,432.00)",
+     "issue": "Only receipt line of the Water and Sewer funds; probably utility charges, but the page does not say so. Kept other under the label decision ('local receipts other', apply=label). Business-type receipts are 100% other, so this goes to review. Same for detail[24] and detail[26]."},
+    {"severity": "warning", "path": "ending_cash", "page": 1,
+     "extracted": 303112.00, "on_page": "Line 24 Ending Balance (governmental) 303,112.00 = Net Cash 298,112.00 + General Fund Investments 5,000.00",
+     "issue": "ending_cash includes the 5,000 certificate of deposit, which is also recorded in ending_investments (5,000). This follows the convention used in Roseland_FY2024 ('informational, already in ending_cash'), but ending_investments here has no note saying so. Anything that adds cash and investments would double count 5,000."},
+    {"severity": "warning", "path": "disbursements[1].category", "page": 4,
+     "extracted": "public safety", "on_page": "Public Safety - Police & Fire 298.00 (Public Health Fund column)",
+     "issue": "Printed on the Public Safety row but paid from the Public Health Fund. Kept as printed, which is correct under the as-printed rule; flagged only because the fund suggests health/welfare. Same for detail[20]."},
+    {"severity": "warning", "path": "ending_cash", "page": 1,
+     "extracted": null, "on_page": "County Treasurer Balance at October 1, 2022 1,168.00; at September 30, 2023 2,620.00",
+     "issue": "County treasurer balances are printed below the statement, outside lines 24/28, and are not recorded. Left out on purpose (stated in notes)."}
+  ],
+  "checks": {
+    "page_count": "5 pages; notes end 'Read pages 1-5 of 5'. The text layer on p1/p3 swaps the General/Street column order. The JSON follows the image (General 58,468 / Street 18,750; property tax only in Street 31,574 and Debt Service 15,540), which is correct.",
+    "sums": "Governmental receipts 139,737 = General 27,353 + Street 78,620 + TIF 57 + Debt Service 15,557 + page 1a 18,150; business 62,818; total 202,555 as printed. Disbursements 87,504 + 33,460 = 120,964 as printed. Every fund's detail lines add up to its line 21/52 total.",
+    "roll_forward": "Governmental 250,879 + 139,737 - 87,504 = 303,112; business 139,231 + 62,818 - 33,460 = 168,589; total 471,701 as printed.",
+    "balance_sheet": "Net cash 298,112 + 148,589 = 446,701 (line 26 Total) + investments 5,000 + 20,000 = 25,000 (line 27; schedule p5 25,000) = 471,701.",
+    "capital_outlay": "Capital Improvements 15,376 in the Street Fund column -> 'Capital Outlay: Streets/Highways' (function from the fund column), detail_category not itemized. Correct.",
+    "prior_year_tie": "Roseland_FY2024 beginning_cash 303,112 (with beginning_investments 5,000 informational) and business_type.beginning 168,589 equal FY2023 ending as printed.",
+    "transfers": "None printed (lines 19/20/49/50 blank; p5 schedule blank). No debt."
+  }
+}

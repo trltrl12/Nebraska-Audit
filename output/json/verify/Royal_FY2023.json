@@ -1,0 +1,31 @@
+{
+  "stem": "Royal_FY2023",
+  "values_checked": 60,
+  "issues": [
+    {"severity": "warning", "path": "detail[15].category", "page": 1,
+     "extracted": "other", "on_page": "Local Receipts: Other 72,213.77 (LOTTERY column)",
+     "issue": "This is the only receipt of the Lottery fund and probably keno/lottery proceeds (compare the Waverly ruling on lottery-fund gross keno receipts). The printed row is the generic 'Local Receipts: Other' and the fund-name rule covers tax receipts only, so other is defensible. Makes up 75% of the 95,800.02 governmental 'other' receipt (receipts[9]); governmental other is about 68% of governmental receipts."},
+    {"severity": "warning", "path": "decision_needed", "page": 1,
+     "extracted": null, "on_page": "Lottery fund Local Receipts: Other 72,213.77",
+     "issue": "Whether the Lottery fund's 72,213.77 should be keno/lottery can only be settled by a person, and decision_needed[] has no entry for it."},
+    {"severity": "warning", "path": "disbursements[4].fund_type", "page": 3,
+     "extracted": "governmental", "on_page": "Line 45 Solid Waste 9,429.20 under Business-Type Activities, General Fund column",
+     "issue": "The row is a business-type activity, but the amount sits in the General Fund column. Recording it as governmental keeps the General Fund roll-forward right and is defensible. Category utilities is right. Same for detail[11]."},
+    {"severity": "warning", "path": "receipts[10].category", "page": 1,
+     "extracted": "other", "on_page": "Local Receipts: Other 13,065.53 (Water 8,115.42 + Sewer 4,950.11)",
+     "issue": "Only receipt line of the Water and Sewer funds; probably utility charges, but the page does not say so. Kept other under the label decision. Business-type receipts are 100% other, so this goes to review. Same for detail[17] and detail[19]."},
+    {"severity": "warning", "path": "report_discrepancies", "page": 2,
+     "extracted": null, "on_page": "Crossed-out original page 1: Street/Lottery receipts in other columns, Street total receipts -, Lottery 87,591.41, ending Street 33,016.91 / Lottery 92,397.48, lines 26-28 222,137.00",
+     "issue": "The revised page (p1, 'REVISED 1/24/24') was used and the crossed-out original (p2) was ignored, which is correct. The void version's differing figures are only described in notes; there is no report_discrepancies entry, which the budget-form rule asks for. Also note that Royal_FY2024's per-fund beginning balances (Street 33,016.91, Lottery 92,397.48) follow the void version's split. The governmental total 275,618.09 ties."},
+    {"severity": "warning", "path": "ending_cash", "page": 1,
+     "extracted": null, "on_page": "County Treasurer Balance at October 1, 2022 318.90; at September 30, 2023 290.26",
+     "issue": "County treasurer balances are printed below the statement, outside lines 24/28, and are not recorded. Left out on purpose (stated in notes)."}
+  ],
+  "checks": {
+    "page_count": "4 pages; notes end 'Read pages 1-4 of 4'. p1 = REVISED 1/24/24 Exhibit A page 1 (used); p2 = crossed-out original (ignored); p3 = Exhibit A page 2; p4 = blank investment/debt/transfer schedules. Pages 1a/2a are not in the trim, but every Total-column figure equals the sum of the printed fund columns.",
+    "sums": "Governmental receipts 139,867.63 = General 52,275.19 + Street 15,377.64 + Lottery 72,213.77 + Community 1.03; business 13,065.53; total 152,933.16 as printed. Line 18 Total 108,865.55 = 95,800.02 + 13,065.53. Disbursements 51,497.87 + 11,564.05 = 63,061.92 as printed. Every fund's detail lines add up to its line 21/52 total.",
+    "roll_forward": "Governmental 187,248.33 + 139,867.63 - 51,497.87 = 275,618.09; business 65,244.83 + 13,065.53 - 11,564.05 = 66,746.31; total 342,364.40 as printed (lines 24, 26, 28).",
+    "prior_year_tie": "Royal_FY2024 beginning_cash 275,618.09 and business_type.beginning 66,746.31 equal FY2023 ending as printed (totals; see the per-fund note above).",
+    "transfers": "None printed (lines 19/20/49/50 blank; p4 schedule blank). No investments or debt."
+  }
+}
