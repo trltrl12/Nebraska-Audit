@@ -1,0 +1,21 @@
+{
+  "stem": "Bloomington_FY2022",
+  "values_checked": 64,
+  "issues": [
+    {"severity": "warning", "path": "receipts[8].category", "page": 1,
+     "extracted": "other", "on_page": "Local Receipts: Other, Water Fund 30,729.12",
+     "issue": "This is the Water Fund's only receipt line, so it is almost certainly water charges for services. It is a context label (Local Receipts) left for the context check. It puts 97% of business-type receipts in other."},
+    {"severity": "warning", "path": "detail[17].category", "page": 1,
+     "extracted": "other", "on_page": "Local Receipts: Other 30,729.12 (Water Fund)",
+     "issue": "Same as receipts[8]: likely water charges. Needs the context check."},
+    {"severity": "warning", "path": "disbursements[2].original_label", "page": 2,
+     "extracted": "Capital Outlay", "on_page": "Capital Improvements 40,197.43 (General 25,623.91 + Street 14,573.52)",
+     "issue": "This is a plain 'Capital Outlay' label with no function, because the line mixes General and Street columns. The capital outlay rule expects 'Capital Outlay: <function>'."},
+    {"severity": "warning", "path": "detail[7].original_label", "page": 2,
+     "extracted": "Capital Outlay", "on_page": "Capital Improvements 25,623.91 (General Fund column)",
+     "issue": "The General Fund column would be 'Capital Outlay: General Government' under the capital outlay rule. The Street column line was given a function, but this one was not."},
+    {"severity": "warning", "path": "beginning_cash", "page": 1,
+     "extracted": 172231.77, "on_page": "line 3 Subtotal of Beginning Balance (line 1 Net Cash Balance + line 2 Investments)",
+     "issue": "beginning_cash and ending_cash include investments (85,796.46 / 62,821.66), and beginning_investments / ending_investments are null, even though lines 1/2 and 26/27 print cash and investments separately. The extractor made this choice and said so in computed."}
+  ]
+}

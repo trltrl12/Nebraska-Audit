@@ -1,0 +1,62 @@
+{
+  "stem": "Blue_Hill_FY2022",
+  "values_checked": 165,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "receipts[13].category",
+      "page": 6,
+      "extracted": "other",
+      "on_page": "Operating revenues: Charges for services: ... Other revenues 21,740",
+      "issue": "[fixed: charges for services/fees] On p6, 'Other revenues' is printed under the 'Charges for services:' heading, and p2 counts it in business-type Charges for Services 1,018,305 (= 972,331 + 24,234 + 21,740). Under the 2026-11-06 ruling, a generic utility other revenue that the report counts in Charges for Services is charges for services, not other (Bloomfield FY2022 was treated that way)."
+    },
+    {
+      "severity": "error",
+      "path": "detail[59].category",
+      "page": 6,
+      "extracted": "other",
+      "on_page": "Water Other revenues 5,504 (under Charges for services)",
+      "issue": "[fixed: charges for services/fees] Same as receipts[13]: should be charges for services."
+    },
+    {
+      "severity": "error",
+      "path": "detail[70].category",
+      "page": 6,
+      "extracted": "other",
+      "on_page": "Sewer Other revenues 9,757 (under Charges for services)",
+      "issue": "[fixed: charges for services/fees] Same as receipts[13]: should be charges for services."
+    },
+    {
+      "severity": "error",
+      "path": "detail[80].category",
+      "page": 6,
+      "extracted": "other",
+      "on_page": "Electric Other revenues 6,479 (under Charges for services)",
+      "issue": "[fixed: charges for services/fees] Same as receipts[13]: should be charges for services."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[0].category",
+      "page": 7,
+      "extracted": "property tax 281,325",
+      "on_page": "Budget schedule p7: Property taxes-county 259,475 + Motor vehicle taxes-county 21,850 = 281,325",
+      "issue": "The report prints a breakdown that adds up exactly and shows 21,850 of the 'Property taxes' line is motor vehicle tax. The extractor kept it as printed property tax (a printed tax-type label), as in FY2023. Whether to split it is the user's call."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[12].category",
+      "page": 6,
+      "extracted": "utilities",
+      "on_page": "Utilities 48,026 (operating expense object)",
+      "issue": "This is a cost-type line (utility bills: power, gas, phone) with category 'utilities', the same name as the function category. Under the utility cost-type rule a cost-type name such as 'Utilities (Power, Gas, Phone)' may be intended. The same applies to detail[66], detail[76] and detail[87]."
+    },
+    {
+      "severity": "warning",
+      "path": "ending_cash",
+      "page": 3,
+      "extracted": 997077,
+      "on_page": "Cash 828,605 + Cash with County Treasurer 15,007 + Restricted cash 153,465 (no printed cash total)",
+      "issue": "ending_cash is a sum the extractor computed, and beginning_cash is null. The 2026-11-06 ruling says cash is filled only where printed and never derived. The arithmetic is correct."
+    }
+  ]
+}

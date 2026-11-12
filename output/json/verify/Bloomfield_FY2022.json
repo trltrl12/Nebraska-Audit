@@ -1,0 +1,21 @@
+{
+  "stem": "Bloomfield_FY2022",
+  "values_checked": 190,
+  "issues": [
+    {"severity": "warning", "path": "decision_needed", "page": 16,
+     "extracted": "report_discrepancies only (no decision_needed entry)", "on_page": "p7 proprietary statement ends at net position 1,358,094; p16 (report p37) version ends at 1,431,994 (charges 481,837, operating expenses 446,354, interest expense 2,066)",
+     "issue": "The trimmed PDF holds two conflicting proprietary operating statements. The extractor used p7 for the roll-forward and statement lines, but the Water/Sewer detail comes from p18, which ties to the p16 version. Which version is final (and whether one is a superseded page) is a question for a person. It should be in decision_needed[]."},
+    {"severity": "warning", "path": "detail", "page": 18,
+     "extracted": "Water/Sewer detail from p18 (ties to p16) + Sanitation detail from p7", "on_page": "p18 Combined Utility totals 423,799 rev / 382,218 exp vs p7 412,048 / 392,700",
+     "issue": "The business-type detail mixes the two statement versions, so it does not add up to the business-type statement lines (difference recorded in report_discrepancies). This follows the as-printed rule, but the user should know."},
+    {"severity": "warning", "path": "receipts[20].category", "page": 11,
+     "extracted": "other (detail_category Loan Collections)", "on_page": "Economic Development reuse payments 15,028",
+     "issue": "Economic development reuse payments are usually repayments on CDBG reuse loans, so this could be the Loan Repayments category (user 2026-11-05). It is already marked review."},
+    {"severity": "warning", "path": "detail[14].category", "page": 11,
+     "extracted": "other", "on_page": "Economic Development reuse payments 15,028",
+     "issue": "Same as receipts[20]: possibly Loan Repayments."},
+    {"severity": "warning", "path": "detail[33].original_label", "page": 12,
+     "extracted": "Capital Outlay", "on_page": "Capital outlay 7,083 (General department column)",
+     "issue": "The capital outlay rule calls for 'Capital Outlay: <function>'. The line is in the General department column, so it would be 'Capital Outlay: General Government'. The extractor left it as plain Capital Outlay because no function is printed."}
+  ]
+}
