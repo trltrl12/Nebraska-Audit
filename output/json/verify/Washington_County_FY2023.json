@@ -1,0 +1,18 @@
+{
+  "stem": "Washington_County_FY2023",
+  "values_checked": 280,
+  "issues": [
+    {"severity": "warning", "path": "receipts[3].category", "page": 4,
+     "extracted": "Interest Income 3,670,979", "on_page": "Interest row: General 147,393, Road Fund 3,509,057, Jail Capital 14,202, Nonmajor 327, Total 3,670,979 (SoA p2 'Interest Income' 3,670,979)",
+     "issue": "Confirmed printed as recorded. But the Road Fund's 3,509,057 equals its p6 schedule Intergovernmental 3,037,632 + Other Intergovernmental 461,675 + County Treasurer - Sales Tax Commission 9,750, and the Road column's Intergovernmental cell is blank. So about 96% of this 'Interest Income' line is really intergovernmental money printed on the wrong row. Recorded as printed, and decision_needed[0] already asks the user."},
+    {"severity": "warning", "path": "detail[50].category", "page": 6,
+     "extracted": "Homestead Exemption (-26)", "on_page": "County Treasurer - Homestead Commission (26)",
+     "issue": "The same applies to detail[59] (-72, p7), detail[65] (-134, p8) and detail[105] (-40, p17). These are negative county treasurer commissions (fees withheld), not homestead exemption receipts. Homestead Exemption can be defended, but a fee/commission category could also fit. The statements count them inside Intergovernmental."},
+    {"severity": "warning", "path": "detail[86].category", "page": 15,
+     "extracted": "taxes (unlabeled) 1,500 (Veterans' Aid Fund)", "on_page": "Taxes 1,500 actual; budget 'Transfers in - Inheritance Tax Fund' 1,500, actual 0",
+     "issue": "The same applies to detail[90] (Juvenile Services Grant Fund Taxes 10,000, p16; budget 'Transfers in' 10,000, actual 0). Each actual 'Taxes' amount exactly equals the inheritance-fund transfer that was budgeted but not made. The Inheritance Fund's budgeted Transfer out of 711,500 (p7) also matches the transfers budgeted in from it. This suggests inheritance tax was credited straight to these funds as 'Taxes'. The report does not establish it, so unlabeled is defensible under the evidence standard."},
+    {"severity": "warning", "path": "ending_fund_balance.amount", "page": 4,
+     "extracted": 13227687, "on_page": "FY2024 JSON beginning_fund_balance 13,227,689",
+     "issue": "FY2023 ending 13,227,687 differs from the FY2024 beginning 13,227,689 by 2. There is no printed restatement. The FY2024 report's own rounding explains it (its SoA beginning is 13,227,687), and the FY2024 report_discrepancies already records it. Recorded correctly as printed in FY2023."}
+  ]
+}
