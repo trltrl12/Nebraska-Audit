@@ -1,0 +1,110 @@
+{
+  "stem": "Walthill_FY2023",
+  "values_checked": 196,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "receipts[9]",
+      "page": 7,
+      "extracted": [
+        {
+          "original_label": "Charges for Services",
+          "amount": 791753,
+          "source_page": 2
+        },
+        {
+          "original_label": "Property taxes",
+          "amount": 80582,
+          "source_page": 2
+        },
+        {
+          "original_label": "Miscellaneous income",
+          "amount": 6321,
+          "source_page": 2
+        },
+        {
+          "original_label": "Investment income",
+          "amount": 8589,
+          "source_page": 2
+        }
+      ],
+      "on_page": "Proprietary Statement of Revenues, Expenses and Changes in Net Position (p7, no Total column): Metered sales 549,833 + 102,111 + 139,809 = 791,753; Tax revenues 25,788 + 54,800 = 80,588; Miscellaneous 5,367 + 954 = 6,321; Interest income 4,100 + 1,947 + 2,542 = 8,589",
+      "issue": "Business-type receipts (receipts[9]-[12]) were taken from the government-wide Statement of Activities instead of the proprietary funds statement the rules require (no Total column: sum the fund columns, computed). 'Charges for Services' is a column header, not a row label, and property tax 80,582 differs from the printed fund columns 80,588. Fix: Metered sales 791,753 (Utility Charges), Tax revenues 80,588 (property tax, computed), Miscellaneous 6,321 (other), Interest income 8,589 (Interest Income, outside_printed_total), all source_page 7 with computed sums. FY2024 was extracted this way.",
+      "resolved": "business-type lines rebuilt from p7 proprietary statement"
+    },
+    {
+      "severity": "error",
+      "path": "disbursements[4]",
+      "page": 7,
+      "extracted": [
+        {
+          "original_label": "Electrical",
+          "amount": 484017
+        },
+        {
+          "original_label": "Sewer",
+          "amount": 220717
+        },
+        {
+          "original_label": "Water",
+          "amount": 164204
+        }
+      ],
+      "on_page": "p7 cost-type rows summed over Electric/Sewer/Water: Salaries 217,888; Social security 16,668; Unemployment 93; Group insurance 26,003; Office 5,505; Operating 13,242; Electricity purchased 292,189; Insurance 24,301; Utilities 2,117; Repairs and maintenance 34,187; Professional fees 65,616; Transportation 3,825; Telephone 4,624; Education 2,747; Chlorination 4,772; Laboratory tests 1,687; Depreciation 140,782; Meter deposit and refund 7,946; Miscellaneous 4,752 (= total operating expenses 484,017 + 220,717 + 164,210 = 868,944)",
+      "issue": "Business-type spending (disbursements[4]-[6]) taken from the Statement of Activities function rows (Water 164,204) instead of the proprietary statement's cost-type rows (Water total operating expenses 164,210). Replace with the 19 summed cost-type lines above (computed, source_page 7). Capital outlay 12,605 and interest expense 24,565 (disbursements[7]-[8]) are correct as sums but should cite p7 with computed (3,276 + 5,369 + 3,960; 7,113 + 13,537 + 3,915).",
+      "resolved": "business-type lines rebuilt from p7 proprietary statement"
+    },
+    {
+      "severity": "error",
+      "path": "reported_totals.business-type",
+      "page": 7,
+      "extracted": {
+        "receipts": 791753,
+        "disbursements": 868938
+      },
+      "on_page": "Total operating revenues 555,200 + 127,899 + 195,563 = 878,662; Total operating expenses 484,017 + 220,717 + 164,210 = 868,944",
+      "issue": "Follows from the source error: should be receipts 878,662 and disbursements 868,944 (computed from the p7 fund-column totals). Roll-forward still ties: 2,257,595 + 878,662 + 8,589 - 868,944 - 12,605 - 24,565 = 2,238,732.",
+      "resolved": "business-type lines rebuilt from p7 proprietary statement"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[34]",
+      "page": 11,
+      "extracted": "Loan repayment 2,703 (Fire) and detail[52] Loan repayment 16,654 (Economic Development), section expenditure",
+      "on_page": "Budget schedule prints them under Charges to Appropriations (inside the 956,941 total); the fund statement (p5) prints the same 19,357 as 'Loan repayments' under Other financing sources (uses)",
+      "issue": "Detail follows its own schedule (defensible), but detail spending (956,941) then exceeds statement disbursements (937,584) by these 19,357, which the statement counts as other financing."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[0].category",
+      "page": 5,
+      "extracted": "general government",
+      "on_page": "Personal services 165,007 (Street 57,900, Police 86,899, Other governmental 20,208); Supplies 12,691 (disbursements[1])",
+      "issue": "Spending listed by object; these Total-column lines are mostly streets/public safety/library, not general government. Review notes present."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[3].category",
+      "page": 5,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "Grants 226,774 (capital grants; Street 500, Econ Dev 221,274, Library 5,000)",
+      "issue": "Grantor not stated; could be federal grants. Same for the detail Grants lines. Review notes present."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[44].category",
+      "page": 11,
+      "extracted": "general government",
+      "on_page": "Community: Operating Expenses 137; Capital outlay 11,833 (detail[45])",
+      "issue": "'Community' department function not stated; could be Community Betterment. Review notes present."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[72].category",
+      "page": 7,
+      "extracted": "other",
+      "on_page": "Meter deposit and refund 7,946 (Electric operating expense)",
+      "issue": "Customer deposit refunds recorded as other spending as printed; doubtful category (review note present)."
+    }
+  ]
+}
