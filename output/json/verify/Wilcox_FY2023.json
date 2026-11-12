@@ -1,0 +1,57 @@
+{
+  "stem": "Wilcox_FY2023",
+  "values_checked": 118,
+  "fy2024_tie": "FY2023 ending_fund_balance 264,385 = FY2024 beginning_fund_balance 264,385; business-type ending 984,771 = FY2024 business_type.beginning 984,771. Ties as printed. (beginning_cash null in both years: no prior-year cash printed.)",
+  "issues": [
+    {
+      "severity": "error",
+      "path": "transfers_in.amount",
+      "page": 3,
+      "extracted": 23700,
+      "on_page": 16523,
+      "issue": "Wrong column. The Total Governmental Funds column prints Transfers in 16,523 and no transfers out. The Reclassifications column eliminates the 7,177 General/Street transfers within the governmental funds. 23,700 is the Street fund-column cell. FY2024 Wilcox records the Total column (transfers_in 16,875, transfers_out null). Fix: transfers_in 16,523 (p3), and set transfers_out to null/0. The roll-forward still ties: 277,092 + 189,989 - 219,219 + 16,523 = 264,385.",
+      "resolved": "kept gross fund-column transfers (FY2023 rule: record gross transfers where fund columns print them); roll-forward ties"
+    },
+    {
+      "severity": "error",
+      "path": "transfers_out.amount",
+      "page": 3,
+      "extracted": 7177,
+      "on_page": "blank in the Total Governmental Funds column (General (6,204) + Street (973), eliminated by the Reclassifications column 7,177)",
+      "issue": "Wrong column: this is the gross of the fund columns. The Total column prints no transfers out. Should be null/0, paired with transfers_in 16,523.",
+      "resolved": "kept gross fund-column transfers (FY2023 rule: record gross transfers where fund columns print them); roll-forward ties"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[8].category",
+      "page": 6,
+      "extracted": "other",
+      "on_page": "Miscellaneous 3,603 (Enterprise Fund operating revenues)",
+      "issue": "The Statement of Activities (p1) counts it in Charges for Services: business-type charges 474,752 = 471,149 + 3,603. Under the 2026-11-06 ruling, a generic utility other revenue that the report counts in Charges for Services is charges for services. It is kept as other per the label decision; a person should decide. Same for detail[37] (Water 100) and detail[40] (Light 3,503)."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[3].category",
+      "page": 3,
+      "extracted": "occupation/franchise tax",
+      "on_page": "Franchise fees and licenses 4,527",
+      "issue": "Mixed label with no printed breakdown. It is kept as one line with its dominant category, as the ruling says, but the split between franchise and licenses is unknown. Same for detail[3]."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[1].category",
+      "page": 3,
+      "extracted": "utilities",
+      "on_page": "Public Works - landfill 5,891 (General Fund)",
+      "issue": "Category judgement: a governmental landfill department under Public Works. The budget schedule (p7) prints it as 'Public Works - other'. Utilities is defensible; streets/highways or general government are other options. Same for detail[26], detail[27]."
+    },
+    {
+      "severity": "warning",
+      "path": "missing",
+      "page": null,
+      "extracted": null,
+      "on_page": "report p28 (between the General Fund combining schedule p27 = trimmed p8 and the Enterprise Fund schedule p29 = trimmed p9) is not in the trim",
+      "issue": "Possible missing schedule page, e.g. a Street Fund schedule. Every figure on the 10 trimmed pages is in the JSON and all totals tie. Check the source PDF to see whether report p28 holds schedule lines."
+    }
+  ]
+}

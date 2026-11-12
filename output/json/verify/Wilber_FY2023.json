@@ -1,0 +1,27 @@
+{
+  "stem": "Wilber_FY2023",
+  "values_checked": 392,
+  "fy2024_tie": "FY2023 ending_fund_balance 3,311,506 = FY2024 beginning_fund_balance 3,311,506; business_type ending 14,052,731 = FY2024 beginning; proprietary ending cash 5,034,719 = FY2024 proprietary beginning_cash; governmental_net_position ending 6,472,554 = FY2024 beginning. FY2024 beginning_cash is null, so FY2023 ending_cash 2,574,549 cannot be compared; this is not a FY2023 error.",
+  "split_checks": "Licenses and permits 46,412 (p6) = Liquor occupation taxes 4,800 + Occupation taxes 41,612 (Schedule 2, p13; General Fund is the only column): exact, printed row labels. Intergovernmental revenues 529,548 = remainder 493,472 (computed, parent label) + Motor vehicle prorate 907 + Homestead exemption 16,926 (p13) + State of Nebraska-motor vehicle fee 18,243 (p16): exact. The fund pieces tie: General 159,563 = 140,781+907+16,926+949; Street 298,168 = 267,717+3,000+9,208+18,243; Library 1,036; Debt Service 5,950; nonmajor 64,831 = Ambulance 4,000 + Fire rural fire district 60,831. Debt service 41,969 = principal 31,158 (Fire, p22) + interest 10,811 (Debt Service Fund 4,944 p19 + Fire 5,867 p22; the SoA prints Debt service expenses 10,811 p2): exact. Taxes 342,205 = SoA 'Property tax' 342,205 (p2): correct. The General Fund Taxes 295,115 as property tax by subtraction (342,205 - Debt Service property tax 47,090) holds exactly, since only these two columns print taxes.",
+  "issues": [
+    {"severity": "warning", "path": "receipts[23].category", "page": 10,
+     "extracted": "federal grants", "on_page": "Employee Retention Credit 1,382,483 (Care Center, non-operating)",
+     "issue": "Category judgement. ERC is a federal payroll-tax credit refund, not a grant. It matches Beaver_City_Manor_FY2025 (federal grants), but Stanton_Nursing_Home_FY2025 uses reimbursements/refunds for 'Employee Retention Credit Refund'. The user may want one category (e.g. reimbursements/refunds or a new 'Employee Retention Credit') across reports. Same for detail[215]."},
+    {"severity": "warning", "path": "receipts[12].category", "page": 6,
+     "extracted": "intergovernmental/state aid", "on_page": "Grants 20,663 (Library 10,373 + Park 10,290)",
+     "issue": "The grantor is not stated anywhere. The 2026-11-06 ruling says do not guess a grantor, and calling it state aid is a guess. The SoA counts it in culture/recreation Operating Grants and Contributions 23,564. A generic grants category may fit better. Same for detail[56] (Library Grants), detail[92] (Park Grants) and detail[169] (Water 'Grant income' 303)."},
+    {"severity": "warning", "path": "receipts[17].category", "page": 10,
+     "extracted": "other", "on_page": "Miscellaneous 43,414 (operating revenue: Electric 15,931, Water 92, Care Center 27,391)",
+     "issue": "The SoA (p2) counts these in Charges for Services: Electric 1,803,915, Water 282,029 and Care Center 4,392,921 are total operating revenues. Under the 2026-11-06 ruling, a generic utility other revenue that the report counts in Charges for Services is charges for services. It is kept as other per the label decision; a person should decide. Same for detail[146] (Electric Miscellaneous 15,931), detail[168] (Water Miscellaneous 92) and detail[209] (Care Center Other revenue 27,391)."},
+    {"severity": "warning", "path": "disbursements[9].function", "page": 10,
+     "extracted": "Personal services / Production function 'hospital/health care'; General operations 'utilities'; Administrative category 'hospital/health care'; Depreciation function 'utilities'",
+     "on_page": "Totals 2023 column mixes Electric, Water, Sewer and Care Center (Care Center: personal 2,777,202, production 1,895,660, admin 489,535, depreciation 254,821)",
+     "issue": "The function/category tags on the five mixed operating-expense lines (disbursements[9]-[13]) are inconsistent. 'Administrative' 647,750 has category hospital/health care instead of a cost type or Operating, and Depreciation is tagged utilities although 68% of it (254,821) is Care Center. user_rules.py applies the cost types later; flagging so the function tags are checked."},
+    {"severity": "warning", "path": "disbursements[8].original_label", "page": 2,
+     "extracted": "Debt service-interest", "on_page": "Sum of 'Debt service-interest' 4,944 (p19) + 'Debt service-interest' 5,867 (p22); the SoA row cited (p2) is labelled 'Debt service'",
+     "issue": "The 2026-11-06 ruling says sums keep the parent label ('Debt service'). Both source rows print 'Debt service-interest', so the label is defensible. The amount and computed note are correct."},
+    {"severity": "warning", "path": "receipts[21].original_label", "page": 10,
+     "extracted": "Intergovernmental transfer", "on_page": "Intergovernmental transfer 164,339 (Care Center non-operating revenues)",
+     "issue": "The label contains 'transfer', so validate.py may flag it. On the page it is nursing-home intergovernmental transfer (IGT) revenue, not an interfund transfer. Keeping it as revenue (intergovernmental/state aid) is correct as printed. Same for detail[212]."}
+  ]
+}
