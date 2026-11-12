@@ -1,0 +1,74 @@
+{
+  "stem": "Trenton_FY2023",
+  "values_checked": 155,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "detail[60]",
+      "page": 13,
+      "extracted": "Electric 483,562.05 (budget 5,615,696), Budgetary Basis - Budget and Actual - All Funds",
+      "on_page": "Proprietary Statement of Revenues, Expenses and Changes in Net Position p10, Electric column: Charge for services 748,006.13; Other 337.02; Less: Cost of purchased power 250,661.10; Salaries, taxes and benefits 104,275.96; Professional fees 4,847.50; Repair and maintenance 1,866.69; Utilities and telephone 4,923.53; Supplies 63,187.13; Fuel and transportation 3,687.72; Franchise fees to city 7,129.78; Miscellaneous 9,917.31; Depreciation 16,404.00; Interest income 693.35; Transfers in (out) (24,901.84); totals: operating revenues 748,343.15, operating expenses 216,239.62",
+      "issue": "Utility detail taken from the combined all-funds budget schedule (p13). No Electric Fund budget schedule is printed, so the rule requires the proprietary statement's Electric column (p10). Replace the line with the p10 Electric lines listed here, as revenue/expenditure/other financing, with detail_totals per fund.",
+      "resolved": "utility detail replaced with p10 proprietary statement fund-column lines"
+    },
+    {
+      "severity": "error",
+      "path": "detail[61]",
+      "page": 13,
+      "extracted": "Water 182,997.53 (budget 215,086), all-funds budget schedule",
+      "on_page": "p10 Water column: Charge for services 210,952.60; Other 114.48; Salaries, taxes and benefits 44,354.73; Professional fees 1,731.25; Repair and maintenance 25,502.89; Utilities and telephone 16,038.50; Supplies 10,514.64; Fuel and transportation 37.91; Miscellaneous 5,627.08; Depreciation 65,222.00; Interest income 234.46; Interest expense (14,956.52); Transfers in (out) (873.18); totals: operating revenues 211,067.08, operating expenses 169,029.00",
+      "issue": "Utility detail taken from the combined all-funds budget schedule. No Water Fund schedule is printed, so the p10 Water column lines listed here should replace it.",
+      "resolved": "utility detail replaced with p10 proprietary statement fund-column lines"
+    },
+    {
+      "severity": "error",
+      "path": "detail[62]",
+      "page": 13,
+      "extracted": "Sewer 54,271.54 (budget 46,252), all-funds budget schedule",
+      "on_page": "p10 Sewer column: Charge for services 66,980.75; Other 800.00; Salaries, taxes and benefits 19,944.25; Professional fees 692.50; Repair and maintenance 11,885.65; Utilities and telephone 993.21; Supplies 7,318.56; Fuel and transportation 177.86; Miscellaneous 1,296.40; Depreciation 10,099.00; Interest income 23.53; Interest expense (913.77); Transfers in (out) 12,080.13; totals: operating revenues 67,780.75, operating expenses 52,407.43",
+      "issue": "Utility detail taken from the combined all-funds budget schedule. No Sewer Fund schedule is printed, so the p10 Sewer column lines listed here should replace it.",
+      "resolved": "utility detail replaced with p10 proprietary statement fund-column lines"
+    },
+    {
+      "severity": "error",
+      "path": "detail[63]",
+      "page": 13,
+      "extracted": "Solid Waste 177,087.36 (budget 218,084), all-funds budget schedule",
+      "on_page": "p10 Waste column: Charge for services 188,991.74; Other 2,648.67; Salaries, taxes and benefits 64,279.02; Professional fees 1,731.25; Repair and maintenance 14,251.19; Utilities and telephone 2,443.54; Supplies 14,376.22; Fuel and transportation 18,171.98; Franchise fees to city 45,155.08; Miscellaneous 769.99; Depreciation 53,663.00; Interest expense (2,985.66); totals: operating revenues 191,640.41, operating expenses 214,841.27",
+      "issue": "Utility detail taken from the combined all-funds budget schedule. No Waste Fund schedule is printed, so the p10 Waste column lines listed here should replace it (fund 'Waste Fund').",
+      "resolved": "utility detail replaced with p10 proprietary statement fund-column lines"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[7].category",
+      "page": 6,
+      "extracted": "Ambulance Fees (Charges for services 18,169.33)",
+      "on_page": "Charges for services 18,169.33. The p14 Totals column breaks it down as Ambulance 16,008.88 + Library 2,160.45",
+      "issue": "A mixed line was put in the dominant category. The report prints an exact breakdown (p14), so it could be split into Ambulance Fees 16,008.88 and charges for services 2,160.45. The detail line for the same label (Library) is charges for services/fees."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[1]",
+      "page": 3,
+      "extracted": "Motor vehicle 19,260.08 (fund statement p6)",
+      "on_page": "Statement of Activities p3: 'Sales taxes, levied for general purposes' 19,260.08, 'Franchise taxes' 8,610.53, 'Motor vehicle taxes' 11,033.09; fund statement p6: Motor vehicle 19,260.08 (General 12,771.78 + Street 6,488.30), Franchise 11,033.09, City sales 8,610.53",
+      "issue": "Confirmed: the fund statement lines are recorded as p6 prints them (p14 agrees for the General Fund). The conflicting SoA labels are already in decision_needed. Noted for completeness only."
+    },
+    {
+      "severity": "warning",
+      "path": "balance_sheet.assets[9].category",
+      "page": 1,
+      "extracted": "restricted assets",
+      "on_page": "Restricted assets - Temporarily restricted - Due from other funds 15,928.55",
+      "issue": "An interfund receivable is printed under Restricted assets. 'restricted assets' follows the heading; Internal Balances is an alternative."
+    },
+    {
+      "severity": "warning",
+      "path": "proprietary.ending_cash",
+      "page": 12,
+      "extracted": 1494464.88,
+      "on_page": "1,494,464.88 (end of year, p12); Trenton_FY2024.json proprietary.beginning_cash = 1,473,738.19",
+      "issue": "The year-to-year tie fails for proprietary cash: FY2023 ending 1,494,464.88 vs FY2024 beginning 1,473,738.19 (difference 20,726.69), and no restatement is recorded in the FY2024 JSON. The FY2023 value matches its page. Governmental fund balance ties (435,772.46). Business-type net position 2,057,004.45 vs FY2024 beginning 2,057,005.45 differs by 1.00, which the printed Sewer rounding gap explains (already in report_discrepancies)."
+    }
+  ]
+}
