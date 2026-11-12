@@ -1,0 +1,15 @@
+{
+  "stem": "Stamford_FY2023",
+  "values_checked": 61,
+  "issues": [
+    {"severity": "warning", "path": "ending_cash", "page": 1,
+     "extracted": 158019.26, "on_page": "line 26 Net Cash Balance General 76,125.40 + Street 37,538.63 + ARPA 31,095.42 = 144,759.45; line 27 Investments Street 13,259.81",
+     "issue": "beginning_cash/ending_cash are the line 3/24 subtotals (cash plus investments), while balance_sheet records cash 144,759.45 and investments 13,259.81 separately and beginning/ending_investments are also filled. ending_cash does not equal the balance-sheet cash line, and anything that adds cash and investments together will count the Street Fund CD twice. The extractor's own note says this, and FY2024 uses the same approach. Printed cash-only figures are line 1 (144,398.47 governmental) and line 26 (144,759.45)."},
+    {"severity": "warning", "path": "transfers_in", "page": 1,
+     "extracted": 21978.71, "on_page": "line 19 Transfers In of Surplus Fees: blank (should = p2 line 49, 6,492.28); line 20: 21,978.71 (should = p2 line 50, 15,486.43)",
+     "issue": "The report's own cross-checks (line 19 = line 49, line 20 = line 50) fail on the page: Street's 6,492.28 is classified 'other than surplus fees' as a receipt but 'surplus fees' as a transfer out. Total transfers in and out still agree (21,978.71, matching the p3 schedule). This is mentioned only in notes and is not in report_discrepancies."},
+    {"severity": "warning", "path": "beginning_cash", "page": 1,
+     "extracted": 158019.26, "on_page": "FY2024 JSON beginning_cash 165,124.32 = General 76,125.40 + Street 50,798.44 + ARPA 31,095.42 + Park 7,105.06",
+     "issue": "Roll-forward to FY2024: the governmental ending (158,019.26) does not equal the FY2024 beginning (165,124.32). The 7,105.06 difference is a Park fund that does not appear in the FY2023 Exhibit A, and no restatement is printed in this report. Business-type ending 195,362.99 and Street investments 13,259.81 tie to FY2024. Nothing changed."}
+  ]
+}
