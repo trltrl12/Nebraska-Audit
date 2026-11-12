@@ -1,0 +1,18 @@
+{
+  "stem": "Ord_FY2022",
+  "values_checked": 276,
+  "issues": [
+    {"severity": "warning", "path": "balance_sheet.statement", "page": 1,
+     "extracted": "governmental funds Balance Sheet (p6) + proprietary Statement of Net Position (pp13-14)", "on_page": "Statement of Net Position p1 shows only the NET POSITION half (governmental 15,822,442 incl. Net Investment in Capital Assets 6,102,024); the assets/liabilities half is not in the trim",
+     "issue": "government-wide figures include capital assets, so the balance-sheet rule calls for the Statement of Net Position, but its asset page is missing from the trimmed PDF; re-trim (config/extra_pages.csv) may be needed. p1 equity lines are not in the JSON."},
+    {"severity": "warning", "path": "receipts[34].category", "page": 15,
+     "extracted": "Public Power District Sales Tax", "on_page": "NPPD Payments 452,943 (Electric Fund operating revenue)",
+     "issue": "nature of NPPD payments not stated; may be lease/contract payments rather than a public power district sales tax. Same on detail[92]."},
+    {"severity": "warning", "path": "detail[31].category", "page": 22,
+     "extracted": "public safety", "on_page": "Public Health Fund objects: Personal Services 407,126, Contracted 77,639, Materials 23,575, Other 48,463; statement p9 splits the fund into Public Safety 460,750 and Public Health 96,053",
+     "issue": "all Public Health Fund object lines (detail[31]-[34]) put in public safety (dominant function); defensible, review set."},
+    {"severity": "warning", "path": "detail[45].original_label", "page": 22,
+     "extracted": "Capital Outlay: Culture/Recreation", "on_page": "Capital Outlay 5,000 (Culture and Recreation Fund column)",
+     "issue": "function inferred from the fund column (FY2022 ruling: function only when printed), and inconsistent with detail[35] and detail[66] (Public Health / Public Works capital outlay) which keep plain 'Capital Outlay'."}
+  ]
+}
