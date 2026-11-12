@@ -1,0 +1,31 @@
+{
+  "stem": "Hitchcock_County_FY2022",
+  "values_checked": 150,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "detail[4].category",
+      "page": 4,
+      "extracted": "other (Local 209,071)",
+      "on_page": "General Fund budget 'Local' 209,071 (p5) = Exhibit D General column (p4) Charges for Services 194,678 + Interest 8,071 + Miscellaneous (2,915) + Intergovernmental 9,237",
+      "issue": "charges for services are 93% of the line; the extractor's rule (broad 'Local' line: use the category that is more than half, or split) calls for charges for services/fees, not other. Note: 'Local' is a context label, so the context checker may also decide it",
+      "resolved": "'Local' is a context label: stays other until the context check (CLAUDE.md 2026-11-05 rule)"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[39].category",
+      "page": 10,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "Visitor's Promotion Fund Intergovernmental 4,627",
+      "issue": "visitors promotion fund money printed as Intergovernmental is probably county lodging tax remitted by the state; state aid is defensible since the printed label is not a tax label"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[40].category",
+      "page": 10,
+      "extracted": "intergovernmental/state aid",
+      "on_page": "Visitor's Improvement Fund Intergovernmental 4,628",
+      "issue": "same as detail[39]: possibly lodging tax"
+    }
+  ]
+}
