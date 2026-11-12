@@ -1,0 +1,16 @@
+{
+  "stem": "York_County_FY2023",
+  "values_checked": 235,
+  "issues": [
+    {"severity": "warning", "path": "ending_cash", "page": 3,
+     "extracted": 12909336, "on_page": "Cash 7,365,287 + Restricted cash 5,544,049; TOTAL ASSETS 12,909,336",
+     "issue": "ending_cash is a computed sum of two printed cash lines (marked computed; equals the printed TOTAL ASSETS, all cash). The 2026-11-06 ruling says cash is never derived; FY2024 JSON leaves ending_cash null. Confirm a sum of printed cash lines is acceptable."},
+    {"severity": "warning", "path": "detail_totals", "page": 5,
+     "extracted": "other financing totals only for General Fund (-1,750,450) and Inheritance Tax Fund (-1,325,835)",
+     "on_page": "TOTAL OTHER FINANCING SOURCES (USES) printed per fund: Reappraisal 25,000, County Medical Relief 9,168 (p5); State Institutions 22,982, Veteran's Aid 2,000 (p6); Juvenile Diversion 20,000, Child Support 23,574 (p7); Area Agency on Aging 81,400 (p8); 911 Emergency 516,304, E911 Wireless (45,041), E911 Wireless Holding 45,041 (p10); Emergency Management 31,027, Law Enforcement/Sheriff (4,851) (p11); Highway Allocation Bond 0 (p13)",
+     "issue": "printed other-financing totals not entered in detail_totals for these funds (the transfer lines themselves are all present and tie)"},
+    {"severity": "warning", "path": "detail[88].category", "page": 9,
+     "extracted": "federal grants", "on_page": "Intergovernmental 2,106 (Federal Drug Law Enforcement Fund - Sheriff)",
+     "issue": "federal source inferred from the fund name; the row prints only Intergovernmental"}
+  ]
+}
