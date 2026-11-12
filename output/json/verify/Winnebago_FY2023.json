@@ -1,0 +1,83 @@
+{
+  "stem": "Winnebago_FY2023",
+  "values_checked": 74,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "receipts[9].source_page, receipts[10].source_page",
+      "page": 7,
+      "extracted": 8,
+      "on_page": 7,
+      "issue": "Business-type receipts (Utility sales 519,520; Miscellaneous 6,981) are on trimmed page 7 (Statement of Revenues, Expenses and Change in Net Position - Proprietary Funds, printed page number 8). Trimmed p8 is the General Fund budget schedule. Amounts are correct; set source_page to 7.",
+      "resolved": "source_page set to trimmed p7; rounding gap recorded"
+    },
+    {
+      "severity": "error",
+      "path": "disbursements[6..13].source_page",
+      "page": 7,
+      "extracted": 8,
+      "on_page": 7,
+      "issue": "All 8 business-type spending lines (Personnel Costs 189,690 through Capital Outlay 29,388) are on trimmed page 7 (the proprietary statement), not p8. The extractor used the printed page number. Amounts are correct; set source_page to 7.",
+      "resolved": "source_page set to trimmed p7; rounding gap recorded"
+    },
+    {
+      "severity": "error",
+      "path": "reported_totals.business-type.receipts.source_page, reported_totals.business-type.disbursements.source_page",
+      "page": 7,
+      "extracted": 8,
+      "on_page": 7,
+      "issue": "Total operating revenues 526,501 and Total operating expenses 527,867 are printed on trimmed p7, not p8. Set source_page to 7.",
+      "resolved": "source_page set to trimmed p7; rounding gap recorded"
+    },
+    {
+      "severity": "error",
+      "path": "business_type.beginning.source_page, business_type.ending.source_page",
+      "page": 7,
+      "extracted": 8,
+      "on_page": 7,
+      "issue": "Net Position - Beginning of Year 266,519 and End of Year 265,153 are printed on trimmed p7, not p8 (p8 is the General Fund budget schedule). Set source_page to 7.",
+      "resolved": "source_page set to trimmed p7; rounding gap recorded"
+    },
+    {
+      "severity": "error",
+      "path": "report_discrepancies",
+      "page": 2,
+      "extracted": "only the p4 fund-column gap (General 16,096 + Streets 17,908 = 34,004 vs 34,005) is recorded",
+      "on_page": "p2 Governmental: Cash in Bank 34,005 + Cash held at County Treasurer 3,496 = 37,501 vs Total assets 37,500; Total (memo) column 212,799 + 86,359 + 3,496 = 302,654 vs 302,653; p4 Total column 34,005 + 3,496 = 37,501 vs 37,500",
+      "issue": "The report's own rounding gap that matters for the balance sheet is not recorded. The JSON's balance_sheet.assets add to 302,654 against total_assets 302,653, and the governmental lines add to 37,501 against 37,500. Add a report_discrepancies entry (check: balance, difference 1, pages 2 and 4).",
+      "resolved": "source_page set to trimmed p7; rounding gap recorded"
+    },
+    {
+      "severity": "warning",
+      "path": "ending_cash.computed",
+      "page": 4,
+      "extracted": "governmental funds Total assets 37,500 (p4) = Cash at Bank 34,005 + Cash held at County Treasurer 3,496",
+      "on_page": "34,005 + 3,496 = 37,501; printed Total assets 37,500",
+      "issue": "The amount 37,500 matches the printed Total assets, but the arithmetic in the computed note is wrong by 1 because of the report's rounding gap."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[1].category",
+      "page": 5,
+      "extracted": "public safety",
+      "on_page": "Public Health and Safety 1,246",
+      "issue": "The line mixes health and safety. public safety is defensible, and health/welfare would be too (the line is already marked review). detail[10] makes the same call."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[9]",
+      "page": 8,
+      "extracted": "section revenue, category donations/contributions, 64,861",
+      "on_page": "Grants and donations 64,861 listed under RECEIPTS on the General Fund budget schedule (p8); the same amount is under OTHER FINANCING SOURCES (USES) on the governmental funds statement (p5)",
+      "issue": "The top level has it in other_financing (correct for p5) while detail has it as revenue, which follows the p8 schedule as printed. It is a mixed grants/donations label, and the Statement of Activities (p3) shows it as Operating Grants and Contributions for general government. The category is a judgment call."
+    },
+    {
+      "severity": "warning",
+      "path": "notes",
+      "page": null,
+      "extracted": "ending fund balance 37,500; business-type net position 265,153",
+      "on_page": "no Winnebago FY2024 JSON exists (no FY2024 file with entity_name Winnebago)",
+      "issue": "Could not check FY2023 ending balances against the FY2024 beginning balances."
+    }
+  ]
+}
