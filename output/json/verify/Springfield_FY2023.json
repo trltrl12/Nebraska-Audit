@@ -1,0 +1,101 @@
+{
+  "stem": "Springfield_FY2023",
+  "values_checked": 121,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "report_discrepancies",
+      "page": 4,
+      "extracted": "not recorded",
+      "on_page": "General column receipts: 801,227 + 289,547 + 2,935,596 + 22,730 + 99,437 + 257,391 + 28,528 + 279,511 + 72,341 + 18,846 = 4,805,154 vs printed Total receipts 4,805,153; Bond column 213,525 + 9,167 + 6,020 + 8,251 = 236,963 vs printed 236,964",
+      "issue": "Unrecorded report rounding gaps on the governmental funds statement (p4). The General column is +1 and the Bond column -1, which offset in the Total column 5,042,117. Only the p9 Bond schedule gap is recorded. Add the p4 General and Bond column gaps.",
+      "resolved": "report_discrepancies entry added"
+    },
+    {
+      "severity": "error",
+      "path": "report_discrepancies",
+      "page": 6,
+      "extracted": "not recorded",
+      "on_page": "Utility sales Total 2,321,149 vs Water 613,994 + Sewer 1,707,156 = 2,321,150; Water total operating revenues 663,447 vs lines 663,448; Interest income Total 11,186 vs 3,338 + 7,849 = 11,187; Water non-operating total 6,750 vs 3,338 + 3,413 = 6,751",
+      "issue": "Unrecorded rounding gaps on the proprietary revenues/expenses statement (revenue side). These affect receipts[14] and receipts[19]. The JSON values are as printed.",
+      "resolved": "report_discrepancies entry added"
+    },
+    {
+      "severity": "error",
+      "path": "report_discrepancies",
+      "page": 6,
+      "extracted": "not recorded",
+      "on_page": "Salaries and benefits Total 246,204 vs 104,080 + 142,125 = 246,205; Other miscellaneous Total 2,212 vs 1,456 + 755 = 2,211; Water operating income 412,465 vs 663,447 - 250,981 = 412,466; Sewer operating income 646,035 vs 1,711,526 - 1,065,492 = 646,034; Sewer change 644,317 vs 646,035 - 1,717 = 644,318",
+      "issue": "Unrecorded rounding gaps on the proprietary statement (expense side). These affect disbursements[7] and disbursements[15]. The JSON values are as printed.",
+      "resolved": "report_discrepancies entry added"
+    },
+    {
+      "severity": "error",
+      "path": "report_discrepancies",
+      "page": 7,
+      "extracted": "not recorded",
+      "on_page": "Total operating lines 1,058,500 + 118,411 - 9,084 - 51,306 + 198 - 99 - 2,144 = 1,114,476 vs printed 1,114,477; Sewer operating lines = 681,013 vs printed 681,014; Sewer net change 681,014 - 94,301 + 7,849 = 594,562 vs printed 594,561; Water end 2,966,195 + Sewer end 2,763,528 = 5,729,723 vs Total 5,729,724",
+      "issue": "Unrecorded rounding gaps in the proprietary cash flows (p7). These are separate from the recorded capital financing misprint. They affect proprietary.operating and proprietary.ending_cash (both as printed).",
+      "resolved": "report_discrepancies entry added"
+    },
+    {
+      "severity": "error",
+      "path": "report_discrepancies",
+      "page": 10,
+      "extracted": "not recorded",
+      "on_page": "Total column Debt service (2,205,743) vs Water (2,240,407) + Sewer 34,665 = (2,205,742)",
+      "issue": "Unrecorded rounding gap in the p10 Total column. The Total column itself is not extracted.",
+      "resolved": "report_discrepancies entry added"
+    },
+    {
+      "severity": "error",
+      "path": "report_discrepancies",
+      "page": 5,
+      "extracted": "not recorded",
+      "on_page": "Sewer Total Current Liabilities 9,568 vs 4,831 + 3,128 + 1,608 = 9,567; Water Total Liabilities and Net Position 5,869,643 vs Total Assets 5,869,642; Sewer 3,314,068 vs 3,314,069; Total column current liabilities 33,939 vs 33,938; total 9,183,712 vs assets 9,183,711",
+      "issue": "Unrecorded rounding gaps on the proprietary Statement of Net Position (p5). Only the matching p1 Total Liabilities gap is recorded.",
+      "resolved": "report_discrepancies entry added"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[12].section",
+      "page": 8,
+      "extracted": "other financing (printed_in revenue)",
+      "on_page": "Grants and donations 27,606 listed under RECEIPTS and included in Total receipts 4,832,759",
+      "issue": "The p8 budget schedule prints this amount among receipts. The p4 fund statement prints it under Other Financing Sources. Making the schedule line other financing follows p4 rather than how p8 prints it. Defensible, but it departs from the 'schedule lines as printed' rule."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[4].category",
+      "page": 4,
+      "extracted": "general government",
+      "on_page": "Public buildings 20,343 (p11: Auditorium fund column)",
+      "issue": "Auditorium spending could be culture/recreation. The Statement of Activities lists it as its own function."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[4].split_from",
+      "page": 8,
+      "extracted": "Intergovernmental - state 298,714 split by the p8 breakdown, remainder 10,175",
+      "on_page": "p4 General intergovernmental-state 289,547; p8 breakdown 55,779 + 34,693 + 1,749 + 196,318 = 288,539; the 1,008 Library state aid sits inside p8 'Other miscellaneous' 19,854 (= p4 18,846 + 1,008)",
+      "issue": "The arithmetic is exact. The p8 breakdown does not add to the p4 General cell, so the remainder 10,175 (Library 1,008 from p11 + Bond 9,167) relies on reconciling across schedules. Correct, but noted."
+    },
+    {
+      "severity": "warning",
+      "path": "decision_needed",
+      "page": 7,
+      "extracted": "decision_needed[0] present",
+      "on_page": "Water Notes payable 2,240,407: p1 and p5 long-term liabilities; p7 cash flow 'Debt service' +2,240,407 (Water column, capital financing); p10 budget schedule Debt service (2,240,407) under EXPENDITURES; p10 Bond proceeds actual '-' (budget 2,661,000)",
+      "issue": "Confirmed that the loan is printed nowhere as proceeds. It is in the cash flow as positive Debt service, in the budget schedule as negative debt service, and not on the accrual p6 statement. The decision_needed item is appropriate; detail[29] -2,240,407 is as printed."
+    },
+    {
+      "severity": "warning",
+      "path": "business_type.ending",
+      "page": 6,
+      "extracted": 6644366,
+      "on_page": "FY2023 Net Position - End of Year 6,644,366; FY2024 JSON business_type.beginning 6,644,365",
+      "issue": "Off by 1 against FY2024's printed beginning. No restatement is shown, so this is likely rounding in the FY2024 report. Governmental ending fund balance 13,167,343 = FY2024 beginning_fund_balance (ties)."
+    }
+  ],
+  "notes": "Trimmed PDF has 12 pages (p12 is a federal assistance divider page); notes end 'Read pages 1-12 of 12'. Every recorded amount matches its page. The p7 capital financing Total was re-read: printed 2,205,841, while its lines give (2,153,727) + 2,215,407 + (9,566) = 52,114 and the Water 146,415 + Sewer (94,301) columns also give 52,114. The printed 2,205,841 = 2,215,407 - 9,566, i.e. the Total leaves out the (2,153,727) purchase line. The net change 1,181,190 and ending cash tie only with 52,114, so the error is the report's own and is correctly in report_discrepancies. Governmental receipts 5,042,117 tie. Disbursement lines 2,033,085 vs printed 2,033,084 (recorded). Fund-balance roll 10,130,705 + 5,042,117 - 2,033,085 + 27,606 = 13,167,343. Business-type receipts 2,389,572 and disbursements 1,326,039 tie; the net position roll ties. Balance sheet totals tie except the recorded p1 liability gap."
+}
