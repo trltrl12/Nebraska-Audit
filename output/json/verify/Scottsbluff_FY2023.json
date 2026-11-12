@@ -1,0 +1,63 @@
+{
+  "stem": "Scottsbluff_FY2023",
+  "values_checked": 282,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "business_type.ending",
+      "page": 11,
+      "extracted": 36685642,
+      "on_page": "Proprietary Totals net position, September 30 36,685,642 (p11, p9) vs Statement of Net Position business-type Total net position 36,685,641 (p1) and Statement of Activities 36,685,641 (p3)",
+      "issue": "This is a rounding gap printed in the report itself, and report_discrepancies does not record it. As extracted, the JSON is internally inconsistent: the balance_sheet business-type equity lines (p1) add to 36,685,641, while business_type.ending is 36,685,642. The same 1-dollar gaps also appear in: business-type change in net position 1,229,470 (p3) vs 1,229,471 (p11); Statement of Activities business-type investment income 380,029 and miscellaneous 107,052 (p3) vs 380,025 and 107,057 (p11); proprietary statement total assets 38,207,483 and unrestricted 14,227,817 (p9) vs 38,207,482 and 14,227,816 (p1). Fix: add a report_discrepancies entry (no change to amounts).",
+      "resolved": "report_discrepancies entry added"
+    },
+    {
+      "severity": "warning",
+      "path": "business_type.beginning",
+      "page": 11,
+      "extracted": 35456171,
+      "on_page": "Net position, October 1 35,456,171",
+      "issue": "Year-to-year tie check. FY2023 business-type ending 36,685,642 does not equal Scottsbluff_FY2024 business_type.beginning 36,654,084 (difference 31,558, which is about the GIS internal service fund's net position of 31,557 included in the FY2023 business-type Totals). Nothing in the FY2023 report explains this, so it is probably a reclassification in FY2024. Governmental: FY2024 beginning_fund_balance 24,827,156 matches the FY2023 balance sheet (p5); the operating statement prints 24,827,157, which is already in report_discrepancies. Governmental net position 64,954,385 ties."
+    },
+    {
+      "severity": "warning",
+      "path": "detail",
+      "page": 7,
+      "extracted": null,
+      "on_page": "General Fund: Operating transfers in 3,396,423 and Proceeds from sale of assets 31,407 (p6); Streets: Operating transfers out (12,500) (p6); Special Projects: Insurance proceeds 156,814 (p7)",
+      "issue": "The major-fund detail comes from budget-basis schedules (p14-19), which print no other financing lines. As a result, the governmental transfers and other financing sources have no detail other-financing lines, while the matching Electric transfer out (3,396,423) does appear in the business-type detail. Not double counted; recorded at statement level."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[43].category",
+      "page": 21,
+      "extracted": "other",
+      "on_page": "Keno: Other revenue 77,269",
+      "issue": "The Keno Fund's other revenue is probably keno proceeds (keno/lottery), but the label is generic, so other is defensible. A person should decide."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[13].category",
+      "page": 16,
+      "extracted": "economic development",
+      "on_page": "Economic Development Fund: Community development 2,143,918",
+      "issue": "Community Betterment is its own spending category under the user rules ('Community development/betterment' -> Community Betterment). This line is plain 'Community development' in the Economic Development Fund, so economic development is defensible but should be confirmed."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[50].category",
+      "page": 21,
+      "extracted": "taxes",
+      "on_page": "CRA: Taxes and special assessments 516,881",
+      "issue": "CRA funds normally hold TIF (property tax increment). The fund name does not literally say TIF, and the label includes special assessments, so leaving it unlabeled is defensible under the evidence standard."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[11].function",
+      "page": 11,
+      "extracted": "utilities",
+      "on_page": "Totals column includes Internal Service (GIS) 61,375 personnel, 4,652 supplies, 1,536 contractual, 15,000 maintenance, 549 utilities, 880 other, 1,390 depreciation",
+      "issue": "The business-type statement cost-type lines (disbursements[11]-[18]) carry function utilities, but they include the GIS internal service fund's 85,382, which the detail tags general government."
+    }
+  ]
+}
