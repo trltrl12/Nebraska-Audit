@@ -239,6 +239,12 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
     every change is in output/json/_meta/corrections_log.csv, open items in _meta/mixed_label_open.csv and
     _meta/held_items.csv, audit finding status in _meta/audit_findings_status.csv.
 
+- **User ruling 2026-11-12 (FY2022/FY2023 consistency):** "match with 2024 and 2025 if that is actually correct and what is
+  on the report": copy a later year's category only when this report's page supports it. Otherwise generic: context labels
+  stay other; capital outlay detail_category not itemized and function only when printed; "Intergovernmental"/"State"
+  stays other state aid unless highway allocation is printed; grant lines with no grantor printed are category other,
+  detail_category Grants; mixed grant/donation labels are donations/contributions.
+
 ## Batch procedure
 1. `git pull --rebase`.
 2. Read `output/progress.csv`. Take the next `pending` reports, plus any `flagged` reports whose
