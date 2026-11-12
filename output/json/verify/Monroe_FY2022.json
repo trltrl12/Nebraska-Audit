@@ -1,0 +1,15 @@
+{
+  "stem": "Monroe_FY2022",
+  "values_checked": 101,
+  "issues": [
+    {"severity": "warning", "path": "receipts[14].split_from", "page": 6,
+     "extracted": "Insurance proceeds 20,900 + Other 44,585 split from Other 65,485 (p2)", "on_page": "p2 business-type general receipts 'Other' 65,485; p6 proprietary Totals: Insurance proceeds 20,900, Other 44,585",
+     "issue": "Split uses the proprietary funds statement (same money, ties exactly) rather than a breakdown printed for the p2 line itself; defensible but a judgment call"},
+    {"severity": "warning", "path": "detail[32]", "page": 6,
+     "extracted": "Interest income 52, section other financing, category null", "on_page": "Interest income 52 under OTHER FINANCING SOURCES (USES)",
+     "issue": "Interest income kept in section other financing with no category (as printed), while the statement-level receipt treats it as Interest Income; could be section revenue / Interest Income"},
+    {"severity": "warning", "path": "detail[33]", "page": 6,
+     "extracted": "Principal -20,000, Interest expense -2,749, Wire fees -30 (detail[33-35]), section other financing, category null", "on_page": "Debt service lines under OTHER FINANCING SOURCES (USES)",
+     "issue": "Water Fund debt service kept in section other financing with null category (as printed), while the statement-level disbursements count them as Debt Service; could be section expenditure / Debt Service"}
+  ]
+}
