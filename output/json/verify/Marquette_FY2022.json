@@ -1,0 +1,54 @@
+{
+  "stem": "Marquette_FY2022",
+  "values_checked": 103,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "detail[1].detail_category",
+      "page": 1,
+      "extracted": "highway allocation",
+      "on_page": "State Receipts: MIRF 4,423.78 (General Fund), a separate row from line 8 Highway Allocation and Incentives",
+      "issue": "[fixed: detail_category other state aid] MIRF (Municipal Infrastructure Redevelopment Fund) is not highway allocation. The form prints it as its own row. Under the 2026-11-12 ruling, state lines stay other state aid unless highway allocation is printed."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[3].category",
+      "page": 3,
+      "extracted": "streets/highways",
+      "on_page": "Public Works - Other 2,164.03 (General Fund); streets are printed on their own row, line 32 Public Works - Streets",
+      "issue": "The form keeps Public Works - Other separate from Streets, so streets/highways is a guess. The business-type cells of the same row went to utilities. Same for detail[9]."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[11].category",
+      "page": 3,
+      "extracted": "public safety",
+      "on_page": "Public Safety - Other: Utility 67.24, Sewer 57.47",
+      "issue": "Utility and sewer spending printed on a governmental public safety row is recorded as public safety for business-type, as printed (also detail[29] and detail[37]). Questionable for utility funds."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[8].fund_type",
+      "page": 3,
+      "extracted": "governmental / utilities",
+      "on_page": "Electric Utility (line 44) General 14,061.62 + Street 620.00; Water (line 48) General 704.03",
+      "issue": "Rows printed under Business-Type Activities but in governmental fund columns are kept governmental with category utilities (by column). Defensible, but these may be electricity and water bills for governmental operations."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[9].review",
+      "page": 3,
+      "extracted": "context label (Transportation); decided by context check",
+      "on_page": "Transportation: General 2,881.19, Street 350.94, Utility 111.12",
+      "issue": "There is no output/json/_meta/context_decisions/Marquette_FY2022.csv, so these lines have not been context-checked yet even though the review text says they have. Category other is fine for now (context label). This covers disbursements[9], [17] and detail[14], [28], [33]."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[5].original_label",
+      "page": 3,
+      "extracted": "Capital Outlay: Streets/Highways / Capital Outlay: Utilities",
+      "on_page": "Capital Improvements (line 35): Street 934.46, Utility 17,799.20, Sewer 4,449.80",
+      "issue": "Capital outlay functions come from fund names (marked computed). The 2026-11-12 FY2022 ruling says a function is given only when printed. This covers disbursements[5], [14] and detail[24], [30], [38]."
+    }
+  ]
+}
