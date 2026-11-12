@@ -1,0 +1,20 @@
+{
+  "stem": "Thomas_County_FY2023",
+  "values_checked": 106,
+  "issues": [
+    {"severity": "warning", "path": "detail[30].category", "page": 8,
+     "extracted": "inheritance tax", "on_page": "Local 107,218 (Exhibit H); Exhibit D p4 Inheritance Tax column prints the same 107,218 as 'Inheritance Tax'",
+     "issue": "Label 'Local' has a label-level decision (config/category_decisions.csv: local -> other). Category comes from the printed p4 row, which is defensible and matches FY2024. Unlike FY2024, the line has no `computed` note naming the p4 evidence, only `review`."},
+    {"severity": "warning", "path": "detail[42].category", "page": 10,
+     "extracted": "Fees of Office", "on_page": "Charges for Services 434 (Register of Deeds P&M column)",
+     "issue": "The same printed label 'Charges for Services' is charges for services/fees on detail[32] (Pre-Trial Diversion 810), and Exhibit D p4 counts it in Charges for Services. Fees of Office is a judgment call based on the fund name."},
+    {"severity": "warning", "path": "detail[38].detail_category", "page": 10,
+     "extracted": "county/other local governments", "on_page": "Intergovernmental 67,880 (Central Sandhills Extension column)",
+     "issue": "Every other 'Intergovernmental' line is other state aid. Nothing on the page says this money comes from other counties; it is an assumption."},
+    {"severity": "warning", "path": "detail[53]", "page": 13,
+     "extracted": "Building Fund Transfers Out -18,588 (p9)", "on_page": "p9 Schedule 2: Transfers (Out) (18,588); p13 Schedule 4 Building: CASH DISBURSEMENTS 18,588",
+     "issue": "The report prints the same 18,588 one way on p9 and another way on p13. The JSON records the p9 line as printed (other financing, matching General Fund Transfers In 18,588 on p6). The p13 Schedule 4 totals are left out, as for every nonmajor fund, which avoids counting it twice. decision_needed[0] already asks the user. Arithmetic is fine; only the presentation is inconsistent."}
+  ],
+  "fy2024_tie": "Ending fund balance 3,176,790 = Thomas_County_FY2024 beginning_fund_balance 3,176,790 (both null beginning_cash).",
+  "checks": "Pages 1-13 of 13 read; notes say 'Read pages 1-13 of 13'. Receipts sum 1,755,919 and disbursements sum 1,272,394 = p4 Total Governmental Funds. Roll-forward 2,693,265 + 1,755,919 - 1,272,394 + 337,752 - 337,752 = 3,176,790. Balance sheet ties (289,071 + 2,165,989 + 721,730). Every detail schedule ties to its printed totals (General revenue 1,230,109, expenditure 793,669, OFS -285,576; Road; Inheritance; Schedule 3 funds; nonmajor totals 136,947 / 168,700 / 42,164 / -33,588). General Fund Taxes 891,420 = 843,204 + 48,216 (p4 General column), exact. Transfers: General out 304,164 = Road 277,000 + Central Sandhills 24,162 + Bookmobile 3,002; Building out 18,588 = General in; Bookmobile out 15,000 = Library in."
+}
