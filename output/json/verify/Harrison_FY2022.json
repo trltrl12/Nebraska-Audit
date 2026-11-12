@@ -1,0 +1,12 @@
+{
+  "stem": "Harrison_FY2022",
+  "values_checked": 106,
+  "issues": [
+    {"severity": "warning", "path": "receipts[0].category", "page": 3,
+     "extracted": "property tax (Property taxes 44,842, p5)", "on_page": "Property taxes and motor vehicle taxes 44,842 (Statement of Activities general receipts, p3)",
+     "issue": "The fund statement prints 'Property taxes', but the Statement of Activities shows the same 44,842 as property AND motor vehicle taxes, so some motor vehicle tax is probably inside it. Under the combined-row rule this might be 'Property Tax and Motor Vehicle Taxes'. The same applies to detail[0]."},
+    {"severity": "warning", "path": "ending_cash", "page": 4,
+     "extracted": null, "on_page": "TOTAL ASSETS 442,667 (all cash & certificates of deposit and cash with county treasurer, governmental)",
+     "issue": "Ending governmental assets are all cash, printed as a total of 442,667 on p1/p4, but ending_cash is null and only fund balance is filled. That fits 'cash is never derived' if the cash-and-CD total is not counted as cash. Confirm this is intended."}
+  ]
+}
