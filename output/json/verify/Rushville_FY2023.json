@@ -1,0 +1,18 @@
+{
+  "stem": "Rushville_FY2023",
+  "values_checked": 162,
+  "issues": [
+    {"severity": "warning", "path": "detail[17].category", "page": 11,
+     "extracted": "other", "on_page": "Keno Special Revenue Fund: Miscellaneous 6,083",
+     "issue": "The receipt is printed as Miscellaneous, but it sits in the Keno Special Revenue Fund and could be keno/lottery proceeds. The printed label alone says miscellaneous, so other is defensible."},
+    {"severity": "warning", "path": "disbursements[9].function", "page": 7,
+     "extracted": "utilities", "on_page": "Total Business-type Funds column includes Golf Fund (operating expenses 138,722)",
+     "issue": "The top-level business-type cost-type lines (disbursements[9]-[16]) all carry function 'utilities', but their Total-column amounts include Golf Fund spending, which is culture/recreation. The detail lines tag Golf as culture/recreation, so the two disagree."},
+    {"severity": "warning", "path": "receipts[8].category", "page": 7,
+     "extracted": "charges for services/fees", "on_page": "Charges for Services 419,889 (Water 159,605 + Sewer 155,335 + Golf 104,949)",
+     "issue": "The detail gives the same label Utility Charges for Water/Sewer and Recreation Fees for Golf, but the combined top-level line keeps the generic category. This is defensible because the line is a mix; flagged because the same label has different categories."},
+    {"severity": "warning", "path": "proprietary.ending_cash", "page": 8,
+     "extracted": 278979, "on_page": 278979,
+     "issue": "Year-to-year check: Rushville_FY2024 prints the proprietary beginning cash as 278,719 (FY2024 trimmed p7: Water 147,524, Sewer 127,389, Golf 3,806). The FY2023 ending is 278,979 (Golf 4,066). The 260 difference is in the Golf column; FY2024 printed Golf's FY2023 beginning figure (3,806), and no restatement is printed. FY2023 is extracted correctly as printed. Other balances tie: fund balance 1,277,326 and business-type net position 973,097 equal the FY2024 beginning figures."}
+  ]
+}
