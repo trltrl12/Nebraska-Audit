@@ -1,0 +1,15 @@
+{
+  "stem": "Tobias_FY2023",
+  "values_checked": 77,
+  "issues": [
+    {"severity": "warning", "path": "ending_cash", "page": 1,
+     "extracted": 438785.00, "on_page": "line 26 Net Cash Balance (governmental funds) 152,442.00 (General (9,044.00) + Street 38,743.00 + Fire 116,646.00 + Park 99.00 + Debt Service 5,998.00); line 27 Investments 286,343.00; line 24/28 Ending Balance 438,785.00",
+     "issue": "beginning_cash (396,444) and ending_cash (438,785) are the line 3 / line 24 subtotals (net cash + investments), while beginning_investments 35,841 and ending_investments 286,343 are also recorded and are inside those figures (noted in computed). Printed Net Cash Balance is 360,603 beginning (14,190 + 63,746 + 276,671 + 5,996) and 152,442 ending. Consistent with Tobias_FY2024's convention and the roll-forward ties, but anyone adding cash + investments will double count 286,343. Cross-year: FY2023 ending 438,785 / investments 286,343 / business-type 74,851 = FY2024 beginning figures exactly."},
+    {"severity": "warning", "path": "disbursements[5].fund_type", "page": 3,
+     "extracted": "business-type (Capital Outlay: Utilities 46,832; Debt Service 13,401)", "on_page": "Lines 35 Capital Improvements 46,832.00 and 39 Debt Service 13,401.00 printed under the 'Governmental' row heading but in the WATER FUND column",
+     "issue": "Recorded as business-type from the fund column (Water Fund total 79,562 includes them). Defensible; the form's row heading says governmental. Also disbursements[6], detail[25], detail[26]."},
+    {"severity": "warning", "path": "receipts[10].category", "page": 1,
+     "extracted": "other", "on_page": "Local Receipts: Other, Sewer 7,898.00 + Water 45,501.00",
+     "issue": "100% of business-type receipts are in category other (only utility receipt row on the form); likely user charges but no breakdown printed; review note set. Governmental 'Local Receipts: Other' 81,101 is 56% of governmental receipts (Fire Fund 62,778 unexplained)."}
+  ]
+}
