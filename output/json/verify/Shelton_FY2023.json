@@ -1,0 +1,33 @@
+{
+  "stem": "Shelton_FY2023",
+  "values_checked": 325,
+  "issues": [
+    {"severity": "warning", "path": "detail[139].budget_final", "page": 14,
+     "extracted": null, "on_page": "Property budget 28,400 (combined line, actual 31,787)",
+     "issue": "Street Fund 'Property' 31,787 split into Property 30,565 + Property tax credit 1,222 (p5 Street Fund column; labels are the printed p5 row labels and the pieces add exactly to 31,787); the split is valid, but the printed budget 28,400 is now on neither piece"},
+    {"severity": "warning", "path": "detail[52].category", "page": 16,
+     "extracted": "charges for services/fees", "on_page": "Charges for services 9,850 (Cemetery Fund column)",
+     "issue": "fund column names the cemetery; user receipt category Cemetery Fees fits (detail_category already cemetery fees)"},
+    {"severity": "warning", "path": "detail[30].category", "page": 16,
+     "extracted": "charges for services/fees", "on_page": "Rental and fees 17,102 (Ambulance Fund column)",
+     "issue": "mixed label kept as one line per 2026-11-06 ruling; category charges for services/fees vs detail_category ambulance/rescue fees disagree (Ambulance Fees or Rentals would be the specific category)"},
+    {"severity": "warning", "path": "detail[27].category", "page": 16,
+     "extracted": "intergovernmental/state aid", "on_page": "Reimbursement Rural Fire District 44,041 (under Intergovernmental heading, Fire Fund column)",
+     "issue": "printed under Intergovernmental, so defensible; extractor rules list rural fire contracts under charges for services/fees and the label says reimbursement"},
+    {"severity": "warning", "path": "receipts[18].category", "page": 8,
+     "extracted": "charges for services/fees", "on_page": "Connect/disconnect fees 1,867 (Water Fund operating revenues)",
+     "issue": "utility fund fee; Utility Charges may fit better (same for detail[165])"},
+    {"severity": "warning", "path": "detail[178].detail_category", "page": 8,
+     "extracted": "tax refunds/treasurer fees", "on_page": "Sales tax 7,938 (Water operating expense)",
+     "issue": "sales tax remitted is not a tax refund/treasurer fee; no exact detail category exists (same for detail[195] Sewer 5,350)"},
+    {"severity": "warning", "path": "detail[164..198]", "page": 8,
+     "extracted": "35 Water/Sewer lines from the proprietary funds statement", "on_page": "no budget schedule for the utility funds",
+     "issue": "user rule 2026-10-28: when some funds have their own schedules, statement lines are not added for the other funds; these may need removing (amounts all verified correct)"},
+    {"severity": "warning", "path": "proprietary.beginning_cash", "page": 10,
+     "extracted": 1425444, "on_page": "CASH AND CASH EQUIVALENTS, beginning of year (restated) 1,425,444",
+     "issue": "labelled restated but no restatement amount is printed in the trim; nothing to put in adjustments, prior-year figure cannot be confirmed (no FY2022 JSON)"},
+    {"severity": "warning", "path": "balance_sheet", "page": 4,
+     "extracted": "government-wide Statement of Net Position (p1) only", "on_page": "Governmental funds Statement of Assets and Fund Balances p4 (total 1,545,198) and proprietary Statement of Net Position p7",
+     "issue": "fund-level balance-sheet pages are only reflected through ending_cash/ending_investments and the government-wide columns; choice follows the rule (government-wide includes capital assets and debt), noted for completeness"}
+  ]
+}
