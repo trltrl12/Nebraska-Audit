@@ -1,0 +1,21 @@
+{
+  "stem": "Minatare_FY2022",
+  "values_checked": 135,
+  "issues": [
+    {"severity": "warning", "path": "ending_cash", "page": 5,
+     "extracted": 17410, "on_page": "Cash 14,983 + Cash with county treasurer 2,427 (Total Governmental Funds); Restricted cash 201,702 also printed",
+     "issue": "No governmental cash total is printed. ending_cash is a sum the extractor made (marked computed), which conflicts with the 2026-11-06 ruling that cash is never derived. It also leaves out restricted cash 201,702."},
+    {"severity": "warning", "path": "detail[16].category", "page": 6,
+     "extracted": "other", "on_page": "Local 18,666 (Keno Fund column)",
+     "issue": "The Keno Fund's only receipt line is 'Local', which is probably keno proceeds (keno/lottery). It is a context label with no printed breakdown, so the context checker needs to confirm it."},
+    {"severity": "warning", "path": "detail[13].original_label", "page": 6,
+     "extracted": "Capital Outlay: Public Works", "on_page": "Capital outlay 63,702 (Street Fund column)",
+     "issue": "The function comes from the fund column, not this row, and is noted in 'note' instead of 'computed'. The 2026-11-12 ruling says to add the function only when it is printed. Milligan/Minden use 'Streets/Highways' for the same case."},
+    {"severity": "warning", "path": "balance_sheet.equity[2..5].category", "page": 2,
+     "extracted": null, "on_page": "Restricted for: America Recovery Plan / Community development; Unrestricted",
+     "issue": "The restricted and unrestricted net position lines have no category field."},
+    {"severity": "warning", "path": "detail[21].detail_category", "page": 9,
+     "extracted": "investment income", "on_page": "Interest income",
+     "issue": "Category is Interest Income but detail_category is investment income (same on the other proprietary interest lines). Milligan uses detail_category Interest Income."}
+  ]
+}

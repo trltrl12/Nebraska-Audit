@@ -1,0 +1,27 @@
+{
+  "stem": "Minden_FY2022",
+  "values_checked": 241,
+  "issues": [
+    {"severity": "warning", "path": "receipts[10].category", "page": 7,
+     "extracted": "other", "on_page": "Other 22,322 (General 13,704 + Street Repair and Maintenance 8,618); p14 prints Street's 8,618 as Street assessments 1,200 + Other revenues 7,418",
+     "issue": "The report prints a breakdown of the Street column piece, so 1,200 could be split out as special assessments (split_from). Detail already shows it separately (detail[23])."},
+    {"severity": "warning", "path": "receipts[3].category", "page": 7,
+     "extracted": "intergovernmental/state aid", "on_page": "Intergovernmental 982,346; Statement of Activities p4 prints Motor vehicle taxes 74,788 (governmental), and the fund statement has no motor vehicle line",
+     "issue": "Intergovernmental probably includes motor vehicle taxes, but no printed breakdown ties exactly, so it can't be split under the rules. Left as is."},
+    {"severity": "warning", "path": "disbursements[8].category", "page": 11,
+     "extracted": "other", "on_page": "Vehicle expenses 98,971",
+     "issue": "A cost-type line put in other (also detail Vehicle expense lines). A specific cost type (e.g. fuel or repairs) may fit, but the page doesn't say which. Already marked review."},
+    {"severity": "warning", "path": "proprietary", "page": 17,
+     "extracted": null, "on_page": "Schedule of Cash Flows - Proprietary Fund: operating 1,348,534; capital and related 201,622; noncapital (80,000); investing (118,621)",
+     "issue": "Proprietary cash flows are printed but recorded as null (modified cash basis report). The schedule's continuation page (net change and beginning/ending cash, report p55) is not in the trim."},
+    {"severity": "warning", "path": "detail[27].original_label", "page": 14,
+     "extracted": "Capital Outlay: Streets/Highways", "on_page": "Capital outlay 493,293",
+     "issue": "The function comes from the fund name (marked computed), not a printed row. The 2026-11-12 ruling says to add the function only when it is printed."},
+    {"severity": "warning", "path": "balance_sheet.equity[2..9].category", "page": 2,
+     "extracted": null, "on_page": "Restricted for: Capital improvements / Economic development / Federal grant projects / Debt service; Unrestricted",
+     "issue": "The restricted and unrestricted net position lines have no category field."},
+    {"severity": "warning", "path": "detail[6].detail_category", "page": 7,
+     "extracted": "investment income", "on_page": "Interest income",
+     "issue": "Category is Interest Income but detail_category is investment income on every interest detail line. Milligan uses detail_category Interest Income."}
+  ]
+}
