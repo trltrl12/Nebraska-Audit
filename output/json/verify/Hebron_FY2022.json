@@ -1,0 +1,18 @@
+{
+  "stem": "Hebron_FY2022",
+  "values_checked": 340,
+  "issues": [
+    {"severity": "warning", "path": "receipts[13].category", "page": 6,
+     "extracted": "donations/contributions", "on_page": "Contributions/grants 422,299 (General 146,699 + Non-Major 275,600)",
+     "issue": "Mixed label kept as one line (allowed by the 2026-11-06 ruling). But the nonmajor part is mostly grants (Grant Project 'Grant income' 200,192 p32, Library 'Grants' 18,459 p24), and the detail records those same grants as category 'other', so the statement line and its detail use different categories."},
+    {"severity": "warning", "path": "detail[190].category", "page": 32,
+     "extracted": "other", "on_page": "Grant income 200,192 (Grant Project Fund)",
+     "issue": "A printed 'Grant income' line is in 'other'. The notes cite a user ruling dated 2026-11-12, but it is not in CLAUDE.md or the extractor rules, so I could not confirm it. Same applies to the Library 'Grants' 18,459 line (p24). The Statement of Activities (p2) counts these as operating grants for economic development."},
+    {"severity": "warning", "path": "disbursements[10].category", "page": 10,
+     "extracted": "Repairs and Maintenance", "on_page": "Maintenance and operation 399,531",
+     "issue": "'Maintenance and operation' reads more like an operating function line, which would stay 'utilities', than a repairs cost type. Judgment call."},
+    {"severity": "warning", "path": "detail[200].category", "page": 35,
+     "extracted": "Utility Charges", "on_page": "Sched 29 Receipts: Electric 1,607,843 (budgetary basis)",
+     "issue": "This is the Electric fund's total budgetary-basis receipts (charges plus lease agreement 90,147 and interest; p9), not charges alone. The extractor already flagged it for review; amount correct."}
+  ]
+}

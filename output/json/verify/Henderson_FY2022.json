@@ -1,0 +1,15 @@
+{
+  "stem": "Henderson_FY2022",
+  "values_checked": 98,
+  "issues": [
+    {"severity": "warning", "path": "disbursements[4].original_label", "page": 2,
+     "extracted": "Ambulance", "on_page": "Fund statement p4 / schedule p8: 'Ambulance' 10,548; Statement of Activities p2: 'Auditorium' 10,548",
+     "issue": "The report labels the same 10,548 differently on two statements: Ambulance (fund statements) and Auditorium (Statement of Activities). The extraction follows the fund statement and puts it in public safety. If it is really the auditorium, it would be culture/recreation."},
+    {"severity": "warning", "path": "proprietary", "page": 7,
+     "extracted": null, "on_page": "Net cash from operating activities 189,197; capital financing (173,687); cash beginning 77,678; end 93,188",
+     "issue": "The notes say 'Proprietary cash flows from p7', but proprietary is null. Null is defensible because the schema reserves proprietary for GAAP and this report is recorded as cash basis; the notes and the data disagree."},
+    {"severity": "warning", "path": "disbursements[5].debt_service_part", "page": 9,
+     "extracted": "principal", "on_page": "Debt service 214,000 (listed with Interest 65,364 and Other 900)",
+     "issue": "The row is printed as 'Debt service', not 'Principal'. Reading it as principal is an assumption, plausible given the separate Interest row and the 214,000 budget."}
+  ]
+}

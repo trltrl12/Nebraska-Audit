@@ -1,0 +1,38 @@
+{
+  "stem": "Hemingford_FY2022",
+  "values_checked": 201,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "balance_sheet.liabilities[3].category",
+      "page": 6,
+      "extracted": "debt - due in more than one year",
+      "on_page": "Line of credit 50,000, printed under 'Current liabilities' (Care Center Fund; Total current liabilities 826,489)",
+      "issue": "[fixed: due within one year (current liabilities)] The business-type funds statement (p6) lists the line of credit as a current liability, so it is debt due within one year. p1 prints it without a current/noncurrent split. The amount is correct; the category contradicts the page."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[9].category",
+      "page": 7,
+      "extracted": "Utility Charges",
+      "on_page": "Charges for services 2,485,083 (incl. Care Center Fund 985,244)",
+      "issue": "About 40% of this line is care-facility charges (Care Center Fund), not utility charges. Utility is the dominant part and the extractor flagged it for review; still a mixed category."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[7].category",
+      "page": 5,
+      "extracted": "other",
+      "on_page": "Grants 7,013",
+      "issue": "A printed 'Grants' line is in 'other'. The notes cite a ruling (other / Grants) that I could not find in CLAUDE.md or the extractor rules. Same applies to detail 'Grant income' 7,013 (p10)."
+    },
+    {
+      "severity": "warning",
+      "path": "proprietary",
+      "page": 8,
+      "extracted": null,
+      "on_page": "Statement of Cash Flows - Business-Type Funds: operating 285,185; noncapital financing (145,261); capital and related (54,200); investing 19; beginning cash 1,297,945; ending cash 1,383,688",
+      "issue": "The proprietary cash flow statement is printed (pp8-9) but proprietary is null. The schema reserves proprietary for GAAP reports, and this report is recorded as cash basis, so this is defensible; noted so the omission is visible."
+    }
+  ]
+}
