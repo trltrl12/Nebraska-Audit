@@ -1,0 +1,18 @@
+{
+  "stem": "Bridgeport_FY2022",
+  "values_checked": 274,
+  "issues": [
+    {"severity": "warning", "path": "receipts[7].category", "page": 7,
+     "extracted": "Utility Charges", "on_page": "Charges for services 3,236,255 (Electric 1,903,343, Water 619,366, Sewer 263,786, Community Center 80,318, Nursing Home 129,067, Other 240,375)",
+     "issue": "Total-column line mixes utility sales with Community Center 80,318 and Nursing Home 129,067 (6.5%); dominant category is defensible and the line already carries review"},
+    {"severity": "warning", "path": "disbursements[8].function", "page": 7,
+     "extracted": "utilities", "on_page": "Personal services 555,284 incl. Community Center 201,276 (p7)",
+     "issue": "business-type cost-type lines (Personal services, Contract services, Materials and repairs, Heat light and power, Depreciation, Miscellaneous) carry function utilities but include Community Center and Nursing Home amounts (e.g. 36% of Personal services); the detail lines give those funds culture/recreation and hospital/health care"},
+    {"severity": "warning", "path": "ending_cash", "page": 4,
+     "extracted": 870718, "on_page": "Cash and cash equivalents 870,718; Cash on deposit - County Treasurer 13,921; Restricted cash in bank 238,366",
+     "issue": "ending_cash takes only the 'Cash and cash equivalents' row, while balance_sheet.assets[1] classifies County Treasurer cash 13,921 as Cash and Cash Equivalents too; no cash roll-forward is printed, so either reading is an assumption (notes state it)"},
+    {"severity": "warning", "path": "detail[8].detail_category", "page": 16,
+     "extracted": "Events / Fair", "on_page": "Downtown appearance 14,351",
+     "issue": "category_decision applied; 'Downtown appearance' could equally be community betterment/beautification"}
+  ]
+}
