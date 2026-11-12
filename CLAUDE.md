@@ -284,16 +284,10 @@ the cash flow, balance sheet and revenue/expense detail. `output/cashflow_core.x
 holds just those reports and sheets. Prioritise fixes and re-checks for these types; the others stay extracted.
 
 ## Open follow-ups (remove each line once done)
-- FY2023 extraction (started 2026-11-09, one extractor + one verifier at a time, 3 reports per batch, push after each
-  batch): 163 of 630 done through Crete (alphabetical; county CO.. files by county number); next Crofton, Crookston,
-  Culbertson. Set aside for re-trim (no JSON): Abie_FY2023, Cornlea_FY2023 (trim has no Exhibit A). Extracted but
-  re-trim needed for missing detail/statement pages: Beaver_Crossing (report pp27, 29, 31), Bradshaw (General Fund
-  Parks column, Sewer budget schedule p29), Clarkson (proprietary revenues/expenses right half, report p21). Likely
-  more: Litchfield, Winside (no balance statement flagged) and 11 large reports with detail_truncated. Brief the
-  extractor with the 2026-11-06 rulings plus: existing category names only (specific ones where they fit), capital
-  outlay function only when printed, cash/investments wherever printed (incl. prior-year column), proprietary cash
-  flows, governmental_net_position GAAP only, waiver transfers counted once (includes vs includes_split), amounts
-  exactly as printed (third read settles digit disputes).
+- FY2023: all 630 trimmed reports extracted (2026-11-12) and aligned with FY2024 choices (354 reports, brief items 1-10:
+  same business-type source/measure, transfers, detail sources, categories, capital outlay labels; FY2023 printed amounts).
+  Held for re-trim (no JSON or missing pages): Abie, Cornlea, LaVista, Minatare, Pickrell, Rogers, Santee, Sargent, Superior,
+  Wilsonville, Winside; also Beaver_Crossing, Bradshaw, Clarkson, Wauneta (missing pages). Re-trims need the user's OK.
 - Missing-page re-trim 2026-10-27 (cities/villages/schools/counties): done. 29 reports re-trimmed with
   config/extra_pages.csv, pages remapped, new pages added, verified, verifier errors fixed (0 flags). No page needed:
   Butte (re-check its extraction), Kimball County, Chadron PS, Springfield.
