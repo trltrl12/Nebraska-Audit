@@ -1,0 +1,40 @@
+{
+  "stem": "Wallace_FY2023",
+  "values_checked": 86,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "report_discrepancies",
+      "page": 4,
+      "extracted": "rounding entries cover only TOTAL DISBURSEMENTS (352,032 vs 352,033), the General Fund disbursement total and the Library ending balance",
+      "on_page": "Operating expenses row: 112,880 + 16,356 + 4,416 = 133,652 vs Total column 133,651; Excess (deficiency) Total: 234,766 - 352,032 = (117,266) vs printed (117,267); Net Change row: (66,865) + (69,947) + (13,617) + 4,023 = (146,406) vs printed (146,407)",
+      "issue": "Unrecorded report rounding gaps on p4: add report_discrepancies entries (check 'totals', difference -1 each for the Operating expenses row cross-foot, the Total excess line and the Total net change cross-foot).",
+      "resolved": "report_discrepancies entry added"
+    },
+    {
+      "severity": "error",
+      "path": "report_discrepancies",
+      "page": 3,
+      "extracted": "no entry for p3",
+      "on_page": "Cash and cash equivalents row: (31,945) + (785,375) + 22,762 + (63,007) = (857,565) vs Total (857,564); Unassigned row: (25,472) + 22,762 = (2,710) vs Total (2,709); TOTAL ASSETS / TOTAL CASH BASIS FUND BALANCES rows: fund columns (848,119) vs Total (848,118)",
+      "issue": "Unrecorded report rounding gaps on the governmental funds Statement of Assets and Fund Balances: add report_discrepancies entries (check 'balance'/'totals', difference +1 each). The extracted Total-column amounts themselves are correct as printed.",
+      "resolved": "report_discrepancies entry added"
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[1].category",
+      "page": 4,
+      "extracted": "general government",
+      "on_page": "Personnel services 115,384 (General 62,344, Street 53,040)",
+      "issue": "Statement lists spending by object; 53,040 of this Total-column line is Street Fund (streets/highways). Review note present."
+    },
+    {
+      "severity": "warning",
+      "path": "reported_totals.governmental.receipts",
+      "page": 4,
+      "extracted": 234766,
+      "on_page": "TOTAL RECEIPTS 234,766; General Fund TOTAL RECEIPTS 128,760",
+      "issue": "Re-read confirmed: the General Fund lines are 74,760 + 6,659 + 70 + 19,465 + 12,025 + 9,206 = 122,185 (6,575 short of the printed 128,760) and the Total-column lines add to 228,192 (6,574 short of 234,766). No line was missed: p4 prints no other receipt row, and the General Fund printed total ties to its fund balance roll-forward (41,393 + 128,760 - 198,880 + 3,255 = (25,472)). The gap is printed (report_discrepancies and decision_needed already have it); the 8,164 charges for services on p2 and the budget schedule's Other 17,570 (= 9,406 + 8,164, p8) suggest an unprinted receipt line."
+    }
+  ]
+}
