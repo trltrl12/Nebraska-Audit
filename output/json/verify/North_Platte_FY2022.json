@@ -1,0 +1,33 @@
+{
+  "stem": "North_Platte_FY2022",
+  "values_checked": 219,
+  "issues": [
+    {"severity": "warning", "path": "transfers_in.amount", "page": 7,
+     "extracted": 1534064, "on_page": "Transfers in row, Total 1,534,064 = General 1,200,000 + Assessments (315,936) + Other Governmental 650,000",
+     "issue": "Matches the printed Total, but the printed figure nets the Assessments Fund's transfer out (315,936, labelled 'Transfers out' on its p13 schedule; received by the Water Fund p9) against transfers in. Gross figures would be transfers in 1,850,000 and transfers out 1,165,936; the net 684,064 is unchanged."},
+    {"severity": "warning", "path": "receipts[9].category", "page": 7,
+     "extracted": "other", "on_page": "Grants 3,418,770 = General 1,041,471 + ARPA 2,091,906 + Grant Fund 278,039 + National Opioid Settlement 7,354",
+     "issue": "Category other (no grantor printed, per the 2026-11-12 ruling), but 61% is the ARPA Fund, which detail[41] treats as federal grants by fund name. The statement line and the detail are categorized differently."},
+    {"severity": "warning", "path": "detail[26].category", "page": 12,
+     "extracted": "streets/highways", "on_page": "Public works: Cemetery 144,309",
+     "issue": "The report puts Cemetery under Public works, but the category rules list cemetery under health/welfare."},
+    {"severity": "warning", "path": "detail[33].category", "page": 12,
+     "extracted": "culture/recreation", "on_page": "Environment and leisure: Senior center and RSVP 170,744",
+     "issue": "The report puts this under Environment and leisure, but the category rules list senior services under health/welfare."},
+    {"severity": "warning", "path": "detail[18].category", "page": 12,
+     "extracted": "general government", "on_page": "General government: Civil defense 27,350",
+     "issue": "The report puts this under General government, but the category rules list emergency management under public safety."},
+    {"severity": "warning", "path": "detail[31].category", "page": 12,
+     "extracted": "culture/recreation", "on_page": "Environment and leisure: Public transit 771,795",
+     "issue": "Transit is recorded as culture/recreation. That follows the report's grouping, but it is a transportation service (the Mass Transit category exists for other entities)."},
+    {"severity": "warning", "path": "balance_sheet.liabilities[7].category", "page": 1,
+     "extracted": "debt - due within one year", "on_page": "Current liabilities: Warrants payable 4,030,675 (Assessments Fund, p4)",
+     "issue": "Registered warrants are recorded as current debt. That is defensible (they may be interim financing), but the page lists them among current payables, so accounts payable or other liabilities would also fit."},
+    {"severity": "warning", "path": "detail[61].category", "page": 16,
+     "extracted": "Opioid Settlement", "on_page": "National Opioid Settlement Fund: Grants 7,354",
+     "issue": "A new category was created for a line printed as Grants; the fund name supports it, but it is the extractor's judgment."},
+    {"severity": "warning", "path": "balance_sheet.equity[3].original_label", "page": 1,
+     "extracted": "Restricted: Capital projects", "on_page": "Restricted for: Capital projects",
+     "issue": "Label mismatch: the other restricted lines use 'Restricted for: ...'; printed_label holds the printed text."}
+  ]
+}

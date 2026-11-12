@@ -1,0 +1,21 @@
+{
+  "stem": "ONeill_FY2022",
+  "values_checked": 350,
+  "issues": [
+    {"severity": "warning", "path": "receipts[17].category", "page": 6,
+     "extracted": "other", "on_page": "Miscellaneous revenue 914,909 = General 685,882 (p16-17: NPPD lease 622,422, Source Gas/KN Energy 12,566, Lot sales 7,400, Cable TV franchise 14,376, Rural fire 1,000, Other park 416, Other revenues 27,702) + Street Other 720 + Community Improvement Other 2,262 + LB 840 Loan repayments 226,045 (p30)",
+     "issue": "Kept as other under the user's label decision for 'miscellaneous revenue', but the schedules print the full breakdown: 68% is NPPD lease (also printed separately on the Statement of Activities p3 as 'Public power district lease payments' 622,422) and 25% is LB 840 loan repayments. The extractor rule (category > half of a broad line) would point to Rentals or a split."},
+    {"severity": "warning", "path": "receipts[13].computed", "page": 6,
+     "extracted": 798383, "on_page": "Intergovernmental revenues 1,365,804 (Debt Service column 19,084)",
+     "issue": "Arithmetic correct, but the remainder includes Debt Service Fund 424 with no printed breakdown (no Debt Service schedule in the trim); its type is assumed to be state aid."},
+    {"severity": "warning", "path": "detail[110].detail_category", "page": 20,
+     "extracted": "Sales Tax", "on_page": "Park and pool: Sales tax 2,472",
+     "issue": "Spending line (sales tax remitted on park/pool sales) given detail_category 'Sales Tax', which reads like the revenue category; 'Other Taxes Paid' would be clearer."},
+    {"severity": "warning", "path": "detail[39].category", "page": 17,
+     "extracted": "economic development", "on_page": "General government - administration: Interlocal - Holt County Economic Development 25,413",
+     "issue": "Printed inside General government - administration, which the governmental funds statement (p6) totals as General government 408,708; category economic development is defensible but differs from the statement's grouping."},
+    {"severity": "warning", "path": "detail[16].category", "page": 16,
+     "extracted": "occupation/franchise tax", "on_page": "Miscellaneous: Source Gas/KN Energy 12,566",
+     "issue": "The page does not say what this gas utility payment is; franchise fee is an assumption (already flagged for review)."}
+  ]
+}
