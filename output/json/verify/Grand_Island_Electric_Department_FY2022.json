@@ -1,0 +1,21 @@
+{
+  "stem": "Grand_Island_Electric_Department_FY2022",
+  "values_checked": 62,
+  "issues": [
+    {"severity": "warning", "path": "disbursements[3].category", "page": 3,
+     "extracted": "Professional/Contract Services", "on_page": "Consumer accounting and collection 1,688,936",
+     "issue": "this is a function (customer accounts), not a cost type; nothing on the page says it is contract services. Grand_Island_FY2022 (p6) records the same row as utilities (FY2023 Electric used Professional/Contract Services)."},
+    {"severity": "warning", "path": "disbursements[5].category", "page": 3,
+     "extracted": "Salaries and Wages", "on_page": "General office salaries and expense 829,127",
+     "issue": "label mixes salaries and other office expense; Salaries and Wages is the dominant guess, not printed. Grand_Island_FY2022 (p6) records the matching 'General office expense' row as utilities."},
+    {"severity": "warning", "path": "receipts[4].category", "page": 3,
+     "extracted": "other", "on_page": "Other revenue 1,777,260 (operating revenues)",
+     "issue": "allowed by the 2026-11-06 rule since this trim has no Statement of Activities, but the city-wide report (Grand_Island_FY2022 p2) counts all Electric operating revenues (105,280,550, incl. this line) as Charges for Services; the two reports now disagree."},
+    {"severity": "warning", "path": "balance_sheet.liabilities[3].category", "page": 2,
+     "extracted": "Accrued Liabilities", "on_page": "Compensated absences-current 132,499",
+     "issue": "current compensated absences put in Accrued Liabilities while the noncurrent part (liabilities[6], 1,506,899) is other liabilities; the two halves of the same liability are categorized inconsistently"},
+    {"severity": "warning", "path": "balance_sheet.assets[4].category", "page": 1,
+     "extracted": "Other Assets", "on_page": "Due from other funds 140,775",
+     "issue": "an interfund receivable; Internal Balances or receivables would fit better than Other Assets (Due to other funds 228,414 is likewise in other liabilities)"}
+  ]
+}
