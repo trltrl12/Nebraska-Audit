@@ -1,0 +1,15 @@
+{
+  "stem": "Berwyn_FY2022",
+  "values_checked": 43,
+  "issues": [
+    {"severity": "warning", "path": "balance_sheet.assets[1].category", "page": 1,
+     "extracted": "Cash and Cash Equivalents", "on_page": "Investments 4,182.64 (line 27)",
+     "issue": "printed as Investments. The category comes from the p3 Schedule of Investments, which lists two checking accounts. Defensible, but the category differs from the printed label."},
+    {"severity": "warning", "path": "beginning_investments", "page": 1,
+     "extracted": 3785.69, "on_page": "Investments 3,785.69; Subtotal of Beginning Balance 126,319.00",
+     "issue": "beginning_cash (126,319.00) already includes this investment amount, so adding cash and investments downstream would double count it. The same applies to ending_cash 92,244.14 / ending_investments 4,182.64."},
+    {"severity": "warning", "path": "disbursements[3].fund_type", "page": 2,
+     "extracted": "governmental", "on_page": "Business-Type Activities: Electric Utility 5,224.10; Solid Waste 3,271.68 (General Fund column)",
+     "issue": "the form prints these under Business-Type Activities, but they were kept governmental because they sit in the General Fund column with no utility fund or utility receipts. This is a judgment call; it also applies to disbursements[4] and detail[13], detail[14]."}
+  ]
+}
