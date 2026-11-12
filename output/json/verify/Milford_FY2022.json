@@ -1,0 +1,38 @@
+{
+  "stem": "Milford_FY2022",
+  "values_checked": 132,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "reported_totals.business-type.receipts.amount",
+      "page": 2,
+      "extracted": 663999,
+      "on_page": 664009,
+      "issue": "[fixed: 664,009] arithmetic error: the cited sum, business-type charges for services 646,782 + general receipts (unrestricted investment earnings) 17,227 (p2), is 664,009, not 663,999. The receipts lines 437,948 + 208,834 + 17,227 also total 664,009, and 2,005,739 + 664,009 - 825,937 = 1,843,811 (the printed ending). The notes repeat the wrong 663,999."
+    },
+    {
+      "severity": "warning",
+      "path": "ending_cash",
+      "page": 3,
+      "extracted": 3895344,
+      "on_page": "Cash and cash equivalents 2,307,114; Restricted cash 1,588,230; Cash at county treasurer 14,914; Restricted cash at county treasurer 1,503",
+      "issue": "the extractor added two printed lines together and left out the county treasurer cash (16,417). This is marked computed, but the user's 2026-11-06 ruling says cash is never derived, and leaving out the treasurer cash is a judgment call."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[0]",
+      "page": 4,
+      "extracted": "Taxes 986,253 (taxes)",
+      "on_page": "p2 general receipts tax lines sum to 986,254",
+      "issue": "the taxes line was not split because the p2 tax-type breakdown is 1 more than the p4 Taxes line. This is defensible under the exact-reconciliation rule, but the 1 difference is across statements printed in the report itself (rounding), so a person may want to accept the split."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[19].original_label",
+      "page": 4,
+      "extracted": "Capital Outlay: Streets/Highways",
+      "on_page": "Capital outlay (Street fund column)",
+      "issue": "the function was inferred from the fund column name. The user's FY2022 ruling allows a capital outlay function only where one is printed. The same applies to detail[24] 'Capital Outlay: Public Safety' (Fire fund column 14,121)."
+    }
+  ]
+}
