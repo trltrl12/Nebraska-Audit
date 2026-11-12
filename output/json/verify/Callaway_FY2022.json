@@ -1,0 +1,25 @@
+{
+  "stem": "Callaway_FY2022",
+  "values_checked": 193,
+  "issues": [
+    {"severity": "warning", "path": "receipts[12].category", "page": 4,
+     "extracted": "federal grants", "on_page": "Contributions 48,793 (p4); nonmajor p7: ARPA 47,433, Cemetery 600, Park 260; Pool 500 (p4)",
+     "issue": "Printed label is Contributions; 1,360 of the line is private donations (Pool, Cemetery, Park). Federal grants applies only to the ARPA column (47,433, by fund name). Defensible as the dominant part, but it is a judgment call against the printed label."},
+    {"severity": "warning", "path": "receipts[10].category", "page": 4,
+     "extracted": "intergovernmental/state aid", "on_page": "Grant proceeds 7,500 (Pool)",
+     "issue": "The grantor is not printed. The Statement of Activities (p2) shows it only under Operating Grants and Contributions, so it could be a private grant. The same applies to detail[36]."},
+    {"severity": "warning", "path": "disbursements[0].category", "page": 4,
+     "extracted": "culture/recreation", "on_page": "Personnel services 98,812 = General 5,466, Street 18,165, Hall 5,276, Pool 31,431, nonmajor 38,474 (Cemetery 20,662, Park 17,812)",
+     "issue": "Spending is listed by object only. Culture/recreation (Pool + Park 49,243) is about 50% of the line, and Cemetery's 20,662 is health/welfare. This is a judgment call; disbursements[2] Supplies (culture/recreation 7,595 of 17,005) is similar."},
+    {"severity": "warning", "path": "detail[57].original_label", "page": 7,
+     "extracted": "Equipment", "on_page": "Equipment 3,498 (Cemetery)",
+     "issue": "Line is category capital outlay, but the label was not changed to 'Capital Outlay: Health/Welfare' (printed text in printed_label) as the user's capital outlay rule requires. The same applies to detail[66] Park Equipment 3,498 ('Capital Outlay: Culture/Recreation')."},
+    {"severity": "warning", "path": "disbursements[4].original_label", "page": 4,
+     "extracted": "Capital Outlay", "on_page": "Capital outlay 9,611 (Street 2,616; nonmajor Cemetery 3,498 + Park 3,498 = 6,995)",
+     "issue": "Plain 'Capital Outlay' with no function because the line is mixed. The notes explain this, but it does not follow the 'Capital Outlay: <function>' label rule."},
+    {"severity": "warning", "path": "decision_needed", "page": 2,
+     "extracted": "Water Fund 66,769 / 48,891; Sewer Fund 32,376 / 79,923 (from p6)",
+     "on_page": "Statement of Activities p2: Sewer expenditures 48,891 / charges 66,769; Water 79,923 / 32,376. Proprietary statement p6: Water 66,769 / 48,891; Sewer 32,376 / 79,923",
+     "issue": "The report swaps the Water and Sewer amounts between the Statement of Activities and the proprietary statement. The extractor followed p6 and mentioned this in its notes, but nothing was added to report_discrepancies or decision_needed. Which fund is which is for a person to decide (detail[86]-[94] Water, detail[95]-[102] Sewer)."}
+  ]
+}
