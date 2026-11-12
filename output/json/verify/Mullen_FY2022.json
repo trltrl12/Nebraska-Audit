@@ -1,0 +1,21 @@
+{
+  "stem": "Mullen_FY2022",
+  "values_checked": 126,
+  "issues": [
+    {"severity": "warning", "path": "receipts[0].category", "page": 8,
+     "extracted": "property tax", "on_page": "County treasurer receipts 62,487 (p7) = Property taxes 48,740 + Motor vehicle taxes 11,018 + Homestead 3,121 + Interest 96 - Collection fee 488 (p8)",
+     "issue": "The 62,487 piece is mixed: the County Treasurer's Fund schedule shows about 11,018 of motor vehicle tax and 3,121 of homestead inside it. Property tax is the dominant part, and the Statement of Activities (p2) prints the 67,441 as Property taxes, but 'County treasurer receipts' is a context label. Same issue on detail[0]."},
+    {"severity": "warning", "path": "receipts[13].category", "page": 2,
+     "extracted": "charges for services/fees", "on_page": "Statement of Activities charges for services: Sanitation 120,898 + Park Pool 7,218 = 128,116",
+     "issue": "The report prints an exact breakdown of this line, so it could be split into Utility Charges (refuse) 120,898 and Recreation Fees 7,218 under the user's charges-for-services categories. Same issue on detail[9]."},
+    {"severity": "warning", "path": "receipts[11].category", "page": 4,
+     "extracted": "federal grants", "on_page": "Reuse monies 4,441 (CDBG Fund)",
+     "issue": "CDBG re-use monies are usually repayments of CDBG loans, which would make the category Loan Repayments. The Statement of Activities shows them as operating grants and contributions, so federal grants is defensible. Same issue on detail[28]."},
+    {"severity": "warning", "path": "receipts[18].category", "page": 2,
+     "extracted": "Deposits", "on_page": "Customer deposits 3,900; Statement of Activities Electric charges for services 630,935 = 627,035 + 3,900",
+     "issue": "The report counts customer deposits inside business-type charges for services (860,810 = 856,910 + 3,900). Using its own category, Deposits, is a judgment call. Same issue on detail[48]."},
+    {"severity": "warning", "path": "detail[14].original_label", "page": 4,
+     "extracted": "Capital Outlay", "on_page": "Capital outlays 80,150 (General column)",
+     "issue": "Inconsistent with the Street column line (detail[26], 'Capital Outlay: Streets/Highways', function from the fund column). Under the capital outlay naming rule this General Fund line would be 'Capital Outlay: General Government', or both lines should keep the plain label."}
+  ]
+}

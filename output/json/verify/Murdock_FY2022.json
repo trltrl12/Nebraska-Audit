@@ -1,0 +1,15 @@
+{
+  "stem": "Murdock_FY2022",
+  "values_checked": 81,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "reported_totals.business-type.receipts.includes",
+      "page": 1,
+      "extracted": [],
+      "on_page": "Line 21 Total Receipts Water 105,985.88 includes line 20 Transfers In Other Than Surplus Fees 29,176.00",
+      "issue": "The printed business-type receipts total 159,476.88 includes the 29,176.00 transfer in, but includes is empty. The transfer is recorded only in a non-standard 'includes_split' field. It should be includes: [\"transfers_net\"]; otherwise receipts (130,300.88) and the reported total differ by 29,176.00.",
+      "resolved": "includes_split is the validator's supported field for a transfer inside a printed total (scripts/validate.py); totals tie"
+    }
+  ]
+}
