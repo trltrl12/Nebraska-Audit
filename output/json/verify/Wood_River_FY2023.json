@@ -1,0 +1,24 @@
+{
+  "stem": "Wood_River_FY2023",
+  "values_checked": 290,
+  "issues": [
+    {"severity": "warning", "path": "receipts[7].category", "page": 5,
+     "extracted": "intergovernmental/state aid", "on_page": "Grant income 743,608",
+     "issue": "The grantor (state, federal or private) is not printed, and the 2026-11-06 ruling says not to guess a grantor. The same applies to detail[22] Library Grant income 4,700, detail[37] Senior Citizen Center 283,875 and detail[129] Capital Projects 455,033 (detail_category 'other state aid'). Statement of Activities pp2-3 shows them only as operating/capital grants and contributions."},
+    {"severity": "warning", "path": "detail[11].category", "page": 14,
+     "extracted": "intergovernmental/state aid / county/other local governments", "on_page": "Intergovernmental revenue: Rural fire reimbursement 61,943 (Fire)",
+     "issue": "Printed under the Intergovernmental revenue heading, so this is defensible. But the label says reimbursement, and the extractor rules list rural fire contracts under charges for services."},
+    {"severity": "warning", "path": "detail[95].category", "page": 15,
+     "extracted": "culture/recreation", "on_page": "Senior Citizen Center (under Environment and leisure on the budget schedule p9)",
+     "issue": "Senior Citizen Center spending (detail[95]-[102]) follows the report's 'Environment and leisure' grouping. The disbursement category list puts senior services under health/welfare. This is a judgment call."},
+    {"severity": "warning", "path": "detail[60].detail_category", "page": 14,
+     "extracted": "Travel", "on_page": "Transportation 1,055 (Ambulance)",
+     "issue": "'Transportation' is an apply=context label in config/category_decisions.csv (2026-11-05). Its detail_category 'Travel' was taken from the label and is tagged category_decision 'user 2026-10-23'. The same applies to detail[67] Fire 4,099, detail[90] Parks and Recreation 1,422 and detail[98] Senior Citizen Center 5,031. The page gives no evidence of what the transportation costs are, so these should go to the context check."},
+    {"severity": "warning", "path": "detail[3].category", "page": 14,
+     "extracted": "charges for services/fees", "on_page": "Rental and charges for service (General 11,213; Ambulance 33,107; Fire 16,355; Parks 700; Senior 36,594; Pool 97,540)",
+     "issue": "The same printed label gets different categories by department: Ambulance Fees for Ambulance, Recreation Fees for Parks and Pool, charges for services/fees for the rest. This is defensible by department context. The label also mixes rentals and fees with no printed breakdown."},
+    {"severity": "warning", "path": "ending_cash", "page": 4,
+     "extracted": 2124487, "on_page": "Cash and cash equivalents 2,124,487; County treasurer cash 32,857; Certificates of deposit 416,117 (Total Governmental Funds)",
+     "issue": "ending_cash is the printed cash and cash equivalents line only. County treasurer cash 32,857 (Cash and Cash Equivalents under the user rule) is left out of ending_cash and is only on the balance sheet. beginning_cash is null because it is not printed. FY2023 ending agrees with FY2024 beginning: fund balance 2,573,461 and business-type net position 7,000,964."}
+  ]
+}
