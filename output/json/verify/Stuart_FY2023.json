@@ -1,0 +1,21 @@
+{
+  "stem": "Stuart_FY2023",
+  "values_checked": 236,
+  "issues": [
+    {"severity": "warning", "path": "receipts[26].category", "page": 9,
+     "extracted": "charges for services/fees", "on_page": "Other operating revenues 45,374",
+     "issue": "Amount correct. The category is defensible because the Statement of Activities (p2) counts it in business-type Charges for Services 2,379,453 (2026-11-06 ruling). But config/category_decisions.csv has 'other operating revenues' as a label decision for 'other', so user_rules.py may overwrite it. The 'computed' field is also set on a value that is printed as-is (it should be a note, not computed)."},
+    {"severity": "warning", "path": "ending_cash", "page": 3,
+     "extracted": 379726, "on_page": "Cash 372,920 + Cash held by county treasurer 6,806 (Total Governmental Funds); no single cash total printed",
+     "issue": "The sum is correct and marked computed, but no single cash total is printed. The 2026-11-06 ruling says cash is never derived. Stuart_FY2024 leaves beginning_cash/ending_cash null for the same statement layout, so the two years are inconsistent. Ties: FY2023 ending fund balance 379,726 = FY2024 beginning_fund_balance 379,726, and business-type ending net position 2,950,380 = FY2024 business_type.beginning 2,950,380."},
+    {"severity": "warning", "path": "missing", "page": 14,
+     "extracted": null, "on_page": "Combined budget and actual schedule (pp13-14): Nursing Home Bonds 16,540; Airport 11,741 (expenditures); NH bond transfers 36,000; Utilities support 25,134; Other 101,186 (revenues)",
+     "issue": "The budget-basis all-fund-types schedule is left out of detail on purpose; notes explain it (its governmental lines duplicate the fund schedules). Its Nursing Home Bonds and Airport spending appear nowhere else in the JSON. Confirm that leaving them out is intended."},
+    {"severity": "warning", "path": "detail[63].detail_category", "page": 20,
+     "extracted": "grants/payments to other entities", "on_page": "Loans 17,387 (Housing Rehab)",
+     "issue": "These are loans the village made, not grants. No loan object exists in the detail list, and the line is already marked review. The same applies to detail[75] LB 840 'Loans' 32,557 (p21)."},
+    {"severity": "warning", "path": "balance_sheet.liabilities[0].category", "page": 1,
+     "extracted": "other liabilities", "on_page": "Due to other funds 92,058",
+     "issue": "The matching asset 'Due from other funds' 13,667 is categorized Internal Balances. Interfund lines are categorized inconsistently."}
+  ]
+}
