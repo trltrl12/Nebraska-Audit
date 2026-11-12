@@ -1,0 +1,12 @@
+{
+  "stem": "Hordville_FY2022",
+  "values_checked": 82,
+  "issues": [
+    {"severity": "warning", "path": "beginning_cash.amount", "page": 1,
+     "extracted": 384126.08, "on_page": "Line 3 Subtotal of Beginning Balance (Net Cash Balance + Investments); governmental net cash alone = 234,126.08",
+     "issue": "beginning_cash is the line 3 subtotal, which already includes the General Fund investments 150,000, while beginning_investments separately carries the same 150,000. The extractor's notes explain this, but a consumer that adds cash + investments would count the CDs twice. Same for ending_cash 366,072.28 (line 24, includes the 150,000) and ending_investments 150,000. The arithmetic itself ties: 384,126.08 + 340,470.09 - 358,523.89 + 1,500 - 1,500 = 366,072.28."},
+    {"severity": "warning", "path": "disbursements[2].original_label", "page": 3,
+     "extracted": "Capital Outlay", "on_page": "Capital Improvements: General 7,828.01, Street 5,259.00, Horville Gym 156,117.48, Hordville Centennial 3,000.00",
+     "issue": "Amount 172,204.49 is correct and the sum is marked computed. However it includes the Street Fund's 5,259.00, which detail[] labels 'Capital Outlay: Streets/Highways' (detail[15]), while the statement-level line is a generic 'Capital Outlay'. The statement level and detail level label the same money differently. The General/Gym/Centennial capital lines have no function printed, so the 'Capital Outlay: <function>' label rule can't be applied to them (they stay 'Capital Outlay')."}
+  ]
+}
