@@ -1,0 +1,19 @@
+{
+  "stem": "Hay_Springs_FY2022",
+  "values_checked": 143,
+  "issues": [
+    {"severity": "warning", "path": "receipts[6].category", "page": 5,
+     "extracted": "other", "on_page": "Grant revenue 47,787 (p2 Statement of Activities: Capital Grants and Contributions, General government)",
+     "issue": "Grant left in 'other' (detail_category Grants); notes cite a 'user ruling 2026-11-12' that is not in config/category_decisions.csv. Other reports default unnamed grants to intergovernmental/state aid. Same for detail[6]. Confirm the category."},
+    {"severity": "warning", "path": "receipts[9].category", "page": 7,
+     "extracted": "Utility Charges", "on_page": "Charges for services 265,205 (Water 154,548 + Sewer 96,932 + RV Park 13,725)",
+     "issue": "The business-type total includes RV Park charges of 13,725, which detail[41] records as Recreation Fees. The utility category is correct for most of the line but not all of it."},
+    {"severity": "warning", "path": "detail[42].category", "page": 7,
+     "extracted": "culture/recreation", "on_page": "RV Park Fund: Utilities 3,436; Repairs and maintenance 4,768; Supplies 2,765; Other services and charges 2,309; Depreciation and amortization 724",
+     "issue": "RV Park spending lines detail[42]-[46] use the function category culture/recreation. The same rows in the total-column disbursements and the Water/Sewer detail use cost-type categories (business-type cost-type rule 2026-10-28), so the categories are inconsistent. Defensible because RV Park is not a utility."},
+    {"severity": "warning", "path": "balance_sheet.equity", "page": 4,
+     "extracted": "governmental: Restricted: Grants 95,573; Unrestricted 100,258 (government-wide p1)",
+     "on_page": "Governmental funds statement p4 ties exactly to 195,831: Restricted Grants 95,573; Committed Community improvement 111,424; Assigned Cemetery 12,251, Library 16,813, Parks 6,860, Other 1,990; Unassigned (49,080)",
+     "issue": "The 2026-10-27 balance-sheet basis rule says to take governmental lines from the funds statement when its totals equal the government-wide figures. The extractor kept the Statement of Net Position for consistency with FY2023/FY2024, which is defensible because the government-wide statement also carries business-type capital assets and debt."}
+  ]
+}
