@@ -1,0 +1,11 @@
+{
+  "stem": "McGrew_FY2022",
+  "values_checked": 58,
+  "issues": [
+    {"severity": "warning", "path": "beginning_cash", "page": 1, "extracted": 138748.07, "on_page": "line 3 Subtotal of Beginning Balance (line 1 Net Cash Balance + line 2 Investments): General (18,473.05) + Street 60,165.73 + Keno 97,055.39", "issue": "beginning_cash (and ending_cash 155,391.96) is the line 3/24 subtotal, which includes certificates of deposit, while beginning_investments 21,349.29 / ending_investments 21,394.14 are also filled. Cash alone (line 1 / line 26) is 117,398.78 / 133,997.77. The arithmetic is right, but the investments are inside cash and also listed separately, so they could be double counted downstream."},
+    {"severity": "warning", "path": "balance_sheet.equity[0].category", "page": 1, "extracted": null, "on_page": "Ending Balance (line 24)", "issue": "equity[0] and equity[1] have no category field"},
+    {"severity": "warning", "path": "receipts[6].category", "page": 1, "extracted": "other", "on_page": "Local Receipts: Other, Keno Fund column 25,620.47", "issue": "the Keno Fund's only receipt is very likely keno proceeds (keno/lottery). It was left as other because Local Receipts is a context label and the fund-name rule covers tax receipts only. Same for detail[13]. Judgment call."},
+    {"severity": "warning", "path": "balance_sheet.assets", "page": 1, "extracted": null, "on_page": "County Treasurer Balance at September 30, 2022: 2,708.82 (October 1, 2021: 300.02)", "issue": "the printed county treasurer balance is not in assets or cash (the notes say so); confirm it should stay out"},
+    {"severity": "warning", "path": "balance_sheet.liabilities", "page": 5, "extracted": [], "on_page": "Schedule of Outstanding Debt: NDEQ - Loan 3,077.73", "issue": "the loan printed on the debt schedule is not in liabilities (the cash-basis statement has no liability lines); confirm it should stay out"}
+  ]
+}
