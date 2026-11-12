@@ -1,0 +1,55 @@
+{
+  "stem": "Red_Willow_County_FY2023",
+  "values_checked": 156,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "report_discrepancies",
+      "page": 15,
+      "extracted": null,
+      "on_page": "Schedule 5 Highway Buyback: disbursements 84,113, net change 71,337, ending 262,752; Schedule 4 (p12) / Exhibit A (p1) print 84,114, 71,336, 262,751",
+      "issue": "unrecorded 1-dollar report rounding gap between Schedule 5 and Schedule 4 for Highway Buyback; JSON uses the Schedule 4 figures (correct) but report_discrepancies lacks this entry",
+      "resolved": "report_discrepancies entry added"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[33].review",
+      "page": 7,
+      "extracted": "State 1,506,051 / Local 23,526 (review: detail by type on p4)",
+      "on_page": "Exhibit D (p4) Road column: Intergovernmental 1,506,346, Charges for Services 9,804, Miscellaneous 13,427 (total 1,529,577 on both)",
+      "issue": "Road budget schedule State/Local split differs by 295 from Exhibit D's Intergovernmental / other rows; both total 1,529,577 so no add-up gap, but the review note implies p4 gives the breakdown of these exact lines and it does not tie. Could be added to report_discrepancies like the General Fund 1-dollar item"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[40].category",
+      "page": 9,
+      "extracted": "Interest Income",
+      "on_page": "Local 24,211 (Exhibit D p4 prints ARP 24,211 on the Interest row)",
+      "issue": "printed label 'Local' has a label decision (category_decisions.csv: local -> other, apply=label); extractor used Exhibit D evidence instead. Defensible (PDF first) but differs from the label decision; user_rules.py may revert it"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[42].category",
+      "page": 10,
+      "extracted": "inheritance tax",
+      "on_page": "Local 787,828 (Exhibit D p4 prints 787,828 on the Inheritance Tax row)",
+      "issue": "Inheritance Tax Fund 'Local' line categorised inheritance tax from Exhibit D's printed row; user ruling 2026-11-06 keeps Inheritance Tax Fund 'Local fees...' lines as printed. Evidence here is a printed row, not the fund name, so defensible; flag for consistency with the label decision (local -> other)"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[48].detail_category",
+      "page": 12,
+      "extracted": "county/other local governments",
+      "on_page": "Visitor's Promotion: Intergovernmental 81,045",
+      "issue": "same printed label 'Intergovernmental' gets other state aid elsewhere (Fair, Health, Jail Bond...) but county/other local governments here and for Visitor's Improvement (detail[51]) and Waste Disposal (detail[75]); the page does not say the source. Visitor's funds' 81,045 is likely county lodging tax remitted by the state"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[0].budget_final",
+      "page": 5,
+      "extracted": null,
+      "on_page": "Taxes final budget 3,904,654",
+      "issue": "split pieces of General Fund Taxes drop the printed final budget 3,904,654 (noted only in split_from)"
+    }
+  ]
+}

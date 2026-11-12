@@ -1,0 +1,15 @@
+{
+  "stem": "Republican_City_FY2023",
+  "values_checked": 92,
+  "issues": [
+    {"severity": "warning", "path": "ending_cash", "page": 4,
+     "extracted": null, "on_page": "Statement of Assets and Fund Balances (p4) Total column: Cash 715,507, Cash with County Treasurer 3,504, Restricted Cash 27,576 (Total Assets 746,587, all cash)",
+     "issue": "governmental year-end cash is printed (all assets are cash) but ending_cash is null; notes say the statement prints only fund balances. Red_Willow_County_FY2023 fills ending_cash from the same kind of statement. Beginning cash is not printed, so beginning_cash null is right"},
+    {"severity": "warning", "path": "receipts[7].category", "page": 5,
+     "extracted": "other", "on_page": "Other 33,259 (Statement of Activities p2 prints 33,259 as Public safety Operating Grants and Contributions)",
+     "issue": "label 'Other' is printed so other is allowed, but the Statement of Activities shows the line is operating grants/contributions for public safety; grantor not printed, so other is defensible (same for detail[7])"},
+    {"severity": "warning", "path": "balance_sheet.assets[3].category", "page": 4,
+     "extracted": "restricted assets", "on_page": "Restricted: Cash 27,576",
+     "issue": "restricted cash put in restricted assets; Cash and Cash Equivalents would also fit (same for assets[4], business-type 73,470)"}
+  ]
+}
