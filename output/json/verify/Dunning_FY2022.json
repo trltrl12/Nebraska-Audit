@@ -1,0 +1,15 @@
+{
+  "stem": "Dunning_FY2022",
+  "values_checked": 58,
+  "issues": [
+    {"severity": "warning", "path": "disbursements[3].fund_type", "page": 2,
+     "extracted": "governmental", "on_page": "Wastewater 13,865.33 and Water 9,179.39, printed under 'Business-Type Activities' in the General Fund column",
+     "issue": "The lines are classed governmental because of their fund column, but the form prints them under the Business-Type Activities heading. This is a judgment call. The same applies to disbursements[4] and the matching detail lines (detail[8], detail[9])."},
+    {"severity": "warning", "path": "receipts[8].category", "page": 1,
+     "extracted": "other", "on_page": "Local Receipts: Other 31,734.12 (Enterprise Fund column)",
+     "issue": "This is the Enterprise Fund's only receipt and is probably utility charges, but no breakdown is printed. A context label, left for the context check. The same applies to detail[15]."},
+    {"severity": "warning", "path": "ending_cash", "page": 1,
+     "extracted": 119595.14, "on_page": "line 26 Net Cash Balance 58,892.76 (General+Street); line 28 Subtotal (cash + investments) 119,595.14",
+     "issue": "ending_cash and beginning_cash (111,785.85) are the line 3 / line 28 subtotals, which include investments (60,702.38 at the end, 60,334.16 at the start), while ending_investments and beginning_investments are null. This matches the FY2023 convention noted in the extraction, but cash is printed separately on lines 1 and 26."}
+  ]
+}
