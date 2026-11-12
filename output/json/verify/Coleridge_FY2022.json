@@ -1,0 +1,72 @@
+{
+  "stem": "Coleridge_FY2022",
+  "values_checked": 140,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "missing",
+      "page": 8,
+      "extracted": null,
+      "on_page": "Nursing Home revenues 3,149,918 (Actual; budget 3,100,000)",
+      "issue": "This line is on the p8 Combined Budget and Actual schedule and appears nowhere in the JSON. The other p8 lines duplicate the statements, but this one has no counterpart, so it is not double counting. decision_needed already asks whether to capture it; it stays an error until the user decides.",
+      "resolved": "nursing home lines on the all-funds budget schedule left out as in FY2023; open decision_needed for the user"
+    },
+    {
+      "severity": "error",
+      "path": "missing",
+      "page": 8,
+      "extracted": null,
+      "on_page": "Public buildings - Nursing Home 3,078,199 (Actual; budget 3,100,000)",
+      "issue": "This spending line is on p8 and appears nowhere in the JSON (same decision_needed question as the Nursing Home revenues).",
+      "resolved": "nursing home lines on the all-funds budget schedule left out as in FY2023; open decision_needed for the user"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[5].original_label",
+      "page": 3,
+      "extracted": "Property Tax",
+      "on_page": "Property taxes - levied for debt service",
+      "issue": "The 2026-11-06 ruling keeps qualified property tax labels (debt service / special building). The printed label should be kept rather than renamed to Property Tax."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[61].category",
+      "page": 7,
+      "extracted": "public safety",
+      "on_page": "Operating expense 21,583 (Ambulance column)",
+      "issue": "This is inconsistent with the same cost-type row in the other proprietary funds (category Operating) and with the Ambulance personnel and supplies lines (cost-type categories). It is probably Operating with function public safety."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[19].original_label",
+      "page": 9,
+      "extracted": "Capital Outlay",
+      "on_page": "Capital outlay 16,442 (General department column)",
+      "issue": "The capital outlay rule calls for 'Capital Outlay: <function>'. The General department's other lines are general government, and the Statement of Activities p2 general government 84,346 = 67,904 + 16,442. So the label is probably 'Capital Outlay: General Government'."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[10].category",
+      "page": 9,
+      "extracted": "charges for services/fees",
+      "on_page": "Charges for services 3,500 (Community Building column)",
+      "issue": "Community building charges are probably rentals (category Rentals). This is a judgment call."
+    },
+    {
+      "severity": "warning",
+      "path": "business_type.measure",
+      "page": 7,
+      "extracted": "cash",
+      "on_page": "NET POSITION (DEFICIT) beginning 159,650 / end 169,848; cash and cash equivalents 230,464 (p6)",
+      "issue": "These balances are modified-cash net position, not cash: cash is 230,464, less due to other funds of 60,616. Labelling them as cash conflicts with the 2026-11-06 ruling that fund balance or net position is never treated as cash. This was kept to match FY2023-FY2024."
+    },
+    {
+      "severity": "warning",
+      "path": "ending_cash",
+      "page": 4,
+      "extracted": 409955,
+      "on_page": "Cash and cash equivalents 405,538 + Cash held by county treasurer 4,417",
+      "issue": "Ending cash (and beginning_cash 403,650 = 399,522 + 4,128) is a sum of two printed cash lines, not a printed figure. The arithmetic is correct and the value is marked computed, but the 2026-11-06 ruling says cash is never derived."
+    }
+  ]
+}

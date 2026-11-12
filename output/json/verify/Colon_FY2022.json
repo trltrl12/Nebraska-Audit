@@ -1,0 +1,9 @@
+{
+  "stem": "Colon_FY2022",
+  "values_checked": 82,
+  "issues": [
+    {"severity": "warning", "path": "receipts[11].category", "page": 1, "extracted": "other", "on_page": "Local Receipts: Other 28,669.03 (Waste Water & Sewer Fund) + 300.00 (Sewer Cust. Utility Deposits)", "issue": "These are the only receipts of the sewer utility fund, so they are probably sewer charges and customer deposits. 'Local Receipts: Other' is a context label, and the page needs checking before it can be categorized. The same applies to detail[25] and detail[26]."},
+    {"severity": "warning", "path": "ending_investments", "page": 1, "extracted": 60061.25, "on_page": "line 27 Investments 31,168.42 + 28,892.83", "issue": "beginning_investments (59,806.68) and ending_investments are filled even though they are already included in beginning_cash (line 3) and ending_cash (line 24). Anything that adds cash and investments together will count them twice. Cody_FY2022 leaves the investments null instead, so the two reports are inconsistent."},
+    {"severity": "warning", "path": "ending_cash", "page": 1, "extracted": 158975.64, "on_page": "line 24 Ending Balance (General 55,999.95 + Street 93,595.34 + ARPA 9,380.35)", "issue": "ending_cash is the line 24 Ending Balance, which includes investments, rather than a cash line. Line 26 Net Cash Balance for the governmental columns is 98,914.39."}
+  ]
+}
