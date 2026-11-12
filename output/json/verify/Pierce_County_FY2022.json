@@ -1,0 +1,24 @@
+{
+  "stem": "Pierce_County_FY2022",
+  "values_checked": 171,
+  "issues": [
+    {"severity": "warning", "path": "receipts[0].category", "page": 4,
+     "extracted": "property tax", "on_page": "Taxes 4,853,274 (incl. Inheritance Tax 283,112, Visitor Promotion 6,172, Visitor Improvement 6,172, 911 Emergency 23,325); Statement of Activities p2 'Property taxes' 4,853,274",
+     "issue": "Whole line called property tax because the Statement of Activities lumps all taxes as 'Property taxes'. The fund rows print only 'Taxes'; inheritance and visitor (lodging) taxes are very likely not property tax. Follows the letter of the 'printed label beats fund name' rule, but a person may want to settle it (not in decision_needed)."},
+    {"severity": "warning", "path": "detail[28].category", "page": 6,
+     "extracted": "property tax", "on_page": "Inheritance Tax fund: Taxes 283,112",
+     "issue": "Inheritance Tax Fund taxes recorded as property tax from the Statement of Activities' aggregate label; fund name points to inheritance tax."},
+    {"severity": "warning", "path": "detail[36].category", "page": 12,
+     "extracted": "property tax", "on_page": "Visitor Promotion Taxes 6,172; Visitor Improvement Taxes 6,172 (detail[38])",
+     "issue": "Visitor fund taxes (normally lodging tax) recorded as property tax from the aggregate Statement of Activities label."},
+    {"severity": "warning", "path": "receipts[5].category", "page": 4,
+     "extracted": "other", "on_page": "Local 1,202,878; Statement of Activities p2: Fees, Fines and Charges for Services 966,127, Interest 31,170, Other receipts 206,324",
+     "issue": "Broad 'Local' line kept as other; the Statement of Activities suggests about 80% is fees/charges for services (no exact tie). Defensible under the FY2022 context-label ruling."},
+    {"severity": "warning", "path": "detail[63].category", "page": 13,
+     "extracted": "other", "on_page": "Lottery Keno fund: Local 2,852",
+     "issue": "Only receipt of the Lottery Keno Fund, likely keno proceeds; kept other because the label is 'Local'."},
+    {"severity": "warning", "path": "balance_sheet.assets[1].category", "page": 3,
+     "extracted": "Cash and Cash Equivalents", "on_page": "Cash at bank - restricted 3,019,616",
+     "issue": "Restricted cash could be category 'restricted assets'."}
+  ]
+}
