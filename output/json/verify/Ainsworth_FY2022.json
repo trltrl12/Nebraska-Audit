@@ -1,0 +1,10 @@
+{
+  "stem": "Ainsworth_FY2022",
+  "values_checked": 210,
+  "issues": [
+    {"severity": "warning", "path": "transfers_out", "page": 4, "extracted": 135091, "on_page": "Total column 'Operating transfers in (out)' (135,091); fund columns: General (52,000), Street 85,577, Debt Service (168,668)", "issue": "Only the net transfer from the Total column is recorded (transfers_in null). The gross amounts are printed in the fund columns (in 85,577 / out 220,668). The roll-forward ties either way."},
+    {"severity": "warning", "path": "ending_cash", "page": 3, "extracted": null, "on_page": "Cash and cash equivalents 2,254,657; Cash at county treasurer 28,466 (Total column)", "issue": "ending_cash is left null while ending_investments (970,548) is a computed sum from the same p3 Total column. The two fields are treated inconsistently."},
+    {"severity": "warning", "path": "receipts[25].category", "page": 12, "extracted": "Sale of Property", "on_page": "Lot sales 5,350 (General Fund, Other)", "issue": "These are probably cemetery lot sales, which would make them Cemetery Fees. The page doesn't say, so this is a judgment call (also applies to detail[22])."},
+    {"severity": "warning", "path": "detail[87].detail_category", "page": 20, "extracted": "grants/payments to other entities", "on_page": "Business loans 400,000 (LB 840 Fund)", "issue": "These are loans made to businesses (repaid later as 'Economic reuse - loan payments'), not grants. The detail_category is doubtful."}
+  ]
+}
