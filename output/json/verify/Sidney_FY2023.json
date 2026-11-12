@@ -1,0 +1,27 @@
+{
+  "stem": "Sidney_FY2023",
+  "values_checked": 348,
+  "issues": [
+    {"severity": "warning", "path": "receipts[12].category", "page": 4,
+     "extracted": "intergovernmental/state aid", "on_page": "Grants 887,662 (General 185,295; Street 170,923; Debt Service 15,347; Other Governmental 516,097)",
+     "issue": "Mixed grantors. The General Fund's 185,295 is Federal Receipts on p8 and State and Federal Grants on p10; Street and Debt Service are State Receipts Other (p8); the Economic Development 516,097 grantor is not printed. The category is defensible and has a review note."},
+    {"severity": "warning", "path": "detail[176].detail_category", "page": 9,
+     "extracted": "other state aid", "on_page": "Economic Development fund Grants 516,097",
+     "issue": "Grantor not printed. It could be federal (e.g. CDBG) as well as state."},
+    {"severity": "warning", "path": "detail[169]", "page": 8,
+     "extracted": -2374878, "on_page": "Debt Service Fund 'Other Financing Uses' 2,374,878 under Charges to appropriations (budget 2,087,771)",
+     "issue": "Recorded as other financing because of the printed label. On the GAAP statement (p4) this money is the Debt Service Fund's bond and lease payments (2,382,100), not a transfer, so the Debt Service Fund has no expenditure lines in detail. budget_final is positive (2,087,771) while the amount is negative. Street's printed Other Financing Uses budget '-' is null."},
+    {"severity": "warning", "path": "ending_cash", "page": 3,
+     "extracted": 14486046, "on_page": "Cash and Cash Equivalents 14,486,046; Cash with Fiscal Agent 162,560; Equity in Pooled Cash and Investments 2,955,719 (Total Governmental Funds)",
+     "issue": "ending_cash takes only the Cash and Cash Equivalents line. The pooled cash and investments line and the fiscal agent cash are printed but are in neither ending_cash nor ending_investments. This matches the FY2024 convention (FY2024 ending_cash 14,630,606, p3)."},
+    {"severity": "warning", "path": "balance_sheet", "page": 3,
+     "extracted": "government-wide Statement of Net Position (p1) only", "on_page": "Governmental funds Balance Sheet (p3) and Proprietary Statement of Net Position (p5)",
+     "issue": "Two more balance-sheet pages in the trim are not recorded as balance_sheet lines. This follows the GAAP rule (government-wide Statement of Net Position), and the p5 proprietary totals agree with the business-type column on p1 (55,322,676 / 6,339,827 / 48,982,849). It is noted so the user knows they were read and not entered."},
+    {"severity": "warning", "path": "detail[55].detail_category", "page": 11,
+     "extracted": "professional/contract services", "on_page": "Economic Development 614,207 (Administration, General Government)",
+     "issue": "This could be grants/payments to other entities (likely a payment to the economic development corporation; p8 budgets Economic Development 650,000 separately). Likewise Emergency Services 485,489 (detail[54]) and Recreation Coordination 114,000 (detail[56]). The function category general government matches the statement (p4)."},
+    {"severity": "warning", "path": "other_financing", "page": 4,
+     "extracted": -282410, "on_page": "Capital Contributions (289,283) under Other Financing Sources (Uses); Statement of Activities p2 prints it as 'Transfers of Capital'",
+     "issue": "The capital contribution to the enterprise funds is recorded as other financing on both sides (governmental -289,283; business_type.other_financing +289,283), not as transfers. This is consistent and matches the printed section, but the Statement of Activities calls it a transfer."}
+  ]
+}
