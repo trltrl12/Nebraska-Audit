@@ -1,0 +1,21 @@
+{
+  "stem": "Gandy_FY2022",
+  "values_checked": 50,
+  "issues": [
+    {"severity": "warning", "path": "beginning_cash.amount", "page": 1,
+     "extracted": 58550.84, "on_page": "Line 1 Net Cash Balance General 4,617.39 + Street 33,933.45 = 38,550.84; line 2 Investments Street 20,000.00; line 3 subtotal 58,550.84",
+     "issue": "beginning_cash is the line 3 subtotal, which already includes the 20,000 Street Fund time deposit, and beginning_investments is also 20,000. Adding cash and investments would count the 20,000 twice. The printed Net Cash Balance is 38,550.84. The budget-form rule handles the same case by leaving the investments fields null when they are already inside cash. The extractor chose this to match FY2023."},
+    {"severity": "warning", "path": "ending_cash.amount", "page": 1,
+     "extracted": 65348.25, "on_page": "Line 26 Net Cash Balance General 2,757.15 + Street 42,591.10 = 45,348.25; line 27 Investments 20,000.00; line 24/28 balance 65,348.25",
+     "issue": "ending_cash (65,348.25) includes the 20,000 investment, while ending_investments is also 20,000 and balance_sheet cash is 45,348.25. The same 'cash' figure is stated two different ways in one report, and the investment is double counted if the fields are added."},
+    {"severity": "warning", "path": "receipts[4].category", "page": 1,
+     "extracted": "other", "on_page": "Local Receipts: Other 3,678.50 (Trash Fund column)",
+     "issue": "This is a context label in the Trash (solid waste) utility fund column, and the fund's only receipt. It is most likely refuse charges (Utility Charges / charges for services), and the rules say to decide from the row's fund column. It is left as other with review for the context checker (same for detail[11])."},
+    {"severity": "warning", "path": "detail[12].category", "page": 2,
+     "extracted": "general government (business-type, function utilities)", "on_page": "Line 29 General Government, Trash Fund column 23.20 (printed under 'Governmental:')",
+     "issue": "A general government line printed in the business-type Trash Fund column. The category is defensible; disbursements[3] is the same case and carries review. Also the Trash Public Health & Social Services 877.20 (detail[13], disbursements[4]) is on line 34. The crossed-out original put it on line 33, Public Works - Other."},
+    {"severity": "warning", "path": "disbursements", "page": 2,
+     "extracted": "revised Exhibit A page 2 used", "on_page": "Header reads 'Village of Davey, Nebraska'",
+     "issue": "The revised page 2 is headed with another village's name. Every fund total (line 52: General 2,472.22, Street 8,237.82, Trash 3,900.40, total 14,610.44) ties to Gandy p1 line 23, and the column amounts add exactly, so it is very likely just a misprinted header. The extractor noted this; it is not in decision_needed."}
+  ]
+}

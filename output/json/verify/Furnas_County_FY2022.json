@@ -1,0 +1,23 @@
+{
+  "stem": "Furnas_County_FY2022",
+  "values_checked": 117,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "detail[4].category",
+      "page": 5,
+      "extracted": "other / miscellaneous revenue",
+      "on_page": "Local 621,662 (General Fund budget schedule)",
+      "issue": "The broad 'Local' group is left in other, but the Exhibit D General column (p4) shows what it holds. The budget schedule's Federal+State+Local (723,982) equals Exhibit D's Federal Grants 72,897 + Intergovernmental 59,704 + Charges for Services 527,483 + Interest 19,751 + Miscellaneous 44,147 (723,982). Even if all of Federal 77,019 and State 25,301 were charges, Local still holds at least 425,163 of charges (more than 68%; on the most likely mapping 527,483, about 85%). Under the extractor rule that a broad 'Local' line takes any category above half, it should be charges for services/fees (review: broad group), not other.",
+      "resolved": "'Local' is a context label: stays other until the context check (CLAUDE.md 2026-11-05 rule)"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[33].category",
+      "page": 9,
+      "extracted": "inheritance tax",
+      "on_page": "Local 234,717 (Inheritance Tax budget schedule)",
+      "issue": "The printed label is 'Local'. The 2026-11-06 ruling keeps Inheritance Tax Fund 'Local fees...' receipts as printed (no category from the fund name). This one is defensible because Exhibit D (p4) prints the same 234,717 as 'Inheritance Tax', but it has no note or computed marker citing that evidence apart from the note text. Please confirm it is consistent with the ruling."
+    }
+  ]
+}
