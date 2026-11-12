@@ -1,0 +1,18 @@
+{
+  "stem": "Davenport_FY2022",
+  "values_checked": 144,
+  "issues": [
+    {"severity": "warning", "path": "receipts[4].category", "page": 4,
+     "extracted": "donations/contributions", "on_page": "Grants/Donations 25,044 (p2: Capital Grants and Contributions, Policy/administration)",
+     "issue": "The notes say 'category other, detail_category Grants (user ruling 2026-11-12)', but the JSON has donations/contributions here and in detail[5]. The notes and the data disagree, and that ruling is not in the extractor rules. Mixed grant/donation line; category is a judgment call."},
+    {"severity": "warning", "path": "detail[38].category", "page": 6,
+     "extracted": "sales tax", "on_page": "Sales tax 18,038 (Electric Fund operating receipts)",
+     "issue": "This is sales tax collected on utility billings and paid back out (Sales tax expense 18,824), not the village's own sales tax revenue. The statement-level receipts count the same money as Utility Charges in 'Electric' 417,881. Same for detail[51] (1,005) and detail[64] (2,261)."},
+    {"severity": "warning", "path": "detail[33].original_label", "page": 12,
+     "extracted": "Capital Outlay", "on_page": "Capital outlay: Equipment 4,527 (General)",
+     "issue": "Not in the 'Capital Outlay: <function>' form the rules require. Same for detail[41] (Special Revenue Equipment 5,200, function streets/highways)."},
+    {"severity": "warning", "path": "detail[26].category", "page": 12,
+     "extracted": "utilities", "on_page": "Dump expense 4,405 (General Fund)",
+     "issue": "Refuse spending in the General Fund is categorized as utilities. It is already marked for review; general government or health/welfare are also defensible."}
+  ]
+}

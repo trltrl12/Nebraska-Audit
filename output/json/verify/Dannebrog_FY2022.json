@@ -1,0 +1,18 @@
+{
+  "stem": "Dannebrog_FY2022",
+  "values_checked": 127,
+  "issues": [
+    {"severity": "warning", "path": "receipts[12].category", "page": 6,
+     "extracted": "other", "on_page": "Grant proceeds 39,336 (nonoperating, Water Fund)",
+     "issue": "A grant line is put in 'other', which the rules treat as a last resort. The cited 'user ruling 2026-11-12' is not in the extractor rules or CLAUDE.md. FY2023/FY2024 Dannebrog put the same label in intergovernmental/state aid. Same for detail[25]."},
+    {"severity": "warning", "path": "receipts[7].category", "page": 4,
+     "extracted": "donations/contributions", "on_page": "Contributions and grants 84,296 (p2 shows General government 56,035 as Operating Grants and Contributions)",
+     "issue": "The notes say 'Contributions and grants / Grant proceeds ... category other, detail_category Grants', but the JSON has donations/contributions here (and in detail[5], detail[16]). The notes and the data disagree. FY2023/FY2024 used intergovernmental/state aid for this label. Category is a judgment call."},
+    {"severity": "warning", "path": "detail[11].original_label", "page": 4,
+     "extracted": "Capital outlay", "on_page": "General Fund Capital outlay 65,162",
+     "issue": "Not relabelled 'Capital Outlay: <function>'. The notes say no function is printed, but p2 does print one: General government expenses 159,810 = 94,648 + 65,162, and the p8 budget schedule also counts it in general government. So it could be 'Capital Outlay: General Government'."},
+    {"severity": "warning", "path": "business_type.measure", "page": 6,
+     "extracted": "cash", "on_page": "Net position 284,197 / 308,719 (cash 292,899 + certificates of deposit 15,820)",
+     "issue": "The measure is labelled 'cash' but the balances are the printed net position, which includes CDs (stated in the notes; consistent with FY2023/FY2024)."}
+  ]
+}
