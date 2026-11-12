@@ -1,0 +1,15 @@
+{
+  "stem": "Banner_County_FY2022",
+  "values_checked": 77,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "detail[3].category",
+      "page": 5,
+      "extracted": "other",
+      "on_page": "Local 71,903 (General Fund); statement p4 General column: Charges for Services 64,197, Interest 5,684, Miscellaneous 2,014",
+      "issue": "broad 'Local' group put in other although the statement shows it is about 89% charges for services; under the extractor rule (a category over half of the group is used, or split with split_from) it should be charges for services/fees (detail_category e.g. other charges for services / fees of office), not other. 'Local' is also a context label, so the context check must settle it from the page",
+      "resolved": "'Local' is a context label: stays other until the context check (CLAUDE.md 2026-11-05 rule)"
+    }
+  ]
+}
