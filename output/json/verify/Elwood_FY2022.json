@@ -1,0 +1,33 @@
+{
+  "stem": "Elwood_FY2022",
+  "values_checked": 118,
+  "issues": [
+    {"severity": "warning", "path": "receipts[2].category", "page": 2,
+     "extracted": "other", "on_page": "Taxes: Other 24,240 (p4); Statement of Activities general revenue 'Homestead/other' 24,240 (p2)",
+     "issue": "printed under Taxes and labelled Homestead/other on p2; could be Homestead Exemption (or other taxes) rather than other. Same for detail[1]"},
+    {"severity": "warning", "path": "receipts[11].category", "page": 4,
+     "extracted": "other", "on_page": "Other 92,233 (General 14,471, Street 720, CRA Fund 77,041)",
+     "issue": "77,041 of it is CRA Fund receipts (possibly TIF proceeds); governmental other (24,240 + 92,233) is 14% of receipts, over the 10% review threshold. Printed label is 'Other' so kept"},
+    {"severity": "warning", "path": "receipts[9].category", "page": 4,
+     "extracted": "donations/contributions", "on_page": "Grants and contributions 82,813 (General 62,668, Street 20,145); p2 shows them as Operating Grants and Contributions by function",
+     "issue": "mixed label; the Street Fund 20,145 is likely a government grant. Kept as one line per the mixed-label ruling, but the category is a judgment call"},
+    {"severity": "warning", "path": "other_financing", "page": 4,
+     "extracted": 845, "on_page": "Interest income 845, printed under Other Financing Sources (Uses)",
+     "issue": "interest income kept as other_financing because of where it is printed (consistent with FY2024 per notes); it is investment earnings, not financing"},
+    {"severity": "warning", "path": "disbursements[7].category", "page": 9,
+     "extracted": "culture/recreation", "on_page": "Community Development 82,175 (Sales Tax department)",
+     "issue": "label suggests economic development; culture/recreation is supported by the p9 budget schedule (Culture and recreation 192,579 = 56,389 + 54,015 + 82,175), so defensible"},
+    {"severity": "warning", "path": "disbursements[4].category", "page": 10,
+     "extracted": "general government", "on_page": "Contracted labor 1,200 (Cemetery department, General Fund)",
+     "issue": "statement line is general government while the same amount in detail[42] is health/welfare (Cemetery = Public health and social services on p9); inconsistent"},
+    {"severity": "warning", "path": "disbursements[12].original_label", "page": 4,
+     "extracted": "Capital Outlay", "on_page": "Capital outlay, General column 65,428 (p10: General 2,516, Library 45,665, Community Improvement 17,248)",
+     "issue": "label has no function; mostly culture/recreation per p10. detail[31] (General dept 2,516) also lacks 'Capital Outlay: General Government'"},
+    {"severity": "warning", "path": "detail[44].detail_category", "page": 10,
+     "extracted": "grants/payments to other entities", "on_page": "Community Development 82,175 (no object breakdown)",
+     "issue": "object not printed; detail_category should probably be 'not itemized'"},
+    {"severity": "warning", "path": "balance_sheet.total_liabilities", "page": 1,
+     "extracted": 2663, "on_page": "Sales tax collected 247 + Payroll taxes withheld 2,415 = 2,662; printed totals 2,663",
+     "issue": "the page's own liabilities total is off by 1 (rounding in the report); not recorded in report_discrepancies"}
+  ]
+}
