@@ -1,0 +1,10 @@
+{
+  "stem": "Burwell_FY2022",
+  "values_checked": 176,
+  "issues": [
+    {"severity": "warning", "path": "receipts[4].category", "page": 4, "extracted": "intergovernmental/state aid", "on_page": "Grants and donations 20,950 (Local Option Sales Tax column)", "issue": "mixed label with no grantor printed; the Statement of Activities (p2) shows it only as Public welfare operating grants and contributions. State aid is a guess (could be donations/contributions); already marked review (also detail[19])"},
+    {"severity": "warning", "path": "ending_cash", "page": 3, "extracted": 1624558, "on_page": "four cash lines 1,213,786 + 9,977 + 392,688 + 8,107 (Total Governmental Funds); no single cash total printed", "issue": "ending_cash is a sum the extractor computed (marked computed, arithmetic correct); the user's 2026-11-06 ruling says cash is never derived, so a person may prefer null or the printed lines only"},
+    {"severity": "warning", "path": "business_type", "page": 6, "extracted": "measure net position, 2,509,456 -> 3,178,443", "on_page": "p6 proprietary net position (accrual: receivables, inventory, capital assets, depreciation 74,665); p1/p2 business-type modified cash net position 1,531,158 -> 1,905,907; p7 cash flows cash 1,388,626 -> 1,763,375", "issue": "business_type rolls the accrual-style proprietary net position while the balance_sheet business-type lines are the cash-basis 1,905,907 from p1, so the two do not agree; proprietary cash flows (p7) are printed but proprietary is null. Notes say this follows FY2023/FY2024, so it is consistent, but the mismatch is worth a person's look"},
+    {"severity": "warning", "path": "disbursements[16].category", "page": 6, "extracted": "utilities", "on_page": "Utilities 1,076,879 (Electric 1,049,293)", "issue": "the Electric fund's 1,049,293 'Utilities' is almost certainly purchased power (detail_category purchased power/cost of sales) rather than utility bills; already marked review (detail[44])"}
+  ]
+}
