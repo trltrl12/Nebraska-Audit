@@ -1,0 +1,28 @@
+{
+  "stem": "St_Edward_FY2023",
+  "values_checked": 212,
+  "issues": [
+    {"severity": "warning", "path": "balance_sheet", "page": 4,
+     "extracted": "only the government-wide Statement of Net Position (p1) recorded",
+     "on_page": "p4 Balance Sheet - Modified Cash Basis - Governmental Funds (cash 810,060; CDs 81,551; county treasurer cash 7,105; fund balances: restricted community betterment 69,246, debt service 301,819, street improvements 328,967, infrastructure/economic development 42,754, assigned budget stabilization 26,786, unassigned 129,144; total 898,716) and p6 Statement of Fund Net Position - Proprietary Funds (total net position 857,846)",
+     "issue": "The trim has two more balance-sheet pages that aren't recorded as balance_sheet lines. Keeping the SNP follows the basis rule, because the government-wide figures include capital assets and debt. The p4/p6 totals agree with the SNP columns (governmental cash 67,274 + restricted cash 742,786 = 810,060; business-type 889,571 / 31,725 / 857,846). The p4 fund-balance classifications (assigned 26,786, unassigned 129,144) only appear in notes/ending_fund_balance."},
+    {"severity": "warning", "path": "ending_cash.amount", "page": 4,
+     "extracted": 810060, "on_page": "Cash and cash equivalents 810,060; County treasurer cash 7,105 (separate line)",
+     "issue": "ending_cash leaves out the separately printed county treasurer cash 7,105. The project rules treat county treasurer cash as Cash and Cash Equivalents, and the balance sheet records it that way. beginning_cash is null (no prior-year governmental cash printed). Year-to-year: FY2023 ending fund balance 898,716 and business-type net position 857,846 = St_Edward_FY2024 beginning as printed."},
+    {"severity": "warning", "path": "receipts[9].category", "page": 5,
+     "extracted": "donations/contributions", "on_page": "Grants and contributions 17,786",
+     "issue": "Mixed 'grants and contributions' label with no grantor stated (SoA: operating 12,500 for fire/library, capital 5,286 for community building). It is kept with one category under the 2026-11-06 mixed-label ruling, but it could be grants (intergovernmental). The same applies to detail[10]-detail[12]."},
+    {"severity": "warning", "path": "receipts[15].category", "page": 7,
+     "extracted": "donations/contributions", "on_page": "Grant and contribution income 10,000 (Water Fund); cash flows p8 'Grant proceeds' 10,000 under capital and related financing",
+     "issue": "The cash flow statement calls this money 'Grant proceeds', which suggests a government grant (intergovernmental/state aid or federal grants) rather than a private donation. The same applies to detail[92]."},
+    {"severity": "warning", "path": "detail[7].category", "page": 16,
+     "extracted": "Recreation Fees", "on_page": "Charges for services 2,480 (Park), 6,138 (Pool), 3,250 (Community Building)",
+     "issue": "The same printed label 'Charges for services' gets Recreation Fees for Park/Pool (detail[7], detail[8]) but charges for services/fees for Community Building (detail[9]) and the statement line receipts[8]. The department-based split is defensible, but it breaks the same-label-same-category check. Community Building charges may be Rentals."},
+    {"severity": "warning", "path": "detail[30].detail_category", "page": 15,
+     "extracted": "professional/contract services", "on_page": "Police - Contracted services 53,360",
+     "issue": "Police contracted services is most of police spending and may be a sheriff/law enforcement contract (detail_category law enforcement contract). The page doesn't say who the contractor is."},
+    {"severity": "warning", "path": "detail[18].detail_category", "page": 15,
+     "extracted": "salaries and wages", "on_page": "Salaries and benefits 31,295 (and the Police, Fire, Park, Pool, Library and Community Building columns)",
+     "issue": "Combined salaries-and-benefits lines are put entirely under salaries and wages. This is a judgment call, and each line already carries a review note."}
+  ]
+}
