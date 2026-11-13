@@ -1,0 +1,33 @@
+{
+  "stem": "Sarpy_County_FY2022",
+  "values_checked": 349,
+  "issues": [
+    {"severity": "warning", "path": "detail[3].category", "page": 8,
+     "extracted": "other (Other / Miscellaneous Receipts)", "on_page": "Local 26,154,933",
+     "issue": "Same label/money is categorized differently in one report: the governmental funds statement (p4) prints General Fund 'Local' 26,182,458 under the Intergovernmental heading and receipts[3] records it as intergovernmental/state aid, but the budget-schedule 'Local' lines are in other. 'Local' is a context label (category_decision cites the label file). Also applies to detail[72] (Special Roads Local 5,358,018, p10) and detail[91] (nonmajor Local 3,608,562, p12)."},
+    {"severity": "warning", "path": "detail[85].category", "page": 11,
+     "extracted": "other", "on_page": "Equipment and office rental 91,967",
+     "issue": "ARPA object lines use inconsistent function categories: Supplies and materials -> 'Supplies and Materials', Operating expenses -> 'Operating', but Equipment and office rental -> 'other' (the business-type rental line uses 'Rent/Leases'). Category 'other' where a specific one fits."},
+    {"severity": "warning", "path": "detail[83].category", "page": 11,
+     "extracted": "Operating", "on_page": "Operating expenses 200,000",
+     "issue": "ARPA operating expenses 200,000 equal the ARPA column's 'Public welfare and social services' 200,000 on the governmental funds statement (p4); the function could be health/welfare."},
+    {"severity": "warning", "path": "detail[74].detail_category", "page": 10,
+     "extracted": "Other / Miscellaneous Expenses", "on_page": "Operating expenses 2,265,850",
+     "issue": "Same label 'Operating expenses' gets detail_category 'not itemized' in the ARPA schedule (detail[83]) but 'Other / Miscellaneous Expenses' here. Inconsistent."},
+    {"severity": "warning", "path": "detail[109].category", "page": 12,
+     "extracted": "other", "on_page": "Keno 228,604",
+     "issue": "Keno fund spending is in 'other'. The function isn't printed, but keno proceeds usually fund Community Betterment. This is a judgment call."},
+    {"severity": "warning", "path": "detail[111].category", "page": 12,
+     "extracted": "other", "on_page": "Sinking Fund 9,960,046",
+     "issue": "A large line (half of nonmajor spending) is in 'other'. The sinking fund's purpose isn't printed. It could be capital outlay or debt service, so it needs review."},
+    {"severity": "warning", "path": "balance_sheet.assets[21].original_label", "page": 1,
+     "extracted": "Capital Assets - Depreciable - Net of Depreciation", "on_page": "Capital assets: Depreciable assets 233,717,959",
+     "issue": "The printed line is GROSS depreciable assets. Accumulated depreciation is printed and recorded separately (assets[23] -98,923,061), so the 'Net of Depreciation' label is wrong for this amount. Same for assets[22] (business-type 48,252,125). Land and Work in Progress were not renamed to 'Capital Assets - Non-Depreciable'."},
+    {"severity": "warning", "path": "ending_cash", "page": 3,
+     "extracted": 159871550, "on_page": "Cash and investments 159,871,550 (Total Governmental Funds)",
+     "issue": "ending_cash is the combined printed 'Cash and investments' line, which includes restricted cash held in escrow (GW restricted cash 104,622,215). It is not cash alone, and ending_investments is null."},
+    {"severity": "warning", "path": "detail[56].category", "page": 9,
+     "extracted": "debt service (principal and interest combined)", "on_page": "Radio Coverage Bonds 924,897 (under Public Safety)",
+     "issue": "Printed under the Public Safety heading and recorded as debt service. This is defensible because the label says bonds, but it is a judgment call."}
+  ]
+}
