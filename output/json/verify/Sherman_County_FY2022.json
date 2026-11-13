@@ -1,0 +1,26 @@
+{
+  "stem": "Sherman_County_FY2022",
+  "values_checked": 303,
+  "issues": [
+    {"severity": "warning", "path": "receipts[4].category", "page": 3,
+     "extracted": "licenses and permits", "on_page": "Local Fees, Licenses, Commissions, and Miscellaneous 646,490 (p5); Statement of Activities (pp2-3) shows 453,499 of it as Charges for Services and 192,991 as general receipts",
+     "issue": "category comes from the user's label decision (category_decisions.csv), but the report's own Statement of Activities puts about 70% of this line in Charges for Services. charges for services/fees may fit better; the line is a mixed label and is already marked for review"},
+    {"severity": "warning", "path": "detail[3].category", "page": 2,
+     "extracted": "other", "on_page": "General Fund 'Local' 400,943 (p8); Statement of Activities General Fund departments' Charges for Services = Clerk 29,907 + Treasurer 133,390 + Election Commissioner 12,611 + Sheriff 175,940 + County Attorney 13,979 = 365,827",
+     "issue": "'Local' was left in other under the label decision, but the Statement of Activities shows that at least 91% of it is charges for services. The same applies to Register of Deeds 2,690, Planning and Zoning 1,535, STOP 680 and Drug Testing 250 (charges equal Local), and to most of Road 'Local' 87,259 (charges 72,407). This is a context label, so it is left for the context check"},
+    {"severity": "warning", "path": "detail[98].original_label", "page": 16,
+     "extracted": "Capital Outlay: Streets/Highways (also detail[101] Special Road Fund and detail[112] Capital Outlay: Culture/Recreation for Public Libraries Fund)",
+     "on_page": "Capital Outlay",
+     "issue": "the function was inferred from the fund name ('function from fund ...'), not printed. Other capital outlay lines in the same report (detail[108] Noxious Weed 865, detail[118] STOP 1,638, detail[132] Capital Project 11,648) were left as plain 'Capital Outlay'. Under the 2026-11-12 ruling for FY2022/23 (function only when printed), these lines are handled inconsistently"},
+    {"severity": "warning", "path": "detail[115].category", "page": 17,
+     "extracted": "Operating", "on_page": "Environmental Tust - Bowman: Operating Disbursements 0 (budget 300,000)",
+     "issue": "the actual amount is zero. Bowman (Bowman Lake) is under Culture and Recreation in the General Fund, so culture/recreation could apply. detail[128] Debt Service Fund Operating Disbursements 0 is also category Operating"},
+    {"severity": "warning", "path": "detail_totals", "page": 15,
+     "extracted": "no Schedule 2 grand totals", "on_page": "Schedule 2 Total Receipts 3,440,756 (p15); Total Disbursements 3,192,317 (p18); Total Bowman Park disbursements 0 (p18); Schedule 3 Total Disbursements and Transfers 0 (p19)",
+     "issue": "these printed totals are not in detail_totals. The detail lines do add up to them exactly (checked), so no amounts are wrong"},
+    {"severity": "warning", "path": "balance_sheet.equity", "page": 6,
+     "extracted": "Committed 776; Assigned 3,592,113; Unassigned 743,644 (Total column, p7)",
+     "on_page": "p6 fund columns print Road 479,466 and Inheritance Tax 2,454,576 on the 'Committed' row and General Fund 743,644 on the 'Assigned' row",
+     "issue": "the fund columns on p6 appear shifted by one row from the Total column on p7. The Total column was used, and its figures tie: 3,592,113 = 479,466 + 2,454,576 + 658,071. This printing inconsistency is noted but not in report_discrepancies"}
+  ]
+}
