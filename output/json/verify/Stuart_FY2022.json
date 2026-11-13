@@ -1,0 +1,86 @@
+{
+  "stem": "Stuart_FY2022",
+  "values_checked": 242,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "receipts[20].category",
+      "page": 15,
+      "extracted": "other",
+      "on_page": "Lot sales 1,200 (General Fund, Miscellaneous)",
+      "issue": "[fixed: Sale of Property] A sale of lots is a specific category, not other: Sale of Property (or Cemetery Fees if they are cemetery lots). The audit rules don't allow other when a specific category fits. Same fix needed at detail[19]."
+    },
+    {
+      "severity": "error",
+      "path": "detail[19].category",
+      "page": 15,
+      "extracted": "other / miscellaneous revenue",
+      "on_page": "Lot sales 1,200",
+      "issue": "[fixed: Sale of Property] Same as receipts[20]: should be Sale of Property (detail_category Sale of Property), or Cemetery Fees if the lots are cemetery lots."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[112].category",
+      "page": 22,
+      "extracted": "Repairs and Maintenance / detail_category Fuel / Vehicle",
+      "on_page": "Vehicle expense 26,459 (Electric)",
+      "issue": "The category (Repairs and Maintenance) doesn't match the detail_category (Fuel / Vehicle). Vehicle expense could be either one."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[113].category",
+      "page": 22,
+      "extracted": "Repairs and Maintenance / detail_category Fuel / Vehicle",
+      "on_page": "Vehicle expense 7,402 (Garbage)",
+      "issue": "The category (Repairs and Maintenance) doesn't match the detail_category (Fuel / Vehicle)."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[74].detail_category",
+      "page": 21,
+      "extracted": "Loan Collections",
+      "on_page": "Economic reuse - loan payments 2,117",
+      "issue": "Every other loan-repayment line uses detail_category Loan Repayments; this one uses Loan Collections. The names should be consistent."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[40].category",
+      "page": 17,
+      "extracted": "streets/highways",
+      "on_page": "Mosquito control 1,654 (under Highway and Streets)",
+      "issue": "Mosquito control is usually health/welfare. It is printed under Highway and Streets, and the statement counts it there, so the current category is defensible."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[6].detail_category",
+      "page": 16,
+      "extracted": "grants/payments to other entities",
+      "on_page": "Business development loans 55,000; Loans 33,500 (p20); Loans 130,000 (p21)",
+      "issue": "These are loans the village made, not grants. No loan category exists in the detail list, so this is a judgment call. The same applies to detail[66] and detail[79]."
+    },
+    {
+      "severity": "warning",
+      "path": "proprietary",
+      "page": 11,
+      "extracted": null,
+      "on_page": "Statement of Cash Flows - Modified Cash Basis: operating 190,021; noncapital financing (10,402); capital and related financing (216,452); investing 71,923; beginning cash 353,128; ending cash 388,218",
+      "issue": "The schema says proprietary cash flows are for GAAP reports, and this report is cash basis. The cash flow statement is printed on pp11-12 (and in accrual form on pp24-25) but is not recorded."
+    },
+    {
+      "severity": "warning",
+      "path": "missing",
+      "page": 13,
+      "extracted": null,
+      "on_page": "Combined Budget and Actual schedule (pp13-14): Airport 11,472; Nursing Home Bonds 17,886; NH bond transfers 45,000; Utilities support 16,970",
+      "issue": "The extractor left out the combined budget-to-actual schedule on purpose (budget basis). Most of its lines duplicate the fund schedules, but Airport and Nursing Home Bonds spending and NH bond transfers appear on no statement. Governmental budget-basis spending 811,560 is 29,358 more than the statement's 775,634 + 6,568 = 782,202; the gap equals Airport 11,472 + Nursing Home Bonds 17,886. A person should decide whether to record them."
+    },
+    {
+      "severity": "warning",
+      "path": "ending_cash",
+      "page": 3,
+      "extracted": 468250,
+      "on_page": "Cash 459,951 + Cash held by county treasurer 8,299 (Total Governmental Funds)",
+      "issue": "The sum is correct and marked computed, but it is a sum rather than one printed figure. It also equals ending fund balance because liabilities net to zero. beginning_cash is null because no prior-year cash is printed."
+    }
+  ]
+}
