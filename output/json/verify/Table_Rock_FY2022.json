@@ -1,0 +1,18 @@
+{
+  "stem": "Table_Rock_FY2022",
+  "values_checked": 61,
+  "issues": [
+    {"severity": "warning", "path": "ending_cash", "page": 1,
+     "extracted": 307565.81, "on_page": "line 24/28 governmental 307,565.81 = Net Cash Balance 222,514.57 + Investments 85,051.24",
+     "issue": "beginning_cash (219,311.68) and ending_cash (307,565.81) are the line 3 / line 24 subtotals that already include investments 85,051.24, while beginning_investments / ending_investments also carry 85,051.24; anyone adding cash + investments double counts. Consistent with FY2023/FY2024 but Table_Rock_FY2025 leaves investments null. Amounts are correct."},
+    {"severity": "warning", "path": "balance_sheet.equity[0].category", "page": 1,
+     "extracted": "Subtotal of Ending Balances", "on_page": "line 28 Subtotal of Ending Balances (Line 26 + 27)",
+     "issue": "Equity lines are the line 28 subtotal of the asset lines (cash + investments), entered as items with a non-standard category equal to the label; no fund balance / net position is printed. Amounts are correct (gov 307,565.81; business-type 190,061.52 on equity[1]); same treatment as FY2023."},
+    {"severity": "warning", "path": "detail[13].category", "page": 2,
+     "extracted": "general government", "on_page": "Fire Fund 4,145.26 on line 29 General Government",
+     "issue": "Fire Fund spending printed on the General Government line is kept general government (as printed; same in disbursements[0]), while Water/Sewer spending on the same line was assigned utilities by fund. Inconsistent; could be public safety. Judgment call."},
+    {"severity": "warning", "path": "detail[12].original_label", "page": 2,
+     "extracted": "Capital Outlay: Streets/Highways", "on_page": "Capital Improvements (Street Fund column) 31,559.81",
+     "issue": "Function taken from the fund name, not printed (marked computed). The 2026-11-12 FY2022 ruling says capital outlay function only when printed; the same applies to detail[19] / disbursements[3] 'Capital Outlay: Utilities' (Sewer Fund 4,735.72)."}
+  ]
+}
