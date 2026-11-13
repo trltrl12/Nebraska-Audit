@@ -1,0 +1,18 @@
+{
+  "stem": "Saronville_FY2022",
+  "values_checked": 37,
+  "issues": [
+    {"severity": "warning", "path": "disbursements[5].fund_type", "page": 2,
+     "extracted": "governmental", "on_page": "Line 44 Electric Utility 2,576.19 under 'Business-Type Activities', General Fund column",
+     "issue": "The form prints this row under Business-Type Activities, but the amount is in the General Fund column and the village has no utility fund. Keeping it governmental is defensible (fund-column split), but whether it is utility spending or the village's own electric bill can't be settled from the page. Same for detail[13]. Not listed in decision_needed."},
+    {"severity": "warning", "path": "balance_sheet.total_assets", "page": 1,
+     "extracted": 0, "on_page": "Line 28 Subtotal of Ending Balances printed '-'; no total-assets line printed",
+     "issue": "total_assets 0 comes from a dash on the ending-balance subtotal line, not from a printed total-assets figure. Assets (line 26 Net Cash Balance) are blank, while the Ending Balance of 39,928.03 is recorded as equity, so the balance sheet doesn't balance (also in report_discrepancies)."},
+    {"severity": "warning", "path": "ending_cash", "page": 1,
+     "extracted": 39928.03, "on_page": "Line 24 Ending Balance 39,928.03; line 26 Net Cash Balance blank",
+     "issue": "Ending cash is taken from line 24 Ending Balance because line 26 Net Cash Balance is left blank. This is reasonable for a cash-basis statement, but the cash line itself isn't printed. The County Treasurer balance of 2,332.70 is excluded, which matches the form."},
+    {"severity": "warning", "path": "balance_sheet.equity[0].category", "page": 1,
+     "extracted": null, "on_page": "Ending Balance 39,928.03",
+     "issue": "The equity line has no category field."}
+  ]
+}
