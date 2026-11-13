@@ -1,0 +1,102 @@
+{
+  "stem": "Sutherland_FY2022",
+  "values_checked": 229,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "report_discrepancies",
+      "page": 12,
+      "extracted": "no entry for the General Fund departments nonoperating rows",
+      "on_page": "Interest income cells 3,643 + 73 + 1,128 + 112 + 486 = 5,442 vs printed Total 5,441; General column Sale of assets 4,879 + Interest 3,643 = 8,522 vs printed total nonoperating 8,521; Pool net gain (245,411) + 112 = (245,299) vs printed (245,300)",
+      "issue": "[fixed: added to report_discrepancies] The page does not add up here and report_discrepancies does not record it (detail[26..30] interest lines sum to 5,442, while the General Fund statement on p5 prints 5,441). Re-read visually: the cells look like 3,643 and 112. Both totals point to General 3,642 (or Pool 111), but this report has 1-dollar rounding throughout, so it is most likely report rounding. Add a report_discrepancies entry."
+    },
+    {
+      "severity": "error",
+      "path": "report_discrepancies",
+      "page": 12,
+      "extracted": "no entry for the General Fund departments transfer rows",
+      "on_page": "Transfers in 1,792,367 + 1,322 + 16,000 = 1,809,689 vs printed Total 1,809,688; Transfers out (602,212) + (201,322) + (16,000) = (819,534) vs printed (819,533)",
+      "issue": "[fixed: added to report_discrepancies] The gross transfer rows are each 1 off their cells. The net still ties (990,155, matching detail_totals), and the General column 1,792,367 - 602,212 = 1,190,155 ties as printed. Not recorded in report_discrepancies. The digits look as extracted."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[0].amount",
+      "page": 11,
+      "extracted": 291346,
+      "on_page": 291346,
+      "issue": "Re-read as asked: the General / Property taxes cell reads 291,346 at the available resolution, with no visible sign of a 5. Row total 413,362 and General column total 562,753 both point to 291,345. The same page has many other 1-dollar row/column mismatches (Personnel, Contract services, Taxes - payroll, Supplies, Miscellaneous rows; General, Pool and Park columns), so report rounding is the likely cause. Keep 291,346 as printed. It is already in report_discrepancies; the digit cannot be confirmed further from the scan."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[59].original_label",
+      "page": 12,
+      "extracted": "Capital Outlay",
+      "on_page": "Capital outlay (Recycling column) 15,863",
+      "issue": "The other department capital outlay lines are labelled 'Capital Outlay: <function>' with computed. The Recycling line (category general government elsewhere) has no function and no computed. Under the capital outlay rule it would be 'Capital Outlay: General Government'."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[118].detail_category",
+      "page": 10,
+      "extracted": "keno/lottery",
+      "on_page": "Keno 912 (expenditure)",
+      "issue": "keno/lottery is a revenue detail category. For a spending line with no object breakdown on this schedule it should be 'not itemized'; p4 shows the Keno fund spending is Contract services 800, Meetings 100 and Office 12. Category 'other' is a last-resort judgment and keeps its review note."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[45].detail_category",
+      "page": 11,
+      "extracted": "tax refunds/treasurer fees",
+      "on_page": "Taxes - sales 9,594",
+      "issue": "This is sales tax paid by the village, not a tax refund or treasurer fee. 'Other Taxes Paid' (the name used for utility cost types) may fit better."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[9].category",
+      "page": 11,
+      "extracted": "charges for services/fees",
+      "on_page": "Recycling - Rental and fees 6,422",
+      "issue": "detail_category is refuse/sanitation charges, but under the 2026-10-28 rule garbage/refuse charges take receipt category 'Utility Charges'. The label also mixes rental and fees, so this is a judgment call."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[5].category",
+      "page": 11,
+      "extracted": "Rentals",
+      "on_page": "General - Rental and fees 17,323",
+      "issue": "Mixed label with no printed breakdown, so the split between rentals and fees is unknown. Kept with one category (allowed by the 2026-11-06 ruling) and already marked for review."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[0..16].category",
+      "page": 4,
+      "extracted": "general government",
+      "on_page": "Total column by object; includes Street fund 137,991 and General Fund Fire/Ambulance/Animal Control/Pool/Park/Library spending",
+      "issue": "The statement lists spending by object only, so every Total-column line is general government ('listed by object' review). This puts Street fund spending (streets/highways) and public safety / culture and recreation spending under general government. It follows the stated rule, but the function totals are misstated."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[21].category",
+      "page": 7,
+      "extracted": "Professional/Contract Services",
+      "on_page": "Bank charges 27 (Water)",
+      "issue": "The governmental detail uses 'Bank Service Charges' for the same label (detail[33]), so the same label has two categories in one report."
+    },
+    {
+      "severity": "warning",
+      "path": "proprietary",
+      "page": 8,
+      "extracted": null,
+      "on_page": "Proprietary Statement of Cash Flows pp8-9 (operating 762,636; capital and related financing (159,850); investing 4,242; noncapital financing (1,009,711); cash beginning 3,386,723, end 2,984,042)",
+      "issue": "The proprietary cash flows are printed but not recorded. Defensible because the schema fills proprietary only for GAAP and this report is modified cash basis (same choice as later years), but the data exists in the report."
+    },
+    {
+      "severity": "warning",
+      "path": "ending_cash",
+      "page": 3,
+      "extracted": 37624,
+      "on_page": "Cash and cash equivalents (272,197) + Cash with County Treasurer 10,724 + Restricted cash 299,097 (no total cash line printed)",
+      "issue": "The arithmetic is right and marked computed. However, it is a sum the extractor built (including restricted cash) rather than a printed figure, and the 2026-11-06 ruling says cash is filled only where printed."
+    }
+  ]
+}
