@@ -1,0 +1,14 @@
+{
+  "stem": "St_Paul_FY2022",
+  "values_checked": 178,
+  "issues": [
+    {"severity": "warning", "path": "receipts[0].category", "page": 5,
+     "extracted": "taxes (Property Tax and Motor Vehicle Taxes 962,179, kept as one row)",
+     "on_page": "Property and motor vehicle 962,179 = General 658,543 + Street 128,994 + Debt Service 174,642 (p5); p14 prints the General Fund money as 'Property' 658,543, p18 prints Debt Service 'Property taxes' 174,642; only Street 128,994 is printed as property and motor vehicle on its schedule (p17)",
+     "issue": "Kept whole as the combined row, as the 2026-11-06 ruling says. The fund schedules do print 833,185 as plain property tax, but p5 labels the same General Fund money 'Property and motor vehicle', so the pages contradict each other. Because of that, the detail lines (detail[0], [14], [25], [40], [56], [64], [71] 'Property', category property tax) and the statement line are categorized differently. Defensible either way; a person should confirm."},
+    {"severity": "warning", "path": "detail[44].category", "page": 15,
+     "extracted": "health/welfare (Cemetery Personnel services 20,864; same for detail[45] 4,917, detail[46] 3,900, detail[47] Capital Outlay: Health/Welfare 20,308)",
+     "on_page": "General Fund budget schedule lists Cemetery under 'Public works' (p15); the statement's Public works 386,108 includes General Fund cemetery 29,681 (p5)",
+     "issue": "The report treats cemetery as public works, and disbursements[2] puts the same money in streets/highways. The detail uses health/welfare, which matches the extractor list (cemetery -> health/welfare). This inconsistency is defensible."}
+  ]
+}
