@@ -1,0 +1,54 @@
+{
+  "stem": "Springfield_FY2022",
+  "values_checked": 152,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "report_discrepancies",
+      "page": 10,
+      "extracted": "no entry for the p10 Water expenditures total",
+      "on_page": "Water Actual (Budgetary Basis): Operating 335,731 + Capital improvements 214,019 = 549,750 vs printed Total expenditures 549,749 (Total column likewise 564,766 + 214,019 + 48,370 = 827,155 vs printed 827,154)",
+      "issue": "[fixed: added to report_discrepancies] The page doesn't add up by 1, and report_discrepancies doesn't record it. The detail line amounts and detail_totals[5] are correct as printed."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[4].category",
+      "page": 8,
+      "extracted": "general government",
+      "on_page": "Public buildings 19,223 (p4; Auditorium column on p11)",
+      "issue": "The p8 General Fund budget schedule counts Public buildings inside Culture and recreation (397,113 = 377,889 + 19,223 + 1 rounding), and p11 shows it in the Auditorium fund. Culture/recreation fits better than general government."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[11].category",
+      "page": 2,
+      "extracted": "licenses and permits",
+      "on_page": "Licenses, fees and permits 953,816 (p4); 'Permits and fees' 947,016 + 6,800 on p11; included in Statement of Activities 'Franchise tax and fees' 979,107 (= 25,291 + 953,816)",
+      "issue": "This mixed-label line is large (budget 63,840, actual 953,816). The Statement of Activities groups it with franchise fees, so the category is a judgment call. Same for detail[8]."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[12].section",
+      "page": 8,
+      "extracted": "other financing (no category)",
+      "on_page": "Bond proceeds 1,298,620 printed among RECEIPTS on the p8 budget schedule",
+      "issue": "This is inconsistent within the same schedule. Bond proceeds is entered as other financing with no category, but 'Grants and donations' 180,938 (detail[13]), which sits in the same RECEIPTS block, is entered as revenue. At the top level both are entered as other financing, as p4 prints them. One treatment should apply to both p8 lines."
+    },
+    {
+      "severity": "warning",
+      "path": "detail",
+      "page": 11,
+      "extracted": "p11 combining schedule of General sub-funds not entered",
+      "on_page": "General, Sales Tax, Library, Auditorium, Park, Streets, Keno Community Betterment columns (Total 4,771,621 receipts / 3,613,811 disbursements)",
+      "issue": "Leaving p11 out to avoid double counting is defensible because p8 covers the same General Fund money. But p11 is the per-fund breakdown, with labels such as 'Public safety - police contract' and Sales Tax fund general government 49,192, and the per-fund detail rule might prefer it. Choosing a schedule is a judgment call."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[5]",
+      "page": 4,
+      "extracted": 11745,
+      "on_page": "Intergovernmental - state 290,496 (Total); Library 927 (p11), Bond 10,818 (p4; 'Intergovernmental - other' on p9)",
+      "issue": "The remainder is exact: 290,496 - 55,877 - 32,018 - 1,936 - 188,920 = 11,745 = 927 + 10,818. But the General-fund breakdown comes from two schedules: p8 leaves the Library 927 out of Intergovernmental and adds it to Other miscellaneous (85,613 vs 84,686 on p4). The arithmetic and markings are correct; this is noted for transparency."
+    }
+  ]
+}
