@@ -1,0 +1,15 @@
+{
+  "stem": "Riverton_FY2022",
+  "values_checked": 63,
+  "issues": [
+    {"severity": "warning", "path": "disbursements[2].fund_type", "page": 3,
+     "extracted": "business-type", "on_page": "Line 39 Debt Service 5,376.00 (Sewer Fund column, printed under the 'Governmental:' heading)",
+     "issue": "Recorded as business-type because the column is the Sewer Fund. This is defensible and matches FY2023/FY2024, but the form prints it on a governmental row. The same applies to detail[17]."},
+    {"severity": "warning", "path": "receipts[8].category", "page": 1,
+     "extracted": "other", "on_page": "Local Receipts: Other (Water 11,459.35 + Sewer 15,652.31)",
+     "issue": "This is the only receipt line for the Water and Sewer funds, so 100% of business-type receipts are in 'other'. It is almost certainly utility charges, but nothing printed shows that, so per the 2026-11-12 ruling it stays as other. It is already marked review. The same applies to detail[13] and detail[15]."},
+    {"severity": "warning", "path": "balance_sheet.equity[0].category", "page": 1,
+     "extracted": null, "on_page": "Ending Balance (Line 22 MINUS Line 23)",
+     "issue": "Both equity lines have no category field. The amounts are correct (32,591.86 and 46,175.82; their sum equals the printed 78,767.68)."}
+  ]
+}
