@@ -1,0 +1,38 @@
+{
+  "stem": "Ruskin_FY2022",
+  "values_checked": 67,
+  "issues": [
+    {
+      "severity": "warning",
+      "path": "receipts[9].category",
+      "page": 1,
+      "extracted": "other",
+      "on_page": "Local Receipts: Other 57,115.51 (Utilities Fund column)",
+      "issue": "This is the Utilities Fund's only receipt, so it is very likely water/sewer charges. It stays in other because the page prints no breakdown. The business-type fund type is 100% other and is marked review. Same item in detail[19]."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[3].original_label",
+      "page": 2,
+      "extracted": "Capital Outlay (General 62,900.00 + Street 27,587.67 = 90,487.67)",
+      "on_page": "Capital Improvements: General 62,900.00, Street 27,587.67",
+      "issue": "The statement-level line adds a General Fund cell (no function) to a Street Fund cell under one plain 'Capital Outlay' label, but the detail labels the Street piece 'Capital Outlay: Streets/Highways'. The sum is correct and marked computed. The functions 'Streets/Highways' and 'Utilities' (detail[17], detail[20], detail[21], disbursements[5], disbursements[6]) come from fund names, not a printed function, which is questionable under the FY2022 rule 'function only when printed'."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[5].fund_type",
+      "page": 2,
+      "extracted": "business-type",
+      "on_page": "Utilities Fund column, Capital Improvements 58,418.65 / Other Capital Outlay 7,354.88 / Debt Service 29,492.65 printed under the 'Governmental' heading",
+      "issue": "Business-type is assigned by fund column against the printed heading. This is defensible: the debt schedule on p3 shows USDA Water / NDEQ Sewer loans. The same applies to disbursements[6] and disbursements[7]."
+    },
+    {
+      "severity": "warning",
+      "path": "balance_sheet.equity[0].category",
+      "page": 1,
+      "extracted": null,
+      "on_page": "Ending Balance (line 24)",
+      "issue": "Equity lines have no category field; the asset lines do have one. The same applies to balance_sheet.equity[1]."
+    }
+  ]
+}
