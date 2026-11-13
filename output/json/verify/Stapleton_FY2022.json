@@ -1,0 +1,15 @@
+{
+  "stem": "Stapleton_FY2022",
+  "values_checked": 70,
+  "issues": [
+    {"severity": "warning", "path": "receipts[10].category", "page": 1,
+     "extracted": "other", "on_page": "Local Receipts: Other 30,774.95 / 55,011.35 / 153,015.96 (Sewer / Water / Solid Waste)",
+     "issue": "The only local receipts of the Sewer, Water and Solid Waste funds are almost certainly user charges (Utility Charges), but the page doesn't say so. Keeping 'other' fits the context-label rule. The same applies to the matching detail lines detail[15], detail[17] and detail[20]. Business-type 'other' is 47% of that fund type's receipts."},
+    {"severity": "warning", "path": "disbursements[4].fund_type", "page": 2,
+     "extracted": "business-type", "on_page": "Line 36 Other Capital Outlay (under the 'Governmental:' heading), Solid Waste column 260,514.00",
+     "issue": "The row sits under the Governmental heading but is printed in the Solid Waste fund column. It was tagged business-type by its column, which is defensible. The function 'Utilities' comes from the fund column (marked computed)."},
+    {"severity": "warning", "path": "beginning_cash", "page": 1,
+     "extracted": 198418.34, "on_page": "Line 3 Subtotal of Beginning Balance (cash 191,004.31 + investments 7,414.03)",
+     "issue": "beginning_cash and ending_cash are the line 3 and line 24 subtotals, which include investments (7,414.03 and 7,494.69). beginning_investments and ending_investments repeat those same amounts as information only. This matches Stapleton_FY2023, but any downstream sum of cash plus investments would count the investments twice."}
+  ]
+}
