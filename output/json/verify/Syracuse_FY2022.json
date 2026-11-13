@@ -1,0 +1,70 @@
+{
+  "stem": "Syracuse_FY2022",
+  "values_checked": 110,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "detail[8].category",
+      "page": 8,
+      "extracted": "other (detail_category Grants)",
+      "on_page": "Grants and contributions 456,835",
+      "issue": "[fixed: donations/contributions] User ruling 2026-11-12 (FY2022/FY2023): mixed grant/donation labels are donations/contributions; only grant lines with no grantor printed go to other/Grants. The p8 label is 'Grants and contributions', so it should be donations/contributions (the p4 'Grants' receipt line as other/Grants is correct). Note the Statement of Activities (p2) shows this amount as capital grants for general government"
+    },
+    {
+      "severity": "warning",
+      "path": "decision_needed",
+      "page": 8,
+      "extracted": null,
+      "on_page": "Combined Utilities Fund Debt service (3,007,457)",
+      "issue": "The budgetary schedule prints utility debt service as a negative 3,007,457, apparently netted against loan proceeds of 2,945,330 (p7 cash flows). The line is kept as printed with a review note, but decision_needed[] is missing, so this does not reach the user's Needs Decision list"
+    },
+    {
+      "severity": "warning",
+      "path": "detail[30].original_label",
+      "page": 8,
+      "extracted": "Capital Outlay: Utilities",
+      "on_page": "Capital outlay 3,051,197",
+      "issue": "The function comes only from the fund column, not from a printed function; the 2026-11-12 ruling says function only when printed. It is also inconsistent with General Fund capital outlay (detail[24], disbursements[7]), which keeps 'Capital outlay'"
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[6].category",
+      "page": 4,
+      "extracted": "other (detail_category keno/lottery)",
+      "on_page": "Keno 357",
+      "issue": "Keno spending is in other; the Statement of Activities (p2) prints Keno as its own function. A specific spending category (e.g. Community Betterment or a Keno function) may fit; same for detail[22]"
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[11].category",
+      "page": 6,
+      "extracted": "Repairs and Maintenance",
+      "on_page": "Operation and Maintenance 508,103",
+      "issue": "'Operation and Maintenance' is broader than repairs (cost-type judgment call)"
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[15].category",
+      "page": 6,
+      "extracted": "utilities",
+      "on_page": "Administrative Costs 20,282",
+      "issue": "Utility cost-type rule: an administrative cost line might take a cost-type or administration category rather than the function 'utilities'"
+    },
+    {
+      "severity": "warning",
+      "path": "ending_cash",
+      "page": 3,
+      "extracted": -538714,
+      "on_page": "Cash in Bank (553,719); Cash at County Treasurer 15,005",
+      "issue": "Computed sum of two printed cash lines (the arithmetic is right and it is marked computed). The 2026-11-06 ruling says cash is never derived; confirm that summing printed cash lines is acceptable"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[13].category",
+      "page": 4,
+      "extracted": "other (Rental Deposits (refundable))",
+      "on_page": "Tennants Deposits 9,875",
+      "issue": "Context label (Deposits); the Statement of Activities p2 includes it in Miscellaneous 53,772 (43,897 + 9,875). Leave it for the context check; same for detail[14]"
+    }
+  ]
+}
