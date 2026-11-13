@@ -1,0 +1,15 @@
+{
+  "stem": "Stockham_FY2022",
+  "values_checked": 22,
+  "issues": [
+    {"severity": "warning", "path": "beginning_cash.amount", "page": 1,
+     "extracted": 9824.04, "on_page": "Line 1 Net Cash Balance 6,324.04; line 3 Subtotal of Beginning Balance 9,824.04 (incl. Investments 3,500.00)",
+     "issue": "beginning_cash is the printed line-3 subtotal, which includes the 3,500.00 certificate of deposit also stored in beginning_investments; the printed Net Cash Balance is 6,324.04. Defensible because it makes the roll-forward work and matches FY2023-FY2025, but cash and investments are counted together here."},
+    {"severity": "warning", "path": "ending_cash.amount", "page": 1,
+     "extracted": 8129.33, "on_page": "Line 26 Net Cash Balance 4,629.33; line 28 Subtotal of Ending Balances 8,129.33 (incl. Investments 3,500.00)",
+     "issue": "Same as beginning_cash: ending_cash is the line 24/28 total including the 3,500.00 CD (also in ending_investments), while balance_sheet cash is 4,629.33."},
+    {"severity": "warning", "path": "balance_sheet.equity[0]", "page": 1,
+     "extracted": "Subtotal of Ending Balances 8,129.33 (category 'Subtotal of Ending Balances')", "on_page": "Line 28 Subtotal of Ending Balances (Line 26 + 27) 8,129.33",
+     "issue": "The equity line is the asset subtotal (cash + investments), entered again as equity so the balance check works. The category is just the label. Line 24 'Ending Balance' (8,129.33) would be the closer equity row. This is the same convention as FY2023-FY2025, so it is a warning only."}
+  ]
+}
