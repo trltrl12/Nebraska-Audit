@@ -1,0 +1,21 @@
+{
+  "stem": "Rushville_FY2022",
+  "values_checked": 181,
+  "issues": [
+    {"severity": "warning", "path": "ending_cash", "page": 4,
+     "extracted": 671570, "on_page": "no single governmental cash total printed; lines 271,791 + 235,898 + 5,340 + 158,541 summed, restricted cash 74,252 and restricted CDs 596,708 excluded",
+     "issue": "Value is derived (marked computed, arithmetic correct), but the 2026-11-06 ruling says cash is filled only where printed and never derived. Excluding the restricted cash and including unrestricted CDs are also the extractor's own choices. beginning_cash is null, so the cash measure has no roll-forward."},
+    {"severity": "warning", "path": "ending_investments", "page": 4,
+     "extracted": 158541, "on_page": "Certificates of deposit 158,541",
+     "issue": "The same 158,541 is also counted inside ending_cash, so the two fields overlap."},
+    {"severity": "warning", "path": "detail[24].category", "page": 11,
+     "extracted": "keno/lottery", "on_page": "Keno Special Revenue Fund: Miscellaneous 3,639",
+     "issue": "The category comes from the fund name, not the printed label. The fund-name rule covers a fund's tax receipts only, and miscellaneous receipts are not assumed to be the fund's type. Keno proceeds are likely, but the page does not say so."},
+    {"severity": "warning", "path": "disbursements[9-16].function", "page": 7,
+     "extracted": "utilities", "on_page": "Total Proprietary Funds column includes Golf Fund 148,844 (personal services 45,905, utilities 11,982, insurance 5,262, repairs 13,660, other services 64,778, depreciation 7,257)",
+     "issue": "The combined business-type cost-type lines all carry function 'utilities', but about a third of the money is Golf Fund (the detail lines give Golf function culture/recreation). Also, the 'Utilities' cost-type line has category 'utilities', which looks the same as the utilities function. A distinct category such as 'Utilities (power, gas, phone)' may be clearer."},
+    {"severity": "warning", "path": "receipts[7].amount", "page": 5,
+     "extracted": 149119, "on_page": "Miscellaneous 149,119 (General 85,146 + Permanent Trust 41,771 + Other Governmental 22,202)",
+     "issue": "Kept as printed in 'other', which is correct because the printed label says Miscellaneous. Note that the Other Governmental Funds 22,202 is Hospital Fund rent income 18,563 (p10) + Keno miscellaneous 3,639 (p11). It is not split, which is correct because the statement prints one line."}
+  ]
+}
