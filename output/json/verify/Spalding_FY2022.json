@@ -1,0 +1,21 @@
+{
+  "stem": "Spalding_FY2022",
+  "values_checked": 195,
+  "issues": [
+    {"severity": "warning", "path": "receipts[18].category", "page": 8,
+     "extracted": "federal grants", "on_page": "Grants 43,558 (General 38,937, Ambulance 750, Library 3,871; p7-8)",
+     "issue": "Budget schedule Federal Receipts 307,754 (p14) = General 38,937 + Library 3,871 + Electric 264,946, so the Ambulance 750 inside this Total-column line is not federal (the detail line for it is category other). The statement line as a whole is 98% federal, so the category is defensible, but 750 of it is not shown to be federal."},
+    {"severity": "warning", "path": "receipts[4].category", "page": 8,
+     "extracted": "charges for services/fees", "on_page": "Charges for Services 63,171 (Garbage 38,321, Ambulance 19,983, General 4,867; p7-8)",
+     "issue": "Mixed line: refuse charges (Garbage Fund) are 61% of it, so under the dominant-category rule it could be Utility Charges. The generic category is defensible for a mixed Total-column line, and the review note names the mix."},
+    {"severity": "warning", "path": "detail[18].category", "page": 16,
+     "extracted": "general government", "on_page": "General Fund Contracted Services 11,357 / Materials and Supplies 4,723 / Other Operating Expenses 91,687 (also detail[19], detail[21])",
+     "issue": "These General Fund object lines are categorized general government because they sit in the General Fund. However, p7 shows the General Fund's non-capital spending is mostly Culture and Recreation (73,435) rather than General Government (34,332). The rule ('listed by object' -> fund function) permits this, and review notes are present."},
+    {"severity": "warning", "path": "detail[32].original_label", "page": 16,
+     "extracted": "Capital Outlay: Streets/Highways", "on_page": "Capital Outlay 30,310 (Road Fund column)",
+     "issue": "The function was inferred from the fund name (computed: 'function from fund column Road Fund'). The 2026-11-12 FY2022 ruling says the capital outlay function is used 'only when printed', and the page prints no function. The General Fund capital outlay 26,770 was correctly left as plain 'Capital Outlay'."},
+    {"severity": "warning", "path": "balance_sheet.liabilities[1].category", "page": 1,
+     "extracted": "accrued liabilities", "on_page": "Payroll Taxes Payable 4,709",
+     "issue": "The category is right, but its capitalization differs from the standard liability category name 'Accrued Liabilities'."}
+  ]
+}
