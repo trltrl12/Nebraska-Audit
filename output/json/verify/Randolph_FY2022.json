@@ -1,0 +1,22 @@
+{
+  "stem": "Randolph_FY2022",
+  "values_checked": 338,
+  "issues": [
+    {"severity": "warning", "path": "detail[294]", "page": 11,
+     "extracted": {"original_label": "Transfers Out", "amount": 22116},
+     "on_page": "Transfers out 22,116 (added in the schedule: 50,058 + 22,116 = 72,174; statement p5 Street Fund Transfers in (out) +22,116)",
+     "issue": "the amount is correctly recorded as an inflow (+22,116), but its label is 'Transfers Out'. In the workbook this shows as a Transfers Out row with a positive amount. The printed label and the sign conflict on the page itself; consider 'Transfers In' (printed text kept in printed_label)."},
+    {"severity": "warning", "path": "detail (Cemetery and Recycling departments, p18); disbursements[2].category", "page": 18,
+     "extracted": "streets/highways",
+     "on_page": "Cemetery 23,169 + Recycling 7,501 = General Fund Public works 30,670 (p5)",
+     "issue": "the report counts Cemetery and Recycling under Public works, so streets/highways ties to the statement. By the category list, though, cemetery is normally health/welfare and recycling is utilities (refuse). This is a judgment call."},
+    {"severity": "warning", "path": "detail capital outlay lines (Police p17, Park p17, Economic Development p18, Street Fund p11, Library Board Fund p16)", "page": 17,
+     "extracted": "Capital Outlay: <function> (computed from department column or fund name)",
+     "on_page": "Capital outlay (no function printed)",
+     "issue": "the 2026-11-12 FY2022 ruling says to add a capital outlay function only when it is printed. These five lines take their function from the department or fund name and are marked computed. Flood Control, Cemetery and Recycling stay plain 'Capital Outlay', so the treatment is inconsistent within the report."},
+    {"severity": "warning", "path": "ending_cash", "page": 4,
+     "extracted": 820884,
+     "on_page": "Cash and cash equivalents (181,076) + Restricted cash and cash equivalents 997,142 + County treasurer cash 4,818; no printed total cash line",
+     "issue": "the sum is correct and marked computed. However, the total is not printed, and the 2026-11-06 ruling says cash is never derived. Someone should confirm that a sum of printed cash lines is acceptable here."}
+  ]
+}
