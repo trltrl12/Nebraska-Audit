@@ -1,0 +1,46 @@
+{
+  "stem": "Rosalie_FY2022",
+  "values_checked": 85,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "balance_sheet.assets[1].amount",
+      "page": 1,
+      "extracted": 13479.9,
+      "on_page": 13478.9,
+      "issue": "[fixed: 13,478.90] Line 26 Net Cash Balance Garbage 203.62 + Water 6,108.84 + Sewer 7,166.44 = 13,478.90, not 13,479.90 (the computed note's own addends give 13,478.90; printed Total 55,524.72 - governmental 42,045.82 = 13,478.90). As extracted, assets sum to 149,240.14 vs printed total_assets 149,239.14, so the balance check fails by 1.00."
+    },
+    {
+      "severity": "warning",
+      "path": "balance_sheet.equity",
+      "page": 1,
+      "extracted": null,
+      "on_page": "Subtotal of Ending Balances (line 28)",
+      "issue": "Both equity lines have no category field; every other balance-sheet line has one."
+    },
+    {
+      "severity": "warning",
+      "path": "business_type.beginning",
+      "page": 1,
+      "extracted": 118729.9,
+      "on_page": "line 3 Subtotal of Beginning Balance (cash 26,810.85 + investments 91,919.05)",
+      "issue": "measure is 'cash', but the beginning and ending business-type balances include investments (line 3 and line 24 subtotals). This matches the printed Exhibit A ending-balance line, but the measure label is loose."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[10].category",
+      "page": 1,
+      "extracted": "other",
+      "on_page": "Local Receipts: Other (Garbage 16,489.75; Water 49,878.88; Sewer 47,189.91)",
+      "issue": "These are the utility funds' only receipts and are almost certainly user charges, but the page prints no breakdown. Keeping 'other' follows the context-label rule; this is flagged for review only."
+    },
+    {
+      "severity": "warning",
+      "path": "missing",
+      "page": 1,
+      "extracted": null,
+      "on_page": "County Treasurer Balance at October 1, 2021 $1,637.26; at September 30, 2022 1,833.94",
+      "issue": "This memo line is printed outside the fund columns and was deliberately left out of cash. The CLAUDE.md rule maps county treasurer balances to Cash and Cash Equivalents, so whether it belongs on the balance sheet is a judgment call for the user."
+    }
+  ]
+}
