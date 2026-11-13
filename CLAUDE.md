@@ -253,7 +253,10 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
   Outlay"); printed spending function "Community development"/"Community improvement" -> economic development (as FY2024/25);
   waiver "Local Receipts: Other" stays other (as printed), also in utility columns; internal service funds are not added
   (no double counting); memo balances outside a statement's totals are not recorded; department/object lines keep the
-  function the report prints. Verification files: scratchpad only; changes logged in _meta/corrections_log.csv.
+  function the report prints. Intra-governmental transfers printed in fund columns are recorded gross even when the
+  Total Governmental column nets them (as FY2025); a one-line schedule amount is split when another statement prints its
+  exact breakdown (more detail; split_from + computed); a statement-level Total-column line stays one line.
+  Verification files: scratchpad only; changes logged in _meta/corrections_log.csv.
 
 ## Batch procedure
 1. `git pull --rebase`.
