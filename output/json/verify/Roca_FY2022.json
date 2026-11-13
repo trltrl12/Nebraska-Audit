@@ -1,0 +1,21 @@
+{
+  "stem": "Roca_FY2022",
+  "values_checked": 63,
+  "issues": [
+    {"severity": "warning", "path": "transfers_in", "page": 1,
+     "extracted": 7000.0, "on_page": "Line 19 Transfers In of Surplus Fees 7,000.00 (Street); p2 line 49 Transfers Out of Surplus Fees '-', line 50 Transfers Out Other Than Surplus Fees 7,000.00 (General)",
+     "issue": "The report's own cross-check fails: line 19 'Total Should = Pg 2, Line 49', but line 49 is blank and the 7,000 outflow is on line 50 (and line 20 is '-', not 7,000). The amounts agree and the p3 schedule confirms General -> Street 7,000. The mismatch is mentioned in notes but not in report_discrepancies."},
+    {"severity": "warning", "path": "receipts[10].category", "page": 1,
+     "extracted": "other", "on_page": "Local Receipts: Other 104,076.00 (Enterprise Funds column)",
+     "issue": "This is the Enterprise Funds' only receipt line, so it is almost certainly water/wastewater/solid-waste charges. The printed label says Other and the page has no breakdown, so 'other' is defensible. It is over 10% of business-type receipts (100%), so it should go to review."},
+    {"severity": "warning", "path": "receipts[9].category", "page": 1,
+     "extracted": "other", "on_page": "Local Receipts: Other 139,346.00 (General Fund)",
+     "issue": "32% of governmental receipts are in other. The printed label is Other and the page has no breakdown, so this is defensible, but the line is large."},
+    {"severity": "warning", "path": "balance_sheet.equity", "page": 1,
+     "extracted": "no category field", "on_page": "Subtotal of Ending Balances (Line 26 + 27) 796,088.00 / 97,311.00 / 328,562.00",
+     "issue": "The equity lines have no category key. Amounts and computed sums are correct."},
+    {"severity": "warning", "path": "decision_needed", "page": 1,
+     "extracted": null, "on_page": "County Treasurer Balance at October 1, 2021 $1,574.00; at September 30, 2022 2,067.00",
+     "issue": "County treasurer balances are printed outside the fund columns and were not recorded (as in FY2023). Whether they belong in Cash and Cash Equivalents is a question for the user, and decision_needed[] has no entry for it."}
+  ]
+}
