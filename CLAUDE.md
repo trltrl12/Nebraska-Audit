@@ -245,6 +245,16 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
   stays other state aid unless highway allocation is printed; grant lines with no grantor printed are category other,
   detail_category Grants; mixed grant/donation labels are donations/contributions.
 
+- **User rulings 2026-11-13 (FY2023 audit verification; FY2023 only, other years untouched):** equity lines with a printed
+  classification (Restricted / Committed / Assigned / Unassigned / Unrestricted / Nonspendable) take it as category (as FY2025);
+  waiver "Ending Balance" equity lines stay with no category (as FY2024/25); capital outlay with no printed object ->
+  detail_category not itemized; a single-purpose fund column name counts as the printed capital outlay function (Street ->
+  Streets/Highways, Fire/Rescue -> Public Safety, Water/Sewer/Electric -> Utilities; General and mixed funds: plain "Capital
+  Outlay"); printed spending function "Community development"/"Community improvement" -> economic development (as FY2024/25);
+  waiver "Local Receipts: Other" stays other (as printed), also in utility columns; internal service funds are not added
+  (no double counting); memo balances outside a statement's totals are not recorded; department/object lines keep the
+  function the report prints. Verification files: scratchpad only; changes logged in _meta/corrections_log.csv.
+
 ## Batch procedure
 1. `git pull --rebase`.
 2. Read `output/progress.csv`. Take the next `pending` reports, plus any `flagged` reports whose
