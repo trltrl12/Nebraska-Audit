@@ -1,18 +1,21 @@
 {
   "stem": "Beatrice_FY2023",
-  "values_checked": 391,
+  "values_checked": 390,
   "issues": [
     {"severity": "warning", "path": "receipts[36].category", "page": 5,
-     "extracted": "other", "on_page": "Miscellaneous 884,935 (General 390,866; Other Governmental 494,070)",
-     "issue": "The schedules break this line down. B-3 p15 shows donations 305,921, lease income - BASWA 70,944, sidewalk 800 and Other 12,138; Airport Miscellaneous 1,063 (p18); Economic Development Miscellaneous 315,647 (p24); Capital Improvements 'Donations and other revenue' 178,423 (p31). Donations are 35% to 55% of the line, depending on how the mixed 178,423 is treated, so a split with split_from could be justified. Recorded as other under the user's 2026-10-23 decision; noting it for review."},
+     "extracted": "other", "on_page": "Miscellaneous 884,935",
+     "issue": "Kept as other, but the schedules show what it holds: General Fund donations 305,921 (p15, Donations / Police / Fire / Water park / Public properties / Library donations), Capital Improvements 'Donations and other revenue' 178,423 (p33), Economic Development 'Miscellaneous' 315,647 (p24), Lease income - BASWA 70,944, Sidewalk 800, Other 12,138, Airport 1,063. Donations, counting the mixed 178,423 line, come to 484,344 (54.7%), or 34.6% without it, so 'other' is defensible but could be donations/contributions."},
     {"severity": "warning", "path": "receipts[29].category", "page": 25,
-     "extracted": "intergovernmental/state aid", "on_page": "CDBG Special Revenue Fund: Intergovernmental 137,003",
-     "issue": "Inconsistent with detail[159], which gives the same amount category intergovernmental/state aid but detail_category federal grants. CDBG money is federal (passed through the state), but the page prints it only as 'Intergovernmental'."},
-    {"severity": "warning", "path": "detail[176].category", "page": 30,
-     "extracted": "special assessments", "on_page": "Unbonded Assessments: Interest on assessments 1,120",
-     "issue": "On the governmental funds statement (p5 'Interest' 352,804; D-2 p22 Debt Service 'Interest' 1,120) this amount sits in Interest, and the receipts line records it as Interest Income. The detail records it as special assessments. The categories disagree across levels."},
-    {"severity": "warning", "path": "disbursements[9].category", "page": 5,
-     "extracted": "other", "on_page": "MFO payments - other entities 303,447 (Capital Projects Funds, p22)",
-     "issue": "other is a last resort. These are capital-projects payments to other entities, and the page does not say what they are for. Economic development or a payments-to-other-entities category may fit better. Same for detail[193]."}
+     "extracted": "federal grants", "on_page": "Intergovernmental 137,003 (CDBG Special Revenue Fund, Schedule E-4)",
+     "issue": "The row is labelled only 'Intergovernmental'. It is categorized federal grants from the fund name (Community Development Block Grant). The FY2023 ruling keeps 'Intergovernmental' as other state aid unless the page prints the source. Same for detail[159]."},
+    {"severity": "warning", "path": "proprietary.ending_cash", "page": 9,
+     "extracted": 10558222, "on_page": "Total column: beginning 10,279,603; operating 6,765,746 + noncapital 306,059 + capital (5,897,807) + investing (895,378) = net change 278,620; ending 10,558,222",
+     "issue": "The report itself is off by $1: 10,279,603 + 278,620 = 10,558,223, not the printed 10,558,222. The fund columns' net changes sum to 278,619 and their operating cash sums to 6,765,745. All values are entered as printed, but there is no report_discrepancies entry for this rounding gap."},
+    {"severity": "warning", "path": "detail[186].original_label", "page": 33,
+     "extracted": "Computer equipment", "on_page": "Computer equipment 65,554 (Capital Improvements Capital Projects Fund, Capital Projects)",
+     "issue": "This is a capital outlay line (category capital outlay), but unlike the other G-4 capital project lines it was not relabelled 'Capital Outlay: <function>' (or plain 'Capital Outlay' for a general/mixed fund)."},
+    {"severity": "warning", "path": "ending_cash", "page": 4,
+     "extracted": 16006414, "on_page": "Cash and cash equivalents 16,006,414; Cash on deposit - county treasurer 129,825 (separate row); Investments 2,273,157",
+     "issue": "ending_cash takes only the 'Cash and cash equivalents' row. County treasurer cash 129,825 is left out, although the rules treat county treasurer cash as Cash and Cash Equivalents. This was an extractor assumption."}
   ]
 }
