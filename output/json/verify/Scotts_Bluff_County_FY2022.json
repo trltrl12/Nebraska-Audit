@@ -1,0 +1,15 @@
+{
+  "stem": "Scotts_Bluff_County_FY2022",
+  "values_checked": 232,
+  "issues": [
+    {"severity": "warning", "path": "receipts[5].category", "page": 4,
+     "extracted": "licenses and permits", "on_page": "Local fees, licenses, commissions, and miscellaneous 7,011,305",
+     "issue": "Mixed line kept whole as licenses and permits (user label decision), but the Statement of Activities (p2) prints charges for services 6,073,371 + miscellaneous local 937,934 = 7,011,305 exactly, so most of the line is charges for services. The detail lines with the same label use detail_category 'other charges for services', which doesn't match the category. Defensible under the 2026-11-06 mixed-label ruling, but worth a look."},
+    {"severity": "warning", "path": "detail[147].category", "page": 20,
+     "extracted": "keno/lottery", "on_page": "Keno Fund: Local fees, licenses, commissions, and miscellaneous 576,843",
+     "issue": "Category comes from the fund name. The extractor's tax-split rule (extractor.md line 377) says a fund's non-tax receipts ('Local', miscellaneous) are not assumed to be that fund's tax. The cited 'user ruling 2026-11-12' isn't in extractor.md. Probably keno receipts, but the page doesn't label them."},
+    {"severity": "warning", "path": "detail[122].detail_category", "page": 8,
+     "extracted": "salaries and wages", "on_page": "Self-Insured Medical Insurance Fund: Personnel services 2,170,282",
+     "issue": "Personnel services of a self-insured medical insurance fund are probably employee health claims or premiums, not wages. The extractor flagged it for review."}
+  ]
+}
