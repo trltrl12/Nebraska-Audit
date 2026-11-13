@@ -1,0 +1,24 @@
+{
+  "stem": "South_Sioux_City_FY2022",
+  "values_checked": 500,
+  "issues": [
+    {"severity": "warning", "path": "receipts[18].category", "page": 7,
+     "extracted": "other", "on_page": "Finance Charge 62,325",
+     "issue": "utility finance (late-payment) charges; label is not 'other/miscellaneous', so 'other' is doubtful. Could be charges for services/fees (Utility Charges); the Statement of Activities (p2-3) lists them under general revenues, so 'other' is defensible. Same for the matching detail line (Combined Utilities, p13)"},
+    {"severity": "warning", "path": "detail[*Library Fund 'Taxes' 586,338; Fire Fund 'Taxes' 235,419; Police Pension Fund 'Taxes' 206,696].category", "page": 14,
+     "extracted": "property tax (computed)", "on_page": "Taxes 586,338 (p14), 235,419 (p15), 206,696 (p19)",
+     "issue": "tax type inferred from the statement's row structure, not exact reconciliation: the nonmajor schedules' 'Taxes' rows sum to 2,257,649 vs Other Governmental Funds Property Taxes 2,257,497 (p5), a 152 gap. Evidence standard says budget-basis lines that don't tie stay unlabeled. Also inconsistent with the General Fund 'Taxes' 2,594,143 (p10), which is left as 'taxes'. Defensible but a judgment call"},
+    {"severity": "warning", "path": "detail[*Street Projects Fund 'Other Taxes' 1,789,485].category", "page": 22,
+     "extracted": "sales tax (computed)", "on_page": "Other Taxes 1,789,485",
+     "issue": "the fund name does not identify a tax; type inferred by elimination. The 'Other Taxes' rows of the sales-tax funds plus Street Projects sum to 3,622,552 vs Local Option Sales Taxes 3,603,731 on p5 (gap 18,821), so this does not reconcile exactly"},
+    {"severity": "warning", "path": "detail[*Street Projects Fund / Park Projects Fund 'Capital Projects'].original_label", "page": 22,
+     "extracted": "Capital Outlay: Streets/Highways; Capital Outlay: Culture/Recreation", "on_page": "Capital Projects 950,587; Capital Projects 83,170",
+     "issue": "function taken from the fund column name, not printed on the row; the 2026-11-12 ruling says function only when printed (Disaster Recovery's line was left as plain 'Capital Outlay')"},
+    {"severity": "warning", "path": "detail[*Revolving Loan Fund 'Miscellaneous' 27,500].category", "page": 16,
+     "extracted": "other", "on_page": "Miscellaneous 27,500",
+     "issue": "a revolving loan fund's receipts are likely loan repayments (Loan Repayments category), but the page doesn't say so; left as other"},
+    {"severity": "warning", "path": "detail[*County/LEC Sales Tax Fund 'Miscellaneous' 141,963]", "page": 15,
+     "extracted": 141963, "on_page": "Miscellaneous 141,963 and Transfers In 141,963",
+     "issue": "the same 141,963 shows up as both Miscellaneous revenue and Transfers In for this fund, and it equals the General Fund's Transfers Out 141,963 (p10). Recorded as printed; possible double count in the report"}
+  ]
+}
