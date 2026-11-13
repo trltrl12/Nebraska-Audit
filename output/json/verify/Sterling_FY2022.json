@@ -1,0 +1,21 @@
+{
+  "stem": "Sterling_FY2022",
+  "values_checked": 124,
+  "issues": [
+    {"severity": "warning", "path": "receipts[3].category", "page": 2,
+     "extracted": "Ambulance Fees", "on_page": "Fire & Rescue Receipts 2,924",
+     "issue": "label mixes fire and rescue; could be a rural fire contract (charges for services/fees) rather than ambulance fees. Same for detail[3] (p3)."},
+    {"severity": "warning", "path": "receipts[13].category", "page": 2,
+     "extracted": "Public Power District Sales Tax", "on_page": "Public Power Reimbursement 56,605",
+     "issue": "printed label says reimbursement, not sales/in-lieu tax; category is defensible but not shown on the page. Same for detail[10] (p3)."},
+    {"severity": "warning", "path": "receipts[18].category", "page": 2,
+     "extracted": "Recreation Fees", "on_page": "Library & Parks 4,428",
+     "issue": "line combines library and parks receipts; nature (fees vs other) not stated. Same for detail[15] (p3)."},
+    {"severity": "warning", "path": "ending_investments", "page": 1,
+     "extracted": 55000, "on_page": "Certificates of Deposit 55,000; Cash, End of Year 1,284,759 (p4) includes it",
+     "issue": "ending_cash 1,284,759 (p4) already includes the 55,000 CDs, so ending_investments overlaps ending_cash (could be double counted downstream); beginning_investments is null, so the two years are not on the same basis."},
+    {"severity": "warning", "path": "detail[36].original_label", "page": 3,
+     "extracted": "Capital Outlay: Streets/Highways", "on_page": "Capital Expenditures 343,383 (Street Fund column)",
+     "issue": "the function comes from the fund name (marked computed), not a printed function; the 2026-11-12 FY2022 ruling says capital outlay gets a function only when it is printed."}
+  ]
+}
