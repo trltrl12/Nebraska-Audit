@@ -1,0 +1,27 @@
+{
+  "stem": "Sioux_County_FY2022",
+  "values_checked": 136,
+  "issues": [
+    {"severity": "warning", "path": "receipts[3].amount", "page": 6,
+     "extracted": 60594, "on_page": "60,594 (statement p5 General Fund and p6 Total; Statement of Activities p2 Inheritance 60,594) vs 60,644 (combining General Funds p7, Inheritance Tax column, Taxes row)",
+     "issue": "Re-checked visually: no misread. Both cells are printed as recorded. The combining page is internally consistent with 60,644: Total General Fund Taxes 1,568,771 = 1,508,127 + 60,644, and the Inheritance Tax fund balance rolls 299,345 + 60,644 = 359,989. The statement and Statement of Activities consistently print 60,594, with Local 150,243 vs the combining page's 150,193. Total receipts are 2,148,512 on both pages. The report itself has a 50 inconsistency, already recorded in report_discrepancies. detail[28] = 60,644 and receipts[3] = 60,594 are each correct for their own page."},
+    {"severity": "warning", "path": "receipts[5].category", "page": 2,
+     "extracted": "other", "on_page": "Local 251,218 = Statement of Activities Charges for services 119,087 + Interest income 4,973 + Miscellaneous 127,158 (exactly)",
+     "issue": "The Statement of Activities breakdown reconciles exactly to Local. Miscellaneous is 50.6%, so 'other' is defensible under the more-than-half rule. A split with split_from (charges for services, Interest Income, other) is also arguable."},
+    {"severity": "warning", "path": "receipts[4].category", "page": 6,
+     "extracted": "intergovernmental/state aid", "on_page": "Intergovernmental 1,736,665",
+     "issue": "Mixed line: it includes U.S. Entitlement 236,257 and American Rescue Plan 113,241, which detail classes as federal grants (p7, p13). It was kept as one statement line, which is defensible but not purely state aid."},
+    {"severity": "warning", "path": "detail[23].original_label", "page": 7,
+     "extracted": "Capital outlay", "on_page": "Capital outlay 3,522 (Noxious Weed)",
+     "issue": "Not relabelled 'Capital Outlay: <function>' as the 2026-10-26 rule requires. detail[32] (Road Fund) was relabelled, so labels are inconsistent. The same applies to detail[48] (Courthouse Building Fund 25,487, p8) and disbursements[5]."},
+    {"severity": "warning", "path": "detail[4]", "page": 9,
+     "extracted": "General Fund department lines (general government/public safety)", "on_page": "Department totals include General Fund capital outlay 34,943 (combining p7)",
+     "issue": "The budget schedule's department totals (general government 773,303, public safety 362,045) include 34,943 of capital outlay. The schedule does not print which department holds it, so it can't be split out. These lines are left in their functions, and the notes say so."},
+    {"severity": "warning", "path": "detail[26].category", "page": 7,
+     "extracted": "federal grants", "on_page": "U.S. Entitlement - Intergovernmental 236,257",
+     "issue": "Federal is taken from the fund name. The line has review but no computed marker (the ARPA line detail[41] has computed). The 2026-11-12 FY2022 ruling keeps generic Intergovernmental as other state aid unless the page supports otherwise. The fund name 'U.S. Entitlement' is reasonable support."},
+    {"severity": "warning", "path": "ending_cash", "page": 4,
+     "extracted": 2091650, "on_page": "Cash 1,669,948 + Restricted cash 421,702; TOTAL ASSETS 2,091,650",
+     "issue": "Ending cash is a computed sum. The 2026-11-06 ruling says cash is never derived. The two printed lines are both cash, and the printed TOTAL ASSETS equals the sum, so this is acceptable, but a person should confirm it."}
+  ]
+}
