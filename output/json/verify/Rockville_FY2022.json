@@ -1,0 +1,24 @@
+{
+  "stem": "Rockville_FY2022",
+  "values_checked": 86,
+  "issues": [
+    {"severity": "warning", "path": "receipts[12].category", "page": 1,
+     "extracted": "other", "on_page": "Local Receipts: Other - Water 29,612.84, Sewer 15,243.68, Water Reserve 85.41",
+     "issue": "This is the utility funds' only receipt line, so it is very likely water and sewer charges (and interest for Water Reserve). The page prints no breakdown, so 'other' is defensible as a context label, but it puts 100% of business-type receipts in other. The same applies to detail[22], detail[26] and detail[30]."},
+    {"severity": "warning", "path": "disbursements[5].original_label", "page": 3,
+     "extracted": "Capital Outlay: Utilities", "on_page": "Other Capital Outlay (Sewer Fund column, printed under Governmental rows)",
+     "issue": "The function 'Utilities' is inferred from the Sewer Fund column, not printed. The 2026-11-12 FY2022/FY2023 ruling says the function is used only when printed. The same applies to detail[27]."},
+    {"severity": "warning", "path": "disbursements[4].fund_type", "page": 3,
+     "extracted": "governmental", "on_page": "Solid Waste 8,299.50 printed under Business-Type Activities, General Fund column",
+     "issue": "Kept governmental by fund column, which is defensible. The row heading says business-type."},
+    {"severity": "warning", "path": "disbursements[6].fund_type", "page": 3,
+     "extracted": "business-type", "on_page": "Debt Service 6,134.00 printed under Governmental rows, Water Fund column",
+     "issue": "Recorded as business-type by fund column (USDA loans, p5), which is defensible. The row heading says governmental."},
+    {"severity": "warning", "path": "beginning_cash.amount", "page": 1,
+     "extracted": 107004.21, "on_page": "Subtotal of Beginning Balance (General 53,018.12 + Street 53,986.09), including 15,000.00 investments",
+     "issue": "beginning_cash and ending_cash (124,439.58) include the General Fund CDs. Those CDs are also reported separately in beginning_investments and ending_investments (15,000.00), so anyone adding cash and investments would count them twice."},
+    {"severity": "warning", "path": "balance_sheet.assets", "page": 1,
+     "extracted": null, "on_page": "County Treasurer Balance at September 30, 2022: 570.55 (at October 1, 2021: 591.50)",
+     "issue": "The county treasurer balance is printed outside the fund balances and was not recorded. This is consistent with FY2023 and is probably correct, since it is not part of the village's cash."}
+  ]
+}
