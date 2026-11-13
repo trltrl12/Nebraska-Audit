@@ -255,7 +255,10 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
   (no double counting); memo balances outside a statement's totals are not recorded; department/object lines keep the
   function the report prints. Intra-governmental transfers printed in fund columns are recorded gross even when the
   Total Governmental column nets them (as FY2025); a one-line schedule amount is split when another statement prints its
-  exact breakdown (more detail; split_from + computed); a statement-level Total-column line stays one line.
+  exact breakdown (more detail; split_from + computed); a statement-level Total-column line stays one line; statement
+  object lines are split by function only where the same report prints the breakdown. Generally "whatever is printed",
+  and where the printed label alone doesn't decide, the category FY2024/FY2025 use for the same printed line. County
+  audits keep their CO..-..._Audit_Report filenames (entity_name is correct).
   Verification files: scratchpad only; changes logged in _meta/corrections_log.csv.
 
 ## Batch procedure
