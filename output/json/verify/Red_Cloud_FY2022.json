@@ -1,0 +1,19 @@
+{
+  "stem": "Red_Cloud_FY2022",
+  "values_checked": 304,
+  "issues": [
+    {"severity": "warning", "path": "detail[124].schedule", "page": 10,
+     "extracted": "utility fund detail from the accrual Statement of Revenues, Expenses and Changes in Net Position (pp10-11)",
+     "on_page": "modified cash basis proprietary statement pp8-9 prints the same fund columns (Charges for services 2,159,869; Direct electric and water 1,370,655; Sewer interest expense 2,453; principal payment 18,805)",
+     "issue": "detail[124]-[169] come from the accrual statement, not the cash-basis statement the business-type receipts/disbursements use. The detail therefore does not tie to the statement lines: charges 2,173,778 vs 2,159,869, depreciation 75,663 included, Sewer interest 2,380 vs 2,453, NDEQ principal 18,805 missing. Every amount matches p10/p11 as printed. The notes say this follows FY2023/FY2024, but the choice should be confirmed."},
+    {"severity": "warning", "path": "detail[61].category", "page": 21,
+     "extracted": "federal grants", "on_page": "ARP Fund: Intergovernmental 81,060",
+     "issue": "The grantor comes from the fund name (ARP) only; the printed row says 'Intergovernmental'. The statement-level receipts[7] keeps the same 81,060 inside intergovernmental/state aid, so the two levels use different categories for the same money."},
+    {"severity": "warning", "path": "detail[34].detail_category", "page": 16,
+     "extracted": "miscellaneous expenditure", "on_page": "Sweeper 144",
+     "issue": "The object isn't printed. This could be repairs and maintenance or equipment rather than miscellaneous; it's a judgment call."},
+    {"severity": "warning", "path": "ending_cash", "page": 1,
+     "extracted": 678137, "on_page": "Cash and equity in pooled cash 678,137; also Cash on deposit - county treasurer 7,609, Cash - debt service 6,859, County treasurer - long-term debt 13,315",
+     "issue": "ending_cash holds only the pooled-cash line (net of deficit equity) and leaves out the county treasurer and restricted cash lines. beginning_cash is null, so there is no cash roll-forward. beginning_investments 138,043 comes from the governmental funds statement (p4, 2021 Totals) and ending_investments 138,285 from the government-wide p1, which prints the same figure as p4."}
+  ]
+}
