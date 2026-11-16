@@ -1,0 +1,19 @@
+{
+  "stem": "Waverly_FY2022",
+  "values_checked": 156,
+  "issues": [
+    {"severity": "warning", "path": "receipts[6]", "page": 2,
+     "extracted": {"category": "property tax", "original_label": "TIF", "amount": 616018},
+     "on_page": "p2 Statement of Activities: row 'TIF', Charges for Services column 616,018; p4 funds Taxes 3,903,108",
+     "issue": "Split is supported, but only by subtraction under evidence-standard rule 3. Checked: p2 general-receipt tax lines (1,334,798 + 139,649 + 1,255,882 + 54,535 + 461,799 + 40,427 = 3,287,090) + 616,018 = 3,903,108 exactly. Every other governmental receipt ties between p2 and p4 (intergovernmental 699,955; interest 19,828; operating 119,449 + capital 360,613 grants = 480,062; total 7,451,598), and the funds' charges for services tie per fund to p2 without TIF (General 385,980 = 226,979 + 136,976 + 22,025; Other Governmental 107,095 = public safety 107,095; Street 4,171; Lottery 1,851,399). So the 616,018 has to sit in the funds' Taxes line (inside Other Governmental Funds Taxes 662,545), and TIF counts as property tax increment. Limits: the report prints TIF as a program 'charge', not as a tax, and no page prints 'Taxes includes TIF'. FY2023 left the same situation unsplit (3,148,966 'taxes' remainder) because its statements differ by $1, so the two years are categorized differently. That difference follows from the exact-reconciliation rule; it is not an extraction error. The label 'TIF' will be renamed 'TIF Proceeds' by user_rules (2026-11-06). The per-fund detail line Other Governmental Funds Taxes 662,545 stays unlabeled, so detail and statement lines are categorized differently."},
+    {"severity": "warning", "path": "receipts[3].category", "page": 2,
+     "extracted": "In Lieu of Tax", "on_page": "In lieu and other tax 54,535",
+     "issue": "Mixed label (in lieu + other tax) with no printed breakdown; In Lieu of Tax is defensible but part may be other taxes (already marked review)"},
+    {"severity": "warning", "path": "ending_cash", "page": 3,
+     "extracted": 10725928, "on_page": "Total assets 10,725,928 (governmental funds balance sheet)",
+     "issue": "No line labelled cash total is printed; ending_cash takes 'Total assets', which holds only cash lines. Under the 2026-11-06 ruling (cash is never derived) this is borderline. beginning_cash is null."},
+    {"severity": "warning", "path": "business_type.ending", "page": 6,
+     "extracted": 13917897, "on_page": "p1 modified cash business-type net position 6,115,005; p6 accrual ending net position 13,917,897",
+     "issue": "business_type rolls forward the accrual net position (p6), but balance_sheet business-type lines and total_equity come from the modified cash Statement of Net Position (p1, 6,115,005). These are two different measures in one report (the extractor says it follows FY2023/FY2024)."}
+  ]
+}
