@@ -1,0 +1,12 @@
+{
+  "stem": "Wayne_County_FY2022",
+  "values_checked": 160,
+  "issues": [
+    {"severity": "warning", "path": "ending_cash.amount", "page": 3,
+     "extracted": 10861755, "on_page": "Cash at bank 10,861,755; Cash at bank - restricted 4,446,341; Total Assets 15,308,096",
+     "issue": "ending_cash takes only the unrestricted 'Cash at bank' line. The restricted line is also cash at bank, so total cash is 15,308,096 (equal to ending fund balance). This is defensible as printed and matches FY2023, but cash-flow outputs will show cash about 4.4M below total cash."},
+    {"severity": "warning", "path": "receipts[0].category", "page": 2,
+     "extracted": "property tax", "on_page": "Statement of Activities 'Property taxes 5,799,318'; p4 fund columns: Inheritance Tax 583,223, Other Nonmajor (Visitor's Promotion) 32,011",
+     "issue": "The whole statement Taxes line is property tax because of the SoA label, but the detail calls the Inheritance and Visitors Promotion fund taxes inheritance/lodging tax, so the two levels disagree. This is already in decision_needed."}
+  ]
+}
