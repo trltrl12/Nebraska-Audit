@@ -1,0 +1,21 @@
+{
+  "stem": "Terrytown_FY2022",
+  "values_checked": 121,
+  "issues": [
+    {"severity": "warning", "path": "receipts[6].category", "page": 5,
+     "extracted": "other", "on_page": "Miscellaneous 146,486 (General 26,841 + Keno Fund 119,645)",
+     "issue": "Inconsistent with detail[20]: the Keno Fund's 119,645 (82% of this line) is categorized keno/lottery in detail but the statement line stays other. Under the 'more than half' rule the statement line would take keno/lottery (or be split), if the keno reading of detail[20] is accepted. Printed label says Miscellaneous and the user's category decision put it in other, so left as a warning."},
+    {"severity": "warning", "path": "detail[20].category", "page": 12,
+     "extracted": "keno/lottery", "on_page": "Keno Fund: Miscellaneous 119,645",
+     "issue": "The row is printed only as 'Miscellaneous'. The keno category comes from the fund name (marked computed). It is very likely gross keno proceeds, but the fund-name rule in the extractor says a fund's miscellaneous receipts are not assumed to be the fund's tax. This is an assumption the extractor made."},
+    {"severity": "warning", "path": "disbursements[2].category", "page": 7,
+     "extracted": "Supplies and Materials", "on_page": "Materials and repairs 36,106",
+     "issue": "The label mixes materials with repairs, so Repairs and Maintenance is equally defensible. The same applies to detail[27] and detail[36]. Already marked review."},
+    {"severity": "warning", "path": "detail[32].detail_category", "page": 7,
+     "extracted": "sewer charges", "on_page": "Sewer and Sanitation Fund: Charges for services 419,761",
+     "issue": "The fund combines sewer and sanitation (refuse) charges, and the page does not split them. Already marked review."},
+    {"severity": "warning", "path": "ending_cash", "page": 4,
+     "extracted": 505067, "on_page": "395,875 + 104,671 + 4,521 (Total Governmental Funds column)",
+     "issue": "Computed as the sum of three printed cash lines (arithmetic correct, marked computed). No single governmental cash total is printed, and certificates of deposit 729,150 are kept separately in ending_investments. Check this against the 2026-11-06 ruling that cash is filled only where printed."}
+  ]
+}
