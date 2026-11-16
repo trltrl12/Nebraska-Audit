@@ -1,0 +1,27 @@
+{
+  "stem": "Valparaiso_FY2022",
+  "values_checked": 72,
+  "issues": [
+    {"severity": "warning", "path": "receipts[3].category", "page": 4,
+     "extracted": "intergovernmental/state aid", "on_page": "Miscellaneous income/(expense) 181,239",
+     "issue": "Category differs from the printed label. The budget schedules (p7 General 115,199; p8 Special 66,040) print the same amounts as 'Other state receipts', so the category is defensible. The question is already in decision_needed."},
+    {"severity": "warning", "path": "detail[0].amount", "page": 7,
+     "extracted": "130,922 Property Tax + 63,692 Occupation Tax (detail[1])", "on_page": "Personal and real property taxes 194,614 (budget 92,817)",
+     "issue": "The General Fund schedule line 'Personal and real property taxes' 194,614 was split into property tax and occupation tax using the p4 General Fund column (130,922 + 63,692 = 194,614 exactly). The tax-split evidence rule allows this, but the schedule's own label calls the whole amount property taxes, and the 92,817 budget figure is not recorded on either piece (budget_final null)."},
+    {"severity": "warning", "path": "detail[10].category", "page": 8,
+     "extracted": "Interest Income", "on_page": "Other local receipts 114",
+     "issue": "The same printed label 'Other local receipts' is category other in the General Fund schedule (detail[4], 27,830) but Interest Income here. config/category_decisions.csv has 'other local receipts' as a label-level decision (other), so user_rules.py may override this line. The p4 evidence (Special Revenue interest income 114) does support Interest Income."},
+    {"severity": "warning", "path": "detail[4].category", "page": 7,
+     "extracted": "other", "on_page": "Other local receipts 27,830",
+     "issue": "The p4 General Fund column shows that this line is interest 582 + charges for services 11,214 + operating grants and contributions 16,034 (57.6%, more than half). Under the extractor's broad-line rule it would be donations/contributions, but the user's label decision for 'other local receipts' is other. Kept as other; flagged for a person to settle."},
+    {"severity": "warning", "path": "detail[8].category", "page": 8,
+     "extracted": "Motor Vehicle Pro-Rate", "on_page": "Motor vehicle 8,718",
+     "issue": "The schedule prints only 'Motor vehicle'. Pro-Rate is inferred from p4, where the same 8,718 is printed as 'Motor vehicle prorate'. Defensible."},
+    {"severity": "warning", "path": "reported_totals.governmental.disbursements", "page": 4,
+     "extracted": 297569, "on_page": "Total other financing sources and uses 297,569",
+     "issue": "The page labels the expenditure total 'Total other financing sources and uses'. Arithmetically it is the total of expenditures (131,014 + 42,263 + 78,047 + 46,245; transfers out are '-'), so it was used correctly. The label itself is wrong on the page."},
+    {"severity": "warning", "path": "ending_cash", "page": 3,
+     "extracted": 725455, "on_page": "Cash or cash equivalents 721,113; Cash at county treasurer 4,342 (no printed cash total)",
+     "issue": "ending_cash is a computed sum of two printed cash lines and is marked computed. The arithmetic is right, but the 2026-11-06 ruling says cash is never derived; confirm that summing printed cash lines is acceptable."}
+  ]
+}
