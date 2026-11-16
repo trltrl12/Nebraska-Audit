@@ -1,0 +1,24 @@
+{
+  "stem": "Uehling_FY2022",
+  "values_checked": 312,
+  "issues": [
+    {"severity": "warning", "path": "disbursements[18].amount", "page": 11,
+     "extracted": -850, "on_page": "Misc. Expense: Water 850, Sewer 0, Total (850)",
+     "issue": "Re-checked visually: the Total column really prints (850) with parentheses, and the Water column prints 850 with none. The printed Total cell is a sign misprint. The Water budget schedule (p12) prints 850 actual, Water's cash payments to suppliers on p14 (40,433 = 59,064 - 18,631) include +850, and the printed Total 105,729 = Water 59,064 + Sewer 46,665. The extraction keeps the printed (850) under the as-printed rule and records the 1,700 gap in report_discrepancies, so this is correct under the rules. But the business-type spending lines add up to 104,029, not the printed 105,729. The true Total-column amount is +850."},
+    {"severity": "warning", "path": "other_financing", "page": 4,
+     "extracted": 298812, "on_page": "ARPA grant 19,646; FEMA grant 258,312; Other grants 20,354; Sale of Assets 500 (Other Financing Sources)",
+     "issue": "Arithmetic and computed note are correct, and the grants are printed under Other Financing Sources on the fund statement. But the Statement of Activities (p2) counts the same 298,312 as Capital Grants and Contributions (program receipts). Under the as-printed rule this is defensible. Note that it leaves 298,312 of grant money, more than the year's governmental receipts, outside receipts."},
+    {"severity": "warning", "path": "beginning_cash", "page": 2,
+     "extracted": 172130, "on_page": "Net position at beginning of year 172,130 (governmental activities)",
+     "issue": "Taken from beginning net position, not from a printed cash line. All modified-cash assets are cash, so the amount is right in substance. But the 2026-11-06 ruling says cash is filled only where printed and never derived, and Uehling_FY2025 has beginning_cash null. FY2023 and FY2024 do the same thing as this file."},
+    {"severity": "warning", "path": "receipts[3].category", "page": 4,
+     "extracted": "other", "on_page": "Incentive 600",
+     "issue": "The printed label is not other/miscellaneous, and the trimmed pages don't say what the incentive is. Kept in other with a review note; it may belong in a specific category (for example state aid or reimbursement) once the source is known."},
+    {"severity": "warning", "path": "disbursements[19].category", "page": 11,
+     "extracted": "Dues, Training and Travel", "on_page": "School 973 (Water 487, Sewer 486); also General and Administrative 'School' 193 (p6) and the Water/Sewer schedule lines (p12-13)",
+     "issue": "Assumes 'School' means operator/clerk training (following FY2023/FY2024). The page doesn't say so."},
+    {"severity": "warning", "path": "disbursements[5].category", "page": 2,
+     "extracted": "Debt Service", "on_page": "Bonding costs 400; Statement of Activities General government (160,627) = 160,030 + 400 + 197; Payments on long-term debt (18,781) = 15,269 + 3,512 only",
+     "issue": "The report's own government-wide statement counts bonding costs (and county commissions) in general government, not debt service. Putting bond fees in debt service follows the extractor rule (debt service incl. fees) and is defensible. The line already has a review note."}
+  ]
+}
