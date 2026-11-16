@@ -1,0 +1,30 @@
+{
+  "stem": "Verdon_FY2022",
+  "values_checked": 82,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "balance_sheet.assets[0].amount",
+      "page": 1,
+      "extracted": 98423.08,
+      "on_page": 98424.08,
+      "issue": "[fixed: amount set to 98,424.08] Line 26 Net Cash Balance, governmental columns: General 39,279.46 + Street 34,484.57 + Cemetery 11,315.79 + Parks 9,254.76 + Library 4,089.50 = 98,424.08, not 98,423.08 (off by 1.00). The cross-checks agree: Total 161,727.18 - Enterprise 63,303.10 = 98,424.08, and 98,424.08 + investments 124,545.68 = 222,969.76 (line 28 governmental). With 98,423.08 the governmental assets add to 222,968.76 and the four asset lines add to 347,278.79, which does not match the printed total_assets of 347,279.79."
+    },
+    {
+      "severity": "warning",
+      "path": "decision_needed",
+      "page": 3,
+      "extracted": "transfers as on Exhibit A: General in 18,292.36 / out 25,473.28; Street in 15,473.28 / out 8,852.25; Enterprise in 20,000.00 / out 18,538.62; Cemetery out 901.49",
+      "on_page": "Schedule of Interfund Transfers (p3): General out 18,292.36 / in 26,374.77; Street out 15,473.28 / in 8,852.25; Enterprise out 20,000.00 / in 18,538.62; no Cemetery transfer",
+      "issue": "The report's interfund transfer schedule shows each fund's transfers going the opposite way from Exhibit A, and it has no Cemetery 901.49 transfer. Under the schedule, the Enterprise net transfer would be -1,461.38 instead of +1,461.38. The extraction follows Exhibit A, whose own roll-forward adds up, but the conflict is not in report_discrepancies or decision_needed."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[1].category",
+      "page": 2,
+      "extracted": "utilities",
+      "on_page": "General Government (Enterprise Fund column, under 'Governmental:' heading)",
+      "issue": "The category is taken from the Enterprise (water/sewer) fund, not the printed row label General Government. This is defensible but a judgment call; detail[27] is the same."
+    }
+  ]
+}
