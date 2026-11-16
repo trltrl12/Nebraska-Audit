@@ -1,0 +1,54 @@
+{
+  "stem": "Valentine_FY2022",
+  "values_checked": 275,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "disbursements[21].category",
+      "page": 9,
+      "extracted": "other",
+      "on_page": "Landfill post-closure costs 3,000",
+      "issue": "[fixed: Landfill Closure and Postclosure] label clearly names the cost; the existing category 'Landfill Closure and Postclosure' (config/category_decisions.csv, label decisions for 'closure and post closure costs' / 'closure costs') fits, so 'other' is not a last resort here"
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[5].category",
+      "page": 7,
+      "extracted": "other",
+      "on_page": "Airport 503,403",
+      "issue": "printed Airport function line left in 'other' (detail_category Airport); category 'Airport' is in use (category_decisions.csv 'airport' -> Airport, context label) and the extractor rules name 'Airport' as the example category. Also inconsistent with the Airport Fund schedule line 'Operating expenditures' (detail[61]) categorised 'Operating'"
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[18].category",
+      "page": 9,
+      "extracted": "other",
+      "on_page": "Licenses and fees 434,780",
+      "issue": "category 'Licenses and Fees' is in use for this label (context decision); left to the context check"
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[14].category",
+      "page": 9,
+      "extracted": "utilities",
+      "on_page": "Utilities and telephone 101,010",
+      "issue": "utility cost-type line given the function category 'utilities'; the cost-type category in use for this label is 'Utilities and Telephone' (context decision)"
+    },
+    {
+      "severity": "warning",
+      "path": "report_discrepancies",
+      "page": 7,
+      "extracted": null,
+      "on_page": "Governmental funds net transfers (81,656) (p7); proprietary funds transfers 197,656 (p9); Statement of Activities governmental interfund transfers (197,656) (p3)",
+      "issue": "fund-level transfers do not net to zero (difference 116,000, the Street Fund's 116,000 transfer in has no matching outflow in any printed fund); the JSON records the figures as printed but has no report_discrepancies entry, and the sending side of the Street Fund transfer can't be confirmed"
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[8].category",
+      "page": 7,
+      "extracted": "donations/contributions",
+      "on_page": "Grants and donations 2,318,799",
+      "issue": "mixed grant/donation label kept as donations/contributions per the 2026-11-12 ruling, but 2,206,892 is Airport Fund capital grants (Statement of Activities p3), likely governmental (FAA/state) money"
+    }
+  ]
+}
