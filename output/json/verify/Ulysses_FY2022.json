@@ -1,0 +1,12 @@
+{
+  "stem": "Ulysses_FY2022",
+  "values_checked": 68,
+  "issues": [
+    {"severity": "warning", "path": "beginning_cash.amount", "page": 1,
+     "extracted": 170664.16, "on_page": "Line 3 Subtotal of Beginning Balance (Net Cash 166,547.59 + Investments 4,116.57)",
+     "issue": "beginning_cash is the line 3 subtotal, so it includes the Street Fund investments 4,116.57, which are also recorded in beginning_investments. Anything that adds cash and investments together counts the 4,116.57 twice. Line 1 Net Cash Balance governmental is 166,547.59. The roll-forward identity holds on the combined basis."},
+    {"severity": "warning", "path": "ending_cash.amount", "page": 1,
+     "extracted": 212588.52, "on_page": "Line 24 Ending Balance (incl. Investments 4,190.27); line 26 Net Cash Balance governmental 208,398.25",
+     "issue": "ending_cash includes the 4,190.27 CD, which is also in ending_investments and balance_sheet.assets[2]. Cash alone (line 26) is 208,398.25, which matches balance_sheet.assets[0]."}
+  ]
+}
