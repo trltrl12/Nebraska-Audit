@@ -1,0 +1,18 @@
+{
+  "stem": "Valley_County_FY2022",
+  "values_checked": 164,
+  "issues": [
+    {"severity": "warning", "path": "receipts[5].category", "page": 2,
+     "extracted": "other", "on_page": "Local 518,444 = Statement of Activities charges for services 425,717 + interest income 2,188 + miscellaneous 90,539",
+     "issue": "Charges for services make up 82% of Local, as the page shows. The extractor rule ('more than half -> use that category or split') points to charges for services/fees. The line was left as other because Local is a context label; the context check should settle it."},
+    {"severity": "warning", "path": "receipts[4].category", "page": 6,
+     "extracted": "intergovernmental/state aid", "on_page": "Intergovernmental 1,932,916 (incl. Covid American Rescue Plan Fund 403,822)",
+     "issue": "The statement line holds the 403,822 ARPA money as state aid, but detail[47] gives the same 403,822 the category federal grants (based on the fund name). The two categories don't match. The statement line is kept whole, which is defensible."},
+    {"severity": "warning", "path": "detail[45]", "page": 12,
+     "extracted": 427254, "on_page": "Schedule p12 prints Principal and interest 427,254; statement p5 prints this fund as Public works 1,000 + Principal and interest 426,254",
+     "issue": "Kept as the schedule prints it, so the detail debt service is 1,000 more than the statement's debt service for this fund. The review note mentions this; a person may want to split it."},
+    {"severity": "warning", "path": "detail[49].original_label", "page": 13,
+     "extracted": "General government", "on_page": "DISBURSEMENTS",
+     "issue": "The original_label comes from the statement p6 COVID column (General government 30,975), not from the schedule row, which prints only 'Disbursements'. The amount ties and computed is set."}
+  ]
+}
