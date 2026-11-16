@@ -1,0 +1,54 @@
+{
+  "stem": "Weeping_Water_FY2022",
+  "values_checked": 107,
+  "issues": [
+    {
+      "severity": "warning",
+      "path": "disbursements[4].category",
+      "page": 4,
+      "extracted": "general government",
+      "on_page": "Public building 64,265 (Sales Tax fund)",
+      "issue": "Function category is a guess (already marked review; same choice as FY2023); nothing on the page says which function Public building belongs to."
+    },
+    {
+      "severity": "warning",
+      "path": "receipts[2]",
+      "page": 9,
+      "extracted": "Intergovernmental 625,849 (one line, intergovernmental/state aid)",
+      "on_page": "Budgetary all-funds schedule p9: Highway allocation 155,989 + State aid 131,535 + Other 338,325 = 625,849",
+      "issue": "The budget schedule prints an exact breakdown of this line (utility funds have no intergovernmental receipts). It was kept as one statement Total-column line, which follows the rules, but the highway allocation part could be identified if the user wants it."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[6].amount",
+      "page": 10,
+      "extracted": 1877,
+      "on_page": "Rescue: Transfers out 1,877 (no parentheses)",
+      "issue": "Printed positive on the Transfers out row and the fund roll-forward adds it (-3,578 + 1,877 = -1,701; total column -14,423 nets it), so it is recorded as an inflow labelled Transfers Out. As printed, but the direction is odd."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[10].category",
+      "page": 10,
+      "extracted": "charges for services/fees",
+      "on_page": "Community Building: Charges for services 5,375",
+      "issue": "Community building charges are likely rentals (Rentals category), but the page does not say so; defensible as is."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[25].detail_category",
+      "page": 11,
+      "extracted": "tax refunds/treasurer fees",
+      "on_page": "Water: Sales taxes 10,455",
+      "issue": "Sales tax remitted on utility sales, not a tax refund or treasurer fee; no exact detail category fits (already marked review)."
+    },
+    {
+      "severity": "warning",
+      "path": "ending_cash",
+      "page": 1,
+      "extracted": 1004163,
+      "on_page": "Cash in bank 989,568 + Cash at county treasurer 14,595 (Governmental Activities); no governmental cash total printed",
+      "issue": "[fixed: ending_cash set to null; cash is never derived] Computed sum (marked computed, arithmetic correct, same approach as FY2023). The 2026-11-06 ruling fills cash only where it is printed, and FY2024/FY2025 leave ending_cash null, so this may be a derived cash figure."
+    }
+  ]
+}
