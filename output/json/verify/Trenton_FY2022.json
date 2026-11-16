@@ -1,0 +1,18 @@
+{
+  "stem": "Trenton_FY2022",
+  "values_checked": 158,
+  "issues": [
+    {"severity": "warning", "path": "receipts[6].category", "page": 5,
+     "extracted": "charges for services/fees", "on_page": "Charges for services 22,287 (p13: Ambulance 22,057 + Library 230)",
+     "issue": "The same label is categorized differently within the report: the statement line is charges for services/fees, while the detail Ambulance 'Charges for services' 22,057 (detail[15]) is Ambulance Fees. Ambulance fees are 99% of the statement line, so it could take Ambulance Fees, or the detail line could stay charges for services/fees. The rules say to use the same category for the same label within a report."},
+    {"severity": "warning", "path": "disbursements[11].category", "page": 7,
+     "extracted": "utilities", "on_page": "Utilities and telephone 22,296",
+     "issue": "This is a utility cost-type line (utility bills and telephone), but its category 'utilities' is the same name as the function category, so the two can't be told apart. A cost-type name like 'utilities (power, gas, phone)' would be clearer. Judgment call."},
+    {"severity": "warning", "path": "business_type.transfers_net", "page": 7,
+     "extracted": -38286, "on_page": "Electric (50,000), Sewer 11,714, Total (38,286); governmental funds statement p5 nets +50,000; Statement of Activities p3 governmental 38,286",
+     "issue": "The Sewer Fund's transfer in of 11,714 has no matching outflow in the governmental funds statement, which shows only Street +50,000 and Keno -3,000 to General. Business-type net (-38,286) and governmental net (+50,000) don't offset, and only the Statement of Activities reconciles them. The amounts are correctly recorded as printed, but this is a one-sided transfer."},
+    {"severity": "warning", "path": "decision_needed", "page": 7,
+     "extracted": [], "on_page": "Sewer Fund Transfers from (to) other funds 11,714",
+     "issue": "The 11,714 transfer into the Sewer Fund is one-sided: no governmental fund prints the matching transfer out. Under the rules, a person should decide this, but decision_needed is empty."}
+  ]
+}
