@@ -1,0 +1,25 @@
+{
+  "stem": "Valley_FY2022",
+  "values_checked": 255,
+  "issues": [
+    {"severity": "warning", "path": "decision_needed", "page": 4,
+     "extracted": "other_financing -640,419 (Grants and donations 2,385,560; Bond fees 705; Debt service principal 235,000 / interest 44,328; Tax increment financing 2,745,946)",
+     "on_page": "p4 prints these under OTHER FINANCING SOURCES (USES); p8 budget schedule lists Grants and donations 2,385,560 under RECEIPTS and Bond 280,033 / Tax increment financing 2,745,946 under DISBURSEMENTS; p2 Statement of Activities counts TIF 2,745,946 and Debt service 280,033 as expenses",
+     "issue": "Recorded by the printed-section rule (defensible), but 2.4M of grants and 3.0M of debt/TIF spending sit outside receipts/disbursements; the report itself treats them as revenue/spending elsewhere. Not raised in decision_needed."},
+    {"severity": "warning", "path": "balance_sheet.liabilities[3].category", "page": 1,
+     "extracted": "debt - due in more than one year (382,575)", "on_page": "NDEQ SRF loan 382,575 (p5: current portion 26,900 + noncurrent 355,675)",
+     "issue": "Whole amount put in due-in-more-than-one-year although p5 prints a current portion of 26,900"},
+    {"severity": "warning", "path": "balance_sheet.liabilities[4].category", "page": 1,
+     "extracted": "debt - due in more than one year (8,000,257)", "on_page": "Bonds payable 8,000,257 (p5: current portion 373,246 + net of current 7,627,011)",
+     "issue": "Whole amount put in due-in-more-than-one-year although p5 prints a current portion of 373,246"},
+    {"severity": "warning", "path": "detail[137].category", "page": 9,
+     "extracted": "utilities (no function field)", "on_page": "Water: Operating 1,142,057",
+     "issue": "Same printed label 'Operating' is category 'Operating' for Nursing home (detail[141]) but 'utilities' here; inconsistent within the schedule (cost-type rule would give Operating with function utilities)"},
+    {"severity": "warning", "path": "detail[14].category", "page": 10,
+     "extracted": "Cemetery Fees", "on_page": "Charges for services 50 (Cemetery column)",
+     "issue": "Same label is 'charges for services/fees' in receipts[7]; category differs between statement and detail for the same 50"},
+    {"severity": "warning", "path": "detail[64].category", "page": 11,
+     "extracted": "public safety (Cemetery column lines detail[64], [81], [85], [90])", "on_page": "Cemetery column; p4 Public safety 902,555 = Police 671,370 + EMD 1,059 + Cemetery 230,126",
+     "issue": "Cemetery spending put in public safety because the report's p4 totals include it there (verified arithmetic); cemetery is normally health/welfare, so a judgment call"}
+  ]
+}
