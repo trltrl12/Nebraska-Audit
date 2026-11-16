@@ -1,0 +1,30 @@
+{
+  "stem": "Wakefield_FY2022",
+  "values_checked": 232,
+  "issues": [
+    {"severity": "warning", "path": "detail[28].detail_category", "page": 14,
+     "extracted": "professional/contract services", "on_page": "Police: Contracted services 162,106",
+     "issue": "Police department's only real spending line is contracted services (no salaries); this is most likely a law enforcement contract (detail category 'law enforcement contract'). The page doesn't name the contractor."},
+    {"severity": "warning", "path": "detail[104].category", "page": 13,
+     "extracted": "charges for services/fees", "on_page": "Rescue Fund: Charges for services 27,257",
+     "issue": "Rescue Fund charges for services could be Ambulance Fees / ambulance/rescue fees (the Park/Pool/Cemetery department charges were given their specific categories). The page only prints 'Charges for services'."},
+    {"severity": "warning", "path": "detail[36].detail_category", "page": 14,
+     "extracted": "Other / Miscellaneous Expenses", "on_page": "Fire: Transportation 2,491",
+     "issue": "'Transportation' is a context label. The detail_category was copied from FY2023 with no evidence on this page. It needs a context check (could be fuel/vehicle costs)."},
+    {"severity": "warning", "path": "detail[44].detail_category", "page": 14,
+     "extracted": "Other / Miscellaneous Expenses", "on_page": "Park: Transportation 2,500",
+     "issue": "'Transportation' is a context label. The detail_category was copied from FY2023 with no evidence on this page. It needs a context check."},
+    {"severity": "warning", "path": "detail[67].detail_category", "page": 15,
+     "extracted": "Other / Miscellaneous Expenses", "on_page": "Cemetery: Transportation 767",
+     "issue": "'Transportation' is a context label. The detail_category was copied from FY2023 with no evidence on this page. It needs a context check."},
+    {"severity": "warning", "path": "detail[79].original_label", "page": 11,
+     "extracted": "Capital Outlay: Streets/Highways", "on_page": "Capital outlay 319,845 (Street Fund budget schedule)",
+     "issue": "The function comes from the fund name, not from a printed function. The 2026-11-12 FY2022/23 rule says a capital outlay function is used only when printed (the fund-name allowance in the 2026-11-13 ruling covers FY2023 only). The amount is correct."},
+    {"severity": "warning", "path": "balance_sheet.equity", "page": 4,
+     "extracted": "governmental equity from the government-wide Statement of Net Position (Restricted for... 1,103,111 + Unrestricted 1,765,062)", "on_page": "Governmental funds balance sheet p4: Nonspendable 83,701; Restricted 830,962; Committed 134,370; Assigned 379,387; Unassigned 1,251,305 (total 2,869,173)",
+     "issue": "Balance-sheet basis rule (user 2026-10-27): cash-basis governmental lines come from the governmental funds balance sheet (fund balance by classification) when its totals equal the government-wide figures. They do here (assets 2,869,173 = net position 2,869,173). The extractor used the government-wide statement, as FY2023 did. All amounts match the page and the totals tie."},
+    {"severity": "warning", "path": "transfers_in", "page": 5,
+     "extracted": 100000, "on_page": "Total Governmental Funds 'Transfers in (out)' 100,000; Statement of Activities p3: governmental 100,000, business-type '-', component unit (100,000)",
+     "issue": "This is information, not an error. The net 100,000 comes from the component unit (Community Redevelopment Authority), which is outside the primary government, so there is no governmental or business-type outflow to match. Fund-level transfers: GF (34,000) -> Civic Center 16,000 + Sinking 18,000; Sales Tax (100,000) + CRA 100,000 -> Street 200,000. Electric (800,000) -> Water 800,000 nets to '-'. All of these are in detail as other financing, and none sit inside spending lines."}
+  ]
+}
