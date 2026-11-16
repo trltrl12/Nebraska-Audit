@@ -1,0 +1,33 @@
+{
+  "stem": "Walthill_FY2022",
+  "values_checked": 192,
+  "issues": [
+    {"severity": "warning", "path": "receipts[0].category", "page": 2,
+     "extracted": "charges for services/fees", "on_page": "Charges for Services 74,357 (General Government) = Garbage hauling 60,215 + Recycling fees 11,508 + Fees, permits, & licenses 2,634 (p8)",
+     "issue": "81% of this line is garbage/recycling, which the matching detail lines (detail[4], detail[5]) categorize as Utility Charges (user rule: Utility Charges incl. garbage/refuse). Dominant category could be Utility Charges; statement and detail are inconsistent."},
+    {"severity": "warning", "path": "receipts[1].category", "page": 2,
+     "extracted": "charges for services/fees", "on_page": "Charges for Services 1,540 (Economic Development); p9 prints it as 'Fees, permits, & licenses' 1,540",
+     "issue": "The same 1,540 is category licenses and permits in detail[20]; the statement line and detail line disagree."},
+    {"severity": "warning", "path": "receipts[13].category", "page": 6,
+     "extracted": "federal grants", "on_page": "USDA/other grant 126,671 (Electric 56,053 + Water 70,618)",
+     "issue": "The label is mixed ('USDA/other'), and the page does not show how much is federal. federal grants is defensible but not certain."},
+    {"severity": "warning", "path": "disbursements[6].category", "page": 2,
+     "extracted": "general government", "on_page": "Community 9,521 (Operating Expenses 780 + Capital outlay 8,741, p10)",
+     "issue": "The page does not say what the 'Community' function is. The budget shows Community Grants of 155,000, so it could be economic development or community betterment. general government is a guess (the same applies to detail[37])."},
+    {"severity": "warning", "path": "disbursements[27].category", "page": 6,
+     "extracted": "other", "on_page": "Meter deposit and refund 8,293",
+     "issue": "This is a refund of customer utility deposits (the p7 cash flow prints 'Refunds of customer utility deposits (8,293)'). A specific category could fit instead of other."},
+    {"severity": "warning", "path": "report_discrepancies", "page": 2,
+     "extracted": [], "on_page": "p2 expenses Electrical 454,601 / Sewer 174,328 / Water 212,509 vs p6 Total operating expenses 454,602 / 174,329 / 212,507 (both total 841,438)",
+     "issue": "The report's own per-fund operating expenses differ between the Statement of Activities and the proprietary statement (+/-1, -2), although the totals agree. This is not recorded in report_discrepancies."},
+    {"severity": "warning", "path": "beginning_fund_balance", "page": 2,
+     "extracted": 6354, "on_page": "Net Position - Beginning of the year 6,354 (governmental activities, cash)",
+     "issue": "This value is government-wide net position, not a printed fund balance. The fund-balance beginning (the Total Governmental Funds column on report p8) is not in the trim. It ties here only because both are cash basis, and the extractor assumed they are the same (ruling 2026-11-06: fill each measure only where printed)."},
+    {"severity": "warning", "path": "missing", "page": 4,
+     "extracted": null, "on_page": "Governmental funds Statement of Revenues, Expenditures and Changes in Fund Balances: only the General, Street and Library columns are in the trim; the Econ Dev, Police, Other Governmental and Total Governmental Funds columns (report p8) are missing",
+     "issue": "The trim is incomplete. Governmental lines were correctly taken from the Statement of Activities (p2) and tie to the budget schedule, so no amounts are missing from the JSON. The governmental-funds transfers (General out 204,377, in 7,936; Street in 57,071; Library in 22,932) and the General Fund 'Loan repayments (1,091)', which p4 prints under other financing, cannot be checked against a Total column."},
+    {"severity": "warning", "path": "detail[7].fund", "page": 8,
+     "extracted": "General Fund", "on_page": "Budgetary Comparison Schedule - General Fund, Street department; p3/p4 show Street, Library, Econ Dev and Police as separate funds",
+     "issue": "The schedule title says General Fund, but its departments match separate fund columns on p3/p4. fund='General Fund' follows the printed schedule title; please confirm this is intended for the Street, Library, Police and Economic Development detail lines."}
+  ]
+}
