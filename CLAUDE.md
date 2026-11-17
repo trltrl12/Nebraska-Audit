@@ -265,13 +265,14 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
   - **Fund balance / net position classes:** equity lines printed Restricted / Committed / Assigned have category
     `Assigned`; Unrestricted / Unassigned have `Unassigned`; Nonspendable stays. The label is "<Category> - <Purpose>"
     (plain "Assigned" / "Unassigned" when no purpose is printed); the printed text stays in printed_label. Purposes are
-    unified by `config/equity_purposes.csv` (the user's consolidation: Community Betterment includes development and
+    unified by `config/equity_purposes.csv` (the user's consolidation: Community Betterment/Development includes development and
     improvement; Road Improvements/Maintenance and Road and Bridge Improvements/Maintenance are one label each;
     Keno/Lottery; sewer, water, street, library, building etc. keep their printed detail such as Maintenance,
     Improvements, Projects; anything printed with "reserve" is its own label; Capital Projects and Capital Outlay,
     911 Emergency and 911 Wireless stay separate). A purpose not in the file keeps its printed words. Net Investment in
     Capital Assets and waiver Ending Balance lines are unchanged. Lines printing two classes at once are decided per
     line from the page (`_meta/equity_page_check.csv`). Applied by user_rules.py (`equity_class_rule`).
+  - The category "Community Betterment" and the equity label are named "Community Betterment/Development".
   - **Everything else: be gentle.** No further label consolidation without the user's ruling. A line gets a specific
     category only when the page shows what it is; "other" stays other. A generic label (Local, Local Receipts: Other,
     Other, Miscellaneous) stays `other` unless that year's page prints what the money is; a fund column name alone is
