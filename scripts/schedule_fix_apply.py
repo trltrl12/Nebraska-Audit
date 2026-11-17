@@ -11,7 +11,10 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from schedule_gap import gaps, v, J  # noqa: E402
 
-FIX = J / "_meta" / "schedule_fix"
+PASS2 = "--pass2" in sys.argv
+FIX = J / "_meta" / ("schedule_fix2" if PASS2 else "schedule_fix")
+MARK = "2026-11-17 pass 2" if PASS2 else "2026-11-17"
+TAG = "schedule_fix2" if PASS2 else "schedule_fix"
 # removals of more than ten lines are applied only after an independent page check confirmed every removed line
 CHECKED_REMOVALS = {"Potter_FY2022", "Potter_FY2023", "Potter_FY2025", "Hubbard_FY2022"}
 FIXED = {"missing fund column", "missing lines", "duplicate lines"}
@@ -54,7 +57,7 @@ def main():
             status.append((stem, "", "", "unreadable fix file", str(e)[:200], 0, 0)); stat["unreadable"] += 1
             continue
         before = {(g[0], g[1]): g for g in gaps(d)}
-        if any(isinstance(x, dict) and x.get("schedule_fix") for x in d.get("detail") or []):
+        if any(isinstance(x, dict) and x.get("schedule_fix") == MARK for x in d.get("detail") or []):
             for k, g in before.items():
                 status.append((stem, k[0], k[1], "already applied; still open", "", g[4], 0))
             stat["already applied"] += 1
@@ -101,7 +104,7 @@ def main():
                             "detail_category": dcat, "original_label": a["original_label"], "amount": a["amount"],
                             "budget_final": None, "source_page": a.get("source_page"),
                             "computed": "schedule fix 2026-11-17: line read from the page so the schedule adds up to the statement",
-                            "schedule_fix": "2026-11-17"})
+                            "schedule_fix": MARK})
         new = dict(d)
         new["detail"] = [x for i, x in enumerate(det) if i not in rm] + add
         after = {(g[0], g[1]): g for g in gaps(new)}
@@ -143,12 +146,12 @@ def main():
             changed.append(stem)
             if write:
                 p.write_text(json.dumps(new, indent=2, ensure_ascii=False))
-    with (J / "_meta" / "schedule_fix_status.csv").open("w", newline="") as fh:
+    with (J / "_meta" / (TAG + "_status.csv")).open("w", newline="") as fh:
         w = csv.writer(fh)
         w.writerow(["stem", "fund_type", "section", "result", "explanation", "gap_before", "gap_after"])
         w.writerows(status)
     print(dict(stat))
-    (J / "_meta" / "schedule_fix_changed.txt").write_text("\n".join(changed) + "\n")
+    (J / "_meta" / (TAG + "_changed.txt")).write_text("\n".join(changed) + "\n")
     print(len(changed), "reports", "changed" if write else "would change")
 
 

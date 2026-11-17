@@ -18,8 +18,11 @@ def gaps(d):
     det = [x for x in d.get("detail") or [] if isinstance(x, dict)]
     for ft in ("governmental", "business-type"):
         dl = [x for x in det if (x.get("fund_type") or "governmental") == ft]
-        if not dl:
+        if not dl and not any(isinstance(x, dict) and x.get("fund_type") == ft
+                              for k in ("receipts", "disbursements") for x in d.get(k) or []):
             continue
+        # a fund type with statement lines but no schedule lines at all is a gap of the whole amount (user 2026-11-17:
+        # utility fund columns printed on the proprietary statement belong on the schedule, in every year)
         for sec, key in (("revenue", "receipts"), ("expenditure", "disbursements")):
             st = sum(v(x) for x in d.get(key) or [] if isinstance(x, dict) and x.get("fund_type") == ft)
             sc = sum(v(x) for x in dl if x.get("section") == sec)
@@ -35,6 +38,25 @@ def gaps(d):
                          and re.search(r"transfer", str(x.get("original_label") or ""), re.I))
                 if abs(abs(t) - abs(sc)) > 3:
                     out.append((ft, name, round(abs(t), 2), round(abs(sc), 2), round(abs(t) - abs(sc), 2)))
+    PROC = re.compile(r"bond|loan|note|proceed|issuance|warrant|lease", re.I)
+    dp = d.get("debt_proceeds")
+    dp = dp.get("amount") if isinstance(dp, dict) else dp
+    if isinstance(dp, (int, float)) and dp and det:
+        sc = sum(v(x) for x in det if (x.get("fund_type") or "governmental") == "governmental"
+                 and x.get("section") == "other financing" and PROC.search(str(x.get("original_label") or ""))
+                 and not re.search(r"transfer", str(x.get("original_label") or ""), re.I))
+        sc += sum(v(x) for x in det if (x.get("fund_type") or "governmental") == "governmental" and x.get("section") == "revenue"
+                  and str(x.get("category") or "") in ("Bond Proceeds", "Loan Proceeds", "Debt Proceeds"))
+        if abs(dp - sc) > 3:
+            out.append(("governmental", "debt_proceeds", round(dp, 2), round(sc, 2), round(dp - sc, 2)))
+    bt = d.get("business_type") if isinstance(d.get("business_type"), dict) else {}
+    tn = bt.get("transfers_net")
+    tn = tn.get("amount") if isinstance(tn, dict) else tn
+    if isinstance(tn, (int, float)) and tn and det:
+        sc = sum(v(x) for x in det if x.get("fund_type") == "business-type" and x.get("section") == "other financing"
+                 and re.search(r"transfer", str(x.get("original_label") or ""), re.I))
+        if abs(tn - sc) > 3:
+            out.append(("business-type", "transfers_net", round(tn, 2), round(sc, 2), round(tn - sc, 2)))
     return out
 
 
