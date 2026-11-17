@@ -297,6 +297,21 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
   - **FY2022 numbers:** FY2022 ending balances were tied to FY2023 beginning balances (56 entities differed; all read
     from the pages: no extraction errors, only printed restatements, report differences and fund-scope changes), and
     a 30-report random sample was independently re-read.
+  - **Verification and alignment (2026-11-17, done):** every cross-year category change was read a second time on its
+    page (3,824 lines); disputed lines and all Cemetery spending lines got a third, deciding read (1,145 lines) and a
+    blind spot check (122). A disputed change stands only where two readers agree; otherwise the line keeps its earlier
+    category. **Cemetery spending follows the function the report itself prints** (General Fund Public works / Culture
+    and recreation / Public safety totals), never a blanket health/welfare. Decisions: `_meta/xyear_verify/`,
+    `_meta/xyear_third/`, applied through `_meta/xyear_decisions/` (verdict `differs`).
+  - **Alignment rules (user_rules.py `align_rules`, all years):** footnote references ("(note E)") are removed from
+    labels; waiver "Ending Balance" / "Subtotal of Ending Balances" equity lines carry that category in every year
+    (this replaces the 2026-11-13 "no category" wording); Sales tax payable -> due to other governments; due to/from
+    other funds -> Internal Balances; detail_category follows a Grants or donations/contributions category;
+    "Transfers from/to other funds" -> Transfers In / Transfers Out; FY2022/FY2023 bare capital outlay in a
+    single-purpose fund (Street, Fire/Rescue, Water/Sewer/Electric) is "Capital Outlay: <function>".
+  - FY2022 full audit: 147 of 595 reports read page by page (`_meta/fy2022_audit/`): no amount errors; the user narrowed
+    it (2026-11-17) to the pattern fixes above plus the findings marked certain. Not corrected: McCook Building and
+    Zoning / Senior Center lines for FY2022, FY2024, FY2025 (FY2023 done).
   - Sargent_FY2022: the Auditor's PDF does not contain printed pp19, 22, 24, 52 (left-hand statement pages); it cannot
     be re-trimmed. Governmental lines come from the Total column.
 

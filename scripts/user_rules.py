@@ -857,8 +857,9 @@ def _merges():
         exact, bykey = {}, {}
         if f.exists():
             for r in csv.DictReader(open(f)):
-                exact[r["label"]] = r["combined_label"]
-                bykey.setdefault(merge_key(r["label"]), set()).add(r["combined_label"])
+                tgt = NOTE_REF.sub("", r["combined_label"]).strip() or r["combined_label"]  # no footnote refs in labels
+                exact[r["label"]] = tgt
+                bykey.setdefault(merge_key(r["label"]), set()).add(tgt)
         _MERGE = (exact, {k: next(iter(v)) for k, v in bykey.items() if len(v) == 1})
     return _MERGE
 
@@ -965,7 +966,69 @@ def apply(d, stem=""):
                     continue
                 label_merge(x, log)
     label_unify_all(d, school, log)
+    align_rules(d, stem, log)
     return log
+
+
+# ---- Alignment clean-ups (user 2026-11-17, "finish up 2022 so it aligns"; all years unless noted) ----
+NOTE_REF = re.compile(r"\s*\((see )?notes? [^)]*\)", re.I)
+_FUND_FN = [(re.compile(r"\bstreets?\b|\broads?\b", re.I), "Streets/Highways"),
+            (re.compile(r"\bfire\b|\brescue\b", re.I), "Public Safety"),
+            (re.compile(r"\bwater\b|\bsewer\b|\belectric\b|\bwastewater\b", re.I), "Utilities")]
+_BARE_CO = re.compile(r"^\s*capital outlays?\s*$", re.I)
+
+
+def align_rules(d, stem, log):
+    """Footnote references out of labels; waiver ending-balance lines carry the category the later years use; standing
+    balance-sheet choices (sales tax payable, due to/from other funds); detail_category follows a Grants / donations
+    category; transfers to/from other funds; FY2022/FY2023 capital outlay in a single-purpose fund names the function
+    (user 2026-11-13)."""
+    bs = d.get("balance_sheet") if isinstance(d.get("balance_sheet"), dict) else {}
+    every = [x for k in ("receipts", "disbursements", "detail") for x in (d.get(k) or []) if isinstance(x, dict)]
+    every += [x for k in ("assets", "deferred_outflows", "liabilities", "deferred_inflows", "equity")
+              for x in (bs.get(k) or []) if isinstance(x, dict)]
+    for x in every:
+        lab = x.get("original_label") or ""
+        if NOTE_REF.search(lab) and NOTE_REF.sub("", lab).strip():
+            relabel(x, NOTE_REF.sub("", lab).strip(), "label: footnote reference removed", log)
+    for x in bs.get("equity") or []:
+        if isinstance(x, dict) and not x.get("category"):
+            lab = x.get("original_label") or ""
+            if re.match(r"\s*subtotal of ending balances", lab, re.I):
+                setcat(x, "category", "Subtotal of Ending Balances", "equity: ending balance category", log)
+            elif re.search(r"\bending balances?\b", lab, re.I):
+                setcat(x, "category", "Ending Balance", "equity: ending balance category", log)
+    for x in bs.get("liabilities") or []:
+        if isinstance(x, dict) and re.match(r"\s*sales tax(es)? payable\s*$", x.get("original_label") or "", re.I) \
+                and x.get("category") in ("other liabilities", "Accrued Liabilities", "accounts payable"):
+            setcat(x, "category", "due to other governments", "category: sales tax payable", log)
+    for sec in ("assets", "liabilities"):
+        for x in bs.get(sec) or []:
+            if isinstance(x, dict) and re.match(r"\s*due (to|from) other funds?\s*$", x.get("original_label") or "", re.I) \
+                    and x.get("category") in ("other liabilities", "Other Assets", "other assets", "receivables"):
+                setcat(x, "category", "Internal Balances", "category: due to/from other funds", log)
+    fy = re.search(r"_FY(20\d\d)$", stem)
+    for x in d.get("detail") or []:
+        if not isinstance(x, dict):
+            continue
+        sec, lab = x.get("section"), (x.get("original_label") or "")
+        if sec == "revenue":
+            if x.get("category") == "Grants" and x.get("detail_category") in (
+                    "other state aid", "federal grants", "miscellaneous revenue", "highway allocation"):
+                setcat(x, "detail_category", "Grants", "detail_category: Grants", log)
+            if x.get("category") == "donations/contributions" and x.get("detail_category") in ("other state aid", "federal grants"):
+                setcat(x, "detail_category", "donations/contributions", "detail_category: donations/contributions", log)
+        elif sec == "other financing":
+            m = re.match(r"\s*(operating )?transfers? (from|to) other funds?\s*$", lab, re.I)
+            if m:
+                relabel(x, "Transfers In" if m.group(2).lower() == "from" else "Transfers Out", "label: Transfers In/Out", log)
+        elif sec == "expenditure" and fy and fy.group(1) in ("2022", "2023") and x.get("category") == "capital outlay" \
+                and not x.get("department") and _BARE_CO.match(lab) and "general" not in str(x.get("fund") or "").lower():
+            hits = {fn for rx, fn in _FUND_FN if rx.search(str(x.get("fund") or ""))}
+            if len(hits) == 1:
+                fn = hits.pop()
+                x["computed"] = (x["computed"] + "; " if x.get("computed") else "") + "capital outlay function from the fund name"
+                relabel(x, "Capital Outlay: " + fn, "label: Capital Outlay: <function> (fund name)", log)
 
 
 def write_context_queue(stems):
