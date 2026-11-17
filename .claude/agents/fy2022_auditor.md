@@ -39,3 +39,15 @@ For each stem (e.g. `Arnold_FY2022`):
    Write only that file; never use git or scripts.
 
 Return one line per report: `<stem>: L lines checked, F findings (A amount, M missing/duplicate, B label, C category, X consistency)`.
+
+Rules that supersede older text in CLAUDE.md / extractor.md (user 2026-11-17), so do NOT report these as open questions:
+- A grant line with no grantor printed ("Grants", "Grant income/proceeds/revenue", "Capital grants", "Operating
+  grants") is category `Grants` (not `other`, not state aid, not federal grants). This replaces the 2026-11-12 "other".
+- "other taxes" no longer exists as a category; it is `taxes`.
+- Waiver "Ending Balance" / "Subtotal of Ending Balances" equity lines carry the category "Ending Balance" /
+  "Subtotal of Ending Balances" in every year (FY2022 lines with no category are being filled by rule).
+- Generic vehicle lines are `Vehicle Expenses/Maintenance`; spending under a printed Community development function is
+  `Community Betterment/Development`; compensated absences keep the category each report has.
+- A "Street Fund: Intergovernmental" line has detail_category other state aid unless highway allocation is printed.
+- Capital outlay detail lines with no printed object have detail_category not itemized.
+These pattern-level items are fixed by script for all reports; report a line only if it would still be wrong after them.
