@@ -46,6 +46,11 @@ own page prints.
      under a utility fund's operating revenues) is `charges for services/fees` when that year's own Statement of
      Activities counts it in the Charges for Services column (the totals tie); that is printed evidence. Without that
      tie it stays `other`.
+   - Choices already made across entities, to keep them the same everywhere when the pages give nothing more:
+     "Sales tax payable" / "Sales tax collected" -> due to other governments; "Due to other funds" / "Due from other
+     funds" -> Internal Balances; "Grants" / "Grant income" / "Grant proceeds" with no grantor printed -> other;
+     mixed "Grants and contributions" / "Grants and donations" with no breakdown -> donations/contributions; waiver
+     "Local Receipts: Other" -> other; compensated absences -> other liabilities; "NPPD lease payment/revenue" -> Rentals.
    - Never merge or rename labels. Categories only.
    - The category formerly named "Community Betterment" is now named "Community Betterment/Development" (user 2026-11-17); use the new name.
    - Never change an amount, never comment on amounts. Categories only.
