@@ -757,7 +757,7 @@ def eq_cap(t):
 
 def eq_parse(x):
     """-> None (not a class line) | ("PAGE", None) | (category, printed purpose or '')."""
-    lab = label_of(x)
+    lab = re.sub(r"\brestric?t?ed\b|\brestriced\b|\bresticted\b", "Restricted", re.sub(r"\bunrestriced\b|\bunresticted\b", "Unrestricted", label_of(x), flags=re.I), flags=re.I)
     if NICA.search(lab):
         return None
     if EQ_TWO.search(lab):
