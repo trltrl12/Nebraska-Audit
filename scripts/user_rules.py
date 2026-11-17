@@ -1018,7 +1018,7 @@ def xyear_rule(d, stem, log):
 # 2. Wordings that are the same words (capitalization, punctuation, singular/plural, small words) or one misspelled
 #    word share one label: config/label_unify.csv (section, key, unified_label), the list the user approved.
 # The printed text stays in printed_label.
-_CODE_LEAD = re.compile(r"^\s*(\d{4})(?:[-.]\d{1,3})?\s*[-:]?\s+(?=[A-Za-z(])")
+_CODE_LEAD = re.compile(r"^\s*(\d{3,4})(?:[-.]\d{1,3})?\s*[-:]?\s+(?=[A-Za-z(])")
 _CODE_TRAIL = re.compile(r"\s*\((\d{4})(?:[-.]\d{1,3})?\)\s*$")
 _LU = None
 
@@ -1026,8 +1026,8 @@ _LU = None
 def strip_code(label, school):
     t = label or ""
     m = _CODE_LEAD.match(t)
-    if m and (school or not 1900 <= int(m.group(1)) <= 2099):
-        t = t[m.end():]
+    if m and (school or (len(m.group(1)) == 4 and not 1900 <= int(m.group(1)) <= 2099)):
+        t = t[m.end():]   # 3-digit object codes (111 Salary, 221 Social security) only in school / ESU reports
     m = _CODE_TRAIL.search(t)
     if m and (school or not 1900 <= int(m.group(1)) <= 2099) and len(t[:m.start()].strip()) > 2:
         t = t[:m.start()]
