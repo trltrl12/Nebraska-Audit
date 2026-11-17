@@ -320,6 +320,22 @@ Run this when the user says "run the context check". Use a fresh session and do 
 5. `git add output/json/ && git commit -m "context check: N reports"`, then `git pull --rebase && git push`.
 6. Report how many reports and lines are left (step 2's count). Lines marked `unclear` go to the user's review list.
 
+## Cross-year check procedure (user 2026-11-17; IN PROGRESS, resume here)
+1. `git pull --rebase`, then `python3 scripts/xyear_check.py` (rebuilds `_meta/xyear_check.csv`).
+2. Entities still to do = entities in xyear_check.csv with no file in `_meta/xyear_decisions/`:
+   `python3 -c "import csv,os;d='output/json/_meta/xyear_decisions';e=sorted({r['entity'] for r in csv.DictReader(open('output/json/_meta/xyear_check.csv'))}-{f[:-4] for f in os.listdir(d)});print(len(e),'left');print(', '.join(e[:60]))"`
+3. Send them to the `xyear_checker` agent (Opus), about 4-6 entities or ~80 rows per agent, ~15 agents per wave. Pass only
+   the entity names.
+4. `python3 scripts/user_rules.py --all` (applies the decisions per line), `python3 scripts/xyear_log.py` (logs the
+   changes), `git add output/json/ && git commit -m "Cross-year page check: wave N"`, `git pull --rebase && git push`.
+5. Entities whose remaining rows are all verdict `differs`/`unclear` drop out of the queue; rows marked `hold` stay.
+Status 2026-11-17: pilot + waves 1-2 applied (about 95 entities); wave 3 (Chappell ... Elk_Creek, Beaver_Crossing,
+Bradshaw) was running when the session ended: any entity without a decisions file must be re-sent. Open question for
+the user: move spending lines printed "Community development/improvement" (now economic development) into Community
+Betterment/Development? FY2022 re-extractions in flight at session end: Walthill_FY2022, Wauneta_FY2022 (re-trimmed;
+re-extract if their JSON still cites the old trim's pages, then verify); Beaver_Crossing_FY2022 and Bradshaw_FY2022
+were re-extracted and need the verifier.
+
 ## Running another fiscal year (e.g. 2024)
 Works for any year. Upload the Auditor's search export as config/export_<year>.xlsx (as was done for 2025), then run the
 fetch workflow with input year=<year>; without an export file it uses the live search. Files are
