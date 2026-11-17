@@ -1,0 +1,23 @@
+{"stem": "Otoe_County_FY2025", "gaps": [
+  {"fund_type": "governmental", "section": "transfers_in", "cause": "missing lines",
+   "explanation": "The budgetary comparison schedules (p6 General Fund; pp7-8 Major Funds) print only one net line, 'TOTAL OTHER FINANCING SOURCES (USES)' / 'OTHER FINANCING SOURCES (USES)', per fund; detail recorded these net amounts (idx 39 General -2,640,682 p6; idx 47 Road 2,554,682 p7; idx 51 Inheritance -179,999 p7; idx 58 Equipment Sinking 89,200 p8) under total labels, so they are not counted as transfers. p4 Statement of Cash Receipts, Disbursements, and Changes in Fund Balances - Governmental Funds prints the gross transfers per fund: Transfers in General Fund 3,200, Road Fund 2,554,682, Equipment Sinking Fund 89,200, Nonmajor Funds 191,733 (already in detail per fund: idx 90 Special Road Fund 179,999 + idx 91 Federal Justice Equitable Sharing Fund 11,734), Total 2,838,815; Transfers out General Fund (2,643,882), Inheritance Fund (179,999), Nonmajor (14,934) (already in detail, idx 92 Federal Treasury Equitable Sharing Fund), Total (2,838,815). Fix: replace the four net total-row lines with the gross per-fund transfers from p4 (General net 3,200 - 2,643,882 = -2,640,682; Road 2,554,682; Inheritance -179,999; Equipment Sinking 89,200, so other financing net per fund is unchanged). The removed lines carry total labels and are not part of the transfers schedule_total, so the transfer check is 191,733 + 3,200 + 2,554,682 + 89,200 = 2,838,815 = statement total.",
+   "add": [
+     {"fund_type": "governmental", "schedule": "Statement of Cash Receipts, Disbursements, and Changes in Fund Balances - Governmental Funds (General Fund column)", "fund": "General", "department": null, "section": "other financing", "original_label": "Transfers In", "amount": 3200, "source_page": 4, "category": null, "detail_category": null},
+     {"fund_type": "governmental", "schedule": "Statement of Cash Receipts, Disbursements, and Changes in Fund Balances - Governmental Funds (Road Fund column)", "fund": "Road", "department": null, "section": "other financing", "original_label": "Transfers In", "amount": 2554682, "source_page": 4, "category": null, "detail_category": null},
+     {"fund_type": "governmental", "schedule": "Statement of Cash Receipts, Disbursements, and Changes in Fund Balances - Governmental Funds (Equipment Sinking Fund column)", "fund": "Equipment Sinking", "department": null, "section": "other financing", "original_label": "Transfers In", "amount": 89200, "source_page": 4, "category": null, "detail_category": null}
+   ],
+   "remove": [
+     {"detail_index": 39, "original_label": "Total Other Financing Sources (Uses)", "amount": -2640682},
+     {"detail_index": 47, "original_label": "Total Other Financing Sources (Uses)", "amount": 2554682},
+     {"detail_index": 58, "original_label": "Other Financing Sources (Uses)", "amount": 89200}
+   ]},
+  {"fund_type": "governmental", "section": "transfers_out", "cause": "missing lines",
+   "explanation": "Same cause as transfers_in: the budget schedules print only net other financing per fund (idx 39 General -2,640,682 p6, removed under transfers_in; idx 51 Inheritance -179,999 p7, removed here). p4 prints Transfers out General Fund (2,643,882) and Inheritance Fund (179,999); Nonmajor (14,934) is already in detail (idx 92 Federal Treasury Equitable Sharing Fund). The removed lines carry total labels and are not in the transfers schedule_total, so the check is 14,934 + 2,643,882 + 179,999 = 2,838,815 = statement total.",
+   "add": [
+     {"fund_type": "governmental", "schedule": "Statement of Cash Receipts, Disbursements, and Changes in Fund Balances - Governmental Funds (General Fund column)", "fund": "General", "department": null, "section": "other financing", "original_label": "Transfers Out", "amount": -2643882, "source_page": 4, "category": null, "detail_category": null},
+     {"fund_type": "governmental", "schedule": "Statement of Cash Receipts, Disbursements, and Changes in Fund Balances - Governmental Funds (Inheritance Fund column)", "fund": "Inheritance", "department": null, "section": "other financing", "original_label": "Transfers Out", "amount": -179999, "source_page": 4, "category": null, "detail_category": null}
+   ],
+   "remove": [
+     {"detail_index": 51, "original_label": "Other Financing Sources (Uses)", "amount": -179999}
+   ]}
+]}
