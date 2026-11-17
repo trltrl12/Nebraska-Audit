@@ -1,0 +1,15 @@
+{"stem": "Palmer_FY2022", "gaps": [
+  {"fund_type": "governmental", "section": "revenue", "cause": "missing fund column",
+   "explanation": "p5 Statement of Revenues, Expenditures, and Changes in Fund Balances - Modified Cash Basis - Governmental Funds prints the column 'Other Governmental Fund (Rehab)', which has no schedule (detail covers General Fund p12, Street Fund p10, Sales Tax Fund p11). Its revenues: Charges for services 15,800 + Interest income 1 = 15,801 = printed column Total revenues = gap. 579,815 + 15,801 = 595,616 = statement total. The column has no expenditures.",
+   "add": [
+     {"fund_type": "governmental", "schedule": "Statement of Revenues, Expenditures, and Changes in Fund Balances - Modified Cash Basis - Governmental Funds (Other Governmental Fund (Rehab) column)", "fund": "Other Governmental Fund (Rehab)", "department": null, "section": "revenue", "original_label": "Charges for services", "amount": 15800, "source_page": 5, "category": "charges for services/fees", "detail_category": "other charges for services"},
+     {"fund_type": "governmental", "schedule": "Statement of Revenues, Expenditures, and Changes in Fund Balances - Modified Cash Basis - Governmental Funds (Other Governmental Fund (Rehab) column)", "fund": "Other Governmental Fund (Rehab)", "department": null, "section": "revenue", "original_label": "Interest income", "amount": 1, "source_page": 5, "category": "Interest Income", "detail_category": "Interest Income"}
+   ],
+   "remove": []},
+  {"fund_type": "governmental", "section": "transfers_out", "cause": "missing fund column",
+   "explanation": "Two parts. (1) Missing fund column: p5 'Transfers (to) from other funds' prints Other Governmental Fund (Rehab) (15,800), not in detail; added. (2) Different basis: the JSON statement transfers_out 36,820 is the p5 Total Governmental Funds net figure (36,820), and transfers_in is null, while detail records transfers gross per fund: out General (14,132) + (15,000) (p12 departments; General Fund column (29,132) on p5), Street (19,041) (p10), Rehab (15,800) = 63,973; in Sales Tax 27,153 (p11, already in detail as Transfers In). After the addition: 48,173 + 15,800 = 63,973; 63,973 - 27,153 (Sales Tax transfer in, netted in the Total column) = 36,820 = statement figure. The remaining 27,153 above the statement is netting only, not an error.",
+   "add": [
+     {"fund_type": "governmental", "schedule": "Statement of Revenues, Expenditures, and Changes in Fund Balances - Modified Cash Basis - Governmental Funds (Other Governmental Fund (Rehab) column)", "fund": "Other Governmental Fund (Rehab)", "department": null, "section": "other financing", "original_label": "Transfers Out", "amount": -15800, "source_page": 5, "category": null, "detail_category": null}
+   ],
+   "remove": []}
+]}
