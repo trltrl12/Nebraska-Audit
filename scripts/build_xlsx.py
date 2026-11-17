@@ -174,7 +174,7 @@ def main():
     _scope = None
 
 
-ONE_COLS = ["entity_name", "entity_type", "county", "filename", "filing_type", "fiscal_year_end", "basis", "level",
+ONE_COLS = ["entity_name", "entity_type", "county", "filename", "year", "filing_type", "fiscal_year_end", "basis", "level",
             "fund_type", "section", "source", "line", "schedule", "fund", "department", "category",
             "detail_category", "printed_label", "original_label", "amount", "pages", "page_link"]
 # one-tab header: Printed Label = text as printed (blank on generated cash-flow rows, which are descriptions, not
@@ -328,6 +328,9 @@ def one_tab(collected):
         return m.group(1) if m else str(row.get("fiscal_year_end") or "")[:4] or "unknown"
     by_year = {}
     for row in out:
+        # Year column (user 2026-11-17): the year in the file name (<entity>_FY2024), else the filing year
+        m = re.search(r"_FY(\d{4})", Path(str(row.get("filename") or "")).stem)
+        row["year"] = int(m.group(1)) if m else (int(year_of(row)) if year_of(row).isdigit() else None)
         by_year.setdefault(year_of(row), []).append(row)
     global _scope
     keep, _scope = _scope, None   # rows are already limited to the focused reports
