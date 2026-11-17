@@ -327,6 +327,16 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
     an unconfirmed line go to `_meta/schedule_fix_hold.csv`; `python3 scripts/schedule_fix_apply.py [--pass2] [--write]`
     applies a report only when its gaps really tie and no other gap opens (`_meta/schedule_fix_status.csv`); then
     `user_rules.py` on the changed stems. Pass 1 applied 2026-11-17: 280 reports, 2,933 lines added, 98 duplicates removed.
+    Pass 2 applied 2026-11-17 (utility fund columns, utility transfers, bond/loan proceeds, other-financing rows): 368
+    reports, 12,317 lines added, none removed; spot check of 106 reports (`_meta/schedule_spot2/`, 3,437 items, 99.1%
+    confirmed, no wrong amounts). Pass 2 never removes or relabels a printed line: a transfer printed with an odd sign
+    on a "Transfers in"/"Transfers out" row keeps its printed label. Bond premiums, discounts and escrow payments count
+    with other_financing in the tie check, not with debt_proceeds.
+    Still open after pass 2 (52 reports with a pass-2 type gap; list: schedule_gap.csv): held reports
+    (`schedule_fix_hold.csv`), bond proceeds not tying (Grand Island FY2022-24, Papillion FY2022/24, Lancaster County
+    FY2022, Omaha FY2025), Scottsbluff FY2022/23, unresolved Huntley FY2025, Lamar FY2025, Tekamah FY2022/23, and
+    reports whose difference is a printed basis difference. Governmental transfers printed gross in fund columns but
+    absent from a budget schedule are not flagged by the gap check; only the reports the spot check found were added.
   - Sargent_FY2022: the Auditor's PDF does not contain printed pp19, 22, 24, 52 (left-hand statement pages); it cannot
     be re-trimmed. Governmental lines come from the Total column.
 
