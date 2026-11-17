@@ -337,6 +337,15 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
     FY2022, Omaha FY2025), Scottsbluff FY2022/23, unresolved Huntley FY2025, Lamar FY2025, Tekamah FY2022/23, and
     reports whose difference is a printed basis difference. Governmental transfers printed gross in fund columns but
     absent from a budget schedule are not flagged by the gap check; only the reports the spot check found were added.
+  - **As printed, no tie required (user 2026-11-17, final):** "just put what is on the PDFs into the files; if the
+    PDFs themselves do not tie that is OK; we report what is in the files, we do not correct them". A printed line
+    missing from detail is added even where the schedule then differs from the statement; no derived, contra or plug
+    line is kept or added; the user does not want to be asked to decide tie questions. Remaining schedule-vs-statement
+    differences are differences in the report itself and are fine.
+    Pass 3 (2026-11-17, `_meta/schedule_fix3/`, every report page-checked in `_meta/schedule_spot3/`): the 51 reports
+    still open were re-read in full; 34 changed (1,095 lines added, 51 duplicate/replaced summary lines removed); 14
+    have nothing printed to add. Pass 4 (`_meta/schedule_fix4/`, `schedule_fix_apply.py --pass4`, no tie gate): the
+    page-confirmed printed lines that pass 3 had left out because they did not tie.
   - Sargent_FY2022: the Auditor's PDF does not contain printed pp19, 22, 24, 52 (left-hand statement pages); it cannot
     be re-trimmed. Governmental lines come from the Total column.
 

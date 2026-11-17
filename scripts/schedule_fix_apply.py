@@ -13,9 +13,12 @@ from schedule_gap import gaps, v, J  # noqa: E402
 
 PASS2 = "--pass2" in sys.argv
 PASS3 = "--pass3" in sys.argv   # pass 3: the reports still open after passes 1 and 2, each re-read in full
-TAG = "schedule_fix3" if PASS3 else "schedule_fix2" if PASS2 else "schedule_fix"
+# pass 4 (user 2026-11-17: "just put what is on the PDFs into the files; if the PDFs themselves do not tie that is ok"):
+# page-confirmed printed lines are added even where the schedule then differs from the statement; no tie is required
+PASS4 = "--pass4" in sys.argv
+TAG = "schedule_fix4" if PASS4 else "schedule_fix3" if PASS3 else "schedule_fix2" if PASS2 else "schedule_fix"
 FIX = J / "_meta" / TAG
-MARK = "2026-11-17 pass 3" if PASS3 else "2026-11-17 pass 2" if PASS2 else "2026-11-17"
+MARK = "2026-11-17 pass 4" if PASS4 else "2026-11-17 pass 3" if PASS3 else "2026-11-17 pass 2" if PASS2 else "2026-11-17"
 # removals of more than ten lines are applied only after an independent page check confirmed every removed line
 CHECKED_REMOVALS = {"Potter_FY2022", "Potter_FY2023", "Potter_FY2025", "Hubbard_FY2022"}
 FIXED = {"missing fund column", "missing lines", "duplicate lines"}
@@ -45,7 +48,7 @@ def norm(s):
 
 def main():
     write = "--write" in sys.argv
-    hold_f = J / "_meta" / ("schedule_fix3_hold.csv" if PASS3 else "schedule_fix_hold.csv")   # stem,reason: fixes the page check did not confirm
+    hold_f = J / "_meta" / ("schedule_fix4_hold.csv" if PASS4 else "schedule_fix3_hold.csv" if PASS3 else "schedule_fix_hold.csv")   # stem,reason: fixes the page check did not confirm
     hold = {r["stem"]: r["reason"] for r in csv.DictReader(hold_f.open())} if hold_f.exists() else {}
     status, stat, changed = [], Counter(), []
     for f in sorted(FIX.glob("*.json")):
@@ -136,12 +139,12 @@ def main():
                 continue
             if k not in before or abs(g[4]) > abs(before[k][4]) + 3:
                 ok = False; bad.append("%s %s gap opened/worsened: %s" % (k[0], k[1], g[4]))
-        if PASS3 and bad and not any(b.startswith(("remove index", "added line")) for b in bad):
+        if (PASS3 or PASS4) and bad and not any(b.startswith(("remove index", "added line")) for b in bad):
             # pass 3: every line of every report was checked on the page (_meta/schedule_spot3). A report is applied
             # when its gaps shrink in total; a gap that stays or grows is a printed basis difference recorded in the
             # explanation (budget schedule vs statement), never closed with a derived amount.
             tot = lambda m: sum(abs(g[4]) for k, g in m.items() if not (k[1].startswith("transfers") and g[4] < 0))
-            if tot(after) < tot(before) - 3:
+            if PASS4 or tot(after) < tot(before) - 3:
                 ok = True; bad = []
         if stem in hold:
             ok = False; bad.append("held: " + hold[stem])
@@ -154,7 +157,7 @@ def main():
             gap_b = before.get(k, (0, 0, 0, 0, 0))[4]
             gap_a = (after if applied else before).get(k, (0, 0, 0, 0, 0))[4]
             res = ("fixed" if applied and k not in after else "explained" if not (e.get("add") or e.get("remove")) else
-                   "fix rejected" if not ok else "partly fixed (printed basis difference remains)" if PASS3 else "partly fixed")
+                   "fix rejected" if not ok else "partly fixed (printed basis difference remains)" if (PASS3 or PASS4) else "partly fixed")
             stat[res] += 1
             status.append((stem, k[0], k[1], res + ": " + cause, (e.get("explanation") or "")[:700] + (" | REJECTED: " + "; ".join(bad)[:400] if res == "fix rejected" else ""), gap_b, gap_a))
         for k, g in before.items():
