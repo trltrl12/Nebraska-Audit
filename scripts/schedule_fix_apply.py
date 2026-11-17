@@ -16,6 +16,23 @@ FIXED = {"missing fund column", "missing lines", "duplicate lines"}
 SECTIONS = {"revenue", "expenditure", "other financing"}
 
 
+def fund_name(name, existing):
+    """Fund name on the schedule = the statement column's label (user 2026-11-17): "Other Governmental Funds" only
+    when that is all the heading says; "Other Governmental Fund (Cemetery Trust)" -> "Cemetery Trust Fund"; a fund
+    already on the schedule keeps its existing spelling; names end in "Fund" unless they already contain it."""
+    n = re.sub(r"\s+", " ", str(name or "")).strip()
+    m = re.match(r"^(?:other|non-?major)(?: governmental)?(?: funds?)?\s*[-:]?\s*\((.+)\)$", n, re.I)
+    if m:
+        n = m.group(1).strip()
+    if "fund" not in n.lower():
+        n += " Fund"
+    key = re.sub(r"[^a-z0-9]+", "", re.sub(r"\bfunds?\b", "", n.lower()))
+    for e in existing:
+        if e and re.sub(r"[^a-z0-9]+", "", re.sub(r"\bfunds?\b", "", e.lower())) == key:
+            return e
+    return n
+
+
 def norm(s):
     return re.sub(r"[^a-z0-9]+", " ", str(s or "").lower()).strip()
 
@@ -46,6 +63,7 @@ def main():
                         st_cat.setdefault((key, x.get("fund_type"), norm(lab)), (x.get("category"), x.get("detail_category")))
         det = [x for x in d.get("detail") or []]
         rm, add, bad = set(), [], []
+        existing_funds = sorted({x.get("fund") for x in det if isinstance(x, dict) and x.get("fund")})
         entries = [e for e in fx.get("gaps") or [] if isinstance(e, dict)]
         for e in entries:
             for r in e.get("remove") or []:
@@ -73,7 +91,8 @@ def main():
                        and norm(x.get("fund")) == norm(a["fund"]) and norm(x.get("original_label")) == norm(a["original_label"])]
                 if dup:
                     bad.append("added line is already in detail: %r" % (a,)); continue
-                add.append({"schedule": a.get("schedule") or "", "fund_type": a["fund_type"], "fund": a["fund"],
+                add.append({"schedule": a.get("schedule") or "", "fund_type": a["fund_type"],
+                            "fund": fund_name(a["fund"], existing_funds), "printed_fund": a["fund"],
                             "department": a.get("department") or None, "section": a["section"], "category": cat,
                             "detail_category": dcat, "original_label": a["original_label"], "amount": a["amount"],
                             "budget_final": None, "source_page": a.get("source_page"),
@@ -86,15 +105,19 @@ def main():
         for e in entries:
             k = (e.get("fund_type"), e.get("section"))
             cause = str(e.get("cause") or "").strip().lower()
-            if any(c in cause for c in FIXED) and (e.get("add") or e.get("remove")):
+            if e.get("add") or e.get("remove"):
+                partial = any(c in cause for c in ("different basis", "statement issue", "partly", "explained"))
                 if k in after and not (k[1].startswith("transfers") and after[k][4] < 0):
-                    ok = False; bad.append("%s %s still off by %s after the fix" % (k[0], k[1], after[k][4]))
+                    if not (partial and k in before and abs(after[k][4]) < abs(before[k][4]) - 3):
+                        ok = False; bad.append("%s %s still off by %s after the fix" % (k[0], k[1], after[k][4]))
         # a fix must not open or worsen another gap
         for k, g in after.items():
             if k[1].startswith("transfers") and g[4] < 0:
                 continue
             if k not in before or abs(g[4]) > abs(before[k][4]) + 3:
                 ok = False; bad.append("%s %s gap opened/worsened: %s" % (k[0], k[1], g[4]))
+        if len(rm) > 10:
+            ok = False; bad.append("held: removes %d lines; needs a full page check first" % len(rm))
         applied = ok and (add or rm)
         for e in entries:
             k = (e.get("fund_type"), e.get("section"))

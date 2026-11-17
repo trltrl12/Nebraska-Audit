@@ -1,0 +1,21 @@
+{"stem": "Decatur_FY2025", "gaps": [
+  {"fund_type": "governmental", "section": "revenue", "cause": "different basis",
+   "explanation": "Statement (GAAP Governmental Funds statement, trimmed p5) Total Revenue 712,680 = General 491,824 + Economic Development Sales Tax 53,463 + Street 167,393 + Nonmajor 0. Detail = the Budgetary Comparison Schedule (Budgetary Basis), p12-13: General Total Revenues 462,955 + Economic Development Sales Tax 53,830 + Street 165,305 = 682,090. Gap 30,590 = General 28,869 (491,824 - 462,955; e.g. Taxes 151,092 vs Property Taxes 152,246, Intergovernmental 37,187 vs 64,795, Charges 82,570 vs 82,677) + EDST -367 (53,463 - 53,830) + Street 2,088 (167,393 - 165,305). Nonmajor has no revenue. Budgetary (cash) vs GAAP basis; no fix.",
+   "add": [], "remove": []},
+  {"fund_type": "governmental", "section": "expenditure", "cause": "missing fund column + different basis",
+   "explanation": "Statement p5 Total Expenditures 771,536 = General 552,645 + EDST 121,243 + Street 94,723 + Nonmajor 2,925. The Nonmajor column (Debt Service Principal Retirements 2,021, Interest 904) has no schedule and is not in detail: add both lines (+2,925). The rest is budgetary vs GAAP: budgetary schedule (p12-13) Total Disbursements General 558,770, EDST 135,858, Street 96,852 = 791,480 vs GAAP 552,645 + 121,243 + 94,723 = 768,611 (difference -22,869 = -6,125 - 14,615 - 2,129). Check: 791,480 + 2,925 - 22,869 (basis) = 771,536. The added lines fix the missing-column part (2,925) exactly; the remaining -22,869 is different basis and has no fix.",
+   "add": [
+     {"fund_type": "governmental", "schedule": "Statement of Revenues, Expenditures, and Changes in Fund Balances - Governmental Funds (Nonmajor column)", "fund": "Nonmajor", "department": "Debt Service", "section": "expenditure", "original_label": "Principal Retirements", "amount": 2021, "source_page": 5, "category": "Debt Service", "detail_category": "debt principal"},
+     {"fund_type": "governmental", "schedule": "Statement of Revenues, Expenditures, and Changes in Fund Balances - Governmental Funds (Nonmajor column)", "fund": "Nonmajor", "department": "Debt Service", "section": "expenditure", "original_label": "Interest", "amount": 904, "source_page": 5, "category": "Debt Service", "detail_category": "debt interest and fees"}
+   ],
+   "remove": []},
+  {"fund_type": "governmental", "section": "transfers_in", "cause": "missing fund column + different basis",
+   "explanation": "Statement p5 Transfers In 139,725 = General 93,600 + Street 43,200 + Nonmajor 2,925. Detail has only the budgetary schedules' 'Net Interfund Transfers' (p12 General 83,600 = 93,600 - 10,000; p13 Street 40,275 = 43,200 - 2,925) = 123,875. Nonmajor column Transfers In 2,925 is missing: add it. The remaining 12,925 is the budgetary schedule printing transfers net (General out 10,000, Street out 2,925 netted into the in-amounts), a different basis with no fix. Check: 123,875 + 2,925 + 12,925 = 139,725.",
+   "add": [
+     {"fund_type": "governmental", "schedule": "Statement of Revenues, Expenditures, and Changes in Fund Balances - Governmental Funds (Nonmajor column)", "fund": "Nonmajor", "department": null, "section": "other financing", "original_label": "Transfers In", "amount": 2925, "source_page": 5, "category": null, "detail_category": null}
+   ],
+   "remove": []},
+  {"fund_type": "governmental", "section": "transfers_out", "cause": "different basis",
+   "explanation": "Statement p5 Transfers Out (12,925) = General (10,000) + Street (2,925). The budgetary schedules (p12-13) print only 'Net Interfund Transfers' (General 83,600, Street 40,275), so the transfers out are netted inside those positive amounts and detail has 0 transfers out. 10,000 + 2,925 = 12,925 = gap. No gross transfer-out line is printed on the schedules; no fix.",
+   "add": [], "remove": []}
+]}
