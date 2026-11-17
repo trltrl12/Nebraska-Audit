@@ -338,9 +338,14 @@ def one_tab(collected):
         path = OUTPUT / f"cashflow_one_tab_{year}.xlsx"
         wb.save(path)
         print(f"wrote {path.relative_to(OUTPUT.parent)} ({len(rows)} rows)")
+    # all years in one tab as well (user 2026-11-17: "the 1 tab spreadsheet with all years in it")
+    wb = Workbook()
+    wb.remove(wb.active)
+    allrows = [r for year, rows in sorted(by_year.items()) for r in rows]
+    add_sheet(wb, "All Data", ONE_HEAD, [[r.get(c) for c in ONE_COLS] for r in allrows], ["amount"])
+    wb.save(ONE_XLSX)
+    print(f"wrote {ONE_XLSX.relative_to(OUTPUT.parent)} ({len(allrows)} rows, all years)")
     _scope = keep
-    if ONE_XLSX.exists():   # the combined all-years file is replaced by the per-year files
-        ONE_XLSX.unlink()
 
 
 def build(xlsx):
