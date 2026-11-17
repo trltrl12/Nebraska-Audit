@@ -67,6 +67,8 @@ own page prints.
      printed under a "Restricted" heading is restricted assets; (e) a line naming a service the entity provides
      (garbage, sanitation) is utilities, not a cost type; (f) LATCF is a federal program (federal grants); (g) for
      compensated absences keep the category the years already share; do not change it.
+   - A generic vehicle spending line ("Vehicle", "Vehicles", "Vehicle expense(s)") that the page does not put under a
+     function is category `Vehicle Expense` (user 2026-11-17), never other / Fuel / Repairs and Maintenance.
    - Never merge or rename labels. Categories only.
    - The category formerly named "Community Betterment" is now named "Community Betterment/Development" (user 2026-11-17); use the new name.
    - Never change an amount, never comment on amounts. Categories only.

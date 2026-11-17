@@ -78,6 +78,17 @@ def community_dev_rule(x, log):
         setcat(x, "category", CB, "category: " + CB + " (community development)", log)
 
 
+# user 2026-11-17: a generic vehicle spending line ("Vehicle", "Vehicles", "Vehicle expense(s)") is never `other`:
+# category Vehicle Expense (also replaces the Fuel / Repairs and Maintenance guesses for the same label). Lines the
+# report puts under a function (streets/highways, public safety ...) or capital outlay keep that category.
+VEHICLE = re.compile(r"^\s*vehicles?( expenses?| costs?)?\s*$", re.I)
+
+
+def vehicle_rule(x, log):
+    if x.get("category") in ("other", "Fuel", "Repairs and Maintenance") and VEHICLE.match(label_of(x)):
+        setcat(x, "category", "Vehicle Expense", "category: Vehicle Expense", log)
+
+
 COMMUNITY_BETTERMENT = re.compile(r"community (development/)?better", re.I)
 NOXIOUS_WEED = re.compile(r"noxious|\bweeds?\b", re.I)
 OPERATING_LABEL = re.compile(r"^operating( expenses?| costs?)?$", re.I)
@@ -917,9 +928,11 @@ def apply(d, stem=""):
     for x in d.get("disbursements") or []:
         if isinstance(x, dict):
             community_dev_rule(x, log)
+            vehicle_rule(x, log)
     for x in d.get("detail") or []:
         if isinstance(x, dict) and x.get("section") == "expenditure":
             community_dev_rule(x, log)
+            vehicle_rule(x, log)
     for k in ("receipts", "disbursements", "detail"):
         for x in d.get(k) or []:
             label_merge(x, log)
@@ -991,6 +1004,8 @@ def xyear_rule(d, stem, log):
                 if cat == "economic development" and where != "receipts" and "revenue" not in where and (
                         COMMUNITY_DEV.search(label_of(x)) or COMMUNITY_DEV.search(str(x.get("department") or ""))):
                     cat = CB
+                if cat in ("other", "Fuel", "Repairs and Maintenance") and VEHICLE.match(label_of(x)):
+                    cat = "Vehicle Expense"
                 setcat(x, "category", cat, "xyear page check: category", log)
                 if x.get("category_evidence") != r.get("evidence"):
                     x["category_evidence"] = r.get("evidence")
