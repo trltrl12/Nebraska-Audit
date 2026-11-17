@@ -1,0 +1,15 @@
+{"stem": "Deuel_County_FY2025", "gaps": [
+  {"fund_type": "governmental", "section": "expenditure", "cause": "missing lines",
+   "explanation": "Statement (trimmed p4) Road Fund column prints Public Works 989,755 + Debt Service: Principal Payments 235,000 + Interest and Fiscal Charges 49,110 + Capital Outlay 260,016 = TOTAL DISBURSEMENTS 1,533,881. The Road Fund budgetary schedule (p6) actual Disbursements 1,249,771 (detail) = 989,755 + 260,016 only; the bond payments belong to the 'Roads - Bond Debt Service Fund', whose budgetary schedule (p9) prints '-' in the Actual column (budget 284,110), so the 235,000 + 49,110 = 284,110 debt service actually paid (statement Total column 235,000 / 49,110) is in no detail line. Fix: add the two printed Road Fund column debt-service rows from p4. Check: 3,986,210 + 235,000 + 49,110 = 4,270,320 = statement total.",
+   "add": [
+     {"fund_type": "governmental", "schedule": "Statement of Cash Receipts, Disbursements, and Changes in Cash Basis Fund Balances - Governmental Funds (Road Fund column)", "fund": "Road Fund", "department": null, "section": "expenditure", "original_label": "Principal Payments", "amount": 235000, "source_page": 4, "category": "Debt Service", "detail_category": "debt principal"},
+     {"fund_type": "governmental", "schedule": "Statement of Cash Receipts, Disbursements, and Changes in Cash Basis Fund Balances - Governmental Funds (Road Fund column)", "fund": "Road Fund", "department": null, "section": "expenditure", "original_label": "Interest and Fiscal Charges", "amount": 49110, "source_page": 4, "category": "Debt Service", "detail_category": "debt interest and fees"}
+   ],
+   "remove": []},
+  {"fund_type": "governmental", "section": "transfers_in", "cause": "missing lines",
+   "explanation": "Statement (p4) Road Fund column Transfers in 849,110 (Total column 897,153). Detail has the Road Fund budgetary schedule (p6) Transfers in 565,000 only; the remaining 284,110 is the transfer into the Roads - Bond Debt Service Fund (combined into the statement's Road Fund column; its budgetary schedule p9 prints '-' as actual), matching the Road Fund Transfers out (284,110) already in detail. 849,110 - 565,000 = 284,110. Fix: add the Road Fund column transfer-in remainder from p4. Check: 613,043 + 284,110 = 897,153 = statement total.",
+   "add": [
+     {"fund_type": "governmental", "schedule": "Statement of Cash Receipts, Disbursements, and Changes in Cash Basis Fund Balances - Governmental Funds (Road Fund column)", "fund": "Road Fund", "department": null, "section": "other financing", "original_label": "Transfers In", "amount": 284110, "source_page": 4, "category": null, "detail_category": null}
+   ],
+   "remove": []}
+]}
