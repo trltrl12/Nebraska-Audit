@@ -1,0 +1,50 @@
+{
+  "stem": "Wisner_FY2022",
+  "values_checked": 260,
+  "issues": [
+    {
+      "severity": "error",
+      "path": "detail[83]",
+      "page": 15,
+      "extracted": {
+        "original_label": "Capital Outlay: Culture/Recreation",
+        "category": "capital outlay",
+        "amount": 691
+      },
+      "on_page": "Pool column: 'Other expenses' 691; Pool 'Capital outlay' is '-'",
+      "issue": "[fixed: detail[83] relabelled as the Pool Other expenses line, culture/recreation] Wrong row. On p15 the Pool 691 is on the Other expenses row (that row: -, 691, 5,324, 7,226, -, -, total 35,381 = 11,885+8,801+1,438+16+691+5,324+7,226). The Capital outlay row is -, -, 546,463, -, 26,910, -, total 592,525 = 19,152+546,463+26,910. The statement on p5 confirms this: General Fund Environment and leisure 169,663 includes the 691 and capital outlay is 592,525. It should be original_label 'Other expenses', category culture/recreation, detail_category Other / Miscellaneous Expenses, with no capital-outlay label or computed function. The amount and the Pool total are right."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[78].category",
+      "page": 15,
+      "extracted": "health/welfare",
+      "on_page": "Cemetery: Repairs and maintenance 2,563; Supplies 2,318 (dept total 4,881)",
+      "issue": "The report counts Cemetery spending under Public works: General Fund 'Public works' on p5 is 4,881, exactly the Cemetery department total. The statement-level Public works line is streets/highways. Health/welfare follows the generic cemetery rule, but the report's own function is Public works. The same applies to detail[79]. Also, the review text on disbursements[3] says Environment and leisure 'includes cemetery', but it doesn't."
+    },
+    {
+      "severity": "warning",
+      "path": "detail[43].category",
+      "page": 15,
+      "extracted": "charges for services/fees (detail_category rentals)",
+      "on_page": "Auditorium: Charges for services and rental fees 15,243",
+      "issue": "This mixed label stays a generic category, while the Cemetery and Pool/Park cells of the same row got specific categories (Cemetery Fees, Recreation Fees). If auditorium rental is what this is, the category would be Rentals, which matches its detail_category. It's a judgment call; no breakdown is printed."
+    },
+    {
+      "severity": "warning",
+      "path": "ending_cash",
+      "page": 4,
+      "extracted": 1700152,
+      "on_page": "Cash and cash equivalents 1,700,152; County treasurer cash 20,347 (separate line)",
+      "issue": "ending_cash is the printed 'Cash and cash equivalents' line only. County treasurer cash 20,347 is classed as Cash and Cash Equivalents on the balance sheet but isn't in ending_cash. The choice is defensible (printed figure, as in FY2023), but cash is understated by 20,347 if county treasurer cash counts as cash."
+    },
+    {
+      "severity": "warning",
+      "path": "disbursements[11].category",
+      "page": 7,
+      "extracted": "utilities",
+      "on_page": "Utilities and telephone 77,835",
+      "issue": "This cost-type line has the category string 'utilities', which is the same as the function category for utility funds. That makes it impossible to tell apart from function-level utility spending. A cost-type name (e.g. 'Utilities (Power, Gas, Phone)') may be meant."
+    }
+  ]
+}
