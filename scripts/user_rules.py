@@ -679,6 +679,105 @@ def label_unify_assets(bs, log):
             relabel(x, "Capital Assets - Depreciable - Net of Depreciation", "label: capital assets depreciable", log)
 
 
+# ---- Fund balance / net position classes (user 2026-11-17, all years) ----
+# Equity lines printed (or categorized) Restricted / Committed / Assigned -> category "Assigned"; Unrestricted /
+# Unassigned -> "Unassigned"; Nonspendable stays. The label is "<Category> - <Purpose>" (plain "<Category>" when no
+# purpose is printed); the printed text stays in printed_label. Purposes are unified by config/equity_purposes.csv
+# (purpose_key -> purpose; the user's consolidation rulings); a purpose not in the file keeps its printed words.
+# Lines that print two classes at once ("Assigned / Unrestricted", "Unrestricted, but Committed or Assigned for")
+# are left alone until their page is checked (_meta/equity_page_check.csv decides them per line).
+EQ_CLASS = {"restricted": "Assigned", "committed": "Assigned", "assigned": "Assigned", "unrestricted": "Unassigned",
+            "unassigned": "Unassigned", "nonspendable": "Nonspendable", "non-spendable": "Nonspendable"}
+EQ_CATS = set(EQ_CLASS.values())
+EQ_PRE = re.compile(r"^\s*(restricted|assigned|committed|nonspendable|non-spendable|unrestricted|unassigned)\b\s*,?\s*"
+                    r"(?:(?:for|to)\b)?\s*[:\-]?\s*(?:(?:for|to)\b)?\s*[:\-]?\s*(.*)$", re.I)
+EQ_SUFFIX = re.compile(r"^(?:fund balances?|net position|net assets)\s*[-:,(]*\s*(?:restricted|unrestricted|assigned|"
+                       r"unassigned|committed|nonspendable)\)?$", re.I)
+EQ_FILLER = re.compile(r"^(/\s*(un)?restricted|/\s*(un)?assigned|fund balances?( \(deficit\))?|funds?|net position( \(deficit\))?|"
+                       r"net assets|\(?deficits?\)?|and not committed or assigned|undesignated|designated|assets|"
+                       r"\(?general\)?)$", re.I)
+EQ_TWO = re.compile(r"but committed or assigned|^(assigned|committed|restricted)\s*/\s*(unrestricted|unassigned)", re.I)
+_EQ_SMALL = {"and", "of", "for", "the", "to", "in", "or", "on", "by"}
+_EQP = None
+EQ_PAGE_QUEUE = []
+
+
+def eq_key(p):
+    t = re.sub(r"&", " and ", (p or "").lower())
+    for a, b in _TYPO.items():
+        t = t.replace(a, b)
+    t = re.sub(r"'s\b|s'(?=\s|$)|'", "", t)
+    t = re.sub(r"[^a-z0-9 ]+", " ", t)
+    return " ".join(re.sub(r"(?<=[a-z]{3})s$", "", w) for w in t.split()
+                    if w not in ("the", "of", "for", "and", "fund", "funds", "purpose", "purposes"))
+
+
+def eq_cap(t):
+    return " ".join(w if (re.search(r"[A-Z]", w[1:]) or (i and w.lower() in _EQ_SMALL)) else w[:1].upper() + w[1:]
+                    for i, w in enumerate(t.split()))
+
+
+def eq_parse(x):
+    """-> None (not a class line) | ("PAGE", None) | (category, printed purpose or '')."""
+    lab = label_of(x)
+    if NICA.search(lab):
+        return None
+    if EQ_TWO.search(lab):
+        return ("PAGE", None)
+    m = EQ_PRE.match(lab)
+    if m:
+        cls, p = m.group(1), m.group(2)
+    else:
+        m2 = EQ_PRE.match(str(x.get("category") or ""))
+        if not m2:
+            return None
+        cls, p = m2.group(1), ("" if EQ_SUFFIX.match(lab) else lab)
+    p = re.sub(r"\((see )?notes? [^)]*\)", "", p, flags=re.I)
+    p = re.sub(r"^(funds?|fund balances?|net position)\s*[:\-]\s*", "", p.strip(" :-"), flags=re.I).strip(" :-")
+    if EQ_FILLER.match(p):
+        p = ""
+    return (EQ_CLASS[cls.lower()], p)
+
+
+def _eq_purposes():
+    global _EQP
+    if _EQP is None:
+        f = Path(__file__).resolve().parent.parent / "config" / "equity_purposes.csv"
+        _EQP = {r["purpose_key"]: r["purpose"] for r in csv.DictReader(open(f))} if f.exists() else {}
+    return _EQP
+
+
+def _eq_page_decisions():
+    f = JSON_DIR / "_meta" / "equity_page_check.csv"
+    if not f.exists():
+        return {}
+    return {(r["stem"], r["printed_label"], r["amount"]): r for r in csv.DictReader(open(f)) if r.get("category") in EQ_CATS}
+
+
+def equity_class_rule(bs, log, stem=""):
+    for x in bs.get("equity") or []:
+        if not isinstance(x, dict):
+            continue
+        r = eq_parse(x)
+        if not r:
+            continue
+        cat, p = r
+        if cat == "PAGE":
+            a = x.get("amount")
+            a = a.get("amount") if isinstance(a, dict) else a
+            dec = _eq_page_decisions().get((stem, label_of(x), str(a)))
+            if not dec:
+                EQ_PAGE_QUEUE.append({"stem": stem, "printed_label": label_of(x), "amount": a,
+                                      "source_page": (x.get("amount") or {}).get("source_page") if isinstance(x.get("amount"), dict) else x.get("source_page"),
+                                      "category": "", "purpose": "", "evidence": ""})
+                continue
+            cat, p = dec["category"], dec.get("purpose") or ""
+        if p:
+            p = _eq_purposes().get(eq_key(p), eq_cap(p))
+        setcat(x, "category", cat, "equity: category " + cat, log)
+        relabel(x, cat + (" - " + p if p else ""), "equity: label", log)
+
+
 # ---- Label merges (user 2026-11-06, all levels, any year): config/label_merges.csv ----
 # Spellings that differ only in capitalization, spacing, punctuation, hyphenation, & or /, singular/plural, possessives,
 # Restricted/Assigned/Committed prefixes, footnote references or known typos share one label. Today's standard labels are
@@ -803,8 +902,11 @@ def apply(d, stem=""):
         for x in d.get(k) or []:
             label_merge(x, log)
     if isinstance(d.get("balance_sheet"), dict):
+        equity_class_rule(d["balance_sheet"], log, stem)
         for sec in ("assets", "deferred_outflows", "liabilities", "deferred_inflows", "equity"):
             for x in d["balance_sheet"].get(sec) or []:
+                if sec == "equity" and isinstance(x, dict) and x.get("category") in EQ_CATS:
+                    continue
                 label_merge(x, log)
     return log
 
@@ -820,6 +922,22 @@ def write_context_queue(stems):
     CONTEXT_CHECK_CSV.parent.mkdir(parents=True, exist_ok=True)
     with CONTEXT_CHECK_CSV.open("w", newline="") as fh:
         w = csv.DictWriter(fh, fieldnames=CONTEXT_FIELDS)
+        w.writeheader()
+        w.writerows(rows)
+
+
+def write_equity_queue(stems):
+    """_meta/equity_page_check.csv: decided rows are kept; undecided rows of the processed reports are replaced."""
+    f = JSON_DIR / "_meta" / "equity_page_check.csv"
+    fields = ["stem", "printed_label", "amount", "source_page", "category", "purpose", "evidence"]
+    rows = []
+    if f.exists():
+        with f.open(newline="") as fh:
+            rows = [r for r in csv.DictReader(fh) if r.get("category") or r["stem"] not in stems]
+    rows += EQ_PAGE_QUEUE
+    rows.sort(key=lambda r: (r["stem"], r["printed_label"], str(r["amount"])))
+    with f.open("w", newline="") as fh:
+        w = csv.DictWriter(fh, fieldnames=fields)
         w.writeheader()
         w.writerows(rows)
 
@@ -849,6 +967,7 @@ def main():
                 f.write_text(json.dumps(d, indent=2, ensure_ascii=False) + "\n")
     if not a.check:
         write_context_queue({f.stem for f in files})
+        write_equity_queue({f.stem for f in files})
     for k, v in total.most_common():
         print(f"{v:6} {k}")
     print(f"{len(CONTEXT_QUEUE)} lines need a page check before their category is set ({CONTEXT_CHECK_CSV.name})")

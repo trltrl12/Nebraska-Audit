@@ -1,7 +1,15 @@
 {
   "stem": "Dunbar_FY2022",
-  "values_checked": 50,
+  "values_checked": 51,
   "issues": [
-    {"severity": "warning", "path": "receipts[4].category", "page": 1, "extracted": "federal grants", "on_page": "12 State Receipts: Other 47,079.32 (ARPA Fund column)", "issue": "The row is printed as a State receipt. It was recorded as federal grants based only on the ARPA fund name, and the item has no computed note saying so (detail line for the ARPA Fund is the same). Defensible, but it is a judgment call."}
+    {"severity": "warning", "path": "receipts[4].category", "page": 1,
+     "extracted": "federal grants", "on_page": "State Receipts: Other 47,079.32 (ARPA Fund column)",
+     "issue": "category does not match the printed label (State Receipts); federal grants rests on the ARPA fund name only. Same for detail[10]. Defensible, but the 2026-11-12 FY2022/23 ruling keeps 'State' lines as other state aid unless the page supports otherwise"},
+    {"severity": "warning", "path": "ending_cash.amount", "page": 1,
+     "extracted": 161043.96, "on_page": "line 24 Ending Balance 278,825.20 total (governmental columns sum 161,043.96); line 26 Net Cash Balance blank, line 28 prints '-'",
+     "issue": "ending cash is taken from the line 24 Ending Balance because the cash lines 26-28 are blank. That is the cash-basis roll-forward, so the amount is right, but no cash figure is printed (2026-11-06 ruling: cash is only filled where printed). business_type.ending does the same"},
+    {"severity": "warning", "path": "balance_sheet.liabilities", "page": 5,
+     "extracted": [], "on_page": "Schedule of Outstanding Debt: Water 81,657.16; Street 18,312.57; total 99,969.73",
+     "issue": "outstanding debt is printed on p5 but not recorded in the balance sheet (only mentioned in notes). This is consistent with a cash-basis waiver, but Exhibit A shows no debt service paid on either loan"}
   ]
 }
