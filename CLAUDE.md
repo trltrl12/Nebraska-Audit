@@ -261,6 +261,33 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
   audits keep their CO..-..._Audit_Report filenames (entity_name is correct).
   Verification files: scratchpad only; changes logged in _meta/corrections_log.csv.
 
+- **User rulings 2026-11-17 (all years):**
+  - **Fund balance / net position classes:** equity lines printed Restricted / Committed / Assigned have category
+    `Assigned`; Unrestricted / Unassigned have `Unassigned`; Nonspendable stays. The label is "<Category> - <Purpose>"
+    (plain "Assigned" / "Unassigned" when no purpose is printed); the printed text stays in printed_label. Purposes are
+    unified by `config/equity_purposes.csv` (the user's consolidation: Community Betterment includes development and
+    improvement; Road Improvements/Maintenance and Road and Bridge Improvements/Maintenance are one label each;
+    Keno/Lottery; sewer, water, street, library, building etc. keep their printed detail such as Maintenance,
+    Improvements, Projects; anything printed with "reserve" is its own label; Capital Projects and Capital Outlay,
+    911 Emergency and 911 Wireless stay separate). A purpose not in the file keeps its printed words. Net Investment in
+    Capital Assets and waiver Ending Balance lines are unchanged. Lines printing two classes at once are decided per
+    line from the page (`_meta/equity_page_check.csv`). Applied by user_rules.py (`equity_class_rule`).
+  - **Everything else: be gentle.** No further label consolidation without the user's ruling. A line gets a specific
+    category only when the page shows what it is; "other" stays other. A generic label (Local, Local Receipts: Other,
+    Other, Miscellaneous) stays `other` unless that year's page prints what the money is; a fund column name alone is
+    not enough (it may be used only for lines whose own label says what they are, e.g. Charges for services in a
+    Water Fund).
+  - **Cross-year check:** `python3 scripts/xyear_check.py` lists lines where the same entity prints the same label in
+    different years with different categories (`_meta/xyear_check.csv`). A mismatch is a reason to read the pages side
+    by side, never a reason to copy a category from another year. Decisions go to `_meta/xyear_decisions/<entity>.csv`
+    (category, verdict same | differs | unclear, evidence), are applied per line by user_rules.py and logged in
+    `_meta/corrections_log.csv`. The agent brief is in the session notes (same rules as above).
+  - **FY2022 numbers:** FY2022 ending balances were tied to FY2023 beginning balances (56 entities differed; all read
+    from the pages: no extraction errors, only printed restatements, report differences and fund-scope changes), and
+    a 30-report random sample was independently re-read.
+  - Sargent_FY2022: the Auditor's PDF does not contain printed pp19, 22, 24, 52 (left-hand statement pages); it cannot
+    be re-trimmed. Governmental lines come from the Total column.
+
 ## Batch procedure
 1. `git pull --rebase`.
 2. Read `output/progress.csv`. Take the next `pending` reports, plus any `flagged` reports whose
