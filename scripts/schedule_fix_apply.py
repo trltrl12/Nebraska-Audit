@@ -12,9 +12,10 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from schedule_gap import gaps, v, J  # noqa: E402
 
 PASS2 = "--pass2" in sys.argv
-FIX = J / "_meta" / ("schedule_fix2" if PASS2 else "schedule_fix")
-MARK = "2026-11-17 pass 2" if PASS2 else "2026-11-17"
-TAG = "schedule_fix2" if PASS2 else "schedule_fix"
+PASS3 = "--pass3" in sys.argv   # pass 3: the reports still open after passes 1 and 2, each re-read in full
+TAG = "schedule_fix3" if PASS3 else "schedule_fix2" if PASS2 else "schedule_fix"
+FIX = J / "_meta" / TAG
+MARK = "2026-11-17 pass 3" if PASS3 else "2026-11-17 pass 2" if PASS2 else "2026-11-17"
 # removals of more than ten lines are applied only after an independent page check confirmed every removed line
 CHECKED_REMOVALS = {"Potter_FY2022", "Potter_FY2023", "Potter_FY2025", "Hubbard_FY2022"}
 FIXED = {"missing fund column", "missing lines", "duplicate lines"}
@@ -44,7 +45,7 @@ def norm(s):
 
 def main():
     write = "--write" in sys.argv
-    hold_f = J / "_meta" / "schedule_fix_hold.csv"   # stem,reason: fixes the page check did not confirm
+    hold_f = J / "_meta" / ("schedule_fix3_hold.csv" if PASS3 else "schedule_fix_hold.csv")   # stem,reason: fixes the page check did not confirm
     hold = {r["stem"]: r["reason"] for r in csv.DictReader(hold_f.open())} if hold_f.exists() else {}
     status, stat, changed = [], Counter(), []
     for f in sorted(FIX.glob("*.json")):
