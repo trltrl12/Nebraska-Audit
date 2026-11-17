@@ -278,7 +278,7 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
     printed_label), and wordings that are the same words (case, punctuation, plural, small words) or one misspelled
     word share one label (`config/label_unify.csv`; user_rules.py `label_unify_rule`). Anything beyond same-words
     groups needs the user's ruling first.
-  - Generic vehicle spending lines ("Vehicle", "Vehicles", "Vehicle expense(s)") are category **Vehicle Expense**, never
+  - Generic vehicle spending lines ("Vehicle", "Vehicles", "Vehicle expense(s)") are category **Vehicle Expenses/Maintenance**, never
     other (also replaces Fuel / Repairs and Maintenance for that label); lines under a printed function keep it.
   - Compensated absences lines are left in the category each report already has (user 2026-11-17: leave them split).
   - **Everything else: be gentle.** No further label consolidation without the user's ruling. A line gets a specific

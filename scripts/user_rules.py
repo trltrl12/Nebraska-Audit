@@ -79,14 +79,14 @@ def community_dev_rule(x, log):
 
 
 # user 2026-11-17: a generic vehicle spending line ("Vehicle", "Vehicles", "Vehicle expense(s)") is never `other`:
-# category Vehicle Expense (also replaces the Fuel / Repairs and Maintenance guesses for the same label). Lines the
+# category Vehicle Expenses/Maintenance (also replaces the Fuel / Repairs and Maintenance guesses for the same label). Lines the
 # report puts under a function (streets/highways, public safety ...) or capital outlay keep that category.
 VEHICLE = re.compile(r"^\s*vehicles?( expenses?| costs?)?\s*$", re.I)
 
 
 def vehicle_rule(x, log):
-    if x.get("category") in ("other", "Fuel", "Repairs and Maintenance") and VEHICLE.match(label_of(x)):
-        setcat(x, "category", "Vehicle Expense", "category: Vehicle Expense", log)
+    if x.get("category") in ("other", "Fuel", "Repairs and Maintenance", "Vehicle Expense") and VEHICLE.match(label_of(x)):
+        setcat(x, "category", "Vehicle Expenses/Maintenance", "category: Vehicle Expenses/Maintenance", log)
 
 
 COMMUNITY_BETTERMENT = re.compile(r"community (development/)?better", re.I)
@@ -1005,8 +1005,8 @@ def xyear_rule(d, stem, log):
                 if cat == "economic development" and where != "receipts" and "revenue" not in where and (
                         COMMUNITY_DEV.search(label_of(x)) or COMMUNITY_DEV.search(str(x.get("department") or ""))):
                     cat = CB
-                if cat in ("other", "Fuel", "Repairs and Maintenance") and VEHICLE.match(label_of(x)):
-                    cat = "Vehicle Expense"
+                if cat in ("other", "Fuel", "Repairs and Maintenance", "Vehicle Expense") and VEHICLE.match(label_of(x)):
+                    cat = "Vehicle Expenses/Maintenance"
                 setcat(x, "category", cat, "xyear page check: category", log)
                 if x.get("category_evidence") != r.get("evidence"):
                     x["category_evidence"] = r.get("evidence")
