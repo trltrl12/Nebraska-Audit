@@ -1,0 +1,22 @@
+{"stem": "Sutton_FY2023", "gaps": [
+  {"fund_type": "governmental", "section": "revenue", "cause": "missing fund column",
+   "explanation": "The governmental funds statement (trimmed p5) prints a Debt Service Fund column that has no schedule of its own; detail[] has no Debt Service Fund line. Its printed revenues are Property 305,811 and Other tax 709, Total revenues 306,520. Check: 2,091,565 + 306,520 = 2,398,085, which equals the statement.",
+   "add": [
+     {"fund_type": "governmental", "schedule": "Statement of Revenues, Expenditures, and Changes in Fund Balances - Modified Cash Basis - Governmental Funds (Debt Service Fund column)", "fund": "Debt Service Fund", "department": null, "section": "revenue", "original_label": "Property", "amount": 305811, "source_page": 5, "category": "property tax", "detail_category": "property tax"},
+     {"fund_type": "governmental", "schedule": "Statement of Revenues, Expenditures, and Changes in Fund Balances - Modified Cash Basis - Governmental Funds (Debt Service Fund column)", "fund": "Debt Service Fund", "department": null, "section": "revenue", "original_label": "Other tax", "amount": 709, "source_page": 5, "category": "taxes", "detail_category": "other local taxes"}
+   ],
+   "remove": []},
+  {"fund_type": "governmental", "section": "expenditure", "cause": "missing fund column",
+   "explanation": "The Debt Service Fund column (p5) prints Principal payments on debt 195,000 and Interest on long-term debt 42,363, Total expenditures 237,363. Neither is in detail[]. Check: 2,197,266 + 237,363 = 2,434,629, which equals the statement.",
+   "add": [
+     {"fund_type": "governmental", "schedule": "Statement of Revenues, Expenditures, and Changes in Fund Balances - Modified Cash Basis - Governmental Funds (Debt Service Fund column)", "fund": "Debt Service Fund", "department": null, "section": "expenditure", "original_label": "Principal payments on debt", "amount": 195000, "source_page": 5, "category": "Debt Service", "detail_category": "debt principal"},
+     {"fund_type": "governmental", "schedule": "Statement of Revenues, Expenditures, and Changes in Fund Balances - Modified Cash Basis - Governmental Funds (Debt Service Fund column)", "fund": "Debt Service Fund", "department": null, "section": "expenditure", "original_label": "Interest on long-term debt", "amount": 42363, "source_page": 5, "category": "Debt Service", "detail_category": "debt interest and fees"}
+   ],
+   "remove": []},
+  {"fund_type": "governmental", "section": "transfers_out", "cause": "different basis",
+   "explanation": "This gap has two parts. (1) Missing line: the Debt Service Fund column (p5) prints Transfers in (out) (182,500), and it is not in detail[], so it is added below. (2) Gross vs net: the statement figure 183,800 is the Total Governmental Funds column's net 'Transfers in (out)'. By fund column that is General (164,450), Street 119,105, Debt Service (182,500), Sales Tax (89,350) and CDBG 133,395, net (183,800). detail[] records the transfers gross per fund. Out: General Fund Administrative (253,800) (p20), Sales Tax (89,350) (p16), plus the added Debt Service (182,500) = 525,650. In: General Fund Park 89,350 (p21), Street 119,105 (p15), CDBG 133,395 (p18) = 341,850. Net: 341,850 - 525,650 = -183,800, which equals the statement. The remaining difference on this row, 525,650 - 183,800 = 341,850, is exactly the gross transfers in. That part is different basis, not an error.",
+   "add": [
+     {"fund_type": "governmental", "schedule": "Statement of Revenues, Expenditures, and Changes in Fund Balances - Modified Cash Basis - Governmental Funds (Debt Service Fund column)", "fund": "Debt Service Fund", "department": null, "section": "other financing", "original_label": "Transfers Out", "amount": -182500, "source_page": 5, "category": "Total Other Financing Sources (Uses)", "detail_category": "Transfers Out"}
+   ],
+   "remove": []}
+]}
