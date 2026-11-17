@@ -328,9 +328,9 @@ def one_tab(collected):
         return m.group(1) if m else str(row.get("fiscal_year_end") or "")[:4] or "unknown"
     by_year = {}
     for row in out:
-        # Year column (user 2026-11-17): the year in the file name (<entity>_FY2024), else the filing year
-        m = re.search(r"_FY(\d{4})", Path(str(row.get("filename") or "")).stem)
-        row["year"] = int(m.group(1)) if m else (int(year_of(row)) if year_of(row).isdigit() else None)
+        # Year column (user 2026-11-17): the Auditor's year (the year the Auditor lists the filing under,
+        # file_list.csv fiscal_year), never the report's own fiscal year end
+        row["year"] = int(year_of(row)) if year_of(row).isdigit() else None
         by_year.setdefault(year_of(row), []).append(row)
     global _scope
     keep, _scope = _scope, None   # rows are already limited to the focused reports
