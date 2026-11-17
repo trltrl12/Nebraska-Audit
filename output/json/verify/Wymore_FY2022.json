@@ -1,0 +1,19 @@
+{
+  "stem": "Wymore_FY2022",
+  "values_checked": 184,
+  "issues": [
+    {"severity": "warning", "path": "balance_sheet.equity", "page": 5,
+     "extracted": "business-type equity 402,532 + 2,089,324 = 2,491,856 (p1, modified cash basis); business_type.ending 4,064,539 (p6, accrual)",
+     "on_page": "p5 Statement of Net Position - Business-type Activities: receivables 196,497, inventory 128,738, capital assets 2,330,782, total liabilities 1,083,334, net investment in capital assets 1,425,782, total net position 4,064,539",
+     "issue": "Business-type roll-forward uses the accrual proprietary statement (p6, ending 4,064,539) while the balance sheet's business-type lines come from the cash-basis government-wide statement (p1, 2,491,856), so the two measures don't match; the p5 assets/liabilities (receivables, inventory, capital assets, debt 905,000) are not recorded anywhere. Also the p2 Statement of Activities business-type figures (beginning 2,179,635 + 26,336, disbursements 1,540,482) differ from p6. Defensible (same choice as FY2023) but worth a person's check."},
+    {"severity": "warning", "path": "ending_cash", "page": 3,
+     "extracted": 2958925, "on_page": "Cash and cash equivalents 2,846,789 + Cash at county treasurer 14,260 + Restricted cash 97,876; Total assets 2,958,925",
+     "issue": "Ending governmental cash is a sum of cash lines (marked computed, arithmetic correct); the 2026-11-06 ruling says cash is filled only where printed and never derived. The printed Total assets 2,958,925 is all cash, so the value is right, but no printed 'cash' total exists and beginning cash is null."},
+    {"severity": "warning", "path": "disbursements[17].category", "page": 6,
+     "extracted": "utilities", "on_page": "Utilities 727,776 (Light 725,069, Water 2,707)",
+     "issue": "Light fund 'Utilities' 725,069 is almost certainly purchased power (cost of sales) for the electric utility; kept as utilities (power, gas, phone) as printed. Same for detail[49] (Light Fund Utilities 725,069). Judgment call."},
+    {"severity": "warning", "path": "receipts[0]", "page": 2,
+     "extracted": "Taxes 508,562 (category taxes, unsplit)", "on_page": "p2 general receipts: Property tax 298,622, City sales tax 205,106, 911 surcharge 4,571, Occupation tax 265 = 508,564",
+     "issue": "Not split because the p2 breakdown is 2 more than the p4 Taxes line; consistent with the exact-reconciliation rule. Recorded in report_discrepancies. Noted only so a person can decide whether the 2 rounding difference may be accepted."}
+  ]
+}
