@@ -1,0 +1,14 @@
+{"stem": "Nelson_FY2024", "gaps": [
+  {"fund_type": "governmental", "section": "revenue", "cause": "missing fund column",
+   "explanation": "Governmental funds statement p6 has three columns: General Fund, Sales Tax Fund, Other Governmental Funds. detail[] holds the Combining General Fund schedule (p14, lines add to 423,516) and the nonmajor schedule (p15, Keno 16,991 = the Other Governmental Funds column), schedule_total 440,507. The Sales Tax Fund column (no schedule of its own) prints one revenue row: 'Sales tax revenue' 105,487. 440,507 + 105,487 = 545,994 vs statement_total 545,993 (JSON receipt lines; the General Fund column lines add to 423,515 vs printed 423,516, page rounding of 1, already in report_discrepancies). Residual -1.",
+   "add": [
+     {"fund_type": "governmental", "schedule": "Statement of Revenues, Expenditures, and Changes in Fund Balances - Governmental Funds (Sales Tax Fund column)", "fund": "Sales Tax Fund", "department": null, "section": "revenue", "original_label": "Sales tax revenue", "amount": 105487, "source_page": 6, "category": "sales tax", "detail_category": "sales tax"}
+   ],
+   "remove": []},
+  {"fund_type": "governmental", "section": "transfers_out", "cause": "missing fund column",
+   "explanation": "Statement p6 'Operating transfers out' Total (87,400) = General Fund (47,400) + Sales Tax Fund (40,000). detail[] has only the General Department transfer out -47,400 (p14). The Sales Tax Fund column transfer out (40,000) is missing. 47,400 + 40,000 = 87,400 = statement_total.",
+   "add": [
+     {"fund_type": "governmental", "schedule": "Statement of Revenues, Expenditures, and Changes in Fund Balances - Governmental Funds (Sales Tax Fund column)", "fund": "Sales Tax Fund", "department": null, "section": "other financing", "original_label": "Transfers Out", "amount": -40000, "source_page": 6, "category": null, "detail_category": null}
+   ],
+   "remove": []}
+]}
