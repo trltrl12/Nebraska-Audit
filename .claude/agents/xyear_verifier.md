@@ -44,3 +44,5 @@ Rules that supersede older text in CLAUDE.md / extractor.md (user 2026-11-17), s
 - A "Street Fund: Intergovernmental" line has detail_category other state aid unless highway allocation is printed.
 - Capital outlay detail lines with no printed object have detail_category not itemized.
 These pattern-level items are fixed by script for all reports; report a line only if it would still be wrong after them.
+
+Your final message must be ONLY the one status line per entity/report described above: no notes, no explanations, no file list. Everything else belongs in the CSV (use its evidence / what_the_page_prints column; add a row for any related line outside your list that is wrong, with the same columns).
