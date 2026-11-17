@@ -1,0 +1,33 @@
+{
+  "stem": "Wilber_FY2022",
+  "values_checked": 354,
+  "issues": [
+    {"severity": "warning", "path": "disbursements[8].source_page", "page": 2,
+     "extracted": 2, "on_page": "Debt Service Fund Debt service-interest 3,795 (p19) + Fire Debt service-interest 12,421 (p22) = 16,216",
+     "issue": "The 16,216 interest piece is computed from the fund schedules on pp19 and 22, but it cites p2. The 16,216 on p2 is the Statement of Activities accrual-basis debt service expense, which only happens to match. The arithmetic is right: 128,386 + 16,216 = 144,602 (p6 Total 2022 Debt service; nonmajor 140,807 = Fire 128,386 + 12,421; Debt Service Fund 3,795)."},
+    {"severity": "warning", "path": "disbursements[10].category", "page": 10,
+     "extracted": "Purchased Power/Cost of Sales (function hospital/health care)", "on_page": "Production 2,388,969 = Electric 1,040,290 + Water 76,103 + Care Center 1,272,576",
+     "issue": "Mixed line. The Care Center's 1,272,576 is nursing-home production cost, not purchased power. Electric's 1,040,290 is power purchased and belongs to the utilities function, not hospital/health care. The category/function pair fits neither part well."},
+    {"severity": "warning", "path": "disbursements[12].category", "page": 10,
+     "extracted": "hospital/health care", "on_page": "Administrative 559,285 = Electric 50,508 + Water 23,568 + Sewer 30,588 + Care Center 454,621",
+     "issue": "Mixed line: 104,664 is utility administration. The category was chosen for the dominant part (Care Center). This is defensible but should be reviewed."},
+    {"severity": "warning", "path": "disbursements[13].function", "page": 10,
+     "extracted": "utilities", "on_page": "Depreciation and amortization 395,452 = Electric 52,131 + Water 35,771 + Sewer 38,902 + Care Center 268,648",
+     "issue": "The function is set to utilities, but the largest part (268,648) is Care Center (hospital/health care). This contradicts the dominant-function choice used on the other business-type lines."},
+    {"severity": "warning", "path": "receipts[22].category", "page": 10,
+     "extracted": "intergovernmental/state aid", "on_page": "Intergovernmental transfer 174,810 (Care Center non-operating revenue)",
+     "issue": "The label contains 'transfer', so the validator may flag it. The page prints it as non-operating revenue, with a matching 'Intergovernmental transfer receivable' on p1, separate from the 'Transfers from/to other funds' rows (0). It is a nursing-home intergovernmental-transfer (IGT) payment, not an interfund transfer. The category is defensible. The same applies to detail[221]."},
+    {"severity": "warning", "path": "detail[101].category", "page": 22,
+     "extracted": "intergovernmental/state aid / county/other local governments", "on_page": "Rural fire district 114,103 (Fire Fund)",
+     "issue": "The extractor rules list rural fire contracts under charges for services/fees. Here the governmental funds statement counts it in Intergovernmental revenues (p6 Non-Major 118,103 = 4,000 + 114,103), and the payer is another government. This is a judgment call."},
+    {"severity": "warning", "path": "detail[68].detail_category", "page": 17,
+     "extracted": "equipment purchases", "on_page": "Capital outlay - Books and subscriptions 14,307",
+     "issue": "Books and subscriptions are not equipment. Library collection materials might fit better as supplies and materials or a books category."},
+    {"severity": "warning", "path": "detail[87].original_label", "page": 21,
+     "extracted": "Capital Outlay: Public Safety", "on_page": "Capital outlay 133,313 (Ambulance column)",
+     "issue": "The function was inferred from the fund name. Under the 2026-11-12 FY2022/2023 ruling, the function is used only when printed (the fund-name rule of 2026-11-13 is FY2023 only). The same applies to detail[98] (Park, 39,395), detail[113] (Fire, 505,455), detail[68] and detail[69] (Library, 14,307 and 5,554). The amounts are correct."},
+    {"severity": "warning", "path": "detail[128].detail_category", "page": 22,
+     "extracted": "Sales Tax", "on_page": "Pool Operating expenditures - Sales tax 2,645",
+     "issue": "This is sales tax paid, an expense. The detail_category 'Sales Tax' is a revenue name and could be confused with sales tax revenue. A taxes-paid category, as used for the Care Center, would be clearer."}
+  ]
+}
