@@ -1,0 +1,16 @@
+{"stem": "Syracuse_FY2023", "gaps": [
+  {"fund_type": "business-type", "section": "transfers_net", "cause": "missing fund column",
+   "explanation": "Proprietary Fund Statement of Revenues, Expenses, and Changes in Net Position p6, Combined Utilities Fund column: Transfers In '-', Transfers Out (349,103), Total Transfers (349,103) = business_type.transfers_net (also p7 cash flows 'Transfer to Other Funds' (349,103), p2 business-type Transfers In (out) (349,103)). detail's business-type lines come from the all-funds budgetary schedule p8, whose Combined Utilities column prints Transfers In (out) '-', so no transfer is in detail. Added the printed statement row: Combined Utilities Fund Transfers Out -349,103. Check: 0 - 349,103 = -349,103.",
+   "add": [
+    {"fund_type": "business-type", "schedule": "Proprietary Fund Statement of Revenues, Expenses, and Changes in Net Position (Combined Utilities Fund column)", "fund": "Combined Utilities Fund", "department": null, "section": "other financing", "original_label": "Transfers Out", "amount": -349103, "source_page": 6, "category": "Transfers Out", "detail_category": "Transfers Out"}
+   ],
+   "remove": []},
+  {"fund_type": "governmental", "section": "other financing", "cause": "missing lines",
+   "explanation": "Mislabelled transfer line: detail[24] (budgetary schedule p8, General Fund, printed 'Transfers In (out)') is +191,287, a net inflow (statement p4: Operating Transfers In 349,103, Operating Transfers Out (157,816), Total 191,287), but its original_label is 'Transfers Out'. Remove it and add it back unchanged except the label 'Transfers In' (same amount 191,287, same page). Net effect on totals 0. The gross 349,103 / (157,816) split is not printed on the schedule (first pass: different basis). No other other-financing rows are printed in the governmental statement.",
+   "add": [
+    {"fund_type": "governmental", "schedule": "Budgetary Comparison Schedule - Budget and Actual - Cash Basis - All Funds", "fund": "General Fund", "department": null, "section": "other financing", "original_label": "Transfers In", "amount": 191287, "source_page": 8, "category": "Transfers In", "detail_category": "Transfers In"}
+   ],
+   "remove": [
+    {"detail_index": 24, "original_label": "Transfers Out", "amount": 191287}
+   ]}
+]}
