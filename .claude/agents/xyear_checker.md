@@ -50,7 +50,7 @@ own page prints.
      "Sales tax payable" / "Sales tax collected" -> due to other governments; "Due to other funds" / "Due from other
      funds" -> Internal Balances; "Grants" / "Grant income" / "Grant proceeds" with no grantor printed -> other;
      mixed "Grants and contributions" / "Grants and donations" with no breakdown -> donations/contributions; waiver
-     "Local Receipts: Other" -> other; compensated absences -> other liabilities; "NPPD lease payment/revenue" -> Rentals.
+     "Local Receipts: Other" -> other; "NPPD lease payment/revenue" -> Rentals.
    - Tax lines follow the tax-split rule in CLAUDE.md (user 2026-11-04): a fund name that clearly identifies one tax
      decides that fund's "Taxes" line (Visitor Promotion / Visitor Improvement -> lodging tax; TIF -> property tax;
      Local Option Sales Tax fund -> sales tax). An "Intergovernmental" line in a fund column named for a federal
@@ -59,6 +59,14 @@ own page prints.
      rely on notes inside the JSON.
    - Write ONLY the decision files of the entities you were given, with the Write tool. Never touch any other file in
      that folder, never run git, and never generate files with a script.
+   - From the 2026-11-17 spot check: (a) before setting a utility "Other" / "Miscellaneous" line to `other`, ALWAYS open
+     that year's Statement of Activities and test the Charges for Services tie; (b) a department or schedule heading
+     counts as the printed function (a Cemetery Department schedule is health/welfare unless the report prints
+     cemetery under another function such as Public works); (c) spending under a printed "Community development" /
+     "Community improvement" function is Community Betterment/Development, never economic development; (d) cash
+     printed under a "Restricted" heading is restricted assets; (e) a line naming a service the entity provides
+     (garbage, sanitation) is utilities, not a cost type; (f) LATCF is a federal program (federal grants); (g) for
+     compensated absences keep the category the years already share; do not change it.
    - Never merge or rename labels. Categories only.
    - The category formerly named "Community Betterment" is now named "Community Betterment/Development" (user 2026-11-17); use the new name.
    - Never change an amount, never comment on amounts. Categories only.
