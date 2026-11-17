@@ -1,16 +1,18 @@
 {
   "stem": "Wauneta_FY2022",
-  "values_checked": 152,
+  "values_checked": 178,
   "issues": [
+    {"severity": "warning", "path": "proprietary", "page": 7,
+     "extracted": null, "on_page": "Statement of Cash Flows - Proprietary Funds, Total (p8): operating 250,739; noncapital financing (84,640); capital and related financing (37,366); investing (48,949); beginning cash 598,622; ending cash 678,406",
+     "issue": "the proprietary cash flow statement is printed and the business-type activities are accrual basis, but nothing is recorded (the extractor treated it as not GAAP). Confirm this matches the convention for accrual-basis enterprise funds in modified-cash villages"},
+    {"severity": "warning", "path": "receipts[16].category", "page": 6,
+     "extracted": "donations/contributions", "on_page": "Grant and contribution income 191,107 (Water Fund; cash flow p8 'Capital grant and contributions received')",
+     "issue": "a capital grant could come from a government (grant) rather than private donors. The mixed-label rule supports donations/contributions, but the grantor is not stated"},
+    {"severity": "warning", "path": "receipts[5].category", "page": 4,
+     "extracted": "Rentals", "on_page": "Rental and fees 5,175",
+     "issue": "mixed label (rental and fees) with no printed breakdown, kept as Rentals"},
     {"severity": "warning", "path": "disbursements[7].category", "page": 6,
      "extracted": "Salaries and Wages", "on_page": "Salaries, taxes, and benefits 233,146",
-     "issue": "combined line covers salaries, payroll taxes and benefits; the category picks the dominant part (salaries). Defensible but it is a judgment call"},
-    {"severity": "warning", "path": "detail[23].detail_category", "page": 10,
-     "extracted": "salaries and wages", "on_page": "Personnel services 10,415",
-     "issue": "'Personnel services' usually covers salaries and benefits; could be left not itemized"},
-    {"severity": "warning", "path": "detail[11].category", "page": 13,
-     "extracted": "public safety / culture/recreation (Fire 27,482, Park 72,340, not itemized)",
-     "on_page": "General Fund departments combining statement (p13) prints Fire capital outlay 15,336 and Park capital outlay 11,995 inside these department totals",
-     "issue": "General Fund detail is taken from the p9 budget schedule (department totals), so printed capital outlay inside Fire and Park stays in public safety / culture-recreation, not capital outlay. The statement lines split capital outlay out (48,863), so the two levels don't match. The p13 object lines (General, Fire, Park) are not in the JSON. Notes say this was deliberate because the continuation page for Cemetery, Library and Community Building is not in the trim, so there is no double counting. Applies to detail[11] (Fire) and detail[13] (Park)"}
+     "issue": "combined line includes payroll taxes and benefits; Salaries and Wages is the dominant-part judgment"}
   ]
 }

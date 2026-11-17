@@ -66,6 +66,18 @@ RECREATION_DEPT = re.compile(r"pool|\bparks?\b|recreation|golf|swim", re.I)
 UTILITY_FUND = re.compile(r"water|sewer|electric|light|gas|utilit|refuse|sanitation|garbage|trash|solid waste", re.I)
 DRIVERS_ED = re.compile(r"driver'?s'? ?ed", re.I)
 CB = "Community Betterment/Development"  # user 2026-11-17: the category and label read this way (was Community Betterment)
+# user 2026-11-17: spending printed "Community development" / "Community improvement(s)" (label or department) that
+# was in economic development moves to Community Betterment/Development. Mixed labels ("Economic and community
+# development") and lines whose page puts them under another function are left alone.
+COMMUNITY_DEV = re.compile(r"^\s*community (development|improvements?|betterment)\b", re.I)
+
+
+def community_dev_rule(x, log):
+    if x.get("category") in ("economic development", "Community Betterment") and (
+            COMMUNITY_DEV.search(label_of(x)) or COMMUNITY_DEV.search(str(x.get("department") or ""))):
+        setcat(x, "category", CB, "category: " + CB + " (community development)", log)
+
+
 COMMUNITY_BETTERMENT = re.compile(r"community (development/)?better", re.I)
 NOXIOUS_WEED = re.compile(r"noxious|\bweeds?\b", re.I)
 OPERATING_LABEL = re.compile(r"^operating( expenses?| costs?)?$", re.I)
@@ -902,6 +914,12 @@ def apply(d, stem=""):
         label_unify_assets(d["balance_sheet"], log)
     entity_rules(d, entity_of(stem), log)
     xyear_rule(d, stem, log)
+    for x in d.get("disbursements") or []:
+        if isinstance(x, dict):
+            community_dev_rule(x, log)
+    for x in d.get("detail") or []:
+        if isinstance(x, dict) and x.get("section") == "expenditure":
+            community_dev_rule(x, log)
     for k in ("receipts", "disbursements", "detail"):
         for x in d.get(k) or []:
             label_merge(x, log)
@@ -962,8 +980,11 @@ def xyear_rule(d, stem, log):
         for lab in (x.get("original_label"), x.get("printed_label")):
             r = xy.get((stem, where, lab, str(a), str(p), fund or "", dept or ""))
             if r:
-                setcat(x, "category", CB if r["category"] == "Community Betterment" else r["category"],
-                       "xyear page check: category", log)
+                cat = CB if r["category"] == "Community Betterment" else r["category"]
+                if cat == "economic development" and where != "receipts" and "revenue" not in where and (
+                        COMMUNITY_DEV.search(label_of(x)) or COMMUNITY_DEV.search(str(x.get("department") or ""))):
+                    cat = CB
+                setcat(x, "category", cat, "xyear page check: category", log)
                 if x.get("category_evidence") != r.get("evidence"):
                     x["category_evidence"] = r.get("evidence")
                     x["category_decision"] = "xyear page check"

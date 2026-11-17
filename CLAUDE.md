@@ -330,9 +330,9 @@ Run this when the user says "run the context check". Use a fresh session and do 
    changes), `git add output/json/ && git commit -m "Cross-year page check: wave N"`, `git pull --rebase && git push`.
 5. Entities whose remaining rows are all verdict `differs`/`unclear` drop out of the queue; rows marked `hold` stay.
 Status 2026-11-17: pilot + waves 1-2 applied (about 95 entities); wave 3 (Chappell ... Elk_Creek, Beaver_Crossing,
-Bradshaw) was running when the session ended: any entity without a decisions file must be re-sent. Open question for
-the user: move spending lines printed "Community development/improvement" (now economic development) into Community
-Betterment/Development? Walthill, Wauneta, Beaver_Crossing and Bradshaw FY2022 were re-extracted from their new trims 2026-11-17; run the
+Bradshaw) was running when the session ended: any entity without a decisions file must be re-sent. Spending printed "Community development" / "Community improvement"
+(label or department) that was in economic development is category Community Betterment/Development (user 2026-11-17;
+user_rules.py community_dev_rule). Walthill, Wauneta, Beaver_Crossing and Bradshaw FY2022 were re-extracted from their new trims 2026-11-17; run the
 verifier on any of them whose output/json/verify file is older than its JSON.
 
 ## Running another fiscal year (e.g. 2024)

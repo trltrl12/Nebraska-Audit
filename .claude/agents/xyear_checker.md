@@ -42,6 +42,10 @@ own page prints.
      specific category (e.g. "Local" in an Ambulance Fund stays other; "Local Receipts: Other" in a Water column of a
      waiver form stays other). A fund/department name may be used only for lines whose own label already says what
      they are (e.g. "Charges for services" in a Water Fund -> Utility Charges, in a Pool department -> Recreation Fees).
+   - Exception that still holds (user 2026-11-06): a generic utility line ("Other revenue", "Miscellaneous", "Other"
+     under a utility fund's operating revenues) is `charges for services/fees` when that year's own Statement of
+     Activities counts it in the Charges for Services column (the totals tie); that is printed evidence. Without that
+     tie it stays `other`.
    - Never merge or rename labels. Categories only.
    - The category formerly named "Community Betterment" is now named "Community Betterment/Development" (user 2026-11-17); use the new name.
    - Never change an amount, never comment on amounts. Categories only.
