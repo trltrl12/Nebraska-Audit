@@ -280,6 +280,7 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
     groups needs the user's ruling first.
   - Generic vehicle spending lines ("Vehicle", "Vehicles", "Vehicle expense(s)") are category **Vehicle Expense**, never
     other (also replaces Fuel / Repairs and Maintenance for that label); lines under a printed function keep it.
+  - Compensated absences lines are left in the category each report already has (user 2026-11-17: leave them split).
   - **Everything else: be gentle.** No further label consolidation without the user's ruling. A line gets a specific
     category only when the page shows what it is; "other" stays other. A generic label (Local, Local Receipts: Other,
     Other, Miscellaneous) stays `other` unless that year's page prints what the money is; a fund column name alone is
