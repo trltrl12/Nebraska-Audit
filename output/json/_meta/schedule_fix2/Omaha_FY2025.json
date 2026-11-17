@@ -1,0 +1,16 @@
+{"stem": "Omaha_FY2025", "gaps": [
+  {"fund_type": "governmental", "section": "debt_proceeds", "cause": "missing lines + page not in trim",
+   "explanation": "p6 governmental funds statement: Issuance of debt 151,760,000 is printed only in the Nonmajor Governmental Funds column. Detail = Riverfront Redevelopment Special Tax Fund 'Issuance of debt' 40,000,000 (p32, a nonmajor fund). Adding the Nonmajor cell would double count the 40,000,000, and adding 151,760,000 - 40,000,000 = 111,760,000 would be a derived figure; that 111,760,000 was issued by nonmajor funds that have no budget schedule in the trim (combining nonmajor statements not trimmed) - not fixable. Separately, the General Fund column prints Issuance of long-term lease 1,252,711 and Issuance of subscriptions 1,480,473 (p6); the General Fund budget schedule (pp12-13) has no other financing section, so neither is in detail - both added as printed (they are in JSON other_financing, not debt_proceeds, so they do not change this gap's 111,760,000).",
+   "add": [
+     {"fund_type": "governmental", "schedule": "Statement of Revenues, Expenditures, and Changes in Fund Balances (Deficits)—Governmental Funds (General Fund column)", "fund": "General", "department": null, "section": "other financing", "original_label": "Issuance of long-term lease", "amount": 1252711, "source_page": 6, "category": null, "detail_category": null},
+     {"fund_type": "governmental", "schedule": "Statement of Revenues, Expenditures, and Changes in Fund Balances (Deficits)—Governmental Funds (General Fund column)", "fund": "General", "department": null, "section": "other financing", "original_label": "Issuance of subscriptions", "amount": 1480473, "source_page": 6, "category": null, "detail_category": null}
+   ],
+   "remove": []},
+  {"fund_type": "governmental", "section": "other financing", "cause": "missing lines",
+   "explanation": "p6 Nonmajor Governmental Funds column: Premium on debt issued 10,460,000 and Proceeds on sale of capital assets 75,435. No nonmajor budget schedule in detail prints either (Riverfront p32 prints premium '-'), so no part is in detail - both added as printed. Debt Service Fund premium is already in detail (778,643 budgetary vs 1,065,233 GAAP: different basis, explained in the first pass). No mislabelled transfer lines.",
+   "add": [
+     {"fund_type": "governmental", "schedule": "Statement of Revenues, Expenditures, and Changes in Fund Balances (Deficits)—Governmental Funds (Nonmajor Governmental Funds column)", "fund": "Nonmajor Governmental Funds", "department": null, "section": "other financing", "original_label": "Premium on debt issued", "amount": 10460000, "source_page": 6, "category": null, "detail_category": null},
+     {"fund_type": "governmental", "schedule": "Statement of Revenues, Expenditures, and Changes in Fund Balances (Deficits)—Governmental Funds (Nonmajor Governmental Funds column)", "fund": "Nonmajor Governmental Funds", "department": null, "section": "other financing", "original_label": "Proceeds on sale of capital assets", "amount": 75435, "source_page": 6, "category": "Sale of Property", "detail_category": "Sale of Property"}
+   ],
+   "remove": []}
+]}
