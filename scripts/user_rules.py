@@ -763,6 +763,9 @@ def eq_parse(x):
     if EQ_TWO.search(lab):
         return ("PAGE", None)
     m = EQ_PRE.match(lab)
+    if not m and x.get("category") not in EQ_CATS:
+        # class kept only in original_label (printed_label holds the bare purpose)
+        m = EQ_PRE.match(str(x.get("original_label") or ""))
     if m:
         cls, p = m.group(1), m.group(2)
     else:
