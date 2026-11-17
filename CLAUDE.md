@@ -332,9 +332,8 @@ Run this when the user says "run the context check". Use a fresh session and do 
 Status 2026-11-17: pilot + waves 1-2 applied (about 95 entities); wave 3 (Chappell ... Elk_Creek, Beaver_Crossing,
 Bradshaw) was running when the session ended: any entity without a decisions file must be re-sent. Open question for
 the user: move spending lines printed "Community development/improvement" (now economic development) into Community
-Betterment/Development? FY2022 re-extractions in flight at session end: Walthill_FY2022, Wauneta_FY2022 (re-trimmed;
-re-extract if their JSON still cites the old trim's pages, then verify); Beaver_Crossing_FY2022 and Bradshaw_FY2022
-were re-extracted and need the verifier.
+Betterment/Development? Walthill, Wauneta, Beaver_Crossing and Bradshaw FY2022 were re-extracted from their new trims 2026-11-17; run the
+verifier on any of them whose output/json/verify file is older than its JSON.
 
 ## Running another fiscal year (e.g. 2024)
 Works for any year. Upload the Auditor's search export as config/export_<year>.xlsx (as was done for 2025), then run the
