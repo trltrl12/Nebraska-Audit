@@ -123,6 +123,21 @@ def _decision_categories():
                 c = (r.get("category") or "").strip()
                 if c and c.lower() != "unclear" and r.get("section") in out and c not in out[r["section"]]:
                     out[r["section"]].append(c)
+    # category names set by cross-year page checks or the user's 2026-11-17 rulings
+    for f in sorted((ROOT / "output" / "json" / "_meta" / "xyear_decisions").glob("*.csv")):
+        with f.open(newline="") as fh:
+            for r in csv.DictReader(fh):
+                cat = (r.get("category") or "").strip()
+                sec = "revenue" if r.get("where") in ("receipts", "detail revenue") else \
+                    "expenditure" if r.get("where") in ("disbursements", "detail expenditure") else ""
+                if cat and sec and r.get("verdict") in ("same", "differs") and cat not in out[sec]:
+                    out[sec].append(cat)
+    for cat in ("Grants", "Operating Revenue"):
+        if cat not in out["revenue"]:
+            out["revenue"].append(cat)
+    for cat in ("Vehicle Expenses/Maintenance", "School"):
+        if cat not in out["expenditure"]:
+            out["expenditure"].append(cat)
     return out
 
 

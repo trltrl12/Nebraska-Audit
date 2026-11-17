@@ -89,6 +89,18 @@ def vehicle_rule(x, log):
         setcat(x, "category", "Vehicle Expenses/Maintenance", "category: Vehicle Expenses/Maintenance", log)
 
 
+# user 2026-11-17: (a) a plain grant line ("Grants", "Grant income / proceeds / revenue / receipts") with no grantor
+# printed is category Grants, not other; (b) the category "other taxes" is "taxes".
+PLAIN_GRANT = re.compile(r"^\s*grants?( income| proceeds| revenues?| receipts| funds| monies)?\s*$", re.I)
+
+
+def grants_taxes_rule(x, log):
+    if x.get("category") == "other taxes":
+        setcat(x, "category", "taxes", "category: taxes (was other taxes)", log)
+    elif x.get("category") == "other" and PLAIN_GRANT.match(label_of(x)):
+        setcat(x, "category", "Grants", "category: Grants", log)
+
+
 COMMUNITY_BETTERMENT = re.compile(r"community (development/)?better", re.I)
 NOXIOUS_WEED = re.compile(r"noxious|\bweeds?\b", re.I)
 OPERATING_LABEL = re.compile(r"^operating( expenses?| costs?)?$", re.I)
@@ -925,6 +937,12 @@ def apply(d, stem=""):
         label_unify_assets(d["balance_sheet"], log)
     entity_rules(d, entity_of(stem), log)
     xyear_rule(d, stem, log)
+    for x in d.get("receipts") or []:
+        if isinstance(x, dict):
+            grants_taxes_rule(x, log)
+    for x in d.get("detail") or []:
+        if isinstance(x, dict) and x.get("section") == "revenue":
+            grants_taxes_rule(x, log)
     for x in d.get("disbursements") or []:
         if isinstance(x, dict):
             community_dev_rule(x, log)
@@ -1005,6 +1023,11 @@ def xyear_rule(d, stem, log):
                 if cat == "economic development" and where != "receipts" and "revenue" not in where and (
                         COMMUNITY_DEV.search(label_of(x)) or COMMUNITY_DEV.search(str(x.get("department") or ""))):
                     cat = CB
+                if cat == "other taxes":
+                    cat = "taxes"
+                if cat == "other" and "revenue" in (where + " revenue" if where == "receipts" else where) \
+                        and PLAIN_GRANT.match(label_of(x)):
+                    cat = "Grants"
                 if cat in ("other", "Fuel", "Repairs and Maintenance", "Vehicle Expense") and VEHICLE.match(label_of(x)):
                     cat = "Vehicle Expenses/Maintenance"
                 setcat(x, "category", cat, "xyear page check: category", log)
