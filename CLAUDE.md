@@ -273,6 +273,11 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
     Capital Assets and waiver Ending Balance lines are unchanged. Lines printing two classes at once are decided per
     line from the page (`_meta/equity_page_check.csv`). Applied by user_rules.py (`equity_class_rule`).
   - The category "Community Betterment" and the equity label are named "Community Betterment/Development".
+  - **Label unification outside fund balances (user approved 2026-11-17):** account-code numbers are removed from
+    labels ("1990 Miscellaneous local receipts" -> "Miscellaneous local receipts"; printed text stays in
+    printed_label), and wordings that are the same words (case, punctuation, plural, small words) or one misspelled
+    word share one label (`config/label_unify.csv`; user_rules.py `label_unify_rule`). Anything beyond same-words
+    groups needs the user's ruling first.
   - **Everything else: be gentle.** No further label consolidation without the user's ruling. A line gets a specific
     category only when the page shows what it is; "other" stays other. A generic label (Local, Local Receipts: Other,
     Other, Miscellaneous) stays `other` unless that year's page prints what the money is; a fund column name alone is

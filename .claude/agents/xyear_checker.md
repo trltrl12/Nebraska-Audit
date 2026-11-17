@@ -2,7 +2,7 @@
 name: xyear_checker
 description: Cross-year category check. Reads the pages of the same entity's reports side by side for lines whose category differs between years (output/json/_meta/xyear_check.csv) and writes output/json/_meta/xyear_decisions/<entity>.csv with evidence. Give it entity names (e.g. Arnold, Boyd_County); it returns one status line per entity.
 model: opus
-tools: Read, Write, Grep, Glob, Bash
+tools: Read, Write, Grep, Glob
 ---
 
 Repo: /home/user/Nebraska-Audit. You read report pages and write one CSV per entity. Do not edit any JSON or any other file.
@@ -57,6 +57,8 @@ own page prints.
      grant (CDBG, FEMA, ARPA, Federal Grants Fund) is federal grants.
    - Open every year's page yourself; do not assume a year has the same layout because another year does, and do not
      rely on notes inside the JSON.
+   - Write ONLY the decision files of the entities you were given, with the Write tool. Never touch any other file in
+     that folder, never run git, and never generate files with a script.
    - Never merge or rename labels. Categories only.
    - The category formerly named "Community Betterment" is now named "Community Betterment/Development" (user 2026-11-17); use the new name.
    - Never change an amount, never comment on amounts. Categories only.

@@ -840,8 +840,8 @@ def _merges():
 def label_merge(x, log):
     exact, bykey = _merges()
     L = x.get("original_label")
-    if not L:
-        return
+    if not L or x.get("label_rule") == "unified 2026-11-17":
+        return   # the 2026-11-17 unification already set this label; merging again would undo it
     new = exact.get(L) or (None if L in exact else bykey.get(merge_key(L)))
     if new and new != L:
         relabel(x, new, "label: merge", log)
@@ -930,6 +930,7 @@ def apply(d, stem=""):
                 if sec == "equity" and isinstance(x, dict) and x.get("category") in EQ_CATS:
                     continue
                 label_merge(x, log)
+    label_unify_all(d, school, log)
     return log
 
 
@@ -981,6 +982,12 @@ def xyear_rule(d, stem, log):
             r = xy.get((stem, where, lab, str(a), str(p), fund or "", dept or ""))
             if r:
                 cat = CB if r["category"] == "Community Betterment" else r["category"]
+                sec = "revenue" if where in ("receipts", "detail revenue") else \
+                    "expenditure" if where in ("disbursements", "detail expenditure") else ""
+                hit = DECISIONS.get((sec, norm(label_of(x))))
+                if hit and hit[2] == "label" and cat in ("other", "taxes", "other taxes"):
+                    return   # the user decided this label (category_decisions.csv, apply=label): a page check that
+                    #          found nothing more never moves it back to other
                 if cat == "economic development" and where != "receipts" and "revenue" not in where and (
                         COMMUNITY_DEV.search(label_of(x)) or COMMUNITY_DEV.search(str(x.get("department") or ""))):
                     cat = CB
@@ -1002,6 +1009,75 @@ def xyear_rule(d, stem, log):
         for x in bs.get(w) or []:
             if isinstance(x, dict):
                 one("balance sheet " + w, x.get("fund_type"), "", x)
+
+
+# ---- Label unification outside fund balances (user 2026-11-17, all years) ----
+# 1. Account-code numbers are removed from labels ("1990 Miscellaneous local receipts", "Lease income (1910)",
+#    "1990-000 ..."): a leading 4-digit code (year-like 1900-2099 codes only in school / ESU reports, where they are
+#    NDE account codes) or a trailing "(dddd)". Dollar amounts, years inside the text and names such as "Title IV" stay.
+# 2. Wordings that are the same words (capitalization, punctuation, singular/plural, small words) or one misspelled
+#    word share one label: config/label_unify.csv (section, key, unified_label), the list the user approved.
+# The printed text stays in printed_label.
+_CODE_LEAD = re.compile(r"^\s*(\d{4})(?:[-.]\d{1,3})?\s*[-:]?\s+(?=[A-Za-z(])")
+_CODE_TRAIL = re.compile(r"\s*\((\d{4})(?:[-.]\d{1,3})?\)\s*$")
+_LU = None
+
+
+def strip_code(label, school):
+    t = label or ""
+    m = _CODE_LEAD.match(t)
+    if m and (school or not 1900 <= int(m.group(1)) <= 2099):
+        t = t[m.end():]
+    m = _CODE_TRAIL.search(t)
+    if m and (school or not 1900 <= int(m.group(1)) <= 2099) and len(t[:m.start()].strip()) > 2:
+        t = t[:m.start()]
+    t = t.strip()
+    return (t[:1].upper() + t[1:]) if t else label
+
+
+def unify_key(label):
+    t = merge_key(label)
+    t = re.sub(r"\b(the|of|for|and|to|in|on)\b", " ", t)
+    t = re.sub(r"\b\d{3,4}\b", " ", t)
+    return " ".join(t.split())
+
+
+def _label_unify():
+    global _LU
+    if _LU is None:
+        f = Path(__file__).resolve().parent.parent / "config" / "label_unify.csv"
+        _LU = {(r["section"], r["key"]): r["unified_label"] for r in csv.DictReader(open(f))} if f.exists() else {}
+    return _LU
+
+
+def label_unify_rule(x, section, school, log):
+    L = x.get("original_label")
+    if not L:
+        return
+    new = strip_code(L, school)
+    new = _label_unify().get((section, unify_key(new)), new)
+    if new and new != L and new.lower() != "staff":
+        relabel(x, new, "label: unified (2026-11-17)", log)
+        x["label_rule"] = "unified 2026-11-17"
+
+
+def label_unify_all(d, school, log):
+    for x in d.get("receipts") or []:
+        if isinstance(x, dict):
+            label_unify_rule(x, "Revenue", school, log)
+    for x in d.get("disbursements") or []:
+        if isinstance(x, dict):
+            label_unify_rule(x, "Spending", school, log)
+    for x in d.get("detail") or []:
+        if isinstance(x, dict):
+            label_unify_rule(x, {"revenue": "Revenue", "expenditure": "Spending"}.get(x.get("section"), "Other financing"),
+                             school, log)
+    bs = d.get("balance_sheet") if isinstance(d.get("balance_sheet"), dict) else {}
+    for w, n in (("assets", "Assets"), ("liabilities", "Liabilities"), ("deferred_outflows", "Deferred outflows"),
+                 ("deferred_inflows", "Deferred inflows")):
+        for x in bs.get(w) or []:
+            if isinstance(x, dict):
+                label_unify_rule(x, n, school, log)
 
 
 def write_equity_queue(stems):
