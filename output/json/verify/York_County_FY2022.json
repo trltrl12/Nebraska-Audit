@@ -1,0 +1,15 @@
+{
+  "stem": "York_County_FY2022",
+  "values_checked": 232,
+  "issues": [
+    {"severity": "warning", "path": "receipts[5].category", "page": 4,
+     "extracted": "other", "on_page": "Local 1,441,108",
+     "issue": "Extractor rule (counties/cities): use the Statement of Activities to see what 'Local' holds, and if one category is more than half of it, use that category. On p2 Charges for Services is 1,213,171, about 84% of Local; the rest is interest income 58,716, miscellaneous 165,146 and 4,075 that appears in the program grants (SoA intergovernmental 3,528,715 + 2,000,523 + 132,340 = 5,661,578 vs p4 Intergovernmental 5,657,503). Keeping it as 'other' (unsplit, with review) is defensible under the FY2022/FY2023 'context labels stay other' ruling, but 'charges for services/fees' is arguably the rule's answer. The same question applies to every detail 'Local' line in 'other' (e.g. detail[2] General Fund 903,733, detail[94] 911 Emergency Fund 363,529)."},
+    {"severity": "warning", "path": "detail[86].category", "page": 9,
+     "extracted": "federal grants", "on_page": "Intergovernmental 241,914 (Federal Drug Law Enforcement Fund - Sheriff)",
+     "issue": "Federal source inferred from the fund name (marked computed). The same applies to detail[88] 11,459 (Attorney, p9) and detail[90] 1,328,492 (COVID American Rescue Plan Fund, p10). The inference is reasonable, but the 2026-11-12 ruling keeps 'Intergovernmental' as other state aid unless the page shows otherwise."},
+    {"severity": "warning", "path": "detail[117].original_label", "page": 13,
+     "extracted": "Capital outlay", "on_page": "Capital outlay 314,881 (Visitors Improvement Fund)",
+     "issue": "Labelling of capital outlay is inconsistent: single-purpose funds 911 Emergency, E911 Wireless Holding and Highway Buyback get 'Capital Outlay: <function>' from the fund name, but Visitors Improvement (culture/recreation), Child Support Enforcement (detail[64], 13,808, p7) and Stop Program (detail[80], 3,784, p8) keep plain 'Capital outlay'. This is a judgment call, not a wrong amount."}
+  ]
+}
