@@ -1,0 +1,18 @@
+{"stem": "Lancaster_County_FY2023", "gaps": [
+  {"fund_type": "governmental", "section": "revenue", "cause": "different basis",
+   "explanation": "Every governmental fund is in detail[] (General Fund, Veterans Aid subfund, Federal Grants and all 16 nonmajor funds; Gaming Tax 972,056 from the combining statement p13 as it has no budget schedule), but the schedules are Budget and Actual - Budgetary Basis (pp9-11, 15-30) while the statement (p5) is GAAP. Printed budgetary totals add exactly to the schedule total 178,669,946. GAAP minus budgetary: General 136,827,837 (p5/p12) - 135,045,300 (p9) = 1,782,537; Federal Grants 23,797,867 - 8,373,685 (p11) = 15,424,182; nonmajor 35,372,168 (p5/p14) - 35,250,961 (sum of the 16 nonmajor schedule totals) = 121,207 (e.g. Highway 12,001,534 vs 11,758,548; Keno 1,587,023 vs 1,724,404; Mental Health 3,137,228 vs 3,290,963). 1,782,537 + 15,424,182 + 121,207 = 17,327,926 = gap (statement 195,997,872). No fix.",
+   "add": [], "remove": []},
+  {"fund_type": "governmental", "section": "expenditure", "cause": "different basis",
+   "explanation": "Budgetary schedule totals add to 179,128,529: General 118,356,183 (p10) + Veterans Aid 12,885 (p30) = 118,369,068 vs GAAP Total General 118,421,403 (p12): 52,335 short; Federal Grants 16,711,730 (p11) vs GAAP 16,626,258 (p5): 85,472 above; 15 nonmajor schedules with spending (pp15-29) 44,047,731 vs GAAP nonmajor 44,381,344 (p5/p14): 333,613 short (e.g. Highway 14,992,744 vs 16,568,905; Bridge and Special Road 10,524,494 vs 9,356,655). -52,335 + 85,472 - 333,613 = -300,476 = gap (statement 179,429,005). No fix.",
+   "add": [], "remove": []},
+  {"fund_type": "governmental", "section": "transfers_in", "cause": "missing lines",
+   "explanation": "Statement transfers in 20,403,824 (p5); detail 20,408,342. Detail[223] is the Sinking Fund budget schedule (p29) 'Transfers out' 4,517, which that schedule prints as a positive number and adds into Total other financing sources (uses) 2,894,007 (report sign error); stored as +4,517 it counts as a transfer in. The nonmajor combining statement (p14) prints Sinking Fund Transfers out (4,517) and the statement's nonmajor Transfers out is (8,596) = Keno 4,079 + Sinking 4,517. Remove detail[223] here and add it back as -4,517 under transfers_out. 20,408,342 - 4,517 = 20,403,825 vs 20,403,824: the remaining 1 is rounding (Sinking Fund transfers in 2,889,490 on the budget schedule p29 vs 2,889,489 on the combining statement p14). Within 3.",
+   "add": [],
+   "remove": [{"detail_index": 223, "original_label": "Transfers Out", "amount": 4517}]},
+  {"fund_type": "governmental", "section": "transfers_out", "cause": "missing lines",
+   "explanation": "Statement transfers out 21,803,824 (p5) = General (18,210,169) + Federal Grants (3,585,059) + nonmajor (8,596) (Keno 4,079 + Sinking 4,517, p14). Detail has General (18,210,169) p10, Federal Grants (3,585,059) p11, Keno (4,079) p18 = 21,799,307; the Sinking Fund's 4,517 transfer out is stored as a positive amount (removed under transfers_in). Adding it as -4,517: 21,799,307 + 4,517 = 21,803,824 = statement.",
+   "add": [
+     {"fund_type": "governmental", "schedule": "Budget and Actual - Sinking Fund", "fund": "Sinking Fund", "department": null, "section": "other financing", "original_label": "Transfers Out", "amount": -4517, "source_page": 29, "category": null, "detail_category": null}
+   ],
+   "remove": []}
+]}
