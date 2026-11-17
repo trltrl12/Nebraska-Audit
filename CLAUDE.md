@@ -310,8 +310,23 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
     "Transfers from/to other funds" -> Transfers In / Transfers Out; FY2022/FY2023 bare capital outlay in a
     single-purpose fund (Street, Fire/Rescue, Water/Sewer/Electric) is "Capital Outlay: <function>".
   - FY2022 full audit: 147 of 595 reports read page by page (`_meta/fy2022_audit/`): no amount errors; the user narrowed
-    it (2026-11-17) to the pattern fixes above plus the findings marked certain. Not corrected: McCook Building and
-    Zoning / Senior Center lines for FY2022, FY2024, FY2025 (FY2023 done).
+    it (2026-11-17) to the pattern fixes above plus the findings marked certain. McCook department functions
+    (Building and Zoning, Senior Center ...) are corrected for all four years from the printed headings.
+  - **Schedule adds up to the statement (user 2026-11-17, cities, villages and counties, all years; overrides the
+    2026-10-28 "statement lines are not added for the others" rule):** for each fund type and section the detail lines
+    must total the statement lines, with nothing missing. A fund column the statement prints but the schedules do not
+    cover (other governmental funds, utility funds), printed transfers, bond/loan proceeds and other-financing rows are
+    added to detail from the statement's fund columns: printed amounts only, never a derived or plug amount, never the
+    Total column; a line is removed only when it is a true duplicate. Where the report itself uses a different basis
+    the gap stays and is explained, not forced. Lincoln_FY2022 is left as printed (user).
+  - **Fund name on added lines = the statement column label:** "Other Governmental Funds" only when that is all the
+    heading says; "Other Governmental Funds (Keno)" -> "Keno Fund"; a fund already on the schedule keeps its spelling.
+  - Procedure: `python3 scripts/schedule_gap.py` (lists gaps in `_meta/schedule_gap.csv`); `schedule_fixer` agent
+    (pass 2 brief: `.claude/agents/schedule_fixer2.md`) writes `_meta/schedule_fix/<stem>.json` (pass 2:
+    `_meta/schedule_fix2/`); `schedule_spot` agent independently re-reads a sample (`_meta/schedule_spot/`); reports with
+    an unconfirmed line go to `_meta/schedule_fix_hold.csv`; `python3 scripts/schedule_fix_apply.py [--pass2] [--write]`
+    applies a report only when its gaps really tie and no other gap opens (`_meta/schedule_fix_status.csv`); then
+    `user_rules.py` on the changed stems. Pass 1 applied 2026-11-17: 280 reports, 2,933 lines added, 98 duplicates removed.
   - Sargent_FY2022: the Auditor's PDF does not contain printed pp19, 22, 24, 52 (left-hand statement pages); it cannot
     be re-trimmed. Governmental lines come from the Total column.
 

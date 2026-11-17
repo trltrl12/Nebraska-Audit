@@ -1,0 +1,16 @@
+{"stem": "Coleridge_FY2025", "gaps": [
+  {"fund_type": "business-type", "section": "transfers_net", "cause": "missing lines",
+   "explanation": "Proprietary funds statement (p8, printed p12), OPERATING TRANSFERS 'Operating transfers in (out)': Sewer blank, Ambulance 118, Water blank, Sanitation blank, Totals 118 (= business_type.transfers_net 118). The business-type detail (Proprietary Funds Statement lines, detail indexes 44-59) has no transfer line. Add the Ambulance column's 118 as Transfers In. Check: 0 + 118 = 118 = statement; gap closed.",
+   "add": [
+     {"fund_type": "business-type", "schedule": "Proprietary Funds Statement of Revenues, Expenses", "fund": "Ambulance", "department": null, "section": "other financing", "original_label": "Transfers In", "amount": 118, "source_page": 8, "category": null, "detail_category": null}
+   ],
+   "remove": []},
+  {"fund_type": "governmental", "section": "other financing", "cause": "missing lines",
+   "explanation": "Mislabelled transfer: detail[38] (General Fund Combining Schedule, fund 'General Fund - General', p10, printed 'Transfers' (273,982)) is an outflow (negative) but labelled 'Transfers In'. Remove it and add it back as 'Transfers Out' with the same amount -273,982. Amounts unchanged, so no total moves. The other General Fund department transfer lines (Community Building 22,446, Police 6,062, Fire 27,954, Park 177,277, p10) are positive and correctly 'Transfers In'; 'Loan Disbursement - Park View' (46,000) is already detail[39]. The Street 10,000 / Debt Service 30,125 transfers in (p5) were added in pass 1. No other non-zero other-financing row on p5 or p8 is missing.",
+   "add": [
+     {"fund_type": "governmental", "schedule": "General Fund Combining Schedule", "fund": "General Fund - General", "department": null, "section": "other financing", "original_label": "Transfers Out", "amount": -273982, "source_page": 10, "category": null, "detail_category": null}
+   ],
+   "remove": [
+     {"detail_index": 38, "original_label": "Transfers In", "amount": -273982}
+   ]}
+]}

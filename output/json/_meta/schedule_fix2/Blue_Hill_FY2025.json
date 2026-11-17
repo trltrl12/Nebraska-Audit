@@ -1,0 +1,18 @@
+{"stem": "Blue_Hill_FY2025", "gaps": [
+  {"fund_type": "governmental", "section": "transfers_out", "cause": "different basis",
+   "explanation": "Statement p4 (Total Governmental Funds column) prints Transfers out (2,262) after an Eliminations column (150,204) that nets the interfund transfers; the fund columns print General Fund transfers in 204 / out (152,466) and Street Fund in 150,000. Detail records the p9 departments schedule gross per department: General (2,058) idx 4 + Sales Tax (150,000) idx 20 + Cemetery (204) idx 31 = 152,262 out. 152,262 - 2,262 = 150,000 = the Sales Tax department -> Street Fund transfer that the Total column eliminates. The net 2,262 is the transfer to the utilities (Sewer 1,131 + Electric 1,131, p6). Both printed; no fix for the gap. (Separately the Street +150,000 line is labelled the wrong way round; see the other financing entry.)",
+   "add": [], "remove": []},
+  {"fund_type": "governmental", "section": "other financing", "cause": "missing lines",
+   "explanation": "Mislabelled transfer: detail index 39 (Street, p9 'Transfers in (out)' 150,000, positive) is labelled 'Transfers Out'. p9 prints Street 150,000 (a transfer in; p4 Street Fund column 'Transfers in' 150,000). Remove it and add it back as Transfers In 150,000, same fund, schedule and page. Net amount unchanged.",
+   "add": [
+     {"fund_type": "governmental", "schedule": "Combining Schedule of Receipts and Disbursements - Governmental Fund Departments", "fund": "Street", "department": null, "section": "other financing", "original_label": "Transfers In", "amount": 150000, "source_page": 9, "category": "Total Other Financing Sources (Uses)", "detail_category": null}
+   ],
+   "remove": [{"detail_index": 39, "original_label": "Transfers Out", "amount": 150000}]},
+  {"fund_type": "business-type", "section": "transfers_net", "cause": "missing lines",
+   "explanation": "Proprietary funds statement p6, Operating transfers: Operating transfers in Water - , Sewer 1,131, Electric 1,131, Total 2,262 (also p7 cash flows 'Transfer from (to) other funds (net)' 1,131 / 1,131). No business-type transfer line is in detail. Add Sewer Transfers In 1,131 and Electric Transfers In 1,131. 0 + 2,262 = 2,262 = statement transfers_net.",
+   "add": [
+     {"fund_type": "business-type", "schedule": "Statement of Revenues, Expenses, and Changes in Net Position - Proprietary Funds (Sewer column)", "fund": "Sewer", "department": null, "section": "other financing", "original_label": "Transfers In", "amount": 1131, "source_page": 6, "category": "Total Other Financing Sources (Uses)", "detail_category": null},
+     {"fund_type": "business-type", "schedule": "Statement of Revenues, Expenses, and Changes in Net Position - Proprietary Funds (Electric column)", "fund": "Electric", "department": null, "section": "other financing", "original_label": "Transfers In", "amount": 1131, "source_page": 6, "category": "Total Other Financing Sources (Uses)", "detail_category": null}
+   ],
+   "remove": []}
+]}
