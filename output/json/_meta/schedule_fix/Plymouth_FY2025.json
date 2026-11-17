@@ -1,0 +1,17 @@
+{"stem": "Plymouth_FY2025", "gaps": [
+  {"fund_type": "governmental", "section": "revenue", "cause": "missing fund column",
+   "explanation": "p5 Statement of Revenues, Expenditures, and Changes in Fund Balances - Cash Basis - Governmental Funds prints four major fund columns (General, Street Special Revenue, Sales Tax-Special Revenue, Debt Service) plus Non-Major Funds and Totals (p6). detail[] holds General, Street Special Revenue and Sales Tax Special Revenue (p10), the non-major combining funds (pp11-12) and Water/Sewer, but nothing for the Debt Service column, which has no schedule of its own. Debt Service column revenues: Taxes 56,797 + Intergovernmental revenues 11,845 = Total revenues 68,642 (p5). 581,659 + 68,642 = 650,301 = statement total (p6). Category of the taxes row follows the statement line already in the JSON (Property Tax 56,797, property tax).",
+   "add": [
+     {"fund_type": "governmental", "schedule": "Statement of Revenues, Expenditures, and Changes in Fund Balances - Cash Basis - Governmental Funds (Debt Service column)", "fund": "Debt Service", "department": null, "section": "revenue", "original_label": "Taxes", "amount": 56797, "source_page": 5, "category": "property tax", "detail_category": "property tax"},
+     {"fund_type": "governmental", "schedule": "Statement of Revenues, Expenditures, and Changes in Fund Balances - Cash Basis - Governmental Funds (Debt Service column)", "fund": "Debt Service", "department": null, "section": "revenue", "original_label": "Intergovernmental revenues", "amount": 11845, "source_page": 5, "category": "intergovernmental/state aid", "detail_category": "other state aid"}
+   ],
+   "remove": []},
+  {"fund_type": "governmental", "section": "expenditure", "cause": "missing fund column",
+   "explanation": "Same Debt Service column (p5): Debt service 613 = Total expenditures 613. 407,097 + 613 = 407,710 = statement total (p6). The column's other financing rows, Bond principal paid (60,000) and Bond interest and fees paid (4,845) (Total other financing (64,845), p5; JSON other_financing -64,845), are also missing from detail[] and are added in section other financing; they are not expenditures and do not enter this gap's arithmetic (they are not transfers either).",
+   "add": [
+     {"fund_type": "governmental", "schedule": "Statement of Revenues, Expenditures, and Changes in Fund Balances - Cash Basis - Governmental Funds (Debt Service column)", "fund": "Debt Service", "department": null, "section": "expenditure", "original_label": "Debt service", "amount": 613, "source_page": 5, "category": "debt service (principal and interest combined)", "detail_category": "debt principal and interest (combined)"},
+     {"fund_type": "governmental", "schedule": "Statement of Revenues, Expenditures, and Changes in Fund Balances - Cash Basis - Governmental Funds (Debt Service column)", "fund": "Debt Service", "department": null, "section": "other financing", "original_label": "Bond principal paid", "amount": -60000, "source_page": 5, "category": "Debt Service", "detail_category": "debt principal"},
+     {"fund_type": "governmental", "schedule": "Statement of Revenues, Expenditures, and Changes in Fund Balances - Cash Basis - Governmental Funds (Debt Service column)", "fund": "Debt Service", "department": null, "section": "other financing", "original_label": "Bond interest and fees paid", "amount": -4845, "source_page": 5, "category": "Debt Service", "detail_category": "debt interest and fees"}
+   ],
+   "remove": []}
+]}
