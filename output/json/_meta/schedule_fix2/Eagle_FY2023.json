@@ -1,0 +1,27 @@
+{"stem": "Eagle_FY2023", "gaps": [
+  {"fund_type": "business-type", "section": "revenue", "cause": "missing fund column",
+   "explanation": "p6 (printed p8) Statement of Receipts, Disbursements, and Changes in Net Position - Cash Basis - Proprietary Fund prints one column, Enterprise Fund, with no schedule lines in detail[]. Operating revenues, Charges for services: Sewer 296,786 + Water 115,850 = 412,636 (printed total operating revenues collected) + Non-Operating Revenues: Interest income 4,131 + Licenses, fees and permits 180 + Miscellaneous 55,958 = 60,269 (printed) -> 472,905 = statement total = gap. Labels follow the JSON statement lines. Check: 0 + 472,905 = 472,905. No transfers printed.",
+   "add": [
+     {"fund_type": "business-type", "schedule": "Statement of Receipts, Disbursements, and Changes in Net Position - Cash Basis - Proprietary Fund (Enterprise Fund column)", "fund": "Enterprise Fund", "department": null, "section": "revenue", "original_label": "Charges for services: Sewer", "amount": 296786, "source_page": 6, "category": "Utility Charges", "detail_category": "sewer charges"},
+     {"fund_type": "business-type", "schedule": "Statement of Receipts, Disbursements, and Changes in Net Position - Cash Basis - Proprietary Fund (Enterprise Fund column)", "fund": "Enterprise Fund", "department": null, "section": "revenue", "original_label": "Charges for services: Water", "amount": 115850, "source_page": 6, "category": "Utility Charges", "detail_category": "water charges"},
+     {"fund_type": "business-type", "schedule": "Statement of Receipts, Disbursements, and Changes in Net Position - Cash Basis - Proprietary Fund (Enterprise Fund column)", "fund": "Enterprise Fund", "department": null, "section": "revenue", "original_label": "Interest income", "amount": 4131, "source_page": 6, "category": "Interest Income", "detail_category": "Interest Income"},
+     {"fund_type": "business-type", "schedule": "Statement of Receipts, Disbursements, and Changes in Net Position - Cash Basis - Proprietary Fund (Enterprise Fund column)", "fund": "Enterprise Fund", "department": null, "section": "revenue", "original_label": "Licenses, fees and permits", "amount": 180, "source_page": 6, "category": "licenses and permits", "detail_category": "licenses and permits"},
+     {"fund_type": "business-type", "schedule": "Statement of Receipts, Disbursements, and Changes in Net Position - Cash Basis - Proprietary Fund (Enterprise Fund column)", "fund": "Enterprise Fund", "department": null, "section": "revenue", "original_label": "Miscellaneous", "amount": 55958, "source_page": 6, "category": "other", "detail_category": "Other / Miscellaneous Receipts"}
+   ],
+   "remove": []},
+  {"fund_type": "business-type", "section": "expenditure", "cause": "missing fund column",
+   "explanation": "p6 Enterprise Fund column Operating Expenditures: Sewer 304,245 + Water 115,345 = 419,590 (printed total operating disbursements) = statement total = gap. No non-operating disbursements or transfers printed. Check: 0 + 419,590 = 419,590.",
+   "add": [
+     {"fund_type": "business-type", "schedule": "Statement of Receipts, Disbursements, and Changes in Net Position - Cash Basis - Proprietary Fund (Enterprise Fund column)", "fund": "Enterprise Fund", "department": null, "section": "expenditure", "original_label": "Operating Expenditures: Sewer", "amount": 304245, "source_page": 6, "category": "utilities", "detail_category": "not itemized"},
+     {"fund_type": "business-type", "schedule": "Statement of Receipts, Disbursements, and Changes in Net Position - Cash Basis - Proprietary Fund (Enterprise Fund column)", "fund": "Enterprise Fund", "department": null, "section": "expenditure", "original_label": "Operating Expenditures: Water", "amount": 115345, "source_page": 6, "category": "utilities", "detail_category": "not itemized"}
+   ],
+   "remove": []},
+  {"fund_type": "governmental", "section": "other financing", "cause": "missing lines",
+   "explanation": "Not a gap row (p4 Total column prints '-' for both transfer rows). Mislabelled transfer: p4 row 'Transfers (in)/out' under expenditures prints Special Revenue Fund (3), i.e. a transfer in of 3; detail index 22 records it as 'Transfers Out' +3 (a positive amount labelled Transfers Out). Removed and added back as 'Transfers In' 3. The other transfer lines are the right way round: index 10 General 'Transfers Out' -1 (p4 1 under expenditures), index 13 General 'Net transfers' -106,727, index 19 Special Revenue 'Net transfers' 106,726, Debt Service 'Net transfers' 1 (pp7-9 / p4 'Transfers in/(out)'). The Debt Service Fund's p4 'Transfers (in)/out' 2 is printed on its budget schedule (p9) as 'Operating expenses' 2 and is in detail as that expenditure line; left as printed on the schedule.",
+   "add": [
+     {"fund_type": "governmental", "schedule": "Budget and Actual - Special Revenue Fund", "fund": "Special Revenue Fund", "department": null, "section": "other financing", "original_label": "Transfers In", "amount": 3, "source_page": 4, "category": null, "detail_category": null}
+   ],
+   "remove": [
+     {"detail_index": 22, "original_label": "Transfers Out", "amount": 3}
+   ]}
+]}

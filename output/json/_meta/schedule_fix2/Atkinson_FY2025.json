@@ -1,0 +1,16 @@
+{"stem": "Atkinson_FY2025",
+ "note": "The business-type revenue (gap 258,396) and expenditure (gap -163,337) rows are already fixed by output/json/_meta/schedule_fix/Atkinson_FY2025.json (pass 1: remove the p15/p17 budget-schedule utility lines, add every Sewer / Water / Sanitation row of the proprietary statement pp11-12; ties exactly to 884,707 and 807,206). That fix is not yet applied to the report JSON; it is not repeated here to avoid double counting.",
+ "gaps": [
+  {"fund_type": "business-type", "section": "transfers_net", "cause": "missing lines",
+   "explanation": "Proprietary statement p12 (Statement of Revenues, Expenditures, and Changes in Net Position (Deficit) - Modified Cash Basis - Proprietary Funds) TRANSFERS: Transfers in Water 11,680 (Total 11,680; no transfers out row) = JSON business_type.transfers_net 11,680. It is not in detail[]. It is the Community Development Fund's Operating transfers out (11,680) on the governmental statement p7, which is already in detail[] as Transfers Out -11,680. Added Water Transfers In 11,680; schedule 0 + 11,680 = 11,680 = statement, exact.",
+   "add": [
+    {"fund_type": "business-type", "schedule": "Statement of Revenues, Expenditures, and Changes in Net Position (Deficit) - Modified Cash Basis - Proprietary Funds (Water column)", "fund": "Water", "department": null, "section": "other financing", "original_label": "Transfers In", "amount": 11680, "source_page": 12, "category": null, "detail_category": null}
+   ],
+   "remove": []},
+  {"fund_type": "business-type", "section": "other financing", "cause": "missing lines",
+   "explanation": "Proprietary statement p12 prints CAPITAL CONTRIBUTIONS - GRANTS in the Water column 129,675 (Total 129,675) = JSON business_type.other_financing 129,675. No detail line holds it. Added as an other-financing line in the Water column. Governmental other financing (p7: General Operating transfers out (30,000), Street transfers in 30,000, Community Development transfers out (11,680)) is already in detail[] with the right signs and labels; no mislabelled transfer lines.",
+   "add": [
+    {"fund_type": "business-type", "schedule": "Statement of Revenues, Expenditures, and Changes in Net Position (Deficit) - Modified Cash Basis - Proprietary Funds (Water column)", "fund": "Water", "department": null, "section": "other financing", "original_label": "Capital contributions - grants", "amount": 129675, "source_page": 12, "category": null, "detail_category": null}
+   ],
+   "remove": []}
+]}

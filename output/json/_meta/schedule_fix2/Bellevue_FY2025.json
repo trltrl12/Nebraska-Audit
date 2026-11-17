@@ -1,0 +1,20 @@
+{"stem": "Bellevue_FY2025", "gaps": [
+  {"fund_type": "governmental", "section": "debt_proceeds", "cause": "missing lines; different basis",
+   "explanation": "JSON debt_proceeds 34,170,348 = p4 Total column Bonds issued 34,020,000 + Issuance of SBITA 150,348 (General Fund 29,390,000 + Debt Service Fund 4,630,000 bonds; General Fund 150,348 SBITA). Detail has only the General Fund budget-basis 'Proceeds from issuance of bonds and notes' 30,007,045 (p5, idx 12) = GAAP General Fund Bonds issued 29,390,000 + Premium on debt issued 617,045. (1) Missing printed lines, added: Debt Service Fund 'Bonds issued' 4,630,000 (p4; that fund has no schedule) and General Fund 'Issuance of SBITA' 150,348 (p4; not in the budget schedule, which prints only bonds and notes). (2) Different basis, no fix: the budget-basis proceeds line includes the General Fund premium 617,045, which the GAAP statement prints as 'Premium on debt issued' (JSON other_financing), not as debt proceeds. Check: 30,007,045 + 4,630,000 + 150,348 = 34,787,393; 34,787,393 - 617,045 = 34,170,348 = statement. Remaining gap after the adds -617,045 is the premium (basis).",
+   "add": [
+     {"fund_type": "governmental", "schedule": "Statement of Revenues, Expenditures and Changes in Fund Balances of Governmental Funds (Debt Service Fund column)", "fund": "Debt Service Fund", "department": null, "section": "other financing", "original_label": "Bonds issued", "amount": 4630000, "source_page": 4, "category": null, "detail_category": null},
+     {"fund_type": "governmental", "schedule": "Statement of Revenues, Expenditures and Changes in Fund Balances of Governmental Funds (General Fund column)", "fund": "General", "department": null, "section": "other financing", "original_label": "Issuance of SBITA", "amount": 150348, "source_page": 4, "category": null, "detail_category": null}
+   ],
+   "remove": []},
+  {"fund_type": "governmental", "section": "transfers_in", "cause": "different basis",
+   "explanation": "Statement p4 prints only 'Transfers in (out), net' per column; Total 268,000 (JSON transfers_in) = General Fund 6,146,335 - Community Betterment 754,975 - Debt Service 5,123,360. Detail positive transfers 1,933,000 = General Fund budget basis 'Transfers in, net' 1,183,000 (p5, idx 13) + LB840 'Transfers In' 750,000 (p10, idx 20; LB840 sits inside the General Fund GAAP column). Budget-basis 1,183,000 vs GAAP 6,146,335 and the statement's netting across funds make the totals differ. The Debt Service Fund's (5,123,360) is added as Transfers Out in the other financing entry below (does not change transfers_in). No fix for this row.",
+   "add": [],
+   "remove": []},
+  {"fund_type": "governmental", "section": "other financing", "cause": "missing lines",
+   "explanation": "p4 Debt Service Fund column prints other-financing rows not in detail[]: Premium on debt issued 421,108 and Transfers in (out), net (5,123,360), added as Transfers Out. The General Fund premium 617,045 is not added: it is already inside the budget-basis proceeds line 30,007,045 (idx 12). Community Betterment's GAAP (754,975) is covered by its budget line (755,000, idx 17).",
+   "add": [
+     {"fund_type": "governmental", "schedule": "Statement of Revenues, Expenditures and Changes in Fund Balances of Governmental Funds (Debt Service Fund column)", "fund": "Debt Service Fund", "department": null, "section": "other financing", "original_label": "Premium on debt issued", "amount": 421108, "source_page": 4, "category": null, "detail_category": null},
+     {"fund_type": "governmental", "schedule": "Statement of Revenues, Expenditures and Changes in Fund Balances of Governmental Funds (Debt Service Fund column)", "fund": "Debt Service Fund", "department": null, "section": "other financing", "original_label": "Transfers Out", "amount": -5123360, "source_page": 4, "category": null, "detail_category": null}
+   ],
+   "remove": []}
+]}
