@@ -1,0 +1,26 @@
+{"stem": "Wood_River_FY2025", "gaps": [
+  {"fund_type": "governmental", "section": "revenue", "cause": "missing fund column",
+   "explanation": "p5 Statement of Revenues, Expenditures, and Changes in Fund Balances - Modified Cash Basis - Governmental Funds prints a column 'Other Governmental Fund (Sales Tax Fund)' with Sales tax 91,171 and Interest income 108 (Total revenues 91,279). That fund has no schedule, so none of its lines are in detail[]. 91,171 + 108 = 91,279 = gap. Check: 3,242,003 + 91,279 = 3,333,282 = statement total.",
+   "add": [
+     {"fund_type": "governmental", "schedule": "Statement of Revenues, Expenditures, and Changes in Fund Balances - Modified Cash Basis - Governmental Funds (Other Governmental Fund (Sales Tax Fund) column)", "fund": "Other Governmental Fund (Sales Tax Fund)", "department": null, "section": "revenue", "original_label": "Sales tax", "amount": 91171, "source_page": 5, "category": "sales tax", "detail_category": "sales tax"},
+     {"fund_type": "governmental", "schedule": "Statement of Revenues, Expenditures, and Changes in Fund Balances - Modified Cash Basis - Governmental Funds (Other Governmental Fund (Sales Tax Fund) column)", "fund": "Other Governmental Fund (Sales Tax Fund)", "department": null, "section": "revenue", "original_label": "Interest income", "amount": 108, "source_page": 5, "category": "Interest Income", "detail_category": "Interest Income"}
+   ],
+   "remove": []},
+  {"fund_type": "governmental", "section": "expenditure", "cause": "missing fund column",
+   "explanation": "p5 'Other Governmental Fund (Sales Tax Fund)' column prints expenditure 'Other' 89,205 (Total expenditures 89,205; the statement's own Other line 89,205 sits only in this column). Not in detail[]. Check: 2,866,891 + 89,205 = 2,956,096 = statement total.",
+   "add": [
+     {"fund_type": "governmental", "schedule": "Statement of Revenues, Expenditures, and Changes in Fund Balances - Modified Cash Basis - Governmental Funds (Other Governmental Fund (Sales Tax Fund) column)", "fund": "Other Governmental Fund (Sales Tax Fund)", "department": null, "section": "expenditure", "original_label": "Other", "amount": 89205, "source_page": 5, "category": "other", "detail_category": "not itemized"}
+   ],
+   "remove": []},
+  {"fund_type": "governmental", "section": "transfers_in", "cause": "missing lines",
+   "explanation": "General Fund transfers in are 283,640 on p5 (General Fund column 'Transfers in' 283,640, 'Transfers out' (200,000)) and on p10 (Budgetary Comparison Schedule - General Fund, Actual 'Transfers from other funds' 283,640, 'Transfers to other funds' (200,000), net 83,640). The p14-15 General Fund departments schedule used for detail prints department transfer lines Fire 5,492, Library 30,000, Parks and Recreation 20,000, Senior Citizen Center 50,000, Pool (200,000) (sum -94,508) but its Total column prints 83,640: the departmental page omits 178,148 of transfers in (283,640 - 105,492). Detail transfers in = 5,492 + 30,000 + 20,000 + 50,000 (General departments) + 17,668 (Capital Projects p12) + 300,000 (Debt Service p13) = 423,160. Fix: replace the four positive department transfer lines (detail 105-108, 105,492) with the p10 General Fund 'Transfers from other funds' 283,640; the Pool (200,000) line (detail 109) stays and equals p10 'Transfers to other funds' (200,000), so transfers out are unchanged (200,000 + 50,000 = 250,000). Check: 423,160 - 105,492 + 283,640 = 601,308 = statement total (283,640 + 17,668 + 300,000).",
+   "add": [
+     {"fund_type": "governmental", "schedule": "Budgetary Comparison Schedule - Modified Cash Basis - General Fund", "fund": "General", "department": null, "section": "other financing", "original_label": "Transfers In", "amount": 283640, "source_page": 10, "category": null, "detail_category": null}
+   ],
+   "remove": [
+     {"detail_index": 105, "original_label": "Transfers In", "amount": 5492},
+     {"detail_index": 106, "original_label": "Transfers In", "amount": 30000},
+     {"detail_index": 107, "original_label": "Transfers In", "amount": 20000},
+     {"detail_index": 108, "original_label": "Transfers In", "amount": 50000}
+   ]}
+]}
