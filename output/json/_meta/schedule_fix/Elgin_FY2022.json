@@ -1,0 +1,27 @@
+{"stem": "Elgin_FY2022", "gaps": [
+  {"fund_type": "governmental", "section": "revenue", "cause": "missing fund column",
+   "explanation": "p5 Statement of Revenues, Expenditures, and Changes in Fund Balances - Modified Cash Basis - Governmental Funds prints four fund columns (General, Street, Debt Service, Rescue). detail[] has the General Fund departments (pp13-14), Street (p11) and Debt Service (p12) schedules; the Rescue Fund has no schedule in the trim. Rescue Fund column p5: Charges for service 20,894 + Interest income 1,116 + Grants and contributions 5,145 = 27,155 (printed Total revenues 27,155 = gap). Check: 641,249 + 27,155 = 668,404 = statement total.",
+   "add": [
+     {"fund_type": "governmental", "schedule": "Statement of Revenues, Expenditures, and Changes in Fund Balances - Modified Cash Basis - Governmental Funds (Rescue Fund column)", "fund": "Rescue Fund", "department": null, "section": "revenue", "original_label": "Charges for service", "amount": 20894, "source_page": 5, "category": "charges for services/fees", "detail_category": "other charges for services"},
+     {"fund_type": "governmental", "schedule": "Statement of Revenues, Expenditures, and Changes in Fund Balances - Modified Cash Basis - Governmental Funds (Rescue Fund column)", "fund": "Rescue Fund", "department": null, "section": "revenue", "original_label": "Interest income", "amount": 1116, "source_page": 5, "category": "Interest Income", "detail_category": "investment income"},
+     {"fund_type": "governmental", "schedule": "Statement of Revenues, Expenditures, and Changes in Fund Balances - Modified Cash Basis - Governmental Funds (Rescue Fund column)", "fund": "Rescue Fund", "department": null, "section": "revenue", "original_label": "Grants and contributions", "amount": 5145, "source_page": 5, "category": "donations/contributions", "detail_category": "donations/contributions"}
+   ],
+   "remove": []},
+  {"fund_type": "governmental", "section": "expenditure", "cause": "missing fund column",
+   "explanation": "Rescue Fund column p5: Public safety 11,732 + Capital outlay 12,578 = 24,310 (printed Total expenditures 24,310 = gap). Check: 657,568 + 24,310 = 681,878 = statement total.",
+   "add": [
+     {"fund_type": "governmental", "schedule": "Statement of Revenues, Expenditures, and Changes in Fund Balances - Modified Cash Basis - Governmental Funds (Rescue Fund column)", "fund": "Rescue Fund", "department": null, "section": "expenditure", "original_label": "Public safety", "amount": 11732, "source_page": 5, "category": "public safety", "detail_category": "not itemized"},
+     {"fund_type": "governmental", "schedule": "Statement of Revenues, Expenditures, and Changes in Fund Balances - Modified Cash Basis - Governmental Funds (Rescue Fund column)", "fund": "Rescue Fund", "department": null, "section": "expenditure", "original_label": "Capital outlay", "amount": 12578, "source_page": 5, "category": "capital outlay", "detail_category": "not itemized"}
+   ],
+   "remove": []},
+  {"fund_type": "governmental", "section": "transfers_in", "cause": "different basis",
+   "explanation": "Two parts. (1) Missing fund column: p5 Rescue Fund column prints 'Transfers from (to) other funds' 12,578 (the statement's transfers_in 12,578); not in detail -> added below. (2) Different basis: detail holds the intra-General-Fund departmental transfers from the Combining Statement - General Fund Departments (pp13-14 row 'Transfers from (to) other funds': Pool 29,605 + Youth 1,500 in = 31,105; Fire (5,000) + Sales Tax (38,683) out = 43,683; departmental Total column (12,578) = the General Fund's p5 transfer to the Rescue Fund). These are transfers between departments of one fund, printed gross on the departmental schedule; the fund statement shows only the fund net. Arithmetic: 31,105 + 12,578 (added) = 43,683 vs statement 12,578; the remaining -31,105 is exactly the departmental gross-up (Pool 29,605 + Youth 1,500), not an error.",
+   "add": [
+     {"fund_type": "governmental", "schedule": "Statement of Revenues, Expenditures, and Changes in Fund Balances - Modified Cash Basis - Governmental Funds (Rescue Fund column)", "fund": "Rescue Fund", "department": null, "section": "other financing", "original_label": "Transfers In", "amount": 12578, "source_page": 5, "category": null, "detail_category": null}
+   ],
+   "remove": []},
+  {"fund_type": "governmental", "section": "transfers_out", "cause": "different basis",
+   "explanation": "Statement transfers_out 12,578 = p5 General Fund 'Transfers from (to) other funds' (12,578). Detail 43,683 = departmental transfers out on the Combining Statement - General Fund Departments: Fire (5,000) p13 + Sales Tax (38,683) p14. That schedule prints transfers between departments gross (Pool 29,605 and Youth 1,500 received); net of the departments (43,683 - 31,105) = 12,578 = the General Fund's transfer out on p5 (departmental Total column (12,578), p14). Gap -31,105 = intra-fund departmental transfers; nothing missing or duplicated.",
+   "add": [],
+   "remove": []}
+]}
