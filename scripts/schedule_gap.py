@@ -47,7 +47,17 @@ def gaps(d):
                  and not re.search(r"transfer", str(x.get("original_label") or ""), re.I))
         sc += sum(v(x) for x in det if (x.get("fund_type") or "governmental") == "governmental" and x.get("section") == "revenue"
                   and str(x.get("category") or "") in ("Bond Proceeds", "Loan Proceeds", "Debt Proceeds"))
-        if abs(dp - sc) > 3:
+        # premiums, discounts, escrow payments etc. sit in other_financing: the schedule also ties when all its
+        # non-transfer other-financing lines equal debt_proceeds + other_financing
+        of = d.get("other_financing")
+        of = of.get("amount") if isinstance(of, dict) else of
+        of = of if isinstance(of, (int, float)) else 0
+        sc_all = sum(v(x) for x in det if (x.get("fund_type") or "governmental") == "governmental"
+                     and x.get("section") == "other financing"
+                     and not re.search(r"transfer", str(x.get("original_label") or ""), re.I))
+        sc_all += sum(v(x) for x in det if (x.get("fund_type") or "governmental") == "governmental" and x.get("section") == "revenue"
+                      and str(x.get("category") or "") in ("Bond Proceeds", "Loan Proceeds", "Debt Proceeds"))
+        if abs(dp - sc) > 3 and abs(dp + of - sc_all) > 3:
             out.append(("governmental", "debt_proceeds", round(dp, 2), round(sc, 2), round(dp - sc, 2)))
     bt = d.get("business_type") if isinstance(d.get("business_type"), dict) else {}
     tn = bt.get("transfers_net")
