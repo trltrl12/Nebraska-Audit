@@ -998,7 +998,8 @@ def xyear_rule(d, stem, log):
                 sec = "revenue" if where in ("receipts", "detail revenue") else \
                     "expenditure" if where in ("disbursements", "detail expenditure") else ""
                 hit = DECISIONS.get((sec, norm(label_of(x))))
-                if hit and hit[2] == "label" and cat in ("other", "taxes", "other taxes"):
+                if hit and hit[2] == "label" and hit[1] not in ("", "other", "taxes", "other taxes") \
+                        and cat in ("other", "taxes", "other taxes"):
                     return   # the user decided this label (category_decisions.csv, apply=label): a page check that
                     #          found nothing more never moves it back to other
                 if cat == "economic development" and where != "receipts" and "revenue" not in where and (
