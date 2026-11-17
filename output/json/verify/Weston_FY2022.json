@@ -1,0 +1,15 @@
+{
+  "stem": "Weston_FY2022",
+  "values_checked": 117,
+  "issues": [
+    {"severity": "warning", "path": "receipts[7].category", "page": 5,
+     "extracted": "other", "on_page": "Other general receipts 8,432 (General 1,587 + Streets 698 + Cemetery 500 + Keno 5,647)",
+     "issue": "5,647 of the 8,432 (67%) is the Keno Fund column, which the detail records as keno/lottery; the statement line stays 'other' (user decision for the label), so receipts and detail disagree. The extractor rule for broad lines says a category over half of the line should be used, or the line split. Statement of Activities (p3) prints the other 2,785 as Miscellaneous."},
+    {"severity": "warning", "path": "detail[17].category", "page": 5,
+     "extracted": "keno/lottery", "on_page": "Keno Fund: Other general receipts 5,647",
+     "issue": "The category comes from the fund name only (computed is set). The printed label is 'Other general receipts', and the Statement of Activities (p2) counts the 5,647 as General Government Operating Grants and Contributions. Probably keno, but the page doesn't say so."},
+    {"severity": "warning", "path": "ending_cash.amount", "page": 4,
+     "extracted": 48191, "on_page": "Cash and cash equivalents 48,191; Cash at county treasurer 648",
+     "issue": "ending_cash leaves out the 648 at the county treasurer, which the project rules count as Cash and Cash Equivalents (the balance sheet does). Governmental cash including the treasurer would be 48,839. The notes record this choice."}
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "stem": "Wolbach_FY2022",
+  "values_checked": 93,
+  "issues": [
+    {"severity": "warning", "path": "detail[24].category", "page": 1,
+     "extracted": "keno/lottery", "on_page": "Local Receipts: Other 2.00 (Special Revenue - Keno column)",
+     "issue": "Detail line takes keno/lottery from the fund name, but the matching statement receipt receipts[10] (Local Receipts: Other 148,553) still holds these 2 dollars as category other. The same printed line is categorized two ways in one report, and the fund-name rule covers only a fund's tax receipts. The amount is immaterial, but the two categories should match."},
+    {"severity": "warning", "path": "disbursements[7].fund_type", "page": 3,
+     "extracted": "governmental", "on_page": "Line 45 Solid Waste 23,512.00, printed under 'Business-Type Activities' heading but in the General Fund column",
+     "issue": "Fund type is a judgment call. The column says governmental (General Fund) but the row heading says business-type. Recorded as governmental with category utilities. Also applies to detail[12]."},
+    {"severity": "warning", "path": "beginning_cash.amount", "page": 1,
+     "extracted": 284359, "on_page": "Line 3 Subtotal of Beginning Balance (governmental columns) 284,359; line 1 Net Cash Balance 278,794 + line 2 Investments 5,565",
+     "issue": "beginning_cash and ending_cash (264,990, line 24) include the General Fund CDs (5,565 / 5,623), and beginning_investments/ending_investments repeat those amounts. This is consistent with the statement's roll-forward and is noted as informational, but any consumer adding cash + investments would double count 5,565 / 5,623."}
+  ]
+}
