@@ -1,0 +1,10 @@
+{"stem": "Dorchester_FY2024", "gaps": [
+  {"fund_type": "governmental", "section": "debt_proceeds", "cause": "different basis",
+   "explanation": "Exhibit E (pp5-6, Total Governmental Funds 2024 p6) prints Other Financing Sources (Uses): Bond Proceeds 1,665,000, Bond Issue Costs (44,363), Interest paid on long-term debt (43,338), Transfers in 351,196, Transfers out (145,531). JSON debt_proceeds = 1,665,000; the bond issue costs are in JSON other_financing (-87,701 = -44,363 - 43,338). Detail already has every printed proceeds line: General Fund 'Bond Proceeds' 535,000 (p11) + Street Fund 'Bond Proceeds' 1,130,000 (p12) = 1,665,000, and the Bond Issue Costs General (13,265) (p11) + Street (31,098) (p12) = (44,363). The schedule_total 1,620,637 = 1,665,000 - 44,363, i.e. the gap check counts the bond issue cost lines with the proceeds while the statement side records them under other_financing. Nothing is missing or duplicated; no fix.",
+   "add": [], "remove": []},
+  {"fund_type": "business-type", "section": "transfers_net", "cause": "missing lines",
+   "explanation": "Exhibit H proprietary statement p8 (printed p13), Non-operating revenue (expenses) 'Transfers to other funds': Electric Fund (205,665), Water 0, Sewer 0; Totals 2024 (205,665) = JSON business_type.transfers_net. No business-type transfer line is in detail[] (business-type detail = the Schedule 8 p17 one-line cash disbursements per fund; per Schedule 7 p16 the Electric cash disbursements 740,041 embed the 205,665 transfer, but that is one printed amount and is not split). Added the printed Electric Fund transfer out: 0 + (205,665) = (205,665), gap 0. The governmental side already has the matching General Fund 'Transfers from other funds' 205,665 (p11).",
+   "add": [
+    {"fund_type": "business-type", "schedule": "Statement of Revenues, Expenditures, and Changes in Net Position - Proprietary Funds (Electric Fund column)", "fund": "Electric Fund", "department": null, "section": "other financing", "original_label": "Transfers Out", "amount": -205665, "source_page": 8, "category": null, "detail_category": null}
+   ], "remove": []}
+]}
