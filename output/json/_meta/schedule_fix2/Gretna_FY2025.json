@@ -1,0 +1,12 @@
+{"stem": "Gretna_FY2025", "gaps": [
+  {"fund_type": "governmental", "section": "debt_proceeds", "cause": "different basis",
+   "explanation": "Statement p5-6 debt proceeds: Proceeds from tax supported municipal improvement bonds 22,461,809 (General) + Proceeds from refunding bonds 49,505,000 (Debt Service) = 71,966,809. General 22,461,809 is in detail[] (p14). The Debt Service Fund already has its own schedule in detail[] (p16, 'Budget and Actual (Budgetary Basis)'), which prints Proceeds from bond issuance 46,866,242 and Transfers from other funds 2,638,758 instead (46,866,242 + 2,638,758 = 49,505,000; the statement prints Transfers, net (27,897,181) for the same fund) - a budgetary-basis difference of 2,638,758; adding the statement's 49,505,000 would double count the schedule line. The rest of the gap is the label match in the schedule total, which also counts both Deposit to escrow to refund bonds lines (General (35,091,668) p15; Debt Service (17,758,864) p16; these belong to JSON other_financing): 22,461,809 + 46,866,242 - 35,091,668 - 17,758,864 = 16,477,519 = schedule total; gap 55,489,290 = 35,091,668 + 17,758,864 + 2,638,758. No printed proceeds line is missing; no fix.",
+   "add": [],
+   "remove": []},
+  {"fund_type": "governmental", "section": "other financing", "cause": "missing lines",
+   "explanation": "Mislabelled transfer: detail[45] (Street, p11 Special Revenue Funds budgetary schedule) is labelled 'Transfers In' but the amount is negative (293,282): p11 prints 'Transfers from other funds (293,282)' in the Street actual column, the statement p5 prints Street 'Transfers, net (293,282)', and the General Fund schedule p14 prints 'Transfer from street fund' 293,282 - money leaving Street. Removed and added back as Transfers Out with the same amount. All other printed other-financing rows of the fund columns (p5: General 22,461,809 / 882,542 / (35,091,668) / transfers 293,282 + 30,099,681 - 2,202,500 = 28,190,463; Debt Service (404,195) / (17,758,864) / 2,638,758 - 27,897,181) are already in detail[].",
+   "add": [
+     {"fund_type": "governmental", "schedule": "Budget and Actual - Special Revenue Funds (budgetary basis)", "fund": "Street", "department": null, "section": "other financing", "original_label": "Transfers Out", "printed_label": "Transfers from other funds", "amount": -293282, "source_page": 11, "category": null, "detail_category": null}
+   ],
+   "remove": [{"detail_index": 45, "original_label": "Transfers In", "amount": -293282}]}
+]}
