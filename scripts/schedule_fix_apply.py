@@ -73,6 +73,18 @@ def main():
         existing_funds = sorted({x.get("fund") for x in det if isinstance(x, dict) and x.get("fund")})
         entries = [e for e in fx.get("gaps") or [] if isinstance(e, dict)]
         for e in entries:
+            if PASS2 and e.get("remove"):
+                # pass 2 never removes or relabels a printed line (as printed, user 2026-10-29; the page check found
+                # the "mislabelled transfer" swaps were the printed row labels): drop the removals and the adds that
+                # only re-add a removed line under another label
+                gone = [(norm(det[r["detail_index"]].get("fund")) if isinstance(r.get("detail_index"), int)
+                         and 0 <= r["detail_index"] < len(det) else None, round(abs(r.get("amount") or 0), 2))
+                        for r in e["remove"]]
+                amts = {a for _, a in gone}
+                e["add"] = [a for a in e.get("add") or [] if not (isinstance(a.get("amount"), (int, float))
+                            and round(abs(a["amount"]), 2) in amts and re.search(r"transfer", str(a.get("original_label")), re.I))]
+                e["remove"] = []
+                e["cause"] = str(e.get("cause") or "") + " (partly: relabelling not applied, lines stay as printed)"
             for r in e.get("remove") or []:
                 i = r.get("detail_index")
                 if not isinstance(i, int) or not (0 <= i < len(det)) or abs(v(det[i]) - (r.get("amount") or 0)) > 0.5:
@@ -115,7 +127,7 @@ def main():
             if e.get("add") or e.get("remove"):
                 partial = any(c in cause for c in ("different basis", "statement issue", "partly", "explained"))
                 if k in after and not (k[1].startswith("transfers") and after[k][4] < 0):
-                    if not (partial and k in before and abs(after[k][4]) < abs(before[k][4]) - 3):
+                    if not (partial and k in before and (abs(after[k][4]) < abs(before[k][4]) - 3 or "relabelling not applied" in cause)):
                         ok = False; bad.append("%s %s still off by %s after the fix" % (k[0], k[1], after[k][4]))
         # a fix must not open or worsen another gap
         for k, g in after.items():
