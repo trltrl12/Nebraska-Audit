@@ -12,6 +12,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from schedule_gap import gaps, v, J  # noqa: E402
 
 FIX = J / "_meta" / "schedule_fix"
+# removals of more than ten lines are applied only after an independent page check confirmed every removed line
+CHECKED_REMOVALS = {"Potter_FY2022", "Potter_FY2023", "Potter_FY2025", "Hubbard_FY2022"}
 FIXED = {"missing fund column", "missing lines", "duplicate lines"}
 SECTIONS = {"revenue", "expenditure", "other financing"}
 
@@ -39,6 +41,8 @@ def norm(s):
 
 def main():
     write = "--write" in sys.argv
+    hold_f = J / "_meta" / "schedule_fix_hold.csv"   # stem,reason: fixes the page check did not confirm
+    hold = {r["stem"]: r["reason"] for r in csv.DictReader(hold_f.open())} if hold_f.exists() else {}
     status, stat, changed = [], Counter(), []
     for f in sorted(FIX.glob("*.json")):
         stem = f.stem
@@ -116,7 +120,9 @@ def main():
                 continue
             if k not in before or abs(g[4]) > abs(before[k][4]) + 3:
                 ok = False; bad.append("%s %s gap opened/worsened: %s" % (k[0], k[1], g[4]))
-        if len(rm) > 10:
+        if stem in hold:
+            ok = False; bad.append("held: " + hold[stem])
+        elif len(rm) > 10 and stem not in CHECKED_REMOVALS:
             ok = False; bad.append("held: removes %d lines; needs a full page check first" % len(rm))
         applied = ok and (add or rm)
         for e in entries:
