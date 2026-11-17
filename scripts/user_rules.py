@@ -898,6 +898,7 @@ def apply(d, stem=""):
     if isinstance(d.get("balance_sheet"), dict):
         label_unify_assets(d["balance_sheet"], log)
     entity_rules(d, entity_of(stem), log)
+    xyear_rule(d, stem, log)
     for k in ("receipts", "disbursements", "detail"):
         for x in d.get(k) or []:
             label_merge(x, log)
@@ -924,6 +925,58 @@ def write_context_queue(stems):
         w = csv.DictWriter(fh, fieldnames=CONTEXT_FIELDS)
         w.writeheader()
         w.writerows(rows)
+
+
+# ---- Cross-year page checks (user 2026-11-17): output/json/_meta/xyear_decisions/<entity>.csv ----
+# scripts/xyear_check.py lists lines whose category differs between years for the same entity and printed label; an
+# agent reads the years' pages side by side and writes one decision per line (category + evidence + verdict). A
+# decision applies to that one line only (matched on report, section, label, amount and page) and is never extended.
+_XY = None
+
+
+def _xyear():
+    global _XY
+    if _XY is None:
+        _XY = {}
+        d = JSON_DIR / "_meta" / "xyear_decisions"
+        if d.exists():
+            for f in sorted(d.glob("*.csv")):
+                for r in csv.DictReader(f.open(newline="")):
+                    if r.get("verdict") in ("same", "differs") and r.get("category"):
+                        _XY[(r["stem"], r["where"], r["label"], str(r["amount"]), str(r["source_page"]),
+                             r.get("fund") or "", r.get("department") or "")] = r
+    return _XY
+
+
+def xyear_rule(d, stem, log):
+    xy = _xyear()
+    if not xy:
+        return
+
+    def one(where, fund, dept, x):
+        a = x.get("amount")
+        a, p = (a.get("amount"), a.get("source_page")) if isinstance(a, dict) else (a, x.get("source_page"))
+        for lab in (x.get("original_label"), x.get("printed_label")):
+            r = xy.get((stem, where, lab, str(a), str(p), fund or "", dept or ""))
+            if r:
+                setcat(x, "category", r["category"], "xyear page check: category", log)
+                if x.get("category_evidence") != r.get("evidence"):
+                    x["category_evidence"] = r.get("evidence")
+                    x["category_decision"] = "xyear page check"
+                return
+
+    for w in ("receipts", "disbursements"):
+        for x in d.get(w) or []:
+            if isinstance(x, dict):
+                one(w, x.get("fund_type"), "", x)
+    for x in d.get("detail") or []:
+        if isinstance(x, dict) and x.get("section") in ("revenue", "expenditure"):
+            one("detail " + x["section"], x.get("fund"), x.get("department"), x)
+    bs = d.get("balance_sheet") if isinstance(d.get("balance_sheet"), dict) else {}
+    for w in ("assets", "liabilities", "deferred_outflows", "deferred_inflows"):
+        for x in bs.get(w) or []:
+            if isinstance(x, dict):
+                one("balance sheet " + w, x.get("fund_type"), "", x)
 
 
 def write_equity_queue(stems):
