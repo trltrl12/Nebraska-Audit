@@ -51,6 +51,12 @@ own page prints.
      funds" -> Internal Balances; "Grants" / "Grant income" / "Grant proceeds" with no grantor printed -> other;
      mixed "Grants and contributions" / "Grants and donations" with no breakdown -> donations/contributions; waiver
      "Local Receipts: Other" -> other; compensated absences -> other liabilities; "NPPD lease payment/revenue" -> Rentals.
+   - Tax lines follow the tax-split rule in CLAUDE.md (user 2026-11-04): a fund name that clearly identifies one tax
+     decides that fund's "Taxes" line (Visitor Promotion / Visitor Improvement -> lodging tax; TIF -> property tax;
+     Local Option Sales Tax fund -> sales tax). An "Intergovernmental" line in a fund column named for a federal
+     grant (CDBG, FEMA, ARPA, Federal Grants Fund) is federal grants.
+   - Open every year's page yourself; do not assume a year has the same layout because another year does, and do not
+     rely on notes inside the JSON.
    - Never merge or rename labels. Categories only.
    - The category formerly named "Community Betterment" is now named "Community Betterment/Development" (user 2026-11-17); use the new name.
    - Never change an amount, never comment on amounts. Categories only.
