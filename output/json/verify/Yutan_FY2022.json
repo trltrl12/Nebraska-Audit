@@ -1,0 +1,27 @@
+{
+  "stem": "Yutan_FY2022",
+  "values_checked": 488,
+  "issues": [
+    {"severity": "warning", "path": "basis", "page": 1,
+     "extracted": "cash", "on_page": "Government-wide Statement of Net Position with receivables, capital assets, accumulated depreciation and bonds payable; proprietary depreciation (pp1-2, 13-14)",
+     "issue": "Basis recorded as cash to match FY2023-FY2025 (the extractor's own assumption, stated in notes), but the statements are GAAP/accrual-style. A person should confirm the basis."},
+    {"severity": "warning", "path": "governmental_net_position", "page": 2,
+     "extracted": null, "on_page": "Governmental Activities: beginning 2,680,620; change 242,762; ending 2,923,382",
+     "issue": "The Statement of Activities prints governmental net position, but it was left null because basis was recorded as cash. If the report is treated as GAAP, these values belong here."},
+    {"severity": "warning", "path": "ending_cash", "page": 3,
+     "extracted": 1091870, "on_page": "Cash and Equivalents 823,447; Restricted cash 268,423; Due from County Treasurer 5,056 (no printed cash total)",
+     "issue": "Ending cash is a computed sum of two printed lines. The 2026-11-06 ruling says cash is never derived. Also, Due from County Treasurer 5,056 is classed as Cash and Cash Equivalents in balance_sheet but left out of this sum. The arithmetic itself is correct."},
+    {"severity": "warning", "path": "other_financing", "page": 5,
+     "extracted": 121577, "on_page": "ARPA Grant Income 115,927 + Grant income - Library 5,650 (under Other Financing Sources (Uses))",
+     "issue": "These federal/library grant receipts are recorded as other_financing, as printed, so they are not in receipts. The Statement of Activities (p2) shows them as operating grants. Defensible under the as-printed rule; flagged so a person can confirm."},
+    {"severity": "warning", "path": "receipts[2].category", "page": 4,
+     "extracted": "Public Power District Sales Tax", "on_page": "5% Gross tax 12,096",
+     "issue": "Category is an assumption (public power district 5% gross revenue in-lieu tax). The page does not say who pays it. Same assumption in detail rows for General Fund 7,205 (p6) and Debt Service 4,891 (p12)."},
+    {"severity": "warning", "path": "disbursements[24].category", "page": 14,
+     "extracted": "School-Related Spending", "on_page": "Schools 2,869 (Water 1,207 / Sewer 1,662, utility operating expenses)",
+     "issue": "In a utility's operating expenses, 'Schools' is likely operator training (the detail rows already use detail_category dues, training and travel). Category School-Related Spending applies the city school-label rule. Judgment call; same for the Water p15 and Sewer p16 detail rows."},
+    {"severity": "warning", "path": "disbursements[17].category", "page": 14,
+     "extracted": "other", "on_page": "Lagoon farm expense 28,406; Locations 278; Lagoon discharge 331",
+     "issue": "Utility cost-type lines put in 'other' (with review notes). 'Locations' (utility locates) and 'Lagoon discharge' could be professional/contract services. The cost type is not printed, so this is a defensible judgment call (also disbursements[21], disbursements[27] and matching detail rows)."}
+  ]
+}
