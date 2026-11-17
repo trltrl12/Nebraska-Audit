@@ -104,7 +104,7 @@ DISBURSEMENT_CATEGORIES = [
     "Drivers Education",  # user decision 2026-10-28: out of instruction
     "School-Related Spending",  # user decision 2026-10-29: school lines in city/village/county reports
     "Operating",  # user decision 2026-10-29: "Operating" lines that were in other
-    "Community Betterment",  # user decision 2026-10-29: not keno, not economic development
+    "Community Betterment/Development",  # user decision 2026-10-29: not keno, not economic development
 ]
 def _decision_categories():
     """Category names the user decided (config/category_decisions.csv) or a page check created count as known."""

@@ -48,7 +48,7 @@ RECEIPT_CATS = [
 SPENDING_CATS = [
     "general government", "public safety", "streets/highways", "culture/recreation", "health/welfare",
     "economic development", "utilities", "Debt Service", "capital outlay", "instruction", "support services",
-    "student transportation", "food service", "student activities", "Drivers Education", "Community Betterment",
+    "student transportation", "food service", "student activities", "Drivers Education", "Community Betterment/Development",
     "Operating", "School-Related Spending", "hospital/health care", "housing", "natural resources/conservation",
     "agriculture/fair", "Mass Transit", "Bond Retirement", "Leases and SBITA", "other",
 ]

@@ -65,6 +65,7 @@ CHARGE_CATS = [
 RECREATION_DEPT = re.compile(r"pool|\bparks?\b|recreation|golf|swim", re.I)
 UTILITY_FUND = re.compile(r"water|sewer|electric|light|gas|utilit|refuse|sanitation|garbage|trash|solid waste", re.I)
 DRIVERS_ED = re.compile(r"driver'?s'? ?ed", re.I)
+CB = "Community Betterment/Development"  # user 2026-11-17: the category and label read this way (was Community Betterment)
 COMMUNITY_BETTERMENT = re.compile(r"community (development/)?better", re.I)
 NOXIOUS_WEED = re.compile(r"noxious|\bweeds?\b", re.I)
 OPERATING_LABEL = re.compile(r"^operating( expenses?| costs?)?$", re.I)
@@ -389,8 +390,10 @@ def drivers_ed_spending_rule(x, log):
 def community_betterment_rule(x, log):
     """Community betterment spending (keno-funded or not) is its own category (user 2026-10-29); capital outlay stays."""
     if COMMUNITY_BETTERMENT.search(label_of(x) + " " + str(x.get("department") or "")) \
-            and x.get("category") not in ("Community Betterment", "capital outlay"):
-        setcat(x, "category", "Community Betterment", "category: Community Betterment", log)
+            and x.get("category") not in (CB, "capital outlay"):
+        setcat(x, "category", CB, "category: " + CB, log)
+    elif x.get("category") == "Community Betterment":
+        setcat(x, "category", CB, "category: " + CB, log)
 
 
 def noxious_weed_rule(x, log):
@@ -959,7 +962,8 @@ def xyear_rule(d, stem, log):
         for lab in (x.get("original_label"), x.get("printed_label")):
             r = xy.get((stem, where, lab, str(a), str(p), fund or "", dept or ""))
             if r:
-                setcat(x, "category", r["category"], "xyear page check: category", log)
+                setcat(x, "category", CB if r["category"] == "Community Betterment" else r["category"],
+                       "xyear page check: category", log)
                 if x.get("category_evidence") != r.get("evidence"):
                     x["category_evidence"] = r.get("evidence")
                     x["category_decision"] = "xyear page check"
