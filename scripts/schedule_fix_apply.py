@@ -25,6 +25,8 @@ FIX = J / "_meta" / TAG
 MARK = "2026-11-18 pass 8 (re-trim)" if PASS8 else "2026-11-18 pass 7" if PASS7 else "2026-11-18 pass 6" if PASS6 else "2026-11-18 pass 5 (re-trim)" if PASS5 else "2026-11-17 pass 4" if PASS4 else "2026-11-17 pass 3" if PASS3 else "2026-11-17 pass 2" if PASS2 else "2026-11-17"
 # removals of more than ten lines are applied only after an independent page check confirmed every removed line
 CHECKED_REMOVALS = {"Potter_FY2022", "Potter_FY2023", "Potter_FY2025", "Hubbard_FY2022"}
+if PASS8:  # page-checked in _meta/schedule_spot8 (budget-basis schedules / combined enterprise column replaced by fund lines)
+    CHECKED_REMOVALS |= {"Lincoln_FY2022", "Lincoln_FY2025"}
 if PASS7:  # Ansley_FY2022: combined all-funds budget lines replaced by the per-fund statement lines (page-checked)
     CHECKED_REMOVALS |= {"Ansley_FY2022"}
 if PASS6:  # every removal page-checked in _meta/schedule_spot6
