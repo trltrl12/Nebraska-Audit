@@ -372,6 +372,28 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
     page-checked; McCook_FY2025 Transportation / Miscellaneous income / Grant income categories follow its statement.
   - **Court Settlements (user 2026-11-18):** receipt lines labelled "Court settlements" are their own category, Court
     Settlements (out of other; `config/category_decisions.csv`, label rule). Only Lincoln FY2022 and FY2023 print it.
+  - **Dashboard check (user 2026-11-18):** the published Power BI report was reviewed against the pages. 410 flagged
+    label/category lines (`_meta/dashboard_check.csv`) were read on the page (`_meta/dash_decisions/`), proposed changes
+    read a second time (`_meta/dash_verify/`); 69 lines changed where both readers agreed (decisions in
+    `_meta/xyear_decisions/dash_<entity>.csv`, logged in corrections_log.csv): Airport spending printed as its own
+    function is category Airport (Falls City, Hay Springs, Grant, Valentine); mixed grant/donation labels with no
+    grantor leave state aid for donations/contributions; single lines. **Casino / gaming tax stays keno/lottery
+    (user).** Clearwater: the Street Fund "Intergovernmental" that the Statement of Activities prints as Motor vehicle
+    tax keeps category motor vehicle tax (user: leave); Clearwater_FY2025 governmental liability 9,769 is "Payroll
+    withholding" (as the Statement of Net Position prints it and as FY2022-24), not the fund balance sheet's
+    "Accounts payable and accrued expenses". School districts: leave as they are (user).
+  - **Tax lines consistent across years (user 2026-11-18: "whatever is correct and consistent"):** Lancaster_County
+    FY2022-24 and Milford FY2022-24 are split like their FY2025 reports (Lancaster: the Statement of Activities tax
+    types as printed, property tax = remainder of the fund statement Taxes line; Milford: six printed tax rows, $1-2
+    rounding on property tax); two independent reads of the printed rows; logged in `_meta/tax_splits.csv`. Stay
+    unsplit because the report prints no breakdown or it does not add up: Adams_County FY2023-24, Kimball_County
+    FY2024, Perkins_County FY2022-24 (`_meta/tax_split_consistency.json`).
+  - **FY2025 liabilities aligned with FY2024 (user 2026-11-18):** La Vista, Lexington, Norfolk, Sarpy County, Syracuse:
+    41 due-within / due-in-more-than-one-year rows (bonds, leases, subscriptions, OPEB, landfill, compensated absences)
+    carry the 2026-10-26 categories and labels as in FY2024 (`_meta/liability_align_2025.json`; user_rules.py only
+    matches the "<X> - Due within one year" spelling, so these were set per line). Sarpy County compensated absences
+    and Beatrice are left (compensated-absences ruling).
+  - Further dashboard findings are listed only, not changed, until the user rules (review list sent 2026-11-18).
   - Sargent_FY2022: the Auditor's PDF does not contain printed pp19, 22, 24, 52 (left-hand statement pages); it cannot
     be re-trimmed. Governmental lines come from the Total column.
 
