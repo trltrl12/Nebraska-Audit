@@ -205,7 +205,8 @@ def page_amount(v):
 def one_tab(collected):
     """output/cashflow_one_tab.xlsx: one sheet, one amount column, three levels:
     cash flow (governmental and business-type roll-forwards; utility cash flow statements),
-    balance sheet, and revenue and expenses (statement lines and schedule detail, told apart by `source`:
+    balance sheet, and revenue and expenses (statement lines and schedule detail, told apart by `source`;
+    the statement's transfers, debt proceeds and other financing are repeated there as "other financing" rows:
     both describe the same money, so sum one source at a time). Cash-flow outflows are negative."""
     county = {Path(r["filename"]).stem: r.get("county", "") for r in read_csv(FILE_LIST)}
     out = []
@@ -230,6 +231,17 @@ def one_tab(collected):
             if v is not None and (v or col in ("beginning_balance", "ending_balance")):
                 out.append({**ident_, "level": "cash flow", "fund_type": "governmental", "section": "roll-forward",
                             "source": "statement", "line": n, "original_label": label.format(bt), "amount": sign * v})
+        # user 2026-11-18: the statement's transfers, debt proceeds and other financing also appear as "other financing"
+        # rows under revenue and expenses (source statement), next to the schedule's other-financing rows
+        for n, (col, label, sign) in enumerate((("transfers_in", "Transfers In", 1), ("transfers_out", "Transfers Out", -1),
+                                                ("debt_proceeds", "Debt Proceeds", 1),
+                                                ("other_financing", "Other Financing", 1)), 1):
+            v = num_(r.get(col))
+            if v:
+                out.append({**ident_, "level": "revenue and expenses", "fund_type": "governmental",
+                            "section": "other financing", "source": "statement", "line": n,
+                            "category": "Total Other Financing Sources (Uses)", "original_label": label,
+                            "amount": sign * v})
         # governmental activities net position from the Statement of Activities (user 2026-10-29); not part of the
         # fund-balance roll-forward above
         try:
@@ -272,6 +284,12 @@ def one_tab(collected):
             v = num_(page_amount(btj.get(key)))
             if v:
                 lines.append((4, label, round(v * units, 2), "statement"))
+                out.append({**ident_, "level": "revenue and expenses", "fund_type": "business-type",
+                            "section": "other financing", "source": "statement", "line": 4,
+                            "category": "Total Other Financing Sources (Uses)",
+                            "original_label": {"transfers_net": "Transfers (Net)", "debt_proceeds": "Debt Proceeds",
+                                               "other_financing": "Other Financing"}[key],
+                            "amount": round(v * units, 2)})
         for it in btj.get("adjustments") or []:
             v = num_(page_amount(it))
             if v:
