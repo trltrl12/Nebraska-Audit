@@ -23,6 +23,8 @@ FIX = J / "_meta" / TAG
 MARK = "2026-11-18 pass 6" if PASS6 else "2026-11-18 pass 5 (re-trim)" if PASS5 else "2026-11-17 pass 4" if PASS4 else "2026-11-17 pass 3" if PASS3 else "2026-11-17 pass 2" if PASS2 else "2026-11-17"
 # removals of more than ten lines are applied only after an independent page check confirmed every removed line
 CHECKED_REMOVALS = {"Potter_FY2022", "Potter_FY2023", "Potter_FY2025", "Hubbard_FY2022"}
+if PASS6:  # every removal page-checked in _meta/schedule_spot6
+    CHECKED_REMOVALS |= {"Boys_Town_FY2024", "Boys_Town_FY2025"}
 if PASS5:  # every removal page-checked in _meta/schedule_spot5 (combined enterprise column replaced by its funds)
     CHECKED_REMOVALS |= {"Lincoln_FY2023", "Lincoln_FY2024", "Omaha_FY2022", "Omaha_FY2023", "Omaha_FY2024", "Omaha_FY2025"}
 FIXED = {"missing fund column", "missing lines", "duplicate lines"}
@@ -114,7 +116,7 @@ def main():
                     dcat = a.get("detail_category") or dcat or ("not itemized" if a["section"] == "expenditure" else cat)
                     if not cat:
                         bad.append("added line has no category: %r" % (a,)); continue
-                dup = [x for x in det if isinstance(x, dict) and x.get("section") == a["section"] and abs(v(x) - a["amount"]) < 0.005
+                dup = [x for i, x in enumerate(det) if i not in rm and isinstance(x, dict) and x.get("section") == a["section"] and abs(v(x) - a["amount"]) < 0.005
                        and norm(x.get("fund")) == norm(a["fund"]) and norm(x.get("original_label")) == norm(a["original_label"])]
                 if dup:
                     bad.append("added line is already in detail: %r" % (a,)); continue

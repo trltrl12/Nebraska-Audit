@@ -346,6 +346,17 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
     still open were re-read in full; 34 changed (1,095 lines added, 51 duplicate/replaced summary lines removed); 14
     have nothing printed to add. Pass 4 (`_meta/schedule_fix4/`, `schedule_fix_apply.py --pass4`, no tie gate): the
     page-confirmed printed lines that pass 3 had left out because they did not tie.
+  - **Full page check and pass 6 (2026-11-18):** every pass-1 and pass-2 report that the earlier samples had not
+    covered was checked on the page (`schedule_spot_full` / `schedule_spot_full1` agents; 254 pass-2 reports, 8,995
+    items, and 140 pass-1 reports, 1,162 items; results in `_meta/schedule_spot2/` and `_meta/schedule_spot/`). No
+    wrong amounts except one derived line (Axtell_FY2022 Water debt issue cost, removed). Fixed from the findings:
+    transfer labels as printed (a positive amount on a "Transfers to other funds" row is labelled Transfers Out with
+    its printed sign), DeWitt_FY2025 duplicate transfer removed, gross fund-column transfers added where the schedule
+    had only a budget net line (Decatur FY2022-24, Walthill FY2022-24, Columbus_FY2023; the net line is replaced only
+    when the gross pair nets to it exactly), other single missing lines. The 27 first-pass leftovers were re-read and
+    page-checked. Pass 6 (`_meta/schedule_fix6/`, `_meta/schedule_spot6/`, `schedule_fix_apply.py --pass6`): 32 reports,
+    310 lines added, 73 replaced/duplicate lines removed. Not added by rule: debt proceeds printed only on a utility
+    cash-flow statement (the schedule follows the net-position statement); internal service fund columns.
   - Sargent_FY2022: the Auditor's PDF does not contain printed pp19, 22, 24, 52 (left-hand statement pages); it cannot
     be re-trimmed. Governmental lines come from the Total column.
 
