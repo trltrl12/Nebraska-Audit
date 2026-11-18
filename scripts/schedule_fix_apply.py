@@ -18,10 +18,11 @@ PASS3 = "--pass3" in sys.argv   # pass 3: the reports still open after passes 1 
 PASS5 = "--pass5" in sys.argv   # pass 5: lines from the pages added by the 2026-11-17 re-trim (8 reports)
 PASS6 = "--pass6" in sys.argv   # pass 6: first-pass leftovers + lines the full page check of pass 2 found missing
 PASS7 = "--pass7" in sys.argv   # pass 7: reports whose governmental schedule still differs >10% from the statement
-PASS4 = "--pass4" in sys.argv or PASS5 or PASS6 or PASS7
-TAG = "schedule_fix7" if PASS7 else "schedule_fix6" if PASS6 else "schedule_fix5" if PASS5 else "schedule_fix4" if PASS4 else "schedule_fix3" if PASS3 else "schedule_fix2" if PASS2 else "schedule_fix"
+PASS8 = "--pass8" in sys.argv   # pass 8: Lincoln FY2022/FY2025 (and South Sioux City FY2025) after their re-trim
+PASS4 = "--pass4" in sys.argv or PASS5 or PASS6 or PASS7 or PASS8
+TAG = "schedule_fix8" if PASS8 else "schedule_fix7" if PASS7 else "schedule_fix6" if PASS6 else "schedule_fix5" if PASS5 else "schedule_fix4" if PASS4 else "schedule_fix3" if PASS3 else "schedule_fix2" if PASS2 else "schedule_fix"
 FIX = J / "_meta" / TAG
-MARK = "2026-11-18 pass 7" if PASS7 else "2026-11-18 pass 6" if PASS6 else "2026-11-18 pass 5 (re-trim)" if PASS5 else "2026-11-17 pass 4" if PASS4 else "2026-11-17 pass 3" if PASS3 else "2026-11-17 pass 2" if PASS2 else "2026-11-17"
+MARK = "2026-11-18 pass 8 (re-trim)" if PASS8 else "2026-11-18 pass 7" if PASS7 else "2026-11-18 pass 6" if PASS6 else "2026-11-18 pass 5 (re-trim)" if PASS5 else "2026-11-17 pass 4" if PASS4 else "2026-11-17 pass 3" if PASS3 else "2026-11-17 pass 2" if PASS2 else "2026-11-17"
 # removals of more than ten lines are applied only after an independent page check confirmed every removed line
 CHECKED_REMOVALS = {"Potter_FY2022", "Potter_FY2023", "Potter_FY2025", "Hubbard_FY2022"}
 if PASS7:  # Ansley_FY2022: combined all-funds budget lines replaced by the per-fund statement lines (page-checked)
@@ -57,7 +58,7 @@ def norm(s):
 
 def main():
     write = "--write" in sys.argv
-    hold_f = J / "_meta" / ("schedule_fix7_hold.csv" if PASS7 else "schedule_fix6_hold.csv" if PASS6 else "schedule_fix5_hold.csv" if PASS5 else "schedule_fix4_hold.csv" if PASS4 else "schedule_fix3_hold.csv" if PASS3 else "schedule_fix_hold.csv")   # stem,reason: fixes the page check did not confirm
+    hold_f = J / "_meta" / ("schedule_fix8_hold.csv" if PASS8 else "schedule_fix7_hold.csv" if PASS7 else "schedule_fix6_hold.csv" if PASS6 else "schedule_fix5_hold.csv" if PASS5 else "schedule_fix4_hold.csv" if PASS4 else "schedule_fix3_hold.csv" if PASS3 else "schedule_fix_hold.csv")   # stem,reason: fixes the page check did not confirm
     hold = {r["stem"]: r["reason"] for r in csv.DictReader(hold_f.open())} if hold_f.exists() else {}
     status, stat, changed = [], Counter(), []
     for f in sorted(FIX.glob("*.json")):
