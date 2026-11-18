@@ -357,6 +357,8 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
     page-checked. Pass 6 (`_meta/schedule_fix6/`, `_meta/schedule_spot6/`, `schedule_fix_apply.py --pass6`): 32 reports,
     310 lines added, 73 replaced/duplicate lines removed. Not added by rule: debt proceeds printed only on a utility
     cash-flow statement (the schedule follows the net-position statement); internal service fund columns.
+  - **Court Settlements (user 2026-11-18):** receipt lines labelled "Court settlements" are their own category, Court
+    Settlements (out of other; `config/category_decisions.csv`, label rule). Only Lincoln FY2022 and FY2023 print it.
   - Sargent_FY2022: the Auditor's PDF does not contain printed pp19, 22, 24, 52 (left-hand statement pages); it cannot
     be re-trimmed. Governmental lines come from the Total column.
 
