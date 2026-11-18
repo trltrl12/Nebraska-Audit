@@ -22,6 +22,8 @@ FIX = J / "_meta" / TAG
 MARK = "2026-11-18 pass 5 (re-trim)" if PASS5 else "2026-11-17 pass 4" if PASS4 else "2026-11-17 pass 3" if PASS3 else "2026-11-17 pass 2" if PASS2 else "2026-11-17"
 # removals of more than ten lines are applied only after an independent page check confirmed every removed line
 CHECKED_REMOVALS = {"Potter_FY2022", "Potter_FY2023", "Potter_FY2025", "Hubbard_FY2022"}
+if PASS5:  # every removal page-checked in _meta/schedule_spot5 (combined enterprise column replaced by its funds)
+    CHECKED_REMOVALS |= {"Lincoln_FY2023", "Lincoln_FY2024", "Omaha_FY2022", "Omaha_FY2023", "Omaha_FY2024", "Omaha_FY2025"}
 FIXED = {"missing fund column", "missing lines", "duplicate lines"}
 SECTIONS = {"revenue", "expenditure", "other financing"}
 

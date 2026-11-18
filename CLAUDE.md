@@ -419,14 +419,16 @@ holds just those reports and sheets. Prioritise fixes and re-checks for these ty
 - Missing-page re-trim 2026-10-27 (cities/villages/schools/counties): done. 29 reports re-trimmed with
   config/extra_pages.csv, pages remapped, new pages added, verified, verifier errors fixed (0 flags). No page needed:
   Butte (re-check its extraction), Kimball County, Chadron PS, Springfield.
-- Re-trim queued 2026-11-17 (config/extra_pages.csv + retrim.csv; waiting for the user to run the fetch workflow once
-  per year 2022, 2023, 2024, 2025): McCool_Junction_FY2022 (Bond Fund budget column), South_Sioux_City_FY2022
-  (nonmajor combining statement), Lincoln_FY2023/FY2024 (nonmajor enterprise combining statement), Omaha_FY2022-FY2025
-  (nonmajor governmental + enterprise combining statements). After the fetch: source_page numbers of these 8 reports
-  shift, so re-extract and re-verify them (batch procedure), then run user_rules.py and the schedule gap check; add
-  detail lines only for funds that have no budget schedule lines already (no double counting). Not re-trimmable (page
-  not in the Auditor's PDF): Ansley_FY2024 (budget revenue page, printed p47), Sargent_FY2022. Grant_County_FY2023
-  needs no page (the report itself does not add up).
+- Re-trim 2026-11-17/18: DONE. 8 reports re-trimmed with config/extra_pages.csv + retrim.csv (one fetch run re-trims
+  every queued report whatever year is typed: the download step works from the whole file list; the year only steers
+  the search): McCool_Junction_FY2022, South_Sioux_City_FY2022, Lincoln_FY2023/FY2024, Omaha_FY2022-FY2025. Page
+  references renumbered to the new trims; lines from the added pages put in by pass 5 (`_meta/schedule_fix5/`, every
+  line page-checked in `_meta/schedule_spot5/`, `schedule_fix_apply.py --pass5`): 606 lines added for funds that had
+  no schedule lines, 85 combined "Other/Nonmajor Enterprise Funds" lines replaced by their individual funds (rows add
+  up exactly). Omaha per-fund debt issuance/premium rows are not added: the combined "Nonmajor Governmental Funds"
+  lines from pass 2 hold that money. McCool Junction needed no line (Bond Fund already in from the statement).
+  Not re-trimmable (page not in the Auditor's PDF): Ansley_FY2024 (budget revenue page, printed p47), Sargent_FY2022.
+  Grant_County_FY2023 needs no page (the report itself does not add up).
 - Targeted re-trims (config/retrim.csv; FINDER_VERSION stays 8 so other reports are NOT re-trimmed; never bump it
   without the user's OK). Done 2026-10-22: 12 reports re-trimmed (find_pages v9 + Waterloo/Plainview fixes),
   re-extracted and re-verified; Sargent_Public_Schools_FY2025 followed (OCR-garbled repeated title fix), Activities
