@@ -15,10 +15,11 @@ PASS2 = "--pass2" in sys.argv
 PASS3 = "--pass3" in sys.argv   # pass 3: the reports still open after passes 1 and 2, each re-read in full
 # pass 4 (user 2026-11-17: "just put what is on the PDFs into the files; if the PDFs themselves do not tie that is ok"):
 # page-confirmed printed lines are added even where the schedule then differs from the statement; no tie is required
-PASS4 = "--pass4" in sys.argv
-TAG = "schedule_fix4" if PASS4 else "schedule_fix3" if PASS3 else "schedule_fix2" if PASS2 else "schedule_fix"
+PASS5 = "--pass5" in sys.argv   # pass 5: lines from the pages added by the 2026-11-17 re-trim (8 reports)
+PASS4 = "--pass4" in sys.argv or PASS5
+TAG = "schedule_fix5" if PASS5 else "schedule_fix4" if PASS4 else "schedule_fix3" if PASS3 else "schedule_fix2" if PASS2 else "schedule_fix"
 FIX = J / "_meta" / TAG
-MARK = "2026-11-17 pass 4" if PASS4 else "2026-11-17 pass 3" if PASS3 else "2026-11-17 pass 2" if PASS2 else "2026-11-17"
+MARK = "2026-11-18 pass 5 (re-trim)" if PASS5 else "2026-11-17 pass 4" if PASS4 else "2026-11-17 pass 3" if PASS3 else "2026-11-17 pass 2" if PASS2 else "2026-11-17"
 # removals of more than ten lines are applied only after an independent page check confirmed every removed line
 CHECKED_REMOVALS = {"Potter_FY2022", "Potter_FY2023", "Potter_FY2025", "Hubbard_FY2022"}
 FIXED = {"missing fund column", "missing lines", "duplicate lines"}
@@ -48,7 +49,7 @@ def norm(s):
 
 def main():
     write = "--write" in sys.argv
-    hold_f = J / "_meta" / ("schedule_fix4_hold.csv" if PASS4 else "schedule_fix3_hold.csv" if PASS3 else "schedule_fix_hold.csv")   # stem,reason: fixes the page check did not confirm
+    hold_f = J / "_meta" / ("schedule_fix5_hold.csv" if PASS5 else "schedule_fix4_hold.csv" if PASS4 else "schedule_fix3_hold.csv" if PASS3 else "schedule_fix_hold.csv")   # stem,reason: fixes the page check did not confirm
     hold = {r["stem"]: r["reason"] for r in csv.DictReader(hold_f.open())} if hold_f.exists() else {}
     status, stat, changed = [], Counter(), []
     for f in sorted(FIX.glob("*.json")):
