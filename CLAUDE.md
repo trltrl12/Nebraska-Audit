@@ -463,10 +463,12 @@ holds just those reports and sheets. Prioritise fixes and re-checks for these ty
   p37; the combined Other Enterprise Funds column is not used); Lincoln_FY2025: 21 combined "Other Enterprise Funds"
   lines replaced by 74 individual-fund lines (p22; new p16 is only a summary of pp17-21, nothing added). Both now
   equal the statement totals exactly for both fund types.
-  STILL WAITING for one fetch run (any year; Cities and Villages; Audit): South_Sioux_City_FY2025 source pp81, 82
-  (first two pages of the nonmajor governmental combining statement; pp83-85 are already trimmed). After the fetch:
-  renumber source_page to the new trim, add lines only for nonmajor funds with no budget schedule lines, page-check
-  every line, apply with a new pass and run user_rules.py.
+  South_Sioux_City_FY2025 (re-trimmed 2026-11-18, 28 -> 33 pages; new trimmed pp11-12 nonmajor governmental
+  combining statement, pp16-18 Combined Utilities departmental schedule): every nonmajor fund column and every
+  printed transfer was already in detail, nothing added; the 14 combined utility statement lines replaced by 90
+  departmental schedule lines (as FY2022-24), utility totals equal the statement. Harvest Meadows' transfer out
+  1,816,062 is labelled as printed (Transfers Out). Its governmental schedule-vs-statement differences are the
+  report's own (budget basis vs GAAP).
 - Targeted re-trims (config/retrim.csv; FINDER_VERSION stays 8 so other reports are NOT re-trimmed; never bump it
   without the user's OK). Done 2026-10-22: 12 reports re-trimmed (find_pages v9 + Waterloo/Plainview fixes),
   re-extracted and re-verified; Sargent_Public_Schools_FY2025 followed (OCR-garbled repeated title fix), Activities
