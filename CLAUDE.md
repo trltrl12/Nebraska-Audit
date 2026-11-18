@@ -450,6 +450,8 @@ holds just those reports and sheets. Prioritise fixes and re-checks for these ty
   "leave Lincoln_FY2022 as printed" ruling). Waiting for ONE fetch run (any year; Cities and Villages; Audit):
   Lincoln_FY2022 source pp131, 132, 136, 140, 144 (nonmajor governmental subcombining statements of revenues) and 168
   (nonmajor enterprise combining statement); Lincoln_FY2025 source p176 (nonmajor enterprise combining statement).
+  Same run: South_Sioux_City_FY2025 source pp81, 82 (first two pages of the nonmajor governmental combining statement;
+  pp83-85 are already trimmed): add lines only for nonmajor funds with no budget schedule lines.
   After the fetch: renumber source_page to the new trims; Lincoln_FY2022: replace the 13 budget-basis nonmajor
   schedules (trimmed pp19-31 before the re-trim) with one line per printed row per nonmajor fund column of the new
   pages, and add the utility funds from the proprietary statement (p11) plus the individual nonmajor enterprise
