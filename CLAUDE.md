@@ -361,6 +361,15 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
     debt proceeds and other financing (governmental) and transfers (net), debt proceeds, other financing (business-type)
     also appear under level Revenue and Expenses, section Other financing, source Statement, next to the schedule's
     other-financing rows; they stay in the Cash Flow roll-forward as well (build_xlsx.py `one_tab`).
+  - **Pass 7 and McCook (2026-11-18):** the 52 city/village/county reports whose governmental schedule differed more
+    than 10% from the statement were re-read fund by fund (`.claude/agents/schedule_fixer7.md`, `_meta/schedule_fix7/`,
+    `_meta/schedule_spot7/`, `schedule_fix_apply.py --pass7`). 48 are differences inside the report (bond proceeds or
+    debt payments printed as receipts/spending on the budget schedule and as other financing on the statement; budget
+    or cash basis schedules vs the statement's basis): nothing missing, nothing counted twice. 4 changed: Ansley_FY2022
+    (12 combined all-funds budget lines replaced by 83 per-fund statement lines; 116,756 printed only on the budget
+    schedule is not carried, as with Ansley_FY2023's 2,400), Columbus_FY2024 (+3), Lancaster_County_FY2024 (+1),
+    Papillion_FY2025 (+2). McCook_FY2022-24 had no utility schedule lines (missed in pass 2): 176 lines added and
+    page-checked; McCook_FY2025 Transportation / Miscellaneous income / Grant income categories follow its statement.
   - **Court Settlements (user 2026-11-18):** receipt lines labelled "Court settlements" are their own category, Court
     Settlements (out of other; `config/category_decisions.csv`, label rule). Only Lincoln FY2022 and FY2023 print it.
   - Sargent_FY2022: the Auditor's PDF does not contain printed pp19, 22, 24, 52 (left-hand statement pages); it cannot
