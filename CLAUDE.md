@@ -455,17 +455,18 @@ holds just those reports and sheets. Prioritise fixes and re-checks for these ty
   lines from pass 2 hold that money. McCool Junction needed no line (Bond Fund already in from the statement).
   Not re-trimmable (page not in the Auditor's PDF): Ansley_FY2024 (budget revenue page, printed p47), Sargent_FY2022.
   Grant_County_FY2023 needs no page (the report itself does not add up).
-- Lincoln re-trim queued 2026-11-18 (user: make Lincoln FY2022 like the other years; this replaces the earlier
-  "leave Lincoln_FY2022 as printed" ruling). Waiting for ONE fetch run (any year; Cities and Villages; Audit):
-  Lincoln_FY2022 source pp131, 132, 136, 140, 144 (nonmajor governmental subcombining statements of revenues) and 168
-  (nonmajor enterprise combining statement); Lincoln_FY2025 source p176 (nonmajor enterprise combining statement).
-  Same run: South_Sioux_City_FY2025 source pp81, 82 (first two pages of the nonmajor governmental combining statement;
-  pp83-85 are already trimmed): add lines only for nonmajor funds with no budget schedule lines.
-  After the fetch: renumber source_page to the new trims; Lincoln_FY2022: replace the 13 budget-basis nonmajor
-  schedules (trimmed pp19-31 before the re-trim) with one line per printed row per nonmajor fund column of the new
-  pages, and add the utility funds from the proprietary statement (p11) plus the individual nonmajor enterprise
-  funds; Lincoln_FY2025: replace the combined "Other Enterprise Funds" lines with the individual funds (as FY2023/24).
-  Page-check every line, then apply (schedule_fix_apply.py, new pass) and run user_rules.py.
+- Lincoln re-trim 2026-11-18: DONE for Lincoln (user: make Lincoln FY2022 like the other years; this replaces the
+  earlier "leave Lincoln_FY2022 as printed" ruling). Pass 8 (`_meta/schedule_fix8/`, every line page-checked in
+  `_meta/schedule_spot8/`, `schedule_fix_apply.py --pass8`): Lincoln_FY2022: the 13 budget-basis nonmajor schedules
+  (107 lines) replaced by 153 lines, one per printed row per nonmajor fund column of the subcombining statements
+  (trimmed pp15-19), and 96 utility lines added (three major systems from p11, six nonmajor enterprise funds from
+  p37; the combined Other Enterprise Funds column is not used); Lincoln_FY2025: 21 combined "Other Enterprise Funds"
+  lines replaced by 74 individual-fund lines (p22; new p16 is only a summary of pp17-21, nothing added). Both now
+  equal the statement totals exactly for both fund types.
+  STILL WAITING for one fetch run (any year; Cities and Villages; Audit): South_Sioux_City_FY2025 source pp81, 82
+  (first two pages of the nonmajor governmental combining statement; pp83-85 are already trimmed). After the fetch:
+  renumber source_page to the new trim, add lines only for nonmajor funds with no budget schedule lines, page-check
+  every line, apply with a new pass and run user_rules.py.
 - Targeted re-trims (config/retrim.csv; FINDER_VERSION stays 8 so other reports are NOT re-trimmed; never bump it
   without the user's OK). Done 2026-10-22: 12 reports re-trimmed (find_pages v9 + Waterloo/Plainview fixes),
   re-extracted and re-verified; Sargent_Public_Schools_FY2025 followed (OCR-garbled repeated title fix), Activities
