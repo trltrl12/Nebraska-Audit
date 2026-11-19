@@ -394,6 +394,20 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
     matches the "<X> - Due within one year" spelling, so these were set per line). Sarpy County compensated absences
     and Beatrice are left (compensated-absences ruling).
   - Further dashboard findings are listed only, not changed, until the user rules (review list sent 2026-11-18).
+  - **Final fix, triple read (user 2026-11-18: fix only the questioned piece, three page readers must agree, lines
+    already corrected are not touched):** 1,211 questioned lines in 448 city/village/county reports
+    (`_meta/final_fix/worklist.json`; readers in `read1-3/`). 285 of 313 schedule lines filed under other financing
+    with revenue-like labels are printed there and stay. Changed (61 lines, 19 reports; `applied.json`, decisions in
+    `_meta/xyear_decisions/final_<entity>.csv`): Potter FY2023/FY2025 nonoperating receipts (TIF, donations, interest)
+    to revenue and TIF debt interest to expenditure (as FY2022/24); Brady FY2024/25 interest income to revenue;
+    Indianola FY2025 loss from joint venture to expenditure; Bartlett FY2024 Street Fund total replaced by its three
+    printed rows (the crossed-out Exhibit A page 2 is the only copy; General and Water totals differ from it and stay
+    as totals); Bayard FY2022-24 "Operating" rows take the printed function; Airport department lines (Grant, Chadron,
+    Stuart) are Airport; single lines (Valentine, Broken Bow, Pierce County, Sargent). Not changed: 110 lines the
+    readers did not agree on (`not_changed_readers_disagreed.csv`), 64 held on review
+    (`not_changed_held_by_review.csv`: fund-name tax types, function-to-Operating calls, earlier page decisions,
+    Elm_Creek_FY2024 which needs a split by fund, Hebron_FY2025), reader remarks in `noticed_not_changed.csv`.
+    Osmond_FY2024 still needs a re-trim (left half of the General Fund department schedule).
   - Sargent_FY2022: the Auditor's PDF does not contain printed pp19, 22, 24, 52 (left-hand statement pages); it cannot
     be re-trimmed. Governmental lines come from the Total column.
 
