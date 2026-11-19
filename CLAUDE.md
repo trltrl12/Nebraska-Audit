@@ -437,6 +437,8 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
     year and the category is the same; the rule-standard label wins, then the label used in more years. 38 lines
     changed in 32 reports (`label_changes.json`); 161 pairs are printed differently by the report and stay; capital
     outlay labels are left to their own rule.
+    Leftover spellings (user 2026-11-19): Inventories -> "Inventory" (asset label), Insurance recovery -> "Insurance recoveries",
+    "Bridge & Road Maintenance" -> "Bridge/Road Maintenance" (`config/label_unify.csv`, `config/equity_purposes.csv`).
     Osmond_FY2024 cannot be re-trimmed: the left half of the General Fund department schedule is not in the
     Auditor's PDF (source p56 is printed p55, source p57 is the right half, printed p56; checked 2026-11-19).
   - Sargent_FY2022: the Auditor's PDF does not contain printed pp19, 22, 24, 52 (left-hand statement pages); it cannot
