@@ -60,14 +60,30 @@ def settled():
 
 def build():
     groups = defaultdict(lambda: defaultdict(list))
-    for f in sorted(JSON_DIR.glob("*_FY20*.json")):
-        m = re.match(r"(.*)_FY(20\d\d)$", f.stem)
+    files = []
+    names = {}  # entity_name -> entity key of its <entity>_FY<year> files
+    for f in sorted(JSON_DIR.glob("*.json")):
         try:
             d = json.loads(f.read_text())
         except Exception:
             continue
-        if not m or not isinstance(d, dict):
+        if not isinstance(d, dict):
             continue
+        m = re.match(r"(.*)_FY(20\d\d)$", f.stem)
+        if m:
+            names.setdefault(norm(d.get("entity_name")), m.group(1))
+        files.append((f, d, m))
+    for f, d, m in files:
+        if not m:
+            # State Auditor audits keep their CO..-/CV..- filenames: entity and year come from the report itself
+            if not re.match(r"C[OV]\d", f.stem):
+                continue
+            y = re.match(r"(20\d\d)", str(d.get("fiscal_year_end") or ""))
+            n = str(d.get("entity_name") or "")
+            if not y or not n:
+                continue
+            key = names.get(norm(n)) or re.sub(r"[^A-Za-z0-9]+", "_", re.sub(r"^(City|Village) of ", "", n)).strip("_")
+            m = re.match(r"(.*)_FY(20\d\d)$", f"{key}_FY{y.group(1)}")
         for where, fund, dept, x in lines(d):
             L = x.get("original_label")
             if norm(L):
