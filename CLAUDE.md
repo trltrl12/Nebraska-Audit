@@ -426,6 +426,11 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
     Douglas_County FY2022/24 "Miscellaneous" -> "Miscellaneous taxes" (as FY2023/25), Papillion_FY2022 "Taxes - city
     sales" -> "Sales and Use Tax" (as FY2023-25); printed text in printed_label. Buffalo County and Hall County tax
     rows differ by year because the reports print them differently: left as printed.
+    Spending labels (user 2026-11-19): the "Current:" heading prefix is removed from every spending label (as the
+    2026-11-06 Public safety ruling; `config/label_unify.csv`, Lincoln, Wahoo, St. Paul); Hastings_FY2024 capital
+    outlay is "Capital outlay" as printed; Boys_Town_FY2025 rows are "Personnel" / "Operating" as printed under
+    General government in all four years (three page reads). Papillion's FY2025 "Building and fire safety" is a real
+    change in the report and stays.
     Osmond_FY2024 cannot be re-trimmed: the left half of the General Fund department schedule is not in the
     Auditor's PDF (source p56 is printed p55, source p57 is the right half, printed p56; checked 2026-11-19).
   - Sargent_FY2022: the Auditor's PDF does not contain printed pp19, 22, 24, 52 (left-hand statement pages); it cannot
