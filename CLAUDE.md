@@ -439,6 +439,14 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
     outlay labels are left to their own rule.
     Leftover spellings (user 2026-11-19): Inventories -> "Inventory" (asset label), Insurance recovery -> "Insurance recoveries",
     "Bridge & Road Maintenance" -> "Bridge/Road Maintenance" (`config/label_unify.csv`, `config/equity_purposes.csv`).
+    Receipt label merges (user 2026-11-19, `config/label_unify.csv` with the new `only_category` column: a rule applies
+    only to lines in that category): Franchise / Franchise fees / Franchise taxes -> "Franchise Tax"; "Occupation and
+    Franchise Tax"; "Motor Vehicle Tax"; "Motor Vehicle Fee"; "Motor Vehicle Pro-Rate"; "Wheel Tax"; "Licenses and
+    Permits"; "Licenses, Permits and Fees"; Interest / Interest income -> "Interest Income"; "Interest and Dividends";
+    "Keno Proceeds"; "Lottery Proceeds"; "Keno Lottery Proceeds"; "In Lieu of Tax"; Property(Net) -> "Property Tax".
+    Waiver-form labels "Local Receipts: ..." / "State Receipts: ..." are kept as they are (user: keep local and state
+    labels separate). Specific labels (Occupational tax - telephone, Cable franchise tax, Keno tax, Gaming tax, 5%
+    in-lieu lines, Building permits, Investment Earnings) stay as printed. Waterbury_FY2022: left out (user).
     Osmond_FY2024 cannot be re-trimmed: the left half of the General Fund department schedule is not in the
     Auditor's PDF (source p56 is printed p55, source p57 is the right half, printed p56; checked 2026-11-19).
   - Sargent_FY2022: the Auditor's PDF does not contain printed pp19, 22, 24, 52 (left-hand statement pages); it cannot

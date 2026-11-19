@@ -1153,7 +1153,9 @@ def _label_unify():
     global _LU
     if _LU is None:
         f = Path(__file__).resolve().parent.parent / "config" / "label_unify.csv"
-        _LU = {(r["section"], r["key"]): r["unified_label"] for r in csv.DictReader(open(f))} if f.exists() else {}
+        # optional 4th column only_category (user 2026-11-19): the rule applies only to lines in one of these categories ("a|b")
+        _LU = {(r["section"], r["key"]): (r["unified_label"], [c.strip().lower() for c in (r.get("only_category") or "").split("|") if c.strip()])
+               for r in csv.DictReader(open(f))} if f.exists() else {}
     return _LU
 
 
@@ -1162,7 +1164,9 @@ def label_unify_rule(x, section, school, log):
     if not L:
         return
     new = strip_code(L, school)
-    new = _label_unify().get((section, unify_key(new)), new)
+    lab, cats = _label_unify().get((section, unify_key(new)), (new, []))
+    if not cats or str(x.get("category") or "").lower() in cats:
+        new = lab
     if new and new != L and new.lower() != "staff":
         relabel(x, new, "label: unified (2026-11-17)", log)
         x["label_rule"] = "unified 2026-11-17"
