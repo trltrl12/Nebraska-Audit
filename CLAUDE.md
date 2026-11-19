@@ -490,6 +490,12 @@ found were corrected across all decisions and added to the `xyear_checker` rules
 (about 220 label groups in 103 entities) is intended: reports that really print the line differently (verdict
 `differs`), compensated absences (left as they are by the user's ruling), lines marked `unclear` (39) and lines held
 for the user. Run steps 1-4 again after new extractions or re-trims; only new differences are listed.
+2026-11-19: the check skipped State Auditor audits that keep CO..-/CV..- filenames (79 reports, 33 entities, all years);
+xyear_check.py, xyear_log.py and the FY2022/23 capital-outlay rule now take entity and year from the report. 34 pending
+reports (31 county FY2022 audits, CV5405, CV5409, Wilsonville_FY2023) were extracted and verified the same day. The 215
+newly listed lines in 29 counties were read on the page by two readers (`_meta/xyear_co/`); 35 categories changed where
+both agreed (`_meta/xyear_decisions/co_<entity>.csv`); 2 disagreements (Dawson County Lottery Fund
+"Miscellaneous") stay keno/lottery. Waterbury_FY2022 is a one-page waiver approval letter (no statement).
 Do not push while a validate run is needed: the workflow cancels the run in progress on every push (cancel-in-progress),
 so many small pushes mean the workbooks are never rebuilt. Push once per wave.
 

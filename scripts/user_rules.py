@@ -1008,6 +1008,8 @@ def align_rules(d, stem, log):
                     and x.get("category") in ("other liabilities", "Other Assets", "other assets", "receivables"):
                 setcat(x, "category", "Internal Balances", "category: due to/from other funds", log)
     fy = re.search(r"_FY(20\d\d)$", stem)
+    if not fy and re.match(r"C[OV]\d", stem):  # State Auditor audits keep CO..-/CV..- filenames: year from the report
+        fy = re.match(r"()(20\d\d)", str(d.get("fiscal_year_end") or ""))
     for x in d.get("detail") or []:
         if not isinstance(x, dict):
             continue
@@ -1022,7 +1024,7 @@ def align_rules(d, stem, log):
             m = re.match(r"\s*(operating )?transfers? (from|to) other funds?\s*$", lab, re.I)
             if m:
                 relabel(x, "Transfers In" if m.group(2).lower() == "from" else "Transfers Out", "label: Transfers In/Out", log)
-        elif sec == "expenditure" and fy and fy.group(1) in ("2022", "2023") and x.get("category") == "capital outlay" \
+        elif sec == "expenditure" and fy and fy.group(fy.lastindex) in ("2022", "2023") and x.get("category") == "capital outlay" \
                 and not x.get("department") and _BARE_CO.match(lab) and "general" not in str(x.get("fund") or "").lower():
             hits = {fn for rx, fn in _FUND_FN if rx.search(str(x.get("fund") or ""))}
             if len(hits) == 1:
