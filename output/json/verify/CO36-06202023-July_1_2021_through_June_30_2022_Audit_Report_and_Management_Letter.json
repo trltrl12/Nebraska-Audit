@@ -1,0 +1,22 @@
+{
+  "stem": "CO36-06202023-July_1_2021_through_June_30_2022_Audit_Report_and_Management_Letter",
+  "values_checked": 101,
+  "issues": [
+    {"severity": "warning", "path": "detail[42].amount", "page": 7,
+     "extracted": "COVID American Rescue Plan Fund Disbursements 117,515 split into detail[42-44] 348 / 106,687 / 10,480 from the p4 fund column",
+     "on_page": "p7 prints one line DISBURSEMENTS 117,515; p4 COVID column prints General Government 348, Public Safety 106,687, Public Works 10,480",
+     "issue": "split taken from another statement (exact breakdown, marked split_from/computed); the 'split when another statement prints the exact breakdown' ruling was given for FY2023 only, so check it is wanted for FY2022"},
+    {"severity": "warning", "path": "detail[45].fund", "page": 13,
+     "extracted": "Nonmajor funds (combined), 10 lines (detail[45-54]) from the Total Nonmajor Funds column",
+     "on_page": "pp11-13 print 11 individual nonmajor fund columns (Highway Bridge Buyback, Geographical Information System, Planning & Zoning, Visitor Promotion, Visitor Improvement, Preservation & Modernization, Library, Library Memorial, Library Grant, STOP Program, Misc Federal & State Grants)",
+     "issue": "nonmajor detail is the combining statement's Total column, not one line per fund column; totals tie either way. As a result the detail Taxes 96,159 stays taxes (unlabeled) while the statement receipts carry a lodging tax piece of 32,976 from the Visitor Promotion / Visitor Improvement columns"},
+    {"severity": "warning", "path": "receipts[2].category", "page": 4,
+     "extracted": "taxes 1,218,197 (General Fund 1,155,014 + Library Fund 63,183)",
+     "on_page": "Statement of Activities (p2) prints a single Taxes line 1,375,243 with no breakdown",
+     "issue": "statement Taxes split by fund-name evidence (Inheritance 124,070; lodging 32,976); remainder left unlabeled as the rules require; arithmetic ties (124,070 + 32,976 + 1,218,197 = 1,375,243)"},
+    {"severity": "warning", "path": "detail[41].category", "page": 7,
+     "extracted": "intergovernmental/state aid (detail_category federal grants)",
+     "on_page": "COVID AMERICAN RESCUE PLAN FUND - Intergovernmental 191,227",
+     "issue": "category and detail_category disagree; ARPA money is federal, so category federal grants may be intended (grant-named fund ruling 2026-11-19)"}
+  ]
+}

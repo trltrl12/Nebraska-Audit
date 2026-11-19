@@ -1,0 +1,22 @@
+{
+  "stem": "CO34-06122023-July_1_2021_through_June_30_2022_Audit_Report_and_Management_Letter",
+  "values_checked": 111,
+  "issues": [
+    {"severity": "warning", "path": "detail[41].amount", "page": 7,
+     "extracted": "Inheritance Fund Disbursements 2,275,043 split into detail[41-43] 22,788 / 33,288 / 2,218,967 from the p4 fund column",
+     "on_page": "p7 prints one line DISBURSEMENTS 2,275,043; p4 Inheritance Fund column prints General Government 22,788, Public Safety 33,288, Public Works 2,218,967",
+     "issue": "split taken from another statement (exact breakdown, marked split_from/computed); the 'split when another statement prints the exact breakdown' ruling was given for FY2023 only, so check it is wanted for FY2022"},
+    {"severity": "warning", "path": "detail[54].fund", "page": 14,
+     "extracted": "Nonmajor funds (combined), 7 lines (detail[54-60]) from the Total Nonmajor Funds column",
+     "on_page": "pp12-14 print 10 individual nonmajor fund columns (Visitors Promotion, Visitors Improvement, Preservation & Modernization, Insurance, Diversion Program, STOP Program, Drug Law Enforcement, Economic Development, 911 Emergency Management, County Building)",
+     "issue": "nonmajor detail is the combining statement's Total column, not one line per fund column; totals tie either way"},
+    {"severity": "warning", "path": "detail[54].detail_category", "page": 12,
+     "extracted": "taxes / other local taxes (Taxes 200,131)",
+     "on_page": "Taxes: Visitors Promotion Fund 86,857, Visitors Improvement Fund 86,857, 911 Emergency Management Fund 26,417; Statement of Activities (p2) prints 'Other Taxes' 200,131",
+     "issue": "173,714 of it sits in visitor promotion funds (lodging tax by fund name) but the Statement of Activities labels the whole amount Other Taxes; kept as taxes is defensible, flag for consistency"},
+    {"severity": "warning", "path": "detail[52].category", "page": 9,
+     "extracted": "intergovernmental/state aid (detail_category federal grants)",
+     "on_page": "COVID AMERICAN RESCUE PLAN FUND - Intergovernmental 2,089,324",
+     "issue": "category and detail_category disagree; ARPA money is federal, so category federal grants may be intended (grant-named fund ruling 2026-11-19)"}
+  ]
+}
