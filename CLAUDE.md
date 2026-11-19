@@ -415,6 +415,11 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
     three readers, 34 corrected where all agreed (plain "Other" receipts rows out of taxes, Bayard personnel/supplies
     rows to their printed function, Plattsmouth Debt Service Fund taxes to property tax, Hickman General/Street
     "City taxes and fees" to taxes; decisions in `_meta/xyear_decisions/final2_<entity>.csv`).
+    Grant-named funds (user 2026-11-19): a "Contributions and grants" cell printed in a fund column whose heading says
+    grants is category Grants (Omaha Grants Fund, FY2022-25; the statement line is split into the Grants Fund cell and
+    the rest); a heading naming a federal programme makes it federal grants (Shelton_FY2022 ARPA Fund, Homer
+    FY2024/25 CDBG Fund). Three page reads; `_meta/xyear_decisions/final3_<entity>.csv`. Left: Grand Island FY2024/25
+    Community Grants and Hebron_FY2025 Grant Project (row labels are on a facing page not in the trim).
     Osmond_FY2024 cannot be re-trimmed: the left half of the General Fund department schedule is not in the
     Auditor's PDF (source p56 is printed p55, source p57 is the right half, printed p56; checked 2026-11-19).
   - Sargent_FY2022: the Auditor's PDF does not contain printed pp19, 22, 24, 52 (left-hand statement pages); it cannot
