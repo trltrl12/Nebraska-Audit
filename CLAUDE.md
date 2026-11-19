@@ -407,6 +407,9 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
     readers did not agree on (`not_changed_readers_disagreed.csv`), 64 held on review
     (`not_changed_held_by_review.csv`: fund-name tax types, function-to-Operating calls, earlier page decisions,
     Elm_Creek_FY2024 which needs a split by fund, Hebron_FY2025), reader remarks in `noticed_not_changed.csv`.
+    Elm_Creek_FY2024 (user 2026-11-19): the eight statement cost rows are split by fund column with the fund's
+    function, as FY2023/FY2025 (36 lines; every cell checked against the page text; fund cells differ from the
+    printed Total column by the report's own $1-2 rounding).
     Osmond_FY2024 cannot be re-trimmed: the left half of the General Fund department schedule is not in the
     Auditor's PDF (source p56 is printed p55, source p57 is the right half, printed p56; checked 2026-11-19).
   - Sargent_FY2022: the Auditor's PDF does not contain printed pp19, 22, 24, 52 (left-hand statement pages); it cannot
