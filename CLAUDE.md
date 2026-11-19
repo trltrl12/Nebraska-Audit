@@ -431,6 +431,12 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
     outlay is "Capital outlay" as printed; Boys_Town_FY2025 rows are "Personnel" / "Operating" as printed under
     General government in all four years (three page reads). Papillion's FY2025 "Building and fire safety" is a real
     change in the report and stays.
+    Year-to-year labels (user 2026-11-19, `_meta/label_years/`, `_meta/label_years_bs/`): statement and balance
+    sheet lines whose label appears in some of an entity's years only were transcribed from the page by three
+    readers (663 lines, 101 entities). A label is changed only where all three find the same printed row in every
+    year and the category is the same; the rule-standard label wins, then the label used in more years. 38 lines
+    changed in 32 reports (`label_changes.json`); 161 pairs are printed differently by the report and stay; capital
+    outlay labels are left to their own rule.
     Osmond_FY2024 cannot be re-trimmed: the left half of the General Fund department schedule is not in the
     Auditor's PDF (source p56 is printed p55, source p57 is the right half, printed p56; checked 2026-11-19).
   - Sargent_FY2022: the Auditor's PDF does not contain printed pp19, 22, 24, 52 (left-hand statement pages); it cannot
