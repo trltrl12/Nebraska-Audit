@@ -410,6 +410,11 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
     Elm_Creek_FY2024 (user 2026-11-19): the eight statement cost rows are split by fund column with the fund's
     function, as FY2023/FY2025 (36 lines; every cell checked against the page text; fund cells differ from the
     printed Total column by the report's own $1-2 rounding).
+    Same-label rows (2026-11-19, `_meta/final_fix2/`): schedule lines added from statement fund columns had taken the
+    category of another row with the same label; 56 lines in Potter, Elwood, Bayard, Plattsmouth and Hickman read by
+    three readers, 34 corrected where all agreed (plain "Other" receipts rows out of taxes, Bayard personnel/supplies
+    rows to their printed function, Plattsmouth Debt Service Fund taxes to property tax, Hickman General/Street
+    "City taxes and fees" to taxes; decisions in `_meta/xyear_decisions/final2_<entity>.csv`).
     Osmond_FY2024 cannot be re-trimmed: the left half of the General Fund department schedule is not in the
     Auditor's PDF (source p56 is printed p55, source p57 is the right half, printed p56; checked 2026-11-19).
   - Sargent_FY2022: the Auditor's PDF does not contain printed pp19, 22, 24, 52 (left-hand statement pages); it cannot
