@@ -447,6 +447,13 @@ total_deferred_inflows, total_equity}, ending_cash, ending_investments, ending_f
     Waiver-form labels "Local Receipts: ..." / "State Receipts: ..." are kept as they are (user: keep local and state
     labels separate). Specific labels (Occupational tax - telephone, Cable franchise tax, Keno tax, Gaming tax, 5%
     in-lieu lines, Building permits, Investment Earnings) stay as printed. Waterbury_FY2022: left out (user).
+    Accuracy sample (2026-11-19, cities/villages/counties, all years): 1,500 random lines read blind against the PDF,
+    every difference judged by two independent referees. Confirmed errors: amounts 0, labels 6 (0.4%), categories 12
+    (0.8%); 17 lines corrected (`_meta/xyear_decisions/sample_<entity>.csv`). Pattern fix (`_meta/pattern_fix/`, two
+    page readers, both certain): 200 plain grant lines with no grantor printed -> category Grants (of 455 read; 117
+    confirmed where the page names the grantor; the rest unchanged because readers were not both certain or disagreed;
+    5 held by an earlier page decision); 189 split-piece labels of the form "Parent (piece)" / "<Fund> Taxes" -> the
+    printed row label (of 264 read). Decisions: `_meta/xyear_decisions/pattern_<entity>.csv`, `pattern_fix/applied.json`.
     Osmond_FY2024 cannot be re-trimmed: the left half of the General Fund department schedule is not in the
     Auditor's PDF (source p56 is printed p55, source p57 is the right half, printed p56; checked 2026-11-19).
   - Sargent_FY2022: the Auditor's PDF does not contain printed pp19, 22, 24, 52 (left-hand statement pages); it cannot
